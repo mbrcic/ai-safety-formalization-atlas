@@ -23,6 +23,7 @@ def main() -> None:
         "README.md",
         "CONTRIBUTING.md",
         "CITATION.cff",
+        "SECURITY.md",
         "LICENSE",
         "STATE.md",
         "registry.yaml",

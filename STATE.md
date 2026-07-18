@@ -1,7 +1,7 @@
 # Project State
 
 Updated: 2026-07-18
-Current phase: public collaboration preparation
+Current phase: public collaboration
 
 ## Completed
 
@@ -14,12 +14,12 @@ Current phase: public collaboration preparation
 - Reviewed AI-system bridge theorems: 0
 - v0.1 publication approved through `e9fdfc0`
 - Squashed v0.1 baseline published on `main`
+- Public metadata, security reporting, and protected `main` rules configured
 
 ## Current work
 
-- Add a minimal contributor workflow and public repository metadata.
-- Configure GitHub branch rules after visibility changes.
 - Invite focused contributions through the public strategy and roadmap.
+- Triage source-verification, API-review, and bridge-design proposals.
 
 ## Blocked
 
