@@ -66,8 +66,8 @@ domains.
   and utility interfaces.
 - Keep the public API small while making the documented entry points sufficient
   for downstream proofs.
-- Complete maintainer review of the evidence classifications and public scope
-  before the first public release.
+- Keep evidence classifications and public scope under maintainer review as
+  coverage changes.
 
 Success means a contributor can use the canonical results without learning
 their upstream repository layouts or encountering multiple competing atlas
@@ -115,8 +115,9 @@ identified:
   gives a precise model of aggregation or alignment rather than a parallel
   vocabulary.
 
-Causality, corrigibility, reward tampering, formal decision theories, and broad solver infrastructure
-remain later work unless a small addition clearly unlocks a priority theorem.
+Causality, corrigibility, reward tampering, formal decision theories, and broad
+solver infrastructure remain later work unless a small addition clearly
+unlocks a priority theorem.
 
 ## How to contribute
 

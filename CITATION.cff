@@ -1,0 +1,12 @@
+cff-version: 1.2.0
+message: "If you use the AI Safety Formalization Atlas, please cite this software."
+type: software
+title: "AI Safety Formalization Atlas"
+authors:
+  - family-names: "Brčić"
+    given-names: "Mario"
+version: "0.1.0"
+date-released: 2026-07-18
+repository-code: "https://github.com/mbrcic/ai-safety-formalization-atlas"
+url: "https://github.com/mbrcic/ai-safety-formalization-atlas"
+license: Apache-2.0

@@ -1,0 +1,50 @@
+name: Problem report
+description: Report a build failure, incorrect record, documentation error, or API problem.
+title: "[Problem]: "
+body:
+  - type: dropdown
+    id: category
+    attributes:
+      label: Category
+      options:
+        - Lean build or toolchain
+        - Registry or formalization evidence
+        - Public Lean API
+        - Documentation
+        - Reproduction script
+        - Other
+    validations:
+      required: true
+  - type: input
+    id: location
+    attributes:
+      label: Location
+      description: Give the file, declaration, registry identifier, or command involved.
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: Explain what is incorrect or failed and what you expected instead.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reproduction or supporting evidence
+      description: Provide minimal commands, logs, primary-source links, or statement comparisons.
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: Include operating system and tool versions when reporting a build or reproduction issue.
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Checks
+      options:
+        - label: I searched existing issues for the same problem.
+          required: true

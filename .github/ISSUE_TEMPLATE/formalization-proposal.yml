@@ -1,0 +1,71 @@
+name: Formalization proposal
+description: Propose formalization evidence, a Lean interface, or a reviewed bridge theorem.
+title: "[Formalization]: "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Please check the roadmap, methodology, registry, and open issues first.
+  - type: dropdown
+    id: contribution_type
+    attributes:
+      label: Contribution type
+      options:
+        - Source or statement verification
+        - Registry evidence correction
+        - External reproduction
+        - Lean facade over an existing theorem
+        - New representation bridge
+        - AI-safety bridge theorem
+    validations:
+      required: true
+  - type: input
+    id: result
+    attributes:
+      label: Survey result or research target
+      description: Give the BY identifier when applicable, otherwise name the target precisely.
+      placeholder: "BY-001 — Rice's theorem"
+    validations:
+      required: true
+  - type: textarea
+    id: gap
+    attributes:
+      label: Exact gap
+      description: What statement, evidence, representation, or interface is currently missing?
+    validations:
+      required: true
+  - type: textarea
+    id: existing_work
+    attributes:
+      label: Existing work checked
+      description: List primary sources, formal libraries, declarations, immutable revisions, and licenses checked.
+    validations:
+      required: true
+  - type: textarea
+    id: unique_value
+    attributes:
+      label: Unique value
+      description: Why is this not redundant with the canonical result, and which downstream proof needs it?
+    validations:
+      required: true
+  - type: textarea
+    id: interface
+    attributes:
+      label: Proposed public interface
+      description: Give intended imports, namespace, theorem statement, and dependencies when applicable.
+  - type: textarea
+    id: interpretation
+    attributes:
+      label: Interpretation boundary
+      description: For bridge work, state the AI-system model and claims that still require human review.
+  - type: checkboxes
+    id: policy
+    attributes:
+      label: Policy checks
+      options:
+        - label: I checked for a maintained formalization before proposing a new proof.
+          required: true
+        - label: I identified the unique capability this contribution would add.
+          required: true
+        - label: I will not treat a keyword search hit as verified formalization evidence.
+          required: true

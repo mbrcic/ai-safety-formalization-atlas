@@ -21,6 +21,8 @@ def require(condition: bool, message: str) -> None:
 def main() -> None:
     required_files = [
         "README.md",
+        "CONTRIBUTING.md",
+        "CITATION.cff",
         "LICENSE",
         "STATE.md",
         "registry.yaml",
@@ -41,6 +43,11 @@ def main() -> None:
         "docs/open-work.md",
         "docs/release-v0.1.md",
         "scripts/update_formalization_search.py",
+        ".github/CODEOWNERS",
+        ".github/ISSUE_TEMPLATE/config.yml",
+        ".github/ISSUE_TEMPLATE/formalization-proposal.yml",
+        ".github/ISSUE_TEMPLATE/problem-report.yml",
+        ".github/pull_request_template.md",
         ".github/workflows/ci.yml",
     ]
     missing = [path for path in required_files if not (ROOT / path).is_file()]
@@ -124,7 +131,7 @@ def main() -> None:
     require("- Publication status: approved for publication" in release_doc,
             "release document must record publication approval")
     require(
-        f"| Mario approval | Approved for immutable ref `{approved_ref}` | Passed |"
+        f"| Maintainer approval | Approved for immutable ref `{approved_ref}` | Passed |"
         in release_doc,
         "release document approval evidence does not match its approval ref",
     )

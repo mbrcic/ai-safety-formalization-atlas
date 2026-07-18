@@ -1,6 +1,6 @@
 # Open Work
 
-The v0.1 candidate intentionally exposes uncertainty instead of presenting the
+The v0.1 baseline intentionally exposes uncertainty instead of presenting the
 inventory as complete formal coverage.
 
 The contributor-facing priorities and selection principles are summarized in
@@ -9,17 +9,16 @@ research leads, and integration decisions behind that strategy.
 
 ## Human review
 
-- Approve the public framing and mandatory scope disclaimer.
+- Revisit the public framing and scope disclaimer when coverage claims change.
 - Review the `EXACT`/`EQUIVALENT` classifications for Rice, halting, and Arrow.
 - Review source-level statements for the three survey-introduced proof sketches:
   unfairness of explainability, misaligned embodiment, and limited self-awareness.
 - Decide whether and how any classical result should be connected to an explicit
   AI-system model. Every such bridge remains `HUMAN_REVIEW`.
-- Approve the v0.1 candidate before the repository becomes public.
 
 ## Formalization search
 
-- Forty-two survey rows still lack a maintained Lean declaration in the registry.
+- Forty-one survey rows still lack an atlas Lean declaration in the registry.
 - Search Isabelle/HOL, Rocq, HOL4, HOL Light, and Agda for exact declarations,
   licenses, and immutable versions before proposing new proofs.
 - Reproduce additional external developments only when they are credible exact or
@@ -66,7 +65,8 @@ not represented in the original plan:
 
 ## Deferred expansion
 
-Causality, multi-agent systems, corrigibility, reward tampering, and FDT remain
-deferred until they create reusable value or unblock a precise mapped result.
+Causality, multi-agent systems, corrigibility, reward tampering, and formal
+decision theories remain deferred until they create reusable value or unblock a
+precise mapped result.
 Decision theory, verification, reflection, and containment may advance earlier
 when implemented as small bridges over stable foundations.

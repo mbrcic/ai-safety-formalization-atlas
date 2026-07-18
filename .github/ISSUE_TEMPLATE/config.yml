@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Roadmap and contribution priorities
+    url: https://github.com/mbrcic/ai-safety-formalization-atlas/blob/main/ROADMAP.md
+    about: Review project scope and priorities before proposing substantial work.

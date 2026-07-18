@@ -1,7 +1,7 @@
 # Project State
 
 Updated: 2026-07-18
-Current phase: v0.1 publication
+Current phase: public collaboration preparation
 
 ## Completed
 
@@ -13,10 +13,12 @@ Current phase: v0.1 publication
 - New Lean proofs: 1 utility-representation bridge
 - Reviewed AI-system bridge theorems: 0
 - v0.1 publication approved through `e9fdfc0`
+- Squashed v0.1 baseline published on `main`
 
 ## Current work
 
-- Publish the approved v0.1 baseline on `main`.
+- Add a minimal contributor workflow and public repository metadata.
+- Configure GitHub branch rules after visibility changes.
 - Invite focused contributions through the public strategy and roadmap.
 
 ## Blocked

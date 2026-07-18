@@ -24,8 +24,8 @@
 | Clear open work | `docs/open-work.md` | Passed |
 | No incomplete Lean proofs | Release audit scans all released Lean files | Passed |
 | Mandatory disclaimer | README epistemic-scope section | Passed |
-| Private until approval | Authenticated Git remote reachable; anonymous URL returned 404 before approval | Passed |
-| Mario approval | Approved for immutable ref `e9fdfc06f2c599b00210eba17f66985bca4c002e` | Passed |
+| Private until approval | Repository remained private until approval was recorded | Passed |
+| Maintainer approval | Approved for immutable ref `e9fdfc06f2c599b00210eba17f66985bca4c002e` | Passed |
 
 Run the local release gates with:
 

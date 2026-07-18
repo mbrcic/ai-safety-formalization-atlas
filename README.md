@@ -1,5 +1,7 @@
 # AI Safety Formalization Atlas
 
+[![CI](https://github.com/mbrcic/ai-safety-formalization-atlas/actions/workflows/ci.yml/badge.svg)](https://github.com/mbrcic/ai-safety-formalization-atlas/actions/workflows/ci.yml)
+
 A Lean-centered map of machine-checked mathematics relevant to AI safety.
 
 The initial collection tracks every result listed in Mario Brčić and Roman V.
@@ -27,13 +29,14 @@ layers, and uncertain semantic relationships are marked for human review.
 
 - [`registry.yaml`](registry.yaml) is the complete survey-result inventory.
 - [`AISafetyAtlas/`](AISafetyAtlas/) contains attributed Lean integrations.
+- [`CONTRIBUTING.md`](CONTRIBUTING.md) explains how to propose and verify changes.
 - [`ROADMAP.md`](ROADMAP.md) presents the public strategy and contributor entry points.
 - [`docs/methodology.md`](docs/methodology.md) defines evidence and review rules.
 - [`docs/formalization-status.md`](docs/formalization-status.md) summarizes current coverage.
 - [`docs/external-formalizations.md`](docs/external-formalizations.md) records reproducibility checks outside Lean.
 - [`docs/formalization-search.md`](docs/formalization-search.md) records the pinned six-corpus discovery pass for every survey row.
 - [`docs/open-work.md`](docs/open-work.md) lists unresolved review and formalization work.
-- [`docs/release-v0.1.md`](docs/release-v0.1.md) records release-candidate evidence and the approval gate.
+- [`docs/release-v0.1.md`](docs/release-v0.1.md) records v0.1 evidence and its immutable approval reference.
 - [`STATE.md`](STATE.md) reports the current phase, blockers, and next tasks.
 
 ## Build
@@ -47,6 +50,13 @@ lake build
 
 The repository pins both Lean and Mathlib. Released Lean files contain no
 `sorry`.
+
+## Contributing
+
+Contributions in source verification, reproducibility, API review, bridge
+design, and Lean implementation are welcome. Start with the
+[contribution guide](CONTRIBUTING.md) and use the structured issue forms for
+work that changes coverage, dependencies, or the public Lean interface.
 
 ## License
 
