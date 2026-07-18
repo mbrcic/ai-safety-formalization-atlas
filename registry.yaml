@@ -1,0 +1,2087 @@
+{
+  "schema_version": 1,
+  "survey": {
+    "title": "Impossibility Results in AI: A Survey",
+    "authors": [
+      "Mario Brčić",
+      "Roman V. Yampolskiy"
+    ],
+    "doi": "10.1145/3603371",
+    "arxiv": "2109.00484v2",
+    "inventory_basis": "Table 1 in arXiv v2",
+    "expected_result_count": 44
+  },
+  "vocabulary": {
+    "progress_status": [
+      "MAPPED",
+      "LEAN_AVAILABLE"
+    ],
+    "relationship": [
+      "EXACT",
+      "EQUIVALENT",
+      "RELATED",
+      "DEPENDENCY_ONLY",
+      "UNCLEAR"
+    ],
+    "lean_artifact_type": [
+      "REFERENCE",
+      "WRAPPER",
+      "NEW_PROOF",
+      "BRIDGE"
+    ]
+  },
+  "source_catalog": {
+    "survey-ref-001": {
+      "survey_number": 1,
+      "citation": "K. Gödel, “Über formal unentscheidbare Sätze der Principia Mathematica und verwandter Systeme I,” Monatshefte Für Math. Phys., vol. 38, no. 1, pp. 173–198, Dec. 1931, doi: 10.1007/BF01700692.",
+      "locator": "https://doi.org/10.1007/BF01700692"
+    },
+    "survey-ref-002": {
+      "survey_number": 2,
+      "citation": "A. M. Turing, “On Computable Numbers, with an Application to the Entscheidungsproblem,” Proc. Lond. Math. Soc., vol. s2-42, no. 1, pp. 230–265, 1937, doi: 10.1112/plms/s2-42.1.230.",
+      "locator": "https://doi.org/10.1112/plms/s2-42.1.230"
+    },
+    "survey-ref-005": {
+      "survey_number": 5,
+      "citation": "D. H. Wolpert, “Physical limits of inference,” Phys. Nonlinear Phenom., vol. 237, no. 9, pp. 1257–1281, Jul. 2008, doi: 10.1016/j.physd.2008.03.040.",
+      "locator": "https://doi.org/10.1016/j.physd.2008.03.040"
+    },
+    "survey-ref-008": {
+      "survey_number": 8,
+      "citation": "R. V. Yampolskiy, “Uncontrollability of Artificial Intelligence,” presented at the IJCAI-21 Workshop on Artificial Intelligence Safety (AISafety2021), Montreal, Quebec, Canada, Aug. 2021. Accessed: Jul. 01, 2021. [Online]. Available: http://arxiv.org/abs/2008.04071",
+      "locator": "http://arxiv.org/abs/2008.04071"
+    },
+    "survey-ref-018": {
+      "survey_number": 18,
+      "citation": "D. H. Wolpert, “The Existence of A Priori Distinctions Between Learning Algorithms,” Neural Comput., vol. 8, no. 7, pp. 1391–1420, Oct. 1996, doi: 10.1162/neco.1996.8.7.1391.",
+      "locator": "https://doi.org/10.1162/neco.1996.8.7.1391"
+    },
+    "survey-ref-019": {
+      "survey_number": 19,
+      "citation": "D. H. Wolpert and W. G. Macready, “No free lunch theorems for optimization,” IEEE Trans. Evol. Comput., vol. 1, no. 1, pp. 67–82, Apr. 1997, doi: 10.1109/4235.585893.",
+      "locator": "https://doi.org/10.1109/4235.585893"
+    },
+    "survey-ref-021": {
+      "survey_number": 21,
+      "citation": "J. Klamka, “Uncontrollability and unobservability of multivariable systems,” IEEE Trans. Autom. Control, vol. 17, no. 5, pp. 725–726, Oct. 1972, doi: 10.1109/TAC.1972.1100128.",
+      "locator": "https://doi.org/10.1109/TAC.1972.1100128"
+    },
+    "survey-ref-022": {
+      "survey_number": 22,
+      "citation": "A. P. Guerreiro, C. M. Fonseca, and L. Paquete, “The Hypervolume Indicator: Problems and Algorithms,” ArXiv200500515 Cs, May 2020, Accessed: May 08, 2021. [Online]. Available: http://arxiv.org/abs/2005.00515",
+      "locator": "http://arxiv.org/abs/2005.00515"
+    },
+    "survey-ref-023": {
+      "survey_number": 23,
+      "citation": "R. M. Karp, “Reducibility among combinatorial problems,” in Complexity of computer computations, Springer, 1972, pp. 85–103."
+    },
+    "survey-ref-024": {
+      "survey_number": 24,
+      "citation": "J. Klamka, “Controllability of dynamical systems. A survey,” vol. 61, no. No 2, pp. 335–342, 2013."
+    },
+    "survey-ref-025": {
+      "survey_number": 25,
+      "citation": "R. C. CONANT and W. R. ASHBY, “Every good regulator of a system must be a model of that system,” Int. J. Syst. Sci., vol. 1, no. 2, pp. 89–97, Oct. 1970, doi: 10.1080/00207727008920220.",
+      "locator": "https://doi.org/10.1080/00207727008920220"
+    },
+    "survey-ref-026": {
+      "survey_number": 26,
+      "citation": "R. W. Ashby, Introduction to Cybernetics.1961 Edition. Chapman & Hall, 1961."
+    },
+    "survey-ref-027": {
+      "survey_number": 27,
+      "citation": "H. Touchette and S. Lloyd, “Information-theoretic approach to the study of control systems,” Phys. Stat. Mech. Its Appl., vol. 331, no. 1, pp. 140–172, Jan. 2004, doi: 10.1016/j.physa.2003.09.007.",
+      "locator": "https://doi.org/10.1016/j.physa.2003.09.007"
+    },
+    "survey-ref-028": {
+      "survey_number": 28,
+      "citation": "J. McDowell, “Virtue and Reason,” The Monist, vol. 62, no. 3, pp. 331–350, Jul. 1979, doi: 10.5840/monist197962319.",
+      "locator": "https://doi.org/10.5840/monist197962319"
+    },
+    "survey-ref-029": {
+      "survey_number": 29,
+      "citation": "S. McKeever and M. Ridge, “The Many Moral Particularisms,” Can. J. Philos., vol. 35, no. 1, pp. 83–106, 2005."
+    },
+    "survey-ref-030": {
+      "survey_number": 30,
+      "citation": "P. S.-H. Tsu, “Can Virtue Be Codified?: An Inquiry on the Basis of Four Conceptions of Virtue,” in Virtue’s Reasons, Routledge, 2017."
+    },
+    "survey-ref-031": {
+      "survey_number": 31,
+      "citation": "K. J. Arrow, “A Difficulty in the Concept of Social Welfare,” J. Polit. Econ., vol. 58, no. 4, pp. 328–346, Aug. 1950, doi: 10.1086/256963.",
+      "locator": "https://doi.org/10.1086/256963"
+    },
+    "survey-ref-032": {
+      "survey_number": 32,
+      "citation": "G. Arrhenius, “The Impossibility of a Satisfactory Population Ethics,” in Descriptive and Normative Approaches to Human Behavior, vol. Volume 3, 0 vols., WORLD SCIENTIFIC, 2011, pp. 1–26. doi: 10.1142/9789814368018_0001.",
+      "locator": "https://doi.org/10.1142/9789814368018_0001"
+    },
+    "survey-ref-033": {
+      "survey_number": 33,
+      "citation": "P. Eckersley, “Impossibility and Uncertainty Theorems in AI Value Alignment (or why your AGI should not have a utility function),” ArXiv190100064 Cs, Mar. 2019, Accessed: Jun. 28, 2021. [Online]. Available: http://arxiv.org/abs/1901.00064",
+      "locator": "http://arxiv.org/abs/1901.00064"
+    },
+    "survey-ref-034": {
+      "survey_number": 34,
+      "citation": "J. Kleinberg, S. Mullainathan, and M. Raghavan, “Inherent Trade-Offs in the Fair Determination of Risk Scores,” ArXiv160905807 Cs Stat, Nov. 2016, Accessed: Jun. 28, 2021. [Online]. Available: http://arxiv.org/abs/1609.05807",
+      "locator": "http://arxiv.org/abs/1609.05807"
+    },
+    "survey-ref-035": {
+      "survey_number": 35,
+      "citation": "K. K. Saravanakumar, “The Impossibility Theorem of Machine Fairness -- A Causal Perspective,” ArXiv200706024 Cs Stat, Jan. 2021, Accessed: Aug. 12, 2021. [Online]. Available: http://arxiv.org/abs/2007.06024",
+      "locator": "http://arxiv.org/abs/2007.06024"
+    },
+    "survey-ref-036": {
+      "survey_number": 36,
+      "citation": "S. Armstrong and S. Mindermann, “Occam’s razor is insufficient to infer the preferences of irrational agents,” Adv. Neural Inf. Process. Syst., vol. 31, 2018, Accessed: Jun. 28, 2021. [Online]. Available: https://proceedings.neurips.cc/paper/2018/hash/d89a66c7c80a29b1bdbab0f2a1a94af8-Abstract.html",
+      "locator": "https://proceedings.neurips.cc/paper/2018/hash/d89a66c7c80a29b1bdbab0f2a1a94af8-Abstract.html"
+    },
+    "survey-ref-037": {
+      "survey_number": 37,
+      "citation": "H. G. Rice, “Classes of Recursively Enumerable Sets and Their Decision Problems,” Trans. Am. Math. Soc., vol. 74, no. 2, pp. 358–366, 1953, doi: 10.2307/1990888.",
+      "locator": "https://doi.org/10.2307/1990888"
+    },
+    "survey-ref-038": {
+      "survey_number": 38,
+      "citation": "A. Church, “An Unsolvable Problem of Elementary Number Theory,” Am. J. Math., vol. 58, no. 2, pp. 345–363, 1936, doi: 10.2307/2371045.",
+      "locator": "https://doi.org/10.2307/2371045"
+    },
+    "survey-ref-039": {
+      "survey_number": 39,
+      "citation": "G. J. Chaitin, Information, Randomness And Incompleteness: Papers On Algorithmic Information Theory. 1987."
+    },
+    "survey-ref-040": {
+      "survey_number": 40,
+      "citation": "A. Tarski, “The Concept of Truth in Formalized Languages,” in Logic, Semantics, Metamathematics, A. Tarski, Ed. Oxford University Press, 1936, pp. 152–278."
+    },
+    "survey-ref-041": {
+      "survey_number": 41,
+      "citation": "O. B. Bassler, “The Surveyability of Mathematical Proof: A Historical Perspective,” Synthese, vol. 148, no. 1, pp. 99–133, 2006."
+    },
+    "survey-ref-042": {
+      "survey_number": 42,
+      "citation": "S. Ben-David, P. Hrubeš, S. Moran, A. Shpilka, and A. Yehudayoff, “Learnability can be undecidable,” Nat. Mach. Intell., vol. 1, no. 1, pp. 44–48, Jan. 2019, doi: 10.1038/s42256-018-0002-3.",
+      "locator": "https://doi.org/10.1038/s42256-018-0002-3"
+    },
+    "survey-ref-043": {
+      "survey_number": 43,
+      "citation": "L. Reyzin, “Unprovability comes to machine learning,” Nature, vol. 565, no. 7738, Art. no. 7738, Jan. 2019, doi: 10.1038/d41586-019-00012-4.",
+      "locator": "https://doi.org/10.1038/d41586-019-00012-4"
+    },
+    "survey-ref-044": {
+      "survey_number": 44,
+      "citation": "L. G. Valiant, “A theory of the learnable,” Commun. ACM, vol. 27, no. 11, pp. 1134–1142, Nov. 1984, doi: 10.1145/1968.1972.",
+      "locator": "https://doi.org/10.1145/1968.1972"
+    },
+    "survey-ref-045": {
+      "survey_number": 45,
+      "citation": "D. Foster and H. P. Young, “On the Impossibility of Predicting the Behavior of Rational Agents,” The Johns Hopkins University,Department of Economics, 423, Jun. 2001. Accessed: Jul. 01, 2021. [Online]. Available: https://ideas.repec.org/p/jhu/papers/423.html",
+      "locator": "https://ideas.repec.org/p/jhu/papers/423.html"
+    },
+    "survey-ref-046": {
+      "survey_number": 46,
+      "citation": "R. Koppl and J. B. R. Jr, “All That I Have to Say Has Already Crossed Your Mind,” Metroeconomica, vol. 53, no. 4, pp. 339–360, 2002, doi: 10.1111/1467-999X.00147.",
+      "locator": "https://doi.org/10.1111/1467-999X.00147"
+    },
+    "survey-ref-047": {
+      "survey_number": 47,
+      "citation": "A. Auger and O. Teytaud, “Continuous Lunches Are Free Plus the Design of Optimal Optimization Algorithms,” Algorithmica, vol. 57, no. 1, pp. 121–146, May 2010, doi: 10.1007/s00453-008-9244-5.",
+      "locator": "https://doi.org/10.1007/s00453-008-9244-5"
+    },
+    "survey-ref-048": {
+      "survey_number": 48,
+      "citation": "D. H. Wolpert and W. G. Macready, “Coevolutionary free lunches,” IEEE Trans. Evol. Comput., vol. 9, no. 6, pp. 721–735, Dec. 2005, doi: 10.1109/TEVC.2005.856205.",
+      "locator": "https://doi.org/10.1109/TEVC.2005.856205"
+    },
+    "survey-ref-049": {
+      "survey_number": 49,
+      "citation": "A. Hyvärinen and P. Pajunen, “Nonlinear independent component analysis: Existence and uniqueness results,” Neural Netw., vol. 12, no. 3, pp. 429–439, Apr. 1999, doi: 10.1016/S0893-6080(98)00140-3.",
+      "locator": "https://doi.org/10.1016/S0893-6080(98)00140-3"
+    },
+    "survey-ref-050": {
+      "survey_number": 50,
+      "citation": "J. Peters, D. Janzing, and B. Schölkopf, Elements of Causal Inference: Foundations and Learning Algorithms. Cambridge, MA, USA: MIT Press, 2017."
+    },
+    "survey-ref-051": {
+      "survey_number": 51,
+      "citation": "F. Locatello et al., “Challenging Common Assumptions in the Unsupervised Learning of Disentangled Representations,” 2019. Accessed: Jun. 29, 2021. [Online]. Available: http://proceedings.mlr.press/v97/locatello19a.html",
+      "locator": "http://proceedings.mlr.press/v97/locatello19a.html"
+    },
+    "survey-ref-052": {
+      "survey_number": 52,
+      "citation": "I. I. Bojinov and G. Basse, “A General Theory of Identification,” Harvard Business School, Feb. 2020. Accessed: Jun. 11, 2021. [Online]. Available: https://www.hbs.edu/faculty/Pages/item.aspx?num=57688",
+      "locator": "https://www.hbs.edu/faculty/Pages/item.aspx?num=57688"
+    },
+    "survey-ref-053": {
+      "survey_number": 53,
+      "citation": "D. H. Wolpert, “Computational capabilities of physical systems,” Phys. Rev. E, vol. 65, no. 1, p. 016128, Dec. 2001, doi: 10.1103/PhysRevE.65.016128.",
+      "locator": "https://doi.org/10.1103/PhysRevE.65.016128"
+    },
+    "survey-ref-054": {
+      "survey_number": 54,
+      "citation": "D. Wolpert, “Constraints on physical reality arising from a formalization of knowledge,” ArXiv171103499 Phys., Jun. 2018, Accessed: Jun. 22, 2021. [Online]. Available: http://arxiv.org/abs/1711.03499",
+      "locator": "http://arxiv.org/abs/1711.03499"
+    },
+    "survey-ref-055": {
+      "survey_number": 55,
+      "citation": "A. Devereaux, R. Koppl, S. Kauffman, and A. Roli, “Constraints on modeling systems from within systems: the principle of frame relativity,” Social Science Research Network, Rochester, NY, SSRN Scholarly Paper ID 3968077, Nov. 2021. doi: 10.2139/ssrn.3968077.",
+      "locator": "https://doi.org/10.2139/ssrn.3968077"
+    },
+    "survey-ref-056": {
+      "survey_number": 56,
+      "citation": "M. Alfonseca, M. Cebrian, A. F. Anta, L. Coviello, A. Abeliuk, and I. Rahwan, “Superintelligence cannot be contained: Lessons from Computability Theory,” J. Artif. Intell. Res., vol. 70, pp. 65–76, Jan. 2021, doi: 10.1613/jair.1.12202.",
+      "locator": "https://doi.org/10.1613/jair.1.12202"
+    },
+    "survey-ref-057": {
+      "survey_number": 57,
+      "citation": "R. Carey, “Incorrigibility in the CIRL Framework,” ArXiv170906275 Cs, Jun. 2018, Accessed: Jul. 01, 2021. [Online]. Available: http://arxiv.org/abs/1709.06275",
+      "locator": "http://arxiv.org/abs/1709.06275"
+    },
+    "survey-ref-058": {
+      "survey_number": 58,
+      "citation": "L. Orseau and S. Armstrong, “Safely interruptible agents,” in Proceedings of the Thirty-Second Conference on Uncertainty in Artificial Intelligence, Arlington, Virginia, USA, Jun. 2016, pp. 557–566."
+    },
+    "survey-ref-059": {
+      "survey_number": 59,
+      "citation": "D. Hadfield-Menell, A. Dragan, P. Abbeel, and S. Russell, “The off-switch game,” in Proceedings of the 26th International Joint Conference on Artificial Intelligence, Melbourne, Australia, Aug. 2017, pp. 220–227."
+    },
+    "survey-ref-060": {
+      "survey_number": 60,
+      "citation": "T. Wängberg, M. Böörs, E. Catt, T. Everitt, and M. Hutter, “A Game-Theoretic Analysis of the Off-Switch Game,” in Artificial General Intelligence, Cham, 2017, pp. 167–177. doi: 10.1007/978-3-319-63703-7_16.",
+      "locator": "https://doi.org/10.1007/978-3-319-63703-7_16"
+    },
+    "survey-ref-061": {
+      "survey_number": 61,
+      "citation": "E. M. E. Mhamdi, R. Guerraoui, H. Hendrikx, and A. Maurer, “Dynamic safe interruptibility for decentralized multi-agent reinforcement learning,” in Proceedings of the 31st International Conference on Neural Information Processing Systems, Red Hook, NY, USA, Dec. 2017, pp. 129–139."
+    },
+    "survey-ref-062": {
+      "survey_number": 62,
+      "citation": "M. H. Löb, “Solution of a Problem of Leon Henkin,” J. Symb. Log., vol. 20, no. 2, pp. 115–118, 1955, doi: 10.2307/2266895.",
+      "locator": "https://doi.org/10.2307/2266895"
+    },
+    "survey-ref-063": {
+      "survey_number": 63,
+      "citation": "V. Vinge, “TECHNOLOGICAL SINGULARITY,” presented at the VISION-21 Symposium sponsored by NASA Lewis Research Center and the Ohio Aerospace Institute, 1993. Accessed: Jul. 01, 2021. [Online]. Available: https://frc.ri.cmu.edu/~hpm/book98/com.ch1/vinge.singularity.html",
+      "locator": "https://frc.ri.cmu.edu/~hpm/book98/com.ch1/vinge.singularity.html"
+    },
+    "survey-ref-064": {
+      "survey_number": 64,
+      "citation": "R. V. Yampolskiy, “Unpredictability of AI: On the Impossibility of Accurately Predicting All Actions of a Smarter Agent,” J. Artif. Intell. Conscious., vol. 07, no. 01, pp. 109–118, Mar. 2020, doi: 10.1142/S2705078520500034.",
+      "locator": "https://doi.org/10.1142/S2705078520500034"
+    },
+    "survey-ref-065": {
+      "survey_number": 65,
+      "citation": "R. V. Yampolskiy, “Unexplainability and Incomprehensibility of AI,” J. Artif. Intell. Conscious., vol. 07, no. 02, pp. 277–291, Sep. 2020, doi: 10.1142/S2705078520500150.",
+      "locator": "https://doi.org/10.1142/S2705078520500150"
+    },
+    "survey-ref-066": {
+      "survey_number": 66,
+      "citation": "A. Charlesworth, “Comprehending software correctness implies comprehending an intelligence-related limitation,” ACM Trans. Comput. Log., vol. 7, no. 3, pp. 590–612, Jul. 2006, doi: 10.1145/1149114.1149119.",
+      "locator": "https://doi.org/10.1145/1149114.1149119"
+    },
+    "survey-ref-067": {
+      "survey_number": 67,
+      "citation": "J. Hernandez-orallo, “A formal definition of intelligence based on an intensional variant of Kolmogorov complexity,” in In Proceedings of the International Symposium of Engineering of Intelligent Systems (EIS’98, 1998, pp. 146–163."
+    },
+    "survey-ref-068": {
+      "survey_number": 68,
+      "citation": "R. V. Yampolskiy, “What are the ultimate limits to computational techniques: verifier theory and unverifiability,” Phys. Scr., vol. 92, no. 9, p. 093001, Jul. 2017, doi: 10.1088/1402-4896/aa7ca8.",
+      "locator": "https://doi.org/10.1088/1402-4896/aa7ca8"
+    },
+    "survey-ref-069": {
+      "survey_number": 69,
+      "citation": "J. van Leeuwen and J. Wiedermann, “Impossibility Results for the Online Verification of Ethical and Legal Behaviour of Robots,” Utrecht University, Utrecht, UU-PCS-2021-02, 2021. Accessed: Aug. 12, 2021. [Online]. Available: http://www.cs.uu.nl/groups/AD/UU-PCS-2021-02.pdf",
+      "locator": "http://www.cs.uu.nl/groups/AD/UU-PCS-2021-02.pdf"
+    },
+    "survey-ref-070": {
+      "survey_number": 70,
+      "citation": "C. J. Reynolds, “On the Computational Complexity of Action Evaluations,” Netherlands, 2005. Accessed: Jul. 01, 2021. [Online]. Available: https://www.media.mit.edu/publications/on-the-computational-complexity-of-action- evaluations/",
+      "locator": "https://www.media.mit.edu/publications/on-the-computational-complexity-of-action-"
+    },
+    "survey-ref-071": {
+      "survey_number": 71,
+      "citation": "M. Brundage, “Limitations and risks of machine ethics,” J. Exp. Theor. Artif. Intell., vol. 26, no. 3, pp. 355–372, Jul. 2014, doi: 10.1080/0952813X.2014.895108.",
+      "locator": "https://doi.org/10.1080/0952813X.2014.895108"
+    },
+    "survey-ref-072": {
+      "survey_number": 72,
+      "citation": "H. W. Lin, M. Tegmark, and D. Rolnick, “Why Does Deep and Cheap Learning Work So Well?,” J. Stat. Phys., vol. 168, no. 6, pp. 1223–1247, Sep. 2017, doi: 10.1007/s10955-017-1836-5.",
+      "locator": "https://doi.org/10.1007/s10955-017-1836-5"
+    },
+    "survey-ref-073": {
+      "survey_number": 73,
+      "citation": "C. S. Calude, S. Heidari, and J. Sifakis, “What Neural Networks Are (Not) Good For?,” Research report CDMTCS- 556, Aug. 2021."
+    },
+    "survey-ref-074": {
+      "survey_number": 74,
+      "citation": "C. A. E. Goodhart, “Problems of Monetary Management: The UK Experience,” in Monetary Theory and Practice: The UK Experience, C. A. E. Goodhart, Ed. London: Macmillan Education UK, 1984, pp. 91–121. doi: 10.1007/978-1-349-17295-5_4.",
+      "locator": "https://doi.org/10.1007/978-1-349-17295-5_4"
+    },
+    "survey-ref-075": {
+      "survey_number": 75,
+      "citation": "M. Strathern, “‘Improving ratings’: audit in the British University system,” Eur. Rev., vol. 5, no. 3, pp. 305–321, Jul. 1997, doi: 10.1002/(SICI)1234-981X(199707)5:3<305::AID-EURO184>3.0.CO;2-4.",
+      "locator": "https://doi.org/10.1002/(SICI)1234-981X(199707)5:3<305::AID-EURO184>3.0.CO;2-4"
+    },
+    "survey-ref-076": {
+      "survey_number": 76,
+      "citation": "D. T. Campbell, “Assessing the impact of planned social change,” Eval. Program Plann., vol. 2, no. 1, pp. 67–90, Jan. 1979, doi: 10.1016/0149-7189(79)90048-X.",
+      "locator": "https://doi.org/10.1016/0149-7189(79)90048-X"
+    },
+    "survey-ref-077": {
+      "survey_number": 77,
+      "citation": "T. Everitt, V. Krakovna, L. Orseau, M. Hutter, and S. Legg, “Reinforcement Learning with a Corrupted Reward Channel,” ArXiv170508417 Cs Stat, Aug. 2017, Accessed: May 13, 2021. [Online]. Available: http://arxiv.org/abs/1705.08417",
+      "locator": "http://arxiv.org/abs/1705.08417"
+    },
+    "survey-ref-078": {
+      "survey_number": 78,
+      "citation": "W. J. Howe and R. V. Yampolskiy, “Impossibility of Unambiguous Communication as a Source of Failure in AI Systems,” presented at the IJCAI-21 Workshop on Artificial Intelligence Safety (AISafety2021), Montreal, Quebec, Canada, Aug. 2021. doi: 10.13140/RG.2.2.13245.28641.",
+      "locator": "https://doi.org/10.13140/RG.2.2.13245.28641"
+    }
+  },
+  "results": [
+    {
+      "id": "BY-001",
+      "name": "Unobservability",
+      "paper_reference": "Table 1",
+      "mechanism_category": "INDISTINGUISHABILITY",
+      "domain_category": "DATA",
+      "survey_proof_assessment": "PROVEN",
+      "informal_claim": "A system's internal state cannot in general be reconstructed from its observable outputs.",
+      "original_source_refs": [
+        "survey-ref-021"
+      ],
+      "formalizations": [],
+      "lean_artifact": null,
+      "status": "MAPPED",
+      "ai_safety_relevance": "The survey identifies this result as relevant to limits on AI; no direct real-system implication is asserted here.",
+      "ai_bridge_status": "HUMAN_REVIEW",
+      "notes": "Corrected control-theory queries surface Isabelle AFP observability candidates; statement-level equivalence remains unverified.",
+      "formal_library_search": {
+        "searched_on": "2026-07-18",
+        "evidence_file": "docs/formalization-search.json",
+        "searched_corpora": [
+          "mathlib",
+          "isabelle-afp",
+          "rocq-undecidability",
+          "hol4",
+          "hol-light",
+          "agda-stdlib"
+        ],
+        "candidate_corpora": [
+          "isabelle-afp"
+        ],
+        "query_terms": [
+          "observability",
+          "unobservable state",
+          "state reconstruction",
+          "observable output"
+        ]
+      }
+    },
+    {
+      "id": "BY-002",
+      "name": "Uncontrollability of dynamical systems",
+      "paper_reference": "Table 1",
+      "mechanism_category": "INDISTINGUISHABILITY",
+      "domain_category": "DATA",
+      "survey_proof_assessment": "PROVEN",
+      "informal_claim": "Some dynamical systems cannot be driven between arbitrary states by available controls.",
+      "original_source_refs": [
+        "survey-ref-021",
+        "survey-ref-024"
+      ],
+      "formalizations": [],
+      "lean_artifact": null,
+      "status": "MAPPED",
+      "ai_safety_relevance": "The survey identifies this result as relevant to limits on AI; no direct real-system implication is asserted here.",
+      "ai_bridge_status": "HUMAN_REVIEW",
+      "notes": "Statement-level equivalence to each cited source remains subject to source comparison.",
+      "formal_library_search": {
+        "searched_on": "2026-07-18",
+        "evidence_file": "docs/formalization-search.json",
+        "searched_corpora": [
+          "mathlib",
+          "isabelle-afp",
+          "rocq-undecidability",
+          "hol4",
+          "hol-light",
+          "agda-stdlib"
+        ],
+        "candidate_corpora": [],
+        "query_terms": [
+          "uncontrollability",
+          "not controllable",
+          "controllability"
+        ]
+      }
+    },
+    {
+      "id": "BY-003",
+      "name": "Good Regulator Theorem",
+      "paper_reference": "Table 1",
+      "mechanism_category": "INDISTINGUISHABILITY",
+      "domain_category": "DATA",
+      "survey_proof_assessment": "PROVEN",
+      "informal_claim": "Every maximally simple optimal regulator must embody a model of the regulated system.",
+      "original_source_refs": [
+        "survey-ref-025"
+      ],
+      "formalizations": [],
+      "lean_artifact": null,
+      "status": "MAPPED",
+      "ai_safety_relevance": "The survey identifies this result as relevant to limits on AI; no direct real-system implication is asserted here.",
+      "ai_bridge_status": "HUMAN_REVIEW",
+      "notes": "Statement-level equivalence to each cited source remains subject to source comparison.",
+      "formal_library_search": {
+        "searched_on": "2026-07-18",
+        "evidence_file": "docs/formalization-search.json",
+        "searched_corpora": [
+          "mathlib",
+          "isabelle-afp",
+          "rocq-undecidability",
+          "hol4",
+          "hol-light",
+          "agda-stdlib"
+        ],
+        "candidate_corpora": [],
+        "query_terms": [
+          "good regulator theorem",
+          "good regulator"
+        ]
+      }
+    },
+    {
+      "id": "BY-004",
+      "name": "Law of Requisite Variety",
+      "paper_reference": "Table 1",
+      "mechanism_category": "INDISTINGUISHABILITY",
+      "domain_category": "DATA",
+      "survey_proof_assessment": "CONDITIONAL",
+      "informal_claim": "Perfect regulation requires sufficient controller variety under perfect information and unbounded response speed.",
+      "original_source_refs": [
+        "survey-ref-026"
+      ],
+      "formalizations": [],
+      "lean_artifact": null,
+      "status": "MAPPED",
+      "ai_safety_relevance": "The survey identifies this result as relevant to limits on AI; no direct real-system implication is asserted here.",
+      "ai_bridge_status": "HUMAN_REVIEW",
+      "notes": "Statement-level equivalence to each cited source remains subject to source comparison.",
+      "formal_library_search": {
+        "searched_on": "2026-07-18",
+        "evidence_file": "docs/formalization-search.json",
+        "searched_corpora": [
+          "mathlib",
+          "isabelle-afp",
+          "rocq-undecidability",
+          "hol4",
+          "hol-light",
+          "agda-stdlib"
+        ],
+        "candidate_corpora": [],
+        "query_terms": [
+          "requisite variety",
+          "law of requisite variety"
+        ]
+      }
+    },
+    {
+      "id": "BY-005",
+      "name": "Information-theoretical control limits",
+      "paper_reference": "Table 1",
+      "mechanism_category": "INDISTINGUISHABILITY",
+      "domain_category": "DATA",
+      "survey_proof_assessment": "PROVEN",
+      "informal_claim": "Information constraints impose lower bounds on achievable control.",
+      "original_source_refs": [
+        "survey-ref-027"
+      ],
+      "formalizations": [],
+      "lean_artifact": null,
+      "status": "MAPPED",
+      "ai_safety_relevance": "The survey identifies this result as relevant to limits on AI; no direct real-system implication is asserted here.",
+      "ai_bridge_status": "HUMAN_REVIEW",
+      "notes": "Statement-level equivalence to each cited source remains subject to source comparison.",
+      "formal_library_search": {
+        "searched_on": "2026-07-18",
+        "evidence_file": "docs/formalization-search.json",
+        "searched_corpora": [
+          "mathlib",
+          "isabelle-afp",
+          "rocq-undecidability",
+          "hol4",
+          "hol-light",
+          "agda-stdlib"
+        ],
+        "candidate_corpora": [],
+        "query_terms": [
+          "information-theoretic control",
+          "information theoretic control"
+        ]
+      }
+    },
+    {
+      "id": "BY-006",
+      "name": "(Anti)codifiability thesis",
+      "paper_reference": "Table 1",
+      "mechanism_category": "INDUCTION",
+      "domain_category": "DATA",
+      "survey_proof_assessment": "NOT_PROVEN_IN_SURVEY",
+      "informal_claim": "The survey groups moral-particularist arguments against complete codification of virtue.",
+      "original_source_refs": [
+        "survey-ref-028",
+        "survey-ref-029",
+        "survey-ref-030"
+      ],
+      "formalizations": [],
+      "lean_artifact": null,
+      "status": "MAPPED",
+      "ai_safety_relevance": "The survey identifies this result as relevant to limits on AI; no direct real-system implication is asserted here.",
+      "ai_bridge_status": "HUMAN_REVIEW",
+      "notes": "Statement-level equivalence to each cited source remains subject to source comparison.",
+      "formal_library_search": {
+        "searched_on": "2026-07-18",
+        "evidence_file": "docs/formalization-search.json",
+        "searched_corpora": [
+          "mathlib",
+          "isabelle-afp",
+          "rocq-undecidability",
+          "hol4",
+          "hol-light",
+          "agda-stdlib"
+        ],
+        "candidate_corpora": [],
+        "query_terms": [
+          "codifiability",
+          "moral particularism",
+          "virtue codification"
+        ]
+      }
+    },
+    {
+      "id": "BY-007",
+      "name": "Arrow's impossibility theorem",
+      "paper_reference": "Table 1",
+      "mechanism_category": "TRADEOFF",
+      "domain_category": "SYMBOLIC",
+      "survey_proof_assessment": "PROVEN",
+      "informal_claim": "No rank-order voting rule satisfies Arrow's full set of fairness conditions for three or more alternatives.",
+      "original_source_refs": [
+        "survey-ref-031"
+      ],
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "repository": "https://github.com/ChihChengLiang/arrow",
+          "version": "758398779decc66d2830a70b02597b0f22030181",
+          "relationship": "EQUIVALENT",
+          "reproduced": true,
+          "license": "Apache-2.0",
+          "module": "Arrow/Arrow.lean; vendored as AISafetyAtlas.Upstream.Arrow",
+          "declaration": "Impossibility"
+        },
+        {
+          "framework": "Isabelle/HOL",
+          "repository": "https://www.isa-afp.org/entries/ArrowImpossibilityGS.html",
+          "version": "AFP release 2026-02-06 (SHA256 8174c738b42203100170ff25f3c9fc2c6d16d8556fbaff205c0eaa98a3813da7)",
+          "relationship": "EQUIVALENT",
+          "reproduced": true,
+          "license": "BSD-3-Clause (AFP BSD License)",
+          "build_environment": "makarius/isabelle@sha256:9bd33b183c399327c5d554fc8cde27c29b5d2b20cdc6fe7a604caa3f951018fc",
+          "build_command": "scripts/reproduce_isabelle.sh arrow",
+          "module": "Thys/Arrow_Order.thy; session ArrowImpossibilityGS",
+          "declaration": "Arrow"
+        },
+        {
+          "framework": "Isabelle/HOL",
+          "repository": "https://www.isa-afp.org/entries/ArrowImpossibilityGS.html",
+          "version": "AFP release 2026-02-06 (SHA256 8174c738b42203100170ff25f3c9fc2c6d16d8556fbaff205c0eaa98a3813da7)",
+          "relationship": "EQUIVALENT",
+          "reproduced": true,
+          "license": "BSD-3-Clause (AFP BSD License)",
+          "build_environment": "makarius/isabelle@sha256:9bd33b183c399327c5d554fc8cde27c29b5d2b20cdc6fe7a604caa3f951018fc",
+          "build_command": "scripts/reproduce_isabelle.sh arrow",
+          "module": "Thys/Arrow_Utility.thy; session ArrowImpossibilityGS",
+          "declaration": "dictator"
+        }
+      ],
+      "lean_artifact": {
+        "type": "BRIDGE",
+        "source_declarations": [
+          "AISafetyAtlas.Upstream.Arrow.Impossibility"
+        ],
+        "atlas_declarations": [
+          "AISafetyAtlas.SocialChoice.arrow",
+          "AISafetyAtlas.SocialChoice.Utility.arrow"
+        ]
+      },
+      "status": "LEAN_AVAILABLE",
+      "ai_safety_relevance": "The survey identifies this result as relevant to limits on AI; no direct real-system implication is asserted here.",
+      "ai_bridge_status": "HUMAN_REVIEW",
+      "notes": "CC Liang's Lean 4 order proof is the canonical mathematical source and is vendored at an immutable Apache-2.0 commit with only module, namespace, visibility, and interface-reducibility changes. The atlas exposes one stable order theorem and proves one utility-representation bridge from it. The two reproduced Isabelle/HOL variants remain provenance and specification references, not additional coverage results.",
+      "formal_library_search": {
+        "searched_on": "2026-07-18",
+        "evidence_file": "docs/formalization-search.json",
+        "searched_corpora": [
+          "mathlib",
+          "isabelle-afp",
+          "rocq-undecidability",
+          "hol4",
+          "hol-light",
+          "agda-stdlib"
+        ],
+        "candidate_corpora": [
+          "mathlib",
+          "isabelle-afp"
+        ],
+        "query_terms": [
+          "arrow impossibility",
+          "arrow's theorem",
+          "arrow theorem"
+        ]
+      }
+    },
+    {
+      "id": "BY-008",
+      "name": "Impossibility theorems in population ethics",
+      "paper_reference": "Table 1",
+      "mechanism_category": "TRADEOFF",
+      "domain_category": "SYMBOLIC",
+      "survey_proof_assessment": "PROVEN",
+      "informal_claim": "No population axiology simultaneously satisfies the cited set of adequacy conditions.",
+      "original_source_refs": [
+        "survey-ref-032"
+      ],
+      "formalizations": [],
+      "lean_artifact": null,
+      "status": "MAPPED",
+      "ai_safety_relevance": "The survey identifies this result as relevant to limits on AI; no direct real-system implication is asserted here.",
+      "ai_bridge_status": "HUMAN_REVIEW",
+      "notes": "Statement-level equivalence to each cited source remains subject to source comparison.",
+      "formal_library_search": {
+        "searched_on": "2026-07-18",
+        "evidence_file": "docs/formalization-search.json",
+        "searched_corpora": [
+          "mathlib",
+          "isabelle-afp",
+          "rocq-undecidability",
+          "hol4",
+          "hol-light",
+          "agda-stdlib"
+        ],
+        "candidate_corpora": [
+          "isabelle-afp"
+        ],
+        "query_terms": [
+          "population ethics",
+          "population axiology"
+        ]
+      }
+    },
+    {
+      "id": "BY-009",
+      "name": "Impossibility theorems in AI alignment",
+      "paper_reference": "Table 1",
+      "mechanism_category": "TRADEOFF",
+      "domain_category": "SYMBOLIC",
+      "survey_proof_assessment": "PROVEN",
+      "informal_claim": "The cited work derives incompatibilities among desiderata for utility-based value alignment.",
+      "original_source_refs": [
+        "survey-ref-033"
+      ],
+      "formalizations": [],
+      "lean_artifact": null,
+      "status": "MAPPED",
+      "ai_safety_relevance": "The survey identifies this result as relevant to limits on AI; no direct real-system implication is asserted here.",
+      "ai_bridge_status": "HUMAN_REVIEW",
+      "notes": "Statement-level equivalence to each cited source remains subject to source comparison.",
+      "formal_library_search": {
+        "searched_on": "2026-07-18",
+        "evidence_file": "docs/formalization-search.json",
+        "searched_corpora": [
+          "mathlib",
+          "isabelle-afp",
+          "rocq-undecidability",
+          "hol4",
+          "hol-light",
+          "agda-stdlib"
+        ],
+        "candidate_corpora": [],
+        "query_terms": [
+          "value alignment",
+          "ai alignment",
+          "utility alignment"
+        ]
+      }
+    },
+    {
+      "id": "BY-010",
+      "name": "Fairness impossibility theorem",
+      "paper_reference": "Table 1",
+      "mechanism_category": "TRADEOFF",
+      "domain_category": "SYMBOLIC",
+      "survey_proof_assessment": "PROVEN",
+      "informal_claim": "Common calibration and error-rate fairness criteria cannot all hold when base rates differ, subject to source assumptions.",
+      "original_source_refs": [
+        "survey-ref-034",
+        "survey-ref-035"
+      ],
+      "formalizations": [],
+      "lean_artifact": null,
+      "status": "MAPPED",
+      "ai_safety_relevance": "The survey identifies this result as relevant to limits on AI; no direct real-system implication is asserted here.",
+      "ai_bridge_status": "HUMAN_REVIEW",
+      "notes": "Statement-level equivalence to each cited source remains subject to source comparison.",
+      "formal_library_search": {
+        "searched_on": "2026-07-18",
+        "evidence_file": "docs/formalization-search.json",
+        "searched_corpora": [
+          "mathlib",
+          "isabelle-afp",
+          "rocq-undecidability",
+          "hol4",
+          "hol-light",
+          "agda-stdlib"
+        ],
+        "candidate_corpora": [],
+        "query_terms": [
+          "fairness impossibility",
+          "calibration fairness",
+          "equalized odds"
+        ]
+      }
+    },
+    {
+      "id": "BY-011",
+      "name": "Limits on preference deduction",
+      "paper_reference": "Table 1",
+      "mechanism_category": "INDISTINGUISHABILITY",
+      "domain_category": "DATA",
+      "survey_proof_assessment": "PROVEN",
+      "informal_claim": "Observed behaviour alone does not identify an agent's reward function and planning process without strong normative assumptions.",
+      "original_source_refs": [
+        "survey-ref-036"
+      ],
+      "formalizations": [],
+      "lean_artifact": null,
+      "status": "MAPPED",
+      "ai_safety_relevance": "The survey identifies this result as relevant to limits on AI; no direct real-system implication is asserted here.",
+      "ai_bridge_status": "HUMAN_REVIEW",
+      "notes": "Statement-level equivalence to each cited source remains subject to source comparison.",
+      "formal_library_search": {
+        "searched_on": "2026-07-18",
+        "evidence_file": "docs/formalization-search.json",
+        "searched_corpora": [
+          "mathlib",
+          "isabelle-afp",
+          "rocq-undecidability",
+          "hol4",
+          "hol-light",
+          "agda-stdlib"
+        ],
+        "candidate_corpora": [],
+        "query_terms": [
+          "preference deduction",
+          "preference inference",
+          "inverse reinforcement"
+        ]
+      }
+    },
+    {
+      "id": "BY-012",
+      "name": "Rice's theorem",
+      "paper_reference": "Table 1",
+      "mechanism_category": "DEDUCTION",
+      "domain_category": "SYMBOLIC",
+      "survey_proof_assessment": "PROVEN",
+      "informal_claim": "Every nontrivial extensional property of partial computable functions is undecidable.",
+      "original_source_refs": [
+        "survey-ref-037"
+      ],
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "repository": "https://github.com/leanprover-community/mathlib4",
+          "version": "81a5d257c8e410db227a6665ed08f64fea08e997",
+          "module": "Mathlib.Computability.Halting",
+          "reproduced": true,
+          "license": "Apache-2.0",
+          "declaration": "ComputablePred.rice",
+          "relationship": "EQUIVALENT"
+        },
+        {
+          "framework": "Lean",
+          "repository": "https://github.com/leanprover-community/mathlib4",
+          "version": "81a5d257c8e410db227a6665ed08f64fea08e997",
+          "module": "Mathlib.Computability.Halting",
+          "reproduced": true,
+          "license": "Apache-2.0",
+          "declaration": "ComputablePred.rice₂",
+          "relationship": "EXACT"
+        },
+        {
+          "framework": "Isabelle/HOL",
+          "repository": "https://www.isa-afp.org/entries/Recursion-Theory-I.html",
+          "version": "AFP release 2026-02-06 (SHA256 b5314c859ce3b2876ef01151f394c1a5e6b234b0fc6563698dbb0250c73cd3f8)",
+          "module": "RecEnSet.thy; session Recursion-Theory-I",
+          "declaration": "Rice_2",
+          "relationship": "EQUIVALENT",
+          "reproduced": true,
+          "license": "BSD-3-Clause (AFP BSD License)",
+          "build_environment": "makarius/isabelle@sha256:9bd33b183c399327c5d554fc8cde27c29b5d2b20cdc6fe7a604caa3f951018fc",
+          "build_command": "scripts/reproduce_isabelle.sh rice"
+        }
+      ],
+      "lean_artifact": {
+        "type": "WRAPPER",
+        "source_declarations": [
+          "ComputablePred.rice",
+          "ComputablePred.rice₂"
+        ],
+        "atlas_declarations": [
+          "AISafetyAtlas.Computability.rice",
+          "AISafetyAtlas.Computability.rice_code_iff"
+        ]
+      },
+      "status": "LEAN_AVAILABLE",
+      "ai_safety_relevance": "The survey identifies this result as relevant to limits on AI; no direct real-system implication is asserted here.",
+      "ai_bridge_status": "HUMAN_REVIEW",
+      "notes": "Mathlib v4.32.0 provides an equivalent extensional-function theorem and an exact code-set characterization. Isabelle Rice_2 independently verifies the ordinary undecidability result. Reproduced Rice_1 adds an explicit one-reduction and Rice_3 adds a c.e.-set interface, but neither is an additional survey coverage result or a current Lean migration target.",
+      "formal_library_search": {
+        "searched_on": "2026-07-18",
+        "evidence_file": "docs/formalization-search.json",
+        "searched_corpora": [
+          "mathlib",
+          "isabelle-afp",
+          "rocq-undecidability",
+          "hol4",
+          "hol-light",
+          "agda-stdlib"
+        ],
+        "candidate_corpora": [
+          "mathlib",
+          "isabelle-afp",
+          "rocq-undecidability",
+          "hol4",
+          "agda-stdlib"
+        ],
+        "query_terms": [
+          "rice theorem",
+          "rice's theorem",
+          "rice_"
+        ]
+      }
+    },
+    {
+      "id": "BY-013",
+      "name": "Unprovability",
+      "paper_reference": "Table 1",
+      "mechanism_category": "DEDUCTION",
+      "domain_category": "SYMBOLIC",
+      "survey_proof_assessment": "PROVEN",
+      "informal_claim": "Sufficiently expressive consistent formal systems contain true statements they cannot prove, under the source's hypotheses.",
+      "original_source_refs": [
+        "survey-ref-001"
+      ],
+      "formalizations": [],
+      "lean_artifact": null,
+      "status": "MAPPED",
+      "ai_safety_relevance": "The survey identifies this result as relevant to limits on AI; no direct real-system implication is asserted here.",
+      "ai_bridge_status": "HUMAN_REVIEW",
+      "notes": "Statement-level equivalence to each cited source remains subject to source comparison.",
+      "formal_library_search": {
+        "searched_on": "2026-07-18",
+        "evidence_file": "docs/formalization-search.json",
+        "searched_corpora": [
+          "mathlib",
+          "isabelle-afp",
+          "rocq-undecidability",
+          "hol4",
+          "hol-light",
+          "agda-stdlib"
+        ],
+        "candidate_corpora": [
+          "mathlib",
+          "isabelle-afp",
+          "hol-light"
+        ],
+        "query_terms": [
+          "gödel incompleteness",
+          "goedel incompleteness",
+          "unprovability"
+        ]
+      }
+    },
+    {
+      "id": "BY-014",
+      "name": "Undecidability",
+      "paper_reference": "Table 1",
+      "mechanism_category": "DEDUCTION",
+      "domain_category": "SYMBOLIC",
+      "survey_proof_assessment": "PROVEN",
+      "informal_claim": "No effective procedure decides every instance of the relevant computation or decision problem.",
+      "original_source_refs": [
+        "survey-ref-002",
+        "survey-ref-038"
+      ],
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "repository": "https://github.com/leanprover-community/mathlib4",
+          "version": "81a5d257c8e410db227a6665ed08f64fea08e997",
+          "module": "Mathlib.Computability.Halting",
+          "reproduced": true,
+          "license": "Apache-2.0",
+          "declaration": "ComputablePred.halting_problem_re",
+          "relationship": "RELATED"
+        },
+        {
+          "framework": "Lean",
+          "repository": "https://github.com/leanprover-community/mathlib4",
+          "version": "81a5d257c8e410db227a6665ed08f64fea08e997",
+          "module": "Mathlib.Computability.Halting",
+          "reproduced": true,
+          "license": "Apache-2.0",
+          "declaration": "ComputablePred.halting_problem",
+          "relationship": "EXACT"
+        },
+        {
+          "framework": "Lean",
+          "repository": "https://github.com/leanprover-community/mathlib4",
+          "version": "81a5d257c8e410db227a6665ed08f64fea08e997",
+          "module": "Mathlib.Computability.Halting",
+          "reproduced": true,
+          "license": "Apache-2.0",
+          "declaration": "ComputablePred.halting_problem_not_re",
+          "relationship": "RELATED"
+        }
+      ],
+      "lean_artifact": {
+        "type": "WRAPPER",
+        "source_declarations": [
+          "ComputablePred.halting_problem_re",
+          "ComputablePred.halting_problem",
+          "ComputablePred.halting_problem_not_re"
+        ],
+        "atlas_declarations": [
+          "AISafetyAtlas.Computability.halting_re",
+          "AISafetyAtlas.Computability.halting_problem",
+          "AISafetyAtlas.Computability.nonhalting_not_re"
+        ]
+      },
+      "status": "LEAN_AVAILABLE",
+      "ai_safety_relevance": "The survey identifies this result as relevant to limits on AI; no direct real-system implication is asserted here.",
+      "ai_bridge_status": "HUMAN_REVIEW",
+      "notes": "Mathlib v4.32.0 formalizes recursive enumerability, noncomputability, and non-r.e. complement results for the fixed-input halting predicate.",
+      "formal_library_search": {
+        "searched_on": "2026-07-18",
+        "evidence_file": "docs/formalization-search.json",
+        "searched_corpora": [
+          "mathlib",
+          "isabelle-afp",
+          "rocq-undecidability",
+          "hol4",
+          "hol-light",
+          "agda-stdlib"
+        ],
+        "candidate_corpora": [
+          "mathlib",
+          "isabelle-afp",
+          "rocq-undecidability",
+          "hol4",
+          "hol-light"
+        ],
+        "query_terms": [
+          "halting problem",
+          "undecidability",
+          "undecidable"
+        ]
+      }
+    },
+    {
+      "id": "BY-015",
+      "name": "Chaitin incompleteness",
+      "paper_reference": "Table 1",
+      "mechanism_category": "DEDUCTION",
+      "domain_category": "SYMBOLIC",
+      "survey_proof_assessment": "PROVEN",
+      "informal_claim": "A finitely specified formal theory cannot prove arbitrarily high lower bounds on Kolmogorov complexity.",
+      "original_source_refs": [
+        "survey-ref-039"
+      ],
+      "formalizations": [],
+      "lean_artifact": null,
+      "status": "MAPPED",
+      "ai_safety_relevance": "The survey identifies this result as relevant to limits on AI; no direct real-system implication is asserted here.",
+      "ai_bridge_status": "HUMAN_REVIEW",
+      "notes": "Statement-level equivalence to each cited source remains subject to source comparison.",
+      "formal_library_search": {
+        "searched_on": "2026-07-18",
+        "evidence_file": "docs/formalization-search.json",
+        "searched_corpora": [
+          "mathlib",
+          "isabelle-afp",
+          "rocq-undecidability",
+          "hol4",
+          "hol-light",
+          "agda-stdlib"
+        ],
+        "candidate_corpora": [],
+        "query_terms": [
+          "chaitin incompleteness",
+          "kolmogorov complexity incompleteness"
+        ]
+      }
+    },
+    {
+      "id": "BY-016",
+      "name": "Undefinability",
+      "paper_reference": "Table 1",
+      "mechanism_category": "DEDUCTION",
+      "domain_category": "SYMBOLIC",
+      "survey_proof_assessment": "PROVEN",
+      "informal_claim": "Truth for a sufficiently expressive formal language is not definable within that language under the source's hypotheses.",
+      "original_source_refs": [
+        "survey-ref-040"
+      ],
+      "formalizations": [],
+      "lean_artifact": null,
+      "status": "MAPPED",
+      "ai_safety_relevance": "The survey identifies this result as relevant to limits on AI; no direct real-system implication is asserted here.",
+      "ai_bridge_status": "HUMAN_REVIEW",
+      "notes": "Statement-level equivalence to each cited source remains subject to source comparison.",
+      "formal_library_search": {
+        "searched_on": "2026-07-18",
+        "evidence_file": "docs/formalization-search.json",
+        "searched_corpora": [
+          "mathlib",
+          "isabelle-afp",
+          "rocq-undecidability",
+          "hol4",
+          "hol-light",
+          "agda-stdlib"
+        ],
+        "candidate_corpora": [
+          "hol-light"
+        ],
+        "query_terms": [
+          "tarski undefinability",
+          "undefinability of truth",
+          "undefinability"
+        ]
+      }
+    },
+    {
+      "id": "BY-017",
+      "name": "Unsurveyability",
+      "paper_reference": "Table 1",
+      "mechanism_category": "INTRACTABILITY",
+      "domain_category": "DATA",
+      "survey_proof_assessment": "NOT_PROVEN_IN_SURVEY",
+      "informal_claim": "Some proofs may exceed feasible human survey or comprehension even when mechanically checkable.",
+      "original_source_refs": [
+        "survey-ref-041"
+      ],
+      "formalizations": [],
+      "lean_artifact": null,
+      "status": "MAPPED",
+      "ai_safety_relevance": "The survey identifies this result as relevant to limits on AI; no direct real-system implication is asserted here.",
+      "ai_bridge_status": "HUMAN_REVIEW",
+      "notes": "Statement-level equivalence to each cited source remains subject to source comparison.",
+      "formal_library_search": {
+        "searched_on": "2026-07-18",
+        "evidence_file": "docs/formalization-search.json",
+        "searched_corpora": [
+          "mathlib",
+          "isabelle-afp",
+          "rocq-undecidability",
+          "hol4",
+          "hol-light",
+          "agda-stdlib"
+        ],
+        "candidate_corpora": [],
+        "query_terms": [
+          "unsurveyability",
+          "surveyability of proof"
+        ]
+      }
+    },
+    {
+      "id": "BY-018",
+      "name": "Unlearnability",
+      "paper_reference": "Table 1",
+      "mechanism_category": "DEDUCTION_AND_INTRACTABILITY",
+      "domain_category": "DATA",
+      "survey_proof_assessment": "PROVEN",
+      "informal_claim": "Learning can be undecidable or computationally infeasible for specified concept classes and learning models.",
+      "original_source_refs": [
+        "survey-ref-042",
+        "survey-ref-043",
+        "survey-ref-044"
+      ],
+      "formalizations": [],
+      "lean_artifact": null,
+      "status": "MAPPED",
+      "ai_safety_relevance": "The survey identifies this result as relevant to limits on AI; no direct real-system implication is asserted here.",
+      "ai_bridge_status": "HUMAN_REVIEW",
+      "notes": "Statement-level equivalence to each cited source remains subject to source comparison.",
+      "formal_library_search": {
+        "searched_on": "2026-07-18",
+        "evidence_file": "docs/formalization-search.json",
+        "searched_corpora": [
+          "mathlib",
+          "isabelle-afp",
+          "rocq-undecidability",
+          "hol4",
+          "hol-light",
+          "agda-stdlib"
+        ],
+        "candidate_corpora": [],
+        "query_terms": [
+          "unlearnability",
+          "learnability undecidable",
+          "pac learnability"
+        ]
+      }
+    },
+    {
+      "id": "BY-019",
+      "name": "Unpredictability of rational agents",
+      "paper_reference": "Table 1",
+      "mechanism_category": "INDUCTION",
+      "domain_category": "DATA",
+      "survey_proof_assessment": "PROVEN",
+      "informal_claim": "No predictor can universally forecast the behaviour of rational agents in the cited strategic settings.",
+      "original_source_refs": [
+        "survey-ref-045",
+        "survey-ref-046"
+      ],
+      "formalizations": [],
+      "lean_artifact": null,
+      "status": "MAPPED",
+      "ai_safety_relevance": "The survey identifies this result as relevant to limits on AI; no direct real-system implication is asserted here.",
+      "ai_bridge_status": "HUMAN_REVIEW",
+      "notes": "Statement-level equivalence to each cited source remains subject to source comparison.",
+      "formal_library_search": {
+        "searched_on": "2026-07-18",
+        "evidence_file": "docs/formalization-search.json",
+        "searched_corpora": [
+          "mathlib",
+          "isabelle-afp",
+          "rocq-undecidability",
+          "hol4",
+          "hol-light",
+          "agda-stdlib"
+        ],
+        "candidate_corpora": [],
+        "query_terms": [
+          "predicting rational agents",
+          "rational agent unpredictability"
+        ]
+      }
+    },
+    {
+      "id": "BY-020",
+      "name": "No Free Lunch — supervised learning",
+      "paper_reference": "Table 1",
+      "mechanism_category": "INDUCTION",
+      "domain_category": "DATA",
+      "survey_proof_assessment": "PROVEN",
+      "informal_claim": "Averaged uniformly over target functions, learning algorithms have no universal performance advantage.",
+      "original_source_refs": [
+        "survey-ref-018"
+      ],
+      "formalizations": [],
+      "lean_artifact": null,
+      "status": "MAPPED",
+      "ai_safety_relevance": "The survey identifies this result as relevant to limits on AI; no direct real-system implication is asserted here.",
+      "ai_bridge_status": "HUMAN_REVIEW",
+      "notes": "The rerun surfaces AFP No_Free_Lunch_ML as a candidate; its declaration and relationship require statement-level verification.",
+      "formal_library_search": {
+        "searched_on": "2026-07-18",
+        "evidence_file": "docs/formalization-search.json",
+        "searched_corpora": [
+          "mathlib",
+          "isabelle-afp",
+          "rocq-undecidability",
+          "hol4",
+          "hol-light",
+          "agda-stdlib"
+        ],
+        "candidate_corpora": [
+          "isabelle-afp"
+        ],
+        "query_terms": [
+          "no free lunch",
+          "supervised learning"
+        ]
+      }
+    },
+    {
+      "id": "BY-021",
+      "name": "No Free Lunch — optimization",
+      "paper_reference": "Table 1",
+      "mechanism_category": "INDUCTION",
+      "domain_category": "DATA",
+      "survey_proof_assessment": "PROVEN",
+      "informal_claim": "Averaged uniformly over objective functions, optimization algorithms have equal aggregate performance.",
+      "original_source_refs": [
+        "survey-ref-019"
+      ],
+      "formalizations": [],
+      "lean_artifact": null,
+      "status": "MAPPED",
+      "ai_safety_relevance": "The survey identifies this result as relevant to limits on AI; no direct real-system implication is asserted here.",
+      "ai_bridge_status": "HUMAN_REVIEW",
+      "notes": "Precise optimization queries remove the prior 143-file noise set. AFP No_Free_Lunch_ML remains a candidate whose relationship to this row is unverified.",
+      "formal_library_search": {
+        "searched_on": "2026-07-18",
+        "evidence_file": "docs/formalization-search.json",
+        "searched_corpora": [
+          "mathlib",
+          "isabelle-afp",
+          "rocq-undecidability",
+          "hol4",
+          "hol-light",
+          "agda-stdlib"
+        ],
+        "candidate_corpora": [
+          "isabelle-afp"
+        ],
+        "query_terms": [
+          "no free lunch",
+          "black box optimization",
+          "wolpert",
+          "macready"
+        ]
+      }
+    },
+    {
+      "id": "BY-022",
+      "name": "Free lunches in continuous spaces and coevolution",
+      "paper_reference": "Table 1",
+      "mechanism_category": "INDUCTION",
+      "domain_category": "DATA",
+      "survey_proof_assessment": "PROVEN",
+      "informal_claim": "The cited results identify settings where standard no-free-lunch symmetry fails.",
+      "original_source_refs": [
+        "survey-ref-047",
+        "survey-ref-048"
+      ],
+      "formalizations": [],
+      "lean_artifact": null,
+      "status": "MAPPED",
+      "ai_safety_relevance": "The survey identifies this result as relevant to limits on AI; no direct real-system implication is asserted here.",
+      "ai_bridge_status": "HUMAN_REVIEW",
+      "notes": "Statement-level equivalence to each cited source remains subject to source comparison.",
+      "formal_library_search": {
+        "searched_on": "2026-07-18",
+        "evidence_file": "docs/formalization-search.json",
+        "searched_corpora": [
+          "mathlib",
+          "isabelle-afp",
+          "rocq-undecidability",
+          "hol4",
+          "hol-light",
+          "agda-stdlib"
+        ],
+        "candidate_corpora": [],
+        "query_terms": [
+          "continuous free lunch",
+          "coevolutionary free lunch"
+        ]
+      }
+    },
+    {
+      "id": "BY-023",
+      "name": "Unidentifiability",
+      "paper_reference": "Table 1",
+      "mechanism_category": "INDISTINGUISHABILITY",
+      "domain_category": "DATA",
+      "survey_proof_assessment": "PROVEN",
+      "informal_claim": "Observational data can be compatible with multiple latent, causal, or generative explanations.",
+      "original_source_refs": [
+        "survey-ref-049",
+        "survey-ref-050",
+        "survey-ref-051",
+        "survey-ref-052"
+      ],
+      "formalizations": [],
+      "lean_artifact": null,
+      "status": "MAPPED",
+      "ai_safety_relevance": "The survey identifies this result as relevant to limits on AI; no direct real-system implication is asserted here.",
+      "ai_bridge_status": "HUMAN_REVIEW",
+      "notes": "Statement-level equivalence to each cited source remains subject to source comparison.",
+      "formal_library_search": {
+        "searched_on": "2026-07-18",
+        "evidence_file": "docs/formalization-search.json",
+        "searched_corpora": [
+          "mathlib",
+          "isabelle-afp",
+          "rocq-undecidability",
+          "hol4",
+          "hol-light",
+          "agda-stdlib"
+        ],
+        "candidate_corpora": [],
+        "query_terms": [
+          "unidentifiability",
+          "nonidentifiability",
+          "disentanglement impossibility"
+        ]
+      }
+    },
+    {
+      "id": "BY-024",
+      "name": "Physical limits on inference",
+      "paper_reference": "Table 1",
+      "mechanism_category": "DEDUCTION_AND_INDUCTION",
+      "domain_category": "DATA",
+      "survey_proof_assessment": "PROVEN",
+      "informal_claim": "Embedded physical inference devices face limits on prediction, observation, and mutual control.",
+      "original_source_refs": [
+        "survey-ref-005",
+        "survey-ref-053",
+        "survey-ref-054",
+        "survey-ref-055"
+      ],
+      "formalizations": [],
+      "lean_artifact": null,
+      "status": "MAPPED",
+      "ai_safety_relevance": "The survey identifies this result as relevant to limits on AI; no direct real-system implication is asserted here.",
+      "ai_bridge_status": "HUMAN_REVIEW",
+      "notes": "Statement-level equivalence to each cited source remains subject to source comparison.",
+      "formal_library_search": {
+        "searched_on": "2026-07-18",
+        "evidence_file": "docs/formalization-search.json",
+        "searched_corpora": [
+          "mathlib",
+          "isabelle-afp",
+          "rocq-undecidability",
+          "hol4",
+          "hol-light",
+          "agda-stdlib"
+        ],
+        "candidate_corpora": [],
+        "query_terms": [
+          "physical limits of inference",
+          "inference device"
+        ]
+      }
+    },
+    {
+      "id": "BY-025",
+      "name": "Uncontainability",
+      "paper_reference": "Table 1",
+      "mechanism_category": "DEDUCTION",
+      "domain_category": "SYMBOLIC_AND_DATA",
+      "survey_proof_assessment": "PROVEN",
+      "informal_claim": "Perfect containment of a superintelligent program is undecidable in the formal model used by the source.",
+      "original_source_refs": [
+        "survey-ref-056"
+      ],
+      "formalizations": [],
+      "lean_artifact": null,
+      "status": "MAPPED",
+      "ai_safety_relevance": "The survey identifies this result as relevant to limits on AI; no direct real-system implication is asserted here.",
+      "ai_bridge_status": "HUMAN_REVIEW",
+      "notes": "Statement-level equivalence to each cited source remains subject to source comparison.",
+      "formal_library_search": {
+        "searched_on": "2026-07-18",
+        "evidence_file": "docs/formalization-search.json",
+        "searched_corpora": [
+          "mathlib",
+          "isabelle-afp",
+          "rocq-undecidability",
+          "hol4",
+          "hol-light",
+          "agda-stdlib"
+        ],
+        "candidate_corpora": [],
+        "query_terms": [
+          "uncontainability",
+          "superintelligence cannot be contained",
+          "containment problem"
+        ]
+      }
+    },
+    {
+      "id": "BY-026",
+      "name": "Uninterruptibility",
+      "paper_reference": "Table 1",
+      "mechanism_category": "DEDUCTION",
+      "domain_category": "DATA",
+      "survey_proof_assessment": "NOT_PROVEN_IN_SURVEY",
+      "informal_claim": "Available interruption proposals guarantee safe interruptibility only under restricted assumptions.",
+      "original_source_refs": [
+        "survey-ref-057",
+        "survey-ref-058",
+        "survey-ref-059",
+        "survey-ref-060",
+        "survey-ref-061"
+      ],
+      "formalizations": [],
+      "lean_artifact": null,
+      "status": "MAPPED",
+      "ai_safety_relevance": "The survey identifies this result as relevant to limits on AI; no direct real-system implication is asserted here.",
+      "ai_bridge_status": "HUMAN_REVIEW",
+      "notes": "Statement-level equivalence to each cited source remains subject to source comparison.",
+      "formal_library_search": {
+        "searched_on": "2026-07-18",
+        "evidence_file": "docs/formalization-search.json",
+        "searched_corpora": [
+          "mathlib",
+          "isabelle-afp",
+          "rocq-undecidability",
+          "hol4",
+          "hol-light",
+          "agda-stdlib"
+        ],
+        "candidate_corpora": [],
+        "query_terms": [
+          "safe interruptibility",
+          "uninterruptibility",
+          "off-switch"
+        ]
+      }
+    },
+    {
+      "id": "BY-027",
+      "name": "Löb's theorem (unverifiability)",
+      "paper_reference": "Table 1",
+      "mechanism_category": "DEDUCTION",
+      "domain_category": "SYMBOLIC",
+      "survey_proof_assessment": "PROVEN",
+      "informal_claim": "A sufficiently strong formal system cannot generally prove its own soundness; the precise modal reading follows Löb's hypotheses.",
+      "original_source_refs": [
+        "survey-ref-062"
+      ],
+      "formalizations": [],
+      "lean_artifact": null,
+      "status": "MAPPED",
+      "ai_safety_relevance": "The survey identifies this result as relevant to limits on AI; no direct real-system implication is asserted here.",
+      "ai_bridge_status": "HUMAN_REVIEW",
+      "notes": "The corrected search records AFP Loebs_Theorem and Goedel_Incompleteness/Loeb candidates plus HOL Light GL provability-logic candidates; exact declarations and relationships remain unverified.",
+      "formal_library_search": {
+        "searched_on": "2026-07-18",
+        "evidence_file": "docs/formalization-search.json",
+        "searched_corpora": [
+          "mathlib",
+          "isabelle-afp",
+          "rocq-undecidability",
+          "hol4",
+          "hol-light",
+          "agda-stdlib"
+        ],
+        "candidate_corpora": [
+          "isabelle-afp",
+          "hol-light"
+        ],
+        "query_terms": [
+          "loebs theorem",
+          "loeb theorem",
+          "loeb formula",
+          "provability logic"
+        ]
+      }
+    },
+    {
+      "id": "BY-028",
+      "name": "Unpredictability of superhuman AI",
+      "paper_reference": "Table 1",
+      "mechanism_category": "INDUCTION",
+      "domain_category": "DATA",
+      "survey_proof_assessment": "PROOF_SKETCH",
+      "informal_claim": "A strictly less capable predictor cannot accurately predict every action of a more capable agent under the source's definitions.",
+      "original_source_refs": [
+        "survey-ref-063",
+        "survey-ref-064"
+      ],
+      "formalizations": [],
+      "lean_artifact": null,
+      "status": "MAPPED",
+      "ai_safety_relevance": "The survey identifies this result as relevant to limits on AI; no direct real-system implication is asserted here.",
+      "ai_bridge_status": "HUMAN_REVIEW",
+      "notes": "Statement-level equivalence to each cited source remains subject to source comparison.",
+      "formal_library_search": {
+        "searched_on": "2026-07-18",
+        "evidence_file": "docs/formalization-search.json",
+        "searched_corpora": [
+          "mathlib",
+          "isabelle-afp",
+          "rocq-undecidability",
+          "hol4",
+          "hol-light",
+          "agda-stdlib"
+        ],
+        "candidate_corpora": [],
+        "query_terms": [
+          "superhuman unpredictability",
+          "unpredictability of ai"
+        ]
+      }
+    },
+    {
+      "id": "BY-029",
+      "name": "Unexplainability",
+      "paper_reference": "Table 1",
+      "mechanism_category": "DEDUCTION",
+      "domain_category": "DATA",
+      "survey_proof_assessment": "NOT_PROVEN_IN_SURVEY",
+      "informal_claim": "The cited argument links complete AI explanation to proof, truth, and model-access assumptions.",
+      "original_source_refs": [
+        "survey-ref-065"
+      ],
+      "formalizations": [],
+      "lean_artifact": null,
+      "status": "MAPPED",
+      "ai_safety_relevance": "The survey identifies this result as relevant to limits on AI; no direct real-system implication is asserted here.",
+      "ai_bridge_status": "HUMAN_REVIEW",
+      "notes": "Statement-level equivalence to each cited source remains subject to source comparison.",
+      "formal_library_search": {
+        "searched_on": "2026-07-18",
+        "evidence_file": "docs/formalization-search.json",
+        "searched_corpora": [
+          "mathlib",
+          "isabelle-afp",
+          "rocq-undecidability",
+          "hol4",
+          "hol-light",
+          "agda-stdlib"
+        ],
+        "candidate_corpora": [],
+        "query_terms": [
+          "unexplainability",
+          "explanation impossibility"
+        ]
+      }
+    },
+    {
+      "id": "BY-030",
+      "name": "Incomprehensibility",
+      "paper_reference": "Table 1",
+      "mechanism_category": "DEDUCTION",
+      "domain_category": "DATA",
+      "survey_proof_assessment": "MIXED",
+      "informal_claim": "Some correct computations or explanations cannot be comprehended by a bounded verifier under the cited formalizations and assumptions.",
+      "original_source_refs": [
+        "survey-ref-065",
+        "survey-ref-066"
+      ],
+      "formalizations": [],
+      "lean_artifact": null,
+      "status": "MAPPED",
+      "ai_safety_relevance": "The survey identifies this result as relevant to limits on AI; no direct real-system implication is asserted here.",
+      "ai_bridge_status": "HUMAN_REVIEW",
+      "notes": "Statement-level equivalence to each cited source remains subject to source comparison.",
+      "formal_library_search": {
+        "searched_on": "2026-07-18",
+        "evidence_file": "docs/formalization-search.json",
+        "searched_corpora": [
+          "mathlib",
+          "isabelle-afp",
+          "rocq-undecidability",
+          "hol4",
+          "hol-light",
+          "agda-stdlib"
+        ],
+        "candidate_corpora": [],
+        "query_terms": [
+          "incomprehensibility",
+          "software comprehension"
+        ]
+      }
+    },
+    {
+      "id": "BY-031",
+      "name": "k-incomprehensibility",
+      "paper_reference": "Table 1",
+      "mechanism_category": "INDUCTION",
+      "domain_category": "DATA",
+      "survey_proof_assessment": "DEFINITIONS_ONLY",
+      "informal_claim": "The cited source defines intelligence and comprehension limits using an intensional Kolmogorov-complexity variant.",
+      "original_source_refs": [
+        "survey-ref-067"
+      ],
+      "formalizations": [],
+      "lean_artifact": null,
+      "status": "MAPPED",
+      "ai_safety_relevance": "The survey identifies this result as relevant to limits on AI; no direct real-system implication is asserted here.",
+      "ai_bridge_status": "HUMAN_REVIEW",
+      "notes": "Statement-level equivalence to each cited source remains subject to source comparison.",
+      "formal_library_search": {
+        "searched_on": "2026-07-18",
+        "evidence_file": "docs/formalization-search.json",
+        "searched_corpora": [
+          "mathlib",
+          "isabelle-afp",
+          "rocq-undecidability",
+          "hol4",
+          "hol-light",
+          "agda-stdlib"
+        ],
+        "candidate_corpora": [],
+        "query_terms": [
+          "k-incomprehensibility",
+          "kolmogorov intelligence"
+        ]
+      }
+    },
+    {
+      "id": "BY-032",
+      "name": "Unverifiability",
+      "paper_reference": "Table 1",
+      "mechanism_category": "DEDUCTION",
+      "domain_category": "SYMBOLIC",
+      "survey_proof_assessment": "PROVEN",
+      "informal_claim": "A universal verifier for arbitrary computations cannot satisfy the cited completeness and correctness requirements.",
+      "original_source_refs": [
+        "survey-ref-068"
+      ],
+      "formalizations": [],
+      "lean_artifact": null,
+      "status": "MAPPED",
+      "ai_safety_relevance": "The survey identifies this result as relevant to limits on AI; no direct real-system implication is asserted here.",
+      "ai_bridge_status": "HUMAN_REVIEW",
+      "notes": "Statement-level equivalence to each cited source remains subject to source comparison.",
+      "formal_library_search": {
+        "searched_on": "2026-07-18",
+        "evidence_file": "docs/formalization-search.json",
+        "searched_corpora": [
+          "mathlib",
+          "isabelle-afp",
+          "rocq-undecidability",
+          "hol4",
+          "hol-light",
+          "agda-stdlib"
+        ],
+        "candidate_corpora": [
+          "isabelle-afp"
+        ],
+        "query_terms": [
+          "unverifiability",
+          "verifier theory"
+        ]
+      }
+    },
+    {
+      "id": "BY-033",
+      "name": "Unverifiability of robot ethics",
+      "paper_reference": "Table 1",
+      "mechanism_category": "DEDUCTION",
+      "domain_category": "SYMBOLIC",
+      "survey_proof_assessment": "PROVEN",
+      "informal_claim": "Online verification of unrestricted ethical and legal robot behaviour is impossible in the cited model.",
+      "original_source_refs": [
+        "survey-ref-069"
+      ],
+      "formalizations": [],
+      "lean_artifact": null,
+      "status": "MAPPED",
+      "ai_safety_relevance": "The survey identifies this result as relevant to limits on AI; no direct real-system implication is asserted here.",
+      "ai_bridge_status": "HUMAN_REVIEW",
+      "notes": "Statement-level equivalence to each cited source remains subject to source comparison.",
+      "formal_library_search": {
+        "searched_on": "2026-07-18",
+        "evidence_file": "docs/formalization-search.json",
+        "searched_corpora": [
+          "mathlib",
+          "isabelle-afp",
+          "rocq-undecidability",
+          "hol4",
+          "hol-light",
+          "agda-stdlib"
+        ],
+        "candidate_corpora": [],
+        "query_terms": [
+          "robot ethics verification",
+          "ethical robot"
+        ]
+      }
+    },
+    {
+      "id": "BY-034",
+      "name": "Intractability of bottom-up ethics",
+      "paper_reference": "Table 1",
+      "mechanism_category": "INTRACTABILITY",
+      "domain_category": "DATA",
+      "survey_proof_assessment": "PROVEN",
+      "informal_claim": "Computational complexity obstructs exhaustive bottom-up evaluation of ethically relevant action consequences.",
+      "original_source_refs": [
+        "survey-ref-070",
+        "survey-ref-071"
+      ],
+      "formalizations": [],
+      "lean_artifact": null,
+      "status": "MAPPED",
+      "ai_safety_relevance": "The survey identifies this result as relevant to limits on AI; no direct real-system implication is asserted here.",
+      "ai_bridge_status": "HUMAN_REVIEW",
+      "notes": "Statement-level equivalence to each cited source remains subject to source comparison.",
+      "formal_library_search": {
+        "searched_on": "2026-07-18",
+        "evidence_file": "docs/formalization-search.json",
+        "searched_corpora": [
+          "mathlib",
+          "isabelle-afp",
+          "rocq-undecidability",
+          "hol4",
+          "hol-light",
+          "agda-stdlib"
+        ],
+        "candidate_corpora": [],
+        "query_terms": [
+          "bottom-up ethics",
+          "machine ethics complexity"
+        ]
+      }
+    },
+    {
+      "id": "BY-035",
+      "name": "No-flattening theorems for deep learning",
+      "paper_reference": "Table 1",
+      "mechanism_category": "INTRACTABILITY",
+      "domain_category": "DATA",
+      "survey_proof_assessment": "PROVEN",
+      "informal_claim": "Some functions efficiently represented by deep networks require inefficiently large shallow representations.",
+      "original_source_refs": [
+        "survey-ref-072"
+      ],
+      "formalizations": [],
+      "lean_artifact": null,
+      "status": "MAPPED",
+      "ai_safety_relevance": "The survey identifies this result as relevant to limits on AI; no direct real-system implication is asserted here.",
+      "ai_bridge_status": "HUMAN_REVIEW",
+      "notes": "Statement-level equivalence to each cited source remains subject to source comparison.",
+      "formal_library_search": {
+        "searched_on": "2026-07-18",
+        "evidence_file": "docs/formalization-search.json",
+        "searched_corpora": [
+          "mathlib",
+          "isabelle-afp",
+          "rocq-undecidability",
+          "hol4",
+          "hol-light",
+          "agda-stdlib"
+        ],
+        "candidate_corpora": [],
+        "query_terms": [
+          "no-flattening",
+          "deep shallow network"
+        ]
+      }
+    },
+    {
+      "id": "BY-036",
+      "name": "Efficiency of computing Boolean functions for multilayered perceptrons",
+      "paper_reference": "Table 1",
+      "mechanism_category": "INTRACTABILITY",
+      "domain_category": "DATA",
+      "survey_proof_assessment": "PROVEN",
+      "informal_claim": "The cited report constrains which Boolean functions multilayer perceptrons compute efficiently.",
+      "original_source_refs": [
+        "survey-ref-073"
+      ],
+      "formalizations": [],
+      "lean_artifact": null,
+      "status": "MAPPED",
+      "ai_safety_relevance": "The survey identifies this result as relevant to limits on AI; no direct real-system implication is asserted here.",
+      "ai_bridge_status": "HUMAN_REVIEW",
+      "notes": "Statement-level equivalence to each cited source remains subject to source comparison.",
+      "formal_library_search": {
+        "searched_on": "2026-07-18",
+        "evidence_file": "docs/formalization-search.json",
+        "searched_corpora": [
+          "mathlib",
+          "isabelle-afp",
+          "rocq-undecidability",
+          "hol4",
+          "hol-light",
+          "agda-stdlib"
+        ],
+        "candidate_corpora": [],
+        "query_terms": [
+          "multilayer perceptron",
+          "boolean functions neural"
+        ]
+      }
+    },
+    {
+      "id": "BY-037",
+      "name": "Goodhart's law (Strathern)",
+      "paper_reference": "Table 1",
+      "mechanism_category": "INDUCTION",
+      "domain_category": "DATA",
+      "survey_proof_assessment": "NOT_PROVEN_IN_SURVEY",
+      "informal_claim": "When a measure becomes a target, optimization pressure can destroy its value as a measure.",
+      "original_source_refs": [
+        "survey-ref-074",
+        "survey-ref-075"
+      ],
+      "formalizations": [],
+      "lean_artifact": null,
+      "status": "MAPPED",
+      "ai_safety_relevance": "The survey identifies this result as relevant to limits on AI; no direct real-system implication is asserted here.",
+      "ai_bridge_status": "HUMAN_REVIEW",
+      "notes": "Statement-level equivalence to each cited source remains subject to source comparison.",
+      "formal_library_search": {
+        "searched_on": "2026-07-18",
+        "evidence_file": "docs/formalization-search.json",
+        "searched_corpora": [
+          "mathlib",
+          "isabelle-afp",
+          "rocq-undecidability",
+          "hol4",
+          "hol-light",
+          "agda-stdlib"
+        ],
+        "candidate_corpora": [],
+        "query_terms": [
+          "goodhart",
+          "measure becomes a target"
+        ]
+      }
+    },
+    {
+      "id": "BY-038",
+      "name": "Campbell's law",
+      "paper_reference": "Table 1",
+      "mechanism_category": "INDUCTION",
+      "domain_category": "DATA",
+      "survey_proof_assessment": "NOT_PROVEN_IN_SURVEY",
+      "informal_claim": "Heavy decision use of a quantitative indicator creates pressure that corrupts the indicator and represented process.",
+      "original_source_refs": [
+        "survey-ref-076"
+      ],
+      "formalizations": [],
+      "lean_artifact": null,
+      "status": "MAPPED",
+      "ai_safety_relevance": "The survey identifies this result as relevant to limits on AI; no direct real-system implication is asserted here.",
+      "ai_bridge_status": "HUMAN_REVIEW",
+      "notes": "Statement-level equivalence to each cited source remains subject to source comparison.",
+      "formal_library_search": {
+        "searched_on": "2026-07-18",
+        "evidence_file": "docs/formalization-search.json",
+        "searched_corpora": [
+          "mathlib",
+          "isabelle-afp",
+          "rocq-undecidability",
+          "hol4",
+          "hol-light",
+          "agda-stdlib"
+        ],
+        "candidate_corpora": [],
+        "query_terms": [
+          "campbell's law",
+          "campbell law"
+        ]
+      }
+    },
+    {
+      "id": "BY-039",
+      "name": "Reward corruption unsolvability",
+      "paper_reference": "Table 1",
+      "mechanism_category": "INDUCTION",
+      "domain_category": "DATA",
+      "survey_proof_assessment": "PROVEN",
+      "informal_claim": "No agent can in general distinguish all reward-channel corruption from genuine reward without additional assumptions.",
+      "original_source_refs": [
+        "survey-ref-077"
+      ],
+      "formalizations": [],
+      "lean_artifact": null,
+      "status": "MAPPED",
+      "ai_safety_relevance": "The survey identifies this result as relevant to limits on AI; no direct real-system implication is asserted here.",
+      "ai_bridge_status": "HUMAN_REVIEW",
+      "notes": "Statement-level equivalence to each cited source remains subject to source comparison.",
+      "formal_library_search": {
+        "searched_on": "2026-07-18",
+        "evidence_file": "docs/formalization-search.json",
+        "searched_corpora": [
+          "mathlib",
+          "isabelle-afp",
+          "rocq-undecidability",
+          "hol4",
+          "hol-light",
+          "agda-stdlib"
+        ],
+        "candidate_corpora": [],
+        "query_terms": [
+          "reward corruption",
+          "corrupted reward channel",
+          "reward tampering"
+        ]
+      }
+    },
+    {
+      "id": "BY-040",
+      "name": "Uncontrollability of AI",
+      "paper_reference": "Table 1",
+      "mechanism_category": "DEDUCTION",
+      "domain_category": "DATA",
+      "survey_proof_assessment": "PROOF_SKETCH",
+      "informal_claim": "Perfect explicit control of advanced AI fails in the source's degenerate self-referential conditions.",
+      "original_source_refs": [
+        "survey-ref-008"
+      ],
+      "formalizations": [],
+      "lean_artifact": null,
+      "status": "MAPPED",
+      "ai_safety_relevance": "The survey identifies this result as relevant to limits on AI; no direct real-system implication is asserted here.",
+      "ai_bridge_status": "HUMAN_REVIEW",
+      "notes": "Statement-level equivalence to each cited source remains subject to source comparison.",
+      "formal_library_search": {
+        "searched_on": "2026-07-18",
+        "evidence_file": "docs/formalization-search.json",
+        "searched_corpora": [
+          "mathlib",
+          "isabelle-afp",
+          "rocq-undecidability",
+          "hol4",
+          "hol-light",
+          "agda-stdlib"
+        ],
+        "candidate_corpora": [],
+        "query_terms": [
+          "uncontrollability of ai",
+          "ai control"
+        ]
+      }
+    },
+    {
+      "id": "BY-041",
+      "name": "Impossibility of unambiguous communication",
+      "paper_reference": "Table 1",
+      "mechanism_category": "INDUCTION",
+      "domain_category": "DATA",
+      "survey_proof_assessment": "CONDITIONAL",
+      "informal_claim": "Unambiguous communication is impossible under the source's strict assumptions about language and interpretation.",
+      "original_source_refs": [
+        "survey-ref-078"
+      ],
+      "formalizations": [],
+      "lean_artifact": null,
+      "status": "MAPPED",
+      "ai_safety_relevance": "The survey identifies this result as relevant to limits on AI; no direct real-system implication is asserted here.",
+      "ai_bridge_status": "HUMAN_REVIEW",
+      "notes": "Statement-level equivalence to each cited source remains subject to source comparison.",
+      "formal_library_search": {
+        "searched_on": "2026-07-18",
+        "evidence_file": "docs/formalization-search.json",
+        "searched_corpora": [
+          "mathlib",
+          "isabelle-afp",
+          "rocq-undecidability",
+          "hol4",
+          "hol-light",
+          "agda-stdlib"
+        ],
+        "candidate_corpora": [],
+        "query_terms": [
+          "unambiguous communication",
+          "ambiguity communication"
+        ]
+      }
+    },
+    {
+      "id": "BY-042",
+      "name": "Unfairness of explainability",
+      "paper_reference": "Table 1",
+      "mechanism_category": "INDUCTION",
+      "domain_category": "DATA",
+      "survey_proof_assessment": "PROOF_SKETCH",
+      "informal_claim": "A verifier and a decision-maker have structurally unequal strategic positions when explanations omit the full execution trace.",
+      "original_source_refs": [],
+      "formalizations": [],
+      "lean_artifact": null,
+      "status": "MAPPED",
+      "ai_safety_relevance": "The survey identifies this result as relevant to limits on AI; no direct real-system implication is asserted here.",
+      "ai_bridge_status": "HUMAN_REVIEW",
+      "notes": "Introduced in the survey; statement-level semantic review is required.",
+      "formal_library_search": {
+        "searched_on": "2026-07-18",
+        "evidence_file": "docs/formalization-search.json",
+        "searched_corpora": [
+          "mathlib",
+          "isabelle-afp",
+          "rocq-undecidability",
+          "hol4",
+          "hol-light",
+          "agda-stdlib"
+        ],
+        "candidate_corpora": [],
+        "query_terms": [
+          "unfairness of explainability",
+          "strategic inequality"
+        ]
+      }
+    },
+    {
+      "id": "BY-043",
+      "name": "Misaligned embodiment",
+      "paper_reference": "Table 1",
+      "mechanism_category": "TRADEOFF",
+      "domain_category": "DATA",
+      "survey_proof_assessment": "PROOF_SKETCH",
+      "informal_claim": "Mistakenly cloned self-interested agents cannot perfectly control one another in the survey's model.",
+      "original_source_refs": [],
+      "formalizations": [],
+      "lean_artifact": null,
+      "status": "MAPPED",
+      "ai_safety_relevance": "The survey identifies this result as relevant to limits on AI; no direct real-system implication is asserted here.",
+      "ai_bridge_status": "HUMAN_REVIEW",
+      "notes": "Introduced in the survey; statement-level semantic review is required.",
+      "formal_library_search": {
+        "searched_on": "2026-07-18",
+        "evidence_file": "docs/formalization-search.json",
+        "searched_corpora": [
+          "mathlib",
+          "isabelle-afp",
+          "rocq-undecidability",
+          "hol4",
+          "hol-light",
+          "agda-stdlib"
+        ],
+        "candidate_corpora": [],
+        "query_terms": [
+          "misaligned embodiment",
+          "operationally cloned",
+          "clone misalignment"
+        ]
+      }
+    },
+    {
+      "id": "BY-044",
+      "name": "Limited self-awareness",
+      "paper_reference": "Table 1",
+      "mechanism_category": "INDUCTION",
+      "domain_category": "DATA",
+      "survey_proof_assessment": "PROOF_SKETCH",
+      "informal_claim": "An agent cannot be perfectly self-aware across the survey's defined operational boundaries.",
+      "original_source_refs": [],
+      "formalizations": [],
+      "lean_artifact": null,
+      "status": "MAPPED",
+      "ai_safety_relevance": "The survey identifies this result as relevant to limits on AI; no direct real-system implication is asserted here.",
+      "ai_bridge_status": "HUMAN_REVIEW",
+      "notes": "Introduced in the survey; statement-level semantic review is required.",
+      "formal_library_search": {
+        "searched_on": "2026-07-18",
+        "evidence_file": "docs/formalization-search.json",
+        "searched_corpora": [
+          "mathlib",
+          "isabelle-afp",
+          "rocq-undecidability",
+          "hol4",
+          "hol-light",
+          "agda-stdlib"
+        ],
+        "candidate_corpora": [],
+        "query_terms": [
+          "limited self-awareness",
+          "locus of self",
+          "self-awareness limit"
+        ]
+      }
+    }
+  ]
+}

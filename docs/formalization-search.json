@@ -1,0 +1,3126 @@
+{
+  "schema_version": 2,
+  "searched_on": "2026-07-18",
+  "method": "Case-insensitive Unicode-normalized token and phrase search over pinned source snapshots. Hits are candidates, not verified formalizations; per-query counts expose noisy terms, and zero hits are scoped negative evidence only.",
+  "corpora": {
+    "mathlib": {
+      "framework": "Lean",
+      "repository": "https://github.com/leanprover-community/mathlib4",
+      "version": "81a5d257c8e410db227a6665ed08f64fea08e997",
+      "scope": "Mathlib source tree"
+    },
+    "isabelle-afp": {
+      "framework": "Isabelle/HOL",
+      "repository": "https://isa-afp.org/",
+      "version": "AFP release 2026-02-06",
+      "archive_sha256": "b059edd46073479ee8dde45004c2346a7365e5d94cded49d27257cfea66c8879",
+      "scope": "All AFP entry source files"
+    },
+    "rocq-undecidability": {
+      "framework": "Rocq/Coq",
+      "repository": "https://github.com/uds-psl/coq-library-undecidability",
+      "version": "c7257b736763d7b2bc3bd25ac47d5fb7ce749c9c",
+      "scope": "Default-branch source snapshot"
+    },
+    "hol4": {
+      "framework": "HOL4",
+      "repository": "https://github.com/HOL-Theorem-Prover/HOL",
+      "version": "3e2cd21c3c465ecd77540b1eb1146b4916158cdf",
+      "scope": "Default-branch source snapshot"
+    },
+    "hol-light": {
+      "framework": "HOL Light",
+      "repository": "https://github.com/jrh13/hol-light",
+      "version": "b4caefbb21638893e0d74085b1209bff7b03bb3d",
+      "scope": "Default-branch source snapshot"
+    },
+    "agda-stdlib": {
+      "framework": "Agda",
+      "repository": "https://github.com/agda/agda-stdlib",
+      "version": "5abbf1dc9423377df4db7a10f869665e53c4f13c",
+      "scope": "Default-branch source snapshot"
+    }
+  },
+  "results": {
+    "BY-001": {
+      "queries": [
+        "observability",
+        "unobservable state",
+        "state reconstruction",
+        "observable output"
+      ],
+      "candidate_hits": {
+        "mathlib": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "observability": 0,
+            "unobservable state": 0,
+            "state reconstruction": 0,
+            "observable output": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "isabelle-afp": {
+          "hit_count": 10,
+          "query_hit_counts": {
+            "observability": 9,
+            "unobservable state": 0,
+            "state reconstruction": 0,
+            "observable output": 1
+          },
+          "paths": [
+            "afp-2026-02-06/thys/Adaptive_State_Counting/FSM/FSM.thy",
+            "afp-2026-02-06/thys/CommCSL/document/root.tex",
+            "afp-2026-02-06/thys/Consensus_Refined/Refinement.thy",
+            "afp-2026-02-06/thys/FSM_Tests/AdaptiveStateCounting/State_Separator.thy",
+            "afp-2026-02-06/thys/FSM_Tests/FSM.thy",
+            "afp-2026-02-06/thys/FSM_Tests/Minimisation.thy",
+            "afp-2026-02-06/thys/FSM_Tests/Observability.thy",
+            "afp-2026-02-06/thys/FSM_Tests/Prime_Transformation.thy",
+            "afp-2026-02-06/thys/Key_Agreement_Strong_Adversaries/Refinement.thy",
+            "afp-2026-02-06/thys/Security_Protocol_Refinement/Refinement/Refinement.thy"
+          ],
+          "matched_queries": [
+            "observability",
+            "observable output"
+          ]
+        },
+        "rocq-undecidability": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "observability": 0,
+            "unobservable state": 0,
+            "state reconstruction": 0,
+            "observable output": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "hol4": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "observability": 0,
+            "unobservable state": 0,
+            "state reconstruction": 0,
+            "observable output": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "hol-light": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "observability": 0,
+            "unobservable state": 0,
+            "state reconstruction": 0,
+            "observable output": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "agda-stdlib": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "observability": 0,
+            "unobservable state": 0,
+            "state reconstruction": 0,
+            "observable output": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        }
+      }
+    },
+    "BY-002": {
+      "queries": [
+        "uncontrollability",
+        "not controllable",
+        "controllability"
+      ],
+      "candidate_hits": {
+        "mathlib": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "uncontrollability": 0,
+            "not controllable": 0,
+            "controllability": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "isabelle-afp": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "uncontrollability": 0,
+            "not controllable": 0,
+            "controllability": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "rocq-undecidability": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "uncontrollability": 0,
+            "not controllable": 0,
+            "controllability": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "hol4": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "uncontrollability": 0,
+            "not controllable": 0,
+            "controllability": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "hol-light": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "uncontrollability": 0,
+            "not controllable": 0,
+            "controllability": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "agda-stdlib": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "uncontrollability": 0,
+            "not controllable": 0,
+            "controllability": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        }
+      }
+    },
+    "BY-003": {
+      "queries": [
+        "good regulator theorem",
+        "good regulator"
+      ],
+      "candidate_hits": {
+        "mathlib": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "good regulator theorem": 0,
+            "good regulator": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "isabelle-afp": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "good regulator theorem": 0,
+            "good regulator": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "rocq-undecidability": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "good regulator theorem": 0,
+            "good regulator": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "hol4": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "good regulator theorem": 0,
+            "good regulator": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "hol-light": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "good regulator theorem": 0,
+            "good regulator": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "agda-stdlib": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "good regulator theorem": 0,
+            "good regulator": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        }
+      }
+    },
+    "BY-004": {
+      "queries": [
+        "requisite variety",
+        "law of requisite variety"
+      ],
+      "candidate_hits": {
+        "mathlib": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "requisite variety": 0,
+            "law of requisite variety": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "isabelle-afp": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "requisite variety": 0,
+            "law of requisite variety": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "rocq-undecidability": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "requisite variety": 0,
+            "law of requisite variety": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "hol4": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "requisite variety": 0,
+            "law of requisite variety": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "hol-light": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "requisite variety": 0,
+            "law of requisite variety": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "agda-stdlib": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "requisite variety": 0,
+            "law of requisite variety": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        }
+      }
+    },
+    "BY-005": {
+      "queries": [
+        "information-theoretic control",
+        "information theoretic control"
+      ],
+      "candidate_hits": {
+        "mathlib": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "information-theoretic control": 0,
+            "information theoretic control": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "isabelle-afp": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "information-theoretic control": 0,
+            "information theoretic control": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "rocq-undecidability": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "information-theoretic control": 0,
+            "information theoretic control": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "hol4": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "information-theoretic control": 0,
+            "information theoretic control": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "hol-light": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "information-theoretic control": 0,
+            "information theoretic control": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "agda-stdlib": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "information-theoretic control": 0,
+            "information theoretic control": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        }
+      }
+    },
+    "BY-006": {
+      "queries": [
+        "codifiability",
+        "moral particularism",
+        "virtue codification"
+      ],
+      "candidate_hits": {
+        "mathlib": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "codifiability": 0,
+            "moral particularism": 0,
+            "virtue codification": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "isabelle-afp": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "codifiability": 0,
+            "moral particularism": 0,
+            "virtue codification": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "rocq-undecidability": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "codifiability": 0,
+            "moral particularism": 0,
+            "virtue codification": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "hol4": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "codifiability": 0,
+            "moral particularism": 0,
+            "virtue codification": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "hol-light": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "codifiability": 0,
+            "moral particularism": 0,
+            "virtue codification": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "agda-stdlib": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "codifiability": 0,
+            "moral particularism": 0,
+            "virtue codification": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        }
+      }
+    },
+    "BY-007": {
+      "queries": [
+        "arrow impossibility",
+        "arrow's theorem",
+        "arrow theorem"
+      ],
+      "candidate_hits": {
+        "mathlib": {
+          "hit_count": 9,
+          "query_hit_counts": {
+            "arrow impossibility": 0,
+            "arrow's theorem": 0,
+            "arrow theorem": 9
+          },
+          "paths": [
+            "CategoryTheory/Abelian/Pseudoelements.lean",
+            "CategoryTheory/Comma/StructuredArrow/Basic.lean",
+            "CategoryTheory/Generator/Basic.lean",
+            "CategoryTheory/Subobject/Comma.lean",
+            "CategoryTheory/Subobject/Limits.lean",
+            "CategoryTheory/Subobject/MonoOver.lean",
+            "Data/Sigma/Basic.lean",
+            "Data/ULift.lean",
+            "Order/Circular.lean"
+          ],
+          "matched_queries": [
+            "arrow theorem"
+          ]
+        },
+        "isabelle-afp": {
+          "hit_count": 6,
+          "query_hit_counts": {
+            "arrow impossibility": 0,
+            "arrow's theorem": 6,
+            "arrow theorem": 0
+          },
+          "paths": [
+            "afp-2026-02-06/thys/ArrowImpossibilityGS/Thys/Arrow_Order.thy",
+            "afp-2026-02-06/thys/ArrowImpossibilityGS/Thys/Arrow_Utility.thy",
+            "afp-2026-02-06/thys/ArrowImpossibilityGS/Thys/GS.thy",
+            "afp-2026-02-06/thys/SenSocialChoice/SCFs.thy",
+            "afp-2026-02-06/thys/SenSocialChoice/Sen.thy",
+            "afp-2026-02-06/thys/SenSocialChoice/document/root.tex"
+          ],
+          "matched_queries": [
+            "arrow's theorem"
+          ]
+        },
+        "rocq-undecidability": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "arrow impossibility": 0,
+            "arrow's theorem": 0,
+            "arrow theorem": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "hol4": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "arrow impossibility": 0,
+            "arrow's theorem": 0,
+            "arrow theorem": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "hol-light": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "arrow impossibility": 0,
+            "arrow's theorem": 0,
+            "arrow theorem": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "agda-stdlib": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "arrow impossibility": 0,
+            "arrow's theorem": 0,
+            "arrow theorem": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        }
+      }
+    },
+    "BY-008": {
+      "queries": [
+        "population ethics",
+        "population axiology"
+      ],
+      "candidate_hits": {
+        "mathlib": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "population ethics": 0,
+            "population axiology": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "isabelle-afp": {
+          "hit_count": 1,
+          "query_hit_counts": {
+            "population ethics": 1,
+            "population axiology": 0
+          },
+          "paths": [
+            "afp-2026-02-06/thys/CondNormReasHOL/document/root.tex"
+          ],
+          "matched_queries": [
+            "population ethics"
+          ]
+        },
+        "rocq-undecidability": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "population ethics": 0,
+            "population axiology": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "hol4": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "population ethics": 0,
+            "population axiology": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "hol-light": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "population ethics": 0,
+            "population axiology": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "agda-stdlib": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "population ethics": 0,
+            "population axiology": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        }
+      }
+    },
+    "BY-009": {
+      "queries": [
+        "value alignment",
+        "ai alignment",
+        "utility alignment"
+      ],
+      "candidate_hits": {
+        "mathlib": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "value alignment": 0,
+            "ai alignment": 0,
+            "utility alignment": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "isabelle-afp": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "value alignment": 0,
+            "ai alignment": 0,
+            "utility alignment": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "rocq-undecidability": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "value alignment": 0,
+            "ai alignment": 0,
+            "utility alignment": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "hol4": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "value alignment": 0,
+            "ai alignment": 0,
+            "utility alignment": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "hol-light": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "value alignment": 0,
+            "ai alignment": 0,
+            "utility alignment": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "agda-stdlib": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "value alignment": 0,
+            "ai alignment": 0,
+            "utility alignment": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        }
+      }
+    },
+    "BY-010": {
+      "queries": [
+        "fairness impossibility",
+        "calibration fairness",
+        "equalized odds"
+      ],
+      "candidate_hits": {
+        "mathlib": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "fairness impossibility": 0,
+            "calibration fairness": 0,
+            "equalized odds": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "isabelle-afp": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "fairness impossibility": 0,
+            "calibration fairness": 0,
+            "equalized odds": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "rocq-undecidability": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "fairness impossibility": 0,
+            "calibration fairness": 0,
+            "equalized odds": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "hol4": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "fairness impossibility": 0,
+            "calibration fairness": 0,
+            "equalized odds": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "hol-light": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "fairness impossibility": 0,
+            "calibration fairness": 0,
+            "equalized odds": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "agda-stdlib": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "fairness impossibility": 0,
+            "calibration fairness": 0,
+            "equalized odds": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        }
+      }
+    },
+    "BY-011": {
+      "queries": [
+        "preference deduction",
+        "preference inference",
+        "inverse reinforcement"
+      ],
+      "candidate_hits": {
+        "mathlib": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "preference deduction": 0,
+            "preference inference": 0,
+            "inverse reinforcement": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "isabelle-afp": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "preference deduction": 0,
+            "preference inference": 0,
+            "inverse reinforcement": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "rocq-undecidability": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "preference deduction": 0,
+            "preference inference": 0,
+            "inverse reinforcement": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "hol4": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "preference deduction": 0,
+            "preference inference": 0,
+            "inverse reinforcement": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "hol-light": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "preference deduction": 0,
+            "preference inference": 0,
+            "inverse reinforcement": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "agda-stdlib": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "preference deduction": 0,
+            "preference inference": 0,
+            "inverse reinforcement": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        }
+      }
+    },
+    "BY-012": {
+      "queries": [
+        "rice theorem",
+        "rice's theorem",
+        "rice_"
+      ],
+      "candidate_hits": {
+        "mathlib": {
+          "hit_count": 1,
+          "query_hit_counts": {
+            "rice theorem": 0,
+            "rice's theorem": 1,
+            "rice_": 1
+          },
+          "paths": [
+            "Computability/Halting.lean"
+          ],
+          "matched_queries": [
+            "rice's theorem",
+            "rice_"
+          ]
+        },
+        "isabelle-afp": {
+          "hit_count": 7,
+          "query_hit_counts": {
+            "rice theorem": 2,
+            "rice's theorem": 6,
+            "rice_": 7
+          },
+          "paths": [
+            "afp-2026-02-06/thys/Inductive_Inference/Standard_Results.thy",
+            "afp-2026-02-06/thys/Inductive_Inference/document/root.tex",
+            "afp-2026-02-06/thys/Minsky_Machines/Minsky.thy",
+            "afp-2026-02-06/thys/Minsky_Machines/Recursive_Inseparability.thy",
+            "afp-2026-02-06/thys/Recursion-Theory-I/RecEnSet.thy",
+            "afp-2026-02-06/thys/Recursion-Theory-I/document/root.tex",
+            "afp-2026-02-06/thys/Universal_Turing_Machine/TuringDecidable.thy"
+          ],
+          "matched_queries": [
+            "rice theorem",
+            "rice's theorem",
+            "rice_"
+          ]
+        },
+        "rocq-undecidability": {
+          "hit_count": 1,
+          "query_hit_counts": {
+            "rice theorem": 0,
+            "rice's theorem": 1,
+            "rice_": 1
+          },
+          "paths": [
+            "theories/L/Computability/Rice.v"
+          ],
+          "matched_queries": [
+            "rice's theorem",
+            "rice_"
+          ]
+        },
+        "hol4": {
+          "hit_count": 2,
+          "query_hit_counts": {
+            "rice theorem": 0,
+            "rice's theorem": 1,
+            "rice_": 2
+          },
+          "paths": [
+            "examples/computability/lambda/recsetsScript.sml",
+            "examples/logic/temporal_deep/src/examples/ltl2omega.sml"
+          ],
+          "matched_queries": [
+            "rice's theorem",
+            "rice_"
+          ]
+        },
+        "hol-light": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "rice theorem": 0,
+            "rice's theorem": 0,
+            "rice_": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "agda-stdlib": {
+          "hit_count": 1,
+          "query_hit_counts": {
+            "rice theorem": 0,
+            "rice's theorem": 0,
+            "rice_": 1
+          },
+          "paths": [
+            "src/Data/Nat/DivMod.agda"
+          ],
+          "matched_queries": [
+            "rice_"
+          ]
+        }
+      }
+    },
+    "BY-013": {
+      "queries": [
+        "gödel incompleteness",
+        "goedel incompleteness",
+        "unprovability"
+      ],
+      "candidate_hits": {
+        "mathlib": {
+          "hit_count": 4,
+          "query_hit_counts": {
+            "gödel incompleteness": 0,
+            "goedel incompleteness": 0,
+            "unprovability": 4
+          },
+          "paths": [
+            "ModelTheory/Basic.lean",
+            "ModelTheory/LanguageMap.lean",
+            "ModelTheory/Semantics.lean",
+            "ModelTheory/Syntax.lean"
+          ],
+          "matched_queries": [
+            "unprovability"
+          ]
+        },
+        "isabelle-afp": {
+          "hit_count": 23,
+          "query_hit_counts": {
+            "gödel incompleteness": 0,
+            "goedel incompleteness": 23,
+            "unprovability": 0
+          },
+          "paths": [
+            "afp-2026-02-06/thys/Goedel_HFSet_Semantic/Instance.thy",
+            "afp-2026-02-06/thys/Goedel_HFSet_Semantic/document/root.tex",
+            "afp-2026-02-06/thys/Goedel_HFSet_Semanticless/Instance.thy",
+            "afp-2026-02-06/thys/Goedel_HFSet_Semanticless/document/root.tex",
+            "afp-2026-02-06/thys/Goedel_Incompleteness/Abstract_Encoding.thy",
+            "afp-2026-02-06/thys/Goedel_Incompleteness/Abstract_First_Goedel.thy",
+            "afp-2026-02-06/thys/Goedel_Incompleteness/Abstract_First_Goedel_Rosser.thy",
+            "afp-2026-02-06/thys/Goedel_Incompleteness/Abstract_Jeroslow_Encoding.thy",
+            "afp-2026-02-06/thys/Goedel_Incompleteness/Abstract_Representability.thy",
+            "afp-2026-02-06/thys/Goedel_Incompleteness/Abstract_Second_Goedel.thy",
+            "afp-2026-02-06/thys/Goedel_Incompleteness/All_Abstract.thy",
+            "afp-2026-02-06/thys/Goedel_Incompleteness/Deduction2.thy"
+          ],
+          "matched_queries": [
+            "goedel incompleteness"
+          ]
+        },
+        "rocq-undecidability": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "gödel incompleteness": 0,
+            "goedel incompleteness": 0,
+            "unprovability": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "hol4": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "gödel incompleteness": 0,
+            "goedel incompleteness": 0,
+            "unprovability": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "hol-light": {
+          "hit_count": 2,
+          "query_hit_counts": {
+            "gödel incompleteness": 1,
+            "goedel incompleteness": 0,
+            "unprovability": 1
+          },
+          "paths": [
+            "GL/decid.ml",
+            "GL/gl.ml"
+          ],
+          "matched_queries": [
+            "gödel incompleteness",
+            "unprovability"
+          ]
+        },
+        "agda-stdlib": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "gödel incompleteness": 0,
+            "goedel incompleteness": 0,
+            "unprovability": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        }
+      }
+    },
+    "BY-014": {
+      "queries": [
+        "halting problem",
+        "undecidability",
+        "undecidable"
+      ],
+      "candidate_hits": {
+        "mathlib": {
+          "hit_count": 6,
+          "query_hit_counts": {
+            "halting problem": 2,
+            "undecidability": 1,
+            "undecidable": 3
+          },
+          "paths": [
+            "CategoryTheory/Category/PartialFun.lean",
+            "Computability/Halting.lean",
+            "Computability/PartrecCode.lean",
+            "Control/LawfulFix.lean",
+            "Data/Fintype/Order.lean",
+            "SetTheory/Cardinal/Aleph.lean"
+          ],
+          "matched_queries": [
+            "halting problem",
+            "undecidability",
+            "undecidable"
+          ]
+        },
+        "isabelle-afp": {
+          "hit_count": 36,
+          "query_hit_counts": {
+            "halting problem": 13,
+            "undecidability": 16,
+            "undecidable": 23
+          },
+          "paths": [
+            "afp-2026-02-06/thys/CISC-Kernel/document/root.tex",
+            "afp-2026-02-06/thys/CakeML/generated/Lem_set.thy",
+            "afp-2026-02-06/thys/Diophantine_Universal_Pairs/document/root.tex",
+            "afp-2026-02-06/thys/Goedel_Incompleteness/Rosser_Formula.thy",
+            "afp-2026-02-06/thys/Inductive_Inference/Inductive_Inference_Basics.thy",
+            "afp-2026-02-06/thys/Inductive_Inference/Partial_Recursive.thy",
+            "afp-2026-02-06/thys/Inductive_Inference/Standard_Results.thy",
+            "afp-2026-02-06/thys/MHComputation/MHComputation.thy",
+            "afp-2026-02-06/thys/MHComputation/document/root.tex",
+            "afp-2026-02-06/thys/Minsky_Machines/Minsky.thy",
+            "afp-2026-02-06/thys/Minsky_Machines/document/root.tex",
+            "afp-2026-02-06/thys/Orient_Rewrite_Rule_Undecidable/Delta_Poly_Termination_Undecidable.thy"
+          ],
+          "matched_queries": [
+            "halting problem",
+            "undecidability",
+            "undecidable"
+          ]
+        },
+        "rocq-undecidability": {
+          "hit_count": 660,
+          "query_hit_counts": {
+            "halting problem": 28,
+            "undecidability": 655,
+            "undecidable": 67
+          },
+          "paths": [
+            "README.md",
+            "theories/BI/BI.md",
+            "theories/BI/BI.v",
+            "theories/BI/BI_undec.v",
+            "theories/BI/Reductions/ACM2_to_BI.v",
+            "theories/BI/Utils/encoding.v",
+            "theories/BI/Utils/hbi.v",
+            "theories/BI/Utils/hil.v",
+            "theories/BI/Utils/lbi.v",
+            "theories/BI/Utils/tps.v",
+            "theories/BI/Utils/utils.v",
+            "theories/CFG/CFG_undec.v"
+          ],
+          "matched_queries": [
+            "halting problem",
+            "undecidability",
+            "undecidable"
+          ]
+        },
+        "hol4": {
+          "hit_count": 1,
+          "query_hit_counts": {
+            "halting problem": 0,
+            "undecidability": 0,
+            "undecidable": 1
+          },
+          "paths": [
+            "examples/computability/lambda/HaltingProblemsScript.sml"
+          ],
+          "matched_queries": [
+            "undecidable"
+          ]
+        },
+        "hol-light": {
+          "hit_count": 2,
+          "query_hit_counts": {
+            "halting problem": 0,
+            "undecidability": 2,
+            "undecidable": 2
+          },
+          "paths": [
+            "GL/decid.ml",
+            "GL/tests.ml"
+          ],
+          "matched_queries": [
+            "undecidability",
+            "undecidable"
+          ]
+        },
+        "agda-stdlib": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "halting problem": 0,
+            "undecidability": 0,
+            "undecidable": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        }
+      }
+    },
+    "BY-015": {
+      "queries": [
+        "chaitin incompleteness",
+        "kolmogorov complexity incompleteness"
+      ],
+      "candidate_hits": {
+        "mathlib": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "chaitin incompleteness": 0,
+            "kolmogorov complexity incompleteness": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "isabelle-afp": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "chaitin incompleteness": 0,
+            "kolmogorov complexity incompleteness": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "rocq-undecidability": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "chaitin incompleteness": 0,
+            "kolmogorov complexity incompleteness": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "hol4": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "chaitin incompleteness": 0,
+            "kolmogorov complexity incompleteness": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "hol-light": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "chaitin incompleteness": 0,
+            "kolmogorov complexity incompleteness": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "agda-stdlib": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "chaitin incompleteness": 0,
+            "kolmogorov complexity incompleteness": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        }
+      }
+    },
+    "BY-016": {
+      "queries": [
+        "tarski undefinability",
+        "undefinability of truth",
+        "undefinability"
+      ],
+      "candidate_hits": {
+        "mathlib": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "tarski undefinability": 0,
+            "undefinability of truth": 0,
+            "undefinability": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "isabelle-afp": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "tarski undefinability": 0,
+            "undefinability of truth": 0,
+            "undefinability": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "rocq-undecidability": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "tarski undefinability": 0,
+            "undefinability of truth": 0,
+            "undefinability": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "hol4": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "tarski undefinability": 0,
+            "undefinability of truth": 0,
+            "undefinability": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "hol-light": {
+          "hit_count": 1,
+          "query_hit_counts": {
+            "tarski undefinability": 0,
+            "undefinability of truth": 1,
+            "undefinability": 1
+          },
+          "paths": [
+            "Arithmetic/tarski.ml"
+          ],
+          "matched_queries": [
+            "undefinability of truth",
+            "undefinability"
+          ]
+        },
+        "agda-stdlib": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "tarski undefinability": 0,
+            "undefinability of truth": 0,
+            "undefinability": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        }
+      }
+    },
+    "BY-017": {
+      "queries": [
+        "unsurveyability",
+        "surveyability of proof"
+      ],
+      "candidate_hits": {
+        "mathlib": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "unsurveyability": 0,
+            "surveyability of proof": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "isabelle-afp": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "unsurveyability": 0,
+            "surveyability of proof": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "rocq-undecidability": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "unsurveyability": 0,
+            "surveyability of proof": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "hol4": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "unsurveyability": 0,
+            "surveyability of proof": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "hol-light": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "unsurveyability": 0,
+            "surveyability of proof": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "agda-stdlib": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "unsurveyability": 0,
+            "surveyability of proof": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        }
+      }
+    },
+    "BY-018": {
+      "queries": [
+        "unlearnability",
+        "learnability undecidable",
+        "pac learnability"
+      ],
+      "candidate_hits": {
+        "mathlib": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "unlearnability": 0,
+            "learnability undecidable": 0,
+            "pac learnability": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "isabelle-afp": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "unlearnability": 0,
+            "learnability undecidable": 0,
+            "pac learnability": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "rocq-undecidability": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "unlearnability": 0,
+            "learnability undecidable": 0,
+            "pac learnability": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "hol4": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "unlearnability": 0,
+            "learnability undecidable": 0,
+            "pac learnability": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "hol-light": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "unlearnability": 0,
+            "learnability undecidable": 0,
+            "pac learnability": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "agda-stdlib": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "unlearnability": 0,
+            "learnability undecidable": 0,
+            "pac learnability": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        }
+      }
+    },
+    "BY-019": {
+      "queries": [
+        "predicting rational agents",
+        "rational agent unpredictability"
+      ],
+      "candidate_hits": {
+        "mathlib": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "predicting rational agents": 0,
+            "rational agent unpredictability": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "isabelle-afp": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "predicting rational agents": 0,
+            "rational agent unpredictability": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "rocq-undecidability": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "predicting rational agents": 0,
+            "rational agent unpredictability": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "hol4": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "predicting rational agents": 0,
+            "rational agent unpredictability": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "hol-light": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "predicting rational agents": 0,
+            "rational agent unpredictability": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "agda-stdlib": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "predicting rational agents": 0,
+            "rational agent unpredictability": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        }
+      }
+    },
+    "BY-020": {
+      "queries": [
+        "no free lunch",
+        "supervised learning"
+      ],
+      "candidate_hits": {
+        "mathlib": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "no free lunch": 0,
+            "supervised learning": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "isabelle-afp": {
+          "hit_count": 2,
+          "query_hit_counts": {
+            "no free lunch": 2,
+            "supervised learning": 0
+          },
+          "paths": [
+            "afp-2026-02-06/thys/No_Free_Lunch_ML/No_Free_Lunch_ML.thy",
+            "afp-2026-02-06/thys/No_Free_Lunch_ML/document/root.tex"
+          ],
+          "matched_queries": [
+            "no free lunch"
+          ]
+        },
+        "rocq-undecidability": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "no free lunch": 0,
+            "supervised learning": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "hol4": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "no free lunch": 0,
+            "supervised learning": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "hol-light": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "no free lunch": 0,
+            "supervised learning": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "agda-stdlib": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "no free lunch": 0,
+            "supervised learning": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        }
+      }
+    },
+    "BY-021": {
+      "queries": [
+        "no free lunch",
+        "black box optimization",
+        "wolpert",
+        "macready"
+      ],
+      "candidate_hits": {
+        "mathlib": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "no free lunch": 0,
+            "black box optimization": 0,
+            "wolpert": 0,
+            "macready": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "isabelle-afp": {
+          "hit_count": 2,
+          "query_hit_counts": {
+            "no free lunch": 2,
+            "black box optimization": 0,
+            "wolpert": 0,
+            "macready": 0
+          },
+          "paths": [
+            "afp-2026-02-06/thys/No_Free_Lunch_ML/No_Free_Lunch_ML.thy",
+            "afp-2026-02-06/thys/No_Free_Lunch_ML/document/root.tex"
+          ],
+          "matched_queries": [
+            "no free lunch"
+          ]
+        },
+        "rocq-undecidability": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "no free lunch": 0,
+            "black box optimization": 0,
+            "wolpert": 0,
+            "macready": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "hol4": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "no free lunch": 0,
+            "black box optimization": 0,
+            "wolpert": 0,
+            "macready": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "hol-light": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "no free lunch": 0,
+            "black box optimization": 0,
+            "wolpert": 0,
+            "macready": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "agda-stdlib": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "no free lunch": 0,
+            "black box optimization": 0,
+            "wolpert": 0,
+            "macready": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        }
+      }
+    },
+    "BY-022": {
+      "queries": [
+        "continuous free lunch",
+        "coevolutionary free lunch"
+      ],
+      "candidate_hits": {
+        "mathlib": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "continuous free lunch": 0,
+            "coevolutionary free lunch": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "isabelle-afp": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "continuous free lunch": 0,
+            "coevolutionary free lunch": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "rocq-undecidability": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "continuous free lunch": 0,
+            "coevolutionary free lunch": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "hol4": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "continuous free lunch": 0,
+            "coevolutionary free lunch": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "hol-light": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "continuous free lunch": 0,
+            "coevolutionary free lunch": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "agda-stdlib": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "continuous free lunch": 0,
+            "coevolutionary free lunch": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        }
+      }
+    },
+    "BY-023": {
+      "queries": [
+        "unidentifiability",
+        "nonidentifiability",
+        "disentanglement impossibility"
+      ],
+      "candidate_hits": {
+        "mathlib": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "unidentifiability": 0,
+            "nonidentifiability": 0,
+            "disentanglement impossibility": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "isabelle-afp": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "unidentifiability": 0,
+            "nonidentifiability": 0,
+            "disentanglement impossibility": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "rocq-undecidability": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "unidentifiability": 0,
+            "nonidentifiability": 0,
+            "disentanglement impossibility": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "hol4": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "unidentifiability": 0,
+            "nonidentifiability": 0,
+            "disentanglement impossibility": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "hol-light": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "unidentifiability": 0,
+            "nonidentifiability": 0,
+            "disentanglement impossibility": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "agda-stdlib": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "unidentifiability": 0,
+            "nonidentifiability": 0,
+            "disentanglement impossibility": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        }
+      }
+    },
+    "BY-024": {
+      "queries": [
+        "physical limits of inference",
+        "inference device"
+      ],
+      "candidate_hits": {
+        "mathlib": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "physical limits of inference": 0,
+            "inference device": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "isabelle-afp": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "physical limits of inference": 0,
+            "inference device": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "rocq-undecidability": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "physical limits of inference": 0,
+            "inference device": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "hol4": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "physical limits of inference": 0,
+            "inference device": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "hol-light": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "physical limits of inference": 0,
+            "inference device": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "agda-stdlib": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "physical limits of inference": 0,
+            "inference device": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        }
+      }
+    },
+    "BY-025": {
+      "queries": [
+        "uncontainability",
+        "superintelligence cannot be contained",
+        "containment problem"
+      ],
+      "candidate_hits": {
+        "mathlib": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "uncontainability": 0,
+            "superintelligence cannot be contained": 0,
+            "containment problem": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "isabelle-afp": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "uncontainability": 0,
+            "superintelligence cannot be contained": 0,
+            "containment problem": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "rocq-undecidability": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "uncontainability": 0,
+            "superintelligence cannot be contained": 0,
+            "containment problem": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "hol4": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "uncontainability": 0,
+            "superintelligence cannot be contained": 0,
+            "containment problem": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "hol-light": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "uncontainability": 0,
+            "superintelligence cannot be contained": 0,
+            "containment problem": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "agda-stdlib": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "uncontainability": 0,
+            "superintelligence cannot be contained": 0,
+            "containment problem": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        }
+      }
+    },
+    "BY-026": {
+      "queries": [
+        "safe interruptibility",
+        "uninterruptibility",
+        "off-switch"
+      ],
+      "candidate_hits": {
+        "mathlib": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "safe interruptibility": 0,
+            "uninterruptibility": 0,
+            "off-switch": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "isabelle-afp": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "safe interruptibility": 0,
+            "uninterruptibility": 0,
+            "off-switch": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "rocq-undecidability": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "safe interruptibility": 0,
+            "uninterruptibility": 0,
+            "off-switch": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "hol4": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "safe interruptibility": 0,
+            "uninterruptibility": 0,
+            "off-switch": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "hol-light": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "safe interruptibility": 0,
+            "uninterruptibility": 0,
+            "off-switch": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "agda-stdlib": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "safe interruptibility": 0,
+            "uninterruptibility": 0,
+            "off-switch": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        }
+      }
+    },
+    "BY-027": {
+      "queries": [
+        "loebs theorem",
+        "loeb theorem",
+        "loeb formula",
+        "provability logic"
+      ],
+      "candidate_hits": {
+        "mathlib": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "loebs theorem": 0,
+            "loeb theorem": 0,
+            "loeb formula": 0,
+            "provability logic": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "isabelle-afp": {
+          "hit_count": 3,
+          "query_hit_counts": {
+            "loebs theorem": 1,
+            "loeb theorem": 0,
+            "loeb formula": 2,
+            "provability logic": 0
+          },
+          "paths": [
+            "afp-2026-02-06/thys/Goedel_Incompleteness/Loeb.thy",
+            "afp-2026-02-06/thys/Goedel_Incompleteness/Loeb_Formula.thy",
+            "afp-2026-02-06/thys/Incompleteness/Loebs_Theorem.thy"
+          ],
+          "matched_queries": [
+            "loebs theorem",
+            "loeb formula"
+          ]
+        },
+        "rocq-undecidability": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "loebs theorem": 0,
+            "loeb theorem": 0,
+            "loeb formula": 0,
+            "provability logic": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "hol4": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "loebs theorem": 0,
+            "loeb theorem": 0,
+            "loeb formula": 0,
+            "provability logic": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "hol-light": {
+          "hit_count": 6,
+          "query_hit_counts": {
+            "loebs theorem": 0,
+            "loeb theorem": 0,
+            "loeb formula": 0,
+            "provability logic": 6
+          },
+          "paths": [
+            "GL/README.md",
+            "GL/completeness.ml",
+            "GL/decid.ml",
+            "GL/gl.ml",
+            "GL/k4lr.ml",
+            "GL/make.ml"
+          ],
+          "matched_queries": [
+            "provability logic"
+          ]
+        },
+        "agda-stdlib": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "loebs theorem": 0,
+            "loeb theorem": 0,
+            "loeb formula": 0,
+            "provability logic": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        }
+      }
+    },
+    "BY-028": {
+      "queries": [
+        "superhuman unpredictability",
+        "unpredictability of ai"
+      ],
+      "candidate_hits": {
+        "mathlib": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "superhuman unpredictability": 0,
+            "unpredictability of ai": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "isabelle-afp": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "superhuman unpredictability": 0,
+            "unpredictability of ai": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "rocq-undecidability": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "superhuman unpredictability": 0,
+            "unpredictability of ai": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "hol4": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "superhuman unpredictability": 0,
+            "unpredictability of ai": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "hol-light": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "superhuman unpredictability": 0,
+            "unpredictability of ai": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "agda-stdlib": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "superhuman unpredictability": 0,
+            "unpredictability of ai": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        }
+      }
+    },
+    "BY-029": {
+      "queries": [
+        "unexplainability",
+        "explanation impossibility"
+      ],
+      "candidate_hits": {
+        "mathlib": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "unexplainability": 0,
+            "explanation impossibility": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "isabelle-afp": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "unexplainability": 0,
+            "explanation impossibility": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "rocq-undecidability": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "unexplainability": 0,
+            "explanation impossibility": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "hol4": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "unexplainability": 0,
+            "explanation impossibility": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "hol-light": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "unexplainability": 0,
+            "explanation impossibility": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "agda-stdlib": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "unexplainability": 0,
+            "explanation impossibility": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        }
+      }
+    },
+    "BY-030": {
+      "queries": [
+        "incomprehensibility",
+        "software comprehension"
+      ],
+      "candidate_hits": {
+        "mathlib": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "incomprehensibility": 0,
+            "software comprehension": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "isabelle-afp": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "incomprehensibility": 0,
+            "software comprehension": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "rocq-undecidability": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "incomprehensibility": 0,
+            "software comprehension": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "hol4": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "incomprehensibility": 0,
+            "software comprehension": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "hol-light": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "incomprehensibility": 0,
+            "software comprehension": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "agda-stdlib": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "incomprehensibility": 0,
+            "software comprehension": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        }
+      }
+    },
+    "BY-031": {
+      "queries": [
+        "k-incomprehensibility",
+        "kolmogorov intelligence"
+      ],
+      "candidate_hits": {
+        "mathlib": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "k-incomprehensibility": 0,
+            "kolmogorov intelligence": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "isabelle-afp": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "k-incomprehensibility": 0,
+            "kolmogorov intelligence": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "rocq-undecidability": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "k-incomprehensibility": 0,
+            "kolmogorov intelligence": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "hol4": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "k-incomprehensibility": 0,
+            "kolmogorov intelligence": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "hol-light": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "k-incomprehensibility": 0,
+            "kolmogorov intelligence": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "agda-stdlib": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "k-incomprehensibility": 0,
+            "kolmogorov intelligence": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        }
+      }
+    },
+    "BY-032": {
+      "queries": [
+        "unverifiability",
+        "verifier theory"
+      ],
+      "candidate_hits": {
+        "mathlib": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "unverifiability": 0,
+            "verifier theory": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "isabelle-afp": {
+          "hit_count": 3,
+          "query_hit_counts": {
+            "unverifiability": 0,
+            "verifier theory": 3
+          },
+          "paths": [
+            "afp-2026-02-06/thys/FOL_Seq_Calc2/README.md",
+            "afp-2026-02-06/thys/Jinja/DFA/Abstract_BV.thy",
+            "afp-2026-02-06/thys/JinjaThreads/DFA/Abstract_BV.thy"
+          ],
+          "matched_queries": [
+            "verifier theory"
+          ]
+        },
+        "rocq-undecidability": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "unverifiability": 0,
+            "verifier theory": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "hol4": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "unverifiability": 0,
+            "verifier theory": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "hol-light": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "unverifiability": 0,
+            "verifier theory": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "agda-stdlib": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "unverifiability": 0,
+            "verifier theory": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        }
+      }
+    },
+    "BY-033": {
+      "queries": [
+        "robot ethics verification",
+        "ethical robot"
+      ],
+      "candidate_hits": {
+        "mathlib": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "robot ethics verification": 0,
+            "ethical robot": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "isabelle-afp": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "robot ethics verification": 0,
+            "ethical robot": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "rocq-undecidability": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "robot ethics verification": 0,
+            "ethical robot": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "hol4": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "robot ethics verification": 0,
+            "ethical robot": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "hol-light": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "robot ethics verification": 0,
+            "ethical robot": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "agda-stdlib": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "robot ethics verification": 0,
+            "ethical robot": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        }
+      }
+    },
+    "BY-034": {
+      "queries": [
+        "bottom-up ethics",
+        "machine ethics complexity"
+      ],
+      "candidate_hits": {
+        "mathlib": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "bottom-up ethics": 0,
+            "machine ethics complexity": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "isabelle-afp": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "bottom-up ethics": 0,
+            "machine ethics complexity": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "rocq-undecidability": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "bottom-up ethics": 0,
+            "machine ethics complexity": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "hol4": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "bottom-up ethics": 0,
+            "machine ethics complexity": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "hol-light": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "bottom-up ethics": 0,
+            "machine ethics complexity": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "agda-stdlib": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "bottom-up ethics": 0,
+            "machine ethics complexity": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        }
+      }
+    },
+    "BY-035": {
+      "queries": [
+        "no-flattening",
+        "deep shallow network"
+      ],
+      "candidate_hits": {
+        "mathlib": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "no-flattening": 0,
+            "deep shallow network": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "isabelle-afp": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "no-flattening": 0,
+            "deep shallow network": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "rocq-undecidability": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "no-flattening": 0,
+            "deep shallow network": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "hol4": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "no-flattening": 0,
+            "deep shallow network": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "hol-light": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "no-flattening": 0,
+            "deep shallow network": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "agda-stdlib": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "no-flattening": 0,
+            "deep shallow network": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        }
+      }
+    },
+    "BY-036": {
+      "queries": [
+        "multilayer perceptron",
+        "boolean functions neural"
+      ],
+      "candidate_hits": {
+        "mathlib": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "multilayer perceptron": 0,
+            "boolean functions neural": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "isabelle-afp": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "multilayer perceptron": 0,
+            "boolean functions neural": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "rocq-undecidability": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "multilayer perceptron": 0,
+            "boolean functions neural": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "hol4": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "multilayer perceptron": 0,
+            "boolean functions neural": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "hol-light": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "multilayer perceptron": 0,
+            "boolean functions neural": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "agda-stdlib": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "multilayer perceptron": 0,
+            "boolean functions neural": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        }
+      }
+    },
+    "BY-037": {
+      "queries": [
+        "goodhart",
+        "measure becomes a target"
+      ],
+      "candidate_hits": {
+        "mathlib": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "goodhart": 0,
+            "measure becomes a target": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "isabelle-afp": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "goodhart": 0,
+            "measure becomes a target": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "rocq-undecidability": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "goodhart": 0,
+            "measure becomes a target": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "hol4": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "goodhart": 0,
+            "measure becomes a target": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "hol-light": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "goodhart": 0,
+            "measure becomes a target": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "agda-stdlib": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "goodhart": 0,
+            "measure becomes a target": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        }
+      }
+    },
+    "BY-038": {
+      "queries": [
+        "campbell's law",
+        "campbell law"
+      ],
+      "candidate_hits": {
+        "mathlib": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "campbell's law": 0,
+            "campbell law": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "isabelle-afp": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "campbell's law": 0,
+            "campbell law": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "rocq-undecidability": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "campbell's law": 0,
+            "campbell law": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "hol4": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "campbell's law": 0,
+            "campbell law": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "hol-light": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "campbell's law": 0,
+            "campbell law": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "agda-stdlib": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "campbell's law": 0,
+            "campbell law": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        }
+      }
+    },
+    "BY-039": {
+      "queries": [
+        "reward corruption",
+        "corrupted reward channel",
+        "reward tampering"
+      ],
+      "candidate_hits": {
+        "mathlib": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "reward corruption": 0,
+            "corrupted reward channel": 0,
+            "reward tampering": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "isabelle-afp": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "reward corruption": 0,
+            "corrupted reward channel": 0,
+            "reward tampering": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "rocq-undecidability": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "reward corruption": 0,
+            "corrupted reward channel": 0,
+            "reward tampering": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "hol4": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "reward corruption": 0,
+            "corrupted reward channel": 0,
+            "reward tampering": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "hol-light": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "reward corruption": 0,
+            "corrupted reward channel": 0,
+            "reward tampering": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "agda-stdlib": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "reward corruption": 0,
+            "corrupted reward channel": 0,
+            "reward tampering": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        }
+      }
+    },
+    "BY-040": {
+      "queries": [
+        "uncontrollability of ai",
+        "ai control"
+      ],
+      "candidate_hits": {
+        "mathlib": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "uncontrollability of ai": 0,
+            "ai control": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "isabelle-afp": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "uncontrollability of ai": 0,
+            "ai control": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "rocq-undecidability": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "uncontrollability of ai": 0,
+            "ai control": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "hol4": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "uncontrollability of ai": 0,
+            "ai control": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "hol-light": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "uncontrollability of ai": 0,
+            "ai control": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "agda-stdlib": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "uncontrollability of ai": 0,
+            "ai control": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        }
+      }
+    },
+    "BY-041": {
+      "queries": [
+        "unambiguous communication",
+        "ambiguity communication"
+      ],
+      "candidate_hits": {
+        "mathlib": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "unambiguous communication": 0,
+            "ambiguity communication": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "isabelle-afp": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "unambiguous communication": 0,
+            "ambiguity communication": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "rocq-undecidability": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "unambiguous communication": 0,
+            "ambiguity communication": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "hol4": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "unambiguous communication": 0,
+            "ambiguity communication": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "hol-light": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "unambiguous communication": 0,
+            "ambiguity communication": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "agda-stdlib": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "unambiguous communication": 0,
+            "ambiguity communication": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        }
+      }
+    },
+    "BY-042": {
+      "queries": [
+        "unfairness of explainability",
+        "strategic inequality"
+      ],
+      "candidate_hits": {
+        "mathlib": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "unfairness of explainability": 0,
+            "strategic inequality": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "isabelle-afp": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "unfairness of explainability": 0,
+            "strategic inequality": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "rocq-undecidability": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "unfairness of explainability": 0,
+            "strategic inequality": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "hol4": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "unfairness of explainability": 0,
+            "strategic inequality": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "hol-light": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "unfairness of explainability": 0,
+            "strategic inequality": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "agda-stdlib": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "unfairness of explainability": 0,
+            "strategic inequality": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        }
+      }
+    },
+    "BY-043": {
+      "queries": [
+        "misaligned embodiment",
+        "operationally cloned",
+        "clone misalignment"
+      ],
+      "candidate_hits": {
+        "mathlib": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "misaligned embodiment": 0,
+            "operationally cloned": 0,
+            "clone misalignment": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "isabelle-afp": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "misaligned embodiment": 0,
+            "operationally cloned": 0,
+            "clone misalignment": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "rocq-undecidability": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "misaligned embodiment": 0,
+            "operationally cloned": 0,
+            "clone misalignment": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "hol4": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "misaligned embodiment": 0,
+            "operationally cloned": 0,
+            "clone misalignment": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "hol-light": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "misaligned embodiment": 0,
+            "operationally cloned": 0,
+            "clone misalignment": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "agda-stdlib": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "misaligned embodiment": 0,
+            "operationally cloned": 0,
+            "clone misalignment": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        }
+      }
+    },
+    "BY-044": {
+      "queries": [
+        "limited self-awareness",
+        "locus of self",
+        "self-awareness limit"
+      ],
+      "candidate_hits": {
+        "mathlib": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "limited self-awareness": 0,
+            "locus of self": 0,
+            "self-awareness limit": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "isabelle-afp": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "limited self-awareness": 0,
+            "locus of self": 0,
+            "self-awareness limit": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "rocq-undecidability": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "limited self-awareness": 0,
+            "locus of self": 0,
+            "self-awareness limit": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "hol4": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "limited self-awareness": 0,
+            "locus of self": 0,
+            "self-awareness limit": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "hol-light": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "limited self-awareness": 0,
+            "locus of self": 0,
+            "self-awareness limit": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        },
+        "agda-stdlib": {
+          "hit_count": 0,
+          "query_hit_counts": {
+            "limited self-awareness": 0,
+            "locus of self": 0,
+            "self-awareness limit": 0
+          },
+          "paths": [],
+          "matched_queries": []
+        }
+      }
+    }
+  }
+}

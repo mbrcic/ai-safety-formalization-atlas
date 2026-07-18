@@ -1,0 +1,20 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate survey registry
+        run: python3 scripts/validate_registry.py
+      - name: Audit v0.1 release data
+        run: python3 scripts/audit_release.py
+      - uses: leanprover/lean-action@v1
