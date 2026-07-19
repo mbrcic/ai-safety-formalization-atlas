@@ -1,0 +1,903 @@
+{
+  "schema_version": 1,
+  "generated_by": "scripts/generate_registry_views.py",
+  "note": "Compact agent lookup. Prefer this over registry.yaml / landscape.yaml. Open the full YAML only for a single id when notes or candidate formalization detail is required.",
+  "survey_result_count": 44,
+  "landscape_entry_count": 9,
+  "results_by_id": {
+    "BY-001": {
+      "id": "BY-001",
+      "name": "Unobservability",
+      "status": "MAPPED",
+      "ai_bridge_status": "HUMAN_REVIEW",
+      "mechanism_category": "INDISTINGUISHABILITY",
+      "domain_category": "DATA",
+      "informal_claim": "A system's internal state cannot in general be reconstructed from its observable outputs.",
+      "formalizations": [],
+      "lean_artifact": null,
+      "candidate_count": 0
+    },
+    "BY-002": {
+      "id": "BY-002",
+      "name": "Uncontrollability of dynamical systems",
+      "status": "MAPPED",
+      "ai_bridge_status": "HUMAN_REVIEW",
+      "mechanism_category": "INDISTINGUISHABILITY",
+      "domain_category": "DATA",
+      "informal_claim": "Some dynamical systems cannot be driven between arbitrary states by available controls.",
+      "formalizations": [],
+      "lean_artifact": null,
+      "candidate_count": 0
+    },
+    "BY-003": {
+      "id": "BY-003",
+      "name": "Good Regulator Theorem",
+      "status": "MAPPED",
+      "ai_bridge_status": "HUMAN_REVIEW",
+      "mechanism_category": "INDISTINGUISHABILITY",
+      "domain_category": "DATA",
+      "informal_claim": "Every maximally simple optimal regulator must embody a model of the regulated system.",
+      "formalizations": [],
+      "lean_artifact": null,
+      "candidate_count": 0
+    },
+    "BY-004": {
+      "id": "BY-004",
+      "name": "Law of Requisite Variety",
+      "status": "MAPPED",
+      "ai_bridge_status": "HUMAN_REVIEW",
+      "mechanism_category": "INDISTINGUISHABILITY",
+      "domain_category": "DATA",
+      "informal_claim": "Perfect regulation requires sufficient controller variety under perfect information and unbounded response speed.",
+      "formalizations": [],
+      "lean_artifact": null,
+      "candidate_count": 0
+    },
+    "BY-005": {
+      "id": "BY-005",
+      "name": "Information-theoretical control limits",
+      "status": "MAPPED",
+      "ai_bridge_status": "HUMAN_REVIEW",
+      "mechanism_category": "INDISTINGUISHABILITY",
+      "domain_category": "DATA",
+      "informal_claim": "Information constraints impose lower bounds on achievable control.",
+      "formalizations": [],
+      "lean_artifact": null,
+      "candidate_count": 0
+    },
+    "BY-006": {
+      "id": "BY-006",
+      "name": "(Anti)codifiability thesis",
+      "status": "MAPPED",
+      "ai_bridge_status": "HUMAN_REVIEW",
+      "mechanism_category": "INDUCTION",
+      "domain_category": "DATA",
+      "informal_claim": "The survey groups moral-particularist arguments against complete codification of virtue.",
+      "formalizations": [],
+      "lean_artifact": null,
+      "candidate_count": 0
+    },
+    "BY-007": {
+      "id": "BY-007",
+      "name": "Arrow's impossibility theorem",
+      "status": "LEAN_AVAILABLE",
+      "ai_bridge_status": "HUMAN_REVIEW",
+      "mechanism_category": "TRADEOFF",
+      "domain_category": "SYMBOLIC",
+      "informal_claim": "No rank-order voting rule satisfies Arrow's full set of fairness conditions for three or more alternatives.",
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "relationship": "EQUIVALENT",
+          "reproduced": true,
+          "declaration": "Impossibility",
+          "module": "Arrow/Arrow.lean; vendored as AISafetyAtlas.Upstream.Arrow",
+          "repository": "https://github.com/ChihChengLiang/arrow",
+          "version": "758398779decc66d2830a70b02597b0f22030181"
+        },
+        {
+          "framework": "Isabelle/HOL",
+          "relationship": "EQUIVALENT",
+          "reproduced": true,
+          "declaration": "Arrow",
+          "module": "Thys/Arrow_Order.thy; session ArrowImpossibilityGS",
+          "repository": "https://www.isa-afp.org/entries/ArrowImpossibilityGS.html",
+          "version": "AFP release 2026-02-06 (SHA256 8174c738b42203100170ff25f3c9fc2c6d16d8556fbaff205c0eaa98a3813da7)"
+        },
+        {
+          "framework": "Isabelle/HOL",
+          "relationship": "EQUIVALENT",
+          "reproduced": true,
+          "declaration": "dictator",
+          "module": "Thys/Arrow_Utility.thy; session ArrowImpossibilityGS",
+          "repository": "https://www.isa-afp.org/entries/ArrowImpossibilityGS.html",
+          "version": "AFP release 2026-02-06 (SHA256 8174c738b42203100170ff25f3c9fc2c6d16d8556fbaff205c0eaa98a3813da7)"
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.SocialChoice.arrow",
+            "type": "WRAPPER"
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.SocialChoice.Utility.arrow",
+            "type": "BRIDGE"
+          }
+        ]
+      },
+      "candidate_count": 0
+    },
+    "BY-008": {
+      "id": "BY-008",
+      "name": "Impossibility theorems in population ethics",
+      "status": "MAPPED",
+      "ai_bridge_status": "HUMAN_REVIEW",
+      "mechanism_category": "TRADEOFF",
+      "domain_category": "SYMBOLIC",
+      "informal_claim": "No population axiology simultaneously satisfies the cited set of adequacy conditions.",
+      "formalizations": [],
+      "lean_artifact": null,
+      "candidate_count": 0
+    },
+    "BY-009": {
+      "id": "BY-009",
+      "name": "Impossibility theorems in AI alignment",
+      "status": "MAPPED",
+      "ai_bridge_status": "HUMAN_REVIEW",
+      "mechanism_category": "TRADEOFF",
+      "domain_category": "SYMBOLIC",
+      "informal_claim": "The cited work derives incompatibilities among desiderata for utility-based value alignment.",
+      "formalizations": [],
+      "lean_artifact": null,
+      "candidate_count": 0
+    },
+    "BY-010": {
+      "id": "BY-010",
+      "name": "Fairness impossibility theorem",
+      "status": "MAPPED",
+      "ai_bridge_status": "HUMAN_REVIEW",
+      "mechanism_category": "TRADEOFF",
+      "domain_category": "SYMBOLIC",
+      "informal_claim": "Common calibration and error-rate fairness criteria cannot all hold when base rates differ, subject to source assumptions.",
+      "formalizations": [],
+      "lean_artifact": null,
+      "candidate_count": 0
+    },
+    "BY-011": {
+      "id": "BY-011",
+      "name": "Limits on preference deduction",
+      "status": "MAPPED",
+      "ai_bridge_status": "HUMAN_REVIEW",
+      "mechanism_category": "INDISTINGUISHABILITY",
+      "domain_category": "DATA",
+      "informal_claim": "Observed behaviour alone does not identify an agent's reward function and planning process without strong normative assumptions.",
+      "formalizations": [],
+      "lean_artifact": null,
+      "candidate_count": 0
+    },
+    "BY-012": {
+      "id": "BY-012",
+      "name": "Rice's theorem",
+      "status": "LEAN_AVAILABLE",
+      "ai_bridge_status": "REVIEWED",
+      "mechanism_category": "DEDUCTION",
+      "domain_category": "SYMBOLIC",
+      "informal_claim": "Every nontrivial extensional property of partial computable functions is undecidable.",
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "relationship": "EQUIVALENT",
+          "reproduced": true,
+          "declaration": "ComputablePred.rice",
+          "module": "Mathlib.Computability.Halting",
+          "repository": "https://github.com/leanprover-community/mathlib4",
+          "version": "fabf563a7c95a166b8d7b6efca11c8b4dc9d911f"
+        },
+        {
+          "framework": "Lean",
+          "relationship": "EXACT",
+          "reproduced": true,
+          "declaration": "ComputablePred.rice₂",
+          "module": "Mathlib.Computability.Halting",
+          "repository": "https://github.com/leanprover-community/mathlib4",
+          "version": "fabf563a7c95a166b8d7b6efca11c8b4dc9d911f"
+        },
+        {
+          "framework": "Isabelle/HOL",
+          "relationship": "EQUIVALENT",
+          "reproduced": true,
+          "declaration": "Rice_2",
+          "module": "RecEnSet.thy; session Recursion-Theory-I",
+          "repository": "https://www.isa-afp.org/entries/Recursion-Theory-I.html",
+          "version": "AFP release 2026-02-06 (SHA256 b5314c859ce3b2876ef01151f394c1a5e6b234b0fc6563698dbb0250c73cd3f8)"
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Computability.rice",
+            "type": "WRAPPER"
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Computability.rice_code_iff",
+            "type": "WRAPPER"
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Verification.rice",
+            "type": "BRIDGE"
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Verification.AgentBehavior.no_behavioral_safety_verifier",
+            "type": "BRIDGE"
+          }
+        ]
+      },
+      "candidate_count": 0
+    },
+    "BY-013": {
+      "id": "BY-013",
+      "name": "Unprovability",
+      "status": "LEAN_AVAILABLE",
+      "ai_bridge_status": "HUMAN_REVIEW",
+      "mechanism_category": "DEDUCTION",
+      "domain_category": "SYMBOLIC",
+      "informal_claim": "Sufficiently expressive consistent formal systems contain true statements they cannot prove, under the source's hypotheses.",
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "relationship": "EQUIVALENT",
+          "reproduced": true,
+          "declaration": "LO.FirstOrder.Arithmetic.exists_true_but_unprovable_sentence",
+          "module": "Foundation.FirstOrder.Incompleteness.First",
+          "repository": "https://github.com/FormalizedFormalLogic/Foundation",
+          "version": "b47cf447255addf88a5d72781d0d29641948eb6e"
+        },
+        {
+          "framework": "Lean",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declaration": "LO.FirstOrder.Arithmetic.consistent_unprovable",
+          "module": "Foundation.FirstOrder.Incompleteness.Second",
+          "repository": "https://github.com/FormalizedFormalLogic/Foundation",
+          "version": "b47cf447255addf88a5d72781d0d29641948eb6e"
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Logic.godel_first_incompleteness",
+            "type": "WRAPPER"
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Logic.godel_second_incompleteness",
+            "type": "WRAPPER"
+          }
+        ]
+      },
+      "candidate_count": 0
+    },
+    "BY-014": {
+      "id": "BY-014",
+      "name": "Undecidability",
+      "status": "LEAN_AVAILABLE",
+      "ai_bridge_status": "HUMAN_REVIEW",
+      "mechanism_category": "DEDUCTION",
+      "domain_category": "SYMBOLIC",
+      "informal_claim": "No effective procedure decides every instance of the relevant computation or decision problem.",
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declaration": "ComputablePred.halting_problem_re",
+          "module": "Mathlib.Computability.Halting",
+          "repository": "https://github.com/leanprover-community/mathlib4",
+          "version": "fabf563a7c95a166b8d7b6efca11c8b4dc9d911f"
+        },
+        {
+          "framework": "Lean",
+          "relationship": "EXACT",
+          "reproduced": true,
+          "declaration": "ComputablePred.halting_problem",
+          "module": "Mathlib.Computability.Halting",
+          "repository": "https://github.com/leanprover-community/mathlib4",
+          "version": "fabf563a7c95a166b8d7b6efca11c8b4dc9d911f"
+        },
+        {
+          "framework": "Lean",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declaration": "ComputablePred.halting_problem_not_re",
+          "module": "Mathlib.Computability.Halting",
+          "repository": "https://github.com/leanprover-community/mathlib4",
+          "version": "fabf563a7c95a166b8d7b6efca11c8b4dc9d911f"
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Computability.halting_re",
+            "type": "WRAPPER"
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Computability.halting_problem",
+            "type": "WRAPPER"
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Computability.nonhalting_not_re",
+            "type": "WRAPPER"
+          }
+        ]
+      },
+      "candidate_count": 0
+    },
+    "BY-015": {
+      "id": "BY-015",
+      "name": "Chaitin incompleteness",
+      "status": "LEAN_AVAILABLE",
+      "ai_bridge_status": "HUMAN_REVIEW",
+      "mechanism_category": "DEDUCTION",
+      "domain_category": "SYMBOLIC",
+      "informal_claim": "A finitely specified formal theory cannot prove arbitrarily high lower bounds on Kolmogorov complexity.",
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "relationship": "EQUIVALENT",
+          "reproduced": true,
+          "declaration": "FormalSystem.chaitinIncompleteness",
+          "module": "KolmogorovMathlib.Complexity.Chaitin",
+          "repository": "https://github.com/AlexeyMilovanov/kolmogorov-complexity-lean",
+          "version": "005ac4c81eefe09642ef561057199d489cd79485"
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Logic.chaitin_incompleteness",
+            "type": "WRAPPER"
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Logic.chaitin_bound",
+            "type": "WRAPPER"
+          }
+        ]
+      },
+      "candidate_count": 0
+    },
+    "BY-016": {
+      "id": "BY-016",
+      "name": "Undefinability",
+      "status": "LEAN_AVAILABLE",
+      "ai_bridge_status": "HUMAN_REVIEW",
+      "mechanism_category": "DEDUCTION",
+      "domain_category": "SYMBOLIC",
+      "informal_claim": "Truth for a sufficiently expressive formal language is not definable within that language under the source's hypotheses.",
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "relationship": "EQUIVALENT",
+          "reproduced": true,
+          "declaration": "LO.FirstOrder.Arithmetic.undefinability_of_truth",
+          "module": "Foundation.FirstOrder.Incompleteness.Tarski",
+          "repository": "https://github.com/FormalizedFormalLogic/Foundation",
+          "version": "b47cf447255addf88a5d72781d0d29641948eb6e"
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Logic.tarski_undefinability",
+            "type": "WRAPPER"
+          }
+        ]
+      },
+      "candidate_count": 0
+    },
+    "BY-017": {
+      "id": "BY-017",
+      "name": "Unsurveyability",
+      "status": "MAPPED",
+      "ai_bridge_status": "HUMAN_REVIEW",
+      "mechanism_category": "INTRACTABILITY",
+      "domain_category": "DATA",
+      "informal_claim": "Some proofs may exceed feasible human survey or comprehension even when mechanically checkable.",
+      "formalizations": [],
+      "lean_artifact": null,
+      "candidate_count": 0
+    },
+    "BY-018": {
+      "id": "BY-018",
+      "name": "Unlearnability",
+      "status": "MAPPED",
+      "ai_bridge_status": "HUMAN_REVIEW",
+      "mechanism_category": "DEDUCTION_AND_INTRACTABILITY",
+      "domain_category": "DATA",
+      "informal_claim": "Learning can be undecidable or computationally infeasible for specified concept classes and learning models.",
+      "formalizations": [],
+      "lean_artifact": null,
+      "candidate_count": 0
+    },
+    "BY-019": {
+      "id": "BY-019",
+      "name": "Unpredictability of rational agents",
+      "status": "MAPPED",
+      "ai_bridge_status": "HUMAN_REVIEW",
+      "mechanism_category": "INDUCTION",
+      "domain_category": "DATA",
+      "informal_claim": "No predictor can universally forecast the behaviour of rational agents in the cited strategic settings.",
+      "formalizations": [],
+      "lean_artifact": null,
+      "candidate_count": 0
+    },
+    "BY-020": {
+      "id": "BY-020",
+      "name": "No Free Lunch — supervised learning",
+      "status": "LEAN_AVAILABLE",
+      "ai_bridge_status": "HUMAN_REVIEW",
+      "mechanism_category": "INDUCTION",
+      "domain_category": "DATA",
+      "informal_claim": "Averaged uniformly over target functions, learning algorithms have no universal performance advantage.",
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declaration": "AISafetyAtlas.Learning.no_free_lunch_supervised",
+          "module": "AISafetyAtlas.Learning",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Learning.no_free_lunch_supervised",
+            "type": "NEW_PROOF"
+          }
+        ]
+      },
+      "candidate_count": 0
+    },
+    "BY-021": {
+      "id": "BY-021",
+      "name": "No Free Lunch — optimization",
+      "status": "LEAN_AVAILABLE",
+      "ai_bridge_status": "HUMAN_REVIEW",
+      "mechanism_category": "INDUCTION",
+      "domain_category": "DATA",
+      "informal_claim": "Averaged uniformly over objective functions, optimization algorithms have equal aggregate performance.",
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declaration": "AISafetyAtlas.Learning.no_free_lunch",
+          "module": "AISafetyAtlas.Learning",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Learning.no_free_lunch",
+            "type": "NEW_PROOF"
+          }
+        ]
+      },
+      "candidate_count": 0
+    },
+    "BY-022": {
+      "id": "BY-022",
+      "name": "Free lunches in continuous spaces and coevolution",
+      "status": "MAPPED",
+      "ai_bridge_status": "HUMAN_REVIEW",
+      "mechanism_category": "INDUCTION",
+      "domain_category": "DATA",
+      "informal_claim": "The cited results identify settings where standard no-free-lunch symmetry fails.",
+      "formalizations": [],
+      "lean_artifact": null,
+      "candidate_count": 0
+    },
+    "BY-023": {
+      "id": "BY-023",
+      "name": "Unidentifiability",
+      "status": "MAPPED",
+      "ai_bridge_status": "HUMAN_REVIEW",
+      "mechanism_category": "INDISTINGUISHABILITY",
+      "domain_category": "DATA",
+      "informal_claim": "Observational data can be compatible with multiple latent, causal, or generative explanations.",
+      "formalizations": [],
+      "lean_artifact": null,
+      "candidate_count": 0
+    },
+    "BY-024": {
+      "id": "BY-024",
+      "name": "Physical limits on inference",
+      "status": "MAPPED",
+      "ai_bridge_status": "HUMAN_REVIEW",
+      "mechanism_category": "DEDUCTION_AND_INDUCTION",
+      "domain_category": "DATA",
+      "informal_claim": "Embedded physical inference devices face limits on prediction, observation, and mutual control.",
+      "formalizations": [],
+      "lean_artifact": null,
+      "candidate_count": 0
+    },
+    "BY-025": {
+      "id": "BY-025",
+      "name": "Uncontainability",
+      "status": "MAPPED",
+      "ai_bridge_status": "HUMAN_REVIEW",
+      "mechanism_category": "DEDUCTION",
+      "domain_category": "SYMBOLIC_AND_DATA",
+      "informal_claim": "Perfect containment of a superintelligent program is undecidable in the formal model used by the source.",
+      "formalizations": [],
+      "lean_artifact": null,
+      "candidate_count": 0
+    },
+    "BY-026": {
+      "id": "BY-026",
+      "name": "Uninterruptibility",
+      "status": "MAPPED",
+      "ai_bridge_status": "HUMAN_REVIEW",
+      "mechanism_category": "DEDUCTION",
+      "domain_category": "DATA",
+      "informal_claim": "Available interruption proposals guarantee safe interruptibility only under restricted assumptions.",
+      "formalizations": [],
+      "lean_artifact": null,
+      "candidate_count": 0
+    },
+    "BY-027": {
+      "id": "BY-027",
+      "name": "Löb's theorem (unverifiability)",
+      "status": "LEAN_AVAILABLE",
+      "ai_bridge_status": "HUMAN_REVIEW",
+      "mechanism_category": "DEDUCTION",
+      "domain_category": "SYMBOLIC",
+      "informal_claim": "Löb's theorem: if a sufficiently strong formal system T proves Prov_T(σ) → σ, then T already proves σ (under the source's arithmetic hypotheses).",
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "relationship": "EQUIVALENT",
+          "reproduced": true,
+          "declaration": "LO.FirstOrder.Arithmetic.löb_theorem",
+          "module": "Foundation.FirstOrder.Incompleteness.Löb",
+          "repository": "https://github.com/FormalizedFormalLogic/Foundation",
+          "version": "b47cf447255addf88a5d72781d0d29641948eb6e"
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Logic.loeb",
+            "type": "WRAPPER"
+          }
+        ]
+      },
+      "candidate_count": 0
+    },
+    "BY-028": {
+      "id": "BY-028",
+      "name": "Unpredictability of superhuman AI",
+      "status": "MAPPED",
+      "ai_bridge_status": "HUMAN_REVIEW",
+      "mechanism_category": "INDUCTION",
+      "domain_category": "DATA",
+      "informal_claim": "A strictly less capable predictor cannot accurately predict every action of a more capable agent under the source's definitions.",
+      "formalizations": [],
+      "lean_artifact": null,
+      "candidate_count": 0
+    },
+    "BY-029": {
+      "id": "BY-029",
+      "name": "Unexplainability",
+      "status": "MAPPED",
+      "ai_bridge_status": "HUMAN_REVIEW",
+      "mechanism_category": "DEDUCTION",
+      "domain_category": "DATA",
+      "informal_claim": "The cited argument links complete AI explanation to proof, truth, and model-access assumptions.",
+      "formalizations": [],
+      "lean_artifact": null,
+      "candidate_count": 0
+    },
+    "BY-030": {
+      "id": "BY-030",
+      "name": "Incomprehensibility",
+      "status": "MAPPED",
+      "ai_bridge_status": "HUMAN_REVIEW",
+      "mechanism_category": "DEDUCTION",
+      "domain_category": "DATA",
+      "informal_claim": "Some correct computations or explanations cannot be comprehended by a bounded verifier under the cited formalizations and assumptions.",
+      "formalizations": [],
+      "lean_artifact": null,
+      "candidate_count": 0
+    },
+    "BY-031": {
+      "id": "BY-031",
+      "name": "k-incomprehensibility",
+      "status": "MAPPED",
+      "ai_bridge_status": "HUMAN_REVIEW",
+      "mechanism_category": "INDUCTION",
+      "domain_category": "DATA",
+      "informal_claim": "The cited source defines intelligence and comprehension limits using an intensional Kolmogorov-complexity variant.",
+      "formalizations": [],
+      "lean_artifact": null,
+      "candidate_count": 0
+    },
+    "BY-032": {
+      "id": "BY-032",
+      "name": "Unverifiability",
+      "status": "MAPPED",
+      "ai_bridge_status": "HUMAN_REVIEW",
+      "mechanism_category": "DEDUCTION",
+      "domain_category": "SYMBOLIC",
+      "informal_claim": "A universal verifier for arbitrary computations cannot satisfy the cited completeness and correctness requirements.",
+      "formalizations": [],
+      "lean_artifact": null,
+      "candidate_count": 0
+    },
+    "BY-033": {
+      "id": "BY-033",
+      "name": "Unverifiability of robot ethics",
+      "status": "LEAN_AVAILABLE",
+      "ai_bridge_status": "REVIEWED",
+      "mechanism_category": "DEDUCTION",
+      "domain_category": "SYMBOLIC",
+      "informal_claim": "Theorem 1 (van Leeuwen & Wiedermann 2021): for any non-trivial robot property P there is no algorithmic procedure that tells, for an arbitrary robot with potentially unbounded memory, whether its actions always satisfy P. Corollary 1: same conclusion restricted to robots programmed by structured programs. (Paper Def. 3 defines non-triviality via a switchable base program pair; ethics/legality are motivating instances, not the only P.)",
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declaration": "AISafetyAtlas.Verification.Robot.action_safety_unverifiable",
+          "module": "AISafetyAtlas.Verification.Robot",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Verification.Robot.action_safety_unverifiable",
+            "type": "BRIDGE"
+          }
+        ]
+      },
+      "candidate_count": 0
+    },
+    "BY-034": {
+      "id": "BY-034",
+      "name": "Intractability of bottom-up ethics",
+      "status": "MAPPED",
+      "ai_bridge_status": "HUMAN_REVIEW",
+      "mechanism_category": "INTRACTABILITY",
+      "domain_category": "DATA",
+      "informal_claim": "Computational complexity obstructs exhaustive bottom-up evaluation of ethically relevant action consequences.",
+      "formalizations": [],
+      "lean_artifact": null,
+      "candidate_count": 0
+    },
+    "BY-035": {
+      "id": "BY-035",
+      "name": "No-flattening theorems for deep learning",
+      "status": "MAPPED",
+      "ai_bridge_status": "HUMAN_REVIEW",
+      "mechanism_category": "INTRACTABILITY",
+      "domain_category": "DATA",
+      "informal_claim": "Some functions efficiently represented by deep networks require inefficiently large shallow representations.",
+      "formalizations": [],
+      "lean_artifact": null,
+      "candidate_count": 0
+    },
+    "BY-036": {
+      "id": "BY-036",
+      "name": "Efficiency of computing Boolean functions for multilayered perceptrons",
+      "status": "MAPPED",
+      "ai_bridge_status": "HUMAN_REVIEW",
+      "mechanism_category": "INTRACTABILITY",
+      "domain_category": "DATA",
+      "informal_claim": "The cited report constrains which Boolean functions multilayer perceptrons compute efficiently.",
+      "formalizations": [],
+      "lean_artifact": null,
+      "candidate_count": 0
+    },
+    "BY-037": {
+      "id": "BY-037",
+      "name": "Goodhart's law (Strathern)",
+      "status": "MAPPED",
+      "ai_bridge_status": "HUMAN_REVIEW",
+      "mechanism_category": "INDUCTION",
+      "domain_category": "DATA",
+      "informal_claim": "When a measure becomes a target, optimization pressure can destroy its value as a measure.",
+      "formalizations": [],
+      "lean_artifact": null,
+      "candidate_count": 0
+    },
+    "BY-038": {
+      "id": "BY-038",
+      "name": "Campbell's law",
+      "status": "MAPPED",
+      "ai_bridge_status": "HUMAN_REVIEW",
+      "mechanism_category": "INDUCTION",
+      "domain_category": "DATA",
+      "informal_claim": "Heavy decision use of a quantitative indicator creates pressure that corrupts the indicator and represented process.",
+      "formalizations": [],
+      "lean_artifact": null,
+      "candidate_count": 0
+    },
+    "BY-039": {
+      "id": "BY-039",
+      "name": "Reward corruption unsolvability",
+      "status": "MAPPED",
+      "ai_bridge_status": "HUMAN_REVIEW",
+      "mechanism_category": "INDUCTION",
+      "domain_category": "DATA",
+      "informal_claim": "No agent can in general distinguish all reward-channel corruption from genuine reward without additional assumptions.",
+      "formalizations": [],
+      "lean_artifact": null,
+      "candidate_count": 0
+    },
+    "BY-040": {
+      "id": "BY-040",
+      "name": "Uncontrollability of AI",
+      "status": "MAPPED",
+      "ai_bridge_status": "HUMAN_REVIEW",
+      "mechanism_category": "DEDUCTION",
+      "domain_category": "DATA",
+      "informal_claim": "Perfect explicit control of advanced AI fails in the source's degenerate self-referential conditions.",
+      "formalizations": [],
+      "lean_artifact": null,
+      "candidate_count": 0
+    },
+    "BY-041": {
+      "id": "BY-041",
+      "name": "Impossibility of unambiguous communication",
+      "status": "MAPPED",
+      "ai_bridge_status": "HUMAN_REVIEW",
+      "mechanism_category": "INDUCTION",
+      "domain_category": "DATA",
+      "informal_claim": "Unambiguous communication is impossible under the source's strict assumptions about language and interpretation.",
+      "formalizations": [],
+      "lean_artifact": null,
+      "candidate_count": 0
+    },
+    "BY-042": {
+      "id": "BY-042",
+      "name": "Unfairness of explainability",
+      "status": "MAPPED",
+      "ai_bridge_status": "HUMAN_REVIEW",
+      "mechanism_category": "INDUCTION",
+      "domain_category": "DATA",
+      "informal_claim": "A verifier and a decision-maker have structurally unequal strategic positions when explanations omit the full execution trace.",
+      "formalizations": [],
+      "lean_artifact": null,
+      "candidate_count": 0
+    },
+    "BY-043": {
+      "id": "BY-043",
+      "name": "Misaligned embodiment",
+      "status": "MAPPED",
+      "ai_bridge_status": "HUMAN_REVIEW",
+      "mechanism_category": "TRADEOFF",
+      "domain_category": "DATA",
+      "informal_claim": "Mistakenly cloned self-interested agents cannot perfectly control one another in the survey's model.",
+      "formalizations": [],
+      "lean_artifact": null,
+      "candidate_count": 0
+    },
+    "BY-044": {
+      "id": "BY-044",
+      "name": "Limited self-awareness",
+      "status": "MAPPED",
+      "ai_bridge_status": "HUMAN_REVIEW",
+      "mechanism_category": "INDUCTION",
+      "domain_category": "DATA",
+      "informal_claim": "An agent cannot be perfectly self-aware across the survey's defined operational boundaries.",
+      "formalizations": [],
+      "lean_artifact": null,
+      "candidate_count": 0
+    }
+  },
+  "landscape_by_id": {
+    "LAND-ATTR-001": {
+      "id": "LAND-ATTR-001",
+      "name": "Attribution impossibility (DASH trilemma)",
+      "framework": "Lean",
+      "atlas_declaration": "AISafetyAtlas.Explainability.attribution_impossibility",
+      "related_survey_ids": [
+        "BY-029",
+        "BY-042"
+      ],
+      "module": "AISafetyAtlas/Explainability.lean",
+      "survey_coverage": null
+    },
+    "LAND-GS-001": {
+      "id": "LAND-GS-001",
+      "name": "Gibbard–Satterthwaite theorem",
+      "framework": "Isabelle/HOL",
+      "atlas_declaration": null,
+      "related_survey_ids": [
+        "BY-007"
+      ],
+      "module": "Thys/GS.thy",
+      "survey_coverage": null
+    },
+    "LAND-GS-002": {
+      "id": "LAND-GS-002",
+      "name": "Gibbard–Satterthwaite theorem (Lean / SocialChoiceLean)",
+      "framework": "Lean",
+      "atlas_declaration": "AISafetyAtlas.SocialChoice.gibbard_satterthwaite",
+      "related_survey_ids": [
+        "BY-007"
+      ],
+      "module": "AISafetyAtlas/SocialChoice.lean",
+      "survey_coverage": null
+    },
+    "LAND-NFL-001": {
+      "id": "LAND-NFL-001",
+      "name": "No-free-lunch theorem for machine learning (Shalev-Shwartz–Ben-David §5.1)",
+      "framework": "Isabelle/HOL",
+      "atlas_declaration": null,
+      "related_survey_ids": [
+        "BY-020",
+        "BY-021"
+      ],
+      "module": "No_Free_Lunch_ML.thy",
+      "survey_coverage": null
+    },
+    "LAND-PE-001": {
+      "id": "LAND-PE-001",
+      "name": "Parfit mere addition / conditional normative reasoning (Åqvist E)",
+      "framework": "Isabelle/HOL",
+      "atlas_declaration": null,
+      "related_survey_ids": [
+        "BY-008"
+      ],
+      "module": "mere_addition_opt.thy",
+      "survey_coverage": null
+    },
+    "LAND-DL-001": {
+      "id": "LAND-DL-001",
+      "name": "Deep vs shallow network capacity (Cohen–Bentkamp)",
+      "framework": "Isabelle/HOL",
+      "atlas_declaration": null,
+      "related_survey_ids": [
+        "BY-035"
+      ],
+      "module": "DL_Fundamental_Theorem_Network_Capacity.thy",
+      "survey_coverage": null
+    },
+    "LAND-VNM-001": {
+      "id": "LAND-VNM-001",
+      "name": "von Neumann–Morgenstern expected utility",
+      "framework": "Lean",
+      "atlas_declaration": null,
+      "related_survey_ids": [],
+      "module": null,
+      "survey_coverage": null
+    },
+    "LAND-TCS-ARROW-001": {
+      "id": "LAND-TCS-ARROW-001",
+      "name": "Fourier-analytic Arrow theorem (TCSLib)",
+      "framework": "Lean",
+      "atlas_declaration": null,
+      "related_survey_ids": [
+        "BY-007"
+      ],
+      "module": null,
+      "survey_coverage": null
+    },
+    "LAND-MELO-001": {
+      "id": "LAND-MELO-001",
+      "name": "Melo et al. inner-alignment decision problem (Rice packaging)",
+      "framework": "Lean",
+      "atlas_declaration": "AISafetyAtlas.Verification.AgentBehavior.no_behavioral_safety_verifier",
+      "related_survey_ids": [
+        "BY-012"
+      ],
+      "module": "AISafetyAtlas/Verification/AgentBehavior.lean",
+      "survey_coverage": null
+    }
+  }
+}

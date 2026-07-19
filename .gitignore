@@ -11,3 +11,14 @@ __pycache__/
 .tokensave/
 **/CLAUDE.md
 .github/workflows/CLAUDE.md
+
+# Accidental URL-as-path download debris (wget/curl without -O).
+/https:/
+/http:/
+
+# Ephemeral local scratch and tool dumps (not product source).
+/scratchpad/
+/ai_context.txt
+/No_Free_Lunch_ML/
+/SocialChoice/
+/scl/

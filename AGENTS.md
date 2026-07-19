@@ -2,7 +2,41 @@
 
 Read this file before autonomous work. Live phase status is in [`STATE.md`](STATE.md);
 survey inventory is [`registry.yaml`](registry.yaml); human doc map is
-[`docs/README.md`](docs/README.md).
+[`docs/README.md`](docs/README.md). Agent navigation: [`docs/agent/INDEX.md`](docs/agent/INDEX.md).
+
+## Context budget (agents)
+
+Token cost is dominated by large inventory dumps. Prefer small generated indexes.
+
+### Default open set
+
+1. This file (policy)
+2. [`STATE.md`](STATE.md)
+3. [`docs/agent/INDEX.md`](docs/agent/INDEX.md) and [`docs/agent/by-id.json`](docs/agent/by-id.json)
+4. [`docs/status/atlas-index.md`](docs/status/atlas-index.md) / [`landscape-index.md`](docs/status/landscape-index.md) as needed
+5. The single facade module under `AISafetyAtlas/` for the task domain
+6. [`docs/guide/open-work.md`](docs/guide/open-work.md) or [`contributor-tasks.md`](docs/guide/contributor-tasks.md) when picking work
+
+### Do not read by default
+
+| Path | Why | When to open |
+|---|---|---|
+| Full [`registry.yaml`](registry.yaml) (~100KB+) | Redundant with `by-id.json` | One `BY-###` via `rg` for notes / candidates / bridge_review |
+| Full [`landscape.yaml`](landscape.yaml) | Redundant with `by-id.json` + landscape-index | One `LAND-###` detail |
+| [`docs/provenance/formalization-search.json`](docs/provenance/formalization-search.json) | Large discovery dump | Updating search evidence or auditing a candidate |
+| [`reviews/**`](reviews/) | Historical adversarial rounds | Maintainer names a specific round finding |
+| `vendor/**` | Upstream vendor trees | Editing that vendored package only |
+| `.lake/**`, `**/CLAUDE.md`, `ai_context.txt` | Build cache / tool dumps | Never as task context |
+| Accidental `https:/`, `http:/` trees | wget path debris (gitignored) | Delete if recreated; do not index |
+
+### Cheap vs full validation
+
+```console
+./scripts/agent_gate.sh   # cheap: registry, landscape, views --check, current-state, docs paths
+```
+
+Full green (Lean + axioms) is listed under **Validation before claiming green** below.
+Do not run `lake build` on every tiny docs-only edit unless the task touches Lean.
 
 ## Public Lean API
 
@@ -107,17 +141,18 @@ Do not dump new narrative into a flat `docs/` root. Use the role split in
 
 | Path | Role |
 |---|---|
+| `docs/agent/` | Agent navigation + generated compact `by-id.json` |
 | `docs/guide/` | Human explainers: methodology, open work, tasks, model notes, related-literature map |
 | `docs/status/` | **Generated** coverage tables — regenerate, do not hand-edit |
 | `docs/provenance/` | Discovery search evidence + external reproduction narrative |
 | `docs/bridges/` | Bridge review packages and human review evidence |
 | `docs/releases/` | Release evidence notes |
-| `reviews/` (repo root) | Adversarial project reviews (not under `docs/`) |
+| `reviews/` (repo root) | **Historical** adversarial reviews — not default agent context |
 
 Registry search evidence path:
 `docs/provenance/formalization-search.json`. After registry edits run
-`python3 scripts/generate_registry_views.py` (updates `docs/status/*` including
-`paper-coverage.md`, README scope snippet, STATE snapshot, Lean registry
+`python3 scripts/generate_registry_views.py` (updates `docs/status/*`,
+`docs/agent/by-id.json`, README scope snippet, STATE snapshot, Lean registry
 checks). Use `docs/status/paper-coverage.md` for the **theorem / survey** paper ↔
 formalization map. Use `docs/guide/related-literature.md` for **AI safety
 literature first** (how each paper is addressed: packaging, related-formal,
@@ -150,13 +185,16 @@ work directly to it.
 
 ## Validation before claiming green
 
-Typical local gate (adjust if the maintainer names a subset):
+Cheap preflight (schema + generated views, no Lean):
 
 ```console
-python3 scripts/validate_registry.py
-python3 scripts/generate_registry_views.py
-python3 scripts/validate_current_state.py
-python3 scripts/validate_landscape.py
+./scripts/agent_gate.sh
+```
+
+Full local gate before claiming green (adjust if the maintainer names a subset):
+
+```console
+./scripts/agent_gate.sh
 python3 scripts/check_print_axioms.py
 lake build
 xargs lake build < scripts/lean_build_targets.txt

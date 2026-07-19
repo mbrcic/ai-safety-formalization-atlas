@@ -17,6 +17,7 @@ STATUS = ROOT / "docs/status/formalization-status.md"
 ATLAS_INDEX = ROOT / "docs/status/atlas-index.md"
 LANDSCAPE_INDEX = ROOT / "docs/status/landscape-index.md"
 PAPER_COVERAGE = ROOT / "docs/status/paper-coverage.md"
+AGENT_BY_ID = ROOT / "docs/agent/by-id.json"
 STATE = ROOT / "STATE.md"
 README = ROOT / "README.md"
 LEAN_CHECKS = ROOT / "AISafetyAtlas/Examples/Registry.lean"
@@ -25,7 +26,6 @@ README_END = "<!-- END GENERATED REGISTRY SCOPE -->"
 STATE_START = "<!-- BEGIN GENERATED REGISTRY SNAPSHOT -->"
 STATE_END = "<!-- END GENERATED REGISTRY SNAPSHOT -->"
 COVERAGE_RELATIONSHIPS = {"EXACT", "EQUIVALENT"}
-
 
 def code_list(items: list[str]) -> str:
     return "<br>".join(f"`{item}`" for item in items)
@@ -500,6 +500,84 @@ def render_lean(registry: dict) -> str:
     return "\n".join(lines)
 
 
+def compact_formalization(record: dict) -> dict:
+    """Agent-facing formalization fields only (omit build logs / license prose)."""
+    return {
+        "framework": record.get("framework"),
+        "relationship": record.get("relationship"),
+        "reproduced": record.get("reproduced"),
+        "declaration": record.get("declaration"),
+        "module": record.get("module"),
+        "repository": record.get("repository"),
+        "version": record.get("version"),
+    }
+
+
+def compact_result(result: dict) -> dict:
+    """Compact survey row for agent lookup without loading full registry.yaml."""
+    lean = result.get("lean_artifact")
+    lean_out = None
+    if lean is not None:
+        lean_out = {
+            "declarations": [
+                {
+                    "atlas_declaration": declaration["atlas_declaration"],
+                    "type": declaration["type"],
+                }
+                for declaration in lean.get("declarations") or []
+            ]
+        }
+    return {
+        "id": result["id"],
+        "name": result["name"],
+        "status": result["status"],
+        "ai_bridge_status": result["ai_bridge_status"],
+        "mechanism_category": result.get("mechanism_category"),
+        "domain_category": result.get("domain_category"),
+        "informal_claim": result["informal_claim"],
+        "formalizations": [
+            compact_formalization(record)
+            for record in result.get("formalizations") or []
+        ],
+        "lean_artifact": lean_out,
+        "candidate_count": len(result.get("candidate_formalizations") or []),
+    }
+
+
+def compact_landscape_entry(entry: dict) -> dict:
+    return {
+        "id": entry["id"],
+        "name": entry["name"],
+        "framework": entry.get("framework"),
+        "atlas_declaration": entry.get("atlas_declaration"),
+        "related_survey_ids": entry.get("related_survey_ids") or [],
+        "module": entry.get("module"),
+        "survey_coverage": entry.get("survey_coverage"),
+    }
+
+
+def render_agent_by_id(registry: dict, landscape: dict) -> str:
+    """Compact BY-### / LAND-### index for agents (token-cheap vs full registry)."""
+    payload = {
+        "schema_version": 1,
+        "generated_by": "scripts/generate_registry_views.py",
+        "note": (
+            "Compact agent lookup. Prefer this over registry.yaml / landscape.yaml. "
+            "Open the full YAML only for a single id when notes or candidate "
+            "formalization detail is required."
+        ),
+        "survey_result_count": len(registry["results"]),
+        "landscape_entry_count": len(landscape.get("entries") or []),
+        "results_by_id": {
+            result["id"]: compact_result(result) for result in registry["results"]
+        },
+        "landscape_by_id": {
+            entry["id"]: compact_landscape_entry(entry)
+            for entry in landscape.get("entries") or []
+        },
+    }
+    return json.dumps(payload, indent=2, ensure_ascii=False) + "\n"
+
 def update(path: Path, expected: str, check: bool) -> bool:
     actual = path.read_text(encoding="utf-8") if path.exists() else None
     if actual == expected:
@@ -536,12 +614,14 @@ def main() -> None:
     stale |= update(ATLAS_INDEX, render_atlas_index(registry), args.check)
     stale |= update(LANDSCAPE_INDEX, render_landscape_index(landscape), args.check)
     stale |= update(PAPER_COVERAGE, render_paper_coverage(registry, landscape), args.check)
+    stale |= update(
+        AGENT_BY_ID, render_agent_by_id(registry, landscape), args.check
+    )
     stale |= update(README, render_readme(readme, registry), args.check)
     stale |= update(LEAN_CHECKS, render_lean(registry), args.check)
     stale |= update(STATE, render_state(state, registry, landscape), args.check)
     if stale:
         raise SystemExit(1)
-
 
 if __name__ == "__main__":
     main()

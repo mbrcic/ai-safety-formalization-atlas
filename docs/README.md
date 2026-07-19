@@ -5,6 +5,7 @@ reviews, and release evidence are not mixed in one flat directory.
 
 | Directory | Role | Edit by hand? |
 |---|---|---|
+| [`agent/`](agent/) | Agent navigation + compact `by-id.json` lookup | INDEX yes; `by-id.json` **No** — regenerate |
 | [`guide/`](guide/) | Human-facing explainers: methodology, open work, model notes, tasks | Yes |
 | [`provenance/`](provenance/) | Discovery evidence and external reproduction narrative | Search JSON is generated; narrative yes |
 | [`status/`](status/) | Generated coverage tables and indexes | **No** — regenerate |
@@ -15,7 +16,13 @@ Root project files still used for navigation: [`README.md`](../README.md),
 [`STATE.md`](../STATE.md), [`ROADMAP.md`](../ROADMAP.md),
 [`CONTRIBUTING.md`](../CONTRIBUTING.md), [`registry.yaml`](../registry.yaml),
 [`landscape.yaml`](../landscape.yaml). Adversarial project reviews live in
-[`reviews/`](../reviews/) (not under `docs/`).
+[`reviews/`](../reviews/) (historical; not default agent context — see
+[`reviews/README.md`](../reviews/README.md)).
+
+## Agent (token-cheap navigation)
+
+- [Agent index](agent/INDEX.md) — default open set and lookup recipes
+- [by-id.json](agent/by-id.json) — generated compact `BY-###` / `LAND-###` map
 
 ## Guide (explain / process)
 
@@ -34,7 +41,8 @@ Root project files still used for navigation: [`README.md`](../README.md),
 
 ## Status (generated)
 
-Regenerate with `python3 scripts/generate_registry_views.py`.
+Regenerate with `python3 scripts/generate_registry_views.py` (also refreshes
+`docs/agent/by-id.json`).
 
 - [Formalization status](status/formalization-status.md)
 - [Atlas index](status/atlas-index.md) (44 survey rows)
