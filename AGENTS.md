@@ -31,6 +31,7 @@ AISafetyAtlas.Verification.AgentBehavior.no_behavioral_safety_verifier
 AISafetyAtlas.Verification.Robot.action_safety_unverifiable
 AISafetyAtlas.SocialChoice.arrow
 AISafetyAtlas.SocialChoice.Utility.arrow
+AISafetyAtlas.SocialChoice.gibbard_satterthwaite
 AISafetyAtlas.Logic.godel_first_incompleteness
 AISafetyAtlas.Logic.godel_second_incompleteness
 AISafetyAtlas.Logic.tarski_undefinability
@@ -92,8 +93,10 @@ recorded in the relevant source, registry entry, or design documentation.
   core** of van Leeuwen & Wiedermann Thm 1 / Cor 1 under an assumed
   `SwitchingConstruction`; relationship is `RELATED`. Do not lengthen the
   proof for paper show-off; full SPA/Def. 3 fidelity is optional future work.
-- Gibbard–Satterthwaite for this cycle: **Isabelle landscape only**; no Lean
-  SocialChoiceLean facade/vendor unless a boring Lean 4.31+ build is green.
+- Gibbard–Satterthwaite: Isabelle landscape `LAND-GS-001` remains the AFP
+  reproduce path; Lean interface is vendored SocialChoiceLean GS closure →
+  `AISafetyAtlas.SocialChoice.gibbard_satterthwaite` (`LAND-GS-002`). Do not
+  vendor the rest of SocialChoiceLean without a documented consumer need.
 
 Policy detail: [`docs/guide/methodology.md`](docs/guide/methodology.md).
 

@@ -83,7 +83,9 @@ Reproduced external formalizations that carry no Lean interface are pinned in
 `scripts/reproduce_isabelle.sh`:
 
 - `Gibbard_Satterthwaite` (`LAND-GS-001`, Isabelle/HOL; Arrow-session
-  provenance related to BY-007; Isabelle-only, no Lean port planned)
+  provenance related to BY-007). Lean consumer interface:
+  `AISafetyAtlas.SocialChoice.gibbard_satterthwaite` (`LAND-GS-002`, vendored
+  SocialChoiceLean GS closure)
 - `no_free_lunch_ML` (`LAND-NFL-001`, Isabelle/HOL; the Shalev-Shwartz–Ben-David
   PAC no-free-lunch — the formal core of "generalization needs inductive bias" —
   distinct from the Wolpert NFL survey rows BY-020/BY-021; see

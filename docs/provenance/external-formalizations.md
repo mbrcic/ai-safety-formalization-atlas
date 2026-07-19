@@ -59,14 +59,12 @@ scripts/reproduce_isabelle.sh rice
   session (including `GS.thy`). Passed on 2026-07-18; re-run green on
   **2026-07-19** (`ArrowImpossibilityGS` finished ~5s wall after image/start:
   `Arrow_Order`, `Arrow_Utility`, `GS` all 100%).
-- **Integration decision (closed 2026-07-19):** Isabelle
-  `Gibbard_Satterthwaite` is the **reproduced landscape formalization** for GS
-  (Isabelle only; no Lean interface; landscape id `LAND-GS-001` in
-  [`landscape.yaml`](../../landscape.yaml); not a Table-1 BY ID). “Reproduced”
-  means the pinned AFP session rebuilds via the script below — it is **not**
-  CI-integrated and not importable from Lean. Do not port GS from Isabelle into
-  Lean. Atlas Arrow remains CC Liang + utility bridge. A Lean GS facade is
-  **not** planned unless upstream becomes a boring 4.31+ dependency (see below).
+- **Integration:** Isabelle `Gibbard_Satterthwaite` is landscape `LAND-GS-001`
+  (not a Table-1 BY ID). “Reproduced” means the pinned AFP session rebuilds via
+  the script below — it is **not** CI-integrated. Lean consumers should use
+  `AISafetyAtlas.SocialChoice.gibbard_satterthwaite` (`LAND-GS-002`, next
+  section), not an Isabelle→Lean port. Atlas Arrow remains CC Liang + utility
+  bridge (distinct lineage from SocialChoiceLean).
 
 Command:
 
@@ -74,50 +72,35 @@ Command:
 scripts/reproduce_isabelle.sh arrow
 ```
 
-## Lean 4: Gibbard–Satterthwaite (SocialChoiceLean) — deficient, not used
+## Lean 4: Gibbard–Satterthwaite (SocialChoiceLean) — vendored landscape
 
-Existing Lean formalization of classical GS (not a survey-row coverage claim).
-**Not an atlas dependency.** Kept only as inspected landscape evidence.
+Classical GS (resolute voting rules), landscape only — **not** survey Table-1
+coverage. Lean interface is first-class for atlas consumers; Isabelle twin
+remains `LAND-GS-001`.
 
 - Upstream: [`DominikPeters/SocialChoiceLean`](https://github.com/DominikPeters/SocialChoiceLean)
-- Domain supervisor: Dominik Peters (CNRS / LAMSADE, computational social choice)
-- License: **MIT** (stated in README; no separate LICENSE file in tree at pin)
-- Revision inspected: `0331c7b237994e10cd893e17945a8445e2422e17` (clone HEAD 2026-07-19)
-- Toolchain at pin: Lean `v4.27.0-rc1`; lakefile pins Mathlib to **`master`**
-  (not an immutable Mathlib rev — blocks strict atlas reproduction until pinned)
-- Module: `SocialChoice.Impossibilities.GibbardSatterthwaite.Main`
-- Principal declaration: `SocialChoice.gibbard_satterthwaite`
-  - For `3 ≤ |A|`, resolute, unanimous, strategy-proof voting rules are
-    dictatorial (`∃ d, ∀ P, f P = {topChoice P d}`).
-- Trust scan (sources at pin): no `sorry` / `admit` in `SocialChoice/`.
-- Provenance note: README describes substantial AI-assisted (“vibe-proving”)
-  authorship under Dominik Peters; treat as **source-inspected community Lean**,
-  not peer-reviewed formalization paper-grade, **not atlas-canonical**.
+- Port pin: [`mbrcic/SocialChoiceLean`](https://github.com/mbrcic/SocialChoiceLean)
+  branch `port/lean-4.31` revision **`74f491b`** (Lean/Mathlib **v4.31.0**)
+- License: **MIT** (`vendor/SocialChoiceLean/LICENSE`)
+- Atlas module: `AISafetyAtlas/Upstream/GibbardSatterthwaite.lean` (single-module
+  packaging of the GS closure; multi-file mirror under
+  `vendor/SocialChoiceLean/`)
+- Facade: `AISafetyAtlas.SocialChoice.gibbard_satterthwaite` (`LAND-GS-002`)
+- Statement: for `3 ≤ |A|`, resolute + unanimous + strategy-proof ⇒
+  dictatorial (`∃ d, ∀ P, f P = {topChoice P d}`)
+- Axioms: `[propext, Classical.choice, Quot.sound]` only
+  (`scripts/check_print_axioms.py`)
+- Scope: classical GS only — not the rest of SocialChoiceLean
+- Provenance note: upstream README describes substantial AI-assisted authorship
+  under Dominik Peters; treat as source-inspected community Lean
 
-### 4.31 force experiment (2026-07-19) — closed
+### 4.31 port path (2026-07-19)
 
-Tried path (1): force SocialChoiceLean onto Lean/Mathlib `v4.31.0` (atlas pin)
-in an isolated clone (`/tmp/socialchoice-431`). Outcomes:
-
-- `lake update` to Mathlib `v4.31.0` succeeded.
-- After ballot-equality proof repair (class-valued `LinearOrder` + `simp` no
-  longer rewrites Prefers instances on 4.31): **BaseCase**, **Common**, and
-  **InductionStepCase1** built green.
-- **InductionStepCase2** (~1.8k lines) still had ~70 errors of the same class;
-  **Main** blocked. No full GS green build under 4.31.
-- Dual-toolchain / side-by-side 4.33 was rejected earlier (Lake is one toolchain;
-  atlas pin stays 4.31).
-
-### Integration decision (final for this cycle)
-
-Per atlas policy (prefer Lean; use other provers when Lean is missing or
-deficient): **Lean GS is deficient under the atlas pin.** The reproduced
-landscape formalization is Isabelle `Gibbard_Satterthwaite` via
-`scripts/reproduce_isabelle.sh arrow` (not a Lean research interface). **Do
-not** vendor SocialChoiceLean, **do not** add
-`AISafetyAtlas…gibbard_satterthwaite` until upstream is a boring 4.31+ pin with
-a green full GS build (or a reworked human-owned proof). **No Isabelle→Lean
-port.** Reopen only if a named consumer needs a Lean statement.
+Initial force of upstream master (4.27-class) onto Mathlib `v4.31.0` failed on
+`InductionStepCase2` (`Prefers` → `.lt` instance-path drift). The port adds
+`GSShim.lean` ballot-level congruence and routes profile equalities through it;
+full GS (BaseCase/Common/Case1/Case2/Main) builds green under the atlas pin and
+is vendored as above. Isabelle AFP reproduce path is unchanged.
 
 ## Lean 4: Attribution impossibility (DASH / XAI landscape)
 

@@ -12,7 +12,7 @@ on `agent-work`; R6/R7 remediation; BY-012 and BY-033 bridges `REVIEWED`
   **7 of 44**; RELATED-only **1**; reviewed
   AI-system bridges **2**; declaration layers WRAPPER **12** /
   BRIDGE **4**; structured candidate leads **1**; landscape
-  entries **6** (see `landscape.yaml`).
+  entries **7** (see `landscape.yaml`).
 <!-- END GENERATED REGISTRY SNAPSHOT -->
 
 Package version is **`0.2.0`** on this branch (`lakefile.toml`, `CITATION.cff`);
@@ -90,18 +90,22 @@ to `main` still requires explicit maintainer authorization (push / PR / merge).
 
 - `AISafetyAtlas.Explainability.attribution_impossibility` on root import;
   recorded in `landscape.yaml` (not survey coverage).
-- Gibbard–Satterthwaite **closed for this cycle:** Isabelle
-  `Gibbard_Satterthwaite` is a **reproduced landscape formalization** (Isabelle
-  only; no Lean interface; arrow session via
-  `scripts/reproduce_isabelle.sh arrow`). Lean SocialChoiceLean force-to-4.31
-  failed to green Main; no Lean facade or vendor.
+- Gibbard–Satterthwaite **Lean interface green:** vendored SocialChoiceLean GS
+  closure (`mbrcic/SocialChoiceLean` `port/lean-4.31` @ `74f491b`) as
+  `AISafetyAtlas/Upstream/GibbardSatterthwaite.lean` with facade
+  `AISafetyAtlas.SocialChoice.gibbard_satterthwaite` (landscape `LAND-GS-002`).
+  Isabelle AFP twin remains `LAND-GS-001` /
+  `scripts/reproduce_isabelle.sh arrow`.
+- CT-2 NFL triage done: AFP `No_Free_Lunch_ML` → landscape `LAND-NFL-001` (SSBD);
+  Wolpert BY-020/021 candidates cleared.
 - CT-4: `AISafetyAtlas.Verification.AgentBehavior.no_behavioral_safety_verifier`
   is a downstream consumer of `Verification.rice`.
 
 ## Next three tasks
 
-1. Maintainer: authorize push / PR / squash merge of 0.2 to `main` after gates.
-2. NFL triage (CT-2 / BY-020–021): statement-level check of AFP
-   `No_Free_Lunch_ML` using structured candidates already on those rows.
+1. Maintainer: authorize push / PR / squash merge of post-0.2 agent-work to
+   `main` after gates (NFL landscape + Lean GS).
+2. Optional: shim-only PR to DominikPeters/SocialChoiceLean (not the 4.31
+   toolchain bump).
 3. Optional: external domain review of bridge packages; open public issue queue
    when collaboration should go outward.

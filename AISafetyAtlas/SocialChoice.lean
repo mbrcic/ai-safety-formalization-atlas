@@ -1,13 +1,23 @@
 module
 
 public import AISafetyAtlas.Upstream.Arrow
+public import AISafetyAtlas.Upstream.GibbardSatterthwaite
 
 /-!
 # Social choice
 
-A stable atlas facade over a pinned, vendored snapshot of CC Liang's Lean 4
-formalization of Arrow's impossibility theorem. These names isolate downstream
-work from the upstream declaration layout.
+Stable atlas facades over pinned, vendored social-choice formalizations:
+
+* **Arrow** — CC Liang's Lean 4 weak-order social welfare function proof
+  (`AISafetyAtlas.Upstream.Arrow`).
+* **Gibbard–Satterthwaite** — classical resolute voting-rule form from
+  SocialChoiceLean (Dominik Peters et al.), vendored as
+  `AISafetyAtlas/Upstream/GibbardSatterthwaite.lean` (MIT, pin `74f491b`;
+  multi-file upstream layout collapsed to one module for the atlas boundary).
+
+The two results use different ballot models (weak orders vs linear orders) and
+different rule shapes (SWF vs resolute choice). Facade names isolate downstream
+work from upstream declaration layout.
 -/
 
 namespace AISafetyAtlas.SocialChoice
@@ -56,5 +66,55 @@ public theorem arrow
       IndependenceOfIrrelevantAlternatives rule ∧
       NonDictatorship rule :=
   AISafetyAtlas.Upstream.Arrow.Impossibility atLeastThree
+
+/-! ## Gibbard–Satterthwaite (resolute voting rules)
+
+Linear-order ballots and resolute voting rules
+(`_root_.SocialChoice.VotingRule`). These abbreviations re-export the vendored
+SocialChoiceLean interface so downstream proofs need not import the Upstream
+path. Qualified via `_root_` because this namespace is also named `SocialChoice`.
+-/
+
+/-- Finite electorate × candidate linear-order profile (SocialChoiceLean). -/
+public abbrev VotingProfile (V A : Type) [Fintype V] [Fintype A] :=
+  _root_.SocialChoice.Profile V A
+
+/-- Polymorphic resolute-capable voting rule on finite electorates. -/
+public abbrev VotingRule := _root_.SocialChoice.VotingRule
+
+/-- Unique-winner (resolute) voting rules. -/
+public abbrev ResoluteVoting := _root_.SocialChoice.Resolute
+
+/-- Unanimity for resolute voting rules (SocialChoiceLean form). -/
+public abbrev VotingUnanimity := _root_.SocialChoice.Unanimity
+
+/-- Strategy-proofness for resolute voting rules. -/
+public abbrev ResoluteStrategyproofness :=
+  _root_.SocialChoice.ResoluteStrategyproofness
+
+/-- Top-ranked candidate under a linear-order ballot (SocialChoiceLean). -/
+public noncomputable abbrev topChoice {V A : Type}
+    [Fintype V] [Fintype A] [Nonempty A]
+    (P : VotingProfile V A) (v : V) : A :=
+  _root_.SocialChoice.topChoice P v
+
+/--
+Gibbard–Satterthwaite: with at least three candidates, every resolute,
+unanimous, strategy-proof voting rule is dictatorial (some voter's top choice
+is always the unique winner).
+
+Source: `_root_.SocialChoice.gibbard_satterthwaite` in SocialChoiceLean,
+vendored from `mbrcic/SocialChoiceLean` revision `74f491b` (`port/lean-4.31`),
+file `AISafetyAtlas/Upstream/GibbardSatterthwaite.lean`.
+-/
+public theorem gibbard_satterthwaite
+    {V A : Type} [Fintype V] [Nonempty V] [Fintype A] [Nonempty A]
+    (hcardA : 3 ≤ Fintype.card A)
+    (f : VotingRule)
+    (hf_res : ResoluteVoting f)
+    (hf_unan : VotingUnanimity f)
+    (hf_sp : ResoluteStrategyproofness f hf_res) :
+    ∃ d : V, ∀ P : VotingProfile V A, f P = {topChoice P d} :=
+  _root_.SocialChoice.gibbard_satterthwaite hcardA f hf_res hf_unan hf_sp
 
 end AISafetyAtlas.SocialChoice

@@ -129,7 +129,7 @@ current registry and public API so assimilation does not re-open completed work.
 
 **Done this cycle (do not re-open as “pending review”):** CT-3 robot (RELATED +
 `REVIEWED` bridge); CT-4 AgentBehavior (BY-012 `REVIEWED`); Tarski/Löb/Gödel;
-GS landscape Isabelle-only; literature map + packaging vocabulary.
+GS landscape Isabelle + Lean facade (LAND-GS-001/002); literature map + packaging vocabulary.
 
 **Assimilated from Foundation (2026-07-19):** Tarski (BY-016) and Löb (BY-027)
 as `EQUIVALENT` Logic wrappers alongside Gödel I/II — see

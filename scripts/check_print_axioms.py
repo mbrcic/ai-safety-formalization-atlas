@@ -26,6 +26,7 @@ DECLARATIONS = [
     "AISafetyAtlas.Computability.halting_problem",
     "AISafetyAtlas.SocialChoice.arrow",
     "AISafetyAtlas.SocialChoice.Utility.arrow",
+    "AISafetyAtlas.SocialChoice.gibbard_satterthwaite",
     "AISafetyAtlas.Logic.chaitin_incompleteness",
     "AISafetyAtlas.Logic.chaitin_bound",
     "AISafetyAtlas.Logic.godel_first_incompleteness",

@@ -8,11 +8,14 @@ are third-party formalizations retained under their upstream licenses:
 | `Arrow.lean` | CC Liang Arrow development (see file header) | Apache-2.0 | vendored for Lean module boundary |
 | `KolmogorovMathlib/` | [AlexeyMilovanov/kolmogorov-complexity-lean](https://github.com/AlexeyMilovanov/kolmogorov-complexity-lean) | Apache-2.0 | rev `005ac4c81eefe09642ef561057199d489cd79485` |
 | `Attribution/` | [DrakeCaraker/dash-impossibility-lean](https://github.com/DrakeCaraker/dash-impossibility-lean) | Apache-2.0 (software SPDX via upstream `CITATION.cff`) | rev `7ec3ef9813a7642fdabe5b73c71d1bed4d5488e2`; core trilemma only |
+| `GibbardSatterthwaite.lean` (+ multi-file mirror `vendor/SocialChoiceLean/`) | [DominikPeters/SocialChoiceLean](https://github.com/DominikPeters/SocialChoiceLean) via [mbrcic/SocialChoiceLean](https://github.com/mbrcic/SocialChoiceLean) `port/lean-4.31` | MIT | rev `74f491b`; classical GS; see `vendor/SocialChoiceLean/{LICENSE,PROVENANCE.md}` |
 
 The full Apache License, Version 2.0 text is the repository root
 [`LICENSE`](../../../LICENSE). That text applies to this atlas package and is
 the license text redistributed alongside the Apache-2.0 vendored subtrees
-(Apache-2.0 §4).
+(Apache-2.0 §4). The SocialChoiceLean GS closure is MIT: compiled form is
+`GibbardSatterthwaite.lean`; multi-file provenance mirror is
+[`vendor/SocialChoiceLean/`](../../../vendor/SocialChoiceLean/).
 
 Mathematical statements and proofs in vendored files remain the upstream
 authors'. Atlas changes are limited to module boundaries, visibility, and

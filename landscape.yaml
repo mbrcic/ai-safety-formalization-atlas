@@ -41,7 +41,28 @@
       "module": "Thys/GS.thy",
       "declaration": "Gibbard_Satterthwaite",
       "reproduction": "scripts/reproduce_isabelle.sh arrow",
-      "notes": "Reproduced landscape formalization (Isabelle only; no Lean interface). Lean SocialChoiceLean is deficient under the atlas 4.31 pin and is not vendored."
+      "notes": "Reproduced AFP landscape formalization (Isabelle). Lean interface is LAND-GS-002."
+    },
+    {
+      "id": "LAND-GS-002",
+      "name": "Gibbard–Satterthwaite theorem (Lean / SocialChoiceLean)",
+      "kind": "LANDSCAPE",
+      "survey_coverage": null,
+      "related_survey_ids": [
+        "BY-007"
+      ],
+      "survey_coverage_note": "Not a separate Table-1 BY ID; Arrow-session provenance only. Classical resolute voting-rule form.",
+      "framework": "Lean",
+      "license": "MIT",
+      "repository": "https://github.com/DominikPeters/SocialChoiceLean",
+      "revision": "mbrcic/SocialChoiceLean port/lean-4.31 @ 74f491b (Mathlib/Lean v4.31.0)",
+      "atlas_declaration": "AISafetyAtlas.SocialChoice.gibbard_satterthwaite",
+      "root_import": true,
+      "module": "AISafetyAtlas/SocialChoice.lean",
+      "upstream_module": "AISafetyAtlas/Upstream/GibbardSatterthwaite.lean",
+      "declaration": "gibbard_satterthwaite",
+      "reproduction": "lake build AISafetyAtlas; python3 scripts/check_print_axioms.py",
+      "notes": "Classical GS: resolute + unanimous + strategy-proof ⇒ dictatorial (3 ≤ |A|). Vendored GS closure from SocialChoiceLean 4.31 port (ballot shim); multi-file mirror under vendor/SocialChoiceLean/. Not full SocialChoiceLean. Isabelle twin is LAND-GS-001."
     },
     {
       "id": "LAND-NFL-001",
