@@ -15,7 +15,7 @@ formalization gaps.
 
 <!-- BEGIN GENERATED REGISTRY SCOPE -->
 The current registry has verified `EXACT` or `EQUIVALENT` formalization coverage for
-**7 of 44** survey results. It records **2 additional results with a
+**7 of 44** survey results. It records **3 additional results with a
 `RELATED` formalization only**, outside headline coverage, and
 **2 survey results with reviewed AI-system bridges**. It provides
 infrastructure for further formalization; it does not claim complete formal

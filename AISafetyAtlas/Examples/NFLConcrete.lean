@@ -43,4 +43,23 @@ example (Φ : CostPerformance 1 (Fin 2)) :
       (card (Fin 2) : ℝ) ^ (card (Fin 2) - 1) * ∑ c : Fin 1 → Fin 2, Φ c :=
   aggregatePerformance_eq_scaled_sum Φ schedule0
 
+/-! ## Supervised OTS form on `Fin 2` -/
+
+/-- Train on `{0}` only. -/
+def trainOn0 : Set (Fin 2) := {0}
+
+/-- Constant-0 learner. -/
+def learnerConst0 : SupervisedLearner (Fin 2) (Fin 2) trainOn0 :=
+  fun _ _ => 0
+
+/-- Constant-1 learner. -/
+def learnerConst1 : SupervisedLearner (Fin 2) (Fin 2) trainOn0 :=
+  fun _ _ => 1
+
+/-- Both learners have equal aggregate off-training-set loss. -/
+example :
+    aggregateOffTrainingLoss trainOn0 learnerConst0 =
+      aggregateOffTrainingLoss trainOn0 learnerConst1 :=
+  no_free_lunch_supervised trainOn0 learnerConst0 learnerConst1
+
 end AISafetyAtlas.Examples.NFLConcrete

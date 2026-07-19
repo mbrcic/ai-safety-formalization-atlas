@@ -151,4 +151,12 @@ example {X Y : Type*} [Fintype X] [Fintype Y] {m : ℕ}
       AISafetyAtlas.Learning.aggregatePerformance Φ s₂ :=
   AISafetyAtlas.Learning.no_free_lunch Φ s₁ s₂
 
+-- Finite-domain Wolpert 1996 supervised NFL (off-training-set form).
+example {X Y : Type*} [Fintype X] [Fintype Y] [DecidableEq X] [DecidableEq Y]
+    (S : Set X)
+    (A B : AISafetyAtlas.Learning.SupervisedLearner X Y S) :
+    AISafetyAtlas.Learning.aggregateOffTrainingLoss S A =
+      AISafetyAtlas.Learning.aggregateOffTrainingLoss S B :=
+  AISafetyAtlas.Learning.no_free_lunch_supervised S A B
+
 end AISafetyAtlas.Examples.PublicAPI

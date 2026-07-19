@@ -29,7 +29,7 @@ coverage counting and [open work](../guide/open-work.md) for next actions.
 | BY-017 | Unsurveyability | Some proofs may exceed feasible human survey or comprehension even when mechanically checkable. | — | `HUMAN_REVIEW` | — |
 | BY-018 | Unlearnability | Learning can be undecidable or computationally infeasible for specified concept classes and learning models. | — | `HUMAN_REVIEW` | — |
 | BY-019 | Unpredictability of rational agents | No predictor can universally forecast the behaviour of rational agents in the cited strategic settings. | — | `HUMAN_REVIEW` | — |
-| BY-020 | No Free Lunch — supervised learning | Averaged uniformly over target functions, learning algorithms have no universal performance advantage. | — | `HUMAN_REVIEW` | — |
+| BY-020 | No Free Lunch — supervised learning | Averaged uniformly over target functions, learning algorithms have no universal performance advantage. | `RELATED` | `HUMAN_REVIEW` | — |
 | BY-021 | No Free Lunch — optimization | Averaged uniformly over objective functions, optimization algorithms have equal aggregate performance. | `RELATED` | `HUMAN_REVIEW` | — |
 | BY-022 | Free lunches in continuous spaces and coevolution | The cited results identify settings where standard no-free-lunch symmetry fails. | — | `HUMAN_REVIEW` | — |
 | BY-023 | Unidentifiability | Observational data can be compatible with multiple latent, causal, or generative explanations. | — | `HUMAN_REVIEW` | — |
