@@ -229,6 +229,7 @@ def main() -> None:
         "docs/status/paper-coverage.md",
         "docs/agent/INDEX.md",
         "docs/agent/by-id.json",
+        "docs/agent/search-summary.json",
         "docs/provenance/external-formalizations.md",
         "docs/provenance/formalization-search.json",
         "docs/provenance/formalization-search.md",

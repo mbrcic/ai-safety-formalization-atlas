@@ -23,6 +23,7 @@ Root project files still used for navigation: [`README.md`](../README.md),
 
 - [Agent index](agent/INDEX.md) — default open set and lookup recipes
 - [by-id.json](agent/by-id.json) — generated compact `BY-###` / `LAND-###` map
+- [search-summary.json](agent/search-summary.json) — generated compact discovery hits
 
 ## Guide (explain / process)
 

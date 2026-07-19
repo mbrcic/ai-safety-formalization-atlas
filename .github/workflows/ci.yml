@@ -15,25 +15,67 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  build:
+  # Schema, generated views, and path checks — always (docs-only PRs stay cheap).
+  agent-gate:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
         with:
           persist-credentials: false
-      - name: Validate survey registry
-        run: python3 scripts/validate_registry.py
-      - name: Validate landscape ledger
-        run: python3 scripts/validate_landscape.py
-      - name: Check generated registry views
-        run: python3 scripts/generate_registry_views.py --check
-      - name: Validate current repository state
-        run: python3 scripts/validate_current_state.py
-      - name: Check relative documentation paths
-        run: python3 scripts/check_docs_paths.py
+      - name: Cheap agent gate
+        run: ./scripts/agent_gate.sh
+
+  # Lean build + axioms only when Lean toolchain or sources change.
+  lean:
+    needs: agent-gate
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    outputs:
+      run_lean: ${{ steps.filter.outputs.run_lean }}
+    steps:
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - name: Decide whether Lean build is required
+        id: filter
+        shell: bash
+        run: |
+          set -euo pipefail
+          pattern='(\.lean$|^lakefile\.toml$|^lake-manifest\.json$|^lean-toolchain$|^scripts/lean_build_targets\.txt$|^scripts/check_print_axioms\.py$|^scripts/agent_gate\.sh$)'
+          run_lean=false
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            run_lean=true
+          elif [ "${{ github.event_name }}" = "push" ] && [ "${{ github.ref }}" = "refs/heads/main" ]; then
+            # Always verify Lean on main pushes.
+            run_lean=true
+          elif [ "${{ github.event_name }}" = "pull_request" ]; then
+            base="${{ github.event.pull_request.base.sha }}"
+            head="${{ github.event.pull_request.head.sha }}"
+            if git diff --name-only "$base" "$head" | grep -E "$pattern" >/dev/null; then
+              run_lean=true
+            fi
+          elif [ "${{ github.event_name }}" = "push" ]; then
+            before="${{ github.event.before }}"
+            if [ -n "$before" ] && [ "$before" != "0000000000000000000000000000000000000000" ]; then
+              if git diff --name-only "$before" "${{ github.sha }}" | grep -E "$pattern" >/dev/null; then
+                run_lean=true
+              fi
+            else
+              run_lean=true
+            fi
+          fi
+          echo "run_lean=$run_lean" >> "$GITHUB_OUTPUT"
+          echo "Lean build required: $run_lean"
+      - name: Skip notice
+        if: steps.filter.outputs.run_lean != 'true'
+        run: echo "No Lean-related paths changed; skipping lake build and axiom check."
       - uses: leanprover/lean-action@38fbc41a8c28c4cbaec22d7f7de508ec2e7c0dd9 # v1
+        if: steps.filter.outputs.run_lean == 'true'
       - name: Compile explicit non-root Lean targets
+        if: steps.filter.outputs.run_lean == 'true'
         run: xargs lake build < scripts/lean_build_targets.txt
       - name: Kernel axiom check for headline declarations
+        if: steps.filter.outputs.run_lean == 'true'
         run: python3 scripts/check_print_axioms.py

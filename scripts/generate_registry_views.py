@@ -18,6 +18,7 @@ ATLAS_INDEX = ROOT / "docs/status/atlas-index.md"
 LANDSCAPE_INDEX = ROOT / "docs/status/landscape-index.md"
 PAPER_COVERAGE = ROOT / "docs/status/paper-coverage.md"
 AGENT_BY_ID = ROOT / "docs/agent/by-id.json"
+AGENT_SEARCH_SUMMARY = ROOT / "docs/agent/search-summary.json"
 STATE = ROOT / "STATE.md"
 README = ROOT / "README.md"
 LEAN_CHECKS = ROOT / "AISafetyAtlas/Examples/Registry.lean"
@@ -26,7 +27,7 @@ README_END = "<!-- END GENERATED REGISTRY SCOPE -->"
 STATE_START = "<!-- BEGIN GENERATED REGISTRY SNAPSHOT -->"
 STATE_END = "<!-- END GENERATED REGISTRY SNAPSHOT -->"
 COVERAGE_RELATIONSHIPS = {"EXACT", "EQUIVALENT"}
-
+SEARCH_SUMMARY_MAX_PATHS = 3
 def code_list(items: list[str]) -> str:
     return "<br>".join(f"`{item}`" for item in items)
 
@@ -578,6 +579,52 @@ def render_agent_by_id(registry: dict, landscape: dict) -> str:
     }
     return json.dumps(payload, indent=2, ensure_ascii=False) + "\n"
 
+
+def compact_search_result(record: dict) -> dict:
+    """Keep queries and non-zero corpus hits only (drop empty zero matrices)."""
+    hits: dict[str, dict] = {}
+    for corpus, hit in (record.get("candidate_hits") or {}).items():
+        count = int(hit.get("hit_count") or 0)
+        if count <= 0:
+            continue
+        paths = list(hit.get("paths") or [])[:SEARCH_SUMMARY_MAX_PATHS]
+        hits[corpus] = {
+            "hit_count": count,
+            "matched_queries": list(hit.get("matched_queries") or []),
+            "paths": paths,
+        }
+    return {
+        "queries": list(record.get("queries") or []),
+        "hits": hits,
+        "total_hit_count": sum(item["hit_count"] for item in hits.values()),
+    }
+
+
+def render_agent_search_summary(search_evidence: dict) -> str:
+    """Token-cheap discovery summary; prefer over formalization-search.json."""
+    results = search_evidence.get("results") or {}
+    compact_results = {
+        result_id: compact_search_result(record)
+        for result_id, record in results.items()
+    }
+    with_hits = sum(
+        1 for record in compact_results.values() if record["total_hit_count"] > 0
+    )
+    payload = {
+        "schema_version": 1,
+        "generated_by": "scripts/generate_registry_views.py",
+        "note": (
+            "Compact discovery summary. Prefer this over "
+            "docs/provenance/formalization-search.json. Full path lists and "
+            "per-query zero counts live only in the full evidence file."
+        ),
+        "searched_on": search_evidence.get("searched_on"),
+        "corpora": list((search_evidence.get("corpora") or {}).keys()),
+        "result_count": len(compact_results),
+        "results_with_hits": with_hits,
+        "results": compact_results,
+    }
+    return json.dumps(payload, indent=2, ensure_ascii=False) + "\n"
 def update(path: Path, expected: str, check: bool) -> bool:
     actual = path.read_text(encoding="utf-8") if path.exists() else None
     if actual == expected:
@@ -617,11 +664,15 @@ def main() -> None:
     stale |= update(
         AGENT_BY_ID, render_agent_by_id(registry, landscape), args.check
     )
+    stale |= update(
+        AGENT_SEARCH_SUMMARY,
+        render_agent_search_summary(search_evidence),
+        args.check,
+    )
     stale |= update(README, render_readme(readme, registry), args.check)
     stale |= update(LEAN_CHECKS, render_lean(registry), args.check)
     stale |= update(STATE, render_state(state, registry, landscape), args.check)
     if stale:
         raise SystemExit(1)
-
 if __name__ == "__main__":
     main()
