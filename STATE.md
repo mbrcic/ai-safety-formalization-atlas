@@ -11,8 +11,8 @@ on `agent-work`; R6/R7 remediation; BY-012 and BY-033 bridges `REVIEWED`
   **8** survey results; headline `EXACT`/`EQUIVALENT` coverage
   **7 of 44**; RELATED-only **1**; reviewed
   AI-system bridges **2**; declaration layers WRAPPER **12** /
-  BRIDGE **4**; structured candidate leads **1**; landscape
-  entries **7** (see `landscape.yaml`).
+  BRIDGE **4**; structured candidate leads **0**; landscape
+  entries **9** (see `landscape.yaml`).
 <!-- END GENERATED REGISTRY SNAPSHOT -->
 
 Package version is **`0.2.0`** on this branch (`lakefile.toml`, `CITATION.cff`);
@@ -38,7 +38,7 @@ to `main` still requires explicit maintainer authorization (push / PR / merge).
   BY-033 robot RELATED + scoped interpretation)
 - Landscape ledger: `landscape.yaml` for non–Table-1 formalizations (attribution,
   GS, vNM, TCSLib Arrow)
-- Structured `candidate_formalizations` for BY-001 / BY-020 / BY-021
+- Structured `candidate_formalizations` cleared for BY-001 / BY-020 / BY-021
 - Kernel `#print axioms` check for headline declarations
   (`scripts/check_print_axioms.py`)
 - v0.1 publication approved through `e9fdfc0`
@@ -87,6 +87,13 @@ to `main` still requires explicit maintainer authorization (push / PR / merge).
   [`docs/bridges/ct3-robot-review-package.md`](docs/bridges/ct3-robot-review-package.md).
 
 ## Recent integration
+
+- Pattern-A (2026-07-19): AFP `CondNormReasHOL` → landscape `LAND-PE-001`
+  (Parfit mere addition; RELATED only to BY-008; not Arrhenius EXACT).
+  AFP `Deep_Learning` → landscape `LAND-DL-001` (Cohen–Bentkamp network
+  capacity; RELATED to BY-035). BY-001 AFP observability candidates **cleared**
+  as DISTINCT from Klamka control unobservability.
+
 
 - `AISafetyAtlas.Explainability.attribution_impossibility` on root import;
   recorded in `landscape.yaml` (not survey coverage).

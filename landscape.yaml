@@ -86,6 +86,46 @@
       "notes": "Statement-level triage (CT-2, 2026-07-19): matches SSBD Thm 5.1 — for binary classification with 2*m < |space X|, every learner admits a realizable distribution on which P[L(A(S)) > 1/8] >= 1/7. Session depends only on HOL-Probability. Reproduction log recorded in docs/provenance/ct2-nfl-triage.md."
     },
     {
+      "id": "LAND-PE-001",
+      "name": "Parfit mere addition / conditional normative reasoning (Åqvist E)",
+      "kind": "LANDSCAPE",
+      "survey_coverage": null,
+      "related_survey_ids": [
+        "BY-008"
+      ],
+      "survey_coverage_note": "RELATED only: population-ethics adjacent (Parfit mere addition / repugnant-conclusion encoding). Not EXACT/EQUIVALENT to Arrhenius 2011 impossibility package (BY-008 survey source). See docs/provenance/a1-condnorm-parfit-triage.md.",
+      "framework": "Isabelle/HOL",
+      "license": "BSD-3-Clause",
+      "repository": "https://www.isa-afp.org/entries/CondNormReasHOL.html",
+      "revision": "AFP release 2026-02-06; archive SHA-256 10c3aa794a3cafcfb08a784e11515933162a490b32fc0cdb0cf88f489accdb38",
+      "atlas_declaration": null,
+      "root_import": false,
+      "module": "mere_addition_opt.thy",
+      "declaration": "mere_addition encodings (Parent–Benzmüller CondNormReasHOL)",
+      "reproduction": "scripts/reproduce_isabelle.sh condnorm",
+      "notes": "A1 (2026-07-19): AFP CondNormReasHOL — Åqvist system E + Parfit mere-addition use case. Not Arrhenius BY-008 coverage. Evidence: docs/provenance/a1-condnorm-parfit-triage.md."
+    },
+    {
+      "id": "LAND-DL-001",
+      "name": "Deep vs shallow network capacity (Cohen–Bentkamp)",
+      "kind": "LANDSCAPE",
+      "survey_coverage": null,
+      "related_survey_ids": [
+        "BY-035"
+      ],
+      "survey_coverage_note": "RELATED to BY-035 no-flattening informal claim (deep nets require large shallow representations). Formalizes Bentkamp/AFP of Cohen et al. 2015-style network-capacity theorems, not the Lin–Tegmark–Rolnick 2017 survey citation as EXACT. See docs/provenance/a2-deep-learning-by035-triage.md.",
+      "framework": "Isabelle/HOL",
+      "license": "BSD-3-Clause",
+      "repository": "https://www.isa-afp.org/entries/Deep_Learning.html",
+      "revision": "AFP release 2026-02-06; full-tree build SHA-256 b059edd46073479ee8dde45004c2346a7365e5d94cded49d27257cfea66c8879; entry archive 018557d0041584239d603a7eb3700d07ed7eb2a2ca48f694820072003ebf430d",
+      "atlas_declaration": null,
+      "root_import": false,
+      "module": "DL_Fundamental_Theorem_Network_Capacity.thy",
+      "declaration": "fundamental_theorem_network_capacity",
+      "reproduction": "scripts/reproduce_isabelle.sh deep-learning",
+      "notes": "A2 (2026-07-19): AE almost-all weights, deep model not matchable by shallow width Z < r^(N/2). Landscape RELATED to BY-035; not headline EXACT. Evidence: docs/provenance/a2-deep-learning-by035-triage.md."
+    },
+    {
       "id": "LAND-VNM-001",
       "name": "von Neumann–Morgenstern expected utility",
       "kind": "LANDSCAPE",

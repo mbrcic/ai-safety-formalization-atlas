@@ -20,7 +20,7 @@ do not affect the headline coverage count. Regenerate this page with
 | … of which `REFERENCE` | 0 |
 | Survey rows whose atlas Lean is wrapper-only | 5 |
 | Survey rows with at least one `BRIDGE` declaration | 3 |
-| Structured `candidate_formalizations` leads | 1 |
+| Structured `candidate_formalizations` leads | 0 |
 | Reproduced external coverage records | 3 across 2 survey results |
 | Survey results with reviewed AI-system bridges | 2 |
 | Survey rows with six-corpus discovery evidence | 44 / 44 |

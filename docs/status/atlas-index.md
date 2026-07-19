@@ -10,7 +10,7 @@ coverage counting and [open work](../guide/open-work.md) for next actions.
 
 | ID | Survey result | Informal claim | Formalization | Bridge | Candidate leads |
 |---|---|---|---|---|---:|
-| BY-001 | Unobservability | A system's internal state cannot in general be reconstructed from its observable outputs. | — | `HUMAN_REVIEW` | 1 |
+| BY-001 | Unobservability | A system's internal state cannot in general be reconstructed from its observable outputs. | — | `HUMAN_REVIEW` | — |
 | BY-002 | Uncontrollability of dynamical systems | Some dynamical systems cannot be driven between arbitrary states by available controls. | — | `HUMAN_REVIEW` | — |
 | BY-003 | Good Regulator Theorem | Every maximally simple optimal regulator must embody a model of the regulated system. | — | `HUMAN_REVIEW` | — |
 | BY-004 | Law of Requisite Variety | Perfect regulation requires sufficient controller variety under perfect information and unbounded response speed. | — | `HUMAN_REVIEW` | — |

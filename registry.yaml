@@ -370,7 +370,7 @@
       "status": "MAPPED",
       "ai_safety_relevance": "The survey identifies this result as relevant to limits on AI; no direct real-system implication is asserted here.",
       "ai_bridge_status": "HUMAN_REVIEW",
-      "notes": "Structured candidate leads under candidate_formalizations (AFP observability pointers). Statement-level equivalence remains unverified.",
+      "notes": "A3 (2026-07-19): AFP 'observability' keyword hits (FSM_Tests Observability, protocol refinement, etc.) are DISTINCT from Klamka multivariable control-theoretic unobservability (survey-ref-021). Candidate formalizations cleared. See docs/provenance/a3-by001-unobservability-triage.md.",
       "formal_library_search": {
         "searched_on": "2026-07-18",
         "evidence_file": "docs/provenance/formalization-search.json",
@@ -392,18 +392,7 @@
           "observable output"
         ]
       },
-      "candidate_formalizations": [
-        {
-          "repository": "https://www.isa-afp.org/",
-          "revision": "AFP release 2026-02-06",
-          "framework": "Isabelle/HOL",
-          "license": "BSD-3-Clause",
-          "declaration": "(AFP observability / control candidates; declaration pending)",
-          "inspection_state": "UNVERIFIED",
-          "relationship_review": "PENDING",
-          "notes": "Control-theory discovery queries surface AFP observability-related theories; no single declaration has been statement-matched to BY-001 Unobservability. Promoted from free-text notes into candidate_formalizations (R6-4)."
-        }
-      ]
+      "candidate_formalizations": []
     },
     {
       "id": "BY-002",
@@ -694,7 +683,7 @@
       "status": "MAPPED",
       "ai_safety_relevance": "The survey identifies this result as relevant to limits on AI; no direct real-system implication is asserted here.",
       "ai_bridge_status": "HUMAN_REVIEW",
-      "notes": "Statement-level equivalence to each cited source remains subject to source comparison.",
+      "notes": "A1 (2026-07-19): AFP CondNormReasHOL (Parfit mere addition / Åqvist E) is RELATED landscape LAND-PE-001 only — not EXACT/EQUIVALENT Arrhenius 2011 (survey-ref-032). See docs/provenance/a1-condnorm-parfit-triage.md.",
       "formal_library_search": {
         "searched_on": "2026-07-18",
         "evidence_file": "docs/provenance/formalization-search.json",
@@ -1989,7 +1978,7 @@
       "status": "MAPPED",
       "ai_safety_relevance": "The survey identifies this result as relevant to limits on AI; no direct real-system implication is asserted here.",
       "ai_bridge_status": "HUMAN_REVIEW",
-      "notes": "Statement-level equivalence to each cited source remains subject to source comparison.",
+      "notes": "A2 (2026-07-19): AFP Deep_Learning (Bentkamp; Cohen et al. network-capacity / deep-vs-shallow theorems) is RELATED landscape LAND-DL-001 — matches the informal no-flattening claim but is not EXACT formalization of the Lin–Tegmark–Rolnick 2017 survey citation (survey-ref-072). See docs/provenance/a2-deep-learning-by035-triage.md.",
       "formal_library_search": {
         "searched_on": "2026-07-18",
         "evidence_file": "docs/provenance/formalization-search.json",

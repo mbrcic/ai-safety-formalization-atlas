@@ -325,6 +325,42 @@ Coverage policy: [`logic-incompleteness.md`](../guide/logic-incompleteness.md).
 Chaitin vendor layout:
 [`AISafetyAtlas/Upstream/KolmogorovMathlib/README.md`](../../AISafetyAtlas/Upstream/KolmogorovMathlib/README.md).
 
+## Isabelle/HOL: CondNormReasHOL (Parfit mere addition; landscape)
+
+- Upstream: [AFP — CondNormReasHOL](https://www.isa-afp.org/entries/CondNormReasHOL.html)
+- Authors: Xavier Parent, Christoph Benzmüller
+- License: BSD-3-Clause (AFP)
+- Release: `2026-02-06`; archive SHA-256
+  `10c3aa794a3cafcfb08a784e11515933162a490b32fc0cdb0cf88f489accdb38`
+- Session: `CondNormReasHOL` (HOL only)
+- Landscape: `LAND-PE-001` — **RELATED** to BY-008 (population-ethics adjacent);
+  **not** EXACT Arrhenius 2011
+- Reproduce: `scripts/reproduce_isabelle.sh condnorm`
+- Evidence: [`a1-condnorm-parfit-triage.md`](a1-condnorm-parfit-triage.md)
+
+## Isabelle/HOL: Deep_Learning (network capacity / no-flattening family)
+
+- Upstream: [AFP — Deep_Learning](https://www.isa-afp.org/entries/Deep_Learning.html)
+- Author: Alexander Bentkamp
+- License: BSD-3-Clause (AFP)
+- Release: `2026-02-06`; entry archive SHA-256
+  `018557d0041584239d603a7eb3700d07ed7eb2a2ca48f694820072003ebf430d`;
+  full AFP tree for build SHA-256
+  `b059edd46073479ee8dde45004c2346a7365e5d94cded49d27257cfea66c8879`
+- Session: `Deep_Learning` (via full AFP `thys/`; deps include Jordan_Normal_Form,
+  Polynomials, VectorSpace, …)
+- Principal declarations: `fundamental_theorem_network_capacity` (+ `_v2`, `_v3`)
+- Landscape: `LAND-DL-001` — **RELATED** to BY-035 informal no-flattening claim;
+  not EXACT Lin–Tegmark–Rolnick 2017 citation alone
+- Reproduce: `scripts/reproduce_isabelle.sh deep-learning`
+- Evidence: [`a2-deep-learning-by035-triage.md`](a2-deep-learning-by035-triage.md)
+
+## BY-001 Unobservability — AFP candidates cleared
+
+Keyword AFP “observability” hits (FSM testing, protocol refinement) are
+**DISTINCT** from Klamka control-theoretic unobservability. Candidates removed;
+see [`a3-by001-unobservability-triage.md`](a3-by001-unobservability-triage.md).
+
 ## Isabelle reproduction environment
 
 - Official image: `makarius/isabelle:Isabelle2025-2`
