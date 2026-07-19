@@ -24,6 +24,16 @@ jobs:
           persist-credentials: false
       - name: Validate survey registry
         run: python3 scripts/validate_registry.py
-      - name: Audit v0.1 release data
-        run: python3 scripts/audit_release.py
+      - name: Validate landscape ledger
+        run: python3 scripts/validate_landscape.py
+      - name: Check generated registry views
+        run: python3 scripts/generate_registry_views.py --check
+      - name: Validate current repository state
+        run: python3 scripts/validate_current_state.py
+      - name: Check relative documentation paths
+        run: python3 scripts/check_docs_paths.py
       - uses: leanprover/lean-action@38fbc41a8c28c4cbaec22d7f7de508ec2e7c0dd9 # v1
+      - name: Compile explicit non-root Lean targets
+        run: xargs lake build < scripts/lean_build_targets.txt
+      - name: Kernel axiom check for headline declarations
+        run: python3 scripts/check_print_axioms.py

@@ -1,0 +1,105 @@
+{
+  "schema_version": 1,
+  "description": "Non–Table-1 formalizations that are first-class atlas landscape evidence or public Lean surface. These never increase the survey headline EXACT/EQUIVALENT coverage count (7 of 44). Survey-adjacent rows stay in registry.yaml.",
+  "entries": [
+    {
+      "id": "LAND-ATTR-001",
+      "name": "Attribution impossibility (DASH trilemma)",
+      "kind": "LANDSCAPE",
+      "survey_coverage": null,
+      "related_survey_ids": [
+        "BY-029",
+        "BY-042"
+      ],
+      "survey_coverage_note": "Not BY-042 or BY-029 coverage without a separate statement map.",
+      "framework": "Lean",
+      "license": "Apache-2.0",
+      "repository": "https://github.com/DrakeCaraker/dash-impossibility-lean",
+      "revision": "7ec3ef9813a7642fdabe5b73c71d1bed4d5488e2",
+      "atlas_declaration": "AISafetyAtlas.Explainability.attribution_impossibility",
+      "root_import": true,
+      "module": "AISafetyAtlas/Explainability.lean",
+      "upstream_module": "AISafetyAtlas/Upstream/Attribution/Trilemma.lean",
+      "reproduction": "lake build AISafetyAtlas (vendored axiom-free trilemma)",
+      "notes": "Core Rashomon/faithfulness trilemma only; upstream GBDT axiom layers not vendored."
+    },
+    {
+      "id": "LAND-GS-001",
+      "name": "Gibbard–Satterthwaite theorem",
+      "kind": "LANDSCAPE",
+      "survey_coverage": null,
+      "related_survey_ids": [
+        "BY-007"
+      ],
+      "survey_coverage_note": "Not a separate Table-1 BY ID; Arrow-session provenance only.",
+      "framework": "Isabelle/HOL",
+      "license": "BSD-3-Clause",
+      "repository": "https://www.isa-afp.org/entries/ArrowImpossibilityGS.html",
+      "revision": "AFP release 2026-02-06; archive SHA-256 8174c738b42203100170ff25f3c9fc2c6d16d8556fbaff205c0eaa98a3813da7",
+      "atlas_declaration": null,
+      "root_import": false,
+      "module": "Thys/GS.thy",
+      "declaration": "Gibbard_Satterthwaite",
+      "reproduction": "scripts/reproduce_isabelle.sh arrow",
+      "notes": "Reproduced landscape formalization (Isabelle only; no Lean interface). Lean SocialChoiceLean is deficient under the atlas 4.31 pin and is not vendored."
+    },
+    {
+      "id": "LAND-VNM-001",
+      "name": "von Neumann–Morgenstern expected utility",
+      "kind": "LANDSCAPE",
+      "survey_coverage": null,
+      "related_survey_ids": [],
+      "survey_coverage_note": "Adjacent utility foundation; not a BY coverage row.",
+      "framework": "Lean",
+      "license": "Apache-2.0",
+      "repository": "https://github.com/jingyuanli-hk/vNM-Theorem-pub",
+      "revision": "89ed1680170bcf947f77bd26cdf614c1ce02222c",
+      "atlas_declaration": null,
+      "root_import": false,
+      "declaration": "vNM.vNM_theorem",
+      "reproduction": "scripts/reproduce_vnm.sh",
+      "notes": "Reproduced provenance; not an atlas Lake dependency."
+    },
+    {
+      "id": "LAND-TCS-ARROW-001",
+      "name": "Fourier-analytic Arrow theorem (TCSLib)",
+      "kind": "LANDSCAPE",
+      "survey_coverage": null,
+      "related_survey_ids": [
+        "BY-007"
+      ],
+      "survey_coverage_note": "Alternative Arrow representation; not additional BY-007 coverage.",
+      "framework": "Lean",
+      "license": "Apache-2.0",
+      "repository": "https://github.com/Shilun-Allan-Li/tcslib",
+      "revision": "502287d7f8d84c33421c71ce5495b08f097c47a5",
+      "atlas_declaration": null,
+      "root_import": false,
+      "declaration": "ArrowTheorem.arrow_theorem",
+      "reproduction": null,
+      "notes": "Source-inspected only; deferred until a named theorem needs Fourier structure."
+    },
+    {
+      "id": "LAND-MELO-001",
+      "name": "Melo et al. inner-alignment decision problem (Rice packaging)",
+      "kind": "LANDSCAPE",
+      "survey_coverage": null,
+      "related_survey_ids": [
+        "BY-012"
+      ],
+      "survey_coverage_note": "Not a Table-1 BY row. Negative computability claim is related to Rice (BY-012) via AgentBehavior; does not add headline coverage.",
+      "framework": "Lean",
+      "license": "Apache-2.0",
+      "repository": "https://arxiv.org/abs/2408.08995",
+      "revision": "arXiv:2408.08995 (2024); Sci. Rep. 2025 companion publication",
+      "atlas_declaration": "AISafetyAtlas.Verification.AgentBehavior.no_behavioral_safety_verifier",
+      "root_import": false,
+      "module": "AISafetyAtlas/Verification/AgentBehavior.lean",
+      "declaration": "AISafetyAtlas.Verification.AgentBehavior.no_behavioral_safety_verifier",
+      "reproduction": "lake build AISafetyAtlas.Verification.AgentBehavior",
+      "statement_map": "docs/guide/related-literature.md",
+      "source_catalog_ref": "atlas-ref-melo-2024",
+      "notes": "Related-literature landscape entry (see docs/guide/related-literature.md). Atlas tracks Rice packaging of their stated decision problem; architecture half not formalized. Does not increase headline coverage."
+    }
+  ]
+}

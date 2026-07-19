@@ -14,8 +14,8 @@ import unicodedata
 
 ROOT = Path(__file__).resolve().parents[1]
 REGISTRY_PATH = ROOT / "registry.yaml"
-EVIDENCE_PATH = ROOT / "docs/formalization-search.json"
-SUMMARY_PATH = ROOT / "docs/formalization-search.md"
+EVIDENCE_PATH = ROOT / "docs/provenance/formalization-search.json"
+SUMMARY_PATH = ROOT / "docs/provenance/formalization-search.md"
 MAX_RECORDED_PATHS = 12
 SOURCE_SUFFIXES = {
     ".agda",

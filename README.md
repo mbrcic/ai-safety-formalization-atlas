@@ -13,10 +13,14 @@ formalization gaps.
 
 ## Current scope
 
-The v0.1 baseline has verified formalization records for **3 of 44** survey
-results and **0 reviewed AI-system bridge theorems**. It provides infrastructure
-for further formalization; it does not claim complete formal coverage. See the
-current [formalization status](docs/formalization-status.md).
+<!-- BEGIN GENERATED REGISTRY SCOPE -->
+The current registry has verified `EXACT` or `EQUIVALENT` formalization coverage for
+**7 of 44** survey results. It records **1 additional result with a
+`RELATED` formalization only**, outside headline coverage, and
+**2 survey results with reviewed AI-system bridges**. It provides
+infrastructure for further formalization; it does not claim complete formal
+coverage. See the current [formalization status](docs/status/formalization-status.md).
+<!-- END GENERATED REGISTRY SCOPE -->
 
 ## Epistemic scope
 
@@ -24,6 +28,10 @@ A machine-checked proof establishes its encoded mathematical statement. It does
 not by itself establish that the statement fully captures an informal AI-safety
 claim. Classical results and AI-safety bridge claims are documented as separate
 layers, and uncertain semantic relationships are marked for human review.
+**Reviewed AI-system bridges are not additional headline `EXACT`/`EQUIVALENT`
+coverage** (e.g. the robot formalization remains `RELATED` only). See
+[`docs/releases/v0.2.md`](docs/releases/v0.2.md) for the current release
+non-claims.
 
 ## Repository contents
 
@@ -31,13 +39,68 @@ layers, and uncertain semantic relationships are marked for human review.
 - [`AISafetyAtlas/`](AISafetyAtlas/) contains attributed Lean integrations.
 - [`CONTRIBUTING.md`](CONTRIBUTING.md) explains how to propose and verify changes.
 - [`ROADMAP.md`](ROADMAP.md) presents the public strategy and contributor entry points.
-- [`docs/methodology.md`](docs/methodology.md) defines evidence and review rules.
-- [`docs/formalization-status.md`](docs/formalization-status.md) summarizes current coverage.
-- [`docs/external-formalizations.md`](docs/external-formalizations.md) records reproducibility checks outside Lean.
-- [`docs/formalization-search.md`](docs/formalization-search.md) records the pinned six-corpus discovery pass for every survey row.
-- [`docs/open-work.md`](docs/open-work.md) lists unresolved review and formalization work.
-- [`docs/release-v0.1.md`](docs/release-v0.1.md) records v0.1 evidence and its immutable approval reference.
 - [`STATE.md`](STATE.md) reports the current phase, blockers, and next tasks.
+- [`landscape.yaml`](landscape.yaml) records non–Table-1 formalizations (never headline survey coverage).
+- [`docs/`](docs/README.md) is split by role — start with the [documentation map](docs/README.md):
+  - [`docs/guide/`](docs/guide/) — methodology, open work, model notes, tasks
+  - [`docs/status/`](docs/status/) — generated coverage tables and indexes
+  - [`docs/provenance/`](docs/provenance/) — discovery search + external reproduction
+  - [`docs/bridges/`](docs/bridges/) — bridge review packages and evidence
+  - [`docs/releases/`](docs/releases/) — release evidence notes
+
+## Lean API
+
+Downstream proofs need only the root import:
+
+```lean
+import AISafetyAtlas
+```
+
+The stable entry points are conventional theorem names under domain namespaces:
+
+- `AISafetyAtlas.Computability.rice` and `rice_code_iff`
+- `AISafetyAtlas.Computability.halting_problem`
+- `AISafetyAtlas.SocialChoice.arrow`
+- `AISafetyAtlas.SocialChoice.Utility.arrow`
+- `AISafetyAtlas.Logic.chaitin_incompleteness` and `chaitin_bound`
+- `AISafetyAtlas.Logic.godel_first_incompleteness` and `godel_second_incompleteness`
+- `AISafetyAtlas.Logic.tarski_undefinability`
+- `AISafetyAtlas.Logic.loeb`
+- `AISafetyAtlas.Verification.rice`
+- `AISafetyAtlas.Verification.AgentBehavior.no_behavioral_safety_verifier`
+- `AISafetyAtlas.Verification.Robot.action_safety_unverifiable`
+
+**Landscape (not survey coverage):** recorded in
+[`landscape.yaml`](landscape.yaml), also on the root import when marked
+`root_import: true`:
+
+- `AISafetyAtlas.Explainability.attribution_impossibility` (DASH trilemma;
+  not BY-029/BY-042 without a separate statement map)
+
+The Rice verification bridge concerns properties of partial input/output
+behavior; `AgentBehavior` is a downstream consumer that models encoded agents
+and total behavioral safety verifiers. The independent Robot bridge concerns
+total reactive action traces under an explicit effective switching certificate
+and reduces directly to the halting problem. The Logic layer covers Chaitin
+(BY-015, vendored KolmogorovMathlib), classical Gödel I/II (BY-013, Foundation),
+Tarski undefinability (BY-016), and Löb (BY-027); see
+[logic incompleteness](docs/guide/logic-incompleteness.md). Neither classical nor
+bridge theorem asserts that a particular AI system or practical verification
+task satisfies its model. Generated checks in
+`AISafetyAtlas.Examples.Registry` compile every registry-listed declaration
+through the root import. The hand-written examples in
+`AISafetyAtlas.Examples.PublicAPI` additionally protect the intended theorem
+signatures; the explicit targets in `scripts/lean_build_targets.txt` also build
+worked examples that are intentionally outside the public root import.
+Kernel axiom cleanliness of the headline surface is checked by
+`scripts/check_print_axioms.py`.
+
+External reproduction of the Kolmogorov pin (upstream checkout, not the
+vendored tree):
+
+```console
+scripts/reproduce_chaitin.sh
+```
 
 ## Build
 
@@ -46,10 +109,11 @@ Install Lean through [`elan`](https://lean-lang.org/install/manual/), then run:
 ```console
 lake update
 lake build
+xargs lake build < scripts/lean_build_targets.txt
 ```
 
-The repository pins both Lean and Mathlib. Released Lean files contain no
-`sorry`.
+The repository pins both Lean and Mathlib. Released Lean files follow the
+[strict-trust and build-closure policy](docs/guide/methodology.md#new-proofs-and-bridges).
 
 ## Contributing
 
