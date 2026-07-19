@@ -27,7 +27,7 @@ Difficulty: **S** self-contained verification, **M** new Lean/schema work,
   (`godel_second_incompleteness`) as a `RELATED` companion on the same row. The
   earlier Kritchman–Raz skeleton is retired.
 
-## CT-2 — Triage AFP `No_Free_Lunch_ML` for BY-020 / BY-021 (L)
+## CT-2 — Triage AFP `No_Free_Lunch_ML` for BY-020 / BY-021 (L) — **done (reproduced)**
 
 - **Goal:** inspect the AFP `No_Free_Lunch_ML` declarations and hypotheses,
   reproduce a pinned AFP artifact, and classify each of BY-020 and BY-021 as
@@ -36,6 +36,14 @@ Difficulty: **S** self-contained verification, **M** new Lean/schema work,
   reproduction log; a per-row relationship classification with reasoning.
 - **Does not change:** coverage until each row is reproduced and classified;
   a repository link alone is candidate evidence, not coverage.
+- **Done (2026-07-19):** AFP `No_Free_Lunch_ML` reproduced (pinned `2026-02-06`,
+  SHA-256 `93ce8953…173588`, `isabelle build` exit 0 via
+  `scripts/reproduce_isabelle.sh nfl`) and triaged as the Shalev-Shwartz–Ben-David
+  PAC no-free-lunch (Understanding ML §5.1) — **DISTINCT** from BY-020 (Wolpert
+  supervised NFL) and BY-021 (Wolpert–Macready optimization NFL). Candidate tags
+  removed from both rows; reproduced SSBD entry recorded as landscape row
+  `LAND-NFL-001`. Evidence:
+  [`ct2-nfl-triage.md`](../provenance/ct2-nfl-triage.md).
 
 ## CT-3 — Domain and statement review of the robot bridge (M) — **done (reviewed)**
 

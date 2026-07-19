@@ -1379,7 +1379,7 @@
       "status": "MAPPED",
       "ai_safety_relevance": "The survey identifies this result as relevant to limits on AI; no direct real-system implication is asserted here.",
       "ai_bridge_status": "HUMAN_REVIEW",
-      "notes": "Structured candidate: AFP No_Free_Lunch_ML (see candidate_formalizations). Declaration and relationship require statement-level verification (CT-2).",
+      "notes": "CT-2 (2026-07-19) resolved: AFP No_Free_Lunch_ML formalizes the Shalev-Shwartz–Ben-David PAC no-free-lunch (Understanding ML §5.1), a DISTINCT theorem from Wolpert 1996 supervised NFL — different statement, hypotheses (2m < |X|, realizability), and proof (adversarial sample-complexity lower bound vs uniform averaging over target functions). Not coverage; candidate removed. See docs/provenance/ct2-nfl-triage.md.",
       "formal_library_search": {
         "searched_on": "2026-07-18",
         "evidence_file": "docs/provenance/formalization-search.json",
@@ -1399,18 +1399,7 @@
           "supervised learning"
         ]
       },
-      "candidate_formalizations": [
-        {
-          "repository": "https://www.isa-afp.org/entries/No_Free_Lunch_ML.html",
-          "revision": "AFP release 2026-02-06",
-          "framework": "Isabelle/HOL",
-          "license": "BSD-3-Clause",
-          "declaration": "No_Free_Lunch_ML (session; declaration-level match pending CT-2)",
-          "inspection_state": "UNVERIFIED",
-          "relationship_review": "PENDING",
-          "notes": "Pinned six-corpus / note triage surfaces AFP entry No_Free_Lunch_ML. Statement-level comparison to Wolpert–Macready NFL for supervised learning vs optimization is open (CT-2). Not coverage."
-        }
-      ]
+      "candidate_formalizations": []
     },
     {
       "id": "BY-021",
@@ -1428,7 +1417,7 @@
       "status": "MAPPED",
       "ai_safety_relevance": "The survey identifies this result as relevant to limits on AI; no direct real-system implication is asserted here.",
       "ai_bridge_status": "HUMAN_REVIEW",
-      "notes": "Structured candidate: AFP No_Free_Lunch_ML shared with BY-020 (see candidate_formalizations). Relationship to the optimization row is unverified (CT-2).",
+      "notes": "CT-2 (2026-07-19) resolved: AFP No_Free_Lunch_ML formalizes the Shalev-Shwartz–Ben-David PAC no-free-lunch for binary classification (Understanding ML §5.1), a DISTINCT theorem from the Wolpert–Macready 1997 optimization NFL — it concerns classification learning, not black-box optimization over an objective landscape; no shared formal object. Not coverage; candidate removed. See docs/provenance/ct2-nfl-triage.md.",
       "formal_library_search": {
         "searched_on": "2026-07-18",
         "evidence_file": "docs/provenance/formalization-search.json",
@@ -1450,18 +1439,7 @@
           "macready"
         ]
       },
-      "candidate_formalizations": [
-        {
-          "repository": "https://www.isa-afp.org/entries/No_Free_Lunch_ML.html",
-          "revision": "AFP release 2026-02-06",
-          "framework": "Isabelle/HOL",
-          "license": "BSD-3-Clause",
-          "declaration": "No_Free_Lunch_ML (session; declaration-level match pending CT-2)",
-          "inspection_state": "UNVERIFIED",
-          "relationship_review": "PENDING",
-          "notes": "Pinned six-corpus / note triage surfaces AFP entry No_Free_Lunch_ML. Statement-level comparison to Wolpert–Macready NFL for supervised learning vs optimization is open (CT-2). Not coverage."
-        }
-      ]
+      "candidate_formalizations": []
     },
     {
       "id": "BY-022",

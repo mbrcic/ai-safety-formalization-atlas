@@ -77,6 +77,18 @@ The stable entry points are conventional theorem names under domain namespaces:
 - `AISafetyAtlas.Explainability.attribution_impossibility` (DASH trilemma;
   not BY-029/BY-042 without a separate statement map)
 
+Reproduced external formalizations that carry no Lean interface are pinned in
+[`landscape.yaml`](landscape.yaml), listed in the
+[landscape index](docs/status/landscape-index.md), and rebuilt with
+`scripts/reproduce_isabelle.sh`:
+
+- `Gibbard_Satterthwaite` (`LAND-GS-001`, Isabelle/HOL; Arrow-session
+  provenance related to BY-007; Isabelle-only, no Lean port planned)
+- `no_free_lunch_ML` (`LAND-NFL-001`, Isabelle/HOL; the Shalev-Shwartz–Ben-David
+  PAC no-free-lunch — the formal core of "generalization needs inductive bias" —
+  distinct from the Wolpert NFL survey rows BY-020/BY-021; see
+  [CT-2 triage](docs/provenance/ct2-nfl-triage.md))
+
 The Rice verification bridge concerns properties of partial input/output
 behavior; `AgentBehavior` is a downstream consumer that models encoded agents
 and total behavioral safety verifiers. The independent Robot bridge concerns

@@ -42,6 +42,14 @@ reproduce_arrow() {
     "ArrowImpossibilityGS"
 }
 
+reproduce_nfl() {
+  reproduce \
+    "https://isa-afp.org/release/afp-No_Free_Lunch_ML-2026-02-06.tar.gz" \
+    "93ce8953bac6b09a29f6d2aafa64d4dbedf49e11f13cdad4cddc42f95f173588" \
+    "No_Free_Lunch_ML" \
+    "No_Free_Lunch_ML"
+}
+
 case "${1:-all}" in
   rice)
     reproduce_rice
@@ -49,12 +57,16 @@ case "${1:-all}" in
   arrow)
     reproduce_arrow
     ;;
+  nfl)
+    reproduce_nfl
+    ;;
   all)
     reproduce_rice
     reproduce_arrow
+    reproduce_nfl
     ;;
   *)
-    echo "usage: $0 [rice|arrow|all]" >&2
+    echo "usage: $0 [rice|arrow|nfl|all]" >&2
     exit 2
     ;;
 esac

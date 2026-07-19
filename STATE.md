@@ -11,8 +11,8 @@ on `agent-work`; R6/R7 remediation; BY-012 and BY-033 bridges `REVIEWED`
   **8** survey results; headline `EXACT`/`EQUIVALENT` coverage
   **7 of 44**; RELATED-only **1**; reviewed
   AI-system bridges **2**; declaration layers WRAPPER **12** /
-  BRIDGE **4**; structured candidate leads **3**; landscape
-  entries **5** (see `landscape.yaml`).
+  BRIDGE **4**; structured candidate leads **1**; landscape
+  entries **6** (see `landscape.yaml`).
 <!-- END GENERATED REGISTRY SNAPSHOT -->
 
 Package version is **`0.2.0`** on this branch (`lakefile.toml`, `CITATION.cff`);
