@@ -4,3 +4,10 @@
 # Python validation artifacts.
 __pycache__/
 *.py[cod]
+
+# Local agent / IDE tool caches (not product source).
+.claude/
+.serena/
+.tokensave/
+**/CLAUDE.md
+.github/workflows/CLAUDE.md

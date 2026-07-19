@@ -10,7 +10,7 @@ For anything that changes formalization coverage, dependencies, or the public
 Lean API, open a formalization proposal issue first. Small factual corrections
 and documentation fixes may go directly to a pull request.
 
-Read the [roadmap](ROADMAP.md), [methodology](docs/methodology.md), and
+Read the [roadmap](ROADMAP.md), [methodology](docs/guide/methodology.md), and
 [public API and parsimony policy](AGENTS.md). In particular:
 
 - reuse a maintained theorem before writing another proof;
@@ -28,21 +28,46 @@ pins its Lean toolchain and Mathlib revision. From the repository root, run:
 ```console
 lake update
 lake build
+xargs lake build < scripts/lean_build_targets.txt
 python3 scripts/validate_registry.py
-python3 scripts/audit_release.py
+python3 scripts/generate_registry_views.py --check
+python3 scripts/validate_current_state.py
 ```
 
-Lean changes must compile without `sorry`, `admit`, or new axioms. If a change
-only affects documentation or registry evidence, still run both Python checks.
+Lean changes must compile under the strict-trust policy: no `sorry`, `admit`,
+new axioms, direct `sorryAx`, `native_decide`, or `@[implemented_by]`. Every
+Lean module must remain reachable from the public root or be listed in
+`scripts/lean_build_targets.txt`, which CI consumes directly. If a change only
+affects documentation or registry evidence, still run all three
+current-state Python checks. Run `scripts/generate_registry_views.py` without
+`--check` after changing registry data. `scripts/audit_release_v0_1.py` is
+historical and is not an ordinary development gate.
 
 ## Evidence and registry changes
 
-A verified formalization record needs an immutable version, exact module or
-file, declaration name, relationship to the surveyed statement, license, and
-reproduction status. Prefer primary sources. Do not infer coverage from a paper
-title, repository description, or keyword match.
+A verified external formalization record needs an immutable version, exact
+module or file, declaration name, relationship to the surveyed statement,
+license, and reproduction status. Same-repository records use `IN_TREE`,
+meaning the source in the same immutable checkout or release tag as the
+registry. Prefer primary sources. Do not infer coverage from a paper title,
+repository description, or keyword match; only reproduced `EXACT` and
+`EQUIVALENT` records increase headline coverage.
 
-`docs/formalization-search.json` is generated evidence. When search terms or
+A discovered-but-unaccepted formalization belongs in a result's
+`candidate_formalizations` list, not in `formalizations`. A candidate lead
+records repository, revision, framework, license, declaration,
+`inspection_state`, `relationship_review`, and notes, and never changes headline
+coverage. Promote it to a `formalizations` record only after reproduction and
+statement-level classification.
+
+Formalizations that are **not** Table-1 survey coverage (adjacent landscape)
+belong in [`landscape.yaml`](landscape.yaml), not in `registry.yaml` coverage
+counts. Public Lean landscape theorems on the root import must set
+`root_import: true` and keep `survey_coverage: null`. Regenerate views with
+`python3 scripts/generate_registry_views.py` (includes the landscape index and
+the `STATE.md` registry snapshot).
+
+`docs/provenance/formalization-search.json` is generated evidence. When search terms or
 pinned corpora change, regenerate it with
 `scripts/update_formalization_search.py`; do not hand-edit its results. Keep
 `registry.yaml`, the generated evidence, and the status documentation
@@ -58,7 +83,13 @@ list of atlas modifications.
 
 For an AI-safety bridge, state the modeled system, assumptions, quantifier
 order, mathematical conclusion, and the practical claim it does not establish.
-Bridge interpretation remains subject to separate human review.
+Bridge interpretation remains subject to separate human review, tracked by the
+`ai_bridge_status` lifecycle: `HUMAN_REVIEW` (default), `STATEMENT_REVIEWED`
+(the encoded statement accepted, interpretation not), and `REVIEWED` (both
+accepted). Graduating a bridge past `HUMAN_REVIEW` requires a `bridge_review`
+record (reviewer, date, the two review flags, and an evidence pointer); ordinary
+validation accepts a well-formed graduation, so recording a real review does not
+require editing a validator.
 
 ## Pull requests
 

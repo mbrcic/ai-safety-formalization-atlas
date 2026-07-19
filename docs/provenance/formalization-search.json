@@ -6,7 +6,7 @@
     "mathlib": {
       "framework": "Lean",
       "repository": "https://github.com/leanprover-community/mathlib4",
-      "version": "81a5d257c8e410db227a6665ed08f64fea08e997",
+      "version": "fabf563a7c95a166b8d7b6efca11c8b4dc9d911f",
       "scope": "Mathlib source tree"
     },
     "isabelle-afp": {

@@ -8,9 +8,11 @@ the most relevant results easy to find, verify, reuse, and extend without hiding
 the gap between a mathematical theorem and an informal claim about AI systems.
 
 This is a living strategic document for contributors. Current counts and
-short-term tasks live in [the status report](docs/formalization-status.md) and
-[project state](STATE.md); detailed research leads live in
-[open work](docs/open-work.md).
+short-term tasks live in [the status report](docs/status/formalization-status.md) and
+[project state](STATE.md); the full 44-row landscape is browsable in the
+generated [atlas index](docs/status/atlas-index.md); detailed research leads live in
+[open work](docs/guide/open-work.md) and bounded, ready-to-take units in
+[contributor tasks](docs/guide/contributor-tasks.md).
 
 ## What we are building
 
@@ -50,13 +52,13 @@ The initial survey inventory and cross-framework discovery pass are complete.
 The repository has verified external evidence and compiling Lean interfaces for
 computability limits, the halting problem, Arrow's theorem, and a utility
 representation of Arrow's theorem. See
-[formalization status](docs/formalization-status.md) for the maintained figures
-and [external formalizations](docs/external-formalizations.md) for reproduction
+[formalization status](docs/status/formalization-status.md) for the maintained figures
+and [external formalizations](docs/provenance/external-formalizations.md) for reproduction
 evidence.
 
-This foundation is deliberately narrow. The next work should test whether its
-interfaces support useful AI-safety statements before the atlas grows into more
-domains.
+The squashed v0.1 foundation is published on `main`. Further work is
+developed off `main` and proposed as a small reviewed delta rather than by
+replaying the private pre-squash history.
 
 ## Near-term work
 
@@ -73,6 +75,10 @@ Success means a contributor can use the canonical results without learning
 their upstream repository layouts or encountering multiple competing atlas
 versions of the same theorem.
 
+Development checkpoint: implemented on the local `agent-work` branch. A
+root-import compile contract exercises every documented entry point without
+exposing upstream declaration layouts. No competing theorem aliases were added.
+
 ### Build utility and value-alignment foundations
 
 - Re-verify the reported Lean development of von Neumann–Morgenstern expected
@@ -85,7 +91,21 @@ versions of the same theorem.
   value alignment, with interpretation reviewed separately from the proof.
 
 Success means the utility API supports at least one substantive downstream
-theorem without duplicating existing decision-theory libraries.
+theorem — a distinct result that imports and reuses the public utility
+vocabulary — without duplicating existing decision-theory libraries.
+
+Development checkpoint: partially implemented on the local `agent-work` branch.
+What is done is a completed utility-facing social-choice bridge: the utility
+Arrow theorem represents finite total preorders by lower-contour cardinalities.
+Its representation machinery is private to `Utility.lean` and consumed there to
+prove that module's own public Arrow bridge; no separate theorem or module yet
+imports the public utility vocabulary for an independent result. The broader
+success criterion — a reusable utility foundation with a distinct downstream
+consumer, and any value-comparison or value-alignment result — therefore remains
+open, not met. The vNM existence and uniqueness development was reproduced at an
+immutable revision, but remains provenance rather than a dependency because the
+atlas has no current theorem requiring lottery infrastructure. A larger utility
+dependency will not be added merely to satisfy the wording.
 
 ### State one precise verification or containment limit
 
@@ -97,6 +117,44 @@ theorem without duplicating existing decision-theory libraries.
 
 Success means a reusable bridge theorem, not an AI-themed alias for Rice's
 theorem.
+
+Development checkpoint: implemented on the local `agent-work` branch as two
+independent bridges over the computability facade.
+`AISafetyAtlas.Verification.rice` maps properties of partial input/output
+behavior to Mathlib program codes. A downstream consumer,
+`AISafetyAtlas.Verification.AgentBehavior.no_behavioral_safety_verifier`, models
+encoded agents and total `BehavioralSafetyVerifier`s and reduces through `rice`
+(CT-4). Separately,
+`AISafetyAtlas.Verification.Robot.action_safety_unverifiable` reduces directly
+to `AISafetyAtlas.Computability.halting_problem`; forcing it through the Rice
+interface would obscure the paper's switching construction rather than provide
+reuse. The robot theorem models total reactive action traces and makes that
+construction explicit. It is a machine-checked conditional computability core for
+van Leeuwen and Wiedermann's Theorem 1, not a formalization of its complete
+robotics language or an ethical interpretation. The scope and external robotics
+precedents are recorded in `docs/guide/robot-verification-model.md`. Bridge
+review status (v0.2): BY-012 AgentBehavior and BY-033 robot are maintainer
+**`REVIEWED`** (robot formalization relationship remains **`RELATED`**; CT-3
+evidence at `docs/bridges/ct3-robot-review-package.md`). Finite-state and
+otherwise bounded systems, sound incomplete methods, and real-system claims
+beyond the scoped interpretation packages remain outside the automatic
+conclusion. Live status: [`STATE.md`](STATE.md) and
+[`docs/status/formalization-status.md`](docs/status/formalization-status.md).
+
+Post-v0.1 / v0.2 implementation checkpoint: near-term outcomes compile on
+`agent-work`. Current-state validation is independent of the immutable v0.1
+audit. Publication of **0.2.0** is described in
+[`docs/releases/v0.2.md`](docs/releases/v0.2.md) and still requires maintainer
+authorization to merge to `main`.
+
+Structural-integrity checkpoint: the post-v0.1 external reviews' immediate
+findings are resolved locally. Ordinary CI checks timeless invariants rather
+than historical release counts. A single target manifest and import-closure
+validator ensure every Lean source is built; strict-trust scanning is
+self-tested; generated reporting separates `EXACT`/`EQUIVALENT` coverage from
+`RELATED` bridges; and same-repository evidence uses revision-relative
+`IN_TREE` provenance. Broader search infrastructure and a website remain
+deferred until a reviewed downstream bridge demonstrates demand.
 
 ## Research workstreams
 
@@ -146,7 +204,7 @@ answers:
 4. Which public interface will downstream proofs use?
 5. Which interpretation claims require domain review?
 
-Contributions should follow [the methodology](docs/methodology.md), update the
+Contributions should follow [the methodology](docs/guide/methodology.md), update the
 registry when coverage claims change, and leave the repository building without
 incomplete proofs.
 

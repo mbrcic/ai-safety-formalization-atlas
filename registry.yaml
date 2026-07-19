@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 3,
   "survey": {
     "title": "Impossibility Results in AI: A Survey",
     "authors": [
@@ -28,6 +28,15 @@
       "WRAPPER",
       "NEW_PROOF",
       "BRIDGE"
+    ],
+    "spdx_license": [
+      "Apache-2.0",
+      "BSD-3-Clause"
+    ],
+    "ai_bridge_status": [
+      "HUMAN_REVIEW",
+      "STATEMENT_REVIEWED",
+      "REVIEWED"
     ]
   },
   "source_catalog": {
@@ -291,12 +300,12 @@
     "survey-ref-069": {
       "survey_number": 69,
       "citation": "J. van Leeuwen and J. Wiedermann, “Impossibility Results for the Online Verification of Ethical and Legal Behaviour of Robots,” Utrecht University, Utrecht, UU-PCS-2021-02, 2021. Accessed: Aug. 12, 2021. [Online]. Available: http://www.cs.uu.nl/groups/AD/UU-PCS-2021-02.pdf",
-      "locator": "http://www.cs.uu.nl/groups/AD/UU-PCS-2021-02.pdf"
+      "locator": "https://web.archive.org/web/20220222045551/http://www.cs.uu.nl/groups/AD/UU-PCS-2021-02.pdf"
     },
     "survey-ref-070": {
       "survey_number": 70,
-      "citation": "C. J. Reynolds, “On the Computational Complexity of Action Evaluations,” Netherlands, 2005. Accessed: Jul. 01, 2021. [Online]. Available: https://www.media.mit.edu/publications/on-the-computational-complexity-of-action- evaluations/",
-      "locator": "https://www.media.mit.edu/publications/on-the-computational-complexity-of-action-"
+      "citation": "C. J. Reynolds, “On the Computational Complexity of Action Evaluations,” Netherlands, 2005. Accessed: Jul. 01, 2021. [Online]. Available: https://www.media.mit.edu/publications/on-the-computational-complexity-of-action-evaluations/",
+      "locator": "https://www.media.mit.edu/publications/on-the-computational-complexity-of-action-evaluations/"
     },
     "survey-ref-071": {
       "survey_number": 71,
@@ -336,6 +345,12 @@
       "survey_number": 78,
       "citation": "W. J. Howe and R. V. Yampolskiy, “Impossibility of Unambiguous Communication as a Source of Failure in AI Systems,” presented at the IJCAI-21 Workshop on Artificial Intelligence Safety (AISafety2021), Montreal, Quebec, Canada, Aug. 2021. doi: 10.13140/RG.2.2.13245.28641.",
       "locator": "https://doi.org/10.13140/RG.2.2.13245.28641"
+    },
+    "atlas-ref-melo-2024": {
+      "citation": "G. A. Melo, M. R. O. A. Máximo, N. Y. Soma, and P. A. L. Castro, “On the Undecidability of Artificial Intelligence Alignment: Machines that Halt,” arXiv:2408.08995, 2024; also Sci. Rep., 2025.",
+      "locator": "https://arxiv.org/abs/2408.08995",
+      "role": "related_literature",
+      "notes": "Not a Brčić–Yampolskiy Table-1 source. Related to BY-012 Rice packaging via AgentBehavior; see docs/guide/related-literature.md and landscape LAND-MELO-001."
     }
   },
   "results": [
@@ -355,10 +370,10 @@
       "status": "MAPPED",
       "ai_safety_relevance": "The survey identifies this result as relevant to limits on AI; no direct real-system implication is asserted here.",
       "ai_bridge_status": "HUMAN_REVIEW",
-      "notes": "Corrected control-theory queries surface Isabelle AFP observability candidates; statement-level equivalence remains unverified.",
+      "notes": "Structured candidate leads under candidate_formalizations (AFP observability pointers). Statement-level equivalence remains unverified.",
       "formal_library_search": {
         "searched_on": "2026-07-18",
-        "evidence_file": "docs/formalization-search.json",
+        "evidence_file": "docs/provenance/formalization-search.json",
         "searched_corpora": [
           "mathlib",
           "isabelle-afp",
@@ -376,7 +391,19 @@
           "state reconstruction",
           "observable output"
         ]
-      }
+      },
+      "candidate_formalizations": [
+        {
+          "repository": "https://www.isa-afp.org/",
+          "revision": "AFP release 2026-02-06",
+          "framework": "Isabelle/HOL",
+          "license": "BSD-3-Clause",
+          "declaration": "(AFP observability / control candidates; declaration pending)",
+          "inspection_state": "UNVERIFIED",
+          "relationship_review": "PENDING",
+          "notes": "Control-theory discovery queries surface AFP observability-related theories; no single declaration has been statement-matched to BY-001 Unobservability. Promoted from free-text notes into candidate_formalizations (R6-4)."
+        }
+      ]
     },
     {
       "id": "BY-002",
@@ -398,7 +425,7 @@
       "notes": "Statement-level equivalence to each cited source remains subject to source comparison.",
       "formal_library_search": {
         "searched_on": "2026-07-18",
-        "evidence_file": "docs/formalization-search.json",
+        "evidence_file": "docs/provenance/formalization-search.json",
         "searched_corpora": [
           "mathlib",
           "isabelle-afp",
@@ -434,7 +461,7 @@
       "notes": "Statement-level equivalence to each cited source remains subject to source comparison.",
       "formal_library_search": {
         "searched_on": "2026-07-18",
-        "evidence_file": "docs/formalization-search.json",
+        "evidence_file": "docs/provenance/formalization-search.json",
         "searched_corpora": [
           "mathlib",
           "isabelle-afp",
@@ -469,7 +496,7 @@
       "notes": "Statement-level equivalence to each cited source remains subject to source comparison.",
       "formal_library_search": {
         "searched_on": "2026-07-18",
-        "evidence_file": "docs/formalization-search.json",
+        "evidence_file": "docs/provenance/formalization-search.json",
         "searched_corpora": [
           "mathlib",
           "isabelle-afp",
@@ -504,7 +531,7 @@
       "notes": "Statement-level equivalence to each cited source remains subject to source comparison.",
       "formal_library_search": {
         "searched_on": "2026-07-18",
-        "evidence_file": "docs/formalization-search.json",
+        "evidence_file": "docs/provenance/formalization-search.json",
         "searched_corpora": [
           "mathlib",
           "isabelle-afp",
@@ -541,7 +568,7 @@
       "notes": "Statement-level equivalence to each cited source remains subject to source comparison.",
       "formal_library_search": {
         "searched_on": "2026-07-18",
-        "evidence_file": "docs/formalization-search.json",
+        "evidence_file": "docs/provenance/formalization-search.json",
         "searched_corpora": [
           "mathlib",
           "isabelle-afp",
@@ -577,6 +604,8 @@
           "relationship": "EQUIVALENT",
           "reproduced": true,
           "license": "Apache-2.0",
+          "build_environment": "leanprover/lean4:v4.31.0; mathlib@fabf563a7c95a166b8d7b6efca11c8b4dc9d911f",
+          "build_command": "lake build AISafetyAtlas",
           "module": "Arrow/Arrow.lean; vendored as AISafetyAtlas.Upstream.Arrow",
           "declaration": "Impossibility"
         },
@@ -586,7 +615,7 @@
           "version": "AFP release 2026-02-06 (SHA256 8174c738b42203100170ff25f3c9fc2c6d16d8556fbaff205c0eaa98a3813da7)",
           "relationship": "EQUIVALENT",
           "reproduced": true,
-          "license": "BSD-3-Clause (AFP BSD License)",
+          "license": "BSD-3-Clause",
           "build_environment": "makarius/isabelle@sha256:9bd33b183c399327c5d554fc8cde27c29b5d2b20cdc6fe7a604caa3f951018fc",
           "build_command": "scripts/reproduce_isabelle.sh arrow",
           "module": "Thys/Arrow_Order.thy; session ArrowImpossibilityGS",
@@ -598,7 +627,7 @@
           "version": "AFP release 2026-02-06 (SHA256 8174c738b42203100170ff25f3c9fc2c6d16d8556fbaff205c0eaa98a3813da7)",
           "relationship": "EQUIVALENT",
           "reproduced": true,
-          "license": "BSD-3-Clause (AFP BSD License)",
+          "license": "BSD-3-Clause",
           "build_environment": "makarius/isabelle@sha256:9bd33b183c399327c5d554fc8cde27c29b5d2b20cdc6fe7a604caa3f951018fc",
           "build_command": "scripts/reproduce_isabelle.sh arrow",
           "module": "Thys/Arrow_Utility.thy; session ArrowImpossibilityGS",
@@ -606,13 +635,21 @@
         }
       ],
       "lean_artifact": {
-        "type": "BRIDGE",
-        "source_declarations": [
-          "AISafetyAtlas.Upstream.Arrow.Impossibility"
-        ],
-        "atlas_declarations": [
-          "AISafetyAtlas.SocialChoice.arrow",
-          "AISafetyAtlas.SocialChoice.Utility.arrow"
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.SocialChoice.arrow",
+            "type": "WRAPPER",
+            "source_declarations": [
+              "AISafetyAtlas.Upstream.Arrow.Impossibility"
+            ]
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.SocialChoice.Utility.arrow",
+            "type": "BRIDGE",
+            "source_declarations": [
+              "AISafetyAtlas.Upstream.Arrow.Impossibility"
+            ]
+          }
         ]
       },
       "status": "LEAN_AVAILABLE",
@@ -621,7 +658,7 @@
       "notes": "CC Liang's Lean 4 order proof is the canonical mathematical source and is vendored at an immutable Apache-2.0 commit with only module, namespace, visibility, and interface-reducibility changes. The atlas exposes one stable order theorem and proves one utility-representation bridge from it. The two reproduced Isabelle/HOL variants remain provenance and specification references, not additional coverage results.",
       "formal_library_search": {
         "searched_on": "2026-07-18",
-        "evidence_file": "docs/formalization-search.json",
+        "evidence_file": "docs/provenance/formalization-search.json",
         "searched_corpora": [
           "mathlib",
           "isabelle-afp",
@@ -660,7 +697,7 @@
       "notes": "Statement-level equivalence to each cited source remains subject to source comparison.",
       "formal_library_search": {
         "searched_on": "2026-07-18",
-        "evidence_file": "docs/formalization-search.json",
+        "evidence_file": "docs/provenance/formalization-search.json",
         "searched_corpora": [
           "mathlib",
           "isabelle-afp",
@@ -697,7 +734,7 @@
       "notes": "Statement-level equivalence to each cited source remains subject to source comparison.",
       "formal_library_search": {
         "searched_on": "2026-07-18",
-        "evidence_file": "docs/formalization-search.json",
+        "evidence_file": "docs/provenance/formalization-search.json",
         "searched_corpora": [
           "mathlib",
           "isabelle-afp",
@@ -734,7 +771,7 @@
       "notes": "Statement-level equivalence to each cited source remains subject to source comparison.",
       "formal_library_search": {
         "searched_on": "2026-07-18",
-        "evidence_file": "docs/formalization-search.json",
+        "evidence_file": "docs/provenance/formalization-search.json",
         "searched_corpora": [
           "mathlib",
           "isabelle-afp",
@@ -770,7 +807,7 @@
       "notes": "Statement-level equivalence to each cited source remains subject to source comparison.",
       "formal_library_search": {
         "searched_on": "2026-07-18",
-        "evidence_file": "docs/formalization-search.json",
+        "evidence_file": "docs/provenance/formalization-search.json",
         "searched_corpora": [
           "mathlib",
           "isabelle-afp",
@@ -802,20 +839,24 @@
         {
           "framework": "Lean",
           "repository": "https://github.com/leanprover-community/mathlib4",
-          "version": "81a5d257c8e410db227a6665ed08f64fea08e997",
+          "version": "fabf563a7c95a166b8d7b6efca11c8b4dc9d911f",
           "module": "Mathlib.Computability.Halting",
           "reproduced": true,
           "license": "Apache-2.0",
+          "build_environment": "leanprover/lean4:v4.31.0; mathlib@fabf563a7c95a166b8d7b6efca11c8b4dc9d911f",
+          "build_command": "lake build AISafetyAtlas",
           "declaration": "ComputablePred.rice",
           "relationship": "EQUIVALENT"
         },
         {
           "framework": "Lean",
           "repository": "https://github.com/leanprover-community/mathlib4",
-          "version": "81a5d257c8e410db227a6665ed08f64fea08e997",
+          "version": "fabf563a7c95a166b8d7b6efca11c8b4dc9d911f",
           "module": "Mathlib.Computability.Halting",
           "reproduced": true,
           "license": "Apache-2.0",
+          "build_environment": "leanprover/lean4:v4.31.0; mathlib@fabf563a7c95a166b8d7b6efca11c8b4dc9d911f",
+          "build_command": "lake build AISafetyAtlas",
           "declaration": "ComputablePred.rice₂",
           "relationship": "EXACT"
         },
@@ -827,29 +868,58 @@
           "declaration": "Rice_2",
           "relationship": "EQUIVALENT",
           "reproduced": true,
-          "license": "BSD-3-Clause (AFP BSD License)",
+          "license": "BSD-3-Clause",
           "build_environment": "makarius/isabelle@sha256:9bd33b183c399327c5d554fc8cde27c29b5d2b20cdc6fe7a604caa3f951018fc",
           "build_command": "scripts/reproduce_isabelle.sh rice"
         }
       ],
       "lean_artifact": {
-        "type": "WRAPPER",
-        "source_declarations": [
-          "ComputablePred.rice",
-          "ComputablePred.rice₂"
-        ],
-        "atlas_declarations": [
-          "AISafetyAtlas.Computability.rice",
-          "AISafetyAtlas.Computability.rice_code_iff"
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Computability.rice",
+            "type": "WRAPPER",
+            "source_declarations": [
+              "ComputablePred.rice"
+            ]
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Computability.rice_code_iff",
+            "type": "WRAPPER",
+            "source_declarations": [
+              "ComputablePred.rice₂"
+            ]
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Verification.rice",
+            "type": "BRIDGE",
+            "source_declarations": [
+              "ComputablePred.rice₂"
+            ]
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Verification.AgentBehavior.no_behavioral_safety_verifier",
+            "type": "BRIDGE",
+            "source_declarations": [
+              "AISafetyAtlas.Verification.rice",
+              "AISafetyAtlas.Computability.rice_code_iff"
+            ]
+          }
         ]
       },
       "status": "LEAN_AVAILABLE",
       "ai_safety_relevance": "The survey identifies this result as relevant to limits on AI; no direct real-system implication is asserted here.",
-      "ai_bridge_status": "HUMAN_REVIEW",
-      "notes": "Mathlib v4.32.0 provides an equivalent extensional-function theorem and an exact code-set characterization. Isabelle Rice_2 independently verifies the ordinary undecidability result. Reproduced Rice_1 adds an explicit one-reduction and Rice_3 adds a c.e.-set interface, but neither is an additional survey coverage result or a current Lean migration target.",
+      "ai_bridge_status": "REVIEWED",
+      "bridge_review": {
+        "reviewer": "Mario Brčić (mbrcic)",
+        "date": "2026-07-19",
+        "statement_reviewed": true,
+        "interpretation_reviewed": true,
+        "evidence": "docs/bridges/review-by-012-agentbehavior.md"
+      },
+      "notes": "Mathlib v4.31.0 provides an equivalent extensional-function theorem and an exact code-set characterization. The atlas keeps those canonical wrappers and derives one semantic-to-code verification bridge for properties stated on partial input/output behavior; it makes no claim about a particular AI system. Isabelle Rice_2 independently verifies the ordinary undecidability result. Reproduced Rice_1 adds an explicit one-reduction and Rice_3 adds a c.e.-set interface, but neither is an additional survey coverage result or a current Lean migration target. Downstream consumer of Verification.rice: AISafetyAtlas.Verification.AgentBehavior.no_behavioral_safety_verifier models encoded agents as Mathlib program codes and proves no total BehavioralSafetyVerifier exists for a nontrivial I/O safety specification (CT-4 / R6-8). Melo et al. (arXiv:2408.08995) apply Rice to a comparable agent/program and non-trivial I/O-judge decision problem; the atlas formalizes the Rice packaging, not that paper’s full narrative or architecture proposals. Maintainer bridge review 2026-07-19 (REVIEWED): statement and scoped AI-safety interpretation accepted (see bridge_review evidence). Paper list: docs/status/paper-coverage.md. Related literature: atlas-ref-melo-2024; landscape LAND-MELO-001; related literature docs/guide/related-literature.md. Bridge REVIEWED (2026-07-19) applies to the AI-facing bridges Verification.rice and AgentBehavior.no_behavioral_safety_verifier (statement + scoped interpretation); it is not a re-audit of Mathlib Rice as novel AI-safety content. See docs/bridges/review-by-012-agentbehavior.md and docs/releases/v0.2.md.",
       "formal_library_search": {
         "searched_on": "2026-07-18",
-        "evidence_file": "docs/formalization-search.json",
+        "evidence_file": "docs/provenance/formalization-search.json",
         "searched_corpora": [
           "mathlib",
           "isabelle-afp",
@@ -883,15 +953,57 @@
       "original_source_refs": [
         "survey-ref-001"
       ],
-      "formalizations": [],
-      "lean_artifact": null,
-      "status": "MAPPED",
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "repository": "https://github.com/FormalizedFormalLogic/Foundation",
+          "version": "b47cf447255addf88a5d72781d0d29641948eb6e",
+          "module": "Foundation.FirstOrder.Incompleteness.First",
+          "declaration": "LO.FirstOrder.Arithmetic.exists_true_but_unprovable_sentence",
+          "relationship": "EQUIVALENT",
+          "reproduced": true,
+          "license": "Apache-2.0",
+          "build_environment": "leanprover/lean4:v4.31.0; Foundation@b47cf447255addf88a5d72781d0d29641948eb6e",
+          "build_command": "lake build AISafetyAtlas"
+        },
+        {
+          "framework": "Lean",
+          "repository": "https://github.com/FormalizedFormalLogic/Foundation",
+          "version": "b47cf447255addf88a5d72781d0d29641948eb6e",
+          "module": "Foundation.FirstOrder.Incompleteness.Second",
+          "declaration": "LO.FirstOrder.Arithmetic.consistent_unprovable",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "license": "Apache-2.0",
+          "build_environment": "leanprover/lean4:v4.31.0; Foundation@b47cf447255addf88a5d72781d0d29641948eb6e",
+          "build_command": "lake build AISafetyAtlas"
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Logic.godel_first_incompleteness",
+            "type": "WRAPPER",
+            "source_declarations": [
+              "LO.FirstOrder.Arithmetic.exists_true_but_unprovable_sentence"
+            ]
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Logic.godel_second_incompleteness",
+            "type": "WRAPPER",
+            "source_declarations": [
+              "LO.FirstOrder.Arithmetic.consistent_unprovable"
+            ]
+          }
+        ]
+      },
+      "status": "LEAN_AVAILABLE",
       "ai_safety_relevance": "The survey identifies this result as relevant to limits on AI; no direct real-system implication is asserted here.",
       "ai_bridge_status": "HUMAN_REVIEW",
-      "notes": "Statement-level equivalence to each cited source remains subject to source comparison.",
+      "notes": "Gödel's first incompleteness theorem (exists_true_but_unprovable_sentence) is reproduced from FormalizedFormalLogic/Foundation at the pinned revision and exposed via the thin atlas wrapper AISafetyAtlas.Logic.godel_first_incompleteness; this is the BY-013 statement match (EQUIVALENT). The theorem is the classical result for any concrete Δ₁-definable, 𝚺₁-sound arithmetic theory interpreting 𝗥₀ — not an abstract axiomatized skeleton. Gödel's second incompleteness theorem (consistent_unprovable: T ⊬ Con(T) for consistent theories interpreting 𝗜𝚺₁) is a distinct companion result, exposed via AISafetyAtlas.Logic.godel_second_incompleteness and recorded here as RELATED (not the BY-013 first-incompleteness claim, so not double-counted). All three atlas wrappers depend only on [propext, Classical.choice, Quot.sound].",
       "formal_library_search": {
         "searched_on": "2026-07-18",
-        "evidence_file": "docs/formalization-search.json",
+        "evidence_file": "docs/provenance/formalization-search.json",
         "searched_corpora": [
           "mathlib",
           "isabelle-afp",
@@ -928,54 +1040,72 @@
         {
           "framework": "Lean",
           "repository": "https://github.com/leanprover-community/mathlib4",
-          "version": "81a5d257c8e410db227a6665ed08f64fea08e997",
+          "version": "fabf563a7c95a166b8d7b6efca11c8b4dc9d911f",
           "module": "Mathlib.Computability.Halting",
           "reproduced": true,
           "license": "Apache-2.0",
+          "build_environment": "leanprover/lean4:v4.31.0; mathlib@fabf563a7c95a166b8d7b6efca11c8b4dc9d911f",
+          "build_command": "lake build AISafetyAtlas",
           "declaration": "ComputablePred.halting_problem_re",
           "relationship": "RELATED"
         },
         {
           "framework": "Lean",
           "repository": "https://github.com/leanprover-community/mathlib4",
-          "version": "81a5d257c8e410db227a6665ed08f64fea08e997",
+          "version": "fabf563a7c95a166b8d7b6efca11c8b4dc9d911f",
           "module": "Mathlib.Computability.Halting",
           "reproduced": true,
           "license": "Apache-2.0",
+          "build_environment": "leanprover/lean4:v4.31.0; mathlib@fabf563a7c95a166b8d7b6efca11c8b4dc9d911f",
+          "build_command": "lake build AISafetyAtlas",
           "declaration": "ComputablePred.halting_problem",
           "relationship": "EXACT"
         },
         {
           "framework": "Lean",
           "repository": "https://github.com/leanprover-community/mathlib4",
-          "version": "81a5d257c8e410db227a6665ed08f64fea08e997",
+          "version": "fabf563a7c95a166b8d7b6efca11c8b4dc9d911f",
           "module": "Mathlib.Computability.Halting",
           "reproduced": true,
           "license": "Apache-2.0",
+          "build_environment": "leanprover/lean4:v4.31.0; mathlib@fabf563a7c95a166b8d7b6efca11c8b4dc9d911f",
+          "build_command": "lake build AISafetyAtlas",
           "declaration": "ComputablePred.halting_problem_not_re",
           "relationship": "RELATED"
         }
       ],
       "lean_artifact": {
-        "type": "WRAPPER",
-        "source_declarations": [
-          "ComputablePred.halting_problem_re",
-          "ComputablePred.halting_problem",
-          "ComputablePred.halting_problem_not_re"
-        ],
-        "atlas_declarations": [
-          "AISafetyAtlas.Computability.halting_re",
-          "AISafetyAtlas.Computability.halting_problem",
-          "AISafetyAtlas.Computability.nonhalting_not_re"
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Computability.halting_re",
+            "type": "WRAPPER",
+            "source_declarations": [
+              "ComputablePred.halting_problem_re"
+            ]
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Computability.halting_problem",
+            "type": "WRAPPER",
+            "source_declarations": [
+              "ComputablePred.halting_problem"
+            ]
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Computability.nonhalting_not_re",
+            "type": "WRAPPER",
+            "source_declarations": [
+              "ComputablePred.halting_problem_not_re"
+            ]
+          }
         ]
       },
       "status": "LEAN_AVAILABLE",
       "ai_safety_relevance": "The survey identifies this result as relevant to limits on AI; no direct real-system implication is asserted here.",
       "ai_bridge_status": "HUMAN_REVIEW",
-      "notes": "Mathlib v4.32.0 formalizes recursive enumerability, noncomputability, and non-r.e. complement results for the fixed-input halting predicate.",
+      "notes": "Mathlib v4.31.0 formalizes recursive enumerability, noncomputability, and non-r.e. complement results for the fixed-input halting predicate.",
       "formal_library_search": {
         "searched_on": "2026-07-18",
-        "evidence_file": "docs/formalization-search.json",
+        "evidence_file": "docs/provenance/formalization-search.json",
         "searched_corpora": [
           "mathlib",
           "isabelle-afp",
@@ -1009,15 +1139,45 @@
       "original_source_refs": [
         "survey-ref-039"
       ],
-      "formalizations": [],
-      "lean_artifact": null,
-      "status": "MAPPED",
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "repository": "https://github.com/AlexeyMilovanov/kolmogorov-complexity-lean",
+          "version": "005ac4c81eefe09642ef561057199d489cd79485",
+          "module": "KolmogorovMathlib.Complexity.Chaitin",
+          "declaration": "FormalSystem.chaitinIncompleteness",
+          "relationship": "EQUIVALENT",
+          "reproduced": true,
+          "license": "Apache-2.0",
+          "build_environment": "leanprover/lean4:v4.31.0; mathlib@fabf563a7c95a166b8d7b6efca11c8b4dc9d911f",
+          "build_command": "scripts/reproduce_chaitin.sh"
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Logic.chaitin_incompleteness",
+            "type": "WRAPPER",
+            "source_declarations": [
+              "Kolmogorov.FormalSystem.chaitinIncompleteness"
+            ]
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Logic.chaitin_bound",
+            "type": "WRAPPER",
+            "source_declarations": [
+              "Kolmogorov.FormalSystem.chaitinBound"
+            ]
+          }
+        ]
+      },
+      "status": "LEAN_AVAILABLE",
       "ai_safety_relevance": "The survey identifies this result as relevant to limits on AI; no direct real-system implication is asserted here.",
       "ai_bridge_status": "HUMAN_REVIEW",
-      "notes": "Statement-level equivalence to each cited source remains subject to source comparison.",
+      "notes": "External Lean formalization of Chaitin's incompleteness is reproduced at the pinned revision (EQUIVALENT) and exposed via thin atlas wrappers under AISafetyAtlas.Logic. The proof body is vendored under AISafetyAtlas.Upstream.KolmogorovMathlib for Lean module compatibility (Apache-2.0, same pin). The development uses an abstract sound r.e. FormalSystem, not a concrete arithmetic theory. Classical Gödel first and second incompleteness (concrete arithmetic theories) are covered separately under BY-013 via FormalizedFormalLogic/Foundation; the earlier Kritchman–Raz second-incompleteness skeleton has been retired.",
       "formal_library_search": {
         "searched_on": "2026-07-18",
-        "evidence_file": "docs/formalization-search.json",
+        "evidence_file": "docs/provenance/formalization-search.json",
         "searched_corpora": [
           "mathlib",
           "isabelle-afp",
@@ -1044,15 +1204,38 @@
       "original_source_refs": [
         "survey-ref-040"
       ],
-      "formalizations": [],
-      "lean_artifact": null,
-      "status": "MAPPED",
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "repository": "https://github.com/FormalizedFormalLogic/Foundation",
+          "version": "b47cf447255addf88a5d72781d0d29641948eb6e",
+          "reproduced": true,
+          "license": "Apache-2.0",
+          "build_environment": "leanprover/lean4:v4.31.0; Foundation@b47cf447255addf88a5d72781d0d29641948eb6e",
+          "build_command": "lake build AISafetyAtlas",
+          "module": "Foundation.FirstOrder.Incompleteness.Tarski",
+          "declaration": "LO.FirstOrder.Arithmetic.undefinability_of_truth",
+          "relationship": "EQUIVALENT"
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Logic.tarski_undefinability",
+            "type": "WRAPPER",
+            "source_declarations": [
+              "LO.FirstOrder.Arithmetic.undefinability_of_truth"
+            ]
+          }
+        ]
+      },
+      "status": "LEAN_AVAILABLE",
       "ai_safety_relevance": "The survey identifies this result as relevant to limits on AI; no direct real-system implication is asserted here.",
       "ai_bridge_status": "HUMAN_REVIEW",
-      "notes": "Statement-level equivalence to each cited source remains subject to source comparison.",
+      "notes": "Tarski's undefinability of truth is reproduced from FormalizedFormalLogic/Foundation at the pinned revision and exposed via AISafetyAtlas.Logic.tarski_undefinability. The statement is the classical arithmetic form (no arithmetic truth predicate for the standard model), classified EQUIVALENT to the survey informal claim. A related no-Tarski-predicate lemma for consistent IΣ₁-extensions is upstream but not separately counted.",
       "formal_library_search": {
         "searched_on": "2026-07-18",
-        "evidence_file": "docs/formalization-search.json",
+        "evidence_file": "docs/provenance/formalization-search.json",
         "searched_corpora": [
           "mathlib",
           "isabelle-afp",
@@ -1090,7 +1273,7 @@
       "notes": "Statement-level equivalence to each cited source remains subject to source comparison.",
       "formal_library_search": {
         "searched_on": "2026-07-18",
-        "evidence_file": "docs/formalization-search.json",
+        "evidence_file": "docs/provenance/formalization-search.json",
         "searched_corpora": [
           "mathlib",
           "isabelle-afp",
@@ -1127,7 +1310,7 @@
       "notes": "Statement-level equivalence to each cited source remains subject to source comparison.",
       "formal_library_search": {
         "searched_on": "2026-07-18",
-        "evidence_file": "docs/formalization-search.json",
+        "evidence_file": "docs/provenance/formalization-search.json",
         "searched_corpora": [
           "mathlib",
           "isabelle-afp",
@@ -1164,7 +1347,7 @@
       "notes": "Statement-level equivalence to each cited source remains subject to source comparison.",
       "formal_library_search": {
         "searched_on": "2026-07-18",
-        "evidence_file": "docs/formalization-search.json",
+        "evidence_file": "docs/provenance/formalization-search.json",
         "searched_corpora": [
           "mathlib",
           "isabelle-afp",
@@ -1196,10 +1379,10 @@
       "status": "MAPPED",
       "ai_safety_relevance": "The survey identifies this result as relevant to limits on AI; no direct real-system implication is asserted here.",
       "ai_bridge_status": "HUMAN_REVIEW",
-      "notes": "The rerun surfaces AFP No_Free_Lunch_ML as a candidate; its declaration and relationship require statement-level verification.",
+      "notes": "Structured candidate: AFP No_Free_Lunch_ML (see candidate_formalizations). Declaration and relationship require statement-level verification (CT-2).",
       "formal_library_search": {
         "searched_on": "2026-07-18",
-        "evidence_file": "docs/formalization-search.json",
+        "evidence_file": "docs/provenance/formalization-search.json",
         "searched_corpora": [
           "mathlib",
           "isabelle-afp",
@@ -1215,7 +1398,19 @@
           "no free lunch",
           "supervised learning"
         ]
-      }
+      },
+      "candidate_formalizations": [
+        {
+          "repository": "https://www.isa-afp.org/entries/No_Free_Lunch_ML.html",
+          "revision": "AFP release 2026-02-06",
+          "framework": "Isabelle/HOL",
+          "license": "BSD-3-Clause",
+          "declaration": "No_Free_Lunch_ML (session; declaration-level match pending CT-2)",
+          "inspection_state": "UNVERIFIED",
+          "relationship_review": "PENDING",
+          "notes": "Pinned six-corpus / note triage surfaces AFP entry No_Free_Lunch_ML. Statement-level comparison to Wolpert–Macready NFL for supervised learning vs optimization is open (CT-2). Not coverage."
+        }
+      ]
     },
     {
       "id": "BY-021",
@@ -1233,10 +1428,10 @@
       "status": "MAPPED",
       "ai_safety_relevance": "The survey identifies this result as relevant to limits on AI; no direct real-system implication is asserted here.",
       "ai_bridge_status": "HUMAN_REVIEW",
-      "notes": "Precise optimization queries remove the prior 143-file noise set. AFP No_Free_Lunch_ML remains a candidate whose relationship to this row is unverified.",
+      "notes": "Structured candidate: AFP No_Free_Lunch_ML shared with BY-020 (see candidate_formalizations). Relationship to the optimization row is unverified (CT-2).",
       "formal_library_search": {
         "searched_on": "2026-07-18",
-        "evidence_file": "docs/formalization-search.json",
+        "evidence_file": "docs/provenance/formalization-search.json",
         "searched_corpora": [
           "mathlib",
           "isabelle-afp",
@@ -1254,7 +1449,19 @@
           "wolpert",
           "macready"
         ]
-      }
+      },
+      "candidate_formalizations": [
+        {
+          "repository": "https://www.isa-afp.org/entries/No_Free_Lunch_ML.html",
+          "revision": "AFP release 2026-02-06",
+          "framework": "Isabelle/HOL",
+          "license": "BSD-3-Clause",
+          "declaration": "No_Free_Lunch_ML (session; declaration-level match pending CT-2)",
+          "inspection_state": "UNVERIFIED",
+          "relationship_review": "PENDING",
+          "notes": "Pinned six-corpus / note triage surfaces AFP entry No_Free_Lunch_ML. Statement-level comparison to Wolpert–Macready NFL for supervised learning vs optimization is open (CT-2). Not coverage."
+        }
+      ]
     },
     {
       "id": "BY-022",
@@ -1276,7 +1483,7 @@
       "notes": "Statement-level equivalence to each cited source remains subject to source comparison.",
       "formal_library_search": {
         "searched_on": "2026-07-18",
-        "evidence_file": "docs/formalization-search.json",
+        "evidence_file": "docs/provenance/formalization-search.json",
         "searched_corpora": [
           "mathlib",
           "isabelle-afp",
@@ -1314,7 +1521,7 @@
       "notes": "Statement-level equivalence to each cited source remains subject to source comparison.",
       "formal_library_search": {
         "searched_on": "2026-07-18",
-        "evidence_file": "docs/formalization-search.json",
+        "evidence_file": "docs/provenance/formalization-search.json",
         "searched_corpora": [
           "mathlib",
           "isabelle-afp",
@@ -1353,7 +1560,7 @@
       "notes": "Statement-level equivalence to each cited source remains subject to source comparison.",
       "formal_library_search": {
         "searched_on": "2026-07-18",
-        "evidence_file": "docs/formalization-search.json",
+        "evidence_file": "docs/provenance/formalization-search.json",
         "searched_corpora": [
           "mathlib",
           "isabelle-afp",
@@ -1388,7 +1595,7 @@
       "notes": "Statement-level equivalence to each cited source remains subject to source comparison.",
       "formal_library_search": {
         "searched_on": "2026-07-18",
-        "evidence_file": "docs/formalization-search.json",
+        "evidence_file": "docs/provenance/formalization-search.json",
         "searched_corpora": [
           "mathlib",
           "isabelle-afp",
@@ -1428,7 +1635,7 @@
       "notes": "Statement-level equivalence to each cited source remains subject to source comparison.",
       "formal_library_search": {
         "searched_on": "2026-07-18",
-        "evidence_file": "docs/formalization-search.json",
+        "evidence_file": "docs/provenance/formalization-search.json",
         "searched_corpora": [
           "mathlib",
           "isabelle-afp",
@@ -1452,19 +1659,42 @@
       "mechanism_category": "DEDUCTION",
       "domain_category": "SYMBOLIC",
       "survey_proof_assessment": "PROVEN",
-      "informal_claim": "A sufficiently strong formal system cannot generally prove its own soundness; the precise modal reading follows Löb's hypotheses.",
+      "informal_claim": "Löb's theorem: if a sufficiently strong formal system T proves Prov_T(σ) → σ, then T already proves σ (under the source's arithmetic hypotheses).",
       "original_source_refs": [
         "survey-ref-062"
       ],
-      "formalizations": [],
-      "lean_artifact": null,
-      "status": "MAPPED",
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "repository": "https://github.com/FormalizedFormalLogic/Foundation",
+          "version": "b47cf447255addf88a5d72781d0d29641948eb6e",
+          "reproduced": true,
+          "license": "Apache-2.0",
+          "build_environment": "leanprover/lean4:v4.31.0; Foundation@b47cf447255addf88a5d72781d0d29641948eb6e",
+          "build_command": "lake build AISafetyAtlas",
+          "module": "Foundation.FirstOrder.Incompleteness.Löb",
+          "declaration": "LO.FirstOrder.Arithmetic.löb_theorem",
+          "relationship": "EQUIVALENT"
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Logic.loeb",
+            "type": "WRAPPER",
+            "source_declarations": [
+              "LO.FirstOrder.Arithmetic.löb_theorem"
+            ]
+          }
+        ]
+      },
+      "status": "LEAN_AVAILABLE",
       "ai_safety_relevance": "The survey identifies this result as relevant to limits on AI; no direct real-system implication is asserted here.",
       "ai_bridge_status": "HUMAN_REVIEW",
-      "notes": "The corrected search records AFP Loebs_Theorem and Goedel_Incompleteness/Loeb candidates plus HOL Light GL provability-logic candidates; exact declarations and relationships remain unverified.",
+      "notes": "Löb's theorem (if T proves Prov_T(σ)→σ then T proves σ) is reproduced from FormalizedFormalLogic/Foundation and exposed via AISafetyAtlas.Logic.loeb. Classified EQUIVALENT to the survey row named \"Löb's theorem (unverifiability)\": the formalization matches the Löb schema itself. The informal AI-safety reading \"cannot prove own soundness\" is a standard consequence under the theorem's hypotheses (Δ₁ theory interpreting IΣ₁), recorded as interpretation context only and not as a separate coverage claim. AFP Loebs_Theorem and HOL Light GL remain discovery provenance only. (Re-triaged 2026-07-19 per adversarial review R6-5.)",
       "formal_library_search": {
         "searched_on": "2026-07-18",
-        "evidence_file": "docs/formalization-search.json",
+        "evidence_file": "docs/provenance/formalization-search.json",
         "searched_corpora": [
           "mathlib",
           "isabelle-afp",
@@ -1505,7 +1735,7 @@
       "notes": "Statement-level equivalence to each cited source remains subject to source comparison.",
       "formal_library_search": {
         "searched_on": "2026-07-18",
-        "evidence_file": "docs/formalization-search.json",
+        "evidence_file": "docs/provenance/formalization-search.json",
         "searched_corpora": [
           "mathlib",
           "isabelle-afp",
@@ -1540,7 +1770,7 @@
       "notes": "Statement-level equivalence to each cited source remains subject to source comparison.",
       "formal_library_search": {
         "searched_on": "2026-07-18",
-        "evidence_file": "docs/formalization-search.json",
+        "evidence_file": "docs/provenance/formalization-search.json",
         "searched_corpora": [
           "mathlib",
           "isabelle-afp",
@@ -1576,7 +1806,7 @@
       "notes": "Statement-level equivalence to each cited source remains subject to source comparison.",
       "formal_library_search": {
         "searched_on": "2026-07-18",
-        "evidence_file": "docs/formalization-search.json",
+        "evidence_file": "docs/provenance/formalization-search.json",
         "searched_corpora": [
           "mathlib",
           "isabelle-afp",
@@ -1611,7 +1841,7 @@
       "notes": "Statement-level equivalence to each cited source remains subject to source comparison.",
       "formal_library_search": {
         "searched_on": "2026-07-18",
-        "evidence_file": "docs/formalization-search.json",
+        "evidence_file": "docs/provenance/formalization-search.json",
         "searched_corpora": [
           "mathlib",
           "isabelle-afp",
@@ -1646,7 +1876,7 @@
       "notes": "Statement-level equivalence to each cited source remains subject to source comparison.",
       "formal_library_search": {
         "searched_on": "2026-07-18",
-        "evidence_file": "docs/formalization-search.json",
+        "evidence_file": "docs/provenance/formalization-search.json",
         "searched_corpora": [
           "mathlib",
           "isabelle-afp",
@@ -1671,19 +1901,42 @@
       "mechanism_category": "DEDUCTION",
       "domain_category": "SYMBOLIC",
       "survey_proof_assessment": "PROVEN",
-      "informal_claim": "Online verification of unrestricted ethical and legal robot behaviour is impossible in the cited model.",
+      "informal_claim": "Theorem 1 (van Leeuwen & Wiedermann 2021): for any non-trivial robot property P there is no algorithmic procedure that tells, for an arbitrary robot with potentially unbounded memory, whether its actions always satisfy P. Corollary 1: same conclusion restricted to robots programmed by structured programs. (Paper Def. 3 defines non-triviality via a switchable base program pair; ethics/legality are motivating instances, not the only P.)",
       "original_source_refs": [
         "survey-ref-069"
       ],
-      "formalizations": [],
-      "lean_artifact": null,
-      "status": "MAPPED",
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE",
+          "module": "AISafetyAtlas.Verification.Robot",
+          "declaration": "AISafetyAtlas.Verification.Robot.action_safety_unverifiable",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "license": "Apache-2.0",
+          "build_environment": "leanprover/lean4:v4.31.0; mathlib@fabf563a7c95a166b8d7b6efca11c8b4dc9d911f",
+          "build_command": "lake build AISafetyAtlas.Verification.Robot AISafetyAtlas.Examples.Robot"
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Verification.Robot.action_safety_unverifiable",
+            "type": "BRIDGE",
+            "source_declarations": [
+              "AISafetyAtlas.Computability.halting_problem"
+            ]
+          }
+        ]
+      },
+      "status": "LEAN_AVAILABLE",
       "ai_safety_relevance": "The survey identifies this result as relevant to limits on AI; no direct real-system implication is asserted here.",
-      "ai_bridge_status": "HUMAN_REVIEW",
-      "notes": "Statement-level equivalence to each cited source remains subject to source comparison.",
+      "ai_bridge_status": "REVIEWED",
+      "notes": "Extracted paper statements (Theorem 1, Corollary 1, Defs 2–3) and a step-by-step proof comparison are in docs/guide/robot-verification-model.md (source: UU-PCS-2021-02 §3.2). The paper proof is longer than Lean's because it constructs τ_x (Fig. 1) from Def. 3 non-triviality inside Sense–Plan–Act (paced TM simulation, hyper-command validity, unbounded memory), then reduces diagonal K to the observer problem; Lean packages τ as SwitchingConstruction and only machine-checks the reduction half (fixed-input halting via Mathlib, equally undecidable). A concrete paced-computation example witnesses the assumption for Mathlib codes. Relationship is RELATED, not EXACT/EQUIVALENT: SPA syntax, Def. 3 derivation, probability, physical dynamics, and ethical/legal interpretation are not mechanized. Does not cover bounded/finite-state systems; does not exclude sound incomplete verification. Paper-model correspondence remains HUMAN_REVIEW. CT-3 2026-07-19: maintainer REVIEWED (statement + scoped interpretation); formalization relationship remains RELATED (SwitchingConstruction assumed; not paper EXACT); evidence docs/bridges/ct3-robot-review-package.md.",
       "formal_library_search": {
         "searched_on": "2026-07-18",
-        "evidence_file": "docs/formalization-search.json",
+        "evidence_file": "docs/provenance/formalization-search.json",
         "searched_corpora": [
           "mathlib",
           "isabelle-afp",
@@ -1697,6 +1950,13 @@
           "robot ethics verification",
           "ethical robot"
         ]
+      },
+      "bridge_review": {
+        "reviewer": "Mario Brčić (mbrcic)",
+        "date": "2026-07-19",
+        "statement_reviewed": true,
+        "interpretation_reviewed": true,
+        "evidence": "docs/bridges/ct3-robot-review-package.md"
       }
     },
     {
@@ -1719,7 +1979,7 @@
       "notes": "Statement-level equivalence to each cited source remains subject to source comparison.",
       "formal_library_search": {
         "searched_on": "2026-07-18",
-        "evidence_file": "docs/formalization-search.json",
+        "evidence_file": "docs/provenance/formalization-search.json",
         "searched_corpora": [
           "mathlib",
           "isabelle-afp",
@@ -1754,7 +2014,7 @@
       "notes": "Statement-level equivalence to each cited source remains subject to source comparison.",
       "formal_library_search": {
         "searched_on": "2026-07-18",
-        "evidence_file": "docs/formalization-search.json",
+        "evidence_file": "docs/provenance/formalization-search.json",
         "searched_corpora": [
           "mathlib",
           "isabelle-afp",
@@ -1789,7 +2049,7 @@
       "notes": "Statement-level equivalence to each cited source remains subject to source comparison.",
       "formal_library_search": {
         "searched_on": "2026-07-18",
-        "evidence_file": "docs/formalization-search.json",
+        "evidence_file": "docs/provenance/formalization-search.json",
         "searched_corpora": [
           "mathlib",
           "isabelle-afp",
@@ -1825,7 +2085,7 @@
       "notes": "Statement-level equivalence to each cited source remains subject to source comparison.",
       "formal_library_search": {
         "searched_on": "2026-07-18",
-        "evidence_file": "docs/formalization-search.json",
+        "evidence_file": "docs/provenance/formalization-search.json",
         "searched_corpora": [
           "mathlib",
           "isabelle-afp",
@@ -1860,7 +2120,7 @@
       "notes": "Statement-level equivalence to each cited source remains subject to source comparison.",
       "formal_library_search": {
         "searched_on": "2026-07-18",
-        "evidence_file": "docs/formalization-search.json",
+        "evidence_file": "docs/provenance/formalization-search.json",
         "searched_corpora": [
           "mathlib",
           "isabelle-afp",
@@ -1895,7 +2155,7 @@
       "notes": "Statement-level equivalence to each cited source remains subject to source comparison.",
       "formal_library_search": {
         "searched_on": "2026-07-18",
-        "evidence_file": "docs/formalization-search.json",
+        "evidence_file": "docs/provenance/formalization-search.json",
         "searched_corpora": [
           "mathlib",
           "isabelle-afp",
@@ -1931,7 +2191,7 @@
       "notes": "Statement-level equivalence to each cited source remains subject to source comparison.",
       "formal_library_search": {
         "searched_on": "2026-07-18",
-        "evidence_file": "docs/formalization-search.json",
+        "evidence_file": "docs/provenance/formalization-search.json",
         "searched_corpora": [
           "mathlib",
           "isabelle-afp",
@@ -1966,7 +2226,7 @@
       "notes": "Statement-level equivalence to each cited source remains subject to source comparison.",
       "formal_library_search": {
         "searched_on": "2026-07-18",
-        "evidence_file": "docs/formalization-search.json",
+        "evidence_file": "docs/provenance/formalization-search.json",
         "searched_corpora": [
           "mathlib",
           "isabelle-afp",
@@ -1999,7 +2259,7 @@
       "notes": "Introduced in the survey; statement-level semantic review is required.",
       "formal_library_search": {
         "searched_on": "2026-07-18",
-        "evidence_file": "docs/formalization-search.json",
+        "evidence_file": "docs/provenance/formalization-search.json",
         "searched_corpora": [
           "mathlib",
           "isabelle-afp",
@@ -2032,7 +2292,7 @@
       "notes": "Introduced in the survey; statement-level semantic review is required.",
       "formal_library_search": {
         "searched_on": "2026-07-18",
-        "evidence_file": "docs/formalization-search.json",
+        "evidence_file": "docs/provenance/formalization-search.json",
         "searched_corpora": [
           "mathlib",
           "isabelle-afp",
@@ -2066,7 +2326,7 @@
       "notes": "Introduced in the survey; statement-level semantic review is required.",
       "formal_library_search": {
         "searched_on": "2026-07-18",
-        "evidence_file": "docs/formalization-search.json",
+        "evidence_file": "docs/provenance/formalization-search.json",
         "searched_corpora": [
           "mathlib",
           "isabelle-afp",

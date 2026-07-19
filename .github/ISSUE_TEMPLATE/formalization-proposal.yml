@@ -24,7 +24,7 @@ body:
     attributes:
       label: Survey result or research target
       description: Give the BY identifier when applicable, otherwise name the target precisely.
-      placeholder: "BY-001 — Rice's theorem"
+      placeholder: "BY-012 — Rice's theorem"
     validations:
       required: true
   - type: textarea

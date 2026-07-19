@@ -14,7 +14,7 @@ belong in `registry.yaml` under `formalizations`.
 
 | ID | Framework | Version | Scope |
 |---|---|---|---|
-| mathlib | Lean | `81a5d257c8e410db227a6665ed08f64fea08e997` | Mathlib source tree |
+| mathlib | Lean | `fabf563a7c95a166b8d7b6efca11c8b4dc9d911f` | Mathlib source tree |
 | isabelle-afp | Isabelle/HOL | `AFP release 2026-02-06` | All AFP entry source files |
 | rocq-undecidability | Rocq/Coq | `c7257b736763d7b2bc3bd25ac47d5fb7ce749c9c` | Default-branch source snapshot |
 | hol4 | HOL4 | `3e2cd21c3c465ecd77540b1eb1146b4916158cdf` | Default-branch source snapshot |
