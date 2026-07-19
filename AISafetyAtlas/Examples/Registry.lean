@@ -18,5 +18,6 @@ import AISafetyAtlas
 #check AISafetyAtlas.Logic.chaitin_incompleteness
 #check AISafetyAtlas.Logic.chaitin_bound
 #check AISafetyAtlas.Logic.tarski_undefinability
+#check AISafetyAtlas.Learning.no_free_lunch
 #check AISafetyAtlas.Logic.loeb
 #check AISafetyAtlas.Verification.Robot.action_safety_unverifiable

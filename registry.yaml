@@ -1368,7 +1368,7 @@
       "status": "MAPPED",
       "ai_safety_relevance": "The survey identifies this result as relevant to limits on AI; no direct real-system implication is asserted here.",
       "ai_bridge_status": "HUMAN_REVIEW",
-      "notes": "CT-2 (2026-07-19) resolved: AFP No_Free_Lunch_ML formalizes the Shalev-Shwartz–Ben-David PAC no-free-lunch (Understanding ML §5.1), a DISTINCT theorem from Wolpert 1996 supervised NFL — different statement, hypotheses (2m < |X|, realizability), and proof (adversarial sample-complexity lower bound vs uniform averaging over target functions). Not coverage; candidate removed. See docs/provenance/ct2-nfl-triage.md.",
+      "notes": "CT-2 (2026-07-19) resolved: AFP No_Free_Lunch_ML formalizes the Shalev-Shwartz–Ben-David PAC no-free-lunch (Understanding ML §5.1), a DISTINCT theorem from Wolpert 1996 supervised NFL — different statement, hypotheses (2m < |X|, realizability), and proof (adversarial sample-complexity lower bound vs uniform averaging over target functions). Not coverage; candidate removed. See docs/provenance/ct2-nfl-triage.md. Lean AISafetyAtlas.Learning.no_free_lunch (2026-07-19) covers the optimization/non-adaptive uniform-averaging core for BY-021 (RELATED), not the supervised off-training-set form of this BY-020 row; BY-020 remains without a dedicated formalization.",
       "formal_library_search": {
         "searched_on": "2026-07-18",
         "evidence_file": "docs/provenance/formalization-search.json",
@@ -1401,12 +1401,36 @@
       "original_source_refs": [
         "survey-ref-019"
       ],
-      "formalizations": [],
-      "lean_artifact": null,
-      "status": "MAPPED",
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE",
+          "module": "AISafetyAtlas.Learning",
+          "declaration": "AISafetyAtlas.Learning.no_free_lunch",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "license": "Apache-2.0",
+          "build_environment": "leanprover/lean4:v4.31.0; mathlib@fabf563a7c95a166b8d7b6efca11c8b4dc9d911f",
+          "build_command": "lake build AISafetyAtlas.Learning AISafetyAtlas.Examples.PublicAPI"
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Learning.no_free_lunch",
+            "type": "NEW_PROOF",
+            "source_declarations": [
+              "AISafetyAtlas.Learning.sum_performance_eq_scaled_sum",
+              "AISafetyAtlas.Learning.aggregatePerformance_eq_scaled_sum"
+            ]
+          }
+        ]
+      },
+      "status": "LEAN_AVAILABLE",
       "ai_safety_relevance": "The survey identifies this result as relevant to limits on AI; no direct real-system implication is asserted here.",
       "ai_bridge_status": "HUMAN_REVIEW",
-      "notes": "CT-2 (2026-07-19) resolved: AFP No_Free_Lunch_ML formalizes the Shalev-Shwartz–Ben-David PAC no-free-lunch for binary classification (Understanding ML §5.1), a DISTINCT theorem from the Wolpert–Macready 1997 optimization NFL — it concerns classification learning, not black-box optimization over an objective landscape; no shared formal object. Not coverage; candidate removed. See docs/provenance/ct2-nfl-triage.md.",
+      "notes": "Lean NEW_PROOF (2026-07-19): AISafetyAtlas.Learning.no_free_lunch formalizes the finite-domain non-adaptive uniform-averaging core of Wolpert–Macready 1997 — for finite X,Y, any cost-sequence score Φ, any two injective m-point schedules have equal sum of Φ over all objectives f:X→Y (equivalently the closed form |Y|^{|X|-m}·∑_c Φ(c)). Relationship is RELATED, not EXACT/EQUIVALENT: adaptive query trees, stochastic algorithms, and time-varying objectives from the paper are not mechanized. Distinct from BY-020 (supervised Wolpert 1996 off-training-set form), from SSBD PAC NFL / AFP No_Free_Lunch_ML (LAND-NFL-001), and from continuous free lunches (BY-022). CT-2: Isabelle No_Free_Lunch_ML remains DISTINCT landscape substrate, not BY-021 coverage. Provenance: docs/provenance/lean-wolpert-nfl.md. ai_bridge_status stays HUMAN_REVIEW.",
       "formal_library_search": {
         "searched_on": "2026-07-18",
         "evidence_file": "docs/provenance/formalization-search.json",

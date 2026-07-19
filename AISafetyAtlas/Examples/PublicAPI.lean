@@ -143,4 +143,12 @@ example (fs : AISafetyAtlas.Explainability.FeatureIndex)
   AISafetyAtlas.Explainability.attribution_impossibility
     fs Model attribution hrash ℓ j k hj hk hjk ranking h_faithful
 
+-- Finite-domain Wolpert–Macready NFL (non-adaptive uniform averaging).
+example {X Y : Type*} [Fintype X] [Fintype Y] {m : ℕ}
+    (Φ : AISafetyAtlas.Learning.CostPerformance m Y)
+    (s₁ s₂ : AISafetyAtlas.Learning.NonadaptiveSchedule X m) :
+    AISafetyAtlas.Learning.aggregatePerformance Φ s₁ =
+      AISafetyAtlas.Learning.aggregatePerformance Φ s₂ :=
+  AISafetyAtlas.Learning.no_free_lunch Φ s₁ s₂
+
 end AISafetyAtlas.Examples.PublicAPI

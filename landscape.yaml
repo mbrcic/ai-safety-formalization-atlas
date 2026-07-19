@@ -73,7 +73,7 @@
         "BY-020",
         "BY-021"
       ],
-      "survey_coverage_note": "DISTINCT from BY-020 (Wolpert 1996 supervised NFL) and BY-021 (Wolpert–Macready 1997 optimization NFL): this is the PAC / sample-complexity NFL (Understanding ML Thm 5.1), not the uniform-averaging Wolpert results. Not BY-020/021 coverage. See docs/provenance/ct2-nfl-triage.md.",
+      "survey_coverage_note": "DISTINCT from BY-020 (Wolpert 1996 supervised NFL) and BY-021 (Wolpert–Macready 1997 optimization NFL): this is the PAC / sample-complexity NFL (Understanding ML Thm 5.1), not the uniform-averaging Wolpert results. Not BY-020/021 coverage. See docs/provenance/ct2-nfl-triage.md. The in-tree Lean AISafetyAtlas.Learning.no_free_lunch (BY-021 RELATED) is also DISTINCT from this landscape entry.",
       "framework": "Isabelle/HOL",
       "license": "BSD-3-Clause",
       "repository": "https://www.isa-afp.org/entries/No_Free_Lunch_ML.html",
@@ -83,7 +83,7 @@
       "module": "No_Free_Lunch_ML.thy",
       "declaration": "no_free_lunch_ML",
       "reproduction": "scripts/reproduce_isabelle.sh nfl",
-      "notes": "Statement-level triage (CT-2, 2026-07-19): matches SSBD Thm 5.1 — for binary classification with 2*m < |space X|, every learner admits a realizable distribution on which P[L(A(S)) > 1/8] >= 1/7. Session depends only on HOL-Probability. Reproduction log recorded in docs/provenance/ct2-nfl-triage.md."
+      "notes": "Statement-level triage (CT-2, 2026-07-19): matches SSBD Thm 5.1 — for binary classification with 2*m < |space X|, every learner admits a realizable distribution on which P[L(A(S)) > 1/8] >= 1/7. Session depends only on HOL-Probability. Reproduction log recorded in docs/provenance/ct2-nfl-triage.md. Lean Wolpert NFL (docs/provenance/lean-wolpert-nfl.md) does not replace or cover this entry."
     },
     {
       "id": "LAND-PE-001",

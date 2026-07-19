@@ -2,6 +2,7 @@ module
 
 public import AISafetyAtlas.Computability
 public import AISafetyAtlas.Explainability
+public import AISafetyAtlas.Learning
 public import AISafetyAtlas.Logic
 public import AISafetyAtlas.SocialChoice
 public import AISafetyAtlas.SocialChoice.Utility

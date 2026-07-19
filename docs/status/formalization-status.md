@@ -11,12 +11,12 @@ do not affect the headline coverage count. Regenerate this page with
 |---|---:|
 | Survey results inventoried | 44 / 44 |
 | Survey results with verified `EXACT`/`EQUIVALENT` formalizations | 7 |
-| Additional survey results with `RELATED` formalizations only | 1 |
-| Verified formalization records | 15 |
-| Atlas Lean theorem declarations | 16 across 8 survey results |
+| Additional survey results with `RELATED` formalizations only | 2 |
+| Verified formalization records | 16 |
+| Atlas Lean theorem declarations | 17 across 9 survey results |
 | … of which `WRAPPER` | 12 |
 | … of which `BRIDGE` | 4 |
-| … of which `NEW_PROOF` | 0 |
+| … of which `NEW_PROOF` | 1 |
 | … of which `REFERENCE` | 0 |
 | Survey rows whose atlas Lean is wrapper-only | 5 |
 | Survey rows with at least one `BRIDGE` declaration | 3 |
@@ -42,6 +42,7 @@ its interpretation is under `HUMAN_REVIEW`.
 | BY-014 | Undecidability | `RELATED`<br>`EXACT` | `ComputablePred.halting_problem_re`<br>`ComputablePred.halting_problem`<br>`ComputablePred.halting_problem_not_re` | `AISafetyAtlas.Computability.halting_re (WRAPPER)`<br>`AISafetyAtlas.Computability.halting_problem (WRAPPER)`<br>`AISafetyAtlas.Computability.nonhalting_not_re (WRAPPER)` |
 | BY-015 | Chaitin incompleteness | `EQUIVALENT` | `Kolmogorov.FormalSystem.chaitinIncompleteness`<br>`Kolmogorov.FormalSystem.chaitinBound` | `AISafetyAtlas.Logic.chaitin_incompleteness (WRAPPER)`<br>`AISafetyAtlas.Logic.chaitin_bound (WRAPPER)` |
 | BY-016 | Undefinability | `EQUIVALENT` | `LO.FirstOrder.Arithmetic.undefinability_of_truth` | `AISafetyAtlas.Logic.tarski_undefinability (WRAPPER)` |
+| BY-021 | No Free Lunch — optimization | `RELATED` | `AISafetyAtlas.Learning.sum_performance_eq_scaled_sum`<br>`AISafetyAtlas.Learning.aggregatePerformance_eq_scaled_sum` | `AISafetyAtlas.Learning.no_free_lunch (NEW_PROOF)` |
 | BY-027 | Löb's theorem (unverifiability) | `EQUIVALENT` | `LO.FirstOrder.Arithmetic.löb_theorem` | `AISafetyAtlas.Logic.loeb (WRAPPER)` |
 | BY-033 | Unverifiability of robot ethics | `RELATED` | `AISafetyAtlas.Computability.halting_problem` | `AISafetyAtlas.Verification.Robot.action_safety_unverifiable (BRIDGE)` |
 

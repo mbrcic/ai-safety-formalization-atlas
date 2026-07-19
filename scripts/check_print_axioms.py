@@ -34,6 +34,8 @@ DECLARATIONS = [
     "AISafetyAtlas.Logic.tarski_undefinability",
     "AISafetyAtlas.Logic.loeb",
     "AISafetyAtlas.Explainability.attribution_impossibility",
+    "AISafetyAtlas.Learning.no_free_lunch",
+    "AISafetyAtlas.Learning.sum_performance_eq_scaled_sum",
     "AISafetyAtlas.Verification.rice",
     "AISafetyAtlas.Verification.AgentBehavior.no_behavioral_safety_verifier",
     "AISafetyAtlas.Verification.Robot.action_safety_unverifiable",
