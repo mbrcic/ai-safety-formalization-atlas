@@ -22,9 +22,10 @@ machine-checked. A bound, a guarantee, a tradeoff, a limit — impossibility and
 possibility run on the same machinery. The seed is impossibility results by
 design, the direction this project pushes further; the door is open to whatever
 is interesting. DeepMind's doubly-efficient debate — a scalable-oversight
-guarantee already machine-checked in Lean 4 — is a case in point: reproducing
-it here is [open work](docs/guide/contributor-tasks.md#open-now), and if nobody
-takes it, it still lands. The first possibility result proven natively will be
+guarantee machine-checked in Lean 4 — is now reproduced here
+([`LAND-DEBATE-001`](docs/provenance/debate-reproduction.md)): the first
+possibility result in the ledger, dual to the impossibility rows. The first
+possibility result proven *natively* will be
 continuous free lunches (BY-022, [open](docs/guide/contributor-tasks.md#open-now)),
 where No-Free-Lunch provably breaks. The field is moving toward provable safety.
 The Atlas is where that work gets done in the open.

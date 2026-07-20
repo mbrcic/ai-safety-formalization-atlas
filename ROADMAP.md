@@ -161,9 +161,11 @@ deferred until a reviewed downstream bridge demonstrates demand.
 These workstreams may proceed when a concrete theorem and a maintainer are
 identified:
 
-- **AI-safety-native formalizations:** review debate and attribution
-  impossibility developments at statement and build level before registry
-  inclusion.
+- **AI-safety-native formalizations:** doubly-efficient debate is reproduced
+  into the landscape (`LAND-DEBATE-001`, Path A build at upstream v4.8);
+  attribution impossibility is in-atlas (`LAND-ATTR-001`). Remaining: an in-tree
+  import surface for debate (Path B port-then-wrap) only when a downstream
+  consumer needs it, and debate follow-ups with no existing proof (CT-9).
 - **Unformalized high-value results:** investigate No Free Lunch and the
   survey-introduced proof sketches using primary sources; do not treat an
   unsuccessful search as proof that no formalization exists.

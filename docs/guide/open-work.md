@@ -113,7 +113,8 @@ current registry and public API so assimilation does not re-open completed work.
    Optional: dedicated statement map or bridge if a named containment API is
    needed; do not claim BY-025 is formalized.
 3. **AI-native landscape (not survey coverage):** DeepMind doubly-efficient
-   debate still needs pin/build/license review. **Attribution impossibility** is
+   debate is **reproduced** (`LAND-DEBATE-001`, CT-7, Path A build at upstream
+   v4.8; `scripts/reproduce_debate.sh`). **Attribution impossibility** is
    **in-atlas** as `AISafetyAtlas.Explainability.attribution_impossibility`
    and listed in [`landscape.yaml`](../../landscape.yaml) (`LAND-ATTR-001`; not
    BY-042/BY-029 coverage).
