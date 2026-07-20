@@ -71,8 +71,26 @@ jobs:
       - name: Skip notice
         if: steps.filter.outputs.run_lean != 'true'
         run: echo "No Lean-related paths changed; skipping lake build and axiom check."
+      # Cache only Foundation (full Gödel I/II, source-built — not in the Mathlib
+      # CDN cache). Mathlib and its deps come from `lake exe cache get` each run,
+      # so we never tar/restore gigabytes of Mathlib oleans. Keyed on the
+      # toolchain + manifest; the prefix restore-key reuses a prior Foundation
+      # build across manifest bumps (lake revalidates traces).
+      - name: Cache Foundation build (skip cold Gödel rebuild)
+        if: steps.filter.outputs.run_lean == 'true'
+        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        with:
+          path: .lake/packages/Foundation
+          key: foundation-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json') }}
+          restore-keys: |
+            foundation-${{ runner.os }}-${{ runner.arch }}-
       - uses: leanprover/lean-action@38fbc41a8c28c4cbaec22d7f7de508ec2e7c0dd9 # v1
         if: steps.filter.outputs.run_lean == 'true'
+        with:
+          # Mathlib oleans via CDN (fast); do not GitHub-cache the whole .lake
+          # (multi-GB, slow tar, risks the 10 GB repo cache cap → evictions).
+          use-mathlib-cache: "true"
+          use-github-cache: "false"
       - name: Compile explicit non-root Lean targets
         if: steps.filter.outputs.run_lean == 'true'
         run: xargs lake build < scripts/lean_build_targets.txt
