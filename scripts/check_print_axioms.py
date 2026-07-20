@@ -36,6 +36,8 @@ DECLARATIONS = [
     "AISafetyAtlas.Explainability.attribution_impossibility",
     "AISafetyAtlas.Learning.no_free_lunch",
     "AISafetyAtlas.Learning.no_free_lunch_supervised",
+    "AISafetyAtlas.Learning.homogeneous_of_learner_indep",
+    "AISafetyAtlas.Learning.homogeneous_iff_learner_indep",
     "AISafetyAtlas.Learning.sum_performance_eq_scaled_sum",
     "AISafetyAtlas.Learning.sum_pointLoss_off_training",
     "AISafetyAtlas.Verification.rice",

@@ -10,6 +10,7 @@ public import Mathlib.Logic.Equiv.Fin.Basic
 public import Mathlib.Logic.Equiv.Fintype
 public import Mathlib.Logic.Equiv.Prod
 public import Mathlib.Logic.Equiv.Set
+public import Mathlib.SetTheory.Cardinal.Finite
 
 /-!
 # Learning limits — finite-domain No Free Lunch (Wolpert)
@@ -391,11 +392,11 @@ priors remain out of scope (open collaboration work). -/
 /--
 A loss `ℓ prediction truth` is **homogeneous** (Wolpert's condition): for any two
 predictions there is a relabeling of the truth values matching their loss
-profiles. **Sufficient** for the off-training-set error distribution to be
-learner-independent (`lossConfig_sum_learner_indep`). The converse — necessity,
-which holds given at least one off-training point — is a tight iff but is not yet
-formalized (separate NEW_PROOF pass); until then this is a one-directional claim.
-0-1 loss qualifies (`homogeneous_zeroOne`).
+profiles. Given at least one off-training point this is **exactly** the condition
+under which the off-training-set error distribution is learner-independent:
+sufficiency is `lossConfig_sum_learner_indep`, necessity is
+`homogeneous_of_learner_indep`, and the two are packaged as the tight `iff`
+`homogeneous_iff_learner_indep`. 0-1 loss qualifies (`homogeneous_zeroOne`).
 -/
 public def HomogeneousLoss {Y : Type*} (ℓ : Y → Y → ℝ) : Prop :=
   ∀ a₁ a₂ : Y, ∃ π : Y ≃ Y, ∀ y, ℓ a₂ y = ℓ a₁ (π y)
@@ -682,5 +683,145 @@ public theorem no_free_lunch_adaptive
         by_cases hf : observed r f = c <;> simp [hf]
     _ = K * ∑ c : Fin m → Y, Ψ c := by
         rw [← Finset.sum_mul, mul_comm]
+
+/-! ## Supervised NFL — necessity of homogeneity (converse; iff characterization)
+
+`lossConfig_sum_learner_indep` shows homogeneity is **sufficient** for the
+off-training-set error distribution to be learner-independent. The converse holds
+too, given at least one off-training point: if every functional of the OTS loss
+vector has the same uniform-over-targets sum for all learners, the loss must be
+homogeneous. Together this is a tight `iff`.
+
+This is a NEW_PROOF (folklore-tight, not stated as an iff by Wolpert): the loss-axis
+analog of the Schumacher–Vose–Whitley / Igel–Toussaint "closed under permutation"
+necessary-and-sufficient characterization, which is on the prior axis. -/
+
+/--
+Reduction: summing a value-indicator of the loss at a fixed test point `x` over all
+targets factors as `|Y|^{|X|-1}` times the size of the loss fiber at that value.
+-/
+private theorem sum_ite_pointval_eq
+    {X Y : Type*} [Fintype X] [Fintype Y] [DecidableEq X]
+    (x : X) (a : Y) (ℓ : Y → Y → ℝ) (v : ℝ) :
+    (∑ f : X → Y, if ℓ a (f x) = v then (1 : ℝ) else 0)
+      = (card Y : ℝ) ^ (card X - 1) * (Nat.card {y : Y // ℓ a y = v} : ℝ) := by
+  classical
+  let e : (X → Y) ≃ Y × ({ j : X // j ≠ x } → Y) := Equiv.funSplitAt x Y
+  calc
+    (∑ f : X → Y, if ℓ a (f x) = v then (1 : ℝ) else 0)
+        = ∑ p : Y × ({ j : X // j ≠ x } → Y), if ℓ a p.1 = v then (1 : ℝ) else 0 := by
+          refine Fintype.sum_equiv e _ _ (fun f => ?_)
+          simp [e, Equiv.funSplitAt_apply]
+    _ = ∑ _y : Y, ∑ _r : ({ j : X // j ≠ x } → Y), (if ℓ a _y = v then (1 : ℝ) else 0) :=
+          Fintype.sum_prod_type _
+    _ = ∑ y : Y, (card ({ j : X // j ≠ x } → Y) : ℝ) * (if ℓ a y = v then (1 : ℝ) else 0) := by
+          refine Fintype.sum_congr _ _ fun y => ?_
+          rw [Finset.sum_const, nsmul_eq_mul, Finset.card_univ, mul_comm]
+    _ = (card ({ j : X // j ≠ x } → Y) : ℝ) * ∑ y : Y, if ℓ a y = v then (1 : ℝ) else 0 := by
+          rw [Finset.mul_sum]
+    _ = (card Y : ℝ) ^ (card X - 1) * (Nat.card {y : Y // ℓ a y = v} : ℝ) := by
+          rw [card_fun, card_ne_eq x, Nat.cast_pow]
+          congr 1
+          rw [Finset.sum_boole, Nat.card_eq_fintype_card, Fintype.card_subtype]
+
+/--
+Equal loss-value fibers ⇒ a permutation of the truth space carrying one prediction's
+loss row onto the other's. The combinatorial heart of the necessity direction.
+-/
+private theorem exists_perm_comp_of_fiber_card_eq
+    {Y Z : Type*} [Finite Y] (g₁ g₂ : Y → Z)
+    (h : ∀ v : Z, Nat.card {y : Y // g₂ y = v} = Nat.card {y : Y // g₁ y = v}) :
+    ∃ π : Y ≃ Y, ∀ y, g₂ y = g₁ (π y) := by
+  classical
+  have : Fintype Y := Fintype.ofFinite Y
+  have hcardEq : ∀ v : Z,
+      Fintype.card {y : Y // g₂ y = v} = Fintype.card {y : Y // g₁ y = v} := by
+    intro v
+    rw [← Nat.card_eq_fintype_card, ← Nat.card_eq_fintype_card]
+    exact h v
+  let e₁ : (Σ v : Z, {y : Y // g₁ y = v}) ≃ Y := Equiv.sigmaFiberEquiv g₁
+  let e₂ : (Σ v : Z, {y : Y // g₂ y = v}) ≃ Y := Equiv.sigmaFiberEquiv g₂
+  let F : ∀ v : Z, {y : Y // g₂ y = v} ≃ {y : Y // g₁ y = v} :=
+    fun v => Fintype.equivOfCardEq (hcardEq v)
+  let ϕ : (Σ v : Z, {y : Y // g₂ y = v}) ≃ (Σ v : Z, {y : Y // g₁ y = v}) :=
+    Equiv.sigmaCongrRight F
+  refine ⟨e₂.symm.trans (ϕ.trans e₁), fun y => ?_⟩
+  have h2 : e₂.symm y = ⟨g₂ y, ⟨y, rfl⟩⟩ := (Equiv.symm_apply_eq e₂).2 rfl
+  have hpi : (e₂.symm.trans (ϕ.trans e₁)) y = ↑(F (g₂ y) ⟨y, rfl⟩) := by
+    rw [Equiv.trans_apply, Equiv.trans_apply, h2]
+    rfl
+  rw [hpi]
+  exact (F (g₂ y) ⟨y, rfl⟩).2.symm
+
+/--
+**Necessity of homogeneity for learner-independence (Wolpert, converse direction).**
+
+If, for a fixed training domain `S` with at least one off-training point `x ∉ S`,
+every functional `Ψ` of the off-training-set loss vector has the same
+uniform-over-targets sum for all learners, then the loss `ℓ` is homogeneous.
+
+Proof: instantiate learner-independence with two constant learners and a
+value-indicator functional at `x`; the reduction `sum_ite_pointval_eq` turns the
+hypothesis into equal loss-value fibers for every pair of predictions, and
+`exists_perm_comp_of_fiber_card_eq` produces the relabeling `π`.
+-/
+public theorem homogeneous_of_learner_indep
+    {X Y : Type*} [Fintype X] [Fintype Y] [DecidableEq X] [DecidableEq Y]
+    {ℓ : Y → Y → ℝ} (S : Set X) (x : X) (hx : x ∉ S)
+    (hLI : ∀ (A B : SupervisedLearner X Y S) (Ψ : ((Sᶜ : Set X) → ℝ) → ℝ),
+      ∑ f : X → Y, Ψ (lossConfig ℓ S A f) = ∑ f : X → Y, Ψ (lossConfig ℓ S B f)) :
+    HomogeneousLoss ℓ := by
+  classical
+  intro a₁ a₂
+  have hxc : x ∈ (Sᶜ : Set X) := hx
+  have key : ∀ v : ℝ,
+      (∑ f : X → Y, if ℓ a₁ (f x) = v then (1 : ℝ) else 0)
+        = ∑ f : X → Y, if ℓ a₂ (f x) = v then (1 : ℝ) else 0 := by
+    intro v
+    have hred : ∀ a : Y,
+        (∑ f : X → Y, (fun w : (Sᶜ : Set X) → ℝ => if w ⟨x, hxc⟩ = v then (1 : ℝ) else 0)
+            (lossConfig ℓ S (fun _ => fun _ => a) f))
+          = ∑ f : X → Y, if ℓ a (f x) = v then (1 : ℝ) else 0 := by
+      intro a
+      refine Fintype.sum_congr _ _ (fun f => ?_)
+      show (if (lossConfig ℓ S (fun _ => fun _ => a) f) ⟨x, hxc⟩ = v then (1 : ℝ) else 0) = _
+      have hpt : (lossConfig ℓ S (fun _ => fun _ => a) f) ⟨x, hxc⟩ = ℓ a (f x) := rfl
+      rw [hpt]
+    have h := hLI (fun _ => fun _ => a₁) (fun _ => fun _ => a₂)
+      (fun w => if w ⟨x, hxc⟩ = v then (1 : ℝ) else 0)
+    rw [hred a₁, hred a₂] at h
+    exact h
+  have hcard : ∀ v : ℝ,
+      Nat.card {y : Y // ℓ a₂ y = v} = Nat.card {y : Y // ℓ a₁ y = v} := by
+    intro v
+    have hk := key v
+    rw [sum_ite_pointval_eq x a₁ ℓ v, sum_ite_pointval_eq x a₂ ℓ v] at hk
+    have hpos : 0 < card Y := Fintype.card_pos_iff.2 ⟨a₁⟩
+    have hbase : (0 : ℝ) < (card Y : ℝ) := by exact_mod_cast hpos
+    have hYpos : (0 : ℝ) < (card Y : ℝ) ^ (card X - 1) := pow_pos hbase _
+    have hc := mul_left_cancel₀ (ne_of_gt hYpos) hk
+    exact_mod_cast hc.symm
+  obtain ⟨π, hπ⟩ := exists_perm_comp_of_fiber_card_eq (ℓ a₁) (ℓ a₂) hcard
+  exact ⟨π, hπ⟩
+
+/--
+**Homogeneous loss ⟺ learner-independent OTS error distribution (iff).**
+
+For a fixed training domain `S` with at least one off-training point `x ∉ S`, the
+loss `ℓ` is homogeneous **iff** every functional of the off-training-set loss vector
+has the same uniform-over-targets sum for all learners. Forward is
+`lossConfig_sum_learner_indep`; the converse is `homogeneous_of_learner_indep`.
+-/
+public theorem homogeneous_iff_learner_indep
+    {X Y : Type*} [Fintype X] [Fintype Y] [DecidableEq X] [DecidableEq Y]
+    (ℓ : Y → Y → ℝ) (S : Set X) (x : X) (hx : x ∉ S) :
+    HomogeneousLoss ℓ ↔
+      ∀ (A B : SupervisedLearner X Y S) (Ψ : ((Sᶜ : Set X) → ℝ) → ℝ),
+        ∑ f : X → Y, Ψ (lossConfig ℓ S A f) = ∑ f : X → Y, Ψ (lossConfig ℓ S B f) := by
+  constructor
+  · intro hℓ A B Ψ
+    exact lossConfig_sum_learner_indep hℓ S A B Ψ
+  · intro hLI
+    exact homogeneous_of_learner_indep S x hx hLI
 
 end AISafetyAtlas.Learning

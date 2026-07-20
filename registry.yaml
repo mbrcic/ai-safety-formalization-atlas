@@ -1401,6 +1401,22 @@
             "source_declarations": [
               "AISafetyAtlas.Learning.lossConfig_sum_learner_indep"
             ]
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Learning.homogeneous_of_learner_indep",
+            "type": "NEW_PROOF",
+            "source_declarations": [
+              "AISafetyAtlas.Learning.HomogeneousLoss",
+              "AISafetyAtlas.Learning.lossConfig"
+            ]
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Learning.homogeneous_iff_learner_indep",
+            "type": "NEW_PROOF",
+            "source_declarations": [
+              "AISafetyAtlas.Learning.homogeneous_of_learner_indep",
+              "AISafetyAtlas.Learning.lossConfig_sum_learner_indep"
+            ]
           }
         ]
       },

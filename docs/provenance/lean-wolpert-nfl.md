@@ -94,6 +94,19 @@ kernel-clean:
   relabeling `π : Y ≃ Y` of truth values matching their loss profiles. 0-1 loss
   qualifies (`homogeneous_zeroOne`, via the transposition `Equiv.swap`). Replaces
   the hard-coded 0-1 loss.
+- **The condition is tight (iff).** `homogeneous_iff_learner_indep`: given at least
+  one off-training point, homogeneity is **necessary and sufficient** for the OTS
+  error distribution to be learner-independent. Sufficiency is
+  `lossConfig_sum_learner_indep`; necessity (`homogeneous_of_learner_indep`) probes
+  learner-independence with two constant learners and a value-indicator functional,
+  reducing (`sum_ite_pointval_eq`) to equal loss-value fibers, then glues a
+  permutation of the truth space (`exists_perm_comp_of_fiber_card_eq`,
+  `Equiv.sigmaFiberEquiv` + `Fintype.equivOfCardEq`). This iff is a **NEW_PROOF**:
+  Wolpert never stated it as a biconditional (his *Existence* companion only
+  *demonstrates* distinctions for non-homogeneous loss). It is the loss-axis analog
+  of the Schumacher–Vose–Whitley (GECCO 2001) / Igel–Toussaint (2004,
+  doi `10.1023/B:JMMA.0000049381.24625.f7`) "closed under permutation"
+  necessary-and-sufficient NFL characterization, which lives on the prior axis.
 - **Full distribution, not just the mean.** For homogeneous `ℓ` and *any*
   functional `Ψ` of the off-training-set loss vector,
 
