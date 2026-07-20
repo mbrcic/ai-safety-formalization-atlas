@@ -3,6 +3,7 @@ module
 public import Mathlib.Algebra.BigOperators.Group.Finset.Basic
 public import Mathlib.Algebra.BigOperators.Group.Finset.Piecewise
 public import Mathlib.Algebra.BigOperators.Ring.Finset
+public import Mathlib.Algebra.Order.BigOperators.Group.Finset
 public import Mathlib.Data.Fintype.BigOperators
 public import Mathlib.Data.Real.Basic
 public import Mathlib.Logic.Equiv.Fin.Basic
@@ -498,5 +499,175 @@ public theorem ots_error_distribution_learner_indep
   simpa [lossConfig] using
     lossConfig_sum_learner_indep hℓ S A B
       (fun w => if (∑ x : (Sᶜ : Set X), w x) = v then (1 : ℝ) else 0)
+
+/-! ## Adaptive optimization NFL (Wolpert–Macready 1997, deterministic no-revisit)
+
+The optimization core above (`no_free_lunch`) restricts to **non-adaptive**
+schedules — a fixed sequence of points, ignoring observed costs. Wolpert–Macready's
+actual content is that even a genuinely **adaptive** deterministic algorithm — one
+that chooses each next query from the costs it has already seen — has no a priori
+advantage once objectives are averaged uniformly. That is proven here, still
+finite / combinatorial. Stochastic algorithms and time-varying objectives remain
+out of scope. -/
+
+/--
+A deterministic **adaptive** query rule: given the `k` costs observed so far,
+choose the next query point. The point genuinely depends on the observed cost
+history, not on a fixed schedule.
+-/
+public abbrev AdaptiveRule (X Y : Type*) (m : ℕ) : Type _ :=
+  ∀ k : Fin m, (Fin k → Y) → X
+
+/--
+The point rule `r` picks at step `k` when the observed cost sequence is `c`.
+Depends on `c` only through its first `k` entries — the causal unrolling of the
+rule.
+-/
+@[expose] public def ruleVisit {X Y : Type*} {m : ℕ}
+    (r : AdaptiveRule X Y m) (c : Fin m → Y) (k : Fin m) : X :=
+  r k (fun i : Fin k => c (i.castLE k.isLt.le))
+
+/--
+Cost sequence observed by rule `r` on objective `f`, built prefix by prefix: the
+cost at step `n` is `f` of the point the rule picks from the earlier costs.
+-/
+@[expose] public noncomputable def obsPrefix {X Y : Type*} {m : ℕ}
+    (r : AdaptiveRule X Y m) (f : X → Y) : (n : ℕ) → n ≤ m → (Fin n → Y)
+  | 0, _ => fun i => i.elim0
+  | n + 1, h =>
+    Fin.snoc (obsPrefix r f n (Nat.le_of_succ_le h))
+      (f (r ⟨n, h⟩ (obsPrefix r f n (Nat.le_of_succ_le h))))
+
+/-- The full cost sequence rule `r` observes on objective `f`. -/
+@[expose] public noncomputable def observed {X Y : Type*} {m : ℕ}
+    (r : AdaptiveRule X Y m) (f : X → Y) : Fin m → Y :=
+  obsPrefix r f m le_rfl
+
+/--
+If objective `f` reproduces cost sequence `c` along the trajectory `r` unrolls
+from `c`, then `c` is exactly what `r` observes on `f`. (The "backward" half of the
+fiber characterization; the forward half comes free by counting.)
+-/
+public theorem observed_of_consistent {X Y : Type*} {m : ℕ}
+    (r : AdaptiveRule X Y m) (f : X → Y) (c : Fin m → Y)
+    (hc : ∀ k, f (ruleVisit r c k) = c k) : observed r f = c := by
+  have hpre : ∀ n (h : n ≤ m),
+      obsPrefix r f n h = fun i : Fin n => c (i.castLE h) := by
+    intro n
+    induction n with
+    | zero => intro h; funext i; exact i.elim0
+    | succ n ih =>
+      intro h
+      have hn := ih (Nat.le_of_succ_le h)
+      funext j
+      have hstep : obsPrefix r f (n + 1) h
+          = Fin.snoc (obsPrefix r f n (Nat.le_of_succ_le h))
+              (f (r ⟨n, h⟩ (obsPrefix r f n (Nat.le_of_succ_le h)))) := rfl
+      rw [hstep, hn]
+      refine Fin.lastCases ?_ ?_ j
+      · have hru : ruleVisit r c ⟨n, h⟩
+            = r ⟨n, h⟩ (fun i : Fin n => c (i.castLE (Nat.le_of_succ_le h))) := rfl
+        rw [Fin.snoc_last, ← hru, hc ⟨n, h⟩]
+        congr 1
+      · intro i
+        rw [Fin.snoc_castSucc]
+        congr 1
+  have hmpre := hpre m le_rfl
+  rw [observed, hmpre]
+  simp
+
+/--
+For a no-revisit rule, the number of objectives that observe a *fixed* cost
+sequence `c` is `|Y|^{|X|−m}` — independent of the rule. (Uses the non-adaptive
+reindexing identity on the injective trajectory of `c`.)
+-/
+public theorem adaptive_constraint_card
+    {X Y : Type*} [Fintype X] [Fintype Y]
+    {m : ℕ} (r : AdaptiveRule X Y m) (c : Fin m → Y)
+    (hinj : Injective (ruleVisit r c)) :
+    (∑ f : X → Y, if (fun i => f (ruleVisit r c i)) = c then (1 : ℝ) else 0)
+      = (card Y : ℝ) ^ (card X - m) := by
+  have hkey := sum_performance_eq_scaled_sum (σ := ⟨ruleVisit r c, hinj⟩)
+    (Φ := fun cs : Fin m → Y => if cs = c then (1 : ℝ) else 0)
+  simp only [Function.Embedding.coeFn_mk, Finset.sum_ite_eq', Finset.mem_univ,
+    if_true, mul_one] at hkey
+  exact hkey
+
+/--
+**No Free Lunch (finite-domain, adaptive optimization form; Wolpert–Macready 1997).**
+
+For a finite search domain `X` and finite cost codomain `Y`, any two deterministic
+adaptive no-revisit rules of length `m ≤ |X|` produce the same uniform sum, over
+all objectives `f : X → Y`, of any functional `Ψ` of the observed cost sequence.
+So no adaptive algorithm has an a priori advantage under uniform averaging — the
+genuinely adaptive strengthening of `no_free_lunch`.
+
+Survey row **BY-021** (`RELATED`). Stochastic algorithms and time-varying
+objectives remain out of scope.
+-/
+public theorem no_free_lunch_adaptive
+    {X Y : Type*} [Fintype X] [Fintype Y]
+    {m : ℕ} (hm : m ≤ card X)
+    (r₁ r₂ : AdaptiveRule X Y m)
+    (h₁ : ∀ c, Injective (ruleVisit r₁ c))
+    (h₂ : ∀ c, Injective (ruleVisit r₂ c))
+    (Ψ : (Fin m → Y) → ℝ) :
+    ∑ f : X → Y, Ψ (observed r₁ f) = ∑ f : X → Y, Ψ (observed r₂ f) := by
+  suffices h : ∀ (r : AdaptiveRule X Y m), (∀ c, Injective (ruleVisit r c)) →
+      ∑ f : X → Y, Ψ (observed r f)
+        = (card Y : ℝ) ^ (card X - m) * ∑ c : Fin m → Y, Ψ c by
+    rw [h r₁ h₁, h r₂ h₂]
+  intro r hr
+  set K : ℝ := (card Y : ℝ) ^ (card X - m) with hK
+  -- Each fiber `{f : observed r f = c}` has real cardinality `K`.
+  have hfiber : ∀ c : Fin m → Y,
+      (∑ f : X → Y, if observed r f = c then (1 : ℝ) else 0) = K := by
+    -- Lower bound `K ≤ fiber c` from the constraint set (backward direction).
+    have hle : ∀ c : Fin m → Y,
+        K ≤ ∑ f : X → Y, if observed r f = c then (1 : ℝ) else 0 := by
+      intro c
+      rw [hK, ← adaptive_constraint_card r c (hr c)]
+      refine Finset.sum_le_sum (fun f _ => ?_)
+      by_cases hcons : (fun i => f (ruleVisit r c i)) = c
+      · have hobs : observed r f = c :=
+          observed_of_consistent r f c (fun k => congrFun hcons k)
+        simp [hcons, hobs]
+      · simp only [hcons, if_false]
+        split_ifs <;> norm_num
+    -- Totals agree: both sum to `|Y|^{|X|}`.
+    have htot : (∑ c : Fin m → Y, ∑ f : X → Y,
+        if observed r f = c then (1 : ℝ) else 0)
+          = ∑ _c : Fin m → Y, K := by
+      rw [Finset.sum_comm]
+      have hone : ∀ f : X → Y,
+          (∑ c : Fin m → Y, if observed r f = c then (1 : ℝ) else 0) = 1 := by
+        intro f; simp
+      rw [Finset.sum_congr rfl (fun f _ => hone f), Finset.sum_const, Finset.sum_const]
+      simp only [Finset.card_univ, nsmul_eq_mul, mul_one, hK]
+      rw [card_fun, card_fun, card_fin]
+      push_cast
+      rw [← pow_add, Nat.add_sub_cancel' hm]
+    -- `K ≤ fiber c` pointwise with equal totals forces equality.
+    intro c
+    have hpt := (Finset.sum_eq_sum_iff_of_le
+      (s := (Finset.univ : Finset (Fin m → Y)))
+      (f := fun _ => K) (g := fun c => ∑ f : X → Y,
+        if observed r f = c then (1 : ℝ) else 0)
+      (fun c _ => hle c)).1 htot.symm
+    exact (hpt c (Finset.mem_univ c)).symm
+  -- Assemble: expand `Ψ (observed r f)` over the fibers.
+  calc ∑ f : X → Y, Ψ (observed r f)
+      = ∑ f : X → Y, ∑ c : Fin m → Y, (if observed r f = c then Ψ c else 0) := by
+        refine Finset.sum_congr rfl (fun f _ => ?_)
+        simp
+    _ = ∑ c : Fin m → Y, ∑ f : X → Y, (if observed r f = c then Ψ c else 0) :=
+        Finset.sum_comm
+    _ = ∑ c : Fin m → Y, Ψ c * K := by
+        refine Finset.sum_congr rfl (fun c _ => ?_)
+        rw [← hfiber c, Finset.mul_sum]
+        refine Finset.sum_congr rfl (fun f _ => ?_)
+        by_cases hf : observed r f = c <;> simp [hf]
+    _ = K * ∑ c : Fin m → Y, Ψ c := by
+        rw [← Finset.sum_mul, mul_comm]
 
 end AISafetyAtlas.Learning

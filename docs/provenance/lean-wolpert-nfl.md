@@ -104,6 +104,30 @@ homogeneity `π` (`Equiv.piCongrRight`), a bijection on the target space that tu
 `A`'s loss vector into `B`'s. So the OTS-error *distribution* — not just its mean
 — is learner-independent.
 
+## Adaptive optimization strengthening (BY-021, 2026-07-20)
+
+The optimization core (`no_free_lunch`) restricts to **non-adaptive** schedules —
+a fixed point sequence that ignores observed costs. The genuinely adaptive case
+is now proven:
+
+- `AdaptiveRule X Y m := ∀ k : Fin m, (Fin k → Y) → X` — a deterministic rule that
+  picks each next query from the costs already observed.
+- `observed r f` — the cost sequence rule `r` produces on objective `f`, built
+  prefix by prefix (`Fin.snoc`).
+- `no_free_lunch_adaptive` — for `m ≤ |X|` and any two **no-revisit** adaptive
+  rules and any functional `Ψ` of the observed cost sequence,
+
+  ```text
+  ∑_f Ψ(observed r₁ f) = ∑_f Ψ(observed r₂ f)  ( = |Y|^{|X|−m} · ∑_c Ψ(c) )
+  ```
+
+Proof: the "backward" fiber inclusion `(∀k, f(ruleVisit r c k) = c k) → observed r f = c`
+by prefix induction; each fiber then has real cardinality `|Y|^{|X|−m}` by a
+**pigeonhole** — each fiber is at least the constrained set (via the non-adaptive
+reindexing `sum_performance_eq_scaled_sum` on the injective trajectory), the fibers
+partition `X → Y`, and the totals `∑ = |Y|^{|X|}` match, forcing equality
+(`Finset.sum_eq_sum_iff_of_le`). No forward fixpoint lemma needed.
+
 ## Why RELATED (not EXACT / EQUIVALENT)
 
 Both results match the classical **finite-domain, uniform-over-all-targets,
@@ -112,7 +136,9 @@ special cases used in expositions.
 
 Not claimed EXACT/EQUIVALENT to the full papers:
 
-- **1997:** adaptive query trees, stochastic algorithms, time-varying objectives;
+- **1997:** the deterministic **adaptive** no-revisit case is now covered (see
+  the adaptive strengthening above); *stochastic* algorithms and time-varying
+  objectives remain out of scope (open collaboration work);
 - **1996:** *stochastic* learners and non-uniform prior `P(f)` averaging remain
   out of scope (open collaboration work — needs Mathlib probability). The
   deterministic homogeneous-loss **full-distribution** core is now covered (see

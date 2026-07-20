@@ -36,8 +36,10 @@ to `main` still requires explicit maintainer authorization (push / PR / merge).
   `Learning.no_free_lunch` (BY-021) and `Learning.no_free_lunch_supervised`
   (BY-020) Wolpert finite NFL cores (`NEW_PROOF`); BY-020 strengthened to the
   homogeneous-loss **full-distribution** form (`lossConfig_sum_learner_indep`,
-  `ots_error_distribution_learner_indep`, `HomogeneousLoss`), still `RELATED`
-  (stochastic learners / non-uniform priors remain out of scope)
+  `ots_error_distribution_learner_indep`, `HomogeneousLoss`); BY-021 strengthened
+  to the deterministic **adaptive** no-revisit form (`no_free_lunch_adaptive`,
+  `AdaptiveRule`, `observed`), still `RELATED` (stochastic algorithms / learners
+  and non-uniform priors remain out of scope)
 - Adjacent Lean developments reproduced: 1 vNM expected-utility development
 - Reviewed AI-system bridge theorems: 2 fully reviewed rows (BY-012 AgentBehavior;
   BY-033 robot RELATED + scoped interpretation)
