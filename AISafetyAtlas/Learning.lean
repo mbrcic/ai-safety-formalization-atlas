@@ -20,7 +20,10 @@ Two classical **finite uniform-averaging** NFL cores live in this module:
    `no_free_lunch`: non-adaptive injective query schedules; performance a
    function of the ordered cost sequence; equal aggregate sum over all
    objectives `f : X → Y`.
-2. **Supervised learning (BY-020 / Wolpert 1996)** —
+2. **Supervised learning (BY-020 / Wolpert 1996 — *The Lack of A Priori
+   Distinctions Between Learning Algorithms*, Neural Comput. 8(7):1341–1390; the
+   survey and registry `survey-ref-018` instead cite the companion *Existence*
+   paper, pp. 1391–1420 — see the provenance doc)** —
    `no_free_lunch_supervised`: learners map training labels on a fixed domain
    `S ⊆ X` to full hypotheses; **off-training-set** 0-1 loss, averaged
    uniformly over all targets, is independent of the learner.
@@ -388,8 +391,11 @@ priors remain out of scope (open collaboration work). -/
 /--
 A loss `ℓ prediction truth` is **homogeneous** (Wolpert's condition): for any two
 predictions there is a relabeling of the truth values matching their loss
-profiles. Exactly the condition under which the off-training-set error
-distribution is learner-independent. 0-1 loss qualifies (`homogeneous_zeroOne`).
+profiles. **Sufficient** for the off-training-set error distribution to be
+learner-independent (`lossConfig_sum_learner_indep`). The converse — necessity,
+which holds given at least one off-training point — is a tight iff but is not yet
+formalized (separate NEW_PROOF pass); until then this is a one-directional claim.
+0-1 loss qualifies (`homogeneous_zeroOne`).
 -/
 public def HomogeneousLoss {Y : Type*} (ℓ : Y → Y → ℝ) : Prop :=
   ∀ a₁ a₂ : Y, ∃ π : Y ≃ Y, ∀ y, ℓ a₂ y = ℓ a₁ (π y)
@@ -428,7 +434,11 @@ Taking `Ψ` a sum recovers the mean (`no_free_lunch_supervised`); an indicator o
 value recovers the full generalization-error distribution
 (`ots_error_distribution_learner_indep`); a power recovers every moment. Proven by
 a per-point relabeling bijection on the target space, fiber-wise over the training
-restriction. Survey row **BY-020** (`RELATED`), strengthening the mean core.
+restriction. Survey row **BY-020** (`RELATED`), strengthening the mean core. This
+is `EXACT` for the deterministic finite case (Wolpert 1996: the OTS error
+*distribution*, not just its mean, is a priori learner-independent for homogeneous
+loss); it stays `RELATED` to the *full paper* only because stochastic learners,
+label noise, and non-uniform target priors `P(f)` remain out of scope.
 -/
 public theorem lossConfig_sum_learner_indep
     {X Y : Type*} [Fintype X] [Fintype Y] [DecidableEq X] [DecidableEq Y]
@@ -602,8 +612,11 @@ all objectives `f : X → Y`, of any functional `Ψ` of the observed cost sequen
 So no adaptive algorithm has an a priori advantage under uniform averaging — the
 genuinely adaptive strengthening of `no_free_lunch`.
 
-Survey row **BY-021** (`RELATED`). Stochastic algorithms and time-varying
-objectives remain out of scope.
+Survey row **BY-021** (`RELATED`). This is `EXACT` for the deterministic finite
+case (Wolpert–Macready Theorem 1: taking `Ψ` an indicator of a cost sequence
+gives that the number of objectives yielding it is rule-independent, the full
+histogram); it stays `RELATED` to the *full paper* only because stochastic
+algorithms and time-varying objectives remain out of scope.
 -/
 public theorem no_free_lunch_adaptive
     {X Y : Type*} [Fintype X] [Fintype Y]

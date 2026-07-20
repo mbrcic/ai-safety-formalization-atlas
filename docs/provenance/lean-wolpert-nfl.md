@@ -5,8 +5,17 @@ with:
 
 - Wolpert–Macready *No free lunch theorems for optimization* (IEEE TEC 1997;
   survey-ref-019 / **BY-021**);
-- Wolpert *The Existence of A Priori Distinctions Between Learning Algorithms*
-  (Neural Computation 1996; survey-ref-018 / **BY-020**).
+- Wolpert *The **Lack** of A Priori Distinctions Between Learning Algorithms*
+  (Neural Computation 8(7):1341–1390, 1996, doi `10.1162/neco.1996.8.7.1341`) —
+  the actual source of the formalized supervised NFL (uniform target average,
+  off-training-set error learner-independence, homogeneous loss).
+  **Citation note:** survey ref [18] and registry `survey-ref-018` cite the
+  companion paper *The Existence of A Priori Distinctions Between Learning
+  Algorithms* (same issue, pp. 1391–1420, doi `10.1162/neco.1996.8.7.1391`),
+  which proves the *converse* — distinctions exist for non-homogeneous loss
+  (e.g. quadratic). The registry deliberately mirrors the survey's own citation;
+  the content formalized in this module is from the *Lack* paper, not *Existence*.
+  (survey-ref-018 / **BY-020**).
 
 ## Public surface
 
@@ -133,6 +142,14 @@ partition `X → Y`, and the totals `∑ = |Y|^{|X|}` match, forcing equality
 Both results match the classical **finite-domain, uniform-over-all-targets,
 equal aggregate performance** NFL identities in the standard deterministic
 special cases used in expositions.
+
+The honesty cuts both ways: the two strengthenings (`no_free_lunch_adaptive`,
+`lossConfig_sum_learner_indep` / `ots_error_distribution_learner_indep`) are
+**`EXACT` for the deterministic finite case** — the adaptive one is
+Wolpert–Macready Theorem 1 (full cost-sequence histogram, not a scalar), the
+supervised one is Wolpert 1996's OTS error *distribution* under homogeneous loss.
+They stay `RELATED` at the **row** level only because the full papers also cover
+the deferred tail below.
 
 Not claimed EXACT/EQUIVALENT to the full papers:
 
