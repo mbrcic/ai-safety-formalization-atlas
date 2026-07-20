@@ -5,8 +5,8 @@ title: "AI Safety Formalization Atlas"
 authors:
   - family-names: "Brčić"
     given-names: "Mario"
-version: "0.2.0"
-date-released: 2026-07-19
+version: "0.3.0"
+date-released: 2026-07-20
 repository-code: "https://github.com/mbrcic/ai-safety-formalization-atlas"
 url: "https://github.com/mbrcic/ai-safety-formalization-atlas"
 license: Apache-2.0
