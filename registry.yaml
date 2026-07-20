@@ -1386,6 +1386,21 @@
               "AISafetyAtlas.Learning.sum_pointLoss_off_training",
               "AISafetyAtlas.Learning.aggregateOffTrainingLoss_eq"
             ]
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Learning.lossConfig_sum_learner_indep",
+            "type": "NEW_PROOF",
+            "source_declarations": [
+              "AISafetyAtlas.Learning.HomogeneousLoss",
+              "AISafetyAtlas.Learning.lossConfig"
+            ]
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Learning.ots_error_distribution_learner_indep",
+            "type": "NEW_PROOF",
+            "source_declarations": [
+              "AISafetyAtlas.Learning.lossConfig_sum_learner_indep"
+            ]
           }
         ]
       },
@@ -1447,6 +1462,15 @@
             "source_declarations": [
               "AISafetyAtlas.Learning.sum_performance_eq_scaled_sum",
               "AISafetyAtlas.Learning.aggregatePerformance_eq_scaled_sum"
+            ]
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Learning.no_free_lunch_adaptive",
+            "type": "NEW_PROOF",
+            "source_declarations": [
+              "AISafetyAtlas.Learning.observed_of_consistent",
+              "AISafetyAtlas.Learning.adaptive_constraint_card",
+              "AISafetyAtlas.Learning.sum_performance_eq_scaled_sum"
             ]
           }
         ]

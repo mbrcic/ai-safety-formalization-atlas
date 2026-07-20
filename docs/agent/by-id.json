@@ -454,6 +454,14 @@
           {
             "atlas_declaration": "AISafetyAtlas.Learning.no_free_lunch_supervised",
             "type": "NEW_PROOF"
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Learning.lossConfig_sum_learner_indep",
+            "type": "NEW_PROOF"
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Learning.ots_error_distribution_learner_indep",
+            "type": "NEW_PROOF"
           }
         ]
       },
@@ -482,6 +490,10 @@
         "declarations": [
           {
             "atlas_declaration": "AISafetyAtlas.Learning.no_free_lunch",
+            "type": "NEW_PROOF"
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Learning.no_free_lunch_adaptive",
             "type": "NEW_PROOF"
           }
         ]
