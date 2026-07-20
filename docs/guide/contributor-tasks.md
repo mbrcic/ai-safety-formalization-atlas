@@ -9,6 +9,147 @@ GitHub issue per task when the queue is created.
 Difficulty: **S** self-contained verification, **M** new Lean/schema work,
 **L** larger design or external-toolchain work.
 
+## Open now
+
+Live units across the contribution rungs. Take one, open the matching proposal
+issue, or ask in a draft PR. CT-1…CT-5 below are completed history, kept for
+provenance.
+
+### CT-6 — First possibility proof: continuous free lunches (BY-022) (L) — **New proof rung**
+
+- **Goal:** give BY-022 (*Free lunches in continuous spaces and coevolution*,
+  Auger–Teytaud 2010 / Wolpert–Macready coevolutionary) its first Lean
+  statement — a setting where the finite NFL symmetry provably fails, dual to
+  `AISafetyAtlas.Learning.no_free_lunch`.
+- **Acceptance:** a kernel-checked Lean theorem under the facade (or a landscape
+  entry if the natural home is adjacent), a `formalizations`/landscape record
+  with honest `EXACT`/`EQUIVALENT`/`RELATED` classification against
+  `survey-ref-047`/`survey-ref-048`, provenance note, `agent_gate.sh` +
+  `lake build` green, kernel axioms clean.
+- **Does not change:** the impossibility rows; do not retro-claim BY-022 as
+  formalized in README/registry until this lands.
+
+### CT-7 — Reproduce DeepMind doubly-efficient debate into the landscape (M) — **done (reproduced 2026-07-20)**
+
+The formalization exists and is Lean 4: `google-deepmind/debate`
+(Apache-2.0), a machine-checked correctness proof of the stochastic oracle
+protocol from Brown-Cohen–Irving–Piliouras 2023 (*Scalable AI Safety via
+Doubly-Efficient Debate*, arXiv 2311.14125). This is a **possibility /
+scalable-oversight guarantee**, not an impossibility — a live landscape anchor
+dual to the impossibility rows.
+
+- **Coordinates:** repo `github.com/google-deepmind/debate`, revision
+  `de3a6e500ae1a65dfeea2f91ef519ebad9704be0` (single `main`, no release tag,
+  last commit 2024-10-08). Main theorems in `Debate/Correct.lean`:
+  `completeness`, `soundness`, `correctness` (paper Theorem 6.2). License
+  Apache-2.0.
+- **Version gap:** upstream pins `leanprover/lean4:v4.8.0` and Mathlib
+  `v4.8.0`; the atlas is on `v4.31.0`. Do **not** vendor into the 4.31 tree.
+  Reproduce like Chaitin/Isabelle — build at the upstream toolchain from a
+  separate checkout via a new `scripts/reproduce_debate.sh`.
+- **Acceptance:** clean build at the pinned revision under its own toolchain;
+  strict-trust scan of the reproduced tree; a `landscape.yaml` record
+  (`LAND-DEBATE-001` — revision, `Debate/Correct.lean`, the three theorem
+  names, Apache-2.0, relationship `RELATED`, reproduction status,
+  `survey_coverage: null`); `scripts/reproduce_debate.sh`; regenerated views;
+  provenance note. Never a headline coverage count.
+- **Honest scope:** carry upstream's own caveats — correctness only; space
+  complexity not formalized; time counts oracle queries only; Lipschitz oracle
+  machine defined slightly differently (a stronger variant). No AI-system
+  reading without a separate reviewed bridge.
+- **Does not change:** survey `registry.yaml` coverage; the 4.31 build closure.
+- **Done (2026-07-20):** clean build at the pinned revision under upstream
+  `leanprover/lean4:v4.8.0` (`Debate.Correct`, 1721/1721 targets); strict-trust
+  scan clean across 19 upstream Lean sources; `completeness`/`soundness`/
+  `correctness` present in `Debate/Correct.lean`. Landscape record
+  `LAND-DEBATE-001` (`survey_coverage: null`, no atlas import surface);
+  `scripts/reproduce_debate.sh`; evidence
+  [`debate-reproduction.md`](../provenance/debate-reproduction.md). First
+  reproduced possibility / scalable-oversight anchor. Never headline coverage.
+
+### CT-8 — BY-025 Uncontainability: bridge or documented no-map (M) — **Bridge rung**
+
+- **Goal:** decide whether BY-025 (still `MAPPED`) earns a dedicated bridge over
+  Rice/halting with an explicit containment model, or stays mapped-only.
+- **Acceptance:** either a bridge declaration with stated modeled system,
+  assumptions, quantifier order, conclusion, and the practical claim it does
+  **not** establish (`ai_bridge_status: HUMAN_REVIEW`), or a provenance note
+  recording why no clean statement map exists. Do not claim BY-025 is
+  formalized.
+- **Does not change:** the Alfonseca/AgentBehavior packaging; no fake bridge
+  graduation.
+
+### CT-9 — Formalize a debate follow-up with no existing proof (L) — **New proof rung**
+
+Greenfield: these debate refinements are **pen-and-paper only** — no ITP
+formalization exists (checked 2026-07-20). Formalizing one is original work,
+dual to CT-7's *reproduction* of the already-formalized doubly-efficient debate.
+
+Each target has a complete pen-and-paper proof; the task is to mechanize it.
+Pointer to the informal proof is given per target.
+
+- **Targets (pick one):**
+  - *Avoiding Obfuscation with Prover-Estimator Debate* (arXiv 2506.13609) —
+    relaxes the equal-compute-provers assumption of doubly-efficient debate.
+    **Pen-and-paper proof:** the paper has exactly three theorems — **6.1**
+    (completeness: honest debater wins under (ε,ρ)-stability) and **6.2**
+    (soundness: honest output is truth in every Stackelberg equilibrium), the
+    two "main theorems" in Section 6; and **8.3** (Section 8), the
+    training-convergence companion (debaters reach Stackelberg equilibria via
+    standard gradient methods). Supporting proofs in Appendices A–D. Formalize
+    any one; smallest scoped core is Theorem 6.1 completeness alone.
+  - *How to Avoid Debate: Scalable AI Safety via Doubly-Efficient Interactive
+    Proofs* (arXiv 2607.03561) — doubly-efficient **single-prover** interactive
+    proofs/arguments for oracle-aided (relativizing) computation.
+    **Pen-and-paper proof:** two main-results settings — (1) robust computation
+    (output stable if a small fraction of oracle answers are wrong) and
+    (2) low-degree-polynomial oracle; pick one setting's protocol + soundness
+    proof. (Paper is days old as of 2026-07-20; take exact theorem numbers from
+    the arXiv PDF, HTML not yet rendered.)
+- **Acceptance:** a kernel-checked Lean statement + proof of the paper's central
+  guarantee (or an explicitly scoped core of it) under the facade or landscape;
+  honest relationship classification against the paper theorem; provenance note
+  stating exactly which theorem and which assumptions are and are not
+  mechanized; `agent_gate.sh` + `lake build` green; kernel axioms clean.
+- **Reuse first:** the `google-deepmind/debate` Lean development (CT-7) is the
+  natural scaffold — check whether its `Prob`/`Comp` monads and protocol
+  definitions carry over before rebuilding primitives.
+- **Honest scope:** a possibility/oversight guarantee, `RELATED` at most; no
+  AI-system reading without a separate reviewed bridge. Do not claim the paper
+  is "formalized" until a proof (not a statement) lands.
+- **Does not change:** survey `registry.yaml` coverage.
+
+### CT-10 — Reproduce the closed-under-permutation NFL iff (BY-020, optional) (L) — **New reproduction rung**
+
+- **Goal:** reproduce the sharp *both-directions* NFL characterization on the
+  **prior axis**: over a distribution `P` on target functions `X → Y`, expected
+  performance is algorithm-independent **iff** `P` is closed under permutation of
+  the domain. This is the general boundary that subsumes every uniform-prior core
+  already in `AISafetyAtlas.Learning` (`no_free_lunch`, `no_free_lunch_supervised`,
+  `no_free_lunch_adaptive`) — those are the trivially-c.u.p. special case.
+- **Source (in the literature — citable proof to diff against):** Schumacher,
+  Vose, Whitley, *The No Free Lunch and Problem Description Length* (GECCO 2001,
+  first c.u.p. iff); Igel & Toussaint, *A No-Free-Lunch Theorem for Non-Uniform
+  Distributions of Target Functions* (J. Math. Modelling & Algorithms 2004,
+  doi `10.1023/B:JMMA.0000049381.24625.f7`, both directions). Because it is a
+  published result, this graduates to **`EXACT`/`EQUIVALENT`** — not the folklore
+  `NEW_PROOF` status of the loss-axis iff `homogeneous_iff_learner_indep`.
+- **Acceptance:** kernel-checked Lean theorem under the facade; finite weighted
+  sums over `Fintype` suffice (no Mathlib probability needed); honest
+  `EXACT`/`EQUIVALENT`/`RELATED` classification against `survey-ref-018`;
+  provenance note in [`../provenance/lean-wolpert-nfl.md`](../provenance/lean-wolpert-nfl.md)
+  recording which paper and which assumptions; `agent_gate.sh` + `lake build`
+  green; kernel axioms clean.
+- **Why it may wait (read before taking):** no current downstream consumer needs
+  it — the uniform cores already carry the headline. Its distinctive value is
+  bridge-readiness: c.u.p. is the exact condition under which NFL is *vacuous*
+  (real learning priors are structured, not permutation-symmetric), so it is the
+  one NFL variant with a plausible AI-safety bridge story. Pull it only if a
+  bridge needs "which priors kill learning"; otherwise it is completeness polish.
+- **Does not change:** the existing `NEW_PROOF` loss-axis iff stays as-is; no
+  retro-claim of c.u.p. coverage in README/registry until a proof lands. See
+  reference note `nfl-cup-iff-lineage` and [`ct2-nfl-triage.md`](../provenance/ct2-nfl-triage.md).
+
 ## CT-1 — Reproduce the Chaitin BY-015 candidate (M) — **done**
 
 - **Goal:** reproduce `AlexeyMilovanov/kolmogorov-complexity-lean` at revision
@@ -27,7 +168,7 @@ Difficulty: **S** self-contained verification, **M** new Lean/schema work,
   (`godel_second_incompleteness`) as a `RELATED` companion on the same row. The
   earlier Kritchman–Raz skeleton is retired.
 
-## CT-2 — Triage AFP `No_Free_Lunch_ML` for BY-020 / BY-021 (L)
+## CT-2 — Triage AFP `No_Free_Lunch_ML` for BY-020 / BY-021 (L) — **done (reproduced)**
 
 - **Goal:** inspect the AFP `No_Free_Lunch_ML` declarations and hypotheses,
   reproduce a pinned AFP artifact, and classify each of BY-020 and BY-021 as
@@ -36,6 +177,14 @@ Difficulty: **S** self-contained verification, **M** new Lean/schema work,
   reproduction log; a per-row relationship classification with reasoning.
 - **Does not change:** coverage until each row is reproduced and classified;
   a repository link alone is candidate evidence, not coverage.
+- **Done (2026-07-19):** AFP `No_Free_Lunch_ML` reproduced (pinned `2026-02-06`,
+  SHA-256 `93ce8953…173588`, `isabelle build` exit 0 via
+  `scripts/reproduce_isabelle.sh nfl`) and triaged as the Shalev-Shwartz–Ben-David
+  PAC no-free-lunch (Understanding ML §5.1) — **DISTINCT** from BY-020 (Wolpert
+  supervised NFL) and BY-021 (Wolpert–Macready optimization NFL). Candidate tags
+  removed from both rows; reproduced SSBD entry recorded as landscape row
+  `LAND-NFL-001`. Evidence:
+  [`ct2-nfl-triage.md`](../provenance/ct2-nfl-triage.md).
 
 ## CT-3 — Domain and statement review of the robot bridge (M) — **done (reviewed)**
 

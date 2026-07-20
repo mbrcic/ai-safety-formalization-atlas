@@ -2,20 +2,60 @@
 
 [![CI](https://github.com/mbrcic/ai-safety-formalization-atlas/actions/workflows/ci.yml/badge.svg)](https://github.com/mbrcic/ai-safety-formalization-atlas/actions/workflows/ci.yml)
 
-A Lean-centered map of machine-checked mathematics relevant to AI safety.
+**The open workbench for doing AI safety the formal way.**
 
-The initial collection tracks every result listed in Mario Brčić and Roman V.
-Yampolskiy's *Impossibility Results in AI: A Survey* (ACM Computing Surveys,
-DOI [`10.1145/3603371`](https://doi.org/10.1145/3603371), arXiv
-[`2109.00484`](https://arxiv.org/abs/2109.00484)). It records where results have
-been formalized, reuses maintained Lean declarations, and identifies genuine
-formalization gaps.
+Most of AI safety lives in prose, intuition, and scattered results — and the
+rigor that *does* exist is fragmented across incompatible proof systems. The
+Atlas pulls it onto one surface: reusable, machine-checked Lean, built to grow.
+Here, a safety argument doesn't stay an argument. It becomes a theorem you can
+build on, break, or extend.
 
-## Current scope
+It's a **launchpad** — for the researcher sharpening a claim, and for the AI
+agent proving it. Formal proof stops being a boutique specialty and becomes
+shared infrastructure: a place where humans and agents accelerate each other on
+the questions that actually matter for keeping powerful systems in check.
+
+**Bring a question.** Alignment, control, oversight, interpretability,
+robustness, the paradoxes that make these problems wicked — if you can make a
+safety property precise, this is where you turn it into something
+machine-checked. A bound, a guarantee, a tradeoff, a limit — impossibility and
+possibility run on the same machinery. The seed is impossibility results by
+design, the direction this project pushes further; the door is open to whatever
+is interesting. DeepMind's doubly-efficient debate — a scalable-oversight
+guarantee machine-checked in Lean 4 — is now reproduced here
+([`LAND-DEBATE-001`](docs/provenance/debate-reproduction.md)): the first
+possibility result in the ledger, dual to the impossibility rows. The first
+possibility result proven *natively* will be
+continuous free lunches (BY-022, [open](docs/guide/contributor-tasks.md#open-now)),
+where No-Free-Lunch provably breaks. The field is moving toward provable safety.
+The Atlas is where that work gets done in the open.
+
+**Where it starts.** The seed collection formalizes the impossibility results
+from Mario Brčić and Roman V. Yampolskiy's *Impossibility Results in AI: A
+Survey* (ACM Computing Surveys, DOI
+[`10.1145/3603371`](https://doi.org/10.1145/3603371), arXiv
+[`2109.00484`](https://arxiv.org/abs/2109.00484)) — a concrete, self-contained
+first target, and the direction the project is actively pushing further. It
+records where results are formalized, reuses maintained Lean
+declarations, and identifies genuine gaps. It's the on-ramp, not the ceiling.
+
+## Who this is for
+
+You. Whether you're a researcher who's published for years or someone who just
+started asking hard questions with an AI agent at your side — the barrier to
+real formal work has never been lower. If you can state what "safe" should mean,
+you can contribute a proof of it here. Bring a theorem, a counterexample, a
+formalization of someone else's result, or a question nobody's made precise yet.
+
+## Coverage & momentum
+
+Real, machine-checked, and growing — tracked transparently. The snapshot below
+is where the Atlas is today, not where it's headed; that discipline is the point,
+because it's what makes a proof here worth building on.
 
 <!-- BEGIN GENERATED REGISTRY SCOPE -->
 The current registry has verified `EXACT` or `EQUIVALENT` formalization coverage for
-**7 of 44** survey results. It records **1 additional result with a
+**7 of 44** survey results. It records **3 additional results with a
 `RELATED` formalization only**, outside headline coverage, and
 **2 survey results with reviewed AI-system bridges**. It provides
 infrastructure for further formalization; it does not claim complete formal
@@ -77,6 +117,20 @@ The stable entry points are conventional theorem names under domain namespaces:
 - `AISafetyAtlas.Explainability.attribution_impossibility` (DASH trilemma;
   not BY-029/BY-042 without a separate statement map)
 
+Reproduced external formalizations that carry no Lean interface are pinned in
+[`landscape.yaml`](landscape.yaml), listed in the
+[landscape index](docs/status/landscape-index.md), and rebuilt with
+`scripts/reproduce_isabelle.sh`:
+
+- `Gibbard_Satterthwaite` (`LAND-GS-001`, Isabelle/HOL; Arrow-session
+  provenance related to BY-007). Lean consumer interface:
+  `AISafetyAtlas.SocialChoice.gibbard_satterthwaite` (`LAND-GS-002`, vendored
+  SocialChoiceLean GS closure)
+- `no_free_lunch_ML` (`LAND-NFL-001`, Isabelle/HOL; the Shalev-Shwartz–Ben-David
+  PAC no-free-lunch — the formal core of "generalization needs inductive bias" —
+  distinct from the Wolpert NFL survey rows BY-020/BY-021; see
+  [CT-2 triage](docs/provenance/ct2-nfl-triage.md))
+
 The Rice verification bridge concerns properties of partial input/output
 behavior; `AgentBehavior` is a downstream consumer that models encoded agents
 and total behavioral safety verifiers. The independent Robot bridge concerns
@@ -107,20 +161,27 @@ scripts/reproduce_chaitin.sh
 Install Lean through [`elan`](https://lean-lang.org/install/manual/), then run:
 
 ```console
-lake update
+lake exe cache get   # fetch prebuilt Mathlib — skips an hours-long local compile
 lake build
 xargs lake build < scripts/lean_build_targets.txt
 ```
 
-The repository pins both Lean and Mathlib. Released Lean files follow the
-[strict-trust and build-closure policy](docs/guide/methodology.md#new-proofs-and-bridges).
+The repository pins Lean, Mathlib, and every transitive dependency:
+[`lake-manifest.json`](lake-manifest.json) is the lock. Build from it directly —
+do **not** run `lake update` unless you are deliberately bumping a dependency, as
+it re-resolves floating revisions off the pinned set. Released Lean files follow
+the [strict-trust and build-closure policy](docs/guide/methodology.md#new-proofs-and-bridges).
 
 ## Contributing
 
-Contributions in source verification, reproducibility, API review, bridge
-design, and Lean implementation are welcome. Start with the
-[contribution guide](CONTRIBUTING.md) and use the structured issue forms for
-work that changes coverage, dependencies, or the public Lean interface.
+Four rungs, lowest-effort first — **Pointer → Reproduction → Bridge → New
+proof**; the [contribution guide](CONTRIBUTING.md#start-here--pick-your-rung)
+describes each. Source verification, reproducibility, and API review are equally
+welcome. Pick a
+live bounded unit from [**open now**](docs/guide/contributor-tasks.md#open-now) —
+covering every rung — or start with the [contribution guide](CONTRIBUTING.md); the
+structured issue forms cover work that changes coverage, dependencies, or the
+public Lean interface.
 
 ## License
 

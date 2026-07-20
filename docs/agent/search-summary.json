@@ -1,0 +1,656 @@
+{
+  "schema_version": 1,
+  "generated_by": "scripts/generate_registry_views.py",
+  "note": "Compact discovery summary. Prefer this over docs/provenance/formalization-search.json. Full path lists and per-query zero counts live only in the full evidence file.",
+  "searched_on": "2026-07-18",
+  "corpora": [
+    "mathlib",
+    "isabelle-afp",
+    "rocq-undecidability",
+    "hol4",
+    "hol-light",
+    "agda-stdlib"
+  ],
+  "result_count": 44,
+  "results_with_hits": 11,
+  "results": {
+    "BY-001": {
+      "queries": [
+        "observability",
+        "unobservable state",
+        "state reconstruction",
+        "observable output"
+      ],
+      "hits": {
+        "isabelle-afp": {
+          "hit_count": 10,
+          "matched_queries": [
+            "observability",
+            "observable output"
+          ],
+          "paths": [
+            "afp-2026-02-06/thys/Adaptive_State_Counting/FSM/FSM.thy",
+            "afp-2026-02-06/thys/CommCSL/document/root.tex",
+            "afp-2026-02-06/thys/Consensus_Refined/Refinement.thy"
+          ]
+        }
+      },
+      "total_hit_count": 10
+    },
+    "BY-002": {
+      "queries": [
+        "uncontrollability",
+        "not controllable",
+        "controllability"
+      ],
+      "hits": {},
+      "total_hit_count": 0
+    },
+    "BY-003": {
+      "queries": [
+        "good regulator theorem",
+        "good regulator"
+      ],
+      "hits": {},
+      "total_hit_count": 0
+    },
+    "BY-004": {
+      "queries": [
+        "requisite variety",
+        "law of requisite variety"
+      ],
+      "hits": {},
+      "total_hit_count": 0
+    },
+    "BY-005": {
+      "queries": [
+        "information-theoretic control",
+        "information theoretic control"
+      ],
+      "hits": {},
+      "total_hit_count": 0
+    },
+    "BY-006": {
+      "queries": [
+        "codifiability",
+        "moral particularism",
+        "virtue codification"
+      ],
+      "hits": {},
+      "total_hit_count": 0
+    },
+    "BY-007": {
+      "queries": [
+        "arrow impossibility",
+        "arrow's theorem",
+        "arrow theorem"
+      ],
+      "hits": {
+        "mathlib": {
+          "hit_count": 9,
+          "matched_queries": [
+            "arrow theorem"
+          ],
+          "paths": [
+            "CategoryTheory/Abelian/Pseudoelements.lean",
+            "CategoryTheory/Comma/StructuredArrow/Basic.lean",
+            "CategoryTheory/Generator/Basic.lean"
+          ]
+        },
+        "isabelle-afp": {
+          "hit_count": 6,
+          "matched_queries": [
+            "arrow's theorem"
+          ],
+          "paths": [
+            "afp-2026-02-06/thys/ArrowImpossibilityGS/Thys/Arrow_Order.thy",
+            "afp-2026-02-06/thys/ArrowImpossibilityGS/Thys/Arrow_Utility.thy",
+            "afp-2026-02-06/thys/ArrowImpossibilityGS/Thys/GS.thy"
+          ]
+        }
+      },
+      "total_hit_count": 15
+    },
+    "BY-008": {
+      "queries": [
+        "population ethics",
+        "population axiology"
+      ],
+      "hits": {
+        "isabelle-afp": {
+          "hit_count": 1,
+          "matched_queries": [
+            "population ethics"
+          ],
+          "paths": [
+            "afp-2026-02-06/thys/CondNormReasHOL/document/root.tex"
+          ]
+        }
+      },
+      "total_hit_count": 1
+    },
+    "BY-009": {
+      "queries": [
+        "value alignment",
+        "ai alignment",
+        "utility alignment"
+      ],
+      "hits": {},
+      "total_hit_count": 0
+    },
+    "BY-010": {
+      "queries": [
+        "fairness impossibility",
+        "calibration fairness",
+        "equalized odds"
+      ],
+      "hits": {},
+      "total_hit_count": 0
+    },
+    "BY-011": {
+      "queries": [
+        "preference deduction",
+        "preference inference",
+        "inverse reinforcement"
+      ],
+      "hits": {},
+      "total_hit_count": 0
+    },
+    "BY-012": {
+      "queries": [
+        "rice theorem",
+        "rice's theorem",
+        "rice_"
+      ],
+      "hits": {
+        "mathlib": {
+          "hit_count": 1,
+          "matched_queries": [
+            "rice's theorem",
+            "rice_"
+          ],
+          "paths": [
+            "Computability/Halting.lean"
+          ]
+        },
+        "isabelle-afp": {
+          "hit_count": 7,
+          "matched_queries": [
+            "rice theorem",
+            "rice's theorem",
+            "rice_"
+          ],
+          "paths": [
+            "afp-2026-02-06/thys/Inductive_Inference/Standard_Results.thy",
+            "afp-2026-02-06/thys/Inductive_Inference/document/root.tex",
+            "afp-2026-02-06/thys/Minsky_Machines/Minsky.thy"
+          ]
+        },
+        "rocq-undecidability": {
+          "hit_count": 1,
+          "matched_queries": [
+            "rice's theorem",
+            "rice_"
+          ],
+          "paths": [
+            "theories/L/Computability/Rice.v"
+          ]
+        },
+        "hol4": {
+          "hit_count": 2,
+          "matched_queries": [
+            "rice's theorem",
+            "rice_"
+          ],
+          "paths": [
+            "examples/computability/lambda/recsetsScript.sml",
+            "examples/logic/temporal_deep/src/examples/ltl2omega.sml"
+          ]
+        },
+        "agda-stdlib": {
+          "hit_count": 1,
+          "matched_queries": [
+            "rice_"
+          ],
+          "paths": [
+            "src/Data/Nat/DivMod.agda"
+          ]
+        }
+      },
+      "total_hit_count": 12
+    },
+    "BY-013": {
+      "queries": [
+        "gödel incompleteness",
+        "goedel incompleteness",
+        "unprovability"
+      ],
+      "hits": {
+        "mathlib": {
+          "hit_count": 4,
+          "matched_queries": [
+            "unprovability"
+          ],
+          "paths": [
+            "ModelTheory/Basic.lean",
+            "ModelTheory/LanguageMap.lean",
+            "ModelTheory/Semantics.lean"
+          ]
+        },
+        "isabelle-afp": {
+          "hit_count": 23,
+          "matched_queries": [
+            "goedel incompleteness"
+          ],
+          "paths": [
+            "afp-2026-02-06/thys/Goedel_HFSet_Semantic/Instance.thy",
+            "afp-2026-02-06/thys/Goedel_HFSet_Semantic/document/root.tex",
+            "afp-2026-02-06/thys/Goedel_HFSet_Semanticless/Instance.thy"
+          ]
+        },
+        "hol-light": {
+          "hit_count": 2,
+          "matched_queries": [
+            "gödel incompleteness",
+            "unprovability"
+          ],
+          "paths": [
+            "GL/decid.ml",
+            "GL/gl.ml"
+          ]
+        }
+      },
+      "total_hit_count": 29
+    },
+    "BY-014": {
+      "queries": [
+        "halting problem",
+        "undecidability",
+        "undecidable"
+      ],
+      "hits": {
+        "mathlib": {
+          "hit_count": 6,
+          "matched_queries": [
+            "halting problem",
+            "undecidability",
+            "undecidable"
+          ],
+          "paths": [
+            "CategoryTheory/Category/PartialFun.lean",
+            "Computability/Halting.lean",
+            "Computability/PartrecCode.lean"
+          ]
+        },
+        "isabelle-afp": {
+          "hit_count": 36,
+          "matched_queries": [
+            "halting problem",
+            "undecidability",
+            "undecidable"
+          ],
+          "paths": [
+            "afp-2026-02-06/thys/CISC-Kernel/document/root.tex",
+            "afp-2026-02-06/thys/CakeML/generated/Lem_set.thy",
+            "afp-2026-02-06/thys/Diophantine_Universal_Pairs/document/root.tex"
+          ]
+        },
+        "rocq-undecidability": {
+          "hit_count": 660,
+          "matched_queries": [
+            "halting problem",
+            "undecidability",
+            "undecidable"
+          ],
+          "paths": [
+            "README.md",
+            "theories/BI/BI.md",
+            "theories/BI/BI.v"
+          ]
+        },
+        "hol4": {
+          "hit_count": 1,
+          "matched_queries": [
+            "undecidable"
+          ],
+          "paths": [
+            "examples/computability/lambda/HaltingProblemsScript.sml"
+          ]
+        },
+        "hol-light": {
+          "hit_count": 2,
+          "matched_queries": [
+            "undecidability",
+            "undecidable"
+          ],
+          "paths": [
+            "GL/decid.ml",
+            "GL/tests.ml"
+          ]
+        }
+      },
+      "total_hit_count": 705
+    },
+    "BY-015": {
+      "queries": [
+        "chaitin incompleteness",
+        "kolmogorov complexity incompleteness"
+      ],
+      "hits": {},
+      "total_hit_count": 0
+    },
+    "BY-016": {
+      "queries": [
+        "tarski undefinability",
+        "undefinability of truth",
+        "undefinability"
+      ],
+      "hits": {
+        "hol-light": {
+          "hit_count": 1,
+          "matched_queries": [
+            "undefinability of truth",
+            "undefinability"
+          ],
+          "paths": [
+            "Arithmetic/tarski.ml"
+          ]
+        }
+      },
+      "total_hit_count": 1
+    },
+    "BY-017": {
+      "queries": [
+        "unsurveyability",
+        "surveyability of proof"
+      ],
+      "hits": {},
+      "total_hit_count": 0
+    },
+    "BY-018": {
+      "queries": [
+        "unlearnability",
+        "learnability undecidable",
+        "pac learnability"
+      ],
+      "hits": {},
+      "total_hit_count": 0
+    },
+    "BY-019": {
+      "queries": [
+        "predicting rational agents",
+        "rational agent unpredictability"
+      ],
+      "hits": {},
+      "total_hit_count": 0
+    },
+    "BY-020": {
+      "queries": [
+        "no free lunch",
+        "supervised learning"
+      ],
+      "hits": {
+        "isabelle-afp": {
+          "hit_count": 2,
+          "matched_queries": [
+            "no free lunch"
+          ],
+          "paths": [
+            "afp-2026-02-06/thys/No_Free_Lunch_ML/No_Free_Lunch_ML.thy",
+            "afp-2026-02-06/thys/No_Free_Lunch_ML/document/root.tex"
+          ]
+        }
+      },
+      "total_hit_count": 2
+    },
+    "BY-021": {
+      "queries": [
+        "no free lunch",
+        "black box optimization",
+        "wolpert",
+        "macready"
+      ],
+      "hits": {
+        "isabelle-afp": {
+          "hit_count": 2,
+          "matched_queries": [
+            "no free lunch"
+          ],
+          "paths": [
+            "afp-2026-02-06/thys/No_Free_Lunch_ML/No_Free_Lunch_ML.thy",
+            "afp-2026-02-06/thys/No_Free_Lunch_ML/document/root.tex"
+          ]
+        }
+      },
+      "total_hit_count": 2
+    },
+    "BY-022": {
+      "queries": [
+        "continuous free lunch",
+        "coevolutionary free lunch"
+      ],
+      "hits": {},
+      "total_hit_count": 0
+    },
+    "BY-023": {
+      "queries": [
+        "unidentifiability",
+        "nonidentifiability",
+        "disentanglement impossibility"
+      ],
+      "hits": {},
+      "total_hit_count": 0
+    },
+    "BY-024": {
+      "queries": [
+        "physical limits of inference",
+        "inference device"
+      ],
+      "hits": {},
+      "total_hit_count": 0
+    },
+    "BY-025": {
+      "queries": [
+        "uncontainability",
+        "superintelligence cannot be contained",
+        "containment problem"
+      ],
+      "hits": {},
+      "total_hit_count": 0
+    },
+    "BY-026": {
+      "queries": [
+        "safe interruptibility",
+        "uninterruptibility",
+        "off-switch"
+      ],
+      "hits": {},
+      "total_hit_count": 0
+    },
+    "BY-027": {
+      "queries": [
+        "loebs theorem",
+        "loeb theorem",
+        "loeb formula",
+        "provability logic"
+      ],
+      "hits": {
+        "isabelle-afp": {
+          "hit_count": 3,
+          "matched_queries": [
+            "loebs theorem",
+            "loeb formula"
+          ],
+          "paths": [
+            "afp-2026-02-06/thys/Goedel_Incompleteness/Loeb.thy",
+            "afp-2026-02-06/thys/Goedel_Incompleteness/Loeb_Formula.thy",
+            "afp-2026-02-06/thys/Incompleteness/Loebs_Theorem.thy"
+          ]
+        },
+        "hol-light": {
+          "hit_count": 6,
+          "matched_queries": [
+            "provability logic"
+          ],
+          "paths": [
+            "GL/README.md",
+            "GL/completeness.ml",
+            "GL/decid.ml"
+          ]
+        }
+      },
+      "total_hit_count": 9
+    },
+    "BY-028": {
+      "queries": [
+        "superhuman unpredictability",
+        "unpredictability of ai"
+      ],
+      "hits": {},
+      "total_hit_count": 0
+    },
+    "BY-029": {
+      "queries": [
+        "unexplainability",
+        "explanation impossibility"
+      ],
+      "hits": {},
+      "total_hit_count": 0
+    },
+    "BY-030": {
+      "queries": [
+        "incomprehensibility",
+        "software comprehension"
+      ],
+      "hits": {},
+      "total_hit_count": 0
+    },
+    "BY-031": {
+      "queries": [
+        "k-incomprehensibility",
+        "kolmogorov intelligence"
+      ],
+      "hits": {},
+      "total_hit_count": 0
+    },
+    "BY-032": {
+      "queries": [
+        "unverifiability",
+        "verifier theory"
+      ],
+      "hits": {
+        "isabelle-afp": {
+          "hit_count": 3,
+          "matched_queries": [
+            "verifier theory"
+          ],
+          "paths": [
+            "afp-2026-02-06/thys/FOL_Seq_Calc2/README.md",
+            "afp-2026-02-06/thys/Jinja/DFA/Abstract_BV.thy",
+            "afp-2026-02-06/thys/JinjaThreads/DFA/Abstract_BV.thy"
+          ]
+        }
+      },
+      "total_hit_count": 3
+    },
+    "BY-033": {
+      "queries": [
+        "robot ethics verification",
+        "ethical robot"
+      ],
+      "hits": {},
+      "total_hit_count": 0
+    },
+    "BY-034": {
+      "queries": [
+        "bottom-up ethics",
+        "machine ethics complexity"
+      ],
+      "hits": {},
+      "total_hit_count": 0
+    },
+    "BY-035": {
+      "queries": [
+        "no-flattening",
+        "deep shallow network"
+      ],
+      "hits": {},
+      "total_hit_count": 0
+    },
+    "BY-036": {
+      "queries": [
+        "multilayer perceptron",
+        "boolean functions neural"
+      ],
+      "hits": {},
+      "total_hit_count": 0
+    },
+    "BY-037": {
+      "queries": [
+        "goodhart",
+        "measure becomes a target"
+      ],
+      "hits": {},
+      "total_hit_count": 0
+    },
+    "BY-038": {
+      "queries": [
+        "campbell's law",
+        "campbell law"
+      ],
+      "hits": {},
+      "total_hit_count": 0
+    },
+    "BY-039": {
+      "queries": [
+        "reward corruption",
+        "corrupted reward channel",
+        "reward tampering"
+      ],
+      "hits": {},
+      "total_hit_count": 0
+    },
+    "BY-040": {
+      "queries": [
+        "uncontrollability of ai",
+        "ai control"
+      ],
+      "hits": {},
+      "total_hit_count": 0
+    },
+    "BY-041": {
+      "queries": [
+        "unambiguous communication",
+        "ambiguity communication"
+      ],
+      "hits": {},
+      "total_hit_count": 0
+    },
+    "BY-042": {
+      "queries": [
+        "unfairness of explainability",
+        "strategic inequality"
+      ],
+      "hits": {},
+      "total_hit_count": 0
+    },
+    "BY-043": {
+      "queries": [
+        "misaligned embodiment",
+        "operationally cloned",
+        "clone misalignment"
+      ],
+      "hits": {},
+      "total_hit_count": 0
+    },
+    "BY-044": {
+      "queries": [
+        "limited self-awareness",
+        "locus of self",
+        "self-awareness limit"
+      ],
+      "hits": {},
+      "total_hit_count": 0
+    }
+  }
+}

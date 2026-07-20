@@ -86,16 +86,25 @@ def main() -> None:
                 fail(f"{eid} root_import true requires atlas_declaration")
             root_import_decls.append(decl)
 
-    # Root-import landscape theorems must appear in the public root module text.
+    # Root-import landscape theorems must appear on the public import surface:
+    # either the root module text or a facade module the root re-exports.
     root_lean = (ROOT / "AISafetyAtlas.lean").read_text(encoding="utf-8")
-    explain = (ROOT / "AISafetyAtlas" / "Explainability.lean").read_text(encoding="utf-8")
+    facade_paths = [
+        ROOT / "AISafetyAtlas" / "Explainability.lean",
+        ROOT / "AISafetyAtlas" / "SocialChoice.lean",
+        ROOT / "AISafetyAtlas" / "Logic.lean",
+        ROOT / "AISafetyAtlas" / "Computability.lean",
+        ROOT / "AISafetyAtlas" / "Verification.lean",
+    ]
+    facade_text = "\n".join(
+        path.read_text(encoding="utf-8") for path in facade_paths if path.is_file()
+    )
     for decl in root_import_decls:
-        # Namespace path: AISafetyAtlas.Explainability.attribution_impossibility
         short = decl.split(".")[-1]
-        if short not in explain and decl not in root_lean:
+        if short not in facade_text and decl not in root_lean and short not in root_lean:
             fail(
-                f"root_import declaration {decl} not found in Explainability.lean "
-                "or AISafetyAtlas.lean"
+                f"root_import declaration {decl} not found in AISafetyAtlas.lean "
+                "or a root-imported facade module"
             )
 
     print(

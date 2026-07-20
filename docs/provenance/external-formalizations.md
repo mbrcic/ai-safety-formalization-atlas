@@ -59,14 +59,12 @@ scripts/reproduce_isabelle.sh rice
   session (including `GS.thy`). Passed on 2026-07-18; re-run green on
   **2026-07-19** (`ArrowImpossibilityGS` finished ~5s wall after image/start:
   `Arrow_Order`, `Arrow_Utility`, `GS` all 100%).
-- **Integration decision (closed 2026-07-19):** Isabelle
-  `Gibbard_Satterthwaite` is the **reproduced landscape formalization** for GS
-  (Isabelle only; no Lean interface; landscape id `LAND-GS-001` in
-  [`landscape.yaml`](../../landscape.yaml); not a Table-1 BY ID). “Reproduced”
-  means the pinned AFP session rebuilds via the script below — it is **not**
-  CI-integrated and not importable from Lean. Do not port GS from Isabelle into
-  Lean. Atlas Arrow remains CC Liang + utility bridge. A Lean GS facade is
-  **not** planned unless upstream becomes a boring 4.31+ dependency (see below).
+- **Integration:** Isabelle `Gibbard_Satterthwaite` is landscape `LAND-GS-001`
+  (not a Table-1 BY ID). “Reproduced” means the pinned AFP session rebuilds via
+  the script below — it is **not** CI-integrated. Lean consumers should use
+  `AISafetyAtlas.SocialChoice.gibbard_satterthwaite` (`LAND-GS-002`, next
+  section), not an Isabelle→Lean port. Atlas Arrow remains CC Liang + utility
+  bridge (distinct lineage from SocialChoiceLean).
 
 Command:
 
@@ -74,50 +72,35 @@ Command:
 scripts/reproduce_isabelle.sh arrow
 ```
 
-## Lean 4: Gibbard–Satterthwaite (SocialChoiceLean) — deficient, not used
+## Lean 4: Gibbard–Satterthwaite (SocialChoiceLean) — vendored landscape
 
-Existing Lean formalization of classical GS (not a survey-row coverage claim).
-**Not an atlas dependency.** Kept only as inspected landscape evidence.
+Classical GS (resolute voting rules), landscape only — **not** survey Table-1
+coverage. Lean interface is first-class for atlas consumers; Isabelle twin
+remains `LAND-GS-001`.
 
 - Upstream: [`DominikPeters/SocialChoiceLean`](https://github.com/DominikPeters/SocialChoiceLean)
-- Domain supervisor: Dominik Peters (CNRS / LAMSADE, computational social choice)
-- License: **MIT** (stated in README; no separate LICENSE file in tree at pin)
-- Revision inspected: `0331c7b237994e10cd893e17945a8445e2422e17` (clone HEAD 2026-07-19)
-- Toolchain at pin: Lean `v4.27.0-rc1`; lakefile pins Mathlib to **`master`**
-  (not an immutable Mathlib rev — blocks strict atlas reproduction until pinned)
-- Module: `SocialChoice.Impossibilities.GibbardSatterthwaite.Main`
-- Principal declaration: `SocialChoice.gibbard_satterthwaite`
-  - For `3 ≤ |A|`, resolute, unanimous, strategy-proof voting rules are
-    dictatorial (`∃ d, ∀ P, f P = {topChoice P d}`).
-- Trust scan (sources at pin): no `sorry` / `admit` in `SocialChoice/`.
-- Provenance note: README describes substantial AI-assisted (“vibe-proving”)
-  authorship under Dominik Peters; treat as **source-inspected community Lean**,
-  not peer-reviewed formalization paper-grade, **not atlas-canonical**.
+- Port pin: [`mbrcic/SocialChoiceLean`](https://github.com/mbrcic/SocialChoiceLean)
+  branch `port/lean-4.31` revision **`74f491b`** (Lean/Mathlib **v4.31.0**)
+- License: **MIT** (`vendor/SocialChoiceLean/LICENSE`)
+- Atlas module: `AISafetyAtlas/Upstream/GibbardSatterthwaite.lean` (single-module
+  packaging of the GS closure; multi-file mirror under
+  `vendor/SocialChoiceLean/`)
+- Facade: `AISafetyAtlas.SocialChoice.gibbard_satterthwaite` (`LAND-GS-002`)
+- Statement: for `3 ≤ |A|`, resolute + unanimous + strategy-proof ⇒
+  dictatorial (`∃ d, ∀ P, f P = {topChoice P d}`)
+- Axioms: `[propext, Classical.choice, Quot.sound]` only
+  (`scripts/check_print_axioms.py`)
+- Scope: classical GS only — not the rest of SocialChoiceLean
+- Provenance note: upstream README describes substantial AI-assisted authorship
+  under Dominik Peters; treat as source-inspected community Lean
 
-### 4.31 force experiment (2026-07-19) — closed
+### 4.31 port path (2026-07-19)
 
-Tried path (1): force SocialChoiceLean onto Lean/Mathlib `v4.31.0` (atlas pin)
-in an isolated clone (`/tmp/socialchoice-431`). Outcomes:
-
-- `lake update` to Mathlib `v4.31.0` succeeded.
-- After ballot-equality proof repair (class-valued `LinearOrder` + `simp` no
-  longer rewrites Prefers instances on 4.31): **BaseCase**, **Common**, and
-  **InductionStepCase1** built green.
-- **InductionStepCase2** (~1.8k lines) still had ~70 errors of the same class;
-  **Main** blocked. No full GS green build under 4.31.
-- Dual-toolchain / side-by-side 4.33 was rejected earlier (Lake is one toolchain;
-  atlas pin stays 4.31).
-
-### Integration decision (final for this cycle)
-
-Per atlas policy (prefer Lean; use other provers when Lean is missing or
-deficient): **Lean GS is deficient under the atlas pin.** The reproduced
-landscape formalization is Isabelle `Gibbard_Satterthwaite` via
-`scripts/reproduce_isabelle.sh arrow` (not a Lean research interface). **Do
-not** vendor SocialChoiceLean, **do not** add
-`AISafetyAtlas…gibbard_satterthwaite` until upstream is a boring 4.31+ pin with
-a green full GS build (or a reworked human-owned proof). **No Isabelle→Lean
-port.** Reopen only if a named consumer needs a Lean statement.
+Initial force of upstream master (4.27-class) onto Mathlib `v4.31.0` failed on
+`InductionStepCase2` (`Prefers` → `.lt` instance-path drift). The port adds
+`GSShim.lean` ballot-level congruence and routes profile equalities through it;
+full GS (BaseCase/Common/Case1/Case2/Main) builds green under the atlas pin and
+is vendored as above. Isabelle AFP reproduce path is unchanged.
 
 ## Lean 4: Attribution impossibility (DASH / XAI landscape)
 
@@ -341,6 +324,42 @@ only (no `sorry` in the atlas closure). Foundation rebuilds with
 Coverage policy: [`logic-incompleteness.md`](../guide/logic-incompleteness.md).
 Chaitin vendor layout:
 [`AISafetyAtlas/Upstream/KolmogorovMathlib/README.md`](../../AISafetyAtlas/Upstream/KolmogorovMathlib/README.md).
+
+## Isabelle/HOL: CondNormReasHOL (Parfit mere addition; landscape)
+
+- Upstream: [AFP — CondNormReasHOL](https://www.isa-afp.org/entries/CondNormReasHOL.html)
+- Authors: Xavier Parent, Christoph Benzmüller
+- License: BSD-3-Clause (AFP)
+- Release: `2026-02-06`; archive SHA-256
+  `10c3aa794a3cafcfb08a784e11515933162a490b32fc0cdb0cf88f489accdb38`
+- Session: `CondNormReasHOL` (HOL only)
+- Landscape: `LAND-PE-001` — **RELATED** to BY-008 (population-ethics adjacent);
+  **not** EXACT Arrhenius 2011
+- Reproduce: `scripts/reproduce_isabelle.sh condnorm`
+- Evidence: [`a1-condnorm-parfit-triage.md`](a1-condnorm-parfit-triage.md)
+
+## Isabelle/HOL: Deep_Learning (network capacity / no-flattening family)
+
+- Upstream: [AFP — Deep_Learning](https://www.isa-afp.org/entries/Deep_Learning.html)
+- Author: Alexander Bentkamp
+- License: BSD-3-Clause (AFP)
+- Release: `2026-02-06`; entry archive SHA-256
+  `018557d0041584239d603a7eb3700d07ed7eb2a2ca48f694820072003ebf430d`;
+  full AFP tree for build SHA-256
+  `b059edd46073479ee8dde45004c2346a7365e5d94cded49d27257cfea66c8879`
+- Session: `Deep_Learning` (via full AFP `thys/`; deps include Jordan_Normal_Form,
+  Polynomials, VectorSpace, …)
+- Principal declarations: `fundamental_theorem_network_capacity` (+ `_v2`, `_v3`)
+- Landscape: `LAND-DL-001` — **RELATED** to BY-035 informal no-flattening claim;
+  not EXACT Lin–Tegmark–Rolnick 2017 citation alone
+- Reproduce: `scripts/reproduce_isabelle.sh deep-learning`
+- Evidence: [`a2-deep-learning-by035-triage.md`](a2-deep-learning-by035-triage.md)
+
+## BY-001 Unobservability — AFP candidates cleared
+
+Keyword AFP “observability” hits (FSM testing, protocol refinement) are
+**DISTINCT** from Klamka control-theoretic unobservability. Candidates removed;
+see [`a3-by001-unobservability-triage.md`](a3-by001-unobservability-triage.md).
 
 ## Isabelle reproduction environment
 

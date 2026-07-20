@@ -1,4 +1,5 @@
 AISafetyAtlas.Examples.PublicAPI
 AISafetyAtlas.Examples.Registry
 AISafetyAtlas.Examples.Robot
+AISafetyAtlas.Examples.NFLConcrete
 AISafetyAtlas.Survey.BrcicYampolskiy.HaltingExample

@@ -41,7 +41,89 @@
       "module": "Thys/GS.thy",
       "declaration": "Gibbard_Satterthwaite",
       "reproduction": "scripts/reproduce_isabelle.sh arrow",
-      "notes": "Reproduced landscape formalization (Isabelle only; no Lean interface). Lean SocialChoiceLean is deficient under the atlas 4.31 pin and is not vendored."
+      "notes": "Reproduced AFP landscape formalization (Isabelle). Lean interface is LAND-GS-002."
+    },
+    {
+      "id": "LAND-GS-002",
+      "name": "Gibbard–Satterthwaite theorem (Lean / SocialChoiceLean)",
+      "kind": "LANDSCAPE",
+      "survey_coverage": null,
+      "related_survey_ids": [
+        "BY-007"
+      ],
+      "survey_coverage_note": "Not a separate Table-1 BY ID; Arrow-session provenance only. Classical resolute voting-rule form.",
+      "framework": "Lean",
+      "license": "MIT",
+      "repository": "https://github.com/DominikPeters/SocialChoiceLean",
+      "revision": "mbrcic/SocialChoiceLean port/lean-4.31 @ 74f491b (Mathlib/Lean v4.31.0)",
+      "atlas_declaration": "AISafetyAtlas.SocialChoice.gibbard_satterthwaite",
+      "root_import": true,
+      "module": "AISafetyAtlas/SocialChoice.lean",
+      "upstream_module": "AISafetyAtlas/Upstream/GibbardSatterthwaite.lean",
+      "declaration": "gibbard_satterthwaite",
+      "reproduction": "lake build AISafetyAtlas; python3 scripts/check_print_axioms.py",
+      "notes": "Classical GS: resolute + unanimous + strategy-proof ⇒ dictatorial (3 ≤ |A|). Vendored GS closure from SocialChoiceLean 4.31 port (ballot shim); multi-file mirror under vendor/SocialChoiceLean/. Not full SocialChoiceLean. Isabelle twin is LAND-GS-001."
+    },
+    {
+      "id": "LAND-NFL-001",
+      "name": "No-free-lunch theorem for machine learning (Shalev-Shwartz–Ben-David §5.1)",
+      "kind": "LANDSCAPE",
+      "survey_coverage": null,
+      "related_survey_ids": [
+        "BY-020",
+        "BY-021"
+      ],
+      "survey_coverage_note": "DISTINCT from BY-020 (Wolpert 1996 supervised NFL) and BY-021 (Wolpert–Macready 1997 optimization NFL): this is the PAC / sample-complexity NFL (Understanding ML Thm 5.1), not the uniform-averaging Wolpert results. Not BY-020/021 coverage. See docs/provenance/ct2-nfl-triage.md. The in-tree Lean AISafetyAtlas.Learning.no_free_lunch (BY-021 RELATED) is also DISTINCT from this landscape entry.",
+      "framework": "Isabelle/HOL",
+      "license": "BSD-3-Clause",
+      "repository": "https://www.isa-afp.org/entries/No_Free_Lunch_ML.html",
+      "revision": "AFP release 2026-02-06; archive SHA-256 93ce8953bac6b09a29f6d2aafa64d4dbedf49e11f13cdad4cddc42f95f173588",
+      "atlas_declaration": null,
+      "root_import": false,
+      "module": "No_Free_Lunch_ML.thy",
+      "declaration": "no_free_lunch_ML",
+      "reproduction": "scripts/reproduce_isabelle.sh nfl",
+      "notes": "Statement-level triage (CT-2, 2026-07-19): matches SSBD Thm 5.1 — for binary classification with 2*m < |space X|, every learner admits a realizable distribution on which P[L(A(S)) > 1/8] >= 1/7. Session depends only on HOL-Probability. Reproduction log recorded in docs/provenance/ct2-nfl-triage.md. Lean Wolpert NFL (docs/provenance/lean-wolpert-nfl.md) does not replace or cover this entry."
+    },
+    {
+      "id": "LAND-PE-001",
+      "name": "Parfit mere addition / conditional normative reasoning (Åqvist E)",
+      "kind": "LANDSCAPE",
+      "survey_coverage": null,
+      "related_survey_ids": [
+        "BY-008"
+      ],
+      "survey_coverage_note": "RELATED only: population-ethics adjacent (Parfit mere addition / repugnant-conclusion encoding). Not EXACT/EQUIVALENT to Arrhenius 2011 impossibility package (BY-008 survey source). See docs/provenance/a1-condnorm-parfit-triage.md.",
+      "framework": "Isabelle/HOL",
+      "license": "BSD-3-Clause",
+      "repository": "https://www.isa-afp.org/entries/CondNormReasHOL.html",
+      "revision": "AFP release 2026-02-06; archive SHA-256 10c3aa794a3cafcfb08a784e11515933162a490b32fc0cdb0cf88f489accdb38",
+      "atlas_declaration": null,
+      "root_import": false,
+      "module": "mere_addition_opt.thy",
+      "declaration": "mere_addition encodings (Parent–Benzmüller CondNormReasHOL)",
+      "reproduction": "scripts/reproduce_isabelle.sh condnorm",
+      "notes": "A1 (2026-07-19): AFP CondNormReasHOL — Åqvist system E + Parfit mere-addition use case. Not Arrhenius BY-008 coverage. Evidence: docs/provenance/a1-condnorm-parfit-triage.md."
+    },
+    {
+      "id": "LAND-DL-001",
+      "name": "Deep vs shallow network capacity (Cohen–Bentkamp)",
+      "kind": "LANDSCAPE",
+      "survey_coverage": null,
+      "related_survey_ids": [
+        "BY-035"
+      ],
+      "survey_coverage_note": "RELATED to BY-035 no-flattening informal claim (deep nets require large shallow representations). Formalizes Bentkamp/AFP of Cohen et al. 2015-style network-capacity theorems, not the Lin–Tegmark–Rolnick 2017 survey citation as EXACT. See docs/provenance/a2-deep-learning-by035-triage.md.",
+      "framework": "Isabelle/HOL",
+      "license": "BSD-3-Clause",
+      "repository": "https://www.isa-afp.org/entries/Deep_Learning.html",
+      "revision": "AFP release 2026-02-06; full-tree build SHA-256 b059edd46073479ee8dde45004c2346a7365e5d94cded49d27257cfea66c8879; entry archive 018557d0041584239d603a7eb3700d07ed7eb2a2ca48f694820072003ebf430d",
+      "atlas_declaration": null,
+      "root_import": false,
+      "module": "DL_Fundamental_Theorem_Network_Capacity.thy",
+      "declaration": "fundamental_theorem_network_capacity",
+      "reproduction": "scripts/reproduce_isabelle.sh deep-learning",
+      "notes": "A2 (2026-07-19): AE almost-all weights, deep model not matchable by shallow width Z < r^(N/2). Landscape RELATED to BY-035; not headline EXACT. Evidence: docs/provenance/a2-deep-learning-by035-triage.md."
     },
     {
       "id": "LAND-VNM-001",
@@ -100,6 +182,24 @@
       "statement_map": "docs/guide/related-literature.md",
       "source_catalog_ref": "atlas-ref-melo-2024",
       "notes": "Related-literature landscape entry (see docs/guide/related-literature.md). Atlas tracks Rice packaging of their stated decision problem; architecture half not formalized. Does not increase headline coverage."
+    },
+    {
+      "id": "LAND-DEBATE-001",
+      "name": "Doubly-efficient debate correctness (Brown-Cohen–Irving–Piliouras 2023)",
+      "kind": "LANDSCAPE",
+      "survey_coverage": null,
+      "related_survey_ids": [],
+      "survey_coverage_note": "Possibility / scalable-oversight guarantee, not a Table-1 impossibility row — a live landscape anchor dual to the impossibility rows. No survey coverage.",
+      "framework": "Lean",
+      "license": "Apache-2.0",
+      "repository": "https://github.com/google-deepmind/debate",
+      "revision": "de3a6e500ae1a65dfeea2f91ef519ebad9704be0 (main, no release tag; last commit 2024-10-08)",
+      "atlas_declaration": null,
+      "root_import": false,
+      "module": "Debate/Correct.lean",
+      "declaration": "completeness, soundness, correctness (paper Theorem 6.2)",
+      "reproduction": "scripts/reproduce_debate.sh",
+      "notes": "CT-7 (2026-07-20): machine-checked correctness of the stochastic-oracle debate protocol, arXiv 2311.14125. Path-A reproduction — built at upstream toolchain (Lean/Mathlib v4.8.0), NOT vendored into the atlas 4.31 tree, no atlas Lean import surface. Upstream caveats carried: correctness only (space complexity not formalized); time counts oracle queries only; Lipschitz oracle machine defined as a stronger variant. No AI-system reading without a separate reviewed bridge. Evidence: docs/provenance/debate-reproduction.md."
     }
   ]
 }

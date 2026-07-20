@@ -18,5 +18,12 @@ import AISafetyAtlas
 #check AISafetyAtlas.Logic.chaitin_incompleteness
 #check AISafetyAtlas.Logic.chaitin_bound
 #check AISafetyAtlas.Logic.tarski_undefinability
+#check AISafetyAtlas.Learning.no_free_lunch_supervised
+#check AISafetyAtlas.Learning.lossConfig_sum_learner_indep
+#check AISafetyAtlas.Learning.ots_error_distribution_learner_indep
+#check AISafetyAtlas.Learning.homogeneous_of_learner_indep
+#check AISafetyAtlas.Learning.homogeneous_iff_learner_indep
+#check AISafetyAtlas.Learning.no_free_lunch
+#check AISafetyAtlas.Learning.no_free_lunch_adaptive
 #check AISafetyAtlas.Logic.loeb
 #check AISafetyAtlas.Verification.Robot.action_safety_unverifiable

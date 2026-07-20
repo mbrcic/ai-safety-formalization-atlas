@@ -9,6 +9,11 @@ Narrative provenance remains in [`external-formalizations.md`](../provenance/ext
 |---|---|---|---|---|---|
 | LAND-ATTR-001 | Attribution impossibility (DASH trilemma) | Lean | `AISafetyAtlas.Explainability.attribution_impossibility` | yes | `lake build AISafetyAtlas (vendored axiom-free trilemma)` |
 | LAND-GS-001 | Gibbard–Satterthwaite theorem | Isabelle/HOL | `Gibbard_Satterthwaite` | no | `scripts/reproduce_isabelle.sh arrow` |
+| LAND-GS-002 | Gibbard–Satterthwaite theorem (Lean / SocialChoiceLean) | Lean | `AISafetyAtlas.SocialChoice.gibbard_satterthwaite` | yes | `lake build AISafetyAtlas; python3 scripts/check_print_axioms.py` |
+| LAND-NFL-001 | No-free-lunch theorem for machine learning (Shalev-Shwartz–Ben-David §5.1) | Isabelle/HOL | `no_free_lunch_ML` | no | `scripts/reproduce_isabelle.sh nfl` |
+| LAND-PE-001 | Parfit mere addition / conditional normative reasoning (Åqvist E) | Isabelle/HOL | `mere_addition encodings (Parent–Benzmüller CondNormReasHOL)` | no | `scripts/reproduce_isabelle.sh condnorm` |
+| LAND-DL-001 | Deep vs shallow network capacity (Cohen–Bentkamp) | Isabelle/HOL | `fundamental_theorem_network_capacity` | no | `scripts/reproduce_isabelle.sh deep-learning` |
 | LAND-VNM-001 | von Neumann–Morgenstern expected utility | Lean | `vNM.vNM_theorem` | no | `scripts/reproduce_vnm.sh` |
 | LAND-TCS-ARROW-001 | Fourier-analytic Arrow theorem (TCSLib) | Lean | `ArrowTheorem.arrow_theorem` | no | — |
 | LAND-MELO-001 | Melo et al. inner-alignment decision problem (Rice packaging) | Lean | `AISafetyAtlas.Verification.AgentBehavior.no_behavioral_safety_verifier` | no | `lake build AISafetyAtlas.Verification.AgentBehavior` |
+| LAND-DEBATE-001 | Doubly-efficient debate correctness (Brown-Cohen–Irving–Piliouras 2023) | Lean | `completeness, soundness, correctness (paper Theorem 6.2)` | no | `scripts/reproduce_debate.sh` |

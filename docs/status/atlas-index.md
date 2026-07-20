@@ -10,7 +10,7 @@ coverage counting and [open work](../guide/open-work.md) for next actions.
 
 | ID | Survey result | Informal claim | Formalization | Bridge | Candidate leads |
 |---|---|---|---|---|---:|
-| BY-001 | Unobservability | A system's internal state cannot in general be reconstructed from its observable outputs. | — | `HUMAN_REVIEW` | 1 |
+| BY-001 | Unobservability | A system's internal state cannot in general be reconstructed from its observable outputs. | — | `HUMAN_REVIEW` | — |
 | BY-002 | Uncontrollability of dynamical systems | Some dynamical systems cannot be driven between arbitrary states by available controls. | — | `HUMAN_REVIEW` | — |
 | BY-003 | Good Regulator Theorem | Every maximally simple optimal regulator must embody a model of the regulated system. | — | `HUMAN_REVIEW` | — |
 | BY-004 | Law of Requisite Variety | Perfect regulation requires sufficient controller variety under perfect information and unbounded response speed. | — | `HUMAN_REVIEW` | — |
@@ -29,8 +29,8 @@ coverage counting and [open work](../guide/open-work.md) for next actions.
 | BY-017 | Unsurveyability | Some proofs may exceed feasible human survey or comprehension even when mechanically checkable. | — | `HUMAN_REVIEW` | — |
 | BY-018 | Unlearnability | Learning can be undecidable or computationally infeasible for specified concept classes and learning models. | — | `HUMAN_REVIEW` | — |
 | BY-019 | Unpredictability of rational agents | No predictor can universally forecast the behaviour of rational agents in the cited strategic settings. | — | `HUMAN_REVIEW` | — |
-| BY-020 | No Free Lunch — supervised learning | Averaged uniformly over target functions, learning algorithms have no universal performance advantage. | — | `HUMAN_REVIEW` | 1 |
-| BY-021 | No Free Lunch — optimization | Averaged uniformly over objective functions, optimization algorithms have equal aggregate performance. | — | `HUMAN_REVIEW` | 1 |
+| BY-020 | No Free Lunch — supervised learning | Averaged uniformly over target functions, learning algorithms have no universal performance advantage. | `RELATED` | `HUMAN_REVIEW` | — |
+| BY-021 | No Free Lunch — optimization | Averaged uniformly over objective functions, optimization algorithms have equal aggregate performance. | `RELATED` | `HUMAN_REVIEW` | — |
 | BY-022 | Free lunches in continuous spaces and coevolution | The cited results identify settings where standard no-free-lunch symmetry fails. | — | `HUMAN_REVIEW` | — |
 | BY-023 | Unidentifiability | Observational data can be compatible with multiple latent, causal, or generative explanations. | — | `HUMAN_REVIEW` | — |
 | BY-024 | Physical limits on inference | Embedded physical inference devices face limits on prediction, observation, and mutual control. | — | `HUMAN_REVIEW` | — |

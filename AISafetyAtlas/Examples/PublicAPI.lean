@@ -65,6 +65,16 @@ example {Alternative : Type} {voterCount : ℕ}
       AISafetyAtlas.SocialChoice.Utility.NonDictatorship rule :=
   AISafetyAtlas.SocialChoice.Utility.arrow atLeastThree
 
+example {V A : Type} [Fintype V] [Nonempty V] [Fintype A] [Nonempty A]
+    (hcardA : 3 ≤ Fintype.card A)
+    (f : AISafetyAtlas.SocialChoice.VotingRule)
+    (hf_res : AISafetyAtlas.SocialChoice.ResoluteVoting f)
+    (hf_unan : AISafetyAtlas.SocialChoice.VotingUnanimity f)
+    (hf_sp : AISafetyAtlas.SocialChoice.ResoluteStrategyproofness f hf_res) :
+    ∃ d : V, ∀ P : AISafetyAtlas.SocialChoice.VotingProfile V A,
+      f P = {AISafetyAtlas.SocialChoice.topChoice P d} :=
+  AISafetyAtlas.SocialChoice.gibbard_satterthwaite hcardA f hf_res hf_unan hf_sp
+
 example (property : AISafetyAtlas.Verification.BehavioralProperty)
     (nontrivial : AISafetyAtlas.Verification.Nontrivial property) :
     ¬ AISafetyAtlas.Verification.HasVerifier property :=
@@ -132,5 +142,21 @@ example (fs : AISafetyAtlas.Explainability.FeatureIndex)
     False :=
   AISafetyAtlas.Explainability.attribution_impossibility
     fs Model attribution hrash ℓ j k hj hk hjk ranking h_faithful
+
+-- Finite-domain Wolpert–Macready NFL (non-adaptive uniform averaging).
+example {X Y : Type*} [Fintype X] [Fintype Y] {m : ℕ}
+    (Φ : AISafetyAtlas.Learning.CostPerformance m Y)
+    (s₁ s₂ : AISafetyAtlas.Learning.NonadaptiveSchedule X m) :
+    AISafetyAtlas.Learning.aggregatePerformance Φ s₁ =
+      AISafetyAtlas.Learning.aggregatePerformance Φ s₂ :=
+  AISafetyAtlas.Learning.no_free_lunch Φ s₁ s₂
+
+-- Finite-domain Wolpert 1996 supervised NFL (off-training-set form).
+example {X Y : Type*} [Fintype X] [Fintype Y] [DecidableEq X] [DecidableEq Y]
+    (S : Set X)
+    (A B : AISafetyAtlas.Learning.SupervisedLearner X Y S) :
+    AISafetyAtlas.Learning.aggregateOffTrainingLoss S A =
+      AISafetyAtlas.Learning.aggregateOffTrainingLoss S B :=
+  AISafetyAtlas.Learning.no_free_lunch_supervised S A B
 
 end AISafetyAtlas.Examples.PublicAPI
