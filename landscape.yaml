@@ -182,6 +182,24 @@
       "statement_map": "docs/guide/related-literature.md",
       "source_catalog_ref": "atlas-ref-melo-2024",
       "notes": "Related-literature landscape entry (see docs/guide/related-literature.md). Atlas tracks Rice packaging of their stated decision problem; architecture half not formalized. Does not increase headline coverage."
+    },
+    {
+      "id": "LAND-DEBATE-001",
+      "name": "Doubly-efficient debate correctness (Brown-Cohen–Irving–Piliouras 2023)",
+      "kind": "LANDSCAPE",
+      "survey_coverage": null,
+      "related_survey_ids": [],
+      "survey_coverage_note": "Possibility / scalable-oversight guarantee, not a Table-1 impossibility row — a live landscape anchor dual to the impossibility rows. No survey coverage.",
+      "framework": "Lean",
+      "license": "Apache-2.0",
+      "repository": "https://github.com/google-deepmind/debate",
+      "revision": "de3a6e500ae1a65dfeea2f91ef519ebad9704be0 (main, no release tag; last commit 2024-10-08)",
+      "atlas_declaration": null,
+      "root_import": false,
+      "module": "Debate/Correct.lean",
+      "declaration": "completeness, soundness, correctness (paper Theorem 6.2)",
+      "reproduction": "scripts/reproduce_debate.sh",
+      "notes": "CT-7 (2026-07-20): machine-checked correctness of the stochastic-oracle debate protocol, arXiv 2311.14125. Path-A reproduction — built at upstream toolchain (Lean/Mathlib v4.8.0), NOT vendored into the atlas 4.31 tree, no atlas Lean import surface. Upstream caveats carried: correctness only (space complexity not formalized); time counts oracle queries only; Lipschitz oracle machine defined as a stronger variant. No AI-system reading without a separate reviewed bridge. Evidence: docs/provenance/debate-reproduction.md."
     }
   ]
 }

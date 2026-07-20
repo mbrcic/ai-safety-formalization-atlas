@@ -29,7 +29,7 @@ provenance.
 - **Does not change:** the impossibility rows; do not retro-claim BY-022 as
   formalized in README/registry until this lands.
 
-### CT-7 — Reproduce DeepMind doubly-efficient debate into the landscape (M) — **Reproduction rung**
+### CT-7 — Reproduce DeepMind doubly-efficient debate into the landscape (M) — **done (reproduced 2026-07-20)**
 
 The formalization exists and is Lean 4: `google-deepmind/debate`
 (Apache-2.0), a machine-checked correctness proof of the stochastic oracle
@@ -58,6 +58,14 @@ dual to the impossibility rows.
   machine defined slightly differently (a stronger variant). No AI-system
   reading without a separate reviewed bridge.
 - **Does not change:** survey `registry.yaml` coverage; the 4.31 build closure.
+- **Done (2026-07-20):** clean build at the pinned revision under upstream
+  `leanprover/lean4:v4.8.0` (`Debate.Correct`, 1721/1721 targets); strict-trust
+  scan clean across 19 upstream Lean sources; `completeness`/`soundness`/
+  `correctness` present in `Debate/Correct.lean`. Landscape record
+  `LAND-DEBATE-001` (`survey_coverage: null`, no atlas import surface);
+  `scripts/reproduce_debate.sh`; evidence
+  [`debate-reproduction.md`](../provenance/debate-reproduction.md). First
+  reproduced possibility / scalable-oversight anchor. Never headline coverage.
 
 ### CT-8 — BY-025 Uncontainability: bridge or documented no-map (M) — **Bridge rung**
 

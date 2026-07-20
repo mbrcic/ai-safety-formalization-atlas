@@ -12,7 +12,7 @@ Foundation Gödel I/II); R6/R7 remediation; BY-012 and BY-033 bridges `REVIEWED`
   **7 of 44**; RELATED-only **3**; reviewed
   AI-system bridges **2**; declaration layers WRAPPER **12** /
   BRIDGE **4**; structured candidate leads **0**; landscape
-  entries **9** (see `landscape.yaml`).
+  entries **10** (see `landscape.yaml`).
 <!-- END GENERATED REGISTRY SNAPSHOT -->
 
 Package version is **`0.2.0`** on this branch (`lakefile.toml`, `CITATION.cff`);
@@ -114,6 +114,13 @@ to `main` still requires explicit maintainer authorization (push / PR / merge).
   `docs/provenance/lean-wolpert-nfl.md`.
 - CT-4: `AISafetyAtlas.Verification.AgentBehavior.no_behavioral_safety_verifier`
   is a downstream consumer of `Verification.rice`.
+- CT-7 debate reproduced (2026-07-20): `google-deepmind/debate` @
+  `de3a6e500a` correctness proof (arXiv 2311.14125, Thm 6.2) built clean at
+  upstream Lean/Mathlib v4.8.0 (Path A, separate checkout, not vendored into the
+  4.31 tree). Landscape `LAND-DEBATE-001` (possibility / scalable-oversight
+  anchor, `survey_coverage: null`, no atlas import surface);
+  `scripts/reproduce_debate.sh`; docs `docs/provenance/debate-reproduction.md`.
+  First reproduced possibility result — never headline coverage.
 
 ## Next three tasks
 

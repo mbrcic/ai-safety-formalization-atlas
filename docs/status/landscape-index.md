@@ -16,3 +16,4 @@ Narrative provenance remains in [`external-formalizations.md`](../provenance/ext
 | LAND-VNM-001 | von Neumann–Morgenstern expected utility | Lean | `vNM.vNM_theorem` | no | `scripts/reproduce_vnm.sh` |
 | LAND-TCS-ARROW-001 | Fourier-analytic Arrow theorem (TCSLib) | Lean | `ArrowTheorem.arrow_theorem` | no | — |
 | LAND-MELO-001 | Melo et al. inner-alignment decision problem (Rice packaging) | Lean | `AISafetyAtlas.Verification.AgentBehavior.no_behavioral_safety_verifier` | no | `lake build AISafetyAtlas.Verification.AgentBehavior` |
+| LAND-DEBATE-001 | Doubly-efficient debate correctness (Brown-Cohen–Irving–Piliouras 2023) | Lean | `completeness, soundness, correctness (paper Theorem 6.2)` | no | `scripts/reproduce_debate.sh` |

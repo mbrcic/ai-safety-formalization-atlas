@@ -3,7 +3,7 @@
   "generated_by": "scripts/generate_registry_views.py",
   "note": "Compact agent lookup. Prefer this over registry.yaml / landscape.yaml. Open the full YAML only for a single id when notes or candidate formalization detail is required.",
   "survey_result_count": 44,
-  "landscape_entry_count": 9,
+  "landscape_entry_count": 10,
   "results_by_id": {
     "BY-001": {
       "id": "BY-001",
@@ -897,6 +897,15 @@
         "BY-012"
       ],
       "module": "AISafetyAtlas/Verification/AgentBehavior.lean",
+      "survey_coverage": null
+    },
+    "LAND-DEBATE-001": {
+      "id": "LAND-DEBATE-001",
+      "name": "Doubly-efficient debate correctness (Brown-Cohen–Irving–Piliouras 2023)",
+      "framework": "Lean",
+      "atlas_declaration": null,
+      "related_survey_ids": [],
+      "module": "Debate/Correct.lean",
       "survey_coverage": null
     }
   }
