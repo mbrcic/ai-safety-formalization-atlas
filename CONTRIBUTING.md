@@ -17,10 +17,10 @@ Lowest step that fits. Every one moves the atlas forward:
    system.
 4. **New proof** — formalize a result in Lean against the stable facade.
 
-Impossibility or possibility both belong: a bound, a guarantee, a tradeoff, or
-a limit. The seed leans toward impossibility results, but the infrastructure
-doesn't — continuous free lunches (BY-022) is a possibility row waiting to be
-formalized.
+A bound, a guarantee, a tradeoff, a limit — impossibility and possibility both
+belong, on the same machinery. The seed is impossibility by design; bring
+whatever is interesting. Continuous free lunches (BY-022) — a possibility row —
+is open for its first proof.
 
 Ready to start? [**Open now**](docs/guide/contributor-tasks.md#open-now) lists
 live bounded units across the rungs — with goal, acceptance evidence, and scope.

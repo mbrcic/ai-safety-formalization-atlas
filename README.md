@@ -18,21 +18,24 @@ the questions that actually matter for keeping powerful systems in check.
 **Bring a question.** Alignment, control, oversight, interpretability,
 robustness, the paradoxes that make these problems wicked — if you can make a
 safety property precise, this is where you turn it into something
-machine-checked. Impossibility *or* possibility: a bound, a guarantee, a
-tradeoff, or a limit — the same machinery holds it. Possibility results are just as provable: DeepMind's doubly-efficient debate
-— a scalable-oversight guarantee — is machine-checked in Lean 4, and
-reproducing it into the landscape is [open work](docs/guide/contributor-tasks.md#open-now).
-The first possibility result proven *natively* here is continuous free lunches
-(BY-022), where No-Free-Lunch provably breaks — still [waiting for its first
-proof](docs/guide/contributor-tasks.md#open-now). The field is moving toward
-provable safety. The Atlas is where that work gets done in the open.
+machine-checked. A bound, a guarantee, a tradeoff, a limit — impossibility and
+possibility run on the same machinery. The seed is impossibility results by
+design, the direction this project pushes further; the door is open to whatever
+is interesting. DeepMind's doubly-efficient debate — a scalable-oversight
+guarantee already machine-checked in Lean 4 — is a case in point: reproducing
+it here is [open work](docs/guide/contributor-tasks.md#open-now), and if nobody
+takes it, it still lands. The first possibility result proven natively will be
+continuous free lunches (BY-022, [open](docs/guide/contributor-tasks.md#open-now)),
+where No-Free-Lunch provably breaks. The field is moving toward provable safety.
+The Atlas is where that work gets done in the open.
 
 **Where it starts.** The seed collection formalizes the impossibility results
 from Mario Brčić and Roman V. Yampolskiy's *Impossibility Results in AI: A
 Survey* (ACM Computing Surveys, DOI
 [`10.1145/3603371`](https://doi.org/10.1145/3603371), arXiv
 [`2109.00484`](https://arxiv.org/abs/2109.00484)) — a concrete, self-contained
-first target. It records where results are formalized, reuses maintained Lean
+first target, and the direction the project is actively pushing further. It
+records where results are formalized, reuses maintained Lean
 declarations, and identifies genuine gaps. It's the on-ramp, not the ceiling.
 
 ## Who this is for
