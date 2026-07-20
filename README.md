@@ -18,7 +18,10 @@ the questions that actually matter for keeping powerful systems in check.
 **Bring a question.** Alignment, control, oversight, interpretability,
 robustness, the paradoxes that make these problems wicked — if you can make a
 safety property precise, this is where you turn it into something
-machine-checked. The field is moving toward provable safety. The Atlas is where
+machine-checked. Impossibility *or* possibility: a bound, a guarantee, a
+tradeoff, or a limit — the same machinery holds it. The seed already carries
+possibility results, like continuous free lunches (BY-022), where No-Free-Lunch
+provably breaks. The field is moving toward provable safety. The Atlas is where
 that work gets done in the open.
 
 **Where it starts.** The seed collection formalizes the impossibility results
@@ -151,19 +154,32 @@ scripts/reproduce_chaitin.sh
 Install Lean through [`elan`](https://lean-lang.org/install/manual/), then run:
 
 ```console
-lake update
+lake exe cache get   # fetch prebuilt Mathlib — skips an hours-long local compile
 lake build
 xargs lake build < scripts/lean_build_targets.txt
 ```
 
-The repository pins both Lean and Mathlib. Released Lean files follow the
-[strict-trust and build-closure policy](docs/guide/methodology.md#new-proofs-and-bridges).
+The repository pins Lean, Mathlib, and every transitive dependency:
+[`lake-manifest.json`](lake-manifest.json) is the lock. Build from it directly —
+do **not** run `lake update` unless you are deliberately bumping a dependency, as
+it re-resolves floating revisions off the pinned set. Released Lean files follow
+the [strict-trust and build-closure policy](docs/guide/methodology.md#new-proofs-and-bridges).
 
 ## Contributing
 
-Contributions in source verification, reproducibility, API review, bridge
-design, and Lean implementation are welcome. Start with the
-[contribution guide](CONTRIBUTING.md) and use the structured issue forms for
+There's a rung for every level of effort — start on the lowest one that fits:
+
+- **Pointer** — spotted a theorem that might fit a survey row? Add a candidate
+  lead. No Lean, nothing to prove.
+- **Reproduction** — hold a proof in another system (Isabelle, Coq, Agda)? Bring
+  it into the landscape lane; the atlas already reproduces external
+  formalizations this way.
+- **Bridge** — connect a theorem to what it does (and does not) say about an AI
+  system.
+- **New proof** — formalize a result in Lean against the stable facade.
+
+Source verification, reproducibility, and API review are equally welcome. Start
+with the [contribution guide](CONTRIBUTING.md); the structured issue forms cover
 work that changes coverage, dependencies, or the public Lean interface.
 
 ## License
