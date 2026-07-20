@@ -15,13 +15,18 @@
 * Dropped `Meta.lean` / `@[scAxiom]` (doc tooling only).
 * `Unanimity.lean`: definition only (dropped Meta-dependent preservation lemma).
 * `Strategyproofness.lean`: `updateProfile` + `ResoluteStrategyproofness` only.
-* Built as a separate Lake library (`SocialChoice` in `lakefile.toml`) so proofs
-  stay outside the AISafetyAtlas public-module boundary (same pattern as the
-  Foundation dependency).
 * Includes the 4.31 `GSShim.lean` ballot-level congruence helpers from the port.
 
 ## Packaging note
 
-Multi-file non-module Lake lib is not importable from the AISafetyAtlas module
-package. Collapsing to one public module preserves proof tactics without
+The GS proof is redistributed **inlined** as a single public module,
+`AISafetyAtlas/Upstream/GibbardSatterthwaite.lean` (imports Mathlib only), which
+is part of the `AISafetyAtlas` Lake library and compiles in the atlas 4.31 build
+closure. There is **no** separate `SocialChoice` Lake library and no `require` on
+this directory in `lakefile.toml`.
+
+This `vendor/SocialChoiceLean/` tree is the original multi-file upstream source,
+kept for **provenance and MIT attribution only** — it is not a build target. The
+original multi-file non-module layout is not importable from the AISafetyAtlas
+module package; collapsing to one public module preserves proof tactics without
 per-def `@[expose]` across a graph of files.

@@ -699,6 +699,17 @@ loss must be homogeneous. Together this is a tight `iff` at the loss-*vector*
 level; necessity from the weaker scalar total-loss distribution alone is not
 claimed.
 
+Wolpert's original supervised object is the *scalar* off-training-set error `c`
+and its uniform-over-targets distribution; he establishes homogeneity as a
+**sufficient** condition and does not state a biconditional. The scalar level is
+genuinely weaker here: the necessity argument below isolates a single test
+coordinate (a functional of the loss *vector*, not of the total), and for more
+than one off-training point scalar independence is an `n`-fold-convolution
+equality that need not force equal per-coordinate loss-value distributions. So the
+biconditional lives at the vector level, and the sufficiency direction we prove
+(the *full* OTS loss-vector distribution, not just the mean) already strengthens
+Wolpert's scalar-mean claim.
+
 This is a NEW_PROOF (folklore-tight, not stated as an iff by Wolpert): the loss-axis
 analog of the Schumacher–Vose–Whitley / Igel–Toussaint "closed under permutation"
 necessary-and-sufficient characterization, which is on the prior axis. -/
