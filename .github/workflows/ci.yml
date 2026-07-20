@@ -4,7 +4,11 @@ on:
   push:
     branches:
       - main
+    tags:
+      - 'v*'
   pull_request:
+  schedule:
+    - cron: '0 6 * * 1'  # weekly Mon 06:00 UTC — catch Mathlib CDN / toolchain drift
   workflow_dispatch:
 
 permissions:
@@ -43,13 +47,18 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          pattern='(\.lean$|^lakefile\.toml$|^lake-manifest\.json$|^lean-toolchain$|^scripts/lean_build_targets\.txt$|^scripts/check_print_axioms\.py$|^scripts/agent_gate\.sh$)'
+          pattern='(\.lean$|^lakefile\.toml$|^lake-manifest\.json$|^lean-toolchain$|^scripts/lean_build_targets\.txt$|^scripts/check_print_axioms\.py$|^scripts/agent_gate\.sh$|^\.github/workflows/ci\.yml$)'
           run_lean=false
-          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ] || [ "${{ github.event_name }}" = "schedule" ]; then
+            run_lean=true
+          elif [ "${{ github.event_name }}" = "push" ] && [[ "${{ github.ref }}" == refs/tags/v* ]]; then
+            # Release tag: full Lean verification.
             run_lean=true
           elif [ "${{ github.event_name }}" = "push" ] && [ "${{ github.ref }}" = "refs/heads/main" ]; then
-            # Always verify Lean on main pushes.
-            run_lean=true
+            # main receives only PR merges, already Lean-verified by the required
+            # PR check; skip the redundant rebuild. Tag pushes + the weekly
+            # schedule provide the on-main safety net (CDN / toolchain drift).
+            run_lean=false
           elif [ "${{ github.event_name }}" = "pull_request" ]; then
             base="${{ github.event.pull_request.base.sha }}"
             head="${{ github.event.pull_request.head.sha }}"
@@ -84,6 +93,19 @@ jobs:
           key: foundation-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json') }}
           restore-keys: |
             foundation-${{ runner.os }}-${{ runner.arch }}-
+      # Cache only the atlas library's OWN build output (MB). Mathlib/Foundation
+      # oleans live under .lake/packages and are never tarred here, so no 10 GB
+      # repo-cache-cap risk. Lake revalidates traces, so a prefix-restored stale
+      # olean set just triggers targeted rebuilds — this makes the atlas compile
+      # incremental as the tree grows instead of cold every run.
+      - name: Cache atlas oleans (incremental atlas compile; Mathlib excluded)
+        if: steps.filter.outputs.run_lean == 'true'
+        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        with:
+          path: .lake/build
+          key: atlas-olean-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('lean-toolchain', 'lakefile.toml', 'lake-manifest.json', 'AISafetyAtlas/**/*.lean') }}
+          restore-keys: |
+            atlas-olean-${{ runner.os }}-${{ runner.arch }}-
       - uses: leanprover/lean-action@38fbc41a8c28c4cbaec22d7f7de508ec2e7c0dd9 # v1
         if: steps.filter.outputs.run_lean == 'true'
         with:
