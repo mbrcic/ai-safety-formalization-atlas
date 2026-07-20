@@ -2,16 +2,46 @@
 
 [![CI](https://github.com/mbrcic/ai-safety-formalization-atlas/actions/workflows/ci.yml/badge.svg)](https://github.com/mbrcic/ai-safety-formalization-atlas/actions/workflows/ci.yml)
 
-A Lean-centered map of machine-checked mathematics relevant to AI safety.
+**The open workbench for doing AI safety the formal way.**
 
-The initial collection tracks every result listed in Mario Brčić and Roman V.
-Yampolskiy's *Impossibility Results in AI: A Survey* (ACM Computing Surveys,
-DOI [`10.1145/3603371`](https://doi.org/10.1145/3603371), arXiv
-[`2109.00484`](https://arxiv.org/abs/2109.00484)). It records where results have
-been formalized, reuses maintained Lean declarations, and identifies genuine
-formalization gaps.
+Most of AI safety lives in prose, intuition, and scattered results — and the
+rigor that *does* exist is fragmented across incompatible proof systems. The
+Atlas pulls it onto one surface: reusable, machine-checked Lean, built to grow.
+Here, a safety argument doesn't stay an argument. It becomes a theorem you can
+build on, break, or extend.
 
-## Current scope
+It's a **launchpad** — for the researcher sharpening a claim, and for the AI
+agent proving it. Formal proof stops being a boutique specialty and becomes
+shared infrastructure: a place where humans and agents accelerate each other on
+the questions that actually matter for keeping powerful systems in check.
+
+**Bring a question.** Alignment, control, oversight, interpretability,
+robustness, the paradoxes that make these problems wicked — if you can make a
+safety property precise, this is where you turn it into something
+machine-checked. The field is moving toward provable safety. The Atlas is where
+that work gets done in the open.
+
+**Where it starts.** The seed collection formalizes the impossibility results
+from Mario Brčić and Roman V. Yampolskiy's *Impossibility Results in AI: A
+Survey* (ACM Computing Surveys, DOI
+[`10.1145/3603371`](https://doi.org/10.1145/3603371), arXiv
+[`2109.00484`](https://arxiv.org/abs/2109.00484)) — a concrete, self-contained
+first target. It records where results are formalized, reuses maintained Lean
+declarations, and identifies genuine gaps. It's the on-ramp, not the ceiling.
+
+## Who this is for
+
+You. Whether you're a researcher who's published for years or someone who just
+started asking hard questions with an AI agent at your side — the barrier to
+real formal work has never been lower. If you can state what "safe" should mean,
+you can contribute a proof of it here. Bring a theorem, a counterexample, a
+formalization of someone else's result, or a question nobody's made precise yet.
+
+## Coverage & momentum
+
+Real, machine-checked, and growing — tracked transparently. The snapshot below
+is where the Atlas is today, not where it's headed; that discipline is the point,
+because it's what makes a proof here worth building on.
 
 <!-- BEGIN GENERATED REGISTRY SCOPE -->
 The current registry has verified `EXACT` or `EQUIVALENT` formalization coverage for
