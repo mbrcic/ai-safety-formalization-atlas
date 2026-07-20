@@ -28,6 +28,8 @@ STATE_START = "<!-- BEGIN GENERATED REGISTRY SNAPSHOT -->"
 STATE_END = "<!-- END GENERATED REGISTRY SNAPSHOT -->"
 COVERAGE_RELATIONSHIPS = {"EXACT", "EQUIVALENT"}
 SEARCH_SUMMARY_MAX_PATHS = 3
+
+
 def code_list(items: list[str]) -> str:
     return "<br>".join(f"`{item}`" for item in items)
 
@@ -625,6 +627,8 @@ def render_agent_search_summary(search_evidence: dict) -> str:
         "results": compact_results,
     }
     return json.dumps(payload, indent=2, ensure_ascii=False) + "\n"
+
+
 def update(path: Path, expected: str, check: bool) -> bool:
     actual = path.read_text(encoding="utf-8") if path.exists() else None
     if actual == expected:
@@ -674,5 +678,7 @@ def main() -> None:
     stale |= update(STATE, render_state(state, registry, landscape), args.check)
     if stale:
         raise SystemExit(1)
+
+
 if __name__ == "__main__":
     main()
