@@ -157,12 +157,13 @@ equal aggregate performance** NFL identities in the standard deterministic
 special cases used in expositions.
 
 The honesty cuts both ways: the two strengthenings (`no_free_lunch_adaptive`,
-`lossConfig_sum_learner_indep` / `ots_error_distribution_learner_indep`) are
-**`EXACT` for the deterministic finite case** — the adaptive one is
-Wolpert–Macready Theorem 1 (full cost-sequence histogram, not a scalar), the
-supervised one is Wolpert 1996's OTS error *distribution* under homogeneous loss.
-They stay `RELATED` at the **row** level only because the full papers also cover
-the deferred tail below.
+`lossConfig_sum_learner_indep` / `ots_error_distribution_learner_indep`)
+reproduce their papers' deterministic finite-case claims **exactly** — the
+adaptive one is Wolpert–Macready Theorem 1 (full cost-sequence histogram, not a
+scalar), the supervised one is Wolpert 1996's OTS error *distribution* under
+homogeneous loss. The taxonomy classification stays `RELATED` (not `EXACT`) at
+the **row** level, taken against the full papers, which also cover the deferred
+tail below.
 
 Not claimed EXACT/EQUIVALENT to the full papers:
 

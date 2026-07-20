@@ -462,6 +462,14 @@
           {
             "atlas_declaration": "AISafetyAtlas.Learning.ots_error_distribution_learner_indep",
             "type": "NEW_PROOF"
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Learning.homogeneous_of_learner_indep",
+            "type": "NEW_PROOF"
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Learning.homogeneous_iff_learner_indep",
+            "type": "NEW_PROOF"
           }
         ]
       },

@@ -435,11 +435,12 @@ Taking `Ψ` a sum recovers the mean (`no_free_lunch_supervised`); an indicator o
 value recovers the full generalization-error distribution
 (`ots_error_distribution_learner_indep`); a power recovers every moment. Proven by
 a per-point relabeling bijection on the target space, fiber-wise over the training
-restriction. Survey row **BY-020** (`RELATED`), strengthening the mean core. This
-is `EXACT` for the deterministic finite case (Wolpert 1996: the OTS error
+restriction. Survey row **BY-020** (`RELATED`), strengthening the mean core. It reproduces
+Wolpert 1996's deterministic finite-case claim exactly (the OTS error
 *distribution*, not just its mean, is a priori learner-independent for homogeneous
-loss); it stays `RELATED` to the *full paper* only because stochastic learners,
-label noise, and non-uniform target priors `P(f)` remain out of scope.
+loss). The artifact is still classified `RELATED`, not `EXACT`: that classification
+is taken against the *full paper*, whose stochastic learners, label noise, and
+non-uniform target priors `P(f)` remain out of scope.
 -/
 public theorem lossConfig_sum_learner_indep
     {X Y : Type*} [Fintype X] [Fintype Y] [DecidableEq X] [DecidableEq Y]
@@ -613,11 +614,12 @@ all objectives `f : X → Y`, of any functional `Ψ` of the observed cost sequen
 So no adaptive algorithm has an a priori advantage under uniform averaging — the
 genuinely adaptive strengthening of `no_free_lunch`.
 
-Survey row **BY-021** (`RELATED`). This is `EXACT` for the deterministic finite
-case (Wolpert–Macready Theorem 1: taking `Ψ` an indicator of a cost sequence
+Survey row **BY-021** (`RELATED`). It reproduces Wolpert–Macready Theorem 1 for
+the deterministic finite case exactly (taking `Ψ` an indicator of a cost sequence
 gives that the number of objectives yielding it is rule-independent, the full
-histogram); it stays `RELATED` to the *full paper* only because stochastic
-algorithms and time-varying objectives remain out of scope.
+histogram). The artifact is still classified `RELATED`, not `EXACT`: that
+classification is taken against the *full paper*, whose stochastic algorithms and
+time-varying objectives remain out of scope.
 -/
 public theorem no_free_lunch_adaptive
     {X Y : Type*} [Fintype X] [Fintype Y]

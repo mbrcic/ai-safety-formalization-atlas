@@ -65,6 +65,10 @@
       "citation": "D. H. Wolpert, “The Existence of A Priori Distinctions Between Learning Algorithms,” Neural Comput., vol. 8, no. 7, pp. 1391–1420, Oct. 1996, doi: 10.1162/neco.1996.8.7.1391.",
       "locator": "https://doi.org/10.1162/neco.1996.8.7.1391"
     },
+    "wolpert-1996-lack": {
+      "citation": "D. H. Wolpert, “The Lack of A Priori Distinctions Between Learning Algorithms,” Neural Comput., vol. 8, no. 7, pp. 1341–1390, Oct. 1996, doi: 10.1162/neco.1996.8.7.1341.",
+      "locator": "https://doi.org/10.1162/neco.1996.8.7.1341"
+    },
     "survey-ref-019": {
       "survey_number": 19,
       "citation": "D. H. Wolpert and W. G. Macready, “No free lunch theorems for optimization,” IEEE Trans. Evol. Comput., vol. 1, no. 1, pp. 67–82, Apr. 1997, doi: 10.1109/4235.585893.",
@@ -1373,6 +1377,10 @@
           "relationship": "RELATED",
           "reproduced": true,
           "license": "Apache-2.0",
+          "content_source_refs": [
+            "wolpert-1996-lack"
+          ],
+          "content_source_note": "The formalized content (uniform target average, off-training-set error learner-independence, homogeneous loss) is from Wolpert's 'Lack' paper. original_source_refs mirrors the survey's own citation (survey-ref-018 = the companion 'Existence' paper, which proves the converse); see docs/provenance/lean-wolpert-nfl.md.",
           "build_environment": "leanprover/lean4:v4.31.0; mathlib@fabf563a7c95a166b8d7b6efca11c8b4dc9d911f",
           "build_command": "lake build AISafetyAtlas.Learning AISafetyAtlas.Examples.PublicAPI AISafetyAtlas.Examples.NFLConcrete"
         }
