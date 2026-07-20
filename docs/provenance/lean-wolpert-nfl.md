@@ -96,7 +96,12 @@ kernel-clean:
   the hard-coded 0-1 loss.
 - **The condition is tight (iff).** `homogeneous_iff_learner_indep`: given at least
   one off-training point, homogeneity is **necessary and sufficient** for the OTS
-  error distribution to be learner-independent. Sufficiency is
+  loss *vector* distribution — every functional `Ψ` of the loss vector — to be
+  learner-independent. Scalar vs vector: the scalar total-loss distribution
+  (`ots_error_distribution_learner_indep`) is a weaker consequence of the vector
+  form; sufficiency covers it, but necessity is proven only from vector-level
+  independence — that scalar independence *alone* forces homogeneity is not
+  claimed. Sufficiency is
   `lossConfig_sum_learner_indep`; necessity (`homogeneous_of_learner_indep`) probes
   learner-independence with two constant learners and a value-indicator functional,
   reducing (`sum_ite_pointval_eq`) to equal loss-value fibers, then glues a

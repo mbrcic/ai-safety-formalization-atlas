@@ -393,10 +393,13 @@ priors remain out of scope (open collaboration work). -/
 A loss `ℓ prediction truth` is **homogeneous** (Wolpert's condition): for any two
 predictions there is a relabeling of the truth values matching their loss
 profiles. Given at least one off-training point this is **exactly** the condition
-under which the off-training-set error distribution is learner-independent:
-sufficiency is `lossConfig_sum_learner_indep`, necessity is
-`homogeneous_of_learner_indep`, and the two are packaged as the tight `iff`
-`homogeneous_iff_learner_indep`. 0-1 loss qualifies (`homogeneous_zeroOne`).
+under which the off-training-set loss *vector* distribution — every functional `Ψ`
+of the loss vector — is learner-independent: sufficiency is
+`lossConfig_sum_learner_indep`, necessity is `homogeneous_of_learner_indep`, and
+the two are packaged as the tight `iff` `homogeneous_iff_learner_indep`. The
+scalar total-loss distribution (`ots_error_distribution_learner_indep`) is a
+weaker consequence; necessity from scalar independence alone is *not* claimed.
+0-1 loss qualifies (`homogeneous_zeroOne`).
 -/
 public def HomogeneousLoss {Y : Type*} (ℓ : Y → Y → ℝ) : Prop :=
   ∀ a₁ a₂ : Y, ∃ π : Y ≃ Y, ∀ y, ℓ a₂ y = ℓ a₁ (π y)
@@ -688,11 +691,13 @@ public theorem no_free_lunch_adaptive
 
 /-! ## Supervised NFL — necessity of homogeneity (converse; iff characterization)
 
-`lossConfig_sum_learner_indep` shows homogeneity is **sufficient** for the
-off-training-set error distribution to be learner-independent. The converse holds
-too, given at least one off-training point: if every functional of the OTS loss
-vector has the same uniform-over-targets sum for all learners, the loss must be
-homogeneous. Together this is a tight `iff`.
+`lossConfig_sum_learner_indep` shows homogeneity is **sufficient** for every
+functional of the off-training-set loss vector to be learner-independent. The
+converse holds too, given at least one off-training point: if every functional of
+the OTS loss vector has the same uniform-over-targets sum for all learners, the
+loss must be homogeneous. Together this is a tight `iff` at the loss-*vector*
+level; necessity from the weaker scalar total-loss distribution alone is not
+claimed.
 
 This is a NEW_PROOF (folklore-tight, not stated as an iff by Wolpert): the loss-axis
 analog of the Schumacher–Vose–Whitley / Igel–Toussaint "closed under permutation"
@@ -807,7 +812,7 @@ public theorem homogeneous_of_learner_indep
   exact ⟨π, hπ⟩
 
 /--
-**Homogeneous loss ⟺ learner-independent OTS error distribution (iff).**
+**Homogeneous loss ⟺ learner-independent OTS loss-vector distribution (iff).**
 
 For a fixed training domain `S` with at least one off-training point `x ∉ S`, the
 loss `ℓ` is homogeneous **iff** every functional of the off-training-set loss vector
