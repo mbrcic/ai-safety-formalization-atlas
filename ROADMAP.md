@@ -168,7 +168,11 @@ identified:
   consumer needs it, and debate follow-ups with no existing proof (CT-9).
 - **Unformalized high-value results:** investigate No Free Lunch and the
   survey-introduced proof sketches using primary sources; do not treat an
-  unsuccessful search as proof that no formalization exists.
+  unsuccessful search as proof that no formalization exists. The sharp
+  both-directions NFL characterization (closed-under-permutation priors,
+  Schumacher–Vose–Whitley 2001 / Igel–Toussaint 2004) is scoped as optional
+  reproduction rung **CT-10** — the general boundary subsuming the uniform-prior
+  cores; pull only when a downstream bridge needs "which priors kill learning."
 - **Decision theory and reflection:** develop foundations only when they unblock
   a named result, such as a cooperation or decision-theoretic theorem.
 - **Multi-agent and value aggregation:** extend the social-choice layer where it
