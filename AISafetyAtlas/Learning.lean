@@ -374,4 +374,129 @@ public theorem no_free_lunch_supervised
     aggregateOffTrainingLoss S A = aggregateOffTrainingLoss S B := by
   rw [aggregateOffTrainingLoss_eq S A, aggregateOffTrainingLoss_eq S B]
 
+/-! ## Supervised NFL — full distribution and homogeneous loss (Wolpert 1996)
+
+The mean-only form above (`no_free_lunch_supervised`) is the first-moment core.
+Wolpert's actual claim is stronger: for a **homogeneous** loss the entire
+off-training-set error *distribution* — hence every moment — is learner-
+independent, and the loss need not be 0-1. Both strengthenings are captured here
+by a single functional identity, proven by a per-point relabeling bijection on the
+target space. Still finite / uniform-averaging; stochastic learners and non-uniform
+priors remain out of scope (open collaboration work). -/
+
+/--
+A loss `ℓ prediction truth` is **homogeneous** (Wolpert's condition): for any two
+predictions there is a relabeling of the truth values matching their loss
+profiles. Exactly the condition under which the off-training-set error
+distribution is learner-independent. 0-1 loss qualifies (`homogeneous_zeroOne`).
+-/
+public def HomogeneousLoss {Y : Type*} (ℓ : Y → Y → ℝ) : Prop :=
+  ∀ a₁ a₂ : Y, ∃ π : Y ≃ Y, ∀ y, ℓ a₂ y = ℓ a₁ (π y)
+
+/-- 0-1 loss is homogeneous: relabel truths by the transposition of the two
+predictions. -/
+public theorem homogeneous_zeroOne {Y : Type*} [DecidableEq Y] :
+    HomogeneousLoss (fun a y : Y => if a = y then (0 : ℝ) else 1) := by
+  intro a₁ a₂
+  refine ⟨Equiv.swap a₁ a₂, fun y => ?_⟩
+  by_cases hy : y = a₂
+  · subst hy; simp [Equiv.swap_apply_right]
+  · by_cases hy2 : y = a₁
+    · subst hy2; simp [Equiv.swap_apply_left, eq_comm]
+    · rw [Equiv.swap_apply_of_ne_of_ne hy2 hy]
+      simp [Ne.symm hy, Ne.symm hy2]
+
+/--
+Off-training-set loss configuration of learner `A` on target `f` under loss `ℓ`:
+the vector of losses `ℓ (predict A f x) (f x)` at each off-training point
+`x ∉ S`. Its pushforward under the uniform target measure is the object Wolpert's
+supervised NFL fixes a priori.
+-/
+@[expose] public noncomputable def lossConfig
+    {X Y : Type*} (ℓ : Y → Y → ℝ) (S : Set X)
+    (A : SupervisedLearner X Y S) (f : X → Y) : (Sᶜ : Set X) → ℝ :=
+  fun x => ℓ (predict A f (x : X)) (f (x : X))
+
+/--
+**Supervised NFL, distributional / homogeneous-loss form (Wolpert 1996).**
+
+For a homogeneous loss `ℓ` and *any* functional `Ψ` of the off-training-set loss
+vector, the uniform sum over all target functions is learner-independent.
+
+Taking `Ψ` a sum recovers the mean (`no_free_lunch_supervised`); an indicator of a
+value recovers the full generalization-error distribution
+(`ots_error_distribution_learner_indep`); a power recovers every moment. Proven by
+a per-point relabeling bijection on the target space, fiber-wise over the training
+restriction. Survey row **BY-020** (`RELATED`), strengthening the mean core.
+-/
+public theorem lossConfig_sum_learner_indep
+    {X Y : Type*} [Fintype X] [Fintype Y] [DecidableEq X] [DecidableEq Y]
+    {ℓ : Y → Y → ℝ} (hℓ : HomogeneousLoss ℓ) (S : Set X)
+    (A B : SupervisedLearner X Y S)
+    (Ψ : ((Sᶜ : Set X) → ℝ) → ℝ) :
+    ∑ f : X → Y, Ψ (lossConfig ℓ S A f) = ∑ f : X → Y, Ψ (lossConfig ℓ S B f) := by
+  classical
+  let eSum : S ⊕ (Sᶜ : Set X) ≃ X := Equiv.Set.sumCompl S
+  let eFun : (X → Y) ≃ (S → Y) × ((Sᶜ : Set X) → Y) :=
+    (eSum.symm.arrowCongr (Equiv.refl Y)).trans
+      (Equiv.sumArrowEquivProdArrow _ _ _)
+  -- Group the sum over targets by the training restriction `d` and free OTS part `g`.
+  have hred : ∀ C : SupervisedLearner X Y S,
+      ∑ f : X → Y, Ψ (lossConfig ℓ S C f)
+        = ∑ d : S → Y, ∑ g : (Sᶜ : Set X) → Y,
+            Ψ (fun x => ℓ (C d (x : X)) (g x)) := by
+    intro C
+    rw [← Fintype.sum_prod_type
+      (fun p : (S → Y) × ((Sᶜ : Set X) → Y) =>
+        Ψ (fun x => ℓ (C p.1 (x : X)) (p.2 x)))]
+    refine Fintype.sum_equiv eFun _ _ (fun f => ?_)
+    have h1 : (eFun f).1 = restrictTo S f := by
+      funext s
+      simp [eFun, eSum, restrictTo, Equiv.sumArrowEquivProdArrow_apply_fst,
+        Equiv.arrowCongr_apply, Equiv.Set.sumCompl_apply_inl]
+    have h2 : ∀ x : (Sᶜ : Set X), (eFun f).2 x = f (x : X) := by
+      intro x
+      simp [eFun, eSum, Equiv.sumArrowEquivProdArrow_apply_snd,
+        Equiv.arrowCongr_apply, Equiv.Set.sumCompl_apply_inr]
+    have h3 : (fun x : (Sᶜ : Set X) => ℓ (C (eFun f).1 (x : X)) ((eFun f).2 x))
+        = lossConfig ℓ S C f := by
+      funext x
+      rw [h1, h2 x]
+      rfl
+    rw [h3]
+  rw [hred A, hred B]
+  refine Fintype.sum_congr _ _ (fun d => ?_)
+  -- Fixed training block: relabel the free OTS values to turn `A`'s losses into `B`'s.
+  refine Fintype.sum_equiv
+    (Equiv.piCongrRight (fun x : (Sᶜ : Set X) =>
+      (hℓ (B d (x : X)) (A d (x : X))).choose)) _ _ (fun g => ?_)
+  have : (fun x : (Sᶜ : Set X) => ℓ (A d (x : X)) (g x))
+      = fun x : (Sᶜ : Set X) =>
+          ℓ (B d (x : X)) ((hℓ (B d (x : X)) (A d (x : X))).choose (g x)) := by
+    funext x
+    exact (hℓ (B d (x : X)) (A d (x : X))).choose_spec (g x)
+  rw [this]
+  rfl
+
+/--
+**Off-training-set error distribution is learner-independent (Wolpert 1996).**
+
+For a homogeneous loss, the number of target functions on which a learner attains
+any given total off-training-set loss `v` is the same for every learner. The full
+generalization-error distribution — not merely its mean — is fixed a priori.
+-/
+public theorem ots_error_distribution_learner_indep
+    {X Y : Type*} [Fintype X] [Fintype Y] [DecidableEq X] [DecidableEq Y]
+    {ℓ : Y → Y → ℝ} (hℓ : HomogeneousLoss ℓ) (S : Set X)
+    (A B : SupervisedLearner X Y S) (v : ℝ) :
+    (∑ f : X → Y,
+        if (∑ x : (Sᶜ : Set X), ℓ (predict A f (x : X)) (f (x : X))) = v
+          then (1 : ℝ) else 0)
+      = ∑ f : X → Y,
+        if (∑ x : (Sᶜ : Set X), ℓ (predict B f (x : X)) (f (x : X))) = v
+          then (1 : ℝ) else 0 := by
+  simpa [lossConfig] using
+    lossConfig_sum_learner_indep hℓ S A B
+      (fun w => if (∑ x : (Sᶜ : Set X), w x) = v then (1 : ℝ) else 0)
+
 end AISafetyAtlas.Learning

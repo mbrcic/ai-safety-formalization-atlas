@@ -75,6 +75,35 @@ Proof: `Equiv.funSplitAt` at the test point — training labels (and thus the
 learner’s prediction at `x`) depend only on values off `x`, while `f(x)` is
 free under the uniform sum.
 
+## Supervised distributional / homogeneous-loss strengthening (2026-07-20)
+
+The mean-only closed form above is the first moment. Two Wolpert-1996
+strengthenings are now proven, both still finite / uniform-averaging and
+kernel-clean:
+
+- **Homogeneous loss.** `HomogeneousLoss ℓ` := for any two predictions there is a
+  relabeling `π : Y ≃ Y` of truth values matching their loss profiles. 0-1 loss
+  qualifies (`homogeneous_zeroOne`, via the transposition `Equiv.swap`). Replaces
+  the hard-coded 0-1 loss.
+- **Full distribution, not just the mean.** For homogeneous `ℓ` and *any*
+  functional `Ψ` of the off-training-set loss vector,
+
+  ```text
+  ∑_f Ψ(lossConfig ℓ S A f) = ∑_f Ψ(lossConfig ℓ S B f)
+  ```
+
+  (`lossConfig_sum_learner_indep`). `Ψ = sum` recovers the mean; an indicator of
+  a value recovers the entire generalization-error distribution
+  (`ots_error_distribution_learner_indep`, i.e. every learner attains any given
+  total OTS loss on the *same number* of targets); `Ψ = (sum)^k` recovers every
+  moment.
+
+Proof: group targets by the training restriction `d` (`Equiv.Set.sumCompl`);
+within a fixed block the free OTS values are relabeled coordinate-wise by the
+homogeneity `π` (`Equiv.piCongrRight`), a bijection on the target space that turns
+`A`'s loss vector into `B`'s. So the OTS-error *distribution* — not just its mean
+— is learner-independent.
+
 ## Why RELATED (not EXACT / EQUIVALENT)
 
 Both results match the classical **finite-domain, uniform-over-all-targets,
@@ -84,8 +113,11 @@ special cases used in expositions.
 Not claimed EXACT/EQUIVALENT to the full papers:
 
 - **1997:** adaptive query trees, stochastic algorithms, time-varying objectives;
-- **1996:** general loss, stochastic learners, cross-validation-as-meta-algorithm
-  arguments beyond the OTS core.
+- **1996:** *stochastic* learners and non-uniform prior `P(f)` averaging remain
+  out of scope (open collaboration work — needs Mathlib probability). The
+  deterministic homogeneous-loss **full-distribution** core is now covered (see
+  strengthening above); general (non-homogeneous) loss is genuinely
+  learner-dependent and correctly excluded.
 
 ## Explicit non-coverage
 

@@ -34,7 +34,10 @@ to `main` still requires explicit maintainer authorization (push / PR / merge).
 - New Lean proofs / bridges: utility Arrow representation; `Verification.rice`;
   robot switching; `Verification.AgentBehavior` consumer of `rice` (CT-4);
   `Learning.no_free_lunch` (BY-021) and `Learning.no_free_lunch_supervised`
-  (BY-020) Wolpert finite NFL cores (`NEW_PROOF`)
+  (BY-020) Wolpert finite NFL cores (`NEW_PROOF`); BY-020 strengthened to the
+  homogeneous-loss **full-distribution** form (`lossConfig_sum_learner_indep`,
+  `ots_error_distribution_learner_indep`, `HomogeneousLoss`), still `RELATED`
+  (stochastic learners / non-uniform priors remain out of scope)
 - Adjacent Lean developments reproduced: 1 vNM expected-utility development
 - Reviewed AI-system bridge theorems: 2 fully reviewed rows (BY-012 AgentBehavior;
   BY-033 robot RELATED + scoped interpretation)
