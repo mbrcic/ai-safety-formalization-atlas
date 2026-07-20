@@ -119,6 +119,37 @@ Pointer to the informal proof is given per target.
   is "formalized" until a proof (not a statement) lands.
 - **Does not change:** survey `registry.yaml` coverage.
 
+### CT-10 — Reproduce the closed-under-permutation NFL iff (BY-020, optional) (L) — **New reproduction rung**
+
+- **Goal:** reproduce the sharp *both-directions* NFL characterization on the
+  **prior axis**: over a distribution `P` on target functions `X → Y`, expected
+  performance is algorithm-independent **iff** `P` is closed under permutation of
+  the domain. This is the general boundary that subsumes every uniform-prior core
+  already in `AISafetyAtlas.Learning` (`no_free_lunch`, `no_free_lunch_supervised`,
+  `no_free_lunch_adaptive`) — those are the trivially-c.u.p. special case.
+- **Source (in the literature — citable proof to diff against):** Schumacher,
+  Vose, Whitley, *The No Free Lunch and Problem Description Length* (GECCO 2001,
+  first c.u.p. iff); Igel & Toussaint, *A No-Free-Lunch Theorem for Non-Uniform
+  Distributions of Target Functions* (J. Math. Modelling & Algorithms 2004,
+  doi `10.1023/B:JMMA.0000049381.24625.f7`, both directions). Because it is a
+  published result, this graduates to **`EXACT`/`EQUIVALENT`** — not the folklore
+  `NEW_PROOF` status of the loss-axis iff `homogeneous_iff_learner_indep`.
+- **Acceptance:** kernel-checked Lean theorem under the facade; finite weighted
+  sums over `Fintype` suffice (no Mathlib probability needed); honest
+  `EXACT`/`EQUIVALENT`/`RELATED` classification against `survey-ref-018`;
+  provenance note in [`../provenance/lean-wolpert-nfl.md`](../provenance/lean-wolpert-nfl.md)
+  recording which paper and which assumptions; `agent_gate.sh` + `lake build`
+  green; kernel axioms clean.
+- **Why it may wait (read before taking):** no current downstream consumer needs
+  it — the uniform cores already carry the headline. Its distinctive value is
+  bridge-readiness: c.u.p. is the exact condition under which NFL is *vacuous*
+  (real learning priors are structured, not permutation-symmetric), so it is the
+  one NFL variant with a plausible AI-safety bridge story. Pull it only if a
+  bridge needs "which priors kill learning"; otherwise it is completeness polish.
+- **Does not change:** the existing `NEW_PROOF` loss-axis iff stays as-is; no
+  retro-claim of c.u.p. coverage in README/registry until a proof lands. See
+  reference note `nfl-cup-iff-lineage` and [`ct2-nfl-triage.md`](../provenance/ct2-nfl-triage.md).
+
 ## CT-1 — Reproduce the Chaitin BY-015 candidate (M) — **done**
 
 - **Goal:** reproduce `AlexeyMilovanov/kolmogorov-complexity-lean` at revision
