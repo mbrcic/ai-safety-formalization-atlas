@@ -9,6 +9,49 @@ GitHub issue per task when the queue is created.
 Difficulty: **S** self-contained verification, **M** new Lean/schema work,
 **L** larger design or external-toolchain work.
 
+## Open now
+
+Live units, one per contribution rung. Take one, open the matching proposal
+issue, or ask in a draft PR. CT-1…CT-5 below are completed history, kept for
+provenance.
+
+### CT-6 — First possibility proof: continuous free lunches (BY-022) (L) — **New proof rung**
+
+- **Goal:** give BY-022 (*Free lunches in continuous spaces and coevolution*,
+  Auger–Teytaud 2010 / Wolpert–Macready coevolutionary) its first Lean
+  statement — a setting where the finite NFL symmetry provably fails, dual to
+  `AISafetyAtlas.Learning.no_free_lunch`.
+- **Acceptance:** a kernel-checked Lean theorem under the facade (or a landscape
+  entry if the natural home is adjacent), a `formalizations`/landscape record
+  with honest `EXACT`/`EQUIVALENT`/`RELATED` classification against
+  `survey-ref-047`/`survey-ref-048`, provenance note, `agent_gate.sh` +
+  `lake build` green, kernel axioms clean.
+- **Does not change:** the impossibility rows; do not retro-claim BY-022 as
+  formalized in README/registry until this lands.
+
+### CT-7 — Pin and license-review DeepMind doubly-efficient debate (M) — **Reproduction rung**
+
+- **Goal:** evaluate the doubly-efficient debate development for the landscape
+  lane: immutable revision, build under the pinned toolchain, license, and
+  relationship to existing rows.
+- **Acceptance:** either a `landscape.yaml` record (revision, module,
+  declaration, license, relationship, reproduction status) with regenerated
+  views, or a documented rejection in provenance explaining why it is out of
+  scope. Never a headline coverage count.
+- **Does not change:** survey `registry.yaml` coverage.
+
+### CT-8 — BY-025 Uncontainability: bridge or documented no-map (M) — **Bridge rung**
+
+- **Goal:** decide whether BY-025 (still `MAPPED`) earns a dedicated bridge over
+  Rice/halting with an explicit containment model, or stays mapped-only.
+- **Acceptance:** either a bridge declaration with stated modeled system,
+  assumptions, quantifier order, conclusion, and the practical claim it does
+  **not** establish (`ai_bridge_status: HUMAN_REVIEW`), or a provenance note
+  recording why no clean statement map exists. Do not claim BY-025 is
+  formalized.
+- **Does not change:** the Alfonseca/AgentBehavior packaging; no fake bridge
+  graduation.
+
 ## CT-1 — Reproduce the Chaitin BY-015 candidate (M) — **done**
 
 - **Goal:** reproduce `AlexeyMilovanov/kolmogorov-complexity-lean` at revision

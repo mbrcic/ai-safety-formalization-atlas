@@ -19,10 +19,10 @@ the questions that actually matter for keeping powerful systems in check.
 robustness, the paradoxes that make these problems wicked — if you can make a
 safety property precise, this is where you turn it into something
 machine-checked. Impossibility *or* possibility: a bound, a guarantee, a
-tradeoff, or a limit — the same machinery holds it. The seed already carries
-possibility results, like continuous free lunches (BY-022), where No-Free-Lunch
-provably breaks. The field is moving toward provable safety. The Atlas is where
-that work gets done in the open.
+tradeoff, or a limit — the same machinery holds it. Possibility rows are open
+targets too: continuous free lunches (BY-022), where No-Free-Lunch provably
+breaks, is mapped and waiting for its first proof. The field is moving toward
+provable safety. The Atlas is where that work gets done in the open.
 
 **Where it starts.** The seed collection formalizes the impossibility results
 from Mario Brčić and Roman V. Yampolskiy's *Impossibility Results in AI: A
@@ -178,9 +178,11 @@ There's a rung for every level of effort — start on the lowest one that fits:
   system.
 - **New proof** — formalize a result in Lean against the stable facade.
 
-Source verification, reproducibility, and API review are equally welcome. Start
-with the [contribution guide](CONTRIBUTING.md); the structured issue forms cover
-work that changes coverage, dependencies, or the public Lean interface.
+Source verification, reproducibility, and API review are equally welcome. Pick a
+live bounded unit from [**open now**](docs/guide/contributor-tasks.md#open-now) —
+one per rung — or start with the [contribution guide](CONTRIBUTING.md); the
+structured issue forms cover work that changes coverage, dependencies, or the
+public Lean interface.
 
 ## License
 
