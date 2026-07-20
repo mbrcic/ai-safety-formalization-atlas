@@ -17,8 +17,8 @@ Foundation Gödel I/II); R6/R7 remediation; BY-012 and BY-033 bridges `REVIEWED`
 
 Package version is **`0.3.0`** on this branch (`lakefile.toml`, `CITATION.cff`);
 release scope is [`docs/releases/v0.3.md`](docs/releases/v0.3.md) (v0.2.0 is
-already published to `main` as `9f45ab6`). Publication of 0.3 to `main` still
-requires explicit maintainer authorization (push / PR / merge).
+already published to `main` as `9f45ab6`). Publication of 0.3 to `main` is
+maintainer-authorized (2026-07-20): push / PR / squash-merge.
 
 ## Completed
 
