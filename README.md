@@ -19,9 +19,12 @@ the questions that actually matter for keeping powerful systems in check.
 robustness, the paradoxes that make these problems wicked — if you can make a
 safety property precise, this is where you turn it into something
 machine-checked. Impossibility *or* possibility: a bound, a guarantee, a
-tradeoff, or a limit — the same machinery holds it. Possibility rows are open
-targets too: continuous free lunches (BY-022), where No-Free-Lunch provably
-breaks, is mapped and waiting for its first proof. The field is moving toward
+tradeoff, or a limit — the same machinery holds it. Possibility results are just as provable: DeepMind's doubly-efficient debate
+— a scalable-oversight guarantee — is machine-checked in Lean 4, and
+reproducing it into the landscape is [open work](docs/guide/contributor-tasks.md#open-now).
+The first possibility result proven *natively* here is continuous free lunches
+(BY-022), where No-Free-Lunch provably breaks — still [waiting for its first
+proof](docs/guide/contributor-tasks.md#open-now). The field is moving toward
 provable safety. The Atlas is where that work gets done in the open.
 
 **Where it starts.** The seed collection formalizes the impossibility results
@@ -167,18 +170,10 @@ the [strict-trust and build-closure policy](docs/guide/methodology.md#new-proofs
 
 ## Contributing
 
-There's a rung for every level of effort — start on the lowest one that fits:
-
-- **Pointer** — spotted a theorem that might fit a survey row? Add a candidate
-  lead. No Lean, nothing to prove.
-- **Reproduction** — hold a proof in another system (Isabelle, Coq, Agda)? Bring
-  it into the landscape lane; the atlas already reproduces external
-  formalizations this way.
-- **Bridge** — connect a theorem to what it does (and does not) say about an AI
-  system.
-- **New proof** — formalize a result in Lean against the stable facade.
-
-Source verification, reproducibility, and API review are equally welcome. Pick a
+Four rungs, lowest-effort first — **Pointer → Reproduction → Bridge → New
+proof**; the [contribution guide](CONTRIBUTING.md#start-here--pick-your-rung)
+describes each. Source verification, reproducibility, and API review are equally
+welcome. Pick a
 live bounded unit from [**open now**](docs/guide/contributor-tasks.md#open-now) —
 covering every rung — or start with the [contribution guide](CONTRIBUTING.md); the
 structured issue forms cover work that changes coverage, dependencies, or the
