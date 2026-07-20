@@ -180,7 +180,7 @@ There's a rung for every level of effort — start on the lowest one that fits:
 
 Source verification, reproducibility, and API review are equally welcome. Pick a
 live bounded unit from [**open now**](docs/guide/contributor-tasks.md#open-now) —
-one per rung — or start with the [contribution guide](CONTRIBUTING.md); the
+covering every rung — or start with the [contribution guide](CONTRIBUTING.md); the
 structured issue forms cover work that changes coverage, dependencies, or the
 public Lean interface.
 

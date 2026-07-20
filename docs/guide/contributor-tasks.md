@@ -11,7 +11,7 @@ Difficulty: **S** self-contained verification, **M** new Lean/schema work,
 
 ## Open now
 
-Live units, one per contribution rung. Take one, open the matching proposal
+Live units across the contribution rungs. Take one, open the matching proposal
 issue, or ask in a draft PR. CT-1…CT-5 below are completed history, kept for
 provenance.
 
@@ -29,16 +29,35 @@ provenance.
 - **Does not change:** the impossibility rows; do not retro-claim BY-022 as
   formalized in README/registry until this lands.
 
-### CT-7 — Pin and license-review DeepMind doubly-efficient debate (M) — **Reproduction rung**
+### CT-7 — Reproduce DeepMind doubly-efficient debate into the landscape (M) — **Reproduction rung**
 
-- **Goal:** evaluate the doubly-efficient debate development for the landscape
-  lane: immutable revision, build under the pinned toolchain, license, and
-  relationship to existing rows.
-- **Acceptance:** either a `landscape.yaml` record (revision, module,
-  declaration, license, relationship, reproduction status) with regenerated
-  views, or a documented rejection in provenance explaining why it is out of
-  scope. Never a headline coverage count.
-- **Does not change:** survey `registry.yaml` coverage.
+The formalization exists and is Lean 4: `google-deepmind/debate`
+(Apache-2.0), a machine-checked correctness proof of the stochastic oracle
+protocol from Brown-Cohen–Irving–Piliouras 2023 (*Scalable AI Safety via
+Doubly-Efficient Debate*, arXiv 2311.14125). This is a **possibility /
+scalable-oversight guarantee**, not an impossibility — a live landscape anchor
+dual to the impossibility rows.
+
+- **Coordinates:** repo `github.com/google-deepmind/debate`, revision
+  `de3a6e500ae1a65dfeea2f91ef519ebad9704be0` (single `main`, no release tag,
+  last commit 2024-10-08). Main theorems in `Debate/Correct.lean`:
+  `completeness`, `soundness`, `correctness` (paper Theorem 6.2). License
+  Apache-2.0.
+- **Version gap:** upstream pins `leanprover/lean4:v4.8.0` and Mathlib
+  `v4.8.0`; the atlas is on `v4.31.0`. Do **not** vendor into the 4.31 tree.
+  Reproduce like Chaitin/Isabelle — build at the upstream toolchain from a
+  separate checkout via a new `scripts/reproduce_debate.sh`.
+- **Acceptance:** clean build at the pinned revision under its own toolchain;
+  strict-trust scan of the reproduced tree; a `landscape.yaml` record
+  (`LAND-DEBATE-001` — revision, `Debate/Correct.lean`, the three theorem
+  names, Apache-2.0, relationship `RELATED`, reproduction status,
+  `survey_coverage: null`); `scripts/reproduce_debate.sh`; regenerated views;
+  provenance note. Never a headline coverage count.
+- **Honest scope:** carry upstream's own caveats — correctness only; space
+  complexity not formalized; time counts oracle queries only; Lipschitz oracle
+  machine defined slightly differently (a stronger variant). No AI-system
+  reading without a separate reviewed bridge.
+- **Does not change:** survey `registry.yaml` coverage; the 4.31 build closure.
 
 ### CT-8 — BY-025 Uncontainability: bridge or documented no-map (M) — **Bridge rung**
 
@@ -51,6 +70,46 @@ provenance.
   formalized.
 - **Does not change:** the Alfonseca/AgentBehavior packaging; no fake bridge
   graduation.
+
+### CT-9 — Formalize a debate follow-up with no existing proof (L) — **New proof rung**
+
+Greenfield: these debate refinements are **pen-and-paper only** — no ITP
+formalization exists (checked 2026-07-20). Formalizing one is original work,
+dual to CT-7's *reproduction* of the already-formalized doubly-efficient debate.
+
+Each target has a complete pen-and-paper proof; the task is to mechanize it.
+Pointer to the informal proof is given per target.
+
+- **Targets (pick one):**
+  - *Avoiding Obfuscation with Prover-Estimator Debate* (arXiv 2506.13609) —
+    relaxes the equal-compute-provers assumption of doubly-efficient debate.
+    **Pen-and-paper proof:** the paper has exactly three theorems — **6.1**
+    (completeness: honest debater wins under (ε,ρ)-stability) and **6.2**
+    (soundness: honest output is truth in every Stackelberg equilibrium), the
+    two "main theorems" in Section 6; and **8.3** (Section 8), the
+    training-convergence companion (debaters reach Stackelberg equilibria via
+    standard gradient methods). Supporting proofs in Appendices A–D. Formalize
+    any one; smallest scoped core is Theorem 6.1 completeness alone.
+  - *How to Avoid Debate: Scalable AI Safety via Doubly-Efficient Interactive
+    Proofs* (arXiv 2607.03561) — doubly-efficient **single-prover** interactive
+    proofs/arguments for oracle-aided (relativizing) computation.
+    **Pen-and-paper proof:** two main-results settings — (1) robust computation
+    (output stable if a small fraction of oracle answers are wrong) and
+    (2) low-degree-polynomial oracle; pick one setting's protocol + soundness
+    proof. (Paper is days old as of 2026-07-20; take exact theorem numbers from
+    the arXiv PDF, HTML not yet rendered.)
+- **Acceptance:** a kernel-checked Lean statement + proof of the paper's central
+  guarantee (or an explicitly scoped core of it) under the facade or landscape;
+  honest relationship classification against the paper theorem; provenance note
+  stating exactly which theorem and which assumptions are and are not
+  mechanized; `agent_gate.sh` + `lake build` green; kernel axioms clean.
+- **Reuse first:** the `google-deepmind/debate` Lean development (CT-7) is the
+  natural scaffold — check whether its `Prob`/`Comp` monads and protocol
+  definitions carry over before rebuilding primitives.
+- **Honest scope:** a possibility/oversight guarantee, `RELATED` at most; no
+  AI-system reading without a separate reviewed bridge. Do not claim the paper
+  is "formalized" until a proof (not a statement) lands.
+- **Does not change:** survey `registry.yaml` coverage.
 
 ## CT-1 — Reproduce the Chaitin BY-015 candidate (M) — **done**
 

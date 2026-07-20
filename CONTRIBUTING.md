@@ -23,7 +23,7 @@ doesn't — continuous free lunches (BY-022) is a possibility row waiting to be
 formalized.
 
 Ready to start? [**Open now**](docs/guide/contributor-tasks.md#open-now) lists
-live bounded units — one per rung — with goal, acceptance evidence, and scope.
+live bounded units across the rungs — with goal, acceptance evidence, and scope.
 
 ## Where does it go?
 
