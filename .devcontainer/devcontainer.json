@@ -1,0 +1,16 @@
+{
+  "name": "ai-safety-formalization-atlas",
+  "image": "mcr.microsoft.com/devcontainers/base:ubuntu-24.04",
+  "features": {
+    "ghcr.io/devcontainers/features/python:1": {}
+  },
+  "onCreateCommand": "bash scripts/setup.sh",
+  "remoteEnv": {
+    "PATH": "${containerEnv:HOME}/.elan/bin:${containerEnv:PATH}"
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": ["leanprover.lean4"]
+    }
+  }
+}

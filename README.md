@@ -156,15 +156,42 @@ vendored tree):
 scripts/reproduce_chaitin.sh
 ```
 
-## Build
+## Get started
 
-Install Lean through [`elan`](https://lean-lang.org/install/manual/), then run:
+Two on-ramps — take the lowest one that fits.
+
+**Just adding a pointer?** A source that might match a survey row — no Lean, no
+proof, no toolchain. You need only Python 3:
+
+```console
+scripts/setup.sh --pointer   # runs the cheap validators; no Lean toolchain
+```
+
+Then add a lead under that row's `candidate_formalizations` in
+[`registry.yaml`](registry.yaml) and open a pull request.
+
+**Writing or building a proof?** One command provisions everything — it installs
+[`elan`](https://lean-lang.org/install/manual/) if it's missing, fetches the
+prebuilt Mathlib, builds, and runs the validators:
+
+```console
+scripts/setup.sh
+```
+
+Zero local install: open the repo in **GitHub Codespaces** — or any editor's
+[Dev Container](.devcontainer/devcontainer.json) — and the toolchain provisions
+itself on first boot.
+
+<details>
+<summary>What <code>scripts/setup.sh</code> runs, to do it by hand</summary>
 
 ```console
 lake exe cache get   # fetch prebuilt Mathlib — skips an hours-long local compile
 lake build
 xargs lake build < scripts/lean_build_targets.txt
+./scripts/agent_gate.sh
 ```
+</details>
 
 The repository pins Lean, Mathlib, and every transitive dependency:
 [`lake-manifest.json`](lake-manifest.json) is the lock. Build from it directly —
