@@ -87,7 +87,7 @@ jobs:
       # build across manifest bumps (lake revalidates traces).
       - name: Cache Foundation build (skip cold Gödel rebuild)
         if: steps.filter.outputs.run_lean == 'true'
-        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         with:
           path: .lake/packages/Foundation
           key: foundation-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json') }}
@@ -100,7 +100,7 @@ jobs:
       # incremental as the tree grows instead of cold every run.
       - name: Cache atlas oleans (incremental atlas compile; Mathlib excluded)
         if: steps.filter.outputs.run_lean == 'true'
-        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         with:
           path: .lake/build
           key: atlas-olean-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('lean-toolchain', 'lakefile.toml', 'lake-manifest.json', 'AISafetyAtlas/**/*.lean') }}
