@@ -37,20 +37,25 @@ prior context, a single deterministic done-check. Take one, then climb.
   `10.1162/neco.1996.8.7.1391`) — confirm the DOI/arXiv id resolves to the cited
   paper and that the transcribed title, authors, and pages match. Correct the
   entry if anything is off.
-- **Acceptance:** either "verified, no change" recorded in the PR description
-  with the resolved link, or a precise transcription fix; `scripts/agent_gate.sh`
-  green. Source verification is a first-class contribution.
+- **Acceptance:** every outcome leaves a durable record. Found a mismatch? Open
+  a PR with the precise transcription fix (`scripts/agent_gate.sh` green). Checks
+  out clean? Report it on the row's tracking issue (or a new verification issue)
+  with the resolved link and what you confirmed — no empty PR. Source
+  verification is a first-class contribution.
 - **Does not change:** any Lean, any relationship classification.
 
-### CT-13 — Add one Lean use-site over a shipped theorem (S) — **New-proof rung, scoped**
+### CT-13 — Add one Lean use-site over a shipped theorem (S) — **API use-site rung**
 
 - **Goal:** copy [`AISafetyAtlas/Examples/FirstContribution.lean`](../../AISafetyAtlas/Examples/FirstContribution.lean)
   as your model and add one new `example` that exercises an existing shipped
   theorem (e.g. `no_free_lunch_supervised`, or anything on the README "Lean API"
   list over `import AISafetyAtlas`). No new math — a use-site, not a reproof.
 - **Acceptance:** `lake build AISafetyAtlas.Examples.FirstContribution` (or
-  `.PublicAPI`) green; `python3 scripts/check_print_axioms.py` clean. Runs under
-  the fast `scripts/setup.sh --quick` path if you stay on the learning layer.
+  `.PublicAPI`) green and `scripts/agent_gate.sh` clean. A non-public `example`
+  needs no local axiom audit — CI runs `check_print_axioms.py` over the headline
+  surface for you; reserve that check for new *public* theorems and bridges.
+  Runs under the fast `scripts/setup.sh --quick` path if you stay on the learning
+  layer.
 - **Does not change:** any theorem statement or the public facade.
 
 ### CT-14 — Report a proof we don't have (S) — **Pointer rung**
