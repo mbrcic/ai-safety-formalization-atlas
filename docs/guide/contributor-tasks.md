@@ -75,8 +75,9 @@ prior context, a single deterministic done-check. Take one, then climb.
 ### CT-15 — Formalize the survey's own three theorems (BY-042 / BY-043 / BY-044) (L) — **New proof rung**
 
 The three results the survey [*Impossibility Results in AI: A Survey*](https://doi.org/10.1145/3603371)
-introduces **itself** — presented with proof sketches in a dedicated section,
-distinct from the Table-1 catalogue of others' results. Each is `PROOF_SKETCH`,
+introduces **itself** — listed in the results table but, unlike the imported
+results, developed and argued by the authors in a dedicated section with proof
+sketches. Each is `PROOF_SKETCH`,
 `MAPPED`, and unformalized. This is the highest-legitimacy native target in the
 ledger: the authors' own sketched theorem turned into a machine-checked one,
 dual to CT-6 but in-house. A sketch is a scaffold, not a full proof —
@@ -84,20 +85,26 @@ mechanizing it audits the sketch.
 
 - **Targets (pick one):**
   - **BY-044 — Limited self-awareness:** an agent cannot be perfectly
-    self-aware across the survey's operational boundaries. Sketch likely rests on
-    self-reference / a fixed-point argument — check reuse of the atlas's Gödel,
-    Rice, and halting layers before building primitives.
+    self-aware across the survey's operational boundaries. The sketch is a
+    finite-resource / awareness-graph argument (its proposition plus a handful of
+    operational assumptions), *not* primarily a Gödel/Rice fixed-point result —
+    read it and pin the actual structure before assuming any reuse. Likely the
+    lightest of the three; take first.
   - **BY-043 — Misaligned embodiment:** mistakenly cloned self-interested agents
-    cannot perfectly control one another. Likely an uncontrollability /
-    self-reference argument — same reuse check.
+    cannot perfectly control one another. The sketch turns on operational
+    cloning, functional identity, self-interest, and competition over a scarce
+    resource — not obviously self-reference. Pin those definitions first.
   - **BY-042 — Unfairness of explainability:** a verifier and a decision-maker
     hold structurally unequal strategic positions when explanations omit the full
-    execution trace. Likely game-theoretic / information-asymmetry — expect new
+    execution trace. Two distinct claims — verifier indistinguishability without a
+    full trace, and growing adversarial advantage as the decision-maker better
+    models surrounding actors — needing game-theoretic / information-asymmetry
     machinery; scope the hardest, take last.
 - **Step 0 (do first, low effort):** in [`registry.yaml`](../../registry.yaml)
-  set the chosen row's `original_source_refs` to the survey itself
-  (`10.1145/3603371`) — these are survey-original results and the field is
-  currently empty — and write a provenance note under
+  add `"brcic-yampolskiy-2023"` to the chosen row's `original_source_refs` — the
+  survey's own `source_catalog` record (already present); the field is currently
+  empty. `original_source_refs` must hold `source_catalog` keys, never raw DOIs,
+  or `agent_gate.sh` rejects the change. Then write a provenance note under
   [`../provenance/`](../provenance/) that pins the **exact** paper statement,
   section/theorem number, the sketch, and every definition it assumes
   (e.g. what "perfectly self-aware" or "operational boundaries" mean formally).
