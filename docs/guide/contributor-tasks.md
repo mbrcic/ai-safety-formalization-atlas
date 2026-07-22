@@ -21,9 +21,13 @@ prior context, a single deterministic done-check. Take one, then climb.
 ### CT-11 — Add a candidate lead to an uncovered row (S) — **Pointer rung**
 
 - **Goal:** pick one `MAPPED`-only survey row in [`registry.yaml`](../../registry.yaml)
-  whose `candidate_formalizations` is `[]`, and add **one** lead — a repository
-  or paper URL that plausibly formalizes or proves it. No Lean, no proof, no
-  coverage claim.
+  whose `candidate_formalizations` is `[]`, and add **one** lead pointing at an
+  *existing* formalization. The entry needs all eight schema fields: a
+  `repository` URL, its immutable `revision`, the `framework`, the `declaration`
+  name, a `license`, an `inspection_state` (`UNVERIFIED` if you have only read the
+  source), a `relationship_review` (`PENDING` is fine), and `notes` — a bare paper
+  URL is not a candidate lead. A pen-and-paper result with no existing
+  formalization goes to **CT-14** instead. No Lean, no proof, no coverage claim.
 - **Acceptance:** a schema-valid `candidate_formalizations` entry;
   `scripts/setup.sh --pointer` (i.e. `scripts/agent_gate.sh`) green. A lead is
   candidate evidence, not coverage.
