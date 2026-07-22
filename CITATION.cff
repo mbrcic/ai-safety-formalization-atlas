@@ -8,6 +8,13 @@ authors:
     orcid: "https://orcid.org/0000-0002-7564-6805"
 version: "0.3.1"
 date-released: 2026-07-22
+identifiers:
+  - type: doi
+    value: "10.5281/zenodo.21483033"
+    description: "Concept DOI (all versions)"
+  - type: doi
+    value: "10.5281/zenodo.21483034"
+    description: "Version DOI (v0.3.1)"
 repository-code: "https://github.com/mbrcic/ai-safety-formalization-atlas"
 url: "https://github.com/mbrcic/ai-safety-formalization-atlas"
 license: Apache-2.0
