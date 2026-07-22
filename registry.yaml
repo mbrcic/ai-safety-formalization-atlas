@@ -69,6 +69,12 @@
       "citation": "D. H. Wolpert, “The Lack of A Priori Distinctions Between Learning Algorithms,” Neural Comput., vol. 8, no. 7, pp. 1341–1390, Oct. 1996, doi: 10.1162/neco.1996.8.7.1341.",
       "locator": "https://doi.org/10.1162/neco.1996.8.7.1341"
     },
+    "brcic-yampolskiy-2023": {
+      "citation": "M. Brčić and R. V. Yampolskiy, “Impossibility Results in AI: A Survey,” ACM Computing Surveys, 2023, doi: 10.1145/3603371, arXiv:2109.00484.",
+      "locator": "https://doi.org/10.1145/3603371",
+      "role": "survey_original",
+      "notes": "The survey itself; source for its three author-original results BY-042, BY-043, BY-044."
+    },
     "survey-ref-019": {
       "survey_number": 19,
       "citation": "D. H. Wolpert and W. G. Macready, “No free lunch theorems for optimization,” IEEE Trans. Evol. Comput., vol. 1, no. 1, pp. 67–82, Apr. 1997, doi: 10.1109/4235.585893.",
