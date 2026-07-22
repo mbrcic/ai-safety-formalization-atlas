@@ -67,6 +67,45 @@ prior context, a single deterministic done-check. Take one, then climb.
   until reproduced and classified.
 - **Does not change:** any coverage count — a lead is candidate evidence only.
 
+### CT-15 — Formalize the survey's own three theorems (BY-042 / BY-043 / BY-044) (L) — **New proof rung**
+
+The three results the survey [*Impossibility Results in AI: A Survey*](https://doi.org/10.1145/3603371)
+introduces **itself** — presented with proof sketches in a dedicated section,
+distinct from the Table-1 catalogue of others' results. Each is `PROOF_SKETCH`,
+`MAPPED`, and unformalized. This is the highest-legitimacy native target in the
+ledger: the authors' own sketched theorem turned into a machine-checked one,
+dual to CT-6 but in-house. A sketch is a scaffold, not a full proof —
+mechanizing it audits the sketch.
+
+- **Targets (pick one):**
+  - **BY-044 — Limited self-awareness:** an agent cannot be perfectly
+    self-aware across the survey's operational boundaries. Sketch likely rests on
+    self-reference / a fixed-point argument — check reuse of the atlas's Gödel,
+    Rice, and halting layers before building primitives.
+  - **BY-043 — Misaligned embodiment:** mistakenly cloned self-interested agents
+    cannot perfectly control one another. Likely an uncontrollability /
+    self-reference argument — same reuse check.
+  - **BY-042 — Unfairness of explainability:** a verifier and a decision-maker
+    hold structurally unequal strategic positions when explanations omit the full
+    execution trace. Likely game-theoretic / information-asymmetry — expect new
+    machinery; scope the hardest, take last.
+- **Step 0 (do first, low effort):** in [`registry.yaml`](../../registry.yaml)
+  set the chosen row's `original_source_refs` to the survey itself
+  (`10.1145/3603371`) — these are survey-original results and the field is
+  currently empty — and write a provenance note under
+  [`../provenance/`](../provenance/) that pins the **exact** paper statement,
+  section/theorem number, the sketch, and every definition it assumes
+  (e.g. what "perfectly self-aware" or "operational boundaries" mean formally).
+  Pin the model before writing Lean.
+- **Acceptance:** a kernel-checked Lean theorem under the facade (new namespace as
+  needed — `AISafetyAtlas.SelfAwareness`, `.Embodiment`; `.Explainability`
+  already exists) with an honest `EXACT`/`EQUIVALENT`/`RELATED` classification
+  against the paper statement; the provenance note stating exactly which
+  assumptions are and are not mechanized and **any gap the sketch leaves**;
+  `agent_gate.sh` + `lake build` green; kernel axioms clean.
+- **Does not change:** the other two rows until each lands; no retro-claim of
+  coverage in README/registry until a proof (not a statement) is in.
+
 ### CT-6 — First possibility proof: continuous free lunches (BY-022) (L) — **New proof rung**
 
 - **Goal:** give BY-022 (*Free lunches in continuous spaces and coevolution*,
