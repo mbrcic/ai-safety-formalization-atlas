@@ -5,9 +5,10 @@
 #   scripts/setup.sh --quick    fast first compile: elan + Mathlib cache + one small example
 #   scripts/setup.sh --pointer  docs/registry only: skip the Lean toolchain, run cheap validators
 #
-# Idempotent and safe to re-run. Installs elan only when neither `elan` nor
-# `lake` is present; the toolchain version is taken from `lean-toolchain`,
-# dependencies from the committed `lake-manifest.json` (never `lake update`).
+# Idempotent and safe to re-run. Installs elan whenever `elan` itself is
+# missing (elan is what honors `lean-toolchain`); the toolchain version is taken
+# from `lean-toolchain`, dependencies from the committed `lake-manifest.json`
+# (never `lake update`).
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
@@ -44,10 +45,10 @@ if [ "$MODE" = "pointer" ]; then
 fi
 
 # --- Lean toolchain (elan) ---
-# Gate on elan, not just lake: elan is what honors `lean-toolchain`. A stray
-# non-elan `lake` on PATH would pin a different toolchain, so only skip the
-# install when elan (or a lake) is already present.
-if ! need elan && ! need lake; then
+# Gate on elan, not lake: elan is what honors `lean-toolchain`. A stray non-elan
+# `lake` on PATH would pin a different toolchain, so a present `lake` must not
+# suppress the elan install — key only on elan's own absence.
+if ! need elan; then
   require curl "needed to download the elan installer."
   echo "==> installing elan (Lean toolchain manager)"
   curl -fsSL https://elan.lean-lang.org/elan-init.sh | sh -s -- -y --default-toolchain none
@@ -68,8 +69,8 @@ echo "==> fetching prebuilt Mathlib (lake exe cache get)"
 lake exe cache get
 
 if [ "$MODE" = "quick" ]; then
-  echo "==> quick build: one small Foundation-free example (AISafetyAtlas.Examples.NFLConcrete)"
-  lake build AISafetyAtlas.Examples.NFLConcrete
+  echo "==> quick build: the newcomer starter (AISafetyAtlas.Examples.FirstContribution)"
+  lake build AISafetyAtlas.Examples.FirstContribution
   echo
   echo "setup: ok (quick). One example compiles — the toolchain works."
   echo "Before opening a PR that touches Lean, run the full setup: scripts/setup.sh"

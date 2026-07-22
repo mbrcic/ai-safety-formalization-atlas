@@ -11,8 +11,13 @@
   },
   "customizations": {
     "vscode": {
-      "extensions": ["leanprover.lean4"],
-      "openFiles": ["docs/guide/contributor-tasks.md"]
+      "extensions": ["leanprover.lean4"]
+    },
+    "codespaces": {
+      "openFiles": [
+        "AISafetyAtlas/Examples/FirstContribution.lean",
+        "docs/guide/contributor-tasks.md"
+      ]
     }
   }
 }
