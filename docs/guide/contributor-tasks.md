@@ -15,6 +15,58 @@ Live units across the contribution rungs. Take one, open the matching proposal
 issue, or ask in a draft PR. CT-1…CT-5 below are completed history, kept for
 provenance.
 
+**New here? Start with an S.** CT-11…CT-14 are first tasks — one sitting, no
+prior context, a single deterministic done-check. Take one, then climb.
+
+### CT-11 — Add a candidate lead to an uncovered row (S) — **Pointer rung**
+
+- **Goal:** pick one `MAPPED`-only survey row in [`registry.yaml`](../../registry.yaml)
+  whose `candidate_formalizations` is `[]`, and add **one** lead — a repository
+  or paper URL that plausibly formalizes or proves it. No Lean, no proof, no
+  coverage claim.
+- **Acceptance:** a schema-valid `candidate_formalizations` entry;
+  `scripts/setup.sh --pointer` (i.e. `scripts/agent_gate.sh`) green. A lead is
+  candidate evidence, not coverage.
+- **Does not change:** the row's `status` or any coverage count — a candidate is
+  not a formalization until reproduced and classified.
+
+### CT-12 — Verify one citation against its source (S) — **Verification rung**
+
+- **Goal:** take one `original_source_refs` entry in
+  [`registry.yaml`](../../registry.yaml) — e.g. `survey-ref-018` (doi
+  `10.1162/neco.1996.8.7.1391`) — confirm the DOI/arXiv id resolves to the cited
+  paper and that the transcribed title, authors, and pages match. Correct the
+  entry if anything is off.
+- **Acceptance:** either "verified, no change" recorded in the PR description
+  with the resolved link, or a precise transcription fix; `scripts/agent_gate.sh`
+  green. Source verification is a first-class contribution.
+- **Does not change:** any Lean, any relationship classification.
+
+### CT-13 — Add one Lean use-site over a shipped theorem (S) — **New-proof rung, scoped**
+
+- **Goal:** copy [`AISafetyAtlas/Examples/FirstContribution.lean`](../../AISafetyAtlas/Examples/FirstContribution.lean)
+  as your model and add one new `example` that exercises an existing shipped
+  theorem (e.g. `no_free_lunch_supervised`, or anything on the README "Lean API"
+  list over `import AISafetyAtlas`). No new math — a use-site, not a reproof.
+- **Acceptance:** `lake build AISafetyAtlas.Examples.FirstContribution` (or
+  `.PublicAPI`) green; `python3 scripts/check_print_axioms.py` clean. Runs under
+  the fast `scripts/setup.sh --quick` path if you stay on the learning layer.
+- **Does not change:** any theorem statement or the public facade.
+
+### CT-14 — Report a proof we don't have (S) — **Pointer rung**
+
+- **Goal:** you know a result — or a proof of one — not in the catalogue. Report
+  where it lives, via the [Known formalization issue form](https://github.com/mbrcic/ai-safety-formalization-atlas/issues/new?template=known-formalization.yml).
+  Value grades by readiness: **pen and paper** (a formalization target) →
+  **another prover** (an Isabelle/Coq/HOL reproduction candidate) → **already in
+  Lean** (a possible thin vendor/alias). This is the reuse thesis as a rung:
+  point us at a building block instead of reinventing it.
+- **Acceptance:** a filled discovery issue, or a schema-valid
+  `candidate_formalizations` entry with source coordinates and license;
+  `scripts/agent_gate.sh` green if you touch the registry. No coverage claimed
+  until reproduced and classified.
+- **Does not change:** any coverage count — a lead is candidate evidence only.
+
 ### CT-6 — First possibility proof: continuous free lunches (BY-022) (L) — **New proof rung**
 
 - **Goal:** give BY-022 (*Free lunches in continuous spaces and coevolution*,
