@@ -1,0 +1,64 @@
+name: Known formalization / proof we don't have
+description: Point us at a result — or a proof of one — that isn't in the catalogue yet. No Lean or proof required.
+title: "[Discovery]: "
+labels: ["discovery"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        You know a result, or a proof of one, that the Atlas doesn't record. Tell us where it lives — that's a real contribution on its own. We reproduce or classify it; you don't have to.
+
+        This never claims coverage by itself. A lead becomes coverage only after the proof is reproduced and classified. Please check `registry.yaml`, `landscape.yaml`, and open issues first.
+  - type: input
+    id: result
+    attributes:
+      label: Result
+      description: The theorem or claim. Give the BY identifier if it maps to a survey row, otherwise name it precisely.
+      placeholder: "BY-021 — No Free Lunch (optimization), or: Blum speed-up theorem"
+    validations:
+      required: true
+  - type: dropdown
+    id: readiness
+    attributes:
+      label: Readiness tier
+      description: How far along is the proof you know about?
+      options:
+        - Lean — already formalized in Lean (Mathlib, an upstream dev, anywhere)
+        - Other prover — formalized in Isabelle/AFP, Coq/Rocq, HOL, Agda, etc.
+        - Pen and paper — a complete informal proof exists, not yet mechanized
+    validations:
+      required: true
+  - type: textarea
+    id: coordinates
+    attributes:
+      label: Source coordinates
+      description: |
+        Where exactly does it live? Give as much as applies:
+        - Lean / other prover: repository URL, an immutable revision (commit SHA / AFP release), file, and declaration name.
+        - Pen and paper: paper title, authors, venue/year, DOI or arXiv id, and the exact theorem number.
+      placeholder: |
+        github.com/owner/repo @ <commit sha>, path/to/File.lean, theorem_name
+        — or —
+        Author et al., "Title", Venue 20XX, arXiv:XXXX.XXXXX, Theorem 3.2
+    validations:
+      required: true
+  - type: input
+    id: license
+    attributes:
+      label: License
+      description: For an existing formalization, the license of the source repository (needed before reproduction/vendoring).
+      placeholder: "Apache-2.0 / MIT / unknown"
+  - type: textarea
+    id: relevance
+    attributes:
+      label: Why it's interesting
+      description: One or two lines — how it connects to AI safety, or which survey row / open task it would serve.
+  - type: checkboxes
+    id: policy
+    attributes:
+      label: Checks
+      options:
+        - label: I searched registry.yaml, landscape.yaml, and open issues; this isn't already recorded.
+          required: true
+        - label: I understand a lead is candidate evidence, not verified coverage, until reproduced and classified.
+          required: true

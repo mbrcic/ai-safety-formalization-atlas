@@ -5,12 +5,14 @@
     "ghcr.io/devcontainers/features/python:1": {}
   },
   "onCreateCommand": "bash scripts/setup.sh --quick",
+  "postAttachCommand": "echo '' && echo 'Ready. Toolchain provisioned and one example compiled.' && echo 'Pick a first task: docs/guide/contributor-tasks.md#open-now' && echo 'Before a Lean PR, run the full setup: scripts/setup.sh'",
   "remoteEnv": {
     "PATH": "${containerEnv:HOME}/.elan/bin:${containerEnv:PATH}"
   },
   "customizations": {
     "vscode": {
-      "extensions": ["leanprover.lean4"]
+      "extensions": ["leanprover.lean4"],
+      "openFiles": ["docs/guide/contributor-tasks.md"]
     }
   }
 }
