@@ -5,8 +5,9 @@ title: "AI Safety Formalization Atlas"
 authors:
   - family-names: "Brčić"
     given-names: "Mario"
-version: "0.3.0"
-date-released: 2026-07-20
+    orcid: "https://orcid.org/0000-0002-7564-6805"
+version: "0.3.1"
+date-released: 2026-07-22
 repository-code: "https://github.com/mbrcic/ai-safety-formalization-atlas"
 url: "https://github.com/mbrcic/ai-safety-formalization-atlas"
 license: Apache-2.0
