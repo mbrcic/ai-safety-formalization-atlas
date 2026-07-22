@@ -1,0 +1,23 @@
+{
+  "title": "AI Safety Formalization Atlas",
+  "upload_type": "software",
+  "description": "<p><strong>AI Safety Formalization Atlas</strong> is an open workbench for doing AI safety the formal way: a growing library of machine-checked Lean 4 proofs about the limits and guarantees of AI systems, with a transparent registry that records where each result is formalized, which maintained declarations it reuses, and where genuine gaps remain.</p><p>Most AI-safety reasoning lives in prose and intuition, and the rigor that does exist is scattered across incompatible proof systems. The Atlas pulls it onto one surface, so a safety argument stops being an argument and becomes a theorem you can build on, break, or extend. It is built to grow across the field &mdash; alignment, oversight, interpretability, robustness, and the paradoxes that make these problems wicked &mdash; with formalized impossibility results as the initial seed and no ceiling on scope; impossibility and possibility run on the same machinery.</p><p><strong>Scope.</strong> Machine-checked Lean 4 formalizations span computability, logic and self-reference, social choice, and learning theory, covering both impossibility results and possibility guarantees (including a reviewed reproduction of a scalable-oversight result), exposed through a single stable root import, alongside independently reproduced external formalizations with pinned, rebuildable provenance. The current, authoritative inventory of formalized results &mdash; their status, provenance, and open gaps &mdash; is maintained in the repository's registry; this record does not enumerate it, so the description stays accurate as the library grows.</p><p><strong>Epistemic scope.</strong> A machine-checked proof establishes its encoded mathematical statement; it does not by itself establish that the statement fully captures an informal AI-safety claim. Classical results and AI-system bridge claims are recorded as separate layers, and uncertain semantic relationships are flagged for human review. The registry reports verified coverage transparently rather than claiming complete formal coverage.</p><p>Licensed under Apache-2.0; individual external formalizations remain under their own licenses, recorded in the registry.</p>",
+  "license": "Apache-2.0",
+  "access_right": "open",
+  "creators": [
+    {
+      "name": "Brčić, Mario",
+      "affiliation": "University of Zagreb Faculty of Electrical Engineering and Computing",
+      "orcid": "0000-0002-7564-6805"
+    }
+  ],
+  "keywords": [
+    "AI safety",
+    "formal verification",
+    "interactive theorem proving",
+    "Lean 4",
+    "impossibility results",
+    "AI alignment",
+    "machine-checked proofs"
+  ]
+}
