@@ -4,7 +4,7 @@
   "features": {
     "ghcr.io/devcontainers/features/python:1": {}
   },
-  "onCreateCommand": "bash scripts/setup.sh",
+  "onCreateCommand": "bash scripts/setup.sh --quick",
   "remoteEnv": {
     "PATH": "${containerEnv:HOME}/.elan/bin:${containerEnv:PATH}"
   },

@@ -29,6 +29,19 @@ jobs:
           persist-credentials: false
       - name: Cheap agent gate
         run: ./scripts/agent_gate.sh
+      # Onboarding contract: setup.sh must parse, document itself, reject bad
+      # options, and run the docs-only (--pointer) path. This job is unfiltered,
+      # so a PR that breaks the onboarding script can no longer stay green.
+      - name: Smoke-test onboarding (setup.sh contract)
+        run: |
+          set -euo pipefail
+          bash -n scripts/setup.sh
+          scripts/setup.sh --help >/dev/null
+          if scripts/setup.sh --bogus >/dev/null 2>&1; then
+            echo "setup.sh accepted an unknown option — expected non-zero exit" >&2
+            exit 1
+          fi
+          scripts/setup.sh --pointer
 
   # Lean build + axioms only when Lean toolchain or sources change.
   lean:
