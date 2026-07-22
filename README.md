@@ -1,6 +1,9 @@
 # AI Safety Formalization Atlas
 
 [![CI](https://github.com/mbrcic/ai-safety-formalization-atlas/actions/workflows/ci.yml/badge.svg)](https://github.com/mbrcic/ai-safety-formalization-atlas/actions/workflows/ci.yml)
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/mbrcic/ai-safety-formalization-atlas)
+
+> **Quickstart:** [Open in Codespaces](https://codespaces.new/mbrcic/ai-safety-formalization-atlas) — the toolchain provisions itself and one example compiles in minutes — then pick a [first task](docs/guide/contributor-tasks.md#open-now). Prefer local? `scripts/setup.sh --pointer` (docs only, no Lean) or `scripts/setup.sh --quick` (one example). Full detail: [Get started](#get-started).
 
 **The open workbench for doing AI safety the formal way.**
 
@@ -175,12 +178,14 @@ Then add a lead under that row's `candidate_formalizations` in
 prebuilt Mathlib, builds, and runs the validators:
 
 ```console
-scripts/setup.sh
+scripts/setup.sh --quick   # fast path: toolchain + Mathlib cache + one example compiling
+scripts/setup.sh           # full: whole build closure + validators (run before a Lean PR)
 ```
 
 Zero local install: open the repo in **GitHub Codespaces** — or any editor's
 [Dev Container](.devcontainer/devcontainer.json) — and the toolchain provisions
-itself on first boot.
+itself on first boot (via `--quick`, so the cold start stays short; run the full
+`scripts/setup.sh` before submitting a Lean change).
 
 <details>
 <summary>What <code>scripts/setup.sh</code> runs, to do it by hand</summary>
