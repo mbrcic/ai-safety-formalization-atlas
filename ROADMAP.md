@@ -141,11 +141,12 @@ beyond the scoped interpretation packages remain outside the automatic
 conclusion. Live status: [`STATE.md`](STATE.md) and
 [`docs/status/formalization-status.md`](docs/status/formalization-status.md).
 
-Post-v0.1 / v0.2 implementation checkpoint: near-term outcomes compile on
-`agent-work`. Current-state validation is independent of the immutable v0.1
-audit. Publication of **0.2.0** is described in
-[`docs/releases/v0.2.md`](docs/releases/v0.2.md) and still requires maintainer
-authorization to merge to `main`.
+Release checkpoint: **v0.2.0 and v0.3.0 are published to `main`** (release notes
+under [`docs/releases/`](docs/releases/); the repository's git tags are the
+canonical published set). Current-state validation is independent of the
+immutable v0.1 audit. Package version, version-file agreement, and the matching
+release note are enforced from source — see the generated release-status block in
+[`STATE.md`](STATE.md).
 
 Structural-integrity checkpoint: the post-v0.1 external reviews' immediate
 findings are resolved locally. Ordinary CI checks timeless invariants rather

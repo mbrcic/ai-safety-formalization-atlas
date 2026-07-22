@@ -25,6 +25,12 @@ def require(condition: bool, message: str) -> None:
         raise SystemExit(1)
 
 
+def read_version(path: Path, pattern: str, label: str) -> str:
+    match = re.search(pattern, path.read_text(encoding="utf-8"))
+    require(match is not None, f"could not read version from {label}")
+    return match.group(1)
+
+
 def lean_code_without_comments_or_strings(source: str) -> str:
     """Mask Lean comments and strings while preserving token boundaries."""
     masked: list[str] = []
@@ -313,6 +319,33 @@ def main() -> None:
         and "<!-- END GENERATED REGISTRY SNAPSHOT -->" in state_text,
         "STATE.md must contain generated registry snapshot markers",
     )
+    require(
+        "<!-- BEGIN GENERATED RELEASE STATUS -->" in state_text
+        and "<!-- END GENERATED RELEASE STATUS -->" in state_text,
+        "STATE.md must contain generated release-status markers",
+    )
+    # Release/version coherence: lakefile, CITATION, and the matching release note
+    # must agree. Deterministic and offline, so version identifiers cannot drift
+    # apart the way the hand-maintained v0.2/v0.3 publication prose once did.
+    lake_version = read_version(
+        ROOT / "lakefile.toml", r'(?m)^\s*version\s*=\s*"([^"]+)"', "lakefile.toml"
+    )
+    citation_version = read_version(
+        ROOT / "CITATION.cff", r'(?m)^\s*version\s*:\s*"?([^"\s]+)"?', "CITATION.cff"
+    )
+    require(
+        lake_version == citation_version,
+        "package version mismatch: "
+        f"lakefile.toml {lake_version!r} != CITATION.cff {citation_version!r}",
+    )
+    # Release notes follow the major.minor convention (v0.1, v0.2, v0.3); the
+    # package version carries a patch component (0.3.0). Match on the series.
+    minor_series = ".".join(lake_version.split(".")[:2])
+    require(
+        (ROOT / f"docs/releases/v{minor_series}.md").is_file(),
+        f"missing release note docs/releases/v{minor_series}.md "
+        f"for package version {lake_version}",
+    )
     # Landscape root-import surface must stay dual-listed (R6-3).
     require(
         (ROOT / "landscape.yaml").is_file(),
@@ -322,7 +355,8 @@ def main() -> None:
     print(
         "current state ok: required public files, Apache-2.0, disclaimer, "
         "complete Lean build closure, executable reproduction scripts, "
-        "STATE snapshot markers, landscape ledger, and strict-trust Lean sources"
+        "STATE snapshot + release-status markers, version/release coherence, "
+        "landscape ledger, and strict-trust Lean sources"
     )
 
 

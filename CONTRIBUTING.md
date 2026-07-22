@@ -60,18 +60,19 @@ it.
 
 ## Development setup
 
-Install Lean with [`elan`](https://lean-lang.org/install/manual/). The repository
-pins its Lean toolchain, Mathlib revision, and all transitive dependencies in
-[`lake-manifest.json`](lake-manifest.json). From the repository root, run:
+One command provisions everything and is idempotent — from the repository root:
 
 ```console
-lake exe cache get   # fetch prebuilt Mathlib — skips an hours-long local compile
-lake build
-xargs lake build < scripts/lean_build_targets.txt
-python3 scripts/validate_registry.py
-python3 scripts/generate_registry_views.py --check
-python3 scripts/validate_current_state.py
+scripts/setup.sh            # installs elan if missing, fetches Mathlib, builds, validates
+scripts/setup.sh --pointer  # docs/registry-only work: skips the Lean toolchain
 ```
+
+It installs Lean via [`elan`](https://lean-lang.org/install/manual/) when `lake`
+is missing, pins its toolchain, Mathlib revision, and all transitive
+dependencies from [`lake-manifest.json`](lake-manifest.json), then runs
+`lake build`, the explicit `scripts/lean_build_targets.txt`, and the cheap
+validators (`scripts/agent_gate.sh`). Zero local install: open the repo in
+GitHub Codespaces or any [Dev Container](.devcontainer/devcontainer.json).
 
 Build from the committed manifest; do not run `lake update` unless you are
 deliberately bumping a dependency (it re-resolves floating revisions off the
@@ -82,10 +83,11 @@ build on someone else's result without re-reading it. So Lean changes compile
 under the strict-trust policy: no `sorry`, `admit`, new axioms, direct
 `sorryAx`, `native_decide`, or `@[implemented_by]`. Every Lean module stays
 reachable from the public root or listed in `scripts/lean_build_targets.txt`,
-which CI consumes directly. If a change only affects documentation or registry
-evidence, still run all three current-state Python checks. Run `scripts/generate_registry_views.py` without
-`--check` after changing registry data. `scripts/audit_release_v0_1.py` is
-historical and is not an ordinary development gate.
+which CI consumes directly. A documentation- or registry-only change still needs
+the cheap validators green — `scripts/agent_gate.sh` runs them (schema, generated
+views, path checks). Run `scripts/generate_registry_views.py` without `--check`
+after changing registry data. `scripts/audit_release_v0_1.py` is historical and
+is not an ordinary development gate.
 
 ## Evidence and registry changes
 
