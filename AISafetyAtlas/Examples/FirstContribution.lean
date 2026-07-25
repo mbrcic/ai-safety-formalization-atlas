@@ -47,6 +47,23 @@ example :
       aggregateOffTrainingLoss trainOn0 learnerConst1 :=
   no_free_lunch_supervised trainOn0 learnerConst0 learnerConst1
 
+/-- Constant-0 learner with a three-element label space. -/
+def learnerThreeConst0 : SupervisedLearner (Fin 2) (Fin 3) trainOn0 :=
+  fun _ _ => 0
+
+/-- Constant-2 learner with a three-element label space. -/
+def learnerThreeConst2 : SupervisedLearner (Fin 2) (Fin 3) trainOn0 :=
+  fun _ _ => 2
+
+/--
+The aggregate off-training-set loss remains learner-independent after enlarging
+the label space from `Fin 2` to `Fin 3`.
+-/
+example :
+    aggregateOffTrainingLoss trainOn0 learnerThreeConst0 =
+      aggregateOffTrainingLoss trainOn0 learnerThreeConst2 :=
+  no_free_lunch_supervised trainOn0 learnerThreeConst0 learnerThreeConst2
+
 /-
 YOUR TURN (CT-13, difficulty S)
 -------------------------------
