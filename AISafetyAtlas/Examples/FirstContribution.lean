@@ -9,6 +9,10 @@ A minimal, self-contained file for your first Lean change (task **CT-13**,
 `docs/guide/contributor-tasks.md#open-now`). It compiles as-is, so you can copy
 it, add one line, and watch CI stay green.
 
+The first example below is the reference pattern; merged CT-13 contributions
+accumulate underneath it, so expect the list to grow. Append yours at the
+bottom, under the marker after the "YOUR TURN" block.
+
 Everything here is Foundation-free: it imports only `AISafetyAtlas.Learning`, so
 it builds under the fast `scripts/setup.sh --quick` path — no full Gödel build
 needed. The stable public facade is the single root import:
@@ -67,17 +71,26 @@ example :
 /-
 YOUR TURN (CT-13, difficulty S)
 -------------------------------
-Add ONE new `example` below that exercises an existing shipped theorem — no new
-math, just a use-site. Ideas:
+Add ONE new `example` of your own that exercises an existing shipped theorem —
+no new math, just a use-site. Ideas:
 
-  * a third constant learner and another `no_free_lunch_supervised` instance;
+  * another constant learner and another `no_free_lunch_supervised` instance;
   * a `no_free_lunch` instance over cost-sequence schedules
     (see `AISafetyAtlas.Examples.NFLConcrete` for the pattern);
   * anything from the README "Lean API" list, after switching to `import
     AISafetyAtlas`.
 
+APPEND IT AT THE BOTTOM, below this block and above the `end` line — not between
+the examples above. Those are earlier contributors' use-sites; leave them alone.
+The file is meant to accumulate, so a growing list here is the intended outcome,
+and appending keeps everyone's diffs from colliding.
+
 Then: `lake build AISafetyAtlas.Examples.FirstContribution` must be green and
-`python3 scripts/check_print_axioms.py` must stay clean. Open a pull request.
+`./scripts/agent_gate.sh` must stay clean. An anonymous `example` adds no public
+declaration, so you do not need to run the kernel axiom check locally — CI runs
+it over the headline surface for you. Open a pull request.
 -/
+
+-- ↓↓↓ APPEND YOUR CT-13 EXAMPLE HERE ↓↓↓
 
 end AISafetyAtlas.Examples.FirstContribution

@@ -54,6 +54,9 @@ prior context, a single deterministic done-check. Take one, then climb.
   as your model and add one new `example` that exercises an existing shipped
   theorem (e.g. `no_free_lunch_supervised`, or anything on the README "Lean API"
   list over `import AISafetyAtlas`). No new math — a use-site, not a reproof.
+  **Append it at the bottom of that file**, under the marker after the "YOUR
+  TURN" block — not between the examples already there. The file is meant to
+  accumulate use-sites, and appending keeps contributors' diffs from colliding.
 - **Acceptance:** `lake build AISafetyAtlas.Examples.FirstContribution` (or
   `.PublicAPI`) green and `scripts/agent_gate.sh` clean. A non-public `example`
   needs no local axiom audit — CI runs `check_print_axioms.py` over the headline
