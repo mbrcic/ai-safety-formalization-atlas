@@ -93,4 +93,27 @@ it over the headline surface for you. Open a pull request.
 
 -- ↓↓↓ APPEND YOUR CT-13 EXAMPLE HERE ↓↓↓
 
+/-- Sample the first point of `Fin 3`. -/
+def scheduleFin3First : NonadaptiveSchedule (Fin 3) 1 where
+  sample := fun _ => 0
+  injective := by
+    intro a b _
+    exact Subsingleton.elim a b
+
+/-- Sample the last point of `Fin 3`. -/
+def scheduleFin3Last : NonadaptiveSchedule (Fin 3) 1 where
+  sample := fun _ => 2
+  injective := by
+    intro a b _
+    exact Subsingleton.elim a b
+
+/--
+Any cost-sequence score has equal aggregate performance on the first-point and
+last-point length-one schedules over `Fin 3`.
+-/
+example (Φ : CostPerformance 1 (Fin 2)) :
+    aggregatePerformance Φ scheduleFin3First =
+      aggregatePerformance Φ scheduleFin3Last :=
+  no_free_lunch Φ scheduleFin3First scheduleFin3Last
+
 end AISafetyAtlas.Examples.FirstContribution
