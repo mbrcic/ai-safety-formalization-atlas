@@ -48,21 +48,39 @@ prior context, a single deterministic done-check. Take one, then climb.
   verification is a first-class contribution.
 - **Does not change:** any Lean, any relationship classification.
 
-### CT-13 — Add one Lean use-site over a shipped theorem (S) — **API use-site rung**
+### CT-13 — Add one Lean use-site over a shipped theorem (S) — **Onboarding exercise**
+
+**This is a toolchain exercise, not coverage work — one per contributor.** The
+public API is already fully exercised:
+[`AISafetyAtlas/Examples/PublicAPI.lean`](../../AISafetyAtlas/Examples/PublicAPI.lean)
+carries an applied use-site for every declaration on the README "Lean API" list,
+and [`NFLConcrete.lean`](../../AISafetyAtlas/Examples/NFLConcrete.lean) covers
+the learning-layer schedules. A new `example` adds no coverage, closes no gap,
+and changes no status file. What it does is prove you can drive the toolchain —
+fork, branch, `lake build`, `agent_gate.sh`, PR — before you take on work where
+a mistake is expensive. That is the whole point, and it is worth one PR.
 
 - **Goal:** copy [`AISafetyAtlas/Examples/FirstContribution.lean`](../../AISafetyAtlas/Examples/FirstContribution.lean)
   as your model and add one new `example` that exercises an existing shipped
   theorem (e.g. `no_free_lunch_supervised`, or anything on the README "Lean API"
   list over `import AISafetyAtlas`). No new math — a use-site, not a reproof.
   **Append it at the bottom of that file**, under the marker after the "YOUR
-  TURN" block — not between the examples already there. The file is meant to
-  accumulate use-sites, and appending keeps contributors' diffs from colliding.
+  TURN" block — not between the examples already there. Appending keeps
+  contributors' diffs from colliding.
 - **Acceptance:** `lake build AISafetyAtlas.Examples.FirstContribution` (or
   `.PublicAPI`) green and `scripts/agent_gate.sh` clean. A non-public `example`
   needs no local axiom audit — CI runs `check_print_axioms.py` over the headline
   surface for you; reserve that check for new *public* theorems and bridges.
   Runs under the fast `scripts/setup.sh --quick` path if you stay on the learning
   layer.
+- **Terminal rung — do not repeat it.** Once your CT-13 has merged, a second one
+  will be closed. Varying a type parameter (`Fin 2` → `Fin 3`) or a constant in
+  an already-exercised theorem is not a distinct use-site.
+- **Next:** CT-11, CT-12, or CT-14 if you want another single-sitting unit; the
+  open `Formalize BY-0xx` issues or CT-6 / CT-8 / CT-9 / CT-15 for work that
+  moves coverage. If you are running an AI coding agent, prefer the Lean rungs:
+  `lake build` checks the result, so a wrong answer costs a red CI run rather
+  than a maintainer audit.
 - **Does not change:** any theorem statement or the public facade.
 
 ### CT-14 — Report a proof we don't have (S) — **Pointer rung**

@@ -80,10 +80,18 @@ no new math, just a use-site. Ideas:
   * anything from the README "Lean API" list, after switching to `import
     AISafetyAtlas`.
 
+This is an onboarding exercise, ONE PER CONTRIBUTOR — it proves you can drive
+the toolchain, not that the API needed another caller. Coverage here is already
+complete: `AISafetyAtlas.Examples.PublicAPI` applies every declaration on the
+README "Lean API" list, and `NFLConcrete` covers the learning-layer schedules.
+So a second CT-13 will be closed, and widening a type parameter (`Fin 2` →
+`Fin 3`) or changing a constant in an already-exercised theorem is not a
+distinct use-site. Once yours has merged, take a rung that moves coverage —
+`docs/guide/contributor-tasks.md`, "Open now".
+
 APPEND IT AT THE BOTTOM, below this block and above the `end` line — not between
 the examples above. Those are earlier contributors' use-sites; leave them alone.
-The file is meant to accumulate, so a growing list here is the intended outcome,
-and appending keeps everyone's diffs from colliding.
+Appending keeps everyone's diffs from colliding.
 
 Then: `lake build AISafetyAtlas.Examples.FirstContribution` must be green and
 `./scripts/agent_gate.sh` must stay clean. An anonymous `example` adds no public
