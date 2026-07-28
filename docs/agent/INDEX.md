@@ -70,5 +70,5 @@ See `AGENTS.md` § Validation. Includes Lean builds and axiom checks.
 
 See the context-budget section at the top of [`AGENTS.md`](../../AGENTS.md).
 In short: full `registry.yaml`, full `formalization-search.json`, `ROADMAP.md`,
-`reviews/**`, `AISafetyAtlas/Upstream/**`, `vendor/**`, `.lake/**`, and
+`AISafetyAtlas/Upstream/**`, `vendor/**`, `.lake/**`, and
 accidental download debris.

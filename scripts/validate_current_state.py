@@ -243,7 +243,6 @@ def main() -> None:
         "docs/bridges/review-by-012-agentbehavior.md",
         "docs/releases/v0.1.md",
         "docs/releases/v0.2.md",
-        "reviews/README.md",
         "scripts/check_docs_paths.py",
         "scripts/agent_gate.sh",
         "landscape.yaml",

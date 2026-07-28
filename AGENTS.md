@@ -28,7 +28,6 @@ Agent map: [`docs/agent/INDEX.md`](docs/agent/INDEX.md). Human doc map:
 | Full [`landscape.yaml`](landscape.yaml) | Redundant with `by-id.json` | One `LAND-###` detail |
 | [`docs/provenance/formalization-search.json`](docs/provenance/formalization-search.json) | Large discovery dump | Regenerating evidence or deep candidate audit |
 | [`ROADMAP.md`](ROADMAP.md) | Human strategy, not live tasking | Maintainer names roadmap work |
-| [`reviews/**`](reviews/) | Historical adversarial rounds | Maintainer names a specific round finding |
 | `AISafetyAtlas/Upstream/**` | Large vendored/collapsed proofs | Editing that formalization only |
 | `vendor/**` | Upstream vendor trees | Editing that vendored package only |
 | `.lake/**`, `**/CLAUDE.md`, `ai_context.txt` | Build cache / tool dumps | Never as task context |
@@ -111,7 +110,6 @@ proof. Detail: [`docs/guide/methodology.md`](docs/guide/methodology.md).
 | `docs/provenance/` | Discovery evidence + external reproduction narrative |
 | `docs/bridges/` | Bridge review packages |
 | `docs/releases/` | Release evidence notes |
-| `reviews/` | **Historical** adversarial reviews |
 
 After registry/landscape edits: `python3 scripts/generate_registry_views.py`
 (updates `docs/status/*`, `docs/agent/by-id.json`, `docs/agent/search-summary.json`,

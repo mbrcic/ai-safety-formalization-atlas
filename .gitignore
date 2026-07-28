@@ -16,6 +16,9 @@ __pycache__/
 /https:/
 /http:/
 
+# Internal adversarial review rounds — process artifacts, kept local only.
+/reviews/
+
 # Ephemeral local scratch and tool dumps (not product source).
 /scratchpad/
 /ai_context.txt
