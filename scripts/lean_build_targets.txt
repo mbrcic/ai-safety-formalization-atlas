@@ -3,4 +3,6 @@ AISafetyAtlas.Examples.Registry
 AISafetyAtlas.Examples.Robot
 AISafetyAtlas.Examples.NFLConcrete
 AISafetyAtlas.Examples.FirstContribution
+AISafetyAtlas.Examples.SixTargets
+AISafetyAtlas.Examples.WorkbenchConsumers
 AISafetyAtlas.Survey.BrcicYampolskiy.HaltingExample

@@ -9,27 +9,22 @@ public import Foundation.FirstOrder.Incompleteness.Löb
 /-!
 # Logic limits
 
-Atlas-facing names for incompleteness and undefinability results reused from
-upstream Lean developments. These are thin wrappers: proofs remain upstream's,
-and no AI-safety bridge is asserted.
+Thin wrappers over upstream incompleteness / undefinability. No AI-safety bridge.
+
+## Primary surface
+
+| Role | Declaration | Survey |
+|---|---|---|
+| **Law** | `chaitin_incompleteness` / `chaitin_bound` | BY-015 |
+| **Law** | `godel_first_incompleteness` | BY-013 |
+| **Related companion** | `godel_second_incompleteness` | BY-013 companion |
+| **Law** | `tarski_undefinability` | BY-016 |
+| **Law** | `loeb` | BY-027 |
 
 ## Sources
 
-* Chaitin's \(K(x) > L\) theorem and its bound form come from the vendored
-  KolmogorovMathlib development (AlexeyMilovanov, Apache-2.0, revision
-  `005ac4c81eefe09642ef561057199d489cd79485`).
-* Gödel's first and second incompleteness theorems, Tarski's undefinability of
-  truth, and Löb's theorem come from FormalizedFormalLogic/Foundation (revision
-  `b47cf447255addf88a5d72781d0d29641948eb6e`). These are classical results for
-  concrete arithmetic theories, not abstract axiomatized skeletons.
-
-## Naming
-
-* `chaitin_incompleteness` / `chaitin_bound` — Chaitin (survey **BY-015**).
-* `godel_first_incompleteness` — some true sentence is unprovable in `T` (**BY-013**).
-* `godel_second_incompleteness` — `T` cannot prove its own consistency (**BY-013** companion).
-* `tarski_undefinability` — truth is not definable in the arithmetic language (**BY-016**).
-* `loeb` — Löb's theorem: if \(T \vdash \mathrm{Prov}_T(\sigma) \to \sigma\) then \(T \vdash \sigma\) (**BY-027**).
+* Chaitin: vendored KolmogorovMathlib @ `005ac4c…`.
+* Gödel / Tarski / Löb: FormalizedFormalLogic/Foundation @ `b47cf44…`.
 
 See `docs/guide/logic-incompleteness.md`.
 -/

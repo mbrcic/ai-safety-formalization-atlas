@@ -382,7 +382,7 @@
       "ai_bridge_status": "HUMAN_REVIEW",
       "notes": "A3 (2026-07-19): AFP 'observability' keyword hits (FSM_Tests Observability, protocol refinement, etc.) are DISTINCT from Klamka multivariable control-theoretic unobservability (survey-ref-021). Candidate formalizations cleared. See docs/provenance/a3-by001-unobservability-triage.md.",
       "formal_library_search": {
-        "searched_on": "2026-07-18",
+        "searched_on": "2026-07-28",
         "evidence_file": "docs/provenance/formalization-search.json",
         "searched_corpora": [
           "mathlib",
@@ -423,7 +423,7 @@
       "ai_bridge_status": "HUMAN_REVIEW",
       "notes": "Statement-level equivalence to each cited source remains subject to source comparison.",
       "formal_library_search": {
-        "searched_on": "2026-07-18",
+        "searched_on": "2026-07-28",
         "evidence_file": "docs/provenance/formalization-search.json",
         "searched_corpora": [
           "mathlib",
@@ -459,7 +459,7 @@
       "ai_bridge_status": "HUMAN_REVIEW",
       "notes": "Statement-level equivalence to each cited source remains subject to source comparison.",
       "formal_library_search": {
-        "searched_on": "2026-07-18",
+        "searched_on": "2026-07-28",
         "evidence_file": "docs/provenance/formalization-search.json",
         "searched_corpora": [
           "mathlib",
@@ -494,7 +494,7 @@
       "ai_bridge_status": "HUMAN_REVIEW",
       "notes": "Statement-level equivalence to each cited source remains subject to source comparison.",
       "formal_library_search": {
-        "searched_on": "2026-07-18",
+        "searched_on": "2026-07-28",
         "evidence_file": "docs/provenance/formalization-search.json",
         "searched_corpora": [
           "mathlib",
@@ -529,7 +529,7 @@
       "ai_bridge_status": "HUMAN_REVIEW",
       "notes": "Statement-level equivalence to each cited source remains subject to source comparison.",
       "formal_library_search": {
-        "searched_on": "2026-07-18",
+        "searched_on": "2026-07-28",
         "evidence_file": "docs/provenance/formalization-search.json",
         "searched_corpora": [
           "mathlib",
@@ -566,7 +566,7 @@
       "ai_bridge_status": "HUMAN_REVIEW",
       "notes": "Statement-level equivalence to each cited source remains subject to source comparison.",
       "formal_library_search": {
-        "searched_on": "2026-07-18",
+        "searched_on": "2026-07-28",
         "evidence_file": "docs/provenance/formalization-search.json",
         "searched_corpora": [
           "mathlib",
@@ -656,7 +656,7 @@
       "ai_bridge_status": "HUMAN_REVIEW",
       "notes": "CC Liang's Lean 4 order proof is the canonical mathematical source and is vendored at an immutable Apache-2.0 commit with only module, namespace, visibility, and interface-reducibility changes. The atlas exposes one stable order theorem and proves one utility-representation bridge from it. The two reproduced Isabelle/HOL variants remain provenance and specification references, not additional coverage results.",
       "formal_library_search": {
-        "searched_on": "2026-07-18",
+        "searched_on": "2026-07-28",
         "evidence_file": "docs/provenance/formalization-search.json",
         "searched_corpora": [
           "mathlib",
@@ -695,7 +695,7 @@
       "ai_bridge_status": "HUMAN_REVIEW",
       "notes": "A1 (2026-07-19): AFP CondNormReasHOL (Parfit mere addition / Åqvist E) is RELATED landscape LAND-PE-001 only — not EXACT/EQUIVALENT Arrhenius 2011 (survey-ref-032). See docs/provenance/a1-condnorm-parfit-triage.md.",
       "formal_library_search": {
-        "searched_on": "2026-07-18",
+        "searched_on": "2026-07-28",
         "evidence_file": "docs/provenance/formalization-search.json",
         "searched_corpora": [
           "mathlib",
@@ -732,7 +732,7 @@
       "ai_bridge_status": "HUMAN_REVIEW",
       "notes": "Statement-level equivalence to each cited source remains subject to source comparison.",
       "formal_library_search": {
-        "searched_on": "2026-07-18",
+        "searched_on": "2026-07-28",
         "evidence_file": "docs/provenance/formalization-search.json",
         "searched_corpora": [
           "mathlib",
@@ -769,7 +769,7 @@
       "ai_bridge_status": "HUMAN_REVIEW",
       "notes": "Statement-level equivalence to each cited source remains subject to source comparison.",
       "formal_library_search": {
-        "searched_on": "2026-07-18",
+        "searched_on": "2026-07-28",
         "evidence_file": "docs/provenance/formalization-search.json",
         "searched_corpora": [
           "mathlib",
@@ -798,14 +798,281 @@
       "original_source_refs": [
         "survey-ref-036"
       ],
-      "formalizations": [],
-      "lean_artifact": null,
-      "status": "MAPPED",
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE",
+          "module": "AISafetyAtlas.Preference",
+          "declaration": "AISafetyAtlas.Preference.exists_planner",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "license": "Apache-2.0",
+          "build_environment": "leanprover/lean4:v4.31.0; mathlib@fabf563a7c95a166b8d7b6efca11c8b4dc9d911f",
+          "build_command": "lake build AISafetyAtlas.Preference AISafetyAtlas.Examples.PublicAPI"
+        },
+        {
+          "framework": "Lean",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE",
+          "module": "AISafetyAtlas.Preference",
+          "declaration": "AISafetyAtlas.Preference.exists_reward",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "license": "Apache-2.0",
+          "build_environment": "leanprover/lean4:v4.31.0; mathlib@fabf563a7c95a166b8d7b6efca11c8b4dc9d911f",
+          "build_command": "lake build AISafetyAtlas.Preference AISafetyAtlas.Examples.Registry"
+        },
+        {
+          "framework": "Lean",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE",
+          "module": "AISafetyAtlas.Preference",
+          "declaration": "AISafetyAtlas.Preference.negPlanner",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "license": "Apache-2.0",
+          "build_environment": "leanprover/lean4:v4.31.0; mathlib@fabf563a7c95a166b8d7b6efca11c8b4dc9d911f",
+          "build_command": "lake build AISafetyAtlas.Preference AISafetyAtlas.Examples.Registry"
+        },
+        {
+          "framework": "Lean",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE",
+          "module": "AISafetyAtlas.Preference",
+          "declaration": "AISafetyAtlas.Preference.lemma_six",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "license": "Apache-2.0",
+          "build_environment": "leanprover/lean4:v4.31.0; mathlib@fabf563a7c95a166b8d7b6efca11c8b4dc9d911f",
+          "build_command": "lake build AISafetyAtlas.Preference AISafetyAtlas.Examples.Registry"
+        },
+        {
+          "framework": "Lean",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE",
+          "module": "AISafetyAtlas.Preference.SourceComplexity",
+          "declaration": "AISafetyAtlas.Preference.Source.ReasonableForF.proposition_seven",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "license": "Apache-2.0",
+          "build_environment": "leanprover/lean4:v4.31.0; mathlib@fabf563a7c95a166b8d7b6efca11c8b4dc9d911f",
+          "build_command": "lake build AISafetyAtlas.Preference.SourceComplexity AISafetyAtlas.Examples.SixTargets"
+        },
+        {
+          "framework": "Lean",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE",
+          "module": "AISafetyAtlas.Preference.SourceComplexity",
+          "declaration": "AISafetyAtlas.Preference.Source.ReasonableForF.proposition_eight",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "license": "Apache-2.0",
+          "build_environment": "leanprover/lean4:v4.31.0; mathlib@fabf563a7c95a166b8d7b6efca11c8b4dc9d911f",
+          "build_command": "lake build AISafetyAtlas.Preference.SourceComplexity AISafetyAtlas.Examples.SixTargets"
+        },
+        {
+          "framework": "Lean",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE",
+          "module": "AISafetyAtlas.Preference.Reasonable",
+          "declaration": "AISafetyAtlas.Preference.ReasonableLanguage.proposition_seven",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "license": "Apache-2.0",
+          "build_environment": "leanprover/lean4:v4.31.0; mathlib@fabf563a7c95a166b8d7b6efca11c8b4dc9d911f",
+          "build_command": "lake build AISafetyAtlas.Preference.Reasonable AISafetyAtlas.Examples.PublicAPI"
+        },
+        {
+          "framework": "Lean",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE",
+          "module": "AISafetyAtlas.Preference.Reasonable",
+          "declaration": "AISafetyAtlas.Preference.ReasonableLanguage.proposition_eight",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "license": "Apache-2.0",
+          "build_environment": "leanprover/lean4:v4.31.0; mathlib@fabf563a7c95a166b8d7b6efca11c8b4dc9d911f",
+          "build_command": "lake build AISafetyAtlas.Preference.Reasonable AISafetyAtlas.Examples.PublicAPI"
+        },
+        {
+          "framework": "Lean",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE",
+          "module": "AISafetyAtlas.Preference.Complexity",
+          "declaration": "AISafetyAtlas.Preference.explanation_complexity_eq_behaviour",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "license": "Apache-2.0",
+          "build_environment": "leanprover/lean4:v4.31.0; mathlib@fabf563a7c95a166b8d7b6efca11c8b4dc9d911f",
+          "build_command": "lake build AISafetyAtlas.Preference.Complexity AISafetyAtlas.Examples.PublicAPI"
+        },
+        {
+          "framework": "Lean",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE",
+          "module": "AISafetyAtlas.Preference.Override",
+          "declaration": "AISafetyAtlas.Preference.OverrideModel.OverridesFor",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "license": "Apache-2.0",
+          "build_environment": "leanprover/lean4:v4.31.0; mathlib@fabf563a7c95a166b8d7b6efca11c8b4dc9d911f",
+          "build_command": "lake build AISafetyAtlas.Preference.Override AISafetyAtlas.Examples.Registry"
+        },
+        {
+          "framework": "Lean",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE",
+          "module": "AISafetyAtlas.Preference.Override",
+          "declaration": "AISafetyAtlas.Preference.OverrideModel.Overrides",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "license": "Apache-2.0",
+          "build_environment": "leanprover/lean4:v4.31.0; mathlib@fabf563a7c95a166b8d7b6efca11c8b4dc9d911f",
+          "build_command": "lake build AISafetyAtlas.Preference.Override AISafetyAtlas.Examples.Registry"
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Preference.exists_planner",
+            "type": "NEW_PROOF",
+            "source_declarations": [
+              "AISafetyAtlas.Preference.Planner",
+              "AISafetyAtlas.Preference.Explains"
+            ]
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Preference.exists_reward",
+            "type": "NEW_PROOF",
+            "source_declarations": [
+              "AISafetyAtlas.Preference.Planner",
+              "AISafetyAtlas.Preference.Explains"
+            ]
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Preference.consistent_rewards_eq_univ",
+            "type": "NEW_PROOF",
+            "source_declarations": [
+              "AISafetyAtlas.Preference.exists_planner"
+            ]
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Preference.neg_twin",
+            "type": "NEW_PROOF",
+            "source_declarations": [
+              "AISafetyAtlas.Preference.Planner",
+              "AISafetyAtlas.Preference.Explains"
+            ]
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Preference.greedy_rewardOf",
+            "type": "NEW_PROOF",
+            "source_declarations": [
+              "AISafetyAtlas.Preference.greedyAction_max",
+              "AISafetyAtlas.Preference.greedyPlanner",
+              "AISafetyAtlas.Preference.rewardOf"
+            ]
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Preference.Source.ReasonableForF.proposition_seven",
+            "type": "NEW_PROOF",
+            "source_declarations": [
+              "AISafetyAtlas.Preference.Source.ReasonableForF.F₁_of_compatible",
+              "AISafetyAtlas.Preference.Source.ReasonableForF.F₂_of_compatible",
+              "AISafetyAtlas.Preference.Source.ReasonableForF.F₃_of_compatible"
+            ]
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Preference.Source.ReasonableForF.proposition_eight",
+            "type": "NEW_PROOF",
+            "source_declarations": [
+              "AISafetyAtlas.Preference.Source.ReasonableForF.F₄_F₄",
+              "AISafetyAtlas.Preference.op3_op4"
+            ]
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Preference.ReasonableLanguage.proposition_seven",
+            "type": "NEW_PROOF",
+            "source_declarations": [
+              "AISafetyAtlas.Preference.ReasonableLanguage.policy_le_of_compatible",
+              "AISafetyAtlas.Preference.op3_op1_op5",
+              "AISafetyAtlas.Preference.op3_op2_op6",
+              "AISafetyAtlas.Preference.op3_op4_op2_op6"
+            ]
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Preference.ReasonableLanguage.proposition_eight",
+            "type": "NEW_PROOF",
+            "source_declarations": [
+              "AISafetyAtlas.Preference.op3_op4",
+              "AISafetyAtlas.Preference.ReasonableLanguage.Compatible"
+            ]
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Preference.explanation_at_least_behaviour",
+            "type": "NEW_PROOF",
+            "source_declarations": [
+              "Kolmogorov.plainKMapLe",
+              "AISafetyAtlas.Preference.decodeBehaviour_encodeExplanation"
+            ]
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Preference.degenerate_explanation_cheap",
+            "type": "NEW_PROOF",
+            "source_declarations": [
+              "Kolmogorov.plainKMapLe",
+              "AISafetyAtlas.Preference.computable_encodeExplanation"
+            ]
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Preference.explanation_complexity_eq_behaviour",
+            "type": "NEW_PROOF",
+            "source_declarations": [
+              "AISafetyAtlas.Preference.explanation_at_least_behaviour",
+              "AISafetyAtlas.Preference.degenerate_explanation_cheap"
+            ]
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Preference.RegretModel.cannot_rule_out_half_maximal_regret",
+            "type": "NEW_PROOF",
+            "source_declarations": [
+              "AISafetyAtlas.Preference.exists_planner",
+              "AISafetyAtlas.Wireheading.Corruption.ComplementedClass.halfMaximalRegretBound"
+            ]
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Preference.OverrideModel.mixtureValue_rationalise",
+            "type": "NEW_PROOF",
+            "source_declarations": [
+              "AISafetyAtlas.Preference.OverrideModel.mixtureValue",
+              "AISafetyAtlas.Preference.OverrideModel"
+            ]
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Preference.Source.ReasonableForF.theorem_two_conditional",
+            "type": "NEW_PROOF",
+            "source_declarations": [
+              "AISafetyAtlas.Preference.Source.ReasonableForF.NotAmongLowestCompatible",
+              "AISafetyAtlas.Preference.Source.ReasonableForF.proposition_seven"
+            ]
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Preference.OverrideModel.rationalise_strictly_better",
+            "type": "NEW_PROOF",
+            "source_declarations": [
+              "AISafetyAtlas.Preference.OverrideModel",
+              "AISafetyAtlas.Preference.OverrideModel.regret"
+            ]
+          }
+        ]
+      },
+      "status": "LEAN_AVAILABLE",
       "ai_safety_relevance": "The survey identifies this result as relevant to limits on AI; no direct real-system implication is asserted here.",
       "ai_bridge_status": "HUMAN_REVIEW",
       "notes": "Statement-level equivalence to each cited source remains subject to source comparison.",
       "formal_library_search": {
-        "searched_on": "2026-07-18",
+        "searched_on": "2026-07-28",
         "evidence_file": "docs/provenance/formalization-search.json",
         "searched_corpora": [
           "mathlib",
@@ -819,7 +1086,94 @@
         "query_terms": [
           "preference deduction",
           "preference inference",
-          "inverse reinforcement"
+          "inverse reinforcement",
+          "planner reward",
+          "reward identifiability",
+          "irrational agents"
+        ]
+      },
+      "source_coverage": {
+        "covered": 6,
+        "total": 8,
+        "percent": 75,
+        "basis": "Numbered results in the NeurIPS 2018 camera-ready and its official supplement, the canonical edition for this row: Theorems 1 and 2, Propositions 3 and 4, Definition 5, Lemma 6, Propositions 7 and 8, Conjecture 9, Proposition 10, Definition 11. Descriptive progress indicator only; never a coverage claim; not comparable across rows.",
+        "covered_items": [
+          {
+            "item": "Theorem 1 (both halves)",
+            "declarations": [
+              "AISafetyAtlas.Preference.exists_planner",
+              "AISafetyAtlas.Preference.exists_reward"
+            ],
+            "relationship": "RELATED",
+            "note": "Both quantifier directions are proved for the source's unconstrained planner/reward decomposition, abstracted from policies to arbitrary behaviour and reward types."
+          },
+          {
+            "item": "Definition 5 (negative of a planner, -p(R) = p(-R))",
+            "declarations": [
+              "AISafetyAtlas.Preference.negPlanner"
+            ],
+            "relationship": "RELATED",
+            "note": "The source definition is instantiated to state/action reward functions and policies."
+          },
+          {
+            "item": "Lemma 6 (the three degenerate pairs are compatible)",
+            "declarations": [
+              "AISafetyAtlas.Preference.lemma_six"
+            ],
+            "relationship": "RELATED",
+            "note": "All three source pairs are proved compatible in the finite nonempty action model used by the greedy planner construction."
+          },
+          {
+            "item": "Proposition 7",
+            "declarations": [
+              "AISafetyAtlas.Preference.Source.ReasonableForF.proposition_seven",
+              "AISafetyAtlas.Preference.ReasonableLanguage.proposition_seven"
+            ],
+            "relationship": "RELATED",
+            "note": "Two parameterizations. Source.ReasonableForF.proposition_seven follows the source: it defines the composite operations F1 = f1 of f5 of f3, F2 = f2 of f6 of f3, F3 = f4 of f2 of f6 of f3 and F4 = f4, assumes the F-complexity bound uniformly over the four, and concludes distance c. Because each Fi maps a pair to a pair, no policy complexity enters and the constant does not double. ReasonableLanguage.proposition_seven is the earlier reparameterization with separate evaluation and construction bounds, which concludes 2*c; it is retained because Preference.Complexity instantiates its evaluation bound concretely. The source formalizes among the lowest complexity using an attained minimum and its proof picks the simplest compatible pair; both Lean versions quantify universally over compatible pairs instead, which is implied whenever that minimum is attained."
+          },
+          {
+            "item": "Proposition 8",
+            "declarations": [
+              "AISafetyAtlas.Preference.Source.ReasonableForF.proposition_eight",
+              "AISafetyAtlas.Preference.ReasonableLanguage.proposition_eight"
+            ],
+            "relationship": "RELATED",
+            "note": "Both directions of comparable complexity: at the source's distance c in Source.ReasonableForF.proposition_eight, from the F4 bound together with its involution, and likewise at c under the reparameterized ReasonableLanguage interface."
+          },
+          {
+            "item": "Definition 11",
+            "declarations": [
+              "AISafetyAtlas.Preference.OverrideModel.OverridesFor",
+              "AISafetyAtlas.Preference.OverrideModel.Overrides"
+            ],
+            "relationship": "RELATED",
+            "note": "OverridesFor is the source definition with its relativisation restored: the agent action leaves the human in a situation of regret at least theta for R, where the pair (p, R) explains the resulting human policy. Overrides is the unrelativised shadow, and overrides_of_overridesFor records that the relativised notion is the stronger one. Equation (1) is optValue_isGreatest, which shows the regret baseline is the maximum over agent actions rather than an unexplained optimum. Equation (2) is mixtureValue and is restricted to the rationalising action, exactly where its epsilon-times-optimal-value term is justified. mixtureValue_rationalise proves the source's at-the-very-least claim that rationalising under the true reward attains the optimum at every mixture weight. Action zero is evaluated separately by noopValue; noopValue_lt_mixtureValue_rationalise proves the closing observation when the unaided human is suboptimal. The source's very plausible existence claim, that some easily maximised agent reward does strictly better, is deliberately not formalized. The informal high-regret threshold remains an explicit parameter."
+          }
+        ],
+        "uncovered_items": [
+          {
+            "item": "Conjecture 9 (Informal complexity proposition)",
+            "reason": "Still uncovered, and deliberately so. This is the missing half that makes Theorem 2 bite: Proposition 7 shows degenerate pairs are cheap, while Conjecture 9 would show the reasonable pair is not near-minimal. The source argues for it qualitatively but does not prove it, and the atlas supplies no such lower bound. It is now stated as the predicate Source.ReasonableForF.NotAmongLowestCompatible, with notAmongLowest_iff showing it is exactly the negation of being amongst the lowest, and theorem_two_conditional deriving the informal Theorem 2 from it: each degenerate pair is then strictly simpler than the intended one. The predicate is never assumed. No axiom, structure field or hypothesis anywhere in the atlas asserts it, so the conditional theorem is the only thing claimed."
+          },
+          {
+            "item": "Proposition 10 (Appendix A)",
+            "reason": "Needs resource-bounded complexity (Levin Kt, Allender KT); the vendored KolmogorovMathlib carries only plain K and Map is a Partrec function with no running time. Raised upstream at AlexeyMilovanov/kolmogorov-complexity-lean#1."
+          }
+        ],
+        "excluded_items": [
+          {
+            "item": "Theorem 2 (Informal simplicity theorem)",
+            "reason": "Informal headline. The source notes issues with it as stated and splits its formal content into Propositions 7 and 8 and Conjecture 9, each counted separately; counting it again would double count."
+          },
+          {
+            "item": "Proposition 3",
+            "reason": "Explicitly semi-formal: the source introduces Propositions 3 and 4 as the two 'semi-formal results' for which the section provides grounds. Its rigorous counterpart is Proposition 7, counted as covered; counting it again would double count."
+          },
+          {
+            "item": "Proposition 4",
+            "reason": "Explicitly semi-formal, same introduction as Proposition 3. Its rigorous counterpart is Proposition 8, counted as covered."
+          }
         ]
       }
     },
@@ -917,7 +1271,7 @@
       },
       "notes": "Mathlib v4.31.0 provides an equivalent extensional-function theorem and an exact code-set characterization. The atlas keeps those canonical wrappers and derives one semantic-to-code verification bridge for properties stated on partial input/output behavior; it makes no claim about a particular AI system. Isabelle Rice_2 independently verifies the ordinary undecidability result. Reproduced Rice_1 adds an explicit one-reduction and Rice_3 adds a c.e.-set interface, but neither is an additional survey coverage result or a current Lean migration target. Downstream consumer of Verification.rice: AISafetyAtlas.Verification.AgentBehavior.no_behavioral_safety_verifier models encoded agents as Mathlib program codes and proves no total BehavioralSafetyVerifier exists for a nontrivial I/O safety specification (CT-4 / R6-8). Melo et al. (arXiv:2408.08995) apply Rice to a comparable agent/program and non-trivial I/O-judge decision problem; the atlas formalizes the Rice packaging, not that paper’s full narrative or architecture proposals. Maintainer bridge review 2026-07-19 (REVIEWED): statement and scoped AI-safety interpretation accepted (see bridge_review evidence). Paper list: docs/status/paper-coverage.md. Related literature: atlas-ref-melo-2024; landscape LAND-MELO-001; related literature docs/guide/related-literature.md. Bridge REVIEWED (2026-07-19) applies to the AI-facing bridges Verification.rice and AgentBehavior.no_behavioral_safety_verifier (statement + scoped interpretation); it is not a re-audit of Mathlib Rice as novel AI-safety content. See docs/bridges/review-by-012-agentbehavior.md and docs/releases/v0.2.md.",
       "formal_library_search": {
-        "searched_on": "2026-07-18",
+        "searched_on": "2026-07-28",
         "evidence_file": "docs/provenance/formalization-search.json",
         "searched_corpora": [
           "mathlib",
@@ -1001,7 +1355,7 @@
       "ai_bridge_status": "HUMAN_REVIEW",
       "notes": "Gödel's first incompleteness theorem (exists_true_but_unprovable_sentence) is reproduced from FormalizedFormalLogic/Foundation at the pinned revision and exposed via the thin atlas wrapper AISafetyAtlas.Logic.godel_first_incompleteness; this is the BY-013 statement match (EQUIVALENT). The theorem is the classical result for any concrete Δ₁-definable, 𝚺₁-sound arithmetic theory interpreting 𝗥₀ — not an abstract axiomatized skeleton. Gödel's second incompleteness theorem (consistent_unprovable: T ⊬ Con(T) for consistent theories interpreting 𝗜𝚺₁) is a distinct companion result, exposed via AISafetyAtlas.Logic.godel_second_incompleteness and recorded here as RELATED (not the BY-013 first-incompleteness claim, so not double-counted). All three atlas wrappers depend only on [propext, Classical.choice, Quot.sound].",
       "formal_library_search": {
-        "searched_on": "2026-07-18",
+        "searched_on": "2026-07-28",
         "evidence_file": "docs/provenance/formalization-search.json",
         "searched_corpora": [
           "mathlib",
@@ -1103,7 +1457,7 @@
       "ai_bridge_status": "HUMAN_REVIEW",
       "notes": "Mathlib v4.31.0 formalizes recursive enumerability, noncomputability, and non-r.e. complement results for the fixed-input halting predicate.",
       "formal_library_search": {
-        "searched_on": "2026-07-18",
+        "searched_on": "2026-07-28",
         "evidence_file": "docs/provenance/formalization-search.json",
         "searched_corpora": [
           "mathlib",
@@ -1175,7 +1529,7 @@
       "ai_bridge_status": "HUMAN_REVIEW",
       "notes": "External Lean formalization of Chaitin's incompleteness is reproduced at the pinned revision (EQUIVALENT) and exposed via thin atlas wrappers under AISafetyAtlas.Logic. The proof body is vendored under AISafetyAtlas.Upstream.KolmogorovMathlib for Lean module compatibility (Apache-2.0, same pin). The development uses an abstract sound r.e. FormalSystem, not a concrete arithmetic theory. Classical Gödel first and second incompleteness (concrete arithmetic theories) are covered separately under BY-013 via FormalizedFormalLogic/Foundation; the earlier Kritchman–Raz second-incompleteness skeleton has been retired.",
       "formal_library_search": {
-        "searched_on": "2026-07-18",
+        "searched_on": "2026-07-28",
         "evidence_file": "docs/provenance/formalization-search.json",
         "searched_corpora": [
           "mathlib",
@@ -1233,7 +1587,7 @@
       "ai_bridge_status": "HUMAN_REVIEW",
       "notes": "Tarski's undefinability of truth is reproduced from FormalizedFormalLogic/Foundation at the pinned revision and exposed via AISafetyAtlas.Logic.tarski_undefinability. The statement is the classical arithmetic form (no arithmetic truth predicate for the standard model), classified EQUIVALENT to the survey informal claim. A related no-Tarski-predicate lemma for consistent IΣ₁-extensions is upstream but not separately counted.",
       "formal_library_search": {
-        "searched_on": "2026-07-18",
+        "searched_on": "2026-07-28",
         "evidence_file": "docs/provenance/formalization-search.json",
         "searched_corpora": [
           "mathlib",
@@ -1271,7 +1625,7 @@
       "ai_bridge_status": "HUMAN_REVIEW",
       "notes": "Statement-level equivalence to each cited source remains subject to source comparison.",
       "formal_library_search": {
-        "searched_on": "2026-07-18",
+        "searched_on": "2026-07-28",
         "evidence_file": "docs/provenance/formalization-search.json",
         "searched_corpora": [
           "mathlib",
@@ -1308,7 +1662,7 @@
       "ai_bridge_status": "HUMAN_REVIEW",
       "notes": "Statement-level equivalence to each cited source remains subject to source comparison.",
       "formal_library_search": {
-        "searched_on": "2026-07-18",
+        "searched_on": "2026-07-28",
         "evidence_file": "docs/provenance/formalization-search.json",
         "searched_corpora": [
           "mathlib",
@@ -1345,7 +1699,7 @@
       "ai_bridge_status": "HUMAN_REVIEW",
       "notes": "Statement-level equivalence to each cited source remains subject to source comparison.",
       "formal_library_search": {
-        "searched_on": "2026-07-18",
+        "searched_on": "2026-07-28",
         "evidence_file": "docs/provenance/formalization-search.json",
         "searched_corpora": [
           "mathlib",
@@ -1439,7 +1793,7 @@
       "ai_bridge_status": "HUMAN_REVIEW",
       "notes": "Lean NEW_PROOF (2026-07-19): AISafetyAtlas.Learning.no_free_lunch_supervised formalizes the finite-domain supervised off-training-set uniform-averaging core of Wolpert 1996 — for finite X,Y and fixed training domain S, any two learners A,B : (S→Y)→(X→Y) have equal sum over all targets f of OTS 0-1 loss (closed form |Sᶜ|·(|Y|−1)·|Y|^{|X|−1}). Relationship is RELATED, not EXACT/EQUIVALENT: full 1996 development (cross-validation as meta-algorithm, general loss, stochastic learners) is not mechanized. CT-2: AFP No_Free_Lunch_ML / SSBD PAC NFL remains DISTINCT (LAND-NFL-001). Optimization twin is BY-021 / no_free_lunch. Content source: Wolpert 'The Lack of A Priori Distinctions Between Learning Algorithms' (Neural Comput. 1996, 8(7):1341-1390, doi 10.1162/neco.1996.8.7.1341); survey-ref-018 mirrors the survey's own citation of the companion 'Existence' paper (pp. 1391-1420, doi ...1391), which proves the converse — see provenance. Provenance: docs/provenance/lean-wolpert-nfl.md. ai_bridge_status stays HUMAN_REVIEW.",
       "formal_library_search": {
-        "searched_on": "2026-07-18",
+        "searched_on": "2026-07-28",
         "evidence_file": "docs/provenance/formalization-search.json",
         "searched_corpora": [
           "mathlib",
@@ -1510,7 +1864,7 @@
       "ai_bridge_status": "HUMAN_REVIEW",
       "notes": "Lean NEW_PROOF (2026-07-19): AISafetyAtlas.Learning.no_free_lunch formalizes the finite-domain non-adaptive uniform-averaging core of Wolpert–Macready 1997 — for finite X,Y, any cost-sequence score Φ, any two injective m-point schedules have equal sum of Φ over all objectives f:X→Y (equivalently the closed form |Y|^{|X|-m}·∑_c Φ(c)). Relationship is RELATED, not EXACT/EQUIVALENT: adaptive query trees, stochastic algorithms, and time-varying objectives from the paper are not mechanized. Supervised twin is BY-020 / no_free_lunch_supervised. Distinct from SSBD PAC NFL / AFP No_Free_Lunch_ML (LAND-NFL-001) and continuous free lunches (BY-022). Provenance: docs/provenance/lean-wolpert-nfl.md. ai_bridge_status stays HUMAN_REVIEW.",
       "formal_library_search": {
-        "searched_on": "2026-07-18",
+        "searched_on": "2026-07-28",
         "evidence_file": "docs/provenance/formalization-search.json",
         "searched_corpora": [
           "mathlib",
@@ -1530,7 +1884,18 @@
           "macready"
         ]
       },
-      "candidate_formalizations": []
+      "candidate_formalizations": [
+        {
+          "repository": "https://github.com/JinZida/DSC291LT_NFL",
+          "revision": "a24c64c5ebb56200b22b4ad6059eef7a74ab6b35",
+          "framework": "Lean",
+          "license": "NONE",
+          "declaration": "NFL.CodexFull.WolpertMacready.wolpert_macready and .wolpert_macready_avg (NFL/NFL/codex_full/WolpertMacready.lean); independently duplicated as NFL.ClaudeFull.WolpertMacready.* (NFL/NFL/claude_full/WolpertMacready.lean). The statement skeleton at NFL/NFL/WolpertMacready.lean is sorry-closed.",
+          "inspection_state": "REPRODUCED",
+          "relationship_review": "RELATED",
+          "notes": "UCSD DSC 291 (Learning Theory) course project, Spring 2026, formalizing three No Free Lunch theorems. Layout: NFL.lean imports a 69-line statement skeleton whose theorems are sorry-closed; the proofs live in codex_full/ and claude_full/, outputs of two AI coding agents on the same task, with the README designating codex_full/ as the deliverable. Built and audited 2026-07-28 at the repository's own pins (Lean v4.29.1, Mathlib 5e932f97). The default lake build target succeeds but warns 'declaration uses sorry' at WolpertMacready.lean lines 42 and 60; no oleans appear under codex_full/ or claude_full/, confirming both are outside the default closure. Built explicitly, both compile (1700 jobs each). Axiom audit reports [propext, Classical.choice, Quot.sound] for wolpert_macready and wolpert_macready_avg in both namespaces, with no sorryAx: both agent proofs are complete and kernel-checked. Delta against existing atlas coverage is narrow. BY-021 is already covered RELATED by the in-tree Lean AISafetyAtlas.Learning.no_free_lunch, and AISafetyAtlas.Learning.no_free_lunch_adaptive already proves the deterministic adaptive case including the full histogram (each fiber has cardinality |Y|^(|X|-m) independent of the rule). What this lead adds is stochastic algorithms: its SearchAlg.nextQuery is PMF-valued where AdaptiveRule is deterministic. It is not uniformly stronger — its performance functional is ENNReal-valued where the atlas admits signed real functionals — and it likewise omits the time-varying objectives that keep the atlas artifact at RELATED. Graded RELATED for consistency with that standard. Its other two theorems are more interesting than the Wolpert one: batch_stochastic_NFL is SSBD Thm 5.1, which the atlas holds only in Isabelle as LAND-NFL-001, though that AFP entry is strictly more general (arbitrary measure spaces, not Fintype-only), so this is a finite-domain special case rather than a Lean replacement; and exists_adversarial_target is an online adversarial NFL with no atlas analogue. The blocker is licensing: no license file, so nothing here is reusable, vendorable or promotable however good the proofs are. Version skew against atlas pins (Lean v4.31.0, Mathlib fabf563a) is secondary. Found via an incidental control query, not a systematic lead sweep of this row."
+        }
+      ]
     },
     {
       "id": "BY-022",
@@ -1551,7 +1916,7 @@
       "ai_bridge_status": "HUMAN_REVIEW",
       "notes": "Statement-level equivalence to each cited source remains subject to source comparison.",
       "formal_library_search": {
-        "searched_on": "2026-07-18",
+        "searched_on": "2026-07-28",
         "evidence_file": "docs/provenance/formalization-search.json",
         "searched_corpora": [
           "mathlib",
@@ -1589,7 +1954,7 @@
       "ai_bridge_status": "HUMAN_REVIEW",
       "notes": "Statement-level equivalence to each cited source remains subject to source comparison.",
       "formal_library_search": {
-        "searched_on": "2026-07-18",
+        "searched_on": "2026-07-28",
         "evidence_file": "docs/provenance/formalization-search.json",
         "searched_corpora": [
           "mathlib",
@@ -1628,7 +1993,7 @@
       "ai_bridge_status": "HUMAN_REVIEW",
       "notes": "Statement-level equivalence to each cited source remains subject to source comparison.",
       "formal_library_search": {
-        "searched_on": "2026-07-18",
+        "searched_on": "2026-07-28",
         "evidence_file": "docs/provenance/formalization-search.json",
         "searched_corpora": [
           "mathlib",
@@ -1641,7 +2006,10 @@
         "candidate_corpora": [],
         "query_terms": [
           "physical limits of inference",
-          "inference device"
+          "inference device",
+          "inference devices",
+          "computational capabilities of physical systems",
+          "wolpert"
         ]
       }
     },
@@ -1663,7 +2031,7 @@
       "ai_bridge_status": "HUMAN_REVIEW",
       "notes": "Statement-level equivalence to each cited source remains subject to source comparison.",
       "formal_library_search": {
-        "searched_on": "2026-07-18",
+        "searched_on": "2026-07-28",
         "evidence_file": "docs/provenance/formalization-search.json",
         "searched_corpora": [
           "mathlib",
@@ -1703,7 +2071,7 @@
       "ai_bridge_status": "HUMAN_REVIEW",
       "notes": "Statement-level equivalence to each cited source remains subject to source comparison.",
       "formal_library_search": {
-        "searched_on": "2026-07-18",
+        "searched_on": "2026-07-28",
         "evidence_file": "docs/provenance/formalization-search.json",
         "searched_corpora": [
           "mathlib",
@@ -1717,7 +2085,10 @@
         "query_terms": [
           "safe interruptibility",
           "uninterruptibility",
-          "off-switch"
+          "off-switch",
+          "interruptibility",
+          "safely interruptible",
+          "corrigibility"
         ]
       }
     },
@@ -1762,7 +2133,7 @@
       "ai_bridge_status": "HUMAN_REVIEW",
       "notes": "Löb's theorem (if T proves Prov_T(σ)→σ then T proves σ) is reproduced from FormalizedFormalLogic/Foundation and exposed via AISafetyAtlas.Logic.loeb. Classified EQUIVALENT to the survey row named \"Löb's theorem (unverifiability)\": the formalization matches the Löb schema itself. The informal AI-safety reading \"cannot prove own soundness\" is a standard consequence under the theorem's hypotheses (Δ₁ theory interpreting IΣ₁), recorded as interpretation context only and not as a separate coverage claim. AFP Loebs_Theorem and HOL Light GL remain discovery provenance only. (Re-triaged 2026-07-19 per adversarial review R6-5.)",
       "formal_library_search": {
-        "searched_on": "2026-07-18",
+        "searched_on": "2026-07-28",
         "evidence_file": "docs/provenance/formalization-search.json",
         "searched_corpora": [
           "mathlib",
@@ -1803,7 +2174,7 @@
       "ai_bridge_status": "HUMAN_REVIEW",
       "notes": "Statement-level equivalence to each cited source remains subject to source comparison.",
       "formal_library_search": {
-        "searched_on": "2026-07-18",
+        "searched_on": "2026-07-28",
         "evidence_file": "docs/provenance/formalization-search.json",
         "searched_corpora": [
           "mathlib",
@@ -1838,7 +2209,7 @@
       "ai_bridge_status": "HUMAN_REVIEW",
       "notes": "Statement-level equivalence to each cited source remains subject to source comparison.",
       "formal_library_search": {
-        "searched_on": "2026-07-18",
+        "searched_on": "2026-07-28",
         "evidence_file": "docs/provenance/formalization-search.json",
         "searched_corpora": [
           "mathlib",
@@ -1874,7 +2245,7 @@
       "ai_bridge_status": "HUMAN_REVIEW",
       "notes": "Statement-level equivalence to each cited source remains subject to source comparison.",
       "formal_library_search": {
-        "searched_on": "2026-07-18",
+        "searched_on": "2026-07-28",
         "evidence_file": "docs/provenance/formalization-search.json",
         "searched_corpora": [
           "mathlib",
@@ -1909,7 +2280,7 @@
       "ai_bridge_status": "HUMAN_REVIEW",
       "notes": "Statement-level equivalence to each cited source remains subject to source comparison.",
       "formal_library_search": {
-        "searched_on": "2026-07-18",
+        "searched_on": "2026-07-28",
         "evidence_file": "docs/provenance/formalization-search.json",
         "searched_corpora": [
           "mathlib",
@@ -1944,7 +2315,7 @@
       "ai_bridge_status": "HUMAN_REVIEW",
       "notes": "Statement-level equivalence to each cited source remains subject to source comparison.",
       "formal_library_search": {
-        "searched_on": "2026-07-18",
+        "searched_on": "2026-07-28",
         "evidence_file": "docs/provenance/formalization-search.json",
         "searched_corpora": [
           "mathlib",
@@ -2004,7 +2375,7 @@
       "ai_bridge_status": "REVIEWED",
       "notes": "Extracted paper statements (Theorem 1, Corollary 1, Defs 2–3) and a step-by-step proof comparison are in docs/guide/robot-verification-model.md (source: UU-PCS-2021-02 §3.2). The paper proof is longer than Lean's because it constructs τ_x (Fig. 1) from Def. 3 non-triviality inside Sense–Plan–Act (paced TM simulation, hyper-command validity, unbounded memory), then reduces diagonal K to the observer problem; Lean packages τ as SwitchingConstruction and only machine-checks the reduction half (fixed-input halting via Mathlib, equally undecidable). A concrete paced-computation example witnesses the assumption for Mathlib codes. Relationship is RELATED, not EXACT/EQUIVALENT: SPA syntax, Def. 3 derivation, probability, physical dynamics, and ethical/legal interpretation are not mechanized. Does not cover bounded/finite-state systems; does not exclude sound incomplete verification. Paper-model correspondence remains HUMAN_REVIEW. CT-3 2026-07-19: maintainer REVIEWED (statement + scoped interpretation); formalization relationship remains RELATED (SwitchingConstruction assumed; not paper EXACT); evidence docs/bridges/ct3-robot-review-package.md.",
       "formal_library_search": {
-        "searched_on": "2026-07-18",
+        "searched_on": "2026-07-28",
         "evidence_file": "docs/provenance/formalization-search.json",
         "searched_corpora": [
           "mathlib",
@@ -2047,7 +2418,7 @@
       "ai_bridge_status": "HUMAN_REVIEW",
       "notes": "Statement-level equivalence to each cited source remains subject to source comparison.",
       "formal_library_search": {
-        "searched_on": "2026-07-18",
+        "searched_on": "2026-07-28",
         "evidence_file": "docs/provenance/formalization-search.json",
         "searched_corpora": [
           "mathlib",
@@ -2082,7 +2453,7 @@
       "ai_bridge_status": "HUMAN_REVIEW",
       "notes": "A2 (2026-07-19): AFP Deep_Learning (Bentkamp; Cohen et al. network-capacity / deep-vs-shallow theorems) is RELATED landscape LAND-DL-001 — matches the informal no-flattening claim but is not EXACT formalization of the Lin–Tegmark–Rolnick 2017 survey citation (survey-ref-072). See docs/provenance/a2-deep-learning-by035-triage.md.",
       "formal_library_search": {
-        "searched_on": "2026-07-18",
+        "searched_on": "2026-07-28",
         "evidence_file": "docs/provenance/formalization-search.json",
         "searched_corpora": [
           "mathlib",
@@ -2117,7 +2488,7 @@
       "ai_bridge_status": "HUMAN_REVIEW",
       "notes": "Statement-level equivalence to each cited source remains subject to source comparison.",
       "formal_library_search": {
-        "searched_on": "2026-07-18",
+        "searched_on": "2026-07-28",
         "evidence_file": "docs/provenance/formalization-search.json",
         "searched_corpora": [
           "mathlib",
@@ -2153,7 +2524,7 @@
       "ai_bridge_status": "HUMAN_REVIEW",
       "notes": "Statement-level equivalence to each cited source remains subject to source comparison.",
       "formal_library_search": {
-        "searched_on": "2026-07-18",
+        "searched_on": "2026-07-28",
         "evidence_file": "docs/provenance/formalization-search.json",
         "searched_corpora": [
           "mathlib",
@@ -2166,9 +2537,54 @@
         "candidate_corpora": [],
         "query_terms": [
           "goodhart",
-          "measure becomes a target"
+          "measure becomes a target",
+          "regressional goodhart",
+          "winner's curse",
+          "regression to the mean"
         ]
-      }
+      },
+      "candidate_formalizations": [
+        {
+          "repository": "https://github.com/audieleon/goodhart",
+          "revision": "29128f3f9bcafb30d019682b63c1b582bcadf7b9",
+          "framework": "Lean",
+          "license": "Apache-2.0",
+          "declaration": "Skalse.skalse_theorem1 (proofs/GoodhartProofs/Skalse/Theorem1.lean); also skalse_theorem3, skalse_corollary3, and a potential-shaping layer (ng_vstar_shaped, ng_qstar_shaped, ng_shaping_preserves_optimal, ng_necessity_lemma3) over a FiniteMDP/Bellman development",
+          "inspection_state": "REPRODUCED",
+          "relationship_review": "RELATED",
+          "notes": "Strongest of four Lean leads found by manual GitHub search on 2026-07-28; outside the six pinned corpora. Formalizes Skalse et al., 'Defining and Characterizing Reward Hacking' (NeurIPS 2022), with policies as occupancy vectors and value as an inner product (value R F = sum_i R i * F i); definitions checked non-degenerate at source level. Also carries Ng, Harada & Russell (1999) potential-based shaping over a FiniteMDP/Bellman development. Its ng_necessity_lemma3 proves an algebraic action-dependent ordering reversal, not the full Ng necessity theorem; an earlier note here overstated that. Independently built 2026-07-28 in an isolated elan 4.2.3 toolchain at the repository's own pins (Lean v4.30.0-rc2, Mathlib 9268b22206b0425419498769f780a91dee03bcf3) with 'lake exe cache get' then 'lake build': completed successfully, 3313 jobs, exit 0. Axiom audit via 'lake env lean' on skalse_theorem1, skalse_theorem3_only_if, skalse_corollary3, ng_vstar_shaped, ng_qstar_shaped and ng_shaping_preserves_optimal reports only [propext, Classical.choice, Quot.sound] for each; no sorryAx. RELATED rather than EXACT/EQUIVALENT: a reward-hacking characterization is not a formalization of the Goodhart/Strathern statement this row records. Not usable as atlas coverage without resolving version skew (atlas pins Lean v4.31.0 and Mathlib fabf563a7c95a166b8d7b6efca11c8b4dc9d911f). Companion paper (Sheridan 2026) is self-published and not peer reviewed; maintenance is unproven. The MDP/Bellman/shaping layer is a candidate Lean-native substrate for BY-039."
+        },
+        {
+          "repository": "https://github.com/RichardZandi/Impossibility",
+          "revision": "3e951593660655055953330226039b5c79c6b09a",
+          "framework": "Lean",
+          "license": "NONE",
+          "declaration": "goodhart_impossibility (Impossibility/Goodhart/GoodhartUCI.lean)",
+          "inspection_state": "SOURCE_INSPECTED",
+          "relationship_review": "DISTINCT",
+          "notes": "Rejected. The lemma states that a computable, extensional classifier separating two programs is contradictory, which is Rice's theorem under a Goodhart name; it encodes no proxy/target divergence. Rice is already covered at BY-012. No license file, so it could not be reused even if the statement matched."
+        },
+        {
+          "repository": "https://github.com/paulklemstine/Lean",
+          "revision": "620407cde0610ab76ba3e055ef143b341a8e6cd9",
+          "framework": "Lean",
+          "license": "NONE",
+          "declaration": "goodhart_divergence_exists (Catalog/Computation/GoodhartsRepulsor.lean)",
+          "inspection_state": "SOURCE_INSPECTED",
+          "relationship_review": "DISTINCT",
+          "notes": "Rejected as vacuous. The hypothesis is 'exists s, proxy increases and true value decreases' and the conclusion is 'exists s, true value decreases', a weakening of the hypothesis; the theorem carries no Goodhart content. A neighbouring theorem in the same file proves set intersection is a subset of one operand. No license file; the repository duplicates generated copies of the same file across several directories."
+        },
+        {
+          "repository": "https://github.com/JonRademacher/standing-algebra",
+          "revision": "df1fb08f32544de796f9a90a4a8d102f1a57635f",
+          "framework": "Lean",
+          "license": "Apache-2.0",
+          "declaration": "Collapse_Demonstrations.Goodhart_Drift.GoodhartDrift (Collapse_Demonstrations/Goodhart_Drift/Goodhart.lean)",
+          "inspection_state": "SOURCE_INSPECTED",
+          "relationship_review": "DISTINCT",
+          "notes": "Rejected. The file supplies only a predicate GoodhartDrift asserting that some pair of times exists at which a proxy rises while true value falls, and proves nothing about it; the file states its own purpose as showing the notion is satisfiable. A definition without a theorem is not a formalization of this row."
+        }
+      ]
     },
     {
       "id": "BY-038",
@@ -2188,7 +2604,7 @@
       "ai_bridge_status": "HUMAN_REVIEW",
       "notes": "Statement-level equivalence to each cited source remains subject to source comparison.",
       "formal_library_search": {
-        "searched_on": "2026-07-18",
+        "searched_on": "2026-07-28",
         "evidence_file": "docs/provenance/formalization-search.json",
         "searched_corpora": [
           "mathlib",
@@ -2201,7 +2617,8 @@
         "candidate_corpora": [],
         "query_terms": [
           "campbell's law",
-          "campbell law"
+          "campbell law",
+          "regression to the mean"
         ]
       }
     },
@@ -2216,14 +2633,39 @@
       "original_source_refs": [
         "survey-ref-077"
       ],
-      "formalizations": [],
-      "lean_artifact": null,
-      "status": "MAPPED",
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE",
+          "module": "AISafetyAtlas.Wireheading.CRMDP",
+          "declaration": "AISafetyAtlas.Wireheading.CRMDP.Model.everitt_theorem_eleven",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "license": "Apache-2.0",
+          "build_environment": "leanprover/lean4:v4.31.0; mathlib@fabf563a7c95a166b8d7b6efca11c8b4dc9d911f",
+          "build_command": "lake build AISafetyAtlas.Wireheading.CRMDP AISafetyAtlas.Examples.SixTargets"
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Wireheading.CRMDP.Model.everitt_theorem_eleven",
+            "type": "NEW_PROOF",
+            "source_declarations": [
+              "AISafetyAtlas.Wireheading.CRMDP.Env.observed_complement",
+              "AISafetyAtlas.Wireheading.CRMDP.return_add_complement",
+              "AISafetyAtlas.Wireheading.Corruption.ComplementedClass.everitt_theorem_eleven"
+            ]
+          }
+        ]
+      },
+      "status": "LEAN_AVAILABLE",
       "ai_safety_relevance": "The survey identifies this result as relevant to limits on AI; no direct real-system implication is asserted here.",
       "ai_bridge_status": "HUMAN_REVIEW",
-      "notes": "Statement-level equivalence to each cited source remains subject to source comparison.",
+      "notes": "Two levels. CRMDP.Model.everitt_theorem_eleven is the canonical declaration and is stated for a model that carries states, actions, one fixed deterministic transition, unit-interval true and observed rewards, a corruption channel, source-shaped action/observation histories, policies that read them, and finite-horizon return. Inside it the source construction is verified rather than assumed: Env.observed_complement proves that an environment and its complement induce the same observed reward, run_complement proves that no policy can therefore separate them, and return_add_complement proves the source equation (3) that true returns sum to the horizon. Completeness with respect to true rewards and corruption channels is structural, since Env is their full bounded function-space product and is closed under complement with no side condition; unlike the source's complete CRMDP class, one Lean Model does not range over transition kernels. The reward bound is load-bearing: the superseded unrestricted-real interface combined with an attained worst-environment field forced every inhabitant to have zero regret by a scaling argument. Examples.SixTargets.nonzeroCRMDPModel_worstCaseRegret now proves worst-case regret exactly one in a concrete two-state, two-action model. Corruption.ComplementedClass.everitt_theorem_eleven remains as the algebraic core lemma that the model instantiates, and it supplies the certificate consumed by AISafetyAtlas.Preference.Regret. RELATED, not EXACT: one fixed deterministic transition replaces a class ranging over stochastic kernels and induced measures on histories; the attained best policy, worst environment and worst policy are structure fields rather than derived from finiteness; and rewards range over the continuous interval [0,1] rather than a finite uniform grid.",
       "formal_library_search": {
-        "searched_on": "2026-07-18",
+        "searched_on": "2026-07-28",
         "evidence_file": "docs/provenance/formalization-search.json",
         "searched_corpora": [
           "mathlib",
@@ -2233,11 +2675,16 @@
           "hol-light",
           "agda-stdlib"
         ],
-        "candidate_corpora": [],
+        "candidate_corpora": [
+          "isabelle-afp"
+        ],
         "query_terms": [
           "reward corruption",
           "corrupted reward channel",
-          "reward tampering"
+          "reward tampering",
+          "corrupt reward mdp",
+          "reward misspecification",
+          "markov decision process"
         ]
       }
     },
@@ -2259,7 +2706,7 @@
       "ai_bridge_status": "HUMAN_REVIEW",
       "notes": "Statement-level equivalence to each cited source remains subject to source comparison.",
       "formal_library_search": {
-        "searched_on": "2026-07-18",
+        "searched_on": "2026-07-28",
         "evidence_file": "docs/provenance/formalization-search.json",
         "searched_corpora": [
           "mathlib",
@@ -2294,7 +2741,7 @@
       "ai_bridge_status": "HUMAN_REVIEW",
       "notes": "Statement-level equivalence to each cited source remains subject to source comparison.",
       "formal_library_search": {
-        "searched_on": "2026-07-18",
+        "searched_on": "2026-07-28",
         "evidence_file": "docs/provenance/formalization-search.json",
         "searched_corpora": [
           "mathlib",
@@ -2327,7 +2774,7 @@
       "ai_bridge_status": "HUMAN_REVIEW",
       "notes": "Introduced in the survey; statement-level semantic review is required.",
       "formal_library_search": {
-        "searched_on": "2026-07-18",
+        "searched_on": "2026-07-28",
         "evidence_file": "docs/provenance/formalization-search.json",
         "searched_corpora": [
           "mathlib",
@@ -2352,15 +2799,40 @@
       "domain_category": "DATA",
       "survey_proof_assessment": "PROOF_SKETCH",
       "informal_claim": "Mistakenly cloned self-interested agents cannot perfectly control one another in the survey's model.",
-      "original_source_refs": [],
-      "formalizations": [],
-      "lean_artifact": null,
-      "status": "MAPPED",
+      "original_source_refs": [
+        "brcic-yampolskiy-2023"
+      ],
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE",
+          "module": "AISafetyAtlas.Compositional.Symmetry",
+          "declaration": "AISafetyAtlas.Compositional.Symmetry.Protocol.no_unique_leader_from_symmetric_start",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "license": "Apache-2.0",
+          "build_environment": "leanprover/lean4:v4.31.0; mathlib@fabf563a7c95a166b8d7b6efca11c8b4dc9d911f",
+          "build_command": "lake build AISafetyAtlas.Compositional.Symmetry"
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Compositional.Symmetry.Protocol.no_unique_leader_from_symmetric_start",
+            "type": "NEW_PROOF",
+            "source_declarations": [
+              "Angluin (1980), deterministic anonymous-network symmetry obstruction"
+            ]
+          }
+        ]
+      },
+      "status": "LEAN_AVAILABLE",
       "ai_safety_relevance": "The survey identifies this result as relevant to limits on AI; no direct real-system implication is asserted here.",
       "ai_bridge_status": "HUMAN_REVIEW",
-      "notes": "Introduced in the survey; statement-level semantic review is required.",
+      "notes": "Lean formalizes the Angluin-style inductive core: identical deterministic code plus indistinguishable observations preserves a symmetric configuration, so at least two nodes cannot reach exactly one leader in finitely many synchronous rounds. The network beneath it is now formalized separately in AISafetyAtlas.Compositional.Networks, catalogued as LAND-ANGLUIN-001, where observational indistinguishability is derived from port structure rather than assumed: runFor_eq_of_view_eq is the depth-n view lemma and no_unique_leader_of_fixedPointFree gives the automorphism route. That work deliberately does not change this row. RELATED only: this is a reusable dependency and source-backed repair direction, not a formalization of the survey's self-interest, mistaken-belief, embodiment or mutual-control semantics. Randomness, identifiers and asymmetric observations are explicit exits.",
       "formal_library_search": {
-        "searched_on": "2026-07-18",
+        "searched_on": "2026-07-28",
         "evidence_file": "docs/provenance/formalization-search.json",
         "searched_corpora": [
           "mathlib",
@@ -2370,11 +2842,16 @@
           "hol-light",
           "agda-stdlib"
         ],
-        "candidate_corpora": [],
+        "candidate_corpora": [
+          "isabelle-afp"
+        ],
         "query_terms": [
           "misaligned embodiment",
           "operationally cloned",
-          "clone misalignment"
+          "clone misalignment",
+          "symmetry breaking",
+          "anonymous network",
+          "leader election"
         ]
       }
     },
@@ -2394,7 +2871,7 @@
       "ai_bridge_status": "HUMAN_REVIEW",
       "notes": "Introduced in the survey; statement-level semantic review is required.",
       "formal_library_search": {
-        "searched_on": "2026-07-18",
+        "searched_on": "2026-07-28",
         "evidence_file": "docs/provenance/formalization-search.json",
         "searched_corpora": [
           "mathlib",

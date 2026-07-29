@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import json
+import re
 import sys
 from pathlib import Path
 from urllib.parse import urlsplit
@@ -24,6 +25,7 @@ REQUIRED_ENTRY_FIELDS = {
     "root_import",
     "notes",
 }
+PUBLIC_IMPORT_RE = re.compile(r"^public import ([A-Za-z0-9_'.]+)\s*$")
 
 
 def fail(message: str) -> None:
@@ -36,6 +38,33 @@ def valid_http_url(value: object) -> bool:
         return False
     parsed = urlsplit(value)
     return parsed.scheme in {"http", "https"} and bool(parsed.netloc)
+
+
+def public_surface_text() -> str:
+    """Return the text of every module re-exported from the package root."""
+    root_module = ROOT / "AISafetyAtlas.lean"
+    pending = ["AISafetyAtlas"]
+    seen: set[str] = set()
+    sources: list[str] = []
+    while pending:
+        module = pending.pop(0)
+        if module in seen:
+            continue
+        seen.add(module)
+        path = root_module if module == "AISafetyAtlas" else (
+            ROOT / (module.replace(".", "/") + ".lean")
+        )
+        if not path.is_file():
+            fail(f"public atlas import missing module: {path.relative_to(ROOT)}")
+        source = path.read_text(encoding="utf-8")
+        sources.append(source)
+        pending.extend(
+            match.group(1)
+            for line in source.splitlines()
+            if (match := PUBLIC_IMPORT_RE.match(line))
+            if match.group(1).startswith("AISafetyAtlas")
+        )
+    return "\n".join(sources)
 
 
 def main() -> None:
@@ -86,25 +115,15 @@ def main() -> None:
                 fail(f"{eid} root_import true requires atlas_declaration")
             root_import_decls.append(decl)
 
-    # Root-import landscape theorems must appear on the public import surface:
-    # either the root module text or a facade module the root re-exports.
-    root_lean = (ROOT / "AISafetyAtlas.lean").read_text(encoding="utf-8")
-    facade_paths = [
-        ROOT / "AISafetyAtlas" / "Explainability.lean",
-        ROOT / "AISafetyAtlas" / "SocialChoice.lean",
-        ROOT / "AISafetyAtlas" / "Logic.lean",
-        ROOT / "AISafetyAtlas" / "Computability.lean",
-        ROOT / "AISafetyAtlas" / "Verification.lean",
-    ]
-    facade_text = "\n".join(
-        path.read_text(encoding="utf-8") for path in facade_paths if path.is_file()
-    )
+    # Root-import landscape theorems must occur anywhere in the transitive
+    # public import surface, including nested facade modules.
+    surface_text = public_surface_text()
     for decl in root_import_decls:
         short = decl.split(".")[-1]
-        if short not in facade_text and decl not in root_lean and short not in root_lean:
+        if short not in surface_text and decl not in surface_text:
             fail(
                 f"root_import declaration {decl} not found in AISafetyAtlas.lean "
-                "or a root-imported facade module"
+                "or its transitive public imports"
             )
 
     print(

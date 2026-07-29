@@ -3,7 +3,7 @@
   "generated_by": "scripts/generate_registry_views.py",
   "note": "Compact agent lookup. Prefer this over registry.yaml / landscape.yaml. Open the full YAML only for a single id when notes or candidate formalization detail is required.",
   "survey_result_count": 44,
-  "landscape_entry_count": 10,
+  "landscape_entry_count": 16,
   "results_by_id": {
     "BY-001": {
       "id": "BY-001",
@@ -167,13 +167,180 @@
     "BY-011": {
       "id": "BY-011",
       "name": "Limits on preference deduction",
-      "status": "MAPPED",
+      "status": "LEAN_AVAILABLE",
       "ai_bridge_status": "HUMAN_REVIEW",
       "mechanism_category": "INDISTINGUISHABILITY",
       "domain_category": "DATA",
       "informal_claim": "Observed behaviour alone does not identify an agent's reward function and planning process without strong normative assumptions.",
-      "formalizations": [],
-      "lean_artifact": null,
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declaration": "AISafetyAtlas.Preference.exists_planner",
+          "module": "AISafetyAtlas.Preference",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        },
+        {
+          "framework": "Lean",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declaration": "AISafetyAtlas.Preference.exists_reward",
+          "module": "AISafetyAtlas.Preference",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        },
+        {
+          "framework": "Lean",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declaration": "AISafetyAtlas.Preference.negPlanner",
+          "module": "AISafetyAtlas.Preference",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        },
+        {
+          "framework": "Lean",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declaration": "AISafetyAtlas.Preference.lemma_six",
+          "module": "AISafetyAtlas.Preference",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        },
+        {
+          "framework": "Lean",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declaration": "AISafetyAtlas.Preference.Source.ReasonableForF.proposition_seven",
+          "module": "AISafetyAtlas.Preference.SourceComplexity",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        },
+        {
+          "framework": "Lean",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declaration": "AISafetyAtlas.Preference.Source.ReasonableForF.proposition_eight",
+          "module": "AISafetyAtlas.Preference.SourceComplexity",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        },
+        {
+          "framework": "Lean",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declaration": "AISafetyAtlas.Preference.ReasonableLanguage.proposition_seven",
+          "module": "AISafetyAtlas.Preference.Reasonable",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        },
+        {
+          "framework": "Lean",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declaration": "AISafetyAtlas.Preference.ReasonableLanguage.proposition_eight",
+          "module": "AISafetyAtlas.Preference.Reasonable",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        },
+        {
+          "framework": "Lean",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declaration": "AISafetyAtlas.Preference.explanation_complexity_eq_behaviour",
+          "module": "AISafetyAtlas.Preference.Complexity",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        },
+        {
+          "framework": "Lean",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declaration": "AISafetyAtlas.Preference.OverrideModel.OverridesFor",
+          "module": "AISafetyAtlas.Preference.Override",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        },
+        {
+          "framework": "Lean",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declaration": "AISafetyAtlas.Preference.OverrideModel.Overrides",
+          "module": "AISafetyAtlas.Preference.Override",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Preference.exists_planner",
+            "type": "NEW_PROOF"
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Preference.exists_reward",
+            "type": "NEW_PROOF"
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Preference.consistent_rewards_eq_univ",
+            "type": "NEW_PROOF"
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Preference.neg_twin",
+            "type": "NEW_PROOF"
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Preference.greedy_rewardOf",
+            "type": "NEW_PROOF"
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Preference.Source.ReasonableForF.proposition_seven",
+            "type": "NEW_PROOF"
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Preference.Source.ReasonableForF.proposition_eight",
+            "type": "NEW_PROOF"
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Preference.ReasonableLanguage.proposition_seven",
+            "type": "NEW_PROOF"
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Preference.ReasonableLanguage.proposition_eight",
+            "type": "NEW_PROOF"
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Preference.explanation_at_least_behaviour",
+            "type": "NEW_PROOF"
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Preference.degenerate_explanation_cheap",
+            "type": "NEW_PROOF"
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Preference.explanation_complexity_eq_behaviour",
+            "type": "NEW_PROOF"
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Preference.RegretModel.cannot_rule_out_half_maximal_regret",
+            "type": "NEW_PROOF"
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Preference.OverrideModel.mixtureValue_rationalise",
+            "type": "NEW_PROOF"
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Preference.Source.ReasonableForF.theorem_two_conditional",
+            "type": "NEW_PROOF"
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Preference.OverrideModel.rationalise_strictly_better",
+            "type": "NEW_PROOF"
+          }
+        ]
+      },
       "candidate_count": 0
     },
     "BY-012": {
@@ -506,7 +673,7 @@
           }
         ]
       },
-      "candidate_count": 0
+      "candidate_count": 1
     },
     "BY-022": {
       "id": "BY-022",
@@ -732,7 +899,7 @@
       "informal_claim": "When a measure becomes a target, optimization pressure can destroy its value as a measure.",
       "formalizations": [],
       "lean_artifact": null,
-      "candidate_count": 0
+      "candidate_count": 4
     },
     "BY-038": {
       "id": "BY-038",
@@ -749,13 +916,30 @@
     "BY-039": {
       "id": "BY-039",
       "name": "Reward corruption unsolvability",
-      "status": "MAPPED",
+      "status": "LEAN_AVAILABLE",
       "ai_bridge_status": "HUMAN_REVIEW",
       "mechanism_category": "INDUCTION",
       "domain_category": "DATA",
       "informal_claim": "No agent can in general distinguish all reward-channel corruption from genuine reward without additional assumptions.",
-      "formalizations": [],
-      "lean_artifact": null,
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declaration": "AISafetyAtlas.Wireheading.CRMDP.Model.everitt_theorem_eleven",
+          "module": "AISafetyAtlas.Wireheading.CRMDP",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Wireheading.CRMDP.Model.everitt_theorem_eleven",
+            "type": "NEW_PROOF"
+          }
+        ]
+      },
       "candidate_count": 0
     },
     "BY-040": {
@@ -797,13 +981,30 @@
     "BY-043": {
       "id": "BY-043",
       "name": "Misaligned embodiment",
-      "status": "MAPPED",
+      "status": "LEAN_AVAILABLE",
       "ai_bridge_status": "HUMAN_REVIEW",
       "mechanism_category": "TRADEOFF",
       "domain_category": "DATA",
       "informal_claim": "Mistakenly cloned self-interested agents cannot perfectly control one another in the survey's model.",
-      "formalizations": [],
-      "lean_artifact": null,
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declaration": "AISafetyAtlas.Compositional.Symmetry.Protocol.no_unique_leader_from_symmetric_start",
+          "module": "AISafetyAtlas.Compositional.Symmetry",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Compositional.Symmetry.Protocol.no_unique_leader_from_symmetric_start",
+            "type": "NEW_PROOF"
+          }
+        ]
+      },
       "candidate_count": 0
     },
     "BY-044": {
@@ -926,6 +1127,62 @@
       "atlas_declaration": null,
       "related_survey_ids": [],
       "module": "Debate/Correct.lean",
+      "survey_coverage": null
+    },
+    "LAND-HYPER-001": {
+      "id": "LAND-HYPER-001",
+      "name": "Trace-property and hyperproperty classes (Alpern–Schneider decomposition; Clarkson–Schneider hierarchy)",
+      "framework": "Rocq/Coq",
+      "atlas_declaration": null,
+      "related_survey_ids": [],
+      "module": "Topology.v, TopologyTrace.v, Properties.v",
+      "survey_coverage": null
+    },
+    "LAND-HYPER-002": {
+      "id": "LAND-HYPER-002",
+      "name": "k-safety self-composition and hyperproperty decomposition",
+      "framework": "Lean",
+      "atlas_declaration": "AISafetyAtlas.Compositional.Hyperproperties.k_safety_iff_finite_self_composition",
+      "related_survey_ids": [],
+      "module": "AISafetyAtlas.Compositional.Hyperproperties",
+      "survey_coverage": null
+    },
+    "LAND-ANGLUIN-001": {
+      "id": "LAND-ANGLUIN-001",
+      "name": "Port-labelled anonymous networks, views, and automorphisms",
+      "framework": "Lean",
+      "atlas_declaration": "AISafetyAtlas.Compositional.Networks.runFor_eq_of_view_eq",
+      "related_survey_ids": [
+        "BY-043"
+      ],
+      "module": "AISafetyAtlas.Compositional.Networks",
+      "survey_coverage": null
+    },
+    "LAND-RECT-001": {
+      "id": "LAND-RECT-001",
+      "name": "Rectangle, exchange, and unary-contract equivalences",
+      "framework": "Lean",
+      "atlas_declaration": "AISafetyAtlas.Compositional.rectangle_iff_exchange_closed",
+      "related_survey_ids": [],
+      "module": "AISafetyAtlas.Compositional.Rectangularity",
+      "survey_coverage": null
+    },
+    "LAND-WIRE-OBJ-001": {
+      "id": "LAND-WIRE-OBJ-001",
+      "name": "Ring-Orseau objective factorization",
+      "framework": "Lean",
+      "atlas_declaration": "AISafetyAtlas.Wireheading.AgentEquations.value_eq_of_agree_on_window",
+      "related_survey_ids": [],
+      "module": "AISafetyAtlas.Wireheading.Objective",
+      "survey_coverage": null
+    },
+    "LAND-GOAL-001": {
+      "id": "LAND-GOAL-001",
+      "name": "Finite-percept on-policy goal-preservation induction step",
+      "framework": "Lean",
+      "atlas_declaration": "AISafetyAtlas.Wireheading.GoalPreservationSource.Model.selected_matches_initial",
+      "related_survey_ids": [],
+      "module": "AISafetyAtlas.Wireheading.GoalPreservationSource",
       "survey_coverage": null
     }
   }

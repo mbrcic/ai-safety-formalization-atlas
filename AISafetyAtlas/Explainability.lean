@@ -5,9 +5,15 @@ public import AISafetyAtlas.Upstream.Attribution.Trilemma
 /-!
 # Explainability / attribution limits
 
-Atlas-facing names for attribution impossibility results. Thin wrappers over
-the core trilemma adapted from Caraker et al. (Apache-2.0 software per
-`CITATION.cff`). No AI-system bridge is asserted.
+Thin wrappers over the attribution trilemma (Caraker et al.; Apache-2.0).
+Landscape `LAND-ATTR-001` — not survey headline coverage. No AI-system bridge.
+
+## Primary surface
+
+| Role | Declaration | One-line |
+|---|---|---|
+| **Law** | `attribution_impossibility` | Faithful + stable ranking impossible under Rashomon |
+| **Law** | `attribution_impossibility_weak` | Weaker packaging of the same core |
 -/
 
 namespace AISafetyAtlas.Explainability

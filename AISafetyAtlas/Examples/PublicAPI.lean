@@ -159,4 +159,46 @@ example {X Y : Type*} [Fintype X] [Fintype Y] [DecidableEq X] [DecidableEq Y]
       AISafetyAtlas.Learning.aggregateOffTrainingLoss S B :=
   AISafetyAtlas.Learning.no_free_lunch_supervised S A B
 
+/-!
+## Refactored facade-table contract
+
+These checks deliberately spell out the declarations exactly as documented in
+the Compositional, Wireheading, and Preference primary-surface tables. A table
+rename or namespace mistake must therefore fail this build target.
+-/
+
+#check AISafetyAtlas.Compositional.rectangle_iff_exchange_closed
+#check AISafetyAtlas.Compositional.coordinate_product_iff_spliceClosed
+#check AISafetyAtlas.Compositional.not_isCoordinateProduct_finitelySupported
+#check AISafetyAtlas.Compositional.LocalContractBoundary.not_isRectangle_agreement
+#check AISafetyAtlas.Compositional.LocalContractBoundary.atMostOneTrace_bool_boundary
+#check AISafetyAtlas.Compositional.Hyperproperties.k_safety_iff_finite_self_composition
+#check AISafetyAtlas.Compositional.Hyperproperties.k_safety_iff_product_self_composition
+#check AISafetyAtlas.Compositional.Hyperproperties.hyperSafety_of_isKSafety
+#check AISafetyAtlas.Compositional.Hyperproperties.hyperSafety_hyperLiveness_decomposition
+#check AISafetyAtlas.Compositional.Networks.runFor_eq_of_view_eq
+#check AISafetyAtlas.Compositional.Networks.no_unique_leader_of_fixedPointFree
+#check AISafetyAtlas.Compositional.Symmetry.Protocol.no_unique_leader_from_symmetric_start
+
+#check AISafetyAtlas.Wireheading.Corruption.ComplementedClass.everitt_theorem_eleven
+#check AISafetyAtlas.Wireheading.CRMDP.Model.everitt_theorem_eleven
+#check AISafetyAtlas.Wireheading.CRMDP.Env.observed_complement
+#check AISafetyAtlas.Wireheading.CRMDP.return_add_complement
+#check AISafetyAtlas.Wireheading.GoalPreservationSource.Model.selected_matches_initial
+#check AISafetyAtlas.Wireheading.GoalPreservationSource.Model.safe_modification
+#check AISafetyAtlas.Wireheading.AgentEquations.value_eq_of_agree_on_window
+#check AISafetyAtlas.Wireheading.Objective.value_eq_of_agree_on_window
+#check AISafetyAtlas.Wireheading.Objective.value_congr
+
+#check AISafetyAtlas.Preference.exists_planner
+#check AISafetyAtlas.Preference.exists_reward
+#check AISafetyAtlas.Preference.lemma_six
+#check AISafetyAtlas.Preference.Source.ReasonableForF.proposition_seven
+#check AISafetyAtlas.Preference.Source.ReasonableForF.proposition_eight
+#check AISafetyAtlas.Preference.ReasonableLanguage.proposition_seven
+#check AISafetyAtlas.Preference.explanation_complexity_eq_behaviour
+#check AISafetyAtlas.Preference.RegretModel.cannot_rule_out_half_maximal_regret
+#check AISafetyAtlas.Preference.OverrideModel.OverridesFor
+#check AISafetyAtlas.Preference.Source.ReasonableForF.theorem_two_conditional
+
 end AISafetyAtlas.Examples.PublicAPI

@@ -6,76 +6,99 @@
 
 > **Quickstart:** [Open in Codespaces](https://codespaces.new/mbrcic/ai-safety-formalization-atlas?quickstart=1) — the toolchain provisions itself and one example compiles in minutes — then pick a [first task](docs/guide/contributor-tasks.md#open-now). Prefer local? `scripts/setup.sh --pointer` (docs only, no Lean) or `scripts/setup.sh --quick` (one example). Full detail: [Get started](#get-started).
 
-**The open workbench for doing AI safety the formal way.**
+**The open Lean workbench for formal AI-safety results.**
 
-Most of AI safety lives in prose, intuition, and scattered results — and the
-rigor that *does* exist is fragmented across incompatible proof systems. The
-Atlas pulls it onto one surface: reusable, machine-checked Lean, built to grow.
-Here, a safety argument doesn't stay an argument. It becomes a theorem you can
-build on, break, or extend.
+The Atlas develops, reproduces, and audits machine-checked AI-safety mathematics:
+shared definitions, theorems, counterexamples, and reviewed interpretation
+bridges. Researchers use it to sharpen and discover claims; engineers may use
+public facade cores as **reference specifications** inside larger assurance
+arguments. Runtime systems and product stacks normally remain downstream.
 
-It's a **launchpad** — for the researcher sharpening a claim, and for the AI
-agent proving it. Formal proof stops being a boutique specialty and becomes
-shared infrastructure: a place where humans and agents accelerate each other on
-the questions that actually matter for keeping powerful systems in check.
+Most of AI safety lives in prose and scattered proofs. This repo puts
+**ingredients and primitives** on one Lean surface so impossibility, possibility,
+tradeoffs, and—when computable—governance or ethics claims can be formalized
+without rebuilding foundations each time. Humans and proof agents work here
+together.
 
 **Bring a question.** Alignment, control, oversight, interpretability,
-robustness, the paradoxes that make these problems wicked — if you can make a
-safety property precise, this is where you turn it into something
-machine-checked. A bound, a guarantee, a tradeoff, a limit — impossibility and
-possibility run on the same machinery. The seed is impossibility results by
-design, the direction this project pushes further; the door is open to whatever
-is interesting. DeepMind's doubly-efficient debate — a scalable-oversight
-guarantee machine-checked in Lean 4 — is now reproduced here
-([`LAND-DEBATE-001`](docs/provenance/debate-reproduction.md)): the first
-possibility result in the ledger, dual to the impossibility rows. The first
-possibility result proven *natively* will be
-continuous free lunches (BY-022, [open](docs/guide/contributor-tasks.md#open-now)),
-where No-Free-Lunch provably breaks. The field is moving toward provable safety.
-The Atlas is where that work gets done in the open.
-
-**Where it starts.** The seed collection formalizes the impossibility results
-from Mario Brčić and Roman V. Yampolskiy's *Impossibility Results in AI: A
-Survey* (ACM Computing Surveys, DOI
-[`10.1145/3603371`](https://doi.org/10.1145/3603371), arXiv
-[`2109.00484`](https://arxiv.org/abs/2109.00484)) — a concrete, self-contained
-first target, and the direction the project is actively pushing further. It
-records where results are formalized, reuses maintained Lean
-declarations, and identifies genuine gaps. It's the on-ramp, not the ceiling.
+robustness—if you can make a safety property precise, this is where you turn it
+into something machine-checked. The seed is the Brčić–Yampolskiy impossibility
+survey ([CSUR](https://doi.org/10.1145/3603371)); it is an **on-ramp, not the
+ceiling**. Possibility work is welcome (e.g. DeepMind debate reproduced as
+[`LAND-DEBATE-001`](docs/provenance/debate-reproduction.md); continuous free
+lunches BY-022 [open](docs/guide/contributor-tasks.md#open-now)).
 
 ## Who this is for
 
-You. Whether you're a researcher who's published for years or someone who just
-started asking hard questions with an AI agent at your side — the barrier to
-real formal work has never been lower. If you can state what "safe" should mean,
-you can contribute a proof of it here. Bring a theorem, a counterexample, a
-formalization of someone else's result, or a question nobody's made precise yet.
+- **Lean formalizers and AI-safety theory researchers** (and proof agents)
+  developing, reproducing, or auditing formal claims.
+- **Formal-methods and safety engineers** using cores as reference
+  specifications or to pressure-test assumptions in a larger assurance
+  argument—not as a drop-in system safety certificate.
+- **Contributors** willing to make a claim precise, including with help from
+  formal-methods collaborators or agents.
 
-## Coverage & momentum
+A theorem is **not** a system safety case. Applying it to a real system needs a
+scoped reviewed bridge where relevant, implementation evidence, and the rest of
+the assurance argument. Bridge review validates a scoped interpretation; it does
+not by itself prove operational safety.
 
-Real, machine-checked, and growing — tracked transparently. The snapshot below
-is where the Atlas is today, not where it's headed; that discipline is the point,
-because it's what makes a proof here worth building on.
+## Workbench status
+
+**Primary goal:** develop, reproduce, and machine-check formal AI-safety results
+(including using shared foundations to discover new ones), for AI safety and
+related computable governance/ethics. **Also:** keep cores usable as reference
+specifications downstream. **Not a goal:** maximizing the fraction of survey
+rows graded `EXACT`/`EQUIVALENT`, or growing a product monorepo in-tree.
 
 <!-- BEGIN GENERATED REGISTRY SCOPE -->
-The current registry has verified `EXACT` or `EQUIVALENT` formalization coverage for
-**7 of 44** survey results. It records **3 additional results with a
-`RELATED` formalization only**, outside headline coverage, and
-**2 survey results with reviewed AI-system bridges**. It provides
-infrastructure for further formalization; it does not claim complete formal
-coverage. See the current [formalization status](docs/status/formalization-status.md).
+| Metric | Current |
+|---|---:|
+| Survey rows with atlas Lean | **13 / 44** |
+| … statement-match (`EXACT` / `EQUIVALENT`) | **7 / 44** |
+| … workbench formalizations (`RELATED` only) | **6 / 44** |
+| Reviewed AI-system bridges | **2** |
+
+`EXACT`/`EQUIVALENT` = conservative citation grade (completely
+formalization-covered source statements). `RELATED` = value-based scoped
+formalization, with documented deltas; it does **not by itself** mean
+unfinished, but postponed until justified (paper residuals stay in
+provenance).
+Survey rows are a seed inventory. Detail:
+[formalization status](docs/status/formalization-status.md).
 <!-- END GENERATED REGISTRY SCOPE -->
+
+Published units must rebuild under documented commands and the axiom policy
+([Validation](#validation)).
+
+## Domain imports
+
+Prefer a facade over the full root import when starting a proof:
+
+```lean
+import AISafetyAtlas.Preference    -- planner/reward limits, override, regret
+import AISafetyAtlas.Wireheading   -- reward channels, self-modification
+import AISafetyAtlas.Compositional -- rectangles, hyperproperties, networks
+```
+
+Cross-surface consumer pattern (compositional boundary + nonzero regret +
+preference certificate): `AISafetyAtlas.Examples.WorkbenchConsumers`. Primary
+names live in each facade docstring; root `import AISafetyAtlas` remains
+available.
 
 ## Epistemic scope
 
 A machine-checked proof establishes its encoded mathematical statement. It does
 not by itself establish that the statement fully captures an informal AI-safety
-claim. Classical results and AI-safety bridge claims are documented as separate
-layers, and uncertain semantic relationships are marked for human review.
-**Reviewed AI-system bridges are not additional headline `EXACT`/`EQUIVALENT`
-coverage** (e.g. the robot formalization remains `RELATED` only). See
-[`docs/releases/v0.2.md`](docs/releases/v0.2.md) for the current release
-non-claims.
+claim. Math results and AI-system bridges are separate layers; bridges need
+human review.
+
+**Citation grades stay conservative:** do not raise `EXACT`/`EQUIVALENT` by
+weakening fidelity. `RELATED` is a useful core with an explicit scope delta; it
+does not by itself mean unfinished, and residual paper gaps remain documented.
+A bridge may be `REVIEWED` while the formalization stays `RELATED` (e.g. robot).
+See the [`v0.4 release scope`](docs/releases/v0.4.md) and
+[`docs/guide/methodology.md`](docs/guide/methodology.md).
 
 ## Repository contents
 
@@ -84,7 +107,8 @@ non-claims.
 - [`CONTRIBUTING.md`](CONTRIBUTING.md) explains how to propose and verify changes.
 - [`ROADMAP.md`](ROADMAP.md) presents the public strategy and contributor entry points.
 - [`STATE.md`](STATE.md) reports the current phase, blockers, and next tasks.
-- [`landscape.yaml`](landscape.yaml) records non–Table-1 formalizations (never headline survey coverage).
+- [`landscape.yaml`](landscape.yaml) records non–Table-1 formalizations (never
+  counted as survey statement-match).
 - [`docs/`](docs/README.md) is split by role — start with the [documentation map](docs/README.md):
   - [`docs/guide/`](docs/guide/) — methodology, open work, model notes, tasks
   - [`docs/status/`](docs/status/) — generated coverage tables and indexes
@@ -113,6 +137,13 @@ The stable entry points are conventional theorem names under domain namespaces:
 - `AISafetyAtlas.Verification.rice`
 - `AISafetyAtlas.Verification.AgentBehavior.no_behavioral_safety_verifier`
 - `AISafetyAtlas.Verification.Robot.action_safety_unverifiable`
+- `AISafetyAtlas.Compositional` — rectangularity, hyperproperties, and network symmetry
+- `AISafetyAtlas.Wireheading` — objective, corruption, and goal-preservation cores
+- `AISafetyAtlas.Preference` — preference-unidentifiability and override cores
+
+The three latter facades contain short primary-surface tables and explicit
+paper-parity non-claims. Their source maps and residual gaps are recorded in the
+[A1–A3/B1–B3/B7 re-verification](docs/provenance/a1-a3-b1-b3-b7-reverification.md).
 
 **Landscape (not survey coverage):** recorded in
 [`landscape.yaml`](landscape.yaml), also on the root import when marked
@@ -207,14 +238,21 @@ the [strict-trust and build-closure policy](docs/guide/methodology.md#new-proofs
 
 ## Contributing
 
-Four rungs, lowest-effort first — **Pointer → Reproduction → Bridge → New
-proof**; the [contribution guide](CONTRIBUTING.md#start-here--pick-your-rung)
-describes each. Source verification, reproducibility, and API review are equally
-welcome. Pick a
-live bounded unit from [**open now**](docs/guide/contributor-tasks.md#open-now) —
-covering every rung — or start with the [contribution guide](CONTRIBUTING.md); the
-structured issue forms cover work that changes coverage, dependencies, or the
-public Lean interface.
+**Join — there is always something to do.** Docs, citation checks, leads,
+examples, agent-assisted Lean, new formal claims, or reproductions. The survey
+is a seed inventory, not the only path.
+
+- **No Lean?** CT-11, CT-12, CT-14, or docs fixes
+  ([open now](docs/guide/contributor-tasks.md#open-now)).
+- **With an LLM/agent?** Draft against a facade → `lake build` →
+  `agent_gate.sh` → `check_print_axioms.py` (see [CONTRIBUTING](CONTRIBUTING.md)).
+  Green Lean is kernel validity of the encoding, not source match or system
+  interpretation.
+- **Have a claim to formalize?** Domain imports above + primary surfaces; prefer
+  reuse of primitives over reinventing foundations.
+
+Full tracks and rungs: [CONTRIBUTING.md](CONTRIBUTING.md). Issue forms for
+proposals that change coverage, dependencies, or the public Lean interface.
 
 ## License
 

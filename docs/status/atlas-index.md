@@ -5,8 +5,8 @@ One row per surveyed impossibility result, generated from
 [`registry.yaml`](../../registry.yaml). `Formalization` is the strongest
 reproduced relationship; `Bridge` is the AI-system interpretation review
 state; `Candidate` counts manually discovered leads not yet accepted as
-coverage. See [formalization status](formalization-status.md) for headline
-coverage counting and [open work](../guide/open-work.md) for next actions.
+coverage. See [formalization status](formalization-status.md) for workbench
+and statement-match metrics and [open work](../guide/open-work.md) for next actions.
 
 | ID | Survey result | Informal claim | Formalization | Bridge | Candidate leads |
 |---|---|---|---|---|---:|
@@ -20,7 +20,7 @@ coverage counting and [open work](../guide/open-work.md) for next actions.
 | BY-008 | Impossibility theorems in population ethics | No population axiology simultaneously satisfies the cited set of adequacy conditions. | — | `HUMAN_REVIEW` | — |
 | BY-009 | Impossibility theorems in AI alignment | The cited work derives incompatibilities among desiderata for utility-based value alignment. | — | `HUMAN_REVIEW` | — |
 | BY-010 | Fairness impossibility theorem | Common calibration and error-rate fairness criteria cannot all hold when base rates differ, subject to source assumptions. | — | `HUMAN_REVIEW` | — |
-| BY-011 | Limits on preference deduction | Observed behaviour alone does not identify an agent's reward function and planning process without strong normative assumptions. | — | `HUMAN_REVIEW` | — |
+| BY-011 | Limits on preference deduction | Observed behaviour alone does not identify an agent's reward function and planning process without strong normative assumptions. | `RELATED` | `HUMAN_REVIEW` | — |
 | BY-012 | Rice's theorem | Every nontrivial extensional property of partial computable functions is undecidable. | `EQUIVALENT`<br>`EXACT` | `REVIEWED` | — |
 | BY-013 | Unprovability | Sufficiently expressive consistent formal systems contain true statements they cannot prove, under the source's hypotheses. | `EQUIVALENT` | `HUMAN_REVIEW` | — |
 | BY-014 | Undecidability | No effective procedure decides every instance of the relevant computation or decision problem. | `EXACT` | `HUMAN_REVIEW` | — |
@@ -30,7 +30,7 @@ coverage counting and [open work](../guide/open-work.md) for next actions.
 | BY-018 | Unlearnability | Learning can be undecidable or computationally infeasible for specified concept classes and learning models. | — | `HUMAN_REVIEW` | — |
 | BY-019 | Unpredictability of rational agents | No predictor can universally forecast the behaviour of rational agents in the cited strategic settings. | — | `HUMAN_REVIEW` | — |
 | BY-020 | No Free Lunch — supervised learning | Averaged uniformly over target functions, learning algorithms have no universal performance advantage. | `RELATED` | `HUMAN_REVIEW` | — |
-| BY-021 | No Free Lunch — optimization | Averaged uniformly over objective functions, optimization algorithms have equal aggregate performance. | `RELATED` | `HUMAN_REVIEW` | — |
+| BY-021 | No Free Lunch — optimization | Averaged uniformly over objective functions, optimization algorithms have equal aggregate performance. | `RELATED` | `HUMAN_REVIEW` | 1 |
 | BY-022 | Free lunches in continuous spaces and coevolution | The cited results identify settings where standard no-free-lunch symmetry fails. | — | `HUMAN_REVIEW` | — |
 | BY-023 | Unidentifiability | Observational data can be compatible with multiple latent, causal, or generative explanations. | — | `HUMAN_REVIEW` | — |
 | BY-024 | Physical limits on inference | Embedded physical inference devices face limits on prediction, observation, and mutual control. | — | `HUMAN_REVIEW` | — |
@@ -46,11 +46,11 @@ coverage counting and [open work](../guide/open-work.md) for next actions.
 | BY-034 | Intractability of bottom-up ethics | Computational complexity obstructs exhaustive bottom-up evaluation of ethically relevant action consequences. | — | `HUMAN_REVIEW` | — |
 | BY-035 | No-flattening theorems for deep learning | Some functions efficiently represented by deep networks require inefficiently large shallow representations. | — | `HUMAN_REVIEW` | — |
 | BY-036 | Efficiency of computing Boolean functions for multilayered perceptrons | The cited report constrains which Boolean functions multilayer perceptrons compute efficiently. | — | `HUMAN_REVIEW` | — |
-| BY-037 | Goodhart's law (Strathern) | When a measure becomes a target, optimization pressure can destroy its value as a measure. | — | `HUMAN_REVIEW` | — |
+| BY-037 | Goodhart's law (Strathern) | When a measure becomes a target, optimization pressure can destroy its value as a measure. | — | `HUMAN_REVIEW` | 4 |
 | BY-038 | Campbell's law | Heavy decision use of a quantitative indicator creates pressure that corrupts the indicator and represented process. | — | `HUMAN_REVIEW` | — |
-| BY-039 | Reward corruption unsolvability | No agent can in general distinguish all reward-channel corruption from genuine reward without additional assumptions. | — | `HUMAN_REVIEW` | — |
+| BY-039 | Reward corruption unsolvability | No agent can in general distinguish all reward-channel corruption from genuine reward without additional assumptions. | `RELATED` | `HUMAN_REVIEW` | — |
 | BY-040 | Uncontrollability of AI | Perfect explicit control of advanced AI fails in the source's degenerate self-referential conditions. | — | `HUMAN_REVIEW` | — |
 | BY-041 | Impossibility of unambiguous communication | Unambiguous communication is impossible under the source's strict assumptions about language and interpretation. | — | `HUMAN_REVIEW` | — |
 | BY-042 | Unfairness of explainability | A verifier and a decision-maker have structurally unequal strategic positions when explanations omit the full execution trace. | — | `HUMAN_REVIEW` | — |
-| BY-043 | Misaligned embodiment | Mistakenly cloned self-interested agents cannot perfectly control one another in the survey's model. | — | `HUMAN_REVIEW` | — |
+| BY-043 | Misaligned embodiment | Mistakenly cloned self-interested agents cannot perfectly control one another in the survey's model. | `RELATED` | `HUMAN_REVIEW` | — |
 | BY-044 | Limited self-awareness | An agent cannot be perfectly self-aware across the survey's defined operational boundaries. | — | `HUMAN_REVIEW` | — |

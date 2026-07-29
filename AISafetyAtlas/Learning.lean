@@ -15,34 +15,30 @@ public import Mathlib.SetTheory.Cardinal.Finite
 /-!
 # Learning limits — finite-domain No Free Lunch (Wolpert)
 
-Two classical **finite uniform-averaging** NFL cores live in this module:
+## Primary surface
 
-1. **Optimization (BY-021 / Wolpert–Macready 1997)** —
-   `no_free_lunch`: non-adaptive injective query schedules; performance a
-   function of the ordered cost sequence; equal aggregate sum over all
-   objectives `f : X → Y`.
-2. **Supervised learning (BY-020 / Wolpert 1996 — *The Lack of A Priori
-   Distinctions Between Learning Algorithms*, Neural Comput. 8(7):1341–1390; the
-   survey and registry `survey-ref-018` instead cite the companion *Existence*
-   paper, pp. 1391–1420 — see the provenance doc)** —
-   `no_free_lunch_supervised`: learners map training labels on a fixed domain
-   `S ⊆ X` to full hypotheses; **off-training-set** 0-1 loss, averaged
-   uniformly over all targets, is independent of the learner.
+| Role | Declaration | One-line |
+|---|---|---|
+| **Law** | `no_free_lunch` | Optimization NFL (BY-021): equal aggregate over objectives |
+| **Law** | `no_free_lunch_supervised` | Supervised OTS NFL (BY-020) under uniform targets |
+| **Law** | `no_free_lunch_adaptive` | Deterministic adaptive no-revisit strengthening (still RELATED) |
+
+Two classical **finite uniform-averaging** NFL cores:
+
+1. **Optimization (BY-021 / Wolpert–Macready 1997)** — `no_free_lunch`.
+2. **Supervised (BY-020 / Wolpert 1996 *Lack…*)** — `no_free_lunch_supervised`
+   (survey `survey-ref-018` cites the companion *Existence* paper; see
+   provenance).
 
 ## Explicit non-claims
 
-- **Not** the Shalev-Shwartz–Ben-David PAC / sample-complexity NFL
-  (Understanding ML Thm 5.1; AFP `No_Free_Lunch_ML`; landscape
-  `LAND-NFL-001`). That result is an adversarial lower bound under a domain-size
-  hypothesis `2m < |X|`, not a uniform average over all target functions.
-- **Not** continuous free lunches or coevolutionary free lunches (survey
-  BY-022 / Auger–Teytaud): those are settings where the finite NFL symmetry
-  **fails**.
-- **Not** a full paper-syntax port of every lemma in Wolpert 1996 / 1997
-  (stochastic algorithms, adaptive optimization trees, time-varying
-  objectives, cross-validation meta-algorithms, etc.).
+- **Not** SSBD PAC / sample-complexity NFL (AFP `No_Free_Lunch_ML`;
+  `LAND-NFL-001`).
+- **Not** continuous free lunches (BY-022) — where finite NFL symmetry fails.
+- **Not** full Wolpert 1996/1997 (stochastic algorithms, time-varying
+  objectives, …). Graded **RELATED** for the atlas cores.
 
-No AI-system bridge is asserted; `ai_bridge_status` remains human review.
+No AI-system bridge; `ai_bridge_status` remains human review.
 -/
 
 open Classical

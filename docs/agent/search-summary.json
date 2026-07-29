@@ -2,7 +2,7 @@
   "schema_version": 1,
   "generated_by": "scripts/generate_registry_views.py",
   "note": "Compact discovery summary. Prefer this over docs/provenance/formalization-search.json. Full path lists and per-query zero counts live only in the full evidence file.",
-  "searched_on": "2026-07-18",
+  "searched_on": "2026-07-28",
   "corpora": [
     "mathlib",
     "isabelle-afp",
@@ -12,7 +12,7 @@
     "agda-stdlib"
   ],
   "result_count": 44,
-  "results_with_hits": 11,
+  "results_with_hits": 13,
   "results": {
     "BY-001": {
       "queries": [
@@ -151,7 +151,10 @@
       "queries": [
         "preference deduction",
         "preference inference",
-        "inverse reinforcement"
+        "inverse reinforcement",
+        "planner reward",
+        "reward identifiability",
+        "irrational agents"
       ],
       "hits": {},
       "total_hit_count": 0
@@ -444,7 +447,10 @@
     "BY-024": {
       "queries": [
         "physical limits of inference",
-        "inference device"
+        "inference device",
+        "inference devices",
+        "computational capabilities of physical systems",
+        "wolpert"
       ],
       "hits": {},
       "total_hit_count": 0
@@ -462,7 +468,10 @@
       "queries": [
         "safe interruptibility",
         "uninterruptibility",
-        "off-switch"
+        "off-switch",
+        "interruptibility",
+        "safely interruptible",
+        "corrigibility"
       ],
       "hits": {},
       "total_hit_count": 0
@@ -588,7 +597,10 @@
     "BY-037": {
       "queries": [
         "goodhart",
-        "measure becomes a target"
+        "measure becomes a target",
+        "regressional goodhart",
+        "winner's curse",
+        "regression to the mean"
       ],
       "hits": {},
       "total_hit_count": 0
@@ -596,7 +608,8 @@
     "BY-038": {
       "queries": [
         "campbell's law",
-        "campbell law"
+        "campbell law",
+        "regression to the mean"
       ],
       "hits": {},
       "total_hit_count": 0
@@ -605,10 +618,25 @@
       "queries": [
         "reward corruption",
         "corrupted reward channel",
-        "reward tampering"
+        "reward tampering",
+        "corrupt reward mdp",
+        "reward misspecification",
+        "markov decision process"
       ],
-      "hits": {},
-      "total_hit_count": 0
+      "hits": {
+        "isabelle-afp": {
+          "hit_count": 8,
+          "matched_queries": [
+            "markov decision process"
+          ],
+          "paths": [
+            "afp-2026-02-06/thys/Markov_Models/MDP_Reachability_Problem.thy",
+            "afp-2026-02-06/thys/Markov_Models/Markov_Decision_Process.thy",
+            "afp-2026-02-06/thys/Markov_Models/Markov_Models.thy"
+          ]
+        }
+      },
+      "total_hit_count": 8
     },
     "BY-040": {
       "queries": [
@@ -638,10 +666,26 @@
       "queries": [
         "misaligned embodiment",
         "operationally cloned",
-        "clone misalignment"
+        "clone misalignment",
+        "symmetry breaking",
+        "anonymous network",
+        "leader election"
       ],
-      "hits": {},
-      "total_hit_count": 0
+      "hits": {
+        "isabelle-afp": {
+          "hit_count": 7,
+          "matched_queries": [
+            "symmetry breaking",
+            "leader election"
+          ],
+          "paths": [
+            "afp-2026-02-06/thys/DiskPaxos/document/body.tex",
+            "afp-2026-02-06/thys/HOL-CSP/Deterministic_Choice.thy",
+            "afp-2026-02-06/thys/PAPP_Impossibility/PAPP_Impossibility_Base_Case.thy"
+          ]
+        }
+      },
+      "total_hit_count": 7
     },
     "BY-044": {
       "queries": [

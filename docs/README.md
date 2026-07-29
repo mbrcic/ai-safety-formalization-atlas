@@ -37,6 +37,8 @@ Root project files still used for navigation: [`README.md`](../README.md),
 - [Formalization search summary](provenance/formalization-search.md)
 - [Formalization search JSON](provenance/formalization-search.json) (machine-readable)
 - [External formalizations](provenance/external-formalizations.md) — Isabelle etc.
+- [A1–A3/B1–B3/B7 statement maps](provenance/a1-a3-b1-b3-b7-statement-maps.md)
+- [A1–A3/B1–B3/B7 re-verification](provenance/a1-a3-b1-b3-b7-reverification.md)
 
 ## Status (generated)
 
@@ -55,8 +57,10 @@ Regenerate with `python3 scripts/generate_registry_views.py` (also refreshes
 
 ## Releases
 
-- [v0.2 release scope](releases/v0.2.md) (current package version on branch)
-- [v0.1 release evidence](releases/v0.1.md)
+- [v0.4 release](releases/v0.4.md) — current release candidate (`0.4.0`; publication is canonical only after the tag)
+- [v0.3 release](releases/v0.3.md) — latest published historical scope (`0.3.x`)
+- [v0.2 release](releases/v0.2.md) — historical
+- [v0.1 release](releases/v0.1.md) — historical
 
 ## Path policy
 

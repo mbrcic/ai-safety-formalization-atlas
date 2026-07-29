@@ -1,22 +1,25 @@
 # Contributor Tasks
 
-Bounded, ready-to-take units of work derived from [`open-work.md`](open-work.md)
-and the round-5 review. Each task states its goal, acceptance evidence, and what
-it explicitly does **not** change so a new contributor can pick one up without
-prior context. This file is the source for the public issue queue; open one
-GitHub issue per task when the queue is created.
+Bounded, ready-to-take units. Each states goal, acceptance evidence, and what it
+does **not** change. Use this with or without an AI coding agent.
 
-Difficulty: **S** self-contained verification, **M** new Lean/schema work,
-**L** larger design or external-toolchain work.
+Difficulty: **S** one sitting · **M** Lean/schema · **L** design / multi-module.
+
+**Not survey-only.** Tasks below include survey pointers, but the workbench also
+needs domain consumers, non-claims, examples, landscape leads, and new claims on
+existing primitives. If nothing here fits, open an issue describing the gap.
 
 ## Open now
 
-Live units across the contribution rungs. Take one, open the matching proposal
-issue, or ask in a draft PR. CT-1…CT-5 below are completed history, kept for
-provenance.
+**Agent-friendly default:** pick an S task or a small Lean use-site; let the
+agent draft; you (or CI) run `lake build`, `scripts/agent_gate.sh`, and
+`python3 scripts/check_print_axioms.py` when theorems change. Wrong Lean is a
+red build, not a social failure. A green build is **kernel validity of the
+encoding** — not paper match, model adequacy, non-vacuous assumptions, or system
+interpretation (see [CONTRIBUTING](../../CONTRIBUTING.md)).
 
-**New here? Start with an S.** CT-11…CT-14 are first tasks — one sitting, no
-prior context, a single deterministic done-check. Take one, then climb.
+**New here? Start with an S** (CT-11, CT-12, CT-14 for no Lean; CT-13 for
+Lean+agent onboarding). CT-1…CT-5 are completed history.
 
 ### CT-11 — Add a candidate lead to an uncovered row (S) — **Pointer rung**
 
@@ -76,11 +79,14 @@ a mistake is expensive. That is the whole point, and it is worth one PR.
 - **Terminal rung — do not repeat it.** Once your CT-13 has merged, a second one
   will be closed. Varying a type parameter (`Fin 2` → `Fin 3`) or a constant in
   an already-exercised theorem is not a distinct use-site.
-- **Next:** CT-11, CT-12, or CT-14 if you want another single-sitting unit; the
-  open `Formalize BY-0xx` issues or CT-6 / CT-8 / CT-9 / CT-15 for work that
-  moves coverage. If you are running an AI coding agent, prefer the Lean rungs:
-  `lake build` checks the result, so a wrong answer costs a red CI run rather
-  than a maintainer audit.
+- **Next:** CT-11 / CT-12 / CT-14; a **nontrivial** facade consumer (pattern:
+  [`WorkbenchConsumers.lean`](../../AISafetyAtlas/Examples/WorkbenchConsumers.lean)
+  — cross-surface composition, instantiated model, boundary at a use site, or
+  downstream theorem; not a trivial restatement); or domain work (Preference /
+  Wireheading / Compositional primary surfaces). Survey `Formalize BY-0xx` /
+  CT-6 / CT-9 / CT-15 remain optional, not required. With an agent: prefer Lean
+  rungs — green build + axiom check is the **kernel** bar; alignment and
+  usefulness stay review questions.
 - **Does not change:** any theorem statement or the public facade.
 
 ### CT-14 — Report a proof we don't have (S) — **Pointer rung**

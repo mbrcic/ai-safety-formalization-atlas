@@ -6,18 +6,22 @@ public import AISafetyAtlas.Upstream.GibbardSatterthwaite
 /-!
 # Social choice
 
-Stable atlas facades over pinned, vendored social-choice formalizations:
+Stable facades over pinned, vendored social-choice formalizations.
 
-* **Arrow** — CC Liang's Lean 4 weak-order social welfare function proof
-  (`AISafetyAtlas.Upstream.Arrow`).
-* **Gibbard–Satterthwaite** — classical resolute voting-rule form from
-  SocialChoiceLean (Dominik Peters et al.), vendored as
-  `AISafetyAtlas/Upstream/GibbardSatterthwaite.lean` (MIT, pin `74f491b`;
-  multi-file upstream layout collapsed to one module for the atlas boundary).
+## Primary surface
 
-The two results use different ballot models (weak orders vs linear orders) and
-different rule shapes (SWF vs resolute choice). Facade names isolate downstream
-work from upstream declaration layout.
+| Role | Declaration | One-line |
+|---|---|---|
+| **Law** | `arrow` | Arrow impossibility (order form; BY-007) |
+| **Bridge** | `Utility.arrow` | Utility-representation packaging of Arrow |
+| **Law** | `gibbard_satterthwaite` | GS resolute form (landscape `LAND-GS-002`) |
+
+* **Arrow** — CC Liang Lean 4 SWF proof (`Upstream.Arrow`).
+* **GS** — SocialChoiceLean pin `74f491b` (`Upstream.GibbardSatterthwaite`).
+
+Different ballot models (weak orders vs linear orders) and rule shapes (SWF vs
+resolute choice). Isabelle AFP GS remains `LAND-GS-001` provenance. No AI-system
+bridge is asserted from these wrappers alone.
 -/
 
 namespace AISafetyAtlas.SocialChoice

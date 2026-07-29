@@ -1,43 +1,90 @@
 # Contributing
 
-Welcome — and thank you. If you can state what "safe" should mean, there's a
-place for you here. You don't need to be a Lean expert or a published
-researcher; you need a question and a willingness to make it precise.
+Welcome — and thank you. **There is always something useful to do.** You do not
+need to be a Lean expert or a survey specialist. Docs, leads, examples, reviews,
+and agent-assisted proofs all count.
 
-## Start here — pick your rung
+**Coding agents are supported here.** Draft Lean against a facade, then run the
+full Lean loop below. A red build is cheap feedback; a merged primitive is shared
+capital. The survey’s 44 rows are a **seed map**, not the only menu — domain
+work, landscape entries, and new questions all move the workbench forward.
 
-Lowest step that fits. Every one moves the atlas forward:
+## Start here — pick any track
 
-1. **Pointer** — found a theorem that might match a survey row? Add a candidate
-   lead in that row's `candidate_formalizations`. No Lean, no proof, no risk —
-   just a source and a note.
-2. **Reproduction** — you have a proof in another system (Isabelle, Coq, Agda)?
-   Bring it into the landscape lane. Cross-system results are first-class here.
-3. **Bridge** — say what a theorem does, and does not, establish about an AI
-   system.
-4. **New proof** — formalize a result in Lean against the stable facade.
+### A. No Lean required (today)
 
-A bound, a guarantee, a tradeoff, a limit — impossibility and possibility both
-belong, on the same machinery. The seed is impossibility by design; bring
-whatever is interesting. Continuous free lunches (BY-022) — a possibility row —
-is open for its first proof.
+| Track | What you do |
+|---|---|
+| **Lead** | Point at an existing formalization or a missing target (CT-11, CT-14) |
+| **Source check** | Verify a citation / DOI against the paper (CT-12) |
+| **Docs / UX** | Fix a docstring, primary-surface table, or example path |
+| **Issue** | File a clear gap: missing consumer, unclear non-claim, broken link |
 
-Ready to start? [**Open now**](docs/guide/contributor-tasks.md#open-now) lists
-live bounded units across the rungs — with goal, acceptance evidence, and scope.
+### B. Lean with an agent (recommended default)
+
+| Track | What you do |
+|---|---|
+| **Toolchain** | One use-site in `FirstContribution.lean` (CT-13) — prove CI works |
+| **Consumer** | Nontrivial facade use-site (see bar below; pattern: `WorkbenchConsumers.lean`) |
+| **Core / RELATED** | Formalize a useful specialization or boundary; grade honestly |
+| **New domain claim** | State a precise AI-safety (or computable governance/ethics) claim and prove it against existing primitives |
+
+### C. Classical rungs (still valid)
+
+1. **Pointer** → candidate lead  
+2. **Reproduction** → landscape or registry after build  
+3. **Bridge** → scoped AI interpretation (human review)  
+4. **New proof** → Lean against a public facade  
+
+Live bounded units: [**Open now**](docs/guide/contributor-tasks.md#open-now).
+
+## Agent / Lean verification loop
+
+For Lean changes (agent-drafted or hand-written):
+
+```console
+lake build
+xargs lake build < scripts/lean_build_targets.txt   # every Lean PR
+./scripts/agent_gate.sh
+python3 scripts/check_print_axioms.py
+```
+
+`agent_gate.sh` is cheap only (schema, views, paths — no `lake build`). Always
+pair it with a real build and the axiom check when theorems change.
+
+**A green build establishes kernel validity** of the encoded statement under the
+strict-trust policy. It does **not** establish source alignment, model adequacy,
+non-vacuous assumptions, usefulness, or a valid AI-system interpretation — those
+remain review questions (registry notes, bridge packages, human review).
+
+**Nonvacuity is claim-relative.** A model presented as satisfiable or applicable
+ships an inhabitant (e.g. `Examples/SixTargets.lean`); label the limitation if
+the witness is degenerate, or record that satisfiability is unestablished. For a
+negative theorem of the form `A → ¬ Nonempty T`, demonstrate that its assumptions
+`A` and ambient setting are realizable or nontrivial—the forbidden target `T`
+need not be inhabited. Pure parameter records used only under binders need no
+instance until a positive applicability claim or named consumer requires one.
+
+**Retained consumers** (not one-off CT-13) need at least one of: cross-surface
+composition, meaningful instantiated model, use-site boundary, or downstream
+theorem. `WorkbenchConsumers.lean` is the bar; trivial restatements stay out.
 
 ## Where does it go?
 
-- Reproduced **Table-1 survey** result, `EXACT`/`EQUIVALENT` → `registry.yaml`
-  coverage (counts toward the headline).
-- Reproduced result **adjacent** to the survey (any prover) → `landscape.yaml`
-  (real and credited, never a headline count).
-- **Found but not yet reproduced** → the row's `candidate_formalizations`
-  (a lead, promoted once reproduced).
-- A claim about an **AI system** → a bridge, kept separate from the math and
-  marked for human review.
+- **Survey Table-1**, statement matches the paper → `registry.yaml`
+  (`EXACT` / `EQUIVALENT`)
+- **Substantively related to a specific survey row**, but not full match →
+  `registry.yaml` as `RELATED`, with a **written scope delta** (what matches,
+  what does not). An entry without that delta is not mergeable.
+- **Adjacent or independent formal capital** (no load-bearing survey attachment)
+  → `landscape.yaml`
+- **Internal helper with a named in-tree consumer** → Lean only (no forced
+  registry row)
+- **Found but not reproduced** → `candidate_formalizations`
+- **AI-system interpretation** → bridge package + `ai_bridge_status` (human review)
 
-`RELATED` isn't a demotion — it's how we credit a partial or adjacent match
-honestly, without overclaiming an exact fit.
+Do not attach arbitrary useful theorems to a survey row just to land somewhere.
+Detail on grades: [methodology](docs/guide/methodology.md).
 
 ## Before you open a pull request
 
@@ -49,7 +96,8 @@ A few things we keep, and why:
 
 - reuse a maintained theorem before writing another proof — less to maintain,
   more to build on;
-- one canonical atlas declaration per result — a stable name others can import;
+- one canonical atlas declaration per result — a name others can import from a
+  public facade;
 - justify a second representation or proof by its unique downstream value;
 - keep mathematical theorems separate from claims about AI systems; and
 - treat search hits as leads, not verified formalizations.
@@ -79,9 +127,10 @@ deliberately bumping a dependency (it re-resolves floating revisions off the
 pinned set and can break the Lean 4.31 build).
 
 Every proof here checks all the way to the Lean kernel — that's what lets you
-build on someone else's result without re-reading it. So Lean changes compile
-under the strict-trust policy: no `sorry`, `admit`, new axioms, direct
-`sorryAx`, `native_decide`, or `@[implemented_by]`. Every Lean module stays
+build on someone else's result without re-reading the proof text. Lean changes
+compile under the strict-trust policy: no `sorry`, `admit`, new axioms, direct
+`sorryAx`, `native_decide`, or `@[implemented_by]`. Public surface axioms are
+audited with `python3 scripts/check_print_axioms.py`. Every Lean module stays
 reachable from the public root or listed in `scripts/lean_build_targets.txt`,
 which CI consumes directly. A documentation- or registry-only change still needs
 the cheap validators green — `scripts/agent_gate.sh` runs them (schema, generated
@@ -95,9 +144,11 @@ A verified external formalization record needs an immutable version, exact
 module or file, declaration name, relationship to the surveyed statement,
 license, and reproduction status. Same-repository records use `IN_TREE`,
 meaning the source in the same immutable checkout or release tag as the
-registry. Prefer primary sources. Coverage comes from a reproduced proof, not a
-paper title, repository description, or keyword match — only reproduced `EXACT`
-and `EQUIVALENT` records increase the headline count.
+registry. Prefer primary sources. Statement-match coverage (`EXACT`/`EQUIVALENT`)
+comes from a reproduced proof, not a paper title or keyword match. `RELATED`
+requires a written scope delta against the named survey statement; landscape
+capital is adjacent work without that attachment. Neither raises the
+statement-match grade.
 
 A discovered-but-unaccepted formalization belongs in a result's
 `candidate_formalizations` list, not in `formalizations`. A candidate lead

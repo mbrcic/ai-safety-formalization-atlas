@@ -3,6 +3,24 @@
 The v0.1 baseline intentionally exposes uncertainty instead of presenting the
 inventory as complete formal coverage.
 
+For the compositional, wireheading, and preference-deduction increment
+(A1–A3, B1–B3, B7): formal cores compile and are axiom-clean. Most of the
+HIGH-severity scaffold/representation gaps from the first adversarial review
+have been closed by WP packages; remaining issues are paper-parity depth
+(stochastic CRMDP, Prop. 10, nontrivial reasonable languages, etc.), not
+“missing cores.” **Primary surfaces** for these (and other) domains are listed
+in each facade module docstring under `AISafetyAtlas/*.lean`. Durable residual
+gaps and stop rules:
+[`../provenance/a1-a3-b1-b3-b7-reverification.md`](../provenance/a1-a3-b1-b3-b7-reverification.md).
+Source evidence:
+[`../provenance/a1-a3-b1-b3-source-audit.md`](../provenance/a1-a3-b1-b3-source-audit.md)
+and
+[`../provenance/a1-a3-b1-b3-b7-statement-maps.md`](../provenance/a1-a3-b1-b3-b7-statement-maps.md).
+
+Repo-wide refactor direction (cheap, cost-aware): facade primary names first;
+event-driven certificates; one reusable domain theorem at a time — not standing
+paper-parity bureaucracy.
+
 The contributor-facing priorities and selection principles are summarized in
 [`ROADMAP.md`](../../ROADMAP.md). This file retains the detailed review queue,
 research leads, and integration decisions behind that strategy.
@@ -10,8 +28,8 @@ research leads, and integration decisions behind that strategy.
 ## Human review
 
 - Revisit the public framing and scope disclaimer when coverage claims change
-  (see [`../releases/v0.2.md`](../releases/v0.2.md) for the current release
-  non-claims).
+  (see [`../releases/v0.4.md`](../releases/v0.4.md) for the current release
+  candidate's non-claims; older notes under `docs/releases/`).
 - Optional: external domain review of bridge packages beyond maintainer review.
 - Review source-level statements for the three survey-introduced proof sketches:
   unfairness of explainability, misaligned embodiment, and limited self-awareness.
@@ -23,7 +41,8 @@ research leads, and integration decisions behind that strategy.
 
 ## Formalization search
 
-- Forty survey rows still lack an atlas Lean declaration in the registry.
+- Thirty-one survey rows still lack an atlas Lean declaration in the registry
+  (13 of 44 have atlas Lean; see generated status).
 - Search Isabelle/HOL, Rocq, HOL4, HOL Light, and Agda for exact declarations,
   licenses, and immutable versions before proposing new proofs.
 - Reproduce additional external developments only when they are credible exact or
@@ -147,8 +166,16 @@ bridge / system claim; stop rules; no unreviewed AI-safety implications.
 
 ## Deferred expansion
 
-Causality, multi-agent systems, corrigibility, reward tampering, and formal
-decision theories remain deferred until they create reusable value or unblock a
-precise mapped result.
+Reward-tampering and compositional formal **cores** have landed and are no
+longer wholly deferred, but they are not paper-complete. See facade **primary
+surface** tables in `AISafetyAtlas/Wireheading.lean` and
+`Compositional.lean` (CRMDP-level BY-039 RELATED, goal-preservation source path,
+hyperproperties, splice rectangularity, networks). Residuals:
+[`../provenance/a1-a3-b1-b3-b7-reverification.md`](../provenance/a1-a3-b1-b3-b7-reverification.md).
+Primary-source evidence:
+[`../provenance/a1-a3-b1-b3-source-audit.md`](../provenance/a1-a3-b1-b3-source-audit.md).
+
+Causality, corrigibility, and formal decision theories remain deferred until
+they create reusable value or unblock a precise mapped result.
 Decision theory, verification, reflection, and containment may advance earlier
 when implemented as small bridges over stable foundations.

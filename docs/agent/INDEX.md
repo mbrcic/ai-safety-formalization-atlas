@@ -15,6 +15,7 @@ file. Prefer the small paths below over loading full inventory dumps.
 | [`docs/status/landscape-index.md`](../status/landscape-index.md) | Non–Table-1 landscape |
 | [`docs/guide/open-work.md`](../guide/open-work.md) | Research queue |
 | [`docs/guide/contributor-tasks.md`](../guide/contributor-tasks.md) | Bounded CT units |
+| [`docs/provenance/a1-a3-b1-b3-b7-reverification.md`](../provenance/a1-a3-b1-b3-b7-reverification.md) | Durable residual gaps for compositional / wireheading / preference work |
 | Facade modules under `AISafetyAtlas/*.lean` | Public Lean surface for the task domain |
 
 ## Lookup recipe

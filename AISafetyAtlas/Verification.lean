@@ -5,24 +5,26 @@ public import AISafetyAtlas.Computability
 /-!
 # Verification limits for extensional program behavior
 
+## Primary surface
+
+| Role | Declaration | One-line |
+|---|---|---|
+| **Law** | `rice` | No total verifier for nontrivial behavioral properties |
+| **Bridge** | `AgentBehavior.no_behavioral_safety_verifier` | Downstream packaging (BY-012; reviewed bridge) |
+| **Bridge** | `Robot.action_safety_unverifiable` | Robot-facing RELATED reduction (BY-033; reviewed) |
+
+Also via root: `Verification.AgentBehavior`, `Verification.Robot`.
+
 ## Statement intent
 
-- System object: a partial natural-number input/output behavior.
-- Representation: natural-number program codes interpreted by Mathlib's
-  partial recursive evaluator `eval`.
-- Behavioral property: a set of partial input/output behaviors.
-- Verifier: a total computable decision procedure for membership in that set.
-- Assumption: the property has both an accepted and a rejected representable
-  behavior.
-- Conclusion: no such verifier exists.
-- Source: the exact code-set form of Rice's theorem exposed as
-  `AISafetyAtlas.Computability.rice_code_iff`.
+- Object: partial ℕ I/O behavior; codes via Mathlib `eval`.
+- Conclusion: no total computable verifier for nontrivial behavioral properties.
+- Source form: `Computability.rice_code_iff`.
 
-This is a reusable semantic-to-code bridge for encoded program-verification
-models: callers state the property on behavior, while `Holds` supplies the
-representation map used by a verifier. It does not claim that every practical
-property of an AI system is behavioral, that a particular system is represented
-by this evaluator, or that sound incomplete verification methods are impossible.
+## Explicit non-claims
+
+Does **not** claim every practical AI property is behavioral, that a particular
+system is this evaluator, or that sound incomplete methods are impossible.
 -/
 
 open Nat.Partrec (Code)

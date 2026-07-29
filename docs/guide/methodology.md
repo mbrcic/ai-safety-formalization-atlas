@@ -15,11 +15,21 @@ dependency-only, or unclear formalization. A repository name or search hit is
 not enough: verified records include the version, module/file, declaration, and
 license.
 
-Headline formalization coverage counts a survey result only when at least one
-reproduced record is `EXACT` or `EQUIVALENT`. A `RELATED` result is reported
-separately and does not increase that count. This prevents a new atlas bridge
-that is still under semantic review from being presented as equivalent to a
-verified formalization of the surveyed statement.
+## Workbench metrics vs statement-match grades
+
+The atlas is a **workbench and launchpad**. Report progress on three tracks:
+
+1. **Workbench capital** — importable Lean (including `RELATED`), facades,
+   examples; published units rebuild and pass the axiom policy.
+2. **Statement-match** — reproduced `EXACT` or `EQUIVALENT` only. Conservative
+   citation grade, not the primary score; do not raise it by weakening grades.
+3. **AI-system bridges** — human-reviewed interpretation; never implied by math
+   alone.
+
+`RELATED` is scoped capital with documented deltas—not “failed EXACT,” and not
+by itself a claim that paper-parity work is finished (see residual notes under
+`docs/provenance/`). Statement-match and `RELATED` are reported separately so
+specializations are not read as full source matches.
 
 Formalization licenses use SPDX identifiers. Repository URLs and any recorded
 source locators must be syntactically valid HTTP(S) locations. A source locator
@@ -84,6 +94,45 @@ scoped negative search evidence for the six corpora; they do not prove that no
 formalization exists anywhere. The evidence is rebuilt with
 `scripts/update_formalization_search.py`; the registry validator rejects drift
 between its queries, candidate corpora, and the generated evidence.
+
+## Source coverage percentage
+
+A row may carry an optional `source_coverage` block recording how much of its
+primary source has been formalized. It is a **descriptive progress indicator, not
+a coverage claim**: `relationship` on a formalization record remains the only
+thing that gates headline `EXACT`/`EQUIVALENT` counting, and a row can be
+`RELATED` at any percentage.
+
+The denominator is mechanical so the figure can be rechecked: **numbered results
+in the primary source** (theorems, propositions, lemmas, conjectures,
+definitions). `basis` must name the **edition** counted, since preprint and
+camera-ready numbering can differ; where an official version exists, count that
+one. A result whose statement has not been read is `uncovered`, never `covered`
+on the strength of a plausible-looking local declaration. Neither lines nor
+pages nor judgement of importance. Conjectures remain in the denominator and
+stay `uncovered` until the atlas proves the stated proposition; being labelled a
+conjecture is not itself grounds for exclusion.
+
+`covered_items` and `uncovered_items` are structured records. Every covered item
+names one or more Lean declarations, gives its `EXACT`, `EQUIVALENT`, or
+`RELATED` relationship, and explains any abstraction in `note`. Every named
+declaration must have a formalization record on the same row with the same
+relationship. Generated `Registry.lean` checks declaration existence. Uncovered
+items record an `item` and `reason`. The list lengths must match `covered` and
+`total - covered`; `percent` must equal `round(100 * covered / total)`.
+
+Zero coverage without formalizations stays legal, since a row may be counted
+against its source before any work exists.
+
+`excluded_items` removes results from the denominator and must give a reason for
+each. Legitimate reasons include an informal umbrella whose formal content is
+counted elsewhere, a semi-formal precursor superseded by a separately counted
+rigorous result, and a result cited from a different paper and mapped to a
+different row. Exclusions are visible precisely so they can be disputed.
+
+**Percentages are not comparable across rows.** Eighty percent of a nine-page
+conference paper is not eighty percent of a monograph, and a row's remaining
+percent may be its most important part. Do not average them or rank rows by them.
 
 ## Progress and bridge status
 

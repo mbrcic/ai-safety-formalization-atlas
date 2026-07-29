@@ -2,7 +2,7 @@
 # Landscape Index
 
 Non–Table-1 formalizations from [`landscape.yaml`](../../landscape.yaml).
-These **never** increase the survey headline `EXACT`/`EQUIVALENT` count.
+These **never** increase the survey statement-match (`EXACT`/`EQUIVALENT`) count.
 Narrative provenance remains in [`external-formalizations.md`](../provenance/external-formalizations.md).
 
 | ID | Name | Framework | Atlas declaration | Root import | Reproduction |
@@ -17,3 +17,9 @@ Narrative provenance remains in [`external-formalizations.md`](../provenance/ext
 | LAND-TCS-ARROW-001 | Fourier-analytic Arrow theorem (TCSLib) | Lean | `ArrowTheorem.arrow_theorem` | no | — |
 | LAND-MELO-001 | Melo et al. inner-alignment decision problem (Rice packaging) | Lean | `AISafetyAtlas.Verification.AgentBehavior.no_behavioral_safety_verifier` | no | `lake build AISafetyAtlas.Verification.AgentBehavior` |
 | LAND-DEBATE-001 | Doubly-efficient debate correctness (Brown-Cohen–Irving–Piliouras 2023) | Lean | `completeness, soundness, correctness (paper Theorem 6.2)` | no | `scripts/reproduce_debate.sh` |
+| LAND-HYPER-001 | Trace-property and hyperproperty classes (Alpern–Schneider decomposition; Clarkson–Schneider hierarchy) | Rocq/Coq | `decomposition_theorem (Topology.v); safety_closed, liveness_dense, decomposition_safety_dense (TopologyTrace.v); Safety, Liveness, hprop, SSC, HSafe, H2Safe, HLiv (Properties.v)` | no | `Exact build attempted 2026-07-28 with coqorg/coq:8.9.1@sha256:8e26609c5450aa795af6917cf169a65ab3952ba666d1b0c90e6b0179314a1149 and coqorg/coq:8.20@sha256:e50d77c4c5a9aa0d76ae1b343d79c5f922da3a75054b79c5dc635895438e4674: both fail at InternalNondet.v line 8 (`From Stdlib Require Import List`) after compiling the principal topology/property files.` |
+| LAND-HYPER-002 | k-safety self-composition and hyperproperty decomposition | Lean | `AISafetyAtlas.Compositional.Hyperproperties.k_safety_iff_finite_self_composition` | yes | `lake build AISafetyAtlas.Compositional.Hyperproperties AISafetyAtlas.Compositional.Hyperproperties.PrefixTopology AISafetyAtlas.Compositional.Hyperproperties.Product` |
+| LAND-ANGLUIN-001 | Port-labelled anonymous networks, views, and automorphisms | Lean | `AISafetyAtlas.Compositional.Networks.runFor_eq_of_view_eq` | yes | `lake build AISafetyAtlas.Compositional.Networks AISafetyAtlas.Examples.SixTargets` |
+| LAND-RECT-001 | Rectangle, exchange, and unary-contract equivalences | Lean | `AISafetyAtlas.Compositional.rectangle_iff_exchange_closed` | yes | `lake build AISafetyAtlas.Compositional.Rectangularity` |
+| LAND-WIRE-OBJ-001 | Ring-Orseau objective factorization | Lean | `AISafetyAtlas.Wireheading.AgentEquations.value_eq_of_agree_on_window` | yes | `lake build AISafetyAtlas.Wireheading.Objective AISafetyAtlas.Wireheading.AgentEquations` |
+| LAND-GOAL-001 | Finite-percept on-policy goal-preservation induction step | Lean | `AISafetyAtlas.Wireheading.GoalPreservationSource.Model.selected_matches_initial` | yes | `lake build AISafetyAtlas.Wireheading.GoalPreservation AISafetyAtlas.Wireheading.GoalPreservationSource` |

@@ -5,9 +5,18 @@ public import Mathlib.Computability.Halting
 /-!
 # Computability limits
 
-Atlas-facing names for the maintained Rice and halting-problem results in
-`Mathlib.Computability.Halting`. These are thin, attributed wrappers: the proofs
-remain Mathlib's, and no AI-safety bridge is asserted.
+Thin wrappers over Mathlib `Computability.Halting`. No AI-safety bridge.
+
+## Primary surface
+
+| Role | Declaration | One-line |
+|---|---|---|
+| **Law** | `rice` | Extensional Rice (function form) |
+| **Law** | `rice_code_iff` | Extensional code-set Rice |
+| **Law** | `halting_problem` / `halting_re` | Halting RE / undecidability packaging |
+
+Prefer `Verification.rice` when the caller states a property on behavior rather
+than on codes directly.
 -/
 
 open Nat.Partrec (Code)

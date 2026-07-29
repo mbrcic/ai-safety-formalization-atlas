@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
-"""Kernel-level axiom check for atlas headline declarations (R7-2 item 5).
+"""Kernel-level axiom check for every public theorem declared in facade modules.
 
 Runs `lake env lean` on a generated `#print axioms` harness and asserts each
 named declaration depends only on the standard classical Lean axioms
 `propext`, `Classical.choice`, and `Quot.sound`. This upgrades the textual
-strict-trust grep to a kernel check for the public theorem surface.
+strict-trust grep to a kernel check for the complete theorem surface declared
+by modules reachable through public `AISafetyAtlas.*` facade imports.
 """
 
 from __future__ import annotations
@@ -16,44 +17,116 @@ import tempfile
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
+ROOT_IMPORT = ROOT / "AISafetyAtlas.lean"
 ALLOWED = frozenset({"propext", "Classical.choice", "Quot.sound"})
 
-# Public atlas theorems that must stay axiom-clean. Keep in sync with the
-# root-import surface exercised by Examples.PublicAPI / Registry.
-DECLARATIONS = [
-    "AISafetyAtlas.Computability.rice",
-    "AISafetyAtlas.Computability.rice_code_iff",
-    "AISafetyAtlas.Computability.halting_problem",
-    "AISafetyAtlas.SocialChoice.arrow",
-    "AISafetyAtlas.SocialChoice.Utility.arrow",
-    "AISafetyAtlas.SocialChoice.gibbard_satterthwaite",
-    "AISafetyAtlas.Logic.chaitin_incompleteness",
-    "AISafetyAtlas.Logic.chaitin_bound",
-    "AISafetyAtlas.Logic.godel_first_incompleteness",
-    "AISafetyAtlas.Logic.godel_second_incompleteness",
-    "AISafetyAtlas.Logic.tarski_undefinability",
-    "AISafetyAtlas.Logic.loeb",
-    "AISafetyAtlas.Explainability.attribution_impossibility",
-    "AISafetyAtlas.Learning.no_free_lunch",
-    "AISafetyAtlas.Learning.no_free_lunch_supervised",
-    "AISafetyAtlas.Learning.homogeneous_of_learner_indep",
-    "AISafetyAtlas.Learning.homogeneous_iff_learner_indep",
-    "AISafetyAtlas.Learning.sum_performance_eq_scaled_sum",
-    "AISafetyAtlas.Learning.sum_pointLoss_off_training",
-    "AISafetyAtlas.Verification.rice",
-    "AISafetyAtlas.Verification.AgentBehavior.no_behavioral_safety_verifier",
-    "AISafetyAtlas.Verification.Robot.action_safety_unverifiable",
-]
+PUBLIC_IMPORT_RE = re.compile(r"^public import ([A-Za-z0-9_'.]+)\s*$")
+NAMESPACE_RE = re.compile(r"^\s*namespace\s+([A-Za-z0-9_'.]+)\s*$")
+END_RE = re.compile(r"^\s*end\s+([A-Za-z0-9_'.]+)\s*$")
+PUBLIC_THEOREM_RE = re.compile(
+    r"^\s*public\s+theorem\s+([A-Za-z0-9_'.]+)\b"
+)
+
+
+def imported_atlas_modules(path: Path) -> list[str]:
+    """Read public imports belonging to this package from one Lean module."""
+    return [
+        match.group(1)
+        for line in path.read_text(encoding="utf-8").splitlines()
+        if (match := PUBLIC_IMPORT_RE.match(line))
+        if match.group(1).startswith("AISafetyAtlas")
+    ]
+
+
+def facade_sources() -> list[Path]:
+    """Resolve the complete transitive public atlas facade closure."""
+    pending = imported_atlas_modules(ROOT_IMPORT)
+    if not pending:
+        raise RuntimeError(f"no public imports found in {ROOT_IMPORT}")
+    seen: set[str] = set()
+    paths: list[Path] = []
+    while pending:
+        module = pending.pop(0)
+        if module in seen:
+            continue
+        seen.add(module)
+        path = ROOT / (module.replace(".", "/") + ".lean")
+        if not path.is_file():
+            raise RuntimeError(
+                f"public atlas import missing module: {path.relative_to(ROOT)}"
+            )
+        paths.append(path)
+        pending.extend(imported_atlas_modules(path))
+    return paths
+
+
+def public_theorems_in(path: Path) -> list[str]:
+    """Extract fully qualified `public theorem` names from one facade module.
+
+    Facade files use explicit namespaces. Named `end` commands pop only matching
+    namespaces; section endings such as `end Operations` are intentionally
+    ignored.
+    """
+    namespace: list[str] = []
+    declarations: list[str] = []
+    for line_number, line in enumerate(
+        path.read_text(encoding="utf-8").splitlines(), start=1
+    ):
+        if match := NAMESPACE_RE.match(line):
+            name = match.group(1)
+            components = name.split(".")
+            if name.startswith("AISafetyAtlas."):
+                namespace = components
+            else:
+                namespace.extend(components)
+            continue
+        if match := END_RE.match(line):
+            name = match.group(1)
+            if ".".join(namespace) == name:
+                namespace.clear()
+            elif namespace and namespace[-1] == name:
+                namespace.pop()
+            continue
+        if match := PUBLIC_THEOREM_RE.match(line):
+            if not namespace:
+                relative = path.relative_to(ROOT)
+                raise RuntimeError(
+                    f"{relative}:{line_number}: public theorem outside a namespace"
+                )
+            declarations.append(".".join(namespace + [match.group(1)]))
+    return declarations
+
+
+def discover_public_theorems() -> list[str]:
+    """Discover the complete theorem surface from all root facade modules."""
+    declarations = [
+        declaration
+        for path in facade_sources()
+        for declaration in public_theorems_in(path)
+    ]
+    duplicates = sorted(
+        declaration
+        for declaration in set(declarations)
+        if declarations.count(declaration) > 1
+    )
+    if duplicates:
+        raise RuntimeError(f"duplicate public theorem declarations: {duplicates}")
+    if not declarations:
+        raise RuntimeError("no public facade theorems discovered")
+    return declarations
+
+
+DECLARATIONS = discover_public_theorems()
 
 # Lean 4 formats:
 #   'Name' depends on axioms: [propext, Classical.choice, Quot.sound]
 #   'Name' does not depend on any axioms
 # The axiom list may wrap across lines after the opening bracket.
 DECL_START = re.compile(
-    r"^'([^']+)' (depends on axioms|does not depend on any axioms):\s*(.*)$"
+    r"^'(.+)' (depends on axioms|does not depend on any axioms):\s*(.*)$"
 )
 DECL_START_NO_COLON = re.compile(
-    r"^'([^']+)' (does not depend on any axioms)\s*$"
+    r"^'(.+)' (does not depend on any axioms)\s*$"
 )
 
 

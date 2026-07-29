@@ -6,6 +6,22 @@ import AISafetyAtlas
 
 #check AISafetyAtlas.SocialChoice.arrow
 #check AISafetyAtlas.SocialChoice.Utility.arrow
+#check AISafetyAtlas.Preference.exists_planner
+#check AISafetyAtlas.Preference.exists_reward
+#check AISafetyAtlas.Preference.consistent_rewards_eq_univ
+#check AISafetyAtlas.Preference.neg_twin
+#check AISafetyAtlas.Preference.greedy_rewardOf
+#check AISafetyAtlas.Preference.Source.ReasonableForF.proposition_seven
+#check AISafetyAtlas.Preference.Source.ReasonableForF.proposition_eight
+#check AISafetyAtlas.Preference.ReasonableLanguage.proposition_seven
+#check AISafetyAtlas.Preference.ReasonableLanguage.proposition_eight
+#check AISafetyAtlas.Preference.explanation_at_least_behaviour
+#check AISafetyAtlas.Preference.degenerate_explanation_cheap
+#check AISafetyAtlas.Preference.explanation_complexity_eq_behaviour
+#check AISafetyAtlas.Preference.RegretModel.cannot_rule_out_half_maximal_regret
+#check AISafetyAtlas.Preference.OverrideModel.mixtureValue_rationalise
+#check AISafetyAtlas.Preference.Source.ReasonableForF.theorem_two_conditional
+#check AISafetyAtlas.Preference.OverrideModel.rationalise_strictly_better
 #check AISafetyAtlas.Computability.rice
 #check AISafetyAtlas.Computability.rice_code_iff
 #check AISafetyAtlas.Verification.rice
@@ -27,3 +43,9 @@ import AISafetyAtlas
 #check AISafetyAtlas.Learning.no_free_lunch_adaptive
 #check AISafetyAtlas.Logic.loeb
 #check AISafetyAtlas.Verification.Robot.action_safety_unverifiable
+#check AISafetyAtlas.Wireheading.CRMDP.Model.everitt_theorem_eleven
+#check AISafetyAtlas.Compositional.Symmetry.Protocol.no_unique_leader_from_symmetric_start
+#check AISafetyAtlas.Preference.negPlanner
+#check AISafetyAtlas.Preference.lemma_six
+#check AISafetyAtlas.Preference.OverrideModel.OverridesFor
+#check AISafetyAtlas.Preference.OverrideModel.Overrides

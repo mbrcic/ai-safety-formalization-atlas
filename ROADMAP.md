@@ -141,12 +141,12 @@ beyond the scoped interpretation packages remain outside the automatic
 conclusion. Live status: [`STATE.md`](STATE.md) and
 [`docs/status/formalization-status.md`](docs/status/formalization-status.md).
 
-Release checkpoint: **v0.2.0 and v0.3.0 are published to `main`** (release notes
-under [`docs/releases/`](docs/releases/); the repository's git tags are the
-canonical published set). Current-state validation is independent of the
-immutable v0.1 audit. Package version, version-file agreement, and the matching
-release note are enforced from source — see the generated release-status block in
-[`STATE.md`](STATE.md).
+Release checkpoint: **v0.3.1 is published; v0.4.0 is the current release
+candidate** (release notes under [`docs/releases/`](docs/releases/); the
+repository's git tags are the canonical published set). Current-state
+validation is independent of the immutable v0.1 audit. Package version,
+version-file agreement, and the matching release note are enforced from source
+— see the generated release-status block in [`STATE.md`](STATE.md).
 
 Structural-integrity checkpoint: the post-v0.1 external reviews' immediate
 findings are resolved locally. Ordinary CI checks timeless invariants rather
@@ -180,9 +180,25 @@ identified:
   gives a precise model of aggregation or alignment rather than a parallel
   vocabulary.
 
-Causality, corrigibility, reward tampering, formal decision theories, and broad
-solver infrastructure remain later work unless a small addition clearly
-unlocks a priority theorem.
+Reward-tampering and compositional **formal cores** have landed and are no longer
+wholly deferred, but they are not paper-complete. Each public facade documents a
+**primary surface** (laws / specializations / boundaries) in its module docstring —
+start there rather than treating every declaration as equally public.
+`AISafetyAtlas.Wireheading` carries the CRMDP-level corrupted-reward bound
+(BY-039 RELATED), algebraic complement core, finite objective packaging, and
+the finite-percept on-policy goal-preservation induction step;
+`AISafetyAtlas.Preference` carries
+a RELATED preference-deduction suite (BY-011, ledger 6/8);
+`AISafetyAtlas.Compositional` carries hyperproperty k-safety, rectangularity
+(including finite splice), and network/Angluin cores. Paper-parity residuals and
+stop rules are tracked in
+[`docs/provenance/a1-a3-b1-b3-b7-reverification.md`](docs/provenance/a1-a3-b1-b3-b7-reverification.md).
+Primary-source evidence, including the BY-039 retraction, is in
+[`docs/provenance/a1-a3-b1-b3-source-audit.md`](docs/provenance/a1-a3-b1-b3-source-audit.md).
+
+Causality, corrigibility, formal decision theories, and broad solver
+infrastructure remain later work unless a small addition clearly unlocks a
+priority theorem.
 
 ## How to contribute
 

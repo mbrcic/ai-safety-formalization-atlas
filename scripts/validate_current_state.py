@@ -337,8 +337,9 @@ def main() -> None:
         "package version mismatch: "
         f"lakefile.toml {lake_version!r} != CITATION.cff {citation_version!r}",
     )
-    # Release notes follow the major.minor convention (v0.1, v0.2, v0.3); the
-    # package version carries a patch component (0.3.0). Match on the series.
+    # Release notes follow the major.minor convention (for example v0.4); the
+    # package version carries a patch component (for example 0.4.0). Match on
+    # the series.
     minor_series = ".".join(lake_version.split(".")[:2])
     require(
         (ROOT / f"docs/releases/v{minor_series}.md").is_file(),
