@@ -88,7 +88,8 @@ This table is the same one the README shows, rendered from one source.
 
 | I have… | It goes in | Then |
 |---|---|---|
-| a pointer to work that already exists, or a citation fix | `registry.yaml` (survey row) or `landscape.yaml` | `scripts/setup.sh --pointer` |
+| a pointer to a result, or a proof, that is not recorded here | the [discovery issue form](https://github.com/mbrcic/ai-safety-formalization-atlas/issues/new?template=known-formalization.yml) — we classify it and place it | nothing to install |
+| a correction to a record you have already found | the ledger file that holds it | `scripts/setup.sh --pointer` |
 | an open question and no proof | `conjectures.yaml` + a module under `AISafetyAtlas/Conjectures/` | add it to `scripts/lean_build_targets.txt`, then build + gate |
 | a proof to write, or any Lean change | the facade for your area (see Domain imports) | `scripts/setup.sh`, then build + gate + `check_print_axioms.py` |
 | a change to a contributor task | `tasks.yaml` — never the generated Markdown | regenerate + gate |

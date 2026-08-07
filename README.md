@@ -180,16 +180,16 @@ The stable entry points are conventional theorem names under domain namespaces:
 - `AISafetyAtlas.Preference` — preference-unidentifiability and override cores
 - `AISafetyAtlas.Oversight.JointObservation` — `covers_iff_no_collision`, the certified
   finite checker `decideCoverage`, the repair boundary, and the bounded portfolio target
-  (landscape `LAND-JOINTOBS-001`, not a survey row; see the
+  (landscape `LAND-JOINTOBS-001`; see the
   [joint observation model](docs/guide/joint-observation-model.md))
 
 The three latter facades contain short primary-surface tables and explicit
 paper-parity non-claims. Their source maps and residual gaps are recorded in the
 [A1–A3/B1–B3/B7 re-verification](docs/provenance/a1-a3-b1-b3-b7-reverification.md).
 
-**Landscape (not survey coverage):** recorded in
-[`landscape.yaml`](landscape.yaml), also on the root import when marked
-`root_import: true`:
+**Landscape declarations** — results the workbench develops or reproduces on its
+own account, recorded in [`landscape.yaml`](landscape.yaml) and on the root
+import when marked `root_import: true`:
 
 - `AISafetyAtlas.Explainability.attribution_impossibility` (DASH trilemma;
   not BY-029/BY-042 without a separate statement map)
@@ -240,7 +240,8 @@ scripts/reproduce_chaitin.sh
 
 | I have… | It goes in | Then |
 |---|---|---|
-| a pointer to work that already exists, or a citation fix | `registry.yaml` (survey row) or `landscape.yaml` | `scripts/setup.sh --pointer` |
+| a pointer to a result, or a proof, that is not recorded here | the [discovery issue form](https://github.com/mbrcic/ai-safety-formalization-atlas/issues/new?template=known-formalization.yml) — we classify it and place it | nothing to install |
+| a correction to a record you have already found | the ledger file that holds it | `scripts/setup.sh --pointer` |
 | an open question and no proof | `conjectures.yaml` + a module under `AISafetyAtlas/Conjectures/` | add it to `scripts/lean_build_targets.txt`, then build + gate |
 | a proof to write, or any Lean change | the facade for your area (see Domain imports) | `scripts/setup.sh`, then build + gate + `check_print_axioms.py` |
 | a change to a contributor task | `tasks.yaml` — never the generated Markdown | regenerate + gate |

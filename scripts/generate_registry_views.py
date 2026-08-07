@@ -479,8 +479,15 @@ def render_routing() -> str:
     """
     rows = [
         (
-            "a pointer to work that already exists, or a citation fix",
-            "`registry.yaml` (survey row) or `landscape.yaml`",
+            "a pointer to a result, or a proof, that is not recorded here",
+            "the [discovery issue form]"
+            "(https://github.com/mbrcic/ai-safety-formalization-atlas/issues/new"
+            "?template=known-formalization.yml) — we classify it and place it",
+            "nothing to install",
+        ),
+        (
+            "a correction to a record you have already found",
+            "the ledger file that holds it",
             "`scripts/setup.sh --pointer`",
         ),
         (
