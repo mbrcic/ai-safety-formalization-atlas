@@ -245,9 +245,7 @@ def main() -> None:
         "docs/releases/v0.2.md",
         "scripts/check_docs_paths.py",
         "scripts/agent_gate.sh",
-        "landscape.yaml",
         "scripts/generate_registry_views.py",
-        "scripts/validate_landscape.py",
         "scripts/check_print_axioms.py",
         "scripts/lean_build_targets.txt",
         "scripts/update_formalization_search.py",
@@ -346,17 +344,11 @@ def main() -> None:
         f"missing release note docs/releases/v{minor_series}.md "
         f"for package version {lake_version}",
     )
-    # Landscape root-import surface must stay dual-listed (R6-3).
-    require(
-        (ROOT / "landscape.yaml").is_file(),
-        "landscape.yaml missing",
-    )
-
     print(
         "current state ok: required public files, Apache-2.0, disclaimer, "
         "complete Lean build closure, executable reproduction scripts, "
         "STATE snapshot + release-status markers, version/release coherence, "
-        "landscape ledger, and strict-trust Lean sources"
+        "and strict-trust Lean sources"
     )
 
 

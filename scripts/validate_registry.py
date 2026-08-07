@@ -75,6 +75,37 @@ CANDIDATE_REVIEW_STATES = {
 }
 
 
+
+def public_surface_text(root: Path) -> str:
+    """Text of every module re-exported from the package root.
+
+    Ported from the retired landscape validator: a row claiming a place on the
+    public API must actually appear on it, or root_import is a claim nothing
+    backs.
+    """
+    root_module = root / "AISafetyAtlas.lean"
+    pending = ["AISafetyAtlas"]
+    seen: set[str] = set()
+    sources: list[str] = []
+    while pending:
+        module = pending.pop(0)
+        if module in seen:
+            continue
+        seen.add(module)
+        path = root_module if module == "AISafetyAtlas" else (
+            root / (module.replace(".", "/") + ".lean")
+        )
+        if not path.is_file():
+            fail(f"public atlas import missing module: {path}")
+        source = path.read_text(encoding="utf-8")
+        sources.append(source)
+        pending.extend(
+            m.group(1)
+            for m in re.finditer(r"(?m)^\s*public import (AISafetyAtlas[\w.]*)", source)
+        )
+    return "\n".join(sources)
+
+
 def validate_bridge_review(result_id: str, result: dict) -> None:
     """Enforce the bridge-review lifecycle: HUMAN_REVIEW carries no evidence; any
     graduated status must supply a complete, consistent bridge_review record."""
@@ -144,14 +175,24 @@ def main() -> None:
     if not isinstance(sources, dict):
         fail("source_catalog must be an object")
 
+    # One ledger, two kinds of row. A claim row states something a source
+    # asserted; an artifact row records a formalization that stands on its own.
+    # Closure is a property of the catalogued source, not of the file: the BY
+    # block stays contiguous and complete, and everything else is open.
     expected_count = survey.get("expected_result_count")
-    if len(results) != expected_count:
-        fail(f"expected {expected_count} results, found {len(results)}")
-
-    expected_ids = [f"BY-{number:03d}" for number in range(1, expected_count + 1)]
     actual_ids = [result.get("id") for result in results]
-    if actual_ids != expected_ids:
-        fail("result IDs must be unique, ordered, and contiguous from BY-001")
+    if len(set(actual_ids)) != len(actual_ids):
+        fail("result IDs must be unique")
+    survey_ids = [i for i in actual_ids if i and i.startswith("BY-")]
+    expected_ids = [f"BY-{number:03d}" for number in range(1, expected_count + 1)]
+    if survey_ids != expected_ids:
+        fail(
+            f"survey rows must be contiguous BY-001..BY-{expected_count:03d} in order; "
+            "the catalogued survey is closed"
+        )
+    bad = [i for i in actual_ids if not re.fullmatch(r"(BY-\d{3}|LAND-[A-Z0-9-]+)", i or "")]
+    if bad:
+        fail(f"result ids must be BY-### or LAND-*: {bad}")
 
     relationship_values = set(vocabulary.get("relationship", []))
     artifact_values = set(vocabulary.get("lean_artifact_type", []))
@@ -177,12 +218,11 @@ def main() -> None:
         fail("tag vocabulary must not repeat a tag")
     tag_values = set(tag_values)
 
+    universal_result_fields = {"id", "name", "tags", "notes", "formalizations", "lean_artifact"}
     required_result_fields = {
         "id",
         "name",
         "paper_reference",
-        "mechanism_category",
-        "domain_category",
         "survey_proof_assessment",
         "informal_claim",
         "formal_library_search",
@@ -238,13 +278,28 @@ def main() -> None:
         if not isinstance(search_evidence.get(field), str) or not search_evidence[field].strip():
             fail(f"formalization-search.json must state {field}")
     evidence_results = search_evidence.get("results")
-    if not isinstance(evidence_results, dict) or set(evidence_results) != set(actual_ids):
-        fail("formalization-search.json result IDs do not match registry")
+    if not isinstance(evidence_results, dict) or set(evidence_results) != set(expected_ids):
+        fail(
+            "formalization-search.json must cover exactly the catalogued survey rows; "
+            "the baseline-catalogue profile is scoped to that source, not to the ledger"
+        )
 
     # A claim that something does not exist is the one claim a reader cannot
     # check for themselves, so it carries what was searched, where, when, and
     # what the search did not cover. Recording one is optional; recording one
     # incompletely is not.
+    surface = public_surface_text(ROOT)
+    for result in results:
+        if not result.get("root_import"):
+            continue
+        for declaration in (result["lean_artifact"] or {}).get("declarations", []):
+            name = declaration["atlas_declaration"]
+            if name.split(".")[-1] not in surface and name not in surface:
+                fail(
+                    f"{result['id']} claims root_import but {name} does not appear in "
+                    "AISafetyAtlas.lean or its transitive public imports"
+                )
+
     novelty_checks = search_evidence.get("novelty_checks")
     if not isinstance(novelty_checks, list):
         fail("formalization-search.json must carry a novelty_checks list")
@@ -320,12 +375,25 @@ def main() -> None:
 
     for result in results:
         result_id = result.get("id", "<missing>")
-        missing = required_result_fields - result.keys()
+        is_claim = "informal_claim" in result
+        needed = required_result_fields if is_claim else universal_result_fields
+        missing = needed - result.keys()
         if missing:
             fail(f"{result_id} missing fields: {sorted(missing)}")
-        if not result["name"] or not result["informal_claim"]:
-            fail(f"{result_id} must have a name and informal claim")
-        if result["ai_bridge_status"] not in bridge_status_values:
+        if not result["name"]:
+            fail(f"{result_id} must have a name")
+        if is_claim and not result["informal_claim"]:
+            fail(f"{result_id} must have an informal claim")
+        if not is_claim:
+            stray = {"ai_bridge_status", "bridge_review", "candidate_formalizations"} & result.keys()
+            if stray:
+                fail(
+                    f"{result_id} is an artifact row and must not carry claim fields: "
+                    f"{sorted(stray)}"
+                )
+        if result.get("root_import") and result["lean_artifact"] is None:
+            fail(f"{result_id} root_import requires an atlas declaration")
+        if is_claim and result["ai_bridge_status"] not in bridge_status_values:
             fail(f"{result_id} has unknown ai_bridge_status {result['ai_bridge_status']!r}")
         tags = result["tags"]
         if not isinstance(tags, list) or not tags:
@@ -335,8 +403,15 @@ def main() -> None:
             fail(f"{result_id} has tags outside the vocabulary: {sorted(unknown_tags)}")
         if len(set(tags)) != len(tags):
             fail(f"{result_id} repeats a tag")
-        validate_bridge_review(result_id, result)
-        validate_candidate_formalizations(result_id, result)
+        if is_claim:
+            validate_bridge_review(result_id, result)
+        if is_claim:
+            validate_candidate_formalizations(result_id, result)
+
+        if not is_claim:
+            # Artifact rows carry no claim, so there is nothing for a
+            # baseline-catalogue sweep to have searched for.
+            continue
 
         search = result["formal_library_search"]
         if set(search.get("searched_corpora", [])) != expected_search_corpora:
@@ -395,7 +470,7 @@ def main() -> None:
                 for name in root_import_modules
             )
             delta = record.get("scope_delta")
-            if not (public or interpretation_affecting):
+            if not is_claim or not (public or interpretation_affecting):
                 continue
             declaration = record.get("declaration", "<unnamed>")
             if not isinstance(delta, dict):
@@ -532,13 +607,15 @@ def main() -> None:
             if record["framework"] != "Lean" and record["reproduced"]:
                 reproduced_external_count += 1
 
+    claims = sum(1 for r in results if "informal_claim" in r)
     print(
         "registry ok: "
-        f"{len(results)} results, {len(sources)} sources, "
+        f"{len(results)} results ({claims} claims + {len(results) - claims} artifacts), "
+        f"{len(sources)} sources, "
         f"{formalization_count} formalizations, "
-        f"{lean_artifact_count} Lean artifacts, "
+        f"{lean_artifact_count} rows with atlas Lean, "
         f"{reproduced_external_count} reproduced external records, "
-        f"{len(results)} synchronized six-corpus searches"
+        f"{len(expected_ids)} synchronized six-corpus searches"
     )
 
 

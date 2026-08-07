@@ -45,3 +45,11 @@ import AISafetyAtlas
 #check AISafetyAtlas.Verification.Robot.action_safety_unverifiable
 #check AISafetyAtlas.Wireheading.CRMDP.Model.everitt_theorem_eleven
 #check AISafetyAtlas.Compositional.Symmetry.Protocol.no_unique_leader_from_symmetric_start
+#check AISafetyAtlas.Explainability.attribution_impossibility
+#check AISafetyAtlas.SocialChoice.gibbard_satterthwaite
+#check AISafetyAtlas.Compositional.Hyperproperties.k_safety_iff_finite_self_composition
+#check AISafetyAtlas.Compositional.Networks.runFor_eq_of_view_eq
+#check AISafetyAtlas.Compositional.rectangle_iff_exchange_closed
+#check AISafetyAtlas.Wireheading.AgentEquations.value_eq_of_agree_on_window
+#check AISafetyAtlas.Wireheading.GoalPreservationSource.Model.selected_matches_initial
+#check AISafetyAtlas.Oversight.JointObservation.covers_iff_no_collision

@@ -495,8 +495,6 @@
       "id": "BY-001",
       "name": "Unobservability",
       "paper_reference": "Table 1",
-      "mechanism_category": "INDISTINGUISHABILITY",
-      "domain_category": "DATA",
       "survey_proof_assessment": "PROVEN",
       "informal_claim": "A system's internal state cannot in general be reconstructed from its observable outputs.",
       "original_source_refs": [
@@ -537,8 +535,6 @@
       "id": "BY-002",
       "name": "Uncontrollability of dynamical systems",
       "paper_reference": "Table 1",
-      "mechanism_category": "INDISTINGUISHABILITY",
-      "domain_category": "DATA",
       "survey_proof_assessment": "PROVEN",
       "informal_claim": "Some dynamical systems cannot be driven between arbitrary states by available controls.",
       "original_source_refs": [
@@ -576,8 +572,6 @@
       "id": "BY-003",
       "name": "Good Regulator Theorem",
       "paper_reference": "Table 1",
-      "mechanism_category": "INDISTINGUISHABILITY",
-      "domain_category": "DATA",
       "survey_proof_assessment": "PROVEN",
       "informal_claim": "Every maximally simple optimal regulator must embody a model of the regulated system.",
       "original_source_refs": [
@@ -613,8 +607,6 @@
       "id": "BY-004",
       "name": "Law of Requisite Variety",
       "paper_reference": "Table 1",
-      "mechanism_category": "INDISTINGUISHABILITY",
-      "domain_category": "DATA",
       "survey_proof_assessment": "CONDITIONAL",
       "informal_claim": "Perfect regulation requires sufficient controller variety under perfect information and unbounded response speed.",
       "original_source_refs": [
@@ -651,8 +643,6 @@
       "id": "BY-005",
       "name": "Information-theoretical control limits",
       "paper_reference": "Table 1",
-      "mechanism_category": "INDISTINGUISHABILITY",
-      "domain_category": "DATA",
       "survey_proof_assessment": "PROVEN",
       "informal_claim": "Information constraints impose lower bounds on achievable control.",
       "original_source_refs": [
@@ -689,8 +679,6 @@
       "id": "BY-006",
       "name": "(Anti)codifiability thesis",
       "paper_reference": "Table 1",
-      "mechanism_category": "INDUCTION",
-      "domain_category": "DATA",
       "survey_proof_assessment": "NOT_PROVEN_IN_SURVEY",
       "informal_claim": "The survey groups moral-particularist arguments against complete codification of virtue.",
       "original_source_refs": [
@@ -729,8 +717,6 @@
       "id": "BY-007",
       "name": "Arrow's impossibility theorem",
       "paper_reference": "Table 1",
-      "mechanism_category": "TRADEOFF",
-      "domain_category": "SYMBOLIC",
       "survey_proof_assessment": "PROVEN",
       "informal_claim": "No rank-order voting rule satisfies Arrow's full set of fairness conditions for three or more alternatives.",
       "original_source_refs": [
@@ -825,8 +811,6 @@
       "id": "BY-008",
       "name": "Impossibility theorems in population ethics",
       "paper_reference": "Table 1",
-      "mechanism_category": "TRADEOFF",
-      "domain_category": "SYMBOLIC",
       "survey_proof_assessment": "PROVEN",
       "informal_claim": "No population axiology simultaneously satisfies the cited set of adequacy conditions.",
       "original_source_refs": [
@@ -865,8 +849,6 @@
       "id": "BY-009",
       "name": "Impossibility theorems in AI alignment",
       "paper_reference": "Table 1",
-      "mechanism_category": "TRADEOFF",
-      "domain_category": "SYMBOLIC",
       "survey_proof_assessment": "PROVEN",
       "informal_claim": "The cited work derives incompatibilities among desiderata for utility-based value alignment.",
       "original_source_refs": [
@@ -904,8 +886,6 @@
       "id": "BY-010",
       "name": "Fairness impossibility theorem",
       "paper_reference": "Table 1",
-      "mechanism_category": "TRADEOFF",
-      "domain_category": "SYMBOLIC",
       "survey_proof_assessment": "PROVEN",
       "informal_claim": "Common calibration and error-rate fairness criteria cannot all hold when base rates differ, subject to source assumptions.",
       "original_source_refs": [
@@ -943,8 +923,6 @@
       "id": "BY-011",
       "name": "Limits on preference deduction",
       "paper_reference": "Table 1",
-      "mechanism_category": "INDISTINGUISHABILITY",
-      "domain_category": "DATA",
       "survey_proof_assessment": "PROVEN",
       "informal_claim": "Observed behaviour alone does not identify an agent's reward function and planning process without strong normative assumptions.",
       "original_source_refs": [
@@ -1296,8 +1274,6 @@
       "id": "BY-012",
       "name": "Rice's theorem",
       "paper_reference": "Table 1",
-      "mechanism_category": "DEDUCTION",
-      "domain_category": "SYMBOLIC",
       "survey_proof_assessment": "PROVEN",
       "informal_claim": "Every nontrivial extensional property of partial computable functions is undecidable.",
       "original_source_refs": [
@@ -1417,8 +1393,6 @@
       "id": "BY-013",
       "name": "Unprovability",
       "paper_reference": "Table 1",
-      "mechanism_category": "DEDUCTION",
-      "domain_category": "SYMBOLIC",
       "survey_proof_assessment": "PROVEN",
       "informal_claim": "Sufficiently expressive consistent formal systems contain true statements they cannot prove, under the source's hypotheses.",
       "original_source_refs": [
@@ -1501,8 +1475,6 @@
       "id": "BY-014",
       "name": "Undecidability",
       "paper_reference": "Table 1",
-      "mechanism_category": "DEDUCTION",
-      "domain_category": "SYMBOLIC",
       "survey_proof_assessment": "PROVEN",
       "informal_claim": "No effective procedure decides every instance of the relevant computation or decision problem.",
       "original_source_refs": [
@@ -1607,8 +1579,6 @@
       "id": "BY-015",
       "name": "Chaitin incompleteness",
       "paper_reference": "Table 1",
-      "mechanism_category": "DEDUCTION",
-      "domain_category": "SYMBOLIC",
       "survey_proof_assessment": "PROVEN",
       "informal_claim": "A finitely specified formal theory cannot prove arbitrarily high lower bounds on Kolmogorov complexity.",
       "original_source_refs": [
@@ -1675,8 +1645,6 @@
       "id": "BY-016",
       "name": "Undefinability",
       "paper_reference": "Table 1",
-      "mechanism_category": "DEDUCTION",
-      "domain_category": "SYMBOLIC",
       "survey_proof_assessment": "PROVEN",
       "informal_claim": "Truth for a sufficiently expressive formal language is not definable within that language under the source's hypotheses.",
       "original_source_refs": [
@@ -1738,8 +1706,6 @@
       "id": "BY-017",
       "name": "Unsurveyability",
       "paper_reference": "Table 1",
-      "mechanism_category": "INTRACTABILITY",
-      "domain_category": "DATA",
       "survey_proof_assessment": "NOT_PROVEN_IN_SURVEY",
       "informal_claim": "Some proofs may exceed feasible human survey or comprehension even when mechanically checkable.",
       "original_source_refs": [
@@ -1775,8 +1741,6 @@
       "id": "BY-018",
       "name": "Unlearnability",
       "paper_reference": "Table 1",
-      "mechanism_category": "DEDUCTION_AND_INTRACTABILITY",
-      "domain_category": "DATA",
       "survey_proof_assessment": "PROVEN",
       "informal_claim": "Learning can be undecidable or computationally infeasible for specified concept classes and learning models.",
       "original_source_refs": [
@@ -1816,8 +1780,6 @@
       "id": "BY-019",
       "name": "Unpredictability of rational agents",
       "paper_reference": "Table 1",
-      "mechanism_category": "INDUCTION",
-      "domain_category": "DATA",
       "survey_proof_assessment": "PROVEN",
       "informal_claim": "No predictor can universally forecast the behaviour of rational agents in the cited strategic settings.",
       "original_source_refs": [
@@ -1855,8 +1817,6 @@
       "id": "BY-020",
       "name": "No Free Lunch — supervised learning",
       "paper_reference": "Table 1",
-      "mechanism_category": "INDUCTION",
-      "domain_category": "DATA",
       "survey_proof_assessment": "PROVEN",
       "informal_claim": "Averaged uniformly over target functions, learning algorithms have no universal performance advantage.",
       "original_source_refs": [
@@ -1958,8 +1918,6 @@
       "id": "BY-021",
       "name": "No Free Lunch — optimization",
       "paper_reference": "Table 1",
-      "mechanism_category": "INDUCTION",
-      "domain_category": "DATA",
       "survey_proof_assessment": "PROVEN",
       "informal_claim": "Averaged uniformly over objective functions, optimization algorithms have equal aggregate performance.",
       "original_source_refs": [
@@ -2048,8 +2006,6 @@
       "id": "BY-022",
       "name": "Free lunches in continuous spaces and coevolution",
       "paper_reference": "Table 1",
-      "mechanism_category": "INDUCTION",
-      "domain_category": "DATA",
       "survey_proof_assessment": "PROVEN",
       "informal_claim": "The cited results identify settings where standard no-free-lunch symmetry fails.",
       "original_source_refs": [
@@ -2086,8 +2042,6 @@
       "id": "BY-023",
       "name": "Unidentifiability",
       "paper_reference": "Table 1",
-      "mechanism_category": "INDISTINGUISHABILITY",
-      "domain_category": "DATA",
       "survey_proof_assessment": "PROVEN",
       "informal_claim": "Observational data can be compatible with multiple latent, causal, or generative explanations.",
       "original_source_refs": [
@@ -2128,8 +2082,6 @@
       "id": "BY-024",
       "name": "Physical limits on inference",
       "paper_reference": "Table 1",
-      "mechanism_category": "DEDUCTION_AND_INDUCTION",
-      "domain_category": "DATA",
       "survey_proof_assessment": "PROVEN",
       "informal_claim": "Embedded physical inference devices face limits on prediction, observation, and mutual control.",
       "original_source_refs": [
@@ -2171,8 +2123,6 @@
       "id": "BY-025",
       "name": "Uncontainability",
       "paper_reference": "Table 1",
-      "mechanism_category": "DEDUCTION",
-      "domain_category": "SYMBOLIC_AND_DATA",
       "survey_proof_assessment": "PROVEN",
       "informal_claim": "Perfect containment of a superintelligent program is undecidable in the formal model used by the source.",
       "original_source_refs": [
@@ -2210,8 +2160,6 @@
       "id": "BY-026",
       "name": "Uninterruptibility",
       "paper_reference": "Table 1",
-      "mechanism_category": "DEDUCTION",
-      "domain_category": "DATA",
       "survey_proof_assessment": "NOT_PROVEN_IN_SURVEY",
       "informal_claim": "Available interruption proposals guarantee safe interruptibility only under restricted assumptions.",
       "original_source_refs": [
@@ -2255,8 +2203,6 @@
       "id": "BY-027",
       "name": "Löb's theorem (unverifiability)",
       "paper_reference": "Table 1",
-      "mechanism_category": "DEDUCTION",
-      "domain_category": "SYMBOLIC",
       "survey_proof_assessment": "PROVEN",
       "informal_claim": "Löb's theorem: if a sufficiently strong formal system T proves Prov_T(σ) → σ, then T already proves σ (under the source's arithmetic hypotheses).",
       "original_source_refs": [
@@ -2321,8 +2267,6 @@
       "id": "BY-028",
       "name": "Unpredictability of superhuman AI",
       "paper_reference": "Table 1",
-      "mechanism_category": "INDUCTION",
-      "domain_category": "DATA",
       "survey_proof_assessment": "PROOF_SKETCH",
       "informal_claim": "A strictly less capable predictor cannot accurately predict every action of a more capable agent under the source's definitions.",
       "original_source_refs": [
@@ -2359,8 +2303,6 @@
       "id": "BY-029",
       "name": "Unexplainability",
       "paper_reference": "Table 1",
-      "mechanism_category": "DEDUCTION",
-      "domain_category": "DATA",
       "survey_proof_assessment": "NOT_PROVEN_IN_SURVEY",
       "informal_claim": "The cited argument links complete AI explanation to proof, truth, and model-access assumptions.",
       "original_source_refs": [
@@ -2396,8 +2338,6 @@
       "id": "BY-030",
       "name": "Incomprehensibility",
       "paper_reference": "Table 1",
-      "mechanism_category": "DEDUCTION",
-      "domain_category": "DATA",
       "survey_proof_assessment": "MIXED",
       "informal_claim": "Some correct computations or explanations cannot be comprehended by a bounded verifier under the cited formalizations and assumptions.",
       "original_source_refs": [
@@ -2434,8 +2374,6 @@
       "id": "BY-031",
       "name": "k-incomprehensibility",
       "paper_reference": "Table 1",
-      "mechanism_category": "INDUCTION",
-      "domain_category": "DATA",
       "survey_proof_assessment": "DEFINITIONS_ONLY",
       "informal_claim": "The cited source defines intelligence and comprehension limits using an intensional Kolmogorov-complexity variant.",
       "original_source_refs": [
@@ -2472,8 +2410,6 @@
       "id": "BY-032",
       "name": "Unverifiability",
       "paper_reference": "Table 1",
-      "mechanism_category": "DEDUCTION",
-      "domain_category": "SYMBOLIC",
       "survey_proof_assessment": "PROVEN",
       "informal_claim": "A universal verifier for arbitrary computations cannot satisfy the cited completeness and correctness requirements.",
       "original_source_refs": [
@@ -2511,8 +2447,6 @@
       "id": "BY-033",
       "name": "Unverifiability of robot ethics",
       "paper_reference": "Table 1",
-      "mechanism_category": "DEDUCTION",
-      "domain_category": "SYMBOLIC",
       "survey_proof_assessment": "PROVEN",
       "informal_claim": "Theorem 1 (van Leeuwen & Wiedermann 2021): for any non-trivial robot property P there is no algorithmic procedure that tells, for an arbitrary robot with potentially unbounded memory, whether its actions always satisfy P. Corollary 1: same conclusion restricted to robots programmed by structured programs. (Paper Def. 3 defines non-triviality via a switchable base program pair; ethics/legality are motivating instances, not the only P.)",
       "original_source_refs": [
@@ -2583,8 +2517,6 @@
       "id": "BY-034",
       "name": "Intractability of bottom-up ethics",
       "paper_reference": "Table 1",
-      "mechanism_category": "INTRACTABILITY",
-      "domain_category": "DATA",
       "survey_proof_assessment": "PROVEN",
       "informal_claim": "Computational complexity obstructs exhaustive bottom-up evaluation of ethically relevant action consequences.",
       "original_source_refs": [
@@ -2622,8 +2554,6 @@
       "id": "BY-035",
       "name": "No-flattening theorems for deep learning",
       "paper_reference": "Table 1",
-      "mechanism_category": "INTRACTABILITY",
-      "domain_category": "DATA",
       "survey_proof_assessment": "PROVEN",
       "informal_claim": "Some functions efficiently represented by deep networks require inefficiently large shallow representations.",
       "original_source_refs": [
@@ -2660,8 +2590,6 @@
       "id": "BY-036",
       "name": "Efficiency of computing Boolean functions for multilayered perceptrons",
       "paper_reference": "Table 1",
-      "mechanism_category": "INTRACTABILITY",
-      "domain_category": "DATA",
       "survey_proof_assessment": "PROVEN",
       "informal_claim": "The cited report constrains which Boolean functions multilayer perceptrons compute efficiently.",
       "original_source_refs": [
@@ -2698,8 +2626,6 @@
       "id": "BY-037",
       "name": "Goodhart's law (Strathern)",
       "paper_reference": "Table 1",
-      "mechanism_category": "INDUCTION",
-      "domain_category": "DATA",
       "survey_proof_assessment": "NOT_PROVEN_IN_SURVEY",
       "informal_claim": "When a measure becomes a target, optimization pressure can destroy its value as a measure.",
       "original_source_refs": [
@@ -2781,8 +2707,6 @@
       "id": "BY-038",
       "name": "Campbell's law",
       "paper_reference": "Table 1",
-      "mechanism_category": "INDUCTION",
-      "domain_category": "DATA",
       "survey_proof_assessment": "NOT_PROVEN_IN_SURVEY",
       "informal_claim": "Heavy decision use of a quantitative indicator creates pressure that corrupts the indicator and represented process.",
       "original_source_refs": [
@@ -2819,8 +2743,6 @@
       "id": "BY-039",
       "name": "Reward corruption unsolvability",
       "paper_reference": "Table 1",
-      "mechanism_category": "INDUCTION",
-      "domain_category": "DATA",
       "survey_proof_assessment": "PROVEN",
       "informal_claim": "No agent can in general distinguish all reward-channel corruption from genuine reward without additional assumptions.",
       "original_source_refs": [
@@ -2891,8 +2813,6 @@
       "id": "BY-040",
       "name": "Uncontrollability of AI",
       "paper_reference": "Table 1",
-      "mechanism_category": "DEDUCTION",
-      "domain_category": "DATA",
       "survey_proof_assessment": "PROOF_SKETCH",
       "informal_claim": "Perfect explicit control of advanced AI fails in the source's degenerate self-referential conditions.",
       "original_source_refs": [
@@ -2929,8 +2849,6 @@
       "id": "BY-041",
       "name": "Impossibility of unambiguous communication",
       "paper_reference": "Table 1",
-      "mechanism_category": "INDUCTION",
-      "domain_category": "DATA",
       "survey_proof_assessment": "CONDITIONAL",
       "informal_claim": "Unambiguous communication is impossible under the source's strict assumptions about language and interpretation.",
       "original_source_refs": [
@@ -2967,8 +2885,6 @@
       "id": "BY-042",
       "name": "Unfairness of explainability",
       "paper_reference": "Table 1",
-      "mechanism_category": "INDUCTION",
-      "domain_category": "DATA",
       "survey_proof_assessment": "PROOF_SKETCH",
       "informal_claim": "A verifier and a decision-maker have structurally unequal strategic positions when explanations omit the full execution trace.",
       "original_source_refs": [],
@@ -3003,8 +2919,6 @@
       "id": "BY-043",
       "name": "Misaligned embodiment",
       "paper_reference": "Table 1",
-      "mechanism_category": "TRADEOFF",
-      "domain_category": "DATA",
       "survey_proof_assessment": "PROOF_SKETCH",
       "informal_claim": "Mistakenly cloned self-interested agents cannot perfectly control one another in the survey's model.",
       "original_source_refs": [
@@ -3074,8 +2988,6 @@
       "id": "BY-044",
       "name": "Limited self-awareness",
       "paper_reference": "Table 1",
-      "mechanism_category": "INDUCTION",
-      "domain_category": "DATA",
       "survey_proof_assessment": "PROOF_SKETCH",
       "informal_claim": "An agent cannot be perfectly self-aware across the survey's defined operational boundaries.",
       "original_source_refs": [],
@@ -3105,6 +3017,550 @@
       "tags": [
         "interpretability"
       ]
+    },
+    {
+      "id": "LAND-ATTR-001",
+      "name": "Attribution impossibility (DASH trilemma)",
+      "tags": [
+        "interpretability"
+      ],
+      "notes": "Core Rashomon/faithfulness trilemma only; upstream GBDT axiom layers not vendored. Not BY-042 or BY-029 coverage without a separate statement map.",
+      "original_source_refs": [],
+      "related_result_ids": [
+        "BY-029",
+        "BY-042"
+      ],
+      "root_import": true,
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "repository": "https://github.com/DrakeCaraker/dash-impossibility-lean",
+          "version": "7ec3ef9813a7642fdabe5b73c71d1bed4d5488e2",
+          "license": "Apache-2.0",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "module": "AISafetyAtlas/Explainability.lean",
+          "upstream_module": "AISafetyAtlas/Upstream/Attribution/Trilemma.lean",
+          "build_command": "lake build AISafetyAtlas (vendored axiom-free trilemma)"
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Explainability.attribution_impossibility",
+            "type": "REFERENCE",
+            "source_declarations": [
+              "AISafetyAtlas.Explainability.attribution_impossibility"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "LAND-GS-001",
+      "name": "Gibbard–Satterthwaite theorem",
+      "tags": [
+        "social-choice"
+      ],
+      "notes": "Reproduced AFP landscape formalization (Isabelle). Lean interface is LAND-GS-002. Not a separate Table-1 BY ID; Arrow-session provenance only.",
+      "original_source_refs": [],
+      "related_result_ids": [
+        "BY-007"
+      ],
+      "root_import": false,
+      "formalizations": [
+        {
+          "framework": "Isabelle/HOL",
+          "repository": "https://www.isa-afp.org/entries/ArrowImpossibilityGS.html",
+          "version": "AFP release 2026-02-06; archive SHA-256 8174c738b42203100170ff25f3c9fc2c6d16d8556fbaff205c0eaa98a3813da7",
+          "license": "BSD-3-Clause",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declaration": "Gibbard_Satterthwaite",
+          "module": "Thys/GS.thy",
+          "build_command": "scripts/reproduce_isabelle.sh arrow"
+        }
+      ],
+      "lean_artifact": null
+    },
+    {
+      "id": "LAND-GS-002",
+      "name": "Gibbard–Satterthwaite theorem (Lean / SocialChoiceLean)",
+      "tags": [
+        "social-choice"
+      ],
+      "notes": "Classical GS: resolute + unanimous + strategy-proof ⇒ dictatorial (3 ≤ |A|). Vendored GS closure from SocialChoiceLean 4.31 port (ballot shim); multi-file mirror under vendor/SocialChoiceLean/. Not full SocialChoiceLean. Isabelle twin is LAND-GS-001. Not a separate Table-1 BY ID; Arrow-session provenance only. Classical resolute voting-rule form.",
+      "original_source_refs": [],
+      "related_result_ids": [
+        "BY-007"
+      ],
+      "root_import": true,
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "repository": "https://github.com/DominikPeters/SocialChoiceLean",
+          "version": "mbrcic/SocialChoiceLean port/lean-4.31 @ 74f491b (Mathlib/Lean v4.31.0)",
+          "license": "MIT",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declaration": "gibbard_satterthwaite",
+          "module": "AISafetyAtlas/SocialChoice.lean",
+          "upstream_module": "AISafetyAtlas/Upstream/GibbardSatterthwaite.lean",
+          "build_command": "lake build AISafetyAtlas; python3 scripts/check_print_axioms.py"
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.SocialChoice.gibbard_satterthwaite",
+            "type": "REFERENCE",
+            "source_declarations": [
+              "gibbard_satterthwaite"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "LAND-NFL-001",
+      "name": "No-free-lunch theorem for machine learning (Shalev-Shwartz–Ben-David §5.1)",
+      "tags": [
+        "learning-theory"
+      ],
+      "notes": "Statement-level triage (CT-2, 2026-07-19): matches SSBD Thm 5.1 — for binary classification with 2*m < |space X|, every learner admits a realizable distribution on which P[L(A(S)) > 1/8] >= 1/7. Session depends only on HOL-Probability. Reproduction log recorded in docs/provenance/ct2-nfl-triage.md. Lean Wolpert NFL (docs/provenance/lean-wolpert-nfl.md) does not replace or cover this entry. DISTINCT from BY-020 (Wolpert 1996 supervised NFL) and BY-021 (Wolpert–Macready 1997 optimization NFL): this is the PAC / sample-complexity NFL (Understanding ML Thm 5.1), not the uniform-averaging Wolpert results. Not BY-020/021 coverage. See docs/provenance/ct2-nfl-triage.md. The in-tree Lean AISafetyAtlas.Learning.no_free_lunch (BY-021 RELATED) is also DISTINCT from this landscape entry.",
+      "original_source_refs": [],
+      "related_result_ids": [
+        "BY-020",
+        "BY-021"
+      ],
+      "root_import": false,
+      "formalizations": [
+        {
+          "framework": "Isabelle/HOL",
+          "repository": "https://www.isa-afp.org/entries/No_Free_Lunch_ML.html",
+          "version": "AFP release 2026-02-06; archive SHA-256 93ce8953bac6b09a29f6d2aafa64d4dbedf49e11f13cdad4cddc42f95f173588",
+          "license": "BSD-3-Clause",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declaration": "no_free_lunch_ML",
+          "module": "No_Free_Lunch_ML.thy",
+          "build_command": "scripts/reproduce_isabelle.sh nfl"
+        }
+      ],
+      "lean_artifact": null
+    },
+    {
+      "id": "LAND-PE-001",
+      "name": "Parfit mere addition / conditional normative reasoning (Åqvist E)",
+      "tags": [
+        "social-choice",
+        "ethics"
+      ],
+      "notes": "A1 (2026-07-19): AFP CondNormReasHOL — Åqvist system E + Parfit mere-addition use case. Not Arrhenius BY-008 coverage. Evidence: docs/provenance/a1-condnorm-parfit-triage.md. RELATED only: population-ethics adjacent (Parfit mere addition / repugnant-conclusion encoding). Not EXACT/EQUIVALENT to Arrhenius 2011 impossibility package (BY-008 survey source). See docs/provenance/a1-condnorm-parfit-triage.md.",
+      "original_source_refs": [],
+      "related_result_ids": [
+        "BY-008"
+      ],
+      "root_import": false,
+      "formalizations": [
+        {
+          "framework": "Isabelle/HOL",
+          "repository": "https://www.isa-afp.org/entries/CondNormReasHOL.html",
+          "version": "AFP release 2026-02-06; archive SHA-256 10c3aa794a3cafcfb08a784e11515933162a490b32fc0cdb0cf88f489accdb38",
+          "license": "BSD-3-Clause",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declaration": "mere_addition encodings (Parent–Benzmüller CondNormReasHOL)",
+          "module": "mere_addition_opt.thy",
+          "build_command": "scripts/reproduce_isabelle.sh condnorm"
+        }
+      ],
+      "lean_artifact": null
+    },
+    {
+      "id": "LAND-DL-001",
+      "name": "Deep vs shallow network capacity (Cohen–Bentkamp)",
+      "tags": [
+        "computational-complexity",
+        "learning-theory"
+      ],
+      "notes": "A2 (2026-07-19): AE almost-all weights, deep model not matchable by shallow width Z < r^(N/2). Landscape RELATED to BY-035; not headline EXACT. Evidence: docs/provenance/a2-deep-learning-by035-triage.md. RELATED to BY-035 no-flattening informal claim (deep nets require large shallow representations). Formalizes Bentkamp/AFP of Cohen et al. 2015-style network-capacity theorems, not the Lin–Tegmark–Rolnick 2017 survey citation as EXACT. See docs/provenance/a2-deep-learning-by035-triage.md.",
+      "original_source_refs": [],
+      "related_result_ids": [
+        "BY-035"
+      ],
+      "root_import": false,
+      "formalizations": [
+        {
+          "framework": "Isabelle/HOL",
+          "repository": "https://www.isa-afp.org/entries/Deep_Learning.html",
+          "version": "AFP release 2026-02-06; full-tree build SHA-256 b059edd46073479ee8dde45004c2346a7365e5d94cded49d27257cfea66c8879; entry archive 018557d0041584239d603a7eb3700d07ed7eb2a2ca48f694820072003ebf430d",
+          "license": "BSD-3-Clause",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declaration": "fundamental_theorem_network_capacity",
+          "module": "DL_Fundamental_Theorem_Network_Capacity.thy",
+          "build_command": "scripts/reproduce_isabelle.sh deep-learning"
+        }
+      ],
+      "lean_artifact": null
+    },
+    {
+      "id": "LAND-VNM-001",
+      "name": "von Neumann–Morgenstern expected utility",
+      "tags": [
+        "decision-theory"
+      ],
+      "notes": "Reproduced provenance; not an atlas Lake dependency. Adjacent utility foundation; not a BY coverage row.",
+      "original_source_refs": [],
+      "related_result_ids": [],
+      "root_import": false,
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "repository": "https://github.com/jingyuanli-hk/vNM-Theorem-pub",
+          "version": "89ed1680170bcf947f77bd26cdf614c1ce02222c",
+          "license": "Apache-2.0",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declaration": "vNM.vNM_theorem",
+          "build_command": "scripts/reproduce_vnm.sh"
+        }
+      ],
+      "lean_artifact": null
+    },
+    {
+      "id": "LAND-TCS-ARROW-001",
+      "name": "Fourier-analytic Arrow theorem (TCSLib)",
+      "tags": [
+        "social-choice"
+      ],
+      "notes": "Source-inspected only; deferred until a named theorem needs Fourier structure. Alternative Arrow representation; not additional BY-007 coverage.",
+      "original_source_refs": [],
+      "related_result_ids": [
+        "BY-007"
+      ],
+      "root_import": false,
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "repository": "https://github.com/Shilun-Allan-Li/tcslib",
+          "version": "502287d7f8d84c33421c71ce5495b08f097c47a5",
+          "license": "Apache-2.0",
+          "relationship": "RELATED",
+          "reproduced": false,
+          "declaration": "ArrowTheorem.arrow_theorem"
+        }
+      ],
+      "lean_artifact": null
+    },
+    {
+      "id": "LAND-MELO-001",
+      "name": "Melo et al. inner-alignment decision problem (Rice packaging)",
+      "tags": [
+        "computability",
+        "verification"
+      ],
+      "notes": "Related-literature landscape entry (see docs/guide/related-literature.md). Atlas tracks Rice packaging of their stated decision problem; architecture half not formalized. Does not increase headline coverage. Not a Table-1 BY row. Negative computability claim is related to Rice (BY-012) via AgentBehavior; does not add headline coverage.",
+      "original_source_refs": [
+        "atlas-ref-melo-2024"
+      ],
+      "related_result_ids": [
+        "BY-012"
+      ],
+      "root_import": false,
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "repository": "https://arxiv.org/abs/2408.08995",
+          "version": "arXiv:2408.08995 (2024); Sci. Rep. 2025 companion publication",
+          "license": "Apache-2.0",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declaration": "AISafetyAtlas.Verification.AgentBehavior.no_behavioral_safety_verifier",
+          "module": "AISafetyAtlas/Verification/AgentBehavior.lean",
+          "build_command": "lake build AISafetyAtlas.Verification.AgentBehavior",
+          "statement_map": "docs/guide/related-literature.md"
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Verification.AgentBehavior.no_behavioral_safety_verifier",
+            "type": "REFERENCE",
+            "source_declarations": [
+              "AISafetyAtlas.Verification.AgentBehavior.no_behavioral_safety_verifier"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "LAND-DEBATE-001",
+      "name": "Doubly-efficient debate correctness (Brown-Cohen–Irving–Piliouras 2023)",
+      "tags": [
+        "oversight",
+        "computational-complexity"
+      ],
+      "notes": "CT-7 (2026-07-20): machine-checked correctness of the stochastic-oracle debate protocol, arXiv 2311.14125. Path-A reproduction — built at upstream toolchain (Lean/Mathlib v4.8.0), NOT vendored into the atlas 4.31 tree, no atlas Lean import surface. Upstream caveats carried: correctness only (space complexity not formalized); time counts oracle queries only; Lipschitz oracle machine defined as a stronger variant. No AI-system reading without a separate reviewed bridge. Evidence: docs/provenance/debate-reproduction.md. Possibility / scalable-oversight guarantee, not a Table-1 impossibility row — a live landscape anchor dual to the impossibility rows. No survey coverage.",
+      "original_source_refs": [],
+      "related_result_ids": [],
+      "root_import": false,
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "repository": "https://github.com/google-deepmind/debate",
+          "version": "de3a6e500ae1a65dfeea2f91ef519ebad9704be0 (main, no release tag; last commit 2024-10-08)",
+          "license": "Apache-2.0",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declaration": "completeness, soundness, correctness (paper Theorem 6.2)",
+          "module": "Debate/Correct.lean",
+          "build_command": "scripts/reproduce_debate.sh"
+        }
+      ],
+      "lean_artifact": null
+    },
+    {
+      "id": "LAND-HYPER-001",
+      "name": "Trace-property and hyperproperty classes (Alpern–Schneider decomposition; Clarkson–Schneider hierarchy)",
+      "tags": [
+        "compositionality",
+        "verification"
+      ],
+      "notes": "Artifact for Abate, Blanco, Garg, Hritcu, Patrignani and Thibault, 'Journey Beyond Full Abstraction' (CSF 2019, arXiv:1807.04603). Mechanizes the Alpern-Schneider safety/liveness decomposition (safety = closed, liveness = dense, every trace property = safety intersect liveness) and the Clarkson-Schneider class hierarchy including subset-closed hyperproperties, hypersafety, 2-hypersafety, hyperliveness and relational hyperproperties. Found by manual GitHub search on 2026-07-28; it lies outside all six pinned corpora. Exact revision c68187c was tested unmodified. Coq 8.9.1, one of the README's claimed supported versions, and Coq 8.20 both compile Topology.v, TopologyTrace.v, Properties.v and most of the tree, then fail because `Stdlib.List` has no physical load-path binding. Therefore the repository-wide reproduction is FAILED, not reproduced; the principal declarations did kernel-compile before the unrelated late failure. Axiom caveat: Topology.v line 11 declares nonstandard `Axiom prop_ext : prop_extensionality`, used by decomposition_theorem. General arbitrary-k safety and the Clarkson-Schneider self-composition reduction are absent from this upstream tree; the independent axiom-audited Lean increment is LAND-HYPER-002. No Table-1 BY ID concerns hyperproperties; recorded as landscape evidence only.",
+      "original_source_refs": [],
+      "related_result_ids": [],
+      "root_import": false,
+      "formalizations": [
+        {
+          "framework": "Rocq/Coq",
+          "repository": "https://github.com/secure-compilation/exploring-robust-property-preservation",
+          "version": "c68187cbaba763d88cbb3509df4ca9cf49cc6338",
+          "license": "Apache-2.0",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declaration": "decomposition_theorem (Topology.v); safety_closed, liveness_dense, decomposition_safety_dense (TopologyTrace.v); Safety, Liveness, hprop, SSC, HSafe, H2Safe, HLiv (Properties.v)",
+          "module": "Topology.v, TopologyTrace.v, Properties.v",
+          "build_command": "Exact build attempted 2026-07-28 with coqorg/coq:8.9.1@sha256:8e26609c5450aa795af6917cf169a65ab3952ba666d1b0c90e6b0179314a1149 and coqorg/coq:8.20@sha256:e50d77c4c5a9aa0d76ae1b343d79c5f922da3a75054b79c5dc635895438e4674: both fail at InternalNondet.v line 8 (`From Stdlib Require Import List`) after compiling the principal topology/property files."
+        }
+      ],
+      "lean_artifact": null
+    },
+    {
+      "id": "LAND-HYPER-002",
+      "name": "k-safety self-composition and hyperproperty decomposition",
+      "tags": [
+        "compositionality",
+        "verification"
+      ],
+      "notes": "Clarkson-Schneider Theorem 2 in both presentations. The batch form uses unordered sets of at most k complete traces. The synchronized-product form k_safety_iff_product_self_composition uses the source ordered Fin k tuples, with the translation and its boundaries made explicit: toBatch is total and coalesces duplicates and order (card_toBatch_le, toBatch_perm), padding recovers a nonempty batch exactly (toBatch_padBatch), and for k greater than zero the empty batch has no product preimage at all, which productSelfComposition_empty and finiteSelfComposition_empty record. The transfer is therefore stated for the induced safety predicate rather than an arbitrary predicate, since selfCompositionSafe_empty_of_any shows the empty batch is subsumed by every other one while an arbitrary predicate could distinguish it; the product form additionally carries a nonempty-system hypothesis. The reduction proves both satisfaction equivalence and that the induced batch predicate has finite bad observations. The operational reading of the decomposition is now earned rather than asserted. PrefixTopology defines the observation topology as a function of the observation relation prefixOf, deliberately not as a global TopologicalSpace instance, since a global instance cannot mention prefixOf and would forget the observation semantics; it is installed locally with letI. Against that topology, isClosed_iff_hyperSafety and dense_iff_hyperLiveness prove that closed and dense mean exactly Clarkson-Schneider hypersafety and hyperliveness, stated independently of any topology, and hyperSafety_of_isKSafety supplies the inclusion joining the k-safety reduction to the decomposition. The generic arbitrary-topology decomposition is retained in the parent module and is no longer the operational claim. Independent Lean proof; it does not import the Rocq artifact or its prop_ext axiom. Non-Table-1 hyperproperty infrastructure; no survey headline coverage.",
+      "original_source_refs": [],
+      "related_result_ids": [],
+      "root_import": true,
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE",
+          "license": "Apache-2.0",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declaration": "k_safety_iff_finite_self_composition; k_safety_iff_product_self_composition; self_composition_is_safety; isClosed_iff_hyperSafety; dense_iff_hyperLiveness; hyperSafety_of_isKSafety; hyperSafety_hyperLiveness_decomposition",
+          "module": "AISafetyAtlas.Compositional.Hyperproperties",
+          "build_command": "lake build AISafetyAtlas.Compositional.Hyperproperties AISafetyAtlas.Compositional.Hyperproperties.PrefixTopology AISafetyAtlas.Compositional.Hyperproperties.Product"
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Compositional.Hyperproperties.k_safety_iff_finite_self_composition",
+            "type": "REFERENCE",
+            "source_declarations": [
+              "k_safety_iff_finite_self_composition; k_safety_iff_product_self_composition; self_composition_is_safety; isClosed_iff_hyperSafety; dense_iff_hyperLiveness; hyperSafety_of_isKSafety; hyperSafety_hyperLiveness_decomposition"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "LAND-ANGLUIN-001",
+      "name": "Port-labelled anonymous networks, views, and automorphisms",
+      "tags": [
+        "compositionality",
+        "multi-agent"
+      ],
+      "notes": "Builds the network beneath AISafetyAtlas.Compositional.Symmetry, whose Protocol structure takes observational indistinguishability as a field. Here it is derived. runFor_eq_of_view_eq is the Angluin lemma: nodes whose views agree to depth n, meaning every port sequence of length at most n reaches equally-labelled nodes, are in the same state after n synchronous rounds, so an anonymous algorithm cannot see past the depth its messages have travelled. Automorphisms give the second route: invariant_of_automorphism shows a port-preserving permutation leaving the configuration invariant keeps it invariant through every round, and no_unique_leader_of_fixedPointFree concludes that a fixed-point-free automorphism rules out electing a unique leader, since the leader would have to be a fixed point. invariant_of_constant places the earlier constant-configuration symmetry inside this model. Deterministic and synchronous only, so Itai-Rodeh randomized symmetry breaking is out of scope. Message routing is simplified: the message received on port i is what the port-i neighbour sends on index i, rather than being routed back through the neighbour own port, which would need a port involution. The general covering and quotient machinery relating a network to its universal cover is not formalized. Upstream dependency for the survey-original BY-043. Not coverage of it; no status follows from this entry.",
+      "original_source_refs": [],
+      "related_result_ids": [
+        "BY-043"
+      ],
+      "root_import": true,
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE",
+          "license": "Apache-2.0",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declaration": "runFor_eq_of_view_eq; invariant_of_automorphism; no_unique_leader_of_fixedPointFree; invariant_of_constant",
+          "module": "AISafetyAtlas.Compositional.Networks",
+          "build_command": "lake build AISafetyAtlas.Compositional.Networks AISafetyAtlas.Examples.SixTargets"
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Compositional.Networks.runFor_eq_of_view_eq",
+            "type": "REFERENCE",
+            "source_declarations": [
+              "runFor_eq_of_view_eq; invariant_of_automorphism; no_unique_leader_of_fixedPointFree; invariant_of_constant"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "LAND-RECT-001",
+      "name": "Rectangle, exchange, and unary-contract equivalences",
+      "tags": [
+        "compositionality"
+      ],
+      "notes": "Mechanizes the communication-complexity mix-and-match characterization for binary relations and two indexed full-product characterizations. Sources: Kushilevitz-Nisan (1997) rectangle folklore and Fagin (1977) lossless-join/MVD special case. coordinate_product_iff_spliceClosed is the substantive indexed result: over a finite index and a nonempty predicate, being the full product of unary contracts is equivalent to closure under updating one accepted point at a single coordinate, proved by splicing coordinates one at a time along a Finset.piecewise induction. coordinate_product_iff_recombination_closed is retained only as a helper and is explicitly demoted in the module docstring, since one inclusion of the product equality always holds and the statement therefore reduces to unfolding Set.pi. Necessity of finiteness is machine-checked rather than asserted: spliceClosed_finitelySupported and not_isCoordinateProduct_finitelySupported show the finite-support Boolean sequences over the naturals are splice closed with full unary projections yet omit the constantly-true sequence. Applies to single trace/state predicates, not hyperproperties. Compositional trace/state mathematics, not a Table-1 impossibility result.",
+      "original_source_refs": [],
+      "related_result_ids": [],
+      "root_import": true,
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE",
+          "license": "Apache-2.0",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declaration": "rectangle_iff_exchange_closed; coordinate_product_iff_spliceClosed; not_isCoordinateProduct_finitelySupported; coordinate_product_iff_recombination_closed",
+          "module": "AISafetyAtlas.Compositional.Rectangularity",
+          "build_command": "lake build AISafetyAtlas.Compositional.Rectangularity"
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Compositional.rectangle_iff_exchange_closed",
+            "type": "REFERENCE",
+            "source_declarations": [
+              "rectangle_iff_exchange_closed; coordinate_product_iff_spliceClosed; not_isCoordinateProduct_finitelySupported; coordinate_product_iff_recombination_closed"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "LAND-WIRE-OBJ-001",
+      "name": "Ring-Orseau objective factorization",
+      "tags": [
+        "agent-incentives"
+      ],
+      "notes": "The Ring and Orseau (AGI 2011) agent equations and their finite-horizon consequences. AgentEquations writes down the source displayed equations (1) to (3): value is the depth-truncated form of the mutually recursive v_t(h) and v_t(ha), bestAction and bestAction_max are the argmax of equation (1), and actionValue is equation (2). Equations (2) and (3) have no base case in the source, so the truncation is explicit rather than implicit: value_eq_zero_of_horizon_vanishes and truncation_exact show that once the horizon weighting vanishes past the window, deepening the recursion changes nothing, which is the condition under which the finite form is the source value rather than an approximation. AgentEquations.value_eq_of_agree_on_window is the factorization with content, since its proof unfolds the recursion: with the prior fixed, the depth-n value depends only on the utility and horizon inside the reachable window. The Objective module keeps the same shape at one further remove, with its own locality, homogeneity and rescaling results, and separately. The headline results unfold the horizon sum: value_eq_of_agree_on_window is the truncation statement that value on a window depends only on the weights and utilities inside it, so two objectives may diverge arbitrarily outside and still agree on it; value_scaleUtility is homogeneity in utility; optimal_decisions_eq_of_pos_scaleUtility carries that through to optimal-decision sets under strictly positive rescaling. Separately, value_congr and optimal_decisions_congr are record congruence only: their proofs conclude equality of the two objectives from componentwise equality and never unfold value, so they are well-definedness lemmas and not results about objectives. An earlier revision exposed only those two under the name objective_factorization, which overstated their content; they are renamed and demoted here. The paper frames its results as statements and arguments and supplies no numbered objective-factorization theorem, so nothing here reproduces a numbered source result. Lean utilities are unrestricted real values rather than source-bounded [0,1] values. This entry does not formalize AIXI, Solomonoff induction, delusion-box learning thresholds or asymptotic convergence. Supporting wireheading mathematics, not itself a Table-1 row.",
+      "original_source_refs": [],
+      "related_result_ids": [],
+      "root_import": true,
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE",
+          "license": "Apache-2.0",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declaration": "AgentEquations.value_eq_of_agree_on_window; AgentEquations.truncation_exact; AgentEquations.bestAction_max; Objective.value_eq_of_agree_on_window; Objective.value_scaleUtility; Objective.optimal_decisions_eq_of_pos_scaleUtility; Objective.value_congr; Objective.optimal_decisions_congr",
+          "module": "AISafetyAtlas.Wireheading.Objective",
+          "build_command": "lake build AISafetyAtlas.Wireheading.Objective AISafetyAtlas.Wireheading.AgentEquations"
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Wireheading.AgentEquations.value_eq_of_agree_on_window",
+            "type": "REFERENCE",
+            "source_declarations": [
+              "AgentEquations.value_eq_of_agree_on_window; AgentEquations.truncation_exact; AgentEquations.bestAction_max; Objective.value_eq_of_agree_on_window; Objective.value_scaleUtility; Objective.optimal_decisions_eq_of_pos_scaleUtility; Objective.value_congr; Objective.optimal_decisions_congr"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "LAND-GOAL-001",
+      "name": "Finite-percept on-policy goal-preservation induction step",
+      "tags": [
+        "agent-incentives"
+      ],
+      "notes": "Everitt-Filan-Daswani-Hutter (2016), Theorem 16, at two abstraction levels. GoalPreservationSource is the headline finite-percept one-step argument: it drops the atlas's earlier naming-surjectivity premise, compares the selected continuation only with the named initial policy, and uses a normalized full-support percept distribution to turn a strict pointwise loss into a strict expected loss. It is not the full or source-strength Theorem 16. initial_dominates and contValue are supplied rather than derived from modification independence and the source's Theorem 20; policy names and policies are not separated by an explicit naming map; expectations are finite discrete sums rather than integrals; and no all-times trajectory theorem is proved. SixTargets.finitePerceptGoalModel witnesses the interface with two percepts, a uniform full-support distribution, and a genuinely dominated continuation. The older deterministic GoalPreservation model is retained as a stronger-assumption specialization: next_policy_optimal is its load-bearing statement, run_optimal lifts it along the reached path, and goal_preservation is a corollary. Its names_surjective premise forces an infinite policy-name type with at least two world actions; SixTargets.twoActionGoalModel witnesses satisfiability. RELATED only; no off-policy preservation or AI-system bridge is claimed. Supporting self-modification theorem; no direct Table-1 coverage.",
+      "original_source_refs": [],
+      "related_result_ids": [],
+      "root_import": true,
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE",
+          "license": "Apache-2.0",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declaration": "GoalPreservationSource.Model.selected_matches_initial; GoalPreservationSource.Model.safe_modification; GoalPreservationSource.Model.qValue_selected_eq_initial; next_policy_optimal; run_optimal; goal_preservation",
+          "module": "AISafetyAtlas.Wireheading.GoalPreservationSource",
+          "build_command": "lake build AISafetyAtlas.Wireheading.GoalPreservation AISafetyAtlas.Wireheading.GoalPreservationSource"
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Wireheading.GoalPreservationSource.Model.selected_matches_initial",
+            "type": "REFERENCE",
+            "source_declarations": [
+              "GoalPreservationSource.Model.selected_matches_initial; GoalPreservationSource.Model.safe_modification; GoalPreservationSource.Model.qValue_selected_eq_initial; next_policy_optimal; run_optimal; goal_preservation"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "LAND-JOINTOBS-001",
+      "name": "Coalition-indexed joint observation and the emitted-interface coverage boundary",
+      "tags": [
+        "oversight",
+        "multi-agent"
+      ],
+      "notes": "When can a hazard be decided from what a coalition of principals is permitted to observe. EvidenceArchitecture separates private evidence from declared emitted views, while CoalitionInput enforces coalition access in the type of a candidate computation. Covers is factorization through one uniform decision rule; covers_iff_no_collision separately characterizes failure by a concrete safe/hazardous collision. decideCoverage is the certified finite decision over an explicit complete ExecutionEnum. Post-processing an unchanged output cannot repair a collision, while genuine refinement preserves coverage. Everything holds under the fixed truthful mechanism M0; no strategic incentive, permissibility, or normative safety claim follows. The four-state Procurement example checks singleton and complete-emitted-interface failures plus one narrow joint success. The bounded synthesis target adds indexed hazard and candidate families, finite portfolios, per-candidate PortfolioCovers, pointwise PortfolioIndistinguishable, and portfolioCovers_implies_hazardEquivalent; the converse is not claimed because individually insufficient outputs are not fused for free. InclusionMinimalCovering and CostOptimalCovering are distinct, with inclusionMinimal_of_costOptimal proving the positive-cost implication. A second three-principal, eight-execution example uses qCD over {C,D}, qDE over {D,E}, and qCDE over {C,D,E}. The narrow portfolio {qCD,qDE} and broad singleton {qCDE} both cover two hazards and are inclusion-minimal; declared coordination-plus-disclosure costs 6 and 7 make only the narrow portfolio cost-optimal. Coverage is reduced once to a decidable membership condition for exhaustive instance proofs. This is checked target semantics, not a synthesizer: nothing generates candidates, searches a mechanism library, validates the cost model, or establishes optimality outside the declared family. Oversight observation-architecture mathematics, not a Table-1 impossibility result.",
+      "original_source_refs": [],
+      "related_result_ids": [],
+      "root_import": true,
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE",
+          "license": "Apache-2.0",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declaration": "covers_iff_no_collision; not_covers_of_collisionWitness; exists_collisionWitness_of_not_covers; decideCoverage; decideCoverage_covered_iff; CoverageResult.covered_eq_true_iff; decidableCovers; postprocess_cannot_repair_collision; covers_of_refines; observe_truthful; PortfolioCovers; PortfolioIndistinguishable; portfolioCovers_implies_hazardEquivalent; InclusionMinimalCovering; PortfolioCost; CostOptimalCovering; inclusionMinimal_of_costOptimal",
+          "module": "AISafetyAtlas.Oversight.JointObservation",
+          "build_command": "lake build AISafetyAtlas.Oversight.JointObservation AISafetyAtlas.Examples.Oversight.JointObservation.Procurement AISafetyAtlas.Examples.Oversight.JointObservation.Portfolio"
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Oversight.JointObservation.covers_iff_no_collision",
+            "type": "REFERENCE",
+            "source_declarations": [
+              "covers_iff_no_collision; not_covers_of_collisionWitness; exists_collisionWitness_of_not_covers; decideCoverage; decideCoverage_covered_iff; CoverageResult.covered_eq_true_iff; decidableCovers; postprocess_cannot_repair_collision; covers_of_refines; observe_truthful; PortfolioCovers; PortfolioIndistinguishable; portfolioCovers_implies_hazardEquivalent; InclusionMinimalCovering; PortfolioCost; CostOptimalCovering; inclusionMinimal_of_costOptimal"
+            ]
+          }
+        ]
+      }
     }
   ]
 }

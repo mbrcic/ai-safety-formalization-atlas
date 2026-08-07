@@ -229,7 +229,7 @@ dual to the impossibility rows.
   Reproduce like Chaitin/Isabelle — build at the upstream toolchain from a
   separate checkout via a new `scripts/reproduce_debate.sh`.
 - **Acceptance:** clean build at the pinned revision under its own toolchain;
-  strict-trust scan of the reproduced tree; a `landscape.yaml` record
+  strict-trust scan of the reproduced tree; a `registry.yaml` record
   (`LAND-DEBATE-001` — revision, `Debate/Correct.lean`, the three theorem
   names, Apache-2.0, relationship `RELATED`, reproduction status,
   `survey_coverage: null`); `scripts/reproduce_debate.sh`; regenerated views;
@@ -423,7 +423,7 @@ evidence above as the issue body. Suggested title:
   coverage; BY-001 / BY-020 / BY-021 candidates populated (R6-4).
 - Generated full-registry human view at
   [`sources/brcic-yampolskiy-2023.md`](../status/sources/brcic-yampolskiy-2023.md).
-- `landscape.yaml` + generated landscape index for non–Table-1 formalizations
+- `registry.yaml` + generated landscape index for non–Table-1 formalizations
   (R6-3).
 - Status breakdown of WRAPPER vs BRIDGE (R6-2); STATE generated snapshot (R7-1).
 - Kernel `#print axioms` CI check (R7-2); Upstream LICENSE copies (R7-3).

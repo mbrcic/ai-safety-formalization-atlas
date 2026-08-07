@@ -23,7 +23,6 @@ import sys
 ROOT = Path(__file__).resolve().parents[1]
 TASKS = ROOT / "tasks.yaml"
 REGISTRY = ROOT / "registry.yaml"
-LANDSCAPE = ROOT / "landscape.yaml"
 TASK_ID = re.compile(r"CT-\d+")
 RESULT_REF = re.compile(r"\bBY-\d{3}\b")
 LANDSCAPE_REF = re.compile(r"\bLAND-[A-Z0-9-]+\b")
@@ -41,7 +40,6 @@ def main() -> None:
     try:
         data = json.loads(TASKS.read_text(encoding="utf-8"))
         registry = json.loads(REGISTRY.read_text(encoding="utf-8"))
-        landscape = json.loads(LANDSCAPE.read_text(encoding="utf-8"))
     except (OSError, json.JSONDecodeError) as error:
         fail(str(error))
 
@@ -52,7 +50,7 @@ def main() -> None:
             fail(f"tasks.yaml must carry a non-empty {field}")
 
     result_ids = {result["id"] for result in registry["results"]}
-    landscape_ids = {entry["id"] for entry in landscape["entries"]}
+    landscape_ids = {r["id"] for r in registry["results"] if r["id"].startswith("LAND-")}
 
     tasks = data.get("tasks")
     if not isinstance(tasks, list) or not tasks:

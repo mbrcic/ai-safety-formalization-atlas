@@ -77,7 +77,7 @@ theorem. `WorkbenchConsumers.lean` is the bar; trivial restatements stay out.
   `registry.yaml` as `RELATED`, with a **written scope delta** (what matches,
   what does not). An entry without that delta is not mergeable.
 - **Adjacent or independent formal capital** (no load-bearing survey attachment)
-  → `landscape.yaml`
+  → `registry.yaml`
 - **Internal helper with a named in-tree consumer** → Lean only (no forced
   registry row)
 - **Found but not reproduced** → `candidate_formalizations`
@@ -158,7 +158,7 @@ coverage. Promote it to a `formalizations` record only after reproduction and
 statement-level classification.
 
 Formalizations that are **not** Table-1 survey coverage (adjacent landscape)
-belong in [`landscape.yaml`](landscape.yaml), not in `registry.yaml` coverage
+belong in `registry.yaml`, not in `registry.yaml` coverage
 counts. Public Lean landscape theorems on the root import must set
 `root_import: true` and keep `survey_coverage: null`. Regenerate views with
 `python3 scripts/generate_registry_views.py` (includes the landscape index and

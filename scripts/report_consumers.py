@@ -55,7 +55,6 @@ from validate_current_state import (  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[1]
 REGISTRY = ROOT / "registry.yaml"
-LANDSCAPE = ROOT / "landscape.yaml"
 LEAN_DIR = ROOT / "AISafetyAtlas"
 EXAMPLES_PREFIX = "AISafetyAtlas.Examples"
 
@@ -63,7 +62,6 @@ EXAMPLES_PREFIX = "AISafetyAtlas.Examples"
 def load_declarations() -> dict[str, str]:
     """Every atlas declaration in either ledger, mapped to its origin ID."""
     registry = json.loads(REGISTRY.read_text(encoding="utf-8"))
-    landscape = json.loads(LANDSCAPE.read_text(encoding="utf-8"))
     declarations: dict[str, str] = {}
     for result in registry["results"]:
         artifact = result["lean_artifact"]
@@ -71,10 +69,6 @@ def load_declarations() -> dict[str, str]:
             continue
         for declaration in artifact["declarations"]:
             declarations[declaration["atlas_declaration"]] = result["id"]
-    for entry in landscape["entries"]:
-        name = entry.get("atlas_declaration")
-        if name:
-            declarations.setdefault(name, entry["id"])
     return declarations
 
 

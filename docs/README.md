@@ -15,7 +15,7 @@ reviews, and release evidence are not mixed in one flat directory.
 Root project files still used for navigation: [`README.md`](../README.md),
 [`STATE.md`](../STATE.md), [`ROADMAP.md`](../ROADMAP.md),
 [`CONTRIBUTING.md`](../CONTRIBUTING.md), [`registry.yaml`](../registry.yaml),
-[`landscape.yaml`](../landscape.yaml).
+`registry.yaml`.
 
 ## Agent (token-cheap navigation)
 

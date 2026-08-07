@@ -26,7 +26,6 @@ import tempfile
 ROOT = Path(__file__).resolve().parents[1]
 DATA = [
     "registry.yaml",
-    "landscape.yaml",
     "conjectures.yaml",
     "tasks.yaml",
     "docs/provenance/formalization-search.json",
@@ -34,7 +33,6 @@ DATA = [
 EXTRA = ["AISafetyAtlas.lean"]
 SCRIPTS = [
     "validate_registry.py",
-    "validate_landscape.py",
     "validate_conjectures.py",
     "validate_tasks.py",
     # validate_conjectures imports it for the Lean import-graph helpers.

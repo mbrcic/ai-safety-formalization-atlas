@@ -8,7 +8,7 @@ anchor dual to the survey's impossibility rows. It never counts toward headline
 `EXACT`/`EQUIVALENT` coverage.
 
 Task: [CT-7](../guide/contributor-tasks.md). Landscape record:
-[`LAND-DEBATE-001`](../../landscape.yaml). Reproduction driver:
+[`LAND-DEBATE-001`](../../registry.yaml). Reproduction driver:
 [`scripts/reproduce_debate.sh`](../../scripts/reproduce_debate.sh).
 
 ## Coordinates

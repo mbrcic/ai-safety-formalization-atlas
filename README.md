@@ -81,8 +81,9 @@ monorepo in-tree. Reusable structure and honest grading over volume.
 <!-- BEGIN GENERATED REGISTRY SCOPE -->
 | Metric | Current |
 |---|---:|
-| Registry Lean declarations | **41** |
-| Landscape formalizations | **17** (8 on root import) |
+| Atlas Lean declarations | **49** |
+| Results stating a source claim | **44** |
+| Results recording a formalization only | **17** (8 on root import) |
 | Reviewed AI-system bridges | **2** |
 | Open conjectures | **0** |
 | Catalogued results with statement-match | **7** |
@@ -140,7 +141,7 @@ See the [`v0.4 release scope`](docs/releases/v0.4.md) and
 - [`CONTRIBUTING.md`](CONTRIBUTING.md) explains how to propose and verify changes.
 - [`ROADMAP.md`](ROADMAP.md) presents the public strategy and contributor entry points.
 - [`STATE.md`](STATE.md) reports the current phase, blockers, and next tasks.
-- [`landscape.yaml`](landscape.yaml) records formalizations and public Lean
+- `registry.yaml` records formalizations and public Lean
   surface the workbench develops or reproduces on its own account.
 - [`conjectures.yaml`](conjectures.yaml) records open questions that have a
   compiling Lean statement and no proof; nothing in it is asserted.
@@ -188,14 +189,14 @@ paper-parity non-claims. Their source maps and residual gaps are recorded in the
 [A1–A3/B1–B3/B7 re-verification](docs/provenance/a1-a3-b1-b3-b7-reverification.md).
 
 **Landscape declarations** — results the workbench develops or reproduces on its
-own account, recorded in [`landscape.yaml`](landscape.yaml) and on the root
+own account, recorded in `registry.yaml` and on the root
 import when marked `root_import: true`:
 
 - `AISafetyAtlas.Explainability.attribution_impossibility` (DASH trilemma;
   not BY-029/BY-042 without a separate statement map)
 
 Reproduced external formalizations that carry no Lean interface are pinned in
-[`landscape.yaml`](landscape.yaml), listed in the
+`registry.yaml`, listed in the
 [landscape index](docs/status/landscape-index.md), and rebuilt with
 `scripts/reproduce_isabelle.sh`:
 

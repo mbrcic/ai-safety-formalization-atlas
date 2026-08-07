@@ -25,7 +25,7 @@ Agent map: [`docs/agent/INDEX.md`](docs/agent/INDEX.md). Human doc map:
 | Path | Why | When to open |
 |---|---|---|
 | Full [`registry.yaml`](registry.yaml) | Redundant with `by-id.json` | One `BY-###` via `rg` for notes / candidates / bridge_review |
-| Full [`landscape.yaml`](landscape.yaml) | Redundant with `by-id.json` | One `LAND-###` detail |
+| Full `registry.yaml` | Redundant with `by-id.json` | One `LAND-###` detail |
 | [`docs/provenance/formalization-search.json`](docs/provenance/formalization-search.json) | Large discovery dump | Regenerating evidence or deep candidate audit |
 | [`ROADMAP.md`](ROADMAP.md) | Human strategy, not live tasking | Maintainer names roadmap work |
 | `AISafetyAtlas/Upstream/**` | Large vendored/collapsed proofs | Editing that formalization only |
@@ -91,7 +91,7 @@ proof. Detail: [`docs/guide/methodology.md`](docs/guide/methodology.md).
   | Ledger | Holds | Note |
   |---|---|---|
   | `registry.yaml` | the Brčić–Yampolskiy survey catalogue | **closed** at `BY-001`…`BY-044`; never add a `BY-045` |
-  | `landscape.yaml` | work the atlas develops, reproduces, or exposes itself | no fixed id space, no denominator; never headline coverage |
+  | `registry.yaml` | work the atlas develops, reproduces, or exposes itself | no fixed id space, no denominator; never headline coverage |
   | `conjectures.yaml` | open questions with a compiling statement and no proof | never a theorem, never counted as one |
   | `tasks.yaml` | the task board | `docs/guide/contributor-tasks.md` is **generated** from it — never edit the Markdown |
   Source-neutrality here is two ledgers, not one neutral ledger. New work goes to
@@ -127,7 +127,7 @@ proof. Detail: [`docs/guide/methodology.md`](docs/guide/methodology.md).
 | `docs/bridges/` | Bridge review packages |
 | `docs/releases/` | Release evidence notes |
 
-After editing **any** ledger — `registry.yaml`, `landscape.yaml`,
+After editing **any** ledger — `registry.yaml`, `registry.yaml`,
 `conjectures.yaml`, `tasks.yaml`, or `docs/provenance/formalization-search.json` —
 run `python3 scripts/generate_registry_views.py` (updates `docs/status/*`,
 `docs/guide/contributor-tasks.md`, `docs/agent/by-id.json`,

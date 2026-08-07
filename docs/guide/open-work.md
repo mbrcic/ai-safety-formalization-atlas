@@ -135,7 +135,7 @@ current registry and public API so assimilation does not re-open completed work.
    debate is **reproduced** (`LAND-DEBATE-001`, CT-7, Path A build at upstream
    v4.8; `scripts/reproduce_debate.sh`). **Attribution impossibility** is
    **in-atlas** as `AISafetyAtlas.Explainability.attribution_impossibility`
-   and listed in [`landscape.yaml`](../../landscape.yaml) (`LAND-ATTR-001`; not
+   and listed in `registry.yaml` (`LAND-ATTR-001`; not
    BY-042/BY-029 coverage).
 4. **Survey-original / pen-and-paper AI claims** (unfairness of explainability,
    misaligned embodiment, limited self-awareness; uncontainability;

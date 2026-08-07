@@ -3,7 +3,7 @@
 
 Sources: [`registry.yaml`](../../registry.yaml),
 [`formalization-search.json`](../provenance/formalization-search.json),
-[`landscape.yaml`](../../landscape.yaml).
+[`registry.yaml`](../../registry.yaml).
 Regenerate: `python3 scripts/generate_registry_views.py`.
 
 Workbench capital vs statement-match grades: see
@@ -74,7 +74,7 @@ All 44 rows have a **baseline classical six-corpus** search
 **scoped** negative/positive evidence for those corpora only — it does not
 search third-party Lean packages (Foundation, KolmogorovMathlib, SocialChoiceLean,
 DASH, …). Manually discovered package leads use `candidate_formalizations` or
-[`landscape.yaml`](../../landscape.yaml). Candidate hits are discovery evidence,
+[`registry.yaml`](../../registry.yaml). Candidate hits are discovery evidence,
 not verified formalizations. Relationship labels are
 `EXACT`, `EQUIVALENT`, `RELATED`, `DEPENDENCY_ONLY`, and `UNCLEAR`.
 An AI-safety interpretation remains `HUMAN_REVIEW` unless it has been

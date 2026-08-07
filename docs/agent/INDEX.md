@@ -46,7 +46,7 @@ Open **facade** modules only (`AISafetyAtlas/Learning.lean`,
 
 ## Regenerated artifacts
 
-After editing any ledger — `registry.yaml`, `landscape.yaml`, `conjectures.yaml`,
+After editing any ledger — `registry.yaml`, `registry.yaml`, `conjectures.yaml`,
 `tasks.yaml`, or search evidence:
 
 ```console

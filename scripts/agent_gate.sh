@@ -9,9 +9,6 @@ cd "$ROOT"
 echo "==> validate_registry"
 python3 scripts/validate_registry.py
 
-echo "==> validate_landscape"
-python3 scripts/validate_landscape.py
-
 echo "==> validate_conjectures"
 python3 scripts/validate_conjectures.py
 

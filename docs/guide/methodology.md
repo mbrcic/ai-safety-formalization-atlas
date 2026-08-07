@@ -69,7 +69,7 @@ check it in ten seconds.
 [`registry.yaml`](../../registry.yaml) is structurally the Brčić–Yampolskiy
 catalogue: the validator requires contiguous ids `BY-001`…`BY-044` matching that
 source's `expected_result_count`. It is a closed catalogue of one source, and it
-is not where new work goes. [`landscape.yaml`](../../landscape.yaml) holds
+is not where new work goes. `registry.yaml` holds
 results the workbench develops, reproduces, or exposes on its own account, with
 no source-shaped id space and no fixed size;
 [`conjectures.yaml`](../../conjectures.yaml) holds open questions.
@@ -102,12 +102,12 @@ revision, the declaration itself, the license, and, where practical, a local
 build.
 
 Relevant formalizations outside the survey inventory are recorded in
-[`landscape.yaml`](../../landscape.yaml) (machine-readable) and narrated in the
+`registry.yaml` (machine-readable) and narrated in the
 external-evidence documentation. The generated
 [landscape index](../status/landscape-index.md) lists them. Landscape entries do **not**
 enter survey-coverage counts. A landscape result may appear on the public Lean
 root import (for example attribution impossibility) only when it is listed in
-`landscape.yaml` with `root_import: true`. Promoting a landscape item into
+`registry.yaml` with `root_import: true`. Promoting a landscape item into
 `registry.yaml` as survey coverage still requires the normal admission checks.
 
 ## Formal-library discovery evidence
@@ -149,7 +149,7 @@ standard library. This is a **baseline classical corpus pass**, not a complete
 search of all formalizations: third-party Lean packages (for example
 FormalizedFormalLogic/Foundation, KolmogorovMathlib, SocialChoiceLean, DASH)
 are outside those trees and must be recorded via `candidate_formalizations` or
-`landscape.yaml` when discovered manually. The query terms, corpus versions,
+`registry.yaml` when discovered manually. The query terms, corpus versions,
 per-query file counts, and representative candidate paths are retained in
 [`formalization-search.json`](../provenance/formalization-search.json).
 

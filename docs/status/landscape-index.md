@@ -2,7 +2,7 @@
 # Landscape Index
 
 First-class atlas formalizations and public Lean surface recorded in
-[`landscape.yaml`](../../landscape.yaml) — results the workbench develops,
+[`registry.yaml`](../../registry.yaml) — results the workbench develops,
 reproduces, or exposes on its own account. Statement-match grades are
 reported per catalogued source and are not affected by entries here.
 Narrative provenance remains in [`external-formalizations.md`](../provenance/external-formalizations.md).
