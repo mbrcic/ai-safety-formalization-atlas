@@ -1,15 +1,22 @@
 #!/usr/bin/env python3
-"""Kernel-level axiom check for every public theorem declared in facade modules.
+"""Kernel-level axiom check for the public theorem surface of the facade closure.
 
 Runs `lake env lean` on a generated `#print axioms` harness and asserts each
 named declaration depends only on the standard classical Lean axioms
 `propext`, `Classical.choice`, and `Quot.sound`. This upgrades the textual
-strict-trust grep to a kernel check for the complete theorem surface declared
-by modules reachable through public `AISafetyAtlas.*` facade imports.
+strict-trust grep to a kernel check.
+
+Scope, stated exactly, because an earlier version claimed more than it did:
+every `public theorem` and `public lemma` declared inside a namespace in a
+module reachable through public `AISafetyAtlas.*` facade imports. Declarations
+introduced any other way are outside it — so `check_ledger_coverage` asserts
+that every declaration the registry publishes falls inside, rather than leaving
+that to the coincidence that published results happen to use these keywords.
 """
 
 from __future__ import annotations
 
+import json
 import re
 import subprocess
 import sys
@@ -23,8 +30,12 @@ ALLOWED = frozenset({"propext", "Classical.choice", "Quot.sound"})
 PUBLIC_IMPORT_RE = re.compile(r"^public import ([A-Za-z0-9_'.]+)\s*$")
 NAMESPACE_RE = re.compile(r"^\s*namespace\s+([A-Za-z0-9_'.]+)\s*$")
 END_RE = re.compile(r"^\s*end\s+([A-Za-z0-9_'.]+)\s*$")
+# `lemma` is `theorem` under a different keyword: same kernel status, same
+# public surface, same obligation. Matching only `theorem` audited 208 of the
+# 325 public declarations in the facade closure and called that "the complete
+# theorem surface".
 PUBLIC_THEOREM_RE = re.compile(
-    r"^\s*public\s+theorem\s+([A-Za-z0-9_'.]+)\b"
+    r"^\s*public\s+(?:theorem|lemma)\s+([A-Za-z0-9_'.]+)\b"
 )
 
 
@@ -118,6 +129,37 @@ def discover_public_theorems() -> list[str]:
 
 DECLARATIONS = discover_public_theorems()
 
+
+def ledger_declarations() -> list[str]:
+    """Every atlas declaration the registry publishes as a result."""
+    registry = json.loads((ROOT / "registry.yaml").read_text(encoding="utf-8"))
+    return [
+        declaration["atlas_declaration"]
+        for result in registry["results"]
+        if result.get("lean_artifact")
+        for declaration in result["lean_artifact"]["declarations"]
+    ]
+
+
+def check_ledger_coverage() -> None:
+    """Every published declaration must be inside the audited set.
+
+    Until this check existed, that held by coincidence: the audit collects names
+    by scanning for a keyword, and every published result happened to be spelled
+    with the one keyword it scanned for. A result declared any other way would
+    have dropped out of the kernel audit while `Examples/Registry.lean` still
+    `#check`ed it and the gate still reported green.
+    """
+    audited = set(DECLARATIONS)
+    missing = sorted(set(ledger_declarations()) - audited)
+    if missing:
+        print(
+            "check_print_axioms: registry declarations outside the audited "
+            f"surface: {missing}",
+            file=sys.stderr,
+        )
+        raise SystemExit(1)
+
 # Lean 4 formats:
 #   'Name' depends on axioms: [propext, Classical.choice, Quot.sound]
 #   'Name' does not depend on any axioms
@@ -181,6 +223,9 @@ def parse_axioms(blob: str) -> dict[str, set[str]]:
 
 
 def main() -> None:
+    # Cheap and first: no point spending a Lean elaboration to audit a set that
+    # does not contain everything the ledger publishes.
+    check_ledger_coverage()
     with tempfile.TemporaryDirectory(prefix="atlas-axioms-") as tmp:
         harness = Path(tmp) / "PrintAxioms.lean"
         harness.write_text(harness_source(), encoding="utf-8")

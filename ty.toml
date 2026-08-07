@@ -1,0 +1,6 @@
+# The validators import each other by bare module name (`from
+# validate_current_state import ...`), and tests/ imports one script directly.
+# Declaring both roots keeps those resolvable, so the type check reports real
+# problems instead of import noise.
+[environment]
+root = ["scripts", "tests", "."]

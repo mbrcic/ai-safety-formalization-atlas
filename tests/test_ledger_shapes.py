@@ -281,3 +281,20 @@ def test_the_unmutated_copy_still_validates(tree: Path) -> None:
         text=True,
     )
     assert done.returncode == 0, done.stderr + done.stdout
+
+
+def test_every_published_declaration_is_inside_the_axiom_audit() -> None:
+    """The kernel audit must cover what the ledger publishes, by rule.
+
+    This held by coincidence before: the audit finds names by scanning for
+    keywords, and every published result happened to use one it scanned for.
+    Imported directly rather than run as a subprocess — the coverage check is
+    pure, so it needs no Lean toolchain.
+    """
+    sys.path.insert(0, str(ROOT / "scripts"))
+    import check_print_axioms
+
+    audited = set(check_print_axioms.DECLARATIONS)
+    published = set(check_print_axioms.ledger_declarations())
+    assert published, "registry publishes no declarations; the check is vacuous"
+    assert published <= audited, sorted(published - audited)
