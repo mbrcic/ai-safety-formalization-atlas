@@ -27,7 +27,7 @@ file. Prefer the small paths below over loading full inventory dumps.
 python3 -c "import json; d=json.load(open('docs/agent/by-id.json')); print(json.dumps(d['results_by_id']['BY-020'], indent=2))"
 
 # One landscape entry:
-python3 -c "import json; d=json.load(open('docs/agent/by-id.json')); print(json.dumps(d['landscape_by_id']['LAND-NFL-001'], indent=2))"
+python3 -c "import json; d=json.load(open('docs/agent/by-id.json')); print(json.dumps(d['results_by_id']['LAND-NFL-001'], indent=2))"
 
 # Discovery hits for one id (prefer over formalization-search.json):
 python3 -c "import json; d=json.load(open('docs/agent/search-summary.json')); print(json.dumps(d['results']['BY-001'], indent=2))"

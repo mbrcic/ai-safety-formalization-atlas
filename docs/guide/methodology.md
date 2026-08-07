@@ -59,27 +59,26 @@ would need to contain its own hash. Publication audits should establish the
 reachability of the registry's release ref, which then anchors every `IN_TREE`
 record in that tree.
 
-## Two ledgers, and what that means for source-neutrality
+## One ledger, two kinds of row
 
-Source-neutrality here is implemented as **two ledgers, not as one neutral
-ledger**. Saying so plainly matters, because the alternative reading — that the
-canonical registry itself became source-agnostic — is false and a reader can
-check it in ten seconds.
+`registry.yaml` holds every result. A row carrying `informal_claim` is a **claim**
+— something a source asserted — and must supply the claim fields and a bridge
+status. A row without one is an **artifact**: a formalization standing on its own
+account, using the `LAND-` prefix, forbidden from carrying claim fields, and
+required to record at least one formalization, since otherwise it asserts
+nothing.
 
-[`registry.yaml`](../../registry.yaml) is structurally the Brčić–Yampolskiy
-catalogue: the validator requires contiguous ids `BY-001`…`BY-044` matching that
-source's `expected_result_count`. It is a closed catalogue of one source, and it
-is not where new work goes. `registry.yaml` holds
-results the workbench develops, reproduces, or exposes on its own account, with
-no source-shaped id space and no fixed size;
-[`conjectures.yaml`](../../conjectures.yaml) holds open questions.
+There were two files. A landscape entry and a registry `formalizations[]` record
+shared five fields outright and duplicated two more concepts under different
+names, so the split modelled one thing twice. Its justification was that
+landscape must never increase the statement-match count, which stopped being a
+concern when the counts stopped having denominators.
 
-What the de-anchoring changed is therefore **what is counted and how the atlas is
-navigated**, not the shape of the older ledger: headline metrics are absolute
-rather than fractions of 44, sources are split into directories and works with
-neither privileged, and the primary index is
-[by mathematical area](../status/by-area.md) spanning both ledgers. Nobody should
-be adding a `BY-045`; new work belongs in the landscape or the conjecture ledger.
+**Closure belongs to the source, not to the file.** The Brčić–Yampolskiy block
+must stay contiguous `BY-001`…`BY-044` and complete, because that catalogue is
+finished. Everything else is open: artifact rows, and claims from any other
+catalogued source, neither of which inherits the six-corpus sweep — that sweep is
+the `baseline-catalogue` profile of one source.
 
 ## Parsimony and source roles
 
@@ -107,8 +106,8 @@ external-evidence documentation. The generated
 [landscape index](../status/landscape-index.md) lists them. Landscape entries do **not**
 enter survey-coverage counts. A landscape result may appear on the public Lean
 root import (for example attribution impossibility) only when it is listed in
-`registry.yaml` with `root_import: true`. Promoting a landscape item into
-`registry.yaml` as survey coverage still requires the normal admission checks.
+`root_import: true`. Turning an artifact row into a claim row still requires the
+normal admission checks.
 
 ## Formal-library discovery evidence
 

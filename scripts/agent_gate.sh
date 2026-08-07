@@ -18,6 +18,9 @@ python3 scripts/validate_tasks.py
 echo "==> test_validators"
 python3 scripts/test_validators.py
 
+echo "==> test_a1_a3_pattern_a_harness"
+python3 scripts/test_a1_a3_pattern_a_harness.py
+
 echo "==> generate_registry_views --check"
 python3 scripts/generate_registry_views.py --check
 

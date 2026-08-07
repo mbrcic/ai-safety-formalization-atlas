@@ -8,7 +8,7 @@ body:
       value: |
         You know a result, or a proof of one, that the Atlas doesn't record. Tell us where it lives — that's a real contribution on its own. We reproduce or classify it; you don't have to.
 
-        This never claims coverage by itself. A lead becomes coverage only after the proof is reproduced and classified. Please check `registry.yaml`, `landscape.yaml`, and open issues first.
+        This never claims coverage by itself. A lead becomes coverage only after the proof is reproduced and classified. Please check `registry.yaml` and open issues first.
   - type: input
     id: result
     attributes:
@@ -58,7 +58,7 @@ body:
     attributes:
       label: Checks
       options:
-        - label: I searched registry.yaml, landscape.yaml, and open issues; this isn't already recorded.
+        - label: I searched registry.yaml and open issues; this isn't already recorded.
           required: true
         - label: I understand a lead is candidate evidence, not verified coverage, until reproduced and classified.
           required: true

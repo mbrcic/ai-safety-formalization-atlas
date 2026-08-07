@@ -87,15 +87,13 @@ proof. Detail: [`docs/guide/methodology.md`](docs/guide/methodology.md).
 
 - **Headline coverage:** reproduced registry formalizations with `EXACT` or
   `EQUIVALENT` only. `RELATED` does not increase the count.
-- **Which ledger takes your edit:**
-  | Ledger | Holds | Note |
+- **Which record takes your edit:**
+  | Where | Holds | Note |
   |---|---|---|
-  | `registry.yaml` | the Brčić–Yampolskiy survey catalogue | **closed** at `BY-001`…`BY-044`; never add a `BY-045` |
-  | `registry.yaml` | work the atlas develops, reproduces, or exposes itself | no fixed id space, no denominator; never headline coverage |
-  | `conjectures.yaml` | open questions with a compiling statement and no proof | never a theorem, never counted as one |
-  | `tasks.yaml` | the task board | `docs/guide/contributor-tasks.md` is **generated** from it — never edit the Markdown |
-  Source-neutrality here is two ledgers, not one neutral ledger. New work goes to
-  landscape or conjectures, not into the survey catalogue.
+  | `registry.yaml` claim rows | what a source asserted | `BY-001`…`BY-044` is **closed**; never add `BY-045` |
+  | `registry.yaml` artifact rows | formalizations standing on their own | `LAND-` prefix, no `informal_claim`, never headline coverage |
+  | `conjectures.yaml` | open questions, compiling statement, no proof | never a theorem, never counted as one |
+  | `tasks.yaml` | the task board | `docs/guide/contributor-tasks.md` is **generated** — never edit the Markdown |
 - **Sources are `directory` or `work`.** A directory is a curated map (the survey
   itself, `mathforaisafety.org`, AISI, MAIS): never graded against, entry count
   never a metric. A `work` is statement-bearing and is the only thing a

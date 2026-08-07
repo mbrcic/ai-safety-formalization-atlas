@@ -2,7 +2,7 @@
 """Structural checks for pattern-A (A1–A3) harness wiring and triage artifacts.
 
 Drives the real files in-repo (not reimplemented stubs): parses
-`scripts/reproduce_isabelle.sh` and `landscape.yaml` / provenance docs.
+`scripts/reproduce_isabelle.sh` and `registry.yaml` / provenance docs.
 """
 
 from __future__ import annotations
@@ -14,7 +14,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 SCRIPT = ROOT / "scripts" / "reproduce_isabelle.sh"
-LANDSCAPE = ROOT / "landscape.yaml"
+REGISTRY = ROOT / "registry.yaml"
 REGISTRY = ROOT / "registry.yaml"
 
 
@@ -73,25 +73,27 @@ def main() -> None:
             fail("A1 triage must state RELATED/adjacent relationship")
 
     # --- Landscape rows ---
-    landscape = json.loads(LANDSCAPE.read_text(encoding="utf-8"))
-    by_id = {e["id"]: e for e in landscape["entries"]}
+    registry = json.loads(REGISTRY.read_text(encoding="utf-8"))
+    by_id = {r["id"]: r for r in registry["results"]}
     for eid, must_sub in (
         ("LAND-PE-001", "condnorm"),
         ("LAND-DL-001", "deep-learning"),
     ):
         if eid not in by_id:
-            fail(f"landscape missing {eid}")
+            fail(f"registry missing {eid}")
         e = by_id[eid]
-        if e.get("survey_coverage") is not None:
-            fail(f"{eid} survey_coverage must be null")
+        if "informal_claim" in e:
+            fail(f"{eid} must be an artifact row, not a claim")
         if e.get("root_import"):
             fail(f"{eid} must not be root_import Lean facade")
-        repro = e.get("reproduction") or ""
+        repro = " ".join(
+            f.get("build_command") or "" for f in e.get("formalizations") or []
+        )
         if must_sub not in repro:
             fail(f"{eid} reproduction must mention {must_sub}")
 
     pe = by_id["LAND-PE-001"]
-    if "BY-008" not in (pe.get("related_survey_ids") or []):
+    if "BY-008" not in (pe.get("related_result_ids") or []):
         fail("LAND-PE-001 must relate BY-008")
     note = (pe.get("notes") or "") + (pe.get("survey_coverage_note") or "")
     if "Arrhenius" not in note and "not EXACT" not in note and "Not EXACT" not in note:
@@ -99,7 +101,7 @@ def main() -> None:
             fail("LAND-PE-001 must deny EXACT Arrhenius coverage in notes")
 
     dl = by_id["LAND-DL-001"]
-    if "BY-035" not in (dl.get("related_survey_ids") or []):
+    if "BY-035" not in (dl.get("related_result_ids") or []):
         fail("LAND-DL-001 must relate BY-035")
 
     # --- BY-001 registry: no pending candidates ---

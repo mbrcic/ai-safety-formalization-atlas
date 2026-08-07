@@ -77,7 +77,7 @@ theorem. `WorkbenchConsumers.lean` is the bar; trivial restatements stay out.
   `registry.yaml` as `RELATED`, with a **written scope delta** (what matches,
   what does not). An entry without that delta is not mergeable.
 - **Adjacent or independent formal capital** (no load-bearing survey attachment)
-  → `registry.yaml`
+  → an artifact row in `registry.yaml` (`LAND-` prefix, no `informal_claim`)
 - **Internal helper with a named in-tree consumer** → Lean only (no forced
   registry row)
 - **Found but not reproduced** → `candidate_formalizations`
@@ -157,10 +157,10 @@ records repository, revision, framework, license, declaration,
 coverage. Promote it to a `formalizations` record only after reproduction and
 statement-level classification.
 
-Formalizations that are **not** Table-1 survey coverage (adjacent landscape)
-belong in `registry.yaml`, not in `registry.yaml` coverage
-counts. Public Lean landscape theorems on the root import must set
-`root_import: true` and keep `survey_coverage: null`. Regenerate views with
+Formalizations with no source claim behind them are artifact rows in
+`registry.yaml`: they carry no `informal_claim`, use the `LAND-` prefix, and
+never enter statement-match counts. Ones on the public root import set
+`root_import: true`. Regenerate views with
 `python3 scripts/generate_registry_views.py` (includes the landscape index and
 the `STATE.md` registry snapshot).
 

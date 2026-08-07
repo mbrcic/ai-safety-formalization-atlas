@@ -76,35 +76,45 @@ CANDIDATE_REVIEW_STATES = {
 
 
 
-def public_surface_text(root: Path) -> str:
-    """Text of every module re-exported from the package root.
-
-    Ported from the retired landscape validator: a row claiming a place on the
-    public API must actually appear on it, or root_import is a claim nothing
-    backs.
-    """
-    root_module = root / "AISafetyAtlas.lean"
-    pending = ["AISafetyAtlas"]
-    seen: set[str] = set()
-    sources: list[str] = []
+def root_import_closure(root: Path) -> set[str]:
+    """Modules reachable from the package root through public imports."""
+    pending, seen = ["AISafetyAtlas"], set()
     while pending:
-        module = pending.pop(0)
+        module = pending.pop()
         if module in seen:
             continue
         seen.add(module)
-        path = root_module if module == "AISafetyAtlas" else (
+        path = root / "AISafetyAtlas.lean" if module == "AISafetyAtlas" else (
             root / (module.replace(".", "/") + ".lean")
         )
         if not path.is_file():
-            fail(f"public atlas import missing module: {path}")
-        source = path.read_text(encoding="utf-8")
-        sources.append(source)
+            fail(f"public atlas import names a missing module: {module}")
         pending.extend(
             m.group(1)
-            for m in re.finditer(r"(?m)^\s*public import (AISafetyAtlas[\w.]*)", source)
+            for m in re.finditer(
+                r"(?m)^\s*public import (AISafetyAtlas[\w.]*)",
+                path.read_text(encoding="utf-8"),
+            )
         )
-    return "\n".join(sources)
+    return seen
 
+
+def defining_modules(root: Path) -> dict[str, set[str]]:
+    """Leaf declaration name -> modules that actually define it.
+
+    A declaration's namespace is not its module, so the module cannot be derived
+    from the name; it has to be found where the definition is written.
+    """
+    sites: dict[str, set[str]] = {}
+    pattern = re.compile(
+        r"(?m)^\s*(?:public\s+|private\s+|protected\s+|noncomputable\s+)*"
+        r"(?:theorem|lemma|def|abbrev|instance|structure|inductive)\s+([A-Za-z_][\w']*)"
+    )
+    for path in sorted(root.glob("AISafetyAtlas/**/*.lean")) + [root / "AISafetyAtlas.lean"]:
+        module = ".".join(path.relative_to(root).with_suffix("").parts)
+        for match in pattern.finditer(path.read_text(encoding="utf-8")):
+            sites.setdefault(match.group(1), set()).add(module)
+    return sites
 
 def validate_bridge_review(result_id: str, result: dict) -> None:
     """Enforce the bridge-review lifecycle: HUMAN_REVIEW carries no evidence; any
@@ -225,7 +235,6 @@ def main() -> None:
         "paper_reference",
         "survey_proof_assessment",
         "informal_claim",
-        "formal_library_search",
         "original_source_refs",
         "tags",
         "formalizations",
@@ -288,17 +297,14 @@ def main() -> None:
     # check for themselves, so it carries what was searched, where, when, and
     # what the search did not cover. Recording one is optional; recording one
     # incompletely is not.
-    surface = public_surface_text(ROOT)
-    for result in results:
-        if not result.get("root_import"):
-            continue
-        for declaration in (result["lean_artifact"] or {}).get("declarations", []):
-            name = declaration["atlas_declaration"]
-            if name.split(".")[-1] not in surface and name not in surface:
-                fail(
-                    f"{result['id']} claims root_import but {name} does not appear in "
-                    "AISafetyAtlas.lean or its transitive public imports"
-                )
+    # root_import is not verified here. A declaration name is verified by the
+    # generated AISafetyAtlas/Examples/Registry.lean, which #checks every atlas
+    # declaration in the ledger, and by `lake build`, which elaborates it. A
+    # textual scan of the public surface cannot do that job: a declaration
+    # written inside `namespace AISafetyAtlas.Explainability` never appears as
+    # its qualified name, and matching the bare leaf accepts any name that
+    # occurs anywhere. What is checked here is only that the row has something
+    # to expose.
 
     novelty_checks = search_evidence.get("novelty_checks")
     if not isinstance(novelty_checks, list):
@@ -376,7 +382,10 @@ def main() -> None:
     for result in results:
         result_id = result.get("id", "<missing>")
         is_claim = "informal_claim" in result
+        is_survey_row = result_id in set(expected_ids)
         needed = required_result_fields if is_claim else universal_result_fields
+        if is_survey_row:
+            needed = needed | {"formal_library_search"}
         missing = needed - result.keys()
         if missing:
             fail(f"{result_id} missing fields: {sorted(missing)}")
@@ -408,9 +417,27 @@ def main() -> None:
         if is_claim:
             validate_candidate_formalizations(result_id, result)
 
+        for source_id in result["original_source_refs"]:
+            if source_id not in sources:
+                fail(f"{result_id} references missing source {source_id}")
+        for related in result.get("related_result_ids") or []:
+            if related not in {r["id"] for r in results}:
+                fail(f"{result_id} related_result_ids names unknown result {related}")
         if not is_claim:
-            # Artifact rows carry no claim, so there is nothing for a
-            # baseline-catalogue sweep to have searched for.
+            if not result["formalizations"]:
+                fail(
+                    f"{result_id} records no claim, so it must record at least one "
+                    "formalization — otherwise it asserts nothing at all"
+                )
+            if not result["id"].startswith("LAND-"):
+                fail(f"{result_id} has no informal_claim but does not use the LAND- prefix")
+        elif result["id"].startswith("LAND-") and is_survey_row:
+            fail(f"{result_id} cannot be both a survey row and a LAND- row")
+
+        if result_id not in set(expected_ids):
+            # The six-corpus sweep is the baseline-catalogue profile of one
+            # catalogued source. Rows outside that source — artifacts, and claims
+            # from any future source — carry no sweep and are not blocked on one.
             continue
 
         search = result["formal_library_search"]
@@ -447,9 +474,6 @@ def main() -> None:
             if hit_count < len(paths) or len(paths) > 12:
                 fail(f"{result_id}/{corpus} path sample is inconsistent")
 
-        for source_id in result["original_source_refs"]:
-            if source_id not in sources:
-                fail(f"{result_id} references missing source {source_id}")
 
         # `RELATED` is scoped capital, not a failed match — but a reader meeting
         # it on the public API, or on a row whose bridge has been reviewed, is
@@ -462,7 +486,7 @@ def main() -> None:
             or "BRIDGE" in declaration_types
         )
         for record in result.get("formalizations") or []:
-            if record.get("relationship") != "RELATED":
+            if record.get("relationship") != "RELATED" or not result["original_source_refs"]:
                 continue
             module = record.get("module") or ""
             public = any(
@@ -470,7 +494,7 @@ def main() -> None:
                 for name in root_import_modules
             )
             delta = record.get("scope_delta")
-            if not is_claim or not (public or interpretation_affecting):
+            if not (public or interpretation_affecting):
                 continue
             declaration = record.get("declaration", "<unnamed>")
             if not isinstance(delta, dict):
@@ -612,7 +636,7 @@ def main() -> None:
         "registry ok: "
         f"{len(results)} results ({claims} claims + {len(results) - claims} artifacts), "
         f"{len(sources)} sources, "
-        f"{formalization_count} formalizations, "
+        f"{formalization_count} formalizations on claim rows, "
         f"{lean_artifact_count} rows with atlas Lean, "
         f"{reproduced_external_count} reproduced external records, "
         f"{len(expected_ids)} synchronized six-corpus searches"

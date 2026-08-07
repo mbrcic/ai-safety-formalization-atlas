@@ -3037,7 +3037,6 @@
           "repository": "https://github.com/DrakeCaraker/dash-impossibility-lean",
           "version": "7ec3ef9813a7642fdabe5b73c71d1bed4d5488e2",
           "license": "Apache-2.0",
-          "relationship": "RELATED",
           "reproduced": true,
           "module": "AISafetyAtlas/Explainability.lean",
           "upstream_module": "AISafetyAtlas/Upstream/Attribution/Trilemma.lean",
@@ -3048,10 +3047,8 @@
         "declarations": [
           {
             "atlas_declaration": "AISafetyAtlas.Explainability.attribution_impossibility",
-            "type": "REFERENCE",
-            "source_declarations": [
-              "AISafetyAtlas.Explainability.attribution_impossibility"
-            ]
+            "type": "NEW_PROOF",
+            "source_declarations": []
           }
         ]
       }
@@ -3074,7 +3071,6 @@
           "repository": "https://www.isa-afp.org/entries/ArrowImpossibilityGS.html",
           "version": "AFP release 2026-02-06; archive SHA-256 8174c738b42203100170ff25f3c9fc2c6d16d8556fbaff205c0eaa98a3813da7",
           "license": "BSD-3-Clause",
-          "relationship": "RELATED",
           "reproduced": true,
           "declaration": "Gibbard_Satterthwaite",
           "module": "Thys/GS.thy",
@@ -3101,7 +3097,6 @@
           "repository": "https://github.com/DominikPeters/SocialChoiceLean",
           "version": "mbrcic/SocialChoiceLean port/lean-4.31 @ 74f491b (Mathlib/Lean v4.31.0)",
           "license": "MIT",
-          "relationship": "RELATED",
           "reproduced": true,
           "declaration": "gibbard_satterthwaite",
           "module": "AISafetyAtlas/SocialChoice.lean",
@@ -3113,7 +3108,7 @@
         "declarations": [
           {
             "atlas_declaration": "AISafetyAtlas.SocialChoice.gibbard_satterthwaite",
-            "type": "REFERENCE",
+            "type": "NEW_PROOF",
             "source_declarations": [
               "gibbard_satterthwaite"
             ]
@@ -3221,7 +3216,6 @@
           "repository": "https://github.com/jingyuanli-hk/vNM-Theorem-pub",
           "version": "89ed1680170bcf947f77bd26cdf614c1ce02222c",
           "license": "Apache-2.0",
-          "relationship": "RELATED",
           "reproduced": true,
           "declaration": "vNM.vNM_theorem",
           "build_command": "scripts/reproduce_vnm.sh"
@@ -3247,7 +3241,6 @@
           "repository": "https://github.com/Shilun-Allan-Li/tcslib",
           "version": "502287d7f8d84c33421c71ce5495b08f097c47a5",
           "license": "Apache-2.0",
-          "relationship": "RELATED",
           "reproduced": false,
           "declaration": "ArrowTheorem.arrow_theorem"
         }
@@ -3275,7 +3268,6 @@
           "repository": "https://arxiv.org/abs/2408.08995",
           "version": "arXiv:2408.08995 (2024); Sci. Rep. 2025 companion publication",
           "license": "Apache-2.0",
-          "relationship": "RELATED",
           "reproduced": true,
           "declaration": "AISafetyAtlas.Verification.AgentBehavior.no_behavioral_safety_verifier",
           "module": "AISafetyAtlas/Verification/AgentBehavior.lean",
@@ -3287,10 +3279,8 @@
         "declarations": [
           {
             "atlas_declaration": "AISafetyAtlas.Verification.AgentBehavior.no_behavioral_safety_verifier",
-            "type": "REFERENCE",
-            "source_declarations": [
-              "AISafetyAtlas.Verification.AgentBehavior.no_behavioral_safety_verifier"
-            ]
+            "type": "NEW_PROOF",
+            "source_declarations": []
           }
         ]
       }
@@ -3312,7 +3302,6 @@
           "repository": "https://github.com/google-deepmind/debate",
           "version": "de3a6e500ae1a65dfeea2f91ef519ebad9704be0 (main, no release tag; last commit 2024-10-08)",
           "license": "Apache-2.0",
-          "relationship": "RELATED",
           "reproduced": true,
           "declaration": "completeness, soundness, correctness (paper Theorem 6.2)",
           "module": "Debate/Correct.lean",
@@ -3338,8 +3327,7 @@
           "repository": "https://github.com/secure-compilation/exploring-robust-property-preservation",
           "version": "c68187cbaba763d88cbb3509df4ca9cf49cc6338",
           "license": "Apache-2.0",
-          "relationship": "RELATED",
-          "reproduced": true,
+          "reproduced": false,
           "declaration": "decomposition_theorem (Topology.v); safety_closed, liveness_dense, decomposition_safety_dense (TopologyTrace.v); Safety, Liveness, hprop, SSC, HSafe, H2Safe, HLiv (Properties.v)",
           "module": "Topology.v, TopologyTrace.v, Properties.v",
           "build_command": "Exact build attempted 2026-07-28 with coqorg/coq:8.9.1@sha256:8e26609c5450aa795af6917cf169a65ab3952ba666d1b0c90e6b0179314a1149 and coqorg/coq:8.20@sha256:e50d77c4c5a9aa0d76ae1b343d79c5f922da3a75054b79c5dc635895438e4674: both fail at InternalNondet.v line 8 (`From Stdlib Require Import List`) after compiling the principal topology/property files."
@@ -3364,7 +3352,6 @@
           "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
           "version": "IN_TREE",
           "license": "Apache-2.0",
-          "relationship": "RELATED",
           "reproduced": true,
           "declaration": "k_safety_iff_finite_self_composition; k_safety_iff_product_self_composition; self_composition_is_safety; isClosed_iff_hyperSafety; dense_iff_hyperLiveness; hyperSafety_of_isKSafety; hyperSafety_hyperLiveness_decomposition",
           "module": "AISafetyAtlas.Compositional.Hyperproperties",
@@ -3375,7 +3362,7 @@
         "declarations": [
           {
             "atlas_declaration": "AISafetyAtlas.Compositional.Hyperproperties.k_safety_iff_finite_self_composition",
-            "type": "REFERENCE",
+            "type": "NEW_PROOF",
             "source_declarations": [
               "k_safety_iff_finite_self_composition; k_safety_iff_product_self_composition; self_composition_is_safety; isClosed_iff_hyperSafety; dense_iff_hyperLiveness; hyperSafety_of_isKSafety; hyperSafety_hyperLiveness_decomposition"
             ]
@@ -3402,7 +3389,6 @@
           "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
           "version": "IN_TREE",
           "license": "Apache-2.0",
-          "relationship": "RELATED",
           "reproduced": true,
           "declaration": "runFor_eq_of_view_eq; invariant_of_automorphism; no_unique_leader_of_fixedPointFree; invariant_of_constant",
           "module": "AISafetyAtlas.Compositional.Networks",
@@ -3413,7 +3399,7 @@
         "declarations": [
           {
             "atlas_declaration": "AISafetyAtlas.Compositional.Networks.runFor_eq_of_view_eq",
-            "type": "REFERENCE",
+            "type": "NEW_PROOF",
             "source_declarations": [
               "runFor_eq_of_view_eq; invariant_of_automorphism; no_unique_leader_of_fixedPointFree; invariant_of_constant"
             ]
@@ -3437,7 +3423,6 @@
           "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
           "version": "IN_TREE",
           "license": "Apache-2.0",
-          "relationship": "RELATED",
           "reproduced": true,
           "declaration": "rectangle_iff_exchange_closed; coordinate_product_iff_spliceClosed; not_isCoordinateProduct_finitelySupported; coordinate_product_iff_recombination_closed",
           "module": "AISafetyAtlas.Compositional.Rectangularity",
@@ -3448,7 +3433,7 @@
         "declarations": [
           {
             "atlas_declaration": "AISafetyAtlas.Compositional.rectangle_iff_exchange_closed",
-            "type": "REFERENCE",
+            "type": "NEW_PROOF",
             "source_declarations": [
               "rectangle_iff_exchange_closed; coordinate_product_iff_spliceClosed; not_isCoordinateProduct_finitelySupported; coordinate_product_iff_recombination_closed"
             ]
@@ -3472,7 +3457,6 @@
           "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
           "version": "IN_TREE",
           "license": "Apache-2.0",
-          "relationship": "RELATED",
           "reproduced": true,
           "declaration": "AgentEquations.value_eq_of_agree_on_window; AgentEquations.truncation_exact; AgentEquations.bestAction_max; Objective.value_eq_of_agree_on_window; Objective.value_scaleUtility; Objective.optimal_decisions_eq_of_pos_scaleUtility; Objective.value_congr; Objective.optimal_decisions_congr",
           "module": "AISafetyAtlas.Wireheading.Objective",
@@ -3483,7 +3467,7 @@
         "declarations": [
           {
             "atlas_declaration": "AISafetyAtlas.Wireheading.AgentEquations.value_eq_of_agree_on_window",
-            "type": "REFERENCE",
+            "type": "NEW_PROOF",
             "source_declarations": [
               "AgentEquations.value_eq_of_agree_on_window; AgentEquations.truncation_exact; AgentEquations.bestAction_max; Objective.value_eq_of_agree_on_window; Objective.value_scaleUtility; Objective.optimal_decisions_eq_of_pos_scaleUtility; Objective.value_congr; Objective.optimal_decisions_congr"
             ]
@@ -3518,7 +3502,7 @@
         "declarations": [
           {
             "atlas_declaration": "AISafetyAtlas.Wireheading.GoalPreservationSource.Model.selected_matches_initial",
-            "type": "REFERENCE",
+            "type": "NEW_PROOF",
             "source_declarations": [
               "GoalPreservationSource.Model.selected_matches_initial; GoalPreservationSource.Model.safe_modification; GoalPreservationSource.Model.qValue_selected_eq_initial; next_policy_optimal; run_optimal; goal_preservation"
             ]
@@ -3543,7 +3527,6 @@
           "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
           "version": "IN_TREE",
           "license": "Apache-2.0",
-          "relationship": "RELATED",
           "reproduced": true,
           "declaration": "covers_iff_no_collision; not_covers_of_collisionWitness; exists_collisionWitness_of_not_covers; decideCoverage; decideCoverage_covered_iff; CoverageResult.covered_eq_true_iff; decidableCovers; postprocess_cannot_repair_collision; covers_of_refines; observe_truthful; PortfolioCovers; PortfolioIndistinguishable; portfolioCovers_implies_hazardEquivalent; InclusionMinimalCovering; PortfolioCost; CostOptimalCovering; inclusionMinimal_of_costOptimal",
           "module": "AISafetyAtlas.Oversight.JointObservation",
@@ -3554,7 +3537,7 @@
         "declarations": [
           {
             "atlas_declaration": "AISafetyAtlas.Oversight.JointObservation.covers_iff_no_collision",
-            "type": "REFERENCE",
+            "type": "NEW_PROOF",
             "source_declarations": [
               "covers_iff_no_collision; not_covers_of_collisionWitness; exists_collisionWitness_of_not_covers; decideCoverage; decideCoverage_covered_iff; CoverageResult.covered_eq_true_iff; decidableCovers; postprocess_cannot_repair_collision; covers_of_refines; observe_truthful; PortfolioCovers; PortfolioIndistinguishable; portfolioCovers_implies_hazardEquivalent; InclusionMinimalCovering; PortfolioCost; CostOptimalCovering; inclusionMinimal_of_costOptimal"
             ]

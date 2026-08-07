@@ -38,7 +38,7 @@ Related but distinct: Alfonseca et al., *Superintelligence cannot be contained*
 (JAIR 2021; `survey-ref-056`).
 
 Registry BY-012 (statement layer). Coverage:
-`docs/status/paper-coverage.md`. Review:
+`docs/status/sources/brcic-yampolskiy-2023.md`. Review:
 `docs/bridges/review-by-012-agentbehavior.md`.
 
 CT-4 / R6-8 consumer of `Verification.rice`. Does not claim that every
