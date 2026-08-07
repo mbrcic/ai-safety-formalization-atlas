@@ -7,6 +7,7 @@ import os
 from pathlib import Path
 import re
 import sys
+from typing import NoReturn
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -19,15 +20,20 @@ IMPORT_LINE = re.compile(r"^\s*(?:public\s+)?import\s+(.+)$", re.MULTILINE)
 LOCAL_MODULE = re.compile(r"^AISafetyAtlas(?:\.[A-Za-z_][A-Za-z0-9_]*)*$")
 
 
-def require(condition: bool, message: str) -> None:
+def fail(message: str) -> NoReturn:
+    print(f"current-state validation error: {message}", file=sys.stderr)
+    raise SystemExit(1)
+
+
+def require(condition: object, message: str) -> None:
     if not condition:
-        print(f"current-state validation error: {message}", file=sys.stderr)
-        raise SystemExit(1)
+        fail(message)
 
 
 def read_version(path: Path, pattern: str, label: str) -> str:
     match = re.search(pattern, path.read_text(encoding="utf-8"))
-    require(match is not None, f"could not read version from {label}")
+    if match is None:
+        fail(f"could not read version from {label}")
     return match.group(1)
 
 
@@ -171,7 +177,7 @@ def validate_lean_build_closure(lean_files: list[Path]) -> None:
     }
     root_closure = dependency_closure("AISafetyAtlas", graph)
     targets = explicit_lean_build_targets()
-    require(targets, "Lean build-target manifest is empty")
+    require(bool(targets), "Lean build-target manifest is empty")
     require(len(targets) == len(set(targets)), "Lean build-target manifest has duplicates")
     require(
         all(LOCAL_MODULE.fullmatch(target) for target in targets),

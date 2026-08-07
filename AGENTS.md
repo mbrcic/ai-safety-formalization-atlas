@@ -152,6 +152,11 @@ Cheap preflight:
 ./scripts/agent_gate.sh
 ```
 
+The gate ends with `pytest tests/` (malformed-shape regressions) and
+`ty check scripts/ tests/`. Both are skipped with a notice when the tool is not
+installed, so the gate still runs without them; CI installs both, so neither is
+optional on a pull request. Install with `python3 -m pip install pytest ty`.
+
 Full green (Lean + axioms):
 
 ```console

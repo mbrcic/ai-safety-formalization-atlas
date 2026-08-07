@@ -8,6 +8,7 @@ import os
 from pathlib import Path
 import re
 import sys
+from typing import Any, NoReturn, cast
 from urllib.parse import urlsplit
 
 from validate_current_state import lean_code_without_comments_or_strings
@@ -20,9 +21,30 @@ PROJECT_REPOSITORY = "https://github.com/mbrcic/ai-safety-formalization-atlas"
 IN_TREE_VERSION = "IN_TREE"
 
 
-def fail(message: str) -> None:
+def fail(message: str) -> NoReturn:
     print(f"registry error: {message}", file=sys.stderr)
     raise SystemExit(1)
+
+
+def require_mapping(value: object, message: str) -> dict[str, Any]:
+    """Return `value` as a mapping, or fail with a reason a contributor can act on.
+
+    A ledger is edited by hand, so wrong shapes arrive routinely. Reaching
+    `.get` or `sorted` on one produced an AttributeError or TypeError — a
+    traceback in CI says only that the validator broke, not that the data did.
+    """
+    if not isinstance(value, dict):
+        fail(message)
+    # A JSON object is `dict[str, Any]`; `isinstance` can only narrow to
+    # `dict[Unknown, Unknown]`, whose key type defeats every later subscript.
+    return cast("dict[str, Any]", value)
+
+
+def require_text(value: object, message: str) -> str:
+    """Return `value` as a non-empty string, or fail. Whitespace is not content."""
+    if not isinstance(value, str) or not value.strip():
+        fail(message)
+    return value
 
 
 def valid_http_url(value: object) -> bool:
@@ -137,8 +159,9 @@ def validate_bridge_review(result_id: str, result: dict) -> None:
         if review is not None:
             fail(f"{result_id} is HUMAN_REVIEW and must not carry a bridge_review record")
         return
-    if not isinstance(review, dict):
-        fail(f"{result_id} bridge status {status} requires a bridge_review record")
+    review = require_mapping(
+        review, f"{result_id} bridge status {status} requires a bridge_review record"
+    )
     missing = BRIDGE_REVIEW_FIELDS - review.keys()
     if missing:
         fail(f"{result_id} bridge_review missing fields: {sorted(missing)}")
@@ -146,8 +169,15 @@ def validate_bridge_review(result_id: str, result: dict) -> None:
         review["interpretation_reviewed"], bool
     ):
         fail(f"{result_id} bridge_review review flags must be booleans")
-    if not review.get("reviewer") or not review.get("date") or not review.get("evidence"):
-        fail(f"{result_id} bridge_review must record reviewer, date, and evidence")
+    for field in ("reviewer", "date", "evidence"):
+        require_text(
+            review.get(field),
+            f"{result_id} bridge_review must record {field} as a non-empty string",
+        )
+    # A review is dated evidence. An unparseable date is a review nobody can
+    # place against the statement it reviewed.
+    if not ISO_DATE.fullmatch(review["date"]):
+        fail(f"{result_id} bridge_review date must be an ISO date: {review['date']!r}")
     if not review["statement_reviewed"]:
         fail(f"{result_id} graduated bridge status requires statement_reviewed to be true")
     if status == "REVIEWED" and not review["interpretation_reviewed"]:
@@ -162,15 +192,22 @@ def validate_candidate_formalizations(result_id: str, result: dict) -> None:
     if not isinstance(leads, list):
         fail(f"{result_id} candidate_formalizations must be a list")
     for index, lead in enumerate(leads):
-        if not isinstance(lead, dict):
-            fail(f"{result_id} candidate_formalizations[{index}] must be an object")
+        lead = require_mapping(
+            lead, f"{result_id} candidate_formalizations[{index}] must be an object"
+        )
         missing = CANDIDATE_LEAD_FIELDS - lead.keys()
         if missing:
             fail(f"{result_id} candidate lead {index} missing fields: {sorted(missing)}")
         if not valid_http_url(lead["repository"]):
             fail(f"{result_id} candidate lead {index} has an invalid repository URL")
-        if not lead.get("revision") or not lead.get("declaration") or not lead.get("notes"):
-            fail(f"{result_id} candidate lead {index} must record revision, declaration, and notes")
+        # `if not lead.get(...)` accepted any truthy value, so a list read as a
+        # recorded revision. A lead is provenance; provenance is text.
+        for field in ("revision", "declaration", "notes"):
+            require_text(
+                lead.get(field),
+                f"{result_id} candidate lead {index} must record {field} as "
+                "a non-empty string",
+            )
         if lead["inspection_state"] not in CANDIDATE_INSPECTION_STATES:
             fail(f"{result_id} candidate lead {index} has unknown inspection_state {lead['inspection_state']!r}")
         if lead["relationship_review"] not in CANDIDATE_REVIEW_STATES:
@@ -184,18 +221,23 @@ def main() -> None:
     except (OSError, json.JSONDecodeError) as error:
         fail(str(error))
 
-    survey = data.get("survey", {})
+    data = require_mapping(data, "registry.yaml must contain an object")
+    survey = require_mapping(data.get("survey", {}), "survey must be an object")
     results = data.get("results")
     sources = data.get("source_catalog")
-    vocabulary = data.get("vocabulary", {})
+    vocabulary = require_mapping(
+        data.get("vocabulary", {}), "vocabulary must be an object"
+    )
+    search_evidence = require_mapping(
+        search_evidence, "formalization-search.json must contain an object"
+    )
 
     if data.get("schema_version") != 3:
         fail("registry.yaml must use schema version 3")
 
     if not isinstance(results, list):
         fail("results must be a list")
-    if not isinstance(sources, dict):
-        fail("source_catalog must be an object")
+    sources = require_mapping(sources, "source_catalog must be an object")
 
     # One ledger, two kinds of row. A claim row states something a source
     # asserted; an artifact row records a formalization that stands on its own.
@@ -238,6 +280,9 @@ def main() -> None:
     tag_values = vocabulary.get("tag")
     if not isinstance(tag_values, list) or not tag_values:
         fail("tag vocabulary must be a non-empty list")
+    # Sorting a mixed-type list raises before any rule below can run.
+    if not all(isinstance(tag, str) and tag.strip() for tag in tag_values):
+        fail("tag vocabulary must contain only non-empty strings")
     if sorted(tag_values) != list(tag_values):
         fail("tag vocabulary must be sorted")
     if len(set(tag_values)) != len(tag_values):
@@ -294,7 +339,11 @@ def main() -> None:
     }
     if search_evidence.get("schema_version") != 3:
         fail("formalization-search.json must use schema version 3")
-    if set(search_evidence.get("corpora", {})) != expected_search_corpora:
+    evidence_corpora = require_mapping(
+        search_evidence.get("corpora", {}),
+        "formalization-search.json corpora must be an object",
+    )
+    if set(evidence_corpora) != expected_search_corpora:
         fail("formalization-search.json corpus set does not match registry policy")
     # The six-corpus sweep is one profile — a completeness artifact for one
     # catalogued source — not a standing obligation every new row inherits.
@@ -328,8 +377,7 @@ def main() -> None:
         fail("formalization-search.json must carry a novelty_checks list")
     seen_checks: set[str] = set()
     for index, check in enumerate(novelty_checks):
-        if not isinstance(check, dict):
-            fail(f"novelty check {index} must be an object")
+        check = require_mapping(check, f"novelty check {index} must be an object")
         missing = NOVELTY_CHECK_FIELDS - check.keys()
         if missing:
             fail(f"novelty check {index} missing fields: {sorted(missing)}")
@@ -354,8 +402,12 @@ def main() -> None:
             fail(f"{cid} names corpora with no pinned revision on record: {unknown}")
 
     for source_id, source in sources.items():
-        if not isinstance(source, dict) or not source.get("citation"):
-            fail(f"{source_id} must contain a citation")
+        require_mapping(source, f"{source_id} must be an object")
+        # A list citation passed the old truthiness test and then crashed the
+        # generator, which calls `.split()` on it to shorten the reference.
+        require_text(
+            source.get("citation"), f"{source_id} must contain a citation"
+        )
         locator = source.get("locator")
         if locator is not None and not valid_http_url(locator):
             fail(f"{source_id} has an invalid locator URL")
@@ -485,6 +537,10 @@ def main() -> None:
             candidate_hits = result_evidence.get("candidate_hits")
             if not isinstance(candidate_hits, dict) or set(candidate_hits) != expected_search_corpora:
                 fail(f"{result_id} search evidence has an invalid corpus set")
+            for corpus, hit in candidate_hits.items():
+                require_mapping(
+                    hit, f"{result_id}/{corpus} hit evidence must be an object"
+                )
             candidate_corpora = {
                 corpus for corpus, hit in candidate_hits.items() if hit.get("hit_count", 0)
             }
@@ -601,8 +657,10 @@ def main() -> None:
                 fail(f"{result_id} Lean artifact lacks atlas declarations")
             row_declaration_names: set[str] = set()
             for declaration in declarations:
-                if not isinstance(declaration, dict):
-                    fail(f"{result_id} Lean artifact declarations must be objects")
+                declaration = require_mapping(
+                    declaration,
+                    f"{result_id} Lean artifact declarations must be objects",
+                )
                 missing = required_artifact_declaration_fields - declaration.keys()
                 if missing:
                     fail(

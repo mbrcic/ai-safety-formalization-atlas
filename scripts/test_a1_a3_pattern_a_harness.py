@@ -10,6 +10,7 @@ from __future__ import annotations
 import json
 import re
 import sys
+from typing import NoReturn
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -17,7 +18,7 @@ SCRIPT = ROOT / "scripts" / "reproduce_isabelle.sh"
 REGISTRY = ROOT / "registry.yaml"
 
 
-def fail(msg: str) -> None:
+def fail(msg: str) -> NoReturn:
     print(f"FAIL: {msg}", file=sys.stderr)
     raise SystemExit(1)
 

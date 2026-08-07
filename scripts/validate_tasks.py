@@ -18,6 +18,7 @@ import json
 from pathlib import Path
 import re
 import sys
+from typing import Any, NoReturn, cast
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -31,9 +32,23 @@ STATUSES = {"OPEN", "DONE"}
 REQUIRED = {"id", "title", "size", "rung", "status", "heading_level", "body"}
 
 
-def fail(message: str) -> None:
+def fail(message: str) -> NoReturn:
     print(f"tasks error: {message}", file=sys.stderr)
     raise SystemExit(1)
+
+
+def require_mapping(value: object, message: str) -> dict[str, Any]:
+    """Return `value` as a JSON object, or fail with an actionable reason.
+
+    `isinstance(value, dict)` narrows only to `dict[Unknown, Unknown]`, whose
+    key type is `Never`, so every subsequent subscript reads as an error. One
+    spelling for "this must be an object" keeps the narrowing honest and the
+    message uniform.
+    """
+    if not isinstance(value, dict):
+        fail(message)
+    return cast("dict[str, Any]", value)
+
 
 
 def main() -> None:
@@ -58,8 +73,7 @@ def main() -> None:
 
     seen: set[str] = set()
     for index, task in enumerate(tasks):
-        if not isinstance(task, dict):
-            fail(f"task {index} must be an object")
+        task = require_mapping(task, f"task {index} must be an object")
         missing = REQUIRED - task.keys()
         if missing:
             fail(f"task {index} missing fields: {sorted(missing)}")

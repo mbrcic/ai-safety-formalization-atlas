@@ -33,4 +33,25 @@ python3 scripts/validate_current_state.py
 echo "==> check_docs_paths"
 python3 scripts/check_docs_paths.py
 
+# Shape-level regressions (malformed containers, wrong metadata types). Kept in
+# pytest because they are parameterised and pytest is not a dependency of the
+# repository — a contributor without it still gets every check above, and CI
+# installs it so the suite is not optional there.
+echo "==> pytest tests/"
+if python3 -c "import pytest" >/dev/null 2>&1; then
+  python3 -m pytest tests/ -q --no-header -p no:cacheprovider
+else
+  echo "pytest not installed; skipping tests/ (CI runs it)"
+fi
+
+# Type checking is not decoration here: it found a `match.lastindex >= 3`
+# comparison against a value the standard library types as `int | None`, and two
+# `.group()` calls guarded by a helper that narrows nothing.
+echo "==> ty check"
+if command -v ty >/dev/null 2>&1; then
+  ty check scripts/ tests/
+else
+  echo "ty not installed; skipping type check (CI runs it)"
+fi
+
 echo "agent_gate: ok (cheap validators only; lake build not run)"

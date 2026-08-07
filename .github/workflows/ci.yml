@@ -27,6 +27,11 @@ jobs:
       - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
         with:
           persist-credentials: false
+      # The gate skips tests/ when pytest is absent so a contributor without it
+      # still gets every other check. CI installs it, so the skip never applies
+      # here and the shape suite is not optional on a pull request.
+      - name: Install pytest and ty (shape suite + type check)
+        run: python3 -m pip install --quiet pytest ty
       - name: Cheap agent gate
         run: ./scripts/agent_gate.sh
       # Onboarding contract: setup.sh must parse, document itself, reject bad

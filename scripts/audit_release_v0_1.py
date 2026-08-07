@@ -7,15 +7,20 @@ from pathlib import Path
 import re
 import subprocess
 import sys
+from typing import NoReturn
 
 
 ROOT = Path(__file__).resolve().parents[1]
 
 
+def fail(message: str) -> NoReturn:
+    print(f"v0.1 release audit error: {message}", file=sys.stderr)
+    raise SystemExit(1)
+
+
 def require(condition: bool, message: str) -> None:
     if not condition:
-        print(f"v0.1 release audit error: {message}", file=sys.stderr)
-        raise SystemExit(1)
+        fail(message)
 
 
 def git_output(*args: str) -> subprocess.CompletedProcess[str]:
@@ -77,10 +82,8 @@ def main() -> None:
     approval_match = re.search(
         r"^- Approval ref: `([0-9a-f]{40})`$", release_doc, re.MULTILINE
     )
-    require(
-        approval_match is not None,
-        "release document must record a full immutable approval ref",
-    )
+    if approval_match is None:
+        fail("release document must record a full immutable approval ref")
     approved_ref = approval_match.group(1)
     require(
         "- Publication status: approved for publication" in release_doc,

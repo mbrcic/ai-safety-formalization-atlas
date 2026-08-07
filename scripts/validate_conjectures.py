@@ -21,6 +21,7 @@ import json
 from pathlib import Path
 import re
 import sys
+from typing import Any, NoReturn, cast
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
@@ -54,9 +55,23 @@ REQUIRED_FIELDS = {
 }
 
 
-def fail(message: str) -> None:
+def fail(message: str) -> NoReturn:
     print(f"conjectures error: {message}", file=sys.stderr)
     raise SystemExit(1)
+
+
+def require_mapping(value: object, message: str) -> dict[str, Any]:
+    """Return `value` as a JSON object, or fail with an actionable reason.
+
+    `isinstance(value, dict)` narrows only to `dict[Unknown, Unknown]`, whose
+    key type is `Never`, so every subsequent subscript reads as an error. One
+    spelling for "this must be an object" keeps the narrowing honest and the
+    message uniform.
+    """
+    if not isinstance(value, dict):
+        fail(message)
+    return cast("dict[str, Any]", value)
+
 
 
 def nonempty_text(value: object) -> bool:
@@ -109,8 +124,7 @@ def main() -> None:
 
     seen: set[str] = set()
     for index, entry in enumerate(entries):
-        if not isinstance(entry, dict):
-            fail(f"conjecture {index} must be an object")
+        entry = require_mapping(entry, f"conjecture {index} must be an object")
         missing = REQUIRED_FIELDS - entry.keys()
         if missing:
             fail(f"conjecture {index} missing fields: {sorted(missing)}")

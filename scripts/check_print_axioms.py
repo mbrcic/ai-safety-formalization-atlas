@@ -155,7 +155,7 @@ def parse_axioms(blob: str) -> dict[str, set[str]]:
             continue
         name = match.group(1)
         kind = match.group(2)
-        rest = match.group(3) if match.lastindex >= 3 else ""
+        rest = match.group(3) if (match.lastindex or 0) >= 3 else ""
         if "does not depend" in kind:
             found[name] = set()
             index += 1

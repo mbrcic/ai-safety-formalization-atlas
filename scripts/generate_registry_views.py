@@ -1060,4 +1060,17 @@ def main() -> None:
 
 
 if __name__ == "__main__":
-    main()
+    # The documented workflow is edit-ledger, regenerate, gate — so this script
+    # is the first thing a malformed ledger meets, before any validator has had
+    # a chance to say what is wrong with it. A traceback here reports that the
+    # generator broke; the validator reports which field did.
+    try:
+        main()
+    except (AttributeError, TypeError, KeyError, IndexError) as error:
+        print(
+            f"generate_registry_views: the ledger is malformed ({error!r}).\n"
+            "Run `python3 scripts/validate_registry.py` for the field and the "
+            "reason.",
+            file=sys.stderr,
+        )
+        raise SystemExit(1) from None

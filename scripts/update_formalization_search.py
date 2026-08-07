@@ -7,6 +7,7 @@ import argparse
 import hashlib
 import json
 from pathlib import Path
+from typing import Any
 import re
 import subprocess
 import unicodedata
@@ -139,7 +140,7 @@ def search_corpus(
     return evidence
 
 
-def render_summary(registry: dict[str, object], evidence: dict[str, object]) -> str:
+def render_summary(registry: dict[str, Any], evidence: dict[str, Any]) -> str:
     lines = [
         "# Formal-Library Search Evidence",
         "",
