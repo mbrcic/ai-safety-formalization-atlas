@@ -27,7 +27,8 @@
     ],
     "spdx_license": [
       "Apache-2.0",
-      "BSD-3-Clause"
+      "BSD-3-Clause",
+      "MIT"
     ],
     "ai_bridge_status": [
       "HUMAN_REVIEW",
@@ -3038,6 +3039,7 @@
           "version": "7ec3ef9813a7642fdabe5b73c71d1bed4d5488e2",
           "license": "Apache-2.0",
           "reproduced": true,
+          "build_environment": "leanprover/lean4:v4.31.0; vendored DASH core at upstream Lean v4.29.0-rc8 pin",
           "module": "AISafetyAtlas/Explainability.lean",
           "upstream_module": "AISafetyAtlas/Upstream/Attribution/Trilemma.lean",
           "build_command": "lake build AISafetyAtlas (vendored axiom-free trilemma)"
@@ -3072,6 +3074,7 @@
           "version": "AFP release 2026-02-06; archive SHA-256 8174c738b42203100170ff25f3c9fc2c6d16d8556fbaff205c0eaa98a3813da7",
           "license": "BSD-3-Clause",
           "reproduced": true,
+          "build_environment": "makarius/isabelle@sha256:9bd33b183c399327c5d554fc8cde27c29b5d2b20cdc6fe7a604caa3f951018fc (Isabelle2025-2; x86_64)",
           "declaration": "Gibbard_Satterthwaite",
           "module": "Thys/GS.thy",
           "build_command": "scripts/reproduce_isabelle.sh arrow"
@@ -3098,6 +3101,7 @@
           "version": "mbrcic/SocialChoiceLean port/lean-4.31 @ 74f491b (Mathlib/Lean v4.31.0)",
           "license": "MIT",
           "reproduced": true,
+          "build_environment": "leanprover/lean4:v4.31.0; Mathlib/Lean v4.31.0",
           "declaration": "gibbard_satterthwaite",
           "module": "AISafetyAtlas/SocialChoice.lean",
           "upstream_module": "AISafetyAtlas/Upstream/GibbardSatterthwaite.lean",
@@ -3137,6 +3141,7 @@
           "license": "BSD-3-Clause",
           "relationship": "RELATED",
           "reproduced": true,
+          "build_environment": "makarius/isabelle@sha256:9bd33b183c399327c5d554fc8cde27c29b5d2b20cdc6fe7a604caa3f951018fc (Isabelle2025-2; x86_64)",
           "declaration": "no_free_lunch_ML",
           "module": "No_Free_Lunch_ML.thy",
           "build_command": "scripts/reproduce_isabelle.sh nfl"
@@ -3165,6 +3170,7 @@
           "license": "BSD-3-Clause",
           "relationship": "RELATED",
           "reproduced": true,
+          "build_environment": "makarius/isabelle@sha256:9bd33b183c399327c5d554fc8cde27c29b5d2b20cdc6fe7a604caa3f951018fc (Isabelle2025-2; x86_64)",
           "declaration": "mere_addition encodings (Parent–Benzmüller CondNormReasHOL)",
           "module": "mere_addition_opt.thy",
           "build_command": "scripts/reproduce_isabelle.sh condnorm"
@@ -3193,6 +3199,7 @@
           "license": "BSD-3-Clause",
           "relationship": "RELATED",
           "reproduced": true,
+          "build_environment": "makarius/isabelle@sha256:9bd33b183c399327c5d554fc8cde27c29b5d2b20cdc6fe7a604caa3f951018fc (Isabelle2025-2; x86_64)",
           "declaration": "fundamental_theorem_network_capacity",
           "module": "DL_Fundamental_Theorem_Network_Capacity.thy",
           "build_command": "scripts/reproduce_isabelle.sh deep-learning"
@@ -3217,6 +3224,7 @@
           "version": "89ed1680170bcf947f77bd26cdf614c1ce02222c",
           "license": "Apache-2.0",
           "reproduced": true,
+          "build_environment": "Lean 4.31.0; Mathlib fabf563a7c95a166b8d7b6efca11c8b4dc9d911f",
           "declaration": "vNM.vNM_theorem",
           "build_command": "scripts/reproduce_vnm.sh"
         }
@@ -3269,6 +3277,7 @@
           "version": "arXiv:2408.08995 (2024); Sci. Rep. 2025 companion publication",
           "license": "Apache-2.0",
           "reproduced": true,
+          "build_environment": "leanprover/lean4:v4.31.0; atlas current checkout",
           "declaration": "AISafetyAtlas.Verification.AgentBehavior.no_behavioral_safety_verifier",
           "module": "AISafetyAtlas/Verification/AgentBehavior.lean",
           "build_command": "lake build AISafetyAtlas.Verification.AgentBehavior",
@@ -3303,6 +3312,7 @@
           "version": "de3a6e500ae1a65dfeea2f91ef519ebad9704be0 (main, no release tag; last commit 2024-10-08)",
           "license": "Apache-2.0",
           "reproduced": true,
+          "build_environment": "leanprover/lean4:v4.8.0; Mathlib v4.8.0 (upstream pinned checkout)",
           "declaration": "completeness, soundness, correctness (paper Theorem 6.2)",
           "module": "Debate/Correct.lean",
           "build_command": "scripts/reproduce_debate.sh"
@@ -3353,6 +3363,7 @@
           "version": "IN_TREE",
           "license": "Apache-2.0",
           "reproduced": true,
+          "build_environment": "leanprover/lean4:v4.31.0; Mathlib fabf563a7c95a166b8d7b6efca11c8b4dc9d911f; atlas IN_TREE",
           "declaration": "k_safety_iff_finite_self_composition; k_safety_iff_product_self_composition; self_composition_is_safety; isClosed_iff_hyperSafety; dense_iff_hyperLiveness; hyperSafety_of_isKSafety; hyperSafety_hyperLiveness_decomposition",
           "module": "AISafetyAtlas.Compositional.Hyperproperties",
           "build_command": "lake build AISafetyAtlas.Compositional.Hyperproperties AISafetyAtlas.Compositional.Hyperproperties.PrefixTopology AISafetyAtlas.Compositional.Hyperproperties.Product"
@@ -3390,6 +3401,7 @@
           "version": "IN_TREE",
           "license": "Apache-2.0",
           "reproduced": true,
+          "build_environment": "leanprover/lean4:v4.31.0; Mathlib fabf563a7c95a166b8d7b6efca11c8b4dc9d911f; atlas IN_TREE",
           "declaration": "runFor_eq_of_view_eq; invariant_of_automorphism; no_unique_leader_of_fixedPointFree; invariant_of_constant",
           "module": "AISafetyAtlas.Compositional.Networks",
           "build_command": "lake build AISafetyAtlas.Compositional.Networks AISafetyAtlas.Examples.SixTargets"
@@ -3424,6 +3436,7 @@
           "version": "IN_TREE",
           "license": "Apache-2.0",
           "reproduced": true,
+          "build_environment": "leanprover/lean4:v4.31.0; Mathlib fabf563a7c95a166b8d7b6efca11c8b4dc9d911f; atlas IN_TREE",
           "declaration": "rectangle_iff_exchange_closed; coordinate_product_iff_spliceClosed; not_isCoordinateProduct_finitelySupported; coordinate_product_iff_recombination_closed",
           "module": "AISafetyAtlas.Compositional.Rectangularity",
           "build_command": "lake build AISafetyAtlas.Compositional.Rectangularity"
@@ -3458,6 +3471,7 @@
           "version": "IN_TREE",
           "license": "Apache-2.0",
           "reproduced": true,
+          "build_environment": "leanprover/lean4:v4.31.0; Mathlib fabf563a7c95a166b8d7b6efca11c8b4dc9d911f; atlas IN_TREE",
           "declaration": "AgentEquations.value_eq_of_agree_on_window; AgentEquations.truncation_exact; AgentEquations.bestAction_max; Objective.value_eq_of_agree_on_window; Objective.value_scaleUtility; Objective.optimal_decisions_eq_of_pos_scaleUtility; Objective.value_congr; Objective.optimal_decisions_congr",
           "module": "AISafetyAtlas.Wireheading.Objective",
           "build_command": "lake build AISafetyAtlas.Wireheading.Objective AISafetyAtlas.Wireheading.AgentEquations"
@@ -3493,6 +3507,7 @@
           "license": "Apache-2.0",
           "relationship": "RELATED",
           "reproduced": true,
+          "build_environment": "leanprover/lean4:v4.31.0; Mathlib fabf563a7c95a166b8d7b6efca11c8b4dc9d911f; atlas IN_TREE",
           "declaration": "GoalPreservationSource.Model.selected_matches_initial; GoalPreservationSource.Model.safe_modification; GoalPreservationSource.Model.qValue_selected_eq_initial; next_policy_optimal; run_optimal; goal_preservation",
           "module": "AISafetyAtlas.Wireheading.GoalPreservationSource",
           "build_command": "lake build AISafetyAtlas.Wireheading.GoalPreservation AISafetyAtlas.Wireheading.GoalPreservationSource"
@@ -3528,6 +3543,7 @@
           "version": "IN_TREE",
           "license": "Apache-2.0",
           "reproduced": true,
+          "build_environment": "leanprover/lean4:v4.31.0; Mathlib fabf563a7c95a166b8d7b6efca11c8b4dc9d911f; atlas IN_TREE",
           "declaration": "covers_iff_no_collision; not_covers_of_collisionWitness; exists_collisionWitness_of_not_covers; decideCoverage; decideCoverage_covered_iff; CoverageResult.covered_eq_true_iff; decidableCovers; postprocess_cannot_repair_collision; covers_of_refines; observe_truthful; PortfolioCovers; PortfolioIndistinguishable; portfolioCovers_implies_hazardEquivalent; InclusionMinimalCovering; PortfolioCost; CostOptimalCovering; inclusionMinimal_of_costOptimal",
           "module": "AISafetyAtlas.Oversight.JointObservation",
           "build_command": "lake build AISafetyAtlas.Oversight.JointObservation AISafetyAtlas.Examples.Oversight.JointObservation.Procurement AISafetyAtlas.Examples.Oversight.JointObservation.Portfolio"

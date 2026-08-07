@@ -7,7 +7,7 @@ reproduces, or exposes on its own account. Statement-match grades are
 reported per catalogued source and are not affected by entries here.
 Narrative provenance remains in [`external-formalizations.md`](../provenance/external-formalizations.md).
 
-| ID | Name | Framework | Atlas declaration | Root import | Reproduction |
+| ID | Name | Framework | Atlas / source declarations | Root import | Reproduction |
 |---|---|---|---|---|---|
 | LAND-ATTR-001 | Attribution impossibility (DASH trilemma) | Lean | `AISafetyAtlas.Explainability.attribution_impossibility` | yes | `lake build AISafetyAtlas (vendored axiom-free trilemma)` |
 | LAND-GS-001 | Gibbard–Satterthwaite theorem | Isabelle/HOL | `Gibbard_Satterthwaite` | no | `scripts/reproduce_isabelle.sh arrow` |

@@ -15,7 +15,6 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 SCRIPT = ROOT / "scripts" / "reproduce_isabelle.sh"
 REGISTRY = ROOT / "registry.yaml"
-REGISTRY = ROOT / "registry.yaml"
 
 
 def fail(msg: str) -> None:

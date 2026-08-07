@@ -75,47 +75,6 @@ CANDIDATE_REVIEW_STATES = {
 }
 
 
-
-def root_import_closure(root: Path) -> set[str]:
-    """Modules reachable from the package root through public imports."""
-    pending, seen = ["AISafetyAtlas"], set()
-    while pending:
-        module = pending.pop()
-        if module in seen:
-            continue
-        seen.add(module)
-        path = root / "AISafetyAtlas.lean" if module == "AISafetyAtlas" else (
-            root / (module.replace(".", "/") + ".lean")
-        )
-        if not path.is_file():
-            fail(f"public atlas import names a missing module: {module}")
-        pending.extend(
-            m.group(1)
-            for m in re.finditer(
-                r"(?m)^\s*public import (AISafetyAtlas[\w.]*)",
-                path.read_text(encoding="utf-8"),
-            )
-        )
-    return seen
-
-
-def defining_modules(root: Path) -> dict[str, set[str]]:
-    """Leaf declaration name -> modules that actually define it.
-
-    A declaration's namespace is not its module, so the module cannot be derived
-    from the name; it has to be found where the definition is written.
-    """
-    sites: dict[str, set[str]] = {}
-    pattern = re.compile(
-        r"(?m)^\s*(?:public\s+|private\s+|protected\s+|noncomputable\s+)*"
-        r"(?:theorem|lemma|def|abbrev|instance|structure|inductive)\s+([A-Za-z_][\w']*)"
-    )
-    for path in sorted(root.glob("AISafetyAtlas/**/*.lean")) + [root / "AISafetyAtlas.lean"]:
-        module = ".".join(path.relative_to(root).with_suffix("").parts)
-        for match in pattern.finditer(path.read_text(encoding="utf-8")):
-            sites.setdefault(match.group(1), set()).add(module)
-    return sites
-
 def validate_bridge_review(result_id: str, result: dict) -> None:
     """Enforce the bridge-review lifecycle: HUMAN_REVIEW carries no evidence; any
     graduated status must supply a complete, consistent bridge_review record."""
@@ -247,11 +206,13 @@ def main() -> None:
         "framework",
         "repository",
         "version",
+        "reproduced",
+        "license",
+    }
+    claim_formalization_fields = required_formalization_fields | {
         "module",
         "declaration",
         "relationship",
-        "reproduced",
-        "license",
     }
     required_artifact_declaration_fields = {
         "atlas_declaration",
@@ -260,8 +221,9 @@ def main() -> None:
     }
 
     formalization_count = 0
+    claim_formalization_count = 0
     reproduced_external_count = 0
-    lean_artifact_count = 0
+    lean_row_count = 0
     lean_declaration_names: set[str] = set()
     formalization_keys: set[tuple[str, ...]] = set()
     expected_search_corpora = {
@@ -400,6 +362,8 @@ def main() -> None:
                     f"{result_id} is an artifact row and must not carry claim fields: "
                     f"{sorted(stray)}"
                 )
+        if "root_import" in result and not isinstance(result["root_import"], bool):
+            fail(f"{result_id} root_import must be boolean")
         if result.get("root_import") and result["lean_artifact"] is None:
             fail(f"{result_id} root_import requires an atlas declaration")
         if is_claim and result["ai_bridge_status"] not in bridge_status_values:
@@ -407,6 +371,8 @@ def main() -> None:
         tags = result["tags"]
         if not isinstance(tags, list) or not tags:
             fail(f"{result_id} must carry at least one tag")
+        if any(not isinstance(tag, str) or not tag.strip() for tag in tags):
+            fail(f"{result_id} tags must be non-empty strings")
         unknown_tags = [tag for tag in tags if tag not in tag_values]
         if unknown_tags:
             fail(f"{result_id} has tags outside the vocabulary: {sorted(unknown_tags)}")
@@ -417,12 +383,27 @@ def main() -> None:
         if is_claim:
             validate_candidate_formalizations(result_id, result)
 
-        for source_id in result["original_source_refs"]:
+        source_refs = result.get("original_source_refs", [])
+        if not isinstance(source_refs, list) or not all(
+            isinstance(source_id, str) and source_id for source_id in source_refs
+        ):
+            fail(f"{result_id} original_source_refs must be a list of non-empty strings")
+        related_ids = result.get("related_result_ids", [])
+        if not isinstance(related_ids, list) or not all(
+            isinstance(related, str) and related for related in related_ids
+        ):
+            fail(f"{result_id} related_result_ids must be a list of non-empty strings")
+        for source_id in source_refs:
             if source_id not in sources:
                 fail(f"{result_id} references missing source {source_id}")
-        for related in result.get("related_result_ids") or []:
+        for related in related_ids:
             if related not in {r["id"] for r in results}:
                 fail(f"{result_id} related_result_ids names unknown result {related}")
+        if not isinstance(result["formalizations"], list):
+            fail(f"{result_id} formalizations must be a list")
+        for record in result["formalizations"]:
+            if not isinstance(record, dict):
+                fail(f"{result_id} formalization records must be objects")
         if not is_claim:
             if not result["formalizations"]:
                 fail(
@@ -434,59 +415,64 @@ def main() -> None:
         elif result["id"].startswith("LAND-") and is_survey_row:
             fail(f"{result_id} cannot be both a survey row and a LAND- row")
 
-        if result_id not in set(expected_ids):
-            # The six-corpus sweep is the baseline-catalogue profile of one
-            # catalogued source. Rows outside that source — artifacts, and claims
-            # from any future source — carry no sweep and are not blocked on one.
-            continue
+        if result_id in expected_ids:
+            search = result["formal_library_search"]
+            if set(search.get("searched_corpora", [])) != expected_search_corpora:
+                fail(f"{result_id} does not cover all required formal-library corpora")
+            if not search.get("query_terms"):
+                fail(f"{result_id} has no formal-library search terms")
+            if search.get("evidence_file") != "docs/provenance/formalization-search.json":
+                fail(f"{result_id} points to unexpected search evidence")
 
-        search = result["formal_library_search"]
-        if set(search.get("searched_corpora", [])) != expected_search_corpora:
-            fail(f"{result_id} does not cover all required formal-library corpora")
-        if not search.get("query_terms"):
-            fail(f"{result_id} has no formal-library search terms")
-        if search.get("evidence_file") != "docs/provenance/formalization-search.json":
-            fail(f"{result_id} points to unexpected search evidence")
-
-        result_evidence = evidence_results[result_id]
-        queries = search["query_terms"]
-        if result_evidence.get("queries") != queries:
-            fail(f"{result_id} query terms have drifted from search evidence")
-        candidate_hits = result_evidence.get("candidate_hits")
-        if not isinstance(candidate_hits, dict) or set(candidate_hits) != expected_search_corpora:
-            fail(f"{result_id} search evidence has an invalid corpus set")
-        candidate_corpora = {
-            corpus for corpus, hit in candidate_hits.items() if hit.get("hit_count", 0)
-        }
-        if set(search.get("candidate_corpora", [])) != candidate_corpora:
-            fail(f"{result_id} candidate corpora have drifted from search evidence")
-        for corpus, hit in candidate_hits.items():
-            counts = hit.get("query_hit_counts")
-            if not isinstance(counts, dict) or list(counts) != queries:
-                fail(f"{result_id}/{corpus} lacks ordered per-query hit counts")
-            expected_matches = [query for query in queries if counts[query] > 0]
-            if hit.get("matched_queries") != expected_matches:
-                fail(f"{result_id}/{corpus} matched-query summary is inconsistent")
-            paths = hit.get("paths")
-            hit_count = hit.get("hit_count")
-            if not isinstance(paths, list) or not isinstance(hit_count, int):
-                fail(f"{result_id}/{corpus} has invalid hit evidence")
-            if hit_count < len(paths) or len(paths) > 12:
-                fail(f"{result_id}/{corpus} path sample is inconsistent")
+            result_evidence = evidence_results[result_id]
+            queries = search["query_terms"]
+            if result_evidence.get("queries") != queries:
+                fail(f"{result_id} query terms have drifted from search evidence")
+            candidate_hits = result_evidence.get("candidate_hits")
+            if not isinstance(candidate_hits, dict) or set(candidate_hits) != expected_search_corpora:
+                fail(f"{result_id} search evidence has an invalid corpus set")
+            candidate_corpora = {
+                corpus for corpus, hit in candidate_hits.items() if hit.get("hit_count", 0)
+            }
+            if set(search.get("candidate_corpora", [])) != candidate_corpora:
+                fail(f"{result_id} candidate corpora have drifted from search evidence")
+            for corpus, hit in candidate_hits.items():
+                counts = hit.get("query_hit_counts")
+                if not isinstance(counts, dict) or list(counts) != queries:
+                    fail(f"{result_id}/{corpus} lacks ordered per-query hit counts")
+                expected_matches = [query for query in queries if counts[query] > 0]
+                if hit.get("matched_queries") != expected_matches:
+                    fail(f"{result_id}/{corpus} matched-query summary is inconsistent")
+                paths = hit.get("paths")
+                hit_count = hit.get("hit_count")
+                if not isinstance(paths, list) or not isinstance(hit_count, int):
+                    fail(f"{result_id}/{corpus} has invalid hit evidence")
+                if hit_count < len(paths) or len(paths) > 12:
+                    fail(f"{result_id}/{corpus} path sample is inconsistent")
 
 
         # `RELATED` is scoped capital, not a failed match — but a reader meeting
         # it on the public API, or on a row whose bridge has been reviewed, is
         # entitled to know what it does not cover. Internal helper material that
         # nothing public exposes stays lighter: the trigger is reach, not grade.
-        artifact = result.get("lean_artifact") or {}
-        declaration_types = {d["type"] for d in artifact.get("declarations", [])}
+        raw_artifact = result.get("lean_artifact")
+        if raw_artifact is not None and not isinstance(raw_artifact, dict):
+            fail(f"{result_id} lean_artifact must be an object or null")
+        artifact = raw_artifact or {}
+        raw_declarations = artifact.get("declarations", [])
+        declaration_types: set[str] = set()
+        if isinstance(raw_declarations, list):
+            declaration_types = {
+                d.get("type")
+                for d in raw_declarations
+                if isinstance(d, dict) and isinstance(d.get("type"), str)
+            }
         interpretation_affecting = (
-            result["ai_bridge_status"] != "HUMAN_REVIEW"
+            result.get("ai_bridge_status", "HUMAN_REVIEW") != "HUMAN_REVIEW"
             or "BRIDGE" in declaration_types
         )
         for record in result.get("formalizations") or []:
-            if record.get("relationship") != "RELATED" or not result["original_source_refs"]:
+            if record.get("relationship") != "RELATED" or not source_refs:
                 continue
             module = record.get("module") or ""
             public = any(
@@ -525,11 +511,13 @@ def main() -> None:
         # statement-match grade relates two statements, and a curated list has
         # none. A graded row must therefore name at least one work source.
         graded = any(
-            (record or {}).get("relationship") in GRADED_RELATIONSHIPS
+            isinstance(record, dict)
+            and isinstance(record.get("relationship"), str)
+            and record.get("relationship") in GRADED_RELATIONSHIPS
             for record in (result.get("formalizations") or [])
         )
         if graded:
-            refs = result["original_source_refs"]
+            refs = source_refs
             if refs and not any(source_id not in directories for source_id in refs):
                 fail(
                     f"{result_id} carries a statement-match grade but cites only "
@@ -542,44 +530,93 @@ def main() -> None:
             declarations = artifact.get("declarations")
             if not isinstance(declarations, list) or not declarations:
                 fail(f"{result_id} Lean artifact lacks atlas declarations")
+            row_declaration_names: set[str] = set()
             for declaration in declarations:
+                if not isinstance(declaration, dict):
+                    fail(f"{result_id} Lean artifact declarations must be objects")
                 missing = required_artifact_declaration_fields - declaration.keys()
                 if missing:
                     fail(
                         f"{result_id} Lean artifact declaration missing fields: "
                         f"{sorted(missing)}"
                     )
-                if declaration["type"] not in artifact_values:
+                if (
+                    not isinstance(declaration["type"], str)
+                    or declaration["type"] not in artifact_values
+                ):
                     fail(f"{result_id} has unknown Lean artifact type")
-                if not declaration["atlas_declaration"]:
+                if not isinstance(declaration["atlas_declaration"], str) or not declaration[
+                    "atlas_declaration"
+                ].strip():
                     fail(f"{result_id} has an unnamed Lean artifact declaration")
-                if declaration["atlas_declaration"] in lean_declaration_names:
+                if declaration["atlas_declaration"] in row_declaration_names:
                     fail(
-                        f"duplicate Lean artifact declaration: "
+                        f"duplicate Lean artifact declaration within {result_id}: "
                         f"{declaration['atlas_declaration']}"
                     )
+                row_declaration_names.add(declaration["atlas_declaration"])
                 lean_declaration_names.add(declaration["atlas_declaration"])
-                if not isinstance(declaration["source_declarations"], list) or not declaration["source_declarations"]:
+                if not isinstance(declaration["source_declarations"], list):
+                    fail(
+                        f"{result_id} Lean artifact declaration source_declarations "
+                        "must be a list"
+                    )
+                if any(
+                    not isinstance(source, str) or not source.strip()
+                    for source in declaration["source_declarations"]
+                ):
+                    fail(
+                        f"{result_id} Lean artifact declaration source_declarations "
+                        "must contain non-empty strings"
+                    )
+                if declaration["type"] != "NEW_PROOF" and not declaration["source_declarations"]:
                     fail(f"{result_id} Lean artifact declaration lacks sources")
-            lean_artifact_count += len(declarations)
+            lean_row_count += 1
 
-        if not isinstance(result["formalizations"], list):
-            fail(f"{result_id} formalizations must be a list")
         for record in result["formalizations"]:
-            missing = required_formalization_fields - record.keys()
+            required = (
+                claim_formalization_fields if is_claim else required_formalization_fields
+            )
+            missing = required - record.keys()
             if missing:
                 fail(f"{result_id} formalization missing fields: {sorted(missing)}")
-            if record["relationship"] not in relationship_values:
+            if not isinstance(record["framework"], str) or not record["framework"].strip():
+                fail(f"{result_id} formalization framework must be a non-empty string")
+            if not isinstance(record["version"], str) or not record["version"].strip():
+                fail(f"{result_id} formalization version must be a non-empty string")
+            for optional_field in ("module", "declaration"):
+                if optional_field in record and (
+                    not isinstance(record[optional_field], str)
+                    or not record[optional_field].strip()
+                ):
+                    fail(
+                        f"{result_id} formalization {optional_field} must be a "
+                        "non-empty string when present"
+                    )
+            if "relationship" in record and not isinstance(record["relationship"], str):
+                fail(f"{result_id} formalization relationship must be a string")
+            if "relationship" in record and record["relationship"] not in relationship_values:
                 fail(f"{result_id} has unknown relationship")
-            if record["license"] not in license_values:
+            if (
+                not isinstance(record["license"], str)
+                or record["license"] not in license_values
+            ):
                 fail(f"{result_id} has an unknown SPDX license identifier")
             if not valid_http_url(record["repository"]):
                 fail(f"{result_id} formalization has an invalid repository URL")
             if not isinstance(record["reproduced"], bool):
                 fail(f"{result_id} formalization reproduced flag must be boolean")
-            if not all(record[field] for field in ("version", "module", "declaration")):
+            provenance_fields = (
+                ("version", "module", "declaration") if is_claim else ("version",)
+            )
+            if not all(record.get(field) for field in provenance_fields):
                 fail(f"{result_id} formalization has incomplete provenance")
             if record["repository"] == PROJECT_REPOSITORY:
+                if not record.get("module") or not record.get("declaration"):
+                    fail(
+                        f"{result_id} in-repository formalization must record "
+                        "module and declaration"
+                    )
                 if record["version"] != IN_TREE_VERSION:
                     fail(
                         f"{result_id} in-repository formalization must use "
@@ -602,11 +639,11 @@ def main() -> None:
                 fail(f"{result_id} external formalization cannot use {IN_TREE_VERSION}")
             formalization_key = (
                 result_id,
-                record["framework"],
-                record["repository"],
-                record["version"],
-                record["module"],
-                record["declaration"],
+                str(record["framework"]),
+                str(record["repository"]),
+                str(record["version"]),
+                str(record.get("module", "")),
+                str(record.get("declaration", "")),
             )
             if formalization_key in formalization_keys:
                 fail(f"{result_id} contains a duplicate formalization record")
@@ -614,10 +651,15 @@ def main() -> None:
             if record["reproduced"]:
                 environment = record.get("build_environment")
                 command = record.get("build_command")
-                if not environment or not command:
+                if not isinstance(environment, str) or not environment.strip():
                     fail(
-                        f"{result_id} reproduced formalization lacks explicit "
-                        "build evidence"
+                        f"{result_id} reproduced formalization build_environment "
+                        "must be a non-empty string"
+                    )
+                if not isinstance(command, str) or not command.strip():
+                    fail(
+                        f"{result_id} reproduced formalization build_command "
+                        "must be a non-empty string"
                     )
                 command_path = command.split()[0]
                 if command_path.startswith("scripts/"):
@@ -627,7 +669,18 @@ def main() -> None:
                             f"{result_id} reproduction command references a missing "
                             "or nonexecutable script"
                         )
+            else:
+                for evidence_field in ("build_environment", "build_command"):
+                    if evidence_field in record and not isinstance(
+                        record[evidence_field], str
+                    ):
+                        fail(
+                            f"{result_id} formalization {evidence_field} must be a "
+                            "string when present"
+                        )
             formalization_count += 1
+            if is_claim:
+                claim_formalization_count += 1
             if record["framework"] != "Lean" and record["reproduced"]:
                 reproduced_external_count += 1
 
@@ -636,8 +689,9 @@ def main() -> None:
         "registry ok: "
         f"{len(results)} results ({claims} claims + {len(results) - claims} artifacts), "
         f"{len(sources)} sources, "
-        f"{formalization_count} formalizations on claim rows, "
-        f"{lean_artifact_count} rows with atlas Lean, "
+        f"{formalization_count} formalization records ({claim_formalization_count} on claim rows), "
+        f"{lean_row_count} rows with atlas Lean, "
+        f"{len(lean_declaration_names)} unique atlas declarations, "
         f"{reproduced_external_count} reproduced external records, "
         f"{len(expected_ids)} synchronized six-corpus searches"
     )

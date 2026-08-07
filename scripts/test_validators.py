@@ -163,6 +163,231 @@ CASES = [
         "must be a repository-relative path inside the tree",
     ),
     (
+        "registry: artifact formalization with invalid relationship",
+        "validate_registry.py",
+        "registry.yaml",
+        lambda d: first(d["results"], id="LAND-VNM-001")["formalizations"][0].__setitem__(
+            "relationship", "NOT-A-RELATIONSHIP"
+        ),
+        "has unknown relationship",
+    ),
+    (
+        "registry: artifact formalization with no schema",
+        "validate_registry.py",
+        "registry.yaml",
+        lambda d: first(d["results"], id="LAND-VNM-001").__setitem__(
+            "formalizations", [{"garbage": "no"}]
+        ),
+        "formalization missing fields",
+    ),
+    (
+        "registry: artifact formalization with invalid repository",
+        "validate_registry.py",
+        "registry.yaml",
+        lambda d: first(d["results"], id="LAND-VNM-001")["formalizations"][0].__setitem__(
+            "repository", "not a url"
+        ),
+        "has an invalid repository URL",
+    ),
+    (
+        "registry: artifact formalization with invalid license",
+        "validate_registry.py",
+        "registry.yaml",
+        lambda d: first(d["results"], id="LAND-GS-002")["formalizations"][0].__setitem__(
+            "license", "NOT-SPDX"
+        ),
+        "has an unknown SPDX license identifier",
+    ),
+    (
+        "registry: artifact formalization with invalid reproduced flag",
+        "validate_registry.py",
+        "registry.yaml",
+        lambda d: first(d["results"], id="LAND-VNM-001")["formalizations"][0].__setitem__(
+            "reproduced", "yes"
+        ),
+        "reproduced flag must be boolean",
+    ),
+    (
+        "registry: artifact formalization with incomplete provenance",
+        "validate_registry.py",
+        "registry.yaml",
+        lambda d: first(d["results"], id="LAND-VNM-001")["formalizations"][0].pop(
+            "version"
+        ),
+        "formalization missing fields",
+    ),
+    (
+        "registry: artifact declaration without source",
+        "validate_registry.py",
+        "registry.yaml",
+        lambda d: first(d["results"], id="LAND-GS-002")["lean_artifact"]["declarations"][0].update(
+            type="WRAPPER", source_declarations=[]
+        ),
+        "Lean artifact declaration lacks sources",
+    ),
+    (
+        "registry: duplicate artifact declaration within a row",
+        "validate_registry.py",
+        "registry.yaml",
+        lambda d: first(d["results"], id="LAND-ATTR-001")["lean_artifact"]["declarations"].append(
+            dict(first(d["results"], id="LAND-ATTR-001")["lean_artifact"]["declarations"][0])
+        ),
+        "duplicate Lean artifact declaration within LAND-ATTR-001",
+    ),
+    (
+        "registry: artifact with unknown related result",
+        "validate_registry.py",
+        "registry.yaml",
+        lambda d: first(d["results"], id="LAND-GS-001")["related_result_ids"].append(
+            "LAND-GHOST-001"
+        ),
+        "related_result_ids names unknown result",
+    ),
+    (
+        "registry: artifact with no formalization",
+        "validate_registry.py",
+        "registry.yaml",
+        lambda d: first(d["results"], id="LAND-VNM-001").__setitem__(
+            "formalizations", []
+        ),
+        "records no claim, so it must record at least one formalization",
+    ),
+    (
+        "registry: artifact formalizations with wrong container type",
+        "validate_registry.py",
+        "registry.yaml",
+        lambda d: first(d["results"], id="LAND-VNM-001").__setitem__(
+            "formalizations", {}
+        ),
+        "formalizations must be a list",
+    ),
+    (
+        "registry: artifact with malformed lean artifact",
+        "validate_registry.py",
+        "registry.yaml",
+        lambda d: first(d["results"], id="LAND-GS-002").__setitem__(
+            "lean_artifact", []
+        ),
+        "lean_artifact must be an object or null",
+    ),
+    (
+        "registry: artifact declaration with wrong container type",
+        "validate_registry.py",
+        "registry.yaml",
+        lambda d: first(d["results"], id="LAND-GS-002")["lean_artifact"].__setitem__(
+            "declarations", [{}]
+        ),
+        "Lean artifact declaration missing fields",
+    ),
+    (
+        "registry: artifact declarations with wrong container type",
+        "validate_registry.py",
+        "registry.yaml",
+        lambda d: first(d["results"], id="LAND-GS-002")["lean_artifact"].__setitem__(
+            "declarations", None
+        ),
+        "Lean artifact lacks atlas declarations",
+    ),
+    (
+        "registry: artifact declaration with non-list sources",
+        "validate_registry.py",
+        "registry.yaml",
+        lambda d: first(d["results"], id="LAND-GS-002")["lean_artifact"]["declarations"][0].__setitem__(
+            "source_declarations", "not-a-list"
+        ),
+        "source_declarations must be a list",
+    ),
+    (
+        "registry: reproduced artifact without build evidence",
+        "validate_registry.py",
+        "registry.yaml",
+        lambda d: first(d["results"], id="LAND-VNM-001")["formalizations"][0].pop(
+            "build_environment"
+        ),
+        "build_environment must be a non-empty string",
+    ),
+    (
+        "registry: reproduced artifact with malformed environment",
+        "validate_registry.py",
+        "registry.yaml",
+        lambda d: first(d["results"], id="LAND-VNM-001")["formalizations"][0].__setitem__(
+            "build_environment", []
+        ),
+        "build_environment must be a non-empty string",
+    ),
+    (
+        "registry: artifact with malformed relationship type",
+        "validate_registry.py",
+        "registry.yaml",
+        lambda d: first(d["results"], id="LAND-GOAL-001")["formalizations"][0].__setitem__(
+            "relationship", []
+        ),
+        "relationship must be a string",
+    ),
+    (
+        "registry: artifact declaration with malformed type",
+        "validate_registry.py",
+        "registry.yaml",
+        lambda d: first(d["results"], id="LAND-GS-002")["lean_artifact"]["declarations"][0].__setitem__(
+            "type", []
+        ),
+        "has unknown Lean artifact type",
+    ),
+    (
+        "registry: artifact declaration with malformed source entry",
+        "validate_registry.py",
+        "registry.yaml",
+        lambda d: first(d["results"], id="LAND-GS-002")["lean_artifact"]["declarations"][0].__setitem__(
+            "source_declarations", [[]]
+        ),
+        "source_declarations must contain non-empty strings",
+    ),
+    (
+        "registry: artifact with non-boolean root import",
+        "validate_registry.py",
+        "registry.yaml",
+        lambda d: first(d["results"], id="LAND-GS-002").__setitem__(
+            "root_import", "yes"
+        ),
+        "root_import must be boolean",
+    ),
+    (
+        "registry: artifact with malformed tag",
+        "validate_registry.py",
+        "registry.yaml",
+        lambda d: first(d["results"], id="LAND-VNM-001").__setitem__(
+            "tags", [[]]
+        ),
+        "tags must be non-empty strings",
+    ),
+    (
+        "registry: in-repository artifact without declaration provenance",
+        "validate_registry.py",
+        "registry.yaml",
+        lambda d: first(d["results"], id="LAND-HYPER-002")["formalizations"][0].pop(
+            "module"
+        ),
+        "in-repository formalization must record module and declaration",
+    ),
+    (
+        "registry: external artifact using in-tree version",
+        "validate_registry.py",
+        "registry.yaml",
+        lambda d: first(d["results"], id="LAND-VNM-001")["formalizations"][0].__setitem__(
+            "version", "IN_TREE"
+        ),
+        "external formalization cannot use IN_TREE",
+    ),
+    (
+        "registry: duplicate artifact formalization",
+        "validate_registry.py",
+        "registry.yaml",
+        lambda d: first(d["results"], id="LAND-VNM-001")["formalizations"].append(
+            dict(first(d["results"], id="LAND-VNM-001")["formalizations"][0])
+        ),
+        "contains a duplicate formalization record",
+    ),
+    (
         "conjectures: no refutation condition",
         "validate_conjectures.py",
         "conjectures.yaml",
