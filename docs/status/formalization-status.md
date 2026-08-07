@@ -17,7 +17,8 @@ Statement-match is not the primary success score.
 | Registry results with atlas Lean (any grade) | 21 |
 | Claim results with statement-match (`EXACT` or `EQUIVALENT`) | 7 |
 | Claim results with workbench formalizations (`RELATED` only) | 6 |
-| Verified formalization records | 46 |
+| Formalization records | 46 |
+| … declaring reproduction (self-attested; see methodology) | 44 |
 | Atlas Lean theorem declarations (unique names) | 49 |
 | Registry Lean declaration records | 49 |
 | … of which `WRAPPER` | 14 |

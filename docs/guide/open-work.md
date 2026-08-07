@@ -25,6 +25,16 @@ The contributor-facing priorities and selection principles are summarized in
 [`ROADMAP.md`](../../ROADMAP.md). This file retains the detailed review queue,
 research leads, and integration decisions behind that strategy.
 
+## Deliberately not automated
+
+- **Re-executing recorded reproductions.** `reproduced: true` means the ledger
+  declares reproduction evidence, not that the gate just rebuilt it; the status
+  page and [methodology](methodology.md) both say so. The scripts under
+  `scripts/reproduce_*.sh` need Isabelle, Docker, or an upstream toolchain, so
+  running them belongs in an opt-in or scheduled job, not in the cheap gate a
+  contributor runs on every edit. Open: build that job, or accept the
+  declaration as the trust boundary and leave it stated.
+
 ## Human review
 
 - Revisit the public framing and scope disclaimer when coverage claims change

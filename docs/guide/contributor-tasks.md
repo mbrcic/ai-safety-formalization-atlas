@@ -231,8 +231,8 @@ dual to the impossibility rows.
 - **Acceptance:** clean build at the pinned revision under its own toolchain;
   strict-trust scan of the reproduced tree; a `registry.yaml` record
   (`LAND-DEBATE-001` — revision, `Debate/Correct.lean`, the three theorem
-  names, Apache-2.0, relationship `RELATED`, reproduction status,
-  `survey_coverage: null`); `scripts/reproduce_debate.sh`; regenerated views;
+  names, Apache-2.0, relationship `RELATED`, reproduction status; an artifact row,
+  so never headline coverage); `scripts/reproduce_debate.sh`; regenerated views;
   provenance note. Never a headline coverage count.
 - **Honest scope:** carry upstream's own caveats — correctness only; space
   complexity not formalized; time counts oracle queries only; Lipschitz oracle
@@ -243,7 +243,7 @@ dual to the impossibility rows.
   `leanprover/lean4:v4.8.0` (`Debate.Correct`, 1721/1721 targets); strict-trust
   scan clean across 19 upstream Lean sources; `completeness`/`soundness`/
   `correctness` present in `Debate/Correct.lean`. Landscape record
-  `LAND-DEBATE-001` (`survey_coverage: null`, no atlas import surface);
+  `LAND-DEBATE-001` (artifact row, no atlas import surface);
   `scripts/reproduce_debate.sh`; evidence
   [`debate-reproduction.md`](../provenance/debate-reproduction.md). First
   reproduced possibility / scalable-oversight anchor. Never headline coverage.
