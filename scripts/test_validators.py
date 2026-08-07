@@ -127,6 +127,24 @@ CASES = [
         "must carry a scope_delta",
     ),
     (
+        "registry: claim row using the artifact namespace",
+        "validate_registry.py",
+        "registry.yaml",
+        lambda d: d["results"].append(
+            dict(first(d["results"], id="BY-001"), id="LAND-NOT-A-CLAIM")
+        ),
+        "its id must be BY-### (the closed survey block) or CLM-*",
+    ),
+    (
+        "registry: non-survey claim carrying survey-only fields",
+        "validate_registry.py",
+        "registry.yaml",
+        lambda d: d["results"].append(
+            dict(first(d["results"], id="BY-001"), id="CLM-BORROWED-001")
+        ),
+        "carries survey-only fields",
+    ),
+    (
         "registry: result tagged outside the vocabulary",
         "validate_registry.py",
         "registry.yaml",

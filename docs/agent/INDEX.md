@@ -102,7 +102,7 @@ Nothing here needs the whole picture: take the row that matches what you
 have and ignore the rest.
 <!-- END GENERATED ROUTING -->
 
-**Four rules worth knowing before you edit anything:**
+**Five rules worth knowing before you edit anything:**
 
 1. A **conjecture is not a theorem.** It ships as a `Prop`-valued definition that
    asserts nothing, lives off the root import, and is counted on its own line.
@@ -113,3 +113,12 @@ have and ignore the rest.
    are never graded against; only a statement-bearing work can carry a grade.
 4. A **public `RELATED` record carries its `scope_delta`** — what it does not
    cover, and where that is documented.
+5. An **id prefix says what a row is**, not where it came from. `BY-###` is the
+   closed survey block, `CLM-*` is a claim from any other source, `LAND-*` is a
+   formalization standing on its own account. Only `BY-` rows carry
+   `paper_reference`, `survey_proof_assessment`, and `formal_library_search`;
+   another source's claim cannot answer them.
+
+One declaration has one owning row. Two rows naming the same
+`atlas_declaration` is rejected: every consumer that maps a declaration back to
+a result would otherwise answer by iteration order.

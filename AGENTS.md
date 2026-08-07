@@ -89,7 +89,8 @@ proof. Detail: [`docs/guide/methodology.md`](docs/guide/methodology.md).
 - **Which record takes your edit:**
   | Where | Holds | Note |
   |---|---|---|
-  | `registry.yaml` claim rows | what a source asserted | `BY-001`…`BY-044` is **closed**; never add `BY-045` |
+  | `registry.yaml` survey claim rows | what the Brčić–Yampolskiy survey asserted | `BY-001`…`BY-044` is **closed**; never add `BY-045` |
+  | `registry.yaml` other claim rows | what any other source asserted | `CLM-` prefix; no survey-only fields (`paper_reference`, `survey_proof_assessment`, `formal_library_search`) |
   | `registry.yaml` artifact rows | formalizations standing on their own | `LAND-` prefix, no `informal_claim`, never headline coverage |
   | `conjectures.yaml` | open questions, compiling statement, no proof | never a theorem, never counted as one |
   | `tasks.yaml` | the task board | `docs/guide/contributor-tasks.md` is **generated** — never edit the Markdown |

@@ -258,9 +258,20 @@ def main() -> None:
             f"survey rows must be contiguous BY-001..BY-{expected_count:03d} in order; "
             "the catalogued survey is closed"
         )
-    bad = [i for i in actual_ids if not re.fullmatch(r"(BY-\d{3}|LAND-[A-Z0-9-]+)", i or "")]
+    # Three prefixes, and the prefix says what the row is, not where it came
+    # from. `BY-###` is the closed survey block. `CLM-*` is a claim from any
+    # other source — without it, a claim from AISI or MAIS had to borrow the
+    # LAND- namespace, which the documentation reserves for artifacts, so a
+    # ledger described as source-neutral could only admit a new source by
+    # contradicting its own vocabulary. `LAND-*` is a formalization standing on
+    # its own account.
+    bad = [
+        i
+        for i in actual_ids
+        if not re.fullmatch(r"(BY-\d{3}|CLM-[A-Z0-9-]+|LAND-[A-Z0-9-]+)", i or "")
+    ]
     if bad:
-        fail(f"result ids must be BY-### or LAND-*: {bad}")
+        fail(f"result ids must be BY-###, CLM-*, or LAND-*: {bad}")
 
     relationship_values = set(vocabulary.get("relationship", []))
     artifact_values = set(vocabulary.get("lean_artifact_type", []))
@@ -290,11 +301,10 @@ def main() -> None:
     tag_values = set(tag_values)
 
     universal_result_fields = {"id", "name", "tags", "notes", "formalizations", "lean_artifact"}
-    required_result_fields = {
+    # What any claim row owes, whatever source it came from.
+    required_claim_fields = {
         "id",
         "name",
-        "paper_reference",
-        "survey_proof_assessment",
         "informal_claim",
         "original_source_refs",
         "tags",
@@ -303,6 +313,17 @@ def main() -> None:
         "ai_safety_relevance",
         "ai_bridge_status",
         "notes",
+    }
+    # ...and what only a survey row owes. `paper_reference` restates the
+    # survey's own bibliography column and `survey_proof_assessment` records how
+    # that survey argued its row — neither is a question another source's claim
+    # can answer. Requiring them of every claim meant a real AISI or MAIS entry
+    # could only be admitted by inventing survey vocabulary for it, which is the
+    # opposite of the source-neutral ledger the views already claim to render.
+    survey_only_result_fields = {
+        "paper_reference",
+        "survey_proof_assessment",
+        "formal_library_search",
     }
     required_formalization_fields = {
         "framework",
@@ -446,9 +467,29 @@ def main() -> None:
         result_id = result.get("id", "<missing>")
         is_claim = "informal_claim" in result
         is_survey_row = result_id in set(expected_ids)
-        needed = required_result_fields if is_claim else universal_result_fields
+        # Namespace first: which prefix a row uses decides which fields it owes,
+        # so reporting a field mismatch before the prefix is wrong would name the
+        # symptom and hide the cause.
+        if is_claim:
+            if not result_id.startswith(("BY-", "CLM-")):
+                fail(
+                    f"{result_id} states a claim, so its id must be BY-### (the "
+                    "closed survey block) or CLM-*; LAND- is for formalizations "
+                    "that stand on their own account"
+                )
+        elif not result_id.startswith("LAND-"):
+            fail(f"{result_id} has no informal_claim but does not use the LAND- prefix")
+
+        needed = required_claim_fields if is_claim else universal_result_fields
         if is_survey_row:
-            needed = needed | {"formal_library_search"}
+            needed = needed | survey_only_result_fields
+        elif survey_only_result_fields & result.keys():
+            present = sorted(survey_only_result_fields & result.keys())
+            fail(
+                f"{result_id} carries survey-only fields {present}; those record "
+                "how the Brčić–Yampolskiy survey presented its own rows and mean "
+                "nothing on another source's claim"
+            )
         missing = needed - result.keys()
         if missing:
             fail(f"{result_id} missing fields: {sorted(missing)}")
@@ -510,16 +551,11 @@ def main() -> None:
         for record in result["formalizations"]:
             if not isinstance(record, dict):
                 fail(f"{result_id} formalization records must be objects")
-        if not is_claim:
-            if not result["formalizations"]:
-                fail(
-                    f"{result_id} records no claim, so it must record at least one "
-                    "formalization — otherwise it asserts nothing at all"
-                )
-            if not result["id"].startswith("LAND-"):
-                fail(f"{result_id} has no informal_claim but does not use the LAND- prefix")
-        elif result["id"].startswith("LAND-") and is_survey_row:
-            fail(f"{result_id} cannot be both a survey row and a LAND- row")
+        if not is_claim and not result["formalizations"]:
+            fail(
+                f"{result_id} records no claim, so it must record at least one "
+                "formalization — otherwise it asserts nothing at all"
+            )
 
         if result_id in expected_ids:
             search = result["formal_library_search"]

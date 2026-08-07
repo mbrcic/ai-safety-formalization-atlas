@@ -298,3 +298,40 @@ def test_every_published_declaration_is_inside_the_axiom_audit() -> None:
     published = set(check_print_axioms.ledger_declarations())
     assert published, "registry publishes no declarations; the check is vacuous"
     assert published <= audited, sorted(published - audited)
+
+
+def test_a_claim_from_another_source_is_admissible(tree: Path) -> None:
+    """The ledger must accept a non-survey claim without survey vocabulary.
+
+    Every negative test in the suite shows what is rejected. This one shows the
+    thing the design is *for* is possible at all: before the CLM- namespace, a
+    claim from AISI or MAIS had to borrow the artifact prefix and invent a
+    `survey_proof_assessment` to pass, so "source-neutral ledger" was a property
+    of the generated views and not of the schema.
+    """
+    path = tree / REGISTRY
+    original = path.read_text(encoding="utf-8")
+    try:
+        data = json.loads(original)
+        row = json.loads(json.dumps(_first(data["results"], id="BY-001")))
+        row["id"] = "CLM-AISI-001"
+        row["name"] = "Admissibility probe: a claim catalogued from another source"
+        row["original_source_refs"] = ["aisi-alignment-project-2026"]
+        for survey_only in (
+            "paper_reference",
+            "survey_proof_assessment",
+            "formal_library_search",
+        ):
+            row.pop(survey_only, None)
+        data["results"].append(row)
+        path.write_text(json.dumps(data, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+        done = subprocess.run(
+            [sys.executable, "scripts/validate_registry.py"],
+            cwd=tree,
+            capture_output=True,
+            text=True,
+        )
+        assert done.returncode == 0, done.stderr + done.stdout
+        assert "45 claims" in done.stdout, done.stdout
+    finally:
+        path.write_text(original, encoding="utf-8")
