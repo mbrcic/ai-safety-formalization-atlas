@@ -6,7 +6,7 @@ coverage estimation and triage.
 
 This is **not** the survey theorem inventory. Table-1 BY rows and classical
 sources are generated in
-[`../status/paper-coverage.md`](../status/paper-coverage.md). Some papers below
+[`../status/sources/`](../status/sources/). Some papers below
 also appear there as survey results; they still belong here as **literature** so
 AI-safety reading lists can be scanned in one place.
 
@@ -119,13 +119,13 @@ Full model note: [`robot-verification-model.md`](robot-verification-model.md).
 ## How to estimate coverage
 
 1. **AI safety lit addressed?** → this table (`how addressed` column).  
-2. **Survey theorem inventory?** → [`paper-coverage.md`](../status/paper-coverage.md).  
+2. **Survey theorem inventory?** → [`sources/brcic-yampolskiy-2023.md`](../status/sources/brcic-yampolskiy-2023.md).  
 3. A paper can appear in both (e.g. robot = lit here + BY-033 there); count
    **formalization status once** on the survey row for headline metrics.
 
 ## Pointers
 
-- Survey/paper formalization table: [`../status/paper-coverage.md`](../status/paper-coverage.md)
+- Survey/paper formalization table: [`../status/sources/brcic-yampolskiy-2023.md`](../status/sources/brcic-yampolskiy-2023.md)
 - BY-012 review: [`../bridges/review-by-012-agentbehavior.md`](../bridges/review-by-012-agentbehavior.md)
 - Robot model / CT-3: [`robot-verification-model.md`](robot-verification-model.md),
   [`../bridges/ct3-robot-review-package.md`](../bridges/ct3-robot-review-package.md)

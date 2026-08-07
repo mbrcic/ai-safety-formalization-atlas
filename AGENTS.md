@@ -133,7 +133,7 @@ run `python3 scripts/generate_registry_views.py` (updates `docs/status/*`,
 `docs/guide/contributor-tasks.md`, `docs/agent/by-id.json`,
 `docs/agent/search-summary.json`, README/STATE snippets, and the Lean registry and
 conjecture checks), then `./scripts/agent_gate.sh`. Paper ↔ formalization map:
-`docs/status/paper-coverage.md`. AI-safety literature map:
+`docs/status/sources/`. AI-safety literature map:
 `docs/guide/related-literature.md`.
 
 ## Branch, version, and publication

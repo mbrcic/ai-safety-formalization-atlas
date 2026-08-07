@@ -56,7 +56,8 @@ Regenerate with `python3 scripts/generate_registry_views.py` (also refreshes
   Lean surface
 - [Source reports](status/sources/) — per-source coverage, one report per
   catalogued source
-- [Paper coverage](status/paper-coverage.md) — source papers ↔ formalizations ↔ atlas
+- [Source reports](status/sources/) — per catalogued source: papers, formalizations,
+  atlas declarations, bridge state
 
 ## Bridges (human semantic review)
 
