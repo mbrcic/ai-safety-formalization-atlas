@@ -17,7 +17,7 @@ picking work. Grades and reproduction evidence:
 | [agent-incentives](#agent-incentives) | 3 | 3 |
 | [algorithmic-information](#algorithmic-information) | 1 | 1 |
 | [compositionality](#compositionality) | 4 | 1 |
-| [computability](#computability) | 3 | 2 |
+| [computability](#computability) | 2 | 2 |
 | [computational-complexity](#computational-complexity) | 0 | 5 |
 | [control-theory](#control-theory) | 0 | 6 |
 | [decision-theory](#decision-theory) | 2 | 3 |
@@ -30,7 +30,7 @@ picking work. Grades and reproduction evidence:
 | [preference-inference](#preference-inference) | 1 | 1 |
 | [provability-logic](#provability-logic) | 4 | 0 |
 | [social-choice](#social-choice) | 2 | 6 |
-| [verification](#verification) | 5 | 4 |
+| [verification](#verification) | 4 | 4 |
 
 ## agent-incentives
 
@@ -81,7 +81,6 @@ Catalogued, no atlas Lean:
 |---|---|---|
 | BY-012 | Rice's theorem | `AISafetyAtlas.Computability.rice`<br>`AISafetyAtlas.Computability.rice_code_iff`<br>`AISafetyAtlas.Verification.AgentBehavior.no_behavioral_safety_verifier`<br>`AISafetyAtlas.Verification.rice` |
 | BY-014 | Undecidability | `AISafetyAtlas.Computability.halting_problem`<br>`AISafetyAtlas.Computability.halting_re`<br>`AISafetyAtlas.Computability.nonhalting_not_re` |
-| LAND-MELO-001 | Melo et al. inner-alignment decision problem (Rice packaging) | `AISafetyAtlas.Verification.AgentBehavior.no_behavioral_safety_verifier` |
 
 Catalogued, no atlas Lean:
 
@@ -273,7 +272,6 @@ Catalogued, no atlas Lean:
 | BY-012 | Rice's theorem | `AISafetyAtlas.Computability.rice`<br>`AISafetyAtlas.Computability.rice_code_iff`<br>`AISafetyAtlas.Verification.AgentBehavior.no_behavioral_safety_verifier`<br>`AISafetyAtlas.Verification.rice` |
 | BY-027 | Löb's theorem (unverifiability) | `AISafetyAtlas.Logic.loeb` |
 | BY-033 | Unverifiability of robot ethics | `AISafetyAtlas.Verification.Robot.action_safety_unverifiable` |
-| LAND-MELO-001 | Melo et al. inner-alignment decision problem (Rice packaging) | `AISafetyAtlas.Verification.AgentBehavior.no_behavioral_safety_verifier` |
 | LAND-HYPER-002 | k-safety self-composition and hyperproperty decomposition | `AISafetyAtlas.Compositional.Hyperproperties.k_safety_iff_finite_self_composition` |
 
 Catalogued, no atlas Lean:

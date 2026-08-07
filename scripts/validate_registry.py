@@ -282,6 +282,7 @@ def main() -> None:
     reproduced_external_count = 0
     lean_row_count = 0
     lean_declaration_names: set[str] = set()
+    declaration_owner: dict[str, str] = {}
     formalization_keys: set[tuple[str, ...]] = set()
     expected_search_corpora = {
         "mathlib",
@@ -604,11 +605,24 @@ def main() -> None:
                     "atlas_declaration"
                 ].strip():
                     fail(f"{result_id} has an unnamed Lean artifact declaration")
+                # One declaration, one owning row. A declaration named by two
+                # rows has no answer to "which result does this prove?", and
+                # every consumer that maps declaration -> result silently picks
+                # by iteration order. The pre-merge validator enforced this
+                # globally; scoping it to a single row was a regression.
                 if declaration["atlas_declaration"] in row_declaration_names:
                     fail(
                         f"duplicate Lean artifact declaration within {result_id}: "
                         f"{declaration['atlas_declaration']}"
                     )
+                owner = declaration_owner.get(declaration["atlas_declaration"])
+                if owner is not None:
+                    fail(
+                        f"duplicate Lean artifact declaration: "
+                        f"{declaration['atlas_declaration']} is owned by {owner} "
+                        f"and claimed again by {result_id}"
+                    )
+                declaration_owner[declaration["atlas_declaration"]] = result_id
                 row_declaration_names.add(declaration["atlas_declaration"])
                 lean_declaration_names.add(declaration["atlas_declaration"])
                 if not isinstance(declaration["source_declarations"], list):

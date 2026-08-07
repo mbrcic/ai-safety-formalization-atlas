@@ -1360,7 +1360,7 @@
         "interpretation_reviewed": true,
         "evidence": "docs/bridges/review-by-012-agentbehavior.md"
       },
-      "notes": "Mathlib v4.31.0 provides an equivalent extensional-function theorem and an exact code-set characterization. The atlas keeps those canonical wrappers and derives one semantic-to-code verification bridge for properties stated on partial input/output behavior; it makes no claim about a particular AI system. Isabelle Rice_2 independently verifies the ordinary undecidability result. Reproduced Rice_1 adds an explicit one-reduction and Rice_3 adds a c.e.-set interface, but neither is an additional survey coverage result or a current Lean migration target. Downstream consumer of Verification.rice: AISafetyAtlas.Verification.AgentBehavior.no_behavioral_safety_verifier models encoded agents as Mathlib program codes and proves no total BehavioralSafetyVerifier exists for a nontrivial I/O safety specification (CT-4 / R6-8). Melo et al. (arXiv:2408.08995) apply Rice to a comparable agent/program and non-trivial I/O-judge decision problem; the atlas formalizes the Rice packaging, not that paper’s full narrative or architecture proposals. Maintainer bridge review 2026-07-19 (REVIEWED): statement and scoped AI-safety interpretation accepted (see bridge_review evidence). Paper list: docs/status/paper-coverage.md. Related literature: atlas-ref-melo-2024; landscape LAND-MELO-001; related literature docs/guide/related-literature.md. Bridge REVIEWED (2026-07-19) applies to the AI-facing bridges Verification.rice and AgentBehavior.no_behavioral_safety_verifier (statement + scoped interpretation); it is not a re-audit of Mathlib Rice as novel AI-safety content. See docs/bridges/review-by-012-agentbehavior.md and docs/releases/v0.2.md.",
+      "notes": "Mathlib v4.31.0 provides an equivalent extensional-function theorem and an exact code-set characterization. The atlas keeps those canonical wrappers and derives one semantic-to-code verification bridge for properties stated on partial input/output behavior; it makes no claim about a particular AI system. Isabelle Rice_2 independently verifies the ordinary undecidability result. Reproduced Rice_1 adds an explicit one-reduction and Rice_3 adds a c.e.-set interface, but neither is an additional survey coverage result or a current Lean migration target. Downstream consumer of Verification.rice: AISafetyAtlas.Verification.AgentBehavior.no_behavioral_safety_verifier models encoded agents as Mathlib program codes and proves no total BehavioralSafetyVerifier exists for a nontrivial I/O safety specification (CT-4 / R6-8). Melo et al. (arXiv:2408.08995) apply Rice to a comparable agent/program and non-trivial I/O-judge decision problem; the atlas formalizes the Rice packaging, not that paper’s full narrative or architecture proposals. Maintainer bridge review 2026-07-19 (REVIEWED): statement and scoped AI-safety interpretation accepted (see bridge_review evidence). Related literature: atlas-ref-melo-2024; related literature docs/guide/related-literature.md. Bridge REVIEWED (2026-07-19) applies to the AI-facing bridges Verification.rice and AgentBehavior.no_behavioral_safety_verifier (statement + scoped interpretation); it is not a re-audit of Mathlib Rice as novel AI-safety content. See docs/bridges/review-by-012-agentbehavior.md and docs/releases/v0.2.md.",
       "formal_library_search": {
         "searched_on": "2026-07-28",
         "evidence_file": "docs/provenance/formalization-search.json",
@@ -3049,8 +3049,10 @@
         "declarations": [
           {
             "atlas_declaration": "AISafetyAtlas.Explainability.attribution_impossibility",
-            "type": "NEW_PROOF",
-            "source_declarations": []
+            "type": "WRAPPER",
+            "source_declarations": [
+              "DASHImpossibility.attribution_impossibility"
+            ]
           }
         ]
       }
@@ -3112,9 +3114,9 @@
         "declarations": [
           {
             "atlas_declaration": "AISafetyAtlas.SocialChoice.gibbard_satterthwaite",
-            "type": "NEW_PROOF",
+            "type": "WRAPPER",
             "source_declarations": [
-              "gibbard_satterthwaite"
+              "SocialChoice.gibbard_satterthwaite"
             ]
           }
         ]
@@ -3254,45 +3256,6 @@
         }
       ],
       "lean_artifact": null
-    },
-    {
-      "id": "LAND-MELO-001",
-      "name": "Melo et al. inner-alignment decision problem (Rice packaging)",
-      "tags": [
-        "computability",
-        "verification"
-      ],
-      "notes": "Related-literature landscape entry (see docs/guide/related-literature.md). Atlas tracks Rice packaging of their stated decision problem; architecture half not formalized. Does not increase headline coverage. Not a Table-1 BY row. Negative computability claim is related to Rice (BY-012) via AgentBehavior; does not add headline coverage.",
-      "original_source_refs": [
-        "atlas-ref-melo-2024"
-      ],
-      "related_result_ids": [
-        "BY-012"
-      ],
-      "root_import": true,
-      "formalizations": [
-        {
-          "framework": "Lean",
-          "repository": "https://arxiv.org/abs/2408.08995",
-          "version": "arXiv:2408.08995 (2024); Sci. Rep. 2025 companion publication",
-          "license": "Apache-2.0",
-          "reproduced": true,
-          "build_environment": "leanprover/lean4:v4.31.0; atlas current checkout",
-          "declaration": "AISafetyAtlas.Verification.AgentBehavior.no_behavioral_safety_verifier",
-          "atlas_module": "AISafetyAtlas.Verification.AgentBehavior",
-          "build_command": "lake build AISafetyAtlas.Verification.AgentBehavior",
-          "statement_map": "docs/guide/related-literature.md"
-        }
-      ],
-      "lean_artifact": {
-        "declarations": [
-          {
-            "atlas_declaration": "AISafetyAtlas.Verification.AgentBehavior.no_behavioral_safety_verifier",
-            "type": "NEW_PROOF",
-            "source_declarations": []
-          }
-        ]
-      }
     },
     {
       "id": "LAND-DEBATE-001",

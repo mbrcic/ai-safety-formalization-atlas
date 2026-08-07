@@ -28,7 +28,7 @@ extensional I/O specification: no total sound-and-complete computable verifier
 exists for all program codes.
 
 Melo, Máximo, Soma, and Castro ([arXiv:2408.08995](https://arxiv.org/abs/2408.08995);
-Sci. Rep. 2025; catalog `atlas-ref-melo-2024`, landscape `LAND-MELO-001`) apply
+Sci. Rep. 2025; catalog `atlas-ref-melo-2024`) apply
 Rice to a stated decision problem: whether an arbitrary AI model (as a program)
 always satisfices a fixed non-trivial judge of input/output pairs. Basics and
 coverage estimate: `docs/guide/related-literature.md`. The atlas formalizes the

@@ -355,10 +355,27 @@ CASES = [
         "registry: artifact with incorrect root import claim",
         "validate_registry.py",
         "registry.yaml",
-        lambda d: first(d["results"], id="LAND-MELO-001").__setitem__(
+        lambda d: first(d["results"], id="LAND-JOINTOBS-001").__setitem__(
             "root_import", False
         ),
         "disagrees with the public root import closure",
+    ),
+    (
+        "registry: one declaration owned by two rows",
+        "validate_registry.py",
+        "registry.yaml",
+        lambda d: first(d["results"], id="LAND-GS-002")["lean_artifact"][
+            "declarations"
+        ].__setitem__(
+            0,
+            dict(
+                first(d["results"], id="LAND-GS-002")["lean_artifact"]["declarations"][
+                    0
+                ],
+                atlas_declaration="AISafetyAtlas.SocialChoice.arrow",
+            ),
+        ),
+        "is owned by BY-007 and claimed again by LAND-GS-002",
     ),
     (
         "registry: result with empty notes",

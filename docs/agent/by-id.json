@@ -3,7 +3,7 @@
   "generated_by": "scripts/generate_registry_views.py",
   "note": "Compact agent lookup over the single results ledger. Prefer this over registry.yaml; open the full YAML only for one id when notes or candidate-formalization detail is required. A row with an informal claim states something a source asserted; a row without one records a formalization standing on its own account.",
   "claim_count": 44,
-  "artifact_count": 17,
+  "artifact_count": 16,
   "results_by_id": {
     "BY-001": {
       "id": "BY-001",
@@ -907,7 +907,7 @@
         "declarations": [
           {
             "atlas_declaration": "AISafetyAtlas.Explainability.attribution_impossibility",
-            "type": "NEW_PROOF"
+            "type": "WRAPPER"
           }
         ]
       },
@@ -952,7 +952,7 @@
         "declarations": [
           {
             "atlas_declaration": "AISafetyAtlas.SocialChoice.gibbard_satterthwaite",
-            "type": "NEW_PROOF"
+            "type": "WRAPPER"
           }
         ]
       },
@@ -1051,32 +1051,6 @@
         }
       ],
       "lean_artifact": null,
-      "candidate_count": 0
-    },
-    "LAND-MELO-001": {
-      "id": "LAND-MELO-001",
-      "name": "Melo et al. inner-alignment decision problem (Rice packaging)",
-      "ai_bridge_status": null,
-      "informal_claim": null,
-      "formalizations": [
-        {
-          "framework": "Lean",
-          "relationship": null,
-          "reproduced": true,
-          "declaration": "AISafetyAtlas.Verification.AgentBehavior.no_behavioral_safety_verifier",
-          "module": null,
-          "repository": "https://arxiv.org/abs/2408.08995",
-          "version": "arXiv:2408.08995 (2024); Sci. Rep. 2025 companion publication"
-        }
-      ],
-      "lean_artifact": {
-        "declarations": [
-          {
-            "atlas_declaration": "AISafetyAtlas.Verification.AgentBehavior.no_behavioral_safety_verifier",
-            "type": "NEW_PROOF"
-          }
-        ]
-      },
       "candidate_count": 0
     },
     "LAND-DEBATE-001": {

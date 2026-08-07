@@ -13,18 +13,18 @@ Statement-match is not the primary success score.
 | Metric | Current |
 |---|---:|
 | Results stating a source claim | 44 |
-| Results recording a formalization only | 17 |
-| Registry results with atlas Lean (any grade) | 22 |
+| Results recording a formalization only | 16 |
+| Registry results with atlas Lean (any grade) | 21 |
 | Claim results with statement-match (`EXACT` or `EQUIVALENT`) | 7 |
 | Claim results with workbench formalizations (`RELATED` only) | 6 |
-| Verified formalization records | 47 |
+| Verified formalization records | 46 |
 | Atlas Lean theorem declarations (unique names) | 49 |
-| Registry Lean declaration records | 50 |
-| … of which `WRAPPER` | 12 |
+| Registry Lean declaration records | 49 |
+| … of which `WRAPPER` | 14 |
 | … of which `BRIDGE` | 4 |
-| … of which `NEW_PROOF` | 34 |
+| … of which `NEW_PROOF` | 31 |
 | … of which `REFERENCE` | 0 |
-| Registry rows whose atlas Lean is wrapper-only | 5 |
+| Registry rows whose atlas Lean is wrapper-only | 7 |
 | Registry rows with at least one `BRIDGE` declaration | 3 |
 | Structured `candidate_formalizations` leads | 5 |
 | Reproduced external formalization records | 7 across 6 registry results |
@@ -50,9 +50,8 @@ Statement-match is not the primary success score.
 | BY-033 | Unverifiability of robot ethics | `RELATED` | `AISafetyAtlas.Computability.halting_problem` | `AISafetyAtlas.Verification.Robot.action_safety_unverifiable (BRIDGE)` |
 | BY-039 | Reward corruption unsolvability | `RELATED` | `AISafetyAtlas.Wireheading.CRMDP.Env.observed_complement`<br>`AISafetyAtlas.Wireheading.CRMDP.return_add_complement`<br>`AISafetyAtlas.Wireheading.Corruption.ComplementedClass.everitt_theorem_eleven` | `AISafetyAtlas.Wireheading.CRMDP.Model.everitt_theorem_eleven (NEW_PROOF)` |
 | BY-043 | Misaligned embodiment | `RELATED` | `Angluin (1980), deterministic anonymous-network symmetry obstruction` | `AISafetyAtlas.Compositional.Symmetry.Protocol.no_unique_leader_from_symmetric_start (NEW_PROOF)` |
-| LAND-ATTR-001 | Attribution impossibility (DASH trilemma) |  | — | `AISafetyAtlas.Explainability.attribution_impossibility (NEW_PROOF)` |
-| LAND-GS-002 | Gibbard–Satterthwaite theorem (Lean / SocialChoiceLean) |  | `gibbard_satterthwaite` | `AISafetyAtlas.SocialChoice.gibbard_satterthwaite (NEW_PROOF)` |
-| LAND-MELO-001 | Melo et al. inner-alignment decision problem (Rice packaging) |  | — | `AISafetyAtlas.Verification.AgentBehavior.no_behavioral_safety_verifier (NEW_PROOF)` |
+| LAND-ATTR-001 | Attribution impossibility (DASH trilemma) |  | `DASHImpossibility.attribution_impossibility` | `AISafetyAtlas.Explainability.attribution_impossibility (WRAPPER)` |
+| LAND-GS-002 | Gibbard–Satterthwaite theorem (Lean / SocialChoiceLean) |  | `SocialChoice.gibbard_satterthwaite` | `AISafetyAtlas.SocialChoice.gibbard_satterthwaite (WRAPPER)` |
 | LAND-HYPER-002 | k-safety self-composition and hyperproperty decomposition |  | `k_safety_iff_finite_self_composition; k_safety_iff_product_self_composition; self_composition_is_safety; isClosed_iff_hyperSafety; dense_iff_hyperLiveness; hyperSafety_of_isKSafety; hyperSafety_hyperLiveness_decomposition` | `AISafetyAtlas.Compositional.Hyperproperties.k_safety_iff_finite_self_composition (NEW_PROOF)` |
 | LAND-ANGLUIN-001 | Port-labelled anonymous networks, views, and automorphisms |  | `runFor_eq_of_view_eq; invariant_of_automorphism; no_unique_leader_of_fixedPointFree; invariant_of_constant` | `AISafetyAtlas.Compositional.Networks.runFor_eq_of_view_eq (NEW_PROOF)` |
 | LAND-RECT-001 | Rectangle, exchange, and unary-contract equivalences |  | `rectangle_iff_exchange_closed; coordinate_product_iff_spliceClosed; not_isCoordinateProduct_finitelySupported; coordinate_product_iff_recombination_closed` | `AISafetyAtlas.Compositional.rectangle_iff_exchange_closed (NEW_PROOF)` |
