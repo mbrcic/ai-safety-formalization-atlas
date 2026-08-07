@@ -149,6 +149,35 @@ mechanizing it audits the sketch.
 - **Does not change:** the other two rows until each lands; no retro-claim of
   coverage in README/registry until a proof (not a statement) is in.
 
+### CT-16 — Instantiate the bounded portfolio target on your own architecture (M) — **Onboarding exercise**
+
+`AISafetyAtlas.Oversight.JointObservation` defines what a *correct* portfolio of
+observations would be — `PortfolioCovers`, `InclusionMinimalCovering`, a declared
+`PortfolioCost`, `CostOptimalCovering` — and checks one three-principal instance in
+[`Examples.Oversight.JointObservation.Portfolio`](../../AISafetyAtlas/Examples/Oversight/JointObservation/Portfolio.lean).
+Nothing outside that example has ever instantiated it. That is the gap: a target
+specification nobody has consumed is a specification whose ergonomics are untested.
+
+- **Goal:** bring your own bounded architecture — principals, a finite execution
+  enumeration, a hazard family of at least two hazards, a declared candidate family,
+  and a declared cost — and prove a portfolio for it covers, is inclusion-minimal, and
+  is or is not cost-optimal. The interesting instances are the ones where the two
+  orderings *disagree*, since `inclusionMinimal_of_costOptimal` gives only one
+  direction and the non-implication is exhibited rather than proved.
+- **Where to start:** read
+  [joint observation model](joint-observation-model.md), then the example above; it is
+  fully explicit and every step is `decide`-able on a small enumeration.
+- **Acceptance:** a new `Examples/` module that imports only the facade
+  `AISafetyAtlas.Oversight.JointObservation`, restates no kernel definition, and adds
+  its build target to `scripts/lean_build_targets.txt`; `agent_gate.sh` + `lake build`
+  green; kernel axioms clean.
+- **Does not change:** any coverage count. This is landscape infrastructure
+  (`LAND-JOINTOBS-001`), not a survey row, and an instance claims nothing about
+  strategic production — everything stays under the truthful mechanism `M0`.
+- **Report back:** what the type of `joint` made awkward. Coalition access is enforced
+  by type rather than by a side condition, and that is exactly the design choice a
+  second consumer is positioned to falsify.
+
 ### CT-6 — First possibility proof: continuous free lunches (BY-022) (L) — **New proof rung**
 
 - **Goal:** give BY-022 (*Free lunches in continuous spaces and coevolution*,

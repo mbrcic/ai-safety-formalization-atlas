@@ -5,6 +5,7 @@ public import AISafetyAtlas.Compositional
 public import AISafetyAtlas.Explainability
 public import AISafetyAtlas.Learning
 public import AISafetyAtlas.Logic
+public import AISafetyAtlas.Oversight.JointObservation
 public import AISafetyAtlas.Preference
 public import AISafetyAtlas.Preference.Complexity
 public import AISafetyAtlas.Preference.Reasonable

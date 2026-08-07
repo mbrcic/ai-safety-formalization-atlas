@@ -3,7 +3,7 @@
   "generated_by": "scripts/generate_registry_views.py",
   "note": "Compact agent lookup. Prefer this over registry.yaml / landscape.yaml. Open the full YAML only for a single id when notes or candidate formalization detail is required.",
   "survey_result_count": 44,
-  "landscape_entry_count": 16,
+  "landscape_entry_count": 17,
   "results_by_id": {
     "BY-001": {
       "id": "BY-001",
@@ -1183,6 +1183,15 @@
       "atlas_declaration": "AISafetyAtlas.Wireheading.GoalPreservationSource.Model.selected_matches_initial",
       "related_survey_ids": [],
       "module": "AISafetyAtlas.Wireheading.GoalPreservationSource",
+      "survey_coverage": null
+    },
+    "LAND-JOINTOBS-001": {
+      "id": "LAND-JOINTOBS-001",
+      "name": "Coalition-indexed joint observation and the emitted-interface coverage boundary",
+      "framework": "Lean",
+      "atlas_declaration": "AISafetyAtlas.Oversight.JointObservation.covers_iff_no_collision",
+      "related_survey_ids": [],
+      "module": "AISafetyAtlas.Oversight.JointObservation",
       "survey_coverage": null
     }
   }

@@ -6,3 +6,5 @@ AISafetyAtlas.Examples.FirstContribution
 AISafetyAtlas.Examples.SixTargets
 AISafetyAtlas.Examples.WorkbenchConsumers
 AISafetyAtlas.Survey.BrcicYampolskiy.HaltingExample
+AISafetyAtlas.Examples.Oversight.JointObservation.Procurement
+AISafetyAtlas.Examples.Oversight.JointObservation.Portfolio

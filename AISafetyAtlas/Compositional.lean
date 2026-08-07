@@ -48,6 +48,12 @@ arbitrary topology (use `PrefixTopology` for the operational reading).
 - **Not** full Angluin covering theory, randomized leader election, or
   assume-guarantee completeness (e.g. Dewes–Dimitrova GEDCs).
 - **Not** an AI-system bridge. No `ai_bridge_status` graduation from this facade.
+- **Not** the same question as `AISafetyAtlas.Oversight.JointObservation`. That surface
+  asks whether a hazard label factors through an available observation, under typed
+  coalition access restriction. Rectangularity asks whether a relation decomposes into
+  local product constraints. Neither subsumes the other — a rectangular relation may be
+  unobservable, and a non-rectangular one may be covered — but the indistinguishability
+  and bounded-witness patterns recur in both.
 
 Landscape / survey anchors: `LAND-HYPER-002`, `LAND-RECT-001`, `LAND-ANGLUIN-001`,
 BY-043 (RELATED). Cores compile; paper-parity residuals live in

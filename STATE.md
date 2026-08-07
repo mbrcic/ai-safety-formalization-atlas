@@ -13,7 +13,7 @@ remain `REVIEWED` (the robot formalization remains `RELATED`).
   **44** survey rows; statement-match **7/44**;
   `RELATED`-only **6**; reviewed bridges **2**;
   WRAPPER **12** / BRIDGE **4**; candidates **5**;
-  landscape **16** (`landscape.yaml`).
+  landscape **17** (`landscape.yaml`).
 <!-- END GENERATED REGISTRY SNAPSHOT -->
 
 <!-- BEGIN GENERATED RELEASE STATUS -->

@@ -79,6 +79,7 @@ Prefer a facade over the full root import when starting a proof:
 import AISafetyAtlas.Preference    -- planner/reward limits, override, regret
 import AISafetyAtlas.Wireheading   -- reward channels, self-modification
 import AISafetyAtlas.Compositional -- rectangles, hyperproperties, networks
+import AISafetyAtlas.Oversight.JointObservation -- coalition evidence, coverage, collision
 ```
 
 Cross-surface consumer pattern (compositional boundary + nonzero regret +
@@ -140,6 +141,10 @@ The stable entry points are conventional theorem names under domain namespaces:
 - `AISafetyAtlas.Compositional` — rectangularity, hyperproperties, and network symmetry
 - `AISafetyAtlas.Wireheading` — objective, corruption, and goal-preservation cores
 - `AISafetyAtlas.Preference` — preference-unidentifiability and override cores
+- `AISafetyAtlas.Oversight.JointObservation` — `covers_iff_no_collision`, the certified
+  finite checker `decideCoverage`, the repair boundary, and the bounded portfolio target
+  (landscape `LAND-JOINTOBS-001`, not a survey row; see the
+  [joint observation model](docs/guide/joint-observation-model.md))
 
 The three latter facades contain short primary-surface tables and explicit
 paper-parity non-claims. Their source maps and residual gaps are recorded in the

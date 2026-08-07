@@ -30,6 +30,7 @@ Root project files still used for navigation: [`README.md`](../README.md),
 - [Contributor tasks](guide/contributor-tasks.md) — bounded CT units
 - [Logic incompleteness](guide/logic-incompleteness.md) — Chaitin vs Gödel aliases
 - [Robot verification model](guide/robot-verification-model.md) — paper vs Lean model
+- [Joint observation model](guide/joint-observation-model.md) — what a coalition's evidence can decide
 - [AI safety literature map](guide/related-literature.md) — papers first: how the atlas addresses them
 
 ## Provenance (evidence)
