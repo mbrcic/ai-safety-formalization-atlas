@@ -10,6 +10,8 @@ import re
 import sys
 from urllib.parse import urlsplit
 
+from validate_current_state import lean_code_without_comments_or_strings
+
 
 ROOT = Path(__file__).resolve().parents[1]
 REGISTRY = ROOT / "registry.yaml"
@@ -28,6 +30,57 @@ def valid_http_url(value: object) -> bool:
         return False
     parsed = urlsplit(value)
     return parsed.scheme in {"http", "https"} and bool(parsed.netloc)
+
+
+def lean_module_name(path: Path) -> str:
+    """Return the dotted Lean module name for a repository-relative source."""
+    return ".".join(path.relative_to(ROOT).with_suffix("").parts)
+
+
+def local_imports(source: str, local_modules: set[str]) -> set[str]:
+    """Read local imports without treating external packages as atlas modules."""
+    source = lean_code_without_comments_or_strings(source)
+    imports: set[str] = set()
+    for match in re.finditer(r"^\s*(?:public\s+)?import\s+(.+)$", source, re.M):
+        imports.update(
+            token for token in match.group(1).split() if token in local_modules
+        )
+    return imports
+
+
+def root_import_closure() -> tuple[set[str], set[str]]:
+    """Compute the actual local module closure of the public root facade.
+
+    The result-level ``root_import`` flag is published metadata, so it must be
+    checked against the same import graph that determines whether a declaration
+    is reachable from ``AISafetyAtlas``. Direct-import membership is not enough:
+    a facade may re-export a nested module through an intermediate import.
+    """
+    sources = {
+        lean_module_name(path): path
+        for path in (ROOT / "AISafetyAtlas").rglob("*.lean")
+    }
+    root = ROOT / "AISafetyAtlas.lean"
+    sources["AISafetyAtlas"] = root
+    modules = set(sources)
+    graph = {
+        module: local_imports(path.read_text(encoding="utf-8"), modules)
+        for module, path in sources.items()
+    }
+    closure: set[str] = set()
+    pending = list(graph["AISafetyAtlas"])
+    while pending:
+        module = pending.pop()
+        if module in closure:
+            continue
+        closure.add(module)
+        pending.extend(graph.get(module, set()) - closure)
+    return modules, closure
+
+
+def normalize_module_name(value: str) -> str:
+    """Accept the historical slash/``.lean`` spelling as a module name."""
+    return value.removesuffix(".lean").replace("/", ".")
 
 
 SOURCE_ROLES = {"directory", "work"}
@@ -149,6 +202,10 @@ def main() -> None:
     # Closure is a property of the catalogued source, not of the file: the BY
     # block stays contiguous and complete, and everything else is open.
     expected_count = survey.get("expected_result_count")
+    if not isinstance(expected_count, int) or expected_count < 1:
+        fail("survey.expected_result_count must be a positive integer")
+    if any(not isinstance(result, dict) for result in results):
+        fail("every result must be an object")
     actual_ids = [result.get("id") for result in results]
     if len(set(actual_ids)) != len(actual_ids):
         fail("result IDs must be unique")
@@ -259,14 +316,11 @@ def main() -> None:
     # check for themselves, so it carries what was searched, where, when, and
     # what the search did not cover. Recording one is optional; recording one
     # incompletely is not.
-    # root_import is not verified here. A declaration name is verified by the
-    # generated AISafetyAtlas/Examples/Registry.lean, which #checks every atlas
-    # declaration in the ledger, and by `lake build`, which elaborates it. A
-    # textual scan of the public surface cannot do that job: a declaration
-    # written inside `namespace AISafetyAtlas.Explainability` never appears as
-    # its qualified name, and matching the bare leaf accepts any name that
-    # occurs anywhere. What is checked here is only that the row has something
-    # to expose.
+    # A declaration name is verified by the generated
+    # AISafetyAtlas/Examples/Registry.lean, which #checks every atlas
+    # declaration in the ledger, and by the Lean build, which elaborates it.
+    # The result-level root_import flag is checked later against the actual
+    # module import closure.
 
     novelty_checks = search_evidence.get("novelty_checks")
     if not isinstance(novelty_checks, list):
@@ -333,13 +387,7 @@ def main() -> None:
         if source.get("role") == "directory"
     }
 
-    root_import_modules = set(
-        re.findall(
-            r"^\s*(?:public\s+)?import\s+(\S+)",
-            (ROOT / "AISafetyAtlas.lean").read_text(encoding="utf-8"),
-            re.M,
-        )
-    )
+    local_modules, root_closure = root_import_closure()
 
     for result in results:
         result_id = result.get("id", "<missing>")
@@ -351,9 +399,14 @@ def main() -> None:
         missing = needed - result.keys()
         if missing:
             fail(f"{result_id} missing fields: {sorted(missing)}")
-        if not result["name"]:
+        if not isinstance(result["name"], str) or not result["name"].strip():
             fail(f"{result_id} must have a name")
-        if is_claim and not result["informal_claim"]:
+        if not isinstance(result["notes"], str) or not result["notes"].strip():
+            fail(f"{result_id} must have non-empty notes")
+        if is_claim and (
+            not isinstance(result["informal_claim"], str)
+            or not result["informal_claim"].strip()
+        ):
             fail(f"{result_id} must have an informal claim")
         if not is_claim:
             stray = {"ai_bridge_status", "bridge_review", "candidate_formalizations"} & result.keys()
@@ -474,10 +527,12 @@ def main() -> None:
         for record in result.get("formalizations") or []:
             if record.get("relationship") != "RELATED" or not source_refs:
                 continue
-            module = record.get("module") or ""
+            module = normalize_module_name(
+                record.get("atlas_module") or record.get("module") or ""
+            )
             public = any(
                 module == name or module.startswith(name + ".")
-                for name in root_import_modules
+                for name in root_closure
             )
             delta = record.get("scope_delta")
             if not (public or interpretation_affecting):
@@ -584,7 +639,7 @@ def main() -> None:
                 fail(f"{result_id} formalization framework must be a non-empty string")
             if not isinstance(record["version"], str) or not record["version"].strip():
                 fail(f"{result_id} formalization version must be a non-empty string")
-            for optional_field in ("module", "declaration"):
+            for optional_field in ("module", "atlas_module", "declaration"):
                 if optional_field in record and (
                     not isinstance(record[optional_field], str)
                     or not record[optional_field].strip()
@@ -592,6 +647,34 @@ def main() -> None:
                     fail(
                         f"{result_id} formalization {optional_field} must be a "
                         "non-empty string when present"
+                    )
+            if "modules" in record:
+                modules = record["modules"]
+                if (
+                    not isinstance(modules, list)
+                    or not modules
+                    or any(
+                        not isinstance(module, str) or not module.strip()
+                        for module in modules
+                    )
+                ):
+                    fail(
+                        f"{result_id} formalization modules must be a non-empty list "
+                        "of non-empty strings"
+                    )
+                if "module" in record:
+                    fail(f"{result_id} formalization must use module or modules, not both")
+            if "upstream_module" in record:
+                fail(
+                    f"{result_id} uses deprecated upstream_module; use module for "
+                    "the referenced repository and atlas_module for the local atlas"
+                )
+            if "atlas_module" in record:
+                atlas_module = normalize_module_name(record["atlas_module"])
+                if atlas_module not in local_modules:
+                    fail(
+                        f"{result_id} atlas_module does not name a local Lean module: "
+                        f"{record['atlas_module']}"
                     )
             if "relationship" in record and not isinstance(record["relationship"], str):
                 fail(f"{result_id} formalization relationship must be a string")
@@ -637,12 +720,24 @@ def main() -> None:
                     )
             elif record["version"] == IN_TREE_VERSION:
                 fail(f"{result_id} external formalization cannot use {IN_TREE_VERSION}")
+            if (
+                not is_claim
+                and artifact is not None
+                and record["framework"] == "Lean"
+                and record["repository"] != PROJECT_REPOSITORY
+                and "atlas_module" not in record
+            ):
+                fail(
+                    f"{result_id} external Lean artifact must record atlas_module "
+                    "separately from the referenced repository module"
+                )
             formalization_key = (
                 result_id,
                 str(record["framework"]),
                 str(record["repository"]),
                 str(record["version"]),
                 str(record.get("module", "")),
+                str(record.get("modules", "")),
                 str(record.get("declaration", "")),
             )
             if formalization_key in formalization_keys:
@@ -683,6 +778,22 @@ def main() -> None:
                 claim_formalization_count += 1
             if record["framework"] != "Lean" and record["reproduced"]:
                 reproduced_external_count += 1
+
+        if "root_import" in result and result["lean_artifact"] is not None:
+            atlas_modules = set()
+            for record in result["formalizations"]:
+                if record.get("repository") == PROJECT_REPOSITORY and record.get("module"):
+                    atlas_modules.add(normalize_module_name(record["module"]))
+                elif record.get("atlas_module"):
+                    atlas_modules.add(normalize_module_name(record["atlas_module"]))
+            if not atlas_modules:
+                fail(f"{result_id} root_import requires a recorded atlas module")
+            expected_root_import = any(module in root_closure for module in atlas_modules)
+            if result["root_import"] != expected_root_import:
+                fail(
+                    f"{result_id} root_import={result['root_import']} disagrees with "
+                    f"the public root import closure ({expected_root_import})"
+                )
 
     claims = sum(1 for r in results if "informal_claim" in r)
     print(

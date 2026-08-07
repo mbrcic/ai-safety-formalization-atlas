@@ -83,7 +83,7 @@ monorepo in-tree. Reusable structure and honest grading over volume.
 |---|---:|
 | Atlas Lean declarations | **49** |
 | Results stating a source claim | **44** |
-| Results recording a formalization only | **17** (8 on root import) |
+| Results recording a formalization only | **17** (9 on root import) |
 | Reviewed AI-system bridges | **2** |
 | Open conjectures | **0** |
 | Catalogued results with statement-match | **7** |

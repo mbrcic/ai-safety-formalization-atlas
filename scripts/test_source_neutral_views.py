@@ -3,7 +3,7 @@
 
 The ledger accepts claims from sources other than the closed BY catalogue. Those
 claims must remain visible to global views without entering the CSUR-specific
-status page or source report.
+source report, and the CSUR-specific denominator must remain unchanged.
 """
 
 from __future__ import annotations
@@ -30,10 +30,14 @@ def main() -> None:
         registry,
         json.loads((ROOT / "docs/provenance/formalization-search.json").read_text()),
     )
+    by_area = views.render_by_area(registry)
     source_report = views.render_survey_source_report(registry)
-    for output, label in ((status, "status"), (source_report, "source report")):
-        if "LAND-AISI-001" in output:
-            raise SystemExit(f"source-neutral regression: AISI claim entered {label}")
+    if "| Results stating a source claim | 45 |" not in status:
+        raise SystemExit("source-neutral regression: global status did not count the AISI claim")
+    if "LAND-AISI-001" not in by_area:
+        raise SystemExit("source-neutral regression: AISI claim is absent from the by-area view")
+    if "LAND-AISI-001" in source_report:
+        raise SystemExit("source-neutral regression: AISI claim entered the CSUR source report")
     if "45 / 44" in status or "44 / 45" in status:
         raise SystemExit("source-neutral regression: CSUR denominator changed")
     if "44 / 44" not in status:

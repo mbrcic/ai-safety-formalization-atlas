@@ -352,6 +352,31 @@ CASES = [
         "root_import must be boolean",
     ),
     (
+        "registry: artifact with incorrect root import claim",
+        "validate_registry.py",
+        "registry.yaml",
+        lambda d: first(d["results"], id="LAND-MELO-001").__setitem__(
+            "root_import", False
+        ),
+        "disagrees with the public root import closure",
+    ),
+    (
+        "registry: result with empty notes",
+        "validate_registry.py",
+        "registry.yaml",
+        lambda d: first(d["results"], id="LAND-VNM-001").__setitem__("notes", " "),
+        "must have non-empty notes",
+    ),
+    (
+        "registry: external artifact without local atlas module",
+        "validate_registry.py",
+        "registry.yaml",
+        lambda d: first(d["results"], id="LAND-GS-002")["formalizations"][0].pop(
+            "atlas_module"
+        ),
+        "external Lean artifact must record atlas_module",
+    ),
+    (
         "registry: artifact with malformed tag",
         "validate_registry.py",
         "registry.yaml",

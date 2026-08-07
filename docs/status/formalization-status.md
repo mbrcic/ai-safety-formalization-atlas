@@ -12,26 +12,30 @@ Statement-match is not the primary success score.
 
 | Metric | Current |
 |---|---:|
-| Brčić–Yampolskiy survey rows catalogued (that source, complete) | 44 / 44 |
-| Survey results with atlas Lean (any grade) | 13 |
-| … statement-match (`EXACT` or `EQUIVALENT`) | 7 |
-| … workbench formalizations (`RELATED` only) | 6 |
-| Verified formalization records | 30 |
-| Atlas Lean theorem declarations | 41 |
+| Results stating a source claim | 44 |
+| Results recording a formalization only | 17 |
+| Registry results with atlas Lean (any grade) | 22 |
+| Claim results with statement-match (`EXACT` or `EQUIVALENT`) | 7 |
+| Claim results with workbench formalizations (`RELATED` only) | 6 |
+| Verified formalization records | 47 |
+| Atlas Lean theorem declarations (unique names) | 49 |
+| Registry Lean declaration records | 50 |
 | … of which `WRAPPER` | 12 |
 | … of which `BRIDGE` | 4 |
-| … of which `NEW_PROOF` | 25 |
+| … of which `NEW_PROOF` | 34 |
 | … of which `REFERENCE` | 0 |
-| Survey rows whose atlas Lean is wrapper-only | 5 |
-| Survey rows with at least one `BRIDGE` declaration | 3 |
+| Registry rows whose atlas Lean is wrapper-only | 5 |
+| Registry rows with at least one `BRIDGE` declaration | 3 |
 | Structured `candidate_formalizations` leads | 5 |
-| Reproduced external coverage records | 3 across 2 survey results |
-| Survey results with reviewed AI-system bridges | 2 |
+| Reproduced external formalization records | 7 across 6 registry results |
+| Claim results with reviewed AI-system bridges | 2 |
+| Brčić–Yampolskiy survey rows catalogued (that source, complete) | 44 / 44 |
+| Survey rows with atlas Lean (any grade) | 13 |
 | … with six-corpus discovery evidence (that source, complete) | 44 / 44 |
 
 ## Registry Lean declarations
 
-| ID | Survey result | Formalization relationships | Source declarations | Atlas declarations and layers |
+| ID | Registry result | Formalization relationships | Source declarations | Atlas declarations and layers |
 |---|---|---|---|---|
 | BY-007 | Arrow's impossibility theorem | `EQUIVALENT` | `AISafetyAtlas.Upstream.Arrow.Impossibility` | `AISafetyAtlas.SocialChoice.arrow (WRAPPER)`<br>`AISafetyAtlas.SocialChoice.Utility.arrow (BRIDGE)` |
 | BY-011 | Limits on preference deduction | `RELATED` | `AISafetyAtlas.Preference.Planner`<br>`AISafetyAtlas.Preference.Explains`<br>`AISafetyAtlas.Preference.exists_planner`<br>`AISafetyAtlas.Preference.greedyAction_max`<br>`AISafetyAtlas.Preference.greedyPlanner`<br>`AISafetyAtlas.Preference.rewardOf`<br>`AISafetyAtlas.Preference.Source.ReasonableForF.F₁_of_compatible`<br>`AISafetyAtlas.Preference.Source.ReasonableForF.F₂_of_compatible`<br>`AISafetyAtlas.Preference.Source.ReasonableForF.F₃_of_compatible`<br>`AISafetyAtlas.Preference.Source.ReasonableForF.F₄_F₄`<br>`AISafetyAtlas.Preference.op3_op4`<br>`AISafetyAtlas.Preference.ReasonableLanguage.policy_le_of_compatible`<br>`AISafetyAtlas.Preference.op3_op1_op5`<br>`AISafetyAtlas.Preference.op3_op2_op6`<br>`AISafetyAtlas.Preference.op3_op4_op2_op6`<br>`AISafetyAtlas.Preference.ReasonableLanguage.Compatible`<br>`Kolmogorov.plainKMapLe`<br>`AISafetyAtlas.Preference.decodeBehaviour_encodeExplanation`<br>`AISafetyAtlas.Preference.computable_encodeExplanation`<br>`AISafetyAtlas.Preference.explanation_at_least_behaviour`<br>`AISafetyAtlas.Preference.degenerate_explanation_cheap`<br>`AISafetyAtlas.Wireheading.Corruption.ComplementedClass.halfMaximalRegretBound`<br>`AISafetyAtlas.Preference.OverrideModel.mixtureValue`<br>`AISafetyAtlas.Preference.OverrideModel`<br>`AISafetyAtlas.Preference.Source.ReasonableForF.NotAmongLowestCompatible`<br>`AISafetyAtlas.Preference.Source.ReasonableForF.proposition_seven`<br>`AISafetyAtlas.Preference.OverrideModel.regret` | `AISafetyAtlas.Preference.exists_planner (NEW_PROOF)`<br>`AISafetyAtlas.Preference.exists_reward (NEW_PROOF)`<br>`AISafetyAtlas.Preference.consistent_rewards_eq_univ (NEW_PROOF)`<br>`AISafetyAtlas.Preference.neg_twin (NEW_PROOF)`<br>`AISafetyAtlas.Preference.greedy_rewardOf (NEW_PROOF)`<br>`AISafetyAtlas.Preference.Source.ReasonableForF.proposition_seven (NEW_PROOF)`<br>`AISafetyAtlas.Preference.Source.ReasonableForF.proposition_eight (NEW_PROOF)`<br>`AISafetyAtlas.Preference.ReasonableLanguage.proposition_seven (NEW_PROOF)`<br>`AISafetyAtlas.Preference.ReasonableLanguage.proposition_eight (NEW_PROOF)`<br>`AISafetyAtlas.Preference.explanation_at_least_behaviour (NEW_PROOF)`<br>`AISafetyAtlas.Preference.degenerate_explanation_cheap (NEW_PROOF)`<br>`AISafetyAtlas.Preference.explanation_complexity_eq_behaviour (NEW_PROOF)`<br>`AISafetyAtlas.Preference.RegretModel.cannot_rule_out_half_maximal_regret (NEW_PROOF)`<br>`AISafetyAtlas.Preference.OverrideModel.mixtureValue_rationalise (NEW_PROOF)`<br>`AISafetyAtlas.Preference.Source.ReasonableForF.theorem_two_conditional (NEW_PROOF)`<br>`AISafetyAtlas.Preference.OverrideModel.rationalise_strictly_better (NEW_PROOF)` |
@@ -46,19 +50,32 @@ Statement-match is not the primary success score.
 | BY-033 | Unverifiability of robot ethics | `RELATED` | `AISafetyAtlas.Computability.halting_problem` | `AISafetyAtlas.Verification.Robot.action_safety_unverifiable (BRIDGE)` |
 | BY-039 | Reward corruption unsolvability | `RELATED` | `AISafetyAtlas.Wireheading.CRMDP.Env.observed_complement`<br>`AISafetyAtlas.Wireheading.CRMDP.return_add_complement`<br>`AISafetyAtlas.Wireheading.Corruption.ComplementedClass.everitt_theorem_eleven` | `AISafetyAtlas.Wireheading.CRMDP.Model.everitt_theorem_eleven (NEW_PROOF)` |
 | BY-043 | Misaligned embodiment | `RELATED` | `Angluin (1980), deterministic anonymous-network symmetry obstruction` | `AISafetyAtlas.Compositional.Symmetry.Protocol.no_unique_leader_from_symmetric_start (NEW_PROOF)` |
+| LAND-ATTR-001 | Attribution impossibility (DASH trilemma) |  | — | `AISafetyAtlas.Explainability.attribution_impossibility (NEW_PROOF)` |
+| LAND-GS-002 | Gibbard–Satterthwaite theorem (Lean / SocialChoiceLean) |  | `gibbard_satterthwaite` | `AISafetyAtlas.SocialChoice.gibbard_satterthwaite (NEW_PROOF)` |
+| LAND-MELO-001 | Melo et al. inner-alignment decision problem (Rice packaging) |  | — | `AISafetyAtlas.Verification.AgentBehavior.no_behavioral_safety_verifier (NEW_PROOF)` |
+| LAND-HYPER-002 | k-safety self-composition and hyperproperty decomposition |  | `k_safety_iff_finite_self_composition; k_safety_iff_product_self_composition; self_composition_is_safety; isClosed_iff_hyperSafety; dense_iff_hyperLiveness; hyperSafety_of_isKSafety; hyperSafety_hyperLiveness_decomposition` | `AISafetyAtlas.Compositional.Hyperproperties.k_safety_iff_finite_self_composition (NEW_PROOF)` |
+| LAND-ANGLUIN-001 | Port-labelled anonymous networks, views, and automorphisms |  | `runFor_eq_of_view_eq; invariant_of_automorphism; no_unique_leader_of_fixedPointFree; invariant_of_constant` | `AISafetyAtlas.Compositional.Networks.runFor_eq_of_view_eq (NEW_PROOF)` |
+| LAND-RECT-001 | Rectangle, exchange, and unary-contract equivalences |  | `rectangle_iff_exchange_closed; coordinate_product_iff_spliceClosed; not_isCoordinateProduct_finitelySupported; coordinate_product_iff_recombination_closed` | `AISafetyAtlas.Compositional.rectangle_iff_exchange_closed (NEW_PROOF)` |
+| LAND-WIRE-OBJ-001 | Ring-Orseau objective factorization |  | `AgentEquations.value_eq_of_agree_on_window; AgentEquations.truncation_exact; AgentEquations.bestAction_max; Objective.value_eq_of_agree_on_window; Objective.value_scaleUtility; Objective.optimal_decisions_eq_of_pos_scaleUtility; Objective.value_congr; Objective.optimal_decisions_congr` | `AISafetyAtlas.Wireheading.AgentEquations.value_eq_of_agree_on_window (NEW_PROOF)` |
+| LAND-GOAL-001 | Finite-percept on-policy goal-preservation induction step | `RELATED` | `GoalPreservationSource.Model.selected_matches_initial; GoalPreservationSource.Model.safe_modification; GoalPreservationSource.Model.qValue_selected_eq_initial; next_policy_optimal; run_optimal; goal_preservation` | `AISafetyAtlas.Wireheading.GoalPreservationSource.Model.selected_matches_initial (NEW_PROOF)` |
+| LAND-JOINTOBS-001 | Coalition-indexed joint observation and the emitted-interface coverage boundary |  | `covers_iff_no_collision; not_covers_of_collisionWitness; exists_collisionWitness_of_not_covers; decideCoverage; decideCoverage_covered_iff; CoverageResult.covered_eq_true_iff; decidableCovers; postprocess_cannot_repair_collision; covers_of_refines; observe_truthful; PortfolioCovers; PortfolioIndistinguishable; portfolioCovers_implies_hazardEquivalent; InclusionMinimalCovering; PortfolioCost; CostOptimalCovering; inclusionMinimal_of_costOptimal` | `AISafetyAtlas.Oversight.JointObservation.covers_iff_no_collision (NEW_PROOF)` |
 
 The generated declaration-presence checks live in
 [`AISafetyAtlas/Examples/Registry.lean`](../../AISafetyAtlas/Examples/Registry.lean).
 The hand-written `PublicAPI` examples separately protect the intended theorem
 signatures and root-import usability.
 
-## Reproduced external coverage
+## Reproduced external formalization records
 
-| ID | Survey result | Framework | Declaration | Relationship | Reproduction command |
+| ID | Registry result | Framework | Declaration | Relationship | Reproduction command |
 |---|---|---|---|---|---|
 | BY-007 | Arrow's impossibility theorem | Isabelle/HOL | `Arrow` | EQUIVALENT | `scripts/reproduce_isabelle.sh arrow` |
 | BY-007 | Arrow's impossibility theorem | Isabelle/HOL | `dictator` | EQUIVALENT | `scripts/reproduce_isabelle.sh arrow` |
 | BY-012 | Rice's theorem | Isabelle/HOL | `Rice_2` | EQUIVALENT | `scripts/reproduce_isabelle.sh rice` |
+| LAND-GS-001 | Gibbard–Satterthwaite theorem | Isabelle/HOL | `Gibbard_Satterthwaite` | — | `scripts/reproduce_isabelle.sh arrow` |
+| LAND-NFL-001 | No-free-lunch theorem for machine learning (Shalev-Shwartz–Ben-David §5.1) | Isabelle/HOL | `no_free_lunch_ML` | RELATED | `scripts/reproduce_isabelle.sh nfl` |
+| LAND-PE-001 | Parfit mere addition / conditional normative reasoning (Åqvist E) | Isabelle/HOL | `mere_addition encodings (Parent–Benzmüller CondNormReasHOL)` | RELATED | `scripts/reproduce_isabelle.sh condnorm` |
+| LAND-DL-001 | Deep vs shallow network capacity (Cohen–Bentkamp) | Isabelle/HOL | `fundamental_theorem_network_capacity` | RELATED | `scripts/reproduce_isabelle.sh deep-learning` |
 
 Additional reproduced variants and adjacent developments, including vNM
 expected utility, remain provenance rather than extra survey coverage; see

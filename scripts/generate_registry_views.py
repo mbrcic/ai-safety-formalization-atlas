@@ -157,7 +157,9 @@ def render_survey_source_report(registry: dict) -> str:
 
 
 def render_status(registry: dict, search_evidence: dict) -> str:
-    results = survey_claim_rows(registry)
+    results = claim_rows(registry)
+    survey_results = survey_claim_rows(registry)
+    all_results = registry["results"]
     covered = [
         result
         for result in results
@@ -170,11 +172,11 @@ def render_status(registry: dict, search_evidence: dict) -> str:
         and has_reproduced_relationship(result, {"RELATED"})
     ]
     formalizations = [
-        record for result in results for record in result["formalizations"]
+        record for result in all_results for record in result["formalizations"]
     ]
     artifacts = [
         declaration
-        for result in results
+        for result in all_results
         if result["lean_artifact"] is not None
         for declaration in result["lean_artifact"]["declarations"]
     ]
@@ -185,19 +187,19 @@ def render_status(registry: dict, search_evidence: dict) -> str:
     rows_with_bridge = sum(
         result["lean_artifact"] is not None
         and any(d["type"] == "BRIDGE" for d in result["lean_artifact"]["declarations"])
-        for result in results
+        for result in all_results
     )
     rows_wrapper_only = sum(
         result["lean_artifact"] is not None
         and all(d["type"] == "WRAPPER" for d in result["lean_artifact"]["declarations"])
-        for result in results
+        for result in all_results
     )
     candidate_leads = sum(
         len(result.get("candidate_formalizations") or []) for result in results
     )
     external = [
         (result, record)
-        for result in results
+        for result in all_results
         for record in result["formalizations"]
         if record["framework"] != "Lean" and record["reproduced"]
     ]
@@ -224,30 +226,34 @@ def render_status(registry: dict, search_evidence: dict) -> str:
         "",
         "| Metric | Current |",
         "|---|---:|",
-        f"| Brčić–Yampolskiy survey rows catalogued (that source, complete) | {len(results)} / {registry['survey']['expected_result_count']} |",
-        f"| Survey results with atlas Lean (any grade) | {sum(result['lean_artifact'] is not None for result in results)} |",
-        f"| … statement-match (`EXACT` or `EQUIVALENT`) | {len(covered)} |",
-        f"| … workbench formalizations (`RELATED` only) | {len(related_only)} |",
+        f"| Results stating a source claim | {len(results)} |",
+        f"| Results recording a formalization only | {len(artifact_rows(registry))} |",
+        f"| Registry results with atlas Lean (any grade) | {sum(result['lean_artifact'] is not None for result in all_results)} |",
+        f"| Claim results with statement-match (`EXACT` or `EQUIVALENT`) | {len(covered)} |",
+        f"| Claim results with workbench formalizations (`RELATED` only) | {len(related_only)} |",
         f"| Verified formalization records | {len(formalizations)} |",
-        f"| Atlas Lean theorem declarations | {len(artifacts)} |",
+        f"| Atlas Lean theorem declarations (unique names) | {len(all_declarations(registry))} |",
+        f"| Registry Lean declaration records | {len(artifacts)} |",
         f"| … of which `WRAPPER` | {len(wrappers)} |",
         f"| … of which `BRIDGE` | {len(bridges)} |",
         f"| … of which `NEW_PROOF` | {len(new_proofs)} |",
         f"| … of which `REFERENCE` | {len(references)} |",
-        f"| Survey rows whose atlas Lean is wrapper-only | {rows_wrapper_only} |",
-        f"| Survey rows with at least one `BRIDGE` declaration | {rows_with_bridge} |",
+        f"| Registry rows whose atlas Lean is wrapper-only | {rows_wrapper_only} |",
+        f"| Registry rows with at least one `BRIDGE` declaration | {rows_with_bridge} |",
         f"| Structured `candidate_formalizations` leads | {candidate_leads} |",
-        f"| Reproduced external coverage records | {len(external)} across {len({result['id'] for result, _ in external})} survey results |",
-        f"| Survey results with reviewed AI-system bridges | {reviewed_results} |",
-        f"| … with six-corpus discovery evidence (that source, complete) | {len(search_evidence['results'])} / {len(results)} |",
+        f"| Reproduced external formalization records | {len(external)} across {len({result['id'] for result, _ in external})} registry results |",
+        f"| Claim results with reviewed AI-system bridges | {reviewed_results} |",
+        f"| Brčić–Yampolskiy survey rows catalogued (that source, complete) | {len(survey_results)} / {registry['survey']['expected_result_count']} |",
+        f"| Survey rows with atlas Lean (any grade) | {sum(result['lean_artifact'] is not None for result in survey_results)} |",
+        f"| … with six-corpus discovery evidence (that source, complete) | {len(search_evidence['results'])} / {len(survey_results)} |",
         "",
         "## Registry Lean declarations",
         "",
-        "| ID | Survey result | Formalization relationships | Source declarations | Atlas declarations and layers |",
+        "| ID | Registry result | Formalization relationships | Source declarations | Atlas declarations and layers |",
         "|---|---|---|---|---|",
     ]
 
-    for result in results:
+    for result in all_results:
         artifact = result["lean_artifact"]
         if artifact is None:
             continue
@@ -268,7 +274,7 @@ def render_status(registry: dict, search_evidence: dict) -> str:
         )
         lines.append(
             f"| {result['id']} | {result['name']} | {code_list(relationships)} | "
-            f"{code_list(sources)} | {code_list(atlas)} |"
+            f"{code_list(sources) or '—'} | {code_list(atlas)} |"
         )
 
     lines.extend(
@@ -279,9 +285,9 @@ def render_status(registry: dict, search_evidence: dict) -> str:
             "The hand-written `PublicAPI` examples separately protect the intended theorem",
             "signatures and root-import usability.",
             "",
-            "## Reproduced external coverage",
+            "## Reproduced external formalization records",
             "",
-            "| ID | Survey result | Framework | Declaration | Relationship | Reproduction command |",
+            "| ID | Registry result | Framework | Declaration | Relationship | Reproduction command |",
             "|---|---|---|---|---|---|",
         ]
     )
@@ -303,7 +309,7 @@ def render_status(registry: dict, search_evidence: dict) -> str:
             "",
             "## Discovery coverage",
             "",
-            f"All {len(results)} rows have a **baseline classical six-corpus** search",
+            f"All {len(survey_results)} rows have a **baseline classical six-corpus** search",
             "(Mathlib, Isabelle AFP, Rocq Undecidability, HOL4, HOL Light, Agda stdlib);",
             f"{candidate_results} rows produced raw candidate-file hits. That pass is",
             "**scoped** negative/positive evidence for those corpora only — it does not",
@@ -322,6 +328,11 @@ def render_status(registry: dict, search_evidence: dict) -> str:
 
 def _md_cell(text: str) -> str:
     return text.replace("|", "\\|").replace("\n", " ")
+
+
+def _inline_code(text: object) -> str:
+    """Render a code span safely when the value itself contains backticks."""
+    return f"`{_md_cell(str(text)).replace('`', '&#96;')}`"
 
 
 def _short_citation(citation: str, limit: int = 120) -> str:
@@ -473,7 +484,7 @@ def render_routing() -> str:
 
 
 def render_by_area(registry: dict) -> str:
-    """The atlas indexed by mathematical area, spanning both ledgers.
+    """The atlas indexed by mathematical area, spanning the single registry ledger.
 
     A contributor arrives knowing an area, not an identifier. This is the entry
     point for "I work on provability logic / learning theory / social choice —
@@ -593,11 +604,20 @@ def render_source_index(registry: dict) -> str:
         locator = value.get("locator")
         link = f"[{locator}]({locator})" if locator else "—"
         lines.append(f"| `{key}` | {value.get('retrieved') or '—'} | {link} |")
+    report_paths = sorted(
+        path
+        for path in SOURCE_INDEX.parent.glob("*.md")
+        if path.name != SOURCE_INDEX.name
+    )
     lines += [
         "",
         "## Per-source coverage reports",
         "",
-        "- [Brčić–Yampolskiy impossibility survey](brcic-yampolskiy-2023.md)",
+        *(
+            f"- [`{path.name}`]({path.name})"
+            for path in report_paths
+        ),
+        "" if report_paths else "No per-source report has been generated yet.",
         "",
         "A source without a report is one nothing has been drawn from yet. That is a",
         "normal state, not a gap.",
@@ -636,7 +656,7 @@ def render_landscape_index(registry: dict) -> str:
             root = "yes" if entry.get("root_import") else "no"
             repro = record.get("build_command") or "—"
             if repro != "—":
-                repro = f"`{repro}`"
+                repro = _inline_code(repro)
             lines.append(
                 f"| {entry['id']} | {entry['name']} | {record['framework']} | "
                 f"{declarations} | {root} | {repro} |"
@@ -1012,10 +1032,13 @@ def main() -> None:
     stale |= update(
         CONJECTURE_CHECKS, render_conjecture_checks(conjectures), args.check
     )
-    stale |= update(SOURCE_INDEX, render_source_index(registry), args.check)
     stale |= update(
         SURVEY_SOURCE_REPORT, render_survey_source_report(registry), args.check
     )
+    # The source index discovers report files from this directory. Generate
+    # reports first so a newly added report is listed in the same run rather
+    # than appearing only after a second regeneration.
+    stale |= update(SOURCE_INDEX, render_source_index(registry), args.check)
     stale |= update(LANDSCAPE_INDEX, render_landscape_index(registry), args.check)
     stale |= update(
         AGENT_BY_ID, render_agent_by_id(registry), args.check

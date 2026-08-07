@@ -23,7 +23,8 @@ own that a statement-match grade can be related to.
 
 ## Per-source coverage reports
 
-- [Brčić–Yampolskiy impossibility survey](brcic-yampolskiy-2023.md)
+- [`brcic-yampolskiy-2023.md`](brcic-yampolskiy-2023.md)
+
 
 A source without a report is one nothing has been drawn from yet. That is a
 normal state, not a gap.

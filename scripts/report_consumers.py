@@ -60,7 +60,7 @@ EXAMPLES_PREFIX = "AISafetyAtlas.Examples"
 
 
 def load_declarations() -> dict[str, str]:
-    """Every atlas declaration in either ledger, mapped to its origin ID."""
+    """Every atlas declaration in the registry ledger, mapped to its origin ID."""
     registry = json.loads(REGISTRY.read_text(encoding="utf-8"))
     declarations: dict[str, str] = {}
     for result in registry["results"]:

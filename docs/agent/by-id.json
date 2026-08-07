@@ -898,7 +898,7 @@
           "relationship": null,
           "reproduced": true,
           "declaration": null,
-          "module": "AISafetyAtlas/Explainability.lean",
+          "module": "DASHImpossibility.Trilemma",
           "repository": "https://github.com/DrakeCaraker/dash-impossibility-lean",
           "version": "7ec3ef9813a7642fdabe5b73c71d1bed4d5488e2"
         }
@@ -943,7 +943,7 @@
           "relationship": null,
           "reproduced": true,
           "declaration": "gibbard_satterthwaite",
-          "module": "AISafetyAtlas/SocialChoice.lean",
+          "module": "SocialChoice.Impossibilities.GibbardSatterthwaite.Main",
           "repository": "https://github.com/DominikPeters/SocialChoiceLean",
           "version": "mbrcic/SocialChoiceLean port/lean-4.31 @ 74f491b (Mathlib/Lean v4.31.0)"
         }
@@ -1064,7 +1064,7 @@
           "relationship": null,
           "reproduced": true,
           "declaration": "AISafetyAtlas.Verification.AgentBehavior.no_behavioral_safety_verifier",
-          "module": "AISafetyAtlas/Verification/AgentBehavior.lean",
+          "module": null,
           "repository": "https://arxiv.org/abs/2408.08995",
           "version": "arXiv:2408.08995 (2024); Sci. Rep. 2025 companion publication"
         }
@@ -1109,7 +1109,7 @@
           "relationship": null,
           "reproduced": false,
           "declaration": "decomposition_theorem (Topology.v); safety_closed, liveness_dense, decomposition_safety_dense (TopologyTrace.v); Safety, Liveness, hprop, SSC, HSafe, H2Safe, HLiv (Properties.v)",
-          "module": "Topology.v, TopologyTrace.v, Properties.v",
+          "module": null,
           "repository": "https://github.com/secure-compilation/exploring-robust-property-preservation",
           "version": "c68187cbaba763d88cbb3509df4ca9cf49cc6338"
         }

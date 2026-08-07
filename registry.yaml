@@ -3040,8 +3040,8 @@
           "license": "Apache-2.0",
           "reproduced": true,
           "build_environment": "leanprover/lean4:v4.31.0; vendored DASH core at upstream Lean v4.29.0-rc8 pin",
-          "module": "AISafetyAtlas/Explainability.lean",
-          "upstream_module": "AISafetyAtlas/Upstream/Attribution/Trilemma.lean",
+          "module": "DASHImpossibility.Trilemma",
+          "atlas_module": "AISafetyAtlas.Explainability",
           "build_command": "lake build AISafetyAtlas (vendored axiom-free trilemma)"
         }
       ],
@@ -3103,8 +3103,8 @@
           "reproduced": true,
           "build_environment": "leanprover/lean4:v4.31.0; Mathlib/Lean v4.31.0",
           "declaration": "gibbard_satterthwaite",
-          "module": "AISafetyAtlas/SocialChoice.lean",
-          "upstream_module": "AISafetyAtlas/Upstream/GibbardSatterthwaite.lean",
+          "module": "SocialChoice.Impossibilities.GibbardSatterthwaite.Main",
+          "atlas_module": "AISafetyAtlas.SocialChoice",
           "build_command": "lake build AISafetyAtlas; python3 scripts/check_print_axioms.py"
         }
       ],
@@ -3269,7 +3269,7 @@
       "related_result_ids": [
         "BY-012"
       ],
-      "root_import": false,
+      "root_import": true,
       "formalizations": [
         {
           "framework": "Lean",
@@ -3279,7 +3279,7 @@
           "reproduced": true,
           "build_environment": "leanprover/lean4:v4.31.0; atlas current checkout",
           "declaration": "AISafetyAtlas.Verification.AgentBehavior.no_behavioral_safety_verifier",
-          "module": "AISafetyAtlas/Verification/AgentBehavior.lean",
+          "atlas_module": "AISafetyAtlas.Verification.AgentBehavior",
           "build_command": "lake build AISafetyAtlas.Verification.AgentBehavior",
           "statement_map": "docs/guide/related-literature.md"
         }
@@ -3339,7 +3339,11 @@
           "license": "Apache-2.0",
           "reproduced": false,
           "declaration": "decomposition_theorem (Topology.v); safety_closed, liveness_dense, decomposition_safety_dense (TopologyTrace.v); Safety, Liveness, hprop, SSC, HSafe, H2Safe, HLiv (Properties.v)",
-          "module": "Topology.v, TopologyTrace.v, Properties.v",
+          "modules": [
+            "Topology.v",
+            "TopologyTrace.v",
+            "Properties.v"
+          ],
           "build_command": "Exact build attempted 2026-07-28 with coqorg/coq:8.9.1@sha256:8e26609c5450aa795af6917cf169a65ab3952ba666d1b0c90e6b0179314a1149 and coqorg/coq:8.20@sha256:e50d77c4c5a9aa0d76ae1b343d79c5f922da3a75054b79c5dc635895438e4674: both fail at InternalNondet.v line 8 (`From Stdlib Require Import List`) after compiling the principal topology/property files."
         }
       ],
