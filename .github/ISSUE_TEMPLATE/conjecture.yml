@@ -1,0 +1,92 @@
+name: Conjecture
+description: Propose an open question you think is worth stating precisely. No proof required.
+title: "[Conjecture]: "
+labels: ["conjecture"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        A precise open question is a contribution in its own right. Stating a
+        safety property exactly enough to be checkable is usually the hard part,
+        and it does not require knowing what a proof assistant is.
+
+        Nothing here is asserted by the atlas. A conjecture never enters theorem
+        counts and never reaches the public Lean API. If you cannot write the
+        Lean statement, say so — someone else can, and that is a separate
+        contribution recorded separately.
+
+        Please read [the conjecture guide](https://github.com/mbrcic/ai-safety-formalization-atlas/blob/main/docs/guide/conjectures.md)
+        and check `conjectures.yaml` and open issues first.
+  - type: textarea
+    id: statement
+    attributes:
+      label: The conjecture
+      description: >
+        State it as precisely as you can in prose. Name every object and every
+        assumption. "Models are hard to interpret" is not a conjecture; "for
+        every X satisfying A, there is no Y such that B" is.
+    validations:
+      required: true
+  - type: textarea
+    id: refutation
+    attributes:
+      label: What would refute this?
+      description: >
+        Describe an object or argument that would show it false. If nothing
+        could, it is not a conjecture and will be closed. If you suspect one
+        direction is weaker than the other, say which and why.
+    validations:
+      required: true
+  - type: textarea
+    id: prior_art
+    attributes:
+      label: Prior art checked
+      description: >
+        Where you looked and what you found: Mathlib, the atlas surfaces
+        (`docs/status/by-area.md`), the literature. Name the nearest known
+        result and say how yours differs. A keyword search is not a search.
+        If you are claiming nothing exists, say which corpus you searched, at
+        what revision, on what date, and what you did not cover.
+    validations:
+      required: true
+  - type: input
+    id: nearest
+    attributes:
+      label: Nearest atlas declaration or area
+      description: >
+        A tag from `docs/status/by-area.md`, or an existing declaration this
+        would sit next to.
+      placeholder: "learning-theory, or AISafetyAtlas.Learning.no_free_lunch_supervised"
+    validations:
+      required: true
+  - type: textarea
+    id: why_it_matters
+    attributes:
+      label: What would change if it were settled
+      description: >
+        Which other statement or proof becomes easier, or which claim about real
+        systems stops being safe to make. This is the selection criterion; an
+        honest "I find it interesting and nothing else depends on it" is an
+        acceptable answer.
+    validations:
+      required: true
+  - type: textarea
+    id: lean
+    attributes:
+      label: Lean statement (optional)
+      description: >
+        A `Prop`-valued definition under `AISafetyAtlas.Conjectures.*` if you
+        have one. It must compile and it must assert nothing — no `sorry`, which
+        is banned repo-wide. Leave blank if you cannot write it.
+      render: lean
+  - type: checkboxes
+    id: policy
+    attributes:
+      label: Policy checks
+      options:
+        - label: I stated a condition that would refute this.
+          required: true
+        - label: I checked prior art and named the nearest known result.
+          required: true
+        - label: I understand a conjecture is never counted as a theorem or result.
+          required: true

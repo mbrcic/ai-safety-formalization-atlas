@@ -5,8 +5,8 @@ public import AISafetyAtlas.Computability
 /-!
 # Worked example: the halting problem
 
-The survey lists Turing/Church undecidability as a deductive impossibility. For
-one precise, machine-checked instance, Mathlib fixes an input `n` and considers
+Turing/Church undecidability is a deductive impossibility (catalogued as BY-014).
+For one precise, machine-checked instance, Mathlib fixes an input `n` and considers
 program codes `c`; `eval c n` is a partial computation, and `.Dom` states that
 it terminates. The theorem below witnesses that this predicate is not
 computable.
@@ -19,9 +19,9 @@ not a second public theorem, and this module is not imported by the atlas root.
 
 open Nat.Partrec.Code
 
-namespace AISafetyAtlas.Survey.BrcicYampolskiy
+namespace AISafetyAtlas.Examples
 
 example (input : ℕ) : ¬ComputablePred fun code => (eval code input).Dom :=
   AISafetyAtlas.Computability.halting_problem input
 
-end AISafetyAtlas.Survey.BrcicYampolskiy
+end AISafetyAtlas.Examples

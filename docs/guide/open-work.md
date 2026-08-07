@@ -42,7 +42,7 @@ research leads, and integration decisions behind that strategy.
 ## Formalization search
 
 - Thirty-one survey rows still lack an atlas Lean declaration in the registry
-  (13 of 44 have atlas Lean; see generated status).
+  (see generated status for the rows that do).
 - Search Isabelle/HOL, Rocq, HOL4, HOL Light, and Agda for exact declarations,
   licenses, and immutable versions before proposing new proofs.
 - Reproduce additional external developments only when they are credible exact or

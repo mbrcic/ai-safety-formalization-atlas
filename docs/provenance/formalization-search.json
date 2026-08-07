@@ -1,5 +1,8 @@
 {
-  "schema_version": 2,
+  "schema_version": 3,
+  "profile": "baseline-catalogue",
+  "profile_obligation": "This file is the baseline-catalogue profile: a single synchronized sweep of six pinned classical corpora across every row of one catalogued source, run once and kept in sync with that source's row set. It is a completeness artifact for that catalogue and nothing more. It is NOT a standing per-row obligation: a new source, result, landscape entry, or conjecture does not inherit a six-corpus sweep, and no row is blocked on one. The obligation that does apply to new work is the novelty-check profile below, which attaches to a claim rather than to a row.",
+  "novelty_check_obligation": "Required whenever the repository asserts that no formalization or no proof of something exists — in a conjecture's prior_art, a task that calls a target greenfield, or a note claiming a result is unformalized. Such a claim must record what was searched, at which revision, on what date, and what the search did not cover. A claim of absence with no recorded search is the failure that retired CONJ-001: the repaired statement turned out to be a published theorem already tracked as a contributor task.",
   "searched_on": "2026-07-28",
   "method": "Case-insensitive Unicode-normalized token and phrase search over pinned source snapshots. Hits are candidates, not verified formalizations; per-query counts expose noisy terms, and zero hits are scoped negative evidence only.",
   "corpora": {
@@ -41,6 +44,24 @@
       "scope": "Default-branch source snapshot"
     }
   },
+  "novelty_checks": [
+    {
+      "id": "NC-001",
+      "claim": "Mathlib carries no o-minimal structures, definable families, or infinite-domain VC theory; its only VC-dimension content is finite and combinatorial.",
+      "asserted_in": [
+        "conjectures.yaml CONJ-001 statement",
+        "AISafetyAtlas/Conjectures/RestrictedNFL.lean module docstring"
+      ],
+      "searched_on": "2026-08-07",
+      "searched_by": "mbrcic",
+      "corpora": [
+        "mathlib"
+      ],
+      "method": "Filename glob and case-insensitive content grep over the pinned Mathlib source tree for o-minimal, VCDim, Vapnik, and shatter.",
+      "found": "Mathlib/Combinatorics/SetFamily/Shatter.lean only: Shatters, shatterer, and a Finset-valued vcDim. No other match.",
+      "scope_limits": "One corpus at one revision. Says nothing about third-party Lean packages, other provers, or the wider literature, where o-minimality is of course extensively developed on paper."
+    }
+  ],
   "results": {
     "BY-001": {
       "queries": [

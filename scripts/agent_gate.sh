@@ -12,6 +12,15 @@ python3 scripts/validate_registry.py
 echo "==> validate_landscape"
 python3 scripts/validate_landscape.py
 
+echo "==> validate_conjectures"
+python3 scripts/validate_conjectures.py
+
+echo "==> validate_tasks"
+python3 scripts/validate_tasks.py
+
+echo "==> test_validators"
+python3 scripts/test_validators.py
+
 echo "==> generate_registry_views --check"
 python3 scripts/generate_registry_views.py --check
 

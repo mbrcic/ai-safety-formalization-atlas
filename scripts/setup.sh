@@ -39,8 +39,9 @@ if [ "$MODE" = "pointer" ]; then
   echo "==> pointer mode: skipping the Lean toolchain"
   ./scripts/agent_gate.sh
   echo
-  echo "setup: ok (pointer). Add a lead under a row's candidate_formalizations in"
-  echo "registry.yaml, re-run scripts/agent_gate.sh, then open a PR."
+  echo "setup: ok (pointer). Which file takes your edit is the routing table"
+  echo "under Get started in README.md. Edit it, re-run scripts/agent_gate.sh,"
+  echo "then open a PR."
   exit 0
 fi
 

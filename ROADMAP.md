@@ -9,8 +9,8 @@ the gap between a mathematical theorem and an informal claim about AI systems.
 
 This is a living strategic document for contributors. Current counts and
 short-term tasks live in [the status report](docs/status/formalization-status.md) and
-[project state](STATE.md); the full 44-row landscape is browsable in the
-generated [atlas index](docs/status/atlas-index.md); detailed research leads live in
+[project state](STATE.md); per-source coverage is browsable under the generated
+[source reports](docs/status/sources/); detailed research leads live in
 [open work](docs/guide/open-work.md) and bounded, ready-to-take units in
 [contributor tasks](docs/guide/contributor-tasks.md).
 
@@ -141,9 +141,9 @@ beyond the scoped interpretation packages remain outside the automatic
 conclusion. Live status: [`STATE.md`](STATE.md) and
 [`docs/status/formalization-status.md`](docs/status/formalization-status.md).
 
-Release checkpoint: **v0.3.1 is published; v0.4.0 is the current release
-candidate** (release notes under [`docs/releases/`](docs/releases/); the
-repository's git tags are the canonical published set). Current-state
+Release checkpoint: **v0.4.0 is published** (release notes under
+[`docs/releases/`](docs/releases/); the repository's git tags are the canonical
+published set). Current-state
 validation is independent of the immutable v0.1 audit. Package version,
 version-file agreement, and the matching release note are enforced from source
 — see the generated release-status block in [`STATE.md`](STATE.md).

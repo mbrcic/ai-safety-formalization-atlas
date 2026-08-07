@@ -7,7 +7,7 @@ Generated from [`registry.yaml`](../../registry.yaml) and
 [`landscape.yaml`](../../landscape.yaml). Headline coverage still means
 reproduced `EXACT`/`EQUIVALENT` only; `RELATED` and landscape rows are listed
 but do not increase that count. See also [formalization status](formalization-status.md)
-and [atlas index](atlas-index.md).
+and the [per-source reports](sources/).
 
 ## Survey Table 1 results
 

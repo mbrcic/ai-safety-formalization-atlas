@@ -24,6 +24,7 @@ REQUIRED_ENTRY_FIELDS = {
     "revision",
     "root_import",
     "notes",
+    "tags",
 }
 PUBLIC_IMPORT_RE = re.compile(r"^public import ([A-Za-z0-9_'.]+)\s*$")
 
@@ -81,6 +82,11 @@ def main() -> None:
         fail("landscape entries must be a non-empty list")
 
     survey_ids = {result["id"] for result in registry["results"]}
+    # One shared tag vocabulary across both ledgers, so the by-area view is a
+    # single surface rather than two that drift apart.
+    tag_values = set(registry.get("vocabulary", {}).get("tag") or [])
+    if not tag_values:
+        fail("registry vocabulary.tag must be populated before landscape tags validate")
     seen_ids: set[str] = set()
     root_import_decls: list[str] = []
 
@@ -98,6 +104,12 @@ def main() -> None:
         seen_ids.add(eid)
         if entry["kind"] != "LANDSCAPE":
             fail(f"{eid} kind must be LANDSCAPE")
+        tags = entry["tags"]
+        if not isinstance(tags, list) or not tags:
+            fail(f"{eid} must carry at least one tag")
+        unknown_tags = [tag for tag in tags if tag not in tag_values]
+        if unknown_tags:
+            fail(f"{eid} has tags outside the vocabulary: {sorted(unknown_tags)}")
         if entry["survey_coverage"] is not None:
             fail(f"{eid} survey_coverage must be null (landscape never counts as survey coverage)")
         if not valid_http_url(entry["repository"]):

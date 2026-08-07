@@ -46,9 +46,16 @@ Root project files still used for navigation: [`README.md`](../README.md),
 Regenerate with `python3 scripts/generate_registry_views.py` (also refreshes
 `docs/agent/by-id.json`).
 
+- [By mathematical area](status/by-area.md) — **start here** if you know an area
+  and want to see what is shipped and what is thin
+- [Contributor tasks](guide/contributor-tasks.md) — generated from `tasks.yaml`
+- [Conjectures](guide/conjectures.md) — open questions with compiling statements
+  and no proof; how to propose one
 - [Formalization status](status/formalization-status.md)
-- [Atlas index](status/atlas-index.md) (44 survey rows)
-- [Landscape index](status/landscape-index.md) (non–Table-1)
+- [Landscape index](status/landscape-index.md) — atlas formalizations and public
+  Lean surface
+- [Source reports](status/sources/) — per-source coverage, one report per
+  catalogued source
 - [Paper coverage](status/paper-coverage.md) — source papers ↔ formalizations ↔ atlas
 
 ## Bridges (human semantic review)
@@ -58,8 +65,8 @@ Regenerate with `python3 scripts/generate_registry_views.py` (also refreshes
 
 ## Releases
 
-- [v0.4 release](releases/v0.4.md) — current release candidate (`0.4.0`; publication is canonical only after the tag)
-- [v0.3 release](releases/v0.3.md) — latest published historical scope (`0.3.x`)
+- [v0.4 release](releases/v0.4.md) — current published release (`0.4.0`, tagged)
+- [v0.3 release](releases/v0.3.md) — historical (`0.3.x`)
 - [v0.2 release](releases/v0.2.md) — historical
 - [v0.1 release](releases/v0.1.md) — historical
 

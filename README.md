@@ -20,11 +20,38 @@ tradeoffs, and—when computable—governance or ethics claims can be formalized
 without rebuilding foundations each time. Humans and proof agents work here
 together.
 
+## Why this exists
+
+**The situation.** AI systems are gaining capability faster than anyone is
+gaining understanding of them, and they are being deployed on the near side of
+that gap. Decisions about what is safe to build and release are being made now.
+
+**Why mathematics.** Most of the evidence behind those decisions is empirical —
+evaluations, red-teaming, incident review. That evidence is one-sided by
+construction: testing can show that a system fails, never that it cannot. As
+capability grows the space of behaviors grows with it, so the fraction any test
+suite covers shrinks. A proof is the only form of evidence that speaks about
+every case. Its assumptions can still stop matching the system, which is why
+nothing here is read as a claim about a real system without a separate reviewed
+step.
+
+**Why now.** The same systems that make this urgent are what make it tractable.
+Autoformalization has turned mechanization from a specialist craft into ordinary
+work: models draft the Lean, and a kernel that does not care who wrote it decides
+whether the proof holds. Trust never routes through the model. What this
+accelerates is implementation, not discovery — stating the right property, and
+reviewing whether it matches the system, still move at human speed. AI is the
+subject, the instrument, and the deadline at once.
+
+What the kernel settles is whether a proof is valid. Whether it is the right
+statement stays a human question — and that is the bottleneck. Stating a safety
+property exactly enough to be checkable is the hard part, and it does not require
+knowing what a proof assistant is.
+
 **Bring a question.** Alignment, control, oversight, interpretability,
 robustness—if you can make a safety property precise, this is where you turn it
-into something machine-checked. The seed is the Brčić–Yampolskiy impossibility
-survey ([CSUR](https://doi.org/10.1145/3603371)); it is an **on-ramp, not the
-ceiling**. Possibility work is welcome (e.g. DeepMind debate reproduced as
+into something machine-checked. Impossibility and possibility both count (e.g.
+DeepMind debate reproduced as
 [`LAND-DEBATE-001`](docs/provenance/debate-reproduction.md); continuous free
 lunches BY-022 [open](docs/guide/contributor-tasks.md#open-now)).
 
@@ -48,24 +75,28 @@ not by itself prove operational safety.
 **Primary goal:** develop, reproduce, and machine-check formal AI-safety results
 (including using shared foundations to discover new ones), for AI safety and
 related computable governance/ethics. **Also:** keep cores usable as reference
-specifications downstream. **Not a goal:** maximizing the fraction of survey
-rows graded `EXACT`/`EQUIVALENT`, or growing a product monorepo in-tree.
+specifications downstream. **Not a goal:** growing counts, or growing a product
+monorepo in-tree. Reusable structure and honest grading over volume.
 
 <!-- BEGIN GENERATED REGISTRY SCOPE -->
 | Metric | Current |
 |---|---:|
-| Survey rows with atlas Lean | **13 / 44** |
-| … statement-match (`EXACT` / `EQUIVALENT`) | **7 / 44** |
-| … workbench formalizations (`RELATED` only) | **6 / 44** |
+| Registry Lean declarations | **41** |
+| Landscape formalizations | **17** (8 on root import) |
 | Reviewed AI-system bridges | **2** |
+| Open conjectures | **0** |
+| Catalogued results with statement-match | **7** |
+| Catalogued results with `RELATED`-only formalization | **6** |
 
 `EXACT`/`EQUIVALENT` = conservative citation grade (completely
 formalization-covered source statements). `RELATED` = value-based scoped
 formalization, with documented deltas; it does **not by itself** mean
 unfinished, but postponed until justified (paper residuals stay in
-provenance).
-Survey rows are a seed inventory. Detail:
-[formalization status](docs/status/formalization-status.md).
+provenance). Counts above are **catalogued results**, not
+formalization records: one result may carry several. Detail:
+[formalization status](docs/status/formalization-status.md);
+[by mathematical area](docs/status/by-area.md);
+per-source reports under [`docs/status/sources/`](docs/status/sources/).
 <!-- END GENERATED REGISTRY SCOPE -->
 
 Published units must rebuild under documented commands and the axiom policy
@@ -103,13 +134,19 @@ See the [`v0.4 release scope`](docs/releases/v0.4.md) and
 
 ## Repository contents
 
-- [`registry.yaml`](registry.yaml) is the complete survey-result inventory.
+- [`registry.yaml`](registry.yaml) records results carrying source provenance,
+  with the catalogued sources they came from.
 - [`AISafetyAtlas/`](AISafetyAtlas/) contains attributed Lean integrations.
 - [`CONTRIBUTING.md`](CONTRIBUTING.md) explains how to propose and verify changes.
 - [`ROADMAP.md`](ROADMAP.md) presents the public strategy and contributor entry points.
 - [`STATE.md`](STATE.md) reports the current phase, blockers, and next tasks.
-- [`landscape.yaml`](landscape.yaml) records non–Table-1 formalizations (never
-  counted as survey statement-match).
+- [`landscape.yaml`](landscape.yaml) records formalizations and public Lean
+  surface the workbench develops or reproduces on its own account.
+- [`conjectures.yaml`](conjectures.yaml) records open questions that have a
+  compiling Lean statement and no proof; nothing in it is asserted.
+- [`tasks.yaml`](tasks.yaml) is the maintained task board;
+  [`docs/guide/contributor-tasks.md`](docs/guide/contributor-tasks.md) is
+  generated from it.
 - [`docs/`](docs/README.md) is split by role — start with the [documentation map](docs/README.md):
   - [`docs/guide/`](docs/guide/) — methodology, open work, model notes, tasks
   - [`docs/status/`](docs/status/) — generated coverage tables and indexes
@@ -198,19 +235,31 @@ scripts/reproduce_chaitin.sh
 
 ## Get started
 
-Two on-ramps — take the lowest one that fits.
+<!-- BEGIN GENERATED ROUTING -->
+<!-- Generated by scripts/generate_registry_views.py; do not edit by hand. -->
 
-**Just adding a pointer?** A source that might match a survey row — no Lean, no
-proof, no toolchain. You need only Python 3:
+| I have… | It goes in | Then |
+|---|---|---|
+| a pointer to work that already exists, or a citation fix | `registry.yaml` (survey row) or `landscape.yaml` | `scripts/setup.sh --pointer` |
+| an open question and no proof | `conjectures.yaml` + a module under `AISafetyAtlas/Conjectures/` | add it to `scripts/lean_build_targets.txt`, then build + gate |
+| a proof to write, or any Lean change | the facade for your area (see Domain imports) | `scripts/setup.sh`, then build + gate + `check_print_axioms.py` |
+| a change to a contributor task | `tasks.yaml` — never the generated Markdown | regenerate + gate |
+| evidence that something does not exist | `novelty_checks` in `docs/provenance/formalization-search.json` | regenerate + gate |
+| a new source to catalogue | `source_catalog` in `registry.yaml`, with its `role` | regenerate + gate |
+
+**regenerate** `python3 scripts/generate_registry_views.py` · **gate** `./scripts/agent_gate.sh` · **build** `lake build`
+
+Nothing here needs the whole picture: take the row that matches what you
+have and ignore the rest.
+<!-- END GENERATED ROUTING -->
+
+No toolchain needed for the first row — the validators are pure-stdlib Python 3:
 
 ```console
-scripts/setup.sh --pointer   # runs the cheap validators; no Lean toolchain
+scripts/setup.sh --pointer   # cheap validators only; no Lean toolchain
 ```
 
-Then add a lead under that row's `candidate_formalizations` in
-[`registry.yaml`](registry.yaml) and open a pull request.
-
-**Writing or building a proof?** One command provisions everything — it installs
+For anything touching Lean, one command provisions everything — it installs
 [`elan`](https://lean-lang.org/install/manual/) if it's missing, fetches the
 prebuilt Mathlib, builds, and runs the validators:
 
@@ -243,18 +292,14 @@ the [strict-trust and build-closure policy](docs/guide/methodology.md#new-proofs
 
 ## Contributing
 
-**Join — there is always something to do.** Docs, citation checks, leads,
-examples, agent-assisted Lean, new formal claims, or reproductions. The survey
-is a seed inventory, not the only path.
+**There is always something to do.** [Get started](#get-started) routes what you
+have to the one file it belongs in; bounded units are in
+[contributor tasks](docs/guide/contributor-tasks.md).
 
-- **No Lean?** CT-11, CT-12, CT-14, or docs fixes
-  ([open now](docs/guide/contributor-tasks.md#open-now)).
-- **With an LLM/agent?** Draft against a facade → `lake build` →
-  `agent_gate.sh` → `check_print_axioms.py` (see [CONTRIBUTING](CONTRIBUTING.md)).
-  Green Lean is kernel validity of the encoding, not source match or system
-  interpretation.
-- **Have a claim to formalize?** Domain imports above + primary surfaces; prefer
-  reuse of primitives over reinventing foundations.
+Working with an LLM or agent: draft against a facade, then `lake build` →
+`agent_gate.sh` → `check_print_axioms.py` (see [CONTRIBUTING](CONTRIBUTING.md)).
+Green Lean is kernel validity of the encoding — not source match, model
+adequacy, or system interpretation.
 
 Full tracks and rungs: [CONTRIBUTING.md](CONTRIBUTING.md). Issue forms for
 proposals that change coverage, dependencies, or the public Lean interface.

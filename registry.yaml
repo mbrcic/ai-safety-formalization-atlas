@@ -37,330 +37,461 @@
       "HUMAN_REVIEW",
       "STATEMENT_REVIEWED",
       "REVIEWED"
+    ],
+    "tag": [
+      "agent-incentives",
+      "algorithmic-information",
+      "compositionality",
+      "computability",
+      "computational-complexity",
+      "control-theory",
+      "decision-theory",
+      "ethics",
+      "information-theory",
+      "interpretability",
+      "learning-theory",
+      "multi-agent",
+      "oversight",
+      "preference-inference",
+      "provability-logic",
+      "social-choice",
+      "verification"
     ]
   },
   "source_catalog": {
     "survey-ref-001": {
       "survey_number": 1,
       "citation": "K. Gödel, “Über formal unentscheidbare Sätze der Principia Mathematica und verwandter Systeme I,” Monatshefte Für Math. Phys., vol. 38, no. 1, pp. 173–198, Dec. 1931, doi: 10.1007/BF01700692.",
-      "locator": "https://doi.org/10.1007/BF01700692"
+      "locator": "https://doi.org/10.1007/BF01700692",
+      "role": "work"
     },
     "survey-ref-002": {
       "survey_number": 2,
       "citation": "A. M. Turing, “On Computable Numbers, with an Application to the Entscheidungsproblem,” Proc. Lond. Math. Soc., vol. s2-42, no. 1, pp. 230–265, 1937, doi: 10.1112/plms/s2-42.1.230.",
-      "locator": "https://doi.org/10.1112/plms/s2-42.1.230"
+      "locator": "https://doi.org/10.1112/plms/s2-42.1.230",
+      "role": "work"
     },
     "survey-ref-005": {
       "survey_number": 5,
       "citation": "D. H. Wolpert, “Physical limits of inference,” Phys. Nonlinear Phenom., vol. 237, no. 9, pp. 1257–1281, Jul. 2008, doi: 10.1016/j.physd.2008.03.040.",
-      "locator": "https://doi.org/10.1016/j.physd.2008.03.040"
+      "locator": "https://doi.org/10.1016/j.physd.2008.03.040",
+      "role": "work"
     },
     "survey-ref-008": {
       "survey_number": 8,
       "citation": "R. V. Yampolskiy, “Uncontrollability of Artificial Intelligence,” presented at the IJCAI-21 Workshop on Artificial Intelligence Safety (AISafety2021), Montreal, Quebec, Canada, Aug. 2021. Accessed: Jul. 01, 2021. [Online]. Available: http://arxiv.org/abs/2008.04071",
-      "locator": "http://arxiv.org/abs/2008.04071"
+      "locator": "http://arxiv.org/abs/2008.04071",
+      "role": "work"
     },
     "survey-ref-018": {
       "survey_number": 18,
       "citation": "D. H. Wolpert, “The Existence of A Priori Distinctions Between Learning Algorithms,” Neural Comput., vol. 8, no. 7, pp. 1391–1420, Oct. 1996, doi: 10.1162/neco.1996.8.7.1391.",
-      "locator": "https://doi.org/10.1162/neco.1996.8.7.1391"
+      "locator": "https://doi.org/10.1162/neco.1996.8.7.1391",
+      "role": "work"
     },
     "wolpert-1996-lack": {
       "citation": "D. H. Wolpert, “The Lack of A Priori Distinctions Between Learning Algorithms,” Neural Comput., vol. 8, no. 7, pp. 1341–1390, Oct. 1996, doi: 10.1162/neco.1996.8.7.1341.",
-      "locator": "https://doi.org/10.1162/neco.1996.8.7.1341"
+      "locator": "https://doi.org/10.1162/neco.1996.8.7.1341",
+      "role": "work"
     },
     "brcic-yampolskiy-2023": {
       "citation": "M. Brčić and R. V. Yampolskiy, “Impossibility Results in AI: A Survey,” ACM Computing Surveys, 2023, doi: 10.1145/3603371, arXiv:2109.00484.",
       "locator": "https://doi.org/10.1145/3603371",
-      "role": "survey_original",
+      "role": "directory",
       "notes": "The survey itself; source for its three author-original results BY-042, BY-043, BY-044."
     },
     "survey-ref-019": {
       "survey_number": 19,
       "citation": "D. H. Wolpert and W. G. Macready, “No free lunch theorems for optimization,” IEEE Trans. Evol. Comput., vol. 1, no. 1, pp. 67–82, Apr. 1997, doi: 10.1109/4235.585893.",
-      "locator": "https://doi.org/10.1109/4235.585893"
+      "locator": "https://doi.org/10.1109/4235.585893",
+      "role": "work"
     },
     "survey-ref-021": {
       "survey_number": 21,
       "citation": "J. Klamka, “Uncontrollability and unobservability of multivariable systems,” IEEE Trans. Autom. Control, vol. 17, no. 5, pp. 725–726, Oct. 1972, doi: 10.1109/TAC.1972.1100128.",
-      "locator": "https://doi.org/10.1109/TAC.1972.1100128"
+      "locator": "https://doi.org/10.1109/TAC.1972.1100128",
+      "role": "work"
     },
     "survey-ref-022": {
       "survey_number": 22,
       "citation": "A. P. Guerreiro, C. M. Fonseca, and L. Paquete, “The Hypervolume Indicator: Problems and Algorithms,” ArXiv200500515 Cs, May 2020, Accessed: May 08, 2021. [Online]. Available: http://arxiv.org/abs/2005.00515",
-      "locator": "http://arxiv.org/abs/2005.00515"
+      "locator": "http://arxiv.org/abs/2005.00515",
+      "role": "work"
     },
     "survey-ref-023": {
       "survey_number": 23,
-      "citation": "R. M. Karp, “Reducibility among combinatorial problems,” in Complexity of computer computations, Springer, 1972, pp. 85–103."
+      "citation": "R. M. Karp, “Reducibility among combinatorial problems,” in Complexity of computer computations, Springer, 1972, pp. 85–103.",
+      "role": "work"
     },
     "survey-ref-024": {
       "survey_number": 24,
-      "citation": "J. Klamka, “Controllability of dynamical systems. A survey,” vol. 61, no. No 2, pp. 335–342, 2013."
+      "citation": "J. Klamka, “Controllability of dynamical systems. A survey,” vol. 61, no. No 2, pp. 335–342, 2013.",
+      "role": "work"
     },
     "survey-ref-025": {
       "survey_number": 25,
       "citation": "R. C. CONANT and W. R. ASHBY, “Every good regulator of a system must be a model of that system,” Int. J. Syst. Sci., vol. 1, no. 2, pp. 89–97, Oct. 1970, doi: 10.1080/00207727008920220.",
-      "locator": "https://doi.org/10.1080/00207727008920220"
+      "locator": "https://doi.org/10.1080/00207727008920220",
+      "role": "work"
     },
     "survey-ref-026": {
       "survey_number": 26,
-      "citation": "R. W. Ashby, Introduction to Cybernetics.1961 Edition. Chapman & Hall, 1961."
+      "citation": "R. W. Ashby, Introduction to Cybernetics.1961 Edition. Chapman & Hall, 1961.",
+      "role": "work"
     },
     "survey-ref-027": {
       "survey_number": 27,
       "citation": "H. Touchette and S. Lloyd, “Information-theoretic approach to the study of control systems,” Phys. Stat. Mech. Its Appl., vol. 331, no. 1, pp. 140–172, Jan. 2004, doi: 10.1016/j.physa.2003.09.007.",
-      "locator": "https://doi.org/10.1016/j.physa.2003.09.007"
+      "locator": "https://doi.org/10.1016/j.physa.2003.09.007",
+      "role": "work"
     },
     "survey-ref-028": {
       "survey_number": 28,
       "citation": "J. McDowell, “Virtue and Reason,” The Monist, vol. 62, no. 3, pp. 331–350, Jul. 1979, doi: 10.5840/monist197962319.",
-      "locator": "https://doi.org/10.5840/monist197962319"
+      "locator": "https://doi.org/10.5840/monist197962319",
+      "role": "work"
     },
     "survey-ref-029": {
       "survey_number": 29,
-      "citation": "S. McKeever and M. Ridge, “The Many Moral Particularisms,” Can. J. Philos., vol. 35, no. 1, pp. 83–106, 2005."
+      "citation": "S. McKeever and M. Ridge, “The Many Moral Particularisms,” Can. J. Philos., vol. 35, no. 1, pp. 83–106, 2005.",
+      "role": "work"
     },
     "survey-ref-030": {
       "survey_number": 30,
-      "citation": "P. S.-H. Tsu, “Can Virtue Be Codified?: An Inquiry on the Basis of Four Conceptions of Virtue,” in Virtue’s Reasons, Routledge, 2017."
+      "citation": "P. S.-H. Tsu, “Can Virtue Be Codified?: An Inquiry on the Basis of Four Conceptions of Virtue,” in Virtue’s Reasons, Routledge, 2017.",
+      "role": "work"
     },
     "survey-ref-031": {
       "survey_number": 31,
       "citation": "K. J. Arrow, “A Difficulty in the Concept of Social Welfare,” J. Polit. Econ., vol. 58, no. 4, pp. 328–346, Aug. 1950, doi: 10.1086/256963.",
-      "locator": "https://doi.org/10.1086/256963"
+      "locator": "https://doi.org/10.1086/256963",
+      "role": "work"
     },
     "survey-ref-032": {
       "survey_number": 32,
       "citation": "G. Arrhenius, “The Impossibility of a Satisfactory Population Ethics,” in Descriptive and Normative Approaches to Human Behavior, vol. Volume 3, 0 vols., WORLD SCIENTIFIC, 2011, pp. 1–26. doi: 10.1142/9789814368018_0001.",
-      "locator": "https://doi.org/10.1142/9789814368018_0001"
+      "locator": "https://doi.org/10.1142/9789814368018_0001",
+      "role": "work"
     },
     "survey-ref-033": {
       "survey_number": 33,
       "citation": "P. Eckersley, “Impossibility and Uncertainty Theorems in AI Value Alignment (or why your AGI should not have a utility function),” ArXiv190100064 Cs, Mar. 2019, Accessed: Jun. 28, 2021. [Online]. Available: http://arxiv.org/abs/1901.00064",
-      "locator": "http://arxiv.org/abs/1901.00064"
+      "locator": "http://arxiv.org/abs/1901.00064",
+      "role": "work"
     },
     "survey-ref-034": {
       "survey_number": 34,
       "citation": "J. Kleinberg, S. Mullainathan, and M. Raghavan, “Inherent Trade-Offs in the Fair Determination of Risk Scores,” ArXiv160905807 Cs Stat, Nov. 2016, Accessed: Jun. 28, 2021. [Online]. Available: http://arxiv.org/abs/1609.05807",
-      "locator": "http://arxiv.org/abs/1609.05807"
+      "locator": "http://arxiv.org/abs/1609.05807",
+      "role": "work"
     },
     "survey-ref-035": {
       "survey_number": 35,
       "citation": "K. K. Saravanakumar, “The Impossibility Theorem of Machine Fairness -- A Causal Perspective,” ArXiv200706024 Cs Stat, Jan. 2021, Accessed: Aug. 12, 2021. [Online]. Available: http://arxiv.org/abs/2007.06024",
-      "locator": "http://arxiv.org/abs/2007.06024"
+      "locator": "http://arxiv.org/abs/2007.06024",
+      "role": "work"
     },
     "survey-ref-036": {
       "survey_number": 36,
       "citation": "S. Armstrong and S. Mindermann, “Occam’s razor is insufficient to infer the preferences of irrational agents,” Adv. Neural Inf. Process. Syst., vol. 31, 2018, Accessed: Jun. 28, 2021. [Online]. Available: https://proceedings.neurips.cc/paper/2018/hash/d89a66c7c80a29b1bdbab0f2a1a94af8-Abstract.html",
-      "locator": "https://proceedings.neurips.cc/paper/2018/hash/d89a66c7c80a29b1bdbab0f2a1a94af8-Abstract.html"
+      "locator": "https://proceedings.neurips.cc/paper/2018/hash/d89a66c7c80a29b1bdbab0f2a1a94af8-Abstract.html",
+      "role": "work"
     },
     "survey-ref-037": {
       "survey_number": 37,
       "citation": "H. G. Rice, “Classes of Recursively Enumerable Sets and Their Decision Problems,” Trans. Am. Math. Soc., vol. 74, no. 2, pp. 358–366, 1953, doi: 10.2307/1990888.",
-      "locator": "https://doi.org/10.2307/1990888"
+      "locator": "https://doi.org/10.2307/1990888",
+      "role": "work"
     },
     "survey-ref-038": {
       "survey_number": 38,
       "citation": "A. Church, “An Unsolvable Problem of Elementary Number Theory,” Am. J. Math., vol. 58, no. 2, pp. 345–363, 1936, doi: 10.2307/2371045.",
-      "locator": "https://doi.org/10.2307/2371045"
+      "locator": "https://doi.org/10.2307/2371045",
+      "role": "work"
     },
     "survey-ref-039": {
       "survey_number": 39,
-      "citation": "G. J. Chaitin, Information, Randomness And Incompleteness: Papers On Algorithmic Information Theory. 1987."
+      "citation": "G. J. Chaitin, Information, Randomness And Incompleteness: Papers On Algorithmic Information Theory. 1987.",
+      "role": "work"
     },
     "survey-ref-040": {
       "survey_number": 40,
-      "citation": "A. Tarski, “The Concept of Truth in Formalized Languages,” in Logic, Semantics, Metamathematics, A. Tarski, Ed. Oxford University Press, 1936, pp. 152–278."
+      "citation": "A. Tarski, “The Concept of Truth in Formalized Languages,” in Logic, Semantics, Metamathematics, A. Tarski, Ed. Oxford University Press, 1936, pp. 152–278.",
+      "role": "work"
     },
     "survey-ref-041": {
       "survey_number": 41,
-      "citation": "O. B. Bassler, “The Surveyability of Mathematical Proof: A Historical Perspective,” Synthese, vol. 148, no. 1, pp. 99–133, 2006."
+      "citation": "O. B. Bassler, “The Surveyability of Mathematical Proof: A Historical Perspective,” Synthese, vol. 148, no. 1, pp. 99–133, 2006.",
+      "role": "work"
     },
     "survey-ref-042": {
       "survey_number": 42,
       "citation": "S. Ben-David, P. Hrubeš, S. Moran, A. Shpilka, and A. Yehudayoff, “Learnability can be undecidable,” Nat. Mach. Intell., vol. 1, no. 1, pp. 44–48, Jan. 2019, doi: 10.1038/s42256-018-0002-3.",
-      "locator": "https://doi.org/10.1038/s42256-018-0002-3"
+      "locator": "https://doi.org/10.1038/s42256-018-0002-3",
+      "role": "work"
     },
     "survey-ref-043": {
       "survey_number": 43,
       "citation": "L. Reyzin, “Unprovability comes to machine learning,” Nature, vol. 565, no. 7738, Art. no. 7738, Jan. 2019, doi: 10.1038/d41586-019-00012-4.",
-      "locator": "https://doi.org/10.1038/d41586-019-00012-4"
+      "locator": "https://doi.org/10.1038/d41586-019-00012-4",
+      "role": "work"
     },
     "survey-ref-044": {
       "survey_number": 44,
       "citation": "L. G. Valiant, “A theory of the learnable,” Commun. ACM, vol. 27, no. 11, pp. 1134–1142, Nov. 1984, doi: 10.1145/1968.1972.",
-      "locator": "https://doi.org/10.1145/1968.1972"
+      "locator": "https://doi.org/10.1145/1968.1972",
+      "role": "work"
     },
     "survey-ref-045": {
       "survey_number": 45,
       "citation": "D. Foster and H. P. Young, “On the Impossibility of Predicting the Behavior of Rational Agents,” The Johns Hopkins University,Department of Economics, 423, Jun. 2001. Accessed: Jul. 01, 2021. [Online]. Available: https://ideas.repec.org/p/jhu/papers/423.html",
-      "locator": "https://ideas.repec.org/p/jhu/papers/423.html"
+      "locator": "https://ideas.repec.org/p/jhu/papers/423.html",
+      "role": "work"
     },
     "survey-ref-046": {
       "survey_number": 46,
       "citation": "R. Koppl and J. B. R. Jr, “All That I Have to Say Has Already Crossed Your Mind,” Metroeconomica, vol. 53, no. 4, pp. 339–360, 2002, doi: 10.1111/1467-999X.00147.",
-      "locator": "https://doi.org/10.1111/1467-999X.00147"
+      "locator": "https://doi.org/10.1111/1467-999X.00147",
+      "role": "work"
     },
     "survey-ref-047": {
       "survey_number": 47,
       "citation": "A. Auger and O. Teytaud, “Continuous Lunches Are Free Plus the Design of Optimal Optimization Algorithms,” Algorithmica, vol. 57, no. 1, pp. 121–146, May 2010, doi: 10.1007/s00453-008-9244-5.",
-      "locator": "https://doi.org/10.1007/s00453-008-9244-5"
+      "locator": "https://doi.org/10.1007/s00453-008-9244-5",
+      "role": "work"
     },
     "survey-ref-048": {
       "survey_number": 48,
       "citation": "D. H. Wolpert and W. G. Macready, “Coevolutionary free lunches,” IEEE Trans. Evol. Comput., vol. 9, no. 6, pp. 721–735, Dec. 2005, doi: 10.1109/TEVC.2005.856205.",
-      "locator": "https://doi.org/10.1109/TEVC.2005.856205"
+      "locator": "https://doi.org/10.1109/TEVC.2005.856205",
+      "role": "work"
     },
     "survey-ref-049": {
       "survey_number": 49,
       "citation": "A. Hyvärinen and P. Pajunen, “Nonlinear independent component analysis: Existence and uniqueness results,” Neural Netw., vol. 12, no. 3, pp. 429–439, Apr. 1999, doi: 10.1016/S0893-6080(98)00140-3.",
-      "locator": "https://doi.org/10.1016/S0893-6080(98)00140-3"
+      "locator": "https://doi.org/10.1016/S0893-6080(98)00140-3",
+      "role": "work"
     },
     "survey-ref-050": {
       "survey_number": 50,
-      "citation": "J. Peters, D. Janzing, and B. Schölkopf, Elements of Causal Inference: Foundations and Learning Algorithms. Cambridge, MA, USA: MIT Press, 2017."
+      "citation": "J. Peters, D. Janzing, and B. Schölkopf, Elements of Causal Inference: Foundations and Learning Algorithms. Cambridge, MA, USA: MIT Press, 2017.",
+      "role": "work"
     },
     "survey-ref-051": {
       "survey_number": 51,
       "citation": "F. Locatello et al., “Challenging Common Assumptions in the Unsupervised Learning of Disentangled Representations,” 2019. Accessed: Jun. 29, 2021. [Online]. Available: http://proceedings.mlr.press/v97/locatello19a.html",
-      "locator": "http://proceedings.mlr.press/v97/locatello19a.html"
+      "locator": "http://proceedings.mlr.press/v97/locatello19a.html",
+      "role": "work"
     },
     "survey-ref-052": {
       "survey_number": 52,
       "citation": "I. I. Bojinov and G. Basse, “A General Theory of Identification,” Harvard Business School, Feb. 2020. Accessed: Jun. 11, 2021. [Online]. Available: https://www.hbs.edu/faculty/Pages/item.aspx?num=57688",
-      "locator": "https://www.hbs.edu/faculty/Pages/item.aspx?num=57688"
+      "locator": "https://www.hbs.edu/faculty/Pages/item.aspx?num=57688",
+      "role": "work"
     },
     "survey-ref-053": {
       "survey_number": 53,
       "citation": "D. H. Wolpert, “Computational capabilities of physical systems,” Phys. Rev. E, vol. 65, no. 1, p. 016128, Dec. 2001, doi: 10.1103/PhysRevE.65.016128.",
-      "locator": "https://doi.org/10.1103/PhysRevE.65.016128"
+      "locator": "https://doi.org/10.1103/PhysRevE.65.016128",
+      "role": "work"
     },
     "survey-ref-054": {
       "survey_number": 54,
       "citation": "D. Wolpert, “Constraints on physical reality arising from a formalization of knowledge,” ArXiv171103499 Phys., Jun. 2018, Accessed: Jun. 22, 2021. [Online]. Available: http://arxiv.org/abs/1711.03499",
-      "locator": "http://arxiv.org/abs/1711.03499"
+      "locator": "http://arxiv.org/abs/1711.03499",
+      "role": "work"
     },
     "survey-ref-055": {
       "survey_number": 55,
       "citation": "A. Devereaux, R. Koppl, S. Kauffman, and A. Roli, “Constraints on modeling systems from within systems: the principle of frame relativity,” Social Science Research Network, Rochester, NY, SSRN Scholarly Paper ID 3968077, Nov. 2021. doi: 10.2139/ssrn.3968077.",
-      "locator": "https://doi.org/10.2139/ssrn.3968077"
+      "locator": "https://doi.org/10.2139/ssrn.3968077",
+      "role": "work"
     },
     "survey-ref-056": {
       "survey_number": 56,
       "citation": "M. Alfonseca, M. Cebrian, A. F. Anta, L. Coviello, A. Abeliuk, and I. Rahwan, “Superintelligence cannot be contained: Lessons from Computability Theory,” J. Artif. Intell. Res., vol. 70, pp. 65–76, Jan. 2021, doi: 10.1613/jair.1.12202.",
-      "locator": "https://doi.org/10.1613/jair.1.12202"
+      "locator": "https://doi.org/10.1613/jair.1.12202",
+      "role": "work"
     },
     "survey-ref-057": {
       "survey_number": 57,
       "citation": "R. Carey, “Incorrigibility in the CIRL Framework,” ArXiv170906275 Cs, Jun. 2018, Accessed: Jul. 01, 2021. [Online]. Available: http://arxiv.org/abs/1709.06275",
-      "locator": "http://arxiv.org/abs/1709.06275"
+      "locator": "http://arxiv.org/abs/1709.06275",
+      "role": "work"
     },
     "survey-ref-058": {
       "survey_number": 58,
-      "citation": "L. Orseau and S. Armstrong, “Safely interruptible agents,” in Proceedings of the Thirty-Second Conference on Uncertainty in Artificial Intelligence, Arlington, Virginia, USA, Jun. 2016, pp. 557–566."
+      "citation": "L. Orseau and S. Armstrong, “Safely interruptible agents,” in Proceedings of the Thirty-Second Conference on Uncertainty in Artificial Intelligence, Arlington, Virginia, USA, Jun. 2016, pp. 557–566.",
+      "role": "work"
     },
     "survey-ref-059": {
       "survey_number": 59,
-      "citation": "D. Hadfield-Menell, A. Dragan, P. Abbeel, and S. Russell, “The off-switch game,” in Proceedings of the 26th International Joint Conference on Artificial Intelligence, Melbourne, Australia, Aug. 2017, pp. 220–227."
+      "citation": "D. Hadfield-Menell, A. Dragan, P. Abbeel, and S. Russell, “The off-switch game,” in Proceedings of the 26th International Joint Conference on Artificial Intelligence, Melbourne, Australia, Aug. 2017, pp. 220–227.",
+      "role": "work"
     },
     "survey-ref-060": {
       "survey_number": 60,
       "citation": "T. Wängberg, M. Böörs, E. Catt, T. Everitt, and M. Hutter, “A Game-Theoretic Analysis of the Off-Switch Game,” in Artificial General Intelligence, Cham, 2017, pp. 167–177. doi: 10.1007/978-3-319-63703-7_16.",
-      "locator": "https://doi.org/10.1007/978-3-319-63703-7_16"
+      "locator": "https://doi.org/10.1007/978-3-319-63703-7_16",
+      "role": "work"
     },
     "survey-ref-061": {
       "survey_number": 61,
-      "citation": "E. M. E. Mhamdi, R. Guerraoui, H. Hendrikx, and A. Maurer, “Dynamic safe interruptibility for decentralized multi-agent reinforcement learning,” in Proceedings of the 31st International Conference on Neural Information Processing Systems, Red Hook, NY, USA, Dec. 2017, pp. 129–139."
+      "citation": "E. M. E. Mhamdi, R. Guerraoui, H. Hendrikx, and A. Maurer, “Dynamic safe interruptibility for decentralized multi-agent reinforcement learning,” in Proceedings of the 31st International Conference on Neural Information Processing Systems, Red Hook, NY, USA, Dec. 2017, pp. 129–139.",
+      "role": "work"
     },
     "survey-ref-062": {
       "survey_number": 62,
       "citation": "M. H. Löb, “Solution of a Problem of Leon Henkin,” J. Symb. Log., vol. 20, no. 2, pp. 115–118, 1955, doi: 10.2307/2266895.",
-      "locator": "https://doi.org/10.2307/2266895"
+      "locator": "https://doi.org/10.2307/2266895",
+      "role": "work"
     },
     "survey-ref-063": {
       "survey_number": 63,
       "citation": "V. Vinge, “TECHNOLOGICAL SINGULARITY,” presented at the VISION-21 Symposium sponsored by NASA Lewis Research Center and the Ohio Aerospace Institute, 1993. Accessed: Jul. 01, 2021. [Online]. Available: https://frc.ri.cmu.edu/~hpm/book98/com.ch1/vinge.singularity.html",
-      "locator": "https://frc.ri.cmu.edu/~hpm/book98/com.ch1/vinge.singularity.html"
+      "locator": "https://frc.ri.cmu.edu/~hpm/book98/com.ch1/vinge.singularity.html",
+      "role": "work"
     },
     "survey-ref-064": {
       "survey_number": 64,
       "citation": "R. V. Yampolskiy, “Unpredictability of AI: On the Impossibility of Accurately Predicting All Actions of a Smarter Agent,” J. Artif. Intell. Conscious., vol. 07, no. 01, pp. 109–118, Mar. 2020, doi: 10.1142/S2705078520500034.",
-      "locator": "https://doi.org/10.1142/S2705078520500034"
+      "locator": "https://doi.org/10.1142/S2705078520500034",
+      "role": "work"
     },
     "survey-ref-065": {
       "survey_number": 65,
       "citation": "R. V. Yampolskiy, “Unexplainability and Incomprehensibility of AI,” J. Artif. Intell. Conscious., vol. 07, no. 02, pp. 277–291, Sep. 2020, doi: 10.1142/S2705078520500150.",
-      "locator": "https://doi.org/10.1142/S2705078520500150"
+      "locator": "https://doi.org/10.1142/S2705078520500150",
+      "role": "work"
     },
     "survey-ref-066": {
       "survey_number": 66,
       "citation": "A. Charlesworth, “Comprehending software correctness implies comprehending an intelligence-related limitation,” ACM Trans. Comput. Log., vol. 7, no. 3, pp. 590–612, Jul. 2006, doi: 10.1145/1149114.1149119.",
-      "locator": "https://doi.org/10.1145/1149114.1149119"
+      "locator": "https://doi.org/10.1145/1149114.1149119",
+      "role": "work"
     },
     "survey-ref-067": {
       "survey_number": 67,
-      "citation": "J. Hernandez-orallo, “A formal definition of intelligence based on an intensional variant of Kolmogorov complexity,” in In Proceedings of the International Symposium of Engineering of Intelligent Systems (EIS’98, 1998, pp. 146–163."
+      "citation": "J. Hernandez-orallo, “A formal definition of intelligence based on an intensional variant of Kolmogorov complexity,” in In Proceedings of the International Symposium of Engineering of Intelligent Systems (EIS’98, 1998, pp. 146–163.",
+      "role": "work"
     },
     "survey-ref-068": {
       "survey_number": 68,
       "citation": "R. V. Yampolskiy, “What are the ultimate limits to computational techniques: verifier theory and unverifiability,” Phys. Scr., vol. 92, no. 9, p. 093001, Jul. 2017, doi: 10.1088/1402-4896/aa7ca8.",
-      "locator": "https://doi.org/10.1088/1402-4896/aa7ca8"
+      "locator": "https://doi.org/10.1088/1402-4896/aa7ca8",
+      "role": "work"
     },
     "survey-ref-069": {
       "survey_number": 69,
       "citation": "J. van Leeuwen and J. Wiedermann, “Impossibility Results for the Online Verification of Ethical and Legal Behaviour of Robots,” Utrecht University, Utrecht, UU-PCS-2021-02, 2021. Accessed: Aug. 12, 2021. [Online]. Available: http://www.cs.uu.nl/groups/AD/UU-PCS-2021-02.pdf",
-      "locator": "https://web.archive.org/web/20220222045551/http://www.cs.uu.nl/groups/AD/UU-PCS-2021-02.pdf"
+      "locator": "https://web.archive.org/web/20220222045551/http://www.cs.uu.nl/groups/AD/UU-PCS-2021-02.pdf",
+      "role": "work"
     },
     "survey-ref-070": {
       "survey_number": 70,
       "citation": "C. J. Reynolds, “On the Computational Complexity of Action Evaluations,” Netherlands, 2005. Accessed: Jul. 01, 2021. [Online]. Available: https://www.media.mit.edu/publications/on-the-computational-complexity-of-action-evaluations/",
-      "locator": "https://www.media.mit.edu/publications/on-the-computational-complexity-of-action-evaluations/"
+      "locator": "https://www.media.mit.edu/publications/on-the-computational-complexity-of-action-evaluations/",
+      "role": "work"
     },
     "survey-ref-071": {
       "survey_number": 71,
       "citation": "M. Brundage, “Limitations and risks of machine ethics,” J. Exp. Theor. Artif. Intell., vol. 26, no. 3, pp. 355–372, Jul. 2014, doi: 10.1080/0952813X.2014.895108.",
-      "locator": "https://doi.org/10.1080/0952813X.2014.895108"
+      "locator": "https://doi.org/10.1080/0952813X.2014.895108",
+      "role": "work"
     },
     "survey-ref-072": {
       "survey_number": 72,
       "citation": "H. W. Lin, M. Tegmark, and D. Rolnick, “Why Does Deep and Cheap Learning Work So Well?,” J. Stat. Phys., vol. 168, no. 6, pp. 1223–1247, Sep. 2017, doi: 10.1007/s10955-017-1836-5.",
-      "locator": "https://doi.org/10.1007/s10955-017-1836-5"
+      "locator": "https://doi.org/10.1007/s10955-017-1836-5",
+      "role": "work"
     },
     "survey-ref-073": {
       "survey_number": 73,
-      "citation": "C. S. Calude, S. Heidari, and J. Sifakis, “What Neural Networks Are (Not) Good For?,” Research report CDMTCS- 556, Aug. 2021."
+      "citation": "C. S. Calude, S. Heidari, and J. Sifakis, “What Neural Networks Are (Not) Good For?,” Research report CDMTCS- 556, Aug. 2021.",
+      "role": "work"
     },
     "survey-ref-074": {
       "survey_number": 74,
       "citation": "C. A. E. Goodhart, “Problems of Monetary Management: The UK Experience,” in Monetary Theory and Practice: The UK Experience, C. A. E. Goodhart, Ed. London: Macmillan Education UK, 1984, pp. 91–121. doi: 10.1007/978-1-349-17295-5_4.",
-      "locator": "https://doi.org/10.1007/978-1-349-17295-5_4"
+      "locator": "https://doi.org/10.1007/978-1-349-17295-5_4",
+      "role": "work"
     },
     "survey-ref-075": {
       "survey_number": 75,
       "citation": "M. Strathern, “‘Improving ratings’: audit in the British University system,” Eur. Rev., vol. 5, no. 3, pp. 305–321, Jul. 1997, doi: 10.1002/(SICI)1234-981X(199707)5:3<305::AID-EURO184>3.0.CO;2-4.",
-      "locator": "https://doi.org/10.1002/(SICI)1234-981X(199707)5:3<305::AID-EURO184>3.0.CO;2-4"
+      "locator": "https://doi.org/10.1002/(SICI)1234-981X(199707)5:3<305::AID-EURO184>3.0.CO;2-4",
+      "role": "work"
     },
     "survey-ref-076": {
       "survey_number": 76,
       "citation": "D. T. Campbell, “Assessing the impact of planned social change,” Eval. Program Plann., vol. 2, no. 1, pp. 67–90, Jan. 1979, doi: 10.1016/0149-7189(79)90048-X.",
-      "locator": "https://doi.org/10.1016/0149-7189(79)90048-X"
+      "locator": "https://doi.org/10.1016/0149-7189(79)90048-X",
+      "role": "work"
     },
     "survey-ref-077": {
       "survey_number": 77,
       "citation": "T. Everitt, V. Krakovna, L. Orseau, M. Hutter, and S. Legg, “Reinforcement Learning with a Corrupted Reward Channel,” ArXiv170508417 Cs Stat, Aug. 2017, Accessed: May 13, 2021. [Online]. Available: http://arxiv.org/abs/1705.08417",
-      "locator": "http://arxiv.org/abs/1705.08417"
+      "locator": "http://arxiv.org/abs/1705.08417",
+      "role": "work"
     },
     "survey-ref-078": {
       "survey_number": 78,
       "citation": "W. J. Howe and R. V. Yampolskiy, “Impossibility of Unambiguous Communication as a Source of Failure in AI Systems,” presented at the IJCAI-21 Workshop on Artificial Intelligence Safety (AISafety2021), Montreal, Quebec, Canada, Aug. 2021. doi: 10.13140/RG.2.2.13245.28641.",
-      "locator": "https://doi.org/10.13140/RG.2.2.13245.28641"
+      "locator": "https://doi.org/10.13140/RG.2.2.13245.28641",
+      "role": "work"
     },
     "atlas-ref-melo-2024": {
       "citation": "G. A. Melo, M. R. O. A. Máximo, N. Y. Soma, and P. A. L. Castro, “On the Undecidability of Artificial Intelligence Alignment: Machines that Halt,” arXiv:2408.08995, 2024; also Sci. Rep., 2025.",
       "locator": "https://arxiv.org/abs/2408.08995",
-      "role": "related_literature",
+      "role": "work",
       "notes": "Not a Brčić–Yampolskiy Table-1 source. Related to BY-012 Rice packaging via AgentBehavior; see docs/guide/related-literature.md and landscape LAND-MELO-001."
+    },
+    "brcic-yampolskiy-2023-own-results": {
+      "citation": "M. Brčić and R. V. Yampolskiy, “Impossibility Results in AI: A Survey,” ACM Computing Surveys, 2023, doi: 10.1145/3603371 — the authors' own results section (BY-042, BY-043, BY-044) with proof sketches.",
+      "locator": "https://doi.org/10.1145/3603371",
+      "role": "work",
+      "notes": "Depth source for the survey's three author-original results. Distinct from the Table 1 directory entry brcic-yampolskiy-2023, which enumerates imported results and carries no statement to grade against."
+    },
+    "mathforaisafety-2026": {
+      "citation": "AI Safety for Mathematicians, mathforaisafety.org — curated research directions for mathematicians entering AI safety (heuristic estimators, interpretability and feature manifolds, open-source game theory) plus a concrete-problems page.",
+      "locator": "https://www.mathforaisafety.org/",
+      "role": "directory",
+      "retrieved": "2026-08-07",
+      "notes": "Living directory; the site states the direction list is expanding and the writeups subject to change. Points at the AISI, Iliad, MAIS, and Timaeus directories also catalogued here."
+    },
+    "aisi-alignment-project-2026": {
+      "citation": "The Alignment Project (UK AI Security Institute), research agenda — eleven priority research areas broken down by mathematical discipline, each listing open subproblems: benchmark design, cognitive science, computational complexity theory, economic and game theory, monitoring and red-teaming, evaluation and guarantees in RL, information theory and cryptography, interpretability, learning theory, post-training and elicitation, probabilistic methods.",
+      "locator": "https://alignmentproject.aisi.gov.uk/research-agenda",
+      "role": "directory",
+      "retrieved": "2026-08-07",
+      "notes": "Directory of research areas, not of individually numbered conjectures; each area states subproblems in prose. Reached via mathforaisafety-2026. The computational-complexity-theory area (scalable oversight, debate, prover-verifier games) is the one nearest current atlas surfaces."
+    },
+    "mais-open-problems-2026": {
+      "citation": "Math for AI Safety (MAIS), master list of open problems — 92 numbered problems (MAIS-O1 … MAIS-O92), each with an AI-safety motivation, mathematical area, and difficulty rating, linked to a research agenda carrying full context.",
+      "locator": "https://github.com/lionellevine/MAIS/tree/main/open-problems",
+      "role": "directory",
+      "retrieved": "2026-08-07",
+      "notes": "Problems are open to the registry's knowledge, literature-checked at release; MAIS-O60 was resolved in the negative in August 2026. Fourteen problems (MAIS-O1, O10-O22) concern bounded and quantitative Löb, cooperative AI, and program equilibrium — the area where the atlas already ships Löb, Gödel I/II and Tarski. Checked 2026-08-07: MAIS-O1 and MAIS-O16 are not statable against AISafetyAtlas.Logic.loeb, which is the unbounded theorem; both need proof-length metrics, arithmetized bounded provability, and expansion certificates that neither Mathlib nor Foundation provides."
+    },
+    "timaeus-projects-2026": {
+      "citation": "Timaeus project ideas — a directory of project ideas in developmental interpretability and singular learning theory.",
+      "locator": "https://timaeus.co/projects",
+      "role": "directory",
+      "retrieved": "2026-08-07",
+      "notes": "Reached via mathforaisafety-2026."
+    },
+    "iliad-ecosystem-2026": {
+      "citation": "Iliad ecosystem, incubated organizations — a directory of groups working on interpretability, theoretical models, agency, and alignment.",
+      "locator": "https://www.iliad.ac/incubated-organizations",
+      "role": "directory",
+      "retrieved": "2026-08-07",
+      "notes": "Reached via mathforaisafety-2026."
+    },
+    "critch-tsimerman-2025": {
+      "citation": "A. Critch and J. Tsimerman, “A Taxonomy of Omnicidal Futures Involving Artificial Intelligence,” arXiv:2507.09369, 2025.",
+      "locator": "https://arxiv.org/abs/2507.09369",
+      "role": "work",
+      "notes": "Five exhaustive categories, made mutually exclusive by earliest-match; the paper states that preventing all five is logically necessary for human survival without writing the argument down. Not yet referenced by any result."
     }
   },
   "results": [
@@ -402,7 +533,10 @@
           "observable output"
         ]
       },
-      "candidate_formalizations": []
+      "candidate_formalizations": [],
+      "tags": [
+        "control-theory"
+      ]
     },
     {
       "id": "BY-002",
@@ -439,7 +573,10 @@
           "not controllable",
           "controllability"
         ]
-      }
+      },
+      "tags": [
+        "control-theory"
+      ]
     },
     {
       "id": "BY-003",
@@ -474,7 +611,10 @@
           "good regulator theorem",
           "good regulator"
         ]
-      }
+      },
+      "tags": [
+        "control-theory"
+      ]
     },
     {
       "id": "BY-004",
@@ -509,7 +649,11 @@
           "requisite variety",
           "law of requisite variety"
         ]
-      }
+      },
+      "tags": [
+        "control-theory",
+        "information-theory"
+      ]
     },
     {
       "id": "BY-005",
@@ -544,7 +688,11 @@
           "information-theoretic control",
           "information theoretic control"
         ]
-      }
+      },
+      "tags": [
+        "control-theory",
+        "information-theory"
+      ]
     },
     {
       "id": "BY-006",
@@ -582,7 +730,10 @@
           "moral particularism",
           "virtue codification"
         ]
-      }
+      },
+      "tags": [
+        "ethics"
+      ]
     },
     {
       "id": "BY-007",
@@ -675,7 +826,11 @@
           "arrow's theorem",
           "arrow theorem"
         ]
-      }
+      },
+      "tags": [
+        "social-choice",
+        "decision-theory"
+      ]
     },
     {
       "id": "BY-008",
@@ -712,7 +867,11 @@
           "population ethics",
           "population axiology"
         ]
-      }
+      },
+      "tags": [
+        "social-choice",
+        "ethics"
+      ]
     },
     {
       "id": "BY-009",
@@ -748,7 +907,11 @@
           "ai alignment",
           "utility alignment"
         ]
-      }
+      },
+      "tags": [
+        "social-choice",
+        "decision-theory"
+      ]
     },
     {
       "id": "BY-010",
@@ -785,7 +948,10 @@
           "calibration fairness",
           "equalized odds"
         ]
-      }
+      },
+      "tags": [
+        "social-choice"
+      ]
     },
     {
       "id": "BY-011",
@@ -809,7 +975,11 @@
           "reproduced": true,
           "license": "Apache-2.0",
           "build_environment": "leanprover/lean4:v4.31.0; mathlib@fabf563a7c95a166b8d7b6efca11c8b4dc9d911f",
-          "build_command": "lake build AISafetyAtlas.Preference AISafetyAtlas.Examples.PublicAPI"
+          "build_command": "lake build AISafetyAtlas.Preference AISafetyAtlas.Examples.PublicAPI",
+          "scope_delta": {
+            "summary": "Real-valued rather than [-1,1]-valued rewards; the source's Conjecture 9 is stated as a predicate and not proved; Proposition 10 is absent; and no nontrivial reasonable-language witness exists — the only exhibited ReasonableLanguage inhabitant is degenerate, so Propositions 7 and 8 hold there without saying anything.",
+            "evidence": "docs/provenance/a1-a3-b1-b3-b7-reverification.md"
+          }
         },
         {
           "framework": "Lean",
@@ -821,7 +991,11 @@
           "reproduced": true,
           "license": "Apache-2.0",
           "build_environment": "leanprover/lean4:v4.31.0; mathlib@fabf563a7c95a166b8d7b6efca11c8b4dc9d911f",
-          "build_command": "lake build AISafetyAtlas.Preference AISafetyAtlas.Examples.Registry"
+          "build_command": "lake build AISafetyAtlas.Preference AISafetyAtlas.Examples.Registry",
+          "scope_delta": {
+            "summary": "Real-valued rather than [-1,1]-valued rewards; the source's Conjecture 9 is stated as a predicate and not proved; Proposition 10 is absent; and no nontrivial reasonable-language witness exists — the only exhibited ReasonableLanguage inhabitant is degenerate, so Propositions 7 and 8 hold there without saying anything.",
+            "evidence": "docs/provenance/a1-a3-b1-b3-b7-reverification.md"
+          }
         },
         {
           "framework": "Lean",
@@ -833,7 +1007,11 @@
           "reproduced": true,
           "license": "Apache-2.0",
           "build_environment": "leanprover/lean4:v4.31.0; mathlib@fabf563a7c95a166b8d7b6efca11c8b4dc9d911f",
-          "build_command": "lake build AISafetyAtlas.Preference AISafetyAtlas.Examples.Registry"
+          "build_command": "lake build AISafetyAtlas.Preference AISafetyAtlas.Examples.Registry",
+          "scope_delta": {
+            "summary": "Real-valued rather than [-1,1]-valued rewards; the source's Conjecture 9 is stated as a predicate and not proved; Proposition 10 is absent; and no nontrivial reasonable-language witness exists — the only exhibited ReasonableLanguage inhabitant is degenerate, so Propositions 7 and 8 hold there without saying anything.",
+            "evidence": "docs/provenance/a1-a3-b1-b3-b7-reverification.md"
+          }
         },
         {
           "framework": "Lean",
@@ -845,7 +1023,11 @@
           "reproduced": true,
           "license": "Apache-2.0",
           "build_environment": "leanprover/lean4:v4.31.0; mathlib@fabf563a7c95a166b8d7b6efca11c8b4dc9d911f",
-          "build_command": "lake build AISafetyAtlas.Preference AISafetyAtlas.Examples.Registry"
+          "build_command": "lake build AISafetyAtlas.Preference AISafetyAtlas.Examples.Registry",
+          "scope_delta": {
+            "summary": "Real-valued rather than [-1,1]-valued rewards; the source's Conjecture 9 is stated as a predicate and not proved; Proposition 10 is absent; and no nontrivial reasonable-language witness exists — the only exhibited ReasonableLanguage inhabitant is degenerate, so Propositions 7 and 8 hold there without saying anything.",
+            "evidence": "docs/provenance/a1-a3-b1-b3-b7-reverification.md"
+          }
         },
         {
           "framework": "Lean",
@@ -857,7 +1039,11 @@
           "reproduced": true,
           "license": "Apache-2.0",
           "build_environment": "leanprover/lean4:v4.31.0; mathlib@fabf563a7c95a166b8d7b6efca11c8b4dc9d911f",
-          "build_command": "lake build AISafetyAtlas.Preference.SourceComplexity AISafetyAtlas.Examples.SixTargets"
+          "build_command": "lake build AISafetyAtlas.Preference.SourceComplexity AISafetyAtlas.Examples.SixTargets",
+          "scope_delta": {
+            "summary": "Real-valued rather than [-1,1]-valued rewards; the source's Conjecture 9 is stated as a predicate and not proved; Proposition 10 is absent; and no nontrivial reasonable-language witness exists — the only exhibited ReasonableLanguage inhabitant is degenerate, so Propositions 7 and 8 hold there without saying anything.",
+            "evidence": "docs/provenance/a1-a3-b1-b3-b7-reverification.md"
+          }
         },
         {
           "framework": "Lean",
@@ -869,7 +1055,11 @@
           "reproduced": true,
           "license": "Apache-2.0",
           "build_environment": "leanprover/lean4:v4.31.0; mathlib@fabf563a7c95a166b8d7b6efca11c8b4dc9d911f",
-          "build_command": "lake build AISafetyAtlas.Preference.SourceComplexity AISafetyAtlas.Examples.SixTargets"
+          "build_command": "lake build AISafetyAtlas.Preference.SourceComplexity AISafetyAtlas.Examples.SixTargets",
+          "scope_delta": {
+            "summary": "Real-valued rather than [-1,1]-valued rewards; the source's Conjecture 9 is stated as a predicate and not proved; Proposition 10 is absent; and no nontrivial reasonable-language witness exists — the only exhibited ReasonableLanguage inhabitant is degenerate, so Propositions 7 and 8 hold there without saying anything.",
+            "evidence": "docs/provenance/a1-a3-b1-b3-b7-reverification.md"
+          }
         },
         {
           "framework": "Lean",
@@ -881,7 +1071,11 @@
           "reproduced": true,
           "license": "Apache-2.0",
           "build_environment": "leanprover/lean4:v4.31.0; mathlib@fabf563a7c95a166b8d7b6efca11c8b4dc9d911f",
-          "build_command": "lake build AISafetyAtlas.Preference.Reasonable AISafetyAtlas.Examples.PublicAPI"
+          "build_command": "lake build AISafetyAtlas.Preference.Reasonable AISafetyAtlas.Examples.PublicAPI",
+          "scope_delta": {
+            "summary": "Real-valued rather than [-1,1]-valued rewards; the source's Conjecture 9 is stated as a predicate and not proved; Proposition 10 is absent; and no nontrivial reasonable-language witness exists — the only exhibited ReasonableLanguage inhabitant is degenerate, so Propositions 7 and 8 hold there without saying anything.",
+            "evidence": "docs/provenance/a1-a3-b1-b3-b7-reverification.md"
+          }
         },
         {
           "framework": "Lean",
@@ -893,7 +1087,11 @@
           "reproduced": true,
           "license": "Apache-2.0",
           "build_environment": "leanprover/lean4:v4.31.0; mathlib@fabf563a7c95a166b8d7b6efca11c8b4dc9d911f",
-          "build_command": "lake build AISafetyAtlas.Preference.Reasonable AISafetyAtlas.Examples.PublicAPI"
+          "build_command": "lake build AISafetyAtlas.Preference.Reasonable AISafetyAtlas.Examples.PublicAPI",
+          "scope_delta": {
+            "summary": "Real-valued rather than [-1,1]-valued rewards; the source's Conjecture 9 is stated as a predicate and not proved; Proposition 10 is absent; and no nontrivial reasonable-language witness exists — the only exhibited ReasonableLanguage inhabitant is degenerate, so Propositions 7 and 8 hold there without saying anything.",
+            "evidence": "docs/provenance/a1-a3-b1-b3-b7-reverification.md"
+          }
         },
         {
           "framework": "Lean",
@@ -905,7 +1103,11 @@
           "reproduced": true,
           "license": "Apache-2.0",
           "build_environment": "leanprover/lean4:v4.31.0; mathlib@fabf563a7c95a166b8d7b6efca11c8b4dc9d911f",
-          "build_command": "lake build AISafetyAtlas.Preference.Complexity AISafetyAtlas.Examples.PublicAPI"
+          "build_command": "lake build AISafetyAtlas.Preference.Complexity AISafetyAtlas.Examples.PublicAPI",
+          "scope_delta": {
+            "summary": "Real-valued rather than [-1,1]-valued rewards; the source's Conjecture 9 is stated as a predicate and not proved; Proposition 10 is absent; and no nontrivial reasonable-language witness exists — the only exhibited ReasonableLanguage inhabitant is degenerate, so Propositions 7 and 8 hold there without saying anything.",
+            "evidence": "docs/provenance/a1-a3-b1-b3-b7-reverification.md"
+          }
         },
         {
           "framework": "Lean",
@@ -917,7 +1119,11 @@
           "reproduced": true,
           "license": "Apache-2.0",
           "build_environment": "leanprover/lean4:v4.31.0; mathlib@fabf563a7c95a166b8d7b6efca11c8b4dc9d911f",
-          "build_command": "lake build AISafetyAtlas.Preference.Override AISafetyAtlas.Examples.Registry"
+          "build_command": "lake build AISafetyAtlas.Preference.Override AISafetyAtlas.Examples.Registry",
+          "scope_delta": {
+            "summary": "Real-valued rather than [-1,1]-valued rewards; the source's Conjecture 9 is stated as a predicate and not proved; Proposition 10 is absent; and no nontrivial reasonable-language witness exists — the only exhibited ReasonableLanguage inhabitant is degenerate, so Propositions 7 and 8 hold there without saying anything.",
+            "evidence": "docs/provenance/a1-a3-b1-b3-b7-reverification.md"
+          }
         },
         {
           "framework": "Lean",
@@ -929,7 +1135,11 @@
           "reproduced": true,
           "license": "Apache-2.0",
           "build_environment": "leanprover/lean4:v4.31.0; mathlib@fabf563a7c95a166b8d7b6efca11c8b4dc9d911f",
-          "build_command": "lake build AISafetyAtlas.Preference.Override AISafetyAtlas.Examples.Registry"
+          "build_command": "lake build AISafetyAtlas.Preference.Override AISafetyAtlas.Examples.Registry",
+          "scope_delta": {
+            "summary": "Real-valued rather than [-1,1]-valued rewards; the source's Conjecture 9 is stated as a predicate and not proved; Proposition 10 is absent; and no nontrivial reasonable-language witness exists — the only exhibited ReasonableLanguage inhabitant is degenerate, so Propositions 7 and 8 hold there without saying anything.",
+            "evidence": "docs/provenance/a1-a3-b1-b3-b7-reverification.md"
+          }
         }
       ],
       "lean_artifact": {
@@ -1175,7 +1385,11 @@
             "reason": "Explicitly semi-formal, same introduction as Proposition 3. Its rigorous counterpart is Proposition 8, counted as covered."
           }
         ]
-      }
+      },
+      "tags": [
+        "preference-inference",
+        "decision-theory"
+      ]
     },
     {
       "id": "BY-012",
@@ -1293,7 +1507,11 @@
           "rice's theorem",
           "rice_"
         ]
-      }
+      },
+      "tags": [
+        "computability",
+        "verification"
+      ]
     },
     {
       "id": "BY-013",
@@ -1375,7 +1593,10 @@
           "goedel incompleteness",
           "unprovability"
         ]
-      }
+      },
+      "tags": [
+        "provability-logic"
+      ]
     },
     {
       "id": "BY-014",
@@ -1479,7 +1700,10 @@
           "undecidability",
           "undecidable"
         ]
-      }
+      },
+      "tags": [
+        "computability"
+      ]
     },
     {
       "id": "BY-015",
@@ -1544,7 +1768,11 @@
           "chaitin incompleteness",
           "kolmogorov complexity incompleteness"
         ]
-      }
+      },
+      "tags": [
+        "algorithmic-information",
+        "provability-logic"
+      ]
     },
     {
       "id": "BY-016",
@@ -1605,7 +1833,10 @@
           "undefinability of truth",
           "undefinability"
         ]
-      }
+      },
+      "tags": [
+        "provability-logic"
+      ]
     },
     {
       "id": "BY-017",
@@ -1640,7 +1871,10 @@
           "unsurveyability",
           "surveyability of proof"
         ]
-      }
+      },
+      "tags": [
+        "interpretability"
+      ]
     },
     {
       "id": "BY-018",
@@ -1678,7 +1912,11 @@
           "learnability undecidable",
           "pac learnability"
         ]
-      }
+      },
+      "tags": [
+        "learning-theory",
+        "computability"
+      ]
     },
     {
       "id": "BY-019",
@@ -1714,7 +1952,11 @@
           "predicting rational agents",
           "rational agent unpredictability"
         ]
-      }
+      },
+      "tags": [
+        "multi-agent",
+        "decision-theory"
+      ]
     },
     {
       "id": "BY-020",
@@ -1742,7 +1984,11 @@
           ],
           "content_source_note": "The formalized content (uniform target average, off-training-set error learner-independence, homogeneous loss) is from Wolpert's 'Lack' paper. original_source_refs mirrors the survey's own citation (survey-ref-018 = the companion 'Existence' paper, which proves the converse); see docs/provenance/lean-wolpert-nfl.md.",
           "build_environment": "leanprover/lean4:v4.31.0; mathlib@fabf563a7c95a166b8d7b6efca11c8b4dc9d911f",
-          "build_command": "lake build AISafetyAtlas.Learning AISafetyAtlas.Examples.PublicAPI AISafetyAtlas.Examples.NFLConcrete"
+          "build_command": "lake build AISafetyAtlas.Learning AISafetyAtlas.Examples.PublicAPI AISafetyAtlas.Examples.NFLConcrete",
+          "scope_delta": {
+            "summary": "Finite-domain supervised off-training-set uniform-averaging core under homogeneous loss only; cross-validation as a meta-algorithm, general loss, and stochastic learners from Wolpert 1996 are not mechanized. Distinct from the SSBD PAC no-free-lunch theorem (LAND-NFL-001).",
+            "evidence": "docs/provenance/lean-wolpert-nfl.md"
+          }
         }
       ],
       "lean_artifact": {
@@ -1811,7 +2057,10 @@
           "supervised learning"
         ]
       },
-      "candidate_formalizations": []
+      "candidate_formalizations": [],
+      "tags": [
+        "learning-theory"
+      ]
     },
     {
       "id": "BY-021",
@@ -1835,7 +2084,11 @@
           "reproduced": true,
           "license": "Apache-2.0",
           "build_environment": "leanprover/lean4:v4.31.0; mathlib@fabf563a7c95a166b8d7b6efca11c8b4dc9d911f",
-          "build_command": "lake build AISafetyAtlas.Learning AISafetyAtlas.Examples.PublicAPI AISafetyAtlas.Examples.NFLConcrete"
+          "build_command": "lake build AISafetyAtlas.Learning AISafetyAtlas.Examples.PublicAPI AISafetyAtlas.Examples.NFLConcrete",
+          "scope_delta": {
+            "summary": "Finite-domain non-adaptive core plus a deterministic adaptive no-revisit strengthening; adaptive query trees, stochastic algorithms, and time-varying objectives from Wolpert-Macready 1997 are not mechanized. The sharp closed-under-permutation characterization is an open task (CT-10), not formalized here.",
+            "evidence": "docs/provenance/lean-wolpert-nfl.md"
+          }
         }
       ],
       "lean_artifact": {
@@ -1895,6 +2148,9 @@
           "relationship_review": "RELATED",
           "notes": "UCSD DSC 291 (Learning Theory) course project, Spring 2026, formalizing three No Free Lunch theorems. Layout: NFL.lean imports a 69-line statement skeleton whose theorems are sorry-closed; the proofs live in codex_full/ and claude_full/, outputs of two AI coding agents on the same task, with the README designating codex_full/ as the deliverable. Built and audited 2026-07-28 at the repository's own pins (Lean v4.29.1, Mathlib 5e932f97). The default lake build target succeeds but warns 'declaration uses sorry' at WolpertMacready.lean lines 42 and 60; no oleans appear under codex_full/ or claude_full/, confirming both are outside the default closure. Built explicitly, both compile (1700 jobs each). Axiom audit reports [propext, Classical.choice, Quot.sound] for wolpert_macready and wolpert_macready_avg in both namespaces, with no sorryAx: both agent proofs are complete and kernel-checked. Delta against existing atlas coverage is narrow. BY-021 is already covered RELATED by the in-tree Lean AISafetyAtlas.Learning.no_free_lunch, and AISafetyAtlas.Learning.no_free_lunch_adaptive already proves the deterministic adaptive case including the full histogram (each fiber has cardinality |Y|^(|X|-m) independent of the rule). What this lead adds is stochastic algorithms: its SearchAlg.nextQuery is PMF-valued where AdaptiveRule is deterministic. It is not uniformly stronger — its performance functional is ENNReal-valued where the atlas admits signed real functionals — and it likewise omits the time-varying objectives that keep the atlas artifact at RELATED. Graded RELATED for consistency with that standard. Its other two theorems are more interesting than the Wolpert one: batch_stochastic_NFL is SSBD Thm 5.1, which the atlas holds only in Isabelle as LAND-NFL-001, though that AFP entry is strictly more general (arbitrary measure spaces, not Fintype-only), so this is a finite-domain special case rather than a Lean replacement; and exists_adversarial_target is an online adversarial NFL with no atlas analogue. The blocker is licensing: no license file, so nothing here is reusable, vendorable or promotable however good the proofs are. Version skew against atlas pins (Lean v4.31.0, Mathlib fabf563a) is secondary. Found via an incidental control query, not a systematic lead sweep of this row."
         }
+      ],
+      "tags": [
+        "learning-theory"
       ]
     },
     {
@@ -1931,7 +2187,10 @@
           "continuous free lunch",
           "coevolutionary free lunch"
         ]
-      }
+      },
+      "tags": [
+        "learning-theory"
+      ]
     },
     {
       "id": "BY-023",
@@ -1970,7 +2229,11 @@
           "nonidentifiability",
           "disentanglement impossibility"
         ]
-      }
+      },
+      "tags": [
+        "preference-inference",
+        "learning-theory"
+      ]
     },
     {
       "id": "BY-024",
@@ -2011,7 +2274,10 @@
           "computational capabilities of physical systems",
           "wolpert"
         ]
-      }
+      },
+      "tags": [
+        "information-theory"
+      ]
     },
     {
       "id": "BY-025",
@@ -2047,7 +2313,11 @@
           "superintelligence cannot be contained",
           "containment problem"
         ]
-      }
+      },
+      "tags": [
+        "computability",
+        "verification"
+      ]
     },
     {
       "id": "BY-026",
@@ -2090,7 +2360,10 @@
           "safely interruptible",
           "corrigibility"
         ]
-      }
+      },
+      "tags": [
+        "agent-incentives"
+      ]
     },
     {
       "id": "BY-027",
@@ -2153,7 +2426,11 @@
           "loeb formula",
           "provability logic"
         ]
-      }
+      },
+      "tags": [
+        "provability-logic",
+        "verification"
+      ]
     },
     {
       "id": "BY-028",
@@ -2189,7 +2466,10 @@
           "superhuman unpredictability",
           "unpredictability of ai"
         ]
-      }
+      },
+      "tags": [
+        "multi-agent"
+      ]
     },
     {
       "id": "BY-029",
@@ -2224,7 +2504,10 @@
           "unexplainability",
           "explanation impossibility"
         ]
-      }
+      },
+      "tags": [
+        "interpretability"
+      ]
     },
     {
       "id": "BY-030",
@@ -2260,7 +2543,10 @@
           "incomprehensibility",
           "software comprehension"
         ]
-      }
+      },
+      "tags": [
+        "interpretability"
+      ]
     },
     {
       "id": "BY-031",
@@ -2295,7 +2581,11 @@
           "k-incomprehensibility",
           "kolmogorov intelligence"
         ]
-      }
+      },
+      "tags": [
+        "interpretability",
+        "algorithmic-information"
+      ]
     },
     {
       "id": "BY-032",
@@ -2332,7 +2622,10 @@
           "unverifiability",
           "verifier theory"
         ]
-      }
+      },
+      "tags": [
+        "verification"
+      ]
     },
     {
       "id": "BY-033",
@@ -2356,7 +2649,11 @@
           "reproduced": true,
           "license": "Apache-2.0",
           "build_environment": "leanprover/lean4:v4.31.0; mathlib@fabf563a7c95a166b8d7b6efca11c8b4dc9d911f",
-          "build_command": "lake build AISafetyAtlas.Verification.Robot AISafetyAtlas.Examples.Robot"
+          "build_command": "lake build AISafetyAtlas.Verification.Robot AISafetyAtlas.Examples.Robot",
+          "scope_delta": {
+            "summary": "Lean packages the switching construction as SwitchingConstruction and machine-checks only the reduction half; the paper's SPA syntax, its Definition 3 non-triviality construction, and the paced Turing-machine simulation are not mechanized. Bridge is REVIEWED while the formalization stays RELATED.",
+            "evidence": "docs/guide/robot-verification-model.md"
+          }
         }
       ],
       "lean_artifact": {
@@ -2397,7 +2694,11 @@
         "statement_reviewed": true,
         "interpretation_reviewed": true,
         "evidence": "docs/bridges/ct3-robot-review-package.md"
-      }
+      },
+      "tags": [
+        "verification",
+        "ethics"
+      ]
     },
     {
       "id": "BY-034",
@@ -2433,7 +2734,11 @@
           "bottom-up ethics",
           "machine ethics complexity"
         ]
-      }
+      },
+      "tags": [
+        "computational-complexity",
+        "ethics"
+      ]
     },
     {
       "id": "BY-035",
@@ -2468,7 +2773,11 @@
           "no-flattening",
           "deep shallow network"
         ]
-      }
+      },
+      "tags": [
+        "computational-complexity",
+        "learning-theory"
+      ]
     },
     {
       "id": "BY-036",
@@ -2503,7 +2812,11 @@
           "multilayer perceptron",
           "boolean functions neural"
         ]
-      }
+      },
+      "tags": [
+        "computational-complexity",
+        "learning-theory"
+      ]
     },
     {
       "id": "BY-037",
@@ -2584,6 +2897,9 @@
           "relationship_review": "DISTINCT",
           "notes": "Rejected. The file supplies only a predicate GoodhartDrift asserting that some pair of times exists at which a proxy rises while true value falls, and proves nothing about it; the file states its own purpose as showing the notion is satisfiable. A definition without a theorem is not a formalization of this row."
         }
+      ],
+      "tags": [
+        "agent-incentives"
       ]
     },
     {
@@ -2620,7 +2936,10 @@
           "campbell law",
           "regression to the mean"
         ]
-      }
+      },
+      "tags": [
+        "agent-incentives"
+      ]
     },
     {
       "id": "BY-039",
@@ -2644,7 +2963,11 @@
           "reproduced": true,
           "license": "Apache-2.0",
           "build_environment": "leanprover/lean4:v4.31.0; mathlib@fabf563a7c95a166b8d7b6efca11c8b4dc9d911f",
-          "build_command": "lake build AISafetyAtlas.Wireheading.CRMDP AISafetyAtlas.Examples.SixTargets"
+          "build_command": "lake build AISafetyAtlas.Wireheading.CRMDP AISafetyAtlas.Examples.SixTargets",
+          "scope_delta": {
+            "summary": "One fixed deterministic transition rather than a class ranging over stochastic kernels; extrema supplied as structure fields rather than derived; a continuous reward interval rather than the source's finite uniform reward grid.",
+            "evidence": "docs/provenance/a1-a3-b1-b3-b7-reverification.md"
+          }
         }
       ],
       "lean_artifact": {
@@ -2686,7 +3009,10 @@
           "reward misspecification",
           "markov decision process"
         ]
-      }
+      },
+      "tags": [
+        "agent-incentives"
+      ]
     },
     {
       "id": "BY-040",
@@ -2721,7 +3047,11 @@
           "uncontrollability of ai",
           "ai control"
         ]
-      }
+      },
+      "tags": [
+        "control-theory",
+        "verification"
+      ]
     },
     {
       "id": "BY-041",
@@ -2756,7 +3086,11 @@
           "unambiguous communication",
           "ambiguity communication"
         ]
-      }
+      },
+      "tags": [
+        "information-theory",
+        "multi-agent"
+      ]
     },
     {
       "id": "BY-042",
@@ -2789,7 +3123,11 @@
           "unfairness of explainability",
           "strategic inequality"
         ]
-      }
+      },
+      "tags": [
+        "interpretability",
+        "multi-agent"
+      ]
     },
     {
       "id": "BY-043",
@@ -2800,7 +3138,7 @@
       "survey_proof_assessment": "PROOF_SKETCH",
       "informal_claim": "Mistakenly cloned self-interested agents cannot perfectly control one another in the survey's model.",
       "original_source_refs": [
-        "brcic-yampolskiy-2023"
+        "brcic-yampolskiy-2023-own-results"
       ],
       "formalizations": [
         {
@@ -2813,7 +3151,11 @@
           "reproduced": true,
           "license": "Apache-2.0",
           "build_environment": "leanprover/lean4:v4.31.0; mathlib@fabf563a7c95a166b8d7b6efca11c8b4dc9d911f",
-          "build_command": "lake build AISafetyAtlas.Compositional.Symmetry"
+          "build_command": "lake build AISafetyAtlas.Compositional.Symmetry",
+          "scope_delta": {
+            "summary": "The Angluin-style inductive core only, over an assumed symmetric configuration: simplified port routing, no full covering theory, no randomized symmetry breaking. Do not infer BY-043 from the A3 dependency alone.",
+            "evidence": "docs/provenance/a1-a3-b1-b3-b7-reverification.md"
+          }
         }
       ],
       "lean_artifact": {
@@ -2853,7 +3195,11 @@
           "anonymous network",
           "leader election"
         ]
-      }
+      },
+      "tags": [
+        "multi-agent",
+        "compositionality"
+      ]
     },
     {
       "id": "BY-044",
@@ -2887,7 +3233,10 @@
           "locus of self",
           "self-awareness limit"
         ]
-      }
+      },
+      "tags": [
+        "interpretability"
+      ]
     }
   ]
 }

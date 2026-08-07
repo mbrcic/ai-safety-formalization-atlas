@@ -31,6 +31,20 @@ by itself a claim that paper-parity work is finished (see residual notes under
 `docs/provenance/`). Statement-match and `RELATED` are reported separately so
 specializations are not read as full source matches.
 
+**A `RELATED` record that a reader can reach carries its delta as data.** When
+the record's module is on the public root import, or its row's bridge status has
+graduated past `HUMAN_REVIEW`, or the row exposes a `BRIDGE` declaration, the
+record must supply `scope_delta`: a one-line summary of what the atlas core does
+not cover relative to its source, and a path to the document that establishes it.
+The validator rejects a missing delta and an evidence path that does not resolve.
+
+The trigger is **reach, not grade**. Internal helper material that nothing public
+exposes — an upstream `Mathlib` or `Foundation` module that a wrapper happens to
+name — stays lighter, because no reader meets it holding a claim. Nothing here
+weakens grading: `relationship` still gates headline counting, and a delta is a
+disclosure obligation on `RELATED`, never a licence to record one where
+`EXACT`/`EQUIVALENT` was warranted.
+
 Formalization licenses use SPDX identifiers. Repository URLs and any recorded
 source locators must be syntactically valid HTTP(S) locations. A source locator
 may remain absent when the cited bibliography does not provide a verified
@@ -44,6 +58,28 @@ registry record. This avoids an impossible self-reference in which a commit
 would need to contain its own hash. Publication audits should establish the
 reachability of the registry's release ref, which then anchors every `IN_TREE`
 record in that tree.
+
+## Two ledgers, and what that means for source-neutrality
+
+Source-neutrality here is implemented as **two ledgers, not as one neutral
+ledger**. Saying so plainly matters, because the alternative reading — that the
+canonical registry itself became source-agnostic — is false and a reader can
+check it in ten seconds.
+
+[`registry.yaml`](../../registry.yaml) is structurally the Brčić–Yampolskiy
+catalogue: the validator requires contiguous ids `BY-001`…`BY-044` matching that
+source's `expected_result_count`. It is a closed catalogue of one source, and it
+is not where new work goes. [`landscape.yaml`](../../landscape.yaml) holds
+results the workbench develops, reproduces, or exposes on its own account, with
+no source-shaped id space and no fixed size;
+[`conjectures.yaml`](../../conjectures.yaml) holds open questions.
+
+What the de-anchoring changed is therefore **what is counted and how the atlas is
+navigated**, not the shape of the older ledger: headline metrics are absolute
+rather than fractions of 44, sources are split into directories and works with
+neither privileged, and the primary index is
+[by mathematical area](../status/by-area.md) spanning both ledgers. Nobody should
+be adding a `BY-045`; new work belongs in the landscape or the conjecture ledger.
 
 ## Parsimony and source roles
 
@@ -76,8 +112,38 @@ root import (for example attribution impossibility) only when it is listed in
 
 ## Formal-library discovery evidence
 
-Every survey row receives a case-insensitive, Unicode-normalized token and
-phrase search across pinned snapshots of **six classical corpora**: Mathlib,
+Discovery searching runs under one of two **profiles**, and the difference is
+what each one attaches to.
+
+**`baseline-catalogue`** is a completeness artifact for one catalogued source:
+a single synchronized sweep across every row of that source, kept in sync with
+its row set. It is not a standing obligation. A new source, result, landscape
+entry, or conjecture does not inherit a six-corpus sweep, and nothing is blocked
+on one. Requiring it per row would make a second catalogued source impossible to
+add, which is a good reason not to require it.
+
+**`novelty-check`** attaches to a **claim**, not to a row. It is required
+whenever the repository asserts that no formalization or no proof of something
+exists — in a conjecture's `prior_art`, in a task calling a target greenfield, in
+a note saying a result is unformalized. The claim records what was searched, at
+which revision, on what date, and what the search did not cover. One corpus is a
+legitimate novelty check if the claim is about that corpus; six are needed only
+if the claim is that broad.
+
+A claim of absence is the one claim a reader cannot check for themselves, which
+is why it carries its own evidence. `CONJ-001` is the worked example of skipping
+it: the conjecture was recorded without the prior-art search its own template
+requires, and the repaired statement turned out to be a published theorem the
+repository already tracked as a contributor task.
+
+Both profiles live in
+[`formalization-search.json`](../provenance/formalization-search.json) and are
+validated: the file declares its profile, states both obligations, and every
+`novelty_checks` entry must name a corpus with a pinned revision on record.
+
+The baseline sweep itself: every survey row receives a case-insensitive,
+Unicode-normalized token and phrase search across pinned snapshots of
+**six classical corpora**: Mathlib,
 Isabelle AFP, the Rocq Library of Undecidability, HOL4, HOL Light, and the Agda
 standard library. This is a **baseline classical corpus pass**, not a complete
 search of all formalizations: third-party Lean packages (for example

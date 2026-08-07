@@ -13,8 +13,8 @@ Agent map: [`docs/agent/INDEX.md`](docs/agent/INDEX.md). Human doc map:
 2. [`STATE.md`](STATE.md)
 3. [`docs/agent/INDEX.md`](docs/agent/INDEX.md), [`by-id.json`](docs/agent/by-id.json),
    and [`search-summary.json`](docs/agent/search-summary.json) as needed
-4. [`docs/status/atlas-index.md`](docs/status/atlas-index.md) /
-   [`landscape-index.md`](docs/status/landscape-index.md) if browsing coverage
+4. [`docs/status/landscape-index.md`](docs/status/landscape-index.md) /
+   [`docs/status/sources/`](docs/status/sources/) if browsing coverage
 5. **One facade module** under `AISafetyAtlas/*.lean` (or a small nested facade
    such as `Verification/Robot.lean`) for the task domain — not `Upstream/`
 6. [`docs/guide/open-work.md`](docs/guide/open-work.md) or
@@ -87,7 +87,23 @@ proof. Detail: [`docs/guide/methodology.md`](docs/guide/methodology.md).
 
 - **Headline coverage:** reproduced registry formalizations with `EXACT` or
   `EQUIVALENT` only. `RELATED` does not increase the count.
-- **`landscape.yaml`:** non–Table-1 formalizations; never headline coverage.
+- **Which ledger takes your edit:**
+  | Ledger | Holds | Note |
+  |---|---|---|
+  | `registry.yaml` | the Brčić–Yampolskiy survey catalogue | **closed** at `BY-001`…`BY-044`; never add a `BY-045` |
+  | `landscape.yaml` | work the atlas develops, reproduces, or exposes itself | no fixed id space, no denominator; never headline coverage |
+  | `conjectures.yaml` | open questions with a compiling statement and no proof | never a theorem, never counted as one |
+  | `tasks.yaml` | the task board | `docs/guide/contributor-tasks.md` is **generated** from it — never edit the Markdown |
+  Source-neutrality here is two ledgers, not one neutral ledger. New work goes to
+  landscape or conjectures, not into the survey catalogue.
+- **Sources are `directory` or `work`.** A directory is a curated map (the survey
+  itself, `mathforaisafety.org`, AISI, MAIS): never graded against, entry count
+  never a metric. A `work` is statement-bearing and is the only thing a
+  statement-match grade may cite.
+- **Claiming something does not exist?** That needs a `novelty_checks` record in
+  `docs/provenance/formalization-search.json` — corpus, revision, date, and what
+  the search did not cover. The six-corpus sweep is the `baseline-catalogue`
+  profile for one source and is **not** inherited by new work.
 - **Layers:** (1) math theorem → (2) atlas interface → (3) AI-safety bridge →
   (4) real-system claim. Layers 3–4 need human review; Lean at 1–2 does not
   inherit an AI reading.
@@ -111,9 +127,12 @@ proof. Detail: [`docs/guide/methodology.md`](docs/guide/methodology.md).
 | `docs/bridges/` | Bridge review packages |
 | `docs/releases/` | Release evidence notes |
 
-After registry/landscape edits: `python3 scripts/generate_registry_views.py`
-(updates `docs/status/*`, `docs/agent/by-id.json`, `docs/agent/search-summary.json`,
-README/STATE snippets, Lean registry checks). Paper ↔ formalization map:
+After editing **any** ledger — `registry.yaml`, `landscape.yaml`,
+`conjectures.yaml`, `tasks.yaml`, or `docs/provenance/formalization-search.json` —
+run `python3 scripts/generate_registry_views.py` (updates `docs/status/*`,
+`docs/guide/contributor-tasks.md`, `docs/agent/by-id.json`,
+`docs/agent/search-summary.json`, README/STATE snippets, and the Lean registry and
+conjecture checks), then `./scripts/agent_gate.sh`. Paper ↔ formalization map:
 `docs/status/paper-coverage.md`. AI-safety literature map:
 `docs/guide/related-literature.md`.
 
@@ -122,7 +141,8 @@ README/STATE snippets, Lean registry checks). Paper ↔ formalization map:
 - `main` is protected; do not commit or push agent work to it.
 - Use local `agent-work` unless the maintainer names another branch.
 - Commit coherent verified increments locally; **do not push** or open PRs/issues
-  without explicit maintainer authorization (drafts in `contributor-tasks.md`).
+  without explicit maintainer authorization (draft tasks in `tasks.yaml` or the
+  issue tracker; `docs/guide/contributor-tasks.md` is generated).
 - Package version stays at the last published baseline until authorized.
 - Publish via reviewed PR + squash merge; keep pre-squash history on a local
   archive branch when useful.

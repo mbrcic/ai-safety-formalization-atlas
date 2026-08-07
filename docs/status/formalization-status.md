@@ -13,7 +13,7 @@ Statement-match is not the primary success score.
 
 | Metric | Current |
 |---|---:|
-| Survey results inventoried (seed map) | 44 / 44 |
+| Brčić–Yampolskiy survey rows catalogued (that source, complete) | 44 / 44 |
 | Survey results with atlas Lean (any grade) | 13 |
 | … statement-match (`EXACT` or `EQUIVALENT`) | 7 |
 | … workbench formalizations (`RELATED` only) | 6 |
@@ -28,9 +28,9 @@ Statement-match is not the primary success score.
 | Structured `candidate_formalizations` leads | 5 |
 | Reproduced external coverage records | 3 across 2 survey results |
 | Survey results with reviewed AI-system bridges | 2 |
-| Survey rows with six-corpus discovery evidence | 44 / 44 |
+| … with six-corpus discovery evidence (that source, complete) | 44 / 44 |
 
-## Atlas Lean declarations
+## Registry Lean declarations
 
 | ID | Survey result | Formalization relationships | Source declarations | Atlas declarations and layers |
 |---|---|---|---|---|

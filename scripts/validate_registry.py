@@ -6,6 +6,7 @@ from __future__ import annotations
 import json
 import os
 from pathlib import Path
+import re
 import sys
 from urllib.parse import urlsplit
 
@@ -29,6 +30,22 @@ def valid_http_url(value: object) -> bool:
     return parsed.scheme in {"http", "https"} and bool(parsed.netloc)
 
 
+SOURCE_ROLES = {"directory", "work"}
+SCOPE_DELTA_FIELDS = {"summary", "evidence"}
+NOVELTY_CHECK_ID = re.compile(r"NC-\d{3}")
+NOVELTY_CHECK_FIELDS = {
+    "id",
+    "claim",
+    "asserted_in",
+    "searched_on",
+    "searched_by",
+    "corpora",
+    "method",
+    "found",
+    "scope_limits",
+}
+GRADED_RELATIONSHIPS = {"EXACT", "EQUIVALENT", "RELATED"}
+ISO_DATE = re.compile(r"\d{4}-\d{2}-\d{2}")
 BRIDGE_STATUS_VALUES = {"HUMAN_REVIEW", "STATEMENT_REVIEWED", "REVIEWED"}
 BRIDGE_REVIEW_FIELDS = {
     "reviewer",
@@ -306,6 +323,18 @@ def main() -> None:
     if not license_values:
         fail("spdx_license vocabulary must not be empty")
 
+    # Mathematical area, the axis a contributor navigates by. A controlled
+    # vocabulary rather than free text: an unchecked tag fragments the by-area
+    # view silently, and a view nobody can trust is a view nobody reads.
+    tag_values = vocabulary.get("tag")
+    if not isinstance(tag_values, list) or not tag_values:
+        fail("tag vocabulary must be a non-empty list")
+    if sorted(tag_values) != list(tag_values):
+        fail("tag vocabulary must be sorted")
+    if len(set(tag_values)) != len(tag_values):
+        fail("tag vocabulary must not repeat a tag")
+    tag_values = set(tag_values)
+
     required_result_fields = {
         "id",
         "name",
@@ -316,6 +345,7 @@ def main() -> None:
         "informal_claim",
         "formal_library_search",
         "original_source_refs",
+        "tags",
         "formalizations",
         "lean_artifact",
         "status",
@@ -352,13 +382,57 @@ def main() -> None:
         "hol-light",
         "agda-stdlib",
     }
-    if search_evidence.get("schema_version") != 2:
-        fail("formalization-search.json must use schema version 2")
+    if search_evidence.get("schema_version") != 3:
+        fail("formalization-search.json must use schema version 3")
     if set(search_evidence.get("corpora", {})) != expected_search_corpora:
         fail("formalization-search.json corpus set does not match registry policy")
+    # The six-corpus sweep is one profile — a completeness artifact for one
+    # catalogued source — not a standing obligation every new row inherits.
+    if search_evidence.get("profile") != "baseline-catalogue":
+        fail(
+            "formalization-search.json must declare profile 'baseline-catalogue'; "
+            "the sweep is scoped to one catalogued source, not to the workbench"
+        )
+    for field in ("profile_obligation", "novelty_check_obligation"):
+        if not isinstance(search_evidence.get(field), str) or not search_evidence[field].strip():
+            fail(f"formalization-search.json must state {field}")
     evidence_results = search_evidence.get("results")
     if not isinstance(evidence_results, dict) or set(evidence_results) != set(actual_ids):
         fail("formalization-search.json result IDs do not match registry")
+
+    # A claim that something does not exist is the one claim a reader cannot
+    # check for themselves, so it carries what was searched, where, when, and
+    # what the search did not cover. Recording one is optional; recording one
+    # incompletely is not.
+    novelty_checks = search_evidence.get("novelty_checks")
+    if not isinstance(novelty_checks, list):
+        fail("formalization-search.json must carry a novelty_checks list")
+    seen_checks: set[str] = set()
+    for index, check in enumerate(novelty_checks):
+        if not isinstance(check, dict):
+            fail(f"novelty check {index} must be an object")
+        missing = NOVELTY_CHECK_FIELDS - check.keys()
+        if missing:
+            fail(f"novelty check {index} missing fields: {sorted(missing)}")
+        cid = check["id"]
+        if not isinstance(cid, str) or not NOVELTY_CHECK_ID.fullmatch(cid):
+            fail(f"novelty check id must match NC-###: {cid!r}")
+        if cid in seen_checks:
+            fail(f"duplicate novelty check id {cid}")
+        seen_checks.add(cid)
+        for field in ("claim", "method", "found", "scope_limits", "searched_by"):
+            if not isinstance(check[field], str) or not check[field].strip():
+                fail(f"{cid} must record a non-empty {field}")
+        if not ISO_DATE.fullmatch(str(check["searched_on"])):
+            fail(f"{cid} has an invalid searched_on date {check['searched_on']!r}")
+        if not isinstance(check["asserted_in"], list) or not check["asserted_in"]:
+            fail(f"{cid} must name where the claim is asserted")
+        corpora = check["corpora"]
+        if not isinstance(corpora, list) or not corpora:
+            fail(f"{cid} must name at least one searched corpus")
+        unknown = sorted(set(corpora) - set(search_evidence["corpora"]))
+        if unknown:
+            fail(f"{cid} names corpora with no pinned revision on record: {unknown}")
 
     for source_id, source in sources.items():
         if not isinstance(source, dict) or not source.get("citation"):
@@ -366,6 +440,42 @@ def main() -> None:
         locator = source.get("locator")
         if locator is not None and not valid_http_url(locator):
             fail(f"{source_id} has an invalid locator URL")
+        role = source.get("role")
+        if role not in SOURCE_ROLES:
+            fail(
+                f"{source_id} has unknown role {role!r}; "
+                f"expected one of {sorted(SOURCE_ROLES)}"
+            )
+        # A directory is a curated map that hands work to others; it enumerates
+        # pointers and has no statement of its own. A work is a single result
+        # with a statement and a proof — the only thing a grade can compare to.
+        # A living directory (a web page, not a DOI-fixed publication) is
+        # rewritten without notice, so what we read must carry a snapshot date.
+        living = role == "directory" and (locator is None or "doi.org" not in locator)
+        retrieved = source.get("retrieved")
+        if living and (
+            not isinstance(retrieved, str) or not ISO_DATE.fullmatch(retrieved)
+        ):
+            fail(
+                f"{source_id} is a living directory and must record a `retrieved` "
+                "ISO date; a curated list is rewritten and its snapshot must be dated"
+            )
+        if retrieved is not None and not ISO_DATE.fullmatch(str(retrieved)):
+            fail(f"{source_id} has an invalid `retrieved` date {retrieved!r}")
+
+    directories = {
+        source_id
+        for source_id, source in sources.items()
+        if source.get("role") == "directory"
+    }
+
+    root_import_modules = set(
+        re.findall(
+            r"^\s*(?:public\s+)?import\s+(\S+)",
+            (ROOT / "AISafetyAtlas.lean").read_text(encoding="utf-8"),
+            re.M,
+        )
+    )
 
     for result in results:
         result_id = result.get("id", "<missing>")
@@ -385,6 +495,14 @@ def main() -> None:
             )
         if result["ai_bridge_status"] not in bridge_status_values:
             fail(f"{result_id} has unknown ai_bridge_status {result['ai_bridge_status']!r}")
+        tags = result["tags"]
+        if not isinstance(tags, list) or not tags:
+            fail(f"{result_id} must carry at least one tag")
+        unknown_tags = [tag for tag in tags if tag not in tag_values]
+        if unknown_tags:
+            fail(f"{result_id} has tags outside the vocabulary: {sorted(unknown_tags)}")
+        if len(set(tags)) != len(tags):
+            fail(f"{result_id} repeats a tag")
         validate_bridge_review(result_id, result)
         validate_candidate_formalizations(result_id, result)
         validate_source_coverage(result_id, result)
@@ -426,6 +544,68 @@ def main() -> None:
         for source_id in result["original_source_refs"]:
             if source_id not in sources:
                 fail(f"{result_id} references missing source {source_id}")
+
+        # `RELATED` is scoped capital, not a failed match — but a reader meeting
+        # it on the public API, or on a row whose bridge has been reviewed, is
+        # entitled to know what it does not cover. Internal helper material that
+        # nothing public exposes stays lighter: the trigger is reach, not grade.
+        artifact = result.get("lean_artifact") or {}
+        declaration_types = {d["type"] for d in artifact.get("declarations", [])}
+        interpretation_affecting = (
+            result["ai_bridge_status"] != "HUMAN_REVIEW"
+            or "BRIDGE" in declaration_types
+        )
+        for record in result.get("formalizations") or []:
+            if record.get("relationship") != "RELATED":
+                continue
+            module = record.get("module") or ""
+            public = any(
+                module == name or module.startswith(name + ".")
+                for name in root_import_modules
+            )
+            delta = record.get("scope_delta")
+            if not (public or interpretation_affecting):
+                continue
+            declaration = record.get("declaration", "<unnamed>")
+            if not isinstance(delta, dict):
+                fail(
+                    f"{result_id} RELATED record {declaration} is public or "
+                    "interpretation-affecting and must carry a scope_delta"
+                )
+            missing = SCOPE_DELTA_FIELDS - delta.keys()
+            if missing:
+                fail(f"{result_id} scope_delta missing fields: {sorted(missing)}")
+            if not str(delta["summary"]).strip():
+                fail(f"{result_id} scope_delta needs a non-empty summary")
+            raw_evidence = str(delta["evidence"])
+            if raw_evidence.startswith("/") or ".." in Path(raw_evidence).parts:
+                fail(
+                    f"{result_id} scope_delta evidence must be a repository-relative "
+                    f"path inside the tree: {raw_evidence}"
+                )
+            evidence = ROOT / raw_evidence
+            if not evidence.is_file():
+                fail(
+                    f"{result_id} scope_delta evidence does not exist: "
+                    f"{delta['evidence']}"
+                )
+
+        # A directory may be cited as provenance — recording where a claim came
+        # from is honest. It may not be the thing a grade compares against: a
+        # statement-match grade relates two statements, and a curated list has
+        # none. A graded row must therefore name at least one work source.
+        graded = any(
+            (record or {}).get("relationship") in GRADED_RELATIONSHIPS
+            for record in (result.get("formalizations") or [])
+        )
+        if graded:
+            refs = result["original_source_refs"]
+            if refs and not any(source_id not in directories for source_id in refs):
+                fail(
+                    f"{result_id} carries a statement-match grade but cites only "
+                    "directory sources; grade against the work that states the "
+                    "theorem, not the list that points at it"
+                )
 
         artifact = result["lean_artifact"]
         if artifact is not None:

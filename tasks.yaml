@@ -1,0 +1,152 @@
+{
+  "schema_version": 1,
+  "description": "Contributor task units. One maintained record; docs/guide/contributor-tasks.md is generated from it. GitHub issues remain the execution system and are referenced, never mirrored: nothing here tracks issue lifecycle. The validator checks schema, cross-references and staleness only — whether a task is worth doing stays a human judgement.",
+  "preamble": "# Contributor Tasks\n\nBounded, ready-to-take units. Each states goal, acceptance evidence, and what it\ndoes **not** change. Use this with or without an AI coding agent.\n\nDifficulty: **S** one sitting · **M** Lean/schema · **L** design / multi-module.\n\n**Not survey-only.** Tasks below include survey pointers, but the workbench also\nneeds domain consumers, non-claims, examples, landscape leads, and new claims on\nexisting primitives. If nothing here fits, open an issue describing the gap.\n\n## Open now\n\n**Agent-friendly default:** pick an S task or a small Lean use-site; let the\nagent draft; you (or CI) run `lake build`, `scripts/agent_gate.sh`, and\n`python3 scripts/check_print_axioms.py` when theorems change. Wrong Lean is a\nred build, not a social failure. A green build is **kernel validity of the\nencoding** — not paper match, model adequacy, non-vacuous assumptions, or system\ninterpretation (see [CONTRIBUTING](../../CONTRIBUTING.md)).\n\n**Have a question rather than an answer?** Propose a conjecture — an open\nquestion stated precisely enough to be false is a deliverable here, and you do\nnot need Lean to contribute one. See\n[conjectures](conjectures.md).\n\n**Looking for a target rather than a task?** Run\n`python3 scripts/report_consumers.py --queue`. It lists every atlas declaration\nthat nothing outside `Examples/` builds on. A theorem with no downstream\nconsumer has untested ergonomics — that is the gap CT-4 closed for\n`Verification.rice` and CT-16 opened for the bounded portfolio target. Giving\none a real consumer, or arguing it should be retired, is contribution either\nway. The count is a queue, not a score.\n\nNew here, and unsure whether a task is even the right shape for what you have?\nThe README's [Get started](../../README.md#get-started) table routes that. If a\ntask is what you want: CT-11, CT-12 and CT-14 need no Lean, CT-13 is the\ntoolchain exercise. CT-1…CT-5 are completed history.",
+  "tasks": [
+    {
+      "id": "CT-11",
+      "title": "Add a candidate lead to an uncovered row",
+      "size": "S",
+      "rung": "Pointer rung",
+      "status": "OPEN",
+      "heading_level": 3,
+      "body": "- **Goal:** pick one `MAPPED`-only survey row in [`registry.yaml`](../../registry.yaml)\n  whose `candidate_formalizations` is `[]`, and add **one** lead pointing at an\n  *existing* formalization. The entry needs all eight schema fields: a\n  `repository` URL, its immutable `revision`, the `framework`, the `declaration`\n  name, a `license`, an `inspection_state` (`UNVERIFIED` if you have only read the\n  source), a `relationship_review` (`PENDING` is fine), and `notes` — a bare paper\n  URL is not a candidate lead. A pen-and-paper result with no existing\n  formalization goes to **CT-14** instead. No Lean, no proof, no coverage claim.\n- **Acceptance:** a schema-valid `candidate_formalizations` entry;\n  `scripts/setup.sh --pointer` (i.e. `scripts/agent_gate.sh`) green. A lead is\n  candidate evidence, not coverage.\n- **Does not change:** the row's `status` or any coverage count — a candidate is\n  not a formalization until reproduced and classified."
+    },
+    {
+      "id": "CT-12",
+      "title": "Verify one citation against its source",
+      "size": "S",
+      "rung": "Verification rung",
+      "status": "OPEN",
+      "heading_level": 3,
+      "body": "- **Goal:** take one `original_source_refs` entry in\n  [`registry.yaml`](../../registry.yaml) — e.g. `survey-ref-018` (doi\n  `10.1162/neco.1996.8.7.1391`) — confirm the DOI/arXiv id resolves to the cited\n  paper and that the transcribed title, authors, and pages match. Correct the\n  entry if anything is off.\n- **Acceptance:** every outcome leaves a durable record. Found a mismatch? Open\n  a PR with the precise transcription fix (`scripts/agent_gate.sh` green). Checks\n  out clean? Report it on the row's tracking issue (or a new verification issue)\n  with the resolved link and what you confirmed — no empty PR. Source\n  verification is a first-class contribution.\n- **Does not change:** any Lean, any relationship classification."
+    },
+    {
+      "id": "CT-13",
+      "title": "Add one Lean use-site over a shipped theorem",
+      "size": "S",
+      "rung": "Onboarding exercise",
+      "status": "OPEN",
+      "heading_level": 3,
+      "body": "**This is a toolchain exercise, not coverage work — one per contributor.** The\npublic API is already fully exercised:\n[`AISafetyAtlas/Examples/PublicAPI.lean`](../../AISafetyAtlas/Examples/PublicAPI.lean)\ncarries an applied use-site for every declaration on the README \"Lean API\" list,\nand [`NFLConcrete.lean`](../../AISafetyAtlas/Examples/NFLConcrete.lean) covers\nthe learning-layer schedules. A new `example` adds no coverage, closes no gap,\nand changes no status file. What it does is prove you can drive the toolchain —\nfork, branch, `lake build`, `agent_gate.sh`, PR — before you take on work where\na mistake is expensive. That is the whole point, and it is worth one PR.\n\n- **Goal:** copy [`AISafetyAtlas/Examples/FirstContribution.lean`](../../AISafetyAtlas/Examples/FirstContribution.lean)\n  as your model and add one new `example` that exercises an existing shipped\n  theorem (e.g. `no_free_lunch_supervised`, or anything on the README \"Lean API\"\n  list over `import AISafetyAtlas`). No new math — a use-site, not a reproof.\n  **Append it at the bottom of that file**, under the marker after the \"YOUR\n  TURN\" block — not between the examples already there. Appending keeps\n  contributors' diffs from colliding.\n- **Acceptance:** `lake build AISafetyAtlas.Examples.FirstContribution` (or\n  `.PublicAPI`) green and `scripts/agent_gate.sh` clean. A non-public `example`\n  needs no local axiom audit — CI runs `check_print_axioms.py` over the headline\n  surface for you; reserve that check for new *public* theorems and bridges.\n  Runs under the fast `scripts/setup.sh --quick` path if you stay on the learning\n  layer.\n- **Terminal rung — do not repeat it.** Once your CT-13 has merged, a second one\n  will be closed. Varying a type parameter (`Fin 2` → `Fin 3`) or a constant in\n  an already-exercised theorem is not a distinct use-site.\n- **Next:** CT-11 / CT-12 / CT-14; a **nontrivial** facade consumer (pattern:\n  [`WorkbenchConsumers.lean`](../../AISafetyAtlas/Examples/WorkbenchConsumers.lean)\n  — cross-surface composition, instantiated model, boundary at a use site, or\n  downstream theorem; not a trivial restatement); or domain work (Preference /\n  Wireheading / Compositional primary surfaces). Survey `Formalize BY-0xx` /\n  CT-6 / CT-9 / CT-15 remain optional, not required. With an agent: prefer Lean\n  rungs — green build + axiom check is the **kernel** bar; alignment and\n  usefulness stay review questions.\n- **Does not change:** any theorem statement or the public facade."
+    },
+    {
+      "id": "CT-14",
+      "title": "Report a proof we don't have",
+      "size": "S",
+      "rung": "Pointer rung",
+      "status": "OPEN",
+      "heading_level": 3,
+      "body": "- **Goal:** you know a result — or a proof of one — not in the catalogue. Report\n  where it lives, via the [Known formalization issue form](https://github.com/mbrcic/ai-safety-formalization-atlas/issues/new?template=known-formalization.yml).\n  Value grades by readiness: **pen and paper** (a formalization target) →\n  **another prover** (an Isabelle/Coq/HOL reproduction candidate) → **already in\n  Lean** (a possible thin vendor/alias). This is the reuse thesis as a rung:\n  point us at a building block instead of reinventing it.\n- **Acceptance:** a filled discovery issue, or a schema-valid\n  `candidate_formalizations` entry with source coordinates and license;\n  `scripts/agent_gate.sh` green if you touch the registry. No coverage claimed\n  until reproduced and classified.\n- **Does not change:** any coverage count — a lead is candidate evidence only."
+    },
+    {
+      "id": "CT-15",
+      "title": "Formalize the survey's own three theorems (BY-042 / BY-043 / BY-044)",
+      "size": "L",
+      "rung": "New proof rung",
+      "status": "OPEN",
+      "heading_level": 3,
+      "body": "The three results the survey [*Impossibility Results in AI: A Survey*](https://doi.org/10.1145/3603371)\nintroduces **itself** — listed in the results table but, unlike the imported\nresults, developed and argued by the authors in a dedicated section with proof\nsketches. BY-042 and BY-044 are `PROOF_SKETCH`, `MAPPED`, and unformalized;\nBY-043 already carries a `RELATED` formalization — check the row before\nscoping it. A sketch is a scaffold, not a full proof, so mechanizing one audits\nthe sketch. One target among many, taken on the same grounds as any other:\nwhether it makes something else easier to state or prove.\n\n- **Targets (pick one):**\n  - **BY-044 — Limited self-awareness:** an agent cannot be perfectly\n    self-aware across the survey's operational boundaries. The sketch is a\n    finite-resource / awareness-graph argument (its proposition plus a handful of\n    operational assumptions), *not* primarily a Gödel/Rice fixed-point result —\n    read it and pin the actual structure before assuming any reuse. Likely the\n    lightest of the three; take first.\n  - **BY-043 — Misaligned embodiment:** mistakenly cloned self-interested agents\n    cannot perfectly control one another. The sketch turns on operational\n    cloning, functional identity, self-interest, and competition over a scarce\n    resource — not obviously self-reference. Pin those definitions first.\n  - **BY-042 — Unfairness of explainability:** a verifier and a decision-maker\n    hold structurally unequal strategic positions when explanations omit the full\n    execution trace. Two distinct claims — verifier indistinguishability without a\n    full trace, and growing adversarial advantage as the decision-maker better\n    models surrounding actors — needing game-theoretic / information-asymmetry\n    machinery; scope the hardest, take last.\n- **Step 0 (do first, low effort):** in [`registry.yaml`](../../registry.yaml)\n  add `\"brcic-yampolskiy-2023-own-results\"` to the chosen row's\n  `original_source_refs` — the `work` record for the survey's authored section,\n  **not** `brcic-yampolskiy-2023`, which is the Table 1 directory and states no\n  theorem to grade against. `original_source_refs` must hold `source_catalog`\n  keys, never raw DOIs, or `agent_gate.sh` rejects the change. Then write a\n  provenance note under\n  [`../provenance/`](../provenance/) that pins the **exact** paper statement,\n  section/theorem number, the sketch, and every definition it assumes\n  (e.g. what \"perfectly self-aware\" or \"operational boundaries\" mean formally).\n  Pin the model before writing Lean.\n- **Acceptance:** a kernel-checked Lean theorem under the facade (new namespace as\n  needed — `AISafetyAtlas.SelfAwareness`, `.Embodiment`; `.Explainability`\n  already exists) with an honest `EXACT`/`EQUIVALENT`/`RELATED` classification\n  against the paper statement; the provenance note stating exactly which\n  assumptions are and are not mechanized and **any gap the sketch leaves**;\n  `agent_gate.sh` + `lake build` green; kernel axioms clean.\n- **Does not change:** the other two rows until each lands; no retro-claim of\n  coverage in README/registry until a proof (not a statement) is in."
+    },
+    {
+      "id": "CT-16",
+      "title": "Instantiate the bounded portfolio target on your own architecture",
+      "size": "M",
+      "rung": "Onboarding exercise",
+      "status": "OPEN",
+      "heading_level": 3,
+      "body": "`AISafetyAtlas.Oversight.JointObservation` defines what a *correct* portfolio of\nobservations would be — `PortfolioCovers`, `InclusionMinimalCovering`, a declared\n`PortfolioCost`, `CostOptimalCovering` — and checks one three-principal instance in\n[`Examples.Oversight.JointObservation.Portfolio`](../../AISafetyAtlas/Examples/Oversight/JointObservation/Portfolio.lean).\nNothing outside that example has ever instantiated it. That is the gap: a target\nspecification nobody has consumed is a specification whose ergonomics are untested.\n\n- **Goal:** bring your own bounded architecture — principals, a finite execution\n  enumeration, a hazard family of at least two hazards, a declared candidate family,\n  and a declared cost — and prove a portfolio for it covers, is inclusion-minimal, and\n  is or is not cost-optimal. The interesting instances are the ones where the two\n  orderings *disagree*, since `inclusionMinimal_of_costOptimal` gives only one\n  direction and the non-implication is exhibited rather than proved.\n- **Where to start:** read\n  [joint observation model](joint-observation-model.md), then the example above; it is\n  fully explicit and every step is `decide`-able on a small enumeration.\n- **Acceptance:** a new `Examples/` module that imports only the facade\n  `AISafetyAtlas.Oversight.JointObservation`, restates no kernel definition, and adds\n  its build target to `scripts/lean_build_targets.txt`; `agent_gate.sh` + `lake build`\n  green; kernel axioms clean.\n- **Does not change:** any coverage count. This is landscape infrastructure\n  (`LAND-JOINTOBS-001`), not a survey row, and an instance claims nothing about\n  strategic production — everything stays under the truthful mechanism `M0`.\n- **Report back:** what the type of `joint` made awkward. Coalition access is enforced\n  by type rather than by a side condition, and that is exactly the design choice a\n  second consumer is positioned to falsify."
+    },
+    {
+      "id": "CT-6",
+      "title": "First possibility proof: continuous free lunches (BY-022)",
+      "size": "L",
+      "rung": "New proof rung",
+      "status": "OPEN",
+      "heading_level": 3,
+      "body": "- **Goal:** give BY-022 (*Free lunches in continuous spaces and coevolution*,\n  Auger–Teytaud 2010 / Wolpert–Macready coevolutionary) its first Lean\n  statement — a setting where the finite NFL symmetry provably fails, dual to\n  `AISafetyAtlas.Learning.no_free_lunch`.\n- **Acceptance:** a kernel-checked Lean theorem under the facade (or a landscape\n  entry if the natural home is adjacent), a `formalizations`/landscape record\n  with honest `EXACT`/`EQUIVALENT`/`RELATED` classification against\n  `survey-ref-047`/`survey-ref-048`, provenance note, `agent_gate.sh` +\n  `lake build` green, kernel axioms clean.\n- **Does not change:** the impossibility rows; do not retro-claim BY-022 as\n  formalized in README/registry until this lands."
+    },
+    {
+      "id": "CT-7",
+      "title": "Reproduce DeepMind doubly-efficient debate into the landscape",
+      "size": "M",
+      "rung": "done (reproduced 2026-07-20)",
+      "status": "DONE",
+      "heading_level": 3,
+      "body": "The formalization exists and is Lean 4: `google-deepmind/debate`\n(Apache-2.0), a machine-checked correctness proof of the stochastic oracle\nprotocol from Brown-Cohen–Irving–Piliouras 2023 (*Scalable AI Safety via\nDoubly-Efficient Debate*, arXiv 2311.14125). This is a **possibility /\nscalable-oversight guarantee**, not an impossibility — a live landscape anchor\ndual to the impossibility rows.\n\n- **Coordinates:** repo `github.com/google-deepmind/debate`, revision\n  `de3a6e500ae1a65dfeea2f91ef519ebad9704be0` (single `main`, no release tag,\n  last commit 2024-10-08). Main theorems in `Debate/Correct.lean`:\n  `completeness`, `soundness`, `correctness` (paper Theorem 6.2). License\n  Apache-2.0.\n- **Version gap:** upstream pins `leanprover/lean4:v4.8.0` and Mathlib\n  `v4.8.0`; the atlas is on `v4.31.0`. Do **not** vendor into the 4.31 tree.\n  Reproduce like Chaitin/Isabelle — build at the upstream toolchain from a\n  separate checkout via a new `scripts/reproduce_debate.sh`.\n- **Acceptance:** clean build at the pinned revision under its own toolchain;\n  strict-trust scan of the reproduced tree; a `landscape.yaml` record\n  (`LAND-DEBATE-001` — revision, `Debate/Correct.lean`, the three theorem\n  names, Apache-2.0, relationship `RELATED`, reproduction status,\n  `survey_coverage: null`); `scripts/reproduce_debate.sh`; regenerated views;\n  provenance note. Never a headline coverage count.\n- **Honest scope:** carry upstream's own caveats — correctness only; space\n  complexity not formalized; time counts oracle queries only; Lipschitz oracle\n  machine defined slightly differently (a stronger variant). No AI-system\n  reading without a separate reviewed bridge.\n- **Does not change:** survey `registry.yaml` coverage; the 4.31 build closure.\n- **Done (2026-07-20):** clean build at the pinned revision under upstream\n  `leanprover/lean4:v4.8.0` (`Debate.Correct`, 1721/1721 targets); strict-trust\n  scan clean across 19 upstream Lean sources; `completeness`/`soundness`/\n  `correctness` present in `Debate/Correct.lean`. Landscape record\n  `LAND-DEBATE-001` (`survey_coverage: null`, no atlas import surface);\n  `scripts/reproduce_debate.sh`; evidence\n  [`debate-reproduction.md`](../provenance/debate-reproduction.md). First\n  reproduced possibility / scalable-oversight anchor. Never headline coverage."
+    },
+    {
+      "id": "CT-8",
+      "title": "BY-025 Uncontainability: bridge or documented no-map",
+      "size": "M",
+      "rung": "Bridge rung",
+      "status": "OPEN",
+      "heading_level": 3,
+      "body": "- **Goal:** decide whether BY-025 (still `MAPPED`) earns a dedicated bridge over\n  Rice/halting with an explicit containment model, or stays mapped-only.\n- **Acceptance:** either a bridge declaration with stated modeled system,\n  assumptions, quantifier order, conclusion, and the practical claim it does\n  **not** establish (`ai_bridge_status: HUMAN_REVIEW`), or a provenance note\n  recording why no clean statement map exists. Do not claim BY-025 is\n  formalized.\n- **Does not change:** the Alfonseca/AgentBehavior packaging; no fake bridge\n  graduation."
+    },
+    {
+      "id": "CT-9",
+      "title": "Formalize a debate follow-up with no existing proof",
+      "size": "L",
+      "rung": "New proof rung",
+      "status": "OPEN",
+      "heading_level": 3,
+      "body": "Greenfield as far as anyone here has looked: a manual search on 2026-07-20\nfound no interactive-theorem-prover formalization of these debate refinements.\nThat search recorded no corpus or revision, so it is **not** a novelty check under\n[methodology](methodology.md#formal-library-discovery-evidence) and the claim is\nscoped to it. Before asserting more than \"none was found,\" record a\n`novelty_checks` entry. Formalizing one is original work,\ndual to CT-7's *reproduction* of the already-formalized doubly-efficient debate.\n\nEach target has a complete pen-and-paper proof; the task is to mechanize it.\nPointer to the informal proof is given per target.\n\n- **Targets (pick one):**\n  - *Avoiding Obfuscation with Prover-Estimator Debate* (arXiv 2506.13609) —\n    relaxes the equal-compute-provers assumption of doubly-efficient debate.\n    **Pen-and-paper proof:** the paper has exactly three theorems — **6.1**\n    (completeness: honest debater wins under (ε,ρ)-stability) and **6.2**\n    (soundness: honest output is truth in every Stackelberg equilibrium), the\n    two \"main theorems\" in Section 6; and **8.3** (Section 8), the\n    training-convergence companion (debaters reach Stackelberg equilibria via\n    standard gradient methods). Supporting proofs in Appendices A–D. Formalize\n    any one; smallest scoped core is Theorem 6.1 completeness alone.\n  - *How to Avoid Debate: Scalable AI Safety via Doubly-Efficient Interactive\n    Proofs* (arXiv 2607.03561) — doubly-efficient **single-prover** interactive\n    proofs/arguments for oracle-aided (relativizing) computation.\n    **Pen-and-paper proof:** two main-results settings — (1) robust computation\n    (output stable if a small fraction of oracle answers are wrong) and\n    (2) low-degree-polynomial oracle; pick one setting's protocol + soundness\n    proof. (Paper is days old as of 2026-07-20; take exact theorem numbers from\n    the arXiv PDF, HTML not yet rendered.)\n- **Acceptance:** a kernel-checked Lean statement + proof of the paper's central\n  guarantee (or an explicitly scoped core of it) under the facade or landscape;\n  honest relationship classification against the paper theorem; provenance note\n  stating exactly which theorem and which assumptions are and are not\n  mechanized; `agent_gate.sh` + `lake build` green; kernel axioms clean.\n- **Reuse first:** the `google-deepmind/debate` Lean development (CT-7) is the\n  natural scaffold — check whether its `Prob`/`Comp` monads and protocol\n  definitions carry over before rebuilding primitives.\n- **Honest scope:** a possibility/oversight guarantee, `RELATED` at most; no\n  AI-system reading without a separate reviewed bridge. Do not claim the paper\n  is \"formalized\" until a proof (not a statement) lands.\n- **Does not change:** survey `registry.yaml` coverage."
+    },
+    {
+      "id": "CT-10",
+      "title": "Reproduce the closed-under-permutation NFL iff (BY-020, optional)",
+      "size": "L",
+      "rung": "New reproduction rung",
+      "status": "OPEN",
+      "heading_level": 3,
+      "body": "- **Goal:** reproduce the sharp *both-directions* NFL characterization on the\n  **prior axis**: over a distribution `P` on target functions `X → Y`, expected\n  performance is algorithm-independent **iff** `P` is closed under permutation of\n  the domain. This is the general boundary that subsumes every uniform-prior core\n  already in `AISafetyAtlas.Learning` (`no_free_lunch`, `no_free_lunch_supervised`,\n  `no_free_lunch_adaptive`) — those are the trivially-c.u.p. special case.\n- **Source (in the literature — citable proof to diff against):** Schumacher,\n  Vose, Whitley, *The No Free Lunch and Problem Description Length* (GECCO 2001,\n  first c.u.p. iff); Igel & Toussaint, *A No-Free-Lunch Theorem for Non-Uniform\n  Distributions of Target Functions* (J. Math. Modelling & Algorithms 2004,\n  doi `10.1023/B:JMMA.0000049381.24625.f7`, both directions). Because it is a\n  published result, this graduates to **`EXACT`/`EQUIVALENT`** — not the folklore\n  `NEW_PROOF` status of the loss-axis iff `homogeneous_iff_learner_indep`.\n- **Acceptance:** kernel-checked Lean theorem under the facade; finite weighted\n  sums over `Fintype` suffice (no Mathlib probability needed); honest\n  `EXACT`/`EQUIVALENT`/`RELATED` classification against `survey-ref-018`;\n  provenance note in [`../provenance/lean-wolpert-nfl.md`](../provenance/lean-wolpert-nfl.md)\n  recording which paper and which assumptions; `agent_gate.sh` + `lake build`\n  green; kernel axioms clean.\n- **Why it may wait (read before taking):** no current downstream consumer needs\n  it — the uniform cores already carry the headline. Its distinctive value is\n  bridge-readiness: c.u.p. is the exact condition under which NFL is *vacuous*\n  (real learning priors are structured, not permutation-symmetric), so it is the\n  one NFL variant with a plausible AI-safety bridge story. Pull it only if a\n  bridge needs \"which priors kill learning\"; otherwise it is completeness polish.\n- **Does not change:** the existing `NEW_PROOF` loss-axis iff stays as-is; no\n  retro-claim of c.u.p. coverage in README/registry until a proof lands. See\n  reference note `nfl-cup-iff-lineage` and [`ct2-nfl-triage.md`](../provenance/ct2-nfl-triage.md)."
+    },
+    {
+      "id": "CT-1",
+      "title": "Reproduce the Chaitin BY-015 candidate",
+      "size": "M",
+      "rung": "done",
+      "status": "DONE",
+      "heading_level": 2,
+      "body": "- **Goal:** reproduce `AlexeyMilovanov/kolmogorov-complexity-lean` at revision\n  `005ac4c81eefe09642ef561057199d489cd79485`, compare\n  `FormalSystem.chaitinIncompleteness` against survey source `survey-ref-039`,\n  and classify the relationship.\n- **Done (2026-07-19):** clean build at the pinned revision; trust scan clean;\n  Lean/Mathlib 4.31 compatible; statement comparison in\n  [`external-formalizations.md`](../provenance/external-formalizations.md); relationship\n  **`EQUIVALENT`**; `formalizations` record + `scripts/reproduce_chaitin.sh`;\n  thin aliases `AISafetyAtlas.Logic.chaitin_incompleteness` /\n  `chaitin_bound` (vendored import closure for the Lean module boundary).\n  Follow-on (done): BY-013 Unprovability now covered by classical Gödel first\n  incompleteness from `FormalizedFormalLogic/Foundation` (Lake dependency,\n  `EQUIVALENT`, `godel_first_incompleteness`), with Gödel second incompleteness\n  (`godel_second_incompleteness`) as a `RELATED` companion on the same row. The\n  earlier Kritchman–Raz skeleton is retired."
+    },
+    {
+      "id": "CT-2",
+      "title": "Triage AFP `No_Free_Lunch_ML` for BY-020 / BY-021",
+      "size": "L",
+      "rung": "done (reproduced)",
+      "status": "DONE",
+      "heading_level": 2,
+      "body": "- **Goal:** inspect the AFP `No_Free_Lunch_ML` declarations and hypotheses,\n  reproduce a pinned AFP artifact, and classify each of BY-020 and BY-021 as\n  same theorem, partial overlap, or distinct.\n- **Acceptance evidence:** a pinned AFP revision and Isabelle version; a\n  reproduction log; a per-row relationship classification with reasoning.\n- **Does not change:** coverage until each row is reproduced and classified;\n  a repository link alone is candidate evidence, not coverage.\n- **Done (2026-07-19):** AFP `No_Free_Lunch_ML` reproduced (pinned `2026-02-06`,\n  SHA-256 `93ce8953…173588`, `isabelle build` exit 0 via\n  `scripts/reproduce_isabelle.sh nfl`) and triaged as the Shalev-Shwartz–Ben-David\n  PAC no-free-lunch (Understanding ML §5.1) — **DISTINCT** from BY-020 (Wolpert\n  supervised NFL) and BY-021 (Wolpert–Macready optimization NFL). Candidate tags\n  removed from both rows; reproduced SSBD entry recorded as landscape row\n  `LAND-NFL-001`. Evidence:\n  [`ct2-nfl-triage.md`](../provenance/ct2-nfl-triage.md)."
+    },
+    {
+      "id": "CT-3",
+      "title": "Domain and statement review of the robot bridge",
+      "size": "M",
+      "rung": "done (reviewed)",
+      "status": "DONE",
+      "heading_level": 2,
+      "body": "- **Goal:** review `AISafetyAtlas.Verification.Robot.action_safety_unverifiable`\n  against van Leeuwen & Wiedermann Theorem 1: the modeled total-trace system,\n  the explicit switching-construction certificate, and the `RELATED`\n  classification.\n- **Review package:** [`ct3-robot-review-package.md`](../bridges/ct3-robot-review-package.md).\n- **Done (2026-07-19):** maintainer **reviewed** statement and scoped\n  interpretation; accepts transparent **`RELATED`** packaging (Lean assumes\n  `SwitchingConstruction`; not paper EXACT). Registry: formalization\n  **`RELATED`**, bridge **`REVIEWED`**.\n- **Does not change:** machine-checked statement; headline coverage still\n  excludes BY-033 as RELATED-only."
+    },
+    {
+      "id": "CT-4",
+      "title": "Give `Verification.rice` a downstream consumer or retire it",
+      "size": "M",
+      "rung": "done",
+      "status": "DONE",
+      "heading_level": 2,
+      "body": "- **Goal:** decide whether the `AISafetyAtlas.Verification.rice` interface earns\n  its public slot.\n- **Done (2026-07-19):** `AISafetyAtlas.Verification.AgentBehavior` models\n  encoded agents (Mathlib codes), `SafetySpec` / `BehavioralSafetyVerifier`, and\n  proves `no_behavioral_safety_verifier` by reducing through `Verification.rice`.\n  Root import, PublicAPI smoke example, and BY-012 registry declaration updated.\n- **Bridge review (2026-07-19):** maintainer accepted statement and scoped\n  interpretation; BY-012 is `REVIEWED`\n  ([`review-by-012-agentbehavior.md`](../bridges/review-by-012-agentbehavior.md))."
+    },
+    {
+      "id": "CT-5",
+      "title": "Surface the generated atlas index in project navigation",
+      "size": "S",
+      "rung": "done",
+      "status": "DONE",
+      "heading_level": 2,
+      "body": "- **Goal:** link the generated full-registry human view from README/docs entry\n  points.\n- **Done:** README repository-contents list links it (now the per-source report\n  [`brcic-yampolskiy-2023.md`](../status/sources/brcic-yampolskiy-2023.md));\n  landscape index is linked alongside it."
+    }
+  ],
+  "footer": "## Maintainer-only: public issue queue (R6-11)\n\nDo **not** open GitHub issues without maintainer authorization. When authorized,\nopen issues for remaining outward work (e.g. CT-2) using the acceptance\nevidence above as the issue body. Suggested title:\n\n1. `CT-2: Triage AFP No_Free_Lunch_ML for BY-020 / BY-021`\n\n## Completed since round 5–7\n\n- Bridge-status lifecycle vocabulary (`HUMAN_REVIEW` / `STATEMENT_REVIEWED` /\n  `REVIEWED`) with `bridge_review` evidence, enforced by\n  `scripts/validate_registry.py`; the v0.1 all-`HUMAN_REVIEW` snapshot now lives\n  only in the release audit.\n- Structured `candidate_formalizations` schema; BY-015 Chaitin promoted to\n  coverage; BY-001 / BY-020 / BY-021 candidates populated (R6-4).\n- Generated full-registry human view at\n  [`sources/brcic-yampolskiy-2023.md`](../status/sources/brcic-yampolskiy-2023.md).\n- `landscape.yaml` + generated landscape index for non–Table-1 formalizations\n  (R6-3).\n- Status breakdown of WRAPPER vs BRIDGE (R6-2); STATE generated snapshot (R7-1).\n- Kernel `#print axioms` CI check (R7-2); Upstream LICENSE copies (R7-3).\n- Validator perimeter documented in methodology (R7-2).\n- CT-4 AgentBehavior consumer; CT-3 review package (no fake graduation)."
+}
