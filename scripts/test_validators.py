@@ -102,6 +102,31 @@ CASES = [
         "must record a `retrieved` ISO date",
     ),
     (
+        "registry: graded row citing no source at all",
+        "validate_registry.py",
+        "registry.yaml",
+        lambda d: first(d["results"], id="LAND-NFL-001").__setitem__(
+            "original_source_refs", []
+        ),
+        "names no work source; a grade relates two statements",
+    ),
+    (
+        "registry: public RELATED with no sources skipping its scope delta",
+        "validate_registry.py",
+        "registry.yaml",
+        lambda d: [
+            first(d["results"], id="LAND-GOAL-001").__setitem__(
+                "original_source_refs", ["mathforaisafety-2026"]
+            ),
+            next(
+                f
+                for f in first(d["results"], id="LAND-GOAL-001")["formalizations"]
+                if f.get("relationship") == "RELATED"
+            ).pop("scope_delta"),
+        ],
+        "must carry a scope_delta",
+    ),
+    (
         "registry: result tagged outside the vocabulary",
         "validate_registry.py",
         "registry.yaml",

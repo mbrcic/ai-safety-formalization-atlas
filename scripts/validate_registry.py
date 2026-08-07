@@ -526,7 +526,11 @@ def main() -> None:
             or "BRIDGE" in declaration_types
         )
         for record in result.get("formalizations") or []:
-            if record.get("relationship") != "RELATED" or not source_refs:
+            # The trigger is reach, not citation. An earlier version also
+            # required a non-empty `original_source_refs`, which quietly exempted
+            # exactly the rows least able to justify a grade: LAND-GOAL-001 was
+            # RELATED, on the public root import, and carried no scope_delta.
+            if record.get("relationship") != "RELATED":
                 continue
             module = normalize_module_name(
                 record.get("atlas_module") or record.get("module") or ""
@@ -573,8 +577,17 @@ def main() -> None:
             for record in (result.get("formalizations") or [])
         )
         if graded:
-            refs = source_refs
-            if refs and not any(source_id not in directories for source_id in refs):
+            # Citing nothing is not weaker than citing a directory — it is the
+            # same failure with less to inspect. Both leave a grade with no
+            # second statement to be a grade *of*. Guarding this on `refs and`
+            # exempted precisely the rows that cited nothing.
+            if not source_refs:
+                fail(
+                    f"{result_id} carries a statement-match grade but names no work "
+                    "source; a grade relates two statements, and this row records "
+                    "only one"
+                )
+            if not any(source_id not in directories for source_id in source_refs):
                 fail(
                     f"{result_id} carries a statement-match grade but cites only "
                     "directory sources; grade against the work that states the "

@@ -441,7 +441,7 @@
       "citation": "G. A. Melo, M. R. O. A. Máximo, N. Y. Soma, and P. A. L. Castro, “On the Undecidability of Artificial Intelligence Alignment: Machines that Halt,” arXiv:2408.08995, 2024; also Sci. Rep., 2025.",
       "locator": "https://arxiv.org/abs/2408.08995",
       "role": "work",
-      "notes": "Not a Brčić–Yampolskiy Table-1 source. Related to BY-012 Rice packaging via AgentBehavior; see docs/guide/related-literature.md and landscape LAND-MELO-001."
+      "notes": "Not a Brčić–Yampolskiy Table-1 source. Related to BY-012 Rice packaging via AgentBehavior; see docs/guide/related-literature.md."
     },
     "brcic-yampolskiy-2023-own-results": {
       "citation": "M. Brčić and R. V. Yampolskiy, “Impossibility Results in AI: A Survey,” ACM Computing Surveys, 2023, doi: 10.1145/3603371 — the authors' own results section (BY-042, BY-043, BY-044) with proof sketches.",
@@ -489,6 +489,26 @@
       "locator": "https://arxiv.org/abs/2507.09369",
       "role": "work",
       "notes": "Five exhaustive categories, made mutually exclusive by earliest-match; the paper states that preventing all five is logically necessary for human survival without writing the argument down. Not yet referenced by any result."
+    },
+    "atlas-ref-shalev-shwartz-ben-david-2014": {
+      "citation": "S. Shalev-Shwartz and S. Ben-David, Understanding Machine Learning: From Theory to Algorithms. Cambridge University Press, 2014.",
+      "role": "work",
+      "notes": "Statement source for the no-free-lunch theorem reproduced as LAND-NFL-001 (Theorem 5.1). Locator not yet recorded."
+    },
+    "atlas-ref-parent-benzmueller-condnorm": {
+      "citation": "X. Parent and C. Benzmüller, “Conditional normative reasoning as a fragment of HOL,” formalized in the Archive of Formal Proofs entry CondNormReasHOL.",
+      "role": "work",
+      "notes": "Statement source for LAND-PE-001 (Åqvist system E with the Parfit mere-addition use case). Locator not yet recorded."
+    },
+    "atlas-ref-cohen-sharir-shashua-2016": {
+      "citation": "N. Cohen, O. Sharir, and A. Shashua, “On the expressive power of deep learning: a tensor analysis,” Conference on Learning Theory (COLT), 2016.",
+      "role": "work",
+      "notes": "Statement source for LAND-DL-001, reproduced through the Archive of Formal Proofs entry Deep_Learning. Locator not yet recorded."
+    },
+    "atlas-ref-everitt-2016-self-modification": {
+      "citation": "T. Everitt, D. Filan, M. Daswani, and M. Hutter, “Self-modification of policy and utility function in rational agents,” Artificial General Intelligence (AGI), 2016.",
+      "role": "work",
+      "notes": "Statement source for LAND-GOAL-001 (Theorem 16). Locator not yet recorded."
     }
   },
   "results": [
@@ -3129,7 +3149,9 @@
         "learning-theory"
       ],
       "notes": "Statement-level triage (CT-2, 2026-07-19): matches SSBD Thm 5.1 — for binary classification with 2*m < |space X|, every learner admits a realizable distribution on which P[L(A(S)) > 1/8] >= 1/7. Session depends only on HOL-Probability. Reproduction log recorded in docs/provenance/ct2-nfl-triage.md. Lean Wolpert NFL (docs/provenance/lean-wolpert-nfl.md) does not replace or cover this entry. DISTINCT from BY-020 (Wolpert 1996 supervised NFL) and BY-021 (Wolpert–Macready 1997 optimization NFL): this is the PAC / sample-complexity NFL (Understanding ML Thm 5.1), not the uniform-averaging Wolpert results. Not BY-020/021 coverage. See docs/provenance/ct2-nfl-triage.md. The in-tree Lean AISafetyAtlas.Learning.no_free_lunch (BY-021 RELATED) is also DISTINCT from this landscape entry.",
-      "original_source_refs": [],
+      "original_source_refs": [
+        "atlas-ref-shalev-shwartz-ben-david-2014"
+      ],
       "related_result_ids": [
         "BY-020",
         "BY-021"
@@ -3159,7 +3181,9 @@
         "ethics"
       ],
       "notes": "A1 (2026-07-19): AFP CondNormReasHOL — Åqvist system E + Parfit mere-addition use case. Not Arrhenius BY-008 coverage. Evidence: docs/provenance/a1-condnorm-parfit-triage.md. RELATED only: population-ethics adjacent (Parfit mere addition / repugnant-conclusion encoding). Not EXACT/EQUIVALENT to Arrhenius 2011 impossibility package (BY-008 survey source). See docs/provenance/a1-condnorm-parfit-triage.md.",
-      "original_source_refs": [],
+      "original_source_refs": [
+        "atlas-ref-parent-benzmueller-condnorm"
+      ],
       "related_result_ids": [
         "BY-008"
       ],
@@ -3188,7 +3212,9 @@
         "learning-theory"
       ],
       "notes": "A2 (2026-07-19): AE almost-all weights, deep model not matchable by shallow width Z < r^(N/2). Landscape RELATED to BY-035; not headline EXACT. Evidence: docs/provenance/a2-deep-learning-by035-triage.md. RELATED to BY-035 no-flattening informal claim (deep nets require large shallow representations). Formalizes Bentkamp/AFP of Cohen et al. 2015-style network-capacity theorems, not the Lin–Tegmark–Rolnick 2017 survey citation as EXACT. See docs/provenance/a2-deep-learning-by035-triage.md.",
-      "original_source_refs": [],
+      "original_source_refs": [
+        "atlas-ref-cohen-sharir-shashua-2016"
+      ],
       "related_result_ids": [
         "BY-035"
       ],
@@ -3463,7 +3489,9 @@
         "agent-incentives"
       ],
       "notes": "Everitt-Filan-Daswani-Hutter (2016), Theorem 16, at two abstraction levels. GoalPreservationSource is the headline finite-percept one-step argument: it drops the atlas's earlier naming-surjectivity premise, compares the selected continuation only with the named initial policy, and uses a normalized full-support percept distribution to turn a strict pointwise loss into a strict expected loss. It is not the full or source-strength Theorem 16. initial_dominates and contValue are supplied rather than derived from modification independence and the source's Theorem 20; policy names and policies are not separated by an explicit naming map; expectations are finite discrete sums rather than integrals; and no all-times trajectory theorem is proved. SixTargets.finitePerceptGoalModel witnesses the interface with two percepts, a uniform full-support distribution, and a genuinely dominated continuation. The older deterministic GoalPreservation model is retained as a stronger-assumption specialization: next_policy_optimal is its load-bearing statement, run_optimal lifts it along the reached path, and goal_preservation is a corollary. Its names_surjective premise forces an infinite policy-name type with at least two world actions; SixTargets.twoActionGoalModel witnesses satisfiability. RELATED only; no off-policy preservation or AI-system bridge is claimed. Supporting self-modification theorem; no direct Table-1 coverage.",
-      "original_source_refs": [],
+      "original_source_refs": [
+        "atlas-ref-everitt-2016-self-modification"
+      ],
       "related_result_ids": [],
       "root_import": true,
       "formalizations": [
@@ -3477,7 +3505,11 @@
           "build_environment": "leanprover/lean4:v4.31.0; Mathlib fabf563a7c95a166b8d7b6efca11c8b4dc9d911f; atlas IN_TREE",
           "declaration": "GoalPreservationSource.Model.selected_matches_initial; GoalPreservationSource.Model.safe_modification; GoalPreservationSource.Model.qValue_selected_eq_initial; next_policy_optimal; run_optimal; goal_preservation",
           "module": "AISafetyAtlas.Wireheading.GoalPreservationSource",
-          "build_command": "lake build AISafetyAtlas.Wireheading.GoalPreservation AISafetyAtlas.Wireheading.GoalPreservationSource"
+          "build_command": "lake build AISafetyAtlas.Wireheading.GoalPreservation AISafetyAtlas.Wireheading.GoalPreservationSource",
+          "scope_delta": {
+            "summary": "A finite-percept one-step induction step, not source-strength Theorem 16. `initial_dominates` and the continuation value are assumed rather than derived from modification independence and the source's Theorem 20; policy names and policies are not separated by an explicit naming map; expectations are finite discrete sums rather than integrals; no all-times trajectory theorem is proved.",
+            "evidence": "docs/provenance/a1-a3-b1-b3-b7-reverification.md"
+          }
         }
       ],
       "lean_artifact": {
