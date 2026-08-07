@@ -161,52 +161,12 @@ formalization exists anywhere. The evidence is rebuilt with
 `scripts/update_formalization_search.py`; the registry validator rejects drift
 between its queries, candidate corpora, and the generated evidence.
 
-## Source coverage percentage
-
-A row may carry an optional `source_coverage` block recording how much of its
-primary source has been formalized. It is a **descriptive progress indicator, not
-a coverage claim**: `relationship` on a formalization record remains the only
-thing that gates headline `EXACT`/`EQUIVALENT` counting, and a row can be
-`RELATED` at any percentage.
-
-The denominator is mechanical so the figure can be rechecked: **numbered results
-in the primary source** (theorems, propositions, lemmas, conjectures,
-definitions). `basis` must name the **edition** counted, since preprint and
-camera-ready numbering can differ; where an official version exists, count that
-one. A result whose statement has not been read is `uncovered`, never `covered`
-on the strength of a plausible-looking local declaration. Neither lines nor
-pages nor judgement of importance. Conjectures remain in the denominator and
-stay `uncovered` until the atlas proves the stated proposition; being labelled a
-conjecture is not itself grounds for exclusion.
-
-`covered_items` and `uncovered_items` are structured records. Every covered item
-names one or more Lean declarations, gives its `EXACT`, `EQUIVALENT`, or
-`RELATED` relationship, and explains any abstraction in `note`. Every named
-declaration must have a formalization record on the same row with the same
-relationship. Generated `Registry.lean` checks declaration existence. Uncovered
-items record an `item` and `reason`. The list lengths must match `covered` and
-`total - covered`; `percent` must equal `round(100 * covered / total)`.
-
-Zero coverage without formalizations stays legal, since a row may be counted
-against its source before any work exists.
-
-`excluded_items` removes results from the denominator and must give a reason for
-each. Legitimate reasons include an informal umbrella whose formal content is
-counted elsewhere, a semi-formal precursor superseded by a separately counted
-rigorous result, and a result cited from a different paper and mapped to a
-different row. Exclusions are visible precisely so they can be disputed.
-
-**Percentages are not comparable across rows.** Eighty percent of a nine-page
-conference paper is not eighty percent of a monograph, and a row's remaining
-percent may be its most important part. Do not average them or rank rows by them.
-
 ## Progress and bridge status
 
-`progress_status` deliberately has only two values. `MAPPED` means the survey
-row and its discovery evidence are recorded but the atlas exposes no Lean
-declaration for it. `LEAN_AVAILABLE` means the row exposes at least one compiled
-atlas Lean declaration. External reproduction is recorded on each formalization
-record rather than duplicated in progress status.
+Whether a row has Lean behind it is read from the row, not stored beside it: a
+`lean_artifact` is present or it is not. There was a `progress_status` field
+duplicating that fact, and a validator asserting the two agreed — a stored copy
+of something already computable is a second thing to keep in sync for no gain.
 
 `ai_bridge_status` is separate and has a defined lifecycle vocabulary:
 `HUMAN_REVIEW`, `STATEMENT_REVIEWED`, and `REVIEWED`. `HUMAN_REVIEW` (the

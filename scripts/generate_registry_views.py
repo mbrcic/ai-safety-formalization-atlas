@@ -908,13 +908,7 @@ def render_lean(registry: dict) -> str:
         if result["lean_artifact"] is not None
         for declaration in result["lean_artifact"]["declarations"]
     ]
-    coverage_declarations = [
-        declaration
-        for result in registry["results"]
-        for item in (result.get("source_coverage") or {}).get("covered_items", [])
-        for declaration in item["declarations"]
-    ]
-    declarations = unique(artifact_declarations + coverage_declarations)
+    declarations = unique(artifact_declarations)
     lines = [
         "module",
         "",
@@ -958,7 +952,6 @@ def compact_result(result: dict) -> dict:
     return {
         "id": result["id"],
         "name": result["name"],
-        "status": result["status"],
         "ai_bridge_status": result["ai_bridge_status"],
         "mechanism_category": result.get("mechanism_category"),
         "domain_category": result.get("domain_category"),

@@ -102,161 +102,6 @@ def validate_bridge_review(result_id: str, result: dict) -> None:
     if status == "STATEMENT_REVIEWED" and review["interpretation_reviewed"]:
         fail(f"{result_id} STATEMENT_REVIEWED must not claim interpretation_reviewed; use REVIEWED")
 
-SOURCE_COVERAGE_FIELDS = {
-    "covered",
-    "total",
-    "percent",
-    "basis",
-    "covered_items",
-    "uncovered_items",
-    "excluded_items",
-}
-SOURCE_COVERED_ITEM_FIELDS = {
-    "item",
-    "declarations",
-    "relationship",
-    "note",
-}
-SOURCE_UNCOVERED_ITEM_FIELDS = {"item", "reason"}
-SOURCE_COVERAGE_RELATIONSHIPS = {"EXACT", "EQUIVALENT", "RELATED"}
-
-
-def validate_source_coverage(result_id: str, result: dict) -> None:
-    """Optional descriptive progress indicator: how much of the primary source a
-    row's formalization covers. It is never a coverage claim; `relationship` on a
-    formalization record remains the only thing that gates headline counting, and
-    percentages are not comparable between rows."""
-    coverage = result.get("source_coverage")
-    if coverage is None:
-        return
-    if not isinstance(coverage, dict):
-        fail(f"{result_id} source_coverage must be an object")
-    missing = SOURCE_COVERAGE_FIELDS - coverage.keys()
-    if missing:
-        fail(f"{result_id} source_coverage missing fields: {sorted(missing)}")
-    covered, total = coverage["covered"], coverage["total"]
-    if not isinstance(covered, int) or not isinstance(total, int):
-        fail(f"{result_id} source_coverage covered and total must be integers")
-    if total <= 0 or covered < 0 or covered > total:
-        fail(f"{result_id} source_coverage needs 0 <= covered <= total and total > 0")
-    for key in ("covered_items", "uncovered_items", "excluded_items"):
-        if not isinstance(coverage[key], list):
-            fail(f"{result_id} source_coverage {key} must be a list")
-    if len(coverage["covered_items"]) != covered:
-        fail(f"{result_id} source_coverage covered_items must have {covered} entries")
-    if len(coverage["uncovered_items"]) != total - covered:
-        fail(
-            f"{result_id} source_coverage uncovered_items must have "
-            f"{total - covered} entries"
-        )
-    if coverage["percent"] != round(100 * covered / total):
-        fail(f"{result_id} source_coverage percent must be round(100*covered/total)")
-    if not str(coverage["basis"]).strip():
-        fail(f"{result_id} source_coverage must state its basis")
-
-    formalization_relationships: dict[str, set[str]] = {}
-    for record in result.get("formalizations") or []:
-        declaration = record.get("declaration")
-        relationship = record.get("relationship")
-        if declaration and relationship:
-            formalization_relationships.setdefault(declaration, set()).add(relationship)
-    seen_items: set[str] = set()
-    seen_covered_declarations: set[str] = set()
-    for index, item in enumerate(coverage["covered_items"]):
-        if not isinstance(item, dict):
-            fail(f"{result_id} source_coverage covered_items[{index}] must be an object")
-        missing = SOURCE_COVERED_ITEM_FIELDS - item.keys()
-        if missing:
-            fail(
-                f"{result_id} source_coverage covered_items[{index}] "
-                f"missing fields: {sorted(missing)}"
-            )
-        item_name = item["item"]
-        declarations = item["declarations"]
-        relationship = item["relationship"]
-        if not isinstance(item_name, str) or not item_name.strip():
-            fail(f"{result_id} source_coverage covered_items[{index}] has no item name")
-        if item_name in seen_items:
-            fail(f"{result_id} source_coverage repeats item {item_name!r}")
-        seen_items.add(item_name)
-        if (
-            not isinstance(declarations, list)
-            or not declarations
-            or not all(isinstance(name, str) and name for name in declarations)
-        ):
-            fail(
-                f"{result_id} source_coverage covered_items[{index}] "
-                "must name one or more Lean declarations"
-            )
-        if len(declarations) != len(set(declarations)):
-            fail(
-                f"{result_id} source_coverage covered_items[{index}] "
-                "repeats a Lean declaration"
-            )
-        repeated = seen_covered_declarations.intersection(declarations)
-        if repeated:
-            fail(
-                f"{result_id} source_coverage counts declarations more than once: "
-                f"{sorted(repeated)}"
-            )
-        seen_covered_declarations.update(declarations)
-        if relationship not in SOURCE_COVERAGE_RELATIONSHIPS:
-            fail(
-                f"{result_id} source_coverage covered_items[{index}] "
-                f"has unknown relationship {relationship!r}"
-            )
-        if not isinstance(item["note"], str) or not item["note"].strip():
-            fail(
-                f"{result_id} source_coverage covered_items[{index}] "
-                "must explain its statement match in note"
-            )
-        mismatched = [
-            declaration
-            for declaration in declarations
-            if relationship not in formalization_relationships.get(declaration, set())
-        ]
-        if mismatched:
-            fail(
-                f"{result_id} source_coverage covered_items[{index}] declarations "
-                f"lack formalization records with relationship {relationship}: "
-                f"{mismatched}"
-            )
-
-    for index, item in enumerate(coverage["uncovered_items"]):
-        if not isinstance(item, dict):
-            fail(f"{result_id} source_coverage uncovered_items[{index}] must be an object")
-        missing = SOURCE_UNCOVERED_ITEM_FIELDS - item.keys()
-        if missing:
-            fail(
-                f"{result_id} source_coverage uncovered_items[{index}] "
-                f"missing fields: {sorted(missing)}"
-            )
-        item_name = item["item"]
-        if (
-            not isinstance(item_name, str)
-            or not item_name.strip()
-            or not isinstance(item["reason"], str)
-            or not item["reason"].strip()
-        ):
-            fail(
-                f"{result_id} source_coverage uncovered_items[{index}] "
-                "must record item and reason"
-            )
-        if item_name in seen_items:
-            fail(f"{result_id} source_coverage repeats item {item_name!r}")
-        seen_items.add(item_name)
-
-    for index, item in enumerate(coverage["excluded_items"]):
-        if not isinstance(item, dict) or not item.get("item") or not item.get("reason"):
-            fail(
-                f"{result_id} source_coverage excluded_items[{index}] "
-                "must record item and reason"
-            )
-        if item["item"] in seen_items:
-            fail(f"{result_id} source_coverage repeats item {item['item']!r}")
-        seen_items.add(item["item"])
-
-
 def validate_candidate_formalizations(result_id: str, result: dict) -> None:
     """Structured non-coverage leads: manually discovered formalizations that are
     not yet accepted as coverage. They never substitute for a `formalizations` entry."""
@@ -308,13 +153,10 @@ def main() -> None:
     if actual_ids != expected_ids:
         fail("result IDs must be unique, ordered, and contiguous from BY-001")
 
-    status_values = set(vocabulary.get("progress_status", []))
     relationship_values = set(vocabulary.get("relationship", []))
     artifact_values = set(vocabulary.get("lean_artifact_type", []))
     license_values = set(vocabulary.get("spdx_license", []))
     bridge_status_values = set(vocabulary.get("ai_bridge_status", []))
-    if status_values != {"MAPPED", "LEAN_AVAILABLE"}:
-        fail("progress_status vocabulary must contain only MAPPED and LEAN_AVAILABLE")
     if bridge_status_values != BRIDGE_STATUS_VALUES:
         fail(
             "ai_bridge_status vocabulary must contain exactly "
@@ -348,7 +190,6 @@ def main() -> None:
         "tags",
         "formalizations",
         "lean_artifact",
-        "status",
         "ai_safety_relevance",
         "ai_bridge_status",
         "notes",
@@ -484,15 +325,6 @@ def main() -> None:
             fail(f"{result_id} missing fields: {sorted(missing)}")
         if not result["name"] or not result["informal_claim"]:
             fail(f"{result_id} must have a name and informal claim")
-        if result["status"] not in status_values:
-            fail(f"{result_id} has unknown status {result['status']!r}")
-        expected_status = (
-            "LEAN_AVAILABLE" if result["lean_artifact"] is not None else "MAPPED"
-        )
-        if result["status"] != expected_status:
-            fail(
-                f"{result_id} status must be {expected_status} for its Lean artifact state"
-            )
         if result["ai_bridge_status"] not in bridge_status_values:
             fail(f"{result_id} has unknown ai_bridge_status {result['ai_bridge_status']!r}")
         tags = result["tags"]
@@ -505,7 +337,6 @@ def main() -> None:
             fail(f"{result_id} repeats a tag")
         validate_bridge_review(result_id, result)
         validate_candidate_formalizations(result_id, result)
-        validate_source_coverage(result_id, result)
 
         search = result["formal_library_search"]
         if set(search.get("searched_corpora", [])) != expected_search_corpora:

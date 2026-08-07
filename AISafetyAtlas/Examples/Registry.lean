@@ -45,7 +45,3 @@ import AISafetyAtlas
 #check AISafetyAtlas.Verification.Robot.action_safety_unverifiable
 #check AISafetyAtlas.Wireheading.CRMDP.Model.everitt_theorem_eleven
 #check AISafetyAtlas.Compositional.Symmetry.Protocol.no_unique_leader_from_symmetric_start
-#check AISafetyAtlas.Preference.negPlanner
-#check AISafetyAtlas.Preference.lemma_six
-#check AISafetyAtlas.Preference.OverrideModel.OverridesFor
-#check AISafetyAtlas.Preference.OverrideModel.Overrides

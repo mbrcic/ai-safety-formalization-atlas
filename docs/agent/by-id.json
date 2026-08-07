@@ -8,7 +8,6 @@
     "BY-001": {
       "id": "BY-001",
       "name": "Unobservability",
-      "status": "MAPPED",
       "ai_bridge_status": "HUMAN_REVIEW",
       "mechanism_category": "INDISTINGUISHABILITY",
       "domain_category": "DATA",
@@ -20,7 +19,6 @@
     "BY-002": {
       "id": "BY-002",
       "name": "Uncontrollability of dynamical systems",
-      "status": "MAPPED",
       "ai_bridge_status": "HUMAN_REVIEW",
       "mechanism_category": "INDISTINGUISHABILITY",
       "domain_category": "DATA",
@@ -32,7 +30,6 @@
     "BY-003": {
       "id": "BY-003",
       "name": "Good Regulator Theorem",
-      "status": "MAPPED",
       "ai_bridge_status": "HUMAN_REVIEW",
       "mechanism_category": "INDISTINGUISHABILITY",
       "domain_category": "DATA",
@@ -44,7 +41,6 @@
     "BY-004": {
       "id": "BY-004",
       "name": "Law of Requisite Variety",
-      "status": "MAPPED",
       "ai_bridge_status": "HUMAN_REVIEW",
       "mechanism_category": "INDISTINGUISHABILITY",
       "domain_category": "DATA",
@@ -56,7 +52,6 @@
     "BY-005": {
       "id": "BY-005",
       "name": "Information-theoretical control limits",
-      "status": "MAPPED",
       "ai_bridge_status": "HUMAN_REVIEW",
       "mechanism_category": "INDISTINGUISHABILITY",
       "domain_category": "DATA",
@@ -68,7 +63,6 @@
     "BY-006": {
       "id": "BY-006",
       "name": "(Anti)codifiability thesis",
-      "status": "MAPPED",
       "ai_bridge_status": "HUMAN_REVIEW",
       "mechanism_category": "INDUCTION",
       "domain_category": "DATA",
@@ -80,7 +74,6 @@
     "BY-007": {
       "id": "BY-007",
       "name": "Arrow's impossibility theorem",
-      "status": "LEAN_AVAILABLE",
       "ai_bridge_status": "HUMAN_REVIEW",
       "mechanism_category": "TRADEOFF",
       "domain_category": "SYMBOLIC",
@@ -131,7 +124,6 @@
     "BY-008": {
       "id": "BY-008",
       "name": "Impossibility theorems in population ethics",
-      "status": "MAPPED",
       "ai_bridge_status": "HUMAN_REVIEW",
       "mechanism_category": "TRADEOFF",
       "domain_category": "SYMBOLIC",
@@ -143,7 +135,6 @@
     "BY-009": {
       "id": "BY-009",
       "name": "Impossibility theorems in AI alignment",
-      "status": "MAPPED",
       "ai_bridge_status": "HUMAN_REVIEW",
       "mechanism_category": "TRADEOFF",
       "domain_category": "SYMBOLIC",
@@ -155,7 +146,6 @@
     "BY-010": {
       "id": "BY-010",
       "name": "Fairness impossibility theorem",
-      "status": "MAPPED",
       "ai_bridge_status": "HUMAN_REVIEW",
       "mechanism_category": "TRADEOFF",
       "domain_category": "SYMBOLIC",
@@ -167,7 +157,6 @@
     "BY-011": {
       "id": "BY-011",
       "name": "Limits on preference deduction",
-      "status": "LEAN_AVAILABLE",
       "ai_bridge_status": "HUMAN_REVIEW",
       "mechanism_category": "INDISTINGUISHABILITY",
       "domain_category": "DATA",
@@ -346,7 +335,6 @@
     "BY-012": {
       "id": "BY-012",
       "name": "Rice's theorem",
-      "status": "LEAN_AVAILABLE",
       "ai_bridge_status": "REVIEWED",
       "mechanism_category": "DEDUCTION",
       "domain_category": "SYMBOLIC",
@@ -405,7 +393,6 @@
     "BY-013": {
       "id": "BY-013",
       "name": "Unprovability",
-      "status": "LEAN_AVAILABLE",
       "ai_bridge_status": "HUMAN_REVIEW",
       "mechanism_category": "DEDUCTION",
       "domain_category": "SYMBOLIC",
@@ -447,7 +434,6 @@
     "BY-014": {
       "id": "BY-014",
       "name": "Undecidability",
-      "status": "LEAN_AVAILABLE",
       "ai_bridge_status": "HUMAN_REVIEW",
       "mechanism_category": "DEDUCTION",
       "domain_category": "SYMBOLIC",
@@ -502,7 +488,6 @@
     "BY-015": {
       "id": "BY-015",
       "name": "Chaitin incompleteness",
-      "status": "LEAN_AVAILABLE",
       "ai_bridge_status": "HUMAN_REVIEW",
       "mechanism_category": "DEDUCTION",
       "domain_category": "SYMBOLIC",
@@ -535,7 +520,6 @@
     "BY-016": {
       "id": "BY-016",
       "name": "Undefinability",
-      "status": "LEAN_AVAILABLE",
       "ai_bridge_status": "HUMAN_REVIEW",
       "mechanism_category": "DEDUCTION",
       "domain_category": "SYMBOLIC",
@@ -564,7 +548,6 @@
     "BY-017": {
       "id": "BY-017",
       "name": "Unsurveyability",
-      "status": "MAPPED",
       "ai_bridge_status": "HUMAN_REVIEW",
       "mechanism_category": "INTRACTABILITY",
       "domain_category": "DATA",
@@ -576,7 +559,6 @@
     "BY-018": {
       "id": "BY-018",
       "name": "Unlearnability",
-      "status": "MAPPED",
       "ai_bridge_status": "HUMAN_REVIEW",
       "mechanism_category": "DEDUCTION_AND_INTRACTABILITY",
       "domain_category": "DATA",
@@ -588,7 +570,6 @@
     "BY-019": {
       "id": "BY-019",
       "name": "Unpredictability of rational agents",
-      "status": "MAPPED",
       "ai_bridge_status": "HUMAN_REVIEW",
       "mechanism_category": "INDUCTION",
       "domain_category": "DATA",
@@ -600,7 +581,6 @@
     "BY-020": {
       "id": "BY-020",
       "name": "No Free Lunch — supervised learning",
-      "status": "LEAN_AVAILABLE",
       "ai_bridge_status": "HUMAN_REVIEW",
       "mechanism_category": "INDUCTION",
       "domain_category": "DATA",
@@ -645,7 +625,6 @@
     "BY-021": {
       "id": "BY-021",
       "name": "No Free Lunch — optimization",
-      "status": "LEAN_AVAILABLE",
       "ai_bridge_status": "HUMAN_REVIEW",
       "mechanism_category": "INDUCTION",
       "domain_category": "DATA",
@@ -678,7 +657,6 @@
     "BY-022": {
       "id": "BY-022",
       "name": "Free lunches in continuous spaces and coevolution",
-      "status": "MAPPED",
       "ai_bridge_status": "HUMAN_REVIEW",
       "mechanism_category": "INDUCTION",
       "domain_category": "DATA",
@@ -690,7 +668,6 @@
     "BY-023": {
       "id": "BY-023",
       "name": "Unidentifiability",
-      "status": "MAPPED",
       "ai_bridge_status": "HUMAN_REVIEW",
       "mechanism_category": "INDISTINGUISHABILITY",
       "domain_category": "DATA",
@@ -702,7 +679,6 @@
     "BY-024": {
       "id": "BY-024",
       "name": "Physical limits on inference",
-      "status": "MAPPED",
       "ai_bridge_status": "HUMAN_REVIEW",
       "mechanism_category": "DEDUCTION_AND_INDUCTION",
       "domain_category": "DATA",
@@ -714,7 +690,6 @@
     "BY-025": {
       "id": "BY-025",
       "name": "Uncontainability",
-      "status": "MAPPED",
       "ai_bridge_status": "HUMAN_REVIEW",
       "mechanism_category": "DEDUCTION",
       "domain_category": "SYMBOLIC_AND_DATA",
@@ -726,7 +701,6 @@
     "BY-026": {
       "id": "BY-026",
       "name": "Uninterruptibility",
-      "status": "MAPPED",
       "ai_bridge_status": "HUMAN_REVIEW",
       "mechanism_category": "DEDUCTION",
       "domain_category": "DATA",
@@ -738,7 +712,6 @@
     "BY-027": {
       "id": "BY-027",
       "name": "Löb's theorem (unverifiability)",
-      "status": "LEAN_AVAILABLE",
       "ai_bridge_status": "HUMAN_REVIEW",
       "mechanism_category": "DEDUCTION",
       "domain_category": "SYMBOLIC",
@@ -767,7 +740,6 @@
     "BY-028": {
       "id": "BY-028",
       "name": "Unpredictability of superhuman AI",
-      "status": "MAPPED",
       "ai_bridge_status": "HUMAN_REVIEW",
       "mechanism_category": "INDUCTION",
       "domain_category": "DATA",
@@ -779,7 +751,6 @@
     "BY-029": {
       "id": "BY-029",
       "name": "Unexplainability",
-      "status": "MAPPED",
       "ai_bridge_status": "HUMAN_REVIEW",
       "mechanism_category": "DEDUCTION",
       "domain_category": "DATA",
@@ -791,7 +762,6 @@
     "BY-030": {
       "id": "BY-030",
       "name": "Incomprehensibility",
-      "status": "MAPPED",
       "ai_bridge_status": "HUMAN_REVIEW",
       "mechanism_category": "DEDUCTION",
       "domain_category": "DATA",
@@ -803,7 +773,6 @@
     "BY-031": {
       "id": "BY-031",
       "name": "k-incomprehensibility",
-      "status": "MAPPED",
       "ai_bridge_status": "HUMAN_REVIEW",
       "mechanism_category": "INDUCTION",
       "domain_category": "DATA",
@@ -815,7 +784,6 @@
     "BY-032": {
       "id": "BY-032",
       "name": "Unverifiability",
-      "status": "MAPPED",
       "ai_bridge_status": "HUMAN_REVIEW",
       "mechanism_category": "DEDUCTION",
       "domain_category": "SYMBOLIC",
@@ -827,7 +795,6 @@
     "BY-033": {
       "id": "BY-033",
       "name": "Unverifiability of robot ethics",
-      "status": "LEAN_AVAILABLE",
       "ai_bridge_status": "REVIEWED",
       "mechanism_category": "DEDUCTION",
       "domain_category": "SYMBOLIC",
@@ -856,7 +823,6 @@
     "BY-034": {
       "id": "BY-034",
       "name": "Intractability of bottom-up ethics",
-      "status": "MAPPED",
       "ai_bridge_status": "HUMAN_REVIEW",
       "mechanism_category": "INTRACTABILITY",
       "domain_category": "DATA",
@@ -868,7 +834,6 @@
     "BY-035": {
       "id": "BY-035",
       "name": "No-flattening theorems for deep learning",
-      "status": "MAPPED",
       "ai_bridge_status": "HUMAN_REVIEW",
       "mechanism_category": "INTRACTABILITY",
       "domain_category": "DATA",
@@ -880,7 +845,6 @@
     "BY-036": {
       "id": "BY-036",
       "name": "Efficiency of computing Boolean functions for multilayered perceptrons",
-      "status": "MAPPED",
       "ai_bridge_status": "HUMAN_REVIEW",
       "mechanism_category": "INTRACTABILITY",
       "domain_category": "DATA",
@@ -892,7 +856,6 @@
     "BY-037": {
       "id": "BY-037",
       "name": "Goodhart's law (Strathern)",
-      "status": "MAPPED",
       "ai_bridge_status": "HUMAN_REVIEW",
       "mechanism_category": "INDUCTION",
       "domain_category": "DATA",
@@ -904,7 +867,6 @@
     "BY-038": {
       "id": "BY-038",
       "name": "Campbell's law",
-      "status": "MAPPED",
       "ai_bridge_status": "HUMAN_REVIEW",
       "mechanism_category": "INDUCTION",
       "domain_category": "DATA",
@@ -916,7 +878,6 @@
     "BY-039": {
       "id": "BY-039",
       "name": "Reward corruption unsolvability",
-      "status": "LEAN_AVAILABLE",
       "ai_bridge_status": "HUMAN_REVIEW",
       "mechanism_category": "INDUCTION",
       "domain_category": "DATA",
@@ -945,7 +906,6 @@
     "BY-040": {
       "id": "BY-040",
       "name": "Uncontrollability of AI",
-      "status": "MAPPED",
       "ai_bridge_status": "HUMAN_REVIEW",
       "mechanism_category": "DEDUCTION",
       "domain_category": "DATA",
@@ -957,7 +917,6 @@
     "BY-041": {
       "id": "BY-041",
       "name": "Impossibility of unambiguous communication",
-      "status": "MAPPED",
       "ai_bridge_status": "HUMAN_REVIEW",
       "mechanism_category": "INDUCTION",
       "domain_category": "DATA",
@@ -969,7 +928,6 @@
     "BY-042": {
       "id": "BY-042",
       "name": "Unfairness of explainability",
-      "status": "MAPPED",
       "ai_bridge_status": "HUMAN_REVIEW",
       "mechanism_category": "INDUCTION",
       "domain_category": "DATA",
@@ -981,7 +939,6 @@
     "BY-043": {
       "id": "BY-043",
       "name": "Misaligned embodiment",
-      "status": "LEAN_AVAILABLE",
       "ai_bridge_status": "HUMAN_REVIEW",
       "mechanism_category": "TRADEOFF",
       "domain_category": "DATA",
@@ -1010,7 +967,6 @@
     "BY-044": {
       "id": "BY-044",
       "name": "Limited self-awareness",
-      "status": "MAPPED",
       "ai_bridge_status": "HUMAN_REVIEW",
       "mechanism_category": "INDUCTION",
       "domain_category": "DATA",
