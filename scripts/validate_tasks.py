@@ -26,6 +26,7 @@ TASKS = ROOT / "tasks.yaml"
 REGISTRY = ROOT / "registry.yaml"
 TASK_ID = re.compile(r"CT-\d+")
 RESULT_REF = re.compile(r"\bBY-\d{3}\b")
+CLAIM_REF = re.compile(r"\bCLM-[A-Z0-9-]+\b")
 LANDSCAPE_REF = re.compile(r"\bLAND-[A-Z0-9-]+\b")
 SIZES = {"S", "M", "L"}
 STATUSES = {"OPEN", "DONE"}
@@ -109,6 +110,9 @@ def main() -> None:
             fail(f"{tid} issue must be an integer or absent")
 
         unknown = sorted(set(RESULT_REF.findall(task["body"])) - result_ids)
+        if unknown:
+            fail(f"{tid} cites result ids that do not exist: {unknown}")
+        unknown = sorted(set(CLAIM_REF.findall(task["body"])) - result_ids)
         if unknown:
             fail(f"{tid} cites result ids that do not exist: {unknown}")
         unknown = sorted(set(LANDSCAPE_REF.findall(task["body"])) - landscape_ids)

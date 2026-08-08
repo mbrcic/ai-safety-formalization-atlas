@@ -9,7 +9,7 @@ file. Prefer the small paths below over loading full inventory dumps.
 |---|---|
 | [`AGENTS.md`](../../AGENTS.md) | Short policy, public API, do-not-read list |
 | [`STATE.md`](../../STATE.md) | Live phase + generated coverage snapshot |
-| [`docs/agent/by-id.json`](by-id.json) | Compact `BY-###` / `LAND-###` lookup |
+| [`docs/agent/by-id.json`](by-id.json) | Compact `BY-###` / `CLM-*` / `LAND-*` lookup |
 | [`docs/agent/search-summary.json`](search-summary.json) | Compact discovery hits (not full search dump) |
 | [`docs/status/by-area.md`](../status/by-area.md) | The atlas by mathematical area, one registry ledger |
 | [`docs/guide/conjectures.md`](../guide/conjectures.md) | How an open question enters, and why it is never a theorem |
@@ -114,8 +114,9 @@ have and ignore the rest.
 4. A **public `RELATED` record carries its `scope_delta`** — what it does not
    cover, and where that is documented.
 5. An **id prefix says what a row is**, not where it came from. `BY-###` is the
-   closed survey block, `CLM-*` is a claim from any other source, `LAND-*` is a
-   formalization standing on its own account. Only `BY-` rows carry
+   closed survey block, `CLM-*` is a claim from any other source and must name
+   that provenance in `original_source_refs`, `LAND-*` is a formalization
+   standing on its own account. Only `BY-` rows carry
    `paper_reference`, `survey_proof_assessment`, and `formal_library_search`;
    another source's claim cannot answer them.
 

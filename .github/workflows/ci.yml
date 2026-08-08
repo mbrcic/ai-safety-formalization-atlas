@@ -73,10 +73,9 @@ jobs:
             # Release tag: full Lean verification.
             run_lean=true
           elif [ "${{ github.event_name }}" = "push" ] && [ "${{ github.ref }}" = "refs/heads/main" ]; then
-            # main receives only PR merges, already Lean-verified by the required
-            # PR check; skip the redundant rebuild. Tag pushes + the weekly
-            # schedule provide the on-main safety net (CDN / toolchain drift).
-            run_lean=false
+            # Verify the post-merge tree too. This deliberately does not rely on
+            # branch-protection configuration remaining correct forever.
+            run_lean=true
           elif [ "${{ github.event_name }}" = "pull_request" ]; then
             base="${{ github.event.pull_request.base.sha }}"
             head="${{ github.event.pull_request.head.sha }}"

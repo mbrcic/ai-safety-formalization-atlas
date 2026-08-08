@@ -539,6 +539,15 @@ CASES = [
         "result ids that do not exist",
     ),
     (
+        "tasks: citing a claim row that does not exist",
+        "validate_tasks.py",
+        "tasks.yaml",
+        lambda d: first(d["tasks"], id="CT-15").__setitem__(
+            "body", first(d["tasks"], id="CT-15")["body"] + " See CLM-GHOST-001."
+        ),
+        "result ids that do not exist",
+    ),
+    (
         "tasks: citing a landscape entry that does not exist",
         "validate_tasks.py",
         "tasks.yaml",

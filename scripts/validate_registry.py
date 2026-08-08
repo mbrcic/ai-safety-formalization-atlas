@@ -47,6 +47,15 @@ def require_text(value: object, message: str) -> str:
     return value
 
 
+def require_text_list(value: object, message: str) -> list[str]:
+    """Return a list of non-empty strings, or fail without leaking a traceback."""
+    if not isinstance(value, list) or any(
+        not isinstance(item, str) or not item.strip() for item in value
+    ):
+        fail(message)
+    return cast("list[str]", value)
+
+
 def valid_http_url(value: object) -> bool:
     if not isinstance(value, str) or any(character.isspace() for character in value):
         return False
@@ -246,9 +255,12 @@ def main() -> None:
     expected_count = survey.get("expected_result_count")
     if not isinstance(expected_count, int) or expected_count < 1:
         fail("survey.expected_result_count must be a positive integer")
-    if any(not isinstance(result, dict) for result in results):
-        fail("every result must be an object")
-    actual_ids = [result.get("id") for result in results]
+    actual_ids: list[str] = []
+    for index, result in enumerate(results):
+        result = require_mapping(result, f"result {index} must be an object")
+        actual_ids.append(
+            require_text(result.get("id"), f"result {index} id must be a non-empty string")
+        )
     if len(set(actual_ids)) != len(actual_ids):
         fail("result IDs must be unique")
     survey_ids = [i for i in actual_ids if i and i.startswith("BY-")]
@@ -273,10 +285,30 @@ def main() -> None:
     if bad:
         fail(f"result ids must be BY-###, CLM-*, or LAND-*: {bad}")
 
-    relationship_values = set(vocabulary.get("relationship", []))
-    artifact_values = set(vocabulary.get("lean_artifact_type", []))
-    license_values = set(vocabulary.get("spdx_license", []))
-    bridge_status_values = set(vocabulary.get("ai_bridge_status", []))
+    relationship_values = set(
+        require_text_list(
+            vocabulary.get("relationship"),
+            "relationship vocabulary must be a list of non-empty strings",
+        )
+    )
+    artifact_values = set(
+        require_text_list(
+            vocabulary.get("lean_artifact_type"),
+            "lean_artifact_type vocabulary must be a list of non-empty strings",
+        )
+    )
+    license_values = set(
+        require_text_list(
+            vocabulary.get("spdx_license"),
+            "spdx_license vocabulary must be a list of non-empty strings",
+        )
+    )
+    bridge_status_values = set(
+        require_text_list(
+            vocabulary.get("ai_bridge_status"),
+            "ai_bridge_status vocabulary must be a list of non-empty strings",
+        )
+    )
     if bridge_status_values != BRIDGE_STATUS_VALUES:
         fail(
             "ai_bridge_status vocabulary must contain exactly "
@@ -289,11 +321,12 @@ def main() -> None:
     # vocabulary rather than free text: an unchecked tag fragments the by-area
     # view silently, and a view nobody can trust is a view nobody reads.
     tag_values = vocabulary.get("tag")
-    if not isinstance(tag_values, list) or not tag_values:
+    tag_values = require_text_list(
+        vocabulary.get("tag"),
+        "tag vocabulary must be a non-empty list of non-empty strings",
+    )
+    if not tag_values:
         fail("tag vocabulary must be a non-empty list")
-    # Sorting a mixed-type list raises before any rule below can run.
-    if not all(isinstance(tag, str) and tag.strip() for tag in tag_values):
-        fail("tag vocabulary must contain only non-empty strings")
     if sorted(tag_values) != list(tag_values):
         fail("tag vocabulary must be sorted")
     if len(set(tag_values)) != len(tag_values):
@@ -411,12 +444,20 @@ def main() -> None:
         for field in ("claim", "method", "found", "scope_limits", "searched_by"):
             if not isinstance(check[field], str) or not check[field].strip():
                 fail(f"{cid} must record a non-empty {field}")
-        if not ISO_DATE.fullmatch(str(check["searched_on"])):
+        searched_on = require_text(
+            check.get("searched_on"), f"{cid} must record searched_on as an ISO date"
+        )
+        if not ISO_DATE.fullmatch(searched_on):
             fail(f"{cid} has an invalid searched_on date {check['searched_on']!r}")
-        if not isinstance(check["asserted_in"], list) or not check["asserted_in"]:
-            fail(f"{cid} must name where the claim is asserted")
-        corpora = check["corpora"]
-        if not isinstance(corpora, list) or not corpora:
+        require_text_list(
+            check.get("asserted_in"),
+            f"{cid} asserted_in must be a list of non-empty strings",
+        )
+        corpora = require_text_list(
+            check.get("corpora"),
+            f"{cid} corpora must be a list of non-empty strings",
+        )
+        if not corpora:
             fail(f"{cid} must name at least one searched corpus")
         unknown = sorted(set(corpora) - set(search_evidence["corpora"]))
         if unknown:
@@ -432,7 +473,10 @@ def main() -> None:
         locator = source.get("locator")
         if locator is not None and not valid_http_url(locator):
             fail(f"{source_id} has an invalid locator URL")
-        role = source.get("role")
+        role = require_text(
+            source.get("role"),
+            f"{source_id} role must be a non-empty string",
+        )
         if role not in SOURCE_ROLES:
             fail(
                 f"{source_id} has unknown role {role!r}; "
@@ -535,6 +579,11 @@ def main() -> None:
             isinstance(source_id, str) and source_id for source_id in source_refs
         ):
             fail(f"{result_id} original_source_refs must be a list of non-empty strings")
+        if result_id.startswith("CLM-") and not source_refs:
+            fail(
+                f"{result_id} claim rows must name at least one original source; "
+                "CLM-* is reserved for claims with recorded provenance"
+            )
         related_ids = result.get("related_result_ids", [])
         if not isinstance(related_ids, list) or not all(
             isinstance(related, str) and related for related in related_ids
@@ -558,41 +607,70 @@ def main() -> None:
             )
 
         if result_id in expected_ids:
-            search = result["formal_library_search"]
-            if set(search.get("searched_corpora", [])) != expected_search_corpora:
+            search = require_mapping(
+                result.get("formal_library_search"),
+                f"{result_id} formal_library_search must be an object",
+            )
+            searched_corpora = require_text_list(
+                search.get("searched_corpora"),
+                f"{result_id} searched_corpora must be a list of non-empty strings",
+            )
+            if set(searched_corpora) != expected_search_corpora:
                 fail(f"{result_id} does not cover all required formal-library corpora")
-            if not search.get("query_terms"):
+            queries = require_text_list(
+                search.get("query_terms"),
+                f"{result_id} query_terms must be a non-empty list of non-empty strings",
+            )
+            if not queries:
                 fail(f"{result_id} has no formal-library search terms")
             if search.get("evidence_file") != "docs/provenance/formalization-search.json":
                 fail(f"{result_id} points to unexpected search evidence")
 
-            result_evidence = evidence_results[result_id]
-            queries = search["query_terms"]
+            result_evidence = require_mapping(
+                evidence_results[result_id],
+                f"{result_id} search evidence must be an object",
+            )
             if result_evidence.get("queries") != queries:
                 fail(f"{result_id} query terms have drifted from search evidence")
             candidate_hits = result_evidence.get("candidate_hits")
             if not isinstance(candidate_hits, dict) or set(candidate_hits) != expected_search_corpora:
                 fail(f"{result_id} search evidence has an invalid corpus set")
-            for corpus, hit in candidate_hits.items():
-                require_mapping(
-                    hit, f"{result_id}/{corpus} hit evidence must be an object"
+            for corpus, raw_hit in candidate_hits.items():
+                hit = require_mapping(
+                    raw_hit, f"{result_id}/{corpus} hit evidence must be an object"
                 )
+                candidate_hits[corpus] = hit
+                hit_count = hit.get("hit_count")
+                if type(hit_count) is not int or hit_count < 0:
+                    fail(f"{result_id}/{corpus} has invalid hit evidence")
             candidate_corpora = {
-                corpus for corpus, hit in candidate_hits.items() if hit.get("hit_count", 0)
+                corpus
+                for corpus, hit in candidate_hits.items()
+                if hit.get("hit_count", 0)
             }
-            if set(search.get("candidate_corpora", [])) != candidate_corpora:
+            candidate_corpora_declared = require_text_list(
+                search.get("candidate_corpora"),
+                f"{result_id} candidate_corpora must be a list of non-empty strings",
+            )
+            if set(candidate_corpora_declared) != candidate_corpora:
                 fail(f"{result_id} candidate corpora have drifted from search evidence")
             for corpus, hit in candidate_hits.items():
                 counts = hit.get("query_hit_counts")
                 if not isinstance(counts, dict) or list(counts) != queries:
                     fail(f"{result_id}/{corpus} lacks ordered per-query hit counts")
+                if any(type(counts[query]) is not int or counts[query] < 0 for query in queries):
+                    fail(
+                        f"{result_id}/{corpus} query hit counts must be non-negative integers"
+                    )
                 expected_matches = [query for query in queries if counts[query] > 0]
                 if hit.get("matched_queries") != expected_matches:
                     fail(f"{result_id}/{corpus} matched-query summary is inconsistent")
                 paths = hit.get("paths")
                 hit_count = hit.get("hit_count")
-                if not isinstance(paths, list) or not isinstance(hit_count, int):
+                if not isinstance(paths, list) or type(hit_count) is not int or hit_count < 0:
                     fail(f"{result_id}/{corpus} has invalid hit evidence")
+                if any(not isinstance(path, str) or not path.strip() for path in paths):
+                    fail(f"{result_id}/{corpus} hit paths must be non-empty strings")
                 if hit_count < len(paths) or len(paths) > 12:
                     fail(f"{result_id}/{corpus} path sample is inconsistent")
 
@@ -643,9 +721,14 @@ def main() -> None:
             missing = SCOPE_DELTA_FIELDS - delta.keys()
             if missing:
                 fail(f"{result_id} scope_delta missing fields: {sorted(missing)}")
-            if not str(delta["summary"]).strip():
-                fail(f"{result_id} scope_delta needs a non-empty summary")
-            raw_evidence = str(delta["evidence"])
+            require_text(
+                delta.get("summary"),
+                f"{result_id} scope_delta summary must be a non-empty string",
+            )
+            raw_evidence = require_text(
+                delta.get("evidence"),
+                f"{result_id} scope_delta evidence must be a non-empty string",
+            )
             if raw_evidence.startswith("/") or ".." in Path(raw_evidence).parts:
                 fail(
                     f"{result_id} scope_delta evidence must be a repository-relative "

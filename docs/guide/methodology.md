@@ -69,8 +69,9 @@ required to record at least one formalization, since otherwise it asserts
 nothing.
 
 The prefix says what a row is, not where it came from. `BY-###` is the closed
-survey block, `CLM-*` is a claim catalogued from any other source, `LAND-*` is an
-artifact. Only survey rows carry `paper_reference`, `survey_proof_assessment`,
+survey block, `CLM-*` is a claim catalogued from any other source and must name
+that provenance in `original_source_refs`, `LAND-*` is an artifact. Only survey
+rows carry `paper_reference`, `survey_proof_assessment`,
 and `formal_library_search`: those record how one survey presented and searched
 its own rows, and they are questions another source's claim cannot answer.
 Requiring them everywhere meant a real AISI or MAIS claim could only be admitted

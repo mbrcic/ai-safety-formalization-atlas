@@ -20,7 +20,7 @@ Root project files still used for navigation: [`README.md`](../README.md),
 ## Agent (token-cheap navigation)
 
 - [Agent index](agent/INDEX.md) — default open set and lookup recipes
-- [by-id.json](agent/by-id.json) — generated compact `BY-###` / `LAND-###` map
+- [by-id.json](agent/by-id.json) — generated compact `BY-###` / `CLM-*` / `LAND-*` map
 - [search-summary.json](agent/search-summary.json) — generated compact discovery hits
 
 ## Guide (explain / process)
@@ -54,8 +54,6 @@ Regenerate with `python3 scripts/generate_registry_views.py` (also refreshes
 - [Formalization status](status/formalization-status.md)
 - [Landscape index](status/landscape-index.md) — atlas formalizations and public
   Lean surface
-- [Source reports](status/sources/) — per-source coverage, one report per
-  catalogued source
 - [Source reports](status/sources/) — per catalogued source: papers, formalizations,
   atlas declarations, bridge state
 

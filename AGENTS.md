@@ -24,7 +24,7 @@ Agent map: [`docs/agent/INDEX.md`](docs/agent/INDEX.md). Human doc map:
 
 | Path | Why | When to open |
 |---|---|---|
-| Full [`registry.yaml`](registry.yaml) | Redundant with `by-id.json` | One `BY-###` or `LAND-###` via `rg` for notes / candidates / bridge_review |
+| Full [`registry.yaml`](registry.yaml) | Redundant with `by-id.json` | One `BY-###`, `CLM-*`, or `LAND-*` via `rg` for notes / candidates / bridge_review |
 | [`docs/provenance/formalization-search.json`](docs/provenance/formalization-search.json) | Large discovery dump | Regenerating evidence or deep candidate audit |
 | [`ROADMAP.md`](ROADMAP.md) | Human strategy, not live tasking | Maintainer names roadmap work |
 | `AISafetyAtlas/Upstream/**` | Large vendored/collapsed proofs | Editing that formalization only |
@@ -90,7 +90,7 @@ proof. Detail: [`docs/guide/methodology.md`](docs/guide/methodology.md).
   | Where | Holds | Note |
   |---|---|---|
   | `registry.yaml` survey claim rows | what the Brčić–Yampolskiy survey asserted | `BY-001`…`BY-044` is **closed**; never add `BY-045` |
-  | `registry.yaml` other claim rows | what any other source asserted | `CLM-` prefix; no survey-only fields (`paper_reference`, `survey_proof_assessment`, `formal_library_search`) |
+  | `registry.yaml` other claim rows | what any other source asserted | `CLM-` prefix; at least one `original_source_refs`; no survey-only fields (`paper_reference`, `survey_proof_assessment`, `formal_library_search`) |
   | `registry.yaml` artifact rows | formalizations standing on their own | `LAND-` prefix, no `informal_claim`, never headline coverage |
   | `conjectures.yaml` | open questions, compiling statement, no proof | never a theorem, never counted as one |
   | `tasks.yaml` | the task board | `docs/guide/contributor-tasks.md` is **generated** — never edit the Markdown |

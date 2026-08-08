@@ -116,7 +116,7 @@ CONTAINER_CASES: list[tuple[str, str, Mutation, str]] = [
         "a result is not an object",
         REGISTRY,
         lambda d: d["results"].append("not a result"),
-        "every result must be an object",
+        "must be an object",
     ),
     (
         "a source is not an object",
@@ -128,7 +128,53 @@ CONTAINER_CASES: list[tuple[str, str, Mutation, str]] = [
         "tag vocabulary mixes types",
         REGISTRY,
         lambda d: d["vocabulary"].__setitem__("tag", ["arrow", 7]),
-        "tag vocabulary must contain only non-empty strings",
+        "tag vocabulary must be a non-empty list of non-empty strings",
+    ),
+    (
+        "relationship vocabulary is null",
+        REGISTRY,
+        lambda d: d["vocabulary"].__setitem__("relationship", None),
+        "relationship vocabulary must be a list of non-empty strings",
+    ),
+    (
+        "artifact vocabulary is null",
+        REGISTRY,
+        lambda d: d["vocabulary"].__setitem__("lean_artifact_type", None),
+        "lean_artifact_type vocabulary must be a list of non-empty strings",
+    ),
+    (
+        "license vocabulary is null",
+        REGISTRY,
+        lambda d: d["vocabulary"].__setitem__("spdx_license", None),
+        "spdx_license vocabulary must be a list of non-empty strings",
+    ),
+    (
+        "bridge vocabulary is null",
+        REGISTRY,
+        lambda d: d["vocabulary"].__setitem__("ai_bridge_status", None),
+        "ai_bridge_status vocabulary must be a list of non-empty strings",
+    ),
+    (
+        "a result id is a list",
+        REGISTRY,
+        lambda d: _first(d["results"], id="BY-001").__setitem__("id", ["BY-001"]),
+        "result 0 id must be a non-empty string",
+    ),
+    (
+        "formal library search is null",
+        REGISTRY,
+        lambda d: _first(d["results"], id="BY-001").__setitem__(
+            "formal_library_search", None
+        ),
+        "formal_library_search must be an object",
+    ),
+    (
+        "source role is a list",
+        REGISTRY,
+        lambda d: d["source_catalog"]["survey-ref-018"].__setitem__(
+            "role", ["work"]
+        ),
+        "role must be a non-empty string",
     ),
     (
         "formalizations block is null",
@@ -215,6 +261,32 @@ METADATA_CASES: list[tuple[str, str, Mutation, str]] = [
         REGISTRY,
         lambda d: d["source_catalog"]["survey-ref-018"].__setitem__("citation", "   "),
         "must contain a citation",
+    ),
+    (
+        "scope delta summary is a list",
+        REGISTRY,
+        lambda d: next(
+            f
+            for f in _first(d["results"], id="BY-020")["formalizations"]
+            if f["relationship"] == "RELATED"
+        )["scope_delta"].__setitem__("summary", ["not text"]),
+        "scope_delta summary must be a non-empty string",
+    ),
+    (
+        "query hit count is a list",
+        SEARCH,
+        lambda d: d["results"]["BY-020"]["candidate_hits"]["mathlib"][
+            "query_hit_counts"
+        ].__setitem__("no free lunch", [1]),
+        "query hit counts must be non-negative integers",
+    ),
+    (
+        "candidate hit count is a list",
+        SEARCH,
+        lambda d: d["results"]["BY-020"]["candidate_hits"]["mathlib"].__setitem__(
+            "hit_count", [1]
+        ),
+        "has invalid hit evidence",
     ),
 ]
 
@@ -334,6 +406,37 @@ def test_a_claim_from_another_source_is_admissible(tree: Path) -> None:
         )
         assert done.returncode == 0, done.stderr + done.stdout
         assert "45 claims" in done.stdout, done.stdout
+    finally:
+        path.write_text(original, encoding="utf-8")
+
+
+def test_a_claim_without_provenance_is_rejected(tree: Path) -> None:
+    """CLM-* is source-neutral, not source-free."""
+    path = tree / REGISTRY
+    original = path.read_text(encoding="utf-8")
+    try:
+        data = json.loads(original)
+        row = json.loads(json.dumps(_first(data["results"], id="BY-001")))
+        row["id"] = "CLM-UNSOURCED-001"
+        row["original_source_refs"] = []
+        for survey_only in (
+            "paper_reference",
+            "survey_proof_assessment",
+            "formal_library_search",
+        ):
+            row.pop(survey_only, None)
+        data["results"].append(row)
+        path.write_text(json.dumps(data, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+        done = subprocess.run(
+            [sys.executable, "scripts/validate_registry.py"],
+            cwd=tree,
+            capture_output=True,
+            text=True,
+        )
+        _assert_clean_rejection(
+            done,
+            "CLM-UNSOURCED-001 claim rows must name at least one original source",
+        )
     finally:
         path.write_text(original, encoding="utf-8")
 

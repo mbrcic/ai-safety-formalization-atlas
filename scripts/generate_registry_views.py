@@ -944,7 +944,7 @@ def compact_result(result: dict) -> dict:
 
 
 def render_agent_by_id(registry: dict) -> str:
-    """Compact BY-### / LAND-### index for agents (token-cheap vs full registry)."""
+    """Compact BY-### / CLM-* / LAND-* index for agents (token-cheap vs full registry)."""
     payload = {
         "schema_version": 1,
         "generated_by": "scripts/generate_registry_views.py",
