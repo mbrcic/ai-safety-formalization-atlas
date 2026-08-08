@@ -135,14 +135,13 @@ See the [`v0.4 release scope`](docs/releases/v0.4.md) and
 
 ## Repository contents
 
-- [`registry.yaml`](registry.yaml) records results carrying source provenance,
-  with the catalogued sources they came from.
+- [`registry.yaml`](registry.yaml) records every result: claim rows carrying
+  source provenance, and artifact rows for formalizations and public Lean
+  surface the workbench develops or reproduces on its own account.
 - [`AISafetyAtlas/`](AISafetyAtlas/) contains attributed Lean integrations.
 - [`CONTRIBUTING.md`](CONTRIBUTING.md) explains how to propose and verify changes.
 - [`ROADMAP.md`](ROADMAP.md) presents the public strategy and contributor entry points.
 - [`STATE.md`](STATE.md) reports the current phase, blockers, and next tasks.
-- `registry.yaml` records formalizations and public Lean
-  surface the workbench develops or reproduces on its own account.
 - [`conjectures.yaml`](conjectures.yaml) records open questions that have a
   compiling Lean statement and no proof; nothing in it is asserted.
 - [`tasks.yaml`](tasks.yaml) is the maintained task board;

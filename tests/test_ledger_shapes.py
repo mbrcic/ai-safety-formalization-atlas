@@ -17,6 +17,7 @@ Run: `python3 -m pytest tests/ -q`
 from __future__ import annotations
 
 import json
+import re
 from pathlib import Path
 import shutil
 import subprocess
@@ -370,3 +371,81 @@ def test_every_recorded_reproduction_command_is_a_real_entry_point(tree: Path) -
             if (tree / (module.replace(".", "/") + ".lean")).is_file()
         ]
         assert modules, f"builds nothing that exists: {command}"
+
+
+LEDGER_FILES = ("registry.yaml", "conjectures.yaml", "tasks.yaml")
+MD_LINK = re.compile(r"\[([^\]]*)\]\(([^)]*)\)")
+PATH_KEY = re.compile(r"\.(?:yaml|json|md|lean|sh|py)\b|/\*\*|/$")
+
+
+def test_no_line_names_the_same_ledger_twice() -> None:
+    """Catch the residue a blunt rename leaves behind.
+
+    Merging landscape.yaml into registry.yaml was done partly by substitution,
+    which turned every sentence naming both files into one naming registry.yaml
+    twice — "belong in registry.yaml, not in registry.yaml", a README listing the
+    same ledger under two bullets, a table with two rows for it, a generated page
+    offering a file as the alternative to itself. Four instances were found by
+    hand across three review rounds, each after the previous one was declared
+    fixed.
+
+    Markdown links repeat the filename by construction, so links collapse to
+    their text before counting; what remains is a line that genuinely says the
+    name twice.
+    """
+    offenders: list[str] = []
+    for path in sorted(ROOT.rglob("*.md")):
+        if any(part in {".lake", ".git", "reviews", "vendor"} for part in path.parts):
+            continue
+        for number, line in enumerate(
+            path.read_text(encoding="utf-8", errors="ignore").splitlines(), start=1
+        ):
+            collapsed = MD_LINK.sub(r"\1", line)
+            for ledger in LEDGER_FILES:
+                if collapsed.count(ledger) > 1:
+                    offenders.append(
+                        f"{path.relative_to(ROOT)}:{number}: {line.strip()[:88]}"
+                    )
+    assert not offenders, "\n".join(offenders)
+
+
+def test_no_markdown_table_repeats_a_row_key() -> None:
+    """A table listing the same path in two rows is a leftover, not a choice.
+
+    The line-level check above cannot see this one: after the rename, AGENTS.md
+    carried two "do not read by default" rows, one for registry.yaml and one for
+    landscape.yaml's ghost, each individually well-formed. Comparing first cells
+    within a table catches it, and catches the general case of a table that grew
+    a duplicate key.
+    """
+    offenders: list[str] = []
+    for path in sorted(ROOT.rglob("*.md")):
+        if any(part in {".lake", ".git", "reviews", "vendor"} for part in path.parts):
+            continue
+        seen: dict[str, int] = {}
+        for number, line in enumerate(
+            path.read_text(encoding="utf-8", errors="ignore").splitlines(), start=1
+        ):
+            stripped = line.strip()
+            if not stripped.startswith("|"):
+                seen = {}  # a blank or prose line ends the table
+                continue
+            cells = [c.strip() for c in stripped.strip("|").split("|")]
+            # Backticks are formatting, not identity: `registry.yaml` and
+            # [`registry.yaml`](registry.yaml) name the same row.
+            key = " ".join(MD_LINK.sub(r"\2", cells[0]).replace("`", "").split())
+            # Separator rows and empty keys carry no identity.
+            if not key or set(key) <= set("-: "):
+                continue
+            # Only path-shaped keys. A table may legitimately repeat a word
+            # ("Proposition 7", a BY id across two adjacent tables); repeating a
+            # *file* as a row key is the rename residue.
+            if not PATH_KEY.search(key):
+                continue
+            if key in seen:
+                offenders.append(
+                    f"{path.relative_to(ROOT)}:{number}: row key {key!r} also at "
+                    f"line {seen[key]}"
+                )
+            seen[key] = number
+    assert not offenders, "\n".join(offenders)

@@ -47,18 +47,19 @@ stale without anyone noticing.
   BY-012 ([`review-by-012-agentbehavior.md`](docs/bridges/review-by-012-agentbehavior.md))
   and BY-033 ([`ct3-robot-review-package.md`](docs/bridges/ct3-robot-review-package.md)),
   both `REVIEWED` on 2026-07-19.
-- **What is formalized and how it is graded** — [`registry.yaml`](registry.yaml),
-  `registry.yaml`, and the generated
+- **What is formalized and how it is graded** — [`registry.yaml`](registry.yaml)
+  and the generated
   [formalization status](docs/status/formalization-status.md) and
   [by-area index](docs/status/by-area.md).
 - **Everything else** — git history and the release tags.
 
 ## Current work
 
-- v0.4.0 is published. `atlas-reshape` carries the de-anchoring and process
-  changes described above and is not yet merged.
-- Multi-commit local history remains on `agent-work` and the archive branches;
-  public PR history is the squash commit only.
+- v0.4.0 is published. `parsimony` carries the one-ledger merge, the
+  de-anchoring, and the process changes described above, and is not yet merged.
+  `atlas-reshape` was squashed into it and archived.
+- Multi-commit local history remains on the archive branches; public PR history
+  is the squash commit only.
 
 ## Blocked
 
@@ -68,8 +69,8 @@ stale without anyone noticing.
 
 ## Human review needed
 
-- **Tag assignments** (`atlas-reshape`): every registry row and landscape entry
-  now carries one or more areas from the shared `tag` vocabulary. The vocabulary
+- **Tag assignments** (`parsimony`): every registry row — claim and artifact
+  alike — now carries one or more areas from the shared `tag` vocabulary. The vocabulary
   is validated, but which areas a result belongs to was a judgement call and has
   not been reviewed.
 - **Conjecture admission**: whether a proposed conjecture is worth recording is

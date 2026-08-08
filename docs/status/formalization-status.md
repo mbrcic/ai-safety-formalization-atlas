@@ -89,9 +89,10 @@ All 44 rows have a **baseline classical six-corpus** search
 13 rows produced raw candidate-file hits. That pass is
 **scoped** negative/positive evidence for those corpora only — it does not
 search third-party Lean packages (Foundation, KolmogorovMathlib, SocialChoiceLean,
-DASH, …). Manually discovered package leads use `candidate_formalizations` or
-[`registry.yaml`](../../registry.yaml). Candidate hits are discovery evidence,
-not verified formalizations. Relationship labels are
+DASH, …). Manually discovered package leads are recorded as
+`candidate_formalizations` on a claim row, or as an artifact row when the
+formalization stands on its own account. Candidate hits are discovery
+evidence, not verified formalizations. Relationship labels are
 `EXACT`, `EQUIVALENT`, `RELATED`, `DEPENDENCY_ONLY`, and `UNCLEAR`.
 An AI-safety interpretation remains `HUMAN_REVIEW` unless it has been
 separately defined and reviewed.
