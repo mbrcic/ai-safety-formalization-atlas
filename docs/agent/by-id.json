@@ -968,6 +968,10 @@
           {
             "atlas_declaration": "AISafetyAtlas.Explainability.attribution_impossibility",
             "type": "WRAPPER"
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Explainability.attribution_impossibility_weak",
+            "type": "WRAPPER"
           }
         ]
       },

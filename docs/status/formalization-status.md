@@ -19,9 +19,9 @@ Statement-match is not the primary success score.
 | Claim results with workbench formalizations (`RELATED` only) | 6 |
 | Formalization records | 46 |
 | … declaring reproduction (self-attested; see methodology) | 44 |
-| Atlas Lean theorem declarations (unique names) | 49 |
-| Registry Lean declaration records | 49 |
-| … of which `WRAPPER` | 14 |
+| Atlas Lean theorem declarations (unique names) | 50 |
+| Registry Lean declaration records | 50 |
+| … of which `WRAPPER` | 15 |
 | … of which `BRIDGE` | 4 |
 | … of which `NEW_PROOF` | 31 |
 | … of which `REFERENCE` | 0 |
@@ -51,7 +51,7 @@ Statement-match is not the primary success score.
 | BY-033 | Unverifiability of robot ethics | `RELATED` | `AISafetyAtlas.Computability.halting_problem` | `AISafetyAtlas.Verification.Robot.action_safety_unverifiable (BRIDGE)` |
 | BY-039 | Reward corruption unsolvability | `RELATED` | `AISafetyAtlas.Wireheading.CRMDP.Env.observed_complement`<br>`AISafetyAtlas.Wireheading.CRMDP.return_add_complement`<br>`AISafetyAtlas.Wireheading.Corruption.ComplementedClass.everitt_theorem_eleven` | `AISafetyAtlas.Wireheading.CRMDP.Model.everitt_theorem_eleven (NEW_PROOF)` |
 | BY-043 | Misaligned embodiment | `RELATED` | — | `AISafetyAtlas.Compositional.Symmetry.Protocol.no_unique_leader_from_symmetric_start (NEW_PROOF)` |
-| LAND-ATTR-001 | Attribution impossibility (DASH trilemma) |  | `DASHImpossibility.attribution_impossibility` | `AISafetyAtlas.Explainability.attribution_impossibility (WRAPPER)` |
+| LAND-ATTR-001 | Attribution impossibility (DASH trilemma) |  | `DASHImpossibility.attribution_impossibility`<br>`DASHImpossibility.attribution_impossibility_weak` | `AISafetyAtlas.Explainability.attribution_impossibility (WRAPPER)`<br>`AISafetyAtlas.Explainability.attribution_impossibility_weak (WRAPPER)` |
 | LAND-GS-002 | Gibbard–Satterthwaite theorem (Lean / SocialChoiceLean) |  | `SocialChoice.gibbard_satterthwaite` | `AISafetyAtlas.SocialChoice.gibbard_satterthwaite (WRAPPER)` |
 | LAND-HYPER-002 | k-safety self-composition and hyperproperty decomposition |  | `k_safety_iff_finite_self_composition`<br>`k_safety_iff_product_self_composition`<br>`self_composition_is_safety`<br>`isClosed_iff_hyperSafety`<br>`dense_iff_hyperLiveness`<br>`hyperSafety_of_isKSafety`<br>`hyperSafety_hyperLiveness_decomposition` | `AISafetyAtlas.Compositional.Hyperproperties.k_safety_iff_finite_self_composition (NEW_PROOF)` |
 | LAND-ANGLUIN-001 | Port-labelled anonymous networks, views, and automorphisms |  | `runFor_eq_of_view_eq`<br>`invariant_of_automorphism`<br>`no_unique_leader_of_fixedPointFree`<br>`invariant_of_constant` | `AISafetyAtlas.Compositional.Networks.runFor_eq_of_view_eq (NEW_PROOF)` |

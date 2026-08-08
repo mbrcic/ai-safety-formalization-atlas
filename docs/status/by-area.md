@@ -165,7 +165,7 @@ Catalogued, no atlas Lean:
 
 | ID | Result | Atlas declarations |
 |---|---|---|
-| LAND-ATTR-001 | Attribution impossibility (DASH trilemma) | `AISafetyAtlas.Explainability.attribution_impossibility` |
+| LAND-ATTR-001 | Attribution impossibility (DASH trilemma) | `AISafetyAtlas.Explainability.attribution_impossibility`<br>`AISafetyAtlas.Explainability.attribution_impossibility_weak` |
 
 Catalogued, no atlas Lean:
 

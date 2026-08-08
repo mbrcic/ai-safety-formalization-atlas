@@ -46,6 +46,7 @@ import AISafetyAtlas
 #check AISafetyAtlas.Wireheading.CRMDP.Model.everitt_theorem_eleven
 #check AISafetyAtlas.Compositional.Symmetry.Protocol.no_unique_leader_from_symmetric_start
 #check AISafetyAtlas.Explainability.attribution_impossibility
+#check AISafetyAtlas.Explainability.attribution_impossibility_weak
 #check AISafetyAtlas.SocialChoice.gibbard_satterthwaite
 #check AISafetyAtlas.Compositional.Hyperproperties.k_safety_iff_finite_self_composition
 #check AISafetyAtlas.Compositional.Networks.runFor_eq_of_view_eq

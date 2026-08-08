@@ -9,7 +9,7 @@ Narrative provenance remains in [`external-formalizations.md`](../provenance/ext
 
 | ID | Name | Framework | Atlas / source declarations | Root import | Reproduction |
 |---|---|---|---|---|---|
-| LAND-ATTR-001 | Attribution impossibility (DASH trilemma) | Lean | `AISafetyAtlas.Explainability.attribution_impossibility` | yes | `lake build AISafetyAtlas (vendored axiom-free trilemma)` |
+| LAND-ATTR-001 | Attribution impossibility (DASH trilemma) | Lean | `AISafetyAtlas.Explainability.attribution_impossibility`<br>`AISafetyAtlas.Explainability.attribution_impossibility_weak` | yes | `lake build AISafetyAtlas (vendored axiom-free trilemma)` |
 | LAND-GS-001 | Gibbard–Satterthwaite theorem | Isabelle/HOL | `Gibbard_Satterthwaite` | no | `scripts/reproduce_isabelle.sh arrow` |
 | LAND-GS-002 | Gibbard–Satterthwaite theorem (Lean / SocialChoiceLean) | Lean | `AISafetyAtlas.SocialChoice.gibbard_satterthwaite` | yes | `lake build AISafetyAtlas; python3 scripts/check_print_axioms.py` |
 | LAND-NFL-001 | No-free-lunch theorem for machine learning (Shalev-Shwartz–Ben-David §5.1) | Isabelle/HOL | `no_free_lunch_ML` | no | `scripts/reproduce_isabelle.sh nfl` |

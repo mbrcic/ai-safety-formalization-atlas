@@ -6,7 +6,7 @@ reader is likely to arrive from. Each entry says what is claimed, over which
 model, and where the statement comes from. A result appears under every area
 its row is tagged with.
 
-**16** applications across **12** areas; **2** rows carry a maintainer-reviewed AI-system
+**17** applications across **12** areas; **2** rows carry a maintainer-reviewed AI-system
 interpretation, with evidence under [`docs/bridges/`](../bridges/).
 
 ## Why these matter, and what they do not settle
@@ -85,6 +85,7 @@ declaration surface, including results with no AI-system reading, is in
 | What it says | Declaration | Row | Bridge |
 |---|---|---|---|
 | Explainability: under the Rashomon property no feature ranking is faithful across models within a collinearity group. Reused from DrakeCaraker/dash-impossibility-lean; the atlas exposes the model-agnostic core. Rashomon is witnessed in `Examples.NonVacuity`. | `AISafetyAtlas.Explainability.attribution_impossibility` | LAND-ATTR-001 | — |
+| Explainability: weaker packaging of the Rashomon attribution trilemma, requiring less of the ranking. Reused from DrakeCaraker/dash-impossibility-lean alongside the strong form. | `AISafetyAtlas.Explainability.attribution_impossibility_weak` | LAND-ATTR-001 | — |
 
 ## learning-theory
 

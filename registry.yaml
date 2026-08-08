@@ -3081,6 +3081,14 @@
               "DASHImpossibility.attribution_impossibility"
             ],
             "application": "Explainability: under the Rashomon property no feature ranking is faithful across models within a collinearity group. Reused from DrakeCaraker/dash-impossibility-lean; the atlas exposes the model-agnostic core. Rashomon is witnessed in `Examples.NonVacuity`."
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Explainability.attribution_impossibility_weak",
+            "type": "WRAPPER",
+            "source_declarations": [
+              "DASHImpossibility.attribution_impossibility_weak"
+            ],
+            "application": "Explainability: weaker packaging of the Rashomon attribution trilemma, requiring less of the ranking. Reused from DrakeCaraker/dash-impossibility-lean alongside the strong form."
           }
         ]
       }
