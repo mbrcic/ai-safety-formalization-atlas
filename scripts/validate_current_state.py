@@ -146,11 +146,15 @@ def validate_gate_witnesses() -> None:
         "AISafetyAtlas/Examples/WorkbenchConsumers.lean": [
             r"example\s*:\s*HalfMaximalRegretBound\b",
         ],
+        "AISafetyAtlas/Examples/SixTargets.lean": [
+            r"example\s*:\s*Algorithm\s+Unit\s+Unit\s+1\b",
+        ],
     }
     targets = set(explicit_lean_build_targets())
     target_requirements = {
         "AISafetyAtlas.Examples.NonVacuity",
         "AISafetyAtlas.Examples.WorkbenchConsumers",
+        "AISafetyAtlas.Examples.SixTargets",
     }
     require(
         target_requirements <= targets,

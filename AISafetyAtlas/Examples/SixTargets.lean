@@ -122,6 +122,13 @@ open AISafetyAtlas.Compositional.Networks
 def twoRing : Network Bool 1 where
   port := fun v _ => !v
 
+/-! A concrete anonymous algorithm for the two-node network interface. -/
+def uniformAlgorithm : Algorithm Unit Unit 1 where
+  send := fun _ _ => ()
+  update := fun _ _ => ()
+
+example : Algorithm Unit Unit 1 := uniformAlgorithm
+
 /-- Swapping the two nodes is a port-preserving automorphism, and it fixes
 neither node. -/
 def swap : Automorphism twoRing where
