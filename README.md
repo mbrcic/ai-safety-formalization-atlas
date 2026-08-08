@@ -142,8 +142,9 @@ See the [`v0.5 release scope`](docs/releases/v0.5.md) and
 - [`CONTRIBUTING.md`](CONTRIBUTING.md) explains how to propose and verify changes.
 - [`ROADMAP.md`](ROADMAP.md) presents the public strategy and contributor entry points.
 - [`STATE.md`](STATE.md) reports the current phase, blockers, and next tasks.
-- [`conjectures.yaml`](conjectures.yaml) records open questions that have a
-  compiling Lean statement and no proof; nothing in it is asserted.
+- [`conjectures.yaml`](conjectures.yaml) records conjecture statements that
+  compile in Lean without a proof, open ones and the settled or withdrawn ones
+  behind them; nothing in it is asserted.
 - [`tasks.yaml`](tasks.yaml) is the maintained task board;
   [`docs/guide/contributor-tasks.md`](docs/guide/contributor-tasks.md) is
   generated from it.

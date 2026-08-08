@@ -56,6 +56,25 @@ research leads, and integration decisions behind that strategy.
 
 ## Formalization search
 
+- **Restricted no-free-lunch, and the o-minimality prerequisite.**
+  `AISafetyAtlas.Learning.no_free_lunch_supervised` averages uniformly over
+  every target function. Real systems draw from restricted families —
+  computable, resource-bounded, finite-precision, tame — and which restriction
+  breaks the averaging argument is the question of whether the impossibility
+  binds anything real. Over *finite* families the answer is settled and not
+  ours: performance is algorithm-independent iff the family is closed under
+  permutation (Schumacher–Vose–Whitley, GECCO 2001; Igel–Toussaint, JMMA 2004,
+  [doi:10.1023/B:JMMA.0000049381.24625.f7](https://doi.org/10.1023/B:JMMA.0000049381.24625.f7)),
+  tracked as a reproduction rung in
+  [`contributor-tasks.md`](contributor-tasks.md). The interesting case is
+  definability in an o-minimal structure, and it is **blocked on Mathlib**:
+  Mathlib carries finite combinatorial VC dimension
+  (`Mathlib.Combinatorics.SetFamily.Shatter`) and no o-minimal structures,
+  definable families, or infinite-domain VC theory at all (search recorded as
+  `NC-001` in
+  [`formalization-search.json`](../provenance/formalization-search.json)).
+  Building o-minimality in Mathlib is a large, self-contained project with
+  value well beyond this repository; nothing here needs to own it.
 - Thirty-one survey rows still lack an atlas Lean declaration in the registry
   (see generated status for the rows that do).
 - Search Isabelle/HOL, Rocq, HOL4, HOL Light, and Agda for exact declarations,

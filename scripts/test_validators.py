@@ -86,6 +86,41 @@ def first(items, **match):
     return next(i for i in items if all(i[k] == v for k, v in match.items()))
 
 
+def synthetic_conjecture(data: dict) -> dict:
+    """A schema-clean conjecture record to mutate, independent of the ledger.
+
+    The ledger is legitimately empty most of the time — a recorded conjecture is
+    a research event, not a fixture. Mutating `conjectures[0]` therefore tests
+    whichever entry happens to exist, and raises `IndexError` when none does.
+    Seeding a record instead keeps every rule below exercised at all times, and
+    keeps the harness from quietly shrinking when the last conjecture resolves.
+
+    Schema-clean, not real: `validate_conjectures.py` checks the namespace
+    prefix, the module against `lean_build_targets.txt`, and root-import
+    containment — all string-level. It never elaborates, so
+    `AISafetyAtlas.Conjectures.Checks.synthetic` satisfies it while naming no
+    declaration that exists. That is the right scope for a schema mutation
+    harness and the wrong thing to copy into `conjectures.yaml`: a real record
+    must name a declaration the generated `Checks.lean` can elaborate, which is
+    what CI checks and this file deliberately does not.
+    """
+    data["conjectures"].insert(
+        0,
+        {
+            "id": "CONJ-900",
+            "statement": "Synthetic harness record. Never written to the ledger.",
+            "refutation": "Not applicable; this record exists only under test.",
+            "prior_art": "Not applicable; this record exists only under test.",
+            "lean": "AISafetyAtlas.Conjectures.Checks.synthetic",
+            "tags": ["learning-theory"],
+            "proposed_by": "test_validators",
+            "status": "OPEN",
+            "resolution": None,
+        },
+    )
+    return data["conjectures"][0]
+
+
 CASES = [
     (
         "registry: graded row citing only a directory source",
@@ -543,14 +578,14 @@ CASES = [
         "conjectures: no refutation condition",
         "validate_conjectures.py",
         "conjectures.yaml",
-        lambda d: d["conjectures"][0].__setitem__("refutation", "   "),
+        lambda d: synthetic_conjecture(d).__setitem__("refutation", "   "),
         "non-empty refutation",
     ),
     (
         "conjectures: statement outside the Conjectures namespace",
         "validate_conjectures.py",
         "conjectures.yaml",
-        lambda d: d["conjectures"][0].__setitem__(
+        lambda d: synthetic_conjecture(d).__setitem__(
             "lean", "AISafetyAtlas.Learning.no_free_lunch"
         ),
         "must live under AISafetyAtlas.Conjectures",
@@ -559,28 +594,28 @@ CASES = [
         "conjectures: terminal status with no resolution",
         "validate_conjectures.py",
         "conjectures.yaml",
-        lambda d: d["conjectures"][0].update(status="RESOLVED", resolution=None),
+        lambda d: synthetic_conjecture(d).update(status="RESOLVED", resolution=None),
         "resolution exactly when its status is terminal",
     ),
     (
         "conjectures: status has the wrong scalar type",
         "validate_conjectures.py",
         "conjectures.yaml",
-        lambda d: d["conjectures"][0].__setitem__("status", []),
+        lambda d: synthetic_conjecture(d).__setitem__("status", []),
         "unknown status",
     ),
     (
         "conjectures: tag has the wrong scalar type",
         "validate_conjectures.py",
         "conjectures.yaml",
-        lambda d: d["conjectures"][0].__setitem__("tags", [[]]),
+        lambda d: synthetic_conjecture(d).__setitem__("tags", [[]]),
         "tags must be non-empty strings",
     ),
     (
         "conjectures: module that is not a Lean build target",
         "validate_conjectures.py",
         "conjectures.yaml",
-        lambda d: d["conjectures"][0].__setitem__(
+        lambda d: synthetic_conjecture(d).__setitem__(
             "lean", "AISafetyAtlas.Conjectures.Ghost.statement"
         ),
         "not an explicit Lean build target",

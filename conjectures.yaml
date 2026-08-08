@@ -1,20 +1,5 @@
 {
   "schema_version": 1,
   "description": "Open questions with a compiling Lean statement and no proof. A conjecture is a first-class deliverable: stating a safety property precisely enough to be checkable is the hard part, and the statement is useful before anyone proves it. Nothing here is asserted. Conjecture modules live under AISafetyAtlas.Conjectures.*, are never on the atlas root import, and never enter theorem counts. Tag vocabulary is shared with registry.yaml.",
-  "conjectures": [
-    {
-      "id": "CONJ-001",
-      "statement": "AISafetyAtlas.Learning.no_free_lunch_supervised averages uniformly over every target function. Real systems are drawn from restricted classes — computable, resource-bounded, finite-precision, tame. Conjecture: for a homogeneous loss, closure of the target family under relabelling targets off the training domain is not only sufficient for learner-independence but necessary, so restricting to any family lacking that symmetry lets some learner beat another on average. The schematic form is deliberate: a specific restriction instantiates it rather than needing its own theorem. The motivating instantiation is definability in an o-minimal structure, which is out of reach today — Mathlib carries finite combinatorial VC dimension and no o-minimal structures.",
-      "refutation": "Exhibit a homogeneous loss, a training domain with an off-training point, and a nonempty target family satisfying exactly one side of the biconditional. Either direction failing refutes it. The suspected weak direction is necessity: a family could fail off-training closure and still average symmetrically for accidental reasons.",
-      "prior_art": "Distinct from AISafetyAtlas.Learning.homogeneous_iff_learner_indep, which characterises learner-independence in terms of the loss with the target class left unrestricted; this fixes the loss as homogeneous and asks about the target class. Searched: Mathlib (no o-minimality; Combinatorics.SetFamily.Shatter is finite VC only), the atlas Learning surface, and the BY-020/BY-021/BY-022 rows.",
-      "lean": "AISafetyAtlas.Conjectures.RestrictedNFL.statement",
-      "tags": [
-        "learning-theory",
-        "computational-complexity"
-      ],
-      "proposed_by": "mbrcic",
-      "status": "WITHDRAWN",
-      "resolution": "Withdrawn 2026-08-07, unsound as stated and superseded as intended. (1) The reverse direction is false. Take X = {s, x1, x2}, S = {s}, Y = {0,1}, 0-1 loss, and F = {(x1,x2) = (0,0), (1,1)} — the orbit of one target under a single global permutation applied off S, so OffTrainingClosed holds. The learner predicting (0,0) yields loss vectors {(0,0),(1,1)}; the learner predicting (0,1) yields {(0,1),(1,0)}. Psi = indicator of the zero vector separates them, so learner-independence fails while closure holds. The defect is that OffTrainingClosed applies one permutation simultaneously at every off-training point, which is far weaker than closure under permutation of the domain. (2) The repaired statement is a published theorem, not an open question: Schumacher-Vose-Whitley (GECCO 2001) and Igel-Toussaint (JMMA 2004, doi 10.1023/B:JMMA.0000049381.24625.f7) prove performance is algorithm-independent over a finite family iff it is closed under permutation. The atlas already tracks this as contributor task CT-10, a reproduction rung. The prior-art field the conjecture template requires would have caught this before it was recorded."
-    }
-  ]
+  "conjectures": []
 }

@@ -140,10 +140,10 @@ legitimate novelty check if the claim is about that corpus; six are needed only
 if the claim is that broad.
 
 A claim of absence is the one claim a reader cannot check for themselves, which
-is why it carries its own evidence. `CONJ-001` is the worked example of skipping
-it: the conjecture was recorded without the prior-art search its own template
-requires, and the repaired statement turned out to be a published theorem the
-repository already tracked as a contributor task.
+is why it carries its own evidence. The usual failure is to assert that
+something is unformalized when the search would have found a published result;
+a recorded `novelty_checks` entry makes that failure visible before the claim
+ships rather than after.
 
 Both profiles live in
 [`formalization-search.json`](../provenance/formalization-search.json) and are

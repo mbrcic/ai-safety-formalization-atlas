@@ -9,5 +9,4 @@ AISafetyAtlas.Examples.HaltingExample
 AISafetyAtlas.Examples.NonVacuity
 AISafetyAtlas.Examples.Oversight.JointObservation.Procurement
 AISafetyAtlas.Examples.Oversight.JointObservation.Portfolio
-AISafetyAtlas.Conjectures.RestrictedNFL
 AISafetyAtlas.Conjectures.Checks
