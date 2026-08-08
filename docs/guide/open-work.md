@@ -35,6 +35,11 @@ research leads, and integration decisions behind that strategy.
   contributor runs on every edit. Open: build that job, or accept the
   declaration as the trust boundary and leave it stated.
 
+  What the gate *does* check is that the command is a reproduction entry point
+  at all — a `scripts/reproduce_*.sh` that exists and is executable, or a
+  `lake build` naming a module in the tree. Before that rule, an external record
+  could carry `reproduced: true` with `build_command: "echo done"`.
+
 ## Human review
 
 - Revisit the public framing and scope disclaimer when coverage claims change

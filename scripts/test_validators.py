@@ -145,6 +145,24 @@ CASES = [
         "carries survey-only fields",
     ),
     (
+        "registry: reproduction claimed with a command that reproduces nothing",
+        "validate_registry.py",
+        "registry.yaml",
+        lambda d: first(d["results"], id="LAND-NFL-001")["formalizations"][0].__setitem__(
+            "build_command", "echo pretend"
+        ),
+        "neither a scripts/reproduce_*.sh entry point nor a `lake build`",
+    ),
+    (
+        "registry: reproduction lake-building a module that does not exist",
+        "validate_registry.py",
+        "registry.yaml",
+        lambda d: first(d["results"], id="LAND-GS-002")["formalizations"][0].__setitem__(
+            "build_command", "lake build AISafetyAtlas.NoSuchModule"
+        ),
+        "builds no module that exists in this tree",
+    ),
+    (
         "registry: result tagged outside the vocabulary",
         "validate_registry.py",
         "registry.yaml",

@@ -335,3 +335,38 @@ def test_a_claim_from_another_source_is_admissible(tree: Path) -> None:
         assert "45 claims" in done.stdout, done.stdout
     finally:
         path.write_text(original, encoding="utf-8")
+
+
+def test_every_recorded_reproduction_command_is_a_real_entry_point(tree: Path) -> None:
+    """The gate cannot run these builds, so it checks the command is one.
+
+    Isabelle, Docker, and upstream-toolchain reproductions are out of scope for
+    a check that runs on every edit — methodology.md states that boundary. What
+    remains checkable is the shape: a `scripts/reproduce_*.sh` that exists and is
+    executable, or a `lake build` naming a module present in the tree. This test
+    pins the two forms so a third cannot arrive unnoticed and carry
+    `reproduced: true` on a command that reproduces nothing.
+    """
+    registry = json.loads((tree / REGISTRY).read_text(encoding="utf-8"))
+    commands = [
+        record["build_command"]
+        for result in registry["results"]
+        for record in result["formalizations"]
+        if record.get("reproduced")
+    ]
+    assert commands, "no reproduced records; the check would be vacuous"
+    for command in commands:
+        tokens = command.split()
+        if tokens[0].startswith("scripts/"):
+            script = tree / tokens[0]
+            assert script.is_file(), command
+            assert script.stat().st_mode & 0o111, f"not executable: {command}"
+            continue
+        assert tokens[:2] == ["lake", "build"], f"unrecognised entry point: {command}"
+        modules = [
+            module
+            for raw in tokens[2:]
+            if (module := raw.strip("();,"))
+            if (tree / (module.replace(".", "/") + ".lean")).is_file()
+        ]
+        assert modules, f"builds nothing that exists: {command}"

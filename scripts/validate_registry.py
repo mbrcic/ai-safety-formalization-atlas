@@ -877,7 +877,16 @@ def main() -> None:
                         f"{result_id} reproduced formalization build_command "
                         "must be a non-empty string"
                     )
-                command_path = command.split()[0]
+                # The gate does not execute these commands — Isabelle, Docker,
+                # and upstream-toolchain builds are out of scope for a check a
+                # contributor runs on every edit, and methodology.md states that
+                # trust boundary. What the gate *can* refuse is a reproduction
+                # claim backed by a command that reproduces nothing: only the
+                # script path and `lake build` were ever checked, so
+                # `build_command: "echo done"` on an external record recorded a
+                # reproduction the ledger had no way to doubt.
+                tokens = command.split()
+                command_path = tokens[0]
                 if command_path.startswith("scripts/"):
                     script = ROOT / command_path
                     if not script.is_file() or not os.access(script, os.X_OK):
@@ -885,6 +894,27 @@ def main() -> None:
                             f"{result_id} reproduction command references a missing "
                             "or nonexecutable script"
                         )
+                elif tokens[:2] == ["lake", "build"]:
+                    # Recorded commands carry shell punctuation and prose:
+                    # `lake build AISafetyAtlas; python3 …` and
+                    # `lake build AISafetyAtlas (vendored axiom-free trilemma)`.
+                    built = [
+                        token
+                        for raw in tokens[2:]
+                        if (token := raw.strip("();,"))
+                        if (ROOT / (token.replace(".", "/") + ".lean")).is_file()
+                    ]
+                    if not built:
+                        fail(
+                            f"{result_id} reproduction command builds no module that "
+                            f"exists in this tree: {command!r}"
+                        )
+                else:
+                    fail(
+                        f"{result_id} claims reproduction with a command that is "
+                        f"neither a scripts/reproduce_*.sh entry point nor a "
+                        f"`lake build`: {command!r}"
+                    )
             else:
                 for evidence_field in ("build_environment", "build_command"):
                     if evidence_field in record and not isinstance(
