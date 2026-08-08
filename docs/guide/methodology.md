@@ -192,6 +192,13 @@ immutable release audit (`scripts/audit_release_v0_1.py` via
 [`v0.1.md`](../releases/v0.1.md)), not by ordinary current-state validation, so a genuine
 future graduation can be recorded without editing a timeless validator.
 
+A declaration stated over an AI-system model may also carry an `application` line.
+That line is a proposed reading for discovery and contributor discussion; it is
+not evidence that the theorem applies to a deployed or real-world system. The
+generated [`applications.md`](../status/applications.md) view makes these lines
+findable and displays the separate bridge status. Only a `REVIEWED` bridge, with
+its review record and evidence, supports a reviewed AI-system interpretation.
+
 A result may also carry `candidate_formalizations`: structured, non-coverage
 leads for a formalization that has been discovered but not yet accepted. Each
 lead records `repository`, `revision`, `framework`, `license`, `declaration`,

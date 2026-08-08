@@ -242,11 +242,11 @@ scripts/reproduce_chaitin.sh
 |---|---|---|
 | a pointer to a result, or a proof, that is not recorded here | the [discovery issue form](https://github.com/mbrcic/ai-safety-formalization-atlas/issues/new?template=known-formalization.yml) — we classify it and place it | nothing to install |
 | a correction to a record you have already found | the ledger file that holds it | `scripts/setup.sh --pointer` |
-| an open question and no proof | `conjectures.yaml` + a module under `AISafetyAtlas/Conjectures/` | add it to `scripts/lean_build_targets.txt`, then build + gate |
-| a proof to write, or any Lean change | the facade for your area (see Domain imports) | `scripts/setup.sh`, then build + gate + `check_print_axioms.py` |
+| an open question and no proof | the [conjecture issue form](https://github.com/mbrcic/ai-safety-formalization-atlas/issues/new?template=conjecture.yml) | no Lean needed; the statement enters the ledger after it compiles |
+| a proof to write, or any Lean change | the facade for your area (see Domain imports); for new coverage, dependencies, or public API, start with the [formalization proposal](https://github.com/mbrcic/ai-safety-formalization-atlas/issues/new?template=formalization-proposal.yml) | `scripts/setup.sh`, then build + gate + `check_print_axioms.py` |
 | a change to a contributor task | `tasks.yaml` — never the generated Markdown | regenerate + gate |
 | evidence that something does not exist | `novelty_checks` in `docs/provenance/formalization-search.json` | update search evidence, then regenerate + gate |
-| a new source to catalogue | `source_catalog` in `registry.yaml`, with its `role` | regenerate + gate |
+| a new source to catalogue | `source_catalog` in `registry.yaml`, with its `role`; add a `CLM-*` row with `original_source_refs` if it states a result | regenerate + gate |
 
 **regenerate** `python3 scripts/generate_registry_views.py` · **gate** `./scripts/agent_gate.sh` · **build** `lake build`
 

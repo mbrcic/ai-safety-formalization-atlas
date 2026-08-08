@@ -7,7 +7,10 @@ Agent map: [`docs/agent/INDEX.md`](docs/agent/INDEX.md). Human doc map:
 
 ## Context budget (agents)
 
-### Default open set
+### Start here (small by design)
+
+Open this file, `STATE.md`, and `docs/agent/INDEX.md` first. The other paths
+below are conditional and should be opened only when the task needs them.
 
 1. This file (short policy)
 2. [`STATE.md`](STATE.md)
@@ -102,9 +105,11 @@ proof. Detail: [`docs/guide/methodology.md`](docs/guide/methodology.md).
   `docs/provenance/formalization-search.json` — corpus, revision, date, and what
   the search did not cover. The six-corpus sweep is the `baseline-catalogue`
   profile for one source and is **not** inherited by new work.
-- **Applications:** a declaration stated over an AI-system model records an
-  `application` line — what it claims, over which model, and where the statement
-  comes from. Required on every `BRIDGE`. Generated view:
+- **Applications:** a declaration stated over an AI-system model may record a
+  proposed `application` line — what it claims, over which model, and where the
+  statement comes from. It is discovery prose, not review evidence; only a
+  `REVIEWED` bridge supports a reviewed AI-system interpretation. Required on
+  every `BRIDGE`. Generated view:
   [`docs/status/applications.md`](docs/status/applications.md).
 - **Layers:** (1) math theorem → (2) atlas interface → (3) AI-safety bridge →
   (4) real-system claim. Layers 3–4 need human review; Lean at 1–2 does not
@@ -158,6 +163,8 @@ Cheap preflight:
 
 ```console
 ./scripts/agent_gate.sh
+# repeated agent iterations: one-line success, full output on failure
+./scripts/agent_gate.sh --quiet
 ```
 
 The gate ends with `pytest tests/` (malformed-shape regressions) and

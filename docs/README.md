@@ -19,7 +19,7 @@ and [`conjectures.yaml`](../conjectures.yaml).
 
 ## Agent (token-cheap navigation)
 
-- [Agent index](agent/INDEX.md) — default open set and lookup recipes
+- [Agent index](agent/INDEX.md) — small start set and targeted lookup recipes
 - [by-id.json](agent/by-id.json) — generated compact `BY-###` / `CLM-*` / `LAND-*` map
 - [search-summary.json](agent/search-summary.json) — generated compact discovery hits
 

@@ -3,23 +3,33 @@
 Read [`AGENTS.md`](../../AGENTS.md) first (context budget at the top), then this
 file. Prefer the small paths below over loading full inventory dumps.
 
-## Default open set
+## Start here (small by design)
+
+Open these three files first. They are the only default context needed to route
+an ordinary contribution. Everything below is conditional: open it only when
+the task requires that particular inventory, domain, or evidence.
 
 | Path | Why |
 |---|---|
 | [`AGENTS.md`](../../AGENTS.md) | Short policy, public API, do-not-read list |
 | [`STATE.md`](../../STATE.md) | Live phase + generated coverage snapshot |
-| [`docs/agent/by-id.json`](by-id.json) | Compact `BY-###` / `CLM-*` / `LAND-*` lookup |
-| [`docs/agent/search-summary.json`](search-summary.json) | Compact discovery hits (not full search dump) |
-| [`docs/status/applications.md`](../status/applications.md) | What the atlas states about AI-system models, by area |
-| [`docs/status/by-area.md`](../status/by-area.md) | The atlas by mathematical area, one registry ledger |
-| [`docs/guide/conjectures.md`](../guide/conjectures.md) | How an open question enters, and why it is never a theorem |
-| [`docs/status/landscape-index.md`](../status/landscape-index.md) | Atlas formalizations and public Lean surface |
-| [`docs/status/sources/brcic-yampolskiy-2023.md`](../status/sources/brcic-yampolskiy-2023.md) | Per-source report: Brčić–Yampolskiy survey |
-| [`docs/guide/open-work.md`](../guide/open-work.md) | Research queue |
-| [`docs/guide/contributor-tasks.md`](../guide/contributor-tasks.md) | Bounded CT units |
-| [`docs/provenance/a1-a3-b1-b3-b7-reverification.md`](../provenance/a1-a3-b1-b3-b7-reverification.md) | Durable residual gaps for compositional / wireheading / preference work |
-| Facade modules under `AISafetyAtlas/*.lean` | Public Lean surface for the task domain |
+| [`docs/agent/INDEX.md`](INDEX.md) | This routing map and targeted lookup recipes |
+
+## Open only when needed
+
+| Path | Open it when… |
+|---|---|
+| [`docs/agent/by-id.json`](by-id.json) | looking up one `BY-*`, `CLM-*`, or `LAND-*` row; prefer the recipe below over loading it wholesale |
+| [`docs/agent/search-summary.json`](search-summary.json) | checking discovery hits for one result; do not load the full search evidence |
+| [`docs/status/applications.md`](../status/applications.md) | working on an AI-system model reading or bridge |
+| [`docs/status/by-area.md`](../status/by-area.md) | browsing the catalogue by mathematical area |
+| [`docs/guide/conjectures.md`](../guide/conjectures.md) | proposing or reviewing a conjecture |
+| [`docs/status/landscape-index.md`](../status/landscape-index.md) | auditing the atlas Lean surface or artifact rows |
+| [`docs/status/sources/brcic-yampolskiy-2023.md`](../status/sources/brcic-yampolskiy-2023.md) | auditing the survey source specifically |
+| [`docs/guide/open-work.md`](../guide/open-work.md) | choosing research work rather than a bounded task |
+| [`docs/guide/contributor-tasks.md`](../guide/contributor-tasks.md) | choosing or implementing a CT unit |
+| [`docs/provenance/a1-a3-b1-b3-b7-reverification.md`](../provenance/a1-a3-b1-b3-b7-reverification.md) | working on those domain residuals |
+| Facade modules under `AISafetyAtlas/*.lean` | writing Lean for the relevant domain |
 
 ## Lookup recipe
 
@@ -94,11 +104,11 @@ This table is the same one the README shows, rendered from one source.
 |---|---|---|
 | a pointer to a result, or a proof, that is not recorded here | the [discovery issue form](https://github.com/mbrcic/ai-safety-formalization-atlas/issues/new?template=known-formalization.yml) — we classify it and place it | nothing to install |
 | a correction to a record you have already found | the ledger file that holds it | `scripts/setup.sh --pointer` |
-| an open question and no proof | `conjectures.yaml` + a module under `AISafetyAtlas/Conjectures/` | add it to `scripts/lean_build_targets.txt`, then build + gate |
-| a proof to write, or any Lean change | the facade for your area (see Domain imports) | `scripts/setup.sh`, then build + gate + `check_print_axioms.py` |
+| an open question and no proof | the [conjecture issue form](https://github.com/mbrcic/ai-safety-formalization-atlas/issues/new?template=conjecture.yml) | no Lean needed; the statement enters the ledger after it compiles |
+| a proof to write, or any Lean change | the facade for your area (see Domain imports); for new coverage, dependencies, or public API, start with the [formalization proposal](https://github.com/mbrcic/ai-safety-formalization-atlas/issues/new?template=formalization-proposal.yml) | `scripts/setup.sh`, then build + gate + `check_print_axioms.py` |
 | a change to a contributor task | `tasks.yaml` — never the generated Markdown | regenerate + gate |
 | evidence that something does not exist | `novelty_checks` in `docs/provenance/formalization-search.json` | update search evidence, then regenerate + gate |
-| a new source to catalogue | `source_catalog` in `registry.yaml`, with its `role` | regenerate + gate |
+| a new source to catalogue | `source_catalog` in `registry.yaml`, with its `role`; add a `CLM-*` row with `original_source_refs` if it states a result | regenerate + gate |
 
 **regenerate** `python3 scripts/generate_registry_views.py` · **gate** `./scripts/agent_gate.sh` · **build** `lake build`
 

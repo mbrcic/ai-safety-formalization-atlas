@@ -3,6 +3,24 @@
 # Does not run lake build or axiom scans (use full AGENTS.md gate for that).
 set -euo pipefail
 
+# Agents often run the cheap gate repeatedly while iterating.  Preserve the
+# full diagnostic stream on failure, but make successful probes cheap in the
+# context window when explicitly requested.
+if [ "${1:-}" = "--quiet" ]; then
+  if [ "$#" -ne 1 ]; then
+    echo "usage: $0 [--quiet]" >&2
+    exit 2
+  fi
+  gate_log="$(mktemp)"
+  trap 'rm -f "$gate_log"' EXIT
+  if "$0" >"$gate_log" 2>&1; then
+    echo "agent_gate: ok (quiet; full checks passed)"
+    exit 0
+  fi
+  cat "$gate_log"
+  exit 1
+fi
+
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT"
 
