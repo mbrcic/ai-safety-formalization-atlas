@@ -397,6 +397,22 @@ def test_every_published_declaration_is_inside_the_axiom_audit() -> None:
     assert published <= audited, sorted(published - audited)
 
 
+def test_agent_index_normalizes_formalization_declarations() -> None:
+    """The agent-facing index must not re-expose singular/plural ledger shape."""
+    index = json.loads(
+        (ROOT / "docs/agent/by-id.json").read_text(encoding="utf-8")
+    )
+    formalizations = [
+        formalization
+        for result in index["results_by_id"].values()
+        for formalization in result.get("formalizations", [])
+    ]
+    assert formalizations, "agent index publishes no formalization records"
+    for formalization in formalizations:
+        assert "declaration" not in formalization
+        assert isinstance(formalization["declarations"], list)
+
+
 def test_a_claim_from_another_source_is_admissible(tree: Path) -> None:
     """The ledger must accept a non-survey claim without survey vocabulary.
 

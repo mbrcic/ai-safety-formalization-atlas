@@ -909,12 +909,11 @@ def render_lean(registry: dict) -> str:
 
 
 def compact_formalization(record: dict) -> dict:
-    """Agent-facing formalization fields only (omit build logs / license prose)."""
+    """Agent-facing formalization fields with one normalized declaration list."""
     return {
         "framework": record.get("framework"),
         "relationship": record.get("relationship"),
         "reproduced": record.get("reproduced"),
-        "declaration": record.get("declaration"),
         "declarations": record_declarations(record),
         "module": record.get("module"),
         "repository": record.get("repository"),

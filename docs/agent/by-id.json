@@ -69,7 +69,6 @@
           "framework": "Lean",
           "relationship": "EQUIVALENT",
           "reproduced": true,
-          "declaration": "Impossibility",
           "declarations": [
             "Impossibility"
           ],
@@ -81,7 +80,6 @@
           "framework": "Isabelle/HOL",
           "relationship": "EQUIVALENT",
           "reproduced": true,
-          "declaration": "Arrow",
           "declarations": [
             "Arrow"
           ],
@@ -93,7 +91,6 @@
           "framework": "Isabelle/HOL",
           "relationship": "EQUIVALENT",
           "reproduced": true,
-          "declaration": "dictator",
           "declarations": [
             "dictator"
           ],
@@ -153,7 +150,6 @@
           "framework": "Lean",
           "relationship": "RELATED",
           "reproduced": true,
-          "declaration": "AISafetyAtlas.Preference.exists_planner",
           "declarations": [
             "AISafetyAtlas.Preference.exists_planner"
           ],
@@ -165,7 +161,6 @@
           "framework": "Lean",
           "relationship": "RELATED",
           "reproduced": true,
-          "declaration": "AISafetyAtlas.Preference.exists_reward",
           "declarations": [
             "AISafetyAtlas.Preference.exists_reward"
           ],
@@ -177,7 +172,6 @@
           "framework": "Lean",
           "relationship": "RELATED",
           "reproduced": true,
-          "declaration": "AISafetyAtlas.Preference.negPlanner",
           "declarations": [
             "AISafetyAtlas.Preference.negPlanner"
           ],
@@ -189,7 +183,6 @@
           "framework": "Lean",
           "relationship": "RELATED",
           "reproduced": true,
-          "declaration": "AISafetyAtlas.Preference.lemma_six",
           "declarations": [
             "AISafetyAtlas.Preference.lemma_six"
           ],
@@ -201,7 +194,6 @@
           "framework": "Lean",
           "relationship": "RELATED",
           "reproduced": true,
-          "declaration": "AISafetyAtlas.Preference.Source.ReasonableForF.proposition_seven",
           "declarations": [
             "AISafetyAtlas.Preference.Source.ReasonableForF.proposition_seven"
           ],
@@ -213,7 +205,6 @@
           "framework": "Lean",
           "relationship": "RELATED",
           "reproduced": true,
-          "declaration": "AISafetyAtlas.Preference.Source.ReasonableForF.proposition_eight",
           "declarations": [
             "AISafetyAtlas.Preference.Source.ReasonableForF.proposition_eight"
           ],
@@ -225,7 +216,6 @@
           "framework": "Lean",
           "relationship": "RELATED",
           "reproduced": true,
-          "declaration": "AISafetyAtlas.Preference.ReasonableLanguage.proposition_seven",
           "declarations": [
             "AISafetyAtlas.Preference.ReasonableLanguage.proposition_seven"
           ],
@@ -237,7 +227,6 @@
           "framework": "Lean",
           "relationship": "RELATED",
           "reproduced": true,
-          "declaration": "AISafetyAtlas.Preference.ReasonableLanguage.proposition_eight",
           "declarations": [
             "AISafetyAtlas.Preference.ReasonableLanguage.proposition_eight"
           ],
@@ -249,7 +238,6 @@
           "framework": "Lean",
           "relationship": "RELATED",
           "reproduced": true,
-          "declaration": "AISafetyAtlas.Preference.explanation_complexity_eq_behaviour",
           "declarations": [
             "AISafetyAtlas.Preference.explanation_complexity_eq_behaviour"
           ],
@@ -261,7 +249,6 @@
           "framework": "Lean",
           "relationship": "RELATED",
           "reproduced": true,
-          "declaration": "AISafetyAtlas.Preference.OverrideModel.OverridesFor",
           "declarations": [
             "AISafetyAtlas.Preference.OverrideModel.OverridesFor"
           ],
@@ -273,7 +260,6 @@
           "framework": "Lean",
           "relationship": "RELATED",
           "reproduced": true,
-          "declaration": "AISafetyAtlas.Preference.OverrideModel.Overrides",
           "declarations": [
             "AISafetyAtlas.Preference.OverrideModel.Overrides"
           ],
@@ -362,7 +348,6 @@
           "framework": "Lean",
           "relationship": "EQUIVALENT",
           "reproduced": true,
-          "declaration": "ComputablePred.rice",
           "declarations": [
             "ComputablePred.rice"
           ],
@@ -374,7 +359,6 @@
           "framework": "Lean",
           "relationship": "EXACT",
           "reproduced": true,
-          "declaration": "ComputablePred.rice₂",
           "declarations": [
             "ComputablePred.rice₂"
           ],
@@ -386,7 +370,6 @@
           "framework": "Isabelle/HOL",
           "relationship": "EQUIVALENT",
           "reproduced": true,
-          "declaration": "Rice_2",
           "declarations": [
             "Rice_2"
           ],
@@ -427,7 +410,6 @@
           "framework": "Lean",
           "relationship": "EQUIVALENT",
           "reproduced": true,
-          "declaration": "LO.FirstOrder.Arithmetic.exists_true_but_unprovable_sentence",
           "declarations": [
             "LO.FirstOrder.Arithmetic.exists_true_but_unprovable_sentence"
           ],
@@ -439,7 +421,6 @@
           "framework": "Lean",
           "relationship": "RELATED",
           "reproduced": true,
-          "declaration": "LO.FirstOrder.Arithmetic.consistent_unprovable",
           "declarations": [
             "LO.FirstOrder.Arithmetic.consistent_unprovable"
           ],
@@ -472,7 +453,6 @@
           "framework": "Lean",
           "relationship": "RELATED",
           "reproduced": true,
-          "declaration": "ComputablePred.halting_problem_re",
           "declarations": [
             "ComputablePred.halting_problem_re"
           ],
@@ -484,7 +464,6 @@
           "framework": "Lean",
           "relationship": "EXACT",
           "reproduced": true,
-          "declaration": "ComputablePred.halting_problem",
           "declarations": [
             "ComputablePred.halting_problem"
           ],
@@ -496,7 +475,6 @@
           "framework": "Lean",
           "relationship": "RELATED",
           "reproduced": true,
-          "declaration": "ComputablePred.halting_problem_not_re",
           "declarations": [
             "ComputablePred.halting_problem_not_re"
           ],
@@ -533,7 +511,6 @@
           "framework": "Lean",
           "relationship": "EQUIVALENT",
           "reproduced": true,
-          "declaration": "FormalSystem.chaitinIncompleteness",
           "declarations": [
             "FormalSystem.chaitinIncompleteness"
           ],
@@ -566,7 +543,6 @@
           "framework": "Lean",
           "relationship": "EQUIVALENT",
           "reproduced": true,
-          "declaration": "LO.FirstOrder.Arithmetic.undefinability_of_truth",
           "declarations": [
             "LO.FirstOrder.Arithmetic.undefinability_of_truth"
           ],
@@ -622,7 +598,6 @@
           "framework": "Lean",
           "relationship": "RELATED",
           "reproduced": true,
-          "declaration": "AISafetyAtlas.Learning.no_free_lunch_supervised",
           "declarations": [
             "AISafetyAtlas.Learning.no_free_lunch_supervised"
           ],
@@ -667,7 +642,6 @@
           "framework": "Lean",
           "relationship": "RELATED",
           "reproduced": true,
-          "declaration": "AISafetyAtlas.Learning.no_free_lunch",
           "declarations": [
             "AISafetyAtlas.Learning.no_free_lunch"
           ],
@@ -745,7 +719,6 @@
           "framework": "Lean",
           "relationship": "EQUIVALENT",
           "reproduced": true,
-          "declaration": "LO.FirstOrder.Arithmetic.löb_theorem",
           "declarations": [
             "LO.FirstOrder.Arithmetic.löb_theorem"
           ],
@@ -819,7 +792,6 @@
           "framework": "Lean",
           "relationship": "RELATED",
           "reproduced": true,
-          "declaration": "AISafetyAtlas.Verification.Robot.action_safety_unverifiable",
           "declarations": [
             "AISafetyAtlas.Verification.Robot.action_safety_unverifiable"
           ],
@@ -893,7 +865,6 @@
           "framework": "Lean",
           "relationship": "RELATED",
           "reproduced": true,
-          "declaration": "AISafetyAtlas.Wireheading.CRMDP.Model.everitt_theorem_eleven",
           "declarations": [
             "AISafetyAtlas.Wireheading.CRMDP.Model.everitt_theorem_eleven"
           ],
@@ -949,7 +920,6 @@
           "framework": "Lean",
           "relationship": "RELATED",
           "reproduced": true,
-          "declaration": "AISafetyAtlas.Compositional.Symmetry.Protocol.no_unique_leader_from_symmetric_start",
           "declarations": [
             "AISafetyAtlas.Compositional.Symmetry.Protocol.no_unique_leader_from_symmetric_start"
           ],
@@ -987,7 +957,6 @@
           "framework": "Lean",
           "relationship": null,
           "reproduced": true,
-          "declaration": null,
           "declarations": [],
           "module": "DASHImpossibility.Trilemma",
           "repository": "https://github.com/DrakeCaraker/dash-impossibility-lean",
@@ -1014,7 +983,6 @@
           "framework": "Isabelle/HOL",
           "relationship": null,
           "reproduced": true,
-          "declaration": "Gibbard_Satterthwaite",
           "declarations": [
             "Gibbard_Satterthwaite"
           ],
@@ -1036,7 +1004,6 @@
           "framework": "Lean",
           "relationship": null,
           "reproduced": true,
-          "declaration": "gibbard_satterthwaite",
           "declarations": [
             "gibbard_satterthwaite"
           ],
@@ -1065,7 +1032,6 @@
           "framework": "Isabelle/HOL",
           "relationship": "RELATED",
           "reproduced": true,
-          "declaration": "no_free_lunch_ML",
           "declarations": [
             "no_free_lunch_ML"
           ],
@@ -1087,7 +1053,6 @@
           "framework": "Isabelle/HOL",
           "relationship": "RELATED",
           "reproduced": true,
-          "declaration": "mere_addition",
           "declarations": [
             "mere_addition"
           ],
@@ -1109,7 +1074,6 @@
           "framework": "Isabelle/HOL",
           "relationship": "RELATED",
           "reproduced": true,
-          "declaration": "fundamental_theorem_network_capacity",
           "declarations": [
             "fundamental_theorem_network_capacity"
           ],
@@ -1131,7 +1095,6 @@
           "framework": "Lean",
           "relationship": null,
           "reproduced": true,
-          "declaration": "vNM.vNM_theorem",
           "declarations": [
             "vNM.vNM_theorem"
           ],
@@ -1153,7 +1116,6 @@
           "framework": "Lean",
           "relationship": null,
           "reproduced": false,
-          "declaration": "ArrowTheorem.arrow_theorem",
           "declarations": [
             "ArrowTheorem.arrow_theorem"
           ],
@@ -1175,7 +1137,6 @@
           "framework": "Lean",
           "relationship": null,
           "reproduced": true,
-          "declaration": null,
           "declarations": [
             "completeness",
             "soundness",
@@ -1199,7 +1160,6 @@
           "framework": "Rocq/Coq",
           "relationship": null,
           "reproduced": false,
-          "declaration": null,
           "declarations": [
             "decomposition_theorem",
             "safety_closed",
@@ -1231,7 +1191,6 @@
           "framework": "Lean",
           "relationship": null,
           "reproduced": true,
-          "declaration": null,
           "declarations": [
             "k_safety_iff_finite_self_composition",
             "k_safety_iff_product_self_composition",
@@ -1266,7 +1225,6 @@
           "framework": "Lean",
           "relationship": null,
           "reproduced": true,
-          "declaration": null,
           "declarations": [
             "runFor_eq_of_view_eq",
             "invariant_of_automorphism",
@@ -1298,7 +1256,6 @@
           "framework": "Lean",
           "relationship": null,
           "reproduced": true,
-          "declaration": null,
           "declarations": [
             "rectangle_iff_exchange_closed",
             "coordinate_product_iff_spliceClosed",
@@ -1330,7 +1287,6 @@
           "framework": "Lean",
           "relationship": null,
           "reproduced": true,
-          "declaration": null,
           "declarations": [
             "AgentEquations.value_eq_of_agree_on_window",
             "AgentEquations.truncation_exact",
@@ -1366,7 +1322,6 @@
           "framework": "Lean",
           "relationship": "RELATED",
           "reproduced": true,
-          "declaration": null,
           "declarations": [
             "GoalPreservationSource.Model.selected_matches_initial",
             "GoalPreservationSource.Model.safe_modification",
@@ -1400,7 +1355,6 @@
           "framework": "Lean",
           "relationship": null,
           "reproduced": true,
-          "declaration": null,
           "declarations": [
             "covers_iff_no_collision",
             "not_covers_of_collisionWitness",

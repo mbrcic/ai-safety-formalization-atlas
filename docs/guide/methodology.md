@@ -199,7 +199,11 @@ lead records `repository`, `revision`, `framework`, `license`, `declaration`,
 `relationship_review` (`PENDING`/`EXACT`/`EQUIVALENT`/`RELATED`/`DISTINCT`/
 `UNCLEAR`), and `notes`. A candidate lead never substitutes for a
 `formalizations` record and never changes headline coverage; promotion still
-requires reproduction and statement-level classification.
+requires reproduction and statement-level classification. Its `declaration`
+field is intentionally free-form lead prose: it may name several files or
+theorems while the source is still being inspected. The one-identifier-per-list-
+entry rule below applies only after promotion to a `formalizations` record or
+to `lean_artifact.declarations[*].source_declarations`.
 
 Each entry in `lean_artifact.declarations` classifies one atlas declaration as
 `REFERENCE`, `WRAPPER`, `NEW_PROOF`, or `BRIDGE` and records its source
