@@ -17,7 +17,10 @@ Run: `python3 -m pytest tests/ -q`
 from __future__ import annotations
 
 import json
+import os
 import re
+import tempfile
+from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 import shutil
 import subprocess
@@ -315,32 +318,50 @@ METADATA_CASES: list[tuple[str, str, Mutation, str]] = [
 ]
 
 
-@pytest.mark.parametrize(
-    "target,mutation,expected",
-    [case[1:] for case in CONTAINER_CASES],
-    ids=[case[0] for case in CONTAINER_CASES],
-)
-def test_malformed_container_is_reported_not_raised(
-    mutated: Callable[[str, Mutation], subprocess.CompletedProcess[str]],
-    target: str,
-    mutation: Mutation,
-    expected: str,
-) -> None:
-    _assert_clean_rejection(mutated(target, mutation), expected)
+def _check_cases(cases: list[tuple[str, str, Mutation, str]]) -> None:
+    """Run each case against its own copy of the tree, concurrently.
+
+    A case mutates a ledger file, so cases cannot share a tree. Giving each its
+    own copy costs about 10 ms and lets the validator runs — the real expense,
+    about 0.18 s each — proceed in parallel instead of end to end. Failures are
+    collected and reported together, so one bad case does not mask the rest.
+    """
+    def check(case: tuple[str, str, Mutation, str]) -> str | None:
+        label, target, mutation, expected = case
+        with tempfile.TemporaryDirectory() as raw:
+            work = Path(raw) / "repo"
+            shutil.copytree(
+                ROOT, work, symlinks=True,
+                ignore=shutil.ignore_patterns(".lake", ".git", "vendor", "tests"),
+            )
+            path = work / target
+            data = json.loads(path.read_text(encoding="utf-8"))
+            mutation(data)
+            path.write_text(
+                json.dumps(data, indent=2, ensure_ascii=False) + "\n", encoding="utf-8"
+            )
+            done = subprocess.run(
+                [sys.executable, "scripts/validate_registry.py"],
+                cwd=work, capture_output=True, text=True,
+            )
+        try:
+            _assert_clean_rejection(done, expected)
+        except AssertionError as error:
+            return f"{label}: {error}"
+        return None
+
+    workers = max(1, min(os.cpu_count() or 1, 8, len(cases)))
+    with ThreadPoolExecutor(max_workers=workers) as pool:
+        failures = [problem for problem in pool.map(check, cases) if problem]
+    assert not failures, "\n\n".join(failures)
 
 
-@pytest.mark.parametrize(
-    "target,mutation,expected",
-    [case[1:] for case in METADATA_CASES],
-    ids=[case[0] for case in METADATA_CASES],
-)
-def test_metadata_field_of_the_wrong_type_is_rejected(
-    mutated: Callable[[str, Mutation], subprocess.CompletedProcess[str]],
-    target: str,
-    mutation: Mutation,
-    expected: str,
-) -> None:
-    _assert_clean_rejection(mutated(target, mutation), expected)
+def test_malformed_containers_are_reported_not_raised() -> None:
+    _check_cases(CONTAINER_CASES)
+
+
+def test_metadata_fields_of_the_wrong_type_are_rejected() -> None:
+    _check_cases(METADATA_CASES)
 
 
 def test_generator_points_at_the_validator_instead_of_crashing(tree: Path) -> None:

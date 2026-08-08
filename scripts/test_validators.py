@@ -16,6 +16,8 @@ that copy.
 from __future__ import annotations
 
 import json
+import os
+from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 import shutil
 import subprocess
@@ -634,24 +636,18 @@ CASES = [
 ]
 
 
-def main() -> None:
-    failures: list[str] = []
+def run_cases(cases: list[tuple]) -> list[str]:
+    """Run a slice of the case list against a private copy of the tree.
 
+    Each worker gets its own tree because a case mutates a ledger file and
+    restores it afterwards; sharing one tree would make the cases race. The copy
+    costs about 10 ms, which is nothing next to the validator runs it enables to
+    proceed in parallel.
+    """
+    failures: list[str] = []
     with tempfile.TemporaryDirectory() as raw:
         tmp = build_tree(Path(raw))
-
-        # Control: the unmutated copy must pass, otherwise a rejection below
-        # proves nothing about the rule it claims to exercise.
-        for script in (
-            "validate_registry.py",
-            "validate_conjectures.py",
-            "validate_tasks.py",
-        ):
-            code, output = run(tmp, script)
-            if code != 0:
-                failures.append(f"control: {script} rejected valid data: {output}")
-
-        for label, script, target, change, expected in CASES:
+        for label, script, target, change, expected in cases:
             original = (tmp / target).read_text(encoding="utf-8")
             try:
                 mutate(tmp, target, change)
@@ -664,14 +660,46 @@ def main() -> None:
                     )
             finally:
                 (tmp / target).write_text(original, encoding="utf-8")
+    return failures
 
-    for failure in failures:
+
+def run_control() -> list[str]:
+    """The unmutated copy must pass, or every rejection below proves nothing."""
+    failures: list[str] = []
+    with tempfile.TemporaryDirectory() as raw:
+        tmp = build_tree(Path(raw))
+        for script in (
+            "validate_registry.py",
+            "validate_conjectures.py",
+            "validate_tasks.py",
+        ):
+            code, output = run(tmp, script)
+            if code != 0:
+                failures.append(f"control: {script} rejected valid data: {output}")
+    return failures
+
+
+def main() -> None:
+    # The work is a subprocess per case, so threads are enough — the GIL is
+    # released while each validator runs. Capped because the win flattens once
+    # workers outnumber the cases each would carry.
+    workers = max(1, min(os.cpu_count() or 1, 8, len(CASES)))
+    chunks: list[list[tuple]] = [CASES[index::workers] for index in range(workers)]
+
+    failures: list[str] = []
+    with ThreadPoolExecutor(max_workers=workers + 1) as pool:
+        pending = [pool.submit(run_control)]
+        pending += [pool.submit(run_cases, chunk) for chunk in chunks if chunk]
+        for future in pending:
+            failures.extend(future.result())
+
+    for failure in sorted(failures):
         print(f"validator regression FAILED — {failure}", file=sys.stderr)
     if failures:
         raise SystemExit(1)
     print(
         f"validator regressions ok: {len(CASES)} invalid ledgers rejected, "
-        "valid ledgers accepted"
+        f"valid ledgers accepted ({workers} workers)"
     )
 
 
