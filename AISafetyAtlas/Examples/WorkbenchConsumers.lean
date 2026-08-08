@@ -91,6 +91,10 @@ example (π : Bool) :
       binaryCorruption]
   simpa [hw] using h
 
+/-! The gate used by the preference bridge has a concrete inhabitant. -/
+example : HalfMaximalRegretBound binaryCorruption.toRegretModel :=
+  binaryCorruption.halfMaximalRegretBound
+
 /-! ## Preference consumer: unidentifiability + regret certificate -/
 
 /--

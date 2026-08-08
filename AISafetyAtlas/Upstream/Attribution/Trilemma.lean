@@ -38,7 +38,7 @@ public def inGroup (fs : FeatureIndex) (ℓ : Fin fs.L) (j : Fin fs.P) : Prop :=
   fs.groupOf j = ℓ
 
 /-- Rashomon: within a group, models exist ranking two features oppositely. -/
-public def RashomonProperty
+@[expose] public def RashomonProperty
     (fs : FeatureIndex)
     (Model : Type)
     (attribution : Fin fs.P → Model → ℝ) : Prop :=

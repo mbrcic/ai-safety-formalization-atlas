@@ -135,6 +135,40 @@ def explicit_lean_build_targets() -> list[str]:
     ]
 
 
+def validate_gate_witnesses() -> None:
+    """Keep published theorem gates paired with compiled concrete witnesses."""
+    witness_files = {
+        "AISafetyAtlas/Examples/NonVacuity.lean": [
+            r"example\s*:\s*AISafetyAtlas\.Verification\.Nontrivial\b",
+            r"example\s*:\s*AISafetyAtlas\.Verification\.AgentBehavior\.SpecNontrivial\b",
+            r"example\s*:\s*AISafetyAtlas\.Explainability\.RashomonProperty\b",
+        ],
+        "AISafetyAtlas/Examples/WorkbenchConsumers.lean": [
+            r"example\s*:\s*HalfMaximalRegretBound\b",
+        ],
+    }
+    targets = set(explicit_lean_build_targets())
+    target_requirements = {
+        "AISafetyAtlas.Examples.NonVacuity",
+        "AISafetyAtlas.Examples.WorkbenchConsumers",
+    }
+    require(
+        target_requirements <= targets,
+        "gate-witness modules are not explicit Lean build targets",
+    )
+    for relative_path, patterns in witness_files.items():
+        path = ROOT / relative_path
+        require(path.is_file(), f"missing gate-witness file: {relative_path}")
+        source = lean_code_without_comments_or_strings(
+            path.read_text(encoding="utf-8")
+        )
+        for pattern in patterns:
+            require(
+                re.search(pattern, source) is not None,
+                f"missing compiled gate witness in {relative_path}: {pattern}",
+            )
+
+
 def validate_scanner_examples() -> None:
     forbidden_examples = [
         "theorem x : True := by sorry",
@@ -202,6 +236,7 @@ def validate_lean_build_closure(lean_files: list[Path]) -> None:
 
 def main() -> None:
     validate_scanner_examples()
+    validate_gate_witnesses()
 
     required_files = [
         "README.md",
@@ -225,6 +260,8 @@ def main() -> None:
         "AISafetyAtlas/Examples/PublicAPI.lean",
         "AISafetyAtlas/Examples/Registry.lean",
         "AISafetyAtlas/Examples/Robot.lean",
+        "AISafetyAtlas/Examples/NonVacuity.lean",
+        "AISafetyAtlas/Examples/WorkbenchConsumers.lean",
         "AISafetyAtlas/Verification/Robot.lean",
         "AISafetyAtlas/Upstream/Arrow.lean",
         "AISafetyAtlas/Examples/HaltingExample.lean",
