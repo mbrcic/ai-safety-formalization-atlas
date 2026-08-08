@@ -85,13 +85,23 @@ def main() -> None:
     except (OSError, json.JSONDecodeError) as error:
         fail(str(error))
 
+    data = require_mapping(data, "conjectures.yaml must contain an object")
+    registry = require_mapping(registry, "registry.yaml must contain an object")
     if data.get("schema_version") != 1:
         fail("conjectures.yaml must use schema_version 1")
     entries = data.get("conjectures")
     if not isinstance(entries, list):
         fail("conjectures must be a list")
 
-    tag_values = set(registry.get("vocabulary", {}).get("tag") or [])
+    vocabulary = require_mapping(
+        registry.get("vocabulary", {}), "registry vocabulary must be an object"
+    )
+    raw_tags = vocabulary.get("tag")
+    if not isinstance(raw_tags, list) or any(
+        not isinstance(tag, str) or not tag.strip() for tag in raw_tags
+    ):
+        fail("registry vocabulary.tag must be a list of non-empty strings")
+    tag_values = set(raw_tags)
     if not tag_values:
         fail("registry vocabulary.tag must be populated before conjecture tags validate")
 
@@ -146,7 +156,7 @@ def main() -> None:
             if not nonempty_text(entry[field]):
                 fail(f"{cid} must record a non-empty {field}")
 
-        if entry["status"] not in STATUS_VALUES:
+        if not isinstance(entry["status"], str) or entry["status"] not in STATUS_VALUES:
             fail(f"{cid} has unknown status {entry['status']!r}")
         # Every terminal status carries its reason, withdrawal included. A
         # conjecture that leaves the queue without a recorded argument is an
@@ -162,6 +172,8 @@ def main() -> None:
         tags = entry["tags"]
         if not isinstance(tags, list) or not tags:
             fail(f"{cid} must carry at least one tag")
+        if any(not isinstance(tag, str) or not tag.strip() for tag in tags):
+            fail(f"{cid} tags must be non-empty strings")
         unknown_tags = [tag for tag in tags if tag not in tag_values]
         if unknown_tags:
             fail(f"{cid} has tags outside the vocabulary: {sorted(unknown_tags)}")

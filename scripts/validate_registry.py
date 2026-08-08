@@ -56,6 +56,37 @@ def require_text_list(value: object, message: str) -> list[str]:
     return cast("list[str]", value)
 
 
+def declaration_name(value: object, message: str) -> str:
+    name = require_text(value, message)
+    if any(character.isspace() for character in name) or any(
+        delimiter in name for delimiter in (";", ",")
+    ):
+        fail(
+            f"{message}; declaration names must be one identifier per list entry"
+        )
+    return name
+
+
+def declaration_names(value: object, message: str) -> list[str]:
+    """Validate declaration-name containers and reject packed prose.
+
+    A semicolon-separated blob defeats per-declaration provenance and makes
+    generated views unable to link or check individual names.  Keep the
+    delimiter out of the data model instead of trying to split arbitrary prose
+    in the validator.
+    """
+    names = require_text_list(value, message)
+    if not names:
+        fail(message)
+    if any(
+        any(character.isspace() for character in name)
+        or any(delimiter in name for delimiter in (";", ","))
+        for name in names
+    ):
+        fail(f"{message}; declaration names must be one identifier per list entry")
+    return names
+
+
 def valid_http_url(value: object) -> bool:
     if not isinstance(value, str) or any(character.isspace() for character in value):
         return False
@@ -217,9 +248,15 @@ def validate_candidate_formalizations(result_id: str, result: dict) -> None:
                 f"{result_id} candidate lead {index} must record {field} as "
                 "a non-empty string",
             )
-        if lead["inspection_state"] not in CANDIDATE_INSPECTION_STATES:
+        if (
+            not isinstance(lead["inspection_state"], str)
+            or lead["inspection_state"] not in CANDIDATE_INSPECTION_STATES
+        ):
             fail(f"{result_id} candidate lead {index} has unknown inspection_state {lead['inspection_state']!r}")
-        if lead["relationship_review"] not in CANDIDATE_REVIEW_STATES:
+        if (
+            not isinstance(lead["relationship_review"], str)
+            or lead["relationship_review"] not in CANDIDATE_REVIEW_STATES
+        ):
             fail(f"{result_id} candidate lead {index} has unknown relationship_review {lead['relationship_review']!r}")
 
 
@@ -367,7 +404,6 @@ def main() -> None:
     }
     claim_formalization_fields = required_formalization_fields | {
         "module",
-        "declaration",
         "relationship",
     }
     required_artifact_declaration_fields = {
@@ -557,7 +593,13 @@ def main() -> None:
             fail(f"{result_id} root_import must be boolean")
         if result.get("root_import") and result["lean_artifact"] is None:
             fail(f"{result_id} root_import requires an atlas declaration")
-        if is_claim and result["ai_bridge_status"] not in bridge_status_values:
+        if (
+            is_claim
+            and (
+                not isinstance(result["ai_bridge_status"], str)
+                or result["ai_bridge_status"] not in bridge_status_values
+            )
+        ):
             fail(f"{result_id} has unknown ai_bridge_status {result['ai_bridge_status']!r}")
         tags = result["tags"]
         if not isinstance(tags, list) or not tags:
@@ -712,7 +754,9 @@ def main() -> None:
             delta = record.get("scope_delta")
             if not (public or interpretation_affecting):
                 continue
-            declaration = record.get("declaration", "<unnamed>")
+            declaration = record.get(
+                "declaration", record.get("declarations", "<unnamed>")
+            )
             if not isinstance(delta, dict):
                 fail(
                     f"{result_id} RELATED record {declaration} is public or "
@@ -791,10 +835,10 @@ def main() -> None:
                     or declaration["type"] not in artifact_values
                 ):
                     fail(f"{result_id} has unknown Lean artifact type")
-                if not isinstance(declaration["atlas_declaration"], str) or not declaration[
-                    "atlas_declaration"
-                ].strip():
-                    fail(f"{result_id} has an unnamed Lean artifact declaration")
+                declaration_name(
+                    declaration["atlas_declaration"],
+                    f"{result_id} has an unnamed Lean artifact declaration",
+                )
                 # One declaration, one owning row. A declaration named by two
                 # rows has no answer to "which result does this prove?", and
                 # every consumer that maps declaration -> result silently picks
@@ -820,13 +864,11 @@ def main() -> None:
                         f"{result_id} Lean artifact declaration source_declarations "
                         "must be a list"
                     )
-                if any(
-                    not isinstance(source, str) or not source.strip()
-                    for source in declaration["source_declarations"]
-                ):
-                    fail(
-                        f"{result_id} Lean artifact declaration source_declarations "
-                        "must contain non-empty strings"
+                if declaration["source_declarations"]:
+                    declaration_names(
+                        declaration["source_declarations"],
+                        f"{result_id} Lean artifact declaration "
+                        "source_declarations must contain non-empty names",
                     )
                 if declaration["type"] != "NEW_PROOF" and not declaration["source_declarations"]:
                     fail(f"{result_id} Lean artifact declaration lacks sources")
@@ -843,7 +885,7 @@ def main() -> None:
                 fail(f"{result_id} formalization framework must be a non-empty string")
             if not isinstance(record["version"], str) or not record["version"].strip():
                 fail(f"{result_id} formalization version must be a non-empty string")
-            for optional_field in ("module", "atlas_module", "declaration"):
+            for optional_field in ("module", "atlas_module"):
                 if optional_field in record and (
                     not isinstance(record[optional_field], str)
                     or not record[optional_field].strip()
@@ -868,6 +910,30 @@ def main() -> None:
                     )
                 if "module" in record:
                     fail(f"{result_id} formalization must use module or modules, not both")
+            has_declaration = "declaration" in record
+            has_declarations = "declarations" in record
+            if has_declaration and has_declarations:
+                fail(
+                    f"{result_id} formalization must use declaration or declarations, "
+                    "not both"
+                )
+            if is_claim and not (has_declaration or has_declarations):
+                fail(
+                    f"{result_id} formalization must record declaration or declarations"
+                )
+            if has_declaration:
+                record_declarations = declaration_names(
+                    [record["declaration"]],
+                    f"{result_id} formalization declaration must be a non-empty name",
+                )
+            elif has_declarations:
+                record_declarations = declaration_names(
+                    record["declarations"],
+                    f"{result_id} formalization declarations must be a non-empty list "
+                    "of names",
+                )
+            else:
+                record_declarations = []
             if "upstream_module" in record:
                 fail(
                     f"{result_id} uses deprecated upstream_module; use module for "
@@ -893,13 +959,14 @@ def main() -> None:
                 fail(f"{result_id} formalization has an invalid repository URL")
             if not isinstance(record["reproduced"], bool):
                 fail(f"{result_id} formalization reproduced flag must be boolean")
-            provenance_fields = (
-                ("version", "module", "declaration") if is_claim else ("version",)
-            )
-            if not all(record.get(field) for field in provenance_fields):
+            if is_claim and (
+                not record.get("version")
+                or not record.get("module")
+                or not record_declarations
+            ):
                 fail(f"{result_id} formalization has incomplete provenance")
             if record["repository"] == PROJECT_REPOSITORY:
-                if not record.get("module") or not record.get("declaration"):
+                if not record.get("module") or not record_declarations:
                     fail(
                         f"{result_id} in-repository formalization must record "
                         "module and declaration"
@@ -942,7 +1009,7 @@ def main() -> None:
                 str(record["version"]),
                 str(record.get("module", "")),
                 str(record.get("modules", "")),
-                str(record.get("declaration", "")),
+                str(record_declarations),
             )
             if formalization_key in formalization_keys:
                 fail(f"{result_id} contains a duplicate formalization record")
@@ -969,10 +1036,18 @@ def main() -> None:
                 # `build_command: "echo done"` on an external record recorded a
                 # reproduction the ledger had no way to doubt.
                 tokens = command.split()
+                if not tokens:
+                    fail(f"{result_id} reproduction command must not be empty")
                 command_path = tokens[0]
-                if command_path.startswith("scripts/"):
-                    script = ROOT / command_path
-                    if not script.is_file() or not os.access(script, os.X_OK):
+                script_path = Path(command_path)
+                if (
+                    script_path.parent == Path("scripts")
+                    and script_path.name.startswith("reproduce_")
+                    and script_path.suffix == ".sh"
+                ):
+                    script = (ROOT / script_path).resolve()
+                    root = ROOT.resolve()
+                    if root not in script.parents or not script.is_file() or not os.access(script, os.X_OK):
                         fail(
                             f"{result_id} reproduction command references a missing "
                             "or nonexecutable script"

@@ -238,7 +238,6 @@ def main() -> None:
         "docs/status/formalization-status.md",
         "docs/status/sources/brcic-yampolskiy-2023.md",
         "docs/status/landscape-index.md",
-        "docs/status/sources/brcic-yampolskiy-2023.md",
         "docs/agent/INDEX.md",
         "docs/agent/by-id.json",
         "docs/agent/search-summary.json",

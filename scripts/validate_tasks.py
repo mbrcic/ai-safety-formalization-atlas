@@ -59,14 +59,27 @@ def main() -> None:
     except (OSError, json.JSONDecodeError) as error:
         fail(str(error))
 
+    data = require_mapping(data, "tasks.yaml must contain an object")
+    registry = require_mapping(registry, "registry.yaml must contain an object")
     if data.get("schema_version") != 1:
         fail("tasks.yaml must use schema_version 1")
     for field in ("preamble", "footer"):
         if not isinstance(data.get(field), str) or not data[field].strip():
             fail(f"tasks.yaml must carry a non-empty {field}")
 
-    result_ids = {result["id"] for result in registry["results"]}
-    landscape_ids = {r["id"] for r in registry["results"] if r["id"].startswith("LAND-")}
+    results = registry.get("results")
+    if not isinstance(results, list):
+        fail("registry results must be a list")
+    result_ids: set[str] = set()
+    landscape_ids: set[str] = set()
+    for index, result in enumerate(results):
+        result = require_mapping(result, f"registry result {index} must be an object")
+        result_id = result.get("id")
+        if not isinstance(result_id, str) or not result_id.strip():
+            fail(f"registry result {index} id must be a non-empty string")
+        result_ids.add(result_id)
+        if result_id.startswith("LAND-"):
+            landscape_ids.add(result_id)
 
     tasks = data.get("tasks")
     if not isinstance(tasks, list) or not tasks:
@@ -89,9 +102,9 @@ def main() -> None:
         for field in ("title", "rung", "body"):
             if not isinstance(task[field], str) or not task[field].strip():
                 fail(f"{tid} must carry a non-empty {field}")
-        if task["size"] not in SIZES:
+        if not isinstance(task["size"], str) or task["size"] not in SIZES:
             fail(f"{tid} has unknown size {task['size']!r}")
-        if task["status"] not in STATUSES:
+        if not isinstance(task["status"], str) or task["status"] not in STATUSES:
             fail(f"{tid} has unknown status {task['status']!r}")
         if task["heading_level"] not in (2, 3):
             fail(f"{tid} heading_level must be 2 or 3")

@@ -70,6 +70,9 @@
           "relationship": "EQUIVALENT",
           "reproduced": true,
           "declaration": "Impossibility",
+          "declarations": [
+            "Impossibility"
+          ],
           "module": "Arrow/Arrow.lean; vendored as AISafetyAtlas.Upstream.Arrow",
           "repository": "https://github.com/ChihChengLiang/arrow",
           "version": "758398779decc66d2830a70b02597b0f22030181"
@@ -79,6 +82,9 @@
           "relationship": "EQUIVALENT",
           "reproduced": true,
           "declaration": "Arrow",
+          "declarations": [
+            "Arrow"
+          ],
           "module": "Thys/Arrow_Order.thy; session ArrowImpossibilityGS",
           "repository": "https://www.isa-afp.org/entries/ArrowImpossibilityGS.html",
           "version": "AFP release 2026-02-06 (SHA256 8174c738b42203100170ff25f3c9fc2c6d16d8556fbaff205c0eaa98a3813da7)"
@@ -88,6 +94,9 @@
           "relationship": "EQUIVALENT",
           "reproduced": true,
           "declaration": "dictator",
+          "declarations": [
+            "dictator"
+          ],
           "module": "Thys/Arrow_Utility.thy; session ArrowImpossibilityGS",
           "repository": "https://www.isa-afp.org/entries/ArrowImpossibilityGS.html",
           "version": "AFP release 2026-02-06 (SHA256 8174c738b42203100170ff25f3c9fc2c6d16d8556fbaff205c0eaa98a3813da7)"
@@ -145,6 +154,9 @@
           "relationship": "RELATED",
           "reproduced": true,
           "declaration": "AISafetyAtlas.Preference.exists_planner",
+          "declarations": [
+            "AISafetyAtlas.Preference.exists_planner"
+          ],
           "module": "AISafetyAtlas.Preference",
           "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
           "version": "IN_TREE"
@@ -154,6 +166,9 @@
           "relationship": "RELATED",
           "reproduced": true,
           "declaration": "AISafetyAtlas.Preference.exists_reward",
+          "declarations": [
+            "AISafetyAtlas.Preference.exists_reward"
+          ],
           "module": "AISafetyAtlas.Preference",
           "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
           "version": "IN_TREE"
@@ -163,6 +178,9 @@
           "relationship": "RELATED",
           "reproduced": true,
           "declaration": "AISafetyAtlas.Preference.negPlanner",
+          "declarations": [
+            "AISafetyAtlas.Preference.negPlanner"
+          ],
           "module": "AISafetyAtlas.Preference",
           "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
           "version": "IN_TREE"
@@ -172,6 +190,9 @@
           "relationship": "RELATED",
           "reproduced": true,
           "declaration": "AISafetyAtlas.Preference.lemma_six",
+          "declarations": [
+            "AISafetyAtlas.Preference.lemma_six"
+          ],
           "module": "AISafetyAtlas.Preference",
           "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
           "version": "IN_TREE"
@@ -181,6 +202,9 @@
           "relationship": "RELATED",
           "reproduced": true,
           "declaration": "AISafetyAtlas.Preference.Source.ReasonableForF.proposition_seven",
+          "declarations": [
+            "AISafetyAtlas.Preference.Source.ReasonableForF.proposition_seven"
+          ],
           "module": "AISafetyAtlas.Preference.SourceComplexity",
           "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
           "version": "IN_TREE"
@@ -190,6 +214,9 @@
           "relationship": "RELATED",
           "reproduced": true,
           "declaration": "AISafetyAtlas.Preference.Source.ReasonableForF.proposition_eight",
+          "declarations": [
+            "AISafetyAtlas.Preference.Source.ReasonableForF.proposition_eight"
+          ],
           "module": "AISafetyAtlas.Preference.SourceComplexity",
           "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
           "version": "IN_TREE"
@@ -199,6 +226,9 @@
           "relationship": "RELATED",
           "reproduced": true,
           "declaration": "AISafetyAtlas.Preference.ReasonableLanguage.proposition_seven",
+          "declarations": [
+            "AISafetyAtlas.Preference.ReasonableLanguage.proposition_seven"
+          ],
           "module": "AISafetyAtlas.Preference.Reasonable",
           "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
           "version": "IN_TREE"
@@ -208,6 +238,9 @@
           "relationship": "RELATED",
           "reproduced": true,
           "declaration": "AISafetyAtlas.Preference.ReasonableLanguage.proposition_eight",
+          "declarations": [
+            "AISafetyAtlas.Preference.ReasonableLanguage.proposition_eight"
+          ],
           "module": "AISafetyAtlas.Preference.Reasonable",
           "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
           "version": "IN_TREE"
@@ -217,6 +250,9 @@
           "relationship": "RELATED",
           "reproduced": true,
           "declaration": "AISafetyAtlas.Preference.explanation_complexity_eq_behaviour",
+          "declarations": [
+            "AISafetyAtlas.Preference.explanation_complexity_eq_behaviour"
+          ],
           "module": "AISafetyAtlas.Preference.Complexity",
           "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
           "version": "IN_TREE"
@@ -226,6 +262,9 @@
           "relationship": "RELATED",
           "reproduced": true,
           "declaration": "AISafetyAtlas.Preference.OverrideModel.OverridesFor",
+          "declarations": [
+            "AISafetyAtlas.Preference.OverrideModel.OverridesFor"
+          ],
           "module": "AISafetyAtlas.Preference.Override",
           "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
           "version": "IN_TREE"
@@ -235,6 +274,9 @@
           "relationship": "RELATED",
           "reproduced": true,
           "declaration": "AISafetyAtlas.Preference.OverrideModel.Overrides",
+          "declarations": [
+            "AISafetyAtlas.Preference.OverrideModel.Overrides"
+          ],
           "module": "AISafetyAtlas.Preference.Override",
           "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
           "version": "IN_TREE"
@@ -321,6 +363,9 @@
           "relationship": "EQUIVALENT",
           "reproduced": true,
           "declaration": "ComputablePred.rice",
+          "declarations": [
+            "ComputablePred.rice"
+          ],
           "module": "Mathlib.Computability.Halting",
           "repository": "https://github.com/leanprover-community/mathlib4",
           "version": "fabf563a7c95a166b8d7b6efca11c8b4dc9d911f"
@@ -330,6 +375,9 @@
           "relationship": "EXACT",
           "reproduced": true,
           "declaration": "ComputablePred.rice₂",
+          "declarations": [
+            "ComputablePred.rice₂"
+          ],
           "module": "Mathlib.Computability.Halting",
           "repository": "https://github.com/leanprover-community/mathlib4",
           "version": "fabf563a7c95a166b8d7b6efca11c8b4dc9d911f"
@@ -339,6 +387,9 @@
           "relationship": "EQUIVALENT",
           "reproduced": true,
           "declaration": "Rice_2",
+          "declarations": [
+            "Rice_2"
+          ],
           "module": "RecEnSet.thy; session Recursion-Theory-I",
           "repository": "https://www.isa-afp.org/entries/Recursion-Theory-I.html",
           "version": "AFP release 2026-02-06 (SHA256 b5314c859ce3b2876ef01151f394c1a5e6b234b0fc6563698dbb0250c73cd3f8)"
@@ -377,6 +428,9 @@
           "relationship": "EQUIVALENT",
           "reproduced": true,
           "declaration": "LO.FirstOrder.Arithmetic.exists_true_but_unprovable_sentence",
+          "declarations": [
+            "LO.FirstOrder.Arithmetic.exists_true_but_unprovable_sentence"
+          ],
           "module": "Foundation.FirstOrder.Incompleteness.First",
           "repository": "https://github.com/FormalizedFormalLogic/Foundation",
           "version": "b47cf447255addf88a5d72781d0d29641948eb6e"
@@ -386,6 +440,9 @@
           "relationship": "RELATED",
           "reproduced": true,
           "declaration": "LO.FirstOrder.Arithmetic.consistent_unprovable",
+          "declarations": [
+            "LO.FirstOrder.Arithmetic.consistent_unprovable"
+          ],
           "module": "Foundation.FirstOrder.Incompleteness.Second",
           "repository": "https://github.com/FormalizedFormalLogic/Foundation",
           "version": "b47cf447255addf88a5d72781d0d29641948eb6e"
@@ -416,6 +473,9 @@
           "relationship": "RELATED",
           "reproduced": true,
           "declaration": "ComputablePred.halting_problem_re",
+          "declarations": [
+            "ComputablePred.halting_problem_re"
+          ],
           "module": "Mathlib.Computability.Halting",
           "repository": "https://github.com/leanprover-community/mathlib4",
           "version": "fabf563a7c95a166b8d7b6efca11c8b4dc9d911f"
@@ -425,6 +485,9 @@
           "relationship": "EXACT",
           "reproduced": true,
           "declaration": "ComputablePred.halting_problem",
+          "declarations": [
+            "ComputablePred.halting_problem"
+          ],
           "module": "Mathlib.Computability.Halting",
           "repository": "https://github.com/leanprover-community/mathlib4",
           "version": "fabf563a7c95a166b8d7b6efca11c8b4dc9d911f"
@@ -434,6 +497,9 @@
           "relationship": "RELATED",
           "reproduced": true,
           "declaration": "ComputablePred.halting_problem_not_re",
+          "declarations": [
+            "ComputablePred.halting_problem_not_re"
+          ],
           "module": "Mathlib.Computability.Halting",
           "repository": "https://github.com/leanprover-community/mathlib4",
           "version": "fabf563a7c95a166b8d7b6efca11c8b4dc9d911f"
@@ -468,6 +534,9 @@
           "relationship": "EQUIVALENT",
           "reproduced": true,
           "declaration": "FormalSystem.chaitinIncompleteness",
+          "declarations": [
+            "FormalSystem.chaitinIncompleteness"
+          ],
           "module": "KolmogorovMathlib.Complexity.Chaitin",
           "repository": "https://github.com/AlexeyMilovanov/kolmogorov-complexity-lean",
           "version": "005ac4c81eefe09642ef561057199d489cd79485"
@@ -498,6 +567,9 @@
           "relationship": "EQUIVALENT",
           "reproduced": true,
           "declaration": "LO.FirstOrder.Arithmetic.undefinability_of_truth",
+          "declarations": [
+            "LO.FirstOrder.Arithmetic.undefinability_of_truth"
+          ],
           "module": "Foundation.FirstOrder.Incompleteness.Tarski",
           "repository": "https://github.com/FormalizedFormalLogic/Foundation",
           "version": "b47cf447255addf88a5d72781d0d29641948eb6e"
@@ -551,6 +623,9 @@
           "relationship": "RELATED",
           "reproduced": true,
           "declaration": "AISafetyAtlas.Learning.no_free_lunch_supervised",
+          "declarations": [
+            "AISafetyAtlas.Learning.no_free_lunch_supervised"
+          ],
           "module": "AISafetyAtlas.Learning",
           "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
           "version": "IN_TREE"
@@ -593,6 +668,9 @@
           "relationship": "RELATED",
           "reproduced": true,
           "declaration": "AISafetyAtlas.Learning.no_free_lunch",
+          "declarations": [
+            "AISafetyAtlas.Learning.no_free_lunch"
+          ],
           "module": "AISafetyAtlas.Learning",
           "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
           "version": "IN_TREE"
@@ -668,6 +746,9 @@
           "relationship": "EQUIVALENT",
           "reproduced": true,
           "declaration": "LO.FirstOrder.Arithmetic.löb_theorem",
+          "declarations": [
+            "LO.FirstOrder.Arithmetic.löb_theorem"
+          ],
           "module": "Foundation.FirstOrder.Incompleteness.Löb",
           "repository": "https://github.com/FormalizedFormalLogic/Foundation",
           "version": "b47cf447255addf88a5d72781d0d29641948eb6e"
@@ -739,6 +820,9 @@
           "relationship": "RELATED",
           "reproduced": true,
           "declaration": "AISafetyAtlas.Verification.Robot.action_safety_unverifiable",
+          "declarations": [
+            "AISafetyAtlas.Verification.Robot.action_safety_unverifiable"
+          ],
           "module": "AISafetyAtlas.Verification.Robot",
           "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
           "version": "IN_TREE"
@@ -810,6 +894,9 @@
           "relationship": "RELATED",
           "reproduced": true,
           "declaration": "AISafetyAtlas.Wireheading.CRMDP.Model.everitt_theorem_eleven",
+          "declarations": [
+            "AISafetyAtlas.Wireheading.CRMDP.Model.everitt_theorem_eleven"
+          ],
           "module": "AISafetyAtlas.Wireheading.CRMDP",
           "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
           "version": "IN_TREE"
@@ -863,6 +950,9 @@
           "relationship": "RELATED",
           "reproduced": true,
           "declaration": "AISafetyAtlas.Compositional.Symmetry.Protocol.no_unique_leader_from_symmetric_start",
+          "declarations": [
+            "AISafetyAtlas.Compositional.Symmetry.Protocol.no_unique_leader_from_symmetric_start"
+          ],
           "module": "AISafetyAtlas.Compositional.Symmetry",
           "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
           "version": "IN_TREE"
@@ -898,6 +988,7 @@
           "relationship": null,
           "reproduced": true,
           "declaration": null,
+          "declarations": [],
           "module": "DASHImpossibility.Trilemma",
           "repository": "https://github.com/DrakeCaraker/dash-impossibility-lean",
           "version": "7ec3ef9813a7642fdabe5b73c71d1bed4d5488e2"
@@ -924,6 +1015,9 @@
           "relationship": null,
           "reproduced": true,
           "declaration": "Gibbard_Satterthwaite",
+          "declarations": [
+            "Gibbard_Satterthwaite"
+          ],
           "module": "Thys/GS.thy",
           "repository": "https://www.isa-afp.org/entries/ArrowImpossibilityGS.html",
           "version": "AFP release 2026-02-06; archive SHA-256 8174c738b42203100170ff25f3c9fc2c6d16d8556fbaff205c0eaa98a3813da7"
@@ -943,6 +1037,9 @@
           "relationship": null,
           "reproduced": true,
           "declaration": "gibbard_satterthwaite",
+          "declarations": [
+            "gibbard_satterthwaite"
+          ],
           "module": "SocialChoice.Impossibilities.GibbardSatterthwaite.Main",
           "repository": "https://github.com/DominikPeters/SocialChoiceLean",
           "version": "mbrcic/SocialChoiceLean port/lean-4.31 @ 74f491b (Mathlib/Lean v4.31.0)"
@@ -969,6 +1066,9 @@
           "relationship": "RELATED",
           "reproduced": true,
           "declaration": "no_free_lunch_ML",
+          "declarations": [
+            "no_free_lunch_ML"
+          ],
           "module": "No_Free_Lunch_ML.thy",
           "repository": "https://www.isa-afp.org/entries/No_Free_Lunch_ML.html",
           "version": "AFP release 2026-02-06; archive SHA-256 93ce8953bac6b09a29f6d2aafa64d4dbedf49e11f13cdad4cddc42f95f173588"
@@ -987,7 +1087,10 @@
           "framework": "Isabelle/HOL",
           "relationship": "RELATED",
           "reproduced": true,
-          "declaration": "mere_addition encodings (Parent–Benzmüller CondNormReasHOL)",
+          "declaration": "mere_addition",
+          "declarations": [
+            "mere_addition"
+          ],
           "module": "mere_addition_opt.thy",
           "repository": "https://www.isa-afp.org/entries/CondNormReasHOL.html",
           "version": "AFP release 2026-02-06; archive SHA-256 10c3aa794a3cafcfb08a784e11515933162a490b32fc0cdb0cf88f489accdb38"
@@ -1007,6 +1110,9 @@
           "relationship": "RELATED",
           "reproduced": true,
           "declaration": "fundamental_theorem_network_capacity",
+          "declarations": [
+            "fundamental_theorem_network_capacity"
+          ],
           "module": "DL_Fundamental_Theorem_Network_Capacity.thy",
           "repository": "https://www.isa-afp.org/entries/Deep_Learning.html",
           "version": "AFP release 2026-02-06; full-tree build SHA-256 b059edd46073479ee8dde45004c2346a7365e5d94cded49d27257cfea66c8879; entry archive 018557d0041584239d603a7eb3700d07ed7eb2a2ca48f694820072003ebf430d"
@@ -1026,6 +1132,9 @@
           "relationship": null,
           "reproduced": true,
           "declaration": "vNM.vNM_theorem",
+          "declarations": [
+            "vNM.vNM_theorem"
+          ],
           "module": null,
           "repository": "https://github.com/jingyuanli-hk/vNM-Theorem-pub",
           "version": "89ed1680170bcf947f77bd26cdf614c1ce02222c"
@@ -1045,6 +1154,9 @@
           "relationship": null,
           "reproduced": false,
           "declaration": "ArrowTheorem.arrow_theorem",
+          "declarations": [
+            "ArrowTheorem.arrow_theorem"
+          ],
           "module": null,
           "repository": "https://github.com/Shilun-Allan-Li/tcslib",
           "version": "502287d7f8d84c33421c71ce5495b08f097c47a5"
@@ -1063,7 +1175,12 @@
           "framework": "Lean",
           "relationship": null,
           "reproduced": true,
-          "declaration": "completeness, soundness, correctness (paper Theorem 6.2)",
+          "declaration": null,
+          "declarations": [
+            "completeness",
+            "soundness",
+            "correctness"
+          ],
           "module": "Debate/Correct.lean",
           "repository": "https://github.com/google-deepmind/debate",
           "version": "de3a6e500ae1a65dfeea2f91ef519ebad9704be0 (main, no release tag; last commit 2024-10-08)"
@@ -1082,7 +1199,20 @@
           "framework": "Rocq/Coq",
           "relationship": null,
           "reproduced": false,
-          "declaration": "decomposition_theorem (Topology.v); safety_closed, liveness_dense, decomposition_safety_dense (TopologyTrace.v); Safety, Liveness, hprop, SSC, HSafe, H2Safe, HLiv (Properties.v)",
+          "declaration": null,
+          "declarations": [
+            "decomposition_theorem",
+            "safety_closed",
+            "liveness_dense",
+            "decomposition_safety_dense",
+            "Safety",
+            "Liveness",
+            "hprop",
+            "SSC",
+            "HSafe",
+            "H2Safe",
+            "HLiv"
+          ],
           "module": null,
           "repository": "https://github.com/secure-compilation/exploring-robust-property-preservation",
           "version": "c68187cbaba763d88cbb3509df4ca9cf49cc6338"
@@ -1101,7 +1231,16 @@
           "framework": "Lean",
           "relationship": null,
           "reproduced": true,
-          "declaration": "k_safety_iff_finite_self_composition; k_safety_iff_product_self_composition; self_composition_is_safety; isClosed_iff_hyperSafety; dense_iff_hyperLiveness; hyperSafety_of_isKSafety; hyperSafety_hyperLiveness_decomposition",
+          "declaration": null,
+          "declarations": [
+            "k_safety_iff_finite_self_composition",
+            "k_safety_iff_product_self_composition",
+            "self_composition_is_safety",
+            "isClosed_iff_hyperSafety",
+            "dense_iff_hyperLiveness",
+            "hyperSafety_of_isKSafety",
+            "hyperSafety_hyperLiveness_decomposition"
+          ],
           "module": "AISafetyAtlas.Compositional.Hyperproperties",
           "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
           "version": "IN_TREE"
@@ -1127,7 +1266,13 @@
           "framework": "Lean",
           "relationship": null,
           "reproduced": true,
-          "declaration": "runFor_eq_of_view_eq; invariant_of_automorphism; no_unique_leader_of_fixedPointFree; invariant_of_constant",
+          "declaration": null,
+          "declarations": [
+            "runFor_eq_of_view_eq",
+            "invariant_of_automorphism",
+            "no_unique_leader_of_fixedPointFree",
+            "invariant_of_constant"
+          ],
           "module": "AISafetyAtlas.Compositional.Networks",
           "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
           "version": "IN_TREE"
@@ -1153,7 +1298,13 @@
           "framework": "Lean",
           "relationship": null,
           "reproduced": true,
-          "declaration": "rectangle_iff_exchange_closed; coordinate_product_iff_spliceClosed; not_isCoordinateProduct_finitelySupported; coordinate_product_iff_recombination_closed",
+          "declaration": null,
+          "declarations": [
+            "rectangle_iff_exchange_closed",
+            "coordinate_product_iff_spliceClosed",
+            "not_isCoordinateProduct_finitelySupported",
+            "coordinate_product_iff_recombination_closed"
+          ],
           "module": "AISafetyAtlas.Compositional.Rectangularity",
           "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
           "version": "IN_TREE"
@@ -1179,7 +1330,17 @@
           "framework": "Lean",
           "relationship": null,
           "reproduced": true,
-          "declaration": "AgentEquations.value_eq_of_agree_on_window; AgentEquations.truncation_exact; AgentEquations.bestAction_max; Objective.value_eq_of_agree_on_window; Objective.value_scaleUtility; Objective.optimal_decisions_eq_of_pos_scaleUtility; Objective.value_congr; Objective.optimal_decisions_congr",
+          "declaration": null,
+          "declarations": [
+            "AgentEquations.value_eq_of_agree_on_window",
+            "AgentEquations.truncation_exact",
+            "AgentEquations.bestAction_max",
+            "Objective.value_eq_of_agree_on_window",
+            "Objective.value_scaleUtility",
+            "Objective.optimal_decisions_eq_of_pos_scaleUtility",
+            "Objective.value_congr",
+            "Objective.optimal_decisions_congr"
+          ],
           "module": "AISafetyAtlas.Wireheading.Objective",
           "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
           "version": "IN_TREE"
@@ -1205,7 +1366,15 @@
           "framework": "Lean",
           "relationship": "RELATED",
           "reproduced": true,
-          "declaration": "GoalPreservationSource.Model.selected_matches_initial; GoalPreservationSource.Model.safe_modification; GoalPreservationSource.Model.qValue_selected_eq_initial; next_policy_optimal; run_optimal; goal_preservation",
+          "declaration": null,
+          "declarations": [
+            "GoalPreservationSource.Model.selected_matches_initial",
+            "GoalPreservationSource.Model.safe_modification",
+            "GoalPreservationSource.Model.qValue_selected_eq_initial",
+            "next_policy_optimal",
+            "run_optimal",
+            "goal_preservation"
+          ],
           "module": "AISafetyAtlas.Wireheading.GoalPreservationSource",
           "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
           "version": "IN_TREE"
@@ -1231,7 +1400,26 @@
           "framework": "Lean",
           "relationship": null,
           "reproduced": true,
-          "declaration": "covers_iff_no_collision; not_covers_of_collisionWitness; exists_collisionWitness_of_not_covers; decideCoverage; decideCoverage_covered_iff; CoverageResult.covered_eq_true_iff; decidableCovers; postprocess_cannot_repair_collision; covers_of_refines; observe_truthful; PortfolioCovers; PortfolioIndistinguishable; portfolioCovers_implies_hazardEquivalent; InclusionMinimalCovering; PortfolioCost; CostOptimalCovering; inclusionMinimal_of_costOptimal",
+          "declaration": null,
+          "declarations": [
+            "covers_iff_no_collision",
+            "not_covers_of_collisionWitness",
+            "exists_collisionWitness_of_not_covers",
+            "decideCoverage",
+            "decideCoverage_covered_iff",
+            "CoverageResult.covered_eq_true_iff",
+            "decidableCovers",
+            "postprocess_cannot_repair_collision",
+            "covers_of_refines",
+            "observe_truthful",
+            "PortfolioCovers",
+            "PortfolioIndistinguishable",
+            "portfolioCovers_implies_hazardEquivalent",
+            "InclusionMinimalCovering",
+            "PortfolioCost",
+            "CostOptimalCovering",
+            "inclusionMinimal_of_costOptimal"
+          ],
           "module": "AISafetyAtlas.Oversight.JointObservation",
           "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
           "version": "IN_TREE"

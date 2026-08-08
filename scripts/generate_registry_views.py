@@ -76,6 +76,14 @@ def code_list(items: list[str]) -> str:
     return "<br>".join(f"`{item}`" for item in items)
 
 
+def record_declarations(record: dict) -> list[str]:
+    """Return one normalized list for singular and plural ledger spellings."""
+    if record.get("declarations") is not None:
+        return list(record["declarations"])
+    declaration = record.get("declaration")
+    return [declaration] if declaration else []
+
+
 def unique(items: list[str]) -> list[str]:
     return list(dict.fromkeys(items))
 
@@ -310,7 +318,7 @@ def render_status(registry: dict, search_evidence: dict) -> str:
     for result, record in external:
         lines.append(
             f"| {result['id']} | {result['name']} | {record['framework']} | "
-            f"`{record.get('declaration', '—')}` | "
+            f"{code_list(record_declarations(record)) or '—'} | "
             f"{record.get('relationship', '—')} | "
             f"`{record['build_command']}` |"
         )
@@ -667,9 +675,7 @@ def render_landscape_index(registry: dict) -> str:
             )
         )
         for record in entry["formalizations"]:
-            declarations = atlas_declarations or code_list(
-                [record["declaration"]] if record.get("declaration") else []
-            ) or "—"
+            declarations = atlas_declarations or code_list(record_declarations(record)) or "—"
             root = "yes" if entry.get("root_import") else "no"
             repro = record.get("build_command") or "—"
             if repro != "—":
@@ -909,6 +915,7 @@ def compact_formalization(record: dict) -> dict:
         "relationship": record.get("relationship"),
         "reproduced": record.get("reproduced"),
         "declaration": record.get("declaration"),
+        "declarations": record_declarations(record),
         "module": record.get("module"),
         "repository": record.get("repository"),
         "version": record.get("version"),

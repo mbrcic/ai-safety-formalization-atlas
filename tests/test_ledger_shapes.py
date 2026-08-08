@@ -233,6 +233,30 @@ METADATA_CASES: list[tuple[str, str, Mutation, str]] = [
         "must record notes as a non-empty string",
     ),
     (
+        "candidate inspection state is a list",
+        REGISTRY,
+        lambda d: _first(d["results"], id="BY-021")["candidate_formalizations"][
+            0
+        ].__setitem__("inspection_state", []),
+        "unknown inspection_state",
+    ),
+    (
+        "candidate relationship review is a list",
+        REGISTRY,
+        lambda d: _first(d["results"], id="BY-021")["candidate_formalizations"][
+            0
+        ].__setitem__("relationship_review", []),
+        "unknown relationship_review",
+    ),
+    (
+        "bridge status is a list",
+        REGISTRY,
+        lambda d: _first(d["results"], id="BY-001").__setitem__(
+            "ai_bridge_status", []
+        ),
+        "unknown ai_bridge_status",
+    ),
+    (
         "bridge review date is a list",
         REGISTRY,
         lambda d: _first(d["results"], id="BY-012")["bridge_review"].__setitem__(
@@ -461,11 +485,12 @@ def test_every_recorded_reproduction_command_is_a_real_entry_point(tree: Path) -
     assert commands, "no reproduced records; the check would be vacuous"
     for command in commands:
         tokens = command.split()
-        if tokens[0].startswith("scripts/"):
+        if tokens[0].startswith("scripts/reproduce_") and tokens[0].endswith(".sh"):
             script = tree / tokens[0]
             assert script.is_file(), command
             assert script.stat().st_mode & 0o111, f"not executable: {command}"
             continue
+        assert not tokens[0].startswith("scripts/"), command
         assert tokens[:2] == ["lake", "build"], f"unrecognised entry point: {command}"
         modules = [
             module

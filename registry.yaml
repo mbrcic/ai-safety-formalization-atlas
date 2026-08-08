@@ -2968,15 +2968,13 @@
           {
             "atlas_declaration": "AISafetyAtlas.Compositional.Symmetry.Protocol.no_unique_leader_from_symmetric_start",
             "type": "NEW_PROOF",
-            "source_declarations": [
-              "Angluin (1980), deterministic anonymous-network symmetry obstruction"
-            ]
+            "source_declarations": []
           }
         ]
       },
       "ai_safety_relevance": "The survey identifies this result as relevant to limits on AI; no direct real-system implication is asserted here.",
       "ai_bridge_status": "HUMAN_REVIEW",
-      "notes": "Lean formalizes the Angluin-style inductive core: identical deterministic code plus indistinguishable observations preserves a symmetric configuration, so at least two nodes cannot reach exactly one leader in finitely many synchronous rounds. The network beneath it is now formalized separately in AISafetyAtlas.Compositional.Networks, catalogued as LAND-ANGLUIN-001, where observational indistinguishability is derived from port structure rather than assumed: runFor_eq_of_view_eq is the depth-n view lemma and no_unique_leader_of_fixedPointFree gives the automorphism route. That work deliberately does not change this row. RELATED only: this is a reusable dependency and source-backed repair direction, not a formalization of the survey's self-interest, mistaken-belief, embodiment or mutual-control semantics. Randomness, identifiers and asymmetric observations are explicit exits.",
+      "notes": "Lean formalizes the Angluin-style inductive core (Angluin, Local and Global Properties in Networks of Processors, STOC 1980): identical deterministic code plus indistinguishable observations preserves a symmetric configuration, so at least two nodes cannot reach exactly one leader in finitely many synchronous rounds. The network beneath it is now formalized separately in AISafetyAtlas.Compositional.Networks, catalogued as LAND-ANGLUIN-001, where observational indistinguishability is derived from port structure rather than assumed: runFor_eq_of_view_eq is the depth-n view lemma and no_unique_leader_of_fixedPointFree gives the automorphism route. That work deliberately does not change this row. RELATED only: this is a reusable dependency and source-backed repair direction, not a formalization of the survey's self-interest, mistaken-belief, embodiment or mutual-control semantics. Randomness, identifiers and asymmetric observations are explicit exits.",
       "formal_library_search": {
         "searched_on": "2026-07-28",
         "evidence_file": "docs/provenance/formalization-search.json",
@@ -3197,7 +3195,7 @@
           "relationship": "RELATED",
           "reproduced": true,
           "build_environment": "makarius/isabelle@sha256:9bd33b183c399327c5d554fc8cde27c29b5d2b20cdc6fe7a604caa3f951018fc (Isabelle2025-2; x86_64)",
-          "declaration": "mere_addition encodings (Parent–Benzmüller CondNormReasHOL)",
+          "declaration": "mere_addition",
           "module": "mere_addition_opt.thy",
           "build_command": "scripts/reproduce_isabelle.sh condnorm"
         }
@@ -3302,7 +3300,11 @@
           "license": "Apache-2.0",
           "reproduced": true,
           "build_environment": "leanprover/lean4:v4.8.0; Mathlib v4.8.0 (upstream pinned checkout)",
-          "declaration": "completeness, soundness, correctness (paper Theorem 6.2)",
+          "declarations": [
+            "completeness",
+            "soundness",
+            "correctness"
+          ],
           "module": "Debate/Correct.lean",
           "build_command": "scripts/reproduce_debate.sh"
         }
@@ -3327,7 +3329,19 @@
           "version": "c68187cbaba763d88cbb3509df4ca9cf49cc6338",
           "license": "Apache-2.0",
           "reproduced": false,
-          "declaration": "decomposition_theorem (Topology.v); safety_closed, liveness_dense, decomposition_safety_dense (TopologyTrace.v); Safety, Liveness, hprop, SSC, HSafe, H2Safe, HLiv (Properties.v)",
+          "declarations": [
+            "decomposition_theorem",
+            "safety_closed",
+            "liveness_dense",
+            "decomposition_safety_dense",
+            "Safety",
+            "Liveness",
+            "hprop",
+            "SSC",
+            "HSafe",
+            "H2Safe",
+            "HLiv"
+          ],
           "modules": [
             "Topology.v",
             "TopologyTrace.v",
@@ -3357,7 +3371,15 @@
           "license": "Apache-2.0",
           "reproduced": true,
           "build_environment": "leanprover/lean4:v4.31.0; Mathlib fabf563a7c95a166b8d7b6efca11c8b4dc9d911f; atlas IN_TREE",
-          "declaration": "k_safety_iff_finite_self_composition; k_safety_iff_product_self_composition; self_composition_is_safety; isClosed_iff_hyperSafety; dense_iff_hyperLiveness; hyperSafety_of_isKSafety; hyperSafety_hyperLiveness_decomposition",
+          "declarations": [
+            "k_safety_iff_finite_self_composition",
+            "k_safety_iff_product_self_composition",
+            "self_composition_is_safety",
+            "isClosed_iff_hyperSafety",
+            "dense_iff_hyperLiveness",
+            "hyperSafety_of_isKSafety",
+            "hyperSafety_hyperLiveness_decomposition"
+          ],
           "module": "AISafetyAtlas.Compositional.Hyperproperties",
           "build_command": "lake build AISafetyAtlas.Compositional.Hyperproperties AISafetyAtlas.Compositional.Hyperproperties.PrefixTopology AISafetyAtlas.Compositional.Hyperproperties.Product"
         }
@@ -3368,7 +3390,13 @@
             "atlas_declaration": "AISafetyAtlas.Compositional.Hyperproperties.k_safety_iff_finite_self_composition",
             "type": "NEW_PROOF",
             "source_declarations": [
-              "k_safety_iff_finite_self_composition; k_safety_iff_product_self_composition; self_composition_is_safety; isClosed_iff_hyperSafety; dense_iff_hyperLiveness; hyperSafety_of_isKSafety; hyperSafety_hyperLiveness_decomposition"
+              "k_safety_iff_finite_self_composition",
+              "k_safety_iff_product_self_composition",
+              "self_composition_is_safety",
+              "isClosed_iff_hyperSafety",
+              "dense_iff_hyperLiveness",
+              "hyperSafety_of_isKSafety",
+              "hyperSafety_hyperLiveness_decomposition"
             ]
           }
         ]
@@ -3395,7 +3423,12 @@
           "license": "Apache-2.0",
           "reproduced": true,
           "build_environment": "leanprover/lean4:v4.31.0; Mathlib fabf563a7c95a166b8d7b6efca11c8b4dc9d911f; atlas IN_TREE",
-          "declaration": "runFor_eq_of_view_eq; invariant_of_automorphism; no_unique_leader_of_fixedPointFree; invariant_of_constant",
+          "declarations": [
+            "runFor_eq_of_view_eq",
+            "invariant_of_automorphism",
+            "no_unique_leader_of_fixedPointFree",
+            "invariant_of_constant"
+          ],
           "module": "AISafetyAtlas.Compositional.Networks",
           "build_command": "lake build AISafetyAtlas.Compositional.Networks AISafetyAtlas.Examples.SixTargets"
         }
@@ -3406,7 +3439,10 @@
             "atlas_declaration": "AISafetyAtlas.Compositional.Networks.runFor_eq_of_view_eq",
             "type": "NEW_PROOF",
             "source_declarations": [
-              "runFor_eq_of_view_eq; invariant_of_automorphism; no_unique_leader_of_fixedPointFree; invariant_of_constant"
+              "runFor_eq_of_view_eq",
+              "invariant_of_automorphism",
+              "no_unique_leader_of_fixedPointFree",
+              "invariant_of_constant"
             ]
           }
         ]
@@ -3430,7 +3466,12 @@
           "license": "Apache-2.0",
           "reproduced": true,
           "build_environment": "leanprover/lean4:v4.31.0; Mathlib fabf563a7c95a166b8d7b6efca11c8b4dc9d911f; atlas IN_TREE",
-          "declaration": "rectangle_iff_exchange_closed; coordinate_product_iff_spliceClosed; not_isCoordinateProduct_finitelySupported; coordinate_product_iff_recombination_closed",
+          "declarations": [
+            "rectangle_iff_exchange_closed",
+            "coordinate_product_iff_spliceClosed",
+            "not_isCoordinateProduct_finitelySupported",
+            "coordinate_product_iff_recombination_closed"
+          ],
           "module": "AISafetyAtlas.Compositional.Rectangularity",
           "build_command": "lake build AISafetyAtlas.Compositional.Rectangularity"
         }
@@ -3441,7 +3482,10 @@
             "atlas_declaration": "AISafetyAtlas.Compositional.rectangle_iff_exchange_closed",
             "type": "NEW_PROOF",
             "source_declarations": [
-              "rectangle_iff_exchange_closed; coordinate_product_iff_spliceClosed; not_isCoordinateProduct_finitelySupported; coordinate_product_iff_recombination_closed"
+              "rectangle_iff_exchange_closed",
+              "coordinate_product_iff_spliceClosed",
+              "not_isCoordinateProduct_finitelySupported",
+              "coordinate_product_iff_recombination_closed"
             ]
           }
         ]
@@ -3465,7 +3509,16 @@
           "license": "Apache-2.0",
           "reproduced": true,
           "build_environment": "leanprover/lean4:v4.31.0; Mathlib fabf563a7c95a166b8d7b6efca11c8b4dc9d911f; atlas IN_TREE",
-          "declaration": "AgentEquations.value_eq_of_agree_on_window; AgentEquations.truncation_exact; AgentEquations.bestAction_max; Objective.value_eq_of_agree_on_window; Objective.value_scaleUtility; Objective.optimal_decisions_eq_of_pos_scaleUtility; Objective.value_congr; Objective.optimal_decisions_congr",
+          "declarations": [
+            "AgentEquations.value_eq_of_agree_on_window",
+            "AgentEquations.truncation_exact",
+            "AgentEquations.bestAction_max",
+            "Objective.value_eq_of_agree_on_window",
+            "Objective.value_scaleUtility",
+            "Objective.optimal_decisions_eq_of_pos_scaleUtility",
+            "Objective.value_congr",
+            "Objective.optimal_decisions_congr"
+          ],
           "module": "AISafetyAtlas.Wireheading.Objective",
           "build_command": "lake build AISafetyAtlas.Wireheading.Objective AISafetyAtlas.Wireheading.AgentEquations"
         }
@@ -3476,7 +3529,14 @@
             "atlas_declaration": "AISafetyAtlas.Wireheading.AgentEquations.value_eq_of_agree_on_window",
             "type": "NEW_PROOF",
             "source_declarations": [
-              "AgentEquations.value_eq_of_agree_on_window; AgentEquations.truncation_exact; AgentEquations.bestAction_max; Objective.value_eq_of_agree_on_window; Objective.value_scaleUtility; Objective.optimal_decisions_eq_of_pos_scaleUtility; Objective.value_congr; Objective.optimal_decisions_congr"
+              "AgentEquations.value_eq_of_agree_on_window",
+              "AgentEquations.truncation_exact",
+              "AgentEquations.bestAction_max",
+              "Objective.value_eq_of_agree_on_window",
+              "Objective.value_scaleUtility",
+              "Objective.optimal_decisions_eq_of_pos_scaleUtility",
+              "Objective.value_congr",
+              "Objective.optimal_decisions_congr"
             ]
           }
         ]
@@ -3503,7 +3563,14 @@
           "relationship": "RELATED",
           "reproduced": true,
           "build_environment": "leanprover/lean4:v4.31.0; Mathlib fabf563a7c95a166b8d7b6efca11c8b4dc9d911f; atlas IN_TREE",
-          "declaration": "GoalPreservationSource.Model.selected_matches_initial; GoalPreservationSource.Model.safe_modification; GoalPreservationSource.Model.qValue_selected_eq_initial; next_policy_optimal; run_optimal; goal_preservation",
+          "declarations": [
+            "GoalPreservationSource.Model.selected_matches_initial",
+            "GoalPreservationSource.Model.safe_modification",
+            "GoalPreservationSource.Model.qValue_selected_eq_initial",
+            "next_policy_optimal",
+            "run_optimal",
+            "goal_preservation"
+          ],
           "module": "AISafetyAtlas.Wireheading.GoalPreservationSource",
           "build_command": "lake build AISafetyAtlas.Wireheading.GoalPreservation AISafetyAtlas.Wireheading.GoalPreservationSource",
           "scope_delta": {
@@ -3518,7 +3585,12 @@
             "atlas_declaration": "AISafetyAtlas.Wireheading.GoalPreservationSource.Model.selected_matches_initial",
             "type": "NEW_PROOF",
             "source_declarations": [
-              "GoalPreservationSource.Model.selected_matches_initial; GoalPreservationSource.Model.safe_modification; GoalPreservationSource.Model.qValue_selected_eq_initial; next_policy_optimal; run_optimal; goal_preservation"
+              "GoalPreservationSource.Model.selected_matches_initial",
+              "GoalPreservationSource.Model.safe_modification",
+              "GoalPreservationSource.Model.qValue_selected_eq_initial",
+              "next_policy_optimal",
+              "run_optimal",
+              "goal_preservation"
             ]
           }
         ]
@@ -3543,7 +3615,25 @@
           "license": "Apache-2.0",
           "reproduced": true,
           "build_environment": "leanprover/lean4:v4.31.0; Mathlib fabf563a7c95a166b8d7b6efca11c8b4dc9d911f; atlas IN_TREE",
-          "declaration": "covers_iff_no_collision; not_covers_of_collisionWitness; exists_collisionWitness_of_not_covers; decideCoverage; decideCoverage_covered_iff; CoverageResult.covered_eq_true_iff; decidableCovers; postprocess_cannot_repair_collision; covers_of_refines; observe_truthful; PortfolioCovers; PortfolioIndistinguishable; portfolioCovers_implies_hazardEquivalent; InclusionMinimalCovering; PortfolioCost; CostOptimalCovering; inclusionMinimal_of_costOptimal",
+          "declarations": [
+            "covers_iff_no_collision",
+            "not_covers_of_collisionWitness",
+            "exists_collisionWitness_of_not_covers",
+            "decideCoverage",
+            "decideCoverage_covered_iff",
+            "CoverageResult.covered_eq_true_iff",
+            "decidableCovers",
+            "postprocess_cannot_repair_collision",
+            "covers_of_refines",
+            "observe_truthful",
+            "PortfolioCovers",
+            "PortfolioIndistinguishable",
+            "portfolioCovers_implies_hazardEquivalent",
+            "InclusionMinimalCovering",
+            "PortfolioCost",
+            "CostOptimalCovering",
+            "inclusionMinimal_of_costOptimal"
+          ],
           "module": "AISafetyAtlas.Oversight.JointObservation",
           "build_command": "lake build AISafetyAtlas.Oversight.JointObservation AISafetyAtlas.Examples.Oversight.JointObservation.Procurement AISafetyAtlas.Examples.Oversight.JointObservation.Portfolio"
         }
@@ -3554,7 +3644,23 @@
             "atlas_declaration": "AISafetyAtlas.Oversight.JointObservation.covers_iff_no_collision",
             "type": "NEW_PROOF",
             "source_declarations": [
-              "covers_iff_no_collision; not_covers_of_collisionWitness; exists_collisionWitness_of_not_covers; decideCoverage; decideCoverage_covered_iff; CoverageResult.covered_eq_true_iff; decidableCovers; postprocess_cannot_repair_collision; covers_of_refines; observe_truthful; PortfolioCovers; PortfolioIndistinguishable; portfolioCovers_implies_hazardEquivalent; InclusionMinimalCovering; PortfolioCost; CostOptimalCovering; inclusionMinimal_of_costOptimal"
+              "covers_iff_no_collision",
+              "not_covers_of_collisionWitness",
+              "exists_collisionWitness_of_not_covers",
+              "decideCoverage",
+              "decideCoverage_covered_iff",
+              "CoverageResult.covered_eq_true_iff",
+              "decidableCovers",
+              "postprocess_cannot_repair_collision",
+              "covers_of_refines",
+              "observe_truthful",
+              "PortfolioCovers",
+              "PortfolioIndistinguishable",
+              "portfolioCovers_implies_hazardEquivalent",
+              "InclusionMinimalCovering",
+              "PortfolioCost",
+              "CostOptimalCovering",
+              "inclusionMinimal_of_costOptimal"
             ]
           }
         ]

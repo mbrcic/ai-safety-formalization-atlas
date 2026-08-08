@@ -126,7 +126,7 @@ Full model note: [`robot-verification-model.md`](robot-verification-model.md).
 ## How to estimate coverage
 
 1. **AI safety lit addressed?** → this table (`how addressed` column).  
-2. **Survey theorem inventory?** → [`sources/brcic-yampolskiy-2023.md`](../status/sources/brcic-yampolskiy-2023.md).  
+2. **Survey theorem inventory?** → [`sources/brcic-yampolskiy-2023.md`](../status/sources/brcic-yampolskiy-2023.md).
 3. A paper can appear in both (e.g. robot = lit here + BY-033 there); count
    **formalization status once** on the survey row for headline metrics.
 

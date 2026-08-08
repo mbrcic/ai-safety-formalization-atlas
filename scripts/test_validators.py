@@ -154,6 +154,15 @@ CASES = [
         "neither a scripts/reproduce_*.sh entry point nor a `lake build`",
     ),
     (
+        "registry: reproduction claimed with a non-reproduction script",
+        "validate_registry.py",
+        "registry.yaml",
+        lambda d: first(d["results"], id="LAND-NFL-001")["formalizations"][0].__setitem__(
+            "build_command", "scripts/validate_registry.py"
+        ),
+        "neither a scripts/reproduce_*.sh entry point nor a `lake build`",
+    ),
+    (
         "registry: reproduction lake-building a module that does not exist",
         "validate_registry.py",
         "registry.yaml",
@@ -401,7 +410,34 @@ CASES = [
         lambda d: first(d["results"], id="LAND-GS-002")["lean_artifact"]["declarations"][0].__setitem__(
             "source_declarations", [[]]
         ),
-        "source_declarations must contain non-empty strings",
+        "source_declarations must contain non-empty names",
+    ),
+    (
+        "registry: artifact declaration packs multiple source names",
+        "validate_registry.py",
+        "registry.yaml",
+        lambda d: first(d["results"], id="LAND-HYPER-002")["lean_artifact"][
+            "declarations"
+        ][0]["source_declarations"].__setitem__(0, "first; second"),
+        "must be one identifier per list entry",
+    ),
+    (
+        "registry: formalization packs multiple declaration names",
+        "validate_registry.py",
+        "registry.yaml",
+        lambda d: first(d["results"], id="LAND-HYPER-002")["formalizations"][
+            0
+        ]["declarations"].__setitem__(0, "first; second"),
+        "declaration names must be one identifier per list entry",
+    ),
+    (
+        "registry: formalization packs names with a comma",
+        "validate_registry.py",
+        "registry.yaml",
+        lambda d: first(d["results"], id="LAND-HYPER-002")["formalizations"][
+            0
+        ]["declarations"].__setitem__(0, "first, second"),
+        "declaration names must be one identifier per list entry",
     ),
     (
         "registry: artifact with non-boolean root import",
@@ -514,6 +550,20 @@ CASES = [
         "resolution exactly when its status is terminal",
     ),
     (
+        "conjectures: status has the wrong scalar type",
+        "validate_conjectures.py",
+        "conjectures.yaml",
+        lambda d: d["conjectures"][0].__setitem__("status", []),
+        "unknown status",
+    ),
+    (
+        "conjectures: tag has the wrong scalar type",
+        "validate_conjectures.py",
+        "conjectures.yaml",
+        lambda d: d["conjectures"][0].__setitem__("tags", [[]]),
+        "tags must be non-empty strings",
+    ),
+    (
         "conjectures: module that is not a Lean build target",
         "validate_conjectures.py",
         "conjectures.yaml",
@@ -555,6 +605,20 @@ CASES = [
             "body", first(d["tasks"], id="CT-16")["body"] + " See LAND-GHOST-001."
         ),
         "landscape ids that do not exist",
+    ),
+    (
+        "tasks: size has the wrong scalar type",
+        "validate_tasks.py",
+        "tasks.yaml",
+        lambda d: d["tasks"][0].__setitem__("size", []),
+        "unknown size",
+    ),
+    (
+        "tasks: status has the wrong scalar type",
+        "validate_tasks.py",
+        "tasks.yaml",
+        lambda d: d["tasks"][0].__setitem__("status", []),
+        "unknown status",
     ),
 ]
 
