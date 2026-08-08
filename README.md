@@ -130,7 +130,7 @@ human review.
 weakening fidelity. `RELATED` is a useful core with an explicit scope delta; it
 does not by itself mean unfinished, and residual paper gaps remain documented.
 A bridge may be `REVIEWED` while the formalization stays `RELATED` (e.g. robot).
-See the [`v0.4 release scope`](docs/releases/v0.4.md) and
+See the [`v0.5 release scope`](docs/releases/v0.5.md) and
 [`docs/guide/methodology.md`](docs/guide/methodology.md).
 
 ## Repository contents
@@ -245,7 +245,7 @@ scripts/reproduce_chaitin.sh
 | an open question and no proof | `conjectures.yaml` + a module under `AISafetyAtlas/Conjectures/` | add it to `scripts/lean_build_targets.txt`, then build + gate |
 | a proof to write, or any Lean change | the facade for your area (see Domain imports) | `scripts/setup.sh`, then build + gate + `check_print_axioms.py` |
 | a change to a contributor task | `tasks.yaml` — never the generated Markdown | regenerate + gate |
-| evidence that something does not exist | `novelty_checks` in `docs/provenance/formalization-search.json` | regenerate + gate |
+| evidence that something does not exist | `novelty_checks` in `docs/provenance/formalization-search.json` | update search evidence, then regenerate + gate |
 | a new source to catalogue | `source_catalog` in `registry.yaml`, with its `role` | regenerate + gate |
 
 **regenerate** `python3 scripts/generate_registry_views.py` · **gate** `./scripts/agent_gate.sh` · **build** `lake build`

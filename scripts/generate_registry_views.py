@@ -482,7 +482,7 @@ def render_routing() -> str:
         (
             "evidence that something does not exist",
             "`novelty_checks` in `docs/provenance/formalization-search.json`",
-            "regenerate + gate",
+            "update search evidence, then regenerate + gate",
         ),
         (
             "a new source to catalogue",

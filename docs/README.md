@@ -15,7 +15,7 @@ reviews, and release evidence are not mixed in one flat directory.
 Root project files still used for navigation: [`README.md`](../README.md),
 [`STATE.md`](../STATE.md), [`ROADMAP.md`](../ROADMAP.md),
 [`CONTRIBUTING.md`](../CONTRIBUTING.md), [`registry.yaml`](../registry.yaml),
-`registry.yaml`.
+and [`conjectures.yaml`](../conjectures.yaml).
 
 ## Agent (token-cheap navigation)
 
@@ -64,7 +64,8 @@ Regenerate with `python3 scripts/generate_registry_views.py` (also refreshes
 
 ## Releases
 
-- [v0.4 release](releases/v0.4.md) — current published release (`0.4.0`, tagged)
+- [v0.5 release](releases/v0.5.md) — current published release (`0.5.0`, tagged)
+- [v0.4 release](releases/v0.4.md) — historical (`0.4.0`, tagged)
 - [v0.3 release](releases/v0.3.md) — historical (`0.3.x`)
 - [v0.2 release](releases/v0.2.md) — historical
 - [v0.1 release](releases/v0.1.md) — historical

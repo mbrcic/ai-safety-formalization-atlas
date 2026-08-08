@@ -43,8 +43,8 @@ research leads, and integration decisions behind that strategy.
 ## Human review
 
 - Revisit the public framing and scope disclaimer when coverage claims change
-  (see [`../releases/v0.4.md`](../releases/v0.4.md) for the current release
-  candidate's non-claims; older notes under `docs/releases/`).
+  (see [`../releases/v0.5.md`](../releases/v0.5.md) for the current release's
+  non-claims; older notes under `docs/releases/`).
 - Optional: external domain review of bridge packages beyond maintainer review.
 - Review source-level statements for the three survey-introduced proof sketches:
   unfairness of explainability, misaligned embodiment, and limited self-awareness.

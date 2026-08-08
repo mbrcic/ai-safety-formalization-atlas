@@ -46,8 +46,8 @@ Open **facade** modules only (`AISafetyAtlas/Learning.lean`,
 
 ## Regenerated artifacts
 
-After editing any ledger — `registry.yaml`, `conjectures.yaml`,
-`tasks.yaml`, or search evidence:
+After editing a maintained ledger — `registry.yaml`, `conjectures.yaml`, or
+`tasks.yaml`:
 
 ```console
 python3 scripts/generate_registry_views.py
@@ -56,7 +56,10 @@ python3 scripts/generate_registry_views.py
 Updates `docs/status/*`, the generated contributor-task board and conjecture
 checks, `docs/agent/by-id.json`, `docs/agent/search-summary.json`, README/STATE
 snippets, and `AISafetyAtlas/Examples/Registry.lean`. Do not hand-edit generated
-files.
+files. Do not hand-edit `docs/provenance/formalization-search.json`. When
+search terms, corpora, or pins change, first rebuild that evidence with
+`scripts/update_formalization_search.py` using its pinned corpus arguments, then
+run the generator above and the gate.
 
 ## Cheap validation gate
 
@@ -93,7 +96,7 @@ This table is the same one the README shows, rendered from one source.
 | an open question and no proof | `conjectures.yaml` + a module under `AISafetyAtlas/Conjectures/` | add it to `scripts/lean_build_targets.txt`, then build + gate |
 | a proof to write, or any Lean change | the facade for your area (see Domain imports) | `scripts/setup.sh`, then build + gate + `check_print_axioms.py` |
 | a change to a contributor task | `tasks.yaml` — never the generated Markdown | regenerate + gate |
-| evidence that something does not exist | `novelty_checks` in `docs/provenance/formalization-search.json` | regenerate + gate |
+| evidence that something does not exist | `novelty_checks` in `docs/provenance/formalization-search.json` | update search evidence, then regenerate + gate |
 | a new source to catalogue | `source_catalog` in `registry.yaml`, with its `role` | regenerate + gate |
 
 **regenerate** `python3 scripts/generate_registry_views.py` · **gate** `./scripts/agent_gate.sh` · **build** `lake build`

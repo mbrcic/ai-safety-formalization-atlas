@@ -60,8 +60,9 @@ compiles.
 
 - **OPEN** — statement compiles, nobody has settled it.
 - **RESOLVED** — proved or refuted. A refutation is also a theorem (`¬ P`), and
-  a proof graduates into the ordinary registry or landscape ledger by the normal
-  admission rules. `resolution` records which, and where the proof went.
+  a proof graduates into an appropriate `registry.yaml` claim or artifact row by
+  the normal admission rules. `resolution` records which, and where the proof
+  went.
 - **WITHDRAWN** — the proposer or a maintainer retired it. Malformed and
   duplicate proposals are closed as issues and never reach the ledger.
 
