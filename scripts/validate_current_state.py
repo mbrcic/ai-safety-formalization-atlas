@@ -105,8 +105,48 @@ def lean_module_name(path: Path) -> str:
     return ".".join(path.relative_to(ROOT).with_suffix("").parts)
 
 
+def lean_import_header(source: str) -> str:
+    """Return the leading region of a Lean file that can contain imports.
+
+    Lean requires every `import` to precede the first command, so the import
+    graph is determined by a few hundred bytes at the top of each file. Masking
+    comments and strings across the whole file to find them cost 0.35s per
+    validator run — over a hundred runs in one gate pass, on a tree whose
+    largest vendored file is 141 KB and entirely irrelevant to its own imports.
+
+    Scanning stops at the first line that is neither blank, a comment, `module`,
+    `prelude`, `set_option`, nor an import. Block comments are tracked so a
+    `/-! … -/` header does not end the scan early.
+    """
+    lines: list[str] = []
+    depth = 0
+    for line in source.splitlines():
+        stripped = line.strip()
+        if depth:
+            lines.append(line)
+            depth += stripped.count("/-") - stripped.count("-/")
+            continue
+        if stripped.startswith("/-"):
+            lines.append(line)
+            depth += stripped.count("/-") - stripped.count("-/")
+            continue
+        if (
+            not stripped
+            or stripped.startswith("--")
+            or stripped.startswith("module")
+            or stripped.startswith("prelude")
+            or stripped.startswith("set_option")
+            or stripped.startswith("import")
+            or stripped.startswith("public import")
+        ):
+            lines.append(line)
+            continue
+        break
+    return "\n".join(lines)
+
+
 def local_imports(source: str, local_modules: set[str]) -> set[str]:
-    code = lean_code_without_comments_or_strings(source)
+    code = lean_code_without_comments_or_strings(lean_import_header(source))
     imports: set[str] = set()
     for match in IMPORT_LINE.finditer(code):
         imports.update(

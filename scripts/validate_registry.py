@@ -99,9 +99,66 @@ def lean_module_name(path: Path) -> str:
     return ".".join(path.relative_to(ROOT).with_suffix("").parts)
 
 
+def lean_import_header(source: str) -> str:
+    """Return the leading region of a Lean file that can contain imports.
+
+    Lean requires every `import` to precede the first command, so the import
+    graph is determined by a few hundred bytes at the top of each file. Masking
+    comments and strings across the whole file to find them cost 0.35s per
+    validator run — over a hundred runs in one gate pass, on a tree whose
+    largest vendored file is 141 KB and entirely irrelevant to its own imports.
+
+    Scanning stops at the first line that is neither blank, a comment, `module`,
+    `prelude`, `set_option`, nor an import. Block comments are tracked so a
+    `/-! … -/` header does not end the scan early.
+    """
+    lines: list[str] = []
+    depth = 0
+    for line in source.splitlines():
+        stripped = line.strip()
+        if depth:
+            lines.append(line)
+            depth += stripped.count("/-") - stripped.count("-/")
+            continue
+        if stripped.startswith("/-"):
+            lines.append(line)
+            depth += stripped.count("/-") - stripped.count("-/")
+            continue
+        if (
+            not stripped
+            or stripped.startswith("--")
+            or stripped.startswith("module")
+            or stripped.startswith("prelude")
+            or stripped.startswith("set_option")
+            or stripped.startswith("import")
+            or stripped.startswith("public import")
+        ):
+            lines.append(line)
+            continue
+        break
+    return "\n".join(lines)
+
+
+def read_lean_header(path: Path, chunk: int = 16384) -> str:
+    """Read only as much of a Lean file as its import header can occupy.
+
+    Complements `lean_import_header`: that bounds the scan, this bounds the I/O.
+    If the header consumes the whole chunk the file is re-read in full, so a very
+    long docstring cannot silently truncate the import graph.
+    """
+    with path.open("r", encoding="utf-8") as handle:
+        head = handle.read(chunk)
+        if len(head) < chunk:
+            return head
+    header = lean_import_header(head)
+    if len(header) < len(head):
+        return head
+    return path.read_text(encoding="utf-8")
+
+
 def local_imports(source: str, local_modules: set[str]) -> set[str]:
     """Read local imports without treating external packages as atlas modules."""
-    source = lean_code_without_comments_or_strings(source)
+    source = lean_code_without_comments_or_strings(lean_import_header(source))
     imports: set[str] = set()
     for match in re.finditer(r"^\s*(?:public\s+)?import\s+(.+)$", source, re.M):
         imports.update(
@@ -126,7 +183,7 @@ def root_import_closure() -> tuple[set[str], set[str]]:
     sources["AISafetyAtlas"] = root
     modules = set(sources)
     graph = {
-        module: local_imports(path.read_text(encoding="utf-8"), modules)
+        module: local_imports(read_lean_header(path), modules)
         for module, path in sources.items()
     }
     closure: set[str] = set()

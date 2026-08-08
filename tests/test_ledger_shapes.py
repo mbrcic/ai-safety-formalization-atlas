@@ -593,3 +593,52 @@ def test_no_markdown_table_repeats_a_row_key() -> None:
                 )
             seen[key] = number
     assert not offenders, "\n".join(offenders)
+
+
+def test_bounded_import_scan_finds_the_same_closure() -> None:
+    """The header-bounded import scan must equal a full-file scan.
+
+    `root_import_closure` reads only the leading region of each Lean file,
+    because Lean requires imports to precede the first command and scanning
+    603 KB to find them cost 0.35s on every validator run. That optimisation is
+    correctness-sensitive: the conjecture-containment rule — no unproved
+    statement reachable from the public root — is computed from this closure, so
+    an import the scan fails to see would silently widen the public surface.
+    """
+    import re
+
+    sys.path.insert(0, str(ROOT / "scripts"))
+    import validate_current_state as state
+    import validate_registry as registry
+
+    modules, closure = registry.root_import_closure()
+
+    sources = {
+        registry.lean_module_name(p): p
+        for p in (registry.ROOT / "AISafetyAtlas").rglob("*.lean")
+    }
+    sources["AISafetyAtlas"] = registry.ROOT / "AISafetyAtlas.lean"
+    names = set(sources)
+    imports = re.compile(r"^\s*(?:public\s+)?import\s+(.+)$", re.M)
+    graph: dict[str, set[str]] = {}
+    for module, path in sources.items():
+        code = state.lean_code_without_comments_or_strings(
+            path.read_text(encoding="utf-8")
+        )
+        graph[module] = {
+            token
+            for match in imports.finditer(code)
+            for token in match.group(1).split()
+            if token in names
+        }
+    expected: set[str] = set()
+    pending = list(graph["AISafetyAtlas"])
+    while pending:
+        module = pending.pop()
+        if module in expected:
+            continue
+        expected.add(module)
+        pending.extend(graph.get(module, set()) - expected)
+
+    assert modules == names
+    assert closure == expected, closure ^ expected
