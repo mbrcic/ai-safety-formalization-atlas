@@ -306,6 +306,13 @@ def main() -> None:
         "AISafetyAtlas/Upstream/LICENSE",
         "AISafetyAtlas/Upstream/KolmogorovMathlib/LICENSE",
         "AISafetyAtlas/Upstream/Attribution/LICENSE",
+        # The MIT notice for the vendored Gibbard-Satterthwaite proof. Apache-2.0
+        # is satisfied by the root LICENSE plus retained headers; MIT requires the
+        # notice itself to travel with the copy, and `vendor/SocialChoiceLean/` is
+        # a provenance mirror nothing imports — exactly the shape a parsimony pass
+        # prunes. LICENSE-NOTICE cites both of these by path.
+        "vendor/SocialChoiceLean/LICENSE",
+        "vendor/SocialChoiceLean/PROVENANCE.md",
         "AISafetyAtlas/Explainability.lean",
         "AISafetyAtlas/Upstream/KolmogorovMathlib/README.md",
         ".github/CODEOWNERS",
@@ -323,6 +330,18 @@ def main() -> None:
         "Apache License" in license_text and "Version 2.0" in license_text,
         "LICENSE is not Apache-2.0",
     )
+    # Existence alone let a licence file be emptied, or replaced with "All
+    # rights reserved", and still pass.
+    for relative_path, marker in (
+        ("AISafetyAtlas/Upstream/LICENSE", "Apache License"),
+        ("AISafetyAtlas/Upstream/KolmogorovMathlib/LICENSE", "Apache License"),
+        ("AISafetyAtlas/Upstream/Attribution/LICENSE", "Apache License"),
+        ("vendor/SocialChoiceLean/LICENSE", "MIT License"),
+    ):
+        require(
+            marker in (ROOT / relative_path).read_text(encoding="utf-8"),
+            f"{relative_path} does not carry its {marker} text",
+        )
 
     readme = (ROOT / "README.md").read_text(encoding="utf-8")
     normalized_readme = " ".join(readme.lower().split())

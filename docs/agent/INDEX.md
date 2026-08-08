@@ -11,6 +11,7 @@ file. Prefer the small paths below over loading full inventory dumps.
 | [`STATE.md`](../../STATE.md) | Live phase + generated coverage snapshot |
 | [`docs/agent/by-id.json`](by-id.json) | Compact `BY-###` / `CLM-*` / `LAND-*` lookup |
 | [`docs/agent/search-summary.json`](search-summary.json) | Compact discovery hits (not full search dump) |
+| [`docs/status/applications.md`](../status/applications.md) | What the atlas states about AI-system models, by area |
 | [`docs/status/by-area.md`](../status/by-area.md) | The atlas by mathematical area, one registry ledger |
 | [`docs/guide/conjectures.md`](../guide/conjectures.md) | How an open question enters, and why it is never a theorem |
 | [`docs/status/landscape-index.md`](../status/landscape-index.md) | Atlas formalizations and public Lean surface |

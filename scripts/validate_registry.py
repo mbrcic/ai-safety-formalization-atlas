@@ -872,6 +872,26 @@ def main() -> None:
                     )
                 if declaration["type"] != "NEW_PROOF" and not declaration["source_declarations"]:
                     fail(f"{result_id} Lean artifact declaration lacks sources")
+                # A BRIDGE is the layer that carries an AI reading, and the layer
+                # a reader is most likely to over-interpret. It must say in one
+                # line what it applies, to which model, and what it reduces
+                # through — otherwise the AI-facing surface can grow unlabelled
+                # under a row named after a classical theorem, which is how the
+                # alignment-undecidability result ended up visible only as
+                # "Rice's theorem".
+                if declaration["type"] == "BRIDGE":
+                    require_text(
+                        declaration.get("application"),
+                        f"{result_id} BRIDGE declaration "
+                        f"{declaration['atlas_declaration']} must record an "
+                        "`application` line",
+                    )
+                elif "application" in declaration:
+                    require_text(
+                        declaration["application"],
+                        f"{result_id} declaration {declaration['atlas_declaration']} "
+                        "has an empty application line",
+                    )
             lean_row_count += 1
 
         for record in result["formalizations"]:

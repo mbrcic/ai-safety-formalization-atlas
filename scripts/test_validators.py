@@ -172,6 +172,17 @@ CASES = [
         "builds no module that exists in this tree",
     ),
     (
+        "registry: BRIDGE declaration with no application line",
+        "validate_registry.py",
+        "registry.yaml",
+        lambda d: next(
+            x
+            for x in first(d["results"], id="BY-012")["lean_artifact"]["declarations"]
+            if x["type"] == "BRIDGE"
+        ).pop("application"),
+        "must record an `application` line",
+    ),
+    (
         "registry: result tagged outside the vocabulary",
         "validate_registry.py",
         "registry.yaml",

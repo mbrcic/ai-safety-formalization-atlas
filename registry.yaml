@@ -795,7 +795,8 @@
             "type": "BRIDGE",
             "source_declarations": [
               "AISafetyAtlas.Upstream.Arrow.Impossibility"
-            ]
+            ],
+            "application": "Aggregation of utility-represented preferences: Arrow's impossibility stated over finite total preorders encoded by lower-contour cardinalities, so a utility profile can be aggregated directly. Representation bridge over the classical Arrow proof."
           }
         ]
       },
@@ -1250,7 +1251,8 @@
             "source_declarations": [
               "AISafetyAtlas.Preference.Source.ReasonableForF.NotAmongLowestCompatible",
               "AISafetyAtlas.Preference.Source.ReasonableForF.proposition_seven"
-            ]
+            ],
+            "application": "Preference inference: observed behaviour does not identify an agent's reward function and planner without normative assumptions. Conditional form of Theorem 2 of Armstrong and Mindermann (NeurIPS 2018)."
           },
           {
             "atlas_declaration": "AISafetyAtlas.Preference.OverrideModel.rationalise_strictly_better",
@@ -1359,7 +1361,8 @@
             "type": "BRIDGE",
             "source_declarations": [
               "ComputablePred.rice₂"
-            ]
+            ],
+            "application": "Verification of program behaviour: Rice's theorem restated for properties of partial input/output behaviour over Mathlib program codes. The interface the behavioural-verification results below reduce through."
           },
           {
             "atlas_declaration": "AISafetyAtlas.Verification.AgentBehavior.no_behavioral_safety_verifier",
@@ -1367,7 +1370,8 @@
             "source_declarations": [
               "AISafetyAtlas.Verification.rice",
               "AISafetyAtlas.Computability.rice_code_iff"
-            ]
+            ],
+            "application": "Alignment undecidability: no total computable verifier decides whether an encoded agent satisfies a nontrivial behavioural safety specification. The decision problem of Melo, Máximo, Soma and Castro (arXiv:2408.08995; Sci. Rep. 2025), machine-checked as a reduction through `Verification.rice`. Nontriviality is witnessed in `Examples.NonVacuity`."
           }
         ]
       },
@@ -1873,7 +1877,8 @@
             "source_declarations": [
               "AISafetyAtlas.Learning.sum_pointLoss_off_training",
               "AISafetyAtlas.Learning.aggregateOffTrainingLoss_eq"
-            ]
+            ],
+            "application": "Supervised learning: for finite domains and a fixed training set, any two learners have equal off-training-set error averaged uniformly over targets. Finite-domain core of Wolpert (1996)."
           },
           {
             "atlas_declaration": "AISafetyAtlas.Learning.lossConfig_sum_learner_indep",
@@ -1970,7 +1975,8 @@
             "source_declarations": [
               "AISafetyAtlas.Learning.sum_performance_eq_scaled_sum",
               "AISafetyAtlas.Learning.aggregatePerformance_eq_scaled_sum"
-            ]
+            ],
+            "application": "Optimization: any two injective non-adaptive m-point schedules have equal uniformly-averaged cost-sequence score. Finite-domain core of Wolpert and Macready (1997)."
           },
           {
             "atlas_declaration": "AISafetyAtlas.Learning.no_free_lunch_adaptive",
@@ -2498,7 +2504,8 @@
             "type": "BRIDGE",
             "source_declarations": [
               "AISafetyAtlas.Computability.halting_problem"
-            ]
+            ],
+            "application": "Robot ethics: no total online verifier decides whether a reactive program's actions are always acceptable, given a switching certificate. Conditional core of van Leeuwen and Wiedermann, Theorem 1 (UU-PCS-2021-02), reduced to the halting problem. The certificate is witnessed in `Examples.Robot`."
           }
         ]
       },
@@ -2796,7 +2803,8 @@
               "AISafetyAtlas.Wireheading.CRMDP.Env.observed_complement",
               "AISafetyAtlas.Wireheading.CRMDP.return_add_complement",
               "AISafetyAtlas.Wireheading.Corruption.ComplementedClass.everitt_theorem_eleven"
-            ]
+            ],
+            "application": "Reward corruption: an agent optimizing an observed reward channel cannot be guaranteed to avoid half-maximal regret against the true reward. Theorem 11 of Everitt, Krakovna, Orseau, Hutter and Legg (2017), over a corrupted-reward MDP."
           }
         ]
       },
@@ -2968,7 +2976,8 @@
           {
             "atlas_declaration": "AISafetyAtlas.Compositional.Symmetry.Protocol.no_unique_leader_from_symmetric_start",
             "type": "NEW_PROOF",
-            "source_declarations": []
+            "source_declarations": [],
+            "application": "Multi-agent symmetry: no anonymous deterministic protocol elects a unique leader from a symmetric configuration. Angluin's 1980 symmetry obstruction, proved in-tree over an explicit port-labelled network model."
           }
         ]
       },
@@ -3070,7 +3079,8 @@
             "type": "WRAPPER",
             "source_declarations": [
               "DASHImpossibility.attribution_impossibility"
-            ]
+            ],
+            "application": "Explainability: under the Rashomon property no feature ranking is faithful across models within a collinearity group. Reused from DrakeCaraker/dash-impossibility-lean; the atlas exposes the model-agnostic core. Rashomon is witnessed in `Examples.NonVacuity`."
           }
         ]
       }
@@ -3397,7 +3407,8 @@
               "dense_iff_hyperLiveness",
               "hyperSafety_of_isKSafety",
               "hyperSafety_hyperLiveness_decomposition"
-            ]
+            ],
+            "application": "Compositional verification: k-safety of a system is safety of its k-fold self-composition. Theorem 2 of Clarkson and Schneider (2010)."
           }
         ]
       }
@@ -3443,7 +3454,8 @@
               "invariant_of_automorphism",
               "no_unique_leader_of_fixedPointFree",
               "invariant_of_constant"
-            ]
+            ],
+            "application": "Multi-agent symmetry: nodes with equal views to depth n hold equal states after n synchronous rounds. The Angluin (1980) lemma, over an explicit port-labelled network model."
           }
         ]
       }
@@ -3486,7 +3498,8 @@
               "coordinate_product_iff_spliceClosed",
               "not_isCoordinateProduct_finitelySupported",
               "coordinate_product_iff_recombination_closed"
-            ]
+            ],
+            "application": "Compositional boundaries: a binary relation is a combinatorial rectangle exactly when it is exchange-closed. Kushilevitz-Nisan (1997) rectangle characterization."
           }
         ]
       }
@@ -3537,7 +3550,8 @@
               "Objective.optimal_decisions_eq_of_pos_scaleUtility",
               "Objective.value_congr",
               "Objective.optimal_decisions_congr"
-            ]
+            ],
+            "application": "Self-modification: an agent's finite-horizon value depends only on the percept window it can still act on. Agent equations of Ring and Orseau (AGI 2011)."
           }
         ]
       }
@@ -3591,7 +3605,8 @@
               "next_policy_optimal",
               "run_optimal",
               "goal_preservation"
-            ]
+            ],
+            "application": "Goal preservation: a rational agent's one-step self-modification selects a continuation matching its initial goal. Finite-percept induction step of Theorem 16 of Everitt, Filan, Daswani and Hutter (2016)."
           }
         ]
       }
@@ -3661,7 +3676,8 @@
               "PortfolioCost",
               "CostOptimalCovering",
               "inclusionMinimal_of_costOptimal"
-            ]
+            ],
+            "application": "Oversight: a hazard is decidable from what a coalition of principals may observe exactly when no two executions collide on that coalition's view. In-tree model of emitted interfaces and coalition access."
           }
         ]
       }

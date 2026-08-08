@@ -102,6 +102,10 @@ proof. Detail: [`docs/guide/methodology.md`](docs/guide/methodology.md).
   `docs/provenance/formalization-search.json` — corpus, revision, date, and what
   the search did not cover. The six-corpus sweep is the `baseline-catalogue`
   profile for one source and is **not** inherited by new work.
+- **Applications:** a declaration stated over an AI-system model records an
+  `application` line — what it claims, over which model, and where the statement
+  comes from. Required on every `BRIDGE`. Generated view:
+  [`docs/status/applications.md`](docs/status/applications.md).
 - **Layers:** (1) math theorem → (2) atlas interface → (3) AI-safety bridge →
   (4) real-system claim. Layers 3–4 need human review; Lean at 1–2 does not
   inherit an AI reading.
