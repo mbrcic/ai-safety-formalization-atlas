@@ -1,5 +1,6 @@
 module
 
+public import Mathlib.Logic.Function.Basic
 public import AISafetyAtlas.Upstream.KolmogorovMathlib.Complexity.Chaitin
 public import Foundation.FirstOrder.Incompleteness.First
 public import Foundation.FirstOrder.Incompleteness.Second
@@ -20,6 +21,7 @@ Thin wrappers over upstream incompleteness / undefinability. No AI-safety bridge
 | **Related companion** | `godel_second_incompleteness` | BY-013 companion |
 | **Law** | `tarski_undefinability` | BY-016 |
 | **Law** | `loeb` | BY-027 |
+| **Kernel** | `lawvere_fixed_point` | CLM-LAWVERE-001 |
 
 ## Sources
 
@@ -30,6 +32,21 @@ See `docs/guide/logic-incompleteness.md`.
 -/
 
 namespace AISafetyAtlas.Logic
+
+/--
+The type-level specialization of Lawvere's fixed-point theorem: if
+`f : α → (α → β)` represents every function `α → β`, then every endofunction
+`g : β → β` has a fixed point.
+
+This is a thin Atlas alias for
+`Function.exists_fixed_point_of_surjective` in Mathlib. It is the ordinary
+types-and-functions instance, not the theorem for arbitrary cartesian closed
+categories.
+-/
+public theorem lawvere_fixed_point {α β : Type*}
+    (f : α → α → β) (hf : Function.Surjective f) (g : β → β) :
+    ∃ y, g y = y :=
+  Function.exists_fixed_point_of_surjective f hf g
 
 /--
 Chaitin's incompleteness theorem for plain Kolmogorov complexity: in any sound,

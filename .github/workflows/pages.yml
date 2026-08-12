@@ -1,0 +1,58 @@
+# Public project page.
+#
+# Ships one static directory. No Lean, no dependency walk, no build step — the
+# whole job is checkout, upload, deploy, and it finishes in under a minute.
+#
+# REPOSITORY PREREQUISITE, one time, not settable from this file: Pages must be
+# configured with **Source: GitHub Actions** under Settings -> Pages -> Build and
+# deployment. Without it the build job passes, the artifact uploads, and `deploy`
+# fails at "Get Pages site failed" — a message that does not name the setting it
+# wants.
+name: Pages
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'site/**'
+      - '.github/workflows/pages.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pages-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    # The page's result table deep-links into blob/main. Publishing from any
+    # other ref would ship a page whose links 404 until that ref merges, so a
+    # manual dispatch from a feature branch is refused rather than half-served.
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        with:
+          persist-credentials: false
+
+      - name: Upload site
+        uses: actions/upload-pages-artifact@7b1f4a764d45c48632c6b24a0339c27f5614fb0b # v4.0.0
+        with:
+          path: site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e # v4.0.5

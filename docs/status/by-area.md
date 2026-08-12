@@ -14,21 +14,21 @@ picking work. Grades and reproduction evidence:
 
 | Area | Shipped | Catalogued |
 |---|---:|---:|
-| [agent-incentives](#agent-incentives) | 3 | 3 |
+| [agent-incentives](#agent-incentives) | 4 | 3 |
 | [algorithmic-information](#algorithmic-information) | 1 | 1 |
 | [compositionality](#compositionality) | 4 | 1 |
-| [computability](#computability) | 2 | 2 |
+| [computability](#computability) | 3 | 3 |
 | [computational-complexity](#computational-complexity) | 0 | 5 |
 | [control-theory](#control-theory) | 0 | 6 |
 | [decision-theory](#decision-theory) | 2 | 3 |
 | [ethics](#ethics) | 1 | 4 |
-| [information-theory](#information-theory) | 0 | 4 |
-| [interpretability](#interpretability) | 1 | 6 |
+| [information-theory](#information-theory) | 9 | 4 |
+| [interpretability](#interpretability) | 7 | 5 |
 | [learning-theory](#learning-theory) | 2 | 7 |
-| [multi-agent](#multi-agent) | 3 | 4 |
-| [oversight](#oversight) | 1 | 1 |
+| [multi-agent](#multi-agent) | 3 | 5 |
+| [oversight](#oversight) | 4 | 2 |
 | [preference-inference](#preference-inference) | 1 | 1 |
-| [provability-logic](#provability-logic) | 4 | 0 |
+| [provability-logic](#provability-logic) | 5 | 1 |
 | [social-choice](#social-choice) | 2 | 6 |
 | [verification](#verification) | 4 | 4 |
 
@@ -39,6 +39,7 @@ picking work. Grades and reproduction evidence:
 | BY-039 | Reward corruption unsolvability | `AISafetyAtlas.Wireheading.CRMDP.Model.everitt_theorem_eleven` |
 | LAND-WIRE-OBJ-001 | Ring-Orseau objective factorization | `AISafetyAtlas.Wireheading.AgentEquations.value_eq_of_agree_on_window` |
 | LAND-GOAL-001 | Finite-percept on-policy goal-preservation induction step | `AISafetyAtlas.Wireheading.GoalPreservationSource.Model.selected_matches_initial` |
+| LAND-CRMDP-KNOW-001 | True return does not factor through the observed history | `AISafetyAtlas.Wireheading.ObservationLimits.not_knowable_trueReturn`<br>`AISafetyAtlas.Wireheading.ObservationLimits.not_knowable_trueReturn_of_complement_mem`<br>`AISafetyAtlas.Wireheading.ObservationLimits.returnOver_zeroEnv_complement` |
 
 Catalogued, no atlas Lean:
 
@@ -81,6 +82,7 @@ Catalogued, no atlas Lean:
 |---|---|---|
 | BY-012 | Rice's theorem | `AISafetyAtlas.Computability.rice`<br>`AISafetyAtlas.Computability.rice_code_iff`<br>`AISafetyAtlas.Verification.AgentBehavior.no_behavioral_safety_verifier`<br>`AISafetyAtlas.Verification.rice` |
 | BY-014 | Undecidability | `AISafetyAtlas.Computability.halting_problem`<br>`AISafetyAtlas.Computability.halting_re`<br>`AISafetyAtlas.Computability.nonhalting_not_re` |
+| CLM-LAWVERE-001 | Lawvere fixed-point theorem (types and functions) | `AISafetyAtlas.Logic.lawvere_fixed_point` |
 
 Catalogued, no atlas Lean:
 
@@ -88,6 +90,7 @@ Catalogued, no atlas Lean:
 |---|---|
 | BY-018 | Unlearnability |
 | BY-025 | Uncontainability |
+| CLM-LAWVERE-CCC-001 | Lawvere fixed-point theorem (Cartesian closed categories) |
 
 ## computational-complexity
 
@@ -150,7 +153,17 @@ Catalogued, no atlas Lean:
 
 ## information-theory
 
-No atlas Lean in this area yet.
+| ID | Result | Atlas declarations |
+|---|---|---|
+| LAND-SELFREF-001 | The self-model as a component of the state it models | `AISafetyAtlas.Knowledge.SelfReference.card_rest_le_one_of_selfComplete`<br>`AISafetyAtlas.Knowledge.SelfReference.not_selfComplete_of_two_rest`<br>`AISafetyAtlas.Knowledge.SelfReference.selfComplete_iff_subsingleton_rest` |
+| LAND-ACCUM-001 | Window ambiguity: accumulation bounds over a set of targets | `AISafetyAtlas.Knowledge.ambiguity_le_of_evidenceMonotone`<br>`AISafetyAtlas.Knowledge.ambiguity_le_pairTarget_left`<br>`AISafetyAtlas.Knowledge.ambiguity_le_pairTarget_of_evidenceMonotone`<br>`AISafetyAtlas.Knowledge.ambiguity_le_pairTarget_right`<br>`AISafetyAtlas.Knowledge.ambiguity_pairTarget_le_mul`<br>`AISafetyAtlas.Knowledge.not_knowable_pairTarget_of_not_knowable` |
+| LAND-AMBIG-001 | Finite fibre ambiguity and the counting obstruction | `AISafetyAtlas.Knowledge.ambiguity_le_of_comp`<br>`AISafetyAtlas.Knowledge.card_image_le_of_knowable`<br>`AISafetyAtlas.Knowledge.knowable_iff_ambiguity_le_one`<br>`AISafetyAtlas.Knowledge.not_knowable_of_card_lt` |
+| LAND-TEMPORAL-001 | Time-indexed knowability, contemporaneous collisions, and delayed knowledge | `AISafetyAtlas.Knowledge.Temporal.collisionAt_of_not_knowableAt`<br>`AISafetyAtlas.Knowledge.Temporal.knowableFrom_mono`<br>`AISafetyAtlas.Knowledge.Temporal.not_knowableAt_of_collisionAt` |
+| LAND-SELFMEAS-001 | Self-measurement failure for an embedded observation | `AISafetyAtlas.Knowledge.knowable_id_iff_injective`<br>`AISafetyAtlas.Knowledge.not_knowable_state_of_nontrivial_remainder` |
+| LAND-SELFMEAS-002 | Breuer abstract embedded-measurement core | `AISafetyAtlas.Knowledge.Embedded.Meshing.restrict_surjective`<br>`AISafetyAtlas.Knowledge.Embedded.eq_restrict_of_infer_singleton_eq`<br>`AISafetyAtlas.Knowledge.Embedded.exists_singleton_infer_eq_of_infer_eq`<br>`AISafetyAtlas.Knowledge.Embedded.exists_state_not_exactly_measurable`<br>`AISafetyAtlas.Knowledge.Embedded.infer_singleton_eq_of_meshing`<br>`AISafetyAtlas.Knowledge.Embedded.no_meshing_inference_distinguishes`<br>`AISafetyAtlas.Knowledge.Embedded.no_meshing_inference_measures_all_states`<br>`AISafetyAtlas.Knowledge.Embedded.no_meshing_inference_measures_all_states_direct`<br>`AISafetyAtlas.Knowledge.Embedded.not_knowable_state_of_properInclusion` |
+| LAND-SELFMEAS-003 | Physical complement and finite-cardinality bridges to Breuer proper inclusion | `AISafetyAtlas.Knowledge.Embedded.Composition.measuresAll_fibreInference_of_injective`<br>`AISafetyAtlas.Knowledge.Embedded.Composition.meshing_and_measuresAll_fibreInference_of_bijective`<br>`AISafetyAtlas.Knowledge.Embedded.Composition.meshing_fibreInference_of_surjective`<br>`AISafetyAtlas.Knowledge.Embedded.Composition.no_meshing_measures_all_of_nontrivial_remainder`<br>`AISafetyAtlas.Knowledge.Embedded.Composition.no_meshing_measures_all_of_nontrivial_remainder_of_equiv`<br>`AISafetyAtlas.Knowledge.Embedded.Composition.not_meshing_of_not_surjective`<br>`AISafetyAtlas.Knowledge.Embedded.Composition.properInclusion_iff_not_injective`<br>`AISafetyAtlas.Knowledge.Embedded.Composition.properInclusion_of_nontrivial_remainder`<br>`AISafetyAtlas.Knowledge.Embedded.Composition.properInclusion_of_nontrivial_remainder_of_equiv`<br>`AISafetyAtlas.Knowledge.Embedded.Finite.no_meshing_measures_all_of_card_lt`<br>`AISafetyAtlas.Knowledge.Embedded.Finite.properInclusion_of_card_lt`<br>`AISafetyAtlas.Knowledge.Embedded.Finite.properInclusion_product_of_card_rest_ge_two` |
+| LAND-KNOW-001 | Exact knowability: the observation-factorization kernel | `AISafetyAtlas.Knowledge.Knowable.mono`<br>`AISafetyAtlas.Knowledge.exists_witness_of_not_knowable`<br>`AISafetyAtlas.Knowledge.knowable_iff_factorsThrough`<br>`AISafetyAtlas.Knowledge.knowable_iff_no_collision`<br>`AISafetyAtlas.Knowledge.not_knowable_comp`<br>`AISafetyAtlas.Knowledge.not_knowable_of_collision`<br>`AISafetyAtlas.Knowledge.not_knowable_of_witness` |
+| LAND-CRMDP-KNOW-001 | True return does not factor through the observed history | `AISafetyAtlas.Wireheading.ObservationLimits.not_knowable_trueReturn`<br>`AISafetyAtlas.Wireheading.ObservationLimits.not_knowable_trueReturn_of_complement_mem`<br>`AISafetyAtlas.Wireheading.ObservationLimits.returnOver_zeroEnv_complement` |
 
 Catalogued, no atlas Lean:
 
@@ -165,7 +178,13 @@ Catalogued, no atlas Lean:
 
 | ID | Result | Atlas declarations |
 |---|---|---|
+| BY-044 | Limited self-awareness | `AISafetyAtlas.SelfAwareness.Model.limited_self_awareness`<br>`AISafetyAtlas.SelfAwareness.Model.not_agentAware_of_maximal`<br>`AISafetyAtlas.SelfAwareness.Model.not_aware_of_le`<br>`AISafetyAtlas.SelfAwareness.Model.not_perfectlySelfAware`<br>`AISafetyAtlas.SelfAwareness.Model.process_not_self_aware` |
 | LAND-ATTR-001 | Attribution impossibility (DASH trilemma) | `AISafetyAtlas.Explainability.attribution_impossibility`<br>`AISafetyAtlas.Explainability.attribution_impossibility_weak` |
+| LAND-SELFREF-001 | The self-model as a component of the state it models | `AISafetyAtlas.Knowledge.SelfReference.card_rest_le_one_of_selfComplete`<br>`AISafetyAtlas.Knowledge.SelfReference.not_selfComplete_of_two_rest`<br>`AISafetyAtlas.Knowledge.SelfReference.selfComplete_iff_subsingleton_rest` |
+| LAND-SELFMEAS-001 | Self-measurement failure for an embedded observation | `AISafetyAtlas.Knowledge.knowable_id_iff_injective`<br>`AISafetyAtlas.Knowledge.not_knowable_state_of_nontrivial_remainder` |
+| LAND-SELFMEAS-002 | Breuer abstract embedded-measurement core | `AISafetyAtlas.Knowledge.Embedded.Meshing.restrict_surjective`<br>`AISafetyAtlas.Knowledge.Embedded.eq_restrict_of_infer_singleton_eq`<br>`AISafetyAtlas.Knowledge.Embedded.exists_singleton_infer_eq_of_infer_eq`<br>`AISafetyAtlas.Knowledge.Embedded.exists_state_not_exactly_measurable`<br>`AISafetyAtlas.Knowledge.Embedded.infer_singleton_eq_of_meshing`<br>`AISafetyAtlas.Knowledge.Embedded.no_meshing_inference_distinguishes`<br>`AISafetyAtlas.Knowledge.Embedded.no_meshing_inference_measures_all_states`<br>`AISafetyAtlas.Knowledge.Embedded.no_meshing_inference_measures_all_states_direct`<br>`AISafetyAtlas.Knowledge.Embedded.not_knowable_state_of_properInclusion` |
+| LAND-SELFMEAS-003 | Physical complement and finite-cardinality bridges to Breuer proper inclusion | `AISafetyAtlas.Knowledge.Embedded.Composition.measuresAll_fibreInference_of_injective`<br>`AISafetyAtlas.Knowledge.Embedded.Composition.meshing_and_measuresAll_fibreInference_of_bijective`<br>`AISafetyAtlas.Knowledge.Embedded.Composition.meshing_fibreInference_of_surjective`<br>`AISafetyAtlas.Knowledge.Embedded.Composition.no_meshing_measures_all_of_nontrivial_remainder`<br>`AISafetyAtlas.Knowledge.Embedded.Composition.no_meshing_measures_all_of_nontrivial_remainder_of_equiv`<br>`AISafetyAtlas.Knowledge.Embedded.Composition.not_meshing_of_not_surjective`<br>`AISafetyAtlas.Knowledge.Embedded.Composition.properInclusion_iff_not_injective`<br>`AISafetyAtlas.Knowledge.Embedded.Composition.properInclusion_of_nontrivial_remainder`<br>`AISafetyAtlas.Knowledge.Embedded.Composition.properInclusion_of_nontrivial_remainder_of_equiv`<br>`AISafetyAtlas.Knowledge.Embedded.Finite.no_meshing_measures_all_of_card_lt`<br>`AISafetyAtlas.Knowledge.Embedded.Finite.properInclusion_of_card_lt`<br>`AISafetyAtlas.Knowledge.Embedded.Finite.properInclusion_product_of_card_rest_ge_two` |
+| LAND-KNOW-001 | Exact knowability: the observation-factorization kernel | `AISafetyAtlas.Knowledge.Knowable.mono`<br>`AISafetyAtlas.Knowledge.exists_witness_of_not_knowable`<br>`AISafetyAtlas.Knowledge.knowable_iff_factorsThrough`<br>`AISafetyAtlas.Knowledge.knowable_iff_no_collision`<br>`AISafetyAtlas.Knowledge.not_knowable_comp`<br>`AISafetyAtlas.Knowledge.not_knowable_of_collision`<br>`AISafetyAtlas.Knowledge.not_knowable_of_witness` |
 
 Catalogued, no atlas Lean:
 
@@ -176,7 +195,6 @@ Catalogued, no atlas Lean:
 | BY-030 | Incomprehensibility |
 | BY-031 | k-incomprehensibility |
 | BY-042 | Unfairness of explainability |
-| BY-044 | Limited self-awareness |
 
 ## learning-theory
 
@@ -213,18 +231,23 @@ Catalogued, no atlas Lean:
 | BY-028 | Unpredictability of superhuman AI |
 | BY-041 | Impossibility of unambiguous communication |
 | BY-042 | Unfairness of explainability |
+| LAND-CL-001 | Chandy-Lamport distributed snapshot — termination, correctness, stable property detection |
 
 ## oversight
 
 | ID | Result | Atlas declarations |
 |---|---|---|
 | LAND-JOINTOBS-001 | Coalition-indexed joint observation and the emitted-interface coverage boundary | `AISafetyAtlas.Oversight.JointObservation.covers_iff_no_collision` |
+| LAND-ACCUM-001 | Window ambiguity: accumulation bounds over a set of targets | `AISafetyAtlas.Knowledge.ambiguity_le_of_evidenceMonotone`<br>`AISafetyAtlas.Knowledge.ambiguity_le_pairTarget_left`<br>`AISafetyAtlas.Knowledge.ambiguity_le_pairTarget_of_evidenceMonotone`<br>`AISafetyAtlas.Knowledge.ambiguity_le_pairTarget_right`<br>`AISafetyAtlas.Knowledge.ambiguity_pairTarget_le_mul`<br>`AISafetyAtlas.Knowledge.not_knowable_pairTarget_of_not_knowable` |
+| LAND-AMBIG-001 | Finite fibre ambiguity and the counting obstruction | `AISafetyAtlas.Knowledge.ambiguity_le_of_comp`<br>`AISafetyAtlas.Knowledge.card_image_le_of_knowable`<br>`AISafetyAtlas.Knowledge.knowable_iff_ambiguity_le_one`<br>`AISafetyAtlas.Knowledge.not_knowable_of_card_lt` |
+| LAND-TEMPORAL-001 | Time-indexed knowability, contemporaneous collisions, and delayed knowledge | `AISafetyAtlas.Knowledge.Temporal.collisionAt_of_not_knowableAt`<br>`AISafetyAtlas.Knowledge.Temporal.knowableFrom_mono`<br>`AISafetyAtlas.Knowledge.Temporal.not_knowableAt_of_collisionAt` |
 
 Catalogued, no atlas Lean:
 
 | ID | Result |
 |---|---|
 | LAND-DEBATE-001 | Doubly-efficient debate correctness (Brown-Cohen–Irving–Piliouras 2023) |
+| LAND-CL-001 | Chandy-Lamport distributed snapshot — termination, correctness, stable property detection |
 
 ## preference-inference
 
@@ -246,6 +269,13 @@ Catalogued, no atlas Lean:
 | BY-015 | Chaitin incompleteness | `AISafetyAtlas.Logic.chaitin_bound`<br>`AISafetyAtlas.Logic.chaitin_incompleteness` |
 | BY-016 | Undefinability | `AISafetyAtlas.Logic.tarski_undefinability` |
 | BY-027 | Löb's theorem (unverifiability) | `AISafetyAtlas.Logic.loeb` |
+| CLM-LAWVERE-001 | Lawvere fixed-point theorem (types and functions) | `AISafetyAtlas.Logic.lawvere_fixed_point` |
+
+Catalogued, no atlas Lean:
+
+| ID | Result |
+|---|---|
+| CLM-LAWVERE-CCC-001 | Lawvere fixed-point theorem (Cartesian closed categories) |
 
 ## social-choice
 

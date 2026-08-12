@@ -21,9 +21,12 @@ used in a module when that module can see a definition site through the local
 import graph *and* names it in code with comments and string literals masked.
 Known limits:
 
-* Matching is by leaf name, so two declarations sharing one (`Computability.rice`
-  and its `Verification.rice` alias) treat each other's module as a definition
-  site, and real use between them is invisible.
+* Matching accepts any dotted *suffix* of a declaration's own name, so all three
+  ways Lean lets a consumer write it count: `foo`, `Knowledge.foo`, and
+  `AISafetyAtlas.Knowledge.foo`. `Other.foo` does not — it is a different `foo`.
+* Definition sites are still found by leaf name, so two declarations sharing one
+  (`Computability.rice` and its `Verification.rice` alias) treat each other's
+  module as a definition site, and real use between them is invisible.
 * `open`, dot-notation, and shadowing are not resolved the way the elaborator
   resolves them.
 
@@ -125,6 +128,22 @@ def definition_sites(leaf: str, sources: dict[str, tuple[Path, str]]) -> set[str
     return {module for module, (_, code) in sources.items() if pattern.search(code)}
 
 
+def qualified_forms(declaration: str) -> list[str]:
+    """Every dotted suffix of `declaration`, longest first.
+
+    Lean lets a consumer name a declaration three ways, and all three are uses:
+    fully (`AISafetyAtlas.Knowledge.foo`), relative to an enclosing namespace
+    (`Knowledge.foo`), or bare (`foo`). Matching only the leaf missed the middle
+    form — the idiomatic one — because a dot precedes it; matching only the full
+    name missed it too. Every declaration reached that way was reported unused.
+
+    Suffixes, not substrings: `Other.foo` is a different `foo`, not a use of
+    this one, and must not count.
+    """
+    parts = declaration.split(".")
+    return [".".join(parts[index:]) for index in range(len(parts))]
+
+
 def consumers(
     declaration: str,
     sources: dict[str, tuple[Path, str]],
@@ -142,14 +161,23 @@ def consumers(
             default="",
         )
         homes = {fallback} if fallback else set()
-    pattern = re.compile(rf"(?<![A-Za-z0-9_.']){re.escape(leaf)}(?![A-Za-z0-9_'])")
+    # Longest form first, so a fully-qualified use matches as a whole rather
+    # than leaving a stray prefix. The lookbehind still forbids a preceding dot,
+    # which is what keeps `Other.foo` out; the alternation is what lets
+    # `Knowledge.foo` in. The lookahead keeps `foo_aux` out — including when it
+    # is written fully qualified, which a raw substring test let through.
+    pattern = re.compile(
+        r"(?<![A-Za-z0-9_.'])(?:"
+        + "|".join(re.escape(form) for form in qualified_forms(declaration))
+        + r")(?![A-Za-z0-9_'])"
+    )
     found = []
     for module, (_, code) in sources.items():
         if module in homes:
             continue
         if not homes & visible.get(module, set()):
             continue
-        if declaration in code or pattern.search(code):
+        if pattern.search(code):
             found.append(module)
     return sorted(found)
 

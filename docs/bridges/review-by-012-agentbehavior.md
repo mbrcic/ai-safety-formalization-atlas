@@ -8,7 +8,7 @@ re-audit of Mathlib’s classical Rice proofs as novel AI-safety content.
 
 ## Reviewer
 
-- **Name:** Mario Brčić (mbrcic)
+- **Name:** Mario Brcic (mbrcic)
 - **Date:** 2026-07-19
 - **Scope:**
   `AISafetyAtlas.Verification.AgentBehavior.no_behavioral_safety_verifier` and
@@ -106,7 +106,7 @@ properties.
 ```json
 "ai_bridge_status": "REVIEWED",
 "bridge_review": {
-  "reviewer": "Mario Brčić (mbrcic)",
+  "reviewer": "Mario Brcic (mbrcic)",
   "date": "2026-07-19",
   "statement_reviewed": true,
   "interpretation_reviewed": true,

@@ -84,7 +84,7 @@ names, so the split modelled one thing twice. Its justification was that
 landscape must never increase the statement-match count, which stopped being a
 concern when the counts stopped having denominators.
 
-**Closure belongs to the source, not to the file.** The Brčić–Yampolskiy block
+**Closure belongs to the source, not to the file.** The Brcic–Yampolskiy block
 must stay contiguous `BY-001`…`BY-044` and complete, because that catalogue is
 finished. Everything else is open: artifact rows, and claims from any other
 catalogued source, neither of which inherits the six-corpus sweep — that sweep is
@@ -104,6 +104,53 @@ alternative proof remains provenance unless it adds a documented capability
 such as a stronger statement, a required representation, an explicit
 composable reduction, useful constructive content, or necessary dependency
 independence.
+
+### Parsimony governs duplication; foundations get a different test
+
+The rule above answers one question: is a second way of establishing the same
+thing worth its maintenance? Applied to a *foundation* — a definitional layer
+that catalogued rows cannot be stated without at all — it asks for consumers
+that are themselves blocked on the layer being judged. That is a rule no
+foundation can pass, and its cost is invisible: nothing is rejected, results
+simply never get proposed, because the first contributor would have to pay for
+the layer alone.
+
+A concrete instance is on the board now. `NC-006` records that the pinned
+Mathlib carries no Shannon entropy, hence no conditional entropy or mutual
+information. `BY-004` (Law of Requisite Variety) and `BY-005`
+(information-theoretic control limits) both need exactly that, and neither can
+be first, because the entry cost is identical for each and neither result
+justifies it alone.
+
+So a foundation may land ahead of its consumers when all four of these hold, and
+they are checkable rather than speculative:
+
+1. **Two blocked rows, by id.** At least two existing `BY-`/`CLM-`/`LAND-` rows
+   or `tasks.yaml` entries that cannot be *stated* without it. Recorded in the
+   artifact row, so the claim is auditable rather than atmospheric.
+2. **The gap is upstream and recorded.** A `novelty_checks` entry showing the
+   pinned corpora lack it. Without that the blocker may be that nobody bothered,
+   which is not a reason to build a layer.
+3. **Definitions may precede consumers; theorems may not.** The definitional
+   half of a foundation is usually cheap and is the half that removes the
+   barrier, so it may land with no consumer. The theorem half is expensive and
+   cannot be guessed — which theorems a consumer needs is exactly what is
+   unknown until one arrives — so it requires a consumer landing in the same
+   change or the next.
+4. **An expiry.** The row names a release by which a consumer must land, after
+   which the layer is deleted or demoted to provenance. This is what makes the
+   bet reversible, and reversibility is what makes it takeable. Removal is an
+   ordinary outcome here: the `doc-gen4` pipeline was built and removed on cost
+   grounds.
+
+A foundation is a `LAND-` artifact row. It never enters headline coverage and
+never carries a statement-match grade against a source it does not state.
+
+The trade this strikes: parsimony keeps its teeth where duplication and
+speculative *theorem* work are concerned, and gives up only the veto over cheap
+definitional layers whose blocked consumers can be named in advance. A layer
+admitted this way that no one uses is deleted at a known date rather than
+accumulating.
 
 Research reports and literature surveys are discovery inputs. Claims from them
 enter the verified registry only after checking a primary source, an immutable
@@ -138,6 +185,26 @@ a note saying a result is unformalized. The claim records what was searched, at
 which revision, on what date, and what the search did not cover. One corpus is a
 legitimate novelty check if the claim is about that corpus; six are needed only
 if the claim is that broad.
+
+**Write the record, not the prose.** The obligation is not paperwork over a
+conclusion already reached — producing the record is what tests the claim. A
+prose absence claim is reached by whatever the author happened to look at; a
+`novelty-check` forces naming a corpus and a revision and then grepping it, and
+that step routinely disagrees with the prose.
+
+The worked case is `NC-005`. The embedded self-knowledge sweep concluded in prose
+that no usable *categorical* Lawvere formalization existed. Writing the record
+required naming corpora, and grepping the pinned AFP release produced
+`Category_Set`'s `Lawveres_fixed_point_theorem` immediately — licensed,
+maintained, at the same release the atlas already pins for two other entries. The
+prose claim had been reached by web search rather than by searching a corpus, and
+it was wrong. What survived was a *narrower* true claim: over ETCS rather than an
+arbitrary cartesian closed category, and in Isabelle rather than Lean. See
+[the sweep](../provenance/embedded-self-knowledge-landscape.md#lawvere--already-in-the-dependency-tree).
+
+So: no absence claim ships on prose. Not because a reviewer demands the artifact,
+but because writing it is the only part of the process that can tell you the
+claim is false.
 
 A claim of absence is the one claim a reader cannot check for themselves, which
 is why it carries its own evidence. The usual failure is to assert that

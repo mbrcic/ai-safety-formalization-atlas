@@ -15,10 +15,17 @@ claim.
 | `Logic.godel_second_incompleteness` | Gödel's **second** incompleteness: \(T \nvdash \mathrm{Con}(T)\) | **BY-013 companion** (`RELATED`) |
 | `Logic.tarski_undefinability` | Tarski: arithmetic truth is not arithmetically definable | **BY-016** (`EQUIVALENT`) |
 | `Logic.loeb` | Löb: if \(T \vdash \mathrm{Prov}_T(\sigma)\to\sigma\) then \(T \vdash \sigma\) | **BY-027** (`EQUIVALENT`) |
+| `Logic.lawvere_fixed_point` | Type-level Lawvere: a surjection `α → (α → β)` forces every endofunction on `β` to have a fixed point | **CLM-LAWVERE-001** (`EQUIVALENT`) |
+
+The original categorical source claim is also recorded as
+**CLM-LAWVERE-CCC-001**. It currently has no Atlas Lean formalization; the
+public Lean alias above is only its ordinary types-and-functions specialization.
 
 Gödel, Tarski, and Löb aliases are **classical theorems for concrete arithmetic
 theories** from FormalizedFormalLogic/Foundation (not abstract axiomatized
-skeletons). Chaitin is from the vendored KolmogorovMathlib pin.
+skeletons). Chaitin is from the vendored KolmogorovMathlib pin. Lawvere is a
+thin alias of Mathlib's theorem for ordinary Lean types and functions; it is not
+the arbitrary-cartesian-closed-category theorem.
 
 ## Coverage policy for BY-013
 
@@ -33,6 +40,9 @@ double-counting.
 - **Gödel I** ≠ **Gödel II** ≠ **Löb** (three different theorems).
 - **Tarski undefinability** is about *truth*, not *provability* (though the
   fixed-point engine is related).
+- **Lawvere** is a reusable extensional diagonal kernel, not a replacement for
+  the syntax, representability, provability, or computability infrastructure in
+  the concrete Gödel, Tarski, Löb, halting, and Rice proofs.
 - Atlas uses ASCII `loeb` for the public name; upstream uses `löb_theorem`.
 
 ## Provenance and build layout
@@ -44,6 +54,10 @@ double-counting.
   `FormalizedFormalLogic/Foundation` @
   `b47cf447255addf88a5d72781d0d29641948eb6e` (Apache-2.0). Modules under
   `Foundation.FirstOrder.Incompleteness.{First,Second,Tarski,Löb}`.
+- **Lawvere:** Mathlib declaration
+  `Function.exists_fixed_point_of_surjective` at the repository's pinned
+  Mathlib revision (Apache-2.0). Lawvere's original source is recorded as
+  `lawvere-1969-diagonal-ccc` in the registry.
 - Public names live only in `AISafetyAtlas.Logic`.
 
 ### Correlated Foundation risk

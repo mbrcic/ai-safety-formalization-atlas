@@ -219,6 +219,32 @@ NOVELTY_CHECK_FIELDS = {
 GRADED_RELATIONSHIPS = {"EXACT", "EQUIVALENT", "RELATED"}
 ISO_DATE = re.compile(r"\d{4}-\d{2}-\d{2}")
 BRIDGE_STATUS_VALUES = {"HUMAN_REVIEW", "STATEMENT_REVIEWED", "REVIEWED"}
+# Typed edges between results, and the shape of statement a row makes.
+# Deliberately small: four kinds and five shapes are what the current ledger
+# actually needs, and a taxonomy nobody has to use is a taxonomy nobody checks.
+RELATION_KIND_VALUES = {"BOUNDARY_PARTNER", "BUILDS_ON", "INSTANTIATES", "REFINES"}
+RESULT_SHAPE_VALUES = {
+    "ACHIEVABILITY",
+    "BOUND",
+    "CHARACTERIZATION",
+    "INFRASTRUCTURE",
+    "POINT_IMPOSSIBILITY",
+}
+# The public page renders `public` verbatim, so these are the rows' own words
+# about themselves rather than a separate marketing copy that can drift.
+# Kept in step with PUBLIC_GROUPS in generate_registry_views.py.
+PUBLIC_FIELDS = {"group", "summary", "use"}
+PUBLIC_OPTIONAL_FIELDS = {"title", "attribution"}
+PUBLIC_GROUP_VALUES = {
+    "Limits of verification",
+    "Limits of self-knowledge and reflection",
+    "What an observer can recover",
+    "Learning and generalization",
+    "Preferences, rewards and incentives",
+    "Aggregation and multi-agent structure",
+    "Composition and interpretability",
+    "Assembled from other proof assistants",
+}
 BRIDGE_REVIEW_FIELDS = {
     "reviewer",
     "date",
@@ -410,6 +436,34 @@ def main() -> None:
         )
     if not license_values:
         fail("spdx_license vocabulary must not be empty")
+
+    # How one result stands to another, and what shape of statement it is.
+    # Both are controlled for the same reason `tag` is: an unchecked kind makes
+    # the generated relation view a place where anyone can assert any structure.
+    # `relationship` is deliberately *not* reused here — that field grades a
+    # statement against its source, which is a different axis entirely.
+    relation_kind_values = set(
+        require_text_list(
+            vocabulary.get("relation_kind"),
+            "relation_kind vocabulary must be a list of non-empty strings",
+        )
+    )
+    if relation_kind_values != RELATION_KIND_VALUES:
+        fail(
+            "relation_kind vocabulary must contain exactly "
+            "BOUNDARY_PARTNER, BUILDS_ON, INSTANTIATES, and REFINES"
+        )
+    result_shape_values = set(
+        require_text_list(
+            vocabulary.get("result_shape"),
+            "result_shape vocabulary must be a list of non-empty strings",
+        )
+    )
+    if result_shape_values != RESULT_SHAPE_VALUES:
+        fail(
+            "result_shape vocabulary must contain exactly ACHIEVABILITY, BOUND, "
+            "CHARACTERIZATION, INFRASTRUCTURE, and POINT_IMPOSSIBILITY"
+        )
 
     # Mathematical area, the axis a contributor navigates by. A controlled
     # vocabulary rather than free text: an unchecked tag fragments the by-area
@@ -624,7 +678,7 @@ def main() -> None:
             present = sorted(survey_only_result_fields & result.keys())
             fail(
                 f"{result_id} carries survey-only fields {present}; those record "
-                "how the Brčić–Yampolskiy survey presented its own rows and mean "
+                "how the Brcic–Yampolskiy survey presented its own rows and mean "
                 "nothing on another source's claim"
             )
         missing = needed - result.keys()
@@ -694,6 +748,102 @@ def main() -> None:
         for related in related_ids:
             if related not in {r["id"] for r in results}:
                 fail(f"{result_id} related_result_ids names unknown result {related}")
+
+        # `relations` types the adjacency `related_result_ids` already records.
+        # It does not replace it: every typed edge must also appear untyped, so
+        # the two can never drift into disagreeing accounts of the same link.
+        # Typing is opt-in per row, because an edge whose kind nobody has
+        # decided is worse than an edge that only says "see also".
+        shape = result.get("result_shape")
+        if shape is not None and shape not in result_shape_values:
+            fail(f"{result_id} result_shape {shape!r} is outside the vocabulary")
+        # `public` is rendered verbatim on the front page. Requiring it on every
+        # row that carries Lean or a reproduced build is what stops the page and
+        # the ledger drifting: a new result cannot ship without saying, on the
+        # row itself, what it is and what it is for.
+        public = result.get("public")
+        if public is not None:
+            public = require_mapping(public, f"{result_id} public must be an object")
+            missing = PUBLIC_FIELDS - set(public)
+            if missing:
+                fail(f"{result_id} public is missing {sorted(missing)}")
+            extra = set(public) - PUBLIC_FIELDS - PUBLIC_OPTIONAL_FIELDS
+            if extra:
+                fail(f"{result_id} public has unknown fields {sorted(extra)}")
+            for optional in ("title", "attribution"):
+                value = public.get(optional)
+                if value is not None and (not isinstance(value, str) or not value.strip()):
+                    fail(
+                        f"{result_id} public {optional} must be a non-empty string "
+                        "when present; omit the field rather than leaving it blank"
+                    )
+            if public.get("group") not in PUBLIC_GROUP_VALUES:
+                fail(
+                    f"{result_id} public group {public.get('group')!r} is outside "
+                    "the vocabulary; add it to PUBLIC_GROUPS in "
+                    "generate_registry_views.py first, so it has a place on the page"
+                )
+            for field in ("summary", "use"):
+                value = public.get(field)
+                if not isinstance(value, str) or not value.strip():
+                    fail(f"{result_id} public {field} must be a non-empty string")
+        elif result.get("lean_artifact") is not None or any(
+            formalization.get("reproduced")
+            for formalization in (result.get("formalizations") or [])
+        ):
+            fail(
+                f"{result_id} carries Lean or a reproduced build but has no public "
+                "summary; the front page is generated from these, so a result "
+                "without one would be published as a silent omission"
+            )
+        relations = result.get("relations")
+        if relations is not None:
+            if not isinstance(relations, list):
+                fail(f"{result_id} relations must be a list")
+            seen_edges: set[tuple[str, str]] = set()
+            for edge in relations:
+                edge = require_mapping(edge, f"{result_id} relations entries must be objects")
+                extra = set(edge) - {"target", "kind", "note"}
+                if extra:
+                    fail(f"{result_id} relation has unknown fields {sorted(extra)}")
+                target = edge.get("target")
+                kind = edge.get("kind")
+                if not isinstance(target, str) or not target:
+                    fail(f"{result_id} relation target must be a non-empty string")
+                if kind not in relation_kind_values:
+                    fail(f"{result_id} relation kind {kind!r} is outside the vocabulary")
+                if target == result_id:
+                    fail(f"{result_id} relation points at itself")
+                if target not in {r["id"] for r in results}:
+                    fail(f"{result_id} relation names unknown result {target}")
+                if target not in related_ids:
+                    fail(
+                        f"{result_id} relation to {target} is not in related_result_ids; "
+                        "typed edges refine the untyped adjacency rather than replacing it"
+                    )
+                if (target, kind) in seen_edges:
+                    fail(f"{result_id} repeats relation {kind} -> {target}")
+                seen_edges.add((target, kind))
+                note = edge.get("note")
+                if note is not None and (not isinstance(note, str) or not note.strip()):
+                    fail(f"{result_id} relation note must be a non-empty string when present")
+                # A boundary pair spans two different models by construction —
+                # an impossibility here, a construction there. Without the delta
+                # written down the edge reads as a formal duality it is not.
+                if kind == "BOUNDARY_PARTNER" and not (isinstance(note, str) and note.strip()):
+                    fail(
+                        f"{result_id} BOUNDARY_PARTNER relation to {target} must carry a note "
+                        "stating the model delta between the two results"
+                    )
+                # "Builds on" is a claim about code. If either side has no Lean,
+                # the edge is a conceptual one and belongs to another kind.
+                if kind == "BUILDS_ON":
+                    target_row = next(r for r in results if r["id"] == target)
+                    if not target_row.get("lean_artifact") or not result.get("lean_artifact"):
+                        fail(
+                            f"{result_id} BUILDS_ON relation to {target} needs a Lean artifact on "
+                            "both rows; without one the dependency is conceptual, not mechanical"
+                        )
         if not isinstance(result["formalizations"], list):
             fail(f"{result_id} formalizations must be a list")
         for record in result["formalizations"]:

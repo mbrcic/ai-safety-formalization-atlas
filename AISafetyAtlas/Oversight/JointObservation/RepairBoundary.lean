@@ -75,17 +75,18 @@ public def CollisionWitness.postprocess
 
 If a candidate fails to cover the hazard, no computation over its unchanged output
 covers it either.
+
+This is `Knowledge.not_knowable_comp` at `Ω := A.Execution`: `Covers` is
+definitionally `Knowledge.Knowable q.observe`, and `(q.postprocess g).observe` is
+`g ∘ q.observe` by `rfl`. Constructive, and axiom-free, in the kernel.
 -/
 public theorem postprocess_cannot_repair_collision
     {q : CandidateObservation.{u, v, w} A}
     {h : Hazard A}
     (hnc : ¬ Covers q h)
     {β : Type w'}
-    (g : q.Output → β) : ¬ Covers (q.postprocess g) h := by
-  -- Contrapositive, and constructive: a rule on the post-processed output composes
-  -- with `g` to give a rule on the original output.
-  rintro ⟨d, hd⟩
-  exact hnc ⟨fun o => d (g o), fun σ => by rw [hd σ, observe_postprocess]⟩
+    (g : q.Output → β) : ¬ Covers (q.postprocess g) h :=
+  Knowledge.not_knowable_comp g hnc
 
 /-! ## Refinement -/
 
@@ -114,15 +115,18 @@ public theorem refines_postprocess
 If `q` covers the hazard and `q'` is at least as informative as `q`, then `q'` covers
 it too. Repair by refining evidence access is therefore monotone: it cannot lose a
 guarantee already established.
+
+This is `Knowledge.Knowable.mono`: `Refines q' q` is definitionally
+`Knowledge.Determines q'.observe q.observe`. Both halves of C3 are therefore the
+same generic monotonicity result, stated once in the kernel — part 1 is its
+contrapositive at `finer := q.observe`.
 -/
 public theorem covers_of_refines
     {q' : CandidateObservation.{u, v, w'} A}
     {q : CandidateObservation.{u, v, w} A}
     {h : Hazard A}
     (hr : Refines q' q)
-    (hc : Covers q h) : Covers q' h := by
-  obtain ⟨f, hf⟩ := hr
-  obtain ⟨d, hd⟩ := hc
-  exact ⟨fun o => d (f o), fun σ => by rw [hd σ, hf σ]⟩
+    (hc : Covers q h) : Covers q' h :=
+  Knowledge.Knowable.mono hr hc
 
 end AISafetyAtlas.Oversight.JointObservation

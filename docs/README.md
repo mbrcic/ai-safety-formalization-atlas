@@ -30,8 +30,30 @@ and [`conjectures.yaml`](../conjectures.yaml).
 - [Contributor tasks](guide/contributor-tasks.md) — bounded CT units
 - [Logic incompleteness](guide/logic-incompleteness.md) — Chaitin vs Gödel aliases
 - [Robot verification model](guide/robot-verification-model.md) — paper vs Lean model
+- [Knowability model](guide/knowledge-model.md) — what a system can learn about
+  itself: the observation-factorization kernel and the five things "a system
+  cannot know itself" conflates
 - [Joint observation model](guide/joint-observation-model.md) — what a coalition's evidence can decide
 - [AI safety literature map](guide/related-literature.md) — papers first: how the atlas addresses them
+
+## Public project page
+
+[`site/`](../site/) holds the public landing page — what the workbench is, why it
+exists, and what each result is good for. It is one static HTML file, deployed to
+GitHub Pages by [`.github/workflows/pages.yml`](../.github/workflows/pages.yml).
+No build step: the workflow checks out, uploads the directory, and deploys.
+
+There is **no generated per-declaration API site**. A `doc-gen4` pipeline was
+built and removed: it renders the full import closure, which produced 372 MB of
+HTML for 2.5 MB of this project's own pages, and it has no way to link out to
+Mathlib's published docs instead of rebuilding them. Declaration-level reference
+lives in the module docstrings and the generated status tables below. The
+decision and what would reverse it are recorded in
+[open work](guide/open-work.md).
+
+Deploying needs Pages configured with **Source: GitHub Actions** (Settings →
+Pages → Build and deployment); the workflow header says so too, because nothing
+in the repository can detect it.
 
 ## Provenance (evidence)
 
@@ -40,6 +62,13 @@ and [`conjectures.yaml`](../conjectures.yaml).
 - [External formalizations](provenance/external-formalizations.md) — Isabelle etc.
 - [A1–A3/B1–B3/B7 statement maps](provenance/a1-a3-b1-b3-b7-statement-maps.md)
 - [A1–A3/B1–B3/B7 re-verification](provenance/a1-a3-b1-b3-b7-reverification.md)
+- [Self-measurement kernel](provenance/self-measurement-kernel.md) — Breuer source
+  map, transcribed propositions, omissions, non-vacuity, stop rules
+- [Embedded self-knowledge landscape](provenance/embedded-self-knowledge-landscape.md) —
+  what already exists around knowability; negative searches and the Lawvere correction
+- [Limited self-awareness](provenance/limited-self-awareness.md) — BY-044 source map,
+  strict-extension interpretation, proof split, and fidelity residual
+- [Debate reproduction](provenance/debate-reproduction.md) — Path-A external build
 
 ## Status (generated)
 
@@ -54,6 +83,9 @@ Regenerate with `python3 scripts/generate_registry_views.py` (also refreshes
 - [Formalization status](status/formalization-status.md)
 - [Landscape index](status/landscape-index.md) — atlas formalizations and public
   Lean surface
+- [Relations and shapes](status/relations.md) — the ledger as a graph: how two
+  results stand to each other, and which are characterizations rather than point
+  impossibilities
 - [Source reports](status/sources/) — per catalogued source: papers, formalizations,
   atlas declarations, bridge state
 
@@ -64,7 +96,8 @@ Regenerate with `python3 scripts/generate_registry_views.py` (also refreshes
 
 ## Releases
 
-- [v0.5 release](releases/v0.5.md) — current published release (`0.5.0`, tagged)
+- [v0.5.1 release](releases/v0.5.1.md) — current published release (`0.5.1`, tagged)
+- [v0.5 release](releases/v0.5.md) — historical (`0.5.0`, tagged)
 - [v0.4 release](releases/v0.4.md) — historical (`0.4.0`, tagged)
 - [v0.3 release](releases/v0.3.md) — historical (`0.3.x`)
 - [v0.2 release](releases/v0.2.md) — historical

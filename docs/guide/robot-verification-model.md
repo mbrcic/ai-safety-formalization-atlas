@@ -162,7 +162,8 @@ the presentation of the source problem, not the reduction principle.
 
 Given a `SwitchingConstruction`, there is no total computable Boolean verifier
 that is both sound and complete for `AlwaysSatisfies` on every program selected
-by `structured`. The example in `AISafetyAtlas.Examples.Robot` constructs a
+by `structured`. The example in `AISafetyAtlas.Examples.Verification.Robot`
+constructs a
 certificate using Mathlib's finite-step evaluator: each cycle performs a longer
 bounded approximation, returns an acceptable action while no result has been
 found, and returns an unacceptable action after a result appears.

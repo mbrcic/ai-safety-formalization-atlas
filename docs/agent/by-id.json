@@ -2,8 +2,8 @@
   "schema_version": 1,
   "generated_by": "scripts/generate_registry_views.py",
   "note": "Compact agent lookup over the single results ledger. Prefer this over registry.yaml; open the full YAML only for one id when notes or candidate-formalization detail is required. A row with an informal claim states something a source asserted; a row without one records a formalization standing on its own account.",
-  "claim_count": 44,
-  "artifact_count": 16,
+  "claim_count": 46,
+  "artifact_count": 26,
   "results_by_id": {
     "BY-001": {
       "id": "BY-001",
@@ -941,8 +941,87 @@
     "BY-044": {
       "id": "BY-044",
       "name": "Limited self-awareness",
-      "ai_bridge_status": "HUMAN_REVIEW",
+      "ai_bridge_status": "STATEMENT_REVIEWED",
       "informal_claim": "An agent cannot be perfectly self-aware across the survey's defined operational boundaries.",
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "relationship": "EQUIVALENT",
+          "reproduced": true,
+          "declarations": [
+            "AISafetyAtlas.SelfAwareness.Model",
+            "AISafetyAtlas.SelfAwareness.AgentAware",
+            "AISafetyAtlas.SelfAwareness.PerfectlySelfAware",
+            "AISafetyAtlas.SelfAwareness.Model.not_aware_of_le",
+            "AISafetyAtlas.SelfAwareness.Model.process_not_self_aware",
+            "AISafetyAtlas.SelfAwareness.Model.not_agentAware_of_maximal",
+            "AISafetyAtlas.SelfAwareness.Model.limited_self_awareness",
+            "AISafetyAtlas.SelfAwareness.Model.not_perfectlySelfAware"
+          ],
+          "module": "AISafetyAtlas.SelfAwareness",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.SelfAwareness.Model.not_aware_of_le",
+            "type": "NEW_PROOF"
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.SelfAwareness.Model.process_not_self_aware",
+            "type": "NEW_PROOF"
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.SelfAwareness.Model.not_agentAware_of_maximal",
+            "type": "NEW_PROOF"
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.SelfAwareness.Model.limited_self_awareness",
+            "type": "NEW_PROOF"
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.SelfAwareness.Model.not_perfectlySelfAware",
+            "type": "NEW_PROOF"
+          }
+        ]
+      },
+      "candidate_count": 0
+    },
+    "CLM-LAWVERE-001": {
+      "id": "CLM-LAWVERE-001",
+      "name": "Lawvere fixed-point theorem (types and functions)",
+      "ai_bridge_status": "HUMAN_REVIEW",
+      "informal_claim": "If a function f : α → (α → β) is surjective, then every endofunction g : β → β has a fixed point.",
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "relationship": "EQUIVALENT",
+          "reproduced": true,
+          "declarations": [
+            "Function.exists_fixed_point_of_surjective"
+          ],
+          "module": "Mathlib.Logic.Function.Basic",
+          "repository": "https://github.com/leanprover-community/mathlib4",
+          "version": "fabf563a7c95a166b8d7b6efca11c8b4dc9d911f"
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Logic.lawvere_fixed_point",
+            "type": "WRAPPER"
+          }
+        ]
+      },
+      "candidate_count": 0
+    },
+    "CLM-LAWVERE-CCC-001": {
+      "id": "CLM-LAWVERE-CCC-001",
+      "name": "Lawvere fixed-point theorem (Cartesian closed categories)",
+      "ai_bridge_status": "HUMAN_REVIEW",
+      "informal_claim": "In a Cartesian closed category, if there are an object A and a weakly point-surjective morphism A → Y^A, then every endomorphism Y → Y has a fixed point.",
       "formalizations": [],
       "lean_artifact": null,
       "candidate_count": 0
@@ -1387,6 +1466,516 @@
         "declarations": [
           {
             "atlas_declaration": "AISafetyAtlas.Oversight.JointObservation.covers_iff_no_collision",
+            "type": "NEW_PROOF"
+          }
+        ]
+      },
+      "candidate_count": 0
+    },
+    "LAND-SELFREF-001": {
+      "id": "LAND-SELFREF-001",
+      "name": "The self-model as a component of the state it models",
+      "ai_bridge_status": null,
+      "informal_claim": null,
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "relationship": null,
+          "reproduced": true,
+          "declarations": [
+            "AISafetyAtlas.Knowledge.SelfReference.SelfState",
+            "AISafetyAtlas.Knowledge.SelfReference.selfRead",
+            "AISafetyAtlas.Knowledge.SelfReference.SelfComplete",
+            "AISafetyAtlas.Knowledge.SelfReference.selfComplete_iff_subsingleton_rest",
+            "AISafetyAtlas.Knowledge.SelfReference.not_selfComplete_of_two_rest",
+            "AISafetyAtlas.Knowledge.SelfReference.card_rest_le_one_of_selfComplete"
+          ],
+          "module": "AISafetyAtlas.Knowledge.SelfReference",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Knowledge.SelfReference.selfComplete_iff_subsingleton_rest",
+            "type": "NEW_PROOF"
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Knowledge.SelfReference.not_selfComplete_of_two_rest",
+            "type": "NEW_PROOF"
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Knowledge.SelfReference.card_rest_le_one_of_selfComplete",
+            "type": "NEW_PROOF"
+          }
+        ]
+      },
+      "candidate_count": 0
+    },
+    "LAND-ACCUM-001": {
+      "id": "LAND-ACCUM-001",
+      "name": "Window ambiguity: accumulation bounds over a set of targets",
+      "ai_bridge_status": null,
+      "informal_claim": null,
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "relationship": null,
+          "reproduced": true,
+          "declarations": [
+            "AISafetyAtlas.Knowledge.pairTarget",
+            "AISafetyAtlas.Knowledge.ambiguity_le_pairTarget_left",
+            "AISafetyAtlas.Knowledge.ambiguity_le_pairTarget_right",
+            "AISafetyAtlas.Knowledge.ambiguity_pairTarget_le_mul",
+            "AISafetyAtlas.Knowledge.not_knowable_pairTarget_of_not_knowable",
+            "AISafetyAtlas.Knowledge.ambiguity_le_of_evidenceMonotone",
+            "AISafetyAtlas.Knowledge.ambiguity_le_pairTarget_of_evidenceMonotone"
+          ],
+          "module": "AISafetyAtlas.Knowledge.Accumulation",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Knowledge.ambiguity_le_pairTarget_left",
+            "type": "NEW_PROOF"
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Knowledge.ambiguity_le_pairTarget_right",
+            "type": "NEW_PROOF"
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Knowledge.ambiguity_pairTarget_le_mul",
+            "type": "NEW_PROOF"
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Knowledge.not_knowable_pairTarget_of_not_knowable",
+            "type": "NEW_PROOF"
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Knowledge.ambiguity_le_of_evidenceMonotone",
+            "type": "NEW_PROOF"
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Knowledge.ambiguity_le_pairTarget_of_evidenceMonotone",
+            "type": "NEW_PROOF"
+          }
+        ]
+      },
+      "candidate_count": 0
+    },
+    "LAND-AMBIG-001": {
+      "id": "LAND-AMBIG-001",
+      "name": "Finite fibre ambiguity and the counting obstruction",
+      "ai_bridge_status": null,
+      "informal_claim": null,
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "relationship": null,
+          "reproduced": true,
+          "declarations": [
+            "AISafetyAtlas.Knowledge.fibre",
+            "AISafetyAtlas.Knowledge.ambiguity",
+            "AISafetyAtlas.Knowledge.knowable_iff_ambiguity_le_one",
+            "AISafetyAtlas.Knowledge.not_knowable_of_one_lt_ambiguity",
+            "AISafetyAtlas.Knowledge.card_image_le_of_knowable",
+            "AISafetyAtlas.Knowledge.not_knowable_of_card_lt",
+            "AISafetyAtlas.Knowledge.ambiguity_le_of_comp"
+          ],
+          "module": "AISafetyAtlas.Knowledge.Ambiguity",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Knowledge.card_image_le_of_knowable",
+            "type": "NEW_PROOF"
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Knowledge.not_knowable_of_card_lt",
+            "type": "NEW_PROOF"
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Knowledge.ambiguity_le_of_comp",
+            "type": "NEW_PROOF"
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Knowledge.knowable_iff_ambiguity_le_one",
+            "type": "NEW_PROOF"
+          }
+        ]
+      },
+      "candidate_count": 0
+    },
+    "LAND-TEMPORAL-001": {
+      "id": "LAND-TEMPORAL-001",
+      "name": "Time-indexed knowability, contemporaneous collisions, and delayed knowledge",
+      "ai_bridge_status": null,
+      "informal_claim": null,
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "relationship": null,
+          "reproduced": true,
+          "declarations": [
+            "AISafetyAtlas.Knowledge.Temporal.KnowableFrom",
+            "AISafetyAtlas.Knowledge.Temporal.KnowableAt",
+            "AISafetyAtlas.Knowledge.Temporal.EvidenceMonotone",
+            "AISafetyAtlas.Knowledge.Temporal.CollisionAt",
+            "AISafetyAtlas.Knowledge.Temporal.DelayedKnowable",
+            "AISafetyAtlas.Knowledge.Temporal.knowableFrom_mono",
+            "AISafetyAtlas.Knowledge.Temporal.not_knowableAt_of_collisionAt",
+            "AISafetyAtlas.Knowledge.Temporal.collisionAt_of_not_knowableAt"
+          ],
+          "module": "AISafetyAtlas.Knowledge.Temporal",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Knowledge.Temporal.knowableFrom_mono",
+            "type": "NEW_PROOF"
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Knowledge.Temporal.not_knowableAt_of_collisionAt",
+            "type": "NEW_PROOF"
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Knowledge.Temporal.collisionAt_of_not_knowableAt",
+            "type": "NEW_PROOF"
+          }
+        ]
+      },
+      "candidate_count": 0
+    },
+    "LAND-CL-001": {
+      "id": "LAND-CL-001",
+      "name": "Chandy-Lamport distributed snapshot — termination, correctness, stable property detection",
+      "ai_bridge_status": null,
+      "informal_claim": null,
+      "formalizations": [
+        {
+          "framework": "Isabelle/HOL",
+          "relationship": null,
+          "reproduced": true,
+          "declarations": [
+            "snapshot_algorithm_must_terminate",
+            "snapshot_algorithm_is_correct",
+            "Stable_Property_Detection"
+          ],
+          "module": "Snapshot.thy; session Chandy_Lamport",
+          "repository": "https://www.isa-afp.org/entries/Chandy_Lamport.html",
+          "version": "AFP release 2026-02-06 (full release archive, SHA256 b059edd46073479ee8dde45004c2346a7365e5d94cded49d27257cfea66c8879)"
+        }
+      ],
+      "lean_artifact": null,
+      "candidate_count": 0
+    },
+    "LAND-SELFMEAS-001": {
+      "id": "LAND-SELFMEAS-001",
+      "name": "Self-measurement failure for an embedded observation",
+      "ai_bridge_status": null,
+      "informal_claim": null,
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "relationship": null,
+          "reproduced": true,
+          "declarations": [
+            "AISafetyAtlas.Knowledge.knowable_id_iff_injective",
+            "AISafetyAtlas.Knowledge.not_knowable_state_of_nontrivial_remainder",
+            "AISafetyAtlas.Knowledge.remainderWitness"
+          ],
+          "module": "AISafetyAtlas.Knowledge",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Knowledge.knowable_id_iff_injective",
+            "type": "NEW_PROOF"
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Knowledge.not_knowable_state_of_nontrivial_remainder",
+            "type": "NEW_PROOF"
+          }
+        ]
+      },
+      "candidate_count": 0
+    },
+    "LAND-SELFMEAS-002": {
+      "id": "LAND-SELFMEAS-002",
+      "name": "Breuer abstract embedded-measurement core",
+      "ai_bridge_status": null,
+      "informal_claim": null,
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "relationship": "EQUIVALENT",
+          "reproduced": true,
+          "declarations": [
+            "AISafetyAtlas.Knowledge.Embedded.ReadingSet",
+            "AISafetyAtlas.Knowledge.Embedded.ReadingSet.singleton",
+            "AISafetyAtlas.Knowledge.Embedded.ReadingSet.univ",
+            "AISafetyAtlas.Knowledge.Embedded.Restriction",
+            "AISafetyAtlas.Knowledge.Embedded.InferenceMap",
+            "AISafetyAtlas.Knowledge.Embedded.ProperInclusion",
+            "AISafetyAtlas.Knowledge.Embedded.Meshing",
+            "AISafetyAtlas.Knowledge.Embedded.Meshing.restrict_surjective",
+            "AISafetyAtlas.Knowledge.Embedded.ExactlyMeasurable",
+            "AISafetyAtlas.Knowledge.Embedded.MeasuresAllStates",
+            "AISafetyAtlas.Knowledge.Embedded.Distinguishes",
+            "AISafetyAtlas.Knowledge.Embedded.not_knowable_state_of_properInclusion",
+            "AISafetyAtlas.Knowledge.Embedded.no_meshing_inference_distinguishes",
+            "AISafetyAtlas.Knowledge.Embedded.no_meshing_inference_measures_all_states",
+            "AISafetyAtlas.Knowledge.Embedded.exists_state_not_exactly_measurable",
+            "AISafetyAtlas.Knowledge.Embedded.infer_singleton_eq_of_meshing",
+            "AISafetyAtlas.Knowledge.Embedded.exists_singleton_infer_eq_of_infer_eq",
+            "AISafetyAtlas.Knowledge.Embedded.eq_restrict_of_infer_singleton_eq",
+            "AISafetyAtlas.Knowledge.Embedded.no_meshing_inference_measures_all_states_direct",
+            "AISafetyAtlas.Knowledge.Embedded.meshing_fails_of_measuresAllStates",
+            "AISafetyAtlas.Knowledge.Embedded.exists_state_meshing_failure_of_measuresAllStates"
+          ],
+          "module": "AISafetyAtlas.Knowledge.Embedded",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Knowledge.Embedded.not_knowable_state_of_properInclusion",
+            "type": "NEW_PROOF"
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Knowledge.Embedded.Meshing.restrict_surjective",
+            "type": "NEW_PROOF"
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Knowledge.Embedded.no_meshing_inference_distinguishes",
+            "type": "NEW_PROOF"
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Knowledge.Embedded.no_meshing_inference_measures_all_states",
+            "type": "NEW_PROOF"
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Knowledge.Embedded.exists_state_not_exactly_measurable",
+            "type": "NEW_PROOF"
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Knowledge.Embedded.infer_singleton_eq_of_meshing",
+            "type": "NEW_PROOF"
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Knowledge.Embedded.exists_singleton_infer_eq_of_infer_eq",
+            "type": "NEW_PROOF"
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Knowledge.Embedded.eq_restrict_of_infer_singleton_eq",
+            "type": "NEW_PROOF"
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Knowledge.Embedded.no_meshing_inference_measures_all_states_direct",
+            "type": "NEW_PROOF"
+          }
+        ]
+      },
+      "candidate_count": 0
+    },
+    "LAND-SELFMEAS-003": {
+      "id": "LAND-SELFMEAS-003",
+      "name": "Physical complement and finite-cardinality bridges to Breuer proper inclusion",
+      "ai_bridge_status": null,
+      "informal_claim": null,
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declarations": [
+            "AISafetyAtlas.Knowledge.Embedded.Composition.knowable_whole_state_iff_injective",
+            "AISafetyAtlas.Knowledge.Embedded.Composition.properInclusion_iff_not_injective",
+            "AISafetyAtlas.Knowledge.Embedded.Composition.productRestriction",
+            "AISafetyAtlas.Knowledge.Embedded.Composition.equivalentProductRestriction",
+            "AISafetyAtlas.Knowledge.Embedded.Composition.properInclusion_of_nontrivial_remainder",
+            "AISafetyAtlas.Knowledge.Embedded.Composition.not_knowable_productState_of_nontrivial_remainder",
+            "AISafetyAtlas.Knowledge.Embedded.Composition.no_meshing_measures_all_of_nontrivial_remainder",
+            "AISafetyAtlas.Knowledge.Embedded.Composition.properInclusion_of_nontrivial_remainder_of_equiv",
+            "AISafetyAtlas.Knowledge.Embedded.Composition.no_meshing_measures_all_of_nontrivial_remainder_of_equiv",
+            "AISafetyAtlas.Knowledge.Embedded.Composition.fibreInference",
+            "AISafetyAtlas.Knowledge.Embedded.Composition.meshing_fibreInference_of_surjective",
+            "AISafetyAtlas.Knowledge.Embedded.Composition.measuresAll_fibreInference_of_injective",
+            "AISafetyAtlas.Knowledge.Embedded.Composition.meshing_and_measuresAll_fibreInference_of_bijective",
+            "AISafetyAtlas.Knowledge.Embedded.Finite.properInclusion_of_card_lt",
+            "AISafetyAtlas.Knowledge.Embedded.Finite.no_meshing_measures_all_of_card_lt",
+            "AISafetyAtlas.Knowledge.Embedded.Finite.properInclusion_product_of_card_rest_ge_two",
+            "AISafetyAtlas.Knowledge.Embedded.Composition.not_meshing_of_not_surjective"
+          ],
+          "module": "AISafetyAtlas.Knowledge.Embedded.Composition",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Knowledge.Embedded.Composition.properInclusion_of_nontrivial_remainder",
+            "type": "NEW_PROOF"
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Knowledge.Embedded.Composition.no_meshing_measures_all_of_nontrivial_remainder",
+            "type": "NEW_PROOF"
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Knowledge.Embedded.Composition.properInclusion_of_nontrivial_remainder_of_equiv",
+            "type": "NEW_PROOF"
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Knowledge.Embedded.Composition.no_meshing_measures_all_of_nontrivial_remainder_of_equiv",
+            "type": "NEW_PROOF"
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Knowledge.Embedded.Composition.measuresAll_fibreInference_of_injective",
+            "type": "NEW_PROOF"
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Knowledge.Embedded.Composition.meshing_and_measuresAll_fibreInference_of_bijective",
+            "type": "NEW_PROOF"
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Knowledge.Embedded.Finite.properInclusion_of_card_lt",
+            "type": "NEW_PROOF"
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Knowledge.Embedded.Finite.no_meshing_measures_all_of_card_lt",
+            "type": "NEW_PROOF"
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Knowledge.Embedded.Composition.properInclusion_iff_not_injective",
+            "type": "NEW_PROOF"
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Knowledge.Embedded.Composition.not_meshing_of_not_surjective",
+            "type": "NEW_PROOF"
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Knowledge.Embedded.Composition.meshing_fibreInference_of_surjective",
+            "type": "NEW_PROOF"
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Knowledge.Embedded.Finite.properInclusion_product_of_card_rest_ge_two",
+            "type": "NEW_PROOF"
+          }
+        ]
+      },
+      "candidate_count": 0
+    },
+    "LAND-KNOW-001": {
+      "id": "LAND-KNOW-001",
+      "name": "Exact knowability: the observation-factorization kernel",
+      "ai_bridge_status": null,
+      "informal_claim": null,
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "relationship": null,
+          "reproduced": true,
+          "declarations": [
+            "AISafetyAtlas.Knowledge.Knowable",
+            "AISafetyAtlas.Knowledge.IndistinguishabilityWitness",
+            "AISafetyAtlas.Knowledge.Determines",
+            "AISafetyAtlas.Knowledge.knowable_iff_factorsThrough",
+            "AISafetyAtlas.Knowledge.knowable_iff_no_collision",
+            "AISafetyAtlas.Knowledge.not_knowable_of_collision",
+            "AISafetyAtlas.Knowledge.not_knowable_of_witness",
+            "AISafetyAtlas.Knowledge.exists_witness_of_not_knowable",
+            "AISafetyAtlas.Knowledge.Knowable.mono",
+            "AISafetyAtlas.Knowledge.not_knowable_comp"
+          ],
+          "module": "AISafetyAtlas.Knowledge",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Knowledge.knowable_iff_factorsThrough",
+            "type": "WRAPPER"
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Knowledge.knowable_iff_no_collision",
+            "type": "WRAPPER"
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Knowledge.not_knowable_of_collision",
+            "type": "NEW_PROOF"
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Knowledge.not_knowable_of_witness",
+            "type": "NEW_PROOF"
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Knowledge.exists_witness_of_not_knowable",
+            "type": "NEW_PROOF"
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Knowledge.Knowable.mono",
+            "type": "NEW_PROOF"
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Knowledge.not_knowable_comp",
+            "type": "NEW_PROOF"
+          }
+        ]
+      },
+      "candidate_count": 0
+    },
+    "LAND-CRMDP-KNOW-001": {
+      "id": "LAND-CRMDP-KNOW-001",
+      "name": "True return does not factor through the observed history",
+      "ai_bridge_status": null,
+      "informal_claim": null,
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "relationship": null,
+          "reproduced": true,
+          "declarations": [
+            "AISafetyAtlas.Wireheading.ObservationLimits.observedHistory",
+            "AISafetyAtlas.Wireheading.ObservationLimits.trueReturn",
+            "AISafetyAtlas.Wireheading.ObservationLimits.complementWitness",
+            "AISafetyAtlas.Wireheading.ObservationLimits.not_knowable_trueReturn_of_complement_mem",
+            "AISafetyAtlas.Wireheading.ObservationLimits.not_knowable_trueReturn"
+          ],
+          "module": "AISafetyAtlas.Wireheading.ObservationLimits",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Wireheading.ObservationLimits.not_knowable_trueReturn_of_complement_mem",
+            "type": "NEW_PROOF"
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Wireheading.ObservationLimits.not_knowable_trueReturn",
+            "type": "NEW_PROOF"
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Wireheading.ObservationLimits.returnOver_zeroEnv_complement",
             "type": "NEW_PROOF"
           }
         ]

@@ -3,11 +3,11 @@ message: "If you use the AI Safety Formalization Atlas, please cite this softwar
 type: software
 title: "AI Safety Formalization Atlas"
 authors:
-  - family-names: "Brčić"
+  - family-names: "Brcic"
     given-names: "Mario"
     orcid: "https://orcid.org/0000-0002-7564-6805"
-version: "0.5.1"
-date-released: 2026-08-08
+version: "0.6.0"
+date-released: 2026-08-12
 identifiers:
   - type: doi
     value: "10.5281/zenodo.21483033"

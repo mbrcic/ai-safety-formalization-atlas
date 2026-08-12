@@ -10,7 +10,7 @@ paper EXACT; reduction core under assumed `SwitchingConstruction`).
 | Field | Value |
 |---|---|
 | Decision | Reviewed; accept RELATED packaging and scoped interpretation |
-| Reviewer | Mario Brčić (mbrcic) |
+| Reviewer | Mario Brcic (mbrcic) |
 | Date | 2026-07-19 |
 | Formalization relationship | Keep **`RELATED`** (not EXACT / EQUIVALENT) |
 | Bridge status | **`REVIEWED`** — statement and interpretation accepted |
@@ -136,7 +136,7 @@ Sense–Plan–Act syntax, hyper-commands, or probability in Def. 3.
 ```json
 "ai_bridge_status": "REVIEWED",
 "bridge_review": {
-  "reviewer": "Mario Brčić (mbrcic)",
+  "reviewer": "Mario Brcic (mbrcic)",
   "date": "2026-07-19",
   "statement_reviewed": true,
   "interpretation_reviewed": true,

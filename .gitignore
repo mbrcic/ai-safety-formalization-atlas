@@ -1,5 +1,9 @@
 # Lean/Lake build artifacts.
 /.lake/
+# The public page in /site is a static file deployed as-is; nothing to ignore.
+# A nested doc-gen4 project used to live in /docbuild and was removed — see
+# docs/guide/open-work.md for why, and delete any leftover /docbuild locally.
+/docbuild/
 
 # Python validation artifacts.
 __pycache__/

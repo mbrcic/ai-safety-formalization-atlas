@@ -303,7 +303,7 @@ def main() -> None:
         "AISafetyAtlas/Verification.lean",
         "AISafetyAtlas/Examples/PublicAPI.lean",
         "AISafetyAtlas/Examples/Registry.lean",
-        "AISafetyAtlas/Examples/Robot.lean",
+        "AISafetyAtlas/Examples/Verification/Robot.lean",
         "AISafetyAtlas/Examples/NonVacuity.lean",
         "AISafetyAtlas/Examples/WorkbenchConsumers.lean",
         "AISafetyAtlas/Verification/Robot.lean",

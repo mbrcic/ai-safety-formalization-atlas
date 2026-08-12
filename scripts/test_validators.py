@@ -361,6 +361,78 @@ CASES = [
         ),
         "related_result_ids names unknown result",
     ),
+    # Typed relations. The point of the schema is that an edge cannot assert
+    # structure nobody checked, so each guard gets a case.
+    (
+        "registry: relation kind outside the vocabulary",
+        "validate_registry.py",
+        "registry.yaml",
+        lambda d: first(d["results"], id="LAND-AMBIG-001")["relations"][0].__setitem__(
+            "kind", "IMPLIES"
+        ),
+        "relation kind 'IMPLIES' is outside the vocabulary",
+    ),
+    (
+        "registry: typed relation not backed by untyped adjacency",
+        "validate_registry.py",
+        "registry.yaml",
+        lambda d: first(d["results"], id="LAND-AMBIG-001")["relations"].append(
+            {"target": "LAND-ACCUM-001", "kind": "BUILDS_ON"}
+        ),
+        "is not in related_result_ids",
+    ),
+    (
+        "registry: boundary partner without a model delta",
+        "validate_registry.py",
+        "registry.yaml",
+        lambda d: first(d["results"], id="LAND-CL-001")["relations"][0].pop("note"),
+        "must carry a note stating the model delta",
+    ),
+    (
+        "registry: builds-on edge to a row with no Lean",
+        "validate_registry.py",
+        "registry.yaml",
+        lambda d: first(d["results"], id="LAND-TEMPORAL-001")["relations"].append(
+            {"target": "LAND-CL-001", "kind": "BUILDS_ON"}
+        ),
+        "needs a Lean artifact on both rows",
+    ),
+    (
+        "registry: relation pointing at its own row",
+        "validate_registry.py",
+        "registry.yaml",
+        lambda d: first(d["results"], id="LAND-AMBIG-001")["relations"][0].__setitem__(
+            "target", "LAND-AMBIG-001"
+        ),
+        "relation points at itself",
+    ),
+    (
+        "registry: repeated typed edge",
+        "validate_registry.py",
+        "registry.yaml",
+        lambda d: first(d["results"], id="LAND-AMBIG-001")["relations"].append(
+            dict(first(d["results"], id="LAND-AMBIG-001")["relations"][0])
+        ),
+        "repeats relation",
+    ),
+    (
+        "registry: result shape outside the vocabulary",
+        "validate_registry.py",
+        "registry.yaml",
+        lambda d: first(d["results"], id="LAND-ACCUM-001").__setitem__(
+            "result_shape", "NO_GO"
+        ),
+        "result_shape 'NO_GO' is outside the vocabulary",
+    ),
+    (
+        "registry: relation with an unknown field",
+        "validate_registry.py",
+        "registry.yaml",
+        lambda d: first(d["results"], id="LAND-AMBIG-001")["relations"][0].__setitem__(
+            "strength", "high"
+        ),
+        "relation has unknown fields",
+    ),
     (
         "registry: artifact with no formalization",
         "validate_registry.py",
@@ -486,6 +558,54 @@ CASES = [
             0
         ]["declarations"].__setitem__(0, "first, second"),
         "declaration names must be one identifier per list entry",
+    ),
+    (
+        "registry: Lean row without a public summary",
+        "validate_registry.py",
+        "registry.yaml",
+        lambda d: first(d["results"], id="LAND-KNOW-001").pop("public"),
+        "has no public summary",
+    ),
+    (
+        "registry: public group outside the vocabulary",
+        "validate_registry.py",
+        "registry.yaml",
+        lambda d: first(d["results"], id="LAND-KNOW-001")["public"].__setitem__(
+            "group", "Miscellaneous"
+        ),
+        "is outside the vocabulary",
+    ),
+    (
+        "registry: public summary empty",
+        "validate_registry.py",
+        "registry.yaml",
+        lambda d: first(d["results"], id="LAND-KNOW-001")["public"].__setitem__(
+            "summary", "   "
+        ),
+        "public summary must be a non-empty string",
+    ),
+    (
+        "registry: public missing a required field",
+        "validate_registry.py",
+        "registry.yaml",
+        lambda d: first(d["results"], id="LAND-KNOW-001")["public"].pop("use"),
+        "public is missing",
+    ),
+    (
+        "registry: public carries an unknown field",
+        "validate_registry.py",
+        "registry.yaml",
+        lambda d: first(d["results"], id="LAND-KNOW-001")["public"].__setitem__(
+            "tagline", "catchy"
+        ),
+        "public has unknown fields",
+    ),
+    (
+        "registry: reproduced row without a public summary",
+        "validate_registry.py",
+        "registry.yaml",
+        lambda d: first(d["results"], id="LAND-CL-001").pop("public"),
+        "has no public summary",
     ),
     (
         "registry: artifact with non-boolean root import",

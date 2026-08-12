@@ -81,6 +81,9 @@ variable {S A Act : Type*} (M : OverrideModel S A Act)
 @[expose] public def regret (R : RewardFn S A) (a : Act) : ℝ :=
   M.optValue R - M.value R (M.resulting a)
 
+/-- Regret is never negative: no action beats the optimal value it is measured
+against. Sanity condition on the definition, and what lets a regret bound be
+read as a shortfall rather than a signed quantity. -/
 public theorem regret_nonneg (R : RewardFn S A) (a : Act) : 0 ≤ M.regret R a :=
   sub_nonneg.mpr (M.le_optValue R _)
 

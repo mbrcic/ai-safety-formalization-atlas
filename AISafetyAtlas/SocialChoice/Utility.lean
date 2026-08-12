@@ -46,6 +46,10 @@ public def preference {Alternative : Type} (utility : Function Alternative) :
   trans _ _ _ := le_trans
   total _ _ := le_total _ _
 
+/-- The preorder induced by a utility function orders alternatives exactly as the
+utility values order. True by `rfl`, and stated as a `simp` lemma so downstream
+proofs rewrite between the order and the numbers without unfolding
+`preference`. -/
 @[simp]
 public theorem preference_le_iff {Alternative : Type}
     (utility : Function Alternative) (a b : Alternative) :

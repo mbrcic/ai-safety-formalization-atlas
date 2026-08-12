@@ -81,20 +81,22 @@ monorepo in-tree. Reusable structure and honest grading over volume.
 <!-- BEGIN GENERATED REGISTRY SCOPE -->
 | Metric | Current |
 |---|---:|
-| Atlas Lean declarations | **50** |
-| Results stating a source claim | **44** |
-| Results recording a formalization only | **16** (8 on root import) |
+| Atlas Lean declarations | **105** |
+| Results stating a source claim | **46** |
+| Results recording a formalization only | **26** (17 on root import) |
 | Reviewed AI-system bridges | **2** |
+| Statement-reviewed bridges (interpretation withheld) | **1** |
 | Open conjectures | **0** |
-| Catalogued results with statement-match | **7** |
-| Catalogued results with `RELATED`-only formalization | **6** |
+| Claim results with statement-match | **9** |
+| Claim results with `RELATED`-only formalization | **6** |
 
 `EXACT`/`EQUIVALENT` = conservative citation grade (completely
 formalization-covered source statements). `RELATED` = value-based scoped
 formalization, with documented deltas; it does **not by itself** mean
 unfinished, but postponed until justified (paper residuals stay in
-provenance). Counts above are **catalogued results**, not
-formalization records: one result may carry several. Detail:
+provenance). The two grade rows count **claim results**, not
+formalization records: one result may carry several, and an artifact
+row's own grade is never in these numbers. Detail:
 [formalization status](docs/status/formalization-status.md);
 [by mathematical area](docs/status/by-area.md);
 per-source reports under [`docs/status/sources/`](docs/status/sources/).
@@ -105,13 +107,29 @@ Published units must rebuild under documented commands and the axiom policy
 
 ## Domain imports
 
-Prefer a facade over the full root import when starting a proof:
+Prefer a facade over the full root import when starting a proof. Some parents
+re-export their domain (`Wireheading`, `Compositional`,
+`Oversight.JointObservation`); the kernels do not, so `Knowledge` and
+`Preference` specializations are imported one by one, and `Verification`
+supplies its mathematical base without the `AgentBehavior` and `Robot` bridges.
+Import contracts per module: [`AISafetyAtlas.lean`](AISafetyAtlas.lean).
 
 ```lean
-import AISafetyAtlas.Preference    -- planner/reward limits, override, regret
+import AISafetyAtlas.Preference    -- planner/reward unidentifiability (kernel)
+import AISafetyAtlas.Preference.Override -- overriding human reward functions
+import AISafetyAtlas.Preference.Regret   -- half-maximal regret not ruled out
 import AISafetyAtlas.Wireheading   -- reward channels, self-modification
 import AISafetyAtlas.Compositional -- rectangles, hyperproperties, networks
 import AISafetyAtlas.Oversight.JointObservation -- coalition evidence, coverage, collision
+import AISafetyAtlas.Knowledge     -- exact knowability, decoders, indistinguishability (kernel)
+import AISafetyAtlas.Knowledge.Embedded -- restriction, meshing, self-measurement limits
+import AISafetyAtlas.Knowledge.Embedded.Composition -- complement ⇒ proper inclusion; positive boundary
+import AISafetyAtlas.Knowledge.Embedded.Finite -- finite cardinality gap ⇒ proper inclusion
+import AISafetyAtlas.Knowledge.Temporal -- time-indexed knowability, collisions, delay
+import AISafetyAtlas.Knowledge.Ambiguity -- finite fibre ambiguity, counting obstruction
+import AISafetyAtlas.Knowledge.SelfReference -- model as part of the state it models
+import AISafetyAtlas.Knowledge.Accumulation -- window ambiguity bounds over time
+import AISafetyAtlas.SelfAwareness -- process composition and complete-awareness limits
 ```
 
 Cross-surface consumer pattern (compositional boundary + nonzero regret +
@@ -183,14 +201,56 @@ The stable entry points are conventional theorem names under domain namespaces:
   finite checker `decideCoverage`, the repair boundary, and the bounded portfolio target
   (landscape `LAND-JOINTOBS-001`; see the
   [joint observation model](docs/guide/joint-observation-model.md))
+- `AISafetyAtlas.Logic.lawvere_fixed_point` — the types-and-functions Lawvere
+  fixed-point wrapper (not the categorical statement; see `CLM-LAWVERE-CCC-001`)
+- `AISafetyAtlas.Learning.no_free_lunch` and `no_free_lunch_supervised` — finite NFL cores
+- `AISafetyAtlas.Knowledge` — start with the
+  [knowability model](docs/guide/knowledge-model.md).
+  `Knowable` in decoder form, `knowable_iff_no_collision`,
+  `IndistinguishabilityWitness`, and the informativeness boundary `Knowable.mono` /
+  `not_knowable_comp`. `JointObservation`'s coverage laws are this kernel applied to
+  `q.observe`
+- `AISafetyAtlas.Knowledge.Embedded` — restriction, inference maps, meshing, and the
+  abstract self-measurement no-gos (`EQUIVALENT` to Breuer 1995 §3.5; see `LAND-SELFMEAS-002`)
+- `AISafetyAtlas.Knowledge.Temporal` — `KnowableFrom` / `KnowableAt`,
+  `CollisionAt`, `EvidenceMonotone`, `DelayedKnowable`. Keeps *knowing the state
+  as of `s` from evidence at `t`* apart from *knowing the current state at `t`*, which
+  is the difference distributed snapshots exploit
+- `AISafetyAtlas.Knowledge.Ambiguity` — `ambiguity` counts the target values one
+  observation leaves open. `card_image_le_of_knowable` is a counting obstruction that
+  never names a colliding pair; `ambiguity_le_of_comp` says coarsening never lowers the
+  shortfall. Finite counting only — no probability or entropy
+- `AISafetyAtlas.Knowledge.SelfReference` — where the observation stops being an
+  arbitrary map: the observer's model is a *component* of the state. Complete
+  self-knowledge holds **iff** nothing else is in the state
+  (`selfComplete_iff_subsingleton_rest`), so it is achievable only degenerately
+- `AISafetyAtlas.Knowledge.Accumulation` — ambiguity about a *window* of targets.
+  Widening never reduces it and never exceeds the product of the steps. Growth itself
+  is not a theorem: it depends on dynamics, and both extremes are exhibited
+- `AISafetyAtlas.SelfAwareness` — active observation-and-predictive-modelling of
+  internal processes during a bounded horizon. `process_not_self_aware` is the
+  local strict-extension result; `limited_self_awareness` lifts it through
+  recursive process composition without assuming the awareness graph is acyclic
 
-The three latter facades contain short primary-surface tables and explicit
-paper-parity non-claims. Their source maps and residual gaps are recorded in the
-[A1–A3/B1–B3/B7 re-verification](docs/provenance/a1-a3-b1-b3-b7-reverification.md).
+Every facade above carries a short primary-surface table and explicit non-claims
+in its module docstring; read that before the declarations. Residual gaps are
+recorded per cluster, not in one place: `Compositional`, `Wireheading`,
+`Preference` and `Oversight.JointObservation` in the
+[A1–A3/B1–B3/B7 re-verification](docs/provenance/a1-a3-b1-b3-b7-reverification.md),
+and the `Knowledge` facades in the
+[self-measurement kernel note](docs/provenance/self-measurement-kernel.md) and the
+[landscape sweep](docs/provenance/embedded-self-knowledge-landscape.md). The
+process-compositional BY-044 interpretation has its own
+[source map and fidelity residual](docs/provenance/limited-self-awareness.md).
 
 **Landscape declarations** — results the workbench develops or reproduces on its
-own account, recorded in `registry.yaml` and on the root
-import when marked `root_import: true`:
+own account rather than as coverage of a catalogued source. Seventeen rows carry
+`root_import: true`; most are the `Knowledge`, `Oversight` and `Compositional`
+entry points listed above. The full list, with the declarations each row owns, is
+generated: [landscape index](docs/status/landscape-index.md), and how the rows
+stand to one another is [relations](docs/status/relations.md).
+
+The one that has no facade bullet above:
 
 - `AISafetyAtlas.Explainability.attribution_impossibility` (DASH trilemma;
   not BY-029/BY-042 without a separate statement map)

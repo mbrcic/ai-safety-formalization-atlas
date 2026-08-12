@@ -447,6 +447,9 @@ def test_a_claim_from_another_source_is_admissible(tree: Path) -> None:
     original = path.read_text(encoding="utf-8")
     try:
         data = json.loads(original)
+        baseline_claim_count = sum(
+            "informal_claim" in result for result in data["results"]
+        )
         row = json.loads(json.dumps(_first(data["results"], id="BY-001")))
         row["id"] = "CLM-AISI-001"
         row["name"] = "Admissibility probe: a claim catalogued from another source"
@@ -466,7 +469,7 @@ def test_a_claim_from_another_source_is_admissible(tree: Path) -> None:
             text=True,
         )
         assert done.returncode == 0, done.stderr + done.stdout
-        assert "45 claims" in done.stdout, done.stdout
+        assert f"{baseline_claim_count + 1} claims" in done.stdout, done.stdout
     finally:
         path.write_text(original, encoding="utf-8")
 

@@ -124,19 +124,22 @@ a mistake is expensive. That is the whole point, and it is worth one PR.
 The three results the survey [*Impossibility Results in AI: A Survey*](https://doi.org/10.1145/3603371)
 introduces **itself** — listed in the results table but, unlike the imported
 results, developed and argued by the authors in a dedicated section with proof
-sketches. BY-042 and BY-044 are `PROOF_SKETCH`, `MAPPED`, and unformalized;
-BY-043 already carries a `RELATED` formalization — check the row before
-scoping it. A sketch is a scaffold, not a full proof, so mechanizing one audits
-the sketch. One target among many, taken on the same grounds as any other:
-whether it makes something else easier to state or prove.
+sketches. BY-042 remains `PROOF_SKETCH` and unformalized; BY-043 already carries
+a `RELATED` formalization; BY-044 now carries an `EQUIVALENT` process-compositional
+formalization and an executable cyclic non-vacuity model. A sketch is a scaffold,
+not a full proof, so mechanizing one audits the sketch. One target among many,
+taken on the same grounds as any other: whether it makes something else easier
+to state or prove.
 
 - **Targets (pick one):**
-  - **BY-044 — Limited self-awareness:** an agent cannot be perfectly
-    self-aware across the survey's operational boundaries. The sketch is a
-    finite-resource / awareness-graph argument (its proposition plus a handful of
-    operational assumptions), *not* primarily a Gödel/Rice fixed-point result —
-    read it and pin the actual structure before assuming any reuse. Likely the
-    lightest of the three; take first.
+  - **BY-044 — Limited self-awareness (completed 2026-08-12):**
+    `AISafetyAtlas.SelfAwareness` separates the local strict-awareness-extension
+    obstruction from the maximal-composite proof, permits ordinary awareness
+    cycles, and explicitly unpacks the awareness definition's implicit
+    non-cancellation/resource semantics. First-author statement-level review
+    confirms that this is intended source content rather than a new physical
+    premise. Fixed-horizon and semilattice representational choices are recorded
+    in `docs/provenance/limited-self-awareness.md`; the row is `EQUIVALENT`.
   - **BY-043 — Misaligned embodiment:** mistakenly cloned self-interested agents
     cannot perfectly control one another. The sketch turns on operational
     cloning, functional identity, self-interest, and competition over a scarce
@@ -195,6 +198,10 @@ specification nobody has consumed is a specification whose ergonomics are untest
 - **Report back:** what the type of `joint` made awkward. Coalition access is enforced
   by type rather than by a side condition, and that is exactly the design choice a
   second consumer is positioned to falsify.
+
+### CT-17 — Pin Breuer 1995 at source and grade the self-measurement row (S) — **done (verified 2026-08-11)**
+
+Completed 2026-08-11. The primary PDF is pinned in [`self-measurement-kernel.md`](../provenance/self-measurement-kernel.md): §3.2 defines the inference map and exact measurement, §3.3 defines proper inclusion and the restriction map, §3.5 defines meshing, and Propositions 1–2 give the abstract no-go results. The generic fibre skeleton remains LAND-SELFMEAS-001; the source-faithful abstract inference-map core is LAND-SELFMEAS-002 with relationship RELATED and an explicit scope delta. Physical apparatus construction, dynamics, quantum structure, EPR, and philosophical consequences remain intentionally omitted. The Lean and registry gates are green. No DOI was confirmed; the direct PDF and PhilPapers catalogue locators are recorded in the provenance note.
 
 ### CT-6 — First possibility proof: continuous free lunches (BY-022) (L) — **New proof rung**
 

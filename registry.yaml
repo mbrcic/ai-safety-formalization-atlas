@@ -3,7 +3,7 @@
   "survey": {
     "title": "Impossibility Results in AI: A Survey",
     "authors": [
-      "Mario Brčić",
+      "Mario Brcic",
       "Roman V. Yampolskiy"
     ],
     "doi": "10.1145/3603371",
@@ -34,6 +34,19 @@
       "HUMAN_REVIEW",
       "STATEMENT_REVIEWED",
       "REVIEWED"
+    ],
+    "relation_kind": [
+      "BOUNDARY_PARTNER",
+      "BUILDS_ON",
+      "INSTANTIATES",
+      "REFINES"
+    ],
+    "result_shape": [
+      "ACHIEVABILITY",
+      "BOUND",
+      "CHARACTERIZATION",
+      "INFRASTRUCTURE",
+      "POINT_IMPOSSIBILITY"
     ],
     "tag": [
       "agent-incentives",
@@ -92,7 +105,7 @@
       "role": "work"
     },
     "brcic-yampolskiy-2023": {
-      "citation": "M. Brčić and R. V. Yampolskiy, “Impossibility Results in AI: A Survey,” ACM Computing Surveys, 2023, doi: 10.1145/3603371, arXiv:2109.00484.",
+      "citation": "M. Brcic and R. V. Yampolskiy, “Impossibility Results in AI: A Survey,” ACM Computing Surveys, 2023, doi: 10.1145/3603371, arXiv:2109.00484.",
       "locator": "https://doi.org/10.1145/3603371",
       "role": "directory",
       "notes": "The survey itself; source for its three author-original results BY-042, BY-043, BY-044."
@@ -441,13 +454,55 @@
       "citation": "G. A. Melo, M. R. O. A. Máximo, N. Y. Soma, and P. A. L. Castro, “On the Undecidability of Artificial Intelligence Alignment: Machines that Halt,” arXiv:2408.08995, 2024; also Sci. Rep., 2025.",
       "locator": "https://arxiv.org/abs/2408.08995",
       "role": "work",
-      "notes": "Not a Brčić–Yampolskiy Table-1 source. Related to BY-012 Rice packaging via AgentBehavior; see docs/guide/related-literature.md."
+      "notes": "Not a Brcic–Yampolskiy Table-1 source. Related to BY-012 Rice packaging via AgentBehavior; see docs/guide/related-literature.md."
+    },
+    "atlas-ref-wang-dorchen-jin-2026": {
+      "citation": "C. L. Wang, K. Dorchen, and P. Jin, “On The Statistical Limits of Self-Improving Agents,” arXiv:2510.04399v2, Feb. 2026.",
+      "locator": "https://arxiv.org/abs/2510.04399",
+      "role": "work",
+      "retrieved": "2026-08-12",
+      "notes": "Related-literature audit only; no claim row or paper-fidelity grade. The paper proposes a VC-capacity boundary for self-modification, but the displayed iff under A1–A7 is not supported as stated: its sufficiency proof additionally assumes all reachable classes lie in one fixed finite-VC reference family, which does not follow from a uniform bound on the VC dimension of each class. The Two-Gate oracle inequality also compares ERM in the final subclass with the infimum over the larger reference family without an approximation or optimization premise. See docs/guide/related-literature.md."
+    },
+    "atlas-ref-majumdar-2026": {
+      "citation": "S. Majumdar, “The Relativity of AGI: Distributional Axioms, Fragility, and Undecidability,” arXiv:2601.17335, Jan. 2026.",
+      "locator": "https://arxiv.org/abs/2601.17335",
+      "role": "work",
+      "retrieved": "2026-08-12",
+      "notes": "Related-literature audit only; no claim row or paper-fidelity grade. The intended certification argument is Rice-shaped, but semanticity and nontriviality on an arbitrary effectively presented admissible-agent subclass do not suffice for Rice's theorem without an acceptable numbering, universality, or a property-preserving reduction. The self-certification corollary adds no independent self-reference mechanism, and the Tarski-style proof additionally assumes unprovided completeness for negative instances. See docs/guide/related-literature.md."
     },
     "brcic-yampolskiy-2023-own-results": {
-      "citation": "M. Brčić and R. V. Yampolskiy, “Impossibility Results in AI: A Survey,” ACM Computing Surveys, 2023, doi: 10.1145/3603371 — the authors' own results section (BY-042, BY-043, BY-044) with proof sketches.",
+      "citation": "M. Brcic and R. V. Yampolskiy, “Impossibility Results in AI: A Survey,” ACM Computing Surveys, 2023, doi: 10.1145/3603371 — the authors' own results section (BY-042, BY-043, BY-044) with proof sketches.",
       "locator": "https://doi.org/10.1145/3603371",
       "role": "work",
       "notes": "Depth source for the survey's three author-original results. Distinct from the Table 1 directory entry brcic-yampolskiy-2023, which enumerates imported results and carries no statement to grade against."
+    },
+    "breuer-1995-self-measurement": {
+      "citation": "T. Breuer, “The Impossibility of Accurate State Self-Measurements,” Philosophy of Science, vol. 62, no. 2, pp. 197–214, Jun. 1995.",
+      "locator": "https://philpapers.org/rec/BRETIO-3",
+      "role": "work",
+      "retrieved": "2026-08-11",
+      "notes": "An observer cannot distinguish all present states of a system in which it is contained — classical or quantum, deterministic or stochastic time evolution. The primary PDF was read on 2026-08-11: §3.2 defines the inference map and exact measurement, §3.3 defines the restriction/proper-inclusion setup, §3.5 gives the meshing condition, and Propositions 1–2 state the abstract no-go results. Exactly one in-tree artifact is graded against this paper: LAND-SELFMEAS-002, the faithful abstract set-theoretic core, at RELATED rather than EXACT because physical apparatus construction, dynamics, the quantum treatment, and the EPR corollary are omitted. LAND-SELFMEAS-001 is a generic knowability specialization that is deliberately UNGRADED and carries no original_source_refs: it replaces the restriction map, inference map and meshing conditions with a product decomposition chosen to make a statement, so there is no second statement for a grade to be a grade of. PDF locator: https://cqi.inf.usi.ch/qic/Breuer95.pdf; catalogue locator remains the PhilPapers record. Search on 2026-08-11 across Mathlib, Isabelle/AFP, Rocq/Coq, HOL4, HOL Light, Agda and the general web found no machine-checked formalization; an unsuccessful search is not proof that none exists. Evidence: docs/provenance/self-measurement-kernel.md."
+    },
+    "chandy-lamport-1985": {
+      "citation": "K. M. Chandy and L. Lamport, “Distributed Snapshots: Determining Global States of Distributed Systems,” ACM Transactions on Computer Systems, vol. 3, no. 1, pp. 63–75, Feb. 1985, doi: 10.1145/214451.214456.",
+      "locator": "https://doi.org/10.1145/214451.214456",
+      "role": "work",
+      "retrieved": "2026-08-11",
+      "notes": "A possibility result, catalogued as the escape boundary dual to the self-knowledge impossibility statements: a process can determine a consistent global state of a distributed system while the computation continues. It bounds how any embedded self-knowledge claim may be worded — the obstruction concerns exact knowledge of the present state, not knowledge of a consistent past cut. Machine-checked in Isabelle/HOL as AFP entry Chandy_Lamport (Fiedler and Traytel, July 2020, BSD License), whose session parent Ordered_Resolution_Prover pulls Coinductive and Nested_Multisets_Ordinals, so reproduction uses the full pinned AFP release rather than a single-entry archive."
+    },
+    "brandenburger-keisler-2006": {
+      "citation": "A. Brandenburger and H. J. Keisler, “An Impossibility Theorem on Beliefs in Games,” Studia Logica, vol. 84, no. 2, pp. 211–240, Nov. 2006, doi: 10.1007/s11225-006-9011-z.",
+      "locator": "https://doi.org/10.1007/s11225-006-9011-z",
+      "role": "work",
+      "retrieved": "2026-08-11",
+      "notes": "Interactive diagonalization: a belief model of a certain kind must have a hole, so some belief a player can hold about the game is absent from any model available to the players themselves. Catalogued as the interactive-self-reference member of the diagonal family alongside CLM-LAWVERE-001. No proof-assistant formalization found on 2026-08-11; the formalizations located are mathematical and category-theoretic rather than machine-checked. Evidence: docs/provenance/embedded-self-knowledge-landscape.md."
+    },
+    "abramsky-zvesper-2010-lawvere-bk": {
+      "citation": "S. Abramsky and J. Zvesper, “From Lawvere to Brandenburger-Keisler: interactive forms of diagonalization and self-reference,” arXiv:1006.0992, Jun. 2010.",
+      "locator": "https://arxiv.org/abs/1006.0992",
+      "role": "work",
+      "retrieved": "2026-08-11",
+      "notes": "Recasts Brandenburger–Keisler as a fixed-point argument in regular categories, reducing it to a relational form of Lawvere's one-agent diagonal argument. Catalogued because it is the stated bridge between CLM-LAWVERE-CCC-001 and brandenburger-keisler-2006, and because it separates the type-level Lawvere statement the atlas holds from the relational one the interactive cases need. It does not follow that regular-category machinery is required to formalize them: section 5.2 reformulates weak and very weak point surjectivity relationally, and the section 7 composition analysis is conducted concretely over relations on sets. No proof-assistant formalization found on 2026-08-11."
     },
     "mathforaisafety-2026": {
       "citation": "AI Safety for Mathematicians, mathforaisafety.org — curated research directions for mathematicians entering AI safety (heuristic estimators, interpretability and feature manifolds, open-source game theory) plus a concrete-problems page.",
@@ -492,23 +547,39 @@
     },
     "atlas-ref-shalev-shwartz-ben-david-2014": {
       "citation": "S. Shalev-Shwartz and S. Ben-David, Understanding Machine Learning: From Theory to Algorithms. Cambridge University Press, 2014.",
+      "locator": "https://www.cs.huji.ac.il/~shais/UnderstandingMachineLearning/",
       "role": "work",
-      "notes": "Statement source for the no-free-lunch theorem reproduced as LAND-NFL-001 (Theorem 5.1). Locator not yet recorded."
+      "notes": "Statement source for the no-free-lunch theorem reproduced as LAND-NFL-001 (Theorem 5.1)."
     },
     "atlas-ref-parent-benzmueller-condnorm": {
       "citation": "X. Parent and C. Benzmüller, “Conditional normative reasoning as a fragment of HOL,” formalized in the Archive of Formal Proofs entry CondNormReasHOL.",
+      "locator": "https://isa-afp.org/entries/CondNormReasHOL.html",
       "role": "work",
-      "notes": "Statement source for LAND-PE-001 (Åqvist system E with the Parfit mere-addition use case). Locator not yet recorded."
+      "notes": "Statement source for LAND-PE-001 (Åqvist system E with the Parfit mere-addition use case)."
     },
     "atlas-ref-cohen-sharir-shashua-2016": {
       "citation": "N. Cohen, O. Sharir, and A. Shashua, “On the expressive power of deep learning: a tensor analysis,” Conference on Learning Theory (COLT), 2016.",
+      "locator": "https://arxiv.org/abs/1509.05009",
       "role": "work",
-      "notes": "Statement source for LAND-DL-001, reproduced through the Archive of Formal Proofs entry Deep_Learning. Locator not yet recorded."
+      "notes": "Statement source for LAND-DL-001, reproduced through the Archive of Formal Proofs entry Deep_Learning."
     },
     "atlas-ref-everitt-2016-self-modification": {
       "citation": "T. Everitt, D. Filan, M. Daswani, and M. Hutter, “Self-modification of policy and utility function in rational agents,” Artificial General Intelligence (AGI), 2016.",
+      "locator": "https://arxiv.org/abs/1605.03142",
       "role": "work",
-      "notes": "Statement source for LAND-GOAL-001 (Theorem 16). Locator not yet recorded."
+      "notes": "Statement source for LAND-GOAL-001 (Theorem 16)."
+    },
+    "lawvere-1969-diagonal-ccc": {
+      "citation": "F. W. Lawvere, “Diagonal Arguments and Cartesian Closed Categories,” in Category Theory, Homology Theory and Their Applications II, Lecture Notes in Mathematics, vol. 92, pp. 134–145, Springer, 1969. doi: 10.1007/BFb0080769.",
+      "locator": "https://doi.org/10.1007/BFb0080769",
+      "role": "work",
+      "notes": "Original source for the categorical Lawvere fixed-point theorem: a weakly point-surjective morphism into an exponential object forces the fixed-point property. The full CCC theorem is recorded as CLM-LAWVERE-CCC-001; no Atlas CCC formalization is claimed yet."
+    },
+    "yanofsky-2003-lawvere": {
+      "citation": "N. S. Yanofsky, “A Universal Approach to Self-Referential Paradoxes, Incompleteness and Fixed Points,” Bulletin of Symbolic Logic, vol. 9, no. 3, pp. 362–386, 2003, doi: 10.2178/bsl/1058448677.",
+      "locator": "https://doi.org/10.2178/bsl/1058448677",
+      "role": "work",
+      "notes": "Statement source for the sets-and-functions form exposed as CLM-LAWVERE-001; Lawvere's 1969 cartesian-closed-category theorem is strictly broader than the Atlas declaration."
     }
   },
   "results": [
@@ -827,7 +898,14 @@
       "tags": [
         "social-choice",
         "decision-theory"
-      ]
+      ],
+      "public": {
+        "group": "Aggregation and multi-agent structure",
+        "summary": "No fair way exists to merge people's rankings into one.",
+        "use": "Combining values across people or models.",
+        "title": "Arrow's impossibility",
+        "attribution": "Arrow"
+      }
     },
     {
       "id": "BY-008",
@@ -1291,7 +1369,14 @@
       "tags": [
         "preference-inference",
         "decision-theory"
-      ]
+      ],
+      "public": {
+        "group": "Preferences, rewards and incentives",
+        "summary": "Behaviour on its own does not pin down what an agent wants.",
+        "use": "Learning what someone wants from what they do.",
+        "title": "Preference unidentifiability",
+        "attribution": "Armstrong & Mindermann"
+      }
     },
     {
       "id": "BY-012",
@@ -1378,7 +1463,7 @@
       "ai_safety_relevance": "The survey identifies this result as relevant to limits on AI; no direct real-system implication is asserted here.",
       "ai_bridge_status": "REVIEWED",
       "bridge_review": {
-        "reviewer": "Mario Brčić (mbrcic)",
+        "reviewer": "Mario Brcic (mbrcic)",
         "date": "2026-07-19",
         "statement_reviewed": true,
         "interpretation_reviewed": true,
@@ -1412,7 +1497,14 @@
       "tags": [
         "computability",
         "verification"
-      ]
+      ],
+      "public": {
+        "group": "Limits of verification",
+        "summary": "You cannot build a tool that reads any code and tells you what it does.",
+        "use": "Why no tool can vet arbitrary AI code.",
+        "title": "Rice's theorem",
+        "attribution": "Rice"
+      }
     },
     {
       "id": "BY-013",
@@ -1494,7 +1586,14 @@
       },
       "tags": [
         "provability-logic"
-      ]
+      ],
+      "public": {
+        "group": "Limits of self-knowledge and reflection",
+        "summary": "Some truths cannot be proved. A system cannot even prove it is consistent.",
+        "use": "Systems asked to verify themselves.",
+        "title": "Gödel incompleteness I & II",
+        "attribution": "Gödel"
+      }
     },
     {
       "id": "BY-014",
@@ -1598,7 +1697,14 @@
       },
       "tags": [
         "computability"
-      ]
+      ],
+      "public": {
+        "group": "Limits of verification",
+        "summary": "You cannot build a tool that tells you if a program will ever stop.",
+        "use": "The root of most impossibilities here.",
+        "title": "The halting problem",
+        "attribution": "Turing; Church"
+      }
     },
     {
       "id": "BY-015",
@@ -1664,7 +1770,14 @@
       "tags": [
         "algorithmic-information",
         "provability-logic"
-      ]
+      ],
+      "public": {
+        "group": "Limits of self-knowledge and reflection",
+        "summary": "A system cannot prove that anything is much more complex than itself.",
+        "use": "Limits on what a system can prove about complexity.",
+        "title": "Chaitin incompleteness",
+        "attribution": "Chaitin"
+      }
     },
     {
       "id": "BY-016",
@@ -1725,7 +1838,14 @@
       },
       "tags": [
         "provability-logic"
-      ]
+      ],
+      "public": {
+        "group": "Limits of self-knowledge and reflection",
+        "summary": "A language cannot define truth for its own sentences.",
+        "use": "Systems that score their own output.",
+        "title": "Tarski undefinability",
+        "attribution": "Tarski"
+      }
     },
     {
       "id": "BY-017",
@@ -1938,7 +2058,14 @@
       "candidate_formalizations": [],
       "tags": [
         "learning-theory"
-      ]
+      ],
+      "public": {
+        "group": "Learning and generalization",
+        "summary": "No learner beats another once you average over all possible tasks.",
+        "use": "Making “our method generalizes” name its assumption.",
+        "title": "No free lunch — supervised learning",
+        "attribution": "Wolpert"
+      }
     },
     {
       "id": "BY-021",
@@ -2027,7 +2154,14 @@
       ],
       "tags": [
         "learning-theory"
-      ]
+      ],
+      "public": {
+        "group": "Learning and generalization",
+        "summary": "Same for search: no optimizer wins on average across all problems.",
+        "use": "Claims about general-purpose optimizers.",
+        "title": "No free lunch — optimization",
+        "attribution": "Wolpert & Macready"
+      }
     },
     {
       "id": "BY-022",
@@ -2288,7 +2422,14 @@
       "tags": [
         "provability-logic",
         "verification"
-      ]
+      ],
+      "public": {
+        "group": "Limits of self-knowledge and reflection",
+        "summary": "Saying “if I prove it, it is true” already proves it.",
+        "use": "Why an agent cannot simply trust its own reasoning.",
+        "title": "Löb's theorem",
+        "attribution": "Löb"
+      }
     },
     {
       "id": "BY-028",
@@ -2490,7 +2631,7 @@
           "reproduced": true,
           "license": "Apache-2.0",
           "build_environment": "leanprover/lean4:v4.31.0; mathlib@fabf563a7c95a166b8d7b6efca11c8b4dc9d911f",
-          "build_command": "lake build AISafetyAtlas.Verification.Robot AISafetyAtlas.Examples.Robot",
+          "build_command": "lake build AISafetyAtlas.Verification.Robot AISafetyAtlas.Examples.Verification.Robot",
           "scope_delta": {
             "summary": "Lean packages the switching construction as SwitchingConstruction and machine-checks only the reduction half; the paper's SPA syntax, its Definition 3 non-triviality construction, and the paced Turing-machine simulation are not mechanized. Bridge is REVIEWED while the formalization stays RELATED.",
             "evidence": "docs/guide/robot-verification-model.md"
@@ -2505,7 +2646,7 @@
             "source_declarations": [
               "AISafetyAtlas.Computability.halting_problem"
             ],
-            "application": "Robot ethics: no total online verifier decides whether a reactive program's actions are always acceptable, given a switching certificate. Conditional core of van Leeuwen and Wiedermann, Theorem 1 (UU-PCS-2021-02), reduced to the halting problem. The certificate is witnessed in `Examples.Robot`."
+            "application": "Robot ethics: no total online verifier decides whether a reactive program's actions are always acceptable, given a switching certificate. Conditional core of van Leeuwen and Wiedermann, Theorem 1 (UU-PCS-2021-02), reduced to the halting problem. The certificate is witnessed in `Examples.Verification.Robot`."
           }
         ]
       },
@@ -2530,7 +2671,7 @@
         ]
       },
       "bridge_review": {
-        "reviewer": "Mario Brčić (mbrcic)",
+        "reviewer": "Mario Brcic (mbrcic)",
         "date": "2026-07-19",
         "statement_reviewed": true,
         "interpretation_reviewed": true,
@@ -2539,7 +2680,14 @@
       "tags": [
         "verification",
         "ethics"
-      ]
+      ],
+      "public": {
+        "group": "Limits of verification",
+        "summary": "No monitor can guarantee a robot with unlimited memory always behaves.",
+        "use": "Watching systems that act in the world.",
+        "title": "Online robot verification",
+        "attribution": "van Leeuwen & Wiedermann"
+      }
     },
     {
       "id": "BY-034",
@@ -2836,7 +2984,14 @@
       },
       "tags": [
         "agent-incentives"
-      ]
+      ],
+      "public": {
+        "group": "Preferences, rewards and incentives",
+        "summary": "If the reward can be faked, the agent cannot tell it is being fooled.",
+        "use": "Reward tampering.",
+        "title": "Reward corruption",
+        "attribution": "Everitt, Krakovna, Orseau, Hutter & Legg"
+      }
     },
     {
       "id": "BY-040",
@@ -3010,7 +3165,14 @@
       "tags": [
         "multi-agent",
         "compositionality"
-      ]
+      ],
+      "public": {
+        "group": "Aggregation and multi-agent structure",
+        "summary": "The survey claims cloned agents cannot control each other. Only the symmetry result is proved.",
+        "use": "The difference between a claim and a proof of it.",
+        "title": "Misaligned embodiment",
+        "attribution": "Brcic & Yampolskiy; Angluin for the formalized core"
+      }
     },
     {
       "id": "BY-044",
@@ -3018,12 +3180,80 @@
       "paper_reference": "Table 1",
       "survey_proof_assessment": "PROOF_SKETCH",
       "informal_claim": "An agent cannot be perfectly self-aware across the survey's defined operational boundaries.",
-      "original_source_refs": [],
-      "formalizations": [],
-      "lean_artifact": null,
+      "original_source_refs": [
+        "brcic-yampolskiy-2023-own-results"
+      ],
+      "result_shape": "POINT_IMPOSSIBILITY",
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE",
+          "module": "AISafetyAtlas.SelfAwareness",
+          "atlas_module": "AISafetyAtlas.SelfAwareness",
+          "relationship": "EQUIVALENT",
+          "reproduced": true,
+          "license": "Apache-2.0",
+          "build_environment": "leanprover/lean4:v4.31.0; Mathlib fabf563a7c95a166b8d7b6efca11c8b4dc9d911f; atlas IN_TREE",
+          "declarations": [
+            "AISafetyAtlas.SelfAwareness.Model",
+            "AISafetyAtlas.SelfAwareness.AgentAware",
+            "AISafetyAtlas.SelfAwareness.PerfectlySelfAware",
+            "AISafetyAtlas.SelfAwareness.Model.not_aware_of_le",
+            "AISafetyAtlas.SelfAwareness.Model.process_not_self_aware",
+            "AISafetyAtlas.SelfAwareness.Model.not_agentAware_of_maximal",
+            "AISafetyAtlas.SelfAwareness.Model.limited_self_awareness",
+            "AISafetyAtlas.SelfAwareness.Model.not_perfectlySelfAware"
+          ],
+          "build_command": "lake build AISafetyAtlas.SelfAwareness AISafetyAtlas.Examples.SelfAwareness",
+          "scope_delta": {
+            "summary": "The process-compositional proof is mechanized over a finite fixed-horizon semilattice of available composites. The source's implicit non-cancellation semantics is unpacked as a strict additive awareness-cost law; propagation time and bounded lag are absorbed into the horizon-relative awareness relation rather than represented by a separate clocked model.",
+            "evidence": "docs/provenance/limited-self-awareness.md"
+          }
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.SelfAwareness.Model.not_aware_of_le",
+            "type": "NEW_PROOF",
+            "source_declarations": [],
+            "application": "Complete process awareness: a constituent cannot actively observe and predictively model the composite containing that same awareness activity under strict positive awareness cost. Brcic and Yampolskiy (2023), Proposition 4.7 formal core."
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.SelfAwareness.Model.process_not_self_aware",
+            "type": "NEW_PROOF",
+            "source_declarations": []
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.SelfAwareness.Model.not_agentAware_of_maximal",
+            "type": "NEW_PROOF",
+            "source_declarations": [],
+            "application": "Complete process awareness: every maximal available composite lacks an available internal observer; the source-facing existential theorem follows by finite maximality."
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.SelfAwareness.Model.limited_self_awareness",
+            "type": "NEW_PROOF",
+            "source_declarations": [],
+            "application": "Bounded-horizon process self-awareness: some available atomic or composite internal process has no available complete observer. Brcic and Yampolskiy (2023), Theorem 4.8 process-compositional interpretation."
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.SelfAwareness.Model.not_perfectlySelfAware",
+            "type": "NEW_PROOF",
+            "source_declarations": []
+          }
+        ]
+      },
       "ai_safety_relevance": "The survey identifies this result as relevant to limits on AI; no direct real-system implication is asserted here.",
-      "ai_bridge_status": "HUMAN_REVIEW",
-      "notes": "Introduced in the survey; statement-level semantic review is required.",
+      "ai_bridge_status": "STATEMENT_REVIEWED",
+      "bridge_review": {
+        "reviewer": "Mario Brcic (mbrcic)",
+        "date": "2026-08-12",
+        "statement_reviewed": true,
+        "interpretation_reviewed": false,
+        "evidence": "docs/bridges/review-by-044-selfawareness.md"
+      },
+      "notes": "EQUIVALENT formalization of Definition 4.6, Proposition 4.7 and Theorem 4.8 in section 4.3, after first-author statement-level review on 2026-08-12. The Lean model separates the vertical strict-awareness-extension obstruction from the horizontal maximal-composite proof. Ordinary cycles are permitted and exhibited: two singleton processes can observe one another while their joint composite remains unobserved. The source's crucial non-cancellation step is exposed as awareness_cost, requiring the observer-target composite to cost at least one positive awareness increment more than the target. This is an explicit formal unpacking of awareness as distinct active observation and predictive modelling that is itself positive-cost computation within the bounded lag, not an additional physical premise. available_finite records the bounded-horizon resource consequence directly, and timing assumptions 4-5 are semantic in aware rather than represented by a separate clock. The executable example also shows that irreflexivity alone does not imply the theorem without composite closure. EQUIVALENT rather than EXACT records the semilattice and fixed-horizon representational choices. No consciousness, Lawvere, Wolpert, Breuer, selected-property, approximate, delayed, or thermodynamic claim is made. Source map and fidelity residual: docs/provenance/limited-self-awareness.md.",
       "formal_library_search": {
         "searched_on": "2026-07-28",
         "evidence_file": "docs/provenance/formalization-search.json",
@@ -3044,6 +3274,87 @@
       },
       "tags": [
         "interpretability"
+      ],
+      "public": {
+        "group": "What an observer can recover",
+        "summary": "A bounded agent cannot completely monitor every recursively composable internal process under strict positive awareness cost.",
+        "use": "The process-compositional version of a self-awareness limit; cycles are allowed.",
+        "title": "Limited self-awareness",
+        "attribution": "Brcic & Yampolskiy"
+      }
+    },
+    {
+      "id": "CLM-LAWVERE-001",
+      "name": "Lawvere fixed-point theorem (types and functions)",
+      "informal_claim": "If a function f : α → (α → β) is surjective, then every endofunction g : β → β has a fixed point.",
+      "original_source_refs": [
+        "yanofsky-2003-lawvere"
+      ],
+      "related_result_ids": [
+        "BY-013",
+        "BY-014",
+        "BY-016",
+        "BY-027"
+      ],
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "repository": "https://github.com/leanprover-community/mathlib4",
+          "version": "fabf563a7c95a166b8d7b6efca11c8b4dc9d911f",
+          "module": "Mathlib.Logic.Function.Basic",
+          "atlas_module": "AISafetyAtlas.Logic",
+          "declaration": "Function.exists_fixed_point_of_surjective",
+          "relationship": "EQUIVALENT",
+          "reproduced": true,
+          "license": "Apache-2.0",
+          "build_environment": "leanprover/lean4:v4.31.0; mathlib@fabf563a7c95a166b8d7b6efca11c8b4dc9d911f",
+          "build_command": "lake build AISafetyAtlas.Logic; python3 scripts/check_print_axioms.py"
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Logic.lawvere_fixed_point",
+            "type": "WRAPPER",
+            "source_declarations": [
+              "Function.exists_fixed_point_of_surjective"
+            ]
+          }
+        ]
+      },
+      "ai_safety_relevance": "A reusable diagonalization kernel. It yields no AI-system limitation without a separate model establishing the required universal representation or surjectivity hypothesis.",
+      "ai_bridge_status": "HUMAN_REVIEW",
+      "notes": "Thin wrapper of Mathlib's theorem for ordinary Lean types and functions, graded EQUIVALENT (the word exact is avoided here because EXACT is a distinct grade in this vocabulary). This is the Set/Type specialization of Lawvere's fixed-point argument, not a formalization for arbitrary cartesian closed categories. Its relations to Gödel, Tarski, Löb, and undecidability are mechanism-level only: the existing Atlas theorems retain their syntax, representability, provability, and computability-specific proofs and are not derived from this wrapper.",
+      "tags": [
+        "computability",
+        "provability-logic"
+      ],
+      "public": {
+        "group": "Limits of self-knowledge and reflection",
+        "summary": "One argument underlies Cantor, Gödel, Tarski and Rice.",
+        "use": "Telling apart arguments that are the same from ones that only rhyme.",
+        "title": "Lawvere fixed point",
+        "attribution": "Lawvere; Yanofsky's uniform treatment"
+      }
+    },
+    {
+      "id": "CLM-LAWVERE-CCC-001",
+      "name": "Lawvere fixed-point theorem (Cartesian closed categories)",
+      "informal_claim": "In a Cartesian closed category, if there are an object A and a weakly point-surjective morphism A → Y^A, then every endomorphism Y → Y has a fixed point.",
+      "original_source_refs": [
+        "lawvere-1969-diagonal-ccc"
+      ],
+      "related_result_ids": [
+        "CLM-LAWVERE-001"
+      ],
+      "formalizations": [],
+      "lean_artifact": null,
+      "ai_safety_relevance": "A general categorical diagonalization schema. It has no AI-system consequence without a model supplying the relevant category, exponential, and weak point-surjectivity assumptions.",
+      "ai_bridge_status": "HUMAN_REVIEW",
+      "notes": "Source claim recorded from Lawvere's original categorical paper. Atlas currently exposes only the ordinary types-and-functions specialization as CLM-LAWVERE-001; the separate CCC Lean repository discussed in the accompanying audit is unlicensed and is not treated as a reproduced Atlas formalization. A categorical formalization does exist, recorded as NC-005 (2026-08-11): AFP entry Category_Set (The Elementary Theory of the Category of Sets) carries Fixed_Points.thy with lemma Lawveres_fixed_point_theorem for a point-surjective p : X -> A^X over ETCS cfunc/cset with exponential objects, following Halvorson Theorem 2.6.13, and derives Cantor from it. That is a maintained, licensed, pinned categorical rendering. It is not the arbitrary-cartesian-closed-category statement — ETCS is one axiomatized category of sets — so this row still records a source claim rather than a covered one, but the honest reason is generality, not availability. It remains true that Lean supplies no categorical version. A reproduction is feasible with scripts/reproduce_isabelle.sh against the same pinned release and has not been attempted; treat this as a candidate lead, not coverage.",
+      "tags": [
+        "computability",
+        "provability-logic"
       ]
     },
     {
@@ -3091,6 +3402,13 @@
             "application": "Explainability: weaker packaging of the Rashomon attribution trilemma, requiring less of the ranking. Reused from DrakeCaraker/dash-impossibility-lean alongside the strong form."
           }
         ]
+      },
+      "public": {
+        "group": "Composition and interpretability",
+        "summary": "No way of scoring which inputs mattered meets all the obvious requirements.",
+        "use": "Claims made for saliency maps.",
+        "title": "Attribution impossibility",
+        "attribution": "DASH trilemma"
       }
     },
     {
@@ -3118,7 +3436,14 @@
           "build_command": "scripts/reproduce_isabelle.sh arrow"
         }
       ],
-      "lean_artifact": null
+      "lean_artifact": null,
+      "public": {
+        "group": "Assembled from other proof assistants",
+        "summary": "The same voting result, proved again in another system.",
+        "use": "Independent confirmation.",
+        "title": "Gibbard–Satterthwaite (independent proof)",
+        "attribution": "Gibbard; Satterthwaite"
+      }
     },
     {
       "id": "LAND-GS-002",
@@ -3156,6 +3481,13 @@
             ]
           }
         ]
+      },
+      "public": {
+        "group": "Aggregation and multi-agent structure",
+        "summary": "Every sensible voting rule can be gamed by lying.",
+        "use": "Asking people or systems to report preferences honestly.",
+        "title": "Gibbard–Satterthwaite",
+        "attribution": "Gibbard; Satterthwaite"
       }
     },
     {
@@ -3187,7 +3519,14 @@
           "build_command": "scripts/reproduce_isabelle.sh nfl"
         }
       ],
-      "lean_artifact": null
+      "lean_artifact": null,
+      "public": {
+        "group": "Assembled from other proof assistants",
+        "summary": "The same no-free-lunch result, proved again in another system.",
+        "use": "Independent confirmation.",
+        "title": "No free lunch (independent proof)",
+        "attribution": "Shalev-Shwartz & Ben-David"
+      }
     },
     {
       "id": "LAND-PE-001",
@@ -3218,7 +3557,14 @@
           "build_command": "scripts/reproduce_isabelle.sh condnorm"
         }
       ],
-      "lean_artifact": null
+      "lean_artifact": null,
+      "public": {
+        "group": "Assembled from other proof assistants",
+        "summary": "A logic of obligation, precise enough for Parfit's argument.",
+        "use": "Population ethics arguments.",
+        "title": "Conditional normative reasoning",
+        "attribution": "Parent & Benzmüller; Parfit's paradox, Åqvist's system E"
+      }
     },
     {
       "id": "LAND-DL-001",
@@ -3249,7 +3595,14 @@
           "build_command": "scripts/reproduce_isabelle.sh deep-learning"
         }
       ],
-      "lean_artifact": null
+      "lean_artifact": null,
+      "public": {
+        "group": "Assembled from other proof assistants",
+        "summary": "Deep networks compute things shallow ones need exponential width to match.",
+        "use": "Capability arguments about architecture, not size.",
+        "title": "Deep versus shallow capacity",
+        "attribution": "Cohen, Sharir & Shashua"
+      }
     },
     {
       "id": "LAND-VNM-001",
@@ -3273,7 +3626,14 @@
           "build_command": "scripts/reproduce_vnm.sh"
         }
       ],
-      "lean_artifact": null
+      "lean_artifact": null,
+      "public": {
+        "group": "Assembled from other proof assistants",
+        "summary": "Consistent preferences can always be written as a utility function.",
+        "use": "The assumptions inside “maximizes expected utility”.",
+        "title": "Expected utility representation",
+        "attribution": "von Neumann & Morgenstern"
+      }
     },
     {
       "id": "LAND-TCS-ARROW-001",
@@ -3327,7 +3687,14 @@
           "build_command": "scripts/reproduce_debate.sh"
         }
       ],
-      "lean_artifact": null
+      "lean_artifact": null,
+      "public": {
+        "group": "Assembled from other proof assistants",
+        "summary": "A weak judge can be argued to the right answer by stronger debaters.",
+        "use": "Judging work you cannot check yourself.",
+        "title": "Doubly-efficient debate",
+        "attribution": "Brown-Cohen, Irving & Piliouras"
+      }
     },
     {
       "id": "LAND-HYPER-001",
@@ -3419,6 +3786,13 @@
             "application": "Compositional verification: k-safety of a system is safety of its k-fold self-composition. Theorem 2 of Clarkson and Schneider (2010)."
           }
         ]
+      },
+      "public": {
+        "group": "Composition and interpretability",
+        "summary": "Some properties need several runs at once to check.",
+        "use": "Leaks and fairness — anything one run cannot reveal.",
+        "title": "Hyperproperties and k-safety",
+        "attribution": "Clarkson & Schneider"
       }
     },
     {
@@ -3466,6 +3840,13 @@
             "application": "Multi-agent symmetry: nodes with equal views to depth n hold equal states after n synchronous rounds. The Angluin (1980) lemma, over an explicit port-labelled network model."
           }
         ]
+      },
+      "public": {
+        "group": "Aggregation and multi-agent structure",
+        "summary": "Identical processes in identical surroundings can never pick a leader.",
+        "use": "Why identical agents cannot coordinate.",
+        "title": "Symmetry in anonymous networks",
+        "attribution": "Angluin"
       }
     },
     {
@@ -3510,6 +3891,13 @@
             "application": "Compositional boundaries: a binary relation is a combinatorial rectangle exactly when it is exchange-closed. Kushilevitz-Nisan (1997) rectangle characterization."
           }
         ]
+      },
+      "public": {
+        "group": "Composition and interpretability",
+        "summary": "A requirement on the whole sometimes splits into requirements on the parts.",
+        "use": "When checking components separately is enough.",
+        "title": "Rectangularity",
+        "attribution": "Kushilevitz & Nisan; Fagin"
       }
     },
     {
@@ -3562,6 +3950,13 @@
             "application": "Self-modification: an agent's finite-horizon value depends only on the percept window it can still act on. Agent equations of Ring and Orseau (AGI 2011)."
           }
         ]
+      },
+      "public": {
+        "group": "Preferences, rewards and incentives",
+        "summary": "An agent can end up caring about what it sees, not about what is real.",
+        "use": "Exactly when wireheading is optimal.",
+        "title": "Objective factorization",
+        "attribution": "Ring & Orseau"
       }
     },
     {
@@ -3617,6 +4012,13 @@
             "application": "Goal preservation: a rational agent's one-step self-modification selects a continuation matching its initial goal. Finite-percept induction step of Theorem 16 of Everitt, Filan, Daswani and Hutter (2016)."
           }
         ]
+      },
+      "public": {
+        "group": "Preferences, rewards and incentives",
+        "summary": "An agent that can rewrite itself can still keep its original goal.",
+        "use": "Self-modification arguments.",
+        "title": "Goal preservation",
+        "attribution": "Everitt, Filan, Daswani & Hutter"
       }
     },
     {
@@ -3626,9 +4028,19 @@
         "oversight",
         "multi-agent"
       ],
-      "notes": "When can a hazard be decided from what a coalition of principals is permitted to observe. EvidenceArchitecture separates private evidence from declared emitted views, while CoalitionInput enforces coalition access in the type of a candidate computation. Covers is factorization through one uniform decision rule; covers_iff_no_collision separately characterizes failure by a concrete safe/hazardous collision. decideCoverage is the certified finite decision over an explicit complete ExecutionEnum. Post-processing an unchanged output cannot repair a collision, while genuine refinement preserves coverage. Everything holds under the fixed truthful mechanism M0; no strategic incentive, permissibility, or normative safety claim follows. The four-state Procurement example checks singleton and complete-emitted-interface failures plus one narrow joint success. The bounded synthesis target adds indexed hazard and candidate families, finite portfolios, per-candidate PortfolioCovers, pointwise PortfolioIndistinguishable, and portfolioCovers_implies_hazardEquivalent; the converse is not claimed because individually insufficient outputs are not fused for free. InclusionMinimalCovering and CostOptimalCovering are distinct, with inclusionMinimal_of_costOptimal proving the positive-cost implication. A second three-principal, eight-execution example uses qCD over {C,D}, qDE over {D,E}, and qCDE over {C,D,E}. The narrow portfolio {qCD,qDE} and broad singleton {qCDE} both cover two hazards and are inclusion-minimal; declared coordination-plus-disclosure costs 6 and 7 make only the narrow portfolio cost-optimal. Coverage is reduced once to a decidable membership condition for exhaustive instance proofs. This is checked target semantics, not a synthesizer: nothing generates candidates, searches a mechanism library, validates the cost model, or establishes optimality outside the declared family. Oversight observation-architecture mathematics, not a Table-1 impossibility result.",
+      "result_shape": "CHARACTERIZATION",
+      "notes": "When a hazard can be decided from what a coalition of principals is permitted to observe. EvidenceArchitecture separates private evidence from declared emitted views, and CoalitionInput enforces coalition access in the type of a candidate computation. Since the LAND-KNOW-001 kernel landed, Covers is definitionally Knowable q.observe and Refines is Determines, so the coverage laws are the generic kernel applied to q.observe rather than separate arguments, with every statement and axiom profile unchanged. What remains coalition-specific is the evidence architecture, the typed coalition restriction, the collision certificate, the certified finite checker decideCoverage over an explicit execution enumeration, and the bounded portfolio target with its inclusion-minimal and cost-optimal notions. Two worked architectures exhibit the failures and one narrow joint success. This is checked target semantics, not a synthesizer: nothing generates candidates, searches a mechanism library, or validates the cost model. Everything holds under the fixed truthful mechanism M0; no strategic, permissibility or normative safety claim follows.",
       "original_source_refs": [],
-      "related_result_ids": [],
+      "related_result_ids": [
+        "LAND-KNOW-001"
+      ],
+      "relations": [
+        {
+          "target": "LAND-KNOW-001",
+          "kind": "BUILDS_ON",
+          "note": "Covers and Refines are definitionally the kernel's Knowable and Determines, so Coverage and RepairBoundary discharge their proofs by calling the kernel rather than repeating a factorization argument."
+        }
+      ],
       "root_import": true,
       "formalizations": [
         {
@@ -3688,6 +4100,897 @@
             "application": "Oversight: a hazard is decidable from what a coalition of principals may observe exactly when no two executions collide on that coalition's view. In-tree model of emitted interfaces and coalition access."
           }
         ]
+      },
+      "public": {
+        "group": "What an observer can recover",
+        "summary": "A group sees only what its members share. Processing cannot recover the rest.",
+        "use": "Designing oversight that can actually work.",
+        "title": "Coalition coverage",
+        "attribution": "Workbench infrastructure"
+      }
+    },
+    {
+      "id": "LAND-SELFREF-001",
+      "name": "The self-model as a component of the state it models",
+      "tags": [
+        "information-theory",
+        "interpretability"
+      ],
+      "result_shape": "CHARACTERIZATION",
+      "notes": "The layer where the observation stops being an arbitrary map. Every earlier knowability module states in its non-claims that nothing makes the observation a projection of a state containing the observer; here the observer's model IS a component of the global state, written Model x Rest, and selfRead is the projection onto it. Self-reference is then forced rather than assumed: the target is the whole state, which includes the Model component, so a complete self-model must model itself. selfComplete_iff_subsingleton_rest says complete self-knowledge holds if and only if the remainder is a subsingleton — achievable, but only degenerately, which is what makes it a characterization rather than a blanket denial. not_selfComplete_of_two_rest is the axiom-free direction, exhibiting the colliding pair. card_rest_le_one_of_selfComplete is the counting form and is proved through LAND-AMBIG-001's card_image_le_of_knowable rather than by a fresh argument: the state carries |Model| * |Rest| values while the reading carries at most |Model|, so completeness is a cardinality inequality only |Rest| <= 1 can satisfy. That makes it the first consumer of the ambiguity layer outside Examples. AISafetyAtlas.Examples.Knowledge.SelfReference inhabits both directions, including the degenerate one, so the iff is not an impossibility in disguise. Explicit non-claims: this is NOT Breuer's theorem, which is LAND-SELFMEAS-002 and models the apparatus with an inference map and meshing rather than assuming a product decomposition; there is no regress or hierarchy over models of models, the obstruction being one level deep; there is no resource bound, budget or process count; and there is no dynamics, so nothing here says the state changes while being modelled — composing with LAND-TEMPORAL-001 is the obvious next step and is deliberately not taken. Model and Rest are arbitrary types and are not interpreted as memory, computation or belief. Nothing here concerns consciousness: incompleteness of a self-model is a statement about a projection, and every partially observed embedded system has it, which is exactly why it cannot be evidence of anything phenomenal. No AI-system reading follows without a separate reviewed bridge.",
+      "original_source_refs": [],
+      "related_result_ids": [
+        "LAND-KNOW-001",
+        "LAND-AMBIG-001",
+        "LAND-SELFMEAS-002"
+      ],
+      "relations": [
+        {
+          "target": "LAND-KNOW-001",
+          "kind": "INSTANTIATES",
+          "note": "Takes the state to be Model times Rest and the observation to be the first projection, so the observer is a component of what it observes."
+        },
+        {
+          "target": "LAND-AMBIG-001",
+          "kind": "BUILDS_ON",
+          "note": "card_rest_le_one_of_selfComplete is proved through card_image_le_of_knowable rather than by a separate cardinality argument."
+        }
+      ],
+      "root_import": true,
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE",
+          "license": "Apache-2.0",
+          "reproduced": true,
+          "build_environment": "leanprover/lean4:v4.31.0; Mathlib fabf563a7c95a166b8d7b6efca11c8b4dc9d911f; atlas IN_TREE",
+          "declarations": [
+            "AISafetyAtlas.Knowledge.SelfReference.SelfState",
+            "AISafetyAtlas.Knowledge.SelfReference.selfRead",
+            "AISafetyAtlas.Knowledge.SelfReference.SelfComplete",
+            "AISafetyAtlas.Knowledge.SelfReference.selfComplete_iff_subsingleton_rest",
+            "AISafetyAtlas.Knowledge.SelfReference.not_selfComplete_of_two_rest",
+            "AISafetyAtlas.Knowledge.SelfReference.card_rest_le_one_of_selfComplete"
+          ],
+          "module": "AISafetyAtlas.Knowledge.SelfReference",
+          "atlas_module": "AISafetyAtlas.Knowledge.SelfReference",
+          "build_command": "lake build AISafetyAtlas.Knowledge.SelfReference"
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Knowledge.SelfReference.selfComplete_iff_subsingleton_rest",
+            "type": "NEW_PROOF",
+            "source_declarations": []
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Knowledge.SelfReference.not_selfComplete_of_two_rest",
+            "type": "NEW_PROOF",
+            "source_declarations": []
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Knowledge.SelfReference.card_rest_le_one_of_selfComplete",
+            "type": "NEW_PROOF",
+            "source_declarations": []
+          }
+        ]
+      },
+      "public": {
+        "group": "What an observer can recover",
+        "summary": "A system can fully know itself only if there is nothing else to know.",
+        "use": "The precise sense in which nothing can fully model itself.",
+        "title": "Self-modelling",
+        "attribution": "Workbench infrastructure"
+      }
+    },
+    {
+      "id": "LAND-ACCUM-001",
+      "name": "Window ambiguity: accumulation bounds over a set of targets",
+      "tags": [
+        "information-theory",
+        "oversight"
+      ],
+      "result_shape": "BOUND",
+      "notes": "Extends LAND-AMBIG-001 from one target to a window of them. Widening a window never reduces ambiguity and never exceeds the product of its steps, which brackets accumulation between never decreases and at most multiplies; one unknowable step makes the whole window unknowable. A second axis runs the other way: under Temporal.EvidenceMonotone a later reading determines an earlier one, so reading late lowers ambiguity while widening raises it, and the two compose. That is what makes the dependency on LAND-TEMPORAL-001 real rather than conceptual. Growth itself is deliberately not proved — it depends on whether each step adds a distinction the observation cannot see, which needs dynamics this layer does not have. AISafetyAtlas.Examples.Knowledge.Accumulation exhibits both extremes, a blind observer meeting the product ceiling and an informed one that never accumulates, so neither is mistaken for a law. Scope: the target is fixed while evidence accumulates; a target that moves with time is not covered. Finite counting only, with no probability, entropy or rate.",
+      "original_source_refs": [],
+      "related_result_ids": [
+        "LAND-AMBIG-001",
+        "LAND-TEMPORAL-001",
+        "LAND-KNOW-001"
+      ],
+      "relations": [
+        {
+          "target": "LAND-AMBIG-001",
+          "kind": "BUILDS_ON",
+          "note": "The window bounds are stated and proved in terms of ambiguity and its fibre image."
+        },
+        {
+          "target": "LAND-KNOW-001",
+          "kind": "BUILDS_ON",
+          "note": "not_knowable_pairTarget_of_not_knowable is Knowable.mono against the projection."
+        },
+        {
+          "target": "LAND-TEMPORAL-001",
+          "kind": "BUILDS_ON",
+          "note": "ambiguity_le_of_evidenceMonotone consumes Temporal.EvidenceMonotone: cumulative evidence makes the earlier observation a post-processing of the later one, so ambiguity_le_of_comp applies along time."
+        }
+      ],
+      "root_import": true,
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE",
+          "license": "Apache-2.0",
+          "reproduced": true,
+          "build_environment": "leanprover/lean4:v4.31.0; Mathlib fabf563a7c95a166b8d7b6efca11c8b4dc9d911f; atlas IN_TREE",
+          "declarations": [
+            "AISafetyAtlas.Knowledge.pairTarget",
+            "AISafetyAtlas.Knowledge.ambiguity_le_pairTarget_left",
+            "AISafetyAtlas.Knowledge.ambiguity_le_pairTarget_right",
+            "AISafetyAtlas.Knowledge.ambiguity_pairTarget_le_mul",
+            "AISafetyAtlas.Knowledge.not_knowable_pairTarget_of_not_knowable",
+            "AISafetyAtlas.Knowledge.ambiguity_le_of_evidenceMonotone",
+            "AISafetyAtlas.Knowledge.ambiguity_le_pairTarget_of_evidenceMonotone"
+          ],
+          "module": "AISafetyAtlas.Knowledge.Accumulation",
+          "atlas_module": "AISafetyAtlas.Knowledge.Accumulation",
+          "build_command": "lake build AISafetyAtlas.Knowledge.Accumulation"
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Knowledge.ambiguity_le_pairTarget_left",
+            "type": "NEW_PROOF",
+            "source_declarations": []
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Knowledge.ambiguity_le_pairTarget_right",
+            "type": "NEW_PROOF",
+            "source_declarations": []
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Knowledge.ambiguity_pairTarget_le_mul",
+            "type": "NEW_PROOF",
+            "source_declarations": []
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Knowledge.not_knowable_pairTarget_of_not_knowable",
+            "type": "NEW_PROOF",
+            "source_declarations": []
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Knowledge.ambiguity_le_of_evidenceMonotone",
+            "type": "NEW_PROOF",
+            "source_declarations": []
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Knowledge.ambiguity_le_pairTarget_of_evidenceMonotone",
+            "type": "NEW_PROOF",
+            "source_declarations": []
+          }
+        ]
+      },
+      "public": {
+        "group": "What an observer can recover",
+        "summary": "Asking about more of a system can only leave more possibilities open.",
+        "use": "Bounding how far a monitor's picture can drift.",
+        "title": "Ambiguity over a window",
+        "attribution": "Workbench infrastructure"
+      }
+    },
+    {
+      "id": "LAND-AMBIG-001",
+      "name": "Finite fibre ambiguity and the counting obstruction",
+      "tags": [
+        "information-theory",
+        "oversight"
+      ],
+      "result_shape": "CHARACTERIZATION",
+      "notes": "Quantitative refinement of LAND-KNOW-001 on finite state spaces. ambiguity r f i counts the distinct target values still possible once the observation reads i; 1 is exact knowledge, 0 marks an observation value nothing realizes, and larger is the shortfall. The exactness condition is at most one rather than exactly one, because requiring equality would make every model with an unreachable observation value unknowable. knowable_iff_ambiguity_le_one is recorded and labelled a BRIDGE, not a result: it is knowable_iff_no_collision in counting form, and a module stopping there would be a cardinality wrapper around a theorem the kernel already proves. The content is the two bounds. card_image_le_of_knowable says a knowable target needs an observation with at least as many distinct outcomes as the target has values — a counting obstruction that never names a colliding pair, with not_knowable_of_card_lt as the usable contrapositive. ambiguity_le_of_comp says post-processing never decreases ambiguity anywhere, which upgrades not_knowable_comp from 'the yes/no answer cannot be repaired' to 'the shortfall never shrinks'. AISafetyAtlas.Examples.Knowledge.Ambiguity keeps the bounds honest with three models: the counting test firing where no pair is exhibited; a model where both cardinalities are 2 and the target is still unknowable, so the counting test is sufficient and never necessary; and a strict increase of ambiguity under coarsening, so the monotonicity bound is not an equality in disguise. Every declaration here is classical, inherited from Mathlib's Finset and Fintype development rather than from the statements, which differs from the axiom-free kernel core and is recorded in the module. Explicit non-claims: this counts possibilities and does not weigh them. There is no probability, entropy, rate or measure. A conditional-entropy treatment would need Shannon entropy over general probability spaces, which the pinned Mathlib does not carry — it has topological entropy, binary entropy and Kullback-Leibler divergence, and no conditional Shannon entropy — so that is a separate foundation, not an extension of this module. No AI-system reading follows without a separate reviewed bridge.",
+      "original_source_refs": [],
+      "related_result_ids": [
+        "LAND-KNOW-001"
+      ],
+      "relations": [
+        {
+          "target": "LAND-KNOW-001",
+          "kind": "BUILDS_ON",
+          "note": "knowable_iff_ambiguity_le_one is proved through knowable_iff_no_collision."
+        },
+        {
+          "target": "LAND-KNOW-001",
+          "kind": "REFINES",
+          "note": "Replaces the qualitative iff with a count of the answers a single observation leaves open, at the cost of finiteness and decidable equality. Knowability becomes ambiguity at most one."
+        }
+      ],
+      "root_import": true,
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE",
+          "license": "Apache-2.0",
+          "reproduced": true,
+          "build_environment": "leanprover/lean4:v4.31.0; Mathlib fabf563a7c95a166b8d7b6efca11c8b4dc9d911f; atlas IN_TREE",
+          "declarations": [
+            "AISafetyAtlas.Knowledge.fibre",
+            "AISafetyAtlas.Knowledge.ambiguity",
+            "AISafetyAtlas.Knowledge.knowable_iff_ambiguity_le_one",
+            "AISafetyAtlas.Knowledge.not_knowable_of_one_lt_ambiguity",
+            "AISafetyAtlas.Knowledge.card_image_le_of_knowable",
+            "AISafetyAtlas.Knowledge.not_knowable_of_card_lt",
+            "AISafetyAtlas.Knowledge.ambiguity_le_of_comp"
+          ],
+          "module": "AISafetyAtlas.Knowledge.Ambiguity",
+          "atlas_module": "AISafetyAtlas.Knowledge.Ambiguity",
+          "build_command": "lake build AISafetyAtlas.Knowledge.Ambiguity"
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Knowledge.card_image_le_of_knowable",
+            "type": "NEW_PROOF",
+            "source_declarations": []
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Knowledge.not_knowable_of_card_lt",
+            "type": "NEW_PROOF",
+            "source_declarations": []
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Knowledge.ambiguity_le_of_comp",
+            "type": "NEW_PROOF",
+            "source_declarations": []
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Knowledge.knowable_iff_ambiguity_le_one",
+            "type": "NEW_PROOF",
+            "source_declarations": []
+          }
+        ]
+      },
+      "public": {
+        "group": "What an observer can recover",
+        "summary": "Counts the answers an observation leaves open.",
+        "use": "Ruling out an observability claim by counting.",
+        "title": "Ambiguity counting",
+        "attribution": "Workbench infrastructure"
+      }
+    },
+    {
+      "id": "LAND-TEMPORAL-001",
+      "name": "Time-indexed knowability, contemporaneous collisions, and delayed knowledge",
+      "tags": [
+        "information-theory",
+        "oversight"
+      ],
+      "result_shape": "INFRASTRUCTURE",
+      "notes": "Adds a time index to the LAND-KNOW-001 kernel, separating the time evidence is read from the time the target refers to. KnowableFrom observe target t s is the target as of s decoded from evidence at t; KnowableAt is the contemporaneous case. That separation is the content of the module — collapsed, two different sentences become one. CollisionAt refutes contemporaneous knowledge and is axiom-free; DelayedKnowable pairs contemporaneous failure with later success, and AISafetyAtlas.Examples.Knowledge.Temporal exhibits a model inhabiting it, which is why a self-knowledge impossibility must be stated contemporaneously rather than absolutely. No result re-proves a factorization argument: knowableFrom_mono is Knowable.mono and not_knowableAt_of_collisionAt is not_knowable_of_collision. Prior art is recorded as NC-007 — the indexing is a measure-free shadow of Mathlib's filtration theory and no novelty is claimed for it; what the module has instead is that it needs no measurable structure and states cumulativity as Determines, since evidence types differ across time. Explicit non-claims are in the module docstring.",
+      "original_source_refs": [],
+      "related_result_ids": [
+        "LAND-KNOW-001",
+        "LAND-CL-001"
+      ],
+      "relations": [
+        {
+          "target": "LAND-KNOW-001",
+          "kind": "BUILDS_ON",
+          "note": "knowableFrom_mono is Knowable.mono and not_knowableAt_of_collisionAt is not_knowable_of_collision; no factorization argument is re-proved."
+        },
+        {
+          "target": "LAND-CL-001",
+          "kind": "BOUNDARY_PARTNER",
+          "note": "Model delta: this row is an arbitrary indexed family of observations over an arbitrary preorder, with no dynamics and no communication; Chandy-Lamport is a concrete message-passing system with an algorithm. The pair brackets contemporaneity, not one model's frontier: DelayedKnowable says the current target can be unreadable while a later reading settles it, and the snapshot algorithm is the motivating instance of that pattern rather than a construction inside this model: nothing here is applied to it, and no theorem connects the two."
+        }
+      ],
+      "root_import": true,
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE",
+          "license": "Apache-2.0",
+          "reproduced": true,
+          "build_environment": "leanprover/lean4:v4.31.0; Mathlib fabf563a7c95a166b8d7b6efca11c8b4dc9d911f; atlas IN_TREE",
+          "declarations": [
+            "AISafetyAtlas.Knowledge.Temporal.KnowableFrom",
+            "AISafetyAtlas.Knowledge.Temporal.KnowableAt",
+            "AISafetyAtlas.Knowledge.Temporal.EvidenceMonotone",
+            "AISafetyAtlas.Knowledge.Temporal.CollisionAt",
+            "AISafetyAtlas.Knowledge.Temporal.DelayedKnowable",
+            "AISafetyAtlas.Knowledge.Temporal.knowableFrom_mono",
+            "AISafetyAtlas.Knowledge.Temporal.not_knowableAt_of_collisionAt",
+            "AISafetyAtlas.Knowledge.Temporal.collisionAt_of_not_knowableAt"
+          ],
+          "module": "AISafetyAtlas.Knowledge.Temporal",
+          "atlas_module": "AISafetyAtlas.Knowledge.Temporal",
+          "build_command": "lake build AISafetyAtlas.Knowledge.Temporal"
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Knowledge.Temporal.knowableFrom_mono",
+            "type": "NEW_PROOF",
+            "source_declarations": []
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Knowledge.Temporal.not_knowableAt_of_collisionAt",
+            "type": "NEW_PROOF",
+            "source_declarations": []
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Knowledge.Temporal.collisionAt_of_not_knowableAt",
+            "type": "NEW_PROOF",
+            "source_declarations": []
+          }
+        ]
+      },
+      "public": {
+        "group": "What an observer can recover",
+        "summary": "You can learn what the state was. Not always what it is now.",
+        "use": "Stating self-knowledge limits correctly.",
+        "title": "Time-indexed knowability",
+        "attribution": "shadows filtration theory; no novelty claimed for time indexing"
+      }
+    },
+    {
+      "id": "LAND-CL-001",
+      "name": "Chandy-Lamport distributed snapshot — termination, correctness, stable property detection",
+      "tags": [
+        "multi-agent",
+        "oversight"
+      ],
+      "result_shape": "ACHIEVABILITY",
+      "notes": "Reproduced 2026-08-11 from AFP entry Chandy_Lamport (Ben Fiedler and Dmitriy Traytel, July 2020) at the pinned full AFP release 2026-02-06, Isabelle2025-2, BSD License. Session build exit 0, all seven theories, no errors; Finished Chandy_Lamport in 1:54 elapsed. The single-entry archive does not close — the Chandy_Lamport session parent is Ordered_Resolution_Prover, which itself needs Coinductive and Nested_Multisets_Ordinals — so reproduction goes through the full immutable release, the pattern already used for Deep_Learning and pinned to the same sha256. A POSSIBILITY result, catalogued as the escape boundary dual to the self-knowledge impossibility rows: a process can determine a consistent global state while the computation continues, so the honest obstruction concerns exact knowledge of the PRESENT state and never 'a system cannot know its own global state', which distributed snapshots falsify at useful engineering resolutions. Snapshots escape by relaxing contemporaneity. Path-A reproduction: built at upstream Isabelle, not vendored, no atlas Lean import surface, and no atlas declaration depends on it. Never counts toward headline EXACT/EQUIVALENT coverage. No AI-system reading without a separate reviewed bridge. Evidence: docs/provenance/embedded-self-knowledge-landscape.md.",
+      "original_source_refs": [
+        "chandy-lamport-1985"
+      ],
+      "related_result_ids": [
+        "LAND-SELFMEAS-001",
+        "LAND-KNOW-001"
+      ],
+      "relations": [
+        {
+          "target": "LAND-SELFMEAS-001",
+          "kind": "BOUNDARY_PARTNER",
+          "note": "Not a formal duality: the two do not share a model. This row is the generic whole-state specialization of the knowability kernel, not Breuer's theorem, which is LAND-SELFMEAS-002: an abstract restriction map from global states to apparatus states, with no dynamics, no messages and no algorithm; Chandy-Lamport's is a message-passing distributed system with channels, markers and a recording procedure. What the pair brackets is contemporaneity. The impossibility is about distinguishing the state one is in *now*; the construction recovers a consistent global state by giving up exactly that, recording a cut rather than an instant."
+        }
+      ],
+      "root_import": false,
+      "formalizations": [
+        {
+          "framework": "Isabelle/HOL",
+          "repository": "https://www.isa-afp.org/entries/Chandy_Lamport.html",
+          "version": "AFP release 2026-02-06 (full release archive, SHA256 b059edd46073479ee8dde45004c2346a7365e5d94cded49d27257cfea66c8879)",
+          "license": "BSD-3-Clause",
+          "reproduced": true,
+          "build_environment": "Isabelle2025-2 (docker makarius/isabelle, digest sha256:9bd33b183c399327c5d554fc8cde27c29b5d2b20cdc6fe7a604caa3f951018fc); full AFP release 2026-02-06",
+          "module": "Snapshot.thy; session Chandy_Lamport",
+          "declarations": [
+            "snapshot_algorithm_must_terminate",
+            "snapshot_algorithm_is_correct",
+            "Stable_Property_Detection"
+          ],
+          "build_command": "scripts/reproduce_isabelle.sh chandy-lamport"
+        }
+      ],
+      "lean_artifact": null,
+      "public": {
+        "group": "Assembled from other proof assistants",
+        "summary": "A running system can snapshot itself without pausing.",
+        "use": "Why “a system cannot know itself” is too strong.",
+        "title": "Distributed snapshots",
+        "attribution": "Chandy & Lamport"
+      }
+    },
+    {
+      "id": "LAND-SELFMEAS-001",
+      "name": "Self-measurement failure for an embedded observation",
+      "tags": [
+        "information-theory",
+        "interpretability"
+      ],
+      "result_shape": "POINT_IMPOSSIBILITY",
+      "notes": "Specialization of the LAND-KNOW-001 kernel to the whole-state target. knowable_id_iff_injective says knowing the entire state is exactly injectivity of the observation. not_knowable_state_of_nontrivial_remainder is the load-bearing statement and is axiom-free: when the global state is Read × Rest and Rest can take two values, the pair (r, rest₁), (r, rest₂) collides at Prod.fst while being distinct, so the global state is not knowable from inside; remainderWitness packages the same obstruction as an inspectable certificate. The Breuer PDF is now pinned, but this row remains ungraded against it because it is only the generic fibre skeleton; the source-faithful abstract inference-map core is recorded separately as LAND-SELFMEAS-002 with relationship RELATED. What is mechanized is the information-theoretic skeleton only — non-triviality of the remainder is a hypothesis rather than a conclusion, and there is no measurement dynamics, no time evolution, no quantum case, no apparatus model, and no EPR corollary. This is not to be called Breuer's theorem in any facade, README or status page. No AI-system reading follows without a separate reviewed bridge. original_source_refs is deliberately empty: exactly one row cites the paper, LAND-SELFMEAS-002, so a reader counting Breuer artifacts in the ledger counts one. The relationship to the paper is described here in prose and in the shared provenance note, which is where a cross-reference belongs when there is no grade to justify. Evidence: docs/provenance/self-measurement-kernel.md.",
+      "original_source_refs": [],
+      "related_result_ids": [
+        "LAND-KNOW-001",
+        "LAND-SELFMEAS-002"
+      ],
+      "relations": [
+        {
+          "target": "LAND-KNOW-001",
+          "kind": "INSTANTIATES",
+          "note": "The whole-state case: the target is the identity, so knowability is injectivity of the observation."
+        }
+      ],
+      "root_import": true,
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE",
+          "license": "Apache-2.0",
+          "reproduced": true,
+          "build_environment": "leanprover/lean4:v4.31.0; Mathlib fabf563a7c95a166b8d7b6efca11c8b4dc9d911f; atlas IN_TREE",
+          "declarations": [
+            "AISafetyAtlas.Knowledge.knowable_id_iff_injective",
+            "AISafetyAtlas.Knowledge.not_knowable_state_of_nontrivial_remainder",
+            "AISafetyAtlas.Knowledge.remainderWitness"
+          ],
+          "module": "AISafetyAtlas.Knowledge",
+          "atlas_module": "AISafetyAtlas.Knowledge",
+          "build_command": "lake build AISafetyAtlas.Knowledge"
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Knowledge.knowable_id_iff_injective",
+            "type": "NEW_PROOF",
+            "source_declarations": []
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Knowledge.not_knowable_state_of_nontrivial_remainder",
+            "type": "NEW_PROOF",
+            "source_declarations": []
+          }
+        ]
+      },
+      "public": {
+        "group": "What an observer can recover",
+        "summary": "To know the whole state, you must be able to tell every pair of states apart.",
+        "use": "The basic version of the limit.",
+        "title": "Whole-state self-measurement",
+        "attribution": "after Breuer"
+      }
+    },
+    {
+      "id": "LAND-SELFMEAS-002",
+      "name": "Breuer abstract embedded-measurement core",
+      "tags": [
+        "information-theory",
+        "interpretability"
+      ],
+      "result_shape": "POINT_IMPOSSIBILITY",
+      "notes": "Faithful abstract set-theoretic core of Breuer (1995): §3.2 inference and exact measurement, §3.3 restriction and proper inclusion, §3.5 meshing, and Propositions 1-2. Both propositions are proved, Proposition 1 twice — derived from Proposition 2 and by Breuer's own direct chain — and the two differ in axioms, the derived route depending on none. ProperInclusion is model data rather than a theorem that containment entails non-injectivity; the paper's own footnote 4 gives a contained apparatus without it. The source assumes the restriction surjective; here that is derived from meshing, so the mechanized hypotheses are no stronger than the paper's. Hypotheses and conclusions are both inhabited in AISafetyAtlas.Examples.NonVacuity, so neither proposition is vacuous. Breuer's Corollary is present too, in both its prose form and the printed witness form, so every statement section 3.5 displays is mechanized; sections 4 and 5 display none, they apply these four. Deliberately omitted: physical state-space construction, dynamics, the quantum treatment, EPR, section 3.4's continuity and phase-space-dimension route, and philosophical discussion. Grade EQUIVALENT, not EXACT: the hypotheses are deliberately not the source's, since meshing alone is assumed where the paper assumes meshing and surjectivity, while the Corollary's witness form takes surjectivity back explicitly because it cannot be derived where meshing is what fails. No AI-system or consciousness bridge. Source transcription, the page-image method behind it, and the residual list are in docs/provenance/self-measurement-kernel.md; module design and non-claims are in the module docstring.",
+      "original_source_refs": [
+        "breuer-1995-self-measurement"
+      ],
+      "related_result_ids": [
+        "LAND-SELFMEAS-001",
+        "LAND-KNOW-001"
+      ],
+      "relations": [
+        {
+          "target": "LAND-KNOW-001",
+          "kind": "BUILDS_ON",
+          "note": "not_knowable_state_of_properInclusion hands the proper-inclusion pair straight to not_knowable_of_collision."
+        }
+      ],
+      "root_import": true,
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE",
+          "license": "Apache-2.0",
+          "reproduced": true,
+          "relationship": "EQUIVALENT",
+          "build_environment": "leanprover/lean4:v4.31.0; Mathlib fabf563a7c95a166b8d7b6efca11c8b4dc9d911f; atlas IN_TREE",
+          "declarations": [
+            "AISafetyAtlas.Knowledge.Embedded.ReadingSet",
+            "AISafetyAtlas.Knowledge.Embedded.ReadingSet.singleton",
+            "AISafetyAtlas.Knowledge.Embedded.ReadingSet.univ",
+            "AISafetyAtlas.Knowledge.Embedded.Restriction",
+            "AISafetyAtlas.Knowledge.Embedded.InferenceMap",
+            "AISafetyAtlas.Knowledge.Embedded.ProperInclusion",
+            "AISafetyAtlas.Knowledge.Embedded.Meshing",
+            "AISafetyAtlas.Knowledge.Embedded.Meshing.restrict_surjective",
+            "AISafetyAtlas.Knowledge.Embedded.ExactlyMeasurable",
+            "AISafetyAtlas.Knowledge.Embedded.MeasuresAllStates",
+            "AISafetyAtlas.Knowledge.Embedded.Distinguishes",
+            "AISafetyAtlas.Knowledge.Embedded.not_knowable_state_of_properInclusion",
+            "AISafetyAtlas.Knowledge.Embedded.no_meshing_inference_distinguishes",
+            "AISafetyAtlas.Knowledge.Embedded.no_meshing_inference_measures_all_states",
+            "AISafetyAtlas.Knowledge.Embedded.exists_state_not_exactly_measurable",
+            "AISafetyAtlas.Knowledge.Embedded.infer_singleton_eq_of_meshing",
+            "AISafetyAtlas.Knowledge.Embedded.exists_singleton_infer_eq_of_infer_eq",
+            "AISafetyAtlas.Knowledge.Embedded.eq_restrict_of_infer_singleton_eq",
+            "AISafetyAtlas.Knowledge.Embedded.no_meshing_inference_measures_all_states_direct",
+            "AISafetyAtlas.Knowledge.Embedded.meshing_fails_of_measuresAllStates",
+            "AISafetyAtlas.Knowledge.Embedded.exists_state_meshing_failure_of_measuresAllStates"
+          ],
+          "module": "AISafetyAtlas.Knowledge.Embedded",
+          "atlas_module": "AISafetyAtlas.Knowledge.Embedded",
+          "build_command": "lake build AISafetyAtlas.Knowledge.Embedded",
+          "scope_delta": {
+            "summary": "Every displayed statement of section 3.5 is mechanized over the paper's own section 3.2 abstraction: Proposition 1 in both the printed existential and the produced negated-universal form, the LEMMA, Proposition 2, and the Corollary in both its prose and printed-witness forms. Sections 4 and 5 add no displayed statement; they apply these four. EQUIVALENT rather than EXACT because the hypotheses are deliberately not the source's: meshing alone is assumed and the section 3.3 surjectivity is derived from it, so the theorems are strictly stronger than printed, while the Corollary's witness form takes surjectivity back as an explicit hypothesis because it cannot be derived where meshing is what fails. Outside section 3.5 the section 3.4 finite-cardinality argument is a separate row (LAND-SELFMEAS-003), its continuity and phase-space-dimension variant is not formalized, and physical apparatus construction, dynamics, the quantum treatment, EPR, and the section 5 universal-validity thesis are omitted.",
+            "evidence": "docs/provenance/self-measurement-kernel.md"
+          }
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Knowledge.Embedded.not_knowable_state_of_properInclusion",
+            "type": "NEW_PROOF",
+            "source_declarations": []
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Knowledge.Embedded.Meshing.restrict_surjective",
+            "type": "NEW_PROOF",
+            "source_declarations": [],
+            "application": "Abstract embedded measurement: the exact meshing condition entails the source's surjective restriction setup. Breuer (1995), section 3.3 and section 3.5."
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Knowledge.Embedded.no_meshing_inference_distinguishes",
+            "type": "NEW_PROOF",
+            "source_declarations": [],
+            "application": "Abstract embedded measurement: equal restriction fibres cannot be mutually separated by a meshing inference map. Breuer (1995), Proposition 2."
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Knowledge.Embedded.no_meshing_inference_measures_all_states",
+            "type": "NEW_PROOF",
+            "source_declarations": [],
+            "application": "Abstract embedded measurement: proper inclusion plus meshing rules out exact measurement of every global state. Breuer (1995), Proposition 1."
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Knowledge.Embedded.exists_state_not_exactly_measurable",
+            "type": "NEW_PROOF",
+            "source_declarations": []
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Knowledge.Embedded.infer_singleton_eq_of_meshing",
+            "type": "NEW_PROOF",
+            "source_declarations": []
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Knowledge.Embedded.exists_singleton_infer_eq_of_infer_eq",
+            "type": "NEW_PROOF",
+            "source_declarations": []
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Knowledge.Embedded.eq_restrict_of_infer_singleton_eq",
+            "type": "NEW_PROOF",
+            "source_declarations": []
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Knowledge.Embedded.no_meshing_inference_measures_all_states_direct",
+            "type": "NEW_PROOF",
+            "source_declarations": []
+          }
+        ]
+      },
+      "public": {
+        "group": "What an observer can recover",
+        "summary": "A sensor inside a system cannot exactly measure every state of that system.",
+        "use": "The measurement version of the limit.",
+        "title": "Embedded self-measurement",
+        "attribution": "Breuer"
+      }
+    },
+    {
+      "id": "LAND-SELFMEAS-003",
+      "name": "Physical complement and finite-cardinality bridges to Breuer proper inclusion",
+      "tags": [
+        "information-theory",
+        "interpretability"
+      ],
+      "result_shape": "CHARACTERIZATION",
+      "notes": "Physical modelling layer over LAND-SELFMEAS-002, not a rewrite of Breuer's section 3.5 core, which continues to take ProperInclusion as model data. Composition derives it from a product or equivalent decomposition with an independently varying remainder, needing no finiteness; Finite derives it from a strict cardinality gap by pigeonhole. The Finite argument is Breuer's own section 3.4 First Attempt, where finitely many apparatus states are said to already exclude exact measurement of all states from inside; it is a bridge rather than the paper's result because section 3.4 is the route Breuer abandons, dropping its continuity variant as difficult to handle and taking the section 3.5 meshing approach instead. That continuity route, which forces equal phase-space dimension in classical mechanics, is not formalized. Composition has no section 3.4 counterpart and is atlas modelling. Both then apply the core no-go under meshing. The boundary has three regions rather than two: a non-injective restriction gives Proposition 1, a bijective one admits a meshing fibre inference map that measures every state, and an injective non-surjective one admits no meshing map at all. Explicit non-claims: not every physical containment has a nontrivial remainder or a cardinality gap, and Bekenstein-type bounds are not encoded as yielding one. Grade RELATED as atlas modelling relative to Breuer, not EXACT. No AI-system bridge. Axiom profiles and the three-region table are in the module docstring; evidence in docs/provenance/self-measurement-kernel.md.",
+      "original_source_refs": [
+        "breuer-1995-self-measurement"
+      ],
+      "related_result_ids": [
+        "LAND-SELFMEAS-002",
+        "LAND-SELFMEAS-001",
+        "LAND-KNOW-001"
+      ],
+      "relations": [
+        {
+          "target": "LAND-SELFMEAS-002",
+          "kind": "BUILDS_ON",
+          "note": "Derives ProperInclusion under product-complement or finite-cardinality hypotheses, then applies the core no-meshing_measures_all theorems."
+        },
+        {
+          "target": "LAND-SELFMEAS-001",
+          "kind": "REFINES",
+          "note": "Composition restates the product remainder obstruction and feeds it into the Breuer measurement model, not only the Knowable skeleton."
+        },
+        {
+          "target": "LAND-KNOW-001",
+          "kind": "BUILDS_ON",
+          "note": "knowable_whole_state_iff_injective is knowable_id_iff_injective at the apparatus reading."
+        }
+      ],
+      "root_import": true,
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE",
+          "license": "Apache-2.0",
+          "reproduced": true,
+          "relationship": "RELATED",
+          "build_environment": "leanprover/lean4:v4.31.0; Mathlib fabf563a7c95a166b8d7b6efca11c8b4dc9d911f; atlas IN_TREE",
+          "declarations": [
+            "AISafetyAtlas.Knowledge.Embedded.Composition.knowable_whole_state_iff_injective",
+            "AISafetyAtlas.Knowledge.Embedded.Composition.properInclusion_iff_not_injective",
+            "AISafetyAtlas.Knowledge.Embedded.Composition.productRestriction",
+            "AISafetyAtlas.Knowledge.Embedded.Composition.equivalentProductRestriction",
+            "AISafetyAtlas.Knowledge.Embedded.Composition.properInclusion_of_nontrivial_remainder",
+            "AISafetyAtlas.Knowledge.Embedded.Composition.not_knowable_productState_of_nontrivial_remainder",
+            "AISafetyAtlas.Knowledge.Embedded.Composition.no_meshing_measures_all_of_nontrivial_remainder",
+            "AISafetyAtlas.Knowledge.Embedded.Composition.properInclusion_of_nontrivial_remainder_of_equiv",
+            "AISafetyAtlas.Knowledge.Embedded.Composition.no_meshing_measures_all_of_nontrivial_remainder_of_equiv",
+            "AISafetyAtlas.Knowledge.Embedded.Composition.fibreInference",
+            "AISafetyAtlas.Knowledge.Embedded.Composition.meshing_fibreInference_of_surjective",
+            "AISafetyAtlas.Knowledge.Embedded.Composition.measuresAll_fibreInference_of_injective",
+            "AISafetyAtlas.Knowledge.Embedded.Composition.meshing_and_measuresAll_fibreInference_of_bijective",
+            "AISafetyAtlas.Knowledge.Embedded.Finite.properInclusion_of_card_lt",
+            "AISafetyAtlas.Knowledge.Embedded.Finite.no_meshing_measures_all_of_card_lt",
+            "AISafetyAtlas.Knowledge.Embedded.Finite.properInclusion_product_of_card_rest_ge_two",
+            "AISafetyAtlas.Knowledge.Embedded.Composition.not_meshing_of_not_surjective"
+          ],
+          "module": "AISafetyAtlas.Knowledge.Embedded.Composition",
+          "atlas_module": "AISafetyAtlas.Knowledge.Embedded.Composition",
+          "build_command": "lake build AISafetyAtlas.Knowledge.Embedded.Composition AISafetyAtlas.Knowledge.Embedded.Finite",
+          "scope_delta": {
+            "summary": "Physical product-complement and finite-cardinality bridges derive ProperInclusion under explicit extra hypotheses. They are not Breuer's abstract core and do not claim that all physical containment forces non-injectivity. Bekenstein is motivation only, not a formal implication.",
+            "evidence": "docs/provenance/self-measurement-kernel.md"
+          }
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Knowledge.Embedded.Composition.properInclusion_of_nontrivial_remainder",
+            "type": "NEW_PROOF",
+            "source_declarations": [],
+            "application": "Physical complement model: independently variable remainder forces restriction collision (product A times R, projection). Atlas modelling layer on Breuer ProperInclusion."
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Knowledge.Embedded.Composition.no_meshing_measures_all_of_nontrivial_remainder",
+            "type": "NEW_PROOF",
+            "source_declarations": [],
+            "application": "Physical complement model plus meshing: nontrivial remainder rules out exact measurement of every product state (Breuer Prop. 1 via derived ProperInclusion)."
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Knowledge.Embedded.Composition.properInclusion_of_nontrivial_remainder_of_equiv",
+            "type": "NEW_PROOF",
+            "source_declarations": [],
+            "application": "Equivalence-general physical complement model: an arbitrary global state representation equivalent to apparatus times remainder inherits the restriction collision."
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Knowledge.Embedded.Composition.no_meshing_measures_all_of_nontrivial_remainder_of_equiv",
+            "type": "NEW_PROOF",
+            "source_declarations": [],
+            "application": "Equivalence-general physical complement model plus meshing: a nontrivial remainder rules out exact measurement of every globally represented state."
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Knowledge.Embedded.Composition.measuresAll_fibreInference_of_injective",
+            "type": "NEW_PROOF",
+            "source_declarations": [],
+            "application": "Positive boundary: injective restriction admits a fibre inference map that exactly measures every global state."
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Knowledge.Embedded.Composition.meshing_and_measuresAll_fibreInference_of_bijective",
+            "type": "NEW_PROOF",
+            "source_declarations": [],
+            "application": "Positive boundary: bijective restriction gives fibre inference that is both meshing and exactly measurable for every global state."
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Knowledge.Embedded.Finite.properInclusion_of_card_lt",
+            "type": "NEW_PROOF",
+            "source_declarations": [],
+            "application": "Finite operational models: strict apparatus/global cardinality gap forces restriction collision (pigeonhole)."
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Knowledge.Embedded.Finite.no_meshing_measures_all_of_card_lt",
+            "type": "NEW_PROOF",
+            "source_declarations": [],
+            "application": "Finite operational models plus meshing: cardinality gap rules out exact measurement of every global state."
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Knowledge.Embedded.Composition.properInclusion_iff_not_injective",
+            "type": "NEW_PROOF",
+            "source_declarations": []
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Knowledge.Embedded.Composition.not_meshing_of_not_surjective",
+            "type": "NEW_PROOF",
+            "source_declarations": []
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Knowledge.Embedded.Composition.meshing_fibreInference_of_surjective",
+            "type": "NEW_PROOF",
+            "source_declarations": []
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Knowledge.Embedded.Finite.properInclusion_product_of_card_rest_ge_two",
+            "type": "NEW_PROOF",
+            "source_declarations": []
+          }
+        ]
+      },
+      "public": {
+        "group": "What an observer can recover",
+        "summary": "It fails when something else in the system varies, or the sensor is too small.",
+        "use": "Applying the limit without assuming what you want to prove.",
+        "title": "When self-measurement fails",
+        "attribution": "extends Breuer"
+      }
+    },
+    {
+      "id": "LAND-KNOW-001",
+      "name": "Exact knowability: the observation-factorization kernel",
+      "tags": [
+        "information-theory",
+        "interpretability"
+      ],
+      "result_shape": "CHARACTERIZATION",
+      "notes": "Generic exact knowability interface. Knowable is defined in decoder form — one rule on observations, uniform in the state — so that the factorization/no-collision characterization stays a theorem rather than definitional unfolding; the same commitment JointObservation.Covers makes, for the same reason. knowable_iff_factorsThrough bridges to Mathlib's Function.FactorsThrough, which supplies the fibrewise construction and the [Nonempty Y] hypothesis; knowable_iff_no_collision is the binder-normalized restatement. IndistinguishabilityWitness is the negative certificate; exists_witness_of_not_knowable is its classical converse. Determines orders observations by informativeness, Knowable.mono transfers knowability upward along it, and not_knowable_comp is the constructive repair boundary — post-processing an unchanged observation cannot create knowability. The factorization content is standard and is Mathlib's; what is packaged here is the decoder-form statement, the witness interface, and monotonicity. No embedded-observer model, no temporal claim, no impossibility claim, and no consciousness result: observation is an arbitrary map, not a projection of a state containing the observer.",
+      "original_source_refs": [],
+      "related_result_ids": [
+        "LAND-JOINTOBS-001"
+      ],
+      "root_import": true,
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE",
+          "license": "Apache-2.0",
+          "reproduced": true,
+          "build_environment": "leanprover/lean4:v4.31.0; Mathlib fabf563a7c95a166b8d7b6efca11c8b4dc9d911f; atlas IN_TREE",
+          "declarations": [
+            "AISafetyAtlas.Knowledge.Knowable",
+            "AISafetyAtlas.Knowledge.IndistinguishabilityWitness",
+            "AISafetyAtlas.Knowledge.Determines",
+            "AISafetyAtlas.Knowledge.knowable_iff_factorsThrough",
+            "AISafetyAtlas.Knowledge.knowable_iff_no_collision",
+            "AISafetyAtlas.Knowledge.not_knowable_of_collision",
+            "AISafetyAtlas.Knowledge.not_knowable_of_witness",
+            "AISafetyAtlas.Knowledge.exists_witness_of_not_knowable",
+            "AISafetyAtlas.Knowledge.Knowable.mono",
+            "AISafetyAtlas.Knowledge.not_knowable_comp"
+          ],
+          "module": "AISafetyAtlas.Knowledge",
+          "atlas_module": "AISafetyAtlas.Knowledge",
+          "build_command": "lake build AISafetyAtlas.Knowledge"
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Knowledge.knowable_iff_factorsThrough",
+            "type": "WRAPPER",
+            "source_declarations": [
+              "Function.factorsThrough_iff"
+            ]
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Knowledge.knowable_iff_no_collision",
+            "type": "WRAPPER",
+            "source_declarations": [
+              "Function.factorsThrough_iff"
+            ]
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Knowledge.not_knowable_of_collision",
+            "type": "NEW_PROOF",
+            "source_declarations": []
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Knowledge.not_knowable_of_witness",
+            "type": "NEW_PROOF",
+            "source_declarations": []
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Knowledge.exists_witness_of_not_knowable",
+            "type": "NEW_PROOF",
+            "source_declarations": []
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Knowledge.Knowable.mono",
+            "type": "NEW_PROOF",
+            "source_declarations": []
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Knowledge.not_knowable_comp",
+            "type": "NEW_PROOF",
+            "source_declarations": []
+          }
+        ]
+      },
+      "public": {
+        "group": "What an observer can recover",
+        "summary": "You can tell things apart only if they look different.",
+        "use": "The shared core behind the observation results.",
+        "title": "Knowability kernel",
+        "attribution": "Workbench infrastructure"
+      }
+    },
+    {
+      "id": "LAND-CRMDP-KNOW-001",
+      "name": "True return does not factor through the observed history",
+      "tags": [
+        "agent-incentives",
+        "information-theory"
+      ],
+      "result_shape": "POINT_IMPOSSIBILITY",
+      "notes": "Reads BY-039's CRMDP complement construction through the LAND-KNOW-001 kernel, with the environment as the unknown. An environment and its complement generate the same observed history but returns summing to the horizon, so a complement pair whose returns differ is a collision and not_knowable_of_collision applies. The primary statement is class-relative: it asks only that some admissible environment class contain such a pair, which is what makes the escape routes exact — restrict the class, add information, relax exactness, or move to a prior. The unrestricted corollary is witnessed at every positive horizon by the zero environment and its complement. The mathematics is not new: Everitt, Krakovna, Orseau, Hutter and Legg supply both ingredients and BY-039 already formalizes them. What this row adds is the factorization reading, the witness certificate, and the import edge making Wireheading a consumer of Knowledge. Quantification is over environments, not over agents: no decoder from observed histories is correct on every environment in the class. Explicit non-claims, including approximation and prior-conditional estimation, are in the module docstring; BY-039's non-claims are inherited.",
+      "original_source_refs": [],
+      "related_result_ids": [
+        "BY-039",
+        "LAND-KNOW-001",
+        "LAND-AMBIG-001"
+      ],
+      "relations": [
+        {
+          "target": "LAND-KNOW-001",
+          "kind": "INSTANTIATES",
+          "note": "Takes the state to be the unknown environment, the observation to be the history a fixed policy receives, and the target to be the true finite-horizon return."
+        },
+        {
+          "target": "BY-039",
+          "kind": "BUILDS_ON",
+          "note": "Both ingredients are BY-039's module: history_complement supplies the collision and return_add_complement supplies the disagreement."
+        }
+      ],
+      "root_import": true,
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE",
+          "license": "Apache-2.0",
+          "reproduced": true,
+          "build_environment": "leanprover/lean4:v4.31.0; Mathlib fabf563a7c95a166b8d7b6efca11c8b4dc9d911f; atlas IN_TREE",
+          "declarations": [
+            "AISafetyAtlas.Wireheading.ObservationLimits.observedHistory",
+            "AISafetyAtlas.Wireheading.ObservationLimits.trueReturn",
+            "AISafetyAtlas.Wireheading.ObservationLimits.complementWitness",
+            "AISafetyAtlas.Wireheading.ObservationLimits.not_knowable_trueReturn_of_complement_mem",
+            "AISafetyAtlas.Wireheading.ObservationLimits.not_knowable_trueReturn"
+          ],
+          "module": "AISafetyAtlas.Wireheading.ObservationLimits",
+          "atlas_module": "AISafetyAtlas.Wireheading.ObservationLimits",
+          "build_command": "lake build AISafetyAtlas.Wireheading.ObservationLimits"
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Wireheading.ObservationLimits.not_knowable_trueReturn_of_complement_mem",
+            "type": "NEW_PROOF",
+            "source_declarations": []
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Wireheading.ObservationLimits.not_knowable_trueReturn",
+            "type": "NEW_PROOF",
+            "source_declarations": []
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Wireheading.ObservationLimits.returnOver_zeroEnv_complement",
+            "type": "NEW_PROOF",
+            "source_declarations": []
+          }
+        ]
+      },
+      "public": {
+        "group": "Preferences, rewards and incentives",
+        "summary": "An agent cannot tell how well it is really doing from what it saw.",
+        "use": "Ties reward tampering to what an agent can know.",
+        "title": "Unobservable return",
+        "attribution": "Workbench infrastructure"
       }
     }
   ]

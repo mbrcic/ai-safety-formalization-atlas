@@ -1,6 +1,7 @@
 module
 
 public import AISafetyAtlas.Oversight.JointObservation.Architecture
+public import AISafetyAtlas.Knowledge
 
 /-!
 # Joint observation — coverage and collision
@@ -15,11 +16,22 @@ would collapse `covers_iff_no_collision` — the characterization this file exis
 prove — into definitional unfolding, and would leave the artifact with no statement
 connecting an observation's *informational content* to a *usable decision rule*.
 
-The forward direction is immediate. The reverse direction is the fibre argument: a
-decision rule is assembled from the hazard values on each fibre of `observe`, which
-is well defined exactly when no fibre contains both a safe and a hazardous execution.
-In this generic form it may use classical choice; `FiniteDecision` supplies the
-constructive executable counterpart.
+## Relation to the generic kernel
+
+`Covers q h` is *definitionally* `AISafetyAtlas.Knowledge.Knowable q.observe h`:
+the coalition-indexed statement here is that kernel at `Ω := A.Execution`,
+`I := q.Output`, `Y := Bool`. `covers_iff_no_collision` is therefore
+`Knowledge.knowable_iff_no_collision` applied to `q.observe`, and no bridge lemma
+is needed — the kernel results apply to a `Covers` hypothesis directly.
+
+The fibre argument lives once, in the kernel, where it is discharged by Mathlib's
+`Function.factorsThrough_iff`: a decision rule is assembled from the hazard values
+on each fibre of `observe`, well defined exactly when no fibre contains both a safe
+and a hazardous execution. In that generic form it uses classical choice;
+`FiniteDecision` supplies the constructive executable counterpart.
+
+What stays here is what is genuinely coalition-specific: the `CollisionWitness`
+certificate consumers cite, and the finite decision procedure.
 
 A `CollisionWitness` is the concrete negative certificate: two executions the
 candidate cannot tell apart, one safe and one hazardous.
@@ -76,24 +88,16 @@ absence of any safe/hazardous pair colliding at that output.
 This is the flagship statement of the kernel: it is what licenses reading a
 collision witness as a genuine informational obstruction rather than a failure of
 one particular decision rule.
+
+The fibre argument is not repeated here. `Covers q h` is definitionally
+`Knowledge.Knowable q.observe h`, so this is the generic characterization at
+`Y := Bool`, whose `[Nonempty Y]` hypothesis is discharged automatically.
 -/
 public theorem covers_iff_no_collision
     (q : CandidateObservation.{u, v, w} A)
     (h : Hazard A) :
-    Covers q h ↔ ∀ σ τ, q.observe σ = q.observe τ → h σ = h τ := by
-  classical
-  constructor
-  · rintro ⟨d, hd⟩ σ τ hst
-    rw [hd σ, hd τ, hst]
-  · intro hno
-    -- Assemble the rule fibrewise: on an output that some execution realizes, answer
-    -- with that execution's hazard status. Well defined exactly by `hno`.
-    refine ⟨fun o => if hex : ∃ τ, q.observe τ = o then h hex.choose else false, ?_⟩
-    intro σ
-    have hex : ∃ τ, q.observe τ = q.observe σ := ⟨σ, rfl⟩
-    show h σ = if hex' : ∃ τ, q.observe τ = q.observe σ then h hex'.choose else false
-    rw [dif_pos hex]
-    exact hno σ hex.choose hex.choose_spec.symm
+    Covers q h ↔ ∀ σ τ, q.observe σ = q.observe τ → h σ = h τ :=
+  Knowledge.knowable_iff_no_collision q.observe h
 
 /-- A collision witness refutes coverage. -/
 public theorem not_covers_of_collisionWitness

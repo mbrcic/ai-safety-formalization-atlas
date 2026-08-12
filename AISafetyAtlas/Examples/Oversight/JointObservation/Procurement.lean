@@ -149,6 +149,9 @@ public instance : Fintype arch.Execution := inferInstanceAs (Fintype Exec)
 
 public instance : DecidableEq arch.Execution := inferInstanceAs (DecidableEq Exec)
 
+/-- Named rather than anonymous because the emitted views differ per principal —
+`Bool` for the data owner, `Unit` for the model owner — so the instance cannot be
+found by a single `inferInstanceAs` and has to be dispatched on the principal. -/
 public instance instDecidableEqEmittedView :
     (i : Principal) → DecidableEq (EmittedView i)
   | .dataOwner => inferInstanceAs (DecidableEq Bool)

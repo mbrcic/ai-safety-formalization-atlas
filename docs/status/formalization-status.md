@@ -12,26 +12,26 @@ Statement-match is not the primary success score.
 
 | Metric | Current |
 |---|---:|
-| Results stating a source claim | 44 |
-| Results recording a formalization only | 16 |
-| Registry results with atlas Lean (any grade) | 21 |
-| Claim results with statement-match (`EXACT` or `EQUIVALENT`) | 7 |
+| Results stating a source claim | 46 |
+| Results recording a formalization only | 26 |
+| Registry results with atlas Lean (any grade) | 32 |
+| Claim results with statement-match (`EXACT` or `EQUIVALENT`) | 9 |
 | Claim results with workbench formalizations (`RELATED` only) | 6 |
-| Formalization records | 46 |
-| … declaring reproduction (self-attested; see methodology) | 44 |
-| Atlas Lean theorem declarations (unique names) | 50 |
-| Registry Lean declaration records | 50 |
-| … of which `WRAPPER` | 15 |
+| Formalization records | 58 |
+| … declaring reproduction (self-attested; see methodology) | 56 |
+| Atlas Lean theorem declarations (unique names) | 105 |
+| Registry Lean declaration records | 105 |
+| … of which `WRAPPER` | 18 |
 | … of which `BRIDGE` | 4 |
-| … of which `NEW_PROOF` | 31 |
+| … of which `NEW_PROOF` | 83 |
 | … of which `REFERENCE` | 0 |
-| Registry rows whose atlas Lean is wrapper-only | 7 |
+| Registry rows whose atlas Lean is wrapper-only | 8 |
 | Registry rows with at least one `BRIDGE` declaration | 3 |
 | Structured `candidate_formalizations` leads | 5 |
-| Reproduced external formalization records | 7 across 6 registry results |
-| Claim results with reviewed AI-system bridges | 2 |
-| Brčić–Yampolskiy survey rows catalogued (that source, complete) | 44 / 44 |
-| Survey rows with atlas Lean (any grade) | 13 |
+| Reproduced external formalization records | 8 across 7 registry results |
+| Claim results with reviewed AI-system bridges | 3 |
+| Brcic–Yampolskiy survey rows catalogued (that source, complete) | 44 / 44 |
+| Survey rows with atlas Lean (any grade) | 14 |
 | … with six-corpus discovery evidence (that source, complete) | 44 / 44 |
 
 ## Registry Lean declarations
@@ -51,6 +51,8 @@ Statement-match is not the primary success score.
 | BY-033 | Unverifiability of robot ethics | `RELATED` | `AISafetyAtlas.Computability.halting_problem` | `AISafetyAtlas.Verification.Robot.action_safety_unverifiable (BRIDGE)` |
 | BY-039 | Reward corruption unsolvability | `RELATED` | `AISafetyAtlas.Wireheading.CRMDP.Env.observed_complement`<br>`AISafetyAtlas.Wireheading.CRMDP.return_add_complement`<br>`AISafetyAtlas.Wireheading.Corruption.ComplementedClass.everitt_theorem_eleven` | `AISafetyAtlas.Wireheading.CRMDP.Model.everitt_theorem_eleven (NEW_PROOF)` |
 | BY-043 | Misaligned embodiment | `RELATED` | — | `AISafetyAtlas.Compositional.Symmetry.Protocol.no_unique_leader_from_symmetric_start (NEW_PROOF)` |
+| BY-044 | Limited self-awareness | `EQUIVALENT` | — | `AISafetyAtlas.SelfAwareness.Model.not_aware_of_le (NEW_PROOF)`<br>`AISafetyAtlas.SelfAwareness.Model.process_not_self_aware (NEW_PROOF)`<br>`AISafetyAtlas.SelfAwareness.Model.not_agentAware_of_maximal (NEW_PROOF)`<br>`AISafetyAtlas.SelfAwareness.Model.limited_self_awareness (NEW_PROOF)`<br>`AISafetyAtlas.SelfAwareness.Model.not_perfectlySelfAware (NEW_PROOF)` |
+| CLM-LAWVERE-001 | Lawvere fixed-point theorem (types and functions) | `EQUIVALENT` | `Function.exists_fixed_point_of_surjective` | `AISafetyAtlas.Logic.lawvere_fixed_point (WRAPPER)` |
 | LAND-ATTR-001 | Attribution impossibility (DASH trilemma) |  | `DASHImpossibility.attribution_impossibility`<br>`DASHImpossibility.attribution_impossibility_weak` | `AISafetyAtlas.Explainability.attribution_impossibility (WRAPPER)`<br>`AISafetyAtlas.Explainability.attribution_impossibility_weak (WRAPPER)` |
 | LAND-GS-002 | Gibbard–Satterthwaite theorem (Lean / SocialChoiceLean) |  | `SocialChoice.gibbard_satterthwaite` | `AISafetyAtlas.SocialChoice.gibbard_satterthwaite (WRAPPER)` |
 | LAND-HYPER-002 | k-safety self-composition and hyperproperty decomposition |  | `k_safety_iff_finite_self_composition`<br>`k_safety_iff_product_self_composition`<br>`self_composition_is_safety`<br>`isClosed_iff_hyperSafety`<br>`dense_iff_hyperLiveness`<br>`hyperSafety_of_isKSafety`<br>`hyperSafety_hyperLiveness_decomposition` | `AISafetyAtlas.Compositional.Hyperproperties.k_safety_iff_finite_self_composition (NEW_PROOF)` |
@@ -59,6 +61,15 @@ Statement-match is not the primary success score.
 | LAND-WIRE-OBJ-001 | Ring-Orseau objective factorization |  | `AgentEquations.value_eq_of_agree_on_window`<br>`AgentEquations.truncation_exact`<br>`AgentEquations.bestAction_max`<br>`Objective.value_eq_of_agree_on_window`<br>`Objective.value_scaleUtility`<br>`Objective.optimal_decisions_eq_of_pos_scaleUtility`<br>`Objective.value_congr`<br>`Objective.optimal_decisions_congr` | `AISafetyAtlas.Wireheading.AgentEquations.value_eq_of_agree_on_window (NEW_PROOF)` |
 | LAND-GOAL-001 | Finite-percept on-policy goal-preservation induction step | `RELATED` | `GoalPreservationSource.Model.selected_matches_initial`<br>`GoalPreservationSource.Model.safe_modification`<br>`GoalPreservationSource.Model.qValue_selected_eq_initial`<br>`next_policy_optimal`<br>`run_optimal`<br>`goal_preservation` | `AISafetyAtlas.Wireheading.GoalPreservationSource.Model.selected_matches_initial (NEW_PROOF)` |
 | LAND-JOINTOBS-001 | Coalition-indexed joint observation and the emitted-interface coverage boundary |  | `covers_iff_no_collision`<br>`not_covers_of_collisionWitness`<br>`exists_collisionWitness_of_not_covers`<br>`decideCoverage`<br>`decideCoverage_covered_iff`<br>`CoverageResult.covered_eq_true_iff`<br>`decidableCovers`<br>`postprocess_cannot_repair_collision`<br>`covers_of_refines`<br>`observe_truthful`<br>`PortfolioCovers`<br>`PortfolioIndistinguishable`<br>`portfolioCovers_implies_hazardEquivalent`<br>`InclusionMinimalCovering`<br>`PortfolioCost`<br>`CostOptimalCovering`<br>`inclusionMinimal_of_costOptimal` | `AISafetyAtlas.Oversight.JointObservation.covers_iff_no_collision (NEW_PROOF)` |
+| LAND-SELFREF-001 | The self-model as a component of the state it models |  | — | `AISafetyAtlas.Knowledge.SelfReference.selfComplete_iff_subsingleton_rest (NEW_PROOF)`<br>`AISafetyAtlas.Knowledge.SelfReference.not_selfComplete_of_two_rest (NEW_PROOF)`<br>`AISafetyAtlas.Knowledge.SelfReference.card_rest_le_one_of_selfComplete (NEW_PROOF)` |
+| LAND-ACCUM-001 | Window ambiguity: accumulation bounds over a set of targets |  | — | `AISafetyAtlas.Knowledge.ambiguity_le_pairTarget_left (NEW_PROOF)`<br>`AISafetyAtlas.Knowledge.ambiguity_le_pairTarget_right (NEW_PROOF)`<br>`AISafetyAtlas.Knowledge.ambiguity_pairTarget_le_mul (NEW_PROOF)`<br>`AISafetyAtlas.Knowledge.not_knowable_pairTarget_of_not_knowable (NEW_PROOF)`<br>`AISafetyAtlas.Knowledge.ambiguity_le_of_evidenceMonotone (NEW_PROOF)`<br>`AISafetyAtlas.Knowledge.ambiguity_le_pairTarget_of_evidenceMonotone (NEW_PROOF)` |
+| LAND-AMBIG-001 | Finite fibre ambiguity and the counting obstruction |  | — | `AISafetyAtlas.Knowledge.card_image_le_of_knowable (NEW_PROOF)`<br>`AISafetyAtlas.Knowledge.not_knowable_of_card_lt (NEW_PROOF)`<br>`AISafetyAtlas.Knowledge.ambiguity_le_of_comp (NEW_PROOF)`<br>`AISafetyAtlas.Knowledge.knowable_iff_ambiguity_le_one (NEW_PROOF)` |
+| LAND-TEMPORAL-001 | Time-indexed knowability, contemporaneous collisions, and delayed knowledge |  | — | `AISafetyAtlas.Knowledge.Temporal.knowableFrom_mono (NEW_PROOF)`<br>`AISafetyAtlas.Knowledge.Temporal.not_knowableAt_of_collisionAt (NEW_PROOF)`<br>`AISafetyAtlas.Knowledge.Temporal.collisionAt_of_not_knowableAt (NEW_PROOF)` |
+| LAND-SELFMEAS-001 | Self-measurement failure for an embedded observation |  | — | `AISafetyAtlas.Knowledge.knowable_id_iff_injective (NEW_PROOF)`<br>`AISafetyAtlas.Knowledge.not_knowable_state_of_nontrivial_remainder (NEW_PROOF)` |
+| LAND-SELFMEAS-002 | Breuer abstract embedded-measurement core | `EQUIVALENT` | — | `AISafetyAtlas.Knowledge.Embedded.not_knowable_state_of_properInclusion (NEW_PROOF)`<br>`AISafetyAtlas.Knowledge.Embedded.Meshing.restrict_surjective (NEW_PROOF)`<br>`AISafetyAtlas.Knowledge.Embedded.no_meshing_inference_distinguishes (NEW_PROOF)`<br>`AISafetyAtlas.Knowledge.Embedded.no_meshing_inference_measures_all_states (NEW_PROOF)`<br>`AISafetyAtlas.Knowledge.Embedded.exists_state_not_exactly_measurable (NEW_PROOF)`<br>`AISafetyAtlas.Knowledge.Embedded.infer_singleton_eq_of_meshing (NEW_PROOF)`<br>`AISafetyAtlas.Knowledge.Embedded.exists_singleton_infer_eq_of_infer_eq (NEW_PROOF)`<br>`AISafetyAtlas.Knowledge.Embedded.eq_restrict_of_infer_singleton_eq (NEW_PROOF)`<br>`AISafetyAtlas.Knowledge.Embedded.no_meshing_inference_measures_all_states_direct (NEW_PROOF)` |
+| LAND-SELFMEAS-003 | Physical complement and finite-cardinality bridges to Breuer proper inclusion | `RELATED` | — | `AISafetyAtlas.Knowledge.Embedded.Composition.properInclusion_of_nontrivial_remainder (NEW_PROOF)`<br>`AISafetyAtlas.Knowledge.Embedded.Composition.no_meshing_measures_all_of_nontrivial_remainder (NEW_PROOF)`<br>`AISafetyAtlas.Knowledge.Embedded.Composition.properInclusion_of_nontrivial_remainder_of_equiv (NEW_PROOF)`<br>`AISafetyAtlas.Knowledge.Embedded.Composition.no_meshing_measures_all_of_nontrivial_remainder_of_equiv (NEW_PROOF)`<br>`AISafetyAtlas.Knowledge.Embedded.Composition.measuresAll_fibreInference_of_injective (NEW_PROOF)`<br>`AISafetyAtlas.Knowledge.Embedded.Composition.meshing_and_measuresAll_fibreInference_of_bijective (NEW_PROOF)`<br>`AISafetyAtlas.Knowledge.Embedded.Finite.properInclusion_of_card_lt (NEW_PROOF)`<br>`AISafetyAtlas.Knowledge.Embedded.Finite.no_meshing_measures_all_of_card_lt (NEW_PROOF)`<br>`AISafetyAtlas.Knowledge.Embedded.Composition.properInclusion_iff_not_injective (NEW_PROOF)`<br>`AISafetyAtlas.Knowledge.Embedded.Composition.not_meshing_of_not_surjective (NEW_PROOF)`<br>`AISafetyAtlas.Knowledge.Embedded.Composition.meshing_fibreInference_of_surjective (NEW_PROOF)`<br>`AISafetyAtlas.Knowledge.Embedded.Finite.properInclusion_product_of_card_rest_ge_two (NEW_PROOF)` |
+| LAND-KNOW-001 | Exact knowability: the observation-factorization kernel |  | `Function.factorsThrough_iff` | `AISafetyAtlas.Knowledge.knowable_iff_factorsThrough (WRAPPER)`<br>`AISafetyAtlas.Knowledge.knowable_iff_no_collision (WRAPPER)`<br>`AISafetyAtlas.Knowledge.not_knowable_of_collision (NEW_PROOF)`<br>`AISafetyAtlas.Knowledge.not_knowable_of_witness (NEW_PROOF)`<br>`AISafetyAtlas.Knowledge.exists_witness_of_not_knowable (NEW_PROOF)`<br>`AISafetyAtlas.Knowledge.Knowable.mono (NEW_PROOF)`<br>`AISafetyAtlas.Knowledge.not_knowable_comp (NEW_PROOF)` |
+| LAND-CRMDP-KNOW-001 | True return does not factor through the observed history |  | — | `AISafetyAtlas.Wireheading.ObservationLimits.not_knowable_trueReturn_of_complement_mem (NEW_PROOF)`<br>`AISafetyAtlas.Wireheading.ObservationLimits.not_knowable_trueReturn (NEW_PROOF)`<br>`AISafetyAtlas.Wireheading.ObservationLimits.returnOver_zeroEnv_complement (NEW_PROOF)` |
 
 The generated declaration-presence checks live in
 [`AISafetyAtlas/Examples/Registry.lean`](../../AISafetyAtlas/Examples/Registry.lean).
@@ -76,6 +87,7 @@ signatures and root-import usability.
 | LAND-NFL-001 | No-free-lunch theorem for machine learning (Shalev-Shwartz–Ben-David §5.1) | Isabelle/HOL | `no_free_lunch_ML` | RELATED | `scripts/reproduce_isabelle.sh nfl` |
 | LAND-PE-001 | Parfit mere addition / conditional normative reasoning (Åqvist E) | Isabelle/HOL | `mere_addition` | RELATED | `scripts/reproduce_isabelle.sh condnorm` |
 | LAND-DL-001 | Deep vs shallow network capacity (Cohen–Bentkamp) | Isabelle/HOL | `fundamental_theorem_network_capacity` | RELATED | `scripts/reproduce_isabelle.sh deep-learning` |
+| LAND-CL-001 | Chandy-Lamport distributed snapshot — termination, correctness, stable property detection | Isabelle/HOL | `snapshot_algorithm_must_terminate`<br>`snapshot_algorithm_is_correct`<br>`Stable_Property_Detection` | — | `scripts/reproduce_isabelle.sh chandy-lamport` |
 
 Additional reproduced variants and adjacent developments, including vNM
 expected utility, remain provenance rather than extra survey coverage; see

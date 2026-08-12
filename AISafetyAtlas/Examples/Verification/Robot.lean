@@ -20,7 +20,7 @@ physical robot or an ethical property.
 open Nat.Partrec (Code)
 open Nat.Partrec.Code
 
-namespace AISafetyAtlas.Examples.Robot
+namespace AISafetyAtlas.Examples.Verification.Robot
 
 private def pacedBehavior (input : ℕ) :
     Code → AISafetyAtlas.Verification.Robot.Behavior Unit (Option ℕ) :=
@@ -67,4 +67,4 @@ example (input : ℕ) :
     (fun _ : Code => True) (pacedBehavior input) noResultAction
     (pacedConstruction input)
 
-end AISafetyAtlas.Examples.Robot
+end AISafetyAtlas.Examples.Verification.Robot

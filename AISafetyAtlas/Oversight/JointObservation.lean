@@ -79,6 +79,20 @@ declared finite family. It makes a proposed portfolio checkable; producing one i
   as in `Compositional.Networks.runFor_eq_of_view_eq`, bounded witnesses as in
   `Compositional.Hyperproperties.IsKSafety` — not results.
 
+## Relation to the generic kernel
+
+`Covers q h` is definitionally `AISafetyAtlas.Knowledge.Knowable q.observe h`, and
+`Refines q' q` is definitionally `Knowledge.Determines q'.observe q.observe`. C1 and
+both halves of C3 are therefore the generic kernel results applied to `q.observe`,
+not separate arguments: `covers_iff_no_collision` is `knowable_iff_no_collision`,
+`covers_of_refines` is `Knowable.mono`, and `postprocess_cannot_repair_collision` is
+`not_knowable_comp`. No bridge lemma is needed — kernel results apply to a `Covers`
+hypothesis directly.
+
+What is coalition-specific, and stays here: `EvidenceArchitecture`, the typed
+`CoalitionInput` restriction, the `CollisionWitness` certificate consumers cite, the
+certified finite checker, and the bounded portfolio target.
+
 Machine-checked consumers live at
 `AISafetyAtlas.Examples.Oversight.JointObservation.Procurement` and
 `AISafetyAtlas.Examples.Oversight.JointObservation.Portfolio`. They are regression

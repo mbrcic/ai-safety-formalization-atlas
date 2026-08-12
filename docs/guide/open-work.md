@@ -25,6 +25,56 @@ The contributor-facing priorities and selection principles are summarized in
 [`ROADMAP.md`](../../ROADMAP.md). This file retains the detailed review queue,
 research leads, and integration decisions behind that strategy.
 
+## Self-knowledge and embedded observation — the open queue
+
+What exists is in [`STATE.md`](../../STATE.md) and
+[`relations.md`](../status/relations.md); this is only what is *not* done, and why
+each item is where it is.
+
+- **Dynamics is the blocking gap.** Every layer over the knowability kernel
+  indexes or projects; none carries a transition relation. So nothing states *why*
+  a collision arises, or how a target moves between observations. A genuine
+  causal-innovation condition — the target changed since the last
+  evidence-generating event — is what would have to **imply** the collisions these
+  modules take as given, and it is not stateable without dynamics.
+  `Knowledge.Temporal` records this in its own docstring rather than papering
+  over it.
+- **The achievability half is unpaid, and cannot be paid around.**
+  `LAND-CL-001` (Chandy–Lamport, Isabelle/AFP, reproduced) is the only entry on
+  that side and has no Lean surface. Porting it would not close the gap: two Lean
+  developments that do not share a model still cannot be composed. What closes it
+  is a shared transition-system-with-observations interface that an impossibility
+  and a construction can both instantiate. Until then the `BOUNDARY_PARTNER`
+  edges with their stated model deltas are the honest representation.
+- **Reuse is mostly internal.** `scripts/report_consumers.py` reports 21 of 105
+  declarations consumed outside `Examples/`. The kernel, joint observation and the
+  CRMDP link compose; the physical bridges (`LAND-SELFMEAS-003`) and the
+  accumulation layer are exercised only by their own witnesses. Give one a
+  downstream consumer, or retire it — not both.
+- **Breuer residuals stay out of scope deliberately.** Physical apparatus
+  construction, dynamics, the quantum/Hilbert-space treatment, EPR, and §3.4's
+  continuity route are omitted from `LAND-SELFMEAS-002`. The grade is
+  `EQUIVALENT`: every statement §3.5 displays is mechanized, but the hypotheses
+  are deliberately not the source's, which is why it is not `EXACT`.
+  Stop rule and full residual list:
+  [`../provenance/self-measurement-kernel.md`](../provenance/self-measurement-kernel.md).
+- **Orientation is [`knowledge-model.md`](knowledge-model.md)**; the paper-level
+  residuals and stop rules stay in `docs/provenance/`. If a new layer lands, the
+  guide's *Not proved* section is the part that has to move with it.
+- **Blocked upstream, not here:** a categorical Lawvere in Lean. The AFP has one
+  over ETCS (`NC-005`); deriving Gödel/Turing/Rice/Brandenburger–Keisler from one
+  diagonal kernel needs realizability or regular categories that Lean does not
+  supply. Nothing here should own that.
+
+## Decided: no generated API documentation site
+
+`doc-gen4` was tried and removed. It renders the entire import closure, so
+documenting this library also documents Mathlib, Foundation and Lean core — 372 MB
+of HTML for 2.5 MB of ours — and it cannot link out to Mathlib's published docs
+instead of rebuilding them. Replaced by [`site/`](../../site/). Worth revisiting
+only for an extractor over the atlas's own environment, which needs no upstream
+change.
+
 ## Deliberately not automated
 
 - **Re-executing recorded reproductions.** `reproduced: true` means the ledger
@@ -43,11 +93,13 @@ research leads, and integration decisions behind that strategy.
 ## Human review
 
 - Revisit the public framing and scope disclaimer when coverage claims change
-  (see [`../releases/v0.5.md`](../releases/v0.5.md) for the current release's
-  non-claims; older notes under `docs/releases/`).
+  (see [`../releases/v0.5.1.md`](../releases/v0.5.1.md) for the current
+  release's non-claims; older notes under `docs/releases/`).
 - Optional: external domain review of bridge packages beyond maintainer review.
-- Review source-level statements for the three survey-introduced proof sketches:
-  unfairness of explainability, misaligned embodiment, and limited self-awareness.
+- Review source-level statements for two of the three survey-introduced proof
+  sketches: unfairness of explainability and misaligned embodiment. Limited
+  self-awareness (BY-044) has had its statement review and carries an
+  `EQUIVALENT` formalization; its AI-facing bridge is still `HUMAN_REVIEW`.
 - Other classical wrappers / Utility Arrow remain without AI-bridge graduation;
   only BY-012 and BY-033 currently carry `REVIEWED` AI-facing bridge status.
 - **Done (v0.2):** `Verification.rice` + `AgentBehavior` (BY-012) and robot
@@ -109,7 +161,7 @@ research leads, and integration decisions behind that strategy.
 1. Arrow's impossibility theorem uses CC Liang's Apache-2.0 Lean 4 development
    at pinned commit `758398779decc66d2830a70b02597b0f22030181` as its canonical
    source. A namespaced snapshot is vendored because the upstream legacy module
-   cannot cross Lean 4.32's public-module boundary directly.
+   cannot cross the atlas's public-module boundary directly.
 2. The utility-facing Arrow theorem is a bridge over that canonical proof. It
    represents finite total preorders by lower-contour cardinalities; neither
    independent Isabelle proof was ported.
@@ -172,10 +224,13 @@ current registry and public API so assimilation does not re-open completed work.
    and listed in `registry.yaml` (`LAND-ATTR-001`; not
    BY-042/BY-029 coverage).
 4. **Survey-original / pen-and-paper AI claims** (unfairness of explainability,
-   misaligned embodiment, limited self-awareness; uncontainability;
-   Yampolskiy unverifiability/uncontrollability) — no ITP proofs in parent
-   reports; only useful as **new bridges** over Rice/halting/Löb with explicit
-   models, not as “missing classical theorems.”
+   misaligned embodiment; uncontainability; Yampolskiy
+   unverifiability/uncontrollability) — no ITP proofs in parent reports; only
+   useful as **new bridges** over Rice/halting/Löb with explicit models, not as
+   “missing classical theorems.” Limited self-awareness has left this group:
+   BY-044 is formalized in-atlas as `AISafetyAtlas.SelfAwareness` at
+   `EQUIVALENT`, by a resource/composition argument rather than a bridge over a
+   classical theorem.
 5. **Defer:** FairBot / PrudentBot / bounded-Löb cooperation; constraint-based
    design-space solver; population-ethics Isabelle partials; AFP
    `Deep_Learning` / no-flattening (BY-035-ish) until a named consumer needs

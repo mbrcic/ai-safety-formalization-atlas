@@ -59,9 +59,23 @@ reproduce_condnorm() {
     "CondNormReasHOL"
 }
 
+# Chandy_Lamport's session parent is Ordered_Resolution_Prover, which in turn needs
+# Coinductive and Nested_Multisets_Ordinals. The per-entry tarball does not close over
+# that chain, so use the full immutable AFP release, as for Deep_Learning.
+reproduce_chandy_lamport() {
+  reproduce_full_afp "Chandy_Lamport"
+}
+
 # Deep_Learning depends on several AFP sessions (Jordan_Normal_Form, Polynomials, …).
 # Use the full immutable AFP release so transitive sessions resolve under one tree.
 reproduce_deep_learning() {
+  reproduce_full_afp "Deep_Learning"
+}
+
+# Build one session against the full immutable AFP release, so that transitive
+# session dependencies resolve under a single pinned tree.
+reproduce_full_afp() {
+  local session="$1"
   local archive_url="https://isa-afp.org/release/afp-2026-02-06.tar.gz"
   # Full AFP release 2026-02-06 (layout: afp-2026-02-06/thys/).
   local archive_sha256="b059edd46073479ee8dde45004c2346a7365e5d94cded49d27257cfea66c8879"
@@ -70,7 +84,7 @@ reproduce_deep_learning() {
     --entrypoint /bin/bash \
     --env AFP_ARCHIVE_URL="$archive_url" \
     --env AFP_ARCHIVE_SHA256="$archive_sha256" \
-    --env AFP_SESSION="Deep_Learning" \
+    --env AFP_SESSION="$session" \
     "$ISABELLE_IMAGE" \
     -lc '
       set -euo pipefail
@@ -104,15 +118,19 @@ case "${1:-all}" in
   deep-learning|deeplearning)
     reproduce_deep_learning
     ;;
+  chandy-lamport|chandylamport)
+    reproduce_chandy_lamport
+    ;;
   all)
     reproduce_rice
     reproduce_arrow
     reproduce_nfl
     reproduce_condnorm
     reproduce_deep_learning
+    reproduce_chandy_lamport
     ;;
   *)
-    echo "usage: $0 [rice|arrow|nfl|condnorm|deep-learning|all]" >&2
+    echo "usage: $0 [rice|arrow|nfl|condnorm|deep-learning|chandy-lamport|all]" >&2
     exit 2
     ;;
 esac

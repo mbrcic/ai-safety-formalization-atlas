@@ -7,7 +7,7 @@ over which model, and where the statement comes from. A result appears under
 every area its row is tagged with. An application line is not itself a reviewed
 AI-system bridge.
 
-**17** applications across **12** areas; **2** rows carry a maintainer-reviewed AI-system
+**31** applications across **13** areas; **2** rows carry a maintainer-reviewed AI-system
 interpretation, with evidence under [`docs/bridges/`](../bridges/).
 
 ## Why these matter, and what they do not settle
@@ -85,7 +85,23 @@ declaration surface, including results with no AI-system reading, is in
 
 | What it says | Declaration | Row | Bridge |
 |---|---|---|---|
-| Robot ethics: no total online verifier decides whether a reactive program's actions are always acceptable, given a switching certificate. Conditional core of van Leeuwen and Wiedermann, Theorem 1 (UU-PCS-2021-02), reduced to the halting problem. The certificate is witnessed in `Examples.Robot`. | `AISafetyAtlas.Verification.Robot.action_safety_unverifiable` | BY-033 | `REVIEWED` |
+| Robot ethics: no total online verifier decides whether a reactive program's actions are always acceptable, given a switching certificate. Conditional core of van Leeuwen and Wiedermann, Theorem 1 (UU-PCS-2021-02), reduced to the halting problem. The certificate is witnessed in `Examples.Verification.Robot`. | `AISafetyAtlas.Verification.Robot.action_safety_unverifiable` | BY-033 | `REVIEWED` |
+
+## information-theory
+
+| What it says | Declaration | Row | Bridge |
+|---|---|---|---|
+| Positive boundary: injective restriction admits a fibre inference map that exactly measures every global state. | `AISafetyAtlas.Knowledge.Embedded.Composition.measuresAll_fibreInference_of_injective` | LAND-SELFMEAS-003 | — |
+| Positive boundary: bijective restriction gives fibre inference that is both meshing and exactly measurable for every global state. | `AISafetyAtlas.Knowledge.Embedded.Composition.meshing_and_measuresAll_fibreInference_of_bijective` | LAND-SELFMEAS-003 | — |
+| Physical complement model plus meshing: nontrivial remainder rules out exact measurement of every product state (Breuer Prop. 1 via derived ProperInclusion). | `AISafetyAtlas.Knowledge.Embedded.Composition.no_meshing_measures_all_of_nontrivial_remainder` | LAND-SELFMEAS-003 | — |
+| Equivalence-general physical complement model plus meshing: a nontrivial remainder rules out exact measurement of every globally represented state. | `AISafetyAtlas.Knowledge.Embedded.Composition.no_meshing_measures_all_of_nontrivial_remainder_of_equiv` | LAND-SELFMEAS-003 | — |
+| Physical complement model: independently variable remainder forces restriction collision (product A times R, projection). Atlas modelling layer on Breuer ProperInclusion. | `AISafetyAtlas.Knowledge.Embedded.Composition.properInclusion_of_nontrivial_remainder` | LAND-SELFMEAS-003 | — |
+| Equivalence-general physical complement model: an arbitrary global state representation equivalent to apparatus times remainder inherits the restriction collision. | `AISafetyAtlas.Knowledge.Embedded.Composition.properInclusion_of_nontrivial_remainder_of_equiv` | LAND-SELFMEAS-003 | — |
+| Finite operational models plus meshing: cardinality gap rules out exact measurement of every global state. | `AISafetyAtlas.Knowledge.Embedded.Finite.no_meshing_measures_all_of_card_lt` | LAND-SELFMEAS-003 | — |
+| Finite operational models: strict apparatus/global cardinality gap forces restriction collision (pigeonhole). | `AISafetyAtlas.Knowledge.Embedded.Finite.properInclusion_of_card_lt` | LAND-SELFMEAS-003 | — |
+| Abstract embedded measurement: the exact meshing condition entails the source's surjective restriction setup. Breuer (1995), section 3.3 and section 3.5. | `AISafetyAtlas.Knowledge.Embedded.Meshing.restrict_surjective` | LAND-SELFMEAS-002 | — |
+| Abstract embedded measurement: equal restriction fibres cannot be mutually separated by a meshing inference map. Breuer (1995), Proposition 2. | `AISafetyAtlas.Knowledge.Embedded.no_meshing_inference_distinguishes` | LAND-SELFMEAS-002 | — |
+| Abstract embedded measurement: proper inclusion plus meshing rules out exact measurement of every global state. Breuer (1995), Proposition 1. | `AISafetyAtlas.Knowledge.Embedded.no_meshing_inference_measures_all_states` | LAND-SELFMEAS-002 | — |
 
 ## interpretability
 
@@ -93,6 +109,20 @@ declaration surface, including results with no AI-system reading, is in
 |---|---|---|---|
 | Explainability: under the Rashomon property no feature ranking is faithful across models within a collinearity group. Reused from DrakeCaraker/dash-impossibility-lean; the atlas exposes the model-agnostic core. Rashomon is witnessed in `Examples.NonVacuity`. | `AISafetyAtlas.Explainability.attribution_impossibility` | LAND-ATTR-001 | — |
 | Explainability: weaker packaging of the Rashomon attribution trilemma, requiring less of the ranking. Reused from DrakeCaraker/dash-impossibility-lean alongside the strong form. | `AISafetyAtlas.Explainability.attribution_impossibility_weak` | LAND-ATTR-001 | — |
+| Positive boundary: injective restriction admits a fibre inference map that exactly measures every global state. | `AISafetyAtlas.Knowledge.Embedded.Composition.measuresAll_fibreInference_of_injective` | LAND-SELFMEAS-003 | — |
+| Positive boundary: bijective restriction gives fibre inference that is both meshing and exactly measurable for every global state. | `AISafetyAtlas.Knowledge.Embedded.Composition.meshing_and_measuresAll_fibreInference_of_bijective` | LAND-SELFMEAS-003 | — |
+| Physical complement model plus meshing: nontrivial remainder rules out exact measurement of every product state (Breuer Prop. 1 via derived ProperInclusion). | `AISafetyAtlas.Knowledge.Embedded.Composition.no_meshing_measures_all_of_nontrivial_remainder` | LAND-SELFMEAS-003 | — |
+| Equivalence-general physical complement model plus meshing: a nontrivial remainder rules out exact measurement of every globally represented state. | `AISafetyAtlas.Knowledge.Embedded.Composition.no_meshing_measures_all_of_nontrivial_remainder_of_equiv` | LAND-SELFMEAS-003 | — |
+| Physical complement model: independently variable remainder forces restriction collision (product A times R, projection). Atlas modelling layer on Breuer ProperInclusion. | `AISafetyAtlas.Knowledge.Embedded.Composition.properInclusion_of_nontrivial_remainder` | LAND-SELFMEAS-003 | — |
+| Equivalence-general physical complement model: an arbitrary global state representation equivalent to apparatus times remainder inherits the restriction collision. | `AISafetyAtlas.Knowledge.Embedded.Composition.properInclusion_of_nontrivial_remainder_of_equiv` | LAND-SELFMEAS-003 | — |
+| Finite operational models plus meshing: cardinality gap rules out exact measurement of every global state. | `AISafetyAtlas.Knowledge.Embedded.Finite.no_meshing_measures_all_of_card_lt` | LAND-SELFMEAS-003 | — |
+| Finite operational models: strict apparatus/global cardinality gap forces restriction collision (pigeonhole). | `AISafetyAtlas.Knowledge.Embedded.Finite.properInclusion_of_card_lt` | LAND-SELFMEAS-003 | — |
+| Abstract embedded measurement: the exact meshing condition entails the source's surjective restriction setup. Breuer (1995), section 3.3 and section 3.5. | `AISafetyAtlas.Knowledge.Embedded.Meshing.restrict_surjective` | LAND-SELFMEAS-002 | — |
+| Abstract embedded measurement: equal restriction fibres cannot be mutually separated by a meshing inference map. Breuer (1995), Proposition 2. | `AISafetyAtlas.Knowledge.Embedded.no_meshing_inference_distinguishes` | LAND-SELFMEAS-002 | — |
+| Abstract embedded measurement: proper inclusion plus meshing rules out exact measurement of every global state. Breuer (1995), Proposition 1. | `AISafetyAtlas.Knowledge.Embedded.no_meshing_inference_measures_all_states` | LAND-SELFMEAS-002 | — |
+| Bounded-horizon process self-awareness: some available atomic or composite internal process has no available complete observer. Brcic and Yampolskiy (2023), Theorem 4.8 process-compositional interpretation. | `AISafetyAtlas.SelfAwareness.Model.limited_self_awareness` | BY-044 | `STATEMENT_REVIEWED` |
+| Complete process awareness: every maximal available composite lacks an available internal observer; the source-facing existential theorem follows by finite maximality. | `AISafetyAtlas.SelfAwareness.Model.not_agentAware_of_maximal` | BY-044 | `STATEMENT_REVIEWED` |
+| Complete process awareness: a constituent cannot actively observe and predictively model the composite containing that same awareness activity under strict positive awareness cost. Brcic and Yampolskiy (2023), Proposition 4.7 formal core. | `AISafetyAtlas.SelfAwareness.Model.not_aware_of_le` | BY-044 | `STATEMENT_REVIEWED` |
 
 ## learning-theory
 
@@ -133,7 +163,7 @@ declaration surface, including results with no AI-system reading, is in
 |---|---|---|---|
 | Compositional verification: k-safety of a system is safety of its k-fold self-composition. Theorem 2 of Clarkson and Schneider (2010). | `AISafetyAtlas.Compositional.Hyperproperties.k_safety_iff_finite_self_composition` | LAND-HYPER-002 | — |
 | Alignment undecidability: no total computable verifier decides whether an encoded agent satisfies a nontrivial behavioural safety specification. The decision problem of Melo, Máximo, Soma and Castro (arXiv:2408.08995; Sci. Rep. 2025), machine-checked as a reduction through `Verification.rice`. Nontriviality is witnessed in `Examples.NonVacuity`. | `AISafetyAtlas.Verification.AgentBehavior.no_behavioral_safety_verifier` | BY-012 | `REVIEWED` |
-| Robot ethics: no total online verifier decides whether a reactive program's actions are always acceptable, given a switching certificate. Conditional core of van Leeuwen and Wiedermann, Theorem 1 (UU-PCS-2021-02), reduced to the halting problem. The certificate is witnessed in `Examples.Robot`. | `AISafetyAtlas.Verification.Robot.action_safety_unverifiable` | BY-033 | `REVIEWED` |
+| Robot ethics: no total online verifier decides whether a reactive program's actions are always acceptable, given a switching certificate. Conditional core of van Leeuwen and Wiedermann, Theorem 1 (UU-PCS-2021-02), reduced to the halting problem. The certificate is witnessed in `Examples.Verification.Robot`. | `AISafetyAtlas.Verification.Robot.action_safety_unverifiable` | BY-033 | `REVIEWED` |
 | Verification of program behaviour: Rice's theorem restated for properties of partial input/output behaviour over Mathlib program codes. The interface the behavioural-verification results below reduce through. | `AISafetyAtlas.Verification.rice` | BY-012 | `REVIEWED` |
 
 ## Foundations available to build on
@@ -150,7 +180,15 @@ it — which is what the entries above are.
 | Chaitin incompleteness | `AISafetyAtlas.Logic.chaitin_bound`<br>`AISafetyAtlas.Logic.chaitin_incompleteness` | BY-015 |
 | Undefinability | `AISafetyAtlas.Logic.tarski_undefinability` | BY-016 |
 | Löb's theorem (unverifiability) | `AISafetyAtlas.Logic.loeb` | BY-027 |
+| Lawvere fixed-point theorem (types and functions) | `AISafetyAtlas.Logic.lawvere_fixed_point` | CLM-LAWVERE-001 |
 | Gibbard–Satterthwaite theorem (Lean / SocialChoiceLean) | `AISafetyAtlas.SocialChoice.gibbard_satterthwaite` | LAND-GS-002 |
+| The self-model as a component of the state it models | `AISafetyAtlas.Knowledge.SelfReference.card_rest_le_one_of_selfComplete`<br>`AISafetyAtlas.Knowledge.SelfReference.not_selfComplete_of_two_rest`<br>`AISafetyAtlas.Knowledge.SelfReference.selfComplete_iff_subsingleton_rest` | LAND-SELFREF-001 |
+| Window ambiguity: accumulation bounds over a set of targets | `AISafetyAtlas.Knowledge.ambiguity_le_of_evidenceMonotone`<br>`AISafetyAtlas.Knowledge.ambiguity_le_pairTarget_left`<br>`AISafetyAtlas.Knowledge.ambiguity_le_pairTarget_of_evidenceMonotone`<br>`AISafetyAtlas.Knowledge.ambiguity_le_pairTarget_right`<br>`AISafetyAtlas.Knowledge.ambiguity_pairTarget_le_mul`<br>`AISafetyAtlas.Knowledge.not_knowable_pairTarget_of_not_knowable` | LAND-ACCUM-001 |
+| Finite fibre ambiguity and the counting obstruction | `AISafetyAtlas.Knowledge.ambiguity_le_of_comp`<br>`AISafetyAtlas.Knowledge.card_image_le_of_knowable`<br>`AISafetyAtlas.Knowledge.knowable_iff_ambiguity_le_one`<br>`AISafetyAtlas.Knowledge.not_knowable_of_card_lt` | LAND-AMBIG-001 |
+| Time-indexed knowability, contemporaneous collisions, and delayed knowledge | `AISafetyAtlas.Knowledge.Temporal.collisionAt_of_not_knowableAt`<br>`AISafetyAtlas.Knowledge.Temporal.knowableFrom_mono`<br>`AISafetyAtlas.Knowledge.Temporal.not_knowableAt_of_collisionAt` | LAND-TEMPORAL-001 |
+| Self-measurement failure for an embedded observation | `AISafetyAtlas.Knowledge.knowable_id_iff_injective`<br>`AISafetyAtlas.Knowledge.not_knowable_state_of_nontrivial_remainder` | LAND-SELFMEAS-001 |
+| Exact knowability: the observation-factorization kernel | `AISafetyAtlas.Knowledge.Knowable.mono`<br>`AISafetyAtlas.Knowledge.exists_witness_of_not_knowable`<br>`AISafetyAtlas.Knowledge.knowable_iff_factorsThrough`<br>`AISafetyAtlas.Knowledge.knowable_iff_no_collision`<br>`AISafetyAtlas.Knowledge.not_knowable_comp`<br>`AISafetyAtlas.Knowledge.not_knowable_of_collision`<br>`AISafetyAtlas.Knowledge.not_knowable_of_witness` | LAND-KNOW-001 |
+| True return does not factor through the observed history | `AISafetyAtlas.Wireheading.ObservationLimits.not_knowable_trueReturn`<br>`AISafetyAtlas.Wireheading.ObservationLimits.not_knowable_trueReturn_of_complement_mem`<br>`AISafetyAtlas.Wireheading.ObservationLimits.returnOver_zeroEnv_complement` | LAND-CRMDP-KNOW-001 |
 
 Every `BRIDGE` declaration must record what it applies and where; the
 validator rejects one that does not. Other declarations may carry a proposed

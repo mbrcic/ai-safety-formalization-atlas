@@ -177,7 +177,7 @@ The pinned theorem source is
 ## Lean 4: von Neumann–Morgenstern expected utility
 
 This is adjacent utility-foundation evidence, not coverage of an additional
-Brčić–Yampolskiy survey row.
+Brcic–Yampolskiy survey row.
 
 - Upstream: [`jingyuanli-hk/vNM-Theorem-pub`](https://github.com/jingyuanli-hk/vNM-Theorem-pub)
 - Author: Jingyuan Li

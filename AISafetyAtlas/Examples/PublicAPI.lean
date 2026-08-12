@@ -201,4 +201,10 @@ rename or namespace mistake must therefore fail this build target.
 #check AISafetyAtlas.Preference.OverrideModel.OverridesFor
 #check AISafetyAtlas.Preference.Source.ReasonableForF.theorem_two_conditional
 
+example {Process : Type*} [SemilatticeSup Process]
+    (M : AISafetyAtlas.SelfAwareness.Model Process) :
+    ∃ target ∈ M.available,
+      ∀ observer ∈ M.available, ¬ M.aware observer target :=
+  M.limited_self_awareness
+
 end AISafetyAtlas.Examples.PublicAPI

@@ -20,6 +20,9 @@ ROOT = Path(__file__).resolve().parents[1]
 
 def main() -> None:
     registry = json.loads((ROOT / "registry.yaml").read_text(encoding="utf-8"))
+    baseline_claim_count = sum(
+        "informal_claim" in result for result in registry["results"]
+    )
     # A claim from a source other than the survey: `CLM-`, not `LAND-`, which is
     # for formalizations standing on their own account. The probe also drops the
     # survey-only fields, because a non-survey claim cannot answer them and the
@@ -39,7 +42,8 @@ def main() -> None:
     )
     by_area = views.render_by_area(registry)
     source_report = views.render_survey_source_report(registry)
-    if "| Results stating a source claim | 45 |" not in status:
+    expected_claim_count = baseline_claim_count + 1
+    if f"| Results stating a source claim | {expected_claim_count} |" not in status:
         raise SystemExit("source-neutral regression: global status did not count the AISI claim")
     if "CLM-AISI-001" not in by_area:
         raise SystemExit("source-neutral regression: AISI claim is absent from the by-area view")

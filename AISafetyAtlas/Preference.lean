@@ -192,6 +192,9 @@ public noncomputable def greedyAction {S A : Type*} [Fintype A] [Nonempty A]
     (R : RewardFn S A) (s : S) : A :=
   (Finset.exists_max_image (Finset.univ : Finset A) (R s) ⟨Classical.arbitrary A, Finset.mem_univ _⟩).choose
 
+/-- `greedyAction` earns its name: no action in the finite action type scores
+above it under the same reward. The defining property a consumer needs, since
+the definition itself goes through `Finset.exists_max_image` and `choose`. -/
 public theorem greedyAction_max {S A : Type*} [Fintype A] [Nonempty A]
     (R : RewardFn S A) (s : S) (a : A) :
     R s a ≤ R s (greedyAction R s) :=

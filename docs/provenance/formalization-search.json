@@ -59,6 +59,107 @@
       "method": "Filename glob and case-insensitive content grep over the pinned Mathlib source tree for o-minimal, VCDim, Vapnik, and shatter.",
       "found": "Mathlib/Combinatorics/SetFamily/Shatter.lean only: Shatters, shatterer, and a Finset-valued vcDim. No other match.",
       "scope_limits": "One corpus at one revision. Says nothing about third-party Lean packages, other provers, or the wider literature, where o-minimality is of course extensively developed on paper."
+    },
+    {
+      "id": "NC-002",
+      "claim": "No machine-checked formalization of Breuer's self-measurement propositions exists in the pinned Mathlib or AFP trees.",
+      "asserted_in": [
+        "docs/provenance/self-measurement-kernel.md, formalization search table",
+        "registry.yaml, source_catalog breuer-1995-self-measurement",
+        "docs/provenance/embedded-self-knowledge-landscape.md, outcomes table"
+      ],
+      "searched_on": "2026-08-11",
+      "searched_by": "mbrcic (agent-assisted session)",
+      "corpora": [
+        "mathlib",
+        "isabelle-afp"
+      ],
+      "method": "Case-insensitive recursive content grep over both pinned trees for Breuer and self-measurement.",
+      "found": "No match in either corpus.",
+      "scope_limits": "Two corpora at their pinned revisions. Rocq/Coq, HOL4, HOL Light and Agda were NOT searched at revision for this claim; a general web search on the same date also surfaced nothing, but that is not a pinned corpus and is not durable evidence. Says nothing about unindexed third-party developments."
+    },
+    {
+      "id": "NC-003",
+      "claim": "No machine-checked formalization of the Brandenburger-Keisler belief impossibility theorem exists in the pinned Mathlib or AFP trees.",
+      "asserted_in": [
+        "registry.yaml, source_catalog brandenburger-keisler-2006",
+        "docs/provenance/embedded-self-knowledge-landscape.md, outcomes table"
+      ],
+      "searched_on": "2026-08-11",
+      "searched_by": "mbrcic (agent-assisted session)",
+      "corpora": [
+        "mathlib",
+        "isabelle-afp"
+      ],
+      "method": "Case-insensitive recursive content grep over both pinned trees for Brandenburger and Keisler.",
+      "found": "No match for Brandenburger. Four AFP files match Keisler, all citing Chang and Keisler, Model Theory (Epistemic_Logic and Synthetic_Completeness maximal-consistent-set developments, plus two bibliographies). None concerns the belief impossibility theorem.",
+      "scope_limits": "Two corpora at their pinned revisions. Rocq/Coq, HOL4, HOL Light and Agda were NOT searched at revision for this claim. The negative rests on author-name matching, which would miss a formalization that names neither author."
+    },
+    {
+      "id": "NC-004",
+      "claim": "No machine-checked formalization of the Abramsky-Zvesper categorical reduction of Brandenburger-Keisler exists in the pinned Mathlib or AFP trees.",
+      "asserted_in": [
+        "registry.yaml, source_catalog abramsky-zvesper-2010-lawvere-bk",
+        "docs/provenance/embedded-self-knowledge-landscape.md, outcomes table"
+      ],
+      "searched_on": "2026-08-11",
+      "searched_by": "mbrcic (agent-assisted session)",
+      "corpora": [
+        "mathlib",
+        "isabelle-afp"
+      ],
+      "method": "Case-insensitive recursive content grep over both pinned trees for Zvesper and Abramsky.",
+      "found": "No match in either corpus.",
+      "scope_limits": "Two corpora at their pinned revisions. Rocq/Coq, HOL4, HOL Light and Agda were NOT searched at revision for this claim. Author-name matching only."
+    },
+    {
+      "id": "NC-005",
+      "claim": "CORRECTION. An earlier sweep note recorded that no usable categorical formalization of Lawvere's fixed-point theorem was available. That claim was wrong for the AFP.",
+      "asserted_in": [
+        "docs/provenance/embedded-self-knowledge-landscape.md, outcomes table and Lawvere section",
+        "registry.yaml, CLM-LAWVERE-CCC-001 notes"
+      ],
+      "searched_on": "2026-08-11",
+      "searched_by": "mbrcic (agent-assisted session)",
+      "corpora": [
+        "mathlib",
+        "isabelle-afp"
+      ],
+      "method": "Case-insensitive recursive content grep over both pinned trees for lawvere.",
+      "found": "AFP entry Category_Set (The Elementary Theory of the Category of Sets) carries Fixed_Points.thy with lemma Lawveres_fixed_point_theorem, stated for a point-surjective p : X -> A^X over ETCS cfunc/cset with exponential objects, following Halvorson Theorem 2.6.13, and used there to derive Cantor. This is a genuinely categorical rendering in a maintained, licensed, pinned corpus. Mathlib matches are Lawvere-Tierney topologies in Sites/Grothendieck.lean, a passing mention of Lawvere theories in Subobject/Types.lean, and the Type-level exists_fixed_point_of_surjective in Logic/Function/Basic.lean.",
+      "scope_limits": "ETCS is one axiomatized category of sets, not an arbitrary cartesian closed category, so this does not formalize the CCC statement in full generality; it is nonetheless far closer than the Type-level instance and is not, as previously written, unavailable. It is Isabelle/HOL, so it remains true that Lean supplies no categorical version. The earlier negative was reached by web search rather than by grepping this corpus at its pinned revision, which is exactly the failure this record type exists to prevent."
+    },
+    {
+      "id": "NC-006",
+      "claim": "The pinned Mathlib carries no Shannon entropy of a random variable, and hence no conditional entropy or mutual information. This is a statement about Mathlib and NOT about Lean: conditional Shannon entropy does exist in Lean 4, in the PFR project.",
+      "asserted_in": [
+        "AISafetyAtlas/Knowledge/Ambiguity.lean, explicit non-claims",
+        "registry.yaml, LAND-AMBIG-001 notes"
+      ],
+      "searched_on": "2026-08-11",
+      "searched_by": "mbrcic (agent-assisted session)",
+      "corpora": [
+        "mathlib"
+      ],
+      "method": "Case-insensitive path glob for entropy across the pinned Mathlib tree, plus symbol grep for measureEntropy, condEntropy and mutualInfo across every package under .lake/packages.",
+      "found": "In Mathlib: Dynamics/TopologicalEntropy (Bowen-Dinaburg entropy of a map on a space, a different object), Analysis/SpecialFunctions/BinaryEntropy (the real function h(p)), InformationTheory/KullbackLeibler (Basic and ChainRule), InformationTheory/Hamming and Coding. No Shannon entropy of a random variable, so no conditional entropy. No match for measureEntropy, condEntropy or mutualInfo in any locally pinned package. OUTSIDE Mathlib the picture differs: the PFR project (github.com/teorth/pfr, Apache-2.0, last push 2026-07-25) carries PFR/ForMathlib/Entropy with Basic, Measure, Kernel, Group and RuzsaDist, developing Shannon entropy, conditional entropy H[X|Y] and probability-kernel entropy, with a stated intent to port to Mathlib.",
+      "scope_limits": "One corpus at one revision for the negative, plus a web-level check for the positive. PFR pins leanprover/lean4:v4.33.0-rc1 against the atlas v4.31.0, so it is a Path-A reproduction candidate rather than a dependency, and pulling it for entropy alone would import a very large tree. Not attempted, and no atlas theorem currently needs it: the counting layer LAND-AMBIG-001 covers what is needed without committing to a distribution."
+    },
+    {
+      "id": "NC-007",
+      "claim": "Time-indexed knowability as developed in AISafetyAtlas.Knowledge.Temporal is NOT novel: it is a measure-free, Sort-polymorphic shadow of Mathlib's filtration and adapted-process theory. No priority is claimed for separating evidence time from target time. What the module has that a filtration does not is that it requires no measurable structure, and that cumulativity is stated as Determines rather than sigma-algebra inclusion because the evidence types at different times are different types.",
+      "asserted_in": [
+        "AISafetyAtlas/Knowledge/Temporal.lean, prior-art section",
+        "registry.yaml, LAND-TEMPORAL-001 notes"
+      ],
+      "searched_on": "2026-08-11",
+      "searched_by": "mbrcic (agent-assisted session)",
+      "corpora": [
+        "mathlib"
+      ],
+      "method": "Directory listing of Mathlib/Probability/Process across the pinned revision, then symbol grep for 'structure Filtration' and 'def Adapted' to read the definitions directly.",
+      "found": "Mathlib/Probability/Process/Filtration.lean defines structure Filtration {Omega} (iota) [Preorder iota] (m : MeasurableSpace Omega) with seq : iota -> MeasurableSpace Omega and mono' : Monotone seq - the same preorder-indexed monotone-information shape as EvidenceMonotone. Adapted.lean defines Adapted (f : Filtration iota m) (u : (i : iota) -> Omega -> beta i), which is the family-of-observations form and corresponds to KnowableAt holding at every time. Predictable.lean covers knowability from strictly earlier evidence, Stopping.lean stopping times, PartitionFiltration.lean the partition presentation. The correspondence in the module docstring is by inspection; no formal bridge between the two developments is proved or attempted.",
+      "scope_limits": "One corpus at one pinned revision. The correspondence is asserted at the level of definitions read side by side, not established by a Lean theorem, so it is a prior-art pointer rather than an equivalence result. No search was made for filtration-style developments outside Mathlib, and none was made for the specific composite DelayedKnowable, which names a situation rather than proving a theorem."
     }
   ],
   "results": {

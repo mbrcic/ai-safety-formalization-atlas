@@ -1,0 +1,316 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Safety Formalization Atlas</title>
+<meta name="description" content="An open Lean 4 library of machine-checked AI-safety mathematics: impossibility results, possibility results, and the ledger that grades each one against its source.">
+<style>
+  :root{
+    --ground:#F6F7F4; --panel:#EDEFEA; --ink:#16191C; --ink-2:#4F565B;
+    --rule:#D2D7CE; --rule-2:#BFC5BA; --accent:#1B5566; --flag:#9B3B2E;
+    --stamp-bg:rgba(27,85,102,.10);
+  }
+  @media (prefers-color-scheme:dark){
+    :root:not([data-theme="light"]){
+      --ground:#14181A; --panel:#1B2124; --ink:#E7EAE6; --ink-2:#9AA4A6;
+      --rule:#2B3336; --rule-2:#3A4448; --accent:#78B6C6; --flag:#D08972;
+      --stamp-bg:rgba(120,182,198,.14);
+    }
+  }
+  :root[data-theme="dark"]{
+    --ground:#14181A; --panel:#1B2124; --ink:#E7EAE6; --ink-2:#9AA4A6;
+    --rule:#2B3336; --rule-2:#3A4448; --accent:#78B6C6; --flag:#D08972;
+    --stamp-bg:rgba(120,182,198,.14);
+  }
+  *{box-sizing:border-box;}
+  body{
+    background:var(--ground); color:var(--ink);
+    font-family:Iowan Old Style,Palatino Linotype,Palatino,Georgia,serif;
+    font-size:18.5px; line-height:1.64; margin:0;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1060px; margin:0 auto; padding:0 28px 90px;}
+  .mono{font-family:ui-monospace,SFMono-Regular,SF Mono,Cascadia Code,Menlo,Consolas,monospace;}
+  a{color:var(--accent); text-decoration:none; border-bottom:1px solid color-mix(in srgb,var(--accent) 35%,transparent);}
+  a:hover{border-bottom-color:var(--accent);}
+  a:focus-visible{outline:2px solid var(--accent); outline-offset:2px;}
+
+  .mast{border-bottom:2px solid var(--ink); padding:46px 0 34px;}
+  .eyebrow{
+    font-family:ui-monospace,SFMono-Regular,SF Mono,Menlo,monospace;
+    font-size:12px; letter-spacing:.16em; text-transform:uppercase;
+    color:var(--ink-2); display:flex; flex-wrap:wrap; gap:18px; margin-bottom:22px;
+  }
+  h1{
+    font-size:clamp(40px,6.6vw,72px); line-height:1.02; font-weight:400;
+    margin:0 0 24px; letter-spacing:-.028em; text-wrap:balance; max-width:19ch;
+  }
+  .thesis{
+    font-size:clamp(23px,2.8vw,30px); line-height:1.4; font-weight:400;
+    margin:0 0 20px; max-width:48ch;
+    padding-left:18px; border-left:3px solid var(--accent);
+  }
+  .thesis .turn{color:var(--accent);}
+  .deck{font-size:20.5px; line-height:1.58; max-width:64ch; margin:0 0 30px; color:var(--ink-2);}
+
+  .cta{display:flex; flex-wrap:wrap; gap:12px; align-items:center;}
+  .btn{
+    font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+    font-size:13px; letter-spacing:.08em; text-transform:uppercase;
+    padding:13px 22px; border:1px solid var(--accent); background:var(--accent);
+    color:var(--ground); border-bottom:1px solid var(--accent);
+    transition:opacity .15s ease;
+  }
+  .btn:hover{opacity:.86; border-bottom-color:var(--accent);}
+  .btn.ghost{background:transparent; color:var(--accent);}
+  .btn.ghost:hover{background:var(--stamp-bg); opacity:1;}
+  .cta-note{
+    font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+    font-size:12.5px; color:var(--ink-2); letter-spacing:.03em;
+  }
+
+  section{margin:46px 0 0;}
+  h2{
+    font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+    font-size:12.5px; letter-spacing:.17em; text-transform:uppercase;
+    font-weight:500; color:var(--ink-2); margin:0 0 20px;
+    padding-bottom:9px; border-bottom:1px solid var(--rule-2);
+  }
+  h3{
+    font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+    font-size:12px; letter-spacing:.14em; text-transform:uppercase;
+    font-weight:500; color:var(--accent); margin:34px 0 0;
+  }
+  p{margin:0 0 17px; max-width:72ch;}
+  .lead{font-size:20.5px; line-height:1.54;}
+
+  .scroll{overflow-x:auto;}
+  table{border-collapse:collapse; width:100%; font-size:17.5px;}
+  thead th{
+    font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+    font-size:11.5px; letter-spacing:.11em; text-transform:uppercase;
+    color:var(--ink-2); font-weight:500; text-align:left;
+    padding:11px 20px 11px 0; border-bottom:1px solid var(--rule-2);
+  }
+  tbody td{padding:14px 22px 14px 0; border-bottom:1px solid var(--rule); vertical-align:top;}
+  tbody td:last-child{padding-right:0;}
+  .rname{width:29%; min-width:238px; line-height:1.36; letter-spacing:-.008em;}
+  .attrib{
+    font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+    font-size:12px; letter-spacing:.02em; color:var(--ink-2);
+    margin-top:5px; line-height:1.45; font-weight:400;
+  }
+  .rwhat{color:var(--ink-2); font-size:17px; line-height:1.56;}
+  .rwhat b{color:var(--ink); font-weight:600;}
+  h3 + .scroll table thead{display:none;}
+  h3 + .scroll{margin-top:10px;}
+  .lic{font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:13px; color:var(--ink-2); white-space:nowrap;}
+
+  .note{
+    border-left:3px solid var(--accent); background:var(--panel);
+    padding:18px 22px; margin:26px 0; font-size:17px; line-height:1.55;
+  }
+  .note p{margin:0 0 9px; max-width:none;}
+  .note p:last-child{margin:0;}
+
+  pre{
+    background:var(--panel); border:1px solid var(--rule);
+    padding:17px 20px; overflow-x:auto; font-size:14.5px; line-height:1.68;
+    font-family:ui-monospace,SFMono-Regular,Menlo,monospace; margin:0 0 15px;
+  }
+  ul{margin:0 0 17px; padding-left:22px; max-width:72ch;}
+  li{margin-bottom:8px;}
+  .foot{border-top:2px solid var(--ink); padding-top:20px; margin-top:56px;
+    font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:13px;
+    color:var(--ink-2); line-height:1.95;}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+<header class="mast">
+  <div class="eyebrow">
+    <span>Lean&nbsp;4</span><span>Apache-2.0</span><span>Kernel-checked</span><span>Open&nbsp;contribution</span>
+  </div>
+  <h1>AI Safety Formalization Atlas</h1>
+  <p class="thesis">Testing can prove an AI system is unsafe. <span class="turn">It can never prove one is safe.</span></p>
+  <p class="deck">Proof can. This is a library of proofs about what AI systems can and cannot do — written in Lean, so a computer checks every step.</p>
+  <div class="cta">
+    <a class="btn" href="https://codespaces.new/mbrcic/ai-safety-formalization-atlas?quickstart=1">Open in Codespaces</a>
+    <a class="btn ghost" href="https://github.com/mbrcic/ai-safety-formalization-atlas">Read the source</a>
+    <span class="cta-note">No install — the toolchain sets itself up and an example compiles in minutes.</span>
+  </div>
+</header>
+
+<section>
+  <h2>Why this exists</h2>
+  <p class="lead">AI systems are getting more capable faster than anyone is coming to understand them, and they are being released anyway. The decisions about what is safe to build are being made right now, on evidence that can only ever point one way.</p>
+  <p>Evaluations, red-teaming and incident reports find failures. They cannot show there are none left. The more a system can do, the more ways it can behave, so the share of behaviour any test covers gets smaller exactly as the stakes get higher. A proof is the only kind of evidence that covers every case at once.</p>
+  <p>The claims that carry the most weight in AI safety are already mathematical ones. That a property cannot be checked automatically. That conflicting values cannot be combined fairly. That you cannot always tell what a system wants from what it does. These get argued in prose, rebuilt from scratch each time, worded a little differently each time — so arguments that could be settled run for years instead.</p>
+  <p>Writing them down properly used to take a specialist months. It no longer does: language models draft the proof, and Lean's kernel decides whether it holds. The kernel does not care who wrote it, so nothing has to be taken on trust. AI is the subject here, the instrument, and the deadline at once.</p>
+  <div class="note">
+    <p>A proof settles whether an argument is valid. Whether it is the <em>right</em> argument — whether the mathematics matches the system in front of you — is still a human judgement. That question is worth arguing about. The mathematics underneath it is not, and this library is how it stops being.</p>
+  </div>
+</section>
+
+<section>
+  <h2>What it is</h2>
+  <p>A Lean 4 library plus a ledger. The library holds definitions, theorems and counterexamples, all kernel-checked with no <span class="mono">sorry</span>. The ledger records where each result came from, which external formalizations exist for it, under which licenses, at which pinned revisions, and what a given development does and does not cover.</p>
+  <p>Two things it is deliberately not. It is not a certification tool — a theorem is not a safety case, and applying one to a real system takes a separately reviewed interpretation step. And it is not a survey: everything here compiles.</p>
+  <p>Scope is stated per result rather than assumed. Several entries are reusable cores drawn from larger papers, with the remaining material recorded as an open gap instead of quietly absorbed. That bookkeeping is the reason the library can be cited without a reader having to guess how much of a paper a file really contains.</p>
+</section>
+
+<section>
+  <h2>Using it</h2>
+  <p>Downstream proofs need only the root import, but start from a domain facade — each one opens with a table of its primary declarations and an explicit list of what it does <em>not</em> claim.</p>
+<pre>import AISafetyAtlas.Logic          -- Gödel I/II, Tarski, Löb, Chaitin
+import AISafetyAtlas.Computability  -- Rice, halting
+import AISafetyAtlas.Learning       -- no-free-lunch cores
+import AISafetyAtlas.SocialChoice   -- Arrow, Gibbard–Satterthwaite
+import AISafetyAtlas.Preference     -- planner/reward unidentifiability
+import AISafetyAtlas.Knowledge      -- what an observer can recover about a system
+import AISafetyAtlas.SelfAwareness  -- limits on complete self-monitoring
+import AISafetyAtlas.Wireheading    -- reward channels, self-modification
+import AISafetyAtlas.Compositional  -- hyperproperties, contracts, networks</pre>
+  <p>One import does not always mean the whole domain. <span class="mono">Wireheading</span>, <span class="mono">Compositional</span> and joint observation re-export theirs; <span class="mono">Knowledge</span> and <span class="mono">Preference</span> are kernels whose specializations are imported individually, so that a kernel can still state what it excludes. The root module lists the contract for every parent.</p>
+  <p>Everything rebuilds under documented commands, and the axioms each headline theorem depends on are checked mechanically — bounded to the three standard ones, and several results use none at all.</p>
+  <p>The bottleneck is not Lean. Stating a safety property precisely enough to be checkable is the hard part, and it does not require knowing what a proof assistant is. Pointers to results worth cataloguing, corrections, and open questions with no proof all have somewhere to go.</p>
+  <div class="cta" style="margin-top:24px">
+    <a class="btn" href="https://codespaces.new/mbrcic/ai-safety-formalization-atlas?quickstart=1">Start in the browser</a>
+    <span class="cta-note">Nothing to install. Prefer local? <span class="mono">scripts/setup.sh --quick</span></span>
+  </div>
+</section>
+
+<section>
+  <h2>Results</h2>
+  <p>What is in the library today, and what each one is good for. Impossibility results dominate because that is where the field's load-bearing claims are — but possibility results count too, and the last group holds two of them. The summaries are a plain-language guide; follow each result for its exact statement and scope.</p>
+
+<!-- BEGIN GENERATED RESULTS -->
+<!-- Generated by scripts/generate_registry_views.py; do not edit by hand. -->
+  <h3>Limits of verification</h3>
+  <div class="scroll"><table><tbody>
+    <tr><td class="rname"><a href="https://github.com/mbrcic/ai-safety-formalization-atlas/blob/main/AISafetyAtlas/Verification/Robot.lean#L130">Online robot verification</a><div class="attrib">van Leeuwen &amp; Wiedermann</div></td><td class="rwhat">No monitor can guarantee a robot with unlimited memory always behaves. <b>Use:</b> Watching systems that act in the world.</td></tr>
+    <tr><td class="rname"><a href="https://github.com/mbrcic/ai-safety-formalization-atlas/blob/main/AISafetyAtlas/Computability.lean#L33">Rice&#x27;s theorem</a><div class="attrib">Rice</div></td><td class="rwhat">You cannot build a tool that reads any code and tells you what it does. <b>Use:</b> Why no tool can vet arbitrary AI code.</td></tr>
+    <tr><td class="rname"><a href="https://github.com/mbrcic/ai-safety-formalization-atlas/blob/main/AISafetyAtlas/Computability.lean#L59">The halting problem</a><div class="attrib">Turing; Church</div></td><td class="rwhat">You cannot build a tool that tells you if a program will ever stop. <b>Use:</b> The root of most impossibilities here.</td></tr>
+  </tbody></table></div>
+  <h3>Limits of self-knowledge and reflection</h3>
+  <div class="scroll"><table><tbody>
+    <tr><td class="rname"><a href="https://github.com/mbrcic/ai-safety-formalization-atlas/blob/main/AISafetyAtlas/Logic.lean#L58">Chaitin incompleteness</a><div class="attrib">Chaitin</div></td><td class="rwhat">A system cannot prove that anything is much more complex than itself. <b>Use:</b> Limits on what a system can prove about complexity.</td></tr>
+    <tr><td class="rname"><a href="https://github.com/mbrcic/ai-safety-formalization-atlas/blob/main/AISafetyAtlas/Logic.lean#L89">Gödel incompleteness I &amp; II</a><div class="attrib">Gödel</div></td><td class="rwhat">Some truths cannot be proved. A system cannot even prove it is consistent. <b>Use:</b> Systems asked to verify themselves.</td></tr>
+    <tr><td class="rname"><a href="https://github.com/mbrcic/ai-safety-formalization-atlas/blob/main/AISafetyAtlas/Logic.lean#L46">Lawvere fixed point</a><div class="attrib">Lawvere; Yanofsky&#x27;s uniform treatment</div></td><td class="rwhat">One argument underlies Cantor, Gödel, Tarski and Rice. <b>Use:</b> Telling apart arguments that are the same from ones that only rhyme.</td></tr>
+    <tr><td class="rname"><a href="https://github.com/mbrcic/ai-safety-formalization-atlas/blob/main/AISafetyAtlas/Logic.lean#L134">Löb&#x27;s theorem</a><div class="attrib">Löb</div></td><td class="rwhat">Saying “if I prove it, it is true” already proves it. <b>Use:</b> Why an agent cannot simply trust its own reasoning.</td></tr>
+    <tr><td class="rname"><a href="https://github.com/mbrcic/ai-safety-formalization-atlas/blob/main/AISafetyAtlas/Logic.lean#L117">Tarski undefinability</a><div class="attrib">Tarski</div></td><td class="rwhat">A language cannot define truth for its own sentences. <b>Use:</b> Systems that score their own output.</td></tr>
+  </tbody></table></div>
+  <h3>What an observer can recover</h3>
+  <div class="scroll"><table><tbody>
+    <tr><td class="rname"><a href="https://github.com/mbrcic/ai-safety-formalization-atlas/blob/main/AISafetyAtlas/Knowledge/Ambiguity.lean#L142">Ambiguity counting</a><div class="attrib">Workbench infrastructure</div></td><td class="rwhat">Counts the answers an observation leaves open. <b>Use:</b> Ruling out an observability claim by counting.</td></tr>
+    <tr><td class="rname"><a href="https://github.com/mbrcic/ai-safety-formalization-atlas/blob/main/AISafetyAtlas/Knowledge/Accumulation.lean#L107">Ambiguity over a window</a><div class="attrib">Workbench infrastructure</div></td><td class="rwhat">Asking about more of a system can only leave more possibilities open. <b>Use:</b> Bounding how far a monitor&#x27;s picture can drift.</td></tr>
+    <tr><td class="rname"><a href="https://github.com/mbrcic/ai-safety-formalization-atlas/blob/main/AISafetyAtlas/Oversight/JointObservation/Coverage.lean#L96">Coalition coverage</a><div class="attrib">Workbench infrastructure</div></td><td class="rwhat">A group sees only what its members share. Processing cannot recover the rest. <b>Use:</b> Designing oversight that can actually work.</td></tr>
+    <tr><td class="rname"><a href="https://github.com/mbrcic/ai-safety-formalization-atlas/blob/main/AISafetyAtlas/Knowledge/Embedded.lean#L291">Embedded self-measurement</a><div class="attrib">Breuer</div></td><td class="rwhat">A sensor inside a system cannot exactly measure every state of that system. <b>Use:</b> The measurement version of the limit.</td></tr>
+    <tr><td class="rname"><a href="https://github.com/mbrcic/ai-safety-formalization-atlas/blob/main/AISafetyAtlas/Knowledge.lean#L118">Knowability kernel</a><div class="attrib">Workbench infrastructure</div></td><td class="rwhat">You can tell things apart only if they look different. <b>Use:</b> The shared core behind the observation results.</td></tr>
+    <tr><td class="rname"><a href="https://github.com/mbrcic/ai-safety-formalization-atlas/blob/main/AISafetyAtlas/SelfAwareness.lean#L148">Limited self-awareness</a><div class="attrib">Brcic &amp; Yampolskiy</div></td><td class="rwhat">A bounded agent cannot completely monitor every recursively composable internal process under strict positive awareness cost. <b>Use:</b> The process-compositional version of a self-awareness limit; cycles are allowed.</td></tr>
+    <tr><td class="rname"><a href="https://github.com/mbrcic/ai-safety-formalization-atlas/blob/main/AISafetyAtlas/Knowledge/SelfReference.lean#L119">Self-modelling</a><div class="attrib">Workbench infrastructure</div></td><td class="rwhat">A system can fully know itself only if there is nothing else to know. <b>Use:</b> The precise sense in which nothing can fully model itself.</td></tr>
+    <tr><td class="rname"><a href="https://github.com/mbrcic/ai-safety-formalization-atlas/blob/main/AISafetyAtlas/Knowledge/Temporal.lean#L130">Time-indexed knowability</a><div class="attrib">shadows filtration theory; no novelty claimed for time indexing</div></td><td class="rwhat">You can learn what the state was. Not always what it is now. <b>Use:</b> Stating self-knowledge limits correctly.</td></tr>
+    <tr><td class="rname"><a href="https://github.com/mbrcic/ai-safety-formalization-atlas/blob/main/AISafetyAtlas/Knowledge/Embedded/Composition.lean#L153">When self-measurement fails</a><div class="attrib">extends Breuer</div></td><td class="rwhat">It fails when something else in the system varies, or the sensor is too small. <b>Use:</b> Applying the limit without assuming what you want to prove.</td></tr>
+    <tr><td class="rname"><a href="https://github.com/mbrcic/ai-safety-formalization-atlas/blob/main/AISafetyAtlas/Knowledge.lean#L221">Whole-state self-measurement</a><div class="attrib">after Breuer</div></td><td class="rwhat">To know the whole state, you must be able to tell every pair of states apart. <b>Use:</b> The basic version of the limit.</td></tr>
+  </tbody></table></div>
+  <h3>Learning and generalization</h3>
+  <div class="scroll"><table><tbody>
+    <tr><td class="rname"><a href="https://github.com/mbrcic/ai-safety-formalization-atlas/blob/main/AISafetyAtlas/Learning.lean#L188">No free lunch — optimization</a><div class="attrib">Wolpert &amp; Macready</div></td><td class="rwhat">Same for search: no optimizer wins on average across all problems. <b>Use:</b> Claims about general-purpose optimizers.</td></tr>
+    <tr><td class="rname"><a href="https://github.com/mbrcic/ai-safety-formalization-atlas/blob/main/AISafetyAtlas/Learning.lean#L372">No free lunch — supervised learning</a><div class="attrib">Wolpert</div></td><td class="rwhat">No learner beats another once you average over all possible tasks. <b>Use:</b> Making “our method generalizes” name its assumption.</td></tr>
+  </tbody></table></div>
+  <h3>Preferences, rewards and incentives</h3>
+  <div class="scroll"><table><tbody>
+    <tr><td class="rname"><a href="https://github.com/mbrcic/ai-safety-formalization-atlas/blob/main/AISafetyAtlas/Wireheading/GoalPreservationSource.lean#L138">Goal preservation</a><div class="attrib">Everitt, Filan, Daswani &amp; Hutter</div></td><td class="rwhat">An agent that can rewrite itself can still keep its original goal. <b>Use:</b> Self-modification arguments.</td></tr>
+    <tr><td class="rname"><a href="https://github.com/mbrcic/ai-safety-formalization-atlas/blob/main/AISafetyAtlas/Wireheading/AgentEquations.lean#L157">Objective factorization</a><div class="attrib">Ring &amp; Orseau</div></td><td class="rwhat">An agent can end up caring about what it sees, not about what is real. <b>Use:</b> Exactly when wireheading is optimal.</td></tr>
+    <tr><td class="rname"><a href="https://github.com/mbrcic/ai-safety-formalization-atlas/blob/main/AISafetyAtlas/Preference.lean#L90">Preference unidentifiability</a><div class="attrib">Armstrong &amp; Mindermann</div></td><td class="rwhat">Behaviour on its own does not pin down what an agent wants. <b>Use:</b> Learning what someone wants from what they do.</td></tr>
+    <tr><td class="rname"><a href="https://github.com/mbrcic/ai-safety-formalization-atlas/blob/main/AISafetyAtlas/Wireheading/CRMDP.lean#L338">Reward corruption</a><div class="attrib">Everitt, Krakovna, Orseau, Hutter &amp; Legg</div></td><td class="rwhat">If the reward can be faked, the agent cannot tell it is being fooled. <b>Use:</b> Reward tampering.</td></tr>
+    <tr><td class="rname"><a href="https://github.com/mbrcic/ai-safety-formalization-atlas/blob/main/AISafetyAtlas/Wireheading/ObservationLimits.lean#L130">Unobservable return</a><div class="attrib">Workbench infrastructure</div></td><td class="rwhat">An agent cannot tell how well it is really doing from what it saw. <b>Use:</b> Ties reward tampering to what an agent can know.</td></tr>
+  </tbody></table></div>
+  <h3>Aggregation and multi-agent structure</h3>
+  <div class="scroll"><table><tbody>
+    <tr><td class="rname"><a href="https://github.com/mbrcic/ai-safety-formalization-atlas/blob/main/AISafetyAtlas/SocialChoice.lean#L64">Arrow&#x27;s impossibility</a><div class="attrib">Arrow</div></td><td class="rwhat">No fair way exists to merge people&#x27;s rankings into one. <b>Use:</b> Combining values across people or models.</td></tr>
+    <tr><td class="rname"><a href="https://github.com/mbrcic/ai-safety-formalization-atlas/blob/main/AISafetyAtlas/SocialChoice.lean#L114">Gibbard–Satterthwaite</a><div class="attrib">Gibbard; Satterthwaite</div></td><td class="rwhat">Every sensible voting rule can be gamed by lying. <b>Use:</b> Asking people or systems to report preferences honestly.</td></tr>
+    <tr><td class="rname"><a href="https://github.com/mbrcic/ai-safety-formalization-atlas/blob/main/AISafetyAtlas/Compositional/Symmetry.lean#L96">Misaligned embodiment</a><div class="attrib">Brcic &amp; Yampolskiy; Angluin for the formalized core</div></td><td class="rwhat">The survey claims cloned agents cannot control each other. Only the symmetry result is proved. <b>Use:</b> The difference between a claim and a proof of it.</td></tr>
+    <tr><td class="rname"><a href="https://github.com/mbrcic/ai-safety-formalization-atlas/blob/main/AISafetyAtlas/Compositional/Networks.lean#L107">Symmetry in anonymous networks</a><div class="attrib">Angluin</div></td><td class="rwhat">Identical processes in identical surroundings can never pick a leader. <b>Use:</b> Why identical agents cannot coordinate.</td></tr>
+  </tbody></table></div>
+  <h3>Composition and interpretability</h3>
+  <div class="scroll"><table><tbody>
+    <tr><td class="rname"><a href="https://github.com/mbrcic/ai-safety-formalization-atlas/blob/main/AISafetyAtlas/Explainability.lean#L37">Attribution impossibility</a><div class="attrib">DASH trilemma</div></td><td class="rwhat">No way of scoring which inputs mattered meets all the obvious requirements. <b>Use:</b> Claims made for saliency maps.</td></tr>
+    <tr><td class="rname"><a href="https://github.com/mbrcic/ai-safety-formalization-atlas/blob/main/AISafetyAtlas/Compositional/Hyperproperties.lean#L118">Hyperproperties and k-safety</a><div class="attrib">Clarkson &amp; Schneider</div></td><td class="rwhat">Some properties need several runs at once to check. <b>Use:</b> Leaks and fairness — anything one run cannot reveal.</td></tr>
+    <tr><td class="rname"><a href="https://github.com/mbrcic/ai-safety-formalization-atlas/blob/main/AISafetyAtlas/Compositional/Rectangularity.lean#L62">Rectangularity</a><div class="attrib">Kushilevitz &amp; Nisan; Fagin</div></td><td class="rwhat">A requirement on the whole sometimes splits into requirements on the parts. <b>Use:</b> When checking components separately is enough.</td></tr>
+  </tbody></table></div>
+  <h3>Assembled from other proof assistants</h3>
+  <div class="scroll"><table><tbody>
+    <tr><td class="rname"><a href="https://www.isa-afp.org/entries/CondNormReasHOL.html">Conditional normative reasoning</a><div class="attrib">Parent &amp; Benzmüller; Parfit&#x27;s paradox, Åqvist&#x27;s system E</div></td><td class="rwhat">A logic of obligation, precise enough for Parfit&#x27;s argument. <b>Use:</b> Population ethics arguments.</td></tr>
+    <tr><td class="rname"><a href="https://www.isa-afp.org/entries/Deep_Learning.html">Deep versus shallow capacity</a><div class="attrib">Cohen, Sharir &amp; Shashua</div></td><td class="rwhat">Deep networks compute things shallow ones need exponential width to match. <b>Use:</b> Capability arguments about architecture, not size.</td></tr>
+    <tr><td class="rname"><a href="https://www.isa-afp.org/entries/Chandy_Lamport.html">Distributed snapshots</a><div class="attrib">Chandy &amp; Lamport</div></td><td class="rwhat">A running system can snapshot itself without pausing. <b>Use:</b> Why “a system cannot know itself” is too strong.</td></tr>
+    <tr><td class="rname"><a href="https://github.com/google-deepmind/debate">Doubly-efficient debate</a><div class="attrib">Brown-Cohen, Irving &amp; Piliouras</div></td><td class="rwhat">A weak judge can be argued to the right answer by stronger debaters. <b>Use:</b> Judging work you cannot check yourself.</td></tr>
+    <tr><td class="rname"><a href="https://github.com/jingyuanli-hk/vNM-Theorem-pub">Expected utility representation</a><div class="attrib">von Neumann &amp; Morgenstern</div></td><td class="rwhat">Consistent preferences can always be written as a utility function. <b>Use:</b> The assumptions inside “maximizes expected utility”.</td></tr>
+    <tr><td class="rname"><a href="https://www.isa-afp.org/entries/ArrowImpossibilityGS.html">Gibbard–Satterthwaite (independent proof)</a><div class="attrib">Gibbard; Satterthwaite</div></td><td class="rwhat">The same voting result, proved again in another system. <b>Use:</b> Independent confirmation.</td></tr>
+    <tr><td class="rname"><a href="https://www.isa-afp.org/entries/No_Free_Lunch_ML.html">No free lunch (independent proof)</a><div class="attrib">Shalev-Shwartz &amp; Ben-David</div></td><td class="rwhat">The same no-free-lunch result, proved again in another system. <b>Use:</b> Independent confirmation.</td></tr>
+  </tbody></table></div>
+<!-- END GENERATED RESULTS -->
+
+  <p style="margin-top:20px">These are proofs from other people and other systems, rebuilt from source at pinned revisions to confirm they still hold — not re-implemented in Lean. They carry no Lean import surface, and they are credited in full below.</p>
+</section>
+
+<section>
+  <h2>Directories this work sits alongside</h2>
+  <p>The library is one node in a wider set of curated collections. These are the directories it is catalogued against — several reached through the first, which indexes the rest.</p>
+  <div class="scroll">
+    <table>
+      <thead><tr><th>Directory</th><th>What it collects, and why it is here</th></tr></thead>
+      <tbody>
+        <tr><td class="rname"><a href="https://www.mathforaisafety.org/">Math for AI Safety</a></td><td class="rwhat">A living index of research directions for mathematicians entering AI safety, pointing at the collections below. The closest thing to a map of where mathematical work in this field is being organised.</td></tr>
+        <tr><td class="rname"><a href="https://alignmentproject.aisi.gov.uk/research-agenda">The Alignment Project</a><br><span class="lic">UK AI Security Institute</span></td><td class="rwhat">Eleven priority research areas, each broken into subproblems in prose. The agenda closest to this library's subject matter, and the one most likely to name a problem a formal result could sharpen.</td></tr>
+        <tr><td class="rname"><a href="https://github.com/lionellevine/MAIS/tree/main/open-problems">MAIS open problems</a></td><td class="rwhat">Ninety-two individually numbered open problems in AI-safety mathematics. Numbered identifiers make it the one collection a formal library can be mapped against precisely, problem by problem.</td></tr>
+        <tr><td class="rname"><a href="https://timaeus.co/projects">Timaeus projects</a></td><td class="rwhat">Project ideas in developmental interpretability and singular learning theory — the statistical-physics-flavoured end of the field, largely disjoint from what is formalized here.</td></tr>
+        <tr><td class="rname"><a href="https://www.iliad.ac/incubated-organizations">Iliad ecosystem</a></td><td class="rwhat">Groups working on interpretability and theoretical modelling of learned systems. Useful for finding who is working on a problem rather than which problems exist.</td></tr>
+        <tr><td class="rname"><a href="https://doi.org/10.1145/3603371">Impossibility Results in AI: A Survey</a><br><span class="lic">ACM Computing Surveys, 2023</span></td><td class="rwhat">The inventory of impossibility results this library is organised around, and the reason it exists: a survey that catalogues claims is the natural starting point for a library that checks them.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="margin-top:20px">Mapping the individual numbered problems in these collections to machine-checked results has not been done yet. When it is, most entries will map to nothing — that is the expected outcome, and the empty entries will be as informative as the full ones.</p>
+</section>
+
+<section>
+  <h2>Built on</h2>
+  <p>Every external formalization this library depends on or reproduces is recorded with its license and an immutable revision. Reproduced means the proof was rebuilt from source, not that a link was cited.</p>
+  <div class="scroll">
+    <table>
+      <thead><tr><th>Project</th><th>System</th><th>License</th></tr></thead>
+      <tbody>
+        <tr><td><a href="https://github.com/leanprover-community/mathlib4">mathlib4</a></td><td>Lean</td><td class="lic">Apache-2.0</td></tr>
+        <tr><td><a href="https://github.com/FormalizedFormalLogic/Foundation">FormalizedFormalLogic · Foundation</a></td><td>Lean</td><td class="lic">Apache-2.0</td></tr>
+        <tr><td><a href="https://github.com/DominikPeters/SocialChoiceLean">SocialChoiceLean</a></td><td>Lean</td><td class="lic">MIT</td></tr>
+        <tr><td><a href="https://github.com/ChihChengLiang/arrow">ChihChengLiang · arrow</a></td><td>Lean</td><td class="lic">Apache-2.0</td></tr>
+        <tr><td><a href="https://github.com/AlexeyMilovanov/kolmogorov-complexity-lean">kolmogorov-complexity-lean</a></td><td>Lean</td><td class="lic">Apache-2.0</td></tr>
+        <tr><td><a href="https://github.com/DrakeCaraker/dash-impossibility-lean">dash-impossibility-lean</a></td><td>Lean</td><td class="lic">Apache-2.0</td></tr>
+        <tr><td><a href="https://github.com/google-deepmind/debate">google-deepmind · debate</a></td><td>Lean</td><td class="lic">Apache-2.0</td></tr>
+        <tr><td><a href="https://github.com/jingyuanli-hk/vNM-Theorem-pub">vNM-Theorem-pub</a></td><td>Lean</td><td class="lic">Apache-2.0</td></tr>
+        <tr><td><a href="https://github.com/Shilun-Allan-Li/tcslib">tcslib</a></td><td>Lean</td><td class="lic">Apache-2.0</td></tr>
+        <tr><td><a href="https://www.isa-afp.org/entries/Chandy_Lamport.html">AFP · Chandy_Lamport</a></td><td>Isabelle/HOL</td><td class="lic">BSD-3-Clause</td></tr>
+        <tr><td><a href="https://www.isa-afp.org/entries/ArrowImpossibilityGS.html">AFP · ArrowImpossibilityGS</a></td><td>Isabelle/HOL</td><td class="lic">BSD-3-Clause</td></tr>
+        <tr><td><a href="https://www.isa-afp.org/entries/No_Free_Lunch_ML.html">AFP · No_Free_Lunch_ML</a></td><td>Isabelle/HOL</td><td class="lic">BSD-3-Clause</td></tr>
+        <tr><td><a href="https://www.isa-afp.org/entries/Recursion-Theory-I.html">AFP · Recursion-Theory-I</a></td><td>Isabelle/HOL</td><td class="lic">BSD-3-Clause</td></tr>
+        <tr><td><a href="https://www.isa-afp.org/entries/Deep_Learning.html">AFP · Deep_Learning</a></td><td>Isabelle/HOL</td><td class="lic">BSD-3-Clause</td></tr>
+        <tr><td><a href="https://www.isa-afp.org/entries/CondNormReasHOL.html">AFP · CondNormReasHOL</a></td><td>Isabelle/HOL</td><td class="lic">BSD-3-Clause</td></tr>
+        <tr><td><a href="https://github.com/secure-compilation/exploring-robust-property-preservation">exploring-robust-property-preservation</a></td><td>Rocq/Coq</td><td class="lic">Apache-2.0</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<div class="foot">
+  <div><a href="https://github.com/mbrcic/ai-safety-formalization-atlas">github.com/mbrcic/ai-safety-formalization-atlas</a> · Apache-2.0</div>
+  <div>Cite: <a href="https://doi.org/10.5281/zenodo.21483033">10.5281/zenodo.21483033</a></div>
+  <div>Mario Brcic · Faculty of Electrical Engineering and Computing, University of Zagreb</div>
+</div>
+
+</div>
+
+</body>
+</html>

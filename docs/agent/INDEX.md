@@ -25,6 +25,7 @@ the task requires that particular inventory, domain, or evidence.
 | [`docs/status/by-area.md`](../status/by-area.md) | browsing the catalogue by mathematical area |
 | [`docs/guide/conjectures.md`](../guide/conjectures.md) | proposing or reviewing a conjecture |
 | [`docs/status/landscape-index.md`](../status/landscape-index.md) | auditing the atlas Lean surface or artifact rows |
+| [`docs/status/relations.md`](../status/relations.md) | asking how two results stand to each other, or which are characterizations rather than point impossibilities |
 | [`docs/status/sources/brcic-yampolskiy-2023.md`](../status/sources/brcic-yampolskiy-2023.md) | auditing the survey source specifically |
 | [`docs/guide/open-work.md`](../guide/open-work.md) | choosing research work rather than a bounded task |
 | [`docs/guide/contributor-tasks.md`](../guide/contributor-tasks.md) | choosing or implementing a CT unit |

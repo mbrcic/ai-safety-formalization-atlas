@@ -38,8 +38,48 @@ below are conditional and should be opened only when the task needs them.
 ### Lean surface rule
 
 Prefer **facade** modules (`AISafetyAtlas/Learning.lean`, `SocialChoice.lean`,
-`Logic.lean`, `Verification.lean`, … and small nested facades). Do not open
-`Upstream/` or `vendor/` unless the task is to change that proof tree.
+`Logic.lean`, `Verification.lean`, `Knowledge.lean`, and small nested facades
+such as `Knowledge/Embedded.lean` and `Oversight/JointObservation.lean`). Do not
+open `Upstream/` or `vendor/` unless the task is to change that proof tree.
+
+**One facade is not always the whole domain.** Parents differ in what they
+re-export, so check the pattern before concluding a result is missing:
+
+| Pattern | One import supplies | Parents |
+|---|---|---|
+| Aggregating facade | the domain's whole public surface | `Compositional`, `Oversight.JointObservation`, `Wireheading` |
+| Partial aggregate | the mathematical base only | `Verification` (re-exports `Computability`; **not** `AgentBehavior`, **not** `Robot`) |
+| Kernel and specializations | a closed surface; specializations import separately | `Knowledge.*`, `Preference.*` |
+
+The kernels withhold their specializations by design: `Knowledge` states what it
+excludes, so importing it must not drag in the embedded, temporal, or
+self-referential layers. Full table with one-line domains:
+[`AISafetyAtlas.lean`](AISafetyAtlas.lean).
+
+Each facade's module docstring carries a **primary surface** table; read that
+before the declarations. `AISafetyAtlas.Knowledge` is the generic
+observation-factorization kernel that `Oversight.JointObservation` and
+`Knowledge.Embedded` both build on — reach for it before restating a
+fibre/collision argument.
+
+### Examples layout rule
+
+`AISafetyAtlas/Examples/` holds two kinds of file:
+
+- **Mirror** — non-vacuity or a witness for one module. Its path and namespace
+  repeat that module's: `Verification/Robot.lean` is witnessed by
+  `Examples/Verification/Robot.lean` in `AISafetyAtlas.Examples.Verification.Robot`.
+  A mirror directory may also hold extra scenario files with no module of their
+  own (`Examples/Oversight/JointObservation/Procurement.lean`).
+- **Harness** — serves no single module and stays flat in `Examples/`:
+  `PublicAPI`, `Registry`, `NonVacuity`, `SixTargets`, `WorkbenchConsumers`,
+  `FirstContribution`, `HaltingExample`, `NFLConcrete`.
+
+A new example for one module takes the mirror path. Renaming an existing one
+also touches `scripts/lean_build_targets.txt`,
+`scripts/validate_current_state.py`, any `build_command` or `application` prose
+in `registry.yaml`, and the generated views — regenerate rather than hand-edit
+`docs/status/`.
 
 ### Cheap vs full validation
 
@@ -73,6 +113,7 @@ AISafetyAtlas.Logic.tarski_undefinability
 AISafetyAtlas.Logic.loeb
 AISafetyAtlas.Explainability.attribution_impossibility
 AISafetyAtlas.Learning.no_free_lunch
+AISafetyAtlas.SelfAwareness.Model.limited_self_awareness
 ```
 
 ## Parsimony (formalizations)
@@ -85,6 +126,28 @@ public Lean declarations. Prefer packaging Rice as `Verification.rice` /
 `AgentBehavior.no_behavioral_safety_verifier` rather than a second undecidability
 proof. Detail: [`docs/guide/methodology.md`](docs/guide/methodology.md).
 
+**Parsimony governs duplication, not foundations.** A second way to establish
+something the tree can already state is duplication, and the rule above is
+strict about it. A definitional layer that catalogued rows cannot be *stated*
+without is a foundation, and asking it to show consumers first is a rule no
+foundation can pass: the consumers are blocked on the thing being judged. A
+foundation may land ahead of its consumers when all four hold:
+
+1. **Two blocked rows, by id.** At least two existing `BY-`/`CLM-`/`LAND-` rows
+   or `tasks.yaml` entries that cannot be stated without it — blocked, not
+   merely inconvenienced.
+2. **The gap is upstream and recorded.** A `novelty_checks` entry showing the
+   pinned corpora lack it, so the blocker is availability rather than effort.
+3. **Definitions may precede consumers; theorems may not.** The definitional
+   layer may land with none. Theorems built on it need a consumer landing in the
+   same change or the next.
+4. **An expiry.** The row names a release by which a consumer must land, or the
+   layer is deleted or demoted to provenance. Removal is an ordinary outcome —
+   the `doc-gen4` pipeline was built and removed on cost grounds.
+
+A foundation is a `LAND-` artifact row, never headline coverage, and carries no
+statement-match grade against a source it does not state.
+
 ## Coverage, landscape, and bridges
 
 - **Headline coverage:** reproduced registry formalizations with `EXACT` or
@@ -92,7 +155,7 @@ proof. Detail: [`docs/guide/methodology.md`](docs/guide/methodology.md).
 - **Which record takes your edit:**
   | Where | Holds | Note |
   |---|---|---|
-  | `registry.yaml` survey claim rows | what the Brčić–Yampolskiy survey asserted | `BY-001`…`BY-044` is **closed**; never add `BY-045` |
+  | `registry.yaml` survey claim rows | what the Brcic–Yampolskiy survey asserted | `BY-001`…`BY-044` is **closed**; never add `BY-045` |
   | `registry.yaml` other claim rows | what any other source asserted | `CLM-` prefix; at least one `original_source_refs`; no survey-only fields (`paper_reference`, `survey_proof_assessment`, `formal_library_search`) |
   | `registry.yaml` artifact rows | formalizations standing on their own | `LAND-` prefix, no `informal_claim`, never headline coverage |
   | `conjectures.yaml` | open questions, compiling statement, no proof | never a theorem, never counted as one |

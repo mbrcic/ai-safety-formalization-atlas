@@ -3,6 +3,7 @@ module
 public import AISafetyAtlas.Wireheading.Corruption
 public import AISafetyAtlas.Wireheading.AgentEquations
 public import AISafetyAtlas.Wireheading.CRMDP
+public import AISafetyAtlas.Wireheading.ObservationLimits
 public import AISafetyAtlas.Wireheading.GoalPreservation
 public import AISafetyAtlas.Wireheading.GoalPreservationSource
 public import AISafetyAtlas.Wireheading.Objective
@@ -22,6 +23,8 @@ Import this module (or `AISafetyAtlas`) for the surface below.
 | **Specialization** | `CRMDP.Model.everitt_theorem_eleven` | Same bound with states, corruption, observed channel (BY-039 canonical) |
 | **Law** | `CRMDP.Env.observed_complement` | Environment and complement look the same on the channel |
 | **Law** | `CRMDP.return_add_complement` | True returns sum to the horizon (eq. 3 style) |
+| **Boundary** | `ObservationLimits.not_knowable_trueReturn_of_complement_mem` | A complement pair inside a class defeats every history-to-return decoder |
+| **Corollary** | `ObservationLimits.not_knowable_trueReturn` | The unrestricted class, at any positive horizon |
 | **Law** | `GoalPreservationSource.Model.selected_matches_initial` | Finite-percept Thm 16 induction step without naming surjectivity |
 | **Law** | `GoalPreservationSource.Model.safe_modification` | One-step on-policy continuation matches initial value |
 | **Specialization** | `AgentEquations.value_eq_of_agree_on_window` | Ring–Orseau finite value depends only on window `(u,w)` |
@@ -48,6 +51,13 @@ source-aligned finite-percept induction step, not the full source theorem.
   a possible consumer of these cores, not what this facade currently is.
 - **Not** an AI-system bridge without separate review.
 
-Survey / landscape: BY-039 (RELATED), `LAND-WIRE-OBJ-001`, `LAND-GOAL-001`.
+- **Not** a novelty claim for `ObservationLimits`: the impossibility is the
+  source's and `CRMDP` already formalizes both of its steps. That module adds the
+  factorization reading through `Knowledge`, a certificate, and the import edge.
+  It is class-relative, says nothing about approximate or prior-conditional
+  estimation, and quantifies over environments rather than over agents.
+
+Survey / landscape: BY-039 (RELATED), `LAND-WIRE-OBJ-001`, `LAND-GOAL-001`,
+`LAND-CRMDP-KNOW-001`.
 Residuals: `docs/provenance/a1-a3-b1-b3-b7-reverification.md`.
 -/
