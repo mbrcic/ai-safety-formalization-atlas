@@ -112,7 +112,9 @@ re-export their domain (`Wireheading`, `Compositional`,
 `Oversight.JointObservation`); the kernels do not, so `Knowledge` and
 `Preference` specializations are imported one by one, and `Verification`
 supplies its mathematical base without the `AgentBehavior` and `Robot` bridges.
-Import contracts per module: [`AISafetyAtlas.lean`](AISafetyAtlas.lean).
+`Inference` re-exports its own subtree, so one import carries the whole Wolpert
+development; `Knowledge.Devices` is the transport between the two and imports
+both. Import contracts per module: [`AISafetyAtlas.lean`](AISafetyAtlas.lean).
 
 ```lean
 import AISafetyAtlas.Preference    -- planner/reward unidentifiability (kernel)
@@ -129,6 +131,9 @@ import AISafetyAtlas.Knowledge.Temporal -- time-indexed knowability, collisions,
 import AISafetyAtlas.Knowledge.Ambiguity -- finite fibre ambiguity, counting obstruction
 import AISafetyAtlas.Knowledge.SelfReference -- model as part of the state it models
 import AISafetyAtlas.Knowledge.Accumulation -- window ambiguity bounds over time
+import AISafetyAtlas.Knowledge.Devices -- transports between the kernel and inference devices
+import AISafetyAtlas.Knowledge.Check -- executable checkers, each with an agreement theorem
+import AISafetyAtlas.Inference     -- Wolpert devices: weak/strong inference, control, physical knowledge
 import AISafetyAtlas.SelfAwareness -- process composition and complete-awareness limits
 ```
 

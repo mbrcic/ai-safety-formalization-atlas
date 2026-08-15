@@ -1200,6 +1200,14 @@ def result_source_link(result: dict, sources: dict[str, str]) -> str | None:
         repository = formalization.get("repository")
         if repository and "mbrcic/ai-safety-formalization-atlas" not in repository:
             return repository
+    # A claim row whose formalization is in-tree but which contributes no
+    # artifact row still has declarations a reader can open; without this the
+    # row renders unlinked, which is worse than sending them to the first one.
+    for formalization in result.get("formalizations") or []:
+        for declaration in formalization.get("declarations") or []:
+            link = sources.get(declaration)
+            if link:
+                return link
     return None
 
 
