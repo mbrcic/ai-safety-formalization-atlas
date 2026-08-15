@@ -459,16 +459,27 @@ def main() -> None:
     # package version carries a patch component (for example 0.4.0). Match on
     # the series.
     minor_series = ".".join(lake_version.split(".")[:2])
+    release_note = ROOT / f"docs/releases/v{minor_series}.md"
     require(
-        (ROOT / f"docs/releases/v{minor_series}.md").is_file(),
+        release_note.is_file(),
         f"missing release note docs/releases/v{minor_series}.md "
         f"for package version {lake_version}",
+    )
+    # The publication line belongs to the release PR, not to a follow-up commit:
+    # v0.5.1 and v0.6 both carry theirs in their own squash, and their tags sit
+    # on it. A `_pending_` placeholder that reaches `main` makes the tagged tree
+    # say the tag does not exist, so it fails here rather than in review.
+    require(
+        "_pending_" not in release_note.read_text(encoding="utf-8"),
+        f"docs/releases/v{minor_series}.md still has a `_pending_` placeholder "
+        f"while the package version is {lake_version}. Fill in the publication "
+        "line in the release pull request itself; the tag goes on that commit.",
     )
     print(
         "current state ok: required public files, Apache-2.0, disclaimer, "
         "complete Lean build closure, executable reproduction scripts, "
         "STATE snapshot + release-status markers, version/release coherence, "
-        "and strict-trust Lean sources"
+        "no pending publication placeholder, and strict-trust Lean sources"
     )
 
 

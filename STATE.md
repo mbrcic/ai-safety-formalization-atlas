@@ -1,7 +1,7 @@
 # Project State
 
 Updated: 2026-08-15
-Current phase: `v0.7.0` is **prepared and not yet published** — see
+Current phase: `v0.7.0` is **published** — see
 [`docs/releases/v0.7.md`](docs/releases/v0.7.md). It is a depth release on
 Wolpert's *Physical limits of inference*, carried at the source's own
 quantifiers with the finiteness restrictions the proofs never used removed and
@@ -64,7 +64,8 @@ stale without anyone noticing.
   increment, then the workbench-model and process release), and
   [v0.5.1](docs/releases/v0.5.1.md) (conjecture-ledger maintenance), and
   [v0.6](docs/releases/v0.6.md) (knowability kernel, Breuer core, BY-044,
-  public page).
+  public page), and [v0.7](docs/releases/v0.7.md) (Wolpert at print scope, the
+  probability substrate, the first domain joint, and a runnable kernel).
 - **Reproduction, triage and search evidence** — [`docs/provenance/`](docs/provenance/),
   including the durable residual-gap record
   [`a1-a3-b1-b3-b7-reverification.md`](docs/provenance/a1-a3-b1-b3-b7-reverification.md)
@@ -153,9 +154,11 @@ stale without anyone noticing.
 
   Evidence: [self-measurement kernel](docs/provenance/self-measurement-kernel.md),
   [landscape sweep](docs/provenance/embedded-self-knowledge-landscape.md).
-- `information-limits-foundation` is unmerged local work and is **not** published.
-  It carries the Wolpert 2008/2018 development and, on top of it, the first
-  things that make that development usable rather than only correct:
+- v0.7.0 is published. `information-limits-foundation` carried it and was
+  squashed into `main` as `1270117`; pre-squash history is kept locally on
+  `archive/information-limits-foundation-pre-squash-20260815`. It carries the
+  Wolpert 2008/2018 development and, on top of it, the first things that make
+  that development usable rather than only correct:
 
   **The spine–device joint.** `LAND-KNOW-DEVICE-001` states the conditional
   transports between `LAND-KNOW-001`'s `Knowable` and BY-024's `WeaklyInfers`.
