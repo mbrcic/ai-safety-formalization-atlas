@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
   "generated_by": "scripts/generate_registry_views.py",
-  "note": "Compact agent lookup over the single results ledger. Prefer this over registry.yaml; open the full YAML only for one id when notes or candidate-formalization detail is required. A row with an informal claim states something a source asserted; a row without one records a formalization standing on its own account.",
-  "claim_count": 46,
-  "artifact_count": 26,
+  "note": "Compact agent lookup over the single results ledger. Prefer this over registry.yaml; open the full YAML only for one id when notes or candidate-formalization detail is required. A row with an informal claim states something a source asserted; a row without one records a formalization standing on its own account. Each atlas declaration carries the file and line it is defined at, so opening one needs no repository search.",
+  "claim_count": 49,
+  "artifact_count": 28,
   "results_by_id": {
     "BY-001": {
       "id": "BY-001",
@@ -103,11 +103,15 @@
         "declarations": [
           {
             "atlas_declaration": "AISafetyAtlas.SocialChoice.arrow",
-            "type": "WRAPPER"
+            "type": "WRAPPER",
+            "file": "AISafetyAtlas/SocialChoice.lean",
+            "line": 64
           },
           {
             "atlas_declaration": "AISafetyAtlas.SocialChoice.Utility.arrow",
-            "type": "BRIDGE"
+            "type": "BRIDGE",
+            "file": "AISafetyAtlas/SocialChoice/Utility.lean",
+            "line": 234
           }
         ]
       },
@@ -272,67 +276,99 @@
         "declarations": [
           {
             "atlas_declaration": "AISafetyAtlas.Preference.exists_planner",
-            "type": "NEW_PROOF"
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Preference.lean",
+            "line": 90
           },
           {
             "atlas_declaration": "AISafetyAtlas.Preference.exists_reward",
-            "type": "NEW_PROOF"
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Preference.lean",
+            "line": 167
           },
           {
             "atlas_declaration": "AISafetyAtlas.Preference.consistent_rewards_eq_univ",
-            "type": "NEW_PROOF"
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Preference.lean",
+            "line": 100
           },
           {
             "atlas_declaration": "AISafetyAtlas.Preference.neg_twin",
-            "type": "NEW_PROOF"
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Preference.lean",
+            "line": 115
           },
           {
             "atlas_declaration": "AISafetyAtlas.Preference.greedy_rewardOf",
-            "type": "NEW_PROOF"
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Preference.lean",
+            "line": 211
           },
           {
             "atlas_declaration": "AISafetyAtlas.Preference.Source.ReasonableForF.proposition_seven",
-            "type": "NEW_PROOF"
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Preference/SourceComplexity.lean",
+            "line": 191
           },
           {
             "atlas_declaration": "AISafetyAtlas.Preference.Source.ReasonableForF.proposition_eight",
-            "type": "NEW_PROOF"
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Preference/SourceComplexity.lean",
+            "line": 213
           },
           {
             "atlas_declaration": "AISafetyAtlas.Preference.ReasonableLanguage.proposition_seven",
-            "type": "NEW_PROOF"
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Preference/Reasonable.lean",
+            "line": 196
           },
           {
             "atlas_declaration": "AISafetyAtlas.Preference.ReasonableLanguage.proposition_eight",
-            "type": "NEW_PROOF"
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Preference/Reasonable.lean",
+            "line": 217
           },
           {
             "atlas_declaration": "AISafetyAtlas.Preference.explanation_at_least_behaviour",
-            "type": "NEW_PROOF"
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Preference/Complexity.lean",
+            "line": 157
           },
           {
             "atlas_declaration": "AISafetyAtlas.Preference.degenerate_explanation_cheap",
-            "type": "NEW_PROOF"
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Preference/Complexity.lean",
+            "line": 178
           },
           {
             "atlas_declaration": "AISafetyAtlas.Preference.explanation_complexity_eq_behaviour",
-            "type": "NEW_PROOF"
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Preference/Complexity.lean",
+            "line": 195
           },
           {
             "atlas_declaration": "AISafetyAtlas.Preference.RegretModel.cannot_rule_out_half_maximal_regret",
-            "type": "NEW_PROOF"
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Preference/Regret.lean",
+            "line": 63
           },
           {
             "atlas_declaration": "AISafetyAtlas.Preference.OverrideModel.mixtureValue_rationalise",
-            "type": "NEW_PROOF"
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Preference/Override.lean",
+            "line": 212
           },
           {
             "atlas_declaration": "AISafetyAtlas.Preference.Source.ReasonableForF.theorem_two_conditional",
-            "type": "NEW_PROOF"
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Preference/SourceComplexity.lean",
+            "line": 273
           },
           {
             "atlas_declaration": "AISafetyAtlas.Preference.OverrideModel.rationalise_strictly_better",
-            "type": "NEW_PROOF"
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Preference/Override.lean",
+            "line": 113
           }
         ]
       },
@@ -382,19 +418,27 @@
         "declarations": [
           {
             "atlas_declaration": "AISafetyAtlas.Computability.rice",
-            "type": "WRAPPER"
+            "type": "WRAPPER",
+            "file": "AISafetyAtlas/Computability.lean",
+            "line": 33
           },
           {
             "atlas_declaration": "AISafetyAtlas.Computability.rice_code_iff",
-            "type": "WRAPPER"
+            "type": "WRAPPER",
+            "file": "AISafetyAtlas/Computability.lean",
+            "line": 49
           },
           {
             "atlas_declaration": "AISafetyAtlas.Verification.rice",
-            "type": "BRIDGE"
+            "type": "BRIDGE",
+            "file": "AISafetyAtlas/Verification.lean",
+            "line": 55
           },
           {
             "atlas_declaration": "AISafetyAtlas.Verification.AgentBehavior.no_behavioral_safety_verifier",
-            "type": "BRIDGE"
+            "type": "BRIDGE",
+            "file": "AISafetyAtlas/Verification/AgentBehavior.lean",
+            "line": 85
           }
         ]
       },
@@ -433,11 +477,15 @@
         "declarations": [
           {
             "atlas_declaration": "AISafetyAtlas.Logic.godel_first_incompleteness",
-            "type": "WRAPPER"
+            "type": "WRAPPER",
+            "file": "AISafetyAtlas/Logic.lean",
+            "line": 89
           },
           {
             "atlas_declaration": "AISafetyAtlas.Logic.godel_second_incompleteness",
-            "type": "WRAPPER"
+            "type": "WRAPPER",
+            "file": "AISafetyAtlas/Logic.lean",
+            "line": 103
           }
         ]
       },
@@ -487,15 +535,21 @@
         "declarations": [
           {
             "atlas_declaration": "AISafetyAtlas.Computability.halting_re",
-            "type": "WRAPPER"
+            "type": "WRAPPER",
+            "file": "AISafetyAtlas/Computability.lean",
+            "line": 59
           },
           {
             "atlas_declaration": "AISafetyAtlas.Computability.halting_problem",
-            "type": "WRAPPER"
+            "type": "WRAPPER",
+            "file": "AISafetyAtlas/Computability.lean",
+            "line": 66
           },
           {
             "atlas_declaration": "AISafetyAtlas.Computability.nonhalting_not_re",
-            "type": "WRAPPER"
+            "type": "WRAPPER",
+            "file": "AISafetyAtlas/Computability.lean",
+            "line": 74
           }
         ]
       },
@@ -523,11 +577,15 @@
         "declarations": [
           {
             "atlas_declaration": "AISafetyAtlas.Logic.chaitin_incompleteness",
-            "type": "WRAPPER"
+            "type": "WRAPPER",
+            "file": "AISafetyAtlas/Logic.lean",
+            "line": 58
           },
           {
             "atlas_declaration": "AISafetyAtlas.Logic.chaitin_bound",
-            "type": "WRAPPER"
+            "type": "WRAPPER",
+            "file": "AISafetyAtlas/Logic.lean",
+            "line": 73
           }
         ]
       },
@@ -555,7 +613,9 @@
         "declarations": [
           {
             "atlas_declaration": "AISafetyAtlas.Logic.tarski_undefinability",
-            "type": "WRAPPER"
+            "type": "WRAPPER",
+            "file": "AISafetyAtlas/Logic.lean",
+            "line": 117
           }
         ]
       },
@@ -610,23 +670,33 @@
         "declarations": [
           {
             "atlas_declaration": "AISafetyAtlas.Learning.no_free_lunch_supervised",
-            "type": "NEW_PROOF"
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Learning.lean",
+            "line": 372
           },
           {
             "atlas_declaration": "AISafetyAtlas.Learning.lossConfig_sum_learner_indep",
-            "type": "NEW_PROOF"
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Learning.lean",
+            "line": 444
           },
           {
             "atlas_declaration": "AISafetyAtlas.Learning.ots_error_distribution_learner_indep",
-            "type": "NEW_PROOF"
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Learning.lean",
+            "line": 500
           },
           {
             "atlas_declaration": "AISafetyAtlas.Learning.homogeneous_of_learner_indep",
-            "type": "NEW_PROOF"
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Learning.lean",
+            "line": 782
           },
           {
             "atlas_declaration": "AISafetyAtlas.Learning.homogeneous_iff_learner_indep",
-            "type": "NEW_PROOF"
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Learning.lean",
+            "line": 829
           }
         ]
       },
@@ -654,11 +724,15 @@
         "declarations": [
           {
             "atlas_declaration": "AISafetyAtlas.Learning.no_free_lunch",
-            "type": "NEW_PROOF"
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Learning.lean",
+            "line": 188
           },
           {
             "atlas_declaration": "AISafetyAtlas.Learning.no_free_lunch_adaptive",
-            "type": "NEW_PROOF"
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Learning.lean",
+            "line": 623
           }
         ]
       },
@@ -687,7 +761,116 @@
       "name": "Physical limits on inference",
       "ai_bridge_status": "HUMAN_REVIEW",
       "informal_claim": "Embedded physical inference devices face limits on prediction, observation, and mutual control.",
-      "formalizations": [],
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declarations": [
+            "AISafetyAtlas.Inference.InferenceDevice",
+            "AISafetyAtlas.Inference.IsProbe",
+            "AISafetyAtlas.Inference.IsSourceProbe",
+            "AISafetyAtlas.Inference.isSourceProbe_iff",
+            "AISafetyAtlas.Inference.surjective_of_isProbe",
+            "AISafetyAtlas.Inference.exists_isProbe",
+            "AISafetyAtlas.Inference.probe",
+            "AISafetyAtlas.Inference.WeaklyInfers",
+            "AISafetyAtlas.Inference.weaklyInfers_iff_imageProbes",
+            "AISafetyAtlas.Inference.weaklyInfers_iff_sourceProbes",
+            "AISafetyAtlas.Inference.Distinguishable",
+            "AISafetyAtlas.Inference.StronglyInfers",
+            "AISafetyAtlas.Inference.SemiControls",
+            "AISafetyAtlas.Inference.Controls",
+            "AISafetyAtlas.Inference.separatingDevice",
+            "AISafetyAtlas.Inference.separatingDevice_weaklyInfers",
+            "AISafetyAtlas.Inference.exists_weaklyInfers_family_of_two_values_on",
+            "AISafetyAtlas.Inference.exists_weaklyInfers_of_two_values_on",
+            "AISafetyAtlas.Inference.not_weaklyInfers_own_concl",
+            "AISafetyAtlas.Inference.exists_not_weaklyInfers",
+            "AISafetyAtlas.Inference.not_infersDevice_both_of_distinguishable",
+            "AISafetyAtlas.Inference.weaklyInfers_of_stronglyInfers",
+            "AISafetyAtlas.Inference.stronglyInfers_trans",
+            "AISafetyAtlas.Inference.infersDevice_of_stronglyInfers",
+            "AISafetyAtlas.Inference.not_stronglyInfers_both",
+            "AISafetyAtlas.Inference.not_stronglyInfers_self",
+            "AISafetyAtlas.Inference.exists_not_stronglyInfers",
+            "AISafetyAtlas.Inference.exists_weaklyInfers_family_of_values_attained_on",
+            "AISafetyAtlas.Inference.weaklyInfers_of_controls",
+            "AISafetyAtlas.Inference.semiControls_of_controls",
+            "AISafetyAtlas.Inference.semiControls_of_controls_classical",
+            "AISafetyAtlas.Inference.semiControls_setup_of_stronglyInfers",
+            "AISafetyAtlas.Inference.not_controls_own_concl",
+            "AISafetyAtlas.Inference.not_controls_both_of_distinguishable",
+            "AISafetyAtlas.Inference.setup_partition_eq_of_semiControls_setup",
+            "AISafetyAtlas.Inference.infersDevice_comm_of_semiControls_setup",
+            "AISafetyAtlas.Inference.not_stronglyInfers_either_of_semiControls_setup",
+            "AISafetyAtlas.Inference.not_controls_other_setup_of_semiControls_setup",
+            "AISafetyAtlas.Inference.weaklyInfers_iff_three_setups",
+            "AISafetyAtlas.Inference.not_weaklyInfers_of_at_most_two_setups",
+            "AISafetyAtlas.Inference.exists_stronglyInfers_of_large_fibres",
+            "AISafetyAtlas.Inference.inferenceComplexity",
+            "AISafetyAtlas.Inference.inferenceComplexityTotal",
+            "AISafetyAtlas.Inference.inferenceComplexity_le_of_stronglyInfers",
+            "AISafetyAtlas.Inference.Mimics",
+            "AISafetyAtlas.Inference.Copies",
+            "AISafetyAtlas.Inference.Mimics.trans",
+            "AISafetyAtlas.Inference.Copies.symm",
+            "AISafetyAtlas.Inference.Copies.trans",
+            "AISafetyAtlas.Inference.FullReality",
+            "AISafetyAtlas.Inference.FullReality.SourceStipulations",
+            "AISafetyAtlas.Inference.FullReality.reducedForm",
+            "AISafetyAtlas.Inference.AdmissibleTuples",
+            "AISafetyAtlas.Inference.IsReducedForm",
+            "AISafetyAtlas.Inference.lemma1_reducedForm_iff_admissible",
+            "AISafetyAtlas.Inference.exists_pairwise_distinguishable_weak_cycle",
+            "AISafetyAtlas.Inference.not_mutually_distinguishable_weak_cycle",
+            "AISafetyAtlas.Inference.not_strong_inference_cycle",
+            "AISafetyAtlas.Inference.unique_strong_root",
+            "AISafetyAtlas.Inference.exists_copies_distinguishable_weak",
+            "AISafetyAtlas.Inference.exists_copies_stronglyInfers_infinite",
+            "AISafetyAtlas.Inference.copies_stronglyInfers_not_finite",
+            "AISafetyAtlas.Inference.FinPMF",
+            "AISafetyAtlas.Inference.positiveMassSetups",
+            "AISafetyAtlas.Inference.inferenceAccuracy",
+            "AISafetyAtlas.Inference.inferenceAccuracy_eq_of_two_setups",
+            "AISafetyAtlas.Inference.miDistinguishability",
+            "AISafetyAtlas.Inference.miDistinguishability_mem_unit_interval",
+            "AISafetyAtlas.Inference.countingDistinguishability",
+            "AISafetyAtlas.Inference.Prop6Quadruple",
+            "AISafetyAtlas.Inference.StatisticallyIndependent",
+            "AISafetyAtlas.Inference.Prop6Law",
+            "AISafetyAtlas.Inference.prop6Law_of_independent",
+            "AISafetyAtlas.Inference.prop6_product_eq",
+            "AISafetyAtlas.Inference.prop6_half",
+            "AISafetyAtlas.Inference.prop6Expr_half_maximizer",
+            "AISafetyAtlas.Inference.SelfAwareDevice",
+            "AISafetyAtlas.Inference.Intelligible",
+            "AISafetyAtlas.Inference.Infallible",
+            "AISafetyAtlas.Inference.Corrects",
+            "AISafetyAtlas.Inference.weaklyInfers_of_infallible_semiControls_question",
+            "AISafetyAtlas.Inference.stronglyInfers_of_infallible_semiControls_question_setup",
+            "AISafetyAtlas.Inference.thm7_card",
+            "AISafetyAtlas.Inference.thm7_ii",
+            "AISafetyAtlas.Inference.probeImage_eq_of_card_eq",
+            "AISafetyAtlas.Inference.thm7_ii_chain",
+            "AISafetyAtlas.Inference.not_mutually_deviceIntelligible_of_finite",
+            "AISafetyAtlas.Inference.not_both_concl_intelligible",
+            "AISafetyAtlas.Inference.exists_not_corrects",
+            "AISafetyAtlas.Inference.setupMass",
+            "AISafetyAtlas.Inference.cellAgreeProb",
+            "AISafetyAtlas.Inference.prop6QuadrupleOf",
+            "AISafetyAtlas.Inference.eq_of_apply_eq_of_card_eq",
+            "AISafetyAtlas.Inference.mutualInfo_nonneg",
+            "AISafetyAtlas.Inference.mutualInfo_le_add",
+            "AISafetyAtlas.Inference.gibbs_cell",
+            "AISafetyAtlas.Inference.sum_pushOnImage",
+            "AISafetyAtlas.Inference.pushOnImage_marginal"
+          ],
+          "module": "AISafetyAtlas.Inference",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        }
+      ],
       "lean_artifact": null,
       "candidate_count": 0
     },
@@ -731,7 +914,9 @@
         "declarations": [
           {
             "atlas_declaration": "AISafetyAtlas.Logic.loeb",
-            "type": "WRAPPER"
+            "type": "WRAPPER",
+            "file": "AISafetyAtlas/Logic.lean",
+            "line": 134
           }
         ]
       },
@@ -804,7 +989,9 @@
         "declarations": [
           {
             "atlas_declaration": "AISafetyAtlas.Verification.Robot.action_safety_unverifiable",
-            "type": "BRIDGE"
+            "type": "BRIDGE",
+            "file": "AISafetyAtlas/Verification/Robot.lean",
+            "line": 155
           }
         ]
       },
@@ -877,7 +1064,9 @@
         "declarations": [
           {
             "atlas_declaration": "AISafetyAtlas.Wireheading.CRMDP.Model.everitt_theorem_eleven",
-            "type": "NEW_PROOF"
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Wireheading/CRMDP.lean",
+            "line": 338
           }
         ]
       },
@@ -932,7 +1121,9 @@
         "declarations": [
           {
             "atlas_declaration": "AISafetyAtlas.Compositional.Symmetry.Protocol.no_unique_leader_from_symmetric_start",
-            "type": "NEW_PROOF"
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Compositional/Symmetry.lean",
+            "line": 96
           }
         ]
       },
@@ -967,23 +1158,283 @@
         "declarations": [
           {
             "atlas_declaration": "AISafetyAtlas.SelfAwareness.Model.not_aware_of_le",
-            "type": "NEW_PROOF"
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/SelfAwareness.lean",
+            "line": 148
           },
           {
             "atlas_declaration": "AISafetyAtlas.SelfAwareness.Model.process_not_self_aware",
-            "type": "NEW_PROOF"
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/SelfAwareness.lean",
+            "line": 163
           },
           {
             "atlas_declaration": "AISafetyAtlas.SelfAwareness.Model.not_agentAware_of_maximal",
-            "type": "NEW_PROOF"
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/SelfAwareness.lean",
+            "line": 175
           },
           {
             "atlas_declaration": "AISafetyAtlas.SelfAwareness.Model.limited_self_awareness",
-            "type": "NEW_PROOF"
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/SelfAwareness.lean",
+            "line": 196
           },
           {
             "atlas_declaration": "AISafetyAtlas.SelfAwareness.Model.not_perfectlySelfAware",
-            "type": "NEW_PROOF"
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/SelfAwareness.lean",
+            "line": 207
+          }
+        ]
+      },
+      "candidate_count": 0
+    },
+    "CLM-WOLPERT-KNOW-001": {
+      "id": "CLM-WOLPERT-KNOW-001",
+      "name": "Physical knowledge by inference devices",
+      "ai_bridge_status": "HUMAN_REVIEW",
+      "informal_claim": "A device physically knows a realized target value over a set W when one selector of realized setup blocks answers every target probe correctly and has the required nonempty true/false intersections with W. This entails weak inference; on a W that refines a Boolean target it is truthful and cannot affirm both values; and every device has a Boolean target it physically knows at no value over any W.",
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "relationship": "EQUIVALENT",
+          "reproduced": true,
+          "declarations": [
+            "AISafetyAtlas.Inference.ImageValue",
+            "AISafetyAtlas.Inference.SetupBlock",
+            "AISafetyAtlas.Inference.PhysicalKnowledgeWitness",
+            "AISafetyAtlas.Inference.PhysicallyKnows",
+            "AISafetyAtlas.Inference.PhysicalKnowledgeWitness.weaklyInfers",
+            "AISafetyAtlas.Inference.PhysicallyKnows.weaklyInfers",
+            "AISafetyAtlas.Inference.RefinesOn",
+            "AISafetyAtlas.Inference.PhysicalKnowledgeWitness.eq_target_of_mem_knownBlock",
+            "AISafetyAtlas.Inference.PhysicalKnowledgeWitness.eq_target_on_of_refinesOn",
+            "AISafetyAtlas.Inference.PhysicalKnowledgeWitness.negate",
+            "AISafetyAtlas.Inference.PhysicallyKnows.negate",
+            "AISafetyAtlas.Inference.physicallyKnows_false_iff_not_true",
+            "AISafetyAtlas.Inference.true_on_of_physicallyKnows_true",
+            "AISafetyAtlas.Inference.false_on_of_physicallyKnows_false",
+            "AISafetyAtlas.Inference.not_physicallyKnows_true_and_false",
+            "AISafetyAtlas.Inference.exists_never_physicallyKnown"
+          ],
+          "module": "AISafetyAtlas.Inference.PhysicalKnowledge",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Inference.PhysicallyKnows.weaklyInfers",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Inference/PhysicalKnowledge.lean",
+            "line": 146
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Inference.PhysicalKnowledgeWitness.eq_target_on_of_refinesOn",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Inference/PhysicalKnowledge.lean",
+            "line": 167
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Inference.physicallyKnows_false_iff_not_true",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Inference/PhysicalKnowledge.lean",
+            "line": 242
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Inference.not_physicallyKnows_true_and_false",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Inference/PhysicalKnowledge.lean",
+            "line": 273
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Inference.exists_never_physicallyKnown",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Inference/PhysicalKnowledge.lean",
+            "line": 287
+          }
+        ]
+      },
+      "candidate_count": 0
+    },
+    "CLM-WOLPERT-EPISTEMIC-001": {
+      "id": "CLM-WOLPERT-EPISTEMIC-001",
+      "name": "Epistemic consequences of physical knowledge",
+      "ai_bridge_status": "HUMAN_REVIEW",
+      "informal_claim": "For Wolpert's physical-knowledge predicate, knowledge is truth-preserving under the stated context-refinement hypotheses but is not logically omniscient: known premises can force a consequence to be true without making it known. Distinguishability also prevents mutual knowledge of conclusions and, under the Corollary 24 hypotheses, forces at least three inequivalent binary targets to remain unknown.",
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "relationship": "EQUIVALENT",
+          "reproduced": true,
+          "declarations": [
+            "AISafetyAtlas.Inference.boolImplies",
+            "AISafetyAtlas.Inference.TrueOn",
+            "AISafetyAtlas.Inference.corollary20_i",
+            "AISafetyAtlas.Inference.corollary20_ii",
+            "AISafetyAtlas.Inference.corollary20_iii",
+            "AISafetyAtlas.Inference.corollary20_iv",
+            "AISafetyAtlas.Inference.corollary21_i",
+            "AISafetyAtlas.Inference.FunctionallyEquivalent",
+            "AISafetyAtlas.Inference.exists_three_inequivalent_not_weaklyInfers",
+            "AISafetyAtlas.Inference.corollary23",
+            "AISafetyAtlas.Inference.corollary24"
+          ],
+          "module": "AISafetyAtlas.Inference.PhysicalKnowledge.Epistemic",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Inference.corollary20_ii",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Inference/PhysicalKnowledge/Epistemic.lean",
+            "line": 82
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Inference.exists_three_inequivalent_not_weaklyInfers",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Inference/PhysicalKnowledge/Epistemic.lean",
+            "line": 387
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Inference.corollary23",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Inference/PhysicalKnowledge/Epistemic.lean",
+            "line": 418
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Inference.corollary24",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Inference/PhysicalKnowledge/Epistemic.lean",
+            "line": 449
+          }
+        ]
+      },
+      "candidate_count": 0
+    },
+    "CLM-WOLPERT-APPROX-001": {
+      "id": "CLM-WOLPERT-APPROX-001",
+      "name": "Bounds on inference accuracy, and the collapse of the exact limits",
+      "ai_bridge_status": "HUMAN_REVIEW",
+      "informal_claim": "A target attaining at least three values is weakly inferred by some device, which is the hypothesis the 2008 corollary omits and the 2018 restatement supplies. Covariance accuracy is bounded below by a term depending only on the number of target values times the device's inference power, so for a binary target it is never negative. Under that accuracy both the mutual-inference theorem and the strong-inference inheritance theorem hold only exactly: two setup-distinguishable devices can each infer the other to within any positive epsilon, and a device can strongly infer another that infers a target almost perfectly while itself inferring that target with accuracy exactly zero.",
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "relationship": "EQUIVALENT",
+          "reproduced": true,
+          "declarations": [
+            "AISafetyAtlas.Inference.identityDevice",
+            "AISafetyAtlas.Inference.identityDevice_weaklyInfers",
+            "AISafetyAtlas.Inference.exists_weaklyInfers_of_three_values",
+            "AISafetyAtlas.Inference.inferenceAccuracy_ge",
+            "AISafetyAtlas.Inference.inferenceAccuracy_nonneg_of_card_eq_two",
+            "AISafetyAtlas.Inference.fig5_stronglyInfers",
+            "AISafetyAtlas.Inference.fig5_accuracy_dev1",
+            "AISafetyAtlas.Inference.fig5_accuracy_dev2",
+            "AISafetyAtlas.Inference.fig5_accuracy_gap",
+            "AISafetyAtlas.Inference.fig6_distinguishable",
+            "AISafetyAtlas.Inference.fig6_accuracy_dev1",
+            "AISafetyAtlas.Inference.fig6_accuracy_dev2",
+            "AISafetyAtlas.Inference.fig6_accuracy_near_one",
+            "AISafetyAtlas.Inference.exists_distinguishable_accuracy_near_one",
+            "AISafetyAtlas.Inference.StronglyInfersPair",
+            "AISafetyAtlas.Inference.not_stronglyInfersPair_id",
+            "AISafetyAtlas.Inference.exists_pair_not_stronglyInfers",
+            "AISafetyAtlas.Inference.recursive_iff_refines",
+            "AISafetyAtlas.Inference.PrefixFree",
+            "AISafetyAtlas.Inference.prop11_of_independent",
+            "AISafetyAtlas.Inference.exists_complexity_inversion",
+            "AISafetyAtlas.Inference.inv_complexity",
+            "AISafetyAtlas.Inference.inv_complexity'"
+          ],
+          "module": "AISafetyAtlas.Inference.Existence",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Inference.identityDevice_weaklyInfers",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Inference/Existence.lean",
+            "line": 81
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Inference.exists_weaklyInfers_of_three_values",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Inference/Existence.lean",
+            "line": 118
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Inference.inferenceAccuracy_ge",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Inference/Stochastic/Bounds.lean",
+            "line": 83
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Inference.fig5_accuracy_gap",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Inference/Stochastic/Approximation.lean",
+            "line": 523
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Inference.exists_distinguishable_accuracy_near_one",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Inference/Stochastic/Approximation.lean",
+            "line": 321
+          }
+        ]
+      },
+      "candidate_count": 0
+    },
+    "LAND-WOLPERT-KNOW-DEFECTS-001": {
+      "id": "LAND-WOLPERT-KNOW-DEFECTS-001",
+      "name": "Countermodels to Wolpert 2018 epistemic claims",
+      "ai_bridge_status": null,
+      "informal_claim": null,
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "relationship": null,
+          "reproduced": true,
+          "declarations": [
+            "AISafetyAtlas.Inference.corollary21_ii_repaired",
+            "AISafetyAtlas.Inference.KnowsEvent",
+            "AISafetyAtlas.Inference.KnowledgeEvent",
+            "AISafetyAtlas.Inference.PositiveIntrospection",
+            "AISafetyAtlas.Examples.Inference.PhysicalKnowledge.Epistemic.corollary21_ii_counterexample",
+            "AISafetyAtlas.Examples.Inference.PhysicalKnowledge.Event.not_positiveIntrospection_observer",
+            "AISafetyAtlas.Inference.prop12_refuted",
+            "AISafetyAtlas.Inference.prop12_gap",
+            "AISafetyAtlas.Inference.prop12_complexity",
+            "AISafetyAtlas.Inference.prop12_entropy",
+            "AISafetyAtlas.Inference.prop12Device",
+            "AISafetyAtlas.Inference.prop12_weaklyInfers",
+            "AISafetyAtlas.Inference.ex6_accuracy",
+            "AISafetyAtlas.Inference.ex6_prop8_bound",
+            "AISafetyAtlas.Inference.ex6_bound_not_attained",
+            "AISafetyAtlas.Inference.ex6_prop8_holds",
+            "AISafetyAtlas.Inference.ex6Device",
+            "AISafetyAtlas.Inference.ex6PMF"
+          ],
+          "module": "AISafetyAtlas.Inference.PhysicalKnowledge.Event",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Inference.corollary21_ii_repaired",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Inference/PhysicalKnowledge/Epistemic.lean",
+            "line": 147
           }
         ]
       },
@@ -1011,7 +1462,9 @@
         "declarations": [
           {
             "atlas_declaration": "AISafetyAtlas.Logic.lawvere_fixed_point",
-            "type": "WRAPPER"
+            "type": "WRAPPER",
+            "file": "AISafetyAtlas/Logic.lean",
+            "line": 46
           }
         ]
       },
@@ -1046,11 +1499,15 @@
         "declarations": [
           {
             "atlas_declaration": "AISafetyAtlas.Explainability.attribution_impossibility",
-            "type": "WRAPPER"
+            "type": "WRAPPER",
+            "file": "AISafetyAtlas/Explainability.lean",
+            "line": 37
           },
           {
             "atlas_declaration": "AISafetyAtlas.Explainability.attribution_impossibility_weak",
-            "type": "WRAPPER"
+            "type": "WRAPPER",
+            "file": "AISafetyAtlas/Explainability.lean",
+            "line": 52
           }
         ]
       },
@@ -1099,7 +1556,9 @@
         "declarations": [
           {
             "atlas_declaration": "AISafetyAtlas.SocialChoice.gibbard_satterthwaite",
-            "type": "WRAPPER"
+            "type": "WRAPPER",
+            "file": "AISafetyAtlas/SocialChoice.lean",
+            "line": 114
           }
         ]
       },
@@ -1292,7 +1751,9 @@
         "declarations": [
           {
             "atlas_declaration": "AISafetyAtlas.Compositional.Hyperproperties.k_safety_iff_finite_self_composition",
-            "type": "NEW_PROOF"
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Compositional/Hyperproperties.lean",
+            "line": 118
           }
         ]
       },
@@ -1323,7 +1784,9 @@
         "declarations": [
           {
             "atlas_declaration": "AISafetyAtlas.Compositional.Networks.runFor_eq_of_view_eq",
-            "type": "NEW_PROOF"
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Compositional/Networks.lean",
+            "line": 107
           }
         ]
       },
@@ -1354,7 +1817,9 @@
         "declarations": [
           {
             "atlas_declaration": "AISafetyAtlas.Compositional.rectangle_iff_exchange_closed",
-            "type": "NEW_PROOF"
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Compositional/Rectangularity.lean",
+            "line": 62
           }
         ]
       },
@@ -1389,7 +1854,9 @@
         "declarations": [
           {
             "atlas_declaration": "AISafetyAtlas.Wireheading.AgentEquations.value_eq_of_agree_on_window",
-            "type": "NEW_PROOF"
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Wireheading/AgentEquations.lean",
+            "line": 162
           }
         ]
       },
@@ -1422,7 +1889,9 @@
         "declarations": [
           {
             "atlas_declaration": "AISafetyAtlas.Wireheading.GoalPreservationSource.Model.selected_matches_initial",
-            "type": "NEW_PROOF"
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Wireheading/GoalPreservationSource.lean",
+            "line": 141
           }
         ]
       },
@@ -1455,7 +1924,12 @@
             "InclusionMinimalCovering",
             "PortfolioCost",
             "CostOptimalCovering",
-            "inclusionMinimal_of_costOptimal"
+            "inclusionMinimal_of_costOptimal",
+            "residual",
+            "worstResidual",
+            "covers_iff_worstResidual_le_one",
+            "covers_iff_residual_le_one",
+            "worstResidual_le_postprocess"
           ],
           "module": "AISafetyAtlas.Oversight.JointObservation",
           "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
@@ -1466,7 +1940,9 @@
         "declarations": [
           {
             "atlas_declaration": "AISafetyAtlas.Oversight.JointObservation.covers_iff_no_collision",
-            "type": "NEW_PROOF"
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Oversight/JointObservation/Coverage.lean",
+            "line": 96
           }
         ]
       },
@@ -1499,15 +1975,21 @@
         "declarations": [
           {
             "atlas_declaration": "AISafetyAtlas.Knowledge.SelfReference.selfComplete_iff_subsingleton_rest",
-            "type": "NEW_PROOF"
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Knowledge/SelfReference.lean",
+            "line": 119
           },
           {
             "atlas_declaration": "AISafetyAtlas.Knowledge.SelfReference.not_selfComplete_of_two_rest",
-            "type": "NEW_PROOF"
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Knowledge/SelfReference.lean",
+            "line": 138
           },
           {
             "atlas_declaration": "AISafetyAtlas.Knowledge.SelfReference.card_rest_le_one_of_selfComplete",
-            "type": "NEW_PROOF"
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Knowledge/SelfReference.lean",
+            "line": 156
           }
         ]
       },
@@ -1541,27 +2023,39 @@
         "declarations": [
           {
             "atlas_declaration": "AISafetyAtlas.Knowledge.ambiguity_le_pairTarget_left",
-            "type": "NEW_PROOF"
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Knowledge/Accumulation.lean",
+            "line": 107
           },
           {
             "atlas_declaration": "AISafetyAtlas.Knowledge.ambiguity_le_pairTarget_right",
-            "type": "NEW_PROOF"
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Knowledge/Accumulation.lean",
+            "line": 119
           },
           {
             "atlas_declaration": "AISafetyAtlas.Knowledge.ambiguity_pairTarget_le_mul",
-            "type": "NEW_PROOF"
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Knowledge/Accumulation.lean",
+            "line": 139
           },
           {
             "atlas_declaration": "AISafetyAtlas.Knowledge.not_knowable_pairTarget_of_not_knowable",
-            "type": "NEW_PROOF"
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Knowledge/Accumulation.lean",
+            "line": 206
           },
           {
             "atlas_declaration": "AISafetyAtlas.Knowledge.ambiguity_le_of_evidenceMonotone",
-            "type": "NEW_PROOF"
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Knowledge/Accumulation.lean",
+            "line": 167
           },
           {
             "atlas_declaration": "AISafetyAtlas.Knowledge.ambiguity_le_pairTarget_of_evidenceMonotone",
-            "type": "NEW_PROOF"
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Knowledge/Accumulation.lean",
+            "line": 187
           }
         ]
       },
@@ -1584,7 +2078,12 @@
             "AISafetyAtlas.Knowledge.not_knowable_of_one_lt_ambiguity",
             "AISafetyAtlas.Knowledge.card_image_le_of_knowable",
             "AISafetyAtlas.Knowledge.not_knowable_of_card_lt",
-            "AISafetyAtlas.Knowledge.ambiguity_le_of_comp"
+            "AISafetyAtlas.Knowledge.ambiguity_le_of_comp",
+            "AISafetyAtlas.Knowledge.ambiguity_eq_zero_of_not_mem_image",
+            "AISafetyAtlas.Knowledge.worstAmbiguity",
+            "AISafetyAtlas.Knowledge.ambiguity_le_worstAmbiguity",
+            "AISafetyAtlas.Knowledge.knowable_iff_worstAmbiguity_le_one",
+            "AISafetyAtlas.Knowledge.worstAmbiguity_le_of_comp"
           ],
           "module": "AISafetyAtlas.Knowledge.Ambiguity",
           "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
@@ -1595,19 +2094,27 @@
         "declarations": [
           {
             "atlas_declaration": "AISafetyAtlas.Knowledge.card_image_le_of_knowable",
-            "type": "NEW_PROOF"
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Knowledge/Ambiguity.lean",
+            "line": 143
           },
           {
             "atlas_declaration": "AISafetyAtlas.Knowledge.not_knowable_of_card_lt",
-            "type": "NEW_PROOF"
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Knowledge/Ambiguity.lean",
+            "line": 158
           },
           {
             "atlas_declaration": "AISafetyAtlas.Knowledge.ambiguity_le_of_comp",
-            "type": "NEW_PROOF"
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Knowledge/Ambiguity.lean",
+            "line": 226
           },
           {
             "atlas_declaration": "AISafetyAtlas.Knowledge.knowable_iff_ambiguity_le_one",
-            "type": "NEW_PROOF"
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Knowledge/Ambiguity.lean",
+            "line": 104
           }
         ]
       },
@@ -1642,15 +2149,21 @@
         "declarations": [
           {
             "atlas_declaration": "AISafetyAtlas.Knowledge.Temporal.knowableFrom_mono",
-            "type": "NEW_PROOF"
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Knowledge/Temporal.lean",
+            "line": 130
           },
           {
             "atlas_declaration": "AISafetyAtlas.Knowledge.Temporal.not_knowableAt_of_collisionAt",
-            "type": "NEW_PROOF"
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Knowledge/Temporal.lean",
+            "line": 166
           },
           {
             "atlas_declaration": "AISafetyAtlas.Knowledge.Temporal.collisionAt_of_not_knowableAt",
-            "type": "NEW_PROOF"
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Knowledge/Temporal.lean",
+            "line": 175
           }
         ]
       },
@@ -1703,11 +2216,15 @@
         "declarations": [
           {
             "atlas_declaration": "AISafetyAtlas.Knowledge.knowable_id_iff_injective",
-            "type": "NEW_PROOF"
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Knowledge.lean",
+            "line": 221
           },
           {
             "atlas_declaration": "AISafetyAtlas.Knowledge.not_knowable_state_of_nontrivial_remainder",
-            "type": "NEW_PROOF"
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Knowledge.lean",
+            "line": 242
           }
         ]
       },
@@ -1755,39 +2272,57 @@
         "declarations": [
           {
             "atlas_declaration": "AISafetyAtlas.Knowledge.Embedded.not_knowable_state_of_properInclusion",
-            "type": "NEW_PROOF"
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Knowledge/Embedded.lean",
+            "line": 291
           },
           {
             "atlas_declaration": "AISafetyAtlas.Knowledge.Embedded.Meshing.restrict_surjective",
-            "type": "NEW_PROOF"
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Knowledge/Embedded.lean",
+            "line": 161
           },
           {
             "atlas_declaration": "AISafetyAtlas.Knowledge.Embedded.no_meshing_inference_distinguishes",
-            "type": "NEW_PROOF"
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Knowledge/Embedded.lean",
+            "line": 314
           },
           {
             "atlas_declaration": "AISafetyAtlas.Knowledge.Embedded.no_meshing_inference_measures_all_states",
-            "type": "NEW_PROOF"
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Knowledge/Embedded.lean",
+            "line": 342
           },
           {
             "atlas_declaration": "AISafetyAtlas.Knowledge.Embedded.exists_state_not_exactly_measurable",
-            "type": "NEW_PROOF"
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Knowledge/Embedded.lean",
+            "line": 480
           },
           {
             "atlas_declaration": "AISafetyAtlas.Knowledge.Embedded.infer_singleton_eq_of_meshing",
-            "type": "NEW_PROOF"
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Knowledge/Embedded.lean",
+            "line": 259
           },
           {
             "atlas_declaration": "AISafetyAtlas.Knowledge.Embedded.exists_singleton_infer_eq_of_infer_eq",
-            "type": "NEW_PROOF"
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Knowledge/Embedded.lean",
+            "line": 405
           },
           {
             "atlas_declaration": "AISafetyAtlas.Knowledge.Embedded.eq_restrict_of_infer_singleton_eq",
-            "type": "NEW_PROOF"
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Knowledge/Embedded.lean",
+            "line": 428
           },
           {
             "atlas_declaration": "AISafetyAtlas.Knowledge.Embedded.no_meshing_inference_measures_all_states_direct",
-            "type": "NEW_PROOF"
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Knowledge/Embedded.lean",
+            "line": 449
           }
         ]
       },
@@ -1831,51 +2366,75 @@
         "declarations": [
           {
             "atlas_declaration": "AISafetyAtlas.Knowledge.Embedded.Composition.properInclusion_of_nontrivial_remainder",
-            "type": "NEW_PROOF"
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Knowledge/Embedded/Composition.lean",
+            "line": 153
           },
           {
             "atlas_declaration": "AISafetyAtlas.Knowledge.Embedded.Composition.no_meshing_measures_all_of_nontrivial_remainder",
-            "type": "NEW_PROOF"
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Knowledge/Embedded/Composition.lean",
+            "line": 177
           },
           {
             "atlas_declaration": "AISafetyAtlas.Knowledge.Embedded.Composition.properInclusion_of_nontrivial_remainder_of_equiv",
-            "type": "NEW_PROOF"
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Knowledge/Embedded/Composition.lean",
+            "line": 188
           },
           {
             "atlas_declaration": "AISafetyAtlas.Knowledge.Embedded.Composition.no_meshing_measures_all_of_nontrivial_remainder_of_equiv",
-            "type": "NEW_PROOF"
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Knowledge/Embedded/Composition.lean",
+            "line": 203
           },
           {
             "atlas_declaration": "AISafetyAtlas.Knowledge.Embedded.Composition.measuresAll_fibreInference_of_injective",
-            "type": "NEW_PROOF"
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Knowledge/Embedded/Composition.lean",
+            "line": 266
           },
           {
             "atlas_declaration": "AISafetyAtlas.Knowledge.Embedded.Composition.meshing_and_measuresAll_fibreInference_of_bijective",
-            "type": "NEW_PROOF"
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Knowledge/Embedded/Composition.lean",
+            "line": 287
           },
           {
             "atlas_declaration": "AISafetyAtlas.Knowledge.Embedded.Finite.properInclusion_of_card_lt",
-            "type": "NEW_PROOF"
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Knowledge/Embedded/Finite.lean",
+            "line": 62
           },
           {
             "atlas_declaration": "AISafetyAtlas.Knowledge.Embedded.Finite.no_meshing_measures_all_of_card_lt",
-            "type": "NEW_PROOF"
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Knowledge/Embedded/Finite.lean",
+            "line": 79
           },
           {
             "atlas_declaration": "AISafetyAtlas.Knowledge.Embedded.Composition.properInclusion_iff_not_injective",
-            "type": "NEW_PROOF"
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Knowledge/Embedded/Composition.lean",
+            "line": 97
           },
           {
             "atlas_declaration": "AISafetyAtlas.Knowledge.Embedded.Composition.not_meshing_of_not_surjective",
-            "type": "NEW_PROOF"
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Knowledge/Embedded/Composition.lean",
+            "line": 119
           },
           {
             "atlas_declaration": "AISafetyAtlas.Knowledge.Embedded.Composition.meshing_fibreInference_of_surjective",
-            "type": "NEW_PROOF"
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Knowledge/Embedded/Composition.lean",
+            "line": 238
           },
           {
             "atlas_declaration": "AISafetyAtlas.Knowledge.Embedded.Finite.properInclusion_product_of_card_rest_ge_two",
-            "type": "NEW_PROOF"
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Knowledge/Embedded/Finite.lean",
+            "line": 95
           }
         ]
       },
@@ -1912,31 +2471,103 @@
         "declarations": [
           {
             "atlas_declaration": "AISafetyAtlas.Knowledge.knowable_iff_factorsThrough",
-            "type": "WRAPPER"
+            "type": "WRAPPER",
+            "file": "AISafetyAtlas/Knowledge.lean",
+            "line": 118
           },
           {
             "atlas_declaration": "AISafetyAtlas.Knowledge.knowable_iff_no_collision",
-            "type": "WRAPPER"
+            "type": "WRAPPER",
+            "file": "AISafetyAtlas/Knowledge.lean",
+            "line": 135
           },
           {
             "atlas_declaration": "AISafetyAtlas.Knowledge.not_knowable_of_collision",
-            "type": "NEW_PROOF"
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Knowledge.lean",
+            "line": 143
           },
           {
             "atlas_declaration": "AISafetyAtlas.Knowledge.not_knowable_of_witness",
-            "type": "NEW_PROOF"
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Knowledge.lean",
+            "line": 152
           },
           {
             "atlas_declaration": "AISafetyAtlas.Knowledge.exists_witness_of_not_knowable",
-            "type": "NEW_PROOF"
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Knowledge.lean",
+            "line": 162
           },
           {
             "atlas_declaration": "AISafetyAtlas.Knowledge.Knowable.mono",
-            "type": "NEW_PROOF"
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Knowledge.lean",
+            "line": 191
           },
           {
             "atlas_declaration": "AISafetyAtlas.Knowledge.not_knowable_comp",
-            "type": "NEW_PROOF"
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Knowledge.lean",
+            "line": 207
+          }
+        ]
+      },
+      "candidate_count": 0
+    },
+    "LAND-KNOW-DEVICE-001": {
+      "id": "LAND-KNOW-DEVICE-001",
+      "name": "Transports between the knowability kernel and inference devices",
+      "ai_bridge_status": null,
+      "informal_claim": null,
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "relationship": null,
+          "reproduced": true,
+          "declarations": [
+            "AISafetyAtlas.Knowledge.Devices.deviceObservation",
+            "AISafetyAtlas.Knowledge.Devices.BlockAnswers",
+            "AISafetyAtlas.Knowledge.Devices.BlockwiseCollision",
+            "AISafetyAtlas.Knowledge.Devices.not_blockAnswers_of_witness",
+            "AISafetyAtlas.Knowledge.Devices.BlockwiseCollision.not_weaklyInfers",
+            "AISafetyAtlas.Knowledge.Devices.BlockwiseCollision.not_physicallyKnows",
+            "AISafetyAtlas.Knowledge.Devices.blockwiseCollision_of_knowable_concl",
+            "AISafetyAtlas.Knowledge.Devices.knowable_probe_of_forall_blockAnswers",
+            "AISafetyAtlas.Knowledge.Check.findCollision",
+            "AISafetyAtlas.Knowledge.Check.not_knowable_of_findCollision_eq_some",
+            "AISafetyAtlas.Knowledge.Check.knowable_of_findCollision_eq_none"
+          ],
+          "module": "AISafetyAtlas.Knowledge.Devices",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Knowledge.Devices.not_blockAnswers_of_witness",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Knowledge/Devices.lean",
+            "line": 166
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Knowledge.Devices.BlockwiseCollision.not_weaklyInfers",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Knowledge/Devices.lean",
+            "line": 207
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Knowledge.Devices.BlockwiseCollision.not_physicallyKnows",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Knowledge/Devices.lean",
+            "line": 241
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Knowledge.Devices.knowable_probe_of_forall_blockAnswers",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Knowledge/Devices.lean",
+            "line": 287
           }
         ]
       },
@@ -1968,15 +2599,21 @@
         "declarations": [
           {
             "atlas_declaration": "AISafetyAtlas.Wireheading.ObservationLimits.not_knowable_trueReturn_of_complement_mem",
-            "type": "NEW_PROOF"
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Wireheading/ObservationLimits.lean",
+            "line": 130
           },
           {
             "atlas_declaration": "AISafetyAtlas.Wireheading.ObservationLimits.not_knowable_trueReturn",
-            "type": "NEW_PROOF"
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Wireheading/ObservationLimits.lean",
+            "line": 176
           },
           {
             "atlas_declaration": "AISafetyAtlas.Wireheading.ObservationLimits.returnOver_zeroEnv_complement",
-            "type": "NEW_PROOF"
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Wireheading/ObservationLimits.lean",
+            "line": 161
           }
         ]
       },

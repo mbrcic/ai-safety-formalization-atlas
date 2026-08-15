@@ -1,0 +1,507 @@
+{
+  "note": "Edges are: for a definition, its type and body; for a theorem, its statement only. Lean's module system does not export proof terms.",
+  "cluster": "AISafetyAtlas.Oversight.",
+  "declarations": {
+    "AISafetyAtlas.Oversight.JointObservation.CandidateFamily": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Oversight.JointObservation.EvidenceArchitecture"
+      ]
+    },
+    "AISafetyAtlas.Oversight.JointObservation.CandidateObservation": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Oversight.JointObservation.EvidenceArchitecture"
+      ]
+    },
+    "AISafetyAtlas.Oversight.JointObservation.CandidateObservation.observe": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Oversight.JointObservation.CandidateObservation",
+        "AISafetyAtlas.Oversight.JointObservation.CandidateObservation.Output",
+        "AISafetyAtlas.Oversight.JointObservation.CandidateObservation.coalition",
+        "AISafetyAtlas.Oversight.JointObservation.CandidateObservation.joint",
+        "AISafetyAtlas.Oversight.JointObservation.EvidenceArchitecture",
+        "AISafetyAtlas.Oversight.JointObservation.EvidenceArchitecture.Execution",
+        "AISafetyAtlas.Oversight.JointObservation.EvidenceArchitecture.Principal",
+        "AISafetyAtlas.Oversight.JointObservation.EvidenceArchitecture.privateState"
+      ]
+    },
+    "AISafetyAtlas.Oversight.JointObservation.CandidateObservation.postprocess": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Oversight.JointObservation.CandidateObservation",
+        "AISafetyAtlas.Oversight.JointObservation.CandidateObservation.Output",
+        "AISafetyAtlas.Oversight.JointObservation.CandidateObservation.coalition",
+        "AISafetyAtlas.Oversight.JointObservation.CandidateObservation.joint",
+        "AISafetyAtlas.Oversight.JointObservation.CoalitionInput",
+        "AISafetyAtlas.Oversight.JointObservation.EvidenceArchitecture"
+      ]
+    },
+    "AISafetyAtlas.Oversight.JointObservation.CoalitionInput": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Oversight.JointObservation.EvidenceArchitecture",
+        "AISafetyAtlas.Oversight.JointObservation.EvidenceArchitecture.Principal",
+        "AISafetyAtlas.Oversight.JointObservation.EvidenceArchitecture.PrivateField"
+      ]
+    },
+    "AISafetyAtlas.Oversight.JointObservation.CollisionWitness": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Oversight.JointObservation.CandidateObservation",
+        "AISafetyAtlas.Oversight.JointObservation.EvidenceArchitecture",
+        "AISafetyAtlas.Oversight.JointObservation.Hazard"
+      ]
+    },
+    "AISafetyAtlas.Oversight.JointObservation.CollisionWitness.postprocess": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Oversight.JointObservation.CandidateObservation",
+        "AISafetyAtlas.Oversight.JointObservation.CandidateObservation.Output",
+        "AISafetyAtlas.Oversight.JointObservation.CandidateObservation.postprocess",
+        "AISafetyAtlas.Oversight.JointObservation.CollisionWitness",
+        "AISafetyAtlas.Oversight.JointObservation.CollisionWitness.hazardDiffers",
+        "AISafetyAtlas.Oversight.JointObservation.CollisionWitness.left",
+        "AISafetyAtlas.Oversight.JointObservation.CollisionWitness.right",
+        "AISafetyAtlas.Oversight.JointObservation.EvidenceArchitecture",
+        "AISafetyAtlas.Oversight.JointObservation.Hazard"
+      ]
+    },
+    "AISafetyAtlas.Oversight.JointObservation.CostOptimalCovering": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Oversight.JointObservation.CandidateFamily",
+        "AISafetyAtlas.Oversight.JointObservation.CandidateFamily.Index",
+        "AISafetyAtlas.Oversight.JointObservation.EvidenceArchitecture",
+        "AISafetyAtlas.Oversight.JointObservation.HazardFamily",
+        "AISafetyAtlas.Oversight.JointObservation.Portfolio",
+        "AISafetyAtlas.Oversight.JointObservation.PortfolioCost",
+        "AISafetyAtlas.Oversight.JointObservation.PortfolioCovers"
+      ]
+    },
+    "AISafetyAtlas.Oversight.JointObservation.CoverageResult": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Oversight.JointObservation.CandidateObservation",
+        "AISafetyAtlas.Oversight.JointObservation.EvidenceArchitecture",
+        "AISafetyAtlas.Oversight.JointObservation.Hazard"
+      ]
+    },
+    "AISafetyAtlas.Oversight.JointObservation.CoverageResult.collision": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Oversight.JointObservation.CandidateObservation",
+        "AISafetyAtlas.Oversight.JointObservation.CollisionWitness",
+        "AISafetyAtlas.Oversight.JointObservation.CoverageResult",
+        "AISafetyAtlas.Oversight.JointObservation.EvidenceArchitecture",
+        "AISafetyAtlas.Oversight.JointObservation.Hazard"
+      ]
+    },
+    "AISafetyAtlas.Oversight.JointObservation.CoverageResult.covered": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Oversight.JointObservation.CandidateObservation",
+        "AISafetyAtlas.Oversight.JointObservation.CollisionWitness",
+        "AISafetyAtlas.Oversight.JointObservation.CoverageResult",
+        "AISafetyAtlas.Oversight.JointObservation.Covers",
+        "AISafetyAtlas.Oversight.JointObservation.EvidenceArchitecture",
+        "AISafetyAtlas.Oversight.JointObservation.Hazard"
+      ]
+    },
+    "AISafetyAtlas.Oversight.JointObservation.CoverageResult.covered_eq_true_iff": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Oversight.JointObservation.CandidateObservation",
+        "AISafetyAtlas.Oversight.JointObservation.CoverageResult",
+        "AISafetyAtlas.Oversight.JointObservation.CoverageResult.covered",
+        "AISafetyAtlas.Oversight.JointObservation.Covers",
+        "AISafetyAtlas.Oversight.JointObservation.EvidenceArchitecture",
+        "AISafetyAtlas.Oversight.JointObservation.Hazard"
+      ]
+    },
+    "AISafetyAtlas.Oversight.JointObservation.CoverageResult.covers": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Oversight.JointObservation.CandidateObservation",
+        "AISafetyAtlas.Oversight.JointObservation.CoverageResult",
+        "AISafetyAtlas.Oversight.JointObservation.Covers",
+        "AISafetyAtlas.Oversight.JointObservation.EvidenceArchitecture",
+        "AISafetyAtlas.Oversight.JointObservation.Hazard"
+      ]
+    },
+    "AISafetyAtlas.Oversight.JointObservation.Covers": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Oversight.JointObservation.CandidateObservation",
+        "AISafetyAtlas.Oversight.JointObservation.CandidateObservation.Output",
+        "AISafetyAtlas.Oversight.JointObservation.CandidateObservation.observe",
+        "AISafetyAtlas.Oversight.JointObservation.EvidenceArchitecture",
+        "AISafetyAtlas.Oversight.JointObservation.EvidenceArchitecture.Execution",
+        "AISafetyAtlas.Oversight.JointObservation.Hazard"
+      ]
+    },
+    "AISafetyAtlas.Oversight.JointObservation.EvidenceArchitecture": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Oversight.JointObservation.ExecutionEnum": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Oversight.JointObservation.EvidenceArchitecture"
+      ]
+    },
+    "AISafetyAtlas.Oversight.JointObservation.FamilyBlind": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Oversight.JointObservation.CandidateFamily",
+        "AISafetyAtlas.Oversight.JointObservation.CandidateFamily.Index",
+        "AISafetyAtlas.Oversight.JointObservation.CandidateFamily.candidate",
+        "AISafetyAtlas.Oversight.JointObservation.Covers",
+        "AISafetyAtlas.Oversight.JointObservation.EvidenceArchitecture",
+        "AISafetyAtlas.Oversight.JointObservation.Hazard"
+      ]
+    },
+    "AISafetyAtlas.Oversight.JointObservation.Hazard": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Oversight.JointObservation.EvidenceArchitecture",
+        "AISafetyAtlas.Oversight.JointObservation.EvidenceArchitecture.Execution"
+      ]
+    },
+    "AISafetyAtlas.Oversight.JointObservation.HazardFamily": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Oversight.JointObservation.EvidenceArchitecture"
+      ]
+    },
+    "AISafetyAtlas.Oversight.JointObservation.InclusionMinimalCovering": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Oversight.JointObservation.CandidateFamily",
+        "AISafetyAtlas.Oversight.JointObservation.CandidateFamily.Index",
+        "AISafetyAtlas.Oversight.JointObservation.EvidenceArchitecture",
+        "AISafetyAtlas.Oversight.JointObservation.HazardFamily",
+        "AISafetyAtlas.Oversight.JointObservation.Portfolio",
+        "AISafetyAtlas.Oversight.JointObservation.PortfolioCovers"
+      ]
+    },
+    "AISafetyAtlas.Oversight.JointObservation.Portfolio": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Oversight.JointObservation.CandidateFamily",
+        "AISafetyAtlas.Oversight.JointObservation.CandidateFamily.Index",
+        "AISafetyAtlas.Oversight.JointObservation.EvidenceArchitecture"
+      ]
+    },
+    "AISafetyAtlas.Oversight.JointObservation.PortfolioCost": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Oversight.JointObservation.CandidateFamily",
+        "AISafetyAtlas.Oversight.JointObservation.CandidateFamily.Index",
+        "AISafetyAtlas.Oversight.JointObservation.EvidenceArchitecture",
+        "AISafetyAtlas.Oversight.JointObservation.Portfolio"
+      ]
+    },
+    "AISafetyAtlas.Oversight.JointObservation.PortfolioCovers": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Oversight.JointObservation.CandidateFamily",
+        "AISafetyAtlas.Oversight.JointObservation.CandidateFamily.Index",
+        "AISafetyAtlas.Oversight.JointObservation.CandidateFamily.candidate",
+        "AISafetyAtlas.Oversight.JointObservation.Covers",
+        "AISafetyAtlas.Oversight.JointObservation.EvidenceArchitecture",
+        "AISafetyAtlas.Oversight.JointObservation.HazardFamily",
+        "AISafetyAtlas.Oversight.JointObservation.HazardFamily.Index",
+        "AISafetyAtlas.Oversight.JointObservation.HazardFamily.hazard",
+        "AISafetyAtlas.Oversight.JointObservation.Portfolio"
+      ]
+    },
+    "AISafetyAtlas.Oversight.JointObservation.PortfolioIndistinguishable": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Oversight.JointObservation.CandidateFamily",
+        "AISafetyAtlas.Oversight.JointObservation.CandidateFamily.Index",
+        "AISafetyAtlas.Oversight.JointObservation.CandidateFamily.candidate",
+        "AISafetyAtlas.Oversight.JointObservation.CandidateObservation.Output",
+        "AISafetyAtlas.Oversight.JointObservation.CandidateObservation.observe",
+        "AISafetyAtlas.Oversight.JointObservation.EvidenceArchitecture",
+        "AISafetyAtlas.Oversight.JointObservation.EvidenceArchitecture.Execution",
+        "AISafetyAtlas.Oversight.JointObservation.Portfolio"
+      ]
+    },
+    "AISafetyAtlas.Oversight.JointObservation.Refines": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Oversight.JointObservation.CandidateObservation",
+        "AISafetyAtlas.Oversight.JointObservation.CandidateObservation.Output",
+        "AISafetyAtlas.Oversight.JointObservation.CandidateObservation.observe",
+        "AISafetyAtlas.Oversight.JointObservation.EvidenceArchitecture",
+        "AISafetyAtlas.Oversight.JointObservation.EvidenceArchitecture.Execution"
+      ]
+    },
+    "AISafetyAtlas.Oversight.JointObservation.covers_iff_no_collision": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Oversight.JointObservation.CandidateObservation",
+        "AISafetyAtlas.Oversight.JointObservation.CandidateObservation.Output",
+        "AISafetyAtlas.Oversight.JointObservation.CandidateObservation.observe",
+        "AISafetyAtlas.Oversight.JointObservation.Covers",
+        "AISafetyAtlas.Oversight.JointObservation.EvidenceArchitecture",
+        "AISafetyAtlas.Oversight.JointObservation.EvidenceArchitecture.Execution",
+        "AISafetyAtlas.Oversight.JointObservation.Hazard"
+      ]
+    },
+    "AISafetyAtlas.Oversight.JointObservation.covers_iff_residual_le_one": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Oversight.JointObservation.CandidateObservation",
+        "AISafetyAtlas.Oversight.JointObservation.CandidateObservation.Output",
+        "AISafetyAtlas.Oversight.JointObservation.Covers",
+        "AISafetyAtlas.Oversight.JointObservation.EvidenceArchitecture",
+        "AISafetyAtlas.Oversight.JointObservation.EvidenceArchitecture.Execution",
+        "AISafetyAtlas.Oversight.JointObservation.Hazard",
+        "AISafetyAtlas.Oversight.JointObservation.residual"
+      ]
+    },
+    "AISafetyAtlas.Oversight.JointObservation.covers_iff_worstResidual_le_one": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Oversight.JointObservation.CandidateObservation",
+        "AISafetyAtlas.Oversight.JointObservation.CandidateObservation.Output",
+        "AISafetyAtlas.Oversight.JointObservation.Covers",
+        "AISafetyAtlas.Oversight.JointObservation.EvidenceArchitecture",
+        "AISafetyAtlas.Oversight.JointObservation.EvidenceArchitecture.Execution",
+        "AISafetyAtlas.Oversight.JointObservation.Hazard",
+        "AISafetyAtlas.Oversight.JointObservation.worstResidual"
+      ]
+    },
+    "AISafetyAtlas.Oversight.JointObservation.covers_of_refines": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Oversight.JointObservation.CandidateObservation",
+        "AISafetyAtlas.Oversight.JointObservation.Covers",
+        "AISafetyAtlas.Oversight.JointObservation.EvidenceArchitecture",
+        "AISafetyAtlas.Oversight.JointObservation.Hazard",
+        "AISafetyAtlas.Oversight.JointObservation.Refines"
+      ]
+    },
+    "AISafetyAtlas.Oversight.JointObservation.decidableCovers": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Oversight.JointObservation.CandidateObservation",
+        "AISafetyAtlas.Oversight.JointObservation.CandidateObservation.Output",
+        "AISafetyAtlas.Oversight.JointObservation.CandidateObservation.observe",
+        "AISafetyAtlas.Oversight.JointObservation.Covers",
+        "AISafetyAtlas.Oversight.JointObservation.EvidenceArchitecture",
+        "AISafetyAtlas.Oversight.JointObservation.EvidenceArchitecture.Execution",
+        "AISafetyAtlas.Oversight.JointObservation.Hazard"
+      ]
+    },
+    "AISafetyAtlas.Oversight.JointObservation.decidableEqPostprocessOutput": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Oversight.JointObservation.CandidateObservation",
+        "AISafetyAtlas.Oversight.JointObservation.CandidateObservation.Output",
+        "AISafetyAtlas.Oversight.JointObservation.CandidateObservation.postprocess",
+        "AISafetyAtlas.Oversight.JointObservation.EvidenceArchitecture"
+      ]
+    },
+    "AISafetyAtlas.Oversight.JointObservation.decideCoverage": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Oversight.JointObservation.CandidateObservation",
+        "AISafetyAtlas.Oversight.JointObservation.CandidateObservation.Output",
+        "AISafetyAtlas.Oversight.JointObservation.CandidateObservation.observe",
+        "AISafetyAtlas.Oversight.JointObservation.CoverageResult",
+        "AISafetyAtlas.Oversight.JointObservation.CoverageResult.collision",
+        "AISafetyAtlas.Oversight.JointObservation.CoverageResult.covers",
+        "AISafetyAtlas.Oversight.JointObservation.EvidenceArchitecture",
+        "AISafetyAtlas.Oversight.JointObservation.EvidenceArchitecture.Execution",
+        "AISafetyAtlas.Oversight.JointObservation.ExecutionEnum",
+        "AISafetyAtlas.Oversight.JointObservation.ExecutionEnum.toList",
+        "AISafetyAtlas.Oversight.JointObservation.Hazard"
+      ]
+    },
+    "AISafetyAtlas.Oversight.JointObservation.decideCoverage_covered_iff": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Oversight.JointObservation.CandidateObservation",
+        "AISafetyAtlas.Oversight.JointObservation.CandidateObservation.Output",
+        "AISafetyAtlas.Oversight.JointObservation.CoverageResult.covered",
+        "AISafetyAtlas.Oversight.JointObservation.Covers",
+        "AISafetyAtlas.Oversight.JointObservation.EvidenceArchitecture",
+        "AISafetyAtlas.Oversight.JointObservation.ExecutionEnum",
+        "AISafetyAtlas.Oversight.JointObservation.Hazard",
+        "AISafetyAtlas.Oversight.JointObservation.decideCoverage"
+      ]
+    },
+    "AISafetyAtlas.Oversight.JointObservation.emittedArchitectureCandidate": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Oversight.JointObservation.CandidateObservation",
+        "AISafetyAtlas.Oversight.JointObservation.CoalitionInput",
+        "AISafetyAtlas.Oversight.JointObservation.EvidenceArchitecture",
+        "AISafetyAtlas.Oversight.JointObservation.EvidenceArchitecture.EmittedView",
+        "AISafetyAtlas.Oversight.JointObservation.EvidenceArchitecture.Principal",
+        "AISafetyAtlas.Oversight.JointObservation.EvidenceArchitecture.emit"
+      ]
+    },
+    "AISafetyAtlas.Oversight.JointObservation.exists_collisionWitness_of_not_covers": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Oversight.JointObservation.CandidateObservation",
+        "AISafetyAtlas.Oversight.JointObservation.CollisionWitness",
+        "AISafetyAtlas.Oversight.JointObservation.Covers",
+        "AISafetyAtlas.Oversight.JointObservation.EvidenceArchitecture",
+        "AISafetyAtlas.Oversight.JointObservation.Hazard"
+      ]
+    },
+    "AISafetyAtlas.Oversight.JointObservation.inclusionMinimal_of_costOptimal": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Oversight.JointObservation.CandidateFamily",
+        "AISafetyAtlas.Oversight.JointObservation.CandidateFamily.Index",
+        "AISafetyAtlas.Oversight.JointObservation.CostOptimalCovering",
+        "AISafetyAtlas.Oversight.JointObservation.EvidenceArchitecture",
+        "AISafetyAtlas.Oversight.JointObservation.HazardFamily",
+        "AISafetyAtlas.Oversight.JointObservation.InclusionMinimalCovering",
+        "AISafetyAtlas.Oversight.JointObservation.Portfolio"
+      ]
+    },
+    "AISafetyAtlas.Oversight.JointObservation.localCandidate": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Oversight.JointObservation.CandidateObservation",
+        "AISafetyAtlas.Oversight.JointObservation.CoalitionInput",
+        "AISafetyAtlas.Oversight.JointObservation.EvidenceArchitecture",
+        "AISafetyAtlas.Oversight.JointObservation.EvidenceArchitecture.EmittedView",
+        "AISafetyAtlas.Oversight.JointObservation.EvidenceArchitecture.Principal",
+        "AISafetyAtlas.Oversight.JointObservation.EvidenceArchitecture.emit"
+      ]
+    },
+    "AISafetyAtlas.Oversight.JointObservation.localFamily": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Oversight.JointObservation.CandidateFamily",
+        "AISafetyAtlas.Oversight.JointObservation.EvidenceArchitecture",
+        "AISafetyAtlas.Oversight.JointObservation.EvidenceArchitecture.Principal",
+        "AISafetyAtlas.Oversight.JointObservation.localCandidate"
+      ]
+    },
+    "AISafetyAtlas.Oversight.JointObservation.not_covers_of_collisionWitness": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Oversight.JointObservation.CandidateObservation",
+        "AISafetyAtlas.Oversight.JointObservation.CollisionWitness",
+        "AISafetyAtlas.Oversight.JointObservation.Covers",
+        "AISafetyAtlas.Oversight.JointObservation.EvidenceArchitecture",
+        "AISafetyAtlas.Oversight.JointObservation.Hazard"
+      ]
+    },
+    "AISafetyAtlas.Oversight.JointObservation.observe_postprocess": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Oversight.JointObservation.CandidateObservation",
+        "AISafetyAtlas.Oversight.JointObservation.CandidateObservation.Output",
+        "AISafetyAtlas.Oversight.JointObservation.CandidateObservation.observe",
+        "AISafetyAtlas.Oversight.JointObservation.CandidateObservation.postprocess",
+        "AISafetyAtlas.Oversight.JointObservation.EvidenceArchitecture",
+        "AISafetyAtlas.Oversight.JointObservation.EvidenceArchitecture.Execution"
+      ]
+    },
+    "AISafetyAtlas.Oversight.JointObservation.observe_truthful": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Oversight.JointObservation.CandidateObservation",
+        "AISafetyAtlas.Oversight.JointObservation.CandidateObservation.Output",
+        "AISafetyAtlas.Oversight.JointObservation.CandidateObservation.coalition",
+        "AISafetyAtlas.Oversight.JointObservation.CandidateObservation.joint",
+        "AISafetyAtlas.Oversight.JointObservation.CandidateObservation.observe",
+        "AISafetyAtlas.Oversight.JointObservation.EvidenceArchitecture",
+        "AISafetyAtlas.Oversight.JointObservation.EvidenceArchitecture.Execution",
+        "AISafetyAtlas.Oversight.JointObservation.EvidenceArchitecture.Principal",
+        "AISafetyAtlas.Oversight.JointObservation.EvidenceArchitecture.privateState"
+      ]
+    },
+    "AISafetyAtlas.Oversight.JointObservation.portfolioCovers_implies_hazardEquivalent": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Oversight.JointObservation.CandidateFamily",
+        "AISafetyAtlas.Oversight.JointObservation.EvidenceArchitecture",
+        "AISafetyAtlas.Oversight.JointObservation.EvidenceArchitecture.Execution",
+        "AISafetyAtlas.Oversight.JointObservation.HazardFamily",
+        "AISafetyAtlas.Oversight.JointObservation.HazardFamily.Index",
+        "AISafetyAtlas.Oversight.JointObservation.HazardFamily.hazard",
+        "AISafetyAtlas.Oversight.JointObservation.Portfolio",
+        "AISafetyAtlas.Oversight.JointObservation.PortfolioCovers",
+        "AISafetyAtlas.Oversight.JointObservation.PortfolioIndistinguishable"
+      ]
+    },
+    "AISafetyAtlas.Oversight.JointObservation.postprocess_cannot_repair_collision": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Oversight.JointObservation.CandidateObservation",
+        "AISafetyAtlas.Oversight.JointObservation.CandidateObservation.Output",
+        "AISafetyAtlas.Oversight.JointObservation.CandidateObservation.postprocess",
+        "AISafetyAtlas.Oversight.JointObservation.Covers",
+        "AISafetyAtlas.Oversight.JointObservation.EvidenceArchitecture",
+        "AISafetyAtlas.Oversight.JointObservation.Hazard"
+      ]
+    },
+    "AISafetyAtlas.Oversight.JointObservation.privateSingletonCandidate": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Oversight.JointObservation.CandidateObservation",
+        "AISafetyAtlas.Oversight.JointObservation.CoalitionInput",
+        "AISafetyAtlas.Oversight.JointObservation.EvidenceArchitecture",
+        "AISafetyAtlas.Oversight.JointObservation.EvidenceArchitecture.Principal",
+        "AISafetyAtlas.Oversight.JointObservation.EvidenceArchitecture.PrivateField"
+      ]
+    },
+    "AISafetyAtlas.Oversight.JointObservation.refines_postprocess": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Oversight.JointObservation.CandidateObservation",
+        "AISafetyAtlas.Oversight.JointObservation.CandidateObservation.Output",
+        "AISafetyAtlas.Oversight.JointObservation.CandidateObservation.postprocess",
+        "AISafetyAtlas.Oversight.JointObservation.EvidenceArchitecture",
+        "AISafetyAtlas.Oversight.JointObservation.Refines"
+      ]
+    },
+    "AISafetyAtlas.Oversight.JointObservation.residual": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Knowledge.ambiguity",
+        "AISafetyAtlas.Oversight.JointObservation.CandidateObservation",
+        "AISafetyAtlas.Oversight.JointObservation.CandidateObservation.Output",
+        "AISafetyAtlas.Oversight.JointObservation.CandidateObservation.observe",
+        "AISafetyAtlas.Oversight.JointObservation.EvidenceArchitecture",
+        "AISafetyAtlas.Oversight.JointObservation.EvidenceArchitecture.Execution"
+      ]
+    },
+    "AISafetyAtlas.Oversight.JointObservation.worstResidual": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Knowledge.worstAmbiguity",
+        "AISafetyAtlas.Oversight.JointObservation.CandidateObservation",
+        "AISafetyAtlas.Oversight.JointObservation.CandidateObservation.Output",
+        "AISafetyAtlas.Oversight.JointObservation.CandidateObservation.observe",
+        "AISafetyAtlas.Oversight.JointObservation.EvidenceArchitecture",
+        "AISafetyAtlas.Oversight.JointObservation.EvidenceArchitecture.Execution"
+      ]
+    },
+    "AISafetyAtlas.Oversight.JointObservation.worstResidual_le_postprocess": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Oversight.JointObservation.CandidateObservation",
+        "AISafetyAtlas.Oversight.JointObservation.CandidateObservation.Output",
+        "AISafetyAtlas.Oversight.JointObservation.CandidateObservation.postprocess",
+        "AISafetyAtlas.Oversight.JointObservation.EvidenceArchitecture",
+        "AISafetyAtlas.Oversight.JointObservation.EvidenceArchitecture.Execution",
+        "AISafetyAtlas.Oversight.JointObservation.decidableEqPostprocessOutput",
+        "AISafetyAtlas.Oversight.JointObservation.worstResidual"
+      ]
+    }
+  }
+}

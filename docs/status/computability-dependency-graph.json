@@ -1,0 +1,26 @@
+{
+  "note": "Edges are: for a definition, its type and body; for a theorem, its statement only. Lean's module system does not export proof terms.",
+  "cluster": "AISafetyAtlas.Computability.",
+  "declarations": {
+    "AISafetyAtlas.Computability.halting_problem": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.Computability.halting_re": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.Computability.nonhalting_not_re": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.Computability.rice": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.Computability.rice_code_iff": {
+      "kind": "theorem",
+      "deps": []
+    }
+  }
+}

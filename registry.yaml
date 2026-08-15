@@ -309,7 +309,8 @@
       "survey_number": 54,
       "citation": "D. Wolpert, “Constraints on physical reality arising from a formalization of knowledge,” ArXiv171103499 Phys., Jun. 2018, Accessed: Jun. 22, 2021. [Online]. Available: http://arxiv.org/abs/1711.03499",
       "locator": "http://arxiv.org/abs/1711.03499",
-      "role": "work"
+      "role": "work",
+      "notes": "VERSION: no peer-reviewed published version exists; checked 2026-08-15, the arXiv record carries no journal-ref and no DOI and no journal version is indexed. The preprint is therefore canonical by necessity, and the atlas reads v3, the latest of three versions. This is the one atlas source where a preprint is the authority."
     },
     "survey-ref-055": {
       "survey_number": 55,
@@ -395,7 +396,8 @@
       "survey_number": 69,
       "citation": "J. van Leeuwen and J. Wiedermann, “Impossibility Results for the Online Verification of Ethical and Legal Behaviour of Robots,” Utrecht University, Utrecht, UU-PCS-2021-02, 2021. Accessed: Aug. 12, 2021. [Online]. Available: http://www.cs.uu.nl/groups/AD/UU-PCS-2021-02.pdf",
       "locator": "https://web.archive.org/web/20220222045551/http://www.cs.uu.nl/groups/AD/UU-PCS-2021-02.pdf",
-      "role": "work"
+      "role": "work",
+      "notes": "VERSION: the citation is the survey’s and is preserved as such; it is an unrefereed Utrecht technical report, and it is what Verification.Robot transcribes. A peer-reviewed counterpart exists - Wiedermann and van Leeuwen, Validating Non-trivial Semantic Properties of Autonomous Robots, in Philosophy and Theory of Artificial Intelligence 2021, SAPERE vol. 63, pp. 91-104, Springer 2022, doi 10.1007/978-3-031-09153-7_8 - and the two REUSE THE SAME NUMBERS FOR DIFFERENT STATEMENTS. Report Theorem 1 says no algorithmic procedure decides whether a robot actions always satisfy a non-trivial P; chapter Theorem 1 says that for all REGULAR P, P is trivial if and only if R_P is recursive, strengthened in the following remark to not even recursively enumerable. The corollaries and the Theorem 2s differ the same way, and the chapter adds a regularity hypothesis the report Theorem 1 does not carry. So action_safety_unverifiable matches the report Theorem 1 and Corollary 1 and only the easy half of the chapter Theorem 1. Both copies were read locally on 2026-08-15."
     },
     "survey-ref-070": {
       "survey_number": 70,
@@ -564,10 +566,10 @@
       "notes": "Statement source for LAND-DL-001, reproduced through the Archive of Formal Proofs entry Deep_Learning."
     },
     "atlas-ref-everitt-2016-self-modification": {
-      "citation": "T. Everitt, D. Filan, M. Daswani, and M. Hutter, “Self-modification of policy and utility function in rational agents,” Artificial General Intelligence (AGI), 2016.",
-      "locator": "https://arxiv.org/abs/1605.03142",
+      "citation": "T. Everitt, D. Filan, M. Daswani, and M. Hutter, “Self-Modification of Policy and Utility Function in Rational Agents,” in Artificial General Intelligence (AGI 2016), Lecture Notes in Computer Science, vol. 9782, pp. 1-11, Springer, 2016. doi: 10.1007/978-3-319-41649-6_1. Technical report with the proofs: arXiv:1605.03142.",
+      "locator": "https://doi.org/10.1007/978-3-319-41649-6_1",
       "role": "work",
-      "notes": "Statement source for LAND-GOAL-001 (Theorem 16)."
+      "notes": "Statement source for LAND-GOAL-001. VERSION: the published chapter states its theorems and proves none of them - Proofs for all theorems are provided in a technical report, namely arXiv:1605.03142 - so the published text is canonical for statements and the technical report is the only place any proof exists. The two number the same results differently. Published Theorem 12 (realistic policy-modifying agents make safe modifications) is the atlas target and is word-for-word the report Theorem 16; published Theorems 10 and 11 are report Theorems 14 and 15; published Definitions 1, 3, 7, 8, 9 are report Definitions 3, 5, 10, 11, 12. The report alone carries Lemma 13, Definition 18, Lemma 19, Theorem 20 and Theorem 21, which is proof apparatus the chapter does not print rather than material it dropped: the report proof of Theorem 16 invokes its Appendix-A Theorem 20 as its first step."
     },
     "lawvere-1969-diagonal-ccc": {
       "citation": "F. W. Lawvere, “Diagonal Arguments and Cartesian Closed Categories,” in Category Theory, Homology Theory and Their Applications II, Lecture Notes in Mathematics, vol. 92, pp. 134–145, Springer, 1969. doi: 10.1007/BFb0080769.",
@@ -2251,11 +2253,135 @@
         "survey-ref-054",
         "survey-ref-055"
       ],
-      "formalizations": [],
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE",
+          "module": "AISafetyAtlas.Inference",
+          "atlas_module": "AISafetyAtlas.Inference",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "license": "Apache-2.0",
+          "build_environment": "leanprover/lean4:v4.31.0; Mathlib fabf563a7c95a166b8d7b6efca11c8b4dc9d911f; atlas IN_TREE",
+          "declarations": [
+            "AISafetyAtlas.Inference.InferenceDevice",
+            "AISafetyAtlas.Inference.IsProbe",
+            "AISafetyAtlas.Inference.IsSourceProbe",
+            "AISafetyAtlas.Inference.isSourceProbe_iff",
+            "AISafetyAtlas.Inference.surjective_of_isProbe",
+            "AISafetyAtlas.Inference.exists_isProbe",
+            "AISafetyAtlas.Inference.probe",
+            "AISafetyAtlas.Inference.WeaklyInfers",
+            "AISafetyAtlas.Inference.weaklyInfers_iff_imageProbes",
+            "AISafetyAtlas.Inference.weaklyInfers_iff_sourceProbes",
+            "AISafetyAtlas.Inference.Distinguishable",
+            "AISafetyAtlas.Inference.StronglyInfers",
+            "AISafetyAtlas.Inference.SemiControls",
+            "AISafetyAtlas.Inference.Controls",
+            "AISafetyAtlas.Inference.separatingDevice",
+            "AISafetyAtlas.Inference.separatingDevice_weaklyInfers",
+            "AISafetyAtlas.Inference.exists_weaklyInfers_family_of_two_values_on",
+            "AISafetyAtlas.Inference.exists_weaklyInfers_of_two_values_on",
+            "AISafetyAtlas.Inference.not_weaklyInfers_own_concl",
+            "AISafetyAtlas.Inference.exists_not_weaklyInfers",
+            "AISafetyAtlas.Inference.not_infersDevice_both_of_distinguishable",
+            "AISafetyAtlas.Inference.weaklyInfers_of_stronglyInfers",
+            "AISafetyAtlas.Inference.stronglyInfers_trans",
+            "AISafetyAtlas.Inference.infersDevice_of_stronglyInfers",
+            "AISafetyAtlas.Inference.not_stronglyInfers_both",
+            "AISafetyAtlas.Inference.not_stronglyInfers_self",
+            "AISafetyAtlas.Inference.exists_not_stronglyInfers",
+            "AISafetyAtlas.Inference.exists_weaklyInfers_family_of_values_attained_on",
+            "AISafetyAtlas.Inference.weaklyInfers_of_controls",
+            "AISafetyAtlas.Inference.semiControls_of_controls",
+            "AISafetyAtlas.Inference.semiControls_of_controls_classical",
+            "AISafetyAtlas.Inference.semiControls_setup_of_stronglyInfers",
+            "AISafetyAtlas.Inference.not_controls_own_concl",
+            "AISafetyAtlas.Inference.not_controls_both_of_distinguishable",
+            "AISafetyAtlas.Inference.setup_partition_eq_of_semiControls_setup",
+            "AISafetyAtlas.Inference.infersDevice_comm_of_semiControls_setup",
+            "AISafetyAtlas.Inference.not_stronglyInfers_either_of_semiControls_setup",
+            "AISafetyAtlas.Inference.not_controls_other_setup_of_semiControls_setup",
+            "AISafetyAtlas.Inference.weaklyInfers_iff_three_setups",
+            "AISafetyAtlas.Inference.not_weaklyInfers_of_at_most_two_setups",
+            "AISafetyAtlas.Inference.exists_stronglyInfers_of_large_fibres",
+            "AISafetyAtlas.Inference.inferenceComplexity",
+            "AISafetyAtlas.Inference.inferenceComplexityTotal",
+            "AISafetyAtlas.Inference.inferenceComplexity_le_of_stronglyInfers",
+            "AISafetyAtlas.Inference.Mimics",
+            "AISafetyAtlas.Inference.Copies",
+            "AISafetyAtlas.Inference.Mimics.trans",
+            "AISafetyAtlas.Inference.Copies.symm",
+            "AISafetyAtlas.Inference.Copies.trans",
+            "AISafetyAtlas.Inference.FullReality",
+            "AISafetyAtlas.Inference.FullReality.SourceStipulations",
+            "AISafetyAtlas.Inference.FullReality.reducedForm",
+            "AISafetyAtlas.Inference.AdmissibleTuples",
+            "AISafetyAtlas.Inference.IsReducedForm",
+            "AISafetyAtlas.Inference.lemma1_reducedForm_iff_admissible",
+            "AISafetyAtlas.Inference.exists_pairwise_distinguishable_weak_cycle",
+            "AISafetyAtlas.Inference.not_mutually_distinguishable_weak_cycle",
+            "AISafetyAtlas.Inference.not_strong_inference_cycle",
+            "AISafetyAtlas.Inference.unique_strong_root",
+            "AISafetyAtlas.Inference.exists_copies_distinguishable_weak",
+            "AISafetyAtlas.Inference.exists_copies_stronglyInfers_infinite",
+            "AISafetyAtlas.Inference.copies_stronglyInfers_not_finite",
+            "AISafetyAtlas.Inference.FinPMF",
+            "AISafetyAtlas.Inference.positiveMassSetups",
+            "AISafetyAtlas.Inference.inferenceAccuracy",
+            "AISafetyAtlas.Inference.inferenceAccuracy_eq_of_two_setups",
+            "AISafetyAtlas.Inference.miDistinguishability",
+            "AISafetyAtlas.Inference.miDistinguishability_mem_unit_interval",
+            "AISafetyAtlas.Inference.countingDistinguishability",
+            "AISafetyAtlas.Inference.Prop6Quadruple",
+            "AISafetyAtlas.Inference.StatisticallyIndependent",
+            "AISafetyAtlas.Inference.Prop6Law",
+            "AISafetyAtlas.Inference.prop6Law_of_independent",
+            "AISafetyAtlas.Inference.prop6_product_eq",
+            "AISafetyAtlas.Inference.prop6_half",
+            "AISafetyAtlas.Inference.prop6Expr_half_maximizer",
+            "AISafetyAtlas.Inference.SelfAwareDevice",
+            "AISafetyAtlas.Inference.Intelligible",
+            "AISafetyAtlas.Inference.Infallible",
+            "AISafetyAtlas.Inference.Corrects",
+            "AISafetyAtlas.Inference.weaklyInfers_of_infallible_semiControls_question",
+            "AISafetyAtlas.Inference.stronglyInfers_of_infallible_semiControls_question_setup",
+            "AISafetyAtlas.Inference.thm7_card",
+            "AISafetyAtlas.Inference.thm7_ii",
+            "AISafetyAtlas.Inference.probeImage_eq_of_card_eq",
+            "AISafetyAtlas.Inference.thm7_ii_chain",
+            "AISafetyAtlas.Inference.not_mutually_deviceIntelligible_of_finite",
+            "AISafetyAtlas.Inference.not_both_concl_intelligible",
+            "AISafetyAtlas.Inference.exists_not_corrects",
+            "AISafetyAtlas.Inference.setupMass",
+            "AISafetyAtlas.Inference.cellAgreeProb",
+            "AISafetyAtlas.Inference.prop6QuadrupleOf",
+            "AISafetyAtlas.Inference.eq_of_apply_eq_of_card_eq",
+            "AISafetyAtlas.Inference.mutualInfo_nonneg",
+            "AISafetyAtlas.Inference.mutualInfo_le_add",
+            "AISafetyAtlas.Inference.gibbs_cell",
+            "AISafetyAtlas.Inference.sum_pushOnImage",
+            "AISafetyAtlas.Inference.pushOnImage_marginal"
+          ],
+          "build_command": "lake build AISafetyAtlas.Inference AISafetyAtlas.Examples.Inference.Device",
+          "scope_delta": {
+            "summary": "Wolpert 2008 (survey-ref-005) only, read from arXiv:0708.1362v2 and cross-checked statement by statement against the published Physica D 237(9):1257-1281 article. All 46 tracked statements (the numbered inventory plus Theorem 2's unnumbered third sentence) have Lean declarations and per-item statuses in docs/provenance/wolpert-inference-devices.md: 42 SOURCE-EXACT, 1 SPECIALIZED, 2 REPAIRED, 0 ASSUMED-STEP, 1 REFUTED, 0 unmechanized. RELATED is retained because the row cites three other untranscribed works and because the transcription includes repairs, specializations and one machine-checked refutation. Proposition 6 no longer assumes any step of its source proof: mutualInfo_eq_zero_iff proves the equality case of Gibbs inequality, so statisticallyIndependent_of_miDistinguishability_eq_one derives the sentence the paper asserts without proof, and prop6_half_of_miDistinguishability_eq_one proves the 1/4 bound from the printed mutual-information-distinguishability-one premise. It stays SPECIALIZED for finiteness and for two side conditions the printed statement leaves implicit: positive mass on the four setup fibres, and nonvanishing total setup entropy. Corollary 1(ii) is false as printed and is refuted; its proof requires the proper subset W that the statement omits. Proposition 7 is repaired because the paper's displayed witness is not a Definition 12 device; the Atlas witness satisfies the relaxed Lean device model but not the paper's separate global convention that each function in a reality have at least two image values. Corollary 5 drops a source hypothesis made vacuous by Theorem 1. The finite specializations are Definition 6, Theorem 4, Proposition 4 and Theorem 7(i); other representational scope differences are recorded item by item. FullReality now preserves the source's nonempty-family premise. Both halves of Theorem 6 have executable witnesses. Definitions 9-11 use a finite probability mass function; section 8 remains a local finite/discrete formalization with no PFR dependency. All encoding readings, source defects, omitted prose definitions and boundary conventions are recorded in docs/provenance/wolpert-2008-source-clashes.md. The deterministic impossibility results remain fully general over arbitrary U. Nothing in the Lean layer establishes the paper's physical-worldline interpretation of U.",
+            "evidence": "docs/provenance/wolpert-inference-devices.md"
+          }
+        }
+      ],
       "lean_artifact": null,
+      "public": {
+        "group": "What an observer can recover",
+        "title": "Physical limits on inference",
+        "summary": "No device inside a system can answer every question about that system, no two distinguishable devices can each infer the other, and no two devices can each emulate the other.",
+        "use": "Holds for any observation, prediction or recollection device, whatever the physical laws; control inherits every limit.",
+        "attribution": "Wolpert"
+      },
       "ai_safety_relevance": "The survey identifies this result as relevant to limits on AI; no direct real-system implication is asserted here.",
       "ai_bridge_status": "HUMAN_REVIEW",
-      "notes": "Statement-level equivalence to each cited source remains subject to source comparison.",
+      "notes": "Wolpert 2008 is graded RELATED. The published article's 46 tracked statements are covered at per-item status 42 SOURCE-EXACT, 1 SPECIALIZED, 2 REPAIRED, 0 ASSUMED-STEP and 1 REFUTED; the complete map is docs/provenance/wolpert-inference-devices.md. Proposition 6 is proved from its printed premise, the equality case of Gibbs inequality having closed the step the paper asserts without derivation. Corollary 1(ii) is machine-refuted as written. Proposition 7 is repaired under an explicitly relaxed global image convention. Corollary 3(ii) is both directions under mutual semi-control, not Theorem 3. Section 8 is finite/discrete and adds no PFR dependency. Weak inference and Knowledge.Knowable are incomparable, with both countermodels exhibited. The other three cited works remain untranscribed, and nothing here makes U a set of physical worldlines. Definition 9 dropped the measurability of the setup map, the last atlas-added condition on it, once nonemptiness of the maximizing set was derived from sub-additivity rather than from exact additivity; the source states no measurability anywhere. The row remains SPECIALIZED for a different restriction, the finite setup range, and that one is genuinely removable: the printed max is over conditional expectations bounded in [-1, 1], so a supremum denotes on any setup range.",
       "formal_library_search": {
         "searched_on": "2026-07-28",
         "evidence_file": "docs/provenance/formalization-search.json",
@@ -3284,6 +3410,340 @@
       }
     },
     {
+      "id": "CLM-WOLPERT-KNOW-001",
+      "name": "Physical knowledge by inference devices",
+      "informal_claim": "A device physically knows a realized target value over a set W when one selector of realized setup blocks answers every target probe correctly and has the required nonempty true/false intersections with W. This entails weak inference; on a W that refines a Boolean target it is truthful and cannot affirm both values; and every device has a Boolean target it physically knows at no value over any W.",
+      "original_source_refs": [
+        "survey-ref-054"
+      ],
+      "related_result_ids": [
+        "BY-024",
+        "LAND-KNOW-001"
+      ],
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE",
+          "module": "AISafetyAtlas.Inference.PhysicalKnowledge",
+          "atlas_module": "AISafetyAtlas.Inference",
+          "relationship": "EQUIVALENT",
+          "reproduced": true,
+          "license": "Apache-2.0",
+          "build_environment": "leanprover/lean4:v4.31.0; Mathlib fabf563a7c95a166b8d7b6efca11c8b4dc9d911f; atlas IN_TREE",
+          "declarations": [
+            "AISafetyAtlas.Inference.ImageValue",
+            "AISafetyAtlas.Inference.SetupBlock",
+            "AISafetyAtlas.Inference.PhysicalKnowledgeWitness",
+            "AISafetyAtlas.Inference.PhysicallyKnows",
+            "AISafetyAtlas.Inference.PhysicalKnowledgeWitness.weaklyInfers",
+            "AISafetyAtlas.Inference.PhysicallyKnows.weaklyInfers",
+            "AISafetyAtlas.Inference.RefinesOn",
+            "AISafetyAtlas.Inference.PhysicalKnowledgeWitness.eq_target_of_mem_knownBlock",
+            "AISafetyAtlas.Inference.PhysicalKnowledgeWitness.eq_target_on_of_refinesOn",
+            "AISafetyAtlas.Inference.PhysicalKnowledgeWitness.negate",
+            "AISafetyAtlas.Inference.PhysicallyKnows.negate",
+            "AISafetyAtlas.Inference.physicallyKnows_false_iff_not_true",
+            "AISafetyAtlas.Inference.true_on_of_physicallyKnows_true",
+            "AISafetyAtlas.Inference.false_on_of_physicallyKnows_false",
+            "AISafetyAtlas.Inference.not_physicallyKnows_true_and_false",
+            "AISafetyAtlas.Inference.exists_never_physicallyKnown"
+          ],
+          "build_command": "lake build AISafetyAtlas.Inference.PhysicalKnowledge AISafetyAtlas.Examples.Inference.PhysicalKnowledge; python3 scripts/check_print_axioms.py",
+          "scope_delta": {
+            "summary": "Source-facing transcription of Wolpert 2018 Definition 11, the immediate weak-inference consequence, Lemma 17, Proposition 18, Corollary 19 and Corollary 22. The source's image Gamma(U) is a subtype of realized target values; its setup partition is represented by realized setup labels, which label exactly the same fibres. Bool renames the source's two-valued conclusion set, and clause (i) is expressed as Y(u)=true iff Gamma(u)=gamma rather than by a Kronecker probe, avoiding a decidable-equality restriction. No finiteness, probability, topology or physical-worldline structure is added. This row covers only the named first cluster, not the remainder of the 2018 paper.",
+            "evidence": "docs/provenance/wolpert-2018-knowledge.md"
+          }
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Inference.PhysicallyKnows.weaklyInfers",
+            "type": "NEW_PROOF",
+            "source_declarations": []
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Inference.PhysicalKnowledgeWitness.eq_target_on_of_refinesOn",
+            "type": "NEW_PROOF",
+            "source_declarations": []
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Inference.physicallyKnows_false_iff_not_true",
+            "type": "NEW_PROOF",
+            "source_declarations": []
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Inference.not_physicallyKnows_true_and_false",
+            "type": "NEW_PROOF",
+            "source_declarations": []
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Inference.exists_never_physicallyKnown",
+            "type": "NEW_PROOF",
+            "source_declarations": []
+          }
+        ]
+      },
+      "ai_safety_relevance": "A formal vocabulary for device-relative knowledge and its limits. Applying it to an AI system requires an explicit model of worlds, configuration, conclusion, and the context set W; the Lean definition alone supplies none of those interpretations.",
+      "ai_bridge_status": "HUMAN_REVIEW",
+      "notes": "EQUIVALENT transcription of the first physical-knowledge cluster in Wolpert 2018, read from arXiv:1711.03499v3. The encoding preserves the selector over realized target values, the setup-partition blocks, the global correctness clause and both nonempty W-intersection clauses. The executable Bool-pair example witnesses all Definition 11 obligations. This predicate is not Knowledge.Knowable: physical knowledge chooses a setup block per target probe, whereas Knowable requires one decoder uniformly over all states. No bridge between those notions, no S4/S5 claim, and no actual-device interpretation is asserted. Corollaries 20-24 are owned by CLM-WOLPERT-EPISTEMIC-001; the defects in Corollaries 21(ii) and 25 are owned by LAND-WOLPERT-KNOW-DEFECTS-001. Inference complexity, Kraft and entropy remain outside this row.",
+      "tags": [
+        "interpretability"
+      ],
+      "public": {
+        "group": "What an observer can recover",
+        "summary": "Knowing a fact requires more than producing the right bit: one selected configuration per alternative must answer correctly, and the claimed case must actually occur in context.",
+        "use": "A precise device-level account of knowledge, truthfulness and an unavoidable unknown target.",
+        "title": "Physical knowledge",
+        "attribution": "Wolpert"
+      }
+    },
+    {
+      "id": "CLM-WOLPERT-EPISTEMIC-001",
+      "name": "Epistemic consequences of physical knowledge",
+      "informal_claim": "For Wolpert's physical-knowledge predicate, knowledge is truth-preserving under the stated context-refinement hypotheses but is not logically omniscient: known premises can force a consequence to be true without making it known. Distinguishability also prevents mutual knowledge of conclusions and, under the Corollary 24 hypotheses, forces at least three inequivalent binary targets to remain unknown.",
+      "original_source_refs": [
+        "survey-ref-054"
+      ],
+      "related_result_ids": [
+        "CLM-WOLPERT-KNOW-001",
+        "BY-024",
+        "LAND-WOLPERT-KNOW-DEFECTS-001"
+      ],
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE",
+          "module": "AISafetyAtlas.Inference.PhysicalKnowledge.Epistemic",
+          "atlas_module": "AISafetyAtlas.Inference",
+          "relationship": "EQUIVALENT",
+          "reproduced": true,
+          "license": "Apache-2.0",
+          "build_environment": "leanprover/lean4:v4.31.0; Mathlib fabf563a7c95a166b8d7b6efca11c8b4dc9d911f; atlas IN_TREE",
+          "declarations": [
+            "AISafetyAtlas.Inference.boolImplies",
+            "AISafetyAtlas.Inference.TrueOn",
+            "AISafetyAtlas.Inference.corollary20_i",
+            "AISafetyAtlas.Inference.corollary20_ii",
+            "AISafetyAtlas.Inference.corollary20_iii",
+            "AISafetyAtlas.Inference.corollary20_iv",
+            "AISafetyAtlas.Inference.corollary21_i",
+            "AISafetyAtlas.Inference.FunctionallyEquivalent",
+            "AISafetyAtlas.Inference.exists_three_inequivalent_not_weaklyInfers",
+            "AISafetyAtlas.Inference.corollary23",
+            "AISafetyAtlas.Inference.corollary24"
+          ],
+          "build_command": "lake build AISafetyAtlas.Inference.PhysicalKnowledge.Epistemic AISafetyAtlas.Examples.Inference.PhysicalKnowledge.Epistemic; python3 scripts/check_print_axioms.py",
+          "scope_delta": {
+            "summary": "Source-facing transcription of Wolpert 2018 Corollaries 20(i-iv), 21(i), 23 and 24, together with the earlier Corollary 3 engine used by Corollary 24 and an executable version of Example 9. Bool replaces the source's two truth values; Corollary 20(iv) is zero-indexed. The source assumes countable U for this epistemic subsection, but these proofs do not use countability, so Lean is more general. Every W-refinement and distinguishability premise is explicit. This row deliberately excludes the false printed Corollary 21(ii) and Corollary 25, which are separately machine-audited, and makes no blanket S4 or S5 claim.",
+            "evidence": "docs/provenance/wolpert-2018-knowledge.md"
+          }
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Inference.corollary20_ii",
+            "type": "NEW_PROOF",
+            "source_declarations": []
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Inference.exists_three_inequivalent_not_weaklyInfers",
+            "type": "NEW_PROOF",
+            "source_declarations": []
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Inference.corollary23",
+            "type": "NEW_PROOF",
+            "source_declarations": []
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Inference.corollary24",
+            "type": "NEW_PROOF",
+            "source_declarations": []
+          }
+        ]
+      },
+      "ai_safety_relevance": "Separates truth from knowledge in a device model: deductive consequences may hold in the relevant context without becoming physically known. Applying this to an AI requires a separate model of worlds, setups, conclusions and the context W.",
+      "ai_bridge_status": "HUMAN_REVIEW",
+      "notes": "EQUIVALENT only for the named sound cluster, not for Wolpert 2018 as a whole. The executable Example 9 model proves that distribution fails even while both premises are physically known. The existing row/column device model inhabits Corollary 3, and a source-faithful physical-knowledge certificate inhabits the full Corollary 24 premise. Corollary 21(ii) and Corollary 25 are not hidden inside this grade: the first has a valid repaired theorem plus countermodel, and the second is audited under the paper's own equation (11).",
+      "tags": [
+        "interpretability",
+        "provability-logic"
+      ],
+      "public": {
+        "group": "Limits of self-knowledge and reflection",
+        "summary": "Knowing premises can make a conclusion true without making it known.",
+        "use": "Separating truthful reasoning from logical omniscience in embedded devices.",
+        "title": "Physical knowledge is not omniscience",
+        "attribution": "Wolpert"
+      }
+    },
+    {
+      "id": "CLM-WOLPERT-APPROX-001",
+      "name": "Bounds on inference accuracy, and the collapse of the exact limits",
+      "informal_claim": "A target attaining at least three values is weakly inferred by some device, which is the hypothesis the 2008 corollary omits and the 2018 restatement supplies. Covariance accuracy is bounded below by a term depending only on the number of target values times the device's inference power, so for a binary target it is never negative. Under that accuracy both the mutual-inference theorem and the strong-inference inheritance theorem hold only exactly: two setup-distinguishable devices can each infer the other to within any positive epsilon, and a device can strongly infer another that infers a target almost perfectly while itself inferring that target with accuracy exactly zero.",
+      "original_source_refs": [
+        "survey-ref-054"
+      ],
+      "related_result_ids": [
+        "BY-024",
+        "CLM-WOLPERT-KNOW-001"
+      ],
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE",
+          "module": "AISafetyAtlas.Inference.Existence",
+          "atlas_module": "AISafetyAtlas.Inference",
+          "relationship": "EQUIVALENT",
+          "reproduced": true,
+          "license": "Apache-2.0",
+          "build_environment": "leanprover/lean4:v4.31.0; Mathlib fabf563a7c95a166b8d7b6efca11c8b4dc9d911f; atlas IN_TREE",
+          "declarations": [
+            "AISafetyAtlas.Inference.identityDevice",
+            "AISafetyAtlas.Inference.identityDevice_weaklyInfers",
+            "AISafetyAtlas.Inference.exists_weaklyInfers_of_three_values",
+            "AISafetyAtlas.Inference.inferenceAccuracy_ge",
+            "AISafetyAtlas.Inference.inferenceAccuracy_nonneg_of_card_eq_two",
+            "AISafetyAtlas.Inference.fig5_stronglyInfers",
+            "AISafetyAtlas.Inference.fig5_accuracy_dev1",
+            "AISafetyAtlas.Inference.fig5_accuracy_dev2",
+            "AISafetyAtlas.Inference.fig5_accuracy_gap",
+            "AISafetyAtlas.Inference.fig6_distinguishable",
+            "AISafetyAtlas.Inference.fig6_accuracy_dev1",
+            "AISafetyAtlas.Inference.fig6_accuracy_dev2",
+            "AISafetyAtlas.Inference.fig6_accuracy_near_one",
+            "AISafetyAtlas.Inference.exists_distinguishable_accuracy_near_one",
+            "AISafetyAtlas.Inference.StronglyInfersPair",
+            "AISafetyAtlas.Inference.not_stronglyInfersPair_id",
+            "AISafetyAtlas.Inference.exists_pair_not_stronglyInfers",
+            "AISafetyAtlas.Inference.recursive_iff_refines",
+            "AISafetyAtlas.Inference.PrefixFree",
+            "AISafetyAtlas.Inference.prop11_of_independent",
+            "AISafetyAtlas.Inference.exists_complexity_inversion",
+            "AISafetyAtlas.Inference.inv_complexity",
+            "AISafetyAtlas.Inference.inv_complexity'"
+          ],
+          "build_command": "lake build AISafetyAtlas.Inference.Existence AISafetyAtlas.Inference.Stochastic.Bounds AISafetyAtlas.Inference.Stochastic.Approximation AISafetyAtlas.Examples.Inference.Existence AISafetyAtlas.Examples.Inference.StochasticBounds AISafetyAtlas.Examples.Inference.StochasticApproximation; python3 scripts/check_print_axioms.py",
+          "scope_delta": {
+            "summary": "Wolpert 2018 Propositions 7(1), 8, 9 and 10 - the section III results that are not restatements of the 2008 paper. Proposition 7(1) is proved without either standing hypothesis it is printed under: countability of U is used nowhere, and |U| >= 2 follows from the target attaining three values. Its hypothesis is shown to be sharp rather than asserted to be: two values is exactly the 2008 Corollary 1(ii) countermodel. Proposition 8 is proved without assuming the realized image is nonempty, which follows from concl_surjective. Propositions 9 and 10 are proved sharper than printed - Figures 5 and 6 are transcribed state by state and the covariance accuracies are computed as exact identities in the figure's parameter, p and (1-6b)/(1-4b) respectively, so the printed 'arbitrarily close to' claims follow from algebra rather than from estimates, and the parameter achieving a given epsilon is named outright in each case. The Definition 9 accuracy carries the finite FinPMF and positive-fibre-mass conditions of the 2008 stochastic layer.",
+            "excluded": "This row does not cover Wolpert 2018 Example 6, the sharpness construction for Proposition 8, or the weaker knowledge operator raised in prose after Example 9. Definition 7 is SPECIALIZED for finite rather than countable ranges and for the absence of a semi-measure type. Proposition 12 is REFUTED and is owned by LAND-WOLPERT-KNOW-DEFECTS-001. The complete accounting is the closed inventory in docs/provenance/wolpert-2018-knowledge.md, enforced over every source item by scripts/check_wolpert_2018_status_table.py."
+          }
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Inference.identityDevice_weaklyInfers",
+            "type": "NEW_PROOF",
+            "source_declarations": []
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Inference.exists_weaklyInfers_of_three_values",
+            "type": "NEW_PROOF",
+            "source_declarations": []
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Inference.inferenceAccuracy_ge",
+            "type": "NEW_PROOF",
+            "source_declarations": []
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Inference.fig5_accuracy_gap",
+            "type": "NEW_PROOF",
+            "source_declarations": []
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Inference.exists_distinguishable_accuracy_near_one",
+            "type": "NEW_PROOF",
+            "source_declarations": []
+          }
+        ]
+      },
+      "ai_safety_relevance": "The impossibility result the survey cites for this cluster is a statement about exact inference. Proposition 10 measures what it costs to relax that: nothing about it survives approximation, so no claim about approximate or noisy observers may be inherited from it. Applying either result to an AI system still requires a separate model of universes, setups and conclusions.",
+      "ai_bridge_status": "HUMAN_REVIEW",
+      "notes": "EQUIVALENT for the four named propositions only, not for Wolpert 2018 section III as a whole; the excluded items are listed in scope_delta and tracked row by row in the provenance inventory. Proposition 7(1) supplies the hypothesis missing from 2008 Corollary 1(ii), which BY-024 records as REFUTED: the author repaired his own corollary ten years later, and the atlas countermodel sits at exactly the excluded cardinality. That agreement is clash 20 and does not change the REFUTED grade, because the 2008 statement is still false as printed. Propositions 9 and 10 are stated beside the deterministic theorems they qualify rather than instead of them: weaklyInfers_of_stronglyInfers and not_infersDevice_both_of_distinguishable both still hold for the very devices of Figures 5 and 6.",
+      "tags": [
+        "information-theory"
+      ],
+      "public": {
+        "group": "What an observer can recover",
+        "title": "Approximate inference escapes the exact limit",
+        "summary": "Two observers that cannot each infer the other exactly can each infer the other to any accuracy short of certainty; an observer that can reproduce another observer inherits none of its accuracy; and a question with at least three answers always has some observer that answers it.",
+        "use": "Fixes what the observation limits do and do not rule out once observation is noisy, gives the cardinality condition under which an inferring device is guaranteed to exist, and bounds how low inference accuracy can go.",
+        "attribution": "Wolpert"
+      }
+    },
+    {
+      "id": "LAND-WOLPERT-KNOW-DEFECTS-001",
+      "name": "Countermodels to Wolpert 2018 epistemic claims",
+      "tags": [
+        "interpretability",
+        "provability-logic"
+      ],
+      "notes": "Machine-checked audit artifacts for two defective printed claims in arXiv:1711.03499v3. Corollary 21(ii)'s second disjunct is refuted by an inhabited Boolean model; corollary21_ii_repaired proves the valid successive-implication weakening. Equation (11) is transcribed literally as KnowledgeEvent. For the four-state Definition 11 observer it yields the universal event. Under the paper's standing two-valued-target convention that characteristic is inadmissibly constant, so Corollary 25 is not closed under its own construction; under the natural singleton-image extension implemented by Definition 11, the observer cannot know the universal event and positive introspection is false. These findings are not an EQUIVALENT claim for the defective source statements. Wolpert 2018 Proposition 12 is a third machine-refuted printed claim, added here: C_mu(Gamma; D) <= |Gamma| x H_mu(X) fails on a four-state model meeting every printed hypothesis, by exactly (ln 3)/2. prop12_gap is an identity, so the refutation does not rest on a numeric estimate. The printed proof's final step compares two sums term by term and needs mu(x) >= 1/|Gamma| at every setup value, which the statement does not assume. Recorded as clash 23. Wolpert 2018 Example 6 is a fourth machine-refuted printed claim. Its sharpness claim for Proposition 8's bound is false: the construction's central identity is correct and verified, but the step after it pulls the factor (2 - |Gamma(U)|)/|Gamma(U)| out of a maximum, which is valid only when that factor is nonnegative. For |Gamma(U)| >= 3 it is negative and the maximum moves to the minimum of E_P(Y | x). On a twelve-state instance of the source's own recipe with non-constant inference power the accuracy is 0 while the bound is -1/9, so the bound is strictly not attained; Proposition 8 itself still holds there. Recorded as clash 25.",
+      "original_source_refs": [
+        "survey-ref-054"
+      ],
+      "related_result_ids": [
+        "CLM-WOLPERT-KNOW-001",
+        "CLM-WOLPERT-EPISTEMIC-001"
+      ],
+      "root_import": true,
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE",
+          "license": "Apache-2.0",
+          "reproduced": true,
+          "build_environment": "leanprover/lean4:v4.31.0; Mathlib fabf563a7c95a166b8d7b6efca11c8b4dc9d911f; atlas IN_TREE",
+          "declarations": [
+            "AISafetyAtlas.Inference.corollary21_ii_repaired",
+            "AISafetyAtlas.Inference.KnowsEvent",
+            "AISafetyAtlas.Inference.KnowledgeEvent",
+            "AISafetyAtlas.Inference.PositiveIntrospection",
+            "AISafetyAtlas.Examples.Inference.PhysicalKnowledge.Epistemic.corollary21_ii_counterexample",
+            "AISafetyAtlas.Examples.Inference.PhysicalKnowledge.Event.not_positiveIntrospection_observer",
+            "AISafetyAtlas.Inference.prop12_refuted",
+            "AISafetyAtlas.Inference.prop12_gap",
+            "AISafetyAtlas.Inference.prop12_complexity",
+            "AISafetyAtlas.Inference.prop12_entropy",
+            "AISafetyAtlas.Inference.prop12Device",
+            "AISafetyAtlas.Inference.prop12_weaklyInfers",
+            "AISafetyAtlas.Inference.ex6_accuracy",
+            "AISafetyAtlas.Inference.ex6_prop8_bound",
+            "AISafetyAtlas.Inference.ex6_bound_not_attained",
+            "AISafetyAtlas.Inference.ex6_prop8_holds",
+            "AISafetyAtlas.Inference.ex6Device",
+            "AISafetyAtlas.Inference.ex6PMF"
+          ],
+          "module": "AISafetyAtlas.Inference.PhysicalKnowledge.Event",
+          "build_command": "lake build AISafetyAtlas.Inference.PhysicalKnowledge.Event AISafetyAtlas.Examples.Inference.PhysicalKnowledge.Epistemic AISafetyAtlas.Examples.Inference.PhysicalKnowledge.Event"
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Inference.corollary21_ii_repaired",
+            "type": "NEW_PROOF",
+            "source_declarations": []
+          }
+        ]
+      },
+      "public": {
+        "group": "Limits of self-knowledge and reflection",
+        "summary": "Two tempting epistemic closure claims fail in the source's own device model.",
+        "use": "Executable countermodels prevent false logical-omniscience and positive-introspection claims from entering the API.",
+        "title": "Physical-knowledge boundary cases",
+        "attribution": "Atlas audit of Wolpert 2018"
+      }
+    },
+    {
       "id": "CLM-LAWVERE-001",
       "name": "Lawvere fixed-point theorem (types and functions)",
       "informal_claim": "If a function f : α → (α → β) is surjective, then every endofunction g : β → β has a fixed point.",
@@ -3965,7 +4425,7 @@
       "tags": [
         "agent-incentives"
       ],
-      "notes": "Everitt-Filan-Daswani-Hutter (2016), Theorem 16, at two abstraction levels. GoalPreservationSource is the headline finite-percept one-step argument: it drops the atlas's earlier naming-surjectivity premise, compares the selected continuation only with the named initial policy, and uses a normalized full-support percept distribution to turn a strict pointwise loss into a strict expected loss. It is not the full or source-strength Theorem 16. initial_dominates and contValue are supplied rather than derived from modification independence and the source's Theorem 20; policy names and policies are not separated by an explicit naming map; expectations are finite discrete sums rather than integrals; and no all-times trajectory theorem is proved. SixTargets.finitePerceptGoalModel witnesses the interface with two percepts, a uniform full-support distribution, and a genuinely dominated continuation. The older deterministic GoalPreservation model is retained as a stronger-assumption specialization: next_policy_optimal is its load-bearing statement, run_optimal lifts it along the reached path, and goal_preservation is a corollary. Its names_surjective premise forces an infinite policy-name type with at least two world actions; SixTargets.twoActionGoalModel witnesses satisfiability. RELATED only; no off-policy preservation or AI-system bridge is claimed. Supporting self-modification theorem; no direct Table-1 coverage.",
+      "notes": "Everitt-Filan-Daswani-Hutter, AGI 2016, LNCS 9782, Theorem 12, at two abstraction levels. VERSION: the published chapter is canonical for statements and proves nothing, delegating every proof to the technical report arXiv:1605.03142, whose Theorem 16 is word-for-word the published Theorem 12 and is what older atlas notes cite. The optimal-policy-existence result those notes call Theorem 20 lives in the report's Appendix A and is invoked as the first step of the report's own proof, so the gap recorded here is real against the only proof that exists. GoalPreservationSource is the headline finite-percept one-step argument: it drops the atlas's earlier naming-surjectivity premise, compares the selected continuation only with the named initial policy, and uses a normalized full-support percept distribution to turn a strict pointwise loss into a strict expected loss. It is not the full or source-strength Theorem 16. initial_dominates and contValue are supplied rather than derived from modification independence and the source's Theorem 20; policy names and policies are not separated by an explicit naming map; expectations are finite discrete sums rather than integrals; and no all-times trajectory theorem is proved. SixTargets.finitePerceptGoalModel witnesses the interface with two percepts, a uniform full-support distribution, and a genuinely dominated continuation. The older deterministic GoalPreservation model is retained as a stronger-assumption specialization: next_policy_optimal is its load-bearing statement, run_optimal lifts it along the reached path, and goal_preservation is a corollary. Its names_surjective premise forces an infinite policy-name type with at least two world actions; SixTargets.twoActionGoalModel witnesses satisfiability. RELATED only; no off-policy preservation or AI-system bridge is claimed. Supporting self-modification theorem; no direct Table-1 coverage.",
       "original_source_refs": [
         "atlas-ref-everitt-2016-self-modification"
       ],
@@ -3991,7 +4451,7 @@
           "module": "AISafetyAtlas.Wireheading.GoalPreservationSource",
           "build_command": "lake build AISafetyAtlas.Wireheading.GoalPreservation AISafetyAtlas.Wireheading.GoalPreservationSource",
           "scope_delta": {
-            "summary": "A finite-percept one-step induction step, not source-strength Theorem 16. `initial_dominates` and the continuation value are assumed rather than derived from modification independence and the source's Theorem 20; policy names and policies are not separated by an explicit naming map; expectations are finite discrete sums rather than integrals; no all-times trajectory theorem is proved.",
+            "summary": "A finite-percept one-step induction step, not source-strength published Theorem 12 (technical-report Theorem 16). `initial_dominates` and the continuation value are assumed rather than derived from modification independence and the technical report's Appendix-A Theorem 20, which the source's own proof invokes first and the published chapter prints no proof of; policy names and policies are not separated by an explicit naming map; expectations are finite discrete sums rather than integrals; no all-times trajectory theorem is proved.",
             "evidence": "docs/provenance/a1-a3-b1-b3-b7-reverification.md"
           }
         }
@@ -4009,7 +4469,7 @@
               "run_optimal",
               "goal_preservation"
             ],
-            "application": "Goal preservation: a rational agent's one-step self-modification selects a continuation matching its initial goal. Finite-percept induction step of Theorem 16 of Everitt, Filan, Daswani and Hutter (2016)."
+            "application": "Goal preservation: a rational agent's one-step self-modification selects a continuation matching its initial goal. Finite-percept induction step of Theorem 12 of Everitt, Filan, Daswani and Hutter, AGI 2016, LNCS 9782 (Theorem 16 of the technical report arXiv:1605.03142, which is where its proof lives)."
           }
         ]
       },
@@ -4029,7 +4489,7 @@
         "multi-agent"
       ],
       "result_shape": "CHARACTERIZATION",
-      "notes": "When a hazard can be decided from what a coalition of principals is permitted to observe. EvidenceArchitecture separates private evidence from declared emitted views, and CoalitionInput enforces coalition access in the type of a candidate computation. Since the LAND-KNOW-001 kernel landed, Covers is definitionally Knowable q.observe and Refines is Determines, so the coverage laws are the generic kernel applied to q.observe rather than separate arguments, with every statement and axiom profile unchanged. What remains coalition-specific is the evidence architecture, the typed coalition restriction, the collision certificate, the certified finite checker decideCoverage over an explicit execution enumeration, and the bounded portfolio target with its inclusion-minimal and cost-optimal notions. Two worked architectures exhibit the failures and one narrow joint success. This is checked target semantics, not a synthesizer: nothing generates candidates, searches a mechanism library, or validates the cost model. Everything holds under the fixed truthful mechanism M0; no strategic, permissibility or normative safety claim follows.",
+      "notes": "When a hazard can be decided from what a coalition of principals is permitted to observe. EvidenceArchitecture separates private evidence from declared emitted views, and CoalitionInput enforces coalition access in the type of a candidate computation. Since the LAND-KNOW-001 kernel landed, Covers is definitionally Knowable q.observe and Refines is Determines, so the coverage laws are the generic kernel applied to q.observe rather than separate arguments, with every statement and axiom profile unchanged. What remains coalition-specific is the evidence architecture, the typed coalition restriction, the collision certificate, the certified finite checker decideCoverage over an explicit execution enumeration, and the bounded portfolio target with its inclusion-minimal and cost-optimal notions. Two worked architectures exhibit the failures and one narrow joint success. This is checked target semantics, not a synthesizer: nothing generates candidates, searches a mechanism library, or validates the cost model. Residual adds the distribution-free quantitative face of coverage: worstResidual counts how many target values the worst single output still leaves open, covers_iff_worstResidual_le_one identifies coverage with the residual-at-most-one case, and worstResidual_le_postprocess is the repair boundary as a comparable number. Residual counts executions and never weighs them, so there is no probability, prior, expectation or entropy anywhere in it. A residual of one fixes every state-attribution question; it says nothing about whether a principal reported honestly. Everything holds under the fixed truthful mechanism M0; no strategic, permissibility, accountability or normative safety claim follows.",
       "original_source_refs": [],
       "related_result_ids": [
         "LAND-KNOW-001"
@@ -4067,7 +4527,12 @@
             "InclusionMinimalCovering",
             "PortfolioCost",
             "CostOptimalCovering",
-            "inclusionMinimal_of_costOptimal"
+            "inclusionMinimal_of_costOptimal",
+            "residual",
+            "worstResidual",
+            "covers_iff_worstResidual_le_one",
+            "covers_iff_residual_le_one",
+            "worstResidual_le_postprocess"
           ],
           "module": "AISafetyAtlas.Oversight.JointObservation",
           "build_command": "lake build AISafetyAtlas.Oversight.JointObservation AISafetyAtlas.Examples.Oversight.JointObservation.Procurement AISafetyAtlas.Examples.Oversight.JointObservation.Portfolio"
@@ -4290,7 +4755,7 @@
         "oversight"
       ],
       "result_shape": "CHARACTERIZATION",
-      "notes": "Quantitative refinement of LAND-KNOW-001 on finite state spaces. ambiguity r f i counts the distinct target values still possible once the observation reads i; 1 is exact knowledge, 0 marks an observation value nothing realizes, and larger is the shortfall. The exactness condition is at most one rather than exactly one, because requiring equality would make every model with an unreachable observation value unknowable. knowable_iff_ambiguity_le_one is recorded and labelled a BRIDGE, not a result: it is knowable_iff_no_collision in counting form, and a module stopping there would be a cardinality wrapper around a theorem the kernel already proves. The content is the two bounds. card_image_le_of_knowable says a knowable target needs an observation with at least as many distinct outcomes as the target has values — a counting obstruction that never names a colliding pair, with not_knowable_of_card_lt as the usable contrapositive. ambiguity_le_of_comp says post-processing never decreases ambiguity anywhere, which upgrades not_knowable_comp from 'the yes/no answer cannot be repaired' to 'the shortfall never shrinks'. AISafetyAtlas.Examples.Knowledge.Ambiguity keeps the bounds honest with three models: the counting test firing where no pair is exhibited; a model where both cardinalities are 2 and the target is still unknowable, so the counting test is sufficient and never necessary; and a strict increase of ambiguity under coarsening, so the monotonicity bound is not an equality in disguise. Every declaration here is classical, inherited from Mathlib's Finset and Fintype development rather than from the statements, which differs from the axiom-free kernel core and is recorded in the module. Explicit non-claims: this counts possibilities and does not weigh them. There is no probability, entropy, rate or measure. A conditional-entropy treatment would need Shannon entropy over general probability spaces, which the pinned Mathlib does not carry — it has topological entropy, binary entropy and Kullback-Leibler divergence, and no conditional Shannon entropy — so that is a separate foundation, not an extension of this module. No AI-system reading follows without a separate reviewed bridge.",
+      "notes": "Quantitative refinement of LAND-KNOW-001 on finite state spaces. ambiguity r f i counts the distinct target values still possible once the observation reads i; 1 is exact knowledge, 0 marks an observation value nothing realizes, and larger is the shortfall. The exactness condition is at most one rather than exactly one, because requiring equality would make every model with an unreachable observation value unknowable. knowable_iff_ambiguity_le_one is recorded and labelled a BRIDGE, not a result: it is knowable_iff_no_collision in counting form, and a module stopping there would be a cardinality wrapper around a theorem the kernel already proves. The content is the two bounds. card_image_le_of_knowable says a knowable target needs an observation with at least as many distinct outcomes as the target has values — a counting obstruction that never names a colliding pair, with not_knowable_of_card_lt as the usable contrapositive. ambiguity_le_of_comp says post-processing never decreases ambiguity anywhere, which upgrades not_knowable_comp from 'the yes/no answer cannot be repaired' to 'the shortfall never shrinks'. AISafetyAtlas.Examples.Knowledge.Ambiguity keeps the bounds honest with three models: the counting test firing where no pair is exhibited; a model where both cardinalities are 2 and the target is still unknowable, so the counting test is sufficient and never necessary; and a strict increase of ambiguity under coarsening, so the monotonicity bound is not an equality in disguise. Every declaration here is classical, inherited from Mathlib's Finset and Fintype development rather than from the statements, which differs from the axiom-free kernel core and is recorded in the module. Explicit non-claims: this counts possibilities and does not weigh them. There is no probability, entropy, rate or measure. A conditional-entropy treatment would need Shannon entropy over general probability spaces, which the pinned Mathlib does not carry — it has topological entropy, binary entropy and Kullback-Leibler divergence, and no conditional Shannon entropy — so that is a separate foundation, not an extension of this module. worstAmbiguity condenses the per-value counts into one scalar per observation, which is what a consumer comparing two observations needs, and worstAmbiguity_le_of_comp carries the coarsening bound to that scalar. No AI-system reading follows without a separate reviewed bridge.",
       "original_source_refs": [],
       "related_result_ids": [
         "LAND-KNOW-001"
@@ -4323,7 +4788,12 @@
             "AISafetyAtlas.Knowledge.not_knowable_of_one_lt_ambiguity",
             "AISafetyAtlas.Knowledge.card_image_le_of_knowable",
             "AISafetyAtlas.Knowledge.not_knowable_of_card_lt",
-            "AISafetyAtlas.Knowledge.ambiguity_le_of_comp"
+            "AISafetyAtlas.Knowledge.ambiguity_le_of_comp",
+            "AISafetyAtlas.Knowledge.ambiguity_eq_zero_of_not_mem_image",
+            "AISafetyAtlas.Knowledge.worstAmbiguity",
+            "AISafetyAtlas.Knowledge.ambiguity_le_worstAmbiguity",
+            "AISafetyAtlas.Knowledge.knowable_iff_worstAmbiguity_le_one",
+            "AISafetyAtlas.Knowledge.worstAmbiguity_le_of_comp"
           ],
           "module": "AISafetyAtlas.Knowledge.Ambiguity",
           "atlas_module": "AISafetyAtlas.Knowledge.Ambiguity",
@@ -4915,6 +5385,91 @@
         "summary": "You can tell things apart only if they look different.",
         "use": "The shared core behind the observation results.",
         "title": "Knowability kernel",
+        "attribution": "Workbench infrastructure"
+      }
+    },
+    {
+      "id": "LAND-KNOW-DEVICE-001",
+      "name": "Transports between the knowability kernel and inference devices",
+      "tags": [
+        "information-theory",
+        "oversight"
+      ],
+      "result_shape": "INFRASTRUCTURE",
+      "notes": "Atlas modelling, not a claim of either Wolpert paper. LAND-KNOW-001's Knowable and BY-024's WeaklyInfers are not the same relation - that is a theorem of this development, witnessed both ways on finite models in Examples.Inference.Device, and Inference/Device.lean says so at length. Nothing here retracts it. What this row adds is the conditional half that was missing: the joint object is the device's own setup-and-conclusion pair read as a spine observation (deviceObservation), and an IndistinguishabilityWitness for that pair, lying inside a realized block, stops the block answering the probe. Present in every realized block and straddling the target value (BlockwiseCollision), it refutes Definition 3 and Definition 11 alike, and the physical-knowledge refutation holds for every context W because Definition 11's clause (i) constrains the whole selected block rather than its trace in W. The straddle clause is load-bearing rather than convenient: Examples.Knowledge.Devices exhibits an eight-state device whose every block carries a colliding pair with the target differing, and which weakly infers the target anyway, so the weakened hypothesis would be unsound rather than merely weaker. Travel in the other direction is one lemma: a device answering the probe in every realized block has its conclusion function equal to the probed target, so second projection decodes it. There is deliberately no Knowable-to-WeaklyInfers lemma and no iff between a collision-free block and an answering one; both fail, and the module docstring gives the countermodel for each. Axiom profile measured, not assumed: every refutation and the positive transport depend on no axioms at all, witnessAt reports propext, and the probe-free refutation reports the classical three because constructing a probe is where the choice sits. blockwiseCollision_of_knowable_concl discharges the hypothesis from two conditions an engineer can inspect without mentioning probes - the report factors through the setup, and no reachable configuration separates the value - and Examples.Oversight.Overseer runs both sides of that condition on one four-state system: an overseer whose report reads the world answers every probe while its report stream still does not determine the hazard, and an overseer whose report factors through its configuration is refuted at every configuration, every reconfiguration and every context. The first half is the non-obvious one: satisfying Definition 3 does not make the output decodable, because Definition 3 chooses the configuration per question while a decoder must work in all of them at once. AISafetyAtlas.Knowledge.Check supplies the executable half on the pattern FiniteDecision already sets for coverage - findCollision searches an enumeration for a witness, and the two agreement theorems are what make its output evidence rather than a report, with completeness of the enumeration a hypothesis rather than an instance because it is the whole content of the confirming direction. The lake exe atlas-check reads a finite model as JSON and prints the verdict with the declaration that certifies it; scripts/check_atlas_check.sh asserts that its answers on four shipped models match the Lean proofs in Examples.Oversight.Overseer for the same two devices. The output is what the kernel would give and not a proof term the kernel has checked for that instance, which the tool says itself. A coalition kind decides the joint-observation question over the same certified search, since Covers is definitionally Knowable on the coalition's observation; its shipped models mirror Examples.Oversight.JointObservation.Procurement and reproduce that file's documented failure witness independently. Every verdict reports the worst ambiguity alongside it, so a failing model states how far off it is rather than only that it failed.",
+      "original_source_refs": [],
+      "related_result_ids": [
+        "LAND-KNOW-001",
+        "BY-024"
+      ],
+      "relations": [
+        {
+          "target": "LAND-KNOW-001",
+          "kind": "BUILDS_ON",
+          "note": "Consumes IndistinguishabilityWitness as the object crossing the joint and produces Knowable in the positive direction; neither component of the device's pair suffices alone."
+        },
+        {
+          "target": "BY-024",
+          "kind": "BOUNDARY_PARTNER",
+          "note": "Model delta: Knowable asks one decoder to work at every state, while Definition 3 fixes the conclusion function and lets the choice of setup block vary with the probe. The quantifier alternation is why neither implies the other, and why the transports below are conditional rather than an identification."
+        }
+      ],
+      "root_import": true,
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE",
+          "license": "Apache-2.0",
+          "reproduced": true,
+          "build_environment": "leanprover/lean4:v4.31.0; Mathlib fabf563a7c95a166b8d7b6efca11c8b4dc9d911f; atlas IN_TREE",
+          "declarations": [
+            "AISafetyAtlas.Knowledge.Devices.deviceObservation",
+            "AISafetyAtlas.Knowledge.Devices.BlockAnswers",
+            "AISafetyAtlas.Knowledge.Devices.BlockwiseCollision",
+            "AISafetyAtlas.Knowledge.Devices.not_blockAnswers_of_witness",
+            "AISafetyAtlas.Knowledge.Devices.BlockwiseCollision.not_weaklyInfers",
+            "AISafetyAtlas.Knowledge.Devices.BlockwiseCollision.not_physicallyKnows",
+            "AISafetyAtlas.Knowledge.Devices.blockwiseCollision_of_knowable_concl",
+            "AISafetyAtlas.Knowledge.Devices.knowable_probe_of_forall_blockAnswers",
+            "AISafetyAtlas.Knowledge.Check.findCollision",
+            "AISafetyAtlas.Knowledge.Check.not_knowable_of_findCollision_eq_some",
+            "AISafetyAtlas.Knowledge.Check.knowable_of_findCollision_eq_none"
+          ],
+          "module": "AISafetyAtlas.Knowledge.Devices",
+          "atlas_module": "AISafetyAtlas.Knowledge.Devices",
+          "build_command": "lake build AISafetyAtlas.Knowledge.Devices"
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Knowledge.Devices.not_blockAnswers_of_witness",
+            "type": "NEW_PROOF",
+            "source_declarations": []
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Knowledge.Devices.BlockwiseCollision.not_weaklyInfers",
+            "type": "NEW_PROOF",
+            "source_declarations": []
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Knowledge.Devices.BlockwiseCollision.not_physicallyKnows",
+            "type": "NEW_PROOF",
+            "source_declarations": []
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Knowledge.Devices.knowable_probe_of_forall_blockAnswers",
+            "type": "NEW_PROOF",
+            "source_declarations": []
+          }
+        ]
+      },
+      "public": {
+        "group": "What an observer can recover",
+        "summary": "A device blind to the same distinction in every configuration it can reach cannot answer the question, and cannot know the answer either.",
+        "use": "Lets an oversight file apply a device impossibility without restating it, and says exactly when the two notions of recoverability do not connect.",
+        "title": "Knowability and inference devices",
         "attribution": "Workbench infrastructure"
       }
     },

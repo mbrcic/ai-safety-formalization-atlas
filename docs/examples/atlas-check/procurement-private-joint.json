@@ -1,0 +1,12 @@
+{
+  "_comment": "Mirrors Procurement.covers_qCD. Same four executions, but the coalition reads both principals' PRIVATE evidence rather than their declared interfaces. The checkpoint bit exists throughout and is simply never emitted.",
+  "schema": "atlas-check/1",
+  "kind": "coalition",
+  "states": 4,
+  "emitted": [
+    [0, 1, 0, 1],
+    [0, 0, 1, 1]
+  ],
+  "coalition": [0, 1],
+  "hazard": [false, false, false, true]
+}

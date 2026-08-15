@@ -22,13 +22,13 @@ picking work. Grades and reproduction evidence:
 | [control-theory](#control-theory) | 0 | 6 |
 | [decision-theory](#decision-theory) | 2 | 3 |
 | [ethics](#ethics) | 1 | 4 |
-| [information-theory](#information-theory) | 9 | 4 |
-| [interpretability](#interpretability) | 7 | 5 |
+| [information-theory](#information-theory) | 11 | 4 |
+| [interpretability](#interpretability) | 10 | 5 |
 | [learning-theory](#learning-theory) | 2 | 7 |
 | [multi-agent](#multi-agent) | 3 | 5 |
-| [oversight](#oversight) | 4 | 2 |
+| [oversight](#oversight) | 5 | 2 |
 | [preference-inference](#preference-inference) | 1 | 1 |
-| [provability-logic](#provability-logic) | 5 | 1 |
+| [provability-logic](#provability-logic) | 7 | 1 |
 | [social-choice](#social-choice) | 2 | 6 |
 | [verification](#verification) | 4 | 4 |
 
@@ -155,6 +155,7 @@ Catalogued, no atlas Lean:
 
 | ID | Result | Atlas declarations |
 |---|---|---|
+| CLM-WOLPERT-APPROX-001 | Bounds on inference accuracy, and the collapse of the exact limits | `AISafetyAtlas.Inference.exists_distinguishable_accuracy_near_one`<br>`AISafetyAtlas.Inference.exists_weaklyInfers_of_three_values`<br>`AISafetyAtlas.Inference.fig5_accuracy_gap`<br>`AISafetyAtlas.Inference.identityDevice_weaklyInfers`<br>`AISafetyAtlas.Inference.inferenceAccuracy_ge` |
 | LAND-SELFREF-001 | The self-model as a component of the state it models | `AISafetyAtlas.Knowledge.SelfReference.card_rest_le_one_of_selfComplete`<br>`AISafetyAtlas.Knowledge.SelfReference.not_selfComplete_of_two_rest`<br>`AISafetyAtlas.Knowledge.SelfReference.selfComplete_iff_subsingleton_rest` |
 | LAND-ACCUM-001 | Window ambiguity: accumulation bounds over a set of targets | `AISafetyAtlas.Knowledge.ambiguity_le_of_evidenceMonotone`<br>`AISafetyAtlas.Knowledge.ambiguity_le_pairTarget_left`<br>`AISafetyAtlas.Knowledge.ambiguity_le_pairTarget_of_evidenceMonotone`<br>`AISafetyAtlas.Knowledge.ambiguity_le_pairTarget_right`<br>`AISafetyAtlas.Knowledge.ambiguity_pairTarget_le_mul`<br>`AISafetyAtlas.Knowledge.not_knowable_pairTarget_of_not_knowable` |
 | LAND-AMBIG-001 | Finite fibre ambiguity and the counting obstruction | `AISafetyAtlas.Knowledge.ambiguity_le_of_comp`<br>`AISafetyAtlas.Knowledge.card_image_le_of_knowable`<br>`AISafetyAtlas.Knowledge.knowable_iff_ambiguity_le_one`<br>`AISafetyAtlas.Knowledge.not_knowable_of_card_lt` |
@@ -163,6 +164,7 @@ Catalogued, no atlas Lean:
 | LAND-SELFMEAS-002 | Breuer abstract embedded-measurement core | `AISafetyAtlas.Knowledge.Embedded.Meshing.restrict_surjective`<br>`AISafetyAtlas.Knowledge.Embedded.eq_restrict_of_infer_singleton_eq`<br>`AISafetyAtlas.Knowledge.Embedded.exists_singleton_infer_eq_of_infer_eq`<br>`AISafetyAtlas.Knowledge.Embedded.exists_state_not_exactly_measurable`<br>`AISafetyAtlas.Knowledge.Embedded.infer_singleton_eq_of_meshing`<br>`AISafetyAtlas.Knowledge.Embedded.no_meshing_inference_distinguishes`<br>`AISafetyAtlas.Knowledge.Embedded.no_meshing_inference_measures_all_states`<br>`AISafetyAtlas.Knowledge.Embedded.no_meshing_inference_measures_all_states_direct`<br>`AISafetyAtlas.Knowledge.Embedded.not_knowable_state_of_properInclusion` |
 | LAND-SELFMEAS-003 | Physical complement and finite-cardinality bridges to Breuer proper inclusion | `AISafetyAtlas.Knowledge.Embedded.Composition.measuresAll_fibreInference_of_injective`<br>`AISafetyAtlas.Knowledge.Embedded.Composition.meshing_and_measuresAll_fibreInference_of_bijective`<br>`AISafetyAtlas.Knowledge.Embedded.Composition.meshing_fibreInference_of_surjective`<br>`AISafetyAtlas.Knowledge.Embedded.Composition.no_meshing_measures_all_of_nontrivial_remainder`<br>`AISafetyAtlas.Knowledge.Embedded.Composition.no_meshing_measures_all_of_nontrivial_remainder_of_equiv`<br>`AISafetyAtlas.Knowledge.Embedded.Composition.not_meshing_of_not_surjective`<br>`AISafetyAtlas.Knowledge.Embedded.Composition.properInclusion_iff_not_injective`<br>`AISafetyAtlas.Knowledge.Embedded.Composition.properInclusion_of_nontrivial_remainder`<br>`AISafetyAtlas.Knowledge.Embedded.Composition.properInclusion_of_nontrivial_remainder_of_equiv`<br>`AISafetyAtlas.Knowledge.Embedded.Finite.no_meshing_measures_all_of_card_lt`<br>`AISafetyAtlas.Knowledge.Embedded.Finite.properInclusion_of_card_lt`<br>`AISafetyAtlas.Knowledge.Embedded.Finite.properInclusion_product_of_card_rest_ge_two` |
 | LAND-KNOW-001 | Exact knowability: the observation-factorization kernel | `AISafetyAtlas.Knowledge.Knowable.mono`<br>`AISafetyAtlas.Knowledge.exists_witness_of_not_knowable`<br>`AISafetyAtlas.Knowledge.knowable_iff_factorsThrough`<br>`AISafetyAtlas.Knowledge.knowable_iff_no_collision`<br>`AISafetyAtlas.Knowledge.not_knowable_comp`<br>`AISafetyAtlas.Knowledge.not_knowable_of_collision`<br>`AISafetyAtlas.Knowledge.not_knowable_of_witness` |
+| LAND-KNOW-DEVICE-001 | Transports between the knowability kernel and inference devices | `AISafetyAtlas.Knowledge.Devices.BlockwiseCollision.not_physicallyKnows`<br>`AISafetyAtlas.Knowledge.Devices.BlockwiseCollision.not_weaklyInfers`<br>`AISafetyAtlas.Knowledge.Devices.knowable_probe_of_forall_blockAnswers`<br>`AISafetyAtlas.Knowledge.Devices.not_blockAnswers_of_witness` |
 | LAND-CRMDP-KNOW-001 | True return does not factor through the observed history | `AISafetyAtlas.Wireheading.ObservationLimits.not_knowable_trueReturn`<br>`AISafetyAtlas.Wireheading.ObservationLimits.not_knowable_trueReturn_of_complement_mem`<br>`AISafetyAtlas.Wireheading.ObservationLimits.returnOver_zeroEnv_complement` |
 
 Catalogued, no atlas Lean:
@@ -179,6 +181,9 @@ Catalogued, no atlas Lean:
 | ID | Result | Atlas declarations |
 |---|---|---|
 | BY-044 | Limited self-awareness | `AISafetyAtlas.SelfAwareness.Model.limited_self_awareness`<br>`AISafetyAtlas.SelfAwareness.Model.not_agentAware_of_maximal`<br>`AISafetyAtlas.SelfAwareness.Model.not_aware_of_le`<br>`AISafetyAtlas.SelfAwareness.Model.not_perfectlySelfAware`<br>`AISafetyAtlas.SelfAwareness.Model.process_not_self_aware` |
+| CLM-WOLPERT-KNOW-001 | Physical knowledge by inference devices | `AISafetyAtlas.Inference.PhysicalKnowledgeWitness.eq_target_on_of_refinesOn`<br>`AISafetyAtlas.Inference.PhysicallyKnows.weaklyInfers`<br>`AISafetyAtlas.Inference.exists_never_physicallyKnown`<br>`AISafetyAtlas.Inference.not_physicallyKnows_true_and_false`<br>`AISafetyAtlas.Inference.physicallyKnows_false_iff_not_true` |
+| CLM-WOLPERT-EPISTEMIC-001 | Epistemic consequences of physical knowledge | `AISafetyAtlas.Inference.corollary20_ii`<br>`AISafetyAtlas.Inference.corollary23`<br>`AISafetyAtlas.Inference.corollary24`<br>`AISafetyAtlas.Inference.exists_three_inequivalent_not_weaklyInfers` |
+| LAND-WOLPERT-KNOW-DEFECTS-001 | Countermodels to Wolpert 2018 epistemic claims | `AISafetyAtlas.Inference.corollary21_ii_repaired` |
 | LAND-ATTR-001 | Attribution impossibility (DASH trilemma) | `AISafetyAtlas.Explainability.attribution_impossibility`<br>`AISafetyAtlas.Explainability.attribution_impossibility_weak` |
 | LAND-SELFREF-001 | The self-model as a component of the state it models | `AISafetyAtlas.Knowledge.SelfReference.card_rest_le_one_of_selfComplete`<br>`AISafetyAtlas.Knowledge.SelfReference.not_selfComplete_of_two_rest`<br>`AISafetyAtlas.Knowledge.SelfReference.selfComplete_iff_subsingleton_rest` |
 | LAND-SELFMEAS-001 | Self-measurement failure for an embedded observation | `AISafetyAtlas.Knowledge.knowable_id_iff_injective`<br>`AISafetyAtlas.Knowledge.not_knowable_state_of_nontrivial_remainder` |
@@ -241,6 +246,7 @@ Catalogued, no atlas Lean:
 | LAND-ACCUM-001 | Window ambiguity: accumulation bounds over a set of targets | `AISafetyAtlas.Knowledge.ambiguity_le_of_evidenceMonotone`<br>`AISafetyAtlas.Knowledge.ambiguity_le_pairTarget_left`<br>`AISafetyAtlas.Knowledge.ambiguity_le_pairTarget_of_evidenceMonotone`<br>`AISafetyAtlas.Knowledge.ambiguity_le_pairTarget_right`<br>`AISafetyAtlas.Knowledge.ambiguity_pairTarget_le_mul`<br>`AISafetyAtlas.Knowledge.not_knowable_pairTarget_of_not_knowable` |
 | LAND-AMBIG-001 | Finite fibre ambiguity and the counting obstruction | `AISafetyAtlas.Knowledge.ambiguity_le_of_comp`<br>`AISafetyAtlas.Knowledge.card_image_le_of_knowable`<br>`AISafetyAtlas.Knowledge.knowable_iff_ambiguity_le_one`<br>`AISafetyAtlas.Knowledge.not_knowable_of_card_lt` |
 | LAND-TEMPORAL-001 | Time-indexed knowability, contemporaneous collisions, and delayed knowledge | `AISafetyAtlas.Knowledge.Temporal.collisionAt_of_not_knowableAt`<br>`AISafetyAtlas.Knowledge.Temporal.knowableFrom_mono`<br>`AISafetyAtlas.Knowledge.Temporal.not_knowableAt_of_collisionAt` |
+| LAND-KNOW-DEVICE-001 | Transports between the knowability kernel and inference devices | `AISafetyAtlas.Knowledge.Devices.BlockwiseCollision.not_physicallyKnows`<br>`AISafetyAtlas.Knowledge.Devices.BlockwiseCollision.not_weaklyInfers`<br>`AISafetyAtlas.Knowledge.Devices.knowable_probe_of_forall_blockAnswers`<br>`AISafetyAtlas.Knowledge.Devices.not_blockAnswers_of_witness` |
 
 Catalogued, no atlas Lean:
 
@@ -269,6 +275,8 @@ Catalogued, no atlas Lean:
 | BY-015 | Chaitin incompleteness | `AISafetyAtlas.Logic.chaitin_bound`<br>`AISafetyAtlas.Logic.chaitin_incompleteness` |
 | BY-016 | Undefinability | `AISafetyAtlas.Logic.tarski_undefinability` |
 | BY-027 | Löb's theorem (unverifiability) | `AISafetyAtlas.Logic.loeb` |
+| CLM-WOLPERT-EPISTEMIC-001 | Epistemic consequences of physical knowledge | `AISafetyAtlas.Inference.corollary20_ii`<br>`AISafetyAtlas.Inference.corollary23`<br>`AISafetyAtlas.Inference.corollary24`<br>`AISafetyAtlas.Inference.exists_three_inequivalent_not_weaklyInfers` |
+| LAND-WOLPERT-KNOW-DEFECTS-001 | Countermodels to Wolpert 2018 epistemic claims | `AISafetyAtlas.Inference.corollary21_ii_repaired` |
 | CLM-LAWVERE-001 | Lawvere fixed-point theorem (types and functions) | `AISafetyAtlas.Logic.lawvere_fixed_point` |
 
 Catalogued, no atlas Lean:

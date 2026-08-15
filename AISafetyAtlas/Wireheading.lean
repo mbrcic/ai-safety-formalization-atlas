@@ -46,7 +46,9 @@ source-aligned finite-percept induction step, not the full source theorem.
   `ρ`.
 - **Not** utility modification; GoalPreservationSource is policy self-mod only,
   and still assumes domination / continuation structure rather than deriving
-  full Theorem 20. Its finite percept weights are normalized and full-support.
+  full optimal-policy-existence result (the technical report's Appendix A
+  Theorem 20, which the source's own proof of Theorem 12 invokes). Its finite
+  percept weights are normalized and full-support.
 - **Not** multiprincipal / shared-evaluator infrastructure by itself — that is
   a possible consumer of these cores, not what this facade currently is.
 - **Not** an AI-system bridge without separate review.

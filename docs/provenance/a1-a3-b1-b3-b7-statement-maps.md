@@ -79,7 +79,7 @@ Angluin, *Local and Global Properties in Networks of Processors*, STOC 1980.
 | no unique leader | `symmetric_no_unique_leader`, `no_unique_leader_from_symmetric_start` | none |
 | port-labelled network, identical processors | `Networks.Network`, `Networks.Algorithm` | **specialization**: no identifiers and one shared algorithm, but routing reuses the same port index at both endpoints; no reverse-port involution |
 | depth-`n` views | `Networks.SameView` | **abstraction**: equality of endpoint labels along common port words, rather than Angluin's full rooted port-labelled view tree with reciprocal incidence data |
-| equal views give equal states | `Networks.runFor_eq_of_view_eq` | the Angluin lemma, now derived rather than assumed |
+| equal views give equal states | `Networks.runFor_eq_of_view_eq` | the Angluin lemma, derived rather than assumed |
 | network automorphism | `Networks.Automorphism` | none |
 | no unique leader from a nontrivial automorphism | `Networks.no_unique_leader_of_fixedPointFree` | none |
 | coverings, universal cover | — | **not formalized** |
@@ -117,7 +117,34 @@ numbered theorem** for this content, so nothing here reproduces a source result.
 ## B2 goal preservation
 
 Everitt, Filan, Daswani and Hutter, *Self-Modification of Policy and Utility
-Function in Rational Agents*, 2016, Theorem 16.
+Function in Rational Agents*. Canonical text is the **published** chapter, AGI
+2016, LNCS 9782, pp. 1–11; the extended `arXiv:1605.03142` is support only.
+
+### Two numberings, and where the proofs are
+
+The published chapter states its theorems and **proves none of them** —
+*"Proofs for all theorems are provided in a technical report"*, namely
+`arXiv:1605.03142`. So the published text is canonical for **statements** and the
+technical report is the only place any **proof** exists. This is the atlas's one
+source where those two authorities come apart, and both are needed.
+
+| published (AGI 2016) | technical report (arXiv:1605.03142) |
+|---|---|
+| Definitions 1, 3, 7, 8, 9 | Definitions 3, 5, 10, 11, 12 |
+| Theorem 10, hedonistic agents self-modify | Theorem 14 |
+| Theorem 11, ignorant agents may self-modify | Theorem 15 |
+| **Theorem 12**, realistic policy-modifying agents make safe modifications | **Theorem 16** |
+| — | Lemma 13, Definition 18, Lemma 19, **Theorem 20**, Theorem 21 |
+
+The atlas's target is **published Theorem 12**, whose statement is word-for-word
+the report's Theorem 16. The last row is **proof apparatus the published chapter
+does not print**, not material it dropped: Theorem 20 (optimal policy existence)
+lives in the report's Appendix A, and the proof of Theorem 12 opens by invoking
+it — *"By Theorem 20 in Appendix A, there is a non-modifying
+modification-independent optimal policy `π′`"* — to make
+`Q^re_t(æ_<t π(æ_<t))` modification-independent for optimal `π`. `initial_dominates`
+assumes that consequence, so the gap recorded below is real against the only
+proof there is.
 
 | Source | Lean | Divergence |
 |---|---|---|
@@ -126,11 +153,11 @@ Function in Rational Agents*, 2016, Theorem 16.
 | realistic value function | `Model.continuation`, `Model.coherent` | none |
 | modification-independent belief and utility | — | assumed away by determinism |
 | naming map `ι`, full-support percept distribution | `GoalPreservationSource.Model.initial`, `initial_dominates`, `prob_sum_one`, `prob_pos` | **no-surjectivity specialization**: the proof compares only against the initial policy, which is named; `prob` is a normalized finite full-support distribution; domination is assumed rather than derived |
-| Theorem 16 induction step | `GoalPreservationSource.Model.selected_matches_initial`, `safe_modification`, `qValue_selected_eq_initial` | **specialization**: one-step only, finitely many percepts, discrete expectations rather than integrals |
-| Theorem 20, modification-independence | — | **not reproduced**; `initial_dominates` is assumed instead |
+| Theorem 12 induction step (ext. Theorem 16) | `GoalPreservationSource.Model.selected_matches_initial`, `safe_modification`, `qValue_selected_eq_initial` | **specialization**: one-step only, finitely many percepts, discrete expectations rather than integrals |
+| optimal-policy existence, modification-independence | — | **not reproduced**; `initial_dominates` assumes its consequence instead. This is the technical report's Appendix-A Theorem 20, which the source's own proof of Theorem 12 invokes as its first step, so this is a real gap against that proof |
 | deterministic variant | `GoalPreservation.Model`, `names_surjective` | **stronger than the source**; retained as the simpler model, superseded by the above |
 | discount | `discount`, `discount_pos` | **generalization**: only positivity, not `< 1` |
-| Theorem 16, on-policy preservation | `next_policy_optimal` (substance), `run_optimal` (induction), `goal_preservation` (corollary) | **specialization**: deterministic, finite-step, on-policy only |
+| Theorem 12, on-policy preservation (ext. Theorem 16) | `next_policy_optimal` (substance), `run_optimal` (induction), `goal_preservation` (corollary) | **specialization**: deterministic, finite-step, on-policy only |
 | off-policy preservation | — | **not claimed** |
 
 ---

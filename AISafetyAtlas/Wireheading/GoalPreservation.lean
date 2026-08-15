@@ -8,7 +8,38 @@ public import Mathlib.Tactic.Linarith
 
 This is a deterministic finite-step specialization of Everitt, Filan, Daswani
 and Hutter, *Self-Modification of Policy and Utility Function in Rational
-Agents* (2016), Theorem 16.
+Agents*, **AGI 2016, LNCS 9782, Theorem 12** — *"Realistic policy-modifying
+agents make safe modifications"*.
+
+## Two numberings, and where the proofs are
+
+The published chapter states its theorems and **proves none of them**:
+
+> Proofs for all theorems are provided in a technical report
+
+— which is `arXiv:1605.03142`. So for this source the published text is
+canonical for **statements**, and the technical report is the only place any
+**proof** exists. The two number the same results differently:
+
+| published (AGI 2016) | technical report (arXiv:1605.03142) |
+|---|---|
+| Theorem 10, hedonistic agents self-modify | Theorem 14 |
+| Theorem 11, ignorant agents may self-modify | Theorem 15 |
+| **Theorem 12**, realistic policy-modifying agents make safe modifications | **Theorem 16** |
+| Definitions 1, 3, 7, 8, 9 | Definitions 3, 5, 10, 11, 12 |
+| — | Lemma 13, Definition 18, Lemma 19, **Theorem 20**, Theorem 21 |
+
+The last row is proof apparatus the published chapter does not print, **not**
+material it dropped. Theorem 20 (optimal policy existence) sits in the report's
+Appendix A and the proof of Theorem 12 opens by invoking it:
+
+> By Theorem 20 in Appendix A, there is a non-modifying modification-independent
+> optimal policy `π′`.
+
+That is what makes `Q^re_t(æ_<t π(æ_<t))` modification-independent for optimal
+`π`, and it is what `GoalPreservationSource.Model.initial_dominates` assumes
+instead of deriving. So the gap the atlas records there is a real gap against
+the only proof that exists.
 
 The source theorem assumes modification-independent belief and current utility,
 full-support stochastic percepts, and realistic value functions that anticipate
@@ -135,7 +166,8 @@ public theorem run_optimal
       exact M.next_policy_optimal ih
 
 /--
-**On-policy goal preservation (deterministic specialization of Theorem 16).**
+**On-policy goal preservation (deterministic specialization of published
+Theorem 12, extended-version Theorem 16).**
 
 At every reached history, the current self-modified policy and the initial
 policy obtain the same maximizing value under the fixed initial objective.

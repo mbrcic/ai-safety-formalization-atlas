@@ -1,0 +1,12 @@
+{
+  "_comment": "Mirrors Procurement.not_covers_qC. One principal's full private evidence is still not enough, because the hazard is relational: the conjunction of two restrictions, neither of which is a hazard alone.",
+  "schema": "atlas-check/1",
+  "kind": "coalition",
+  "states": 4,
+  "emitted": [
+    [0, 1, 0, 1],
+    [0, 0, 1, 1]
+  ],
+  "coalition": [0],
+  "hazard": [false, false, false, true]
+}

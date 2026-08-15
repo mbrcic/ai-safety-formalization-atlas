@@ -56,7 +56,7 @@ declaration surface, including results with no AI-system reading, is in
 |---|---|---|---|
 | Self-modification: an agent's finite-horizon value depends only on the percept window it can still act on. Agent equations of Ring and Orseau (AGI 2011). | `AISafetyAtlas.Wireheading.AgentEquations.value_eq_of_agree_on_window` | LAND-WIRE-OBJ-001 | — |
 | Reward corruption: an agent optimizing an observed reward channel cannot be guaranteed to avoid half-maximal regret against the true reward. Theorem 11 of Everitt, Krakovna, Orseau, Hutter and Legg (2017), over a corrupted-reward MDP. | `AISafetyAtlas.Wireheading.CRMDP.Model.everitt_theorem_eleven` | BY-039 | `HUMAN_REVIEW` |
-| Goal preservation: a rational agent's one-step self-modification selects a continuation matching its initial goal. Finite-percept induction step of Theorem 16 of Everitt, Filan, Daswani and Hutter (2016). | `AISafetyAtlas.Wireheading.GoalPreservationSource.Model.selected_matches_initial` | LAND-GOAL-001 | — |
+| Goal preservation: a rational agent's one-step self-modification selects a continuation matching its initial goal. Finite-percept induction step of Theorem 12 of Everitt, Filan, Daswani and Hutter, AGI 2016, LNCS 9782 (Theorem 16 of the technical report arXiv:1605.03142, which is where its proof lives). | `AISafetyAtlas.Wireheading.GoalPreservationSource.Model.selected_matches_initial` | LAND-GOAL-001 | — |
 
 ## compositionality
 
@@ -180,6 +180,10 @@ it — which is what the entries above are.
 | Chaitin incompleteness | `AISafetyAtlas.Logic.chaitin_bound`<br>`AISafetyAtlas.Logic.chaitin_incompleteness` | BY-015 |
 | Undefinability | `AISafetyAtlas.Logic.tarski_undefinability` | BY-016 |
 | Löb's theorem (unverifiability) | `AISafetyAtlas.Logic.loeb` | BY-027 |
+| Physical knowledge by inference devices | `AISafetyAtlas.Inference.PhysicalKnowledgeWitness.eq_target_on_of_refinesOn`<br>`AISafetyAtlas.Inference.PhysicallyKnows.weaklyInfers`<br>`AISafetyAtlas.Inference.exists_never_physicallyKnown`<br>`AISafetyAtlas.Inference.not_physicallyKnows_true_and_false`<br>`AISafetyAtlas.Inference.physicallyKnows_false_iff_not_true` | CLM-WOLPERT-KNOW-001 |
+| Epistemic consequences of physical knowledge | `AISafetyAtlas.Inference.corollary20_ii`<br>`AISafetyAtlas.Inference.corollary23`<br>`AISafetyAtlas.Inference.corollary24`<br>`AISafetyAtlas.Inference.exists_three_inequivalent_not_weaklyInfers` | CLM-WOLPERT-EPISTEMIC-001 |
+| Bounds on inference accuracy, and the collapse of the exact limits | `AISafetyAtlas.Inference.exists_distinguishable_accuracy_near_one`<br>`AISafetyAtlas.Inference.exists_weaklyInfers_of_three_values`<br>`AISafetyAtlas.Inference.fig5_accuracy_gap`<br>`AISafetyAtlas.Inference.identityDevice_weaklyInfers`<br>`AISafetyAtlas.Inference.inferenceAccuracy_ge` | CLM-WOLPERT-APPROX-001 |
+| Countermodels to Wolpert 2018 epistemic claims | `AISafetyAtlas.Inference.corollary21_ii_repaired` | LAND-WOLPERT-KNOW-DEFECTS-001 |
 | Lawvere fixed-point theorem (types and functions) | `AISafetyAtlas.Logic.lawvere_fixed_point` | CLM-LAWVERE-001 |
 | Gibbard–Satterthwaite theorem (Lean / SocialChoiceLean) | `AISafetyAtlas.SocialChoice.gibbard_satterthwaite` | LAND-GS-002 |
 | The self-model as a component of the state it models | `AISafetyAtlas.Knowledge.SelfReference.card_rest_le_one_of_selfComplete`<br>`AISafetyAtlas.Knowledge.SelfReference.not_selfComplete_of_two_rest`<br>`AISafetyAtlas.Knowledge.SelfReference.selfComplete_iff_subsingleton_rest` | LAND-SELFREF-001 |
@@ -188,6 +192,7 @@ it — which is what the entries above are.
 | Time-indexed knowability, contemporaneous collisions, and delayed knowledge | `AISafetyAtlas.Knowledge.Temporal.collisionAt_of_not_knowableAt`<br>`AISafetyAtlas.Knowledge.Temporal.knowableFrom_mono`<br>`AISafetyAtlas.Knowledge.Temporal.not_knowableAt_of_collisionAt` | LAND-TEMPORAL-001 |
 | Self-measurement failure for an embedded observation | `AISafetyAtlas.Knowledge.knowable_id_iff_injective`<br>`AISafetyAtlas.Knowledge.not_knowable_state_of_nontrivial_remainder` | LAND-SELFMEAS-001 |
 | Exact knowability: the observation-factorization kernel | `AISafetyAtlas.Knowledge.Knowable.mono`<br>`AISafetyAtlas.Knowledge.exists_witness_of_not_knowable`<br>`AISafetyAtlas.Knowledge.knowable_iff_factorsThrough`<br>`AISafetyAtlas.Knowledge.knowable_iff_no_collision`<br>`AISafetyAtlas.Knowledge.not_knowable_comp`<br>`AISafetyAtlas.Knowledge.not_knowable_of_collision`<br>`AISafetyAtlas.Knowledge.not_knowable_of_witness` | LAND-KNOW-001 |
+| Transports between the knowability kernel and inference devices | `AISafetyAtlas.Knowledge.Devices.BlockwiseCollision.not_physicallyKnows`<br>`AISafetyAtlas.Knowledge.Devices.BlockwiseCollision.not_weaklyInfers`<br>`AISafetyAtlas.Knowledge.Devices.knowable_probe_of_forall_blockAnswers`<br>`AISafetyAtlas.Knowledge.Devices.not_blockAnswers_of_witness` | LAND-KNOW-DEVICE-001 |
 | True return does not factor through the observed history | `AISafetyAtlas.Wireheading.ObservationLimits.not_knowable_trueReturn`<br>`AISafetyAtlas.Wireheading.ObservationLimits.not_knowable_trueReturn_of_complement_mem`<br>`AISafetyAtlas.Wireheading.ObservationLimits.returnOver_zeroEnv_complement` | LAND-CRMDP-KNOW-001 |
 
 Every `BRIDGE` declaration must record what it applies and where; the

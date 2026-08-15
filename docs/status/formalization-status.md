@@ -12,18 +12,18 @@ Statement-match is not the primary success score.
 
 | Metric | Current |
 |---|---:|
-| Results stating a source claim | 46 |
-| Results recording a formalization only | 26 |
-| Registry results with atlas Lean (any grade) | 32 |
-| Claim results with statement-match (`EXACT` or `EQUIVALENT`) | 9 |
-| Claim results with workbench formalizations (`RELATED` only) | 6 |
-| Formalization records | 58 |
-| … declaring reproduction (self-attested; see methodology) | 56 |
-| Atlas Lean theorem declarations (unique names) | 105 |
-| Registry Lean declaration records | 105 |
+| Results stating a source claim | 49 |
+| Results recording a formalization only | 28 |
+| Registry results with atlas Lean (any grade) | 37 |
+| Claim results with statement-match (`EXACT` or `EQUIVALENT`) | 12 |
+| Claim results with workbench formalizations (`RELATED` only) | 7 |
+| Formalization records | 64 |
+| … declaring reproduction (self-attested; see methodology) | 62 |
+| Atlas Lean theorem declarations (unique names) | 124 |
+| Registry Lean declaration records | 124 |
 | … of which `WRAPPER` | 18 |
 | … of which `BRIDGE` | 4 |
-| … of which `NEW_PROOF` | 83 |
+| … of which `NEW_PROOF` | 102 |
 | … of which `REFERENCE` | 0 |
 | Registry rows whose atlas Lean is wrapper-only | 8 |
 | Registry rows with at least one `BRIDGE` declaration | 3 |
@@ -52,6 +52,10 @@ Statement-match is not the primary success score.
 | BY-039 | Reward corruption unsolvability | `RELATED` | `AISafetyAtlas.Wireheading.CRMDP.Env.observed_complement`<br>`AISafetyAtlas.Wireheading.CRMDP.return_add_complement`<br>`AISafetyAtlas.Wireheading.Corruption.ComplementedClass.everitt_theorem_eleven` | `AISafetyAtlas.Wireheading.CRMDP.Model.everitt_theorem_eleven (NEW_PROOF)` |
 | BY-043 | Misaligned embodiment | `RELATED` | — | `AISafetyAtlas.Compositional.Symmetry.Protocol.no_unique_leader_from_symmetric_start (NEW_PROOF)` |
 | BY-044 | Limited self-awareness | `EQUIVALENT` | — | `AISafetyAtlas.SelfAwareness.Model.not_aware_of_le (NEW_PROOF)`<br>`AISafetyAtlas.SelfAwareness.Model.process_not_self_aware (NEW_PROOF)`<br>`AISafetyAtlas.SelfAwareness.Model.not_agentAware_of_maximal (NEW_PROOF)`<br>`AISafetyAtlas.SelfAwareness.Model.limited_self_awareness (NEW_PROOF)`<br>`AISafetyAtlas.SelfAwareness.Model.not_perfectlySelfAware (NEW_PROOF)` |
+| CLM-WOLPERT-KNOW-001 | Physical knowledge by inference devices | `EQUIVALENT` | — | `AISafetyAtlas.Inference.PhysicallyKnows.weaklyInfers (NEW_PROOF)`<br>`AISafetyAtlas.Inference.PhysicalKnowledgeWitness.eq_target_on_of_refinesOn (NEW_PROOF)`<br>`AISafetyAtlas.Inference.physicallyKnows_false_iff_not_true (NEW_PROOF)`<br>`AISafetyAtlas.Inference.not_physicallyKnows_true_and_false (NEW_PROOF)`<br>`AISafetyAtlas.Inference.exists_never_physicallyKnown (NEW_PROOF)` |
+| CLM-WOLPERT-EPISTEMIC-001 | Epistemic consequences of physical knowledge | `EQUIVALENT` | — | `AISafetyAtlas.Inference.corollary20_ii (NEW_PROOF)`<br>`AISafetyAtlas.Inference.exists_three_inequivalent_not_weaklyInfers (NEW_PROOF)`<br>`AISafetyAtlas.Inference.corollary23 (NEW_PROOF)`<br>`AISafetyAtlas.Inference.corollary24 (NEW_PROOF)` |
+| CLM-WOLPERT-APPROX-001 | Bounds on inference accuracy, and the collapse of the exact limits | `EQUIVALENT` | — | `AISafetyAtlas.Inference.identityDevice_weaklyInfers (NEW_PROOF)`<br>`AISafetyAtlas.Inference.exists_weaklyInfers_of_three_values (NEW_PROOF)`<br>`AISafetyAtlas.Inference.inferenceAccuracy_ge (NEW_PROOF)`<br>`AISafetyAtlas.Inference.fig5_accuracy_gap (NEW_PROOF)`<br>`AISafetyAtlas.Inference.exists_distinguishable_accuracy_near_one (NEW_PROOF)` |
+| LAND-WOLPERT-KNOW-DEFECTS-001 | Countermodels to Wolpert 2018 epistemic claims |  | — | `AISafetyAtlas.Inference.corollary21_ii_repaired (NEW_PROOF)` |
 | CLM-LAWVERE-001 | Lawvere fixed-point theorem (types and functions) | `EQUIVALENT` | `Function.exists_fixed_point_of_surjective` | `AISafetyAtlas.Logic.lawvere_fixed_point (WRAPPER)` |
 | LAND-ATTR-001 | Attribution impossibility (DASH trilemma) |  | `DASHImpossibility.attribution_impossibility`<br>`DASHImpossibility.attribution_impossibility_weak` | `AISafetyAtlas.Explainability.attribution_impossibility (WRAPPER)`<br>`AISafetyAtlas.Explainability.attribution_impossibility_weak (WRAPPER)` |
 | LAND-GS-002 | Gibbard–Satterthwaite theorem (Lean / SocialChoiceLean) |  | `SocialChoice.gibbard_satterthwaite` | `AISafetyAtlas.SocialChoice.gibbard_satterthwaite (WRAPPER)` |
@@ -69,6 +73,7 @@ Statement-match is not the primary success score.
 | LAND-SELFMEAS-002 | Breuer abstract embedded-measurement core | `EQUIVALENT` | — | `AISafetyAtlas.Knowledge.Embedded.not_knowable_state_of_properInclusion (NEW_PROOF)`<br>`AISafetyAtlas.Knowledge.Embedded.Meshing.restrict_surjective (NEW_PROOF)`<br>`AISafetyAtlas.Knowledge.Embedded.no_meshing_inference_distinguishes (NEW_PROOF)`<br>`AISafetyAtlas.Knowledge.Embedded.no_meshing_inference_measures_all_states (NEW_PROOF)`<br>`AISafetyAtlas.Knowledge.Embedded.exists_state_not_exactly_measurable (NEW_PROOF)`<br>`AISafetyAtlas.Knowledge.Embedded.infer_singleton_eq_of_meshing (NEW_PROOF)`<br>`AISafetyAtlas.Knowledge.Embedded.exists_singleton_infer_eq_of_infer_eq (NEW_PROOF)`<br>`AISafetyAtlas.Knowledge.Embedded.eq_restrict_of_infer_singleton_eq (NEW_PROOF)`<br>`AISafetyAtlas.Knowledge.Embedded.no_meshing_inference_measures_all_states_direct (NEW_PROOF)` |
 | LAND-SELFMEAS-003 | Physical complement and finite-cardinality bridges to Breuer proper inclusion | `RELATED` | — | `AISafetyAtlas.Knowledge.Embedded.Composition.properInclusion_of_nontrivial_remainder (NEW_PROOF)`<br>`AISafetyAtlas.Knowledge.Embedded.Composition.no_meshing_measures_all_of_nontrivial_remainder (NEW_PROOF)`<br>`AISafetyAtlas.Knowledge.Embedded.Composition.properInclusion_of_nontrivial_remainder_of_equiv (NEW_PROOF)`<br>`AISafetyAtlas.Knowledge.Embedded.Composition.no_meshing_measures_all_of_nontrivial_remainder_of_equiv (NEW_PROOF)`<br>`AISafetyAtlas.Knowledge.Embedded.Composition.measuresAll_fibreInference_of_injective (NEW_PROOF)`<br>`AISafetyAtlas.Knowledge.Embedded.Composition.meshing_and_measuresAll_fibreInference_of_bijective (NEW_PROOF)`<br>`AISafetyAtlas.Knowledge.Embedded.Finite.properInclusion_of_card_lt (NEW_PROOF)`<br>`AISafetyAtlas.Knowledge.Embedded.Finite.no_meshing_measures_all_of_card_lt (NEW_PROOF)`<br>`AISafetyAtlas.Knowledge.Embedded.Composition.properInclusion_iff_not_injective (NEW_PROOF)`<br>`AISafetyAtlas.Knowledge.Embedded.Composition.not_meshing_of_not_surjective (NEW_PROOF)`<br>`AISafetyAtlas.Knowledge.Embedded.Composition.meshing_fibreInference_of_surjective (NEW_PROOF)`<br>`AISafetyAtlas.Knowledge.Embedded.Finite.properInclusion_product_of_card_rest_ge_two (NEW_PROOF)` |
 | LAND-KNOW-001 | Exact knowability: the observation-factorization kernel |  | `Function.factorsThrough_iff` | `AISafetyAtlas.Knowledge.knowable_iff_factorsThrough (WRAPPER)`<br>`AISafetyAtlas.Knowledge.knowable_iff_no_collision (WRAPPER)`<br>`AISafetyAtlas.Knowledge.not_knowable_of_collision (NEW_PROOF)`<br>`AISafetyAtlas.Knowledge.not_knowable_of_witness (NEW_PROOF)`<br>`AISafetyAtlas.Knowledge.exists_witness_of_not_knowable (NEW_PROOF)`<br>`AISafetyAtlas.Knowledge.Knowable.mono (NEW_PROOF)`<br>`AISafetyAtlas.Knowledge.not_knowable_comp (NEW_PROOF)` |
+| LAND-KNOW-DEVICE-001 | Transports between the knowability kernel and inference devices |  | — | `AISafetyAtlas.Knowledge.Devices.not_blockAnswers_of_witness (NEW_PROOF)`<br>`AISafetyAtlas.Knowledge.Devices.BlockwiseCollision.not_weaklyInfers (NEW_PROOF)`<br>`AISafetyAtlas.Knowledge.Devices.BlockwiseCollision.not_physicallyKnows (NEW_PROOF)`<br>`AISafetyAtlas.Knowledge.Devices.knowable_probe_of_forall_blockAnswers (NEW_PROOF)` |
 | LAND-CRMDP-KNOW-001 | True return does not factor through the observed history |  | — | `AISafetyAtlas.Wireheading.ObservationLimits.not_knowable_trueReturn_of_complement_mem (NEW_PROOF)`<br>`AISafetyAtlas.Wireheading.ObservationLimits.not_knowable_trueReturn (NEW_PROOF)`<br>`AISafetyAtlas.Wireheading.ObservationLimits.returnOver_zeroEnv_complement (NEW_PROOF)` |
 
 The generated declaration-presence checks live in

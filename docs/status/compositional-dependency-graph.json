@@ -1,0 +1,664 @@
+{
+  "note": "Edges are: for a definition, its type and body; for a theorem, its statement only. Lean's module system does not export proof terms.",
+  "cluster": "AISafetyAtlas.Compositional.",
+  "declarations": {
+    "AISafetyAtlas.Compositional.ExchangeClosed": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Compositional.ExchangeClosed.exchange_fst": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Compositional.ExchangeClosed"
+      ]
+    },
+    "AISafetyAtlas.Compositional.FinitelySupported": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Compositional.Hyperproperties.Cone": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Compositional.Hyperproperties.Observation",
+        "AISafetyAtlas.Compositional.Hyperproperties.Realizes",
+        "AISafetyAtlas.Compositional.Hyperproperties.TraceSystem"
+      ]
+    },
+    "AISafetyAtlas.Compositional.Hyperproperties.FiniteSelfComposition": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Compositional.Hyperproperties.TraceSystem"
+      ]
+    },
+    "AISafetyAtlas.Compositional.Hyperproperties.Hyperproperty": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Compositional.Hyperproperties.TraceSystem"
+      ]
+    },
+    "AISafetyAtlas.Compositional.Hyperproperties.IsBadObservation": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Compositional.Hyperproperties.Hyperproperty",
+        "AISafetyAtlas.Compositional.Hyperproperties.Observation",
+        "AISafetyAtlas.Compositional.Hyperproperties.Realizes",
+        "AISafetyAtlas.Compositional.Hyperproperties.TraceSystem"
+      ]
+    },
+    "AISafetyAtlas.Compositional.Hyperproperties.IsHyperLiveness": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Compositional.Hyperproperties.Hyperproperty",
+        "AISafetyAtlas.Compositional.Hyperproperties.TraceSystem"
+      ]
+    },
+    "AISafetyAtlas.Compositional.Hyperproperties.IsHyperLivenessOp": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Compositional.Hyperproperties.Hyperproperty",
+        "AISafetyAtlas.Compositional.Hyperproperties.Observation",
+        "AISafetyAtlas.Compositional.Hyperproperties.Realizes",
+        "AISafetyAtlas.Compositional.Hyperproperties.TraceSystem"
+      ]
+    },
+    "AISafetyAtlas.Compositional.Hyperproperties.IsHyperSafety": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Compositional.Hyperproperties.Hyperproperty",
+        "AISafetyAtlas.Compositional.Hyperproperties.TraceSystem"
+      ]
+    },
+    "AISafetyAtlas.Compositional.Hyperproperties.IsHyperSafetyOp": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Compositional.Hyperproperties.Hyperproperty",
+        "AISafetyAtlas.Compositional.Hyperproperties.IsBadObservation",
+        "AISafetyAtlas.Compositional.Hyperproperties.Observation",
+        "AISafetyAtlas.Compositional.Hyperproperties.Realizes",
+        "AISafetyAtlas.Compositional.Hyperproperties.TraceSystem"
+      ]
+    },
+    "AISafetyAtlas.Compositional.Hyperproperties.IsKSafety": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Compositional.Hyperproperties.Hyperproperty",
+        "AISafetyAtlas.Compositional.Hyperproperties.IsBadObservation",
+        "AISafetyAtlas.Compositional.Hyperproperties.Observation",
+        "AISafetyAtlas.Compositional.Hyperproperties.Realizes",
+        "AISafetyAtlas.Compositional.Hyperproperties.TraceSystem"
+      ]
+    },
+    "AISafetyAtlas.Compositional.Hyperproperties.IsSafetyPredicate": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Compositional.Hyperproperties.Observation",
+        "AISafetyAtlas.Compositional.Hyperproperties.Realizes"
+      ]
+    },
+    "AISafetyAtlas.Compositional.Hyperproperties.Observation": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Compositional.Hyperproperties.Realizes": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Compositional.Hyperproperties.Observation",
+        "AISafetyAtlas.Compositional.Hyperproperties.TraceSystem"
+      ]
+    },
+    "AISafetyAtlas.Compositional.Hyperproperties.SelfCompositionSafe": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Compositional.Hyperproperties.Hyperproperty",
+        "AISafetyAtlas.Compositional.Hyperproperties.IsBadObservation",
+        "AISafetyAtlas.Compositional.Hyperproperties.Observation",
+        "AISafetyAtlas.Compositional.Hyperproperties.Realizes"
+      ]
+    },
+    "AISafetyAtlas.Compositional.Hyperproperties.TraceSystem": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Compositional.Hyperproperties.card_toBatch_le": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Compositional.Hyperproperties.toBatch"
+      ]
+    },
+    "AISafetyAtlas.Compositional.Hyperproperties.cone_empty": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Compositional.Hyperproperties.Cone",
+        "AISafetyAtlas.Compositional.Hyperproperties.Observation",
+        "AISafetyAtlas.Compositional.Hyperproperties.TraceSystem"
+      ]
+    },
+    "AISafetyAtlas.Compositional.Hyperproperties.cone_union": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Compositional.Hyperproperties.Cone",
+        "AISafetyAtlas.Compositional.Hyperproperties.Observation",
+        "AISafetyAtlas.Compositional.Hyperproperties.TraceSystem"
+      ]
+    },
+    "AISafetyAtlas.Compositional.Hyperproperties.dense_iff_hyperLiveness": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Compositional.Hyperproperties.Hyperproperty",
+        "AISafetyAtlas.Compositional.Hyperproperties.IsHyperLivenessOp",
+        "AISafetyAtlas.Compositional.Hyperproperties.TraceSystem",
+        "AISafetyAtlas.Compositional.Hyperproperties.prefixTopology"
+      ]
+    },
+    "AISafetyAtlas.Compositional.Hyperproperties.eq_empty_of_realizes_empty": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Compositional.Hyperproperties.Observation",
+        "AISafetyAtlas.Compositional.Hyperproperties.Realizes"
+      ]
+    },
+    "AISafetyAtlas.Compositional.Hyperproperties.finiteSelfComposition_empty": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Compositional.Hyperproperties.FiniteSelfComposition",
+        "AISafetyAtlas.Compositional.Hyperproperties.TraceSystem"
+      ]
+    },
+    "AISafetyAtlas.Compositional.Hyperproperties.forall_batch_iff_forall_product": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Compositional.Hyperproperties.FiniteSelfComposition",
+        "AISafetyAtlas.Compositional.Hyperproperties.Hyperproperty",
+        "AISafetyAtlas.Compositional.Hyperproperties.SelfCompositionSafe",
+        "AISafetyAtlas.Compositional.Hyperproperties.TraceSystem",
+        "AISafetyAtlas.Compositional.Hyperproperties.productSelfComposition",
+        "AISafetyAtlas.Compositional.Hyperproperties.toBatch"
+      ]
+    },
+    "AISafetyAtlas.Compositional.Hyperproperties.hyperSafety_hyperLiveness_decomposition": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Compositional.Hyperproperties.Hyperproperty",
+        "AISafetyAtlas.Compositional.Hyperproperties.IsHyperLivenessOp",
+        "AISafetyAtlas.Compositional.Hyperproperties.IsHyperSafetyOp",
+        "AISafetyAtlas.Compositional.Hyperproperties.TraceSystem"
+      ]
+    },
+    "AISafetyAtlas.Compositional.Hyperproperties.hyperSafety_of_isKSafety": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Compositional.Hyperproperties.Hyperproperty",
+        "AISafetyAtlas.Compositional.Hyperproperties.IsHyperSafetyOp",
+        "AISafetyAtlas.Compositional.Hyperproperties.IsKSafety"
+      ]
+    },
+    "AISafetyAtlas.Compositional.Hyperproperties.hyperproperty_decomposition": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Compositional.Hyperproperties.Hyperproperty",
+        "AISafetyAtlas.Compositional.Hyperproperties.TraceSystem"
+      ]
+    },
+    "AISafetyAtlas.Compositional.Hyperproperties.hypersafety_hyperliveness_decomposition": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Compositional.Hyperproperties.Hyperproperty",
+        "AISafetyAtlas.Compositional.Hyperproperties.IsHyperLiveness",
+        "AISafetyAtlas.Compositional.Hyperproperties.IsHyperSafety",
+        "AISafetyAtlas.Compositional.Hyperproperties.TraceSystem"
+      ]
+    },
+    "AISafetyAtlas.Compositional.Hyperproperties.isClosed_iff_hyperSafety": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Compositional.Hyperproperties.Hyperproperty",
+        "AISafetyAtlas.Compositional.Hyperproperties.IsHyperSafetyOp",
+        "AISafetyAtlas.Compositional.Hyperproperties.TraceSystem",
+        "AISafetyAtlas.Compositional.Hyperproperties.prefixTopology"
+      ]
+    },
+    "AISafetyAtlas.Compositional.Hyperproperties.isOpen_cone": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Compositional.Hyperproperties.Cone",
+        "AISafetyAtlas.Compositional.Hyperproperties.Observation",
+        "AISafetyAtlas.Compositional.Hyperproperties.TraceSystem",
+        "AISafetyAtlas.Compositional.Hyperproperties.prefixTopology"
+      ]
+    },
+    "AISafetyAtlas.Compositional.Hyperproperties.k_safety_iff_finite_self_composition": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Compositional.Hyperproperties.FiniteSelfComposition",
+        "AISafetyAtlas.Compositional.Hyperproperties.Hyperproperty",
+        "AISafetyAtlas.Compositional.Hyperproperties.IsKSafety",
+        "AISafetyAtlas.Compositional.Hyperproperties.SelfCompositionSafe",
+        "AISafetyAtlas.Compositional.Hyperproperties.TraceSystem"
+      ]
+    },
+    "AISafetyAtlas.Compositional.Hyperproperties.k_safety_iff_product_self_composition": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Compositional.Hyperproperties.Hyperproperty",
+        "AISafetyAtlas.Compositional.Hyperproperties.IsKSafety",
+        "AISafetyAtlas.Compositional.Hyperproperties.SelfCompositionSafe",
+        "AISafetyAtlas.Compositional.Hyperproperties.TraceSystem",
+        "AISafetyAtlas.Compositional.Hyperproperties.productSelfComposition",
+        "AISafetyAtlas.Compositional.Hyperproperties.toBatch"
+      ]
+    },
+    "AISafetyAtlas.Compositional.Hyperproperties.mem_toBatch": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Compositional.Hyperproperties.toBatch"
+      ]
+    },
+    "AISafetyAtlas.Compositional.Hyperproperties.padBatch": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Compositional.Hyperproperties.padBatch_mem": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Compositional.Hyperproperties.padBatch"
+      ]
+    },
+    "AISafetyAtlas.Compositional.Hyperproperties.padBatch_mem_productSelfComposition": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Compositional.Hyperproperties.TraceSystem",
+        "AISafetyAtlas.Compositional.Hyperproperties.padBatch",
+        "AISafetyAtlas.Compositional.Hyperproperties.productSelfComposition"
+      ]
+    },
+    "AISafetyAtlas.Compositional.Hyperproperties.prefixTopology": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Compositional.Hyperproperties.Cone",
+        "AISafetyAtlas.Compositional.Hyperproperties.Observation",
+        "AISafetyAtlas.Compositional.Hyperproperties.Realizes",
+        "AISafetyAtlas.Compositional.Hyperproperties.TraceSystem"
+      ]
+    },
+    "AISafetyAtlas.Compositional.Hyperproperties.productSelfComposition": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Compositional.Hyperproperties.TraceSystem"
+      ]
+    },
+    "AISafetyAtlas.Compositional.Hyperproperties.productSelfComposition_empty": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Compositional.Hyperproperties.TraceSystem",
+        "AISafetyAtlas.Compositional.Hyperproperties.productSelfComposition"
+      ]
+    },
+    "AISafetyAtlas.Compositional.Hyperproperties.selfCompositionSafe_empty_of_any": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Compositional.Hyperproperties.Hyperproperty",
+        "AISafetyAtlas.Compositional.Hyperproperties.SelfCompositionSafe"
+      ]
+    },
+    "AISafetyAtlas.Compositional.Hyperproperties.self_composition_is_safety": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Compositional.Hyperproperties.Hyperproperty",
+        "AISafetyAtlas.Compositional.Hyperproperties.IsSafetyPredicate",
+        "AISafetyAtlas.Compositional.Hyperproperties.SelfCompositionSafe"
+      ]
+    },
+    "AISafetyAtlas.Compositional.Hyperproperties.toBatch": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Compositional.Hyperproperties.toBatch_mem_finiteSelfComposition": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Compositional.Hyperproperties.FiniteSelfComposition",
+        "AISafetyAtlas.Compositional.Hyperproperties.TraceSystem",
+        "AISafetyAtlas.Compositional.Hyperproperties.productSelfComposition",
+        "AISafetyAtlas.Compositional.Hyperproperties.toBatch"
+      ]
+    },
+    "AISafetyAtlas.Compositional.Hyperproperties.toBatch_padBatch": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Compositional.Hyperproperties.padBatch",
+        "AISafetyAtlas.Compositional.Hyperproperties.toBatch"
+      ]
+    },
+    "AISafetyAtlas.Compositional.Hyperproperties.toBatch_perm": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Compositional.Hyperproperties.toBatch"
+      ]
+    },
+    "AISafetyAtlas.Compositional.Hyperproperties.topological_decomposition": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.Compositional.IsCoordinateProduct": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Compositional.coordinateProjection"
+      ]
+    },
+    "AISafetyAtlas.Compositional.IsRectangle": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Compositional.LocalContractBoundary.Agreement": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Compositional.LocalContractBoundary.AtMostOneTrace": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Compositional.Hyperproperties.Hyperproperty",
+        "AISafetyAtlas.Compositional.Hyperproperties.TraceSystem"
+      ]
+    },
+    "AISafetyAtlas.Compositional.LocalContractBoundary.IsPureTraceProperty": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Compositional.Hyperproperties.Hyperproperty"
+      ]
+    },
+    "AISafetyAtlas.Compositional.LocalContractBoundary.agreement_projections_univ": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Compositional.LocalContractBoundary.Agreement"
+      ]
+    },
+    "AISafetyAtlas.Compositional.LocalContractBoundary.agreement_ssubset_product_of_projections": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Compositional.LocalContractBoundary.Agreement"
+      ]
+    },
+    "AISafetyAtlas.Compositional.LocalContractBoundary.atMostOneTrace_bool_boundary": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Compositional.Hyperproperties.IsKSafety",
+        "AISafetyAtlas.Compositional.LocalContractBoundary.AtMostOneTrace",
+        "AISafetyAtlas.Compositional.LocalContractBoundary.IsPureTraceProperty"
+      ]
+    },
+    "AISafetyAtlas.Compositional.LocalContractBoundary.atMostOneTrace_is_two_safety": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Compositional.Hyperproperties.IsKSafety",
+        "AISafetyAtlas.Compositional.LocalContractBoundary.AtMostOneTrace"
+      ]
+    },
+    "AISafetyAtlas.Compositional.LocalContractBoundary.not_exchangeClosed_agreement": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Compositional.ExchangeClosed",
+        "AISafetyAtlas.Compositional.LocalContractBoundary.Agreement"
+      ]
+    },
+    "AISafetyAtlas.Compositional.LocalContractBoundary.not_isRectangle_agreement": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Compositional.IsRectangle",
+        "AISafetyAtlas.Compositional.LocalContractBoundary.Agreement"
+      ]
+    },
+    "AISafetyAtlas.Compositional.LocalContractBoundary.not_pureTraceProperty_atMostOneTrace": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Compositional.LocalContractBoundary.AtMostOneTrace",
+        "AISafetyAtlas.Compositional.LocalContractBoundary.IsPureTraceProperty"
+      ]
+    },
+    "AISafetyAtlas.Compositional.Networks.Algorithm": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Compositional.Networks.Automorphism": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Compositional.Networks.Network"
+      ]
+    },
+    "AISafetyAtlas.Compositional.Networks.Config": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Compositional.Networks.Invariant": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Compositional.Networks.Automorphism",
+        "AISafetyAtlas.Compositional.Networks.Automorphism.toEquiv",
+        "AISafetyAtlas.Compositional.Networks.Config",
+        "AISafetyAtlas.Compositional.Networks.Network"
+      ]
+    },
+    "AISafetyAtlas.Compositional.Networks.Network": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Compositional.Networks.SameView": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Compositional.Networks.Config",
+        "AISafetyAtlas.Compositional.Networks.Network",
+        "AISafetyAtlas.Compositional.Networks.pathTo"
+      ]
+    },
+    "AISafetyAtlas.Compositional.Networks.invariant_of_automorphism": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Compositional.Networks.Algorithm",
+        "AISafetyAtlas.Compositional.Networks.Automorphism",
+        "AISafetyAtlas.Compositional.Networks.Config",
+        "AISafetyAtlas.Compositional.Networks.Invariant",
+        "AISafetyAtlas.Compositional.Networks.Network",
+        "AISafetyAtlas.Compositional.Networks.runFor"
+      ]
+    },
+    "AISafetyAtlas.Compositional.Networks.invariant_of_constant": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Compositional.Networks.Automorphism",
+        "AISafetyAtlas.Compositional.Networks.Config",
+        "AISafetyAtlas.Compositional.Networks.Invariant",
+        "AISafetyAtlas.Compositional.Networks.Network"
+      ]
+    },
+    "AISafetyAtlas.Compositional.Networks.no_unique_leader_of_fixedPointFree": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Compositional.Networks.Algorithm",
+        "AISafetyAtlas.Compositional.Networks.Automorphism",
+        "AISafetyAtlas.Compositional.Networks.Automorphism.toEquiv",
+        "AISafetyAtlas.Compositional.Networks.Config",
+        "AISafetyAtlas.Compositional.Networks.Invariant",
+        "AISafetyAtlas.Compositional.Networks.Network",
+        "AISafetyAtlas.Compositional.Networks.runFor",
+        "AISafetyAtlas.Compositional.Symmetry.HasUniqueLeader"
+      ]
+    },
+    "AISafetyAtlas.Compositional.Networks.pathTo": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Compositional.Networks.Network"
+      ]
+    },
+    "AISafetyAtlas.Compositional.Networks.runFor": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Compositional.Networks.Algorithm",
+        "AISafetyAtlas.Compositional.Networks.Config",
+        "AISafetyAtlas.Compositional.Networks.Network"
+      ]
+    },
+    "AISafetyAtlas.Compositional.Networks.runFor_eq_of_view_eq": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Compositional.Networks.Algorithm",
+        "AISafetyAtlas.Compositional.Networks.Config",
+        "AISafetyAtlas.Compositional.Networks.Network",
+        "AISafetyAtlas.Compositional.Networks.SameView",
+        "AISafetyAtlas.Compositional.Networks.runFor"
+      ]
+    },
+    "AISafetyAtlas.Compositional.Networks.step": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Compositional.Networks.Algorithm",
+        "AISafetyAtlas.Compositional.Networks.Algorithm.send",
+        "AISafetyAtlas.Compositional.Networks.Algorithm.update",
+        "AISafetyAtlas.Compositional.Networks.Config",
+        "AISafetyAtlas.Compositional.Networks.Network",
+        "AISafetyAtlas.Compositional.Networks.Network.port"
+      ]
+    },
+    "AISafetyAtlas.Compositional.Networks.step_invariant": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Compositional.Networks.Algorithm",
+        "AISafetyAtlas.Compositional.Networks.Automorphism",
+        "AISafetyAtlas.Compositional.Networks.Config",
+        "AISafetyAtlas.Compositional.Networks.Invariant",
+        "AISafetyAtlas.Compositional.Networks.Network",
+        "AISafetyAtlas.Compositional.Networks.step"
+      ]
+    },
+    "AISafetyAtlas.Compositional.RecombinationClosed": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Compositional.coordinateProjection"
+      ]
+    },
+    "AISafetyAtlas.Compositional.SpliceClosed": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Compositional.Symmetry.HasAtLeastTwo": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Compositional.Symmetry.HasUniqueLeader": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Compositional.Symmetry.IsSymmetric": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Compositional.Symmetry.Protocol": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Compositional.Symmetry.Protocol.no_unique_leader_from_symmetric_start": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Compositional.Symmetry.HasAtLeastTwo",
+        "AISafetyAtlas.Compositional.Symmetry.HasUniqueLeader",
+        "AISafetyAtlas.Compositional.Symmetry.IsSymmetric",
+        "AISafetyAtlas.Compositional.Symmetry.Protocol",
+        "AISafetyAtlas.Compositional.Symmetry.Protocol.run"
+      ]
+    },
+    "AISafetyAtlas.Compositional.Symmetry.Protocol.run": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Compositional.Symmetry.Protocol"
+      ]
+    },
+    "AISafetyAtlas.Compositional.Symmetry.Protocol.run_preserves_symmetry": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Compositional.Symmetry.IsSymmetric",
+        "AISafetyAtlas.Compositional.Symmetry.Protocol",
+        "AISafetyAtlas.Compositional.Symmetry.Protocol.run"
+      ]
+    },
+    "AISafetyAtlas.Compositional.Symmetry.Protocol.step": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Compositional.Symmetry.Protocol",
+        "AISafetyAtlas.Compositional.Symmetry.Protocol.decide",
+        "AISafetyAtlas.Compositional.Symmetry.Protocol.observe"
+      ]
+    },
+    "AISafetyAtlas.Compositional.Symmetry.Protocol.step_preserves_symmetry": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Compositional.Symmetry.IsSymmetric",
+        "AISafetyAtlas.Compositional.Symmetry.Protocol",
+        "AISafetyAtlas.Compositional.Symmetry.Protocol.step"
+      ]
+    },
+    "AISafetyAtlas.Compositional.Symmetry.Protocol.symmetric_no_unique_leader": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Compositional.Symmetry.HasAtLeastTwo",
+        "AISafetyAtlas.Compositional.Symmetry.HasUniqueLeader",
+        "AISafetyAtlas.Compositional.Symmetry.IsSymmetric"
+      ]
+    },
+    "AISafetyAtlas.Compositional.coordinateProjection": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Compositional.coordinateProjection_finitelySupported": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Compositional.FinitelySupported",
+        "AISafetyAtlas.Compositional.coordinateProjection"
+      ]
+    },
+    "AISafetyAtlas.Compositional.coordinate_product_iff_recombination_closed": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Compositional.IsCoordinateProduct",
+        "AISafetyAtlas.Compositional.RecombinationClosed"
+      ]
+    },
+    "AISafetyAtlas.Compositional.coordinate_product_iff_spliceClosed": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Compositional.IsCoordinateProduct",
+        "AISafetyAtlas.Compositional.SpliceClosed"
+      ]
+    },
+    "AISafetyAtlas.Compositional.not_isCoordinateProduct_finitelySupported": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Compositional.FinitelySupported",
+        "AISafetyAtlas.Compositional.IsCoordinateProduct"
+      ]
+    },
+    "AISafetyAtlas.Compositional.rectangle_iff_exchange_closed": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Compositional.ExchangeClosed",
+        "AISafetyAtlas.Compositional.IsRectangle"
+      ]
+    },
+    "AISafetyAtlas.Compositional.spliceClosed_finitelySupported": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Compositional.FinitelySupported",
+        "AISafetyAtlas.Compositional.SpliceClosed"
+      ]
+    },
+    "AISafetyAtlas.Compositional.spliceClosed_of_isCoordinateProduct": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Compositional.IsCoordinateProduct",
+        "AISafetyAtlas.Compositional.SpliceClosed"
+      ]
+    },
+    "AISafetyAtlas.Compositional.spliceClosed_piecewise_mem": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Compositional.SpliceClosed"
+      ]
+    }
+  }
+}

@@ -5,10 +5,11 @@ public import Mathlib.Data.Fintype.BigOperators
 public import Mathlib.Algebra.Order.BigOperators.Group.Finset
 
 /-!
-# Finite-percept Theorem 16 induction step, without surjectivity
+# Finite-percept Theorem 12 induction step, without surjectivity
 
 `AISafetyAtlas.Wireheading.GoalPreservation` proves a deterministic
-specialization of Everitt, Filan, Daswani and Hutter (2016), Theorem 16, but
+specialization of Everitt, Filan, Daswani and Hutter, AGI 2016, LNCS 9782,
+Theorem 12 (extended version `arXiv:1605.03142`, Theorem 16), but
 only under `names_surjective`: at every history, *every* world-action and
 next-policy pair is emitted by some represented policy.  That premise is
 stronger than the source's, which introduces a naming map `ι : P → Π` and says
@@ -18,7 +19,7 @@ This module removes it from the one-step induction argument.
 
 ## What the source's proof actually uses
 
-Reading the proof of Theorem 16, the comparison is never against an arbitrary
+Reading the proof of Theorem 12, the comparison is never against an arbitrary
 policy.  It is against `π₁`, the agent's own initial policy, which *is* named by
 assumption, so the action `(ǎ_t, π₁)` is always available.  The proof then
 argues:
@@ -44,8 +45,10 @@ probability mass function.
   finite-percept case of the source's `E_{e_t}`.
 * **Not the full source theorem.** `initial_dominates` and `contValue`
   are given; the source derives the corresponding facts from
-  modification-independent `ρ` and `u₁` together with its Theorem 20, which is
-  not reproduced.  What is reproduced is the induction step of Theorem 16, which
+  modification-independent `ρ` and `u₁` together with the optimal-policy-existence
+  result the technical report proves as its Theorem 20 in Appendix A — the
+  published chapter prints no proofs, so that is the only place it appears — which
+  is not reproduced.  What is reproduced is the induction step of Theorem 12, which
   is where `names_surjective` was previously needed.
 * **On-policy only**, as in the source: nothing is claimed off the reached path.
 * **Not utility modification**, only policy modification.
@@ -126,7 +129,7 @@ public theorem qValue_lt_of_lt (h : History) (w : WorldAction)
     exact mul_lt_mul_of_pos_left (by linarith) (M.prob_pos h w e₀)
 
 /--
-**The induction step of Theorem 16, without surjectivity.**
+**The induction step of Theorem 12, without surjectivity.**
 
 If the current policy acts optimally at a history, the continuation it selects
 achieves exactly the initial policy's value at every reachable successor.

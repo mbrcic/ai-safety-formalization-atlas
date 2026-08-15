@@ -81,6 +81,42 @@ also touches `scripts/lean_build_targets.txt`,
 in `registry.yaml`, and the generated views — regenerate rather than hand-edit
 `docs/status/`.
 
+### Tactics and search surface
+
+| Capability | Where | How to use it |
+|---|---|---|
+| SMT-flavoured automation | `grind`, with `@[grind]` / `@[grind →]` on four Layer-0 facts | `grind` alone closes goals about `not_stronglyInfers_self`, `not_weaklyInfers_own_concl`, `weaklyInfers_of_stronglyInfers`, `infersDevice_of_stronglyInfers`. Demonstrated in `Explore.lean`; the two attribute forms are **not** interchangeable — the forward form is rejected on a hypothesis-free fact |
+| Measurability | `fun_prop`, with `@[fun_prop]` on `measurable_setup` / `measurable_concl` | `by fun_prop` in place of `Measurable.of_discrete` in every discrete model |
+| Goal-directed search | `aesop`, rule set `inference` | Registered rules are only those that demonstrably fire; see `Inference/Search/RuleSet.lean` |
+| Exhaustion over devices | `FinDevice` + `decide` | Kernel-checked over **all** devices of a fixed shape, which is what an existential claim needs. `plausible` is measured but banned from commits: it closes an unrefuted goal with `sorry` |
+| Hypothesis minimisation | `scripts/minimize_hypotheses.py` | Reverse proving. Last full run over the frozen core (Device, Reality, SelfAware, PhysicalKnowledge): 157 candidates, **0 REMOVABLE**, 1 CALLSITE (`add_one_mod`'s `_hn`, unused inside its own proof but required by a caller) |
+| Declaration dependency view | `scripts/generate_dependency_graph.py --write`, checked with `--check` | `docs/status/<domain>-dependency-graph.{md,json}` — one view per top-level domain, all 13 from one Lean run. The domain list is derived from the tree, not hand-listed: a new domain gets a view by existing. **Edges are statement-level for theorems**: Lean's module system does not export proof terms, and `import all` does not change that — `ConstantInfo.value?` is `none` for every imported theorem, `some` for every definition. Read the JSON from a program; the Markdown is for people. `--check` is a **liveness** check only — it cannot see a view that is missing newly added declarations, which is how the inference view sat at 536 while the tree had 682, and how twelve domains had no view at all. CI regenerates after the Lean build and fails if the tree moves |
+| Public-name pin | `scripts/check_public_api.py` | The etalon list. A rename must appear as a deleted line in `docs/status/public-api.txt`, regenerated with `--write` |
+
+**Do not** add `lean-smt`, `Duper` or any external solver as a dependency. A
+proof this tree publishes is a proof its own kernel checked; `native_decide` is
+banned for the same reason.
+
+### Every library module needs a worked model
+
+`scripts/check_example_coverage.py` (part of the cheap gate) fails when a module
+declaring public API is referenced by **no** file under `Examples/`.
+
+The rule exists because the same defect shipped six times: `Prop6Law`, section
+9's `Infallible`, the general section-8 measure layer, section 5's inference
+complexity, Proposition 3(ii)'s mutual distinguishability, and the
+general-measure section-5 layer were each a compiling, axiom-clean,
+correctly-transcribed statement about nothing. Every other check passes on those
+— a theorem no model satisfies is a valid proof, and a definition no model
+evaluates is a valid definition. Generalising an existing layer is one way to
+reintroduce it (two of the six), because the general statement gets no witness
+even though the special case had one; the other four were simply never
+witnessed at all.
+
+One reference to one declaration clears a whole module; the check is weak on
+purpose. Exempt a module only with a reason in the script's `EXEMPT` map, which
+is re-checked — a module that gains coverage must lose its entry.
+
 ### Cheap vs full validation
 
 ```console
@@ -219,6 +255,48 @@ then regenerate the views and run the gate. Paper ↔ formalization map:
 - Package version stays at the last published baseline until authorized.
 - Publish via reviewed PR + squash merge; keep pre-squash history on a local
   archive branch when useful.
+
+## Proving: tactic order and the exploration target
+
+Try automation before writing a proof by hand, in this order:
+
+1. **`grind`** — Lean core, so it needs no import and is available even inside
+   `Inference/Device.lean`'s two-module import surface. Measured, not assumed.
+2. **`aesop (rule_sets := [inference])`** — for goals about devices, after
+   `import AISafetyAtlas.Inference.Search`. That module is deliberately not on the
+   public root import: the core's narrow imports are what keep it cheap to audit.
+3. **`decide`** — on finite models. `native_decide` stays banned; the gate rejects it.
+
+**Test a conjecture before proving it.** `AISafetyAtlas.Explore` imports the full
+`Mathlib.Tactic` surface plus `Plausible` and is built by CI as an explicit target,
+so the discovery tactics stay available without widening any shipped import graph.
+
+**`plausible` may never appear in committed code.** On a goal it cannot refute it
+reports *"Unable to find a counter-example"* and closes the goal with `sorry`. Use
+it interactively; commit the counterexample it found as a real theorem, or the
+proof it failed to refute.
+
+**To search over devices, not just over values:** `InferenceDevice` carries its
+setup type as a field, so a statement quantifying over devices ranges over a proper
+class and nothing can enumerate it. `Examples.Inference.FinDevice` fixes both types
+(`U = Fin m`, `Setup = Fin n`), is a `Fintype`, and carries a `Decidable` instance
+for `WeaklyInfers`. `decide` then settles *"no device of this shape does X"* in the
+kernel — exhaustive and trusted, where sampling would be neither. The instance has
+to unfold `WeaklyInfers`, `Realized` and `IsProbe` by hand, because instance search
+runs at reducible transparency and those are `def`s.
+
+**Before adding a hypothesis, check the ones already there:**
+
+```console
+python3 scripts/minimize_hypotheses.py <module.lean> --decl <name>
+python3 scripts/minimize_hypotheses.py <module.lean> --dead-haves-only
+```
+
+`REMOVABLE` means the statement is true without that hypothesis — drop it, or say
+in the docstring why print fidelity keeps it. A hypothesis consumed only by a
+`have _x` the proof then discards reports `USED` and is really removable, which is
+what `--dead-haves-only` finds. This is an offline audit, not a gate: each
+candidate costs a full elaboration.
 
 ## Validation
 

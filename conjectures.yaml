@@ -1,5 +1,20 @@
 {
   "schema_version": 1,
   "description": "Open questions with a compiling Lean statement and no proof. A conjecture is a first-class deliverable: stating a safety property precisely enough to be checkable is the hard part, and the statement is useful before anyone proves it. Nothing here is asserted. Conjecture modules live under AISafetyAtlas.Conjectures.*, are never on the atlas root import, and never enter theorem counts. Tag vocabulary is shared with registry.yaml.",
-  "conjectures": []
+  "conjectures": [
+    {
+      "id": "CONJ-002",
+      "statement": "Wolpert 2008 §8's collapse of stochastic inference complexity to Definition 6 at accuracy 1 genuinely needs its second hypothesis. `stochasticInferenceComplexity_eq` proves `C̄₁(Γ∣C) = 𝒞(Γ∣C)` under the source's `P ∝ dμ` condition, rendered in the atlas's single-measure model as: no point of a setup fibre is null. The conjecture is that dropping that hypothesis makes the statement false — i.e. some probability space, device and target with `C > Γ` and every realized fibre of positive mass, but some individual point null, separates the two complexities.",
+      "refutation": "Prove the hypothesis-free statement. Accuracy 1 forces agreement off a null set, so the accuracy set can only exceed the answering set by setups that answer wrongly at null points; a refutation shows the minimum of the length never moves when those are added — for instance because any such setup's fibre also contains a positive-mass point that answers correctly, or because the added setups never attain the minimum. A refutation strengthens `stochasticInferenceComplexity_eq` by deleting a hypothesis, and is recorded as RESOLVED.",
+      "prior_art": "D. H. Wolpert, Physical limits of inference, Physica D 237(9):1257-1281, 2008, §8 running text after Definition 10 (survey-ref-005). The source states the equality with the proportionality condition and gives no proof of either direction; the `≤` direction is `stochasticInferenceComplexity_le` and needs no such condition. No source consulted addresses necessity. The distinction is the standard measure-zero versus empty gap and is not specific to this paper, but the atlas found no statement of it for this quantity.",
+      "lean": "AISafetyAtlas.Conjectures.StochasticComplexity.eq_needs_no_null_points",
+      "tags": [
+        "information-theory",
+        "computational-complexity"
+      ],
+      "proposed_by": "Atlas review of the Wolpert section 8 prose layer. The hypothesis is carried by `stochasticInferenceComplexity_eq`; its necessity is asserted nowhere in the source and is not proved here.",
+      "status": "OPEN",
+      "resolution": ""
+    }
+  ]
 }

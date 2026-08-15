@@ -135,16 +135,21 @@ Solomonoff prior). Utilities are unbounded real values rather than the source's
 
 ## B2 — goal preservation
 
-Primary source: Everitt, Filan, Daswani, Hutter (2016), Theorem 16.
+Primary source: Everitt, Filan, Daswani, Hutter, AGI 2016, LNCS 9782,
+Theorem 12 (technical report arXiv:1605.03142, Theorem 16). The published
+chapter proves none of its theorems and delegates them to that report.
 
 Two layers:
 
 1. `GoalPreservation` — deterministic specialization; still uses
    `names_surjective` (stronger than the source); retained as the simpler model.
-2. `GoalPreservationSource` — induction step of Theorem 16 **without**
+2. `GoalPreservationSource` — induction step of Theorem 12 **without**
    surjectivity: compares only against the named initial policy under a
    normalized full-support finite distribution (`prob_sum_one`, `prob_pos`) and
-   `initial_dominates`. Theorem 20 / modification-independence not derived.
+   `initial_dominates`. Optimal-policy existence (the technical report's
+   Appendix-A Theorem 20, invoked as the first step of the source's own proof;
+   the published chapter prints no proofs) / modification-independence not
+   derived.
 
 Landscape headline: `GoalPreservationSource.Model.selected_matches_initial`.
 

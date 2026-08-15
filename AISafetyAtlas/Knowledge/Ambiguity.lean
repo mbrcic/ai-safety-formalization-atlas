@@ -2,6 +2,7 @@ module
 
 public import AISafetyAtlas.Knowledge
 public import Mathlib.Data.Fintype.Card
+public import Mathlib.Data.Finset.Lattice.Fold
 
 /-!
 # How much is unknowable — finite fibre ambiguity
@@ -161,6 +162,57 @@ public theorem not_knowable_of_card_lt
     ¬ Knowable r f :=
   fun hk => absurd (card_image_le_of_knowable hk) (Nat.not_le.mpr h)
 
+/-! ## The worst case over all observation values -/
+
+/-- An observation value nothing realizes leaves nothing open. -/
+public theorem ambiguity_eq_zero_of_not_mem_image
+    [Fintype Ω] [DecidableEq I] [DecidableEq Y]
+    {r : Ω → I} {f : Ω → Y} {i : I} (h : i ∉ Finset.univ.image r) :
+    ambiguity r f i = 0 := by
+  have : fibre r i = ∅ := by
+    refine Finset.eq_empty_of_forall_notMem fun ω hω => ?_
+    simp only [fibre, Finset.mem_filter] at hω
+    exact h (Finset.mem_image.mpr ⟨ω, Finset.mem_univ ω, hω.2⟩)
+  simp [ambiguity, this]
+
+/--
+The **worst-case ambiguity**: the largest number of target values any single
+observation value leaves open.
+
+One scalar for a whole observation, where `ambiguity` is one number per
+observation value. That is what a consumer ranking two observations needs, and
+the empty fibres contribute `0` rather than distorting the maximum.
+-/
+@[expose] public def worstAmbiguity [Fintype Ω] [DecidableEq I] [DecidableEq Y]
+    (r : Ω → I) (f : Ω → Y) : ℕ :=
+  (Finset.univ.image r).sup (ambiguity r f)
+
+/-- The worst case dominates every observation value, realized or not. -/
+public theorem ambiguity_le_worstAmbiguity
+    [Fintype Ω] [DecidableEq I] [DecidableEq Y]
+    (r : Ω → I) (f : Ω → Y) (i : I) :
+    ambiguity r f i ≤ worstAmbiguity r f := by
+  by_cases h : i ∈ Finset.univ.image r
+  · exact Finset.le_sup h
+  · simp [ambiguity_eq_zero_of_not_mem_image h]
+
+/--
+Exactness is worst-case ambiguity at most one.
+
+The scalar form of `knowable_iff_ambiguity_le_one`, and the statement a consumer
+comparing two observations actually uses.
+-/
+public theorem knowable_iff_worstAmbiguity_le_one
+    [Fintype Ω] [DecidableEq I] [DecidableEq Y] [Nonempty Y]
+    (r : Ω → I) (f : Ω → Y) :
+    Knowable r f ↔ worstAmbiguity r f ≤ 1 := by
+  rw [knowable_iff_ambiguity_le_one]
+  constructor
+  · intro h
+    exact Finset.sup_le fun i _ => h i
+  · intro h i
+    exact le_trans (ambiguity_le_worstAmbiguity r f i) h
+
 /-! ## Ambiguity under coarsening -/
 
 /--
@@ -179,5 +231,22 @@ public theorem ambiguity_le_of_comp
   intro ω hω
   simp only [fibre, Finset.mem_filter] at hω ⊢
   exact ⟨hω.1, by rw [hω.2]⟩
+
+/--
+**Coarsening never lowers the worst case either.** The scalar form of
+`ambiguity_le_of_comp`: post-processing an observation can only move the maximum
+up.
+
+This is the quantitative repair boundary as a single comparable number, which is
+what lets a consumer say one observation is strictly worse than another rather
+than only that some fibre degraded.
+-/
+public theorem worstAmbiguity_le_of_comp
+    [Fintype Ω] [DecidableEq I] [DecidableEq Y] {K : Type*} [DecidableEq K]
+    (r : Ω → I) (f : Ω → Y) (g : I → K) :
+    worstAmbiguity r f ≤ worstAmbiguity (fun ω => g (r ω)) f := by
+  refine Finset.sup_le fun i _ => ?_
+  exact le_trans (ambiguity_le_of_comp r f g i)
+    (ambiguity_le_worstAmbiguity (fun ω => g (r ω)) f (g i))
 
 end AISafetyAtlas.Knowledge

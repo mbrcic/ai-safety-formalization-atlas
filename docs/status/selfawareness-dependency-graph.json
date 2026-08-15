@@ -1,0 +1,63 @@
+{
+  "note": "Edges are: for a definition, its type and body; for a theorem, its statement only. Lean's module system does not export proof terms.",
+  "cluster": "AISafetyAtlas.SelfAwareness.",
+  "declarations": {
+    "AISafetyAtlas.SelfAwareness.AgentAware": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.SelfAwareness.Model",
+        "AISafetyAtlas.SelfAwareness.Model.available",
+        "AISafetyAtlas.SelfAwareness.Model.aware"
+      ]
+    },
+    "AISafetyAtlas.SelfAwareness.Model": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.SelfAwareness.Model.limited_self_awareness": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SelfAwareness.Model",
+        "AISafetyAtlas.SelfAwareness.Model.available",
+        "AISafetyAtlas.SelfAwareness.Model.aware"
+      ]
+    },
+    "AISafetyAtlas.SelfAwareness.Model.not_agentAware_of_maximal": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SelfAwareness.AgentAware",
+        "AISafetyAtlas.SelfAwareness.Model",
+        "AISafetyAtlas.SelfAwareness.Model.available"
+      ]
+    },
+    "AISafetyAtlas.SelfAwareness.Model.not_aware_of_le": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SelfAwareness.Model",
+        "AISafetyAtlas.SelfAwareness.Model.aware"
+      ]
+    },
+    "AISafetyAtlas.SelfAwareness.Model.not_perfectlySelfAware": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SelfAwareness.Model",
+        "AISafetyAtlas.SelfAwareness.PerfectlySelfAware"
+      ]
+    },
+    "AISafetyAtlas.SelfAwareness.Model.process_not_self_aware": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SelfAwareness.Model",
+        "AISafetyAtlas.SelfAwareness.Model.aware"
+      ]
+    },
+    "AISafetyAtlas.SelfAwareness.PerfectlySelfAware": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.SelfAwareness.AgentAware",
+        "AISafetyAtlas.SelfAwareness.Model",
+        "AISafetyAtlas.SelfAwareness.Model.available"
+      ]
+    }
+  }
+}

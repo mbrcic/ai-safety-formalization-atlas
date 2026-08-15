@@ -1,0 +1,816 @@
+{
+  "note": "Edges are: for a definition, its type and body; for a theorem, its statement only. Lean's module system does not export proof terms.",
+  "cluster": "AISafetyAtlas.Preference.",
+  "declarations": {
+    "AISafetyAtlas.Preference.Explains": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Preference.Planner"
+      ]
+    },
+    "AISafetyAtlas.Preference.HalfMaximalRegretBound": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Preference.RegretModel"
+      ]
+    },
+    "AISafetyAtlas.Preference.OverrideModel": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Preference.OverrideModel.Overrides": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Preference.OverrideModel",
+        "AISafetyAtlas.Preference.OverrideModel.regret",
+        "AISafetyAtlas.Preference.RewardFn"
+      ]
+    },
+    "AISafetyAtlas.Preference.OverrideModel.OverridesFor": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Preference.Explains",
+        "AISafetyAtlas.Preference.OverrideModel",
+        "AISafetyAtlas.Preference.OverrideModel.regret",
+        "AISafetyAtlas.Preference.OverrideModel.resulting",
+        "AISafetyAtlas.Preference.Planner",
+        "AISafetyAtlas.Preference.Policy",
+        "AISafetyAtlas.Preference.RewardFn"
+      ]
+    },
+    "AISafetyAtlas.Preference.OverrideModel.exists_overridesFor": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Preference.OverrideModel",
+        "AISafetyAtlas.Preference.OverrideModel.OverridesFor",
+        "AISafetyAtlas.Preference.OverrideModel.regret",
+        "AISafetyAtlas.Preference.Planner",
+        "AISafetyAtlas.Preference.Policy",
+        "AISafetyAtlas.Preference.RewardFn"
+      ]
+    },
+    "AISafetyAtlas.Preference.OverrideModel.mixtureValue": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Preference.OverrideModel",
+        "AISafetyAtlas.Preference.OverrideModel.optValue",
+        "AISafetyAtlas.Preference.OverrideModel.rationalise",
+        "AISafetyAtlas.Preference.OverrideModel.resulting",
+        "AISafetyAtlas.Preference.OverrideModel.value",
+        "AISafetyAtlas.Preference.RewardFn"
+      ]
+    },
+    "AISafetyAtlas.Preference.OverrideModel.mixtureValue_rationalise": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Preference.OverrideModel",
+        "AISafetyAtlas.Preference.OverrideModel.mixtureValue",
+        "AISafetyAtlas.Preference.OverrideModel.optValue",
+        "AISafetyAtlas.Preference.RewardFn"
+      ]
+    },
+    "AISafetyAtlas.Preference.OverrideModel.noopValue": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Preference.OverrideModel",
+        "AISafetyAtlas.Preference.OverrideModel.noop",
+        "AISafetyAtlas.Preference.OverrideModel.resulting",
+        "AISafetyAtlas.Preference.OverrideModel.value",
+        "AISafetyAtlas.Preference.RewardFn"
+      ]
+    },
+    "AISafetyAtlas.Preference.OverrideModel.noopValue_lt_mixtureValue_rationalise": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Preference.OverrideModel",
+        "AISafetyAtlas.Preference.OverrideModel.mixtureValue",
+        "AISafetyAtlas.Preference.OverrideModel.noop",
+        "AISafetyAtlas.Preference.OverrideModel.noopValue",
+        "AISafetyAtlas.Preference.OverrideModel.optValue",
+        "AISafetyAtlas.Preference.OverrideModel.resulting",
+        "AISafetyAtlas.Preference.OverrideModel.value",
+        "AISafetyAtlas.Preference.RewardFn"
+      ]
+    },
+    "AISafetyAtlas.Preference.OverrideModel.noop_overrides_of_suboptimal": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Preference.OverrideModel",
+        "AISafetyAtlas.Preference.OverrideModel.Overrides",
+        "AISafetyAtlas.Preference.OverrideModel.noop",
+        "AISafetyAtlas.Preference.OverrideModel.optValue",
+        "AISafetyAtlas.Preference.OverrideModel.regret",
+        "AISafetyAtlas.Preference.OverrideModel.resulting",
+        "AISafetyAtlas.Preference.OverrideModel.value",
+        "AISafetyAtlas.Preference.RewardFn"
+      ]
+    },
+    "AISafetyAtlas.Preference.OverrideModel.optValue_isGreatest": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Preference.OverrideModel",
+        "AISafetyAtlas.Preference.OverrideModel.optValue",
+        "AISafetyAtlas.Preference.OverrideModel.resulting",
+        "AISafetyAtlas.Preference.OverrideModel.value",
+        "AISafetyAtlas.Preference.RewardFn"
+      ]
+    },
+    "AISafetyAtlas.Preference.OverrideModel.overrides_of_overridesFor": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Preference.OverrideModel",
+        "AISafetyAtlas.Preference.OverrideModel.Overrides",
+        "AISafetyAtlas.Preference.OverrideModel.OverridesFor",
+        "AISafetyAtlas.Preference.Planner",
+        "AISafetyAtlas.Preference.Policy",
+        "AISafetyAtlas.Preference.RewardFn"
+      ]
+    },
+    "AISafetyAtlas.Preference.OverrideModel.rationalise_strictly_better": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Preference.OverrideModel",
+        "AISafetyAtlas.Preference.OverrideModel.noop",
+        "AISafetyAtlas.Preference.OverrideModel.optValue",
+        "AISafetyAtlas.Preference.OverrideModel.rationalise",
+        "AISafetyAtlas.Preference.OverrideModel.resulting",
+        "AISafetyAtlas.Preference.OverrideModel.value",
+        "AISafetyAtlas.Preference.RewardFn"
+      ]
+    },
+    "AISafetyAtlas.Preference.OverrideModel.regret": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Preference.OverrideModel",
+        "AISafetyAtlas.Preference.OverrideModel.optValue",
+        "AISafetyAtlas.Preference.OverrideModel.resulting",
+        "AISafetyAtlas.Preference.OverrideModel.value",
+        "AISafetyAtlas.Preference.RewardFn"
+      ]
+    },
+    "AISafetyAtlas.Preference.OverrideModel.regret_nonneg": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Preference.OverrideModel",
+        "AISafetyAtlas.Preference.OverrideModel.regret",
+        "AISafetyAtlas.Preference.RewardFn"
+      ]
+    },
+    "AISafetyAtlas.Preference.OverrideModel.regret_rationalise": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Preference.OverrideModel",
+        "AISafetyAtlas.Preference.OverrideModel.rationalise",
+        "AISafetyAtlas.Preference.OverrideModel.regret",
+        "AISafetyAtlas.Preference.RewardFn"
+      ]
+    },
+    "AISafetyAtlas.Preference.Pair": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Preference.Planner",
+        "AISafetyAtlas.Preference.Policy",
+        "AISafetyAtlas.Preference.RewardFn"
+      ]
+    },
+    "AISafetyAtlas.Preference.Planner": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Preference.Policy": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Preference.ReasonableLanguage": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Preference.ReasonableLanguage.Compatible": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Preference.Pair",
+        "AISafetyAtlas.Preference.Policy",
+        "AISafetyAtlas.Preference.op3"
+      ]
+    },
+    "AISafetyAtlas.Preference.ReasonableLanguage.antirational_le_compatible": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Preference.Pair",
+        "AISafetyAtlas.Preference.Policy",
+        "AISafetyAtlas.Preference.ReasonableLanguage",
+        "AISafetyAtlas.Preference.ReasonableLanguage.Compatible",
+        "AISafetyAtlas.Preference.ReasonableLanguage.KPair",
+        "AISafetyAtlas.Preference.ReasonableLanguage.c",
+        "AISafetyAtlas.Preference.op2",
+        "AISafetyAtlas.Preference.op4",
+        "AISafetyAtlas.Preference.op6"
+      ]
+    },
+    "AISafetyAtlas.Preference.ReasonableLanguage.greedy_le_compatible": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Preference.Pair",
+        "AISafetyAtlas.Preference.Policy",
+        "AISafetyAtlas.Preference.ReasonableLanguage",
+        "AISafetyAtlas.Preference.ReasonableLanguage.Compatible",
+        "AISafetyAtlas.Preference.ReasonableLanguage.KPair",
+        "AISafetyAtlas.Preference.ReasonableLanguage.c",
+        "AISafetyAtlas.Preference.op2",
+        "AISafetyAtlas.Preference.op6"
+      ]
+    },
+    "AISafetyAtlas.Preference.ReasonableLanguage.indifferent_le_compatible": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Preference.Pair",
+        "AISafetyAtlas.Preference.Policy",
+        "AISafetyAtlas.Preference.ReasonableLanguage",
+        "AISafetyAtlas.Preference.ReasonableLanguage.Compatible",
+        "AISafetyAtlas.Preference.ReasonableLanguage.KPair",
+        "AISafetyAtlas.Preference.ReasonableLanguage.c",
+        "AISafetyAtlas.Preference.op1",
+        "AISafetyAtlas.Preference.op5"
+      ]
+    },
+    "AISafetyAtlas.Preference.ReasonableLanguage.policy_le_of_compatible": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Preference.Pair",
+        "AISafetyAtlas.Preference.Policy",
+        "AISafetyAtlas.Preference.ReasonableLanguage",
+        "AISafetyAtlas.Preference.ReasonableLanguage.Compatible",
+        "AISafetyAtlas.Preference.ReasonableLanguage.KPair",
+        "AISafetyAtlas.Preference.ReasonableLanguage.KPolicy",
+        "AISafetyAtlas.Preference.ReasonableLanguage.c"
+      ]
+    },
+    "AISafetyAtlas.Preference.ReasonableLanguage.proposition_eight": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Preference.Pair",
+        "AISafetyAtlas.Preference.Policy",
+        "AISafetyAtlas.Preference.ReasonableLanguage",
+        "AISafetyAtlas.Preference.ReasonableLanguage.Compatible",
+        "AISafetyAtlas.Preference.ReasonableLanguage.KPair",
+        "AISafetyAtlas.Preference.ReasonableLanguage.c",
+        "AISafetyAtlas.Preference.op4"
+      ]
+    },
+    "AISafetyAtlas.Preference.ReasonableLanguage.proposition_seven": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Preference.Pair",
+        "AISafetyAtlas.Preference.Policy",
+        "AISafetyAtlas.Preference.ReasonableLanguage",
+        "AISafetyAtlas.Preference.ReasonableLanguage.Compatible",
+        "AISafetyAtlas.Preference.ReasonableLanguage.KPair",
+        "AISafetyAtlas.Preference.ReasonableLanguage.c",
+        "AISafetyAtlas.Preference.op1",
+        "AISafetyAtlas.Preference.op2",
+        "AISafetyAtlas.Preference.op4",
+        "AISafetyAtlas.Preference.op5",
+        "AISafetyAtlas.Preference.op6"
+      ]
+    },
+    "AISafetyAtlas.Preference.RegretModel": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Preference.RegretModel.bad_compatible_rewards_nonempty": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Preference.Explains",
+        "AISafetyAtlas.Preference.HalfMaximalRegretBound",
+        "AISafetyAtlas.Preference.Planner",
+        "AISafetyAtlas.Preference.RegretModel",
+        "AISafetyAtlas.Preference.RegretModel.regret",
+        "AISafetyAtlas.Preference.RegretModel.worstCaseRegret",
+        "AISafetyAtlas.Preference.RegretModel.worstPolicy"
+      ]
+    },
+    "AISafetyAtlas.Preference.RegretModel.cannot_rule_out_half_maximal_regret": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Preference.Explains",
+        "AISafetyAtlas.Preference.HalfMaximalRegretBound",
+        "AISafetyAtlas.Preference.Planner",
+        "AISafetyAtlas.Preference.RegretModel",
+        "AISafetyAtlas.Preference.RegretModel.regret",
+        "AISafetyAtlas.Preference.RegretModel.worstCaseRegret",
+        "AISafetyAtlas.Preference.RegretModel.worstPolicy"
+      ]
+    },
+    "AISafetyAtlas.Preference.RewardFn": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Preference.Source.Fmap": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Preference.Pair",
+        "AISafetyAtlas.Preference.Source.F\u2081",
+        "AISafetyAtlas.Preference.Source.F\u2082",
+        "AISafetyAtlas.Preference.Source.F\u2083",
+        "AISafetyAtlas.Preference.Source.F\u2084"
+      ]
+    },
+    "AISafetyAtlas.Preference.Source.F\u2081": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Preference.Pair",
+        "AISafetyAtlas.Preference.op1",
+        "AISafetyAtlas.Preference.op3",
+        "AISafetyAtlas.Preference.op5"
+      ]
+    },
+    "AISafetyAtlas.Preference.Source.F\u2082": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Preference.Pair",
+        "AISafetyAtlas.Preference.op2",
+        "AISafetyAtlas.Preference.op3",
+        "AISafetyAtlas.Preference.op6"
+      ]
+    },
+    "AISafetyAtlas.Preference.Source.F\u2083": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Preference.Pair",
+        "AISafetyAtlas.Preference.op2",
+        "AISafetyAtlas.Preference.op3",
+        "AISafetyAtlas.Preference.op4",
+        "AISafetyAtlas.Preference.op6"
+      ]
+    },
+    "AISafetyAtlas.Preference.Source.F\u2084": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Preference.Pair",
+        "AISafetyAtlas.Preference.op4"
+      ]
+    },
+    "AISafetyAtlas.Preference.Source.ReasonableForF": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Preference.Source.ReasonableForF.AmongLowestCompatible": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Preference.Pair",
+        "AISafetyAtlas.Preference.Policy",
+        "AISafetyAtlas.Preference.Source.ReasonableForF",
+        "AISafetyAtlas.Preference.Source.ReasonableForF.Compatible",
+        "AISafetyAtlas.Preference.Source.ReasonableForF.KPair",
+        "AISafetyAtlas.Preference.Source.ReasonableForF.c"
+      ]
+    },
+    "AISafetyAtlas.Preference.Source.ReasonableForF.Compatible": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Preference.Pair",
+        "AISafetyAtlas.Preference.Policy",
+        "AISafetyAtlas.Preference.op3"
+      ]
+    },
+    "AISafetyAtlas.Preference.Source.ReasonableForF.F\u2081_of_compatible": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Preference.Pair",
+        "AISafetyAtlas.Preference.Policy",
+        "AISafetyAtlas.Preference.Source.F\u2081",
+        "AISafetyAtlas.Preference.Source.ReasonableForF.Compatible",
+        "AISafetyAtlas.Preference.op1",
+        "AISafetyAtlas.Preference.op5"
+      ]
+    },
+    "AISafetyAtlas.Preference.Source.ReasonableForF.F\u2082_of_compatible": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Preference.Pair",
+        "AISafetyAtlas.Preference.Policy",
+        "AISafetyAtlas.Preference.Source.F\u2082",
+        "AISafetyAtlas.Preference.Source.ReasonableForF.Compatible",
+        "AISafetyAtlas.Preference.op2",
+        "AISafetyAtlas.Preference.op6"
+      ]
+    },
+    "AISafetyAtlas.Preference.Source.ReasonableForF.F\u2083_of_compatible": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Preference.Pair",
+        "AISafetyAtlas.Preference.Policy",
+        "AISafetyAtlas.Preference.Source.F\u2083",
+        "AISafetyAtlas.Preference.Source.ReasonableForF.Compatible",
+        "AISafetyAtlas.Preference.op2",
+        "AISafetyAtlas.Preference.op4",
+        "AISafetyAtlas.Preference.op6"
+      ]
+    },
+    "AISafetyAtlas.Preference.Source.ReasonableForF.F\u2084_F\u2084": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Preference.Pair",
+        "AISafetyAtlas.Preference.Source.F\u2084"
+      ]
+    },
+    "AISafetyAtlas.Preference.Source.ReasonableForF.NotAmongLowestCompatible": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Preference.Pair",
+        "AISafetyAtlas.Preference.Policy",
+        "AISafetyAtlas.Preference.Source.ReasonableForF",
+        "AISafetyAtlas.Preference.Source.ReasonableForF.Compatible",
+        "AISafetyAtlas.Preference.Source.ReasonableForF.KPair",
+        "AISafetyAtlas.Preference.Source.ReasonableForF.c"
+      ]
+    },
+    "AISafetyAtlas.Preference.Source.ReasonableForF.antirational_amongLowest": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Preference.Policy",
+        "AISafetyAtlas.Preference.Source.ReasonableForF",
+        "AISafetyAtlas.Preference.Source.ReasonableForF.AmongLowestCompatible",
+        "AISafetyAtlas.Preference.op2",
+        "AISafetyAtlas.Preference.op4",
+        "AISafetyAtlas.Preference.op6"
+      ]
+    },
+    "AISafetyAtlas.Preference.Source.ReasonableForF.compatible_iff": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Preference.Pair",
+        "AISafetyAtlas.Preference.Policy",
+        "AISafetyAtlas.Preference.ReasonableLanguage.Compatible",
+        "AISafetyAtlas.Preference.Source.ReasonableForF.Compatible"
+      ]
+    },
+    "AISafetyAtlas.Preference.Source.ReasonableForF.compatible_indifferent": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Preference.Policy",
+        "AISafetyAtlas.Preference.Source.ReasonableForF.Compatible",
+        "AISafetyAtlas.Preference.op1",
+        "AISafetyAtlas.Preference.op5"
+      ]
+    },
+    "AISafetyAtlas.Preference.Source.ReasonableForF.greedy_amongLowest": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Preference.Policy",
+        "AISafetyAtlas.Preference.Source.ReasonableForF",
+        "AISafetyAtlas.Preference.Source.ReasonableForF.AmongLowestCompatible",
+        "AISafetyAtlas.Preference.op2",
+        "AISafetyAtlas.Preference.op6"
+      ]
+    },
+    "AISafetyAtlas.Preference.Source.ReasonableForF.indifferent_amongLowest": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Preference.Policy",
+        "AISafetyAtlas.Preference.Source.ReasonableForF",
+        "AISafetyAtlas.Preference.Source.ReasonableForF.AmongLowestCompatible",
+        "AISafetyAtlas.Preference.op1",
+        "AISafetyAtlas.Preference.op5"
+      ]
+    },
+    "AISafetyAtlas.Preference.Source.ReasonableForF.notAmongLowest_iff": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Preference.Pair",
+        "AISafetyAtlas.Preference.Policy",
+        "AISafetyAtlas.Preference.Source.ReasonableForF",
+        "AISafetyAtlas.Preference.Source.ReasonableForF.AmongLowestCompatible",
+        "AISafetyAtlas.Preference.Source.ReasonableForF.Compatible",
+        "AISafetyAtlas.Preference.Source.ReasonableForF.NotAmongLowestCompatible"
+      ]
+    },
+    "AISafetyAtlas.Preference.Source.ReasonableForF.proposition_eight": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Preference.Pair",
+        "AISafetyAtlas.Preference.Policy",
+        "AISafetyAtlas.Preference.Source.F\u2084",
+        "AISafetyAtlas.Preference.Source.ReasonableForF",
+        "AISafetyAtlas.Preference.Source.ReasonableForF.Compatible",
+        "AISafetyAtlas.Preference.Source.ReasonableForF.KPair",
+        "AISafetyAtlas.Preference.Source.ReasonableForF.c"
+      ]
+    },
+    "AISafetyAtlas.Preference.Source.ReasonableForF.proposition_seven": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Preference.Policy",
+        "AISafetyAtlas.Preference.Source.ReasonableForF",
+        "AISafetyAtlas.Preference.Source.ReasonableForF.AmongLowestCompatible",
+        "AISafetyAtlas.Preference.op1",
+        "AISafetyAtlas.Preference.op2",
+        "AISafetyAtlas.Preference.op4",
+        "AISafetyAtlas.Preference.op5",
+        "AISafetyAtlas.Preference.op6"
+      ]
+    },
+    "AISafetyAtlas.Preference.Source.ReasonableForF.theorem_two_conditional": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Preference.Pair",
+        "AISafetyAtlas.Preference.Policy",
+        "AISafetyAtlas.Preference.Source.ReasonableForF",
+        "AISafetyAtlas.Preference.Source.ReasonableForF.KPair",
+        "AISafetyAtlas.Preference.Source.ReasonableForF.NotAmongLowestCompatible",
+        "AISafetyAtlas.Preference.op1",
+        "AISafetyAtlas.Preference.op2",
+        "AISafetyAtlas.Preference.op4",
+        "AISafetyAtlas.Preference.op5",
+        "AISafetyAtlas.Preference.op6"
+      ]
+    },
+    "AISafetyAtlas.Preference.computable_decodeBehaviour": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Preference.decodeBehaviour"
+      ]
+    },
+    "AISafetyAtlas.Preference.computable_encodeExplanation": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Preference.encodeExplanation"
+      ]
+    },
+    "AISafetyAtlas.Preference.consistent_rewards_eq_univ": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Preference.Explains",
+        "AISafetyAtlas.Preference.Planner"
+      ]
+    },
+    "AISafetyAtlas.Preference.decodeBehaviour": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Preference.decodeBehaviour_encodeExplanation": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Preference.decodeBehaviour",
+        "AISafetyAtlas.Preference.encodeExplanation"
+      ]
+    },
+    "AISafetyAtlas.Preference.degenerate_antirational": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Preference.Explains",
+        "AISafetyAtlas.Preference.Policy",
+        "AISafetyAtlas.Preference.RewardFn",
+        "AISafetyAtlas.Preference.greedyPlanner",
+        "AISafetyAtlas.Preference.rewardOf"
+      ]
+    },
+    "AISafetyAtlas.Preference.degenerate_explanation_cheap": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Preference.encodeExplanation"
+      ]
+    },
+    "AISafetyAtlas.Preference.degenerate_greedy": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Preference.Explains",
+        "AISafetyAtlas.Preference.Policy",
+        "AISafetyAtlas.Preference.RewardFn",
+        "AISafetyAtlas.Preference.greedyPlanner",
+        "AISafetyAtlas.Preference.rewardOf"
+      ]
+    },
+    "AISafetyAtlas.Preference.degenerate_indifferent": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Preference.Explains",
+        "AISafetyAtlas.Preference.indifferentPlanner"
+      ]
+    },
+    "AISafetyAtlas.Preference.encodeExplanation": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Preference.encodeExplanation_injective": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Preference.encodeExplanation"
+      ]
+    },
+    "AISafetyAtlas.Preference.exists_planner": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Preference.Explains",
+        "AISafetyAtlas.Preference.Planner"
+      ]
+    },
+    "AISafetyAtlas.Preference.exists_reward": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Preference.Explains",
+        "AISafetyAtlas.Preference.Planner"
+      ]
+    },
+    "AISafetyAtlas.Preference.explanation_at_least_behaviour": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Preference.encodeExplanation"
+      ]
+    },
+    "AISafetyAtlas.Preference.explanation_complexity_eq_behaviour": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Preference.encodeExplanation"
+      ]
+    },
+    "AISafetyAtlas.Preference.greedyAction": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Preference.RewardFn"
+      ]
+    },
+    "AISafetyAtlas.Preference.greedyAction_max": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Preference.RewardFn",
+        "AISafetyAtlas.Preference.greedyAction"
+      ]
+    },
+    "AISafetyAtlas.Preference.greedyPlanner": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Preference.Planner",
+        "AISafetyAtlas.Preference.Policy",
+        "AISafetyAtlas.Preference.RewardFn",
+        "AISafetyAtlas.Preference.greedyAction"
+      ]
+    },
+    "AISafetyAtlas.Preference.greedy_rewardOf": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Preference.Explains",
+        "AISafetyAtlas.Preference.Policy",
+        "AISafetyAtlas.Preference.RewardFn",
+        "AISafetyAtlas.Preference.greedyPlanner",
+        "AISafetyAtlas.Preference.rewardOf"
+      ]
+    },
+    "AISafetyAtlas.Preference.indifferentPlanner": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Preference.Planner"
+      ]
+    },
+    "AISafetyAtlas.Preference.lemma_six": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Preference.Explains",
+        "AISafetyAtlas.Preference.Policy",
+        "AISafetyAtlas.Preference.RewardFn",
+        "AISafetyAtlas.Preference.greedyPlanner",
+        "AISafetyAtlas.Preference.indifferentPlanner",
+        "AISafetyAtlas.Preference.negPlanner",
+        "AISafetyAtlas.Preference.rewardOf"
+      ]
+    },
+    "AISafetyAtlas.Preference.negPlanner": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Preference.Planner",
+        "AISafetyAtlas.Preference.Policy",
+        "AISafetyAtlas.Preference.RewardFn"
+      ]
+    },
+    "AISafetyAtlas.Preference.neg_twin": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Preference.Explains",
+        "AISafetyAtlas.Preference.Planner"
+      ]
+    },
+    "AISafetyAtlas.Preference.op1": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Preference.Pair",
+        "AISafetyAtlas.Preference.Planner",
+        "AISafetyAtlas.Preference.Policy",
+        "AISafetyAtlas.Preference.RewardFn"
+      ]
+    },
+    "AISafetyAtlas.Preference.op2": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Preference.Pair",
+        "AISafetyAtlas.Preference.Planner",
+        "AISafetyAtlas.Preference.Policy",
+        "AISafetyAtlas.Preference.RewardFn",
+        "AISafetyAtlas.Preference.greedyPlanner"
+      ]
+    },
+    "AISafetyAtlas.Preference.op3": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Preference.Pair",
+        "AISafetyAtlas.Preference.Planner",
+        "AISafetyAtlas.Preference.Policy",
+        "AISafetyAtlas.Preference.RewardFn"
+      ]
+    },
+    "AISafetyAtlas.Preference.op3_op1_op5": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Preference.Policy",
+        "AISafetyAtlas.Preference.op1",
+        "AISafetyAtlas.Preference.op3",
+        "AISafetyAtlas.Preference.op5"
+      ]
+    },
+    "AISafetyAtlas.Preference.op3_op2_op6": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Preference.Policy",
+        "AISafetyAtlas.Preference.op2",
+        "AISafetyAtlas.Preference.op3",
+        "AISafetyAtlas.Preference.op6"
+      ]
+    },
+    "AISafetyAtlas.Preference.op3_op4": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Preference.Pair",
+        "AISafetyAtlas.Preference.Policy",
+        "AISafetyAtlas.Preference.op3",
+        "AISafetyAtlas.Preference.op4"
+      ]
+    },
+    "AISafetyAtlas.Preference.op3_op4_op2_op6": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Preference.Policy",
+        "AISafetyAtlas.Preference.op2",
+        "AISafetyAtlas.Preference.op3",
+        "AISafetyAtlas.Preference.op4",
+        "AISafetyAtlas.Preference.op6"
+      ]
+    },
+    "AISafetyAtlas.Preference.op4": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Preference.Pair",
+        "AISafetyAtlas.Preference.Planner",
+        "AISafetyAtlas.Preference.Policy",
+        "AISafetyAtlas.Preference.RewardFn"
+      ]
+    },
+    "AISafetyAtlas.Preference.op4_op4": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Preference.Pair",
+        "AISafetyAtlas.Preference.op4"
+      ]
+    },
+    "AISafetyAtlas.Preference.op5": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Preference.Planner",
+        "AISafetyAtlas.Preference.Policy",
+        "AISafetyAtlas.Preference.RewardFn",
+        "AISafetyAtlas.Preference.indifferentPlanner"
+      ]
+    },
+    "AISafetyAtlas.Preference.op6": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Preference.Policy",
+        "AISafetyAtlas.Preference.RewardFn",
+        "AISafetyAtlas.Preference.rewardOf"
+      ]
+    },
+    "AISafetyAtlas.Preference.policy_neg_twin": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Preference.Explains",
+        "AISafetyAtlas.Preference.Planner",
+        "AISafetyAtlas.Preference.Policy",
+        "AISafetyAtlas.Preference.RewardFn"
+      ]
+    },
+    "AISafetyAtlas.Preference.policy_reward_unidentifiable": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Preference.Explains",
+        "AISafetyAtlas.Preference.Planner",
+        "AISafetyAtlas.Preference.Policy",
+        "AISafetyAtlas.Preference.RewardFn"
+      ]
+    },
+    "AISafetyAtlas.Preference.rewardOf": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Preference.Policy",
+        "AISafetyAtlas.Preference.RewardFn"
+      ]
+    }
+  }
+}

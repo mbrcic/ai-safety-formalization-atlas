@@ -16,7 +16,12 @@ equations.  This module writes those equations down.
 
 ## The source equations
 
-Ring and Orseau, *Delusion, Survival, and Intelligent Agents*, AGI 2011, §2:
+Ring and Orseau, *Delusion, Survival, and Intelligent Agents*, AGI 2011, §2.
+The **published** paper (Springer LNAI 6830, mirrored at `people.idsia.ch/~ring/`
+and on HAL) is canonical; the AGI-2011 conference draft is support only.
+Equations (1)–(3) are the same in both, up to the published `a_{t_h}` with
+`t_h = |h| + 1` where the draft writes `a_{|h|}`; `t` is a parameter below, so
+both indexings instantiate it.
 
 ```
 (1)  a_{|h|}  := argmax_{a ∈ A} v_{|h|}(ha)

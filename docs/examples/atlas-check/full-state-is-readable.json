@@ -1,0 +1,7 @@
+{
+  "schema": "atlas-check/1",
+  "kind": "knowability",
+  "states": 4,
+  "observation": [0, 1, 2, 3],
+  "property": [0, 1, 0, 1]
+}

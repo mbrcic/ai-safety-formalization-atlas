@@ -5,6 +5,7 @@ public import AISafetyAtlas.Oversight.JointObservation.Coverage
 public import AISafetyAtlas.Oversight.JointObservation.Portfolio
 public import AISafetyAtlas.Oversight.JointObservation.FiniteDecision
 public import AISafetyAtlas.Oversight.JointObservation.RepairBoundary
+public import AISafetyAtlas.Oversight.JointObservation.Residual
 
 /-!
 # Joint observation — public facade
@@ -31,6 +32,9 @@ checker, and the boundary separating repairs that can work from repairs that can
 | **Law (C2)** | `decideCoverage_covered_iff` | The checker agrees with `Covers` |
 | **Boundary (C3)** | `postprocess_cannot_repair_collision` | Computation over an unchanged interface inherits every collision |
 | **Law (C3)** | `covers_of_refines` | Genuine refinement never loses established coverage |
+| **Model (C5)** | `worstResidual` | How many target values the worst output still leaves open — distribution-free |
+| **Law (C5)** | `covers_iff_worstResidual_le_one` | Coverage is exactly the residual-at-most-one case |
+| **Boundary (C5)** | `worstResidual_le_postprocess` | The repair boundary as a number: post-processing never lowers the residual |
 | **Scope (C4)** | `observe_truthful` | Everything is stated under the fixed truthful mechanism `M0` |
 | **Model** | `privateSingletonCandidate` | One principal's *full private evidence* -- distinct from its declared view |
 

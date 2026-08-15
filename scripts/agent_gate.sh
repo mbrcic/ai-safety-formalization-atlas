@@ -48,6 +48,21 @@ python3 scripts/generate_registry_views.py --check
 echo "==> validate_current_state"
 python3 scripts/validate_current_state.py
 
+echo "==> check_wolpert_status_table"
+python3 scripts/check_wolpert_status_table.py
+
+echo "==> check_wolpert_2018_status_table"
+python3 scripts/check_wolpert_2018_status_table.py
+
+echo "==> generate_dependency_graph --check"
+python3 scripts/generate_dependency_graph.py --check
+
+echo "==> check_public_api"
+python3 scripts/check_public_api.py
+
+echo "==> check_example_coverage"
+python3 scripts/check_example_coverage.py
+
 echo "==> check_docs_paths"
 python3 scripts/check_docs_paths.py
 

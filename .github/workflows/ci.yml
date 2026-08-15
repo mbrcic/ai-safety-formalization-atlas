@@ -144,3 +144,17 @@ jobs:
       - name: Kernel axiom check for headline declarations
         if: steps.filter.outputs.run_lean == 'true'
         run: python3 scripts/check_print_axioms.py
+      - name: atlas-check agrees with the Lean proofs
+        if: steps.filter.outputs.run_lean == 'true'
+        run: ./scripts/check_atlas_check.sh
+      - name: Declaration dependency views are current
+        # The cheap gate can only check that these views name live declarations;
+        # detecting a view that is missing new ones needs an elaborated
+        # environment, which exists here and nowhere earlier.
+        if: steps.filter.outputs.run_lean == 'true'
+        run: |
+          python3 scripts/generate_dependency_graph.py --write
+          git diff --exit-code --stat -- 'docs/status/*-dependency-graph.md' \
+            'docs/status/*-dependency-graph.json'
+          git diff --exit-code -- 'docs/status/*-dependency-graph.md' \
+            'docs/status/*-dependency-graph.json'

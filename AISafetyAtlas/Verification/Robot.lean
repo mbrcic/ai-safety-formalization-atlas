@@ -11,7 +11,32 @@ Verification of Ethical and Legal Behaviour of Robots* (UU-PCS-2021-02, 2021).
 Full extracted statements and a proof comparison live in
 `docs/guide/robot-verification-model.md`.
 
-## Paper statements (extracted)
+## Which version, and a number collision
+
+The survey cites — and this module transcribes — the **Utrecht technical
+report**, which is unrefereed. A peer-reviewed version exists: Wiedermann and van
+Leeuwen, *Validating Non-trivial Semantic Properties of Autonomous Robots*, in
+*Philosophy and Theory of Artificial Intelligence 2021*, SAPERE vol. 63,
+pp. 91–104, Springer 2022 (`doi:10.1007/978-3-031-09153-7_8`).
+
+**The two reuse the same numbers for different statements.** Every number below
+is the technical report's:
+
+| technical report | published chapter |
+|---|---|
+| **Theorem 1** — non-trivial `P`: no algorithmic procedure tells whether a robot's actions always satisfy `P` | **Theorem 1** — for **regular** `P`: `P` is trivial **iff** `R_P` is recursive |
+| **Corollary 1** — the same for robots programmed by structured programs | **Corollary 1** — for regular `P`: `P` is non-trivial **iff** `R_P` is non-recursive |
+| **Theorem 2** — no feasible `P`-module decides correctly at runtime | **Theorem 2** — no `P`-verifier of whatever kind decides `P` for a given robot |
+| Definition 2, structured programs | Definition 3, **regularity**; Definition 4, non-triviality |
+
+So a reader who takes *"Theorem 1"* below to the published chapter gets a
+different theorem. The published Theorem 1 is also **strictly stronger** — an
+equivalence, strengthened in the following remark to *"not even recursively
+enumerable"* — and carries a **regularity** hypothesis the report's does not.
+`action_safety_unverifiable` matches the report's Theorem 1 and Corollary 1, and
+only the easy half of the published one.
+
+## Paper statements (extracted, technical-report numbering)
 
 **Theorem 1.** Let *P* be any non-trivial robot property. There does not exist
 an algorithmic procedure that will enable an observer to tell, given an

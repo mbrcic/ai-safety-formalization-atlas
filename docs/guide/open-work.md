@@ -5,9 +5,9 @@ inventory as complete formal coverage.
 
 For the compositional, wireheading, and preference-deduction increment
 (A1–A3, B1–B3, B7): formal cores compile and are axiom-clean. Most of the
-HIGH-severity scaffold/representation gaps from the first adversarial review
-have been closed by WP packages; remaining issues are paper-parity depth
-(stochastic CRMDP, Prop. 10, nontrivial reasonable languages, etc.), not
+scaffold and representation gaps are closed; the remaining issues are
+paper-parity depth (stochastic CRMDP, Prop. 10, nontrivial reasonable
+languages, etc.), not
 “missing cores.” **Primary surfaces** for these (and other) domains are listed
 in each facade module docstring under `AISafetyAtlas/*.lean`. Durable residual
 gaps and stop rules:
@@ -179,18 +179,10 @@ change.
    Reassess only for a concrete theorem that needs Fourier weights, correlation,
    or influence.
 
-## Leads from parent research reports and the initial plan
+## Leads
 
-The files in the parent directory (`../`) are **discovery inputs**, not committed
-project sources:
-
-- `AI_Safety_Formalization_Atlas_Initial_Plan.md` / `.docx` — execution plan
-- `formalization_registry_chatgpt.md` — early survey-vs-ITP coverage sketch
-- `registry_of_formalizations_ai_safety.md` — broader landscape and staging advice
-- `AI Safety Formalization Atlas-simple.docx` — short framing note
-
-They remain intentionally outside git. Leads below are re-checked against the
-current registry and public API so assimilation does not re-open completed work.
+Leads below are checked against the current registry and public API, so taking
+one up does not re-open completed work.
 
 ### Already assimilated (do not re-do)
 

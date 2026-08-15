@@ -412,7 +412,7 @@ Pointer to the informal proof is given per target.
   [`brcic-yampolskiy-2023.md`](../status/sources/brcic-yampolskiy-2023.md));
   landscape index is linked alongside it.
 
-## Maintainer-only: public issue queue (R6-11)
+## Public issue queue
 
 Do **not** open GitHub issues without maintainer authorization. When authorized,
 open issues for remaining outward work (e.g. CT-2) using the acceptance
@@ -420,19 +420,19 @@ evidence above as the issue body. Suggested title:
 
 1. `CT-2: Triage AFP No_Free_Lunch_ML for BY-020 / BY-021`
 
-## Completed since round 5–7
+## Completed
 
 - Bridge-status lifecycle vocabulary (`HUMAN_REVIEW` / `STATEMENT_REVIEWED` /
   `REVIEWED`) with `bridge_review` evidence, enforced by
   `scripts/validate_registry.py`; the v0.1 all-`HUMAN_REVIEW` snapshot now lives
   only in the release audit.
 - Structured `candidate_formalizations` schema; BY-015 Chaitin promoted to
-  coverage; BY-001 / BY-020 / BY-021 candidates populated (R6-4).
+  coverage; BY-001 / BY-020 / BY-021 candidates populated.
 - Generated full-registry human view at
   [`sources/brcic-yampolskiy-2023.md`](../status/sources/brcic-yampolskiy-2023.md).
 - `registry.yaml` + generated landscape index for non–Table-1 formalizations
-  (R6-3).
-- Status breakdown of WRAPPER vs BRIDGE (R6-2); STATE generated snapshot (R7-1).
-- Kernel `#print axioms` CI check (R7-2); Upstream LICENSE copies (R7-3).
-- Validator perimeter documented in methodology (R7-2).
-- CT-4 AgentBehavior consumer; CT-3 review package (no fake graduation).
+  .
+- Status breakdown of WRAPPER vs BRIDGE; generated STATE snapshot.
+- Kernel `#print axioms` CI check; Upstream LICENSE copies.
+- Validator perimeter documented in methodology.
+- CT-4 AgentBehavior consumer; CT-3 review package.

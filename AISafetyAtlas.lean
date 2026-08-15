@@ -5,6 +5,7 @@ public import AISafetyAtlas.Compositional
 public import AISafetyAtlas.Explainability
 public import AISafetyAtlas.Learning
 public import AISafetyAtlas.Knowledge
+public import AISafetyAtlas.Inference
 public import AISafetyAtlas.Knowledge.Embedded
 public import AISafetyAtlas.Knowledge.Embedded.Composition
 public import AISafetyAtlas.Knowledge.Embedded.Finite
@@ -12,6 +13,8 @@ public import AISafetyAtlas.Knowledge.Temporal
 public import AISafetyAtlas.Knowledge.Ambiguity
 public import AISafetyAtlas.Knowledge.SelfReference
 public import AISafetyAtlas.Knowledge.Accumulation
+public import AISafetyAtlas.Knowledge.Devices
+public import AISafetyAtlas.Knowledge.Check
 public import AISafetyAtlas.Logic
 public import AISafetyAtlas.Oversight.JointObservation
 public import AISafetyAtlas.Preference
@@ -67,6 +70,7 @@ the result is not proved here.
 |---|---|
 | `AISafetyAtlas.Computability` | Rice / halting (Mathlib wrappers) |
 | `AISafetyAtlas.Explainability` | Attribution impossibility |
+| `AISafetyAtlas.Inference` | Wolpert inference devices: weak/strong inference, control, physical knowledge |
 | `AISafetyAtlas.Learning` | Finite NFL cores |
 | `AISafetyAtlas.Logic` | Incompleteness / undefinability |
 | `AISafetyAtlas.SelfAwareness` | Bounded process-compositional limits on complete self-awareness |
@@ -98,6 +102,8 @@ Import the specialization needed; the parent does not supply it.
 | `AISafetyAtlas.Knowledge.Ambiguity` | Finite fibre ambiguity and the counting obstruction |
 | `AISafetyAtlas.Knowledge.SelfReference` | The model as a component of the state it models |
 | `AISafetyAtlas.Knowledge.Accumulation` | Window ambiguity: never decreases, at most multiplies |
+| `AISafetyAtlas.Knowledge.Devices` | Transports between the knowability kernel and Wolpert inference devices |
+| `AISafetyAtlas.Knowledge.Check` | Executable checkers for the kernel and the transports, with agreement theorems |
 | `AISafetyAtlas.Preference` | Planner/reward unidentifiability, BY-011 (kernel) |
 | `AISafetyAtlas.Preference.Complexity` | Simplicity does not break the planner/reward tie |
 | `AISafetyAtlas.Preference.Reasonable` | Basic operations and Proposition 7 |

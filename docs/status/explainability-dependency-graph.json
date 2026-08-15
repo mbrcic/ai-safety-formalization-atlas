@@ -1,0 +1,49 @@
+{
+  "note": "Edges are: for a definition, its type and body; for a theorem, its statement only. Lean's module system does not export proof terms.",
+  "cluster": "AISafetyAtlas.Explainability.",
+  "declarations": {
+    "AISafetyAtlas.Explainability.FeatureIndex": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Upstream.Attribution.FeatureIndex"
+      ]
+    },
+    "AISafetyAtlas.Explainability.RashomonProperty": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Upstream.Attribution.FeatureIndex",
+        "AISafetyAtlas.Upstream.Attribution.FeatureIndex.P",
+        "AISafetyAtlas.Upstream.Attribution.RashomonProperty"
+      ]
+    },
+    "AISafetyAtlas.Explainability.attribution_impossibility": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Explainability.FeatureIndex",
+        "AISafetyAtlas.Explainability.RashomonProperty",
+        "AISafetyAtlas.Explainability.inGroup",
+        "AISafetyAtlas.Upstream.Attribution.FeatureIndex.L",
+        "AISafetyAtlas.Upstream.Attribution.FeatureIndex.P"
+      ]
+    },
+    "AISafetyAtlas.Explainability.attribution_impossibility_weak": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Explainability.FeatureIndex",
+        "AISafetyAtlas.Explainability.RashomonProperty",
+        "AISafetyAtlas.Explainability.inGroup",
+        "AISafetyAtlas.Upstream.Attribution.FeatureIndex.L",
+        "AISafetyAtlas.Upstream.Attribution.FeatureIndex.P"
+      ]
+    },
+    "AISafetyAtlas.Explainability.inGroup": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Upstream.Attribution.FeatureIndex",
+        "AISafetyAtlas.Upstream.Attribution.FeatureIndex.L",
+        "AISafetyAtlas.Upstream.Attribution.FeatureIndex.P",
+        "AISafetyAtlas.Upstream.Attribution.inGroup"
+      ]
+    }
+  }
+}

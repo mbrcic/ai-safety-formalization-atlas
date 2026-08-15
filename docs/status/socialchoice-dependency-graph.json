@@ -1,0 +1,153 @@
+{
+  "note": "Edges are: for a definition, its type and body; for a theorem, its statement only. Lean's module system does not export proof terms.",
+  "cluster": "AISafetyAtlas.SocialChoice.",
+  "declarations": {
+    "AISafetyAtlas.SocialChoice.IndependenceOfIrrelevantAlternatives": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.SocialChoice.SocialWelfareFunction",
+        "AISafetyAtlas.Upstream.Arrow.IIA"
+      ]
+    },
+    "AISafetyAtlas.SocialChoice.NonDictatorship": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.SocialChoice.SocialWelfareFunction",
+        "AISafetyAtlas.Upstream.Arrow.NonDictatorship"
+      ]
+    },
+    "AISafetyAtlas.SocialChoice.Preference": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Upstream.Arrow.Preorder'"
+      ]
+    },
+    "AISafetyAtlas.SocialChoice.Profile": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Upstream.Arrow.Profile"
+      ]
+    },
+    "AISafetyAtlas.SocialChoice.ResoluteStrategyproofness": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.SocialChoice.ResoluteVoting": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.SocialChoice.SocialWelfareFunction": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Upstream.Arrow.SWF"
+      ]
+    },
+    "AISafetyAtlas.SocialChoice.Unanimity": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.SocialChoice.SocialWelfareFunction",
+        "AISafetyAtlas.Upstream.Arrow.Unanimity"
+      ]
+    },
+    "AISafetyAtlas.SocialChoice.Utility.Function": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.SocialChoice.Utility.IndependenceOfIrrelevantAlternatives": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.SocialChoice.Utility.Profile",
+        "AISafetyAtlas.SocialChoice.Utility.SocialWelfareFunction"
+      ]
+    },
+    "AISafetyAtlas.SocialChoice.Utility.NonDictatorship": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.SocialChoice.Utility.Profile",
+        "AISafetyAtlas.SocialChoice.Utility.SocialWelfareFunction"
+      ]
+    },
+    "AISafetyAtlas.SocialChoice.Utility.Profile": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.SocialChoice.Utility.Function"
+      ]
+    },
+    "AISafetyAtlas.SocialChoice.Utility.SocialWelfareFunction": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.SocialChoice.Utility.Function",
+        "AISafetyAtlas.SocialChoice.Utility.Profile"
+      ]
+    },
+    "AISafetyAtlas.SocialChoice.Utility.Unanimity": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.SocialChoice.Utility.Profile",
+        "AISafetyAtlas.SocialChoice.Utility.SocialWelfareFunction"
+      ]
+    },
+    "AISafetyAtlas.SocialChoice.Utility.arrow": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SocialChoice.Utility.IndependenceOfIrrelevantAlternatives",
+        "AISafetyAtlas.SocialChoice.Utility.NonDictatorship",
+        "AISafetyAtlas.SocialChoice.Utility.SocialWelfareFunction",
+        "AISafetyAtlas.SocialChoice.Utility.Unanimity"
+      ]
+    },
+    "AISafetyAtlas.SocialChoice.Utility.preference": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.SocialChoice.Preference",
+        "AISafetyAtlas.SocialChoice.Utility.Function"
+      ]
+    },
+    "AISafetyAtlas.SocialChoice.Utility.preference_le_iff": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SocialChoice.Utility.Function",
+        "AISafetyAtlas.SocialChoice.Utility.preference",
+        "AISafetyAtlas.Upstream.Arrow.Preorder'.le"
+      ]
+    },
+    "AISafetyAtlas.SocialChoice.VotingProfile": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.SocialChoice.VotingRule": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.SocialChoice.VotingUnanimity": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.SocialChoice.arrow": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SocialChoice.IndependenceOfIrrelevantAlternatives",
+        "AISafetyAtlas.SocialChoice.NonDictatorship",
+        "AISafetyAtlas.SocialChoice.SocialWelfareFunction",
+        "AISafetyAtlas.SocialChoice.Unanimity"
+      ]
+    },
+    "AISafetyAtlas.SocialChoice.gibbard_satterthwaite": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SocialChoice.ResoluteStrategyproofness",
+        "AISafetyAtlas.SocialChoice.ResoluteVoting",
+        "AISafetyAtlas.SocialChoice.VotingProfile",
+        "AISafetyAtlas.SocialChoice.VotingRule",
+        "AISafetyAtlas.SocialChoice.VotingUnanimity",
+        "AISafetyAtlas.SocialChoice.topChoice"
+      ]
+    },
+    "AISafetyAtlas.SocialChoice.topChoice": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.SocialChoice.VotingProfile"
+      ]
+    }
+  }
+}

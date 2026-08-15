@@ -5,7 +5,7 @@ The ledger as a graph. `related_result_ids` in [`registry.yaml`](../../registry.
 `relations` records *how*, and `result_shape` records what kind of statement a
 row makes at all.
 
-Coverage: **18 typed edges** across **10 rows**, and **12 rows** carry a shape, out of **72** results (21 of which record untyped adjacency).
+Coverage: **20 typed edges** across **11 rows**, and **13 rows** carry a shape, out of **77** results (26 of which record untyped adjacency).
 This is a pilot scoped to the self-knowledge cluster. An untyped row is not a
 claim that the row has no relations — it is a claim that nobody has decided them.
 
@@ -21,7 +21,7 @@ row's prose.
 | `ACHIEVABILITY` | a construction attaining something | LAND-CL-001 |
 | `BOUND` | an inequality, so it degrades rather than switching off | LAND-ACCUM-001 |
 | `CHARACTERIZATION` | necessary and sufficient — says what *is* achievable as well as what is not | LAND-AMBIG-001, LAND-JOINTOBS-001, LAND-KNOW-001, LAND-SELFMEAS-003, LAND-SELFREF-001 |
-| `INFRASTRUCTURE` | definitions and transfer lemmas, no standalone claim | LAND-TEMPORAL-001 |
+| `INFRASTRUCTURE` | definitions and transfer lemmas, no standalone claim | LAND-KNOW-DEVICE-001, LAND-TEMPORAL-001 |
 | `POINT_IMPOSSIBILITY` | rules out one extreme configuration | BY-044, LAND-CRMDP-KNOW-001, LAND-SELFMEAS-001, LAND-SELFMEAS-002 |
 
 ## Edge kinds
@@ -46,6 +46,8 @@ row's prose.
 | LAND-CRMDP-KNOW-001 | `BUILDS_ON` | BY-039 — Reward corruption unsolvability | Both ingredients are BY-039's module: history_complement supplies the collision and return_add_complement supplies the disagreement. |
 | LAND-CRMDP-KNOW-001 | `INSTANTIATES` | LAND-KNOW-001 — Exact knowability: the observation-factorization kernel | Takes the state to be the unknown environment, the observation to be the history a fixed policy receives, and the target to be the true finite-horizon return. |
 | LAND-JOINTOBS-001 | `BUILDS_ON` | LAND-KNOW-001 — Exact knowability: the observation-factorization kernel | Covers and Refines are definitionally the kernel's Knowable and Determines, so Coverage and RepairBoundary discharge their proofs by calling the kernel rather than repeating a factorization argument. |
+| LAND-KNOW-DEVICE-001 | `BOUNDARY_PARTNER` | BY-024 — Physical limits on inference | Model delta: Knowable asks one decoder to work at every state, while Definition 3 fixes the conclusion function and lets the choice of setup block vary with the probe. The quantifier alternation is why neither implies the other, and why the transports below are conditional rather than an identification. |
+| LAND-KNOW-DEVICE-001 | `BUILDS_ON` | LAND-KNOW-001 — Exact knowability: the observation-factorization kernel | Consumes IndistinguishabilityWitness as the object crossing the joint and produces Knowable in the positive direction; neither component of the device's pair suffices alone. |
 | LAND-SELFMEAS-001 | `INSTANTIATES` | LAND-KNOW-001 — Exact knowability: the observation-factorization kernel | The whole-state case: the target is the identity, so knowability is injectivity of the observation. |
 | LAND-SELFMEAS-002 | `BUILDS_ON` | LAND-KNOW-001 — Exact knowability: the observation-factorization kernel | not_knowable_state_of_properInclusion hands the proper-inclusion pair straight to not_knowable_of_collision. |
 | LAND-SELFMEAS-003 | `BUILDS_ON` | LAND-KNOW-001 — Exact knowability: the observation-factorization kernel | knowable_whole_state_iff_injective is knowable_id_iff_injective at the apparatus reading. |
@@ -68,6 +70,13 @@ why every such edge is required to carry the delta.
 - **LAND-SELFMEAS-001** (POINT_IMPOSSIBILITY) — Self-measurement failure for an embedded observation
 
 Not a formal duality: the two do not share a model. This row is the generic whole-state specialization of the knowability kernel, not Breuer's theorem, which is LAND-SELFMEAS-002: an abstract restriction map from global states to apparatus states, with no dynamics, no messages and no algorithm; Chandy-Lamport's is a message-passing distributed system with channels, markers and a recording procedure. What the pair brackets is contemporaneity. The impossibility is about distinguishing the state one is in *now*; the construction recovers a consistent global state by giving up exactly that, recording a cut rather than an instant.
+
+### LAND-KNOW-DEVICE-001 ↔ BY-024
+
+- **LAND-KNOW-DEVICE-001** (INFRASTRUCTURE) — Transports between the knowability kernel and inference devices
+- **BY-024** (unshaped) — Physical limits on inference
+
+Model delta: Knowable asks one decoder to work at every state, while Definition 3 fixes the conclusion function and lets the choice of setup block vary with the probe. The quantifier alternation is why neither implies the other, and why the transports below are conditional rather than an identification.
 
 ### LAND-TEMPORAL-001 ↔ LAND-CL-001
 

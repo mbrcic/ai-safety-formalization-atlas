@@ -13,6 +13,7 @@ from typing import NoReturn
 ROOT = Path(__file__).resolve().parents[1]
 LEAN_ROOT = ROOT / "AISafetyAtlas.lean"
 LEAN_BUILD_TARGETS = ROOT / "scripts/lean_build_targets.txt"
+EXECUTABLE_ROOT = ROOT / "Main.lean"
 FORBIDDEN_LEAN_TOKEN = re.compile(
     r"\b(sorry|admit|axiom|sorryAx|native_decide|implemented_by)\b"
 )
@@ -276,6 +277,13 @@ def validate_lean_build_closure(lean_files: list[Path]) -> None:
         "xargs lake build < scripts/lean_build_targets.txt" in workflow,
         "CI does not consume the checked Lean build-target manifest",
     )
+    # The executable is not in that manifest — it is not an `AISafetyAtlas.*`
+    # module — so its compile has to be asserted separately or it silently stops
+    # being built.
+    require(
+        "scripts/check_atlas_check.sh" in workflow,
+        "CI does not build and check the atlas-check executable",
+    )
 
 
 def main() -> None:
@@ -393,8 +401,15 @@ def main() -> None:
     lean_files = list((ROOT / "AISafetyAtlas").rglob("*.lean"))
     lean_files.append(LEAN_ROOT)
     validate_lean_build_closure(lean_files)
+    # The build-closure check above is about `AISafetyAtlas.*` modules and their
+    # import graph, which `Main.lean` is deliberately outside of — the executable
+    # is not a library module and nothing imports it. The trust scan is not about
+    # that graph: it is about what ships in this repository's Lean, and an
+    # executable that reports verdicts is exactly where a `sorry` or a
+    # `native_decide` would matter and go unnoticed.
+    scanned = lean_files + [EXECUTABLE_ROOT]
     offenders = {}
-    for path in lean_files:
+    for path in scanned:
         tokens = forbidden_lean_tokens(path.read_text(encoding="utf-8"))
         if tokens:
             offenders[str(path.relative_to(ROOT))] = tokens

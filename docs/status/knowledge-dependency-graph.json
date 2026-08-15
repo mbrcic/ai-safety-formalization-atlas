@@ -1,0 +1,803 @@
+{
+  "note": "Edges are: for a definition, its type and body; for a theorem, its statement only. Lean's module system does not export proof terms.",
+  "cluster": "AISafetyAtlas.Knowledge.",
+  "declarations": {
+    "AISafetyAtlas.Knowledge.Check.collisionPairs": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Knowledge.Check.decidableBlockwiseCollision": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Inference.InferenceDevice",
+        "AISafetyAtlas.Inference.InferenceDevice.Realized",
+        "AISafetyAtlas.Inference.InferenceDevice.Setup",
+        "AISafetyAtlas.Inference.InferenceDevice.concl",
+        "AISafetyAtlas.Inference.InferenceDevice.setup",
+        "AISafetyAtlas.Knowledge.Devices.BlockwiseCollision"
+      ]
+    },
+    "AISafetyAtlas.Knowledge.Check.decidableRealized": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Inference.InferenceDevice",
+        "AISafetyAtlas.Inference.InferenceDevice.Realized",
+        "AISafetyAtlas.Inference.InferenceDevice.Setup",
+        "AISafetyAtlas.Inference.InferenceDevice.setup"
+      ]
+    },
+    "AISafetyAtlas.Knowledge.Check.decidableSurjective": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Knowledge.Check.decidableWeaklyInfers": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Inference.InferenceDevice",
+        "AISafetyAtlas.Inference.InferenceDevice.Realized",
+        "AISafetyAtlas.Inference.InferenceDevice.Setup",
+        "AISafetyAtlas.Inference.InferenceDevice.concl",
+        "AISafetyAtlas.Inference.InferenceDevice.setup",
+        "AISafetyAtlas.Inference.IsProbe",
+        "AISafetyAtlas.Inference.WeaklyInfers"
+      ]
+    },
+    "AISafetyAtlas.Knowledge.Check.findCollision": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Knowledge.Check.collisionPairs"
+      ]
+    },
+    "AISafetyAtlas.Knowledge.Check.findCollision_eq_none_iff": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Knowledge.Check.findCollision",
+        "AISafetyAtlas.Knowledge.Knowable"
+      ]
+    },
+    "AISafetyAtlas.Knowledge.Check.findCollision_eq_some": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Knowledge.Check.findCollision"
+      ]
+    },
+    "AISafetyAtlas.Knowledge.Check.knowable_of_findCollision_eq_none": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Knowledge.Check.findCollision",
+        "AISafetyAtlas.Knowledge.Knowable"
+      ]
+    },
+    "AISafetyAtlas.Knowledge.Check.not_knowable_of_findCollision_eq_some": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Knowledge.Check.findCollision",
+        "AISafetyAtlas.Knowledge.Knowable"
+      ]
+    },
+    "AISafetyAtlas.Knowledge.Determines": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Knowledge.Devices.BlockAnswers": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Inference.InferenceDevice",
+        "AISafetyAtlas.Inference.InferenceDevice.Setup",
+        "AISafetyAtlas.Inference.InferenceDevice.concl",
+        "AISafetyAtlas.Inference.InferenceDevice.setup"
+      ]
+    },
+    "AISafetyAtlas.Knowledge.Devices.BlockwiseCollision": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Inference.InferenceDevice",
+        "AISafetyAtlas.Inference.InferenceDevice.Realized",
+        "AISafetyAtlas.Inference.InferenceDevice.Setup",
+        "AISafetyAtlas.Inference.InferenceDevice.concl",
+        "AISafetyAtlas.Inference.InferenceDevice.setup"
+      ]
+    },
+    "AISafetyAtlas.Knowledge.Devices.BlockwiseCollision.not_physicallyKnows": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Inference.InferenceDevice",
+        "AISafetyAtlas.Inference.PhysicallyKnows",
+        "AISafetyAtlas.Knowledge.Devices.BlockwiseCollision"
+      ]
+    },
+    "AISafetyAtlas.Knowledge.Devices.BlockwiseCollision.not_weaklyInfers": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Inference.InferenceDevice",
+        "AISafetyAtlas.Inference.IsProbe",
+        "AISafetyAtlas.Inference.WeaklyInfers",
+        "AISafetyAtlas.Knowledge.Devices.BlockwiseCollision"
+      ]
+    },
+    "AISafetyAtlas.Knowledge.Devices.BlockwiseCollision.not_weaklyInfers_classical": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Inference.InferenceDevice",
+        "AISafetyAtlas.Inference.WeaklyInfers",
+        "AISafetyAtlas.Knowledge.Devices.BlockwiseCollision"
+      ]
+    },
+    "AISafetyAtlas.Knowledge.Devices.BlockwiseCollision.witnessAt": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Inference.InferenceDevice",
+        "AISafetyAtlas.Inference.InferenceDevice.Realized",
+        "AISafetyAtlas.Inference.InferenceDevice.Setup",
+        "AISafetyAtlas.Inference.IsProbe",
+        "AISafetyAtlas.Knowledge.Devices.BlockwiseCollision",
+        "AISafetyAtlas.Knowledge.Devices.deviceObservation",
+        "AISafetyAtlas.Knowledge.IndistinguishabilityWitness"
+      ]
+    },
+    "AISafetyAtlas.Knowledge.Devices.blockAnswers_no_collision": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Inference.InferenceDevice",
+        "AISafetyAtlas.Inference.InferenceDevice.Setup",
+        "AISafetyAtlas.Inference.InferenceDevice.concl",
+        "AISafetyAtlas.Inference.InferenceDevice.setup",
+        "AISafetyAtlas.Knowledge.Devices.BlockAnswers"
+      ]
+    },
+    "AISafetyAtlas.Knowledge.Devices.blockwiseCollision_of_knowable_concl": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Inference.InferenceDevice",
+        "AISafetyAtlas.Inference.InferenceDevice.Realized",
+        "AISafetyAtlas.Inference.InferenceDevice.Setup",
+        "AISafetyAtlas.Inference.InferenceDevice.concl",
+        "AISafetyAtlas.Inference.InferenceDevice.setup",
+        "AISafetyAtlas.Knowledge.Devices.BlockwiseCollision",
+        "AISafetyAtlas.Knowledge.Knowable"
+      ]
+    },
+    "AISafetyAtlas.Knowledge.Devices.deviceObservation": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Inference.InferenceDevice",
+        "AISafetyAtlas.Inference.InferenceDevice.Setup",
+        "AISafetyAtlas.Inference.InferenceDevice.concl",
+        "AISafetyAtlas.Inference.InferenceDevice.setup"
+      ]
+    },
+    "AISafetyAtlas.Knowledge.Devices.knowable_probe_of_forall_blockAnswers": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Inference.InferenceDevice",
+        "AISafetyAtlas.Inference.InferenceDevice.Realized",
+        "AISafetyAtlas.Inference.InferenceDevice.Setup",
+        "AISafetyAtlas.Knowledge.Devices.BlockAnswers",
+        "AISafetyAtlas.Knowledge.Devices.deviceObservation",
+        "AISafetyAtlas.Knowledge.Knowable"
+      ]
+    },
+    "AISafetyAtlas.Knowledge.Devices.not_blockAnswers_of_collision": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Inference.InferenceDevice",
+        "AISafetyAtlas.Inference.InferenceDevice.Setup",
+        "AISafetyAtlas.Inference.InferenceDevice.concl",
+        "AISafetyAtlas.Inference.InferenceDevice.setup",
+        "AISafetyAtlas.Knowledge.Devices.BlockAnswers"
+      ]
+    },
+    "AISafetyAtlas.Knowledge.Devices.not_blockAnswers_of_witness": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Inference.InferenceDevice",
+        "AISafetyAtlas.Inference.InferenceDevice.Setup",
+        "AISafetyAtlas.Inference.InferenceDevice.setup",
+        "AISafetyAtlas.Knowledge.Devices.BlockAnswers",
+        "AISafetyAtlas.Knowledge.Devices.deviceObservation",
+        "AISafetyAtlas.Knowledge.IndistinguishabilityWitness",
+        "AISafetyAtlas.Knowledge.IndistinguishabilityWitness.left",
+        "AISafetyAtlas.Knowledge.IndistinguishabilityWitness.right"
+      ]
+    },
+    "AISafetyAtlas.Knowledge.Devices.weaklyInfers_iff_blockAnswers": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Inference.InferenceDevice",
+        "AISafetyAtlas.Inference.InferenceDevice.Realized",
+        "AISafetyAtlas.Inference.InferenceDevice.Setup",
+        "AISafetyAtlas.Inference.IsProbe",
+        "AISafetyAtlas.Inference.WeaklyInfers",
+        "AISafetyAtlas.Knowledge.Devices.BlockAnswers"
+      ]
+    },
+    "AISafetyAtlas.Knowledge.Embedded.Composition.ProductState": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Knowledge.Embedded.Composition.equivalentProductRestriction": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Knowledge.Embedded.Composition.ProductState",
+        "AISafetyAtlas.Knowledge.Embedded.Restriction"
+      ]
+    },
+    "AISafetyAtlas.Knowledge.Embedded.Composition.fibreInference": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Knowledge.Embedded.InferenceMap",
+        "AISafetyAtlas.Knowledge.Embedded.ReadingSet",
+        "AISafetyAtlas.Knowledge.Embedded.Restriction"
+      ]
+    },
+    "AISafetyAtlas.Knowledge.Embedded.Composition.knowable_whole_state_iff_injective": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Knowledge.Embedded.Restriction",
+        "AISafetyAtlas.Knowledge.Knowable"
+      ]
+    },
+    "AISafetyAtlas.Knowledge.Embedded.Composition.measuresAll_fibreInference_of_injective": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Knowledge.Embedded.Composition.fibreInference",
+        "AISafetyAtlas.Knowledge.Embedded.MeasuresAllStates",
+        "AISafetyAtlas.Knowledge.Embedded.Restriction"
+      ]
+    },
+    "AISafetyAtlas.Knowledge.Embedded.Composition.meshing_and_measuresAll_fibreInference_of_bijective": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Knowledge.Embedded.Composition.fibreInference",
+        "AISafetyAtlas.Knowledge.Embedded.MeasuresAllStates",
+        "AISafetyAtlas.Knowledge.Embedded.Meshing",
+        "AISafetyAtlas.Knowledge.Embedded.Restriction"
+      ]
+    },
+    "AISafetyAtlas.Knowledge.Embedded.Composition.meshing_fibreInference_of_surjective": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Knowledge.Embedded.Composition.fibreInference",
+        "AISafetyAtlas.Knowledge.Embedded.Meshing",
+        "AISafetyAtlas.Knowledge.Embedded.Restriction"
+      ]
+    },
+    "AISafetyAtlas.Knowledge.Embedded.Composition.no_meshing_measures_all_of_nontrivial_remainder": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Knowledge.Embedded.Composition.ProductState",
+        "AISafetyAtlas.Knowledge.Embedded.Composition.productRestriction",
+        "AISafetyAtlas.Knowledge.Embedded.InferenceMap",
+        "AISafetyAtlas.Knowledge.Embedded.MeasuresAllStates",
+        "AISafetyAtlas.Knowledge.Embedded.Meshing"
+      ]
+    },
+    "AISafetyAtlas.Knowledge.Embedded.Composition.no_meshing_measures_all_of_nontrivial_remainder_of_equiv": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Knowledge.Embedded.Composition.ProductState",
+        "AISafetyAtlas.Knowledge.Embedded.Composition.equivalentProductRestriction",
+        "AISafetyAtlas.Knowledge.Embedded.InferenceMap",
+        "AISafetyAtlas.Knowledge.Embedded.MeasuresAllStates",
+        "AISafetyAtlas.Knowledge.Embedded.Meshing"
+      ]
+    },
+    "AISafetyAtlas.Knowledge.Embedded.Composition.not_knowable_productState_of_nontrivial_remainder": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Knowledge.Embedded.Composition.ProductState",
+        "AISafetyAtlas.Knowledge.Embedded.Composition.productRestriction",
+        "AISafetyAtlas.Knowledge.Knowable"
+      ]
+    },
+    "AISafetyAtlas.Knowledge.Embedded.Composition.not_meshing_of_not_surjective": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Knowledge.Embedded.InferenceMap",
+        "AISafetyAtlas.Knowledge.Embedded.Meshing",
+        "AISafetyAtlas.Knowledge.Embedded.Restriction"
+      ]
+    },
+    "AISafetyAtlas.Knowledge.Embedded.Composition.productRestriction": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Knowledge.Embedded.Composition.ProductState",
+        "AISafetyAtlas.Knowledge.Embedded.Restriction"
+      ]
+    },
+    "AISafetyAtlas.Knowledge.Embedded.Composition.properInclusion_iff_not_injective": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Knowledge.Embedded.ProperInclusion",
+        "AISafetyAtlas.Knowledge.Embedded.Restriction"
+      ]
+    },
+    "AISafetyAtlas.Knowledge.Embedded.Composition.properInclusion_of_nontrivial_remainder": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Knowledge.Embedded.Composition.ProductState",
+        "AISafetyAtlas.Knowledge.Embedded.Composition.productRestriction",
+        "AISafetyAtlas.Knowledge.Embedded.ProperInclusion"
+      ]
+    },
+    "AISafetyAtlas.Knowledge.Embedded.Composition.properInclusion_of_nontrivial_remainder_of_equiv": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Knowledge.Embedded.Composition.ProductState",
+        "AISafetyAtlas.Knowledge.Embedded.Composition.equivalentProductRestriction",
+        "AISafetyAtlas.Knowledge.Embedded.ProperInclusion"
+      ]
+    },
+    "AISafetyAtlas.Knowledge.Embedded.Distinguishes": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Knowledge.Embedded.InferenceMap",
+        "AISafetyAtlas.Knowledge.Embedded.InferenceMap.infer",
+        "AISafetyAtlas.Knowledge.Embedded.ReadingSet"
+      ]
+    },
+    "AISafetyAtlas.Knowledge.Embedded.ExactlyMeasurable": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Knowledge.Embedded.InferenceMap",
+        "AISafetyAtlas.Knowledge.Embedded.InferenceMap.infer",
+        "AISafetyAtlas.Knowledge.Embedded.ReadingSet"
+      ]
+    },
+    "AISafetyAtlas.Knowledge.Embedded.Finite.no_meshing_measures_all_of_card_lt": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Knowledge.Embedded.InferenceMap",
+        "AISafetyAtlas.Knowledge.Embedded.MeasuresAllStates",
+        "AISafetyAtlas.Knowledge.Embedded.Meshing",
+        "AISafetyAtlas.Knowledge.Embedded.Restriction"
+      ]
+    },
+    "AISafetyAtlas.Knowledge.Embedded.Finite.properInclusion_of_card_lt": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Knowledge.Embedded.ProperInclusion",
+        "AISafetyAtlas.Knowledge.Embedded.Restriction"
+      ]
+    },
+    "AISafetyAtlas.Knowledge.Embedded.Finite.properInclusion_product_of_card_rest_ge_two": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Knowledge.Embedded.Composition.ProductState",
+        "AISafetyAtlas.Knowledge.Embedded.Composition.productRestriction",
+        "AISafetyAtlas.Knowledge.Embedded.ProperInclusion"
+      ]
+    },
+    "AISafetyAtlas.Knowledge.Embedded.InferenceMap": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Knowledge.Embedded.MeasuresAllStates": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Knowledge.Embedded.ExactlyMeasurable",
+        "AISafetyAtlas.Knowledge.Embedded.InferenceMap"
+      ]
+    },
+    "AISafetyAtlas.Knowledge.Embedded.Meshing": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Knowledge.Embedded.InferenceMap",
+        "AISafetyAtlas.Knowledge.Embedded.InferenceMap.infer",
+        "AISafetyAtlas.Knowledge.Embedded.ReadingSet.singleton",
+        "AISafetyAtlas.Knowledge.Embedded.Restriction"
+      ]
+    },
+    "AISafetyAtlas.Knowledge.Embedded.Meshing.restrict_surjective": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Knowledge.Embedded.InferenceMap",
+        "AISafetyAtlas.Knowledge.Embedded.Meshing",
+        "AISafetyAtlas.Knowledge.Embedded.Restriction"
+      ]
+    },
+    "AISafetyAtlas.Knowledge.Embedded.ProperInclusion": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Knowledge.Embedded.Restriction"
+      ]
+    },
+    "AISafetyAtlas.Knowledge.Embedded.ReadingSet": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Knowledge.Embedded.ReadingSet.singleton": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Knowledge.Embedded.ReadingSet"
+      ]
+    },
+    "AISafetyAtlas.Knowledge.Embedded.ReadingSet.univ": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Knowledge.Embedded.ReadingSet"
+      ]
+    },
+    "AISafetyAtlas.Knowledge.Embedded.Restriction": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Knowledge.Embedded.eq_restrict_of_infer_singleton_eq": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Knowledge.Embedded.InferenceMap",
+        "AISafetyAtlas.Knowledge.Embedded.InferenceMap.infer",
+        "AISafetyAtlas.Knowledge.Embedded.Meshing",
+        "AISafetyAtlas.Knowledge.Embedded.ReadingSet.singleton",
+        "AISafetyAtlas.Knowledge.Embedded.Restriction"
+      ]
+    },
+    "AISafetyAtlas.Knowledge.Embedded.exists_singleton_infer_eq_of_infer_eq": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Knowledge.Embedded.InferenceMap",
+        "AISafetyAtlas.Knowledge.Embedded.InferenceMap.infer",
+        "AISafetyAtlas.Knowledge.Embedded.ReadingSet",
+        "AISafetyAtlas.Knowledge.Embedded.ReadingSet.singleton"
+      ]
+    },
+    "AISafetyAtlas.Knowledge.Embedded.exists_state_meshing_failure_of_measuresAllStates": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Knowledge.Embedded.InferenceMap",
+        "AISafetyAtlas.Knowledge.Embedded.InferenceMap.infer",
+        "AISafetyAtlas.Knowledge.Embedded.MeasuresAllStates",
+        "AISafetyAtlas.Knowledge.Embedded.ProperInclusion",
+        "AISafetyAtlas.Knowledge.Embedded.ReadingSet.singleton",
+        "AISafetyAtlas.Knowledge.Embedded.Restriction"
+      ]
+    },
+    "AISafetyAtlas.Knowledge.Embedded.exists_state_not_exactly_measurable": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Knowledge.Embedded.InferenceMap",
+        "AISafetyAtlas.Knowledge.Embedded.InferenceMap.infer",
+        "AISafetyAtlas.Knowledge.Embedded.Meshing",
+        "AISafetyAtlas.Knowledge.Embedded.ProperInclusion",
+        "AISafetyAtlas.Knowledge.Embedded.ReadingSet",
+        "AISafetyAtlas.Knowledge.Embedded.Restriction"
+      ]
+    },
+    "AISafetyAtlas.Knowledge.Embedded.infer_singleton_eq_of_meshing": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Knowledge.Embedded.InferenceMap",
+        "AISafetyAtlas.Knowledge.Embedded.InferenceMap.infer",
+        "AISafetyAtlas.Knowledge.Embedded.Meshing",
+        "AISafetyAtlas.Knowledge.Embedded.ReadingSet.singleton",
+        "AISafetyAtlas.Knowledge.Embedded.ReadingSet.univ",
+        "AISafetyAtlas.Knowledge.Embedded.Restriction"
+      ]
+    },
+    "AISafetyAtlas.Knowledge.Embedded.meshing_fails_of_measuresAllStates": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Knowledge.Embedded.InferenceMap",
+        "AISafetyAtlas.Knowledge.Embedded.MeasuresAllStates",
+        "AISafetyAtlas.Knowledge.Embedded.Meshing",
+        "AISafetyAtlas.Knowledge.Embedded.ProperInclusion",
+        "AISafetyAtlas.Knowledge.Embedded.Restriction"
+      ]
+    },
+    "AISafetyAtlas.Knowledge.Embedded.no_meshing_inference_distinguishes": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Knowledge.Embedded.Distinguishes",
+        "AISafetyAtlas.Knowledge.Embedded.InferenceMap",
+        "AISafetyAtlas.Knowledge.Embedded.Meshing",
+        "AISafetyAtlas.Knowledge.Embedded.Restriction"
+      ]
+    },
+    "AISafetyAtlas.Knowledge.Embedded.no_meshing_inference_measures_all_states": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Knowledge.Embedded.InferenceMap",
+        "AISafetyAtlas.Knowledge.Embedded.MeasuresAllStates",
+        "AISafetyAtlas.Knowledge.Embedded.Meshing",
+        "AISafetyAtlas.Knowledge.Embedded.ProperInclusion",
+        "AISafetyAtlas.Knowledge.Embedded.Restriction"
+      ]
+    },
+    "AISafetyAtlas.Knowledge.Embedded.no_meshing_inference_measures_all_states_direct": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Knowledge.Embedded.InferenceMap",
+        "AISafetyAtlas.Knowledge.Embedded.MeasuresAllStates",
+        "AISafetyAtlas.Knowledge.Embedded.Meshing",
+        "AISafetyAtlas.Knowledge.Embedded.ProperInclusion",
+        "AISafetyAtlas.Knowledge.Embedded.Restriction"
+      ]
+    },
+    "AISafetyAtlas.Knowledge.Embedded.not_knowable_state_of_properInclusion": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Knowledge.Embedded.ProperInclusion",
+        "AISafetyAtlas.Knowledge.Embedded.Restriction",
+        "AISafetyAtlas.Knowledge.Knowable"
+      ]
+    },
+    "AISafetyAtlas.Knowledge.IndistinguishabilityWitness": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Knowledge.Knowable": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Knowledge.Knowable.mono": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Knowledge.Determines",
+        "AISafetyAtlas.Knowledge.Knowable"
+      ]
+    },
+    "AISafetyAtlas.Knowledge.SelfReference.SelfComplete": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Knowledge.Knowable",
+        "AISafetyAtlas.Knowledge.SelfReference.SelfState",
+        "AISafetyAtlas.Knowledge.SelfReference.selfRead"
+      ]
+    },
+    "AISafetyAtlas.Knowledge.SelfReference.SelfState": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Knowledge.SelfReference.card_rest_le_one_of_selfComplete": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Knowledge.SelfReference.SelfComplete"
+      ]
+    },
+    "AISafetyAtlas.Knowledge.SelfReference.not_selfComplete_of_two_rest": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Knowledge.SelfReference.SelfComplete"
+      ]
+    },
+    "AISafetyAtlas.Knowledge.SelfReference.selfComplete_iff_subsingleton_rest": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Knowledge.SelfReference.SelfComplete"
+      ]
+    },
+    "AISafetyAtlas.Knowledge.SelfReference.selfRead": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Knowledge.SelfReference.SelfState"
+      ]
+    },
+    "AISafetyAtlas.Knowledge.Temporal.CollisionAt": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Knowledge.Temporal.DelayedKnowable": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Knowledge.Temporal.KnowableAt",
+        "AISafetyAtlas.Knowledge.Temporal.KnowableFrom"
+      ]
+    },
+    "AISafetyAtlas.Knowledge.Temporal.EvidenceMonotone": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Knowledge.Determines"
+      ]
+    },
+    "AISafetyAtlas.Knowledge.Temporal.KnowableAt": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Knowledge.Temporal.KnowableFrom"
+      ]
+    },
+    "AISafetyAtlas.Knowledge.Temporal.KnowableFrom": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Knowledge.Knowable"
+      ]
+    },
+    "AISafetyAtlas.Knowledge.Temporal.collisionAt_of_not_knowableAt": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Knowledge.Temporal.CollisionAt",
+        "AISafetyAtlas.Knowledge.Temporal.KnowableAt"
+      ]
+    },
+    "AISafetyAtlas.Knowledge.Temporal.knowableFrom_mono": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Knowledge.Temporal.EvidenceMonotone",
+        "AISafetyAtlas.Knowledge.Temporal.KnowableFrom"
+      ]
+    },
+    "AISafetyAtlas.Knowledge.Temporal.not_knowableAt_of_collisionAt": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Knowledge.Temporal.CollisionAt",
+        "AISafetyAtlas.Knowledge.Temporal.KnowableAt"
+      ]
+    },
+    "AISafetyAtlas.Knowledge.ambiguity": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Knowledge.fibre"
+      ]
+    },
+    "AISafetyAtlas.Knowledge.ambiguity_eq_zero_of_not_mem_image": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Knowledge.ambiguity"
+      ]
+    },
+    "AISafetyAtlas.Knowledge.ambiguity_le_of_comp": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Knowledge.ambiguity"
+      ]
+    },
+    "AISafetyAtlas.Knowledge.ambiguity_le_of_evidenceMonotone": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Knowledge.Temporal.EvidenceMonotone",
+        "AISafetyAtlas.Knowledge.ambiguity"
+      ]
+    },
+    "AISafetyAtlas.Knowledge.ambiguity_le_pairTarget_left": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Knowledge.ambiguity",
+        "AISafetyAtlas.Knowledge.pairTarget"
+      ]
+    },
+    "AISafetyAtlas.Knowledge.ambiguity_le_pairTarget_of_evidenceMonotone": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Knowledge.Temporal.EvidenceMonotone",
+        "AISafetyAtlas.Knowledge.ambiguity",
+        "AISafetyAtlas.Knowledge.pairTarget"
+      ]
+    },
+    "AISafetyAtlas.Knowledge.ambiguity_le_pairTarget_right": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Knowledge.ambiguity",
+        "AISafetyAtlas.Knowledge.pairTarget"
+      ]
+    },
+    "AISafetyAtlas.Knowledge.ambiguity_le_worstAmbiguity": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Knowledge.ambiguity",
+        "AISafetyAtlas.Knowledge.worstAmbiguity"
+      ]
+    },
+    "AISafetyAtlas.Knowledge.ambiguity_pairTarget_le_mul": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Knowledge.ambiguity",
+        "AISafetyAtlas.Knowledge.pairTarget"
+      ]
+    },
+    "AISafetyAtlas.Knowledge.card_image_le_of_knowable": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Knowledge.Knowable"
+      ]
+    },
+    "AISafetyAtlas.Knowledge.exists_witness_of_not_knowable": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Knowledge.IndistinguishabilityWitness",
+        "AISafetyAtlas.Knowledge.Knowable"
+      ]
+    },
+    "AISafetyAtlas.Knowledge.fibre": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Knowledge.knowable_id_iff_injective": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Knowledge.Knowable"
+      ]
+    },
+    "AISafetyAtlas.Knowledge.knowable_iff_ambiguity_le_one": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Knowledge.Knowable",
+        "AISafetyAtlas.Knowledge.ambiguity"
+      ]
+    },
+    "AISafetyAtlas.Knowledge.knowable_iff_factorsThrough": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Knowledge.Knowable"
+      ]
+    },
+    "AISafetyAtlas.Knowledge.knowable_iff_no_collision": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Knowledge.Knowable"
+      ]
+    },
+    "AISafetyAtlas.Knowledge.knowable_iff_worstAmbiguity_le_one": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Knowledge.Knowable",
+        "AISafetyAtlas.Knowledge.worstAmbiguity"
+      ]
+    },
+    "AISafetyAtlas.Knowledge.not_knowable_comp": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Knowledge.Knowable"
+      ]
+    },
+    "AISafetyAtlas.Knowledge.not_knowable_of_card_lt": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Knowledge.Knowable"
+      ]
+    },
+    "AISafetyAtlas.Knowledge.not_knowable_of_collision": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Knowledge.Knowable"
+      ]
+    },
+    "AISafetyAtlas.Knowledge.not_knowable_of_one_lt_ambiguity": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Knowledge.Knowable",
+        "AISafetyAtlas.Knowledge.ambiguity"
+      ]
+    },
+    "AISafetyAtlas.Knowledge.not_knowable_of_witness": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Knowledge.IndistinguishabilityWitness",
+        "AISafetyAtlas.Knowledge.Knowable"
+      ]
+    },
+    "AISafetyAtlas.Knowledge.not_knowable_pairTarget_of_not_knowable": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Knowledge.Knowable",
+        "AISafetyAtlas.Knowledge.pairTarget"
+      ]
+    },
+    "AISafetyAtlas.Knowledge.not_knowable_state_of_nontrivial_remainder": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Knowledge.Knowable"
+      ]
+    },
+    "AISafetyAtlas.Knowledge.pairTarget": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Knowledge.remainderWitness": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Knowledge.IndistinguishabilityWitness"
+      ]
+    },
+    "AISafetyAtlas.Knowledge.worstAmbiguity": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Knowledge.ambiguity"
+      ]
+    },
+    "AISafetyAtlas.Knowledge.worstAmbiguity_le_of_comp": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Knowledge.worstAmbiguity"
+      ]
+    }
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "note": "Edges are: for a definition, its type and body; for a theorem, its statement only. Lean's module system does not export proof terms.",
+  "cluster": "AISafetyAtlas.Logic.",
+  "declarations": {
+    "AISafetyAtlas.Logic.chaitin_bound": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.Logic.chaitin_incompleteness": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.Logic.godel_first_incompleteness": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.Logic.godel_second_incompleteness": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.Logic.lawvere_fixed_point": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.Logic.loeb": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.Logic.tarski_undefinability": {
+      "kind": "theorem",
+      "deps": []
+    }
+  }
+}

@@ -1,0 +1,107 @@
+{
+  "note": "Edges are: for a definition, its type and body; for a theorem, its statement only. Lean's module system does not export proof terms.",
+  "cluster": "AISafetyAtlas.Verification.",
+  "declarations": {
+    "AISafetyAtlas.Verification.AgentBehavior.Agent": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Verification.AgentBehavior.BehavioralSafetyVerifier": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Verification.AgentBehavior.SafetySpec"
+      ]
+    },
+    "AISafetyAtlas.Verification.AgentBehavior.SafetySpec": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Verification.BehavioralProperty"
+      ]
+    },
+    "AISafetyAtlas.Verification.AgentBehavior.Satisfies": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Verification.AgentBehavior.Agent",
+        "AISafetyAtlas.Verification.AgentBehavior.SafetySpec",
+        "AISafetyAtlas.Verification.Holds"
+      ]
+    },
+    "AISafetyAtlas.Verification.AgentBehavior.SpecNontrivial": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Verification.AgentBehavior.SafetySpec",
+        "AISafetyAtlas.Verification.Nontrivial"
+      ]
+    },
+    "AISafetyAtlas.Verification.AgentBehavior.no_behavioral_safety_verifier": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Verification.AgentBehavior.BehavioralSafetyVerifier",
+        "AISafetyAtlas.Verification.AgentBehavior.SafetySpec",
+        "AISafetyAtlas.Verification.AgentBehavior.SpecNontrivial"
+      ]
+    },
+    "AISafetyAtlas.Verification.BehavioralProperty": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Verification.HasVerifier": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Verification.BehavioralProperty",
+        "AISafetyAtlas.Verification.Holds"
+      ]
+    },
+    "AISafetyAtlas.Verification.Holds": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Verification.BehavioralProperty"
+      ]
+    },
+    "AISafetyAtlas.Verification.Nontrivial": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Verification.BehavioralProperty",
+        "AISafetyAtlas.Verification.Holds"
+      ]
+    },
+    "AISafetyAtlas.Verification.Robot.AlwaysSatisfies": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Verification.Robot.Behavior"
+      ]
+    },
+    "AISafetyAtlas.Verification.Robot.Behavior": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Verification.Robot.SwitchingConstruction": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Verification.Robot.Behavior"
+      ]
+    },
+    "AISafetyAtlas.Verification.Robot.Verifier": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Verification.Robot.Behavior"
+      ]
+    },
+    "AISafetyAtlas.Verification.Robot.action_safety_unverifiable": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Verification.Robot.Behavior",
+        "AISafetyAtlas.Verification.Robot.SwitchingConstruction",
+        "AISafetyAtlas.Verification.Robot.Verifier"
+      ]
+    },
+    "AISafetyAtlas.Verification.rice": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Verification.BehavioralProperty",
+        "AISafetyAtlas.Verification.HasVerifier",
+        "AISafetyAtlas.Verification.Nontrivial"
+      ]
+    }
+  }
+}

@@ -1,9 +1,7 @@
 # A1–A3, B1–B3, and B7 re-verification
 
-Date: 2026-07-29. This is the durable residual-gap record for the
-compositional, wireheading, and preference-deduction increment. It consolidates
-the useful conclusions from adversarial working reviews; untracked files under
-`reviews/` are not part of the repository evidence chain.
+Updated 2026-08-15. This is the durable residual-gap record for the
+compositional, wireheading, and preference-deduction increment.
 
 This record does not change any `relationship` or `ai_bridge_status`.
 
@@ -27,11 +25,11 @@ Detailed source-to-Lean correspondences:
 | A2 rectangularity | Binary exchange characterization; finite indexed splice characterization; infinite-index counterexample | No named downstream protocol consumer |
 | A3 symmetry | Explicit networks, views, automorphisms, round induction, and fixed-point-free leader obstruction | Simplified port routing; no full covering theory or randomized symmetry breaking; not BY-043 |
 | B1 objectives | Finite objective locality, scaling, recursive displayed-equation package, and truncation boundary | Real-valued rather than `[0,1]`-valued utility; no AIXI, delusion-box model, or four concrete source agents |
-| B2 goal preservation | Finite-percept one-step Theorem 16 argument without naming surjectivity, using a normalized full-support percept distribution | `initial_dominates` / continuation structure assumed; Theorem 20 and modification independence not derived; names and policies not separated; no all-times source theorem |
+| B2 goal preservation | Finite-percept one-step **published Theorem 12** (technical-report Theorem 16) argument without naming surjectivity, using a normalized full-support percept distribution | `initial_dominates` / continuation structure assumed; the technical report's Appendix-A Theorem 20, which the source's own proof invokes first and the published chapter prints no proof of, and modification independence not derived; names and policies not separated; no all-times source theorem |
 | B3 reward corruption | Deterministic fixed-transition CRMDP on bounded rewards, action-and-observation histories, observed-channel complement, identical runs, complementary returns, and half-regret theorem | One fixed deterministic transition rather than a class ranging over stochastic kernels; extrema supplied as fields; continuous interval rather than finite uniform reward grid |
 | B7 preference deduction | Theorem 1, Definition 5, Lemma 6, source-parameterized Propositions 7–8, conditional Theorem 2 predicate, relativized Definition 11 | Real-valued rather than `[-1,1]`-valued rewards; Conjecture 9 is not proved; Proposition 10 is absent; no nontrivial reasonable-language witness |
 
-## Corrections made by re-verification
+## Scope decisions on record
 
 ### Public facade contract
 
@@ -43,7 +41,7 @@ primary-surface tables is checked from the root import by
 ### B2 scope
 
 `GoalPreservationSource` is a **finite-percept induction step**, not a
-source-strength reproduction of Theorem 16. It removes the atlas's earlier
+source-strength reproduction of published Theorem 12 (technical-report Theorem 16). It removes the atlas's earlier
 surjectivity premise from the one-step argument, but assumes the domination
 property that the paper obtains from deeper modification-independence results.
 
@@ -54,16 +52,14 @@ alternative continuation.
 
 ### B3 boundedness and nonzero applicability
 
-The first CRMDP interface used unrestricted real-valued true rewards while also
-requiring an attained worst environment. Those choices interact badly: scaling
-any positive-regret environment preserves its observable histories after
-precomposing the corruption channel with inverse scaling, but makes regret
-arbitrarily large. Consequently the old interface admitted only zero-regret
-models. Merely documenting the missing reward grid was insufficient.
-
-`CRMDP.Reward` now retains the source's load-bearing `[0,1]` bound while omitting
-only finite uniform discretization. Policies now receive the source-shaped
-initial observation followed by action/observation pairs.
+`CRMDP.Reward` retains the source's load-bearing `[0,1]` bound and omits only
+the finite uniform discretization. The bound is not cosmetic: with unrestricted
+real-valued true rewards *and* an attained worst environment, scaling any
+positive-regret environment preserves its observable histories once the
+corruption channel is precomposed with inverse scaling, while sending regret to
+infinity — so an unbounded interface admits only zero-regret models. Policies
+receive the source-shaped initial observation followed by action/observation
+pairs.
 `AISafetyAtlas.Examples.SixTargets.nonzeroCRMDPModel` supplies a two-state,
 two-action, horizon-one model and
 `nonzeroCRMDPModel_worstCaseRegret` proves that every policy's worst-case regret
@@ -72,11 +68,10 @@ this does not derive the paper's finiteness result.
 
 ### B7 equation (2)
 
-`OverrideModel.mixtureValue` now denotes only the source action that
-rationalises the human for `Ragent`. The no-op action has a separate
-`noopValue`; it no longer receives an unjustified
-`ε * optValue Ragent` contribution. The closing comparison is
-`noopValue_lt_mixtureValue_rationalise`.
+`OverrideModel.mixtureValue` denotes only the source action that rationalises
+the human for `Ragent`, which is what justifies its `ε * optValue Ragent` term.
+The no-op action is evaluated separately as `noopValue` and carries no such term.
+The closing comparison is `noopValue_lt_mixtureValue_rationalise`.
 
 ## Ordered remaining work
 
@@ -98,10 +93,10 @@ rationalises the human for `Ragent`. The no-op action has a separate
 
 - Do not count a `RELATED` entry as headline coverage.
 - Do not count Conjecture 9 as covered because its predicate is defined.
-- Do not call the B2 induction step the full or source-strength Theorem 16.
+- Do not call the B2 induction step the full or source-strength Theorem 12
+  (technical-report Theorem 16).
 - Do not call the deterministic B3 model exact Theorem 11.
 - Do not infer BY-043 from the A3 dependency alone.
-- Do not rely on untracked `reviews/` files for shipped API or strategy claims.
 
 ## Verification
 

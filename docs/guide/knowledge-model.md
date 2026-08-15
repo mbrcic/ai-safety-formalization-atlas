@@ -156,6 +156,27 @@ completeness only by having nothing to be complete about. Note this is a
 the precise sense in which "a system cannot model itself" is false as usually
 said.
 
+## Related, but different: Wolpert's physical knowledge
+
+[`Inference.PhysicalKnowledge`](../../AISafetyAtlas/Inference/PhysicalKnowledge.lean)
+formalizes a different notion from Wolpert 2018. A certificate chooses a setup
+block for each realized target value, answers that value's probe correctly on
+the whole block, and requires nonempty true/false intersections with a context
+`W`. The quantifiers do not reduce to `Knowable`'s one uniform decoder, and the
+library proves neither direction between the notions.
+
+The downstream
+[`Epistemic`](../../AISafetyAtlas/Inference/PhysicalKnowledge/Epistemic.lean)
+module shows the useful distinction: known premises may force a consequence to
+be true without making it physically known. Corollaries 20–24 and an executable
+distribution counterexample are mechanized. The
+[`Event`](../../AISafetyAtlas/Inference/PhysicalKnowledge/Event.lean) module
+also exposes a source boundary rather than smoothing it over: Corollary 25's
+positive-introspection construction can produce an inadmissibly constant event,
+and its natural singleton-image extension has a machine-checked countermodel.
+The itemized source map is
+[`wolpert-2018-knowledge.md`](../provenance/wolpert-2018-knowledge.md).
+
 ## Proved / not proved
 
 ### Proved

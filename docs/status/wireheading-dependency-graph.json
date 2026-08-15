@@ -1,0 +1,630 @@
+{
+  "note": "Edges are: for a definition, its type and body; for a theorem, its statement only. Lean's module system does not export proof terms.",
+  "cluster": "AISafetyAtlas.Wireheading.",
+  "declarations": {
+    "AISafetyAtlas.Wireheading.AgentEquations.Agent": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Wireheading.AgentEquations.Belief": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Wireheading.AgentEquations.History": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Wireheading.AgentEquations.actionValue": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Wireheading.AgentEquations.Agent",
+        "AISafetyAtlas.Wireheading.AgentEquations.Belief",
+        "AISafetyAtlas.Wireheading.AgentEquations.Belief.cond",
+        "AISafetyAtlas.Wireheading.AgentEquations.History",
+        "AISafetyAtlas.Wireheading.AgentEquations.value"
+      ]
+    },
+    "AISafetyAtlas.Wireheading.AgentEquations.bestAction": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Wireheading.AgentEquations.Agent",
+        "AISafetyAtlas.Wireheading.AgentEquations.Belief",
+        "AISafetyAtlas.Wireheading.AgentEquations.History",
+        "AISafetyAtlas.Wireheading.AgentEquations.actionValue"
+      ]
+    },
+    "AISafetyAtlas.Wireheading.AgentEquations.bestAction_max": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Wireheading.AgentEquations.Agent",
+        "AISafetyAtlas.Wireheading.AgentEquations.Belief",
+        "AISafetyAtlas.Wireheading.AgentEquations.History",
+        "AISafetyAtlas.Wireheading.AgentEquations.actionValue",
+        "AISafetyAtlas.Wireheading.AgentEquations.bestAction"
+      ]
+    },
+    "AISafetyAtlas.Wireheading.AgentEquations.truncation_exact": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Wireheading.AgentEquations.Agent",
+        "AISafetyAtlas.Wireheading.AgentEquations.Agent.horizon",
+        "AISafetyAtlas.Wireheading.AgentEquations.Belief",
+        "AISafetyAtlas.Wireheading.AgentEquations.History",
+        "AISafetyAtlas.Wireheading.AgentEquations.value"
+      ]
+    },
+    "AISafetyAtlas.Wireheading.AgentEquations.value": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Wireheading.AgentEquations.Agent",
+        "AISafetyAtlas.Wireheading.AgentEquations.Belief",
+        "AISafetyAtlas.Wireheading.AgentEquations.History"
+      ]
+    },
+    "AISafetyAtlas.Wireheading.AgentEquations.value_eq_of_agree_on_window": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Wireheading.AgentEquations.Agent",
+        "AISafetyAtlas.Wireheading.AgentEquations.Agent.horizon",
+        "AISafetyAtlas.Wireheading.AgentEquations.Agent.utility",
+        "AISafetyAtlas.Wireheading.AgentEquations.Belief",
+        "AISafetyAtlas.Wireheading.AgentEquations.History",
+        "AISafetyAtlas.Wireheading.AgentEquations.value"
+      ]
+    },
+    "AISafetyAtlas.Wireheading.AgentEquations.value_eq_zero_of_horizon_vanishes": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Wireheading.AgentEquations.Agent",
+        "AISafetyAtlas.Wireheading.AgentEquations.Agent.horizon",
+        "AISafetyAtlas.Wireheading.AgentEquations.Belief",
+        "AISafetyAtlas.Wireheading.AgentEquations.History",
+        "AISafetyAtlas.Wireheading.AgentEquations.value"
+      ]
+    },
+    "AISafetyAtlas.Wireheading.AgentEquations.value_succ": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Wireheading.AgentEquations.Agent",
+        "AISafetyAtlas.Wireheading.AgentEquations.Agent.horizon",
+        "AISafetyAtlas.Wireheading.AgentEquations.Agent.utility",
+        "AISafetyAtlas.Wireheading.AgentEquations.Belief",
+        "AISafetyAtlas.Wireheading.AgentEquations.History",
+        "AISafetyAtlas.Wireheading.AgentEquations.actionValue",
+        "AISafetyAtlas.Wireheading.AgentEquations.value"
+      ]
+    },
+    "AISafetyAtlas.Wireheading.CRMDP.Env": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Wireheading.CRMDP.Env.complement": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Wireheading.CRMDP.Env",
+        "AISafetyAtlas.Wireheading.CRMDP.Env.corruption",
+        "AISafetyAtlas.Wireheading.CRMDP.Env.rewardComplement",
+        "AISafetyAtlas.Wireheading.CRMDP.Env.trueReward",
+        "AISafetyAtlas.Wireheading.CRMDP.Reward"
+      ]
+    },
+    "AISafetyAtlas.Wireheading.CRMDP.Env.complement_involutive": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Wireheading.CRMDP.Env",
+        "AISafetyAtlas.Wireheading.CRMDP.Env.complement"
+      ]
+    },
+    "AISafetyAtlas.Wireheading.CRMDP.Env.observed": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Wireheading.CRMDP.Env",
+        "AISafetyAtlas.Wireheading.CRMDP.Env.corruption",
+        "AISafetyAtlas.Wireheading.CRMDP.Env.trueReward",
+        "AISafetyAtlas.Wireheading.CRMDP.Reward"
+      ]
+    },
+    "AISafetyAtlas.Wireheading.CRMDP.Env.observed_complement": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Wireheading.CRMDP.Env",
+        "AISafetyAtlas.Wireheading.CRMDP.Env.complement",
+        "AISafetyAtlas.Wireheading.CRMDP.Env.observed",
+        "AISafetyAtlas.Wireheading.CRMDP.Reward"
+      ]
+    },
+    "AISafetyAtlas.Wireheading.CRMDP.Env.rewardComplement": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Wireheading.CRMDP.Reward"
+      ]
+    },
+    "AISafetyAtlas.Wireheading.CRMDP.Env.rewardComplement_involutive": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Wireheading.CRMDP.Env.rewardComplement",
+        "AISafetyAtlas.Wireheading.CRMDP.Reward"
+      ]
+    },
+    "AISafetyAtlas.Wireheading.CRMDP.History": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Wireheading.CRMDP.Obs"
+      ]
+    },
+    "AISafetyAtlas.Wireheading.CRMDP.Model": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Wireheading.CRMDP.Model.cannot_rule_out_half_maximal_regret": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Preference.Explains",
+        "AISafetyAtlas.Preference.Planner",
+        "AISafetyAtlas.Preference.RegretModel.regret",
+        "AISafetyAtlas.Preference.RegretModel.worstCaseRegret",
+        "AISafetyAtlas.Preference.RegretModel.worstPolicy",
+        "AISafetyAtlas.Wireheading.CRMDP.Env",
+        "AISafetyAtlas.Wireheading.CRMDP.Model",
+        "AISafetyAtlas.Wireheading.CRMDP.Model.toComplementedClass",
+        "AISafetyAtlas.Wireheading.CRMDP.Policy",
+        "AISafetyAtlas.Wireheading.Corruption.ComplementedClass.toRegretModel"
+      ]
+    },
+    "AISafetyAtlas.Wireheading.CRMDP.Model.everitt_theorem_eleven": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Wireheading.CRMDP.Env",
+        "AISafetyAtlas.Wireheading.CRMDP.Model",
+        "AISafetyAtlas.Wireheading.CRMDP.Model.toComplementedClass",
+        "AISafetyAtlas.Wireheading.CRMDP.Policy",
+        "AISafetyAtlas.Wireheading.Corruption.ComplementedClass.worstCaseRegret",
+        "AISafetyAtlas.Wireheading.Corruption.ComplementedClass.worstPolicy"
+      ]
+    },
+    "AISafetyAtlas.Wireheading.CRMDP.Model.halfMaximalRegretBound": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Preference.HalfMaximalRegretBound",
+        "AISafetyAtlas.Wireheading.CRMDP.Env",
+        "AISafetyAtlas.Wireheading.CRMDP.Model",
+        "AISafetyAtlas.Wireheading.CRMDP.Model.toComplementedClass",
+        "AISafetyAtlas.Wireheading.CRMDP.Policy",
+        "AISafetyAtlas.Wireheading.Corruption.ComplementedClass.toRegretModel"
+      ]
+    },
+    "AISafetyAtlas.Wireheading.CRMDP.Model.toComplementedClass": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Wireheading.CRMDP.Env",
+        "AISafetyAtlas.Wireheading.CRMDP.Env.complement",
+        "AISafetyAtlas.Wireheading.CRMDP.Env.complement_involutive",
+        "AISafetyAtlas.Wireheading.CRMDP.Model",
+        "AISafetyAtlas.Wireheading.CRMDP.Model.bestPolicy",
+        "AISafetyAtlas.Wireheading.CRMDP.Model.bestPolicy_best",
+        "AISafetyAtlas.Wireheading.CRMDP.Model.horizon",
+        "AISafetyAtlas.Wireheading.CRMDP.Model.start",
+        "AISafetyAtlas.Wireheading.CRMDP.Model.transition",
+        "AISafetyAtlas.Wireheading.CRMDP.Model.worstEnvironment",
+        "AISafetyAtlas.Wireheading.CRMDP.Model.worstEnvironment_worst",
+        "AISafetyAtlas.Wireheading.CRMDP.Model.worstPolicy",
+        "AISafetyAtlas.Wireheading.CRMDP.Model.worstPolicy_worst",
+        "AISafetyAtlas.Wireheading.CRMDP.Policy",
+        "AISafetyAtlas.Wireheading.CRMDP.returnOver",
+        "AISafetyAtlas.Wireheading.Corruption.ComplementedClass"
+      ]
+    },
+    "AISafetyAtlas.Wireheading.CRMDP.Obs": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Wireheading.CRMDP.Reward"
+      ]
+    },
+    "AISafetyAtlas.Wireheading.CRMDP.Policy": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Wireheading.CRMDP.History"
+      ]
+    },
+    "AISafetyAtlas.Wireheading.CRMDP.Reward": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Wireheading.CRMDP.historyUpTo": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Wireheading.CRMDP.Env",
+        "AISafetyAtlas.Wireheading.CRMDP.History",
+        "AISafetyAtlas.Wireheading.CRMDP.Policy",
+        "AISafetyAtlas.Wireheading.CRMDP.run"
+      ]
+    },
+    "AISafetyAtlas.Wireheading.CRMDP.history_complement": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Wireheading.CRMDP.Env",
+        "AISafetyAtlas.Wireheading.CRMDP.Env.complement",
+        "AISafetyAtlas.Wireheading.CRMDP.History",
+        "AISafetyAtlas.Wireheading.CRMDP.Policy",
+        "AISafetyAtlas.Wireheading.CRMDP.historyUpTo"
+      ]
+    },
+    "AISafetyAtlas.Wireheading.CRMDP.returnOver": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Wireheading.CRMDP.Env",
+        "AISafetyAtlas.Wireheading.CRMDP.Env.trueReward",
+        "AISafetyAtlas.Wireheading.CRMDP.Policy",
+        "AISafetyAtlas.Wireheading.CRMDP.stateAt"
+      ]
+    },
+    "AISafetyAtlas.Wireheading.CRMDP.return_add_complement": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Wireheading.CRMDP.Env",
+        "AISafetyAtlas.Wireheading.CRMDP.Env.complement",
+        "AISafetyAtlas.Wireheading.CRMDP.Policy",
+        "AISafetyAtlas.Wireheading.CRMDP.returnOver"
+      ]
+    },
+    "AISafetyAtlas.Wireheading.CRMDP.run": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Wireheading.CRMDP.Env",
+        "AISafetyAtlas.Wireheading.CRMDP.History",
+        "AISafetyAtlas.Wireheading.CRMDP.Policy"
+      ]
+    },
+    "AISafetyAtlas.Wireheading.CRMDP.run_complement": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Wireheading.CRMDP.Env",
+        "AISafetyAtlas.Wireheading.CRMDP.Env.complement",
+        "AISafetyAtlas.Wireheading.CRMDP.History",
+        "AISafetyAtlas.Wireheading.CRMDP.Policy",
+        "AISafetyAtlas.Wireheading.CRMDP.run"
+      ]
+    },
+    "AISafetyAtlas.Wireheading.CRMDP.stateAt": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Wireheading.CRMDP.Env",
+        "AISafetyAtlas.Wireheading.CRMDP.History",
+        "AISafetyAtlas.Wireheading.CRMDP.Policy",
+        "AISafetyAtlas.Wireheading.CRMDP.run"
+      ]
+    },
+    "AISafetyAtlas.Wireheading.CRMDP.stateAt_complement": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Wireheading.CRMDP.Env",
+        "AISafetyAtlas.Wireheading.CRMDP.Env.complement",
+        "AISafetyAtlas.Wireheading.CRMDP.Policy",
+        "AISafetyAtlas.Wireheading.CRMDP.stateAt"
+      ]
+    },
+    "AISafetyAtlas.Wireheading.Corruption.ComplementedClass": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Wireheading.Corruption.ComplementedClass.everitt_theorem_eleven": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Wireheading.Corruption.ComplementedClass",
+        "AISafetyAtlas.Wireheading.Corruption.ComplementedClass.worstCaseRegret",
+        "AISafetyAtlas.Wireheading.Corruption.ComplementedClass.worstPolicy"
+      ]
+    },
+    "AISafetyAtlas.Wireheading.Corruption.ComplementedClass.halfMaximalRegretBound": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Preference.HalfMaximalRegretBound",
+        "AISafetyAtlas.Wireheading.Corruption.ComplementedClass",
+        "AISafetyAtlas.Wireheading.Corruption.ComplementedClass.toRegretModel"
+      ]
+    },
+    "AISafetyAtlas.Wireheading.Corruption.ComplementedClass.regret": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Wireheading.Corruption.ComplementedClass",
+        "AISafetyAtlas.Wireheading.Corruption.ComplementedClass.bestPolicy",
+        "AISafetyAtlas.Wireheading.Corruption.ComplementedClass.returnValue"
+      ]
+    },
+    "AISafetyAtlas.Wireheading.Corruption.ComplementedClass.toRegretModel": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Preference.RegretModel",
+        "AISafetyAtlas.Wireheading.Corruption.ComplementedClass",
+        "AISafetyAtlas.Wireheading.Corruption.ComplementedClass.regret",
+        "AISafetyAtlas.Wireheading.Corruption.ComplementedClass.worstCaseRegret",
+        "AISafetyAtlas.Wireheading.Corruption.ComplementedClass.worstEnvironment_worst",
+        "AISafetyAtlas.Wireheading.Corruption.ComplementedClass.worstPolicy",
+        "AISafetyAtlas.Wireheading.Corruption.ComplementedClass.worstPolicy_worst"
+      ]
+    },
+    "AISafetyAtlas.Wireheading.Corruption.ComplementedClass.worstCaseRegret": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Wireheading.Corruption.ComplementedClass",
+        "AISafetyAtlas.Wireheading.Corruption.ComplementedClass.regret",
+        "AISafetyAtlas.Wireheading.Corruption.ComplementedClass.worstEnvironment"
+      ]
+    },
+    "AISafetyAtlas.Wireheading.GoalPreservation.Model": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Wireheading.GoalPreservation.Model.OptimalAt": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Wireheading.GoalPreservation.Model",
+        "AISafetyAtlas.Wireheading.GoalPreservation.Model.act",
+        "AISafetyAtlas.Wireheading.GoalPreservation.Model.qValue"
+      ]
+    },
+    "AISafetyAtlas.Wireheading.GoalPreservation.Model.goal_preservation": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Wireheading.GoalPreservation.Model",
+        "AISafetyAtlas.Wireheading.GoalPreservation.Model.OptimalAt",
+        "AISafetyAtlas.Wireheading.GoalPreservation.Model.act",
+        "AISafetyAtlas.Wireheading.GoalPreservation.Model.qValue",
+        "AISafetyAtlas.Wireheading.GoalPreservation.Model.run"
+      ]
+    },
+    "AISafetyAtlas.Wireheading.GoalPreservation.Model.next_policy_optimal": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Wireheading.GoalPreservation.Model",
+        "AISafetyAtlas.Wireheading.GoalPreservation.Model.OptimalAt",
+        "AISafetyAtlas.Wireheading.GoalPreservation.Model.act",
+        "AISafetyAtlas.Wireheading.GoalPreservation.Model.next"
+      ]
+    },
+    "AISafetyAtlas.Wireheading.GoalPreservation.Model.qValue": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Wireheading.GoalPreservation.Model",
+        "AISafetyAtlas.Wireheading.GoalPreservation.Model.continuation",
+        "AISafetyAtlas.Wireheading.GoalPreservation.Model.discount",
+        "AISafetyAtlas.Wireheading.GoalPreservation.Model.next",
+        "AISafetyAtlas.Wireheading.GoalPreservation.Model.utility"
+      ]
+    },
+    "AISafetyAtlas.Wireheading.GoalPreservation.Model.run": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Wireheading.GoalPreservation.Model"
+      ]
+    },
+    "AISafetyAtlas.Wireheading.GoalPreservation.Model.run_optimal": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Wireheading.GoalPreservation.Model",
+        "AISafetyAtlas.Wireheading.GoalPreservation.Model.OptimalAt",
+        "AISafetyAtlas.Wireheading.GoalPreservation.Model.run"
+      ]
+    },
+    "AISafetyAtlas.Wireheading.GoalPreservationSource.Model": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Wireheading.GoalPreservationSource.Model.OptimalAt": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Wireheading.GoalPreservationSource.Model",
+        "AISafetyAtlas.Wireheading.GoalPreservationSource.Model.act",
+        "AISafetyAtlas.Wireheading.GoalPreservationSource.Model.qValue"
+      ]
+    },
+    "AISafetyAtlas.Wireheading.GoalPreservationSource.Model.qValue": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Wireheading.GoalPreservationSource.Model",
+        "AISafetyAtlas.Wireheading.GoalPreservationSource.Model.contValue",
+        "AISafetyAtlas.Wireheading.GoalPreservationSource.Model.discount",
+        "AISafetyAtlas.Wireheading.GoalPreservationSource.Model.extend",
+        "AISafetyAtlas.Wireheading.GoalPreservationSource.Model.prob",
+        "AISafetyAtlas.Wireheading.GoalPreservationSource.Model.utility"
+      ]
+    },
+    "AISafetyAtlas.Wireheading.GoalPreservationSource.Model.qValue_lt_of_lt": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Wireheading.GoalPreservationSource.Model",
+        "AISafetyAtlas.Wireheading.GoalPreservationSource.Model.contValue",
+        "AISafetyAtlas.Wireheading.GoalPreservationSource.Model.extend",
+        "AISafetyAtlas.Wireheading.GoalPreservationSource.Model.initial",
+        "AISafetyAtlas.Wireheading.GoalPreservationSource.Model.qValue"
+      ]
+    },
+    "AISafetyAtlas.Wireheading.GoalPreservationSource.Model.qValue_selected_eq_initial": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Wireheading.GoalPreservationSource.Model",
+        "AISafetyAtlas.Wireheading.GoalPreservationSource.Model.OptimalAt",
+        "AISafetyAtlas.Wireheading.GoalPreservationSource.Model.act",
+        "AISafetyAtlas.Wireheading.GoalPreservationSource.Model.initial",
+        "AISafetyAtlas.Wireheading.GoalPreservationSource.Model.qValue"
+      ]
+    },
+    "AISafetyAtlas.Wireheading.GoalPreservationSource.Model.safe_modification": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Wireheading.GoalPreservationSource.Model",
+        "AISafetyAtlas.Wireheading.GoalPreservationSource.Model.OptimalAt",
+        "AISafetyAtlas.Wireheading.GoalPreservationSource.Model.act",
+        "AISafetyAtlas.Wireheading.GoalPreservationSource.Model.contValue",
+        "AISafetyAtlas.Wireheading.GoalPreservationSource.Model.extend",
+        "AISafetyAtlas.Wireheading.GoalPreservationSource.Model.initial"
+      ]
+    },
+    "AISafetyAtlas.Wireheading.GoalPreservationSource.Model.selected_matches_initial": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Wireheading.GoalPreservationSource.Model",
+        "AISafetyAtlas.Wireheading.GoalPreservationSource.Model.OptimalAt",
+        "AISafetyAtlas.Wireheading.GoalPreservationSource.Model.act",
+        "AISafetyAtlas.Wireheading.GoalPreservationSource.Model.contValue",
+        "AISafetyAtlas.Wireheading.GoalPreservationSource.Model.extend",
+        "AISafetyAtlas.Wireheading.GoalPreservationSource.Model.initial"
+      ]
+    },
+    "AISafetyAtlas.Wireheading.Objective": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Wireheading.Objective.IsOptimal": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Wireheading.Objective",
+        "AISafetyAtlas.Wireheading.Objective.decisionValue"
+      ]
+    },
+    "AISafetyAtlas.Wireheading.Objective.decisionValue": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Wireheading.Objective",
+        "AISafetyAtlas.Wireheading.Objective.value"
+      ]
+    },
+    "AISafetyAtlas.Wireheading.Objective.optimal_decisions_congr": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Wireheading.Objective",
+        "AISafetyAtlas.Wireheading.Objective.IsOptimal",
+        "AISafetyAtlas.Wireheading.Objective.horizon",
+        "AISafetyAtlas.Wireheading.Objective.utility"
+      ]
+    },
+    "AISafetyAtlas.Wireheading.Objective.optimal_decisions_eq_of_pos_scaleUtility": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Wireheading.Objective",
+        "AISafetyAtlas.Wireheading.Objective.IsOptimal",
+        "AISafetyAtlas.Wireheading.Objective.scaleUtility"
+      ]
+    },
+    "AISafetyAtlas.Wireheading.Objective.scaleUtility": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Wireheading.Objective",
+        "AISafetyAtlas.Wireheading.Objective.horizon",
+        "AISafetyAtlas.Wireheading.Objective.utility"
+      ]
+    },
+    "AISafetyAtlas.Wireheading.Objective.value": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Wireheading.Objective",
+        "AISafetyAtlas.Wireheading.Objective.horizon",
+        "AISafetyAtlas.Wireheading.Objective.utility"
+      ]
+    },
+    "AISafetyAtlas.Wireheading.Objective.value_congr": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Wireheading.Objective",
+        "AISafetyAtlas.Wireheading.Objective.horizon",
+        "AISafetyAtlas.Wireheading.Objective.utility",
+        "AISafetyAtlas.Wireheading.Objective.value"
+      ]
+    },
+    "AISafetyAtlas.Wireheading.Objective.value_eq_of_agree_on_window": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Wireheading.Objective",
+        "AISafetyAtlas.Wireheading.Objective.horizon",
+        "AISafetyAtlas.Wireheading.Objective.utility",
+        "AISafetyAtlas.Wireheading.Objective.value"
+      ]
+    },
+    "AISafetyAtlas.Wireheading.Objective.value_scaleUtility": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Wireheading.Objective",
+        "AISafetyAtlas.Wireheading.Objective.scaleUtility",
+        "AISafetyAtlas.Wireheading.Objective.value"
+      ]
+    },
+    "AISafetyAtlas.Wireheading.ObservationLimits.complementWitness": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Knowledge.IndistinguishabilityWitness",
+        "AISafetyAtlas.Wireheading.CRMDP.Env",
+        "AISafetyAtlas.Wireheading.CRMDP.Env.complement",
+        "AISafetyAtlas.Wireheading.CRMDP.History",
+        "AISafetyAtlas.Wireheading.CRMDP.Policy",
+        "AISafetyAtlas.Wireheading.CRMDP.returnOver",
+        "AISafetyAtlas.Wireheading.ObservationLimits.observedHistory",
+        "AISafetyAtlas.Wireheading.ObservationLimits.trueReturn"
+      ]
+    },
+    "AISafetyAtlas.Wireheading.ObservationLimits.not_knowable_trueReturn": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Knowledge.Knowable",
+        "AISafetyAtlas.Wireheading.CRMDP.Env",
+        "AISafetyAtlas.Wireheading.CRMDP.History",
+        "AISafetyAtlas.Wireheading.CRMDP.Policy",
+        "AISafetyAtlas.Wireheading.ObservationLimits.observedHistory",
+        "AISafetyAtlas.Wireheading.ObservationLimits.trueReturn"
+      ]
+    },
+    "AISafetyAtlas.Wireheading.ObservationLimits.not_knowable_trueReturn_of_complement_mem": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Knowledge.Knowable",
+        "AISafetyAtlas.Wireheading.CRMDP.Env",
+        "AISafetyAtlas.Wireheading.CRMDP.Env.complement",
+        "AISafetyAtlas.Wireheading.CRMDP.History",
+        "AISafetyAtlas.Wireheading.CRMDP.Policy",
+        "AISafetyAtlas.Wireheading.CRMDP.returnOver",
+        "AISafetyAtlas.Wireheading.ObservationLimits.observedHistory",
+        "AISafetyAtlas.Wireheading.ObservationLimits.trueReturn"
+      ]
+    },
+    "AISafetyAtlas.Wireheading.ObservationLimits.observedHistory": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Wireheading.CRMDP.Env",
+        "AISafetyAtlas.Wireheading.CRMDP.History",
+        "AISafetyAtlas.Wireheading.CRMDP.Policy",
+        "AISafetyAtlas.Wireheading.CRMDP.historyUpTo"
+      ]
+    },
+    "AISafetyAtlas.Wireheading.ObservationLimits.returnOver_zeroEnv": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Wireheading.CRMDP.Policy",
+        "AISafetyAtlas.Wireheading.CRMDP.returnOver",
+        "AISafetyAtlas.Wireheading.ObservationLimits.zeroEnv"
+      ]
+    },
+    "AISafetyAtlas.Wireheading.ObservationLimits.returnOver_zeroEnv_complement": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Wireheading.CRMDP.Env.complement",
+        "AISafetyAtlas.Wireheading.CRMDP.Policy",
+        "AISafetyAtlas.Wireheading.CRMDP.returnOver",
+        "AISafetyAtlas.Wireheading.ObservationLimits.zeroEnv"
+      ]
+    },
+    "AISafetyAtlas.Wireheading.ObservationLimits.trueReturn": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Wireheading.CRMDP.Env",
+        "AISafetyAtlas.Wireheading.CRMDP.Policy",
+        "AISafetyAtlas.Wireheading.CRMDP.returnOver"
+      ]
+    },
+    "AISafetyAtlas.Wireheading.ObservationLimits.zeroEnv": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Wireheading.CRMDP.Env",
+        "AISafetyAtlas.Wireheading.CRMDP.Reward"
+      ]
+    }
+  }
+}

@@ -1,0 +1,208 @@
+{
+  "note": "Edges are: for a definition, its type and body; for a theorem, its statement only. Lean's module system does not export proof terms.",
+  "cluster": "AISafetyAtlas.Learning.",
+  "declarations": {
+    "AISafetyAtlas.Learning.AdaptiveRule": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Learning.CostPerformance": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Learning.HomogeneousLoss": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Learning.NonadaptiveSchedule": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Learning.NonadaptiveSchedule.embedding": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Learning.NonadaptiveSchedule",
+        "AISafetyAtlas.Learning.NonadaptiveSchedule.injective",
+        "AISafetyAtlas.Learning.NonadaptiveSchedule.sample"
+      ]
+    },
+    "AISafetyAtlas.Learning.SupervisedLearner": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Learning.adaptive_constraint_card": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Learning.AdaptiveRule",
+        "AISafetyAtlas.Learning.ruleVisit"
+      ]
+    },
+    "AISafetyAtlas.Learning.aggregateOffTrainingLoss": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Learning.SupervisedLearner",
+        "AISafetyAtlas.Learning.offTrainingLoss",
+        "AISafetyAtlas.Learning.predict"
+      ]
+    },
+    "AISafetyAtlas.Learning.aggregateOffTrainingLoss_eq": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Learning.SupervisedLearner",
+        "AISafetyAtlas.Learning.aggregateOffTrainingLoss"
+      ]
+    },
+    "AISafetyAtlas.Learning.aggregatePerformance": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Learning.CostPerformance",
+        "AISafetyAtlas.Learning.NonadaptiveSchedule",
+        "AISafetyAtlas.Learning.NonadaptiveSchedule.sample"
+      ]
+    },
+    "AISafetyAtlas.Learning.aggregatePerformance_eq_scaled_sum": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Learning.CostPerformance",
+        "AISafetyAtlas.Learning.NonadaptiveSchedule",
+        "AISafetyAtlas.Learning.aggregatePerformance"
+      ]
+    },
+    "AISafetyAtlas.Learning.homogeneous_iff_learner_indep": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Learning.HomogeneousLoss",
+        "AISafetyAtlas.Learning.SupervisedLearner",
+        "AISafetyAtlas.Learning.lossConfig"
+      ]
+    },
+    "AISafetyAtlas.Learning.homogeneous_of_learner_indep": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Learning.HomogeneousLoss",
+        "AISafetyAtlas.Learning.SupervisedLearner",
+        "AISafetyAtlas.Learning.lossConfig"
+      ]
+    },
+    "AISafetyAtlas.Learning.homogeneous_zeroOne": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Learning.HomogeneousLoss"
+      ]
+    },
+    "AISafetyAtlas.Learning.lossConfig": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Learning.SupervisedLearner",
+        "AISafetyAtlas.Learning.predict"
+      ]
+    },
+    "AISafetyAtlas.Learning.lossConfig_sum_learner_indep": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Learning.HomogeneousLoss",
+        "AISafetyAtlas.Learning.SupervisedLearner",
+        "AISafetyAtlas.Learning.lossConfig"
+      ]
+    },
+    "AISafetyAtlas.Learning.no_free_lunch": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Learning.CostPerformance",
+        "AISafetyAtlas.Learning.NonadaptiveSchedule",
+        "AISafetyAtlas.Learning.aggregatePerformance"
+      ]
+    },
+    "AISafetyAtlas.Learning.no_free_lunch_adaptive": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Learning.AdaptiveRule",
+        "AISafetyAtlas.Learning.observed",
+        "AISafetyAtlas.Learning.ruleVisit"
+      ]
+    },
+    "AISafetyAtlas.Learning.no_free_lunch_embedding": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Learning.CostPerformance"
+      ]
+    },
+    "AISafetyAtlas.Learning.no_free_lunch_supervised": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Learning.SupervisedLearner",
+        "AISafetyAtlas.Learning.aggregateOffTrainingLoss"
+      ]
+    },
+    "AISafetyAtlas.Learning.obsPrefix": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Learning.AdaptiveRule"
+      ]
+    },
+    "AISafetyAtlas.Learning.observed": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Learning.AdaptiveRule",
+        "AISafetyAtlas.Learning.obsPrefix"
+      ]
+    },
+    "AISafetyAtlas.Learning.observed_of_consistent": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Learning.AdaptiveRule",
+        "AISafetyAtlas.Learning.observed",
+        "AISafetyAtlas.Learning.ruleVisit"
+      ]
+    },
+    "AISafetyAtlas.Learning.offTrainingLoss": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Learning.pointLoss"
+      ]
+    },
+    "AISafetyAtlas.Learning.ots_error_distribution_learner_indep": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Learning.HomogeneousLoss",
+        "AISafetyAtlas.Learning.SupervisedLearner",
+        "AISafetyAtlas.Learning.predict"
+      ]
+    },
+    "AISafetyAtlas.Learning.pointLoss": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Learning.predict": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Learning.SupervisedLearner",
+        "AISafetyAtlas.Learning.restrictTo"
+      ]
+    },
+    "AISafetyAtlas.Learning.restrictTo": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Learning.ruleVisit": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Learning.AdaptiveRule"
+      ]
+    },
+    "AISafetyAtlas.Learning.sum_performance_eq_scaled_sum": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Learning.CostPerformance"
+      ]
+    },
+    "AISafetyAtlas.Learning.sum_pointLoss_off_training": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Learning.SupervisedLearner",
+        "AISafetyAtlas.Learning.pointLoss",
+        "AISafetyAtlas.Learning.predict"
+      ]
+    }
+  }
+}

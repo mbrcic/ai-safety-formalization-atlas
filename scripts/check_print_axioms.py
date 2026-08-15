@@ -34,8 +34,22 @@ END_RE = re.compile(r"^\s*end\s+([A-Za-z0-9_'.]+)\s*$")
 # public surface, same obligation. Matching only `theorem` audited 208 of the
 # 325 public declarations in the facade closure and called that "the complete
 # theorem surface".
+# Match the whole name up to whatever delimits it, rather than an ASCII-only
+# character class.  Two defects came from the earlier
+# `([A-Za-z0-9_'.]+)\\b` form, and both were silent:
+#
+# * a name ending in a prime (`foo'`) has no word boundary after the quote, so
+#   the match backtracked and truncated to `foo` — `foo` and `foo'` then
+#   collapsed to one name and one of them was never checked;
+# * a name containing a subscript (`F₁_of_compatible`) could not be matched at
+#   all, because the class stops at `F` and `\\b` then fails against the
+#   subscript, which Python counts as a word character.  Such declarations were
+#   dropped from the scan entirely.
+#
+# Lean identifiers admit Greek letters, subscripts, `!`, `?` and more, so
+# enumerating them is the wrong approach; the delimiters are the short list.
 PUBLIC_THEOREM_RE = re.compile(
-    r"^\s*public\s+(?:theorem|lemma)\s+([A-Za-z0-9_'.]+)\b"
+    r"^\s*public\s+(?:theorem|lemma)\s+([^\s:({\[]+)"
 )
 
 

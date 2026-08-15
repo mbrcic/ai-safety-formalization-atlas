@@ -1133,37 +1133,59 @@ _DECL_RE = re.compile(
     r"([A-Za-z_][\w'!?₀-₉]*(?:\.[A-Za-z_][\w'!?₀-₉]*)*)"
 )
 _NS_RE = re.compile(r"^\s*namespace\s+([A-Za-z_][\w.']*)")
-_END_RE = re.compile(r"^\s*end\s+([A-Za-z_][\w.']*)")
+# `section` has to be tracked even though it contributes nothing to a name:
+# its `end` is indistinguishable from a namespace's, so a scope stack that
+# ignores `section` pops the enclosing namespace at the section's end and every
+# later declaration resolves under a truncated prefix. Four ledger declarations
+# were unreachable under their real names that way — `Preference.ReasonableLanguage`'s
+# two propositions and two `Inference` figures. The public page never asked for
+# those four, so nothing rendered wrong and nothing failed; the defect surfaced
+# only once the agent index started resolving every declaration and reported them.
+_SECTION_RE = re.compile(r"^\s*section(?:\s+[A-Za-z_][\w.']*)?\s*$")
+_END_RE = re.compile(r"^\s*end(?:\s+[A-Za-z_][\w.']*)?\s*$")
 
 
-def declaration_sources() -> dict[str, str]:
-    """Map every atlas declaration to a permalink at its definition.
+def declaration_locations() -> dict[str, tuple[str, int]]:
+    """Map every atlas declaration to the repository-relative file and line it is defined at.
 
     Resolved by reading the Lean sources rather than guessing a path from the
     namespace: `AISafetyAtlas.Knowledge.Knowable` could live in `Knowledge.lean`
     or `Knowledge/Knowable.lean`, and only the file knows which.
     """
-    index: dict[str, str] = {}
+    index: dict[str, tuple[str, int]] = {}
     for path in sorted((ROOT / "AISafetyAtlas").rglob("*.lean")) + [
         ROOT / "AISafetyAtlas.lean"
     ]:
         relative = path.relative_to(ROOT).as_posix()
-        stack: list[str] = []
+        # (name, contributes_to_the_namespace_path); sections carry `None`.
+        stack: list[tuple[str | None, bool]] = []
         for number, line in enumerate(
             path.read_text(encoding="utf-8").splitlines(), start=1
         ):
             opened = _NS_RE.match(line)
             if opened:
-                stack.append(opened.group(1))
+                stack.append((opened.group(1), True))
+                continue
+            if _SECTION_RE.match(line):
+                stack.append((None, False))
                 continue
             if _END_RE.match(line) and stack:
                 stack.pop()
                 continue
             declared = _DECL_RE.match(line)
             if declared:
-                name = ".".join(stack + [declared.group(1)]) if stack else declared.group(1)
-                index.setdefault(name, f"{SOURCE_BASE}/{relative}#L{number}")
+                prefix = [name for name, scoping in stack if scoping and name]
+                name = ".".join(prefix + [declared.group(1)])
+                index.setdefault(name, (relative, number))
     return index
+
+
+def declaration_sources() -> dict[str, str]:
+    """Map every atlas declaration to a permalink at its definition."""
+    return {
+        name: f"{SOURCE_BASE}/{relative}#L{number}"
+        for name, (relative, number) in declaration_locations().items()
+    }
 
 
 def result_source_link(result: dict, sources: dict[str, str]) -> str | None:
@@ -1360,17 +1382,37 @@ def compact_formalization(record: dict) -> dict:
     }
 
 
-def compact_result(result: dict) -> dict:
-    """Compact survey row for agent lookup without loading full registry.yaml."""
+def declaration_entry(
+    declaration: dict, locations: dict[str, tuple[str, int]]
+) -> dict:
+    """One declaration, with where to open it when the source is in this tree.
+
+    `file`/`line` are omitted rather than nulled when the name does not resolve —
+    vendored and external declarations have no in-tree definition site, and an
+    entry that is present but empty reads as a broken lookup.
+    """
+    name = declaration["atlas_declaration"]
+    entry: dict = {"atlas_declaration": name, "type": declaration["type"]}
+    located = locations.get(name)
+    if located is not None:
+        entry["file"], entry["line"] = located
+    return entry
+
+
+def compact_result(result: dict, locations: dict[str, tuple[str, int]] | None = None) -> dict:
+    """Compact survey row for agent lookup without loading full registry.yaml.
+
+    Each declaration carries the file and line it is defined at, so a reader can
+    open it directly. Without them the name alone forces a repository-wide search
+    per lookup, which is the cost this index exists to avoid.
+    """
+    locations = locations if locations is not None else {}
     lean = result.get("lean_artifact")
     lean_out = None
     if lean is not None:
         lean_out = {
             "declarations": [
-                {
-                    "atlas_declaration": declaration["atlas_declaration"],
-                    "type": declaration["type"],
-                }
+                declaration_entry(declaration, locations)
                 for declaration in lean.get("declarations") or []
             ]
         }
@@ -1390,6 +1432,7 @@ def compact_result(result: dict) -> dict:
 
 def render_agent_by_id(registry: dict) -> str:
     """Compact BY-### / CLM-* / LAND-* index for agents (token-cheap vs full registry)."""
+    locations = declaration_locations()
     payload = {
         "schema_version": 1,
         "generated_by": "scripts/generate_registry_views.py",
@@ -1398,12 +1441,15 @@ def render_agent_by_id(registry: dict) -> str:
             "registry.yaml; open the full YAML only for one id when notes or "
             "candidate-formalization detail is required. A row with an informal "
             "claim states something a source asserted; a row without one records a "
-            "formalization standing on its own account."
+            "formalization standing on its own account. Each atlas declaration "
+            "carries the file and line it is defined at, so opening one needs no "
+            "repository search."
         ),
         "claim_count": len(claim_rows(registry)),
         "artifact_count": len(artifact_rows(registry)),
         "results_by_id": {
-            result["id"]: compact_result(result) for result in registry["results"]
+            result["id"]: compact_result(result, locations)
+            for result in registry["results"]
         },
     }
     return json.dumps(payload, indent=2, ensure_ascii=False) + "\n"

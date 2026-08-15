@@ -30,6 +30,7 @@ the task requires that particular inventory, domain, or evidence.
 | [`docs/guide/open-work.md`](../guide/open-work.md) | choosing research work rather than a bounded task |
 | [`docs/guide/contributor-tasks.md`](../guide/contributor-tasks.md) | choosing or implementing a CT unit |
 | [`docs/provenance/a1-a3-b1-b3-b7-reverification.md`](../provenance/a1-a3-b1-b3-b7-reverification.md) | working on those domain residuals |
+| [`docs/guide/atlas-check.md`](../guide/atlas-check.md) | answering a question about one finite model — `lake exe atlas-check` decides it and names the theorem, no Lean to write |
 | Facade modules under `AISafetyAtlas/*.lean` | writing Lean for the relevant domain |
 
 ## Lookup recipe
@@ -43,7 +44,15 @@ python3 -c "import json; d=json.load(open('docs/agent/by-id.json')); print(json.
 
 # Discovery hits for one id (prefer over formalization-search.json):
 python3 -c "import json; d=json.load(open('docs/agent/search-summary.json')); print(json.dumps(d['results']['BY-001'], indent=2))"
+
+# Where a row's declarations are defined — file and line, so no search is needed:
+python3 -c "import json; d=json.load(open('docs/agent/by-id.json')); print('\n'.join(f\"{x['file']}:{x['line']}  {x['atlas_declaration']}\" for x in d['results_by_id']['LAND-KNOW-DEVICE-001']['lean_artifact']['declarations']))"
 ```
+
+Every declaration in `lean_artifact` carries `file` and `line`, so reading one is
+a single `Read` at an offset rather than a repository-wide grep. Vendored and
+external declarations have no in-tree definition site and omit both fields
+rather than carrying empty ones.
 
 Open [`registry.yaml`](../../registry.yaml) only when you need full notes,
 `candidate_formalizations`, or `bridge_review` detail for **one** id (prefer

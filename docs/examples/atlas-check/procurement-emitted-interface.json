@@ -1,0 +1,12 @@
+{
+  "_comment": "Wolpert-free. Mirrors AISafetyAtlas.Examples.Oversight.JointObservation.Procurement.not_covers_qEmitted. States are the four executions in order sigma00, sigma10, sigma01, sigma11. Principal 0 is the data owner, whose dataset-restriction bit IS declared; principal 1 is the model owner, whose checkpoint bit is NOT in the declared interface and so emits a constant.",
+  "schema": "atlas-check/1",
+  "kind": "coalition",
+  "states": 4,
+  "emitted": [
+    [0, 1, 0, 1],
+    [0, 0, 0, 0]
+  ],
+  "coalition": [0, 1],
+  "hazard": [false, false, false, true]
+}

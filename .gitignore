@@ -9,10 +9,11 @@
 __pycache__/
 *.py[cod]
 
-# Local agent / IDE tool caches (not product source).
+# Local agent / IDE tool caches and configuration (not product source).
 .claude/
 .serena/
 .tokensave/
+.mcp.json
 **/CLAUDE.md
 .github/workflows/CLAUDE.md
 

@@ -8,10 +8,39 @@ of Ethical and Legal Behaviour of Robots*](https://web.archive.org/web/202202220
 (Utrecht UU-PCS-2021-02, 2021). It does not claim to formalize the paper's
 complete robotics language or a physical robot.
 
-Local working copy of the PDF used for statement extraction (maintainer
-workspace): `../2021 robot ethics limits.pdf`.
+## Which version, and a number collision
 
-## Extracted paper statements (verbatim)
+The survey cites the **Utrecht technical report**, which is unrefereed, and that
+is what this document transcribes. A peer-reviewed version exists: Wiedermann and
+van Leeuwen, *Validating Non-trivial Semantic Properties of Autonomous Robots*,
+in *Philosophy and Theory of Artificial Intelligence 2021*, SAPERE vol. 63,
+pp. 91–104, Springer 2022, `doi:10.1007/978-3-031-09153-7_8`.
+
+**They reuse the same numbers for different statements.** Every number in this
+document is the technical report's.
+
+| technical report (UU-PCS-2021-02, 37 pp) | published chapter (SAPERE 63, 14 pp) |
+|---|---|
+| **Theorem 1** — for non-trivial `P`, no algorithmic procedure tells, for an arbitrary robot with unbounded memory, whether its actions always satisfy `P` | **Theorem 1** — for all **regular** robot properties `P`, `P` is trivial **iff** `R_P` is recursive |
+| **Corollary 1** — the same for robots programmed by a structured program | **Corollary 1** — for all regular `P`, `P` is non-trivial **iff** `R_P` is non-recursive |
+| **Theorem 2** — for a non-trivial interaction property, no feasible `P`-module, algorithmic or otherwise, always decides correctly at runtime | **Theorem 2** — for regular and non-trivial `P`, there is no `P`-verifier of whatever kind |
+| Definition 2, structured programs | Definition 3, **regularity**; Definition 4, non-triviality |
+
+Both copies were read locally on 2026-08-15. What it changes for the atlas:
+
+* The published **Theorem 1 is an iff**, and the remark after it strengthens the
+  non-trivial direction to *"not even recursively enumerable"*. The report gives
+  undecidability only. So `action_safety_unverifiable` matches the report's
+  Theorem 1 and Corollary 1, and only the **easy half** of the published one.
+* The published statements carry a **regularity** hypothesis (Definition 3:
+  failure of `P` survives prefixing by idling, and by arbitrary interactive
+  activity) that the report's Theorem 1 does not.
+* Neither version's **Theorem 2** is formalized.
+
+Re-targeting at the published statement, with regularity explicit, is recorded
+work and is the only route to a published-source fidelity claim for BY-033.
+
+## Extracted paper statements (verbatim, technical-report numbering)
 
 Source: §3.2, pages 15–17 of UU-PCS-2021-02. Hyphenation at line breaks is
 normalized; wording is otherwise as in the paper.

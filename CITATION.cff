@@ -6,8 +6,8 @@ authors:
   - family-names: "Brcic"
     given-names: "Mario"
     orcid: "https://orcid.org/0000-0002-7564-6805"
-version: "0.6.0"
-date-released: 2026-08-12
+version: "0.7.0"
+date-released: 2026-08-15
 identifiers:
   - type: doi
     value: "10.5281/zenodo.21483033"

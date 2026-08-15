@@ -1,5 +1,5 @@
 name = "ai-safety-formalization-atlas"
-version = "0.6.0"
+version = "0.7.0"
 defaultTargets = ["AISafetyAtlas"]
 
 [leanOptions]
@@ -17,3 +17,10 @@ rev = "b47cf447255addf88a5d72781d0d29641948eb6e"
 
 [[lean_lib]]
 name = "AISafetyAtlas"
+
+# Answers a finite model and names the theorem that settles it. Not a default
+# target: the library must build without it, and nothing in the library imports
+# it. See Main.lean for the input schema and for what the output is not.
+[[lean_exe]]
+name = "atlas-check"
+root = "Main"
