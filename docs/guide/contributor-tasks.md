@@ -311,7 +311,47 @@ Pointer to the informal proof is given per target.
   is "formalized" until a proof (not a statement) lands.
 - **Does not change:** survey `registry.yaml` coverage.
 
-### CT-10 — Reproduce the closed-under-permutation NFL iff (BY-020, optional) (L) — **New reproduction rung**
+## CT-10 — Reproduce the closed-under-permutation NFL iff (BY-020, optional) (L) — **done**
+
+- **Done (2026-08-16), on both axes:** `AISafetyAtlas.Learning.Sharp` proves
+  `nfl_adaptive_iff_permInvariant`. Graded **`RELATED`**, not `EQUIVALENT`.
+  The atlas statement widens the printed one on the **weight** axis (any real
+  weight, no nonnegativity or normalization, where the source has a probability
+  distribution) and **meets** it on the algorithm axis:
+  `nfl_adaptive_of_permInvariant` proves sufficiency over `AdaptiveRule` with
+  the no-revisit hypothesis `∀ c, Injective (ruleVisit r c)`, which is the
+  source's non-repeating black-box class, quantified over every sample length
+  and every cost-sequence measure. `permInvariant_of_nfl` is **stronger** than
+  the source — it assumes schedule-independence only at the single length
+  `|X|`, only over non-adaptive schedules, and only at indicator measures.
+  `nfl_of_permInvariant` is the fixed-schedule special case, kept because it is
+  the form the rest of the atlas consumes.
+  Schumacher–Vose–Whitley's set form is
+  `permInvariant_of_closedUnderPermutation`, and their basis-class identity is
+  `basisClass_histogram_eq_permOrbit`. The uniform cores are the
+  constant-weight case (`no_free_lunch_embedding_of_sharp`) and are unchanged.
+  Non-vacuity is exhibited in **both** directions in
+  `AISafetyAtlas.Examples.Learning.Sharp`: a weight off the condition for which
+  NFL demonstrably fails, and a proper permutation-closed prior for which it
+  holds.
+- **Registry home: `BY-021`, not `BY-020`.** Both sources quantify over
+  non-repeating black-box *search* algorithms — Igel–Toussaint's Figure 1 is
+  captioned "the optimization scenario considered in NFL-theorems" — so these
+  records belong on the optimization row. They sat on `BY-020` (Wolpert 1996
+  supervised learning) until 2026-08-16 and were refiled then.
+- **Nothing open.** Two things that can look like gains are not: the source's
+  Theorem 5 quantifies over `m` as well, so every sample length is printed, and
+  the sufficiency half for the source's adaptive non-repeating algorithms is
+  closed by `nfl_adaptive_of_permInvariant`. What remains out of scope is
+  time-varying objectives. The papers' stochastic algorithms are now COVERED:
+  Igel-Toussaint's cited randomized class is Droste-Jansen-Wegener's, and
+  `mixtureTrace`/`nfl_mixture_of_permInvariant` is their definition and their
+  proof step; Schumacher-Vose-Whitley's §2 is deterministic and never carried a
+  gap. Wolpert-Macready 1997's stochastic algorithms are a different paper and
+  remain open on `BY-020`. Provenance:
+  [`../provenance/lean-wolpert-nfl.md`](../provenance/lean-wolpert-nfl.md).
+
+The original scoping follows.
 
 - **Goal:** reproduce the sharp *both-directions* NFL characterization on the
   **prior axis**: over a distribution `P` on target functions `X → Y`, expected

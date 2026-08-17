@@ -1,0 +1,1238 @@
+{
+  "note": "Edges are: for a definition, its type and body; for a theorem, its statement only. Lean's module system does not export proof terms.",
+  "cluster": "AISafetyAtlas.Control.",
+  "declarations": {
+    "AISafetyAtlas.Control.FactorsThrough": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Control.IsInputPolicy": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Control.IsInputPolicy.condIndep": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Control.IsInputPolicy"
+      ]
+    },
+    "AISafetyAtlas.Control.IsInputPolicy.measurable": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Control.IsInputPolicy"
+      ]
+    },
+    "AISafetyAtlas.Control.IsPerfectRegulator": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Control.IsPlant": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Control.IsPurification": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Control.OpenLoopBound": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Control.PerfectlyObservable": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Control.Purified": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Control.admittedOutcomes": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Control.admittedOutcomes_of_isPerfectRegulator": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Control.IsPerfectRegulator",
+        "AISafetyAtlas.Control.admittedOutcomes"
+      ]
+    },
+    "AISafetyAtlas.Control.applyChannel": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Control.ashbyCapacity": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Control.ashbyCapacity_mul": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Control.ashbyCapacity"
+      ]
+    },
+    "AISafetyAtlas.Control.ashbyCapacity_rescale": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Control.ashbyCapacity"
+      ]
+    },
+    "AISafetyAtlas.Control.ashby_logVariety_ge": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Control.admittedOutcomes"
+      ]
+    },
+    "AISafetyAtlas.Control.ashby_logVariety_ge_mul": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Control.admittedOutcomes"
+      ]
+    },
+    "AISafetyAtlas.Control.ashby_variety_ge": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Control.admittedOutcomes"
+      ]
+    },
+    "AISafetyAtlas.Control.ashby_variety_ge_isSharp": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Control.admittedOutcomes",
+        "AISafetyAtlas.Control.blockCount",
+        "AISafetyAtlas.Control.shiftStrategy",
+        "AISafetyAtlas.Control.shiftTable"
+      ]
+    },
+    "AISafetyAtlas.Control.atomLoss": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Control.atomLoss_bestAction": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Control.atomLoss",
+        "AISafetyAtlas.Control.bestAction",
+        "AISafetyAtlas.Control.minAtomLoss"
+      ]
+    },
+    "AISafetyAtlas.Control.bddAbove_openLoopReductions": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Control.openLoopReductions"
+      ]
+    },
+    "AISafetyAtlas.Control.bddBelow_controlLoss_image": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Control.controlLoss",
+        "AISafetyAtlas.Control.plantOutcome"
+      ]
+    },
+    "AISafetyAtlas.Control.bestAction": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Control.atomLoss",
+        "AISafetyAtlas.Control.exists_atomLoss_eq",
+        "AISafetyAtlas.Control.minAtomLoss"
+      ]
+    },
+    "AISafetyAtlas.Control.blockCount": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Control.blockCount_eq": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Control.blockCount"
+      ]
+    },
+    "AISafetyAtlas.Control.card_admittedOutcomes_shiftTable": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Control.admittedOutcomes",
+        "AISafetyAtlas.Control.blockCount",
+        "AISafetyAtlas.Control.shiftStrategy",
+        "AISafetyAtlas.Control.shiftTable"
+      ]
+    },
+    "AISafetyAtlas.Control.card_ceilDiv_le_admittedOutcomes": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Control.admittedOutcomes"
+      ]
+    },
+    "AISafetyAtlas.Control.card_controller_le_card_regulator": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Control.IsPerfectRegulator"
+      ]
+    },
+    "AISafetyAtlas.Control.card_disturbance_le_card_regulator": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Control.IsPerfectRegulator"
+      ]
+    },
+    "AISafetyAtlas.Control.card_le_mul_card_admittedOutcomes": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Control.admittedOutcomes"
+      ]
+    },
+    "AISafetyAtlas.Control.card_le_mul_card_admittedOutcomes_mul": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Control.admittedOutcomes"
+      ]
+    },
+    "AISafetyAtlas.Control.chainRate": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Control.chainRate_eq_condEntropy": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Control.chainRate"
+      ]
+    },
+    "AISafetyAtlas.Control.channelCapacity_controller_le_channel": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Control.FactorsThrough",
+        "AISafetyAtlas.Control.IsPerfectRegulator",
+        "AISafetyAtlas.InformationTheory.channelCapacity"
+      ]
+    },
+    "AISafetyAtlas.Control.channelCapacity_disturbance_le_channel": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Control.FactorsThrough",
+        "AISafetyAtlas.Control.IsPerfectRegulator",
+        "AISafetyAtlas.InformationTheory.channelCapacity"
+      ]
+    },
+    "AISafetyAtlas.Control.closedFormLoss": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Control.minAtomLoss"
+      ]
+    },
+    "AISafetyAtlas.Control.closedFormLoss_le_controlLoss": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Control.IsInputPolicy",
+        "AISafetyAtlas.Control.closedFormLoss",
+        "AISafetyAtlas.Control.controlLoss",
+        "AISafetyAtlas.Control.plantOutcome"
+      ]
+    },
+    "AISafetyAtlas.Control.closedFormLoss_le_kernelControlLoss": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Control.closedFormLoss",
+        "AISafetyAtlas.Control.kernelControlLoss"
+      ]
+    },
+    "AISafetyAtlas.Control.compProd_fst_preimage": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.Control.compProd_singleton": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.Control.comp_ofWeights_real": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Control.ofWeights"
+      ]
+    },
+    "AISafetyAtlas.Control.condEntropy_atom_eq_atomLoss": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Control.IsInputPolicy",
+        "AISafetyAtlas.Control.atomLoss",
+        "AISafetyAtlas.Control.plantOutcome"
+      ]
+    },
+    "AISafetyAtlas.Control.condEntropy_atom_kernelMeasure": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Control.atomLoss",
+        "AISafetyAtlas.Control.kernelMeasure",
+        "AISafetyAtlas.Control.plantOutcome"
+      ]
+    },
+    "AISafetyAtlas.Control.condEntropy_fibre_eq_openLoopEntropy": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Control.openLoopEntropy",
+        "AISafetyAtlas.Control.plantOutcome"
+      ]
+    },
+    "AISafetyAtlas.Control.condEntropy_ge_of_openLoopBound": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Control.IsPlant",
+        "AISafetyAtlas.Control.OpenLoopBound"
+      ]
+    },
+    "AISafetyAtlas.Control.condEntropy_ge_of_openLoopMax": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Control.openLoopMax",
+        "AISafetyAtlas.Control.plantOutcome"
+      ]
+    },
+    "AISafetyAtlas.Control.condEntropy_le_condEntropy_of_forall": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.Control.condEntropy_outcome_controller": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Control.IsPerfectRegulator"
+      ]
+    },
+    "AISafetyAtlas.Control.condEntropy_outcome_eq": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.Control.condEntropy_prodMk_eq_sum": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.Control.condMutualInfo_eq_zero_of_sensorLoss_eq_zero": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Control.sensorLoss"
+      ]
+    },
+    "AISafetyAtlas.Control.continuous_openLoopObjective": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Control.openLoopObjective"
+      ]
+    },
+    "AISafetyAtlas.Control.controlLoss": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Control.controlLoss_comp_eq": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Control.atomLoss",
+        "AISafetyAtlas.Control.controlLoss",
+        "AISafetyAtlas.Control.plantOutcome"
+      ]
+    },
+    "AISafetyAtlas.Control.controlLoss_eq_condMutualInfo": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Control.Purified",
+        "AISafetyAtlas.Control.controlLoss"
+      ]
+    },
+    "AISafetyAtlas.Control.controlLoss_eq_entropy_noise_iff": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Control.Purified",
+        "AISafetyAtlas.Control.controlLoss"
+      ]
+    },
+    "AISafetyAtlas.Control.controlLoss_eq_mutualInfo_sub": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Control.Purified",
+        "AISafetyAtlas.Control.controlLoss"
+      ]
+    },
+    "AISafetyAtlas.Control.controlLoss_le_entropy_noise": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Control.Purified",
+        "AISafetyAtlas.Control.controlLoss"
+      ]
+    },
+    "AISafetyAtlas.Control.div_lt_blockCount": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Control.blockCount"
+      ]
+    },
+    "AISafetyAtlas.Control.entropyReduction": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Control.entropyReduction_const": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Control.entropyReduction",
+        "AISafetyAtlas.Control.openLoopReduction",
+        "AISafetyAtlas.Control.plantOutcome"
+      ]
+    },
+    "AISafetyAtlas.Control.entropyReduction_eq_condEntropy_form_iff": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Control.entropyReduction"
+      ]
+    },
+    "AISafetyAtlas.Control.entropyReduction_le_condEntropy_form": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Control.entropyReduction"
+      ]
+    },
+    "AISafetyAtlas.Control.entropyReduction_le_iSup_openLoopReduction": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Control.entropyReduction",
+        "AISafetyAtlas.Control.openLoopReduction",
+        "AISafetyAtlas.Control.plantOutcome"
+      ]
+    },
+    "AISafetyAtlas.Control.entropyReduction_le_of_condEntropy_ge": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Control.entropyReduction"
+      ]
+    },
+    "AISafetyAtlas.Control.entropyReduction_le_of_openLoopBound": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Control.IsPlant",
+        "AISafetyAtlas.Control.OpenLoopBound",
+        "AISafetyAtlas.Control.entropyReduction"
+      ]
+    },
+    "AISafetyAtlas.Control.entropyReduction_le_openLoopMax": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Control.entropyReduction",
+        "AISafetyAtlas.Control.openLoopMax",
+        "AISafetyAtlas.Control.plantOutcome"
+      ]
+    },
+    "AISafetyAtlas.Control.entropyReduction_purified": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Control.entropyReduction",
+        "AISafetyAtlas.Control.kernelEntropyReduction",
+        "AISafetyAtlas.Control.plantOutcome",
+        "AISafetyAtlas.Control.purifiedAction",
+        "AISafetyAtlas.Control.purifiedLaw",
+        "AISafetyAtlas.Control.purifiedSeed",
+        "AISafetyAtlas.Control.purifiedState",
+        "AISafetyAtlas.Control.purifyMap"
+      ]
+    },
+    "AISafetyAtlas.Control.entropy_eq_zero_iff": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.Control.entropy_ge_of_condEntropy_ge": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.Control.entropy_ge_of_sensor": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.Control.entropy_le_channelCapacity_of_complete": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.InformationTheory.channelCapacity"
+      ]
+    },
+    "AISafetyAtlas.Control.entropy_noise_sub_controlLoss": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Control.Purified",
+        "AISafetyAtlas.Control.controlLoss"
+      ]
+    },
+    "AISafetyAtlas.Control.entropy_outcome_eq_entropy_controller": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Control.IsPerfectRegulator"
+      ]
+    },
+    "AISafetyAtlas.Control.entropy_outcome_ge": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.Control.entropy_outcome_ge_of_strategy": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.Control.entropy_outcome_ge_sub_chainEntropy": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Control.traj"
+      ]
+    },
+    "AISafetyAtlas.Control.entropy_outcome_ge_sub_channelCapacity": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.InformationTheory.channelCapacity"
+      ]
+    },
+    "AISafetyAtlas.Control.entropy_traj": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Control.traj"
+      ]
+    },
+    "AISafetyAtlas.Control.exists_atomLoss_eq": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Control.atomLoss",
+        "AISafetyAtlas.Control.minAtomLoss"
+      ]
+    },
+    "AISafetyAtlas.Control.exists_entropyReduction_const_eq_iSup_openLoopReduction": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Control.entropyReduction",
+        "AISafetyAtlas.Control.openLoopReduction",
+        "AISafetyAtlas.Control.plantOutcome"
+      ]
+    },
+    "AISafetyAtlas.Control.exists_isMaxOn_openLoopObjective": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Control.openLoopObjective"
+      ]
+    },
+    "AISafetyAtlas.Control.exists_isPurification": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Control.IsPurification"
+      ]
+    },
+    "AISafetyAtlas.Control.exists_kernelEntropyReduction_dirac_eq_iSup": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Control.kernelEntropyReduction",
+        "AISafetyAtlas.Control.kernelOpenLoopReductionAt"
+      ]
+    },
+    "AISafetyAtlas.Control.exists_kernelEntropyReduction_le_at_max": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Control.kernelEntropyReduction",
+        "AISafetyAtlas.Control.kernelOpenLoopReductionAt"
+      ]
+    },
+    "AISafetyAtlas.Control.exists_kernelOpenLoopReductionAt_eq_max": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Control.kernelOpenLoopMax",
+        "AISafetyAtlas.Control.kernelOpenLoopReductionAt"
+      ]
+    },
+    "AISafetyAtlas.Control.exists_strategy_forcing": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Control.IsPerfectRegulator"
+      ]
+    },
+    "AISafetyAtlas.Control.indepFun_comp_of_map": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.Control.indepFun_cond_of_condIndepFun": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.Control.indepFun_purified": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Control.purifiedAction",
+        "AISafetyAtlas.Control.purifiedLaw",
+        "AISafetyAtlas.Control.purifiedSeed",
+        "AISafetyAtlas.Control.purifiedState"
+      ]
+    },
+    "AISafetyAtlas.Control.indepFun_purified_openLoop": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Control.purifiedAction",
+        "AISafetyAtlas.Control.purifiedLaw",
+        "AISafetyAtlas.Control.purifiedSeed",
+        "AISafetyAtlas.Control.purifiedState"
+      ]
+    },
+    "AISafetyAtlas.Control.injective_controlChannel": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Control.FactorsThrough",
+        "AISafetyAtlas.Control.IsPerfectRegulator"
+      ]
+    },
+    "AISafetyAtlas.Control.injective_disturbanceChannel": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Control.FactorsThrough",
+        "AISafetyAtlas.Control.IsPerfectRegulator"
+      ]
+    },
+    "AISafetyAtlas.Control.injective_regulator_of_disturbance": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Control.IsPerfectRegulator"
+      ]
+    },
+    "AISafetyAtlas.Control.injective_regulator_of_target": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Control.IsPerfectRegulator"
+      ]
+    },
+    "AISafetyAtlas.Control.injective_snoc": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.Control.inputPolicies": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Control.IsInputPolicy"
+      ]
+    },
+    "AISafetyAtlas.Control.isGreatest_kernelOpenLoopMax": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Control.kernelOpenLoopMax",
+        "AISafetyAtlas.Control.kernelOpenLoopReductions"
+      ]
+    },
+    "AISafetyAtlas.Control.isInputPolicy_comp": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Control.IsInputPolicy"
+      ]
+    },
+    "AISafetyAtlas.Control.isPlant_plantOutcome": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Control.IsPlant",
+        "AISafetyAtlas.Control.plantOutcome"
+      ]
+    },
+    "AISafetyAtlas.Control.isProbabilityMeasure_kernelMeasure": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Control.kernelMeasure"
+      ]
+    },
+    "AISafetyAtlas.Control.isProbabilityMeasure_ofWeights": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Control.ofWeights"
+      ]
+    },
+    "AISafetyAtlas.Control.isPurification_purifyMap": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Control.IsPurification",
+        "AISafetyAtlas.Control.purifyMap",
+        "AISafetyAtlas.Control.purifySeed"
+      ]
+    },
+    "AISafetyAtlas.Control.kernelControlLoss": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Control.controlLoss",
+        "AISafetyAtlas.Control.kernelMeasure",
+        "AISafetyAtlas.Control.plantOutcome"
+      ]
+    },
+    "AISafetyAtlas.Control.kernelControlLoss_deterministic": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Control.atomLoss",
+        "AISafetyAtlas.Control.kernelControlLoss"
+      ]
+    },
+    "AISafetyAtlas.Control.kernelControlLoss_eq_sum": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Control.atomLoss",
+        "AISafetyAtlas.Control.kernelControlLoss"
+      ]
+    },
+    "AISafetyAtlas.Control.kernelEntropyReduction": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Control.kernelEntropyReduction_dirac": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Control.kernelEntropyReduction",
+        "AISafetyAtlas.Control.kernelOpenLoopReductionAt"
+      ]
+    },
+    "AISafetyAtlas.Control.kernelEntropyReduction_le_iSup_kernelOpenLoop": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Control.kernelEntropyReduction",
+        "AISafetyAtlas.Control.kernelOpenLoopReductionAt"
+      ]
+    },
+    "AISafetyAtlas.Control.kernelEntropyReduction_le_kernelOpenLoopMax": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Control.kernelEntropyReduction",
+        "AISafetyAtlas.Control.kernelOpenLoopMax"
+      ]
+    },
+    "AISafetyAtlas.Control.kernelMeasure": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Control.kernelMeasure_prod": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Control.kernelMeasure"
+      ]
+    },
+    "AISafetyAtlas.Control.kernelMinControlLoss": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Control.kernelControlLoss"
+      ]
+    },
+    "AISafetyAtlas.Control.kernelMinControlLoss_eq": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Control.closedFormLoss",
+        "AISafetyAtlas.Control.kernelMinControlLoss"
+      ]
+    },
+    "AISafetyAtlas.Control.kernelOpenLoopMax": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Control.kernelOpenLoopReductions"
+      ]
+    },
+    "AISafetyAtlas.Control.kernelOpenLoopReductionAt": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Control.kernelOpenLoopReductions": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Control.kernelOpenLoopReductionAt"
+      ]
+    },
+    "AISafetyAtlas.Control.le_openLoopMax": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Control.openLoopMax",
+        "AISafetyAtlas.Control.openLoopReductionAt"
+      ]
+    },
+    "AISafetyAtlas.Control.map_applyChannel": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Control.applyChannel",
+        "AISafetyAtlas.Control.purifySeed"
+      ]
+    },
+    "AISafetyAtlas.Control.map_cond_eq_of_indepFun": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.Control.map_cond_kernelMeasure": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Control.kernelMeasure"
+      ]
+    },
+    "AISafetyAtlas.Control.map_dropAction": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Control.purifiedLaw",
+        "AISafetyAtlas.Control.purifiedSeed",
+        "AISafetyAtlas.Control.purifiedState",
+        "AISafetyAtlas.Control.purifySeed"
+      ]
+    },
+    "AISafetyAtlas.Control.map_prodMk_cond_eq_prod": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.Control.map_prodMk_purified": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Control.purifiedAction",
+        "AISafetyAtlas.Control.purifiedLaw",
+        "AISafetyAtlas.Control.purifiedState"
+      ]
+    },
+    "AISafetyAtlas.Control.map_purifiedRegroup": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Control.purifiedLaw",
+        "AISafetyAtlas.Control.purifiedRegroup",
+        "AISafetyAtlas.Control.purifySeed"
+      ]
+    },
+    "AISafetyAtlas.Control.map_purifiedSeed": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Control.purifiedLaw",
+        "AISafetyAtlas.Control.purifiedSeed",
+        "AISafetyAtlas.Control.purifySeed"
+      ]
+    },
+    "AISafetyAtlas.Control.map_purifyMap_prod": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Control.purifyMap",
+        "AISafetyAtlas.Control.purifySeed"
+      ]
+    },
+    "AISafetyAtlas.Control.map_snd_cond_compProd": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.Control.max_channelCapacity_le_channelCapacity_regulator": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Control.IsPerfectRegulator",
+        "AISafetyAtlas.InformationTheory.channelCapacity"
+      ]
+    },
+    "AISafetyAtlas.Control.measurable_applyChannel": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Control.applyChannel"
+      ]
+    },
+    "AISafetyAtlas.Control.measurable_plantOutcome": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Control.plantOutcome"
+      ]
+    },
+    "AISafetyAtlas.Control.measurable_purifiedAction": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Control.purifiedAction"
+      ]
+    },
+    "AISafetyAtlas.Control.measurable_purifiedRegroup": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Control.purifiedRegroup"
+      ]
+    },
+    "AISafetyAtlas.Control.measurable_purifiedSeed": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Control.purifiedSeed"
+      ]
+    },
+    "AISafetyAtlas.Control.measurable_purifiedState": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Control.purifiedState"
+      ]
+    },
+    "AISafetyAtlas.Control.measurable_purifyMap": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Control.purifyMap"
+      ]
+    },
+    "AISafetyAtlas.Control.measurable_traj": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Control.traj"
+      ]
+    },
+    "AISafetyAtlas.Control.measureEntropy_ofWeights": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Control.ofWeights"
+      ]
+    },
+    "AISafetyAtlas.Control.minAtomLoss": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Control.atomLoss"
+      ]
+    },
+    "AISafetyAtlas.Control.minAtomLoss_le": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Control.atomLoss",
+        "AISafetyAtlas.Control.minAtomLoss"
+      ]
+    },
+    "AISafetyAtlas.Control.minAtomLoss_le_condEntropy": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Control.IsInputPolicy",
+        "AISafetyAtlas.Control.minAtomLoss",
+        "AISafetyAtlas.Control.plantOutcome"
+      ]
+    },
+    "AISafetyAtlas.Control.minControlLoss": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Control.controlLoss",
+        "AISafetyAtlas.Control.plantOutcome"
+      ]
+    },
+    "AISafetyAtlas.Control.minControlLoss_eq_entropy_noise_iff_of_attained": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Control.Purified",
+        "AISafetyAtlas.Control.controlLoss",
+        "AISafetyAtlas.Control.minControlLoss",
+        "AISafetyAtlas.Control.plantOutcome"
+      ]
+    },
+    "AISafetyAtlas.Control.minControlLoss_eq_sInf_condMutualInfo": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Control.Purified",
+        "AISafetyAtlas.Control.minControlLoss",
+        "AISafetyAtlas.Control.plantOutcome"
+      ]
+    },
+    "AISafetyAtlas.Control.minControlLoss_eq_sInf_mutualInfo_sub": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Control.Purified",
+        "AISafetyAtlas.Control.minControlLoss",
+        "AISafetyAtlas.Control.plantOutcome"
+      ]
+    },
+    "AISafetyAtlas.Control.minControlLoss_inputPolicies_attained": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Control.bestAction",
+        "AISafetyAtlas.Control.controlLoss",
+        "AISafetyAtlas.Control.inputPolicies",
+        "AISafetyAtlas.Control.plantOutcome"
+      ]
+    },
+    "AISafetyAtlas.Control.minControlLoss_inputPolicies_eq": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Control.bestAction",
+        "AISafetyAtlas.Control.closedFormLoss",
+        "AISafetyAtlas.Control.inputPolicies",
+        "AISafetyAtlas.Control.minControlLoss",
+        "AISafetyAtlas.Control.plantOutcome"
+      ]
+    },
+    "AISafetyAtlas.Control.minControlLoss_inputPolicies_eq_kernelMin": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Control.bestAction",
+        "AISafetyAtlas.Control.inputPolicies",
+        "AISafetyAtlas.Control.kernelMinControlLoss",
+        "AISafetyAtlas.Control.minControlLoss",
+        "AISafetyAtlas.Control.plantOutcome"
+      ]
+    },
+    "AISafetyAtlas.Control.minControlLoss_inputPolicies_le_entropy_noise": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Control.Purified",
+        "AISafetyAtlas.Control.inputPolicies",
+        "AISafetyAtlas.Control.minControlLoss",
+        "AISafetyAtlas.Control.plantOutcome"
+      ]
+    },
+    "AISafetyAtlas.Control.minControlLoss_le": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Control.controlLoss",
+        "AISafetyAtlas.Control.minControlLoss",
+        "AISafetyAtlas.Control.plantOutcome"
+      ]
+    },
+    "AISafetyAtlas.Control.minControlLoss_le_entropy_noise": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Control.Purified",
+        "AISafetyAtlas.Control.minControlLoss",
+        "AISafetyAtlas.Control.plantOutcome"
+      ]
+    },
+    "AISafetyAtlas.Control.minControlLoss_nonneg": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Control.minControlLoss"
+      ]
+    },
+    "AISafetyAtlas.Control.mutualInfo_outcome_disturbance_eq_zero": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Control.IsPerfectRegulator"
+      ]
+    },
+    "AISafetyAtlas.Control.mutualInfo_prod_eq_of_sensorLoss_eq_zero": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Control.sensorLoss"
+      ]
+    },
+    "AISafetyAtlas.Control.mutualInfo_purified": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Control.purifiedAction",
+        "AISafetyAtlas.Control.purifiedLaw",
+        "AISafetyAtlas.Control.purifiedState"
+      ]
+    },
+    "AISafetyAtlas.Control.ofWeights": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Control.ofWeights_apply_singleton": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Control.ofWeights"
+      ]
+    },
+    "AISafetyAtlas.Control.ofWeights_univ": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Control.ofWeights"
+      ]
+    },
+    "AISafetyAtlas.Control.ofWeights_weights": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Control.ofWeights",
+        "AISafetyAtlas.Control.weights"
+      ]
+    },
+    "AISafetyAtlas.Control.openLoopEntropy": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Control.openLoopMax": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Control.openLoopReductions"
+      ]
+    },
+    "AISafetyAtlas.Control.openLoopMax_purifyMap": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Control.kernelOpenLoopMax",
+        "AISafetyAtlas.Control.openLoopMax",
+        "AISafetyAtlas.Control.purifyMap",
+        "AISafetyAtlas.Control.purifySeed"
+      ]
+    },
+    "AISafetyAtlas.Control.openLoopObjective": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Control.openLoopObjective_eq": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Control.kernelOpenLoopReductionAt",
+        "AISafetyAtlas.Control.ofWeights",
+        "AISafetyAtlas.Control.openLoopObjective"
+      ]
+    },
+    "AISafetyAtlas.Control.openLoopReduction": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Control.openLoopEntropy"
+      ]
+    },
+    "AISafetyAtlas.Control.openLoopReductionAt": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Control.openLoopReductionAt_purifyMap": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Control.kernelOpenLoopReductionAt",
+        "AISafetyAtlas.Control.openLoopReductionAt",
+        "AISafetyAtlas.Control.purifyMap",
+        "AISafetyAtlas.Control.purifySeed"
+      ]
+    },
+    "AISafetyAtlas.Control.openLoopReduction_purified": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Control.kernelOpenLoopReductionAt",
+        "AISafetyAtlas.Control.openLoopReduction",
+        "AISafetyAtlas.Control.purifiedLaw",
+        "AISafetyAtlas.Control.purifiedSeed",
+        "AISafetyAtlas.Control.purifiedState",
+        "AISafetyAtlas.Control.purifyMap"
+      ]
+    },
+    "AISafetyAtlas.Control.openLoopReductions": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Control.openLoopReductionAt"
+      ]
+    },
+    "AISafetyAtlas.Control.openLoopReductions_purifyMap": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Control.kernelOpenLoopReductions",
+        "AISafetyAtlas.Control.openLoopReductions",
+        "AISafetyAtlas.Control.purifyMap",
+        "AISafetyAtlas.Control.purifySeed"
+      ]
+    },
+    "AISafetyAtlas.Control.outcome_eq_comp": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Control.IsPerfectRegulator"
+      ]
+    },
+    "AISafetyAtlas.Control.perfectlyObservable_iff_sensorLoss_eq_zero": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Control.PerfectlyObservable",
+        "AISafetyAtlas.Control.sensorLoss"
+      ]
+    },
+    "AISafetyAtlas.Control.plantOutcome": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Control.plantOutcome_purified": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Control.applyChannel",
+        "AISafetyAtlas.Control.plantOutcome",
+        "AISafetyAtlas.Control.purifiedAction",
+        "AISafetyAtlas.Control.purifiedSeed",
+        "AISafetyAtlas.Control.purifiedState",
+        "AISafetyAtlas.Control.purifyMap"
+      ]
+    },
+    "AISafetyAtlas.Control.preimage_kernel_atom": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.Control.preimage_prodMk_singleton": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.Control.prodMk_purified": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Control.purifiedAction",
+        "AISafetyAtlas.Control.purifiedState"
+      ]
+    },
+    "AISafetyAtlas.Control.prod_dirac_eq_map": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.Control.purifiedAction": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Control.purifiedLaw": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Control.purifySeed"
+      ]
+    },
+    "AISafetyAtlas.Control.purifiedRegroup": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Control.purifiedSeed": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Control.purifiedState": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Control.purifyMap": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Control.purifySeed": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Control.sensorLoss": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Control.seq_outcome_eq": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Control.IsPerfectRegulator"
+      ]
+    },
+    "AISafetyAtlas.Control.shiftStrategy": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Control.shiftTable": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Control.blockCount",
+        "AISafetyAtlas.Control.div_lt_blockCount"
+      ]
+    },
+    "AISafetyAtlas.Control.shiftTable_column_injective": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Control.blockCount",
+        "AISafetyAtlas.Control.shiftTable"
+      ]
+    },
+    "AISafetyAtlas.Control.sum_kernel_toReal": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.Control.traj": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Control.traj_succ": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Control.traj"
+      ]
+    },
+    "AISafetyAtlas.Control.two_le_card_admittedOutcomes": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Control.admittedOutcomes"
+      ]
+    },
+    "AISafetyAtlas.Control.weights": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Control.weights_mem_stdSimplex": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Control.weights"
+      ]
+    },
+    "AISafetyAtlas.Control.weights_ofWeights": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Control.ofWeights",
+        "AISafetyAtlas.Control.weights"
+      ]
+    }
+  }
+}

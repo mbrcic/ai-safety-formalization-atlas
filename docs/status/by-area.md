@@ -19,14 +19,14 @@ picking work. Grades and reproduction evidence:
 | [compositionality](#compositionality) | 4 | 1 |
 | [computability](#computability) | 3 | 3 |
 | [computational-complexity](#computational-complexity) | 0 | 5 |
-| [control-theory](#control-theory) | 0 | 6 |
+| [control-theory](#control-theory) | 3 | 4 |
 | [decision-theory](#decision-theory) | 2 | 3 |
 | [ethics](#ethics) | 1 | 4 |
-| [information-theory](#information-theory) | 11 | 4 |
-| [interpretability](#interpretability) | 10 | 5 |
+| [information-theory](#information-theory) | 16 | 2 |
+| [interpretability](#interpretability) | 11 | 5 |
 | [learning-theory](#learning-theory) | 2 | 7 |
 | [multi-agent](#multi-agent) | 3 | 5 |
-| [oversight](#oversight) | 5 | 2 |
+| [oversight](#oversight) | 6 | 2 |
 | [preference-inference](#preference-inference) | 1 | 1 |
 | [provability-logic](#provability-logic) | 7 | 1 |
 | [social-choice](#social-choice) | 2 | 6 |
@@ -108,7 +108,11 @@ Catalogued, no atlas Lean:
 
 ## control-theory
 
-No atlas Lean in this area yet.
+| ID | Result | Atlas declarations |
+|---|---|---|
+| BY-004 | Law of Requisite Variety | `AISafetyAtlas.Control.ashby_logVariety_ge`<br>`AISafetyAtlas.Control.ashby_logVariety_ge_mul`<br>`AISafetyAtlas.Control.ashby_variety_ge`<br>`AISafetyAtlas.Control.ashby_variety_ge_isSharp`<br>`AISafetyAtlas.Control.card_ceilDiv_le_admittedOutcomes`<br>`AISafetyAtlas.Control.card_le_mul_card_admittedOutcomes_mul`<br>`AISafetyAtlas.Control.condEntropy_outcome_eq`<br>`AISafetyAtlas.Control.entropy_ge_of_condEntropy_ge`<br>`AISafetyAtlas.Control.entropy_ge_of_sensor`<br>`AISafetyAtlas.Control.entropy_le_channelCapacity_of_complete`<br>`AISafetyAtlas.Control.entropy_outcome_ge`<br>`AISafetyAtlas.Control.entropy_outcome_ge_of_strategy`<br>`AISafetyAtlas.Control.entropy_outcome_ge_sub_channelCapacity`<br>`AISafetyAtlas.Control.two_le_card_admittedOutcomes`<br>`AISafetyAtlas.InformationTheory.channelCapacity_eq_of_card_eq_pow`<br>`AISafetyAtlas.InformationTheory.channelCapacity_eq_of_card_eq_two_pow`<br>`AISafetyAtlas.InformationTheory.channelCapacity_fun`<br>`AISafetyAtlas.InformationTheory.channelCapacity_prod`<br>`AISafetyAtlas.Oversight.not_forces_of_card_lt` |
+| BY-005 | Information-theoretical control limits | `AISafetyAtlas.Control.condEntropy_ge_of_openLoopBound`<br>`AISafetyAtlas.Control.condEntropy_le_condEntropy_of_forall`<br>`AISafetyAtlas.Control.condMutualInfo_eq_zero_of_sensorLoss_eq_zero`<br>`AISafetyAtlas.Control.controlLoss_eq_condMutualInfo`<br>`AISafetyAtlas.Control.controlLoss_eq_entropy_noise_iff`<br>`AISafetyAtlas.Control.controlLoss_eq_mutualInfo_sub`<br>`AISafetyAtlas.Control.controlLoss_le_entropy_noise`<br>`AISafetyAtlas.Control.entropyReduction_le_condEntropy_form`<br>`AISafetyAtlas.Control.entropyReduction_le_iSup_openLoopReduction`<br>`AISafetyAtlas.Control.entropyReduction_le_of_condEntropy_ge`<br>`AISafetyAtlas.Control.entropyReduction_le_of_openLoopBound`<br>`AISafetyAtlas.Control.entropyReduction_le_openLoopMax`<br>`AISafetyAtlas.Control.entropy_noise_sub_controlLoss`<br>`AISafetyAtlas.Control.exists_entropyReduction_const_eq_iSup_openLoopReduction`<br>`AISafetyAtlas.Control.isPlant_plantOutcome`<br>`AISafetyAtlas.Control.kernelControlLoss_eq_sum`<br>`AISafetyAtlas.Control.measurable_plantOutcome`<br>`AISafetyAtlas.Control.minControlLoss_eq_entropy_noise_iff_of_attained`<br>`AISafetyAtlas.Control.minControlLoss_eq_sInf_condMutualInfo`<br>`AISafetyAtlas.Control.minControlLoss_eq_sInf_mutualInfo_sub`<br>`AISafetyAtlas.Control.minControlLoss_inputPolicies_attained`<br>`AISafetyAtlas.Control.minControlLoss_inputPolicies_eq_kernelMin`<br>`AISafetyAtlas.Control.minControlLoss_le`<br>`AISafetyAtlas.Control.minControlLoss_le_entropy_noise`<br>`AISafetyAtlas.Control.minControlLoss_nonneg`<br>`AISafetyAtlas.Control.mutualInfo_prod_eq_of_sensorLoss_eq_zero`<br>`AISafetyAtlas.Control.perfectlyObservable_iff_sensorLoss_eq_zero` |
+| LAND-OVERSIGHT-VARIETY-001 | Seeing and doing are independent oversight capacities | `AISafetyAtlas.Oversight.exists_cannotForce_false_and_forces`<br>`AISafetyAtlas.Oversight.forces_of_constant_effect`<br>`AISafetyAtlas.Oversight.forces_of_constant_effect_of_not_knowable`<br>`AISafetyAtlas.Oversight.not_forces_of_cannotForce` |
 
 Catalogued, no atlas Lean:
 
@@ -117,8 +121,6 @@ Catalogued, no atlas Lean:
 | BY-001 | Unobservability |
 | BY-002 | Uncontrollability of dynamical systems |
 | BY-003 | Good Regulator Theorem |
-| BY-004 | Law of Requisite Variety |
-| BY-005 | Information-theoretical control limits |
 | BY-040 | Uncontrollability of AI |
 
 ## decision-theory
@@ -155,6 +157,8 @@ Catalogued, no atlas Lean:
 
 | ID | Result | Atlas declarations |
 |---|---|---|
+| BY-004 | Law of Requisite Variety | `AISafetyAtlas.Control.ashby_logVariety_ge`<br>`AISafetyAtlas.Control.ashby_logVariety_ge_mul`<br>`AISafetyAtlas.Control.ashby_variety_ge`<br>`AISafetyAtlas.Control.ashby_variety_ge_isSharp`<br>`AISafetyAtlas.Control.card_ceilDiv_le_admittedOutcomes`<br>`AISafetyAtlas.Control.card_le_mul_card_admittedOutcomes_mul`<br>`AISafetyAtlas.Control.condEntropy_outcome_eq`<br>`AISafetyAtlas.Control.entropy_ge_of_condEntropy_ge`<br>`AISafetyAtlas.Control.entropy_ge_of_sensor`<br>`AISafetyAtlas.Control.entropy_le_channelCapacity_of_complete`<br>`AISafetyAtlas.Control.entropy_outcome_ge`<br>`AISafetyAtlas.Control.entropy_outcome_ge_of_strategy`<br>`AISafetyAtlas.Control.entropy_outcome_ge_sub_channelCapacity`<br>`AISafetyAtlas.Control.two_le_card_admittedOutcomes`<br>`AISafetyAtlas.InformationTheory.channelCapacity_eq_of_card_eq_pow`<br>`AISafetyAtlas.InformationTheory.channelCapacity_eq_of_card_eq_two_pow`<br>`AISafetyAtlas.InformationTheory.channelCapacity_fun`<br>`AISafetyAtlas.InformationTheory.channelCapacity_prod`<br>`AISafetyAtlas.Oversight.not_forces_of_card_lt` |
+| BY-005 | Information-theoretical control limits | `AISafetyAtlas.Control.condEntropy_ge_of_openLoopBound`<br>`AISafetyAtlas.Control.condEntropy_le_condEntropy_of_forall`<br>`AISafetyAtlas.Control.condMutualInfo_eq_zero_of_sensorLoss_eq_zero`<br>`AISafetyAtlas.Control.controlLoss_eq_condMutualInfo`<br>`AISafetyAtlas.Control.controlLoss_eq_entropy_noise_iff`<br>`AISafetyAtlas.Control.controlLoss_eq_mutualInfo_sub`<br>`AISafetyAtlas.Control.controlLoss_le_entropy_noise`<br>`AISafetyAtlas.Control.entropyReduction_le_condEntropy_form`<br>`AISafetyAtlas.Control.entropyReduction_le_iSup_openLoopReduction`<br>`AISafetyAtlas.Control.entropyReduction_le_of_condEntropy_ge`<br>`AISafetyAtlas.Control.entropyReduction_le_of_openLoopBound`<br>`AISafetyAtlas.Control.entropyReduction_le_openLoopMax`<br>`AISafetyAtlas.Control.entropy_noise_sub_controlLoss`<br>`AISafetyAtlas.Control.exists_entropyReduction_const_eq_iSup_openLoopReduction`<br>`AISafetyAtlas.Control.isPlant_plantOutcome`<br>`AISafetyAtlas.Control.kernelControlLoss_eq_sum`<br>`AISafetyAtlas.Control.measurable_plantOutcome`<br>`AISafetyAtlas.Control.minControlLoss_eq_entropy_noise_iff_of_attained`<br>`AISafetyAtlas.Control.minControlLoss_eq_sInf_condMutualInfo`<br>`AISafetyAtlas.Control.minControlLoss_eq_sInf_mutualInfo_sub`<br>`AISafetyAtlas.Control.minControlLoss_inputPolicies_attained`<br>`AISafetyAtlas.Control.minControlLoss_inputPolicies_eq_kernelMin`<br>`AISafetyAtlas.Control.minControlLoss_le`<br>`AISafetyAtlas.Control.minControlLoss_le_entropy_noise`<br>`AISafetyAtlas.Control.minControlLoss_nonneg`<br>`AISafetyAtlas.Control.mutualInfo_prod_eq_of_sensorLoss_eq_zero`<br>`AISafetyAtlas.Control.perfectlyObservable_iff_sensorLoss_eq_zero` |
 | CLM-WOLPERT-APPROX-001 | Bounds on inference accuracy, and the collapse of the exact limits | `AISafetyAtlas.Inference.exists_distinguishable_accuracy_near_one`<br>`AISafetyAtlas.Inference.exists_weaklyInfers_of_three_values`<br>`AISafetyAtlas.Inference.fig5_accuracy_gap`<br>`AISafetyAtlas.Inference.identityDevice_weaklyInfers`<br>`AISafetyAtlas.Inference.inferenceAccuracy_ge` |
 | LAND-SELFREF-001 | The self-model as a component of the state it models | `AISafetyAtlas.Knowledge.SelfReference.card_rest_le_one_of_selfComplete`<br>`AISafetyAtlas.Knowledge.SelfReference.not_selfComplete_of_two_rest`<br>`AISafetyAtlas.Knowledge.SelfReference.selfComplete_iff_subsingleton_rest` |
 | LAND-ACCUM-001 | Window ambiguity: accumulation bounds over a set of targets | `AISafetyAtlas.Knowledge.ambiguity_le_of_evidenceMonotone`<br>`AISafetyAtlas.Knowledge.ambiguity_le_pairTarget_left`<br>`AISafetyAtlas.Knowledge.ambiguity_le_pairTarget_of_evidenceMonotone`<br>`AISafetyAtlas.Knowledge.ambiguity_le_pairTarget_right`<br>`AISafetyAtlas.Knowledge.ambiguity_pairTarget_le_mul`<br>`AISafetyAtlas.Knowledge.not_knowable_pairTarget_of_not_knowable` |
@@ -166,13 +170,14 @@ Catalogued, no atlas Lean:
 | LAND-KNOW-001 | Exact knowability: the observation-factorization kernel | `AISafetyAtlas.Knowledge.Knowable.mono`<br>`AISafetyAtlas.Knowledge.exists_witness_of_not_knowable`<br>`AISafetyAtlas.Knowledge.knowable_iff_factorsThrough`<br>`AISafetyAtlas.Knowledge.knowable_iff_no_collision`<br>`AISafetyAtlas.Knowledge.not_knowable_comp`<br>`AISafetyAtlas.Knowledge.not_knowable_of_collision`<br>`AISafetyAtlas.Knowledge.not_knowable_of_witness` |
 | LAND-KNOW-DEVICE-001 | Transports between the knowability kernel and inference devices | `AISafetyAtlas.Knowledge.Devices.BlockwiseCollision.not_physicallyKnows`<br>`AISafetyAtlas.Knowledge.Devices.BlockwiseCollision.not_weaklyInfers`<br>`AISafetyAtlas.Knowledge.Devices.knowable_probe_of_forall_blockAnswers`<br>`AISafetyAtlas.Knowledge.Devices.not_blockAnswers_of_witness` |
 | LAND-CRMDP-KNOW-001 | True return does not factor through the observed history | `AISafetyAtlas.Wireheading.ObservationLimits.not_knowable_trueReturn`<br>`AISafetyAtlas.Wireheading.ObservationLimits.not_knowable_trueReturn_of_complement_mem`<br>`AISafetyAtlas.Wireheading.ObservationLimits.returnOver_zeroEnv_complement` |
+| LAND-FANO-001 | Fano's inequality at both printed constants, and its sharpness | `AISafetyAtlas.InformationTheory.entropy_le_fano`<br>`AISafetyAtlas.InformationTheory.fano`<br>`AISafetyAtlas.InformationTheory.fano_of_embedding`<br>`AISafetyAtlas.InformationTheory.fano_of_log_le`<br>`AISafetyAtlas.InformationTheory.fano_unrestricted` |
+| LAND-KNOWENTROPY-001 | Knowability measured: zero conditional entropy, and Fano's floor on every decoder | `AISafetyAtlas.Knowledge.condEntropy_eq_zero_of_knowable`<br>`AISafetyAtlas.Knowledge.le_errorProb_of_decoder`<br>`AISafetyAtlas.Knowledge.not_knowable_of_condEntropy_ne_zero` |
+| LAND-DPI-001 | The data-processing inequality, its equality case, and the conditioning counterexamples | `AISafetyAtlas.InformationTheory.condMutualInfo_le_mutualInfo`<br>`AISafetyAtlas.InformationTheory.isMarkovChain_iff_measure_factorizes`<br>`AISafetyAtlas.InformationTheory.isMarkovChain_iff_measure_factorizes_singleton`<br>`AISafetyAtlas.InformationTheory.measure_factorizes_of_isMarkovChain`<br>`AISafetyAtlas.InformationTheory.mutualInfo_comp_le`<br>`AISafetyAtlas.InformationTheory.mutualInfo_eq_iff_isMarkovChain`<br>`AISafetyAtlas.InformationTheory.mutualInfo_le_of_isMarkovChain` |
 
 Catalogued, no atlas Lean:
 
 | ID | Result |
 |---|---|
-| BY-004 | Law of Requisite Variety |
-| BY-005 | Information-theoretical control limits |
 | BY-024 | Physical limits on inference |
 | BY-041 | Impossibility of unambiguous communication |
 
@@ -190,6 +195,7 @@ Catalogued, no atlas Lean:
 | LAND-SELFMEAS-002 | Breuer abstract embedded-measurement core | `AISafetyAtlas.Knowledge.Embedded.Meshing.restrict_surjective`<br>`AISafetyAtlas.Knowledge.Embedded.eq_restrict_of_infer_singleton_eq`<br>`AISafetyAtlas.Knowledge.Embedded.exists_singleton_infer_eq_of_infer_eq`<br>`AISafetyAtlas.Knowledge.Embedded.exists_state_not_exactly_measurable`<br>`AISafetyAtlas.Knowledge.Embedded.infer_singleton_eq_of_meshing`<br>`AISafetyAtlas.Knowledge.Embedded.no_meshing_inference_distinguishes`<br>`AISafetyAtlas.Knowledge.Embedded.no_meshing_inference_measures_all_states`<br>`AISafetyAtlas.Knowledge.Embedded.no_meshing_inference_measures_all_states_direct`<br>`AISafetyAtlas.Knowledge.Embedded.not_knowable_state_of_properInclusion` |
 | LAND-SELFMEAS-003 | Physical complement and finite-cardinality bridges to Breuer proper inclusion | `AISafetyAtlas.Knowledge.Embedded.Composition.measuresAll_fibreInference_of_injective`<br>`AISafetyAtlas.Knowledge.Embedded.Composition.meshing_and_measuresAll_fibreInference_of_bijective`<br>`AISafetyAtlas.Knowledge.Embedded.Composition.meshing_fibreInference_of_surjective`<br>`AISafetyAtlas.Knowledge.Embedded.Composition.no_meshing_measures_all_of_nontrivial_remainder`<br>`AISafetyAtlas.Knowledge.Embedded.Composition.no_meshing_measures_all_of_nontrivial_remainder_of_equiv`<br>`AISafetyAtlas.Knowledge.Embedded.Composition.not_meshing_of_not_surjective`<br>`AISafetyAtlas.Knowledge.Embedded.Composition.properInclusion_iff_not_injective`<br>`AISafetyAtlas.Knowledge.Embedded.Composition.properInclusion_of_nontrivial_remainder`<br>`AISafetyAtlas.Knowledge.Embedded.Composition.properInclusion_of_nontrivial_remainder_of_equiv`<br>`AISafetyAtlas.Knowledge.Embedded.Finite.no_meshing_measures_all_of_card_lt`<br>`AISafetyAtlas.Knowledge.Embedded.Finite.properInclusion_of_card_lt`<br>`AISafetyAtlas.Knowledge.Embedded.Finite.properInclusion_product_of_card_rest_ge_two` |
 | LAND-KNOW-001 | Exact knowability: the observation-factorization kernel | `AISafetyAtlas.Knowledge.Knowable.mono`<br>`AISafetyAtlas.Knowledge.exists_witness_of_not_knowable`<br>`AISafetyAtlas.Knowledge.knowable_iff_factorsThrough`<br>`AISafetyAtlas.Knowledge.knowable_iff_no_collision`<br>`AISafetyAtlas.Knowledge.not_knowable_comp`<br>`AISafetyAtlas.Knowledge.not_knowable_of_collision`<br>`AISafetyAtlas.Knowledge.not_knowable_of_witness` |
+| LAND-KNOWENTROPY-001 | Knowability measured: zero conditional entropy, and Fano's floor on every decoder | `AISafetyAtlas.Knowledge.condEntropy_eq_zero_of_knowable`<br>`AISafetyAtlas.Knowledge.le_errorProb_of_decoder`<br>`AISafetyAtlas.Knowledge.not_knowable_of_condEntropy_ne_zero` |
 
 Catalogued, no atlas Lean:
 
@@ -206,7 +212,7 @@ Catalogued, no atlas Lean:
 | ID | Result | Atlas declarations |
 |---|---|---|
 | BY-020 | No Free Lunch — supervised learning | `AISafetyAtlas.Learning.homogeneous_iff_learner_indep`<br>`AISafetyAtlas.Learning.homogeneous_of_learner_indep`<br>`AISafetyAtlas.Learning.lossConfig_sum_learner_indep`<br>`AISafetyAtlas.Learning.no_free_lunch_supervised`<br>`AISafetyAtlas.Learning.ots_error_distribution_learner_indep` |
-| BY-021 | No Free Lunch — optimization | `AISafetyAtlas.Learning.no_free_lunch`<br>`AISafetyAtlas.Learning.no_free_lunch_adaptive` |
+| BY-021 | No Free Lunch — optimization | `AISafetyAtlas.Combinatorics.basisClass_histogram_eq_permOrbit`<br>`AISafetyAtlas.Combinatorics.card_closedUnderPermutation_nonempty`<br>`AISafetyAtlas.Combinatorics.exists_perm_rel_not_iff`<br>`AISafetyAtlas.Learning.card_observed_eq`<br>`AISafetyAtlas.Learning.closedUnderPermutation_of_nfl`<br>`AISafetyAtlas.Learning.closedUnderPermutation_of_permInvariant`<br>`AISafetyAtlas.Learning.exists_observed_eq`<br>`AISafetyAtlas.Learning.nfl_adaptive_iff_permInvariant`<br>`AISafetyAtlas.Learning.nfl_adaptive_of_permInvariant`<br>`AISafetyAtlas.Learning.nfl_iff_permInvariant`<br>`AISafetyAtlas.Learning.nfl_mixture_of_permInvariant`<br>`AISafetyAtlas.Learning.nfl_of_permInvariant`<br>`AISafetyAtlas.Learning.nfl_stochastic_of_permInvariant`<br>`AISafetyAtlas.Learning.no_free_lunch`<br>`AISafetyAtlas.Learning.no_free_lunch_adaptive`<br>`AISafetyAtlas.Learning.no_free_lunch_adaptive_of_sharp`<br>`AISafetyAtlas.Learning.no_free_lunch_embedding_of_sharp`<br>`AISafetyAtlas.Learning.observed_permRule`<br>`AISafetyAtlas.Learning.permInvariant_of_closedUnderPermutation`<br>`AISafetyAtlas.Learning.permInvariant_of_nfl`<br>`AISafetyAtlas.Learning.ruleVisit_permRule` |
 
 Catalogued, no atlas Lean:
 
@@ -247,6 +253,7 @@ Catalogued, no atlas Lean:
 | LAND-AMBIG-001 | Finite fibre ambiguity and the counting obstruction | `AISafetyAtlas.Knowledge.ambiguity_le_of_comp`<br>`AISafetyAtlas.Knowledge.card_image_le_of_knowable`<br>`AISafetyAtlas.Knowledge.knowable_iff_ambiguity_le_one`<br>`AISafetyAtlas.Knowledge.not_knowable_of_card_lt` |
 | LAND-TEMPORAL-001 | Time-indexed knowability, contemporaneous collisions, and delayed knowledge | `AISafetyAtlas.Knowledge.Temporal.collisionAt_of_not_knowableAt`<br>`AISafetyAtlas.Knowledge.Temporal.knowableFrom_mono`<br>`AISafetyAtlas.Knowledge.Temporal.not_knowableAt_of_collisionAt` |
 | LAND-KNOW-DEVICE-001 | Transports between the knowability kernel and inference devices | `AISafetyAtlas.Knowledge.Devices.BlockwiseCollision.not_physicallyKnows`<br>`AISafetyAtlas.Knowledge.Devices.BlockwiseCollision.not_weaklyInfers`<br>`AISafetyAtlas.Knowledge.Devices.knowable_probe_of_forall_blockAnswers`<br>`AISafetyAtlas.Knowledge.Devices.not_blockAnswers_of_witness` |
+| LAND-OVERSIGHT-VARIETY-001 | Seeing and doing are independent oversight capacities | `AISafetyAtlas.Oversight.exists_cannotForce_false_and_forces`<br>`AISafetyAtlas.Oversight.forces_of_constant_effect`<br>`AISafetyAtlas.Oversight.forces_of_constant_effect_of_not_knowable`<br>`AISafetyAtlas.Oversight.not_forces_of_cannotForce` |
 
 Catalogued, no atlas Lean:
 

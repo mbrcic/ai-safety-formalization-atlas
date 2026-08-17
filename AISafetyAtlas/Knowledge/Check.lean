@@ -134,6 +134,75 @@ public theorem findCollision_eq_none_iff {U : Type u}
   · rfl
   · exact absurd hk (not_knowable_of_findCollision_eq_some hfind)
 
+/-! ## The reader's relabelling changes nothing
+
+`atlas-check` does not hand the kernel the numbers a caller wrote. It relabels
+them, keeping only **which states share a value**, so that the codomain is finite
+without the caller declaring its size. Until now the claim that this cannot change
+a verdict was asserted in a comment, and
+[`docs/guide/atlas-check.md`](../../docs/guide/atlas-check.md) named it as the one
+step between a caller's JSON and a certified predicate that no theorem covered.
+
+These are that theorem. The hypothesis is exactly what the reader guarantees —
+two states share a relabelled value precisely when they shared a raw one — and the
+conclusion is that knowability is the same question before and after. Neither
+direction needs the relabelling to be injective, surjective, order-preserving, or
+into any particular type; it needs only that the partition survives.
+
+`knowable_congr_observation` covers the observation side and
+`knowable_congr_property` the property side, so a reader that renumbers both is
+covered by composing them. `knowable_comp_left_iff` is the special case a caller
+is most likely to reason about: post-composing with an injection.
+-/
+
+/--
+**Relabelling the observation cannot change the verdict.** If two states share a
+value under the new observation exactly when they shared one under the old, then
+the property is knowable from one iff it is knowable from the other.
+
+This is the fibre-preservation the JSON reader performs, stated as a hypothesis.
+-/
+public theorem knowable_congr_observation {U : Type u} {I : Type v} {I' : Type v'}
+    {Y : Type w} [Nonempty Y]
+    {observation : U → I} {observation' : U → I'} {property : U → Y}
+    (hfibres : ∀ u v : U, observation u = observation v ↔ observation' u = observation' v) :
+    Knowable observation property ↔ Knowable observation' property := by
+  rw [knowable_iff_no_collision observation property,
+    knowable_iff_no_collision observation' property]
+  exact ⟨fun h u v huv => h u v ((hfibres u v).mpr huv),
+    fun h u v huv => h u v ((hfibres u v).mp huv)⟩
+
+/--
+**Relabelling the property cannot change the verdict either.** The same
+hypothesis on the other argument.
+
+`Nonempty` is required of both target types because the characterization this
+runs through supplies a decoder by choosing a value on each fibre.
+-/
+public theorem knowable_congr_property {U : Type u} {I : Type v}
+    {Y : Type w} {Y' : Type w'} [Nonempty Y] [Nonempty Y']
+    {observation : U → I} {property : U → Y} {property' : U → Y'}
+    (hfibres : ∀ u v : U, property u = property v ↔ property' u = property' v) :
+    Knowable observation property ↔ Knowable observation property' := by
+  rw [knowable_iff_no_collision observation property,
+    knowable_iff_no_collision observation property']
+  exact ⟨fun h u v huv => (hfibres u v).mp (h u v huv),
+    fun h u v huv => (hfibres u v).mpr (h u v huv)⟩
+
+/--
+The case a caller reasons about directly: renaming observation values by an
+injection is invisible to knowability.
+
+Injectivity is stronger than the theorem above needs, which is why the general
+form is the one the reader is checked against.
+-/
+public theorem knowable_comp_left_iff {U : Type u} {I : Type v} {I' : Type v'}
+    {Y : Type w} [Nonempty Y]
+    {observation : U → I} {property : U → Y} {f : I → I'} (hf : Function.Injective f) :
+    Knowable (f ∘ observation) property ↔ Knowable observation property :=
+  (knowable_congr_observation (observation := observation) (observation' := f ∘ observation)
+    (property := property) (fun _ _ => ⟨fun h => congrArg f h, fun h => hf h⟩)).symm
+
 /-! ## Evaluating the device predicates
 
 Each predicate is a `def` over quantifiers that are finite once the state space

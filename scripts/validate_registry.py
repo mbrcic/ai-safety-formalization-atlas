@@ -94,6 +94,25 @@ def valid_http_url(value: object) -> bool:
     return parsed.scheme in {"http", "https"} and bool(parsed.netloc)
 
 
+# A `lake build` target shaped like a Lean module: dotted, every segment
+# starting with a capital. Deliberately narrow, so prose inside a recorded
+# command is not mistaken for a target.
+LEAN_MODULE_SHAPE = re.compile(r"^[A-Z][A-Za-z0-9_']*(?:\.[A-Z][A-Za-z0-9_']*)+$")
+
+
+def lean_module_exists(module: str) -> bool:
+    """Whether a dotted module name resolves, in this tree or a Lake package."""
+    rel = module.replace(".", "/") + ".lean"
+    if (ROOT / rel).is_file():
+        return True
+    packages = ROOT / ".lake" / "packages"
+    if packages.is_dir():
+        for package in packages.iterdir():
+            if (package / rel).is_file():
+                return True
+    return False
+
+
 def lean_module_name(path: Path) -> str:
     """Return the dotted Lean module name for a repository-relative source."""
     return ".".join(path.relative_to(ROOT).with_suffix("").parts)
@@ -239,6 +258,7 @@ PUBLIC_GROUP_VALUES = {
     "Limits of verification",
     "Limits of self-knowledge and reflection",
     "What an observer can recover",
+    "Limits of control and regulation",
     "Learning and generalization",
     "Preferences, rewards and incentives",
     "Aggregation and multi-agent structure",
@@ -1283,16 +1303,36 @@ def main() -> None:
                     # Recorded commands carry shell punctuation and prose:
                     # `lake build AISafetyAtlas; python3 …` and
                     # `lake build AISafetyAtlas (vendored axiom-free trilemma)`.
-                    built = [
+                    # `+Mod` and `Mod:target` are lake's own target syntax, so a
+                    # decoration must be stripped before a name is resolved —
+                    # otherwise `+AISafetyAtlas.Nonexistent` reads as foreign.
+                    targets = [
                         token
                         for raw in tokens[2:]
-                        if (token := raw.strip("();,"))
-                        if (ROOT / (token.replace(".", "/") + ".lean")).is_file()
+                        if (token := raw.strip("();,").lstrip("+@").split(":")[0])
                     ]
+                    built = [t for t in targets if lean_module_exists(t)]
                     if not built:
                         fail(
                             f"{result_id} reproduction command builds no module that "
                             f"exists in this tree: {command!r}"
+                        )
+                    # One real target used to be enough, so a command could pair a
+                    # module that exists with one that does not and still pass —
+                    # `lake build A B` errors outright when `B` is missing, which
+                    # is a reproduction command that reproduces nothing. Every
+                    # token *shaped* like a Lean module must resolve, in this tree
+                    # or in a Lake package: restricting the check to names literally
+                    # starting `AISafetyAtlas` let `Mathlib.Totally.Fictional` and
+                    # the case typo `Aisafetyatlas.…` through, and both make lake
+                    # error just the same.
+                    missing = [
+                        t for t in targets if LEAN_MODULE_SHAPE.match(t) and t not in built
+                    ]
+                    if missing:
+                        fail(
+                            f"{result_id} reproduction command names modules that do not "
+                            f"exist, so the command errors: {', '.join(missing)}"
                         )
                 else:
                     fail(

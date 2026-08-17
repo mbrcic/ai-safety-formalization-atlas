@@ -556,8 +556,9 @@ cost at step `n` is `f` of the point the rule picks from the earlier costs.
 
 /--
 If objective `f` reproduces cost sequence `c` along the trajectory `r` unrolls
-from `c`, then `c` is exactly what `r` observes on `f`. (The "backward" half of the
-fiber characterization; the forward half comes free by counting.)
+from `c`, then `c` is exactly what `r` observes on `f`. The "backward" half of the
+fibre characterization; the forward half is `observed_consistent`, proved
+directly below rather than obtained by counting.
 -/
 public theorem observed_of_consistent {X Y : Type*} {m : ℕ}
     (r : AdaptiveRule X Y m) (f : X → Y) (c : Fin m → Y)
@@ -586,6 +587,59 @@ public theorem observed_of_consistent {X Y : Type*} {m : ℕ}
   have hmpre := hpre m le_rfl
   rw [observed, hmpre]
   simp
+
+/--
+**Prefixes of the observation are prefixes of the observed sequence.** Reading
+`n` steps and then truncating to `i` gives the same cost as reading `n'` steps
+for any `n' ≥ n`. The recursion builds each prefix by `Fin.snoc` onto the last,
+so this is the statement that `Fin.snoc` leaves earlier entries alone, iterated.
+-/
+public theorem obsPrefix_castLE {X Y : Type*} {m : ℕ}
+    (r : AdaptiveRule X Y m) (f : X → Y) {n n' : ℕ} (hnn : n ≤ n')
+    (h : n ≤ m) (h' : n' ≤ m) (i : Fin n) :
+    obsPrefix r f n h i = obsPrefix r f n' h' (i.castLE hnn) := by
+  induction n', hnn using Nat.le_induction with
+  | base => simp
+  | succ k hk ih =>
+    have hk' : k ≤ m := Nat.le_of_succ_le h'
+    have hstep : obsPrefix r f (k + 1) h'
+        = Fin.snoc (obsPrefix r f k hk') (f (r ⟨k, h'⟩ (obsPrefix r f k hk'))) := rfl
+    have hcast : i.castLE (Nat.le_succ_of_le hk) = (i.castLE hk).castSucc := rfl
+    rw [hstep, hcast, Fin.snoc_castSucc]
+    exact ih hk'
+
+/--
+**A rule's observation is consistent with its own trajectory.** Unrolling `r`
+against the sequence it actually observed on `f` revisits exactly the points it
+queried, and reads exactly the costs it read.
+
+This is the converse of `observed_of_consistent`, and together they say the
+fibre `{f : observed r f = c}` is cut out by the `m` equations
+`f (ruleVisit r c k) = c k`.
+-/
+public theorem observed_consistent {X Y : Type*} {m : ℕ}
+    (r : AdaptiveRule X Y m) (f : X → Y) (k : Fin m) :
+    f (ruleVisit r (observed r f) k) = observed r f k := by
+  have hlt : (k : ℕ) < m := k.isLt
+  -- the arguments the rule is fed at step `k` are the first `k` observations
+  have hargs : (fun i : Fin (k : ℕ) => observed r f (i.castLE hlt.le))
+      = obsPrefix r f (k : ℕ) hlt.le := by
+    funext i
+    exact (obsPrefix_castLE r f hlt.le hlt.le le_rfl i).symm
+  -- so the point unrolled from the observation is the point actually queried
+  have hvisit : ruleVisit r (observed r f) k = r k (obsPrefix r f (k : ℕ) hlt.le) := by
+    rw [ruleVisit, hargs]
+  -- and the cost read there is the `k`-th observation, by one `Fin.snoc` step
+  have hstep : obsPrefix r f ((k : ℕ) + 1) hlt
+      = Fin.snoc (obsPrefix r f (k : ℕ) hlt.le)
+          (f (r ⟨(k : ℕ), hlt⟩ (obsPrefix r f (k : ℕ) hlt.le))) := rfl
+  have hlast : obsPrefix r f ((k : ℕ) + 1) hlt (Fin.last (k : ℕ))
+      = f (r k (obsPrefix r f (k : ℕ) hlt.le)) := by
+    rw [hstep, Fin.snoc_last]
+  have hobs : observed r f k = f (r k (obsPrefix r f (k : ℕ) hlt.le)) := by
+    rw [← hlast, obsPrefix_castLE r f hlt hlt le_rfl (Fin.last (k : ℕ))]
+    congr 1
+  rw [hvisit, hobs]
 
 /--
 For a no-revisit rule, the number of objectives that observe a *fixed* cost

@@ -10,7 +10,7 @@ Edges come from the elaborated Lean environment. This answers the question the p
 
 So `A → B` means *`B` occurs in `A`'s statement, or in `A`'s body when `A` is a definition*. A lemma used only inside a proof does not appear. Reading the table as a complete call graph would be wrong, and the two sections below are scoped so that they stay true under this limit.
 
-`108` authored declarations in `AISafetyAtlas.Knowledge.*` (69 theorems). Compiler-generated companions and projections are dropped.
+`114` authored declarations in `AISafetyAtlas.Knowledge.*` (75 theorems). Compiler-generated companions and projections are dropped.
 
 ## Load-bearing declarations
 
@@ -18,7 +18,7 @@ Named in the statements of eight or more others. A change to one of these is a c
 
 | Declaration | Named by |
 |---|---|
-| `Knowable` | 27 |
+| `Knowable` | 33 |
 | `Embedded.Restriction` | 23 |
 | `Embedded.InferenceMap` | 19 |
 | `Embedded.Meshing` | 14 |
@@ -49,6 +49,9 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 | `Check.findCollision` | definition | `Check.collisionPairs` |
 | `Check.findCollision_eq_none_iff` | theorem | `Check.findCollision`, `Knowable` |
 | `Check.findCollision_eq_some` | theorem | `Check.findCollision` |
+| `Check.knowable_comp_left_iff` | theorem | `Knowable` |
+| `Check.knowable_congr_observation` | theorem | `Knowable` |
+| `Check.knowable_congr_property` | theorem | `Knowable` |
 | `Check.knowable_of_findCollision_eq_none` | theorem | `Check.findCollision`, `Knowable` |
 | `Check.not_knowable_of_findCollision_eq_some` | theorem | `Check.findCollision`, `Knowable` |
 | `Determines` | definition | — |
@@ -131,6 +134,7 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 | `ambiguity_le_worstAmbiguity` | theorem | `ambiguity`, `worstAmbiguity` |
 | `ambiguity_pairTarget_le_mul` | theorem | `ambiguity`, `pairTarget` |
 | `card_image_le_of_knowable` | theorem | `Knowable` |
+| `condEntropy_eq_zero_of_knowable` | theorem | `Knowable` |
 | `exists_witness_of_not_knowable` | theorem | `IndistinguishabilityWitness`, `Knowable` |
 | `fibre` | definition | — |
 | `knowable_id_iff_injective` | theorem | `Knowable` |
@@ -138,9 +142,11 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 | `knowable_iff_factorsThrough` | theorem | `Knowable` |
 | `knowable_iff_no_collision` | theorem | `Knowable` |
 | `knowable_iff_worstAmbiguity_le_one` | theorem | `Knowable`, `worstAmbiguity` |
+| `le_errorProb_of_decoder` | theorem | — |
 | `not_knowable_comp` | theorem | `Knowable` |
 | `not_knowable_of_card_lt` | theorem | `Knowable` |
 | `not_knowable_of_collision` | theorem | `Knowable` |
+| `not_knowable_of_condEntropy_ne_zero` | theorem | `Knowable` |
 | `not_knowable_of_one_lt_ambiguity` | theorem | `Knowable`, `ambiguity` |
 | `not_knowable_of_witness` | theorem | `IndistinguishabilityWitness`, `Knowable` |
 | `not_knowable_pairTarget_of_not_knowable` | theorem | `Knowable`, `pairTarget` |

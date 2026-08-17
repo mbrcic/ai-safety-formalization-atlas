@@ -55,6 +55,18 @@ DeepMind debate reproduced as
 [`LAND-DEBATE-001`](docs/provenance/debate-reproduction.md); continuous free
 lunches BY-022 [open](docs/guide/contributor-tasks.md#open-now)).
 
+**If the question is control**, `AISafetyAtlas.Control` carries Ashby's variety
+bounds and Touchette–Lloyd's information limits at their printed quantifiers: a
+regulator cannot hold an outcome steadier than its own repertoire allows, and
+feedback improves on open loop by at most the information the sensor actually
+supplied. **If it is the reach of a no-free-lunch argument**,
+`AISafetyAtlas.Learning.Sharp` proves the characterization in both directions —
+performance is algorithm-independent *exactly* on priors closed under relabelling
+the search space — together with the count saying almost no prior is one. Several
+of the survey's control rows are still empty; see
+[open work](docs/guide/open-work.md). Reading these across domains:
+[symmetry and impossibility](docs/guide/symmetry-and-impossibility.md).
+
 ## Who this is for
 
 - **Lean formalizers and AI-safety theory researchers** (and proof agents)
@@ -81,13 +93,13 @@ monorepo in-tree. Reusable structure and honest grading over volume.
 <!-- BEGIN GENERATED REGISTRY SCOPE -->
 | Metric | Current |
 |---|---:|
-| Atlas Lean declarations | **124** |
+| Atlas Lean declarations | **208** |
 | Results stating a source claim | **49** |
-| Results recording a formalization only | **28** (19 on root import) |
-| Reviewed AI-system bridges | **2** |
+| Results recording a formalization only | **32** (23 on root import) |
+| Reviewed AI-system bridges | **3** |
 | Statement-reviewed bridges (interpretation withheld) | **1** |
 | Open conjectures | **1** |
-| Claim results with statement-match | **12** |
+| Claim results with statement-match | **14** |
 | Claim results with `RELATED`-only formalization | **7** |
 
 `EXACT`/`EQUIVALENT` = conservative citation grade (completely
@@ -105,18 +117,67 @@ per-source reports under [`docs/status/sources/`](docs/status/sources/).
 Published units must rebuild under documented commands and the axiom policy
 ([Validation](#validation)).
 
+## Depending on the Atlas from your own project
+
+Add it to your `lakefile.toml`. There is no Reservoir entry, so require it by git:
+
+```toml
+[[require]]
+name = "ai-safety-formalization-atlas"
+git = "https://github.com/mbrcic/ai-safety-formalization-atlas.git"
+rev = "v0.7.0"
+```
+
+`v0.7.0` is the published release and is what that stanza gets you. **The module
+list below describes the working tree, which is ahead of it** — anything added
+since the tag is not in `v0.7.0`, so check the tag's own module list before
+depending on a name you read here.
+
+Then `import AISafetyAtlas.Knowledge` (or whichever module below) and instantiate
+the statements at your own types — they are unbundled maps, not an atlas-specific
+agent structure, so your `State` does not have to be one of ours.
+
+Three things worth knowing before you do:
+
+- **Your toolchain has to match, exactly.** Lean `v4.31.0`, Mathlib at the
+  `v4.31.0` tag, and PFR pinned by commit — PFR is a research development whose
+  API is not stable across revisions, which is why it is pinned that way. If your
+  project already sits on a different Mathlib, this is not a drop-in.
+- **You inherit every dependency**, Mathlib, Foundation and PFR, because Lake
+  resolves requirements per package rather than per import. Splitting the counting
+  half of Ashby's law out of the PFR-importing module (`Control.VarietyCounting`)
+  means less has to be *elaborated*, not less fetched.
+- **`warningAsError` is this package's option and does not reach yours** —
+  verified, not assumed.
+
 ## Domain imports
 
 Prefer a facade over the full root import when starting a proof. Some parents
-re-export their domain (`Wireheading`, `Compositional`,
+re-export their domain (`Wireheading`, `Compositional`, `Control`,
 `Oversight.JointObservation`); the kernels do not, so `Knowledge` and
 `Preference` specializations are imported one by one, and `Verification`
 supplies its mathematical base without the `AgentBehavior` and `Robot` bridges.
 `Inference` re-exports its own subtree, so one import carries the whole Wolpert
 development; `Knowledge.Devices` is the transport between the two and imports
-both. Import contracts per module: [`AISafetyAtlas.lean`](AISafetyAtlas.lean).
+both. `InformationTheory` deliberately has **no** parent — each module is one
+result and none is built on the others, so there is no surface for a facade to
+aggregate. Import contracts per module:
+[`AISafetyAtlas.lean`](AISafetyAtlas.lean).
+
+**Two senses of "control" live in this tree.** `Inference` has Wolpert's, which
+is a device controlling another device; `Control` has Ashby's and
+Touchette–Lloyd's, which is a regulator against a disturbance. No theorem
+identifies them.
 
 ```lean
+import AISafetyAtlas.Control       -- Ashby variety bounds + Touchette–Lloyd limits (facade)
+import AISafetyAtlas.Control.RequisiteVariety -- or one module at a time
+import AISafetyAtlas.InformationTheory.Fano   -- peers, no facade: import the one needed
+import AISafetyAtlas.InformationTheory.DataProcessing
+import AISafetyAtlas.InformationTheory.ChannelCapacity
+import AISafetyAtlas.Combinatorics.PermInvariance -- relabelling-invariance machinery
+import AISafetyAtlas.Learning      -- finite NFL cores
+import AISafetyAtlas.Learning.Sharp -- the permutation-closed characterization, both directions
 import AISafetyAtlas.Preference    -- planner/reward unidentifiability (kernel)
 import AISafetyAtlas.Preference.Override -- overriding human reward functions
 import AISafetyAtlas.Preference.Regret   -- half-maximal regret not ruled out
@@ -215,6 +276,29 @@ The stable entry points are conventional theorem names under domain namespaces:
 - `AISafetyAtlas.Logic.lawvere_fixed_point` — the types-and-functions Lawvere
   fixed-point wrapper (not the categorical statement; see `CLM-LAWVERE-CCC-001`)
 - `AISafetyAtlas.Learning.no_free_lunch` and `no_free_lunch_supervised` — finite NFL cores
+- `AISafetyAtlas.Learning.Sharp.nfl_adaptive_iff_permInvariant` — the sharp form:
+  performance is algorithm-independent **iff** the prior is closed under
+  relabelling the search space. With `card_closedUnderPermutation_nonempty`
+  (almost no prior is) this is the result that says where an NFL argument may be
+  used at all
+- `AISafetyAtlas.Control` — Ashby and Touchette–Lloyd behind one import.
+  `ashby_variety_ge` and `ashby_logVariety_ge` are the law in
+  counting and logarithmic form, `ashby_variety_ge_isSharp` says it is attained;
+  `outcome_eq_comp` and `exists_strategy_forcing` are §11/14;
+  `controlLoss_eq_condMutualInfo` identifies control loss with
+  a conditional mutual information and `entropyReduction_le_of_openLoopBound`
+  bounds feedback's advantage over open loop. Every one of those is in
+  `namespace AISafetyAtlas.Control`, whichever of the ten modules declares it, so
+  each is importable one at a time; see the facade docstring for the map
+- `AISafetyAtlas.InformationTheory.Fano` and `.DataProcessing` — Fano's
+  inequality at printed constants and the data-processing inequality with its
+  equality case, both over an arbitrary probability space.
+  `.ChannelCapacity` is the noiseless capacity, owned by neither
+- `AISafetyAtlas.Combinatorics.PermInvariance` — what relabelling-invariance
+  forces. `spectrum_eq_iff_mem_permOrbit` (the multiset of values is the complete
+  invariant), `closedUnderPermutationEquivSet` (invariant families *are* families
+  of multisets), and `exists_perm_rel_not_iff` (no non-trivial relation survives).
+  Domain-neutral, reusable, and the shared half of the NFL result above
 - `AISafetyAtlas.Knowledge` — start with the
   [knowability model](docs/guide/knowledge-model.md).
   `Knowable` in decoder form, `knowable_iff_no_collision`,

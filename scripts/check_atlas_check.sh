@@ -25,6 +25,7 @@ if [[ ! -x "$BINARY" ]]; then
 fi
 
 failures=0
+checks=0
 
 expect() {
   local model="$1"
@@ -42,6 +43,7 @@ expect() {
     failures=$((failures + 1))
     return
   fi
+  checks=$((checks + 1))
   echo "ok   $model: $pattern"
 }
 
@@ -75,6 +77,20 @@ expect procurement-private-joint.json "verdict: KNOWABLE"
 # not enough, because the hazard is relational.
 expect procurement-private-data-owner.json "verdict: NOT KNOWABLE"
 
+# The variety bound, both branches. Three situations and two interventions, with
+# every intervention still separating them: no overseer forces the outcome, and
+# the agreement theorem quantifies over every observation, so the verdict is
+# about all policies rather than one.
+# Lean: Examples.Oversight.VarietyBound.not_forces_revealing.
+expect oversight-repertoire-too-small.json "verdict: NO OVERSEER CAN FORCE THE OUTCOME"
+
+# The same shape with one intervention that flattens every situation to a single
+# outcome. The counting hypothesis fails, so the bound is silent — and the
+# checker must say that it is silent rather than report success.
+# Lean: Examples.Oversight.VarietyBound.forces_flattening.
+expect oversight-has-a-flattening-lever.json "verdict: THE COUNTING BOUND DOES NOT APPLY"
+expect oversight-has-a-flattening-lever.json "this is NOT a finding that oversight succeeds"
+
 # A model the reader must refuse rather than silently decide.
 malformed="$(mktemp "${TMPDIR:-/tmp}/atlas-check-XXXXXX.json")"
 trap 'rm -f -- "$malformed"' EXIT
@@ -86,6 +102,7 @@ if "$BINARY" "$malformed" >/dev/null 2>&1; then
   echo "FAIL malformed model: a short array was accepted" >&2
   failures=$((failures + 1))
 else
+  checks=$((checks + 1))
   echo "ok   malformed model: rejected rather than decided"
 fi
 
@@ -105,6 +122,7 @@ json.dump({"schema": "atlas-check/1", "kind": "device", "states": n,
           open(sys.argv[1], "w"))
 PY
 if timeout 30 "$BINARY" "$wide" >/dev/null 2>&1; then
+  checks=$((checks + 1))
   echo "ok   120 states with two target values: decided within the timeout"
 else
   echo "FAIL 120 states with two target values: timed out or errored" >&2
@@ -114,9 +132,20 @@ else
 fi
 rm -f -- "$wide"
 
+# The step no theorem covers: reading the file. The proofs in Knowledge/Check.lean
+# say the *normalization* is harmless; nothing says the parse built the model the
+# author wrote. That is tested rather than proved, and it is where the clamp in
+# runVariety was found.
+if ! python3 "$ROOT/scripts/check_atlas_check_parse.py"; then
+  echo "FAIL parse battery: see scripts/check_atlas_check_parse.py" >&2
+  failures=$((failures + 1))
+else
+  checks=$((checks + 1))
+fi
+
 if (( failures > 0 )); then
   echo "atlas-check disagrees with the Lean proofs in $failures place(s)" >&2
   exit 1
 fi
 
-echo "atlas-check ok: 12 checks agree with the Lean proofs and the scaling guard holds"
+echo "atlas-check ok: $checks checks agree with the Lean proofs and the scaling guard holds"

@@ -10,7 +10,7 @@ Armstrong and Mindermann combine their planner/reward unidentifiability theorem
 with Everitt et al.'s corrupted-reward no-free-lunch bound.  This module keeps
 the two ingredients separate: `RegretModel` records attained maxima, while
 `HalfMaximalRegretBound` is an explicit certificate proved by
-`AISafetyAtlas.Wireheading.Corruption.everitt_theorem_eleven`.
+`AISafetyAtlas.Wireheading.Corruption.ComplementedClass.everitt_theorem_eleven`.
 
 The result is abstract over reward/environment and behaviour types.  It builds
 no MDP and asserts nothing about a deployed system.

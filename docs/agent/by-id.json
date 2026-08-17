@@ -3,7 +3,7 @@
   "generated_by": "scripts/generate_registry_views.py",
   "note": "Compact agent lookup over the single results ledger. Prefer this over registry.yaml; open the full YAML only for one id when notes or candidate-formalization detail is required. A row with an informal claim states something a source asserted; a row without one records a formalization standing on its own account. Each atlas declaration carries the file and line it is defined at, so opening one needs no repository search.",
   "claim_count": 49,
-  "artifact_count": 28,
+  "artifact_count": 32,
   "results_by_id": {
     "BY-001": {
       "id": "BY-001",
@@ -35,10 +35,304 @@
     "BY-004": {
       "id": "BY-004",
       "name": "Law of Requisite Variety",
-      "ai_bridge_status": "HUMAN_REVIEW",
+      "ai_bridge_status": "REVIEWED",
       "informal_claim": "Perfect regulation requires sufficient controller variety under perfect information and unbounded response speed.",
-      "formalizations": [],
-      "lean_artifact": null,
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declarations": [
+            "AISafetyAtlas.Control.chainRate"
+          ],
+          "module": "AISafetyAtlas.Control.ChannelRate",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        },
+        {
+          "framework": "Lean",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declarations": [
+            "AISafetyAtlas.Control.entropy_traj"
+          ],
+          "module": "AISafetyAtlas.Control.ChannelRate",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        },
+        {
+          "framework": "Lean",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declarations": [
+            "AISafetyAtlas.Control.entropy_outcome_ge_sub_chainEntropy"
+          ],
+          "module": "AISafetyAtlas.Control.ChannelRate",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        },
+        {
+          "framework": "Lean",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declarations": [
+            "AISafetyAtlas.Control.outcome_eq_comp"
+          ],
+          "module": "AISafetyAtlas.Control.CompleteControl",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        },
+        {
+          "framework": "Lean",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declarations": [
+            "AISafetyAtlas.Control.card_disturbance_le_card_regulator"
+          ],
+          "module": "AISafetyAtlas.Control.CompleteControl",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        },
+        {
+          "framework": "Lean",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declarations": [
+            "AISafetyAtlas.Control.max_channelCapacity_le_channelCapacity_regulator"
+          ],
+          "module": "AISafetyAtlas.Control.CompleteControl",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        },
+        {
+          "framework": "Lean",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declarations": [
+            "AISafetyAtlas.Control.entropy_outcome_eq_entropy_controller"
+          ],
+          "module": "AISafetyAtlas.Control.CompleteControl",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        },
+        {
+          "framework": "Lean",
+          "relationship": "EXACT",
+          "reproduced": true,
+          "declarations": [
+            "AISafetyAtlas.Control.ashby_variety_ge"
+          ],
+          "module": "AISafetyAtlas.Control.RequisiteVariety",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        },
+        {
+          "framework": "Lean",
+          "relationship": "EXACT",
+          "reproduced": true,
+          "declarations": [
+            "AISafetyAtlas.Control.ashby_logVariety_ge"
+          ],
+          "module": "AISafetyAtlas.Control.RequisiteVariety",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        },
+        {
+          "framework": "Lean",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declarations": [
+            "AISafetyAtlas.Control.card_le_mul_card_admittedOutcomes_mul"
+          ],
+          "module": "AISafetyAtlas.Control.RequisiteVariety",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        },
+        {
+          "framework": "Lean",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declarations": [
+            "AISafetyAtlas.Control.two_le_card_admittedOutcomes"
+          ],
+          "module": "AISafetyAtlas.Control.RequisiteVariety",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        },
+        {
+          "framework": "Lean",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declarations": [
+            "AISafetyAtlas.Control.entropy_ge_of_condEntropy_ge"
+          ],
+          "module": "AISafetyAtlas.Control.RequisiteVariety",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        },
+        {
+          "framework": "Lean",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declarations": [
+            "AISafetyAtlas.Control.entropy_outcome_ge_of_strategy"
+          ],
+          "module": "AISafetyAtlas.Control.RequisiteVariety",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        },
+        {
+          "framework": "Lean",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declarations": [
+            "AISafetyAtlas.Control.entropy_ge_of_sensor"
+          ],
+          "module": "AISafetyAtlas.Control.RequisiteVariety",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        },
+        {
+          "framework": "Lean",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declarations": [
+            "AISafetyAtlas.Control.entropy_outcome_ge_sub_channelCapacity"
+          ],
+          "module": "AISafetyAtlas.Control.RequisiteVariety",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        },
+        {
+          "framework": "Lean",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declarations": [
+            "AISafetyAtlas.Control.entropy_le_channelCapacity_of_complete"
+          ],
+          "module": "AISafetyAtlas.Control.RequisiteVariety",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Control.ashby_variety_ge",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Control/VarietyCounting.lean",
+            "line": 134
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Control.card_ceilDiv_le_admittedOutcomes",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Control/VarietyCounting.lean",
+            "line": 274
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Control.ashby_variety_ge_isSharp",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Control/VarietyCounting.lean",
+            "line": 378
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Control.ashby_logVariety_ge_mul",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Control/VarietyCounting.lean",
+            "line": 210
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Control.ashby_logVariety_ge",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Control/VarietyCounting.lean",
+            "line": 176
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Control.card_le_mul_card_admittedOutcomes_mul",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Control/VarietyCounting.lean",
+            "line": 80
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Control.two_le_card_admittedOutcomes",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Control/VarietyCounting.lean",
+            "line": 158
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Control.entropy_ge_of_condEntropy_ge",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Control/RequisiteVariety.lean",
+            "line": 132
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Control.condEntropy_outcome_eq",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Control/RequisiteVariety.lean",
+            "line": 151
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Control.entropy_outcome_ge",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Control/RequisiteVariety.lean",
+            "line": 167
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Control.entropy_outcome_ge_of_strategy",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Control/RequisiteVariety.lean",
+            "line": 189
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Control.entropy_ge_of_sensor",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Control/RequisiteVariety.lean",
+            "line": 213
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Control.entropy_outcome_ge_sub_channelCapacity",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Control/RequisiteVariety.lean",
+            "line": 290
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Control.entropy_le_channelCapacity_of_complete",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Control/RequisiteVariety.lean",
+            "line": 319
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.InformationTheory.channelCapacity_fun",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/InformationTheory/ChannelCapacity.lean",
+            "line": 72
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.InformationTheory.channelCapacity_prod",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/InformationTheory/ChannelCapacity.lean",
+            "line": 78
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.InformationTheory.channelCapacity_eq_of_card_eq_two_pow",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/InformationTheory/ChannelCapacity.lean",
+            "line": 66
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.InformationTheory.channelCapacity_eq_of_card_eq_pow",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/InformationTheory/ChannelCapacity.lean",
+            "line": 56
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Oversight.not_forces_of_card_lt",
+            "type": "BRIDGE",
+            "file": "AISafetyAtlas/Oversight/VarietyBound.lean",
+            "line": 109
+          }
+        ]
+      },
       "candidate_count": 0
     },
     "BY-005": {
@@ -46,8 +340,361 @@
       "name": "Information-theoretical control limits",
       "ai_bridge_status": "HUMAN_REVIEW",
       "informal_claim": "Information constraints impose lower bounds on achievable control.",
-      "formalizations": [],
-      "lean_artifact": null,
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declarations": [
+            "AISafetyAtlas.Control.entropy_noise_sub_controlLoss"
+          ],
+          "module": "AISafetyAtlas.Control.InformationLimits",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        },
+        {
+          "framework": "Lean",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declarations": [
+            "AISafetyAtlas.Control.controlLoss_eq_condMutualInfo"
+          ],
+          "module": "AISafetyAtlas.Control.InformationLimits",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        },
+        {
+          "framework": "Lean",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declarations": [
+            "AISafetyAtlas.Control.controlLoss_eq_mutualInfo_sub"
+          ],
+          "module": "AISafetyAtlas.Control.InformationLimits",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        },
+        {
+          "framework": "Lean",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declarations": [
+            "AISafetyAtlas.Control.entropyReduction_le_of_condEntropy_ge"
+          ],
+          "module": "AISafetyAtlas.Control.InformationLimits",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        },
+        {
+          "framework": "Lean",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declarations": [
+            "AISafetyAtlas.Control.isGreatest_kernelOpenLoopMax"
+          ],
+          "module": "AISafetyAtlas.Control.OpenLoopAttainment",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        },
+        {
+          "framework": "Lean",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declarations": [
+            "AISafetyAtlas.Control.exists_kernelEntropyReduction_le_at_max"
+          ],
+          "module": "AISafetyAtlas.Control.OpenLoopAttainment",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        },
+        {
+          "framework": "Lean",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declarations": [
+            "AISafetyAtlas.Control.isPurification_purifyMap"
+          ],
+          "module": "AISafetyAtlas.Control.Purification",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        },
+        {
+          "framework": "Lean",
+          "relationship": "EXACT",
+          "reproduced": true,
+          "declarations": [
+            "AISafetyAtlas.Control.kernelEntropyReduction_le_kernelOpenLoopMax"
+          ],
+          "module": "AISafetyAtlas.Control.Purification",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        },
+        {
+          "framework": "Lean",
+          "relationship": "EXACT",
+          "reproduced": true,
+          "declarations": [
+            "AISafetyAtlas.Control.kernelEntropyReduction_le_iSup_kernelOpenLoop"
+          ],
+          "module": "AISafetyAtlas.Control.Purification",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        },
+        {
+          "framework": "Lean",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declarations": [
+            "AISafetyAtlas.Control.exists_kernelEntropyReduction_dirac_eq_iSup"
+          ],
+          "module": "AISafetyAtlas.Control.Purification",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        },
+        {
+          "framework": "Lean",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declarations": [
+            "AISafetyAtlas.Control.kernelMinControlLoss"
+          ],
+          "module": "AISafetyAtlas.Control.PolicyKernel",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        },
+        {
+          "framework": "Lean",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declarations": [
+            "AISafetyAtlas.Control.openLoopMax"
+          ],
+          "module": "AISafetyAtlas.Control.OpenLoop",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        },
+        {
+          "framework": "Lean",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declarations": [
+            "AISafetyAtlas.Control.minControlLoss"
+          ],
+          "module": "AISafetyAtlas.Control.InformationLimits",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        },
+        {
+          "framework": "Lean",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declarations": [
+            "AISafetyAtlas.Control.minControlLoss_le_entropy_noise"
+          ],
+          "module": "AISafetyAtlas.Control.InformationLimits",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        },
+        {
+          "framework": "Lean",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declarations": [
+            "AISafetyAtlas.Control.minControlLoss_eq_sInf_condMutualInfo"
+          ],
+          "module": "AISafetyAtlas.Control.InformationLimits",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        },
+        {
+          "framework": "Lean",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declarations": [
+            "AISafetyAtlas.Control.minControlLoss_eq_sInf_mutualInfo_sub"
+          ],
+          "module": "AISafetyAtlas.Control.InformationLimits",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        },
+        {
+          "framework": "Lean",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declarations": [
+            "AISafetyAtlas.Control.minControlLoss_eq_entropy_noise_iff_of_attained"
+          ],
+          "module": "AISafetyAtlas.Control.InformationLimits",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Control.entropy_noise_sub_controlLoss",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Control/InformationLimits.lean",
+            "line": 179
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Control.entropyReduction_le_of_openLoopBound",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Control/InformationLimits.lean",
+            "line": 413
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Control.condEntropy_ge_of_openLoopBound",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Control/InformationLimits.lean",
+            "line": 387
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Control.controlLoss_le_entropy_noise",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Control/InformationLimits.lean",
+            "line": 208
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Control.controlLoss_eq_entropy_noise_iff",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Control/InformationLimits.lean",
+            "line": 224
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Control.controlLoss_eq_condMutualInfo",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Control/InformationLimits.lean",
+            "line": 243
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Control.controlLoss_eq_mutualInfo_sub",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Control/InformationLimits.lean",
+            "line": 263
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Control.condEntropy_le_condEntropy_of_forall",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Control/InformationLimits.lean",
+            "line": 289
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Control.entropyReduction_le_of_condEntropy_ge",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Control/InformationLimits.lean",
+            "line": 328
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Control.minControlLoss_le_entropy_noise",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Control/InformationLimits.lean",
+            "line": 602
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Control.minControlLoss_eq_sInf_condMutualInfo",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Control/InformationLimits.lean",
+            "line": 667
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Control.minControlLoss_eq_sInf_mutualInfo_sub",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Control/InformationLimits.lean",
+            "line": 686
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Control.minControlLoss_le",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Control/InformationLimits.lean",
+            "line": 571
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Control.minControlLoss_nonneg",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Control/InformationLimits.lean",
+            "line": 580
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Control.measurable_plantOutcome",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Control/InformationLimits.lean",
+            "line": 466
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Control.isPlant_plantOutcome",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Control/InformationLimits.lean",
+            "line": 458
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Control.minControlLoss_eq_entropy_noise_iff_of_attained",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Control/InformationLimits.lean",
+            "line": 639
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Control.kernelControlLoss_eq_sum",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Control/PolicyKernel.lean",
+            "line": 588
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Control.minControlLoss_inputPolicies_eq_kernelMin",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Control/PolicyKernel.lean",
+            "line": 713
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Control.minControlLoss_inputPolicies_attained",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Control/PolicyKernel.lean",
+            "line": 434
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Control.entropyReduction_le_condEntropy_form",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Control/OpenLoop.lean",
+            "line": 78
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Control.entropyReduction_le_iSup_openLoopReduction",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Control/OpenLoop.lean",
+            "line": 162
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Control.exists_entropyReduction_const_eq_iSup_openLoopReduction",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Control/OpenLoop.lean",
+            "line": 203
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Control.entropyReduction_le_openLoopMax",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Control/OpenLoop.lean",
+            "line": 399
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Control.perfectlyObservable_iff_sensorLoss_eq_zero",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Control/Observability.lean",
+            "line": 143
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Control.condMutualInfo_eq_zero_of_sensorLoss_eq_zero",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Control/Observability.lean",
+            "line": 182
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Control.mutualInfo_prod_eq_of_sensorLoss_eq_zero",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Control/Observability.lean",
+            "line": 200
+          }
+        ]
+      },
       "candidate_count": 0
     },
     "BY-006": {
@@ -278,31 +925,31 @@
             "atlas_declaration": "AISafetyAtlas.Preference.exists_planner",
             "type": "NEW_PROOF",
             "file": "AISafetyAtlas/Preference.lean",
-            "line": 90
+            "line": 94
           },
           {
             "atlas_declaration": "AISafetyAtlas.Preference.exists_reward",
             "type": "NEW_PROOF",
             "file": "AISafetyAtlas/Preference.lean",
-            "line": 167
+            "line": 171
           },
           {
             "atlas_declaration": "AISafetyAtlas.Preference.consistent_rewards_eq_univ",
             "type": "NEW_PROOF",
             "file": "AISafetyAtlas/Preference.lean",
-            "line": 100
+            "line": 104
           },
           {
             "atlas_declaration": "AISafetyAtlas.Preference.neg_twin",
             "type": "NEW_PROOF",
             "file": "AISafetyAtlas/Preference.lean",
-            "line": 115
+            "line": 119
           },
           {
             "atlas_declaration": "AISafetyAtlas.Preference.greedy_rewardOf",
             "type": "NEW_PROOF",
             "file": "AISafetyAtlas/Preference.lean",
-            "line": 211
+            "line": 215
           },
           {
             "atlas_declaration": "AISafetyAtlas.Preference.Source.ReasonableForF.proposition_seven",
@@ -432,7 +1079,7 @@
             "atlas_declaration": "AISafetyAtlas.Verification.rice",
             "type": "BRIDGE",
             "file": "AISafetyAtlas/Verification.lean",
-            "line": 55
+            "line": 57
           },
           {
             "atlas_declaration": "AISafetyAtlas.Verification.AgentBehavior.no_behavioral_safety_verifier",
@@ -690,13 +1337,13 @@
             "atlas_declaration": "AISafetyAtlas.Learning.homogeneous_of_learner_indep",
             "type": "NEW_PROOF",
             "file": "AISafetyAtlas/Learning.lean",
-            "line": 782
+            "line": 836
           },
           {
             "atlas_declaration": "AISafetyAtlas.Learning.homogeneous_iff_learner_indep",
             "type": "NEW_PROOF",
             "file": "AISafetyAtlas/Learning.lean",
-            "line": 829
+            "line": 883
           }
         ]
       },
@@ -718,10 +1365,106 @@
           "module": "AISafetyAtlas.Learning",
           "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
           "version": "IN_TREE"
+        },
+        {
+          "framework": "Lean",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declarations": [
+            "AISafetyAtlas.Learning.nfl_iff_permInvariant"
+          ],
+          "module": "AISafetyAtlas.Learning.Sharp",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        },
+        {
+          "framework": "Lean",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declarations": [
+            "AISafetyAtlas.Learning.nfl_stochastic_of_permInvariant"
+          ],
+          "module": "AISafetyAtlas.Learning.Sharp",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        },
+        {
+          "framework": "Lean",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declarations": [
+            "AISafetyAtlas.Combinatorics.card_closedUnderPermutation_nonempty"
+          ],
+          "module": "AISafetyAtlas.Learning.Sharp",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        },
+        {
+          "framework": "Lean",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declarations": [
+            "AISafetyAtlas.Combinatorics.exists_perm_rel_not_iff"
+          ],
+          "module": "AISafetyAtlas.Learning.Sharp",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        },
+        {
+          "framework": "Lean",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declarations": [
+            "AISafetyAtlas.Learning.permInvariant_of_nfl"
+          ],
+          "module": "AISafetyAtlas.Learning.Sharp",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        },
+        {
+          "framework": "Lean",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declarations": [
+            "AISafetyAtlas.Learning.permInvariant_of_closedUnderPermutation"
+          ],
+          "module": "AISafetyAtlas.Learning.Sharp",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
         }
       ],
       "lean_artifact": {
         "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Learning.nfl_adaptive_iff_permInvariant",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Learning/Sharp.lean",
+            "line": 822
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Learning.nfl_mixture_of_permInvariant",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Learning/Sharp.lean",
+            "line": 604
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Learning.nfl_stochastic_of_permInvariant",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Learning/Sharp.lean",
+            "line": 485
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Combinatorics.card_closedUnderPermutation_nonempty",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Combinatorics/PermInvariance.lean",
+            "line": 320
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Combinatorics.exists_perm_rel_not_iff",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Combinatorics/PermInvariance.lean",
+            "line": 450
+          },
           {
             "atlas_declaration": "AISafetyAtlas.Learning.no_free_lunch",
             "type": "NEW_PROOF",
@@ -732,7 +1475,91 @@
             "atlas_declaration": "AISafetyAtlas.Learning.no_free_lunch_adaptive",
             "type": "NEW_PROOF",
             "file": "AISafetyAtlas/Learning.lean",
-            "line": 623
+            "line": 677
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Learning.nfl_adaptive_of_permInvariant",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Learning/Sharp.lean",
+            "line": 325
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Combinatorics.basisClass_histogram_eq_permOrbit",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Combinatorics/PermInvariance.lean",
+            "line": 142
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Learning.exists_observed_eq",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Learning/Sharp.lean",
+            "line": 667
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Learning.card_observed_eq",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Learning/Sharp.lean",
+            "line": 689
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Learning.closedUnderPermutation_of_permInvariant",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Learning/Sharp.lean",
+            "line": 889
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Learning.no_free_lunch_adaptive_of_sharp",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Learning/Sharp.lean",
+            "line": 400
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Learning.closedUnderPermutation_of_nfl",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Learning/Sharp.lean",
+            "line": 905
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Learning.ruleVisit_permRule",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Learning/Sharp.lean",
+            "line": 264
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Learning.observed_permRule",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Learning/Sharp.lean",
+            "line": 235
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Learning.nfl_iff_permInvariant",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Learning/Sharp.lean",
+            "line": 798
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Learning.nfl_of_permInvariant",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Learning/Sharp.lean",
+            "line": 185
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Learning.permInvariant_of_nfl",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Learning/Sharp.lean",
+            "line": 760
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Learning.permInvariant_of_closedUnderPermutation",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Learning/Sharp.lean",
+            "line": 852
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Learning.no_free_lunch_embedding_of_sharp",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Learning/Sharp.lean",
+            "line": 921
           }
         ]
       },
@@ -2460,7 +3287,10 @@
             "AISafetyAtlas.Knowledge.not_knowable_of_witness",
             "AISafetyAtlas.Knowledge.exists_witness_of_not_knowable",
             "AISafetyAtlas.Knowledge.Knowable.mono",
-            "AISafetyAtlas.Knowledge.not_knowable_comp"
+            "AISafetyAtlas.Knowledge.not_knowable_comp",
+            "AISafetyAtlas.Knowledge.Check.knowable_congr_observation",
+            "AISafetyAtlas.Knowledge.Check.knowable_congr_property",
+            "AISafetyAtlas.Knowledge.Check.knowable_comp_left_iff"
           ],
           "module": "AISafetyAtlas.Knowledge",
           "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
@@ -2614,6 +3444,243 @@
             "type": "NEW_PROOF",
             "file": "AISafetyAtlas/Wireheading/ObservationLimits.lean",
             "line": 161
+          }
+        ]
+      },
+      "candidate_count": 0
+    },
+    "LAND-FANO-001": {
+      "id": "LAND-FANO-001",
+      "name": "Fano's inequality at both printed constants, and its sharpness",
+      "ai_bridge_status": null,
+      "informal_claim": null,
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "relationship": null,
+          "reproduced": true,
+          "declarations": [
+            "fano_of_log_le",
+            "fano",
+            "fano_unrestricted",
+            "fano_of_embedding",
+            "entropy_le_fano",
+            "le_errorProb",
+            "fano_le_log_two_add",
+            "condEntropy_eq_error_split",
+            "condEntropy_le_error_bound"
+          ],
+          "module": "AISafetyAtlas.InformationTheory.Fano",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.InformationTheory.fano_of_log_le",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/InformationTheory/Fano.lean",
+            "line": 322
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.InformationTheory.fano",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/InformationTheory/Fano.lean",
+            "line": 389
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.InformationTheory.fano_unrestricted",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/InformationTheory/Fano.lean",
+            "line": 419
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.InformationTheory.fano_of_embedding",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/InformationTheory/Fano.lean",
+            "line": 454
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.InformationTheory.entropy_le_fano",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/InformationTheory/Fano.lean",
+            "line": 518
+          }
+        ]
+      },
+      "candidate_count": 0
+    },
+    "LAND-OVERSIGHT-VARIETY-001": {
+      "id": "LAND-OVERSIGHT-VARIETY-001",
+      "name": "Seeing and doing are independent oversight capacities",
+      "ai_bridge_status": null,
+      "informal_claim": null,
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "relationship": null,
+          "reproduced": true,
+          "declarations": [
+            "Forces",
+            "not_forces_of_card_lt",
+            "forces_of_constant_effect",
+            "forces_of_constant_effect_of_not_knowable",
+            "cannotForce",
+            "not_forces_of_cannotForce",
+            "exists_cannotForce_false_and_forces"
+          ],
+          "module": "AISafetyAtlas.Oversight.VarietyBound",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Oversight.not_forces_of_cannotForce",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Oversight/VarietyCheck.lean",
+            "line": 53
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Oversight.exists_cannotForce_false_and_forces",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Oversight/VarietyCheck.lean",
+            "line": 70
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Oversight.forces_of_constant_effect",
+            "type": "BRIDGE",
+            "file": "AISafetyAtlas/Oversight/VarietyBound.lean",
+            "line": 136
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Oversight.forces_of_constant_effect_of_not_knowable",
+            "type": "BRIDGE",
+            "file": "AISafetyAtlas/Oversight/VarietyBound.lean",
+            "line": 148
+          }
+        ]
+      },
+      "candidate_count": 0
+    },
+    "LAND-KNOWENTROPY-001": {
+      "id": "LAND-KNOWENTROPY-001",
+      "name": "Knowability measured: zero conditional entropy, and Fano's floor on every decoder",
+      "ai_bridge_status": null,
+      "informal_claim": null,
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "relationship": null,
+          "reproduced": true,
+          "declarations": [
+            "condEntropy_eq_zero_of_knowable",
+            "not_knowable_of_condEntropy_ne_zero",
+            "le_errorProb_of_decoder"
+          ],
+          "module": "AISafetyAtlas.Knowledge.Entropy",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Knowledge.condEntropy_eq_zero_of_knowable",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Knowledge/Entropy.lean",
+            "line": 92
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Knowledge.not_knowable_of_condEntropy_ne_zero",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Knowledge/Entropy.lean",
+            "line": 109
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Knowledge.le_errorProb_of_decoder",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Knowledge/Entropy.lean",
+            "line": 128
+          }
+        ]
+      },
+      "candidate_count": 0
+    },
+    "LAND-DPI-001": {
+      "id": "LAND-DPI-001",
+      "name": "The data-processing inequality, its equality case, and the conditioning counterexamples",
+      "ai_bridge_status": null,
+      "informal_claim": null,
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "relationship": null,
+          "reproduced": true,
+          "declarations": [
+            "isMarkovChain_iff_measure_factorizes_singleton",
+            "measure_preimage_inter_eq_tsum",
+            "isMarkovChain_iff_measure_factorizes",
+            "measure_factorizes_of_isMarkovChain",
+            "mutualInfo_le_of_isMarkovChain",
+            "mutualInfo_le_of_isMarkovChain'",
+            "mutualInfo_eq_iff_isMarkovChain",
+            "mutualInfo_comp_le",
+            "condMutualInfo_le_mutualInfo",
+            "isMarkovChain_comp",
+            "IsMarkovChain.symm",
+            "condEntropy_le_condEntropy_of_isMarkovChain"
+          ],
+          "module": "AISafetyAtlas.InformationTheory.DataProcessing",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.InformationTheory.isMarkovChain_iff_measure_factorizes_singleton",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/InformationTheory/DataProcessing.lean",
+            "line": 246
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.InformationTheory.isMarkovChain_iff_measure_factorizes",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/InformationTheory/DataProcessing.lean",
+            "line": 154
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.InformationTheory.measure_factorizes_of_isMarkovChain",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/InformationTheory/DataProcessing.lean",
+            "line": 290
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.InformationTheory.mutualInfo_le_of_isMarkovChain",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/InformationTheory/DataProcessing.lean",
+            "line": 376
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.InformationTheory.mutualInfo_eq_iff_isMarkovChain",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/InformationTheory/DataProcessing.lean",
+            "line": 407
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.InformationTheory.mutualInfo_comp_le",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/InformationTheory/DataProcessing.lean",
+            "line": 484
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.InformationTheory.condMutualInfo_le_mutualInfo",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/InformationTheory/DataProcessing.lean",
+            "line": 427
           }
         ]
       },

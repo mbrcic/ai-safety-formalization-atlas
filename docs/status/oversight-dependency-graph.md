@@ -10,7 +10,7 @@ Edges come from the elaborated Lean environment. This answers the question the p
 
 So `A → B` means *`B` occurs in `A`'s statement, or in `A`'s body when `A` is a definition*. A lemma used only inside a proof does not appear. Reading the table as a complete call graph would be wrong, and the two sections below are scoped so that they stay true under this limit.
 
-`48` authored declarations in `AISafetyAtlas.Oversight.*` (15 theorems). Compiler-generated companions and projections are dropped.
+`55` authored declarations in `AISafetyAtlas.Oversight.*` (20 theorems). Compiler-generated companions and projections are dropped.
 
 ## Load-bearing declarations
 
@@ -40,6 +40,7 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 
 | Declaration | Kind | Names |
 |---|---|---|
+| `Forces` | definition | — |
 | `JointObservation.CandidateFamily` | definition | `JointObservation.EvidenceArchitecture` |
 | `JointObservation.CandidateObservation` | definition | `JointObservation.EvidenceArchitecture` |
 | `JointObservation.CandidateObservation.observe` | definition | `JointObservation.CandidateObservation`, `JointObservation.CandidateObservation.Output`, `JointObservation.CandidateObservation.coalition`, `JointObservation.CandidateObservation.joint`, `JointObservation.EvidenceArchitecture`, `JointObservation.EvidenceArchitecture.Execution`, `JointObservation.EvidenceArchitecture.Principal`, `JointObservation.EvidenceArchitecture.privateState` |
@@ -88,3 +89,9 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 | `JointObservation.residual` | definition | `JointObservation.CandidateObservation`, `JointObservation.CandidateObservation.Output`, `JointObservation.CandidateObservation.observe`, `JointObservation.EvidenceArchitecture`, `JointObservation.EvidenceArchitecture.Execution` |
 | `JointObservation.worstResidual` | definition | `JointObservation.CandidateObservation`, `JointObservation.CandidateObservation.Output`, `JointObservation.CandidateObservation.observe`, `JointObservation.EvidenceArchitecture`, `JointObservation.EvidenceArchitecture.Execution` |
 | `JointObservation.worstResidual_le_postprocess` | theorem | `JointObservation.CandidateObservation`, `JointObservation.CandidateObservation.Output`, `JointObservation.CandidateObservation.postprocess`, `JointObservation.EvidenceArchitecture`, `JointObservation.EvidenceArchitecture.Execution`, `JointObservation.decidableEqPostprocessOutput`, `JointObservation.worstResidual` |
+| `cannotForce` | definition | — |
+| `exists_cannotForce_false_and_forces` | theorem | `Forces`, `cannotForce` |
+| `forces_of_constant_effect` | theorem | `Forces` |
+| `forces_of_constant_effect_of_not_knowable` | theorem | `Forces` |
+| `not_forces_of_cannotForce` | theorem | `Forces`, `cannotForce` |
+| `not_forces_of_card_lt` | theorem | `Forces` |

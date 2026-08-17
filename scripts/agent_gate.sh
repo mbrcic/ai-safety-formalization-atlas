@@ -63,6 +63,23 @@ python3 scripts/check_public_api.py
 echo "==> check_example_coverage"
 python3 scripts/check_example_coverage.py
 
+echo "==> check_coverage_audit"
+python3 scripts/check_coverage_audit.py
+
+# Advisory: reports Wider/Beyond rows with no worked witness. Never blocks —
+# it produces a worklist, and most unwitnessed rows are fine.
+echo "==> check_scope_witnesses (advisory)"
+python3 scripts/check_scope_witnesses.py | head -1
+
+echo "==> generate_non_claims --check"
+python3 scripts/generate_non_claims.py --check
+
+echo "==> render_coverage_artifact --check"
+python3 scripts/render_coverage_artifact.py --check
+
+echo "==> check_docstring_identifiers"
+python3 scripts/check_docstring_identifiers.py
+
 echo "==> check_docs_paths"
 python3 scripts/check_docs_paths.py
 

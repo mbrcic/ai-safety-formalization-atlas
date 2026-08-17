@@ -11,6 +11,7 @@ __pycache__/
 
 # Local agent / IDE tool caches and configuration (not product source).
 .claude/
+.codex/
 .serena/
 .tokensave/
 .mcp.json

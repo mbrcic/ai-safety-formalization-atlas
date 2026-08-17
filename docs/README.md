@@ -93,6 +93,12 @@ Regenerate with `python3 scripts/generate_registry_views.py` (also refreshes
 
 - [CT-3 robot review package](bridges/ct3-robot-review-package.md)
 - [BY-012 AgentBehavior review](bridges/review-by-012-agentbehavior.md)
+- [BY-044 SelfAwareness review](bridges/review-by-044-selfawareness.md) — statement
+  reviewed; the AI-system interpretation is withheld
+- [Oversight VarietyBound package](bridges/review-oversight-varietybound.md) —
+  **prepared and unsigned.** The statement review is argued and the maintainer
+  decision is not made, so the row stays `HUMAN_REVIEW` and the reviewed-bridge
+  count does not include it
 
 ## Releases
 

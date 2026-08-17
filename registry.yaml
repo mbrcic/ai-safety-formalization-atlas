@@ -104,6 +104,35 @@
       "locator": "https://doi.org/10.1162/neco.1996.8.7.1341",
       "role": "work"
     },
+    "schumacher-vose-whitley-2001": {
+      "citation": "C. Schumacher, M. D. Vose, and L. D. Whitley, “The No Free Lunch and Problem Description Length,” in Proc. Genetic and Evolutionary Computation Conference (GECCO 2001), Morgan Kaufmann, 2001, pp. 565–570.",
+      "role": "work"
+    },
+    "cover-thomas-2006": {
+      "citation": "T. M. Cover and J. A. Thomas, Elements of Information Theory, 2nd ed. Hoboken, NJ: Wiley-Interscience, 2006.",
+      "locator": "https://doi.org/10.1002/047174882X",
+      "role": "work"
+    },
+    "igel-toussaint-2004": {
+      "citation": "C. Igel and M. Toussaint, “A No-Free-Lunch Theorem for Non-Uniform Distributions of Target Functions,” J. Mathematical Modelling and Algorithms, vol. 3, no. 4, pp. 313–322, 2004, doi: 10.1023/B:JMMA.0000049381.24625.f7.",
+      "locator": "https://doi.org/10.1023/B:JMMA.0000049381.24625.f7",
+      "role": "work"
+    },
+    "droste-jansen-wegener-2002": {
+      "citation": "S. Droste, T. Jansen, and I. Wegener, “Optimization with randomized search heuristics—the (A)NFL theorem, realistic scenarios, and difficult functions,” Theoretical Computer Science, vol. 287, no. 1, pp. 131–144, 2002, doi: 10.1016/S0304-3975(02)00094-4.",
+      "locator": "https://doi.org/10.1016/S0304-3975(02)00094-4",
+      "role": "work"
+    },
+    "touchette-lloyd-2003-preprint": {
+      "citation": "H. Touchette and S. Lloyd, “Information-theoretic approach to the study of control systems,” arXiv:physics/0104007v2, 16 May 2003. Preprint of Phys. Stat. Mech. Its Appl. 331(1):140–172, 2004.",
+      "locator": "https://arxiv.org/abs/physics/0104007v2",
+      "role": "work"
+    },
+    "igel-toussaint-2003": {
+      "citation": "C. Igel and M. Toussaint, “Recent Results on No-Free-Lunch Theorems for Optimization,” arXiv:cs/0303032 [cs.NE], 2003.",
+      "locator": "https://arxiv.org/abs/cs/0303032",
+      "role": "work"
+    },
     "brcic-yampolskiy-2023": {
       "citation": "M. Brcic and R. V. Yampolskiy, “Impossibility Results in AI: A Survey,” ACM Computing Surveys, 2023, doi: 10.1145/3603371, arXiv:2109.00484.",
       "locator": "https://doi.org/10.1145/3603371",
@@ -706,11 +735,437 @@
       "original_source_refs": [
         "survey-ref-026"
       ],
-      "formalizations": [],
-      "lean_artifact": null,
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE",
+          "module": "AISafetyAtlas.Control.ChannelRate",
+          "declaration": "AISafetyAtlas.Control.chainRate",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "license": "Apache-2.0",
+          "content_source_refs": [
+            "survey-ref-026"
+          ],
+          "content_source_note": "Section 9/12's definition of the entropy of one step of a Markov chain: the average of the columns' entropies, each weighted by the proportion in which that state occurs when the sequence has settled to its equilibrium. Written from an equilibrium law and a transition kernel, with no sample space.",
+          "build_environment": "leanprover/lean4:v4.31.0; mathlib@fabf563a7c95a166b8d7b6efca11c8b4dc9d911f; PFR@38e94172b72c8ee8ad64b6365dfc22e559c62ebe",
+          "build_command": "lake build AISafetyAtlas.Control.ChannelRate AISafetyAtlas.Examples.Control.ChannelRate",
+          "scope_delta": {
+            "summary": "The quantity section 9/15 calls channel capacity, which channelCapacity (the noiseless alphabet ceiling log |O|) is not. chainRate_eq_condEntropy identifies it with H[X1 | X0] on the canonical one-step chain. Checked against Ashby's own worked three-state insect chain, whose equilibrium is exactly (22/49, 21/49, 6/49) against his printed 0.449, 0.429, 0.122.",
+            "evidence": "docs/provenance/ashby-requisite-variety.md"
+          }
+        },
+        {
+          "framework": "Lean",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE",
+          "module": "AISafetyAtlas.Control.ChannelRate",
+          "declaration": "AISafetyAtlas.Control.entropy_traj",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "license": "Apache-2.0",
+          "content_source_refs": [
+            "survey-ref-026"
+          ],
+          "content_source_note": "Section 9/15: 'the entropy of a length of Markov chain is proportional to its length (provided always that it has settled down to equilibrium)'.",
+          "build_environment": "leanprover/lean4:v4.31.0; mathlib@fabf563a7c95a166b8d7b6efca11c8b4dc9d911f; PFR@38e94172b72c8ee8ad64b6365dfc22e559c62ebe",
+          "build_command": "lake build AISafetyAtlas.Control.ChannelRate AISafetyAtlas.Examples.Control.ChannelRate",
+          "scope_delta": {
+            "summary": "Wider than print in two ways. The source asserts this without proof; it is proved here for a Markov stationary process. And the printed word 'proportional' is loose: the exact identity is H[X_0 ... X_n] = H[X_0] + n * rate, affine rather than linear. The two agree when H[X_0] equals the rate, which is what happens in the spun-coin case Ashby checks it against, so his own example cannot separate them. Same class of printed slip as section 11/8's H_D(E).",
+            "evidence": "docs/provenance/ashby-requisite-variety.md"
+          }
+        },
+        {
+          "framework": "Lean",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE",
+          "module": "AISafetyAtlas.Control.ChannelRate",
+          "declaration": "AISafetyAtlas.Control.entropy_outcome_ge_sub_chainEntropy",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "license": "Apache-2.0",
+          "content_source_refs": [
+            "survey-ref-026"
+          ],
+          "content_source_note": "Section 11/11: 'R's capacity as a regulator cannot exceed R's capacity as a channel of communication', with capacity taken to be section 9/15's entropy rate rather than the alphabet ceiling used by the section's exercises.",
+          "build_environment": "leanprover/lean4:v4.31.0; mathlib@fabf563a7c95a166b8d7b6efca11c8b4dc9d911f; PFR@38e94172b72c8ee8ad64b6365dfc22e559c62ebe",
+          "build_command": "lake build AISafetyAtlas.Control.ChannelRate AISafetyAtlas.Examples.Control.ChannelRate",
+          "scope_delta": {
+            "summary": "Bounds the outcome entropy by Ashby's own entropy-rate capacity rather than by the alphabet ceiling, which is what section 11/11 asserts. The budget is the exact trajectory entropy H[X_0] + n * rate, not rate times time; a bare capacity-times-time budget is not an upper bound, because the initial state carries entropy of its own. entropy_outcome_ge_sub_channelCapacity is retained as the sharper form for the four noiseless exercises.",
+            "evidence": "docs/provenance/ashby-requisite-variety.md"
+          }
+        },
+        {
+          "framework": "Lean",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE",
+          "module": "AISafetyAtlas.Control.CompleteControl",
+          "declaration": "AISafetyAtlas.Control.outcome_eq_comp",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "license": "Apache-2.0",
+          "content_source_refs": [
+            "survey-ref-026"
+          ],
+          "content_source_note": "Section 11/14: 'the fact that R is a perfect regulator gives C complete control over the output, in spite of the entrance of disturbing effects by way of D. Thus, perfect regulation of the outcome by R makes possible a complete control over the outcome by C.'",
+          "build_environment": "leanprover/lean4:v4.31.0; mathlib@fabf563a7c95a166b8d7b6efca11c8b4dc9d911f; PFR@38e94172b72c8ee8ad64b6365dfc22e559c62ebe",
+          "build_command": "lake build AISafetyAtlas.Control.CompleteControl AISafetyAtlas.Examples.Control.CompleteControl",
+          "scope_delta": {
+            "summary": "Same as print. Under perfect regulation the outcome is a function of the controller's setting alone: the disturbance is eliminated rather than bounded. exists_strategy_forcing is complete control, and seq_outcome_eq is the printed compound target a, b, a, c, c, a produced regardless of D's values during the sequence.",
+            "evidence": "docs/provenance/ashby-requisite-variety.md"
+          }
+        },
+        {
+          "framework": "Lean",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE",
+          "module": "AISafetyAtlas.Control.CompleteControl",
+          "declaration": "AISafetyAtlas.Control.card_disturbance_le_card_regulator",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "license": "Apache-2.0",
+          "content_source_refs": [
+            "survey-ref-026"
+          ],
+          "content_source_note": "Section 11/14: 'The achievement of control may thus depend necessarily on the achievement of regulation.'",
+          "build_environment": "leanprover/lean4:v4.31.0; mathlib@fabf563a7c95a166b8d7b6efca11c8b4dc9d911f; PFR@38e94172b72c8ee8ad64b6365dfc22e559c62ebe",
+          "build_command": "lake build AISafetyAtlas.Control.CompleteControl AISafetyAtlas.Examples.Control.CompleteControl",
+          "scope_delta": {
+            "summary": "Wider than print. The printed sentence is qualitative; here it is a count, and a count derived from section 11/10's own impossibility theorem rather than from a fresh argument. Perfect regulation collapses admittedOutcomes to a singleton, which two_le_card_admittedOutcomes forbids below a threshold of regulator variety, so |D| <= |R| and, by card_controller_le_card_regulator, |C| <= |R|. Requisite variety is charged twice, once for each of the regulator's two inputs.",
+            "evidence": "docs/provenance/ashby-requisite-variety.md"
+          }
+        },
+        {
+          "framework": "Lean",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE",
+          "module": "AISafetyAtlas.Control.CompleteControl",
+          "declaration": "AISafetyAtlas.Control.max_channelCapacity_le_channelCapacity_regulator",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "license": "Apache-2.0",
+          "content_source_refs": [
+            "survey-ref-026"
+          ],
+          "content_source_note": "Section 11/14, Ex. 4: 'R to T must carry 2 bits/sec to neutralise D (from Ex. 2), and 20 bits/sec from C; as these two are independent (D's values and C's not correlated), the capacity must be at least 22 bits/sec.' Read from the Martino Fine Books 2015 reprint, book p. 285; the pinned scan omits Answers to Exercises, pp. 274 to 288.",
+          "build_environment": "leanprover/lean4:v4.31.0; mathlib@fabf563a7c95a166b8d7b6efca11c8b4dc9d911f; PFR@38e94172b72c8ee8ad64b6365dfc22e559c62ebe",
+          "build_command": "lake build AISafetyAtlas.Control.CompleteControl AISafetyAtlas.Examples.Control.CompleteControl",
+          "scope_delta": {
+            "summary": "Narrower than the printed answer, and deliberately. What the model forces is the maximum of the two loads, not their sum. Additivity is a property of the table rather than of the diagram: Examples.Control.ashbyControl_capacity_lt_sum runs on Ashby's own answer to Ex. 1, a perfect regulator on Table 11/3/1 whose entire repertoire is log 3 where the additive reading demands log 9. This is not a correction to his arithmetic, since Ex. 4 inherits Ex. 2's attenuating T while Table 11/3/1 attenuates nothing; it is a limit on what section 11/14's diagram alone implies. channelCapacity_prod is the lemma that licenses the sum where the R to T link really is two independent sub-channels. Capacities here are per use, whereas Ashby quotes bits per second; ashbyCapacity converts.",
+            "evidence": "docs/provenance/ashby-requisite-variety.md"
+          }
+        },
+        {
+          "framework": "Lean",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE",
+          "module": "AISafetyAtlas.Control.CompleteControl",
+          "declaration": "AISafetyAtlas.Control.entropy_outcome_eq_entropy_controller",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "license": "Apache-2.0",
+          "content_source_refs": [
+            "survey-ref-026"
+          ],
+          "content_source_note": "Section 11/14: a suitable regulator R 'may be able to form, with T, a compound channel to E that transmits fully from C while transmitting nothing from D.'",
+          "build_environment": "leanprover/lean4:v4.31.0; mathlib@fabf563a7c95a166b8d7b6efca11c8b4dc9d911f; PFR@38e94172b72c8ee8ad64b6365dfc22e559c62ebe",
+          "build_command": "lake build AISafetyAtlas.Control.CompleteControl AISafetyAtlas.Examples.Control.CompleteControl",
+          "scope_delta": {
+            "summary": "Both clauses proved. This one is full transmission from C, when distinct targets name distinct outcomes. condEntropy_outcome_controller is transmission of nothing from D and needs no hypothesis on the disturbance's law at all; mutualInfo_outcome_disturbance_eq_zero is the form under Ashby's own side condition that D's values and C's are not correlated. The two-input factorization FactorsThrough, used by the Ex. 2 and Ex. 3 capacity bounds, is the atlas's reading of the printed diagram and is a hypothesis, not a consequence.",
+            "evidence": "docs/provenance/ashby-requisite-variety.md"
+          }
+        },
+        {
+          "framework": "Lean",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE",
+          "module": "AISafetyAtlas.Control.RequisiteVariety",
+          "declaration": "AISafetyAtlas.Control.ashby_variety_ge",
+          "relationship": "EXACT",
+          "reproduced": true,
+          "license": "Apache-2.0",
+          "build_environment": "leanprover/lean4:v4.31.0; mathlib@fabf563a7c95a166b8d7b6efca11c8b4dc9d911f; PFR@38e94172b72c8ee8ad64b6365dfc22e559c62ebe",
+          "build_command": "lake build AISafetyAtlas.Control.RequisiteVariety AISafetyAtlas.Examples.Control.RequisiteVariety"
+        },
+        {
+          "framework": "Lean",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE",
+          "module": "AISafetyAtlas.Control.RequisiteVariety",
+          "declaration": "AISafetyAtlas.Control.ashby_logVariety_ge",
+          "relationship": "EXACT",
+          "reproduced": true,
+          "license": "Apache-2.0",
+          "build_environment": "leanprover/lean4:v4.31.0; mathlib@fabf563a7c95a166b8d7b6efca11c8b4dc9d911f; PFR@38e94172b72c8ee8ad64b6365dfc22e559c62ebe",
+          "build_command": "lake build AISafetyAtlas.Control.RequisiteVariety AISafetyAtlas.Examples.Control.RequisiteVariety"
+        },
+        {
+          "framework": "Lean",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE",
+          "module": "AISafetyAtlas.Control.RequisiteVariety",
+          "declaration": "AISafetyAtlas.Control.card_le_mul_card_admittedOutcomes_mul",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "license": "Apache-2.0",
+          "build_environment": "leanprover/lean4:v4.31.0; mathlib@fabf563a7c95a166b8d7b6efca11c8b4dc9d911f; PFR@38e94172b72c8ee8ad64b6365dfc22e559c62ebe",
+          "build_command": "lake build AISafetyAtlas.Control.RequisiteVariety AISafetyAtlas.Examples.Control.RequisiteVariety",
+          "scope_delta": {
+            "summary": "Unifies chapter 11's sections 11/5 and 11/9 into one statement with the repetition count k as a parameter, where the source argues them separately; and weakens the column condition from injectivity of every column to Set.InjOn on the fibre a strategy actually visits, so the theorem covers tables the printed statement excludes. Section 11/9's printed bound writes log V_R for an already-logarithmic V_R; the multiplicative form stated here is the reading its derivation supports.",
+            "evidence": "docs/provenance/ashby-requisite-variety.md"
+          }
+        },
+        {
+          "framework": "Lean",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE",
+          "module": "AISafetyAtlas.Control.RequisiteVariety",
+          "declaration": "AISafetyAtlas.Control.two_le_card_admittedOutcomes",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "license": "Apache-2.0",
+          "build_environment": "leanprover/lean4:v4.31.0; mathlib@fabf563a7c95a166b8d7b6efca11c8b4dc9d911f; PFR@38e94172b72c8ee8ad64b6365dfc22e559c62ebe",
+          "build_command": "lake build AISafetyAtlas.Control.RequisiteVariety AISafetyAtlas.Examples.Control.RequisiteVariety",
+          "scope_delta": {
+            "summary": "The impossibility reading of section 11/10 ('the law states that certain events are impossible'), which the source states in prose rather than as a proposition: a regulator with strictly fewer moves than there are disturbances cannot hold the outcome fixed under any strategy. Derived from the counting law; not a separate printed statement.",
+            "evidence": "docs/provenance/ashby-requisite-variety.md"
+          }
+        },
+        {
+          "framework": "Lean",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE",
+          "module": "AISafetyAtlas.Control.RequisiteVariety",
+          "declaration": "AISafetyAtlas.Control.entropy_ge_of_condEntropy_ge",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "license": "Apache-2.0",
+          "build_environment": "leanprover/lean4:v4.31.0; mathlib@fabf563a7c95a166b8d7b6efca11c8b4dc9d911f; PFR@38e94172b72c8ee8ad64b6365dfc22e559c62ebe",
+          "build_command": "lake build AISafetyAtlas.Control.RequisiteVariety AISafetyAtlas.Examples.Control.RequisiteVariety",
+          "scope_delta": {
+            "summary": "Section 11/8 with the 11/9 slack K, over any measurable space with a zero-or-probability measure rather than Shannon's discrete sources. Not graded EXACT because the printed conclusion is misprinted: it reads H_D(E) where the derivation above it and the sentence below it both require H_D(R). The corrected inequality is what is proved. The 1961 typesetting also renders the relation as strict throughout; the non-strict reading is the only one the derivation supports.",
+            "evidence": "docs/provenance/ashby-requisite-variety.md"
+          }
+        },
+        {
+          "framework": "Lean",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE",
+          "module": "AISafetyAtlas.Control.RequisiteVariety",
+          "declaration": "AISafetyAtlas.Control.entropy_outcome_ge_of_strategy",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "license": "Apache-2.0",
+          "build_environment": "leanprover/lean4:v4.31.0; mathlib@fabf563a7c95a166b8d7b6efca11c8b4dc9d911f; PFR@38e94172b72c8ee8ad64b6365dfc22e559c62ebe",
+          "build_command": "lake build AISafetyAtlas.Control.RequisiteVariety AISafetyAtlas.Examples.Control.RequisiteVariety",
+          "scope_delta": {
+            "summary": "Section 11/8's headline H(E) >= H(D) - H(R) for a determinate strategy. Stronger than the printed statement in that the source assumes H_R(E) >= H_R(D) as a hypothesis, whereas condEntropy_outcome_eq derives it — as an equality — from the table's column condition, tying the combinatorial and entropy halves of the chapter into one development.",
+            "evidence": "docs/provenance/ashby-requisite-variety.md"
+          }
+        },
+        {
+          "framework": "Lean",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE",
+          "module": "AISafetyAtlas.Control.RequisiteVariety",
+          "declaration": "AISafetyAtlas.Control.entropy_ge_of_sensor",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "license": "Apache-2.0",
+          "build_environment": "leanprover/lean4:v4.31.0; mathlib@fabf563a7c95a166b8d7b6efca11c8b4dc9d911f; PFR@38e94172b72c8ee8ad64b6365dfc22e559c62ebe",
+          "build_command": "lake build AISafetyAtlas.Control.RequisiteVariety AISafetyAtlas.Examples.Control.RequisiteVariety",
+          "scope_delta": {
+            "summary": "This row's informal claim 'under perfect information' matches the counting sections 11/5-11/10 rather than 11/11. The claim's other qualifier, unbounded response speed, has no counterpart — chapter 11 is untimed and nothing here speaks to latency. This is the deterministic sensor-reading consequence: the bound uses the entropy of one observation, not Ashby's general channel-capacity rate. channelCapacity later added the noiseless alphabet ceiling used by the exercises, but it does not close the general section 11/11 claim.",
+            "evidence": "docs/provenance/ashby-requisite-variety.md"
+          }
+        },
+        {
+          "framework": "Lean",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE",
+          "module": "AISafetyAtlas.Control.RequisiteVariety",
+          "declaration": "AISafetyAtlas.Control.entropy_outcome_ge_sub_channelCapacity",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "license": "Apache-2.0",
+          "build_environment": "leanprover/lean4:v4.31.0; mathlib@fabf563a7c95a166b8d7b6efca11c8b4dc9d911f; PFR@38e94172b72c8ee8ad64b6365dfc22e559c62ebe",
+          "build_command": "lake build AISafetyAtlas.Control.RequisiteVariety AISafetyAtlas.Examples.Control.RequisiteVariety",
+          "scope_delta": {
+            "summary": "A noiseless alphabet-ceiling consequence of section 11/11. channelCapacity O = log |O| and the rate lemmas reproduce the section's signal-counting exercises. This declaration on its own does not reproduce Ashby's general capacity: section 9/15 first computes a three-state Markov source at 0.842 bits per step and 2.53 bits per minute, then calls such a rate the natural measure of channel capacity; log |O| would instead give log 3 per step. That quantity is now declared rather than proxied — chainRate is section 9/12's equilibrium-weighted column entropy, chainRate_eq_condEntropy identifies it with the conditional entropy of one step, and entropy_outcome_ge_sub_chainEntropy carries the general claim — so the two capacities are formalized side by side, the alphabet ceiling here for the section's signal-counting exercises and the rate there for the general statement. The source-audit row is therefore Yes | Wider. Shannon's noisy capacity sup I(input : output) is still not modelled, and section 11/11 does not need it. The observation-variable model is wider than a deterministic sensor. The statement is necessary only; nothing here shows a channel of sufficient capacity admits a regulator that achieves constancy.",
+            "evidence": "docs/provenance/ashby-requisite-variety.md"
+          }
+        },
+        {
+          "framework": "Lean",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE",
+          "module": "AISafetyAtlas.Control.RequisiteVariety",
+          "declaration": "AISafetyAtlas.Control.entropy_le_channelCapacity_of_complete",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "license": "Apache-2.0",
+          "build_environment": "leanprover/lean4:v4.31.0; mathlib@fabf563a7c95a166b8d7b6efca11c8b4dc9d911f; PFR@38e94172b72c8ee8ad64b6365dfc22e559c62ebe",
+          "build_command": "lake build AISafetyAtlas.Control.RequisiteVariety AISafetyAtlas.Examples.Control.RequisiteVariety",
+          "scope_delta": {
+            "summary": "The form section 11/11's exercises use: complete regulation - the outcome held at a single value, Ashby's 'it is constancy that is to be transmitted' - forces the disturbance entropy below the channel capacity. Necessary only, and the three worked exercises are graded accordingly. Examples.Control.ship_disturbance_upper_limit answers Ex. 2, whose printed question - given that the telegraph and wheel are normally sufficient for full regulation, estimate an upper limit for the disturbances - is exactly what the law answers: log 9 + 5 log 50 in five seconds, counted by adding the two controls' capacities. Examples.Control.insect_optic_nerve_not_binding answers Ex. 1 by showing the constraint does not bind (2000 log 2 a second against ten dangers at 10 log 2), which is NOT an answer to the printed question 'is this sufficient to enable it to defend itself'. Examples.Control.general_intelligence_insufficient answers Ex. 3 in the direction the law does settle: ten signallers carrying 576000 log 2 a day cannot regulate ten divisions manoeuvring at 10^7 log 2, so complete regulation is impossible.",
+            "evidence": "docs/provenance/ashby-requisite-variety.md"
+          }
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Control.ashby_variety_ge",
+            "type": "NEW_PROOF",
+            "source_declarations": [
+              "AISafetyAtlas.Control.admittedOutcomes",
+              "AISafetyAtlas.Control.card_le_mul_card_admittedOutcomes"
+            ]
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Control.card_ceilDiv_le_admittedOutcomes",
+            "type": "NEW_PROOF",
+            "source_declarations": [
+              "AISafetyAtlas.Control.admittedOutcomes",
+              "AISafetyAtlas.Control.card_le_mul_card_admittedOutcomes"
+            ]
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Control.ashby_variety_ge_isSharp",
+            "type": "NEW_PROOF",
+            "source_declarations": [
+              "AISafetyAtlas.Control.shiftTable",
+              "AISafetyAtlas.Control.card_admittedOutcomes_shiftTable"
+            ]
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Control.ashby_logVariety_ge_mul",
+            "type": "NEW_PROOF",
+            "source_declarations": [
+              "AISafetyAtlas.Control.card_le_mul_card_admittedOutcomes_mul"
+            ]
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Control.ashby_logVariety_ge",
+            "type": "NEW_PROOF",
+            "source_declarations": [
+              "AISafetyAtlas.Control.admittedOutcomes",
+              "AISafetyAtlas.Control.card_le_mul_card_admittedOutcomes"
+            ]
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Control.card_le_mul_card_admittedOutcomes_mul",
+            "type": "NEW_PROOF",
+            "source_declarations": [
+              "AISafetyAtlas.Control.admittedOutcomes"
+            ]
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Control.two_le_card_admittedOutcomes",
+            "type": "NEW_PROOF",
+            "source_declarations": [
+              "AISafetyAtlas.Control.card_le_mul_card_admittedOutcomes"
+            ]
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Control.entropy_ge_of_condEntropy_ge",
+            "type": "NEW_PROOF",
+            "source_declarations": []
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Control.condEntropy_outcome_eq",
+            "type": "NEW_PROOF",
+            "source_declarations": []
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Control.entropy_outcome_ge",
+            "type": "NEW_PROOF",
+            "source_declarations": [
+              "AISafetyAtlas.Control.entropy_ge_of_condEntropy_ge",
+              "AISafetyAtlas.Control.condEntropy_outcome_eq"
+            ]
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Control.entropy_outcome_ge_of_strategy",
+            "type": "NEW_PROOF",
+            "source_declarations": [
+              "AISafetyAtlas.Control.entropy_outcome_ge",
+              "AISafetyAtlas.InformationTheory.condEntropy_comp_self_left"
+            ]
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Control.entropy_ge_of_sensor",
+            "type": "NEW_PROOF",
+            "source_declarations": [
+              "AISafetyAtlas.Control.entropy_outcome_ge_of_strategy"
+            ]
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Control.entropy_outcome_ge_sub_channelCapacity",
+            "type": "NEW_PROOF",
+            "source_declarations": [
+              "AISafetyAtlas.Control.entropy_outcome_ge",
+              "AISafetyAtlas.InformationTheory.channelCapacity"
+            ],
+            "application": "Regulation under limited information: in the noiseless alphabet-ceiling case used by Ashby's section 11/11 exercises, a regulator cannot reduce the outcome entropy below the disturbance entropy by more than log |O| per channel use."
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Control.entropy_le_channelCapacity_of_complete",
+            "type": "NEW_PROOF",
+            "source_declarations": [
+              "AISafetyAtlas.Control.entropy_outcome_ge_sub_channelCapacity"
+            ]
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.InformationTheory.channelCapacity_fun",
+            "type": "NEW_PROOF",
+            "source_declarations": [
+              "AISafetyAtlas.InformationTheory.channelCapacity_eq_of_card_eq_pow"
+            ]
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.InformationTheory.channelCapacity_prod",
+            "type": "NEW_PROOF",
+            "source_declarations": [
+              "AISafetyAtlas.InformationTheory.channelCapacity"
+            ]
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.InformationTheory.channelCapacity_eq_of_card_eq_two_pow",
+            "type": "NEW_PROOF",
+            "source_declarations": [
+              "AISafetyAtlas.InformationTheory.channelCapacity_eq_of_card_eq_pow"
+            ]
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.InformationTheory.channelCapacity_eq_of_card_eq_pow",
+            "type": "NEW_PROOF",
+            "source_declarations": [
+              "AISafetyAtlas.InformationTheory.channelCapacity"
+            ]
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Oversight.not_forces_of_card_lt",
+            "type": "BRIDGE",
+            "source_declarations": [
+              "AISafetyAtlas.Control.two_le_card_admittedOutcomes"
+            ],
+            "application": "The AI-system reading of the law: an oversight regime whose interventions are fewer than the situations it is answerable for cannot hold the outcome to a single target, whatever it observes. Necessary condition only, and only for forcing every situation with certainty. Reviewed 2026-08-17; the signature is scoped to this bridge and not to Ashby's law in general. Package: docs/bridges/review-oversight-varietybound.md."
+          }
+        ]
+      },
+      "root_import": true,
       "ai_safety_relevance": "The survey identifies this result as relevant to limits on AI; no direct real-system implication is asserted here.",
-      "ai_bridge_status": "HUMAN_REVIEW",
-      "notes": "Statement-level equivalence to each cited source remains subject to source comparison.",
+      "ai_bridge_status": "REVIEWED",
+      "bridge_review": {
+        "reviewer": "Mario Brcic (mbrcic)",
+        "date": "2026-08-17",
+        "statement_reviewed": true,
+        "interpretation_reviewed": true,
+        "evidence": "docs/bridges/review-oversight-varietybound.md"
+      },
+      "notes": "Source comparison done against W. Ross Ashby, An Introduction to Cybernetics, including sections 9/15 and 11/5 to 11/11; recorded in docs/provenance/ashby-requisite-variety.md, which also lists three clashes in the printed text (a misprinted conclusion in 11/8, strict relation symbols throughout, and a double logarithm in 11/9). The survey's citation transposes the author's initials as 'R. W. Ashby'; survey-ref-026 records the survey's text verbatim and is not corrected. Section 11/11 is covered in both readings. Section 11/14 is covered by AISafetyAtlas.Control.CompleteControl: IsPerfectRegulator is its hypothesis, outcome_eq_comp its first half, and card_disturbance_le_card_regulator with card_controller_le_card_regulator turn its closing sentence about control depending on regulation into a count, derived from section 11/10's impossibility theorem. The noiseless alphabet/exercise reading is channelCapacity O = log |O|, which is what the four printed exercises compute. Section 9/15's general reading is an entropy rate: its worked three-state Markov example uses the probability-weighted entropy 0.842 bits per step rather than log 3, before naming such a rate the natural measure of capacity. AISafetyAtlas.Control.ChannelRate supplies that: chainRate is section 9/12's weighted column entropy, chainRate_eq_condEntropy identifies it with H[X1|X0], ashbyCapacity is the per-unit-time rate, and entropy_outcome_ge_sub_chainEntropy is section 11/11's bound against it. entropy_traj proves section 9/15's asserted proportionality and sharpens it from linear to affine. The definition is checked against Ashby's own chain, whose equilibrium is exactly (22/49, 21/49, 6/49) against his printed 0.449, 0.429, 0.122. The row is therefore Yes: the atlas bounds the regulator by the capacity Ashby names, and the definition is pinned to his arithmetic rather than to a reconstruction of it. Shannon's noisy capacity sup I(input : output) is still not modelled and section 9/15 does not ask for it. entropy_outcome_ge_sub_channelCapacity is a necessary alphabet-ceiling bound and entropy_le_channelCapacity_of_complete is the form the exercises use; sufficiency is neither proved nor implied. Maintainer bridge review 2026-08-17 (REVIEWED): applies to the AI-facing bridge Oversight.not_forces_of_card_lt, which this row owns - statement and scoped interpretation accepted per docs/bridges/review-oversight-varietybound.md. It is NOT a reviewed AI-system reading of Ashby's law in general, and it licenses none of that package's forbidden claims: not that oversight does not work, not that monitoring is useless, not anything about a deployed system, not that more interventions suffice. The accepted reading is a conditional whose antecedent - fewer interventions distinct in effect than situations - nobody has established for any real overseer.",
       "formal_library_search": {
         "searched_on": "2026-07-28",
         "evidence_file": "docs/provenance/formalization-search.json",
@@ -731,7 +1186,14 @@
       "tags": [
         "control-theory",
         "information-theory"
-      ]
+      ],
+      "public": {
+        "group": "Limits of control and regulation",
+        "summary": "A controller cannot hold things steadier than its own range of responses allows.",
+        "use": "Sizing what a safety controller has to be able to do.",
+        "title": "Requisite variety",
+        "attribution": "Ashby"
+      }
     },
     {
       "id": "BY-005",
@@ -742,11 +1204,569 @@
       "original_source_refs": [
         "survey-ref-027"
       ],
-      "formalizations": [],
-      "lean_artifact": null,
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE",
+          "module": "AISafetyAtlas.Control.InformationLimits",
+          "declaration": "AISafetyAtlas.Control.entropy_noise_sub_controlLoss",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "license": "Apache-2.0",
+          "content_source_refs": [
+            "touchette-lloyd-2003-preprint"
+          ],
+          "content_source_note": "Theorem 2 of arXiv:physics/0104007v2, strengthened to an exact identity: H(Z) - L_C = H(Z | X', X, C). The printed inequality is that quantity being nonnegative and the printed equality condition is it being zero, so both are corollaries (controlLoss_le_entropy_noise, controlLoss_eq_entropy_noise_iff) rather than separate arguments.",
+          "build_environment": "leanprover/lean4:v4.31.0; mathlib@fabf563a7c95a166b8d7b6efca11c8b4dc9d911f; PFR@38e94172b72c8ee8ad64b6365dfc22e559c62ebe",
+          "build_command": "lake build AISafetyAtlas.Control.InformationLimits AISafetyAtlas.Examples.Control.InformationLimits",
+          "scope_delta": {
+            "summary": "The published Physica A text has now been read and its Theorem 2 matches the preprint's exactly. RELATED, not EXACT, for a substantive reason: the source defines L_C with a minimization over all conditional distributions {p(c|x)}, 'to ensure that L_C reflects the properties of the actuation channel and does not depend on one's choice of control inputs'. The atlas controlLoss is the unminimized H(X'|X,C), so every statement here is the pointwise-in-controller version, which implies the printed one at the minimizer but is not the same statement. This declaration is additionally a strengthening: the printed Theorem 2 is an inequality plus a separate equality condition, and both are corollaries of the identity proved here. Also holds over an arbitrary measurable space rather than the source's finite alphabets. Updated 2026-08-16: minControlLoss now defines eq. (28) itself and minControlLoss_le_entropy_noise proves Theorem 2's INEQUALITY of it, so the minimization caveat no longer applies to that half. It still applies to the equality case, which describes a minimizer that sInf need not have; that half stays pointwise as controlLoss_eq_entropy_noise_iff.",
+            "evidence": "docs/provenance/touchette-lloyd-control.md"
+          }
+        },
+        {
+          "framework": "Lean",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE",
+          "module": "AISafetyAtlas.Control.InformationLimits",
+          "declaration": "AISafetyAtlas.Control.controlLoss_eq_condMutualInfo",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "license": "Apache-2.0",
+          "content_source_refs": [
+            "touchette-lloyd-2003-preprint"
+          ],
+          "content_source_note": "Theorem 3: L_C = I(X' : Z | X, C). Uses the mutual-information chain rule added in AISafetyAtlas.InformationTheory.DataProcessing, which PFR does not carry.",
+          "build_environment": "leanprover/lean4:v4.31.0; mathlib@fabf563a7c95a166b8d7b6efca11c8b4dc9d911f; PFR@38e94172b72c8ee8ad64b6365dfc22e559c62ebe",
+          "build_command": "lake build AISafetyAtlas.Control.InformationLimits AISafetyAtlas.Examples.Control.InformationLimits",
+          "scope_delta": {
+            "summary": "Theorem 3 of the published text, verbatim in content. The source's L_C carries a minimization over {p(c|x)}; this is the pointwise-in-controller statement, which is the STRONGER of the two, since it holds at every controller rather than at one. The printed statement is minControlLoss_eq_sInf_condMutualInfo, derived from this one by taking infima. RELATED rather than EXACT because the model of a policy set is the atlas's, not the paper's, and because the paper's controllability development is not mechanized — Theorem 1 characterizes perfect controllability and is deliberately omitted. The observability half of that earlier reason is stale and is withdrawn: AISafetyAtlas.Control.Observability mechanizes Theorem 5 as perfectlyObservable_iff_sensorLoss_eq_zero, Theorem 6 as condMutualInfo_eq_zero_of_sensorLoss_eq_zero, and Corollary 7 as mutualInfo_prod_eq_of_sensorLoss_eq_zero. Generalized from finite alphabets to any measurable space with a zero-or-probability measure.",
+            "evidence": "docs/provenance/touchette-lloyd-control.md"
+          }
+        },
+        {
+          "framework": "Lean",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE",
+          "module": "AISafetyAtlas.Control.InformationLimits",
+          "declaration": "AISafetyAtlas.Control.controlLoss_eq_mutualInfo_sub",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "license": "Apache-2.0",
+          "content_source_refs": [
+            "touchette-lloyd-2003-preprint"
+          ],
+          "content_source_note": "Theorem 4: L_C = I(X' : X,C,Z) - I(X' : X,C).",
+          "build_environment": "leanprover/lean4:v4.31.0; mathlib@fabf563a7c95a166b8d7b6efca11c8b4dc9d911f; PFR@38e94172b72c8ee8ad64b6365dfc22e559c62ebe",
+          "build_command": "lake build AISafetyAtlas.Control.InformationLimits AISafetyAtlas.Examples.Control.InformationLimits",
+          "scope_delta": {
+            "summary": "Theorem 4 of the published text, verbatim in content. As for the Theorem 3 record: this is the pointwise-in-controller form, which is the stronger one, and the printed minimized statement is minControlLoss_eq_sInf_mutualInfo_sub. Generalized from finite alphabets to any measurable space with a zero-or-probability measure.",
+            "evidence": "docs/provenance/touchette-lloyd-control.md"
+          }
+        },
+        {
+          "framework": "Lean",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE",
+          "module": "AISafetyAtlas.Control.InformationLimits",
+          "declaration": "AISafetyAtlas.Control.entropyReduction_le_of_condEntropy_ge",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "license": "Apache-2.0",
+          "content_source_refs": [
+            "touchette-lloyd-2003-preprint"
+          ],
+          "content_source_note": "Theorem 10, the paper's stated main result: closed-loop control beats the best open-loop control by at most the information the controller gathered, so one bit measured is worth at most one bit of control.",
+          "build_environment": "leanprover/lean4:v4.31.0; mathlib@fabf563a7c95a166b8d7b6efca11c8b4dc9d911f; PFR@38e94172b72c8ee8ad64b6365dfc22e559c62ebe",
+          "build_command": "lake build AISafetyAtlas.Control.InformationLimits AISafetyAtlas.Examples.Control.InformationLimits",
+          "scope_delta": {
+            "summary": "The paper's step (50) — that a closed-loop controller is formally equivalent to an ensemble of open-loop controllers acting on the conditional supports — is justified in the source in one sentence beneath the proof: each conditional distribution p(x|c) is a legitimate input distribution, an element of P. entropyReduction_le_of_condEntropy_ge takes the step as an explicit hypothesis and asserts nothing about the model; entropyReduction_le_of_openLoopBound derives it from IsPlant and OpenLoopBound, which are atlas renderings rather than formulas the paper writes. OpenLoopBound is not the printed Delta-H-open-max: conditioning can change the joint law of state and noise, while the printed maximum varies the input law with a transition kernel fixed. openLoopMax narrows that mismatch by ranging over all input laws inside an independent-noise realization X'=F(X,C,Z), and isPurification_purifyMap now realizes every printed transition kernel that way, with openLoopMax_purifyMap showing the two reduction sets coincide; isGreatest_kernelOpenLoopMax proves the supremum attained, so it is the printed maximum. Theorem 10 is therefore Yes | Wider, stated against the realized maximum by exists_kernelEntropyReduction_le_at_max, which does not go through OpenLoopBound. OpenLoopBound is kept because its conditional-ensemble hypothesis is incomparable with that rendering. Theorems 5, 6 and 9 and Corollary 7 and Lemma 8 are formalized; Theorems 1 and 11 remain unformalized, and the quantum sections are out of scope.",
+            "evidence": "docs/provenance/touchette-lloyd-control.md"
+          }
+        },
+        {
+          "framework": "Lean",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE",
+          "module": "AISafetyAtlas.Control.OpenLoopAttainment",
+          "declaration": "AISafetyAtlas.Control.isGreatest_kernelOpenLoopMax",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "license": "Apache-2.0",
+          "content_source_refs": [
+            "touchette-lloyd-2003-preprint"
+          ],
+          "content_source_note": "Equation (48), Delta H_open^max = max over p_X in P and c in C, with P stated below the equation as the set of all probability distributions for the initial state. The printed notation asserts the maximum is attained.",
+          "build_environment": "leanprover/lean4:v4.31.0; mathlib@fabf563a7c95a166b8d7b6efca11c8b4dc9d911f; PFR@38e94172b72c8ee8ad64b6365dfc22e559c62ebe",
+          "build_command": "lake build AISafetyAtlas.Control.OpenLoopAttainment AISafetyAtlas.Examples.Control.OpenLoopAttainment",
+          "scope_delta": {
+            "summary": "The atlas previously rendered equation (48) as sSup with boundedness, which is formally weaker than print because max <= sSup. This proves the supremum is an element of the set, so the rendering IS the printed maximum. Probability measures on a finite state space are exactly the points of Mathlib's standard simplex via weights and ofWeights; in those coordinates the reduction is a finite sum of negMulLog terms whose inner argument is linear in the weights, by comp_ofWeights_real; continuity plus simplex compactness plus finiteness of the action alphabet give attainment.",
+            "evidence": "docs/provenance/touchette-lloyd-control.md"
+          }
+        },
+        {
+          "framework": "Lean",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE",
+          "module": "AISafetyAtlas.Control.OpenLoopAttainment",
+          "declaration": "AISafetyAtlas.Control.exists_kernelEntropyReduction_le_at_max",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "license": "Apache-2.0",
+          "content_source_refs": [
+            "touchette-lloyd-2003-preprint"
+          ],
+          "content_source_note": "Theorem 10 with its right-hand side written against the attained maximum of equation (48) rather than against a supremum that bounds the family.",
+          "build_environment": "leanprover/lean4:v4.31.0; mathlib@fabf563a7c95a166b8d7b6efca11c8b4dc9d911f; PFR@38e94172b72c8ee8ad64b6365dfc22e559c62ebe",
+          "build_command": "lake build AISafetyAtlas.Control.OpenLoopAttainment AISafetyAtlas.Examples.Control.OpenLoopAttainment",
+          "scope_delta": {
+            "summary": "The form equation (48)'s max notation promises: an explicit input distribution and action realize the bound. Closes the last residual recorded against the Theorem 10 row.",
+            "evidence": "docs/provenance/touchette-lloyd-control.md"
+          }
+        },
+        {
+          "framework": "Lean",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE",
+          "module": "AISafetyAtlas.Control.Purification",
+          "declaration": "AISafetyAtlas.Control.isPurification_purifyMap",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "license": "Apache-2.0",
+          "content_source_refs": [
+            "touchette-lloyd-2003-preprint"
+          ],
+          "content_source_note": "Equation (7) and the two conditions stated above it in Section 2: (i) the extended transition matrix p(x'|x,c,z) is deterministic for all c and z, and (ii) tracing out z reproduces p(x'|x,c) = sum_z p(x'|x,c,z) p_Z(z). Condition (i) is carried by the type of the map rather than by a hypothesis. Condition (ii) is IsPurification.",
+          "build_environment": "leanprover/lean4:v4.31.0; mathlib@fabf563a7c95a166b8d7b6efca11c8b4dc9d911f; PFR@38e94172b72c8ee8ad64b6365dfc22e559c62ebe",
+          "build_command": "lake build AISafetyAtlas.Control.Purification AISafetyAtlas.Examples.Control.Purification",
+          "scope_delta": {
+            "summary": "The paper asserts this representation for any non-deterministic channel and never constructs it. This constructs it, reading the paper's own phrase 'a randomly selected deterministic channel' literally: the seed is a random element of the finite space S x K -> T, drawn columnwise from the kernel, so no continuum seed is needed. Stronger than print, which offers the remark without a witness.",
+            "evidence": "docs/provenance/touchette-lloyd-control.md"
+          }
+        },
+        {
+          "framework": "Lean",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE",
+          "module": "AISafetyAtlas.Control.Purification",
+          "declaration": "AISafetyAtlas.Control.kernelEntropyReduction_le_kernelOpenLoopMax",
+          "relationship": "EXACT",
+          "reproduced": true,
+          "license": "Apache-2.0",
+          "content_source_refs": [
+            "touchette-lloyd-2003-preprint"
+          ],
+          "content_source_note": "Theorem 10, Delta H_closed <= Delta H_open^max + I(X;C), stated from the printed data alone: a joint law rho for the state and the action, and a Markov kernel kappa playing p(x'|x,c). No plant map and no seed occur in the statement.",
+          "build_environment": "leanprover/lean4:v4.31.0; mathlib@fabf563a7c95a166b8d7b6efca11c8b4dc9d911f; PFR@38e94172b72c8ee8ad64b6365dfc22e559c62ebe",
+          "build_command": "lake build AISafetyAtlas.Control.Purification AISafetyAtlas.Examples.Control.Purification",
+          "statement_match_note": "Graded EXACT on 2026-08-17 after the two residuals that had held it at RELATED were both closed on this branch. The family residual - that the earlier entropyReduction_le_openLoopMax held only inside the independent-noise realization X'=F(X,C,Z) - is closed by openLoopMax_purifyMap, which shows the two renderings of equation (48) generate the same set of reductions, so their suprema agree exactly. The sSup-versus-max residual is closed by isGreatest_kernelOpenLoopMax, which proves the supremum attained, so kernelOpenLoopMax is equation (48)'s printed maximum rather than a weaker supremum. No residual against the printed statement remains; the audit grades this printed row Yes and Wider."
+        },
+        {
+          "framework": "Lean",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE",
+          "module": "AISafetyAtlas.Control.Purification",
+          "declaration": "AISafetyAtlas.Control.kernelEntropyReduction_le_iSup_kernelOpenLoop",
+          "relationship": "EXACT",
+          "reproduced": true,
+          "license": "Apache-2.0",
+          "content_source_refs": [
+            "touchette-lloyd-2003-preprint"
+          ],
+          "content_source_note": "Theorem 9, Delta H_open <= max over c of Delta H_open^c, for an open-loop controller whose action law p_C is independent of the state, stated for an arbitrary Markov kernel.",
+          "build_environment": "leanprover/lean4:v4.31.0; mathlib@fabf563a7c95a166b8d7b6efca11c8b4dc9d911f; PFR@38e94172b72c8ee8ad64b6365dfc22e559c62ebe",
+          "build_command": "lake build AISafetyAtlas.Control.Purification AISafetyAtlas.Examples.Control.Purification",
+          "statement_match_note": "Graded EXACT on 2026-08-17. Both sides are stated from the printed data alone - an input law, an action law independent of the state, and an arbitrary Markov kernel - with no plant model in the statement. The one recorded obstruction was the claim that the source does not assume purification in the open-loop section; Section 2 of the published text states it for any non-deterministic channel, before Section 3, so that claim was false and is withdrawn. The printed attainment clause is separate and proved by exists_kernelEntropyReduction_dirac_eq_iSup. The audit grades this printed row Yes and Wider."
+        },
+        {
+          "framework": "Lean",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE",
+          "module": "AISafetyAtlas.Control.Purification",
+          "declaration": "AISafetyAtlas.Control.exists_kernelEntropyReduction_dirac_eq_iSup",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "license": "Apache-2.0",
+          "content_source_refs": [
+            "touchette-lloyd-2003-preprint"
+          ],
+          "content_source_note": "Theorem 9's attainment clause: the subdynamics at c-hat = arg max over c of Delta H_open^c is open-loop optimal. A pure controller is a Dirac action law.",
+          "build_environment": "leanprover/lean4:v4.31.0; mathlib@fabf563a7c95a166b8d7b6efca11c8b4dc9d911f; PFR@38e94172b72c8ee8ad64b6365dfc22e559c62ebe",
+          "build_command": "lake build AISafetyAtlas.Control.Purification AISafetyAtlas.Examples.Control.Purification",
+          "scope_delta": {
+            "summary": "Attainment here is immediate because the supremum is over the finite action alphabet K; equation (48)'s supremum over all input distributions needs a compactness argument and is proved attained separately by isGreatest_kernelOpenLoopMax.",
+            "evidence": "docs/provenance/touchette-lloyd-control.md"
+          }
+        },
+        {
+          "framework": "Lean",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE",
+          "module": "AISafetyAtlas.Control.PolicyKernel",
+          "declaration": "AISafetyAtlas.Control.kernelMinControlLoss",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "license": "Apache-2.0",
+          "content_source_refs": [
+            "touchette-lloyd-2003-preprint"
+          ],
+          "content_source_note": "Equation (28) as the source writes it: L_C = min over the stochastic kernels {p(c|x)} of H(X'|X,C). Declared over Mathlib Kernel S K with IsMarkovKernel, realized as mu compProd kappa.comap X on Omega times K, so the action is drawn from the state and nothing else. This is the printed object rather than a rendering of it on a fixed sample space.",
+          "build_environment": "leanprover/lean4:v4.31.0; mathlib@fabf563a7c95a166b8d7b6efca11c8b4dc9d911f; PFR@38e94172b72c8ee8ad64b6365dfc22e559c62ebe",
+          "build_command": "lake build AISafetyAtlas.Control.PolicyKernel AISafetyAtlas.Examples.Control.PolicyKernel",
+          "scope_delta": {
+            "summary": "The source's minimization itself, not a represented family standing in for it. minControlLoss_inputPolicies_eq_kernelMin proves it equal to the realized infimum over inputPolicies under finite alphabets, which is the printed setting; that closes what the provenance record had listed as the first of two reasons every record here is RELATED. The proof does not construct a kernel realization. Equation (28)'s own second displayed line is linear in p(c|x) because the numbers H(X'|x,c) belong to the actuation channel, so the minimum sits at a vertex of the simplex; the vertices are deterministic state feedbacks, which need no auxiliary randomness and so exist on every sample space. kernelControlLoss_eq_sum states that displayed line verbatim. minControlLoss_inputPolicies_attained exhibits the minimizer, which the source itself never does - it writes min where its own argument supports inf.",
+            "evidence": "docs/provenance/touchette-lloyd-control.md"
+          }
+        },
+        {
+          "framework": "Lean",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE",
+          "module": "AISafetyAtlas.Control.OpenLoop",
+          "declaration": "AISafetyAtlas.Control.openLoopMax",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "license": "Apache-2.0",
+          "content_source_refs": [
+            "touchette-lloyd-2003-preprint"
+          ],
+          "content_source_note": "A bounded-supremum rendering of equation (48): every probability measure on the state space and every control value are ranged over, with an independent noise law held fixed. The source instead starts from an arbitrary fixed transition kernel and writes a maximum.",
+          "build_environment": "leanprover/lean4:v4.31.0; mathlib@fabf563a7c95a166b8d7b6efca11c8b4dc9d911f; PFR@38e94172b72c8ee8ad64b6365dfc22e559c62ebe",
+          "build_command": "lake build AISafetyAtlas.Control.OpenLoop AISafetyAtlas.Examples.Control.OpenLoop",
+          "scope_delta": {
+            "summary": "A closer rendering than OpenLoopBound, but not the printed object at full scope. openLoopMax varies the input law while holding the independent-noise subdynamics F and eta fixed, so each conditional law p(x|c) is genuinely included. Boundedness is load-bearing because Real.sSup of an unbounded set is 0; bddAbove_openLoopReductions supplies it from Fintype S. Two gaps once stood here and both are closed. First, the source fixes an arbitrary transition kernel p(x'|x,c) while the atlas assumes a deterministic F driven by a common noise seed independent of state and action; isPurification_purifyMap bridges the classes and openLoopMax_purifyMap shows the two reduction sets coincide. The independence cited at source step (30) belongs to Theorem 2, not Theorem 10, but Section 2 states purification globally for any channel. Second, the source writes max while the atlas had only a bounded sSup; isGreatest_kernelOpenLoopMax proves attainment. The source-audit row is Yes | Wider. entropyReduction_le_of_openLoopBound is kept alongside it because its hypothesis is incomparable.",
+            "evidence": "docs/provenance/touchette-lloyd-control.md"
+          }
+        },
+        {
+          "framework": "Lean",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE",
+          "module": "AISafetyAtlas.Control.InformationLimits",
+          "declaration": "AISafetyAtlas.Control.minControlLoss",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "license": "Apache-2.0",
+          "content_source_refs": [
+            "touchette-lloyd-2003-preprint"
+          ],
+          "content_source_note": "Equation (28) itself, the definition of the average control loss: L_C = min over {p(c|x)} of H(X' | X, C). Not a theorem and so uses no chain rule. The atlas feasible set is a parameter; inputPolicies is the measurable conditional-independence rendering on the current sample space, and NOT Set.univ. Its infimum is proved equal to the all-kernel minimum for finite alphabets by minControlLoss_inputPolicies_eq_kernelMin, against the object kernelMinControlLoss; that equality is not part of this declaration, which is why the parameterization is kept.",
+          "build_environment": "leanprover/lean4:v4.31.0; mathlib@fabf563a7c95a166b8d7b6efca11c8b4dc9d911f; PFR@38e94172b72c8ee8ad64b6365dfc22e559c62ebe",
+          "build_command": "lake build AISafetyAtlas.Control.InformationLimits AISafetyAtlas.Examples.Control.InformationLimits",
+          "scope_delta": {
+            "summary": "Eq. (28) itself: the control loss minimized over the controller, with the source law of X, the noise Z and the actuation channel held fixed. The constraint set is exactly the paper's - the minimization is there, in its own words, 'to ensure that L_C reflects the properties of the actuation channel, and does not depend on one's choice of control inputs' - and IsPlant is what holds the channel fixed while the controller varies. Two modelling choices are recorded rather than hidden. Controllers are measurable maps on the ambient space rather than kernels x -> p(c|x), which loses nothing because the space may carry auxiliary randomness independent of X; and the quantity is an sInf rather than a min, so no attainment is assumed. The set of admitted controllers is a parameter, so the unconstrained minimum is the Set.univ case. Examples.Control.minControlLoss_lt_controlLoss_gate exhibits a plant and two controllers whose losses are 0 and log 2, so the minimization is not a formality.",
+            "evidence": "docs/provenance/touchette-lloyd-control.md"
+          }
+        },
+        {
+          "framework": "Lean",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE",
+          "module": "AISafetyAtlas.Control.InformationLimits",
+          "declaration": "AISafetyAtlas.Control.minControlLoss_le_entropy_noise",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "license": "Apache-2.0",
+          "content_source_refs": [
+            "touchette-lloyd-2003-preprint"
+          ],
+          "content_source_note": "Theorem 2's inequality, L_C <= H(Z), stated of equation (28)'s minimum rather than of one controller. Purification and the independence step (30) are required at a single admitted controller, since an infimum is capped by any one member.",
+          "build_environment": "leanprover/lean4:v4.31.0; mathlib@fabf563a7c95a166b8d7b6efca11c8b4dc9d911f; PFR@38e94172b72c8ee8ad64b6365dfc22e559c62ebe",
+          "build_command": "lake build AISafetyAtlas.Control.InformationLimits AISafetyAtlas.Examples.Control.InformationLimits",
+          "scope_delta": {
+            "summary": "Theorem 2's inequality at a represented policy infimum, not only pointwise in the controller. The pointwise bound transfers because an infimum is capped by one admitted member, and the realized-policy quantity is an upper ceiling on the source kernel infimum. The equality case is separate: it describes a minimizer and remains represented only under an attainment hypothesis for the supplied family P.",
+            "evidence": "docs/provenance/touchette-lloyd-control.md"
+          }
+        },
+        {
+          "framework": "Lean",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE",
+          "module": "AISafetyAtlas.Control.InformationLimits",
+          "declaration": "AISafetyAtlas.Control.minControlLoss_eq_sInf_condMutualInfo",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "license": "Apache-2.0",
+          "content_source_refs": [
+            "touchette-lloyd-2003-preprint"
+          ],
+          "content_source_note": "Theorem 3, L_C = I(X' : Z | X, C), stated of equation (28)'s minimum. The pointwise equality controlLoss_eq_condMutualInfo holds at every admitted controller, so the two images coincide and so do their infima for any represented policy family; no minimizer is needed. A common all-kernel realization is not constructed here.",
+          "build_environment": "leanprover/lean4:v4.31.0; mathlib@fabf563a7c95a166b8d7b6efca11c8b4dc9d911f; PFR@38e94172b72c8ee8ad64b6365dfc22e559c62ebe",
+          "build_command": "lake build AISafetyAtlas.Control.InformationLimits AISafetyAtlas.Examples.Control.InformationLimits",
+          "scope_delta": {
+            "summary": "Theorem 3 at a represented policy infimum. The two quantities are equal at every admitted controller, so their images under the loss map coincide and hence so do their infima for any represented family - the printed equality is obtainable without a minimizer. The source's all-kernel family is not declared or realized on a common Lean sample space. Generalized from finite alphabets to any measurable space with a zero-or-probability measure.",
+            "evidence": "docs/provenance/touchette-lloyd-control.md"
+          }
+        },
+        {
+          "framework": "Lean",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE",
+          "module": "AISafetyAtlas.Control.InformationLimits",
+          "declaration": "AISafetyAtlas.Control.minControlLoss_eq_sInf_mutualInfo_sub",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "license": "Apache-2.0",
+          "content_source_refs": [
+            "touchette-lloyd-2003-preprint"
+          ],
+          "content_source_note": "Theorem 4, L_C = I(X' : X,C,Z) - I(X' : X,C), stated of equation (28)'s minimum, by the same pointwise-to-represented-family transfer as the Theorem 3 record. A common all-kernel realization is not constructed here.",
+          "build_environment": "leanprover/lean4:v4.31.0; mathlib@fabf563a7c95a166b8d7b6efca11c8b4dc9d911f; PFR@38e94172b72c8ee8ad64b6365dfc22e559c62ebe",
+          "build_command": "lake build AISafetyAtlas.Control.InformationLimits AISafetyAtlas.Examples.Control.InformationLimits",
+          "scope_delta": {
+            "summary": "Theorem 4 at a represented policy infimum, by the same transfer as the Theorem 3 record: an equality holding at every admitted controller is an equality of the two infima for that family. The source's all-kernel feasible family is not declared or realized on a common Lean sample space. Generalized from finite alphabets to any measurable space with a zero-or-probability measure.",
+            "evidence": "docs/provenance/touchette-lloyd-control.md"
+          }
+        },
+        {
+          "framework": "Lean",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE",
+          "module": "AISafetyAtlas.Control.InformationLimits",
+          "declaration": "AISafetyAtlas.Control.minControlLoss_eq_entropy_noise_iff_of_attained",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "license": "Apache-2.0",
+          "content_source_refs": [
+            "touchette-lloyd-2003-preprint"
+          ],
+          "content_source_note": "Theorem 2's equality condition, L_C = H(Z) iff H(Z | X', X, C) = 0, stated of equation (28)'s minimum under the hypothesis that an admitted controller attains it - which is what the paper's min asserts and never exhibits.",
+          "build_environment": "leanprover/lean4:v4.31.0; mathlib@fabf563a7c95a166b8d7b6efca11c8b4dc9d911f; PFR@38e94172b72c8ee8ad64b6365dfc22e559c62ebe",
+          "build_command": "lake build AISafetyAtlas.Control.InformationLimits AISafetyAtlas.Examples.Control.InformationLimits",
+          "scope_delta": {
+            "summary": "Theorem 2's equality case for a represented policy infimum. The printed condition describes a minimizer, so this takes 'C is admitted and no admitted controller loses less' as an explicit hypothesis for the supplied family P. It does not identify that minimizer with a minimizer of the source's all-kernel infimum. Without represented-family attainment the equality case stays pointwise as controlLoss_eq_entropy_noise_iff.",
+            "evidence": "docs/provenance/touchette-lloyd-control.md"
+          }
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Control.entropy_noise_sub_controlLoss",
+            "type": "NEW_PROOF",
+            "source_declarations": [
+              "AISafetyAtlas.Control.controlLoss",
+              "AISafetyAtlas.Control.Purified"
+            ],
+            "application": "Actuation noise bounds control loss: a controller cannot be left more uncertain about the outcome than the channel disturbing it, and the slack is exactly what the outcome fails to reveal about the noise."
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Control.entropyReduction_le_of_openLoopBound",
+            "type": "NEW_PROOF",
+            "source_declarations": [
+              "AISafetyAtlas.Control.OpenLoopBound",
+              "AISafetyAtlas.Control.IsPlant",
+              "AISafetyAtlas.Control.entropyReduction_le_of_condEntropy_ge"
+            ]
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Control.condEntropy_ge_of_openLoopBound",
+            "type": "NEW_PROOF",
+            "source_declarations": [
+              "AISafetyAtlas.Control.OpenLoopBound",
+              "AISafetyAtlas.Control.IsPlant"
+            ]
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Control.controlLoss_le_entropy_noise",
+            "type": "NEW_PROOF",
+            "source_declarations": [
+              "AISafetyAtlas.Control.entropy_noise_sub_controlLoss"
+            ]
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Control.controlLoss_eq_entropy_noise_iff",
+            "type": "NEW_PROOF",
+            "source_declarations": [
+              "AISafetyAtlas.Control.entropy_noise_sub_controlLoss"
+            ]
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Control.controlLoss_eq_condMutualInfo",
+            "type": "NEW_PROOF",
+            "source_declarations": [
+              "AISafetyAtlas.Control.controlLoss",
+              "AISafetyAtlas.Control.Purified"
+            ]
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Control.controlLoss_eq_mutualInfo_sub",
+            "type": "NEW_PROOF",
+            "source_declarations": [
+              "AISafetyAtlas.Control.controlLoss",
+              "AISafetyAtlas.Control.Purified"
+            ]
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Control.condEntropy_le_condEntropy_of_forall",
+            "type": "NEW_PROOF",
+            "source_declarations": []
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Control.entropyReduction_le_of_condEntropy_ge",
+            "type": "NEW_PROOF",
+            "source_declarations": [
+              "AISafetyAtlas.Control.entropyReduction"
+            ],
+            "application": "One bit gathered by a controller is worth at most one bit of extra entropy reduction over open-loop control. Feedback is bounded by, and only by, what the sensor actually learned."
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Control.minControlLoss_le_entropy_noise",
+            "type": "NEW_PROOF",
+            "source_declarations": [
+              "AISafetyAtlas.Control.minControlLoss_le",
+              "AISafetyAtlas.Control.controlLoss_le_entropy_noise",
+              "AISafetyAtlas.Control.inputPolicies",
+              "AISafetyAtlas.Control.IsInputPolicy"
+            ],
+            "application": "Control limits: the actuation noise bounds the control loss of the best available controller, not merely of the one in hand. Touchette-Lloyd Theorem 2 at the printed L_C of eq. (28)."
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Control.minControlLoss_eq_sInf_condMutualInfo",
+            "type": "NEW_PROOF",
+            "source_declarations": [
+              "AISafetyAtlas.Control.controlLoss_eq_condMutualInfo"
+            ]
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Control.minControlLoss_eq_sInf_mutualInfo_sub",
+            "type": "NEW_PROOF",
+            "source_declarations": [
+              "AISafetyAtlas.Control.controlLoss_eq_mutualInfo_sub"
+            ]
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Control.minControlLoss_le",
+            "type": "NEW_PROOF",
+            "source_declarations": [
+              "AISafetyAtlas.Control.bddBelow_controlLoss_image"
+            ]
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Control.minControlLoss_nonneg",
+            "type": "NEW_PROOF",
+            "source_declarations": [
+              "AISafetyAtlas.Control.minControlLoss"
+            ]
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Control.measurable_plantOutcome",
+            "type": "NEW_PROOF",
+            "source_declarations": [
+              "AISafetyAtlas.Control.plantOutcome"
+            ]
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Control.isPlant_plantOutcome",
+            "type": "NEW_PROOF",
+            "source_declarations": [
+              "AISafetyAtlas.Control.plantOutcome",
+              "AISafetyAtlas.Control.IsPlant"
+            ]
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Control.minControlLoss_eq_entropy_noise_iff_of_attained",
+            "type": "NEW_PROOF",
+            "source_declarations": [
+              "AISafetyAtlas.Control.minControlLoss_le",
+              "AISafetyAtlas.Control.controlLoss_eq_entropy_noise_iff"
+            ]
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Control.kernelControlLoss_eq_sum",
+            "type": "NEW_PROOF",
+            "source_declarations": [
+              "AISafetyAtlas.Control.kernelMeasure_prod",
+              "AISafetyAtlas.Control.condEntropy_atom_kernelMeasure"
+            ],
+            "application": "Equation (28)'s second displayed line, verbatim: the kernel's control loss is sum over x of p(x) times sum over c of H(X'|x,c) p(c|x). The objective is linear in p(c|x), which is what every other result in the bridge rests on."
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Control.minControlLoss_inputPolicies_eq_kernelMin",
+            "type": "NEW_PROOF",
+            "source_declarations": [
+              "AISafetyAtlas.Control.kernelMinControlLoss_eq",
+              "AISafetyAtlas.Control.minControlLoss_inputPolicies_eq"
+            ],
+            "application": "The representation gap is zero: the infimum over the controllers realizable on one sample space equals the source's minimum over all conditional distributions. Requires finite alphabets, which is the printed setting."
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Control.minControlLoss_inputPolicies_attained",
+            "type": "NEW_PROOF",
+            "source_declarations": [
+              "AISafetyAtlas.Control.bestAction",
+              "AISafetyAtlas.Control.closedFormLoss_le_controlLoss"
+            ],
+            "application": "A minimizer of equation (28), constructed. Deterministic state feedback playing an argmin action at each state. This is what discharges the attainment hypothesis of Theorem 2's equality case, which the source itself never exhibits."
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Control.entropyReduction_le_condEntropy_form",
+            "type": "NEW_PROOF",
+            "source_declarations": [
+              "AISafetyAtlas.Control.entropyReduction"
+            ],
+            "application": "Lemma 8. Proved with no open-loop assumption at all: the source states it inside the open-loop section but its printed proof uses only that conditioning does not raise entropy."
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Control.entropyReduction_le_iSup_openLoopReduction",
+            "type": "NEW_PROOF",
+            "source_declarations": [
+              "AISafetyAtlas.Control.entropyReduction_le_condEntropy_form",
+              "AISafetyAtlas.Control.condEntropy_fibre_eq_openLoopEntropy"
+            ],
+            "application": "Theorem 9: no randomized open-loop controller removes more entropy than the best single action. The open-loop model enters as the explicit hypothesis IndepFun C (X,Z), the atlas's rendering of equation (opd)."
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Control.exists_entropyReduction_const_eq_iSup_openLoopReduction",
+            "type": "NEW_PROOF",
+            "source_declarations": [
+              "AISafetyAtlas.Control.entropyReduction_const",
+              "AISafetyAtlas.Control.openLoopReduction"
+            ],
+            "application": "Theorem 9's attainment clause: for a finite nonempty action alphabet, some constant action reaches the supremum of the pure open-loop reductions. This states the existential conclusion that entropyReduction_const alone did not."
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Control.entropyReduction_le_openLoopMax",
+            "type": "NEW_PROOF",
+            "source_declarations": [
+              "AISafetyAtlas.Control.condEntropy_ge_of_openLoopMax",
+              "AISafetyAtlas.Control.entropyReduction_le_of_condEntropy_ge"
+            ],
+            "application": "Theorem 10 inside the independent-noise rendering of equation (48). Step (50) becomes an instance because each conditional law p(x|c) is ranged over. The realization bridge from arbitrary printed transition kernels is isPurification_purifyMap, with openLoopMax_purifyMap showing the two reduction sets coincide, and maximum attainment is isGreatest_kernelOpenLoopMax; exists_kernelEntropyReduction_le_at_max states Theorem 10 against the realized maximum."
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Control.perfectlyObservable_iff_sensorLoss_eq_zero",
+            "type": "NEW_PROOF",
+            "source_declarations": [
+              "AISafetyAtlas.Control.entropy_eq_zero_iff",
+              "AISafetyAtlas.Control.sensorLoss",
+              "AISafetyAtlas.Control.PerfectlyObservable"
+            ],
+            "application": "Theorem 5, whose proof the source omits as following from well-known properties of entropy. The property is entropy_eq_zero_iff, which is not in the entropy layer and is proved here."
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Control.condMutualInfo_eq_zero_of_sensorLoss_eq_zero",
+            "type": "NEW_PROOF",
+            "source_declarations": [
+              "AISafetyAtlas.Control.sensorLoss"
+            ],
+            "application": "Theorem 6: a perfectly observable state makes the sensor's purification noise uninformative. The source notes the converse fails and it is not claimed."
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Control.mutualInfo_prod_eq_of_sensorLoss_eq_zero",
+            "type": "NEW_PROOF",
+            "source_declarations": [
+              "AISafetyAtlas.Control.sensorLoss"
+            ],
+            "application": "Corollary 7. The statement is I(X;C,Z) = I(X;C) with a comma, checked against both the published page and the arXiv TeX source."
+          }
+        ]
+      },
+      "root_import": true,
       "ai_safety_relevance": "The survey identifies this result as relevant to limits on AI; no direct real-system implication is asserted here.",
       "ai_bridge_status": "HUMAN_REVIEW",
-      "notes": "Statement-level equivalence to each cited source remains subject to source comparison.",
+      "notes": "Source comparison done against the published Physica A text (survey-ref-027); its Theorems 1-11 are numbered identically to the arXiv v2 preprint originally used, and Theorems 2, 3, 4 and 10 match statement for statement. The arXiv TeX source was also read, which settles Corollary 7 as I(X;C,Z) = I(X;C) with a comma and confirms equation (28)'s second displayed line. Recorded in docs/provenance/touchette-lloyd-control.md. The equation (28) representation gap is closed for finite alphabets: kernelMinControlLoss declares the all-kernel object, minControlLoss_inputPolicies_eq_kernelMin identifies it with the realized infimum, and minControlLoss_inputPolicies_attained exhibits a deterministic minimizing policy. Theorem 2's equality case is therefore unconditional at print scope. The actuation-model gap is closed. Section 2 of the published text states purification for ANY non-deterministic channel, before Section 3 and long before the open-loop section, with condition (i) determinism given (c,z) and condition (ii) equation (7); the earlier note claiming the source confines purification to Theorem 2 was wrong and is withdrawn. AISafetyAtlas.Control.Purification proves the assertion the paper only makes: isPurification_purifyMap builds the seed as a random element of the finite space of deterministic channels S x K -> T. Theorem 9 and the step-(50) row are therefore Yes at print scope, via kernelEntropyReduction_le_iSup_kernelOpenLoop and exists_kernelEntropyReduction_dirac_eq_iSup. Equation (48)'s maximum is now proved attained by isGreatest_kernelOpenLoopMax, using the identification of probability measures on a finite state space with points of the standard simplex, linearity of the outcome law in those coordinates, and compactness; exists_kernelEntropyReduction_le_at_max states Theorem 10 against the realized maximum. Theorem 10 is therefore Yes and this source has no Partial rows left. entropyReduction_le_of_openLoopBound remains useful because its conditional-ensemble hypothesis is incomparable with this rendering. Theorem 9's attainment clause is now explicit in exists_entropyReduction_const_eq_iSup_openLoopReduction. Set.univ is not equation (28)'s feasible family: a bare map may read and cancel actuation noise, as Examples.Control.minControlLoss_univ_lt_inputPolicy and not_isInputPolicy_noiseReader show. Lemma 8, Theorems 5, 6, 9 and 10's inequality at kernel scope, and Corollary 7 are proved; Theorems 1 and 11 remain unformalized, as does the source's unproved prose claim L_S <= H(Z_B).",
       "formal_library_search": {
         "searched_on": "2026-07-28",
         "evidence_file": "docs/provenance/formalization-search.json",
@@ -767,7 +1787,14 @@
       "tags": [
         "control-theory",
         "information-theory"
-      ]
+      ],
+      "public": {
+        "group": "Limits of control and regulation",
+        "summary": "Feedback helps only as much as the sensor actually measured.",
+        "use": "Deciding how much monitoring a control loop really needs.",
+        "title": "Information limits on control",
+        "attribution": "Touchette & Lloyd"
+      }
     },
     {
       "id": "BY-006",
@@ -2037,7 +3064,7 @@
       },
       "ai_safety_relevance": "The survey identifies this result as relevant to limits on AI; no direct real-system implication is asserted here.",
       "ai_bridge_status": "HUMAN_REVIEW",
-      "notes": "Lean NEW_PROOF (2026-07-19): AISafetyAtlas.Learning.no_free_lunch_supervised formalizes the finite-domain supervised off-training-set uniform-averaging core of Wolpert 1996 — for finite X,Y and fixed training domain S, any two learners A,B : (S→Y)→(X→Y) have equal sum over all targets f of OTS 0-1 loss (closed form |Sᶜ|·(|Y|−1)·|Y|^{|X|−1}). Relationship is RELATED, not EXACT/EQUIVALENT: full 1996 development (cross-validation as meta-algorithm, general loss, stochastic learners) is not mechanized. CT-2: AFP No_Free_Lunch_ML / SSBD PAC NFL remains DISTINCT (LAND-NFL-001). Optimization twin is BY-021 / no_free_lunch. Content source: Wolpert 'The Lack of A Priori Distinctions Between Learning Algorithms' (Neural Comput. 1996, 8(7):1341-1390, doi 10.1162/neco.1996.8.7.1341); survey-ref-018 mirrors the survey's own citation of the companion 'Existence' paper (pp. 1391-1420, doi ...1391), which proves the converse — see provenance. Provenance: docs/provenance/lean-wolpert-nfl.md. ai_bridge_status stays HUMAN_REVIEW.",
+      "notes": "Lean NEW_PROOF (2026-07-19): AISafetyAtlas.Learning.no_free_lunch_supervised formalizes the finite-domain supervised off-training-set uniform-averaging core of Wolpert 1996 — for finite X,Y and fixed training domain S, any two learners A,B : (S→Y)→(X→Y) have equal sum over all targets f of OTS 0-1 loss (closed form |Sᶜ|·(|Y|−1)·|Y|^{|X|−1}). Relationship is RELATED, not EXACT/EQUIVALENT: full 1996 development (cross-validation as meta-algorithm, general loss, stochastic learners) is not mechanized. CT-2: AFP No_Free_Lunch_ML / SSBD PAC NFL remains DISTINCT (LAND-NFL-001). Optimization twin is BY-021 / no_free_lunch. Content source: Wolpert 'The Lack of A Priori Distinctions Between Learning Algorithms' (Neural Comput. 1996, 8(7):1341-1390, doi 10.1162/neco.1996.8.7.1341); survey-ref-018 mirrors the survey's own citation of the companion 'Existence' paper (pp. 1391-1420, doi ...1391), which proves the converse — see provenance. Provenance: docs/provenance/lean-wolpert-nfl.md. ai_bridge_status stays HUMAN_REVIEW. CT-10 does not land on this row. The sharp closed-under-permutation characterization (AISafetyAtlas.Learning.Sharp) is filed on BY-021, because both of its sources — Igel-Toussaint 2004 and Schumacher-Vose-Whitley 2001 — are optimization papers quantifying over non-repeating black-box *search* algorithms, not over learners. An earlier revision filed those records here and described the atlas as narrowing the algorithm axis to non-adaptive schedules; both were wrong, the second since nfl_adaptive_of_permInvariant proved sufficiency over the printed adaptive class.",
       "formal_library_search": {
         "searched_on": "2026-07-28",
         "evidence_file": "docs/provenance/formalization-search.json",
@@ -2091,13 +3118,181 @@
           "build_environment": "leanprover/lean4:v4.31.0; mathlib@fabf563a7c95a166b8d7b6efca11c8b4dc9d911f",
           "build_command": "lake build AISafetyAtlas.Learning AISafetyAtlas.Examples.PublicAPI AISafetyAtlas.Examples.NFLConcrete",
           "scope_delta": {
-            "summary": "Finite-domain non-adaptive core plus a deterministic adaptive no-revisit strengthening; adaptive query trees, stochastic algorithms, and time-varying objectives from Wolpert-Macready 1997 are not mechanized. The sharp closed-under-permutation characterization is an open task (CT-10), not formalized here.",
+            "summary": "Finite-domain non-adaptive core plus a deterministic adaptive no-revisit strengthening; adaptive query trees, stochastic algorithms, and time-varying objectives from Wolpert-Macready 1997 are not mechanized. The sharp closed-under-permutation characterization is proved over the printed adaptive class in AISafetyAtlas.Learning.Sharp (CT-10), filed on this row.",
+            "evidence": "docs/provenance/lean-wolpert-nfl.md"
+          }
+        },
+        {
+          "framework": "Lean",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE",
+          "module": "AISafetyAtlas.Learning.Sharp",
+          "declaration": "AISafetyAtlas.Learning.nfl_iff_permInvariant",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "license": "Apache-2.0",
+          "content_source_refs": [
+            "igel-toussaint-2003",
+            "igel-toussaint-2004",
+            "schumacher-vose-whitley-2001"
+          ],
+          "content_source_note": "CT-10. The closed-under-permutation characterization, both directions: aggregate performance is schedule-independent iff the weighting of objectives is invariant under permutations of the search domain. The printed condition is that the weight is constant on each basis class, and by their Lemma 1 a basis class is the permutation orbit, so it is the same condition as PermInvariant. The published 2004 JMMA paper has been read. Its Theorem 5, 'non-uniform sharpened NFL', confirms the assessment recorded here: the condition is that the weight is constant on each basis class, its Lemma 1(2) identifies a basis class with a permutation orbit, and the conclusion is quantified over any two non-repeating black-box (hence adaptive) algorithms, any k, any performance measure, AND any m in {1,...,|X|}. Schumacher-Vose-Whitley 2001 has also been read; its sharpened NFL is 'a No Free Lunch result holds over F iff F is closed under permutation', over the same adaptive algorithm class, and its NFL4 explicitly notes that weighted overall measures are not generally subject to NFL except under equal weighting.",
+          "build_environment": "leanprover/lean4:v4.31.0; mathlib@fabf563a7c95a166b8d7b6efca11c8b4dc9d911f",
+          "build_command": "lake build AISafetyAtlas.Learning.Sharp AISafetyAtlas.Examples.Learning.Sharp",
+          "scope_delta": {
+            "summary": "Not EXACT or EQUIVALENT, but no longer on the algorithm axis. The printed theorem quantifies over non-repeating black-box search algorithms, which are ADAPTIVE, and nfl_adaptive_of_permInvariant now proves the sufficiency half over exactly that class: AdaptiveRule together with the no-revisit hypothesis. nfl_of_permInvariant is the fixed-schedule special case, kept because it is the form the rest of the atlas consumes. What still separates this from the source is the weight axis in the atlas's favour, and time-varying objectives, which remain out of scope. The paper's stochastic algorithms are NO LONGER out of scope: see the nfl_stochastic_of_permInvariant and mixtureTrace records on this row, where the printed quantifier is met at Droste-Jansen-Wegener's own definition. The weight axis is the widening: the atlas statement holds for an arbitrary real weight, including signed ones, where the source takes a probability distribution. The necessity half assumes less than the source and is therefore stronger. Note that quantifying over every sample length is not a sharpening: the source quantifies over m as well, as the published text confirms.",
+            "evidence": "docs/provenance/lean-wolpert-nfl.md"
+          }
+        },
+        {
+          "framework": "Lean",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE",
+          "module": "AISafetyAtlas.Learning.Sharp",
+          "declaration": "AISafetyAtlas.Learning.nfl_stochastic_of_permInvariant",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "license": "Apache-2.0",
+          "content_source_refs": [
+            "igel-toussaint-2004",
+            "droste-jansen-wegener-2002"
+          ],
+          "content_source_note": "Igel-Toussaint state Theorem 1 for 'any two (deterministic or stochastic, cf. [1]) algorithms a and b', citing Droste-Jansen-Wegener on randomized search heuristics. Everything else on this row quantifies over AdaptiveRule, which is deterministic, so the atlas covered a subclass of the printed one. StochasticRule closes that: a rule reads a choice at each step alongside the costs it has seen, and induced fixes the choice sequence to give a deterministic rule DEFINITIONALLY. The theorem is that two stochastic non-repeating rules over possibly different choice alphabets score alike against a permutation-invariant weighting, provided their choice weights carry the same total mass. no_free_lunch_stochastic_of_sharp is the printed uniform case with both masses one.",
+          "build_environment": "leanprover/lean4:v4.31.0; mathlib@fabf563a7c95a166b8d7b6efca11c8b4dc9d911f",
+          "build_command": "lake build AISafetyAtlas.Learning.Sharp AISafetyAtlas.Examples.Learning.Sharp",
+          "scope_delta": {
+            "summary": "The modelling choice is the content. Randomness is NOT modelled as a weighted family of deterministic rules: that would prove only that No Free Lunch is preserved under mixtures, and would leave the residual it is meant to close, since nothing would say the source's algorithms ARE such mixtures — the same shape as the openLoopMax family residual on BY-005, which needed isPurification_purifyMap to close. Here the randomness sits where a randomized heuristic puts it, at the step, so induced needs no representation theorem. An arbitrary weight on choice SEQUENCES allows correlated choices, so independent per-step randomization is a special case and so is the abstract mixture picture, by taking the choice alphabet to index rules. The finite-choice residual recorded when this landed is CLOSED, at the primary source. Droste-Jansen-Wegener, Theoretical Computer Science 287 (2002) 131-144, is Igel-Toussaint's reference [1]; its Theorem 1 is stated for 'an arbitrary (randomized or deterministic) search heuristic' and its randomized half reads, at p. 134: 'The number of different deterministic search strategies is finite. Let m be its number. A randomized search strategy is a probability distribution p = (p1, ..., pm) and chooses the ith deterministic strategy with probability pi. ... the expected cost of a randomized search heuristic is the weighted average of the cost of the deterministic search heuristics. Since all deterministic search heuristics have the same cost, this also holds for all randomized search heuristics.' So the mixture model is DJW's definition rather than a rendering of one, finiteness of the strategy set is DJW's own observation rather than an atlas restriction, and the final sentence is mixtureTrace_eq_sum_mul, so the atlas proof follows the printed one step for step. Igel's own later survey (igel-2014) says the same in secondary form. mixtureTrace is that equation and nfl_mixture_of_permInvariant is the theorem over it, so the printed quantifier is met at the source's own definition. A is finite because X and Y are, and surjective_induced_playChoice records that the choice-sequence form reaches all of it. mixtureTrace_pointMass is the survey's remark that deterministic algorithms are the degenerate distributions. Nonempty on the choice alphabet remains a hypothesis print does not state, and applies only to the choice-sequence form. Examples.Learning.coinRule_realizations_differ checks the quantifier is not decoration — two choice sequences induce rules that open at different points — and nfl_coinRule_vs_probeRule scores that coin against the branching deterministic probeRule.",
+            "evidence": "docs/provenance/lean-wolpert-nfl.md"
+          }
+        },
+        {
+          "framework": "Lean",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE",
+          "module": "AISafetyAtlas.Learning.Sharp",
+          "declaration": "AISafetyAtlas.Combinatorics.card_closedUnderPermutation_nonempty",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "license": "Apache-2.0",
+          "content_source_refs": [
+            "igel-toussaint-2004",
+            "igel-toussaint-2003"
+          ],
+          "content_source_note": "Igel-Toussaint's Theorem 3: the non-empty subsets of Y^X that are closed under permutation number 2^C(|X|+|Y|-1,|X|) - 1, out of 2^(|Y|^|X|) - 1 non-empty subsets in all. They state it citing their own earlier paper, where the proof is given, so this transcribes a printed count rather than supplying an argument the source lacks. The row pairs with nfl_adaptive_iff_permInvariant: that theorem says No Free Lunch holds exactly on the permutation-closed priors, and this one says almost no prior is permutation-closed. card_closedUnderPermutation is the count without the non-emptiness restriction, and fraction_closedUnderPermutation is the printed fraction, in Q.",
+          "build_environment": "leanprover/lean4:v4.31.0; mathlib@fabf563a7c95a166b8d7b6efca11c8b4dc9d911f",
+          "build_command": "lake build AISafetyAtlas.Learning.Sharp AISafetyAtlas.Examples.Learning.Sharp",
+          "scope_delta": {
+            "summary": "Same scope as print, at print's own finite alphabets. The content is closedUnderPermutationEquivSet: a permutation-closed set is a union of orbits, an orbit is a basis class by the source's Lemma 1 (already in the tree as basisClass_histogram_eq_permOrbit), and a basis class is determined by the multiset of cost values an objective takes. So the orbits are exactly Sym Y |X|, and Mathlib's Sym.card_sym_eq_choose supplies the tally. spectrum is that multiset, surjective_spectrum shows none is missed, and preimage_image_spectrum is the recovery step. Counts are stated as card + 1 = 2^N so that no truncated natural subtraction appears in a hypothesis-free claim. NOT covered, and split out as its own audit row rather than absorbed here: the asymptotic claim that the fraction converges to zero double exponentially fast for |Y| > e|X|/(|X|-e), which is the point the section exists to make and needs an estimate on binomial coefficients that these counts do not supply.",
+            "evidence": "docs/provenance/lean-wolpert-nfl.md"
+          }
+        },
+        {
+          "framework": "Lean",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE",
+          "module": "AISafetyAtlas.Learning.Sharp",
+          "declaration": "AISafetyAtlas.Combinatorics.exists_perm_rel_not_iff",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "license": "Apache-2.0",
+          "content_source_refs": [
+            "igel-toussaint-2004"
+          ],
+          "content_source_note": "Igel-Toussaint's Theorem 4, the argument the section exists to make: a non-trivial neighbourhood relation on the search space is not invariant under permutations of that space, so the characterization on this row is met by nothing that carries structure. Print defines the object at p. 318: 'A neighborhood relation on X is a symmetric function n: X x X -> {0,1}', non-trivial iff some pair of DISTINCT points neighbours and some pair of distinct points does not. exists_perm_rel_not_iff is that statement and its equation (6). forall_rel_of_permInvariant carries the proof: one instance of the relation at a pair of distinct points forces it at every pair of distinct points, by two-transitivity - a permutation assembled from two transpositions. rel_diag_iff_of_permInvariant is the diagonal half: an invariant relation is all-or-nothing off the diagonal and all-or-nothing on it, the two independently. No count is claimed or proved. forall_adj_or_forall_not_adj_of_permInvariant and exists_perm_adj_not_iff are the SimpleGraph corollaries, kept because that is the form a reader looking for graph automorphisms would search for. Examples.Learning.oneEdge_not_permInvariant is the smallest instance, one edge on three points. Examples.Learning.loopedEdge_not_permInvariant is that edge plus every self-loop: legal under print's definition, non-trivial in print's own sense, and not a SimpleGraph, so it is the witness the bare-relation form reaches and the graph form does not. Examples.Learning.top_permInvariant and Examples.Learning.bot_permInvariant occupy both branches of the graph dichotomy. Examples.Learning.eq_permInvariant is the diagonal, which is invariant but TRIVIAL in print's sense - it relates no two distinct points - so Theorem 4 says nothing about it; it is recorded to show the diagonal is a degree of freedom forall_rel_of_permInvariant does not constrain.",
+          "build_environment": "leanprover/lean4:v4.31.0; mathlib@fabf563a7c95a166b8d7b6efca11c8b4dc9d911f",
+          "build_command": "lake build AISafetyAtlas.Learning.Sharp AISafetyAtlas.Examples.Learning.Sharp",
+          "scope_delta": {
+            "summary": "Wider than print on two axes. forall_rel_of_permInvariant is stated for an arbitrary binary relation on an arbitrary type: no finiteness, no symmetry, no irreflexivity, and nothing about search in the statement. Print's neighbourhood relation is symmetric; the proof never uses symmetry, so the hypothesis is dropped rather than assumed. The search reading is a corollary. Modelling print's relation as a SimpleGraph would be NARROWER than print, since SimpleGraph is symmetric AND irreflexive whereas print asks only for symmetry and constrains n(x,x) not at all. Examples.Learning.loopedEdge_not_permInvariant is a relation print's definition admits and SimpleGraph cannot express, an edge plus every self-loop, so the graph form cannot be instantiated at it. That is applicability rather than strength: loopedEdge is symmetric, and for symmetric r the graph 'fun a b => a != b and r a b' carries both non-triviality clauses, so the conclusion stays derivable from the graph form. The axis that buys strength is symmetry, witnessed by Examples.Learning.arrowRel_not_permInvariant, where print's theorem cannot be posed at all since no symmetric relation on a two-element type meets both non-triviality clauses. Note print's next sentence, which cuts against the reading here: 'There are only two trivial neighborhood relations, either every two points are neighbored or no points are neighbored.' Print counts off-diagonal behaviour and treats n(x,x) as immaterial rather than as a parameter, so the free diagonal is an inference from a definition that omits it, not something print asserts.",
+            "evidence": "docs/provenance/source-coverage-audit.md"
+          }
+        },
+        {
+          "framework": "Lean",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE",
+          "module": "AISafetyAtlas.Learning.Sharp",
+          "declaration": "AISafetyAtlas.Learning.permInvariant_of_nfl",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "license": "Apache-2.0",
+          "content_source_refs": [
+            "igel-toussaint-2004"
+          ],
+          "content_source_note": "The necessary half of CT-10, and the half that is genuinely stronger than the source: permutation-invariance is forced by schedule-independence at the single sample length |X|, over non-adaptive schedules only, whereas the printed theorem assumes it for every sample length and for the larger class of adaptive non-repeating algorithms. A weaker hypothesis for the same conclusion.",
+          "build_environment": "leanprover/lean4:v4.31.0; mathlib@fabf563a7c95a166b8d7b6efca11c8b4dc9d911f",
+          "build_command": "lake build AISafetyAtlas.Learning.Sharp AISafetyAtlas.Examples.Learning.Sharp",
+          "scope_delta": {
+            "summary": "Half of the printed iff, with a strictly weaker hypothesis than the source uses: only full-length schedules are probed, and only non-adaptive ones. Assuming NFL over a smaller class of algorithms makes this the stronger of the two halves. The hypothesis is weaker on three axes rather than one: fixed schedules rather than the whole algorithm class, a single sample length, and indicator measures only, which is exactly Igel-Toussaint's delta(k, c(Y)) form. Since the class appears in the hypothesis, a smaller one makes the theorem stronger. The sufficiency direction is now proved over the printed adaptive class by nfl_adaptive_of_permInvariant; time-varying objectives remain out of scope; the stochastic algorithms do not, and are covered by nfl_mixture_of_permInvariant on this same row.",
+            "evidence": "docs/provenance/lean-wolpert-nfl.md"
+          }
+        },
+        {
+          "framework": "Lean",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE",
+          "module": "AISafetyAtlas.Learning.Sharp",
+          "declaration": "AISafetyAtlas.Learning.permInvariant_of_closedUnderPermutation",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "license": "Apache-2.0",
+          "content_source_refs": [
+            "schumacher-vose-whitley-2001"
+          ],
+          "content_source_note": "Schumacher-Vose-Whitley's set formulation of closure under permutation, expressed as the statement that such a set's indicator is a permutation-invariant weight, so that their theorem is the indicator case of the weighted one.",
+          "build_environment": "leanprover/lean4:v4.31.0; mathlib@fabf563a7c95a166b8d7b6efca11c8b4dc9d911f",
+          "build_command": "lake build AISafetyAtlas.Learning.Sharp AISafetyAtlas.Examples.Learning.Sharp",
+          "scope_delta": {
+            "summary": "Records the bridge from the set form to the weighted form rather than transcribing the 2001 paper, whose algorithm model and problem-description-length framing are not mechanized. The set-form NFL conclusion itself follows by composing with nfl_of_permInvariant; the worked instance is Examples.Learning.nfl_over_constants.",
             "evidence": "docs/provenance/lean-wolpert-nfl.md"
           }
         }
       ],
       "lean_artifact": {
         "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Learning.nfl_adaptive_iff_permInvariant",
+            "type": "NEW_PROOF",
+            "source_declarations": [
+              "AISafetyAtlas.Learning.nfl_adaptive_of_permInvariant",
+              "AISafetyAtlas.Learning.permInvariant_of_nfl"
+            ],
+            "application": "The exact boundary of No Free Lunch on the prior axis, over the adaptive non-repeating class the sources quantify over: aggregate performance is algorithm-independent precisely when the weighting of objectives is invariant under permutations of the search domain. This is the headline statement of the row; the uniform cores below are its constant-weight case."
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Learning.nfl_mixture_of_permInvariant",
+            "type": "NEW_PROOF",
+            "source_declarations": [
+              "AISafetyAtlas.Learning.mixtureTrace",
+              "AISafetyAtlas.Learning.mixtureTrace_eq_sum_mul"
+            ],
+            "application": "No Free Lunch for randomized search heuristics, at Droste-Jansen-Wegener's own definition of one: a distribution over the finitely many deterministic strategies. Wider than print on the mixture weight, which here may be signed and needs only equal total mass."
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Learning.nfl_stochastic_of_permInvariant",
+            "type": "NEW_PROOF",
+            "source_declarations": [
+              "AISafetyAtlas.Learning.stochasticTrace",
+              "AISafetyAtlas.Learning.induced"
+            ],
+            "application": "The same result with the randomness drawn at each step rather than over whole strategies, which is the other picture the literature uses. surjective_induced_playChoice records that it reaches the entire mixture class."
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Combinatorics.card_closedUnderPermutation_nonempty",
+            "type": "NEW_PROOF",
+            "source_declarations": [
+              "AISafetyAtlas.Combinatorics.closedUnderPermutationEquivSet",
+              "AISafetyAtlas.Combinatorics.spectrum"
+            ],
+            "application": "Igel-Toussaint Theorem 3: the permutation-closed priors number 2^C(|X|+|Y|-1,|X|) - 1 out of 2^(|Y|^|X|) - 1, so the condition characterizing No Free Lunch is met by almost nothing. fraction_closedUnderPermutation is the printed fraction in Q."
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Combinatorics.exists_perm_rel_not_iff",
+            "type": "NEW_PROOF",
+            "source_declarations": [
+              "AISafetyAtlas.Combinatorics.forall_rel_of_permInvariant"
+            ],
+            "application": "Igel-Toussaint Theorem 4: a non-trivial neighbourhood relation on the search space is not invariant under permutations of it. Stated for an arbitrary binary relation, since the proof uses neither the symmetry print assumes nor irreflexivity. Note the deliberate non-claim: the step from here to 'this family of objectives is not permutation-closed' is print's Examples 2 and 3 and is NOT formalized."
+          },
           {
             "atlas_declaration": "AISafetyAtlas.Learning.no_free_lunch",
             "type": "NEW_PROOF",
@@ -2115,12 +3310,122 @@
               "AISafetyAtlas.Learning.adaptive_constraint_card",
               "AISafetyAtlas.Learning.sum_performance_eq_scaled_sum"
             ]
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Learning.nfl_adaptive_of_permInvariant",
+            "type": "NEW_PROOF",
+            "source_declarations": [
+              "AISafetyAtlas.Learning.PermInvariant",
+              "AISafetyAtlas.Learning.weightedTrace",
+              "AISafetyAtlas.Learning.observed_eq_iff"
+            ]
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Combinatorics.basisClass_histogram_eq_permOrbit",
+            "type": "NEW_PROOF",
+            "source_declarations": [
+              "AISafetyAtlas.Combinatorics.histogram",
+              "AISafetyAtlas.Combinatorics.basisClass",
+              "AISafetyAtlas.Combinatorics.permOrbit"
+            ]
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Learning.exists_observed_eq",
+            "type": "NEW_PROOF",
+            "source_declarations": [
+              "AISafetyAtlas.Learning.exists_perm_ruleVisit",
+              "AISafetyAtlas.Learning.observed_eq_iff"
+            ]
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Learning.card_observed_eq",
+            "type": "NEW_PROOF",
+            "source_declarations": [
+              "AISafetyAtlas.Learning.no_free_lunch_adaptive_of_sharp"
+            ]
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Learning.closedUnderPermutation_of_permInvariant",
+            "type": "NEW_PROOF",
+            "source_declarations": [
+              "AISafetyAtlas.Combinatorics.ClosedUnderPermutation",
+              "AISafetyAtlas.Learning.PermInvariant"
+            ]
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Learning.no_free_lunch_adaptive_of_sharp",
+            "type": "NEW_PROOF",
+            "source_declarations": [
+              "AISafetyAtlas.Learning.nfl_adaptive_of_permInvariant"
+            ]
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Learning.closedUnderPermutation_of_nfl",
+            "type": "NEW_PROOF",
+            "source_declarations": [
+              "AISafetyAtlas.Learning.permInvariant_of_nfl",
+              "AISafetyAtlas.Learning.closedUnderPermutation_of_permInvariant"
+            ]
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Learning.ruleVisit_permRule",
+            "type": "NEW_PROOF",
+            "source_declarations": [
+              "AISafetyAtlas.Learning.permRule"
+            ]
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Learning.observed_permRule",
+            "type": "NEW_PROOF",
+            "source_declarations": [
+              "AISafetyAtlas.Learning.permRule"
+            ]
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Learning.nfl_iff_permInvariant",
+            "type": "NEW_PROOF",
+            "source_declarations": [
+              "AISafetyAtlas.Learning.nfl_of_permInvariant",
+              "AISafetyAtlas.Learning.permInvariant_of_nfl"
+            ],
+            "application": "The exact boundary of no free lunch on the prior axis: every schedule performs equally under a weighting of objectives precisely when that weighting is invariant under permutations of the search domain. Real priors over learning problems are structured, hence not permutation-symmetric, hence outside the hypothesis — which is what lets a consumer say where NFL does not bite."
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Learning.nfl_of_permInvariant",
+            "type": "NEW_PROOF",
+            "source_declarations": [
+              "AISafetyAtlas.Learning.PermInvariant",
+              "AISafetyAtlas.Learning.exists_perm_comp",
+              "AISafetyAtlas.Learning.weightedPerformance"
+            ]
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Learning.permInvariant_of_nfl",
+            "type": "NEW_PROOF",
+            "source_declarations": [
+              "AISafetyAtlas.Learning.weightedPerformance_indicator"
+            ]
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Learning.permInvariant_of_closedUnderPermutation",
+            "type": "NEW_PROOF",
+            "source_declarations": [
+              "AISafetyAtlas.Combinatorics.ClosedUnderPermutation",
+              "AISafetyAtlas.Learning.PermInvariant"
+            ]
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Learning.no_free_lunch_embedding_of_sharp",
+            "type": "NEW_PROOF",
+            "source_declarations": [
+              "AISafetyAtlas.Learning.nfl_of_permInvariant"
+            ]
           }
         ]
       },
       "ai_safety_relevance": "The survey identifies this result as relevant to limits on AI; no direct real-system implication is asserted here.",
       "ai_bridge_status": "HUMAN_REVIEW",
-      "notes": "Lean NEW_PROOF (2026-07-19): AISafetyAtlas.Learning.no_free_lunch formalizes the finite-domain non-adaptive uniform-averaging core of Wolpert–Macready 1997 — for finite X,Y, any cost-sequence score Φ, any two injective m-point schedules have equal sum of Φ over all objectives f:X→Y (equivalently the closed form |Y|^{|X|-m}·∑_c Φ(c)). Relationship is RELATED, not EXACT/EQUIVALENT: adaptive query trees, stochastic algorithms, and time-varying objectives from the paper are not mechanized. Supervised twin is BY-020 / no_free_lunch_supervised. Distinct from SSBD PAC NFL / AFP No_Free_Lunch_ML (LAND-NFL-001) and continuous free lunches (BY-022). Provenance: docs/provenance/lean-wolpert-nfl.md. ai_bridge_status stays HUMAN_REVIEW.",
+      "notes": "Lean NEW_PROOF (2026-07-19): AISafetyAtlas.Learning.no_free_lunch formalizes the finite-domain non-adaptive uniform-averaging core of Wolpert–Macready 1997 — for finite X,Y, any cost-sequence score Φ, any two injective m-point schedules have equal sum of Φ over all objectives f:X→Y (equivalently the closed form |Y|^{|X|-m}·∑_c Φ(c)). Relationship is RELATED, not EXACT/EQUIVALENT: adaptive query trees, stochastic algorithms, and time-varying objectives from the paper are not mechanized. Supervised twin is BY-020 / no_free_lunch_supervised. Distinct from SSBD PAC NFL / AFP No_Free_Lunch_ML (LAND-NFL-001) and continuous free lunches (BY-022). Provenance: docs/provenance/lean-wolpert-nfl.md. ai_bridge_status stays HUMAN_REVIEW. CT-10 (2026-08-16, refiled here 2026-08-16): the sharp closed-under-permutation characterization lands in AISafetyAtlas.Learning.Sharp — nfl_adaptive_iff_permInvariant, graded RELATED against Igel-Toussaint 2004 (Theorem 5) and Schumacher-Vose-Whitley 2001. Aggregate performance is algorithm-independent iff the weighting of objectives is invariant under permutations of the search domain. It widens the printed theorem on the weight axis (arbitrary real weights, including signed ones, where the source takes a probability distribution) and matches it on the algorithm axis, since nfl_adaptive_of_permInvariant proves sufficiency over the printed non-repeating adaptive class; the necessity half assumes strictly less than the source (schedules only, one sample length, indicator measures) and is therefore stronger. It does not match print on sample length — Theorem 5 already quantifies over any m in {1,...,|X|}, so that is parity, not a sharpening. Stochastic algorithms and time-varying objectives remain out of scope. These records sat on BY-020 until 2026-08-16; that row is Wolpert 1996 supervised learning, and both CT-10 sources are search papers.",
       "formal_library_search": {
         "searched_on": "2026-07-28",
         "evidence_file": "docs/provenance/formalization-search.json",
@@ -2159,8 +3464,8 @@
       ],
       "public": {
         "group": "Learning and generalization",
-        "summary": "Same for search: no optimizer wins on average across all problems.",
-        "use": "Claims about general-purpose optimizers.",
+        "summary": "Same for search, but only under an exact condition: averaged over a set of objectives that cannot tell one point of the search space from another, every optimizer scores alike — and almost no set of objectives is like that.",
+        "use": "Checking whether a \"no optimizer is better in general\" argument applies to the problem at hand at all.",
         "title": "No free lunch — optimization",
         "attribution": "Wolpert & Macready"
       }
@@ -3982,9 +5287,9 @@
       "lean_artifact": null,
       "public": {
         "group": "Assembled from other proof assistants",
-        "summary": "The same no-free-lunch result, proved again in another system.",
-        "use": "Independent confirmation.",
-        "title": "No free lunch (independent proof)",
+        "summary": "A different no-free-lunch theorem from the atlas's: no learner beats a coin flip on every distribution when the sample is small.",
+        "use": "How much data a guarantee needs — not a second proof of the Wolpert averaging results.",
+        "title": "No free lunch (PAC lower bound)",
         "attribution": "Shalev-Shwartz & Ben-David"
       }
     },
@@ -5330,7 +6635,10 @@
             "AISafetyAtlas.Knowledge.not_knowable_of_witness",
             "AISafetyAtlas.Knowledge.exists_witness_of_not_knowable",
             "AISafetyAtlas.Knowledge.Knowable.mono",
-            "AISafetyAtlas.Knowledge.not_knowable_comp"
+            "AISafetyAtlas.Knowledge.not_knowable_comp",
+            "AISafetyAtlas.Knowledge.Check.knowable_congr_observation",
+            "AISafetyAtlas.Knowledge.Check.knowable_congr_property",
+            "AISafetyAtlas.Knowledge.Check.knowable_comp_left_iff"
           ],
           "module": "AISafetyAtlas.Knowledge",
           "atlas_module": "AISafetyAtlas.Knowledge",
@@ -5546,6 +6854,354 @@
         "use": "Ties reward tampering to what an agent can know.",
         "title": "Unobservable return",
         "attribution": "Workbench infrastructure"
+      }
+    },
+    {
+      "id": "LAND-FANO-001",
+      "name": "Fano's inequality at both printed constants, and its sharpness",
+      "tags": [
+        "information-theory"
+      ],
+      "notes": "Cover and Thomas, Elements of Information Theory (2nd ed.), section 2.10, mechanized against the printed statement. fano_of_log_le is the master form: it takes any uniform bound L on log |A \\ {X' w}| and concludes H[X | X'] <= P(err) * L + binEntropy(P(err)). Both printed constants are corollaries of that one lemma — fano at the sharp log(|A| - 1) of (2.140), fano_unrestricted at the log |A| of (2.139) — where the chapter argues them separately. fano_of_embedding carries the estimate into a different type through an injection, which the printed statement does not do; the printed corollary for an estimator X-hat : Y -> X is fano_of_estimator_chain in the examples. entropy_le_fano is the no-observation remark with its sharp -1. Sharpness is entropy_eq_fano_of_witness in AISafetyAtlas.Examples.InformationTheory.Fano, which attains equality at every p in [0,1] rather than at a single point, matching the one-parameter family the chapter prints. Alphabet membership is a pointwise hypothesis (forall w, X w in A), which is what the printed typing gives; an almost-everywhere version would exceed print and is not claimed. Coverage and scope are graded row by row in docs/provenance/source-coverage-audit.md.",
+      "original_source_refs": [
+        "cover-thomas-2006"
+      ],
+      "related_result_ids": [],
+      "root_import": true,
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE",
+          "license": "Apache-2.0",
+          "reproduced": true,
+          "build_environment": "leanprover/lean4:v4.31.0; Mathlib fabf563a7c95a166b8d7b6efca11c8b4dc9d911f; PFR 38e94172b72c8ee8ad64b6365dfc22e559c62ebe; atlas IN_TREE",
+          "declarations": [
+            "fano_of_log_le",
+            "fano",
+            "fano_unrestricted",
+            "fano_of_embedding",
+            "entropy_le_fano",
+            "le_errorProb",
+            "fano_le_log_two_add",
+            "condEntropy_eq_error_split",
+            "condEntropy_le_error_bound"
+          ],
+          "module": "AISafetyAtlas.InformationTheory.Fano",
+          "build_command": "lake build AISafetyAtlas.InformationTheory.Fano AISafetyAtlas.Examples.InformationTheory.Fano"
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.InformationTheory.fano_of_log_le",
+            "type": "NEW_PROOF",
+            "source_declarations": [
+              "AISafetyAtlas.InformationTheory.condEntropy_eq_error_split",
+              "AISafetyAtlas.InformationTheory.condEntropy_le_error_bound",
+              "AISafetyAtlas.InformationTheory.entropy_errorIndicator"
+            ],
+            "application": "Estimation limits: the conditional entropy left after an estimate is bounded by the error probability times the log of the alphabet, plus one bit. Cover and Thomas Theorem 2.10.1, with both printed constants as instances of a single lemma."
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.InformationTheory.fano",
+            "type": "NEW_PROOF",
+            "source_declarations": [
+              "AISafetyAtlas.InformationTheory.fano_of_log_le"
+            ]
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.InformationTheory.fano_unrestricted",
+            "type": "NEW_PROOF",
+            "source_declarations": [
+              "AISafetyAtlas.InformationTheory.fano_of_log_le"
+            ]
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.InformationTheory.fano_of_embedding",
+            "type": "NEW_PROOF",
+            "source_declarations": [
+              "AISafetyAtlas.InformationTheory.fano_of_log_le"
+            ]
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.InformationTheory.entropy_le_fano",
+            "type": "NEW_PROOF",
+            "source_declarations": [
+              "AISafetyAtlas.InformationTheory.fano_of_log_le"
+            ]
+          }
+        ]
+      },
+      "public": {
+        "group": "What an observer can recover",
+        "summary": "Guess wrong often enough and the thing you are guessing about stays uncertain — by a fixed amount you can compute.",
+        "use": "Turning an error rate into a hard floor on what is still unknown.",
+        "title": "Fano's inequality",
+        "attribution": "Fano; Cover & Thomas"
+      }
+    },
+    {
+      "id": "LAND-OVERSIGHT-VARIETY-001",
+      "name": "Seeing and doing are independent oversight capacities",
+      "tags": [
+        "oversight",
+        "control-theory"
+      ],
+      "notes": "A bridge module over an oversight model, built on Ashby's counting bound (BY-004) and the knowability kernel. Sit is the set of situations an overseer is answerable for, Obs what it observes, Act its interventions, Out the outcomes; an overseer is a map Obs -> Act, so the policy is observation-mediated rather than omniscient, which is the conservative direction. Forces says the composed policy pins the outcome at a single target in EVERY situation, which is the strongest reading of 'oversight works' and therefore the reading whose necessary conditions are weakest. not_forces_of_card_lt: with fewer interventions than situations, and an effect table in which a fixed intervention still distinguishes situations, no policy forces the outcome - and the hypothesis list contains nothing about what the overseer observes, which is the theorem rather than an omission in it. forces_of_constant_effect is the other corner and the boundary of the first: an intervention whose effect is constant forces the target from a blind policy, and a constant column is exactly where the structural hypothesis fails. Examples.Oversight.VarietyBound exhibits both corners at three situations each and states them as one conjunction, so the independence is a checked object rather than prose. Taken alone the first theorem would be close to renaming Ashby's regulator an overseer, which methodology.md says does not earn a bridge grade; what is offered as more than a rename is the pair, a statement about the relation between two capacities that the oversight and control clusters formalize separately and neither states alone. A reviewer who rejects that reading should reject the bridge grade; the declarations are correct either way. Review package at docs/bridges/review-oversight-varietybound.md. Accepted at REVIEWED by the maintainer on 2026-08-17, statement and scoped interpretation both, as conditionals and licensing none of the package's forbidden claims. The decision is not recorded in this row: ai_bridge_status and bridge_review are rejected on rows without an informal_claim, which is every LAND- row, so the generated reviewed-bridge count reads 2 and understates it. The package records the decision and the three ways to make it recordable.",
+      "original_source_refs": [],
+      "related_result_ids": [
+        "BY-004",
+        "LAND-JOINTOBS-001"
+      ],
+      "root_import": true,
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE",
+          "license": "Apache-2.0",
+          "reproduced": true,
+          "build_environment": "leanprover/lean4:v4.31.0; Mathlib fabf563a7c95a166b8d7b6efca11c8b4dc9d911f; atlas IN_TREE",
+          "declarations": [
+            "Forces",
+            "not_forces_of_card_lt",
+            "forces_of_constant_effect",
+            "forces_of_constant_effect_of_not_knowable",
+            "cannotForce",
+            "not_forces_of_cannotForce",
+            "exists_cannotForce_false_and_forces"
+          ],
+          "module": "AISafetyAtlas.Oversight.VarietyBound",
+          "build_command": "lake build AISafetyAtlas.Oversight.VarietyBound AISafetyAtlas.Oversight.VarietyCheck AISafetyAtlas.Examples.Oversight.VarietyBound"
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Oversight.not_forces_of_cannotForce",
+            "type": "NEW_PROOF",
+            "source_declarations": [
+              "AISafetyAtlas.Oversight.cannotForce",
+              "AISafetyAtlas.Oversight.not_forces_of_card_lt"
+            ],
+            "application": "The agreement theorem behind atlas-check's variety kind: a true verdict from the executable checker rules out every policy over every observation type, so a consumer who cannot read Lean still gets the quantifier the theorem has."
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Oversight.exists_cannotForce_false_and_forces",
+            "type": "NEW_PROOF",
+            "source_declarations": [
+              "AISafetyAtlas.Oversight.cannotForce",
+              "AISafetyAtlas.Oversight.Forces"
+            ],
+            "application": "Why a false verdict is not a clearance: a table where the counting bound is silent and forcing succeeds, so 'not obstructed' can never be read as 'not possible'."
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Oversight.forces_of_constant_effect",
+            "type": "BRIDGE",
+            "source_declarations": [
+              "AISafetyAtlas.Oversight.Forces"
+            ],
+            "application": "Oversight: control without observation. The boundary of the counting bound, since a constant column is exactly where its structural hypothesis fails."
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Oversight.forces_of_constant_effect_of_not_knowable",
+            "type": "BRIDGE",
+            "source_declarations": [
+              "AISafetyAtlas.Oversight.forces_of_constant_effect",
+              "AISafetyAtlas.Knowledge.Knowable"
+            ],
+            "application": "Oversight: the two capacities stated in one place - unknowable hazard, forced outcome."
+          }
+        ]
+      },
+      "public": {
+        "group": "Limits of control and regulation",
+        "summary": "An overseer that can tell every situation apart may still be unable to steer the outcome, and one that can tell nothing apart may be able to. What you can see and what you can do are separate budgets.",
+        "use": "Checking whether an oversight proposal is short of information, short of levers, or both.",
+        "title": "Seeing is not steering",
+        "attribution": "Atlas, over Ashby"
+      }
+    },
+    {
+      "id": "LAND-KNOWENTROPY-001",
+      "name": "Knowability measured: zero conditional entropy, and Fano's floor on every decoder",
+      "tags": [
+        "information-theory",
+        "interpretability"
+      ],
+      "notes": "Joins the knowability kernel to the entropy layer, in the one direction that holds exactly. condEntropy_eq_zero_of_knowable: a decoder costs no entropy, proved from InformationTheory.condEntropy_comp_self_left. not_knowable_of_condEntropy_ne_zero is the contrapositive and the usable direction - an estimated entropy certifies unknowability without ever naming the colliding pair, where IndistinguishabilityWitness requires exhibiting one. le_errorProb_of_decoder is the quantitative form: EVERY decoder built from the observation, not merely some decoder, errs with probability at least (H[property | observation] - log 2) / log |A|. It is reached by instantiating Fano's converse (InformationTheory.le_errorProb, Cover and Thomas 2.132) at the decoder's output and then transferring the bound back to the observation along data processing, since a decoder is a coarsening and isMarkovChain_comp plus condEntropy_le_condEntropy_of_isMarkovChain say coarsening never lowers conditional entropy. No new information-theoretic content is claimed; the constant is Cover and Thomas's. The converse fails and the failure is exhibited rather than asserted: Examples.Knowledge.Entropy carries a property that is not Knowable whose conditional entropy is zero, by putting a point mass on one of two colliding states. Entropy answers a question about the measure and Knowable answers a question about every state, so entropy is a sound certificate of unknowability and an unsound certificate of knowability. No AI-system reading is asserted: observation is an arbitrary measurable map.",
+      "original_source_refs": [
+        "cover-thomas-2006"
+      ],
+      "related_result_ids": [
+        "LAND-FANO-001",
+        "LAND-DPI-001"
+      ],
+      "root_import": true,
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE",
+          "license": "Apache-2.0",
+          "reproduced": true,
+          "build_environment": "leanprover/lean4:v4.31.0; Mathlib fabf563a7c95a166b8d7b6efca11c8b4dc9d911f; PFR 38e94172b72c8ee8ad64b6365dfc22e559c62ebe; atlas IN_TREE",
+          "declarations": [
+            "condEntropy_eq_zero_of_knowable",
+            "not_knowable_of_condEntropy_ne_zero",
+            "le_errorProb_of_decoder"
+          ],
+          "module": "AISafetyAtlas.Knowledge.Entropy",
+          "build_command": "lake build AISafetyAtlas.Knowledge.Entropy AISafetyAtlas.Examples.Knowledge.Entropy"
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Knowledge.condEntropy_eq_zero_of_knowable",
+            "type": "NEW_PROOF",
+            "source_declarations": [
+              "AISafetyAtlas.Knowledge.Knowable",
+              "AISafetyAtlas.InformationTheory.condEntropy_comp_self_left"
+            ],
+            "application": "A property recoverable from an observation leaves that observation no uncertainty about it. The entropy side of the knowability kernel."
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Knowledge.not_knowable_of_condEntropy_ne_zero",
+            "type": "NEW_PROOF",
+            "source_declarations": [
+              "AISafetyAtlas.Knowledge.condEntropy_eq_zero_of_knowable"
+            ],
+            "application": "A positive conditional entropy certifies that no decoder exists, without exhibiting the pair the observation confuses."
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Knowledge.le_errorProb_of_decoder",
+            "type": "NEW_PROOF",
+            "source_declarations": [
+              "AISafetyAtlas.InformationTheory.le_errorProb",
+              "AISafetyAtlas.InformationTheory.condEntropy_le_condEntropy_of_isMarkovChain",
+              "AISafetyAtlas.InformationTheory.isMarkovChain_comp"
+            ],
+            "application": "How badly unknowability bites: a floor on the error rate of every decoder built from the observation, uniform over decoders."
+          }
+        ]
+      },
+      "public": {
+        "group": "What an observer can recover",
+        "summary": "If what you want to know is not fixed by what you can see, no procedure reading your observations gets it right more often than a computable floor allows.",
+        "use": "Turning \"this monitor cannot distinguish those cases\" into a rate no amount of cleverness downstream improves on.",
+        "title": "Unknowability has an error rate",
+        "attribution": "Atlas, over Fano; Cover & Thomas"
+      }
+    },
+    {
+      "id": "LAND-DPI-001",
+      "name": "The data-processing inequality, its equality case, and the conditioning counterexamples",
+      "tags": [
+        "information-theory"
+      ],
+      "notes": "Cover and Thomas, Elements of Information Theory (2nd ed.), section 2.8. mutualInfo_le_of_isMarkovChain is Theorem 2.8.1 by the printed argument, two expansions of I(X ; Y, Z). Two statements the chapter asserts inside that proof but does not prove are proved here: mutualInfo_eq_iff_isMarkovChain is the equality case, and mutualInfo_le_of_isMarkovChain' is the dual the text leaves to the reader. isMarkovChain_comp is wider than the printed corollary, taking any measurable g rather than a named function. Markov chains are *defined* as CondIndepFun, which is (2.118)'s right-hand side where the book starts from the factorization (2.117). isMarkovChain_iff_measure_factorizes proves the two equivalent, so the choice of definition is no longer a convention the section trades on. Both directions run at the printed strength. Forward, measure_factorizes_of_isMarkovChain gives p(y)*p(x,y,z) = p(x,y)*p(y,z) at the printed point masses and in fact at every measurable s, t. Backward, isMarkovChain_iff_measure_factorizes_singleton takes the hypothesis at point masses alone, carried up to measurable sets by measure_preimage_inter_eq_tsum - a measurable slice of a countable-valued variable splits over its point masses - applied once in X and once in Z. The set-level isMarkovChain_iff_measure_factorizes is the wider conclusion and needs only Y measurable, with no countability or measurable singletons on S and U. Both printed conditioning counterexamples are in AISafetyAtlas.Examples.InformationTheory.DataProcessing: the chapter's integer sum at half a bit, and an XOR pair at a full bit.",
+      "original_source_refs": [
+        "cover-thomas-2006"
+      ],
+      "related_result_ids": [
+        "LAND-FANO-001"
+      ],
+      "root_import": true,
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE",
+          "license": "Apache-2.0",
+          "reproduced": true,
+          "build_environment": "leanprover/lean4:v4.31.0; Mathlib fabf563a7c95a166b8d7b6efca11c8b4dc9d911f; PFR 38e94172b72c8ee8ad64b6365dfc22e559c62ebe; atlas IN_TREE",
+          "declarations": [
+            "isMarkovChain_iff_measure_factorizes_singleton",
+            "measure_preimage_inter_eq_tsum",
+            "isMarkovChain_iff_measure_factorizes",
+            "measure_factorizes_of_isMarkovChain",
+            "mutualInfo_le_of_isMarkovChain",
+            "mutualInfo_le_of_isMarkovChain'",
+            "mutualInfo_eq_iff_isMarkovChain",
+            "mutualInfo_comp_le",
+            "condMutualInfo_le_mutualInfo",
+            "isMarkovChain_comp",
+            "IsMarkovChain.symm",
+            "condEntropy_le_condEntropy_of_isMarkovChain"
+          ],
+          "module": "AISafetyAtlas.InformationTheory.DataProcessing",
+          "build_command": "lake build AISafetyAtlas.InformationTheory.DataProcessing AISafetyAtlas.Examples.InformationTheory.DataProcessing"
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.InformationTheory.isMarkovChain_iff_measure_factorizes_singleton",
+            "type": "NEW_PROOF",
+            "source_declarations": [
+              "AISafetyAtlas.InformationTheory.isMarkovChain_iff_measure_factorizes",
+              "AISafetyAtlas.InformationTheory.measure_preimage_inter_eq_tsum"
+            ],
+            "application": "Markov chains: the book's defining factorization at point masses and conditional independence are the same condition. Cover and Thomas (2.118), derived at the printed hypothesis in both directions."
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.InformationTheory.isMarkovChain_iff_measure_factorizes",
+            "type": "NEW_PROOF",
+            "source_declarations": [
+              "AISafetyAtlas.InformationTheory.IsMarkovChain"
+            ],
+            "application": "Markov chains: the book's defining factorization (2.117) and conditional independence are the same condition. Cover and Thomas (2.118), derived rather than adopted as a convention."
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.InformationTheory.measure_factorizes_of_isMarkovChain",
+            "type": "NEW_PROOF",
+            "source_declarations": [
+              "AISafetyAtlas.InformationTheory.isMarkovChain_iff_measure_factorizes"
+            ]
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.InformationTheory.mutualInfo_le_of_isMarkovChain",
+            "type": "NEW_PROOF",
+            "source_declarations": [
+              "AISafetyAtlas.InformationTheory.mutualInfo_chain_rule",
+              "AISafetyAtlas.InformationTheory.mutualInfo_sub_eq"
+            ],
+            "application": "Post-processing cannot create information: along a Markov chain X -> Y -> Z, no function of Y tells you more about X than Y does. Cover and Thomas Theorem 2.8.1."
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.InformationTheory.mutualInfo_eq_iff_isMarkovChain",
+            "type": "NEW_PROOF",
+            "source_declarations": [
+              "AISafetyAtlas.InformationTheory.mutualInfo_sub_eq",
+              "AISafetyAtlas.InformationTheory.isMarkovChain_iff_condMutualInfo_eq_zero"
+            ],
+            "application": "The equality case, which the chapter asserts inside the proof of 2.8.1 without proving it."
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.InformationTheory.mutualInfo_comp_le",
+            "type": "NEW_PROOF",
+            "source_declarations": [
+              "AISafetyAtlas.InformationTheory.mutualInfo_le_of_isMarkovChain",
+              "AISafetyAtlas.InformationTheory.isMarkovChain_comp"
+            ]
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.InformationTheory.condMutualInfo_le_mutualInfo",
+            "type": "NEW_PROOF",
+            "source_declarations": [
+              "AISafetyAtlas.InformationTheory.mutualInfo_chain_rule'"
+            ]
+          }
+        ]
+      },
+      "public": {
+        "group": "What an observer can recover",
+        "summary": "No amount of processing a measurement adds information about what was measured.",
+        "use": "Why a pipeline cannot recover what its first stage discarded.",
+        "title": "Data processing",
+        "attribution": "Cover & Thomas"
       }
     }
   ]

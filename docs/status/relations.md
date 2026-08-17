@@ -5,7 +5,7 @@ The ledger as a graph. `related_result_ids` in [`registry.yaml`](../../registry.
 `relations` records *how*, and `result_shape` records what kind of statement a
 row makes at all.
 
-Coverage: **20 typed edges** across **11 rows**, and **13 rows** carry a shape, out of **77** results (26 of which record untyped adjacency).
+Coverage: **20 typed edges** across **11 rows**, and **13 rows** carry a shape, out of **81** results (29 of which record untyped adjacency).
 This is a pilot scoped to the self-knowledge cluster. An untyped row is not a
 claim that the row has no relations — it is a claim that nobody has decided them.
 

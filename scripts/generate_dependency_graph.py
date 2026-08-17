@@ -114,7 +114,13 @@ GENERATED_SUFFIX = re.compile(
     r"\.(mk|rec|recOn|casesOn|below|brecOn|ndrec|ndrecOn|injEq|noConfusion"
     r"|noConfusionType|sizeOf_spec|toCtorIdx|eq_def|eq_\d+|match_\d+|proof_\d+"
     r"|induct|ofNat|ext|ext_iff|inj|below_ind|binductionOn|ctorIdx|congr_simp"
-    r"|elim|ctorElim|ctorElimType)$"
+    r"|elim|ctorElim|ctorElimType"
+    # The well-founded-recursion companions of an `inductive`. These are two
+    # levels deep, so the single-segment alternatives above never matched them:
+    # `--write` emitted `Foo.brecOn.eq`, and `--check` then rejected it, because
+    # its leaf `eq` is declared nowhere in the tree. The first `inductive` in a
+    # clustered module surfaced that; nothing authored is lost by dropping them.
+    r"|brecOn\.eq|brecOn\.go)$"
 )
 
 HARNESS = """import AISafetyAtlas

@@ -26,6 +26,20 @@
         "AISafetyAtlas.Learning.NonadaptiveSchedule.sample"
       ]
     },
+    "AISafetyAtlas.Learning.ObjectiveWeight": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Learning.PermInvariant": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Learning.ObjectiveWeight"
+      ]
+    },
+    "AISafetyAtlas.Learning.StochasticRule": {
+      "kind": "definition",
+      "deps": []
+    },
     "AISafetyAtlas.Learning.SupervisedLearner": {
       "kind": "definition",
       "deps": []
@@ -68,6 +82,54 @@
         "AISafetyAtlas.Learning.aggregatePerformance"
       ]
     },
+    "AISafetyAtlas.Learning.card_observed_eq": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Learning.AdaptiveRule",
+        "AISafetyAtlas.Learning.observed",
+        "AISafetyAtlas.Learning.ruleVisit"
+      ]
+    },
+    "AISafetyAtlas.Learning.closedUnderPermutation_of_nfl": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Combinatorics.ClosedUnderPermutation",
+        "AISafetyAtlas.Learning.weightedPerformance"
+      ]
+    },
+    "AISafetyAtlas.Learning.closedUnderPermutation_of_permInvariant": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Combinatorics.ClosedUnderPermutation",
+        "AISafetyAtlas.Learning.PermInvariant"
+      ]
+    },
+    "AISafetyAtlas.Learning.eq_iUnion_permOrbit": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Combinatorics.ClosedUnderPermutation",
+        "AISafetyAtlas.Combinatorics.permOrbit"
+      ]
+    },
+    "AISafetyAtlas.Learning.exists_observed_eq": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Learning.AdaptiveRule",
+        "AISafetyAtlas.Learning.observed",
+        "AISafetyAtlas.Learning.ruleVisit"
+      ]
+    },
+    "AISafetyAtlas.Learning.exists_perm_comp": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.Learning.exists_perm_ruleVisit": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Learning.AdaptiveRule",
+        "AISafetyAtlas.Learning.ruleVisit"
+      ]
+    },
     "AISafetyAtlas.Learning.homogeneous_iff_learner_indep": {
       "kind": "theorem",
       "deps": [
@@ -90,6 +152,36 @@
         "AISafetyAtlas.Learning.HomogeneousLoss"
       ]
     },
+    "AISafetyAtlas.Learning.induced": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Learning.AdaptiveRule",
+        "AISafetyAtlas.Learning.StochasticRule"
+      ]
+    },
+    "AISafetyAtlas.Learning.induced_playChoice": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Learning.AdaptiveRule",
+        "AISafetyAtlas.Learning.induced",
+        "AISafetyAtlas.Learning.playChoice"
+      ]
+    },
+    "AISafetyAtlas.Learning.injective_ruleVisit_permRule": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Learning.AdaptiveRule",
+        "AISafetyAtlas.Learning.permRule",
+        "AISafetyAtlas.Learning.ruleVisit"
+      ]
+    },
+    "AISafetyAtlas.Learning.injective_ruleVisit_scheduleRule": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Learning.ruleVisit",
+        "AISafetyAtlas.Learning.scheduleRule"
+      ]
+    },
     "AISafetyAtlas.Learning.lossConfig": {
       "kind": "definition",
       "deps": [
@@ -103,6 +195,102 @@
         "AISafetyAtlas.Learning.HomogeneousLoss",
         "AISafetyAtlas.Learning.SupervisedLearner",
         "AISafetyAtlas.Learning.lossConfig"
+      ]
+    },
+    "AISafetyAtlas.Learning.mixtureTrace": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Learning.AdaptiveRule",
+        "AISafetyAtlas.Learning.ObjectiveWeight",
+        "AISafetyAtlas.Learning.weightedTrace"
+      ]
+    },
+    "AISafetyAtlas.Learning.mixtureTrace_eq_sum_mul": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Learning.AdaptiveRule",
+        "AISafetyAtlas.Learning.ObjectiveWeight",
+        "AISafetyAtlas.Learning.PermInvariant",
+        "AISafetyAtlas.Learning.mixtureTrace",
+        "AISafetyAtlas.Learning.ruleVisit",
+        "AISafetyAtlas.Learning.weightedTrace"
+      ]
+    },
+    "AISafetyAtlas.Learning.mixtureTrace_pointMass": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Learning.AdaptiveRule",
+        "AISafetyAtlas.Learning.ObjectiveWeight",
+        "AISafetyAtlas.Learning.mixtureTrace",
+        "AISafetyAtlas.Learning.weightedTrace"
+      ]
+    },
+    "AISafetyAtlas.Learning.nfl_adaptive_iff_permInvariant": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Learning.AdaptiveRule",
+        "AISafetyAtlas.Learning.ObjectiveWeight",
+        "AISafetyAtlas.Learning.PermInvariant",
+        "AISafetyAtlas.Learning.ruleVisit",
+        "AISafetyAtlas.Learning.weightedTrace"
+      ]
+    },
+    "AISafetyAtlas.Learning.nfl_adaptive_of_closedUnderPermutation": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Combinatorics.ClosedUnderPermutation",
+        "AISafetyAtlas.Learning.AdaptiveRule",
+        "AISafetyAtlas.Learning.observed",
+        "AISafetyAtlas.Learning.ruleVisit"
+      ]
+    },
+    "AISafetyAtlas.Learning.nfl_adaptive_of_permInvariant": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Learning.AdaptiveRule",
+        "AISafetyAtlas.Learning.ObjectiveWeight",
+        "AISafetyAtlas.Learning.PermInvariant",
+        "AISafetyAtlas.Learning.ruleVisit",
+        "AISafetyAtlas.Learning.weightedTrace"
+      ]
+    },
+    "AISafetyAtlas.Learning.nfl_iff_permInvariant": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Learning.CostPerformance",
+        "AISafetyAtlas.Learning.ObjectiveWeight",
+        "AISafetyAtlas.Learning.PermInvariant",
+        "AISafetyAtlas.Learning.weightedPerformance"
+      ]
+    },
+    "AISafetyAtlas.Learning.nfl_mixture_of_permInvariant": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Learning.AdaptiveRule",
+        "AISafetyAtlas.Learning.ObjectiveWeight",
+        "AISafetyAtlas.Learning.PermInvariant",
+        "AISafetyAtlas.Learning.mixtureTrace",
+        "AISafetyAtlas.Learning.ruleVisit"
+      ]
+    },
+    "AISafetyAtlas.Learning.nfl_of_permInvariant": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Learning.CostPerformance",
+        "AISafetyAtlas.Learning.ObjectiveWeight",
+        "AISafetyAtlas.Learning.PermInvariant",
+        "AISafetyAtlas.Learning.weightedPerformance"
+      ]
+    },
+    "AISafetyAtlas.Learning.nfl_stochastic_of_permInvariant": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Learning.ObjectiveWeight",
+        "AISafetyAtlas.Learning.PermInvariant",
+        "AISafetyAtlas.Learning.StochasticRule",
+        "AISafetyAtlas.Learning.induced",
+        "AISafetyAtlas.Learning.ruleVisit",
+        "AISafetyAtlas.Learning.stochasticTrace"
       ]
     },
     "AISafetyAtlas.Learning.no_free_lunch": {
@@ -121,10 +309,33 @@
         "AISafetyAtlas.Learning.ruleVisit"
       ]
     },
+    "AISafetyAtlas.Learning.no_free_lunch_adaptive_of_sharp": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Learning.AdaptiveRule",
+        "AISafetyAtlas.Learning.observed",
+        "AISafetyAtlas.Learning.ruleVisit"
+      ]
+    },
     "AISafetyAtlas.Learning.no_free_lunch_embedding": {
       "kind": "theorem",
       "deps": [
         "AISafetyAtlas.Learning.CostPerformance"
+      ]
+    },
+    "AISafetyAtlas.Learning.no_free_lunch_embedding_of_sharp": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Learning.CostPerformance"
+      ]
+    },
+    "AISafetyAtlas.Learning.no_free_lunch_stochastic_of_sharp": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Learning.StochasticRule",
+        "AISafetyAtlas.Learning.induced",
+        "AISafetyAtlas.Learning.observed",
+        "AISafetyAtlas.Learning.ruleVisit"
       ]
     },
     "AISafetyAtlas.Learning.no_free_lunch_supervised": {
@@ -140,11 +351,34 @@
         "AISafetyAtlas.Learning.AdaptiveRule"
       ]
     },
+    "AISafetyAtlas.Learning.obsPrefix_castLE": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Learning.AdaptiveRule",
+        "AISafetyAtlas.Learning.obsPrefix"
+      ]
+    },
     "AISafetyAtlas.Learning.observed": {
       "kind": "definition",
       "deps": [
         "AISafetyAtlas.Learning.AdaptiveRule",
         "AISafetyAtlas.Learning.obsPrefix"
+      ]
+    },
+    "AISafetyAtlas.Learning.observed_consistent": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Learning.AdaptiveRule",
+        "AISafetyAtlas.Learning.observed",
+        "AISafetyAtlas.Learning.ruleVisit"
+      ]
+    },
+    "AISafetyAtlas.Learning.observed_eq_iff": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Learning.AdaptiveRule",
+        "AISafetyAtlas.Learning.observed",
+        "AISafetyAtlas.Learning.ruleVisit"
       ]
     },
     "AISafetyAtlas.Learning.observed_of_consistent": {
@@ -153,6 +387,21 @@
         "AISafetyAtlas.Learning.AdaptiveRule",
         "AISafetyAtlas.Learning.observed",
         "AISafetyAtlas.Learning.ruleVisit"
+      ]
+    },
+    "AISafetyAtlas.Learning.observed_permRule": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Learning.AdaptiveRule",
+        "AISafetyAtlas.Learning.observed",
+        "AISafetyAtlas.Learning.permRule"
+      ]
+    },
+    "AISafetyAtlas.Learning.observed_scheduleRule": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Learning.observed",
+        "AISafetyAtlas.Learning.scheduleRule"
       ]
     },
     "AISafetyAtlas.Learning.offTrainingLoss": {
@@ -167,6 +416,34 @@
         "AISafetyAtlas.Learning.HomogeneousLoss",
         "AISafetyAtlas.Learning.SupervisedLearner",
         "AISafetyAtlas.Learning.predict"
+      ]
+    },
+    "AISafetyAtlas.Learning.permInvariant_of_closedUnderPermutation": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Combinatorics.ClosedUnderPermutation",
+        "AISafetyAtlas.Learning.PermInvariant"
+      ]
+    },
+    "AISafetyAtlas.Learning.permInvariant_of_nfl": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Learning.ObjectiveWeight",
+        "AISafetyAtlas.Learning.PermInvariant",
+        "AISafetyAtlas.Learning.weightedPerformance"
+      ]
+    },
+    "AISafetyAtlas.Learning.permRule": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Learning.AdaptiveRule"
+      ]
+    },
+    "AISafetyAtlas.Learning.playChoice": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Learning.AdaptiveRule",
+        "AISafetyAtlas.Learning.StochasticRule"
       ]
     },
     "AISafetyAtlas.Learning.pointLoss": {
@@ -190,6 +467,36 @@
         "AISafetyAtlas.Learning.AdaptiveRule"
       ]
     },
+    "AISafetyAtlas.Learning.ruleVisit_permRule": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Learning.AdaptiveRule",
+        "AISafetyAtlas.Learning.permRule",
+        "AISafetyAtlas.Learning.ruleVisit"
+      ]
+    },
+    "AISafetyAtlas.Learning.ruleVisit_scheduleRule": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Learning.ruleVisit",
+        "AISafetyAtlas.Learning.scheduleRule"
+      ]
+    },
+    "AISafetyAtlas.Learning.scheduleRule": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Learning.AdaptiveRule"
+      ]
+    },
+    "AISafetyAtlas.Learning.stochasticTrace": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Learning.ObjectiveWeight",
+        "AISafetyAtlas.Learning.StochasticRule",
+        "AISafetyAtlas.Learning.induced",
+        "AISafetyAtlas.Learning.weightedTrace"
+      ]
+    },
     "AISafetyAtlas.Learning.sum_performance_eq_scaled_sum": {
       "kind": "theorem",
       "deps": [
@@ -202,6 +509,53 @@
         "AISafetyAtlas.Learning.SupervisedLearner",
         "AISafetyAtlas.Learning.pointLoss",
         "AISafetyAtlas.Learning.predict"
+      ]
+    },
+    "AISafetyAtlas.Learning.surjective_induced_playChoice": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Learning.AdaptiveRule",
+        "AISafetyAtlas.Learning.induced",
+        "AISafetyAtlas.Learning.playChoice"
+      ]
+    },
+    "AISafetyAtlas.Learning.weightedPerformance": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Learning.CostPerformance",
+        "AISafetyAtlas.Learning.ObjectiveWeight"
+      ]
+    },
+    "AISafetyAtlas.Learning.weightedPerformance_eq_adaptive": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Learning.CostPerformance",
+        "AISafetyAtlas.Learning.ObjectiveWeight",
+        "AISafetyAtlas.Learning.scheduleRule",
+        "AISafetyAtlas.Learning.weightedPerformance",
+        "AISafetyAtlas.Learning.weightedTrace"
+      ]
+    },
+    "AISafetyAtlas.Learning.weightedPerformance_indicator": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Learning.ObjectiveWeight",
+        "AISafetyAtlas.Learning.weightedPerformance"
+      ]
+    },
+    "AISafetyAtlas.Learning.weightedPerformance_pointMass": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Learning.CostPerformance",
+        "AISafetyAtlas.Learning.weightedPerformance"
+      ]
+    },
+    "AISafetyAtlas.Learning.weightedTrace": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Learning.AdaptiveRule",
+        "AISafetyAtlas.Learning.ObjectiveWeight",
+        "AISafetyAtlas.Learning.observed"
       ]
     }
   }

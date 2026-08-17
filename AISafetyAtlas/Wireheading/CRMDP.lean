@@ -41,7 +41,7 @@ member is automatically a member.  That is the structural form of the source's
   from its complement, since both generate the identical observed history.
 * `return_add_complement`: the source's equation (3), `G_t(μ,π) + G_t(μ⁻,π) = t`,
   for the unit-scaled reward range.
-* `crmdpComplementedClass`: packaging as a `ComplementedClass`, whence
+* `toComplementedClass`: packaging as a `ComplementedClass`, whence
   `everitt_theorem_eleven` applies at the MDP level.
 
 ## Explicit non-claims

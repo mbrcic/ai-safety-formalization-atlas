@@ -10,7 +10,7 @@ Edges come from the elaborated Lean environment. This answers the question the p
 
 So `A → B` means *`B` occurs in `A`'s statement, or in `A`'s body when `A` is a definition*. A lemma used only inside a proof does not appear. Reading the table as a complete call graph would be wrong, and the two sections below are scoped so that they stay true under this limit.
 
-`31` authored declarations in `AISafetyAtlas.Learning.*` (15 theorems). Compiler-generated companions and projections are dropped.
+`77` authored declarations in `AISafetyAtlas.Learning.*` (50 theorems). Compiler-generated companions and projections are dropped.
 
 ## Load-bearing declarations
 
@@ -18,7 +18,13 @@ Named in the statements of eight or more others. A change to one of these is a c
 
 | Declaration | Named by |
 |---|---|
+| `AdaptiveRule` | 30 |
+| `ruleVisit` | 20 |
+| `ObjectiveWeight` | 16 |
+| `observed` | 12 |
+| `CostPerformance` | 11 |
 | `SupervisedLearner` | 10 |
+| `PermInvariant` | 10 |
 
 ## Definitions no statement and no example mentions
 
@@ -37,29 +43,75 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 | `HomogeneousLoss` | definition | — |
 | `NonadaptiveSchedule` | definition | — |
 | `NonadaptiveSchedule.embedding` | definition | `NonadaptiveSchedule`, `NonadaptiveSchedule.injective`, `NonadaptiveSchedule.sample` |
+| `ObjectiveWeight` | definition | — |
+| `PermInvariant` | definition | `ObjectiveWeight` |
+| `StochasticRule` | definition | — |
 | `SupervisedLearner` | definition | — |
 | `adaptive_constraint_card` | theorem | `AdaptiveRule`, `ruleVisit` |
 | `aggregateOffTrainingLoss` | definition | `SupervisedLearner`, `offTrainingLoss`, `predict` |
 | `aggregateOffTrainingLoss_eq` | theorem | `SupervisedLearner`, `aggregateOffTrainingLoss` |
 | `aggregatePerformance` | definition | `CostPerformance`, `NonadaptiveSchedule`, `NonadaptiveSchedule.sample` |
 | `aggregatePerformance_eq_scaled_sum` | theorem | `CostPerformance`, `NonadaptiveSchedule`, `aggregatePerformance` |
+| `card_observed_eq` | theorem | `AdaptiveRule`, `observed`, `ruleVisit` |
+| `closedUnderPermutation_of_nfl` | theorem | `weightedPerformance` |
+| `closedUnderPermutation_of_permInvariant` | theorem | `PermInvariant` |
+| `eq_iUnion_permOrbit` | theorem | — |
+| `exists_observed_eq` | theorem | `AdaptiveRule`, `observed`, `ruleVisit` |
+| `exists_perm_comp` | theorem | — |
+| `exists_perm_ruleVisit` | theorem | `AdaptiveRule`, `ruleVisit` |
 | `homogeneous_iff_learner_indep` | theorem | `HomogeneousLoss`, `SupervisedLearner`, `lossConfig` |
 | `homogeneous_of_learner_indep` | theorem | `HomogeneousLoss`, `SupervisedLearner`, `lossConfig` |
 | `homogeneous_zeroOne` | theorem | `HomogeneousLoss` |
+| `induced` | definition | `AdaptiveRule`, `StochasticRule` |
+| `induced_playChoice` | theorem | `AdaptiveRule`, `induced`, `playChoice` |
+| `injective_ruleVisit_permRule` | theorem | `AdaptiveRule`, `permRule`, `ruleVisit` |
+| `injective_ruleVisit_scheduleRule` | theorem | `ruleVisit`, `scheduleRule` |
 | `lossConfig` | definition | `SupervisedLearner`, `predict` |
 | `lossConfig_sum_learner_indep` | theorem | `HomogeneousLoss`, `SupervisedLearner`, `lossConfig` |
+| `mixtureTrace` | definition | `AdaptiveRule`, `ObjectiveWeight`, `weightedTrace` |
+| `mixtureTrace_eq_sum_mul` | theorem | `AdaptiveRule`, `ObjectiveWeight`, `PermInvariant`, `mixtureTrace`, `ruleVisit`, `weightedTrace` |
+| `mixtureTrace_pointMass` | theorem | `AdaptiveRule`, `ObjectiveWeight`, `mixtureTrace`, `weightedTrace` |
+| `nfl_adaptive_iff_permInvariant` | theorem | `AdaptiveRule`, `ObjectiveWeight`, `PermInvariant`, `ruleVisit`, `weightedTrace` |
+| `nfl_adaptive_of_closedUnderPermutation` | theorem | `AdaptiveRule`, `observed`, `ruleVisit` |
+| `nfl_adaptive_of_permInvariant` | theorem | `AdaptiveRule`, `ObjectiveWeight`, `PermInvariant`, `ruleVisit`, `weightedTrace` |
+| `nfl_iff_permInvariant` | theorem | `CostPerformance`, `ObjectiveWeight`, `PermInvariant`, `weightedPerformance` |
+| `nfl_mixture_of_permInvariant` | theorem | `AdaptiveRule`, `ObjectiveWeight`, `PermInvariant`, `mixtureTrace`, `ruleVisit` |
+| `nfl_of_permInvariant` | theorem | `CostPerformance`, `ObjectiveWeight`, `PermInvariant`, `weightedPerformance` |
+| `nfl_stochastic_of_permInvariant` | theorem | `ObjectiveWeight`, `PermInvariant`, `StochasticRule`, `induced`, `ruleVisit`, `stochasticTrace` |
 | `no_free_lunch` | theorem | `CostPerformance`, `NonadaptiveSchedule`, `aggregatePerformance` |
 | `no_free_lunch_adaptive` | theorem | `AdaptiveRule`, `observed`, `ruleVisit` |
+| `no_free_lunch_adaptive_of_sharp` | theorem | `AdaptiveRule`, `observed`, `ruleVisit` |
 | `no_free_lunch_embedding` | theorem | `CostPerformance` |
+| `no_free_lunch_embedding_of_sharp` | theorem | `CostPerformance` |
+| `no_free_lunch_stochastic_of_sharp` | theorem | `StochasticRule`, `induced`, `observed`, `ruleVisit` |
 | `no_free_lunch_supervised` | theorem | `SupervisedLearner`, `aggregateOffTrainingLoss` |
 | `obsPrefix` | definition | `AdaptiveRule` |
+| `obsPrefix_castLE` | theorem | `AdaptiveRule`, `obsPrefix` |
 | `observed` | definition | `AdaptiveRule`, `obsPrefix` |
+| `observed_consistent` | theorem | `AdaptiveRule`, `observed`, `ruleVisit` |
+| `observed_eq_iff` | theorem | `AdaptiveRule`, `observed`, `ruleVisit` |
 | `observed_of_consistent` | theorem | `AdaptiveRule`, `observed`, `ruleVisit` |
+| `observed_permRule` | theorem | `AdaptiveRule`, `observed`, `permRule` |
+| `observed_scheduleRule` | theorem | `observed`, `scheduleRule` |
 | `offTrainingLoss` | definition | `pointLoss` |
 | `ots_error_distribution_learner_indep` | theorem | `HomogeneousLoss`, `SupervisedLearner`, `predict` |
+| `permInvariant_of_closedUnderPermutation` | theorem | `PermInvariant` |
+| `permInvariant_of_nfl` | theorem | `ObjectiveWeight`, `PermInvariant`, `weightedPerformance` |
+| `permRule` | definition | `AdaptiveRule` |
+| `playChoice` | definition | `AdaptiveRule`, `StochasticRule` |
 | `pointLoss` | definition | — |
 | `predict` | definition | `SupervisedLearner`, `restrictTo` |
 | `restrictTo` | definition | — |
 | `ruleVisit` | definition | `AdaptiveRule` |
+| `ruleVisit_permRule` | theorem | `AdaptiveRule`, `permRule`, `ruleVisit` |
+| `ruleVisit_scheduleRule` | theorem | `ruleVisit`, `scheduleRule` |
+| `scheduleRule` | definition | `AdaptiveRule` |
+| `stochasticTrace` | definition | `ObjectiveWeight`, `StochasticRule`, `induced`, `weightedTrace` |
 | `sum_performance_eq_scaled_sum` | theorem | `CostPerformance` |
 | `sum_pointLoss_off_training` | theorem | `SupervisedLearner`, `pointLoss`, `predict` |
+| `surjective_induced_playChoice` | theorem | `AdaptiveRule`, `induced`, `playChoice` |
+| `weightedPerformance` | definition | `CostPerformance`, `ObjectiveWeight` |
+| `weightedPerformance_eq_adaptive` | theorem | `CostPerformance`, `ObjectiveWeight`, `scheduleRule`, `weightedPerformance`, `weightedTrace` |
+| `weightedPerformance_indicator` | theorem | `ObjectiveWeight`, `weightedPerformance` |
+| `weightedPerformance_pointMass` | theorem | `CostPerformance`, `weightedPerformance` |
+| `weightedTrace` | definition | `AdaptiveRule`, `ObjectiveWeight`, `observed` |

@@ -1,0 +1,7 @@
+{
+  "schema": "atlas-check/1",
+  "kind": "variety",
+  "situations": 3,
+  "interventions": 2,
+  "effect": [[0, 0], [0, 1], [0, 2]]
+}

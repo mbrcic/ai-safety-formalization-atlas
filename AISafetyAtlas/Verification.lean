@@ -7,13 +7,15 @@ public import AISafetyAtlas.Computability
 
 ## Primary surface
 
-| Role | Declaration | One-line |
-|---|---|---|
-| **Law** | `rice` | No total verifier for nontrivial behavioral properties |
-| **Bridge** | `AgentBehavior.no_behavioral_safety_verifier` | Downstream packaging (BY-012; reviewed bridge) |
-| **Bridge** | `Robot.action_safety_unverifiable` | Robot-facing RELATED reduction (BY-033; reviewed) |
+| Role | Declaration | Import | One-line |
+|---|---|---|---|
+| **Law** | `rice` | this module | No total verifier for nontrivial behavioral properties |
+| **Bridge** | `AgentBehavior.no_behavioral_safety_verifier` | `.AgentBehavior` | Downstream packaging (BY-012; reviewed bridge) |
+| **Bridge** | `Robot.action_safety_unverifiable` | `.Robot` | Robot-facing RELATED reduction (BY-033; reviewed) |
 
-Also via root: `Verification.AgentBehavior`, `Verification.Robot`.
+This module does not import the two bridge modules, so the last two rows need
+`AISafetyAtlas.Verification.AgentBehavior` or `AISafetyAtlas.Verification.Robot`
+of their own — or `AISafetyAtlas`, which carries all three.
 
 ## Statement intent
 

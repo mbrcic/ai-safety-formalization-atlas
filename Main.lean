@@ -2,6 +2,7 @@ module
 
 public import AISafetyAtlas.Knowledge.Check
 public import AISafetyAtlas.Knowledge.Ambiguity
+public import AISafetyAtlas.Oversight.VarietyCheck
 public import Lean.Data.Json
 
 /-!
@@ -32,6 +33,15 @@ physically know a value? Backed by `Knowledge.Devices.BlockwiseCollision` and th
 two refutations it discharges, evaluated through the `Decidable` instances in
 `Knowledge.Check`.
 
+`variety` — can any overseer hold the outcome to one target? This is the *doing*
+question rather than the seeing one, and it is the only kind here whose verdict
+is one-sided by design. `Oversight.VarietyCheck.cannotForce` decides the counting
+obstruction; a `true` verdict rules out every policy over every observation, by
+`not_forces_of_cannotForce`. A `false` verdict is **not** a clearance: the bound
+is necessary and not sufficient, so it means this argument does not apply, and
+`exists_cannotForce_false_and_forces` is why that distinction is recorded in the
+tree rather than only in the output.
+
 ## Input
 
 Self-describing, and deliberately **not** any downstream project's format. States
@@ -49,7 +59,13 @@ compared for equality only, so their numbering carries no other meaning.
 { "schema": "atlas-check/1", "kind": "device",
   "states": 4, "setup": [0,0,1,1], "conclusion": [false,false,true,true],
   "target": [0,1,0,1], "value": 1 }
+
+{ "schema": "atlas-check/1", "kind": "variety",
+  "situations": 3, "interventions": 2, "effect": [[0,0],[1,1],[2,2]] }
 ```
+
+`effect` has one row per situation and one column per intervention; entries are
+outcome codes, compared for equality only.
 
 `emitted` has one row per principal, each row indexed by state; `coalition`
 names principals by row index.
@@ -127,6 +143,27 @@ private def natList (j : Json) (name : String) : Except String (List Nat) := do
     | .ok n => .ok n
     | .error _ => .error s!"field '{name}' must contain non-negative integers"
 
+/-- A rectangular table: `rows` rows of `cols` entries. Separate from
+`natMatrix` because that one is square by intent — one row per principal, one
+column per state — and an effect table is not. -/
+private def natTable (j : Json) (name : String) (rows : Nat) (cols : Nat) :
+    Except String (Array (Array Nat)) := do
+  let raw ← match (← field j name).getArr? with
+    | .ok a => pure a
+    | .error _ => throw s!"field '{name}' must be an array of arrays"
+  if raw.size ≠ rows then
+    throw s!"field '{name}' has {raw.size} rows but the model declares {rows}"
+  raw.mapM fun row => do
+    let entries ← match row.getArr? with
+      | .ok a => pure a
+      | .error _ => throw s!"field '{name}' must contain arrays, one per row"
+    if entries.size ≠ cols then
+      throw s!"a row of '{name}' has {entries.size} entries but the model declares {cols} columns"
+    entries.mapM fun v =>
+      match v.getNat? with
+      | .ok n => .ok n
+      | .error _ => .error s!"field '{name}' must contain non-negative integers"
+
 /-- One row per principal, each row indexed by state. Rows of the wrong length
 are refused for the same reason short arrays are: a padded row is a different
 model. -/
@@ -163,6 +200,17 @@ private def relabel {n : Nat} (raw : Array Nat) : Fin n → Fin n := fun i =>
 /-- The raw values actually present, in first-appearance order. -/
 private def distinctValues (raw : Array Nat) : Array Nat :=
   raw.foldl (fun seen v => if seen.contains v then seen else seen.push v) #[]
+
+/--
+The outcomes an effect table carries, in first-appearance order.
+
+An outcome label is a **name**. `Oversight.cannotForce` asks only whether each
+intervention's column is injective, so the verdict depends on the partition the
+labels induce and on nothing else — which makes renumbering them the one
+normalization guaranteed to leave the answer alone. Capping them instead is not:
+a cap merges two names into one and asks a different question. -/
+private def tableOutcomes (rows : Array (Array Nat)) : Array Nat :=
+  distinctValues (rows.foldl (fun acc row => acc ++ row) #[])
 
 /--
 Relabel a raw array into `Fin k`, where `k` is how many distinct values it
@@ -308,6 +356,57 @@ private def runDevice (j : Json) : Except String (List String) := do
   else
     throw "the target array carries no values, so there is nothing to probe"
 
+/--
+The variety bound: can any overseer hold the outcome to a single target?
+
+The effect table is read as `situations x interventions`, and the verdict comes
+from `Oversight.VarietyCheck.cannotForce`, whose agreement theorem quantifies
+over every observation type. So a `true` verdict is about every possible
+overseer, which is why the output says so rather than naming a policy.
+
+The `false` branch reports what it does *not* establish. The counting bound is a
+necessary condition, and a checker that printed "forcing is possible" here would
+be asserting its converse.
+
+Outcome labels are renumbered by `tableOutcomes` rather than capped. Capping
+merges any two labels above the cap into one, which silently decides a
+**different** model: `cannotForce` tests only column injectivity, so relabelling
+a table must leave the verdict alone, and a merge can turn a real obstruction
+into silence. `scripts/check_atlas_check_parse.py` tests that invariance.
+-/
+private def runVariety (j : Json) : Except String (List String) := do
+  let situations ← natField j "situations"
+  let interventions ← natField j "interventions"
+  if situations = 0 then
+    throw "a model needs at least one situation"
+  else if interventions = 0 then
+    throw "an overseer with no interventions is not a model of oversight"
+  else
+    let rows ← natTable j "effect" situations interventions
+    let outcomes := tableOutcomes rows
+    if hk : 0 < outcomes.size then
+    let table : Fin situations → Fin interventions → Fin outcomes.size :=
+      fun s a =>
+        let raw := (rows[s.1]!)[a.1]?.getD 0
+        let idx := (outcomes.findIdx? (· == raw)).getD 0
+        if h : idx < outcomes.size then ⟨idx, h⟩ else ⟨0, hk⟩
+    if AISafetyAtlas.Oversight.cannotForce table then
+      pure [
+        "verdict: NO OVERSEER CAN FORCE THE OUTCOME",
+        s!"  {interventions} interventions for {situations} situations, and every intervention still separates them",
+        "  certified by AISafetyAtlas.Oversight.not_forces_of_cannotForce",
+        "  the bound quantifies over every observation, so this rules out every policy"
+      ]
+    else
+      pure [
+        "verdict: THE COUNTING BOUND DOES NOT APPLY",
+        "  this is NOT a finding that oversight succeeds",
+        "  the bound is necessary and not sufficient; see",
+        "  AISafetyAtlas.Oversight.exists_cannotForce_false_and_forces"
+      ]
+    else
+      throw "the effect table carries no outcomes, so there is nothing to force"
+
 private def run (j : Json) : Except String (List String) := do
   let schema ← match (← field j "schema").getStr? with
     | .ok s => pure s
@@ -321,8 +420,9 @@ private def run (j : Json) : Except String (List String) := do
   | "knowability" => runKnowability j
   | "coalition" => runCoalition j
   | "device" => runDevice j
+  | "variety" => runVariety j
   | other =>
-      throw s!"unknown kind '{other}'; this build reads 'knowability', 'coalition' and 'device'"
+      throw s!"unknown kind '{other}'; this build reads 'knowability', 'coalition', 'device' and 'variety'"
 
 public def main (args : List String) : IO UInt32 := do
   match args with

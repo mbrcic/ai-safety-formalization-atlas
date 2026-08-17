@@ -53,6 +53,7 @@ PUBLIC_GROUPS = (
     "Limits of verification",
     "Limits of self-knowledge and reflection",
     "What an observer can recover",
+    "Limits of control and regulation",
     "Learning and generalization",
     "Preferences, rewards and incentives",
     "Aggregation and multi-agent structure",
@@ -242,8 +243,16 @@ def render_status(registry: dict, search_evidence: dict) -> str:
         for record in result["formalizations"]
         if record["framework"] != "Lean" and record["reproduced"]
     ]
+    # Only REVIEWED is a reviewed AI-system bridge. STATEMENT_REVIEWED accepts the
+    # encoded statement and withholds the interpretation, so folding it in here
+    # reported an interpretation nobody had signed. The other site that counts
+    # these already kept them apart; this one did not, and said "3" while two
+    # rows were reviewed.
     reviewed_results = sum(
-        result.get("ai_bridge_status", "HUMAN_REVIEW") != "HUMAN_REVIEW" for result in results
+        result.get("ai_bridge_status") == "REVIEWED" for result in results
+    )
+    statement_reviewed_results = sum(
+        result.get("ai_bridge_status") == "STATEMENT_REVIEWED" for result in results
     )
     candidate_results = sum(
         any(hit["hit_count"] for hit in evidence["candidate_hits"].values())
@@ -287,6 +296,7 @@ def render_status(registry: dict, search_evidence: dict) -> str:
         f"| Structured `candidate_formalizations` leads | {candidate_leads} |",
         f"| Reproduced external formalization records | {len(external)} across {len({result['id'] for result, _ in external})} registry results |",
         f"| Claim results with reviewed AI-system bridges | {reviewed_results} |",
+        f"| … statement-reviewed only, interpretation withheld | {statement_reviewed_results} |",
         f"| Brcic–Yampolskiy survey rows catalogued (that source, complete) | {len(survey_results)} / {registry['survey']['expected_result_count']} |",
         f"| Survey rows with atlas Lean (any grade) | {sum(result['lean_artifact'] is not None for result in survey_results)} |",
         f"| … with six-corpus discovery evidence (that source, complete) | {len(search_evidence['results'])} / {len(survey_results)} |",
@@ -760,6 +770,10 @@ def render_applications(registry: dict) -> str:
         "  statement was reviewed, but not its AI-system interpretation. `REVIEWED`",
         "  means both were reviewed, with evidence under",
         "  [`docs/bridges/`](../bridges/).",
+        "- **A reviewed row does not review its classical mathematics.** The",
+        "  signature covers the AI-facing bridges named in its evidence. A line",
+        "  reading *row `REVIEWED`, not this line* is a classical proof sharing a",
+        "  row with a reviewed bridge; it carries no AI-system claim of its own.",
         "- **Unreviewed application lines are proposals.** A line on a non-`REVIEWED`",
         "  row helps a contributor find a possible use; it does not claim that the",
         "  model faithfully represents a deployed or real-world AI system.",
@@ -778,10 +792,23 @@ def render_applications(registry: dict) -> str:
             entries[tag], key=lambda pair: pair[1]["atlas_declaration"]
         ):
             status = result.get("ai_bridge_status")
+            # A reviewed row documents the AI-facing bridges named in its
+            # evidence, "not a re-review of every upstream classical proof"
+            # (methodology.md). Printing the row's status against a NEW_PROOF of
+            # classical mathematics would say the opposite, so a non-BRIDGE
+            # declaration on a reviewed row shows what it is instead.
+            if status in {"REVIEWED", "STATEMENT_REVIEWED"} and declaration.get(
+                "type"
+            ) != "BRIDGE":
+                cell = f"row `{status}`, not this line"
+            elif status:
+                cell = f"`{status}`"
+            else:
+                cell = "—"
             lines.append(
                 f"| {_md_cell(declaration['application'])} "
                 f"| `{declaration['atlas_declaration']}` "
-                f"| {result['id']} | {f'`{status}`' if status else '—'} |"
+                f"| {result['id']} | {cell} |"
             )
         lines.append("")
     # Rows with Lean but no application line are classical results the atlas

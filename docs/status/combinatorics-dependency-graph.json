@@ -1,0 +1,151 @@
+{
+  "note": "Edges are: for a definition, its type and body; for a theorem, its statement only. Lean's module system does not export proof terms.",
+  "cluster": "AISafetyAtlas.Combinatorics.",
+  "declarations": {
+    "AISafetyAtlas.Combinatorics.ClosedUnderPermutation": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Combinatorics.basisClass": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Combinatorics.histogram"
+      ]
+    },
+    "AISafetyAtlas.Combinatorics.basisClass_histogram_eq_permOrbit": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Combinatorics.basisClass",
+        "AISafetyAtlas.Combinatorics.histogram",
+        "AISafetyAtlas.Combinatorics.permOrbit"
+      ]
+    },
+    "AISafetyAtlas.Combinatorics.card_closedUnderPermutation": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Combinatorics.ClosedUnderPermutation"
+      ]
+    },
+    "AISafetyAtlas.Combinatorics.card_closedUnderPermutation_nonempty": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Combinatorics.ClosedUnderPermutation"
+      ]
+    },
+    "AISafetyAtlas.Combinatorics.card_nonempty_set_add_one": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.Combinatorics.card_nonempty_set_objective": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.Combinatorics.closedUnderPermutationEquivSet": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Combinatorics.ClosedUnderPermutation",
+        "AISafetyAtlas.Combinatorics.spectrum"
+      ]
+    },
+    "AISafetyAtlas.Combinatorics.closedUnderPermutationNonemptyEquivSet": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Combinatorics.ClosedUnderPermutation",
+        "AISafetyAtlas.Combinatorics.spectrum"
+      ]
+    },
+    "AISafetyAtlas.Combinatorics.closedUnderPermutation_iff_permOrbit_subset": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Combinatorics.ClosedUnderPermutation",
+        "AISafetyAtlas.Combinatorics.permOrbit"
+      ]
+    },
+    "AISafetyAtlas.Combinatorics.closedUnderPermutation_permOrbit": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Combinatorics.ClosedUnderPermutation",
+        "AISafetyAtlas.Combinatorics.permOrbit"
+      ]
+    },
+    "AISafetyAtlas.Combinatorics.exists_perm_adj_not_iff": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.Combinatorics.exists_perm_apply_eq_of_ne": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.Combinatorics.exists_perm_rel_not_iff": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.Combinatorics.exists_perm_rel_of_ne": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.Combinatorics.forall_adj_or_forall_not_adj_of_permInvariant": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.Combinatorics.forall_rel_of_permInvariant": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.Combinatorics.fraction_closedUnderPermutation": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Combinatorics.ClosedUnderPermutation"
+      ]
+    },
+    "AISafetyAtlas.Combinatorics.histogram": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Combinatorics.mem_permOrbit_self": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Combinatorics.permOrbit"
+      ]
+    },
+    "AISafetyAtlas.Combinatorics.permOrbit": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Combinatorics.preimage_image_spectrum": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Combinatorics.ClosedUnderPermutation",
+        "AISafetyAtlas.Combinatorics.spectrum"
+      ]
+    },
+    "AISafetyAtlas.Combinatorics.rel_diag_iff_of_permInvariant": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.Combinatorics.spectrum": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Combinatorics.spectrum_eq_iff_histogram_eq": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Combinatorics.histogram",
+        "AISafetyAtlas.Combinatorics.spectrum"
+      ]
+    },
+    "AISafetyAtlas.Combinatorics.spectrum_eq_iff_mem_permOrbit": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Combinatorics.permOrbit",
+        "AISafetyAtlas.Combinatorics.spectrum"
+      ]
+    },
+    "AISafetyAtlas.Combinatorics.surjective_spectrum": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Combinatorics.spectrum"
+      ]
+    }
+  }
+}

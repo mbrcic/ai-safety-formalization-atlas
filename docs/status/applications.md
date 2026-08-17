@@ -7,7 +7,7 @@ over which model, and where the statement comes from. A result appears under
 every area its row is tagged with. An application line is not itself a reviewed
 AI-system bridge.
 
-**31** applications across **13** areas; **2** rows carry a maintainer-reviewed AI-system
+**64** applications across **14** areas; **3** rows carry a maintainer-reviewed AI-system
 interpretation, with evidence under [`docs/bridges/`](../bridges/).
 
 ## Why these matter, and what they do not settle
@@ -40,6 +40,10 @@ That is the whole of what is being claimed. In particular:
   statement was reviewed, but not its AI-system interpretation. `REVIEWED`
   means both were reviewed, with evidence under
   [`docs/bridges/`](../bridges/).
+- **A reviewed row does not review its classical mathematics.** The
+  signature covers the AI-facing bridges named in its evidence. A line
+  reading *row `REVIEWED`, not this line* is a classical proof sharing a
+  row with a reviewed bridge; it carries no AI-system claim of its own.
 - **Unreviewed application lines are proposals.** A line on a non-`REVIEWED`
   row helps a contributor find a possible use; it does not claim that the
   model faithfully represents a deployed or real-world AI system.
@@ -74,6 +78,30 @@ declaration surface, including results with no AI-system reading, is in
 | Alignment undecidability: no total computable verifier decides whether an encoded agent satisfies a nontrivial behavioural safety specification. The decision problem of Melo, Máximo, Soma and Castro (arXiv:2408.08995; Sci. Rep. 2025), machine-checked as a reduction through `Verification.rice`. Nontriviality is witnessed in `Examples.NonVacuity`. | `AISafetyAtlas.Verification.AgentBehavior.no_behavioral_safety_verifier` | BY-012 | `REVIEWED` |
 | Verification of program behaviour: Rice's theorem restated for properties of partial input/output behaviour over Mathlib program codes. The interface the behavioural-verification results below reduce through. | `AISafetyAtlas.Verification.rice` | BY-012 | `REVIEWED` |
 
+## control-theory
+
+| What it says | Declaration | Row | Bridge |
+|---|---|---|---|
+| Theorem 6: a perfectly observable state makes the sensor's purification noise uninformative. The source notes the converse fails and it is not claimed. | `AISafetyAtlas.Control.condMutualInfo_eq_zero_of_sensorLoss_eq_zero` | BY-005 | `HUMAN_REVIEW` |
+| Lemma 8. Proved with no open-loop assumption at all: the source states it inside the open-loop section but its printed proof uses only that conditioning does not raise entropy. | `AISafetyAtlas.Control.entropyReduction_le_condEntropy_form` | BY-005 | `HUMAN_REVIEW` |
+| Theorem 9: no randomized open-loop controller removes more entropy than the best single action. The open-loop model enters as the explicit hypothesis IndepFun C (X,Z), the atlas's rendering of equation (opd). | `AISafetyAtlas.Control.entropyReduction_le_iSup_openLoopReduction` | BY-005 | `HUMAN_REVIEW` |
+| One bit gathered by a controller is worth at most one bit of extra entropy reduction over open-loop control. Feedback is bounded by, and only by, what the sensor actually learned. | `AISafetyAtlas.Control.entropyReduction_le_of_condEntropy_ge` | BY-005 | `HUMAN_REVIEW` |
+| Theorem 10 inside the independent-noise rendering of equation (48). Step (50) becomes an instance because each conditional law p(x\|c) is ranged over. The realization bridge from arbitrary printed transition kernels is isPurification_purifyMap, with openLoopMax_purifyMap showing the two reduction sets coincide, and maximum attainment is isGreatest_kernelOpenLoopMax; exists_kernelEntropyReduction_le_at_max states Theorem 10 against the realized maximum. | `AISafetyAtlas.Control.entropyReduction_le_openLoopMax` | BY-005 | `HUMAN_REVIEW` |
+| Actuation noise bounds control loss: a controller cannot be left more uncertain about the outcome than the channel disturbing it, and the slack is exactly what the outcome fails to reveal about the noise. | `AISafetyAtlas.Control.entropy_noise_sub_controlLoss` | BY-005 | `HUMAN_REVIEW` |
+| Regulation under limited information: in the noiseless alphabet-ceiling case used by Ashby's section 11/11 exercises, a regulator cannot reduce the outcome entropy below the disturbance entropy by more than log \|O\| per channel use. | `AISafetyAtlas.Control.entropy_outcome_ge_sub_channelCapacity` | BY-004 | row `REVIEWED`, not this line |
+| Theorem 9's attainment clause: for a finite nonempty action alphabet, some constant action reaches the supremum of the pure open-loop reductions. This states the existential conclusion that entropyReduction_const alone did not. | `AISafetyAtlas.Control.exists_entropyReduction_const_eq_iSup_openLoopReduction` | BY-005 | `HUMAN_REVIEW` |
+| Equation (28)'s second displayed line, verbatim: the kernel's control loss is sum over x of p(x) times sum over c of H(X'\|x,c) p(c\|x). The objective is linear in p(c\|x), which is what every other result in the bridge rests on. | `AISafetyAtlas.Control.kernelControlLoss_eq_sum` | BY-005 | `HUMAN_REVIEW` |
+| A minimizer of equation (28), constructed. Deterministic state feedback playing an argmin action at each state. This is what discharges the attainment hypothesis of Theorem 2's equality case, which the source itself never exhibits. | `AISafetyAtlas.Control.minControlLoss_inputPolicies_attained` | BY-005 | `HUMAN_REVIEW` |
+| The representation gap is zero: the infimum over the controllers realizable on one sample space equals the source's minimum over all conditional distributions. Requires finite alphabets, which is the printed setting. | `AISafetyAtlas.Control.minControlLoss_inputPolicies_eq_kernelMin` | BY-005 | `HUMAN_REVIEW` |
+| Control limits: the actuation noise bounds the control loss of the best available controller, not merely of the one in hand. Touchette-Lloyd Theorem 2 at the printed L_C of eq. (28). | `AISafetyAtlas.Control.minControlLoss_le_entropy_noise` | BY-005 | `HUMAN_REVIEW` |
+| Corollary 7. The statement is I(X;C,Z) = I(X;C) with a comma, checked against both the published page and the arXiv TeX source. | `AISafetyAtlas.Control.mutualInfo_prod_eq_of_sensorLoss_eq_zero` | BY-005 | `HUMAN_REVIEW` |
+| Theorem 5, whose proof the source omits as following from well-known properties of entropy. The property is entropy_eq_zero_iff, which is not in the entropy layer and is proved here. | `AISafetyAtlas.Control.perfectlyObservable_iff_sensorLoss_eq_zero` | BY-005 | `HUMAN_REVIEW` |
+| Why a false verdict is not a clearance: a table where the counting bound is silent and forcing succeeds, so 'not obstructed' can never be read as 'not possible'. | `AISafetyAtlas.Oversight.exists_cannotForce_false_and_forces` | LAND-OVERSIGHT-VARIETY-001 | — |
+| Oversight: control without observation. The boundary of the counting bound, since a constant column is exactly where its structural hypothesis fails. | `AISafetyAtlas.Oversight.forces_of_constant_effect` | LAND-OVERSIGHT-VARIETY-001 | — |
+| Oversight: the two capacities stated in one place - unknowable hazard, forced outcome. | `AISafetyAtlas.Oversight.forces_of_constant_effect_of_not_knowable` | LAND-OVERSIGHT-VARIETY-001 | — |
+| The agreement theorem behind atlas-check's variety kind: a true verdict from the executable checker rules out every policy over every observation type, so a consumer who cannot read Lean still gets the quantifier the theorem has. | `AISafetyAtlas.Oversight.not_forces_of_cannotForce` | LAND-OVERSIGHT-VARIETY-001 | — |
+| The AI-system reading of the law: an oversight regime whose interventions are fewer than the situations it is answerable for cannot hold the outcome to a single target, whatever it observes. Necessary condition only, and only for forcing every situation with certainty. Reviewed 2026-08-17; the signature is scoped to this bridge and not to Ashby's law in general. Package: docs/bridges/review-oversight-varietybound.md. | `AISafetyAtlas.Oversight.not_forces_of_card_lt` | BY-004 | `REVIEWED` |
+
 ## decision-theory
 
 | What it says | Declaration | Row | Bridge |
@@ -91,6 +119,25 @@ declaration surface, including results with no AI-system reading, is in
 
 | What it says | Declaration | Row | Bridge |
 |---|---|---|---|
+| Theorem 6: a perfectly observable state makes the sensor's purification noise uninformative. The source notes the converse fails and it is not claimed. | `AISafetyAtlas.Control.condMutualInfo_eq_zero_of_sensorLoss_eq_zero` | BY-005 | `HUMAN_REVIEW` |
+| Lemma 8. Proved with no open-loop assumption at all: the source states it inside the open-loop section but its printed proof uses only that conditioning does not raise entropy. | `AISafetyAtlas.Control.entropyReduction_le_condEntropy_form` | BY-005 | `HUMAN_REVIEW` |
+| Theorem 9: no randomized open-loop controller removes more entropy than the best single action. The open-loop model enters as the explicit hypothesis IndepFun C (X,Z), the atlas's rendering of equation (opd). | `AISafetyAtlas.Control.entropyReduction_le_iSup_openLoopReduction` | BY-005 | `HUMAN_REVIEW` |
+| One bit gathered by a controller is worth at most one bit of extra entropy reduction over open-loop control. Feedback is bounded by, and only by, what the sensor actually learned. | `AISafetyAtlas.Control.entropyReduction_le_of_condEntropy_ge` | BY-005 | `HUMAN_REVIEW` |
+| Theorem 10 inside the independent-noise rendering of equation (48). Step (50) becomes an instance because each conditional law p(x\|c) is ranged over. The realization bridge from arbitrary printed transition kernels is isPurification_purifyMap, with openLoopMax_purifyMap showing the two reduction sets coincide, and maximum attainment is isGreatest_kernelOpenLoopMax; exists_kernelEntropyReduction_le_at_max states Theorem 10 against the realized maximum. | `AISafetyAtlas.Control.entropyReduction_le_openLoopMax` | BY-005 | `HUMAN_REVIEW` |
+| Actuation noise bounds control loss: a controller cannot be left more uncertain about the outcome than the channel disturbing it, and the slack is exactly what the outcome fails to reveal about the noise. | `AISafetyAtlas.Control.entropy_noise_sub_controlLoss` | BY-005 | `HUMAN_REVIEW` |
+| Regulation under limited information: in the noiseless alphabet-ceiling case used by Ashby's section 11/11 exercises, a regulator cannot reduce the outcome entropy below the disturbance entropy by more than log \|O\| per channel use. | `AISafetyAtlas.Control.entropy_outcome_ge_sub_channelCapacity` | BY-004 | row `REVIEWED`, not this line |
+| Theorem 9's attainment clause: for a finite nonempty action alphabet, some constant action reaches the supremum of the pure open-loop reductions. This states the existential conclusion that entropyReduction_const alone did not. | `AISafetyAtlas.Control.exists_entropyReduction_const_eq_iSup_openLoopReduction` | BY-005 | `HUMAN_REVIEW` |
+| Equation (28)'s second displayed line, verbatim: the kernel's control loss is sum over x of p(x) times sum over c of H(X'\|x,c) p(c\|x). The objective is linear in p(c\|x), which is what every other result in the bridge rests on. | `AISafetyAtlas.Control.kernelControlLoss_eq_sum` | BY-005 | `HUMAN_REVIEW` |
+| A minimizer of equation (28), constructed. Deterministic state feedback playing an argmin action at each state. This is what discharges the attainment hypothesis of Theorem 2's equality case, which the source itself never exhibits. | `AISafetyAtlas.Control.minControlLoss_inputPolicies_attained` | BY-005 | `HUMAN_REVIEW` |
+| The representation gap is zero: the infimum over the controllers realizable on one sample space equals the source's minimum over all conditional distributions. Requires finite alphabets, which is the printed setting. | `AISafetyAtlas.Control.minControlLoss_inputPolicies_eq_kernelMin` | BY-005 | `HUMAN_REVIEW` |
+| Control limits: the actuation noise bounds the control loss of the best available controller, not merely of the one in hand. Touchette-Lloyd Theorem 2 at the printed L_C of eq. (28). | `AISafetyAtlas.Control.minControlLoss_le_entropy_noise` | BY-005 | `HUMAN_REVIEW` |
+| Corollary 7. The statement is I(X;C,Z) = I(X;C) with a comma, checked against both the published page and the arXiv TeX source. | `AISafetyAtlas.Control.mutualInfo_prod_eq_of_sensorLoss_eq_zero` | BY-005 | `HUMAN_REVIEW` |
+| Theorem 5, whose proof the source omits as following from well-known properties of entropy. The property is entropy_eq_zero_iff, which is not in the entropy layer and is proved here. | `AISafetyAtlas.Control.perfectlyObservable_iff_sensorLoss_eq_zero` | BY-005 | `HUMAN_REVIEW` |
+| Estimation limits: the conditional entropy left after an estimate is bounded by the error probability times the log of the alphabet, plus one bit. Cover and Thomas Theorem 2.10.1, with both printed constants as instances of a single lemma. | `AISafetyAtlas.InformationTheory.fano_of_log_le` | LAND-FANO-001 | — |
+| Markov chains: the book's defining factorization (2.117) and conditional independence are the same condition. Cover and Thomas (2.118), derived rather than adopted as a convention. | `AISafetyAtlas.InformationTheory.isMarkovChain_iff_measure_factorizes` | LAND-DPI-001 | — |
+| Markov chains: the book's defining factorization at point masses and conditional independence are the same condition. Cover and Thomas (2.118), derived at the printed hypothesis in both directions. | `AISafetyAtlas.InformationTheory.isMarkovChain_iff_measure_factorizes_singleton` | LAND-DPI-001 | — |
+| The equality case, which the chapter asserts inside the proof of 2.8.1 without proving it. | `AISafetyAtlas.InformationTheory.mutualInfo_eq_iff_isMarkovChain` | LAND-DPI-001 | — |
+| Post-processing cannot create information: along a Markov chain X -> Y -> Z, no function of Y tells you more about X than Y does. Cover and Thomas Theorem 2.8.1. | `AISafetyAtlas.InformationTheory.mutualInfo_le_of_isMarkovChain` | LAND-DPI-001 | — |
 | Positive boundary: injective restriction admits a fibre inference map that exactly measures every global state. | `AISafetyAtlas.Knowledge.Embedded.Composition.measuresAll_fibreInference_of_injective` | LAND-SELFMEAS-003 | — |
 | Positive boundary: bijective restriction gives fibre inference that is both meshing and exactly measurable for every global state. | `AISafetyAtlas.Knowledge.Embedded.Composition.meshing_and_measuresAll_fibreInference_of_bijective` | LAND-SELFMEAS-003 | — |
 | Physical complement model plus meshing: nontrivial remainder rules out exact measurement of every product state (Breuer Prop. 1 via derived ProperInclusion). | `AISafetyAtlas.Knowledge.Embedded.Composition.no_meshing_measures_all_of_nontrivial_remainder` | LAND-SELFMEAS-003 | — |
@@ -102,6 +149,10 @@ declaration surface, including results with no AI-system reading, is in
 | Abstract embedded measurement: the exact meshing condition entails the source's surjective restriction setup. Breuer (1995), section 3.3 and section 3.5. | `AISafetyAtlas.Knowledge.Embedded.Meshing.restrict_surjective` | LAND-SELFMEAS-002 | — |
 | Abstract embedded measurement: equal restriction fibres cannot be mutually separated by a meshing inference map. Breuer (1995), Proposition 2. | `AISafetyAtlas.Knowledge.Embedded.no_meshing_inference_distinguishes` | LAND-SELFMEAS-002 | — |
 | Abstract embedded measurement: proper inclusion plus meshing rules out exact measurement of every global state. Breuer (1995), Proposition 1. | `AISafetyAtlas.Knowledge.Embedded.no_meshing_inference_measures_all_states` | LAND-SELFMEAS-002 | — |
+| A property recoverable from an observation leaves that observation no uncertainty about it. The entropy side of the knowability kernel. | `AISafetyAtlas.Knowledge.condEntropy_eq_zero_of_knowable` | LAND-KNOWENTROPY-001 | — |
+| How badly unknowability bites: a floor on the error rate of every decoder built from the observation, uniform over decoders. | `AISafetyAtlas.Knowledge.le_errorProb_of_decoder` | LAND-KNOWENTROPY-001 | — |
+| A positive conditional entropy certifies that no decoder exists, without exhibiting the pair the observation confuses. | `AISafetyAtlas.Knowledge.not_knowable_of_condEntropy_ne_zero` | LAND-KNOWENTROPY-001 | — |
+| The AI-system reading of the law: an oversight regime whose interventions are fewer than the situations it is answerable for cannot hold the outcome to a single target, whatever it observes. Necessary condition only, and only for forcing every situation with certainty. Reviewed 2026-08-17; the signature is scoped to this bridge and not to Ashby's law in general. Package: docs/bridges/review-oversight-varietybound.md. | `AISafetyAtlas.Oversight.not_forces_of_card_lt` | BY-004 | `REVIEWED` |
 
 ## interpretability
 
@@ -120,14 +171,23 @@ declaration surface, including results with no AI-system reading, is in
 | Abstract embedded measurement: the exact meshing condition entails the source's surjective restriction setup. Breuer (1995), section 3.3 and section 3.5. | `AISafetyAtlas.Knowledge.Embedded.Meshing.restrict_surjective` | LAND-SELFMEAS-002 | — |
 | Abstract embedded measurement: equal restriction fibres cannot be mutually separated by a meshing inference map. Breuer (1995), Proposition 2. | `AISafetyAtlas.Knowledge.Embedded.no_meshing_inference_distinguishes` | LAND-SELFMEAS-002 | — |
 | Abstract embedded measurement: proper inclusion plus meshing rules out exact measurement of every global state. Breuer (1995), Proposition 1. | `AISafetyAtlas.Knowledge.Embedded.no_meshing_inference_measures_all_states` | LAND-SELFMEAS-002 | — |
-| Bounded-horizon process self-awareness: some available atomic or composite internal process has no available complete observer. Brcic and Yampolskiy (2023), Theorem 4.8 process-compositional interpretation. | `AISafetyAtlas.SelfAwareness.Model.limited_self_awareness` | BY-044 | `STATEMENT_REVIEWED` |
-| Complete process awareness: every maximal available composite lacks an available internal observer; the source-facing existential theorem follows by finite maximality. | `AISafetyAtlas.SelfAwareness.Model.not_agentAware_of_maximal` | BY-044 | `STATEMENT_REVIEWED` |
-| Complete process awareness: a constituent cannot actively observe and predictively model the composite containing that same awareness activity under strict positive awareness cost. Brcic and Yampolskiy (2023), Proposition 4.7 formal core. | `AISafetyAtlas.SelfAwareness.Model.not_aware_of_le` | BY-044 | `STATEMENT_REVIEWED` |
+| A property recoverable from an observation leaves that observation no uncertainty about it. The entropy side of the knowability kernel. | `AISafetyAtlas.Knowledge.condEntropy_eq_zero_of_knowable` | LAND-KNOWENTROPY-001 | — |
+| How badly unknowability bites: a floor on the error rate of every decoder built from the observation, uniform over decoders. | `AISafetyAtlas.Knowledge.le_errorProb_of_decoder` | LAND-KNOWENTROPY-001 | — |
+| A positive conditional entropy certifies that no decoder exists, without exhibiting the pair the observation confuses. | `AISafetyAtlas.Knowledge.not_knowable_of_condEntropy_ne_zero` | LAND-KNOWENTROPY-001 | — |
+| Bounded-horizon process self-awareness: some available atomic or composite internal process has no available complete observer. Brcic and Yampolskiy (2023), Theorem 4.8 process-compositional interpretation. | `AISafetyAtlas.SelfAwareness.Model.limited_self_awareness` | BY-044 | row `STATEMENT_REVIEWED`, not this line |
+| Complete process awareness: every maximal available composite lacks an available internal observer; the source-facing existential theorem follows by finite maximality. | `AISafetyAtlas.SelfAwareness.Model.not_agentAware_of_maximal` | BY-044 | row `STATEMENT_REVIEWED`, not this line |
+| Complete process awareness: a constituent cannot actively observe and predictively model the composite containing that same awareness activity under strict positive awareness cost. Brcic and Yampolskiy (2023), Proposition 4.7 formal core. | `AISafetyAtlas.SelfAwareness.Model.not_aware_of_le` | BY-044 | row `STATEMENT_REVIEWED`, not this line |
 
 ## learning-theory
 
 | What it says | Declaration | Row | Bridge |
 |---|---|---|---|
+| Igel-Toussaint Theorem 3: the permutation-closed priors number 2^C(\|X\|+\|Y\|-1,\|X\|) - 1 out of 2^(\|Y\|^\|X\|) - 1, so the condition characterizing No Free Lunch is met by almost nothing. fraction_closedUnderPermutation is the printed fraction in Q. | `AISafetyAtlas.Combinatorics.card_closedUnderPermutation_nonempty` | BY-021 | `HUMAN_REVIEW` |
+| Igel-Toussaint Theorem 4: a non-trivial neighbourhood relation on the search space is not invariant under permutations of it. Stated for an arbitrary binary relation, since the proof uses neither the symmetry print assumes nor irreflexivity. Note the deliberate non-claim: the step from here to 'this family of objectives is not permutation-closed' is print's Examples 2 and 3 and is NOT formalized. | `AISafetyAtlas.Combinatorics.exists_perm_rel_not_iff` | BY-021 | `HUMAN_REVIEW` |
+| The exact boundary of No Free Lunch on the prior axis, over the adaptive non-repeating class the sources quantify over: aggregate performance is algorithm-independent precisely when the weighting of objectives is invariant under permutations of the search domain. This is the headline statement of the row; the uniform cores below are its constant-weight case. | `AISafetyAtlas.Learning.nfl_adaptive_iff_permInvariant` | BY-021 | `HUMAN_REVIEW` |
+| The exact boundary of no free lunch on the prior axis: every schedule performs equally under a weighting of objectives precisely when that weighting is invariant under permutations of the search domain. Real priors over learning problems are structured, hence not permutation-symmetric, hence outside the hypothesis — which is what lets a consumer say where NFL does not bite. | `AISafetyAtlas.Learning.nfl_iff_permInvariant` | BY-021 | `HUMAN_REVIEW` |
+| No Free Lunch for randomized search heuristics, at Droste-Jansen-Wegener's own definition of one: a distribution over the finitely many deterministic strategies. Wider than print on the mixture weight, which here may be signed and needs only equal total mass. | `AISafetyAtlas.Learning.nfl_mixture_of_permInvariant` | BY-021 | `HUMAN_REVIEW` |
+| The same result with the randomness drawn at each step rather than over whole strategies, which is the other picture the literature uses. surjective_induced_playChoice records that it reaches the entire mixture class. | `AISafetyAtlas.Learning.nfl_stochastic_of_permInvariant` | BY-021 | `HUMAN_REVIEW` |
 | Optimization: any two injective non-adaptive m-point schedules have equal uniformly-averaged cost-sequence score. Finite-domain core of Wolpert and Macready (1997). | `AISafetyAtlas.Learning.no_free_lunch` | BY-021 | `HUMAN_REVIEW` |
 | Supervised learning: for finite domains and a fixed training set, any two learners have equal off-training-set error averaged uniformly over targets. Finite-domain core of Wolpert (1996). | `AISafetyAtlas.Learning.no_free_lunch_supervised` | BY-020 | `HUMAN_REVIEW` |
 
@@ -144,6 +204,10 @@ declaration surface, including results with no AI-system reading, is in
 | What it says | Declaration | Row | Bridge |
 |---|---|---|---|
 | Oversight: a hazard is decidable from what a coalition of principals may observe exactly when no two executions collide on that coalition's view. In-tree model of emitted interfaces and coalition access. | `AISafetyAtlas.Oversight.JointObservation.covers_iff_no_collision` | LAND-JOINTOBS-001 | — |
+| Why a false verdict is not a clearance: a table where the counting bound is silent and forcing succeeds, so 'not obstructed' can never be read as 'not possible'. | `AISafetyAtlas.Oversight.exists_cannotForce_false_and_forces` | LAND-OVERSIGHT-VARIETY-001 | — |
+| Oversight: control without observation. The boundary of the counting bound, since a constant column is exactly where its structural hypothesis fails. | `AISafetyAtlas.Oversight.forces_of_constant_effect` | LAND-OVERSIGHT-VARIETY-001 | — |
+| Oversight: the two capacities stated in one place - unknowable hazard, forced outcome. | `AISafetyAtlas.Oversight.forces_of_constant_effect_of_not_knowable` | LAND-OVERSIGHT-VARIETY-001 | — |
+| The agreement theorem behind atlas-check's variety kind: a true verdict from the executable checker rules out every policy over every observation type, so a consumer who cannot read Lean still gets the quantifier the theorem has. | `AISafetyAtlas.Oversight.not_forces_of_cannotForce` | LAND-OVERSIGHT-VARIETY-001 | — |
 
 ## preference-inference
 

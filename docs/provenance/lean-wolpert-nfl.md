@@ -111,7 +111,8 @@ kernel-clean:
   *demonstrates* distinctions for non-homogeneous loss). It is the loss-axis analog
   of the Schumacher–Vose–Whitley (GECCO 2001) / Igel–Toussaint (2004,
   doi `10.1023/B:JMMA.0000049381.24625.f7`) "closed under permutation"
-  necessary-and-sufficient NFL characterization, which lives on the prior axis.
+  necessary-and-sufficient NFL characterization, which lives on the prior axis
+  and is now formalized in its own right — see [CT-10](#ct-10--the-sharp-closed-under-permutation-characterization) below.
 - **Full distribution, not just the mean.** For homogeneous `ℓ` and *any*
   functional `Ψ` of the off-training-set loss vector,
 
@@ -180,6 +181,121 @@ Not claimed EXACT/EQUIVALENT to the full papers:
   deterministic homogeneous-loss **full-distribution** core is now covered (see
   strengthening above); general (non-homogeneous) loss is genuinely
   learner-dependent and correctly excluded.
+
+## CT-10 — the sharp closed-under-permutation characterization
+
+Landed 2026-08-16 in
+[`AISafetyAtlas/Learning/Sharp.lean`](../../AISafetyAtlas/Learning/Sharp.lean),
+with worked readings in
+[`AISafetyAtlas/Examples/Learning/Sharp.lean`](../../AISafetyAtlas/Examples/Learning/Sharp.lean).
+This closes the prior axis, as the loss axis was closed by
+`homogeneous_iff_learner_indep`.
+
+**Sources.** Schumacher, Vose and Whitley, *The No Free Lunch and Problem
+Description Length* (GECCO 2001) — the first closure-under-permutation
+characterization, stated for a *set* of objectives. Igel and Toussaint, *A
+No-Free-Lunch Theorem for Non-Uniform Distributions of Target Functions*
+(J. Math. Modelling and Algorithms 3(4), 2004,
+doi `10.1023/B:JMMA.0000049381.24625.f7`) — both directions, for a
+*distribution*. Catalogued as `schumacher-vose-whitley-2001` and
+`igel-toussaint-2004`.
+
+**Which texts were read.** All three, in their published form. The 2004 JMMA
+statement was additionally checked against arXiv:`cs/0303032` (Theorem 6,
+"non-uniform sharpened NFL") and Igel's later survey chapter, which agree with
+it:
+
+* **Igel–Toussaint 2004, Theorem 5** (*non-uniform sharpened NFL*): the
+  condition is `f, g ∈ B_h ⇒ p(f) = p(g)`, and their Lemma 1(2) identifies the
+  basis class `B_h` with the permutation orbit `⋃_π {f ∘ π}` — so it is exactly
+  `PermInvariant`. The conclusion is quantified over any two algorithms, any
+  `k ∈ ℝ`, any performance measure, **and any `m ∈ {1, …, |X|}`**. The algorithms
+  are *non-repeating black-box search algorithms*, which are adaptive: they
+  choose each next point from the history of prior explorations.
+* **Schumacher–Vose–Whitley 2001**: the sharpened NFL is *"a No Free Lunch
+  result holds over the set of functions `F` if and only if `F` is closed under
+  permutation"*, over the same adaptive algorithm class. Their **NFL4** is
+  worth noting for the weight axis: they observe that a *weighted* overall
+  measure "is not generally subject to the No Free Lunch theorem except in the
+  case where the functions are equally weighted", and stop there. The extension
+  to non-uniform weights is Igel–Toussaint's, and the extension to arbitrary
+  signed weights is this module's.
+
+The printed
+condition in every version is that the weight is constant on each basis class,
+which by their Lemma 1 is the same condition as `PermInvariant`.
+
+**The statement.** `nfl_iff_permInvariant`: aggregate performance is
+schedule-independent, for every cost-sequence performance measure and every
+sample length, **iff** the weighting of objectives satisfies
+`P (f ∘ π) = P f` for every permutation `π` of the search domain.
+
+**Grading: `RELATED`, and the difference cuts both ways.** This was corrected on
+2026-08-16, having first been recorded as `EQUIVALENT` on a misreading; the
+correction is kept visible here rather than quietly overwritten, and reading the
+published papers the same day confirmed the corrected reading.
+
+| axis | printed | atlas | effect |
+|---|---|---|---|
+| weight | a probability distribution over objectives | **any** real weight — no nonnegativity, no normalization | atlas is more general |
+| condition | constant on each basis class | `P (f ∘ π) = P f` | the same condition, by their Lemma 1 |
+| sample length | every `m ∈ {1, …, |X|}` | every `m` | the same |
+| algorithms | non-repeating black-box search algorithms, **adaptive** | `AdaptiveRule` with `∀ c, Injective (ruleVisit r c)` — the same class | the same, since `nfl_adaptive_of_permInvariant` |
+
+The two halves are no longer separated by the algorithm axis, and what remains
+separates them in one direction only:
+
+| declaration | relative to the source |
+|---|---|
+| `permInvariant_of_nfl` | **stronger**: it assumes schedule-independence only at the single length `m = card X`, only over non-adaptive schedules, and only at indicator measures. A weaker hypothesis for the same conclusion. |
+| `nfl_adaptive_of_permInvariant` | **the printed class**: it concludes schedule-independence for adaptive non-repeating rules, quantified over every `m` and every cost-sequence measure, exactly as the source does. It exceeds print only on the weight axis. |
+| `nfl_of_permInvariant` | the fixed-schedule special case, kept because it is the form the rest of the atlas consumes — not a scope claim. |
+
+Two corrections are kept visible here rather than quietly overwritten.
+
+* The sufficiency half does **not** sharpen the source by quantifying over every
+  sample length: Theorem 5 quantifies over `m` as well.
+* The algorithm axis is met. `nfl_adaptive_of_permInvariant` proves sufficiency
+  over `AdaptiveRule` with the no-revisit hypothesis, which is the printed
+  non-repeating black-box class; the proof is a fibre reindexing that builds the
+  matching permutation from the cost sequence alone.
+
+**Consequence for scope.** `CT-10` widens the **prior** axis and now meets the
+source's algorithm class. **The stochastic axis is closed for both `CT-10`
+sources**: Igel-Toussaint's cited randomized class is Droste-Jansen-Wegener's,
+and `mixtureTrace` is their definition of it, while Schumacher-Vose-Whitley open
+their §2 with *"deterministic non-repeating blackbox search algorithms"*, which
+is `AdaptiveRule` and never carried a gap. What remains out of scope is
+time-varying objectives, and Wolpert-Macready 1997's own stochastic algorithms,
+which are a different paper and a different row.
+
+**Which row these records live on.** `BY-021` (No Free Lunch — optimization),
+not `BY-020` (supervised learning). Both `CT-10` sources quantify over
+non-repeating black-box *search* algorithms — Igel–Toussaint's Figure 1 is
+captioned "the optimization scenario considered in NFL-theorems" — so the
+characterization is about the optimization row. The records sat on `BY-020`
+until 2026-08-16 and were refiled then; `BY-020` keeps `no_free_lunch_supervised`
+and the loss-axis `iff`, which are Wolpert 1996.
+
+**The characterization is not vacuous in either direction.** Both cases are
+inhabited, which is what makes it a characterization rather than a restatement:
+
+* `Examples.Learning.nfl_fails_off_permInvariant` — a two-point domain, a weight
+  concentrated on the identity objective, and two one-query schedules scoring
+  `0` and `1`. Drop the hypothesis and NFL genuinely fails.
+* `Examples.Learning.nfl_over_constants` — the constant objectives form a
+  *proper* permutation-closed subset, so NFL holds over a non-uniform prior.
+  This is Schumacher–Vose–Whitley's set form instantiated, via
+  `permInvariant_of_closedUnderPermutation`.
+
+**Subsumption.** The uniform cores are the constant-weight case;
+`no_free_lunch_embedding_of_sharp` derives `no_free_lunch_embedding` from the
+sharp theorem. The original proofs are independent and are retained — the
+derivation is recorded to show the relationship, not to replace them.
+
+**Axioms.** Every declaration is within `{propext, Classical.choice,
+Quot.sound}`; `closedUnderPermutation_constants` needs only `{Quot.sound}`. No
+`sorry`, no `native_decide`.
 
 ## Explicit non-coverage
 

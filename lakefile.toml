@@ -15,6 +15,22 @@ name = "Foundation"
 git = "https://github.com/FormalizedFormalLogic/Foundation.git"
 rev = "b47cf447255addf88a5d72781d0d29641948eb6e"
 
+# Shannon entropy, conditional entropy, mutual information and the
+# data-processing inequalities, over a general measure. Pinned by commit rather
+# than by tag: PFR is a research development, not a released library, and its
+# API is not stable across revisions.
+#
+# This revision requires mathlib at `v4.31.0`, the same rev string this file
+# pins, so the two resolve to the identical Mathlib commit and every shared
+# transitive dependency already matches. See docs/guide/methodology.md for why
+# the information-theoretic primitives are taken from a shared library rather
+# than rebuilt: the Wolpert layer under AISafetyAtlas.Inference is unaffected
+# and is not migrated.
+[[require]]
+name = "PFR"
+git = "https://github.com/teorth/pfr.git"
+rev = "38e94172b72c8ee8ad64b6365dfc22e559c62ebe"
+
 [[lean_lib]]
 name = "AISafetyAtlas"
 

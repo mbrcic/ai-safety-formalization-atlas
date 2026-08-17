@@ -13,22 +13,26 @@ Root `AISafetyAtlas` also imports nested modules
 
 ## Primary surface
 
-| Role | Declaration | One-line |
-|---|---|---|
-| **Boundary / law** | `exists_planner` | Every reward explains every behaviour under some planner |
-| **Boundary / law** | `exists_reward` | Every behaviour in a planner's image has a realizing reward |
-| **Law** | `lemma_six` | Three degenerate pairs are compatible with a policy |
-| **Source form** | `Source.ReasonableForF.proposition_seven` | Prop. 7 at distance **c** (source parameterization) |
-| **Source form** | `Source.ReasonableForF.proposition_eight` | Prop. 8 both directions at **c** |
-| **Helper** | `ReasonableLanguage.proposition_seven` | Reparameterized Prop. 7 at **2c** (used by plain-K path) |
-| **Specialization** | `explanation_complexity_eq_behaviour` | Plain-K bounds for one canonical encoding |
-| **Law** | `RegretModel.cannot_rule_out_half_maximal_regret` | §4.1.2 style bridge; needs `HalfMaximalRegretBound` certificate |
-| **Definition** | `OverrideModel.OverridesFor` | Definition 11 relativized to a compatible pair |
-| **Boundary** | `Source.ReasonableForF.theorem_two_conditional` | Informal Thm 2 **only if** Conjecture 9 predicate holds |
+| Role | Declaration | Import | One-line |
+|---|---|---|---|
+| **Boundary / law** | `exists_planner` | this module | Every reward explains every behaviour under some planner |
+| **Boundary / law** | `exists_reward` | this module | Every behaviour in a planner's image has a realizing reward |
+| **Law** | `lemma_six` | this module | Three degenerate pairs are compatible with a policy |
+| **Source form** | `Source.ReasonableForF.proposition_seven` | `.SourceComplexity` | Prop. 7 at distance **c** (source parameterization) |
+| **Source form** | `Source.ReasonableForF.proposition_eight` | `.SourceComplexity` | Prop. 8 both directions at **c** |
+| **Helper** | `ReasonableLanguage.proposition_seven` | `.Reasonable` | Reparameterized Prop. 7 at **2c** (used by plain-K path) |
+| **Specialization** | `explanation_complexity_eq_behaviour` | `.Complexity` | Plain-K bounds for one canonical encoding |
+| **Law** | `RegretModel.cannot_rule_out_half_maximal_regret` | `.Regret` | §4.1.2 style bridge; needs `HalfMaximalRegretBound` certificate |
+| **Definition** | `OverrideModel.OverridesFor` | `.Override` | Definition 11 relativized to a compatible pair |
+| **Boundary** | `Source.ReasonableForF.theorem_two_conditional` | `.SourceComplexity` | Informal Thm 2 **only if** Conjecture 9 predicate holds |
 
 This file defines the core planner/reward API (`Planner`, `Explains`, Theorem 1
 halves, degenerate pairs). Nested modules hold complexity, regret, and override
-layers.
+layers, and **this module does not import them** — it is a peer, not a facade,
+so seven of the rows above need the import named beside them (`.Regret` is
+`AISafetyAtlas.Preference.Regret`, and so on) or `AISafetyAtlas` for all of
+them. The `Import` column says which; the `Declaration` column is the name, and
+is independent of it.
 
 ## Statement intent (this file)
 

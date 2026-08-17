@@ -2,6 +2,10 @@
   "note": "Edges are: for a definition, its type and body; for a theorem, its statement only. Lean's module system does not export proof terms.",
   "cluster": "AISafetyAtlas.Oversight.",
   "declarations": {
+    "AISafetyAtlas.Oversight.Forces": {
+      "kind": "definition",
+      "deps": []
+    },
     "AISafetyAtlas.Oversight.JointObservation.CandidateFamily": {
       "kind": "definition",
       "deps": [
@@ -501,6 +505,43 @@
         "AISafetyAtlas.Oversight.JointObservation.EvidenceArchitecture.Execution",
         "AISafetyAtlas.Oversight.JointObservation.decidableEqPostprocessOutput",
         "AISafetyAtlas.Oversight.JointObservation.worstResidual"
+      ]
+    },
+    "AISafetyAtlas.Oversight.cannotForce": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Oversight.exists_cannotForce_false_and_forces": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Oversight.Forces",
+        "AISafetyAtlas.Oversight.cannotForce"
+      ]
+    },
+    "AISafetyAtlas.Oversight.forces_of_constant_effect": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Oversight.Forces"
+      ]
+    },
+    "AISafetyAtlas.Oversight.forces_of_constant_effect_of_not_knowable": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Knowledge.Knowable",
+        "AISafetyAtlas.Oversight.Forces"
+      ]
+    },
+    "AISafetyAtlas.Oversight.not_forces_of_cannotForce": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Oversight.Forces",
+        "AISafetyAtlas.Oversight.cannotForce"
+      ]
+    },
+    "AISafetyAtlas.Oversight.not_forces_of_card_lt": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Oversight.Forces"
       ]
     }
   }

@@ -33,7 +33,7 @@ compute and hand back a specific pair, and a `Fintype`'s underlying `Multiset` f
 no canonical order from which to select one, so selection there routes through choice
 and the result neither compiles nor reduces. `decideCoverage` therefore takes an
 `ExecutionEnum` — the executions listed, plus a completeness proof. For a concrete
-architecture that is a literal, and it is exactly the data a reviewer wants to see.
+architecture that is a literal, and it is exactly the data the decision needs.
 
 `DecidableEq q.Output` compares candidate outputs. Both are assumptions of the
 *checker*, deliberately not fields of `EvidenceArchitecture` or

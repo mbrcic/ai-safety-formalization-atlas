@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """Keep the Wolpert 2008 status tally honest.
 
-Four review rounds in a row shipped a coverage figure that did not match the table
-it described: ``34/5`` in the facade against ``29/10`` in the provenance and the
-registry, none of them equal to the table's own contents. Prose that describes a
-table must be derived from it, not written beside it.
+A coverage figure that did not match the table it described shipped repeatedly:
+``34/5`` in the facade against ``29/10`` in the provenance and the registry, none
+of them equal to the table's own contents. Prose that describes a table must be
+derived from it, not written beside it.
 
 This script recomputes the tally from the one authoritative table -- the
 transcription table in ``docs/provenance/wolpert-inference-devices.md`` -- and

@@ -105,6 +105,22 @@
   .rwhat b{color:var(--ink); font-weight:600;}
   h3 + .scroll table thead{display:none;}
   h3 + .scroll{margin-top:10px;}
+
+  /* Result filter. Progressive enhancement: with scripting off the input is
+     hidden and every row stays on the page, so nothing is reachable only
+     through JavaScript. */
+  .filter{display:none; align-items:center; gap:14px; margin:24px 0 4px; flex-wrap:wrap;}
+  .filter input{
+    flex:1 1 340px; min-width:0; font:inherit; font-size:16.5px;
+    color:var(--ink); background:var(--panel);
+    border:1px solid var(--rule-2); border-radius:3px; padding:10px 13px;
+    -webkit-appearance:none; appearance:none;
+  }
+  .filter input::placeholder{color:var(--ink-2); opacity:1;}
+  .filter input:focus-visible{outline:2px solid var(--accent); outline-offset:1px;}
+  .qcount{color:var(--ink-2); font-size:15px; white-space:nowrap;}
+  .qempty{color:var(--ink-2); margin-top:14px;}
+  [hidden]{display:none !important;}
   .lic{font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:13px; color:var(--ink-2); white-space:nowrap;}
 
   .note{
@@ -165,16 +181,20 @@
 <section>
   <h2>Using it</h2>
   <p>Downstream proofs need only the root import, but start from a domain facade — each one opens with a table of its primary declarations and an explicit list of what it does <em>not</em> claim.</p>
-<pre>import AISafetyAtlas.Logic          -- Gödel I/II, Tarski, Löb, Chaitin
+<pre>import AISafetyAtlas.Control        -- Ashby's variety bounds, Touchette–Lloyd's information limits
+import AISafetyAtlas.Logic          -- Gödel I/II, Tarski, Löb, Chaitin
 import AISafetyAtlas.Computability  -- Rice, halting
 import AISafetyAtlas.Learning       -- no-free-lunch cores
+import AISafetyAtlas.Learning.Sharp -- when a no-free-lunch argument applies at all
 import AISafetyAtlas.SocialChoice   -- Arrow, Gibbard–Satterthwaite
 import AISafetyAtlas.Preference     -- planner/reward unidentifiability
 import AISafetyAtlas.Knowledge      -- what an observer can recover about a system
 import AISafetyAtlas.SelfAwareness  -- limits on complete self-monitoring
 import AISafetyAtlas.Wireheading    -- reward channels, self-modification
-import AISafetyAtlas.Compositional  -- hyperproperties, contracts, networks</pre>
-  <p>One import does not always mean the whole domain. <span class="mono">Wireheading</span>, <span class="mono">Compositional</span> and joint observation re-export theirs; <span class="mono">Knowledge</span> and <span class="mono">Preference</span> are kernels whose specializations are imported individually, so that a kernel can still state what it excludes. The root module lists the contract for every parent.</p>
+import AISafetyAtlas.Compositional  -- hyperproperties, contracts, networks
+import AISafetyAtlas.InformationTheory.Fano  -- peers, no facade: import the one needed
+import AISafetyAtlas.InformationTheory.DataProcessing</pre>
+  <p>One import does not always mean the whole domain. <span class="mono">Wireheading</span>, <span class="mono">Compositional</span> and joint observation re-export theirs; <span class="mono">Knowledge</span> and <span class="mono">Preference</span> are kernels whose specializations are imported individually, so that a kernel can still state what it excludes. <span class="mono">Control</span> aggregates nine modules; <span class="mono">InformationTheory</span> has no parent at all, because each of its modules is one result and none is built on the others. The root module lists the contract for every parent. Two different things are called <em>control</em> here: <span class="mono">Inference</span> has Wolpert's, a device controlling another device, and <span class="mono">Control</span> has a regulator against a disturbance. No theorem identifies them.</p>
   <p>Everything rebuilds under documented commands, and the axioms each headline theorem depends on are checked mechanically — bounded to the three standard ones, and several results use none at all.</p>
   <p>The bottleneck is not Lean. Stating a safety property precisely enough to be checkable is the hard part, and it does not require knowing what a proof assistant is. Pointers to results worth cataloguing, corrections, and open questions with no proof all have somewhere to go.</p>
   <div class="cta" style="margin-top:24px">
@@ -187,6 +207,14 @@ import AISafetyAtlas.Compositional  -- hyperproperties, contracts, networks</pre
   <h2>Results</h2>
   <p>What is in the library today, and what each one is good for. Impossibility results dominate because that is where the field's load-bearing claims are — but possibility results count too, and the last group holds two of them. The summaries are a plain-language guide; follow each result for its exact statement and scope.</p>
 
+  <div class="filter">
+    <input id="q" type="search" autocomplete="off" spellcheck="false"
+           placeholder="Filter results — e.g. oversight, Gödel, learning, monitor"
+           aria-label="Filter results" aria-controls="results">
+    <span id="qcount" class="qcount" role="status" aria-live="polite"></span>
+  </div>
+
+<div id="results">
 <!-- BEGIN GENERATED RESULTS -->
 <!-- Generated by scripts/generate_registry_views.py; do not edit by hand. -->
   <h3>Limits of verification</h3>
@@ -211,7 +239,9 @@ import AISafetyAtlas.Compositional  -- hyperproperties, contracts, networks</pre
     <tr><td class="rname"><a href="https://github.com/mbrcic/ai-safety-formalization-atlas/blob/main/AISafetyAtlas/Knowledge/Accumulation.lean#L107">Ambiguity over a window</a><div class="attrib">Workbench infrastructure</div></td><td class="rwhat">Asking about more of a system can only leave more possibilities open. <b>Use:</b> Bounding how far a monitor&#x27;s picture can drift.</td></tr>
     <tr><td class="rname"><a href="https://github.com/mbrcic/ai-safety-formalization-atlas/blob/main/AISafetyAtlas/Inference/Existence.lean#L81">Approximate inference escapes the exact limit</a><div class="attrib">Wolpert</div></td><td class="rwhat">Two observers that cannot each infer the other exactly can each infer the other to any accuracy short of certainty; an observer that can reproduce another observer inherits none of its accuracy; and a question with at least three answers always has some observer that answers it. <b>Use:</b> Fixes what the observation limits do and do not rule out once observation is noisy, gives the cardinality condition under which an inferring device is guaranteed to exist, and bounds how low inference accuracy can go.</td></tr>
     <tr><td class="rname"><a href="https://github.com/mbrcic/ai-safety-formalization-atlas/blob/main/AISafetyAtlas/Oversight/JointObservation/Coverage.lean#L96">Coalition coverage</a><div class="attrib">Workbench infrastructure</div></td><td class="rwhat">A group sees only what its members share. Processing cannot recover the rest. <b>Use:</b> Designing oversight that can actually work.</td></tr>
+    <tr><td class="rname"><a href="https://github.com/mbrcic/ai-safety-formalization-atlas/blob/main/AISafetyAtlas/InformationTheory/DataProcessing.lean#L246">Data processing</a><div class="attrib">Cover &amp; Thomas</div></td><td class="rwhat">No amount of processing a measurement adds information about what was measured. <b>Use:</b> Why a pipeline cannot recover what its first stage discarded.</td></tr>
     <tr><td class="rname"><a href="https://github.com/mbrcic/ai-safety-formalization-atlas/blob/main/AISafetyAtlas/Knowledge/Embedded.lean#L291">Embedded self-measurement</a><div class="attrib">Breuer</div></td><td class="rwhat">A sensor inside a system cannot exactly measure every state of that system. <b>Use:</b> The measurement version of the limit.</td></tr>
+    <tr><td class="rname"><a href="https://github.com/mbrcic/ai-safety-formalization-atlas/blob/main/AISafetyAtlas/InformationTheory/Fano.lean#L322">Fano&#x27;s inequality</a><div class="attrib">Fano; Cover &amp; Thomas</div></td><td class="rwhat">Guess wrong often enough and the thing you are guessing about stays uncertain — by a fixed amount you can compute. <b>Use:</b> Turning an error rate into a hard floor on what is still unknown.</td></tr>
     <tr><td class="rname"><a href="https://github.com/mbrcic/ai-safety-formalization-atlas/blob/main/AISafetyAtlas/Knowledge/Devices.lean#L166">Knowability and inference devices</a><div class="attrib">Workbench infrastructure</div></td><td class="rwhat">A device blind to the same distinction in every configuration it can reach cannot answer the question, and cannot know the answer either. <b>Use:</b> Lets an oversight file apply a device impossibility without restating it, and says exactly when the two notions of recoverability do not connect.</td></tr>
     <tr><td class="rname"><a href="https://github.com/mbrcic/ai-safety-formalization-atlas/blob/main/AISafetyAtlas/Knowledge.lean#L118">Knowability kernel</a><div class="attrib">Workbench infrastructure</div></td><td class="rwhat">You can tell things apart only if they look different. <b>Use:</b> The shared core behind the observation results.</td></tr>
     <tr><td class="rname"><a href="https://github.com/mbrcic/ai-safety-formalization-atlas/blob/main/AISafetyAtlas/SelfAwareness.lean#L148">Limited self-awareness</a><div class="attrib">Brcic &amp; Yampolskiy</div></td><td class="rwhat">A bounded agent cannot completely monitor every recursively composable internal process under strict positive awareness cost. <b>Use:</b> The process-compositional version of a self-awareness limit; cycles are allowed.</td></tr>
@@ -219,19 +249,26 @@ import AISafetyAtlas.Compositional  -- hyperproperties, contracts, networks</pre
     <tr><td class="rname"><a href="https://github.com/mbrcic/ai-safety-formalization-atlas/blob/main/AISafetyAtlas/Inference/Device.lean#L168">Physical limits on inference</a><div class="attrib">Wolpert</div></td><td class="rwhat">No device inside a system can answer every question about that system, no two distinguishable devices can each infer the other, and no two devices can each emulate the other. <b>Use:</b> Holds for any observation, prediction or recollection device, whatever the physical laws; control inherits every limit.</td></tr>
     <tr><td class="rname"><a href="https://github.com/mbrcic/ai-safety-formalization-atlas/blob/main/AISafetyAtlas/Knowledge/SelfReference.lean#L119">Self-modelling</a><div class="attrib">Workbench infrastructure</div></td><td class="rwhat">A system can fully know itself only if there is nothing else to know. <b>Use:</b> The precise sense in which nothing can fully model itself.</td></tr>
     <tr><td class="rname"><a href="https://github.com/mbrcic/ai-safety-formalization-atlas/blob/main/AISafetyAtlas/Knowledge/Temporal.lean#L130">Time-indexed knowability</a><div class="attrib">shadows filtration theory; no novelty claimed for time indexing</div></td><td class="rwhat">You can learn what the state was. Not always what it is now. <b>Use:</b> Stating self-knowledge limits correctly.</td></tr>
+    <tr><td class="rname"><a href="https://github.com/mbrcic/ai-safety-formalization-atlas/blob/main/AISafetyAtlas/Knowledge/Entropy.lean#L92">Unknowability has an error rate</a><div class="attrib">Atlas, over Fano; Cover &amp; Thomas</div></td><td class="rwhat">If what you want to know is not fixed by what you can see, no procedure reading your observations gets it right more often than a computable floor allows. <b>Use:</b> Turning &quot;this monitor cannot distinguish those cases&quot; into a rate no amount of cleverness downstream improves on.</td></tr>
     <tr><td class="rname"><a href="https://github.com/mbrcic/ai-safety-formalization-atlas/blob/main/AISafetyAtlas/Knowledge/Embedded/Composition.lean#L153">When self-measurement fails</a><div class="attrib">extends Breuer</div></td><td class="rwhat">It fails when something else in the system varies, or the sensor is too small. <b>Use:</b> Applying the limit without assuming what you want to prove.</td></tr>
     <tr><td class="rname"><a href="https://github.com/mbrcic/ai-safety-formalization-atlas/blob/main/AISafetyAtlas/Knowledge.lean#L221">Whole-state self-measurement</a><div class="attrib">after Breuer</div></td><td class="rwhat">To know the whole state, you must be able to tell every pair of states apart. <b>Use:</b> The basic version of the limit.</td></tr>
   </tbody></table></div>
+  <h3>Limits of control and regulation</h3>
+  <div class="scroll"><table><tbody>
+    <tr><td class="rname"><a href="https://github.com/mbrcic/ai-safety-formalization-atlas/blob/main/AISafetyAtlas/Control/InformationLimits.lean#L179">Information limits on control</a><div class="attrib">Touchette &amp; Lloyd</div></td><td class="rwhat">Feedback helps only as much as the sensor actually measured. <b>Use:</b> Deciding how much monitoring a control loop really needs.</td></tr>
+    <tr><td class="rname"><a href="https://github.com/mbrcic/ai-safety-formalization-atlas/blob/main/AISafetyAtlas/Control/VarietyCounting.lean#L134">Requisite variety</a><div class="attrib">Ashby</div></td><td class="rwhat">A controller cannot hold things steadier than its own range of responses allows. <b>Use:</b> Sizing what a safety controller has to be able to do.</td></tr>
+    <tr><td class="rname"><a href="https://github.com/mbrcic/ai-safety-formalization-atlas/blob/main/AISafetyAtlas/Oversight/VarietyCheck.lean#L53">Seeing is not steering</a><div class="attrib">Atlas, over Ashby</div></td><td class="rwhat">An overseer that can tell every situation apart may still be unable to steer the outcome, and one that can tell nothing apart may be able to. What you can see and what you can do are separate budgets. <b>Use:</b> Checking whether an oversight proposal is short of information, short of levers, or both.</td></tr>
+  </tbody></table></div>
   <h3>Learning and generalization</h3>
   <div class="scroll"><table><tbody>
-    <tr><td class="rname"><a href="https://github.com/mbrcic/ai-safety-formalization-atlas/blob/main/AISafetyAtlas/Learning.lean#L188">No free lunch — optimization</a><div class="attrib">Wolpert &amp; Macready</div></td><td class="rwhat">Same for search: no optimizer wins on average across all problems. <b>Use:</b> Claims about general-purpose optimizers.</td></tr>
+    <tr><td class="rname"><a href="https://github.com/mbrcic/ai-safety-formalization-atlas/blob/main/AISafetyAtlas/Learning/Sharp.lean#L822">No free lunch — optimization</a><div class="attrib">Wolpert &amp; Macready</div></td><td class="rwhat">Same for search, but only under an exact condition: averaged over a set of objectives that cannot tell one point of the search space from another, every optimizer scores alike — and almost no set of objectives is like that. <b>Use:</b> Checking whether a &quot;no optimizer is better in general&quot; argument applies to the problem at hand at all.</td></tr>
     <tr><td class="rname"><a href="https://github.com/mbrcic/ai-safety-formalization-atlas/blob/main/AISafetyAtlas/Learning.lean#L372">No free lunch — supervised learning</a><div class="attrib">Wolpert</div></td><td class="rwhat">No learner beats another once you average over all possible tasks. <b>Use:</b> Making “our method generalizes” name its assumption.</td></tr>
   </tbody></table></div>
   <h3>Preferences, rewards and incentives</h3>
   <div class="scroll"><table><tbody>
     <tr><td class="rname"><a href="https://github.com/mbrcic/ai-safety-formalization-atlas/blob/main/AISafetyAtlas/Wireheading/GoalPreservationSource.lean#L141">Goal preservation</a><div class="attrib">Everitt, Filan, Daswani &amp; Hutter</div></td><td class="rwhat">An agent that can rewrite itself can still keep its original goal. <b>Use:</b> Self-modification arguments.</td></tr>
     <tr><td class="rname"><a href="https://github.com/mbrcic/ai-safety-formalization-atlas/blob/main/AISafetyAtlas/Wireheading/AgentEquations.lean#L162">Objective factorization</a><div class="attrib">Ring &amp; Orseau</div></td><td class="rwhat">An agent can end up caring about what it sees, not about what is real. <b>Use:</b> Exactly when wireheading is optimal.</td></tr>
-    <tr><td class="rname"><a href="https://github.com/mbrcic/ai-safety-formalization-atlas/blob/main/AISafetyAtlas/Preference.lean#L90">Preference unidentifiability</a><div class="attrib">Armstrong &amp; Mindermann</div></td><td class="rwhat">Behaviour on its own does not pin down what an agent wants. <b>Use:</b> Learning what someone wants from what they do.</td></tr>
+    <tr><td class="rname"><a href="https://github.com/mbrcic/ai-safety-formalization-atlas/blob/main/AISafetyAtlas/Preference.lean#L94">Preference unidentifiability</a><div class="attrib">Armstrong &amp; Mindermann</div></td><td class="rwhat">Behaviour on its own does not pin down what an agent wants. <b>Use:</b> Learning what someone wants from what they do.</td></tr>
     <tr><td class="rname"><a href="https://github.com/mbrcic/ai-safety-formalization-atlas/blob/main/AISafetyAtlas/Wireheading/CRMDP.lean#L338">Reward corruption</a><div class="attrib">Everitt, Krakovna, Orseau, Hutter &amp; Legg</div></td><td class="rwhat">If the reward can be faked, the agent cannot tell it is being fooled. <b>Use:</b> Reward tampering.</td></tr>
     <tr><td class="rname"><a href="https://github.com/mbrcic/ai-safety-formalization-atlas/blob/main/AISafetyAtlas/Wireheading/ObservationLimits.lean#L130">Unobservable return</a><div class="attrib">Workbench infrastructure</div></td><td class="rwhat">An agent cannot tell how well it is really doing from what it saw. <b>Use:</b> Ties reward tampering to what an agent can know.</td></tr>
   </tbody></table></div>
@@ -256,9 +293,12 @@ import AISafetyAtlas.Compositional  -- hyperproperties, contracts, networks</pre
     <tr><td class="rname"><a href="https://github.com/google-deepmind/debate">Doubly-efficient debate</a><div class="attrib">Brown-Cohen, Irving &amp; Piliouras</div></td><td class="rwhat">A weak judge can be argued to the right answer by stronger debaters. <b>Use:</b> Judging work you cannot check yourself.</td></tr>
     <tr><td class="rname"><a href="https://github.com/jingyuanli-hk/vNM-Theorem-pub">Expected utility representation</a><div class="attrib">von Neumann &amp; Morgenstern</div></td><td class="rwhat">Consistent preferences can always be written as a utility function. <b>Use:</b> The assumptions inside “maximizes expected utility”.</td></tr>
     <tr><td class="rname"><a href="https://www.isa-afp.org/entries/ArrowImpossibilityGS.html">Gibbard–Satterthwaite (independent proof)</a><div class="attrib">Gibbard; Satterthwaite</div></td><td class="rwhat">The same voting result, proved again in another system. <b>Use:</b> Independent confirmation.</td></tr>
-    <tr><td class="rname"><a href="https://www.isa-afp.org/entries/No_Free_Lunch_ML.html">No free lunch (independent proof)</a><div class="attrib">Shalev-Shwartz &amp; Ben-David</div></td><td class="rwhat">The same no-free-lunch result, proved again in another system. <b>Use:</b> Independent confirmation.</td></tr>
+    <tr><td class="rname"><a href="https://www.isa-afp.org/entries/No_Free_Lunch_ML.html">No free lunch (PAC lower bound)</a><div class="attrib">Shalev-Shwartz &amp; Ben-David</div></td><td class="rwhat">A different no-free-lunch theorem from the atlas&#x27;s: no learner beats a coin flip on every distribution when the sample is small. <b>Use:</b> How much data a guarantee needs — not a second proof of the Wolpert averaging results.</td></tr>
   </tbody></table></div>
 <!-- END GENERATED RESULTS -->
+</div>
+
+  <p id="qempty" class="qempty" hidden>Nothing matches that. The filter reads the result name, its summary, and the credit line — try a shorter word, or clear the box.</p>
 
   <p style="margin-top:20px">These are proofs from other people and other systems, rebuilt from source at pinned revisions to confirm they still hold — not re-implemented in Lean. They carry no Lean import surface, and they are credited in full below.</p>
 </section>
@@ -317,6 +357,74 @@ import AISafetyAtlas.Compositional  -- hyperproperties, contracts, networks</pre
 </div>
 
 </div>
+
+<script>
+(function () {
+  var box = document.getElementById('q');
+  var wrap = document.querySelector('.filter');
+  var root = document.getElementById('results');
+  var count = document.getElementById('qcount');
+  var empty = document.getElementById('qempty');
+  if (!box || !wrap || !root) return;
+
+  // Fold accents and the dashes used in names, so someone typing "godel" or
+  // "gibbard-satterthwaite" on an ordinary keyboard finds Gödel and
+  // Gibbard–Satterthwaite. Without this the common spelling matches nothing.
+  function fold(text) {
+    var out = text.toLowerCase().replace(/[‐-―−]/g, '-');
+    if (!''.normalize) return out;
+    out = out.normalize('NFD');
+    // \p{Diacritic} needs a modern engine; fall back to the combining block.
+    try {
+      return out.replace(/\p{Diacritic}/gu, '');
+    } catch (e) {
+      return out.replace(/[̀-ͯ]/g, '');
+    }
+  }
+
+  // Each generated group is an <h3> followed by its table. Hide the heading
+  // with its rows so a filtered page never shows an empty section. Row text is
+  // folded once here, not on every keystroke.
+  var groups = [];
+  Array.prototype.forEach.call(root.querySelectorAll('h3'), function (heading) {
+    var block = heading.nextElementSibling;
+    if (!block) return;
+    groups.push({
+      heading: heading,
+      block: block,
+      rows: Array.prototype.slice.call(block.querySelectorAll('tr')).map(function (row) {
+        return { el: row, text: fold(row.textContent) };
+      })
+    });
+  });
+  if (!groups.length) return;
+
+  var total = groups.reduce(function (n, g) { return n + g.rows.length; }, 0);
+
+  function apply() {
+    var query = fold(box.value.trim());
+    var shown = 0;
+    groups.forEach(function (g) {
+      var visible = 0;
+      g.rows.forEach(function (row) {
+        var hit = !query || row.text.indexOf(query) !== -1;
+        row.el.hidden = !hit;
+        if (hit) visible += 1;
+      });
+      g.heading.hidden = visible === 0;
+      g.block.hidden = visible === 0;
+      shown += visible;
+    });
+    count.textContent = query ? shown + ' of ' + total : '';
+    if (empty) empty.hidden = !(query && shown === 0);
+  }
+
+  box.addEventListener('input', apply);
+  box.addEventListener('search', apply);
+  wrap.style.display = 'flex';
+  apply();
+})();
+</script>
 
 </body>
 </html>

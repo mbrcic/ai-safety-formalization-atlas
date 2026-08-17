@@ -61,6 +61,24 @@
         "AISafetyAtlas.Knowledge.Check.findCollision"
       ]
     },
+    "AISafetyAtlas.Knowledge.Check.knowable_comp_left_iff": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Knowledge.Knowable"
+      ]
+    },
+    "AISafetyAtlas.Knowledge.Check.knowable_congr_observation": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Knowledge.Knowable"
+      ]
+    },
+    "AISafetyAtlas.Knowledge.Check.knowable_congr_property": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Knowledge.Knowable"
+      ]
+    },
     "AISafetyAtlas.Knowledge.Check.knowable_of_findCollision_eq_none": {
       "kind": "theorem",
       "deps": [
@@ -689,6 +707,12 @@
         "AISafetyAtlas.Knowledge.Knowable"
       ]
     },
+    "AISafetyAtlas.Knowledge.condEntropy_eq_zero_of_knowable": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Knowledge.Knowable"
+      ]
+    },
     "AISafetyAtlas.Knowledge.exists_witness_of_not_knowable": {
       "kind": "theorem",
       "deps": [
@@ -732,6 +756,13 @@
         "AISafetyAtlas.Knowledge.worstAmbiguity"
       ]
     },
+    "AISafetyAtlas.Knowledge.le_errorProb_of_decoder": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.InformationTheory.errorPair",
+        "AISafetyAtlas.InformationTheory.errorProb"
+      ]
+    },
     "AISafetyAtlas.Knowledge.not_knowable_comp": {
       "kind": "theorem",
       "deps": [
@@ -745,6 +776,12 @@
       ]
     },
     "AISafetyAtlas.Knowledge.not_knowable_of_collision": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Knowledge.Knowable"
+      ]
+    },
+    "AISafetyAtlas.Knowledge.not_knowable_of_condEntropy_ne_zero": {
       "kind": "theorem",
       "deps": [
         "AISafetyAtlas.Knowledge.Knowable"
