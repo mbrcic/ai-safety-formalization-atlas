@@ -126,8 +126,22 @@ def test_nonexistent_modules_do_not_resolve(module):
     assert not registry.lean_module_exists(module)
 
 
-def test_real_modules_resolve_in_tree_and_in_packages():
+def test_real_module_resolves_in_tree():
     assert registry.lean_module_exists("AISafetyAtlas.Control.RequisiteVariety")
+
+
+@pytest.mark.skipif(
+    not (ROOT / ".lake" / "packages").is_dir(),
+    reason="Lake packages are not checked out; the cheap gate builds no Lean",
+)
+def test_real_module_resolves_in_a_lake_package():
+    """The `.lake/packages` branch of `lean_module_exists`, when there are any.
+
+    Split from the in-tree case and skipped rather than asserted unconditionally:
+    the two halves answer in different environments, and asserting both made this
+    test pass on a developer machine and fail in CI, which builds no Lean. A skip
+    says which half went unexercised; a combined assertion said only "False".
+    """
     assert registry.lean_module_exists("PFR.ForMathlib.Entropy.Basic")
 
 
