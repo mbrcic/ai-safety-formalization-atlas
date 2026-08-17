@@ -64,6 +64,20 @@ EXEMPT = {
 DEPS = [
     ROOT / ".lake" / "packages" / "PFR" / "PFR",
 ]
+# Names a docstring cites that a *dependency* owns, listed rather than resolved
+# by scanning `.lake`. Scanning made the verdict depend on whether the packages
+# happened to be on disk: the cheap gate builds no Lean, so these five citations
+# passed on a developer machine and failed in CI, and the reverse -- a misspelled
+# dependency name accepted locally -- was equally possible. Listing them makes
+# the check deterministic in both environments. `check_dependency_names` below
+# verifies the list against the real package whenever it *is* checked out, so it
+# cannot rot into a set of names PFR no longer defines.
+DEPENDENCY_NAMES = {
+    "condEntropy_prod_eq_sum": "PFR",
+    "mutual_comp_le": "PFR",
+    "mutual_comp_comp_le": "PFR",
+    "condMutual_comp_comp_le": "PFR",
+}
 
 
 def known_modules() -> set[str]:
@@ -171,9 +185,8 @@ def code_identifiers() -> set[str]:
     namespaces and constructors, which are legitimate things for prose to name,
     so the bar is "appears in the source at all".
     """
-    names: set[str] = set()
-    roots = [SRC, *[d for d in DEPS if d.exists()]]
-    paths = [q for root in roots for q in root.rglob("*.lean")]
+    names: set[str] = set(DEPENDENCY_NAMES)
+    paths = list(SRC.rglob("*.lean"))
     paths.append(ROOT / "AISafetyAtlas.lean")  # the root module, where imports live
     for path in paths:
         code = re.sub(r"/-[-!]?.*?-/", " ", path.read_text(), flags=re.S)
@@ -318,6 +331,34 @@ def docstring_spans(text: str):
         yield m.start(), m.group(1)
 
 
+def check_dependency_names() -> list[str]:
+    """Confirm each `DEPENDENCY_NAMES` entry is real, when the package is present.
+
+    Absent, this is a no-op and the listed names are trusted, which is what keeps
+    the cheap gate honest without a Lean checkout. Present, every entry has to
+    appear in the package's own sources, so a dependency bump that renames one is
+    caught here rather than leaving a docstring pointing at nothing.
+    """
+    problems: list[str] = []
+    for root in DEPS:
+        if not root.exists():
+            continue
+        package = root.name
+        wanted = {n for n, owner in DEPENDENCY_NAMES.items() if owner == package}
+        if not wanted:
+            continue
+        found: set[str] = set()
+        for path in root.rglob("*.lean"):
+            text = path.read_text()
+            found.update(n for n in wanted if n in text)
+        for missing in sorted(wanted - found):
+            problems.append(
+                f"DEPENDENCY_NAMES: `{missing}` is listed as a {package} name but "
+                f"appears nowhere in {package}; the docstring citing it is stale"
+            )
+    return problems
+
+
 def main() -> int:
     known = code_identifiers()
     modules = known_modules()
@@ -395,6 +436,7 @@ def main() -> int:
                     problems.append(f"{rel}:~{line0}: `{name}` appears nowhere in the atlas sources")
 
     problems.extend(unreachable_surface(declaring_modules()))
+    problems.extend(check_dependency_names())
 
     prose = 0
     for path in prose_files():
