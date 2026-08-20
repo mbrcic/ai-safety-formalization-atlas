@@ -18,7 +18,7 @@ picking work. Grades and reproduction evidence:
 | [algorithmic-information](#algorithmic-information) | 1 | 1 |
 | [compositionality](#compositionality) | 4 | 1 |
 | [computability](#computability) | 3 | 3 |
-| [computational-complexity](#computational-complexity) | 0 | 5 |
+| [computational-complexity](#computational-complexity) | 1 | 4 |
 | [control-theory](#control-theory) | 3 | 4 |
 | [decision-theory](#decision-theory) | 2 | 3 |
 | [ethics](#ethics) | 1 | 4 |
@@ -26,7 +26,7 @@ picking work. Grades and reproduction evidence:
 | [interpretability](#interpretability) | 11 | 5 |
 | [learning-theory](#learning-theory) | 2 | 7 |
 | [multi-agent](#multi-agent) | 3 | 5 |
-| [oversight](#oversight) | 6 | 2 |
+| [oversight](#oversight) | 7 | 1 |
 | [preference-inference](#preference-inference) | 1 | 1 |
 | [provability-logic](#provability-logic) | 7 | 1 |
 | [social-choice](#social-choice) | 2 | 6 |
@@ -94,7 +94,9 @@ Catalogued, no atlas Lean:
 
 ## computational-complexity
 
-No atlas Lean in this area yet.
+| ID | Result | Atlas declarations |
+|---|---|---|
+| LAND-DEBATE-001 | Doubly-efficient debate correctness (Brown-Cohen–Irving–Piliouras 2023) | `AISafetyAtlas.Oversight.Debate.alice_fast`<br>`AISafetyAtlas.Oversight.Debate.bob_fast`<br>`AISafetyAtlas.Oversight.Debate.completeness`<br>`AISafetyAtlas.Oversight.Debate.correctness`<br>`AISafetyAtlas.Oversight.Debate.soundness`<br>`AISafetyAtlas.Oversight.Debate.vera_fast` |
 
 Catalogued, no atlas Lean:
 
@@ -104,7 +106,6 @@ Catalogued, no atlas Lean:
 | BY-035 | No-flattening theorems for deep learning |
 | BY-036 | Efficiency of computing Boolean functions for multilayered perceptrons |
 | LAND-DL-001 | Deep vs shallow network capacity (Cohen–Bentkamp) |
-| LAND-DEBATE-001 | Doubly-efficient debate correctness (Brown-Cohen–Irving–Piliouras 2023) |
 
 ## control-theory
 
@@ -248,6 +249,7 @@ Catalogued, no atlas Lean:
 
 | ID | Result | Atlas declarations |
 |---|---|---|
+| LAND-DEBATE-001 | Doubly-efficient debate correctness (Brown-Cohen–Irving–Piliouras 2023) | `AISafetyAtlas.Oversight.Debate.alice_fast`<br>`AISafetyAtlas.Oversight.Debate.bob_fast`<br>`AISafetyAtlas.Oversight.Debate.completeness`<br>`AISafetyAtlas.Oversight.Debate.correctness`<br>`AISafetyAtlas.Oversight.Debate.soundness`<br>`AISafetyAtlas.Oversight.Debate.vera_fast` |
 | LAND-JOINTOBS-001 | Coalition-indexed joint observation and the emitted-interface coverage boundary | `AISafetyAtlas.Oversight.JointObservation.covers_iff_no_collision` |
 | LAND-ACCUM-001 | Window ambiguity: accumulation bounds over a set of targets | `AISafetyAtlas.Knowledge.ambiguity_le_of_evidenceMonotone`<br>`AISafetyAtlas.Knowledge.ambiguity_le_pairTarget_left`<br>`AISafetyAtlas.Knowledge.ambiguity_le_pairTarget_of_evidenceMonotone`<br>`AISafetyAtlas.Knowledge.ambiguity_le_pairTarget_right`<br>`AISafetyAtlas.Knowledge.ambiguity_pairTarget_le_mul`<br>`AISafetyAtlas.Knowledge.not_knowable_pairTarget_of_not_knowable` |
 | LAND-AMBIG-001 | Finite fibre ambiguity and the counting obstruction | `AISafetyAtlas.Knowledge.ambiguity_le_of_comp`<br>`AISafetyAtlas.Knowledge.card_image_le_of_knowable`<br>`AISafetyAtlas.Knowledge.knowable_iff_ambiguity_le_one`<br>`AISafetyAtlas.Knowledge.not_knowable_of_card_lt` |
@@ -259,7 +261,6 @@ Catalogued, no atlas Lean:
 
 | ID | Result |
 |---|---|
-| LAND-DEBATE-001 | Doubly-efficient debate correctness (Brown-Cohen–Irving–Piliouras 2023) |
 | LAND-CL-001 | Chandy-Lamport distributed snapshot — termination, correctness, stable property detection |
 
 ## preference-inference

@@ -1,0 +1,121 @@
+/-
+Vendored from `google-deepmind/debate` (Apache-2.0) via the Lean v4.31.0 port
+`LukaHobor/debate` branch `port-lean-4.31`, revision `dafe25d`.
+
+Changed by the atlas, mechanically and only at the file header: `module`, each
+`import` rewritten to `public import` at the atlas module path, one
+`@[expose] public section`, and the `set_option linter.*` block below. No
+statement, proof script, notation, or declaration name in the body is altered.
+Provenance and the full mapping: `vendor/debate/PROVENANCE.md`.
+-/
+
+module
+
+public import AISafetyAtlas.Upstream.Debate.Comp.Oracle
+public import AISafetyAtlas.Upstream.Debate.Prob.Defs
+public import Mathlib.Data.Vector.Basic
+
+@[expose] public section
+
+-- The atlas package builds with `warningAsError = true`; upstream does not.
+-- Silencing the style linters keeps the vendored proof scripts identical to the
+-- port rather than rewriting proofs to satisfy a policy they were not written
+-- under. No correctness linter is touched, and incomplete proofs stay errors.
+set_option linter.unusedSimpArgs false
+set_option linter.unusedSectionVars false
+set_option linter.unusedVariables false
+set_option linter.deprecated false
+set_option linter.style.longLine false
+set_option linter.unnecessarySeqFocus false
+set_option linter.unusedTactic false
+
+/-!
+## Oracle-relative probabilitistic computations
+
+`Prob α` represents the result of a probabilistic computation, but has no information about
+how long the computation took.  `Comp s α` is a computation that is allowed to consult any
+oracle `o ∈ s`, and produces a distribution over results and calls to each oracle.
+-/
+
+open Classical
+open Prob
+open Option (some none)
+open scoped Real
+open Set
+noncomputable section
+
+variable {I : Type}
+variable {s t : Set I}
+variable {α β γ : Type}
+
+/-- A stochastic computation that can make oracle queries.
+    Importantly, the computation does not know the oracle, so we can model query complexity.
+    The `Comp` constructors are not very user friendly due to kernel restrictions on inductive,
+    but we replace them with clean ones below. -/
+inductive Comp {I : Type} (s : Set I) (α : Type) : Type 1 where
+  /-- Return a result with no computation -/
+  | pure' : α → Comp s α
+  /-- Sample a value with some probability distribution, then continue -/
+  | sample' : {β : Type} → Prob β → (β → Comp s α) → Comp s α
+  /-- Query an oracle `o ∈ s`, and branch on the result -/
+  | query' : (o : I) → o ∈ s → (n : ℕ) → List.Vector Bool n → Comp s α → Comp s α → Comp s α
+
+namespace Comp
+
+/-- Bind two `Comp`s together -/
+def bind' (f : Comp s α) (g : α → Comp s β) : Comp s β := match f with
+  | .pure' x => g x
+  | .sample' p f => .sample' p (fun y ↦ (f y).bind' g)
+  | .query' o m n y f0 f1 => .query' o m n y (f0.bind' g) (f1.bind' g)
+
+/-- `Comp` is a monad -/
+instance : Monad (Comp s) where
+  pure := Comp.pure'
+  bind := Comp.bind'
+
+/-- `Prob`s are `Comp s` for any `s` -/
+instance : Coe (Prob α) (Comp s α) where
+  coe f := .sample' f pure
+
+/-- The simplest case of `Comp.query'` -/
+def query (i : I) {n : ℕ} (y : List.Vector Bool n) : Comp {i} Bool :=
+  Comp.query' i (mem_singleton _) n y (pure true) (pure false)
+
+/-- The value and query counts of a `Comp s`, once we supply oracles -/
+def run (f : Comp s α) (o : I → Oracle) : Prob (α × (I → ℕ)) := match f with
+  | .pure' x => pure (x, fun _ => 0)
+  | .sample' f g => f >>= fun x ↦ (g x).run o
+  | .query' i _ n y f0 f1 => do
+    let x ← (o i) n y
+    let (z,c) ← if x then f0.run o else f1.run o
+    return (z, c + fun j => if j = i then 1 else 0)
+
+/-- The value of a `Comp s` -/
+def prob (f : Comp s α) (o : I → Oracle) : Prob α :=
+  Prod.fst <$> f.run o
+
+/-- The value of a `Comp s` when all oracles are the same -/
+@[simp] def prob' (f : Comp s α) (o : Oracle) : Prob α :=
+  f.prob fun _ ↦ o
+
+/-- The expected query cost of a `Comp α`.
+    There is a design decision here to make the theory about expected cost.  My guess is that
+    will make the downstream theory slightly easier. -/
+def cost (f : Comp s α) (o : I → Oracle) (i : I) : ℝ :=
+  (f.run o).exp fun (_,c) ↦ c i
+
+/-- The expected query cost of a `Comp α` when all oracles are the same. -/
+def cost' (f : Comp s α) (o : Oracle) : I → ℝ :=
+  f.cost fun _ ↦ o
+
+/-- Allow more oracles in a computation -/
+def allow (f : Comp s α) (st : s ⊆ t) : Comp t α := match f with
+  | .pure' x => pure x
+  | .sample' f g => f >>= fun x ↦ (g x).allow st
+  | .query' i m n y f0 f1 => .query' i (st m) n y (f0.allow st) (f1.allow st)
+
+/-- Allow all oracles in a computation -/
+def allow_all (f : Comp s α) : Comp (@univ I) α :=
+  f.allow (subset_univ s)
+
+end Comp

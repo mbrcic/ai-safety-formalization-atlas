@@ -231,10 +231,12 @@ dual to the impossibility rows.
   last commit 2024-10-08). Main theorems in `Debate/Correct.lean`:
   `completeness`, `soundness`, `correctness` (paper Theorem 6.2). License
   Apache-2.0.
-- **Version gap:** upstream pins `leanprover/lean4:v4.8.0` and Mathlib
-  `v4.8.0`; the atlas is on `v4.31.0`. Do **not** vendor into the 4.31 tree.
-  Reproduce like Chaitin/Isabelle — build at the upstream toolchain from a
-  separate checkout via a new `scripts/reproduce_debate.sh`.
+- **Version gap (closed 2026-08-20):** upstream pins `leanprover/lean4:v4.8.0`
+  and Mathlib `v4.8.0`; the atlas is on `v4.31.0`. The original scope was
+  therefore Path A only — reproduce like Chaitin/Isabelle, building at the
+  upstream toolchain from a separate checkout via a new
+  `scripts/reproduce_debate.sh`, and do **not** vendor into the 4.31 tree.
+  A toolchain port later removed the gap; see the Path B note below.
 - **Acceptance:** clean build at the pinned revision under its own toolchain;
   strict-trust scan of the reproduced tree; a `registry.yaml` record
   (`LAND-DEBATE-001` — revision, `Debate/Correct.lean`, the three theorem
@@ -254,6 +256,21 @@ dual to the impossibility rows.
   `scripts/reproduce_debate.sh`; evidence
   [`debate-reproduction.md`](../provenance/debate-reproduction.md). First
   reproduced possibility / scalable-oversight anchor. Never headline coverage.
+- **Path B done (2026-08-20):** the port `LukaHobor/debate` `port-lean-4.31`
+  @ `dafe25d` moves the development to the atlas's own Mathlib commit
+  (`fabf563`) without weakening a theorem — three signature differences, all
+  upstream renames, and `Debate/Correct.lean` byte-identical. Vendored as 18
+  modules under `AISafetyAtlas/Upstream/Debate/`, wrapped by
+  `AISafetyAtlas.Oversight.Debate`, witnessed by
+  `AISafetyAtlas/Examples/Oversight/Debate.lean`, and checked by
+  `scripts/reproduce_debate.sh --in-tree` (strict-trust scan, build, kernel
+  `#print axioms` on all six facade declarations). Path A is kept: it stays a
+  check on the upstream artifact rather than on the atlas's copy of it. The
+  facade is deliberately **off** the root import — the vendored tree declares
+  roughly 157 root-namespace names — so `root_import` stays `false` and the
+  axiom audit reaches it through `OFF_ROOT_FACADES`. Query complexity
+  (`alice_fast`, `bob_fast`, `vera_fast`) is now checked too; Path A only ever
+  checked correctness. Still never headline coverage.
 
 ### CT-8 — BY-025 Uncontainability: bridge or documented no-map (M) — **Bridge rung**
 
@@ -304,8 +321,10 @@ Pointer to the informal proof is given per target.
   stating exactly which theorem and which assumptions are and are not
   mechanized; `agent_gate.sh` + `lake build` green; kernel axioms clean.
 - **Reuse first:** the `google-deepmind/debate` Lean development (CT-7) is the
-  natural scaffold — check whether its `Prob`/`Comp` monads and protocol
-  definitions carry over before rebuilding primitives.
+  natural scaffold, and since 2026-08-20 it is **in-tree** at Lean 4.31 —
+  `import AISafetyAtlas.Upstream.Debate` gives you its `Prob`/`Comp` monads,
+  `Oracle`, and the protocol definitions directly. Build on those before
+  rebuilding primitives.
 - **Honest scope:** a possibility/oversight guarantee, `RELATED` at most; no
   AI-system reading without a separate reviewed bridge. Do not claim the paper
   is "formalized" until a proof (not a statement) lands.

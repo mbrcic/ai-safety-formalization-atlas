@@ -2514,9 +2514,64 @@
           "module": "Debate/Correct.lean",
           "repository": "https://github.com/google-deepmind/debate",
           "version": "de3a6e500ae1a65dfeea2f91ef519ebad9704be0 (main, no release tag; last commit 2024-10-08)"
+        },
+        {
+          "framework": "Lean",
+          "relationship": null,
+          "reproduced": true,
+          "declarations": [
+            "completeness",
+            "soundness",
+            "correctness",
+            "alice_fast",
+            "bob_fast",
+            "vera_fast"
+          ],
+          "module": "AISafetyAtlas.Upstream.Debate.Correct",
+          "repository": "https://github.com/google-deepmind/debate",
+          "version": "dafe25df02300c0ebecf436aab32e953006cb0a1 (LukaHobor/debate port-lean-4.31; upstream de3a6e500ae1a65dfeea2f91ef519ebad9704be0)"
         }
       ],
-      "lean_artifact": null,
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Oversight.Debate.completeness",
+            "type": "WRAPPER",
+            "file": "AISafetyAtlas/Oversight/Debate.lean",
+            "line": 169
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Oversight.Debate.soundness",
+            "type": "WRAPPER",
+            "file": "AISafetyAtlas/Oversight/Debate.lean",
+            "line": 182
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Oversight.Debate.correctness",
+            "type": "WRAPPER",
+            "file": "AISafetyAtlas/Oversight/Debate.lean",
+            "line": 194
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Oversight.Debate.alice_fast",
+            "type": "WRAPPER",
+            "file": "AISafetyAtlas/Oversight/Debate.lean",
+            "line": 211
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Oversight.Debate.bob_fast",
+            "type": "WRAPPER",
+            "file": "AISafetyAtlas/Oversight/Debate.lean",
+            "line": 221
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Oversight.Debate.vera_fast",
+            "type": "WRAPPER",
+            "file": "AISafetyAtlas/Oversight/Debate.lean",
+            "line": 233
+          }
+        ]
+      },
       "candidate_count": 0
     },
     "LAND-HYPER-001": {

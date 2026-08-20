@@ -8,7 +8,8 @@ strict-trust grep to a kernel check.
 
 Scope, stated exactly, because an earlier version claimed more than it did:
 every `public theorem` and `public lemma` declared inside a namespace in a
-module reachable through public `AISafetyAtlas.*` facade imports. Declarations
+module reachable through public `AISafetyAtlas.*` facade imports, **plus** the
+facades named in `OFF_ROOT_FACADES` and their own public closures. Declarations
 introduced any other way are outside it — so `check_ledger_coverage` asserts
 that every declaration the registry publishes falls inside, rather than leaving
 that to the coincidence that published results happen to use these keywords.
@@ -63,11 +64,33 @@ def imported_atlas_modules(path: Path) -> list[str]:
     ]
 
 
+# Public facades deliberately kept off the root import, each with the reason.
+#
+# The audited surface is "what the ledger publishes", not "what the root import
+# happens to re-export". Those coincided until a facade had a reason not to be
+# re-exported: `AISafetyAtlas.Oversight.Debate` wraps a vendored third-party
+# development that declares ~157 names in the *root* namespace (`count`, `close`,
+# `final`, `trace`, `step`, `L`, `Correct`, …), and putting those in front of
+# every `import AISafetyAtlas` user is a worse trade than naming the facade here.
+#
+# Without this list such a facade could publish declarations in `registry.yaml`
+# that no kernel audit ever reached, and `check_ledger_coverage` below would
+# reject the row rather than the gap — which reads as "do not publish it" when
+# the real answer is "audit it too".
+OFF_ROOT_FACADES: dict[str, str] = {
+    "AISafetyAtlas.Oversight.Debate": (
+        "re-exports a vendored root-namespace development; see the module "
+        "docstring and vendor/debate/PROVENANCE.md"
+    ),
+}
+
+
 def facade_sources() -> list[Path]:
     """Resolve the complete transitive public atlas facade closure."""
     pending = imported_atlas_modules(ROOT_IMPORT)
     if not pending:
         raise RuntimeError(f"no public imports found in {ROOT_IMPORT}")
+    pending.extend(OFF_ROOT_FACADES)
     seen: set[str] = set()
     paths: list[Path] = []
     while pending:
@@ -187,12 +210,15 @@ DECL_START_NO_COLON = re.compile(
 
 
 def harness_source() -> str:
-    lines = [
-        "import AISafetyAtlas",
-        "",
-        "/-! Generated axiom harness for scripts/check_print_axioms.py. -/",
-        "",
-    ]
+    lines = ["import AISafetyAtlas"]
+    lines.extend(f"import {module}" for module in OFF_ROOT_FACADES)
+    lines.extend(
+        [
+            "",
+            "/-! Generated axiom harness for scripts/check_print_axioms.py. -/",
+            "",
+        ]
+    )
     for decl in DECLARATIONS:
         lines.append(f"#print axioms {decl}")
     lines.append("")

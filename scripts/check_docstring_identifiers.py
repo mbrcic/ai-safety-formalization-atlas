@@ -48,9 +48,15 @@ EXEMPT = {
     "No_Free_Lunch_ML", "qaryEntropy_def",
     # Mathlib lemmas and tactic-local names discussed in prose
     "klDiv_eq_zero_iff", "Finset.sum_fiberwise", "kraft_mcmillan_inequality",
+    # cited by a vendored docstring (AISafetyAtlas/Upstream/Debate/Prob/Pmf.lean)
+    # as the Mathlib lemma its primed variant restates
+    "PMF.pure_apply",
     # gate scripts and source-paper labels
     "validate_current_state", "check_print_axioms", "check_print_axioms.py",
     "Proposition_8",
+    # the off-root facade allowlist inside check_print_axioms.py, cited by the
+    # module whose presence on it is the thing that needs explaining
+    "OFF_ROOT_FACADES",
     # names bound inside a proof, referred to by the surrounding prose
     "sigma_abc", "not_covers",
     # names a docstring deliberately says the atlas does NOT use

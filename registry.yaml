@@ -5431,7 +5431,7 @@
         "oversight",
         "computational-complexity"
       ],
-      "notes": "CT-7 (2026-07-20): machine-checked correctness of the stochastic-oracle debate protocol, arXiv 2311.14125. Path-A reproduction — built at upstream toolchain (Lean/Mathlib v4.8.0), NOT vendored into the atlas 4.31 tree, no atlas Lean import surface. Upstream caveats carried: correctness only (space complexity not formalized); time counts oracle queries only; Lipschitz oracle machine defined as a stronger variant. No AI-system reading without a separate reviewed bridge. Evidence: docs/provenance/debate-reproduction.md. Possibility / scalable-oversight guarantee, not a Table-1 impossibility row — a live landscape anchor dual to the impossibility rows. No survey coverage.",
+      "notes": "CT-7 (2026-07-20): machine-checked correctness of the stochastic-oracle debate protocol, arXiv 2311.14125. Both reproduction lanes are recorded. Path A builds upstream at its own toolchain (Lean/Mathlib v4.8.0) from a separate checkout and stays a check on the upstream artifact itself. Path B (2026-08-20) vendors the Lean v4.31.0 port LukaHobor/debate port-lean-4.31 @ dafe25d into AISafetyAtlas/Upstream/Debate/, where it compiles inside the atlas build closure and carries a facade at AISafetyAtlas.Oversight.Debate. The port is a toolchain migration only: no theorem weakened, generalized, or removed, three signature differences all upstream renames, and Debate/Correct.lean byte-identical to upstream. The facade is deliberately NOT on the root import - the vendored tree declares roughly 157 root-namespace names - so root_import stays false and the kernel axiom audit reaches it through OFF_ROOT_FACADES in scripts/check_print_axioms.py. Path B also adds the query-complexity half (alice_fast, bob_fast, vera_fast), which Path A never checked. Upstream caveats carried unchanged: correctness only (space complexity not formalized); time counts oracle queries only; Lipschitz oracle machine defined as a stronger variant. The Lipschitz hypothesis is witnessed in-tree by every_oracle_lipschitz_zero, proved here rather than vendored - upstream exhibits no oracle at all. No AI-system reading without a separate reviewed bridge. Evidence: docs/provenance/debate-reproduction.md, vendor/debate/PROVENANCE.md. Possibility / scalable-oversight guarantee, not a Table-1 impossibility row - a live landscape anchor dual to the impossibility rows. No survey coverage.",
       "original_source_refs": [],
       "related_result_ids": [],
       "root_import": false,
@@ -5449,10 +5449,75 @@
             "correctness"
           ],
           "module": "Debate/Correct.lean",
+          "atlas_module": "AISafetyAtlas.Oversight.Debate",
           "build_command": "scripts/reproduce_debate.sh"
+        },
+        {
+          "framework": "Lean",
+          "repository": "https://github.com/google-deepmind/debate",
+          "version": "dafe25df02300c0ebecf436aab32e953006cb0a1 (LukaHobor/debate port-lean-4.31; upstream de3a6e500ae1a65dfeea2f91ef519ebad9704be0)",
+          "license": "Apache-2.0",
+          "reproduced": true,
+          "build_environment": "leanprover/lean4:v4.31.0; Mathlib fabf563a7c95a166b8d7b6efca11c8b4dc9d911f; vendored into the atlas build closure",
+          "declarations": [
+            "completeness",
+            "soundness",
+            "correctness",
+            "alice_fast",
+            "bob_fast",
+            "vera_fast"
+          ],
+          "module": "AISafetyAtlas.Upstream.Debate.Correct",
+          "atlas_module": "AISafetyAtlas.Oversight.Debate",
+          "build_command": "scripts/reproduce_debate.sh --in-tree"
         }
       ],
-      "lean_artifact": null,
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Oversight.Debate.completeness",
+            "type": "WRAPPER",
+            "source_declarations": [
+              "completeness"
+            ]
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Oversight.Debate.soundness",
+            "type": "WRAPPER",
+            "source_declarations": [
+              "soundness"
+            ]
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Oversight.Debate.correctness",
+            "type": "WRAPPER",
+            "source_declarations": [
+              "correctness"
+            ]
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Oversight.Debate.alice_fast",
+            "type": "WRAPPER",
+            "source_declarations": [
+              "alice_fast"
+            ]
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Oversight.Debate.bob_fast",
+            "type": "WRAPPER",
+            "source_declarations": [
+              "bob_fast"
+            ]
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Oversight.Debate.vera_fast",
+            "type": "WRAPPER",
+            "source_declarations": [
+              "vera_fast"
+            ]
+          }
+        ]
+      },
       "public": {
         "group": "Assembled from other proof assistants",
         "summary": "A weak judge can be argued to the right answer by stronger debaters.",

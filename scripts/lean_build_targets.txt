@@ -50,6 +50,7 @@ AISafetyAtlas.Examples.Knowledge.Temporal
 AISafetyAtlas.Examples.Learning.Sharp
 AISafetyAtlas.Examples.NFLConcrete
 AISafetyAtlas.Examples.NonVacuity
+AISafetyAtlas.Examples.Oversight.Debate
 AISafetyAtlas.Examples.Oversight.JointObservation.Portfolio
 AISafetyAtlas.Examples.Oversight.JointObservation.Procurement
 AISafetyAtlas.Examples.Oversight.JointObservation.Residual
@@ -68,3 +69,4 @@ AISafetyAtlas.Inference.Search.RuleSet
 AISafetyAtlas.InformationTheory.DataProcessing
 AISafetyAtlas.InformationTheory.Fano
 AISafetyAtlas.Learning.Sharp
+AISafetyAtlas.Oversight.Debate

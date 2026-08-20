@@ -825,6 +825,12 @@ AISafetyAtlas.Logic::godel_second_incompleteness
 AISafetyAtlas.Logic::lawvere_fixed_point
 AISafetyAtlas.Logic::loeb
 AISafetyAtlas.Logic::tarski_undefinability
+AISafetyAtlas.Oversight.Debate::alice_fast
+AISafetyAtlas.Oversight.Debate::bob_fast
+AISafetyAtlas.Oversight.Debate::completeness
+AISafetyAtlas.Oversight.Debate::correctness
+AISafetyAtlas.Oversight.Debate::soundness
+AISafetyAtlas.Oversight.Debate::vera_fast
 AISafetyAtlas.Oversight.JointObservation.Architecture::observe_truthful
 AISafetyAtlas.Oversight.JointObservation.Coverage::covers_iff_no_collision
 AISafetyAtlas.Oversight.JointObservation.Coverage::exists_collisionWitness_of_not_covers

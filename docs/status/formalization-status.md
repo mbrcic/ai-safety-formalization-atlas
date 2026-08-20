@@ -14,18 +14,18 @@ Statement-match is not the primary success score.
 |---|---:|
 | Results stating a source claim | 49 |
 | Results recording a formalization only | 32 |
-| Registry results with atlas Lean (any grade) | 43 |
+| Registry results with atlas Lean (any grade) | 44 |
 | Claim results with statement-match (`EXACT` or `EQUIVALENT`) | 14 |
 | Claim results with workbench formalizations (`RELATED` only) | 7 |
-| Formalization records | 107 |
-| … declaring reproduction (self-attested; see methodology) | 105 |
-| Atlas Lean theorem declarations (unique names) | 208 |
-| Registry Lean declaration records | 208 |
-| … of which `WRAPPER` | 18 |
+| Formalization records | 108 |
+| … declaring reproduction (self-attested; see methodology) | 106 |
+| Atlas Lean theorem declarations (unique names) | 214 |
+| Registry Lean declaration records | 214 |
+| … of which `WRAPPER` | 24 |
 | … of which `BRIDGE` | 7 |
 | … of which `NEW_PROOF` | 183 |
 | … of which `REFERENCE` | 0 |
-| Registry rows whose atlas Lean is wrapper-only | 8 |
+| Registry rows whose atlas Lean is wrapper-only | 9 |
 | Registry rows with at least one `BRIDGE` declaration | 5 |
 | Structured `candidate_formalizations` leads | 5 |
 | Reproduced external formalization records | 8 across 7 registry results |
@@ -62,6 +62,7 @@ Statement-match is not the primary success score.
 | CLM-LAWVERE-001 | Lawvere fixed-point theorem (types and functions) | `EQUIVALENT` | `Function.exists_fixed_point_of_surjective` | `AISafetyAtlas.Logic.lawvere_fixed_point (WRAPPER)` |
 | LAND-ATTR-001 | Attribution impossibility (DASH trilemma) |  | `DASHImpossibility.attribution_impossibility`<br>`DASHImpossibility.attribution_impossibility_weak` | `AISafetyAtlas.Explainability.attribution_impossibility (WRAPPER)`<br>`AISafetyAtlas.Explainability.attribution_impossibility_weak (WRAPPER)` |
 | LAND-GS-002 | Gibbard–Satterthwaite theorem (Lean / SocialChoiceLean) |  | `SocialChoice.gibbard_satterthwaite` | `AISafetyAtlas.SocialChoice.gibbard_satterthwaite (WRAPPER)` |
+| LAND-DEBATE-001 | Doubly-efficient debate correctness (Brown-Cohen–Irving–Piliouras 2023) |  | `completeness`<br>`soundness`<br>`correctness`<br>`alice_fast`<br>`bob_fast`<br>`vera_fast` | `AISafetyAtlas.Oversight.Debate.completeness (WRAPPER)`<br>`AISafetyAtlas.Oversight.Debate.soundness (WRAPPER)`<br>`AISafetyAtlas.Oversight.Debate.correctness (WRAPPER)`<br>`AISafetyAtlas.Oversight.Debate.alice_fast (WRAPPER)`<br>`AISafetyAtlas.Oversight.Debate.bob_fast (WRAPPER)`<br>`AISafetyAtlas.Oversight.Debate.vera_fast (WRAPPER)` |
 | LAND-HYPER-002 | k-safety self-composition and hyperproperty decomposition |  | `k_safety_iff_finite_self_composition`<br>`k_safety_iff_product_self_composition`<br>`self_composition_is_safety`<br>`isClosed_iff_hyperSafety`<br>`dense_iff_hyperLiveness`<br>`hyperSafety_of_isKSafety`<br>`hyperSafety_hyperLiveness_decomposition` | `AISafetyAtlas.Compositional.Hyperproperties.k_safety_iff_finite_self_composition (NEW_PROOF)` |
 | LAND-ANGLUIN-001 | Port-labelled anonymous networks, views, and automorphisms |  | `runFor_eq_of_view_eq`<br>`invariant_of_automorphism`<br>`no_unique_leader_of_fixedPointFree`<br>`invariant_of_constant` | `AISafetyAtlas.Compositional.Networks.runFor_eq_of_view_eq (NEW_PROOF)` |
 | LAND-RECT-001 | Rectangle, exchange, and unary-contract equivalences |  | `rectangle_iff_exchange_closed`<br>`coordinate_product_iff_spliceClosed`<br>`not_isCoordinateProduct_finitelySupported`<br>`coordinate_product_iff_recombination_closed` | `AISafetyAtlas.Compositional.rectangle_iff_exchange_closed (NEW_PROOF)` |

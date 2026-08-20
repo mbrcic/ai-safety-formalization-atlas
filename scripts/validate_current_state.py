@@ -265,11 +265,22 @@ def validate_lean_build_closure(lean_files: list[Path]) -> None:
     unknown_targets = sorted(set(targets) - set(modules))
     require(not unknown_targets, f"Lean build-target manifest names missing modules: {unknown_targets}")
 
-    uncovered = sorted(set(modules) - root_closure - set(targets))
+    # A build target pulls its own imports in with it, so the closure is taken
+    # over the targets exactly as it is over the root. The property being
+    # checked is "CI compiles this file", and `lake build` on a target compiles
+    # everything that target imports. Without the closure the manifest would
+    # have to name every module of a vendored subtree one by one — a
+    # hand-maintained list that rots the moment the subtree gains a file, while
+    # `lake` was building all of them the whole time.
+    target_closure: set[str] = set()
+    for target in targets:
+        target_closure |= dependency_closure(target, graph)
+
+    uncovered = sorted(set(modules) - root_closure - target_closure)
     require(
         not uncovered,
-        "Lean modules are neither reachable from AISafetyAtlas nor explicit CI "
-        f"build targets: {uncovered}",
+        "Lean modules are neither reachable from AISafetyAtlas nor from an "
+        f"explicit CI build target: {uncovered}",
     )
 
     workflow = (ROOT / ".github/workflows/ci.yml").read_text(encoding="utf-8")
