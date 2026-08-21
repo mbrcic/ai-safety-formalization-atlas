@@ -19,9 +19,8 @@ Two lanes, both live:
 | **Path A** (2026-07-20) | upstream, at its own toolchain, from a separate checkout | `scripts/reproduce_debate.sh` |
 | **Path B** (2026-08-20) | the Lean 4.31 port, vendored inside the atlas build closure, with an atlas import surface | `scripts/reproduce_debate.sh --in-tree` |
 
-Path A is not superseded. It checks the upstream artifact; Path B checks the
-atlas's copy of it. A port that silently broke something would still pass Path A,
-which is exactly why the lane is kept.
+Path A is not superseded: a port that silently broke something would still pass
+it, which is exactly why the lane is kept.
 
 ## Coordinates
 
@@ -52,46 +51,27 @@ clean across 19 upstream Lean sources.
 
 ## Path B — vendored into the atlas 4.31 tree
 
-The original record said a port-then-wrap was deferred "until something
-downstream needs to build *on* debate". The port arrived first. Because the
-atlas's Mathlib pin `v4.31.0` resolves to `fabf563a7c95a166b8d7b6efca11c8b4dc9d911f`
-— the exact commit the port pins — the two build closures are identical and the
-development compiles in-tree unchanged.
+The original record deferred a port-then-wrap "until something downstream needs
+to build *on* debate"; the port arrived first. The atlas's Mathlib pin resolves
+to the exact commit the port pins, so the two build closures are identical and
+the development compiles in-tree unchanged. Pins, the three header adaptations
+and statement fidelity are in
+[`vendor/debate/PROVENANCE.md`](../../vendor/debate/PROVENANCE.md).
 
-What landed:
+What landed: 18 vendored modules under `AISafetyAtlas/Upstream/Debate/`; a
+facade, `AISafetyAtlas.Oversight.Debate`, publishing six declarations — Path A
+only ever checked the correctness half, and the query-complexity half is the
+*doubly efficient* part; and a worked model,
+`AISafetyAtlas/Examples/Oversight/Debate.lean`. Upstream exhibits no oracle at
+all, so `every_oracle_lipschitz_zero` is proved there rather than vendored:
+without it `Debate.Lipschitz o t k` would be unwitnessed in the tree and the
+guarantees would be statements about a possibly empty hypothesis.
 
-- **18 vendored modules** under `AISafetyAtlas/Upstream/Debate/`. Every atlas
-  change is confined to the file header: `module`, `public import` at the atlas
-  module path, one `@[expose] public section`, and a `set_option linter.*` block
-  (the package builds with `warningAsError = true`; upstream does not). No
-  statement, proof script, notation, or declaration name in any body is altered.
-- **A facade**, `AISafetyAtlas.Oversight.Debate`, publishing six declarations:
-  `completeness`, `soundness`, `correctness`, `alice_fast`, `bob_fast`,
-  `vera_fast`. Path A only ever checked the correctness half; the
-  query-complexity half — the *doubly efficient* part, and the reason the result
-  is interesting for oversight — is now checked as well.
-- **A worked model**, `AISafetyAtlas/Examples/Oversight/Debate.lean`. Upstream
-  exhibits no oracle at all, so `every_oracle_lipschitz_zero` is proved here, not
-  vendored: every stochastic oracle is 1-Lipschitz over a one-round debate. Without
-  it the hypothesis `Debate.Lipschitz o t k` would be unwitnessed in the tree and
-  the guarantees would be statements about a possibly empty hypothesis.
-
-### Why the facade is off the root import
-
-The vendored development declares roughly 157 names in the **root** namespace —
-`count`, `close`, `final`, `trace`, `estimate`, `step`, `L`, `Correct` among
-them. Re-exporting those through `import AISafetyAtlas` would put them in front
-of every downstream user, so `AISafetyAtlas.Oversight.Debate` is imported on its
-own, the contract `AISafetyAtlas.Explore` already keeps. `root_import` stays
-`false` on the ledger row, which is what the registry validator independently
-checks against the real import graph.
-
-`scripts/check_print_axioms.py` walks the root closure, so it would not have
-reached these theorems. Rather than leave a published declaration unaudited, the
-script now takes an explicit `OFF_ROOT_FACADES` list and audits those facades
-too — so the invariant "everything the ledger publishes is kernel-audited" holds
-unchanged, and the six declarations are pinned in
-[`docs/status/public-api.txt`](../status/public-api.txt) like any other.
+The facade is deliberately off the root import — the vendored tree declares
+roughly 157 root-namespace names — so `root_import` stays `false`, and
+`scripts/check_print_axioms.py` reaches it through an explicit
+`OFF_ROOT_FACADES` list instead of through the root closure. The facade's module
+docstring carries the reasoning.
 
 ### What the `--in-tree` driver checks
 
@@ -102,28 +82,9 @@ unchanged, and the six declarations are pinned in
 3. kernel `#print axioms` on all six facade declarations, asserting only
    `propext`, `Classical.choice`, `Quot.sound`.
 
-Result (2026-08-20):
-
-```
-trust scan: no forbidden tokens in 20 vendored Lean sources
-Build completed successfully (2710 jobs).
-'AISafetyAtlas.Oversight.Debate.completeness' depends on axioms: [propext, Classical.choice, Quot.sound]
-'AISafetyAtlas.Oversight.Debate.soundness'    depends on axioms: [propext, Classical.choice, Quot.sound]
-'AISafetyAtlas.Oversight.Debate.correctness'  depends on axioms: [propext, Classical.choice, Quot.sound]
-'AISafetyAtlas.Oversight.Debate.alice_fast'   depends on axioms: [propext, Classical.choice, Quot.sound]
-'AISafetyAtlas.Oversight.Debate.bob_fast'     depends on axioms: [propext, Classical.choice, Quot.sound]
-'AISafetyAtlas.Oversight.Debate.vera_fast'    depends on axioms: [propext, Classical.choice, Quot.sound]
-debate in-tree check ok: 6 facade declarations depend only on [propext, Classical.choice, Quot.sound]
-```
-
-### Statement fidelity
-
-The port is a toolchain migration only. Its `PORTING.md` diffed every declaration
-signature against upstream and found exactly three differences, none a weakening:
-`Vector` → `List.Vector` (a Mathlib namespace move), a renamed *local* helper in
-`Prob/Chernoff.lean` that had collided with a new Mathlib name, and the removal
-of a manual `Prob.ext_iff` now generated by `@[ext]`. `Debate/Correct.lean` is
-byte-identical to upstream apart from the atlas header.
+Result (2026-08-20): trust scan clean across 20 vendored Lean sources; build
+completed (2710 jobs); all six facade declarations depend only on `propext`,
+`Classical.choice`, `Quot.sound`.
 
 ## Honest scope — upstream's own caveats
 

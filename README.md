@@ -205,10 +205,9 @@ names live in each facade docstring; root `import AISafetyAtlas` remains
 available.
 
 `Oversight.Debate` is the one facade root `import AISafetyAtlas` does **not**
-bring in. It wraps a vendored third-party development that declares its names in
-the root namespace, so it is imported on its own rather than pushed at everyone;
-its module docstring says so, and `scripts/reproduce_debate.sh --in-tree` runs
-the kernel axiom check the root-closure audit would otherwise cover.
+bring in: it wraps a vendored development that declares its names in the root
+namespace, so it is imported on its own and audited separately. Its module
+docstring gives the reason.
 
 ## Epistemic scope
 

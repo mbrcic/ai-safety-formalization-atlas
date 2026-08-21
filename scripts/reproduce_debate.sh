@@ -6,19 +6,13 @@
 # Two lanes, deliberately both kept:
 #
 #   (no argument)  Path A — build UPSTREAM at its own toolchain (Lean/Mathlib
-#                  v4.8.0) from a separate checkout. Independent of anything the
-#                  atlas vendors, so it stays a check on the upstream artifact
-#                  itself rather than on the atlas's copy of it.
+#                  v4.8.0) from a separate checkout, so it stays a check on the
+#                  upstream artifact rather than on the atlas's copy of it.
+#   --in-tree      Path B — check the vendored port inside the atlas 4.31 build
+#                  closure: trust scan, build, kernel `#print axioms`.
 #
-#   --in-tree      Path B — check the vendored port that now lives inside the
-#                  atlas 4.31 build closure: strict-trust scan, build, and a
-#                  kernel `#print axioms` on the facade declarations. The gate
-#                  covers the same declarations via OFF_ROOT_FACADES in
-#                  scripts/check_print_axioms.py; this driver is the standalone,
-#                  citable form of that evidence, and adds the trust scan.
-#
-# Path A reproduces; Path B is what makes the result usable from Lean. Neither
-# is headline coverage, and neither supports an AI-system reading on its own.
+# Evidence for both: docs/provenance/debate-reproduction.md. Neither is headline
+# coverage, and neither supports an AI-system reading on its own.
 set -euo pipefail
 
 readonly DEBATE_REPOSITORY="https://github.com/google-deepmind/debate.git"
@@ -42,8 +36,7 @@ readonly IN_TREE_TARGETS=(
   "AISafetyAtlas.Oversight.Debate"
   "AISafetyAtlas.Examples.Oversight.Debate"
 )
-# The facade surface. Correctness *and* the query-complexity half: a debate
-# protocol that were only correct would not be the result the paper states.
+# Correctness *and* the query-complexity half — the paper states both.
 readonly FACADE_DECLARATIONS=(
   "AISafetyAtlas.Oversight.Debate.completeness"
   "AISafetyAtlas.Oversight.Debate.soundness"
@@ -63,8 +56,7 @@ run_in_tree() {
   fi
 
   # Same strict-trust gate as Path A. `axiom` is matched in declaration position
-  # only, so prose in a module docstring cannot trip it — and cannot hide a real
-  # `axiom` command either, since those start a line.
+  # only: module prose cannot trip it, and cannot hide a real one either.
   local scan_paths=(
     "$VENDORED_DIRECTORY"
     "AISafetyAtlas/Upstream/Debate.lean"
@@ -92,13 +84,11 @@ run_in_tree() {
 
   lake build "${IN_TREE_TARGETS[@]}"
 
-  # Kernel-level axiom check. The textual scan above cannot see through an
-  # imported dependency; `#print axioms` can, and it is the whole point of
-  # having the development inside the build closure rather than beside it.
+  # Kernel-level axiom check: the textual scan above cannot see through an
+  # imported dependency, and `#print axioms` can.
   local harness
   harness=$(mktemp "${TMPDIR:-/tmp}/atlas-debate-axioms-XXXXXX.lean")
-  # EXIT rather than RETURN: under `set -e` a failed build leaves the function
-  # without returning, and the harness would survive in the temp directory.
+  # EXIT, not RETURN: under `set -e` a failed build never returns from here.
   trap 'rm -f -- "$harness"' EXIT
   {
     echo "import AISafetyAtlas.Oversight.Debate"

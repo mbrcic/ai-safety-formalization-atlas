@@ -68,15 +68,9 @@ def imported_atlas_modules(path: Path) -> list[str]:
 #
 # The audited surface is "what the ledger publishes", not "what the root import
 # happens to re-export". Those coincided until a facade had a reason not to be
-# re-exported: `AISafetyAtlas.Oversight.Debate` wraps a vendored third-party
-# development that declares ~157 names in the *root* namespace (`count`, `close`,
-# `final`, `trace`, `step`, `L`, `Correct`, …), and putting those in front of
-# every `import AISafetyAtlas` user is a worse trade than naming the facade here.
-#
-# Without this list such a facade could publish declarations in `registry.yaml`
-# that no kernel audit ever reached, and `check_ledger_coverage` below would
-# reject the row rather than the gap — which reads as "do not publish it" when
-# the real answer is "audit it too".
+# re-exported. Without this list such a facade could publish declarations that
+# no kernel audit ever reached, and `check_ledger_coverage` below would reject
+# the row rather than the gap.
 OFF_ROOT_FACADES: dict[str, str] = {
     "AISafetyAtlas.Oversight.Debate": (
         "re-exports a vendored root-namespace development; see the module "

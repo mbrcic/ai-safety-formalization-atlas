@@ -20,15 +20,11 @@ exhibits both hypotheses, and then reads the guarantees off at fixed numbers.
 | Both at once, better than a coin | `one_round_correct`, `success_beats_coin` |
 | The verifier's query budget as a number | `verifier_queries_le` |
 
-`t = 0` is the shortest debate the protocol admits: `Debate.protocol` runs
-`t + 1` rounds, so this is a one-round argument. It is the round count at which
-the Lipschitz hypothesis can be discharged for every oracle without an induction
-upstream does not carry — `every_oracle_lipschitz_zero` is proved here, not
-vendored. Nothing below depends on the oracle, so the instantiated guarantees
-hold for arbitrary stochastic computations of that length.
-
-Upstream exhibits no oracle at all; without this file the hypothesis
-`Debate.Lipschitz o t k` would be unwitnessed in the tree.
+`t = 0` is the shortest debate the protocol admits (`Debate.protocol` runs
+`t + 1` rounds) and the round count at which the Lipschitz hypothesis can be
+discharged for every oracle without an induction upstream does not carry.
+Nothing below depends on the oracle, so the instantiated guarantees hold for
+arbitrary stochastic computations of that length.
 -/
 
 namespace AISafetyAtlas.Examples.Oversight.Debate

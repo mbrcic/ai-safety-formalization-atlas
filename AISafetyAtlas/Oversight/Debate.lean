@@ -53,34 +53,25 @@ No AI-system reading follows without a separate reviewed bridge
 
 ## Why this module is not on the root import
 
-`AISafetyAtlas.Upstream.Debate` is a vendored third-party development that
-declares roughly 157 names in the **root** namespace, among them `count`,
-`close`, `final`, `trace`, `estimate`, `step`, `L` and `Correct`. Re-exporting
-those through `import AISafetyAtlas` would put them in front of every downstream
-user of the atlas, which is not a trade a stable facade should make on their
-behalf. So this facade is imported on its own, the same contract
-`AISafetyAtlas.Explore` keeps, and it is built by CI as an explicit target in
-`scripts/lean_build_targets.txt`.
+The vendored development declares roughly 157 names in the **root** namespace —
+`count`, `close`, `final`, `trace`, `estimate`, `step`, `L`, `Correct` among
+them — so `import AISafetyAtlas` does not bring this facade in; import it on its
+own, the contract `AISafetyAtlas.Explore` already keeps. Because the root
+closure does not reach it, `scripts/check_print_axioms.py` audits it through an
+explicit `OFF_ROOT_FACADES` list, and the six declarations below are pinned in
+`docs/status/public-api.txt` like any other public name.
 
-Walking only the root closure, `scripts/check_print_axioms.py` would not reach
-these theorems — so it carries an explicit `OFF_ROOT_FACADES` list and audits
-this module too. Everything the ledger publishes stays kernel-audited, and the
-six declarations below are pinned in `docs/status/public-api.txt` like any other
-public name. `scripts/reproduce_debate.sh --in-tree` runs the same
-`#print axioms` check standalone, alongside the strict-trust scan; the recorded
-evidence is in `docs/provenance/debate-reproduction.md`.
-
-For the same reason, `open AISafetyAtlas.Oversight.Debate` makes names such as
+For the same reason `open AISafetyAtlas.Oversight.Debate` makes names such as
 `Oracle` and `Alice` ambiguous against the upstream root declarations this module
 re-exports. Import it and qualify — `open AISafetyAtlas.Oversight` and then
 `Debate.Oracle` — as `AISafetyAtlas/Examples/Oversight/Debate.lean` does.
 
 ## Provenance
 
-Upstream `google-deepmind/debate` at revision de3a6e5 (Apache-2.0), ported to
-Lean v4.31.0 in `LukaHobor/debate` branch `port-lean-4.31` at revision dafe25d,
-vendored under `AISafetyAtlas/Upstream/Debate/`. Statement fidelity, the
-toolchain migration, and every adaptation: `vendor/debate/PROVENANCE.md`.
+Upstream `google-deepmind/debate` (Apache-2.0), ported to Lean v4.31.0 and
+vendored under `AISafetyAtlas/Upstream/Debate/`. Pins, statement fidelity and
+every adaptation: `vendor/debate/PROVENANCE.md`. Reproduction evidence:
+`docs/provenance/debate-reproduction.md`.
 -/
 
 namespace AISafetyAtlas.Oversight.Debate

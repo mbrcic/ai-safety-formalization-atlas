@@ -92,10 +92,8 @@ expect oversight-has-a-flattening-lever.json "verdict: THE COUNTING BOUND DOES N
 expect oversight-has-a-flattening-lever.json "this is NOT a finding that oversight succeeds"
 
 # A model the reader must refuse rather than silently decide.
-# The X's must end the template: BSD `mktemp` substitutes them only there,
-# so an `.json` suffix made both calls resolve to the same literal name and
-# the second one failed with "File exists". The reader does not look at the
-# extension.
+# The X's must end the template: BSD `mktemp` substitutes them only there, so an
+# `.json` suffix made both calls resolve to the same name and the second failed.
 malformed="$(mktemp "${TMPDIR:-/tmp}/atlas-check-XXXXXX")"
 trap 'rm -f -- "$malformed"' EXIT
 cat >"$malformed" <<'JSON'
@@ -125,11 +123,9 @@ json.dump({"schema": "atlas-check/1", "kind": "device", "states": n,
            "target": [i % 2 for i in range(n)], "value": 1},
           open(sys.argv[1], "w"))
 PY
-# `timeout` is GNU coreutils and is absent from a stock macOS. Skipping with a
-# notice is the same trade `agent_gate.sh` makes for pytest and ty: a developer
-# without the tool still gets every other check, and CI runs on Linux, so the
-# guard is not optional on a pull request. Running unbounded instead would turn
-# the regression this guards against into a hang rather than a failure.
+# `timeout` is GNU coreutils, absent on a stock macOS. Skipping with a notice is
+# the trade `agent_gate.sh` already makes for pytest and ty; CI runs on Linux, so
+# the guard still holds on a pull request.
 timeout_command=""
 for candidate in timeout gtimeout; do
   if command -v "$candidate" >/dev/null 2>&1; then

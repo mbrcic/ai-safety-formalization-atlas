@@ -233,10 +233,8 @@ dual to the impossibility rows.
   Apache-2.0.
 - **Version gap (closed 2026-08-20):** upstream pins `leanprover/lean4:v4.8.0`
   and Mathlib `v4.8.0`; the atlas is on `v4.31.0`. The original scope was
-  therefore Path A only — reproduce like Chaitin/Isabelle, building at the
-  upstream toolchain from a separate checkout via a new
-  `scripts/reproduce_debate.sh`, and do **not** vendor into the 4.31 tree.
-  A toolchain port later removed the gap; see the Path B note below.
+  therefore Path A only — build at the upstream toolchain from a separate
+  checkout, like Chaitin/Isabelle. A later port closed the gap; see Path B below.
 - **Acceptance:** clean build at the pinned revision under its own toolchain;
   strict-trust scan of the reproduced tree; a `registry.yaml` record
   (`LAND-DEBATE-001` — revision, `Debate/Correct.lean`, the three theorem
@@ -256,21 +254,17 @@ dual to the impossibility rows.
   `scripts/reproduce_debate.sh`; evidence
   [`debate-reproduction.md`](../provenance/debate-reproduction.md). First
   reproduced possibility / scalable-oversight anchor. Never headline coverage.
-- **Path B done (2026-08-20):** the port `LukaHobor/debate` `port-lean-4.31`
-  @ `dafe25d` moves the development to the atlas's own Mathlib commit
-  (`fabf563`) without weakening a theorem — three signature differences, all
-  upstream renames, and `Debate/Correct.lean` byte-identical. Vendored as 18
-  modules under `AISafetyAtlas/Upstream/Debate/`, wrapped by
+- **Path B done (2026-08-20):** the Lean 4.31 port moves the development to the
+  atlas's own Mathlib commit without weakening a theorem. Vendored as 18 modules
+  under `AISafetyAtlas/Upstream/Debate/`, wrapped by
   `AISafetyAtlas.Oversight.Debate`, witnessed by
   `AISafetyAtlas/Examples/Oversight/Debate.lean`, and checked by
-  `scripts/reproduce_debate.sh --in-tree` (strict-trust scan, build, kernel
-  `#print axioms` on all six facade declarations). Path A is kept: it stays a
-  check on the upstream artifact rather than on the atlas's copy of it. The
-  facade is deliberately **off** the root import — the vendored tree declares
-  roughly 157 root-namespace names — so `root_import` stays `false` and the
-  axiom audit reaches it through `OFF_ROOT_FACADES`. Query complexity
-  (`alice_fast`, `bob_fast`, `vera_fast`) is now checked too; Path A only ever
-  checked correctness. Still never headline coverage.
+  `scripts/reproduce_debate.sh --in-tree` (trust scan, build, kernel
+  `#print axioms` on all six facade declarations). The facade is deliberately
+  **off** the root import, so `root_import` stays `false` and the audit reaches
+  it through `OFF_ROOT_FACADES`. Path A is kept as a check on the upstream
+  artifact; its lane never covered query complexity. Still never headline
+  coverage. Detail: [`debate-reproduction.md`](../provenance/debate-reproduction.md).
 
 ### CT-8 — BY-025 Uncontainability: bridge or documented no-map (M) — **Bridge rung**
 

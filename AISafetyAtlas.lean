@@ -65,14 +65,10 @@ nothing embedded, temporal, or self-referential. The root import list below is
 the public closure and is expected to name specializations directly.
 
 **One published facade is deliberately outside it.**
-`AISafetyAtlas.Oversight.Debate` wraps a vendored third-party development that
-declares roughly 157 names in the *root* namespace, so re-exporting it here
-would push `count`, `close`, `final`, `trace`, `step`, `L` and `Correct` at
-every downstream user of this import. It is imported on its own instead —
-`import AISafetyAtlas.Oversight.Debate` — and audited through
-`OFF_ROOT_FACADES` in `scripts/check_print_axioms.py` rather than through this
-closure. Its declarations are pinned in `docs/status/public-api.txt` like any
-other public name.
+`AISafetyAtlas.Oversight.Debate` wraps a vendored development that declares
+roughly 157 names in the *root* namespace, so it is imported on its own and
+audited through `OFF_ROOT_FACADES` in `scripts/check_print_axioms.py` rather
+than through this closure; its module docstring gives the reason.
 
 ## Aggregating facades
 

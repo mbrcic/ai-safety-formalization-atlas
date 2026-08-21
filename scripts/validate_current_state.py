@@ -265,13 +265,10 @@ def validate_lean_build_closure(lean_files: list[Path]) -> None:
     unknown_targets = sorted(set(targets) - set(modules))
     require(not unknown_targets, f"Lean build-target manifest names missing modules: {unknown_targets}")
 
-    # A build target pulls its own imports in with it, so the closure is taken
-    # over the targets exactly as it is over the root. The property being
-    # checked is "CI compiles this file", and `lake build` on a target compiles
-    # everything that target imports. Without the closure the manifest would
-    # have to name every module of a vendored subtree one by one — a
-    # hand-maintained list that rots the moment the subtree gains a file, while
-    # `lake` was building all of them the whole time.
+    # `lake build` on a target compiles everything that target imports, so the
+    # closure is taken over the targets exactly as it is over the root. Without
+    # it the manifest would have to name every module of a vendored subtree by
+    # hand, and rot the moment the subtree gained a file.
     target_closure: set[str] = set()
     for target in targets:
         target_closure |= dependency_closure(target, graph)

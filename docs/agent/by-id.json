@@ -2538,37 +2538,37 @@
             "atlas_declaration": "AISafetyAtlas.Oversight.Debate.completeness",
             "type": "WRAPPER",
             "file": "AISafetyAtlas/Oversight/Debate.lean",
-            "line": 169
+            "line": 160
           },
           {
             "atlas_declaration": "AISafetyAtlas.Oversight.Debate.soundness",
             "type": "WRAPPER",
             "file": "AISafetyAtlas/Oversight/Debate.lean",
-            "line": 182
+            "line": 173
           },
           {
             "atlas_declaration": "AISafetyAtlas.Oversight.Debate.correctness",
             "type": "WRAPPER",
             "file": "AISafetyAtlas/Oversight/Debate.lean",
-            "line": 194
+            "line": 185
           },
           {
             "atlas_declaration": "AISafetyAtlas.Oversight.Debate.alice_fast",
             "type": "WRAPPER",
             "file": "AISafetyAtlas/Oversight/Debate.lean",
-            "line": 211
+            "line": 202
           },
           {
             "atlas_declaration": "AISafetyAtlas.Oversight.Debate.bob_fast",
             "type": "WRAPPER",
             "file": "AISafetyAtlas/Oversight/Debate.lean",
-            "line": 221
+            "line": 212
           },
           {
             "atlas_declaration": "AISafetyAtlas.Oversight.Debate.vera_fast",
             "type": "WRAPPER",
             "file": "AISafetyAtlas/Oversight/Debate.lean",
-            "line": 233
+            "line": 224
           }
         ]
       },
