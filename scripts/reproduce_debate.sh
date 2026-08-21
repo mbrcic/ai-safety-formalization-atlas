@@ -86,7 +86,8 @@ run_in_tree() {
 
   # Kernel-level axiom check: the textual scan above cannot see through an
   # imported dependency, and `#print axioms` can.
-  local harness
+  # Global, like `work_directory` below: the EXIT trap fires after the function
+  # has returned, and a `local` would be gone by then (unbound under `set -u`).
   harness=$(mktemp "${TMPDIR:-/tmp}/atlas-debate-axioms-XXXXXX.lean")
   # EXIT, not RETURN: under `set -e` a failed build never returns from here.
   trap 'rm -f -- "$harness"' EXIT
