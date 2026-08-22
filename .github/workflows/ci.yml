@@ -29,13 +29,16 @@ jobs:
           persist-credentials: false
       # The gate skips tests/ when pytest is absent so a contributor without it
       # still gets every other check. CI installs it, so the skip never applies
-      # here and the shape suite is not optional on a pull request.
-      - name: Install pytest and ty (shape suite + type check)
+      # here and the shape suite is not optional on a pull request. PyYAML is
+      # here because check_conjecture_grade_prose.py is the one agent_gate
+      # script that reads conjectures.yaml through the real parser rather than
+      # the hand-rolled one the ledger validators use.
+      - name: Install pytest, ty, and PyYAML (shape suite + type check + prose gate)
         run: |
           set -euo pipefail
           ci_venv="$RUNNER_TEMP/atlas-agent-gate-venv"
           python3 -m venv "$ci_venv"
-          "$ci_venv/bin/python" -m pip install --quiet pytest ty
+          "$ci_venv/bin/python" -m pip install --quiet pytest ty pyyaml
           # Keep pytest, ty, and the interpreter used by agent_gate in one
           # environment.  Installing with a different pip than the executable
           # used by ty can make CI report a false unresolved-import failure.
