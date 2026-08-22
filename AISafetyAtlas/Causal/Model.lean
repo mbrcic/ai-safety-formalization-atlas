@@ -576,11 +576,17 @@ public theorem marginal_union_targets (M : Model C dim 𝕜) (targets : Finset C
     rw [jointProb, Finset.prod_eq_zero (Finset.mem_univ c)]
     rw [M.factor_hardInterventionProfile, if_pos (ht hct), if_neg (fun h ↦ hne h.symm)]
 
-/-- **Pearl equation (1.39), Property 2.** Once a variable's direct causes are
-held fixed, forcing any further variables leaves its distribution alone.
+/-- **Pearl equation (1.39), Property 2**, cleared of denominators. Once a
+variable's direct causes are held fixed, forcing any further variables leaves
+its distribution alone.
 
-Print states it for a set disjoint from the variable and its parents; the
-hypothesis here is exactly that, and nothing about the *graph* beyond it. -/
+Print states it for a set disjoint from the variable *and its parents*; the
+hypothesis here names only the variable. That is a weaker binder and the same
+statement: both sides read `extra` only through the forced set
+`M.parents c ∪ extra`, so an `extra` naming a parent gives the instance at
+`extra \ M.parents c`, which is one of print's. What must be excluded is `c`
+itself, since a forced `c` makes the left side a consistency indicator rather
+than `c`'s own mechanism. Nothing about the *graph* is assumed beyond that. -/
 public theorem marginal_singleton_do_parents (M : Model C dim 𝕜) {c : C}
     {extra : Finset C} (hc : c ∉ extra) (target : Assignment C dim) :
     M.marginal (hardInterventionProfile (M.parents c ∪ extra) target) {c} target =

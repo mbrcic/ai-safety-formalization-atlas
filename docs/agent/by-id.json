@@ -3925,25 +3925,25 @@
             "atlas_declaration": "AISafetyAtlas.Causal.Model.Δmix_congr",
             "type": "NEW_PROOF",
             "file": "AISafetyAtlas/Causal/Model.lean",
-            "line": 786
+            "line": 792
           },
           {
             "atlas_declaration": "AISafetyAtlas.Causal.Model.jointProb_hardInterventionProfile",
             "type": "NEW_PROOF",
             "file": "AISafetyAtlas/Causal/Model.lean",
-            "line": 666
+            "line": 672
           },
           {
             "atlas_declaration": "AISafetyAtlas.Causal.Model.Δ_fixProfile",
             "type": "NEW_PROOF",
             "file": "AISafetyAtlas/Causal/Model.lean",
-            "line": 697
+            "line": 703
           },
           {
             "atlas_declaration": "AISafetyAtlas.Causal.Model.ancestors_eq_univ_iff",
             "type": "NEW_PROOF",
             "file": "AISafetyAtlas/Causal/Model.lean",
-            "line": 871
+            "line": 877
           },
           {
             "atlas_declaration": "AISafetyAtlas.Examples.Causal.transform_identity_edgeless",
