@@ -551,9 +551,10 @@
     },
     "mais-open-problems-2026": {
       "citation": "Math for AI Safety (MAIS), master list of open problems — 92 numbered problems (MAIS-O1 … MAIS-O92), each with an AI-safety motivation, mathematical area, and difficulty rating, linked to a research agenda carrying full context.",
-      "locator": "https://github.com/lionellevine/MAIS/tree/main/open-problems",
+      "locator": "https://github.com/lionellevine/MAIS/tree/9dd29f8bf5ccd1e7701e300039b09ed4096b6516/open-problems",
       "role": "directory",
       "retrieved": "2026-08-07",
+      "revision": "9dd29f8bf5ccd1e7701e300039b09ed4096b6516",
       "notes": "Problems are open to the registry's knowledge, literature-checked at release; MAIS-O60 was resolved in the negative in August 2026. Fourteen problems (MAIS-O1, O10-O22) concern bounded and quantitative Löb, cooperative AI, and program equilibrium — the area where the atlas already ships Löb, Gödel I/II and Tarski. Checked 2026-08-07: MAIS-O1 and MAIS-O16 are not statable against AISafetyAtlas.Logic.loeb, which is the unbounded theorem; both need proof-length metrics, arithmetized bounded provability, and expansion certificates that neither Mathlib nor Foundation provides."
     },
     "timaeus-projects-2026": {
@@ -611,6 +612,83 @@
       "locator": "https://doi.org/10.2178/bsl/1058448677",
       "role": "work",
       "notes": "Statement source for the sets-and-functions form exposed as CLM-LAWVERE-001; Lawvere's 1969 cartesian-closed-category theorem is strictly broader than the Atlas declaration."
+    },
+    "pearl-2009-causality": {
+      "citation": "J. Pearl, Causality: Models, Reasoning, and Inference, 2nd ed. Cambridge University Press, 2009.",
+      "locator": "https://doi.org/10.1017/CBO9780511803161",
+      "role": "work",
+      "retrieved": "2026-08-19",
+      "notes": "Ingredient for AISafetyAtlas.Causal.Model: causal Bayesian networks, the product factorization, and hard do(X=x) as truncated factorization. The atlas does not transcribe do-calculus or identification theory."
+    },
+    "howard-matheson-2005-influence-diagrams": {
+      "citation": "R. A. Howard and J. E. Matheson, “Influence Diagrams,” Decision Analysis, vol. 2, no. 3, pp. 127–143, 2005, doi: 10.1287/deca.1050.0020. Reprint of the 1984 paper.",
+      "locator": "https://doi.org/10.1287/deca.1050.0020",
+      "role": "work",
+      "retrieved": "2026-08-19",
+      "notes": "Classical influence-diagram source cited by RE24 for the CID formalism: chance, decision, and value nodes. Ingredient for Skeleton, Policy, and value, via the Everitt et al. 2021 / RE24 CID specialization."
+    },
+    "everitt-etal-2021-agent-incentives": {
+      "citation": "T. Everitt, R. Carey, E. D. Langlois, P. A. Ortega, and S. Legg, “Agent Incentives: A Causal Perspective,” Proceedings of the AAAI Conference on Artificial Intelligence, vol. 35, no. 13, pp. 11487–11495, 2021, doi: 10.1609/aaai.v35i13.17368.",
+      "locator": "https://doi.org/10.1609/aaai.v35i13.17368",
+      "role": "work",
+      "retrieved": "2026-08-19",
+      "notes": "Peer-reviewed CID source RE24 cites: single-decision single-utility causal influence diagrams, policy as the decision mechanism, expected utility. Ingredient for Skeleton, Policy, and Model.value. Not a source of local interventions or of the margin class."
+    },
+    "uhler-etal-2013-faithfulness": {
+      "citation": "C. Uhler, G. Raskutti, P. Bühlmann, and B. Yu, “Geometry of the faithfulness assumption in causal inference,” Annals of Statistics, vol. 41, no. 2, pp. 436–463, 2013, doi: 10.1214/12-AOS1080.",
+      "locator": "https://doi.org/10.1214/12-AOS1080",
+      "role": "work",
+      "retrieved": "2026-08-19",
+      "notes": "Ingredient for the *role* of (M1)–(M6), not for the six inequalities themselves: strong faithfulness replaces a measure-zero unfaithfulness assumption by an explicit margin, and shows the excluded set can be large. MAIS-A2 cites this analogy; the atlas records it as the literature ground of that move. The six numbered conditions remain an A2 composite."
+    },
+    "richens-everitt-2024": {
+      "citation": "J. Richens and T. Everitt, “Robust agents learn causal world models,” International Conference on Learning Representations (ICLR), 2024, arXiv:2402.10877.",
+      "locator": "https://arxiv.org/abs/2402.10877",
+      "role": "work",
+      "retrieved": "2026-08-19",
+      "notes": "Primary peer-reviewed source for the causal/decision primitives: Def. 2 local intervention v |-> f(v) and the displayed mechanism-replacement formula; Def. 3 mixtures; Def. 4 single-decision CID; Assumps. 1–2 unmediated task and domain dependence; section 2.2 expected utility and regret; section 2.3 masking Pa_D -> Pa_D' as a local intervention. Theorems 1–2 (Lebesgue-almost-every identifiability) are not formalized. Causal.Model transcribes the finite categorical specialization of Definitions 2–3, over an ordered field, and the mechanism-replacement formula; Causal.Decision formalizes the unmediated finite decision layer. They are not transcribed from MAIS-A2."
+    },
+    "mais-a2-2026": {
+      "citation": "Math for AI Safety (MAIS), research agenda MAIS-A2, “Behavioral tomography of causal world models” — the agenda in which MAIS-O23, O24, O25, O26, O27, O2, O28, O29, O30, O31, O32, O33, O34 and O35 are stated, together with the definitions they quantify over.",
+      "locator": "https://github.com/lionellevine/MAIS/blob/9dd29f8bf5ccd1e7701e300039b09ed4096b6516/agendas/A2/MAIS-A2.tex",
+      "role": "work",
+      "retrieved": "2026-08-20",
+      "revision": "9dd29f8bf5ccd1e7701e300039b09ed4096b6516",
+      "content_sha256": "d61be3eed51f618dd3b9389693b14e066e89a9cef5e89985b4226fff658c3c4f",
+      "notes": "The statement source every MAIS conjecture in conjectures.yaml is graded against; the open-problems/*.md pages are one-page restatements pointing back into it. Carries the definitions the atlas transcribes: def:cbn, def:local (local interventions, masks, profiles, mixtures), def:cid (binary CID — skeleton, model, policy pi: dom(O) -> [0,1], value, regret; the unmediated-task assumption is built into the definition rather than assumed on top of it), def:margin ((M1)-(M6)), def:twovar (the two-variable family MM_2(lambda)), prop:equiv. Chance variables and the decision are binary by definition, so the atlas's binary types are print's own restriction and not a narrowing. The rendered PDF at the same commit is sha256 91fcefc283db02f377c723120357bb3dc67836604986cfc17f6c0573bdaf6bed. Hashes and the per-statement label map are recorded in docs/provenance/mais-source-pin.md. The agenda is AI-written and not human-peer-reviewed."
+    },
+    "mais-o23-2026": {
+      "citation": "Math for AI Safety (MAIS), open problem MAIS-O23, “Do margins imply behavioral identifiability of causal models?”, posed in agenda MAIS-A2 as Question 4.1; authored by Claude Fable 5 directed by Lionel Levine, audited by GPT 5.6 Sol.",
+      "locator": "https://github.com/lionellevine/MAIS/blob/9dd29f8bf5ccd1e7701e300039b09ed4096b6516/open-problems/MAIS-O23.md",
+      "role": "work",
+      "retrieved": "2026-08-19",
+      "revision": "9dd29f8bf5ccd1e7701e300039b09ed4096b6516",
+      "content_sha256": "80a6aa32e387e12494e24c3c693cd2886aabe50a0889155affedfdf8e88cfdea",
+      "notes": "The *question* only: if two models in A2's composite margin class have equal behavioral transforms, must they be equal? Not a definitional source. Local interventions, mixtures, CIDs, value and regret are RE24/Pearl/Everitt 2021. The six margins and the named transform family are A2 composites of those ingredients (strong-faithfulness move; RE24 mixing trick). Graded against mais-a2-2026's label q:ident, which fixes an arbitrary skeleton. The agenda is AI-written and not human-peer-reviewed."
+    },
+    "mais-issue-4-2026": {
+      "citation": "Math for AI Safety (MAIS), issue #4, “MAIS-O34: exact fibers, regret geometry, and a single graph-threshold program”, filed 2026-08-03 by Robby955.",
+      "locator": "https://github.com/lionellevine/MAIS/issues/4",
+      "role": "work",
+      "retrieved": "2026-08-20",
+      "content_sha256": "f425da83395b457feb5615c9beed703675a977967890ebe1b97dd61efdd0b328",
+      "notes": "The candidate complete criterion for MAIS-O34 part (a), transcribed by a conjecture row wherever that row is recorded, and the origin of the two-variable construction MAIS issue #6 credits. Part (b) — the first-order radius constant, the singular classification, and the graph-threshold program — is not transcribed. One comment by the same author is part of the candidate: https://github.com/lionellevine/MAIS/issues/4#issuecomment-5170099225, body sha256 e290bb83bd980cc9a9b8a3610e21ec6e26a0aa5c3d2e036db10b2610d909bca8. Issue bodies are editable in place and carry no addressable revision, so the recorded hash is the body as read on 2026-08-20; an edit invalidates the grading resting on it. Open and unreviewed at that reading."
+    },
+    "mais-issue-6-2026": {
+      "citation": "Math for AI Safety (MAIS), issue #6, “full solution pending review” for MAIS-O23, filed 2026-08-04.",
+      "locator": "https://github.com/lionellevine/MAIS/issues/6",
+      "role": "work",
+      "retrieved": "2026-08-19",
+      "content_sha256": "4fd639c4322a3a3bd1b27fe6f14ee3de902961e0013485395e461d7cdc739a9b",
+      "notes": "The construction the atlas checks: three models on two binary variables with a common behavioral transform. Open and unreviewed when this row was written. The issue credits the prior two-variable construction in MAIS issue #4 (MAIS-O34) by a different author and states its own contribution as making the MAIS-O23 consequence explicit across all three graphs. The atlas claims no priority and does not assert the issue's conclusion; what is recorded here is that a stated part of it machine-checks. Body sha256 as read 2026-08-20; issue bodies are editable in place, so an edit invalidates this grading."
+    },
+    "mais-issue-8-2026": {
+      "citation": "Math for AI Safety (MAIS), issue #8, “MAIS-O31: candidate complete solution — generic chamber classification for one intervention in a binary chain”, filed 2026-08-04 by kumino.",
+      "locator": "https://github.com/lionellevine/MAIS/issues/8",
+      "role": "work",
+      "retrieved": "2026-08-20",
+      "content_sha256": "8e2e688eaac1a72f915aa787ad1e74676e6b72eff4f2796394e95b0a83fb8a96",
+      "notes": "The candidate a conjecture row transcribes wherever that row is recorded. The issue derives four affine diagnostics and a generic chamber classification, and explicitly claims no human or journal referee verification. Where the issue writes 'let t in (0,1) be the utility decision threshold' without saying which utility produces which t, the transcribing row quantifies over the utility gap pair MAIS-O31 itself names and derives t as a threshold, so nothing is posited. Body sha256 as read 2026-08-20; issue bodies are editable in place, so an edit invalidates this grading."
     }
   },
   "results": [
@@ -1360,7 +1438,7 @@
           "content_source_note": "Theorem 10, Delta H_closed <= Delta H_open^max + I(X;C), stated from the printed data alone: a joint law rho for the state and the action, and a Markov kernel kappa playing p(x'|x,c). No plant map and no seed occur in the statement.",
           "build_environment": "leanprover/lean4:v4.31.0; mathlib@fabf563a7c95a166b8d7b6efca11c8b4dc9d911f; PFR@38e94172b72c8ee8ad64b6365dfc22e559c62ebe",
           "build_command": "lake build AISafetyAtlas.Control.Purification AISafetyAtlas.Examples.Control.Purification",
-          "statement_match_note": "Graded EXACT on 2026-08-17 after the two residuals that had held it at RELATED were both closed on this branch. The family residual - that the earlier entropyReduction_le_openLoopMax held only inside the independent-noise realization X'=F(X,C,Z) - is closed by openLoopMax_purifyMap, which shows the two renderings of equation (48) generate the same set of reductions, so their suprema agree exactly. The sSup-versus-max residual is closed by isGreatest_kernelOpenLoopMax, which proves the supremum attained, so kernelOpenLoopMax is equation (48)'s printed maximum rather than a weaker supremum. No residual against the printed statement remains; the audit grades this printed row Yes and Wider."
+          "statement_match_note": "Graded EXACT on 2026-08-17 after the two residuals that had held it at RELATED were both closed. The family residual - that the earlier entropyReduction_le_openLoopMax held only inside the independent-noise realization X'=F(X,C,Z) - is closed by openLoopMax_purifyMap, which shows the two renderings of equation (48) generate the same set of reductions, so their suprema agree exactly. The sSup-versus-max residual is closed by isGreatest_kernelOpenLoopMax, which proves the supremum attained, so kernelOpenLoopMax is equation (48)'s printed maximum rather than a weaker supremum. No residual against the printed statement remains; the audit grades this printed row Yes and Wider."
         },
         {
           "framework": "Lean",
@@ -3686,7 +3764,7 @@
       },
       "ai_safety_relevance": "The survey identifies this result as relevant to limits on AI; no direct real-system implication is asserted here.",
       "ai_bridge_status": "HUMAN_REVIEW",
-      "notes": "Wolpert 2008 is graded RELATED. The published article's 46 tracked statements are covered at per-item status 42 SOURCE-EXACT, 1 SPECIALIZED, 2 REPAIRED, 0 ASSUMED-STEP and 1 REFUTED; the complete map is docs/provenance/wolpert-inference-devices.md. Proposition 6 is proved from its printed premise, the equality case of Gibbs inequality having closed the step the paper asserts without derivation. Corollary 1(ii) is machine-refuted as written. Proposition 7 is repaired under an explicitly relaxed global image convention. Corollary 3(ii) is both directions under mutual semi-control, not Theorem 3. Section 8 is finite/discrete and adds no PFR dependency. Weak inference and Knowledge.Knowable are incomparable, with both countermodels exhibited. The other three cited works remain untranscribed, and nothing here makes U a set of physical worldlines. Definition 9 dropped the measurability of the setup map, the last atlas-added condition on it, once nonemptiness of the maximizing set was derived from sub-additivity rather than from exact additivity; the source states no measurability anywhere. The row remains SPECIALIZED for a different restriction, the finite setup range, and that one is genuinely removable: the printed max is over conditional expectations bounded in [-1, 1], so a supremum denotes on any setup range.",
+      "notes": "Wolpert 2008 is graded RELATED. The published article's 46 tracked statements are covered at per-item status 42 SOURCE-EXACT, 1 SPECIALIZED, 2 REPAIRED, 0 ASSUMED-STEP and 1 REFUTED; the complete map is docs/provenance/wolpert-inference-devices.md. Proposition 6 is proved from its printed premise, the equality case of Gibbs inequality having closed the step the paper asserts without derivation. Corollary 1(ii) is machine-refuted as written. Proposition 7 is repaired under an explicitly relaxed global image convention. Corollary 3(ii) is both directions under mutual semi-control, not Theorem 3. Section 8 is finite/discrete and adds no PFR dependency. Weak inference and Knowledge.Knowable are incomparable, with both countermodels exhibited. The other three cited works remain untranscribed, and nothing here makes U a set of physical worldlines. Definition 9 is now SOURCE-EXACT: inferenceAccuracySupOn uses the printed supremum over positive-mass setup fibres on an arbitrary setup range, and no setup measurability hypothesis is retained. Definition 10 likewise uses tsum over an unrestricted value type subject only to the finite-entropy conditions its printed ratio needs. Definition 11 remains the sole numbered SPECIALIZED item because its printed ratio of cardinalities is undefined as infinity divided by infinity on countably infinite setup ranges; choosing a totalization would add mathematics not supplied by the source.",
       "formal_library_search": {
         "searched_on": "2026-07-28",
         "evidence_file": "docs/provenance/formalization-search.json",
@@ -7267,6 +7345,691 @@
         "use": "Why a pipeline cannot recover what its first stage discarded.",
         "title": "Data processing",
         "attribution": "Cover & Thomas"
+      }
+    },
+    {
+      "id": "LAND-CAUSAL-PEARLCBN-001",
+      "name": "Pearl causal Bayesian networks as a condition on an interventional family",
+      "tags": [
+        "interpretability"
+      ],
+      "result_shape": "INFRASTRUCTURE",
+      "notes": "GROUNDING. Pearl, Causality: Models, Reasoning, and Inference, 2nd ed., 2009, Definition 1.3.1 and equation (1.37), graded in docs/provenance/source-coverage-audit.md section 7. CONTENT. Definition 1.3.1 is a condition on a FAMILY of interventional distributions, so the family is the object: InterventionalFamily is P-star at the definition's own index set, hard interventions, and a statement about it grades against the definition rather than past it. IsCausalBayesNetwork is the four printed conjuncts, with one observational mechanism family q hoisted once and each member factorized by its own r. eq_family_of_isCausalBayesNetwork DERIVES the truncated product rather than assuming it, which is what print does. Model.isCausalBayesNetwork instantiates the condition at the atlas kernel. A READING, RECORDED. Print writes condition (iii) as a quotient of conditional probabilities; the atlas states conditions (ii) and (iii) on TABLES. The two differ exactly on parent configurations of probability zero, where the quotient is undefined and table equality still binds. That is deliberate: null parent fibres are reachable, which is why Causal.MarginClass carries margin conditions at all, so a quotient rendering would go vacuous precisely where a degenerate mechanism needs constraining. The audit's 'Readings that are not transcriptions' section lists it. WHY THIS ROW EXISTS SEPARATELY. Causal.BayesianNetwork was hosted by no registry row until 2026-08-22, so section 7 graded it while every generated status page omitted it. RESULT. RELATED, not EXACT: the row records that the atlas states Pearl's definition and derives his equation, not that a printed theorem was reproduced.",
+      "original_source_refs": [
+        "pearl-2009-causality"
+      ],
+      "root_import": true,
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE",
+          "license": "Apache-2.0",
+          "reproduced": true,
+          "build_environment": "leanprover/lean4:v4.31.0; Mathlib fabf563a7c95a166b8d7b6efca11c8b4dc9d911f; atlas IN_TREE",
+          "declarations": [
+            "AISafetyAtlas.Causal.InterventionalFamily",
+            "AISafetyAtlas.Causal.ConditionalTables",
+            "AISafetyAtlas.Causal.ConditionalTables.family",
+            "AISafetyAtlas.Causal.forcedTable",
+            "AISafetyAtlas.Causal.IsCausalBayesNetwork",
+            "AISafetyAtlas.Causal.eq_family_of_isCausalBayesNetwork",
+            "AISafetyAtlas.Causal.isCausalBayesNetwork_family",
+            "AISafetyAtlas.Causal.isCausalBayesNetwork_iff",
+            "AISafetyAtlas.Causal.Model.tables",
+            "AISafetyAtlas.Causal.Model.interventionalFamily",
+            "AISafetyAtlas.Causal.Model.interventionalFamily_eq",
+            "AISafetyAtlas.Causal.Model.isCausalBayesNetwork"
+          ],
+          "relationship": "RELATED",
+          "scope_delta": {
+            "summary": "Scope Same against Definition 1.3.1: the four printed conjuncts, at Pearl's own index set of hard interventions. Conditions (ii) and (iii) are stated on tables where print writes a quotient of conditional probabilities, which is a reading and not a scope change -- the two differ only on parent configurations of probability zero, where print's quotient is undefined and the atlas condition still binds, and the atlas takes the stronger side deliberately because null parent fibres are reachable in this kernel. Equation (1.37) is derived, not assumed.",
+            "evidence": "docs/provenance/source-coverage-audit.md"
+          },
+          "module": "AISafetyAtlas.Causal.BayesianNetwork",
+          "atlas_module": "AISafetyAtlas.Causal.BayesianNetwork",
+          "build_command": "lake build AISafetyAtlas.Causal.BayesianNetwork AISafetyAtlas.Examples.Causal.BayesianNetwork"
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Causal.eq_family_of_isCausalBayesNetwork",
+            "type": "NEW_PROOF",
+            "source_declarations": [],
+            "application": "Pearl's equation (1.37) as a consequence of Definition 1.3.1 rather than a separate axiom: on the forced coordinates condition (ii) replaces the mechanism by a point mass, on the free ones condition (iii) replaces it by the observational mechanism, and condition (i) multiplies them. Print derives it the same way, so deriving it is what makes this the printed definition and not a restatement of its corollary."
+          }
+        ]
+      },
+      "public": {
+        "group": "What an observer can recover",
+        "summary": "Pearl's causal Bayesian network, stated as a condition on a whole family of interventional distributions rather than on one distribution, with the truncated-product formula derived from it.",
+        "use": "Deciding whether a family of interventional distributions is generated by a single causal graph, and obtaining the truncated product when it is."
+      }
+    },
+    {
+      "id": "LAND-CAUSAL-DECISIONNET-001",
+      "name": "Decision tasks as causal influence diagrams, with the decision and the utility as vertices",
+      "tags": [
+        "interpretability",
+        "agent-incentives"
+      ],
+      "result_shape": "INFRASTRUCTURE",
+      "notes": "GROUNDING. Richens and Everitt, Robust agents learn causal world models, ICLR 2024, Section 2.2 and Appendix A.1, read from the published proceedings PDF richens-everitt-2024-iclr-proceedings.pdf, sha256 143d458cbee2f4f5d04d7380f6741e8105965d1ee94834e1ddb3bd231722a0e7. Graded in docs/provenance/source-coverage-audit.md section 6. CONTENT. DecisionNetwork is Definition 4: a single-decision single-utility CID, which print defines as a CBN whose variables are partitioned into decision, utility and chance, so it is built on Causal.Model rather than on the structural layer. DecisionPolicy is print's pi(d | pa_D). Model.withPolicy is do(D = pi(pa_D)) as a SOFT intervention: the parent set is untouched and withPolicy_parents records it, because a policy READS pa_D and RE24's own Definition 2 severs a hard-intervened vertex's incoming edges. Reading print's do as a hard intervention here would delete the observations the policy is defined on. expectedUtility, IsOptimal and regret are Section 2.2's three sentences at print's own quantifiers. IsUnmediated is Assumption 1, with proper ancestors and descendants as print's notation section requires - print writes 'Anc_i and Desc_i refer to proper ancestors and descendants', and on print's own Figure 1 the decision is a parent of the utility, so an improper reading would make Assumption 1 unsatisfiable. mem_parents_utility_of_isUnmediated is the graph half of Appendix A.1 Lemma 1(iii): 'D in Anc_U which with Desc_D and Anc_U disjoint implies D in Pa_U'. exists_utilityFunction recovers print's U(pa_U) as an actual function of the parents from IsDeterministicUtility. RESULT. Assumption 1 is INHABITED, not merely defined: figCID is print's own Figure 1 training diagram, figIsUnmediated discharges Assumption 1 on it, and figDecision_mem_parents_utility runs the Appendix step. Without that witness both Assumption-1 theorems would be vacuous. SCOPE. Same against Definition 4, Assumption 1 and the Lemma 1(iii) graph step. ONE DISCLOSED WIDENING: print says the utility variable is a real-valued function of its parents, and DecisionNetwork does not make that a field, so expectedUtility is defined on a strictly larger class. IsDeterministicUtility pins print's case and exists_utilityFunction is the lemma that recovers print's function there. NOT CLOSED BY THIS ROW. The Section 2.2 rows on Causal.Decision stay Narrower. Those declarations are the Assumption-1 projection with the decision and the utility OUTSIDE the graph, and nothing yet proves that projection agrees with expectedUtility on a diagram satisfying Assumption 1. That agreement theorem is what would close them, and it is not here. Lemma 1 itself stays uncovered: its clauses (i) and (ii) and the first half of (iii) run through Assumption 2, domain dependence, which is not formalized. INHERITED. A DecisionNetwork is a Causal.Model, so it carries that structure's finite vertex set, parents as a Finset and N-ranked acyclicity; those are graded on Causal.Model's own rows.",
+      "original_source_refs": [
+        "richens-everitt-2024"
+      ],
+      "root_import": true,
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE",
+          "license": "Apache-2.0",
+          "reproduced": true,
+          "build_environment": "leanprover/lean4:v4.31.0; Mathlib fabf563a7c95a166b8d7b6efca11c8b4dc9d911f; atlas IN_TREE",
+          "declarations": [
+            "AISafetyAtlas.Causal.DecisionNetwork",
+            "AISafetyAtlas.Causal.DecisionPolicy",
+            "AISafetyAtlas.Causal.Model.withPolicy",
+            "AISafetyAtlas.Causal.Model.withPolicy_parents",
+            "AISafetyAtlas.Causal.Model.properAncestors",
+            "AISafetyAtlas.Causal.Model.properDescendants",
+            "AISafetyAtlas.Causal.Model.cpt_eq_one_unique",
+            "AISafetyAtlas.Causal.DecisionNetwork.expectedUtility",
+            "AISafetyAtlas.Causal.DecisionNetwork.IsOptimal",
+            "AISafetyAtlas.Causal.DecisionNetwork.regret",
+            "AISafetyAtlas.Causal.DecisionNetwork.regret_nonneg",
+            "AISafetyAtlas.Causal.DecisionNetwork.IsUnmediated",
+            "AISafetyAtlas.Causal.DecisionNetwork.IsDeterministicUtility",
+            "AISafetyAtlas.Causal.DecisionNetwork.exists_utilityFunction",
+            "AISafetyAtlas.Causal.DecisionNetwork.decision_notMem_parents_of_isUnmediated",
+            "AISafetyAtlas.Causal.DecisionNetwork.mem_parents_utility_of_isUnmediated",
+            "AISafetyAtlas.Examples.Causal.DecisionNetwork.figCID",
+            "AISafetyAtlas.Examples.Causal.DecisionNetwork.figIsUnmediated",
+            "AISafetyAtlas.Examples.Causal.DecisionNetwork.figDecision_mem_parents_utility",
+            "AISafetyAtlas.Examples.Causal.DecisionNetwork.figIsDeterministicUtility"
+          ],
+          "relationship": "RELATED",
+          "scope_delta": {
+            "summary": "Scope Same against RE24 Definition 4, Assumption 1 and the graph half of Appendix A.1 Lemma 1(iii). One disclosed widening: print's clause that the utility is a real-valued function of its parents is carried as the hypothesis IsDeterministicUtility rather than as a field, so expectedUtility is defined on a larger class than print's; exists_utilityFunction recovers print's U(pa_U) where the hypothesis holds. do(D = pi(pa_D)) is rendered as a soft intervention, keeping pa_D, because a policy reads its observations. This row does NOT close the Section 2.2 rows on Causal.Decision: those are the Assumption-1 projection and no theorem yet ties them to expectedUtility.",
+            "evidence": "docs/provenance/source-coverage-audit.md"
+          },
+          "module": "AISafetyAtlas.Causal.DecisionNetwork",
+          "atlas_module": "AISafetyAtlas.Causal.DecisionNetwork",
+          "build_command": "lake build AISafetyAtlas.Causal.DecisionNetwork AISafetyAtlas.Examples.Causal.DecisionNetwork"
+        }
+      ]
+    ,
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Causal.DecisionNetwork.mem_parents_utility_of_isUnmediated",
+            "type": "NEW_PROOF",
+            "source_declarations": [],
+            "application": "The graph half of RE24 Appendix A.1 Lemma 1(iii). Print compresses it to one clause -- D in Anc_U which with Desc_D and Anc_U disjoint implies D in Pa_U -- and the proof is the expansion: if the decision reached the utility through any intermediate vertex, that vertex would be a proper descendant of the decision and a proper ancestor of the utility at once, which Assumption 1 forbids. Formally the ancestor closure of the utility, minus the decision and its proper descendants, is parent-closed and contains the utility, so it contains the whole closure - and therefore the decision, which it does not."
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Examples.Causal.DecisionNetwork.figIsUnmediated",
+            "type": "NEW_PROOF",
+            "source_declarations": [],
+            "application": "Assumption 1 discharged on print's own Figure 1 training diagram. Without an inhabitant every theorem conditional on IsUnmediated would be vacuously true, including the Lemma 1(iii) step above."
+          }
+        ]
+      }
+    ,
+      "public": {
+          "group": "What an observer can recover",
+          "summary": "A decision task written as a causal influence diagram with the decision and the utility as vertices of the network, together with expected utility, optimality and regret at the source's own quantifiers, and the unmediated-task assumption with the graph consequence the source draws from it.",
+          "use": "Stating a single-decision single-utility decision task where the decision node's table is the policy, and deriving that under an unmediated task the decision's only route to the utility is the direct edge.",
+          "title": "Decision tasks as influence diagrams",
+          "attribution": "Richens and Everitt, ICLR 2024, Section 2.2 and Appendix A.1"
+        }
+    },
+    {
+      "id": "LAND-CAUSAL-COLLISION-001",
+      "name": "Margins do not imply behavioral identifiability",
+      "tags": [
+        "interpretability",
+        "agent-incentives"
+      ],
+      "notes": "GROUNDING. Layer 0 is a finite categorical CBN construction over an ordered field: RE24 Appendix A.2 supplies dimensions and full-simplex CPTs; RE24 Definition 2 and equation (1) supply arbitrary local state maps and their preimage-sum factors; Pearl 2009 equation (1.37) supplies the hard-intervention product reading, certified by the fixProfile Dirac and evaluation theorems. Model is constructive (G, theta), not Pearl Definition 1.3.1. Model, Skeleton and the mixture spaces carry a value field, so probability mixtures are the RE24 Definition-3 simplex over whichever field a statement picks rather than a rational specialization of it; witnesses are computed at Q and Skeleton.marginClass_mapRat and Skeleton.behaviorEq_mapRat transport them into any characteristic-zero ordered field. Layer 1 is the unmediated Assumption-1 projection of finite policies and utility, not a CID. The six margin conditions and masked transform family specialize to the printed binary A2 composite; their categorical forms are atlas extensions, not RE24 or Uhler et al. definitions. RESULT. The issue-#6 binary instance gives the same three graphs, lambda = 1/10, utility gap, all-profile collisions, rational probability-mixture collisions, and positive-dimensional arrowXYb family. General jointProb_sum proves normalization for every finite categorical model, and a ternary-root worked model exercises a translation and a non-injective local map. MarginClass includes ValidMargin. Equal transforms are machine-checked to give a common zero-regret sign-policy family; the converse reconstruction from an arbitrary optimal-policy oracle remains sourced rather than formalized. HasRegretAtMost is exactly the regret inequality; regret_eq_zero_iff proves support on fibrewise argmax, with ties unconstrained. SCOPE. The public result is RELATED to RE24 Theorems 1-2: this result formalizes no almost-every statement, no gamma(delta), no recovered subgraph, no chart over a mediated CID's parameters, and no Uhler strong-faithfulness theorem. Two of those phrases used to read atlas-wide and no longer can: AISafetyAtlas.Causal.ParameterChart is a real parameter chart, over MAIS's unmediated chance tables rather than a CID's, and AISafetyAtlas.Causal.StructuralModel is a mediated diagram - Everitt AAAI 2021 Definitions 1-5, with decision and utility vertices. Neither is wired to this result, which is why the row still owns the gap. The declaration-by-declaration boundary is recorded in docs/provenance/mais-a2-causal-collision.md.",
+      "original_source_refs": [
+        "pearl-2009-causality",
+        "richens-everitt-2024",
+        "uhler-etal-2013-faithfulness",
+        "mais-o23-2026",
+        "mais-issue-6-2026"
+      ],
+      "result_shape": "POINT_IMPOSSIBILITY",
+      "root_import": true,
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE",
+          "license": "Apache-2.0",
+          "reproduced": true,
+          "build_environment": "leanprover/lean4:v4.31.0; Mathlib fabf563a7c95a166b8d7b6efca11c8b4dc9d911f; atlas IN_TREE",
+          "declarations": [
+            "LocalIntervention",
+            "InterventionProfile",
+            "Mixture",
+            "IsProbabilityMixture",
+            "ProbMixture",
+            "ProbMixture.dirac",
+            "binaryDim",
+            "identityIntervention",
+            "fixIntervention",
+            "fixProfile",
+            "hardInterventionProfile",
+            "flipIntervention",
+            "Model",
+            "Model.factor",
+            "Model.factor_eq_re24",
+            "Model.factor_congr",
+            "Model.factor_fixProfile",
+            "Model.factor_hardInterventionProfile",
+            "Model.jointProb",
+            "Model.jointProb_sum",
+            "Model.jointProb_fixProfile",
+            "Model.jointProb_hardInterventionProfile",
+            "jointProb_sum_two",
+            "Model.Δ",
+            "Model.Δ_fixProfile",
+            "Model.factor_sum",
+            "Model.ParentClosed",
+            "Model.ancestors",
+            "Model.ancestors_eq_univ_iff",
+            "Model.Δmix",
+            "Model.Δmix_eq_sum",
+            "Model.Δmix_congr",
+            "Model.Δmix_eq_on_probMixture_iff",
+            "sum_assignment_two",
+            "Skeleton",
+            "Skeleton.MarginClass",
+            "Model.Δmask",
+            "Skeleton.BehaviorEq",
+            "Skeleton.ValidMargin",
+            "Model.ext",
+            "Skeleton.realizable_iff"
+          ],
+          "relationship": "RELATED",
+          "scope_delta": {
+            "summary": "The collision instantiates a finite categorical CBN over a parametrized value field and an A2 composite; witnesses are computed at Q and transported to R. It does not formalize RE24 Theorems 1-2, an almost-every parameter chart, or Uhler strong faithfulness. Pearl Definition 1.3.1 and a mediated CID both exist elsewhere in the atlas and neither is used here.",
+            "evidence": "docs/provenance/mais-a2-causal-collision.md"
+          },
+          "module": "AISafetyAtlas.Causal.Model",
+          "build_command": "lake build AISafetyAtlas.Causal.Model AISafetyAtlas.Causal.MarginClass AISafetyAtlas.Examples.Causal.Model AISafetyAtlas.Examples.Causal.BehavioralCollision"
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Examples.Causal.margin_class_not_identifiable",
+            "type": "NEW_PROOF",
+            "source_declarations": [
+              "AISafetyAtlas.Causal.Skeleton.MarginClass",
+              "AISafetyAtlas.Causal.Model.Δmix",
+              "AISafetyAtlas.Examples.Causal.collision_mix_edgeless_arrowXY"
+            ],
+            "application": "Machine-checks the pending-review issue-#6 counterexample against the atlas transcription of MAIS-O23: at one skeleton, with nothing observed and margin 1/10, two distinct models of the margin class share a behavioral transform. The upstream problem remains listed as open pending review. As an audit claim this is a possibility result, not a general one: the explicit degeneracy conditions do not by themselves make a causal graph readable off behavior at this skeleton."
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Examples.Causal.margin_class_not_identifiable_two_graphs",
+            "type": "NEW_PROOF",
+            "source_declarations": [
+              "AISafetyAtlas.Examples.Causal.arrowXY_mem",
+              "AISafetyAtlas.Examples.Causal.arrowYX_mem",
+              "AISafetyAtlas.Examples.Causal.collision_mix_arrowXY_arrowYX"
+            ],
+            "application": "The same conclusion under the narrower reading in which the class carries a genuine graph, so the result does not rest on whether the edgeless model is admissible."
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Examples.Causal.Model.jointProb_sum_shiftCollapse",
+            "type": "NEW_PROOF",
+            "source_declarations": [
+              "AISafetyAtlas.Examples.Causal.Model.factor_root",
+              "AISafetyAtlas.Examples.Causal.Model.factor_child",
+              "AISafetyAtlas.Causal.Model.jointProb_sum"
+            ],
+            "application": "Categorical non-vacuity: a ternary root with a binary child is evaluated under a modulo-three translation and a non-injective child map; the numeric preimage factors and general normalization theorem are both exercised."
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Causal.Skeleton.behaviorEq_of_observed_eq_empty",
+            "type": "NEW_PROOF",
+            "source_declarations": [
+              "AISafetyAtlas.Causal.Skeleton.BehaviorEq",
+              "AISafetyAtlas.Causal.Model.Δmask_empty"
+            ],
+            "application": "What lets a single-transform statement carry the source's family quantifier: with nothing observed, the masked family has one member. The reduction is proved, so the counterexample compares behavioral transforms in the source's sense rather than one component of them."
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Causal.Model.Δmix_congr",
+            "type": "NEW_PROOF",
+            "source_declarations": [
+              "AISafetyAtlas.Causal.Model.Δmix_eq_sum",
+              "AISafetyAtlas.Causal.Model.sum_weighted_congr"
+            ],
+            "application": "The step that makes a finite check answer an infinite question: the atlas sigma is a probability mixture of intervention patterns over the model's own value field, so agreement on the sixteen deterministic patterns is only worth stating once it lifts to every mixture in that simplex. Since the decision layer was parametrized over its value field the statement covers real mixtures, which is def:local's simplex of *all* mixtures; no cast is needed and none is claimed."
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Causal.Model.jointProb_hardInterventionProfile",
+            "type": "NEW_PROOF",
+            "source_declarations": [
+              "AISafetyAtlas.Causal.Model.factor_hardInterventionProfile",
+              "AISafetyAtlas.Causal.hardInterventionProfile"
+            ],
+            "application": "Hard-intervention fidelity: on any selected set of chance variables, intervened factors become consistency indicators and unselected factors remain, exactly the constructive finite specialization of Pearl's truncated factorization (1.37), over any ordered value field."
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Causal.Model.Δ_fixProfile",
+            "type": "NEW_PROOF",
+            "source_declarations": [
+              "AISafetyAtlas.Causal.Model.jointProb_fixProfile",
+              "AISafetyAtlas.Causal.fixProfile"
+            ],
+            "application": "Full hard-intervention corollary: fixing every chance variable produces the Dirac joint at the target assignment, so the utility-gap transform evaluates the gap there."
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Causal.Model.ancestors_eq_univ_iff",
+            "type": "NEW_PROOF",
+            "source_declarations": [
+              "AISafetyAtlas.Causal.Model.ancestors",
+              "AISafetyAtlas.Causal.Model.ParentClosed"
+            ],
+            "application": "Faithfulness bridge: certifies that the elimination form of (M5) used throughout is the source's Anc(U) = C, over an ancestor set defined as the least parent-closed superset. The counterexample's own (M5) proof discharges the elimination form directly and does not route through this lemma; what the lemma buys is the right to call that form (M5)."
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Examples.Causal.transform_identity_edgeless",
+            "type": "NEW_PROOF",
+            "source_declarations": [
+              "AISafetyAtlas.Causal.Model.Δ",
+              "AISafetyAtlas.Examples.Causal.g"
+            ],
+            "application": "Non-vacuity: the shared transform takes the value 1/10 under no intervention, so the collision is between behaviors that exist rather than between two identically zero functions."
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Examples.Causal.Δ_eq_half_sub_joint",
+            "type": "NEW_PROOF",
+            "source_declarations": [
+              "AISafetyAtlas.Causal.jointProb_sum_two",
+              "AISafetyAtlas.Examples.Causal.g"
+            ],
+            "application": "Pearl (1.37) plus this g: Delta_M(sigma) = 1/2 - P_M(1,1; sigma). The collision narrative is now a theorem, not prose."
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Examples.Causal.margin_class_not_identifiable_family",
+            "type": "NEW_PROOF",
+            "source_declarations": [
+              "AISafetyAtlas.Causal.Skeleton.MarginClass",
+              "AISafetyAtlas.Examples.Causal.collision_edgeless_arrowXYb"
+            ],
+            "application": "The excluded set is not a point. Every value of P(Y=1 | X=0) in [1/10, 7/10] gives a margin-class model colliding with the edgeless one, so the counterexample is a segment. MAIS-O24(c) asks how large the excluded set is; this is a lower bound at one skeleton."
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Examples.Causal.behaviorEq_has_teeth",
+            "type": "NEW_PROOF",
+            "source_declarations": [
+              "AISafetyAtlas.Causal.Skeleton.BehaviorEq",
+              "AISafetyAtlas.Examples.Causal.other_mem"
+            ],
+            "application": "Non-vacuity of the collision: two models of the same margin class that behavior DOES tell apart. Without this the agreement theorems could hold because BehaviorEq holds of every pair."
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Examples.Causal.mm2_shape",
+            "type": "NEW_PROOF",
+            "source_declarations": [
+              "AISafetyAtlas.Causal.Model.notMem_parents_self"
+            ],
+            "application": "On two variables a model with any edge carries exactly one of the two arrows -- acyclicity forbidding self-loops and two-cycles. Puts the graph shape in the kernel, which is what lets the two-graph result speak to the agenda's MM_2(lambda) class and hence to MAIS-O34(a)."
+          }
+        ]
+      },
+      "public": {
+        "group": "What an observer can recover",
+        "summary": "Three different causal pictures of the same two variables can produce exactly the same behavioral transform on every task in a family, including every rational randomized mixture of interventions, while satisfying every explicit non-degeneracy condition the setting imposes. Lean now checks the forward step from equal transforms to one shared zero-regret policy family; the source's converse oracle reconstruction is not claimed. Watching what an agent does can leave its picture of the world undetermined.",
+        "use": "Checking whether a proposed method for reading a world model off behavior has ruled out the cancellations that make behavior blind, or only assumed them away.",
+        "title": "Behavior need not reveal the model",
+        "attribution": "Atlas, over a construction filed against MAIS-O23"
+      }
+    },
+    {
+      "id": "LAND-CAUSAL-DECISION-001",
+      "name": "Causal decision policies, regret, and identified-set radius",
+      "tags": [
+        "interpretability",
+        "agent-incentives"
+      ],
+      "result_shape": "INFRASTRUCTURE",
+      "notes": "Generic finite unmediated decision infrastructure. Policy is a probability kernel over the model's value field on any finite decision alphabet, factored through visible chance variables; value is RE24 Section 2.2 expected utility only under the Assumption-1 scope fence, because decision and utility are not graph vertices. bestDecision and bestPolicy maximize each visible fibre. regret_decomp and regret_eq_zero_iff prove that zero regret is exactly positive support on fibrewise argmax decisions, leaving ties unconstrained. HasRegretAtMost is the regret inequality used by the A2 query model and the RE24 main text; RE24 Definition 5 instead packages the policy oracle. The Bool specialization derives gap, signPolicy, value_const_sub, and strict-gap action theorems. regret_signPolicy_eq_zero and inIdentifiedSet_zero_of_behaviorEq machine-check the forward A2 bridge from equal transforms to a shared optimal policy family; the converse oracle reconstruction remains outside. InIdentifiedSet, modelError, and IsRadius are A2 query packaging RELATED to, but not a transcription of, RE24 Theorem 2 or gamma(delta). InIdentifiedSet is defined for delta in the value field, and not_inIdentifiedSet_of_neg proves the extension below the source domain delta >= 0 is empty. The value field is a parameter rather than a reduction, so real tables, utilities, policies and mixture weights are in scope; full-assignment indexing and the unmediated projection remain explicit scope reductions. The companion example applies the shared-optimal bridge to the collision, proves the shared-zero-regret relation is not universal, and checks that the empty-visible fibre image is a singleton. The six baseline corpora plus the pinned CausalForge follow-up do not supply this exact combination (NC-009).",
+      "original_source_refs": [
+        "everitt-etal-2021-agent-incentives",
+        "howard-matheson-2005-influence-diagrams",
+        "richens-everitt-2024"
+      ],
+      "related_result_ids": [
+        "LAND-CAUSAL-COLLISION-001"
+      ],
+      "relations": [
+        {
+          "target": "LAND-CAUSAL-COLLISION-001",
+          "kind": "BUILDS_ON",
+          "note": "Consumes the causal Model, derived Skeleton utility gap, margin class, and masked transform layer."
+        }
+      ],
+      "root_import": true,
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE",
+          "license": "Apache-2.0",
+          "reproduced": true,
+          "build_environment": "leanprover/lean4:v4.31.0; Mathlib fabf563a7c95a166b8d7b6efca11c8b4dc9d911f; atlas IN_TREE",
+          "declarations": [
+            "AISafetyAtlas.Causal.Policy",
+            "AISafetyAtlas.Causal.Policy.ext",
+            "AISafetyAtlas.Causal.Policy.const",
+            "AISafetyAtlas.Causal.fibreRep",
+            "AISafetyAtlas.Causal.Model.value",
+            "AISafetyAtlas.Causal.Model.value_eq",
+            "AISafetyAtlas.Causal.Model.fibreScore",
+            "AISafetyAtlas.Causal.Model.bestDecision",
+            "AISafetyAtlas.Causal.Model.bestPolicy",
+            "AISafetyAtlas.Causal.Model.optimalValue",
+            "AISafetyAtlas.Causal.Model.value_const_sub",
+            "AISafetyAtlas.Causal.Model.value_le_sign",
+            "AISafetyAtlas.Causal.Model.regret_signPolicy_eq_zero",
+            "AISafetyAtlas.Causal.Model.signPolicy_eq_of_behaviorEq",
+            "AISafetyAtlas.Causal.Model.regret",
+            "AISafetyAtlas.Causal.Model.regret_decomp",
+            "AISafetyAtlas.Causal.Model.regret_eq_zero_iff",
+            "AISafetyAtlas.Causal.Model.HasRegretAtMost",
+            "AISafetyAtlas.Causal.InIdentifiedSet",
+            "AISafetyAtlas.Causal.inIdentifiedSet_zero_of_behaviorEq",
+            "AISafetyAtlas.Causal.inIdentifiedSet_self",
+            "AISafetyAtlas.Causal.inIdentifiedSet_symm",
+            "AISafetyAtlas.Causal.not_inIdentifiedSet_of_neg",
+            "AISafetyAtlas.Causal.modelError",
+            "AISafetyAtlas.Causal.modelError_eq_zero_iff",
+            "AISafetyAtlas.Causal.IsRadius"
+          ],
+          "relationship": "RELATED",
+          "scope_delta": {
+            "summary": "This is the finite unmediated Assumption-1 projection. Decision and utility are not graph vertices, and the A2 identified-set/error/radius objects are not RE24 Theorem 2 or its gamma(delta) conclusion. The value field is a parameter, not a restriction: the layer is stated over any ordered field, so it covers def:margin's real tables and def:local's real mixtures directly.",
+            "evidence": "docs/provenance/mais-a2-causal-collision.md"
+          },
+          "module": "AISafetyAtlas.Causal.Decision",
+          "atlas_module": "AISafetyAtlas.Causal.Decision",
+          "build_command": "lake build AISafetyAtlas.Causal.Decision AISafetyAtlas.Examples.Causal.Decision"
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Causal.Model.value_eq",
+            "type": "NEW_PROOF",
+            "source_declarations": [],
+            "application": "Algebraic expansion of the convex combination in the full-assignment representation; not the printed fibre decomposition through Delta^O'."
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Causal.Model.value_const_sub",
+            "type": "NEW_PROOF",
+            "source_declarations": [
+              "AISafetyAtlas.Causal.Policy.const",
+              "AISafetyAtlas.Causal.Model.Δmix"
+            ],
+            "application": "General binary-decision identity: the advantage of the constant policy D=1 over D=0 is the mixture transform. RE24 Appendix B equation (3), with the opposite sign convention, is one two-variable hard-intervention instance."
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Causal.Model.regret_eq_zero_iff",
+            "type": "NEW_PROOF",
+            "source_declarations": [
+              "AISafetyAtlas.Causal.Model.regret_decomp",
+              "AISafetyAtlas.Causal.Model.fibreScore_le_best"
+            ],
+            "application": "The converse formerly embedded in the regret definition: zero regret exactly means that every decision with positive policy mass is fibrewise maximizing; ties remain unconstrained."
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Causal.Model.value_le_sign",
+            "type": "NEW_PROOF",
+            "source_declarations": [
+              "AISafetyAtlas.Causal.Model.fibreScore_true_sub_false",
+              "AISafetyAtlas.Causal.Model.signPolicy"
+            ],
+            "application": "Every policy's value is at most the sign-policy value, which is the source max_{pi'} V(pi') direction used to define regret."
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Causal.inIdentifiedSet_zero_of_behaviorEq",
+            "type": "NEW_PROOF",
+            "source_declarations": [
+              "AISafetyAtlas.Causal.Model.signPolicy_eq_of_behaviorEq",
+              "AISafetyAtlas.Causal.Model.regret_signPolicy_eq_zero"
+            ],
+            "application": "Machine-checks the forward A2 bridge: equal masked utility-gap transforms give both models the same canonical policy family, with zero regret in each. Reconstructing the numerical transform from an arbitrary optimal-policy oracle is the converse source proposition and is not claimed."
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Examples.Causal.margin_class_not_identifiable_shared_optimal",
+            "type": "NEW_PROOF",
+            "source_declarations": [
+              "AISafetyAtlas.Examples.Causal.margin_class_not_identifiable",
+              "AISafetyAtlas.Causal.inIdentifiedSet_zero_of_behaviorEq"
+            ],
+            "application": "Applies the transform-to-policy bridge to the pending-review MAIS-O23 construction: two distinct margin-class models admit one common zero-regret policy family."
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Causal.not_inIdentifiedSet_of_neg",
+            "type": "NEW_PROOF",
+            "source_declarations": [
+              "AISafetyAtlas.Causal.Model.regret_nonneg"
+            ],
+            "application": "Scope control: although the Lean relation accepts every rational tolerance, its extension below RE24 Definition 5's delta >= 0 domain is empty."
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Causal.modelError_eq_zero_iff",
+            "type": "NEW_PROOF",
+            "source_declarations": [
+              "AISafetyAtlas.Causal.Model.ext"
+            ],
+            "application": "The graph-or-table error separates models in the chosen finite representation, over any ordered value field."
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Examples.Causal.not_inIdentifiedSet_high",
+            "type": "NEW_PROOF",
+            "source_declarations": [
+              "AISafetyAtlas.Causal.not_inIdentifiedSet_of_opposite_sign",
+              "AISafetyAtlas.Examples.Causal.high_mem"
+            ],
+            "application": "Non-vacuity: the zero-regret identified-set relation does not contain every pair of margin-class models."
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Examples.Causal.OneNodeClass.modelError_le_ten_mul",
+            "type": "NEW_PROOF",
+            "source_declarations": [
+              "AISafetyAtlas.Causal.InIdentifiedSet",
+              "AISafetyAtlas.Causal.modelError"
+            ],
+            "application": "MAIS-O25's linear recovery modulus with the constant exhibited: L = 10 on the one-node margin class. A shared policy family admissible at delta in two models must pay for both on a mixture that centres their advantages, and the two inequalities add with the policy weight cancelling. This is the substantive clause of the antecedent MAIS-O25 quantifies over. No declaration in the atlas assembles these lemmas into an inhabitant of that antecedent at this commit, so the clause stands on its own here rather than as a non-vacuity witness. Nonempty is all that shows: at one vertex only the edgeless graph exists, so several clauses follow from the vertex set rather than from the class."
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Examples.Causal.card_fibreRep_empty",
+            "type": "NEW_PROOF",
+            "source_declarations": [
+              "AISafetyAtlas.Causal.fibreRep"
+            ],
+            "application": "Regression: with nothing visible on two binary variables the fibre image is a singleton, so the decomposition cannot silently count the one fibre four times."
+          }
+        ]
+      },
+      "public": {
+        "group": "What an observer can recover",
+        "summary": "A policy's utility, regret tolerance, and shared behavior define an identified set of causal models; equal transforms are proved to supply one shared zero-regret policy family, and the residual model error is a radius question.",
+        "use": "Stating interventional value, printed max-regret within the policy type over an ordered value field, of which the printed real case is an instance, and an identified-set relation, without claiming the O27/O28/O34(b) objects.",
+        "title": "Regret and identified-set radius",
+        "attribution": "Atlas infrastructure over MAIS-A2 objects"
+      }
+    },
+    {
+      "id": "LAND-CAUSAL-STRUCTURAL-001",
+      "name": "Structural causal models, causal influence diagrams, and materiality",
+      "tags": [
+        "interpretability",
+        "agent-incentives"
+      ],
+      "result_shape": "INFRASTRUCTURE",
+      "notes": "GROUNDING. Everitt, Carey, Langlois, Ortega and Legg, AAAI 2021, Definitions 1 to 5, read from the pinned PDF everitt-etal-2021-aaai-ojs.pdf, sha256 31d4a4b277c562b82000c4d2b81660e89464877ec0cad3549a9375c6d4492598. Definitions 1 and 2 are attributed in print to Pearl 2009 Chapter 7 and are graded against this paper's statement of them, since that is the text transcribed. PEARL 7.1.1, THE DEFINITION PRINT ATTRIBUTES THESE TO, READ 2026-08-22. Pearl's endogenous set is finite - V is a set {V1,...,Vn} with the structural functions indexed i = 1..n - so the Fintype V removed on 2026-08-21 as a narrowing against Everitt was Pearl's own condition, and dropping it widened past both sources rather than repaying a debt. Pearl bounds no domain, so axis B is a narrowing against both and is the one axis both sources agree the atlas invented. And Pearl's clause (iii) ends with the entire set F has a unique solution V(u), footnoted uniqueness is ensured in recursive (i.e., acyclic) systems, Halpern 1998 allows multiple solutions in nonrecursive systems - so unique solvability is part of the object for Pearl and acyclicity is offered as a sufficient condition for it rather than as the content. BONGERS, FORRE, PETERS AND MOOIJ, ANNALS OF STATISTICS 49(5) 2021, 2885-2915, sha256 6ce97700deb27a6e6fc680d0bd8cbfd053f1f67392979afca8e67d9f289a6d31, WAS READ THE SAME DAY as the general treatment of this object - cycles, latent variables, arbitrary domains. Definition 2.1: I is a FINITE index set of endogenous variables and J a disjoint finite index set of exogenous ones, so the most general published version keeps the vertex set finite and the Fintype V removed on 2026-08-21 was a debt to nobody - a free widening with no known consumer rather than a repaid narrowing. Domains are arbitrary standard measurable spaces and f is measurable, which is axis B taken past Fin (dom v) and is where the field actually generalizes. P_E is a product measure, so axis F is the gap between a product measure and a Finset product rather than between independence and something weaker. And acyclicity is not in the tuple at all - they make no such assumption and allow self-cycles, Definition 2.9 defines acyclic as a property of the graph, Definition 2.3 makes a solution a pair of random variables satisfying the equations almost surely, and Example 2.4 exhibits one SCM with a continuum of solutions and one with none. Unique solvability is a named condition carried where needed. That is the shape axis E produced, arrived at independently. SCM.IsWellFounded is therefore not an atlas addition to the source of record: it is the clause Everitt's paraphrase dropped, carried where it can be discharged instead of assumed everywhere, and chainParents is the proof that the paraphrase loses it at an unbounded vertex set. CONTENT. SCM is structural equations with independent exogenous variables; eval is print's recursion taken literally - well-founded recursion on the parent relation, with eval_eq_f as its fixed-point property, no iteration count and no bound on the number of variables; from 2026-08-22 the well-foundedness is the class SCM.IsWellFounded that eval asks for rather than a field of SCM, and SCM.acyclic carries print's own word. exoJoint_mul_prod is 'mutually independent' in the form an expectation uses. submodel is do(X=x) and softIntervention is the 'more generally' paragraph. CID is Definition 3's graph: a NodeKind partition with childless utility vertices, and IsSingleDecision carried as a hypothesis rather than a field because Definition 3 states no cardinality condition. SCIM is Definition 4, with F a function of a proof that the vertex is not a decision - a total family with an ignored entry at D would give the type more inhabitants than print's tuple has - and with utility domains 'a subset of R' rendered as an injective real readout. Policy is one structural function per decision vertex, and policy_ext_single proves that at Definition 3's single-decision restriction it is print's single pi exactly. withPolicy is M-pi, expectedUtility is E-pi[U] taken in M-pi where print defines it, and optimalValue with exists_isOptimalPolicy is print's max rather than a supremum print never wrote. IsMaterial is Definition 5. The sentence print asserts between Definitions 4 and 5 - for a set of variables X not in Desc_D, Pr-pi(x) is independent of pi and we simply write Pr(x) - is proved rather than assumed: CID.IsDescendant and CID.NotDownstream are the graph condition, SCM.eval_eq_of_f_agree is the content and mentions no policy, SCM.marginal_eq_sum_exo carries a statement about W(e) to one about Pr by summing P(e) over the fibres of eval, and SCIM.marginal_withPolicy_eq_of_notDownstream is print's sentence. It had no row in the coverage audit until 2026-08-22, which was an inventory gap rather than a coverage one: it sits in running prose rather than in a numbered environment. RESULT. Materiality is inhabited, not merely defined: figSCIM is Figure 2a in miniature, where copying the opinion earns 1, every policy of the link-deleted model earns 1/2, and figSCIM_policy_not_const shows the deleted edge is what does the work. Print's Pr(x) is inhabited on the same diagram: figCID_notDownstream_zero puts the opinion outside Desc_D and figSCIM_marginal_opinion_policy_free is the invariance there. SCOPE. Five narrowing axes, and this note claimed two until 2026-08-21 and four until 2026-08-22. The source carries no global finiteness: in the pinned PDF 'finite' occurs exactly twice, both as 'finite-domain', both inside Definition 4, and 'discrete', 'finitely many' and 'countable' do not occur at all. (i) Finitely many variables - CLOSED. SCM, CID and SCIM no longer take Fintype V; the instance moved onto the derived operations that need it, the Finset accessors and the expectation layer, and IsDecision / IsUtility are the unbounded forms with mem_decisions_iff / mem_utilities_iff as the bridge. (ii) Finite domains - OPEN on Definitions 1 and 2 only. SCM and SCIM carry dom edom : V -> Nat, which on Definitions 1 and 2 has no printed counterpart; from Definition 4 on it is print's own, since 'finite-domain variables' is stated there. CID carries no domains. (iii) Finite indegree - CLOSED 2026-08-22. parents : V -> Set V on both SCM and CID, which is Definition 1's unbounded Pa_V and Definition 3's silence. Nothing in this layer sums over parents, so no finiteness hypothesis was needed; the one visible cost is that a policy's defining property is no longer decidable, so Fintype SCIM.Policy is the classical instance SCIM.instFintypePolicy. (iv) N-ranked acyclicity - CLOSED 2026-08-22, and (iii) and (iv) were one axis rather than two. CID.acyclic is now print's condition verbatim, no vertex reachable from itself along edges, which makes Definition 3 Literal. SCM and SCIM asked instead that the parent relation be well-founded, which is strictly stronger than print's bare word - the axis SHRANK rather than closed at that point, since an N-rank is strictly stronger than well-foundedness once parent sets may be infinite. (v) Well-foundedness as a structure field - CLOSED 2026-08-22, later the same day, and labelled PROVABLY NOT CLOSABLE for part of that day in between. SCM.wellFounded and SCIM.graph_wellFounded are gone; SCM.acyclic is print's word in CID's own Relation.TransGen form; and the requirement lives in the classes SCM.IsWellFounded and CID.IsWellFounded, asked for by eval, eval_eq_f, eval_congr, jointProb and its two lemmas, submodel_eval, submodel_eval_notMem, expectedUtility, IsOptimalPolicy, optimalValue, expectedUtility_le_optimalValue, exists_isOptimalPolicy and IsMaterial, with instIsWellFoundedSubmodel, instIsWellFoundedSoftIntervention, instIsWellFoundedWithPolicy and instIsWellFoundedRemoveInfoLink carrying it across the four constructions. The witness in the tree is unchanged and keeps its job: chainParents n = {n-1} on the integers is acyclic (chainParents_acyclic) and not well-founded (chainParents_not_wellFounded), and on it the equation eval_eq_f asserts has two distinct solutions (chainParents_fixedPoint_not_unique), so Definition 1's the value given by recursive application of the structural functions names nothing unique there. That is why the operations ask for the instance; it is not a reason for the structure to carry a field, and the retracted label confused the two. (vi) The expectation layer is a finite sum - OPEN, named 2026-08-22. exoJoint is a product over V, jointProb and expectedUtility are sums over ExoAssignment V edom, and optimalValue is a Finset.sup' of expectedUtility, all of which need Fintype V, while print's P(e) with the exogenous variables mutually independent denotes at unbounded V as a product measure. Definitions 1 and 5 and the policy row carry this; Definition 2 does not, since all four of its declarations omit Fintype V, and Definition 4 does not, since its column is the structure alone. An intermediate draft graded these rows Same with Bridged fidelity; the audit table has no fidelity column and a field print does not write makes a row Narrower, so that grade was withdrawn the same day, and what closed Definition 4 in the end was moving the field rather than arguing about it. wellFounded_iff_exists_rank is the witness that axes (iii) and (iv) had to move together: while parents was a Finset, well-foundedness and an N-valued rank were equivalent, so dropping the rank alone would have admitted precisely the same models. Definitions 3 and 4 are Same as of 2026-08-22 and are the two of the five that closed - Definition 4 last, when the well-foundedness field came off SCIM, and alone among the survivors because its atlas column is Causal.SCIM and nothing else. Definitions 1 and 2 remain Narrower on domains, and Definitions 1 and 5 on the expectation layer. The remaining axis is in the public types, so the row is graded on the artifact - which is also why the audit grades a row on every declaration in its atlas column rather than on the printed object's nearest counterpart alone. A CLAIM THIS NOTE USED TO MAKE, RETRACTED. It said axis (i) was an implementation choice because well-founded recursion on the acyclicity rank would evaluate an infinite diagram of finite-rank nodes. The conclusion was right and the reason was wrong about the code: eval was evalIter stopped after Fintype.card V applications, so rank recursion was a rewrite and not a relabelling. Axis (i) closed without that rewrite, because the structures' own fields never needed the instance. The rewrite itself was done on 2026-08-22 for axes (iii) and (iv), and eval no longer takes [Fintype V] at all; evalIter and the two rank lemmas that supported it are deleted. ONE DECLARATION DEVIATES IN BOTH DIRECTIONS. SCIM.Policy is Mixed rather than Narrower: narrower because expectedUtility sums over ExoAssignment V edom, which wants Fintype V - the axes (iii), (iv) and (v) half of this narrowing closed on 2026-08-22, withPolicy now hands SCM print's own CID.acyclic and instIsWellFoundedWithPolicy supplies the recursion's hypothesis; and exists_isOptimalPolicy needing the policy type finite was withdrawn from this list the same day, because print writes a maximum and states no condition delivering one, so finiteness supplies print's assertion rather than cutting below it; and wider because print's policy paragraph is a single pi under D = {D} while the atlas defines a family over the decision subtype, so it reaches multi-decision diagrams where print defines nothing. policy_ext_single keeps that widening disclosed. NOT HERE. d-separation (Definition 6), and therefore Theorems 9, 14, 16 and 18, whose completeness halves are constructions of witnessing SCIMs. Desc_V and the directed-path relation. Nested counterfactuals and multi-decision imputation. Nothing sends a SCIM's decision vertex to Causal.Model.value, so LAND-CAUSAL-DECISION-001 keeps its own unmediated grade and Richens and Everitt Section 2.2 is still that projection.",
+      "original_source_refs": [
+        "everitt-etal-2021-agent-incentives"
+      ],
+      "related_result_ids": [
+        "LAND-CAUSAL-DECISION-001",
+        "LAND-CAUSAL-COLLISION-001"
+      ],
+      "relations": [
+        {
+          "target": "LAND-CAUSAL-DECISION-001",
+          "kind": "BOUNDARY_PARTNER",
+          "note": "Parallel, not layered. Causal.Decision is the unmediated Assumption-1 projection and this is the mediated diagram; no declaration connects them, and that missing map is what keeps Richens and Everitt Section 2.2 at Narrower."
+        }
+      ],
+      "root_import": true,
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE",
+          "license": "Apache-2.0",
+          "reproduced": true,
+          "build_environment": "leanprover/lean4:v4.31.0; Mathlib fabf563a7c95a166b8d7b6efca11c8b4dc9d911f; atlas IN_TREE",
+          "declarations": [
+            "AISafetyAtlas.Causal.SCM",
+            "AISafetyAtlas.Causal.wellFounded_of_rank",
+            "AISafetyAtlas.Causal.acyclic_of_rank",
+            "AISafetyAtlas.Causal.wellFounded_iff_exists_rank",
+            "AISafetyAtlas.Causal.chainParents",
+            "AISafetyAtlas.Causal.chainParents_acyclic",
+            "AISafetyAtlas.Causal.chainParents_not_wellFounded",
+            "AISafetyAtlas.Causal.chainParents_fixedPoint_not_unique",
+            "AISafetyAtlas.Causal.SCM.exoJoint",
+            "AISafetyAtlas.Causal.SCM.exoJoint_sum",
+            "AISafetyAtlas.Causal.SCM.exoJoint_mul_prod",
+            "AISafetyAtlas.Causal.SCM.eval",
+            "AISafetyAtlas.Causal.SCM.eval_eq_f",
+            "AISafetyAtlas.Causal.SCM.eval_congr",
+            "AISafetyAtlas.Causal.SCM.jointProb",
+            "AISafetyAtlas.Causal.SCM.jointProb_sum",
+            "AISafetyAtlas.Causal.SCM.submodel",
+            "AISafetyAtlas.Causal.SCM.submodel_eval",
+            "AISafetyAtlas.Causal.SCM.submodel_eval_notMem",
+            "AISafetyAtlas.Causal.SCM.softIntervention",
+            "AISafetyAtlas.Causal.NodeKind",
+            "AISafetyAtlas.Causal.CID",
+            "AISafetyAtlas.Causal.CID.decisions",
+            "AISafetyAtlas.Causal.CID.utilities",
+            "AISafetyAtlas.Causal.CID.structureNodes",
+            "AISafetyAtlas.Causal.CID.observations",
+            "AISafetyAtlas.Causal.CID.decisions_disjoint_utilities",
+            "AISafetyAtlas.Causal.CID.IsSingleDecision",
+            "AISafetyAtlas.Causal.SCIM",
+            "AISafetyAtlas.Causal.SCIM.Policy",
+            "AISafetyAtlas.Causal.SCIM.policy_ext_single",
+            "AISafetyAtlas.Causal.SCIM.withPolicy",
+            "AISafetyAtlas.Causal.SCIM.withPolicy_f_mem",
+            "AISafetyAtlas.Causal.SCIM.withPolicy_f_notMem",
+            "AISafetyAtlas.Causal.SCIM.expectedUtility",
+            "AISafetyAtlas.Causal.SCIM.IsOptimalPolicy",
+            "AISafetyAtlas.Causal.SCIM.optimalValue",
+            "AISafetyAtlas.Causal.SCIM.expectedUtility_le_optimalValue",
+            "AISafetyAtlas.Causal.SCIM.exists_isOptimalPolicy",
+            "AISafetyAtlas.Causal.SCIM.removeInfoLink",
+            "AISafetyAtlas.Causal.SCIM.removeInfoLink_sub",
+            "AISafetyAtlas.Causal.SCIM.instFintypePolicy",
+            "AISafetyAtlas.Causal.SCIM.IsMaterial",
+            "AISafetyAtlas.Examples.Causal.StructuralModel.figSCIM",
+            "AISafetyAtlas.Examples.Causal.StructuralModel.figSCIM_optimalValue",
+            "AISafetyAtlas.Examples.Causal.StructuralModel.figCut_optimalValue",
+            "AISafetyAtlas.Examples.Causal.StructuralModel.figSCIM_opinion_isMaterial",
+            "AISafetyAtlas.Examples.Causal.StructuralModel.figSCIM_policy_not_const",
+            "AISafetyAtlas.Examples.Causal.StructuralModel.copyChain_eval_one",
+            "AISafetyAtlas.Examples.Causal.StructuralModel.utility_childless_has_teeth"
+          ],
+          "relationship": "RELATED",
+          "scope_delta": {
+            "summary": "Definitions 1 to 5 at finite domains on Definitions 1 and 2, which print does not require until Definition 4 and then only of the domains, and at finite indegree and an N-valued acyclicity rank throughout, neither of which print imposes anywhere. The finite-variable-set axis closed on 2026-08-21: SCM, CID and SCIM carry no Fintype V, and the instance sits on the derived operations that need it. CID therefore narrows on the two graph axes and on nothing else, since it carries no domains. SCIM.Policy is the one declaration that deviates in both directions - narrower on the carrier, wider because it is a family over the decision subtype where print writes a single policy under a single-decision restriction. No incentive concept and no graphical criterion is formalized.",
+            "evidence": "docs/provenance/source-coverage-audit.md"
+          },
+          "module": "AISafetyAtlas.Causal.StructuralModel",
+          "atlas_module": "AISafetyAtlas.Causal.StructuralModel",
+          "build_command": "lake build AISafetyAtlas.Causal.StructuralModel AISafetyAtlas.Examples.Causal.StructuralModel"
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Causal.SCM.eval_eq_f",
+            "type": "NEW_PROOF",
+            "source_declarations": [],
+            "application": "Print says W(eps) is given by 'recursive application of the structural functions'. The atlas iterates F once per variable; this proves the result is a fixed point of F, which is what makes the unrolling print's recursion rather than an arbitrary finite one."
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Causal.SCM.exoJoint_mul_prod",
+            "type": "NEW_PROOF",
+            "source_declarations": [
+              "AISafetyAtlas.Causal.SCM.exoJoint"
+            ],
+            "application": "Independence in the form an expectation uses: the joint expectation of a product of per-variable factors is the product of the marginal expectations. exoJoint_sum is the constant case. Print states independence and never uses it in this form."
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Causal.SCIM.policy_ext_single",
+            "type": "NEW_PROOF",
+            "source_declarations": [
+              "AISafetyAtlas.Causal.SCIM.Policy",
+              "AISafetyAtlas.Causal.CID.IsSingleDecision"
+            ],
+            "application": "Print writes one policy because it has restricted to D = {D}. The atlas carries a family indexed by decision vertices, to keep withPolicy free of transports between Fin (dom v) and Fin (dom d); this proves the family is print's single datum at print's own restriction."
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Causal.SCIM.exists_isOptimalPolicy",
+            "type": "NEW_PROOF",
+            "source_declarations": [
+              "AISafetyAtlas.Causal.SCIM.optimalValue"
+            ],
+            "application": "Definition 5 writes V*(M) as a maximum over policies. Without an attainment theorem the atlas value is a supremum print never wrote; this exhibits a policy reaching it, and it exists only because the policy type is finite."
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Examples.Causal.StructuralModel.figSCIM_opinion_isMaterial",
+            "type": "NEW_PROOF",
+            "source_declarations": [
+              "AISafetyAtlas.Causal.SCIM.IsMaterial",
+              "AISafetyAtlas.Causal.SCIM.removeInfoLink"
+            ],
+            "application": "Definition 5 is a condition an observation meets: print's Figure 2a in miniature, where deleting the information link costs the agent half its utility. Without it IsMaterial could be a definition nothing satisfies."
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Examples.Causal.StructuralModel.figSCIM_policy_not_const",
+            "type": "NEW_PROOF",
+            "source_declarations": [
+              "AISafetyAtlas.Examples.Causal.StructuralModel.figCut_optimalValue"
+            ],
+            "application": "The deleted edge doing work. Reading the opinion is possible in M and impossible in M with the link removed; without this the materiality witness is 1/2 < 1 between two numbers on two structures whose difference was never exercised."
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Examples.Causal.StructuralModel.utility_childless_has_teeth",
+            "type": "NEW_PROOF",
+            "source_declarations": [
+              "AISafetyAtlas.Causal.CID"
+            ],
+            "application": "Definition 3's 'utility nodes have no children' is a field rather than a consequence; this exhibits the same graph failing that clause and no other."
+          }
+        ]
+      },
+      "public": {
+        "group": "What an observer can recover",
+        "summary": "A causal influence diagram with decision and utility vertices, structural equations with exogenous noise, policies as structural functions, and the observations whose removal costs the agent utility.",
+        "use": "Stating Everitt et al.'s setup - submodels, policies, expected utility in the induced structural model, and materiality - without claiming any incentive concept or graphical criterion.",
+        "title": "Causal influence diagrams and material observations",
+        "attribution": "Atlas transcription of Everitt et al., AAAI 2021, Definitions 1-5"
       }
     }
   ]

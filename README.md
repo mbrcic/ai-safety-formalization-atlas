@@ -55,6 +55,13 @@ DeepMind debate reproduced as
 [`LAND-DEBATE-001`](docs/provenance/debate-reproduction.md); continuous free
 lunches BY-022 [open](docs/guide/contributor-tasks.md#open-now)).
 
+**If the question is causal identifiability**, the `AISafetyAtlas.Causal.*` modules carry
+finite categorical Bayesian networks over an ordered field, interventions and
+regret, Everitt's structural models and influence diagrams, and the objects the
+MAIS-A2 agenda phrases its query problems over — a semialgebraic class, the
+`K(G)` parameter chart, and a rational-weight query layer. Two behaviourally
+identical models with different graphs are exhibited, not assumed.
+
 **If the question is control**, `AISafetyAtlas.Control` carries Ashby's variety
 bounds and Touchette–Lloyd's information limits at their printed quantifiers: a
 regulator cannot hold an outcome steadier than its own repertoire allows, and
@@ -93,9 +100,9 @@ monorepo in-tree. Reusable structure and honest grading over volume.
 <!-- BEGIN GENERATED REGISTRY SCOPE -->
 | Metric | Current |
 |---|---:|
-| Atlas Lean declarations | **214** |
+| Atlas Lean declarations | **248** |
 | Results stating a source claim | **49** |
-| Results recording a formalization only | **32** (23 on root import) |
+| Results recording a formalization only | **37** (28 on root import) |
 | Reviewed AI-system bridges | **3** |
 | Statement-reviewed bridges (interpretation withheld) | **1** |
 | Open conjectures | **1** |
@@ -161,7 +168,13 @@ supplies its mathematical base without the `AgentBehavior` and `Robot` bridges.
 development; `Knowledge.Devices` is the transport between the two and imports
 both. `InformationTheory` deliberately has **no** parent — each module is one
 result and none is built on the others, so there is no surface for a facade to
-aggregate. Import contracts per module:
+aggregate. **`Causal` has no parent either, for a stronger reason**: the domain
+holds two different objects, and an aggregating import would force a consumer of
+one to take the other. `Causal.Model` is a causal Bayesian network — a graph with
+conditional probability tables. `Causal.StructuralModel` is Everitt's structural
+causal model, influence diagram and SCIM, where the randomness sits in exogenous
+variables and the endogenous variables are related deterministically. Neither is
+a special case of the other as rendered here. Import contracts per module:
 [`AISafetyAtlas.lean`](AISafetyAtlas.lean).
 
 **Two senses of "control" live in this tree.** `Inference` has Wolpert's, which
@@ -384,7 +397,9 @@ task satisfies its model. Generated checks in
 through the root import. The hand-written examples in
 `AISafetyAtlas.Examples.PublicAPI` additionally protect the intended theorem
 signatures; the explicit targets in `scripts/lean_build_targets.txt` also build
-worked examples that are intentionally outside the public root import.
+worked examples, most of which are intentionally outside the public root
+import. The ten `AISafetyAtlas.Examples.Causal.*` modules are the exception
+and are on the root import.
 Kernel axiom cleanliness of the headline surface is checked by
 `scripts/check_print_axioms.py`.
 

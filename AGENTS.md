@@ -89,9 +89,10 @@ in `registry.yaml`, and the generated views — regenerate rather than hand-edit
 | Measurability | `fun_prop`, with `@[fun_prop]` on `measurable_setup` / `measurable_concl` | `by fun_prop` in place of `Measurable.of_discrete` in every discrete model |
 | Goal-directed search | `aesop`, rule set `inference` | Registered rules are only those that demonstrably fire; see `Inference/Search/RuleSet.lean` |
 | Exhaustion over devices | `FinDevice` + `decide` | Kernel-checked over **all** devices of a fixed shape, which is what an existential claim needs. `plausible` is measured but banned from commits: it closes an unrefuted goal with `sorry` |
-| Hypothesis minimisation | `scripts/minimize_hypotheses.py` | Reverse proving. Last full run over the frozen core (Device, Reality, SelfAware, PhysicalKnowledge): 157 candidates, **0 REMOVABLE**, 1 CALLSITE (`add_one_mod`'s `_hn`, unused inside its own proof but required by a caller) |
+| Hypothesis minimisation | `scripts/minimize_hypotheses.py` | Reverse proving. Frozen core (Device, Reality, SelfAware, PhysicalKnowledge): 157 candidates, **0 REMOVABLE**, 1 CALLSITE (`add_one_mod`'s `_hn`, unused inside its own proof but required by a caller). **Causal layer, first full run 2026-08-22**: all 12 `AISafetyAtlas/Causal/` modules plus all 12 `Examples/Causal/` modules, 196 candidates, **0 REMOVABLE, 0 CALLSITE**, every candidate `USED`; `--dead-haves-only` clean on all 24. **Read that for what it is.** The deletion test drops a binder and re-elaborates *without rewriting the proof body*, so `USED` means the proof **mentions** the hypothesis, not that the statement needs it — a proof that took a convenient route through a hypothesis the theorem is true without still reports `USED`. `--dead-haves-only` is the only part of the tool that reaches past that, and it covers just one shape (`have _x := …` whose result is discarded). So this run rules out stated-but-unmentioned hypotheses and dead `have`s in the causal layer; it does **not** establish that every hypothesis there is necessary. Closing that gap needs a proof-rewriting search the tool does not do |
 | Declaration dependency view | `scripts/generate_dependency_graph.py --write`, checked with `--check` | `docs/status/<domain>-dependency-graph.{md,json}` — one view per top-level domain, all 13 from one Lean run. The domain list is derived from the tree, not hand-listed: a new domain gets a view by existing. **Edges are statement-level for theorems**: Lean's module system does not export proof terms, and `import all` does not change that — `ConstantInfo.value?` is `none` for every imported theorem, `some` for every definition. Read the JSON from a program; the Markdown is for people. `--check` is a **liveness** check only — it cannot see a view that is missing newly added declarations, which is how the inference view sat at 536 while the tree had 682, and how twelve domains had no view at all. CI regenerates after the Lean build and fails if the tree moves |
-| Public-name pin | `scripts/check_public_api.py` | The etalon list. A rename must appear as a deleted line in `docs/status/public-api.txt`, regenerated with `--write` |
+| Public-name pin | `scripts/check_public_api.py` | The etalon list. A rename must appear as a deleted line in `docs/status/public-api.txt`, regenerated with `--write`. **It pins names, not signatures**: on 2026-08-22 thirteen pinned theorems gained a hypothesis and the file came out byte-identical, so it is not a guard against a statement changing |
+| Scope-axis surface of a row | `#check @<decl>` on every name in the audit row's atlas column | The only reliable way to list what a `Narrower`/`Mixed` row actually carries. Source greps and section-`variable` reading both get it wrong: `omit … in` binds one declaration, section instances are included only when used, and two structures in this tree share names (`SCM.jointProb` and `Model.jointProb`). Four separate mispricings came from enumerating axes off the printed object instead |
 
 **Do not** add `lean-smt`, `Duper` or any external solver as a dependency. A
 proof this tree publishes is a proof its own kernel checked; `native_decide` is
@@ -320,7 +321,27 @@ Full green (Lean + axioms):
 python3 scripts/check_print_axioms.py
 lake build
 xargs lake build < scripts/lean_build_targets.txt
+python3 scripts/generate_declaration_index.py --write   # after adding or renaming
 ```
+
+`generate_declaration_index.py` walks the **elaborated environment** and writes
+`docs/status/declaration-index.json`, which is what lets
+`check_docstring_identifiers.py` tell a real declaration from a name that merely
+appears somewhere in the source. It costs a full elaboration, so it belongs
+here rather than in the cheap gate; the cheap gate reads the committed file and
+says nothing when it is absent.
+
+Two worklists exist for the step *after* a gap closes. Neither can fail and
+neither is in the gate, because both ask a question a regex cannot answer:
+
+```console
+python3 scripts/where_is_graded.py CONJ-002   # every line restating a grade
+python3 scripts/list_absence_claims.py        # every "X is not here" sentence
+```
+
+Run them after landing anything that closes a gap. The recurring defect on this
+repository is not a broken proof — it is a sentence that outlived the field or
+the declaration it described, and these print the sentences to re-read.
 
 Historical v0.1 only: `python3 scripts/audit_release_v0_1.py` (must not block
 genuine post-v0.1 bridge graduation).

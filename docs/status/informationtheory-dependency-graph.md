@@ -10,7 +10,7 @@ Edges come from the elaborated Lean environment. This answers the question the p
 
 So `A → B` means *`B` occurs in `A`'s statement, or in `A`'s body when `A` is a definition*. A lemma used only inside a proof does not appear. Reading the table as a complete call graph would be wrong, and the two sections below are scoped so that they stay true under this limit.
 
-`48` authored declarations in `AISafetyAtlas.InformationTheory.*` (43 theorems). Compiler-generated companions and projections are dropped.
+`55` authored declarations in `AISafetyAtlas.InformationTheory.*` (45 theorems). Compiler-generated companions and projections are dropped.
 
 ## Load-bearing declarations
 
@@ -30,7 +30,7 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 
 **Instances always appear here.** Typeclass resolution names nothing, so an instance has no textual user even when every consumer depends on it. Deleting one because it is listed here is how a checker stops compiling.
 
-None.
+- `observationTagged`
 
 ## Direct dependencies
 
@@ -76,11 +76,18 @@ None.
 | `measure_preimage_inter_eq_tsum` | theorem | — |
 | `mutualInfo_chain_rule` | theorem | — |
 | `mutualInfo_chain_rule'` | theorem | — |
+| `mutualInfo_chain_rule_fin` | theorem | `observationPrefix`, `observationVector` |
+| `mutualInfo_chain_rule_pi` | theorem | `observationPrefixPi`, `observationVectorPi` |
 | `mutualInfo_comp_le` | theorem | — |
 | `mutualInfo_eq_iff_isMarkovChain` | theorem | `IsMarkovChain` |
 | `mutualInfo_le_of_isMarkovChain` | theorem | `IsMarkovChain` |
 | `mutualInfo_le_of_isMarkovChain'` | theorem | `IsMarkovChain` |
 | `mutualInfo_sub_eq` | theorem | — |
+| `observationPrefix` | definition | — |
+| `observationPrefixPi` | definition | — |
+| `observationTagged` | definition | — |
+| `observationVector` | definition | — |
+| `observationVectorPi` | definition | — |
 | `preimage_errorIndicator_false` | theorem | `errorIndicator` |
 | `preimage_errorIndicator_true` | theorem | `errorIndicator` |
 | `sum_errorPair_true` | theorem | `errorPair`, `errorProb` |

@@ -5,7 +5,7 @@ The ledger as a graph. `related_result_ids` in [`registry.yaml`](../../registry.
 `relations` records *how*, and `result_shape` records what kind of statement a
 row makes at all.
 
-Coverage: **20 typed edges** across **11 rows**, and **13 rows** carry a shape, out of **81** results (29 of which record untyped adjacency).
+Coverage: **22 typed edges** across **13 rows**, and **18 rows** carry a shape, out of **86** results (31 of which record untyped adjacency).
 This is a pilot scoped to the self-knowledge cluster. An untyped row is not a
 claim that the row has no relations — it is a claim that nobody has decided them.
 
@@ -21,8 +21,8 @@ row's prose.
 | `ACHIEVABILITY` | a construction attaining something | LAND-CL-001 |
 | `BOUND` | an inequality, so it degrades rather than switching off | LAND-ACCUM-001 |
 | `CHARACTERIZATION` | necessary and sufficient — says what *is* achievable as well as what is not | LAND-AMBIG-001, LAND-JOINTOBS-001, LAND-KNOW-001, LAND-SELFMEAS-003, LAND-SELFREF-001 |
-| `INFRASTRUCTURE` | definitions and transfer lemmas, no standalone claim | LAND-KNOW-DEVICE-001, LAND-TEMPORAL-001 |
-| `POINT_IMPOSSIBILITY` | rules out one extreme configuration | BY-044, LAND-CRMDP-KNOW-001, LAND-SELFMEAS-001, LAND-SELFMEAS-002 |
+| `INFRASTRUCTURE` | definitions and transfer lemmas, no standalone claim | LAND-CAUSAL-DECISION-001, LAND-CAUSAL-DECISIONNET-001, LAND-CAUSAL-PEARLCBN-001, LAND-CAUSAL-STRUCTURAL-001, LAND-KNOW-DEVICE-001, LAND-TEMPORAL-001 |
+| `POINT_IMPOSSIBILITY` | rules out one extreme configuration | BY-044, LAND-CAUSAL-COLLISION-001, LAND-CRMDP-KNOW-001, LAND-SELFMEAS-001, LAND-SELFMEAS-002 |
 
 ## Edge kinds
 
@@ -42,6 +42,8 @@ row's prose.
 | LAND-ACCUM-001 | `BUILDS_ON` | LAND-TEMPORAL-001 — Time-indexed knowability, contemporaneous collisions, and delayed knowledge | ambiguity_le_of_evidenceMonotone consumes Temporal.EvidenceMonotone: cumulative evidence makes the earlier observation a post-processing of the later one, so ambiguity_le_of_comp applies along time. |
 | LAND-AMBIG-001 | `BUILDS_ON` | LAND-KNOW-001 — Exact knowability: the observation-factorization kernel | knowable_iff_ambiguity_le_one is proved through knowable_iff_no_collision. |
 | LAND-AMBIG-001 | `REFINES` | LAND-KNOW-001 — Exact knowability: the observation-factorization kernel | Replaces the qualitative iff with a count of the answers a single observation leaves open, at the cost of finiteness and decidable equality. Knowability becomes ambiguity at most one. |
+| LAND-CAUSAL-DECISION-001 | `BUILDS_ON` | LAND-CAUSAL-COLLISION-001 — Margins do not imply behavioral identifiability | Consumes the causal Model, derived Skeleton utility gap, margin class, and masked transform layer. |
+| LAND-CAUSAL-STRUCTURAL-001 | `BOUNDARY_PARTNER` | LAND-CAUSAL-DECISION-001 — Causal decision policies, regret, and identified-set radius | Parallel, not layered. Causal.Decision is the unmediated Assumption-1 projection and this is the mediated diagram; no declaration connects them, and that missing map is what keeps Richens and Everitt Section 2.2 at Narrower. |
 | LAND-CL-001 | `BOUNDARY_PARTNER` | LAND-SELFMEAS-001 — Self-measurement failure for an embedded observation | Not a formal duality: the two do not share a model. This row is the generic whole-state specialization of the knowability kernel, not Breuer's theorem, which is LAND-SELFMEAS-002: an abstract restriction map from global states to apparatus states, with no dynamics, no messages and no algorithm; Chandy-Lamport's is a message-passing distributed system with channels, markers and a recording procedure. What the pair brackets is contemporaneity. The impossibility is about distinguishing the state one is in *now*; the construction recovers a consistent global state by giving up exactly that, recording a cut rather than an instant. |
 | LAND-CRMDP-KNOW-001 | `BUILDS_ON` | BY-039 — Reward corruption unsolvability | Both ingredients are BY-039's module: history_complement supplies the collision and return_add_complement supplies the disagreement. |
 | LAND-CRMDP-KNOW-001 | `INSTANTIATES` | LAND-KNOW-001 — Exact knowability: the observation-factorization kernel | Takes the state to be the unknown environment, the observation to be the history a fixed policy receives, and the target to be the true finite-horizon return. |
@@ -63,6 +65,13 @@ row's prose.
 The pairs worth reading together: an impossibility and a nearby construction.
 These are **not** formal dualities — the two sides rarely share a model, which is
 why every such edge is required to carry the delta.
+
+### LAND-CAUSAL-STRUCTURAL-001 ↔ LAND-CAUSAL-DECISION-001
+
+- **LAND-CAUSAL-STRUCTURAL-001** (INFRASTRUCTURE) — Structural causal models, causal influence diagrams, and materiality
+- **LAND-CAUSAL-DECISION-001** (INFRASTRUCTURE) — Causal decision policies, regret, and identified-set radius
+
+Parallel, not layered. Causal.Decision is the unmediated Assumption-1 projection and this is the mediated diagram; no declaration connects them, and that missing map is what keeps Richens and Everitt Section 2.2 at Narrower.
 
 ### LAND-CL-001 ↔ LAND-SELFMEAS-001
 

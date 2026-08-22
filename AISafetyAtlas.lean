@@ -9,6 +9,30 @@ public import AISafetyAtlas.Learning
 public import AISafetyAtlas.Learning.Sharp
 public import AISafetyAtlas.Knowledge
 public import AISafetyAtlas.Inference
+public import AISafetyAtlas.Causal.Model
+public import AISafetyAtlas.Causal.BayesianNetwork
+public import AISafetyAtlas.Causal.MarginClass
+public import AISafetyAtlas.Causal.Decision
+public import AISafetyAtlas.Causal.DecisionNetwork
+public import AISafetyAtlas.Causal.Semialgebraic
+public import AISafetyAtlas.Causal.SparseEncoding
+public import AISafetyAtlas.Causal.ParameterChart
+public import AISafetyAtlas.Causal.EffectiveGenericity
+public import AISafetyAtlas.Causal.Query
+public import AISafetyAtlas.Causal.ModelSpace
+public import AISafetyAtlas.Causal.StructuralModel
+public import AISafetyAtlas.Examples.Causal.Model
+public import AISafetyAtlas.Examples.Causal.BayesianNetwork
+public import AISafetyAtlas.Examples.Causal.BehavioralCollision
+public import AISafetyAtlas.Examples.Causal.Decision
+public import AISafetyAtlas.Examples.Causal.DecisionNetwork
+public import AISafetyAtlas.Examples.Causal.Query
+public import AISafetyAtlas.Examples.Causal.Semialgebraic
+public import AISafetyAtlas.Examples.Causal.SparseEncoding
+public import AISafetyAtlas.Examples.Causal.EffectiveGenericity
+public import AISafetyAtlas.Examples.Causal.ModelSpace
+public import AISafetyAtlas.Examples.Causal.StructuralModel
+public import AISafetyAtlas.Examples.Causal.OneNodeClass
 public import AISafetyAtlas.InformationTheory.ChannelCapacity
 public import AISafetyAtlas.InformationTheory.DataProcessing
 public import AISafetyAtlas.InformationTheory.Determinism
@@ -56,7 +80,7 @@ One import does not mean the same thing under every parent. Four patterns:
 | Aggregating facade | the domain's whole public surface | `Compositional`, `Control`, `Oversight.JointObservation`, `Wireheading` |
 | Partial aggregate | the mathematical base, without the bridge modules | `Verification` |
 | Kernel and specializations | a closed surface; each specialization is imported on its own | `Knowledge`, `Preference` |
-| Peer modules | one result each, no aggregating parent | `InformationTheory` |
+| Peer modules | no aggregating parent; import the one needed | `InformationTheory`, `Causal` |
 
 `Knowledge` and `Preference` withhold their specializations deliberately. A
 kernel that re-exported its own specializations could no longer state what it
@@ -133,13 +157,41 @@ below arrives with it.
 
 ## Peer modules
 
-`InformationTheory` has no aggregating parent: each module is one result, and
-none is built on the others. Import the one needed. The two entropy modules take
+`InformationTheory` and `Causal` have no aggregating parent. Import the one
+needed.
+
+For `InformationTheory` that is because each module is one result and none is
+built on the others. For `Causal` the reason is stronger: the domain holds **two
+different objects**, and an aggregating parent would force a consumer of one to
+take the other. `Causal.Model` is a causal Bayesian network — a graph with
+conditional probability tables. `Causal.StructuralModel` is Everitt's structural
+causal model, influence diagram and SCIM, where all randomness sits in exogenous
+variables and the endogenous ones are related deterministically. Neither is a
+special case of the other as rendered here. The remaining modules are the MAIS-A2
+support layer and are built on the network, not on the structural model. The two entropy modules take
 their entropy layer from PFR rather than from `AISafetyAtlas.Inference.entropyOn`,
 which is a separate Wolpert-specific development and is not migrated;
 
 | Import | Domain |
 |---|---|
+| `AISafetyAtlas.Causal.Model` | Finite categorical CBN construction over an ordered field: RE24 local maps and Pearl-style products, not Pearl Definition 1.3.1 |
+| `AISafetyAtlas.Causal.BayesianNetwork` | Pearl Definition 1.3.1 as a condition on a family of interventional distributions, the truncated product derived from it, and the kernel as an instance |
+| `AISafetyAtlas.Causal.MarginClass` | Conditions (M1)–(M6): categorical A2 composite, not a RE24 or Uhler definition |
+| `AISafetyAtlas.Causal.Decision` | Generic finite unmediated policies, expected utility, and regret; not a full CID or RE24 Theorems 1–2 |
+| `AISafetyAtlas.Causal.Semialgebraic` | Semialgebraic subsets of a finite real coordinate space, as a finite union of polynomial sign conditions, closed under the Boolean operations. Mathlib has no such notion at the pinned revision; MAIS-A2 `prob:exact` requires one |
+| `AISafetyAtlas.Causal.ParameterChart` | MAIS-A2's `K(G)` free table coordinates and Lebesgue measure on them: the layer MAIS-O24 is phrased in, not any of its three conclusions |
+| `AISafetyAtlas.Causal.SparseEncoding` | A prefix-free code and print's sparse monomial syntax, which MAIS-O24's construction-time clause needs in order to say what a machine outputs |
+| `AISafetyAtlas.Causal.EffectiveGenericity` | MAIS-O24's rational polynomial certificate, the class `M(sk,lambda,mu)` it cuts, conclusions (a)-(c), the size and construction-time bounds, and the bundled `O24Solution` carrying all of them |
+| `AISafetyAtlas.Causal.Query` | MAIS-A2 `subsec:queries`: rational-weight queries against real tables, randomized adaptive analysts, expected error, and the minimax risk and `N(ε)` its query problems are stated over. The policy-probability oracle only; sampled and corrupted actions are not here |
+| `AISafetyAtlas.Causal.ModelSpace` | Rounding a model's tables onto a grid: the estimate moves by `O(ε)` and rounded models form a countable set, which is the mathematical content of the query layer's countable-support repair |
+| `AISafetyAtlas.Causal.StructuralModel` | Structural causal models with exogenous noise, submodels and soft interventions, causal influence diagrams, structural causal influence models and materiality: Everitt et al. 2021 Definitions 1-5. A different object from `Causal.Model`, which is a causal Bayesian network |
+| `AISafetyAtlas.Examples.Causal.Model` | A ternary-root, binary-child model exercising translation, a non-injective local map, and general normalization |
+| `AISafetyAtlas.Examples.Causal.BayesianNetwork` | The kernel as a Pearl causal Bayesian network, and a family whose members are truncated products but which is not one |
+| `AISafetyAtlas.Examples.Causal.BehavioralCollision` | Three models on two binary variables with one behavior. The construction submitted against MAIS-O23, machine-checked |
+| `AISafetyAtlas.Examples.Causal.Decision` | The collision's shared zero-regret policy family, plus two margin-class models with opposite optimal action at one mixture |
+| `AISafetyAtlas.Examples.Causal.ModelSpace` | A three-state table rounded by hand, and the witness that the `dim c` factor in the error bound is not slack |
+| `AISafetyAtlas.Examples.Causal.StructuralModel` | A two-variable structural model where evaluation needs a real recursion, and a diagram whose childless-utility clause is shown to bite |
+| `AISafetyAtlas.Examples.Causal.OneNodeClass` | One binary chance variable, unobserved, with a straddling utility gap. The margin class is the interval `[λ, 1-λ]`, and it meets all eight clauses of MAIS-O25's antecedent — the inhabitant that makes the conjecture non-vacuous |
 | `AISafetyAtlas.InformationTheory.Fano` | Fano's inequality for an arbitrary estimate on any probability space |
 | `AISafetyAtlas.InformationTheory.DataProcessing` | Markov chains, the mutual-information chain rule, data processing and its equality case |
 | `AISafetyAtlas.InformationTheory.ChannelCapacity` | Capacity of a discrete noiseless channel, with repeated use and parallel composition as lemmas. `Control` is one consumer, not the owner |

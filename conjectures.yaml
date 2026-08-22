@@ -4,8 +4,8 @@
   "conjectures": [
     {
       "id": "CONJ-002",
-      "statement": "Wolpert 2008 §8's collapse of stochastic inference complexity to Definition 6 at accuracy 1 genuinely needs its second hypothesis. `stochasticInferenceComplexity_eq` proves `C̄₁(Γ∣C) = 𝒞(Γ∣C)` under the source's `P ∝ dμ` condition, rendered in the atlas's single-measure model as: no point of a setup fibre is null. The conjecture is that dropping that hypothesis makes the statement false — i.e. some probability space, device and target with `C > Γ` and every realized fibre of positive mass, but some individual point null, separates the two complexities.",
-      "refutation": "Prove the hypothesis-free statement. Accuracy 1 forces agreement off a null set, so the accuracy set can only exceed the answering set by setups that answer wrongly at null points; a refutation shows the minimum of the length never moves when those are added — for instance because any such setup's fibre also contains a positive-mass point that answers correctly, or because the added setups never attain the minimum. A refutation strengthens `stochasticInferenceComplexity_eq` by deleting a hypothesis, and is recorded as RESOLVED.",
+      "statement": "Wolpert 2008 section 8's collapse of stochastic inference complexity to Definition 6 at accuracy 1 genuinely needs its no-null-point hypothesis. `stochasticInferenceComplexity_eq` proves `C-bar_1(Gamma | C) = script-C(Gamma | C)` under the source's `P proportional to d-mu` condition, rendered as `hatom` in the single-measure formulation this atlas uses: no point of the space is null. The conjecture is that theorem with `hatom` deleted and nothing else changed, negated -- so a counterexample is a probability space, device, length function and target meeting every remaining hypothesis, including measurable agreement and positive mass on every realized setup fibre, at which the two complexities differ.",
+      "refutation": "Prove `stochasticInferenceComplexity_eq` without `hatom`, leaving every other hypothesis in place. That shows the hypothesis was never needed and the theorem can simply be strengthened.",
       "prior_art": "D. H. Wolpert, Physical limits of inference, Physica D 237(9):1257-1281, 2008, §8 running text after Definition 10 (survey-ref-005). The source states the equality with the proportionality condition and gives no proof of either direction; the `≤` direction is `stochasticInferenceComplexity_le` and needs no such condition. No source consulted addresses necessity. The distinction is the standard measure-zero versus empty gap and is not specific to this paper, but the atlas found no statement of it for this quantity.",
       "lean": "AISafetyAtlas.Conjectures.StochasticComplexity.eq_needs_no_null_points",
       "tags": [
@@ -14,7 +14,14 @@
       ],
       "proposed_by": "Atlas review of the Wolpert section 8 prose layer. The hypothesis is carried by `stochasticInferenceComplexity_eq`; its necessity is asserted nowhere in the source and is not proved here.",
       "status": "OPEN",
-      "resolution": ""
+      "resolution": "",
+      "source_ref": [
+        "survey-ref-005"
+      ],
+      "context_source_ref": [],
+      "source_scope": "Beyond",
+      "source_fidelity": "AtlasOriginal",
+      "source_note": "Beyond/AtlasOriginal, corrected from Same/Literal on 2026-08-21. There is no printed sentence here to transcribe, and the entry's own fields said so two rows away: prior_art records that Wolpert 2008 section 8 'gives no proof of either direction' and that 'No source consulted addresses necessity', while proposed_by records that the hypothesis's necessity 'is asserted nowhere in the source'. Grading that Literal claimed a printed counterpart the paper does not contain. What the source does contain is the equality itself, which the atlas proves as stochasticInferenceComplexity_eq; the question of whether its hypothesis is needed is the atlas's, asked about that result. survey-ref-005 stays in source_ref as the artifact the question is about. One reading choice is worth recording and previously had nowhere to go: the negated universal is pinned at Type 0 rather than left polymorphic, because Checks.lean cannot name a universe-polymorphic Prop without metavariables. Restricting a *negated* universal makes the claim strictly stronger, so this is not a narrowing -- a Type 0 counterexample refutes the polymorphic theorem."
     }
   ]
 }

@@ -199,6 +199,67 @@ specification nobody has consumed is a specification whose ergonomics are untest
   by type rather than by a side condition, and that is exactly the design choice a
   second consumer is positioned to falsify.
 
+### CT-18 — State the margin conditions (M1)–(M6) and place the three colliding models in the class (M) — **done (2026-08-19)**
+
+- **Goal:** state MAIS-A2 Definition 3.1's margin conditions (M1)–(M6) in Lean over
+  `AISafetyAtlas.Causal.Model`, and prove the three models of
+  [`BehavioralCollision.lean`](../../AISafetyAtlas/Examples/Causal/BehavioralCollision.lean)
+  satisfy them at `λ = 1/10`. Until this lands, that module checks a *collision of
+  transforms*; MAIS-O23 quantifies over the margin class `M(s, λ)`, so the
+  collision does not answer it.
+- **The six, and what each costs.** Five are arithmetic on concrete rationals and
+  should fall to `decide` or `norm_num` once stated; one needs new structure.
+  - **(M1)** every table entry in `[λ, 1-λ]`. Entries are `1/2`, `4/5`, `1/5`. Easy.
+  - **(M2)** `|g(z)| ≥ λ` for every `z`. Here `|g| = 1/2`. Easy.
+  - **(M3)** `g` takes both signs on every observation-compatible slice. With
+    `O = ∅` this is just *`g` takes both signs*. Easy.
+  - **(M4)** every edge has strength `≥ λ`: some pair of parent configurations
+    differing only in the tail gives a table difference `≥ λ`. `X → Y` gives
+    `|4/5 - 1/5| = 3/5`; `Y → X` gives `|4/5 - 1/2| = 3/10`; the edgeless model
+    has no edges, so it is vacuous — state it so that the vacuous case is visibly
+    the definition and not an omission.
+  - **(M5)** `Anc(U) = C` and `O ⊊ C`. **This is the one with a cost.** It needs
+    ancestry — the reflexive-transitive closure of the parent relation — which
+    `Model` does not currently expose. The `rank` field gives a well-founded
+    order to recurse on, so the closure is definable without `Finset` fixpoint
+    machinery, but it is a definition plus its lemmas, not a `decide`.
+  - **(M6)** `u` sensitive to each utility parent. Requires the skeleton's `u`
+    as an object; currently only the gap `g` is present, which is what (M6) is
+    stated in terms of, so this is `|g(z) - g(z')| ≥ λ` over pairs differing in
+    one coordinate. Easy.
+- **Acceptance:** a `MarginClass` predicate (or six named predicates) over an
+  arbitrary `Fintype` of variables, three membership theorems at `λ = 1/10`, and
+  the registry row `LAND-CAUSAL-COLLISION-001` updated to say what the module
+  then establishes. `lake build`, `scripts/agent_gate.sh`,
+  `python3 scripts/check_print_axioms.py` green.
+- **Scope warning.** Membership in the margin class makes the construction an
+  answer to MAIS-O23 *as the atlas states it*. Whether it answers the problem as
+  MAIS states it is a review question for MAIS, not a build question — the atlas
+  records that a stated construction checks, and asserts no resolution. Note
+  also that the general class `M(s, λ)` admits the edgeless graph while the
+  agenda's two-variable class `MM₂(λ)` does not: `MM₂(λ)` is defined as the
+  models carrying `G→` or `G←`. The collision is stated against the general
+  class; do not silently narrow it to `MM₂`.
+- **Does not change:** the collision theorems, which are correct as they stand,
+  or `Model`'s existing fields.
+- **Owner note:** general causal machinery here is reusable — MAIS-A2 carries
+  fourteen problems in this setting, twelve of them causal.
+- **Closed 2026-08-19.** All six hold for all three models at `λ = 1/10`:
+  `edgeless_mem`, `arrowXY_mem`, `arrowYX_mem`. (M5) cost far less than priced
+  here — the least parent-closed superset is definable as an intersection of
+  all of them, so `Model.ancestors` needed no iteration and no
+  fixpoint-stability lemma, and `Model.ancestors_eq_univ_iff` gives the
+  decidable elimination form. The estimate above was wrong about the only
+  item it called costly; kept as written so the misprice is visible.
+
+### CT-19 — Carry the utility in Skeleton, so regret becomes statable (M) — **done (2026-08-19)**
+
+Completed 2026-08-19. `Skeleton` carries bounded utility on categorical assignments and derives `gap` only in the Bool-decision specialization. `AISafetyAtlas.Causal.Decision` states probability mixtures, generic finite policies factored through visible variables, unmediated value, identified sets, model error, and a rational `IsRadius` predicate. `Examples.Causal.Decision` supplies a non-vacuity witness. The layer is the RE24 Assumption-1 projection, not a full CID, and does not state O27/O28/O34(b).
+
+### CT-20 — Prove the finite-fibre maximum for causal policy regret (M) — **done (2026-08-19)**
+
+Completed 2026-08-19, then generalized in the categorical-kernel handoff. `fibreRep` picks one representative per visible fibre; `fibreScore`, `bestDecision`, and `bestPolicy` construct the optimum for any finite decision alphabet. `regret_decomp` and `regret_eq_zero_iff` prove zero regret exactly when positive policy support lies on the fibrewise argmax, with ties unconstrained. The Bool corollary `value_le_sign` recovers the sign policy. `Examples.Causal.card_fibreRep_empty` is the empty-visible cardinality tripwire.
+
 ### CT-17 — Pin Breuer 1995 at source and grade the self-measurement row (S) — **done (verified 2026-08-11)**
 
 Completed 2026-08-11. The primary PDF is pinned in [`self-measurement-kernel.md`](../provenance/self-measurement-kernel.md): §3.2 defines the inference map and exact measurement, §3.3 defines proper inclusion and the restriction map, §3.5 defines meshing, and Propositions 1–2 give the abstract no-go results. The generic fibre skeleton remains LAND-SELFMEAS-001; the source-faithful abstract inference-map core is LAND-SELFMEAS-002 with relationship RELATED and an explicit scope delta. Physical apparatus construction, dynamics, quantum structure, EPR, and philosophical consequences remain intentionally omitted. The Lean and registry gates are green. No DOI was confirmed; the direct PDF and PhilPapers catalogue locators are recorded in the provenance note.

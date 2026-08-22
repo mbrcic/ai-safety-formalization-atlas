@@ -42,6 +42,17 @@ variable [MeasurableSpace Ω] [MeasurableSpace S] [MeasurableSpace T]
 variable [MeasurableSingletonClass S] [MeasurableSingletonClass T]
 variable [Countable S] [Countable T] [DecidableEq S]
 
+/-- The printed finite-family chain rule is usable beyond its old two-variable instance. -/
+private theorem three_variable_chain_rule {V W : Type*} [Fintype V]
+    [MeasurableSpace V] [MeasurableSingletonClass V]
+    [MeasurableSpace W] [MeasurableSingletonClass W] [Countable W]
+    (mu : Measure Ω) [IsZeroOrProbabilityMeasure mu]
+    (Y : Ω → W) (X : Fin 3 → Ω → V) (hY : Measurable Y)
+    (hX : ∀ i, Measurable (X i)) [FiniteRange Y] :
+    I[Y : observationVector X ; mu] =
+      ∑ i : Fin 3, I[Y : X i | observationPrefix X i ; mu] :=
+  mutualInfo_chain_rule_fin mu Y X hY hX
+
 /--
 **Fano along a Markov chain.** If `X → Y → X̂`, then the uncertainty the
 *observation* leaves about the truth is bounded by the error probability of the

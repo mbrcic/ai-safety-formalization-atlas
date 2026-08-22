@@ -1,5 +1,7 @@
 AISafetyAtlas.Conjectures.Checks
 AISafetyAtlas.Conjectures.StochasticComplexity
+AISafetyAtlas.Causal.Decision
+AISafetyAtlas.Causal.DecisionNetwork
 AISafetyAtlas.Control.ChannelRate
 AISafetyAtlas.Control.CompleteControl
 AISafetyAtlas.Control.InformationLimits
@@ -15,6 +17,18 @@ AISafetyAtlas.Examples.Control.OpenLoopAttainment
 AISafetyAtlas.Examples.Control.PolicyKernel
 AISafetyAtlas.Examples.Control.Purification
 AISafetyAtlas.Examples.Control.RequisiteVariety
+AISafetyAtlas.Examples.Causal.Model
+AISafetyAtlas.Examples.Causal.BayesianNetwork
+AISafetyAtlas.Examples.Causal.DecisionNetwork
+AISafetyAtlas.Examples.Causal.Decision
+AISafetyAtlas.Examples.Causal.Query
+AISafetyAtlas.Examples.Causal.Semialgebraic
+AISafetyAtlas.Examples.Causal.EffectiveGenericity
+AISafetyAtlas.Examples.Causal.OneNodeClass
+AISafetyAtlas.Causal.ModelSpace
+AISafetyAtlas.Examples.Causal.ModelSpace
+AISafetyAtlas.Causal.StructuralModel
+AISafetyAtlas.Examples.Causal.StructuralModel
 AISafetyAtlas.Examples.FirstContribution
 AISafetyAtlas.Examples.HaltingExample
 AISafetyAtlas.Examples.Inference.Complexity

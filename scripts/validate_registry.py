@@ -235,6 +235,20 @@ NOVELTY_CHECK_FIELDS = {
     "found",
     "scope_limits",
 }
+NOVELTY_FOLLOWUP_FIELDS = {
+    "corpus",
+    "framework",
+    "repository",
+    "version",
+    "scope",
+    "searched_on",
+    "searched_by",
+    "queries",
+    "candidate_hits",
+    "review",
+    "scope_limits",
+}
+GIT_REVISION = re.compile(r"[0-9a-f]{40}")
 GRADED_RELATIONSHIPS = {"EXACT", "EQUIVALENT", "RELATED"}
 ISO_DATE = re.compile(r"\d{4}-\d{2}-\d{2}")
 BRIDGE_STATUS_VALUES = {"HUMAN_REVIEW", "STATEMENT_REVIEWED", "REVIEWED"}
@@ -626,7 +640,81 @@ def main() -> None:
         )
         if not corpora:
             fail(f"{cid} must name at least one searched corpus")
-        unknown = sorted(set(corpora) - set(search_evidence["corpora"]))
+        followups = check.get("followup_searches", [])
+        if not isinstance(followups, list):
+            fail(f"{cid} followup_searches must be a list")
+        followup_corpora: set[str] = set()
+        for followup_index, raw_followup in enumerate(followups):
+            label = f"{cid} follow-up {followup_index}"
+            followup = require_mapping(raw_followup, f"{label} must be an object")
+            missing_followup = NOVELTY_FOLLOWUP_FIELDS - followup.keys()
+            if missing_followup:
+                fail(f"{label} missing fields: {sorted(missing_followup)}")
+            corpus = require_text(
+                followup.get("corpus"), f"{label} must name a corpus"
+            )
+            if corpus in followup_corpora:
+                fail(f"{cid} has duplicate follow-up corpus {corpus}")
+            followup_corpora.add(corpus)
+            for field in (
+                "framework",
+                "scope",
+                "searched_by",
+                "review",
+                "scope_limits",
+            ):
+                require_text(
+                    followup.get(field), f"{cid}/{corpus} must record {field}"
+                )
+            if not valid_http_url(followup.get("repository")):
+                fail(f"{cid}/{corpus} must record an HTTP(S) repository URL")
+            version = require_text(
+                followup.get("version"), f"{cid}/{corpus} must record a revision"
+            )
+            if not GIT_REVISION.fullmatch(version):
+                fail(f"{cid}/{corpus} must pin a 40-character Git revision")
+            followup_date = require_text(
+                followup.get("searched_on"),
+                f"{cid}/{corpus} must record searched_on as an ISO date",
+            )
+            if not ISO_DATE.fullmatch(followup_date):
+                fail(f"{cid}/{corpus} has an invalid searched_on date")
+            queries = require_text_list(
+                followup.get("queries"),
+                f"{cid}/{corpus} queries must be a list of non-empty strings",
+            )
+            if not queries:
+                fail(f"{cid}/{corpus} must record at least one query")
+            hit = require_mapping(
+                followup.get("candidate_hits"),
+                f"{cid}/{corpus} candidate_hits must be an object",
+            )
+            hit_count = hit.get("hit_count")
+            counts = hit.get("query_hit_counts")
+            paths = hit.get("paths")
+            if type(hit_count) is not int or hit_count < 0:
+                fail(f"{cid}/{corpus} has invalid hit evidence")
+            if not isinstance(counts, dict) or list(counts) != queries:
+                fail(f"{cid}/{corpus} lacks ordered per-query hit counts")
+            if any(
+                type(counts[query]) is not int or counts[query] < 0
+                for query in queries
+            ):
+                fail(f"{cid}/{corpus} query hit counts must be non-negative integers")
+            expected_matches = [query for query in queries if counts[query] > 0]
+            if hit.get("matched_queries") != expected_matches:
+                fail(f"{cid}/{corpus} matched-query summary is inconsistent")
+            if not isinstance(paths, list) or any(
+                not isinstance(path, str) or not path.strip() for path in paths
+            ):
+                fail(f"{cid}/{corpus} hit paths must be non-empty strings")
+            if hit_count < len(paths) or len(paths) > 12:
+                fail(f"{cid}/{corpus} path sample is inconsistent")
+        if not followup_corpora.issubset(corpora):
+            missing_corpora = sorted(followup_corpora - set(corpora))
+            fail(f"{cid} follow-up corpora missing from corpora: {missing_corpora}")
+        pinned_corpora = set(search_evidence["corpora"]) | followup_corpora
+        unknown = sorted(set(corpora) - pinned_corpora)
         if unknown:
             fail(f"{cid} names corpora with no pinned revision on record: {unknown}")
 

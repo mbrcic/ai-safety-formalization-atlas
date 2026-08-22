@@ -139,11 +139,47 @@ def public_theorems_in(path: Path) -> list[str]:
     return declarations
 
 
+BUILD_TARGETS = ROOT / "scripts" / "lean_build_targets.txt"
+
+
+def consumer_sources() -> list[Path]:
+    """Explicit build targets that the root facade deliberately does not import.
+
+    The conjecture layer is a *consumer* of the atlas, not part of it: an
+    unproved `Prop` must not sit on the public surface, and
+    ``validate_conjectures.py`` fails if one becomes reachable from the root.
+    That keeps those modules out of ``facade_sources`` — but axiom hygiene is a
+    property of any checked theorem, whoever owns it, so they are audited here
+    even though ``check_public_api.py`` correctly declines to pin them. Pinning
+    would invent a stability contract for code nothing downstream may depend on.
+    """
+    facade = set(facade_sources())
+    modules = [
+        line.strip()
+        for line in BUILD_TARGETS.read_text(encoding="utf-8").splitlines()
+        if line.strip() and not line.lstrip().startswith("#")
+    ]
+    paths = []
+    for module in modules:
+        path = ROOT / (module.replace(".", "/") + ".lean")
+        if not path.is_file():
+            raise RuntimeError(f"build target names missing module: {module}")
+        if path not in facade:
+            paths.append(path)
+    return paths
+
+
+CONSUMER_MODULES = [
+    str(path.relative_to(ROOT)).removesuffix(".lean").replace("/", ".")
+    for path in consumer_sources()
+]
+
+
 def discover_public_theorems() -> list[str]:
-    """Discover the complete theorem surface from all root facade modules."""
+    """Discover the audited theorem surface: the facade plus explicit consumers."""
     declarations = [
         declaration
-        for path in facade_sources()
+        for path in list(facade_sources()) + consumer_sources()
         for declaration in public_theorems_in(path)
     ]
     duplicates = sorted(
@@ -204,15 +240,15 @@ DECL_START_NO_COLON = re.compile(
 
 
 def harness_source() -> str:
-    lines = ["import AISafetyAtlas"]
-    lines.extend(f"import {module}" for module in OFF_ROOT_FACADES)
-    lines.extend(
-        [
-            "",
-            "/-! Generated axiom harness for scripts/check_print_axioms.py. -/",
-            "",
-        ]
+    harness_imports = dict.fromkeys(
+        ["AISafetyAtlas", *OFF_ROOT_FACADES, *CONSUMER_MODULES]
     )
+    lines = [
+        *[f"import {module}" for module in harness_imports],
+        "",
+        "/-! Generated axiom harness for scripts/check_print_axioms.py. -/",
+        "",
+    ]
     for decl in DECLARATIONS:
         lines.append(f"#print axioms {decl}")
     lines.append("")

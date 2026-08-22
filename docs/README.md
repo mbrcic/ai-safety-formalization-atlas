@@ -69,6 +69,16 @@ in the repository can detect it.
 - [Limited self-awareness](provenance/limited-self-awareness.md) — BY-044 source map,
   strict-extension interpretation, proof split, and fidelity residual
 - [Debate reproduction](provenance/debate-reproduction.md) — Path-A external build
+- [Source coverage audit](provenance/source-coverage-audit.md) — the statement-by-statement
+  grading of every printed source the atlas transcribes: coverage, scope, and the
+  readings that are choices rather than transcriptions
+- [MAIS source pin](provenance/mais-source-pin.md) — the commit and per-file SHA-256
+  the MAIS-A2 grading is anchored to
+
+This section is a **map, not an inventory**: `provenance/` holds triage notes,
+per-source clash logs and dated audits that a reader does not need in order to
+check the work. The two entries above are here because everything else in the
+grading chain refers back to them.
 
 ## Status (generated)
 
@@ -102,7 +112,9 @@ Regenerate with `python3 scripts/generate_registry_views.py` (also refreshes
 
 ## Releases
 
-- [v0.5.1 release](releases/v0.5.1.md) — current published release (`0.5.1`, tagged)
+- [v0.7 release](releases/v0.7.md) — current published release (`0.7.0`, tagged)
+- [v0.6 release](releases/v0.6.md) — historical (`0.6.0`, tagged)
+- [v0.5.1 release](releases/v0.5.1.md) — historical (`0.5.1`, tagged)
 - [v0.5 release](releases/v0.5.md) — historical (`0.5.0`, tagged)
 - [v0.4 release](releases/v0.4.md) — historical (`0.4.0`, tagged)
 - [v0.3 release](releases/v0.3.md) — historical (`0.3.x`)

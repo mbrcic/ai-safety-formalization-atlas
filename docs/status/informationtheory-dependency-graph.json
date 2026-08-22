@@ -229,6 +229,20 @@
       "kind": "theorem",
       "deps": []
     },
+    "AISafetyAtlas.InformationTheory.mutualInfo_chain_rule_fin": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.InformationTheory.observationPrefix",
+        "AISafetyAtlas.InformationTheory.observationVector"
+      ]
+    },
+    "AISafetyAtlas.InformationTheory.mutualInfo_chain_rule_pi": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.InformationTheory.observationPrefixPi",
+        "AISafetyAtlas.InformationTheory.observationVectorPi"
+      ]
+    },
     "AISafetyAtlas.InformationTheory.mutualInfo_comp_le": {
       "kind": "theorem",
       "deps": []
@@ -253,6 +267,26 @@
     },
     "AISafetyAtlas.InformationTheory.mutualInfo_sub_eq": {
       "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.InformationTheory.observationPrefix": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.InformationTheory.observationPrefixPi": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.InformationTheory.observationTagged": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.InformationTheory.observationVector": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.InformationTheory.observationVectorPi": {
+      "kind": "definition",
       "deps": []
     },
     "AISafetyAtlas.InformationTheory.preimage_errorIndicator_false": {

@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+from datetime import date
 import hashlib
 import json
 from pathlib import Path
@@ -82,12 +83,49 @@ def verify_corpus(name: str, path: Path, metadata: dict[str, object]) -> None:
         )
 
 
+def git_revision(path: Path) -> str:
+    repository = git_root(path)
+    if repository is None:
+        raise SystemExit(f"novelty corpus must be inside a Git checkout: {path}")
+    return subprocess.run(
+        ["git", "-C", str(repository), "rev-parse", "HEAD"],
+        check=True,
+        capture_output=True,
+        text=True,
+    ).stdout.strip()
+
+
+def git_remote(path: Path) -> str:
+    repository = git_root(path)
+    if repository is None:
+        raise SystemExit(f"novelty corpus must be inside a Git checkout: {path}")
+    return subprocess.run(
+        ["git", "-C", str(repository), "remote", "get-url", "origin"],
+        check=True,
+        capture_output=True,
+        text=True,
+    ).stdout.strip()
+
+
 def source_files(root: Path) -> list[Path]:
+    repository = git_root(root)
+    if repository is not None:
+        prefix = root.relative_to(repository).as_posix()
+        command = ["git", "-C", str(repository), "ls-files", "-z"]
+        if prefix != ".":
+            command.extend(["--", prefix])
+        tracked = subprocess.run(
+            command,
+            check=True,
+            capture_output=True,
+        ).stdout.split(b"\0")
+        candidates = [repository / path.decode() for path in tracked if path]
+    else:
+        candidates = list(root.rglob("*"))
     return sorted(
         path
-        for path in root.rglob("*")
+        for path in candidates
         if path.is_file()
-        and ".git" not in path.parts
         and path.suffix.casefold() in SOURCE_SUFFIXES
         and path.stat().st_size <= 8 * 1024 * 1024
     )
@@ -218,11 +256,135 @@ def main() -> None:
         default=[],
         help="result ID to rebuild; omit to rebuild every result",
     )
+    parser.add_argument(
+        "--novelty-check",
+        help="append or replace a structured follow-up search on one novelty check",
+    )
+    parser.add_argument(
+        "--novelty-corpus-root",
+        metavar="CORPUS=PATH",
+        help="pinned Git checkout used for a novelty-check follow-up",
+    )
+    parser.add_argument(
+        "--novelty-query",
+        action="append",
+        default=[],
+        help="exact phrase searched in the novelty follow-up; repeat as needed",
+    )
+    parser.add_argument(
+        "--novelty-framework",
+        help="proof assistant or framework of the novelty corpus",
+    )
+    parser.add_argument(
+        "--novelty-scope",
+        help="source-tree scope searched in the novelty corpus",
+    )
+    parser.add_argument(
+        "--novelty-review",
+        help="manual review conclusion for the generated candidate hits",
+    )
+    parser.add_argument(
+        "--novelty-scope-limits",
+        help="what the novelty follow-up does not establish",
+    )
+    parser.add_argument(
+        "--novelty-check-claim",
+        help="replace the selected novelty check's top-level claim",
+    )
+    parser.add_argument(
+        "--novelty-check-method",
+        help="replace the selected novelty check's top-level method",
+    )
+    parser.add_argument(
+        "--novelty-check-found",
+        help="replace the selected novelty check's top-level review conclusion",
+    )
+    parser.add_argument(
+        "--novelty-check-scope-limits",
+        help="replace the selected novelty check's top-level scope limits",
+    )
+    parser.add_argument(
+        "--searched-by",
+        default="Codex agent-assisted session",
+        help="reviewer recorded on a novelty follow-up",
+    )
+    parser.add_argument(
+        "--searched-on",
+        default=date.today().isoformat(),
+        help="ISO search date recorded on a novelty follow-up",
+    )
     parser.add_argument("--write", action="store_true", help="write updated evidence")
     args = parser.parse_args()
 
     registry = json.loads(REGISTRY_PATH.read_text(encoding="utf-8"))
     evidence = json.loads(EVIDENCE_PATH.read_text(encoding="utf-8"))
+
+    if args.novelty_check:
+        required = {
+            "--novelty-corpus-root": args.novelty_corpus_root,
+            "--novelty-query": args.novelty_query,
+            "--novelty-framework": args.novelty_framework,
+            "--novelty-scope": args.novelty_scope,
+            "--novelty-review": args.novelty_review,
+            "--novelty-scope-limits": args.novelty_scope_limits,
+        }
+        missing_options = [name for name, value in required.items() if not value]
+        if missing_options:
+            raise SystemExit(
+                "novelty follow-up is missing: " + ", ".join(missing_options)
+            )
+        novelty_checks = {check["id"]: check for check in evidence["novelty_checks"]}
+        if args.novelty_check not in novelty_checks:
+            raise SystemExit(f"unknown novelty check: {args.novelty_check}")
+        mapping = parse_mapping(
+            [args.novelty_corpus_root], "--novelty-corpus-root"
+        )
+        if len(mapping) != 1:
+            raise SystemExit("--novelty-corpus-root accepts exactly one corpus")
+        corpus, root = next(iter(mapping.items()))
+        if not root.is_dir():
+            raise SystemExit(f"novelty corpus root does not exist: {corpus}={root}")
+        hit = search_corpus(
+            corpus, root, {args.novelty_check: args.novelty_query}
+        )[args.novelty_check]
+        followup = {
+            "corpus": corpus,
+            "framework": args.novelty_framework,
+            "repository": git_remote(root),
+            "version": git_revision(root),
+            "scope": args.novelty_scope,
+            "searched_on": args.searched_on,
+            "searched_by": args.searched_by,
+            "queries": args.novelty_query,
+            "candidate_hits": hit,
+            "review": args.novelty_review,
+            "scope_limits": args.novelty_scope_limits,
+        }
+        check = novelty_checks[args.novelty_check]
+        top_level_updates = {
+            "claim": args.novelty_check_claim,
+            "method": args.novelty_check_method,
+            "found": args.novelty_check_found,
+            "scope_limits": args.novelty_check_scope_limits,
+        }
+        for field, value in top_level_updates.items():
+            if value:
+                check[field] = value
+        followups = [
+            old for old in check.get("followup_searches", [])
+            if old["corpus"] != corpus
+        ]
+        check["followup_searches"] = [*followups, followup]
+        if corpus not in check["corpora"]:
+            check["corpora"].append(corpus)
+        print(f"{args.novelty_check}/{corpus}: {hit['hit_count']} candidate files")
+        if args.write:
+            EVIDENCE_PATH.write_text(
+                json.dumps(evidence, ensure_ascii=False, indent=2) + "\n",
+                encoding="utf-8",
+            )
+        return
+
     corpus_roots = parse_mapping(args.corpus_root, "--corpus-root")
     expected_corpora = list(evidence["corpora"])
     missing = [corpus for corpus in expected_corpora if corpus not in corpus_roots]

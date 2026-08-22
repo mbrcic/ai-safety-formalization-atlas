@@ -10,7 +10,7 @@ Edges come from the elaborated Lean environment. This answers the question the p
 
 So `A → B` means *`B` occurs in `A`'s statement, or in `A`'s body when `A` is a definition*. A lemma used only inside a proof does not appear. Reading the table as a complete call graph would be wrong, and the two sections below are scoped so that they stay true under this limit.
 
-`91` authored declarations in `AISafetyAtlas.Preference.*` (54 theorems). Compiler-generated companions and projections are dropped.
+`83` authored declarations in `AISafetyAtlas.Preference.*` (50 theorems). Compiler-generated companions and projections are dropped.
 
 ## Load-bearing declarations
 
@@ -18,19 +18,15 @@ Named in the statements of eight or more others. A change to one of these is a c
 
 | Declaration | Named by |
 |---|---|
-| `Policy` | 45 |
+| `Policy` | 42 |
 | `RewardFn` | 32 |
-| `Pair` | 29 |
 | `Planner` | 22 |
+| `Pair` | 21 |
 | `Explains` | 15 |
 | `OverrideModel` | 14 |
-| `op6` | 13 |
-| `op2` | 13 |
-| `op4` | 12 |
-| `op5` | 9 |
-| `op3` | 9 |
-| `op1` | 9 |
-| `Source.ReasonableForF.Compatible` | 9 |
+| `op6` | 9 |
+| `op4` | 9 |
+| `op2` | 9 |
 | `Source.ReasonableForF` | 9 |
 | `OverrideModel.resulting` | 8 |
 
@@ -78,18 +74,10 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 | `RegretModel.bad_compatible_rewards_nonempty` | theorem | `Explains`, `HalfMaximalRegretBound`, `Planner`, `RegretModel`, `RegretModel.regret`, `RegretModel.worstCaseRegret`, `RegretModel.worstPolicy` |
 | `RegretModel.cannot_rule_out_half_maximal_regret` | theorem | `Explains`, `HalfMaximalRegretBound`, `Planner`, `RegretModel`, `RegretModel.regret`, `RegretModel.worstCaseRegret`, `RegretModel.worstPolicy` |
 | `RewardFn` | definition | — |
-| `Source.Fmap` | definition | `Pair`, `Source.F₁`, `Source.F₂`, `Source.F₃`, `Source.F₄` |
-| `Source.F₁` | definition | `Pair`, `op1`, `op3`, `op5` |
-| `Source.F₂` | definition | `Pair`, `op2`, `op3`, `op6` |
-| `Source.F₃` | definition | `Pair`, `op2`, `op3`, `op4`, `op6` |
-| `Source.F₄` | definition | `Pair`, `op4` |
+| `Source.Fmap` | definition | `Pair` |
 | `Source.ReasonableForF` | definition | — |
 | `Source.ReasonableForF.AmongLowestCompatible` | definition | `Pair`, `Policy`, `Source.ReasonableForF`, `Source.ReasonableForF.Compatible`, `Source.ReasonableForF.KPair`, `Source.ReasonableForF.c` |
 | `Source.ReasonableForF.Compatible` | definition | `Pair`, `Policy`, `op3` |
-| `Source.ReasonableForF.F₁_of_compatible` | theorem | `Pair`, `Policy`, `Source.F₁`, `Source.ReasonableForF.Compatible`, `op1`, `op5` |
-| `Source.ReasonableForF.F₂_of_compatible` | theorem | `Pair`, `Policy`, `Source.F₂`, `Source.ReasonableForF.Compatible`, `op2`, `op6` |
-| `Source.ReasonableForF.F₃_of_compatible` | theorem | `Pair`, `Policy`, `Source.F₃`, `Source.ReasonableForF.Compatible`, `op2`, `op4`, `op6` |
-| `Source.ReasonableForF.F₄_F₄` | theorem | `Pair`, `Source.F₄` |
 | `Source.ReasonableForF.NotAmongLowestCompatible` | definition | `Pair`, `Policy`, `Source.ReasonableForF`, `Source.ReasonableForF.Compatible`, `Source.ReasonableForF.KPair`, `Source.ReasonableForF.c` |
 | `Source.ReasonableForF.antirational_amongLowest` | theorem | `Policy`, `Source.ReasonableForF`, `Source.ReasonableForF.AmongLowestCompatible`, `op2`, `op4`, `op6` |
 | `Source.ReasonableForF.compatible_iff` | theorem | `Pair`, `Policy`, `ReasonableLanguage.Compatible`, `Source.ReasonableForF.Compatible` |
@@ -97,7 +85,7 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 | `Source.ReasonableForF.greedy_amongLowest` | theorem | `Policy`, `Source.ReasonableForF`, `Source.ReasonableForF.AmongLowestCompatible`, `op2`, `op6` |
 | `Source.ReasonableForF.indifferent_amongLowest` | theorem | `Policy`, `Source.ReasonableForF`, `Source.ReasonableForF.AmongLowestCompatible`, `op1`, `op5` |
 | `Source.ReasonableForF.notAmongLowest_iff` | theorem | `Pair`, `Policy`, `Source.ReasonableForF`, `Source.ReasonableForF.AmongLowestCompatible`, `Source.ReasonableForF.Compatible`, `Source.ReasonableForF.NotAmongLowestCompatible` |
-| `Source.ReasonableForF.proposition_eight` | theorem | `Pair`, `Policy`, `Source.F₄`, `Source.ReasonableForF`, `Source.ReasonableForF.Compatible`, `Source.ReasonableForF.KPair`, `Source.ReasonableForF.c` |
+| `Source.ReasonableForF.proposition_eight` | theorem | `Pair`, `Policy`, `Source.ReasonableForF`, `Source.ReasonableForF.Compatible`, `Source.ReasonableForF.KPair`, `Source.ReasonableForF.c` |
 | `Source.ReasonableForF.proposition_seven` | theorem | `Policy`, `Source.ReasonableForF`, `Source.ReasonableForF.AmongLowestCompatible`, `op1`, `op2`, `op4`, `op5`, `op6` |
 | `Source.ReasonableForF.theorem_two_conditional` | theorem | `Pair`, `Policy`, `Source.ReasonableForF`, `Source.ReasonableForF.KPair`, `Source.ReasonableForF.NotAmongLowestCompatible`, `op1`, `op2`, `op4`, `op5`, `op6` |
 | `computable_decodeBehaviour` | theorem | `decodeBehaviour` |

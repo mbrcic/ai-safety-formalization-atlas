@@ -441,11 +441,13 @@ Two consequences, both applied below:
   case: `E_P(· ∣ x)` presupposes measurable fibres and a measurable integrand, so
   the print requires it whether or not it writes it. Likewise positive fibre
   mass, and `H₁ + H₂ ≠ 0`.
-* **A hypothesis the atlas adds for convenience still is one.** The finite setup
-  range on Definitions 9–11 and on Propositions 8 and 11 is the live example: the
-  printed `max_x` ranges over conditional expectations bounded in `[-1, 1]`, so a
-  **supremum denotes on any setup range**, and finiteness buys only that the
-  maximum is *attained*. Those rows stay `SPECIALIZED` and the debt is real.
+* **A hypothesis the atlas adds for convenience still is one.** The former finite
+  setup restriction on Definition 9 was the live example: the printed `max_x`
+  ranges over conditional expectations bounded in `[-1, 1]`, so a **supremum
+  denotes on any setup range**, and finiteness buys only attainment. The
+  `inferenceAccuracySupOn` surface removes that restriction. Restrictions that
+  remain below are either forced by a printed expression's definedness or named
+  as genuine deltas.
 
 ### Equation (4)'s countable `U` is local to one rewriting
 

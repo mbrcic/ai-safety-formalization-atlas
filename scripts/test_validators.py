@@ -116,6 +116,11 @@ def synthetic_conjecture(data: dict) -> dict:
             "proposed_by": "test_validators",
             "status": "OPEN",
             "resolution": None,
+            "source_ref": ["survey-ref-005"],
+            "context_source_ref": [],
+            "source_scope": "Same",
+            "source_fidelity": "Literal",
+            "source_note": "",
         },
     )
     return data["conjectures"][0]
@@ -246,6 +251,15 @@ CASES = [
         "docs/provenance/formalization-search.json",
         lambda d: d["novelty_checks"][0].__setitem__("corpora", ["google"]),
         "corpora with no pinned revision on record",
+    ),
+    (
+        "search evidence: novelty follow-up using an unpinned revision",
+        "validate_registry.py",
+        "docs/provenance/formalization-search.json",
+        lambda d: next(
+            check for check in d["novelty_checks"] if check["id"] == "NC-009"
+        )["followup_searches"][0].__setitem__("version", "main"),
+        "must pin a 40-character Git revision",
     ),
     (
         "registry: public RELATED record with no scope delta",
@@ -709,6 +723,203 @@ CASES = [
             "lean", "AISafetyAtlas.Learning.no_free_lunch"
         ),
         "must live under AISafetyAtlas.Conjectures",
+    ),
+    # A conjecture is what gets doubted and proved, so the scope grade against
+    # its printed source is part of the schema rather than commentary. Each
+    # rule below is the one a tired author would otherwise walk past.
+    (
+        "conjectures: unknown source_scope",
+        "validate_conjectures.py",
+        "conjectures.yaml",
+        lambda d: synthetic_conjecture(d).__setitem__("source_scope", "Wider"),
+        "unknown source_scope",
+    ),
+    (
+        "conjectures: unknown source_fidelity",
+        "validate_conjectures.py",
+        "conjectures.yaml",
+        lambda d: synthetic_conjecture(d).__setitem__("source_fidelity", "High"),
+        "unknown source_fidelity",
+    ),
+    (
+        "conjectures: source_ref names no registry source",
+        "validate_conjectures.py",
+        "conjectures.yaml",
+        lambda d: synthetic_conjecture(d).__setitem__("source_ref", []),
+        "at least one registry source",
+    ),
+    (
+        "conjectures: source_ref names a source the registry does not have",
+        "validate_conjectures.py",
+        "conjectures.yaml",
+        lambda d: synthetic_conjecture(d).__setitem__("source_ref", ["not-a-source"]),
+        "absent from registry.yaml",
+    ),
+    (
+        "conjectures: graded against an unpinned source",
+        "validate_conjectures.py",
+        "conjectures.yaml",
+        lambda d: synthetic_conjecture(d).__setitem__(
+            "source_ref", ["mathforaisafety-2026"]
+        ),
+        "unpinned sources",
+    ),
+    (
+        "conjectures: a narrowing labelled but not argued",
+        "validate_conjectures.py",
+        "conjectures.yaml",
+        lambda d: synthetic_conjecture(d).update(
+            {"source_scope": "Narrower", "source_note": "binary only"}
+        ),
+        "a label is not the",
+    ),
+    (
+        # A Same/Literal row *may* explain what it read from the source; the
+        # rule that it must not was this schema's worst defect, because the rows
+        # claiming perfect fidelity were then the only ones barred from
+        # disclosing a reading choice. What is still rejected is a fragment: a
+        # note here is an argument or it is absent.
+        "conjectures: Same and Literal hedging in a fragment instead of arguing",
+        "validate_conjectures.py",
+        "conjectures.yaml",
+        lambda d: synthetic_conjecture(d).__setitem__(
+            "source_note", "Roughly the same, give or take."
+        ),
+        "a fragment is a hedge",
+    ),
+    (
+        "conjectures: Beyond scope without the AtlasOriginal fidelity",
+        "validate_conjectures.py",
+        "conjectures.yaml",
+        lambda d: synthetic_conjecture(d).update(
+            {
+                "source_scope": "Beyond",
+                "source_note": (
+                    "An atlas-original question still has to say which printed "
+                    "result it is about and why the source does not settle it."
+                ),
+            }
+        ),
+        "same fact seen from two sides",
+    ),
+    (
+        "conjectures: AtlasOriginal fidelity without the Beyond scope",
+        "validate_conjectures.py",
+        "conjectures.yaml",
+        lambda d: synthetic_conjecture(d).update(
+            {
+                "source_fidelity": "AtlasOriginal",
+                "source_note": (
+                    "Claiming the Prop is at the printed quantifier while saying "
+                    "there is no printed statement is a contradiction in one row."
+                ),
+            }
+        ),
+        "same fact seen from two sides",
+    ),
+    (
+        "conjectures: AtlasOriginal paired with a kind that reads a printed sentence",
+        "validate_conjectures.py",
+        "conjectures.yaml",
+        lambda d: synthetic_conjecture(d).update(
+            {
+                "source_scope": "Beyond",
+                "source_fidelity": ["AtlasOriginal", "Selected"],
+                "source_note": (
+                    "There is no printed sentence for Selected to have selected a "
+                    "branch of, so the two kinds cannot both hold of one Prop."
+                ),
+            }
+        ),
+        "nothing for another kind to describe",
+    ),
+    (
+        "conjectures: source_fidelity list repeating a value",
+        "validate_conjectures.py",
+        "conjectures.yaml",
+        lambda d: synthetic_conjecture(d).update(
+            {
+                "source_fidelity": ["Selected", "Selected"],
+                "source_note": (
+                    "A repeated kind says nothing twice and hides whether a second "
+                    "distinct relation to print was meant to be recorded."
+                ),
+            }
+        ),
+        "repeats a value",
+    ),
+    (
+        # One Same cell answering to two artifacts hides which of them the
+        # verdict is about, and the two are rarely the same genre: CONJ-009 was
+        # graded against both a GitHub issue's criterion and an agenda clause
+        # that says "Determine ...", which no truth-valued Prop can be Same as.
+        "conjectures: one Same grade answering to several sources at once",
+        "validate_conjectures.py",
+        "conjectures.yaml",
+        lambda d: synthetic_conjecture(d).__setitem__(
+            "source_ref", ["survey-ref-005", "mais-a2-2026"]
+        ),
+        "one grade cannot answer to several artifacts",
+    ),
+    (
+        "conjectures: a source listed as both graded and context",
+        "validate_conjectures.py",
+        "conjectures.yaml",
+        lambda d: synthetic_conjecture(d).__setitem__(
+            "context_source_ref", ["survey-ref-005"]
+        ),
+        "not both",
+    ),
+    (
+        "conjectures: context_source_ref naming a source the registry lacks",
+        "validate_conjectures.py",
+        "conjectures.yaml",
+        lambda d: synthetic_conjecture(d).__setitem__(
+            "context_source_ref", ["no-such-source-9999"]
+        ),
+        "context_source_ref names sources absent",
+    ),
+    (
+        "conjectures: withdrawn without the Retired scope",
+        "validate_conjectures.py",
+        "conjectures.yaml",
+        lambda d: synthetic_conjecture(d).update(
+            {
+                "status": "WITHDRAWN",
+                "resolution": "Retired under test.",
+                "source_scope": "Narrower",
+                "source_note": (
+                    "A withdrawn entry still has to say what it retired and why, "
+                    "at enough length that the next proposer does not repeat it."
+                ),
+            }
+        ),
+        "source_scope must be 'Retired'",
+    ),
+    (
+        "conjectures: Retired scope on a live conjecture",
+        "validate_conjectures.py",
+        "conjectures.yaml",
+        lambda d: synthetic_conjecture(d).update(
+            {
+                "source_scope": "Retired",
+                "source_note": (
+                    "A live conjecture graded as retired would hide an ungraded "
+                    "claim behind a status it does not have."
+                ),
+            }
+        ),
+        "cannot be 'Retired'",
+    ),
+    (
+        "conjectures: claims Same while the statement declares a specialization",
+        "validate_conjectures.py",
+        "conjectures.yaml",
+        lambda d: synthetic_conjecture(d).__setitem__(
+            "statement",
+            "In the atlas's finite binary rational specialization, the thing holds.",
+        ),
+        "declares a specialization",
     ),
     (
         "conjectures: terminal status with no resolution",

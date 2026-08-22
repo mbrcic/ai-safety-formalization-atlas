@@ -1,8 +1,12 @@
 # Source coverage audit
 
-Every statement in the sections of the five sources the atlas formalizes from,
+Every statement in the sections of the eight sources the atlas formalizes from,
 checked one by one against the Lean and against the published text of each; last
-revised 2026-08-17.
+revised 2026-08-20, when the causal sources — Richens & Everitt 2024, Pearl §1.3,
+and Everitt et al. 2021 — were graded for the first time. Those three had been
+covered only by hand-written prose in `mais-a2-causal-collision.md`, which no
+script read; six of its scope claims had gone stale through four commits with
+every gate green. Sections 6 to 8 exist so that cannot recur.
 
 **Coverage** is semantic rather than name-based: can a competent reader derive
 the printed statement from the cited kernel-checked declarations? `Yes` permits
@@ -72,15 +76,113 @@ axis must be labelled with which of three states it is in:
 
 * **not a narrowing** — a units restatement or a representation change, with the
   converting lemma named. Regrade it rather than carrying it.
-* **provably not closable** — with the witness that proves it. None currently,
-  as a graded axis.
-* **open, and costed** — with what it would take. Cover & Thomas Thm 2.5.2's
-  arity is the only one, and since the sample-space sweep below struck that
-  row's widening half it is now the audit's only `Narrower` and there is no
-  `Mixed` row left: general `n` needs
-  prefix-tuple machinery (`Measurable` and `FiniteRange` transport through
-  `fun ω => fun i : Fin k => X i ω`) that neither Mathlib nor PFR has, where
-  §2.8 uses only `n = 2`.
+* **provably not closable** — with the witness that proves it. **None on this
+  table.** One was claimed on 2026-08-22 — the well-foundedness of the parent
+  relation that `SCM` and `SCIM` ask for where print writes only *"acyclic"* —
+  and it was **retracted, then closed**. The witness proves that `eval` cannot be totalised over print's class; it does not
+  prove that the structure must carry the field. `SCM` and `SCIM` now carry
+  print's `acyclic` and the recursion's hypothesis lives in `SCM.IsWellFounded`
+  and `CID.IsWellFounded`, which is the refactor the retracted paragraph said
+  did not exist. The retraction is left visible in the §8 preamble rather than
+  deleted.
+  The conjecture ledger grades on a dimension this table does not have, so this
+  phrase is not a claim about both documents.
+**How to read a `Narrower` cell.** The grade is a statement about *classes*: the
+atlas admits fewer objects than the printed words do. It is **not** a statement
+about whether anything downstream lost a theorem, and the two come apart. Two
+kinds occur in this table, and each row now says which it is.
+
+* **Source-class.** The narrowing is against one paper's phrasing, in a module
+  nothing else in the tree imports. Everitt Definitions 1, 2 and 5 are this:
+  `AISafetyAtlas.Causal.StructuralModel` has **no library-module importer**, so
+  no result stated elsewhere is weakened by it. The cost is borne by a future
+  consumer who wants to instantiate that module outside the admitted class, not
+  by anything already proved.
+* **Working-stack.** The narrowing is on an object the rest of the tree is
+  stated over, so existing theorems do not transfer to objects outside it. RE24
+  §2.2's value and regret are this: the margin, query and MAIS layers are all
+  stated over `Model.value`'s unmediated projection, so a mediated diagram —
+  which the atlas *can* write down, as `DecisionNetwork` — cannot use them.
+
+The standing rule applies to both without discount: a `Narrower` cell is a
+defect until discharged, proved unclosable, or costed. The distinction says
+which ones to pay first, not which ones to stop counting.
+
+* **open, and costed** — with what it would take. Every open axis is priced
+  in [`causal-scope-open-work.md`](../guide/causal-scope-open-work.md), which also says
+  which of them close a row on their own and which do not. **Three are open.**
+  Two of the three are in §8. Everitt's finite domains on Definitions 1–2 is one,
+  stated with its cost in that section's preamble; it now closes Definition 2
+  outright and leaves Definition 1 on one further axis. That further axis is the
+  second: the expectation layer's `[Fintype V]`, which was named on the policy
+  row and denied on Definition 5 until 2026-08-22, when §8's preamble adjudicated
+  it once and applied the result to both. **Every upward revision of this number has been a row carrying an axis this
+  list had not enumerated**, which is why axes are now read off the declarations'
+  binders rather than off the printed object.
+  The other is in §6 and is a different kind: RE24 §2.2's value and regret rows
+  are the unmediated projection, because the decision and the utility are not
+  vertices of the graph those declarations are stated over. It is not closable by
+  generalising anything — it needs a construction — and **half of that
+  construction landed on 2026-08-22**. `Causal.DecisionNetwork` is RE24
+  Definition 4 with the decision and the utility as vertices, and print's
+  expected utility, optimality and regret are stated on it; what is missing is
+  the theorem that the projection agrees with it under Assumption 1, and the two
+  live in different vertex types, so that is a translation rather than a rewrite.
+  Until it exists the two rows stay `Narrower`, listed on the projection's
+  declarations alone. §6's own prose carries the detail; this list said "all in
+  §8" and was wrong to. Two further axes were open until 2026-08-20 and are closed
+  rather than re-argued. The decision
+  layer's rational instantiation is closed by the field-parametrization work; its stated obstruction turned
+  out not to exist, because `LinearOrder` already bundles the decidable strict
+  order that `preferredDecision` needs. The binary-decision restriction in §6's
+  eq. (2) row is closed by `Skeleton.realizable_iff_general`, and closed in the
+  strong sense this list asks for — the old binary lemma is *derived from* the
+  general one rather than left beside it. The former
+  Cover & Thomas Theorem 2.5.2 arity
+  gap was closed by `observationVector`, `observationPrefix`, and
+  `mutualInfo_chain_rule_fin`; the atlas now contains the required measurable
+  finite-prefix machinery rather than leaving the printed general `n` theorem
+  at its `n = 2` instance.
+
+## Readings that are not transcriptions
+
+**Scope is not the only axis, and this table only grades scope.** A row can be
+`Same` — asserting exactly what print asserts — while the *rendering* of a
+printed phrase is a choice the atlas made rather than a transcription. The
+conjecture ledger records that as a `Bridged` fidelity tag; this table has no
+fidelity column, so the readings are listed here instead of being left in the
+prose of three long notes. **Nothing below changes a scope grade.** Each is a
+place where a reader checking the atlas against print will find a decision, and
+should be able to find it in one place.
+
+* **Pearl Def. 1.3.1, conditions (ii) and (iii): tables, where print writes
+  conditionals.** Print states (iii) as *P_x(v-i given pa-i) = P(v-i given pa-i)*, a
+  quotient. `IsCausalBayesNetwork` states it as equality of *tables*. The two
+  differ exactly on parent configurations of probability zero, where the quotient
+  is undefined and the table equality still binds. The atlas reading is the
+  stronger one, and deliberately: `Causal.MarginClass`'s margin conditions exist
+  because null parent fibres are reachable, so a quotient rendering would go
+  vacuous precisely where a degenerate mechanism needs constraining. It is a
+  choice about behaviour print does not legislate.
+* **MAIS-O24 size bounds: one polynomial, chosen before the diagram shape.**
+  Print requires *"the list length, degrees, coefficient bit lengths, and
+  construction time to be polynomial in `S`"*. That sentence does not say whether
+  one polynomial serves every shape or each shape may have its own.
+  `HasPolySizeAt` takes the uniform reading, quantifying the polynomial before
+  the shape and the graph. The argument for it is that print names `(m, S)` for
+  the constants `a, b` and names no `m` for the size quantities — a good
+  argument, and an argument is a reading. The uniform reading is the stronger
+  one, so it admits fewer solutions.
+
+**One candidate reading was checked and is not one.** `Causal.ShiftedQuery`'s
+observation field is a full `Assignment C dim` where print writes its observation in *dom(O'-t)*, an assignment
+to the visible subset alone. That looks like a wider query, and a wider query
+would make the analyst more powerful than print's and weaken every bound phrased
+over `N(ε)`. It is not: `Causal.Policy` carries that constraint as a **structure
+field** requiring a policy to agree wherever the visible variables agree, so no policy can read a hidden coordinate, and
+`exactPolicyAnswer_congr_observation` derives the consequence at the query level.
+The invariant is enforced by the type rather than by a lemma anything could
+forget to apply.
 
 **The sample space is not a scope axis.** Taking an arbitrary measurable space
 where the source fixes a discrete one is not a widening. The atlas variables are
@@ -152,12 +254,13 @@ reader can see the boundary without having to reconstruct it.
 | 2.8.1 proof | "similarly, one can prove `I(Y;Z) ≥ I(X;Z)`" | `mutualInfo_le_of_isMarkovChain'` | Yes | Same | as two rows above: the space is a presentation, not a generality. That the source says "similarly, one can prove" and does not is **coverage**, not scope |
 | Cor. (unnum.) | `I(X;Y) ≥ I(X;g(Y))` | `mutualInfo_comp_le` | Yes | Wider | |
 | Cor. (unnum.) | `X → Y → Z` ⟹ `I(X;Y\|Z) ≤ I(X;Y)` | `condMutualInfo_le_mutualInfo` | Yes | Wider | |
-| Thm 2.5.2 at `n = 2`, used inline as (2.119)/(2.120) | `I(X₁,X₂;Y) = Σᵢ I(Xᵢ;Y\|X_{<i})` | `mutualInfo_chain_rule`, `mutualInfo_chain_rule'`, `mutualInfo_sub_eq` | Yes | **Narrower** | the sample space is a presentation and not a generality (see the note above), so the only axis here is that the printed theorem is for `n` variables and this is `n = 2` in both argument orders. The axis is **open, and costed** — see the standing rule above — and this row is now the audit's only `Narrower`. §2.8 uses the two expansions without restating them, and the general form is printed ten pages earlier as Theorem 2.5.2, so this is printed content rather than `Beyond`. `mutualInfo_sub_eq` is the two expansions subtracted, so it belongs here rather than in a `Beyond` row of its own |
+| Thm 2.5.2, used at `n = 2` inline as (2.119)/(2.120) | `I(X₁,…,Xₙ;Y) = Σᵢ I(Xᵢ;Y\|X_{<i})` | `mutualInfo_chain_rule_fin`; `mutualInfo_chain_rule`, `mutualInfo_chain_rule'`, `mutualInfo_sub_eq` at n = 2 | Yes | **Same** | `mutualInfo_chain_rule_pi` is the printed arbitrary finite-family statement, with **one alphabet per index** as the source has it. `mutualInfo_chain_rule_fin` is the same identity at a single shared codomain, and the first is derived from it by tagging each variable with its index. That reduction used to be this row's justification in prose — differently typed finite alphabets embed injectively in one tagged disjoint union — and is now the proof of an exported theorem, so the uniform `V` is provably a representation rather than a restriction. The two-component declarations remain the direct forms used by §2.8, and `mutualInfo_sub_eq` is their difference identity |
 | Remark + example | conditioning **can** increase `I` off a Markov chain: `X, Y` fair bits, `Z = X+Y`, `I(X;Y) = 0` but `I(X;Y\|Z) = ½` bit | `Examples…condMutualInfo_eq_half_bit_of_intSum`, `…condMutualInfo_gt_mutualInfo_of_parity` | Yes | **Wider** | the first is the printed example at the printed numbers — `Z` the **integer** sum, three-valued, and `I(X;Y\|Z) = ½` bit, which is what the printed `P(Z=1)` factor requires. The second replaces `Z` by `X ⊕ Y` and gets a full bit, a strictly larger gap. Either makes the Markov hypothesis of `condMutualInfo_le_mutualInfo` load-bearing rather than assumed to be |
 
 **11 Yes, 0 Partial, 0 No.** Section fully formalized, counterexample included, and nothing left in the `Beyond` column. The row that sat there is printed content — Theorem 2.5.2 at `n = 2` — and `mutualInfo_sub_eq` is those two expansions subtracted, so it shares that row.
 
-The first two rows are the section's definitional pair. `IsMarkovChain X Y Z μ`
+There are no `Narrower` or `Mixed` rows in this source section. The first two
+rows are the section's definitional pair. `IsMarkovChain X Y Z μ`
 is `CondIndepFun X Z Y μ`, which is (2.118)'s right-hand side, while the book
 starts from the factorization (2.117). Both are graded, and the equivalence
 between them is proved at the printed point-mass hypothesis rather than at the
@@ -634,6 +737,513 @@ are realizable everywhere.
 
 ---
 
+## 6. Richens & Everitt, ICLR 2024, §2–3 and Appendices A–B → `AISafetyAtlas.Causal.Model`
+
+**Which text grades these rows.** The published ICLR proceedings PDF, sha256
+`143d458cbee2f4f5d04d7380f6741e8105965d1ee94834e1ddb3bd231722a0e7`. The atlas
+also stores the arXiv working text
+(`b25a2c7e8fe27d1dfd00299166197d8f3bd2ac8af7102f3b2a07585cfd6743b2`), and
+`mais-a2-causal-collision.md` pinned *that* one. Every numbered statement carries
+the same number in both, checked one by one, with a single difference: the
+working text adds **Corollary 1** — the regret-bounded-agent restatement of
+Theorem 2 — after Theorem 3, and the proceedings has no corollary at all. It is
+graded below as a working-text row so that the difference is on the record rather
+than resolved silently. The source also numbers two distinct appendix lemmas
+"Lemma 4"; the second, in Appendix D, is referred to here as D's Lemma 4.
+
+**What gets a row here.** The printed statements the paper argues, plus the
+displayed formulas it introduces definitionally and the atlas transcribes as
+theorems — eq. (1), the truncated factorisation, eq. (2), eq. (3). A definition
+with no transcribed content is not a row.
+
+**The standing narrowing.** `AISafetyAtlas.Causal.Model` and
+`AISafetyAtlas.Causal.MarginClass` carry their value field as a parameter, so the
+printed real case is reachable, and it is the case any statement over these
+objects is stated at. `AISafetyAtlas.Causal.Decision` was the exception until the
+field-parametrization work, and is no longer: it too carries
+`𝕜`, including `InIdentifiedSet`'s tolerance. **No row below is narrow on the
+value field.** The `Narrower` rows are narrow on structure: their declarations
+are the Assumption-1 projection, with the decision and the utility outside the
+graph.
+
+**That sentence used to end "and that is not an axis a generalisation closes",
+which was wrong twice over.** It is not a generalisation that closes it — it is a
+construction — and on 2026-08-22 the construction landed:
+`AISafetyAtlas.Causal.DecisionNetwork` is Definition 4 with the decision and the
+utility as **vertices**, and Section 2.2's three sentences are stated on it at
+print's own quantifiers. The axis therefore moves from *not closable* to **open,
+and costed**, which is the state the standing rule actually provides for. What it
+costs is named in the two `Narrower` rows below and priced in
+[`causal-scope-open-work.md`](../guide/causal-scope-open-work.md).
+
+| # | printed statement | atlas | Cov. | Scope | note |
+|---|---|---|---|---|---|
+| §2.1 truncated factorisation | product of unintervened CPDs when the value is consistent with the forced one, else zero | `hardInterventionProfile`, `Model.jointProb_hardInterventionProfile`, `fixProfile`, `Model.jointProb_fixProfile` | Yes | **Wider** | print states it for hard `do` only; the atlas proves the product form for *every* profile of arbitrary local maps, and the printed case is the constant-map instance. Intervened factors become consistency indicators exactly as printed. Witnessed by `Examples…jointProb_sum_shiftCollapse`, which runs a translation modulo three composed with a non-injective child map — neither is a hard intervention, and neither is expressible in the printed formula |
+| Def. 2, eq. (1) | a local intervention transforms the CPD to the preimage sum over states mapping to the realized one | `Model.factor`, `Model.factor_eq_re24` | Yes | Same | `factor_eq_re24` is the literal preimage sum and closes by `rfl`. The printed map is any `f`, and so is the atlas's `LocalIntervention`; the four-map Boolean case is derived, not built in |
+| Def. 3 mixture formula | a mixed intervention performs each component with its weight, and the joint is the weighted sum | `Mixture`, `ProbMixture`, `IsProbabilityMixture`, `Model.jointProbMix` | Yes | **Wider** | the simplex is over whichever value field a statement picks, so at the reals it is the printed object. The ambient `Mixture` drops the simplex constraint entirely and carries the linear lemmas. Witnessed by `margin_class_not_identifiable`, which inhabits the rational field, where the printed statement has no reals to quantify over |
+| Def. 4 causal influence diagram | a single-decision, single-utility CID is a CBN whose variables are partitioned into decision, utility and chance, with the utility a real-valued function of its parents | `Causal.DecisionNetwork`, `Causal.DecisionPolicy`, `Model.withPolicy`, `Model.withPolicy_parents`, `DecisionNetwork.IsDeterministicUtility`, `DecisionNetwork.exists_utilityFunction`, `Model.cpt_eq_one_unique` | Yes | **Same** | **New on 2026-08-22; this definition had no row before, under this section's rule that a definition with no transcribed content is not one.** Print says a CID *is a CBN* with partitioned variables, so `DecisionNetwork` is built on `Causal.Model` rather than on the structural layer, and the decision and the utility are **vertices**. Distinctness of the decision and utility vertices is the whole of the partition condition a two-element distinguished part needs. **Print's *do(D = π(pa_D))* is rendered as a soft intervention**: `Model.withPolicy` keeps the parent set and swaps the table, and `withPolicy_parents` records it. That is forced by print itself — RE24 Def. 2 severs a hard-intervened vertex's incoming edges, and a policy *reads* its observations, so a hard reading would delete them. **One disclosed widening, with print's case pinned.** Print's clause that the utility is a real-valued function of its parents is carried as `IsDeterministicUtility`, a hypothesis rather than a field, so the atlas defines expected utility on a strictly larger class than print's; `exists_utilityFunction` recovers print's *U(pa_U)* as an actual function wherever the hypothesis holds, which is the same disclosure pattern this section already uses for single-decision restrictions. The widening is in the permitted direction and is why the cell is `Same` rather than `Narrower`. Inherited from `Causal.Model` and graded on its rows, not restated here: a finite vertex set, a `Finset` parent map, and an ℕ-ranked acyclicity witness |
+| §2.2 expected utility and optimality | expected utility of a policy, and a policy is optimal if it maximises it | `Model.value`, `Model.value_eq`, `Model.bestPolicy`, `Model.value_bestPolicy` | Yes | **Narrower** | **Working-stack narrowing** — the kind that costs transfer rather than syntax. One axis, and a structural one. These declarations are the unmediated Assumption-1 projection rather than the printed CID equation: their decision and utility are not graph vertices. **The atlas can state a mediated decision task**, and a sentence in an earlier pass of this note said otherwise: `DecisionNetwork` carries the decision and the utility as vertices, Assumption 1 is `IsUnmediated`, a **hypothesis** rather than a field, and a diagram with `Desc_D ∩ Anc_U ≠ ∅` is a `DecisionNetwork` the atlas writes down and evaluates. What does not transfer is everything stated over the projection — the margin layer, the query layer and the MAIS Props all sit on `Model.value` — so a mediated diagram gets the definition and none of the results. **The axis changed state on 2026-08-22 without closing.** The printed CID equation now exists in the tree -- `DecisionNetwork.expectedUtility` and `DecisionNetwork.IsOptimal`, on a diagram whose decision and utility *are* vertices, graded `Same` on the Definition 4 row above. What is still missing, and what this row is graded on, is the theorem tying the two together: nothing yet proves that this projection agrees with `DecisionNetwork.expectedUtility` on a diagram satisfying Assumption 1. **The mediated declarations are deliberately not listed in this row's atlas column.** Adding them beside the projection would give the row a declaration that is print's object while four others are not, and this section grades a row on *every* declaration in its column -- the convention exists precisely so a row cannot be graded on its best declaration. The axis is now **open, and costed**: the agreement theorem needs the joint over the diagram split at the decision and utility coordinates, and the two renderings live in different vertex types, so it is a translation and not a rewrite. The value field is *not* an axis: Stage 3 made `Causal.Decision` generic like the rest of the causal layer, so the printed real case is an instance. `bestPolicy` maximises each visible fibre and `value_bestPolicy` proves it attains the optimum, with ties unconstrained |
+| §2.2 regret | the decrease in expected utility against an optimal policy | `Model.regret`, `Model.HasRegretAtMost`, `Model.regret_decomp`, `Model.regret_eq_zero_iff` | Yes | **Narrower** | **Working-stack narrowing**, exactly as the row above. The inequality is the printed one within this representation, with no added zero-regret sign clauses. Same single structural axis as the row above, in the same new state: `DecisionNetwork.regret` is print's δ on a diagram with the decision and the utility as vertices and is graded on the Definition 4 row, this row is the projection, and no theorem yet connects them. Same non-axis as the row above too: the value field is a parameter. `regret_eq_zero_iff` is an atlas converse print does not state: zero regret is exactly positive support on the fibrewise argmax |
+| Assumption 1 unmediated decision task | the decision's proper descendants and the utility's proper ancestors are disjoint | `DecisionNetwork.IsUnmediated`, `Model.properAncestors`, `Model.properDescendants`, `Model.mem_properAncestors_iff`, `Model.mem_properDescendants_iff`, `DecisionNetwork.decision_notMem_parents_of_isUnmediated` | Yes | **Same** | **New on 2026-08-22.** **The notation had to be read before the assumption could be stated.** Print's Appendix notation paragraph says *"Anc_i and Desc_i refer to proper ancestors and descendants"*, and the reading matters: on print's own Figure 1 the decision is a parent of the utility, so an improper reading puts the decision in both sets and makes the assumption **unsatisfiable**. Read properly it says the decision's only route to the utility is the direct edge, which is what print's own Appendix argument uses. `decision_notMem_parents_of_isUnmediated` is that content in the form the analysis consumes: no proper ancestor of the utility reads the decision. **Inhabited, not merely defined**: `Examples…figIsUnmediated` discharges it on print's Figure 1 training diagram, without which every theorem conditional on it would be vacuous |
+| App. A.1, Lemma 1(iii), graph step | *"D ∈ Anc_U which with Desc_D ∩ Anc_U = ∅ implies D ∈ Pa_U"* | `DecisionNetwork.mem_parents_utility_of_isUnmediated` | Yes | **Same** | **New on 2026-08-22, and it is a slice of Lemma 1, not the lemma.** Print's clause is one sentence and the atlas theorem is that sentence: the decision being a proper ancestor of the utility, together with Assumption 1, forces the direct edge. The proof is the expansion print compresses — any intermediate vertex on a route from the decision to the utility would be a proper descendant of the one and a proper ancestor of the other at once. Formally the utility's ancestor closure minus the decision and its proper descendants is parent-closed and contains the utility, hence contains the whole closure, hence contains the decision, which it does not. **The rest of Lemma 1 is not covered and its own row still says so**: clauses (i) and (ii), and the first half of (iii), run through Assumption 2 (domain dependence), which is not formalized. Slicing a printed statement is this table's existing practice — see the Cover and Thomas Thm. 2 rows |
+| App. A.2, eq. (2) | normalise the utility to `[0,1]` by subtracting its minimum over parent states and dividing by its range | `Skeleton.normalizeUtility`, `Skeleton.utilityLo`, `Skeleton.utilityHi`, `Skeleton.normalizeUtility_mem_unitInterval`, `Skeleton.ofUtility`, `Skeleton`, `Skeleton.realizable_iff_general`, `Skeleton.realizable_iff` | Yes | **Wider** | the normalising map is now built, not only its output. `normalizeUtility` is the printed quotient over the utility node's parents — the decision together with the utility parents — and `ofUtility` carries an arbitrary `𝕜`-valued utility into a `Skeleton`, which is what was missing while this row read `Partial`: no unnormalized utility could be written down and then rescaled. On a constant utility the range is zero and the quotient is `0`, still in `[0,1]`, so the invariant is unconditional where print states eq. (2) only for the non-degenerate case. The widening is the converse print does not state: `realizable_iff_general` proves a decision family is realized, up to a fibrewise shift, by a normalized utility exactly when its fibrewise spread is bounded by one, at **any** finite decision arity. The former binary restriction is gone and is not merely claimed gone — `realizable_iff` is now *proved from* the general form via `sup'_sub_inf'_bool`. Witnessed by `Examples…ternaryGap_realizable`, a three-decision family the binary lemma cannot state at all |
+| App. A.2, invariance of the optimum under eq. (2) | a positive affine transformation of the utility leaves the set of optimal policies invariant, so regret bounds rescale | — | No | — | the atlas normalises by construction and never states the invariance. Nothing downstream needs it, because no atlas statement transports a regret bound across a rescaling |
+| App. B, eq. (3) | expected-utility difference between the two decisions under a hard intervention, as a weighted sum of utility differences | `Model.value_const_sub` | Yes | **Wider** | print gives one two-variable hard-`do` instance with the opposite sign ordering; `value_const_sub` proves the identity for every probability mixture, every visible set, and every model, and the printed instance is a Dirac profile. The sign is an ordering convention, not an axis. Witnessed by `Examples…margin_class_not_identifiable_shared_optimal`, which needs the identity at *every* probability mixture and visible set to place two models in one identified set; print's single hard-`do` instance does not reach it |
+| App. A.1, Lemma 1 (clauses (i), (ii), and the Assumption-2 half of (iii)) | domain dependence implies no dominant decision, that the observed parents are a proper subset of the utility ancestors, and that the decision is a utility parent | — | No | — | domain dependence is nowhere in the atlas. It is a hypothesis about the existence of two environment distributions with different optima, and the atlas's margin conditions replace that role with explicit inequalities rather than deriving it |
+| App. A.2, parameter space | the CID parameters lie in `[0,1]` and are logically independent, so they define a parameter chart | — | No | — | **no chart over the CID parameters exists**, which is the narrower claim this row used to make as a blanket one. `ChartIndex` with `Model.chartOn` is a real chart, with `K(G)` proved against `def:margin`'s formula by `card_chartIndex`, and MAIS-O24's conclusion (c) carries a Lebesgue estimate over it — but both are charts of the *chance-variable* tables of MAIS's unmediated skeleton, where `D` and `U` are not vertices. RE24's parameter space is over a full CID's parameters, including the decision and utility mechanisms, so it is a different object and this row stays `No`. Its absence is why the four rows below are `No` rather than `Partial` |
+| App. A.2, Lemma 2 (Okamoto) | the solutions of a nontrivial polynomial are Lebesgue measure zero in its parameters | — | No | — | cited by the source, not proved by it. The atlas has no measure on a parameter space and no polynomial encoding of a constraint |
+| App. A.3, reachability of distributions | mixtures of interventions reach any distribution over the environment variables | `ProbMixture.dirac` | No | — | the atlas has the deterministic profiles print mixes over, and the mixture-to-profile reduction lemma proves that mixture-wise equality is profile-wise equality — but it never states that the mixtures *reach* an arbitrary distribution, which is the printed claim |
+| Def. 5, policy oracle | a map from each domain to a policy achieving expected utility within the tolerance of optimal | `InIdentifiedSet`, `not_inIdentifiedSet_of_neg` | No | — | the atlas packages *shared* admissible families rather than a map from domains to policies, so no declaration is the oracle. `InIdentifiedSet` accepts every tolerance in the value field and `not_inIdentifiedSet_of_neg` proves the extension below print's domain is empty, which bounds the packaging but does not build the oracle |
+| Thm. 1 | for almost all CIDs, the graph and the joint over the utility ancestors are identifiable from optimal policies across all mixtures of local interventions | — | No | — | needs the parameter chart, the almost-every quantifier, and the oracle — all three absent. The atlas's `Model.ancestors_eq_univ_iff` supplies only the ancestor-closure bookkeeping the statement is phrased over |
+| Thm. 2 | for almost all CIDs, a regret-bounded policy family identifies an approximate model whose parameter error is bounded by a function vanishing linearly at zero regret | `InIdentifiedSet`, `modelError`, `IsRadius`, `inIdentifiedSet_zero_of_behaviorEq` | No | — | the atlas objects are **related packaging**, not a transcription: there is no recovered subgraph and no error function. What is machine-checked is one direction of the bridge the theorem's proof uses — `inIdentifiedSet_zero_of_behaviorEq` shows equal masked transforms put two models in the identified set at zero tolerance. The converse, reconstructing the numerical query from an arbitrary optimal-policy oracle, is the printed step and is not formalized |
+| Thm. 3 | a causally sufficient model identifies optimal policies for every soft intervention, and an approximate model identifies regret-bounded policies with regret linear in the error | `Model.regret_signPolicy_eq_zero`, `Model.signPolicy_eq_of_behaviorEq` | No | — | the sufficiency direction. The atlas proves a sign policy is optimal and that equal transforms give a shared one, which is the zero-error corner of the printed claim; the linear-in-error statement needs the approximate model the row above lacks |
+| §3 remark | Theorems 2 and 3 together make an approximate causal model necessary and sufficient for regret-bounded policies | — | No | — | a conjunction of two `No` rows |
+| §3 finely-tuned example | a chain where intervening changes only the variance of the utility, leaving the optimum fixed | — | No | — | print's illustration of why almost-every is needed. It is about a continuous latent, which the finite categorical kernel cannot state |
+| App. C–D, Lemmas 3, 4, 5, D's Lemma 4, 6 | a unique deterministic optimum almost everywhere; the query identifiable from an optimal oracle; its point estimate and two-sided bounds from a tolerant oracle; and their expansion at small regret | — | No | — | the identification algorithm. Every one of them quantifies over the parameter chart or the oracle, and grouped as one row because they stand or fall together |
+| Cor. 1 (**working text only**) | Theorem 2 restated for an agent meeting a regret bound, obtained by substituting its policy for the oracle's | — | No | — | absent from the published proceedings. Recorded so that a reader working from the arXiv text does not read its absence here as an oversight |
+| — | margins in place of the almost-every exception | `Skeleton`, `Skeleton.MarginClass`, `Skeleton.ValidMargin` | — | **Beyond** | the six margin conditions are an explicit-inequality replacement for print's measure-zero exclusion. Print never states them; Uhler et al. motivates the *move* but its object is a partial-correlation bound, not these CPT inequalities |
+| — | a margin class does not determine behaviour | `Examples…margin_class_not_identifiable_real`, `Examples…margin_class_not_identifiable_two_graphs_real` | — | **Beyond** | two models in one margin class, over the reals, with opposite one-edge graph shapes and equal complete masked behaviour. Print asserts identifiability for almost all parameters; this exhibits a margin-class pair where it fails, which print does not state either way |
+| — | equal behaviour forces one shared optimal policy family | `Examples…margin_class_not_identifiable_shared_optimal` | — | **Beyond** | the bridge applied to the collision: one policy family with zero regret in two distinct models |
+| — | rational witnesses transport to any characteristic-zero ordered field | `Model.mapRat`, `Skeleton.marginClass_mapRat`, `Skeleton.behaviorEq_mapRat` | — | **Beyond** | print works over the reals and has no reason to state this. It is what lets a witness be *computed* on rational literals and then hold at print's generality; it is not a cast of its hypothesis, since real mixtures are not images of rational ones |
+
+**10 Yes, 0 Partial, 13 No, 4 Beyond**, up from 7 Yes on 2026-08-22, when
+Definition 4, Assumption 1 and the graph step of Lemma 1(iii) gained rows and
+`Causal.DecisionNetwork` to sit in. The shape is worth stating plainly: the
+atlas covers RE24's **setup** completely, and none of its **results**. The one
+gap inside the setup was eq. (2) — the normalised utility carried as an invariant
+with no map producing it — and `Skeleton.normalizeUtility` / `Skeleton.ofUtility`
+closed it on 2026-08-20.
+Every `No` row above fails for one of two reasons, and both are named — there is
+no chart over a *CID's* parameters, so no almost-every statement about one can be
+phrased; and there is no policy oracle, so no identification claim can be
+phrased. Theorems 1 to 3 need both. The first reason is narrower than it was
+before 2026-08-21: a real parameter chart now exists for MAIS's unmediated
+chance-variable tables, with a Lebesgue estimate over it. What is missing is a
+chart of a CID, which needs `D` and `U` as graph vertices — the same object the
+`Decision.lean` scope fence names.
+
+That is not a gap left open by neglect. The atlas's causal increment is the
+MAIS-A2 composite, whose whole point is to replace the measure-zero exception
+with margins, and margins are what the four `Beyond` rows record. The two
+`Narrower` rows are all one thing — the unmediated projection — and it is not
+closable by generalisation. Since 2026-08-21 the object it needs exists:
+`Causal.SCIM` has decision and utility vertices and a policy that is a structural
+function. What is not written is the map from a SCIM's decision vertex to
+`Model.value`, which is what would make these two rows the printed CID equation.
+
+---
+
+## 7. Pearl, *Causality* 2nd ed. §1.3 → `AISafetyAtlas.Causal.BayesianNetwork`
+
+**Where these declarations live.** Equation (1.37) and the interventional
+profile are in `Causal.Model`; Definition 1.3.1 itself — the compatibility
+condition, its truncated-product consequence and the counter-witness — is in
+`Causal.BayesianNetwork`, hosted by `LAND-CAUSAL-PEARLCBN-001` since 2026-08-22.
+Before that row existed this section graded a module no registry row carried, so
+the grade was invisible on every generated status page.
+
+Pearl grounds the interventional reading, and nothing else. Definition 1.3.1 is a
+*semantic* condition — a DAG is a causal Bayesian network compatible with a whole
+family of interventional distributions if three conditions hold for every member.
+The atlas kernel is constructive data, a graph together with tables, so it does
+not state that condition; it certifies the consequence Pearl derives from it.
+
+| # | printed statement | atlas | Cov. | Scope | note |
+|---|---|---|---|---|---|
+| eq. (1.37) | the interventional distribution is the product of unintervened CPDs over values consistent with the forced ones | `hardInterventionProfile`, `Model.jointProb_hardInterventionProfile` | Yes | **Wider** | Pearl derives this from Definition 1.3.1's three conditions; the atlas builds it and proves it, for arbitrary local maps rather than hard interventions only. Same declarations as RE24's truncated-factorisation row, because it is the same formula, and the same witness: `Examples…jointProb_sum_shiftCollapse` runs a translation composed with a non-injective map, neither of which eq. (1.37) can express |
+| eq. (1.37) full-profile corollaries | forcing every variable leaves a point mass, and an outcome function is then evaluated at the forced value | `fixProfile`, `Model.jointProb_fixProfile` | Yes | Same | Pearl states the truncated product and does not separately assert this consequence of it. By the rule above that is coverage and not a widening, so the cell stays `Same`; the corollaries are proved for every finite acyclic variable set, which is the printed generality |
+| Def. 1.3.1 | a DAG is a causal Bayesian network compatible with a family of interventional distributions iff Markov relative to the graph, forced values have probability one, and unintervened CPDs are invariant | `InterventionalFamily`, `ConditionalTables`, `IsCausalBayesNetwork`, `eq_family_of_isCausalBayesNetwork`, `isCausalBayesNetwork_iff`, `Model.interventionalFamily`, `Model.isCausalBayesNetwork` | Yes | **Same** | built on 2026-08-21, and the row's own diagnosis was the design: the missing object was the family. `InterventionalFamily` is `P_*` at Definition 1.3.1's own index set, hard interventions, so a statement about it grades against the definition rather than past it. Conditions (ii) and (iii) are stated on **tables** rather than on conditionals, deliberately: print writes (iii) as *P_x(v_i given pa_i) = P(v_i given pa_i)*, a quotient, and a parent configuration of zero probability is reachable — the margin conditions of `Causal.MarginClass` exist to exclude it — so a quotient rendering would go vacuous exactly on the fibres where a degenerate mechanism needs constraining. The existential is hoisted once, one observational `q` with each member's own `r` agreeing off the intervened set; `Examples…not_isCausalBayesNetwork_badFamily` witnesses that this constrains, exhibiting a family whose two members are each truncated products and which is still not a causal Bayesian network. The truncated product is **not** part of the definition: `eq_family_of_isCausalBayesNetwork` derives it, as print does |
+| Property 1, eq. (1.38) | the conditional given the parents equals the effect of setting the parents by external control | `Model.marginal`, `Model.marginal_insert_parents`, `Model.marginal_eq_sum_ancestral` | Yes | **Same** | the printed identity is *P(v_i given pa_i) = P_pa(v_i)*; the atlas states it multiplied out, as *P(v_i, pa) = P(pa) · P_pa(v_i)*, for the null-fibre reason in the Def. 1.3.1 row. It compares two *marginals* of the family, which is why it needed the marginalization layer and not just the family. The proof marginalizes both sides through the ancestral closure of `{c} ∪ Pa(c)`: erasing `c` from that closure leaves a parent-closed set — no ancestor of `c` has `c` as a parent, by acyclicity — so both marginals run over the same index set and differ by the single factor the printed conditional names |
+| Property 2, eq. (1.39) | once the direct causes are controlled, no further intervention on a disjoint set changes the child's probability | `Model.marginal_singleton_do_parents`, `Model.marginal_union_targets` | Yes | **Wider** | **the note said this and the cell did not, until 2026-08-21.** Print states the property for a set disjoint from the variable *and its parents*; the atlas assumes only that the set does not contain the variable, and concludes what print concludes. A weaker hypothesis with the same conclusion is a widening, and the row is graded as one. The rest of the note stands: stated for any `extra` set not containing the variable: the marginal is the variable's own mechanism whatever else is forced. Disjointness from the *parents* is not needed and is not assumed — forcing a parent to the value it already carries changes nothing, which `marginal_union_targets` proves. The hypothesis is therefore weaker than print's and the conclusion the same |
+| — | normalisation of the constructed joint | `Model.jointProb_sum`, `jointProb_sum_two` | — | **Beyond** | that the acyclic product of stored simplexes is a probability distribution is assumed in print, not argued. Proved here for every finite acyclic variable set, every positive dimension vector, and every intervention profile |
+
+**5 Yes, 0 Partial, 0 No, 1 Beyond**, revised on 2026-08-21. The three `No` rows
+were the same absence three times — no object representing the family of
+interventional distributions — and `AISafetyAtlas.Causal.BayesianNetwork` is that
+object. The boundary has moved: the atlas now takes Pearl's *definition* as well
+as his formula, and derives the formula from it. What remains outside §1.3 is
+identification — do-calculus, the back-door criterion, d-separation — which needs
+a `do`-expression language rather than another distribution.
+The layer was built to a written scope contract, which records what it
+deliberately does not claim — notably that the observational member does not
+determine the family.
+
+---
+
+## 8. Everitt, Carey, Langlois, Ortega & Legg, AAAI 2021 → `AISafetyAtlas.Causal.StructuralModel`
+
+This source supplies the causal influence diagram the decision layer is a
+projection of, and its own results are graphical incentive criteria. The atlas
+formalizes the setup — Definitions 1 to 5, in `AISafetyAtlas.Causal.StructuralModel`
+— and none of the criteria. The section is graded so that the boundary is visible, which is the reason the audit
+lists `No` rows at all.
+
+**Four narrowing axes ran through this section; three are closed and one
+remains.** They are not repeated in each note. Print bounds no cardinality anywhere in Definitions 1 to 3: Definition 1
+writes `dom(V)` with no condition on it and `Pa_V ⊂ V` with no condition on it,
+and Definition 3 is *"a directed acyclic graph"*, full stop. Definition 4 is the
+first place finiteness appears, and it restricts the **domains** — not how many
+variables there are, not how many parents a variable has, and not the shape of
+the acyclicity.
+
+**The source was re-read for a global bound on 2026-08-21 and does not carry
+one.** In the pinned PDF *"finite"* occurs exactly twice, both as
+*"finite-domain"*, both inside Definition 4; *"discrete"*, *"finitely many"*,
+*"countable"* and *"infinite"* do not occur anywhere. There is no preliminaries
+sentence, footnote or `throughout`-clause declaring finiteness globally, so the
+four axes below were the atlas's and not print's. Three of the four have since
+been closed against that reading; the dates are on the bullets.
+
+* **Finitely many variables — CLOSED on 2026-08-21.** `[Fintype V]` was on
+  `SCM`, `CID` and `SCIM` alike. It is on none of them now. The constraint moved
+  onto the operations that genuinely need it — the `Finset` accessors
+  `decisions` / `utilities` / `structureNodes`, and the expectation layer — and
+  `CID.IsDecision` / `CID.IsUtility` read print's *"the vertex set is partitioned
+  into `X`, `D`, `U`"* as a property of each vertex, which is what a partition
+  is. `mem_decisions_iff` and `mem_utilities_iff` recover the `Finset` forms
+  whenever `V` happens to be a `Fintype`. Relocating a constraint from a
+  definition to its use sites relaxes the definition against its own previous
+  form; it is not a hypothesis added to a theorem, and it is not the laundering
+  the scope rule forbids.
+* **Finite domains — OPEN on Definitions 1 and 2 only.** `dom edom : V → ℕ` is
+  on `SCM` and `SCIM`. It is **not** on `CID`, whose four fields are the parent
+  map, the acyclicity condition, the vertex kind and the childlessness of utility
+  vertices — no domains at all. On Definitions 1 and 2 the domain restriction has
+  no printed counterpart; from Definition 4 on it is print's own and costs
+  nothing. Closing it turns `dom` into a family of types and touches
+  `Assignment`, the structural functions, and every downstream sum. It is scoped
+  and not started.
+* **Finite indegree — CLOSED on 2026-08-22.** `parents : V → Set V` on both
+  `SCM` and `CID`, so a vertex may have infinitely many parents, which is
+  print's `Pa_V ⊂ V` at Def. 1 and print's silence at Def. 3. The
+  parent-reading obligation on the structural functions quantifies over the set;
+  nothing in this section sums over parents, so no finiteness hypothesis was
+  needed anywhere. One visible cost: a policy's defining property is no longer
+  decidable, so `Fintype SCIM.Policy` is now the classical instance
+  `SCIM.instFintypePolicy`. Finiteness of the policy space is unaffected, and
+  nothing computes with it.
+* **ℕ-ranked acyclicity — CLOSED on 2026-08-22, and the two closures are one
+  closure.** `CID.acyclic` is now print's condition and nothing more:
+  `∀ v, ¬ Relation.TransGen (` `· ∈ parents ·` `) v v`, no vertex reachable
+  from itself. `SCM` and `SCIM` ask instead that the parent relation be
+  **well-founded**. That is a genuine strengthening of print's bare word, and
+  this audit states it rather than hides it: `V = ℤ` with `parents n = {n-1}`
+  is acyclic and is excluded.
+
+  **It was a narrowing, it was graded as one, and it closed on 2026-08-22.**
+  An earlier draft of this preamble called it `Same` on the argument that print
+  must have meant the narrower class. That is the laundering the standing rule
+  forbids, and this table has no fidelity dimension in which to park it: the
+  scope cell is the only cell, so a field print does not write makes the row
+  `Narrower`. Definitions 1, 2, 4 and 5 read `Narrower` for this reason.
+
+  **The witness.** `chainParents n = {n-1}` on `ℤ` satisfies `CID.acyclic`
+  (`chainParents_acyclic`) and fails `SCM.wellFounded`
+  (`chainParents_not_wellFounded`). On it, with two states per vertex and the
+  structural function that copies the parent, the equation `eval_eq_f` asks for
+  is `W v = W (v-1)`, which has **two** solutions —
+  `chainParents_fixedPoint_not_unique`. Print's Definition 1 says the value is
+  *"given by recursive application of the structural functions"*: one value,
+  *the* value. On a diagram print's own words admit, print's own words name no
+  unique assignment.
+
+  **Retracted: this axis was labelled *provably not closable*, and the label was
+  wrong.** The paragraph that carried it is kept here rather than deleted:
+
+  > **Why that makes the axis not closable rather than merely expensive.** A
+  > total `eval` could still be produced on the wider class by choice, and it
+  > would even satisfy `eval_eq_f`; what it would lose is that `eval_eq_f` pins
+  > it down. The atlas would then be asserting a determinacy Definition 1 does
+  > not have. There is no version of this refactor that widens the class and
+  > keeps the theorem meaning what it says, which is what *provably not
+  > closable* is for.
+
+  Every sentence there is true, and not one of them is about the class this
+  table grades. They are about a **total** `eval`, and a total `eval` is not the
+  only refactor on offer. Take `SCM.wellFounded` off the structure and `SCIM.graph_wellFounded`
+  off its own; give both print's own condition in the `Relation.TransGen` form `CID`
+  already carries; pass well-foundedness as a **hypothesis** to `eval` and to
+  the declarations that consume it. The admitted class is then print's class
+  exactly, `eval` is simply not defined where print's *"recursive application"*
+  names nothing, and `eval_eq_f` still pins down what it does define. That is
+  the version the old paragraph asserted does not exist. Calling the axis
+  unclosable collapsed *"`eval` cannot be totalised over print's class"* into
+  *"the structure must carry the field"*, and those are different claims —
+  the same collapse, one dimension over, as the `Bridged` grade this preamble
+  already retracts below.
+
+  **Done.** `SCM.wellFounded` and `SCIM.graph_wellFounded` are
+  gone; `SCM.acyclic` is print's word in the same form `CID` carries it; and the
+  recursion's requirement is `SCM.IsWellFounded` and `CID.IsWellFounded`, two
+  classes that `eval`, `jointProb`, `expectedUtility`, `optimalValue` and
+  `IsMaterial` ask for. Instances carry it across `submodel`, `softIntervention`,
+  `withPolicy` and `removeInfoLink`, so no statement asks for it twice.
+  **Definition 4 closes**, because its column is the structure alone. Definitions
+  1, 2 and 5 do not, on axes that have nothing to do with this one.
+
+  **Why the hypothesis on the operations is not a new narrowing.** Print's
+  Definition 1 asserts *"the value ... given by recursive application"* — one
+  value — and `chainParents_fixedPoint_not_unique` proves print's own words name
+  two on an acyclic chain. The instance is what makes print's sentence denote,
+  which is the same test this preamble applies to finite `V` at Definition 5's
+  maximum, and the opposite of the test it fails at the expectation layer's sum,
+  where print's object denotes without the instance.
+
+  **The witness keeps its job and loses its title.** `chainParents` and its three
+  theorems are not evidence that the field belongs on the structure. They are a
+  theorem about *print*: on a diagram print's own word admits, print's own words
+  name no unique assignment. That is why `eval` asks for `SCM.IsWellFounded`
+  wherever it is stated, and none of it is retracted.
+
+  Definition 3 closed first and needed nothing: `CID` evaluates nothing, so it
+  never carried well-foundedness and has always had print's word unmodified.
+  Definition 4 closed second, once the field moved off `SCIM`.
+
+  **Why this could not be done alone.** `wellFounded_iff_exists_rank` proves
+  that while `parents` was a `Finset`, well-foundedness and an `ℕ`-valued rank
+  were *equivalent* — the rank is rebuilt by well-founded recursion as one more
+  than the largest rank among the parents, and that step is exactly where the
+  finiteness of the parent set is spent. Dropping the rank without also dropping
+  the `Finset` would have admitted precisely the same models and generalized
+  nothing. The triage priced these as two axes that were cheaper together; they
+  are one axis, and the note there is corrected.
+
+**Both of the two axes above were missed when the vertex-set axis closed**, and
+the Def. 1 row asserted for one day that domains were the only axis left. They
+were restrictions in the structure, visible in the field types, with no printed
+counterpart. They are recorded here because the miss is the reason this section
+now grades on the artifact rather than on the printed object's nearest
+counterpart.
+
+**A claim this section used to make, and what replaced it.** It said the vertex
+axis was "an implementation choice, not a theorem of the source", because
+well-founded recursion on the acyclicity rank would evaluate an infinite diagram
+whose nodes all have finite rank. The conclusion was right and the reason was
+wrong about the code: `SCM.eval` was an iteration stopped after `Fintype.card V`
+applications, so rank recursion was a **rewrite**, not a relabelling. The axis
+closed without that rewrite, because the structures' own fields never needed the
+instance — only their derived operations did.
+
+**`[Fintype V]` on the derived operations does three jobs, and they do not get
+the same verdict.** This paragraph used to give only the first two and conclude
+that the instance was print's throughout; that conclusion was applied at
+Definition 5 and denied at the policy row two rows apart, which is a
+contradiction a reader meets without looking for it. Adjudicated once, on
+2026-08-22:
+
+1. **The maximum over policies is attained.** Print writes `V*(M)` as the
+   *maximum* of `E_π[U]` over policies, not a supremum, and states no condition
+   delivering one; over an infinite policy space it need not be attained. Finite
+   `V` delivers it. **Transcribes print** — `optimalValue` as a `Finset.sup'`
+   with `exists_isOptimalPolicy` exhibiting the attaining policy is print's own
+   sentence made to denote, not a class cut below print's.
+2. **The utility total converges.** `E_π[U]` sums over utility vertices, which
+   print never bounds; at infinitely many the sum need not converge.
+   **Transcribes print**, for the same reason.
+3. **The expectation is a finite sum.** `exoJoint` is `∏ v : V`, `jointProb`
+   sums over `ExoAssignment V edom`, and `expectedUtility` sums over the same —
+   each a `Finset` operation that exists only at `[Fintype V]`. **This one
+   cuts.** Print's `P(ε)` is a distribution under which the exogenous variables
+   are *mutually independent*, and mutual independence denotes at unbounded `V`:
+   it is the product measure, which exists. The atlas renders it as a finite
+   product and a finite sum. That is the atlas's elementary choice, not print's
+   silence being filled, and it is a **narrowing** — the same one the policy row
+   has named all along.
+
+**Which rows carry job 3.** Definition 1, through `jointProb`, `jointProb_sum`
+and `exoJoint_mul_prod`; Definition 5, through `optimalValue`, which is a
+`Finset.sup'` **of** `expectedUtility` and so inherits its summation; and the
+policy row, which named it first. **Definition 2 does not** — `submodel`,
+`submodel_eval`, `submodel_eval_notMem` and `softIntervention` every one carry
+`omit [Fintype V]`, so that column is instance-free. **Definition 4 does not** —
+its column is `Causal.SCIM`, a structure that has carried no `[Fintype V]` since
+2026-08-21.
+
+**What this costs, stated plainly: it adds an axis to two rows and closes
+none.** Definitions 1 and 5 each gain a third named axis and neither grade
+moves, because both were already `Narrower`. The policy row keeps `Mixed` and
+gains a sharper reason. The alternative reading — job 3 also transcribes — would
+have moved the policy row to `Wider` and gained a cell, and it is the reading
+this adjudication rejects.
+
+**The source Definitions 1 and 2 are attributed to, read at last — 2026-08-22.**
+Print heads them *"Structural causal model; Pearl 2009, Chapter 7"* and
+*"Submodel; Pearl 2009, Chapter 7"*. This section grades against Everitt's
+statement of them, because that is the text transcribed, and that convention
+stands. But nothing in this audit had ever opened Pearl 7.1.1, and it says three
+things that change how the axes here should be read.
+
+* **Pearl's endogenous set is finite.** *"`V` is a set `{V₁, V₂, …, Vₙ}` of
+  variables"*, with the structural functions indexed `i = 1, …, n`. So the
+  `[Fintype V]` this section removed on 2026-08-21 — as a narrowing against
+  Everitt, who never bounds the vertex set — was **Pearl's own condition**.
+  Dropping it did not repay a debt; it widened the atlas past *both* sources.
+  That is `Wider`, which the standing rule permits, and it is worth saying
+  plainly rather than leaving on the books as a closed narrowing.
+* **Pearl bounds no domain**, and neither does Everitt before Definition 4. Axis
+  B is a narrowing against both, and it is the one axis here that both sources
+  agree the atlas invented.
+* **Pearl requires unique solvability, in the definition.** Clause (iii) ends
+  *"and the entire set `F` has a unique solution `V(u)`"*, with a footnote:
+  *"Uniqueness is ensured in recursive (i.e., acyclic) systems. Halpern (1998)
+  allows multiple solutions in nonrecursive systems."* So determinacy is part of
+  the object for Pearl, and acyclicity is offered as a *sufficient condition* for
+  it rather than as the content.
+
+**That third point re-reads this section's largest argument.** `chainParents`
+was written as a witness that Everitt's *"acyclic"* fails to name a unique
+`W(ε)` at an unbounded vertex set. It is that. But against Pearl it says
+something sharper: Everitt's paraphrase **dropped a clause its own cited source
+carries**, and the clause it dropped is exactly the one `SCM.IsWellFounded`
+restores. Pearl's footnote even anticipates the failure — uniqueness is ensured
+in *recursive* systems, which at finite `V` is what acyclicity delivers and at
+unbounded `V` is not. So the atlas's shape here — print's `acyclic` as a field,
+solvability as a property asked for where the recursion is used — is **not** a
+strengthening of the source-of-record. It is the source-of-record's own clause,
+carried where it can be discharged rather than assumed everywhere.
+
+**And the treatment that pushes this object as far as it goes — 2026-08-22.**
+Bongers, Forré, Peters and Mooij, *Foundations of structural causal models with
+cycles and latent variables*, Annals of Statistics 49(5), 2885–2915, read from
+the pinned PDF `2021 foundations of structural causal models with cycles and
+latent variables.pdf`, sha256
+`6ce97700deb27a6e6fc680d0bd8cbfd053f1f67392979afca8e67d9f289a6d31`. It is the
+mathematicians' general version — cycles allowed, latent variables, arbitrary
+domains — so it is the right place to ask which of this section's axes the field
+actually cares about. Definition 2.1 makes an SCM a tuple
+`⟨I, J, 𝒳, ℰ, f, P_ℰ⟩` where:
+
+* **`I` is a finite index set of endogenous variables**, and `J` a disjoint
+  finite index set of exogenous ones. The most general published treatment of
+  this object keeps the vertex set finite, exactly as Pearl does and as Everitt's
+  paraphrase does not. **So the `[Fintype V]` this section removed on 2026-08-21
+  was a debt to nobody.** It is a `Wider` cell rather than a repaid narrowing,
+  and the honest note is that the widening is free and has no known consumer.
+* **Domains are arbitrary standard measurable spaces**, `𝒳 = ∏_{i ∈ I} 𝒳_i`, and
+  `f : 𝒳 × ℰ → 𝒳` is measurable. **This is where the literature generalizes**,
+  and it is exactly axis B taken past `Fin (dom v)` — so of the axes still open
+  here, domains is the one that matters to the field, and it is also the one both
+  Pearl and Everitt leave unbounded.
+* **`P_ℰ` is a product measure.** Print's *"mutually independent"* rendered as a
+  product is the general form, not a finite-sum convenience — what this section
+  calls axis F is the difference between a product **measure** and a `Finset`
+  product, not between independence and something weaker.
+* **Acyclicity is not in the tuple.** *"Although it is common to assume the
+  absence of cyclic functional relations, we make no such assumption here. In
+  particular, we allow for self-cycles."* Definition 2.9 then defines *acyclic*
+  as a property of the SCM's graph. And Definition 2.3 makes a **solution** a
+  pair of random variables satisfying the structural equations almost surely,
+  with Example 2.4 exhibiting one SCM with a continuum of solutions and one with
+  none at all. Unique solvability is a **named condition** the theory carries
+  where it needs it.
+
+**That is the shape axis E produced, arrived at independently.** Solvability as
+a property asked for where the recursion is used, rather than acyclicity as a
+field standing in for it. The remaining difference is that `SCM` still carries
+`acyclic` as a field where this treatment carries none — which is a further
+widening available later, not a defect, since print does write the word.
+
+**Where the rows stand after 2026-08-22.** **Definitions 3 and 4 close.**
+Definition 4 closed last, when `SCIM.graph_wellFounded` came off and became
+`CID.IsWellFounded` — a property asked for by the declarations that evaluate
+rather than a field of the tuple. Definition 5 did not follow, and the reason is
+the grading convention rather than the mathematics: its column also holds
+`optimalValue` and `removeInfoLink`, so the expectation layer is graded there
+and Definition 4's is the structure alone. Definitions 1 and 2 keep domains, and
+Definition 1 additionally keeps the expectation layer. **Two open axes remain in
+this section** — domains and the expectation layer's `[Fintype V]` — and the
+well-foundedness axis is closed rather than open, having been labelled *provably
+not closable* in an intermediate revision. The policy row stays `Mixed`.
+
+**This paragraph read "Definitions 3, 4 and 5 close" in an earlier revision**, on
+the strength of a `Same`/`Bridged` grade that this table has no fidelity column
+to express. The scope cell is the only cell, and a field print does not write
+makes a row `Narrower` no matter how good the argument for the field is. The
+argument was good and is kept — it is now the *witness* attached to a
+`Narrower` axis rather than a reason to call the row `Same`, which is the state
+the standing rule actually provides for.
+
+What the refactor did buy on those four rows is real and smaller than claimed:
+finite indegree closed outright, and the acyclicity axis **shrank** — an
+`ℕ`-valued rank is strictly stronger than well-foundedness once parent sets may
+be infinite, so the admitted class genuinely widened. It did not reach print.
+
+The policy row does **not** close, and the triage predicted wrongly that it
+would become plainly `Wider`. Its graph-axis half is indeed gone, but a third
+narrowing survives and was already named in its own note: `expectedUtility` sums
+over `ExoAssignment V edom` and `exists_isOptimalPolicy` needs the policy type
+finite, so `[Fintype V]` is still present in that row's operations even though
+it is absent from `SCIM` itself. Wider on the decision axis, narrower on the
+vertex-set axis: still `Mixed`.
+
+Each note below says only what its row adds to the axes above.
+
+**The convention these rows are graded under, stated because it decides three of
+them.** A row is graded on **every declaration in its atlas column**, not on the
+printed object's nearest atlas counterpart alone. That is the atlas's existing
+convention, written into `registry.yaml` as *"both are in the public types, so
+the row is graded on the artifact"*. It matters because `CID.decisions`,
+`CID.utilities` and `CID.structureNodes` are `Finset.univ.filter …` and need
+`[Fintype V]` even though `CID` does not. Grading the structure alone would let
+a row read `Same` while the operations it names are unavailable at the
+generality the row claims.
+
+The finiteness axis is **not** applied to Pearl §1.3, which is also formalized over a
+`[Fintype C]` graph. That is deliberate and it makes the grading non-uniform:
+Everitt's finiteness is load-bearing — `eval` needs it to terminate and
+`optimalValue` needs it to be a maximum — whereas Pearl's displayed (1.37) is a
+finite product over the graph's own vertices, so a finite index set is what the
+printed equation already ranges over. A reader who disagrees should read this
+paragraph as the whole of the disagreement.
+
+| # | printed statement | atlas | Cov. | Scope | note |
+|---|---|---|---|---|---|
+| Def. 1 structural causal model | a tuple `⟨E, V, F, P⟩` with one exogenous variable per endogenous one, structural functions `f^V : dom(Pa_V ∪ {E^V}) → dom(V)` with acyclic dependencies, and a `P(ε)` under which the exogenous variables are mutually independent | `Causal.SCM`, `SCM.eval`, `SCM.eval_eq_f`, `SCM.jointProb`, `SCM.jointProb_sum`, `SCM.exoJoint_mul_prod`, `wellFounded_iff_exists_rank`, `chainParents`, `chainParents_acyclic`, `chainParents_not_wellFounded`, `chainParents_fixedPoint_not_unique` | Yes | **Narrower** | **The `Fintype V` axis closed on 2026-08-21.** Across the whole paper *"finite"* occurs exactly twice, both inside Def. 4 and both qualifying **domains**; the vertex set is never bounded. `SCM`, `CID` and `SCIM` therefore no longer carry `[Fintype V]`: the constraint moved onto the derived operations that genuinely need it — the `Finset` accessors and the expectation layer. That relaxes the definition against its own previous form rather than adding a hypothesis to a theorem, so it moves the row toward print rather than away. `CID.IsDecision` and `CID.IsUtility` read print's *"the vertex set is partitioned into `X`, `D`, `U`"* as a property of each vertex, which is what a partition is; `mem_decisions_iff` and `mem_utilities_iff` recover the `Finset` forms whenever `V` is a `Fintype`. **Source-class narrowing**: this module has no library-module importer, so nothing proved elsewhere in the tree is weaker for it, and the cost falls on a future consumer instantiating `SCM` outside the admitted class. **Two axes remain and both are open, and costed.** (i) Domains — OPEN: print writes `dom(V)` with no cardinality condition and imposes finiteness only at Def. 4, while `SCM` carries `dom edom : V → ℕ`; closing it turns `dom` into a family of types and touches `Assignment`, `f`, and every downstream sum. Scoped, not started, and the only thing keeping this row off `Same`. (ii) Finite indegree — CLOSED 2026-08-22: `parents : V → Set V`, print's unbounded `Pa_V ⊂ V`. (iii) Acyclicity — **CLOSED 2026-08-22, in two steps.** It was an `ℕ`-rank, then well-foundedness of the parent relation, and it is now `SCM.acyclic : ∀ v, ¬ Relation.TransGen (` `· ∈ parents ·` `) v v` — print's *"acyclic"* and nothing more, the same condition `CID` carries. Well-foundedness did not disappear; it moved to `SCM.IsWellFounded`, a class every declaration downstream of the recursion asks for. **That hypothesis is not a fourth axis**, on the criterion the preamble adjudicates: print's Definition 1 asserts *"the value ... given by recursive application of the structural functions"* — one value, *the* value — and `chainParents_fixedPoint_not_unique` proves that on an acyclic chain print's own words name **two**. So the instance is what makes print's sentence denote, exactly as finite `V` is what makes print's *maximum* denote at Definition 5. `chainParents` and its three theorems are the witness for the hypothesis; the earlier reading of them, that the axis was *provably not closable*, was retracted, and the preamble carries the retracted paragraph in full. **This row read `Same` in an intermediate revision** on a `Bridged` fidelity grade this table has no column for. `eval` no longer needs `[Fintype V]` either — it is well-founded recursion rather than an iteration run to a bound, and that iteration together with its two rank lemmas is deleted — so the sentence that graded the instance here no longer has a referent. `wellFounded_iff_exists_rank` is in this row's column because it is the witness that (ii) and (iii) were a single axis: while `parents` was a `Finset` the two acyclicity forms were equivalent. (iv) The expectation layer's `[Fintype V]` — **OPEN, and named here from 2026-08-22**: `jointProb`, `jointProb_sum` and `exoJoint_mul_prod` are `Finset` sums and products over `V`, which exist only at a finite vertex set, while print's `P(ε)` denotes at unbounded `V` because mutual independence gives a product measure. The preamble adjudicates this instance's three jobs and explains why attainment and utility-convergence transcribe print while summation does not. This row carried the axis unnamed until that adjudication; the policy row named it, and the two were graded inconsistently for as long as both existed. **The retracted sentence is left visible rather than deleted**: it once read *"One axis remains and it is domains"* while three remained. It is still not true — domains are the only *open* axis, but well-foundedness is a second axis in a different state, and collapsing the two is the same undercount that produced the retraction. |
+| Def. 2 submodel | `M_x := ⟨E, V, F_x, P⟩` with `F_x = {f^V \| V ∉ X} ∪ {X = x}`; more generally a soft intervention replaces `f^X` by a `g^X` on the same domain | `SCM.submodel`, `SCM.submodel_eval`, `SCM.submodel_eval_notMem`, `SCM.softIntervention` | Yes | **Narrower** | print's construction, and **Source-class narrowing**, inherited: same module, same absence of importers. It inherits **one** of Def. 1's two remaining axes — domains, open and costed — because `submodel` copies `parents` and the acyclicity field unchanged and alters only `f`. It does **not** carry the expectation layer's `[Fintype V]`: all four of this column's declarations are `omit [Fintype V]`. Well-foundedness closed here with Definition 1 on 2026-08-22; `submodel` now builds print's `acyclic` by `Relation.TransGen.mono`, and `instIsWellFoundedSubmodel` carries the recursion's hypothesis across an intervention by `Subrelation.wf`, since forcing a variable only deletes edges. The vertex-set axis closed on 2026-08-21 and finite indegree closed on 2026-08-22, so neither is among them; `submodel` now inherits well-foundedness by `Subrelation.wf`, since forcing a variable only deletes edges. `submodel_eval` is *"the original functional relationships of `X ∈ 𝐗` are replaced with the constant functions `X = x`"* read off the evaluation. |
+| Def. 3 causal influence diagram | a DAG whose vertex set is partitioned into structure, decision and utility nodes, where utility nodes have no children; `Pa_D` are the observations | `Causal.CID`, `CID.decisions`, `CID.utilities`, `CID.structureNodes`, `CID.observations`, `CID.decisions_disjoint_utilities`, `acyclic_of_rank` | Yes | **Same** | **The `Fintype V` axis closed on 2026-08-21.** Across the whole paper *"finite"* occurs exactly twice, both inside Def. 4 and both qualifying **domains**; the vertex set is never bounded. `SCM`, `CID` and `SCIM` therefore no longer carry `[Fintype V]`: the constraint moved onto the derived operations that genuinely need it — the `Finset` accessors and the expectation layer. That relaxes the definition against its own previous form rather than adding a hypothesis to a theorem, so it moves the row toward print rather than away. `CID.IsDecision` and `CID.IsUtility` read print's *"the vertex set is partitioned into `X`, `D`, `U`"* as a property of each vertex, which is what a partition is; `mem_decisions_iff` and `mem_utilities_iff` recover the `Finset` forms whenever `V` is a `Fintype`. **Def. 3 closed on 2026-08-22, having read `Same` wrongly for one day in between.** A CID carries no domains, so that axis was always absent here; the two that were present were `CID`'s own fields, and both are gone. `parents : V → Set V` is print's unbounded vertex subset. `acyclic` is now `∀ v, ¬ Relation.TransGen (` `· ∈ parents ·` `) v v` — no vertex reachable from itself, which is *"a directed acyclic graph"* and nothing more. **This is the only one of Definitions 1 to 5 that closes.** Definition 3 is a graph and evaluates nothing, so it needs no well-foundedness; that strengthening lives on `SCM` and `SCIM`, which do evaluate, and keeps those rows `Narrower` with the `chainParents` witness attached. `acyclic_of_rank` is in this column as the constructor a finite worked example uses. Under this section's stated convention the row also carries `decisions` / `utilities` / `structureNodes`, which are `Finset.univ.filter …` and need `[Fintype V]`; `IsDecision` and `IsUtility` are the unbounded forms and `mem_decisions_iff` / `mem_utilities_iff` are the bridge, so that part is a genuine relocation rather than a cut, but the two graph axes are not. Childlessness of utility nodes is a structure field with a worked counter-witness in the examples. |
+| policy invariance off `Desc_D` (asserted after Def. 4) | *"We use `Pr^π` and `Eπ` to denote probabilities and expectations with respect to `Mπ`. For a set of variables `X` not in `Desc_D`, `Pr^π(x)` is independent of `π` and we simply write `Pr(x)`."* | `CID.IsDescendant`, `CID.NotDownstream`, `CID.not_isDecision_of_notDownstream`, `CID.notDownstream_of_mem_parents`, `SCM.eval_eq_of_f_agree`, `SCM.marginal`, `SCM.marginal_eq_sum_exo`, `SCIM.eval_withPolicy_eq_of_notDownstream`, `SCIM.marginal_withPolicy_eq_of_notDownstream` | Yes | **Mixed** | **New on 2026-08-22. This sentence had no row until then, and that is an inventory gap rather than a coverage one**: it is a printed assertion in the paragraph that introduces `Pr^π`, and this table's rule is that every printed claim gets a row whether or not the atlas covers it. It was missed because it sits in running prose between Definition 4 and Definition 5 rather than in a numbered environment. **Wider on two axes.** Print *asserts* it and proves nothing — the notation *"we simply write `Pr(x)`"* is well defined only if it holds — and the atlas proves it, which is one of this audit's six recognised widenings. And print writes `Desc_D` having already restricted to `𝐃 = {D}`, while `CID.NotDownstream` quantifies over every decision vertex, so the statement holds on the multi-decision diagrams where print states nothing; at print's own restriction it is print's condition exactly. **Narrower on one**, and it is the expectation layer again: `SCM.marginal` is a `Finset` sum over `Assignment V dom` and carries `[Fintype V]`, which `#check` confirms, so this row carries the axis §8's preamble adjudicates. The two `eval`-level declarations do not — `eval_eq_of_f_agree` and `eval_withPolicy_eq_of_notDownstream` are `omit [Fintype V]` — but a row is graded on every declaration in its column. **`Desc_D` is read reflexively, on purpose.** The decision is its own descendant, so the invariance is not claimed at the decision; under a *proper* reading `D` would fall outside *Desc_D* and print's sentence would assert that `Pr^π(d)` does not depend on `π`, which is false. RE24's `Anc`/`Desc` **are** proper and `Model.properAncestors` / `Model.properDescendants` carry that reading — a different paper and a different sentence, and not a discrepancy to reconcile. **What the proof turns on.** `eval_eq_of_f_agree` is the content and says nothing about policies: two models with one parent map whose structural functions agree on an ancestor-closed set evaluate alike there. The complement of `Desc_𝐃` is such a set, and `Mπ` and `Mπ'` differ only at decision vertices. `marginal_eq_sum_exo` is what carries a statement about `W(ε)` to one about `Pr`, by summing `P(ε)` over the fibres of `eval` instead of summing the joint over assignments. Inhabited on print's own Figure 2a: `figCID_notDownstream_zero` puts the opinion outside `Desc_D` and `figSCIM_marginal_opinion_policy_free` is print's `Pr(x)` there |
+| policy and optimal policy (asserted after Def. 4) | a policy is a structural function from the decision's observations together with an exogenous randomness variable to the decision; an optimal policy is any policy maximising expected utility | `SCIM.Policy`, `SCIM.withPolicy`, `SCIM.expectedUtility`, `SCIM.IsOptimalPolicy`, `SCIM.exists_isOptimalPolicy`, `SCIM.policy_ext_single` | Yes | **Mixed** | **This row has been regraded more than any other in the table, and the reason is the finding: the regrades turned on miscounts of the narrowing side rather than on new mathematics.** Two of the three narrowing halves really are gone. The vertex-set half closed when `SCIM` shed `[Fintype V]`: `Policy` is indexed by `{d // graph.IsDecision d}`, a subtype over a property, so the policy space is defined at unbounded `V`. The domain half was never the atlas's: this object is asserted **after** Def. 4, where *"finite-domain variables"* and *"finite-domain exogenous variables"* are print's own words, so `Fin (dom d)` and `Assignment V dom` transcribe print. What remains is the widening, which was disclosed all along: print writes a single `π` because it has *already* restricted to `𝐃 = {D}`, and the atlas carries one structural function per decision vertex, so it defines the object at multi-decision diagrams where print defines nothing. `policy_ext_single` proves that at print's own restriction the family is print's datum exactly. Indexing by the decision subtype rather than by a membership proof is what keeps `withPolicy` free of transports between `Fin (dom v)` and `Fin (dom d)`. `Eπ[U]` is taken **in `Mπ`**, which is where print defines `Eπ`, so it is print's definition rather than a formula that agrees with it. **What puts the row back to `Mixed` is the narrowing that was never counted.** `withPolicy` used to build an `SCM` from `M.graph.parents` and `M.graph.acyclic`, so every declaration in this row inherited `CID`'s finite indegree and ℕ-ranked acyclicity, which print's policy paragraph asks for neither of. **Both closed on 2026-08-22** and that half of the narrowing is gone: `withPolicy` now hands `SCM` print's own `CID.acyclic`, and `instIsWellFoundedWithPolicy` supplies the recursion's hypothesis from `CID.IsWellFounded` — a property of the diagram rather than a field of `SCIM`, which is what closed the Definition 4 row. `expectedUtility` additionally sums over `ExoAssignment V edom`, which is a `Fintype` only when `V` is — so the vertex-set constraint is still present in this row's operations even though it is gone from `SCIM` itself. **Sharpened 2026-08-22, and half of what this sentence used to say is withdrawn.** It also cited `exists_isOptimalPolicy` needing the policy type finite. That is not an axis: print writes `V*(M)` as a *maximum* and states no condition delivering one, so finiteness supplies print's own assertion rather than cutting below it, and the Definition 5 row has always graded it that way. What remains an axis is the summation alone — print's `P(ε)` denotes at unbounded `V` as a product measure and a `Finset` sum does not. The preamble adjudicates the instance's three jobs once and applies the result to this row and to Definition 5 together; **until that adjudication the two rows graded the identical hypothesis in opposite directions**, which is the finding rather than either verdict. Wider on the decision axis, narrower on the vertex-set axis: that is what `Mixed` is for, and it is still the honest grade. The triage predicted this row would go plainly `Wider` once the graph axes closed. That prediction was wrong, and it was wrong against information this row's own note already carried: it counted only the graph half of the narrowing. **`Causal.Decision`'s `Policy` keeps its own row and its own grade**: it is the unmediated projection of MAIS `def:cid`, an induced conditional law rather than a structural function, and nothing here widens it |
+| Def. 4 structural causal influence model | a CID with finite-domain variables whose utility domains are a subset of `ℝ`, one finite-domain exogenous variable per endogenous one, and structural functions on `𝐕 \ 𝐃` | `Causal.SCIM` | Yes | **Same** | **The `Fintype V` axis closed on 2026-08-21.** Across the whole paper *"finite"* occurs exactly twice, both inside Def. 4 and both qualifying **domains**; the vertex set is never bounded. `SCM`, `CID` and `SCIM` therefore no longer carry `[Fintype V]`: the constraint moved onto the derived operations that genuinely need it — the `Finset` accessors and the expectation layer. That relaxes the definition against its own previous form rather than adding a hypothesis to a theorem, so it moves the row toward print rather than away. `CID.IsDecision` and `CID.IsUtility` read print's *"the vertex set is partitioned into `X`, `D`, `U`"* as a property of each vertex, which is what a partition is; `mem_decisions_iff` and `mem_utilities_iff` recover the `Finset` forms whenever `V` is a `Fintype`. **Def. 4 does not close, and read `Same` twice on two different bad arguments.** Its own addition was always fine: the *domain* finiteness this definition introduces is print's own — *"a CID with finite-domain variables"*, *"finite-domain exogenous variables"* — so `dom edom : V → ℕ` transcribes print from here on and is **not** an axis at this row, which is the one point on which this section's grading is more forgiving than a naive one would be. The vertex-set axis is likewise gone, and what used to remain — Def. 3's finite indegree and ℕ-ranked acyclicity, inherited through `SCIM.graph` — closed with Def. 3. `F` is a function of a proof that the vertex is **not** a decision, which is `¬ IsDecision` rather than `Finset` non-membership. **Closed 2026-08-22 by axis E, and this time by moving Lean rather than prose.** What had kept it `Narrower` was `SCIM.graph_wellFounded`, a field asking the diagram's parent relation to be well-founded where `CID.acyclic` asks only for print's word. That field is **gone**. Definition 4 is where print first writes a model that gets **evaluated** — one definition later, `V*(M)` is the maximum of `Eπ[U]` over policies and runs `W(ε)` in `Mπ` — and that recursion determines a value exactly on well-founded diagrams, so the requirement is real; it is now `CID.IsWellFounded`, a **property of a diagram** that `expectedUtility`, `optimalValue` and `IsMaterial` each ask for, rather than a field of the tuple. `chainParents` and its three theorems keep their job as the witness that print's *"recursive application"* names nothing unique without it. **This row read `Same` twice before, on arguments rather than code** — once on a `Bridged` fidelity grade this table has no column for, once on a `provably not closable` label that confused *"`eval` cannot be totalised"* with *"the structure must carry the field"*. Neither is what closes it now: the class of tuples `SCIM` admits is print's class, which is what this table grades. **The two remaining fields print does not write in so many words, examined rather than assumed.** `SCIM.utilityValue_injective` is print's *"utility variable domains are a subset of `ℝ`"*: a subset of `ℝ` is exactly a set injected into `ℝ`, and the injection is the naming of the states, so this is a representation of print's clause with its own converting fact rather than an addition. `SCIM.dom_pos` asks every domain to be nonempty, which print does not write — and a tuple violating it has **no assignment at all**, so print's own Definition 1 assertion that `W(ε)` has a value is false there. It excludes exactly the tuples on which print's stated conditions cannot hold, which is not the same as excluding tuples that satisfy them; well-foundedness was the second kind, and that is why it had to move and this does not. |
+| Def. 5 materiality | `V*(M)` is the maximum of `Eπ[U]` over policies, `M_{X↛D}` is `M` with the information link removed, and `X ∈ Pa_D` is material when `V*(M_{X↛D}) < V*(M)` | `SCIM.optimalValue`, `SCIM.removeInfoLink`, `SCIM.IsMaterial`, `SCIM.removeInfoLink_sub` | Yes | **Narrower** | **Source-class narrowing**: `SCIM.optimalValue` and `SCIM.IsMaterial` are named nowhere outside this module and its examples. **Partly closed on 2026-08-21, and the part that closed is the part where the finiteness is print's own.** Print writes `V*(M)` as the maximum of `E_π[U]` over policies. Without a finite vertex set `U` is a sum over possibly infinitely many utility vertices that need not converge, and that maximum ranges over an infinite policy space and need not be **attained** — print writes a maximum, not a supremum, and states no condition delivering either. Finite `V` delivers both, so `optimalValue` as a `Finset.sup'` transcribes print's content instead of cutting below it; `exists_isOptimalPolicy` exhibits the attaining policy print presumes. `IsMaterial` now takes `IsDecision` rather than `Finset` membership. **That argument survives every pass, and from 2026-08-22 it is no longer the whole story.** It defends two of the three jobs `[Fintype V]` does here — the maximum being attained and the utility total converging — and says nothing about the third. `optimalValue` is a `Finset.sup'` **of** `expectedUtility`, which sums over `ExoAssignment V edom`; print's `P(ε)` denotes at unbounded `V` because mutual independence is a product measure, and a `Finset` sum does not. **So this row does carry the expectation layer's `[Fintype V]` as an axis**, exactly as the policy row two rows above has said all along — the two rows contradicted each other for as long as both existed, and the preamble now adjudicates it once. The consequence is that **this row does not close when well-foundedness does**: Definition 4's column is the structure alone, and this one's is not. **What kept the row `Narrower` until 2026-08-22 has now closed**: `removeInfoLink` and `optimalValue` are taken at a `SCIM` whose graph is a `CID`, and so used to inherit Def. 3's finite indegree and ℕ-ranked acyclicity. Neither survives — the parent map is a `Set` and the diagram's condition is print's own. `removeInfoLink` keeps both by `Subrelation.wf` and `Relation.TransGen.mono`, since deleting an information link only removes edges; `removeInfoLink_sub` is that one fact, used once for acyclicity and once for well-foundedness. **What kept the row `Narrower` here was Def. 4's field rather than anything this row adds**: `V*(M)` evaluates `Mπ`, so well-foundedness is what makes print's own maximum refer to a determinate quantity. **That axis closed on 2026-08-22**: `SCIM` no longer carries the field, `optimalValue` and `IsMaterial` ask for `CID.IsWellFounded` instead, and `instIsWellFoundedRemoveInfoLink` carries it across the deleted information link so print's inequality needs the hypothesis once rather than at each side. The hypothesis is not itself an axis, for the reason the preamble adjudicates: print's *"recursive application"* names nothing unique without it. **Unlike Definition 4, this row did not close when that axis did**, and the reason is the sentence above — Definition 4's column is the structure alone, this one's also holds `optimalValue` and `removeInfoLink`, so the expectation layer is graded here. **It read `Same` in an intermediate revision** on a fidelity grade this table has no column for. The classical `Fintype SCIM.Policy` instance the `Set` parent map forced changes no grade — it is the same finite policy space, decided classically. |
+| Thm. 9 value-of-information criterion | an observation has positive value of information exactly under a graphical condition on the diagram | — | No | — | requires the diagram as an object with decision and utility vertices |
+| Thm. 14 counterfactual fairness and response incentives | a graphical characterisation relating counterfactual fairness to the response incentive | — | No | — | Definition 4's structural layer now exists; what is missing is the response incentive, the nested counterfactuals it is defined by, and d-separation |
+| Thm. 16 value-of-control criterion | a node has positive value of control exactly under a graphical condition | — | No | — | same missing object as Theorem 9 |
+| Thm. 18 instrumental control incentive criterion | an instrumental control incentive holds exactly under a directed-path condition through the decision | — | No | — | same |
+| — | zero regret characterised, and the optimum attained without a diagram | `Model.regret_decomp`, `Model.regret_eq_zero_iff`, `Model.bestDecision` | — | **Beyond** | the printed source defines regret and reasons about optima; the fibrewise-argmax characterisation, with ties left unconstrained, is proved here and not stated there |
+
+**7 Yes, 0 Partial, 4 No, 1 Beyond**, up from `6 Yes` on 2026-08-22 — not
+because anything was proved that was previously missing from this table, but
+because a printed sentence was missing **from the table**. Print's *"for a set
+of variables `X` not in `Desc_D`, `Pr^π(x)` is independent of `π`"* sits in
+running prose between Definitions 4 and 5, and every earlier pass over this
+source enumerated the numbered environments. It now has a row, and the atlas
+proves it. The setup is formalized and the results
+are not. The four `No` rows are the incentive theorems, and they no longer fail
+on a missing model: `Causal.SCIM` is Definition 4 and `SCIM.IsMaterial` is
+Definition 5. What is absent is **d-separation** — Definition 6, a path algebra
+the atlas has no counterpart for — and the incentive concepts themselves, whose
+*completeness* halves are constructions of witnessing SCIMs rather than
+derivations. That is a second layer on this one, not a continuation of it.
+
+Assumption 1 remains a scope fence in this formalization rather than a
+hypothesis — `Causal.Decision` *is* the unmediated projection, and `Causal.SCIM`
+is a separate object no statement in that module is phrased over — which is why
+there is no declaration stating it. **Nothing here re-grades section 6.**
+Richens & Everitt's §2.2 value and regret are still the unmediated projection:
+`Model.value` takes a policy on a `Model`, and wiring it to a SCIM's decision
+vertex is a construction nobody has written.
+
+**Two ingredient sources are deliberately ungraded.** Uhler, Raskutti, Bühlmann
+& Yu 2013 and Meek 1995 motivate replacing a measure-zero exception with an
+explicit margin, and are cited for that role in
+`mais-a2-causal-collision.md`. No atlas declaration transcribes a statement from
+either: strong faithfulness bounds a partial correlation, and the six margin
+conditions bound CPT entries and utility gaps. Grading them would produce a
+section of `No` rows resting on a single sentence, so they are recorded here
+instead of tabulated.
+
+---
+
 ## Totals
 
 | source | Yes | Partial | No | Beyond |
@@ -643,7 +1253,10 @@ are realizable everywhere.
 | Ashby ch. 11 | 11 | 0 | 4 | 0 |
 | Igel–Toussaint / SVW | 14 | 0 | 1 | 1 |
 | Touchette & Lloyd | 12 | 0 | 2 | 0 |
-| **total** | **57** | **0** | **9** | **2** |
+| Richens & Everitt 2024 | 10 | 0 | 13 | 4 |
+| Pearl §1.3 | 5 | 0 | 0 | 1 |
+| Everitt et al. 2021 | 7 | 0 | 4 | 1 |
+| **total** | **79** | **0** | **26** | **8** |
 
 ## Reading the totals
 
@@ -653,16 +1266,39 @@ them — an arbitrary sample space in place of a fixed discrete one is a
 presentation, for the reason given above. A hypothesis weakened to only what the
 proof uses (Ashby's column condition); a hypothesis *derived*
 rather than assumed (Ashby 11/8); a statement the source asserts without proof
-(exactly two, both inside the proof of 2.8.1); a wider class of objects or
+(**three as of 2026-08-22**: two inside the proof of 2.8.1, and Everitt's
+policy-invariance sentence, which is asserted in running prose between
+Definitions 4 and 5 and proved in §8's new row for it); a wider class of objects or
 parameters quantified over (signed weights in IT Thm 5, arbitrary sample length
 in SVW NFL3, a different estimate *type* in `fano_of_embedding`); a sharper
 conclusion at the same hypotheses (Ashby's integer `⌈r/c⌉`, Fano's surviving
 `−1` in the no-observation remark); and a statement proved **off** an optimum as
 well as at it, where the source only states it at the optimum (Touchette–Lloyd's
 Theorems 2, 3 and 4, each proved at every controller and then transferred to the
-minimized `L_C`).
+minimized `L_C`). The causal sections add a seventh: **a scalar field left as a
+parameter** where print fixes the reals. `Model` and the margin layer are stated
+over any ordered field of characteristic zero, so print's real case is an
+instance, witnesses are computed on rational literals, and the transport lemmas
+carry them back. That is a strict widening rather than a presentation, and the
+rational instance is what witnesses it — `margin_class_not_identifiable` lives
+in a field the printed statement cannot name.
+
+**Counting the weak cells, and one warning about how.** As of 2026-08-22 the
+scope column holds **five `Narrower` and two `Mixed`**. Six of the seven are
+definitions; the seventh, Everitt's policy-invariance sentence, is a printed
+*assertion of a fact*. That breaks a line this audit used to carry — that every
+`Narrower` or `Mixed` row is a definition and no printed claim is narrower — and
+it is worth stating because both `Mixed` labels end in *"(asserted after Def.
+4)"*. Anything that sorts rows by matching `Def.` in the label will file the
+assertion under definitions and report six definition-level defects where there
+are five.
 
 **Where it is weaker, and why — what actually remains:**
+
+1. *(closed)* **The decision layer's rationals.** `AISafetyAtlas.Causal.Decision`
+   now carries its value field as a parameter like the rest of the causal layer,
+   so the printed real case is an instance. The review that gated this named an
+   obstruction which does not exist, and carries a dated addendum saying so.
 
 2. *(closed)* **Ashby's §11/11 capacity.** Both capacities are now formalized:
    the noiseless alphabet ceiling for the four exercises, and §9/12's weighted
@@ -675,6 +1311,27 @@ minimized `L_C`).
    supremum attained, so it is the printed `max`. `OpenLoopBound` still does not
    nest with eq. (48), and is kept only because its hypothesis is incomparable —
    a fact about that definition, not a gap in a claim.
+
+4. **The unmediated projection is structural, not costed.** Decision and utility
+   are not vertices of the graph `Causal.Decision` is stated over, so RE24's
+   Assumption 1 is a scope fence rather than a hypothesis. **The missing object
+   is no longer the CID layer.** `Causal.CID` and `Causal.SCIM` exist, with
+   decision and utility vertices, policies as structural functions, and expected
+   utility taken in the induced SCM. What is missing is the *wiring*: nothing
+   sends a SCIM's decision vertex to `Model.value`, so §2.2's expected utility
+   and regret are still the projection. That is a construction, and it is what
+   this point now names. Everitt's own graphical criteria need a second thing on
+   top of it — d-separation, Definition 6, which has no counterpart here.
+5. **Neither identification theorem is reachable.** RE24's Theorems 1 and 2 need
+   a chart of a *CID's* parameters carrying an almost-every quantifier, and a
+   policy oracle. Neither object exists, which is why §6's thirteen `No` rows are
+   `No` and not `Partial`: they fail on a missing object, not on a missing step.
+   Since 2026-08-21 the chart half is a narrower gap than it reads: a real
+   parameter chart with a Lebesgue estimate over it exists for MAIS's unmediated
+   chance-variable tables (`ChartIndex`, `Model.chartOn`, and MAIS-O24's certificate layer).
+   It is not RE24's, because `D` and `U` are not vertices in it — so this row
+   turns on the same missing wiring as point 4, not on measure theory. A CID with
+   those vertices now exists; a chart over *its* parameters does not.
 
 Two entries that used to sit in this list have been removed rather than
 softened, because the tree no longer supports them:

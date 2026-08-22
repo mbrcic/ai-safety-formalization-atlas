@@ -1157,10 +1157,14 @@ SOURCE_BASE = "https://github.com/mbrcic/ai-safety-formalization-atlas/blob/main
 # say the mathematics is standard, and dressing packaging as discovery is the
 # failure this ledger exists to prevent.
 OWN_WORK_ATTRIBUTION = "Workbench infrastructure"
+# The leading character is any Lean identifier start, not any ASCII one. An
+# `[A-Za-z_]` anchor silently dropped every declaration named with a Greek
+# letter — `Δ`, `Δ_add`, `Δmix_congr` — from the index, which is a lookup that
+# fails open: the name resolves to nothing and the reader falls back to grep.
 _DECL_RE = re.compile(
     r"^\s*(?:@\[[^\]]*\]\s*)?(?:public\s+|private\s+|protected\s+|noncomputable\s+)*"
     r"(?:theorem|lemma|def|abbrev|structure|class|instance|inductive)\s+"
-    r"([A-Za-z_][\w'!?₀-₉]*(?:\.[A-Za-z_][\w'!?₀-₉]*)*)"
+    r"((?!\d)[\w'!?₀-₉]+(?:\.(?!\d)[\w'!?₀-₉]+)*)"
 )
 _NS_RE = re.compile(r"^\s*namespace\s+([A-Za-z_][\w.']*)")
 # `section` has to be tracked even though it contributes nothing to a name:

@@ -35,9 +35,10 @@ PFR already proves the *functional* data-processing inequalities
 `condMutual_comp_comp_le`) — those need no restating. What PFR does not have,
 and what this module supplies, is:
 
-* `mutualInfo_chain_rule` and `mutualInfo_chain_rule'`, the chain rule for
-  mutual information, `I[X : ⟨Y,Z⟩] = I[X : Z] + I[X : Y | Z]` in both
-  argument orders. These are the only new mathematics in the file; everything
+* `mutualInfo_chain_rule` and `mutualInfo_chain_rule'`, the two-component chain
+  rule for mutual information in both argument orders, and
+  `mutualInfo_chain_rule_fin`, Cover--Thomas Theorem 2.5.2 for an arbitrary
+  finite family. These are the only new mathematics in the file; everything
   else is assembly. They are natural upstream candidates.
 * the Markov-chain form itself, which is strictly more general than the
   functional form: `mutualInfo_comp_le` is derived from it here, whereas the
@@ -349,6 +350,173 @@ public theorem mutualInfo_chain_rule' (μ : Measure Ω) [IsZeroOrProbabilityMeas
     condMutualInfo_eq' hX hZ hY μ,
     ← condEntropy_pair_comm μ hX hY hZ]
   ring
+
+/-! ### The printed finite-family chain rule -/
+
+section FiniteChainRule
+
+universe uV uW
+
+variable {V : Type uV} {W : Type uW}
+variable [Fintype V] [MeasurableSpace V] [MeasurableSingletonClass V]
+variable [MeasurableSpace W] [MeasurableSingletonClass W] [Countable W]
+
+/-- Package a finite indexed family of random variables as one vector-valued variable. -/
+public def observationVector {n : ℕ} (X : Fin n → Ω → V) : Ω → Fin n → V :=
+  fun ω i ↦ X i ω
+
+/-- The variables strictly preceding `i`, in their original order. -/
+public def observationPrefix {n : ℕ} (X : Fin n → Ω → V) (i : Fin n) :
+    Ω → Fin i.val → V :=
+  fun ω j ↦ X ⟨j.val, lt_trans j.isLt i.isLt⟩ ω
+
+set_option maxHeartbeats 400000 in
+/-- **Finite chain rule for mutual information** (Cover--Thomas, Theorem 2.5.2).
+
+`I(Y; X₀,…,Xₙ₋₁) = ∑ᵢ I(Y; Xᵢ | X₀,…,Xᵢ₋₁)` for every finite family.
+
+This form gives every variable the same codomain. That loses no printed
+generality, and since 2026-08-21 that is a theorem rather than a remark:
+`mutualInfo_chain_rule_pi` states the same identity for a family with one
+arbitrary finite alphabet per index, and derives it from this one by tagging. -/
+public theorem mutualInfo_chain_rule_fin {n : ℕ} (μ : Measure Ω)
+    [IsZeroOrProbabilityMeasure μ] (Y : Ω → W) (X : Fin n → Ω → V)
+    (hY : Measurable Y) (hX : ∀ i, Measurable (X i)) [FiniteRange Y]
+    [FiniteRange (observationVector X)] [(i : Fin n) → FiniteRange (X i)]
+    [(i : Fin n) → FiniteRange (observationPrefix X i)] :
+    I[Y : observationVector X ; μ] =
+      ∑ i : Fin n, I[Y : X i | observationPrefix X i ; μ] := by
+  induction n with
+  | zero =>
+      have hobs : observationVector X =
+          (fun _ ↦ fun i : Fin 0 ↦ Fin.elim0 i) := by
+        funext ω i
+        exact Fin.elim0 i
+      rw [hobs, mutualInfo_const hY]
+      simp
+  | succ n ih =>
+      let Xinit : Fin n → Ω → V := fun i ↦ X i.castSucc
+      let Xlast : Ω → V := X (Fin.last n)
+      have hXinit : ∀ i, Measurable (Xinit i) := fun i ↦ hX i.castSucc
+      have hXlast : Measurable Xlast := hX (Fin.last n)
+      have hVec : Measurable (observationVector X) := measurable_pi_iff.mpr hX
+      have hInit : Measurable (observationVector Xinit) := measurable_pi_iff.mpr hXinit
+      let split : (Fin (n + 1) → V) → (Fin n → V) × V :=
+        fun v ↦ (fun i ↦ v i.castSucc, v (Fin.last n))
+      have hsplit : Function.Injective split := by
+        intro v w h
+        funext i
+        refine Fin.lastCases ?_ (fun j ↦ ?_) i
+        · exact congrArg Prod.snd h
+        · exact congrFun (congrArg Prod.fst h) j
+      have hPair : Measurable (fun ω ↦ (observationVector Xinit ω, Xlast ω)) :=
+        hInit.prodMk hXlast
+      have hcomp : split ∘ observationVector X =
+          fun ω ↦ (observationVector Xinit ω, Xlast ω) := by
+        rfl
+      have hmi : I[Y : observationVector X ; μ] =
+          I[Y : fun ω ↦ (observationVector Xinit ω, Xlast ω) ; μ] := by
+        rw [mutualInfo_eq_entropy_sub_condEntropy hY hVec μ,
+          mutualInfo_eq_entropy_sub_condEntropy hY hPair μ]
+        have hinj := condEntropy_of_injective' μ hY hVec split hsplit
+          (hcomp.symm ▸ hPair)
+        rw [hcomp] at hinj
+        rw [← hinj]
+      rw [hmi, mutualInfo_chain_rule' μ hY hInit hXlast, ih Xinit hXinit,
+        Fin.sum_univ_castSucc]
+      congr 1
+
+/-! ### Differently typed alphabets
+
+`mutualInfo_chain_rule_fin` gives every variable the same codomain, while
+Cover--Thomas quantify over an arbitrary finite family. The gap is a
+type-formation artifact rather than a restriction, and this section proves that
+rather than asserting it: tagging each variable with its index embeds the family
+into one disjoint union, and mutual information is invariant under an injective
+relabelling of either the measured or the conditioning variable. -/
+
+/-- A family with **differently typed** codomains, packaged as one
+vector-valued variable. -/
+public def observationVectorPi {n : ℕ} {V' : Fin n → Type uV}
+    (X : (i : Fin n) → Ω → V' i) : Ω → ((i : Fin n) → V' i) :=
+  fun ω i ↦ X i ω
+
+/-- The variables strictly preceding `i`, in their original order and types. -/
+public def observationPrefixPi {n : ℕ} {V' : Fin n → Type uV}
+    (X : (i : Fin n) → Ω → V' i) (i : Fin n) :
+    Ω → ((j : Fin i.val) → V' ⟨j.val, lt_trans j.isLt i.isLt⟩) :=
+  fun ω j ↦ X ⟨j.val, lt_trans j.isLt i.isLt⟩ ω
+
+/-- The same family with each variable tagged by its index, so that all of them
+share the codomain `Σ k, V' k`. -/
+public def observationTagged {n : ℕ} {V' : Fin n → Type uV}
+    (X : (i : Fin n) → Ω → V' i) (i : Fin n) : Ω → ((k : Fin n) × V' k) :=
+  fun ω ↦ ⟨i, X i ω⟩
+
+set_option maxHeartbeats 1000000 in
+/-- **Finite chain rule at Cover--Thomas's own generality**: the variables carry
+arbitrary finite alphabets, one per index. -/
+public theorem mutualInfo_chain_rule_pi {n : ℕ} {V' : Fin n → Type uV}
+    [∀ i, Fintype (V' i)] [∀ i, MeasurableSpace (V' i)]
+    [∀ i, MeasurableSingletonClass (V' i)]
+    (μ : Measure Ω) [IsZeroOrProbabilityMeasure μ] (Y : Ω → W)
+    (X : (i : Fin n) → Ω → V' i) (hY : Measurable Y) (hX : ∀ i, Measurable (X i))
+    [FiniteRange Y] :
+    I[Y : observationVectorPi X ; μ] =
+      ∑ i : Fin n, I[Y : X i | observationPrefixPi X i ; μ] := by
+  classical
+  letI : MeasurableSpace ((k : Fin n) × V' k) := ⊤
+  haveI : DiscreteMeasurableSpace ((k : Fin n) × V' k) := ⟨fun _ ↦ trivial⟩
+  have hTm : ∀ i, Measurable (observationTagged X i) :=
+    fun i ↦ (Measurable.of_discrete).comp (hX i)
+  have hPi : Measurable (observationVectorPi X) := measurable_pi_iff.mpr hX
+  have hTvec : Measurable (observationVector (observationTagged X)) :=
+    measurable_pi_iff.mpr hTm
+  -- tagging the whole vector is injective
+  have htag : Function.Injective
+      (fun v : (i : Fin n) → V' i ↦ (fun k ↦ ⟨k, v k⟩ : Fin n → (k : Fin n) × V' k)) := by
+    intro v w h
+    funext k
+    have := congrFun h k
+    simpa using this
+  have hcomp : (fun v : (i : Fin n) → V' i ↦ (fun k ↦ ⟨k, v k⟩ : Fin n → (k : Fin n) × V' k)) ∘
+      observationVectorPi X = observationVector (observationTagged X) := rfl
+  have hmi : I[Y : observationVectorPi X ; μ] =
+      I[Y : observationVector (observationTagged X) ; μ] := by
+    rw [mutualInfo_eq_entropy_sub_condEntropy hY hPi μ,
+      mutualInfo_eq_entropy_sub_condEntropy hY hTvec μ]
+    have hinj := condEntropy_of_injective' μ hY hPi _ htag (hcomp ▸ hTvec)
+    rw [hcomp] at hinj
+    rw [hinj]
+  rw [hmi, mutualInfo_chain_rule_fin μ Y (observationTagged X) hY hTm]
+  refine Finset.sum_congr rfl fun i _ ↦ ?_
+  -- the conditioning prefix is a tagging of the typed prefix
+  have hpre : Function.Injective
+      (fun w : (j : Fin i.val) → V' ⟨j.val, lt_trans j.isLt i.isLt⟩ ↦
+        (fun j ↦ ⟨⟨j.val, lt_trans j.isLt i.isLt⟩, w j⟩ :
+          Fin i.val → (k : Fin n) × V' k)) := by
+    intro v w h
+    funext j
+    have := congrFun h j
+    simpa using this
+  have hprecomp : (fun w : (j : Fin i.val) → V' ⟨j.val, lt_trans j.isLt i.isLt⟩ ↦
+      (fun j ↦ ⟨⟨j.val, lt_trans j.isLt i.isLt⟩, w j⟩ :
+        Fin i.val → (k : Fin n) × V' k)) ∘ observationPrefixPi X i =
+      observationPrefix (observationTagged X) i := rfl
+  have hPrePi : Measurable (observationPrefixPi X i) :=
+    measurable_pi_iff.mpr fun j ↦ hX _
+  have hPreT : Measurable (observationPrefix (observationTagged X) i) :=
+    measurable_pi_iff.mpr fun j ↦ hTm _
+  rw [condMutualInfo_comm hY (hTm i), condMutualInfo_comm hY (hX i)]
+  rw [show observationPrefix (observationTagged X) i =
+    (fun w : (j : Fin i.val) → V' ⟨j.val, lt_trans j.isLt i.isLt⟩ ↦
+      (fun j ↦ ⟨⟨j.val, lt_trans j.isLt i.isLt⟩, w j⟩ :
+        Fin i.val → (k : Fin n) × V' k)) ∘ observationPrefixPi X i from hprecomp.symm]
+  rw [condMutualInfo_of_inj (hTm i) hY hPrePi μ hpre]
+  exact condMutualInfo_of_inj_map (hX i) hY hPrePi (fun _ x ↦ (⟨i, x⟩ : (k : Fin n) × V' k))
+    (fun _ a b h ↦ by simpa using h)
+
+end FiniteChainRule
 
 /-! ## The inequality -/
 

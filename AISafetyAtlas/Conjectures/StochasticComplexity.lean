@@ -31,15 +31,32 @@ open AISafetyAtlas.Inference MeasureTheory
 **CONJ-002.** Dropping the no-null-point hypothesis from
 `stochasticInferenceComplexity_eq` makes it false.
 
-Stated as the negation of the hypothesis-free theorem, so a refutation is a proof
-that the hypothesis was never needed and the theorem can simply be strengthened.
+This is `stochasticInferenceComplexity_eq` with `hatom` deleted and **nothing
+else changed** — same general target type `G`, same `hagree`, same `hpos` —
+negated. That exactness is the whole content of the conjecture. A
+version that also dropped `hagree` would be refutable by a device whose agreement
+function is non-measurable, which says nothing about whether null points matter;
+a version that fixed `G := Bool` or bolted on `WeaklyInfers` would be asking
+about a different theorem. The ledger records that all three deviations
+were present until 2026-08-20.
+
+The one thing that is pinned rather than mirrored is the universe: the theorem is
+polymorphic and this reads it at `Type 0`. That is Lean bookkeeping and not a
+mathematical restriction — a counterexample lives in an ordinary set, and
+refuting the `Type 0` instance refutes the polymorphic theorem. It is pinned here
+because a universe-polymorphic `Prop` cannot be named by the generated
+`example : Prop := …` in `Checks.lean` without universe metavariables.
+
+A refutation is a proof that the hypothesis was never needed and the theorem can
+simply be strengthened.
 -/
 public def eq_needs_no_null_points : Prop :=
   ¬ ∀ {U : Type} [MeasurableSpace U] (μ : Measure U) [IsProbabilityMeasure μ]
       (C : InferenceDevice.{0, 0} U) [DecidableEq C.Setup] [FiniteRange C.setup]
-      [MeasurableSpace C.Setup] [MeasurableSingletonClass C.Setup]
-      (ℓ : C.Setup → ℝ) (Γ : U → Bool) [FiniteRange Γ],
-      Measurable C.setup → WeaklyInfers C Γ →
+      [MeasurableSpace C.Setup] [MeasurableSingletonClass C.Setup],
+      Measurable C.setup → ∀ (ℓ : C.Setup → ℝ) {G : Type} [DecidableEq G]
+        (Γ : U → G) [FiniteRange Γ],
+      (∀ f : G → Bool, Measurable fun u => C.concl u == f (Γ u)) →
       (∀ x : C.Setup, x ∈ realizedSetups C → massOn μ C.setup x ≠ 0) →
       stochasticInferenceComplexity μ C ℓ Γ 1 = inferenceComplexityTotal C ℓ Γ
 

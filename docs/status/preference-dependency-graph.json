@@ -308,46 +308,7 @@
     "AISafetyAtlas.Preference.Source.Fmap": {
       "kind": "definition",
       "deps": [
-        "AISafetyAtlas.Preference.Pair",
-        "AISafetyAtlas.Preference.Source.F\u2081",
-        "AISafetyAtlas.Preference.Source.F\u2082",
-        "AISafetyAtlas.Preference.Source.F\u2083",
-        "AISafetyAtlas.Preference.Source.F\u2084"
-      ]
-    },
-    "AISafetyAtlas.Preference.Source.F\u2081": {
-      "kind": "definition",
-      "deps": [
-        "AISafetyAtlas.Preference.Pair",
-        "AISafetyAtlas.Preference.op1",
-        "AISafetyAtlas.Preference.op3",
-        "AISafetyAtlas.Preference.op5"
-      ]
-    },
-    "AISafetyAtlas.Preference.Source.F\u2082": {
-      "kind": "definition",
-      "deps": [
-        "AISafetyAtlas.Preference.Pair",
-        "AISafetyAtlas.Preference.op2",
-        "AISafetyAtlas.Preference.op3",
-        "AISafetyAtlas.Preference.op6"
-      ]
-    },
-    "AISafetyAtlas.Preference.Source.F\u2083": {
-      "kind": "definition",
-      "deps": [
-        "AISafetyAtlas.Preference.Pair",
-        "AISafetyAtlas.Preference.op2",
-        "AISafetyAtlas.Preference.op3",
-        "AISafetyAtlas.Preference.op4",
-        "AISafetyAtlas.Preference.op6"
-      ]
-    },
-    "AISafetyAtlas.Preference.Source.F\u2084": {
-      "kind": "definition",
-      "deps": [
-        "AISafetyAtlas.Preference.Pair",
-        "AISafetyAtlas.Preference.op4"
+        "AISafetyAtlas.Preference.Pair"
       ]
     },
     "AISafetyAtlas.Preference.Source.ReasonableForF": {
@@ -371,47 +332,6 @@
         "AISafetyAtlas.Preference.Pair",
         "AISafetyAtlas.Preference.Policy",
         "AISafetyAtlas.Preference.op3"
-      ]
-    },
-    "AISafetyAtlas.Preference.Source.ReasonableForF.F\u2081_of_compatible": {
-      "kind": "theorem",
-      "deps": [
-        "AISafetyAtlas.Preference.Pair",
-        "AISafetyAtlas.Preference.Policy",
-        "AISafetyAtlas.Preference.Source.F\u2081",
-        "AISafetyAtlas.Preference.Source.ReasonableForF.Compatible",
-        "AISafetyAtlas.Preference.op1",
-        "AISafetyAtlas.Preference.op5"
-      ]
-    },
-    "AISafetyAtlas.Preference.Source.ReasonableForF.F\u2082_of_compatible": {
-      "kind": "theorem",
-      "deps": [
-        "AISafetyAtlas.Preference.Pair",
-        "AISafetyAtlas.Preference.Policy",
-        "AISafetyAtlas.Preference.Source.F\u2082",
-        "AISafetyAtlas.Preference.Source.ReasonableForF.Compatible",
-        "AISafetyAtlas.Preference.op2",
-        "AISafetyAtlas.Preference.op6"
-      ]
-    },
-    "AISafetyAtlas.Preference.Source.ReasonableForF.F\u2083_of_compatible": {
-      "kind": "theorem",
-      "deps": [
-        "AISafetyAtlas.Preference.Pair",
-        "AISafetyAtlas.Preference.Policy",
-        "AISafetyAtlas.Preference.Source.F\u2083",
-        "AISafetyAtlas.Preference.Source.ReasonableForF.Compatible",
-        "AISafetyAtlas.Preference.op2",
-        "AISafetyAtlas.Preference.op4",
-        "AISafetyAtlas.Preference.op6"
-      ]
-    },
-    "AISafetyAtlas.Preference.Source.ReasonableForF.F\u2084_F\u2084": {
-      "kind": "theorem",
-      "deps": [
-        "AISafetyAtlas.Preference.Pair",
-        "AISafetyAtlas.Preference.Source.F\u2084"
       ]
     },
     "AISafetyAtlas.Preference.Source.ReasonableForF.NotAmongLowestCompatible": {
@@ -490,7 +410,6 @@
       "deps": [
         "AISafetyAtlas.Preference.Pair",
         "AISafetyAtlas.Preference.Policy",
-        "AISafetyAtlas.Preference.Source.F\u2084",
         "AISafetyAtlas.Preference.Source.ReasonableForF",
         "AISafetyAtlas.Preference.Source.ReasonableForF.Compatible",
         "AISafetyAtlas.Preference.Source.ReasonableForF.KPair",

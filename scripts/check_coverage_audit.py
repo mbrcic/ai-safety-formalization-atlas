@@ -42,7 +42,7 @@ EXTERNAL_ROOTS = {
     "Fin", "Prod", "Bool", "Classical", "ENNReal", "Filter", "Fintype", "Mathlib",
     "MeasureTheory", "ProbabilityTheory", "PFR", "GaloisField", "IsUniform",
     "CondIndepFun", "IndepFun", "SimpleGraph", "FiniteRange",
-    "IsProbabilityMeasure", "IsZeroOrProbabilityMeasure",
+    "IsProbabilityMeasure", "IsZeroOrProbabilityMeasure", "LinearOrder",
 }
 # Mathlib names that are lowercase-initial, so the "looks like an atlas
 # declaration" heuristic below would otherwise flag them.

@@ -1,0 +1,4149 @@
+{
+  "note": "Edges are: for a definition, its type and body; for a theorem, its statement only. Lean's module system does not export proof terms.",
+  "cluster": "AISafetyAtlas.Causal.",
+  "declarations": {
+    "AISafetyAtlas.Causal.AdmissibleFamily": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Model.HasRegretAtMost",
+        "AISafetyAtlas.Causal.PolicyFamily",
+        "AISafetyAtlas.Causal.ProbMixture",
+        "AISafetyAtlas.Causal.Skeleton",
+        "AISafetyAtlas.Causal.Skeleton.observed"
+      ]
+    },
+    "AISafetyAtlas.Causal.Assignment": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Causal.BasicSemialgebraic": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.PolySign",
+        "AISafetyAtlas.Causal.PolySign.Holds"
+      ]
+    },
+    "AISafetyAtlas.Causal.CID": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Causal.CID.IsDecision": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.CID",
+        "AISafetyAtlas.Causal.CID.kind",
+        "AISafetyAtlas.Causal.NodeKind",
+        "AISafetyAtlas.Causal.NodeKind.decision"
+      ]
+    },
+    "AISafetyAtlas.Causal.CID.IsDescendant": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.CID",
+        "AISafetyAtlas.Causal.CID.parents"
+      ]
+    },
+    "AISafetyAtlas.Causal.CID.IsSingleDecision": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.CID",
+        "AISafetyAtlas.Causal.CID.decisions"
+      ]
+    },
+    "AISafetyAtlas.Causal.CID.IsUtility": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.CID",
+        "AISafetyAtlas.Causal.CID.kind",
+        "AISafetyAtlas.Causal.NodeKind",
+        "AISafetyAtlas.Causal.NodeKind.utility"
+      ]
+    },
+    "AISafetyAtlas.Causal.CID.IsWellFounded": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.CID"
+      ]
+    },
+    "AISafetyAtlas.Causal.CID.NotDownstream": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.CID",
+        "AISafetyAtlas.Causal.CID.IsDecision",
+        "AISafetyAtlas.Causal.CID.IsDescendant"
+      ]
+    },
+    "AISafetyAtlas.Causal.CID.decisions": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.CID",
+        "AISafetyAtlas.Causal.CID.kind",
+        "AISafetyAtlas.Causal.NodeKind",
+        "AISafetyAtlas.Causal.NodeKind.decision"
+      ]
+    },
+    "AISafetyAtlas.Causal.CID.decisions_disjoint_utilities": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.CID",
+        "AISafetyAtlas.Causal.CID.decisions",
+        "AISafetyAtlas.Causal.CID.utilities"
+      ]
+    },
+    "AISafetyAtlas.Causal.CID.instDecidableIsDecision": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.CID",
+        "AISafetyAtlas.Causal.CID.IsDecision",
+        "AISafetyAtlas.Causal.CID.kind",
+        "AISafetyAtlas.Causal.NodeKind",
+        "AISafetyAtlas.Causal.NodeKind.decision"
+      ]
+    },
+    "AISafetyAtlas.Causal.CID.instDecidableIsUtility": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.CID",
+        "AISafetyAtlas.Causal.CID.IsUtility",
+        "AISafetyAtlas.Causal.CID.kind",
+        "AISafetyAtlas.Causal.NodeKind",
+        "AISafetyAtlas.Causal.NodeKind.utility"
+      ]
+    },
+    "AISafetyAtlas.Causal.CID.mem_decisions_iff": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.CID",
+        "AISafetyAtlas.Causal.CID.IsDecision",
+        "AISafetyAtlas.Causal.CID.decisions"
+      ]
+    },
+    "AISafetyAtlas.Causal.CID.mem_utilities_iff": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.CID",
+        "AISafetyAtlas.Causal.CID.IsUtility",
+        "AISafetyAtlas.Causal.CID.utilities"
+      ]
+    },
+    "AISafetyAtlas.Causal.CID.notDownstream_of_mem_parents": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.CID",
+        "AISafetyAtlas.Causal.CID.NotDownstream",
+        "AISafetyAtlas.Causal.CID.parents"
+      ]
+    },
+    "AISafetyAtlas.Causal.CID.not_isDecision_of_notDownstream": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.CID",
+        "AISafetyAtlas.Causal.CID.IsDecision",
+        "AISafetyAtlas.Causal.CID.NotDownstream"
+      ]
+    },
+    "AISafetyAtlas.Causal.CID.observations": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.CID",
+        "AISafetyAtlas.Causal.CID.parents"
+      ]
+    },
+    "AISafetyAtlas.Causal.CID.structureNodes": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.CID",
+        "AISafetyAtlas.Causal.CID.kind",
+        "AISafetyAtlas.Causal.NodeKind"
+      ]
+    },
+    "AISafetyAtlas.Causal.CID.utilities": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.CID",
+        "AISafetyAtlas.Causal.CID.kind",
+        "AISafetyAtlas.Causal.NodeKind",
+        "AISafetyAtlas.Causal.NodeKind.utility"
+      ]
+    },
+    "AISafetyAtlas.Causal.ChartIndex": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.ParentConfig"
+      ]
+    },
+    "AISafetyAtlas.Causal.ChartIndex.extend": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.Assignment",
+        "AISafetyAtlas.Causal.ChartIndex",
+        "AISafetyAtlas.Causal.ParentConfig",
+        "AISafetyAtlas.Causal.binaryDim"
+      ]
+    },
+    "AISafetyAtlas.Causal.ClosedBox": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Causal.CodeSym": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Causal.CodeSym.isDigit": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.CodeSym"
+      ]
+    },
+    "AISafetyAtlas.Causal.CodeSym.isDigit_ofBool": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.CodeSym.isDigit",
+        "AISafetyAtlas.Causal.CodeSym.ofBool"
+      ]
+    },
+    "AISafetyAtlas.Causal.CodeSym.ofBool": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.CodeSym",
+        "AISafetyAtlas.Causal.CodeSym.one",
+        "AISafetyAtlas.Causal.CodeSym.zero"
+      ]
+    },
+    "AISafetyAtlas.Causal.CodeSym.ofBool_injective": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.CodeSym",
+        "AISafetyAtlas.Causal.CodeSym.ofBool"
+      ]
+    },
+    "AISafetyAtlas.Causal.CodeSym.one": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.CodeSym"
+      ]
+    },
+    "AISafetyAtlas.Causal.CodeSym.sep": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.CodeSym"
+      ]
+    },
+    "AISafetyAtlas.Causal.CodeSym.zero": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.CodeSym"
+      ]
+    },
+    "AISafetyAtlas.Causal.ConditionalTables": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Causal.ConditionalTables.family": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.Assignment",
+        "AISafetyAtlas.Causal.ConditionalTables",
+        "AISafetyAtlas.Causal.ConditionalTables.table",
+        "AISafetyAtlas.Causal.InterventionalFamily"
+      ]
+    },
+    "AISafetyAtlas.Causal.ContainsChartBox": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.ChartIndex",
+        "AISafetyAtlas.Causal.ClosedBox",
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Model.chartSlice",
+        "AISafetyAtlas.Causal.binaryDim"
+      ]
+    },
+    "AISafetyAtlas.Causal.DecisionNetwork": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Causal.DecisionNetwork.IsChance": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.DecisionNetwork",
+        "AISafetyAtlas.Causal.DecisionNetwork.decision",
+        "AISafetyAtlas.Causal.DecisionNetwork.utility"
+      ]
+    },
+    "AISafetyAtlas.Causal.DecisionNetwork.IsDeterministicUtility": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.Assignment",
+        "AISafetyAtlas.Causal.DecisionNetwork",
+        "AISafetyAtlas.Causal.DecisionNetwork.net",
+        "AISafetyAtlas.Causal.DecisionNetwork.utility",
+        "AISafetyAtlas.Causal.Model.cpt"
+      ]
+    },
+    "AISafetyAtlas.Causal.DecisionNetwork.IsOptimal": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.DecisionNetwork",
+        "AISafetyAtlas.Causal.DecisionNetwork.Policy",
+        "AISafetyAtlas.Causal.DecisionNetwork.expectedUtility"
+      ]
+    },
+    "AISafetyAtlas.Causal.DecisionNetwork.IsUnmediated": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.DecisionNetwork",
+        "AISafetyAtlas.Causal.DecisionNetwork.decision",
+        "AISafetyAtlas.Causal.DecisionNetwork.net",
+        "AISafetyAtlas.Causal.DecisionNetwork.utility",
+        "AISafetyAtlas.Causal.Model.properAncestors",
+        "AISafetyAtlas.Causal.Model.properDescendants"
+      ]
+    },
+    "AISafetyAtlas.Causal.DecisionNetwork.Policy": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.DecisionNetwork",
+        "AISafetyAtlas.Causal.DecisionNetwork.decision",
+        "AISafetyAtlas.Causal.DecisionNetwork.net",
+        "AISafetyAtlas.Causal.DecisionPolicy"
+      ]
+    },
+    "AISafetyAtlas.Causal.DecisionNetwork.decision_notMem_parents_of_isUnmediated": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.DecisionNetwork",
+        "AISafetyAtlas.Causal.DecisionNetwork.IsUnmediated",
+        "AISafetyAtlas.Causal.DecisionNetwork.decision",
+        "AISafetyAtlas.Causal.DecisionNetwork.net",
+        "AISafetyAtlas.Causal.DecisionNetwork.utility",
+        "AISafetyAtlas.Causal.Model.parents",
+        "AISafetyAtlas.Causal.Model.properAncestors"
+      ]
+    },
+    "AISafetyAtlas.Causal.DecisionNetwork.exists_utilityFunction": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.Assignment",
+        "AISafetyAtlas.Causal.DecisionNetwork",
+        "AISafetyAtlas.Causal.DecisionNetwork.IsDeterministicUtility",
+        "AISafetyAtlas.Causal.DecisionNetwork.net",
+        "AISafetyAtlas.Causal.DecisionNetwork.utility",
+        "AISafetyAtlas.Causal.Model.cpt",
+        "AISafetyAtlas.Causal.Model.parents"
+      ]
+    },
+    "AISafetyAtlas.Causal.DecisionNetwork.expectedUtility": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.Assignment",
+        "AISafetyAtlas.Causal.DecisionNetwork",
+        "AISafetyAtlas.Causal.DecisionNetwork.Policy",
+        "AISafetyAtlas.Causal.DecisionNetwork.decision",
+        "AISafetyAtlas.Causal.DecisionNetwork.net",
+        "AISafetyAtlas.Causal.DecisionNetwork.utility",
+        "AISafetyAtlas.Causal.DecisionNetwork.uval",
+        "AISafetyAtlas.Causal.Model.jointProb",
+        "AISafetyAtlas.Causal.Model.observationalProfile",
+        "AISafetyAtlas.Causal.Model.withPolicy"
+      ]
+    },
+    "AISafetyAtlas.Causal.DecisionNetwork.instNonemptyPolicy": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.DecisionNetwork",
+        "AISafetyAtlas.Causal.DecisionNetwork.Policy"
+      ]
+    },
+    "AISafetyAtlas.Causal.DecisionNetwork.mem_parents_utility_of_isUnmediated": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.DecisionNetwork",
+        "AISafetyAtlas.Causal.DecisionNetwork.IsUnmediated",
+        "AISafetyAtlas.Causal.DecisionNetwork.decision",
+        "AISafetyAtlas.Causal.DecisionNetwork.net",
+        "AISafetyAtlas.Causal.DecisionNetwork.utility",
+        "AISafetyAtlas.Causal.Model.parents",
+        "AISafetyAtlas.Causal.Model.properAncestors"
+      ]
+    },
+    "AISafetyAtlas.Causal.DecisionNetwork.regret": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.DecisionNetwork",
+        "AISafetyAtlas.Causal.DecisionNetwork.Policy",
+        "AISafetyAtlas.Causal.DecisionNetwork.expectedUtility"
+      ]
+    },
+    "AISafetyAtlas.Causal.DecisionNetwork.regret_nonneg": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.DecisionNetwork",
+        "AISafetyAtlas.Causal.DecisionNetwork.IsOptimal",
+        "AISafetyAtlas.Causal.DecisionNetwork.Policy",
+        "AISafetyAtlas.Causal.DecisionNetwork.regret"
+      ]
+    },
+    "AISafetyAtlas.Causal.DecisionNetwork.regret_self": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.DecisionNetwork",
+        "AISafetyAtlas.Causal.DecisionNetwork.Policy",
+        "AISafetyAtlas.Causal.DecisionNetwork.regret"
+      ]
+    },
+    "AISafetyAtlas.Causal.DecisionPolicy": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.Model"
+      ]
+    },
+    "AISafetyAtlas.Causal.ExoAssignment": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Causal.HasPolySizeAt": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.ChartIndex",
+        "AISafetyAtlas.Causal.IsCompatibleGraph",
+        "AISafetyAtlas.Causal.O24Assignment",
+        "AISafetyAtlas.Causal.O24Var",
+        "AISafetyAtlas.Causal.ParentConfig",
+        "AISafetyAtlas.Causal.UtilityConfig",
+        "AISafetyAtlas.Causal.o24Size",
+        "AISafetyAtlas.Causal.polySize"
+      ]
+    },
+    "AISafetyAtlas.Causal.HasPolySizeList": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.HasPolySizeAt",
+        "AISafetyAtlas.Causal.O24Assignment"
+      ]
+    },
+    "AISafetyAtlas.Causal.InIdentifiedSet": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.AdmissibleFamily",
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.PolicyFamily",
+        "AISafetyAtlas.Causal.Skeleton",
+        "AISafetyAtlas.Causal.Skeleton.MarginClass"
+      ]
+    },
+    "AISafetyAtlas.Causal.InterventionProfile": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.LocalIntervention"
+      ]
+    },
+    "AISafetyAtlas.Causal.InterventionalFamily": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.Assignment"
+      ]
+    },
+    "AISafetyAtlas.Causal.IsCausalBayesNetwork": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.Assignment",
+        "AISafetyAtlas.Causal.ConditionalTables",
+        "AISafetyAtlas.Causal.ConditionalTables.table",
+        "AISafetyAtlas.Causal.InterventionalFamily",
+        "AISafetyAtlas.Causal.forcedTable"
+      ]
+    },
+    "AISafetyAtlas.Causal.IsCompactSemialgebraicClass": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.ChartIndex",
+        "AISafetyAtlas.Causal.IsSemialgebraic",
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Model.chartSlice",
+        "AISafetyAtlas.Causal.binaryDim"
+      ]
+    },
+    "AISafetyAtlas.Causal.IsCompatibleGraph": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Causal.IsNonadaptiveRandomizedStrategy": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.RandomizedQueryStrategy",
+        "AISafetyAtlas.Causal.ShiftedQuery",
+        "AISafetyAtlas.Causal.Skeleton",
+        "AISafetyAtlas.Causal.Transcript"
+      ]
+    },
+    "AISafetyAtlas.Causal.IsPrefixCode": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.CodeSym"
+      ]
+    },
+    "AISafetyAtlas.Causal.IsPrefixCode.injective": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.CodeSym",
+        "AISafetyAtlas.Causal.IsPrefixCode"
+      ]
+    },
+    "AISafetyAtlas.Causal.IsPrefixCode.list": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.CodeSym",
+        "AISafetyAtlas.Causal.IsPrefixCode",
+        "AISafetyAtlas.Causal.encodeList"
+      ]
+    },
+    "AISafetyAtlas.Causal.IsPrefixCode.ofBoolList": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.IsPrefixCode",
+        "AISafetyAtlas.Causal.encodeBoolList"
+      ]
+    },
+    "AISafetyAtlas.Causal.IsPrefixCode.pair": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.CodeSym",
+        "AISafetyAtlas.Causal.IsPrefixCode"
+      ]
+    },
+    "AISafetyAtlas.Causal.IsProbabilityMixture": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.InterventionProfile",
+        "AISafetyAtlas.Causal.LocalIntervention",
+        "AISafetyAtlas.Causal.Mixture"
+      ]
+    },
+    "AISafetyAtlas.Causal.IsRadius": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.Skeleton",
+        "AISafetyAtlas.Causal.radiusErrors"
+      ]
+    },
+    "AISafetyAtlas.Causal.IsSemialgebraic": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.BasicSemialgebraic",
+        "AISafetyAtlas.Causal.PolySign"
+      ]
+    },
+    "AISafetyAtlas.Causal.IsSemialgebraic.basic": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.BasicSemialgebraic",
+        "AISafetyAtlas.Causal.IsSemialgebraic",
+        "AISafetyAtlas.Causal.PolySign"
+      ]
+    },
+    "AISafetyAtlas.Causal.IsSemialgebraic.compl": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.IsSemialgebraic"
+      ]
+    },
+    "AISafetyAtlas.Causal.IsSemialgebraic.inter": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.IsSemialgebraic"
+      ]
+    },
+    "AISafetyAtlas.Causal.IsSemialgebraic.sdiff": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.IsSemialgebraic"
+      ]
+    },
+    "AISafetyAtlas.Causal.IsSemialgebraic.union": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.IsSemialgebraic"
+      ]
+    },
+    "AISafetyAtlas.Causal.LocalIntervention": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Causal.MeasureEstimator": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Skeleton",
+        "AISafetyAtlas.Causal.Transcript",
+        "AISafetyAtlas.Causal.instMeasurableSpaceModel"
+      ]
+    },
+    "AISafetyAtlas.Causal.MeasureEstimator.discretize": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.MeasureEstimator",
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Model.roundDown",
+        "AISafetyAtlas.Causal.RandomizedEstimator",
+        "AISafetyAtlas.Causal.Skeleton",
+        "AISafetyAtlas.Causal.Transcript",
+        "AISafetyAtlas.Causal.instMeasurableSpaceModel"
+      ]
+    },
+    "AISafetyAtlas.Causal.Mixture": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.InterventionProfile"
+      ]
+    },
+    "AISafetyAtlas.Causal.Model": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Causal.Model.HasRegretAtMost": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Model.regret",
+        "AISafetyAtlas.Causal.Policy",
+        "AISafetyAtlas.Causal.ProbMixture",
+        "AISafetyAtlas.Causal.Skeleton"
+      ]
+    },
+    "AISafetyAtlas.Causal.Model.IsOptimal": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Model.regret",
+        "AISafetyAtlas.Causal.Policy",
+        "AISafetyAtlas.Causal.ProbMixture",
+        "AISafetyAtlas.Causal.Skeleton"
+      ]
+    },
+    "AISafetyAtlas.Causal.Model.ParentClosed": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Model.parents"
+      ]
+    },
+    "AISafetyAtlas.Causal.Model.SelfDetermining": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.Assignment",
+        "AISafetyAtlas.Causal.InterventionProfile",
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Model.factor"
+      ]
+    },
+    "AISafetyAtlas.Causal.Model.abs_cpt_roundDown_sub": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.Assignment",
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Model.cpt",
+        "AISafetyAtlas.Causal.Model.roundDown"
+      ]
+    },
+    "AISafetyAtlas.Causal.Model.agreeSet": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.Assignment"
+      ]
+    },
+    "AISafetyAtlas.Causal.Model.agreeSet_filter": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.Assignment",
+        "AISafetyAtlas.Causal.Model.agreeSet"
+      ]
+    },
+    "AISafetyAtlas.Causal.Model.agreeSet_univ": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.Assignment",
+        "AISafetyAtlas.Causal.Model.agreeSet"
+      ]
+    },
+    "AISafetyAtlas.Causal.Model.ancestors": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Model.ParentClosed",
+        "AISafetyAtlas.Causal.Model.instDecidableParentClosed"
+      ]
+    },
+    "AISafetyAtlas.Causal.Model.ancestors_eq_univ_iff": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Model.ParentClosed",
+        "AISafetyAtlas.Causal.Model.ancestors"
+      ]
+    },
+    "AISafetyAtlas.Causal.Model.ancestors_singleton_subset": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Model.ancestors"
+      ]
+    },
+    "AISafetyAtlas.Causal.Model.ancestors_subset": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Model.ParentClosed",
+        "AISafetyAtlas.Causal.Model.ancestors"
+      ]
+    },
+    "AISafetyAtlas.Causal.Model.bestDecision": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.Assignment",
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Model.fibreScore",
+        "AISafetyAtlas.Causal.ProbMixture",
+        "AISafetyAtlas.Causal.Skeleton"
+      ]
+    },
+    "AISafetyAtlas.Causal.Model.bestPolicy": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.Assignment",
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Model.bestDecision",
+        "AISafetyAtlas.Causal.Policy",
+        "AISafetyAtlas.Causal.ProbMixture",
+        "AISafetyAtlas.Causal.Skeleton",
+        "AISafetyAtlas.Causal.fibreRep"
+      ]
+    },
+    "AISafetyAtlas.Causal.Model.chart": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.ChartIndex",
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Model.chartOn",
+        "AISafetyAtlas.Causal.Model.parents",
+        "AISafetyAtlas.Causal.binaryDim"
+      ]
+    },
+    "AISafetyAtlas.Causal.Model.chartOn": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.ChartIndex",
+        "AISafetyAtlas.Causal.ChartIndex.extend",
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Model.cpt",
+        "AISafetyAtlas.Causal.ParentConfig",
+        "AISafetyAtlas.Causal.binaryDim"
+      ]
+    },
+    "AISafetyAtlas.Causal.Model.chartOn_apply": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.Assignment",
+        "AISafetyAtlas.Causal.ChartIndex",
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Model.chartOn",
+        "AISafetyAtlas.Causal.Model.cpt",
+        "AISafetyAtlas.Causal.Model.parents",
+        "AISafetyAtlas.Causal.ParentConfig",
+        "AISafetyAtlas.Causal.binaryDim"
+      ]
+    },
+    "AISafetyAtlas.Causal.Model.chartOn_mem_unitInterval": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.ChartIndex",
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Model.chartOn",
+        "AISafetyAtlas.Causal.binaryDim"
+      ]
+    },
+    "AISafetyAtlas.Causal.Model.chartOn_ofChart": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.ChartIndex",
+        "AISafetyAtlas.Causal.Model.chartOn",
+        "AISafetyAtlas.Causal.Model.ofChart"
+      ]
+    },
+    "AISafetyAtlas.Causal.Model.chartSlice": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.ChartIndex",
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Model.chartOn",
+        "AISafetyAtlas.Causal.Model.parents",
+        "AISafetyAtlas.Causal.binaryDim"
+      ]
+    },
+    "AISafetyAtlas.Causal.Model.cpt_eq_one_unique": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.Assignment",
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Model.cpt"
+      ]
+    },
+    "AISafetyAtlas.Causal.Model.cpt_le_one": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.Assignment",
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Model.cpt"
+      ]
+    },
+    "AISafetyAtlas.Causal.Model.cpt_mapRat": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.Assignment",
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Model.cpt",
+        "AISafetyAtlas.Causal.Model.mapRat"
+      ]
+    },
+    "AISafetyAtlas.Causal.Model.factor": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.Assignment",
+        "AISafetyAtlas.Causal.InterventionProfile",
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Model.cpt"
+      ]
+    },
+    "AISafetyAtlas.Causal.Model.factor_congr": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.Assignment",
+        "AISafetyAtlas.Causal.InterventionProfile",
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Model.factor",
+        "AISafetyAtlas.Causal.Model.parents"
+      ]
+    },
+    "AISafetyAtlas.Causal.Model.factor_eq_re24": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.Assignment",
+        "AISafetyAtlas.Causal.InterventionProfile",
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Model.cpt",
+        "AISafetyAtlas.Causal.Model.factor"
+      ]
+    },
+    "AISafetyAtlas.Causal.Model.factor_fixProfile": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.Assignment",
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Model.factor",
+        "AISafetyAtlas.Causal.fixProfile"
+      ]
+    },
+    "AISafetyAtlas.Causal.Model.factor_hardInterventionProfile": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.Assignment",
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Model.cpt",
+        "AISafetyAtlas.Causal.Model.factor",
+        "AISafetyAtlas.Causal.hardInterventionProfile"
+      ]
+    },
+    "AISafetyAtlas.Causal.Model.factor_mapRat": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.Assignment",
+        "AISafetyAtlas.Causal.InterventionProfile",
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Model.factor",
+        "AISafetyAtlas.Causal.Model.mapRat"
+      ]
+    },
+    "AISafetyAtlas.Causal.Model.factor_nonneg": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.Assignment",
+        "AISafetyAtlas.Causal.InterventionProfile",
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Model.factor"
+      ]
+    },
+    "AISafetyAtlas.Causal.Model.factor_sum": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.Assignment",
+        "AISafetyAtlas.Causal.InterventionProfile",
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Model.factor"
+      ]
+    },
+    "AISafetyAtlas.Causal.Model.fibreScore": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.Assignment",
+        "AISafetyAtlas.Causal.IsProbabilityMixture",
+        "AISafetyAtlas.Causal.Mixture",
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Model.jointProbMix",
+        "AISafetyAtlas.Causal.ProbMixture",
+        "AISafetyAtlas.Causal.Skeleton",
+        "AISafetyAtlas.Causal.Skeleton.utility"
+      ]
+    },
+    "AISafetyAtlas.Causal.Model.fibreScore_le_best": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.Assignment",
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Model.bestDecision",
+        "AISafetyAtlas.Causal.Model.fibreScore",
+        "AISafetyAtlas.Causal.ProbMixture",
+        "AISafetyAtlas.Causal.Skeleton"
+      ]
+    },
+    "AISafetyAtlas.Causal.Model.fibreScore_true_sub_false": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.Assignment",
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Model.fibreScore",
+        "AISafetyAtlas.Causal.ProbMixture",
+        "AISafetyAtlas.Causal.Skeleton",
+        "AISafetyAtlas.Causal.Skeleton.gap"
+      ]
+    },
+    "AISafetyAtlas.Causal.Model.hardInterventionProfile_empty": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.Assignment",
+        "AISafetyAtlas.Causal.InterventionProfile",
+        "AISafetyAtlas.Causal.Model.observationalProfile",
+        "AISafetyAtlas.Causal.hardInterventionProfile"
+      ]
+    },
+    "AISafetyAtlas.Causal.Model.instDecidableParentClosed": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Model.ParentClosed",
+        "AISafetyAtlas.Causal.Model.parents"
+      ]
+    },
+    "AISafetyAtlas.Causal.Model.interventionalFamily": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.Assignment",
+        "AISafetyAtlas.Causal.InterventionalFamily",
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Model.jointProb",
+        "AISafetyAtlas.Causal.hardInterventionProfile"
+      ]
+    },
+    "AISafetyAtlas.Causal.Model.interventionalFamily_eq": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.ConditionalTables.family",
+        "AISafetyAtlas.Causal.InterventionalFamily",
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Model.interventionalFamily",
+        "AISafetyAtlas.Causal.Model.parents",
+        "AISafetyAtlas.Causal.Model.tables"
+      ]
+    },
+    "AISafetyAtlas.Causal.Model.isCausalBayesNetwork": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.IsCausalBayesNetwork",
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Model.interventionalFamily",
+        "AISafetyAtlas.Causal.Model.parents"
+      ]
+    },
+    "AISafetyAtlas.Causal.Model.isOptimal_iff_regret_zero": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Model.IsOptimal",
+        "AISafetyAtlas.Causal.Model.regret",
+        "AISafetyAtlas.Causal.Policy",
+        "AISafetyAtlas.Causal.ProbMixture",
+        "AISafetyAtlas.Causal.Skeleton"
+      ]
+    },
+    "AISafetyAtlas.Causal.Model.jointProb": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.Assignment",
+        "AISafetyAtlas.Causal.InterventionProfile",
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Model.factor"
+      ]
+    },
+    "AISafetyAtlas.Causal.Model.jointProbMix": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.Assignment",
+        "AISafetyAtlas.Causal.InterventionProfile",
+        "AISafetyAtlas.Causal.LocalIntervention",
+        "AISafetyAtlas.Causal.Mixture",
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Model.jointProb"
+      ]
+    },
+    "AISafetyAtlas.Causal.Model.jointProbMix_nonneg": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.Assignment",
+        "AISafetyAtlas.Causal.IsProbabilityMixture",
+        "AISafetyAtlas.Causal.Mixture",
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Model.jointProbMix",
+        "AISafetyAtlas.Causal.ProbMixture"
+      ]
+    },
+    "AISafetyAtlas.Causal.Model.jointProbMix_sum": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.Assignment",
+        "AISafetyAtlas.Causal.IsProbabilityMixture",
+        "AISafetyAtlas.Causal.Mixture",
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Model.jointProbMix",
+        "AISafetyAtlas.Causal.ProbMixture"
+      ]
+    },
+    "AISafetyAtlas.Causal.Model.jointProb_fixProfile": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.Assignment",
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Model.jointProb",
+        "AISafetyAtlas.Causal.fixProfile"
+      ]
+    },
+    "AISafetyAtlas.Causal.Model.jointProb_hardInterventionProfile": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.Assignment",
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Model.cpt",
+        "AISafetyAtlas.Causal.Model.jointProb",
+        "AISafetyAtlas.Causal.hardInterventionProfile"
+      ]
+    },
+    "AISafetyAtlas.Causal.Model.jointProb_mapRat": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.Assignment",
+        "AISafetyAtlas.Causal.InterventionProfile",
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Model.jointProb",
+        "AISafetyAtlas.Causal.Model.mapRat"
+      ]
+    },
+    "AISafetyAtlas.Causal.Model.jointProb_nonneg": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.Assignment",
+        "AISafetyAtlas.Causal.InterventionProfile",
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Model.jointProb"
+      ]
+    },
+    "AISafetyAtlas.Causal.Model.jointProb_sum": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.Assignment",
+        "AISafetyAtlas.Causal.InterventionProfile",
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Model.jointProb"
+      ]
+    },
+    "AISafetyAtlas.Causal.Model.mapRat": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.Assignment",
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Model.acyclic",
+        "AISafetyAtlas.Causal.Model.cpt",
+        "AISafetyAtlas.Causal.Model.dim_pos",
+        "AISafetyAtlas.Causal.Model.parents"
+      ]
+    },
+    "AISafetyAtlas.Causal.Model.marginal": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.Assignment",
+        "AISafetyAtlas.Causal.InterventionProfile",
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Model.agreeSet",
+        "AISafetyAtlas.Causal.Model.jointProb"
+      ]
+    },
+    "AISafetyAtlas.Causal.Model.marginal_empty": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.Assignment",
+        "AISafetyAtlas.Causal.InterventionProfile",
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Model.marginal"
+      ]
+    },
+    "AISafetyAtlas.Causal.Model.marginal_eq_prod": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.Assignment",
+        "AISafetyAtlas.Causal.InterventionProfile",
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Model.SelfDetermining",
+        "AISafetyAtlas.Causal.Model.factor",
+        "AISafetyAtlas.Causal.Model.marginal"
+      ]
+    },
+    "AISafetyAtlas.Causal.Model.marginal_eq_prod_of_parentClosed": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.Assignment",
+        "AISafetyAtlas.Causal.InterventionProfile",
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Model.ParentClosed",
+        "AISafetyAtlas.Causal.Model.factor",
+        "AISafetyAtlas.Causal.Model.marginal"
+      ]
+    },
+    "AISafetyAtlas.Causal.Model.marginal_eq_sum_ancestral": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.Assignment",
+        "AISafetyAtlas.Causal.InterventionProfile",
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Model.ParentClosed",
+        "AISafetyAtlas.Causal.Model.agreeSet",
+        "AISafetyAtlas.Causal.Model.factor",
+        "AISafetyAtlas.Causal.Model.marginal"
+      ]
+    },
+    "AISafetyAtlas.Causal.Model.marginal_forced": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.Assignment",
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Model.marginal",
+        "AISafetyAtlas.Causal.hardInterventionProfile"
+      ]
+    },
+    "AISafetyAtlas.Causal.Model.marginal_insert_parents": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.Assignment",
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Model.marginal",
+        "AISafetyAtlas.Causal.Model.observationalProfile",
+        "AISafetyAtlas.Causal.Model.parents",
+        "AISafetyAtlas.Causal.hardInterventionProfile"
+      ]
+    },
+    "AISafetyAtlas.Causal.Model.marginal_singleton_do_parents": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.Assignment",
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Model.cpt",
+        "AISafetyAtlas.Causal.Model.marginal",
+        "AISafetyAtlas.Causal.Model.parents",
+        "AISafetyAtlas.Causal.hardInterventionProfile"
+      ]
+    },
+    "AISafetyAtlas.Causal.Model.marginal_union_targets": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.Assignment",
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Model.marginal",
+        "AISafetyAtlas.Causal.hardInterventionProfile"
+      ]
+    },
+    "AISafetyAtlas.Causal.Model.mem_agreeSet": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.Assignment",
+        "AISafetyAtlas.Causal.Model.agreeSet"
+      ]
+    },
+    "AISafetyAtlas.Causal.Model.mem_properAncestors_iff": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Model.ancestors",
+        "AISafetyAtlas.Causal.Model.properAncestors"
+      ]
+    },
+    "AISafetyAtlas.Causal.Model.mem_properAncestors_of_mem_parents": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Model.parents",
+        "AISafetyAtlas.Causal.Model.properAncestors"
+      ]
+    },
+    "AISafetyAtlas.Causal.Model.mem_properDescendants_iff": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Model.properAncestors",
+        "AISafetyAtlas.Causal.Model.properDescendants"
+      ]
+    },
+    "AISafetyAtlas.Causal.Model.ne_of_parents_ne": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Model.parents"
+      ]
+    },
+    "AISafetyAtlas.Causal.Model.notMem_parents_of_mem_ancestors": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Model.ancestors",
+        "AISafetyAtlas.Causal.Model.parents"
+      ]
+    },
+    "AISafetyAtlas.Causal.Model.notMem_parents_self": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Model.parents"
+      ]
+    },
+    "AISafetyAtlas.Causal.Model.observationalProfile": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.InterventionProfile",
+        "AISafetyAtlas.Causal.identityIntervention"
+      ]
+    },
+    "AISafetyAtlas.Causal.Model.ofChart": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.Assignment",
+        "AISafetyAtlas.Causal.ChartIndex",
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.ParentConfig",
+        "AISafetyAtlas.Causal.binaryDim"
+      ]
+    },
+    "AISafetyAtlas.Causal.Model.ofChart_chartOn": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Model.acyclic",
+        "AISafetyAtlas.Causal.Model.chartOn",
+        "AISafetyAtlas.Causal.Model.chartOn_mem_unitInterval",
+        "AISafetyAtlas.Causal.Model.ofChart",
+        "AISafetyAtlas.Causal.Model.parents",
+        "AISafetyAtlas.Causal.binaryDim"
+      ]
+    },
+    "AISafetyAtlas.Causal.Model.optimalValue": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.Assignment",
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Model.bestDecision",
+        "AISafetyAtlas.Causal.Model.fibreScore",
+        "AISafetyAtlas.Causal.ProbMixture",
+        "AISafetyAtlas.Causal.Skeleton",
+        "AISafetyAtlas.Causal.fibreRep"
+      ]
+    },
+    "AISafetyAtlas.Causal.Model.parentClosed_ancestors": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Model.ParentClosed",
+        "AISafetyAtlas.Causal.Model.ancestors"
+      ]
+    },
+    "AISafetyAtlas.Causal.Model.parents_mapRat": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Model.mapRat",
+        "AISafetyAtlas.Causal.Model.parents"
+      ]
+    },
+    "AISafetyAtlas.Causal.Model.parents_ofChart": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.ChartIndex",
+        "AISafetyAtlas.Causal.Model.ofChart",
+        "AISafetyAtlas.Causal.Model.parents",
+        "AISafetyAtlas.Causal.binaryDim"
+      ]
+    },
+    "AISafetyAtlas.Causal.Model.parents_roundDown": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Model.parents",
+        "AISafetyAtlas.Causal.Model.roundDown"
+      ]
+    },
+    "AISafetyAtlas.Causal.Model.preferredDecision": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.Assignment",
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.ProbMixture",
+        "AISafetyAtlas.Causal.Skeleton",
+        "AISafetyAtlas.Causal.Skeleton.gap"
+      ]
+    },
+    "AISafetyAtlas.Causal.Model.prob_true_eq_one_of_gap_pos": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.Assignment",
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Model.regret",
+        "AISafetyAtlas.Causal.Policy",
+        "AISafetyAtlas.Causal.Policy.prob",
+        "AISafetyAtlas.Causal.ProbMixture",
+        "AISafetyAtlas.Causal.Skeleton",
+        "AISafetyAtlas.Causal.Skeleton.gap",
+        "AISafetyAtlas.Causal.fibreRep"
+      ]
+    },
+    "AISafetyAtlas.Causal.Model.prob_true_eq_zero_of_gap_neg": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.Assignment",
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Model.regret",
+        "AISafetyAtlas.Causal.Policy",
+        "AISafetyAtlas.Causal.Policy.prob",
+        "AISafetyAtlas.Causal.ProbMixture",
+        "AISafetyAtlas.Causal.Skeleton",
+        "AISafetyAtlas.Causal.Skeleton.gap",
+        "AISafetyAtlas.Causal.fibreRep"
+      ]
+    },
+    "AISafetyAtlas.Causal.Model.properAncestors": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Model.ancestors"
+      ]
+    },
+    "AISafetyAtlas.Causal.Model.properDescendants": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Model.properAncestors"
+      ]
+    },
+    "AISafetyAtlas.Causal.Model.rank_le_of_mem_ancestors": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Model.ancestors",
+        "AISafetyAtlas.Causal.Model.parents"
+      ]
+    },
+    "AISafetyAtlas.Causal.Model.regret": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Model.optimalValue",
+        "AISafetyAtlas.Causal.Model.value",
+        "AISafetyAtlas.Causal.Policy",
+        "AISafetyAtlas.Causal.ProbMixture",
+        "AISafetyAtlas.Causal.Skeleton"
+      ]
+    },
+    "AISafetyAtlas.Causal.Model.regret_decomp": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.Assignment",
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Model.bestDecision",
+        "AISafetyAtlas.Causal.Model.fibreScore",
+        "AISafetyAtlas.Causal.Model.regret",
+        "AISafetyAtlas.Causal.Policy",
+        "AISafetyAtlas.Causal.Policy.prob",
+        "AISafetyAtlas.Causal.ProbMixture",
+        "AISafetyAtlas.Causal.Skeleton",
+        "AISafetyAtlas.Causal.fibreRep"
+      ]
+    },
+    "AISafetyAtlas.Causal.Model.regret_eq_zero_iff": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.Assignment",
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Model.bestDecision",
+        "AISafetyAtlas.Causal.Model.fibreScore",
+        "AISafetyAtlas.Causal.Model.regret",
+        "AISafetyAtlas.Causal.Policy",
+        "AISafetyAtlas.Causal.Policy.prob",
+        "AISafetyAtlas.Causal.ProbMixture",
+        "AISafetyAtlas.Causal.Skeleton",
+        "AISafetyAtlas.Causal.fibreRep"
+      ]
+    },
+    "AISafetyAtlas.Causal.Model.regret_nonneg": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Model.regret",
+        "AISafetyAtlas.Causal.Policy",
+        "AISafetyAtlas.Causal.ProbMixture",
+        "AISafetyAtlas.Causal.Skeleton"
+      ]
+    },
+    "AISafetyAtlas.Causal.Model.regret_signPolicy_eq_zero": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Model.regret",
+        "AISafetyAtlas.Causal.Model.signPolicy",
+        "AISafetyAtlas.Causal.ProbMixture",
+        "AISafetyAtlas.Causal.Skeleton"
+      ]
+    },
+    "AISafetyAtlas.Causal.Model.roundDown": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.Assignment",
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Model.acyclic",
+        "AISafetyAtlas.Causal.Model.cpt",
+        "AISafetyAtlas.Causal.Model.dim_pos",
+        "AISafetyAtlas.Causal.Model.parents",
+        "AISafetyAtlas.Causal.floorMul"
+      ]
+    },
+    "AISafetyAtlas.Causal.Model.roundDown_eq_of_roundKey_eq": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.Assignment",
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Model.roundDown",
+        "AISafetyAtlas.Causal.Model.roundKey"
+      ]
+    },
+    "AISafetyAtlas.Causal.Model.roundKey": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.Assignment",
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Model.cpt",
+        "AISafetyAtlas.Causal.Model.parents"
+      ]
+    },
+    "AISafetyAtlas.Causal.Model.selfDetermining_of_parentClosed": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.InterventionProfile",
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Model.ParentClosed",
+        "AISafetyAtlas.Causal.Model.SelfDetermining"
+      ]
+    },
+    "AISafetyAtlas.Causal.Model.selfDetermining_of_subset_targets": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.Assignment",
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Model.SelfDetermining",
+        "AISafetyAtlas.Causal.hardInterventionProfile"
+      ]
+    },
+    "AISafetyAtlas.Causal.Model.signPolicy": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.Assignment",
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Model.preferredDecision",
+        "AISafetyAtlas.Causal.Policy",
+        "AISafetyAtlas.Causal.ProbMixture",
+        "AISafetyAtlas.Causal.Skeleton"
+      ]
+    },
+    "AISafetyAtlas.Causal.Model.signPolicy_eq_of_behaviorEq": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Model.signPolicy",
+        "AISafetyAtlas.Causal.Policy",
+        "AISafetyAtlas.Causal.ProbMixture",
+        "AISafetyAtlas.Causal.Skeleton",
+        "AISafetyAtlas.Causal.Skeleton.BehaviorEq",
+        "AISafetyAtlas.Causal.Skeleton.observed"
+      ]
+    },
+    "AISafetyAtlas.Causal.Model.subset_ancestors": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Model.ancestors"
+      ]
+    },
+    "AISafetyAtlas.Causal.Model.sum_weighted_congr": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.Assignment",
+        "AISafetyAtlas.Causal.InterventionProfile",
+        "AISafetyAtlas.Causal.Model"
+      ]
+    },
+    "AISafetyAtlas.Causal.Model.tables": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.ConditionalTables",
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Model.cpt",
+        "AISafetyAtlas.Causal.Model.cpt_nonneg",
+        "AISafetyAtlas.Causal.Model.cpt_sum",
+        "AISafetyAtlas.Causal.Model.parents"
+      ]
+    },
+    "AISafetyAtlas.Causal.Model.value": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.Assignment",
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Model.fibreScore",
+        "AISafetyAtlas.Causal.Policy",
+        "AISafetyAtlas.Causal.Policy.prob",
+        "AISafetyAtlas.Causal.ProbMixture",
+        "AISafetyAtlas.Causal.Skeleton",
+        "AISafetyAtlas.Causal.fibreRep"
+      ]
+    },
+    "AISafetyAtlas.Causal.Model.value_bestPolicy": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Model.bestPolicy",
+        "AISafetyAtlas.Causal.Model.optimalValue",
+        "AISafetyAtlas.Causal.Model.value",
+        "AISafetyAtlas.Causal.ProbMixture",
+        "AISafetyAtlas.Causal.Skeleton"
+      ]
+    },
+    "AISafetyAtlas.Causal.Model.value_const_sub": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.IsProbabilityMixture",
+        "AISafetyAtlas.Causal.Mixture",
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Model.value",
+        "AISafetyAtlas.Causal.Policy.const",
+        "AISafetyAtlas.Causal.ProbMixture",
+        "AISafetyAtlas.Causal.Skeleton",
+        "AISafetyAtlas.Causal.Skeleton.gap"
+      ]
+    },
+    "AISafetyAtlas.Causal.Model.value_eq": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.Assignment",
+        "AISafetyAtlas.Causal.IsProbabilityMixture",
+        "AISafetyAtlas.Causal.Mixture",
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Model.jointProbMix",
+        "AISafetyAtlas.Causal.Model.value",
+        "AISafetyAtlas.Causal.Policy",
+        "AISafetyAtlas.Causal.Policy.prob",
+        "AISafetyAtlas.Causal.ProbMixture",
+        "AISafetyAtlas.Causal.Skeleton",
+        "AISafetyAtlas.Causal.Skeleton.utility"
+      ]
+    },
+    "AISafetyAtlas.Causal.Model.value_le_optimal": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Model.optimalValue",
+        "AISafetyAtlas.Causal.Model.value",
+        "AISafetyAtlas.Causal.Policy",
+        "AISafetyAtlas.Causal.ProbMixture",
+        "AISafetyAtlas.Causal.Skeleton"
+      ]
+    },
+    "AISafetyAtlas.Causal.Model.value_le_sign": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Model.signPolicy",
+        "AISafetyAtlas.Causal.Model.value",
+        "AISafetyAtlas.Causal.Policy",
+        "AISafetyAtlas.Causal.ProbMixture",
+        "AISafetyAtlas.Causal.Skeleton"
+      ]
+    },
+    "AISafetyAtlas.Causal.Model.withPolicy": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.Assignment",
+        "AISafetyAtlas.Causal.DecisionPolicy",
+        "AISafetyAtlas.Causal.DecisionPolicy.prob",
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Model.acyclic",
+        "AISafetyAtlas.Causal.Model.cpt",
+        "AISafetyAtlas.Causal.Model.dim_pos",
+        "AISafetyAtlas.Causal.Model.parents"
+      ]
+    },
+    "AISafetyAtlas.Causal.Model.withPolicy_cpt_decision": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.Assignment",
+        "AISafetyAtlas.Causal.DecisionPolicy",
+        "AISafetyAtlas.Causal.DecisionPolicy.prob",
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Model.cpt",
+        "AISafetyAtlas.Causal.Model.withPolicy"
+      ]
+    },
+    "AISafetyAtlas.Causal.Model.withPolicy_cpt_of_ne": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.Assignment",
+        "AISafetyAtlas.Causal.DecisionPolicy",
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Model.cpt",
+        "AISafetyAtlas.Causal.Model.withPolicy"
+      ]
+    },
+    "AISafetyAtlas.Causal.Model.withPolicy_parents": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.DecisionPolicy",
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Model.parents",
+        "AISafetyAtlas.Causal.Model.withPolicy"
+      ]
+    },
+    "AISafetyAtlas.Causal.NodeKind": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Causal.NodeKind.decision": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.NodeKind"
+      ]
+    },
+    "AISafetyAtlas.Causal.NodeKind.utility": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.NodeKind"
+      ]
+    },
+    "AISafetyAtlas.Causal.O24Assignment": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.O24List"
+      ]
+    },
+    "AISafetyAtlas.Causal.O24Assignment.at": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.O24Assignment",
+        "AISafetyAtlas.Causal.O24List",
+        "AISafetyAtlas.Causal.Skeleton",
+        "AISafetyAtlas.Causal.Skeleton.observed",
+        "AISafetyAtlas.Causal.Skeleton.utilityParents",
+        "AISafetyAtlas.Causal.binaryDim"
+      ]
+    },
+    "AISafetyAtlas.Causal.O24Constants": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Causal.O24Constructor": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.O24Assignment"
+      ]
+    },
+    "AISafetyAtlas.Causal.O24ExcludedSetSmall": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.ChartIndex",
+        "AISafetyAtlas.Causal.IsCompatibleGraph",
+        "AISafetyAtlas.Causal.O24Assignment",
+        "AISafetyAtlas.Causal.O24Constants",
+        "AISafetyAtlas.Causal.O24Constants.a",
+        "AISafetyAtlas.Causal.O24Constants.b",
+        "AISafetyAtlas.Causal.ParentConfig",
+        "AISafetyAtlas.Causal.Skeleton.ValidMargin",
+        "AISafetyAtlas.Causal.UtilityConfig",
+        "AISafetyAtlas.Causal.o24ExcludedSlice",
+        "AISafetyAtlas.Causal.o24Size",
+        "AISafetyAtlas.Causal.utilityBox"
+      ]
+    },
+    "AISafetyAtlas.Causal.O24Identifies": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.O24Assignment",
+        "AISafetyAtlas.Causal.Skeleton",
+        "AISafetyAtlas.Causal.Skeleton.BehaviorEq",
+        "AISafetyAtlas.Causal.Skeleton.ValidMargin",
+        "AISafetyAtlas.Causal.binaryDim",
+        "AISafetyAtlas.Causal.effectiveMarginClass"
+      ]
+    },
+    "AISafetyAtlas.Causal.O24Input": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Causal.O24Input.size": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.O24Input",
+        "AISafetyAtlas.Causal.O24Input.graph",
+        "AISafetyAtlas.Causal.O24Input.utilityParents",
+        "AISafetyAtlas.Causal.o24Size"
+      ]
+    },
+    "AISafetyAtlas.Causal.O24List": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.O24Var"
+      ]
+    },
+    "AISafetyAtlas.Causal.O24RecoveryModulus": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.InIdentifiedSet",
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Model.parents",
+        "AISafetyAtlas.Causal.O24Assignment",
+        "AISafetyAtlas.Causal.O24Constants",
+        "AISafetyAtlas.Causal.O24Constants.a",
+        "AISafetyAtlas.Causal.O24Threshold",
+        "AISafetyAtlas.Causal.O24Threshold.bound",
+        "AISafetyAtlas.Causal.Skeleton",
+        "AISafetyAtlas.Causal.Skeleton.MarginClass",
+        "AISafetyAtlas.Causal.Skeleton.ValidMargin",
+        "AISafetyAtlas.Causal.Skeleton.utilityParents",
+        "AISafetyAtlas.Causal.binaryDim",
+        "AISafetyAtlas.Causal.chartDim",
+        "AISafetyAtlas.Causal.effectiveMarginClass",
+        "AISafetyAtlas.Causal.modelError",
+        "AISafetyAtlas.Causal.o24ClassSize"
+      ]
+    },
+    "AISafetyAtlas.Causal.O24Solution": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Causal.O24Solution.behaviorEq_imp_eq": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.O24Solution",
+        "AISafetyAtlas.Causal.O24Solution.marginClass",
+        "AISafetyAtlas.Causal.Skeleton",
+        "AISafetyAtlas.Causal.Skeleton.BehaviorEq",
+        "AISafetyAtlas.Causal.Skeleton.ValidMargin",
+        "AISafetyAtlas.Causal.binaryDim"
+      ]
+    },
+    "AISafetyAtlas.Causal.O24Solution.marginClass": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.O24Solution",
+        "AISafetyAtlas.Causal.O24Solution.lists",
+        "AISafetyAtlas.Causal.Skeleton",
+        "AISafetyAtlas.Causal.binaryDim",
+        "AISafetyAtlas.Causal.effectiveMarginClass"
+      ]
+    },
+    "AISafetyAtlas.Causal.O24Solution.marginClass_subset": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.O24Solution",
+        "AISafetyAtlas.Causal.O24Solution.marginClass",
+        "AISafetyAtlas.Causal.Skeleton",
+        "AISafetyAtlas.Causal.Skeleton.MarginClass",
+        "AISafetyAtlas.Causal.binaryDim"
+      ]
+    },
+    "AISafetyAtlas.Causal.O24Threshold": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Causal.O24Var": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.ChartIndex",
+        "AISafetyAtlas.Causal.UtilityConfig"
+      ]
+    },
+    "AISafetyAtlas.Causal.ParentConfig": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Causal.Policy": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Causal.Policy.const": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.Assignment",
+        "AISafetyAtlas.Causal.Policy"
+      ]
+    },
+    "AISafetyAtlas.Causal.PolicyFamily": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.Policy",
+        "AISafetyAtlas.Causal.ProbMixture",
+        "AISafetyAtlas.Causal.Skeleton",
+        "AISafetyAtlas.Causal.Skeleton.observed"
+      ]
+    },
+    "AISafetyAtlas.Causal.PolySign": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Causal.PolySign.Holds": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.PolySign"
+      ]
+    },
+    "AISafetyAtlas.Causal.PolySign.nonneg": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.PolySign"
+      ]
+    },
+    "AISafetyAtlas.Causal.PolySign.pos": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.PolySign"
+      ]
+    },
+    "AISafetyAtlas.Causal.PolySign.zero": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.PolySign"
+      ]
+    },
+    "AISafetyAtlas.Causal.ProbMixture": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.IsProbabilityMixture",
+        "AISafetyAtlas.Causal.Mixture"
+      ]
+    },
+    "AISafetyAtlas.Causal.ProbMixture.dirac": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.InterventionProfile",
+        "AISafetyAtlas.Causal.IsProbabilityMixture",
+        "AISafetyAtlas.Causal.LocalIntervention",
+        "AISafetyAtlas.Causal.Mixture",
+        "AISafetyAtlas.Causal.ProbMixture"
+      ]
+    },
+    "AISafetyAtlas.Causal.ProbMixture.dirac_apply": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.InterventionProfile",
+        "AISafetyAtlas.Causal.IsProbabilityMixture",
+        "AISafetyAtlas.Causal.LocalIntervention",
+        "AISafetyAtlas.Causal.Mixture",
+        "AISafetyAtlas.Causal.ProbMixture.dirac"
+      ]
+    },
+    "AISafetyAtlas.Causal.ProbMixture.mapRat": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.InterventionProfile",
+        "AISafetyAtlas.Causal.IsProbabilityMixture",
+        "AISafetyAtlas.Causal.Mixture",
+        "AISafetyAtlas.Causal.ProbMixture"
+      ]
+    },
+    "AISafetyAtlas.Causal.RandomizedEstimator": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Skeleton",
+        "AISafetyAtlas.Causal.Transcript"
+      ]
+    },
+    "AISafetyAtlas.Causal.RandomizedEstimator.toMeasureEstimator": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.MeasureEstimator",
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.RandomizedEstimator",
+        "AISafetyAtlas.Causal.Skeleton",
+        "AISafetyAtlas.Causal.Transcript",
+        "AISafetyAtlas.Causal.instMeasurableSpaceModel"
+      ]
+    },
+    "AISafetyAtlas.Causal.RandomizedQueryStrategy": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.ShiftedQuery",
+        "AISafetyAtlas.Causal.Skeleton",
+        "AISafetyAtlas.Causal.Transcript"
+      ]
+    },
+    "AISafetyAtlas.Causal.SCIM": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Causal.SCIM.IsMaterial": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.CID.IsDecision",
+        "AISafetyAtlas.Causal.CID.IsWellFounded",
+        "AISafetyAtlas.Causal.CID.parents",
+        "AISafetyAtlas.Causal.SCIM",
+        "AISafetyAtlas.Causal.SCIM.graph",
+        "AISafetyAtlas.Causal.SCIM.instIsWellFoundedRemoveInfoLink",
+        "AISafetyAtlas.Causal.SCIM.optimalValue",
+        "AISafetyAtlas.Causal.SCIM.removeInfoLink"
+      ]
+    },
+    "AISafetyAtlas.Causal.SCIM.IsOptimalPolicy": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.CID.IsWellFounded",
+        "AISafetyAtlas.Causal.SCIM",
+        "AISafetyAtlas.Causal.SCIM.Policy",
+        "AISafetyAtlas.Causal.SCIM.expectedUtility",
+        "AISafetyAtlas.Causal.SCIM.graph"
+      ]
+    },
+    "AISafetyAtlas.Causal.SCIM.Policy": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.Assignment",
+        "AISafetyAtlas.Causal.CID.IsDecision",
+        "AISafetyAtlas.Causal.CID.parents",
+        "AISafetyAtlas.Causal.SCIM",
+        "AISafetyAtlas.Causal.SCIM.graph"
+      ]
+    },
+    "AISafetyAtlas.Causal.SCIM.eval_withPolicy_eq_of_notDownstream": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.CID.IsWellFounded",
+        "AISafetyAtlas.Causal.CID.NotDownstream",
+        "AISafetyAtlas.Causal.ExoAssignment",
+        "AISafetyAtlas.Causal.SCIM",
+        "AISafetyAtlas.Causal.SCIM.Policy",
+        "AISafetyAtlas.Causal.SCIM.graph",
+        "AISafetyAtlas.Causal.SCIM.instIsWellFoundedWithPolicy",
+        "AISafetyAtlas.Causal.SCIM.withPolicy",
+        "AISafetyAtlas.Causal.SCM.eval"
+      ]
+    },
+    "AISafetyAtlas.Causal.SCIM.exists_isOptimalPolicy": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.CID.IsWellFounded",
+        "AISafetyAtlas.Causal.SCIM",
+        "AISafetyAtlas.Causal.SCIM.IsOptimalPolicy",
+        "AISafetyAtlas.Causal.SCIM.Policy",
+        "AISafetyAtlas.Causal.SCIM.expectedUtility",
+        "AISafetyAtlas.Causal.SCIM.graph",
+        "AISafetyAtlas.Causal.SCIM.optimalValue"
+      ]
+    },
+    "AISafetyAtlas.Causal.SCIM.expectedUtility": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.CID.IsWellFounded",
+        "AISafetyAtlas.Causal.CID.utilities",
+        "AISafetyAtlas.Causal.ExoAssignment",
+        "AISafetyAtlas.Causal.SCIM",
+        "AISafetyAtlas.Causal.SCIM.Policy",
+        "AISafetyAtlas.Causal.SCIM.graph",
+        "AISafetyAtlas.Causal.SCIM.instIsWellFoundedWithPolicy",
+        "AISafetyAtlas.Causal.SCIM.utilityValue",
+        "AISafetyAtlas.Causal.SCIM.withPolicy",
+        "AISafetyAtlas.Causal.SCM.eval",
+        "AISafetyAtlas.Causal.SCM.exoJoint"
+      ]
+    },
+    "AISafetyAtlas.Causal.SCIM.expectedUtility_le_optimalValue": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.CID.IsWellFounded",
+        "AISafetyAtlas.Causal.SCIM",
+        "AISafetyAtlas.Causal.SCIM.Policy",
+        "AISafetyAtlas.Causal.SCIM.expectedUtility",
+        "AISafetyAtlas.Causal.SCIM.graph",
+        "AISafetyAtlas.Causal.SCIM.optimalValue"
+      ]
+    },
+    "AISafetyAtlas.Causal.SCIM.instFintypePolicy": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.SCIM",
+        "AISafetyAtlas.Causal.SCIM.Policy"
+      ]
+    },
+    "AISafetyAtlas.Causal.SCIM.instIsWellFoundedRemoveInfoLink": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.CID.IsDecision",
+        "AISafetyAtlas.Causal.CID.IsWellFounded",
+        "AISafetyAtlas.Causal.SCIM",
+        "AISafetyAtlas.Causal.SCIM.graph",
+        "AISafetyAtlas.Causal.SCIM.removeInfoLink"
+      ]
+    },
+    "AISafetyAtlas.Causal.SCIM.instIsWellFoundedWithPolicy": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.CID.IsWellFounded",
+        "AISafetyAtlas.Causal.SCIM",
+        "AISafetyAtlas.Causal.SCIM.Policy",
+        "AISafetyAtlas.Causal.SCIM.graph",
+        "AISafetyAtlas.Causal.SCIM.withPolicy",
+        "AISafetyAtlas.Causal.SCM.IsWellFounded"
+      ]
+    },
+    "AISafetyAtlas.Causal.SCIM.instNonemptyPolicy": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.SCIM",
+        "AISafetyAtlas.Causal.SCIM.Policy"
+      ]
+    },
+    "AISafetyAtlas.Causal.SCIM.marginal_withPolicy_eq_of_notDownstream": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.Assignment",
+        "AISafetyAtlas.Causal.CID.IsWellFounded",
+        "AISafetyAtlas.Causal.CID.NotDownstream",
+        "AISafetyAtlas.Causal.SCIM",
+        "AISafetyAtlas.Causal.SCIM.Policy",
+        "AISafetyAtlas.Causal.SCIM.graph",
+        "AISafetyAtlas.Causal.SCIM.instIsWellFoundedWithPolicy",
+        "AISafetyAtlas.Causal.SCIM.withPolicy",
+        "AISafetyAtlas.Causal.SCM.marginal"
+      ]
+    },
+    "AISafetyAtlas.Causal.SCIM.optimalValue": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.CID.IsWellFounded",
+        "AISafetyAtlas.Causal.SCIM",
+        "AISafetyAtlas.Causal.SCIM.Policy",
+        "AISafetyAtlas.Causal.SCIM.expectedUtility",
+        "AISafetyAtlas.Causal.SCIM.graph",
+        "AISafetyAtlas.Causal.SCIM.instFintypePolicy"
+      ]
+    },
+    "AISafetyAtlas.Causal.SCIM.policy_ext_single": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.Assignment",
+        "AISafetyAtlas.Causal.CID.IsDecision",
+        "AISafetyAtlas.Causal.CID.decisions",
+        "AISafetyAtlas.Causal.CID.parents",
+        "AISafetyAtlas.Causal.SCIM",
+        "AISafetyAtlas.Causal.SCIM.Policy",
+        "AISafetyAtlas.Causal.SCIM.graph"
+      ]
+    },
+    "AISafetyAtlas.Causal.SCIM.removeInfoLink": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.CID",
+        "AISafetyAtlas.Causal.CID.IsDecision",
+        "AISafetyAtlas.Causal.CID.kind",
+        "AISafetyAtlas.Causal.CID.parents",
+        "AISafetyAtlas.Causal.SCIM",
+        "AISafetyAtlas.Causal.SCIM.dom_pos",
+        "AISafetyAtlas.Causal.SCIM.exoProb",
+        "AISafetyAtlas.Causal.SCIM.exoProb_nonneg",
+        "AISafetyAtlas.Causal.SCIM.exoProb_sum",
+        "AISafetyAtlas.Causal.SCIM.f",
+        "AISafetyAtlas.Causal.SCIM.graph",
+        "AISafetyAtlas.Causal.SCIM.utilityValue"
+      ]
+    },
+    "AISafetyAtlas.Causal.SCIM.removeInfoLink_sub": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.CID.parents",
+        "AISafetyAtlas.Causal.SCIM",
+        "AISafetyAtlas.Causal.SCIM.graph"
+      ]
+    },
+    "AISafetyAtlas.Causal.SCIM.withPolicy": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.Assignment",
+        "AISafetyAtlas.Causal.CID.IsDecision",
+        "AISafetyAtlas.Causal.CID.instDecidableIsDecision",
+        "AISafetyAtlas.Causal.CID.parents",
+        "AISafetyAtlas.Causal.SCIM",
+        "AISafetyAtlas.Causal.SCIM.Policy",
+        "AISafetyAtlas.Causal.SCIM.dom_pos",
+        "AISafetyAtlas.Causal.SCIM.exoProb",
+        "AISafetyAtlas.Causal.SCIM.exoProb_nonneg",
+        "AISafetyAtlas.Causal.SCIM.exoProb_sum",
+        "AISafetyAtlas.Causal.SCIM.f",
+        "AISafetyAtlas.Causal.SCIM.graph",
+        "AISafetyAtlas.Causal.SCM"
+      ]
+    },
+    "AISafetyAtlas.Causal.SCIM.withPolicy_f_mem": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.Assignment",
+        "AISafetyAtlas.Causal.CID.IsDecision",
+        "AISafetyAtlas.Causal.CID.parents",
+        "AISafetyAtlas.Causal.SCIM",
+        "AISafetyAtlas.Causal.SCIM.Policy",
+        "AISafetyAtlas.Causal.SCIM.graph",
+        "AISafetyAtlas.Causal.SCIM.withPolicy",
+        "AISafetyAtlas.Causal.SCM.f"
+      ]
+    },
+    "AISafetyAtlas.Causal.SCIM.withPolicy_f_notMem": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.Assignment",
+        "AISafetyAtlas.Causal.CID.IsDecision",
+        "AISafetyAtlas.Causal.SCIM",
+        "AISafetyAtlas.Causal.SCIM.Policy",
+        "AISafetyAtlas.Causal.SCIM.f",
+        "AISafetyAtlas.Causal.SCIM.graph",
+        "AISafetyAtlas.Causal.SCIM.withPolicy",
+        "AISafetyAtlas.Causal.SCM.f"
+      ]
+    },
+    "AISafetyAtlas.Causal.SCIM.withPolicy_parents": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.CID.parents",
+        "AISafetyAtlas.Causal.SCIM",
+        "AISafetyAtlas.Causal.SCIM.Policy",
+        "AISafetyAtlas.Causal.SCIM.graph",
+        "AISafetyAtlas.Causal.SCIM.withPolicy",
+        "AISafetyAtlas.Causal.SCM.parents"
+      ]
+    },
+    "AISafetyAtlas.Causal.SCM": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Causal.SCM.IsWellFounded": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.SCM"
+      ]
+    },
+    "AISafetyAtlas.Causal.SCM.eval": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.Assignment",
+        "AISafetyAtlas.Causal.ExoAssignment",
+        "AISafetyAtlas.Causal.SCM",
+        "AISafetyAtlas.Causal.SCM.IsWellFounded",
+        "AISafetyAtlas.Causal.SCM.IsWellFounded.wf",
+        "AISafetyAtlas.Causal.SCM.f",
+        "AISafetyAtlas.Causal.SCM.parents",
+        "AISafetyAtlas.Causal.SCM.seed"
+      ]
+    },
+    "AISafetyAtlas.Causal.SCM.eval_congr": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.ExoAssignment",
+        "AISafetyAtlas.Causal.SCM",
+        "AISafetyAtlas.Causal.SCM.IsWellFounded",
+        "AISafetyAtlas.Causal.SCM.eval",
+        "AISafetyAtlas.Causal.SCM.parents"
+      ]
+    },
+    "AISafetyAtlas.Causal.SCM.eval_eq_f": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.ExoAssignment",
+        "AISafetyAtlas.Causal.SCM",
+        "AISafetyAtlas.Causal.SCM.IsWellFounded",
+        "AISafetyAtlas.Causal.SCM.eval",
+        "AISafetyAtlas.Causal.SCM.f"
+      ]
+    },
+    "AISafetyAtlas.Causal.SCM.eval_eq_of_f_agree": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.Assignment",
+        "AISafetyAtlas.Causal.ExoAssignment",
+        "AISafetyAtlas.Causal.SCM",
+        "AISafetyAtlas.Causal.SCM.IsWellFounded",
+        "AISafetyAtlas.Causal.SCM.eval",
+        "AISafetyAtlas.Causal.SCM.f",
+        "AISafetyAtlas.Causal.SCM.parents"
+      ]
+    },
+    "AISafetyAtlas.Causal.SCM.exoJoint": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.ExoAssignment",
+        "AISafetyAtlas.Causal.SCM",
+        "AISafetyAtlas.Causal.SCM.exoProb"
+      ]
+    },
+    "AISafetyAtlas.Causal.SCM.exoJoint_mul_prod": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.ExoAssignment",
+        "AISafetyAtlas.Causal.SCM",
+        "AISafetyAtlas.Causal.SCM.exoJoint",
+        "AISafetyAtlas.Causal.SCM.exoProb"
+      ]
+    },
+    "AISafetyAtlas.Causal.SCM.exoJoint_nonneg": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.ExoAssignment",
+        "AISafetyAtlas.Causal.SCM",
+        "AISafetyAtlas.Causal.SCM.exoJoint"
+      ]
+    },
+    "AISafetyAtlas.Causal.SCM.exoJoint_sum": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.ExoAssignment",
+        "AISafetyAtlas.Causal.SCM",
+        "AISafetyAtlas.Causal.SCM.exoJoint"
+      ]
+    },
+    "AISafetyAtlas.Causal.SCM.instIsWellFoundedSoftIntervention": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.Assignment",
+        "AISafetyAtlas.Causal.SCM",
+        "AISafetyAtlas.Causal.SCM.IsWellFounded",
+        "AISafetyAtlas.Causal.SCM.parents",
+        "AISafetyAtlas.Causal.SCM.softIntervention"
+      ]
+    },
+    "AISafetyAtlas.Causal.SCM.instIsWellFoundedSubmodel": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.Assignment",
+        "AISafetyAtlas.Causal.SCM",
+        "AISafetyAtlas.Causal.SCM.IsWellFounded",
+        "AISafetyAtlas.Causal.SCM.submodel"
+      ]
+    },
+    "AISafetyAtlas.Causal.SCM.jointProb": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.Assignment",
+        "AISafetyAtlas.Causal.ExoAssignment",
+        "AISafetyAtlas.Causal.SCM",
+        "AISafetyAtlas.Causal.SCM.IsWellFounded",
+        "AISafetyAtlas.Causal.SCM.eval",
+        "AISafetyAtlas.Causal.SCM.exoJoint"
+      ]
+    },
+    "AISafetyAtlas.Causal.SCM.jointProb_nonneg": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.Assignment",
+        "AISafetyAtlas.Causal.SCM",
+        "AISafetyAtlas.Causal.SCM.IsWellFounded",
+        "AISafetyAtlas.Causal.SCM.jointProb"
+      ]
+    },
+    "AISafetyAtlas.Causal.SCM.jointProb_sum": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.Assignment",
+        "AISafetyAtlas.Causal.SCM",
+        "AISafetyAtlas.Causal.SCM.IsWellFounded",
+        "AISafetyAtlas.Causal.SCM.jointProb"
+      ]
+    },
+    "AISafetyAtlas.Causal.SCM.marginal": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.Assignment",
+        "AISafetyAtlas.Causal.SCM",
+        "AISafetyAtlas.Causal.SCM.IsWellFounded",
+        "AISafetyAtlas.Causal.SCM.jointProb"
+      ]
+    },
+    "AISafetyAtlas.Causal.SCM.marginal_eq_sum_exo": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.Assignment",
+        "AISafetyAtlas.Causal.ExoAssignment",
+        "AISafetyAtlas.Causal.SCM",
+        "AISafetyAtlas.Causal.SCM.IsWellFounded",
+        "AISafetyAtlas.Causal.SCM.eval",
+        "AISafetyAtlas.Causal.SCM.exoJoint",
+        "AISafetyAtlas.Causal.SCM.marginal"
+      ]
+    },
+    "AISafetyAtlas.Causal.SCM.seed": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.Assignment",
+        "AISafetyAtlas.Causal.SCM",
+        "AISafetyAtlas.Causal.SCM.dom_pos"
+      ]
+    },
+    "AISafetyAtlas.Causal.SCM.softIntervention": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.Assignment",
+        "AISafetyAtlas.Causal.SCM",
+        "AISafetyAtlas.Causal.SCM.acyclic",
+        "AISafetyAtlas.Causal.SCM.dom_pos",
+        "AISafetyAtlas.Causal.SCM.exoProb",
+        "AISafetyAtlas.Causal.SCM.exoProb_nonneg",
+        "AISafetyAtlas.Causal.SCM.exoProb_sum",
+        "AISafetyAtlas.Causal.SCM.f",
+        "AISafetyAtlas.Causal.SCM.parents"
+      ]
+    },
+    "AISafetyAtlas.Causal.SCM.submodel": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.Assignment",
+        "AISafetyAtlas.Causal.SCM",
+        "AISafetyAtlas.Causal.SCM.dom_pos",
+        "AISafetyAtlas.Causal.SCM.exoProb",
+        "AISafetyAtlas.Causal.SCM.exoProb_nonneg",
+        "AISafetyAtlas.Causal.SCM.exoProb_sum",
+        "AISafetyAtlas.Causal.SCM.f",
+        "AISafetyAtlas.Causal.SCM.parents"
+      ]
+    },
+    "AISafetyAtlas.Causal.SCM.submodel_eval": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.Assignment",
+        "AISafetyAtlas.Causal.ExoAssignment",
+        "AISafetyAtlas.Causal.SCM",
+        "AISafetyAtlas.Causal.SCM.IsWellFounded",
+        "AISafetyAtlas.Causal.SCM.eval",
+        "AISafetyAtlas.Causal.SCM.instIsWellFoundedSubmodel",
+        "AISafetyAtlas.Causal.SCM.submodel"
+      ]
+    },
+    "AISafetyAtlas.Causal.SCM.submodel_eval_notMem": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.Assignment",
+        "AISafetyAtlas.Causal.ExoAssignment",
+        "AISafetyAtlas.Causal.SCM",
+        "AISafetyAtlas.Causal.SCM.IsWellFounded",
+        "AISafetyAtlas.Causal.SCM.eval",
+        "AISafetyAtlas.Causal.SCM.f",
+        "AISafetyAtlas.Causal.SCM.instIsWellFoundedSubmodel",
+        "AISafetyAtlas.Causal.SCM.submodel"
+      ]
+    },
+    "AISafetyAtlas.Causal.ShiftedQuery": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.Skeleton"
+      ]
+    },
+    "AISafetyAtlas.Causal.Skeleton": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Causal.Skeleton.BehaviorEq": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.Assignment",
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.ProbMixture",
+        "AISafetyAtlas.Causal.Skeleton",
+        "AISafetyAtlas.Causal.Skeleton.gap",
+        "AISafetyAtlas.Causal.Skeleton.observed"
+      ]
+    },
+    "AISafetyAtlas.Causal.Skeleton.M1": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.Assignment",
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Model.cpt"
+      ]
+    },
+    "AISafetyAtlas.Causal.Skeleton.M2": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.Assignment",
+        "AISafetyAtlas.Causal.Skeleton",
+        "AISafetyAtlas.Causal.Skeleton.gap"
+      ]
+    },
+    "AISafetyAtlas.Causal.Skeleton.M3": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.Assignment",
+        "AISafetyAtlas.Causal.Skeleton",
+        "AISafetyAtlas.Causal.Skeleton.gap",
+        "AISafetyAtlas.Causal.Skeleton.observed",
+        "AISafetyAtlas.Causal.Skeleton.utilityParents"
+      ]
+    },
+    "AISafetyAtlas.Causal.Skeleton.M4": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.Assignment",
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Model.cpt",
+        "AISafetyAtlas.Causal.Model.parents"
+      ]
+    },
+    "AISafetyAtlas.Causal.Skeleton.M5": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Model.ParentClosed",
+        "AISafetyAtlas.Causal.Skeleton",
+        "AISafetyAtlas.Causal.Skeleton.observed",
+        "AISafetyAtlas.Causal.Skeleton.utilityParents"
+      ]
+    },
+    "AISafetyAtlas.Causal.Skeleton.M6": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.Assignment",
+        "AISafetyAtlas.Causal.Skeleton",
+        "AISafetyAtlas.Causal.Skeleton.gap",
+        "AISafetyAtlas.Causal.Skeleton.utilityParents"
+      ]
+    },
+    "AISafetyAtlas.Causal.Skeleton.MarginClass": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Skeleton",
+        "AISafetyAtlas.Causal.Skeleton.M1",
+        "AISafetyAtlas.Causal.Skeleton.M2",
+        "AISafetyAtlas.Causal.Skeleton.M3",
+        "AISafetyAtlas.Causal.Skeleton.M4",
+        "AISafetyAtlas.Causal.Skeleton.M5",
+        "AISafetyAtlas.Causal.Skeleton.M6",
+        "AISafetyAtlas.Causal.Skeleton.ValidMargin"
+      ]
+    },
+    "AISafetyAtlas.Causal.Skeleton.PrintedM1": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.Assignment",
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Model.cpt",
+        "AISafetyAtlas.Causal.binaryDim"
+      ]
+    },
+    "AISafetyAtlas.Causal.Skeleton.PrintedM4": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.Assignment",
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Model.cpt",
+        "AISafetyAtlas.Causal.Model.parents",
+        "AISafetyAtlas.Causal.binaryDim"
+      ]
+    },
+    "AISafetyAtlas.Causal.Skeleton.PrintedM5": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Model.ancestors",
+        "AISafetyAtlas.Causal.Skeleton",
+        "AISafetyAtlas.Causal.Skeleton.observed",
+        "AISafetyAtlas.Causal.Skeleton.utilityParents",
+        "AISafetyAtlas.Causal.binaryDim"
+      ]
+    },
+    "AISafetyAtlas.Causal.Skeleton.PrintedMarginClass": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Skeleton",
+        "AISafetyAtlas.Causal.Skeleton.M2",
+        "AISafetyAtlas.Causal.Skeleton.M3",
+        "AISafetyAtlas.Causal.Skeleton.M6",
+        "AISafetyAtlas.Causal.Skeleton.PrintedM1",
+        "AISafetyAtlas.Causal.Skeleton.PrintedM4",
+        "AISafetyAtlas.Causal.Skeleton.PrintedM5",
+        "AISafetyAtlas.Causal.Skeleton.ValidMargin",
+        "AISafetyAtlas.Causal.binaryDim"
+      ]
+    },
+    "AISafetyAtlas.Causal.Skeleton.ValidMargin": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Causal.Skeleton.ancestors_eq_univ_of_M5": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Model.ancestors",
+        "AISafetyAtlas.Causal.Skeleton",
+        "AISafetyAtlas.Causal.Skeleton.M5",
+        "AISafetyAtlas.Causal.Skeleton.observed",
+        "AISafetyAtlas.Causal.Skeleton.utilityParents"
+      ]
+    },
+    "AISafetyAtlas.Causal.Skeleton.behaviorEq_mapRat": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Model.mapRat",
+        "AISafetyAtlas.Causal.Skeleton",
+        "AISafetyAtlas.Causal.Skeleton.BehaviorEq",
+        "AISafetyAtlas.Causal.Skeleton.mapRat"
+      ]
+    },
+    "AISafetyAtlas.Causal.Skeleton.behaviorEq_of_observed_eq_empty": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.IsProbabilityMixture",
+        "AISafetyAtlas.Causal.Mixture",
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.ProbMixture",
+        "AISafetyAtlas.Causal.Skeleton",
+        "AISafetyAtlas.Causal.Skeleton.BehaviorEq",
+        "AISafetyAtlas.Causal.Skeleton.gap",
+        "AISafetyAtlas.Causal.Skeleton.observed"
+      ]
+    },
+    "AISafetyAtlas.Causal.Skeleton.cpt_zero_eq": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.Assignment",
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Model.cpt",
+        "AISafetyAtlas.Causal.binaryDim"
+      ]
+    },
+    "AISafetyAtlas.Causal.Skeleton.gap": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.Assignment",
+        "AISafetyAtlas.Causal.Skeleton",
+        "AISafetyAtlas.Causal.Skeleton.utility"
+      ]
+    },
+    "AISafetyAtlas.Causal.Skeleton.gap_determines_behaviorEq": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.Assignment",
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Skeleton",
+        "AISafetyAtlas.Causal.Skeleton.BehaviorEq",
+        "AISafetyAtlas.Causal.Skeleton.gap",
+        "AISafetyAtlas.Causal.Skeleton.observed"
+      ]
+    },
+    "AISafetyAtlas.Causal.Skeleton.gap_determines_marginClass": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.Assignment",
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Skeleton",
+        "AISafetyAtlas.Causal.Skeleton.MarginClass",
+        "AISafetyAtlas.Causal.Skeleton.gap",
+        "AISafetyAtlas.Causal.Skeleton.observed",
+        "AISafetyAtlas.Causal.Skeleton.utilityParents"
+      ]
+    },
+    "AISafetyAtlas.Causal.Skeleton.gap_le_one": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.Assignment",
+        "AISafetyAtlas.Causal.Skeleton",
+        "AISafetyAtlas.Causal.Skeleton.gap"
+      ]
+    },
+    "AISafetyAtlas.Causal.Skeleton.gap_mapRat": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.Assignment",
+        "AISafetyAtlas.Causal.Skeleton",
+        "AISafetyAtlas.Causal.Skeleton.gap",
+        "AISafetyAtlas.Causal.Skeleton.mapRat"
+      ]
+    },
+    "AISafetyAtlas.Causal.Skeleton.gap_parents": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.Assignment",
+        "AISafetyAtlas.Causal.Skeleton",
+        "AISafetyAtlas.Causal.Skeleton.gap",
+        "AISafetyAtlas.Causal.Skeleton.utilityParents"
+      ]
+    },
+    "AISafetyAtlas.Causal.Skeleton.le_utilityHi": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.Assignment",
+        "AISafetyAtlas.Causal.Skeleton.utilityHi"
+      ]
+    },
+    "AISafetyAtlas.Causal.Skeleton.m1_iff_printed": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Skeleton.M1",
+        "AISafetyAtlas.Causal.Skeleton.PrintedM1",
+        "AISafetyAtlas.Causal.binaryDim"
+      ]
+    },
+    "AISafetyAtlas.Causal.Skeleton.m2_of_padded": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.Assignment",
+        "AISafetyAtlas.Causal.Skeleton",
+        "AISafetyAtlas.Causal.Skeleton.M2",
+        "AISafetyAtlas.Causal.Skeleton.gap",
+        "AISafetyAtlas.Causal.Skeleton.utilityParents",
+        "AISafetyAtlas.Causal.binaryDim"
+      ]
+    },
+    "AISafetyAtlas.Causal.Skeleton.m4_iff_printed": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Skeleton.M4",
+        "AISafetyAtlas.Causal.Skeleton.PrintedM4",
+        "AISafetyAtlas.Causal.binaryDim"
+      ]
+    },
+    "AISafetyAtlas.Causal.Skeleton.m5_iff_printed": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Skeleton",
+        "AISafetyAtlas.Causal.Skeleton.M5",
+        "AISafetyAtlas.Causal.Skeleton.PrintedM5",
+        "AISafetyAtlas.Causal.binaryDim"
+      ]
+    },
+    "AISafetyAtlas.Causal.Skeleton.mapRat": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.Assignment",
+        "AISafetyAtlas.Causal.Skeleton",
+        "AISafetyAtlas.Causal.Skeleton.observed",
+        "AISafetyAtlas.Causal.Skeleton.utility",
+        "AISafetyAtlas.Causal.Skeleton.utilityParents"
+      ]
+    },
+    "AISafetyAtlas.Causal.Skeleton.marginClass_iff_printed": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Skeleton",
+        "AISafetyAtlas.Causal.Skeleton.MarginClass",
+        "AISafetyAtlas.Causal.Skeleton.PrintedMarginClass",
+        "AISafetyAtlas.Causal.binaryDim"
+      ]
+    },
+    "AISafetyAtlas.Causal.Skeleton.marginClass_mapRat": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Model.mapRat",
+        "AISafetyAtlas.Causal.Skeleton",
+        "AISafetyAtlas.Causal.Skeleton.MarginClass",
+        "AISafetyAtlas.Causal.Skeleton.mapRat"
+      ]
+    },
+    "AISafetyAtlas.Causal.Skeleton.normalizeUtility": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.Assignment",
+        "AISafetyAtlas.Causal.Skeleton.utilityHi",
+        "AISafetyAtlas.Causal.Skeleton.utilityLo"
+      ]
+    },
+    "AISafetyAtlas.Causal.Skeleton.normalizeUtility_mem_unitInterval": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.Assignment",
+        "AISafetyAtlas.Causal.Skeleton.normalizeUtility"
+      ]
+    },
+    "AISafetyAtlas.Causal.Skeleton.normalizeUtility_parents": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.Assignment",
+        "AISafetyAtlas.Causal.Skeleton.normalizeUtility"
+      ]
+    },
+    "AISafetyAtlas.Causal.Skeleton.observed_mapRat": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.Skeleton",
+        "AISafetyAtlas.Causal.Skeleton.mapRat",
+        "AISafetyAtlas.Causal.Skeleton.observed"
+      ]
+    },
+    "AISafetyAtlas.Causal.Skeleton.ofUtility": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.Assignment",
+        "AISafetyAtlas.Causal.Skeleton",
+        "AISafetyAtlas.Causal.Skeleton.normalizeUtility",
+        "AISafetyAtlas.Causal.Skeleton.normalizeUtility_mem_unitInterval",
+        "AISafetyAtlas.Causal.Skeleton.normalizeUtility_parents"
+      ]
+    },
+    "AISafetyAtlas.Causal.Skeleton.ofUtility_utility": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.Assignment",
+        "AISafetyAtlas.Causal.Skeleton.normalizeUtility",
+        "AISafetyAtlas.Causal.Skeleton.ofUtility",
+        "AISafetyAtlas.Causal.Skeleton.utility"
+      ]
+    },
+    "AISafetyAtlas.Causal.Skeleton.realizable_iff": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.Assignment",
+        "AISafetyAtlas.Causal.Skeleton",
+        "AISafetyAtlas.Causal.Skeleton.gap",
+        "AISafetyAtlas.Causal.Skeleton.utilityParents"
+      ]
+    },
+    "AISafetyAtlas.Causal.Skeleton.realizable_iff_general": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.Assignment"
+      ]
+    },
+    "AISafetyAtlas.Causal.Skeleton.utilityHi": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.Assignment"
+      ]
+    },
+    "AISafetyAtlas.Causal.Skeleton.utilityLo": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.Assignment"
+      ]
+    },
+    "AISafetyAtlas.Causal.Skeleton.utilityLo_le": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.Assignment",
+        "AISafetyAtlas.Causal.Skeleton.utilityLo"
+      ]
+    },
+    "AISafetyAtlas.Causal.Skeleton.utilityParents_mapRat": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.Skeleton",
+        "AISafetyAtlas.Causal.Skeleton.mapRat",
+        "AISafetyAtlas.Causal.Skeleton.utilityParents"
+      ]
+    },
+    "AISafetyAtlas.Causal.SparseMonomial": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Causal.SparsePoly": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.SparseMonomial"
+      ]
+    },
+    "AISafetyAtlas.Causal.Transcript": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.ShiftedQuery",
+        "AISafetyAtlas.Causal.Skeleton"
+      ]
+    },
+    "AISafetyAtlas.Causal.UtilityConfig": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Causal.UtilityConfig.extend": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.Assignment",
+        "AISafetyAtlas.Causal.UtilityConfig",
+        "AISafetyAtlas.Causal.binaryDim"
+      ]
+    },
+    "AISafetyAtlas.Causal.acyclic_of_rank": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.Causal.asg": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.Assignment",
+        "AISafetyAtlas.Causal.binaryDim",
+        "AISafetyAtlas.Causal.binaryState"
+      ]
+    },
+    "AISafetyAtlas.Causal.assignment_two_eq": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.Assignment",
+        "AISafetyAtlas.Causal.asg",
+        "AISafetyAtlas.Causal.binaryDim"
+      ]
+    },
+    "AISafetyAtlas.Causal.basicSemialgebraic_union": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.BasicSemialgebraic",
+        "AISafetyAtlas.Causal.PolySign"
+      ]
+    },
+    "AISafetyAtlas.Causal.binaryDim": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Causal.binaryState": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Causal.binaryState_false": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.binaryState"
+      ]
+    },
+    "AISafetyAtlas.Causal.binaryState_true": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.binaryState"
+      ]
+    },
+    "AISafetyAtlas.Causal.binary_eq_zero_or_one": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.binaryDim"
+      ]
+    },
+    "AISafetyAtlas.Causal.bits_injective": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.Causal.card_binaryLocalIntervention": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.Causal.card_chartIndex": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.ChartIndex",
+        "AISafetyAtlas.Causal.ParentConfig",
+        "AISafetyAtlas.Causal.chartDim"
+      ]
+    },
+    "AISafetyAtlas.Causal.card_le_o24Size": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.o24Size"
+      ]
+    },
+    "AISafetyAtlas.Causal.card_o24Var": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.ChartIndex",
+        "AISafetyAtlas.Causal.O24Var",
+        "AISafetyAtlas.Causal.ParentConfig",
+        "AISafetyAtlas.Causal.UtilityConfig",
+        "AISafetyAtlas.Causal.chartDim"
+      ]
+    },
+    "AISafetyAtlas.Causal.card_o24Var_le": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.ChartIndex",
+        "AISafetyAtlas.Causal.O24Var",
+        "AISafetyAtlas.Causal.ParentConfig",
+        "AISafetyAtlas.Causal.UtilityConfig",
+        "AISafetyAtlas.Causal.o24Size"
+      ]
+    },
+    "AISafetyAtlas.Causal.chainParents": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Causal.chainParents_acyclic": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.chainParents"
+      ]
+    },
+    "AISafetyAtlas.Causal.chainParents_fixedPoint_not_unique": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.Causal.chainParents_lt": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.chainParents"
+      ]
+    },
+    "AISafetyAtlas.Causal.chainParents_not_wellFounded": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.chainParents"
+      ]
+    },
+    "AISafetyAtlas.Causal.chartBox": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.ChartIndex",
+        "AISafetyAtlas.Causal.ClosedBox"
+      ]
+    },
+    "AISafetyAtlas.Causal.chartDim": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Causal.chartOn_mem_chartBox": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.ChartIndex",
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Model.chartOn",
+        "AISafetyAtlas.Causal.binaryDim",
+        "AISafetyAtlas.Causal.chartBox"
+      ]
+    },
+    "AISafetyAtlas.Causal.countable_range_roundDown": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Model.roundDown"
+      ]
+    },
+    "AISafetyAtlas.Causal.cptError": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.Assignment",
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Model.cpt"
+      ]
+    },
+    "AISafetyAtlas.Causal.cptError_eq_zero_iff": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.Assignment",
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Model.cpt",
+        "AISafetyAtlas.Causal.cptError"
+      ]
+    },
+    "AISafetyAtlas.Causal.cptError_le_one": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.cptError"
+      ]
+    },
+    "AISafetyAtlas.Causal.cptError_nonneg": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.cptError"
+      ]
+    },
+    "AISafetyAtlas.Causal.dimBound": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Causal.dim_le_dimBound": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.dimBound"
+      ]
+    },
+    "AISafetyAtlas.Causal.effectiveMarginClass": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Model.parents",
+        "AISafetyAtlas.Causal.O24Assignment",
+        "AISafetyAtlas.Causal.O24Assignment.at",
+        "AISafetyAtlas.Causal.O24Var",
+        "AISafetyAtlas.Causal.Skeleton",
+        "AISafetyAtlas.Causal.Skeleton.MarginClass",
+        "AISafetyAtlas.Causal.Skeleton.utilityParents",
+        "AISafetyAtlas.Causal.binaryDim",
+        "AISafetyAtlas.Causal.o24Value"
+      ]
+    },
+    "AISafetyAtlas.Causal.effectiveMarginClass_mono": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.O24Assignment",
+        "AISafetyAtlas.Causal.Skeleton",
+        "AISafetyAtlas.Causal.binaryDim",
+        "AISafetyAtlas.Causal.effectiveMarginClass"
+      ]
+    },
+    "AISafetyAtlas.Causal.effectiveMarginClass_subset": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.O24Assignment",
+        "AISafetyAtlas.Causal.Skeleton",
+        "AISafetyAtlas.Causal.Skeleton.MarginClass",
+        "AISafetyAtlas.Causal.binaryDim",
+        "AISafetyAtlas.Causal.effectiveMarginClass"
+      ]
+    },
+    "AISafetyAtlas.Causal.encodeBoolList": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.CodeSym",
+        "AISafetyAtlas.Causal.CodeSym.ofBool",
+        "AISafetyAtlas.Causal.CodeSym.sep"
+      ]
+    },
+    "AISafetyAtlas.Causal.encodeBoolList_takeWhile": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.CodeSym",
+        "AISafetyAtlas.Causal.CodeSym.isDigit",
+        "AISafetyAtlas.Causal.CodeSym.ofBool",
+        "AISafetyAtlas.Causal.CodeSym.sep",
+        "AISafetyAtlas.Causal.encodeBoolList"
+      ]
+    },
+    "AISafetyAtlas.Causal.encodeFinsetFin": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.CodeSym",
+        "AISafetyAtlas.Causal.encodeBoolList"
+      ]
+    },
+    "AISafetyAtlas.Causal.encodeInt": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.CodeSym",
+        "AISafetyAtlas.Causal.CodeSym.one",
+        "AISafetyAtlas.Causal.CodeSym.zero",
+        "AISafetyAtlas.Causal.encodeNat"
+      ]
+    },
+    "AISafetyAtlas.Causal.encodeList": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.CodeSym",
+        "AISafetyAtlas.Causal.encodeNat"
+      ]
+    },
+    "AISafetyAtlas.Causal.encodeMonomial": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.CodeSym",
+        "AISafetyAtlas.Causal.SparseMonomial",
+        "AISafetyAtlas.Causal.encodeList",
+        "AISafetyAtlas.Causal.encodeRat",
+        "AISafetyAtlas.Causal.encodeVarPow"
+      ]
+    },
+    "AISafetyAtlas.Causal.encodeNat": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.CodeSym",
+        "AISafetyAtlas.Causal.encodeBoolList"
+      ]
+    },
+    "AISafetyAtlas.Causal.encodeO24Var": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.ChartIndex",
+        "AISafetyAtlas.Causal.CodeSym",
+        "AISafetyAtlas.Causal.CodeSym.one",
+        "AISafetyAtlas.Causal.CodeSym.zero",
+        "AISafetyAtlas.Causal.O24Var",
+        "AISafetyAtlas.Causal.ParentConfig",
+        "AISafetyAtlas.Causal.UtilityConfig",
+        "AISafetyAtlas.Causal.encodeBoolList",
+        "AISafetyAtlas.Causal.encodeNat",
+        "AISafetyAtlas.Causal.finsetFunBits"
+      ]
+    },
+    "AISafetyAtlas.Causal.encodeRat": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.CodeSym",
+        "AISafetyAtlas.Causal.encodeInt",
+        "AISafetyAtlas.Causal.encodeNat"
+      ]
+    },
+    "AISafetyAtlas.Causal.encodeSparseList": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.CodeSym",
+        "AISafetyAtlas.Causal.SparsePoly",
+        "AISafetyAtlas.Causal.encodeList",
+        "AISafetyAtlas.Causal.encodeSparsePoly"
+      ]
+    },
+    "AISafetyAtlas.Causal.encodeSparseList_injective": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.CodeSym",
+        "AISafetyAtlas.Causal.IsPrefixCode",
+        "AISafetyAtlas.Causal.SparsePoly",
+        "AISafetyAtlas.Causal.encodeSparseList"
+      ]
+    },
+    "AISafetyAtlas.Causal.encodeSparsePoly": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.CodeSym",
+        "AISafetyAtlas.Causal.SparseMonomial",
+        "AISafetyAtlas.Causal.SparsePoly",
+        "AISafetyAtlas.Causal.encodeList",
+        "AISafetyAtlas.Causal.encodeMonomial"
+      ]
+    },
+    "AISafetyAtlas.Causal.encodeVarPow": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.CodeSym",
+        "AISafetyAtlas.Causal.encodeNat"
+      ]
+    },
+    "AISafetyAtlas.Causal.eq_family_of_isCausalBayesNetwork": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.ConditionalTables",
+        "AISafetyAtlas.Causal.ConditionalTables.family",
+        "AISafetyAtlas.Causal.InterventionalFamily",
+        "AISafetyAtlas.Causal.IsCausalBayesNetwork"
+      ]
+    },
+    "AISafetyAtlas.Causal.exactAnalystRisk": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.AdmissibleFamily",
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.PolicyFamily",
+        "AISafetyAtlas.Causal.RandomizedEstimator",
+        "AISafetyAtlas.Causal.RandomizedQueryStrategy",
+        "AISafetyAtlas.Causal.Skeleton",
+        "AISafetyAtlas.Causal.exactExpectedError"
+      ]
+    },
+    "AISafetyAtlas.Causal.exactAnalystRisk_discretize_le": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.MeasureEstimator",
+        "AISafetyAtlas.Causal.MeasureEstimator.discretize",
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.RandomizedQueryStrategy",
+        "AISafetyAtlas.Causal.Skeleton",
+        "AISafetyAtlas.Causal.dimBound",
+        "AISafetyAtlas.Causal.exactAnalystRisk",
+        "AISafetyAtlas.Causal.measureAnalystRisk"
+      ]
+    },
+    "AISafetyAtlas.Causal.exactAnalystRisk_nonneg": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.RandomizedEstimator",
+        "AISafetyAtlas.Causal.RandomizedQueryStrategy",
+        "AISafetyAtlas.Causal.Skeleton",
+        "AISafetyAtlas.Causal.exactAnalystRisk"
+      ]
+    },
+    "AISafetyAtlas.Causal.exactExpectedError": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.PolicyFamily",
+        "AISafetyAtlas.Causal.RandomizedEstimator",
+        "AISafetyAtlas.Causal.RandomizedQueryStrategy",
+        "AISafetyAtlas.Causal.Skeleton",
+        "AISafetyAtlas.Causal.Transcript",
+        "AISafetyAtlas.Causal.modelError",
+        "AISafetyAtlas.Causal.pmfExpect",
+        "AISafetyAtlas.Causal.runRandomizedTranscript"
+      ]
+    },
+    "AISafetyAtlas.Causal.exactExpectedError_discretize_le": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.MeasureEstimator",
+        "AISafetyAtlas.Causal.MeasureEstimator.discretize",
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.PolicyFamily",
+        "AISafetyAtlas.Causal.RandomizedQueryStrategy",
+        "AISafetyAtlas.Causal.Skeleton",
+        "AISafetyAtlas.Causal.dimBound",
+        "AISafetyAtlas.Causal.exactExpectedError",
+        "AISafetyAtlas.Causal.measureExpectedError"
+      ]
+    },
+    "AISafetyAtlas.Causal.exactExpectedError_nonneg": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.PolicyFamily",
+        "AISafetyAtlas.Causal.RandomizedEstimator",
+        "AISafetyAtlas.Causal.RandomizedQueryStrategy",
+        "AISafetyAtlas.Causal.Skeleton",
+        "AISafetyAtlas.Causal.exactExpectedError"
+      ]
+    },
+    "AISafetyAtlas.Causal.exactMinimalBudget": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Skeleton",
+        "AISafetyAtlas.Causal.exactMinimaxRisk"
+      ]
+    },
+    "AISafetyAtlas.Causal.exactMinimaxRisk": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.RandomizedEstimator",
+        "AISafetyAtlas.Causal.RandomizedQueryStrategy",
+        "AISafetyAtlas.Causal.Skeleton",
+        "AISafetyAtlas.Causal.exactAnalystRisk"
+      ]
+    },
+    "AISafetyAtlas.Causal.exactMinimaxRisk_le_measureMinimaxRisk": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.ShiftedQuery",
+        "AISafetyAtlas.Causal.Skeleton",
+        "AISafetyAtlas.Causal.exactMinimaxRisk",
+        "AISafetyAtlas.Causal.measureMinimaxRisk"
+      ]
+    },
+    "AISafetyAtlas.Causal.exactPolicyAnswer": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.Policy.prob",
+        "AISafetyAtlas.Causal.PolicyFamily",
+        "AISafetyAtlas.Causal.ProbMixture.mapRat",
+        "AISafetyAtlas.Causal.ShiftedQuery",
+        "AISafetyAtlas.Causal.ShiftedQuery.mix",
+        "AISafetyAtlas.Causal.ShiftedQuery.observation",
+        "AISafetyAtlas.Causal.ShiftedQuery.visible",
+        "AISafetyAtlas.Causal.ShiftedQuery.visible_subset",
+        "AISafetyAtlas.Causal.Skeleton"
+      ]
+    },
+    "AISafetyAtlas.Causal.exactPolicyAnswer_congr_observation": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.Assignment",
+        "AISafetyAtlas.Causal.PolicyFamily",
+        "AISafetyAtlas.Causal.ShiftedQuery",
+        "AISafetyAtlas.Causal.ShiftedQuery.mix",
+        "AISafetyAtlas.Causal.ShiftedQuery.observation",
+        "AISafetyAtlas.Causal.ShiftedQuery.visible",
+        "AISafetyAtlas.Causal.ShiftedQuery.visible_subset",
+        "AISafetyAtlas.Causal.Skeleton",
+        "AISafetyAtlas.Causal.exactPolicyAnswer"
+      ]
+    },
+    "AISafetyAtlas.Causal.fibreRep": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.Assignment",
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Model.dim_pos"
+      ]
+    },
+    "AISafetyAtlas.Causal.fibreRep_idem": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.Assignment",
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.fibreRep"
+      ]
+    },
+    "AISafetyAtlas.Causal.fibreRep_mem": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.Assignment",
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.fibreRep"
+      ]
+    },
+    "AISafetyAtlas.Causal.finTwoEquiv_symm_false": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.Causal.finTwoEquiv_symm_true": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.Causal.finsetFunBits": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Causal.finsetFunBits_injective": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.finsetFunBits"
+      ]
+    },
+    "AISafetyAtlas.Causal.fixIntervention": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Causal.fixProfile": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.Assignment",
+        "AISafetyAtlas.Causal.InterventionProfile",
+        "AISafetyAtlas.Causal.fixIntervention"
+      ]
+    },
+    "AISafetyAtlas.Causal.flipIntervention": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Causal.floorMul": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Causal.floorMul_le": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.floorMul"
+      ]
+    },
+    "AISafetyAtlas.Causal.floorMul_nonneg": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.floorMul"
+      ]
+    },
+    "AISafetyAtlas.Causal.forcedTable": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.Assignment"
+      ]
+    },
+    "AISafetyAtlas.Causal.hardInterventionProfile": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.Assignment",
+        "AISafetyAtlas.Causal.InterventionProfile",
+        "AISafetyAtlas.Causal.LocalIntervention",
+        "AISafetyAtlas.Causal.fixIntervention",
+        "AISafetyAtlas.Causal.identityIntervention"
+      ]
+    },
+    "AISafetyAtlas.Causal.hasSum_pmf_toReal": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.Causal.identityIntervention": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Causal.inIdentifiedSet_self": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.InIdentifiedSet",
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Skeleton",
+        "AISafetyAtlas.Causal.Skeleton.MarginClass"
+      ]
+    },
+    "AISafetyAtlas.Causal.inIdentifiedSet_symm": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.InIdentifiedSet",
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Skeleton"
+      ]
+    },
+    "AISafetyAtlas.Causal.inIdentifiedSet_zero_of_behaviorEq": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.InIdentifiedSet",
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Skeleton",
+        "AISafetyAtlas.Causal.Skeleton.BehaviorEq",
+        "AISafetyAtlas.Causal.Skeleton.MarginClass"
+      ]
+    },
+    "AISafetyAtlas.Causal.instCountableShiftedQuery": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.ShiftedQuery",
+        "AISafetyAtlas.Causal.Skeleton"
+      ]
+    },
+    "AISafetyAtlas.Causal.instMeasurableSingletonClassModel": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.instMeasurableSpaceModel"
+      ]
+    },
+    "AISafetyAtlas.Causal.instMeasurableSpaceModel": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.Assignment",
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Model.cpt",
+        "AISafetyAtlas.Causal.Model.parents"
+      ]
+    },
+    "AISafetyAtlas.Causal.instNonemptyBinaryModel": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.binaryDim"
+      ]
+    },
+    "AISafetyAtlas.Causal.instNonemptyShiftedQuery": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.ShiftedQuery",
+        "AISafetyAtlas.Causal.Skeleton",
+        "AISafetyAtlas.Causal.binaryDim"
+      ]
+    },
+    "AISafetyAtlas.Causal.integrable_modelError": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.instMeasurableSpaceModel",
+        "AISafetyAtlas.Causal.modelError"
+      ]
+    },
+    "AISafetyAtlas.Causal.integral_toMeasure_modelError": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.instMeasurableSpaceModel",
+        "AISafetyAtlas.Causal.modelError",
+        "AISafetyAtlas.Causal.pmfExpect"
+      ]
+    },
+    "AISafetyAtlas.Causal.isCausalBayesNetwork_family": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.ConditionalTables",
+        "AISafetyAtlas.Causal.ConditionalTables.family",
+        "AISafetyAtlas.Causal.IsCausalBayesNetwork"
+      ]
+    },
+    "AISafetyAtlas.Causal.isCausalBayesNetwork_iff": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.ConditionalTables",
+        "AISafetyAtlas.Causal.ConditionalTables.family",
+        "AISafetyAtlas.Causal.InterventionalFamily",
+        "AISafetyAtlas.Causal.IsCausalBayesNetwork"
+      ]
+    },
+    "AISafetyAtlas.Causal.isCompact_closedBox": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.ClosedBox"
+      ]
+    },
+    "AISafetyAtlas.Causal.isCompatibleGraph_parents": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.IsCompatibleGraph",
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Model.parents",
+        "AISafetyAtlas.Causal.binaryDim"
+      ]
+    },
+    "AISafetyAtlas.Causal.isPrefixCode_encodeBoolList": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.IsPrefixCode",
+        "AISafetyAtlas.Causal.encodeBoolList"
+      ]
+    },
+    "AISafetyAtlas.Causal.isPrefixCode_encodeFinsetFin": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.IsPrefixCode",
+        "AISafetyAtlas.Causal.encodeFinsetFin"
+      ]
+    },
+    "AISafetyAtlas.Causal.isPrefixCode_encodeInt": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.IsPrefixCode",
+        "AISafetyAtlas.Causal.encodeInt"
+      ]
+    },
+    "AISafetyAtlas.Causal.isPrefixCode_encodeMonomial": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.CodeSym",
+        "AISafetyAtlas.Causal.IsPrefixCode",
+        "AISafetyAtlas.Causal.SparseMonomial",
+        "AISafetyAtlas.Causal.encodeMonomial"
+      ]
+    },
+    "AISafetyAtlas.Causal.isPrefixCode_encodeNat": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.IsPrefixCode",
+        "AISafetyAtlas.Causal.encodeNat"
+      ]
+    },
+    "AISafetyAtlas.Causal.isPrefixCode_encodeO24Var": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.IsPrefixCode",
+        "AISafetyAtlas.Causal.O24Var",
+        "AISafetyAtlas.Causal.encodeO24Var"
+      ]
+    },
+    "AISafetyAtlas.Causal.isPrefixCode_encodeRat": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.IsPrefixCode",
+        "AISafetyAtlas.Causal.encodeRat"
+      ]
+    },
+    "AISafetyAtlas.Causal.isPrefixCode_encodeSparseList": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.CodeSym",
+        "AISafetyAtlas.Causal.IsPrefixCode",
+        "AISafetyAtlas.Causal.SparsePoly",
+        "AISafetyAtlas.Causal.encodeSparseList"
+      ]
+    },
+    "AISafetyAtlas.Causal.isPrefixCode_encodeSparsePoly": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.CodeSym",
+        "AISafetyAtlas.Causal.IsPrefixCode",
+        "AISafetyAtlas.Causal.SparsePoly",
+        "AISafetyAtlas.Causal.encodeSparsePoly"
+      ]
+    },
+    "AISafetyAtlas.Causal.isPrefixCode_encodeVarPow": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.CodeSym",
+        "AISafetyAtlas.Causal.IsPrefixCode",
+        "AISafetyAtlas.Causal.encodeVarPow"
+      ]
+    },
+    "AISafetyAtlas.Causal.isSemialgebraic_biInter": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.IsSemialgebraic"
+      ]
+    },
+    "AISafetyAtlas.Causal.isSemialgebraic_biUnion": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.IsSemialgebraic"
+      ]
+    },
+    "AISafetyAtlas.Causal.isSemialgebraic_closedBox": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.ClosedBox",
+        "AISafetyAtlas.Causal.IsSemialgebraic"
+      ]
+    },
+    "AISafetyAtlas.Causal.isSemialgebraic_compl_basic": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.BasicSemialgebraic",
+        "AISafetyAtlas.Causal.IsSemialgebraic",
+        "AISafetyAtlas.Causal.PolySign"
+      ]
+    },
+    "AISafetyAtlas.Causal.isSemialgebraic_empty": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.IsSemialgebraic"
+      ]
+    },
+    "AISafetyAtlas.Causal.isSemialgebraic_not_holds": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.IsSemialgebraic",
+        "AISafetyAtlas.Causal.PolySign",
+        "AISafetyAtlas.Causal.PolySign.Holds"
+      ]
+    },
+    "AISafetyAtlas.Causal.isSemialgebraic_of_containsChartBox": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.ChartIndex",
+        "AISafetyAtlas.Causal.ClosedBox",
+        "AISafetyAtlas.Causal.ContainsChartBox",
+        "AISafetyAtlas.Causal.IsSemialgebraic",
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Model.chartSlice",
+        "AISafetyAtlas.Causal.binaryDim"
+      ]
+    },
+    "AISafetyAtlas.Causal.isSemialgebraic_univ": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.IsSemialgebraic"
+      ]
+    },
+    "AISafetyAtlas.Causal.jointProb_sum_two": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.Assignment",
+        "AISafetyAtlas.Causal.InterventionProfile",
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Model.jointProb",
+        "AISafetyAtlas.Causal.binaryDim"
+      ]
+    },
+    "AISafetyAtlas.Causal.measurableSet_parents_eq": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Model.parents",
+        "AISafetyAtlas.Causal.instMeasurableSpaceModel"
+      ]
+    },
+    "AISafetyAtlas.Causal.measurable_cpt": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.Assignment",
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Model.cpt",
+        "AISafetyAtlas.Causal.instMeasurableSpaceModel"
+      ]
+    },
+    "AISafetyAtlas.Causal.measurable_modelError": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.instMeasurableSpaceModel",
+        "AISafetyAtlas.Causal.modelError"
+      ]
+    },
+    "AISafetyAtlas.Causal.measurable_roundDown": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Model.roundDown",
+        "AISafetyAtlas.Causal.instMeasurableSpaceModel"
+      ]
+    },
+    "AISafetyAtlas.Causal.measureAnalystRisk": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.AdmissibleFamily",
+        "AISafetyAtlas.Causal.MeasureEstimator",
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.PolicyFamily",
+        "AISafetyAtlas.Causal.RandomizedQueryStrategy",
+        "AISafetyAtlas.Causal.Skeleton",
+        "AISafetyAtlas.Causal.measureExpectedError"
+      ]
+    },
+    "AISafetyAtlas.Causal.measureAnalystRisk_nonneg": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.MeasureEstimator",
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.RandomizedQueryStrategy",
+        "AISafetyAtlas.Causal.Skeleton",
+        "AISafetyAtlas.Causal.measureAnalystRisk"
+      ]
+    },
+    "AISafetyAtlas.Causal.measureAnalystRisk_toMeasureEstimator": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.RandomizedEstimator",
+        "AISafetyAtlas.Causal.RandomizedEstimator.toMeasureEstimator",
+        "AISafetyAtlas.Causal.RandomizedQueryStrategy",
+        "AISafetyAtlas.Causal.Skeleton",
+        "AISafetyAtlas.Causal.exactAnalystRisk",
+        "AISafetyAtlas.Causal.measureAnalystRisk"
+      ]
+    },
+    "AISafetyAtlas.Causal.measureExpectedError": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.MeasureEstimator",
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.PolicyFamily",
+        "AISafetyAtlas.Causal.RandomizedQueryStrategy",
+        "AISafetyAtlas.Causal.Skeleton",
+        "AISafetyAtlas.Causal.Transcript",
+        "AISafetyAtlas.Causal.instMeasurableSpaceModel",
+        "AISafetyAtlas.Causal.modelError",
+        "AISafetyAtlas.Causal.pmfExpect",
+        "AISafetyAtlas.Causal.runRandomizedTranscript"
+      ]
+    },
+    "AISafetyAtlas.Causal.measureExpectedError_le_one": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.MeasureEstimator",
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.PolicyFamily",
+        "AISafetyAtlas.Causal.RandomizedQueryStrategy",
+        "AISafetyAtlas.Causal.Skeleton",
+        "AISafetyAtlas.Causal.measureExpectedError"
+      ]
+    },
+    "AISafetyAtlas.Causal.measureExpectedError_nonneg": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.MeasureEstimator",
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.PolicyFamily",
+        "AISafetyAtlas.Causal.RandomizedQueryStrategy",
+        "AISafetyAtlas.Causal.Skeleton",
+        "AISafetyAtlas.Causal.measureExpectedError"
+      ]
+    },
+    "AISafetyAtlas.Causal.measureExpectedError_toMeasureEstimator": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.PolicyFamily",
+        "AISafetyAtlas.Causal.RandomizedEstimator",
+        "AISafetyAtlas.Causal.RandomizedEstimator.toMeasureEstimator",
+        "AISafetyAtlas.Causal.RandomizedQueryStrategy",
+        "AISafetyAtlas.Causal.Skeleton",
+        "AISafetyAtlas.Causal.exactExpectedError",
+        "AISafetyAtlas.Causal.measureExpectedError"
+      ]
+    },
+    "AISafetyAtlas.Causal.measureMinimalBudget": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Skeleton",
+        "AISafetyAtlas.Causal.measureMinimaxRisk"
+      ]
+    },
+    "AISafetyAtlas.Causal.measureMinimalBudget_eq_exactMinimalBudget": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.ShiftedQuery",
+        "AISafetyAtlas.Causal.Skeleton",
+        "AISafetyAtlas.Causal.exactMinimalBudget",
+        "AISafetyAtlas.Causal.measureMinimalBudget"
+      ]
+    },
+    "AISafetyAtlas.Causal.measureMinimalBudget_eq_exactMinimalBudget_binary": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Skeleton",
+        "AISafetyAtlas.Causal.binaryDim",
+        "AISafetyAtlas.Causal.exactMinimalBudget",
+        "AISafetyAtlas.Causal.measureMinimalBudget"
+      ]
+    },
+    "AISafetyAtlas.Causal.measureMinimaxRisk": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.MeasureEstimator",
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.RandomizedQueryStrategy",
+        "AISafetyAtlas.Causal.Skeleton",
+        "AISafetyAtlas.Causal.measureAnalystRisk"
+      ]
+    },
+    "AISafetyAtlas.Causal.measureMinimaxRisk_eq_exactMinimaxRisk": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.ShiftedQuery",
+        "AISafetyAtlas.Causal.Skeleton",
+        "AISafetyAtlas.Causal.exactMinimaxRisk",
+        "AISafetyAtlas.Causal.measureMinimaxRisk"
+      ]
+    },
+    "AISafetyAtlas.Causal.measureMinimaxRisk_eq_exactMinimaxRisk_binary": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Skeleton",
+        "AISafetyAtlas.Causal.binaryDim",
+        "AISafetyAtlas.Causal.exactMinimaxRisk",
+        "AISafetyAtlas.Causal.measureMinimaxRisk"
+      ]
+    },
+    "AISafetyAtlas.Causal.measureMinimaxRisk_le_exactMinimaxRisk": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.ShiftedQuery",
+        "AISafetyAtlas.Causal.Skeleton",
+        "AISafetyAtlas.Causal.exactMinimaxRisk",
+        "AISafetyAtlas.Causal.measureMinimaxRisk"
+      ]
+    },
+    "AISafetyAtlas.Causal.modelError": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Model.parents",
+        "AISafetyAtlas.Causal.cptError"
+      ]
+    },
+    "AISafetyAtlas.Causal.modelError_eq_zero_iff": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.modelError"
+      ]
+    },
+    "AISafetyAtlas.Causal.modelError_le_one": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.modelError"
+      ]
+    },
+    "AISafetyAtlas.Causal.modelError_nonneg": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.modelError"
+      ]
+    },
+    "AISafetyAtlas.Causal.modelError_roundDown_le": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Model.roundDown",
+        "AISafetyAtlas.Causal.modelError"
+      ]
+    },
+    "AISafetyAtlas.Causal.nonadaptiveExactMinimalBudget": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Skeleton",
+        "AISafetyAtlas.Causal.nonadaptiveExactMinimaxRisk"
+      ]
+    },
+    "AISafetyAtlas.Causal.nonadaptiveExactMinimaxRisk": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.IsNonadaptiveRandomizedStrategy",
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.RandomizedEstimator",
+        "AISafetyAtlas.Causal.RandomizedQueryStrategy",
+        "AISafetyAtlas.Causal.Skeleton",
+        "AISafetyAtlas.Causal.exactAnalystRisk"
+      ]
+    },
+    "AISafetyAtlas.Causal.not_inIdentifiedSet_of_neg": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.InIdentifiedSet",
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Skeleton"
+      ]
+    },
+    "AISafetyAtlas.Causal.not_inIdentifiedSet_of_opposite_sign": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.Assignment",
+        "AISafetyAtlas.Causal.InIdentifiedSet",
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.ProbMixture",
+        "AISafetyAtlas.Causal.Skeleton",
+        "AISafetyAtlas.Causal.Skeleton.gap",
+        "AISafetyAtlas.Causal.Skeleton.observed"
+      ]
+    },
+    "AISafetyAtlas.Causal.o24ClassSize": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Causal.o24EncodeInput": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.CodeSym",
+        "AISafetyAtlas.Causal.O24Input",
+        "AISafetyAtlas.Causal.O24Input.graph",
+        "AISafetyAtlas.Causal.O24Input.observed",
+        "AISafetyAtlas.Causal.O24Input.utilityParents",
+        "AISafetyAtlas.Causal.encodeFinsetFin",
+        "AISafetyAtlas.Causal.encodeList",
+        "AISafetyAtlas.Causal.encodeNat"
+      ]
+    },
+    "AISafetyAtlas.Causal.o24EncodeInput_injective": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.CodeSym",
+        "AISafetyAtlas.Causal.O24Input",
+        "AISafetyAtlas.Causal.o24EncodeInput"
+      ]
+    },
+    "AISafetyAtlas.Causal.o24ExcludedSlice": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.ChartIndex",
+        "AISafetyAtlas.Causal.O24Assignment",
+        "AISafetyAtlas.Causal.O24Var",
+        "AISafetyAtlas.Causal.UtilityConfig",
+        "AISafetyAtlas.Causal.chartBox"
+      ]
+    },
+    "AISafetyAtlas.Causal.o24Point": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.ChartIndex",
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Model.chartOn",
+        "AISafetyAtlas.Causal.O24Var",
+        "AISafetyAtlas.Causal.Skeleton",
+        "AISafetyAtlas.Causal.Skeleton.utility",
+        "AISafetyAtlas.Causal.Skeleton.utilityParents",
+        "AISafetyAtlas.Causal.UtilityConfig",
+        "AISafetyAtlas.Causal.UtilityConfig.extend",
+        "AISafetyAtlas.Causal.binaryDim"
+      ]
+    },
+    "AISafetyAtlas.Causal.o24Size": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.chartDim"
+      ]
+    },
+    "AISafetyAtlas.Causal.o24Value": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.O24Var",
+        "AISafetyAtlas.Causal.Skeleton",
+        "AISafetyAtlas.Causal.Skeleton.utilityParents",
+        "AISafetyAtlas.Causal.binaryDim",
+        "AISafetyAtlas.Causal.o24Point"
+      ]
+    },
+    "AISafetyAtlas.Causal.ofSparseMonomial": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.SparseMonomial",
+        "AISafetyAtlas.Causal.sparseExponents"
+      ]
+    },
+    "AISafetyAtlas.Causal.ofSparsePoly": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.SparseMonomial",
+        "AISafetyAtlas.Causal.SparsePoly",
+        "AISafetyAtlas.Causal.ofSparseMonomial"
+      ]
+    },
+    "AISafetyAtlas.Causal.ofSparsePoly_nil": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.SparseMonomial",
+        "AISafetyAtlas.Causal.ofSparsePoly"
+      ]
+    },
+    "AISafetyAtlas.Causal.optimalPolicyFamily": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Model.bestPolicy",
+        "AISafetyAtlas.Causal.PolicyFamily",
+        "AISafetyAtlas.Causal.ProbMixture",
+        "AISafetyAtlas.Causal.Skeleton",
+        "AISafetyAtlas.Causal.Skeleton.observed"
+      ]
+    },
+    "AISafetyAtlas.Causal.pmfExpect": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Causal.pmfExpect_add_const": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.pmfExpect"
+      ]
+    },
+    "AISafetyAtlas.Causal.pmfExpect_const": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.pmfExpect"
+      ]
+    },
+    "AISafetyAtlas.Causal.pmfExpect_discretize": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.MeasureEstimator",
+        "AISafetyAtlas.Causal.MeasureEstimator.discretize",
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Model.roundDown",
+        "AISafetyAtlas.Causal.Skeleton",
+        "AISafetyAtlas.Causal.Transcript",
+        "AISafetyAtlas.Causal.instMeasurableSpaceModel",
+        "AISafetyAtlas.Causal.modelError",
+        "AISafetyAtlas.Causal.pmfExpect"
+      ]
+    },
+    "AISafetyAtlas.Causal.pmfExpect_le": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.pmfExpect"
+      ]
+    },
+    "AISafetyAtlas.Causal.pmfExpect_mono": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.pmfExpect"
+      ]
+    },
+    "AISafetyAtlas.Causal.pmfExpect_nonneg": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.pmfExpect"
+      ]
+    },
+    "AISafetyAtlas.Causal.pmfExpect_pure": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.pmfExpect"
+      ]
+    },
+    "AISafetyAtlas.Causal.polySize": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.ratBitLength"
+      ]
+    },
+    "AISafetyAtlas.Causal.radiusErrors": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.InIdentifiedSet",
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Skeleton",
+        "AISafetyAtlas.Causal.Skeleton.MarginClass",
+        "AISafetyAtlas.Causal.modelError"
+      ]
+    },
+    "AISafetyAtlas.Causal.ratBitLength": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Causal.runRandomizedTranscript": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.PolicyFamily",
+        "AISafetyAtlas.Causal.RandomizedQueryStrategy",
+        "AISafetyAtlas.Causal.Skeleton",
+        "AISafetyAtlas.Causal.Transcript"
+      ]
+    },
+    "AISafetyAtlas.Causal.sparseExponents": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Causal.sub_floorMul_lt": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.floorMul"
+      ]
+    },
+    "AISafetyAtlas.Causal.sum_assignment_two": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.Assignment",
+        "AISafetyAtlas.Causal.asg",
+        "AISafetyAtlas.Causal.binaryDim"
+      ]
+    },
+    "AISafetyAtlas.Causal.summable_pmfExpect": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.Causal.sup'_sub_inf'_bool": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.Causal.takeWhile_digits_append": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.CodeSym",
+        "AISafetyAtlas.Causal.CodeSym.isDigit",
+        "AISafetyAtlas.Causal.CodeSym.sep"
+      ]
+    },
+    "AISafetyAtlas.Causal.utilityBox": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.ClosedBox",
+        "AISafetyAtlas.Causal.UtilityConfig"
+      ]
+    },
+    "AISafetyAtlas.Causal.utility_mem_utilityBox": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.Skeleton",
+        "AISafetyAtlas.Causal.Skeleton.utility",
+        "AISafetyAtlas.Causal.Skeleton.utilityParents",
+        "AISafetyAtlas.Causal.UtilityConfig",
+        "AISafetyAtlas.Causal.UtilityConfig.extend",
+        "AISafetyAtlas.Causal.binaryDim",
+        "AISafetyAtlas.Causal.utilityBox"
+      ]
+    },
+    "AISafetyAtlas.Causal.wellFounded_iff_exists_rank": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.Causal.wellFounded_of_rank": {
+      "kind": "theorem",
+      "deps": []
+    }
+  }
+}

@@ -3,7 +3,7 @@
   "generated_by": "scripts/generate_registry_views.py",
   "note": "Compact agent lookup over the single results ledger. Prefer this over registry.yaml; open the full YAML only for one id when notes or candidate-formalization detail is required. A row with an informal claim states something a source asserted; a row without one records a formalization standing on its own account. Each atlas declaration carries the file and line it is defined at, so opening one needs no repository search.",
   "claim_count": 49,
-  "artifact_count": 32,
+  "artifact_count": 37,
   "results_by_id": {
     "BY-001": {
       "id": "BY-001",
@@ -3699,43 +3699,511 @@
             "atlas_declaration": "AISafetyAtlas.InformationTheory.isMarkovChain_iff_measure_factorizes_singleton",
             "type": "NEW_PROOF",
             "file": "AISafetyAtlas/InformationTheory/DataProcessing.lean",
-            "line": 246
+            "line": 247
           },
           {
             "atlas_declaration": "AISafetyAtlas.InformationTheory.isMarkovChain_iff_measure_factorizes",
             "type": "NEW_PROOF",
             "file": "AISafetyAtlas/InformationTheory/DataProcessing.lean",
-            "line": 154
+            "line": 155
           },
           {
             "atlas_declaration": "AISafetyAtlas.InformationTheory.measure_factorizes_of_isMarkovChain",
             "type": "NEW_PROOF",
             "file": "AISafetyAtlas/InformationTheory/DataProcessing.lean",
-            "line": 290
+            "line": 291
           },
           {
             "atlas_declaration": "AISafetyAtlas.InformationTheory.mutualInfo_le_of_isMarkovChain",
             "type": "NEW_PROOF",
             "file": "AISafetyAtlas/InformationTheory/DataProcessing.lean",
-            "line": 376
+            "line": 544
           },
           {
             "atlas_declaration": "AISafetyAtlas.InformationTheory.mutualInfo_eq_iff_isMarkovChain",
             "type": "NEW_PROOF",
             "file": "AISafetyAtlas/InformationTheory/DataProcessing.lean",
-            "line": 407
+            "line": 575
           },
           {
             "atlas_declaration": "AISafetyAtlas.InformationTheory.mutualInfo_comp_le",
             "type": "NEW_PROOF",
             "file": "AISafetyAtlas/InformationTheory/DataProcessing.lean",
-            "line": 484
+            "line": 652
           },
           {
             "atlas_declaration": "AISafetyAtlas.InformationTheory.condMutualInfo_le_mutualInfo",
             "type": "NEW_PROOF",
             "file": "AISafetyAtlas/InformationTheory/DataProcessing.lean",
-            "line": 427
+            "line": 595
+          }
+        ]
+      },
+      "candidate_count": 0
+    },
+    "LAND-CAUSAL-PEARLCBN-001": {
+      "id": "LAND-CAUSAL-PEARLCBN-001",
+      "name": "Pearl causal Bayesian networks as a condition on an interventional family",
+      "ai_bridge_status": null,
+      "informal_claim": null,
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declarations": [
+            "AISafetyAtlas.Causal.InterventionalFamily",
+            "AISafetyAtlas.Causal.ConditionalTables",
+            "AISafetyAtlas.Causal.ConditionalTables.family",
+            "AISafetyAtlas.Causal.forcedTable",
+            "AISafetyAtlas.Causal.IsCausalBayesNetwork",
+            "AISafetyAtlas.Causal.eq_family_of_isCausalBayesNetwork",
+            "AISafetyAtlas.Causal.isCausalBayesNetwork_family",
+            "AISafetyAtlas.Causal.isCausalBayesNetwork_iff",
+            "AISafetyAtlas.Causal.Model.tables",
+            "AISafetyAtlas.Causal.Model.interventionalFamily",
+            "AISafetyAtlas.Causal.Model.interventionalFamily_eq",
+            "AISafetyAtlas.Causal.Model.isCausalBayesNetwork"
+          ],
+          "module": "AISafetyAtlas.Causal.BayesianNetwork",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Causal.eq_family_of_isCausalBayesNetwork",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Causal/BayesianNetwork.lean",
+            "line": 131
+          }
+        ]
+      },
+      "candidate_count": 0
+    },
+    "LAND-CAUSAL-DECISIONNET-001": {
+      "id": "LAND-CAUSAL-DECISIONNET-001",
+      "name": "Decision tasks as causal influence diagrams, with the decision and the utility as vertices",
+      "ai_bridge_status": null,
+      "informal_claim": null,
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declarations": [
+            "AISafetyAtlas.Causal.DecisionNetwork",
+            "AISafetyAtlas.Causal.DecisionPolicy",
+            "AISafetyAtlas.Causal.Model.withPolicy",
+            "AISafetyAtlas.Causal.Model.withPolicy_parents",
+            "AISafetyAtlas.Causal.Model.properAncestors",
+            "AISafetyAtlas.Causal.Model.properDescendants",
+            "AISafetyAtlas.Causal.Model.cpt_eq_one_unique",
+            "AISafetyAtlas.Causal.DecisionNetwork.expectedUtility",
+            "AISafetyAtlas.Causal.DecisionNetwork.IsOptimal",
+            "AISafetyAtlas.Causal.DecisionNetwork.regret",
+            "AISafetyAtlas.Causal.DecisionNetwork.regret_nonneg",
+            "AISafetyAtlas.Causal.DecisionNetwork.IsUnmediated",
+            "AISafetyAtlas.Causal.DecisionNetwork.IsDeterministicUtility",
+            "AISafetyAtlas.Causal.DecisionNetwork.exists_utilityFunction",
+            "AISafetyAtlas.Causal.DecisionNetwork.decision_notMem_parents_of_isUnmediated",
+            "AISafetyAtlas.Causal.DecisionNetwork.mem_parents_utility_of_isUnmediated",
+            "AISafetyAtlas.Examples.Causal.DecisionNetwork.figCID",
+            "AISafetyAtlas.Examples.Causal.DecisionNetwork.figIsUnmediated",
+            "AISafetyAtlas.Examples.Causal.DecisionNetwork.figDecision_mem_parents_utility",
+            "AISafetyAtlas.Examples.Causal.DecisionNetwork.figIsDeterministicUtility"
+          ],
+          "module": "AISafetyAtlas.Causal.DecisionNetwork",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Causal.DecisionNetwork.mem_parents_utility_of_isUnmediated",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Causal/DecisionNetwork.lean",
+            "line": 299
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Examples.Causal.DecisionNetwork.figIsUnmediated",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Examples/Causal/DecisionNetwork.lean",
+            "line": 90
+          }
+        ]
+      },
+      "candidate_count": 0
+    },
+    "LAND-CAUSAL-COLLISION-001": {
+      "id": "LAND-CAUSAL-COLLISION-001",
+      "name": "Margins do not imply behavioral identifiability",
+      "ai_bridge_status": null,
+      "informal_claim": null,
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declarations": [
+            "LocalIntervention",
+            "InterventionProfile",
+            "Mixture",
+            "IsProbabilityMixture",
+            "ProbMixture",
+            "ProbMixture.dirac",
+            "binaryDim",
+            "identityIntervention",
+            "fixIntervention",
+            "fixProfile",
+            "hardInterventionProfile",
+            "flipIntervention",
+            "Model",
+            "Model.factor",
+            "Model.factor_eq_re24",
+            "Model.factor_congr",
+            "Model.factor_fixProfile",
+            "Model.factor_hardInterventionProfile",
+            "Model.jointProb",
+            "Model.jointProb_sum",
+            "Model.jointProb_fixProfile",
+            "Model.jointProb_hardInterventionProfile",
+            "jointProb_sum_two",
+            "Model.Δ",
+            "Model.Δ_fixProfile",
+            "Model.factor_sum",
+            "Model.ParentClosed",
+            "Model.ancestors",
+            "Model.ancestors_eq_univ_iff",
+            "Model.Δmix",
+            "Model.Δmix_eq_sum",
+            "Model.Δmix_congr",
+            "Model.Δmix_eq_on_probMixture_iff",
+            "sum_assignment_two",
+            "Skeleton",
+            "Skeleton.MarginClass",
+            "Model.Δmask",
+            "Skeleton.BehaviorEq",
+            "Skeleton.ValidMargin",
+            "Model.ext",
+            "Skeleton.realizable_iff"
+          ],
+          "module": "AISafetyAtlas.Causal.Model",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Examples.Causal.margin_class_not_identifiable",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Examples/Causal/BehavioralCollision.lean",
+            "line": 721
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Examples.Causal.margin_class_not_identifiable_two_graphs",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Examples/Causal/BehavioralCollision.lean",
+            "line": 770
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Examples.Causal.Model.jointProb_sum_shiftCollapse",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Examples/Causal/Model.lean",
+            "line": 105
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Causal.Skeleton.behaviorEq_of_observed_eq_empty",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Causal/MarginClass.lean",
+            "line": 520
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Causal.Model.Δmix_congr",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Causal/Model.lean",
+            "line": 786
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Causal.Model.jointProb_hardInterventionProfile",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Causal/Model.lean",
+            "line": 666
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Causal.Model.Δ_fixProfile",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Causal/Model.lean",
+            "line": 697
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Causal.Model.ancestors_eq_univ_iff",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Causal/Model.lean",
+            "line": 871
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Examples.Causal.transform_identity_edgeless",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Examples/Causal/BehavioralCollision.lean",
+            "line": 289
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Examples.Causal.Δ_eq_half_sub_joint",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Examples/Causal/BehavioralCollision.lean",
+            "line": 236
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Examples.Causal.margin_class_not_identifiable_family",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Examples/Causal/BehavioralCollision.lean",
+            "line": 618
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Examples.Causal.behaviorEq_has_teeth",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Examples/Causal/BehavioralCollision.lean",
+            "line": 684
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Examples.Causal.mm2_shape",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Examples/Causal/BehavioralCollision.lean",
+            "line": 519
+          }
+        ]
+      },
+      "candidate_count": 0
+    },
+    "LAND-CAUSAL-DECISION-001": {
+      "id": "LAND-CAUSAL-DECISION-001",
+      "name": "Causal decision policies, regret, and identified-set radius",
+      "ai_bridge_status": null,
+      "informal_claim": null,
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declarations": [
+            "AISafetyAtlas.Causal.Policy",
+            "AISafetyAtlas.Causal.Policy.ext",
+            "AISafetyAtlas.Causal.Policy.const",
+            "AISafetyAtlas.Causal.fibreRep",
+            "AISafetyAtlas.Causal.Model.value",
+            "AISafetyAtlas.Causal.Model.value_eq",
+            "AISafetyAtlas.Causal.Model.fibreScore",
+            "AISafetyAtlas.Causal.Model.bestDecision",
+            "AISafetyAtlas.Causal.Model.bestPolicy",
+            "AISafetyAtlas.Causal.Model.optimalValue",
+            "AISafetyAtlas.Causal.Model.value_const_sub",
+            "AISafetyAtlas.Causal.Model.value_le_sign",
+            "AISafetyAtlas.Causal.Model.regret_signPolicy_eq_zero",
+            "AISafetyAtlas.Causal.Model.signPolicy_eq_of_behaviorEq",
+            "AISafetyAtlas.Causal.Model.regret",
+            "AISafetyAtlas.Causal.Model.regret_decomp",
+            "AISafetyAtlas.Causal.Model.regret_eq_zero_iff",
+            "AISafetyAtlas.Causal.Model.HasRegretAtMost",
+            "AISafetyAtlas.Causal.InIdentifiedSet",
+            "AISafetyAtlas.Causal.inIdentifiedSet_zero_of_behaviorEq",
+            "AISafetyAtlas.Causal.inIdentifiedSet_self",
+            "AISafetyAtlas.Causal.inIdentifiedSet_symm",
+            "AISafetyAtlas.Causal.not_inIdentifiedSet_of_neg",
+            "AISafetyAtlas.Causal.modelError",
+            "AISafetyAtlas.Causal.modelError_eq_zero_iff",
+            "AISafetyAtlas.Causal.IsRadius"
+          ],
+          "module": "AISafetyAtlas.Causal.Decision",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Causal.Model.value_eq",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Causal/Decision.lean",
+            "line": 130
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Causal.Model.value_const_sub",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Causal/Decision.lean",
+            "line": 520
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Causal.Model.regret_eq_zero_iff",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Causal/Decision.lean",
+            "line": 345
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Causal.Model.value_le_sign",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Causal/Decision.lean",
+            "line": 448
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Causal.inIdentifiedSet_zero_of_behaviorEq",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Causal/Decision.lean",
+            "line": 595
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Examples.Causal.margin_class_not_identifiable_shared_optimal",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Examples/Causal/Decision.lean",
+            "line": 36
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Causal.not_inIdentifiedSet_of_neg",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Causal/Decision.lean",
+            "line": 611
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Causal.modelError_eq_zero_iff",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Causal/Decision.lean",
+            "line": 766
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Examples.Causal.not_inIdentifiedSet_high",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Examples/Causal/Decision.lean",
+            "line": 149
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Examples.Causal.OneNodeClass.modelError_le_ten_mul",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Examples/Causal/OneNodeClass.lean",
+            "line": 541
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Examples.Causal.card_fibreRep_empty",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Examples/Causal/Decision.lean",
+            "line": 52
+          }
+        ]
+      },
+      "candidate_count": 0
+    },
+    "LAND-CAUSAL-STRUCTURAL-001": {
+      "id": "LAND-CAUSAL-STRUCTURAL-001",
+      "name": "Structural causal models, causal influence diagrams, and materiality",
+      "ai_bridge_status": null,
+      "informal_claim": null,
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declarations": [
+            "AISafetyAtlas.Causal.SCM",
+            "AISafetyAtlas.Causal.wellFounded_of_rank",
+            "AISafetyAtlas.Causal.acyclic_of_rank",
+            "AISafetyAtlas.Causal.wellFounded_iff_exists_rank",
+            "AISafetyAtlas.Causal.chainParents",
+            "AISafetyAtlas.Causal.chainParents_acyclic",
+            "AISafetyAtlas.Causal.chainParents_not_wellFounded",
+            "AISafetyAtlas.Causal.chainParents_fixedPoint_not_unique",
+            "AISafetyAtlas.Causal.SCM.exoJoint",
+            "AISafetyAtlas.Causal.SCM.exoJoint_sum",
+            "AISafetyAtlas.Causal.SCM.exoJoint_mul_prod",
+            "AISafetyAtlas.Causal.SCM.eval",
+            "AISafetyAtlas.Causal.SCM.eval_eq_f",
+            "AISafetyAtlas.Causal.SCM.eval_congr",
+            "AISafetyAtlas.Causal.SCM.jointProb",
+            "AISafetyAtlas.Causal.SCM.jointProb_sum",
+            "AISafetyAtlas.Causal.SCM.submodel",
+            "AISafetyAtlas.Causal.SCM.submodel_eval",
+            "AISafetyAtlas.Causal.SCM.submodel_eval_notMem",
+            "AISafetyAtlas.Causal.SCM.softIntervention",
+            "AISafetyAtlas.Causal.NodeKind",
+            "AISafetyAtlas.Causal.CID",
+            "AISafetyAtlas.Causal.CID.decisions",
+            "AISafetyAtlas.Causal.CID.utilities",
+            "AISafetyAtlas.Causal.CID.structureNodes",
+            "AISafetyAtlas.Causal.CID.observations",
+            "AISafetyAtlas.Causal.CID.decisions_disjoint_utilities",
+            "AISafetyAtlas.Causal.CID.IsSingleDecision",
+            "AISafetyAtlas.Causal.SCIM",
+            "AISafetyAtlas.Causal.SCIM.Policy",
+            "AISafetyAtlas.Causal.SCIM.policy_ext_single",
+            "AISafetyAtlas.Causal.SCIM.withPolicy",
+            "AISafetyAtlas.Causal.SCIM.withPolicy_f_mem",
+            "AISafetyAtlas.Causal.SCIM.withPolicy_f_notMem",
+            "AISafetyAtlas.Causal.SCIM.expectedUtility",
+            "AISafetyAtlas.Causal.SCIM.IsOptimalPolicy",
+            "AISafetyAtlas.Causal.SCIM.optimalValue",
+            "AISafetyAtlas.Causal.SCIM.expectedUtility_le_optimalValue",
+            "AISafetyAtlas.Causal.SCIM.exists_isOptimalPolicy",
+            "AISafetyAtlas.Causal.SCIM.removeInfoLink",
+            "AISafetyAtlas.Causal.SCIM.removeInfoLink_sub",
+            "AISafetyAtlas.Causal.SCIM.instFintypePolicy",
+            "AISafetyAtlas.Causal.SCIM.IsMaterial",
+            "AISafetyAtlas.Examples.Causal.StructuralModel.figSCIM",
+            "AISafetyAtlas.Examples.Causal.StructuralModel.figSCIM_optimalValue",
+            "AISafetyAtlas.Examples.Causal.StructuralModel.figCut_optimalValue",
+            "AISafetyAtlas.Examples.Causal.StructuralModel.figSCIM_opinion_isMaterial",
+            "AISafetyAtlas.Examples.Causal.StructuralModel.figSCIM_policy_not_const",
+            "AISafetyAtlas.Examples.Causal.StructuralModel.copyChain_eval_one",
+            "AISafetyAtlas.Examples.Causal.StructuralModel.utility_childless_has_teeth"
+          ],
+          "module": "AISafetyAtlas.Causal.StructuralModel",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Causal.SCM.eval_eq_f",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Causal/StructuralModel.lean",
+            "line": 295
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Causal.SCM.exoJoint_mul_prod",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Causal/StructuralModel.lean",
+            "line": 256
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Causal.SCIM.policy_ext_single",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Causal/StructuralModel.lean",
+            "line": 714
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Causal.SCIM.exists_isOptimalPolicy",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Causal/StructuralModel.lean",
+            "line": 851
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Examples.Causal.StructuralModel.figSCIM_opinion_isMaterial",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Examples/Causal/StructuralModel.lean",
+            "line": 495
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Examples.Causal.StructuralModel.figSCIM_policy_not_const",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Examples/Causal/StructuralModel.lean",
+            "line": 483
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Examples.Causal.StructuralModel.utility_childless_has_teeth",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Examples/Causal/StructuralModel.lean",
+            "line": 107
           }
         ]
       },

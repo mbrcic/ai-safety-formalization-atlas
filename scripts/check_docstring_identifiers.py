@@ -8,7 +8,7 @@ nothing, which is worse than no pointer.
 Only names that look like atlas declarations are checked: an identifier
 containing an underscore, a CamelCase or lowerCamelCase name, or a dotted name
 whose head is `AISafetyAtlas`. Those are the three shapes every declaration on
-this branch is named in.
+the atlas is named in.
 
 **Known limitation.** A short all-lowercase token with no underscore — `hbound`,
 `hle` — is indistinguishable from a proof-local binder, which docstrings do refer
@@ -206,6 +206,42 @@ def code_identifiers() -> set[str]:
     return names
 
 
+# The elaborated-environment index, when it has been generated. Every prefix of
+# every declaration is resolvable: a namespace, a structure and its projections
+# are all things prose legitimately names, and the environment knows each of
+# them as a real constant or as the head of one.
+ENV_INDEX: dict[str, str] = {}
+ENV_PREFIXES: set[str] = set()
+
+
+# Advisory findings: a docstring naming something real that is nevertheless not
+# in the public interface. Reported, never fatal — the same split CausalForge
+# uses, where the deterministic crosslink check is a hard gate and the
+# knowledge-base lint beside it is warn-only.
+ENV_ADVISORIES: list[str] = []
+
+
+def _load_env_index() -> None:
+    path = ROOT / "docs" / "status" / "declaration-index.json"
+    if not path.is_file():
+        return
+    import json
+
+    data = json.loads(path.read_text(encoding="utf-8"))
+    for entry in data.get("declarations", []):
+        name = entry["name"]
+        ENV_INDEX[name] = entry["kind"]
+        for token in (name, entry.get("module", "")):
+            if not token:
+                continue
+            parts = token.split(".")
+            for i in range(1, len(parts) + 1):
+                ENV_PREFIXES.add(".".join(parts[:i]))
+
+
+_load_env_index()
+
+
 # Hand-written prose a consumer reads before ever opening a Lean file. Generated
 # views under docs/status/ are excluded: they are regenerated, not edited, and a
 # name is fixed at its source.
@@ -389,6 +425,21 @@ def main() -> int:
                 if name in EXEMPT:
                     continue
                 if name.startswith("AISafetyAtlas."):
+                    # Strict pass, when the environment index is present. The
+                    # text-based `resolvable` accepts a name that appears
+                    # anywhere in Lean code, so a dangling reference survives by
+                    # colliding with a `have` binder — this file's own header
+                    # says so. `declaration-index.json` is walked from the
+                    # elaborated environment, so a name resolves there only if
+                    # it is a real constant. Absent, this is a no-op, which is
+                    # what keeps the cheap gate runnable without a Lean build.
+                    if ENV_INDEX and name not in ENV_PREFIXES:
+                        ENV_ADVISORIES.append(
+                            f"{rel}:~{line0}: `{name}` resolves in the source but "
+                            "is not in the public interface "
+                            "(docs/status/declaration-index.json), so a consumer "
+                            "cannot name it"
+                        )
                     # a real tail under a fictional namespace is not a resolution
                     prefix, _, tail = name.rpartition(".")
                     prefix_ok = prefix in modules or prefix.split(".")[-1] in modules
@@ -426,7 +477,7 @@ def main() -> int:
                 looks_atlas = (
                     ("_" in name and len(name) > 4)
                     # CamelCase and lowerCamelCase: the two shapes every
-                    # definition and theorem on this branch is named in
+                    # definition and theorem in the atlas is named in
                     or (CAMEL_CASE.match(name) and name.split(".")[0] not in EXTERNAL_ROOTS)
                     or (LOWER_CAMEL.match(name) and len(name) > 6)
                     # plain lowercase words of declaration length: `volume`,
@@ -468,6 +519,20 @@ def main() -> int:
         "docstring identifiers ok: every atlas-shaped backticked name resolves, "
         f"and no module-qualified name in {prose} hand-written prose files"
     )
+    if ENV_ADVISORIES:
+        print(
+            f"  (advisory) {len(ENV_ADVISORIES)} name(s) resolve in the source but "
+            "not in the public interface:"
+        )
+        for note in ENV_ADVISORIES[:10]:
+            print(f"    {note}")
+        if len(ENV_ADVISORIES) > 10:
+            print(f"    … and {len(ENV_ADVISORIES) - 10} more")
+    elif ENV_INDEX:
+        print(
+            f"  (advisory) every one is in the public interface "
+            f"({len(ENV_INDEX)} entries indexed from the elaborated environment)"
+        )
     return 0
 
 

@@ -80,6 +80,9 @@ python3 scripts/render_coverage_artifact.py --check
 echo "==> check_docstring_identifiers"
 python3 scripts/check_docstring_identifiers.py
 
+echo "==> check_conjecture_grade_prose"
+python3 scripts/check_conjecture_grade_prose.py
+
 echo "==> check_docs_paths"
 python3 scripts/check_docs_paths.py
 

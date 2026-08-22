@@ -33,6 +33,7 @@ still exists, which needs no Lean and is cheap enough to gate on.
 from __future__ import annotations
 
 import argparse
+import functools
 import json
 import re
 import subprocess
@@ -147,8 +148,27 @@ open Lean
 DECLARATION_LINE = re.compile(r"^\| `([A-Za-z_][A-Za-z0-9_.']*)` \|")
 
 
+@functools.cache
+def _authored_leaves() -> frozenset[str]:
+    return frozenset(declarations_in_tree())
+
+
 def is_authored(name: str) -> bool:
-    return not GENERATED_SUFFIX.search(name)
+    """Is `name` a declaration someone wrote?
+
+    The suffix blacklist above catches compiler companions with a structural
+    suffix. It cannot catch the two other kinds of generated name, because they
+    have no suffix to match: `deriving` output and anonymous `instance`
+    declarations, which Lean names `instFintypeCodeSym` and the like.
+
+    So the final word is the same criterion `--check` uses — the leaf must be
+    declared somewhere in the tree. Aligning the two is what stops `--write` from
+    emitting a name `--check` then rejects, a divergence this file has already
+    had to patch once by hand.
+    """
+    if GENERATED_SUFFIX.search(name):
+        return False
+    return name.split(".")[-1] in _authored_leaves()
 
 
 def run_harness() -> dict[str, Node]:

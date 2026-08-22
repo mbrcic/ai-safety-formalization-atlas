@@ -160,6 +160,100 @@
       "method": "Directory listing of Mathlib/Probability/Process across the pinned revision, then symbol grep for 'structure Filtration' and 'def Adapted' to read the definitions directly.",
       "found": "Mathlib/Probability/Process/Filtration.lean defines structure Filtration {Omega} (iota) [Preorder iota] (m : MeasurableSpace Omega) with seq : iota -> MeasurableSpace Omega and mono' : Monotone seq - the same preorder-indexed monotone-information shape as EvidenceMonotone. Adapted.lean defines Adapted (f : Filtration iota m) (u : (i : iota) -> Omega -> beta i), which is the family-of-observations form and corresponds to KnowableAt holding at every time. Predictable.lean covers knowability from strictly earlier evidence, Stopping.lean stopping times, PartitionFiltration.lean the partition presentation. The correspondence in the module docstring is by inspection; no formal bridge between the two developments is proved or attempted.",
       "scope_limits": "One corpus at one pinned revision. The correspondence is asserted at the level of definitions read side by side, not established by a Lean theorem, so it is a prior-art pointer rather than an equivalence result. No search was made for filtration-style developments outside Mathlib, and none was made for the specific composite DelayedKnowable, which names a situation rather than proving a theorem."
+    },
+    {
+      "id": "NC-008",
+      "claim": "Mathlib carries no causal-model machinery: no Bayesian or causal networks, no intervention or do-operator, and no directed reachability or decidable transitive closure that AISafetyAtlas.Causal.Model could have reused instead of defining `ancestors`.",
+      "asserted_in": [
+        "AISafetyAtlas/Causal/Model.lean, the ancestors section",
+        "registry.yaml, LAND-CAUSAL-COLLISION-001"
+      ],
+      "searched_on": "2026-08-19",
+      "searched_by": "mbrcic",
+      "corpora": [
+        "mathlib"
+      ],
+      "method": "Content grep over the pinned Mathlib source tree for 'bayesian network', 'do-calculus', 'causal model', 'd-separation'; for ReflTransGen together with any Decidable instance; for a Finset-level closure under a step function; and inspection of Mathlib/Combinatorics/Digraph/Basic.lean and SimpleGraph/Connectivity.",
+      "found": "No match for any causal term anywhere in the dependency tree, including PFR and Foundation. `Relation.ReflTransGen` exists with no Decidable instance. `Digraph` is a bare adjacency structure with lattice operations only: no walks, no reachability, no acyclicity. `SimpleGraph.Reachable` is undirected and so does not apply. No Finset-level closure operator. One genuine near-miss: `OrderHom.lfp` (Knaster-Tarski, Mathlib/Order/FixedPoints.lean) is the abstract form of `ancestors`, whose defining property is exactly `le_lfp`/`lfp_le`; it is not used because it is built from `sInf` over a set and so does not compute, while the whole purpose of `ancestors` is that (M5) be decidable on a concrete model.",
+      "scope_limits": "One corpus at one revision, plus an unpinned web sweep whose results are recorded here as context rather than as corpus evidence. Outside the pinned corpora, two adjacent developments exist and neither supplies what this layer needs: infotheo (Rocq/MathComp, Affeldt et al.) formalizes the graphoid axioms and conditional independence over finite probability mass functions, and Sargsyan's Cubical Agda development (arXiv:2606.20351) formalizes conditional independence, Bayesian conditioning and d-separation soundness. Both target conditional independence; neither defines interventions, a decision variable, a utility, or behavioral equivalence of models, which is the entire content of the layer here. Says nothing about unpinned third-party Lean packages."
+    },
+    {
+      "id": "NC-009",
+      "claim": "The six baseline formalization corpora plus the pinned CausalForge follow-up contain no reusable layer combining MAIS-A2 finite causal policies, arbitrary local state-map mixtures, interventional utility, regret-bounded policy families, identified sets, model error, and radius predicates.",
+      "asserted_in": [
+        "AISafetyAtlas/Causal/Decision.lean, module docstring",
+        "registry.yaml, LAND-CAUSAL-DECISION-001 notes"
+      ],
+      "searched_on": "2026-08-19",
+      "searched_by": "mbrcic",
+      "corpora": [
+        "mathlib",
+        "isabelle-afp",
+        "rocq-undecidability",
+        "hol4",
+        "hol-light",
+        "agda-stdlib",
+        "causalforge"
+      ],
+      "method": "Case-insensitive content and path search over the six pinned baseline snapshots for decision theory, stochastic policy, utility, regret, identified set, minimax, causal intervention, and interventional value terms, followed by a tracked-source search and manual review of CausalForge Causalean SCM/SWIG/intervention candidates and CausalSmith policy-regret candidates.",
+      "found": "No candidate combines the required layer. The baseline corpora contain isolated probability, game-theory, and optimization material. Causalean contains reusable measure-theoretic causal infrastructure, and CausalSmith contains separate observed-law statistical policy-regret and minimax work; neither combines arbitrary local state-map intervention mixtures with the RE24 CID utility/policy-oracle behavior and A2 causal-world-model identified-set/error/radius packaging.",
+      "scope_limits": "Seven pinned snapshots are covered: the six baseline corpora and one third-party CausalForge follow-up. This is scoped negative evidence for the combined layer, not a claim that the corpora lack isolated causal, policy, utility, regret, optimization, or minimax definitions. Keyword misses do not prove absence; no CausalForge build reproduction or adapter was attempted, and the check says nothing about other unpinned packages or unpublished developments.",
+      "followup_searches": [
+        {
+          "corpus": "causalforge",
+          "framework": "Lean",
+          "repository": "https://github.com/Jiyuan-Tan/CausalForge.git",
+          "version": "0bc3544c2ace84c23806e1b20767a18bb765f244",
+          "scope": "Causalean and CausalSmith Lean sources plus checked-in library metadata",
+          "searched_on": "2026-08-19",
+          "searched_by": "Codex agent-assisted session",
+          "queries": [
+            "structural causal model",
+            "local intervention",
+            "mixture of interventions",
+            "causal influence diagram",
+            "policy oracle",
+            "identified set",
+            "model error",
+            "regret"
+          ],
+          "candidate_hits": {
+            "hit_count": 594,
+            "query_hit_counts": {
+              "structural causal model": 75,
+              "local intervention": 0,
+              "mixture of interventions": 0,
+              "causal influence diagram": 0,
+              "policy oracle": 0,
+              "identified set": 331,
+              "model error": 1,
+              "regret": 245
+            },
+            "paths": [
+              ".claude/skills/causalsmith-topics/SKILL.md",
+              "CausalSmith/CausalSmith.lean",
+              "CausalSmith/CausalSmith/Mathlib/InformationTheory/ProductChiSquared.lean",
+              "CausalSmith/CausalSmith/Stat/STAT_NeymanRegretMinimax_Research/Basic.lean",
+              "CausalSmith/CausalSmith/Stat/STAT_NeymanRegretMinimax_Research/Helpers.lean",
+              "CausalSmith/CausalSmith/Stat/STAT_NeymanRegretMinimax_Research/Helpers/ArmScoreSubstrate.lean",
+              "CausalSmith/CausalSmith/Stat/STAT_NeymanRegretMinimax_Research/Helpers/Balanced.lean",
+              "CausalSmith/CausalSmith/Stat/STAT_NeymanRegretMinimax_Research/Helpers/SequentialRisk.lean",
+              "CausalSmith/CausalSmith/Stat/STAT_NeymanRegretMinimax_Research/Helpers/SequentialRiskUniform.lean",
+              "CausalSmith/CausalSmith/Stat/STAT_NeymanRegretMinimax_Research/Helpers/VanTrees.lean",
+              "CausalSmith/CausalSmith/Stat/STAT_NeymanRegretMinimax_Research/TGlobalLogRate.lean",
+              "CausalSmith/CausalSmith/Stat/STAT_NeymanRegretMinimax_Research/TInstanceLocalMinimax.lean"
+            ],
+            "matched_queries": [
+              "structural causal model",
+              "identified set",
+              "model error",
+              "regret"
+            ]
+          },
+          "review": "Causalean supplies measure-theoretic SCM and SWIG structures, hard fixSet interventions, joint and observational kernels, do-calculus, and identification. CausalSmith supplies separate observed-law statistical policy, welfare-regret, margin/overlap, and minimax developments. Reviewed candidates did not combine arbitrary local state-map mixtures with a CID utility and policy-oracle layer or A2 identified-set, model-error, and radius packaging over causal world models.",
+          "scope_limits": "One third-party Lean repository at one revision. Keyword misses do not prove absence. The checked-in library index names an older commit and Lean toolchain than the checkout, so the search used the pinned tracked source tree and treats index results as orientation only. CausalForge pins Lean 4.33.0 while the atlas pins 4.31.0; no build reproduction or adapter was attempted."
+        }
+      ]
     }
   ],
   "results": {
