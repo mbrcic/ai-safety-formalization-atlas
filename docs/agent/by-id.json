@@ -4082,7 +4082,7 @@
             "atlas_declaration": "AISafetyAtlas.Examples.Causal.OneNodeClass.modelError_le_ten_mul",
             "type": "NEW_PROOF",
             "file": "AISafetyAtlas/Examples/Causal/OneNodeClass.lean",
-            "line": 541
+            "line": 542
           },
           {
             "atlas_declaration": "AISafetyAtlas.Examples.Causal.card_fibreRep_empty",
