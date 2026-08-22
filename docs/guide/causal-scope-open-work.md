@@ -289,8 +289,12 @@ has **no library-module importer**: only its own example file and the root
 `AISafetyAtlas.lean` import it, and `Examples/Registry.lean` names three of its
 declarations. Nothing in `DecisionNetwork`, `Decision`, `Query` or the
 conjecture layer reads it, so the axis does not cascade. What it does move is
-the public-API pin — `docs/status/public-api.txt` carries 56 `StructuralModel`
-names, `eval`, `withPolicy`, `expectedUtility` and `optimalValue` among them.
+the public-API pin — `docs/status/public-api.txt` carries 28
+`AISafetyAtlas.Causal.StructuralModel` names and 36 more from the example
+module, `eval_eq_f`, `jointProb_sum` and `expectedUtility_le_optimalValue` among
+them. The definitions the hypothesis lands on first — `eval`, `withPolicy`,
+`expectedUtility`, `optimalValue` — are not pinned there at all, because that
+file lists public **theorems and lemmas** and nothing else.
 The declarations that gain the hypothesis are `eval`, `eval_eq_f`, `eval_congr`,
 `jointProb` and its two lemmas, `submodel_eval`, `submodel_eval_notMem`,
 `softIntervention`, then `withPolicy` and everything downstream of it —
@@ -404,7 +408,8 @@ standing blocker on Theorems 9, 14, 16 and 18.
 **On *d*-separation specifically, defer to
 [`d-separation-build-or-depend.md`](../provenance/d-separation-build-or-depend.md), which
 assesses it on its own terms and reaches a different verdict.** Its conclusion is
-*build the fragment*, and the reasons do not apply to the axes priced here.
+*do not depend and do not build yet* — and, when a consumer is ready, build the
+fragment rather than depend — and the reasons do not apply to the axes priced here.
 *d*-separation is a predicate on a **finite** graph, so none of the measurable
 generality that settles B and F is relevant to it; `Causalean.DAG` carries
 `[Fintype V]` exactly as `CID` does. And a dependency would supply the predicate
@@ -491,8 +496,11 @@ declarations rather than against the printed object.
 ## What none of this buys
 
 No axis here is blocking a **theorem**. Every printed theorem the atlas states is
-graded `Same`, `Wider` or `Beyond`; the seven `Narrower` rows are all
-**definitions**. Closing them makes the atlas's objects match print's objects,
+graded `Same`, `Wider` or `Beyond`. Of the seven weak cells — five `Narrower`
+and two `Mixed` — six are definitions; the seventh is Everitt's
+policy-invariance sentence, a printed assertion the atlas proves and grades
+`Mixed` for a narrowing elsewhere in its column. No printed **theorem** is
+narrower. Closing the axes makes the atlas's objects match print's objects,
 which matters for anyone building on the definitions and for the claim that a
 statement graded against Everitt is a statement about Everitt's diagrams. It does
 not change the truth of anything already proved.

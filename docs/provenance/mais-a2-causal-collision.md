@@ -158,7 +158,8 @@ These are intentional and must not be erased by statement-match wording:
    RE24 or Uhler et al.
 3. `InIdentifiedSet`, `modelError`, and `IsRadius` are not RE24 Theorem 2 or its
    `γ(δ)` conclusion.
-4. No almost-every, parameter-chart, or Theorem-1/2 proof is present.
+4. Nothing in this layer is stated over a parameter chart or an almost-every
+   quantifier, and no RE24 Theorem-1/2 proof is present anywhere.
 5. Equal transforms imply shared optimal behavior in Lean; the converse oracle
    reconstruction proposition remains sourced rather than machine-checked.
 

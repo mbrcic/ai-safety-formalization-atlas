@@ -398,7 +398,7 @@ through the root import. The hand-written examples in
 `AISafetyAtlas.Examples.PublicAPI` additionally protect the intended theorem
 signatures; the explicit targets in `scripts/lean_build_targets.txt` also build
 worked examples, most of which are intentionally outside the public root
-import. The ten `AISafetyAtlas.Examples.Causal.*` modules are the exception
+import. The twelve `AISafetyAtlas.Examples.Causal.*` modules are the exception
 and are on the root import.
 Kernel axiom cleanliness of the headline surface is checked by
 `scripts/check_print_axioms.py`.

@@ -178,6 +178,7 @@ which is a separate Wolpert-specific development and is not migrated;
 | `AISafetyAtlas.Causal.BayesianNetwork` | Pearl Definition 1.3.1 as a condition on a family of interventional distributions, the truncated product derived from it, and the kernel as an instance |
 | `AISafetyAtlas.Causal.MarginClass` | Conditions (M1)–(M6): categorical A2 composite, not a RE24 or Uhler definition |
 | `AISafetyAtlas.Causal.Decision` | Generic finite unmediated policies, expected utility, and regret; not a full CID or RE24 Theorems 1–2 |
+| `AISafetyAtlas.Causal.DecisionNetwork` | RE24 Definition 4 with the decision and the utility as **vertices**: expected utility, optimality and regret on the diagram, with Assumption 1 a hypothesis rather than a shape. `Causal.Decision` is its unmediated projection; no theorem yet connects the two |
 | `AISafetyAtlas.Causal.Semialgebraic` | Semialgebraic subsets of a finite real coordinate space, as a finite union of polynomial sign conditions, closed under the Boolean operations. Mathlib has no such notion at the pinned revision; MAIS-A2 `prob:exact` requires one |
 | `AISafetyAtlas.Causal.ParameterChart` | MAIS-A2's `K(G)` free table coordinates and Lebesgue measure on them: the layer MAIS-O24 is phrased in, not any of its three conclusions |
 | `AISafetyAtlas.Causal.SparseEncoding` | A prefix-free code and print's sparse monomial syntax, which MAIS-O24's construction-time clause needs in order to say what a machine outputs |
