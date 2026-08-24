@@ -67,8 +67,9 @@ proves that the minimax risk sits between `1/2` and `1` whenever the class
 contains two Boltzmann-indistinguishable models with **different graphs** — a
 floor from the two-point argument and a ceiling from print's error being bounded
 by `1`. On such a class that is `prob:boltzmann`(b) answered up to a factor of
-two, uniformly in the budget and in `β`: there is no rate to deteriorate as
-`β → 0` and no `(N, β)` crossover to characterize, because the risk never decays.
+two, uniformly in the budget and in `β`: the rate is `Θ(1)`, so there is nothing
+to deteriorate as `β → 0` and no `(N, β)` crossover to characterize, because the
+risk never decays.
 
 What is **not** here is (b) on a class where the risk *does* decay, which is
 where its rate, its `β → 0` deterioration and its crossover live, and which needs
@@ -390,7 +391,7 @@ whose law does not depend on which of the two models is true.
 **What this is and is not.** It is a lower bound on `prob:boltzmann`(b)'s
 quantity, over the class it is stated on, uniform in `N` and in `β`. Paired with
 `boltzmannMinimaxRisk_le_one` it determines that quantity up to a factor of two
-on such a class — there is no rate, hence no `β → 0` deterioration and no
+on such a class — the rate is `Θ(1)`, hence no `β → 0` deterioration and no
 `(N, β)` crossover. It says nothing about a class where the risk does decay,
 which is where the rest of (b) lives.
 

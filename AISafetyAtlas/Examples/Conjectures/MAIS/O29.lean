@@ -110,8 +110,9 @@ Problem 4.8(b) asks for the minimax risk at budget `N`, including its behaviour
 as `β → 0`. On the full margin class that question has no vanishing answer: the
 pair below induces *literally the same* responses at every query and every
 temperature, so no procedure reading those responses can separate them, at any
-budget. (b) is therefore only well posed on a genericity-restricted subclass —
-the same move O26 makes when it passes from `M(s,λ)` to `M(s,λ,μ)`.
+budget. (b) is well posed here and its answer is `Θ(1)`; what needs a
+genericity-restricted subclass is a **decaying-rate** answer — the same move O26
+makes when it passes from `M(s,λ)` to `M(s,λ,μ)`.
 
 **What is proved here, and what is not.** The floor below is over
 **deterministic** estimators. Print's risk is an infimum over *randomized*
@@ -246,10 +247,11 @@ uniformly in the budget and in the inverse temperature.
 `prob:boltzmann`(b) asks, *"for each fixed finite `β`, determine the minimax risk
 at budget `N` up to constants, including the deterioration as `β → 0`"*, and then
 to characterize the `(N, β)` crossover from the smooth local rate to the
-noiseless adaptive-search regime as `β → ∞`. On this class the answer is that
-there is no rate: the risk is pinned between `1/2` and `1` at **every** budget
-and **every** positive `β`, so it neither deteriorates as `β → 0` nor improves as
-`β → ∞`, and no crossover exists to characterize.
+noiseless adaptive-search regime as `β → ∞`. On this class the rate is `Θ(1)`:
+the risk is pinned between `1/2` and `1` at **every** budget and **every**
+positive `β`, so it neither deteriorates as `β → 0` nor improves as `β → ∞`, and
+no crossover exists to characterize. A constant rate is an answer to (b) at this
+instance, not an absence of one; what is ruled out here is a decaying rate.
 
 That is a complete answer to (b) at one print-legal instance and not at every
 one, the same standing as the MAIS-O27(a) negative instance. It is also the
