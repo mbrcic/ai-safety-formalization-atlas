@@ -10,7 +10,7 @@ Edges come from the elaborated Lean environment. This answers the question the p
 
 So `A → B` means *`B` occurs in `A`'s statement, or in `A`'s body when `A` is a definition*. A lemma used only inside a proof does not appear. Reading the table as a complete call graph would be wrong, and the two sections below are scoped so that they stay true under this limit.
 
-`479` authored declarations in `AISafetyAtlas.Causal.*` (257 theorems). Compiler-generated companions and projections are dropped.
+`493` authored declarations in `AISafetyAtlas.Causal.*` (271 theorems). Compiler-generated companions and projections are dropped.
 
 ## Load-bearing declarations
 
@@ -18,16 +18,17 @@ Named in the statements of eight or more others. A change to one of these is a c
 
 | Declaration | Named by |
 |---|---|
-| `Model` | 244 |
-| `binaryDim` | 186 |
+| `Model` | 248 |
+| `binaryDim` | 187 |
 | `Assignment` | 184 |
-| `Skeleton` | 116 |
-| `Model.parents` | 52 |
+| `Skeleton` | 119 |
+| `Model.parents` | 53 |
 | `InterventionProfile` | 42 |
 | `CodeSym` | 42 |
 | `Model.cpt` | 41 |
 | `ProbMixture` | 39 |
 | `SCIM.graph` | 33 |
+| `IsSemialgebraic` | 31 |
 | `Skeleton.MarginClass` | 30 |
 | `SCIM.Policy` | 30 |
 | `ChartIndex` | 30 |
@@ -38,31 +39,31 @@ Named in the statements of eight or more others. A change to one of these is a c
 | `Skeleton.mapRat` | 22 |
 | `SCIM` | 22 |
 | `Mixture` | 22 |
-| `IsSemialgebraic` | 22 |
 | `CID.IsDecision` | 22 |
+| `RandomizedQueryStrategy` | 21 |
 | `CID` | 21 |
 | `SCM.eval` | 20 |
-| `RandomizedQueryStrategy` | 20 |
 | `Policy` | 19 |
 | `CID.parents` | 19 |
+| `modelError` | 17 |
 | `Skeleton.observed` | 17 |
 | `ShiftedQuery` | 17 |
 | `PolicyFamily` | 17 |
 | `IsProbabilityMixture` | 17 |
 | `IsPrefixCode` | 17 |
-| `modelError` | 16 |
 | `encodeNat` | 16 |
 | `UtilityConfig` | 16 |
 | `SCIM.withPolicy` | 16 |
 | `SCM.IsWellFounded` | 15 |
 | `O24Var` | 15 |
+| `InIdentifiedSet` | 15 |
 | `Transcript` | 14 |
 | `Skeleton.BehaviorEq` | 14 |
 | `Model.roundDown` | 14 |
 | `Model.factor` | 14 |
 | `Model.ancestors` | 14 |
-| `InIdentifiedSet` | 14 |
 | `DecisionNetwork` | 14 |
+| `pmfExpect` | 13 |
 | `Skeleton.ValidMargin` | 13 |
 | `PolySign` | 13 |
 | `O24Assignment` | 13 |
@@ -73,13 +74,12 @@ Named in the statements of eight or more others. A change to one of these is a c
 | `NodeKind` | 12 |
 | `ClosedBox` | 12 |
 | `CID.IsWellFounded` | 12 |
-| `pmfExpect` | 11 |
+| `RandomizedEstimator` | 11 |
 | `Model.jointProb` | 11 |
 | `MeasureEstimator` | 11 |
 | `LocalIntervention` | 11 |
 | `SparseMonomial` | 10 |
 | `Skeleton.utility` | 10 |
-| `RandomizedEstimator` | 10 |
 | `Model.regret` | 10 |
 | `hardInterventionProfile` | 9 |
 | `SCIM.expectedUtility` | 9 |
@@ -193,6 +193,11 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 | `IsSemialgebraic.compl` | theorem | `IsSemialgebraic` |
 | `IsSemialgebraic.inter` | theorem | `IsSemialgebraic` |
 | `IsSemialgebraic.sdiff` | theorem | `IsSemialgebraic` |
+| `IsSemialgebraic.setOf_and` | theorem | `IsSemialgebraic` |
+| `IsSemialgebraic.setOf_congr` | theorem | `IsSemialgebraic` |
+| `IsSemialgebraic.setOf_const_and` | theorem | `IsSemialgebraic` |
+| `IsSemialgebraic.setOf_not` | theorem | `IsSemialgebraic` |
+| `IsSemialgebraic.setOf_or` | theorem | `IsSemialgebraic` |
 | `IsSemialgebraic.union` | theorem | `IsSemialgebraic` |
 | `LocalIntervention` | definition | — |
 | `MeasureEstimator` | definition | `Model`, `Skeleton`, `Transcript`, `instMeasurableSpaceModel` |
@@ -481,6 +486,7 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 | `eq_family_of_isCausalBayesNetwork` | theorem | `ConditionalTables`, `ConditionalTables.family`, `InterventionalFamily`, `IsCausalBayesNetwork` |
 | `exactAnalystRisk` | definition | `AdmissibleFamily`, `Model`, `PolicyFamily`, `RandomizedEstimator`, `RandomizedQueryStrategy`, `Skeleton`, `exactExpectedError` |
 | `exactAnalystRisk_discretize_le` | theorem | `MeasureEstimator`, `MeasureEstimator.discretize`, `Model`, `RandomizedQueryStrategy`, `Skeleton`, `dimBound`, `exactAnalystRisk`, `measureAnalystRisk` |
+| `exactAnalystRisk_empty` | theorem | `Model`, `RandomizedEstimator`, `RandomizedQueryStrategy`, `Skeleton`, `exactAnalystRisk` |
 | `exactAnalystRisk_nonneg` | theorem | `Model`, `RandomizedEstimator`, `RandomizedQueryStrategy`, `Skeleton`, `exactAnalystRisk` |
 | `exactExpectedError` | definition | `Model`, `PolicyFamily`, `RandomizedEstimator`, `RandomizedQueryStrategy`, `Skeleton`, `Transcript`, `modelError`, `pmfExpect`, `runRandomizedTranscript` |
 | `exactExpectedError_discretize_le` | theorem | `MeasureEstimator`, `MeasureEstimator.discretize`, `Model`, `PolicyFamily`, `RandomizedQueryStrategy`, `Skeleton`, `dimBound`, `exactExpectedError`, `measureExpectedError` |
@@ -507,6 +513,7 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 | `hardInterventionProfile` | definition | `Assignment`, `InterventionProfile`, `LocalIntervention`, `fixIntervention`, `identityIntervention` |
 | `hasSum_pmf_toReal` | theorem | — |
 | `identityIntervention` | definition | — |
+| `inIdentifiedSet_mono` | theorem | `InIdentifiedSet`, `Model`, `Skeleton` |
 | `inIdentifiedSet_self` | theorem | `InIdentifiedSet`, `Model`, `Skeleton`, `Skeleton.MarginClass` |
 | `inIdentifiedSet_symm` | theorem | `InIdentifiedSet`, `Model`, `Skeleton` |
 | `inIdentifiedSet_zero_of_behaviorEq` | theorem | `InIdentifiedSet`, `Model`, `Skeleton`, `Skeleton.BehaviorEq`, `Skeleton.MarginClass` |
@@ -538,8 +545,13 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 | `isSemialgebraic_empty` | theorem | `IsSemialgebraic` |
 | `isSemialgebraic_not_holds` | theorem | `IsSemialgebraic`, `PolySign`, `PolySign.Holds` |
 | `isSemialgebraic_of_containsChartBox` | theorem | `ChartIndex`, `ClosedBox`, `ContainsChartBox`, `IsSemialgebraic`, `Model`, `Model.chartSlice`, `binaryDim` |
+| `isSemialgebraic_setOf_eval_eq_zero` | theorem | `IsSemialgebraic` |
+| `isSemialgebraic_setOf_eval_ne_zero` | theorem | `IsSemialgebraic` |
+| `isSemialgebraic_setOf_eval_nonneg` | theorem | `IsSemialgebraic` |
+| `isSemialgebraic_setOf_eval_pos` | theorem | `IsSemialgebraic` |
 | `isSemialgebraic_univ` | theorem | `IsSemialgebraic` |
 | `jointProb_sum_two` | theorem | `Assignment`, `InterventionProfile`, `Model`, `Model.jointProb`, `binaryDim` |
+| `le_pmfExpect` | theorem | `pmfExpect` |
 | `measurableSet_parents_eq` | theorem | `Model`, `Model.parents`, `instMeasurableSpaceModel` |
 | `measurable_cpt` | theorem | `Assignment`, `Model`, `Model.cpt`, `instMeasurableSpaceModel` |
 | `measurable_modelError` | theorem | `Model`, `instMeasurableSpaceModel`, `modelError` |
@@ -577,8 +589,10 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 | `ofSparseMonomial` | definition | `SparseMonomial`, `sparseExponents` |
 | `ofSparsePoly` | definition | `SparseMonomial`, `SparsePoly`, `ofSparseMonomial` |
 | `ofSparsePoly_nil` | theorem | `SparseMonomial`, `ofSparsePoly` |
+| `one_le_modelError_add` | theorem | `Model`, `Model.parents`, `modelError` |
 | `optimalPolicyFamily` | definition | `Model`, `Model.bestPolicy`, `PolicyFamily`, `ProbMixture`, `Skeleton`, `Skeleton.observed` |
 | `pmfExpect` | definition | — |
+| `pmfExpect_add` | theorem | `pmfExpect` |
 | `pmfExpect_add_const` | theorem | `pmfExpect` |
 | `pmfExpect_const` | theorem | `pmfExpect` |
 | `pmfExpect_discretize` | theorem | `MeasureEstimator`, `MeasureEstimator.discretize`, `Model`, `Model.roundDown`, `Skeleton`, `Transcript`, `instMeasurableSpaceModel`, `modelError`, `pmfExpect` |

@@ -195,7 +195,7 @@ statement-match grade against a source it does not state.
   | `registry.yaml` survey claim rows | what the Brcic–Yampolskiy survey asserted | `BY-001`…`BY-044` is **closed**; never add `BY-045` |
   | `registry.yaml` other claim rows | what any other source asserted | `CLM-` prefix; at least one `original_source_refs`; no survey-only fields (`paper_reference`, `survey_proof_assessment`, `formal_library_search`) |
   | `registry.yaml` artifact rows | formalizations standing on their own | `LAND-` prefix, no `informal_claim`, never headline coverage |
-  | `conjectures.yaml` | open questions, compiling statement, no proof | never a theorem, never counted as one |
+  | `conjectures.yaml` | every printed MAIS target: open questions, determine-problem specifications, and problems the atlas cannot state | `kind` says which; never a theorem, never counted as one |
   | `tasks.yaml` | the task board | `docs/guide/contributor-tasks.md` is **generated** — never edit the Markdown |
 - **Sources are `directory` or `work`.** A directory is a curated map (the survey
   itself, `mathforaisafety.org`, AISI, MAIS): never graded against, entry count

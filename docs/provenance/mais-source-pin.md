@@ -84,14 +84,38 @@ hash and invalidates the grading that rests on it — which is the point.
 | [#6](https://github.com/lionellevine/MAIS/issues/6) | MAIS-O23: candidate negative resolution — a three-DAG behavioral collision | kumino | `4fd639c4322a3a3bd1b27fe6f14ee3de902961e0013485395e461d7cdc739a9b` |
 | [#8](https://github.com/lionellevine/MAIS/issues/8) | MAIS-O31: candidate complete solution — generic chamber classification for one intervention in a binary chain | kumino | `8e2e688eaac1a72f915aa787ad1e74676e6b72eff4f2796394e95b0a83fb8a96` |
 
-Issue #4 carries one comment, by the same author, which is part of the candidate
-a conjecture row transcribes wherever that row is recorded:
+**Comments.** Issues #6 and #8 carry none at the pinned reading. Issue #4
+carries one, by the same author, saying that LaTeX may not render on mobile and
+pointing at the PDF ([`#issuecomment-5170099225`](https://github.com/lionellevine/MAIS/issues/4#issuecomment-5170099225),
+body sha256 `e290bb83bd980cc9a9b8a3610e21ec6e26a0aa5c3d2e036db10b2610d909bca8`).
+It carries no mathematical claim and is graded against by nothing; it is
+recorded here only so that "read and judged irrelevant" is distinguishable from
+"never seen". It is not part of the candidate a conjecture row
+transcribes, and it is kept out of the table of artifacts that *are* graded
+against. Hashing it protects less than the table suggested: it would detect an edit
+to this one comment and would not notice a new one, and nothing here watches for
+that.
 
-| permalink | author | body sha256 |
+### The candidate the atlas had not read
+
+Issue [#7](https://github.com/lionellevine/MAIS/issues/7), *MAIS-O24: candidate
+negative resolution — clauses (a) and (c) are incompatible as written*, by
+kumino, body sha256 `68e65b119a8923dd997e2ea75daea5331145706674a44ecc6d3f7c7b89a80ee7`, no comments at the
+pinned reading. It is named by `open-problems/MAIS-O24.md` at this very commit; see
+[`mais-o24-statability.md`](mais-o24-statability.md) for what it claims and what
+of it has been checked.
+
+Its argument lives in an attachment rather than in the pinned tree, so the
+attachment is hashed separately and its own problem revision recorded, because
+that revision is not this pin:
+
+| artifact | sha256 | grades MAIS-O24 at |
 |---|---|---|
-| [`#issuecomment-5170099225`](https://github.com/lionellevine/MAIS/issues/4#issuecomment-5170099225) | Robby955 | `e290bb83bd980cc9a9b8a3610e21ec6e26a0aa5c3d2e036db10b2610d909bca8` |
+| `MAIS-O24-candidate-solution.pdf` | `fd096dea004135fbbed054619857b307881d6432925d1ff1cae5ae3f45d16477` | `43016a3e5c94edfca55ba49bd3e16770f7ac5dae` |
 
-Issues #6 and #8 carry no comments at the pinned reading.
+`open-problems/MAIS-O24.md` is byte-identical between `43016a3e` and this pin
+except for the status line, so the difference in revision does not put the
+candidate and the atlas on different problems.
 
 ## What the pin is for
 

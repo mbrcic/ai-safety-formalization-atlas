@@ -4052,7 +4052,7 @@
             "atlas_declaration": "AISafetyAtlas.Causal.inIdentifiedSet_zero_of_behaviorEq",
             "type": "NEW_PROOF",
             "file": "AISafetyAtlas/Causal/Decision.lean",
-            "line": 595
+            "line": 610
           },
           {
             "atlas_declaration": "AISafetyAtlas.Examples.Causal.margin_class_not_identifiable_shared_optimal",
@@ -4064,13 +4064,13 @@
             "atlas_declaration": "AISafetyAtlas.Causal.not_inIdentifiedSet_of_neg",
             "type": "NEW_PROOF",
             "file": "AISafetyAtlas/Causal/Decision.lean",
-            "line": 611
+            "line": 626
           },
           {
             "atlas_declaration": "AISafetyAtlas.Causal.modelError_eq_zero_iff",
             "type": "NEW_PROOF",
             "file": "AISafetyAtlas/Causal/Decision.lean",
-            "line": 766
+            "line": 803
           },
           {
             "atlas_declaration": "AISafetyAtlas.Examples.Causal.not_inIdentifiedSet_high",
@@ -4082,7 +4082,7 @@
             "atlas_declaration": "AISafetyAtlas.Examples.Causal.OneNodeClass.modelError_le_ten_mul",
             "type": "NEW_PROOF",
             "file": "AISafetyAtlas/Examples/Causal/OneNodeClass.lean",
-            "line": 542
+            "line": 541
           },
           {
             "atlas_declaration": "AISafetyAtlas.Examples.Causal.card_fibreRep_empty",

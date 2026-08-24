@@ -76,7 +76,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          pattern='(\.lean$|^lakefile\.toml$|^lake-manifest\.json$|^lean-toolchain$|^scripts/lean_build_targets\.txt$|^scripts/check_print_axioms\.py$|^scripts/agent_gate\.sh$|^\.github/workflows/ci\.yml$)'
+          pattern='(\.lean$|^lakefile\.toml$|^lake-manifest\.json$|^lean-toolchain$|^scripts/lean_build_targets\.txt$|^scripts/check_print_axioms\.py$|^scripts/generate_declaration_index\.py$|^scripts/check_cited_declarations\.py$|^docs/status/declaration-index\.json$|^scripts/agent_gate\.sh$|^\.github/workflows/ci\.yml$)'
           run_lean=false
           if [ "${{ github.event_name }}" = "workflow_dispatch" ] || [ "${{ github.event_name }}" = "schedule" ]; then
             run_lean=true
@@ -161,3 +161,23 @@ jobs:
             'docs/status/*-dependency-graph.json'
           git diff --exit-code -- 'docs/status/*-dependency-graph.md' \
             'docs/status/*-dependency-graph.json'
+      - name: Declaration index is current
+        # `check_cited_declarations.py` runs in the cheap gate and answers from
+        # this file, so a stale index makes that check answer about a tree that
+        # no longer exists -- passing over a name deleted since the last build,
+        # or failing on one added since. Nothing before this step can notice,
+        # because the index is produced by `lake env lean` and everything under
+        # `AISafetyAtlas/Conjectures` is off the root import, so even a green
+        # root build does not refresh it. This exact staleness occurred on
+        # 2026-08-23: the index reported no change while forty declarations were
+        # missing from it, and the generated file was the one answering.
+        if: steps.filter.outputs.run_lean == 'true'
+        run: |
+          python3 scripts/generate_declaration_index.py --write
+          git diff --exit-code --stat -- docs/status/declaration-index.json
+          git diff --exit-code -- docs/status/declaration-index.json
+      - name: Cited declarations resolve against the rebuilt index
+        # Re-run the citation check against the index this job just regenerated,
+        # rather than the one the cheap gate read from the commit.
+        if: steps.filter.outputs.run_lean == 'true'
+        run: python3 scripts/check_cited_declarations.py

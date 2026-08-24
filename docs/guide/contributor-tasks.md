@@ -88,8 +88,9 @@ a mistake is expensive. That is the whole point, and it is worth one PR.
   contributors' diffs from colliding.
 - **Acceptance:** `lake build AISafetyAtlas.Examples.FirstContribution` (or
   `.PublicAPI`) green and `scripts/agent_gate.sh` clean. A non-public `example`
-  needs no local axiom audit — CI runs `check_print_axioms.py` over the headline
-  surface for you; reserve that check for new *public* theorems and bridges.
+  needs no local axiom audit — CI runs `check_print_axioms.py` for you, over the
+  facade closure *and* the off-root build targets; reserve that check for new
+  *public* theorems, definitions and bridges.
   Runs under the fast `scripts/setup.sh --quick` path if you stay on the learning
   layer.
 - **Terminal rung — do not repeat it.** Once your CT-13 has merged, a second one

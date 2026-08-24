@@ -587,6 +587,21 @@ public abbrev PolicyFamily (sk : Skeleton C dim Bool 𝕜) :=
     ∃ family : PolicyFamily sk,
       AdmissibleFamily M sk δ family ∧ AdmissibleFamily M' sk δ family
 
+/-- The identified set grows with the regret bound.
+
+Admissibility is a `≤ δ` bound on every shifted task, so a family admissible at
+`δ` is admissible at any larger bound. `subsec:queries` defines `I_δ(M)` for
+`δ ≥ 0`, and this is the monotonicity that definition implies: a collision at
+regret zero is a collision at every positive regret, which is what carries a
+`δ = 0` indistinguishability construction into a statement about `φ(δ)` as
+`δ → 0`. -/
+public theorem inIdentifiedSet_mono {sk : Skeleton C dim Bool 𝕜} {lam δ δ' : 𝕜}
+    (h : δ ≤ δ') {M M' : Model C dim 𝕜} (hId : InIdentifiedSet sk lam δ M M') :
+    InIdentifiedSet sk lam δ' M M' := by
+  obtain ⟨hM, hM', family, hA, hA'⟩ := hId
+  exact ⟨hM, hM', family, fun v hv w => le_trans (hA v hv w) h,
+    fun v hv w => le_trans (hA' v hv w) h⟩
+
 /-- Equal transforms give both models one common zero-regret policy family.
 
 This machine-checks the forward direction of the optimal-policy equivalence used
@@ -728,6 +743,28 @@ public theorem modelError_nonneg [Nonempty C] (M M' : Model C dim 𝕜) :
       (Finset.le_sup' _ (Finset.mem_univ _))
   · rw [if_neg hp]
     exact zero_le_one
+
+/-- Two models with different graphs cannot both be well approximated by one
+estimate: the printed error is `1` against whichever of them the estimate
+disagrees with.
+
+This is the two-point inequality a minimax lower bound runs on. `subsec:queries`
+writes the error as *"`1` if `Ĝ ≠ G`"*, so an estimate has to pick a graph, and
+picking one puts the full error `1` on the other model. -/
+public theorem one_le_modelError_add [Nonempty C] {M M' : Model C dim 𝕜}
+    (hpar : M.parents ≠ M'.parents) (N : Model C dim 𝕜) :
+    1 ≤ modelError M N + modelError M' N := by
+  classical
+  by_cases h : M.parents = N.parents
+  · have hne : M'.parents ≠ N.parents := fun hc ↦ hpar (h.trans hc.symm)
+    have h1 : modelError M' N = 1 := by unfold modelError; rw [if_neg hne]
+    have h0 := modelError_nonneg M N
+    rw [h1]
+    linarith
+  · have h1 : modelError M N = 1 := by unfold modelError; rw [if_neg h]
+    have h0 := modelError_nonneg M' N
+    rw [h1]
+    linarith
 
 /-- The printed error is at most `1`, which is what makes it integrable against
 any probability measure. Both branches are bounded by `1`: the graph branch is

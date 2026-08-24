@@ -8,8 +8,125 @@ forces the assumptions into the open, and gives the next person something to
 attack. So a precise open question is a deliverable here, not a placeholder for
 one.
 
-Nothing in the ledger is asserted by the atlas. **One conjecture record is
-currently present, and it is open.**
+An open conjecture asserts nothing — defining a `Prop` is not claiming it, and
+that is the whole point of the mechanism. **Eight conjecture records are currently
+present: four open and four resolved**, and each resolved row
+names the proof that settled it.
+
+## Four kinds of row, because not every printed problem is a conjecture
+
+MAIS-A2 contains one printed `conjecture`, two `question`s and eleven
+`problem`s. A problem reading *"determine the asymptotics"* is resolved by
+determining them — what it cannot have is a `Prop` that is `Same` as the
+instruction, since existence is not exhibition and a proposition asserting that
+a solution exists asks a different question from an instruction to produce one.
+That is a fact about **transcription**, not about solvability.
+
+Keeping such problems out of the ledger left the atlas with no single index of
+what it covers, and a reader who opened `conjectures.yaml` could reasonably
+conclude the formalization stopped where the rows did. Since 2026-08-24 every
+printed A2 target has a row, and the `kind` field says what sort of row it is.
+
+| `kind` | What the source does | What `lean` points at | Resolved by |
+|---|---|---|---|
+| `claim` | states something true-or-false | the doubted `Prop` | a proof |
+| `answer` | someone proposed an answer to a determine-problem | a `Prop` grading *that answer is correct* | a proof |
+| `target` | says *determine* / *exhibit*, nobody has answered | the **specification** — a predicate over a candidate answer | an answer arriving, which then gets its own `answer` row |
+| `blocked` | the atlas cannot state it at all | nothing; `absent_declarations` names what is missing | building the substrate |
+
+A `target` row may not point at a record whose fields carry **no proof
+obligations**. Inhabiting such a structure proves nothing, which is the failure
+the answer-construction literature names first. A record whose fields *are* the
+obligations is a different object and is exactly right for an exhibit-problem:
+`Causal.O24Solution` carries a Turing machine and a `TM2OutputsInTime` bound
+among its fields, so a term of it is a solution and nothing is left to check
+separately. The validator enforces the weaker half of this — every clause must
+register the predicate that decides whether a proposed answer is right, so a row
+cannot advertise a type a solver could inhabit for free. The `answer_candidate`, `answer_admissible` and `answer_correct` fields
+carry that triple, and `admissibility_status` records whether a **circular**
+answer is excluded — `{x | P x}` satisfies any find-all specification of itself,
+and no Lean check rejects it. `Unformalized` there is an open formalization gap
+and not a clean state.
+
+One row excludes the restatement with a demand taken directly from print.
+MAIS-O24 says *"exhibit … in time polynomial in `S`"*, and `O24Constructor`
+carries a Turing machine with a certified time bound, which a bare description
+cannot inhabit.
+
+A finite carrier is not enough. MAIS-O31 asks which of `2(m-1)+1` coordinates
+are identifiable, and `card_o31Coordinate` proves the answer space has exactly
+that many inhabitants, so a proposed list can be represented as a `Finset`.
+But classical filtering converts any predicate on a finite type into a
+`Finset`; `isO31IdentifiableAnswer_of_set` proves that every correct `Set`
+specification therefore yields the finite-list form. O31 remains
+`Unformalized` on admissibility because print supplies no combinatorial answer
+grammar that would exclude this restatement.
+
+The demand has to constrain how the data are obtained, not merely change their
+container. An existential — *there is some finite family of polynomial pieces
+cutting this set out* — also fails: the canonical set together with a proof of
+the existential satisfies it, and the restatement survives. That is why
+`IsO27EdgeSurvivalAnswer` sits in the tree as an atlas strengthening offered for
+study and is named in **no** admissibility field.
+
+MAIS-O27, MAIS-O29(b), and MAIS-O31 are `Unformalized`, and the reason is the
+source rather than the tooling. *Semialgebraic* appears twice in MAIS-A2 — as a hypothesis on
+the model class in `prob:exact`, and as a demand on the answer in
+`prob:starter-set`(a) — and neither is `prob:floor`, which says only *"decide
+for which pairs `(s, δ)`"* and, for clause (b), *"as an explicit function"*
+without defining *explicit*. `prob:boltzmann`(b) presumes a rate grammar in
+saying *"up to constants"* and never names one. A hypothesis in one printed
+problem does not impose an answer language on another; grading either row
+against a language print does not state would make it **narrower than print**.
+Both rows say what a solver would have to fix, and the right way to close them
+is to ask the MAIS authors what counts as an answer.
+
+`Partial` exists for a multi-clause row whose clauses differ on this axis. No
+row uses it today; the positional `answer_admissible` list is what it is checked
+against, so it cannot be asserted of a row whose clauses agree.
+
+`scripts/validate_conjectures.py` prints the breakdown rather than one number,
+because *"eight recorded"* over a 19-row file is how this confusion started. Counts elsewhere in this guide are over conjecture rows — kinds
+`claim` and `answer` — since a blocked row is not an open conjecture.
+
+## Who proposed what
+
+**Three of the four resolved rows rest on constructions submitted to MAIS by
+other people, and the fourth reuses one of them.** The ledger records this per
+row in `proposed_by`; it is repeated here because a reader who meets the atlas
+through a "resolved" count will otherwise read the constructions as its own.
+
+| Row | Target | The construction is | The atlas's part |
+|---|---|---|---|
+| CONJ-004 | MAIS-O23 | MAIS [issue #6](https://github.com/lionellevine/MAIS/issues/6), Svyatoslav Novikov (kumino) | transcription, transport of the rational witness to the real chart, machine-check |
+| CONJ-005 | MAIS-O34(a), margin clause | the same two-variable construction, MAIS issues [#4](https://github.com/lionellevine/MAIS/issues/4)/[#6](https://github.com/lionellevine/MAIS/issues/6) | transcription, real-chart transport, machine-check |
+| CONJ-008 | MAIS-O29(a) | issue #6's collision pair again | the transfer step — that the pair is also a Boltzmann collision at every positive inverse temperature — and its proof |
+| CONJ-009 | MAIS-O34(a), fibre criterion | Rob Sneiderman (Robby955), MAIS [issue #4](https://github.com/lionellevine/MAIS/issues/4) | both directions of the equivalence, the non-vacuity witnesses on each side, the restatement against the printed class, and the semialgebraicity of the criterion |
+| CONJ-010 | MAIS-O31 | Svyatoslav Novikov (kumino) with OpenAI Codex, MAIS [issue #8](https://github.com/lionellevine/MAIS/issues/8) | transcription only; the row is `OPEN` |
+
+**What is the atlas's own** is the statement layer and the proofs, which is a
+smaller claim than resolving the problems and a different one. Named results
+with no submitted antecedent: the MAIS-O24 certificate bundle and the `K(G)`
+parameter chart it is stated over; `Causal.measureMinimalBudget_eq_exactMinimalBudget`,
+which removes the last scope gap on MAIS-O25 by proving the minimal budget is
+the same number whether the analyst's output law is a `PMF` or an arbitrary
+probability measure; the negative MAIS-O27(a) instance
+`Examples.Conjectures.MAIS.not_o27RealRadiusVanishes_collision`, at print's own
+real quantifier; the sampled Boltzmann experiment, which pins MAIS-O29(b)'s
+randomized minimax risk between `1/2` and `1` at one skeleton, at every budget
+and every inverse temperature; and CONJ-009's proof, whose opposite-orientation half could have
+refuted the submitted criterion and does not.
+
+**Source text beside Lean text.**
+[`mais-conjecture-source-vs-lean.md`](../provenance/mais-conjecture-source-vs-lean.md)
+prints every MAIS-linked row three ways — what the source prints, what the Lean
+says, and what the Lean says read back from its binders rather than from its
+intent — with a per-row statement of what differs. It is the document to open
+before believing a `Same` grade.
+
+**A resolved row is not a resolved problem**, and every resolution field says
+which clause it covers. MAIS-O29 has three clauses and CONJ-008 answers (a);
+MAIS-O34 has two and CONJ-005 and CONJ-009 together answer part of (a).
 
 ## How a conjecture is checked without being believed
 
@@ -24,10 +141,14 @@ public noncomputable def statement : Prop :=
 Defining a proposition asserts nothing about its truth. The generated
 [`AISafetyAtlas/Conjectures/Checks.lean`](../../AISafetyAtlas/Conjectures/Checks.lean)
 emits `example : Prop := <name>` for every name in the ledger, so "this
-conjecture has a compiling statement" is verified rather than claimed. Each
-conjecture module also carries `example`s witnessing that its antecedents are
-inhabited: a statement whose hypotheses cannot be satisfied is true and says
-nothing.
+conjecture has a compiling statement" is verified rather than claimed.
+
+**Compiling is not non-vacuity, and the two are checked separately.** A statement
+whose hypotheses cannot be satisfied is true and says nothing, so each row must
+either cite a witness inhabiting its antecedent or disclose that none exists.
+Most do carry one. The row transcribing MAIS-O26 does not: its antecedent needs
+a solution to MAIS-O24, which is itself open, so that statement may hold
+vacuously and its ledger entry says so.
 
 ## Containment
 
@@ -69,6 +190,22 @@ Lean statement compiles; everything before that lives in the GitHub issue.
 retired. Both terminal states require a written `resolution`, so a conjecture
 never leaves the queue as an undocumented decision.
 
+**A row may also leave the ledger entirely**, and the same obligation follows
+it. A withdrawn encoding whose source is a *determine*-problem has no `Same`
+grade available to it, and the source-first rule below keeps atlas-original
+variants out; in both cases the row is removed rather than carried at a grade
+the rule rejects. The removed entry is copied verbatim into
+[`docs/provenance/retired-conjecture-rows.md`](../provenance/retired-conjecture-rows.md)
+together with the date and the reason, and its `CONJ-` number is **retired and
+never reused**. `conjectures.yaml` records the next unassigned number;
+`scripts/validate_conjectures.py` parses the archive headings, rejects a number
+appearing both live and retired, and requires every lower number to occur
+exactly once across the live ledger and the archive. So "not in the ledger" is
+never the same as "never happened". The archive states the Lean status
+separately for each row: one historical module was deleted, one withdrawn
+encoding survives unchanged, and one atlas-original declaration survives under
+a type that later changed with its shared assumptions.
+
 ```yaml
 - id: CONJ-00N
   statement: <prose, precise>
@@ -94,6 +231,15 @@ rather than answering it. Definitions transcribing a source definition are held
 to the same bar, for the same reason — they are the objects under discussion.
 Theorems are exempt and preferred **wider**: a proved lemma that reaches further
 only increases what the tooling is good for.
+
+**For MAIS, this is enforced as a source-first rule.** Every live ledger row
+whose graded source is the MAIS agenda or a pinned MAIS issue must have
+`source_scope: Same`, and it may not use `Bridged`. If the literal source
+statement is false, vacuous, ambiguous, or ill-posed, that is a result about the
+source; the atlas does not add a premise or substitute an object to repair it.
+An atlas-original variant or a retired encoding may still be useful Lean, but it
+stays outside the live MAIS ledger. `Selected` remains available only for a
+truth-valued branch that MAIS itself explicitly asks the reader to decide.
 
 That is a claim about a specific artifact, so `source_ref` must name one, and
 it names **the artifact whose statement is being transcribed** — not everything

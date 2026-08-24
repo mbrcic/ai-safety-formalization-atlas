@@ -560,6 +560,36 @@
         "AISafetyAtlas.Causal.IsSemialgebraic"
       ]
     },
+    "AISafetyAtlas.Causal.IsSemialgebraic.setOf_and": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.IsSemialgebraic"
+      ]
+    },
+    "AISafetyAtlas.Causal.IsSemialgebraic.setOf_congr": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.IsSemialgebraic"
+      ]
+    },
+    "AISafetyAtlas.Causal.IsSemialgebraic.setOf_const_and": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.IsSemialgebraic"
+      ]
+    },
+    "AISafetyAtlas.Causal.IsSemialgebraic.setOf_not": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.IsSemialgebraic"
+      ]
+    },
+    "AISafetyAtlas.Causal.IsSemialgebraic.setOf_or": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.IsSemialgebraic"
+      ]
+    },
     "AISafetyAtlas.Causal.IsSemialgebraic.union": {
       "kind": "theorem",
       "deps": [
@@ -3176,6 +3206,16 @@
         "AISafetyAtlas.Causal.measureAnalystRisk"
       ]
     },
+    "AISafetyAtlas.Causal.exactAnalystRisk_empty": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.RandomizedEstimator",
+        "AISafetyAtlas.Causal.RandomizedQueryStrategy",
+        "AISafetyAtlas.Causal.Skeleton",
+        "AISafetyAtlas.Causal.exactAnalystRisk"
+      ]
+    },
     "AISafetyAtlas.Causal.exactAnalystRisk_nonneg": {
       "kind": "theorem",
       "deps": [
@@ -3378,6 +3418,14 @@
     "AISafetyAtlas.Causal.identityIntervention": {
       "kind": "definition",
       "deps": []
+    },
+    "AISafetyAtlas.Causal.inIdentifiedSet_mono": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.InIdentifiedSet",
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Skeleton"
+      ]
     },
     "AISafetyAtlas.Causal.inIdentifiedSet_self": {
       "kind": "theorem",
@@ -3624,6 +3672,30 @@
         "AISafetyAtlas.Causal.binaryDim"
       ]
     },
+    "AISafetyAtlas.Causal.isSemialgebraic_setOf_eval_eq_zero": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.IsSemialgebraic"
+      ]
+    },
+    "AISafetyAtlas.Causal.isSemialgebraic_setOf_eval_ne_zero": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.IsSemialgebraic"
+      ]
+    },
+    "AISafetyAtlas.Causal.isSemialgebraic_setOf_eval_nonneg": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.IsSemialgebraic"
+      ]
+    },
+    "AISafetyAtlas.Causal.isSemialgebraic_setOf_eval_pos": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.IsSemialgebraic"
+      ]
+    },
     "AISafetyAtlas.Causal.isSemialgebraic_univ": {
       "kind": "theorem",
       "deps": [
@@ -3638,6 +3710,12 @@
         "AISafetyAtlas.Causal.Model",
         "AISafetyAtlas.Causal.Model.jointProb",
         "AISafetyAtlas.Causal.binaryDim"
+      ]
+    },
+    "AISafetyAtlas.Causal.le_pmfExpect": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.pmfExpect"
       ]
     },
     "AISafetyAtlas.Causal.measurableSet_parents_eq": {
@@ -3990,6 +4068,14 @@
         "AISafetyAtlas.Causal.ofSparsePoly"
       ]
     },
+    "AISafetyAtlas.Causal.one_le_modelError_add": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Model.parents",
+        "AISafetyAtlas.Causal.modelError"
+      ]
+    },
     "AISafetyAtlas.Causal.optimalPolicyFamily": {
       "kind": "definition",
       "deps": [
@@ -4004,6 +4090,12 @@
     "AISafetyAtlas.Causal.pmfExpect": {
       "kind": "definition",
       "deps": []
+    },
+    "AISafetyAtlas.Causal.pmfExpect_add": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.pmfExpect"
+      ]
     },
     "AISafetyAtlas.Causal.pmfExpect_add_const": {
       "kind": "theorem",

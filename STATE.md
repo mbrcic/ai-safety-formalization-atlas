@@ -1,6 +1,6 @@
 # Project State
 
-Updated: 2026-08-22
+Updated: 2026-08-23
 
 **Unreleased work in progress.** `v0.7.0` below is still the last published
 release and nothing here supersedes it.
@@ -17,6 +17,54 @@ phrases its problems over: semialgebraic classes, the `K(G)` parameter chart, a
 prefix-free sparse monomial code, the O24 genericity certificate, and a
 rational-weight query layer. There is no aggregating `Causal` facade and that is
 deliberate — these are peer modules, so a consumer imports the one it needs.
+
+**On top of that layer sits the MAIS-A2 conjecture ledger, also in no release.**
+Eighteen MAIS-linked ledger rows span all fourteen agenda problem numbers, and
+only some of them are `Prop`s: seven are conjectures or graded candidate answers
+in `AISafetyAtlas.Conjectures.MAIS` over the causal objects above, four are
+determine-problem specifications over a candidate answer, and seven record a
+printed problem the atlas cannot state at all. Five of the seven take agenda
+clauses as their graded source and two grade candidate statements
+submitted to MAIS issues #4 and #8. Four are resolved and three remain open. An open
+conjecture asserts nothing: it is a compiling statement with no proof, and the
+ledger records for each one what would refute it. The settled rows are the
+exception, and each names the theorem that settled it. Rows graded against a
+printed source are stated at that source's own quantifier. A conjecture stated
+narrower than its source is a different question wearing the source's name. If
+a literal source statement is false, vacuous, ambiguous, or ill-posed, the
+ledger records that source problem rather than adding an atlas premise to rescue
+it; atlas-original variants and withdrawn encodings stay outside this ledger,
+recorded verbatim with their reason in
+`docs/provenance/retired-conjecture-rows.md` so that leaving is not an
+undocumented decision and the retired `CONJ-` numbers are never reused. Four
+rows are resolved and each carries a `Coverage:` sentence naming the printed
+clause it covers -- a resolved row that answers one clause of three is not a
+resolved printed problem.
+
+MAIS-O29(b) is the case worth reading, because what is claimed about it changed
+on 2026-08-23 and the claim before that date was a retraction.
+`boltzmann_minimax_floor` bounds a *deterministic* estimator where
+`subsec:queries` takes an infimum over randomized ones, so it bounds the wrong
+infimum; that retraction stands. What is new is a bound at print's own
+quantifier: `AISafetyAtlas.Conjectures.MAIS.O29Experiment` builds the sampled
+Boltzmann experiment and
+`Examples.Conjectures.MAIS.boltzmannMinimaxRisk_collision_bounds` pins the
+randomized minimax risk between `1/2` and `1` at the collision skeleton, at
+every budget and every inverse temperature. That answers (b) at one print-legal
+instance and at no other -- on a class where the risk decays, none of (b) is
+touched -- and it does not move CONJ-008, which stays `prob:boltzmann`(a) only,
+because (b) is a determine-clause and no truth-valued `Prop` is `Same` as one.
+
+MAIS-O27 has no *conjecture* row for the same reason -- it has one target row,
+CONJ-013, carrying a specification per clause -- and gained two negative
+instances
+the same day, both at `prob:floor`'s real quantifier now that all three of its
+clauses are stated there: `not_o27RealRadiusVanishes_collision` for (a), and
+`not_realEdgesSurviveAt_collision` for (c) at edge strength `λ`. Clause (c)'s
+*second* half -- print asks to exhibit, at the complementary pairs, a model and a
+member of its identified set omitting the edge -- is now
+`exists_strong_edge_omitted_collision` rather than a sentence about the proof of
+the first half.
 
 **Also unreleased, merged to `main` after `v0.7.0` was tagged**: Ashby's chapter
 11 and Touchette–Lloyd's control limits at printed scope behind an
@@ -77,7 +125,7 @@ public API, or axiom profile changed in either release.
 - Atlas Lean declarations: **248** (claim-row WRAPPER **13** / BRIDGE **5**).
 - Results stating a source claim: **49**; recording a formalization only: **37** (**28** on the public root import).
 - Reviewed AI-system bridges: **3**; statement-reviewed only: **1**.
-- Open conjectures: **1** of **1** recorded.
+- Open conjectures: **4** of **8** recorded; the ledger also holds **4** determine-problem targets and **7** printed problems the atlas cannot yet state.
 - Claim results with statement-match (`EXACT`/`EQUIVALENT`): **14**; with `RELATED`-only formalization: **7**. Counts are claim rows, not records: an artifact row's grade is on the row and never in this number.
 - Rows carrying atlas Lean: **49** (**20** of them claim rows); catalogued candidate leads: **5**.
 <!-- END GENERATED REGISTRY SNAPSHOT -->

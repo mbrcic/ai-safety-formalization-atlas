@@ -37,6 +37,7 @@ EXTERNAL_ROOTS = {
     "Fin", "Prod", "Bool", "Classical", "ENNReal", "Filter", "Fintype", "Mathlib",
     "MeasureTheory", "ProbabilityTheory", "PFR", "GaloisField", "IsUniform",
     "Polynomial", "Finsupp", "List", "Option", "Sigma", "Subtype", "Quotient",
+    "Asymptotics",
 }
 BACKTICK_SPAN = re.compile(r"`([^`\n]+)`")
 NAME_RE = re.compile(r"[A-Za-z_][A-Za-z0-9_'.\u2032\u2081-\u2089]*")
@@ -66,6 +67,9 @@ EXEMPT = {
     "H_open", "H_closed", "argmin_a", "mono'", "implemented_by",
     # tactics and Lean/Mathlib vocabulary discussed in prose
     "sorry", "plausible", "tsum", "decide", "omega", "linarith", "gcongr",
+    # Mathlib's asymptotic predicate, named in prose by the atlas theorem that
+    # proves the rate predicate implies it
+    "IsTheta",
 }
 DEPS = [
     ROOT / ".lake" / "packages" / "PFR" / "PFR",

@@ -79,10 +79,9 @@ DATED_HEADER = re.compile(r"^(?:Date|HEAD):\s*\S", re.MULTILINE)
 def is_frozen(path: str) -> bool:
     """A dated audit snapshot, which records what was true when it was written.
 
-    `mais-conjectures-recursive-audit-2026-08-20.md` opens with `Date:` and a
-    pinned `HEAD:`. Its grades are *supposed* to disagree with today's ledger --
-    that is what a snapshot is -- so listing it as something a regrade must
-    visit would train the reader to ignore this tool.
+    A file opening with `Date:` and a pinned `HEAD:` is a snapshot: its grades
+    are *supposed* to disagree with today's ledger, so listing it as something a
+    regrade must visit would train the reader to ignore this tool.
     """
     full = ROOT / path
     if not full.is_file():

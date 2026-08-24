@@ -6,16 +6,15 @@ public import AISafetyAtlas.Causal.Query
 /-!
 # A one-node margin class, and the identification it does support
 
-MAIS-O25's eight-clause antecedent has no known inhabitant in the atlas so
-far, so the conjecture could still be vacuously true once it is stated.
+`Conjectures.MAIS.ExactClassAssumptions` is the antecedent of MAIS-O25, and until this
+module it had no known inhabitant, so the conjecture could have been vacuously
+true. That was a standing proof debt against the conjecture.
 
-**This module builds the witness, one clause at a time.** One binary chance
-variable, no observations, and a utility whose gap straddles zero. The margin
-class there is exactly the interval `[λ, 1-λ]` of root probabilities, and all
-eight clauses hold on it, with `K = 1`, `L = 10`, `ρ = 1 - 2λ` and `δmax = 1` —
-each proved below. No declaration in the atlas assembles the eight into a
-single antecedent at this commit; that assembly is conjecture-layer work,
-downstream of this module.
+**This module discharges it.** One binary chance variable, no observations, and a
+utility whose gap straddles zero. The margin class there is exactly the interval
+`[λ, 1-λ]` of root probabilities, and all eight clauses hold on it, with `K = 1`,
+`L = 10`, `ρ = 1 - 2λ` and `δmax = 1`.
+`Examples.Conjectures.MAIS.oneNode_exactClassAssumptions` assembles them.
 
 The two substantive clauses are the sixth and the seventh.
 
@@ -209,8 +208,8 @@ public theorem model_marginClass {p : ℝ} (h0 : 0 ≤ p) (h1 : p ≤ 1)
     sk.MarginClass (model p h0 h1) lam :=
   marginClass_of_M1 _ (model_M1 h0 h1 hlo hhi)
 
-/-- The class is **inhabited**, which is the first thing the eight-clause
-antecedent needs and the thing an empty antecedent would fail. -/
+/-- The class is **inhabited**, which is the first thing `ExactClassAssumptions`
+needs and the thing an empty antecedent would fail. -/
 public theorem marginClass_nonempty :
     ∃ M : Model (Fin 1) (binaryDim (Fin 1)) ℝ, sk.MarginClass M lam :=
   ⟨model (1 / 2) (by norm_num) (by norm_num),
@@ -219,7 +218,7 @@ public theorem marginClass_nonempty :
 
 /-! ## Clause 6: behavioural identification on the class
 
-The antecedent's sixth clause is `BehaviorEq M M' → M = M'`, and at
+`ExactClassAssumptions`' sixth clause is `BehaviorEq M M' → M = M'`, and at
 `observed = ∅` the behavioural family collapses onto `Δmix`, hence — by
 `Δmix_eq_on_probMixture_iff` — onto the deterministic profiles. The
 observational profile alone already separates: the transform reads the root
@@ -286,7 +285,7 @@ public theorem delta_observational (M : Model (Fin 1) (binaryDim (Fin 1)) ℝ) :
   norm_num [h0, h1]
   ring
 
-/-- **Clause 6 of the eight-clause antecedent, on this class.** Two models whose
+/-- **Clause 6 of `ExactClassAssumptions`, on this class.** Two models whose
 behavioural families agree are equal — no margin hypothesis is needed, because
 the one-vertex graph is already forced. -/
 public theorem behaviorEq_injective {M M' : Model (Fin 1) (binaryDim (Fin 1)) ℝ}

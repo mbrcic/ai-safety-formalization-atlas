@@ -18,6 +18,7 @@ AISafetyAtlas.Causal.Decision::fibreRep_idem
 AISafetyAtlas.Causal.Decision::fibreRep_mem
 AISafetyAtlas.Causal.Decision::fibreScore_le_best
 AISafetyAtlas.Causal.Decision::fibreScore_true_sub_false
+AISafetyAtlas.Causal.Decision::inIdentifiedSet_mono
 AISafetyAtlas.Causal.Decision::inIdentifiedSet_self
 AISafetyAtlas.Causal.Decision::inIdentifiedSet_symm
 AISafetyAtlas.Causal.Decision::inIdentifiedSet_zero_of_behaviorEq
@@ -27,6 +28,7 @@ AISafetyAtlas.Causal.Decision::modelError_le_one
 AISafetyAtlas.Causal.Decision::modelError_nonneg
 AISafetyAtlas.Causal.Decision::not_inIdentifiedSet_of_neg
 AISafetyAtlas.Causal.Decision::not_inIdentifiedSet_of_opposite_sign
+AISafetyAtlas.Causal.Decision::one_le_modelError_add
 AISafetyAtlas.Causal.Decision::prob_true_eq_one_of_gap_pos
 AISafetyAtlas.Causal.Decision::prob_true_eq_zero_of_gap_neg
 AISafetyAtlas.Causal.Decision::regret_decomp
@@ -155,6 +157,7 @@ AISafetyAtlas.Causal.Query::exactPolicyAnswer_congr_observation
 AISafetyAtlas.Causal.Query::hasSum_pmf_toReal
 AISafetyAtlas.Causal.Query::integrable_modelError
 AISafetyAtlas.Causal.Query::integral_toMeasure_modelError
+AISafetyAtlas.Causal.Query::le_pmfExpect
 AISafetyAtlas.Causal.Query::measureAnalystRisk_nonneg
 AISafetyAtlas.Causal.Query::measureAnalystRisk_toMeasureEstimator
 AISafetyAtlas.Causal.Query::measureExpectedError_le_one
@@ -165,6 +168,7 @@ AISafetyAtlas.Causal.Query::measureMinimalBudget_eq_exactMinimalBudget_binary
 AISafetyAtlas.Causal.Query::measureMinimaxRisk_eq_exactMinimaxRisk
 AISafetyAtlas.Causal.Query::measureMinimaxRisk_eq_exactMinimaxRisk_binary
 AISafetyAtlas.Causal.Query::measureMinimaxRisk_le_exactMinimaxRisk
+AISafetyAtlas.Causal.Query::pmfExpect_add
 AISafetyAtlas.Causal.Query::pmfExpect_add_const
 AISafetyAtlas.Causal.Query::pmfExpect_discretize
 AISafetyAtlas.Causal.Query::pmfExpect_le
@@ -175,6 +179,11 @@ AISafetyAtlas.Causal.Semialgebraic::IsSemialgebraic.basic
 AISafetyAtlas.Causal.Semialgebraic::IsSemialgebraic.compl
 AISafetyAtlas.Causal.Semialgebraic::IsSemialgebraic.inter
 AISafetyAtlas.Causal.Semialgebraic::IsSemialgebraic.sdiff
+AISafetyAtlas.Causal.Semialgebraic::IsSemialgebraic.setOf_and
+AISafetyAtlas.Causal.Semialgebraic::IsSemialgebraic.setOf_congr
+AISafetyAtlas.Causal.Semialgebraic::IsSemialgebraic.setOf_const_and
+AISafetyAtlas.Causal.Semialgebraic::IsSemialgebraic.setOf_not
+AISafetyAtlas.Causal.Semialgebraic::IsSemialgebraic.setOf_or
 AISafetyAtlas.Causal.Semialgebraic::IsSemialgebraic.union
 AISafetyAtlas.Causal.Semialgebraic::basicSemialgebraic_union
 AISafetyAtlas.Causal.Semialgebraic::isCompact_closedBox
@@ -184,6 +193,10 @@ AISafetyAtlas.Causal.Semialgebraic::isSemialgebraic_closedBox
 AISafetyAtlas.Causal.Semialgebraic::isSemialgebraic_compl_basic
 AISafetyAtlas.Causal.Semialgebraic::isSemialgebraic_empty
 AISafetyAtlas.Causal.Semialgebraic::isSemialgebraic_not_holds
+AISafetyAtlas.Causal.Semialgebraic::isSemialgebraic_setOf_eval_eq_zero
+AISafetyAtlas.Causal.Semialgebraic::isSemialgebraic_setOf_eval_ne_zero
+AISafetyAtlas.Causal.Semialgebraic::isSemialgebraic_setOf_eval_nonneg
+AISafetyAtlas.Causal.Semialgebraic::isSemialgebraic_setOf_eval_pos
 AISafetyAtlas.Causal.Semialgebraic::isSemialgebraic_univ
 AISafetyAtlas.Causal.SparseEncoding::CodeSym.isDigit_ofBool
 AISafetyAtlas.Causal.SparseEncoding::CodeSym.ofBool_injective
@@ -594,6 +607,7 @@ AISafetyAtlas.Examples.Causal.OneNodeClass::Δ_doProf
 AISafetyAtlas.Examples.Causal.OneNodeClass::Δmix_mix
 AISafetyAtlas.Examples.Causal.OneNodeClass::Δmix_val
 AISafetyAtlas.Examples.Causal.Query::constStrategy_nonadaptive
+AISafetyAtlas.Examples.Causal.Query::exactMinimalBudget_emptyClass
 AISafetyAtlas.Examples.Causal.Query::exactMinimalBudget_of_empty
 AISafetyAtlas.Examples.Causal.Query::pmfExpect_const_strategy
 AISafetyAtlas.Examples.Causal.Query::replayFirstQuery_nonadaptive

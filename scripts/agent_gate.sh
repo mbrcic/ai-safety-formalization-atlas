@@ -83,6 +83,9 @@ python3 scripts/check_docstring_identifiers.py
 echo "==> check_conjecture_grade_prose"
 python3 scripts/check_conjecture_grade_prose.py
 
+echo "==> check_cited_declarations"
+python3 scripts/check_cited_declarations.py
+
 echo "==> check_docs_paths"
 python3 scripts/check_docs_paths.py
 

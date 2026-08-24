@@ -104,14 +104,24 @@ def synthetic_conjecture(data: dict) -> dict:
     must name a declaration the generated `Checks.lean` can elaborate, which is
     what CI checks and this file deliberately does not.
     """
+    data["next_id"] = 26
     data["conjectures"].insert(
         0,
         {
-            "id": "CONJ-900",
+            "id": "CONJ-025",
+            "kind": "claim",
+            "problem": "",
             "statement": "Synthetic harness record. Never written to the ledger.",
             "refutation": "Not applicable; this record exists only under test.",
             "prior_art": "Not applicable; this record exists only under test.",
             "lean": "AISafetyAtlas.Conjectures.Checks.synthetic",
+            "lean_module": "AISafetyAtlas.Conjectures.Checks",
+            "answer_candidate": [],
+            "answer_admissible": [],
+            "answer_correct": [],
+            "admissibility_status": "NotApplicable",
+            "blocked_on": "",
+            "absent_declarations": [],
             "tags": ["learning-theory"],
             "proposed_by": "test_validators",
             "status": "OPEN",
@@ -742,6 +752,67 @@ CASES = [
         "unknown source_fidelity",
     ),
     (
+        "conjectures: MAIS row not at the source scope",
+        "validate_conjectures.py",
+        "conjectures.yaml",
+        lambda d: synthetic_conjecture(d).update(
+            {
+                "source_ref": ["mais-a2-2026"],
+                "source_scope": "Narrower",
+                "source_note": (
+                    "The synthetic row adds a premise that MAIS does not state; "
+                    "the validator must keep this repaired variant out of the ledger."
+                ),
+            }
+        ),
+        "every MAIS ledger row must be 'Same'",
+    ),
+    (
+        # A row may leave the ledger, but not silently: the withdrawn encoding
+        # and the atlas-original variant that left on 2026-08-23 took their
+        # `CONJ-` numbers with them, and only a record keeps that from being an
+        # undocumented decision.
+        "conjectures: a removed row leaves no record",
+        "validate_conjectures.py",
+        "conjectures.yaml",
+        lambda d: d["conjectures"].__delitem__(
+            next(i for i, e in enumerate(d["conjectures"]) if e["id"] == "CONJ-004")
+        ),
+        "conjecture numbering skips assigned ids",
+    ),
+    (
+        "conjectures: a retired id is reused",
+        "validate_conjectures.py",
+        "conjectures.yaml",
+        lambda d: first(d["conjectures"], id="CONJ-010").__setitem__(
+            "id", "CONJ-011"
+        ),
+        "appear in both the live ledger and the retired archive",
+    ),
+    (
+        "conjectures: next_id skips an unrecorded assignment",
+        "validate_conjectures.py",
+        "conjectures.yaml",
+        lambda d: d.__setitem__("next_id", 26),
+        "conjecture numbering skips assigned ids ['CONJ-025']",
+    ),
+    (
+        "conjectures: MAIS row using an atlas bridge",
+        "validate_conjectures.py",
+        "conjectures.yaml",
+        lambda d: synthetic_conjecture(d).update(
+            {
+                "source_ref": ["mais-a2-2026"],
+                "source_fidelity": ["Literal", "Bridged"],
+                "source_note": (
+                    "The synthetic row supplies an atlas object where MAIS did "
+                    "not; the validator must keep that bridge out of the ledger."
+                ),
+            }
+        ),
+        "may not substitute an atlas-supplied object",
+    ),
+    (
         "conjectures: source_ref names no registry source",
         "validate_conjectures.py",
         "conjectures.yaml",
@@ -943,13 +1014,137 @@ CASES = [
         "tags must be non-empty strings",
     ),
     (
-        "conjectures: module that is not a Lean build target",
+        "conjectures: statement module carrying no declaration prefix",
         "validate_conjectures.py",
         "conjectures.yaml",
         lambda d: synthetic_conjecture(d).__setitem__(
-            "lean", "AISafetyAtlas.Conjectures.Ghost.statement"
+            "lean_module", "AISafetyAtlas.Causal.EffectiveGenericity"
         ),
-        "not an explicit Lean build target",
+        "does not plausibly carry",
+    ),
+    (
+        "conjectures: answer fields disagreeing on clause count",
+        "validate_conjectures.py",
+        "conjectures.yaml",
+        lambda d: first(d["conjectures"], id="CONJ-013").__setitem__(
+            "answer_correct", ["AISafetyAtlas.Conjectures.MAIS.IsO27EdgeSurvivalRegion"]
+        ),
+        "disagree on clause count",
+    ),
+    (
+        "conjectures: blocked row naming a Lean declaration",
+        "validate_conjectures.py",
+        "conjectures.yaml",
+        lambda d: first(d["conjectures"], id="CONJ-018").__setitem__(
+            "lean", "AISafetyAtlas.Conjectures.Checks.synthetic"
+        ),
+        "blocked row is the record that none exists",
+    ),
+    (
+        "conjectures: blocked row with no absence to trip on",
+        "validate_conjectures.py",
+        "conjectures.yaml",
+        lambda d: first(d["conjectures"], id="CONJ-019").__setitem__(
+            "absent_declarations", []
+        ),
+        "a note that rots",
+    ),
+    (
+        "conjectures: blocked row carrying a scope grade",
+        "validate_conjectures.py",
+        "conjectures.yaml",
+        lambda d: first(d["conjectures"], id="CONJ-020").__setitem__(
+            "source_scope", "Same"
+        ),
+        "are one fact and must be used together",
+    ),
+    (
+        "conjectures: target row silent about circular answers",
+        "validate_conjectures.py",
+        "conjectures.yaml",
+        lambda d: first(d["conjectures"], id="CONJ-013").__setitem__(
+            "admissibility_status", "NotApplicable"
+        ),
+        "must say whether a circular answer is excluded",
+    ),
+    (
+        "conjectures: target row naming no candidate type",
+        "validate_conjectures.py",
+        "conjectures.yaml",
+        lambda d: first(d["conjectures"], id="CONJ-013").__setitem__(
+            "answer_candidate", []
+        ),
+        "must say what type an answer has",
+    ),
+    (
+        "conjectures: claim row grading admissibility it does not carry",
+        "validate_conjectures.py",
+        "conjectures.yaml",
+        lambda d: synthetic_conjecture(d).__setitem__(
+            "admissibility_status", "Unformalized"
+        ),
+        "admissibility is a property of an answer",
+    ),
+    (
+        "conjectures: admissibility claimed Formalized with no predicate",
+        "validate_conjectures.py",
+        "conjectures.yaml",
+        lambda d: first(d["conjectures"], id="CONJ-009").__setitem__(
+            "admissibility_status", "Formalized"
+        ),
+        "the label is not the artifact",
+    ),
+    (
+        "conjectures: Partial admissibility with every clause covered",
+        "validate_conjectures.py",
+        "conjectures.yaml",
+        # `Partial` on a row whose clauses are all covered would let a fully
+        # closed row read as open, which is the mirror of the `Formalized`
+        # overclaim below and just as invisible to a reader.
+        lambda d: first(d["conjectures"], id="CONJ-017").__setitem__(
+            "admissibility_status", "Partial"
+        ),
+        "both counts must be nonzero",
+    ),
+    (
+        "conjectures: Partial admissibility with no clause covered",
+        "validate_conjectures.py",
+        "conjectures.yaml",
+        lambda d: first(d["conjectures"], id="CONJ-016").__setitem__(
+            "admissibility_status", "Partial"
+        ),
+        "both counts must be nonzero",
+    ),
+    (
+        "conjectures: Formalized while a clause has no predicate",
+        "validate_conjectures.py",
+        "conjectures.yaml",
+        # CONJ-013 covers clause (c) and leaves (a) and (b) open. Rounding that
+        # up to `Formalized` claims an admissibility condition for two clauses
+        # that have none, which is exactly the drift `Partial` exists to stop.
+        lambda d: first(d["conjectures"], id="CONJ-013").__setitem__(
+            "admissibility_status", "Formalized"
+        ),
+        "use 'Partial'",
+    ),
+    (
+        "conjectures: unknown kind",
+        "validate_conjectures.py",
+        "conjectures.yaml",
+        lambda d: synthetic_conjecture(d).__setitem__("kind", "problem"),
+        "has unknown kind",
+    ),
+    (
+        "conjectures: lean_module naming no Lean file",
+        "validate_conjectures.py",
+        "conjectures.yaml",
+        lambda d: synthetic_conjecture(d).update(
+            {
+                "lean": "AISafetyAtlas.Conjectures.Ghost.statement",
+                "lean_module": "AISafetyAtlas.Conjectures.Ghost",
+            }
+        ),
+        "is not a Lean file",
     ),
     (
         "tasks: done badge disagreeing with status",

@@ -6,7 +6,7 @@
 
 > **Quickstart:** [Open in Codespaces](https://codespaces.new/mbrcic/ai-safety-formalization-atlas?quickstart=1) — the toolchain provisions itself and one example compiles in minutes — then pick a [first task](docs/guide/contributor-tasks.md#open-now). Prefer local? `scripts/setup.sh --pointer` (docs only, no Lean) or `scripts/setup.sh --quick` (one example). Full detail: [Get started](#get-started).
 
-**The open Lean workbench for formal AI-safety results.**
+**The open Lean library for formal AI-safety results.**
 
 The Atlas develops, reproduces, and audits machine-checked AI-safety mathematics:
 shared definitions, theorems, counterexamples, and reviewed interpretation
@@ -14,10 +14,12 @@ bridges. Researchers use it to sharpen and discover claims; engineers may use
 public facade cores as **reference specifications** inside larger assurance
 arguments. Runtime systems and product stacks normally remain downstream.
 
-Most of AI safety lives in prose and scattered proofs. This repo puts
-**ingredients and primitives** on one Lean surface so impossibility, possibility,
-tradeoffs, and—when computable—governance or ethics claims can be formalized
-without rebuilding foundations each time. Humans and proof agents work here
+Most of AI safety lives in prose and scattered proofs, so every citation
+rebuilds the model from scratch and words it a little differently each time.
+This repo is durable memory against that: **ingredients and primitives** on one
+kernel-checked Lean surface, so impossibility, possibility, tradeoffs, and—when
+computable—governance or ethics claims name their objects once and reuse them,
+instead of every paper re-deriving its own. Humans and proof agents work here
 together.
 
 ## Why this exists
@@ -62,6 +64,18 @@ MAIS-A2 agenda phrases its query problems over — a semialgebraic class, the
 `K(G)` parameter chart, and a rational-weight query layer. Two behaviourally
 identical models with different graphs are exhibited, not assumed.
 
+**If you want an open question instead of a theorem**,
+[`conjectures.yaml`](conjectures.yaml) tracks precise statements — mostly
+causal-identifiability questions from
+[MAIS](https://github.com/lionellevine/MAIS)'s open-problems agenda, plus one
+from an information-theory survey. Every conjecture entry names a closed, compiling `Prop`, and the ledger also holds determine-problem specifications and printed problems with no Lean object at all;
+defining one asserts nothing about its truth, and the four rows that are settled
+say so and name the proof. Worked models establish that the hypotheses can be met
+where a row says so, and the rows whose antecedents still have no witness
+disclose it — the MAIS-O26 row needs a solution to MAIS-O24, and no such
+solution is exhibited in this tree, so that statement may hold vacuously. See
+[conjectures](docs/guide/conjectures.md).
+
 **If the question is control**, `AISafetyAtlas.Control` carries Ashby's variety
 bounds and Touchette–Lloyd's information limits at their printed quantifiers: a
 regulator cannot hold an outcome steadier than its own repertoire allows, and
@@ -80,7 +94,7 @@ of the survey's control rows are still empty; see
   developing, reproducing, or auditing formal claims.
 - **Formal-methods and safety engineers** using cores as reference
   specifications or to pressure-test assumptions in a larger assurance
-  argument—not as a drop-in system safety certificate.
+  argument.
 - **Contributors** willing to make a claim precise, including with help from
   formal-methods collaborators or agents.
 
@@ -89,7 +103,7 @@ scoped reviewed bridge where relevant, implementation evidence, and the rest of
 the assurance argument. Bridge review validates a scoped interpretation; it does
 not by itself prove operational safety.
 
-## Workbench status
+## Library status
 
 **Primary goal:** develop, reproduce, and machine-check formal AI-safety results
 (including using shared foundations to discover new ones), for AI safety and
@@ -105,7 +119,7 @@ monorepo in-tree. Reusable structure and honest grading over volume.
 | Results recording a formalization only | **37** (28 on root import) |
 | Reviewed AI-system bridges | **3** |
 | Statement-reviewed bridges (interpretation withheld) | **1** |
-| Open conjectures | **1** |
+| Open conjectures | **4** |
 | Claim results with statement-match | **14** |
 | Claim results with `RELATED`-only formalization | **7** |
 
@@ -240,7 +254,7 @@ See the [`v0.7 release scope`](docs/releases/v0.7.md) and
 
 - [`registry.yaml`](registry.yaml) records every result: claim rows carrying
   source provenance, and artifact rows for formalizations and public Lean
-  surface the workbench develops or reproduces on its own account.
+  surface the library develops or reproduces on its own account.
 - [`AISafetyAtlas/`](AISafetyAtlas/) contains attributed Lean integrations.
 - [`Main.lean`](Main.lean) is `atlas-check`: it reads a finite model as JSON and
   prints the verdict together with the declaration that certifies it, so a
@@ -251,9 +265,9 @@ See the [`v0.7 release scope`](docs/releases/v0.7.md) and
 - [`CONTRIBUTING.md`](CONTRIBUTING.md) explains how to propose and verify changes.
 - [`ROADMAP.md`](ROADMAP.md) presents the public strategy and contributor entry points.
 - [`STATE.md`](STATE.md) reports the current phase, blockers, and next tasks.
-- [`conjectures.yaml`](conjectures.yaml) records conjecture statements that
-  compile in Lean without a proof, open ones and the settled or withdrawn ones
-  behind them; nothing in it is asserted.
+- [`conjectures.yaml`](conjectures.yaml) records source-faithful conjecture
+  statements that compile in Lean without a proof, together with settled rows;
+  an open row asserts nothing, and a settled one names its proof.
 - [`tasks.yaml`](tasks.yaml) is the maintained task board;
   [`docs/guide/contributor-tasks.md`](docs/guide/contributor-tasks.md) is
   generated from it.
@@ -357,7 +371,7 @@ and the `Knowledge` facades in the
 process-compositional BY-044 interpretation has its own
 [source map and fidelity residual](docs/provenance/limited-self-awareness.md).
 
-**Landscape declarations** — results the workbench develops or reproduces on its
+**Landscape declarations** — results the library develops or reproduces on its
 own account rather than as coverage of a catalogued source. Seventeen rows carry
 `root_import: true`; most are the `Knowledge`, `Oversight` and `Compositional`
 entry points listed above. The full list, with the declarations each row owns, is

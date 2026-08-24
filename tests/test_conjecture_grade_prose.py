@@ -225,6 +225,240 @@ def test_a_universal_claim_is_checked_against_its_own_coverage_column():
     assert _audit(text) == []
 
 
+# --- grade claims outside Lean -------------------------------------------------
+
+
+def _markdown(text: str, ledger: dict[str, dict[str, object]]) -> list[str]:
+    import tempfile
+
+    with tempfile.TemporaryDirectory() as tmp:
+        path = Path(tmp) / "current.md"
+        path.write_text(text, encoding="utf-8")
+        failures, _ = prose.check_markdown(ledger, [path])
+    return failures
+
+
+def test_markdown_claim_disagreeing_with_ledger_is_caught():
+    ledger: dict[str, dict[str, object]] = {
+        "CONJ-003": {
+            "source_scope": "Same",
+            "source_fidelity": "Literal",
+        }
+    }
+    assert _markdown("CONJ-003 is graded `Narrower`.", ledger)
+
+
+def test_markdown_historical_grade_is_not_a_current_claim():
+    ledger: dict[str, dict[str, object]] = {
+        "CONJ-003": {
+            "source_scope": "Same",
+            "source_fidelity": "Literal",
+        }
+    }
+    assert _markdown("CONJ-003 had been graded `Narrower`.", ledger) == []
+
+
+def test_superseded_markdown_archive_is_skipped():
+    ledger: dict[str, dict[str, object]] = {
+        "CONJ-003": {
+            "source_scope": "Same",
+            "source_fidelity": "Literal",
+        }
+    }
+    text = (
+        "> **Superseded.** Nothing here states a current grade.\n\n"
+        "CONJ-003 is graded `Narrower`."
+    )
+    assert _markdown(text, ledger) == []
+
+
 def test_every_vocabulary_word_is_matched():
     for value in prose.GRADE_VALUES:
         assert _claims(f"The row stays `{value}`.") == [value]
+
+
+# --- the coverage table's own cells, and the counts quoted in public prose -----
+#
+# Three defects shipped green on 2026-08-23 that no pattern above could see,
+# because none of them names a `CONJ-###` row anywhere near the claim:
+#
+#   * the coverage table's O26 row read *"graded `Same`"* while the ledger had
+#     recorded `Narrower` for a day — the cell names `maisO26_exactRate`, not
+#     the row;
+#   * its Counts bullet read *"all four at `Same` scope"* and named no row at
+#     all;
+#   * `site/index.html` read *"five open, four resolved … one withdrawn"* after
+#     the ledger had dropped to four and zero.
+#
+# The table now carries explicit `Ledger` and `Scope` columns so the first two
+# are machine-comparable, and the counts are recomputed from the ledger.
+
+
+def _ledger() -> dict:
+    return prose.load_ledger()
+
+
+def test_coverage_row_disagreeing_with_the_ledger_is_caught(tmp_path):
+    table = tmp_path / "coverage.md"
+    table.write_text(
+        "| ID | Ledger | Scope | Lean statement status |\n"
+        "|---|---|---|---|\n"
+        "| O26 | `CONJ-003` | `Narrower` | **Statement only** |\n",
+        encoding="utf-8",
+    )
+    failures, checked = prose.check_mais_coverage(_ledger(), table)
+    assert checked
+    assert any("CONJ-003" in f and "Narrower" in f for f in failures)
+
+
+def test_coverage_row_prose_disagreeing_with_its_own_cell_is_caught(tmp_path):
+    """The exact shape of the O26 defect: cell right, prose in the row stale."""
+    table = tmp_path / "coverage.md"
+    table.write_text(
+        "| ID | Ledger | Scope | Lean statement status |\n"
+        "|---|---|---|---|\n"
+        "| O26 | `CONJ-003` | `Same` | **Statement only, graded `Narrower`** |\n",
+        encoding="utf-8",
+    )
+    failures, _ = prose.check_mais_coverage(_ledger(), table)
+    assert any("graded" in f and "Scope cell" in f for f in failures)
+
+
+def test_universal_scope_claim_is_recomputed_from_the_rows(tmp_path):
+    """*"all four at `Same` scope"* over a table one of whose rows is not."""
+    table = tmp_path / "coverage.md"
+    table.write_text(
+        "| ID | Ledger | Scope | Lean statement status |\n"
+        "|---|---|---|---|\n"
+        "| O23 | `CONJ-004` | `Same` | **Resolved** |\n"
+        "| O26 | `CONJ-003` | `Same` | **Statement only** |\n"
+        "\n"
+        "- Four source targets have complete propositions, all four at `Beyond` scope.\n",
+        encoding="utf-8",
+    )
+    failures, _ = prose.check_mais_coverage(_ledger(), table)
+    assert any("claims every graded row is `Beyond`" in f for f in failures)
+
+
+def test_target_with_no_ledger_row_may_not_carry_a_grade(tmp_path):
+    table = tmp_path / "coverage.md"
+    table.write_text(
+        "| ID | Ledger | Scope | Lean statement status |\n"
+        "|---|---|---|---|\n"
+        "| O27 | — | `Retired` | **Withdrawn encoding** |\n",
+        encoding="utf-8",
+    )
+    failures, _ = prose.check_mais_coverage(_ledger(), table)
+    assert any("no ledger row" in f for f in failures)
+
+
+def test_stale_public_counts_are_caught(tmp_path):
+    """The `site/index.html` sentence as it stood, against the live ledger."""
+    page = tmp_path / "index.html"
+    page.write_text(
+        "<p>five open, four resolved by linked Lean theorems, one withdrawn.</p>",
+        encoding="utf-8",
+    )
+    failures, checked, skipped = prose.check_counts(_ledger(), (page,))
+    assert checked
+    assert any("open" in f for f in failures)
+    assert any("withdrawn" in f for f in failures)
+
+
+def test_live_counts_pass(tmp_path):
+    # The counts are over *conjecture* rows -- kind claim or answer -- because
+    # that is what the prose these patterns match is about. Counting the target
+    # and blocked rows the ledger gained on 2026-08-24 would make every sentence
+    # in the guide fail at once while saying nothing truer about them.
+    ledger = {
+        cid: row
+        for cid, row in _ledger().items()
+        if row.get("kind", "claim") in {"claim", "answer"}
+    }
+    opened = sum(e["status"] == "OPEN" for e in ledger.values())
+    resolved = sum(e["status"] == "RESOLVED" for e in ledger.values())
+    page = tmp_path / "index.html"
+    page.write_text(f"<p>{opened} open and {resolved} resolved.</p>", encoding="utf-8")
+    failures, checked, skipped = prose.check_counts(ledger, (page,))
+    assert checked and not failures
+
+
+# --- a capitalised sentence start is still an assertion ------------------------
+
+
+def test_capitalised_row_verdict_is_an_assertion():
+    """*"This row is `Same`."* — the sentence that shipped stale in the audit.
+
+    Every pattern was case-sensitive and written lowercase, so the one form a
+    Markdown sentence actually takes was the one form none of them matched.
+    """
+    assert _claims("This row is `Same`.") == ["Same"]
+    assert _claims("The row is `Narrower` on one axis.") == ["Narrower"]
+
+
+def test_mais_scoped_counts_are_checked(tmp_path):
+    """The `site/index.html` rewording of 2026-08-23 matched no count pattern.
+
+    It replaced "four open and four resolved" with a MAIS-scoped sentence, so
+    the page's numbers went unchecked again on the same day the previous stale
+    one was fixed. Three independent numbers are now read from the ledger.
+    """
+    ledger = _ledger()
+    page = tmp_path / "index.html"
+    page.write_text(
+        "<p>ninety-nine MAIS-linked records. One have linked Lean proofs; "
+        "the other twelve remain open.</p>",
+        encoding="utf-8",
+    )
+    failures, checked, skipped = prose.check_counts(ledger, (page,))
+    assert checked == 3
+    # `mais_all` since 2026-08-24: "MAIS-linked records" counts rows of every
+    # kind, while `mais` counts the conjectures among them. The two were the
+    # same number until the ledger gained target and blocked rows.
+    assert any("mais_all" == f.split("for ")[1].split(",")[0] for f in failures)
+    assert any("mais_resolved" in f for f in failures)
+    assert any("mais_open" in f for f in failures)
+
+
+def test_live_site_counts_pass():
+    """The page as it actually stands agrees with the ledger."""
+    site = ROOT / "site" / "index.html"
+    failures, checked, skipped = prose.check_counts(_ledger(), (site,))
+    # Five numbers since 2026-08-24: the all-kinds row count and the count of
+    # distinct printed problems joined the three conjecture-scoped ones, as the
+    # sentence was rewritten first to say what the ledger holds and then to stop
+    # claiming one row per problem, which was false while every number in the
+    # same sentence was right.
+    assert checked == 5, "the live sentence must stay in a checked shape"
+    assert not failures
+    assert not skipped
+
+
+def test_hyphenated_number_word_is_parsed(tmp_path):
+    """`twenty-one-row file` used to match no pattern at all.
+
+    A bare `\\w+` slot cannot capture a hyphenated compound, so the sentence was
+    skipped rather than compared -- and a skipped sentence produces the same
+    silent success as an agreeing one. This is the denominator failure the
+    `checked` assertions above exist for, caught one layer earlier.
+    """
+    page = tmp_path / "guide.md"
+    page.write_text("This is a twenty-one-row file.", encoding="utf-8")
+    failures, checked, skipped = prose.check_counts(_ledger(), (page,))
+    assert checked == 1
+    assert any("21" in f and "rows" in f for f in failures)
+
+
+def test_ordinary_prose_is_not_reported_as_an_unparsed_count(tmp_path):
+    """The wide slot catches sentences that were never counting anything.
+
+    Reporting those as unchecked count claims is a false positive that trains a
+    reader to ignore the report, which costs more than the hole it closes. Only
+    tokens built from number words or digits are reported.
+    """
+    page = tmp_path / "guide.md"
+    page.write_text(
+        "The rest are determine-problem specifications.", encoding="utf-8"
+    )
+    failures, checked, skipped = prose.check_counts(_ledger(), (page,))
+    assert not failures and not skipped and checked == 0

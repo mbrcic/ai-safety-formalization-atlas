@@ -1,13 +1,23 @@
 {
   "schema_version": 1,
-  "description": "Open questions with a compiling Lean statement and no proof. A conjecture is a first-class deliverable: stating a safety property precisely enough to be checkable is the hard part, and the statement is useful before anyone proves it. Nothing here is asserted. Conjecture modules live under AISafetyAtlas.Conjectures.*, are never on the atlas root import, and never enter theorem counts. Tag vocabulary is shared with registry.yaml.",
+  "next_id": 25,
+  "description": "Open questions and their settled ledger records. An OPEN conjecture is a compiling Lean statement with no proof and asserts nothing; every RESOLVED row separately names the checked proof that settled it. Conjecture modules live under AISafetyAtlas.Conjectures.*, are never on the atlas root import, and never enter theorem counts. Tag vocabulary is shared with registry.yaml.",
   "conjectures": [
     {
       "id": "CONJ-002",
+      "kind": "claim",
+      "problem": "",
       "statement": "Wolpert 2008 section 8's collapse of stochastic inference complexity to Definition 6 at accuracy 1 genuinely needs its no-null-point hypothesis. `stochasticInferenceComplexity_eq` proves `C-bar_1(Gamma | C) = script-C(Gamma | C)` under the source's `P proportional to d-mu` condition, rendered as `hatom` in the single-measure formulation this atlas uses: no point of the space is null. The conjecture is that theorem with `hatom` deleted and nothing else changed, negated -- so a counterexample is a probability space, device, length function and target meeting every remaining hypothesis, including measurable agreement and positive mass on every realized setup fibre, at which the two complexities differ.",
       "refutation": "Prove `stochasticInferenceComplexity_eq` without `hatom`, leaving every other hypothesis in place. That shows the hypothesis was never needed and the theorem can simply be strengthened.",
       "prior_art": "D. H. Wolpert, Physical limits of inference, Physica D 237(9):1257-1281, 2008, §8 running text after Definition 10 (survey-ref-005). The source states the equality with the proportionality condition and gives no proof of either direction; the `≤` direction is `stochasticInferenceComplexity_le` and needs no such condition. No source consulted addresses necessity. The distinction is the standard measure-zero versus empty gap and is not specific to this paper, but the atlas found no statement of it for this quantity.",
       "lean": "AISafetyAtlas.Conjectures.StochasticComplexity.eq_needs_no_null_points",
+      "lean_module": "AISafetyAtlas.Conjectures.StochasticComplexity",
+      "answer_candidate": [],
+      "answer_admissible": [],
+      "answer_correct": [],
+      "admissibility_status": "NotApplicable",
+      "blocked_on": "",
+      "absent_declarations": [],
       "tags": [
         "information-theory",
         "computational-complexity"
@@ -22,6 +32,607 @@
       "source_scope": "Beyond",
       "source_fidelity": "AtlasOriginal",
       "source_note": "Beyond/AtlasOriginal, corrected from Same/Literal on 2026-08-21. There is no printed sentence here to transcribe, and the entry's own fields said so two rows away: prior_art records that Wolpert 2008 section 8 'gives no proof of either direction' and that 'No source consulted addresses necessity', while proposed_by records that the hypothesis's necessity 'is asserted nowhere in the source'. Grading that Literal claimed a printed counterpart the paper does not contain. What the source does contain is the equality itself, which the atlas proves as stochasticInferenceComplexity_eq; the question of whether its hypothesis is needed is the atlas's, asked about that result. survey-ref-005 stays in source_ref as the artifact the question is about. One reading choice is worth recording and previously had nowhere to go: the negated universal is pinned at Type 0 rather than left polymorphic, because Checks.lean cannot name a universe-polymorphic Prop without metavariables. Restricting a *negated* universal makes the claim strictly stronger, so this is not a narrowing -- a Type 0 counterexample refutes the polymorphic theorem."
+    },
+    {
+      "id": "CONJ-003",
+      "kind": "claim",
+      "problem": "MAIS-O26",
+      "statement": "MAIS-A2 Conjecture 4.4 (MAIS-O26), at print's own class: for every solution to MAIS-O24 and every skeleton over a finite set of binary chance variables with real tables, if the class MM(sk,lambda,mu) cut by that solution's polynomial list has a linear recovery modulus L below an explicit threshold over the printed identified set, and K is def:margin's chart maximum over the margin class, then the randomized exact-policy-probability minimax budget N(epsilon) is finite and Theta(K log(1/epsilon)) as epsilon tends to zero, under one uniform polynomial bound in 1/lambda, 1/mu and L whose coefficient and degree are chosen after the O24 solution is fixed but before the diagram, its size and the margins -- which is print's own order, since prob:effective closes \"Fix one list supplied by a solution\" and conj:exact asks for constants independent of m.",
+      "refutation": "Conditional refutation route, formalized but not inhabited. Give an O24 solution, a skeleton and margins whose cut class is empty, satisfies O26ClassAssumptions, and has chart dimension K >= 1. AISafetyAtlas.Examples.Causal.Query.exactMinimalBudget_emptyClass proves that the actual randomized minimax budget is zero on every nonnegative target for an empty class. AISafetyAtlas.Examples.Conjectures.MAIS.not_isThetaWithMarginBound_emptyClass proves that this violates the lower half of the printed Theta rate whenever K > 0. AISafetyAtlas.Examples.Conjectures.MAIS.not_maisO26_exactRate_for_of_empty combines those facts into the negation of the corresponding O26 instance. What is missing is an instance of the antecedent: the route needs an inhabitant of Causal.O24Solution, hence an answer to prob:effective, and no such inhabitant is exhibited in this tree. Until one is, this universal Prop may be vacuously true rather than refuted. Whether the missing nonemptiness condition is a defect in MAIS-O26 is a question about the source; the atlas states the source literally rather than adding it.",
+      "prior_art": "MAIS-A2, Conjecture 4.4 and MAIS-O26. conj:exact opens 'For N = MM(sk,lambda,mu) with mu fixed', which is prob:effective's cut -- the margin class intersected with |Q^G_j(theta,u)| >= mu for a solution's own polynomial list. Since 2026-08-21 the atlas has that object, so the Prop cuts by Causal.O24Solution.marginClass rather than by a supplied genericity family. Conclusion (a), behavioural injectivity on the class, is O24Solution.identifies, a field of the bundle rather than an added antecedent. The two guards required by the old supplied-witness version -- IsProperGenericityCut and IsTightGenericityCut -- are absent because they are not in print. O26 names the linear recovery modulus through L, so HasLinearRecoveryModulus remains. It does not state compact semialgebraicity or the richness condition, so neither is carried here; both remain on O25, where prob:exact prints them. The declaration quantifies over every zero-regret policy family the adversary may fix, including arbitrary tie behaviour, and chooses one polynomial constant bound outside all problem parameters.",
+      "lean": "AISafetyAtlas.Conjectures.MAIS.maisO26_exactRate",
+      "lean_module": "AISafetyAtlas.Conjectures.MAIS",
+      "answer_candidate": [],
+      "answer_admissible": [],
+      "answer_correct": [],
+      "admissibility_status": "NotApplicable",
+      "blocked_on": "",
+      "absent_declarations": [],
+      "tags": [
+        "interpretability",
+        "computational-complexity"
+      ],
+      "proposed_by": "Atlas statement-only formalization of MAIS-A2.",
+      "status": "OPEN",
+      "resolution": "",
+      "source_ref": [
+        "mais-a2-2026"
+      ],
+      "context_source_ref": [],
+      "source_scope": "Same",
+      "source_fidelity": "Literal",
+      "source_note": "Scope is Same from 2026-08-23, because the compact-semialgebraic hypothesis was removed rather than explained away. O26ClassAssumptions now contains only the validity conditions, the definition of K, and the linear recovery modulus named through L. IsCompactSemialgebraicClass remains on CONJ-006/O25, where prob:exact states it explicitly, but it is absent here because conj:exact does not state it. If the literal MAIS-O26 statement is false, vacuous, or intended to inherit more from O25, that is recorded as a source issue rather than repaired by an atlas-added premise. Literal is retained because this row transcribes the conjecture rather than selecting one answer branch. O24Solution.exists_o26ClassAssumptions proves formally that, at valid margins and a supplied IsClassChartDim witness, any hypothetical O24 solution supplies the linear recovery modulus needed by this row. Non-vacuity nevertheless remains open: no O24Solution inhabitant is exhibited in the tree, so the proposition may currently be vacuously true."
+    },
+    {
+      "id": "CONJ-004",
+      "kind": "claim",
+      "problem": "MAIS-O23",
+      "statement": "MAIS-O23 has a negative answer, at MAIS-A2 q:ident's own quantifier: for some skeleton over a finite set of binary chance variables and some valid positive margin, two distinct models in the full six-condition margin class have equal masked behavioral transforms under every real intervention mixture.",
+      "refutation": "A refutation would prove that no such pair exists. The checked pair in AISafetyAtlas.Examples.Causal.margin_class_not_identifiable prevents that: both models satisfy the margin class, are unequal, and satisfy BehaviorEq.",
+      "prior_art": "MAIS-A2 Question 4.1 and MAIS issue #6. The issue gives a three-DAG collision and credits the earlier construction in issue #4. The atlas contribution is the finite rational Lean check of all margin conditions and equality on every mixture, not priority for the construction. Both narrowing axes are now closed generically rather than per-statement. Model and Skeleton carry a value field; Skeleton.marginClass_mapRat and Skeleton.behaviorEq_mapRat transport a rational witness into any characteristic-zero ordered field, keeping all six margin conditions and the whole behavioural family. margin_class_not_identifiable_real therefore states the collision on the source's own real chart: real-valued CPTs and every real mixture, not a rational restriction of either. The behavioural half is not a cast of the rational hypothesis, since real mixtures are not images of rational ones; the transport routes through agreement at each deterministic profile, which is a finite rational identity. The earlier ad-hoc ΔmaskReal bridge is deleted, superseded by that transport. The witness construction is MAIS issue #6's and the atlas claims no priority for it; the issue is the provenance of the witness, not the statement being graded, which is q:ident itself.",
+      "lean": "AISafetyAtlas.Conjectures.MAIS.maisO23_marginsDoNotSuffice",
+      "lean_module": "AISafetyAtlas.Conjectures.MAIS",
+      "answer_candidate": [],
+      "answer_admissible": [],
+      "answer_correct": [],
+      "admissibility_status": "NotApplicable",
+      "blocked_on": "",
+      "absent_declarations": [],
+      "tags": [
+        "interpretability"
+      ],
+      "proposed_by": "MAIS issue #6, transcribed and machine-checked by the atlas.",
+      "status": "RESOLVED",
+      "resolution": "Coverage: this row is all of q:ident. Unlike prob:boltzmann and prob:starter-set, MAIS-O23 is a single question with no clauses, so RESOLVED here is the status of both this row's Lean Prop and the printed question -- as a decide-whether answered on its negative branch, which is what the Selected fidelity records. Resolved negatively on the source's real chart by AISafetyAtlas.Examples.Causal.margin_class_not_identifiable_real. The theorem supplies two distinct margin-class models over the reals with equal complete masked behavior. The witness pair is computed at Q by margin_class_not_identifiable and carried to R by Skeleton.marginClass_mapRat and Skeleton.behaviorEq_mapRat; the transport is not a cast of the hypothesis, since real mixtures are not images of rational ones, and it runs through Model.Δmix_eq_on_probMixture_iff reducing behavioral equality to the finitely many deterministic profiles. The source repository's issue remains under its own review process.",
+      "source_ref": [
+        "mais-a2-2026"
+      ],
+      "context_source_ref": [
+        "mais-o23-2026"
+      ],
+      "source_scope": "Same",
+      "source_fidelity": "Selected",
+      "source_note": "Two corrections on 2026-08-21, neither affecting the scope grade. Fidelity was Literal and is Selected: q:ident asks 'If M, M' in MM(sk,lambda) satisfy Delta_M = Delta_M', must M = M'?', and the paragraph after the question environment adds 'I do not conjecture an answer.', which sits outside the question environment. The question itself closes with a second phrasing, recorded below. That is a decide-whether, and the Prop states its negative branch -- the genre graded Selected at CONJ-005 and CONJ-008, so Literal would be an inconsistency in this ledger rather than a reading of the source. And the graded source is now the agenda alone: mais-o23-2026, the GitHub issue supplying the witness construction, moved to context_source_ref, because a grade that answers to two artifacts at once does not say which of them the verdict is about. The statement being graded is q:ident; the issue is the provenance of the witness, and the atlas claims no priority for the construction. Scope stays Same: the Prop is at q:ident's own quantifier over skeletons, valid margins and the full six-condition margin class, on the source's real chart. Print gives two phrasings and the atlas answers both. q:ident closes 'Equivalently (by Proposition prop:equiv): can two distinct models in the margin class share a common family of optimal policies for every observation mask?' The Prop transcribes the FIRST phrasing, equal masked transforms, because that is the numerical object the witness is computed against. The second is discharged separately and in the direction that matters: Examples.Causal.margin_class_not_identifiable_shared_optimal exhibits two distinct margin-class models with different graphs sharing a policy family admissible at level 0, which is a common family of optimal policies, so the answer to the second phrasing is negative too. Only prop:equiv's forward half is needed for that and it is what is proved; the converse reconstruction from an arbitrary optimal-policy oracle remains sourced rather than formalized and is not used here. Recording this is a correction in the UNDER-claiming direction: the row answered print's second question and said nothing about it."
+    },
+    {
+      "id": "CONJ-005",
+      "kind": "claim",
+      "problem": "MAIS-O34(a)",
+      "statement": "MAIS-O34(a) has a negative answer to its margin-sufficiency subquestion: within the binary two-variable one-edge family, positive margin alone does not force the global behavioral fibre to be a singleton.",
+      "refutation": "A refutation would prove singleton fibres throughout the two one-edge graph shapes under margin alone. AISafetyAtlas.Examples.Causal.margin_class_not_identifiable_two_graphs supplies opposite one-edge graphs in the class with equal behavior.",
+      "prior_art": "MAIS-A2 Problem 5.2(a), MAIS-O34, and MAIS issue #4. The registered proposition covers only the precise yes/no margin-sufficiency clause, not O34's requested full semialgebraic classification, first-order constants, or graph-threshold program. margin_class_not_identifiable_two_graphs_real states the two-graph witness on the source's real chart through the same value-field transport used for O23, so both the model axis and the mixture axis are closed here as well.",
+      "lean": "AISafetyAtlas.Conjectures.MAIS.maisO34_marginAloneDoesNotIdentify",
+      "lean_module": "AISafetyAtlas.Conjectures.MAIS",
+      "answer_candidate": [],
+      "answer_admissible": [],
+      "answer_correct": [],
+      "admissibility_status": "NotApplicable",
+      "blocked_on": "",
+      "absent_declarations": [],
+      "tags": [
+        "interpretability"
+      ],
+      "proposed_by": "MAIS issue #4/#6 construction, transcribed and machine-checked by the atlas.",
+      "status": "RESOLVED",
+      "resolution": "Coverage: this row is the margin-sufficiency subquestion of prob:starter-set(a) only. MAIS-O34 has two clauses and RESOLVED here is the status of this row's Lean Prop, not of the printed problem. The rest of (a) -- the explicit semialgebraic singleton criterion -- is CONJ-009's, and (b) is covered by neither. Resolved negatively for the margin-sufficiency clause on the source's real chart by AISafetyAtlas.Examples.Causal.margin_class_not_identifiable_two_graphs_real: two models over the reals with opposite one-edge graph shapes satisfy the same margin class and have equal complete behavior. The rational witness margin_class_not_identifiable_two_graphs is carried to R by the same two transport lemmas. The remainder of O34 is not resolved by this entry.",
+      "source_ref": [
+        "mais-a2-2026"
+      ],
+      "context_source_ref": [
+        "mais-issue-4-2026"
+      ],
+      "source_scope": "Same",
+      "source_fidelity": "Selected",
+      "source_note": "Scope is Same, corrected on 2026-08-21 after a narrowing was found and removed. The Prop had asked for M.parents != M'.parents, and carried no M != M' clause at all -- the graph clause implied one, which is why the narrowing read as harmless. prob:starter-set(a) asks to decide 'when the global fiber {M' : Delta_M' = Delta_M} is the singleton {M}; in particular ... whether margin lambda > 0 alone suffices'. The negative branch needs a nonsingleton fibre, so two distinct models and nothing more; a same-orientation collision at equal graphs answers print just as well and the old statement excluded it. The clause is now M != M', and the existing witness -- which does carry different graphs -- discharges the weakened statement unchanged, via Model.ne_of_parents_ne. The ledger read Same while the Prop was Narrower; that is recorded here rather than silently overwritten. Scope is Same on the remaining axes: prob:starter-set is stated over def:twovar's family MM_2(lambda) -- two binary variables, O empty, Z = {X,Y}, sixteen profiles -- so the two-variable restriction is print's own, and HasGraphEdge on both models is that family's one-edge condition rather than an atlas demand. Fidelity is Selected because part (a) says 'in particular decide whether margin lambda > 0 alone suffices', and the Prop states the negative branch of that decision. Part (a)'s other half, the explicit semialgebraic singleton condition, is CONJ-009; part (b) is a different problem and is not touched. The graded statement is the agenda's clause, not MAIS issue #4's. The issue makes a strictly stronger claim on the same point -- for *every* margin range 0 < lambda <= 1/3, the gap table with three entries -lambda and one +lambda admits a forward/reverse pair with identical transforms -- which is a parametric family the atlas does not state and whose proof would be a construction in lambda rather than a single witness. Grading this entry against the issue would make it Narrower; it is graded against prob:starter-set, where it is Same."
+    },
+    {
+      "id": "CONJ-006",
+      "kind": "claim",
+      "problem": "MAIS-O25",
+      "statement": "MAIS-O25's two decide-clauses, at print's own scope, taking the yes branch of the poly-log bound and the no branch of the adaptivity question: there is one polynomial, fixed before any diagram or class, such that for every compact semialgebraic class of real binary causal models whose margin-class chart dimension is K, which is behaviorally injective, which has linear recovery over the printed identified set below an explicit threshold, and whose table-parameter projection contains a K(G)-dimensional box of side rho inside one fixed graph, the minimal budget N(epsilon) of the randomized exact policy-probability minimax risk is finite and at most that polynomial in (K, 1/lambda, L, 1/rho) times log(1/epsilon) for every epsilon in (0,1) -- and non-adaptive queries cost at most a constant factor more than adaptive ones.",
+      "refutation": "Give a class satisfying ExactClassAssumptions for which no polynomial in (K, 1/lambda, L, 1/rho) fixed independently of the class bounds Causal.exactMinimalBudget by that polynomial times log(1/epsilon) -- including the case where that budget is top, since an infeasible target refutes a finite bound -- or for which the non-adaptive budget is infinite, or exceeds every constant multiple of the adaptive budget, as epsilon tends to zero.",
+      "prior_art": "MAIS-A2 Problem 4.3 and MAIS-O25. The source asks to determine the rate and, in particular, to decide two things: whether N(eps) <= poly(K, 1/lambda, L, 1/rho) log(1/eps), and whether adaptivity gives more than a constant factor. The Lean proposition states one branch of each, and they point OPPOSITE WAYS: IsPolyLogBudget is the YES to the first -- the bound holds -- and NonadaptiveWithinConstant is the NO to the second, since the non-adaptive budget being within a factor c of the adaptive one is adaptivity NOT outperforming by more than a constant. The three axes that would otherwise make it Mixed are closed: real tables, prob:exact's compact semialgebraic class with its literal K(G)-dimensional box, the printed identified set in the recovery modulus, and the randomized-analyst infimum of subsec:queries with an Nat-infinity-valued N(eps). The last axis, the estimator's output law, closed too: the PMF rendering is countably supported where print constrains it not at all, but Causal.measureMinimalBudget_eq_exactMinimalBudget proves N(eps) is the same number under either reading, so the restriction costs nothing and that axis is closed. The row is Same from 2026-08-21: IsPolyLogBudget and NonadaptiveWithinConstant both quantify over every eps in (0,1), which is prob:exact's own scope, and the eps_0 that had made this Narrower is deleted from the Prop rather than explained away. The argument that had justified eps_0 was itself wrong: it held that an unrestricted bound forces N(eps) = 0 near eps = 1 and that this is a demand the poly-log idiom does not address, but N(eps) = 0 there is expected -- the zero-query minimax risk is the error of the best fixed guess, which is below 1 on any class of positive diameter. This field states the current grade and its reason only.",
+      "lean": "AISafetyAtlas.Conjectures.MAIS.maisO25_exactQueryRate",
+      "lean_module": "AISafetyAtlas.Conjectures.MAIS",
+      "answer_candidate": [],
+      "answer_admissible": [],
+      "answer_correct": [],
+      "admissibility_status": "NotApplicable",
+      "blocked_on": "",
+      "absent_declarations": [],
+      "tags": [
+        "interpretability",
+        "computational-complexity"
+      ],
+      "proposed_by": "Atlas statement-only transcription of MAIS-O25's two decide-clauses, at the yes branch of the poly-log bound and the no branch of the adaptivity question.",
+      "status": "OPEN",
+      "resolution": "",
+      "source_ref": [
+        "mais-a2-2026"
+      ],
+      "context_source_ref": [],
+      "source_scope": "Same",
+      "source_fidelity": "Selected",
+      "source_note": "Scope is Same, and the epsilon range is gone from the Prop rather than explained away. IsPolyLogBudget and NonadaptiveWithinConstant both quantified over eps below a supplied eps_0. A second quantifier defect on the same predicate was closed on 2026-08-23: NonadaptiveWithinConstant bound its constant c existentially and was applied inside the for-all over sk and modelClass, so the Prop allowed one adaptivity constant per model class. prob:exact asks whether adaptive queries beat non-adaptive ones by more than a constant factor, with constants depending on (m, K, lambda, L, rho); a class is not among those, so a per-class constant states something weaker than print and the row had been graded Same against the easier statement. c is now a parameter of the predicate, quantified beside A and d before the skeleton and the class. Both now quantify over every eps in (0,1), which is prob:exact's own sentence and the domain on which log(1/eps) is positive. The argument that had justified eps_0 was wrong. It said an unrestricted bound would force N(eps) = 0 as eps approaches 1, since A * P * log(1/eps) falls to zero, and called that a demand the poly-log idiom does not address. N(eps) = 0 near eps = 1 is not absurd but expected: the zero-query minimax risk is the error of the best fixed guess, which is strictly below 1 on any class of positive diameter, so N(eps) is already 0 for every eps above it. Below that point N(eps) is positive and log(1/eps) is bounded away from zero, and A is existentially quantified before the diagram, so a large enough A satisfies the bound there. Examples.Causal.OneNodeClass makes the shape concrete: its class is the interval [lambda, 1-lambda] under one graph, the guess 1/2 is wrong by at most 1/2 - lambda, and N(eps) vanishes above that. A satisfiable printed sentence licenses no repair. Nor does conj:exact license one: it writes the same quantity as eps -> 0, so rendering the two halves of one decide-clause differently would itself be a defect. conj:exact is MAIS-O26 and prob:exact is MAIS-O25. They are different printed statements and the convention of one does not transcribe the other. not_isPolyLogBudget_of_top and not_nonadaptiveWithinConstant_of_top were restated against the wider predicate: any single infeasible target in (0,1) now refutes the bound, where before a witness could choose an eps_0 above it. Non-vacuity is closed. Fidelity is Selected and not Bridged, which would have recorded the epsilon range and nothing else: prob:exact attaches no range to eps, IsPolyLogBudget supplied an eps_0, and the tag recorded that the conventional reading was being used in place of the printed quantifier. Both predicates now quantify over every eps in (0,1), so there is no reading standing in for a quantifier any more. Selected stays, because this row states prob:exact's decide-clause and not the rest of the problem. The tag was also, by its own note, added 'for internal consistency with CONJ-003 and CONJ-010 rather than for a new fact' -- consistency with a tag CONJ-003 has now also dropped is not a reason to keep it. This field states the current grade and its reason only."
+    },
+    {
+      "id": "CONJ-008",
+      "kind": "claim",
+      "problem": "MAIS-O29(a)",
+      "statement": "Negative branch of MAIS-O29(a), at MAIS-A2 prob:boltzmann's own quantifier: for every positive inverse temperature beta, some skeleton over a finite set of binary chance variables carries a pair of distinct models in one six-condition margin class with identical complete Boltzmann response probabilities under every real intervention mixture and observation mask.",
+      "refutation": "Prove injectivity of the Boltzmann behavior map on the margin class of every skeleton at some positive finite beta. A proof of the registered existential collision instead resolves the source subquestion negatively; the existing equal-transform collision is the intended starting witness.",
+      "prior_art": "MAIS-A2 Problem 4.8(a) and MAIS-O29 ask whether Boltzmann behavior is injective. The statement defines the conditional softmax response, including uniform answers on zero-mass observation fibres, and selects the negative branch. Parts (b)--(c), concerning sampled minimax rates, the beta crossover, and optimal design, still require the statistical-experiment layer. The colliding pair is MAIS issue #6's construction, reused here; the issue is the provenance of the witness, not the statement being graded, which is prob:boltzmann(a).",
+      "lean": "AISafetyAtlas.Conjectures.MAIS.maisO29_boltzmannNotInjective",
+      "lean_module": "AISafetyAtlas.Conjectures.MAIS",
+      "answer_candidate": [],
+      "answer_admissible": [],
+      "answer_correct": [],
+      "admissibility_status": "NotApplicable",
+      "blocked_on": "",
+      "absent_declarations": [],
+      "tags": [
+        "interpretability"
+      ],
+      "proposed_by": "Atlas statement-only negative branch of MAIS-O29(a).",
+      "status": "RESOLVED",
+      "resolution": "Coverage: this row is prob:boltzmann(a) only. MAIS-O29 has three clauses and RESOLVED here is the status of this row's Lean Prop, not of the printed problem. Part (b) is answered at one instance by CONJ-016 and part (c) is blocked, and neither follows from (a): a negative answer to (a) constrains (b), since non-identifiability can floor the risk, but does not determine it, and it bears on (c) not at all. Resolved negatively on the source's real chart by AISafetyAtlas.Examples.Conjectures.MAIS.maisO29_boltzmannNotInjective_holds, at every positive beta, with the two-variable skeleton supplied as the witness for the source's existential over skeletons. The MAIS-O23 witness pair is also a Boltzmann collision at every positive inverse temperature: because the skeleton observes nothing, each response probability is a softmax of the full expectations E[u d], and the utility u d v = (1 +/- g v)/2 makes those expectations (1 +/- Delta)/2, so their sum is the total mass 1 and their difference is the behavioral transform. Equal transforms therefore pin both scores and hence the softmax, uniformly in beta. ATTRIBUTION: the colliding construction is MAIS issue #6's; the source does not connect MAIS-O29 to MAIS-O23, and the transfer step is the atlas's. modelError is print's own e. What this row does not claim: boltzmann_minimax_floor proves a deterministic estimator reading only the Boltzmann responses is maximally wrong on one of the two colliding models, at every positive temperature and independently of budget. That is not a lower bound on the randomized minimax risk prob:boltzmann(b) names -- deterministic strategies are a subset of randomized ones, so a lower bound on the larger infimum carries no information about the smaller. The two-point argument at print's own quantifier landed on 2026-08-23: AISafetyAtlas.Conjectures.MAIS.O29Experiment builds the sampled experiment -- the exact-oracle protocol with the policy-probability oracle replaced by one Bernoulli response and the adversarial policy family dropped, since the Boltzmann law is pinned by the model and beta -- and runBoltzmannTranscript_congr proves two Boltzmann-indistinguishable models induce the SAME transcript law at every budget, so no sampling separates them. half_le_boltzmannMinimaxRisk_of_collision then floors the randomized minimax risk at 1/2, and Examples...half_le_boltzmannMinimaxRisk_collision instantiates it on this row's own witness over the full margin class, uniformly in the budget and in beta. boltzmannMinimaxRisk_le_one supplies the other side, so Examples...boltzmannMinimaxRisk_collision_bounds DETERMINES prob:boltzmann(b)'s quantity up to a factor of two at this skeleton, uniformly in the budget and in beta: there is no rate to deteriorate as beta -> 0 and no (N,beta) crossover to characterize, because the risk never decays. That is (b) at one print-legal instance and not at every one, the same standing as the MAIS-O27(a) negative instance; on a class where the risk does decay, none of (b) is touched. The floor's graph condition is load-bearing rather than incidental: without it modelError is the table supremum rather than 1, one_le_modelError_add does not apply, and the floor is not 1/2, so a same-graph Boltzmann collision does not floor the risk. This row remains prob:boltzmann(a) only: (b) is a determine-clause and no truth-valued Prop is Same as it. This row stays prob:boltzmann(a) only. Print's remark that large beta creates no regret floor is not contradicted: this obstruction is non-identifiability at every beta. The module header of AISafetyAtlas/Examples/Conjectures/MAIS/O29.lean states the same distinction beside the theorem.",
+      "source_ref": [
+        "mais-a2-2026"
+      ],
+      "context_source_ref": [
+        "mais-issue-4-2026"
+      ],
+      "source_scope": "Same",
+      "source_fidelity": "Selected",
+      "source_note": "Scope is Same as of 2026-08-20: the Prop quantifies over beta on the outside and over skeletons over a finite binary chance-variable set inside, with real tables, utilities and mixture weights, which is how prob:boltzmann part (a) asks it. It was stated at the rationals until then. Fidelity is Selected because (a) says 'decide whether the map from models to Boltzmann behavior is injective on MM(sk,lambda)' and the Prop states the negative branch. Parts (b) and (c) -- minimax rates, the (N,beta) crossover, and the design problem -- need the sampled statistical-experiment layer and are not claimed."
+    },
+    {
+      "id": "CONJ-009",
+      "kind": "answer",
+      "problem": "MAIS-O34(a)",
+      "statement": "Complete candidate for MAIS-O34(a) on the source's real three-parameter two-variable chart: for every valid utility-gap table, positive margin, and forward or reverse one-edge model, the global sixteen-coordinate behavioral fibre is a singleton exactly when the same-orientation companion set is a singleton and the explicit flat-row/flat-column criterion excludes an opposite-orientation mate.",
+      "refutation": "Give a valid real gap table and model for which the submitted row/column and companion-set criterion holds but another valid model has the same sixteen transform coordinates, or for which the criterion fails although the global fibre is a singleton. Either direction refutes the registered equivalence without requiring a classification of the remaining O34(b) radius geometry.",
+      "prior_art": "MAIS-A2 Problem 5.2(a), MAIS-O34, and the candidate solution in MAIS issue #4. The issue states a complete singleton criterion and remains open for maintainer and community review. The atlas declaration transcribes that candidate onto a dedicated real chart with the source's full local-map intervention semantics. It does not accept the candidate, claim a proof, or cover O34(b)'s first-order radius, singular classification, or graph-threshold program. The candidate is now adjudicated affirmatively; see the resolution field. An earlier exhaustive rational-grid screen over gap-and-margin pairs and model cases found no mismatch in either direction and is superseded by the proof.",
+      "lean": "AISafetyAtlas.Conjectures.MAIS.maisO34_exactFiberCandidate",
+      "lean_module": "AISafetyAtlas.Conjectures.MAIS",
+      "answer_candidate": [
+        "AISafetyAtlas.Conjectures.MAIS.O34GlobalSingletonCandidate"
+      ],
+      "answer_admissible": [],
+      "answer_correct": [
+        "AISafetyAtlas.Conjectures.MAIS.maisO34_exactFiberCandidate"
+      ],
+      "admissibility_status": "Unformalized",
+      "blocked_on": "",
+      "absent_declarations": [],
+      "tags": [
+        "interpretability"
+      ],
+      "proposed_by": "Rob Sneiderman (Robby955), MAIS issue #4; statement transcribed by the atlas.",
+      "status": "RESOLVED",
+      "resolution": "Resolved affirmatively by AISafetyAtlas.Examples.Conjectures.O34.maisO34_exactFiberCandidate_holds: on the source's real two-variable chart the global sixteen-coordinate fibre is a singleton exactly under the criterion submitted in MAIS issue #4. Sufficiency was isSingletonFiber_of_candidate. Necessity splits, and both halves are proved. The same-direction half rests on behaviorEq_of_childDifference_eq_zero: a vanishing direction difference hides its child coordinate from all sixteen profiles, not only from the two profiles that read coordinates, so a failed companion clause supplies a distinct feasible value and hence a same-orientation mate; o34FlatRowGap and o34FlatRowModel witness that this clause can fail. The opposite-orientation half is the step that could have refuted the candidate, and does not: exactly one flat row together with exactly one flat column forces the gap table to be constant off a single entry, and on such a table behaviorEq_crossed_forward and behaviorEq_crossed_reverse show a forward and a reverse model collide as soon as the opposite root is the model's read child coordinate and the opposite model's own read coordinate is the model's root. The remaining opposite coordinate never enters any of the sixteen values, which is exactly why the printed criterion asks only that the root's companion set be inhabited. Both sides of the equivalence are shown reachable on valid data, so neither direction is vacuous: o34TwoFlatGap has one flat row and one flat column, so hasOppositeMate_o34TwoFlat holds and not_isSingletonFiber_o34TwoFlat concludes that model has a mate, while o34SharpGap has no flat line, so globalSingleton_o34Sharp holds and isSingletonFiber_o34Sharp concludes that model's fibre is a genuine singleton. Scope is the transcribed chart: two binary variables, one edge, real coordinates, the source's four local maps. Issue #4 part (b), its 136-segment reduction and threshold program, remains outside and is not claimed. Since 2026-08-23 the equivalence is also available at the printed comparison class: AISafetyAtlas.Examples.Conjectures.O34.o34_classFibre_iff_candidate states the criterion against every model of the printed class carrying an edge, resting on exists_pairModel_toModel_eq and PairModel.toModel_injective, so the singleton claim is about the fibre inside MM2(lambda) and not inside the atlas's chart. The printed adjective is also discharged: AISafetyAtlas.Examples.Conjectures.O34.isSemialgebraic_o34GlobalSingletonCandidate proves the criterion cuts a semialgebraic subset of the seven real coordinates def:twovar names, once an orientation fixes the structural choice. Its two real-quantifier clauses are eliminated by hand rather than by Tarski-Seidenberg: separatedValues_eq_singleton_iff and separatedValues_nonempty_iff replace them with explicit polynomial conditions, and separatedValues_ne_singleton_of_le_quarter records that the companion clause is unsatisfiable below margin 1/4, so at def:twovar's own simulation margin of 1/10 the same-orientation criterion collapses to its first disjunct. Coverage: this row is prob:starter-set(a) only. MAIS-O34 has two clauses and RESOLVED here is the status of this row's Lean Prop, not of the printed problem. Part (b) -- the first-order constant on the Lipschitz locus, the classification on its complement, and the edge-direction regret threshold -- is not covered here or anywhere in the atlas, and does not follow from (a).",
+      "source_ref": [
+        "mais-issue-4-2026"
+      ],
+      "context_source_ref": [
+        "mais-a2-2026"
+      ],
+      "source_scope": "Same",
+      "source_fidelity": "Literal",
+      "source_note": "The graded source is MAIS issue #4 alone, corrected on 2026-08-21 from a pair that also named the agenda. A single Same cell cannot answer to both: prob:starter-set(a) reads 'Determine ... an explicit semialgebraic condition', which no truth-valued Prop is the same statement as, while issue #4 states a complete singleton criterion that this Prop does transcribe. The agenda moves to context_source_ref as the setting the criterion is stated in, where nothing claims to be Same as it. Scope is Same against the issue: the Prop is at the issue's own quantifier over valid real gap tables, positive margins, and forward or reverse one-edge models, on the source's real two-variable chart with its four local maps. Two things are read from the transcription rather than supplied, and are recorded here rather than only in the Lean docstring: the equivalence is stated in both directions because the issue asserts both, and the sixteen-coordinate fibre is the global one over both orientations, not the same-orientation companion set alone. PairModel.toModel_marginClass proves the chart points inhabit the printed kernel class, behaviorEq_iff_kernel proves chart transform equality is exactly kernel behavior, and hasSingletonFibre_iff_kernel transports the fibre claim in both directions. Issue #4 part (b), its 136-segment reduction and threshold program, is a different claim and is not graded here. The chart is now proved onto that class as well: exists_pairModel_toModel_eq shows every model of the printed family carrying an edge is toModel of a valid chart point, PairModel.toModel_injective shows no model is named twice, and hasSingletonFibre_iff_kernel_class therefore compares M against every model of the printed class rather than against the chart's own points. Surjectivity is load-bearing in exactly one direction: ruling out collisions gets easier as the comparison class shrinks, so an identification claim proved over chart points alone would have been weaker than print's, while the counterexample rows never needed it."
+    },
+    {
+      "id": "CONJ-010",
+      "kind": "answer",
+      "problem": "MAIS-O31",
+      "statement": "Candidate complete answer to MAIS-O31 on a real binary chain, at MAIS issue #8's own quantifiers: for every chain model with strict table and edge-strength margins and every decision threshold t in (0,1), away from transfer-endpoint ties, interventions on one variable identify the observational mass r = P(C_j = 1) in the straddling chamber; and a literal table coordinate is identified exactly when the transfer straddles, the intervened variable is the root, and the coordinate is the root probability -- so the same-side chamber identifies none.",
+      "refutation": "Give a real chain with strict margins, a threshold t in (0,1), and a strict straddling or same-side chamber at which either the r clause fails or a literal root or transition coordinate's pointwise identifiability disagrees with the stated classification. Behavioral compatibility quantifies over every real mixture of all four local maps at the selected node and permits arbitrary shared tie behavior, so a counterexample must preserve one complete restricted optimal-policy family.",
+      "prior_art": "MAIS-A2 Question 4.10, MAIS-O31 (`q:chain`), and the candidate complete solution in MAIS issue #8. The issue derives four affine diagnostics and a generic chamber classification but remains open and explicitly claims no human or journal referee verification. The statement uses the full real chain chart, every threshold t in (0,1), the source's table margins, all four binary local interventions, and literal coordinate equality. It transcribes the issue's own Scope exclusions -- endpoint ties, CPT boundaries, exact margin boundaries -- as the chamber disjunct together with `O31ChainModel.Generic`. Both of the issue's bullets are stated; the r clause is the implication the issue asserts, not an equivalence it does not. The separate o31Threshold lemmas connect margin-admissible utilities from the surrounding agenda problem to examples of the issue's free threshold, but they no longer restrict this conjecture.",
+      "lean": "AISafetyAtlas.Conjectures.MAIS.maisO31_chainClassificationCandidate",
+      "lean_module": "AISafetyAtlas.Conjectures.MAIS",
+      "answer_candidate": [
+        "AISafetyAtlas.Conjectures.MAIS.O31CoordinateCandidate"
+      ],
+      "answer_admissible": [],
+      "answer_correct": [
+        "AISafetyAtlas.Conjectures.MAIS.maisO31_chainClassificationCandidate"
+      ],
+      "admissibility_status": "Unformalized",
+      "blocked_on": "",
+      "absent_declarations": [],
+      "tags": [
+        "interpretability"
+      ],
+      "proposed_by": "Svyatoslav Novikov (kumino) with OpenAI Codex, MAIS issue #8; statement transcribed by the atlas.",
+      "status": "OPEN",
+      "resolution": "",
+      "source_ref": [
+        "mais-issue-8-2026"
+      ],
+      "context_source_ref": [
+        "mais-a2-2026"
+      ],
+      "source_scope": "Same",
+      "source_fidelity": "Literal",
+      "source_note": "Scope is Same and fidelity is Literal, both from 2026-08-23, because the threshold bridge was removed rather than defended. MAIS issue #8 quantifies over t in (0,1), so maisO31_chainClassificationCandidate now quantifies directly over every such t. It no longer quantifies over a utility gap pair or substitutes the derived o31Threshold, whose margin bounds cover only a strict subinterval. The o31Threshold lemmas remain separate results connecting the agenda's utility formulation to concrete witnesses; they impose no restriction on the conjecture. The issue's own Scope exclusions -- endpoint ties, CPT boundaries, and exact margin boundaries -- remain the chamber disjunct and O31ChainModel.Generic. Both bullets are transcribed, including the r implication rather than an equivalence the issue does not assert. The chart is not left semantically detached, and since 2026-08-23 the embedding is proved in both directions: O31ChainModel.toModel_marginClass proves that every valid chain chart with a legal endpoint utility embeds in the printed margin class, and exists_O31ChainModel_toModel_eq proves the converse, that every model of the printed class carrying the chain graph is toModel of a valid chart point, with O31ChainModel.toModel_injective naming none twice. Only the first direction was needed while every O31 result here is a counterexample, since an existence claim is harder in a larger class; the converse is what the IDENTIFICATION half needs, because a uniqueness claim is EASIER in a smaller comparison class and proving one over chart points alone would have been weaker than print. that half is this row's. O31IdentifiesCoordinate and O31IdentifiesNodeMass quantify over O31ChainModel, while q:chain names its comparison class in print -- 'the models of MM(sk,lambda) carrying this chain graph, so that all the parameters are defined' -- and issue #8 answers that question without redefining the class. o31IdentifiesCoordinate_iff_class and o31IdentifiesNodeMass_iff_class prove the chart-quantified predicates EQUIVALENT to their statements against every model of the printed class carrying the chain graph, so the conjecture is about print's comparison class and not a smaller one. Before 2026-08-23 that equivalence did not exist and this row's Same grade rested on the chart quantifier alone. O31ChainModel.Δ_toModel_endpointGap proves the actual utility transform is the threshold-centered endpoint marginal up to its nonzero scale; o31BehaviorEqAt_threshold_iff_utilityKernel transports the chart relation to shared-optimum behavior computed from those kernel models; and shareBinaryOptimum_iff_exists_common_action proves that its sign condition means a shared optimal binary action. Non-vacuity is checked on both chambers by o31_antecedent_inhabited and o31_sameSide_antecedent_inhabited. What remains unsettled is the conjecture itself: the straddling positive identification claims, the node-mass claim, the two transition coordinates at n = 1, and the general n >= 2 classification."
+    },
+    {
+      "id": "CONJ-012",
+      "kind": "target",
+      "problem": "MAIS-O24",
+      "statement": "MAIS-A2 prob:effective asks to exhibit an effective-genericity certificate: a class, a recovery modulus and the constants that make recovery quantitative. AISafetyAtlas.Causal.O24Solution is that object, with the proof obligations as fields, so a term of the type is a solution and there is nothing left to check separately. No term is exhibited anywhere in this tree.",
+      "refutation": "Prove no O24Solution exists. MAIS issue #7 argues exactly that, and a proof would resolve this row negatively and settle CONJ-003's non-vacuity with it.",
+      "prior_art": "MAIS-A2 prob:effective. MAIS issue #7 argues no solution exists; that argument is unverified past its collision step and is not graded here.",
+      "lean": "AISafetyAtlas.Causal.O24Solution",
+      "lean_module": "AISafetyAtlas.Causal.EffectiveGenericity",
+      "answer_candidate": [
+        "AISafetyAtlas.Causal.O24Solution"
+      ],
+      "answer_admissible": [
+        "AISafetyAtlas.Causal.O24Constructor"
+      ],
+      "answer_correct": [
+        "AISafetyAtlas.Causal.O24Solution"
+      ],
+      "admissibility_status": "Formalized",
+      "blocked_on": "",
+      "absent_declarations": [],
+      "tags": [
+        "learning-theory",
+        "computational-complexity"
+      ],
+      "proposed_by": "Atlas transcription of the printed determine-clause.",
+      "status": "OPEN",
+      "resolution": "",
+      "source_ref": [
+        "mais-a2-2026"
+      ],
+      "context_source_ref": [],
+      "source_scope": "Same",
+      "source_fidelity": "DetermineProblem",
+      "source_note": "Scope Same, fidelity DetermineProblem. prob:effective reads 'exhibit', which no truth-valued Prop is Same as -- existence is not exhibition, and a Prop asserting that a solution exists asks a different question from the instruction to produce one. The row therefore grades the *specification*: O24Solution's fields are print's own class, modulus and constants, which is why the coverage matrix already graded this object Same before the ledger had a row that could hold the verdict. admissibility_status is Formalized. O24Constructor is the admissibility condition: it carries a Turing machine, a time polynomial, and Turing.TM2OutputsInTime obligations requiring the machine to write the list within time(S) steps, so an inhabitant must carry a concrete machine and certified bounded runs producing the required lists. That is narrower than saying noncomputable choice cannot inhabit the type, which is false: classical choice can select an existing certified machine; what it cannot do is stand in for one. Print's 'exhibit ... in time polynomial in S' is enforced by the structure rather than left to a reader, which is the one place in this ledger where an admissibility demand is met rather than recorded as owed. answer_candidate and answer_correct name the same declaration, which is the exhibit-problem shape rather than an omission: O24Solution's fields ARE the correctness obligations -- print's conclusions (a), (b) and (c), the size bounds and the constructor -- so a term of the type is a checked solution and there is no separate predicate to name."
+    },
+    {
+      "id": "CONJ-013",
+      "kind": "target",
+      "problem": "MAIS-O27",
+      "statement": "MAIS-A2 prob:floor asks to determine the asymptotics of the identified-set radius phi(delta; sk, lambda) as delta tends to zero, in three clauses: (a) decide whether phi(0+) = 0, which print says refines q:ident; (b) assuming it is zero, determine the first-order constant as an explicit function of (sk, lambda) together with the matching indistinguishable pair at distance c*delta; (c) determine the set of pairs (s, delta) at which an edge of strength at least s survives every model of the identified set, and exhibit an omitting pair at the complementary pairs. All three are stated at print's real quantifier; answer_correct carries one extensional correctness specification per clause in print's order. Clause (a)'s criterion packages which (sk, lambda) instances satisfy the printed equality; it imposes no human-readable, computable, or semialgebraic answer language, and admissibility remains unformalized.",
+      "refutation": "Exhibit a skeleton and margin at which a proposed answer to any clause is wrong: a regret range where the radius behaves against a proposed characterization, a constant the limit does not match, or a pair the region misplaces.",
+      "prior_art": "MAIS-A2 prob:floor. Clause (a) is settled negatively at one print-legal (sk, lambda) by Examples.Conjectures.MAIS.not_o27RealRadiusVanishes_collision, and clause (c) at (lambda, delta) on the same skeleton by not_realEdgesSurviveAt_collision, with print's exhibition half discharged by exists_strong_edge_omitted_collision. Clause (b) has no instance in either direction. The defective threshold encoding of (c) is retired as CONJ-007.",
+      "lean": "AISafetyAtlas.Conjectures.MAIS.IsO27RadiusVanishingCriterion",
+      "lean_module": "AISafetyAtlas.Conjectures.MAIS.O27",
+      "answer_candidate": [
+        "Skeleton C dim Bool ℝ → ℝ → Prop",
+        "Skeleton C dim Bool ℝ → ℝ → ℝ",
+        "Set (ℝ × ℝ)"
+      ],
+      "answer_admissible": [
+        "",
+        "",
+        ""
+      ],
+      "answer_correct": [
+        "AISafetyAtlas.Conjectures.MAIS.IsO27RadiusVanishingCriterion",
+        "AISafetyAtlas.Conjectures.MAIS.IsO27FirstOrderConstantFunction",
+        "AISafetyAtlas.Conjectures.MAIS.IsO27EdgeSurvivalRegion"
+      ],
+      "admissibility_status": "Unformalized",
+      "blocked_on": "",
+      "absent_declarations": [],
+      "tags": [
+        "learning-theory",
+        "interpretability"
+      ],
+      "proposed_by": "Atlas transcription of the printed determine-clause.",
+      "status": "OPEN",
+      "resolution": "",
+      "source_ref": [
+        "mais-a2-2026"
+      ],
+      "context_source_ref": [],
+      "source_scope": "Same",
+      "source_fidelity": "DetermineProblem",
+      "source_note": "Scope Same, fidelity DetermineProblem. One row for one printed problem: prob:floor is a single problem environment with three clauses, and one row covers it, as CONJ-008 does for prob:boltzmann. Splitting by clause would be driven by the schema rather than by the source. The resolution field names the clause it reaches. The answer fields are lists now, one entry per clause in print's order, which is what a multi-clause determine-problem needs. CONJ-014 and CONJ-015 are retired and never reused. All three clauses are stated over def:margin's real class with a real regret range, which is prob:floor's own setting; the rational layer beside them is the instance a decidable witness is computed at, and a rational negative answer transports up to print while a positive one does not. Clause (a)'s specification is IsO27RadiusVanishingCriterion, a criterion on (sk, lambda) with the quantifiers inside the candidate. The row also pointed at o27RealProblemTargets, the fillable bundle this schema exists to discourage, and now points at a specification. Clause (b)'s specification takes the candidate as a FUNCTION of (sk, lambda) with the quantifiers inside it, which is print's order; O27RealHasFirstOrderConstant binds the constant after the skeleton and so states only the pointwise version, and a family of pointwise constants need not be a function anyone can write down. Clause (c)'s is find-all -- membership agrees with the printed survival condition at every pair -- since 'decide for which pairs' is not answered by an inclusion in one direction. admissibility_status is Unformalized for all three clauses, and the gap is PROVED rather than asserted: isO27EdgeSurvivalRegion_self shows the canonical region satisfies clause (c)'s specification by unfolding, so a circular answer passes. PRINT NAMES NO ANSWER LANGUAGE FOR ANY CLAUSE OF prob:floor, AND THE ATLAS DOES NOT SUPPLY ONE. Semialgebraic appears twice in MAIS-A2 and neither is here: as a hypothesis on the model class in prob:exact, and as a demand on the answer in prob:starter-set(a), 'Determine, as an explicit semialgebraic condition on (u, theta)'. prob:floor says only 'decide for which pairs (s, delta)', and for clause (b) 'as an explicit function of (sk, lambda)' without defining explicit. A hypothesis in one printed problem does not impose an answer language on another, so grading this row against a semialgebraic demand would make it NARROWER THAN PRINT. This field asserted that grading, and IsO27EdgeSurvivalAnswer was registered here, until it was corrected against the printed text; the declaration remains in the tree as an atlas strengthening offered for study and is named in no admissibility field. TWO REASONS IT WOULD NOT HAVE DONE THE JOB EVEN IF PRINT ASKED FOR IT. Causal.IsSemialgebraic is an existential, so the canonical region together with a proof that it happens to be semialgebraic satisfies the conjunction and the restatement survives; a language that excludes it must make the pieces DATA -- a finite list of polynomial sign conditions, its interpretation as a plane set, and a theorem equating that with the survival region. And whether the printed region IS semialgebraic is open: plausible, since the tables are finitely many reals and the margin and edge-strength conditions are polynomial inequalities and Tarski-Seidenberg carries real quantifiers, but InIdentifiedSet quantifies over a policy family indexed by every real intervention mixture, and reducing that function-valued existential to a first-order real formula is a step no theorem in the tree takes. WHAT A SOLVER SHOULD SETTLE. Clauses (a) and (b) are chartable, contrary to what this field said: with C, dim and the two Finsets fixed, a skeleton's utility field is finitely many reals cut out by utility_parents' linear equalities and the [0,1] box, so a fibrewise semialgebraic condition on the locus, or on the graph of the function, is definable. What is missing is the warrant to demand it, and -- for a criterion asked of every C and dim -- a decision about whether explicit should also mean uniform in the discrete data. Computable, semialgebraic-in-a-chart and closed-form are candidates and are not equivalent. The right resolution is to ask the MAIS authors whether prob:floor(b) and (c) intend an algorithmic, semialgebraic or merely exact answer. Formal Conjectures documents the same hole with the same example and declines to police it."
+    },
+    {
+      "id": "CONJ-016",
+      "kind": "target",
+      "problem": "MAIS-O29(b)",
+      "statement": "MAIS-A2 prob:boltzmann(b) asks for the minimax risk at budget N up to constants for each fixed finite beta, including its deterioration as beta tends to zero, and then for the joint (N, beta) crossover from the smooth local rate to the noiseless adaptive-search regime. boltzmannMinimaxRisk is that quantity, over the sampled Boltzmann experiment.",
+      "refutation": "Exhibit a class and a budget at which a proposed rate is wrong in either direction.",
+      "prior_art": "MAIS-A2 prob:boltzmann(b). Examples.Conjectures.MAIS.boltzmannMinimaxRisk_collision_bounds pins the quantity between one half and one at the collision skeleton, uniformly in the budget and in beta, which answers (b) at one print-legal instance and at no other.",
+      "lean": "AISafetyAtlas.Conjectures.MAIS.boltzmannMinimaxRisk",
+      "lean_module": "AISafetyAtlas.Conjectures.MAIS",
+      "answer_candidate": [
+        "ℕ → ℝ → ℝ"
+      ],
+      "answer_admissible": [],
+      "answer_correct": [
+        "AISafetyAtlas.Conjectures.MAIS.IsBoltzmannRiskRate"
+      ],
+      "admissibility_status": "Unformalized",
+      "blocked_on": "",
+      "absent_declarations": [],
+      "tags": [
+        "learning-theory",
+        "information-theory"
+      ],
+      "proposed_by": "Atlas transcription of the printed determine-clause.",
+      "status": "OPEN",
+      "resolution": "",
+      "source_ref": [
+        "mais-a2-2026"
+      ],
+      "context_source_ref": [],
+      "source_scope": "Same",
+      "source_fidelity": "DetermineProblem",
+      "source_note": "Scope Same, fidelity DetermineProblem. The risk is print's own: an infimum over randomized adaptive analysts of the supremum over the class of the expected error, with print's error function and print's Boltzmann channel. IsBoltzmannRiskRate is the specification a candidate rate must satisfy, with the two constants quantified BEFORE the budget and the inverse temperature -- which is what 'up to constants' means, and what gives the statement content, since constants allowed to depend on (N, beta) could bracket anything. The specification is satisfied at one instance and that is checked: Examples.Conjectures.MAIS.isBoltzmannRiskRate_collision proves the risk is Theta(1) on the collision class -- it lies between one half and one at every budget and every positive beta -- so there is no deterioration as beta tends to zero and no (N, beta) crossover there, because the risk never decays. The three numbers are easy to confuse, and 'the constant rate 1' reads as a risk value when it is not one. The rate function is the constant 1 and the implied constants are one half and one, so the statement about the risk is that it lies in that interval. The lower half is over RANDOMIZED adaptive analysts and is the number with content; the upper one is trivial, since print's error is bounded by one. Neither is boltzmann_minimax_floor's one, which bounds a DETERMINISTIC estimator's error against the model it misses and is not a bound on print's quantity, since deterministic strategies are a subset of randomized ones and a lower bound on the larger infimum says nothing about the smaller. A specification nobody has satisfied is indistinguishable from one that cannot be. Where the risk does decay none of (b) is touched, and any answer with a square root of N in it lives on a class excluding graph-differing Boltzmann collisions. admissibility_status is Unformalized, AND WHAT IS MISSING IS A CHOICE RATHER THAN A PROOF. The answer is a rate function N -> beta -> R, and nothing in IsBoltzmannRiskRate stops a candidate from being defined as the minimax risk itself divided by a constant, which satisfies the specification and answers nothing. Excluding that needs a grammar the rate must be written in -- products of powers of N and beta with logarithms is the usual one, and print's own phrasing 'up to constants' and 'the smooth local rate' presumes something of the kind without naming it. The atlas does not impose one, because the grammar is a modelling decision about what MAIS-A2 accepts as a rate and print does not make it: too narrow a grammar makes the problem unanswerable, too wide readmits the circular answer. A SOLVER SHOULD STATE THE GRAMMAR THEIR ANSWER LIVES IN. The one rate this row does exhibit, fun _ _ => 1 in isBoltzmannRiskRate_collision, is a constant and therefore lies in every candidate grammar, so the instance already checked is not sensitive to the choice."
+    },
+    {
+      "id": "CONJ-017",
+      "kind": "target",
+      "problem": "MAIS-O31",
+      "statement": "MAIS-A2 q:chain asks which of the 2(m-1)+1 table parameters of a directed-path chain are Sigma_W-identifiable for almost every theta, with W a single intervenable variable and the comparison class the margin-class models carrying that chain graph. IsO31IdentifiableSetAlmostEverywhere is the specification a candidate answer set must satisfy: one set of coordinates, quantified outside the parameter, whose membership agrees with identifiability at almost every parameter of the printed class.",
+      "refutation": "Exhibit a coordinate and a positive-measure set of chain parameters inside the margin class on which a proposed answer set gets identifiability wrong in either direction.",
+      "prior_art": "MAIS-A2 q:chain. Print offers a heuristic and labels it as such, declining to conjecture either half. Examples.Conjectures.MAIS.o31_endpointMarginal_not_identified_positiveMeasure refutes the heuristic's claim that the endpoint marginal is recoverable, on an explicit box of Lebesgue measure 1/500 at the two-node chain.",
+      "lean": "AISafetyAtlas.Conjectures.MAIS.IsO31IdentifiableSetAlmostEverywhere",
+      "lean_module": "AISafetyAtlas.Conjectures.MAIS.O31",
+      "answer_candidate": [
+        "Finset (AISafetyAtlas.Conjectures.MAIS.O31Coordinate n)"
+      ],
+      "answer_admissible": [],
+      "answer_correct": [
+        "AISafetyAtlas.Conjectures.MAIS.IsO31IdentifiableSetAlmostEverywhere"
+      ],
+      "admissibility_status": "Unformalized",
+      "blocked_on": "",
+      "absent_declarations": [],
+      "tags": [
+        "interpretability",
+        "learning-theory"
+      ],
+      "proposed_by": "Atlas transcription of the printed determine-clause.",
+      "status": "OPEN",
+      "resolution": "",
+      "source_ref": [
+        "mais-a2-2026"
+      ],
+      "context_source_ref": [],
+      "source_scope": "Same",
+      "source_fidelity": "DetermineProblem",
+      "source_note": "Scope Same, fidelity DetermineProblem. This row grades print's question; CONJ-010 instead grades the candidate classification submitted in MAIS issue #8. IsO31IdentifiableSetAlmostEverywhere places the answer set outside the parameter quantifier and states membership equivalence at almost every point of the real chain chart, matching q:chain's quantifier. O31Coordinate has exactly 2n+1 inhabitants by card_o31Coordinate, so Finset is a convenient concrete carrier for a proposed list, but it is not an admissibility condition: o31FinsetOfSet converts any Set to a Finset by classical filtering, and isO31IdentifiableAnswer_of_set proves that any correct Set specification therefore yields the Finset form. The answer_admissible list is empty and admissibility_status is Unformalized. Nothing requires an explicit combinatorial description in (G, W, O, Z), and print supplies no answer grammar for q:chain. The pointwise predicates remain infrastructure and CONJ-010 uses them; isO31IdentifiableSetAlmostEverywhere_of_forall records that an everywhere classification implies the printed almost-everywhere one. Print's composite transfer map belongs to its labelled heuristic, not to the literal coordinate question. NOT CLAIMED: that the margin class has positive measure at every (lam, t), or that any candidate answer set has been proved correct."
+    },
+    {
+      "id": "CONJ-018",
+      "kind": "blocked",
+      "problem": "MAIS-O2",
+      "statement": "MAIS-A2 prob:noisy replaces the policy-probability oracle by sampled actions, allows positive regret, and asks for the minimax budget, separating switching-surface location, stochastic-policy estimation and the irreducible ambiguity from regret, then adds independent response corruption at a known level.",
+      "refutation": "",
+      "prior_art": "MAIS-A2 prob:noisy. The randomized perfect-recall analyst and the expected-error minimax risk arrived with AISafetyAtlas.Causal.Query; the oracle did not.",
+      "lean": "",
+      "lean_module": "",
+      "answer_candidate": [],
+      "answer_admissible": [],
+      "answer_correct": [],
+      "admissibility_status": "NotApplicable",
+      "blocked_on": "The query layer observes exact real policy probabilities, so a transcript's answers are numbers rather than draws. A sampled-answer transcript exists for one channel -- the Boltzmann experiment in Conjectures.MAIS.O29Experiment -- but its answer is a binary Boltzmann response at Bool, not a sampled action under a supplied policy at an arbitrary action type. Independent response corruption at a known level is a second and unrelated gap.",
+      "absent_declarations": [
+        "AISafetyAtlas.Causal.SampledActionOracle",
+        "AISafetyAtlas.Causal.CorruptedAnswer"
+      ],
+      "tags": [
+        "learning-theory",
+        "information-theory"
+      ],
+      "proposed_by": "Atlas coverage record; the printed problem has no Lean object.",
+      "status": "OPEN",
+      "resolution": "",
+      "source_ref": [
+        "mais-a2-2026"
+      ],
+      "context_source_ref": [],
+      "source_scope": "NotFormalized",
+      "source_fidelity": "NotFormalized",
+      "source_note": ""
+    },
+    {
+      "id": "CONJ-019",
+      "kind": "blocked",
+      "problem": "MAIS-O28",
+      "statement": "MAIS-A2 prob:average replaces worst-case regret by an exception mass under a declared distribution and asks for the radius up to constants, the threshold below which the graph stays identified, and the rate at which the zero-regret radius vanishes as the exception mass does.",
+      "refutation": "",
+      "prior_art": "MAIS-A2 prob:average. Print cites Richens et al. 2025 as empirical evidence and Nayebi 2026 as a goal-based average-case recovery theorem; the interventional version is open.",
+      "lean": "",
+      "lean_module": "",
+      "answer_candidate": [],
+      "answer_admissible": [],
+      "answer_correct": [],
+      "admissibility_status": "NotApplicable",
+      "blocked_on": "The admissibility notion is average-case against a declared continuous distribution on pairs of profiles with a uniform real mixing weight and masks. The atlas has worst-case admissibility only, and no measure on profile pairs, so neither the exception mass nor the radius it induces can be written.",
+      "absent_declarations": [
+        "AISafetyAtlas.Causal.AverageAdmissibleFamily",
+        "AISafetyAtlas.Causal.profilePairMeasure"
+      ],
+      "tags": [
+        "learning-theory",
+        "decision-theory"
+      ],
+      "proposed_by": "Atlas coverage record; the printed problem has no Lean object.",
+      "status": "OPEN",
+      "resolution": "",
+      "source_ref": [
+        "mais-a2-2026"
+      ],
+      "context_source_ref": [],
+      "source_scope": "NotFormalized",
+      "source_fidelity": "NotFormalized",
+      "source_note": ""
+    },
+    {
+      "id": "CONJ-020",
+      "kind": "blocked",
+      "problem": "MAIS-O29(c)",
+      "statement": "MAIS-A2 prob:boltzmann(c) asks which distribution over queries maximizes the minimax rate -- the design problem over mixtures, masks and observations, which print separates from the estimation theory of clause (b).",
+      "refutation": "",
+      "prior_art": "MAIS-A2 prob:boltzmann(c). Print says the econometric literature supplies the local analysis for (b) but not the design question.",
+      "lean": "",
+      "lean_module": "",
+      "answer_candidate": [],
+      "answer_admissible": [],
+      "answer_correct": [],
+      "admissibility_status": "NotApplicable",
+      "blocked_on": "boltzmannMinimaxRisk is already an infimum over analysts, so it optimizes the query strategy away. The design problem needs the risk under a *fixed* query law, and then an extremum over such laws; neither object exists, so there is nothing over which to state a maximization.",
+      "absent_declarations": [
+        "AISafetyAtlas.Conjectures.MAIS.boltzmannMinimaxRiskUnder",
+        "AISafetyAtlas.Conjectures.MAIS.IsOptimalQueryDesign"
+      ],
+      "tags": [
+        "learning-theory",
+        "information-theory"
+      ],
+      "proposed_by": "Atlas coverage record; the printed problem has no Lean object.",
+      "status": "OPEN",
+      "resolution": "",
+      "source_ref": [
+        "mais-a2-2026"
+      ],
+      "context_source_ref": [],
+      "source_scope": "NotFormalized",
+      "source_fidelity": "NotFormalized",
+      "source_note": ""
+    },
+    {
+      "id": "CONJ-021",
+      "kind": "blocked",
+      "problem": "MAIS-O30",
+      "statement": "MAIS-A2 prob:restricted asks, for almost every parameter choice, which edge indicators and table entries are Sigma_W-identifiable, characterized combinatorially in the graph and the sets W, O and Z, together with the minimal W identifying everything on the ancestors of the utility.",
+      "refutation": "",
+      "prior_art": "MAIS-A2 prob:restricted, whose flavor print compares to Eberhardt, Glymour and Scheines on how many experiments identify a causal graph.",
+      "lean": "",
+      "lean_module": "",
+      "answer_candidate": [],
+      "answer_admissible": [],
+      "answer_correct": [],
+      "admissibility_status": "NotApplicable",
+      "blocked_on": "Sigma_W -- mixtures acting as the identity outside W -- has no general form here. One instance exists: O31LocalMixture is Sigma_W for a single intervenable variable on the chain, built for q:chain. What is missing is the general construction, labels for edge and table functionals, and a combinatorial classifier in (G, W, O, Z). The coverage matrix said 'Sigma_W-identifiability' was missing outright for longer than that was true, which is why the absence is now named at declaration level.",
+      "absent_declarations": [
+        "AISafetyAtlas.Causal.RestrictedMixture",
+        "AISafetyAtlas.Causal.SigmaIdentifiable"
+      ],
+      "tags": [
+        "interpretability",
+        "learning-theory"
+      ],
+      "proposed_by": "Atlas coverage record; the printed problem has no Lean object.",
+      "status": "OPEN",
+      "resolution": "",
+      "source_ref": [
+        "mais-a2-2026"
+      ],
+      "context_source_ref": [],
+      "source_scope": "NotFormalized",
+      "source_fidelity": "NotFormalized",
+      "source_note": ""
+    },
+    {
+      "id": "CONJ-022",
+      "kind": "blocked",
+      "problem": "MAIS-O32",
+      "statement": "MAIS-A2 prob:rate asks whether the 1/n resolution radius is the truth for goal-conditioned agents over a finite communicating controlled Markov process, in the first-action-data setting of the goal-based theorem.",
+      "refutation": "",
+      "prior_art": "MAIS-A2 prob:rate, in the goal-based setting of the agenda's Theorem thm:rabe.",
+      "lean": "",
+      "lean_module": "",
+      "answer_candidate": [],
+      "answer_admissible": [],
+      "answer_correct": [],
+      "admissibility_status": "NotApplicable",
+      "blocked_on": "The whole goal layer is absent: finite communicating controlled Markov processes, composite goals and depth, bounded goal-conditioned agents, the first-action family f_pi from start states and goals to actions, and the resolution radius over that family. The atlas's causal layer is interventional rather than goal-conditioned, so nothing here is a specialization of what exists.",
+      "absent_declarations": [
+        "AISafetyAtlas.Causal.ControlledMarkovProcess",
+        "AISafetyAtlas.Causal.FirstActionFamily",
+        "AISafetyAtlas.Causal.resolutionRadius"
+      ],
+      "tags": [
+        "decision-theory",
+        "learning-theory"
+      ],
+      "proposed_by": "Atlas coverage record; the printed problem has no Lean object.",
+      "status": "OPEN",
+      "resolution": "",
+      "source_ref": [
+        "mais-a2-2026"
+      ],
+      "context_source_ref": [],
+      "source_scope": "NotFormalized",
+      "source_fidelity": "NotFormalized",
+      "source_note": ""
+    },
+    {
+      "id": "CONJ-023",
+      "kind": "blocked",
+      "problem": "MAIS-O33",
+      "statement": "MAIS-A2 prob:corruption asks for recovery under persistent corruption -- an adversary that answers consistently rather than independently at each repetition -- with a randomized analyst, a polynomial query budget and a success probability.",
+      "refutation": "",
+      "prior_art": "MAIS-A2 prob:corruption. The atlas holds one endpoint of the related O33 intersection through its Rivest-style noisy-search material, which is a different corruption model.",
+      "lean": "",
+      "lean_module": "",
+      "answer_candidate": [],
+      "answer_admissible": [],
+      "answer_correct": [],
+      "admissibility_status": "NotApplicable",
+      "blocked_on": "This needs prob:rate's goal layer first, and then randomized analysts against a persistent rather than independent adversary, a polynomial budget, and a success probability over both. Independent corruption is already a gap for prob:noisy; persistent corruption is strictly further, because the adversary's answers must be a function fixed in advance rather than a draw.",
+      "absent_declarations": [
+        "AISafetyAtlas.Causal.PersistentAdversary",
+        "AISafetyAtlas.Causal.succeedsWithProbability"
+      ],
+      "tags": [
+        "learning-theory",
+        "computational-complexity"
+      ],
+      "proposed_by": "Atlas coverage record; the printed problem has no Lean object.",
+      "status": "OPEN",
+      "resolution": "",
+      "source_ref": [
+        "mais-a2-2026"
+      ],
+      "context_source_ref": [],
+      "source_scope": "NotFormalized",
+      "source_fidelity": "NotFormalized",
+      "source_note": ""
+    },
+    {
+      "id": "CONJ-024",
+      "kind": "blocked",
+      "problem": "MAIS-O35",
+      "statement": "MAIS-A2 prob:starter-sample asks, on a compact locus of the two-variable family where the local radius is linear in the regret, for matching upper and lower bounds on the sampled-action budget recovering the graph and all three parameters, then the crossover at positive regret between sampling error and the radius, and finally the sharp cost of independent response corruption.",
+      "refutation": "",
+      "prior_art": "MAIS-A2 prob:starter-sample, a starter problem beside prob:starter-set. Print suggests the capacity factor 1/(1-H(zeta)) as the corruption cost.",
+      "lean": "",
+      "lean_module": "",
+      "answer_candidate": [],
+      "answer_admissible": [],
+      "answer_correct": [],
+      "admissibility_status": "NotApplicable",
+      "blocked_on": "The two-variable real chart exists and the rest does not: a sampled-action minimax risk, regret adversaries, switching surfaces of the optimal policy family, and the binary-channel capacity that print's conjectured corruption cost is stated in. It shares prob:noisy's missing oracle and adds three objects of its own.",
+      "absent_declarations": [
+        "AISafetyAtlas.Causal.sampledActionBudget",
+        "AISafetyAtlas.Causal.SwitchingSurface"
+      ],
+      "tags": [
+        "learning-theory",
+        "information-theory"
+      ],
+      "proposed_by": "Atlas coverage record; the printed problem has no Lean object.",
+      "status": "OPEN",
+      "resolution": "",
+      "source_ref": [
+        "mais-a2-2026"
+      ],
+      "context_source_ref": [],
+      "source_scope": "NotFormalized",
+      "source_fidelity": "NotFormalized",
+      "source_note": ""
     }
   ]
 }

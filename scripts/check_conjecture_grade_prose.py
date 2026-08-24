@@ -26,13 +26,20 @@ import yaml
 
 ROOT = Path(__file__).resolve().parent.parent
 LEAN_ROOT = ROOT / "AISafetyAtlas"
+MARKDOWN_ROOTS = (
+    ROOT / "README.md",
+    ROOT / "STATE.md",
+    ROOT / "docs" / "guide",
+    ROOT / "docs" / "provenance",
+)
 
-SCOPE_VALUES = {"Same", "Narrower", "Mixed", "Retired", "Beyond"}
+SCOPE_VALUES = {"Same", "Narrower", "Mixed", "Retired", "Beyond", "NotFormalized"}
 FIDELITY_VALUES = {
     "Literal",
     "Selected",
     "Bridged",
     "DetermineProblem",
+    "NotFormalized",
     "AtlasOriginal",
 }
 GRADE_VALUES = SCOPE_VALUES | FIDELITY_VALUES
@@ -41,14 +48,14 @@ GRADE_RE = "|".join(sorted(GRADE_VALUES))
 # Present-tense assertions of the grade a row currently carries.
 ASSERTIONS = [
     re.compile(r"`conjectures\.yaml`[^.`]{0,80}?grades[^.`]{0,60}?`(" + GRADE_RE + r")`"),
-    re.compile(r"\bthe grade (?:at|to|is) `(" + GRADE_RE + r")`"),
-    re.compile(r"\bkeeps? the (?:grade|row) (?:at )?`(" + GRADE_RE + r")`"),
-    re.compile(r"\bstays? `(" + GRADE_RE + r")`"),
-    re.compile(r"\bremains? `(" + GRADE_RE + r")`"),
-    re.compile(r"\bthis row is `(" + GRADE_RE + r")`"),
-    re.compile(r"\bis graded `(" + GRADE_RE + r")`"),
-    re.compile(r"\bgrades (?:it|this row|the row|this entry) `(" + GRADE_RE + r")`"),
-    re.compile(r"\bthe row (?:is|carries) `(" + GRADE_RE + r")`"),
+    re.compile(r"(?i:\bthe grade (?:at|to|is) )`(" + GRADE_RE + r")`"),
+    re.compile(r"(?i:\bkeeps? the (?:grade|row) (?:at )?)`(" + GRADE_RE + r")`"),
+    re.compile(r"(?i:\bstays? )`(" + GRADE_RE + r")`"),
+    re.compile(r"(?i:\bremains? )`(" + GRADE_RE + r")`"),
+    re.compile(r"(?i:\bthis row is )`(" + GRADE_RE + r")`"),
+    re.compile(r"(?i:\bis graded )`(" + GRADE_RE + r")`"),
+    re.compile(r"(?i:\bgrades (?:it|this row|the row|this entry) )`(" + GRADE_RE + r")`"),
+    re.compile(r"(?i:\bthe row (?:is|carries) )`(" + GRADE_RE + r")`"),
 ]
 
 # A window before the match that makes it retrospective or hypothetical rather
@@ -121,19 +128,38 @@ NOTE_POSITIVE = [
     re.compile(r"\bthe row (?:is|stays|remains) (" + GRADE_RE + r")\b"),
 ]
 
+# A sentence that DENIES a grade the row actually holds. Every pattern above is
+# an assertion, so all of them walk straight past `THE ROW IS NOT Same` sitting
+# in a row graded `Same` -- which is exactly the sentence that survived in
+# CONJ-006's `prior_art` through several passes and was quoted back by an
+# external review as if it were the live grade.
+
+# Fields read as the row's current rationale. `prior_art` is here because a
+# retracted grade hid in it: `source_note` had carried a superseded-history
+# marker for months and `prior_art` never did, so the field went unscanned while
+# asserting the opposite of the row's own grade.
+NOTE_FIELDS = ("source_note", "prior_art")
+
 NOTE_NEGATIVE = [
     re.compile(r"\bis no longer (" + GRADE_RE + r")\b"),
     re.compile(r"\bare no longer (" + GRADE_RE + r")\b"),
     re.compile(r"\bno longer (?:graded|carries) (" + GRADE_RE + r")\b"),
+    # A flat denial of a grade the row holds. The three above all read as a
+    # *transition* -- "is no longer X" is true of a row that used to be X -- so
+    # none of them fires on a sentence that simply says the row is not what it
+    # is. That is the shape the defect took: `THE ROW IS NOT Same` sat in a row
+    # graded `Same`, and an external review quoted it back as the live grade.
+    re.compile(r"\b(?:THE ROW IS NOT|This row is not|the row is not) (" + GRADE_RE + r")\b"),
 ]
 
 
 def check_notes(ledger: dict[str, dict[str, object]]) -> tuple[list[str], int]:
-    """Claims a `source_note` makes about the grades of its own row."""
+    """Claims a row's own rationale fields make about that row's grades."""
     failures: list[str] = []
     checked = 0
     for cid, entry in ledger.items():
-        note = entry.get("source_note")
+      for field in NOTE_FIELDS:  # noqa: E111 -- narrow loop, body indent kept
+        note = entry.get(field)
         if not isinstance(note, str):
             continue
         held = grades_of(entry)
@@ -143,7 +169,7 @@ def check_notes(ledger: dict[str, dict[str, object]]) -> tuple[list[str], int]:
                 if match.group(1) in held:
                     continue
                 failures.append(
-                    f"conjectures.yaml: {cid} source_note asserts "
+                    f"conjectures.yaml: {cid} {field} asserts "
                     f"`{match.group(1)}` for itself, but the row records "
                     f"scope={entry['source_scope']} "
                     f"fidelity={entry['source_fidelity']}\n"
@@ -155,7 +181,7 @@ def check_notes(ledger: dict[str, dict[str, object]]) -> tuple[list[str], int]:
                 if match.group(1) not in held:
                     continue
                 failures.append(
-                    f"conjectures.yaml: {cid} source_note denies "
+                    f"conjectures.yaml: {cid} {field} denies "
                     f"`{match.group(1)}`, which the row holds: "
                     f"scope={entry['source_scope']} "
                     f"fidelity={entry['source_fidelity']}\n"
@@ -302,6 +328,413 @@ def check_audit(audit_path: Path) -> tuple[list[str], int]:
     return failures, checked
 
 
+def live_markdown_paths() -> list[Path]:
+    """Current public/provenance prose, excluding explicit history archives."""
+    paths: set[Path] = set()
+    for root in MARKDOWN_ROOTS:
+        if root.is_file():
+            paths.add(root)
+        elif root.is_dir():
+            paths.update(root.rglob("*.md"))
+    return sorted(paths)
+
+
+def check_markdown(
+    ledger: dict[str, dict[str, object]], paths: list[Path]
+) -> tuple[list[str], int]:
+    """Explicit current grade claims in Markdown against the live ledger.
+
+    Markdown has no declaration anchor, so a claim is actionable only when its
+    local context names a ``CONJ-###`` row. Files whose opening banner explicitly
+    says they are superseded grade history are excluded; the live documents they
+    point to remain checked.
+    """
+    failures: list[str] = []
+    seen: set[tuple[str, int, str, str]] = set()
+    checked = 0
+    for path in paths:
+        text = path.read_text(encoding="utf-8")
+        try:
+            rel = path.relative_to(ROOT)
+        except ValueError:
+            rel = path
+        banner = text[:700]
+        if "Superseded" in banner and "current grade" in banner:
+            continue
+        for pattern in ASSERTIONS:
+            for match in pattern.finditer(text):
+                window = text[max(0, match.start() - GUARD_WINDOW) : match.start()]
+                before = SENTENCE_BREAK.split(window)[-1]
+                if GUARDS.search(before):
+                    continue
+                explicit = re.findall(
+                    r"CONJ-\d+", text[max(0, match.start() - 400) : match.end() + 400]
+                )
+                targets = [cid for cid in dict.fromkeys(explicit) if cid in ledger]
+                if not targets:
+                    continue
+                claimed = match.group(1)
+                line = text.count("\n", 0, match.start()) + 1
+                for cid in targets:
+                    key = (str(rel), line, cid, claimed)
+                    if key in seen:
+                        continue
+                    seen.add(key)
+                    checked += 1
+                    if claimed in grades_of(ledger[cid]):
+                        continue
+                    failures.append(
+                        f"{rel}:{line}: prose asserts "
+                        f"`{claimed}` for {cid}, but conjectures.yaml records "
+                        f"scope={ledger[cid]['source_scope']} "
+                        f"fidelity={ledger[cid]['source_fidelity']}\n"
+                        f"    {match.group(0).strip()}"
+                    )
+    return failures, checked
+
+
+# --- the MAIS coverage table ------------------------------------------------
+#
+# `mais-a2-statement-coverage.md` grades one printed A2 target per row, and its
+# rows carry ledger grades that the generic scan above cannot see: the claim
+# sits in a cell that names the Lean declaration, not the `CONJ-###` row, so no
+# attribution window reaches the ledger. That is how an `O26 | graded `Same``
+# row and an "all four at `Same` scope" count both outlived the ledger's move to
+# `Narrower` on 2026-08-22 and shipped green for a day.
+#
+# The table therefore carries an explicit `Ledger` and `Scope` column, and this
+# reads them. A row with no ledger row writes `—` in both.
+
+def _rel(path: Path) -> Path | str:
+    """Repo-relative path where possible; tests pass throwaway files."""
+    try:
+        return path.relative_to(ROOT)
+    except ValueError:
+        return path
+
+
+MAIS_COVERAGE = ROOT / "docs" / "provenance" / "mais-a2-statement-coverage.md"
+MAIS_ROW = re.compile(r"^\| (O\d+) \|")
+CELL_IDS = re.compile(r"CONJ-\d+")
+CELL_GRADE = re.compile(r"`(" + GRADE_RE + r")`")
+GRADED_IN_CELL = re.compile(r"graded `(" + GRADE_RE + r")`")
+UNIVERSAL_SCOPE = re.compile(r"\ball\b[^.`]{0,40}?at `(" + GRADE_RE + r")` scope")
+
+
+def check_mais_coverage(
+    ledger: dict[str, dict[str, object]], path: Path = MAIS_COVERAGE
+) -> tuple[list[str], int]:
+    """The coverage table's own `Scope` cells, and universal claims over them."""
+    if not path.is_file():
+        return [], 0
+    text = path.read_text(encoding="utf-8")
+    rel = _rel(path)
+    failures: list[str] = []
+    checked = 0
+    rows: list[tuple[int, str, list[str], str]] = []
+
+    for num, line in enumerate(text.splitlines(), start=1):
+        head = MAIS_ROW.match(line)
+        if not head:
+            continue
+        cells = split_cells(line)
+        if len(cells) < 3:
+            failures.append(
+                f"{rel}:{num}: row {head.group(1)} has fewer than three cells; "
+                "the table needs `| ID | Ledger | Scope | …`"
+            )
+            continue
+        target, ledger_cell, scope_cell = head.group(1), cells[1], cells[2]
+        cids = CELL_IDS.findall(ledger_cell)
+        scope_match = CELL_GRADE.search(scope_cell)
+        rows.append((num, target, cids, scope_match.group(1) if scope_match else ""))
+
+        if not cids:
+            checked += 1
+            if scope_match:
+                failures.append(
+                    f"{rel}:{num}: {target} names no ledger row but its Scope cell "
+                    f"reads `{scope_match.group(1)}`; a target with no row has no "
+                    "grade to carry"
+                )
+            continue
+        if not scope_match:
+            failures.append(
+                f"{rel}:{num}: {target} names {cids} but its Scope cell carries no "
+                "grade"
+            )
+            continue
+
+        # A printed target may carry several rows with different grades -- a
+        # resolved claim for one clause, an open target for another, a blocked
+        # third. `prob:boltzmann` is exactly that. So the cell may list one
+        # grade per row, positionally, in the Ledger cell's order; a single
+        # grade still applies to every row, which is the common case. Reading
+        # only the first grade and holding every row to it made a three-clause
+        # problem inexpressible, and the checker reported the mismatch as a
+        # stale document rather than as its own limit.
+        graded = [match.group(1) for match in CELL_GRADE.finditer(scope_cell)]
+        if len(graded) not in {1, len(cids)}:
+            failures.append(
+                f"{rel}:{num}: {target} names {len(cids)} ledger row(s) but its "
+                f"Scope cell carries {len(graded)} grade(s); give one grade for "
+                "all of them or one per row in the Ledger cell's order"
+            )
+            continue
+        claimed_for = (
+            dict(zip(cids, graded))
+            if len(graded) == len(cids)
+            else {cid: graded[0] for cid in cids}
+        )
+        claimed = graded[0]
+        for cid in cids:
+            checked += 1
+            if cid not in ledger:
+                failures.append(
+                    f"{rel}:{num}: {target} names {cid}, which is not a ledger row"
+                )
+                continue
+            held = ledger[cid]["source_scope"]
+            if claimed_for[cid] != held:
+                failures.append(
+                    f"{rel}:{num}: {target}'s Scope cell reads "
+                    f"`{claimed_for[cid]}` for {cid}, but conjectures.yaml "
+                    f"records scope={held!r}"
+                )
+        # A grade asserted in the row's prose must match the row's own cell.
+        for match in GRADED_IN_CELL.finditer(line):
+            checked += 1
+            if match.group(1) != claimed:
+                failures.append(
+                    f"{rel}:{num}: {target}'s prose says \"graded "
+                    f"`{match.group(1)}`\" while its Scope cell reads `{claimed}`"
+                )
+
+    # Universal claims are recomputed against the rows that carry a ledger grade.
+    graded = [(num, target, scope) for num, target, cids, scope in rows if cids]
+    for num, line in enumerate(text.splitlines(), start=1):
+        for match in UNIVERSAL_SCOPE.finditer(line):
+            checked += 1
+            claimed = match.group(1)
+            off = [f"{t}=`{s}`" for _, t, s in graded if s != claimed]
+            if off:
+                failures.append(
+                    f"{rel}:{num}: claims every graded row is `{claimed}`, but "
+                    f"{sorted(off)} disagree.\n    {match.group(0).strip()}"
+                )
+    return failures, checked
+
+
+# --- ledger counts quoted in prose ------------------------------------------
+#
+# "five open, four resolved, one withdrawn" is a grade-adjacent claim the scan
+# above cannot see: it names no row and no grade. It went stale on the public
+# site the same day the ledger dropped two rows, which is the failure this
+# closes. `site/index.html` is included because it is public prose about the
+# same ledger, and nothing else checks it.
+
+COUNT_FILES = (
+    ROOT / "README.md",
+    ROOT / "STATE.md",
+    ROOT / "docs" / "guide" / "conjectures.md",
+    ROOT / "site" / "index.html",
+)
+NUMBER_WORDS = {
+    "zero": 0, "no": 0, "one": 1, "two": 2, "three": 3, "four": 4, "five": 5,
+    "six": 6, "seven": 7, "eight": 8, "nine": 9, "ten": 10, "eleven": 11,
+    "twelve": 12, "thirteen": 13, "fourteen": 14, "fifteen": 15,
+    # The ledger outgrew this vocabulary on 2026-08-24. A number word the table
+    # does not carry is silently *skipped* rather than reported, so the public
+    # sentence saying "eighteen MAIS-linked records" was unchecked at the moment
+    # it most needed checking -- the count had just changed. Prose about a
+    # growing ledger should keep reaching words the checker knows.
+    "sixteen": 16, "seventeen": 17, "eighteen": 18, "nineteen": 19,
+    "twenty": 20, "twenty-one": 21, "twenty-two": 22, "twenty-three": 23,
+    "twenty-four": 24, "twenty-five": 25,
+}
+COUNT_OPEN_RESOLVED = re.compile(
+    r"\b(?P<open>\w+) open,?\s*(?:and\s*)?(?P<res>\w+) resolved", re.I
+)
+COUNT_WITHDRAWN = re.compile(r"\b(?P<n>\w+) withdrawn", re.I)
+
+# Public prose does not always use the "N open, M resolved" shape. `site/index.html`
+# was reworded on 2026-08-23 into a MAIS-scoped sentence that matched none of the
+# patterns above, so its counts went unchecked again the same day the last stale
+# one was fixed. These read the MAIS-scoped totals instead, so the sentence is
+# checked on three independent numbers rather than on none.
+COUNT_MAIS = [
+    # Two different quantities wear similar words, and conflating them is how a
+    # sentence can be true and fail. "MAIS-linked records" counts every row
+    # against an agenda problem, of any kind; "conjectures" counts only the
+    # claim and answer rows among them. Since 2026-08-24 those differ -- 18 and
+    # 7 -- and before that date they were the same number, which is why one key
+    # sufficed and then silently did not.
+    (re.compile(r"\b(?P<n>\w+) MAIS-linked records?\b", re.I), "mais_all"),
+    (re.compile(r"\b(?P<n>\w+)\s+MAIS-linked ledger rows?\b", re.I), "mais_all"),
+    (re.compile(r"\b(?P<n>\w+) are conjectures\b", re.I), "mais"),
+    (re.compile(r"\b(?P<n>\w+) have linked Lean proofs\b", re.I), "mais_resolved"),
+    (re.compile(r"\bthe other (?P<n>\w+) remain open\b", re.I), "mais_open"),
+    # Kind totals. The ledger stopped being all-conjectures on 2026-08-24 and the
+    # narrative paragraph that described its shape was hand-counted, so it went
+    # stale the first time a row changed kind -- twice within the same day, once
+    # in each direction. Anything that quotes the shape is now checked on it.
+    # `\s+` rather than a literal space, because a paragraph in `STATE.md` wraps
+    # between "are" and "determine-problem" and between "a" and "printed". Both
+    # of these patterns matched nothing on their first run for exactly that
+    # reason -- the failure this file's own header describes, reproduced by the
+    # check written to prevent it.
+    (re.compile(r"\b(?P<n>\w+)\s+(?:are\s+)?determine-problem specifications?\b",
+                re.I), "target"),
+    (re.compile(r"\b(?P<n>\w+)\s+record\s+a\s+printed\s+problem\s+the\s+atlas"
+                r"\s+cannot\s+state\b", re.I), "blocked"),
+    # The lookbehind matters: without it `twenty-one-row` matches on `one`,
+    # because a hyphenated compound is several `\w+` runs and the pattern
+    # happily takes the last of them. `[\w-]+` is what makes the compound
+    # *captured* rather than merely not-mismatched: with a bare `\w+` the whole
+    # pattern failed on `twenty-one-row file` and the sentence went unchecked,
+    # which reads exactly like a sentence that agreed with the ledger.
+    (re.compile(r"(?<![-\w])(?P<n>[\w-]+)[- ]row file\b", re.I), "rows"),
+    (re.compile(r"\ball (?P<n>[\w-]+) problems of agenda A2\b", re.I), "mais_problems"),
+]
+
+
+def is_count_word(word: str) -> bool:
+    """Whether a captured token was *trying* to state a number.
+
+    The count patterns have to leave the slot wide, because a number word can
+    be a hyphenated compound and the compound has to be captured whole. A wide
+    slot also catches ordinary prose -- *the rest are determine-problem
+    specifications* -- and those tokens are not unchecked count claims, they are
+    sentences that were never counting. A token is reported as an unparsed count
+    only when it is built out of number words or digits, which is the case the
+    vocabulary can actually be short for.
+    """
+    parts = word.lower().split("-")
+    return any(part.isdigit() or part in NUMBER_WORDS for part in parts)
+
+
+def as_count(word: str) -> int | None:
+    if word.isdigit():
+        return int(word)
+    return NUMBER_WORDS.get(word.lower())
+
+
+def check_counts(
+    ledger: dict[str, dict[str, object]], paths: tuple[Path, ...] = COUNT_FILES
+) -> tuple[list[str], int, set[str]]:
+    """Ledger totals quoted in public prose, against the ledger itself.
+
+    Returns the failures, how many count claims were compared, and the count
+    words that could not be parsed -- the denominator matters, because a
+    sentence no pattern matched produces exactly the output of a sentence that
+    agreed.
+    """
+    def is_mais(entry: dict[str, object]) -> bool:
+        refs = entry.get("source_ref")
+        return isinstance(refs, list) and any(
+            isinstance(r, str) and r.startswith("mais-") for r in refs
+        )
+
+    # Counts are over *conjectures* -- rows of kind claim or answer -- because
+    # that is what the prose these patterns match is about. A target row records
+    # a determine-problem's specification and a blocked row records an absence;
+    # neither is an open conjecture, and folding them in would make every
+    # sentence in the guide wrong at once while saying nothing truer. The
+    # breakdown by kind is printed by `validate_conjectures.py`, which is where
+    # a reader asking "what does the atlas cover" should be sent.
+    conjecture_rows = [
+        e for e in ledger.values() if e.get("kind", "claim") in {"claim", "answer"}
+    ]
+    mais = [e for e in conjecture_rows if is_mais(e)]
+    actual = {
+        "open": sum(e["status"] == "OPEN" for e in conjecture_rows),
+        "resolved": sum(e["status"] == "RESOLVED" for e in conjecture_rows),
+        "withdrawn": sum(e["status"] == "WITHDRAWN" for e in conjecture_rows),
+        "mais": len(mais),
+        "mais_all": sum(is_mais(e) for e in ledger.values()),
+        "rows": len(ledger),
+        "target": sum(e.get("kind") == "target" for e in ledger.values()),
+        "blocked": sum(e.get("kind") == "blocked" for e in ledger.values()),
+        # Distinct printed problems the MAIS rows reach, which is not the row
+        # count: O29 has three rows and O31 and O34 two each, so prose saying
+        # "one per problem" was structurally false while every number in the
+        # same sentence was right.
+        "mais_problems": len(
+            {
+                str(e.get("problem", "")).split("(")[0]
+                for e in ledger.values()
+                if is_mais(e) and e.get("problem")
+            }
+        ),
+        "mais_open": sum(e["status"] == "OPEN" for e in mais),
+        "mais_resolved": sum(e["status"] == "RESOLVED" for e in mais),
+    }
+    failures: list[str] = []
+    checked = 0
+    # A token that reaches `as_count` and comes back `None` was written in a
+    # sentence shaped like a count claim, and skipping it silently is the
+    # failure this script exists to prevent: the output of a check that found
+    # nothing is indistinguishable from the output of a check that ran on
+    # nothing. These are surfaced instead, and `tests/` asserts the live files
+    # produce none -- so an unrecognised number word breaks the suite without
+    # this script guessing that arbitrary prose meant to state a number.
+    skipped: set[str] = set()
+    for path in paths:
+        if not path.is_file():
+            continue
+        text = path.read_text(encoding="utf-8")
+        rel = _rel(path)
+        for match in COUNT_OPEN_RESOLVED.finditer(text):
+            opened, resolved = as_count(match["open"]), as_count(match["res"])
+            if opened is None or resolved is None:
+                skipped.update(
+                    w for w, c in ((match["open"], opened), (match["res"], resolved))
+                    if c is None and is_count_word(w)
+                )
+                continue
+            checked += 1
+            if (opened, resolved) != (actual["open"], actual["resolved"]):
+                line = text.count("\n", 0, match.start()) + 1
+                failures.append(
+                    f"{rel}:{line}: prose says {opened} open / {resolved} "
+                    f"resolved, but conjectures.yaml holds {actual['open']} open "
+                    f"/ {actual['resolved']} resolved.\n    {match.group(0)}"
+                )
+            tail = text[match.end() : match.end() + 120]
+            drawn = COUNT_WITHDRAWN.search(tail)
+            if drawn is None:
+                continue
+            count = as_count(drawn["n"])
+            if count is None:
+                if is_count_word(drawn["n"]):
+                    skipped.add(drawn["n"])
+                continue
+            checked += 1
+            if count != actual["withdrawn"]:
+                line = text.count("\n", 0, match.start()) + 1
+                failures.append(
+                    f"{rel}:{line}: prose says {count} withdrawn, but "
+                    f"conjectures.yaml holds {actual['withdrawn']}.\n"
+                    f"    {match.group(0)}{tail[: drawn.end()]}"
+                )
+        for pattern, key in COUNT_MAIS:
+            for match in pattern.finditer(text):
+                stated = as_count(match["n"])
+                if stated is None:
+                    if is_count_word(match["n"]):
+                        skipped.add(match["n"])
+                    continue
+                checked += 1
+                if stated != actual[key]:
+                    line = text.count("\n", 0, match.start()) + 1
+                    failures.append(
+                        f"{rel}:{line}: prose says {stated} for {key}, but "
+                        f"conjectures.yaml holds {actual[key]}.\n"
+                        f"    {match.group(0)}"
+                    )
+    return failures, checked, skipped
+
+
 def main() -> int:
     ledger = load_ledger()
 
@@ -387,6 +820,26 @@ def main() -> int:
     )
     failures.extend(audit_failures)
     checked += audit_checked
+
+    markdown_failures, markdown_checked = check_markdown(
+        ledger, live_markdown_paths()
+    )
+    failures.extend(markdown_failures)
+    checked += markdown_checked
+
+    coverage_failures, coverage_checked = check_mais_coverage(ledger)
+    failures.extend(coverage_failures)
+    checked += coverage_checked
+
+    count_failures, count_checked, count_skipped = check_counts(ledger)
+    failures.extend(count_failures)
+    checked += count_checked
+    if count_skipped:
+        failures.append(
+            "count words this script cannot parse, so the sentences holding "
+            f"them went unchecked: {', '.join(sorted(count_skipped))}. Add them "
+            "to NUMBER_WORDS or write the number as digits."
+        )
 
     if failures:
         print("conjecture grade prose contradicts the ledger:\n")
