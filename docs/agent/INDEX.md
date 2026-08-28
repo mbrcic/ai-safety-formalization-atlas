@@ -31,7 +31,15 @@ the task requires that particular inventory, domain, or evidence.
 | [`docs/guide/contributor-tasks.md`](../guide/contributor-tasks.md) | choosing or implementing a CT unit |
 | [`docs/provenance/a1-a3-b1-b3-b7-reverification.md`](../provenance/a1-a3-b1-b3-b7-reverification.md) | working on those domain residuals |
 | [`docs/guide/atlas-check.md`](../guide/atlas-check.md) | answering a question about one finite model — `lake exe atlas-check` decides it and names the theorem, no Lean to write |
+| [`docs/status/consumers.json`](../status/consumers.json) | asking what depends on a declaration, or picking a target with no downstream consumer — this is the cheap read; `scripts/report_consumers.py` recomputes it and takes minutes |
+| `docs/status/<cluster>-dependency-graph.md` | **reading** one cluster's declaration dependencies |
 | Facade modules under `AISafetyAtlas/*.lean` | writing Lean for the relevant domain |
+
+**Two formats, one content.** Every cluster's dependency view exists as `.md`
+and as `.json`. The `.md` is the one to open; the `.json` exists for tools and
+is several times larger (`inference-dependency-graph.json` alone is ~52k
+tokens). The same rule holds for `docs/status/declaration-index.json`: it is a
+lookup table, not a document — resolve one name in it rather than reading it.
 
 ## Lookup recipe
 
@@ -53,6 +61,12 @@ Every declaration in `lean_artifact` carries `file` and `line`, so reading one i
 a single `Read` at an offset rather than a repository-wide grep. Vendored and
 external declarations have no in-tree definition site and omit both fields
 rather than carrying empty ones.
+
+```console
+# What depends on one declaration, and what nothing depends on (no 4-minute rescan):
+python3 -c "import json; d=json.load(open('docs/status/consumers.json')); print(json.dumps(d['declarations']['AISafetyAtlas.Verification.rice'], indent=2))"
+python3 -c "import json; d=json.load(open('docs/status/consumers.json')); print(len(d['work_queue']), 'declarations with no consumer outside Examples/')"
+```
 
 Open [`registry.yaml`](../../registry.yaml) only when you need full notes,
 `candidate_formalizations`, or `bridge_review` detail for **one** id (prefer

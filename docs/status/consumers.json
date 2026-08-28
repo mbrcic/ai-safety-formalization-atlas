@@ -1,0 +1,2128 @@
+{
+  "counts": {
+    "declarations": 248,
+    "examples_only": 212,
+    "load_bearing": 36,
+    "no_consumer": 0
+  },
+  "declarations": {
+    "AISafetyAtlas.Causal.DecisionNetwork.mem_parents_utility_of_isUnmediated": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-CAUSAL-DECISIONNET-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Causal.Model.ancestors_eq_univ_iff": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-CAUSAL-COLLISION-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Causal.Model.jointProb_hardInterventionProfile": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-CAUSAL-COLLISION-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Causal.Model.regret_eq_zero_iff": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-CAUSAL-DECISION-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Causal.Model.value_const_sub": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-CAUSAL-DECISION-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Causal.Model.value_eq": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-CAUSAL-DECISION-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Causal.Model.value_le_sign": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-CAUSAL-DECISION-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Causal.Model.\u0394_fixProfile": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-CAUSAL-COLLISION-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Causal.Model.\u0394mix_congr": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Causal.BehavioralCollision",
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-CAUSAL-COLLISION-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Causal.SCIM.exists_isOptimalPolicy": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-CAUSAL-STRUCTURAL-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Causal.SCIM.policy_ext_single": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-CAUSAL-STRUCTURAL-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Causal.SCM.eval_eq_f": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Causal.StructuralModel",
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-CAUSAL-STRUCTURAL-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Causal.SCM.exoJoint_mul_prod": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-CAUSAL-STRUCTURAL-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Causal.Skeleton.behaviorEq_of_observed_eq_empty": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Causal.BehavioralCollision",
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-CAUSAL-COLLISION-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Causal.eq_family_of_isCausalBayesNetwork": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Causal.BayesianNetwork",
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-CAUSAL-PEARLCBN-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Causal.inIdentifiedSet_zero_of_behaviorEq": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Causal.Decision",
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-CAUSAL-DECISION-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Causal.modelError_eq_zero_iff": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-CAUSAL-DECISION-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Causal.not_inIdentifiedSet_of_neg": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-CAUSAL-DECISION-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Combinatorics.basisClass_histogram_eq_permOrbit": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "BY-021",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Combinatorics.card_closedUnderPermutation_nonempty": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Learning.Sharp",
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "BY-021",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Combinatorics.exists_perm_rel_not_iff": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Learning.Sharp",
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "BY-021",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Compositional.Hyperproperties.k_safety_iff_finite_self_composition": {
+      "consumers": [
+        "AISafetyAtlas.Compositional.Hyperproperties.Product",
+        "AISafetyAtlas.Examples.PublicAPI",
+        "AISafetyAtlas.Examples.Registry",
+        "AISafetyAtlas.Examples.SixTargets"
+      ],
+      "origin": "LAND-HYPER-002",
+      "tier": "load-bearing"
+    },
+    "AISafetyAtlas.Compositional.Networks.runFor_eq_of_view_eq": {
+      "consumers": [
+        "AISafetyAtlas.Examples.PublicAPI",
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-ANGLUIN-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Compositional.Symmetry.Protocol.no_unique_leader_from_symmetric_start": {
+      "consumers": [
+        "AISafetyAtlas.Examples.PublicAPI",
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "BY-043",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Compositional.rectangle_iff_exchange_closed": {
+      "consumers": [
+        "AISafetyAtlas.Compositional.LocalContractBoundary",
+        "AISafetyAtlas.Examples.PublicAPI",
+        "AISafetyAtlas.Examples.Registry",
+        "AISafetyAtlas.Examples.SixTargets"
+      ],
+      "origin": "LAND-RECT-001",
+      "tier": "load-bearing"
+    },
+    "AISafetyAtlas.Computability.halting_problem": {
+      "consumers": [
+        "AISafetyAtlas.Examples.HaltingExample",
+        "AISafetyAtlas.Examples.PublicAPI",
+        "AISafetyAtlas.Examples.Registry",
+        "AISafetyAtlas.Verification.Robot"
+      ],
+      "origin": "BY-014",
+      "tier": "load-bearing"
+    },
+    "AISafetyAtlas.Computability.halting_re": {
+      "consumers": [
+        "AISafetyAtlas.Examples.PublicAPI",
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "BY-014",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Computability.nonhalting_not_re": {
+      "consumers": [
+        "AISafetyAtlas.Examples.PublicAPI",
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "BY-014",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Computability.rice": {
+      "consumers": [
+        "AISafetyAtlas.Examples.PublicAPI",
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "BY-012",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Computability.rice_code_iff": {
+      "consumers": [
+        "AISafetyAtlas.Examples.PublicAPI",
+        "AISafetyAtlas.Examples.Registry",
+        "AISafetyAtlas.Verification"
+      ],
+      "origin": "BY-012",
+      "tier": "load-bearing"
+    },
+    "AISafetyAtlas.Control.ashby_logVariety_ge": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "BY-004",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Control.ashby_logVariety_ge_mul": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "BY-004",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Control.ashby_variety_ge": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "BY-004",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Control.ashby_variety_ge_isSharp": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "BY-004",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Control.card_ceilDiv_le_admittedOutcomes": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "BY-004",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Control.card_le_mul_card_admittedOutcomes_mul": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Control.RequisiteVariety",
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "BY-004",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Control.condEntropy_ge_of_openLoopBound": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "BY-005",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Control.condEntropy_le_condEntropy_of_forall": {
+      "consumers": [
+        "AISafetyAtlas.Control.OpenLoop",
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "BY-005",
+      "tier": "load-bearing"
+    },
+    "AISafetyAtlas.Control.condEntropy_outcome_eq": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "BY-004",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Control.condMutualInfo_eq_zero_of_sensorLoss_eq_zero": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Control.Observability",
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "BY-005",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Control.controlLoss_eq_condMutualInfo": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "BY-005",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Control.controlLoss_eq_entropy_noise_iff": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "BY-005",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Control.controlLoss_eq_mutualInfo_sub": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "BY-005",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Control.controlLoss_le_entropy_noise": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Control.InformationLimits",
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "BY-005",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Control.entropyReduction_le_condEntropy_form": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "BY-005",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Control.entropyReduction_le_iSup_openLoopReduction": {
+      "consumers": [
+        "AISafetyAtlas.Control.Purification",
+        "AISafetyAtlas.Examples.Control.OpenLoop",
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "BY-005",
+      "tier": "load-bearing"
+    },
+    "AISafetyAtlas.Control.entropyReduction_le_of_condEntropy_ge": {
+      "consumers": [
+        "AISafetyAtlas.Control.OpenLoop",
+        "AISafetyAtlas.Examples.Control.InformationLimits",
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "BY-005",
+      "tier": "load-bearing"
+    },
+    "AISafetyAtlas.Control.entropyReduction_le_of_openLoopBound": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "BY-005",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Control.entropyReduction_le_openLoopMax": {
+      "consumers": [
+        "AISafetyAtlas.Control.Purification",
+        "AISafetyAtlas.Examples.Control.OpenLoop",
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "BY-005",
+      "tier": "load-bearing"
+    },
+    "AISafetyAtlas.Control.entropy_ge_of_condEntropy_ge": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "BY-004",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Control.entropy_ge_of_sensor": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "BY-004",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Control.entropy_le_channelCapacity_of_complete": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Control.RequisiteVariety",
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "BY-004",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Control.entropy_noise_sub_controlLoss": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "BY-005",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Control.entropy_outcome_ge": {
+      "consumers": [
+        "AISafetyAtlas.Control.ChannelRate",
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "BY-004",
+      "tier": "load-bearing"
+    },
+    "AISafetyAtlas.Control.entropy_outcome_ge_of_strategy": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "BY-004",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Control.entropy_outcome_ge_sub_channelCapacity": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "BY-004",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Control.exists_entropyReduction_const_eq_iSup_openLoopReduction": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Control.OpenLoop",
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "BY-005",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Control.isPlant_plantOutcome": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "BY-005",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Control.kernelControlLoss_eq_sum": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "BY-005",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Control.measurable_plantOutcome": {
+      "consumers": [
+        "AISafetyAtlas.Control.OpenLoop",
+        "AISafetyAtlas.Control.PolicyKernel",
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "BY-005",
+      "tier": "load-bearing"
+    },
+    "AISafetyAtlas.Control.minControlLoss_eq_entropy_noise_iff_of_attained": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "BY-005",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Control.minControlLoss_eq_sInf_condMutualInfo": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "BY-005",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Control.minControlLoss_eq_sInf_mutualInfo_sub": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "BY-005",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Control.minControlLoss_inputPolicies_attained": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "BY-005",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Control.minControlLoss_inputPolicies_eq_kernelMin": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Control.PolicyKernel",
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "BY-005",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Control.minControlLoss_le": {
+      "consumers": [
+        "AISafetyAtlas.Control.PolicyKernel",
+        "AISafetyAtlas.Examples.Control.InformationLimits",
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "BY-005",
+      "tier": "load-bearing"
+    },
+    "AISafetyAtlas.Control.minControlLoss_le_entropy_noise": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "BY-005",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Control.minControlLoss_nonneg": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Control.InformationLimits",
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "BY-005",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Control.mutualInfo_prod_eq_of_sensorLoss_eq_zero": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Control.Observability",
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "BY-005",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Control.perfectlyObservable_iff_sensorLoss_eq_zero": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Control.Observability",
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "BY-005",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Control.two_le_card_admittedOutcomes": {
+      "consumers": [
+        "AISafetyAtlas.Control.CompleteControl",
+        "AISafetyAtlas.Examples.Control.RequisiteVariety",
+        "AISafetyAtlas.Examples.Registry",
+        "AISafetyAtlas.Oversight.VarietyBound"
+      ],
+      "origin": "BY-004",
+      "tier": "load-bearing"
+    },
+    "AISafetyAtlas.Examples.Causal.DecisionNetwork.figIsUnmediated": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-CAUSAL-DECISIONNET-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Examples.Causal.Model.jointProb_sum_shiftCollapse": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-CAUSAL-COLLISION-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Examples.Causal.OneNodeClass.modelError_le_ten_mul": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-CAUSAL-DECISION-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Examples.Causal.StructuralModel.figSCIM_opinion_isMaterial": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-CAUSAL-STRUCTURAL-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Examples.Causal.StructuralModel.figSCIM_policy_not_const": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-CAUSAL-STRUCTURAL-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Examples.Causal.StructuralModel.utility_childless_has_teeth": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-CAUSAL-STRUCTURAL-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Examples.Causal.behaviorEq_has_teeth": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-CAUSAL-COLLISION-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Examples.Causal.card_fibreRep_empty": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-CAUSAL-DECISION-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Examples.Causal.margin_class_not_identifiable": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Causal.Decision",
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-CAUSAL-COLLISION-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Examples.Causal.margin_class_not_identifiable_family": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-CAUSAL-COLLISION-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Examples.Causal.margin_class_not_identifiable_shared_optimal": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-CAUSAL-DECISION-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Examples.Causal.margin_class_not_identifiable_two_graphs": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-CAUSAL-COLLISION-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Examples.Causal.mm2_shape": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-CAUSAL-COLLISION-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Examples.Causal.not_inIdentifiedSet_high": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-CAUSAL-DECISION-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Examples.Causal.transform_identity_edgeless": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Causal.Decision",
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-CAUSAL-COLLISION-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Examples.Causal.\u0394_eq_half_sub_joint": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Causal.Decision",
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-CAUSAL-COLLISION-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Explainability.attribution_impossibility": {
+      "consumers": [
+        "AISafetyAtlas.Examples.PublicAPI",
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-ATTR-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Explainability.attribution_impossibility_weak": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-ATTR-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Inference.PhysicalKnowledgeWitness.eq_target_on_of_refinesOn": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "CLM-WOLPERT-KNOW-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Inference.PhysicallyKnows.weaklyInfers": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "CLM-WOLPERT-KNOW-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Inference.corollary20_ii": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Inference.PhysicalKnowledge.Epistemic",
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "CLM-WOLPERT-EPISTEMIC-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Inference.corollary21_ii_repaired": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-WOLPERT-KNOW-DEFECTS-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Inference.corollary23": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "CLM-WOLPERT-EPISTEMIC-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Inference.corollary24": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Inference.PhysicalKnowledge.Epistemic",
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "CLM-WOLPERT-EPISTEMIC-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Inference.exists_distinguishable_accuracy_near_one": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "CLM-WOLPERT-APPROX-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Inference.exists_never_physicallyKnown": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "CLM-WOLPERT-KNOW-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Inference.exists_three_inequivalent_not_weaklyInfers": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Inference.PhysicalKnowledge.Epistemic",
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "CLM-WOLPERT-EPISTEMIC-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Inference.exists_weaklyInfers_of_three_values": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Inference.Existence",
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "CLM-WOLPERT-APPROX-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Inference.fig5_accuracy_gap": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "CLM-WOLPERT-APPROX-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Inference.identityDevice_weaklyInfers": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Inference.Existence",
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "CLM-WOLPERT-APPROX-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Inference.inferenceAccuracy_ge": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Inference.StochasticBounds",
+        "AISafetyAtlas.Examples.Registry",
+        "AISafetyAtlas.Inference.Stochastic.Sharpness"
+      ],
+      "origin": "CLM-WOLPERT-APPROX-001",
+      "tier": "load-bearing"
+    },
+    "AISafetyAtlas.Inference.not_physicallyKnows_true_and_false": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "CLM-WOLPERT-KNOW-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Inference.physicallyKnows_false_iff_not_true": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "CLM-WOLPERT-KNOW-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.InformationTheory.channelCapacity_eq_of_card_eq_pow": {
+      "consumers": [
+        "AISafetyAtlas.Control.CompleteControl",
+        "AISafetyAtlas.Control.RequisiteVariety",
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "BY-004",
+      "tier": "load-bearing"
+    },
+    "AISafetyAtlas.InformationTheory.channelCapacity_eq_of_card_eq_two_pow": {
+      "consumers": [
+        "AISafetyAtlas.Control.CompleteControl",
+        "AISafetyAtlas.Control.RequisiteVariety",
+        "AISafetyAtlas.Examples.Control.RequisiteVariety",
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "BY-004",
+      "tier": "load-bearing"
+    },
+    "AISafetyAtlas.InformationTheory.channelCapacity_fun": {
+      "consumers": [
+        "AISafetyAtlas.Control.CompleteControl",
+        "AISafetyAtlas.Control.RequisiteVariety",
+        "AISafetyAtlas.Examples.Control.RequisiteVariety",
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "BY-004",
+      "tier": "load-bearing"
+    },
+    "AISafetyAtlas.InformationTheory.channelCapacity_prod": {
+      "consumers": [
+        "AISafetyAtlas.Control.CompleteControl",
+        "AISafetyAtlas.Control.RequisiteVariety",
+        "AISafetyAtlas.Examples.Control.RequisiteVariety",
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "BY-004",
+      "tier": "load-bearing"
+    },
+    "AISafetyAtlas.InformationTheory.condMutualInfo_le_mutualInfo": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-DPI-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.InformationTheory.entropy_le_fano": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-FANO-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.InformationTheory.fano": {
+      "consumers": [
+        "AISafetyAtlas.Examples.InformationTheory.DataProcessing",
+        "AISafetyAtlas.Examples.InformationTheory.Fano",
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-FANO-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.InformationTheory.fano_of_embedding": {
+      "consumers": [
+        "AISafetyAtlas.Examples.InformationTheory.DataProcessing",
+        "AISafetyAtlas.Examples.InformationTheory.ValueTypes",
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-FANO-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.InformationTheory.fano_of_log_le": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-FANO-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.InformationTheory.fano_unrestricted": {
+      "consumers": [
+        "AISafetyAtlas.Examples.InformationTheory.DataProcessing",
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-FANO-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.InformationTheory.isMarkovChain_iff_measure_factorizes": {
+      "consumers": [
+        "AISafetyAtlas.Examples.InformationTheory.ValueTypes",
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-DPI-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.InformationTheory.isMarkovChain_iff_measure_factorizes_singleton": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-DPI-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.InformationTheory.measure_factorizes_of_isMarkovChain": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-DPI-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.InformationTheory.mutualInfo_comp_le": {
+      "consumers": [
+        "AISafetyAtlas.Examples.InformationTheory.ContinuousSampleSpace",
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-DPI-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.InformationTheory.mutualInfo_eq_iff_isMarkovChain": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-DPI-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.InformationTheory.mutualInfo_le_of_isMarkovChain": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-DPI-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Knowledge.Devices.BlockwiseCollision.not_physicallyKnows": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-KNOW-DEVICE-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Knowledge.Devices.BlockwiseCollision.not_weaklyInfers": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-KNOW-DEVICE-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Knowledge.Devices.knowable_probe_of_forall_blockAnswers": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-KNOW-DEVICE-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Knowledge.Devices.not_blockAnswers_of_witness": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-KNOW-DEVICE-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Knowledge.Embedded.Composition.measuresAll_fibreInference_of_injective": {
+      "consumers": [
+        "AISafetyAtlas.Examples.NonVacuity",
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-SELFMEAS-003",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Knowledge.Embedded.Composition.meshing_and_measuresAll_fibreInference_of_bijective": {
+      "consumers": [
+        "AISafetyAtlas.Examples.NonVacuity",
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-SELFMEAS-003",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Knowledge.Embedded.Composition.meshing_fibreInference_of_surjective": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-SELFMEAS-003",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Knowledge.Embedded.Composition.no_meshing_measures_all_of_nontrivial_remainder": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-SELFMEAS-003",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Knowledge.Embedded.Composition.no_meshing_measures_all_of_nontrivial_remainder_of_equiv": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-SELFMEAS-003",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Knowledge.Embedded.Composition.not_meshing_of_not_surjective": {
+      "consumers": [
+        "AISafetyAtlas.Examples.NonVacuity",
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-SELFMEAS-003",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Knowledge.Embedded.Composition.properInclusion_iff_not_injective": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry",
+        "AISafetyAtlas.Knowledge.Embedded.Finite"
+      ],
+      "origin": "LAND-SELFMEAS-003",
+      "tier": "load-bearing"
+    },
+    "AISafetyAtlas.Knowledge.Embedded.Composition.properInclusion_of_nontrivial_remainder": {
+      "consumers": [
+        "AISafetyAtlas.Examples.NonVacuity",
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-SELFMEAS-003",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Knowledge.Embedded.Composition.properInclusion_of_nontrivial_remainder_of_equiv": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-SELFMEAS-003",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Knowledge.Embedded.Finite.no_meshing_measures_all_of_card_lt": {
+      "consumers": [
+        "AISafetyAtlas.Examples.NonVacuity",
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-SELFMEAS-003",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Knowledge.Embedded.Finite.properInclusion_of_card_lt": {
+      "consumers": [
+        "AISafetyAtlas.Examples.NonVacuity",
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-SELFMEAS-003",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Knowledge.Embedded.Finite.properInclusion_product_of_card_rest_ge_two": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-SELFMEAS-003",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Knowledge.Embedded.Meshing.restrict_surjective": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry",
+        "AISafetyAtlas.Knowledge.Embedded.Composition"
+      ],
+      "origin": "LAND-SELFMEAS-002",
+      "tier": "load-bearing"
+    },
+    "AISafetyAtlas.Knowledge.Embedded.eq_restrict_of_infer_singleton_eq": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-SELFMEAS-002",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Knowledge.Embedded.exists_singleton_infer_eq_of_infer_eq": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-SELFMEAS-002",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Knowledge.Embedded.exists_state_not_exactly_measurable": {
+      "consumers": [
+        "AISafetyAtlas.Examples.NonVacuity",
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-SELFMEAS-002",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Knowledge.Embedded.infer_singleton_eq_of_meshing": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-SELFMEAS-002",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Knowledge.Embedded.no_meshing_inference_distinguishes": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-SELFMEAS-002",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Knowledge.Embedded.no_meshing_inference_measures_all_states": {
+      "consumers": [
+        "AISafetyAtlas.Examples.NonVacuity",
+        "AISafetyAtlas.Examples.Registry",
+        "AISafetyAtlas.Knowledge.Embedded.Composition",
+        "AISafetyAtlas.Knowledge.Embedded.Finite"
+      ],
+      "origin": "LAND-SELFMEAS-002",
+      "tier": "load-bearing"
+    },
+    "AISafetyAtlas.Knowledge.Embedded.no_meshing_inference_measures_all_states_direct": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-SELFMEAS-002",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Knowledge.Embedded.not_knowable_state_of_properInclusion": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-SELFMEAS-002",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Knowledge.Knowable.mono": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry",
+        "AISafetyAtlas.Knowledge.Accumulation",
+        "AISafetyAtlas.Knowledge.Temporal",
+        "AISafetyAtlas.Oversight.JointObservation.RepairBoundary"
+      ],
+      "origin": "LAND-KNOW-001",
+      "tier": "load-bearing"
+    },
+    "AISafetyAtlas.Knowledge.SelfReference.card_rest_le_one_of_selfComplete": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Knowledge.SelfReference",
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-SELFREF-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Knowledge.SelfReference.not_selfComplete_of_two_rest": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Knowledge.SelfReference",
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-SELFREF-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Knowledge.SelfReference.selfComplete_iff_subsingleton_rest": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Knowledge.SelfReference",
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-SELFREF-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Knowledge.Temporal.collisionAt_of_not_knowableAt": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-TEMPORAL-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Knowledge.Temporal.knowableFrom_mono": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-TEMPORAL-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Knowledge.Temporal.not_knowableAt_of_collisionAt": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Knowledge.Temporal",
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-TEMPORAL-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Knowledge.ambiguity_le_of_comp": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry",
+        "AISafetyAtlas.Knowledge.Accumulation"
+      ],
+      "origin": "LAND-AMBIG-001",
+      "tier": "load-bearing"
+    },
+    "AISafetyAtlas.Knowledge.ambiguity_le_of_evidenceMonotone": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Knowledge.Accumulation",
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-ACCUM-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Knowledge.ambiguity_le_pairTarget_left": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-ACCUM-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Knowledge.ambiguity_le_pairTarget_of_evidenceMonotone": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Knowledge.Accumulation",
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-ACCUM-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Knowledge.ambiguity_le_pairTarget_right": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-ACCUM-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Knowledge.ambiguity_pairTarget_le_mul": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-ACCUM-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Knowledge.card_image_le_of_knowable": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry",
+        "AISafetyAtlas.Knowledge.SelfReference"
+      ],
+      "origin": "LAND-AMBIG-001",
+      "tier": "load-bearing"
+    },
+    "AISafetyAtlas.Knowledge.condEntropy_eq_zero_of_knowable": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-KNOWENTROPY-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Knowledge.exists_witness_of_not_knowable": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry",
+        "AISafetyAtlas.Knowledge.Temporal"
+      ],
+      "origin": "LAND-KNOW-001",
+      "tier": "load-bearing"
+    },
+    "AISafetyAtlas.Knowledge.knowable_id_iff_injective": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry",
+        "AISafetyAtlas.Knowledge.Embedded.Composition",
+        "AISafetyAtlas.Knowledge.SelfReference"
+      ],
+      "origin": "LAND-SELFMEAS-001",
+      "tier": "load-bearing"
+    },
+    "AISafetyAtlas.Knowledge.knowable_iff_ambiguity_le_one": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Inference.Device",
+        "AISafetyAtlas.Examples.Oversight.JointObservation.Residual",
+        "AISafetyAtlas.Examples.Registry",
+        "AISafetyAtlas.Oversight.JointObservation.Residual"
+      ],
+      "origin": "LAND-AMBIG-001",
+      "tier": "load-bearing"
+    },
+    "AISafetyAtlas.Knowledge.knowable_iff_factorsThrough": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-KNOW-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Knowledge.knowable_iff_no_collision": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry",
+        "AISafetyAtlas.Knowledge.Ambiguity",
+        "AISafetyAtlas.Knowledge.Check",
+        "AISafetyAtlas.Oversight.JointObservation.Coverage"
+      ],
+      "origin": "LAND-KNOW-001",
+      "tier": "load-bearing"
+    },
+    "AISafetyAtlas.Knowledge.le_errorProb_of_decoder": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-KNOWENTROPY-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Knowledge.not_knowable_comp": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry",
+        "AISafetyAtlas.Oversight.JointObservation.RepairBoundary"
+      ],
+      "origin": "LAND-KNOW-001",
+      "tier": "load-bearing"
+    },
+    "AISafetyAtlas.Knowledge.not_knowable_of_card_lt": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Knowledge.Ambiguity",
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-AMBIG-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Knowledge.not_knowable_of_collision": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Knowledge.Ambiguity",
+        "AISafetyAtlas.Examples.Oversight.Overseer",
+        "AISafetyAtlas.Examples.Registry",
+        "AISafetyAtlas.Knowledge.Check",
+        "AISafetyAtlas.Knowledge.Embedded",
+        "AISafetyAtlas.Knowledge.SelfReference",
+        "AISafetyAtlas.Knowledge.Temporal",
+        "AISafetyAtlas.Wireheading.ObservationLimits"
+      ],
+      "origin": "LAND-KNOW-001",
+      "tier": "load-bearing"
+    },
+    "AISafetyAtlas.Knowledge.not_knowable_of_condEntropy_ne_zero": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-KNOWENTROPY-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Knowledge.not_knowable_of_witness": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry",
+        "AISafetyAtlas.Wireheading.ObservationLimits"
+      ],
+      "origin": "LAND-KNOW-001",
+      "tier": "load-bearing"
+    },
+    "AISafetyAtlas.Knowledge.not_knowable_pairTarget_of_not_knowable": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-ACCUM-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Knowledge.not_knowable_state_of_nontrivial_remainder": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry",
+        "AISafetyAtlas.Knowledge.Embedded.Composition"
+      ],
+      "origin": "LAND-SELFMEAS-001",
+      "tier": "load-bearing"
+    },
+    "AISafetyAtlas.Learning.card_observed_eq": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "BY-021",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Learning.closedUnderPermutation_of_nfl": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "BY-021",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Learning.closedUnderPermutation_of_permInvariant": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "BY-021",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Learning.exists_observed_eq": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "BY-021",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Learning.homogeneous_iff_learner_indep": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "BY-020",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Learning.homogeneous_of_learner_indep": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "BY-020",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Learning.lossConfig_sum_learner_indep": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "BY-020",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Learning.nfl_adaptive_iff_permInvariant": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "BY-021",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Learning.nfl_adaptive_of_permInvariant": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Learning.Sharp",
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "BY-021",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Learning.nfl_iff_permInvariant": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "BY-021",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Learning.nfl_mixture_of_permInvariant": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "BY-021",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Learning.nfl_of_permInvariant": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Learning.Sharp",
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "BY-021",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Learning.nfl_stochastic_of_permInvariant": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Learning.Sharp",
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "BY-021",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Learning.no_free_lunch": {
+      "consumers": [
+        "AISafetyAtlas.Examples.FirstContribution",
+        "AISafetyAtlas.Examples.NFLConcrete",
+        "AISafetyAtlas.Examples.PublicAPI",
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "BY-021",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Learning.no_free_lunch_adaptive": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "BY-021",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Learning.no_free_lunch_adaptive_of_sharp": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "BY-021",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Learning.no_free_lunch_embedding_of_sharp": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "BY-021",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Learning.no_free_lunch_supervised": {
+      "consumers": [
+        "AISafetyAtlas.Examples.FirstContribution",
+        "AISafetyAtlas.Examples.NFLConcrete",
+        "AISafetyAtlas.Examples.PublicAPI",
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "BY-020",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Learning.observed_permRule": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "BY-021",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Learning.ots_error_distribution_learner_indep": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "BY-020",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Learning.permInvariant_of_closedUnderPermutation": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Learning.Sharp",
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "BY-021",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Learning.permInvariant_of_nfl": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "BY-021",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Learning.ruleVisit_permRule": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "BY-021",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Logic.chaitin_bound": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "BY-015",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Logic.chaitin_incompleteness": {
+      "consumers": [
+        "AISafetyAtlas.Examples.PublicAPI",
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "BY-015",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Logic.godel_first_incompleteness": {
+      "consumers": [
+        "AISafetyAtlas.Examples.PublicAPI",
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "BY-013",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Logic.godel_second_incompleteness": {
+      "consumers": [
+        "AISafetyAtlas.Examples.PublicAPI",
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "BY-013",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Logic.lawvere_fixed_point": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "CLM-LAWVERE-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Logic.loeb": {
+      "consumers": [
+        "AISafetyAtlas.Examples.PublicAPI",
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "BY-027",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Logic.tarski_undefinability": {
+      "consumers": [
+        "AISafetyAtlas.Examples.PublicAPI",
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "BY-016",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Oversight.Debate.alice_fast": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-DEBATE-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Oversight.Debate.bob_fast": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-DEBATE-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Oversight.Debate.completeness": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Oversight.Debate",
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-DEBATE-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Oversight.Debate.correctness": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Oversight.Debate",
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-DEBATE-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Oversight.Debate.soundness": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Oversight.Debate",
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-DEBATE-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Oversight.Debate.vera_fast": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Oversight.Debate",
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-DEBATE-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Oversight.JointObservation.covers_iff_no_collision": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry",
+        "AISafetyAtlas.Oversight.JointObservation.FiniteDecision"
+      ],
+      "origin": "LAND-JOINTOBS-001",
+      "tier": "load-bearing"
+    },
+    "AISafetyAtlas.Oversight.exists_cannotForce_false_and_forces": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-OVERSIGHT-VARIETY-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Oversight.forces_of_constant_effect": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Oversight.VarietyBound",
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-OVERSIGHT-VARIETY-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Oversight.forces_of_constant_effect_of_not_knowable": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-OVERSIGHT-VARIETY-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Oversight.not_forces_of_cannotForce": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Oversight.VarietyBound",
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-OVERSIGHT-VARIETY-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Oversight.not_forces_of_card_lt": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Oversight.VarietyBound",
+        "AISafetyAtlas.Examples.Registry",
+        "AISafetyAtlas.Oversight.VarietyCheck"
+      ],
+      "origin": "BY-004",
+      "tier": "load-bearing"
+    },
+    "AISafetyAtlas.Preference.OverrideModel.mixtureValue_rationalise": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "BY-011",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Preference.OverrideModel.rationalise_strictly_better": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "BY-011",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Preference.ReasonableLanguage.proposition_eight": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "BY-011",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Preference.ReasonableLanguage.proposition_seven": {
+      "consumers": [
+        "AISafetyAtlas.Examples.PublicAPI",
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "BY-011",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Preference.RegretModel.cannot_rule_out_half_maximal_regret": {
+      "consumers": [
+        "AISafetyAtlas.Examples.PublicAPI",
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "BY-011",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Preference.Source.ReasonableForF.proposition_eight": {
+      "consumers": [
+        "AISafetyAtlas.Examples.PublicAPI",
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "BY-011",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Preference.Source.ReasonableForF.proposition_seven": {
+      "consumers": [
+        "AISafetyAtlas.Examples.PublicAPI",
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "BY-011",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Preference.Source.ReasonableForF.theorem_two_conditional": {
+      "consumers": [
+        "AISafetyAtlas.Examples.PublicAPI",
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "BY-011",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Preference.consistent_rewards_eq_univ": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "BY-011",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Preference.degenerate_explanation_cheap": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "BY-011",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Preference.exists_planner": {
+      "consumers": [
+        "AISafetyAtlas.Examples.PublicAPI",
+        "AISafetyAtlas.Examples.Registry",
+        "AISafetyAtlas.Examples.WorkbenchConsumers",
+        "AISafetyAtlas.Preference.Regret"
+      ],
+      "origin": "BY-011",
+      "tier": "load-bearing"
+    },
+    "AISafetyAtlas.Preference.exists_reward": {
+      "consumers": [
+        "AISafetyAtlas.Examples.PublicAPI",
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "BY-011",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Preference.explanation_at_least_behaviour": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "BY-011",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Preference.explanation_complexity_eq_behaviour": {
+      "consumers": [
+        "AISafetyAtlas.Examples.PublicAPI",
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "BY-011",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Preference.greedy_rewardOf": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry",
+        "AISafetyAtlas.Preference.Reasonable"
+      ],
+      "origin": "BY-011",
+      "tier": "load-bearing"
+    },
+    "AISafetyAtlas.Preference.neg_twin": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "BY-011",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.SelfAwareness.Model.limited_self_awareness": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "BY-044",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.SelfAwareness.Model.not_agentAware_of_maximal": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "BY-044",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.SelfAwareness.Model.not_aware_of_le": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "BY-044",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.SelfAwareness.Model.not_perfectlySelfAware": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "BY-044",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.SelfAwareness.Model.process_not_self_aware": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "BY-044",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.SocialChoice.Utility.arrow": {
+      "consumers": [
+        "AISafetyAtlas.Examples.PublicAPI",
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "BY-007",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.SocialChoice.arrow": {
+      "consumers": [
+        "AISafetyAtlas.Examples.PublicAPI",
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "BY-007",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.SocialChoice.gibbard_satterthwaite": {
+      "consumers": [
+        "AISafetyAtlas.Examples.PublicAPI",
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-GS-002",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Verification.AgentBehavior.no_behavioral_safety_verifier": {
+      "consumers": [
+        "AISafetyAtlas.Examples.PublicAPI",
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "BY-012",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Verification.Robot.action_safety_unverifiable": {
+      "consumers": [
+        "AISafetyAtlas.Examples.PublicAPI",
+        "AISafetyAtlas.Examples.Registry",
+        "AISafetyAtlas.Examples.Verification.Robot"
+      ],
+      "origin": "BY-033",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Verification.rice": {
+      "consumers": [
+        "AISafetyAtlas.Examples.PublicAPI",
+        "AISafetyAtlas.Examples.Registry",
+        "AISafetyAtlas.Verification.AgentBehavior"
+      ],
+      "origin": "BY-012",
+      "tier": "load-bearing"
+    },
+    "AISafetyAtlas.Wireheading.AgentEquations.value_eq_of_agree_on_window": {
+      "consumers": [
+        "AISafetyAtlas.Examples.PublicAPI",
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-WIRE-OBJ-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Wireheading.CRMDP.Model.everitt_theorem_eleven": {
+      "consumers": [
+        "AISafetyAtlas.Examples.PublicAPI",
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "BY-039",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Wireheading.GoalPreservationSource.Model.selected_matches_initial": {
+      "consumers": [
+        "AISafetyAtlas.Examples.PublicAPI",
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-GOAL-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Wireheading.ObservationLimits.not_knowable_trueReturn": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry",
+        "AISafetyAtlas.Examples.Wireheading.ObservationLimits"
+      ],
+      "origin": "LAND-CRMDP-KNOW-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Wireheading.ObservationLimits.not_knowable_trueReturn_of_complement_mem": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-CRMDP-KNOW-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Wireheading.ObservationLimits.returnOver_zeroEnv_complement": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry",
+        "AISafetyAtlas.Examples.Wireheading.ObservationLimits"
+      ],
+      "origin": "LAND-CRMDP-KNOW-001",
+      "tier": "examples-only"
+    }
+  },
+  "generated_by": "scripts/report_consumers.py --json",
+  "work_queue": [
+    "AISafetyAtlas.Causal.DecisionNetwork.mem_parents_utility_of_isUnmediated",
+    "AISafetyAtlas.Causal.Model.ancestors_eq_univ_iff",
+    "AISafetyAtlas.Causal.Model.jointProb_hardInterventionProfile",
+    "AISafetyAtlas.Causal.Model.regret_eq_zero_iff",
+    "AISafetyAtlas.Causal.Model.value_const_sub",
+    "AISafetyAtlas.Causal.Model.value_eq",
+    "AISafetyAtlas.Causal.Model.value_le_sign",
+    "AISafetyAtlas.Causal.Model.\u0394_fixProfile",
+    "AISafetyAtlas.Causal.Model.\u0394mix_congr",
+    "AISafetyAtlas.Causal.SCIM.exists_isOptimalPolicy",
+    "AISafetyAtlas.Causal.SCIM.policy_ext_single",
+    "AISafetyAtlas.Causal.SCM.eval_eq_f",
+    "AISafetyAtlas.Causal.SCM.exoJoint_mul_prod",
+    "AISafetyAtlas.Causal.Skeleton.behaviorEq_of_observed_eq_empty",
+    "AISafetyAtlas.Causal.eq_family_of_isCausalBayesNetwork",
+    "AISafetyAtlas.Causal.inIdentifiedSet_zero_of_behaviorEq",
+    "AISafetyAtlas.Causal.modelError_eq_zero_iff",
+    "AISafetyAtlas.Causal.not_inIdentifiedSet_of_neg",
+    "AISafetyAtlas.Combinatorics.basisClass_histogram_eq_permOrbit",
+    "AISafetyAtlas.Combinatorics.card_closedUnderPermutation_nonempty",
+    "AISafetyAtlas.Combinatorics.exists_perm_rel_not_iff",
+    "AISafetyAtlas.Compositional.Networks.runFor_eq_of_view_eq",
+    "AISafetyAtlas.Compositional.Symmetry.Protocol.no_unique_leader_from_symmetric_start",
+    "AISafetyAtlas.Computability.halting_re",
+    "AISafetyAtlas.Computability.nonhalting_not_re",
+    "AISafetyAtlas.Computability.rice",
+    "AISafetyAtlas.Control.ashby_logVariety_ge",
+    "AISafetyAtlas.Control.ashby_logVariety_ge_mul",
+    "AISafetyAtlas.Control.ashby_variety_ge",
+    "AISafetyAtlas.Control.ashby_variety_ge_isSharp",
+    "AISafetyAtlas.Control.card_ceilDiv_le_admittedOutcomes",
+    "AISafetyAtlas.Control.card_le_mul_card_admittedOutcomes_mul",
+    "AISafetyAtlas.Control.condEntropy_ge_of_openLoopBound",
+    "AISafetyAtlas.Control.condEntropy_outcome_eq",
+    "AISafetyAtlas.Control.condMutualInfo_eq_zero_of_sensorLoss_eq_zero",
+    "AISafetyAtlas.Control.controlLoss_eq_condMutualInfo",
+    "AISafetyAtlas.Control.controlLoss_eq_entropy_noise_iff",
+    "AISafetyAtlas.Control.controlLoss_eq_mutualInfo_sub",
+    "AISafetyAtlas.Control.controlLoss_le_entropy_noise",
+    "AISafetyAtlas.Control.entropyReduction_le_condEntropy_form",
+    "AISafetyAtlas.Control.entropyReduction_le_of_openLoopBound",
+    "AISafetyAtlas.Control.entropy_ge_of_condEntropy_ge",
+    "AISafetyAtlas.Control.entropy_ge_of_sensor",
+    "AISafetyAtlas.Control.entropy_le_channelCapacity_of_complete",
+    "AISafetyAtlas.Control.entropy_noise_sub_controlLoss",
+    "AISafetyAtlas.Control.entropy_outcome_ge_of_strategy",
+    "AISafetyAtlas.Control.entropy_outcome_ge_sub_channelCapacity",
+    "AISafetyAtlas.Control.exists_entropyReduction_const_eq_iSup_openLoopReduction",
+    "AISafetyAtlas.Control.isPlant_plantOutcome",
+    "AISafetyAtlas.Control.kernelControlLoss_eq_sum",
+    "AISafetyAtlas.Control.minControlLoss_eq_entropy_noise_iff_of_attained",
+    "AISafetyAtlas.Control.minControlLoss_eq_sInf_condMutualInfo",
+    "AISafetyAtlas.Control.minControlLoss_eq_sInf_mutualInfo_sub",
+    "AISafetyAtlas.Control.minControlLoss_inputPolicies_attained",
+    "AISafetyAtlas.Control.minControlLoss_inputPolicies_eq_kernelMin",
+    "AISafetyAtlas.Control.minControlLoss_le_entropy_noise",
+    "AISafetyAtlas.Control.minControlLoss_nonneg",
+    "AISafetyAtlas.Control.mutualInfo_prod_eq_of_sensorLoss_eq_zero",
+    "AISafetyAtlas.Control.perfectlyObservable_iff_sensorLoss_eq_zero",
+    "AISafetyAtlas.Examples.Causal.DecisionNetwork.figIsUnmediated",
+    "AISafetyAtlas.Examples.Causal.Model.jointProb_sum_shiftCollapse",
+    "AISafetyAtlas.Examples.Causal.OneNodeClass.modelError_le_ten_mul",
+    "AISafetyAtlas.Examples.Causal.StructuralModel.figSCIM_opinion_isMaterial",
+    "AISafetyAtlas.Examples.Causal.StructuralModel.figSCIM_policy_not_const",
+    "AISafetyAtlas.Examples.Causal.StructuralModel.utility_childless_has_teeth",
+    "AISafetyAtlas.Examples.Causal.behaviorEq_has_teeth",
+    "AISafetyAtlas.Examples.Causal.card_fibreRep_empty",
+    "AISafetyAtlas.Examples.Causal.margin_class_not_identifiable",
+    "AISafetyAtlas.Examples.Causal.margin_class_not_identifiable_family",
+    "AISafetyAtlas.Examples.Causal.margin_class_not_identifiable_shared_optimal",
+    "AISafetyAtlas.Examples.Causal.margin_class_not_identifiable_two_graphs",
+    "AISafetyAtlas.Examples.Causal.mm2_shape",
+    "AISafetyAtlas.Examples.Causal.not_inIdentifiedSet_high",
+    "AISafetyAtlas.Examples.Causal.transform_identity_edgeless",
+    "AISafetyAtlas.Examples.Causal.\u0394_eq_half_sub_joint",
+    "AISafetyAtlas.Explainability.attribution_impossibility",
+    "AISafetyAtlas.Explainability.attribution_impossibility_weak",
+    "AISafetyAtlas.Inference.PhysicalKnowledgeWitness.eq_target_on_of_refinesOn",
+    "AISafetyAtlas.Inference.PhysicallyKnows.weaklyInfers",
+    "AISafetyAtlas.Inference.corollary20_ii",
+    "AISafetyAtlas.Inference.corollary21_ii_repaired",
+    "AISafetyAtlas.Inference.corollary23",
+    "AISafetyAtlas.Inference.corollary24",
+    "AISafetyAtlas.Inference.exists_distinguishable_accuracy_near_one",
+    "AISafetyAtlas.Inference.exists_never_physicallyKnown",
+    "AISafetyAtlas.Inference.exists_three_inequivalent_not_weaklyInfers",
+    "AISafetyAtlas.Inference.exists_weaklyInfers_of_three_values",
+    "AISafetyAtlas.Inference.fig5_accuracy_gap",
+    "AISafetyAtlas.Inference.identityDevice_weaklyInfers",
+    "AISafetyAtlas.Inference.not_physicallyKnows_true_and_false",
+    "AISafetyAtlas.Inference.physicallyKnows_false_iff_not_true",
+    "AISafetyAtlas.InformationTheory.condMutualInfo_le_mutualInfo",
+    "AISafetyAtlas.InformationTheory.entropy_le_fano",
+    "AISafetyAtlas.InformationTheory.fano",
+    "AISafetyAtlas.InformationTheory.fano_of_embedding",
+    "AISafetyAtlas.InformationTheory.fano_of_log_le",
+    "AISafetyAtlas.InformationTheory.fano_unrestricted",
+    "AISafetyAtlas.InformationTheory.isMarkovChain_iff_measure_factorizes",
+    "AISafetyAtlas.InformationTheory.isMarkovChain_iff_measure_factorizes_singleton",
+    "AISafetyAtlas.InformationTheory.measure_factorizes_of_isMarkovChain",
+    "AISafetyAtlas.InformationTheory.mutualInfo_comp_le",
+    "AISafetyAtlas.InformationTheory.mutualInfo_eq_iff_isMarkovChain",
+    "AISafetyAtlas.InformationTheory.mutualInfo_le_of_isMarkovChain",
+    "AISafetyAtlas.Knowledge.Devices.BlockwiseCollision.not_physicallyKnows",
+    "AISafetyAtlas.Knowledge.Devices.BlockwiseCollision.not_weaklyInfers",
+    "AISafetyAtlas.Knowledge.Devices.knowable_probe_of_forall_blockAnswers",
+    "AISafetyAtlas.Knowledge.Devices.not_blockAnswers_of_witness",
+    "AISafetyAtlas.Knowledge.Embedded.Composition.measuresAll_fibreInference_of_injective",
+    "AISafetyAtlas.Knowledge.Embedded.Composition.meshing_and_measuresAll_fibreInference_of_bijective",
+    "AISafetyAtlas.Knowledge.Embedded.Composition.meshing_fibreInference_of_surjective",
+    "AISafetyAtlas.Knowledge.Embedded.Composition.no_meshing_measures_all_of_nontrivial_remainder",
+    "AISafetyAtlas.Knowledge.Embedded.Composition.no_meshing_measures_all_of_nontrivial_remainder_of_equiv",
+    "AISafetyAtlas.Knowledge.Embedded.Composition.not_meshing_of_not_surjective",
+    "AISafetyAtlas.Knowledge.Embedded.Composition.properInclusion_of_nontrivial_remainder",
+    "AISafetyAtlas.Knowledge.Embedded.Composition.properInclusion_of_nontrivial_remainder_of_equiv",
+    "AISafetyAtlas.Knowledge.Embedded.Finite.no_meshing_measures_all_of_card_lt",
+    "AISafetyAtlas.Knowledge.Embedded.Finite.properInclusion_of_card_lt",
+    "AISafetyAtlas.Knowledge.Embedded.Finite.properInclusion_product_of_card_rest_ge_two",
+    "AISafetyAtlas.Knowledge.Embedded.eq_restrict_of_infer_singleton_eq",
+    "AISafetyAtlas.Knowledge.Embedded.exists_singleton_infer_eq_of_infer_eq",
+    "AISafetyAtlas.Knowledge.Embedded.exists_state_not_exactly_measurable",
+    "AISafetyAtlas.Knowledge.Embedded.infer_singleton_eq_of_meshing",
+    "AISafetyAtlas.Knowledge.Embedded.no_meshing_inference_distinguishes",
+    "AISafetyAtlas.Knowledge.Embedded.no_meshing_inference_measures_all_states_direct",
+    "AISafetyAtlas.Knowledge.Embedded.not_knowable_state_of_properInclusion",
+    "AISafetyAtlas.Knowledge.SelfReference.card_rest_le_one_of_selfComplete",
+    "AISafetyAtlas.Knowledge.SelfReference.not_selfComplete_of_two_rest",
+    "AISafetyAtlas.Knowledge.SelfReference.selfComplete_iff_subsingleton_rest",
+    "AISafetyAtlas.Knowledge.Temporal.collisionAt_of_not_knowableAt",
+    "AISafetyAtlas.Knowledge.Temporal.knowableFrom_mono",
+    "AISafetyAtlas.Knowledge.Temporal.not_knowableAt_of_collisionAt",
+    "AISafetyAtlas.Knowledge.ambiguity_le_of_evidenceMonotone",
+    "AISafetyAtlas.Knowledge.ambiguity_le_pairTarget_left",
+    "AISafetyAtlas.Knowledge.ambiguity_le_pairTarget_of_evidenceMonotone",
+    "AISafetyAtlas.Knowledge.ambiguity_le_pairTarget_right",
+    "AISafetyAtlas.Knowledge.ambiguity_pairTarget_le_mul",
+    "AISafetyAtlas.Knowledge.condEntropy_eq_zero_of_knowable",
+    "AISafetyAtlas.Knowledge.knowable_iff_factorsThrough",
+    "AISafetyAtlas.Knowledge.le_errorProb_of_decoder",
+    "AISafetyAtlas.Knowledge.not_knowable_of_card_lt",
+    "AISafetyAtlas.Knowledge.not_knowable_of_condEntropy_ne_zero",
+    "AISafetyAtlas.Knowledge.not_knowable_pairTarget_of_not_knowable",
+    "AISafetyAtlas.Learning.card_observed_eq",
+    "AISafetyAtlas.Learning.closedUnderPermutation_of_nfl",
+    "AISafetyAtlas.Learning.closedUnderPermutation_of_permInvariant",
+    "AISafetyAtlas.Learning.exists_observed_eq",
+    "AISafetyAtlas.Learning.homogeneous_iff_learner_indep",
+    "AISafetyAtlas.Learning.homogeneous_of_learner_indep",
+    "AISafetyAtlas.Learning.lossConfig_sum_learner_indep",
+    "AISafetyAtlas.Learning.nfl_adaptive_iff_permInvariant",
+    "AISafetyAtlas.Learning.nfl_adaptive_of_permInvariant",
+    "AISafetyAtlas.Learning.nfl_iff_permInvariant",
+    "AISafetyAtlas.Learning.nfl_mixture_of_permInvariant",
+    "AISafetyAtlas.Learning.nfl_of_permInvariant",
+    "AISafetyAtlas.Learning.nfl_stochastic_of_permInvariant",
+    "AISafetyAtlas.Learning.no_free_lunch",
+    "AISafetyAtlas.Learning.no_free_lunch_adaptive",
+    "AISafetyAtlas.Learning.no_free_lunch_adaptive_of_sharp",
+    "AISafetyAtlas.Learning.no_free_lunch_embedding_of_sharp",
+    "AISafetyAtlas.Learning.no_free_lunch_supervised",
+    "AISafetyAtlas.Learning.observed_permRule",
+    "AISafetyAtlas.Learning.ots_error_distribution_learner_indep",
+    "AISafetyAtlas.Learning.permInvariant_of_closedUnderPermutation",
+    "AISafetyAtlas.Learning.permInvariant_of_nfl",
+    "AISafetyAtlas.Learning.ruleVisit_permRule",
+    "AISafetyAtlas.Logic.chaitin_bound",
+    "AISafetyAtlas.Logic.chaitin_incompleteness",
+    "AISafetyAtlas.Logic.godel_first_incompleteness",
+    "AISafetyAtlas.Logic.godel_second_incompleteness",
+    "AISafetyAtlas.Logic.lawvere_fixed_point",
+    "AISafetyAtlas.Logic.loeb",
+    "AISafetyAtlas.Logic.tarski_undefinability",
+    "AISafetyAtlas.Oversight.Debate.alice_fast",
+    "AISafetyAtlas.Oversight.Debate.bob_fast",
+    "AISafetyAtlas.Oversight.Debate.completeness",
+    "AISafetyAtlas.Oversight.Debate.correctness",
+    "AISafetyAtlas.Oversight.Debate.soundness",
+    "AISafetyAtlas.Oversight.Debate.vera_fast",
+    "AISafetyAtlas.Oversight.exists_cannotForce_false_and_forces",
+    "AISafetyAtlas.Oversight.forces_of_constant_effect",
+    "AISafetyAtlas.Oversight.forces_of_constant_effect_of_not_knowable",
+    "AISafetyAtlas.Oversight.not_forces_of_cannotForce",
+    "AISafetyAtlas.Preference.OverrideModel.mixtureValue_rationalise",
+    "AISafetyAtlas.Preference.OverrideModel.rationalise_strictly_better",
+    "AISafetyAtlas.Preference.ReasonableLanguage.proposition_eight",
+    "AISafetyAtlas.Preference.ReasonableLanguage.proposition_seven",
+    "AISafetyAtlas.Preference.RegretModel.cannot_rule_out_half_maximal_regret",
+    "AISafetyAtlas.Preference.Source.ReasonableForF.proposition_eight",
+    "AISafetyAtlas.Preference.Source.ReasonableForF.proposition_seven",
+    "AISafetyAtlas.Preference.Source.ReasonableForF.theorem_two_conditional",
+    "AISafetyAtlas.Preference.consistent_rewards_eq_univ",
+    "AISafetyAtlas.Preference.degenerate_explanation_cheap",
+    "AISafetyAtlas.Preference.exists_reward",
+    "AISafetyAtlas.Preference.explanation_at_least_behaviour",
+    "AISafetyAtlas.Preference.explanation_complexity_eq_behaviour",
+    "AISafetyAtlas.Preference.neg_twin",
+    "AISafetyAtlas.SelfAwareness.Model.limited_self_awareness",
+    "AISafetyAtlas.SelfAwareness.Model.not_agentAware_of_maximal",
+    "AISafetyAtlas.SelfAwareness.Model.not_aware_of_le",
+    "AISafetyAtlas.SelfAwareness.Model.not_perfectlySelfAware",
+    "AISafetyAtlas.SelfAwareness.Model.process_not_self_aware",
+    "AISafetyAtlas.SocialChoice.Utility.arrow",
+    "AISafetyAtlas.SocialChoice.arrow",
+    "AISafetyAtlas.SocialChoice.gibbard_satterthwaite",
+    "AISafetyAtlas.Verification.AgentBehavior.no_behavioral_safety_verifier",
+    "AISafetyAtlas.Verification.Robot.action_safety_unverifiable",
+    "AISafetyAtlas.Wireheading.AgentEquations.value_eq_of_agree_on_window",
+    "AISafetyAtlas.Wireheading.CRMDP.Model.everitt_theorem_eleven",
+    "AISafetyAtlas.Wireheading.GoalPreservationSource.Model.selected_matches_initial",
+    "AISafetyAtlas.Wireheading.ObservationLimits.not_knowable_trueReturn",
+    "AISafetyAtlas.Wireheading.ObservationLimits.not_knowable_trueReturn_of_complement_mem",
+    "AISafetyAtlas.Wireheading.ObservationLimits.returnOver_zeroEnv_complement"
+  ]
+}

@@ -185,6 +185,12 @@ def consumers(
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument(
+        "--json",
+        metavar="PATH",
+        help="write the report as JSON to PATH (the generated view agents read; "
+             "this script takes minutes, docs/status/consumers.json does not)",
+    )
+    parser.add_argument(
         "--queue",
         action="store_true",
         help="print only the declarations with no consumer doing mathematics",
@@ -207,6 +213,42 @@ def main() -> None:
             examples_only.append((declaration, origin, found))
         else:
             load_bearing.append((declaration, origin, found))
+
+    if args.json:
+        # The whole point of this file is that reading it costs a few kilobytes
+        # while recomputing it costs minutes: the scan is quadratic in the
+        # corpus. Keys are fully qualified so a consumer can look one up
+        # without knowing which module defines it.
+        payload = {
+            "generated_by": "scripts/report_consumers.py --json",
+            "counts": {
+                "declarations": len(declarations),
+                "load_bearing": len(load_bearing),
+                "examples_only": len(examples_only),
+                "no_consumer": len(unused),
+            },
+            "declarations": {},
+            "work_queue": [],
+        }
+        for declaration, origin, found in load_bearing:
+            payload["declarations"][declaration] = {
+                "origin": origin, "tier": "load-bearing", "consumers": found,
+            }
+        for declaration, origin, found in examples_only:
+            payload["declarations"][declaration] = {
+                "origin": origin, "tier": "examples-only", "consumers": found,
+            }
+            payload["work_queue"].append(declaration)
+        for declaration, origin in unused:
+            payload["declarations"][declaration] = {
+                "origin": origin, "tier": "no-consumer", "consumers": [],
+            }
+            payload["work_queue"].append(declaration)
+        out = Path(args.json)
+        out.write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n")
+        print(f"wrote {out} — {len(payload['declarations'])} declarations, "
+              f"{len(payload['work_queue'])} in the work queue")
+        return
 
     if not args.queue:
         print(f"atlas declarations: {len(declarations)}")

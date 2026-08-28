@@ -7,11 +7,19 @@ public import Mathlib.Analysis.SpecialFunctions.Pow.Real
 /-!
 # Semialgebraic subsets of a finite-dimensional real coordinate space
 
-MAIS-A2 `prob:exact` opens *"Let `𝒩 ⊆ 𝕄(sk, λ)` be a **compact semialgebraic**
-class …"*. Neither word can be dropped, and Mathlib at the pinned revision has
-no semialgebraic sets at all — the word occurs nowhere in the library, and there
-is no o-minimality development either — so the notion is built here.
-Compactness is Mathlib's.
+Mathlib at the pinned revision has no semialgebraic sets at all — the word
+occurs nowhere in the library, and there is no o-minimality development either —
+so the notion is built here. Compactness is Mathlib's.
+
+Nothing below is specific to any one problem: `ι` is an arbitrary index type,
+the coordinate space is `ι → ℝ`, and no atlas definition is imported. Like
+`AISafetyAtlas.Analysis.PolynomialGenericity` it sits in `Analysis` so that it
+can be read against Mathlib rather than against the consumer that motivated it.
+That consumer is MAIS-A2 `prob:exact`, which opens *"Let `𝒩 ⊆ 𝕄(sk, λ)` be a
+**compact semialgebraic** class …"* — neither word can be dropped — and reaches
+this file through `AISafetyAtlas.Causal.ParameterChart`, instantiating
+`ι := ChartIndex G`. Where a design choice below was made for that consumer, it
+is named as such.
 
 The definition is the standard one (Bochnak–Coste–Roy §2.1): a finite union of
 sets each cut out by finitely many polynomial sign conditions. Allowing `≥`
@@ -31,12 +39,9 @@ the other two, and `IsSemialgebraic.sdiff` is what they write.
 What is deliberately absent is Tarski–Seidenberg. Nothing here concludes that
 the projection of a semialgebraic set, its topological closure, or a set defined
 by a quantified first-order formula is semialgebraic.
-
-Nothing here is specific to causal models; `ι` is any index type and the
-coordinate space is `ι → ℝ`. The causal use instantiates `ι := ChartIndex G`.
 -/
 
-namespace AISafetyAtlas.Causal
+namespace AISafetyAtlas.Analysis
 
 open MvPolynomial
 
@@ -342,4 +347,100 @@ public theorem isCompact_closedBox [Fintype ι] (c : ι → ℝ) (r : ℝ) :
   rw [hpi]
   exact isCompact_univ_pi fun _ ↦ isCompact_Icc
 
-end AISafetyAtlas.Causal
+/-! ## Atoms and boolean combinations
+
+`IsSemialgebraic` is closed under union, intersection and complement, so a
+predicate built from polynomial sign conditions by `∧`, `∨` and `¬` cuts out a
+semialgebraic set. These are the three atoms and the three connectives, stated
+over `setOf` so that a proof can follow the shape of the predicate rather than
+rebuilding a `Finset` of sign conditions by hand.
+-/
+
+/-- The vanishing locus of a polynomial. -/
+public theorem isSemialgebraic_setOf_eval_eq_zero (p : MvPolynomial ι ℝ) :
+    IsSemialgebraic {x : ι → ℝ | eval x p = 0} := by
+  have h : {x : ι → ℝ | eval x p = 0} = BasicSemialgebraic {(p, PolySign.zero)} := by
+    ext x
+    simp [BasicSemialgebraic, PolySign.Holds]
+  rw [h]
+  exact IsSemialgebraic.basic _
+
+/-- The nonnegativity locus of a polynomial. -/
+public theorem isSemialgebraic_setOf_eval_nonneg (p : MvPolynomial ι ℝ) :
+    IsSemialgebraic {x : ι → ℝ | 0 ≤ eval x p} := by
+  have h : {x : ι → ℝ | 0 ≤ eval x p} = BasicSemialgebraic {(p, PolySign.nonneg)} := by
+    ext x
+    simp [BasicSemialgebraic, PolySign.Holds]
+  rw [h]
+  exact IsSemialgebraic.basic _
+
+/-- The positivity locus of a polynomial. -/
+public theorem isSemialgebraic_setOf_eval_pos (p : MvPolynomial ι ℝ) :
+    IsSemialgebraic {x : ι → ℝ | 0 < eval x p} := by
+  have h : {x : ι → ℝ | 0 < eval x p} = BasicSemialgebraic {(p, PolySign.pos)} := by
+    ext x
+    simp [BasicSemialgebraic, PolySign.Holds]
+  rw [h]
+  exact IsSemialgebraic.basic _
+
+/-- The non-vanishing locus of a polynomial: the union of the two open half-loci
+its sign can land in. `PolySign` carries no disequality, and it does not need
+one. -/
+public theorem isSemialgebraic_setOf_eval_ne_zero (p : MvPolynomial ι ℝ) :
+    IsSemialgebraic {x : ι → ℝ | eval x p ≠ 0} := by
+  have h : {x : ι → ℝ | eval x p ≠ 0} =
+      {x : ι → ℝ | 0 < eval x p} ∪ {x : ι → ℝ | 0 < eval x (-p)} := by
+    ext x
+    simp only [Set.mem_setOf_eq, Set.mem_union, map_neg, ne_eq]
+    constructor
+    · intro hx
+      rcases lt_trichotomy (eval x p) 0 with h | h | h
+      · exact Or.inr (by linarith)
+      · exact absurd h hx
+      · exact Or.inl h
+    · rintro (h | h) hzero <;> rw [hzero] at h <;> simp at h
+  rw [h]
+  exact (isSemialgebraic_setOf_eval_pos p).union (isSemialgebraic_setOf_eval_pos (-p))
+
+/-- Conjunction of two semialgebraic predicates. -/
+public theorem IsSemialgebraic.setOf_and {P Q : (ι → ℝ) → Prop}
+    (hP : IsSemialgebraic {x | P x}) (hQ : IsSemialgebraic {x | Q x}) :
+    IsSemialgebraic {x | P x ∧ Q x} :=
+  hP.inter hQ
+
+/-- Disjunction of two semialgebraic predicates. -/
+public theorem IsSemialgebraic.setOf_or {P Q : (ι → ℝ) → Prop}
+    (hP : IsSemialgebraic {x | P x}) (hQ : IsSemialgebraic {x | Q x}) :
+    IsSemialgebraic {x | P x ∨ Q x} :=
+  hP.union hQ
+
+/-- Negation of a semialgebraic predicate. -/
+public theorem IsSemialgebraic.setOf_not {P : (ι → ℝ) → Prop}
+    (hP : IsSemialgebraic {x | P x}) :
+    IsSemialgebraic {x | ¬ P x} := by
+  have h : {x : ι → ℝ | ¬ P x} = {x : ι → ℝ | P x}ᶜ := rfl
+  rw [h]
+  exact hP.compl
+
+/-- Rewriting the predicate along a pointwise equivalence. -/
+public theorem IsSemialgebraic.setOf_congr {P Q : (ι → ℝ) → Prop}
+    (h : ∀ x, P x ↔ Q x) (hQ : IsSemialgebraic {x | Q x}) :
+    IsSemialgebraic {x | P x} := by
+  have hset : {x : ι → ℝ | P x} = {x : ι → ℝ | Q x} := by
+    ext x
+    exact h x
+  rw [hset]
+  exact hQ
+
+/-- A constant side condition in front of a semialgebraic predicate. The locus
+is the predicate's when the condition holds and empty when it does not, so no
+coordinate of it is ever read. -/
+public theorem IsSemialgebraic.setOf_const_and {c : Prop} {P : (ι → ℝ) → Prop}
+    (hP : IsSemialgebraic {x | P x}) : IsSemialgebraic {x : ι → ℝ | c ∧ P x} := by
+  by_cases hc : c
+  · exact IsSemialgebraic.setOf_congr (fun _ ↦ ⟨And.right, fun h ↦ ⟨hc, h⟩⟩) hP
+  · refine IsSemialgebraic.setOf_congr (Q := fun _ ↦ False)
+      (fun _ ↦ ⟨fun h ↦ absurd h.1 hc, False.elim⟩) ?_
+    simpa using (isSemialgebraic_empty (ι := ι))
+
+end AISafetyAtlas.Analysis

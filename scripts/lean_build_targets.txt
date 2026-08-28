@@ -22,7 +22,7 @@ AISafetyAtlas.Examples.Causal.BayesianNetwork
 AISafetyAtlas.Examples.Causal.DecisionNetwork
 AISafetyAtlas.Examples.Causal.Decision
 AISafetyAtlas.Examples.Causal.Query
-AISafetyAtlas.Examples.Causal.Semialgebraic
+AISafetyAtlas.Examples.Analysis.Semialgebraic
 AISafetyAtlas.Examples.Causal.EffectiveGenericity
 AISafetyAtlas.Examples.Causal.OneNodeClass
 AISafetyAtlas.Causal.ModelSpace
@@ -84,3 +84,4 @@ AISafetyAtlas.InformationTheory.DataProcessing
 AISafetyAtlas.InformationTheory.Fano
 AISafetyAtlas.Learning.Sharp
 AISafetyAtlas.Oversight.Debate
+AISafetyAtlas.Examples.Analysis.PolynomialGenericity

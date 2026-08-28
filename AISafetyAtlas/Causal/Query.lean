@@ -15,8 +15,7 @@ MAIS-A2 fixes one interaction protocol that all of its query problems (O25, O2,
 O35) quantify over, and states it once. This module is that protocol, and it is
 built to the printed sentences rather than to what is convenient downstream.
 
-Four printed commitments drive the shapes here, and each was previously rendered
-differently by the conjecture layer:
+Four printed commitments drive the shapes here:
 
 * **Queries carry rational weights, tables are real.** *"the `t`th query is a
   triple `(σ_t, 𝐎'_t, w_t)` with **rational** mixture weights"*, while
@@ -47,9 +46,9 @@ behavioural form is the literal reading of *"the analyst **adaptively** issues
 queries"*, and it is the one `PMF.bind` builds directly.
 
 Nothing here is a conjecture. MAIS-O25 and MAIS-O26 are both phrased in this
-layer as of 2026-08-21. O26 had used a rational stand-in because its class is cut
-by MAIS-O24's polynomial list and the atlas had none; `Causal.O24Solution` is
-that list, and the stand-in was deleted with the restatement.
+layer. O26's class is cut by MAIS-O24's polynomial list, which
+`Causal.O24Solution` supplies; a rational stand-in for it would be a different
+statement.
 
 **One rendering here looked like a live scope axis and is now proved not to
 be.** `RandomizedEstimator` returns a `PMF`, so an analyst's output law is
@@ -158,6 +157,28 @@ public theorem pmfExpect_add_const {α : Type*} (p : PMF α) {f : α → ℝ} {C
   simp only [hsplit]
   rw [(summable_pmfExpect p hf).tsum_add ((hasSum_pmf_toReal p).summable.mul_right c),
     tsum_mul_right, (hasSum_pmf_toReal p).tsum_eq, one_mul]
+
+/-- Expectation is additive on bounded functions.
+
+Stated with an explicit bound for the same reason the rest of this toolkit is:
+`pmfExpect` is a `tsum` in `ℝ`, so splitting one needs summability of both
+halves, and every function pushed through here is bounded by `1`. -/
+public theorem pmfExpect_add {α : Type*} (p : PMF α) {f g : α → ℝ} {C : ℝ}
+    (hf : ∀ a, |f a| ≤ C) (hg : ∀ a, |g a| ≤ C) :
+    pmfExpect p (fun a ↦ f a + g a) = pmfExpect p f + pmfExpect p g := by
+  unfold pmfExpect
+  have hsplit : ∀ a, (p a).toReal * (f a + g a)
+      = (p a).toReal * f a + (p a).toReal * g a := fun a ↦ by ring
+  simp only [hsplit]
+  exact (summable_pmfExpect p hf).tsum_add (summable_pmfExpect p hg)
+
+/-- A function bounded below has an expectation bounded below — the mirror of
+`pmfExpect_le`, and the direction a minimax **lower** bound needs. -/
+public theorem le_pmfExpect {α : Type*} (p : PMF α) {f : α → ℝ} {C : ℝ}
+    (hf : ∀ a, |f a| ≤ C) (c : ℝ) (h : ∀ a, c ≤ f a) : c ≤ pmfExpect p f := by
+  have hc : ∀ a, |(fun _ : α ↦ c) a| ≤ max C |c| := fun _ ↦ le_max_right _ _
+  have hf' : ∀ a, |f a| ≤ max C |c| := fun a ↦ (hf a).trans (le_max_left _ _)
+  simpa using pmfExpect_mono p hc hf' h
 
 /-- A bounded function has a bounded expectation. -/
 public theorem pmfExpect_le {α : Type*} (p : PMF α) {f : α → ℝ} {C : ℝ}
@@ -307,6 +328,16 @@ public noncomputable def exactAnalystRisk [Nonempty C] (sk : Skeleton C dim Bool
     AdmissibleFamily M sk 0 family ∧
       e = exactExpectedError sk M family strategy estimator n}
 
+/-- The supremum over an empty model class is zero, following the real
+conditional-complete-lattice convention used by the query definitions. -/
+@[simp] public theorem exactAnalystRisk_empty [Nonempty C]
+    (sk : Skeleton C dim Bool ℝ) (n : ℕ)
+    (strategy : RandomizedQueryStrategy sk)
+    (estimator : RandomizedEstimator C dim ℝ) :
+    exactAnalystRisk sk ∅ n strategy estimator = 0 := by
+  unfold exactAnalystRisk
+  simp
+
 /-- **The minimax risk at budget `n`**, as `subsec:queries` defines it: the
 *infimum* over randomized analyst strategies of `exactAnalystRisk`.
 
@@ -373,7 +404,7 @@ general object is an arbitrary probability measure on the model space, which
 The two risks below are the same definition over the two estimator classes. The
 `PMF` class embeds in the measure class, so the general infimum is at most the
 restricted one — and that inequality, proved here, is the **direction** of the
-deviation, previously argued in prose only. It says a budget computed in this
+deviation. It says a budget computed in this
 file can only be *larger* than print's, so a finite upper bound on it is
 stronger than print's claim, never weaker.
 

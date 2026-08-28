@@ -3,12 +3,227 @@
   "generated_by": "scripts/generate_declaration_index.py",
   "note": "Declaration index walked from the elaborated environment, not from source text. Consumed by the prose checks so that a name resolves only when it is a real declaration.",
   "prefix": "AISafetyAtlas",
-  "count": 3739,
+  "count": 3770,
   "declarations": [
     {
       "name": "AISafetyAtlas",
       "kind": "module",
       "module": "AISafetyAtlas"
+    },
+    {
+      "name": "AISafetyAtlas.Analysis.BasicSemialgebraic",
+      "kind": "def",
+      "module": "AISafetyAtlas.Analysis.Semialgebraic"
+    },
+    {
+      "name": "AISafetyAtlas.Analysis.ClosedBox",
+      "kind": "def",
+      "module": "AISafetyAtlas.Analysis.Semialgebraic"
+    },
+    {
+      "name": "AISafetyAtlas.Analysis.IsSemialgebraic",
+      "kind": "def",
+      "module": "AISafetyAtlas.Analysis.Semialgebraic"
+    },
+    {
+      "name": "AISafetyAtlas.Analysis.IsSemialgebraic.basic",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Analysis.Semialgebraic"
+    },
+    {
+      "name": "AISafetyAtlas.Analysis.IsSemialgebraic.compl",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Analysis.Semialgebraic"
+    },
+    {
+      "name": "AISafetyAtlas.Analysis.IsSemialgebraic.inter",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Analysis.Semialgebraic"
+    },
+    {
+      "name": "AISafetyAtlas.Analysis.IsSemialgebraic.sdiff",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Analysis.Semialgebraic"
+    },
+    {
+      "name": "AISafetyAtlas.Analysis.IsSemialgebraic.setOf_and",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Analysis.Semialgebraic"
+    },
+    {
+      "name": "AISafetyAtlas.Analysis.IsSemialgebraic.setOf_congr",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Analysis.Semialgebraic"
+    },
+    {
+      "name": "AISafetyAtlas.Analysis.IsSemialgebraic.setOf_const_and",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Analysis.Semialgebraic"
+    },
+    {
+      "name": "AISafetyAtlas.Analysis.IsSemialgebraic.setOf_not",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Analysis.Semialgebraic"
+    },
+    {
+      "name": "AISafetyAtlas.Analysis.IsSemialgebraic.setOf_or",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Analysis.Semialgebraic"
+    },
+    {
+      "name": "AISafetyAtlas.Analysis.IsSemialgebraic.union",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Analysis.Semialgebraic"
+    },
+    {
+      "name": "AISafetyAtlas.Analysis.PolySign",
+      "kind": "inductive",
+      "module": "AISafetyAtlas.Analysis.Semialgebraic"
+    },
+    {
+      "name": "AISafetyAtlas.Analysis.PolySign.Holds",
+      "kind": "def",
+      "module": "AISafetyAtlas.Analysis.Semialgebraic"
+    },
+    {
+      "name": "AISafetyAtlas.Analysis.PolySign.nonneg",
+      "kind": "constructor",
+      "module": "AISafetyAtlas.Analysis.Semialgebraic"
+    },
+    {
+      "name": "AISafetyAtlas.Analysis.PolySign.nonneg.elim",
+      "kind": "def",
+      "module": "AISafetyAtlas.Analysis.Semialgebraic"
+    },
+    {
+      "name": "AISafetyAtlas.Analysis.PolySign.pos",
+      "kind": "constructor",
+      "module": "AISafetyAtlas.Analysis.Semialgebraic"
+    },
+    {
+      "name": "AISafetyAtlas.Analysis.PolySign.pos.elim",
+      "kind": "def",
+      "module": "AISafetyAtlas.Analysis.Semialgebraic"
+    },
+    {
+      "name": "AISafetyAtlas.Analysis.PolySign.zero",
+      "kind": "constructor",
+      "module": "AISafetyAtlas.Analysis.Semialgebraic"
+    },
+    {
+      "name": "AISafetyAtlas.Analysis.PolySign.zero.elim",
+      "kind": "def",
+      "module": "AISafetyAtlas.Analysis.Semialgebraic"
+    },
+    {
+      "name": "AISafetyAtlas.Analysis.PolynomialGenericity",
+      "kind": "module",
+      "module": "AISafetyAtlas.Analysis.PolynomialGenericity"
+    },
+    {
+      "name": "AISafetyAtlas.Analysis.Semialgebraic",
+      "kind": "module",
+      "module": "AISafetyAtlas.Analysis.Semialgebraic"
+    },
+    {
+      "name": "AISafetyAtlas.Analysis.ae_eval_ne_zero",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Analysis.PolynomialGenericity"
+    },
+    {
+      "name": "AISafetyAtlas.Analysis.ae_eval_ne_zero_addHaar",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Analysis.PolynomialGenericity"
+    },
+    {
+      "name": "AISafetyAtlas.Analysis.ae_eval_ne_zero_fintype",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Analysis.PolynomialGenericity"
+    },
+    {
+      "name": "AISafetyAtlas.Analysis.ae_eval_ne_zero_pi",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Analysis.PolynomialGenericity"
+    },
+    {
+      "name": "AISafetyAtlas.Analysis.basicSemialgebraic_union",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Analysis.Semialgebraic"
+    },
+    {
+      "name": "AISafetyAtlas.Analysis.instDecidableEqPolySign",
+      "kind": "def",
+      "module": "AISafetyAtlas.Analysis.Semialgebraic"
+    },
+    {
+      "name": "AISafetyAtlas.Analysis.isCompact_closedBox",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Analysis.Semialgebraic"
+    },
+    {
+      "name": "AISafetyAtlas.Analysis.isSemialgebraic_biInter",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Analysis.Semialgebraic"
+    },
+    {
+      "name": "AISafetyAtlas.Analysis.isSemialgebraic_biUnion",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Analysis.Semialgebraic"
+    },
+    {
+      "name": "AISafetyAtlas.Analysis.isSemialgebraic_closedBox",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Analysis.Semialgebraic"
+    },
+    {
+      "name": "AISafetyAtlas.Analysis.isSemialgebraic_compl_basic",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Analysis.Semialgebraic"
+    },
+    {
+      "name": "AISafetyAtlas.Analysis.isSemialgebraic_empty",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Analysis.Semialgebraic"
+    },
+    {
+      "name": "AISafetyAtlas.Analysis.isSemialgebraic_not_holds",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Analysis.Semialgebraic"
+    },
+    {
+      "name": "AISafetyAtlas.Analysis.isSemialgebraic_setOf_eval_eq_zero",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Analysis.Semialgebraic"
+    },
+    {
+      "name": "AISafetyAtlas.Analysis.isSemialgebraic_setOf_eval_ne_zero",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Analysis.Semialgebraic"
+    },
+    {
+      "name": "AISafetyAtlas.Analysis.isSemialgebraic_setOf_eval_nonneg",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Analysis.Semialgebraic"
+    },
+    {
+      "name": "AISafetyAtlas.Analysis.isSemialgebraic_setOf_eval_pos",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Analysis.Semialgebraic"
+    },
+    {
+      "name": "AISafetyAtlas.Analysis.isSemialgebraic_univ",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Analysis.Semialgebraic"
+    },
+    {
+      "name": "AISafetyAtlas.Analysis.measure_setOf_eval_eq_zero_pi",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Analysis.PolynomialGenericity"
+    },
+    {
+      "name": "AISafetyAtlas.Analysis.volume_setOf_eval_eq_zero",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Analysis.PolynomialGenericity"
     },
     {
       "name": "AISafetyAtlas.Causal.AdmissibleFamily",
@@ -19,11 +234,6 @@
       "name": "AISafetyAtlas.Causal.Assignment",
       "kind": "def",
       "module": "AISafetyAtlas.Causal.Model"
-    },
-    {
-      "name": "AISafetyAtlas.Causal.BasicSemialgebraic",
-      "kind": "def",
-      "module": "AISafetyAtlas.Causal.Semialgebraic"
     },
     {
       "name": "AISafetyAtlas.Causal.BayesianNetwork",
@@ -164,66 +374,6 @@
       "name": "AISafetyAtlas.Causal.ChartIndex.extend",
       "kind": "def",
       "module": "AISafetyAtlas.Causal.ParameterChart"
-    },
-    {
-      "name": "AISafetyAtlas.Causal.ClosedBox",
-      "kind": "def",
-      "module": "AISafetyAtlas.Causal.Semialgebraic"
-    },
-    {
-      "name": "AISafetyAtlas.Causal.CodeSym",
-      "kind": "inductive",
-      "module": "AISafetyAtlas.Causal.SparseEncoding"
-    },
-    {
-      "name": "AISafetyAtlas.Causal.CodeSym.isDigit",
-      "kind": "def",
-      "module": "AISafetyAtlas.Causal.SparseEncoding"
-    },
-    {
-      "name": "AISafetyAtlas.Causal.CodeSym.isDigit_ofBool",
-      "kind": "theorem",
-      "module": "AISafetyAtlas.Causal.SparseEncoding"
-    },
-    {
-      "name": "AISafetyAtlas.Causal.CodeSym.ofBool",
-      "kind": "def",
-      "module": "AISafetyAtlas.Causal.SparseEncoding"
-    },
-    {
-      "name": "AISafetyAtlas.Causal.CodeSym.ofBool_injective",
-      "kind": "theorem",
-      "module": "AISafetyAtlas.Causal.SparseEncoding"
-    },
-    {
-      "name": "AISafetyAtlas.Causal.CodeSym.one",
-      "kind": "constructor",
-      "module": "AISafetyAtlas.Causal.SparseEncoding"
-    },
-    {
-      "name": "AISafetyAtlas.Causal.CodeSym.one.elim",
-      "kind": "def",
-      "module": "AISafetyAtlas.Causal.SparseEncoding"
-    },
-    {
-      "name": "AISafetyAtlas.Causal.CodeSym.sep",
-      "kind": "constructor",
-      "module": "AISafetyAtlas.Causal.SparseEncoding"
-    },
-    {
-      "name": "AISafetyAtlas.Causal.CodeSym.sep.elim",
-      "kind": "def",
-      "module": "AISafetyAtlas.Causal.SparseEncoding"
-    },
-    {
-      "name": "AISafetyAtlas.Causal.CodeSym.zero",
-      "kind": "constructor",
-      "module": "AISafetyAtlas.Causal.SparseEncoding"
-    },
-    {
-      "name": "AISafetyAtlas.Causal.CodeSym.zero.elim",
-      "kind": "def",
-      "module": "AISafetyAtlas.Causal.SparseEncoding"
     },
     {
       "name": "AISafetyAtlas.Causal.ConditionalTables",
@@ -471,31 +621,6 @@
       "module": "AISafetyAtlas.Causal.Query"
     },
     {
-      "name": "AISafetyAtlas.Causal.IsPrefixCode",
-      "kind": "def",
-      "module": "AISafetyAtlas.Causal.SparseEncoding"
-    },
-    {
-      "name": "AISafetyAtlas.Causal.IsPrefixCode.injective",
-      "kind": "theorem",
-      "module": "AISafetyAtlas.Causal.SparseEncoding"
-    },
-    {
-      "name": "AISafetyAtlas.Causal.IsPrefixCode.list",
-      "kind": "theorem",
-      "module": "AISafetyAtlas.Causal.SparseEncoding"
-    },
-    {
-      "name": "AISafetyAtlas.Causal.IsPrefixCode.ofBoolList",
-      "kind": "theorem",
-      "module": "AISafetyAtlas.Causal.SparseEncoding"
-    },
-    {
-      "name": "AISafetyAtlas.Causal.IsPrefixCode.pair",
-      "kind": "theorem",
-      "module": "AISafetyAtlas.Causal.SparseEncoding"
-    },
-    {
       "name": "AISafetyAtlas.Causal.IsProbabilityMixture",
       "kind": "def",
       "module": "AISafetyAtlas.Causal.Model"
@@ -504,36 +629,6 @@
       "name": "AISafetyAtlas.Causal.IsRadius",
       "kind": "def",
       "module": "AISafetyAtlas.Causal.Decision"
-    },
-    {
-      "name": "AISafetyAtlas.Causal.IsSemialgebraic",
-      "kind": "def",
-      "module": "AISafetyAtlas.Causal.Semialgebraic"
-    },
-    {
-      "name": "AISafetyAtlas.Causal.IsSemialgebraic.basic",
-      "kind": "theorem",
-      "module": "AISafetyAtlas.Causal.Semialgebraic"
-    },
-    {
-      "name": "AISafetyAtlas.Causal.IsSemialgebraic.compl",
-      "kind": "theorem",
-      "module": "AISafetyAtlas.Causal.Semialgebraic"
-    },
-    {
-      "name": "AISafetyAtlas.Causal.IsSemialgebraic.inter",
-      "kind": "theorem",
-      "module": "AISafetyAtlas.Causal.Semialgebraic"
-    },
-    {
-      "name": "AISafetyAtlas.Causal.IsSemialgebraic.sdiff",
-      "kind": "theorem",
-      "module": "AISafetyAtlas.Causal.Semialgebraic"
-    },
-    {
-      "name": "AISafetyAtlas.Causal.IsSemialgebraic.union",
-      "kind": "theorem",
-      "module": "AISafetyAtlas.Causal.Semialgebraic"
     },
     {
       "name": "AISafetyAtlas.Causal.LocalIntervention",
@@ -564,6 +659,11 @@
       "name": "AISafetyAtlas.Causal.Mixture",
       "kind": "def",
       "module": "AISafetyAtlas.Causal.Model"
+    },
+    {
+      "name": "AISafetyAtlas.Causal.Mixture.congr_simp",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Causal.Query"
     },
     {
       "name": "AISafetyAtlas.Causal.Model",
@@ -1521,6 +1621,11 @@
       "module": "AISafetyAtlas.Causal.Decision"
     },
     {
+      "name": "AISafetyAtlas.Causal.Policy.congr_simp",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Causal.Query"
+    },
+    {
       "name": "AISafetyAtlas.Causal.Policy.const",
       "kind": "def",
       "module": "AISafetyAtlas.Causal.Decision"
@@ -1571,49 +1676,14 @@
       "module": "AISafetyAtlas.Causal.Decision"
     },
     {
-      "name": "AISafetyAtlas.Causal.PolySign",
-      "kind": "inductive",
-      "module": "AISafetyAtlas.Causal.Semialgebraic"
-    },
-    {
-      "name": "AISafetyAtlas.Causal.PolySign.Holds",
-      "kind": "def",
-      "module": "AISafetyAtlas.Causal.Semialgebraic"
-    },
-    {
-      "name": "AISafetyAtlas.Causal.PolySign.nonneg",
-      "kind": "constructor",
-      "module": "AISafetyAtlas.Causal.Semialgebraic"
-    },
-    {
-      "name": "AISafetyAtlas.Causal.PolySign.nonneg.elim",
-      "kind": "def",
-      "module": "AISafetyAtlas.Causal.Semialgebraic"
-    },
-    {
-      "name": "AISafetyAtlas.Causal.PolySign.pos",
-      "kind": "constructor",
-      "module": "AISafetyAtlas.Causal.Semialgebraic"
-    },
-    {
-      "name": "AISafetyAtlas.Causal.PolySign.pos.elim",
-      "kind": "def",
-      "module": "AISafetyAtlas.Causal.Semialgebraic"
-    },
-    {
-      "name": "AISafetyAtlas.Causal.PolySign.zero",
-      "kind": "constructor",
-      "module": "AISafetyAtlas.Causal.Semialgebraic"
-    },
-    {
-      "name": "AISafetyAtlas.Causal.PolySign.zero.elim",
-      "kind": "def",
-      "module": "AISafetyAtlas.Causal.Semialgebraic"
-    },
-    {
       "name": "AISafetyAtlas.Causal.ProbMixture",
       "kind": "def",
       "module": "AISafetyAtlas.Causal.Model"
+    },
+    {
+      "name": "AISafetyAtlas.Causal.ProbMixture.congr_simp",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Causal.Query"
     },
     {
       "name": "AISafetyAtlas.Causal.ProbMixture.dirac",
@@ -1639,6 +1709,11 @@
       "name": "AISafetyAtlas.Causal.RandomizedEstimator",
       "kind": "def",
       "module": "AISafetyAtlas.Causal.Query"
+    },
+    {
+      "name": "AISafetyAtlas.Causal.RandomizedEstimator.congr_simp",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Causal.Query"
     },
     {
       "name": "AISafetyAtlas.Causal.RandomizedEstimator.toMeasureEstimator",
@@ -1991,11 +2066,6 @@
       "module": "AISafetyAtlas.Causal.StructuralModel"
     },
     {
-      "name": "AISafetyAtlas.Causal.Semialgebraic",
-      "kind": "module",
-      "module": "AISafetyAtlas.Causal.Semialgebraic"
-    },
-    {
       "name": "AISafetyAtlas.Causal.ShiftedQuery",
       "kind": "inductive",
       "module": "AISafetyAtlas.Causal.Query"
@@ -2301,21 +2371,6 @@
       "module": "AISafetyAtlas.Causal.MarginClass"
     },
     {
-      "name": "AISafetyAtlas.Causal.SparseEncoding",
-      "kind": "module",
-      "module": "AISafetyAtlas.Causal.SparseEncoding"
-    },
-    {
-      "name": "AISafetyAtlas.Causal.SparseMonomial",
-      "kind": "def",
-      "module": "AISafetyAtlas.Causal.SparseEncoding"
-    },
-    {
-      "name": "AISafetyAtlas.Causal.SparsePoly",
-      "kind": "def",
-      "module": "AISafetyAtlas.Causal.SparseEncoding"
-    },
-    {
       "name": "AISafetyAtlas.Causal.StructuralModel",
       "kind": "module",
       "module": "AISafetyAtlas.Causal.StructuralModel"
@@ -2351,11 +2406,6 @@
       "module": "AISafetyAtlas.Causal.Model"
     },
     {
-      "name": "AISafetyAtlas.Causal.basicSemialgebraic_union",
-      "kind": "theorem",
-      "module": "AISafetyAtlas.Causal.Semialgebraic"
-    },
-    {
       "name": "AISafetyAtlas.Causal.binaryDim",
       "kind": "def",
       "module": "AISafetyAtlas.Causal.Model"
@@ -2379,11 +2429,6 @@
       "name": "AISafetyAtlas.Causal.binary_eq_zero_or_one",
       "kind": "theorem",
       "module": "AISafetyAtlas.Causal.ParameterChart"
-    },
-    {
-      "name": "AISafetyAtlas.Causal.bits_injective",
-      "kind": "theorem",
-      "module": "AISafetyAtlas.Causal.SparseEncoding"
     },
     {
       "name": "AISafetyAtlas.Causal.card_binaryLocalIntervention",
@@ -2501,69 +2546,14 @@
       "module": "AISafetyAtlas.Causal.EffectiveGenericity"
     },
     {
-      "name": "AISafetyAtlas.Causal.encodeBoolList",
-      "kind": "def",
-      "module": "AISafetyAtlas.Causal.SparseEncoding"
-    },
-    {
-      "name": "AISafetyAtlas.Causal.encodeBoolList_takeWhile",
-      "kind": "theorem",
-      "module": "AISafetyAtlas.Causal.SparseEncoding"
-    },
-    {
       "name": "AISafetyAtlas.Causal.encodeFinsetFin",
       "kind": "def",
       "module": "AISafetyAtlas.Causal.EffectiveGenericity"
     },
     {
-      "name": "AISafetyAtlas.Causal.encodeInt",
-      "kind": "def",
-      "module": "AISafetyAtlas.Causal.SparseEncoding"
-    },
-    {
-      "name": "AISafetyAtlas.Causal.encodeList",
-      "kind": "def",
-      "module": "AISafetyAtlas.Causal.SparseEncoding"
-    },
-    {
-      "name": "AISafetyAtlas.Causal.encodeMonomial",
-      "kind": "def",
-      "module": "AISafetyAtlas.Causal.SparseEncoding"
-    },
-    {
-      "name": "AISafetyAtlas.Causal.encodeNat",
-      "kind": "def",
-      "module": "AISafetyAtlas.Causal.SparseEncoding"
-    },
-    {
       "name": "AISafetyAtlas.Causal.encodeO24Var",
       "kind": "def",
       "module": "AISafetyAtlas.Causal.EffectiveGenericity"
-    },
-    {
-      "name": "AISafetyAtlas.Causal.encodeRat",
-      "kind": "def",
-      "module": "AISafetyAtlas.Causal.SparseEncoding"
-    },
-    {
-      "name": "AISafetyAtlas.Causal.encodeSparseList",
-      "kind": "def",
-      "module": "AISafetyAtlas.Causal.SparseEncoding"
-    },
-    {
-      "name": "AISafetyAtlas.Causal.encodeSparseList_injective",
-      "kind": "theorem",
-      "module": "AISafetyAtlas.Causal.SparseEncoding"
-    },
-    {
-      "name": "AISafetyAtlas.Causal.encodeSparsePoly",
-      "kind": "def",
-      "module": "AISafetyAtlas.Causal.SparseEncoding"
-    },
-    {
-      "name": "AISafetyAtlas.Causal.encodeVarPow",
-      "kind": "def",
-      "module": "AISafetyAtlas.Causal.SparseEncoding"
     },
     {
       "name": "AISafetyAtlas.Causal.eq_family_of_isCausalBayesNetwork",
@@ -2582,6 +2572,11 @@
     },
     {
       "name": "AISafetyAtlas.Causal.exactAnalystRisk_discretize_le",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Causal.Query"
+    },
+    {
+      "name": "AISafetyAtlas.Causal.exactAnalystRisk_empty",
       "kind": "theorem",
       "module": "AISafetyAtlas.Causal.Query"
     },
@@ -2736,6 +2731,11 @@
       "module": "AISafetyAtlas.Causal.Model"
     },
     {
+      "name": "AISafetyAtlas.Causal.inIdentifiedSet_mono",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Causal.Decision"
+    },
+    {
       "name": "AISafetyAtlas.Causal.inIdentifiedSet_self",
       "kind": "theorem",
       "module": "AISafetyAtlas.Causal.Decision"
@@ -2756,34 +2756,9 @@
       "module": "AISafetyAtlas.Causal.Query"
     },
     {
-      "name": "AISafetyAtlas.Causal.instDecidableEqCodeSym",
-      "kind": "def",
-      "module": "AISafetyAtlas.Causal.SparseEncoding"
-    },
-    {
       "name": "AISafetyAtlas.Causal.instDecidableEqNodeKind",
       "kind": "def",
       "module": "AISafetyAtlas.Causal.StructuralModel"
-    },
-    {
-      "name": "AISafetyAtlas.Causal.instDecidableEqPolySign",
-      "kind": "def",
-      "module": "AISafetyAtlas.Causal.Semialgebraic"
-    },
-    {
-      "name": "AISafetyAtlas.Causal.instFintypeCodeSym",
-      "kind": "def",
-      "module": "AISafetyAtlas.Causal.SparseEncoding"
-    },
-    {
-      "name": "AISafetyAtlas.Causal.instInhabitedCodeSym",
-      "kind": "def",
-      "module": "AISafetyAtlas.Causal.SparseEncoding"
-    },
-    {
-      "name": "AISafetyAtlas.Causal.instInhabitedCodeSym.default",
-      "kind": "def",
-      "module": "AISafetyAtlas.Causal.SparseEncoding"
     },
     {
       "name": "AISafetyAtlas.Causal.instMeasurableSingletonClassModel",
@@ -2826,19 +2801,9 @@
       "module": "AISafetyAtlas.Causal.BayesianNetwork"
     },
     {
-      "name": "AISafetyAtlas.Causal.isCompact_closedBox",
-      "kind": "theorem",
-      "module": "AISafetyAtlas.Causal.Semialgebraic"
-    },
-    {
       "name": "AISafetyAtlas.Causal.isCompatibleGraph_parents",
       "kind": "theorem",
       "module": "AISafetyAtlas.Causal.EffectiveGenericity"
-    },
-    {
-      "name": "AISafetyAtlas.Causal.isPrefixCode_encodeBoolList",
-      "kind": "theorem",
-      "module": "AISafetyAtlas.Causal.SparseEncoding"
     },
     {
       "name": "AISafetyAtlas.Causal.isPrefixCode_encodeFinsetFin",
@@ -2846,74 +2811,9 @@
       "module": "AISafetyAtlas.Causal.EffectiveGenericity"
     },
     {
-      "name": "AISafetyAtlas.Causal.isPrefixCode_encodeInt",
-      "kind": "theorem",
-      "module": "AISafetyAtlas.Causal.SparseEncoding"
-    },
-    {
-      "name": "AISafetyAtlas.Causal.isPrefixCode_encodeMonomial",
-      "kind": "theorem",
-      "module": "AISafetyAtlas.Causal.SparseEncoding"
-    },
-    {
-      "name": "AISafetyAtlas.Causal.isPrefixCode_encodeNat",
-      "kind": "theorem",
-      "module": "AISafetyAtlas.Causal.SparseEncoding"
-    },
-    {
       "name": "AISafetyAtlas.Causal.isPrefixCode_encodeO24Var",
       "kind": "theorem",
       "module": "AISafetyAtlas.Causal.EffectiveGenericity"
-    },
-    {
-      "name": "AISafetyAtlas.Causal.isPrefixCode_encodeRat",
-      "kind": "theorem",
-      "module": "AISafetyAtlas.Causal.SparseEncoding"
-    },
-    {
-      "name": "AISafetyAtlas.Causal.isPrefixCode_encodeSparseList",
-      "kind": "theorem",
-      "module": "AISafetyAtlas.Causal.SparseEncoding"
-    },
-    {
-      "name": "AISafetyAtlas.Causal.isPrefixCode_encodeSparsePoly",
-      "kind": "theorem",
-      "module": "AISafetyAtlas.Causal.SparseEncoding"
-    },
-    {
-      "name": "AISafetyAtlas.Causal.isPrefixCode_encodeVarPow",
-      "kind": "theorem",
-      "module": "AISafetyAtlas.Causal.SparseEncoding"
-    },
-    {
-      "name": "AISafetyAtlas.Causal.isSemialgebraic_biInter",
-      "kind": "theorem",
-      "module": "AISafetyAtlas.Causal.Semialgebraic"
-    },
-    {
-      "name": "AISafetyAtlas.Causal.isSemialgebraic_biUnion",
-      "kind": "theorem",
-      "module": "AISafetyAtlas.Causal.Semialgebraic"
-    },
-    {
-      "name": "AISafetyAtlas.Causal.isSemialgebraic_closedBox",
-      "kind": "theorem",
-      "module": "AISafetyAtlas.Causal.Semialgebraic"
-    },
-    {
-      "name": "AISafetyAtlas.Causal.isSemialgebraic_compl_basic",
-      "kind": "theorem",
-      "module": "AISafetyAtlas.Causal.Semialgebraic"
-    },
-    {
-      "name": "AISafetyAtlas.Causal.isSemialgebraic_empty",
-      "kind": "theorem",
-      "module": "AISafetyAtlas.Causal.Semialgebraic"
-    },
-    {
-      "name": "AISafetyAtlas.Causal.isSemialgebraic_not_holds",
-      "kind": "theorem",
-      "module": "AISafetyAtlas.Causal.Semialgebraic"
     },
     {
       "name": "AISafetyAtlas.Causal.isSemialgebraic_of_containsChartBox",
@@ -2921,14 +2821,14 @@
       "module": "AISafetyAtlas.Causal.ParameterChart"
     },
     {
-      "name": "AISafetyAtlas.Causal.isSemialgebraic_univ",
-      "kind": "theorem",
-      "module": "AISafetyAtlas.Causal.Semialgebraic"
-    },
-    {
       "name": "AISafetyAtlas.Causal.jointProb_sum_two",
       "kind": "theorem",
       "module": "AISafetyAtlas.Causal.Model"
+    },
+    {
+      "name": "AISafetyAtlas.Causal.le_pmfExpect",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Causal.Query"
     },
     {
       "name": "AISafetyAtlas.Causal.measurableSet_parents_eq",
@@ -3121,19 +3021,9 @@
       "module": "AISafetyAtlas.Causal.EffectiveGenericity"
     },
     {
-      "name": "AISafetyAtlas.Causal.ofSparseMonomial",
-      "kind": "def",
-      "module": "AISafetyAtlas.Causal.SparseEncoding"
-    },
-    {
-      "name": "AISafetyAtlas.Causal.ofSparsePoly",
-      "kind": "def",
-      "module": "AISafetyAtlas.Causal.SparseEncoding"
-    },
-    {
-      "name": "AISafetyAtlas.Causal.ofSparsePoly_nil",
+      "name": "AISafetyAtlas.Causal.one_le_modelError_add",
       "kind": "theorem",
-      "module": "AISafetyAtlas.Causal.SparseEncoding"
+      "module": "AISafetyAtlas.Causal.Decision"
     },
     {
       "name": "AISafetyAtlas.Causal.optimalPolicyFamily",
@@ -3143,6 +3033,11 @@
     {
       "name": "AISafetyAtlas.Causal.pmfExpect",
       "kind": "def",
+      "module": "AISafetyAtlas.Causal.Query"
+    },
+    {
+      "name": "AISafetyAtlas.Causal.pmfExpect_add",
+      "kind": "theorem",
       "module": "AISafetyAtlas.Causal.Query"
     },
     {
@@ -3201,11 +3096,6 @@
       "module": "AISafetyAtlas.Causal.Query"
     },
     {
-      "name": "AISafetyAtlas.Causal.sparseExponents",
-      "kind": "def",
-      "module": "AISafetyAtlas.Causal.SparseEncoding"
-    },
-    {
       "name": "AISafetyAtlas.Causal.sub_floorMul_lt",
       "kind": "theorem",
       "module": "AISafetyAtlas.Causal.ModelSpace"
@@ -3224,11 +3114,6 @@
       "name": "AISafetyAtlas.Causal.sup'_sub_inf'_bool",
       "kind": "theorem",
       "module": "AISafetyAtlas.Causal.MarginClass"
-    },
-    {
-      "name": "AISafetyAtlas.Causal.takeWhile_digits_append",
-      "kind": "theorem",
-      "module": "AISafetyAtlas.Causal.SparseEncoding"
     },
     {
       "name": "AISafetyAtlas.Causal.utilityBox",
@@ -5061,6 +4946,131 @@
       "module": "AISafetyAtlas.Control.OpenLoopAttainment"
     },
     {
+      "name": "AISafetyAtlas.Examples.Analysis.PolynomialGenericity",
+      "kind": "module",
+      "module": "AISafetyAtlas.Examples.Analysis.PolynomialGenericity"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Analysis.Semialgebraic",
+      "kind": "module",
+      "module": "AISafetyAtlas.Examples.Analysis.Semialgebraic"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Analysis.Semialgebraic.axis",
+      "kind": "def",
+      "module": "AISafetyAtlas.Examples.Analysis.Semialgebraic"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Analysis.Semialgebraic.axis_compl_eq",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Analysis.Semialgebraic"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Analysis.Semialgebraic.axis_compl_semialgebraic",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Analysis.Semialgebraic"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Analysis.Semialgebraic.boxes_biInter_semialgebraic",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Analysis.Semialgebraic"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Analysis.Semialgebraic.empty_and_univ_semialgebraic",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Analysis.Semialgebraic"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Analysis.Semialgebraic.halfPlane",
+      "kind": "def",
+      "module": "AISafetyAtlas.Examples.Analysis.Semialgebraic"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Analysis.Semialgebraic.halfPlane_not_compact",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Analysis.Semialgebraic"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Analysis.Semialgebraic.halfPlane_sdiff_unitSquare_semialgebraic",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Analysis.Semialgebraic"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Analysis.Semialgebraic.halfPlane_semialgebraic",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Analysis.Semialgebraic"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Analysis.Semialgebraic.mem_axis",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Analysis.Semialgebraic"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Analysis.Semialgebraic.mem_axis_compl",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Analysis.Semialgebraic"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Analysis.Semialgebraic.mem_halfPlane",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Analysis.Semialgebraic"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Analysis.Semialgebraic.mem_halfPlane_sdiff_unitSquare",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Analysis.Semialgebraic"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Analysis.Semialgebraic.mem_unitSquare",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Analysis.Semialgebraic"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Analysis.Semialgebraic.twoBoxes_inter_semialgebraic",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Analysis.Semialgebraic"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Analysis.Semialgebraic.twoBoxes_semialgebraic",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Analysis.Semialgebraic"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Analysis.Semialgebraic.unitSquare",
+      "kind": "def",
+      "module": "AISafetyAtlas.Examples.Analysis.Semialgebraic"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Analysis.Semialgebraic.unitSquare_compact",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Analysis.Semialgebraic"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Analysis.Semialgebraic.unitSquare_semialgebraic",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Analysis.Semialgebraic"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Analysis.ae_det_ne_zero",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Analysis.PolynomialGenericity"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Analysis.ae_eval_ne_zero_two",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Analysis.PolynomialGenericity"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Analysis.ae_isUnit_det",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Analysis.PolynomialGenericity"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Analysis.not_ae_eval_ne_zero_zero",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Analysis.PolynomialGenericity"
+    },
+    {
       "name": "AISafetyAtlas.Examples.Causal.BayesianNetwork",
       "kind": "module",
       "module": "AISafetyAtlas.Examples.Causal.BayesianNetwork"
@@ -5676,6 +5686,11 @@
       "module": "AISafetyAtlas.Examples.Causal.Query"
     },
     {
+      "name": "AISafetyAtlas.Examples.Causal.Query.exactMinimalBudget_emptyClass",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Causal.Query"
+    },
+    {
       "name": "AISafetyAtlas.Examples.Causal.Query.exactMinimalBudget_of_empty",
       "kind": "theorem",
       "module": "AISafetyAtlas.Examples.Causal.Query"
@@ -5709,176 +5724,6 @@
       "name": "AISafetyAtlas.Examples.Causal.Query.trivialQuery_mix_rational",
       "kind": "theorem",
       "module": "AISafetyAtlas.Examples.Causal.Query"
-    },
-    {
-      "name": "AISafetyAtlas.Examples.Causal.Semialgebraic",
-      "kind": "module",
-      "module": "AISafetyAtlas.Examples.Causal.Semialgebraic"
-    },
-    {
-      "name": "AISafetyAtlas.Examples.Causal.Semialgebraic.axis",
-      "kind": "def",
-      "module": "AISafetyAtlas.Examples.Causal.Semialgebraic"
-    },
-    {
-      "name": "AISafetyAtlas.Examples.Causal.Semialgebraic.axis_compl_eq",
-      "kind": "theorem",
-      "module": "AISafetyAtlas.Examples.Causal.Semialgebraic"
-    },
-    {
-      "name": "AISafetyAtlas.Examples.Causal.Semialgebraic.axis_compl_semialgebraic",
-      "kind": "theorem",
-      "module": "AISafetyAtlas.Examples.Causal.Semialgebraic"
-    },
-    {
-      "name": "AISafetyAtlas.Examples.Causal.Semialgebraic.boxes_biInter_semialgebraic",
-      "kind": "theorem",
-      "module": "AISafetyAtlas.Examples.Causal.Semialgebraic"
-    },
-    {
-      "name": "AISafetyAtlas.Examples.Causal.Semialgebraic.empty_and_univ_semialgebraic",
-      "kind": "theorem",
-      "module": "AISafetyAtlas.Examples.Causal.Semialgebraic"
-    },
-    {
-      "name": "AISafetyAtlas.Examples.Causal.Semialgebraic.halfPlane",
-      "kind": "def",
-      "module": "AISafetyAtlas.Examples.Causal.Semialgebraic"
-    },
-    {
-      "name": "AISafetyAtlas.Examples.Causal.Semialgebraic.halfPlane_not_compact",
-      "kind": "theorem",
-      "module": "AISafetyAtlas.Examples.Causal.Semialgebraic"
-    },
-    {
-      "name": "AISafetyAtlas.Examples.Causal.Semialgebraic.halfPlane_sdiff_unitSquare_semialgebraic",
-      "kind": "theorem",
-      "module": "AISafetyAtlas.Examples.Causal.Semialgebraic"
-    },
-    {
-      "name": "AISafetyAtlas.Examples.Causal.Semialgebraic.halfPlane_semialgebraic",
-      "kind": "theorem",
-      "module": "AISafetyAtlas.Examples.Causal.Semialgebraic"
-    },
-    {
-      "name": "AISafetyAtlas.Examples.Causal.Semialgebraic.mem_axis",
-      "kind": "theorem",
-      "module": "AISafetyAtlas.Examples.Causal.Semialgebraic"
-    },
-    {
-      "name": "AISafetyAtlas.Examples.Causal.Semialgebraic.mem_axis_compl",
-      "kind": "theorem",
-      "module": "AISafetyAtlas.Examples.Causal.Semialgebraic"
-    },
-    {
-      "name": "AISafetyAtlas.Examples.Causal.Semialgebraic.mem_halfPlane",
-      "kind": "theorem",
-      "module": "AISafetyAtlas.Examples.Causal.Semialgebraic"
-    },
-    {
-      "name": "AISafetyAtlas.Examples.Causal.Semialgebraic.mem_halfPlane_sdiff_unitSquare",
-      "kind": "theorem",
-      "module": "AISafetyAtlas.Examples.Causal.Semialgebraic"
-    },
-    {
-      "name": "AISafetyAtlas.Examples.Causal.Semialgebraic.mem_unitSquare",
-      "kind": "theorem",
-      "module": "AISafetyAtlas.Examples.Causal.Semialgebraic"
-    },
-    {
-      "name": "AISafetyAtlas.Examples.Causal.Semialgebraic.twoBoxes_inter_semialgebraic",
-      "kind": "theorem",
-      "module": "AISafetyAtlas.Examples.Causal.Semialgebraic"
-    },
-    {
-      "name": "AISafetyAtlas.Examples.Causal.Semialgebraic.twoBoxes_semialgebraic",
-      "kind": "theorem",
-      "module": "AISafetyAtlas.Examples.Causal.Semialgebraic"
-    },
-    {
-      "name": "AISafetyAtlas.Examples.Causal.Semialgebraic.unitSquare",
-      "kind": "def",
-      "module": "AISafetyAtlas.Examples.Causal.Semialgebraic"
-    },
-    {
-      "name": "AISafetyAtlas.Examples.Causal.Semialgebraic.unitSquare_compact",
-      "kind": "theorem",
-      "module": "AISafetyAtlas.Examples.Causal.Semialgebraic"
-    },
-    {
-      "name": "AISafetyAtlas.Examples.Causal.Semialgebraic.unitSquare_semialgebraic",
-      "kind": "theorem",
-      "module": "AISafetyAtlas.Examples.Causal.Semialgebraic"
-    },
-    {
-      "name": "AISafetyAtlas.Examples.Causal.SparseEncoding",
-      "kind": "module",
-      "module": "AISafetyAtlas.Examples.Causal.SparseEncoding"
-    },
-    {
-      "name": "AISafetyAtlas.Examples.Causal.SparseEncoding.encodeNat_injective",
-      "kind": "theorem",
-      "module": "AISafetyAtlas.Examples.Causal.SparseEncoding"
-    },
-    {
-      "name": "AISafetyAtlas.Examples.Causal.SparseEncoding.encodeNat_one",
-      "kind": "theorem",
-      "module": "AISafetyAtlas.Examples.Causal.SparseEncoding"
-    },
-    {
-      "name": "AISafetyAtlas.Examples.Causal.SparseEncoding.encodeNat_two",
-      "kind": "theorem",
-      "module": "AISafetyAtlas.Examples.Causal.SparseEncoding"
-    },
-    {
-      "name": "AISafetyAtlas.Examples.Causal.SparseEncoding.encodeNat_zero",
-      "kind": "theorem",
-      "module": "AISafetyAtlas.Examples.Causal.SparseEncoding"
-    },
-    {
-      "name": "AISafetyAtlas.Examples.Causal.SparseEncoding.encodeNat_zero_zero",
-      "kind": "theorem",
-      "module": "AISafetyAtlas.Examples.Causal.SparseEncoding"
-    },
-    {
-      "name": "AISafetyAtlas.Examples.Causal.SparseEncoding.encodeRat_neg_one",
-      "kind": "theorem",
-      "module": "AISafetyAtlas.Examples.Causal.SparseEncoding"
-    },
-    {
-      "name": "AISafetyAtlas.Examples.Causal.SparseEncoding.encodeRat_one",
-      "kind": "theorem",
-      "module": "AISafetyAtlas.Examples.Causal.SparseEncoding"
-    },
-    {
-      "name": "AISafetyAtlas.Examples.Causal.SparseEncoding.encodeSparseList_nil",
-      "kind": "theorem",
-      "module": "AISafetyAtlas.Examples.Causal.SparseEncoding"
-    },
-    {
-      "name": "AISafetyAtlas.Examples.Causal.SparseEncoding.ofSparsePoly_const",
-      "kind": "theorem",
-      "module": "AISafetyAtlas.Examples.Causal.SparseEncoding"
-    },
-    {
-      "name": "AISafetyAtlas.Examples.Causal.SparseEncoding.ofSparsePoly_nil_eq_zero",
-      "kind": "theorem",
-      "module": "AISafetyAtlas.Examples.Causal.SparseEncoding"
-    },
-    {
-      "name": "AISafetyAtlas.Examples.Causal.SparseEncoding.ofSparsePoly_single",
-      "kind": "theorem",
-      "module": "AISafetyAtlas.Examples.Causal.SparseEncoding"
-    },
-    {
-      "name": "AISafetyAtlas.Examples.Causal.SparseEncoding.output_injective",
-      "kind": "theorem",
-      "module": "AISafetyAtlas.Examples.Causal.SparseEncoding"
-    },
-    {
-      "name": "AISafetyAtlas.Examples.Causal.SparseEncoding.prefix_splits_zero_zero",
-      "kind": "theorem",
-      "module": "AISafetyAtlas.Examples.Causal.SparseEncoding"
     },
     {
       "name": "AISafetyAtlas.Examples.Causal.StructuralModel",
@@ -8669,6 +8514,76 @@
       "name": "AISafetyAtlas.Examples.InformationTheory.Fano",
       "kind": "module",
       "module": "AISafetyAtlas.Examples.InformationTheory.Fano"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.InformationTheory.PrefixCode",
+      "kind": "module",
+      "module": "AISafetyAtlas.Examples.InformationTheory.PrefixCode"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.InformationTheory.PrefixCode.encodeNat_injective",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.InformationTheory.PrefixCode"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.InformationTheory.PrefixCode.encodeNat_one",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.InformationTheory.PrefixCode"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.InformationTheory.PrefixCode.encodeNat_two",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.InformationTheory.PrefixCode"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.InformationTheory.PrefixCode.encodeNat_zero",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.InformationTheory.PrefixCode"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.InformationTheory.PrefixCode.encodeNat_zero_zero",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.InformationTheory.PrefixCode"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.InformationTheory.PrefixCode.encodeRat_neg_one",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.InformationTheory.PrefixCode"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.InformationTheory.PrefixCode.encodeRat_one",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.InformationTheory.PrefixCode"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.InformationTheory.PrefixCode.encodeSparseList_nil",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.InformationTheory.PrefixCode"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.InformationTheory.PrefixCode.ofSparsePoly_const",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.InformationTheory.PrefixCode"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.InformationTheory.PrefixCode.ofSparsePoly_nil_eq_zero",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.InformationTheory.PrefixCode"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.InformationTheory.PrefixCode.ofSparsePoly_single",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.InformationTheory.PrefixCode"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.InformationTheory.PrefixCode.output_injective",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.InformationTheory.PrefixCode"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.InformationTheory.PrefixCode.prefix_splits_zero_zero",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.InformationTheory.PrefixCode"
     },
     {
       "name": "AISafetyAtlas.Examples.InformationTheory.TwoBits",
@@ -14466,6 +14381,61 @@
       "module": "AISafetyAtlas.InformationTheory.ChannelCapacity"
     },
     {
+      "name": "AISafetyAtlas.InformationTheory.CodeSym",
+      "kind": "inductive",
+      "module": "AISafetyAtlas.InformationTheory.PrefixCode"
+    },
+    {
+      "name": "AISafetyAtlas.InformationTheory.CodeSym.isDigit",
+      "kind": "def",
+      "module": "AISafetyAtlas.InformationTheory.PrefixCode"
+    },
+    {
+      "name": "AISafetyAtlas.InformationTheory.CodeSym.isDigit_ofBool",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.InformationTheory.PrefixCode"
+    },
+    {
+      "name": "AISafetyAtlas.InformationTheory.CodeSym.ofBool",
+      "kind": "def",
+      "module": "AISafetyAtlas.InformationTheory.PrefixCode"
+    },
+    {
+      "name": "AISafetyAtlas.InformationTheory.CodeSym.ofBool_injective",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.InformationTheory.PrefixCode"
+    },
+    {
+      "name": "AISafetyAtlas.InformationTheory.CodeSym.one",
+      "kind": "constructor",
+      "module": "AISafetyAtlas.InformationTheory.PrefixCode"
+    },
+    {
+      "name": "AISafetyAtlas.InformationTheory.CodeSym.one.elim",
+      "kind": "def",
+      "module": "AISafetyAtlas.InformationTheory.PrefixCode"
+    },
+    {
+      "name": "AISafetyAtlas.InformationTheory.CodeSym.sep",
+      "kind": "constructor",
+      "module": "AISafetyAtlas.InformationTheory.PrefixCode"
+    },
+    {
+      "name": "AISafetyAtlas.InformationTheory.CodeSym.sep.elim",
+      "kind": "def",
+      "module": "AISafetyAtlas.InformationTheory.PrefixCode"
+    },
+    {
+      "name": "AISafetyAtlas.InformationTheory.CodeSym.zero",
+      "kind": "constructor",
+      "module": "AISafetyAtlas.InformationTheory.PrefixCode"
+    },
+    {
+      "name": "AISafetyAtlas.InformationTheory.CodeSym.zero.elim",
+      "kind": "def",
+      "module": "AISafetyAtlas.InformationTheory.PrefixCode"
+    },
+    {
       "name": "AISafetyAtlas.InformationTheory.DataProcessing",
       "kind": "module",
       "module": "AISafetyAtlas.InformationTheory.DataProcessing"
@@ -14489,6 +14459,51 @@
       "name": "AISafetyAtlas.InformationTheory.IsMarkovChain.symm",
       "kind": "theorem",
       "module": "AISafetyAtlas.InformationTheory.DataProcessing"
+    },
+    {
+      "name": "AISafetyAtlas.InformationTheory.IsPrefixCode",
+      "kind": "def",
+      "module": "AISafetyAtlas.InformationTheory.PrefixCode"
+    },
+    {
+      "name": "AISafetyAtlas.InformationTheory.IsPrefixCode.injective",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.InformationTheory.PrefixCode"
+    },
+    {
+      "name": "AISafetyAtlas.InformationTheory.IsPrefixCode.list",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.InformationTheory.PrefixCode"
+    },
+    {
+      "name": "AISafetyAtlas.InformationTheory.IsPrefixCode.ofBoolList",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.InformationTheory.PrefixCode"
+    },
+    {
+      "name": "AISafetyAtlas.InformationTheory.IsPrefixCode.pair",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.InformationTheory.PrefixCode"
+    },
+    {
+      "name": "AISafetyAtlas.InformationTheory.PrefixCode",
+      "kind": "module",
+      "module": "AISafetyAtlas.InformationTheory.PrefixCode"
+    },
+    {
+      "name": "AISafetyAtlas.InformationTheory.SparseMonomial",
+      "kind": "def",
+      "module": "AISafetyAtlas.InformationTheory.PrefixCode"
+    },
+    {
+      "name": "AISafetyAtlas.InformationTheory.SparsePoly",
+      "kind": "def",
+      "module": "AISafetyAtlas.InformationTheory.PrefixCode"
+    },
+    {
+      "name": "AISafetyAtlas.InformationTheory.bits_injective",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.InformationTheory.PrefixCode"
     },
     {
       "name": "AISafetyAtlas.InformationTheory.channelCapacity",
@@ -14561,6 +14576,61 @@
       "module": "AISafetyAtlas.InformationTheory.DataProcessing"
     },
     {
+      "name": "AISafetyAtlas.InformationTheory.encodeBoolList",
+      "kind": "def",
+      "module": "AISafetyAtlas.InformationTheory.PrefixCode"
+    },
+    {
+      "name": "AISafetyAtlas.InformationTheory.encodeBoolList_takeWhile",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.InformationTheory.PrefixCode"
+    },
+    {
+      "name": "AISafetyAtlas.InformationTheory.encodeInt",
+      "kind": "def",
+      "module": "AISafetyAtlas.InformationTheory.PrefixCode"
+    },
+    {
+      "name": "AISafetyAtlas.InformationTheory.encodeList",
+      "kind": "def",
+      "module": "AISafetyAtlas.InformationTheory.PrefixCode"
+    },
+    {
+      "name": "AISafetyAtlas.InformationTheory.encodeMonomial",
+      "kind": "def",
+      "module": "AISafetyAtlas.InformationTheory.PrefixCode"
+    },
+    {
+      "name": "AISafetyAtlas.InformationTheory.encodeNat",
+      "kind": "def",
+      "module": "AISafetyAtlas.InformationTheory.PrefixCode"
+    },
+    {
+      "name": "AISafetyAtlas.InformationTheory.encodeRat",
+      "kind": "def",
+      "module": "AISafetyAtlas.InformationTheory.PrefixCode"
+    },
+    {
+      "name": "AISafetyAtlas.InformationTheory.encodeSparseList",
+      "kind": "def",
+      "module": "AISafetyAtlas.InformationTheory.PrefixCode"
+    },
+    {
+      "name": "AISafetyAtlas.InformationTheory.encodeSparseList_injective",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.InformationTheory.PrefixCode"
+    },
+    {
+      "name": "AISafetyAtlas.InformationTheory.encodeSparsePoly",
+      "kind": "def",
+      "module": "AISafetyAtlas.InformationTheory.PrefixCode"
+    },
+    {
+      "name": "AISafetyAtlas.InformationTheory.encodeVarPow",
+      "kind": "def",
+      "module": "AISafetyAtlas.InformationTheory.PrefixCode"
+    },
+    {
       "name": "AISafetyAtlas.InformationTheory.entropy_cond_errorPair_false",
       "kind": "theorem",
       "module": "AISafetyAtlas.InformationTheory.Fano"
@@ -14626,9 +14696,29 @@
       "module": "AISafetyAtlas.InformationTheory.Fano"
     },
     {
+      "name": "AISafetyAtlas.InformationTheory.instDecidableEqCodeSym",
+      "kind": "def",
+      "module": "AISafetyAtlas.InformationTheory.PrefixCode"
+    },
+    {
       "name": "AISafetyAtlas.InformationTheory.instFiniteRangeErrorPair",
       "kind": "theorem",
       "module": "AISafetyAtlas.InformationTheory.Fano"
+    },
+    {
+      "name": "AISafetyAtlas.InformationTheory.instFintypeCodeSym",
+      "kind": "def",
+      "module": "AISafetyAtlas.InformationTheory.PrefixCode"
+    },
+    {
+      "name": "AISafetyAtlas.InformationTheory.instInhabitedCodeSym",
+      "kind": "def",
+      "module": "AISafetyAtlas.InformationTheory.PrefixCode"
+    },
+    {
+      "name": "AISafetyAtlas.InformationTheory.instInhabitedCodeSym.default",
+      "kind": "def",
+      "module": "AISafetyAtlas.InformationTheory.PrefixCode"
     },
     {
       "name": "AISafetyAtlas.InformationTheory.isMarkovChain_comp",
@@ -14649,6 +14739,46 @@
       "name": "AISafetyAtlas.InformationTheory.isMarkovChain_iff_measure_factorizes_singleton",
       "kind": "theorem",
       "module": "AISafetyAtlas.InformationTheory.DataProcessing"
+    },
+    {
+      "name": "AISafetyAtlas.InformationTheory.isPrefixCode_encodeBoolList",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.InformationTheory.PrefixCode"
+    },
+    {
+      "name": "AISafetyAtlas.InformationTheory.isPrefixCode_encodeInt",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.InformationTheory.PrefixCode"
+    },
+    {
+      "name": "AISafetyAtlas.InformationTheory.isPrefixCode_encodeMonomial",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.InformationTheory.PrefixCode"
+    },
+    {
+      "name": "AISafetyAtlas.InformationTheory.isPrefixCode_encodeNat",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.InformationTheory.PrefixCode"
+    },
+    {
+      "name": "AISafetyAtlas.InformationTheory.isPrefixCode_encodeRat",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.InformationTheory.PrefixCode"
+    },
+    {
+      "name": "AISafetyAtlas.InformationTheory.isPrefixCode_encodeSparseList",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.InformationTheory.PrefixCode"
+    },
+    {
+      "name": "AISafetyAtlas.InformationTheory.isPrefixCode_encodeSparsePoly",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.InformationTheory.PrefixCode"
+    },
+    {
+      "name": "AISafetyAtlas.InformationTheory.isPrefixCode_encodeVarPow",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.InformationTheory.PrefixCode"
     },
     {
       "name": "AISafetyAtlas.InformationTheory.le_errorProb",
@@ -14746,6 +14876,21 @@
       "module": "AISafetyAtlas.InformationTheory.DataProcessing"
     },
     {
+      "name": "AISafetyAtlas.InformationTheory.ofSparseMonomial",
+      "kind": "def",
+      "module": "AISafetyAtlas.InformationTheory.PrefixCode"
+    },
+    {
+      "name": "AISafetyAtlas.InformationTheory.ofSparsePoly",
+      "kind": "def",
+      "module": "AISafetyAtlas.InformationTheory.PrefixCode"
+    },
+    {
+      "name": "AISafetyAtlas.InformationTheory.ofSparsePoly_nil",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.InformationTheory.PrefixCode"
+    },
+    {
       "name": "AISafetyAtlas.InformationTheory.preimage_errorIndicator_false",
       "kind": "theorem",
       "module": "AISafetyAtlas.InformationTheory.Fano"
@@ -14756,9 +14901,19 @@
       "module": "AISafetyAtlas.InformationTheory.Fano"
     },
     {
+      "name": "AISafetyAtlas.InformationTheory.sparseExponents",
+      "kind": "def",
+      "module": "AISafetyAtlas.InformationTheory.PrefixCode"
+    },
+    {
       "name": "AISafetyAtlas.InformationTheory.sum_errorPair_true",
       "kind": "theorem",
       "module": "AISafetyAtlas.InformationTheory.Fano"
+    },
+    {
+      "name": "AISafetyAtlas.InformationTheory.takeWhile_digits_append",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.InformationTheory.PrefixCode"
     },
     {
       "name": "AISafetyAtlas.Knowledge",

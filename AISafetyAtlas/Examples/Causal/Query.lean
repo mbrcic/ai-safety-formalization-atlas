@@ -129,4 +129,19 @@ public theorem exactMinimalBudget_of_empty
   unfold exactMinimalBudget
   rw [hempty, sInf_empty]
 
+/-- On an empty model class, every nonnegative target is achieved with zero
+queries. This is the `sSup ∅ = 0` convention propagated through the actual
+randomized minimax and `ℕ∞` budget definitions used by MAIS-O26. -/
+public theorem exactMinimalBudget_emptyClass {m : ℕ}
+    (sk : Skeleton (Fin (m + 1)) (binaryDim (Fin (m + 1))) Bool ℝ)
+    (ε : ℝ) (hε : 0 ≤ ε) :
+    exactMinimalBudget sk
+      (∅ : Set (Model (Fin (m + 1)) (binaryDim (Fin (m + 1))) ℝ)) ε = 0 := by
+  unfold exactMinimalBudget exactMinimaxRisk
+  simp [hε]
+  apply le_antisymm
+  · apply sInf_le
+    exact ⟨0, rfl⟩
+  · exact bot_le
+
 end AISafetyAtlas.Examples.Causal.Query

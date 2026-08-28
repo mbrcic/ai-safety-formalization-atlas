@@ -9,10 +9,23 @@ strict-trust grep to a kernel check.
 Scope, stated exactly, because an earlier version claimed more than it did:
 every `public theorem` and `public lemma` declared inside a namespace in a
 module reachable through public `AISafetyAtlas.*` facade imports, **plus** the
-facades named in `OFF_ROOT_FACADES` and their own public closures. Declarations
+facades named in `OFF_ROOT_FACADES` and their own public closures, **plus** the
+off-root build targets and everything they import, where `public def`,
+`public abbrev` and `public structure` are audited as well. Declarations
 introduced any other way are outside it — so `check_ledger_coverage` asserts
 that every declaration the registry publishes falls inside, rather than leaving
-that to the coincidence that published results happen to use these keywords.
+that to the coincidence that published results happen to use these keywords,
+and `check_every_module_audited` asserts that no `.lean` under `AISafetyAtlas/`
+sits outside the audited set at all.
+
+Two of those clauses arrived on 2026-08-24 and each closed a gap that was
+latent rather than live. The consumer set was the *literal* list of build
+targets, so a module compiled through a target without being named would have
+been audited by nothing; every conjecture module happened to be listed. And
+definitions were audited nowhere off the facade, which mattered little while a
+conjecture was a `Prop` with a one-line body and matters a great deal under the
+answer-construction design, where a "determine X" problem is a `def` over a
+candidate answer and the body is the whole of the statement.
 """
 
 from __future__ import annotations
@@ -52,6 +65,21 @@ END_RE = re.compile(r"^\s*end\s+([A-Za-z0-9_'.]+)\s*$")
 PUBLIC_THEOREM_RE = re.compile(
     r"^\s*public\s+(?:theorem|lemma)\s+([^\s:({\[]+)"
 )
+# Specifications are `def`s, not theorems, and the conjecture layer is about to
+# carry more of them: under the answer-construction design a "determine X"
+# problem is a `def` over a candidate answer, so its *body* is the mathematical
+# content and a `sorry` there would be invisible to a theorem-only scan. An
+# attribute may precede `public` on the same line (`@[expose] public …`), which
+# a `^\s*public` anchor silently skips.
+PUBLIC_DEF_RE = re.compile(
+    r"^\s*(?:@\[[^\]]*\]\s*)?public\s+(?:noncomputable\s+)?"
+    r"(?:def|abbrev|structure)\s+([^\s:({\[]+)"
+)
+# `facade_sources` follows `public import` because that is what re-exports a
+# declaration. A build target's own dependencies are reached by any import, so
+# the consumer closure needs the wider form or a module compiled through a
+# target -- and audited by nothing -- looks covered.
+ANY_IMPORT_RE = re.compile(r"^\s*(?:public\s+)?import\s+([A-Za-z0-9_'.]+)\s*$")
 
 
 def imported_atlas_modules(path: Path) -> list[str]:
@@ -60,6 +88,16 @@ def imported_atlas_modules(path: Path) -> list[str]:
         match.group(1)
         for line in path.read_text(encoding="utf-8").splitlines()
         if (match := PUBLIC_IMPORT_RE.match(line))
+        if match.group(1).startswith("AISafetyAtlas")
+    ]
+
+
+def all_atlas_imports(path: Path) -> list[str]:
+    """Every atlas import of one module, public or not."""
+    return [
+        match.group(1)
+        for line in path.read_text(encoding="utf-8").splitlines()
+        if (match := ANY_IMPORT_RE.match(line))
         if match.group(1).startswith("AISafetyAtlas")
     ]
 
@@ -102,8 +140,10 @@ def facade_sources() -> list[Path]:
     return paths
 
 
-def public_theorems_in(path: Path) -> list[str]:
-    """Extract fully qualified `public theorem` names from one facade module.
+def public_declarations_in(
+    path: Path, pattern: re.Pattern[str], kind: str
+) -> list[str]:
+    """Extract fully qualified names matching `pattern` from one module.
 
     Facade files use explicit namespaces. Named `end` commands pop only matching
     namespaces; section endings such as `end Operations` are intentionally
@@ -129,14 +169,24 @@ def public_theorems_in(path: Path) -> list[str]:
             elif namespace and namespace[-1] == name:
                 namespace.pop()
             continue
-        if match := PUBLIC_THEOREM_RE.match(line):
+        if match := pattern.match(line):
             if not namespace:
                 relative = path.relative_to(ROOT)
                 raise RuntimeError(
-                    f"{relative}:{line_number}: public theorem outside a namespace"
+                    f"{relative}:{line_number}: public {kind} outside a namespace"
                 )
             declarations.append(".".join(namespace + [match.group(1)]))
     return declarations
+
+
+def public_theorems_in(path: Path) -> list[str]:
+    """Fully qualified `public theorem` and `public lemma` names."""
+    return public_declarations_in(path, PUBLIC_THEOREM_RE, "theorem")
+
+
+def public_definitions_in(path: Path) -> list[str]:
+    """Fully qualified `public def`, `abbrev` and `structure` names."""
+    return public_declarations_in(path, PUBLIC_DEF_RE, "definition")
 
 
 BUILD_TARGETS = ROOT / "scripts" / "lean_build_targets.txt"
@@ -159,14 +209,26 @@ def consumer_sources() -> list[Path]:
         for line in BUILD_TARGETS.read_text(encoding="utf-8").splitlines()
         if line.strip() and not line.lstrip().startswith("#")
     ]
+    # Closure, not the literal list. `lake build` on a target compiles
+    # everything the target imports, so a module can be built, be off the root,
+    # and never be named here -- and until 2026-08-24 that module was audited by
+    # nothing. Every conjecture module happened to be listed individually, so
+    # the gap was latent rather than live; nothing made it stay that way.
+    pending = list(modules)
+    seen: set[str] = set()
     paths = []
-    for module in modules:
+    while pending:
+        module = pending.pop()
+        if module in seen:
+            continue
+        seen.add(module)
         path = ROOT / (module.replace(".", "/") + ".lean")
         if not path.is_file():
             raise RuntimeError(f"build target names missing module: {module}")
+        pending.extend(all_atlas_imports(path))
         if path not in facade:
             paths.append(path)
-    return paths
+    return sorted(paths)
 
 
 CONSUMER_MODULES = [
@@ -175,12 +237,47 @@ CONSUMER_MODULES = [
 ]
 
 
+def check_every_module_audited() -> None:
+    """No `.lean` under `AISafetyAtlas/` may sit outside the audited set.
+
+    The consumer closure above is the fix; this is the assertion that it stayed
+    fixed. A new off-root subtree reached by neither the facade nor a build
+    target would compile, pass the textual scanner, and be audited by nothing --
+    and the symptom would be a *smaller* number in a green run, which is the
+    shape of stale-artifact failure this repository has hit before.
+    """
+    audited = {path.resolve() for path in list(facade_sources()) + consumer_sources()}
+    present = {path.resolve() for path in (ROOT / "AISafetyAtlas").rglob("*.lean")}
+    missing = sorted(str(path.relative_to(ROOT)) for path in present - audited)
+    if missing:
+        raise RuntimeError(
+            "Lean modules outside the kernel axiom audit: "
+            f"{missing}. Add them to scripts/lean_build_targets.txt or to the "
+            "root import."
+        )
+
+
 def discover_public_theorems() -> list[str]:
-    """Discover the audited theorem surface: the facade plus explicit consumers."""
+    """The audited surface: facade theorems, plus consumer theorems *and defs*.
+
+    Definitions are audited in the consumer layer and not in the facade, and the
+    asymmetry is deliberate. A facade `def` is pinned by `check_public_api.py`
+    and its body is exercised by the theorems above it. A conjecture-layer `def`
+    is the statement itself -- under the answer-construction design a "determine
+    X" problem *is* a `def` over a candidate answer -- so its body carries the
+    mathematical content, and a theorem-only scan would leave exactly the half
+    that matters to the textual scanner alone.
+    """
+    check_every_module_audited()
+    consumers = consumer_sources()
     declarations = [
         declaration
-        for path in list(facade_sources()) + consumer_sources()
+        for path in list(facade_sources()) + consumers
         for declaration in public_theorems_in(path)
+    ] + [
+        declaration
+        for path in consumers
+        for declaration in public_definitions_in(path)
     ]
     duplicates = sorted(
         declaration

@@ -6,16 +6,17 @@ public import AISafetyAtlas.Causal.Query
 /-!
 # A one-node margin class, and the identification it does support
 
-MAIS-O25's eight-clause antecedent has no known inhabitant in the atlas so
-far, so the conjecture could still be vacuously true once it is stated.
+The eight-clause exact-class antecedent of MAIS-O25 had no known inhabitant, so
+that conjecture could have been vacuously true. That was a standing proof debt
+against it.
 
-**This module builds the witness, one clause at a time.** One binary chance
-variable, no observations, and a utility whose gap straddles zero. The margin
-class there is exactly the interval `[λ, 1-λ]` of root probabilities, and all
-eight clauses hold on it, with `K = 1`, `L = 10`, `ρ = 1 - 2λ` and `δmax = 1` —
-each proved below. No declaration in the atlas assembles the eight into a
-single antecedent at this commit; that assembly is conjecture-layer work,
-downstream of this module.
+**This module discharges it.** One binary chance variable, no observations, and a
+utility whose gap straddles zero. The margin class there is exactly the interval
+`[λ, 1-λ]` of root probabilities, and all eight clauses hold on it, with `K = 1`,
+`L = 10`, `ρ = 1 - 2λ` and `δmax = 1`. The conjecture layer that states the
+antecedent and assembles these pieces into it lives on the conjecture branch and
+is not in this tree; what is here is the inhabitant and its eight clauses,
+stated so that they can be read without it.
 
 The two substantive clauses are the sixth and the seventh.
 
@@ -47,7 +48,7 @@ witness, and `1 - 2λ = 4/5` meets it with room.
 
 namespace AISafetyAtlas.Examples.Causal.OneNodeClass
 
-open AISafetyAtlas.Causal
+open AISafetyAtlas.Causal AISafetyAtlas.Analysis
 
 /-! ## The skeleton -/
 
@@ -209,7 +210,7 @@ public theorem model_marginClass {p : ℝ} (h0 : 0 ≤ p) (h1 : p ≤ 1)
     sk.MarginClass (model p h0 h1) lam :=
   marginClass_of_M1 _ (model_M1 h0 h1 hlo hhi)
 
-/-- The class is **inhabited**, which is the first thing the eight-clause
+/-- The class is **inhabited**, which is the first thing MAIS-O25's exact-class
 antecedent needs and the thing an empty antecedent would fail. -/
 public theorem marginClass_nonempty :
     ∃ M : Model (Fin 1) (binaryDim (Fin 1)) ℝ, sk.MarginClass M lam :=
@@ -286,7 +287,7 @@ public theorem delta_observational (M : Model (Fin 1) (binaryDim (Fin 1)) ℝ) :
   norm_num [h0, h1]
   ring
 
-/-- **Clause 6 of the eight-clause antecedent, on this class.** Two models whose
+/-- **Clause 6 of the exact-class antecedent, on this class.** Two models whose
 behavioural families agree are equal — no margin hypothesis is needed, because
 the one-vertex graph is already forced. -/
 public theorem behaviorEq_injective {M M' : Model (Fin 1) (binaryDim (Fin 1)) ℝ}

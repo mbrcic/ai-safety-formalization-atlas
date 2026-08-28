@@ -250,16 +250,20 @@ stale without anyone noticing.
   joint-observation-synthesis pin is untouched — it still points at `v0.5.1`,
   107 commits back, and repinning waits for a tag.
 - Known-open in that release:
-  - **The public page ships but has never deployed.** [`site/`](site/) holds a
-    static landing page; [`.github/workflows/pages.yml`](.github/workflows/pages.yml)
-    deploys it from `main` only, on pushes that touch `site/`. Deploying needs
-    the repository's Pages source set to "GitHub Actions".
-    There is **no** per-declaration API site — a `doc-gen4` pipeline was built and
-    removed on cost grounds; see [open work](docs/guide/open-work.md).
-  - **Reuse is mostly internal.** `scripts/report_consumers.py` reports 21 of 105
-    declarations consumed outside `Examples/`. The spine and its two domain
-    consumers compose; the physical bridges and the accumulation layer are
-    exercised only by their own witnesses so far.
+  - **No per-declaration API site.** A `doc-gen4` pipeline was built and removed
+    on cost grounds; see [open work](docs/guide/open-work.md). The static landing
+    page in [`site/`](site/) is *not* part of this gap: it is deployed and live at
+    <https://mbrcic.github.io/ai-safety-formalization-atlas/>, shipped from `main`
+    by [`.github/workflows/pages.yml`](.github/workflows/pages.yml) on pushes that
+    touch `site/` (verified 2026-08-29).
+  - **Reuse is mostly internal, and the share is falling.**
+    `scripts/report_consumers.py` reports 36 of 248 declarations consumed
+    outside `Examples/` (measured 2026-08-28; 21 of 105 at v0.7, so the share
+    fell from 20% to 15% while the corpus more than doubled). The spine and its
+    two domain consumers compose. The accumulation layer consumes the kernel
+    without being consumed. Of the physical bridges, one declaration of eleven
+    now reaches a sibling module and the rest are exercised only by their own
+    witnesses.
   - The knowledge cluster's guide is
     [`docs/guide/knowledge-model.md`](docs/guide/knowledge-model.md); paper-level
     residuals stay in `docs/provenance/`. New layers must update its

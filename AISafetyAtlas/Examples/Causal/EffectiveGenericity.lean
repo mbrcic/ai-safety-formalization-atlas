@@ -28,7 +28,7 @@ printed object rather than a shape with the right name:
 
 namespace AISafetyAtlas.Examples.Causal.EffectiveGenericity
 
-open AISafetyAtlas.Causal
+open AISafetyAtlas.Causal AISafetyAtlas.InformationTheory
 open AISafetyAtlas.Examples.Causal
 
 /-! ## `S` is the printed parameter -/

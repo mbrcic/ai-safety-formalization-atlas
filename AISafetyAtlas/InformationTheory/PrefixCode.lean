@@ -8,10 +8,17 @@ public import Mathlib.Algebra.MvPolynomial.Basic
 /-!
 # A canonical self-delimiting code, and sparse monomial syntax
 
-MAIS-A2 `prob:effective` requires the **construction time** of its polynomial
-list to be polynomial in `S`, *"using sparse monomial encoding"*. A machine
-cannot be asked to output a `MvPolynomial`; it outputs a list of symbols. So the
-clause needs a fixed syntax, and this module supplies one.
+A self-delimiting code over a three-symbol alphabet, the composition lemmas that
+build compound encoders from atomic ones, and the sparse polynomial syntax those
+encoders spell out. Source coding, not a domain notion: no atlas definition is
+imported and `σ` is an arbitrary variable type.
+
+The consumer that motivated it is MAIS-A2 `prob:effective`, which requires the
+**construction time** of its polynomial list to be polynomial in `S`, *"using
+sparse monomial encoding"*. A machine cannot be asked to output a `MvPolynomial`;
+it outputs a list of symbols. So the clause needs a fixed syntax, and this module
+supplies one; `AISafetyAtlas.Causal.EffectiveGenericity` instantiates it. Where a
+design choice below was made for that consumer, it is named as such.
 
 **Why the encoding is fixed here rather than quantified with the machine.**
 A solution predicate of the shape *"there exist a machine **and an encoding**
@@ -34,12 +41,9 @@ That is the property that makes concatenation unambiguous, and it composes —
 atomic ones. Without it, *"the machine outputs the encoding of the list"* would
 be satisfiable by a machine that outputs the encoding of a different list which
 happens to collide.
-
-Nothing here is specific to causal models; `Causal.EffectiveGenericity`
-instantiates it.
 -/
 
-namespace AISafetyAtlas.Causal
+namespace AISafetyAtlas.InformationTheory
 
 /-! ## The alphabet -/
 
@@ -347,4 +351,4 @@ condition. -/
 @[simp] public theorem ofSparsePoly_nil {σ : Type*} :
     ofSparsePoly ([] : SparsePoly σ) = 0 := rfl
 
-end AISafetyAtlas.Causal
+end AISafetyAtlas.InformationTheory

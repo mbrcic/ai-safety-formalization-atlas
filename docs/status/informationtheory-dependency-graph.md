@@ -10,7 +10,7 @@ Edges come from the elaborated Lean environment. This answers the question the p
 
 So `A → B` means *`B` occurs in `A`'s statement, or in `A`'s body when `A` is a definition*. A lemma used only inside a proof does not appear. Reading the table as a complete call graph would be wrong, and the two sections below are scoped so that they stay true under this limit.
 
-`55` authored declarations in `AISafetyAtlas.InformationTheory.*` (45 theorems). Compiler-generated companions and projections are dropped.
+`95` authored declarations in `AISafetyAtlas.InformationTheory.*` (64 theorems). Compiler-generated companions and projections are dropped.
 
 ## Load-bearing declarations
 
@@ -18,11 +18,16 @@ Named in the statements of eight or more others. A change to one of these is a c
 
 | Declaration | Named by |
 |---|---|
+| `CodeSym` | 42 |
+| `IsPrefixCode` | 17 |
+| `encodeNat` | 16 |
 | `errorPair` | 12 |
 | `IsMarkovChain` | 11 |
 | `errorProb` | 10 |
 | `channelCapacity` | 10 |
+| `SparseMonomial` | 10 |
 | `errorIndicator` | 8 |
+| `SparsePoly` | 8 |
 
 ## Definitions no statement and no example mentions
 
@@ -36,8 +41,24 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 
 | Declaration | Kind | Names |
 |---|---|---|
+| `CodeSym` | definition | — |
+| `CodeSym.isDigit` | definition | `CodeSym` |
+| `CodeSym.isDigit_ofBool` | theorem | `CodeSym.isDigit`, `CodeSym.ofBool` |
+| `CodeSym.ofBool` | definition | `CodeSym`, `CodeSym.one`, `CodeSym.zero` |
+| `CodeSym.ofBool_injective` | theorem | `CodeSym`, `CodeSym.ofBool` |
+| `CodeSym.one` | definition | `CodeSym` |
+| `CodeSym.sep` | definition | `CodeSym` |
+| `CodeSym.zero` | definition | `CodeSym` |
 | `IsMarkovChain` | definition | — |
 | `IsMarkovChain.symm` | theorem | `IsMarkovChain` |
+| `IsPrefixCode` | definition | `CodeSym` |
+| `IsPrefixCode.injective` | theorem | `CodeSym`, `IsPrefixCode` |
+| `IsPrefixCode.list` | theorem | `CodeSym`, `IsPrefixCode`, `encodeList` |
+| `IsPrefixCode.ofBoolList` | theorem | `IsPrefixCode`, `encodeBoolList` |
+| `IsPrefixCode.pair` | theorem | `CodeSym`, `IsPrefixCode` |
+| `SparseMonomial` | definition | — |
+| `SparsePoly` | definition | `SparseMonomial` |
+| `bits_injective` | theorem | — |
 | `channelCapacity` | definition | — |
 | `channelCapacity_eq_of_card_eq_pow` | theorem | `channelCapacity` |
 | `channelCapacity_eq_of_card_eq_two_pow` | theorem | `channelCapacity` |
@@ -52,6 +73,17 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 | `condEntropy_pair_comm` | theorem | — |
 | `condEntropy_pair_errorIndicator` | theorem | `errorIndicator` |
 | `condMutualInfo_le_mutualInfo` | theorem | `IsMarkovChain` |
+| `encodeBoolList` | definition | `CodeSym`, `CodeSym.ofBool`, `CodeSym.sep` |
+| `encodeBoolList_takeWhile` | theorem | `CodeSym`, `CodeSym.isDigit`, `CodeSym.ofBool`, `CodeSym.sep`, `encodeBoolList` |
+| `encodeInt` | definition | `CodeSym`, `CodeSym.one`, `CodeSym.zero`, `encodeNat` |
+| `encodeList` | definition | `CodeSym`, `encodeNat` |
+| `encodeMonomial` | definition | `CodeSym`, `SparseMonomial`, `encodeList`, `encodeRat`, `encodeVarPow` |
+| `encodeNat` | definition | `CodeSym`, `encodeBoolList` |
+| `encodeRat` | definition | `CodeSym`, `encodeInt`, `encodeNat` |
+| `encodeSparseList` | definition | `CodeSym`, `SparsePoly`, `encodeList`, `encodeSparsePoly` |
+| `encodeSparseList_injective` | theorem | `CodeSym`, `IsPrefixCode`, `SparsePoly`, `encodeSparseList` |
+| `encodeSparsePoly` | definition | `CodeSym`, `SparseMonomial`, `SparsePoly`, `encodeList`, `encodeMonomial` |
+| `encodeVarPow` | definition | `CodeSym`, `encodeNat` |
 | `entropy_cond_errorPair_false` | theorem | `errorPair` |
 | `entropy_cond_errorPair_true_le` | theorem | `errorPair` |
 | `entropy_errorIndicator` | theorem | `errorIndicator`, `errorProb` |
@@ -69,6 +101,14 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 | `isMarkovChain_iff_condMutualInfo_eq_zero` | theorem | `IsMarkovChain` |
 | `isMarkovChain_iff_measure_factorizes` | theorem | `IsMarkovChain` |
 | `isMarkovChain_iff_measure_factorizes_singleton` | theorem | `IsMarkovChain` |
+| `isPrefixCode_encodeBoolList` | theorem | `IsPrefixCode`, `encodeBoolList` |
+| `isPrefixCode_encodeInt` | theorem | `IsPrefixCode`, `encodeInt` |
+| `isPrefixCode_encodeMonomial` | theorem | `CodeSym`, `IsPrefixCode`, `SparseMonomial`, `encodeMonomial` |
+| `isPrefixCode_encodeNat` | theorem | `IsPrefixCode`, `encodeNat` |
+| `isPrefixCode_encodeRat` | theorem | `IsPrefixCode`, `encodeRat` |
+| `isPrefixCode_encodeSparseList` | theorem | `CodeSym`, `IsPrefixCode`, `SparsePoly`, `encodeSparseList` |
+| `isPrefixCode_encodeSparsePoly` | theorem | `CodeSym`, `IsPrefixCode`, `SparsePoly`, `encodeSparsePoly` |
+| `isPrefixCode_encodeVarPow` | theorem | `CodeSym`, `IsPrefixCode`, `encodeVarPow` |
 | `le_errorProb` | theorem | `errorPair`, `errorProb` |
 | `measurable_errorIndicator` | theorem | `errorIndicator` |
 | `measurable_errorPair` | theorem | `errorPair` |
@@ -88,6 +128,11 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 | `observationTagged` | definition | — |
 | `observationVector` | definition | — |
 | `observationVectorPi` | definition | — |
+| `ofSparseMonomial` | definition | `SparseMonomial`, `sparseExponents` |
+| `ofSparsePoly` | definition | `SparseMonomial`, `SparsePoly`, `ofSparseMonomial` |
+| `ofSparsePoly_nil` | theorem | `SparseMonomial`, `ofSparsePoly` |
 | `preimage_errorIndicator_false` | theorem | `errorIndicator` |
 | `preimage_errorIndicator_true` | theorem | `errorIndicator` |
+| `sparseExponents` | definition | — |
 | `sum_errorPair_true` | theorem | `errorPair`, `errorProb` |
+| `takeWhile_digits_append` | theorem | `CodeSym`, `CodeSym.isDigit`, `CodeSym.sep` |

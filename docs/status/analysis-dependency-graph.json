@@ -1,0 +1,222 @@
+{
+  "note": "Edges are: for a definition, its type and body; for a theorem, its statement only. Lean's module system does not export proof terms.",
+  "cluster": "AISafetyAtlas.Analysis.",
+  "declarations": {
+    "AISafetyAtlas.Analysis.BasicSemialgebraic": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Analysis.PolySign",
+        "AISafetyAtlas.Analysis.PolySign.Holds"
+      ]
+    },
+    "AISafetyAtlas.Analysis.ClosedBox": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Analysis.IsSemialgebraic": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Analysis.BasicSemialgebraic",
+        "AISafetyAtlas.Analysis.PolySign"
+      ]
+    },
+    "AISafetyAtlas.Analysis.IsSemialgebraic.basic": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Analysis.BasicSemialgebraic",
+        "AISafetyAtlas.Analysis.IsSemialgebraic",
+        "AISafetyAtlas.Analysis.PolySign"
+      ]
+    },
+    "AISafetyAtlas.Analysis.IsSemialgebraic.compl": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Analysis.IsSemialgebraic"
+      ]
+    },
+    "AISafetyAtlas.Analysis.IsSemialgebraic.inter": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Analysis.IsSemialgebraic"
+      ]
+    },
+    "AISafetyAtlas.Analysis.IsSemialgebraic.sdiff": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Analysis.IsSemialgebraic"
+      ]
+    },
+    "AISafetyAtlas.Analysis.IsSemialgebraic.setOf_and": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Analysis.IsSemialgebraic"
+      ]
+    },
+    "AISafetyAtlas.Analysis.IsSemialgebraic.setOf_congr": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Analysis.IsSemialgebraic"
+      ]
+    },
+    "AISafetyAtlas.Analysis.IsSemialgebraic.setOf_const_and": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Analysis.IsSemialgebraic"
+      ]
+    },
+    "AISafetyAtlas.Analysis.IsSemialgebraic.setOf_not": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Analysis.IsSemialgebraic"
+      ]
+    },
+    "AISafetyAtlas.Analysis.IsSemialgebraic.setOf_or": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Analysis.IsSemialgebraic"
+      ]
+    },
+    "AISafetyAtlas.Analysis.IsSemialgebraic.union": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Analysis.IsSemialgebraic"
+      ]
+    },
+    "AISafetyAtlas.Analysis.PolySign": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Analysis.PolySign.Holds": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Analysis.PolySign"
+      ]
+    },
+    "AISafetyAtlas.Analysis.PolySign.nonneg": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Analysis.PolySign"
+      ]
+    },
+    "AISafetyAtlas.Analysis.PolySign.pos": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Analysis.PolySign"
+      ]
+    },
+    "AISafetyAtlas.Analysis.PolySign.zero": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Analysis.PolySign"
+      ]
+    },
+    "AISafetyAtlas.Analysis.ae_eval_ne_zero": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.Analysis.ae_eval_ne_zero_addHaar": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.Analysis.ae_eval_ne_zero_fintype": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.Analysis.ae_eval_ne_zero_pi": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.Analysis.basicSemialgebraic_union": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Analysis.BasicSemialgebraic",
+        "AISafetyAtlas.Analysis.PolySign"
+      ]
+    },
+    "AISafetyAtlas.Analysis.isCompact_closedBox": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Analysis.ClosedBox"
+      ]
+    },
+    "AISafetyAtlas.Analysis.isSemialgebraic_biInter": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Analysis.IsSemialgebraic"
+      ]
+    },
+    "AISafetyAtlas.Analysis.isSemialgebraic_biUnion": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Analysis.IsSemialgebraic"
+      ]
+    },
+    "AISafetyAtlas.Analysis.isSemialgebraic_closedBox": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Analysis.ClosedBox",
+        "AISafetyAtlas.Analysis.IsSemialgebraic"
+      ]
+    },
+    "AISafetyAtlas.Analysis.isSemialgebraic_compl_basic": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Analysis.BasicSemialgebraic",
+        "AISafetyAtlas.Analysis.IsSemialgebraic",
+        "AISafetyAtlas.Analysis.PolySign"
+      ]
+    },
+    "AISafetyAtlas.Analysis.isSemialgebraic_empty": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Analysis.IsSemialgebraic"
+      ]
+    },
+    "AISafetyAtlas.Analysis.isSemialgebraic_not_holds": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Analysis.IsSemialgebraic",
+        "AISafetyAtlas.Analysis.PolySign",
+        "AISafetyAtlas.Analysis.PolySign.Holds"
+      ]
+    },
+    "AISafetyAtlas.Analysis.isSemialgebraic_setOf_eval_eq_zero": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Analysis.IsSemialgebraic"
+      ]
+    },
+    "AISafetyAtlas.Analysis.isSemialgebraic_setOf_eval_ne_zero": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Analysis.IsSemialgebraic"
+      ]
+    },
+    "AISafetyAtlas.Analysis.isSemialgebraic_setOf_eval_nonneg": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Analysis.IsSemialgebraic"
+      ]
+    },
+    "AISafetyAtlas.Analysis.isSemialgebraic_setOf_eval_pos": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Analysis.IsSemialgebraic"
+      ]
+    },
+    "AISafetyAtlas.Analysis.isSemialgebraic_univ": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Analysis.IsSemialgebraic"
+      ]
+    },
+    "AISafetyAtlas.Analysis.measure_setOf_eval_eq_zero_pi": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.Analysis.volume_setOf_eval_eq_zero": {
+      "kind": "theorem",
+      "deps": []
+    }
+  }
+}

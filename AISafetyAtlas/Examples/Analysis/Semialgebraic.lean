@@ -1,11 +1,11 @@
 module
 
-public import AISafetyAtlas.Causal.Semialgebraic
+public import AISafetyAtlas.Analysis.Semialgebraic
 
 /-!
 # Worked semialgebraic sets
 
-`AISafetyAtlas.Causal.Semialgebraic` supplies the notion MAIS-A2 `prob:exact`
+`AISafetyAtlas.Analysis.Semialgebraic` supplies the notion MAIS-A2 `prob:exact`
 names and Mathlib does not have. This module runs it on concrete sets, so the
 definition is checked against examples rather than only asserted to be the
 standard one.
@@ -16,9 +16,9 @@ non-vacuous as a shape. A half-plane is semialgebraic and not compact, which is
 what makes the compactness half of the hypothesis do work.
 -/
 
-namespace AISafetyAtlas.Examples.Causal.Semialgebraic
+namespace AISafetyAtlas.Examples.Analysis.Semialgebraic
 
-open AISafetyAtlas.Causal
+open AISafetyAtlas.Analysis
 open MvPolynomial
 
 /-! ## The unit square is compact semialgebraic -/
@@ -158,4 +158,4 @@ public theorem mem_halfPlane_sdiff_unitSquare :
     have h := ((mem_unitSquare _).mp hmem 0).2
     norm_num at h
 
-end AISafetyAtlas.Examples.Causal.Semialgebraic
+end AISafetyAtlas.Examples.Analysis.Semialgebraic

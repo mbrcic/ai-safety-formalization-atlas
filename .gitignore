@@ -32,3 +32,8 @@ __pycache__/
 /SocialChoice/
 /scl/
 /.playwright-mcp/
+
+# Rendered coverage artifact: regenerate on demand with
+# `python3 scripts/render_coverage_artifact.py`. It had no reader in the tree
+# and cost 218 KB tracked.
+/docs/status/coverage-audit.html

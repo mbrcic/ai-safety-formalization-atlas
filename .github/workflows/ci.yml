@@ -63,7 +63,10 @@ jobs:
   lean:
     needs: agent-gate
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    # 30 minutes for ordinary runs, so a hung PR build is caught quickly. Only
+    # release tags and manual runs get the longer budget, and they get it
+    # because the leanchecker replay below needs it -- see that step.
+    timeout-minutes: ${{ (github.event_name == 'workflow_dispatch' || startsWith(github.ref, 'refs/tags/v')) && 75 || 30 }}
     outputs:
       run_lean: ${{ steps.filter.outputs.run_lean }}
     steps:
@@ -76,7 +79,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          pattern='(\.lean$|^lakefile\.toml$|^lake-manifest\.json$|^lean-toolchain$|^scripts/lean_build_targets\.txt$|^scripts/check_print_axioms\.py$|^scripts/agent_gate\.sh$|^\.github/workflows/ci\.yml$)'
+          pattern='(\.lean$|^lakefile\.toml$|^lake-manifest\.json$|^lean-toolchain$|^scripts/lean_build_targets\.txt$|^scripts/check_print_axioms\.py$|^scripts/generate_declaration_index\.py$|^docs/status/declaration-index\.json$|^scripts/agent_gate\.sh$|^\.github/workflows/ci\.yml$)'
           run_lean=false
           if [ "${{ github.event_name }}" = "workflow_dispatch" ] || [ "${{ github.event_name }}" = "schedule" ]; then
             run_lean=true
@@ -147,6 +150,69 @@ jobs:
       - name: Kernel axiom check for headline declarations
         if: steps.filter.outputs.run_lean == 'true'
         run: python3 scripts/check_print_axioms.py
+      # Independent kernel re-verification, strictly stronger than the axiom
+      # check above: that one asks which axioms a declaration depends on, this
+      # one replays every declaration the atlas compiled through the kernel and
+      # asks whether it typechecks at all. It is what catches an environment
+      # built by metaprogramming rather than by proving -- a failure mode
+      # `#print axioms` cannot see, because a hacked environment reports
+      # whatever axioms it likes.
+      #
+      # `leanchecker` ships with the toolchain (Lean >= v4.28.0); the separate
+      # leanprover/lean4checker repository is archived and must not be cloned.
+      #
+      # Scope is the atlas's own modules. Their oleans are exactly the ones
+      # under .lake/build/lib/lean -- Mathlib, Foundation and PFR build into
+      # .lake/packages -- so imports are trusted and only what this repository
+      # declares gets replayed. Passing no module argument would instead walk
+      # every olean on the search path, Lean core included.
+      #
+      # RELEASE TAGS AND MANUAL RUNS ONLY -- never on a pull request, a push to
+      # main, or the weekly schedule. Measured 2026-08-28 on a warm local tree:
+      # replaying the 318 atlas modules ran past 15 minutes without finishing,
+      # against 4 s for a no-op build and ~40 s for the axiom check. On a CI
+      # runner it is slower. `ROADMAP_IDEAS.md` §6.1.1 called this "one CI line"
+      # and "the single cheapest item in the file"; the line is cheap and the
+      # run is not, and wiring it into development would stall every PR.
+      #
+      # Release-gating is also the honest scope for what it buys: the claim it
+      # supports is "this published artifact is independently re-verified",
+      # which is a property of a release, not of a work-in-progress branch.
+      - name: Independent kernel re-verification (leanchecker)
+        timeout-minutes: 45
+        if: >-
+          steps.filter.outputs.run_lean == 'true' &&
+          (github.event_name == 'workflow_dispatch' ||
+           startsWith(github.ref, 'refs/tags/v'))
+        run: |
+          set -euo pipefail
+          mods=$(find .lake/build/lib/lean -name '*.olean' -printf '%P\n' \
+            | sed 's|\.olean$||; s|/|.|g' | sort)
+          if [ -z "$mods" ]; then
+            echo "No atlas oleans found — the build step did not produce them." >&2
+            exit 1
+          fi
+          echo "Re-verifying $(printf '%s\n' "$mods" | wc -l) atlas modules."
+          lake env leanchecker $mods
+      # The reuse report is the atlas's own primitives criterion as a number,
+      # and it is what `docs/agent/INDEX.md` sends an agent to when it wants to
+      # know what depends on a declaration. Regenerating it is a quadratic scan
+      # over every module for every declaration and takes minutes, so it is
+      # refreshed here rather than in the gate: reading the generated file must
+      # stay cheap even though producing it is not. Scheduled and manual runs
+      # only, for the same reason the replay above is release-gated -- a pull
+      # request must not pay for it.
+      - name: Reuse report is current (docs/status/consumers.json)
+        if: >-
+          steps.filter.outputs.run_lean == 'true' &&
+          (github.event_name == 'schedule' ||
+           github.event_name == 'workflow_dispatch')
+        run: |
+          set -euo pipefail
+          python3 scripts/report_consumers.py --json docs/status/consumers.json
+          git diff --exit-code --stat -- docs/status/consumers.json
+          git diff --exit-code -- docs/status/consumers.json
+
       - name: atlas-check agrees with the Lean proofs
         if: steps.filter.outputs.run_lean == 'true'
         run: ./scripts/check_atlas_check.sh
@@ -161,3 +227,19 @@ jobs:
             'docs/status/*-dependency-graph.json'
           git diff --exit-code -- 'docs/status/*-dependency-graph.md' \
             'docs/status/*-dependency-graph.json'
+      - name: Declaration index is current
+        # `docs/status/declaration-index.json` is what the prose checks resolve a
+        # name against, and it is produced by `lake env lean` -- so nothing in
+        # the cheap gate can notice when it goes stale, and a stale index makes
+        # those checks answer about a tree that no longer exists: passing over a
+        # name deleted since the last build, or failing on one added since. A
+        # green root build does not refresh it either, because the off-root
+        # build targets are not reached by the root import. This exact staleness
+        # occurred on 2026-08-23: the index reported no change while forty
+        # declarations were missing from it, and the generated file was the one
+        # answering.
+        if: steps.filter.outputs.run_lean == 'true'
+        run: |
+          python3 scripts/generate_declaration_index.py --write
+          git diff --exit-code --stat -- docs/status/declaration-index.json
+          git diff --exit-code -- docs/status/declaration-index.json
