@@ -16,6 +16,10 @@ apply, each naming the section here that governs it. It restates no rule and
 decides nothing — the gate does that — but it removes the step where a
 contributor reads a thousand lines of policy to find the twenty that bind them.
 
+Agents that load project skills will find the same route as
+[`.agents/skills/atlas-contribution/SKILL.md`](.agents/skills/atlas-contribution/SKILL.md);
+it holds the order to work in and no rules, which stay here.
+
 Open this file, `STATE.md`, and `docs/agent/INDEX.md` first. The other paths
 below are conditional and should be opened only when the task needs them.
 
