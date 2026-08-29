@@ -26,9 +26,8 @@ not need Lean to contribute one. See
 
 **Looking for a target rather than a task?** Read the `work_queue` in
 [`docs/status/consumers.json`](../status/consumers.json) — every atlas
-declaration that nothing outside `Examples/` builds on. (`python3 scripts/report_consumers.py --queue` recomputes the same list and
-takes minutes; the generated file is the cheap read, refreshed by CI on the
-weekly run.) A theorem with no downstream
+declaration that nothing outside `Examples/` builds on. (`python3 scripts/report_consumers.py --queue` recomputes the same list in a
+couple of seconds; the committed file is what CI checks against.) A theorem with no downstream
 consumer has untested ergonomics — that is the gap CT-4 closed for
 `Verification.rice` and CT-16 opened for the bounded portfolio target. Giving
 one a real consumer, or arguing it should be retired, is contribution either

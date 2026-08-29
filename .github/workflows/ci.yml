@@ -196,23 +196,35 @@ jobs:
           lake env leanchecker $mods
       # The reuse report is the atlas's own primitives criterion as a number,
       # and it is what `docs/agent/INDEX.md` sends an agent to when it wants to
-      # know what depends on a declaration. Regenerating it is a quadratic scan
-      # over every module for every declaration and takes minutes, so it is
-      # refreshed here rather than in the gate: reading the generated file must
-      # stay cheap even though producing it is not. Scheduled and manual runs
-      # only, for the same reason the replay above is release-gated -- a pull
-      # request must not pay for it.
+      # know what depends on a declaration. It used to take minutes -- a regex
+      # search per (declaration, module) pair -- and was gated to scheduled runs
+      # for that reason. Since it indexes each module once instead it runs in
+      # about two seconds, so every Lean run can afford to check it and a stale
+      # committed report is caught on the pull request that causes it.
       - name: Reuse report is current (docs/status/consumers.json)
-        if: >-
-          steps.filter.outputs.run_lean == 'true' &&
-          (github.event_name == 'schedule' ||
-           github.event_name == 'workflow_dispatch')
+        if: steps.filter.outputs.run_lean == 'true'
         run: |
           set -euo pipefail
           python3 scripts/report_consumers.py --json docs/status/consumers.json
           git diff --exit-code --stat -- docs/status/consumers.json
           git diff --exit-code -- docs/status/consumers.json
 
+      # Split from the assertions below because the two costs are wildly
+      # different and were previously indistinguishable. Measured 2026-08-29:
+      # this step takes 261-307 s across five runs, including a scheduled run
+      # where nothing changed and the olean cache should have hit -- while the
+      # same build is 3.8 s locally on a warm tree, and running the nine models
+      # against the built binary is 0.49 s. So ~5 minutes of every CI run, about
+      # 47% of the whole thing, is here and unexplained. Timing the build
+      # separately says whether it is elaboration or the link of a 120 MB
+      # Mathlib-inclusive binary, which decides what, if anything, to do.
+      - name: Build atlas-check (timed separately -- see comment)
+        if: steps.filter.outputs.run_lean == 'true'
+        run: |
+          set -euo pipefail
+          start=$(date +%s)
+          lake build atlas-check
+          echo "atlas-check build: $(( $(date +%s) - start ))s"
       - name: atlas-check agrees with the Lean proofs
         if: steps.filter.outputs.run_lean == 'true'
         run: ./scripts/check_atlas_check.sh

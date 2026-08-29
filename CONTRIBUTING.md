@@ -88,6 +88,11 @@ Detail on grades: [methodology](docs/guide/methodology.md).
 
 ## Before you open a pull request
 
+Run `python3 scripts/preflight.py`. It looks at what you changed and prints the
+obligations a reviewer will check, with the section of `AGENTS.md` or this file
+that governs each — so you see the rules for your change rather than all of
+them. It is advisory: `./scripts/agent_gate.sh` is what actually decides.
+
 For anything that changes formalization coverage, dependencies, or the public
 Lean API, open a formalization proposal issue first — it saves you rework. Small
 factual corrections and documentation fixes can go straight to a pull request.

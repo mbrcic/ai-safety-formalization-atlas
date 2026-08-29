@@ -8,8 +8,8 @@ lean_only=0
 for arg in "$@"; do
   case "$arg" in
     --quiet) quiet=1 ;;
-    --lean) lean_only=1 ;;
-    *) echo "usage: $0 [--quiet] [--lean]" >&2; exit 2 ;;
+    --fast|--lean) lean_only=1 ;;
+    *) echo "usage: $0 [--quiet] [--fast]   (--lean: old name for --fast)" >&2; exit 2 ;;
   esac
 done
 
@@ -20,10 +20,10 @@ if [ "$quiet" = 1 ]; then
   gate_log="$(mktemp)"
   trap 'rm -f "$gate_log"' EXIT
   inner=()
-  [ "$lean_only" = 1 ] && inner=(--lean)
+  [ "$lean_only" = 1 ] && inner=(--fast)
   if "$0" "${inner[@]}" >"$gate_log" 2>&1; then
     if [ "$lean_only" = 1 ]; then
-      echo "agent_gate: ok (quiet, --lean; Python self-tests NOT run)"
+      echo "agent_gate: ok (quiet, --fast; Python self-tests NOT run)"
     else
       echo "agent_gate: ok (quiet; full checks passed)"
     fi
@@ -33,13 +33,30 @@ if [ "$quiet" = 1 ]; then
   exit 1
 fi
 
-# --lean skips the five steps that exercise the validator scripts themselves
-# against synthetic fixtures rather than against this repository's content.
-# Nothing under AISafetyAtlas/ or docs/ is an input to them, so a Lean edit
-# cannot change their verdict — and they dominate the runtime: measured
-# 2026-08-29, test_validators alone is ~54 s.  The full gate itself took 47,
-# 49, 74 and 91 seconds across four consecutive runs on one machine, so these
-# are measurements rather than constants; re-measure before quoting one.
+# --fast (--lean is the old name, still accepted) skips the five steps that
+# exercise the validator scripts themselves.
+#
+# CORRECTION, 2026-08-29.  This comment used to claim those five "take no input
+# from AISafetyAtlas/ or docs/", so "a Lean edit cannot change their verdict".
+# That is false and was the stated reason the lane is safe.  test_validators
+# copies registry.yaml, conjectures.yaml, tasks.yaml, formalization-search.json,
+# AISafetyAtlas.lean, the whole AISafetyAtlas/ tree and several docs/ trees into
+# a temporary tree and runs the validators against them; test_source_neutral_views
+# reads the live registry; the a1-a3 harness reads a reproduction script and
+# provenance documents; and tests/ reaches declaration locations and repository
+# Markdown.  Repository content is an input to all of them.
+#
+# So the lane is justified by *when* it is used, not by independence: it is the
+# retry after a failure inside one edit cycle, and the full gate is owed before
+# the commit regardless -- non-negotiable if scripts/, tests/ or a ledger schema
+# was touched.  A green --fast is not a green change.
+#
+# Cost, measured 2026-08-29: test_validators is ~12 s, down from ~53 s.  Two
+# implementation fixes, no check removed: the Lean masker stopped scanning a
+# character at a time, and the import-line regex stopped running under re.M
+# where its leading \s* consumed newlines.  Whole-gate numbers on this machine
+# vary by roughly threefold run to run, so they are not quoted here: measure,
+# do not inherit a number.
 # Everything that reads the tree, the ledgers, or the generated views still
 # runs.  See AGENTS.md "Validation" for when the full gate is mandatory.
 skip_self_tests() { [ "$lean_only" = 1 ]; }
@@ -57,7 +74,7 @@ echo "==> validate_tasks"
 python3 scripts/validate_tasks.py
 
 if skip_self_tests; then
-  echo "==> test_validators, test_source_neutral_views, test_a1_a3_pattern_a_harness (skipped: --lean)"
+  echo "==> test_validators, test_source_neutral_views, test_a1_a3_pattern_a_harness (skipped: --fast)"
 else
   echo "==> test_validators"
   python3 scripts/test_validators.py
@@ -87,6 +104,9 @@ python3 scripts/generate_dependency_graph.py --check
 echo "==> check_public_api"
 python3 scripts/check_public_api.py
 
+echo "==> check_examples_layout"
+python3 scripts/check_examples_layout.py
+
 echo "==> check_example_coverage"
 python3 scripts/check_example_coverage.py
 
@@ -95,6 +115,9 @@ python3 scripts/check_coverage_audit.py
 
 # Advisory: reports Wider/Beyond rows with no worked witness. Never blocks —
 # it produces a worklist, and most unwitnessed rows are fine.
+echo "==> check_statement_freeze (advisory)"
+python3 scripts/check_statement_freeze.py | head -20
+
 echo "==> check_scope_witnesses (advisory)"
 python3 scripts/check_scope_witnesses.py | head -1
 
@@ -115,7 +138,7 @@ python3 scripts/check_docs_paths.py
 # repository — a contributor without it still gets every check above, and CI
 # installs it so the suite is not optional there.
 if skip_self_tests; then
-  echo "==> pytest tests/ (skipped: --lean)"
+  echo "==> pytest tests/ (skipped: --fast)"
 elif python3 -c "import pytest" >/dev/null 2>&1; then
   echo "==> pytest tests/"
   python3 -m pytest tests/ -q --no-header -p no:cacheprovider
@@ -128,7 +151,7 @@ fi
 # comparison against a value the standard library types as `int | None`, and two
 # `.group()` calls guarded by a helper that narrows nothing.
 if skip_self_tests; then
-  echo "==> ty check (skipped: --lean)"
+  echo "==> ty check (skipped: --fast)"
 elif command -v ty >/dev/null 2>&1; then
   echo "==> ty check"
   ty check scripts/ tests/

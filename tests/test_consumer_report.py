@@ -56,8 +56,16 @@ def _visible() -> dict[str, set[str]]:
 
 
 def _consumers(consumer_code: str) -> list[str]:
+    # The report indexes definitions and mentions once per module rather than
+    # searching per (declaration, module) pair; the indexes are built here from
+    # the same fixture so every assertion below still tests the real matcher.
+    sources = _sources(consumer_code)
     return report_consumers.consumers(
-        DECLARATION, _sources(consumer_code), _visible()
+        DECLARATION,
+        report_consumers.definition_index(sources),
+        report_consumers.mention_index(sources),
+        sources,
+        _visible(),
     )
 
 

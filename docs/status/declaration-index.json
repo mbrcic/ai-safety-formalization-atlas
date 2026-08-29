@@ -7606,59 +7606,59 @@
       "module": "AISafetyAtlas.Examples.Inference.EntropyBound"
     },
     {
+      "name": "AISafetyAtlas.Examples.Inference.Enumerable",
+      "kind": "module",
+      "module": "AISafetyAtlas.Examples.Inference.Enumerable"
+    },
+    {
       "name": "AISafetyAtlas.Examples.Inference.Enumerable.FinDevice",
       "kind": "inductive",
-      "module": "AISafetyAtlas.Examples.Inference.FinDevice"
+      "module": "AISafetyAtlas.Examples.Inference.Enumerable"
     },
     {
       "name": "AISafetyAtlas.Examples.Inference.Enumerable.FinDevice.concl",
       "kind": "def",
-      "module": "AISafetyAtlas.Examples.Inference.FinDevice"
+      "module": "AISafetyAtlas.Examples.Inference.Enumerable"
     },
     {
       "name": "AISafetyAtlas.Examples.Inference.Enumerable.FinDevice.concl_surj",
       "kind": "theorem",
-      "module": "AISafetyAtlas.Examples.Inference.FinDevice"
+      "module": "AISafetyAtlas.Examples.Inference.Enumerable"
     },
     {
       "name": "AISafetyAtlas.Examples.Inference.Enumerable.FinDevice.mk.inj",
       "kind": "theorem",
-      "module": "AISafetyAtlas.Examples.Inference.FinDevice"
+      "module": "AISafetyAtlas.Examples.Inference.Enumerable"
     },
     {
       "name": "AISafetyAtlas.Examples.Inference.Enumerable.FinDevice.setup",
       "kind": "def",
-      "module": "AISafetyAtlas.Examples.Inference.FinDevice"
+      "module": "AISafetyAtlas.Examples.Inference.Enumerable"
     },
     {
       "name": "AISafetyAtlas.Examples.Inference.Enumerable.FinDevice.toDevice",
       "kind": "def",
-      "module": "AISafetyAtlas.Examples.Inference.FinDevice"
+      "module": "AISafetyAtlas.Examples.Inference.Enumerable"
     },
     {
       "name": "AISafetyAtlas.Examples.Inference.Enumerable.decidableWeaklyInfers",
       "kind": "def",
-      "module": "AISafetyAtlas.Examples.Inference.FinDevice"
+      "module": "AISafetyAtlas.Examples.Inference.Enumerable"
     },
     {
       "name": "AISafetyAtlas.Examples.Inference.Enumerable.instFintypeFinDevice",
       "kind": "def",
-      "module": "AISafetyAtlas.Examples.Inference.FinDevice"
+      "module": "AISafetyAtlas.Examples.Inference.Enumerable"
     },
     {
       "name": "AISafetyAtlas.Examples.Inference.Enumerable.no_finDevice_weaklyInfers_id",
       "kind": "theorem",
-      "module": "AISafetyAtlas.Examples.Inference.FinDevice"
+      "module": "AISafetyAtlas.Examples.Inference.Enumerable"
     },
     {
       "name": "AISafetyAtlas.Examples.Inference.Existence",
       "kind": "module",
       "module": "AISafetyAtlas.Examples.Inference.Existence"
-    },
-    {
-      "name": "AISafetyAtlas.Examples.Inference.FinDevice",
-      "kind": "module",
-      "module": "AISafetyAtlas.Examples.Inference.FinDevice"
     },
     {
       "name": "AISafetyAtlas.Examples.Inference.FunctionFamily",

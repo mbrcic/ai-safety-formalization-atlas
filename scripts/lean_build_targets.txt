@@ -36,7 +36,7 @@ AISafetyAtlas.Examples.Inference.ComplexityMeasure
 AISafetyAtlas.Examples.Inference.Device
 AISafetyAtlas.Examples.Inference.EntropyBound
 AISafetyAtlas.Examples.Inference.Existence
-AISafetyAtlas.Examples.Inference.FinDevice
+AISafetyAtlas.Examples.Inference.Enumerable
 AISafetyAtlas.Examples.Inference.FunctionFamily
 AISafetyAtlas.Examples.Inference.Halting
 AISafetyAtlas.Examples.Inference.Inversion

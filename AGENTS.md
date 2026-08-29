@@ -9,6 +9,13 @@ Agent map: [`docs/agent/INDEX.md`](docs/agent/INDEX.md). Human doc map:
 
 ### Start here (small by design)
 
+**Fastest route, and it needs no agent in particular:** make your change, then
+run `python3 scripts/preflight.py`. It reads the diff, works out which kinds of
+contribution it contains, and prints only the obligations and commands that
+apply, each naming the section here that governs it. It restates no rule and
+decides nothing — the gate does that — but it removes the step where a
+contributor reads a thousand lines of policy to find the twenty that bind them.
+
 Open this file, `STATE.md`, and `docs/agent/INDEX.md` first. The other paths
 below are conditional and should be opened only when the task needs them.
 
@@ -78,6 +85,15 @@ fibre/collision argument.
   `PublicAPI`, `Registry`, `NonVacuity`, `SixTargets`, `WorkbenchConsumers`,
   `FirstContribution`, `HaltingExample`, `NFLConcrete`.
 
+**Two namespace spellings are legal**, and the tree uses both: the full path
+(`AISafetyAtlas.Examples.Verification.Robot`, 47 files) or the directory holding
+it (`AISafetyAtlas.Examples.Verification`, 21 files). Either is findable from the
+module being witnessed, which is what the convention is for. A namespace
+agreeing with neither is not legal, and `scripts/check_examples_layout.py`
+decides all of this in the cheap gate — so this section is background, not
+something to check by hand. Files a script generates are skipped: they declare
+nothing.
+
 A new example for one module takes the mirror path. Renaming an existing one
 also touches `scripts/lean_build_targets.txt`,
 `scripts/validate_current_state.py`, any `build_command` or `application` prose
@@ -125,10 +141,10 @@ is re-checked — a module that gains coverage must lose its entry.
 
 ```console
 ./scripts/agent_gate.sh          # schema + generated views + path checks (no lake)
-./scripts/agent_gate.sh --lean   # same, minus the validator self-tests (~15 s)
+./scripts/agent_gate.sh --fast   # same, minus the validator self-tests
 ```
 
-Full Lean gate is under **Validation** below, together with what `--lean` drops
+Full Lean gate is under **Validation** below, together with what `--fast` drops
 and when dropping it is not allowed. Skip `lake build` for pure docs or
 agent-index edits.
 
@@ -215,6 +231,12 @@ goal by editing the goal, and the build reports success either way.
 
 If a statement looks wrong, say so and stop — a `sorry` with a note naming the
 suspected defect is a better outcome than a proof of something else.
+
+`scripts/check_statement_freeze.py` hashes the signature of every ledger-graded
+declaration against `docs/status/statement-lock.json` and reports drift in the
+cheap gate. It is advisory and compares source text, so reformatting reports a
+change that is not one — the report is a question, never a verdict. Answer it,
+re-grade the row if fidelity moved, then `--write` to record the new statement.
 
 ## Coverage, landscape, and bridges
 
@@ -310,7 +332,7 @@ proof it failed to refute.
 
 **To search over devices, not just over values:** `InferenceDevice` carries its
 setup type as a field, so a statement quantifying over devices ranges over a proper
-class and nothing can enumerate it. `Examples.Inference.FinDevice` fixes both types
+class and nothing can enumerate it. `Examples.Inference.Enumerable.FinDevice` fixes both types
 (`U = Fin m`, `Setup = Fin n`), is a `Fintype`, and carries a `Decidable` instance
 for `WeaklyInfers`. `decide` then settles *"no device of this shape does X"* in the
 kernel — exhaustive and trusted, where sampling would be neither. The instance has
@@ -345,39 +367,59 @@ The gate ends with `pytest tests/` (malformed-shape regressions) and
 installed, so the gate still runs without them; CI installs both, so neither is
 optional on a pull request. Install with `python3 -m pip install pytest ty`.
 
-### The `--lean` fast lane
+### The `--fast` lane (`--lean` is the old name)
 
 ```console
-./scripts/agent_gate.sh --lean          # ~15 s instead of ~45-90 s
-./scripts/agent_gate.sh --lean --quiet  # both flags compose
+./scripts/agent_gate.sh --fast          # skips the five self-test steps
+./scripts/agent_gate.sh --fast --quiet  # both flags compose
 ```
 
-`--lean` skips exactly five steps: `test_validators`, `test_source_neutral_views`,
-`test_a1_a3_pattern_a_harness`, `pytest tests/`, and `ty check`. Those five test
-the validator scripts themselves — against synthetic fixtures and against the
-Python type checker — and take no input from `AISafetyAtlas/`, `docs/`, or the
-ledgers. Editing Lean cannot change their verdict, and they dominate the
-runtime: measured 2026-08-29, `test_validators` alone is ~54 s. **Treat every
-number here as a measurement, not a constant** — four consecutive full-gate runs
-on one machine took 47, 49, 74 and 91 seconds, so any argument resting on a
-single figure is resting on noise. Re-measure before quoting. Everything that
-reads the tree, the ledgers, or the generated views still runs, so `--lean`
-still catches a rename that orphaned a docstring name, a module missing from the
-root import, a stale dependency graph, or a registry `line:` field that shifted.
+`--fast` skips exactly five steps: `test_validators`, `test_source_neutral_views`,
+`test_a1_a3_pattern_a_harness`, `pytest tests/`, and `ty check`. Those five
+exercise the validator scripts themselves.
+
+**Correction, 2026-08-29.** This section used to say those five *"take no input
+from `AISafetyAtlas/`, `docs/`, or the ledgers"* and that *"editing Lean cannot
+change their verdict."* Both are false, and they were the stated reason the lane
+is safe. `test_validators` copies `registry.yaml`, `conjectures.yaml`,
+`tasks.yaml`, `formalization-search.json`, `AISafetyAtlas.lean`, the whole
+`AISafetyAtlas/` tree and several `docs/` trees into a temporary tree and runs
+the validators against them; `test_source_neutral_views` reads the live
+registry; the a1–a3 harness reads a reproduction script and provenance
+documents; and `tests/` reaches declaration locations and repository Markdown.
+Repository content is an input to all of them, so a `--fast` run can be green
+over a change they would reject.
+
+What justifies the lane is therefore **when** it is used, not independence — see
+the retry-loop paragraph below — and the rule that the full gate is owed before
+the commit stands unchanged.
+
+Everything that reads the tree, the ledgers, or the generated views *directly*
+still runs, so `--fast` still catches a rename that orphaned a docstring name, a
+module missing from the root import, a stale dependency graph, a mislaid example
+file, a changed graded statement, or a registry `line:` field that shifted.
+
+**Numbers are measurements, not constants.** On 2026-08-29 `test_validators`
+runs in ~12 s, down from ~53 s. Nothing was dropped to get there: the Lean
+masker stopped scanning one character at a time, and the import-line regex
+stopped running under `re.M`, where its leading `\s*` consumed newlines and made
+the engine rescan blank runs from every position. Whole-gate timings on one
+machine varied roughly threefold run to run, so no single figure for them is
+quoted here. Measure; do not inherit a number from this file.
 
 **This is a retry loop, not an iteration loop.** The gate belongs before a
-commit, not between edits, so `--lean` earns nothing on the first run — you owe
+commit, not between edits, so `--fast` earns nothing on the first run — you owe
 the full gate anyway. Where it pays is the second run and after: the gate fails
 on a Lean-facing check, you fix, and you want to know whether the fix took. That
-retry is ~15 s rather than the full gate, and the failures that put you in that loop are
-exactly the ones `--lean` still watches — a shifted registry `line:` field, a
+retry is a fraction of the full gate, and the failures that put you in that loop are
+exactly the ones `--fast` still watches — a shifted registry `line:` field, a
 regenerated view that did not get regenerated, a docstring name orphaned by a
-rename. Fix, `--lean`, fix, `--lean`, then the full gate once to commit.
+rename. Fix, `--fast`, fix, `--fast`, then the full gate once to commit.
 
 **The full gate is mandatory before you commit**, and non-negotiable whenever
 you touched anything under `scripts/`, `tests/`, or the ledger schemas — those
-are precisely the inputs `--lean` stops watching, and its own last line says so.
-A green `--lean` is never a green change. CI runs the full gate regardless, so
+are precisely the inputs `--fast` stops watching, and its own last line says so.
+A green `--fast` is never a green change. CI runs the full gate regardless, so
 skipping it locally only moves the failure later.
 
 If you are reaching for the gate to find out whether Lean is happy, that is the

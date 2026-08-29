@@ -31,7 +31,7 @@ the task requires that particular inventory, domain, or evidence.
 | [`docs/guide/contributor-tasks.md`](../guide/contributor-tasks.md) | choosing or implementing a CT unit |
 | [`docs/provenance/a1-a3-b1-b3-b7-reverification.md`](../provenance/a1-a3-b1-b3-b7-reverification.md) | working on those domain residuals |
 | [`docs/guide/atlas-check.md`](../guide/atlas-check.md) | answering a question about one finite model — `lake exe atlas-check` decides it and names the theorem, no Lean to write |
-| [`docs/status/consumers.json`](../status/consumers.json) | asking what depends on a declaration, or picking a target with no downstream consumer — this is the cheap read; `scripts/report_consumers.py` recomputes it and takes minutes |
+| [`docs/status/consumers.json`](../status/consumers.json) | asking what depends on a declaration, or picking a target with no downstream consumer — the committed view; `scripts/report_consumers.py` recomputes it in about two seconds |
 | `docs/status/<cluster>-dependency-graph.md` | **reading** one cluster's declaration dependencies |
 | Facade modules under `AISafetyAtlas/*.lean` | writing Lean for the relevant domain |
 
@@ -63,7 +63,7 @@ external declarations have no in-tree definition site and omit both fields
 rather than carrying empty ones.
 
 ```console
-# What depends on one declaration, and what nothing depends on (no 4-minute rescan):
+# What depends on one declaration, and what nothing depends on:
 python3 -c "import json; d=json.load(open('docs/status/consumers.json')); print(json.dumps(d['declarations']['AISafetyAtlas.Verification.rice'], indent=2))"
 python3 -c "import json; d=json.load(open('docs/status/consumers.json')); print(len(d['work_queue']), 'declarations with no consumer outside Examples/')"
 ```

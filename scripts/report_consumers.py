@@ -113,19 +113,27 @@ def visibility(sources: dict[str, tuple[Path, str]]) -> dict[str, set[str]]:
 DEFINITION = "(?:theorem|lemma|def|abbrev|instance|structure|inductive)"
 
 
-def definition_sites(leaf: str, sources: dict[str, tuple[Path, str]]) -> set[str]:
-    """Modules that *define* `leaf`, not merely mention it.
+def definition_index(sources: dict[str, tuple[Path, str]]) -> dict[str, set[str]]:
+    """leaf -> modules that *define* it, built in one pass over the tree.
 
     A declaration's namespace is not its module: `Preference.OverrideModel.foo`
     is proved in `Preference/Override.lean` and re-exported by the `Preference`
     facade. Deriving the home from the namespace makes the module that proves a
     theorem look like a module that consumes it, which inverts the whole report.
+
+    One scan per module replaces one scan per (declaration, module) pair. The
+    pattern is the same one this function used to compile per leaf, with the
+    leaf itself turned into a capture group.
     """
     pattern = re.compile(
         rf"(?m)^\s*(?:public\s+|private\s+|protected\s+|noncomputable\s+)*"
-        rf"{DEFINITION}\s+{re.escape(leaf)}(?![A-Za-z0-9_'])"
+        rf"{DEFINITION}\s+([\w'.]+)"
     )
-    return {module for module, (_, code) in sources.items() if pattern.search(code)}
+    index: dict[str, set[str]] = {}
+    for module, (_, code) in sources.items():
+        for match in pattern.finditer(code):
+            index.setdefault(match.group(1), set()).add(module)
+    return index
 
 
 def qualified_forms(declaration: str) -> list[str]:
@@ -144,14 +152,43 @@ def qualified_forms(declaration: str) -> list[str]:
     return [".".join(parts[index:]) for index in range(len(parts))]
 
 
+def mention_index(sources: dict[str, tuple[Path, str]]) -> dict[str, set[str]]:
+    """module -> every name a use in it could be naming.
+
+    Equivalent to searching each module for each declaration, and the reason it
+    is equivalent is worth stating. The old pattern required a match to start
+    where no identifier character or dot precedes it — that is, at the start of
+    a maximal `[A-Za-z0-9_'.]` run — and to end where no identifier character
+    follows, which a dot satisfies. So the strings that could match inside a run
+    are exactly that run's prefixes at dot boundaries: `A`, `A.B`, `A.B.c` for
+    `A.B.c.d`. Collecting those once per module turns 56,000 regex searches over
+    the whole tree into one pass and a set lookup.
+    """
+    # `\w` under Unicode, because Lean identifiers are not ASCII: three
+    # declarations here are named with a Greek delta, and an ASCII-only token
+    # class dropped them out of the index entirely.
+    token = re.compile(r"[\w'.]+")
+    index: dict[str, set[str]] = {}
+    for module, (_, code) in sources.items():
+        names: set[str] = set()
+        for run in token.findall(code):
+            parts = run.split(".")
+            for stop in range(1, len(parts) + 1):
+                names.add(".".join(parts[:stop]))
+        index[module] = names
+    return index
+
+
 def consumers(
     declaration: str,
+    definitions: dict[str, set[str]],
+    mentions: dict[str, set[str]],
     sources: dict[str, tuple[Path, str]],
     visible: dict[str, set[str]],
 ) -> list[str]:
     """Modules that can see `declaration` and name it without defining it."""
     leaf = declaration.rsplit(".", 1)[1]
-    homes = definition_sites(leaf, sources)
+    homes = definitions.get(leaf, set())
     if not homes:
         # Re-exported alias with no local definition site: fall back to the
         # longest module prefix of the declaration's own name.
@@ -161,23 +198,14 @@ def consumers(
             default="",
         )
         homes = {fallback} if fallback else set()
-    # Longest form first, so a fully-qualified use matches as a whole rather
-    # than leaving a stray prefix. The lookbehind still forbids a preceding dot,
-    # which is what keeps `Other.foo` out; the alternation is what lets
-    # `Knowledge.foo` in. The lookahead keeps `foo_aux` out — including when it
-    # is written fully qualified, which a raw substring test let through.
-    pattern = re.compile(
-        r"(?<![A-Za-z0-9_.'])(?:"
-        + "|".join(re.escape(form) for form in qualified_forms(declaration))
-        + r")(?![A-Za-z0-9_'])"
-    )
+    forms = set(qualified_forms(declaration))
     found = []
-    for module, (_, code) in sources.items():
+    for module in sources:
         if module in homes:
             continue
         if not homes & visible.get(module, set()):
             continue
-        if pattern.search(code):
+        if forms & mentions[module]:
             found.append(module)
     return sorted(found)
 
@@ -187,8 +215,7 @@ def main() -> None:
     parser.add_argument(
         "--json",
         metavar="PATH",
-        help="write the report as JSON to PATH (the generated view agents read; "
-             "this script takes minutes, docs/status/consumers.json does not)",
+        help="write the report as JSON to PATH (the generated view agents read)",
     )
     parser.add_argument(
         "--queue",
@@ -200,13 +227,15 @@ def main() -> None:
     declarations = load_declarations()
     sources = lean_sources()
     visible = visibility(sources)
+    definitions = definition_index(sources)
+    mentions = mention_index(sources)
 
     load_bearing: list[tuple[str, str, list[str]]] = []
     examples_only: list[tuple[str, str, list[str]]] = []
     unused: list[tuple[str, str]] = []
 
     for declaration, origin in sorted(declarations.items()):
-        found = consumers(declaration, sources, visible)
+        found = consumers(declaration, definitions, mentions, sources, visible)
         if not found:
             unused.append((declaration, origin))
         elif all(module.startswith(EXAMPLES_PREFIX) for module in found):

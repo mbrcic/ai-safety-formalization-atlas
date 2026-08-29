@@ -17,7 +17,11 @@ EXECUTABLE_ROOT = ROOT / "Main.lean"
 FORBIDDEN_LEAN_TOKEN = re.compile(
     r"\b(sorry|admit|axiom|sorryAx|native_decide|implemented_by)\b"
 )
-IMPORT_LINE = re.compile(r"^\s*(?:public\s+)?import\s+(.+)$", re.MULTILINE)
+# Matched per line, not with `re.M` over the whole header. Under `re.M` the
+# leading `^\s*` can consume newlines, so the engine rescans blank runs for every
+# starting position: 0.37 s across the tree against 0.002 s here, and this is
+# called once per Lean file on every validator run.
+IMPORT_LINE = re.compile(r"\s*(?:public\s+)?import\s+(.+)$")
 LOCAL_MODULE = re.compile(r"^AISafetyAtlas(?:\.[A-Za-z_][A-Za-z0-9_]*)*$")
 
 
@@ -38,39 +42,62 @@ def read_version(path: Path, pattern: str, label: str) -> str:
     return match.group(1)
 
 
+# The three sequences that can start a comment or a string. Everything between
+# them is ordinary code and can be copied in one slice instead of one character
+# at a time, which is what this scanner used to do: on the 424 Lean files it is
+# called over it made 6.3 million `startswith` calls and was roughly half the
+# runtime of `test_validators`, and it is imported by `report_consumers.py` too.
+_INTERESTING = re.compile(r'--|/-|-/|"')
+_NOT_NEWLINE = re.compile(r"[^\n]")
+
+
+def _blank(chunk: str) -> str:
+    """The chunk with every character replaced by a space, newlines preserved.
+
+    Masking has to keep both the length and the line structure: callers report
+    line numbers against the masked text and match tokens by position.
+    """
+    return _NOT_NEWLINE.sub(" ", chunk)
+
+
 def lean_code_without_comments_or_strings(source: str) -> str:
     """Mask Lean comments and strings while preserving token boundaries."""
     masked: list[str] = []
     index = 0
     block_comment_depth = 0
+    length = len(source)
 
-    while index < len(source):
+    while index < length:
         if block_comment_depth:
-            if source.startswith("/-", index):
-                masked.extend("  ")
+            nested = source.find("/-", index)
+            closing = source.find("-/", index)
+            if closing == -1 and nested == -1:
+                masked.append(_blank(source[index:]))
+                break
+            if nested != -1 and (closing == -1 or nested < closing):
+                masked.append(_blank(source[index:nested]))
+                masked.append("  ")
                 block_comment_depth += 1
-                index += 2
-            elif source.startswith("-/", index):
-                masked.extend("  ")
-                block_comment_depth -= 1
-                index += 2
+                index = nested + 2
             else:
-                masked.append("\n" if source[index] == "\n" else " ")
-                index += 1
+                masked.append(_blank(source[index:closing]))
+                masked.append("  ")
+                block_comment_depth -= 1
+                index = closing + 2
             continue
 
         if source.startswith("--", index):
             line_end = source.find("\n", index)
             if line_end == -1:
-                masked.extend(" " * (len(source) - index))
+                masked.append(" " * (length - index))
                 break
-            masked.extend(" " * (line_end - index))
+            masked.append(" " * (line_end - index))
             masked.append("\n")
             index = line_end + 1
             continue
 
         if source.startswith("/-", index):
-            masked.extend("  ")
+            masked.append("  ")
             block_comment_depth = 1
             index += 2
             continue
@@ -78,21 +105,26 @@ def lean_code_without_comments_or_strings(source: str) -> str:
         if source[index] == '"':
             masked.append(" ")
             index += 1
-            while index < len(source):
-                if source[index] == "\\" and index + 1 < len(source):
-                    masked.extend("  ")
+            while index < length:
+                character = source[index]
+                if character == "\\" and index + 1 < length:
+                    masked.append("  ")
                     index += 2
-                elif source[index] == '"':
+                elif character == '"':
                     masked.append(" ")
                     index += 1
                     break
                 else:
-                    masked.append("\n" if source[index] == "\n" else " ")
+                    masked.append("\n" if character == "\n" else " ")
                     index += 1
             continue
 
-        masked.append(source[index])
-        index += 1
+        # Ordinary code: copy through to the next thing that could start a
+        # comment or a string, rather than one character per loop.
+        match = _INTERESTING.search(source, index + 1)
+        stop = match.start() if match else length
+        masked.append(source[index:stop])
+        index = stop
 
     return "".join(masked)
 
@@ -149,10 +181,14 @@ def lean_import_header(source: str) -> str:
 def local_imports(source: str, local_modules: set[str]) -> set[str]:
     code = lean_code_without_comments_or_strings(lean_import_header(source))
     imports: set[str] = set()
-    for match in IMPORT_LINE.finditer(code):
-        imports.update(
-            token for token in match.group(1).split() if token in local_modules
-        )
+    for line in code.splitlines():
+        if "import" not in line:
+            continue
+        match = IMPORT_LINE.match(line)
+        if match:
+            imports.update(
+                token for token in match.group(1).split() if token in local_modules
+            )
     return imports
 
 

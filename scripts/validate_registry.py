@@ -175,14 +175,25 @@ def read_lean_header(path: Path, chunk: int = 16384) -> str:
     return path.read_text(encoding="utf-8")
 
 
+# Matched per line, not with `re.M` over the whole header. Under `re.M` the
+# leading `^\s*` can consume newlines, so the engine rescans blank runs for every
+# starting position: 0.37 s across the tree against 0.002 s here, and this is
+# called once per Lean file on every validator run.
+IMPORT_LINE = re.compile(r"\s*(?:public\s+)?import\s+(.+)$")
+
+
 def local_imports(source: str, local_modules: set[str]) -> set[str]:
     """Read local imports without treating external packages as atlas modules."""
     source = lean_code_without_comments_or_strings(lean_import_header(source))
     imports: set[str] = set()
-    for match in re.finditer(r"^\s*(?:public\s+)?import\s+(.+)$", source, re.M):
-        imports.update(
-            token for token in match.group(1).split() if token in local_modules
-        )
+    for line in source.splitlines():
+        if "import" not in line:
+            continue
+        match = IMPORT_LINE.match(line)
+        if match:
+            imports.update(
+                token for token in match.group(1).split() if token in local_modules
+            )
     return imports
 
 
