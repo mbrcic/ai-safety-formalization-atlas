@@ -3,7 +3,7 @@
   "generated_by": "scripts/generate_declaration_index.py",
   "note": "Declaration index walked from the elaborated environment, not from source text. Consumed by the prose checks so that a name resolves only when it is a real declaration.",
   "prefix": "AISafetyAtlas",
-  "count": 4694,
+  "count": 4692,
   "declarations": [
     {
       "name": "AISafetyAtlas",
@@ -299,16 +299,6 @@
       "name": "AISafetyAtlas.Analysis.volume_image_eq_zero_of_contDiffOn",
       "kind": "theorem",
       "module": "AISafetyAtlas.Analysis.NullImage"
-    },
-    {
-      "name": "AISafetyAtlas.Analysis.volume_measurePreserving_curry",
-      "kind": "theorem",
-      "module": "AISafetyAtlas.Analysis.PolynomialGenericity"
-    },
-    {
-      "name": "AISafetyAtlas.Analysis.volume_measurePreserving_uncurry",
-      "kind": "theorem",
-      "module": "AISafetyAtlas.Analysis.PolynomialGenericity"
     },
     {
       "name": "AISafetyAtlas.Analysis.volume_ne_zero_pi_pi",

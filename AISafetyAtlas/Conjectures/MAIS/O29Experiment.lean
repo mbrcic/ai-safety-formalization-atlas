@@ -75,9 +75,10 @@ What is **not** here is (b) on a class where the risk *does* decay, which is
 where its rate, its `β → 0` deterioration and its crossover live, and which needs
 mathematics this module contains none of. Nor is (c)'s design problem. A
 determine-problem is not a *conjecture* row; it carries a **target** row naming
-its specification, and `IsBoltzmannRiskRate` below is CONJ-016's. Clause (c) has a blocked row,
-CONJ-020, because the risk here is already an infimum over analysts and there is
-no object over which to state a maximization.
+its specification, and `IsBoltzmannRiskRate` below is CONJ-016's. Clause (c) has no
+ledger row at all: the atlas cannot state it, because the risk here is already an
+infimum over analysts and there is no object over which to state a maximization.
+That absence is recorded in `docs/provenance/mais-a2-statement-coverage.md`.
 
 **What a downstream module can unfold.** `boltzmannAnswer`,
 `runBoltzmannTranscript` and `boltzmannMinimaxRisk` carry `@[expose]`, so their

@@ -1,16 +1,20 @@
 # Retired conjecture-ledger rows
 
 Rows removed from `conjectures.yaml` verbatim, with the date and the reason.
-**Nothing here is a live ledger row.** A row leaves the ledger for one of two
-reasons, and both are recorded rather than deleted:
+**Nothing here is a live ledger row.** A row leaves the ledger for one of three
+reasons, and all are recorded rather than deleted:
 
 * the encoding was **withdrawn** — the registered proposition was defective, and
   the source problem it aimed at is unaffected;
 * the row was **atlas-original** and the MAIS source-first rule in
   [`docs/guide/conjectures.md`](../guide/conjectures.md#scope-against-the-printed-source)
-  keeps atlas-authored variants out of the live MAIS ledger.
+  keeps atlas-authored variants out of the live MAIS ledger;
+* the row held **no Lean and no proposition** — it recorded that a printed
+  problem cannot be stated here at all. That is a fact about the atlas's
+  coverage, and it belongs in the coverage map and the source directory rather
+  than on the conjecture board. See *The six coverage rows* below.
 
-This file exists so that neither exit is an undocumented decision. The ledger's
+This file exists so that no exit is an undocumented decision. The ledger's
 own rule — a terminal state requires a written `resolution` — is honoured by the
 entry below rather than by a row that is no longer there. `CONJ-` numbers listed
 here are **retired and never reused**. `conjectures.yaml` records the next
@@ -153,3 +157,256 @@ third clause entry, together with `isO27EdgeSurvivalRegion_self`, the theorem
 that the canonical region satisfies that specification by unfolding and so
 records the admissibility gap as a checked fact rather than a note.
 
+
+
+## The six coverage rows, retired together
+
+**Retired 2026-08-30.** These six carried no `lean`, no `Prop`, and no
+`refutation`. Each recorded that one printed A2 problem cannot be stated in this
+tree at all, and named the declarations that are missing.
+
+That record is worth keeping and was never worth a ledger row. The elicitation's
+first outcome for a MAIS problem is *"Not statable — recorded (as O1/O16 already
+are). The map says why. **No Lean required.**"*, and the atlas already records
+exactly that for MAIS-O1 and MAIS-O16 in the `mais-open-problems-2026` source
+entry of `registry.yaml`, without minting a `CONJ-` number. Minting one per
+unstatable problem is what turns a selective conjecture board into a coverage
+index for one agenda — the first item on `ROADMAP_IDEAS.md` §8.5's do-not list.
+
+**Nothing recorded here was lost.** Every `blocked_on` and `absent_declarations`
+entry below is stated at greater length, per problem, in the matrix of
+[`mais-a2-statement-coverage.md`](mais-a2-statement-coverage.md), which is the
+live home of the coverage map; the six problems are also named in the
+`mais-open-problems-2026` notes in `registry.yaml`. What changed is the address,
+not the content, and none of these problems is closer to or further from being
+statable than it was.
+
+`CONJ-018`–`CONJ-022` and `CONJ-024` are retired and never reused. The snapshots
+below are the rows as they stood at commit `cfe608e`.
+
+## CONJ-018 — MAIS-O2 (`prob:noisy`)
+
+```json
+{
+  "id": "CONJ-018",
+  "kind": "blocked",
+  "problem": "MAIS-O2",
+  "statement": "MAIS-A2 prob:noisy replaces the policy-probability oracle by sampled actions, allows positive regret, and asks for the minimax budget, separating switching-surface location, stochastic-policy estimation and the irreducible ambiguity from regret, then adds independent response corruption at a known level.",
+  "refutation": "",
+  "prior_art": "MAIS-A2 prob:noisy. The randomized perfect-recall analyst and the expected-error minimax risk arrived with AISafetyAtlas.Causal.Query; the oracle did not.",
+  "lean": "",
+  "lean_module": "",
+  "answer_candidate": [],
+  "answer_admissible": [],
+  "answer_correct": [],
+  "admissibility_status": "NotApplicable",
+  "blocked_on": "The query layer observes exact real policy probabilities, so a transcript's answers are numbers rather than draws. A sampled-answer transcript exists for one channel -- the Boltzmann experiment in Conjectures.MAIS.O29Experiment -- but its answer is a binary Boltzmann response at Bool, not a sampled action under a supplied policy at an arbitrary action type. Independent response corruption at a known level is a second and unrelated gap.",
+  "absent_declarations": [
+    "AISafetyAtlas.Causal.SampledActionOracle",
+    "AISafetyAtlas.Causal.CorruptedAnswer"
+  ],
+  "tags": [
+    "learning-theory",
+    "information-theory"
+  ],
+  "proposed_by": "Atlas coverage record; the printed problem has no Lean object.",
+  "status": "OPEN",
+  "resolution": "",
+  "source_ref": [
+    "mais-a2-2026"
+  ],
+  "context_source_ref": [],
+  "source_scope": "NotFormalized",
+  "source_fidelity": "NotFormalized",
+  "source_note": ""
+}
+```
+
+## CONJ-019 — MAIS-O28 (`prob:average`)
+
+```json
+{
+  "id": "CONJ-019",
+  "kind": "blocked",
+  "problem": "MAIS-O28",
+  "statement": "MAIS-A2 prob:average replaces worst-case regret by an exception mass under a declared distribution and asks for the radius up to constants, the threshold below which the graph stays identified, and the rate at which the zero-regret radius vanishes as the exception mass does.",
+  "refutation": "",
+  "prior_art": "MAIS-A2 prob:average. Print cites Richens et al. 2025 as empirical evidence and Nayebi 2026 as a goal-based average-case recovery theorem; the interventional version is open.",
+  "lean": "",
+  "lean_module": "",
+  "answer_candidate": [],
+  "answer_admissible": [],
+  "answer_correct": [],
+  "admissibility_status": "NotApplicable",
+  "blocked_on": "The admissibility notion is average-case against a declared continuous distribution on pairs of profiles with a uniform real mixing weight and masks. The atlas has worst-case admissibility only, and no measure on profile pairs, so neither the exception mass nor the radius it induces can be written.",
+  "absent_declarations": [
+    "AISafetyAtlas.Causal.AverageAdmissibleFamily",
+    "AISafetyAtlas.Causal.profilePairMeasure"
+  ],
+  "tags": [
+    "learning-theory",
+    "decision-theory"
+  ],
+  "proposed_by": "Atlas coverage record; the printed problem has no Lean object.",
+  "status": "OPEN",
+  "resolution": "",
+  "source_ref": [
+    "mais-a2-2026"
+  ],
+  "context_source_ref": [],
+  "source_scope": "NotFormalized",
+  "source_fidelity": "NotFormalized",
+  "source_note": ""
+}
+```
+
+## CONJ-020 — MAIS-O29(c) (`prob:boltzmann`(c))
+
+```json
+{
+  "id": "CONJ-020",
+  "kind": "blocked",
+  "problem": "MAIS-O29(c)",
+  "statement": "MAIS-A2 prob:boltzmann(c) asks which distribution over queries maximizes the minimax rate -- the design problem over mixtures, masks and observations, which print separates from the estimation theory of clause (b).",
+  "refutation": "",
+  "prior_art": "MAIS-A2 prob:boltzmann(c). Print says the econometric literature supplies the local analysis for (b) but not the design question.",
+  "lean": "",
+  "lean_module": "",
+  "answer_candidate": [],
+  "answer_admissible": [],
+  "answer_correct": [],
+  "admissibility_status": "NotApplicable",
+  "blocked_on": "boltzmannMinimaxRisk is already an infimum over analysts, so it optimizes the query strategy away. The design problem needs the risk under a *fixed* query law, and then an extremum over such laws; neither object exists, so there is nothing over which to state a maximization.",
+  "absent_declarations": [
+    "AISafetyAtlas.Conjectures.MAIS.boltzmannMinimaxRiskUnder",
+    "AISafetyAtlas.Conjectures.MAIS.IsOptimalQueryDesign"
+  ],
+  "tags": [
+    "learning-theory",
+    "information-theory"
+  ],
+  "proposed_by": "Atlas coverage record; the printed problem has no Lean object.",
+  "status": "OPEN",
+  "resolution": "",
+  "source_ref": [
+    "mais-a2-2026"
+  ],
+  "context_source_ref": [],
+  "source_scope": "NotFormalized",
+  "source_fidelity": "NotFormalized",
+  "source_note": ""
+}
+```
+
+## CONJ-021 — MAIS-O30 (`prob:restricted`)
+
+```json
+{
+  "id": "CONJ-021",
+  "kind": "blocked",
+  "problem": "MAIS-O30",
+  "statement": "MAIS-A2 prob:restricted asks, for almost every parameter choice, which edge indicators and table entries are Sigma_W-identifiable, characterized combinatorially in the graph and the sets W, O and Z, together with the minimal W identifying everything on the ancestors of the utility.",
+  "refutation": "",
+  "prior_art": "MAIS-A2 prob:restricted, whose flavor print compares to Eberhardt, Glymour and Scheines on how many experiments identify a causal graph.",
+  "lean": "",
+  "lean_module": "",
+  "answer_candidate": [],
+  "answer_admissible": [],
+  "answer_correct": [],
+  "admissibility_status": "NotApplicable",
+  "blocked_on": "Sigma_W -- mixtures acting as the identity outside W -- has no general form here. One instance exists: O31LocalMixture is Sigma_W for a single intervenable variable on the chain, built for q:chain. What is missing is the general construction, labels for edge and table functionals, and a combinatorial classifier in (G, W, O, Z). The coverage matrix said 'Sigma_W-identifiability' was missing outright for longer than that was true, which is why the absence is now named at declaration level.",
+  "absent_declarations": [
+    "AISafetyAtlas.Causal.RestrictedMixture",
+    "AISafetyAtlas.Causal.SigmaIdentifiable"
+  ],
+  "tags": [
+    "interpretability",
+    "learning-theory"
+  ],
+  "proposed_by": "Atlas coverage record; the printed problem has no Lean object.",
+  "status": "OPEN",
+  "resolution": "",
+  "source_ref": [
+    "mais-a2-2026"
+  ],
+  "context_source_ref": [],
+  "source_scope": "NotFormalized",
+  "source_fidelity": "NotFormalized",
+  "source_note": ""
+}
+```
+
+## CONJ-022 — MAIS-O32 (`prob:rate`)
+
+```json
+{
+  "id": "CONJ-022",
+  "kind": "blocked",
+  "problem": "MAIS-O32",
+  "statement": "MAIS-A2 prob:rate asks whether the 1/n resolution radius is the truth for goal-conditioned agents over a finite communicating controlled Markov process, in the first-action-data setting of the goal-based theorem.",
+  "refutation": "",
+  "prior_art": "MAIS-A2 prob:rate, in the goal-based setting of the agenda's Theorem thm:rabe.",
+  "lean": "",
+  "lean_module": "",
+  "answer_candidate": [],
+  "answer_admissible": [],
+  "answer_correct": [],
+  "admissibility_status": "NotApplicable",
+  "blocked_on": "The goal layer landed 2026-08-30, built for MAIS-O33 and shared with this row: AISafetyAtlas.Causal.ControlledProcess is print's finite stationary controlled Markov process with the communicating condition, AISafetyAtlas.Causal.Goal is composite goals and depth with the trajectory semantics, AISafetyAtlas.Causal.GoalDynamics is deterministic policies at print's own trajectory-prefix history type, the trajectory law, bounded goal-conditioned agents and the first-action map AISafetyAtlas.Causal.firstActionMapFull this row's family is built from, and AISafetyAtlas.Causal.Corruption is the analyst. The congruence lemma this row used to record as missing is no longer needed for MAIS-O33, whose witness runs on action-independent environments where AISafetyAtlas.Causal.trajectoryLaw_congr makes the two laws the same measure; it would be needed again for a family of environments whose transitions read the action, which is what this row's 1/n question is about. What is still absent is this row's own resolution radius over that family. The atlas's causal layer is interventional rather than goal-conditioned, so nothing here is a specialization of what exists.",
+  "absent_declarations": [
+    "AISafetyAtlas.Causal.resolutionRadius"
+  ],
+  "tags": [
+    "decision-theory",
+    "learning-theory"
+  ],
+  "proposed_by": "Atlas coverage record; the printed problem has no Lean object.",
+  "status": "OPEN",
+  "resolution": "",
+  "source_ref": [
+    "mais-a2-2026"
+  ],
+  "context_source_ref": [],
+  "source_scope": "NotFormalized",
+  "source_fidelity": "NotFormalized",
+  "source_note": ""
+}
+```
+
+## CONJ-024 — MAIS-O35 (`prob:starter-sample`)
+
+```json
+{
+  "id": "CONJ-024",
+  "kind": "blocked",
+  "problem": "MAIS-O35",
+  "statement": "MAIS-A2 prob:starter-sample asks, on a compact locus of the two-variable family where the local radius is linear in the regret, for matching upper and lower bounds on the sampled-action budget recovering the graph and all three parameters, then the crossover at positive regret between sampling error and the radius, and finally the sharp cost of independent response corruption.",
+  "refutation": "",
+  "prior_art": "MAIS-A2 prob:starter-sample, a starter problem beside prob:starter-set. Print suggests the capacity factor 1/(1-H(zeta)) as the corruption cost.",
+  "lean": "",
+  "lean_module": "",
+  "answer_candidate": [],
+  "answer_admissible": [],
+  "answer_correct": [],
+  "admissibility_status": "NotApplicable",
+  "blocked_on": "The two-variable real chart exists and the rest does not: a sampled-action minimax risk, regret adversaries, switching surfaces of the optimal policy family, and the binary-channel capacity that print's conjectured corruption cost is stated in. It shares prob:noisy's missing oracle and adds three objects of its own.",
+  "absent_declarations": [
+    "AISafetyAtlas.Causal.sampledActionBudget",
+    "AISafetyAtlas.Causal.SwitchingSurface"
+  ],
+  "tags": [
+    "learning-theory",
+    "information-theory"
+  ],
+  "proposed_by": "Atlas coverage record; the printed problem has no Lean object.",
+  "status": "OPEN",
+  "resolution": "",
+  "source_ref": [
+    "mais-a2-2026"
+  ],
+  "context_source_ref": [],
+  "source_scope": "NotFormalized",
+  "source_fidelity": "NotFormalized",
+  "source_note": ""
+}
+```

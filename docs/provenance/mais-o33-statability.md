@@ -86,7 +86,8 @@ Lemma 2. The table below is updated; the probabilistic half is what is left.
 | the reconstruction target and `2/3` success | yes | sup-norm on kernels | — |
 
 Nothing here is *unstatable*. Every row without a checkmark is work, not a
-blocker of the kind `CONJ-018`–`CONJ-024` mostly record.
+blocker of the kind the coverage matrix records for MAIS-O2, O28, O29(c), O30,
+O32 and O35.
 
 ## The `δ = 0` trap, and why the candidate does not fall into it
 
@@ -245,7 +246,7 @@ Named so the absence is checkable rather than asserted:
   measure* for every policy, and the splice goes through unconditionally
   (`AISafetyAtlas.Causal.exists_isDeltaBounded_prescribing`). A congruence lemma
   for `ProbabilityTheory.Kernel.traj` would be needed again for a family whose
-  transitions read the action, which is what `CONJ-022`/MAIS-O32 is about;
+  transitions read the action, which is what MAIS-O32 is about;
 - ~~`AISafetyAtlas.Causal.PersistentAdversary` and
   `AISafetyAtlas.Causal.succeedsWithProbability`~~ — **Corrected 2026-08-30:
   landed** as `AISafetyAtlas.Causal.IsCorruption`,

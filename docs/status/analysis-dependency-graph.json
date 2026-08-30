@@ -274,14 +274,6 @@
       "kind": "theorem",
       "deps": []
     },
-    "AISafetyAtlas.Analysis.volume_measurePreserving_curry": {
-      "kind": "theorem",
-      "deps": []
-    },
-    "AISafetyAtlas.Analysis.volume_measurePreserving_uncurry": {
-      "kind": "theorem",
-      "deps": []
-    },
     "AISafetyAtlas.Analysis.volume_ne_zero_pi_pi": {
       "kind": "theorem",
       "deps": []

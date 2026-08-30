@@ -28,10 +28,13 @@ reach for.
 | `ae_eval_ne_zero_fintype` | the same at an arbitrary finite variable type — the form that gets applied |
 | `volume_setOf_eval_eq_zero` | the Lebesgue null-set form |
 | `ae_eval_ne_zero_addHaar` | the same for any additive Haar measure |
-| `volume_measurePreserving_uncurry` | uncurrying `ι → κ → ℝ` to `ι × κ → ℝ` preserves `volume` |
-| `volume_measurePreserving_curry` | the same in the direction the application uses |
 | `ae_eval_ne_zero_uncurry` | the a.e. statement over matrix-shaped points |
 | `volume_ne_zero_pi_pi` | `volume` on `ι → κ → ℝ` is not the zero measure |
+
+The two currying transfer lemmas the last two are proved through --
+`volume_measurePreserving_uncurry` and `volume_measurePreserving_curry` -- are
+`private`. They are named nowhere outside this file, so exporting them would pin
+an API surface no consumer reads.
 
 ## Why the hypothesis is `NoAtoms` on each factor rather than Haar
 
@@ -288,8 +291,12 @@ infinite-product statements `ProbabilityTheory.infinitePi_map_piCurry` and
 /-- **Uncurrying is measure preserving** for finite products of Lebesgue
 measure. This is the direction that proves itself: the target is a flat product,
 so `MeasureTheory.Measure.pi_eq` applies, and the preimage of a box is a box of
-boxes. -/
-public theorem volume_measurePreserving_uncurry (ι κ : Type*) [Fintype ι] [Fintype κ] :
+boxes.
+
+Private: nothing outside this file names it. It is the proof of
+`volume_measurePreserving_curry` and of `volume_ne_zero_pi_pi`, and those two
+are what the genericity arguments call. -/
+private theorem volume_measurePreserving_uncurry (ι κ : Type*) [Fintype ι] [Fintype κ] :
     MeasurePreserving (MeasurableEquiv.curry ι κ ℝ).symm
       (volume : Measure (ι → κ → ℝ)) (volume : Measure (ι × κ → ℝ)) where
   measurable := (MeasurableEquiv.curry ι κ ℝ).symm.measurable
@@ -305,8 +312,11 @@ public theorem volume_measurePreserving_uncurry (ι κ : Type*) [Fintype ι] [Fi
     simp_rw [Measure.pi_pi]
     exact (Fintype.prod_prod_type (fun q : ι × κ => volume (t q))).symm
 
-/-- **Currying is measure preserving**, the form the genericity argument uses. -/
-public theorem volume_measurePreserving_curry (ι κ : Type*) [Fintype ι] [Fintype κ] :
+/-- **Currying is measure preserving**, the form the genericity argument uses.
+
+Private for the same reason as `volume_measurePreserving_uncurry`: it is the
+proof of `ae_eval_ne_zero_uncurry` and is named nowhere else. -/
+private theorem volume_measurePreserving_curry (ι κ : Type*) [Fintype ι] [Fintype κ] :
     MeasurePreserving (MeasurableEquiv.curry ι κ ℝ)
       (volume : Measure (ι × κ → ℝ)) (volume : Measure (ι → κ → ℝ)) := by
   simpa using

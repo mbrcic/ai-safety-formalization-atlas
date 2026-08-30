@@ -601,7 +601,7 @@ COUNT_MAIS = [
     # read exactly like agreement.
     (
         re.compile(
-            r"\ball (?P<n>[\w-]+) printed problems of the MAIS agendas\b", re.I
+            r"\b(?:all|covering) (?P<n>[\w-]+) printed problems of the MAIS agendas\b", re.I
         ),
         "mais_problems",
     ),

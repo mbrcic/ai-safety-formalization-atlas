@@ -1113,8 +1113,10 @@ def render_state_snapshot(registry: dict, conjectures: dict) -> str:
             f"- Open conjectures: **{open_conjectures(conjectures)}**"
             f" of **{conjecture_rows(conjectures)}** recorded; the ledger also"
             f" holds **{rows_of_kind(conjectures, 'target')}** determine-problem"
-            f" targets and **{rows_of_kind(conjectures, 'blocked')}** printed"
-            " problems the atlas cannot yet state."
+            " targets. Problems the atlas cannot state carry no row at all and"
+            " are recorded against their source directory, so this line does not"
+            " count them; a resolved row states which printed clause it covers,"
+            " and one of them (CONJ-003) is true only because its class is empty."
             if conjectures["conjectures"]
             else "- Open conjectures: **0**; none recorded yet."
         ),

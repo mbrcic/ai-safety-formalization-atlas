@@ -10,7 +10,7 @@ Edges come from the elaborated Lean environment. This answers the question the p
 
 So `A → B` means *`B` occurs in `A`'s statement, or in `A`'s body when `A` is a definition*. A lemma used only inside a proof does not appear. Reading the table as a complete call graph would be wrong, and the two sections below are scoped so that they stay true under this limit.
 
-`56` authored declarations in `AISafetyAtlas.Analysis.*` (47 theorems). Compiler-generated companions and projections are dropped.
+`54` authored declarations in `AISafetyAtlas.Analysis.*` (45 theorems). Compiler-generated companions and projections are dropped.
 
 ## Load-bearing declarations
 
@@ -83,8 +83,6 @@ None.
 | `volume_image_eq_zero_of_card_lt` | theorem | — |
 | `volume_image_eq_zero_of_contDiff` | theorem | — |
 | `volume_image_eq_zero_of_contDiffOn` | theorem | — |
-| `volume_measurePreserving_curry` | theorem | — |
-| `volume_measurePreserving_uncurry` | theorem | — |
 | `volume_ne_zero_pi_pi` | theorem | — |
 | `volume_range_eq_zero_of_contDiff` | theorem | — |
 | `volume_setOf_eval_eq_zero` | theorem | — |

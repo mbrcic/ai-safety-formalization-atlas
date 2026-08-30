@@ -24,12 +24,20 @@ aggregating `Causal` facade and that is
 deliberate — these are peer modules, so a consumer imports the one it needs.
 
 **On top of that layer sits the MAIS conjecture ledger, also in no release.**
-Nineteen MAIS-linked ledger rows span fifteen printed problem numbers -- all
-fourteen of agenda A2, plus A3's `prob:samples`, whose row shares none of the
-causal vocabulary -- and only some of them are `Prop`s: nine are conjectures or
-graded candidate answers in `AISafetyAtlas.Conjectures.MAIS`, four are
-determine-problem specifications over a candidate answer, and six record a
-printed problem the atlas cannot state at all. Six of the nine take agenda
+Thirteen MAIS-linked ledger rows span ten printed problem numbers -- nine of
+agenda A2, plus A3's `prob:samples`, whose row shares none of the causal
+vocabulary. Nine are conjectures or graded candidate answers in
+`AISafetyAtlas.Conjectures.MAIS`; four are determine-problem specifications over
+a candidate answer. **Every row carries Lean.** The atlas covers fifteen printed
+problems in all, but the six it cannot state at all -- MAIS-O2, O28, O29(c),
+O30, O32 and O35 -- are recorded in the coverage matrix
+`docs/provenance/mais-a2-statement-coverage.md` and in the
+`mais-open-problems-2026` source entry, where MAIS-O1 and MAIS-O16 have always
+been, rather than as ledger rows. They held one until 2026-08-30; a row with no
+`lean`, no `Prop` and no `refutation` states a fact about this repository's
+coverage, and putting one on the conjecture board per unstatable problem is how
+a selective ledger becomes a coverage index for a single agenda. Six of the nine
+take agenda
 clauses as their graded source and three grade candidate statements
 submitted to MAIS issues [#4](https://github.com/lionellevine/MAIS/issues/4), [#8](https://github.com/lionellevine/MAIS/issues/8) and [#9](https://github.com/lionellevine/MAIS/issues/9). Seven are resolved and two remain open. An open
 conjecture asserts nothing: it is a compiling statement with no proof, and the
@@ -43,7 +51,7 @@ it; atlas-original variants and withdrawn encodings stay outside this ledger,
 recorded verbatim with their reason in
 `docs/provenance/retired-conjecture-rows.md` so that leaving is not an
 undocumented decision and the retired `CONJ-` numbers are never reused. Eight
-of the nineteen rows are resolved and each says which printed clause it covers
+of the thirteen rows are resolved and each says which printed clause it covers
 -- a resolved row that answers one clause of three is not a resolved printed
 problem. **Seven of those eight say something about their printed problem.** The
 eighth is CONJ-003 (MAIS-O26), which is true because it has no instances:
@@ -173,7 +181,7 @@ public API, or axiom profile changed in either release.
 - Atlas Lean declarations: **248** (claim-row WRAPPER **13** / BRIDGE **5**).
 - Results stating a source claim: **49**; recording a formalization only: **37** (**28** on the public root import).
 - Reviewed AI-system bridges: **3**; statement-reviewed only: **1**.
-- Open conjectures: **3** of **10** recorded; the ledger also holds **4** determine-problem targets and **6** printed problems the atlas cannot yet state.
+- Open conjectures: **3** of **10** recorded; the ledger also holds **4** determine-problem targets. Problems the atlas cannot state carry no row at all and are recorded against their source directory, so this line does not count them; a resolved row states which printed clause it covers, and one of them (CONJ-003) is true only because its class is empty.
 - Claim results with statement-match (`EXACT`/`EQUIVALENT`): **14**; with `RELATED`-only formalization: **7**. Counts are claim rows, not records: an artifact row's grade is on the row and never in this number.
 - Rows carrying atlas Lean: **49** (**20** of them claim rows); catalogued candidate leads: **5**.
 <!-- END GENERATED REGISTRY SNAPSHOT -->

@@ -71,27 +71,9 @@ example : Prop := AISafetyAtlas.Conjectures.MAIS.maisO31_chainClassificationCand
 #check @AISafetyAtlas.Conjectures.MAIS.IsO31IdentifiableSetAlmostEverywhere
 #check @AISafetyAtlas.Conjectures.MAIS.IsO31IdentifiableSetAlmostEverywhere
 
--- CONJ-018 (blocked, OPEN)
--- No Lean declaration: AISafetyAtlas.Causal.SampledActionOracle, AISafetyAtlas.Causal.CorruptedAnswer are recorded absent.
-
--- CONJ-019 (blocked, OPEN)
--- No Lean declaration: AISafetyAtlas.Causal.AverageAdmissibleFamily, AISafetyAtlas.Causal.profilePairMeasure are recorded absent.
-
--- CONJ-020 (blocked, OPEN)
--- No Lean declaration: AISafetyAtlas.Conjectures.MAIS.boltzmannMinimaxRiskUnder, AISafetyAtlas.Conjectures.MAIS.IsOptimalQueryDesign are recorded absent.
-
--- CONJ-021 (blocked, OPEN)
--- No Lean declaration: AISafetyAtlas.Causal.RestrictedMixture, AISafetyAtlas.Causal.SigmaIdentifiable are recorded absent.
-
--- CONJ-022 (blocked, OPEN)
--- No Lean declaration: AISafetyAtlas.Causal.resolutionRadius are recorded absent.
-
 -- CONJ-023 (answer, RESOLVED)
 example : Prop := AISafetyAtlas.Conjectures.MAIS.maisO33_etaStarIsZero
 #check @AISafetyAtlas.Conjectures.MAIS.maisO33_etaStarIsZeroGivenBaseline
-
--- CONJ-024 (blocked, OPEN)
--- No Lean declaration: AISafetyAtlas.Causal.sampledActionBudget, AISafetyAtlas.Causal.SwitchingSurface are recorded absent.
 
 -- CONJ-025 (claim, RESOLVED)
 example : Prop := AISafetyAtlas.Conjectures.MAIS.maisO38_polynomialSamplesSuffice

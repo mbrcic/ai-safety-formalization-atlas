@@ -136,6 +136,55 @@ def synthetic_conjecture(data: dict) -> dict:
     return data["conjectures"][0]
 
 
+def synthetic_blocked_conjecture(data: dict) -> dict:
+    """A schema-clean `blocked` record to mutate, independent of the ledger.
+
+    Same reasoning as `synthetic_conjecture`, for the same reason it was needed
+    sooner: on 2026-08-30 the last six `blocked` rows left the ledger, because a
+    row with no `lean`, no `Prop` and no `refutation` records a coverage fact
+    that belongs in the coverage map and the source directory rather than on the
+    conjecture board. The `blocked` kind and its rules stay — the next printed
+    problem the atlas cannot state may still want one — so the rules must stay
+    tested with no live row to hang them on. Three cases below previously
+    mutated `CONJ-018`, `CONJ-019` and `CONJ-020` and would now raise
+    `StopIteration` instead of testing anything.
+    """
+    data["next_id"] = 27
+    data["conjectures"].insert(
+        0,
+        {
+            "id": "CONJ-026",
+            "kind": "blocked",
+            "problem": "",
+            "statement": "Synthetic blocked harness record. Never written to the ledger.",
+            "refutation": "",
+            "prior_art": "Not applicable; this record exists only under test.",
+            "lean": "",
+            "lean_module": "",
+            "answer_candidate": [],
+            "answer_admissible": [],
+            "answer_correct": [],
+            "admissibility_status": "NotApplicable",
+            "blocked_on": (
+                "Synthetic; this record exists only under test. The validator "
+                "requires eighty characters here, because naming the missing "
+                "substrate is the whole content of a blocked row."
+            ),
+            "absent_declarations": ["AISafetyAtlas.Conjectures.Checks.absent"],
+            "tags": ["learning-theory"],
+            "proposed_by": "test_validators",
+            "status": "OPEN",
+            "resolution": None,
+            "source_ref": ["survey-ref-005"],
+            "context_source_ref": [],
+            "source_scope": "NotFormalized",
+            "source_fidelity": "NotFormalized",
+            "source_note": "",
+        },
+    )
+    return data["conjectures"][0]
+
+
 CASES = [
     (
         "registry: graded row citing only a directory source",
@@ -1039,7 +1088,7 @@ CASES = [
         "conjectures: blocked row naming a Lean declaration",
         "validate_conjectures.py",
         "conjectures.yaml",
-        lambda d: first(d["conjectures"], id="CONJ-018").__setitem__(
+        lambda d: synthetic_blocked_conjecture(d).__setitem__(
             "lean", "AISafetyAtlas.Conjectures.Checks.synthetic"
         ),
         "blocked row is the record that none exists",
@@ -1048,7 +1097,7 @@ CASES = [
         "conjectures: blocked row with no absence to trip on",
         "validate_conjectures.py",
         "conjectures.yaml",
-        lambda d: first(d["conjectures"], id="CONJ-019").__setitem__(
+        lambda d: synthetic_blocked_conjecture(d).__setitem__(
             "absent_declarations", []
         ),
         "a note that rots",
@@ -1057,7 +1106,7 @@ CASES = [
         "conjectures: blocked row carrying a scope grade",
         "validate_conjectures.py",
         "conjectures.yaml",
-        lambda d: first(d["conjectures"], id="CONJ-020").__setitem__(
+        lambda d: synthetic_blocked_conjecture(d).__setitem__(
             "source_scope", "Same"
         ),
         "are one fact and must be used together",

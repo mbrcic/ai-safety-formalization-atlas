@@ -93,7 +93,7 @@ row uses it today; the positional `answer_admissible` list is what it is checked
 against, so it cannot be asserted of a row whose clauses agree.
 
 `scripts/validate_conjectures.py` prints the breakdown rather than one number,
-because *"eight recorded"* over a 20-row file is how this confusion started. Counts elsewhere in this guide are over conjecture rows — kinds
+because *"eight recorded"* over a 14-row file is how this confusion started. Counts elsewhere in this guide are over conjecture rows — kinds
 `claim` and `answer` — since a blocked row is not an open conjecture.
 
 ## Who proposed what
