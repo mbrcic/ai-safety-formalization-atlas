@@ -9,8 +9,8 @@ attack. So a precise open question is a deliverable here, not a placeholder for
 one.
 
 An open conjecture asserts nothing — defining a `Prop` is not claiming it, and
-that is the whole point of the mechanism. **Nine conjecture records are currently
-present: three open and six resolved**, and each resolved row
+that is the whole point of the mechanism. **Ten conjecture records are currently
+present: three open and seven resolved**, and each resolved row
 names the proof that settled it.
 
 ## Four kinds of row, because not every printed problem is a conjecture
@@ -98,10 +98,20 @@ because *"eight recorded"* over a 20-row file is how this confusion started. Cou
 
 ## Who proposed what
 
-**Four of the five resolved rows rest on constructions submitted to MAIS by
-other people, and the fifth reuses one of them.** The ledger records this per
-row in `proposed_by`; it is repeated here because a reader who meets the atlas
-through a "resolved" count will otherwise read the constructions as its own.
+**Every resolved conjecture row but one rests on a construction submitted to
+MAIS by other people.** The exception is CONJ-003 (MAIS-O26), which the atlas's
+own MAIS-O24 refutation settles vacuously — and that refutation is itself a
+submitted construction, [issue #7](https://github.com/lionellevine/MAIS/issues/7).
+
+**One of the eight resolved rows is not a result, and the count says so.**
+CONJ-003 is true because `conj:exact` has no instances: it is stated over the
+class `prob:effective`'s *"fix one list supplied by a solution"* names, and no
+such solution exists. Its `Prop` is proved, so the row is `RESOLVED`; nothing
+about the rate is. Seven resolved rows say something about their printed
+problem.
+The ledger records this per row in `proposed_by`; it is repeated here because a
+reader who meets the atlas through a "resolved" count will otherwise read the
+constructions as its own.
 
 | Row | Target | The construction is | The atlas's part |
 |---|---|---|---|
@@ -110,6 +120,7 @@ through a "resolved" count will otherwise read the constructions as its own.
 | CONJ-008 | MAIS-O29(a) | issue [#6](https://github.com/lionellevine/MAIS/issues/6)'s collision pair again | the transfer step — that the pair is also a Boltzmann collision at every positive inverse temperature — and its proof |
 | CONJ-009 | MAIS-O34(a), fibre criterion | Rob Sneiderman (Robby955), MAIS [issue #4](https://github.com/lionellevine/MAIS/issues/4) | both directions of the equivalence, the non-vacuity witnesses on each side, the restatement against the printed class, and the semialgebraicity of the criterion |
 | CONJ-010 | MAIS-O31 | Svyatoslav Novikov (kumino) with OpenAI Codex, MAIS [issue #8](https://github.com/lionellevine/MAIS/issues/8) | transcription only; the row is `OPEN` |
+| CONJ-023 | MAIS-O33 | Svyatoslav Novikov (kumino) with OpenAI Codex, MAIS [issue #9](https://github.com/lionellevine/MAIS/issues/9) | transcription, the machine-check, and two changes of instance — action-independent kernels and `δ = 1/2` — each of which removed a dependency the audit had priced as a project |
 | CONJ-025 | MAIS-O38 | David Holmes (26david26) with GPT 5.6 Sol, MAIS [issue #30](https://github.com/lionellevine/MAIS/issues/30) | transcription and the machine-check, together with four domain-neutral facts Mathlib lacked that the proof needs |
 
 The MAIS-O24 row is a fifth submitted antecedent — Svyatoslav Novikov (kumino)

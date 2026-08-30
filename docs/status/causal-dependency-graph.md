@@ -10,7 +10,7 @@ Edges come from the elaborated Lean environment. This answers the question the p
 
 So `A → B` means *`B` occurs in `A`'s statement, or in `A`'s body when `A` is a definition*. A lemma used only inside a proof does not appear. Reading the table as a complete call graph would be wrong, and the two sections below are scoped so that they stay true under this limit.
 
-`423` authored declarations in `AISafetyAtlas.Causal.*` (230 theorems). Compiler-generated companions and projections are dropped.
+`530` authored declarations in `AISafetyAtlas.Causal.*` (282 theorems). Compiler-generated companions and projections are dropped.
 
 ## Load-bearing declarations
 
@@ -24,8 +24,10 @@ Named in the statements of eight or more others. A change to one of these is a c
 | `Skeleton` | 119 |
 | `ChartIndex` | 69 |
 | `Model.parents` | 57 |
+| `ControlledMarkovProcess` | 47 |
 | `InterventionProfile` | 45 |
 | `Model.cpt` | 43 |
+| `CompositeGoal` | 40 |
 | `Skeleton.mapRat` | 39 |
 | `ProbMixture` | 39 |
 | `Skeleton.utilityParents` | 35 |
@@ -33,8 +35,10 @@ Named in the statements of eight or more others. A change to one of these is a c
 | `SCIM.graph` | 33 |
 | `SCIM.Policy` | 30 |
 | `Skeleton.gap` | 28 |
+| `SequentialGoal` | 28 |
 | `ExoAssignment` | 25 |
 | `SCM` | 23 |
+| `GoalPolicy` | 23 |
 | `SCIM` | 22 |
 | `O24Var` | 22 |
 | `Mixture` | 22 |
@@ -47,6 +51,7 @@ Named in the statements of eight or more others. A change to one of these is a c
 | `ParentConfig` | 19 |
 | `CID.parents` | 19 |
 | `modelError` | 17 |
+| `SubGoal` | 17 |
 | `Skeleton.observed` | 17 |
 | `ShiftedQuery` | 17 |
 | `PolicyFamily` | 17 |
@@ -66,6 +71,7 @@ Named in the statements of eight or more others. A change to one of these is a c
 | `Model.jointProb` | 13 |
 | `instMeasurableSpaceModel` | 12 |
 | `fibreRep` | 12 |
+| `achieveProb` | 12 |
 | `SCIM.instIsWellFoundedWithPolicy` | 12 |
 | `NodeKind` | 12 |
 | `CID.IsWellFounded` | 12 |
@@ -77,7 +83,9 @@ Named in the statements of eight or more others. A change to one of these is a c
 | `Skeleton.M1` | 10 |
 | `Model.regret` | 10 |
 | `o24Size` | 9 |
+| `immediateWins` | 9 |
 | `hardInterventionProfile` | 9 |
+| `compositeGoals` | 9 |
 | `Skeleton.M4` | 9 |
 | `SCIM.expectedUtility` | 9 |
 | `Model.ParentClosed` | 9 |
@@ -89,7 +97,11 @@ Named in the statements of eight or more others. A change to one of these is a c
 | `Model.properAncestors` | 8 |
 | `Model.marginal` | 8 |
 | `Model.fibreScore` | 8 |
+| `GoalHistory` | 8 |
+| `GoalConditionedAgent` | 8 |
+| `FirstActionData` | 8 |
 | `DecisionNetwork.decision` | 8 |
+| `ControlledMarkovProcess.ActionIndependent` | 8 |
 | `ConditionalTables` | 8 |
 | `CID.kind` | 8 |
 
@@ -136,9 +148,22 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 | `CID.utilities` | definition | `CID`, `CID.kind`, `NodeKind`, `NodeKind.utility` |
 | `ChartIndex` | definition | `ParentConfig` |
 | `ChartIndex.extend` | definition | `Assignment`, `ChartIndex`, `ParentConfig`, `binaryDim` |
+| `CompositeGoal` | definition | `SequentialGoal` |
+| `CompositeSatisfies` | definition | `CompositeGoal`, `Satisfies`, `SequentialGoal` |
 | `ConditionalTables` | definition | — |
 | `ConditionalTables.family` | definition | `Assignment`, `ConditionalTables`, `ConditionalTables.table`, `InterventionalFamily` |
 | `ContainsChartBox` | definition | `ChartIndex`, `Model`, `Model.chartSlice`, `binaryDim` |
+| `ControlledMarkovProcess` | definition | — |
+| `ControlledMarkovProcess.ActionIndependent` | definition | `ControlledMarkovProcess`, `ControlledMarkovProcess.prob` |
+| `ControlledMarkovProcess.Communicating` | definition | `ControlledMarkovProcess`, `ControlledMarkovProcess.Reachable` |
+| `ControlledMarkovProcess.FullSupport` | definition | `ControlledMarkovProcess`, `ControlledMarkovProcess.prob` |
+| `ControlledMarkovProcess.OneStep` | definition | `ControlledMarkovProcess`, `ControlledMarkovProcess.prob` |
+| `ControlledMarkovProcess.Reachable` | definition | `ControlledMarkovProcess`, `ControlledMarkovProcess.OneStep` |
+| `ControlledMarkovProcess.SeparatedBy` | definition | `ControlledMarkovProcess`, `ControlledMarkovProcess.prob` |
+| `ControlledMarkovProcess.WithinBall` | definition | `ControlledMarkovProcess`, `ControlledMarkovProcess.prob` |
+| `ControlledMarkovProcess.communicating_of_fullSupport` | theorem | `ControlledMarkovProcess`, `ControlledMarkovProcess.Communicating`, `ControlledMarkovProcess.FullSupport` |
+| `ControlledMarkovProcess.not_withinBall_both` | theorem | `ControlledMarkovProcess`, `ControlledMarkovProcess.SeparatedBy`, `ControlledMarkovProcess.WithinBall` |
+| `ControlledMarkovProcess.prob_le_one` | theorem | `ControlledMarkovProcess`, `ControlledMarkovProcess.prob` |
 | `DecisionNetwork` | definition | — |
 | `DecisionNetwork.IsChance` | definition | `DecisionNetwork`, `DecisionNetwork.decision`, `DecisionNetwork.utility` |
 | `DecisionNetwork.IsDeterministicUtility` | definition | `Assignment`, `DecisionNetwork`, `DecisionNetwork.net`, `DecisionNetwork.utility`, `Model.cpt` |
@@ -155,17 +180,33 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 | `DecisionNetwork.regret_self` | theorem | `DecisionNetwork`, `DecisionNetwork.Policy`, `DecisionNetwork.regret` |
 | `DecisionPolicy` | definition | `Model` |
 | `ExoAssignment` | definition | — |
+| `FirstActionData` | definition | `CompositeGoal` |
+| `FirstActionEstimator` | definition | `FirstActionTranscript`, `KernelEstimate` |
+| `FirstActionStrategy` | definition | `FirstActionTranscript`, `O33Query` |
+| `FirstActionTranscript` | definition | `O33Query` |
+| `FullAgent` | definition | `CompositeGoal`, `FullPolicy` |
+| `FullHistory` | definition | — |
+| `FullPolicy` | definition | `FullHistory` |
+| `GoalConditionedAgent` | definition | `CompositeGoal`, `GoalPolicy` |
+| `GoalHistory` | definition | — |
+| `GoalPolicy` | definition | `GoalHistory` |
 | `HasPolySizeAt` | definition | `ChartIndex`, `IsCompatibleGraph`, `O24Assignment`, `O24Var`, `ParentConfig`, `UtilityConfig`, `o24Size`, `polySize` |
 | `HasPolySizeList` | definition | `HasPolySizeAt`, `O24Assignment` |
 | `InIdentifiedSet` | definition | `AdmissibleFamily`, `Model`, `PolicyFamily`, `Skeleton`, `Skeleton.MarginClass` |
 | `InterventionProfile` | definition | `LocalIntervention` |
 | `InterventionalFamily` | definition | `Assignment` |
+| `IsAchievementTime` | definition | `SubGoal`, `SubGoal.op`, `SubGoal.target`, `TemporalOp` |
+| `IsAchievementTime.unique` | theorem | `IsAchievementTime`, `SubGoal` |
 | `IsCausalBayesNetwork` | definition | `Assignment`, `ConditionalTables`, `ConditionalTables.table`, `InterventionalFamily`, `forcedTable` |
 | `IsCompactSemialgebraicClass` | definition | `ChartIndex`, `Model`, `Model.chartSlice`, `binaryDim` |
 | `IsCompatibleGraph` | definition | — |
+| `IsCorruption` | definition | `CompositeGoal`, `FirstActionData`, `corruptionDomain` |
+| `IsDeltaBounded` | definition | `CompositeGoal`, `ControlledMarkovProcess`, `GoalConditionedAgent`, `achieveProb`, `compositeGoals`, `optimalProb` |
+| `IsDeltaBoundedFull` | definition | `CompositeGoal`, `ControlledMarkovProcess`, `FullAgent`, `achieveProb`, `compositeGoals`, `inducedPolicy`, `optimalProbFull` |
 | `IsNonadaptiveRandomizedStrategy` | definition | `RandomizedQueryStrategy`, `ShiftedQuery`, `Skeleton`, `Transcript` |
 | `IsProbabilityMixture` | definition | `InterventionProfile`, `LocalIntervention`, `Mixture` |
 | `IsRadius` | definition | `Skeleton`, `radiusErrors` |
+| `KernelEstimate` | definition | — |
 | `LocalIntervention` | definition | — |
 | `MeasureEstimator` | definition | `Model`, `Skeleton`, `Transcript`, `instMeasurableSpaceModel` |
 | `MeasureEstimator.discretize` | definition | `MeasureEstimator`, `Model`, `Model.roundDown`, `RandomizedEstimator`, `Skeleton`, `Transcript`, `instMeasurableSpaceModel` |
@@ -296,6 +337,7 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 | `O24Solution.marginClass_subset` | theorem | `Model`, `O24Solution`, `O24Solution.marginClass`, `Skeleton`, `Skeleton.MarginClass`, `binaryDim` |
 | `O24Threshold` | definition | — |
 | `O24Var` | definition | `ChartIndex`, `UtilityConfig` |
+| `O33Query` | definition | `CompositeGoal`, `corruptionDomain` |
 | `ParentConfig` | definition | — |
 | `Policy` | definition | — |
 | `Policy.const` | definition | `Assignment`, `Policy` |
@@ -350,6 +392,9 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 | `SCM.submodel` | definition | `Assignment`, `SCM`, `SCM.dom_pos`, `SCM.exoProb`, `SCM.exoProb_nonneg`, `SCM.exoProb_sum`, `SCM.f`, `SCM.parents` |
 | `SCM.submodel_eval` | theorem | `Assignment`, `ExoAssignment`, `SCM`, `SCM.IsWellFounded`, `SCM.eval`, `SCM.instIsWellFoundedSubmodel`, `SCM.submodel` |
 | `SCM.submodel_eval_notMem` | theorem | `Assignment`, `ExoAssignment`, `SCM`, `SCM.IsWellFounded`, `SCM.eval`, `SCM.f`, `SCM.instIsWellFoundedSubmodel`, `SCM.submodel` |
+| `Satisfies` | definition | `SequentialGoal`, `SubGoal` |
+| `SequentialGoal` | definition | `SubGoal` |
+| `SequentialGoal.depth` | definition | `SequentialGoal`, `SubGoal` |
 | `ShiftedQuery` | definition | `Skeleton` |
 | `Skeleton` | definition | — |
 | `Skeleton.BehaviorEq` | definition | `Assignment`, `Model`, `ProbMixture`, `Skeleton`, `Skeleton.gap`, `Skeleton.observed` |
@@ -395,9 +440,19 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 | `Skeleton.utilityLo` | definition | `Assignment` |
 | `Skeleton.utilityLo_le` | theorem | `Assignment`, `Skeleton.utilityLo` |
 | `Skeleton.utilityParents_mapRat` | theorem | `Skeleton`, `Skeleton.mapRat`, `Skeleton.utilityParents` |
+| `SubGoal` | definition | — |
+| `Succeeds` | definition | `ControlledMarkovProcess`, `FirstActionData`, `FirstActionEstimator`, `FirstActionStrategy`, `KernelEstimate`, `outputLaw`, `reconstructionEvent`, `reconstructionRadius` |
+| `TemporalOp` | definition | — |
+| `TemporalOp.next` | definition | `TemporalOp` |
+| `TolerantAt` | definition | `ControlledMarkovProcess`, `ControlledMarkovProcess.Communicating`, `FirstActionData`, `FirstActionEstimator`, `FirstActionStrategy`, `FullAgent`, `IsCorruption`, `IsDeltaBoundedFull`, `Succeeds`, `firstActionMapFull` |
 | `Transcript` | definition | `ShiftedQuery`, `Skeleton` |
 | `UtilityConfig` | definition | — |
 | `UtilityConfig.extend` | definition | `Assignment`, `UtilityConfig`, `binaryDim` |
+| `achieveProb` | definition | `CompositeGoal`, `CompositeSatisfies`, `ControlledMarkovProcess`, `GoalPolicy`, `statePairs`, `trajectoryLaw` |
+| `achieveProb_congr` | theorem | `CompositeGoal`, `ControlledMarkovProcess`, `ControlledMarkovProcess.ActionIndependent`, `GoalHistory`, `GoalPolicy`, `achieveProb` |
+| `achieveProb_eq_one_of_immediateWin` | theorem | `CompositeGoal`, `ControlledMarkovProcess`, `GoalPolicy`, `SequentialGoal`, `achieveProb`, `immediateWins` |
+| `achieveProb_le_one` | theorem | `CompositeGoal`, `ControlledMarkovProcess`, `GoalPolicy`, `achieveProb` |
+| `achieveProb_le_optimalProb` | theorem | `CompositeGoal`, `ControlledMarkovProcess`, `GoalPolicy`, `achieveProb`, `optimalProb` |
 | `acyclic_of_rank` | theorem | — |
 | `asg` | definition | `Assignment`, `binaryDim`, `binaryState` |
 | `assignment_two_eq` | theorem | `Assignment`, `asg`, `binaryDim` |
@@ -406,11 +461,20 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 | `binaryState_false` | theorem | `binaryState` |
 | `binaryState_true` | theorem | `binaryState` |
 | `binary_eq_zero_or_one` | theorem | `binaryDim` |
+| `boundedGoals` | definition | `SequentialGoal`, `SubGoal`, `goalsOfLength` |
 | `card_binaryLocalIntervention` | theorem | — |
 | `card_chartIndex` | theorem | `ChartIndex`, `ParentConfig`, `chartDim` |
+| `card_compositeGoals` | theorem | `CompositeGoal`, `SequentialGoal`, `boundedGoals`, `compositeGoals` |
+| `card_compositeGoals_avoiding` | theorem | `SequentialGoal`, `SubGoal`, `boundedGoals`, `compositeGoals`, `immediateWins` |
+| `card_corruptionDomain` | theorem | `CompositeGoal`, `compositeGoals`, `corruptionDomain` |
+| `card_corruptionDomain_avoiding` | theorem | `CompositeGoal`, `SequentialGoal`, `SubGoal`, `boundedGoals`, `corruptionDomain`, `immediateWins` |
+| `card_goalsOfLength` | theorem | `SequentialGoal`, `SubGoal`, `goalsOfLength` |
+| `card_immediateWins` | theorem | `SequentialGoal`, `immediateWins` |
 | `card_le_o24Size` | theorem | `o24Size` |
 | `card_o24Var` | theorem | `ChartIndex`, `O24Var`, `ParentConfig`, `UtilityConfig`, `chartDim` |
 | `card_o24Var_le` | theorem | `ChartIndex`, `O24Var`, `ParentConfig`, `UtilityConfig`, `o24Size` |
+| `card_subGoal` | theorem | `SubGoal` |
+| `card_temporalOp` | theorem | `TemporalOp` |
 | `chainParents` | definition | — |
 | `chainParents_acyclic` | theorem | `chainParents` |
 | `chainParents_fixedPoint_not_unique` | theorem | — |
@@ -419,6 +483,10 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 | `chartBox` | definition | `ChartIndex` |
 | `chartDim` | definition | — |
 | `chartOn_mem_chartBox` | theorem | `ChartIndex`, `Model`, `Model.chartOn`, `binaryDim`, `chartBox` |
+| `compositeGoals` | definition | `CompositeGoal`, `SequentialGoal`, `boundedGoals` |
+| `compositeSatisfies_of_immediateWin` | theorem | `CompositeGoal`, `CompositeSatisfies`, `SequentialGoal`, `immediateWins` |
+| `compositeSatisfies_of_now_disjunct` | theorem | `CompositeGoal`, `CompositeSatisfies`, `SequentialGoal`, `nowGoal` |
+| `corruptionDomain` | definition | `CompositeGoal`, `compositeGoals` |
 | `countable_range_roundDown` | theorem | `Model`, `Model.roundDown` |
 | `cptError` | definition | `Assignment`, `Model`, `Model.cpt` |
 | `cptError_eq_zero_iff` | theorem | `Assignment`, `Model`, `Model.cpt`, `cptError` |
@@ -426,12 +494,14 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 | `cptError_nonneg` | theorem | `Model`, `cptError` |
 | `dimBound` | definition | — |
 | `dim_le_dimBound` | theorem | `dimBound` |
+| `disjoint_reconstructionEvent` | theorem | `ControlledMarkovProcess`, `ControlledMarkovProcess.SeparatedBy`, `KernelEstimate`, `reconstructionEvent` |
 | `effectiveMarginClass` | definition | `Model`, `Model.parents`, `O24Assignment`, `O24Assignment.at`, `O24Var`, `Skeleton`, `Skeleton.MarginClass`, `Skeleton.utilityParents`, `binaryDim`, `o24Value` |
 | `effectiveMarginClass_mono` | theorem | `Model`, `O24Assignment`, `Skeleton`, `binaryDim`, `effectiveMarginClass` |
 | `effectiveMarginClass_subset` | theorem | `Model`, `O24Assignment`, `Skeleton`, `Skeleton.MarginClass`, `binaryDim`, `effectiveMarginClass` |
 | `encodeFinsetFin` | definition | — |
 | `encodeO24Var` | definition | `ChartIndex`, `O24Var`, `ParentConfig`, `UtilityConfig`, `finsetFunBits` |
 | `eq_family_of_isCausalBayesNetwork` | theorem | `ConditionalTables`, `ConditionalTables.family`, `InterventionalFamily`, `IsCausalBayesNetwork` |
+| `eventually_startState` | theorem | `ControlledMarkovProcess`, `GoalPolicy`, `trajectoryLaw` |
 | `exactAnalystRisk` | definition | `AdmissibleFamily`, `Model`, `PolicyFamily`, `RandomizedEstimator`, `RandomizedQueryStrategy`, `Skeleton`, `exactExpectedError` |
 | `exactAnalystRisk_discretize_le` | theorem | `MeasureEstimator`, `MeasureEstimator.discretize`, `Model`, `RandomizedQueryStrategy`, `Skeleton`, `dimBound`, `exactAnalystRisk`, `measureAnalystRisk` |
 | `exactAnalystRisk_empty` | theorem | `Model`, `RandomizedEstimator`, `RandomizedQueryStrategy`, `Skeleton`, `exactAnalystRisk` |
@@ -444,6 +514,10 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 | `exactMinimaxRisk_le_measureMinimaxRisk` | theorem | `Model`, `ShiftedQuery`, `Skeleton`, `exactMinimaxRisk`, `measureMinimaxRisk` |
 | `exactPolicyAnswer` | definition | `Policy.prob`, `PolicyFamily`, `ProbMixture.mapRat`, `ShiftedQuery`, `ShiftedQuery.mix`, `ShiftedQuery.observation`, `ShiftedQuery.visible`, `ShiftedQuery.visible_subset`, `Skeleton` |
 | `exactPolicyAnswer_congr_observation` | theorem | `Assignment`, `PolicyFamily`, `ShiftedQuery`, `ShiftedQuery.mix`, `ShiftedQuery.observation`, `ShiftedQuery.visible`, `ShiftedQuery.visible_subset`, `Skeleton`, `exactPolicyAnswer` |
+| `exceptional_ratio_lt` | theorem | — |
+| `exceptional_ratio_lt_with_empty` | theorem | — |
+| `exists_achieveProb_ge` | theorem | `CompositeGoal`, `ControlledMarkovProcess`, `GoalPolicy`, `achieveProb`, `optimalProb` |
+| `exists_isDeltaBounded_prescribing` | theorem | `CompositeGoal`, `ControlledMarkovProcess`, `ControlledMarkovProcess.ActionIndependent`, `GoalConditionedAgent`, `IsDeltaBounded`, `SequentialGoal`, `compositeGoals`, `firstActionMap`, `immediateWins` |
 | `fibreRep` | definition | `Assignment`, `Model`, `Model.dim_pos` |
 | `fibreRep_idem` | theorem | `Assignment`, `Model`, `fibreRep` |
 | `fibreRep_mem` | theorem | `Assignment`, `Model`, `fibreRep` |
@@ -451,6 +525,9 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 | `finTwoEquiv_symm_true` | theorem | — |
 | `finsetFunBits` | definition | — |
 | `finsetFunBits_injective` | theorem | `finsetFunBits` |
+| `firstActionMap` | definition | `CompositeGoal`, `GoalConditionedAgent` |
+| `firstActionMapFull` | definition | `CompositeGoal`, `FullAgent`, `inducedPolicy` |
+| `firstActionMapFull_lift` | theorem | `CompositeGoal`, `GoalConditionedAgent`, `firstActionMap`, `firstActionMapFull`, `liftPolicy` |
 | `fixIntervention` | definition | — |
 | `fixProfile` | definition | `Assignment`, `InterventionProfile`, `fixIntervention` |
 | `flipIntervention` | definition | — |
@@ -458,13 +535,19 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 | `floorMul_le` | theorem | `floorMul` |
 | `floorMul_nonneg` | theorem | `floorMul` |
 | `forcedTable` | definition | `Assignment` |
+| `goalsOfLength` | definition | `SequentialGoal` |
 | `hardInterventionProfile` | definition | `Assignment`, `InterventionProfile`, `LocalIntervention`, `fixIntervention`, `identityIntervention` |
 | `hasSum_pmf_toReal` | theorem | — |
+| `history_zero_const` | theorem | — |
 | `identityIntervention` | definition | — |
+| `immediateWins` | definition | `SequentialGoal`, `SubGoal`, `nowGoal` |
+| `immediateWins_subset_boundedGoals` | theorem | `SequentialGoal`, `boundedGoals`, `immediateWins` |
 | `inIdentifiedSet_mono` | theorem | `InIdentifiedSet`, `Model`, `Skeleton` |
 | `inIdentifiedSet_self` | theorem | `InIdentifiedSet`, `Model`, `Skeleton`, `Skeleton.MarginClass` |
 | `inIdentifiedSet_symm` | theorem | `InIdentifiedSet`, `Model`, `Skeleton` |
 | `inIdentifiedSet_zero_of_behaviorEq` | theorem | `InIdentifiedSet`, `Model`, `Skeleton`, `Skeleton.BehaviorEq`, `Skeleton.MarginClass` |
+| `inducedPolicy` | definition | `FullPolicy`, `GoalHistory` |
+| `inducedPolicy_liftPolicy` | theorem | `GoalHistory`, `GoalPolicy`, `inducedPolicy`, `liftPolicy` |
 | `instCountableShiftedQuery` | theorem | `ShiftedQuery`, `Skeleton` |
 | `instMeasurableSingletonClassModel` | theorem | `Model`, `instMeasurableSpaceModel` |
 | `instMeasurableSpaceModel` | definition | `Assignment`, `Model`, `Model.cpt`, `Model.parents` |
@@ -475,15 +558,27 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 | `isCausalBayesNetwork_family` | theorem | `ConditionalTables`, `ConditionalTables.family`, `IsCausalBayesNetwork` |
 | `isCausalBayesNetwork_iff` | theorem | `ConditionalTables`, `ConditionalTables.family`, `InterventionalFamily`, `IsCausalBayesNetwork` |
 | `isCompatibleGraph_parents` | theorem | `IsCompatibleGraph`, `Model`, `Model.parents`, `binaryDim` |
+| `isCorruption_of_agree_off_avoiding` | theorem | `CompositeGoal`, `FirstActionData`, `IsCorruption`, `SequentialGoal`, `compositeGoals`, `immediateWins` |
+| `isCorruption_self` | theorem | `FirstActionData`, `IsCorruption` |
+| `isDeltaBoundedFull_lift_iff` | theorem | `CompositeGoal`, `ControlledMarkovProcess`, `GoalConditionedAgent`, `IsDeltaBounded`, `IsDeltaBoundedFull`, `liftPolicy` |
+| `isDeltaBounded_of_achieve_eq_optimal` | theorem | `CompositeGoal`, `ControlledMarkovProcess`, `GoalConditionedAgent`, `IsDeltaBounded`, `achieveProb`, `optimalProb` |
 | `isPrefixCode_encodeFinsetFin` | theorem | `encodeFinsetFin` |
 | `isPrefixCode_encodeO24Var` | theorem | `O24Var`, `encodeO24Var` |
 | `isSemialgebraic_of_containsChartBox` | theorem | `ChartIndex`, `ContainsChartBox`, `Model`, `Model.chartSlice`, `binaryDim` |
 | `jointProb_sum_two` | theorem | `Assignment`, `InterventionProfile`, `Model`, `Model.jointProb`, `binaryDim` |
 | `le_pmfExpect` | theorem | `pmfExpect` |
+| `liftPolicy` | definition | `FullHistory`, `FullPolicy`, `GoalPolicy` |
+| `measurableSet_compositeSatisfies` | theorem | `CompositeGoal`, `CompositeSatisfies`, `GoalPolicy`, `statePairs` |
+| `measurableSet_goalHistory` | theorem | `GoalHistory` |
+| `measurableSet_isAchievementTime` | theorem | `GoalPolicy`, `IsAchievementTime`, `SubGoal`, `statePairs` |
 | `measurableSet_parents_eq` | theorem | `Model`, `Model.parents`, `instMeasurableSpaceModel` |
+| `measurableSet_reconstructionEvent` | theorem | `ControlledMarkovProcess`, `KernelEstimate`, `reconstructionEvent` |
+| `measurableSet_satisfies` | theorem | `GoalPolicy`, `Satisfies`, `SequentialGoal`, `statePairs` |
+| `measurableSet_statePairs_mem` | theorem | `GoalPolicy`, `statePairs` |
 | `measurable_cpt` | theorem | `Assignment`, `Model`, `Model.cpt`, `instMeasurableSpaceModel` |
 | `measurable_modelError` | theorem | `Model`, `instMeasurableSpaceModel`, `modelError` |
 | `measurable_roundDown` | theorem | `Model`, `Model.roundDown`, `instMeasurableSpaceModel` |
+| `measurable_toGoalHistory` | theorem | — |
 | `measureAnalystRisk` | definition | `AdmissibleFamily`, `MeasureEstimator`, `Model`, `PolicyFamily`, `RandomizedQueryStrategy`, `Skeleton`, `measureExpectedError` |
 | `measureAnalystRisk_nonneg` | theorem | `MeasureEstimator`, `Model`, `RandomizedQueryStrategy`, `Skeleton`, `measureAnalystRisk` |
 | `measureAnalystRisk_toMeasureEstimator` | theorem | `Model`, `RandomizedEstimator`, `RandomizedEstimator.toMeasureEstimator`, `RandomizedQueryStrategy`, `Skeleton`, `exactAnalystRisk`, `measureAnalystRisk` |
@@ -498,6 +593,8 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 | `measureMinimaxRisk_eq_exactMinimaxRisk` | theorem | `Model`, `ShiftedQuery`, `Skeleton`, `exactMinimaxRisk`, `measureMinimaxRisk` |
 | `measureMinimaxRisk_eq_exactMinimaxRisk_binary` | theorem | `Model`, `Skeleton`, `binaryDim`, `exactMinimaxRisk`, `measureMinimaxRisk` |
 | `measureMinimaxRisk_le_exactMinimaxRisk` | theorem | `Model`, `ShiftedQuery`, `Skeleton`, `exactMinimaxRisk`, `measureMinimaxRisk` |
+| `mem_boundedGoals` | theorem | `SequentialGoal`, `SequentialGoal.depth`, `boundedGoals` |
+| `mem_goalsOfLength` | theorem | `SequentialGoal`, `SubGoal`, `goalsOfLength` |
 | `modelError` | definition | `Model`, `Model.parents`, `cptError` |
 | `modelError_eq_zero_iff` | theorem | `Model`, `modelError` |
 | `modelError_le_one` | theorem | `Model`, `modelError` |
@@ -505,8 +602,12 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 | `modelError_roundDown_le` | theorem | `Model`, `Model.roundDown`, `modelError` |
 | `nonadaptiveExactMinimalBudget` | definition | `Model`, `Skeleton`, `nonadaptiveExactMinimaxRisk` |
 | `nonadaptiveExactMinimaxRisk` | definition | `IsNonadaptiveRandomizedStrategy`, `Model`, `RandomizedEstimator`, `RandomizedQueryStrategy`, `Skeleton`, `exactAnalystRisk` |
+| `not_both_two_thirds` | theorem | — |
 | `not_inIdentifiedSet_of_neg` | theorem | `InIdentifiedSet`, `Model`, `Skeleton` |
 | `not_inIdentifiedSet_of_opposite_sign` | theorem | `Assignment`, `InIdentifiedSet`, `Model`, `ProbMixture`, `Skeleton`, `Skeleton.gap`, `Skeleton.observed` |
+| `not_tolerantAt_of_common_corruption` | theorem | `ControlledMarkovProcess`, `ControlledMarkovProcess.Communicating`, `ControlledMarkovProcess.SeparatedBy`, `FirstActionData`, `FullAgent`, `IsCorruption`, `IsDeltaBoundedFull`, `TolerantAt`, `firstActionMapFull`, `reconstructionRadius` |
+| `nowGoal` | definition | `SequentialGoal`, `SubGoal` |
+| `nowGoal_injective` | theorem | `SequentialGoal`, `nowGoal` |
 | `o24ClassSize` | definition | — |
 | `o24EncodeInput` | definition | `O24Input`, `O24Input.graph`, `O24Input.observed`, `O24Input.utilityParents`, `encodeFinsetFin` |
 | `o24EncodeInput_injective` | theorem | `O24Input`, `o24EncodeInput` |
@@ -516,6 +617,11 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 | `o24Value` | definition | `Model`, `O24Var`, `Skeleton`, `Skeleton.utilityParents`, `binaryDim`, `o24Point` |
 | `one_le_modelError_add` | theorem | `Model`, `Model.parents`, `modelError` |
 | `optimalPolicyFamily` | definition | `Model`, `Model.bestPolicy`, `PolicyFamily`, `ProbMixture`, `Skeleton`, `Skeleton.observed` |
+| `optimalProb` | definition | `CompositeGoal`, `ControlledMarkovProcess`, `GoalPolicy`, `achieveProb` |
+| `optimalProbFull` | definition | `CompositeGoal`, `ControlledMarkovProcess`, `FullPolicy`, `achieveProb`, `inducedPolicy` |
+| `optimalProbFull_eq` | theorem | `CompositeGoal`, `ControlledMarkovProcess`, `optimalProb`, `optimalProbFull` |
+| `optimalProb_le_one` | theorem | `CompositeGoal`, `ControlledMarkovProcess`, `optimalProb` |
+| `outputLaw` | definition | `FirstActionData`, `FirstActionEstimator`, `FirstActionStrategy`, `FirstActionTranscript`, `KernelEstimate`, `runFirstActionTranscript` |
 | `pmfExpect` | definition | — |
 | `pmfExpect_add` | theorem | `pmfExpect` |
 | `pmfExpect_add_const` | theorem | `pmfExpect` |
@@ -526,13 +632,26 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 | `pmfExpect_nonneg` | theorem | `pmfExpect` |
 | `pmfExpect_pure` | theorem | `pmfExpect` |
 | `polySize` | definition | `ratBitLength` |
+| `powerset_filter_disjoint` | theorem | — |
 | `radiusErrors` | definition | `InIdentifiedSet`, `Model`, `Skeleton`, `Skeleton.MarginClass`, `modelError` |
 | `ratBitLength` | definition | — |
+| `reconstructionEvent` | definition | `ControlledMarkovProcess`, `ControlledMarkovProcess.WithinBall`, `KernelEstimate` |
+| `reconstructionRadius` | definition | — |
+| `runFirstActionTranscript` | definition | `FirstActionData`, `FirstActionStrategy`, `FirstActionTranscript` |
 | `runRandomizedTranscript` | definition | `PolicyFamily`, `RandomizedQueryStrategy`, `Skeleton`, `Transcript` |
+| `satisfies_nowGoal_iff` | theorem | `Satisfies`, `nowGoal` |
+| `statePairs` | definition | `GoalPolicy` |
+| `stepKernel` | definition | `ControlledMarkovProcess`, `GoalHistory`, `GoalPolicy`, `stepPMF` |
+| `stepKernel_congr` | theorem | `ControlledMarkovProcess`, `ControlledMarkovProcess.ActionIndependent`, `GoalHistory`, `GoalPolicy`, `stepKernel` |
+| `stepPMF` | definition | `ControlledMarkovProcess`, `ControlledMarkovProcess.prob` |
+| `stepPMF_congr` | theorem | `ControlledMarkovProcess`, `ControlledMarkovProcess.ActionIndependent`, `stepPMF` |
 | `sub_floorMul_lt` | theorem | `floorMul` |
 | `sum_assignment_two` | theorem | `Assignment`, `asg`, `binaryDim` |
 | `summable_pmfExpect` | theorem | — |
 | `sup'_sub_inf'_bool` | theorem | — |
+| `trajectoryLaw` | definition | `ControlledMarkovProcess`, `GoalPolicy`, `stepKernel` |
+| `trajectoryLaw_congr` | theorem | `ControlledMarkovProcess`, `ControlledMarkovProcess.ActionIndependent`, `GoalPolicy`, `trajectoryLaw` |
+| `trajectoryLaw_startState` | theorem | `ControlledMarkovProcess`, `GoalPolicy`, `trajectoryLaw` |
 | `utilityBox` | definition | `UtilityConfig` |
 | `utility_mem_utilityBox` | theorem | `Skeleton`, `Skeleton.utility`, `Skeleton.utilityParents`, `UtilityConfig`, `UtilityConfig.extend`, `binaryDim`, `utilityBox` |
 | `wellFounded_iff_exists_rank` | theorem | — |

@@ -1,7 +1,7 @@
 {
   "generated_by": "scripts/check_statement_freeze.py --write",
   "note": "Signature hashes of ledger-graded statements. A diff here is a schema event: say which way fidelity moved and re-grade the row.",
-  "count": 261,
+  "count": 262,
   "declarations": {
     "AISafetyAtlas.Causal.DecisionNetwork.mem_parents_utility_of_isUnmediated": {
       "file": "AISafetyAtlas/Causal/DecisionNetwork.lean",
@@ -158,6 +158,10 @@
     "AISafetyAtlas.Conjectures.MAIS.maisO31_chainClassificationCandidate": {
       "file": "AISafetyAtlas/Conjectures/MAIS/O31.lean",
       "sha256": "c8e3b4d9f8c8510b"
+    },
+    "AISafetyAtlas.Conjectures.MAIS.maisO33_etaStarIsZero": {
+      "file": "AISafetyAtlas/Conjectures/MAIS/O33.lean",
+      "sha256": "9efb4def2d229d80"
     },
     "AISafetyAtlas.Conjectures.MAIS.maisO34_exactFiberCandidate": {
       "file": "AISafetyAtlas/Conjectures/MAIS/O34.lean",

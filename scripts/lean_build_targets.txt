@@ -12,6 +12,7 @@ AISafetyAtlas.Conjectures.MAIS.O27
 AISafetyAtlas.Conjectures.MAIS.Rates
 AISafetyAtlas.Conjectures.MAIS.O25
 AISafetyAtlas.Conjectures.MAIS.O26
+AISafetyAtlas.Conjectures.MAIS.O33
 AISafetyAtlas.Conjectures.MAIS.O38
 AISafetyAtlas.Examples.Conjectures.MAIS
 AISafetyAtlas.Examples.Conjectures.MAIS.Common
@@ -24,6 +25,7 @@ AISafetyAtlas.Examples.Conjectures.MAIS.Rates
 AISafetyAtlas.Examples.Conjectures.MAIS.O25
 AISafetyAtlas.Examples.Conjectures.MAIS.O26
 AISafetyAtlas.Examples.Conjectures.MAIS.O27
+AISafetyAtlas.Examples.Conjectures.MAIS.O33
 AISafetyAtlas.Examples.Conjectures.MAIS.O38
 AISafetyAtlas.Examples.Conjectures.MAIS.O38Candidate
 AISafetyAtlas.Examples.Conjectures.O34Fiber
@@ -53,6 +55,11 @@ AISafetyAtlas.Examples.Causal.Query
 AISafetyAtlas.Examples.Analysis.Semialgebraic
 AISafetyAtlas.Examples.Causal.EffectiveGenericity
 AISafetyAtlas.Examples.Causal.O24Refutation
+AISafetyAtlas.Examples.Causal.Goal
+AISafetyAtlas.Examples.Causal.ControlledProcess
+AISafetyAtlas.Examples.Causal.GoalDynamics
+AISafetyAtlas.Causal.Corruption
+AISafetyAtlas.Examples.Causal.O33Corruption
 AISafetyAtlas.Examples.Causal.OneNodeClass
 AISafetyAtlas.Causal.ModelSpace
 AISafetyAtlas.Examples.Causal.ModelSpace

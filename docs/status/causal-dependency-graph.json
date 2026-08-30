@@ -175,6 +175,20 @@
         "AISafetyAtlas.Causal.binaryDim"
       ]
     },
+    "AISafetyAtlas.Causal.CompositeGoal": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.SequentialGoal"
+      ]
+    },
+    "AISafetyAtlas.Causal.CompositeSatisfies": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.CompositeGoal",
+        "AISafetyAtlas.Causal.Satisfies",
+        "AISafetyAtlas.Causal.SequentialGoal"
+      ]
+    },
     "AISafetyAtlas.Causal.ConditionalTables": {
       "kind": "definition",
       "deps": []
@@ -196,6 +210,82 @@
         "AISafetyAtlas.Causal.Model",
         "AISafetyAtlas.Causal.Model.chartSlice",
         "AISafetyAtlas.Causal.binaryDim"
+      ]
+    },
+    "AISafetyAtlas.Causal.ControlledMarkovProcess": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Causal.ControlledMarkovProcess.ActionIndependent": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.ControlledMarkovProcess",
+        "AISafetyAtlas.Causal.ControlledMarkovProcess.prob"
+      ]
+    },
+    "AISafetyAtlas.Causal.ControlledMarkovProcess.Communicating": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.ControlledMarkovProcess",
+        "AISafetyAtlas.Causal.ControlledMarkovProcess.Reachable"
+      ]
+    },
+    "AISafetyAtlas.Causal.ControlledMarkovProcess.FullSupport": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.ControlledMarkovProcess",
+        "AISafetyAtlas.Causal.ControlledMarkovProcess.prob"
+      ]
+    },
+    "AISafetyAtlas.Causal.ControlledMarkovProcess.OneStep": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.ControlledMarkovProcess",
+        "AISafetyAtlas.Causal.ControlledMarkovProcess.prob"
+      ]
+    },
+    "AISafetyAtlas.Causal.ControlledMarkovProcess.Reachable": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.ControlledMarkovProcess",
+        "AISafetyAtlas.Causal.ControlledMarkovProcess.OneStep"
+      ]
+    },
+    "AISafetyAtlas.Causal.ControlledMarkovProcess.SeparatedBy": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.ControlledMarkovProcess",
+        "AISafetyAtlas.Causal.ControlledMarkovProcess.prob"
+      ]
+    },
+    "AISafetyAtlas.Causal.ControlledMarkovProcess.WithinBall": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.ControlledMarkovProcess",
+        "AISafetyAtlas.Causal.ControlledMarkovProcess.prob"
+      ]
+    },
+    "AISafetyAtlas.Causal.ControlledMarkovProcess.communicating_of_fullSupport": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.ControlledMarkovProcess",
+        "AISafetyAtlas.Causal.ControlledMarkovProcess.Communicating",
+        "AISafetyAtlas.Causal.ControlledMarkovProcess.FullSupport"
+      ]
+    },
+    "AISafetyAtlas.Causal.ControlledMarkovProcess.not_withinBall_both": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.ControlledMarkovProcess",
+        "AISafetyAtlas.Causal.ControlledMarkovProcess.SeparatedBy",
+        "AISafetyAtlas.Causal.ControlledMarkovProcess.WithinBall"
+      ]
+    },
+    "AISafetyAtlas.Causal.ControlledMarkovProcess.prob_le_one": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.ControlledMarkovProcess",
+        "AISafetyAtlas.Causal.ControlledMarkovProcess.prob"
       ]
     },
     "AISafetyAtlas.Causal.DecisionNetwork": {
@@ -341,6 +431,66 @@
       "kind": "definition",
       "deps": []
     },
+    "AISafetyAtlas.Causal.FirstActionData": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.CompositeGoal"
+      ]
+    },
+    "AISafetyAtlas.Causal.FirstActionEstimator": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.FirstActionTranscript",
+        "AISafetyAtlas.Causal.KernelEstimate"
+      ]
+    },
+    "AISafetyAtlas.Causal.FirstActionStrategy": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.FirstActionTranscript",
+        "AISafetyAtlas.Causal.O33Query"
+      ]
+    },
+    "AISafetyAtlas.Causal.FirstActionTranscript": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.O33Query"
+      ]
+    },
+    "AISafetyAtlas.Causal.FullAgent": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.CompositeGoal",
+        "AISafetyAtlas.Causal.FullPolicy"
+      ]
+    },
+    "AISafetyAtlas.Causal.FullHistory": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Causal.FullPolicy": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.FullHistory"
+      ]
+    },
+    "AISafetyAtlas.Causal.GoalConditionedAgent": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.CompositeGoal",
+        "AISafetyAtlas.Causal.GoalPolicy"
+      ]
+    },
+    "AISafetyAtlas.Causal.GoalHistory": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Causal.GoalPolicy": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.GoalHistory"
+      ]
+    },
     "AISafetyAtlas.Causal.HasPolySizeAt": {
       "kind": "definition",
       "deps": [
@@ -383,6 +533,22 @@
         "AISafetyAtlas.Causal.Assignment"
       ]
     },
+    "AISafetyAtlas.Causal.IsAchievementTime": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.SubGoal",
+        "AISafetyAtlas.Causal.SubGoal.op",
+        "AISafetyAtlas.Causal.SubGoal.target",
+        "AISafetyAtlas.Causal.TemporalOp"
+      ]
+    },
+    "AISafetyAtlas.Causal.IsAchievementTime.unique": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.IsAchievementTime",
+        "AISafetyAtlas.Causal.SubGoal"
+      ]
+    },
     "AISafetyAtlas.Causal.IsCausalBayesNetwork": {
       "kind": "definition",
       "deps": [
@@ -407,6 +573,37 @@
       "kind": "definition",
       "deps": []
     },
+    "AISafetyAtlas.Causal.IsCorruption": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.CompositeGoal",
+        "AISafetyAtlas.Causal.FirstActionData",
+        "AISafetyAtlas.Causal.corruptionDomain"
+      ]
+    },
+    "AISafetyAtlas.Causal.IsDeltaBounded": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.CompositeGoal",
+        "AISafetyAtlas.Causal.ControlledMarkovProcess",
+        "AISafetyAtlas.Causal.GoalConditionedAgent",
+        "AISafetyAtlas.Causal.achieveProb",
+        "AISafetyAtlas.Causal.compositeGoals",
+        "AISafetyAtlas.Causal.optimalProb"
+      ]
+    },
+    "AISafetyAtlas.Causal.IsDeltaBoundedFull": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.CompositeGoal",
+        "AISafetyAtlas.Causal.ControlledMarkovProcess",
+        "AISafetyAtlas.Causal.FullAgent",
+        "AISafetyAtlas.Causal.achieveProb",
+        "AISafetyAtlas.Causal.compositeGoals",
+        "AISafetyAtlas.Causal.inducedPolicy",
+        "AISafetyAtlas.Causal.optimalProbFull"
+      ]
+    },
     "AISafetyAtlas.Causal.IsNonadaptiveRandomizedStrategy": {
       "kind": "definition",
       "deps": [
@@ -430,6 +627,10 @@
         "AISafetyAtlas.Causal.Skeleton",
         "AISafetyAtlas.Causal.radiusErrors"
       ]
+    },
+    "AISafetyAtlas.Causal.KernelEstimate": {
+      "kind": "definition",
+      "deps": []
     },
     "AISafetyAtlas.Causal.LocalIntervention": {
       "kind": "definition",
@@ -1667,6 +1868,13 @@
         "AISafetyAtlas.Causal.UtilityConfig"
       ]
     },
+    "AISafetyAtlas.Causal.O33Query": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.CompositeGoal",
+        "AISafetyAtlas.Causal.corruptionDomain"
+      ]
+    },
     "AISafetyAtlas.Causal.ParentConfig": {
       "kind": "definition",
       "deps": []
@@ -2213,6 +2421,26 @@
         "AISafetyAtlas.Causal.SCM.submodel"
       ]
     },
+    "AISafetyAtlas.Causal.Satisfies": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.SequentialGoal",
+        "AISafetyAtlas.Causal.SubGoal"
+      ]
+    },
+    "AISafetyAtlas.Causal.SequentialGoal": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.SubGoal"
+      ]
+    },
+    "AISafetyAtlas.Causal.SequentialGoal.depth": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.SequentialGoal",
+        "AISafetyAtlas.Causal.SubGoal"
+      ]
+    },
     "AISafetyAtlas.Causal.ShiftedQuery": {
       "kind": "definition",
       "deps": [
@@ -2618,6 +2846,48 @@
         "AISafetyAtlas.Causal.Skeleton.utilityParents"
       ]
     },
+    "AISafetyAtlas.Causal.SubGoal": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Causal.Succeeds": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.ControlledMarkovProcess",
+        "AISafetyAtlas.Causal.FirstActionData",
+        "AISafetyAtlas.Causal.FirstActionEstimator",
+        "AISafetyAtlas.Causal.FirstActionStrategy",
+        "AISafetyAtlas.Causal.KernelEstimate",
+        "AISafetyAtlas.Causal.outputLaw",
+        "AISafetyAtlas.Causal.reconstructionEvent",
+        "AISafetyAtlas.Causal.reconstructionRadius"
+      ]
+    },
+    "AISafetyAtlas.Causal.TemporalOp": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Causal.TemporalOp.next": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.TemporalOp"
+      ]
+    },
+    "AISafetyAtlas.Causal.TolerantAt": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.ControlledMarkovProcess",
+        "AISafetyAtlas.Causal.ControlledMarkovProcess.Communicating",
+        "AISafetyAtlas.Causal.FirstActionData",
+        "AISafetyAtlas.Causal.FirstActionEstimator",
+        "AISafetyAtlas.Causal.FirstActionStrategy",
+        "AISafetyAtlas.Causal.FullAgent",
+        "AISafetyAtlas.Causal.IsCorruption",
+        "AISafetyAtlas.Causal.IsDeltaBoundedFull",
+        "AISafetyAtlas.Causal.Succeeds",
+        "AISafetyAtlas.Causal.firstActionMapFull"
+      ]
+    },
     "AISafetyAtlas.Causal.Transcript": {
       "kind": "definition",
       "deps": [
@@ -2635,6 +2905,58 @@
         "AISafetyAtlas.Causal.Assignment",
         "AISafetyAtlas.Causal.UtilityConfig",
         "AISafetyAtlas.Causal.binaryDim"
+      ]
+    },
+    "AISafetyAtlas.Causal.achieveProb": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.CompositeGoal",
+        "AISafetyAtlas.Causal.CompositeSatisfies",
+        "AISafetyAtlas.Causal.ControlledMarkovProcess",
+        "AISafetyAtlas.Causal.GoalPolicy",
+        "AISafetyAtlas.Causal.statePairs",
+        "AISafetyAtlas.Causal.trajectoryLaw"
+      ]
+    },
+    "AISafetyAtlas.Causal.achieveProb_congr": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.CompositeGoal",
+        "AISafetyAtlas.Causal.ControlledMarkovProcess",
+        "AISafetyAtlas.Causal.ControlledMarkovProcess.ActionIndependent",
+        "AISafetyAtlas.Causal.GoalHistory",
+        "AISafetyAtlas.Causal.GoalPolicy",
+        "AISafetyAtlas.Causal.achieveProb"
+      ]
+    },
+    "AISafetyAtlas.Causal.achieveProb_eq_one_of_immediateWin": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.CompositeGoal",
+        "AISafetyAtlas.Causal.ControlledMarkovProcess",
+        "AISafetyAtlas.Causal.GoalPolicy",
+        "AISafetyAtlas.Causal.SequentialGoal",
+        "AISafetyAtlas.Causal.achieveProb",
+        "AISafetyAtlas.Causal.immediateWins"
+      ]
+    },
+    "AISafetyAtlas.Causal.achieveProb_le_one": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.CompositeGoal",
+        "AISafetyAtlas.Causal.ControlledMarkovProcess",
+        "AISafetyAtlas.Causal.GoalPolicy",
+        "AISafetyAtlas.Causal.achieveProb"
+      ]
+    },
+    "AISafetyAtlas.Causal.achieveProb_le_optimalProb": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.CompositeGoal",
+        "AISafetyAtlas.Causal.ControlledMarkovProcess",
+        "AISafetyAtlas.Causal.GoalPolicy",
+        "AISafetyAtlas.Causal.achieveProb",
+        "AISafetyAtlas.Causal.optimalProb"
       ]
     },
     "AISafetyAtlas.Causal.acyclic_of_rank": {
@@ -2683,6 +3005,14 @@
         "AISafetyAtlas.Causal.binaryDim"
       ]
     },
+    "AISafetyAtlas.Causal.boundedGoals": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.SequentialGoal",
+        "AISafetyAtlas.Causal.SubGoal",
+        "AISafetyAtlas.Causal.goalsOfLength"
+      ]
+    },
     "AISafetyAtlas.Causal.card_binaryLocalIntervention": {
       "kind": "theorem",
       "deps": []
@@ -2693,6 +3023,59 @@
         "AISafetyAtlas.Causal.ChartIndex",
         "AISafetyAtlas.Causal.ParentConfig",
         "AISafetyAtlas.Causal.chartDim"
+      ]
+    },
+    "AISafetyAtlas.Causal.card_compositeGoals": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.CompositeGoal",
+        "AISafetyAtlas.Causal.SequentialGoal",
+        "AISafetyAtlas.Causal.boundedGoals",
+        "AISafetyAtlas.Causal.compositeGoals"
+      ]
+    },
+    "AISafetyAtlas.Causal.card_compositeGoals_avoiding": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.SequentialGoal",
+        "AISafetyAtlas.Causal.SubGoal",
+        "AISafetyAtlas.Causal.boundedGoals",
+        "AISafetyAtlas.Causal.compositeGoals",
+        "AISafetyAtlas.Causal.immediateWins"
+      ]
+    },
+    "AISafetyAtlas.Causal.card_corruptionDomain": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.CompositeGoal",
+        "AISafetyAtlas.Causal.compositeGoals",
+        "AISafetyAtlas.Causal.corruptionDomain"
+      ]
+    },
+    "AISafetyAtlas.Causal.card_corruptionDomain_avoiding": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.CompositeGoal",
+        "AISafetyAtlas.Causal.SequentialGoal",
+        "AISafetyAtlas.Causal.SubGoal",
+        "AISafetyAtlas.Causal.boundedGoals",
+        "AISafetyAtlas.Causal.corruptionDomain",
+        "AISafetyAtlas.Causal.immediateWins"
+      ]
+    },
+    "AISafetyAtlas.Causal.card_goalsOfLength": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.SequentialGoal",
+        "AISafetyAtlas.Causal.SubGoal",
+        "AISafetyAtlas.Causal.goalsOfLength"
+      ]
+    },
+    "AISafetyAtlas.Causal.card_immediateWins": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.SequentialGoal",
+        "AISafetyAtlas.Causal.immediateWins"
       ]
     },
     "AISafetyAtlas.Causal.card_le_o24Size": {
@@ -2719,6 +3102,18 @@
         "AISafetyAtlas.Causal.ParentConfig",
         "AISafetyAtlas.Causal.UtilityConfig",
         "AISafetyAtlas.Causal.o24Size"
+      ]
+    },
+    "AISafetyAtlas.Causal.card_subGoal": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.SubGoal"
+      ]
+    },
+    "AISafetyAtlas.Causal.card_temporalOp": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.TemporalOp"
       ]
     },
     "AISafetyAtlas.Causal.chainParents": {
@@ -2768,6 +3163,39 @@
         "AISafetyAtlas.Causal.chartBox"
       ]
     },
+    "AISafetyAtlas.Causal.compositeGoals": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.CompositeGoal",
+        "AISafetyAtlas.Causal.SequentialGoal",
+        "AISafetyAtlas.Causal.boundedGoals"
+      ]
+    },
+    "AISafetyAtlas.Causal.compositeSatisfies_of_immediateWin": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.CompositeGoal",
+        "AISafetyAtlas.Causal.CompositeSatisfies",
+        "AISafetyAtlas.Causal.SequentialGoal",
+        "AISafetyAtlas.Causal.immediateWins"
+      ]
+    },
+    "AISafetyAtlas.Causal.compositeSatisfies_of_now_disjunct": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.CompositeGoal",
+        "AISafetyAtlas.Causal.CompositeSatisfies",
+        "AISafetyAtlas.Causal.SequentialGoal",
+        "AISafetyAtlas.Causal.nowGoal"
+      ]
+    },
+    "AISafetyAtlas.Causal.corruptionDomain": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.CompositeGoal",
+        "AISafetyAtlas.Causal.compositeGoals"
+      ]
+    },
     "AISafetyAtlas.Causal.countable_range_roundDown": {
       "kind": "theorem",
       "deps": [
@@ -2814,6 +3242,15 @@
       "kind": "theorem",
       "deps": [
         "AISafetyAtlas.Causal.dimBound"
+      ]
+    },
+    "AISafetyAtlas.Causal.disjoint_reconstructionEvent": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.ControlledMarkovProcess",
+        "AISafetyAtlas.Causal.ControlledMarkovProcess.SeparatedBy",
+        "AISafetyAtlas.Causal.KernelEstimate",
+        "AISafetyAtlas.Causal.reconstructionEvent"
       ]
     },
     "AISafetyAtlas.Causal.effectiveMarginClass": {
@@ -2881,6 +3318,14 @@
         "AISafetyAtlas.Causal.ConditionalTables.family",
         "AISafetyAtlas.Causal.InterventionalFamily",
         "AISafetyAtlas.Causal.IsCausalBayesNetwork"
+      ]
+    },
+    "AISafetyAtlas.Causal.eventually_startState": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.ControlledMarkovProcess",
+        "AISafetyAtlas.Causal.GoalPolicy",
+        "AISafetyAtlas.Causal.trajectoryLaw"
       ]
     },
     "AISafetyAtlas.Causal.exactAnalystRisk": {
@@ -3023,6 +3468,38 @@
         "AISafetyAtlas.Causal.exactPolicyAnswer"
       ]
     },
+    "AISafetyAtlas.Causal.exceptional_ratio_lt": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.Causal.exceptional_ratio_lt_with_empty": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.Causal.exists_achieveProb_ge": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.CompositeGoal",
+        "AISafetyAtlas.Causal.ControlledMarkovProcess",
+        "AISafetyAtlas.Causal.GoalPolicy",
+        "AISafetyAtlas.Causal.achieveProb",
+        "AISafetyAtlas.Causal.optimalProb"
+      ]
+    },
+    "AISafetyAtlas.Causal.exists_isDeltaBounded_prescribing": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.CompositeGoal",
+        "AISafetyAtlas.Causal.ControlledMarkovProcess",
+        "AISafetyAtlas.Causal.ControlledMarkovProcess.ActionIndependent",
+        "AISafetyAtlas.Causal.GoalConditionedAgent",
+        "AISafetyAtlas.Causal.IsDeltaBounded",
+        "AISafetyAtlas.Causal.SequentialGoal",
+        "AISafetyAtlas.Causal.compositeGoals",
+        "AISafetyAtlas.Causal.firstActionMap",
+        "AISafetyAtlas.Causal.immediateWins"
+      ]
+    },
     "AISafetyAtlas.Causal.fibreRep": {
       "kind": "definition",
       "deps": [
@@ -3065,6 +3542,31 @@
         "AISafetyAtlas.Causal.finsetFunBits"
       ]
     },
+    "AISafetyAtlas.Causal.firstActionMap": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.CompositeGoal",
+        "AISafetyAtlas.Causal.GoalConditionedAgent"
+      ]
+    },
+    "AISafetyAtlas.Causal.firstActionMapFull": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.CompositeGoal",
+        "AISafetyAtlas.Causal.FullAgent",
+        "AISafetyAtlas.Causal.inducedPolicy"
+      ]
+    },
+    "AISafetyAtlas.Causal.firstActionMapFull_lift": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.CompositeGoal",
+        "AISafetyAtlas.Causal.GoalConditionedAgent",
+        "AISafetyAtlas.Causal.firstActionMap",
+        "AISafetyAtlas.Causal.firstActionMapFull",
+        "AISafetyAtlas.Causal.liftPolicy"
+      ]
+    },
     "AISafetyAtlas.Causal.fixIntervention": {
       "kind": "definition",
       "deps": []
@@ -3103,6 +3605,12 @@
         "AISafetyAtlas.Causal.Assignment"
       ]
     },
+    "AISafetyAtlas.Causal.goalsOfLength": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.SequentialGoal"
+      ]
+    },
     "AISafetyAtlas.Causal.hardInterventionProfile": {
       "kind": "definition",
       "deps": [
@@ -3117,9 +3625,29 @@
       "kind": "theorem",
       "deps": []
     },
+    "AISafetyAtlas.Causal.history_zero_const": {
+      "kind": "theorem",
+      "deps": []
+    },
     "AISafetyAtlas.Causal.identityIntervention": {
       "kind": "definition",
       "deps": []
+    },
+    "AISafetyAtlas.Causal.immediateWins": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.SequentialGoal",
+        "AISafetyAtlas.Causal.SubGoal",
+        "AISafetyAtlas.Causal.nowGoal"
+      ]
+    },
+    "AISafetyAtlas.Causal.immediateWins_subset_boundedGoals": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.SequentialGoal",
+        "AISafetyAtlas.Causal.boundedGoals",
+        "AISafetyAtlas.Causal.immediateWins"
+      ]
     },
     "AISafetyAtlas.Causal.inIdentifiedSet_mono": {
       "kind": "theorem",
@@ -3154,6 +3682,22 @@
         "AISafetyAtlas.Causal.Skeleton",
         "AISafetyAtlas.Causal.Skeleton.BehaviorEq",
         "AISafetyAtlas.Causal.Skeleton.MarginClass"
+      ]
+    },
+    "AISafetyAtlas.Causal.inducedPolicy": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.FullPolicy",
+        "AISafetyAtlas.Causal.GoalHistory"
+      ]
+    },
+    "AISafetyAtlas.Causal.inducedPolicy_liftPolicy": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.GoalHistory",
+        "AISafetyAtlas.Causal.GoalPolicy",
+        "AISafetyAtlas.Causal.inducedPolicy",
+        "AISafetyAtlas.Causal.liftPolicy"
       ]
     },
     "AISafetyAtlas.Causal.instCountableShiftedQuery": {
@@ -3237,6 +3781,46 @@
         "AISafetyAtlas.Causal.binaryDim"
       ]
     },
+    "AISafetyAtlas.Causal.isCorruption_of_agree_off_avoiding": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.CompositeGoal",
+        "AISafetyAtlas.Causal.FirstActionData",
+        "AISafetyAtlas.Causal.IsCorruption",
+        "AISafetyAtlas.Causal.SequentialGoal",
+        "AISafetyAtlas.Causal.compositeGoals",
+        "AISafetyAtlas.Causal.immediateWins"
+      ]
+    },
+    "AISafetyAtlas.Causal.isCorruption_self": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.FirstActionData",
+        "AISafetyAtlas.Causal.IsCorruption"
+      ]
+    },
+    "AISafetyAtlas.Causal.isDeltaBoundedFull_lift_iff": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.CompositeGoal",
+        "AISafetyAtlas.Causal.ControlledMarkovProcess",
+        "AISafetyAtlas.Causal.GoalConditionedAgent",
+        "AISafetyAtlas.Causal.IsDeltaBounded",
+        "AISafetyAtlas.Causal.IsDeltaBoundedFull",
+        "AISafetyAtlas.Causal.liftPolicy"
+      ]
+    },
+    "AISafetyAtlas.Causal.isDeltaBounded_of_achieve_eq_optimal": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.CompositeGoal",
+        "AISafetyAtlas.Causal.ControlledMarkovProcess",
+        "AISafetyAtlas.Causal.GoalConditionedAgent",
+        "AISafetyAtlas.Causal.IsDeltaBounded",
+        "AISafetyAtlas.Causal.achieveProb",
+        "AISafetyAtlas.Causal.optimalProb"
+      ]
+    },
     "AISafetyAtlas.Causal.isPrefixCode_encodeFinsetFin": {
       "kind": "theorem",
       "deps": [
@@ -3280,12 +3864,68 @@
         "AISafetyAtlas.Causal.pmfExpect"
       ]
     },
+    "AISafetyAtlas.Causal.liftPolicy": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.FullHistory",
+        "AISafetyAtlas.Causal.FullPolicy",
+        "AISafetyAtlas.Causal.GoalPolicy"
+      ]
+    },
+    "AISafetyAtlas.Causal.measurableSet_compositeSatisfies": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.CompositeGoal",
+        "AISafetyAtlas.Causal.CompositeSatisfies",
+        "AISafetyAtlas.Causal.GoalPolicy",
+        "AISafetyAtlas.Causal.statePairs"
+      ]
+    },
+    "AISafetyAtlas.Causal.measurableSet_goalHistory": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.GoalHistory"
+      ]
+    },
+    "AISafetyAtlas.Causal.measurableSet_isAchievementTime": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.GoalPolicy",
+        "AISafetyAtlas.Causal.IsAchievementTime",
+        "AISafetyAtlas.Causal.SubGoal",
+        "AISafetyAtlas.Causal.statePairs"
+      ]
+    },
     "AISafetyAtlas.Causal.measurableSet_parents_eq": {
       "kind": "theorem",
       "deps": [
         "AISafetyAtlas.Causal.Model",
         "AISafetyAtlas.Causal.Model.parents",
         "AISafetyAtlas.Causal.instMeasurableSpaceModel"
+      ]
+    },
+    "AISafetyAtlas.Causal.measurableSet_reconstructionEvent": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.ControlledMarkovProcess",
+        "AISafetyAtlas.Causal.KernelEstimate",
+        "AISafetyAtlas.Causal.reconstructionEvent"
+      ]
+    },
+    "AISafetyAtlas.Causal.measurableSet_satisfies": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.GoalPolicy",
+        "AISafetyAtlas.Causal.Satisfies",
+        "AISafetyAtlas.Causal.SequentialGoal",
+        "AISafetyAtlas.Causal.statePairs"
+      ]
+    },
+    "AISafetyAtlas.Causal.measurableSet_statePairs_mem": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.GoalPolicy",
+        "AISafetyAtlas.Causal.statePairs"
       ]
     },
     "AISafetyAtlas.Causal.measurable_cpt": {
@@ -3312,6 +3952,10 @@
         "AISafetyAtlas.Causal.Model.roundDown",
         "AISafetyAtlas.Causal.instMeasurableSpaceModel"
       ]
+    },
+    "AISafetyAtlas.Causal.measurable_toGoalHistory": {
+      "kind": "theorem",
+      "deps": []
     },
     "AISafetyAtlas.Causal.measureAnalystRisk": {
       "kind": "definition",
@@ -3465,6 +4109,22 @@
         "AISafetyAtlas.Causal.measureMinimaxRisk"
       ]
     },
+    "AISafetyAtlas.Causal.mem_boundedGoals": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.SequentialGoal",
+        "AISafetyAtlas.Causal.SequentialGoal.depth",
+        "AISafetyAtlas.Causal.boundedGoals"
+      ]
+    },
+    "AISafetyAtlas.Causal.mem_goalsOfLength": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.SequentialGoal",
+        "AISafetyAtlas.Causal.SubGoal",
+        "AISafetyAtlas.Causal.goalsOfLength"
+      ]
+    },
     "AISafetyAtlas.Causal.modelError": {
       "kind": "definition",
       "deps": [
@@ -3521,6 +4181,10 @@
         "AISafetyAtlas.Causal.exactAnalystRisk"
       ]
     },
+    "AISafetyAtlas.Causal.not_both_two_thirds": {
+      "kind": "theorem",
+      "deps": []
+    },
     "AISafetyAtlas.Causal.not_inIdentifiedSet_of_neg": {
       "kind": "theorem",
       "deps": [
@@ -3539,6 +4203,35 @@
         "AISafetyAtlas.Causal.Skeleton",
         "AISafetyAtlas.Causal.Skeleton.gap",
         "AISafetyAtlas.Causal.Skeleton.observed"
+      ]
+    },
+    "AISafetyAtlas.Causal.not_tolerantAt_of_common_corruption": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.ControlledMarkovProcess",
+        "AISafetyAtlas.Causal.ControlledMarkovProcess.Communicating",
+        "AISafetyAtlas.Causal.ControlledMarkovProcess.SeparatedBy",
+        "AISafetyAtlas.Causal.FirstActionData",
+        "AISafetyAtlas.Causal.FullAgent",
+        "AISafetyAtlas.Causal.IsCorruption",
+        "AISafetyAtlas.Causal.IsDeltaBoundedFull",
+        "AISafetyAtlas.Causal.TolerantAt",
+        "AISafetyAtlas.Causal.firstActionMapFull",
+        "AISafetyAtlas.Causal.reconstructionRadius"
+      ]
+    },
+    "AISafetyAtlas.Causal.nowGoal": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.SequentialGoal",
+        "AISafetyAtlas.Causal.SubGoal"
+      ]
+    },
+    "AISafetyAtlas.Causal.nowGoal_injective": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.SequentialGoal",
+        "AISafetyAtlas.Causal.nowGoal"
       ]
     },
     "AISafetyAtlas.Causal.o24ClassSize": {
@@ -3627,6 +4320,53 @@
         "AISafetyAtlas.Causal.Skeleton.observed"
       ]
     },
+    "AISafetyAtlas.Causal.optimalProb": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.CompositeGoal",
+        "AISafetyAtlas.Causal.ControlledMarkovProcess",
+        "AISafetyAtlas.Causal.GoalPolicy",
+        "AISafetyAtlas.Causal.achieveProb"
+      ]
+    },
+    "AISafetyAtlas.Causal.optimalProbFull": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.CompositeGoal",
+        "AISafetyAtlas.Causal.ControlledMarkovProcess",
+        "AISafetyAtlas.Causal.FullPolicy",
+        "AISafetyAtlas.Causal.achieveProb",
+        "AISafetyAtlas.Causal.inducedPolicy"
+      ]
+    },
+    "AISafetyAtlas.Causal.optimalProbFull_eq": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.CompositeGoal",
+        "AISafetyAtlas.Causal.ControlledMarkovProcess",
+        "AISafetyAtlas.Causal.optimalProb",
+        "AISafetyAtlas.Causal.optimalProbFull"
+      ]
+    },
+    "AISafetyAtlas.Causal.optimalProb_le_one": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.CompositeGoal",
+        "AISafetyAtlas.Causal.ControlledMarkovProcess",
+        "AISafetyAtlas.Causal.optimalProb"
+      ]
+    },
+    "AISafetyAtlas.Causal.outputLaw": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.FirstActionData",
+        "AISafetyAtlas.Causal.FirstActionEstimator",
+        "AISafetyAtlas.Causal.FirstActionStrategy",
+        "AISafetyAtlas.Causal.FirstActionTranscript",
+        "AISafetyAtlas.Causal.KernelEstimate",
+        "AISafetyAtlas.Causal.runFirstActionTranscript"
+      ]
+    },
     "AISafetyAtlas.Causal.pmfExpect": {
       "kind": "definition",
       "deps": []
@@ -3693,6 +4433,10 @@
         "AISafetyAtlas.Causal.ratBitLength"
       ]
     },
+    "AISafetyAtlas.Causal.powerset_filter_disjoint": {
+      "kind": "theorem",
+      "deps": []
+    },
     "AISafetyAtlas.Causal.radiusErrors": {
       "kind": "definition",
       "deps": [
@@ -3707,6 +4451,26 @@
       "kind": "definition",
       "deps": []
     },
+    "AISafetyAtlas.Causal.reconstructionEvent": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.ControlledMarkovProcess",
+        "AISafetyAtlas.Causal.ControlledMarkovProcess.WithinBall",
+        "AISafetyAtlas.Causal.KernelEstimate"
+      ]
+    },
+    "AISafetyAtlas.Causal.reconstructionRadius": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Causal.runFirstActionTranscript": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.FirstActionData",
+        "AISafetyAtlas.Causal.FirstActionStrategy",
+        "AISafetyAtlas.Causal.FirstActionTranscript"
+      ]
+    },
     "AISafetyAtlas.Causal.runRandomizedTranscript": {
       "kind": "definition",
       "deps": [
@@ -3714,6 +4478,53 @@
         "AISafetyAtlas.Causal.RandomizedQueryStrategy",
         "AISafetyAtlas.Causal.Skeleton",
         "AISafetyAtlas.Causal.Transcript"
+      ]
+    },
+    "AISafetyAtlas.Causal.satisfies_nowGoal_iff": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.Satisfies",
+        "AISafetyAtlas.Causal.nowGoal"
+      ]
+    },
+    "AISafetyAtlas.Causal.statePairs": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.GoalPolicy"
+      ]
+    },
+    "AISafetyAtlas.Causal.stepKernel": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.ControlledMarkovProcess",
+        "AISafetyAtlas.Causal.GoalHistory",
+        "AISafetyAtlas.Causal.GoalPolicy",
+        "AISafetyAtlas.Causal.stepPMF"
+      ]
+    },
+    "AISafetyAtlas.Causal.stepKernel_congr": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.ControlledMarkovProcess",
+        "AISafetyAtlas.Causal.ControlledMarkovProcess.ActionIndependent",
+        "AISafetyAtlas.Causal.GoalHistory",
+        "AISafetyAtlas.Causal.GoalPolicy",
+        "AISafetyAtlas.Causal.stepKernel"
+      ]
+    },
+    "AISafetyAtlas.Causal.stepPMF": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.ControlledMarkovProcess",
+        "AISafetyAtlas.Causal.ControlledMarkovProcess.prob"
+      ]
+    },
+    "AISafetyAtlas.Causal.stepPMF_congr": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.ControlledMarkovProcess",
+        "AISafetyAtlas.Causal.ControlledMarkovProcess.ActionIndependent",
+        "AISafetyAtlas.Causal.stepPMF"
       ]
     },
     "AISafetyAtlas.Causal.sub_floorMul_lt": {
@@ -3737,6 +4548,31 @@
     "AISafetyAtlas.Causal.sup'_sub_inf'_bool": {
       "kind": "theorem",
       "deps": []
+    },
+    "AISafetyAtlas.Causal.trajectoryLaw": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Causal.ControlledMarkovProcess",
+        "AISafetyAtlas.Causal.GoalPolicy",
+        "AISafetyAtlas.Causal.stepKernel"
+      ]
+    },
+    "AISafetyAtlas.Causal.trajectoryLaw_congr": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.ControlledMarkovProcess",
+        "AISafetyAtlas.Causal.ControlledMarkovProcess.ActionIndependent",
+        "AISafetyAtlas.Causal.GoalPolicy",
+        "AISafetyAtlas.Causal.trajectoryLaw"
+      ]
+    },
+    "AISafetyAtlas.Causal.trajectoryLaw_startState": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.ControlledMarkovProcess",
+        "AISafetyAtlas.Causal.GoalPolicy",
+        "AISafetyAtlas.Causal.trajectoryLaw"
+      ]
     },
     "AISafetyAtlas.Causal.utilityBox": {
       "kind": "definition",

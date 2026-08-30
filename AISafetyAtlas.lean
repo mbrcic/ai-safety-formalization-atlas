@@ -24,6 +24,10 @@ public import AISafetyAtlas.Causal.EffectiveGenericity
 public import AISafetyAtlas.Causal.Query
 public import AISafetyAtlas.Causal.ModelSpace
 public import AISafetyAtlas.Causal.StructuralModel
+public import AISafetyAtlas.Causal.Goal
+public import AISafetyAtlas.Causal.ControlledProcess
+public import AISafetyAtlas.Causal.GoalDynamics
+public import AISafetyAtlas.Causal.Corruption
 public import AISafetyAtlas.Examples.Causal.Model
 public import AISafetyAtlas.Examples.Causal.BayesianNetwork
 public import AISafetyAtlas.Examples.Causal.BehavioralCollision
@@ -32,6 +36,10 @@ public import AISafetyAtlas.Examples.Causal.DecisionNetwork
 public import AISafetyAtlas.Examples.Causal.Query
 public import AISafetyAtlas.Examples.Causal.EffectiveGenericity
 public import AISafetyAtlas.Examples.Causal.O24Refutation
+public import AISafetyAtlas.Examples.Causal.Goal
+public import AISafetyAtlas.Examples.Causal.ControlledProcess
+public import AISafetyAtlas.Examples.Causal.GoalDynamics
+public import AISafetyAtlas.Examples.Causal.O33Corruption
 public import AISafetyAtlas.Examples.Causal.ModelSpace
 public import AISafetyAtlas.Examples.Causal.StructuralModel
 public import AISafetyAtlas.Examples.Causal.OneNodeClass
@@ -191,11 +199,19 @@ which is a separate Wolpert-specific development and is not migrated;
 | `AISafetyAtlas.Causal.EffectiveGenericity` | MAIS-O24's rational polynomial certificate, the class `M(sk,lambda,mu)` it cuts, conclusions (a)-(c), the size and construction-time bounds, and the bundled `O24Solution` carrying all of them |
 | `AISafetyAtlas.Causal.Query` | MAIS-A2 `subsec:queries`: rational-weight queries against real tables, randomized adaptive analysts, expected error, and the minimax risk and `N(ε)` its query problems are stated over. The policy-probability oracle only; sampled and corrupted actions are not here |
 | `AISafetyAtlas.Causal.ModelSpace` | Rounding a model's tables onto a grid: the estimate moves by `O(ε)` and rounded models form a countable set, which is the mathematical content of the query layer's countable-support repair |
+| `AISafetyAtlas.Causal.Goal` | MAIS-A2's goal formalism: sub-goals over the three temporal operators, sequential goals with print's recursive achievement times, composite goals as **sets** of disjuncts, and the counting bound on the composite goals that carry no immediately winnable disjunct. Syntax and trajectory semantics only -- no environment, no policy, no probability |
+| `AISafetyAtlas.Causal.ControlledProcess` | MAIS-A2's environment: a finite stationary controlled Markov process, print's communicating condition and the one-step route to it, entrywise sup-norm separation, and the disjoint-reconstruction-ball fact any indistinguishability argument needs. No agents, no trajectory law |
+| `AISafetyAtlas.Causal.GoalDynamics` | Deterministic goal-conditioned policies, the trajectory law they induce by Ionescu-Tulcea, the achievement probability, and print's `(δ,n)`-bounded agents with the best achievable read as a supremum rather than the maximum print presupposes |
+| `AISafetyAtlas.Causal.Corruption` | MAIS-O33's query side: print's first-action data, `η`-corruption counted against `𝐒 × 𝚿_n`, a randomized analyst with no query budget, and the indistinguishability theorem a common corruption of two far-apart worlds discharges |
 | `AISafetyAtlas.Causal.StructuralModel` | Structural causal models with exogenous noise, submodels and soft interventions, causal influence diagrams, structural causal influence models and materiality: Everitt et al. 2021 Definitions 1-5. A different object from `Causal.Model`, which is a causal Bayesian network |
 | `AISafetyAtlas.Examples.Causal.Model` | A ternary-root, binary-child model exercising translation, a non-injective local map, and general normalization |
 | `AISafetyAtlas.Examples.Causal.BayesianNetwork` | The kernel as a Pearl causal Bayesian network, and a family whose members are truncated products but which is not one |
 | `AISafetyAtlas.Examples.Causal.BehavioralCollision` | Three models on two binary variables with one behavior. The construction submitted against MAIS-O23, machine-checked |
 | `AISafetyAtlas.Examples.Causal.O24Refutation` | MAIS-O24's conclusions (a) and (c) shown incompatible: an open box of behavioural collisions, a certificate polynomial forced to vanish on it, and (c) contradicted at the utilities beside the collision. `O24Solution` is empty |
+| `AISafetyAtlas.Examples.Causal.Goal` | The goal formalism on two states and two actions: each temporal operator exercised, the *Eventually* achievement time checked at the least hitting time, a depth-two goal satisfied and an unreachable one refuted, and the three counts evaluated |
+| `AISafetyAtlas.Examples.Causal.ControlledProcess` | The two separated environments of MAIS issue #9: positive everywhere hence communicating, `4/5` apart at one entry, and their reconstruction balls disjoint at `n = 101`, `δ = 1/2` — which is why the candidate does not need `δ = 0` |
+| `AISafetyAtlas.Examples.Causal.GoalDynamics` | The first-action map read off a branching agent, the empty goal achieved with probability zero, and `IsBounded` inhabited over a one-action environment — the non-vacuity check the predicate needs |
+| `AISafetyAtlas.Examples.Causal.O33Corruption` | MAIS-O33 refuted: two action-independent worlds `4/5` apart at `n = 101`, `δ = 1/2`, `(δ,n)`-bounded agents in each agreeing off a doubly exponentially small set of goals, and one corruption serving both. No positive corruption fraction is uniformly tolerable |
 | `AISafetyAtlas.Examples.Causal.Decision` | The collision's shared zero-regret policy family, plus two margin-class models with opposite optimal action at one mixture |
 | `AISafetyAtlas.Examples.Causal.ModelSpace` | A three-state table rounded by hand, and the witness that the `dim c` factor in the error bound is not slack |
 | `AISafetyAtlas.Examples.Causal.StructuralModel` | A two-variable structural model where evaluation needs a real recursion, and a diagram whose childless-utility clause is shown to bite |

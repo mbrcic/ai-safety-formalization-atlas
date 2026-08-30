@@ -921,12 +921,10 @@ the whole argument — and by `rows_gt_cols_of_full_sparsity_spark` print's own
 `n ≥ 2k` forces the witness into `m < n`, an undercomplete dictionary on the
 wrong side of the agenda's own regime. **It is a warning about the printed
 sentence, not an answer**, and `exists_admissibleGrowthLaw` checks the narrowed
-universal is not empty. (This sentence read *"the row stays `OPEN`"* until
-2026-08-30. The refutation still answers nothing; what changed is that the row was
-resolved the same day by a different argument — the candidate in MAIS
-[issue #30](https://github.com/lionellevine/MAIS/issues/30), transcribed and
-proved — so the clause was true about the refutation and false
-about the row.) MAIS
+universal is not empty. (The row is nonetheless `RESOLVED`: this refutation
+answers nothing, and what settled it was a different argument — the candidate in
+MAIS [issue #30](https://github.com/lionellevine/MAIS/issues/30), transcribed and
+proved.) MAIS
 [issue #30](https://github.com/lionellevine/MAIS/issues/30) reads the domain as
 `1 ≤ k < m` independently.
 

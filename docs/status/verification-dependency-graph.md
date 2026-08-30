@@ -25,7 +25,7 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 
 **Instances always appear here.** Typeclass resolution names nothing, so an instance has no textual user even when every consumer depends on it. Deleting one because it is listed here is how a checker stops compiling.
 
-- `AgentBehavior.Satisfies`
+None.
 
 ## Direct dependencies
 

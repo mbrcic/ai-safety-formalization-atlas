@@ -61,6 +61,8 @@ discrepancy between them is detectable.
 | O27 | `\begin{problem}` | `prob:floor` |
 | O29 | `\begin{problem}` | `prob:boltzmann` |
 | O31 | `\begin{question}` | `q:chain` |
+| O32 | `\begin{problem}` | `prob:rate` |
+| O33 | `\begin{problem}` | `prob:corruption` |
 | O34 | `\begin{problem}` | `prob:starter-set` |
 
 And from the pinned A3 `.tex`:
@@ -84,6 +86,8 @@ regret), `def:margin` ((M1)–(M6)), `def:twovar` (the two-variable family
 | `open-problems/MAIS-O26.md` | `3b38114b5b89f0f9c18ef13d8042c2e6b2907a90232bb2ba0f9e543a4720a013` |
 | `open-problems/MAIS-O29.md` | `7f493b9c7d19e1e56ada160d0bff6905e26f4a271b5e84919ba8e931d9fd6a3f` |
 | `open-problems/MAIS-O31.md` | `9b20c862d2ba6f4b701fa9f87590e7c2467e8d0c1bd5fcee18f5d0a5d15bfe8b` |
+| `open-problems/MAIS-O32.md` | `7402d79a48d02728a805ad55598761cfd168b847ae9774384bcf77c56b22570e` |
+| `open-problems/MAIS-O33.md` | `9ed57dd9e7e2c11ea30c0f9eb86f1c2cf39358ef9017ac9ac77ba6434588c181` |
 | `open-problems/MAIS-O34.md` | `8c9a8e739611acf96c692f4adce0691bd6fafee53783533c1817cd5ba8989ac1` |
 | `open-problems/MAIS-O38.md` | `cea6784554724ce4e67b8967a9fe6fba6959e70a32494dc97b0b8fd3685c4d43` |
 
@@ -93,12 +97,63 @@ Issue bodies are editable in place and carry no revision history a permalink can
 address, so each body is hashed as read on 2026-08-20. A later edit changes the
 hash and invalidates the grading that rests on it — which is the point.
 
+**How these hashes are computed, because a bare `sha256` of the API body does not
+reproduce them.** Every value in the table below is
+
+```
+gh issue view <N> --repo lionellevine/MAIS --json body -q .body | sha256sum
+```
+
+and `jq`'s raw output appends a trailing newline, so each is
+`sha256(body ‖ "\n")` rather than `sha256(body)`. Hashing the API's `body` field
+directly gives a different digest — for issue #7, `a8f4aeee05c2e262cab240a62c9b8ad0a9e0d41c38971446b6130c5af22eeeb8`
+against the `68e65b11…` recorded here — and a reader who did that would conclude
+the issue had been edited when it had not. All six bodies were re-verified under
+this method on 2026-08-30 and all six match. None of them contains a carriage
+return, so no line-ending normalization is involved; the trailing newline is the
+whole difference. The attachment hashes are ordinary file digests and carry no
+such convention.
+
 | issue | title | author | body sha256 |
 |---|---|---|---|
 | [#4](https://github.com/lionellevine/MAIS/issues/4) | MAIS-O34: exact fibers, regret geometry, and a single graph-threshold program | Robby955 | `f425da83395b457feb5615c9beed703675a977967890ebe1b97dd61efdd0b328` |
 | [#6](https://github.com/lionellevine/MAIS/issues/6) | MAIS-O23: candidate negative resolution — a three-DAG behavioral collision | kumino | `4fd639c4322a3a3bd1b27fe6f14ee3de902961e0013485395e461d7cdc739a9b` |
 | [#8](https://github.com/lionellevine/MAIS/issues/8) | MAIS-O31: candidate complete solution — generic chamber classification for one intervention in a binary chain | kumino | `8e2e688eaac1a72f915aa787ad1e74676e6b72eff4f2796394e95b0a83fb8a96` |
+| [#9](https://github.com/lionellevine/MAIS/issues/9) | MAIS-O33: candidate negative resolution — the persistent-corruption threshold is zero | kumino | `9ff124f8cd8fb65d7393780384776f87a42a5870ce477b50da8dd9c315e9bd25` |
 | [#30](https://github.com/lionellevine/MAIS/issues/30) | MAIS-O38 candidate complete solution: m^3+2m fixed codes suffice for every sparsity k < m | 26david26 | `6e2db10eb10242c075ca331fcf87a604511b9b31df3d55a5c4b0d2d2d95d05ab` |
+
+Issue [#9](https://github.com/lionellevine/MAIS/issues/9)'s body was read on
+**2026-08-30**, which is later than the other three: it is the candidate CONJ-023
+grades, and it was pinned only when that row was settled. Its `updated_at` is
+`2026-08-04T02:33:16Z`, before the first reading, so the body carries no edit
+since it was written, and it has no comments at that reading.
+
+**Its attached proof note is pinned separately**, as issue #30's is: the body
+states the claim and the attachment carries the argument.
+
+| artifact | value |
+|---|---|
+| file | `MAIS-O33-candidate-solution.pdf`, attachment of issue [#9](https://github.com/lionellevine/MAIS/issues/9) |
+| url | `https://github.com/user-attachments/files/30684764/MAIS-O33-candidate-solution.pdf` |
+| sha256 | `cf603983ca239bd933d5e3d0810ec5a660fbc1e587e2cce788c0e4edf12f45a6` |
+| pages / producer | 6, `MiKTeX pdfTeX-1.40.26`, created `2026-08-04T00:03:23+02:00` |
+| read | 2026-08-30 |
+| grades MAIS-O33 at | `43016a3e5c94edfca55ba49bd3e16770f7ac5dae` |
+
+Like issue #7's attachment, the note names its own frozen revision —
+`43016a3e5c94edfca55ba49bd3e16770f7ac5dae`, the same one — and that revision is
+not this pin. It makes no difference here: `agendas/A2/MAIS-A2.tex` differs
+between `43016a3e` and `9dd29f8` only in the agenda's title and the survey
+problem's name (four lines, all in the title, abstract and quoted MAIS-O2
+statement), and `prob:corruption` is byte-identical across the two. So the
+candidate and the atlas are grading the same printed sentence.
+
+The note is audited in [`mais-o33-statability.md`](mais-o33-statability.md) and
+what the atlas checked of it is in
+[`mais-o33-refutation.md`](mais-o33-refutation.md). Unlike issue #30's, this
+attachment **is** the graded artifact's argument: CONJ-023's `resolution`
+credits its construction, so an edit to it invalidates a credit rather than a
+grade, and the Lean depends on none of it.
 
 Issue [#30](https://github.com/lionellevine/MAIS/issues/30)'s body was read on **2026-08-27**, re-fetched and confirmed unedited on
 **2026-08-30** (`updated_at` is `2026-08-26T11:16:22Z`, before the first
@@ -145,14 +200,17 @@ against. Hashing it protects less than the table suggested: it would detect an e
 to this one comment and would not notice a new one, and nothing here watches for
 that.
 
-### The candidate the atlas had not read
+### Issue #7, the MAIS-O24 candidate
 
 Issue [#7](https://github.com/lionellevine/MAIS/issues/7), *MAIS-O24: candidate
 negative resolution — clauses (a) and (c) are incompatible as written*, by
-kumino, body sha256 `68e65b119a8923dd997e2ea75daea5331145706674a44ecc6d3f7c7b89a80ee7`, no comments at the
-pinned reading. It is named by `open-problems/MAIS-O24.md` at this very commit; see
-[`mais-o24-statability.md`](mais-o24-statability.md) for what it claims and what
-of it has been checked.
+kumino, body sha256 `68e65b119a8923dd997e2ea75daea5331145706674a44ecc6d3f7c7b89a80ee7`.
+Re-fetched 2026-08-30: the hash is unchanged, `updated_at` is
+`2026-08-04T02:32:33Z` — before every reading — and the issue still carries no
+comments. It is named by `open-problems/MAIS-O24.md` at this very commit; see
+[`mais-o24-statability.md`](mais-o24-statability.md) for what it claims and
+[`mais-o24-refutation.md`](mais-o24-refutation.md) for what of it was checked and
+which step had to be repaired.
 
 Its argument lives in an attachment rather than in the pinned tree, so the
 attachment is hashed separately and its own problem revision recorded, because

@@ -11,6 +11,7 @@ public import AISafetyAtlas.Conjectures.MAIS.O27
 public import AISafetyAtlas.Conjectures.MAIS.Rates
 public import AISafetyAtlas.Conjectures.MAIS.O25
 public import AISafetyAtlas.Conjectures.MAIS.O26
+public import AISafetyAtlas.Conjectures.MAIS.O33
 public import AISafetyAtlas.Conjectures.MAIS.O38
 /-!
 # Statement layer for the MAIS agenda questions
@@ -28,6 +29,7 @@ should open that file rather than this one:
 | MAIS-O27 | `prob:floor` | `MAIS/O27.lean` |
 | MAIS-O29 | `prob:boltzmann` | `MAIS/O29.lean`, sampled experiment in `MAIS/O29Experiment.lean` |
 | MAIS-O31 | `q:chain` | `MAIS/O31.lean`, chart and transport in `MAIS/O31Chart.lean` |
+| MAIS-O33 | `prob:corruption` | `MAIS/O33.lean`, corruption layer in `Causal/Corruption.lean` |
 | MAIS-O34 | `prob:starter-set` | `MAIS/O34.lean` |
 
 One problem here is **not** from A2. MAIS-O38 is A3's `prob:samples`, a

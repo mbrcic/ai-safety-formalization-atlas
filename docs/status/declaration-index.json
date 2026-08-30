@@ -3,7 +3,7 @@
   "generated_by": "scripts/generate_declaration_index.py",
   "note": "Declaration index walked from the elaborated environment, not from source text. Consumed by the prose checks so that a name resolves only when it is a real declaration.",
   "prefix": "AISafetyAtlas",
-  "count": 4475,
+  "count": 4694,
   "declarations": [
     {
       "name": "AISafetyAtlas",
@@ -486,6 +486,16 @@
       "module": "AISafetyAtlas.Causal.ParameterChart"
     },
     {
+      "name": "AISafetyAtlas.Causal.CompositeGoal",
+      "kind": "def",
+      "module": "AISafetyAtlas.Causal.Goal"
+    },
+    {
+      "name": "AISafetyAtlas.Causal.CompositeSatisfies",
+      "kind": "def",
+      "module": "AISafetyAtlas.Causal.Goal"
+    },
+    {
       "name": "AISafetyAtlas.Causal.ConditionalTables",
       "kind": "inductive",
       "module": "AISafetyAtlas.Causal.BayesianNetwork"
@@ -529,6 +539,96 @@
       "name": "AISafetyAtlas.Causal.ContainsChartBox",
       "kind": "def",
       "module": "AISafetyAtlas.Causal.ParameterChart"
+    },
+    {
+      "name": "AISafetyAtlas.Causal.ControlledMarkovProcess",
+      "kind": "inductive",
+      "module": "AISafetyAtlas.Causal.ControlledProcess"
+    },
+    {
+      "name": "AISafetyAtlas.Causal.ControlledMarkovProcess.ActionIndependent",
+      "kind": "def",
+      "module": "AISafetyAtlas.Causal.ControlledProcess"
+    },
+    {
+      "name": "AISafetyAtlas.Causal.ControlledMarkovProcess.Communicating",
+      "kind": "def",
+      "module": "AISafetyAtlas.Causal.ControlledProcess"
+    },
+    {
+      "name": "AISafetyAtlas.Causal.ControlledMarkovProcess.FullSupport",
+      "kind": "def",
+      "module": "AISafetyAtlas.Causal.ControlledProcess"
+    },
+    {
+      "name": "AISafetyAtlas.Causal.ControlledMarkovProcess.OneStep",
+      "kind": "def",
+      "module": "AISafetyAtlas.Causal.ControlledProcess"
+    },
+    {
+      "name": "AISafetyAtlas.Causal.ControlledMarkovProcess.Reachable",
+      "kind": "def",
+      "module": "AISafetyAtlas.Causal.ControlledProcess"
+    },
+    {
+      "name": "AISafetyAtlas.Causal.ControlledMarkovProcess.SeparatedBy",
+      "kind": "def",
+      "module": "AISafetyAtlas.Causal.ControlledProcess"
+    },
+    {
+      "name": "AISafetyAtlas.Causal.ControlledMarkovProcess.WithinBall",
+      "kind": "def",
+      "module": "AISafetyAtlas.Causal.ControlledProcess"
+    },
+    {
+      "name": "AISafetyAtlas.Causal.ControlledMarkovProcess.communicating_of_fullSupport",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Causal.ControlledProcess"
+    },
+    {
+      "name": "AISafetyAtlas.Causal.ControlledMarkovProcess.mk.congr_simp",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Causal.O33Corruption"
+    },
+    {
+      "name": "AISafetyAtlas.Causal.ControlledMarkovProcess.mk.inj",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Causal.ControlledProcess"
+    },
+    {
+      "name": "AISafetyAtlas.Causal.ControlledMarkovProcess.not_withinBall_both",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Causal.ControlledProcess"
+    },
+    {
+      "name": "AISafetyAtlas.Causal.ControlledMarkovProcess.prob",
+      "kind": "def",
+      "module": "AISafetyAtlas.Causal.ControlledProcess"
+    },
+    {
+      "name": "AISafetyAtlas.Causal.ControlledMarkovProcess.prob_le_one",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Causal.ControlledProcess"
+    },
+    {
+      "name": "AISafetyAtlas.Causal.ControlledMarkovProcess.prob_nonneg",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Causal.ControlledProcess"
+    },
+    {
+      "name": "AISafetyAtlas.Causal.ControlledMarkovProcess.prob_sum",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Causal.ControlledProcess"
+    },
+    {
+      "name": "AISafetyAtlas.Causal.ControlledProcess",
+      "kind": "module",
+      "module": "AISafetyAtlas.Causal.ControlledProcess"
+    },
+    {
+      "name": "AISafetyAtlas.Causal.Corruption",
+      "kind": "module",
+      "module": "AISafetyAtlas.Causal.Corruption"
     },
     {
       "name": "AISafetyAtlas.Causal.Decision",
@@ -686,6 +786,66 @@
       "module": "AISafetyAtlas.Causal.StructuralModel"
     },
     {
+      "name": "AISafetyAtlas.Causal.FirstActionData",
+      "kind": "def",
+      "module": "AISafetyAtlas.Causal.Corruption"
+    },
+    {
+      "name": "AISafetyAtlas.Causal.FirstActionEstimator",
+      "kind": "def",
+      "module": "AISafetyAtlas.Causal.Corruption"
+    },
+    {
+      "name": "AISafetyAtlas.Causal.FirstActionStrategy",
+      "kind": "def",
+      "module": "AISafetyAtlas.Causal.Corruption"
+    },
+    {
+      "name": "AISafetyAtlas.Causal.FirstActionTranscript",
+      "kind": "def",
+      "module": "AISafetyAtlas.Causal.Corruption"
+    },
+    {
+      "name": "AISafetyAtlas.Causal.FullAgent",
+      "kind": "def",
+      "module": "AISafetyAtlas.Causal.GoalDynamics"
+    },
+    {
+      "name": "AISafetyAtlas.Causal.FullHistory",
+      "kind": "def",
+      "module": "AISafetyAtlas.Causal.GoalDynamics"
+    },
+    {
+      "name": "AISafetyAtlas.Causal.FullPolicy",
+      "kind": "def",
+      "module": "AISafetyAtlas.Causal.GoalDynamics"
+    },
+    {
+      "name": "AISafetyAtlas.Causal.Goal",
+      "kind": "module",
+      "module": "AISafetyAtlas.Causal.Goal"
+    },
+    {
+      "name": "AISafetyAtlas.Causal.GoalConditionedAgent",
+      "kind": "def",
+      "module": "AISafetyAtlas.Causal.GoalDynamics"
+    },
+    {
+      "name": "AISafetyAtlas.Causal.GoalDynamics",
+      "kind": "module",
+      "module": "AISafetyAtlas.Causal.GoalDynamics"
+    },
+    {
+      "name": "AISafetyAtlas.Causal.GoalHistory",
+      "kind": "def",
+      "module": "AISafetyAtlas.Causal.GoalDynamics"
+    },
+    {
+      "name": "AISafetyAtlas.Causal.GoalPolicy",
+      "kind": "def",
+      "module": "AISafetyAtlas.Causal.GoalDynamics"
+    },
+    {
       "name": "AISafetyAtlas.Causal.HasPolySizeAt",
       "kind": "def",
       "module": "AISafetyAtlas.Causal.EffectiveGenericity"
@@ -711,6 +871,16 @@
       "module": "AISafetyAtlas.Causal.BayesianNetwork"
     },
     {
+      "name": "AISafetyAtlas.Causal.IsAchievementTime",
+      "kind": "def",
+      "module": "AISafetyAtlas.Causal.Goal"
+    },
+    {
+      "name": "AISafetyAtlas.Causal.IsAchievementTime.unique",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Causal.Goal"
+    },
+    {
       "name": "AISafetyAtlas.Causal.IsCausalBayesNetwork",
       "kind": "def",
       "module": "AISafetyAtlas.Causal.BayesianNetwork"
@@ -726,6 +896,21 @@
       "module": "AISafetyAtlas.Causal.EffectiveGenericity"
     },
     {
+      "name": "AISafetyAtlas.Causal.IsCorruption",
+      "kind": "def",
+      "module": "AISafetyAtlas.Causal.Corruption"
+    },
+    {
+      "name": "AISafetyAtlas.Causal.IsDeltaBounded",
+      "kind": "def",
+      "module": "AISafetyAtlas.Causal.GoalDynamics"
+    },
+    {
+      "name": "AISafetyAtlas.Causal.IsDeltaBoundedFull",
+      "kind": "def",
+      "module": "AISafetyAtlas.Causal.GoalDynamics"
+    },
+    {
       "name": "AISafetyAtlas.Causal.IsNonadaptiveRandomizedStrategy",
       "kind": "def",
       "module": "AISafetyAtlas.Causal.Query"
@@ -739,6 +924,11 @@
       "name": "AISafetyAtlas.Causal.IsRadius",
       "kind": "def",
       "module": "AISafetyAtlas.Causal.Decision"
+    },
+    {
+      "name": "AISafetyAtlas.Causal.KernelEstimate",
+      "kind": "def",
+      "module": "AISafetyAtlas.Causal.Corruption"
     },
     {
       "name": "AISafetyAtlas.Causal.LocalIntervention",
@@ -1721,6 +1911,11 @@
       "module": "AISafetyAtlas.Causal.EffectiveGenericity"
     },
     {
+      "name": "AISafetyAtlas.Causal.O33Query",
+      "kind": "def",
+      "module": "AISafetyAtlas.Causal.Corruption"
+    },
+    {
       "name": "AISafetyAtlas.Causal.ParameterChart",
       "kind": "module",
       "module": "AISafetyAtlas.Causal.ParameterChart"
@@ -2186,6 +2381,21 @@
       "module": "AISafetyAtlas.Causal.StructuralModel"
     },
     {
+      "name": "AISafetyAtlas.Causal.Satisfies",
+      "kind": "def",
+      "module": "AISafetyAtlas.Causal.Goal"
+    },
+    {
+      "name": "AISafetyAtlas.Causal.SequentialGoal",
+      "kind": "def",
+      "module": "AISafetyAtlas.Causal.Goal"
+    },
+    {
+      "name": "AISafetyAtlas.Causal.SequentialGoal.depth",
+      "kind": "def",
+      "module": "AISafetyAtlas.Causal.Goal"
+    },
+    {
       "name": "AISafetyAtlas.Causal.ShiftedQuery",
       "kind": "inductive",
       "module": "AISafetyAtlas.Causal.Query"
@@ -2496,6 +2706,71 @@
       "module": "AISafetyAtlas.Causal.StructuralModel"
     },
     {
+      "name": "AISafetyAtlas.Causal.SubGoal",
+      "kind": "inductive",
+      "module": "AISafetyAtlas.Causal.Goal"
+    },
+    {
+      "name": "AISafetyAtlas.Causal.SubGoal.mk.inj",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Causal.Goal"
+    },
+    {
+      "name": "AISafetyAtlas.Causal.SubGoal.op",
+      "kind": "def",
+      "module": "AISafetyAtlas.Causal.Goal"
+    },
+    {
+      "name": "AISafetyAtlas.Causal.SubGoal.target",
+      "kind": "def",
+      "module": "AISafetyAtlas.Causal.Goal"
+    },
+    {
+      "name": "AISafetyAtlas.Causal.Succeeds",
+      "kind": "def",
+      "module": "AISafetyAtlas.Causal.Corruption"
+    },
+    {
+      "name": "AISafetyAtlas.Causal.TemporalOp",
+      "kind": "inductive",
+      "module": "AISafetyAtlas.Causal.Goal"
+    },
+    {
+      "name": "AISafetyAtlas.Causal.TemporalOp.eventually",
+      "kind": "constructor",
+      "module": "AISafetyAtlas.Causal.Goal"
+    },
+    {
+      "name": "AISafetyAtlas.Causal.TemporalOp.eventually.elim",
+      "kind": "def",
+      "module": "AISafetyAtlas.Causal.Goal"
+    },
+    {
+      "name": "AISafetyAtlas.Causal.TemporalOp.next",
+      "kind": "constructor",
+      "module": "AISafetyAtlas.Causal.Goal"
+    },
+    {
+      "name": "AISafetyAtlas.Causal.TemporalOp.next.elim",
+      "kind": "def",
+      "module": "AISafetyAtlas.Causal.Goal"
+    },
+    {
+      "name": "AISafetyAtlas.Causal.TemporalOp.now",
+      "kind": "constructor",
+      "module": "AISafetyAtlas.Causal.Goal"
+    },
+    {
+      "name": "AISafetyAtlas.Causal.TemporalOp.now.elim",
+      "kind": "def",
+      "module": "AISafetyAtlas.Causal.Goal"
+    },
+    {
+      "name": "AISafetyAtlas.Causal.TolerantAt",
+      "kind": "def",
+      "module": "AISafetyAtlas.Causal.Corruption"
+    },
+    {
       "name": "AISafetyAtlas.Causal.Transcript",
       "kind": "def",
       "module": "AISafetyAtlas.Causal.Query"
@@ -2509,6 +2784,36 @@
       "name": "AISafetyAtlas.Causal.UtilityConfig.extend",
       "kind": "def",
       "module": "AISafetyAtlas.Causal.EffectiveGenericity"
+    },
+    {
+      "name": "AISafetyAtlas.Causal.achieveProb",
+      "kind": "def",
+      "module": "AISafetyAtlas.Causal.GoalDynamics"
+    },
+    {
+      "name": "AISafetyAtlas.Causal.achieveProb.congr_simp",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Causal.GoalDynamics"
+    },
+    {
+      "name": "AISafetyAtlas.Causal.achieveProb_congr",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Causal.GoalDynamics"
+    },
+    {
+      "name": "AISafetyAtlas.Causal.achieveProb_eq_one_of_immediateWin",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Causal.GoalDynamics"
+    },
+    {
+      "name": "AISafetyAtlas.Causal.achieveProb_le_one",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Causal.GoalDynamics"
+    },
+    {
+      "name": "AISafetyAtlas.Causal.achieveProb_le_optimalProb",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Causal.GoalDynamics"
     },
     {
       "name": "AISafetyAtlas.Causal.acyclic_of_rank",
@@ -2551,6 +2856,11 @@
       "module": "AISafetyAtlas.Causal.ParameterChart"
     },
     {
+      "name": "AISafetyAtlas.Causal.boundedGoals",
+      "kind": "def",
+      "module": "AISafetyAtlas.Causal.Goal"
+    },
+    {
       "name": "AISafetyAtlas.Causal.card_binaryLocalIntervention",
       "kind": "theorem",
       "module": "AISafetyAtlas.Causal.Model"
@@ -2559,6 +2869,36 @@
       "name": "AISafetyAtlas.Causal.card_chartIndex",
       "kind": "theorem",
       "module": "AISafetyAtlas.Causal.ParameterChart"
+    },
+    {
+      "name": "AISafetyAtlas.Causal.card_compositeGoals",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Causal.Goal"
+    },
+    {
+      "name": "AISafetyAtlas.Causal.card_compositeGoals_avoiding",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Causal.Goal"
+    },
+    {
+      "name": "AISafetyAtlas.Causal.card_corruptionDomain",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Causal.Corruption"
+    },
+    {
+      "name": "AISafetyAtlas.Causal.card_corruptionDomain_avoiding",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Causal.Corruption"
+    },
+    {
+      "name": "AISafetyAtlas.Causal.card_goalsOfLength",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Causal.Goal"
+    },
+    {
+      "name": "AISafetyAtlas.Causal.card_immediateWins",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Causal.Goal"
     },
     {
       "name": "AISafetyAtlas.Causal.card_le_o24Size",
@@ -2574,6 +2914,16 @@
       "name": "AISafetyAtlas.Causal.card_o24Var_le",
       "kind": "theorem",
       "module": "AISafetyAtlas.Causal.EffectiveGenericity"
+    },
+    {
+      "name": "AISafetyAtlas.Causal.card_subGoal",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Causal.Goal"
+    },
+    {
+      "name": "AISafetyAtlas.Causal.card_temporalOp",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Causal.Goal"
     },
     {
       "name": "AISafetyAtlas.Causal.chainParents",
@@ -2616,6 +2966,26 @@
       "module": "AISafetyAtlas.Causal.EffectiveGenericity"
     },
     {
+      "name": "AISafetyAtlas.Causal.compositeGoals",
+      "kind": "def",
+      "module": "AISafetyAtlas.Causal.Goal"
+    },
+    {
+      "name": "AISafetyAtlas.Causal.compositeSatisfies_of_immediateWin",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Causal.Goal"
+    },
+    {
+      "name": "AISafetyAtlas.Causal.compositeSatisfies_of_now_disjunct",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Causal.Goal"
+    },
+    {
+      "name": "AISafetyAtlas.Causal.corruptionDomain",
+      "kind": "def",
+      "module": "AISafetyAtlas.Causal.Corruption"
+    },
+    {
       "name": "AISafetyAtlas.Causal.countable_range_roundDown",
       "kind": "theorem",
       "module": "AISafetyAtlas.Causal.ModelSpace"
@@ -2651,6 +3021,11 @@
       "module": "AISafetyAtlas.Causal.Query"
     },
     {
+      "name": "AISafetyAtlas.Causal.disjoint_reconstructionEvent",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Causal.Corruption"
+    },
+    {
       "name": "AISafetyAtlas.Causal.effectiveMarginClass",
       "kind": "def",
       "module": "AISafetyAtlas.Causal.EffectiveGenericity"
@@ -2679,6 +3054,11 @@
       "name": "AISafetyAtlas.Causal.eq_family_of_isCausalBayesNetwork",
       "kind": "theorem",
       "module": "AISafetyAtlas.Causal.BayesianNetwork"
+    },
+    {
+      "name": "AISafetyAtlas.Causal.eventually_startState",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Causal.GoalDynamics"
     },
     {
       "name": "AISafetyAtlas.Causal.exactAnalystRisk",
@@ -2761,6 +3141,26 @@
       "module": "AISafetyAtlas.Causal.Query"
     },
     {
+      "name": "AISafetyAtlas.Causal.exceptional_ratio_lt",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Causal.Goal"
+    },
+    {
+      "name": "AISafetyAtlas.Causal.exceptional_ratio_lt_with_empty",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Causal.Goal"
+    },
+    {
+      "name": "AISafetyAtlas.Causal.exists_achieveProb_ge",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Causal.GoalDynamics"
+    },
+    {
+      "name": "AISafetyAtlas.Causal.exists_isDeltaBounded_prescribing",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Causal.GoalDynamics"
+    },
+    {
       "name": "AISafetyAtlas.Causal.fibreRep",
       "kind": "def",
       "module": "AISafetyAtlas.Causal.Decision"
@@ -2794,6 +3194,21 @@
       "name": "AISafetyAtlas.Causal.finsetFunBits_injective",
       "kind": "theorem",
       "module": "AISafetyAtlas.Causal.EffectiveGenericity"
+    },
+    {
+      "name": "AISafetyAtlas.Causal.firstActionMap",
+      "kind": "def",
+      "module": "AISafetyAtlas.Causal.GoalDynamics"
+    },
+    {
+      "name": "AISafetyAtlas.Causal.firstActionMapFull",
+      "kind": "def",
+      "module": "AISafetyAtlas.Causal.GoalDynamics"
+    },
+    {
+      "name": "AISafetyAtlas.Causal.firstActionMapFull_lift",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Causal.GoalDynamics"
     },
     {
       "name": "AISafetyAtlas.Causal.fixIntervention",
@@ -2831,6 +3246,11 @@
       "module": "AISafetyAtlas.Causal.BayesianNetwork"
     },
     {
+      "name": "AISafetyAtlas.Causal.goalsOfLength",
+      "kind": "def",
+      "module": "AISafetyAtlas.Causal.Goal"
+    },
+    {
       "name": "AISafetyAtlas.Causal.hardInterventionProfile",
       "kind": "def",
       "module": "AISafetyAtlas.Causal.Model"
@@ -2846,9 +3266,24 @@
       "module": "AISafetyAtlas.Causal.Query"
     },
     {
+      "name": "AISafetyAtlas.Causal.history_zero_const",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Causal.GoalDynamics"
+    },
+    {
       "name": "AISafetyAtlas.Causal.identityIntervention",
       "kind": "def",
       "module": "AISafetyAtlas.Causal.Model"
+    },
+    {
+      "name": "AISafetyAtlas.Causal.immediateWins",
+      "kind": "def",
+      "module": "AISafetyAtlas.Causal.Goal"
+    },
+    {
+      "name": "AISafetyAtlas.Causal.immediateWins_subset_boundedGoals",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Causal.Goal"
     },
     {
       "name": "AISafetyAtlas.Causal.inIdentifiedSet_mono",
@@ -2871,6 +3306,16 @@
       "module": "AISafetyAtlas.Causal.Decision"
     },
     {
+      "name": "AISafetyAtlas.Causal.inducedPolicy",
+      "kind": "def",
+      "module": "AISafetyAtlas.Causal.GoalDynamics"
+    },
+    {
+      "name": "AISafetyAtlas.Causal.inducedPolicy_liftPolicy",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Causal.GoalDynamics"
+    },
+    {
       "name": "AISafetyAtlas.Causal.instCountableShiftedQuery",
       "kind": "theorem",
       "module": "AISafetyAtlas.Causal.Query"
@@ -2879,6 +3324,36 @@
       "name": "AISafetyAtlas.Causal.instDecidableEqNodeKind",
       "kind": "def",
       "module": "AISafetyAtlas.Causal.StructuralModel"
+    },
+    {
+      "name": "AISafetyAtlas.Causal.instDecidableEqSubGoal",
+      "kind": "def",
+      "module": "AISafetyAtlas.Causal.Goal"
+    },
+    {
+      "name": "AISafetyAtlas.Causal.instDecidableEqTemporalOp",
+      "kind": "def",
+      "module": "AISafetyAtlas.Causal.Goal"
+    },
+    {
+      "name": "AISafetyAtlas.Causal.instFintypeSubGoal",
+      "kind": "def",
+      "module": "AISafetyAtlas.Causal.Goal"
+    },
+    {
+      "name": "AISafetyAtlas.Causal.instFintypeTemporalOp",
+      "kind": "def",
+      "module": "AISafetyAtlas.Causal.Goal"
+    },
+    {
+      "name": "AISafetyAtlas.Causal.instIsMarkovKernelGoalHistoryStepKernel",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Causal.GoalDynamics"
+    },
+    {
+      "name": "AISafetyAtlas.Causal.instIsProbabilityMeasureForallNatTrajectoryLaw",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Causal.GoalDynamics"
     },
     {
       "name": "AISafetyAtlas.Causal.instMeasurableSingletonClassModel",
@@ -2899,6 +3374,16 @@
       "name": "AISafetyAtlas.Causal.instNonemptyShiftedQuery",
       "kind": "theorem",
       "module": "AISafetyAtlas.Causal.Query"
+    },
+    {
+      "name": "AISafetyAtlas.Causal.instReprTemporalOp",
+      "kind": "def",
+      "module": "AISafetyAtlas.Causal.Goal"
+    },
+    {
+      "name": "AISafetyAtlas.Causal.instReprTemporalOp.repr",
+      "kind": "def",
+      "module": "AISafetyAtlas.Causal.Goal"
     },
     {
       "name": "AISafetyAtlas.Causal.integrable_modelError",
@@ -2926,6 +3411,26 @@
       "module": "AISafetyAtlas.Causal.EffectiveGenericity"
     },
     {
+      "name": "AISafetyAtlas.Causal.isCorruption_of_agree_off_avoiding",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Causal.Corruption"
+    },
+    {
+      "name": "AISafetyAtlas.Causal.isCorruption_self",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Causal.Corruption"
+    },
+    {
+      "name": "AISafetyAtlas.Causal.isDeltaBoundedFull_lift_iff",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Causal.GoalDynamics"
+    },
+    {
+      "name": "AISafetyAtlas.Causal.isDeltaBounded_of_achieve_eq_optimal",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Causal.GoalDynamics"
+    },
+    {
       "name": "AISafetyAtlas.Causal.isPrefixCode_encodeFinsetFin",
       "kind": "theorem",
       "module": "AISafetyAtlas.Causal.EffectiveGenericity"
@@ -2951,9 +3456,44 @@
       "module": "AISafetyAtlas.Causal.Query"
     },
     {
+      "name": "AISafetyAtlas.Causal.liftPolicy",
+      "kind": "def",
+      "module": "AISafetyAtlas.Causal.GoalDynamics"
+    },
+    {
+      "name": "AISafetyAtlas.Causal.measurableSet_compositeSatisfies",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Causal.GoalDynamics"
+    },
+    {
+      "name": "AISafetyAtlas.Causal.measurableSet_goalHistory",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Causal.GoalDynamics"
+    },
+    {
+      "name": "AISafetyAtlas.Causal.measurableSet_isAchievementTime",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Causal.GoalDynamics"
+    },
+    {
       "name": "AISafetyAtlas.Causal.measurableSet_parents_eq",
       "kind": "theorem",
       "module": "AISafetyAtlas.Causal.ModelSpace"
+    },
+    {
+      "name": "AISafetyAtlas.Causal.measurableSet_reconstructionEvent",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Causal.Corruption"
+    },
+    {
+      "name": "AISafetyAtlas.Causal.measurableSet_satisfies",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Causal.GoalDynamics"
+    },
+    {
+      "name": "AISafetyAtlas.Causal.measurableSet_statePairs_mem",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Causal.GoalDynamics"
     },
     {
       "name": "AISafetyAtlas.Causal.measurable_cpt",
@@ -2969,6 +3509,11 @@
       "name": "AISafetyAtlas.Causal.measurable_roundDown",
       "kind": "theorem",
       "module": "AISafetyAtlas.Causal.ModelSpace"
+    },
+    {
+      "name": "AISafetyAtlas.Causal.measurable_toGoalHistory",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Causal.GoalDynamics"
     },
     {
       "name": "AISafetyAtlas.Causal.measureAnalystRisk",
@@ -3056,6 +3601,16 @@
       "module": "AISafetyAtlas.Causal.Query"
     },
     {
+      "name": "AISafetyAtlas.Causal.mem_boundedGoals",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Causal.Goal"
+    },
+    {
+      "name": "AISafetyAtlas.Causal.mem_goalsOfLength",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Causal.Goal"
+    },
+    {
       "name": "AISafetyAtlas.Causal.modelError",
       "kind": "def",
       "module": "AISafetyAtlas.Causal.Decision"
@@ -3096,6 +3651,11 @@
       "module": "AISafetyAtlas.Causal.Query"
     },
     {
+      "name": "AISafetyAtlas.Causal.not_both_two_thirds",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Causal.ControlledProcess"
+    },
+    {
       "name": "AISafetyAtlas.Causal.not_inIdentifiedSet_of_neg",
       "kind": "theorem",
       "module": "AISafetyAtlas.Causal.Decision"
@@ -3104,6 +3664,21 @@
       "name": "AISafetyAtlas.Causal.not_inIdentifiedSet_of_opposite_sign",
       "kind": "theorem",
       "module": "AISafetyAtlas.Causal.Decision"
+    },
+    {
+      "name": "AISafetyAtlas.Causal.not_tolerantAt_of_common_corruption",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Causal.Corruption"
+    },
+    {
+      "name": "AISafetyAtlas.Causal.nowGoal",
+      "kind": "def",
+      "module": "AISafetyAtlas.Causal.Goal"
+    },
+    {
+      "name": "AISafetyAtlas.Causal.nowGoal_injective",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Causal.Goal"
     },
     {
       "name": "AISafetyAtlas.Causal.o24ClassSize",
@@ -3149,6 +3724,41 @@
       "name": "AISafetyAtlas.Causal.optimalPolicyFamily",
       "kind": "def",
       "module": "AISafetyAtlas.Causal.Decision"
+    },
+    {
+      "name": "AISafetyAtlas.Causal.optimalProb",
+      "kind": "def",
+      "module": "AISafetyAtlas.Causal.GoalDynamics"
+    },
+    {
+      "name": "AISafetyAtlas.Causal.optimalProb.congr_simp",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Causal.GoalDynamics"
+    },
+    {
+      "name": "AISafetyAtlas.Causal.optimalProbFull",
+      "kind": "def",
+      "module": "AISafetyAtlas.Causal.GoalDynamics"
+    },
+    {
+      "name": "AISafetyAtlas.Causal.optimalProbFull.congr_simp",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Causal.GoalDynamics"
+    },
+    {
+      "name": "AISafetyAtlas.Causal.optimalProbFull_eq",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Causal.GoalDynamics"
+    },
+    {
+      "name": "AISafetyAtlas.Causal.optimalProb_le_one",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Causal.GoalDynamics"
+    },
+    {
+      "name": "AISafetyAtlas.Causal.outputLaw",
+      "kind": "def",
+      "module": "AISafetyAtlas.Causal.Corruption"
     },
     {
       "name": "AISafetyAtlas.Causal.pmfExpect",
@@ -3201,6 +3811,11 @@
       "module": "AISafetyAtlas.Causal.EffectiveGenericity"
     },
     {
+      "name": "AISafetyAtlas.Causal.powerset_filter_disjoint",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Causal.Goal"
+    },
+    {
       "name": "AISafetyAtlas.Causal.radiusErrors",
       "kind": "def",
       "module": "AISafetyAtlas.Causal.Decision"
@@ -3211,9 +3826,59 @@
       "module": "AISafetyAtlas.Causal.EffectiveGenericity"
     },
     {
+      "name": "AISafetyAtlas.Causal.reconstructionEvent",
+      "kind": "def",
+      "module": "AISafetyAtlas.Causal.Corruption"
+    },
+    {
+      "name": "AISafetyAtlas.Causal.reconstructionRadius",
+      "kind": "def",
+      "module": "AISafetyAtlas.Causal.ControlledProcess"
+    },
+    {
+      "name": "AISafetyAtlas.Causal.runFirstActionTranscript",
+      "kind": "def",
+      "module": "AISafetyAtlas.Causal.Corruption"
+    },
+    {
       "name": "AISafetyAtlas.Causal.runRandomizedTranscript",
       "kind": "def",
       "module": "AISafetyAtlas.Causal.Query"
+    },
+    {
+      "name": "AISafetyAtlas.Causal.satisfies_nowGoal_iff",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Causal.Goal"
+    },
+    {
+      "name": "AISafetyAtlas.Causal.statePairs",
+      "kind": "def",
+      "module": "AISafetyAtlas.Causal.GoalDynamics"
+    },
+    {
+      "name": "AISafetyAtlas.Causal.stepKernel",
+      "kind": "def",
+      "module": "AISafetyAtlas.Causal.GoalDynamics"
+    },
+    {
+      "name": "AISafetyAtlas.Causal.stepKernel.congr_simp",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Causal.GoalDynamics"
+    },
+    {
+      "name": "AISafetyAtlas.Causal.stepKernel_congr",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Causal.GoalDynamics"
+    },
+    {
+      "name": "AISafetyAtlas.Causal.stepPMF",
+      "kind": "def",
+      "module": "AISafetyAtlas.Causal.GoalDynamics"
+    },
+    {
+      "name": "AISafetyAtlas.Causal.stepPMF_congr",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Causal.GoalDynamics"
     },
     {
       "name": "AISafetyAtlas.Causal.sub_floorMul_lt",
@@ -3234,6 +3899,21 @@
       "name": "AISafetyAtlas.Causal.sup'_sub_inf'_bool",
       "kind": "theorem",
       "module": "AISafetyAtlas.Causal.MarginClass"
+    },
+    {
+      "name": "AISafetyAtlas.Causal.trajectoryLaw",
+      "kind": "def",
+      "module": "AISafetyAtlas.Causal.GoalDynamics"
+    },
+    {
+      "name": "AISafetyAtlas.Causal.trajectoryLaw_congr",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Causal.GoalDynamics"
+    },
+    {
+      "name": "AISafetyAtlas.Causal.trajectoryLaw_startState",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Causal.GoalDynamics"
     },
     {
       "name": "AISafetyAtlas.Causal.utilityBox",
@@ -5256,6 +5936,11 @@
       "module": "AISafetyAtlas.Conjectures.MAIS.O31Chart"
     },
     {
+      "name": "AISafetyAtlas.Conjectures.MAIS.O33",
+      "kind": "module",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O33"
+    },
+    {
       "name": "AISafetyAtlas.Conjectures.MAIS.O34",
       "kind": "module",
       "module": "AISafetyAtlas.Conjectures.MAIS.O34"
@@ -5339,6 +6024,51 @@
       "name": "AISafetyAtlas.Conjectures.MAIS.SparkCondition.two_mul_le_rows",
       "kind": "theorem",
       "module": "AISafetyAtlas.Conjectures.MAIS.O38"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.UniformAnalyst",
+      "kind": "inductive",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O33"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.UniformAnalyst.Meets",
+      "kind": "def",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O33"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.UniformAnalyst.coeff",
+      "kind": "def",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O33"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.UniformAnalyst.deg",
+      "kind": "def",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O33"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.UniformAnalyst.estimator",
+      "kind": "def",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O33"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.UniformAnalyst.mk.inj",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O33"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.UniformAnalyst.strategy",
+      "kind": "def",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O33"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.UniformlyTolerable",
+      "kind": "def",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O33"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.UniformlyTolerableWithin",
+      "kind": "def",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O33"
     },
     {
       "name": "AISafetyAtlas.Conjectures.MAIS.UniquelyCoded",
@@ -5454,6 +6184,11 @@
       "name": "AISafetyAtlas.Conjectures.MAIS.coe_o31FinsetOfSet",
       "kind": "theorem",
       "module": "AISafetyAtlas.Conjectures.MAIS.O31"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.etaStar",
+      "kind": "def",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O33"
     },
     {
       "name": "AISafetyAtlas.Conjectures.MAIS.eventually_one_le_sparsity",
@@ -5619,6 +6354,31 @@
       "name": "AISafetyAtlas.Conjectures.MAIS.maisO31_chainClassificationCandidate",
       "kind": "def",
       "module": "AISafetyAtlas.Conjectures.MAIS.O31"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.maisO33_baselineTolerable",
+      "kind": "def",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O33"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.maisO33_etaStarCandidate",
+      "kind": "def",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O33"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.maisO33_etaStarIsZero",
+      "kind": "def",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O33"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.maisO33_etaStarIsZeroGivenBaseline",
+      "kind": "def",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O33"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.maisO33_etaStarPos",
+      "kind": "def",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O33"
     },
     {
       "name": "AISafetyAtlas.Conjectures.MAIS.maisO34_exactFiberCandidate",
@@ -5889,6 +6649,16 @@
       "name": "AISafetyAtlas.Conjectures.MAIS.shareBinaryOptimum_mul_iff",
       "kind": "theorem",
       "module": "AISafetyAtlas.Conjectures.MAIS.O31Chart"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.tolerantAt_of_uniformlyTolerable",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O33"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.uniformlyTolerable_of_within",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O33"
     },
     {
       "name": "AISafetyAtlas.Conjectures.StochasticComplexity",
@@ -7166,6 +7936,66 @@
       "module": "AISafetyAtlas.Examples.Causal.BehavioralCollision"
     },
     {
+      "name": "AISafetyAtlas.Examples.Causal.ControlledProcess",
+      "kind": "module",
+      "module": "AISafetyAtlas.Examples.Causal.ControlledProcess"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Causal.ControlledProcess.balls_disjoint_at_101_half",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Causal.ControlledProcess"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Causal.ControlledProcess.communicating",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Causal.ControlledProcess"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Causal.ControlledProcess.env",
+      "kind": "def",
+      "module": "AISafetyAtlas.Examples.Causal.ControlledProcess"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Causal.ControlledProcess.env0",
+      "kind": "def",
+      "module": "AISafetyAtlas.Examples.Causal.ControlledProcess"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Causal.ControlledProcess.env1",
+      "kind": "def",
+      "module": "AISafetyAtlas.Examples.Causal.ControlledProcess"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Causal.ControlledProcess.five_lt_sqrt_fifty",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Causal.ControlledProcess"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Causal.ControlledProcess.fullSupport",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Causal.ControlledProcess"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Causal.ControlledProcess.kern",
+      "kind": "def",
+      "module": "AISafetyAtlas.Examples.Causal.ControlledProcess"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Causal.ControlledProcess.no_common_estimate",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Causal.ControlledProcess"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Causal.ControlledProcess.radius_admissible_at_101_half",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Causal.ControlledProcess"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Causal.ControlledProcess.separated",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Causal.ControlledProcess"
+    },
+    {
       "name": "AISafetyAtlas.Examples.Causal.Decision",
       "kind": "module",
       "module": "AISafetyAtlas.Examples.Causal.Decision"
@@ -7324,6 +8154,121 @@
       "name": "AISafetyAtlas.Examples.Causal.EffectiveGenericity.utility_mem_utilityBox_skelFlipped",
       "kind": "theorem",
       "module": "AISafetyAtlas.Examples.Causal.EffectiveGenericity"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Causal.Goal",
+      "kind": "module",
+      "module": "AISafetyAtlas.Examples.Causal.Goal"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Causal.Goal.card_boundedGoals_one",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Causal.Goal"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Causal.Goal.card_compositeGoals_one",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Causal.Goal"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Causal.Goal.card_immediateWins_two",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Causal.Goal"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Causal.Goal.card_subGoal_two",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Causal.Goal"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Causal.Goal.eventually_at_two",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Causal.Goal"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Causal.Goal.exceptional_ratio_two",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Causal.Goal"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Causal.Goal.immediateWin_fires",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Causal.Goal"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Causal.Goal.next_at_one",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Causal.Goal"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Causal.Goal.not_eventually_at_three",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Causal.Goal"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Causal.Goal.not_satisfies_unreachable",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Causal.Goal"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Causal.Goal.now_at_zero",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Causal.Goal"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Causal.Goal.satisfies_depth_two",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Causal.Goal"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Causal.Goal.τ",
+      "kind": "def",
+      "module": "AISafetyAtlas.Examples.Causal.Goal"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Causal.GoalDynamics",
+      "kind": "module",
+      "module": "AISafetyAtlas.Examples.Causal.GoalDynamics"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Causal.GoalDynamics.achieveProb_empty",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Causal.GoalDynamics"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Causal.GoalDynamics.achieve_eq_optimal",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Causal.GoalDynamics"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Causal.GoalDynamics.branchingAgent",
+      "kind": "def",
+      "module": "AISafetyAtlas.Examples.Causal.GoalDynamics"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Causal.GoalDynamics.firstActionMap_branching_one",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Causal.GoalDynamics"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Causal.GoalDynamics.firstActionMap_branching_zero",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Causal.GoalDynamics"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Causal.GoalDynamics.instSubsingletonGoalPolicyFinOfNatNat",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Causal.GoalDynamics"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Causal.GoalDynamics.isDeltaBounded_oneAction",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Causal.GoalDynamics"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Causal.GoalDynamics.oneActionEnv",
+      "kind": "def",
+      "module": "AISafetyAtlas.Examples.Causal.GoalDynamics"
     },
     {
       "name": "AISafetyAtlas.Examples.Causal.LocalIntervention.fix",
@@ -7799,6 +8744,96 @@
       "name": "AISafetyAtlas.Examples.Causal.O24Refutation.Δ_eq_half_sub_joint_real",
       "kind": "theorem",
       "module": "AISafetyAtlas.Examples.Causal.O24Refutation"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Causal.O33Corruption",
+      "kind": "module",
+      "module": "AISafetyAtlas.Examples.Causal.O33Corruption"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Causal.O33Corruption.env",
+      "kind": "def",
+      "module": "AISafetyAtlas.Examples.Causal.O33Corruption"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Causal.O33Corruption.envHi",
+      "kind": "def",
+      "module": "AISafetyAtlas.Examples.Causal.O33Corruption"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Causal.O33Corruption.envHi_actionIndependent",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Causal.O33Corruption"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Causal.O33Corruption.envHi_communicating",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Causal.O33Corruption"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Causal.O33Corruption.envHi_separated",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Causal.O33Corruption"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Causal.O33Corruption.envLo",
+      "kind": "def",
+      "module": "AISafetyAtlas.Examples.Causal.O33Corruption"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Causal.O33Corruption.envLo_actionIndependent",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Causal.O33Corruption"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Causal.O33Corruption.envLo_communicating",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Causal.O33Corruption"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Causal.O33Corruption.env_actionIndependent",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Causal.O33Corruption"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Causal.O33Corruption.env_communicating",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Causal.O33Corruption"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Causal.O33Corruption.env_separated",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Causal.O33Corruption"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Causal.O33Corruption.exists_not_tolerantAt",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Causal.O33Corruption"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Causal.O33Corruption.not_tolerantAt",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Causal.O33Corruption"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Causal.O33Corruption.o33Delta",
+      "kind": "def",
+      "module": "AISafetyAtlas.Examples.Causal.O33Corruption"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Causal.O33Corruption.o33Depth",
+      "kind": "def",
+      "module": "AISafetyAtlas.Examples.Causal.O33Corruption"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Causal.O33Corruption.o33_admissible",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Causal.O33Corruption"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Causal.O33Corruption.o33_radius",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Causal.O33Corruption"
     },
     {
       "name": "AISafetyAtlas.Examples.Causal.OneNodeClass",
@@ -8836,6 +9871,11 @@
       "module": "AISafetyAtlas.Examples.Conjectures.MAIS.O31Measure"
     },
     {
+      "name": "AISafetyAtlas.Examples.Conjectures.MAIS.O33",
+      "kind": "module",
+      "module": "AISafetyAtlas.Examples.Conjectures.MAIS.O33"
+    },
+    {
       "name": "AISafetyAtlas.Examples.Conjectures.MAIS.O34",
       "kind": "module",
       "module": "AISafetyAtlas.Examples.Conjectures.MAIS.O34"
@@ -8879,6 +9919,11 @@
       "name": "AISafetyAtlas.Examples.Conjectures.MAIS.badBlock_iff_flat",
       "kind": "theorem",
       "module": "AISafetyAtlas.Examples.Conjectures.MAIS.O38Candidate"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Conjectures.MAIS.bddAbove_uniformlyTolerable",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Conjectures.MAIS.O33"
     },
     {
       "name": "AISafetyAtlas.Examples.Conjectures.MAIS.boltzmannBehavior",
@@ -9014,6 +10059,21 @@
       "name": "AISafetyAtlas.Examples.Conjectures.MAIS.eq_mul_permMatrix_diagonal",
       "kind": "theorem",
       "module": "AISafetyAtlas.Examples.Conjectures.MAIS.O38Candidate"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Conjectures.MAIS.etaStar_eq_zero",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Conjectures.MAIS.O33"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Conjectures.MAIS.etaStar_eq_zero_of_baseline",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Conjectures.MAIS.O33"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Conjectures.MAIS.etaStar_le_zero",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Conjectures.MAIS.O33"
     },
     {
       "name": "AISafetyAtlas.Examples.Conjectures.MAIS.exactClassAssumptions_nonempty",
@@ -9161,6 +10221,16 @@
       "module": "AISafetyAtlas.Examples.Conjectures.MAIS.O29"
     },
     {
+      "name": "AISafetyAtlas.Examples.Conjectures.MAIS.maisO33_etaStarIsZeroGivenBaseline_holds",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Conjectures.MAIS.O33"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Conjectures.MAIS.maisO33_etaStarIsZero_holds",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Conjectures.MAIS.O33"
+    },
+    {
       "name": "AISafetyAtlas.Examples.Conjectures.MAIS.maisO34_marginAloneDoesNotIdentify_holds",
       "kind": "theorem",
       "module": "AISafetyAtlas.Examples.Conjectures.MAIS.O34"
@@ -9256,6 +10326,11 @@
       "module": "AISafetyAtlas.Examples.Conjectures.MAIS.O26"
     },
     {
+      "name": "AISafetyAtlas.Examples.Conjectures.MAIS.not_maisO33_etaStarPos",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Conjectures.MAIS.O33"
+    },
+    {
       "name": "AISafetyAtlas.Examples.Conjectures.MAIS.not_maisO38_everyDimensionReading",
       "kind": "theorem",
       "module": "AISafetyAtlas.Examples.Conjectures.MAIS.O38"
@@ -9284,6 +10359,16 @@
       "name": "AISafetyAtlas.Examples.Conjectures.MAIS.not_realEdgesSurviveAt_collision",
       "kind": "theorem",
       "module": "AISafetyAtlas.Examples.Conjectures.MAIS.O27"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Conjectures.MAIS.not_uniformlyTolerable",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Conjectures.MAIS.O33"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Conjectures.MAIS.not_uniformlyTolerableWithin",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Conjectures.MAIS.O33"
     },
     {
       "name": "AISafetyAtlas.Examples.Conjectures.MAIS.not_uniquelyCoded_of_full_sparsity",
@@ -9684,6 +10769,16 @@
       "name": "AISafetyAtlas.Examples.Conjectures.MAIS.windowSpan_eq_span_atoms",
       "kind": "theorem",
       "module": "AISafetyAtlas.Examples.Conjectures.MAIS.O38Candidate"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Conjectures.MAIS.zero_le_etaStar",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Conjectures.MAIS.O33"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Conjectures.MAIS.zero_le_etaStar_of_baseline",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Conjectures.MAIS.O33"
     },
     {
       "name": "AISafetyAtlas.Examples.Conjectures.O34Fiber",

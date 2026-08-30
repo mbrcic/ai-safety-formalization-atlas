@@ -21,12 +21,12 @@ deliberate — these are peer modules, so a consumer imports the one it needs.
 **On top of that layer sits the MAIS conjecture ledger, also in no release.**
 Nineteen MAIS-linked ledger rows span fifteen printed problem numbers -- all
 fourteen of agenda A2, plus A3's `prob:samples`, whose row shares none of the
-causal vocabulary -- and only some of them are `Prop`s: eight are conjectures or
+causal vocabulary -- and only some of them are `Prop`s: nine are conjectures or
 graded candidate answers in `AISafetyAtlas.Conjectures.MAIS`, four are
-determine-problem specifications over a candidate answer, and seven record a
-printed problem the atlas cannot state at all. Six of the eight take agenda
-clauses as their graded source and two grade candidate statements
-submitted to MAIS issues [#4](https://github.com/lionellevine/MAIS/issues/4) and [#8](https://github.com/lionellevine/MAIS/issues/8). Five are resolved and three remain open. An open
+determine-problem specifications over a candidate answer, and six record a
+printed problem the atlas cannot state at all. Six of the nine take agenda
+clauses as their graded source and three grade candidate statements
+submitted to MAIS issues [#4](https://github.com/lionellevine/MAIS/issues/4), [#8](https://github.com/lionellevine/MAIS/issues/8) and [#9](https://github.com/lionellevine/MAIS/issues/9). Seven are resolved and two remain open. An open
 conjecture asserts nothing: it is a compiling statement with no proof, and the
 ledger records for each one what would refute it. The settled rows are the
 exception, and each names the theorem that settled it. Rows graded against a
@@ -37,9 +37,17 @@ ledger records that source problem rather than adding an atlas premise to rescue
 it; atlas-original variants and withdrawn encodings stay outside this ledger,
 recorded verbatim with their reason in
 `docs/provenance/retired-conjecture-rows.md` so that leaving is not an
-undocumented decision and the retired `CONJ-` numbers are never reused. Five
-rows are resolved and each says which printed clause it covers -- a resolved row
-that answers one clause of three is not a resolved printed problem.
+undocumented decision and the retired `CONJ-` numbers are never reused. Eight
+of the nineteen rows are resolved and each says which printed clause it covers
+-- a resolved row that answers one clause of three is not a resolved printed
+problem. **Seven of those eight say something about their printed problem.** The
+eighth is CONJ-003 (MAIS-O26), which is true because it has no instances:
+`conj:exact` is stated over the class that `prob:effective`'s *"fix one list
+supplied by a solution"* names, `Examples.Causal.O24Refutation.isEmpty_o24Solution`
+proves no such solution exists, and a universal over an empty domain holds
+without touching the `Theta(K log(1/epsilon))` rate the conjecture is about. It
+is counted as a resolved row because its `Prop` is proved, and it is not counted
+as a result.
 
 CONJ-025 is the exception and the newest: **MAIS-O38 is true**, under print's own
 two hypotheses and at every `m` where the printed sentence has content — every
@@ -142,7 +150,7 @@ public API, or axiom profile changed in either release.
 - Atlas Lean declarations: **248** (claim-row WRAPPER **13** / BRIDGE **5**).
 - Results stating a source claim: **49**; recording a formalization only: **37** (**28** on the public root import).
 - Reviewed AI-system bridges: **3**; statement-reviewed only: **1**.
-- Open conjectures: **3** of **9** recorded; the ledger also holds **4** determine-problem targets and **7** printed problems the atlas cannot yet state.
+- Open conjectures: **3** of **10** recorded; the ledger also holds **4** determine-problem targets and **6** printed problems the atlas cannot yet state.
 - Claim results with statement-match (`EXACT`/`EQUIVALENT`): **14**; with `RELATED`-only formalization: **7**. Counts are claim rows, not records: an artifact row's grade is on the row and never in this number.
 - Rows carrying atlas Lean: **49** (**20** of them claim rows); catalogued candidate leads: **5**.
 <!-- END GENERATED REGISTRY SNAPSHOT -->
