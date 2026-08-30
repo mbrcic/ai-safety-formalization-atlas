@@ -372,10 +372,14 @@ correction is the point of this section. The issue contains **two** theorems.
 
 **The first** is the candidate: `N = m³ + 2m` codes depending only on `m` and
 `k`, for every `n ≥ 2k` and Lebesgue-almost every spark-condition `A`, at every
-`1 ≤ k < m`. It is not transcribed, not checked, and nothing in the Lean rests
-on it. It is *stronger* than CONJ-025 asks, since its codes do not depend on `n`
-where print fixes `n` before asking for codes, so it would resolve the row
-affirmatively if correct.
+`1 ≤ k < m`. It is *stronger* than CONJ-025 asks, since its codes do not depend
+on `n` where print fixes `n` before asking for codes.
+
+**Transcribed and proved, 2026-08-30.** `o38PolynomialSampleCandidate` states it;
+`Examples.Conjectures.MAIS.o38PolynomialSampleCandidate_holds` proves it; and
+`maisO38_polynomialSamplesSuffice_of_candidate` carries it to `prob:samples` at
+print's own quantifier. No `sorry`, no added axiom. CONJ-025 is `RESOLVED`
+affirmatively, and it is the issue's argument that resolves it.
 
 **The second** is labelled *boundary*: at `m ≥ 2`, `k ≥ m` and `n ≥ 2k`, no
 finite list of `k`-sparse codes is uniquely coded at any spark-condition `A` —
@@ -390,12 +394,29 @@ on 2026-08-26 and are the issue's. They are credited, not presented as the
 atlas's own. `not_uniquelyCoded_of_sparsity_zero`, below the range, has no
 antecedent in the issue.
 
-**Not used for anything else.** The construction, the `N = m³ + 2m` bound, the
+**Superseded 2026-08-30, and the superseded text is kept because it was cited.**
+The paragraph here read: *"the construction, the `N = m³ + 2m` bound, the
 reduction to the spark condition, and the proof are not transcribed, not checked,
-and not asserted anywhere in this repository. The transcription's quantifier
-order is print's, not the issue's: print fixes `k` and `n` before asking for
-codes, so the codes here may depend on `n`, where the issue's depend only on `m`
-and `k`. No coverage count, resolution, or grade rests on the issue.
+and not asserted anywhere in this repository … no coverage count, resolution, or
+grade rests on the issue."* That was written on 2026-08-27 and was true then. It
+stopped being true on 2026-08-30, when the construction was transcribed and the
+proof went through, and it stayed on this page for hours afterwards — including
+while this file was linked from the MAIS
+[issue #30](https://github.com/lionellevine/MAIS/issues/30) thread as the
+transcription record, where it contradicted the comment linking to it.
+
+**Recorded rather than deleted, because the failure is the interesting part.** A
+provenance note is a claim about the tree, and a claim about the tree has a shelf
+life measured in commits. This one was falsified by the commit two files away and
+nothing re-ran it. The two absence claims below are flagged for re-checking on a
+Mathlib upgrade; nothing flagged *this* for re-checking on a change to the atlas's
+own Lean, which is the shorter and likelier clock.
+
+What still holds, and is a distinction worth keeping: **CONJ-025's statement is
+print's quantifier order, not the issue's.** Print fixes `k` and `n` before asking
+for codes, so the codes the row quantifies over may depend on `n`; the issue's
+depend only on `m` and `k`. The row is resolved by an argument stronger than the
+row demands.
 
 ## What a later reader should re-check
 
