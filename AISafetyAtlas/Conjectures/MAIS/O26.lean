@@ -184,7 +184,7 @@ nothing about independence of the list. **Until 2026-08-21 the `∃ A, ∃ d` sa
 outside `∀ sol`**, demanding one pair of constants uniform over every solution.
 That is strictly stronger than print, so the row was `Wider` on an axis nothing
 recorded. Moving the existentials inside `∀ sol` is what print asks for. -/
-public noncomputable def maisO26_exactRate : Prop :=
+@[expose] public noncomputable def maisO26_exactRate : Prop :=
   ∀ sol : O24Solution, ∃ A : ℝ, ∃ d : ℕ, 0 ≤ A ∧
     ∀ (m : ℕ)
       (sk : Skeleton (Fin (m + 1)) (binaryDim (Fin (m + 1))) Bool ℝ) (K : ℕ)

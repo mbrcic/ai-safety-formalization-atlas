@@ -10,7 +10,7 @@ one.
 
 An open conjecture asserts nothing — defining a `Prop` is not claiming it, and
 that is the whole point of the mechanism. **Nine conjecture records are currently
-present: four open and five resolved**, and each resolved row
+present: three open and six resolved**, and each resolved row
 names the proof that settled it.
 
 ## Four kinds of row, because not every printed problem is a conjecture
@@ -112,6 +112,12 @@ through a "resolved" count will otherwise read the constructions as its own.
 | CONJ-010 | MAIS-O31 | Svyatoslav Novikov (kumino) with OpenAI Codex, MAIS [issue #8](https://github.com/lionellevine/MAIS/issues/8) | transcription only; the row is `OPEN` |
 | CONJ-025 | MAIS-O38 | David Holmes (26david26) with GPT 5.6 Sol, MAIS [issue #30](https://github.com/lionellevine/MAIS/issues/30) | transcription and the machine-check, together with four domain-neutral facts Mathlib lacked that the proof needs |
 
+The MAIS-O24 row is a fifth submitted antecedent — Svyatoslav Novikov (kumino)
+with OpenAI Codex, MAIS [issue #7](https://github.com/lionellevine/MAIS/issues/7)
+— where what the atlas added is the transcription, the machine-check, and one
+repair to the argument's last step; see
+[`mais-o24-refutation.md`](../provenance/mais-o24-refutation.md).
+
 **What is the atlas's own** is the statement layer and the proofs, which is a
 smaller claim than resolving the problems and a different one. Named results
 with no submitted antecedent: the MAIS-O24 certificate bundle and the `K(G)`
@@ -164,9 +170,12 @@ conjecture has a compiling statement" is verified rather than claimed.
 **Compiling is not non-vacuity, and the two are checked separately.** A statement
 whose hypotheses cannot be satisfied is true and says nothing, so each row must
 either cite a witness inhabiting its antecedent or disclose that none exists.
-Most do carry one. The row transcribing MAIS-O26 does not: its antecedent needs
-a solution to MAIS-O24, which is itself open, so that statement may hold
-vacuously and its ledger entry says so.
+Most do carry one. The row transcribing MAIS-O26 does not, and since 2026-08-30
+that is settled rather than suspected: its antecedent needs a solution to
+MAIS-O24, and `Examples.Causal.O24Refutation.isEmpty_o24Solution` proves there
+are none, so `maisO26_exactRate` **is** vacuously true. The row is `RESOLVED`
+and its entry says which kind of resolution that is — a fact about `conj:exact`
+as printed, and nothing about the rate the conjecture is asking after.
 
 ## Containment
 

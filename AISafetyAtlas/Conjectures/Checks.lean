@@ -29,7 +29,7 @@ Nothing here is proved, and this module is not on the atlas root import.
 -- CONJ-002 (claim, OPEN)
 example : Prop := AISafetyAtlas.Conjectures.StochasticComplexity.eq_needs_no_null_points
 
--- CONJ-003 (claim, OPEN)
+-- CONJ-003 (claim, RESOLVED)
 example : Prop := AISafetyAtlas.Conjectures.MAIS.maisO26_exactRate
 
 -- CONJ-004 (claim, RESOLVED)
@@ -52,7 +52,7 @@ example : Prop := AISafetyAtlas.Conjectures.MAIS.maisO34_exactFiberCandidate
 example : Prop := AISafetyAtlas.Conjectures.MAIS.maisO31_chainClassificationCandidate
 #check @AISafetyAtlas.Conjectures.MAIS.maisO31_chainClassificationCandidate
 
--- CONJ-012 (target, OPEN)
+-- CONJ-012 (target, RESOLVED)
 #check @AISafetyAtlas.Causal.O24Solution
 #check @AISafetyAtlas.Causal.O24Constructor
 #check @AISafetyAtlas.Causal.O24Solution

@@ -129,8 +129,10 @@ and on these rows that is forbidden.
 **What no grade covers.** Two of the agenda's problems, MAIS-O24 and MAIS-O27,
 read *"exhibit …"* and *"determine …"* with no truth-valued clause anywhere in
 them. No proposition is the same statement as an instruction to construct
-something, so neither has a row at all, and the closing notes say what stands in
-their place.
+something, so neither has a row *here*, and the closing notes say what stands in
+their place. Both are carried as `target` rows in the ledger, and MAIS-O24's was
+answered negatively on 2026-08-30 — the instruction cannot be carried out, by
+`Examples.Causal.O24Refutation.isEmpty_o24Solution`.
 
 ## The eight MAIS-linked rows at a glance
 
@@ -138,7 +140,7 @@ their place.
 |---|---|---|---|---|---|
 | CONJ-004 | agenda `q:ident` | MAIS-O23 | RESOLVED | `Same` | `Selected` |
 | CONJ-006 | agenda `prob:exact` | MAIS-O25 | OPEN | `Same` | `Selected` |
-| CONJ-003 | agenda `conj:exact` | MAIS-O26 | OPEN | `Same` | `Literal` |
+| CONJ-003 | agenda `conj:exact` | MAIS-O26 | RESOLVED (vacuously) | `Same` | `Literal` |
 | CONJ-008 | agenda `prob:boltzmann` | MAIS-O29 | RESOLVED | `Same` | `Selected` |
 | CONJ-010 | **issue [#8](https://github.com/lionellevine/MAIS/issues/8)** | MAIS-O31 | OPEN | `Same` | `Literal` |
 | CONJ-005 | agenda `prob:starter-set` | MAIS-O34 | RESOLVED | `Same` | `Selected` |

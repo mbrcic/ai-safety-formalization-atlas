@@ -119,7 +119,7 @@ monorepo in-tree. Reusable structure and honest grading over volume.
 | Results recording a formalization only | **37** (28 on root import) |
 | Reviewed AI-system bridges | **3** |
 | Statement-reviewed bridges (interpretation withheld) | **1** |
-| Open conjectures | **4** |
+| Open conjectures | **3** |
 | Claim results with statement-match | **14** |
 | Claim results with `RELATED`-only formalization | **7** |
 

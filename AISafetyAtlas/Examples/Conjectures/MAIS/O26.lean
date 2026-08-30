@@ -2,17 +2,28 @@ module
 
 public import AISafetyAtlas.Conjectures.MAIS
 public import AISafetyAtlas.Examples.Causal.BehavioralCollision
+public import AISafetyAtlas.Examples.Causal.O24Refutation
 public import AISafetyAtlas.Examples.Causal.OneNodeClass
 public import AISafetyAtlas.Examples.Causal.Query
 public import AISafetyAtlas.Examples.Conjectures.MAIS.Common
 public import AISafetyAtlas.Examples.Conjectures.MAIS.Rates
 
 /-!
-# MAIS-O26's empty-class refutation route
+# MAIS-O26's empty-class refutation route, and why it can never be run
 
-A conditional theorem, not a refutation: it needs an `O24Solution` with an empty
-cut, none is exhibited in this tree, and until one is the closed `∀ sol`
-statement may be vacuously true rather than false.
+Two results that pull in opposite directions.
+
+The conditional theorem needs an `O24Solution` with an empty cut. It can never
+be supplied: `Examples.Causal.O24Refutation.isEmpty_o24Solution` proves that
+`prob:effective`'s conclusions (a) and (c) are incompatible, so no `O24Solution`
+exists at all.
+
+That settles `maisO26_exactRate`, and settles it the uninteresting way. The
+closed statement opens `∀ sol : O24Solution`, so an empty domain makes it true
+with nothing said about any rate. `maisO26_exactRate_holds` records that, and
+records it as a **fact about `conj:exact` as printed**, not as evidence for the
+`Θ(K log(1/ε))` budget the conjecture is about. A repaired MAIS-O26 would have
+to be stated over a class that does not come from an O24 solution.
 
 Nothing here uses `sorry` or an added axiom.
 -/
@@ -67,6 +78,22 @@ public theorem not_maisO26_exactRate_for_of_empty {m K : ℕ} (hK : 0 < K)
   have htheta := hrate hassumptions
   rw [hclass] at htheta
   exact not_isThetaWithMarginBound_emptyClass hK sk lam mu L A d htheta
+
+
+/-! ## The printed conjecture is vacuous
+
+`conj:exact` is stated *"for `𝒩 = 𝕄(sk,λ,μ)`"*, print's own convention being to
+fix one list supplied by a solution to `prob:effective`. There are none, so the
+universal quantifier over solutions ranges over nothing. -/
+
+/-- **MAIS-O26 as printed is true, vacuously.** Every `O24Solution` has the
+stated rate because there are no `O24Solution`s. This is not evidence about the
+minimax budget; it is a defect of the printed quantifier, inherited from
+MAIS-O24 being unsatisfiable. -/
+public theorem maisO26_exactRate_holds : maisO26_exactRate := by
+  unfold maisO26_exactRate
+  intro sol
+  exact (AISafetyAtlas.Examples.Causal.O24Refutation.isEmpty_o24Solution.false sol).elim
 
 
 end AISafetyAtlas.Examples.Conjectures.MAIS

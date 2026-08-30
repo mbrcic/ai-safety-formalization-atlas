@@ -67,6 +67,7 @@
     "AISafetyAtlas.Causal.Model.\u0394mix_congr": {
       "consumers": [
         "AISafetyAtlas.Examples.Causal.BehavioralCollision",
+        "AISafetyAtlas.Examples.Causal.O24Refutation",
         "AISafetyAtlas.Examples.Registry"
       ],
       "origin": "LAND-CAUSAL-COLLISION-001",
@@ -105,6 +106,7 @@
       "consumers": [
         "AISafetyAtlas.Conjectures.BinaryPair",
         "AISafetyAtlas.Examples.Causal.BehavioralCollision",
+        "AISafetyAtlas.Examples.Causal.O24Refutation",
         "AISafetyAtlas.Examples.Registry"
       ],
       "origin": "LAND-CAUSAL-COLLISION-001",

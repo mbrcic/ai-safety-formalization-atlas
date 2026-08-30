@@ -142,7 +142,7 @@ public API, or axiom profile changed in either release.
 - Atlas Lean declarations: **248** (claim-row WRAPPER **13** / BRIDGE **5**).
 - Results stating a source claim: **49**; recording a formalization only: **37** (**28** on the public root import).
 - Reviewed AI-system bridges: **3**; statement-reviewed only: **1**.
-- Open conjectures: **4** of **9** recorded; the ledger also holds **4** determine-problem targets and **7** printed problems the atlas cannot yet state.
+- Open conjectures: **3** of **9** recorded; the ledger also holds **4** determine-problem targets and **7** printed problems the atlas cannot yet state.
 - Claim results with statement-match (`EXACT`/`EQUIVALENT`): **14**; with `RELATED`-only formalization: **7**. Counts are claim rows, not records: an artifact row's grade is on the row and never in this number.
 - Rows carrying atlas Lean: **49** (**20** of them claim rows); catalogued candidate leads: **5**.
 <!-- END GENERATED REGISTRY SNAPSHOT -->

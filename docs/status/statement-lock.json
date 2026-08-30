@@ -149,7 +149,7 @@
     },
     "AISafetyAtlas.Conjectures.MAIS.maisO26_exactRate": {
       "file": "AISafetyAtlas/Conjectures/MAIS/O26.lean",
-      "sha256": "08ef1fe851040041"
+      "sha256": "e1bb61d260682d1f"
     },
     "AISafetyAtlas.Conjectures.MAIS.maisO29_boltzmannNotInjective": {
       "file": "AISafetyAtlas/Conjectures/MAIS/O29.lean",

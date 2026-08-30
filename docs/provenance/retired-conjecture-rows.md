@@ -76,7 +76,7 @@ The named withdrawn Lean declaration still exists with its recorded type.
 
 ## CONJ-011 — `maisO26_exactRateWellPosed`
 
-**Removed from the ledger 2026-08-23.** Atlas-original: `conj:exact` with one hypothesis added, that the cut class is nonempty. It was graded `Beyond`/`AtlasOriginal` and could never be `Same`, because print states no such clause. Under the source-first rule an atlas-authored variant stays outside the live MAIS ledger. The question it records — whether print presupposes a nonempty class or leaves the statement false on an empty one — is still open, and the empty-class route is now machine-checked by `Examples.Conjectures.MAIS.not_maisO26_exactRate_for_of_empty`.
+**Removed from the ledger 2026-08-23.** Atlas-original: `conj:exact` with one hypothesis added, that the cut class is nonempty. It was graded `Beyond`/`AtlasOriginal` and could never be `Same`, because print states no such clause. Under the source-first rule an atlas-authored variant stays outside the live MAIS ledger. The question it records — whether print presupposes a nonempty class or leaves the statement false on an empty one — is still open, and the empty-class route is machine-checked by `Examples.Conjectures.MAIS.not_maisO26_exactRate_for_of_empty`. **That route can never be run.** Since 2026-08-30 `Examples.Causal.O24Refutation.isEmpty_o24Solution` proves no `O24Solution` exists, so neither this retired row's antecedent nor CONJ-003's can be inhabited; the verbatim record below predates that and is left as filed.
 
 The block below is the row exactly as retired. Its statement also mentions
 compact semialgebraicity because the shared `O26ClassAssumptions` carried that

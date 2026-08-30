@@ -52,6 +52,7 @@ AISafetyAtlas.Examples.Causal.Decision
 AISafetyAtlas.Examples.Causal.Query
 AISafetyAtlas.Examples.Analysis.Semialgebraic
 AISafetyAtlas.Examples.Causal.EffectiveGenericity
+AISafetyAtlas.Examples.Causal.O24Refutation
 AISafetyAtlas.Examples.Causal.OneNodeClass
 AISafetyAtlas.Causal.ModelSpace
 AISafetyAtlas.Examples.Causal.ModelSpace

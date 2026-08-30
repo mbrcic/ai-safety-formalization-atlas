@@ -160,6 +160,21 @@ indicators restoring the deleted factors. -/
     (v : Assignment C dim) : 𝕜 :=
   ∏ c : C, M.factor σ v c
 
+/-- **A joint probability reads the tables at the assignment it scores, and
+nowhere else.** Two models whose conditional tables agree at one assignment give
+that assignment the same probability under *every* intervention profile, however
+far apart they are elsewhere — including at different graphs.
+
+`factor` sums `M.cpt c a v` over the child's states at the very `v` being
+scored, so no cell off `v` enters the product. This is what lets a utility gap
+supported on one assignment be blind to a whole graph's worth of difference. -/
+public theorem jointProb_congr_at (M M' : Model C dim 𝕜)
+    (σ : InterventionProfile C dim) (v : Assignment C dim)
+    (h : ∀ c a, M.cpt c a v = M'.cpt c a v) :
+    M.jointProb σ v = M'.jointProb σ v :=
+  Finset.prod_congr rfl fun c _ ↦
+    Finset.sum_congr rfl fun a _ ↦ by rw [h c a]
+
 /-- The expected utility-gap transform under one deterministic profile. -/
 @[expose] public def Δ (M : Model C dim 𝕜) (g : Assignment C dim → 𝕜)
     (σ : InterventionProfile C dim) : 𝕜 :=

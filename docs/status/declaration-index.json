@@ -3,7 +3,7 @@
   "generated_by": "scripts/generate_declaration_index.py",
   "note": "Declaration index walked from the elaborated environment, not from source text. Consumed by the prose checks so that a name resolves only when it is a real declaration.",
   "prefix": "AISafetyAtlas",
-  "count": 4403,
+  "count": 4475,
   "declarations": [
     {
       "name": "AISafetyAtlas",
@@ -322,6 +322,11 @@
     },
     {
       "name": "AISafetyAtlas.Analysis.volume_setOf_eval_eq_zero",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Analysis.PolynomialGenericity"
+    },
+    {
+      "name": "AISafetyAtlas.Analysis.volume_setOf_exists_eval_eq_zero",
       "kind": "theorem",
       "module": "AISafetyAtlas.Analysis.PolynomialGenericity"
     },
@@ -1049,6 +1054,11 @@
       "name": "AISafetyAtlas.Causal.Model.jointProbMix_sum",
       "kind": "theorem",
       "module": "AISafetyAtlas.Causal.Decision"
+    },
+    {
+      "name": "AISafetyAtlas.Causal.Model.jointProb_congr_at",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Causal.Model"
     },
     {
       "name": "AISafetyAtlas.Causal.Model.jointProb_fixProfile",
@@ -7446,6 +7456,351 @@
       "module": "AISafetyAtlas.Examples.Causal.ModelSpace"
     },
     {
+      "name": "AISafetyAtlas.Examples.Causal.O24Refutation",
+      "kind": "module",
+      "module": "AISafetyAtlas.Examples.Causal.O24Refutation"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Causal.O24Refutation.M1_arrowModel",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Causal.O24Refutation"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Causal.O24Refutation.M1_edgeModel",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Causal.O24Refutation"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Causal.O24Refutation.M4_arrowModel",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Causal.O24Refutation"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Causal.O24Refutation.M4_edgeModel",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Causal.O24Refutation"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Causal.O24Refutation.arrowBit",
+      "kind": "def",
+      "module": "AISafetyAtlas.Examples.Causal.O24Refutation"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Causal.O24Refutation.arrowBit_Y",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Causal.O24Refutation"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Causal.O24Refutation.arrowG",
+      "kind": "def",
+      "module": "AISafetyAtlas.Examples.Causal.O24Refutation"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Causal.O24Refutation.arrowG_Y_parent",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Causal.O24Refutation"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Causal.O24Refutation.arrowG_acyclic",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Causal.O24Refutation"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Causal.O24Refutation.arrowG_apply",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Causal.O24Refutation"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Causal.O24Refutation.arrowG_compatible",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Causal.O24Refutation"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Causal.O24Refutation.arrowG_ne_edgeG",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Causal.O24Refutation"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Causal.O24Refutation.arrowModel",
+      "kind": "def",
+      "module": "AISafetyAtlas.Examples.Causal.O24Refutation"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Causal.O24Refutation.arrowModel_ne_edgeModel",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Causal.O24Refutation"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Causal.O24Refutation.asg_true_true_apply",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Causal.O24Refutation"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Causal.O24Refutation.behaviorEq_box",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Causal.O24Refutation"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Causal.O24Refutation.chartOn_arrowModel",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Causal.O24Refutation"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Causal.O24Refutation.chartOn_edgeModel",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Causal.O24Refutation"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Causal.O24Refutation.collision_box",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Causal.O24Refutation"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Causal.O24Refutation.cpt_eq_at_true",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Causal.O24Refutation"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Causal.O24Refutation.edgeG",
+      "kind": "def",
+      "module": "AISafetyAtlas.Examples.Causal.O24Refutation"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Causal.O24Refutation.edgeG_acyclic",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Causal.O24Refutation"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Causal.O24Refutation.edgeG_apply",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Causal.O24Refutation"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Causal.O24Refutation.edgeG_compatible",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Causal.O24Refutation"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Causal.O24Refutation.edgeIndex",
+      "kind": "def",
+      "module": "AISafetyAtlas.Examples.Causal.O24Refutation"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Causal.O24Refutation.edgeIndex_injective",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Causal.O24Refutation"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Causal.O24Refutation.edgeModel",
+      "kind": "def",
+      "module": "AISafetyAtlas.Examples.Causal.O24Refutation"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Causal.O24Refutation.eval_map_eq_aeval",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Causal.O24Refutation"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Causal.O24Refutation.eval_rename_edgeIndex",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Causal.O24Refutation"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Causal.O24Refutation.eval_spec",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Causal.O24Refutation"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Causal.O24Refutation.exists_o24Value_eq_zero",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Causal.O24Refutation"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Causal.O24Refutation.exists_pos_le_of_forall_pos",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Causal.O24Refutation"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Causal.O24Refutation.exists_spec_eq_zero",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Causal.O24Refutation"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Causal.O24Refutation.isEmpty_o24Solution",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Causal.O24Refutation"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Causal.O24Refutation.jointProb_eq_at_true",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Causal.O24Refutation"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Causal.O24Refutation.lamR",
+      "kind": "def",
+      "module": "AISafetyAtlas.Examples.Causal.O24Refutation"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Causal.O24Refutation.lam_cast",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Causal.O24Refutation"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Causal.O24Refutation.marginClass_arrowModel",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Causal.O24Refutation"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Causal.O24Refutation.marginClass_edgeModel",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Causal.O24Refutation"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Causal.O24Refutation.matchedEdgeChart",
+      "kind": "def",
+      "module": "AISafetyAtlas.Examples.Causal.O24Refutation"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Causal.O24Refutation.matchedEdgeChart_eq",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Causal.O24Refutation"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Causal.O24Refutation.mem_o24Box_bounds",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Causal.O24Refutation"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Causal.O24Refutation.mem_o24Box_unitInterval",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Causal.O24Refutation"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Causal.O24Refutation.not_o24ExcludedSetSmall_of_spec_eq_zero",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Causal.O24Refutation"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Causal.O24Refutation.not_o24_identifies_and_excluded",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Causal.O24Refutation"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Causal.O24Refutation.o24Box",
+      "kind": "def",
+      "module": "AISafetyAtlas.Examples.Causal.O24Refutation"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Causal.O24Refutation.o24Hi",
+      "kind": "def",
+      "module": "AISafetyAtlas.Examples.Causal.O24Refutation"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Causal.O24Refutation.o24Hi_upper",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Causal.O24Refutation"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Causal.O24Refutation.o24Lo",
+      "kind": "def",
+      "module": "AISafetyAtlas.Examples.Causal.O24Refutation"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Causal.O24Refutation.o24Lo_lower",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Causal.O24Refutation"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Causal.O24Refutation.o24Lo_lt_hi",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Causal.O24Refutation"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Causal.O24Refutation.o24Point_arrowModel",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Causal.O24Refutation"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Causal.O24Refutation.o24Point_edgeModel",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Causal.O24Refutation"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Causal.O24Refutation.one_le_o24Size",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Causal.O24Refutation"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Causal.O24Refutation.parents_arrowModel",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Causal.O24Refutation"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Causal.O24Refutation.parents_edgeModel",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Causal.O24Refutation"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Causal.O24Refutation.skel_real_M2",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Causal.O24Refutation"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Causal.O24Refutation.skel_real_M3",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Causal.O24Refutation"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Causal.O24Refutation.skel_real_M5",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Causal.O24Refutation"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Causal.O24Refutation.skel_real_M6",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Causal.O24Refutation"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Causal.O24Refutation.skel_real_base",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Causal.O24Refutation"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Causal.O24Refutation.spec",
+      "kind": "def",
+      "module": "AISafetyAtlas.Examples.Causal.O24Refutation"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Causal.O24Refutation.u_pos_lt_one",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Causal.O24Refutation"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Causal.O24Refutation.u₀",
+      "kind": "def",
+      "module": "AISafetyAtlas.Examples.Causal.O24Refutation"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Causal.O24Refutation.u₀_mem_Ioo",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Causal.O24Refutation"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Causal.O24Refutation.validMargin_lamR",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Causal.O24Refutation"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Causal.O24Refutation.volume_o24Box_ne_zero",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Causal.O24Refutation"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Causal.O24Refutation.Δ_eq_half_sub_joint_real",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Causal.O24Refutation"
+    },
+    {
       "name": "AISafetyAtlas.Examples.Causal.OneNodeClass",
       "kind": "module",
       "module": "AISafetyAtlas.Examples.Causal.OneNodeClass"
@@ -8794,6 +9149,11 @@
       "name": "AISafetyAtlas.Examples.Conjectures.MAIS.maisO23_marginsDoNotSuffice_holds",
       "kind": "theorem",
       "module": "AISafetyAtlas.Examples.Conjectures.MAIS.O23"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Conjectures.MAIS.maisO26_exactRate_holds",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Conjectures.MAIS.O26"
     },
     {
       "name": "AISafetyAtlas.Examples.Conjectures.MAIS.maisO29_boltzmannNotInjective_holds",

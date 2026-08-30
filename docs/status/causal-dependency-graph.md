@@ -10,7 +10,7 @@ Edges come from the elaborated Lean environment. This answers the question the p
 
 So `A → B` means *`B` occurs in `A`'s statement, or in `A`'s body when `A` is a definition*. A lemma used only inside a proof does not appear. Reading the table as a complete call graph would be wrong, and the two sections below are scoped so that they stay true under this limit.
 
-`422` authored declarations in `AISafetyAtlas.Causal.*` (229 theorems). Compiler-generated companions and projections are dropped.
+`423` authored declarations in `AISafetyAtlas.Causal.*` (230 theorems). Compiler-generated companions and projections are dropped.
 
 ## Load-bearing declarations
 
@@ -18,69 +18,71 @@ Named in the statements of eight or more others. A change to one of these is a c
 
 | Declaration | Named by |
 |---|---|
-| `Model` | 248 |
-| `binaryDim` | 187 |
-| `Assignment` | 184 |
+| `Model` | 253 |
+| `binaryDim` | 219 |
+| `Assignment` | 186 |
 | `Skeleton` | 119 |
-| `Model.parents` | 53 |
-| `InterventionProfile` | 42 |
-| `Model.cpt` | 41 |
+| `ChartIndex` | 69 |
+| `Model.parents` | 57 |
+| `InterventionProfile` | 45 |
+| `Model.cpt` | 43 |
+| `Skeleton.mapRat` | 39 |
 | `ProbMixture` | 39 |
+| `Skeleton.utilityParents` | 35 |
+| `Skeleton.MarginClass` | 33 |
 | `SCIM.graph` | 33 |
-| `Skeleton.MarginClass` | 30 |
 | `SCIM.Policy` | 30 |
-| `ChartIndex` | 30 |
-| `Skeleton.utilityParents` | 28 |
-| `Skeleton.gap` | 27 |
+| `Skeleton.gap` | 28 |
 | `ExoAssignment` | 25 |
 | `SCM` | 23 |
-| `Skeleton.mapRat` | 22 |
 | `SCIM` | 22 |
+| `O24Var` | 22 |
 | `Mixture` | 22 |
 | `CID.IsDecision` | 22 |
 | `RandomizedQueryStrategy` | 21 |
 | `CID` | 21 |
+| `UtilityConfig` | 20 |
 | `SCM.eval` | 20 |
 | `Policy` | 19 |
+| `ParentConfig` | 19 |
 | `CID.parents` | 19 |
 | `modelError` | 17 |
 | `Skeleton.observed` | 17 |
 | `ShiftedQuery` | 17 |
 | `PolicyFamily` | 17 |
+| `O24Assignment` | 17 |
 | `IsProbabilityMixture` | 17 |
-| `UtilityConfig` | 16 |
 | `SCIM.withPolicy` | 16 |
+| `Skeleton.BehaviorEq` | 15 |
 | `SCM.IsWellFounded` | 15 |
-| `O24Var` | 15 |
 | `InIdentifiedSet` | 15 |
 | `Transcript` | 14 |
-| `Skeleton.BehaviorEq` | 14 |
+| `Skeleton.ValidMargin` | 14 |
 | `Model.roundDown` | 14 |
 | `Model.factor` | 14 |
 | `Model.ancestors` | 14 |
 | `DecisionNetwork` | 14 |
 | `pmfExpect` | 13 |
-| `Skeleton.ValidMargin` | 13 |
-| `O24Assignment` | 13 |
+| `Model.jointProb` | 13 |
 | `instMeasurableSpaceModel` | 12 |
 | `fibreRep` | 12 |
 | `SCIM.instIsWellFoundedWithPolicy` | 12 |
-| `ParentConfig` | 12 |
 | `NodeKind` | 12 |
 | `CID.IsWellFounded` | 12 |
 | `RandomizedEstimator` | 11 |
-| `Model.jointProb` | 11 |
+| `Model.chartOn` | 11 |
 | `MeasureEstimator` | 11 |
 | `LocalIntervention` | 11 |
 | `Skeleton.utility` | 10 |
+| `Skeleton.M1` | 10 |
 | `Model.regret` | 10 |
+| `o24Size` | 9 |
 | `hardInterventionProfile` | 9 |
+| `Skeleton.M4` | 9 |
 | `SCIM.expectedUtility` | 9 |
-| `Model.chartOn` | 9 |
 | `Model.ParentClosed` | 9 |
 | `DecisionNetwork.utility` | 9 |
-| `o24Size` | 8 |
-| `Skeleton.M1` | 8 |
+| `asg` | 8 |
 | `SCM.f` | 8 |
 | `SCM.exoJoint` | 8 |
 | `Policy.prob` | 8 |
@@ -103,7 +105,6 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 - `HasPolySizeList`
 - `IsRadius`
 - `O24Constructor`
-- `O24ExcludedSetSmall`
 - `O24RecoveryModulus`
 - `flipIntervention`
 - `nonadaptiveExactMinimalBudget`
@@ -214,6 +215,7 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 | `Model.jointProbMix` | definition | `Assignment`, `InterventionProfile`, `LocalIntervention`, `Mixture`, `Model`, `Model.jointProb` |
 | `Model.jointProbMix_nonneg` | theorem | `Assignment`, `IsProbabilityMixture`, `Mixture`, `Model`, `Model.jointProbMix`, `ProbMixture` |
 | `Model.jointProbMix_sum` | theorem | `Assignment`, `IsProbabilityMixture`, `Mixture`, `Model`, `Model.jointProbMix`, `ProbMixture` |
+| `Model.jointProb_congr_at` | theorem | `Assignment`, `InterventionProfile`, `Model`, `Model.cpt`, `Model.jointProb` |
 | `Model.jointProb_fixProfile` | theorem | `Assignment`, `Model`, `Model.jointProb`, `fixProfile` |
 | `Model.jointProb_hardInterventionProfile` | theorem | `Assignment`, `Model`, `Model.cpt`, `Model.jointProb`, `hardInterventionProfile` |
 | `Model.jointProb_mapRat` | theorem | `Assignment`, `InterventionProfile`, `Model`, `Model.jointProb`, `Model.mapRat` |

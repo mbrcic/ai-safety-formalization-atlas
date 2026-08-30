@@ -881,6 +881,16 @@
         "AISafetyAtlas.Causal.ProbMixture"
       ]
     },
+    "AISafetyAtlas.Causal.Model.jointProb_congr_at": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Causal.Assignment",
+        "AISafetyAtlas.Causal.InterventionProfile",
+        "AISafetyAtlas.Causal.Model",
+        "AISafetyAtlas.Causal.Model.cpt",
+        "AISafetyAtlas.Causal.Model.jointProb"
+      ]
+    },
     "AISafetyAtlas.Causal.Model.jointProb_fixProfile": {
       "kind": "theorem",
       "deps": [

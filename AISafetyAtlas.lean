@@ -31,6 +31,7 @@ public import AISafetyAtlas.Examples.Causal.Decision
 public import AISafetyAtlas.Examples.Causal.DecisionNetwork
 public import AISafetyAtlas.Examples.Causal.Query
 public import AISafetyAtlas.Examples.Causal.EffectiveGenericity
+public import AISafetyAtlas.Examples.Causal.O24Refutation
 public import AISafetyAtlas.Examples.Causal.ModelSpace
 public import AISafetyAtlas.Examples.Causal.StructuralModel
 public import AISafetyAtlas.Examples.Causal.OneNodeClass
@@ -194,6 +195,7 @@ which is a separate Wolpert-specific development and is not migrated;
 | `AISafetyAtlas.Examples.Causal.Model` | A ternary-root, binary-child model exercising translation, a non-injective local map, and general normalization |
 | `AISafetyAtlas.Examples.Causal.BayesianNetwork` | The kernel as a Pearl causal Bayesian network, and a family whose members are truncated products but which is not one |
 | `AISafetyAtlas.Examples.Causal.BehavioralCollision` | Three models on two binary variables with one behavior. The construction submitted against MAIS-O23, machine-checked |
+| `AISafetyAtlas.Examples.Causal.O24Refutation` | MAIS-O24's conclusions (a) and (c) shown incompatible: an open box of behavioural collisions, a certificate polynomial forced to vanish on it, and (c) contradicted at the utilities beside the collision. `O24Solution` is empty |
 | `AISafetyAtlas.Examples.Causal.Decision` | The collision's shared zero-regret policy family, plus two margin-class models with opposite optimal action at one mixture |
 | `AISafetyAtlas.Examples.Causal.ModelSpace` | A three-state table rounded by hand, and the witness that the `dim c` factor in the error bound is not slack |
 | `AISafetyAtlas.Examples.Causal.StructuralModel` | A two-variable structural model where evaluation needs a real recursion, and a diagram whose childless-utility clause is shown to bite |

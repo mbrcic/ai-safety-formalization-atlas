@@ -294,6 +294,10 @@
       "kind": "theorem",
       "deps": []
     },
+    "AISafetyAtlas.Analysis.volume_setOf_exists_eval_eq_zero": {
+      "kind": "theorem",
+      "deps": []
+    },
     "AISafetyAtlas.Analysis.volume_setOf_exists_forall_dotProduct_eq_zero": {
       "kind": "theorem",
       "deps": []

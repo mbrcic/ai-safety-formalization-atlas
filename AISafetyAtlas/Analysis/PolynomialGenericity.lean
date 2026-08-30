@@ -235,6 +235,34 @@ public theorem volume_setOf_eval_eq_zero {ι : Type*} [Fintype ι]
   rw [MeasureTheory.ae_iff] at this
   simpa using this
 
+/-- **A finite list of nonzero polynomials vanishes only on a null set.** Each
+member's zero set is null, and finitely many null sets union to a null set.
+
+This is the form a covering argument needs: if some *set* of positive measure is
+covered by the vanishing loci of a finite list, then one member of the list is
+the zero polynomial. -/
+public theorem volume_setOf_exists_eval_eq_zero {ι : Type*} [Fintype ι]
+    (l : List (MvPolynomial ι ℝ)) (hl : ∀ p ∈ l, p ≠ 0) :
+    volume {x : ι → ℝ | ∃ p ∈ l, MvPolynomial.eval x p = 0} = 0 := by
+  induction l with
+  | nil => simp
+  | cons a t ih =>
+    have hset : {x : ι → ℝ | ∃ p ∈ a :: t, MvPolynomial.eval x p = 0} =
+        {x : ι → ℝ | MvPolynomial.eval x a = 0} ∪
+          {x : ι → ℝ | ∃ p ∈ t, MvPolynomial.eval x p = 0} := by
+      ext x
+      simp only [List.mem_cons, Set.mem_setOf_eq, Set.mem_union]
+      constructor
+      · rintro ⟨p, hp | hp, hz⟩
+        · exact Or.inl (hp ▸ hz)
+        · exact Or.inr ⟨p, hp, hz⟩
+      · rintro (hz | ⟨p, hp, hz⟩)
+        · exact ⟨a, Or.inl rfl, hz⟩
+        · exact ⟨p, Or.inr hp, hz⟩
+    rw [hset]
+    exact measure_union_null (volume_setOf_eval_eq_zero (hl a (List.mem_cons_self ..)))
+      (ih fun p hp ↦ hl p (List.mem_cons_of_mem a hp))
+
 /-- **The additive Haar form.** Every additive Haar measure on `ι → ℝ` is a
 scalar multiple of `volume`, so it discards the same null sets. -/
 public theorem ae_eval_ne_zero_addHaar {ι : Type*} [Fintype ι] (μ : Measure (ι → ℝ))
