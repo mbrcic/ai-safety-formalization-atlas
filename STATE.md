@@ -6,7 +6,7 @@ Updated: 2026-08-30
 release and nothing here supersedes it.
 
 **A causal-inference layer is what this tree adds most recently, and it is in no
-release.** Twelve library modules and twelve worked-example modules under
+release.** Fourteen library modules and fifteen worked-example modules under
 `AISafetyAtlas.Causal`, graded against three printed sources. Two different
 objects live there and neither is a special case of the other: `Causal.Model` is
 a causal Bayesian network — a graph with conditional probability tables — while
@@ -15,7 +15,12 @@ and SCIM, which consign randomness to exogenous variables and relate the
 endogenous ones deterministically. On top of the network sit the objects MAIS-A2
 phrases its problems over: semialgebraic classes, the `K(G)` parameter chart, a
 prefix-free sparse monomial code, the O24 genericity certificate, and a
-rational-weight query layer. There is no aggregating `Causal` facade and that is
+rational-weight query layer. The newest four modules are the goal layer
+MAIS-O33 is stated over — `Causal.Goal` for print's three temporal operators and
+`Psi_n`, `Causal.ControlledProcess`, `Causal.GoalDynamics` for trajectory laws by
+Ionescu-Tulcea and print's `(delta,n)`-bounded agents, and `Causal.Corruption`
+for first-action data and the adaptive randomized query protocol. There is no
+aggregating `Causal` facade and that is
 deliberate — these are peer modules, so a consumer imports the one it needs.
 
 **On top of that layer sits the MAIS conjecture ledger, also in no release.**
@@ -49,7 +54,25 @@ without touching the `Theta(K log(1/epsilon))` rate the conjecture is about. It
 is counted as a resolved row because its `Prop` is proved, and it is not counted
 as a result.
 
-CONJ-025 is the exception and the newest: **MAIS-O38 is true**, under print's own
+**The two newest results are negative, and both are answers to printed problems
+this tree could not state a week ago.** `Examples.Causal.O24Refutation.isEmpty_o24Solution`
+proves **MAIS-O24 has no solution** -- clauses (a) and (c) of `prob:effective`
+are incompatible for any list of polynomials and any constants, and neither (b)
+nor the complexity clauses are used. `Examples.Conjectures.MAIS.not_maisO33_etaStarPos`
+proves **MAIS-O33's persistent-corruption threshold is not positive**,
+unconditionally; the value `eta* = 0` is proved separately and is conditional on
+the uncorrupted-recovery baseline print cites and this tree does not formalize.
+Both rest on candidates submitted to the MAIS tracker -- issues
+[#7](https://github.com/lionellevine/MAIS/issues/7) and
+[#9](https://github.com/lionellevine/MAIS/issues/9), both by kumino -- and in
+both cases a step of the submitted argument did not survive: O24's final
+`mu`-then-`u` choice is circular against print's quantifier order and was
+reversed, and O33's `delta = 0` instance was replaced by `delta = 1/2` on
+action-independent kernels, which removes two dependencies Mathlib does not
+carry. **What is machine-checked in each is the candidate's claim, not the
+candidate's proof**, and the upstream comments say so.
+
+CONJ-025 is the other recent one: **MAIS-O38 is true**, under print's own
 two hypotheses and at every `m` where the printed sentence has content — every
 `m` with `1 ≤ k(m) < m`, not merely on a tail — proved by
 `Examples.Conjectures.MAIS.maisO38_polynomialSamplesSuffice_holds`. Two weaker
