@@ -7,7 +7,7 @@ with no causal content. This file records the path from those bytes to
 behind three absence claims, and the one place a submitted candidate influenced a
 reading.
 
-**Amended 2026-08-30, twice.** First, a second unwritten quantifier was found —
+**Amended 2026-08-30, three times.** First, a second unwritten quantifier was found —
 the *domain* of `k` — and is read the same way the first was, with the wider
 reading carried beside it and refuted; see *The second unwritten quantifier*
 below for why that refutation is a warning and not an answer.
@@ -20,6 +20,12 @@ the atlas contributed is the transcription, the machine-check, and four
 domain-neutral facts Mathlib does not carry that the proof needs. The issue said
 it had been produced and checked entirely by AI systems with no human
 verification — the machine-check is now that verification, and it found no gap.
+
+Third, the graded conclusion was strengthened from *eventually `m`* to **every
+non-degenerate `m`**. The candidate already proved the latter; the earlier bridge
+discarded it with `filter_upwards`. The statement-freeze check then read only
+registry results and covered no conjecture row at all, so it would also have
+missed later CONJ-025 drift. Its lock now includes every graded conjecture.
 
 ## Source
 
@@ -48,7 +54,8 @@ the causal rows. It is added to
 | what | declaration |
 |---|---|
 | the ledger row's statement | `AISafetyAtlas.Conjectures.MAIS.maisO38_polynomialSamplesSuffice` |
-| the per-growth-law answer | `AISafetyAtlas.Conjectures.MAIS.O38PolynomialSampleAnswer` |
+| the guarded per-growth-law answer | `AISafetyAtlas.Conjectures.MAIS.O38AnswerAtEveryNondegenerate` |
+| the tail-shaped answer, ungraded, kept only to phrase a refuted reading | `AISafetyAtlas.Conjectures.MAIS.O38PolynomialSampleAnswer` |
 | print's *uniquely coded* | `AISafetyAtlas.Conjectures.MAIS.UniquelyCoded` |
 | print's spark condition | `AISafetyAtlas.Conjectures.MAIS.SparkCondition` |
 | the design predicate | `AISafetyAtlas.Conjectures.MAIS.GenericallyUniquelyCoding` |
@@ -57,9 +64,10 @@ the causal rows. It is added to
 | its refutation | `AISafetyAtlas.Examples.Conjectures.MAIS.not_maisO38_unboundedSparsityReading` |
 | the genericity lemma that spends | `AISafetyAtlas.Analysis.ae_eval_ne_zero_uncurry` |
 
-Statement module `AISafetyAtlas/Conjectures/MAIS/O38.lean`; everything proved
-about it is in `AISafetyAtlas/Examples/Conjectures/MAIS/O38.lean`. Neither is on
-the atlas root import, like every other conjecture module.
+Statement module `AISafetyAtlas/Conjectures/MAIS/O38.lean`; boundary and
+transcription facts are in `AISafetyAtlas/Examples/Conjectures/MAIS/O38.lean`,
+and the candidate-dependent proofs are in the sibling `O38Candidate.lean`.
+None is on the atlas root import, like every other conjecture module.
 
 ## Interpretive choices
 
@@ -68,25 +76,26 @@ the atlas root import, like every other conjecture module.
 Print writes *"Let `k = k(m) → ∞` (say `k = ⌈m^α⌉` for some `α ∈ (0,1)`, or even
 `k = ⌈log m⌉`) and `n ≥ 2k`. Do there exist `N` bounded by a polynomial in `m`
 and `k`-sparse `x₁, …, x_N` such that for almost every `A` …"* and **never
-quantifies `m`**. Both surrounding clauses are asymptotic, so the atlas reads the
-missing quantifier at `Filter.atTop`.
+quantifies `m`**. The graded statement now reads the missing quantifier as every
+`m` where the setup is non-degenerate: `2 ≤ m`, `1 ≤ k m`, and `k m < m` guard
+the conclusion.
 
 What turns on it, as a theorem rather than an argument: under the strictest
-alternative — a design demanded at *every* `m` — the printed sentence is false.
+alternative — a design demanded at *every* `m` without those guards — the
+printed sentence is false.
 `AISafetyAtlas.Examples.Conjectures.MAIS.not_maisO38_everyDimensionReading`
 refutes `maisO38_everyDimensionReading` with `k = fun m => m - 1` at `m = 1`,
 where `k 1 = 0`, every code is the zero vector, the dataset is `{0}` and every
 matrix `B` reproduces it. Print's own named family `k = ⌈log m⌉` has `k 1 = 0`
-too, so the strict reading is not one print's own examples survive.
+too, so the unguarded strict reading is not one print's own examples survive.
 
-On the eventual reading, print's own hypothesis excludes that case and the atlas
-supplies no condition of its own:
-`AISafetyAtlas.Conjectures.MAIS.eventually_one_le_sparsity` derives `1 ≤ k m` for
-large `m` from `k(m) → ∞`.
-
-**If the other reading was right**, the row is a refuted statement about a
-degeneracy at `m ≤ 1` rather than an open question, and the interesting content
-of `prob:samples` would have no row at all.
+Two earlier forms were weaker and are gone. The first asked only for
+sufficiently large `m`, discarding through `filter_upwards` the pointwise
+strength issue #30 already supplies. The second guarded the conclusion but still
+*assumed* `∀ᶠ m in atTop, k m < m` — a premise print does not write and the proof
+does not use, which narrowed a source claim by hypothesis. The graded form keeps
+print's `k(m) → ∞`, unused, because print writes it; a version omitting it would
+be true, strictly stronger, and `Beyond`/atlas-original rather than `Same`.
 
 ### 2. Indexed family rather than set
 
@@ -113,15 +122,19 @@ polynomial dominating a `ℕ`-valued function on `ℕ` is itself dominated there
 one with natural coefficients. The bound is required at every `m`, not merely
 eventually, which makes the affirmative branch harder rather than easier.
 
-## Assumptions not in print
+## Assumptions and the unwritten domain
 
-**None.** `#check` on `maisO38_polynomialSamplesSuffice` shows two binders,
-`Filter.Tendsto k Filter.atTop Filter.atTop` and `∀ m, 2 * k m ≤ n m`, which are
-*"`k(m) → ∞`"* and *"`n ≥ 2k`"*. The definitional closure below the statement is
-`O38PolynomialSampleAnswer`, `GenericallyUniquelyCoding`, `SparkCondition`,
+`#check` on `maisO38_polynomialSamplesSuffice` shows the two printed
+binders, `Filter.Tendsto k Filter.atTop Filter.atTop` and
+`∀ m, 2 * k m ≤ n m`, plus the recorded reading that `k m < m` eventually.
+That third binder is not printed; it is the non-degenerate domain reading
+audited below and independently used by issue #30. The conclusion itself adds
+no premise: its pointwise guards say precisely when a design is demanded. The
+definitional closure below the statement is `O38AnswerAtEveryNondegenerate`,
+`GenericallyUniquelyCoding`, `SparkCondition`,
 `UniquelyCoded`, `IsKSparse`, `IsPermutationMatrix`, `IsInvertibleDiagonal` — all
 transcriptions, none carrying a well-formedness field, a normalization, or a
-domain restriction. No structure is involved, so there is no hidden field.
+hidden structure field.
 
 **No chart.** Every object is print's own: real matrices, real codes, Mathlib's
 Lebesgue `volume`. `Matrix.of` is the identity equivalence and is present only
@@ -212,6 +225,7 @@ argument actually applies.
 | `rows_gt_cols_of_full_sparsity_spark` | the full-sparsity route forces `m < n`, an undercomplete dictionary |
 | `not_maisO38_unboundedSparsityReading` | the reading with `k` unbounded by `m` is **false** — a warning, not an answer |
 | `exists_admissibleGrowthLaw` | the narrowed universal is not empty |
+| `maisO38_polynomialSamplesSuffice_holds` | the design works at every `m` with `1 ≤ k m < m`, under print's two hypotheses and no others |
 
 **Non-vacuity is discharged on both sides.** `genericallyUniquelyCoding_two`
 inhabits the inner existential of `O38PolynomialSampleAnswer`, so `UniquelyCoded`
@@ -235,8 +249,9 @@ a single transvection reproduces any dataset with rescaled codes. Second,
 `rows_gt_cols_of_full_sparsity_spark` shows print's own `n ≥ 2k` then forces
 `m < n` — an *undercomplete* dictionary, while §2 of this very agenda places
 superposition at `m > n`. Third, print's named families `k = ⌈m^α⌉` and
-`k = ⌈log m⌉` are both `o(m)`; print says the question is open *"even at
-`k = ⌈log m⌉`"*, and it stays open.
+`k = ⌈log m⌉` are both `o(m)`; print described the question as open *"even at
+`k = ⌈log m⌉`"*, and this refuting witness does not touch either family. The
+affirmative candidate handles them on the guarded domain.
 
 **So the domain of `k` is read, and the reading is recorded rather than argued.**
 Print says what `k` tends to and never says what it ranges over, and two printed
@@ -244,13 +259,15 @@ phrases presuppose `k(m) < m`: *"`k`-sparse codes `xᵢ ∈ ℝᵐ`"* is no cond
 all once `m ≤ k`, and *"the spark condition of order `k`"* is Definition 4.1's
 condition on a dictionary in `U_{n,m}`, a setting §2 places at `m > n`, giving
 `2k ≤ n < m` already. `maisO38_polynomialSamplesSuffice` therefore carries
-`∀ᶠ m in atTop, k m < m` — eventual, because print's own `k = ⌈m^α⌉` has
-`k 1 = 1 = m` and a demand at every `m` would exclude a family print names. The
-wider reading is `maisO38_unboundedSparsityReading`, it is false, and
+`∀ᶠ m in atTop, k m < m` as the domain of the growth law, while its conclusion
+is guarded pointwise by `2 ≤ m`, `1 ≤ k m`, and `k m < m`. This includes every
+non-degenerate member of print's named families without demanding anything at
+their small degenerate indices. The wider reading is
+`maisO38_unboundedSparsityReading`, it is false, and
 `not_maisO38_unboundedSparsityReading` proves it. This is the same move, and the
-same justification, as reading the `m`-quantifier at `Filter.atTop` in
-Interpretive choice 1. `exists_admissibleGrowthLaw` checks the narrowing did not
-empty the universal, and MAIS issue [#30](https://github.com/lionellevine/MAIS/issues/30) reads the domain as `1 ≤ k < m`
+same justification, as guarding the unwritten `m`-quantifier in Interpretive
+choice 1. `exists_admissibleGrowthLaw` checks the narrowing did not empty the
+universal, and MAIS issue [#30](https://github.com/lionellevine/MAIS/issues/30) reads the domain as `1 ≤ k < m`
 independently.
 
 **No conflict with the bounds print quotes.** At `k = m` the classical counts
@@ -295,19 +312,20 @@ work that is worth something independently of the reading dispute.
 candidate complete solution: `m³+2m` fixed codes suffice for every sparsity
 `k < m`"*, filed 2026-08-26 by `26david26`, body sha256
 `6e2db10eb10242c075ca331fcf87a604511b9b31df3d55a5c4b0d2d2d95d05ab` as read
-2026-08-27, no comments. It says it was produced and checked entirely by AI
-systems with no human verification.
+2026-08-27. The atlas posted its machine-check record on 2026-08-30. The issue
+says the proof was produced and checked entirely by AI systems with no human
+verification.
 
 ### The candidate is transcribed and proved
 
 Added 2026-08-30. `AISafetyAtlas.Conjectures.MAIS.o38PolynomialSampleCandidate`
 transcribes the issue's Theorem 3, and
 `AISafetyAtlas.Examples.Conjectures.MAIS.o38PolynomialSampleCandidate_holds`
-proves it. Two chains carry that to the row:
+proves it. The candidate and the two bridges carry that to the row:
 
 | declaration | says |
 |---|---|
-| `maisO38_polynomialSamplesSuffice_of_candidate` | if the candidate is true, CONJ-025 is resolved affirmatively |
+| `maisO38_polynomialSamplesSuffice_holds` | the candidate gives every guarded `m`; print's growth hypothesis is retained, unused, for the `Same` grade |
 | `o38PolynomialSampleCandidate_of_forcing` | a design whose rivals are *forced* yields the candidate |
 | `uniquelyCoded_of_forcing` | forcing data ⟹ print's Definition 1, i.e. the note's Steps 1, 3 and 4 |
 
@@ -372,14 +390,15 @@ correction is the point of this section. The issue contains **two** theorems.
 
 **The first** is the candidate: `N = m³ + 2m` codes depending only on `m` and
 `k`, for every `n ≥ 2k` and Lebesgue-almost every spark-condition `A`, at every
-`1 ≤ k < m`. It is *stronger* than CONJ-025 asks, since its codes do not depend
-on `n` where print fixes `n` before asking for codes.
+`1 ≤ k < m`. It has exactly CONJ-025's strengthened pointwise `m`-scope and is
+still stronger on one axis: its codes do not depend on `n` where print fixes `n`
+before asking for codes.
 
 **Transcribed and proved, 2026-08-30.** `o38PolynomialSampleCandidate` states it;
 `Examples.Conjectures.MAIS.o38PolynomialSampleCandidate_holds` proves it; and
-`maisO38_polynomialSamplesSuffice_of_candidate` carries it to `prob:samples` at
-print's own quantifier. No `sorry`, no added axiom. CONJ-025 is `RESOLVED`
-affirmatively, and it is the issue's argument that resolves it.
+`maisO38_polynomialSamplesSuffice_holds` carries it to `prob:samples` with
+the printed growth hypothesis retained. No `sorry`, no added axiom. CONJ-025 is
+`RESOLVED` affirmatively, and it is the issue's argument that resolves it.
 
 **The second** is labelled *boundary*: at `m ≥ 2`, `k ≥ m` and `n ≥ 2k`, no
 finite list of `k`-sparse codes is uniquely coded at any spark-condition `A` —
@@ -415,8 +434,8 @@ own Lean, which is the shorter and likelier clock.
 What still holds, and is a distinction worth keeping: **CONJ-025's statement is
 print's quantifier order, not the issue's.** Print fixes `k` and `n` before asking
 for codes, so the codes the row quantifies over may depend on `n`; the issue's
-depend only on `m` and `k`. The row is resolved by an argument stronger than the
-row demands.
+depend only on `m` and `k`. The issue now matches the row's every-non-degenerate
+`m` strength and remains stronger only in that independence from `n`.
 
 ## What a later reader should re-check
 

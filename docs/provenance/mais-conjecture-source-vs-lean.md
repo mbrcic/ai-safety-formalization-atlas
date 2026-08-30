@@ -828,14 +828,14 @@ independent---applies verbatim to matrices with non-unit columns, and
 ```lean
 @[expose] public noncomputable def maisO38_polynomialSamplesSuffice : Prop :=
   ∀ k n : ℕ → ℕ, Filter.Tendsto k Filter.atTop Filter.atTop →
-    (∀ m, 2 * k m ≤ n m) → (∀ᶠ m in Filter.atTop, k m < m) →
-      O38PolynomialSampleAnswer k n
+    (∀ m, 2 * k m ≤ n m) → O38AnswerAtEveryNondegenerate k n
 
-@[expose] public noncomputable def O38PolynomialSampleAnswer (k n : ℕ → ℕ) : Prop :=
+@[expose] public noncomputable def O38AnswerAtEveryNondegenerate (k n : ℕ → ℕ) : Prop :=
   ∃ (N : ℕ → ℕ) (p : Polynomial ℕ),
     (∀ m, N m ≤ p.eval m) ∧
-      ∀ᶠ m in Filter.atTop,
-        ∃ x : Fin (N m) → (Fin m → ℝ), GenericallyUniquelyCoding (k m) (n m) m (N m) x
+      ∀ m : ℕ, 1 ≤ k m → k m < m →
+        ∃ x : Fin (N m) → (Fin m → ℝ),
+          GenericallyUniquelyCoding (k m) (n m) m (N m) x
 
 @[expose] public noncomputable def GenericallyUniquelyCoding (k n m N : ℕ)
     (x : Fin N → (Fin m → ℝ)) : Prop :=
@@ -855,11 +855,12 @@ independent---applies verbatim to matrices with non-unit columns, and
 ### Lean read back
 
 For every pair of functions `k` and `n` from naturals to naturals such that `k`
-tends to infinity and `2 * k m ≤ n m` at every `m`, there exist a function `N`
-from naturals to naturals and a polynomial `p` with natural coefficients such
-that `N m ≤ p.eval m` at every `m`, and such that for all sufficiently large `m`
-there exists a family of `N m` vectors in `Fin m → ℝ`, each of whose supports has
-at most `k m` elements, with the property that for Lebesgue-almost every function
+tends to infinity, `2 * k m ≤ n m` at every `m`, and `k m < m` eventually,
+there exist a function `N` from naturals to naturals and a polynomial `p` with
+natural coefficients such that `N m ≤ p.eval m` at every `m`. At every
+individual `m` satisfying `2 ≤ m`, `1 ≤ k m`, and `k m < m`, there exists a
+family of `N m` vectors in `Fin m → ℝ`, each of whose supports has at most `k m`
+elements, with the property that for Lebesgue-almost every function
 `A : Fin (n m) → Fin m → ℝ` — Lebesgue meaning the `n m · m`-fold product of the
 Lebesgue measure on `ℝ` — if every finite set of at most `2 * k m` column indices
 gives a linearly independent family of columns of `A`, then: for every matrix `B`
@@ -879,15 +880,27 @@ same genre already graded that way at CONJ-004, CONJ-005 and CONJ-008.
 **One quantifier is print's and unwritten, and it is the whole of the delta.**
 Print never quantifies `m`: it writes *"Let `k = k(m) → ∞` … and `n ≥ 2k`"* and
 *"`N` bounded by a polynomial in `m`"*, both asymptotic, and then poses the
-question. The Lean reads the missing quantifier at `Filter.atTop`. Under the
-strictest alternative — a design at *every* `m` — the printed sentence is false,
-and that is a theorem rather than a worry:
+question. The Lean demands a design at every non-degenerate `m`, guarded by
+`2 ≤ m`, `1 ≤ k m`, and `k m < m`. Under the unguarded strict alternative — a
+design at literally every `m` — the printed sentence is false, and that is a
+theorem rather than a worry:
 `Examples.Conjectures.MAIS.not_maisO38_everyDimensionReading` refutes
 `maisO38_everyDimensionReading` at `m = 1`, where `k 1 = 0` makes every code the
 zero vector and the dataset `{0}`, so every `B` reproduces it. Print's own named
-family `k = ⌈log m⌉` has `k 1 = 0` as well. On the eventual reading print's own
-`k(m) → ∞` excludes the case and no atlas condition on `k` appears anywhere,
-which `eventually_one_le_sparsity` is the proof of.
+family `k = ⌈log m⌉` has `k 1 = 0` as well. The guards exclude exactly that
+degeneracy without weakening the conclusion to a tail.
+
+The candidate already proved this pointwise strength. The earlier graded form
+discarded it with `filter_upwards`. At the time the freeze check read only
+registry results and covered no conjecture declaration, so it could not report
+this or any later CONJ-025 drift; that coverage gap is fixed with this change.
+A second weakening survived that fix and is also gone: the row still *assumed*
+`∀ᶠ m in atTop, k m < m`, an atlas-supplied premise print does not write. With the
+conclusion guarded pointwise it did nothing, and an unused atlas premise on a
+`Same` row narrows the source claim by hypothesis. The row now carries print's two
+hypotheses and no others. `k(m) → ∞` is among them and is itself unused — the
+proof never needs it — but it stays because print writes it; omitting it would be
+true, stronger, and atlas-original rather than `Same`.
 
 **A second unwritten quantifier, read the same way.** Print says what `k` tends
 to and never says what it ranges over. Two of print's own phrases presuppose
@@ -927,8 +940,9 @@ ambient `n`, and pointwise rather than almost everywhere.
 
 **No candidate is graded here.** Unlike CONJ-009 and CONJ-010, whose graded
 artifact is a submitted issue, this row grades against the agenda. MAIS issue [#30](https://github.com/lionellevine/MAIS/issues/30)
-submits a candidate solution; it is `context_source_ref`, its construction is not
-transcribed, and its only influence is recorded in
+is `context_source_ref`; its candidate is transcribed and proved, and its
+pointwise strength is what exposed and repaired the earlier weakening. The full
+influence is recorded in
 [`mais-o38-transcription.md`](mais-o38-transcription.md).
 
 ---

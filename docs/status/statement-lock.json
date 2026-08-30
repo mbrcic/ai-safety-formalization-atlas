@@ -1,7 +1,7 @@
 {
   "generated_by": "scripts/check_statement_freeze.py --write",
   "note": "Signature hashes of ledger-graded statements. A diff here is a schema event: say which way fidelity moved and re-grade the row.",
-  "count": 248,
+  "count": 261,
   "declarations": {
     "AISafetyAtlas.Causal.DecisionNetwork.mem_parents_utility_of_isUnmediated": {
       "file": "AISafetyAtlas/Causal/DecisionNetwork.lean",
@@ -38,6 +38,10 @@
     "AISafetyAtlas.Causal.Model.\u0394mix_congr": {
       "file": "AISafetyAtlas/Causal/Model.lean",
       "sha256": "913847463c095f2f"
+    },
+    "AISafetyAtlas.Causal.O24Solution": {
+      "file": "AISafetyAtlas/Causal/EffectiveGenericity.lean",
+      "sha256": "2b8e7c373dfa9a01"
     },
     "AISafetyAtlas.Causal.SCIM.exists_isOptimalPolicy": {
       "file": "AISafetyAtlas/Causal/StructuralModel.lean",
@@ -122,6 +126,54 @@
     "AISafetyAtlas.Computability.rice_code_iff": {
       "file": "AISafetyAtlas/Computability.lean",
       "sha256": "b3763f01d06b639b"
+    },
+    "AISafetyAtlas.Conjectures.MAIS.IsO27RadiusVanishingCriterion": {
+      "file": "AISafetyAtlas/Conjectures/MAIS/O27.lean",
+      "sha256": "0e495dc4bddbfd8f"
+    },
+    "AISafetyAtlas.Conjectures.MAIS.IsO31IdentifiableSetAlmostEverywhere": {
+      "file": "AISafetyAtlas/Conjectures/MAIS/O31.lean",
+      "sha256": "b0a064174e37c4db"
+    },
+    "AISafetyAtlas.Conjectures.MAIS.boltzmannMinimaxRisk": {
+      "file": "AISafetyAtlas/Conjectures/MAIS/O29Experiment.lean",
+      "sha256": "a30a1b5e20d7d590"
+    },
+    "AISafetyAtlas.Conjectures.MAIS.maisO23_marginsDoNotSuffice": {
+      "file": "AISafetyAtlas/Conjectures/MAIS/O23.lean",
+      "sha256": "a72266ecb3ad96ee"
+    },
+    "AISafetyAtlas.Conjectures.MAIS.maisO25_exactQueryRate": {
+      "file": "AISafetyAtlas/Conjectures/MAIS/O25.lean",
+      "sha256": "220d85516a5ffb76"
+    },
+    "AISafetyAtlas.Conjectures.MAIS.maisO26_exactRate": {
+      "file": "AISafetyAtlas/Conjectures/MAIS/O26.lean",
+      "sha256": "08ef1fe851040041"
+    },
+    "AISafetyAtlas.Conjectures.MAIS.maisO29_boltzmannNotInjective": {
+      "file": "AISafetyAtlas/Conjectures/MAIS/O29.lean",
+      "sha256": "7c2f6b575c91e955"
+    },
+    "AISafetyAtlas.Conjectures.MAIS.maisO31_chainClassificationCandidate": {
+      "file": "AISafetyAtlas/Conjectures/MAIS/O31.lean",
+      "sha256": "c8e3b4d9f8c8510b"
+    },
+    "AISafetyAtlas.Conjectures.MAIS.maisO34_exactFiberCandidate": {
+      "file": "AISafetyAtlas/Conjectures/MAIS/O34.lean",
+      "sha256": "8a241566e7382223"
+    },
+    "AISafetyAtlas.Conjectures.MAIS.maisO34_marginAloneDoesNotIdentify": {
+      "file": "AISafetyAtlas/Conjectures/MAIS/O34.lean",
+      "sha256": "030f84aa7419cf87"
+    },
+    "AISafetyAtlas.Conjectures.MAIS.maisO38_polynomialSamplesSuffice": {
+      "file": "AISafetyAtlas/Conjectures/MAIS/O38.lean",
+      "sha256": "a8ca4f2fefdb547e"
+    },
+    "AISafetyAtlas.Conjectures.StochasticComplexity.eq_needs_no_null_points": {
+      "file": "AISafetyAtlas/Conjectures/StochasticComplexity.lean",
+      "sha256": "91e54d3cf9fcd88f"
     },
     "AISafetyAtlas.Control.ashby_logVariety_ge": {
       "file": "AISafetyAtlas/Control/VarietyCounting.lean",

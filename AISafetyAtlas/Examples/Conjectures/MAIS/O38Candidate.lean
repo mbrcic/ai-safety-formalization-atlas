@@ -10,9 +10,9 @@ public import AISafetyAtlas.Examples.Conjectures.MAIS.O38
 
 `AISafetyAtlas.Conjectures.MAIS.o38PolynomialSampleCandidate` transcribes the
 theorem submitted as MAIS issue #30 by `26david26`, and
-`o38PolynomialSampleCandidate_holds` **proves it**. With
-`maisO38_polynomialSamplesSuffice_holds` that resolves MAIS-O38 affirmatively at
-print's own quantifier.
+`o38PolynomialSampleCandidate_holds` **proves it**. The theorem
+`maisO38_polynomialSamplesSuffice_holds` then resolves MAIS-O38 at every
+`2 ≤ m`, `1 ≤ k < m`, while retaining print's growth hypotheses.
 
 **The mathematics is not the atlas's.** The construction and the argument are the
 issue's: `N = m³ + 2m` codes — `m` blocks of `L = m² + 1` codes carried on the
@@ -1343,8 +1343,9 @@ codes before the dictionary), and nothing else. -/
 open AISafetyAtlas.Conjectures.MAIS in
 /-- **The candidate follows from a design whose rivals are forced.**
 
-Chained with `maisO38_polynomialSamplesSuffice_of_candidate`, this says: supply
-the design and the forcing lemma, and CONJ-025 is resolved affirmatively. The
+Chained through `o38PolynomialSampleCandidate_holds`, this says: supply the
+design and the forcing lemma, and CONJ-025 is resolved affirmatively at every
+non-degenerate `m`. The
 hypothesis is stated at the note's own quantifier order — codes first, then every
 `n`, then almost every `A` — so discharging it is discharging Lemmas 6 and 8. -/
 public theorem o38PolynomialSampleCandidate_of_forcing
@@ -1414,12 +1415,29 @@ public theorem o38PolynomialSampleCandidate_holds : o38PolynomialSampleCandidate
   exact ⟨T, hTk, hmem, hind⟩
 
 open AISafetyAtlas.Conjectures.MAIS in
-/-- **MAIS-O38 has an affirmative answer at print's own quantifier.**
+/--
+**MAIS-O38 is true**, at print's own hypotheses and at every `m` where the printed
+sentence has content.
 
-`maisO38_polynomialSamplesSuffice` is the transcription of `prob:samples`; this
-proves it, by way of the candidate submitted as MAIS issue #30. -/
+The candidate submitted as MAIS issue #30 already supplies the pointwise
+conclusion, and this proof does not discard it: no `filter_upwards`, no threshold.
+The polynomial witness is `X³ + 2X`, which dominates `N = m³ + 2m` at every `m`
+with equality, so the candidate's bound is exactly a polynomial bound in print's
+sense.
+
+The two guards are discharged from each other: `1 ≤ k m` and `k m < m` give
+`2 ≤ m`, which is the candidate's own lower bound on the dimension.
+
+`hk : Filter.Tendsto k Filter.atTop Filter.atTop` is print's and is **not used**.
+See `maisO38_polynomialSamplesSuffice` for why it is nonetheless part of the
+statement. -/
 public theorem maisO38_polynomialSamplesSuffice_holds :
-    maisO38_polynomialSamplesSuffice :=
-  maisO38_polynomialSamplesSuffice_of_candidate o38PolynomialSampleCandidate_holds
+    maisO38_polynomialSamplesSuffice := by
+  intro k n _ hn
+  refine ⟨fun m => m ^ 3 + 2 * m, Polynomial.X ^ 3 + 2 * Polynomial.X, fun m => by simp, ?_⟩
+  intro m hone hlt
+  obtain ⟨x, hsparse, hae⟩ :=
+    o38PolynomialSampleCandidate_holds m (k m) (by omega) hone hlt
+  exact ⟨x, hsparse, hae (n m) (hn m)⟩
 
 end AISafetyAtlas.Examples.Conjectures.MAIS

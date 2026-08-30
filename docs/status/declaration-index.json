@@ -3,7 +3,7 @@
   "generated_by": "scripts/generate_declaration_index.py",
   "note": "Declaration index walked from the elaborated environment, not from source text. Consumed by the prose checks so that a name resolves only when it is a real declaration.",
   "prefix": "AISafetyAtlas",
-  "count": 4402,
+  "count": 4403,
   "declarations": [
     {
       "name": "AISafetyAtlas",
@@ -5268,6 +5268,11 @@
     {
       "name": "AISafetyAtlas.Conjectures.MAIS.O38",
       "kind": "module",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O38"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.O38AnswerAtEveryNondegenerate",
+      "kind": "def",
       "module": "AISafetyAtlas.Conjectures.MAIS.O38"
     },
     {

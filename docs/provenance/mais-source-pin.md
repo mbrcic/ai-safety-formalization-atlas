@@ -129,7 +129,11 @@ The three 2026-08-20 issue bodies were re-fetched on 2026-08-27 and all three
 hashes above still match, which is a check on this table rather than on any
 verdict.
 
-**Comments.** Issues [#6](https://github.com/lionellevine/MAIS/issues/6), [#8](https://github.com/lionellevine/MAIS/issues/8) and [#30](https://github.com/lionellevine/MAIS/issues/30) carry none at their recorded readings. Issue [#4](https://github.com/lionellevine/MAIS/issues/4)
+**Comments.** Issues [#6](https://github.com/lionellevine/MAIS/issues/6) and [#8](https://github.com/lionellevine/MAIS/issues/8) carry none at their recorded readings. Issue [#30](https://github.com/lionellevine/MAIS/issues/30) later received the atlas's
+[machine-check record](https://github.com/lionellevine/MAIS/issues/30#issuecomment-5466534850), updated
+2026-08-30T04:08:15Z, body sha256
+`db8715b6dd9554bb25720766957901bc83ad9c0a8a37d6812965b722a9b2e138`.
+Issue [#4](https://github.com/lionellevine/MAIS/issues/4)
 carries one, by the same author, saying that LaTeX may not render on mobile and
 pointing at the PDF ([`#issuecomment-5170099225`](https://github.com/lionellevine/MAIS/issues/4#issuecomment-5170099225),
 body sha256 `e290bb83bd980cc9a9b8a3610e21ec6e26a0aa5c3d2e036db10b2610d909bca8`).

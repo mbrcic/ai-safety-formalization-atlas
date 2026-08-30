@@ -19,8 +19,8 @@ the number of features `m`.
 
 This module is the statement layer only. It defines print's *uniquely coded*
 relation, print's spark condition of order `k`, and the printed question.
-Defining a proposition asserts nothing about its truth; everything proved about
-these definitions lives in `AISafetyAtlas/Examples/Conjectures/MAIS/O38.lean`.
+Defining a proposition asserts nothing about its truth; proofs live in the
+matching examples module and its `O38Candidate.lean` sibling.
 
 Unlike every other `MAIS/*` module here, the source is agenda **A3**, not A2, and
 none of this module's vocabulary is shared with the causal layer. Both agendas
@@ -31,8 +31,11 @@ are pinned in `docs/provenance/mais-source-pin.md`.
 Print writes *"Let `k = k(m) → ∞` … and `n ≥ 2k`"* and *"`N` bounded by a
 polynomial in `m`"*, and then never quantifies `m` itself. Both surrounding
 clauses are asymptotic — a polynomial bound is a statement about growth, and
-`k(m) → ∞` is a statement about large `m` — so `maisO38_polynomialSamplesSuffice`
-reads the missing quantifier as *"for all sufficiently large `m`"*.
+`k(m) → ∞` is a statement about large `m`. The graded
+`maisO38_polynomialSamplesSuffice` does **not** answer the unwritten quantifier
+with a tail. It asks for a design at every `m` where the printed sentence has
+content — every `m` with `1 ≤ k m` and `k m < m` — which is stronger than any
+statement about large `m` and assumes nothing print does not write.
 
 That reading is not free and it is the one interpretive choice in this module, so
 here is what turns on it. Under the strictest alternative — a design at *every*
@@ -41,9 +44,11 @@ rather than about sparse coding: `maisO38_everyDimensionReading` is refuted by
 `not_maisO38_everyDimensionReading`, at `m = 1`, where the sparsity is zero, every
 code is the zero vector and the dataset is `{0}`. Print's own named family
 `k = ⌈log m⌉` has `k 1 = 0`, so the strict reading is not one print's examples
-survive either. On the eventual reading print's own hypothesis does the work
-instead: `eventually_one_le_sparsity` derives `1 ≤ k m` for large `m` from
-`k(m) → ∞`, so no atlas-supplied condition on `k` appears anywhere below.
+survive either. The guard excludes exactly that degeneracy at each point where a
+design is asked for, and excludes nothing else — which is why guarding is not the
+same move as retreating to a tail. `eventually_one_le_sparsity` records that
+print's own `k(m) → ∞` would have given `1 ≤ k m` for large `m` anyway; the row
+does not need it, because the guard is pointwise.
 
 ## The second unwritten quantifier: what `k` ranges over
 
@@ -55,8 +60,12 @@ dataset with rescaled codes, and no design of any size works at any dictionary �
 `m < n` by print's own `n ≥ 2k` (`rows_gt_cols_of_full_sparsity_spark`), an
 undercomplete dictionary, where §2 of the agenda places superposition at `m > n`.
 
-So the domain is read as eventually `k m < m`, and the wider reading is carried
-beside it, refuted, exactly as `maisO38_everyDimensionReading` is.
+So the domain is recorded **once, as a guard on the conclusion and never as a
+hypothesis**. An earlier version of this row assumed `∀ᶠ m in atTop, k m < m`,
+which narrowed a source claim by a premise print does not write; the guard says
+the same thing about where the question has content while leaving the hypothesis
+list print's own. The wider reading is carried beside it, refuted, exactly as
+`maisO38_everyDimensionReading` is.
 
 **`maisO38_polynomialSamplesSuffice` is true**, and
 `AISafetyAtlas.Examples.Conjectures.MAIS.maisO38_polynomialSamplesSuffice_holds`
@@ -173,43 +182,83 @@ one with natural coefficients. The bound is required at every `m` and not merely
 eventually, which is the stronger of the two and so makes this affirmative branch
 harder rather than easier.
 
-The design requirement is at `Filter.atTop` — see this module's header for the
-one printed quantifier that is unwritten and why it is read this way. -/
+**This is not the graded answer, and nothing in the atlas asserts it.** The
+design requirement here is at `Filter.atTop`, which is the *tail* reading of
+print's unwritten `m`-quantifier. The graded row uses
+`O38AnswerAtEveryNondegenerate` instead, which is strictly stronger. This
+predicate survives for one purpose: `maisO38_unboundedSparsityReading` is stated
+over it, and refuting a *weaker* conclusion is the stronger refutation, so the
+warning about `k`'s unwritten domain is worth more phrased this way. -/
 @[expose] public noncomputable def O38PolynomialSampleAnswer (k n : ℕ → ℕ) : Prop :=
   ∃ (N : ℕ → ℕ) (p : Polynomial ℕ),
     (∀ m, N m ≤ p.eval m) ∧
       ∀ᶠ m in Filter.atTop,
         ∃ x : Fin (N m) → (Fin m → ℝ), GenericallyUniquelyCoding (k m) (n m) m (N m) x
 
-/--
-**MAIS-O38, affirmative branch.** The open question.
+/-! ## The answer at every non-degenerate dimension -/
 
-*"Let `k = k(m) → ∞` … and `n ≥ 2k`"* is the universal quantifier over both
-growth laws; `Filter.Tendsto k Filter.atTop Filter.atTop` is *"`k(m) → ∞`"* and
-`2 * k m ≤ n m` is *"`n ≥ 2k`"*, both at print's own strength and with no
-condition on `k` beyond the printed one.
+/--
+**The affirmative branch of `prob:samples`, at every `m` where the printed
+vocabulary has content.**
+
+*"bounded by a polynomial in `m`"* is a single `p : Polynomial ℕ` dominating `N`
+at every `m`; the polynomial is chosen before `m`, which is what makes the bound
+a growth statement rather than a tautology. Coefficients in `ℕ` cost nothing: a
+real polynomial dominating a `ℕ`-valued function is itself dominated on `ℕ` by
+one with natural coefficients.
+
+**`1 ≤ k m` and `k m < m` guard the conclusion; they are not hypotheses.** That
+distinction is the whole design of this predicate. Print never quantifies `m` and
+never says what `k` ranges over, and both gaps have the same cause: outside
+`1 ≤ k m < m` the printed sentence has no content — at `k m = 0` every code is the
+zero vector, and at `m ≤ k m` every vector of `ℝᵐ` is `k`-sparse, which
+`not_maisO38_unboundedSparsityReading` shows makes the question false for reasons
+with no sparse-coding content. Guarding says *the design exists wherever the
+question means anything*, which is stronger than any statement about a tail and
+assumes nothing print does not write.
+
+`2 ≤ m` is not among the guards because `1 ≤ k m` and `k m < m` already force it. -/
+@[expose] public noncomputable def O38AnswerAtEveryNondegenerate (k n : ℕ → ℕ) : Prop :=
+  ∃ (N : ℕ → ℕ) (p : Polynomial ℕ),
+    (∀ m, N m ≤ p.eval m) ∧
+      ∀ m : ℕ, 1 ≤ k m → k m < m →
+        ∃ x : Fin (N m) → (Fin m → ℝ),
+          GenericallyUniquelyCoding (k m) (n m) m (N m) x
+
+/--
+**MAIS-O38, affirmative branch.** The graded row.
+
+*"Let `k = k(m) → ∞` … and `n ≥ 2k`"* is the universal quantifier over both growth
+laws; `Filter.Tendsto k Filter.atTop Filter.atTop` is *"`k(m) → ∞`"* and
+`2 * k m ≤ n m` is *"`n ≥ 2k`"*. **Those two are the whole hypothesis list, and
+they are print's own.** Nothing of the atlas's is assumed here.
 
 Print's two named families, `k = ⌈m^α⌉` with `α ∈ (0,1)` and `k = ⌈log m⌉`, are
-instances of this universal rather than the whole of it. Print says the question
-is open *"even at `k = ⌈log m⌉`"*, so a negative answer at some other admissible
-growth law would not settle those instances.
+instances of this universal rather than the whole of it. The source described the
+question as open *"even at `k = ⌈log m⌉`"*; the proved candidate answers those
+instances as well.
 
-**`k m < m` is print's unwritten domain for `k`, not an atlas hypothesis.** Print
+**Why `k m < m` is a guard on the conclusion and not a hypothesis here.** Print
 says what `k` *tends to* and never says what it ranges over, and two of its own
-phrases presuppose the answer: *"`k`-sparse codes `xᵢ ∈ ℝᵐ`"* is no condition at
-all once `m ≤ k`, and *"the spark condition of order `k`"* — every set of at most
-`2k` columns independent — is a condition on a dictionary in `U_{n,m}`, where §2
-of the agenda places superposition at `m > n`, so `2k ≤ n < m` already. Reading
-the domain as eventually `k m < m` is therefore of the same kind as reading the
-`m`-quantifier at `Filter.atTop`, and it is recorded the same way: the wider
-reading is `maisO38_unboundedSparsityReading`, it is **false**, and
-`not_maisO38_unboundedSparsityReading` proves it. The condition is *eventual*
-rather than at every `m` because print's own `k = ⌈m^α⌉` has `k 1 = 1 = m`, so a
-demand at every `m` would exclude a family print names. -/
+phrases presuppose `k m < m`: *"`k`-sparse codes `xᵢ ∈ ℝᵐ`"* is no condition at all
+once `m ≤ k`, and *"the spark condition of order `k`"* — every set of at most `2k`
+columns independent — is a condition on a dictionary in `U_{n,m}`, where §2 of the
+agenda places superposition at `m > n`, so `2k ≤ n < m` already. An earlier version
+of this row carried that reading as a *premise*, `∀ᶠ m in atTop, k m < m`, which
+narrowed a source claim by an atlas-supplied hypothesis. Stated as a guard it
+narrows nothing: the row now asserts a design at every `m` where the printed
+sentence has content, under print's hypotheses alone. The wider reading, in which
+`k`'s domain is left unbounded, is `maisO38_unboundedSparsityReading`; it is
+**false**, and `not_maisO38_unboundedSparsityReading` proves it.
+
+**`k(m) → ∞` is retained and unused.** The proof never needs it — once
+non-degeneracy is pointwise, the asymptotic hypothesis has nothing left to do. It
+stays because print writes it, and dropping a printed hypothesis is the mirror of
+weakening a conclusion. That it is unused is a finding about `prob:samples`, and it
+belongs in this docstring rather than in the statement. -/
 @[expose] public noncomputable def maisO38_polynomialSamplesSuffice : Prop :=
   ∀ k n : ℕ → ℕ, Filter.Tendsto k Filter.atTop Filter.atTop →
-    (∀ m, 2 * k m ≤ n m) → (∀ᶠ m in Filter.atTop, k m < m) →
-      O38PolynomialSampleAnswer k n
+    (∀ m, 2 * k m ≤ n m) → O38AnswerAtEveryNondegenerate k n
 
 /--
 **MAIS-O38 with `k` unbounded by the number of features**, the reading in which
@@ -238,18 +287,15 @@ condition of order `k`, the dataset `{Ax₁, …, Ax_N}` is uniquely coded."*
 
 **Defining this asserts nothing.** It is not proved here, and no grade in this
 repository depends on it being true. What it is for is
-`maisO38_polynomialSamplesSuffice_of_candidate`, which discharges the one
-question a reader of the issue should ask before spending any effort on it: does
-this claim, if correct, actually answer the row?
+the bridges in the examples modules, which discharge the question a reader of
+the issue should ask: does this claim, if correct, actually answer the row?
 
-Two places where the candidate is **stronger** than
-`maisO38_polynomialSamplesSuffice` needs, both of them print's quantifier order
-rather than the issue's. Print fixes `k` and `n` before asking for codes, so the
-codes may depend on `n`; the candidate's depend only on `m` and `k`, and it
-supplies one list good at every `n ≥ 2k` at once. And print asks only for a
-design at sufficiently large `m`, where the candidate delivers one at every
-`m ≥ 2`. Neither difference is repaired away: the `Prop` below is the issue's own
-statement, and the implication absorbs the slack. -/
+The candidate is stronger than the graded claim in one independent direction.
+Print fixes `k` and `n` before asking for codes, so the codes may depend on `n`;
+the candidate's depend only on `m` and `k`, and one list works at every
+`n ≥ 2k` at once. Its guarded `m`-scope is exactly the one exposed by
+`O38AnswerAtEveryNondegenerate`. The `Prop` below is the issue's own statement;
+the bridge preserves that pointwise strength. -/
 @[expose] public noncomputable def o38PolynomialSampleCandidate : Prop :=
   ∀ m k : ℕ, 2 ≤ m → 1 ≤ k → k < m →
     ∃ x : Fin (m ^ 3 + 2 * m) → (Fin m → ℝ),
@@ -264,8 +310,9 @@ quantifier print leaves unwritten.
 
 This is **false** — `not_maisO38_everyDimensionReading` — and the refutation is a
 statement about `m = 1` and not an answer to `prob:samples`. It is carried so
-that the choice of `Filter.atTop` in `O38PolynomialSampleAnswer` is a recorded
-finding about the printed sentence rather than an unexplained preference. -/
+that the non-degeneracy guards in `O38AnswerAtEveryNondegenerate` are a recorded
+finding about the printed sentence rather than an unexplained preference: this is
+the statement obtained by dropping them, and it is false. -/
 @[expose] public noncomputable def maisO38_everyDimensionReading : Prop :=
   ∀ k n : ℕ → ℕ, Filter.Tendsto k Filter.atTop Filter.atTop →
     (∀ m, 2 * k m ≤ n m) →
@@ -288,8 +335,9 @@ public theorem isKSparse_of_card_le {k m : ℕ} (h : m ≤ k) (v : Fin m → ℝ
     (by simp [Set.ncard_univ])) h
 
 /-- Print's own hypothesis `k(m) → ∞` already rules out the zero-sparsity
-degeneracy at large `m`, which is why `O38PolynomialSampleAnswer` needs no
-condition on `k` of the atlas's own. -/
+degeneracy at large `m`. The graded row does not rely on this — its guard is
+pointwise — but it records that print's text alone excludes the degeneracy
+eventually, so the guard withholds nothing print was counting on. -/
 public theorem eventually_one_le_sparsity {k : ℕ → ℕ}
     (hk : Filter.Tendsto k Filter.atTop Filter.atTop) : ∀ᶠ m in Filter.atTop, 1 ≤ k m :=
   hk.eventually_ge_atTop 1

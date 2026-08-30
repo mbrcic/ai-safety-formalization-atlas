@@ -25,10 +25,10 @@ would have had a negative answer for that reason rather than for its own.
 **Zero sparsity is dead.** `not_uniquelyCoded_of_sparsity_zero` proves that at
 `k = 0` no design of any size works, at any nonzero dictionary, and
 `not_genericallyUniquelyCoding_of_sparsity_zero` carries that to print's *almost
-every* quantifier. This is why `maisO38_polynomialSamplesSuffice` reads print's
-unwritten quantifier over `m` at `Filter.atTop`: print's own `k(m) → ∞` then
-excludes the case, and no atlas-supplied condition on `k` is needed. The
-statement module's `eventually_one_le_sparsity` is that step.
+every* quantifier. This is why the graded answer guards its conclusion with
+`1 ≤ k m`: an unguarded every-`m` demand would fail at a small degenerate point.
+Guarding is what lets the row keep print's hypothesis list intact while still
+asking for a design at every `m` the question is about.
 
 **The every-`m` reading is false.** `not_maisO38_everyDimensionReading` refutes
 `maisO38_everyDimensionReading` outright. This is emphatically *not* an answer to
@@ -50,12 +50,12 @@ content: at `k = m` nothing in `ℝᵐ` is constrained and a single transvection
 does all the work. `rows_gt_cols_of_full_sparsity_spark` shows print's own
 `n ≥ 2k` then forces `m < n` — an undercomplete dictionary, where agenda A3's
 subject is `m > n`. Print's named families `k = ⌈m^α⌉` and `k = ⌈log m⌉` are
-both `o(m)`, so nothing here touches the question print asks; print says it is
-open *"even at `k = ⌈log m⌉`"* and it stays open. MAIS issue #30 states its
-claim for `1 ≤ k < m`, which is the same domain read here — and on that domain
-its theorem is true, which is what resolves the row. So the graded
-`maisO38_polynomialSamplesSuffice` carries that domain and is **proved**, and
-this refutation is carried beside it to make the reading a finding rather than a
+both `o(m)`, so this refutation does not touch the question print asks. MAIS
+issue #30 states its claim for `1 ≤ k < m`, which is the same pointwise domain
+read here — and on that domain its theorem is true, which is what resolves the
+row. So the graded `maisO38_polynomialSamplesSuffice` carries that domain as a
+guard on its conclusion rather than as a hypothesis, and is **proved**; this
+refutation is carried beside it to make the reading a finding rather than a
 preference. `exists_admissibleGrowthLaw` checks the narrowed universal is not
 empty, so the row is not true by vacuity of its antecedent.
 
@@ -335,28 +335,27 @@ public theorem genericallyUniquelyCoding_two (n : ℕ) :
       ≤ ({i} : Set (Fin 2)).ncard := Set.ncard_le_ncard hsub (Set.toFinite _)
     _ = 1 := Set.ncard_singleton i
 
-/-! ## The submitted candidate would answer the row -/
+/-! ## What the submitted candidate answers -/
 
 /--
-**If MAIS issue #30's theorem is correct, CONJ-025 is resolved affirmatively.**
+**MAIS issue #30's theorem answers the printed question.**
 
-Nothing here checks the candidate. This discharges the prior question — whether
-the claim, if true, is even about this row — and the answer is yes, with slack in
-the atlas's favour on two axes. The candidate fixes its codes before `n` where
-print allows them to depend on it, and delivers a design at every `m ≥ 2` where
-`O38PolynomialSampleAnswer` asks only for sufficiently large `m`; the proof
-spends both.
+Nothing here checks the candidate — it is taken as a hypothesis, and this states
+only that it is *enough*. What the row needs is exactly what the issue claims,
+one growth law at a time: at each `m` with `1 ≤ k m < m`, a design of
+`(k m)`-sparse codes generically coding at `n m` rows.
 
-The polynomial witness is `X³ + 2X`, which `O38PolynomialSampleAnswer` requires to
-dominate `N` at **every** `m`, not merely eventually. It does so with equality,
-so the candidate's bound is exactly a polynomial bound in print's sense. -/
+The candidate is in two ways stronger than this needs, both of them print's
+quantifier order rather than the issue's: its codes depend only on `m` and `k`
+where print fixes `n` first and so permits dependence on it, and it supplies one
+list good at every `n ≥ 2k` at once. The implication absorbs that slack; it is
+not repaired away. -/
 public theorem maisO38_polynomialSamplesSuffice_of_candidate
     (h : o38PolynomialSampleCandidate) : maisO38_polynomialSamplesSuffice := by
-  intro k n hk hn hlt
+  intro k n _ hn
   refine ⟨fun m => m ^ 3 + 2 * m, Polynomial.X ^ 3 + 2 * Polynomial.X, fun m => by simp, ?_⟩
-  filter_upwards [hlt, eventually_one_le_sparsity hk, Filter.eventually_ge_atTop 2]
-    with m hlt' hone htwo
-  obtain ⟨x, hsparse, hae⟩ := h m (k m) htwo hone hlt'
+  intro m hone hlt
+  obtain ⟨x, hsparse, hae⟩ := h m (k m) (by omega) hone hlt
   exact ⟨x, hsparse, hae (n m) (hn m)⟩
 
 /-! ## The spark-condition set is not null, and the printed question is false -/
@@ -492,9 +491,9 @@ whole of it. By `rows_gt_cols_of_full_sparsity_spark` print's own `n ≥ 2k` the
 forces `m < n`, an undercomplete dictionary, where agenda A3's subject is the
 regime `m > n`. And print's two named families `k = ⌈m^α⌉` and `k = ⌈log m⌉` are
 both `o(m)`, so neither is touched; print says the question is open *"even at
-`k = ⌈log m⌉`"*, and it stays open there. Nor does this bear on MAIS issue #30,
-whose claim is stated for `1 ≤ k < m` and so never reaches this growth law —
-that reading of the domain is the same one taken here.
+`k = ⌈log m⌉`"*, so neither is refuted by this witness. Nor does the witness
+bear on MAIS issue #30, whose claim is stated for `1 ≤ k < m` and so never
+reaches this growth law; that candidate instead resolves the guarded domain.
 
 **No conflict with the bounds print quotes.** At `k = m` the classical counts
 print names — `(k+1)·binom(m,k)`, `k·binom(m,k)²`, `m(k-1)·binom(m,k)+m` —

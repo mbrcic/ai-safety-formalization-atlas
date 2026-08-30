@@ -41,9 +41,13 @@ undocumented decision and the retired `CONJ-` numbers are never reused. Five
 rows are resolved and each says which printed clause it covers -- a resolved row
 that answers one clause of three is not a resolved printed problem.
 
-CONJ-025 is the exception and the newest: **MAIS-O38 is true**, at print's own
-quantifier, proved by
-`Examples.Conjectures.MAIS.maisO38_polynomialSamplesSuffice_holds`. The
+CONJ-025 is the exception and the newest: **MAIS-O38 is true**, under print's own
+two hypotheses and at every `m` where the printed sentence has content — every
+`m` with `1 ≤ k(m) < m`, not merely on a tail — proved by
+`Examples.Conjectures.MAIS.maisO38_polynomialSamplesSuffice_holds`. Two weaker
+forms of this row were published first and are gone: one asked for designs only
+eventually, and one guarded the conclusion but still assumed an atlas-supplied
+premise print does not write. The
 construction and the argument are MAIS issue [#30](https://github.com/lionellevine/MAIS/issues/30)'s, submitted by 26david26 and
 stated there to have been produced and checked entirely by AI systems with no
 human verification; the atlas supplied the transcription, the machine-check, and

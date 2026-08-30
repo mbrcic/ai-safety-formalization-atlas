@@ -14,11 +14,11 @@ different statement. Every fidelity defect this repository has shipped and later
 fixed was of exactly that kind, and every one compiled.
 
 So this hashes the *signature* — everything from the declaration keyword up to
-the `:=` that starts the proof — of each declaration the ledger grades, and
-compares it against `docs/status/statement-lock.json`. A difference is not a
-failure. It is a question: *did fidelity move, and in which direction?* Answer it
-in the change that causes it, re-grade the row if the answer is yes, and run
-`--write` to record the new statement.
+the `:=` that starts the proof — of each declaration the registry or conjecture
+ledger grades, and compares it against `docs/status/statement-lock.json`. A
+difference is not a failure. It is a question: *did fidelity move, and in which
+direction?* Answer it in the change that causes it, re-grade the row if the
+answer is yes, and run `--write` to record the new statement.
 
 **Deliberately crude.** It compares source text, not elaborated types, so
 reformatting a signature or renaming a bound variable reports a change that is
@@ -45,6 +45,8 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 BY_ID = ROOT / "docs" / "agent" / "by-id.json"
+CONJECTURES = ROOT / "conjectures.yaml"
+DECLARATION_INDEX = ROOT / "docs" / "status" / "declaration-index.json"
 LOCK = ROOT / "docs" / "status" / "statement-lock.json"
 
 DECLARATION_KEYWORDS = (
@@ -83,6 +85,66 @@ def signature(text: str, line: int) -> str | None:
     return re.sub(r"\s+", " ", body).strip() or None
 
 
+def declaration_line(text: str, name: str) -> int | None:
+    """Locate an unqualified declaration in its defining module."""
+    without_blocks = BLOCK_COMMENT.sub(
+        lambda match: "\n" * match.group().count("\n"), text)
+    tail = re.escape(name.rsplit(".", 1)[-1])
+    keywords = "|".join(DECLARATION_KEYWORDS)
+    pattern = re.compile(
+        rf"\b(?:{keywords})\s+{tail}(?=\s|[:({{]|$)")
+    matches = [
+        number
+        for number, raw in enumerate(without_blocks.split("\n"), start=1)
+        if pattern.search(LINE_COMMENT.sub("", raw))
+    ]
+    return matches[0] if len(matches) == 1 else None
+
+
+def conjecture_declarations() -> list[tuple[str, str, int]]:
+    """Resolve graded conjecture declarations omitted from registry by-id."""
+    if not CONJECTURES.is_file() or not DECLARATION_INDEX.is_file():
+        missing = [
+            path.relative_to(ROOT).as_posix()
+            for path in (CONJECTURES, DECLARATION_INDEX)
+            if not path.is_file()
+        ]
+        raise RuntimeError(f"missing conjecture input: {', '.join(missing)}")
+
+    rows = json.loads(CONJECTURES.read_text())["conjectures"]
+    declarations = json.loads(DECLARATION_INDEX.read_text())["declarations"]
+    indexed_modules = {
+        declaration["name"]: declaration["module"]
+        for declaration in declarations
+        if declaration.get("name") and declaration.get("module")
+    }
+    resolved: list[tuple[str, str, int]] = []
+    unresolved: list[str] = []
+    for row in rows:
+        name = row.get("lean")
+        if not name or not row.get("source_fidelity"):
+            continue
+        module = indexed_modules.get(name) or row.get("lean_module")
+        if not module:
+            unresolved.append(name)
+            continue
+        path = module.replace(".", "/") + ".lean"
+        source = ROOT / path
+        if not source.is_file():
+            unresolved.append(name)
+            continue
+        line = declaration_line(source.read_text(encoding="utf-8"), name)
+        if line is None:
+            unresolved.append(name)
+            continue
+        resolved.append((name, path, line))
+    if unresolved:
+        raise RuntimeError(
+            "could not resolve graded conjecture declaration(s): "
+            + ", ".join(unresolved))
+    return resolved
+
+
 def current() -> dict[str, dict[str, str]]:
     """Signature hashes for every ledger declaration with a definition site."""
     index = json.loads(BY_ID.read_text())
@@ -105,6 +167,16 @@ def current() -> dict[str, dict[str, str]]:
                 "file": path,
                 "sha256": hashlib.sha256(statement.encode()).hexdigest()[:16],
             }
+    for name, path, line in conjecture_declarations():
+        if path not in sources:
+            sources[path] = (ROOT / path).read_text(encoding="utf-8")
+        statement = signature(sources[path], line)
+        if statement is None:
+            raise RuntimeError(f"could not extract signature for {name}")
+        out[name] = {
+            "file": path,
+            "sha256": hashlib.sha256(statement.encode()).hexdigest()[:16],
+        }
     return out
 
 
@@ -117,7 +189,11 @@ def main() -> int:
     if not BY_ID.is_file():
         print(f"check_statement_freeze: missing {BY_ID}", file=sys.stderr)
         return 1
-    now = current()
+    try:
+        now = current()
+    except (KeyError, OSError, RuntimeError, json.JSONDecodeError) as error:
+        print(f"check_statement_freeze: {error}", file=sys.stderr)
+        return 1
     if not now:
         print("check_statement_freeze: no ledger declaration resolved to a "
               "signature — by-id.json or the tree moved under this script",

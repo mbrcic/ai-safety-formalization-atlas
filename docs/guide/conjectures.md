@@ -137,7 +137,8 @@ which clause it covers. MAIS-O29 has three clauses and CONJ-008 answers (a);
 MAIS-O34 has two and CONJ-005 and CONJ-009 together answer part of (a).
 
 **CONJ-025 is the exception, and it is worth stating plainly.** MAIS-O38 has one
-clause and no sub-parts, and it is now **true** at print's own quantifier —
+clause and no sub-parts, and it is now **true** at every non-degenerate `m` while
+retaining print's growth hypotheses —
 `Examples.Conjectures.MAIS.maisO38_polynomialSamplesSuffice_holds`. The
 construction and the argument are MAIS [issue #30](https://github.com/lionellevine/MAIS/issues/30)'s,
 submitted by 26david26 and stated there to have been produced and checked
