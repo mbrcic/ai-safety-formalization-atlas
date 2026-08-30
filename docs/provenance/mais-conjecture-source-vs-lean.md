@@ -25,7 +25,7 @@ checked out at the pinned commit with a clean tree — `MAIS-A2.tex`,
 fetched `agendas/A3/MAIS-A3.tex` and `open-problems/MAIS-O38.md` at the pinned
 commit and diffed them against `main`: identical, so the pin and the branch are
 not on different problems. It also re-fetched the three 2026-08-20 issue bodies,
-which still match, and read MAIS issue #30 for the first time. Everything else
+which still match, and read MAIS issue [#30](https://github.com/lionellevine/MAIS/issues/30) for the first time. Everything else
 below was left as read on 2026-08-23 and was **not** re-derived; issue bodies are
 served by the GitHub API rather than carried in the tree, so a silent edit
 between readings would not have been caught.
@@ -35,11 +35,11 @@ between readings would not have been caught.
 | MAIS repository | `github.com/lionellevine/MAIS` |
 | MAIS commit | `9dd29f8bf5ccd1e7701e300039b09ed4096b6516` |
 | `agendas/A2/MAIS-A2.tex` | sha256 `d61be3eed51f618dd3b9389693b14e066e89a9cef5e89985b4226fff658c3c4f` — recomputed 2026-08-23, matches pin |
-| MAIS issue #4 body | sha256 `f425da83395b457feb5615c9beed703675a977967890ebe1b97dd61efdd0b328` — recorded 2026-08-20, re-fetched 2026-08-27, matches |
-| MAIS issue #4 author comment | sha256 `e290bb83bd980cc9a9b8a3610e21ec6e26a0aa5c3d2e036db10b2610d909bca8` — as recorded 2026-08-20, not recomputed; a rendering note only, not part of the mathematical candidate |
-| MAIS issue #8 body | sha256 `8e2e688eaac1a72f915aa787ad1e74676e6b72eff4f2796394e95b0a83fb8a96` — recorded 2026-08-20, re-fetched 2026-08-27, matches |
+| MAIS issue [#4](https://github.com/lionellevine/MAIS/issues/4) body | sha256 `f425da83395b457feb5615c9beed703675a977967890ebe1b97dd61efdd0b328` — recorded 2026-08-20, re-fetched 2026-08-27, matches |
+| MAIS issue [#4](https://github.com/lionellevine/MAIS/issues/4) author comment | sha256 `e290bb83bd980cc9a9b8a3610e21ec6e26a0aa5c3d2e036db10b2610d909bca8` — as recorded 2026-08-20, not recomputed; a rendering note only, not part of the mathematical candidate |
+| MAIS issue [#8](https://github.com/lionellevine/MAIS/issues/8) body | sha256 `8e2e688eaac1a72f915aa787ad1e74676e6b72eff4f2796394e95b0a83fb8a96` — recorded 2026-08-20, re-fetched 2026-08-27, matches |
 | `agendas/A3/MAIS-A3.tex` | sha256 `146f0cc95a0a5eb0cf3b2660c32d591169b0e346571b80ee63723a9906371387` — fetched 2026-08-27, the statement source for CONJ-025 |
-| MAIS issue #30 body | sha256 `6e2db10eb10242c075ca331fcf87a604511b9b31df3d55a5c4b0d2d2d95d05ab` — read 2026-08-27; context for CONJ-025, not its graded artifact |
+| MAIS issue [#30](https://github.com/lionellevine/MAIS/issues/30) body | sha256 `6e2db10eb10242c075ca331fcf87a604511b9b31df3d55a5c4b0d2d2d95d05ab` — read 2026-08-27; context for CONJ-025, not its graded artifact |
 | atlas commit the Lean was read from | the tip of the branch this file is part of; the reproducible pin is the toolchain and build evidence below, not a hash this file could state about itself |
 | toolchain | `leanprover/lean4:v4.31.0`, Mathlib `fabf563a7c95a166b8d7b6efca11c8b4dc9d911f` |
 | build evidence, measured at that commit | root `lake build` 3331 jobs, `scripts/lean_build_targets.txt` 4004 jobs; `check_print_axioms` 2495 declarations ⊆ `{propext, Classical.choice, Quot.sound}` |
@@ -96,7 +96,7 @@ on both sides and no *conjecture* row; it has one target row per clause since
 **Issue bodies are editable in place** and carry no revision history a permalink
 can address. The hashes above are the bytes as read on the dates each row states;
 an edit by their authors changes the hash and invalidates whatever rests on it,
-which is the point of recording them. Only #4 and #8 carry a *grade*: #30 is
+which is the point of recording them. Only [#4](https://github.com/lionellevine/MAIS/issues/4) and [#8](https://github.com/lionellevine/MAIS/issues/8) carry a *grade*: [#30](https://github.com/lionellevine/MAIS/issues/30) is
 context for CONJ-025 and an edit to it invalidates a provenance note rather than
 a verdict.
 
@@ -140,9 +140,9 @@ their place.
 | CONJ-006 | agenda `prob:exact` | MAIS-O25 | OPEN | `Same` | `Selected` |
 | CONJ-003 | agenda `conj:exact` | MAIS-O26 | OPEN | `Same` | `Literal` |
 | CONJ-008 | agenda `prob:boltzmann` | MAIS-O29 | RESOLVED | `Same` | `Selected` |
-| CONJ-010 | **issue #8** | MAIS-O31 | OPEN | `Same` | `Literal` |
+| CONJ-010 | **issue [#8](https://github.com/lionellevine/MAIS/issues/8)** | MAIS-O31 | OPEN | `Same` | `Literal` |
 | CONJ-005 | agenda `prob:starter-set` | MAIS-O34 | RESOLVED | `Same` | `Selected` |
-| CONJ-009 | **issue #4** | MAIS-O34 | RESOLVED | `Same` | `Literal` |
+| CONJ-009 | **issue [#4](https://github.com/lionellevine/MAIS/issues/4)** | MAIS-O34 | RESOLVED | `Same` | `Literal` |
 | CONJ-025 | agenda `prob:samples` (**A3**) | MAIS-O38 | RESOLVED | `Same` | `Selected` |
 
 ---
@@ -525,7 +525,7 @@ source's real chart.
 
 # CONJ-010 — MAIS-O31
 
-**Graded against MAIS issue #8**, not the agenda. Status **OPEN**, scope `Same`,
+**Graded against MAIS issue [#8](https://github.com/lionellevine/MAIS/issues/8)**, not the agenda. Status **OPEN**, scope `Same`,
 fidelity `Literal`.
 
 ### The setting — agenda `q:chain` (context, *not* the graded artifact)
@@ -552,7 +552,7 @@ characterize-question, which no truth-valued `Prop` is the same statement as.
 That is why it sits in `context_source_ref` and the graded artifact is the
 issue.
 
-### Source, verbatim — MAIS issue #8, "Claim" section
+### Source, verbatim — MAIS issue [#8](https://github.com/lionellevine/MAIS/issues/8), "Claim" section
 
 > Write the downstream transfer from $P(C_j=1)=x$ to $P(C_1=1)$ as $T(x)=A+Bx$,
 > let $r=P(C_j=1)$, and let $t\in(0,1)$ be the utility decision threshold.
@@ -660,7 +660,7 @@ of `C₁`. `o31BoxSet_volume` computes an explicit open box's Lebesgue measure a
 at every point of that box in the three-parameter two-node chart: a model and its
 mate are both margin-valid,
 share the transfer map, share an optimal policy under every real mixture, and
-disagree on the marginal of `C₁`. That is consistent with issue #8's same-side
+disagree on the marginal of `C₁`. That is consistent with issue [#8](https://github.com/lionellevine/MAIS/issues/8)'s same-side
 branch rather than in tension with it — the issue classifies literal *table
 coordinates*, and the marginal of `C₁` is not one of the `2(m−1)+1` of them.
 
@@ -717,7 +717,7 @@ is a determine-problem; **this row is the second half only**, *"in particular
 decide whether margin `λ > 0` alone suffices"*, answered negatively. The
 `resolution` field says so verbatim: *"COVERAGE: THIS ROW IS THE
 MARGIN-SUFFICIENCY SUBQUESTION OF prob:starter-set(a) ONLY."* The first half is
-CONJ-009's, graded against issue #4. Part (b) is covered by neither.
+CONJ-009's, graded against issue [#4](https://github.com/lionellevine/MAIS/issues/4). Part (b) is covered by neither.
 
 **`HasGraphEdge` on both models is not a narrowing.** It is what makes the
 witness answer the question print asks: two edgeless models colliding would not
@@ -733,10 +733,10 @@ two models of *opposite* one-edge orientation, on the source's real chart.
 
 # CONJ-009 — MAIS-O34 part (a), the singleton criterion
 
-**Graded against MAIS issue #4**, not the agenda. Status **RESOLVED**, scope
+**Graded against MAIS issue [#4](https://github.com/lionellevine/MAIS/issues/4)**, not the agenda. Status **RESOLVED**, scope
 `Same`, fidelity `Literal`.
 
-### Source, verbatim — MAIS issue #4, "Result" section
+### Source, verbatim — MAIS issue [#4](https://github.com/lionellevine/MAIS/issues/4), "Result" section
 
 > Let $g=(g_{xy})$ be the known utility-gap table, let
 > $d_x=g_{x1}-g_{x0}$, $e_y=g_{1y}-g_{0y}$, and let
@@ -768,7 +768,7 @@ two models of *opposite* one-edge orientation, on the source's real chart.
 For every real utility-gap table `g` indexed by the two binary configurations,
 every margin `λ`, and every two-variable pair model `M`: *if* `g` is a valid gap
 table at `λ` and `M` is margin-valid at `λ`, *then* the global sixteen-coordinate
-behavioural fibre of `M` is a singleton **if and only if** the criterion issue #4
+behavioural fibre of `M` is a singleton **if and only if** the criterion issue [#4](https://github.com/lionellevine/MAIS/issues/4)
 states holds of `(g, λ, M)`.
 
 ### The delta
@@ -783,7 +783,7 @@ sixteen profiles rather than only from the two that read coordinates.
 
 **The graded artifact is the issue, not the agenda.** `prob:starter-set`(a)'s
 first half reads *"Determine … an explicit semialgebraic condition"*, which no
-truth-valued `Prop` is the same statement as. Issue #4 supplies a candidate
+truth-valued `Prop` is the same statement as. Issue [#4](https://github.com/lionellevine/MAIS/issues/4) supplies a candidate
 condition, and grading the row `Same` against *that* is what makes the verdict
 falsifiable. The agenda sits in `context_source_ref` as the setting.
 
@@ -801,7 +801,7 @@ source's real two-variable chart.
 Graded against **agenda A3**'s `prob:samples`. Status **RESOLVED**,
 affirmatively, scope `Same`, fidelity `Selected`. The only row here whose source
 is not MAIS-A2, and the only one with no causal content. The construction and
-proof are MAIS issue #30's, not the atlas's; the atlas transcribed and
+proof are MAIS issue [#30](https://github.com/lionellevine/MAIS/issues/30)'s, not the atlas's; the atlas transcribed and
 machine-checked them.
 
 ### Source, verbatim
@@ -926,7 +926,7 @@ one-sparse coordinate probes meeting print's demand at `m = 2`, `k = 1`, for eve
 ambient `n`, and pointwise rather than almost everywhere.
 
 **No candidate is graded here.** Unlike CONJ-009 and CONJ-010, whose graded
-artifact is a submitted issue, this row grades against the agenda. MAIS issue #30
+artifact is a submitted issue, this row grades against the agenda. MAIS issue [#30](https://github.com/lionellevine/MAIS/issues/30)
 submits a candidate solution; it is `context_source_ref`, its construction is not
 transcribed, and its only influence is recorded in
 [`mais-o38-transcription.md`](mais-o38-transcription.md).
@@ -973,7 +973,7 @@ target is nonetheless fully encoded: `Causal.O24Solution` bundles all three
 conclusions with the size and construction-time clauses, and
 `docs/provenance/mais-o24-statability.md` records it clause by clause. The route
 that could produce a row is the one CONJ-009 and CONJ-010 already take — grade
-against a submitted candidate rather than against the agenda — and MAIS issue #7
+against a submitted candidate rather than against the agenda — and MAIS issue [#7](https://github.com/lionellevine/MAIS/issues/7)
 is such a candidate, claiming conclusions (a) and (c) cannot both hold. Opening
 that route needs a `registry.yaml` source entry, and the candidate's own
 argument is unverified here past its collision step, so it is a proposal and not

@@ -107,7 +107,7 @@ through a "resolved" count will otherwise read the constructions as its own.
 |---|---|---|---|
 | CONJ-004 | MAIS-O23 | MAIS [issue #6](https://github.com/lionellevine/MAIS/issues/6), Svyatoslav Novikov (kumino) | transcription, transport of the rational witness to the real chart, machine-check |
 | CONJ-005 | MAIS-O34(a), margin clause | the same two-variable construction, MAIS issues [#4](https://github.com/lionellevine/MAIS/issues/4)/[#6](https://github.com/lionellevine/MAIS/issues/6) | transcription, real-chart transport, machine-check |
-| CONJ-008 | MAIS-O29(a) | issue #6's collision pair again | the transfer step — that the pair is also a Boltzmann collision at every positive inverse temperature — and its proof |
+| CONJ-008 | MAIS-O29(a) | issue [#6](https://github.com/lionellevine/MAIS/issues/6)'s collision pair again | the transfer step — that the pair is also a Boltzmann collision at every positive inverse temperature — and its proof |
 | CONJ-009 | MAIS-O34(a), fibre criterion | Rob Sneiderman (Robby955), MAIS [issue #4](https://github.com/lionellevine/MAIS/issues/4) | both directions of the equivalence, the non-vacuity witnesses on each side, the restatement against the printed class, and the semialgebraicity of the criterion |
 | CONJ-010 | MAIS-O31 | Svyatoslav Novikov (kumino) with OpenAI Codex, MAIS [issue #8](https://github.com/lionellevine/MAIS/issues/8) | transcription only; the row is `OPEN` |
 | CONJ-025 | MAIS-O38 | David Holmes (26david26) with GPT 5.6 Sol, MAIS [issue #30](https://github.com/lionellevine/MAIS/issues/30) | transcription and the machine-check, together with four domain-neutral facts Mathlib lacked that the proof needs |

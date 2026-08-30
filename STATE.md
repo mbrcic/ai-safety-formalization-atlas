@@ -26,7 +26,7 @@ graded candidate answers in `AISafetyAtlas.Conjectures.MAIS`, four are
 determine-problem specifications over a candidate answer, and seven record a
 printed problem the atlas cannot state at all. Six of the eight take agenda
 clauses as their graded source and two grade candidate statements
-submitted to MAIS issues #4 and #8. Five are resolved and three remain open. An open
+submitted to MAIS issues [#4](https://github.com/lionellevine/MAIS/issues/4) and [#8](https://github.com/lionellevine/MAIS/issues/8). Five are resolved and three remain open. An open
 conjecture asserts nothing: it is a compiling statement with no proof, and the
 ledger records for each one what would refute it. The settled rows are the
 exception, and each names the theorem that settled it. Rows graded against a
@@ -44,7 +44,7 @@ that answers one clause of three is not a resolved printed problem.
 CONJ-025 is the exception and the newest: **MAIS-O38 is true**, at print's own
 quantifier, proved by
 `Examples.Conjectures.MAIS.maisO38_polynomialSamplesSuffice_holds`. The
-construction and the argument are MAIS issue #30's, submitted by 26david26 and
+construction and the argument are MAIS issue [#30](https://github.com/lionellevine/MAIS/issues/30)'s, submitted by 26david26 and
 stated there to have been produced and checked entirely by AI systems with no
 human verification; the atlas supplied the transcription, the machine-check, and
 four domain-neutral facts Mathlib lacks that the proof needs -- polynomial

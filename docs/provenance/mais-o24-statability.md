@@ -277,10 +277,10 @@ permanent.
 
 **The pinned source itself flags this and the atlas had not engaged it.** At the
 pinned revision, `open-problems/MAIS-O24.md` carries the status line *"open;
-full solution pending review (issue #7)"*. The bytes this note grades against
+full solution pending review (issue [#7](https://github.com/lionellevine/MAIS/issues/7))"*. The bytes this note grades against
 therefore name a candidate resolution, and nothing in the atlas cited it until
 2026-08-22. Four of the five A2 problems the atlas tracks carry such a pointer
-at the pin — O23 to issue #6, O31 to issue #8, O34 to issue #4, all three
+at the pin — O23 to issue [#6](https://github.com/lionellevine/MAIS/issues/6), O31 to issue [#8](https://github.com/lionellevine/MAIS/issues/8), O34 to issue [#4](https://github.com/lionellevine/MAIS/issues/4), all three
 already engaged — so O24 was the outlier rather than a new genre.
 
 **What the candidate claims.** No finite polynomial lists satisfy conclusions

@@ -15,7 +15,7 @@ below for why that refutation is a warning and not an answer.
 Then **`prob:samples` was answered affirmatively.** CONJ-025 is `RESOLVED`.
 `AISafetyAtlas.Examples.Conjectures.MAIS.maisO38_polynomialSamplesSuffice_holds`
 proves the transcribed `Prop`, by way of the candidate submitted as MAIS issue
-#30. **The construction and the argument are the issue's, not the atlas's**; what
+[#30](https://github.com/lionellevine/MAIS/issues/30). **The construction and the argument are the issue's, not the atlas's**; what
 the atlas contributed is the transcription, the machine-check, and four
 domain-neutral facts Mathlib does not carry that the proof needs. The issue said
 it had been produced and checked entirely by AI systems with no human
@@ -250,7 +250,7 @@ wider reading is `maisO38_unboundedSparsityReading`, it is false, and
 `not_maisO38_unboundedSparsityReading` proves it. This is the same move, and the
 same justification, as reading the `m`-quantifier at `Filter.atTop` in
 Interpretive choice 1. `exists_admissibleGrowthLaw` checks the narrowing did not
-empty the universal, and MAIS issue #30 reads the domain as `1 ≤ k < m`
+empty the universal, and MAIS issue [#30](https://github.com/lionellevine/MAIS/issues/30) reads the domain as `1 ≤ k < m`
 independently.
 
 **No conflict with the bounds print quotes.** At `k = m` the classical counts

@@ -1,7 +1,7 @@
 # MAIS-A2 causal layer — source concordance
 
 This note separates the peer-reviewed ingredients from the A2 composite and
-from the issue-#6 construction. It covers `AISafetyAtlas.Causal.Model`,
+from the issue-[#6](https://github.com/lionellevine/MAIS/issues/6) construction. It covers `AISafetyAtlas.Causal.Model`,
 `MarginClass`, `Decision`, and their two worked examples.
 
 Statement-by-statement status for the A2 targets is recorded with the
@@ -106,7 +106,7 @@ is why the boundary it names still holds here.
 
 ## 4. Binary collision witness
 
-MAIS issue #6 supplies the construction, not the primitives: `C={X,Y}`,
+MAIS issue [#6](https://github.com/lionellevine/MAIS/issues/6) supplies the construction, not the primitives: `C={X,Y}`,
 `O=∅`, `Z={X,Y}`, `λ=1/10`, and
 `g(x,y)=1/2-1_{(x,y)=(1,1)}`. The edgeless, `X→Y`, and `Y→X` tables are stored
 as full Bernoulli simplexes over `Fin 2`.

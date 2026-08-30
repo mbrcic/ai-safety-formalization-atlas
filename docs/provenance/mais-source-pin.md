@@ -100,7 +100,7 @@ hash and invalidates the grading that rests on it — which is the point.
 | [#8](https://github.com/lionellevine/MAIS/issues/8) | MAIS-O31: candidate complete solution — generic chamber classification for one intervention in a binary chain | kumino | `8e2e688eaac1a72f915aa787ad1e74676e6b72eff4f2796394e95b0a83fb8a96` |
 | [#30](https://github.com/lionellevine/MAIS/issues/30) | MAIS-O38 candidate complete solution: m^3+2m fixed codes suffice for every sparsity k < m | 26david26 | `6e2db10eb10242c075ca331fcf87a604511b9b31df3d55a5c4b0d2d2d95d05ab` |
 
-Issue #30's body was read on **2026-08-27**, re-fetched and confirmed unedited on
+Issue [#30](https://github.com/lionellevine/MAIS/issues/30)'s body was read on **2026-08-27**, re-fetched and confirmed unedited on
 **2026-08-30** (`updated_at` is `2026-08-26T11:16:22Z`, before the first
 reading). It sits in a different relation to its row from the other three: it is
 `context_source_ref` for CONJ-025 rather than the graded artifact.
@@ -114,7 +114,7 @@ carrying the full argument; the body alone states only the claim.
 
 | artifact | value |
 |---|---|
-| file | `o38-note.pdf`, attachment of issue #30 |
+| file | `o38-note.pdf`, attachment of issue [#30](https://github.com/lionellevine/MAIS/issues/30) |
 | url | `https://github.com/user-attachments/files/31462612/o38-note.pdf` |
 | sha256 | `2ba4179f312b7e5c9fa87bcecc0702b409d2ec4fdab7d0f06e9ae387eed422ca` |
 | pages / producer | 15, `pdfTeX-1.40.28`, created `2026-08-26T12:08:34+02:00` |
@@ -129,7 +129,7 @@ The three 2026-08-20 issue bodies were re-fetched on 2026-08-27 and all three
 hashes above still match, which is a check on this table rather than on any
 verdict.
 
-**Comments.** Issues #6, #8 and #30 carry none at their recorded readings. Issue #4
+**Comments.** Issues [#6](https://github.com/lionellevine/MAIS/issues/6), [#8](https://github.com/lionellevine/MAIS/issues/8) and [#30](https://github.com/lionellevine/MAIS/issues/30) carry none at their recorded readings. Issue [#4](https://github.com/lionellevine/MAIS/issues/4)
 carries one, by the same author, saying that LaTeX may not render on mobile and
 pointing at the PDF ([`#issuecomment-5170099225`](https://github.com/lionellevine/MAIS/issues/4#issuecomment-5170099225),
 body sha256 `e290bb83bd980cc9a9b8a3610e21ec6e26a0aa5c3d2e036db10b2610d909bca8`).
