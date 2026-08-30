@@ -38,13 +38,23 @@ audit = _load("check_coverage_audit")
 # --- the audit's own state stays consistent ------------------------------------
 
 
-def test_gate_scripts_pass_on_the_repository():
-    for script in ("check_coverage_audit.py", "render_coverage_artifact.py"):
-        args = [sys.executable, str(SCRIPTS / script)]
-        if script == "render_coverage_artifact.py":
-            args.append("--check")
-        result = subprocess.run(args, cwd=ROOT, capture_output=True, text=True)
-        assert result.returncode == 0, f"{script}: {result.stderr}"
+def test_gate_scripts_pass_on_the_repository(tmp_path):
+    # The rendered artifact is no longer tracked — it had no reader, and the
+    # only thing that consumed it was the check keeping it fresh.  What still
+    # matters is that the renderer runs clean against the real audit, so it is
+    # rendered to a scratch path instead of `--check`ed against a stored copy.
+    result = subprocess.run(
+        [sys.executable, str(SCRIPTS / "check_coverage_audit.py")],
+        cwd=ROOT, capture_output=True, text=True,
+    )
+    assert result.returncode == 0, f"check_coverage_audit.py: {result.stderr}"
+    result = subprocess.run(
+        [sys.executable, str(SCRIPTS / "render_coverage_artifact.py"),
+         str(tmp_path / "coverage-audit.html")],
+        cwd=ROOT, capture_output=True, text=True,
+    )
+    assert result.returncode == 0, f"render_coverage_artifact.py: {result.stderr}"
+    assert (tmp_path / "coverage-audit.html").exists()
 
 
 # --- declaration-name resolution ------------------------------------------------

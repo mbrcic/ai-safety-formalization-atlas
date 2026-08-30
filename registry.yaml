@@ -655,7 +655,7 @@
       "retrieved": "2026-08-20",
       "revision": "9dd29f8bf5ccd1e7701e300039b09ed4096b6516",
       "content_sha256": "d61be3eed51f618dd3b9389693b14e066e89a9cef5e89985b4226fff658c3c4f",
-      "notes": "The statement source every MAIS conjecture in conjectures.yaml is graded against; the open-problems/*.md pages are one-page restatements pointing back into it. Carries the definitions the atlas transcribes: def:cbn, def:local (local interventions, masks, profiles, mixtures), def:cid (binary CID — skeleton, model, policy pi: dom(O) -> [0,1], value, regret; the unmediated-task assumption is built into the definition rather than assumed on top of it), def:margin ((M1)-(M6)), def:twovar (the two-variable family MM_2(lambda)), prop:equiv. Chance variables and the decision are binary by definition, so the atlas's binary types are print's own restriction and not a narrowing. The rendered PDF at the same commit is sha256 91fcefc283db02f377c723120357bb3dc67836604986cfc17f6c0573bdaf6bed. Hashes and the per-statement label map are recorded in docs/provenance/mais-source-pin.md. The agenda is AI-written and not human-peer-reviewed."
+      "notes": "The statement source every MAIS conjecture in conjectures.yaml is graded against except CONJ-025, whose printed problem is stated in agenda A3 (mais-a3-2026); the open-problems/*.md pages are one-page restatements pointing back into whichever agenda states them. Carries the definitions the atlas transcribes: def:cbn, def:local (local interventions, masks, profiles, mixtures), def:cid (binary CID — skeleton, model, policy pi: dom(O) -> [0,1], value, regret; the unmediated-task assumption is built into the definition rather than assumed on top of it), def:margin ((M1)-(M6)), def:twovar (the two-variable family MM_2(lambda)), prop:equiv. Chance variables and the decision are binary by definition, so the atlas's binary types are print's own restriction and not a narrowing. The rendered PDF at the same commit is sha256 91fcefc283db02f377c723120357bb3dc67836604986cfc17f6c0573bdaf6bed. Hashes and the per-statement label map are recorded in docs/provenance/mais-source-pin.md. The agenda is AI-written and not human-peer-reviewed."
     },
     "mais-o23-2026": {
       "citation": "Math for AI Safety (MAIS), open problem MAIS-O23, “Do margins imply behavioral identifiability of causal models?”, posed in agenda MAIS-A2 as Question 4.1; authored by Claude Fable 5 directed by Lionel Levine, audited by GPT 5.6 Sol.",
@@ -689,6 +689,32 @@
       "retrieved": "2026-08-20",
       "content_sha256": "8e2e688eaac1a72f915aa787ad1e74676e6b72eff4f2796394e95b0a83fb8a96",
       "notes": "The candidate a conjecture row transcribes wherever that row is recorded. The issue derives four affine diagnostics and a generic chamber classification, and explicitly claims no human or journal referee verification. The transcribing row now quantifies directly over every threshold t in (0,1), exactly as the issue does. Separate lemmas derive and bound thresholds produced by margin-admissible utility gaps in the surrounding agenda problem; those lemmas do not restrict the conjecture. Body sha256 as read 2026-08-20; issue bodies are editable in place, so an edit invalidates this grading."
+    },
+    "mais-a3-2026": {
+      "citation": "Math for AI Safety (MAIS), research agenda MAIS-A3, “The geometry and identifiability of superposition” — the agenda in which MAIS-O3, O36, O37, O38, O39, O40, O41, O42 and O43 are stated; MAIS-O38 is its Problem 4.8.",
+      "locator": "https://github.com/lionellevine/MAIS/blob/9dd29f8bf5ccd1e7701e300039b09ed4096b6516/agendas/A3/MAIS-A3.tex",
+      "role": "work",
+      "retrieved": "2026-08-27",
+      "revision": "9dd29f8bf5ccd1e7701e300039b09ed4096b6516",
+      "content_sha256": "146f0cc95a0a5eb0cf3b2660c32d591169b0e346571b80ee63723a9906371387",
+      "notes": "The statement source for the MAIS-O38 conjecture row, on the same footing MAIS-A2 has for the causal rows: the open-problems/*.md page is a one-page restatement pointing back into it, and at this commit the two agree word for word on Problem 4.8. Problem 4.8 carries the label prob:samples and is the only part of A3 the atlas transcribes; the surrounding superposition material — the estimator F_lambda, the recovery and merge notions, the smeared-feature and pentagon problems — is not. The problem's own vocabulary is self-contained: a matrix, k-sparse codes, the spark condition, permutation and invertible diagonal matrices, and Lebesgue measure on R^{n x m}, none of which is an A3 composite. The agenda is AI-written and not human-peer-reviewed."
+    },
+    "mais-o38-2026": {
+      "citation": "Math for AI Safety (MAIS), open problem MAIS-O38, “Polynomial sample complexity for dictionary uniqueness with growing sparsity”, posed in agenda MAIS-A3 as Problem 4.8; authored by Claude Fable 5 directed by Lionel Levine, audited by GPT 5.6 Sol.",
+      "locator": "https://github.com/lionellevine/MAIS/blob/9dd29f8bf5ccd1e7701e300039b09ed4096b6516/open-problems/MAIS-O38.md",
+      "role": "work",
+      "retrieved": "2026-08-27",
+      "revision": "9dd29f8bf5ccd1e7701e300039b09ed4096b6516",
+      "content_sha256": "cea6784554724ce4e67b8967a9fe6fba6959e70a32494dc97b0b8fd3685c4d43",
+      "notes": "Byte-for-byte the same problem statement as mais-a3-2026's prob:samples, so nothing is graded against this page that is not also in the agenda. It adds the throughout-convention the agenda leaves implicit — “a vector is k-sparse if at most k of its entries are nonzero” — and the literature framing: (k+1)*binom(m,k) generic samples suffice for a fixed A (Aharon-Elad-Bruckstein 2006, Hillar-Sommer 2015), Spielman-Wang-Wright 2012 control rival row sparsity for square dictionaries, and Awasthi-Vijayaraghavan 2018 give approximate recovery under restricted isometry and a triple-occurrence hypothesis. None of those results is transcribed by the atlas. The agenda is AI-written and not human-peer-reviewed."
+    },
+    "mais-issue-30-2026": {
+      "citation": "Math for AI Safety (MAIS), issue #30, “MAIS-O38 candidate complete solution: m^3+2m fixed codes suffice for every sparsity k < m”, filed 2026-08-26 by 26david26.",
+      "locator": "https://github.com/lionellevine/MAIS/issues/30",
+      "role": "work",
+      "retrieved": "2026-08-27",
+      "content_sha256": "6e2db10eb10242c075ca331fcf87a604511b9b31df3d55a5c4b0d2d2d95d05ab",
+      "notes": "Context only. Re-read 2026-08-30 and the earlier note here was corrected: the issue contains TWO theorems, not one. Its main claim -- N = m^3 + 2m codes depending only on m and k suffice for every n >= 2k and almost every spark-condition A, at every 1 <= k < m -- is NOT transcribed, checked, or asserted anywhere in this repository, and no coverage or resolution claim rests on it; it would resolve CONJ-025 affirmatively if correct, and is stronger than that row asks since its codes do not depend on n. Its second theorem, labelled boundary, states that at m >= 2, k >= m and n >= 2k no finite list of k-sparse codes is uniquely coded at any spark-condition A, and observes that this settles the literal reading of the printed question in which k < m is nowhere imposed. That is the same statement as AISafetyAtlas.Examples.Conjectures.MAIS.not_uniquelyCoded_of_full_sparsity_spark and the same reading finding CONJ-025 records; the atlas proved it independently and without the n >= 2k hypothesis, but the statement and the observation are the issue's and are credited as such. The issue says it was produced and checked entirely by AI systems with no human verification. Body sha256 as read 2026-08-27, re-verified unedited 2026-08-30 (issue updated_at 2026-08-26T11:16:22Z, before first reading); issue bodies are editable in place, so a later edit invalidates this record. No comments at either reading."
     }
   },
   "results": [

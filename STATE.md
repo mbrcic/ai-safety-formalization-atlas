@@ -1,6 +1,6 @@
 # Project State
 
-Updated: 2026-08-23
+Updated: 2026-08-30
 
 **Unreleased work in progress.** `v0.7.0` below is still the last published
 release and nothing here supersedes it.
@@ -18,14 +18,15 @@ prefix-free sparse monomial code, the O24 genericity certificate, and a
 rational-weight query layer. There is no aggregating `Causal` facade and that is
 deliberate — these are peer modules, so a consumer imports the one it needs.
 
-**On top of that layer sits the MAIS-A2 conjecture ledger, also in no release.**
-Eighteen MAIS-linked ledger rows span all fourteen agenda problem numbers, and
-only some of them are `Prop`s: seven are conjectures or graded candidate answers
-in `AISafetyAtlas.Conjectures.MAIS` over the causal objects above, four are
+**On top of that layer sits the MAIS conjecture ledger, also in no release.**
+Nineteen MAIS-linked ledger rows span fifteen printed problem numbers -- all
+fourteen of agenda A2, plus A3's `prob:samples`, whose row shares none of the
+causal vocabulary -- and only some of them are `Prop`s: eight are conjectures or
+graded candidate answers in `AISafetyAtlas.Conjectures.MAIS`, four are
 determine-problem specifications over a candidate answer, and seven record a
-printed problem the atlas cannot state at all. Five of the seven take agenda
+printed problem the atlas cannot state at all. Six of the eight take agenda
 clauses as their graded source and two grade candidate statements
-submitted to MAIS issues #4 and #8. Four are resolved and three remain open. An open
+submitted to MAIS issues #4 and #8. Five are resolved and three remain open. An open
 conjecture asserts nothing: it is a compiling statement with no proof, and the
 ledger records for each one what would refute it. The settled rows are the
 exception, and each names the theorem that settled it. Rows graded against a
@@ -36,10 +37,22 @@ ledger records that source problem rather than adding an atlas premise to rescue
 it; atlas-original variants and withdrawn encodings stay outside this ledger,
 recorded verbatim with their reason in
 `docs/provenance/retired-conjecture-rows.md` so that leaving is not an
-undocumented decision and the retired `CONJ-` numbers are never reused. Four
-rows are resolved and each carries a `Coverage:` sentence naming the printed
-clause it covers -- a resolved row that answers one clause of three is not a
-resolved printed problem.
+undocumented decision and the retired `CONJ-` numbers are never reused. Five
+rows are resolved and each says which printed clause it covers -- a resolved row
+that answers one clause of three is not a resolved printed problem.
+
+CONJ-025 is the exception and the newest: **MAIS-O38 is true**, at print's own
+quantifier, proved by
+`Examples.Conjectures.MAIS.maisO38_polynomialSamplesSuffice_holds`. The
+construction and the argument are MAIS issue #30's, submitted by 26david26 and
+stated there to have been produced and checked entirely by AI systems with no
+human verification; the atlas supplied the transcription, the machine-check, and
+four domain-neutral facts Mathlib lacks that the proof needs -- polynomial
+genericity, maximal minors of a rectangular matrix, a hyperplane-family null
+bound standing in for the semialgebraic dimension theory the argument is usually
+phrased in, and measurability of a projection along a sigma-compact factor. Two
+readings of quantifiers print leaves unwritten are separately false and are
+carried beside the row as findings, not as answers.
 
 MAIS-O29(b) is the case worth reading, because what is claimed about it changed
 on 2026-08-23 and the claim before that date was a retraction.
@@ -125,7 +138,7 @@ public API, or axiom profile changed in either release.
 - Atlas Lean declarations: **248** (claim-row WRAPPER **13** / BRIDGE **5**).
 - Results stating a source claim: **49**; recording a formalization only: **37** (**28** on the public root import).
 - Reviewed AI-system bridges: **3**; statement-reviewed only: **1**.
-- Open conjectures: **4** of **8** recorded; the ledger also holds **4** determine-problem targets and **7** printed problems the atlas cannot yet state.
+- Open conjectures: **4** of **9** recorded; the ledger also holds **4** determine-problem targets and **7** printed problems the atlas cannot yet state.
 - Claim results with statement-match (`EXACT`/`EQUIVALENT`): **14**; with `RELATED`-only formalization: **7**. Counts are claim rows, not records: an artifact row's grade is on the row and never in this number.
 - Rows carrying atlas Lean: **49** (**20** of them claim rows); catalogued candidate leads: **5**.
 <!-- END GENERATED REGISTRY SNAPSHOT -->
@@ -298,16 +311,20 @@ stale without anyone noticing.
   joint-observation-synthesis pin is untouched — it still points at `v0.5.1`,
   107 commits back, and repinning waits for a tag.
 - Known-open in that release:
-  - **The public page ships but has never deployed.** [`site/`](site/) holds a
-    static landing page; [`.github/workflows/pages.yml`](.github/workflows/pages.yml)
-    deploys it from `main` only, on pushes that touch `site/`. Deploying needs
-    the repository's Pages source set to "GitHub Actions".
-    There is **no** per-declaration API site — a `doc-gen4` pipeline was built and
-    removed on cost grounds; see [open work](docs/guide/open-work.md).
-  - **Reuse is mostly internal.** `scripts/report_consumers.py` reports 21 of 105
-    declarations consumed outside `Examples/`. The spine and its two domain
-    consumers compose; the physical bridges and the accumulation layer are
-    exercised only by their own witnesses so far.
+  - **No per-declaration API site.** A `doc-gen4` pipeline was built and removed
+    on cost grounds; see [open work](docs/guide/open-work.md). The static landing
+    page in [`site/`](site/) is *not* part of this gap: it is deployed and live at
+    <https://mbrcic.github.io/ai-safety-formalization-atlas/>, shipped from `main`
+    by [`.github/workflows/pages.yml`](.github/workflows/pages.yml) on pushes that
+    touch `site/` (verified 2026-08-29).
+  - **Reuse is mostly internal, and the share is falling.**
+    `scripts/report_consumers.py` reports 36 of 248 declarations consumed
+    outside `Examples/` (measured 2026-08-28; 21 of 105 at v0.7, so the share
+    fell from 20% to 15% while the corpus more than doubled). The spine and its
+    two domain consumers compose. The accumulation layer consumes the kernel
+    without being consumed. Of the physical bridges, one declaration of eleven
+    now reaches a sibling module and the rest are exercised only by their own
+    witnesses.
   - The knowledge cluster's guide is
     [`docs/guide/knowledge-model.md`](docs/guide/knowledge-model.md); paper-level
     residuals stay in `docs/provenance/`. New layers must update its

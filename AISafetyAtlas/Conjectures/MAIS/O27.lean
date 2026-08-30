@@ -528,7 +528,7 @@ print**.
 `IsO27EdgeSurvivalAnswer` below is therefore an **atlas strengthening offered
 for study, not an admissibility condition the source requires**, and the ledger
 does not grade it as one. Two limits are worth stating before anyone reaches for
-it. First, `Causal.IsSemialgebraic` is an *existential* — it asserts that some
+it. First, `Analysis.IsSemialgebraic` is an *existential* — it asserts that some
 finite family of polynomial pieces cuts the set out — so the canonical region
 together with a proof that it happens to be semialgebraic satisfies the
 conjunction, and the restatement is not excluded after all. An answer language
@@ -553,10 +553,10 @@ The ledger records both clauses as open on this axis, with what a solver would
 have to state, rather than choosing on print's behalf. -/
 
 /-- **A plane set is semialgebraic** when the set of `(x 0, x 1)` pairs that
-land in it is, read through `Fin 2 → ℝ`, which is where `Causal.IsSemialgebraic`
+land in it is, read through `Fin 2 → ℝ`, which is where `Analysis.IsSemialgebraic`
 is stated. -/
 @[expose] public def IsSemialgebraicPlaneSet (S : Set (ℝ × ℝ)) : Prop :=
-  Causal.IsSemialgebraic {x : Fin 2 → ℝ | (x 0, x 1) ∈ S}
+  Analysis.IsSemialgebraic {x : Fin 2 → ℝ | (x 0, x 1) ∈ S}
 
 /-- **An atlas strengthening of clause (c), not a source demand.** A candidate
 region is asked to be semialgebraic as well as correct.
@@ -565,7 +565,7 @@ region is asked to be semialgebraic as well as correct.
 does not grade it as admissibility. It is kept because the question *is the
 printed region semialgebraic* is worth asking and this is the statement of it,
 and because a solver who answers with polynomial data can discharge it. It does
-**not** by itself exclude a restatement: `Causal.IsSemialgebraic` is an
+**not** by itself exclude a restatement: `Analysis.IsSemialgebraic` is an
 existential, so the canonical region plus a proof of semialgebraicity satisfies
 this conjunction. -/
 public noncomputable def IsO27EdgeSurvivalAnswer (sk : Skeleton C dim Bool ℝ)
@@ -583,7 +583,7 @@ public theorem isO27EdgeSurvivalAnswer_iff (sk : Skeleton C dim Bool ℝ)
 public theorem isSemialgebraicPlaneSet_empty :
     IsSemialgebraicPlaneSet (∅ : Set (ℝ × ℝ)) := by
   unfold IsSemialgebraicPlaneSet
-  simpa using Causal.isSemialgebraic_empty (ι := Fin 2)
+  simpa using Analysis.isSemialgebraic_empty (ι := Fin 2)
 
 /-- **The quadrant the printed region lives in is semialgebraic.**
 `IsO27EdgeSurvivalRegion` requires `0 ≤ p.1 ∧ 0 ≤ p.2` of every member, so any
@@ -593,16 +593,16 @@ part rather than on the bookkeeping. -/
 public theorem isSemialgebraicPlaneSet_nonnegQuadrant :
     IsSemialgebraicPlaneSet {p : ℝ × ℝ | 0 ≤ p.1 ∧ 0 ≤ p.2} := by
   unfold IsSemialgebraicPlaneSet
-  have h0 : Causal.IsSemialgebraic
+  have h0 : Analysis.IsSemialgebraic
       {x : Fin 2 → ℝ | 0 ≤ MvPolynomial.eval x (MvPolynomial.X 0 :
         MvPolynomial (Fin 2) ℝ)} :=
-    Causal.isSemialgebraic_setOf_eval_nonneg _
-  have h1 : Causal.IsSemialgebraic
+    Analysis.isSemialgebraic_setOf_eval_nonneg _
+  have h1 : Analysis.IsSemialgebraic
       {x : Fin 2 → ℝ | 0 ≤ MvPolynomial.eval x (MvPolynomial.X 1 :
         MvPolynomial (Fin 2) ℝ)} :=
-    Causal.isSemialgebraic_setOf_eval_nonneg _
-  refine Causal.IsSemialgebraic.setOf_congr (fun x ↦ ?_)
-    (Causal.IsSemialgebraic.setOf_and h0 h1)
+    Analysis.isSemialgebraic_setOf_eval_nonneg _
+  refine Analysis.IsSemialgebraic.setOf_congr (fun x ↦ ?_)
+    (Analysis.IsSemialgebraic.setOf_and h0 h1)
   simp
 
 omit [Nonempty C] in

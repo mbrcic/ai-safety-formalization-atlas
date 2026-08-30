@@ -1,0 +1,999 @@
+{
+  "generated_by": "scripts/check_statement_freeze.py --write",
+  "note": "Signature hashes of ledger-graded statements. A diff here is a schema event: say which way fidelity moved and re-grade the row.",
+  "count": 248,
+  "declarations": {
+    "AISafetyAtlas.Causal.DecisionNetwork.mem_parents_utility_of_isUnmediated": {
+      "file": "AISafetyAtlas/Causal/DecisionNetwork.lean",
+      "sha256": "9e79616afaf71896"
+    },
+    "AISafetyAtlas.Causal.Model.ancestors_eq_univ_iff": {
+      "file": "AISafetyAtlas/Causal/Model.lean",
+      "sha256": "137559e391ccf4f8"
+    },
+    "AISafetyAtlas.Causal.Model.jointProb_hardInterventionProfile": {
+      "file": "AISafetyAtlas/Causal/Model.lean",
+      "sha256": "a386788122eea41d"
+    },
+    "AISafetyAtlas.Causal.Model.regret_eq_zero_iff": {
+      "file": "AISafetyAtlas/Causal/Decision.lean",
+      "sha256": "1370782dd9352cd9"
+    },
+    "AISafetyAtlas.Causal.Model.value_const_sub": {
+      "file": "AISafetyAtlas/Causal/Decision.lean",
+      "sha256": "d6fb022cc3516682"
+    },
+    "AISafetyAtlas.Causal.Model.value_eq": {
+      "file": "AISafetyAtlas/Causal/Decision.lean",
+      "sha256": "c45525d18ca0cb51"
+    },
+    "AISafetyAtlas.Causal.Model.value_le_sign": {
+      "file": "AISafetyAtlas/Causal/Decision.lean",
+      "sha256": "7eb7e5447e3fb299"
+    },
+    "AISafetyAtlas.Causal.Model.\u0394_fixProfile": {
+      "file": "AISafetyAtlas/Causal/Model.lean",
+      "sha256": "6efa44f7d9093cce"
+    },
+    "AISafetyAtlas.Causal.Model.\u0394mix_congr": {
+      "file": "AISafetyAtlas/Causal/Model.lean",
+      "sha256": "913847463c095f2f"
+    },
+    "AISafetyAtlas.Causal.SCIM.exists_isOptimalPolicy": {
+      "file": "AISafetyAtlas/Causal/StructuralModel.lean",
+      "sha256": "490f124086898995"
+    },
+    "AISafetyAtlas.Causal.SCIM.policy_ext_single": {
+      "file": "AISafetyAtlas/Causal/StructuralModel.lean",
+      "sha256": "91064f2b72b5d1c3"
+    },
+    "AISafetyAtlas.Causal.SCM.eval_eq_f": {
+      "file": "AISafetyAtlas/Causal/StructuralModel.lean",
+      "sha256": "a21cd4801564e563"
+    },
+    "AISafetyAtlas.Causal.SCM.exoJoint_mul_prod": {
+      "file": "AISafetyAtlas/Causal/StructuralModel.lean",
+      "sha256": "3062db4d955868da"
+    },
+    "AISafetyAtlas.Causal.Skeleton.behaviorEq_of_observed_eq_empty": {
+      "file": "AISafetyAtlas/Causal/MarginClass.lean",
+      "sha256": "42ed7f227640770d"
+    },
+    "AISafetyAtlas.Causal.eq_family_of_isCausalBayesNetwork": {
+      "file": "AISafetyAtlas/Causal/BayesianNetwork.lean",
+      "sha256": "67f8473dc7fb6954"
+    },
+    "AISafetyAtlas.Causal.inIdentifiedSet_zero_of_behaviorEq": {
+      "file": "AISafetyAtlas/Causal/Decision.lean",
+      "sha256": "f3fc81073924d6d6"
+    },
+    "AISafetyAtlas.Causal.modelError_eq_zero_iff": {
+      "file": "AISafetyAtlas/Causal/Decision.lean",
+      "sha256": "25b06ddf5b5df826"
+    },
+    "AISafetyAtlas.Causal.not_inIdentifiedSet_of_neg": {
+      "file": "AISafetyAtlas/Causal/Decision.lean",
+      "sha256": "a0bb177b93e70bd3"
+    },
+    "AISafetyAtlas.Combinatorics.basisClass_histogram_eq_permOrbit": {
+      "file": "AISafetyAtlas/Combinatorics/PermInvariance.lean",
+      "sha256": "94a0e242a1e5377c"
+    },
+    "AISafetyAtlas.Combinatorics.card_closedUnderPermutation_nonempty": {
+      "file": "AISafetyAtlas/Combinatorics/PermInvariance.lean",
+      "sha256": "d23dc42c6b9531e1"
+    },
+    "AISafetyAtlas.Combinatorics.exists_perm_rel_not_iff": {
+      "file": "AISafetyAtlas/Combinatorics/PermInvariance.lean",
+      "sha256": "1a5a064851c1b686"
+    },
+    "AISafetyAtlas.Compositional.Hyperproperties.k_safety_iff_finite_self_composition": {
+      "file": "AISafetyAtlas/Compositional/Hyperproperties.lean",
+      "sha256": "59bf1221876bfda9"
+    },
+    "AISafetyAtlas.Compositional.Networks.runFor_eq_of_view_eq": {
+      "file": "AISafetyAtlas/Compositional/Networks.lean",
+      "sha256": "6a2d68bbc245517c"
+    },
+    "AISafetyAtlas.Compositional.Symmetry.Protocol.no_unique_leader_from_symmetric_start": {
+      "file": "AISafetyAtlas/Compositional/Symmetry.lean",
+      "sha256": "daa9f8e8c4f06c5c"
+    },
+    "AISafetyAtlas.Compositional.rectangle_iff_exchange_closed": {
+      "file": "AISafetyAtlas/Compositional/Rectangularity.lean",
+      "sha256": "d8a5c08979509b8b"
+    },
+    "AISafetyAtlas.Computability.halting_problem": {
+      "file": "AISafetyAtlas/Computability.lean",
+      "sha256": "dd62ec026309114a"
+    },
+    "AISafetyAtlas.Computability.halting_re": {
+      "file": "AISafetyAtlas/Computability.lean",
+      "sha256": "45d6c4d9d58e74a4"
+    },
+    "AISafetyAtlas.Computability.nonhalting_not_re": {
+      "file": "AISafetyAtlas/Computability.lean",
+      "sha256": "648803dc8a53847e"
+    },
+    "AISafetyAtlas.Computability.rice": {
+      "file": "AISafetyAtlas/Computability.lean",
+      "sha256": "53d3eabdc9a9237c"
+    },
+    "AISafetyAtlas.Computability.rice_code_iff": {
+      "file": "AISafetyAtlas/Computability.lean",
+      "sha256": "b3763f01d06b639b"
+    },
+    "AISafetyAtlas.Control.ashby_logVariety_ge": {
+      "file": "AISafetyAtlas/Control/VarietyCounting.lean",
+      "sha256": "c06ab71ce7c03c37"
+    },
+    "AISafetyAtlas.Control.ashby_logVariety_ge_mul": {
+      "file": "AISafetyAtlas/Control/VarietyCounting.lean",
+      "sha256": "c31ddfb81177d4d7"
+    },
+    "AISafetyAtlas.Control.ashby_variety_ge": {
+      "file": "AISafetyAtlas/Control/VarietyCounting.lean",
+      "sha256": "204650412adb75f4"
+    },
+    "AISafetyAtlas.Control.ashby_variety_ge_isSharp": {
+      "file": "AISafetyAtlas/Control/VarietyCounting.lean",
+      "sha256": "b29f7f53de8230ea"
+    },
+    "AISafetyAtlas.Control.card_ceilDiv_le_admittedOutcomes": {
+      "file": "AISafetyAtlas/Control/VarietyCounting.lean",
+      "sha256": "83e9c14a4d546ef3"
+    },
+    "AISafetyAtlas.Control.card_le_mul_card_admittedOutcomes_mul": {
+      "file": "AISafetyAtlas/Control/VarietyCounting.lean",
+      "sha256": "43a1acabbc610f48"
+    },
+    "AISafetyAtlas.Control.condEntropy_ge_of_openLoopBound": {
+      "file": "AISafetyAtlas/Control/InformationLimits.lean",
+      "sha256": "6dff9732a89b643a"
+    },
+    "AISafetyAtlas.Control.condEntropy_le_condEntropy_of_forall": {
+      "file": "AISafetyAtlas/Control/InformationLimits.lean",
+      "sha256": "572254e26bbc3da1"
+    },
+    "AISafetyAtlas.Control.condEntropy_outcome_eq": {
+      "file": "AISafetyAtlas/Control/RequisiteVariety.lean",
+      "sha256": "d8251fb8712e13cd"
+    },
+    "AISafetyAtlas.Control.condMutualInfo_eq_zero_of_sensorLoss_eq_zero": {
+      "file": "AISafetyAtlas/Control/Observability.lean",
+      "sha256": "1e137e8fee00ec3c"
+    },
+    "AISafetyAtlas.Control.controlLoss_eq_condMutualInfo": {
+      "file": "AISafetyAtlas/Control/InformationLimits.lean",
+      "sha256": "f0d2244d2dd75868"
+    },
+    "AISafetyAtlas.Control.controlLoss_eq_entropy_noise_iff": {
+      "file": "AISafetyAtlas/Control/InformationLimits.lean",
+      "sha256": "7a768cae31c00d98"
+    },
+    "AISafetyAtlas.Control.controlLoss_eq_mutualInfo_sub": {
+      "file": "AISafetyAtlas/Control/InformationLimits.lean",
+      "sha256": "3ee087fb5096bcae"
+    },
+    "AISafetyAtlas.Control.controlLoss_le_entropy_noise": {
+      "file": "AISafetyAtlas/Control/InformationLimits.lean",
+      "sha256": "d1fe49e08e447539"
+    },
+    "AISafetyAtlas.Control.entropyReduction_le_condEntropy_form": {
+      "file": "AISafetyAtlas/Control/OpenLoop.lean",
+      "sha256": "a643c72254dca9f9"
+    },
+    "AISafetyAtlas.Control.entropyReduction_le_iSup_openLoopReduction": {
+      "file": "AISafetyAtlas/Control/OpenLoop.lean",
+      "sha256": "8e1d319b4358c6a2"
+    },
+    "AISafetyAtlas.Control.entropyReduction_le_of_condEntropy_ge": {
+      "file": "AISafetyAtlas/Control/InformationLimits.lean",
+      "sha256": "e1111c3559972675"
+    },
+    "AISafetyAtlas.Control.entropyReduction_le_of_openLoopBound": {
+      "file": "AISafetyAtlas/Control/InformationLimits.lean",
+      "sha256": "c8030952cb8b4d48"
+    },
+    "AISafetyAtlas.Control.entropyReduction_le_openLoopMax": {
+      "file": "AISafetyAtlas/Control/OpenLoop.lean",
+      "sha256": "15fbab28e1d59e08"
+    },
+    "AISafetyAtlas.Control.entropy_ge_of_condEntropy_ge": {
+      "file": "AISafetyAtlas/Control/RequisiteVariety.lean",
+      "sha256": "c1a732c6b5ec3ead"
+    },
+    "AISafetyAtlas.Control.entropy_ge_of_sensor": {
+      "file": "AISafetyAtlas/Control/RequisiteVariety.lean",
+      "sha256": "737bdac6a51f0c6b"
+    },
+    "AISafetyAtlas.Control.entropy_le_channelCapacity_of_complete": {
+      "file": "AISafetyAtlas/Control/RequisiteVariety.lean",
+      "sha256": "cb09d4460f9c3174"
+    },
+    "AISafetyAtlas.Control.entropy_noise_sub_controlLoss": {
+      "file": "AISafetyAtlas/Control/InformationLimits.lean",
+      "sha256": "e7e7d22849440cf5"
+    },
+    "AISafetyAtlas.Control.entropy_outcome_ge": {
+      "file": "AISafetyAtlas/Control/RequisiteVariety.lean",
+      "sha256": "4ef64cb3c1c983d6"
+    },
+    "AISafetyAtlas.Control.entropy_outcome_ge_of_strategy": {
+      "file": "AISafetyAtlas/Control/RequisiteVariety.lean",
+      "sha256": "bba69d8f03268486"
+    },
+    "AISafetyAtlas.Control.entropy_outcome_ge_sub_channelCapacity": {
+      "file": "AISafetyAtlas/Control/RequisiteVariety.lean",
+      "sha256": "1ed353cedfc01253"
+    },
+    "AISafetyAtlas.Control.exists_entropyReduction_const_eq_iSup_openLoopReduction": {
+      "file": "AISafetyAtlas/Control/OpenLoop.lean",
+      "sha256": "60cb8151c5ca3029"
+    },
+    "AISafetyAtlas.Control.isPlant_plantOutcome": {
+      "file": "AISafetyAtlas/Control/InformationLimits.lean",
+      "sha256": "9ef73657a5e2dad1"
+    },
+    "AISafetyAtlas.Control.kernelControlLoss_eq_sum": {
+      "file": "AISafetyAtlas/Control/PolicyKernel.lean",
+      "sha256": "6638acf609bbc8f9"
+    },
+    "AISafetyAtlas.Control.measurable_plantOutcome": {
+      "file": "AISafetyAtlas/Control/InformationLimits.lean",
+      "sha256": "586a1a1172c373cf"
+    },
+    "AISafetyAtlas.Control.minControlLoss_eq_entropy_noise_iff_of_attained": {
+      "file": "AISafetyAtlas/Control/InformationLimits.lean",
+      "sha256": "d11a18e67f11e4b7"
+    },
+    "AISafetyAtlas.Control.minControlLoss_eq_sInf_condMutualInfo": {
+      "file": "AISafetyAtlas/Control/InformationLimits.lean",
+      "sha256": "c8685664fe1ff038"
+    },
+    "AISafetyAtlas.Control.minControlLoss_eq_sInf_mutualInfo_sub": {
+      "file": "AISafetyAtlas/Control/InformationLimits.lean",
+      "sha256": "ef51d38b1239afb9"
+    },
+    "AISafetyAtlas.Control.minControlLoss_inputPolicies_attained": {
+      "file": "AISafetyAtlas/Control/PolicyKernel.lean",
+      "sha256": "35c059d34229fa9c"
+    },
+    "AISafetyAtlas.Control.minControlLoss_inputPolicies_eq_kernelMin": {
+      "file": "AISafetyAtlas/Control/PolicyKernel.lean",
+      "sha256": "6ac863e628b6265f"
+    },
+    "AISafetyAtlas.Control.minControlLoss_le": {
+      "file": "AISafetyAtlas/Control/InformationLimits.lean",
+      "sha256": "ea7ed0de0cbb2f57"
+    },
+    "AISafetyAtlas.Control.minControlLoss_le_entropy_noise": {
+      "file": "AISafetyAtlas/Control/InformationLimits.lean",
+      "sha256": "938284aea80ce3d3"
+    },
+    "AISafetyAtlas.Control.minControlLoss_nonneg": {
+      "file": "AISafetyAtlas/Control/InformationLimits.lean",
+      "sha256": "b457ca75aa868707"
+    },
+    "AISafetyAtlas.Control.mutualInfo_prod_eq_of_sensorLoss_eq_zero": {
+      "file": "AISafetyAtlas/Control/Observability.lean",
+      "sha256": "86135f7e33d424ab"
+    },
+    "AISafetyAtlas.Control.perfectlyObservable_iff_sensorLoss_eq_zero": {
+      "file": "AISafetyAtlas/Control/Observability.lean",
+      "sha256": "29c7cb6afdef9cb5"
+    },
+    "AISafetyAtlas.Control.two_le_card_admittedOutcomes": {
+      "file": "AISafetyAtlas/Control/VarietyCounting.lean",
+      "sha256": "0608318e920e0723"
+    },
+    "AISafetyAtlas.Examples.Causal.DecisionNetwork.figIsUnmediated": {
+      "file": "AISafetyAtlas/Examples/Causal/DecisionNetwork.lean",
+      "sha256": "2f342a3f4a2922d9"
+    },
+    "AISafetyAtlas.Examples.Causal.Model.jointProb_sum_shiftCollapse": {
+      "file": "AISafetyAtlas/Examples/Causal/Model.lean",
+      "sha256": "9e006760d2aec0e5"
+    },
+    "AISafetyAtlas.Examples.Causal.OneNodeClass.modelError_le_ten_mul": {
+      "file": "AISafetyAtlas/Examples/Causal/OneNodeClass.lean",
+      "sha256": "2e68a7f4e26c8def"
+    },
+    "AISafetyAtlas.Examples.Causal.StructuralModel.figSCIM_opinion_isMaterial": {
+      "file": "AISafetyAtlas/Examples/Causal/StructuralModel.lean",
+      "sha256": "71707c3fc12dba29"
+    },
+    "AISafetyAtlas.Examples.Causal.StructuralModel.figSCIM_policy_not_const": {
+      "file": "AISafetyAtlas/Examples/Causal/StructuralModel.lean",
+      "sha256": "c35e283c717e713f"
+    },
+    "AISafetyAtlas.Examples.Causal.StructuralModel.utility_childless_has_teeth": {
+      "file": "AISafetyAtlas/Examples/Causal/StructuralModel.lean",
+      "sha256": "336fc595895e7acb"
+    },
+    "AISafetyAtlas.Examples.Causal.behaviorEq_has_teeth": {
+      "file": "AISafetyAtlas/Examples/Causal/BehavioralCollision.lean",
+      "sha256": "f787f0ebb96443d0"
+    },
+    "AISafetyAtlas.Examples.Causal.card_fibreRep_empty": {
+      "file": "AISafetyAtlas/Examples/Causal/Decision.lean",
+      "sha256": "7287d69a6dc957e1"
+    },
+    "AISafetyAtlas.Examples.Causal.margin_class_not_identifiable": {
+      "file": "AISafetyAtlas/Examples/Causal/BehavioralCollision.lean",
+      "sha256": "a4b90994cee3e592"
+    },
+    "AISafetyAtlas.Examples.Causal.margin_class_not_identifiable_family": {
+      "file": "AISafetyAtlas/Examples/Causal/BehavioralCollision.lean",
+      "sha256": "a0bd416ba3a1d197"
+    },
+    "AISafetyAtlas.Examples.Causal.margin_class_not_identifiable_shared_optimal": {
+      "file": "AISafetyAtlas/Examples/Causal/Decision.lean",
+      "sha256": "04a75601d23df756"
+    },
+    "AISafetyAtlas.Examples.Causal.margin_class_not_identifiable_two_graphs": {
+      "file": "AISafetyAtlas/Examples/Causal/BehavioralCollision.lean",
+      "sha256": "f31d78385194d8ce"
+    },
+    "AISafetyAtlas.Examples.Causal.mm2_shape": {
+      "file": "AISafetyAtlas/Examples/Causal/BehavioralCollision.lean",
+      "sha256": "48af23e93d72b3fa"
+    },
+    "AISafetyAtlas.Examples.Causal.not_inIdentifiedSet_high": {
+      "file": "AISafetyAtlas/Examples/Causal/Decision.lean",
+      "sha256": "d1b5a9e6c6a6a396"
+    },
+    "AISafetyAtlas.Examples.Causal.transform_identity_edgeless": {
+      "file": "AISafetyAtlas/Examples/Causal/BehavioralCollision.lean",
+      "sha256": "2cc12a33a0f3db54"
+    },
+    "AISafetyAtlas.Examples.Causal.\u0394_eq_half_sub_joint": {
+      "file": "AISafetyAtlas/Examples/Causal/BehavioralCollision.lean",
+      "sha256": "654123a44b935bfc"
+    },
+    "AISafetyAtlas.Explainability.attribution_impossibility": {
+      "file": "AISafetyAtlas/Explainability.lean",
+      "sha256": "46a929a906f9d3c5"
+    },
+    "AISafetyAtlas.Explainability.attribution_impossibility_weak": {
+      "file": "AISafetyAtlas/Explainability.lean",
+      "sha256": "a6a77f09f59854f1"
+    },
+    "AISafetyAtlas.Inference.PhysicalKnowledgeWitness.eq_target_on_of_refinesOn": {
+      "file": "AISafetyAtlas/Inference/PhysicalKnowledge.lean",
+      "sha256": "f80b99193a2a9ebc"
+    },
+    "AISafetyAtlas.Inference.PhysicallyKnows.weaklyInfers": {
+      "file": "AISafetyAtlas/Inference/PhysicalKnowledge.lean",
+      "sha256": "bbf3bd129ef9ab3e"
+    },
+    "AISafetyAtlas.Inference.corollary20_ii": {
+      "file": "AISafetyAtlas/Inference/PhysicalKnowledge/Epistemic.lean",
+      "sha256": "7ce18f8434e77ccd"
+    },
+    "AISafetyAtlas.Inference.corollary21_ii_repaired": {
+      "file": "AISafetyAtlas/Inference/PhysicalKnowledge/Epistemic.lean",
+      "sha256": "4dca16ae1ec8afab"
+    },
+    "AISafetyAtlas.Inference.corollary23": {
+      "file": "AISafetyAtlas/Inference/PhysicalKnowledge/Epistemic.lean",
+      "sha256": "fb832bcf3da6b93c"
+    },
+    "AISafetyAtlas.Inference.corollary24": {
+      "file": "AISafetyAtlas/Inference/PhysicalKnowledge/Epistemic.lean",
+      "sha256": "de28835fc545da55"
+    },
+    "AISafetyAtlas.Inference.exists_distinguishable_accuracy_near_one": {
+      "file": "AISafetyAtlas/Inference/Stochastic/Approximation.lean",
+      "sha256": "7b36efbb949c1022"
+    },
+    "AISafetyAtlas.Inference.exists_never_physicallyKnown": {
+      "file": "AISafetyAtlas/Inference/PhysicalKnowledge.lean",
+      "sha256": "a71a8cc3406a0274"
+    },
+    "AISafetyAtlas.Inference.exists_three_inequivalent_not_weaklyInfers": {
+      "file": "AISafetyAtlas/Inference/PhysicalKnowledge/Epistemic.lean",
+      "sha256": "269e82214102082b"
+    },
+    "AISafetyAtlas.Inference.exists_weaklyInfers_of_three_values": {
+      "file": "AISafetyAtlas/Inference/Existence.lean",
+      "sha256": "a7f354186f929222"
+    },
+    "AISafetyAtlas.Inference.fig5_accuracy_gap": {
+      "file": "AISafetyAtlas/Inference/Stochastic/Approximation.lean",
+      "sha256": "93134e75628ce515"
+    },
+    "AISafetyAtlas.Inference.identityDevice_weaklyInfers": {
+      "file": "AISafetyAtlas/Inference/Existence.lean",
+      "sha256": "cafa32ac3c1e2432"
+    },
+    "AISafetyAtlas.Inference.inferenceAccuracy_ge": {
+      "file": "AISafetyAtlas/Inference/Stochastic/Bounds.lean",
+      "sha256": "2bcd19510ca81506"
+    },
+    "AISafetyAtlas.Inference.not_physicallyKnows_true_and_false": {
+      "file": "AISafetyAtlas/Inference/PhysicalKnowledge.lean",
+      "sha256": "10b2d855c3969afe"
+    },
+    "AISafetyAtlas.Inference.physicallyKnows_false_iff_not_true": {
+      "file": "AISafetyAtlas/Inference/PhysicalKnowledge.lean",
+      "sha256": "ef82fa94d020154b"
+    },
+    "AISafetyAtlas.InformationTheory.channelCapacity_eq_of_card_eq_pow": {
+      "file": "AISafetyAtlas/InformationTheory/ChannelCapacity.lean",
+      "sha256": "4750531b5ddab002"
+    },
+    "AISafetyAtlas.InformationTheory.channelCapacity_eq_of_card_eq_two_pow": {
+      "file": "AISafetyAtlas/InformationTheory/ChannelCapacity.lean",
+      "sha256": "e260afc46e7327f5"
+    },
+    "AISafetyAtlas.InformationTheory.channelCapacity_fun": {
+      "file": "AISafetyAtlas/InformationTheory/ChannelCapacity.lean",
+      "sha256": "df89246d085b2d21"
+    },
+    "AISafetyAtlas.InformationTheory.channelCapacity_prod": {
+      "file": "AISafetyAtlas/InformationTheory/ChannelCapacity.lean",
+      "sha256": "feb5e36083484be8"
+    },
+    "AISafetyAtlas.InformationTheory.condMutualInfo_le_mutualInfo": {
+      "file": "AISafetyAtlas/InformationTheory/DataProcessing.lean",
+      "sha256": "9fc2b35311d7cc16"
+    },
+    "AISafetyAtlas.InformationTheory.entropy_le_fano": {
+      "file": "AISafetyAtlas/InformationTheory/Fano.lean",
+      "sha256": "2d9ba1288b69f7de"
+    },
+    "AISafetyAtlas.InformationTheory.fano": {
+      "file": "AISafetyAtlas/InformationTheory/Fano.lean",
+      "sha256": "6061b392e33d1009"
+    },
+    "AISafetyAtlas.InformationTheory.fano_of_embedding": {
+      "file": "AISafetyAtlas/InformationTheory/Fano.lean",
+      "sha256": "36c3b5bba381ced2"
+    },
+    "AISafetyAtlas.InformationTheory.fano_of_log_le": {
+      "file": "AISafetyAtlas/InformationTheory/Fano.lean",
+      "sha256": "593fb73112d9bbca"
+    },
+    "AISafetyAtlas.InformationTheory.fano_unrestricted": {
+      "file": "AISafetyAtlas/InformationTheory/Fano.lean",
+      "sha256": "4e21b284282fc8ca"
+    },
+    "AISafetyAtlas.InformationTheory.isMarkovChain_iff_measure_factorizes": {
+      "file": "AISafetyAtlas/InformationTheory/DataProcessing.lean",
+      "sha256": "c2e68621dd54c81c"
+    },
+    "AISafetyAtlas.InformationTheory.isMarkovChain_iff_measure_factorizes_singleton": {
+      "file": "AISafetyAtlas/InformationTheory/DataProcessing.lean",
+      "sha256": "a7c5936768d92b59"
+    },
+    "AISafetyAtlas.InformationTheory.measure_factorizes_of_isMarkovChain": {
+      "file": "AISafetyAtlas/InformationTheory/DataProcessing.lean",
+      "sha256": "46e0d0cb1ee47bda"
+    },
+    "AISafetyAtlas.InformationTheory.mutualInfo_comp_le": {
+      "file": "AISafetyAtlas/InformationTheory/DataProcessing.lean",
+      "sha256": "e04858b7f0b7ea32"
+    },
+    "AISafetyAtlas.InformationTheory.mutualInfo_eq_iff_isMarkovChain": {
+      "file": "AISafetyAtlas/InformationTheory/DataProcessing.lean",
+      "sha256": "ca94a922d7df18d9"
+    },
+    "AISafetyAtlas.InformationTheory.mutualInfo_le_of_isMarkovChain": {
+      "file": "AISafetyAtlas/InformationTheory/DataProcessing.lean",
+      "sha256": "5b4a207fac062bd3"
+    },
+    "AISafetyAtlas.Knowledge.Devices.BlockwiseCollision.not_physicallyKnows": {
+      "file": "AISafetyAtlas/Knowledge/Devices.lean",
+      "sha256": "63c90539d74a341a"
+    },
+    "AISafetyAtlas.Knowledge.Devices.BlockwiseCollision.not_weaklyInfers": {
+      "file": "AISafetyAtlas/Knowledge/Devices.lean",
+      "sha256": "09070c1bcb73f624"
+    },
+    "AISafetyAtlas.Knowledge.Devices.knowable_probe_of_forall_blockAnswers": {
+      "file": "AISafetyAtlas/Knowledge/Devices.lean",
+      "sha256": "79ac0a95ef3dcadf"
+    },
+    "AISafetyAtlas.Knowledge.Devices.not_blockAnswers_of_witness": {
+      "file": "AISafetyAtlas/Knowledge/Devices.lean",
+      "sha256": "3a26aafcad9ffa73"
+    },
+    "AISafetyAtlas.Knowledge.Embedded.Composition.measuresAll_fibreInference_of_injective": {
+      "file": "AISafetyAtlas/Knowledge/Embedded/Composition.lean",
+      "sha256": "7521f3a731088a3d"
+    },
+    "AISafetyAtlas.Knowledge.Embedded.Composition.meshing_and_measuresAll_fibreInference_of_bijective": {
+      "file": "AISafetyAtlas/Knowledge/Embedded/Composition.lean",
+      "sha256": "ad22c44022df7292"
+    },
+    "AISafetyAtlas.Knowledge.Embedded.Composition.meshing_fibreInference_of_surjective": {
+      "file": "AISafetyAtlas/Knowledge/Embedded/Composition.lean",
+      "sha256": "611d993b74c61828"
+    },
+    "AISafetyAtlas.Knowledge.Embedded.Composition.no_meshing_measures_all_of_nontrivial_remainder": {
+      "file": "AISafetyAtlas/Knowledge/Embedded/Composition.lean",
+      "sha256": "c6d2cd06381024ab"
+    },
+    "AISafetyAtlas.Knowledge.Embedded.Composition.no_meshing_measures_all_of_nontrivial_remainder_of_equiv": {
+      "file": "AISafetyAtlas/Knowledge/Embedded/Composition.lean",
+      "sha256": "b255c8144e53f840"
+    },
+    "AISafetyAtlas.Knowledge.Embedded.Composition.not_meshing_of_not_surjective": {
+      "file": "AISafetyAtlas/Knowledge/Embedded/Composition.lean",
+      "sha256": "ae76469a33741487"
+    },
+    "AISafetyAtlas.Knowledge.Embedded.Composition.properInclusion_iff_not_injective": {
+      "file": "AISafetyAtlas/Knowledge/Embedded/Composition.lean",
+      "sha256": "01e16a9bcd4e3bc8"
+    },
+    "AISafetyAtlas.Knowledge.Embedded.Composition.properInclusion_of_nontrivial_remainder": {
+      "file": "AISafetyAtlas/Knowledge/Embedded/Composition.lean",
+      "sha256": "36d9ef7d3990c898"
+    },
+    "AISafetyAtlas.Knowledge.Embedded.Composition.properInclusion_of_nontrivial_remainder_of_equiv": {
+      "file": "AISafetyAtlas/Knowledge/Embedded/Composition.lean",
+      "sha256": "0e8a3cd820cc09da"
+    },
+    "AISafetyAtlas.Knowledge.Embedded.Finite.no_meshing_measures_all_of_card_lt": {
+      "file": "AISafetyAtlas/Knowledge/Embedded/Finite.lean",
+      "sha256": "e1f5461fd419144d"
+    },
+    "AISafetyAtlas.Knowledge.Embedded.Finite.properInclusion_of_card_lt": {
+      "file": "AISafetyAtlas/Knowledge/Embedded/Finite.lean",
+      "sha256": "07ea9cc907f5c46f"
+    },
+    "AISafetyAtlas.Knowledge.Embedded.Finite.properInclusion_product_of_card_rest_ge_two": {
+      "file": "AISafetyAtlas/Knowledge/Embedded/Finite.lean",
+      "sha256": "0fd06365afb1427f"
+    },
+    "AISafetyAtlas.Knowledge.Embedded.Meshing.restrict_surjective": {
+      "file": "AISafetyAtlas/Knowledge/Embedded.lean",
+      "sha256": "4630e8eb4e2c6e2f"
+    },
+    "AISafetyAtlas.Knowledge.Embedded.eq_restrict_of_infer_singleton_eq": {
+      "file": "AISafetyAtlas/Knowledge/Embedded.lean",
+      "sha256": "9a6c2ba8eb20ef92"
+    },
+    "AISafetyAtlas.Knowledge.Embedded.exists_singleton_infer_eq_of_infer_eq": {
+      "file": "AISafetyAtlas/Knowledge/Embedded.lean",
+      "sha256": "17a09134d7827cea"
+    },
+    "AISafetyAtlas.Knowledge.Embedded.exists_state_not_exactly_measurable": {
+      "file": "AISafetyAtlas/Knowledge/Embedded.lean",
+      "sha256": "d97e16a214f66e71"
+    },
+    "AISafetyAtlas.Knowledge.Embedded.infer_singleton_eq_of_meshing": {
+      "file": "AISafetyAtlas/Knowledge/Embedded.lean",
+      "sha256": "99aba3efea3c88ad"
+    },
+    "AISafetyAtlas.Knowledge.Embedded.no_meshing_inference_distinguishes": {
+      "file": "AISafetyAtlas/Knowledge/Embedded.lean",
+      "sha256": "01392a8bde1bcb5e"
+    },
+    "AISafetyAtlas.Knowledge.Embedded.no_meshing_inference_measures_all_states": {
+      "file": "AISafetyAtlas/Knowledge/Embedded.lean",
+      "sha256": "ecd09f7ee661af7d"
+    },
+    "AISafetyAtlas.Knowledge.Embedded.no_meshing_inference_measures_all_states_direct": {
+      "file": "AISafetyAtlas/Knowledge/Embedded.lean",
+      "sha256": "e77ee24c44ae188e"
+    },
+    "AISafetyAtlas.Knowledge.Embedded.not_knowable_state_of_properInclusion": {
+      "file": "AISafetyAtlas/Knowledge/Embedded.lean",
+      "sha256": "06c6f529081281d8"
+    },
+    "AISafetyAtlas.Knowledge.Knowable.mono": {
+      "file": "AISafetyAtlas/Knowledge.lean",
+      "sha256": "34190022b620c3ac"
+    },
+    "AISafetyAtlas.Knowledge.SelfReference.card_rest_le_one_of_selfComplete": {
+      "file": "AISafetyAtlas/Knowledge/SelfReference.lean",
+      "sha256": "e965741cb0dfa826"
+    },
+    "AISafetyAtlas.Knowledge.SelfReference.not_selfComplete_of_two_rest": {
+      "file": "AISafetyAtlas/Knowledge/SelfReference.lean",
+      "sha256": "1e0500f525e25835"
+    },
+    "AISafetyAtlas.Knowledge.SelfReference.selfComplete_iff_subsingleton_rest": {
+      "file": "AISafetyAtlas/Knowledge/SelfReference.lean",
+      "sha256": "6b2e262a97c8ab2a"
+    },
+    "AISafetyAtlas.Knowledge.Temporal.collisionAt_of_not_knowableAt": {
+      "file": "AISafetyAtlas/Knowledge/Temporal.lean",
+      "sha256": "4cf86e67169b8055"
+    },
+    "AISafetyAtlas.Knowledge.Temporal.knowableFrom_mono": {
+      "file": "AISafetyAtlas/Knowledge/Temporal.lean",
+      "sha256": "62aa2e57d6c81a34"
+    },
+    "AISafetyAtlas.Knowledge.Temporal.not_knowableAt_of_collisionAt": {
+      "file": "AISafetyAtlas/Knowledge/Temporal.lean",
+      "sha256": "620a3424a5319771"
+    },
+    "AISafetyAtlas.Knowledge.ambiguity_le_of_comp": {
+      "file": "AISafetyAtlas/Knowledge/Ambiguity.lean",
+      "sha256": "03e0be577967fc79"
+    },
+    "AISafetyAtlas.Knowledge.ambiguity_le_of_evidenceMonotone": {
+      "file": "AISafetyAtlas/Knowledge/Accumulation.lean",
+      "sha256": "5d1b1eb9b35af7b5"
+    },
+    "AISafetyAtlas.Knowledge.ambiguity_le_pairTarget_left": {
+      "file": "AISafetyAtlas/Knowledge/Accumulation.lean",
+      "sha256": "a74ac0c358a6c430"
+    },
+    "AISafetyAtlas.Knowledge.ambiguity_le_pairTarget_of_evidenceMonotone": {
+      "file": "AISafetyAtlas/Knowledge/Accumulation.lean",
+      "sha256": "d71031f21dd549d6"
+    },
+    "AISafetyAtlas.Knowledge.ambiguity_le_pairTarget_right": {
+      "file": "AISafetyAtlas/Knowledge/Accumulation.lean",
+      "sha256": "31c87588b664d3b8"
+    },
+    "AISafetyAtlas.Knowledge.ambiguity_pairTarget_le_mul": {
+      "file": "AISafetyAtlas/Knowledge/Accumulation.lean",
+      "sha256": "20da684a15bec4e2"
+    },
+    "AISafetyAtlas.Knowledge.card_image_le_of_knowable": {
+      "file": "AISafetyAtlas/Knowledge/Ambiguity.lean",
+      "sha256": "2721720516c18fea"
+    },
+    "AISafetyAtlas.Knowledge.condEntropy_eq_zero_of_knowable": {
+      "file": "AISafetyAtlas/Knowledge/Entropy.lean",
+      "sha256": "34eabc11f09b99a3"
+    },
+    "AISafetyAtlas.Knowledge.exists_witness_of_not_knowable": {
+      "file": "AISafetyAtlas/Knowledge.lean",
+      "sha256": "6e01d85cf780ec2c"
+    },
+    "AISafetyAtlas.Knowledge.knowable_id_iff_injective": {
+      "file": "AISafetyAtlas/Knowledge.lean",
+      "sha256": "88cdceeab50f9684"
+    },
+    "AISafetyAtlas.Knowledge.knowable_iff_ambiguity_le_one": {
+      "file": "AISafetyAtlas/Knowledge/Ambiguity.lean",
+      "sha256": "4c4bd8ce95972279"
+    },
+    "AISafetyAtlas.Knowledge.knowable_iff_factorsThrough": {
+      "file": "AISafetyAtlas/Knowledge.lean",
+      "sha256": "e9e1c5ac5ee42a26"
+    },
+    "AISafetyAtlas.Knowledge.knowable_iff_no_collision": {
+      "file": "AISafetyAtlas/Knowledge.lean",
+      "sha256": "3564decca66d3288"
+    },
+    "AISafetyAtlas.Knowledge.le_errorProb_of_decoder": {
+      "file": "AISafetyAtlas/Knowledge/Entropy.lean",
+      "sha256": "d9bb29e5c4e441da"
+    },
+    "AISafetyAtlas.Knowledge.not_knowable_comp": {
+      "file": "AISafetyAtlas/Knowledge.lean",
+      "sha256": "7dbb852bec3b4f5c"
+    },
+    "AISafetyAtlas.Knowledge.not_knowable_of_card_lt": {
+      "file": "AISafetyAtlas/Knowledge/Ambiguity.lean",
+      "sha256": "94afceb03dcd7120"
+    },
+    "AISafetyAtlas.Knowledge.not_knowable_of_collision": {
+      "file": "AISafetyAtlas/Knowledge.lean",
+      "sha256": "cd4f364f6e9759e9"
+    },
+    "AISafetyAtlas.Knowledge.not_knowable_of_condEntropy_ne_zero": {
+      "file": "AISafetyAtlas/Knowledge/Entropy.lean",
+      "sha256": "4c3d4dab75bfcf29"
+    },
+    "AISafetyAtlas.Knowledge.not_knowable_of_witness": {
+      "file": "AISafetyAtlas/Knowledge.lean",
+      "sha256": "91f12687993e8d3f"
+    },
+    "AISafetyAtlas.Knowledge.not_knowable_pairTarget_of_not_knowable": {
+      "file": "AISafetyAtlas/Knowledge/Accumulation.lean",
+      "sha256": "b92a19d9906376f5"
+    },
+    "AISafetyAtlas.Knowledge.not_knowable_state_of_nontrivial_remainder": {
+      "file": "AISafetyAtlas/Knowledge.lean",
+      "sha256": "20e2002a7d25f95b"
+    },
+    "AISafetyAtlas.Learning.card_observed_eq": {
+      "file": "AISafetyAtlas/Learning/Sharp.lean",
+      "sha256": "ed9daf58f78c8f33"
+    },
+    "AISafetyAtlas.Learning.closedUnderPermutation_of_nfl": {
+      "file": "AISafetyAtlas/Learning/Sharp.lean",
+      "sha256": "d88490820b62357e"
+    },
+    "AISafetyAtlas.Learning.closedUnderPermutation_of_permInvariant": {
+      "file": "AISafetyAtlas/Learning/Sharp.lean",
+      "sha256": "236708e951874991"
+    },
+    "AISafetyAtlas.Learning.exists_observed_eq": {
+      "file": "AISafetyAtlas/Learning/Sharp.lean",
+      "sha256": "97748ccc08f5fbb7"
+    },
+    "AISafetyAtlas.Learning.homogeneous_iff_learner_indep": {
+      "file": "AISafetyAtlas/Learning.lean",
+      "sha256": "78f522a14f60fdc1"
+    },
+    "AISafetyAtlas.Learning.homogeneous_of_learner_indep": {
+      "file": "AISafetyAtlas/Learning.lean",
+      "sha256": "738f21e88f343b11"
+    },
+    "AISafetyAtlas.Learning.lossConfig_sum_learner_indep": {
+      "file": "AISafetyAtlas/Learning.lean",
+      "sha256": "f371b9c548eca965"
+    },
+    "AISafetyAtlas.Learning.nfl_adaptive_iff_permInvariant": {
+      "file": "AISafetyAtlas/Learning/Sharp.lean",
+      "sha256": "9e0851ccab7065bc"
+    },
+    "AISafetyAtlas.Learning.nfl_adaptive_of_permInvariant": {
+      "file": "AISafetyAtlas/Learning/Sharp.lean",
+      "sha256": "ac454de4a2fa14a9"
+    },
+    "AISafetyAtlas.Learning.nfl_iff_permInvariant": {
+      "file": "AISafetyAtlas/Learning/Sharp.lean",
+      "sha256": "a78bfa48a94555ef"
+    },
+    "AISafetyAtlas.Learning.nfl_mixture_of_permInvariant": {
+      "file": "AISafetyAtlas/Learning/Sharp.lean",
+      "sha256": "98f4c46c99f75dd2"
+    },
+    "AISafetyAtlas.Learning.nfl_of_permInvariant": {
+      "file": "AISafetyAtlas/Learning/Sharp.lean",
+      "sha256": "7cf89946284117d9"
+    },
+    "AISafetyAtlas.Learning.nfl_stochastic_of_permInvariant": {
+      "file": "AISafetyAtlas/Learning/Sharp.lean",
+      "sha256": "1e53e4532a39b18a"
+    },
+    "AISafetyAtlas.Learning.no_free_lunch": {
+      "file": "AISafetyAtlas/Learning.lean",
+      "sha256": "917f9557e719037a"
+    },
+    "AISafetyAtlas.Learning.no_free_lunch_adaptive": {
+      "file": "AISafetyAtlas/Learning.lean",
+      "sha256": "dd1325c3aca44547"
+    },
+    "AISafetyAtlas.Learning.no_free_lunch_adaptive_of_sharp": {
+      "file": "AISafetyAtlas/Learning/Sharp.lean",
+      "sha256": "12469fd1131bb2c4"
+    },
+    "AISafetyAtlas.Learning.no_free_lunch_embedding_of_sharp": {
+      "file": "AISafetyAtlas/Learning/Sharp.lean",
+      "sha256": "db7fb95abe891700"
+    },
+    "AISafetyAtlas.Learning.no_free_lunch_supervised": {
+      "file": "AISafetyAtlas/Learning.lean",
+      "sha256": "085bb40007b4cd70"
+    },
+    "AISafetyAtlas.Learning.observed_permRule": {
+      "file": "AISafetyAtlas/Learning/Sharp.lean",
+      "sha256": "71a3967dad426fb9"
+    },
+    "AISafetyAtlas.Learning.ots_error_distribution_learner_indep": {
+      "file": "AISafetyAtlas/Learning.lean",
+      "sha256": "07cb014440edf7f8"
+    },
+    "AISafetyAtlas.Learning.permInvariant_of_closedUnderPermutation": {
+      "file": "AISafetyAtlas/Learning/Sharp.lean",
+      "sha256": "8242307484062d40"
+    },
+    "AISafetyAtlas.Learning.permInvariant_of_nfl": {
+      "file": "AISafetyAtlas/Learning/Sharp.lean",
+      "sha256": "a8e982d6d988fa69"
+    },
+    "AISafetyAtlas.Learning.ruleVisit_permRule": {
+      "file": "AISafetyAtlas/Learning/Sharp.lean",
+      "sha256": "2df162b8fed643b5"
+    },
+    "AISafetyAtlas.Logic.chaitin_bound": {
+      "file": "AISafetyAtlas/Logic.lean",
+      "sha256": "6c4f052a85a0670a"
+    },
+    "AISafetyAtlas.Logic.chaitin_incompleteness": {
+      "file": "AISafetyAtlas/Logic.lean",
+      "sha256": "9dc271586c27952c"
+    },
+    "AISafetyAtlas.Logic.godel_first_incompleteness": {
+      "file": "AISafetyAtlas/Logic.lean",
+      "sha256": "09391d8da190416c"
+    },
+    "AISafetyAtlas.Logic.godel_second_incompleteness": {
+      "file": "AISafetyAtlas/Logic.lean",
+      "sha256": "438559898cb8699f"
+    },
+    "AISafetyAtlas.Logic.lawvere_fixed_point": {
+      "file": "AISafetyAtlas/Logic.lean",
+      "sha256": "deed8c018a9e2cf2"
+    },
+    "AISafetyAtlas.Logic.loeb": {
+      "file": "AISafetyAtlas/Logic.lean",
+      "sha256": "c4e254ec99b73df8"
+    },
+    "AISafetyAtlas.Logic.tarski_undefinability": {
+      "file": "AISafetyAtlas/Logic.lean",
+      "sha256": "47ddfb4ed43bd2ff"
+    },
+    "AISafetyAtlas.Oversight.Debate.alice_fast": {
+      "file": "AISafetyAtlas/Oversight/Debate.lean",
+      "sha256": "2319af7cc79b8a89"
+    },
+    "AISafetyAtlas.Oversight.Debate.bob_fast": {
+      "file": "AISafetyAtlas/Oversight/Debate.lean",
+      "sha256": "25fdbdecf3344283"
+    },
+    "AISafetyAtlas.Oversight.Debate.completeness": {
+      "file": "AISafetyAtlas/Oversight/Debate.lean",
+      "sha256": "0e7d7349370698f7"
+    },
+    "AISafetyAtlas.Oversight.Debate.correctness": {
+      "file": "AISafetyAtlas/Oversight/Debate.lean",
+      "sha256": "c5596dfb3eee5f6c"
+    },
+    "AISafetyAtlas.Oversight.Debate.soundness": {
+      "file": "AISafetyAtlas/Oversight/Debate.lean",
+      "sha256": "168438d425af4f4f"
+    },
+    "AISafetyAtlas.Oversight.Debate.vera_fast": {
+      "file": "AISafetyAtlas/Oversight/Debate.lean",
+      "sha256": "f16f6ca4f57e2933"
+    },
+    "AISafetyAtlas.Oversight.JointObservation.covers_iff_no_collision": {
+      "file": "AISafetyAtlas/Oversight/JointObservation/Coverage.lean",
+      "sha256": "0e7fa66873ea44b2"
+    },
+    "AISafetyAtlas.Oversight.exists_cannotForce_false_and_forces": {
+      "file": "AISafetyAtlas/Oversight/VarietyCheck.lean",
+      "sha256": "7039fccc78f89d80"
+    },
+    "AISafetyAtlas.Oversight.forces_of_constant_effect": {
+      "file": "AISafetyAtlas/Oversight/VarietyBound.lean",
+      "sha256": "0adee308fbb2b9c0"
+    },
+    "AISafetyAtlas.Oversight.forces_of_constant_effect_of_not_knowable": {
+      "file": "AISafetyAtlas/Oversight/VarietyBound.lean",
+      "sha256": "d56df2c60455afdb"
+    },
+    "AISafetyAtlas.Oversight.not_forces_of_cannotForce": {
+      "file": "AISafetyAtlas/Oversight/VarietyCheck.lean",
+      "sha256": "f5efe3f8294f5c89"
+    },
+    "AISafetyAtlas.Oversight.not_forces_of_card_lt": {
+      "file": "AISafetyAtlas/Oversight/VarietyBound.lean",
+      "sha256": "bae0c5d930cb4005"
+    },
+    "AISafetyAtlas.Preference.OverrideModel.mixtureValue_rationalise": {
+      "file": "AISafetyAtlas/Preference/Override.lean",
+      "sha256": "fbfa5c86af48777e"
+    },
+    "AISafetyAtlas.Preference.OverrideModel.rationalise_strictly_better": {
+      "file": "AISafetyAtlas/Preference/Override.lean",
+      "sha256": "666caa754a7f1e0c"
+    },
+    "AISafetyAtlas.Preference.ReasonableLanguage.proposition_eight": {
+      "file": "AISafetyAtlas/Preference/Reasonable.lean",
+      "sha256": "94486753ce5e223c"
+    },
+    "AISafetyAtlas.Preference.ReasonableLanguage.proposition_seven": {
+      "file": "AISafetyAtlas/Preference/Reasonable.lean",
+      "sha256": "b5fad33ba20fc659"
+    },
+    "AISafetyAtlas.Preference.RegretModel.cannot_rule_out_half_maximal_regret": {
+      "file": "AISafetyAtlas/Preference/Regret.lean",
+      "sha256": "2b47c4a0e03e45a3"
+    },
+    "AISafetyAtlas.Preference.Source.ReasonableForF.proposition_eight": {
+      "file": "AISafetyAtlas/Preference/SourceComplexity.lean",
+      "sha256": "7dafe6433e93498c"
+    },
+    "AISafetyAtlas.Preference.Source.ReasonableForF.proposition_seven": {
+      "file": "AISafetyAtlas/Preference/SourceComplexity.lean",
+      "sha256": "3b329f83d60e2a9b"
+    },
+    "AISafetyAtlas.Preference.Source.ReasonableForF.theorem_two_conditional": {
+      "file": "AISafetyAtlas/Preference/SourceComplexity.lean",
+      "sha256": "d9146c773c336763"
+    },
+    "AISafetyAtlas.Preference.consistent_rewards_eq_univ": {
+      "file": "AISafetyAtlas/Preference.lean",
+      "sha256": "261c60c9120d3594"
+    },
+    "AISafetyAtlas.Preference.degenerate_explanation_cheap": {
+      "file": "AISafetyAtlas/Preference/Complexity.lean",
+      "sha256": "3e6308e7a348d90c"
+    },
+    "AISafetyAtlas.Preference.exists_planner": {
+      "file": "AISafetyAtlas/Preference.lean",
+      "sha256": "c485f1f567d52ab3"
+    },
+    "AISafetyAtlas.Preference.exists_reward": {
+      "file": "AISafetyAtlas/Preference.lean",
+      "sha256": "4999e9cf316ccdff"
+    },
+    "AISafetyAtlas.Preference.explanation_at_least_behaviour": {
+      "file": "AISafetyAtlas/Preference/Complexity.lean",
+      "sha256": "ba79a545961ed2e5"
+    },
+    "AISafetyAtlas.Preference.explanation_complexity_eq_behaviour": {
+      "file": "AISafetyAtlas/Preference/Complexity.lean",
+      "sha256": "603e71f1de3b8c2d"
+    },
+    "AISafetyAtlas.Preference.greedy_rewardOf": {
+      "file": "AISafetyAtlas/Preference.lean",
+      "sha256": "057406e9fa1881e4"
+    },
+    "AISafetyAtlas.Preference.neg_twin": {
+      "file": "AISafetyAtlas/Preference.lean",
+      "sha256": "fd7dc931d40ea23e"
+    },
+    "AISafetyAtlas.SelfAwareness.Model.limited_self_awareness": {
+      "file": "AISafetyAtlas/SelfAwareness.lean",
+      "sha256": "50c6d23c79fb5361"
+    },
+    "AISafetyAtlas.SelfAwareness.Model.not_agentAware_of_maximal": {
+      "file": "AISafetyAtlas/SelfAwareness.lean",
+      "sha256": "196337841f786459"
+    },
+    "AISafetyAtlas.SelfAwareness.Model.not_aware_of_le": {
+      "file": "AISafetyAtlas/SelfAwareness.lean",
+      "sha256": "5077cbf5306b73b6"
+    },
+    "AISafetyAtlas.SelfAwareness.Model.not_perfectlySelfAware": {
+      "file": "AISafetyAtlas/SelfAwareness.lean",
+      "sha256": "4066b8cee60bd4c7"
+    },
+    "AISafetyAtlas.SelfAwareness.Model.process_not_self_aware": {
+      "file": "AISafetyAtlas/SelfAwareness.lean",
+      "sha256": "e236787355115db3"
+    },
+    "AISafetyAtlas.SocialChoice.Utility.arrow": {
+      "file": "AISafetyAtlas/SocialChoice/Utility.lean",
+      "sha256": "16ce2fdfd128d569"
+    },
+    "AISafetyAtlas.SocialChoice.arrow": {
+      "file": "AISafetyAtlas/SocialChoice.lean",
+      "sha256": "16ce2fdfd128d569"
+    },
+    "AISafetyAtlas.SocialChoice.gibbard_satterthwaite": {
+      "file": "AISafetyAtlas/SocialChoice.lean",
+      "sha256": "1d4e255717ae9e28"
+    },
+    "AISafetyAtlas.Verification.AgentBehavior.no_behavioral_safety_verifier": {
+      "file": "AISafetyAtlas/Verification/AgentBehavior.lean",
+      "sha256": "0ecaea67d08c9344"
+    },
+    "AISafetyAtlas.Verification.Robot.action_safety_unverifiable": {
+      "file": "AISafetyAtlas/Verification/Robot.lean",
+      "sha256": "0e0d2fc254112967"
+    },
+    "AISafetyAtlas.Verification.rice": {
+      "file": "AISafetyAtlas/Verification.lean",
+      "sha256": "6f342eb0bbafa92f"
+    },
+    "AISafetyAtlas.Wireheading.AgentEquations.value_eq_of_agree_on_window": {
+      "file": "AISafetyAtlas/Wireheading/AgentEquations.lean",
+      "sha256": "a0c827b65ec1fccf"
+    },
+    "AISafetyAtlas.Wireheading.CRMDP.Model.everitt_theorem_eleven": {
+      "file": "AISafetyAtlas/Wireheading/CRMDP.lean",
+      "sha256": "a5945f8ca4c573b8"
+    },
+    "AISafetyAtlas.Wireheading.GoalPreservationSource.Model.selected_matches_initial": {
+      "file": "AISafetyAtlas/Wireheading/GoalPreservationSource.lean",
+      "sha256": "34a1b6440544a1b6"
+    },
+    "AISafetyAtlas.Wireheading.ObservationLimits.not_knowable_trueReturn": {
+      "file": "AISafetyAtlas/Wireheading/ObservationLimits.lean",
+      "sha256": "815d85a2d56711d6"
+    },
+    "AISafetyAtlas.Wireheading.ObservationLimits.not_knowable_trueReturn_of_complement_mem": {
+      "file": "AISafetyAtlas/Wireheading/ObservationLimits.lean",
+      "sha256": "a8552308074f6b2b"
+    },
+    "AISafetyAtlas.Wireheading.ObservationLimits.returnOver_zeroEnv_complement": {
+      "file": "AISafetyAtlas/Wireheading/ObservationLimits.lean",
+      "sha256": "08b5d06467423301"
+    }
+  }
+}

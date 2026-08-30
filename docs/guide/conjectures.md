@@ -9,8 +9,8 @@ attack. So a precise open question is a deliverable here, not a placeholder for
 one.
 
 An open conjecture asserts nothing — defining a `Prop` is not claiming it, and
-that is the whole point of the mechanism. **Eight conjecture records are currently
-present: four open and four resolved**, and each resolved row
+that is the whole point of the mechanism. **Nine conjecture records are currently
+present: four open and five resolved**, and each resolved row
 names the proof that settled it.
 
 ## Four kinds of row, because not every printed problem is a conjecture
@@ -26,6 +26,13 @@ Keeping such problems out of the ledger left the atlas with no single index of
 what it covers, and a reader who opened `conjectures.yaml` could reasonably
 conclude the formalization stopped where the rows did. Since 2026-08-24 every
 printed A2 target has a row, and the `kind` field says what sort of row it is.
+
+**The ledger is no longer A2-only.** CONJ-025 grades MAIS-O38 against agenda
+**A3**'s `prob:samples`, a dictionary-learning uniqueness question that shares
+none of the causal vocabulary the other rows are built on; every rule below
+applies to it unchanged, including the `Same`-scope requirement. Its
+transcription is recorded in
+[`mais-o38-transcription.md`](../provenance/mais-o38-transcription.md).
 
 | `kind` | What the source does | What `lean` points at | Resolved by |
 |---|---|---|---|
@@ -86,13 +93,13 @@ row uses it today; the positional `answer_admissible` list is what it is checked
 against, so it cannot be asserted of a row whose clauses agree.
 
 `scripts/validate_conjectures.py` prints the breakdown rather than one number,
-because *"eight recorded"* over a 19-row file is how this confusion started. Counts elsewhere in this guide are over conjecture rows — kinds
+because *"eight recorded"* over a 20-row file is how this confusion started. Counts elsewhere in this guide are over conjecture rows — kinds
 `claim` and `answer` — since a blocked row is not an open conjecture.
 
 ## Who proposed what
 
-**Three of the four resolved rows rest on constructions submitted to MAIS by
-other people, and the fourth reuses one of them.** The ledger records this per
+**Four of the five resolved rows rest on constructions submitted to MAIS by
+other people, and the fifth reuses one of them.** The ledger records this per
 row in `proposed_by`; it is repeated here because a reader who meets the atlas
 through a "resolved" count will otherwise read the constructions as its own.
 
@@ -103,6 +110,7 @@ through a "resolved" count will otherwise read the constructions as its own.
 | CONJ-008 | MAIS-O29(a) | issue #6's collision pair again | the transfer step — that the pair is also a Boltzmann collision at every positive inverse temperature — and its proof |
 | CONJ-009 | MAIS-O34(a), fibre criterion | Rob Sneiderman (Robby955), MAIS [issue #4](https://github.com/lionellevine/MAIS/issues/4) | both directions of the equivalence, the non-vacuity witnesses on each side, the restatement against the printed class, and the semialgebraicity of the criterion |
 | CONJ-010 | MAIS-O31 | Svyatoslav Novikov (kumino) with OpenAI Codex, MAIS [issue #8](https://github.com/lionellevine/MAIS/issues/8) | transcription only; the row is `OPEN` |
+| CONJ-025 | MAIS-O38 | David Holmes (26david26) with GPT 5.6 Sol, MAIS [issue #30](https://github.com/lionellevine/MAIS/issues/30) | transcription and the machine-check, together with four domain-neutral facts Mathlib lacked that the proof needs |
 
 **What is the atlas's own** is the statement layer and the proofs, which is a
 smaller claim than resolving the problems and a different one. Named results
@@ -127,6 +135,15 @@ before believing a `Same` grade.
 **A resolved row is not a resolved problem**, and every resolution field says
 which clause it covers. MAIS-O29 has three clauses and CONJ-008 answers (a);
 MAIS-O34 has two and CONJ-005 and CONJ-009 together answer part of (a).
+
+**CONJ-025 is the exception, and it is worth stating plainly.** MAIS-O38 has one
+clause and no sub-parts, and it is now **true** at print's own quantifier —
+`Examples.Conjectures.MAIS.maisO38_polynomialSamplesSuffice_holds`. The
+construction and the argument are MAIS [issue #30](https://github.com/lionellevine/MAIS/issues/30)'s,
+submitted by 26david26 and stated there to have been produced and checked
+entirely by AI systems with no human verification; the machine-check is now that
+verification. Two readings of quantifiers print leaves unwritten are separately
+false and are carried beside the row as findings, not as answers.
 
 ## How a conjecture is checked without being believed
 

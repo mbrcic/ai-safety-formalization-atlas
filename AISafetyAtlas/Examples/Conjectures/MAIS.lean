@@ -10,6 +10,8 @@ public import AISafetyAtlas.Examples.Conjectures.MAIS.Rates
 public import AISafetyAtlas.Examples.Conjectures.MAIS.O25
 public import AISafetyAtlas.Examples.Conjectures.MAIS.O26
 public import AISafetyAtlas.Examples.Conjectures.MAIS.O27
+public import AISafetyAtlas.Examples.Conjectures.MAIS.O38
+public import AISafetyAtlas.Examples.Conjectures.MAIS.O38Candidate
 
 /-!
 # Non-vacuity checks for the MAIS statement layer
@@ -36,3 +38,7 @@ file under `AISafetyAtlas/Examples/Conjectures/MAIS/`, mirroring the statement
 split under `AISafetyAtlas/Conjectures/MAIS/`. Every declaration keeps the
 `AISafetyAtlas.Examples.Conjectures.MAIS` namespace it had before.
 -/
+
+namespace AISafetyAtlas.Examples.Conjectures.MAIS
+
+end AISafetyAtlas.Examples.Conjectures.MAIS

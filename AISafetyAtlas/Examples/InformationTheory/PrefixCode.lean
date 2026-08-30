@@ -1,11 +1,11 @@
 module
 
-public import AISafetyAtlas.Causal.SparseEncoding
+public import AISafetyAtlas.InformationTheory.PrefixCode
 
 /-!
 # Worked model of the sparse monomial code
 
-`AISafetyAtlas.Causal.SparseEncoding` supplies the syntax MAIS-O24's
+`AISafetyAtlas.InformationTheory.PrefixCode` supplies the syntax MAIS-O24's
 construction-time clause is stated in. This module runs it, because the two
 properties that clause leans on are easy to assert and easy to get wrong.
 
@@ -21,9 +21,9 @@ The decoder is exercised too, on the one polynomial whose syntax is forced: the
 empty monomial list is the zero polynomial.
 -/
 
-namespace AISafetyAtlas.Examples.Causal.SparseEncoding
+namespace AISafetyAtlas.Examples.InformationTheory.PrefixCode
 
-open AISafetyAtlas.Causal
+open AISafetyAtlas.InformationTheory
 
 /-! ## Codewords -/
 
@@ -108,4 +108,4 @@ public theorem ofSparsePoly_single {σ : Type} (x : σ) :
     ofSparsePoly [((1 : ℚ), [(x, 1)])] = (MvPolynomial.X x : MvPolynomial σ ℚ) := by
   simp [ofSparsePoly, ofSparseMonomial, sparseExponents, MvPolynomial.X]
 
-end AISafetyAtlas.Examples.Causal.SparseEncoding
+end AISafetyAtlas.Examples.InformationTheory.PrefixCode

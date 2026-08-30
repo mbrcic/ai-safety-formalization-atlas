@@ -594,7 +594,17 @@ COUNT_MAIS = [
     # pattern failed on `twenty-one-row file` and the sentence went unchecked,
     # which reads exactly like a sentence that agreed with the ledger.
     (re.compile(r"(?<![-\w])(?P<n>[\w-]+)[- ]row file\b", re.I), "rows"),
-    (re.compile(r"\ball (?P<n>[\w-]+) problems of agenda A2\b", re.I), "mais_problems"),
+    # Was `problems of agenda A2`, which stopped being the whole set when
+    # MAIS-O38 arrived from agenda A3. A pattern naming one agenda would have
+    # gone on matching a sentence that had become false about the ledger,
+    # or -- once the sentence was rewritten -- matched nothing at all and
+    # read exactly like agreement.
+    (
+        re.compile(
+            r"\ball (?P<n>[\w-]+) printed problems of the MAIS agendas\b", re.I
+        ),
+        "mais_problems",
+    ),
 ]
 
 

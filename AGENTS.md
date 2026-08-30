@@ -9,6 +9,17 @@ Agent map: [`docs/agent/INDEX.md`](docs/agent/INDEX.md). Human doc map:
 
 ### Start here (small by design)
 
+**Fastest route, and it needs no agent in particular:** make your change, then
+run `python3 scripts/preflight.py`. It reads the diff, works out which kinds of
+contribution it contains, and prints only the obligations and commands that
+apply, each naming the section here that governs it. It restates no rule and
+decides nothing — the gate does that — but it removes the step where a
+contributor reads a thousand lines of policy to find the twenty that bind them.
+
+Agents that load project skills will find the same route as
+[`.agents/skills/atlas-contribution/SKILL.md`](.agents/skills/atlas-contribution/SKILL.md);
+it holds the order to work in and no rules, which stay here.
+
 Open this file, `STATE.md`, and `docs/agent/INDEX.md` first. The other paths
 below are conditional and should be opened only when the task needs them.
 
@@ -33,6 +44,9 @@ below are conditional and should be opened only when the task needs them.
 | `AISafetyAtlas/Upstream/**` | Large vendored/collapsed proofs | Editing that formalization only |
 | `vendor/**` | Upstream vendor trees | Editing that vendored package only |
 | `.lake/**`, `**/CLAUDE.md`, `ai_context.txt` | Build cache / tool dumps | Never as task context |
+| [`docs/status/declaration-index.json`](docs/status/declaration-index.json) | The largest file in the repository (~155k tokens); it is a lookup table, never a read | Resolving one name — `rg '"AISafetyAtlas\.Foo\.bar"'`, or ask the Lean LSP |
+| `docs/status/*-dependency-graph.json` | Machine view of one cluster; `inference` alone is ~52k tokens | A tool consumes it. To *read* a cluster, open the `.md` sibling |
+| [`docs/provenance/source-coverage-audit.md`](docs/provenance/source-coverage-audit.md) | ~42k tokens of statement-by-statement grading | One source's section (`rg -A40 '^## 6\.'`) or one row, never the file |
 | Accidental `https:/`, `http:/` trees | wget path debris (gitignored) | Delete if recreated |
 
 ### Lean surface rule
@@ -74,6 +88,15 @@ fibre/collision argument.
 - **Harness** — serves no single module and stays flat in `Examples/`:
   `PublicAPI`, `Registry`, `NonVacuity`, `SixTargets`, `WorkbenchConsumers`,
   `FirstContribution`, `HaltingExample`, `NFLConcrete`.
+
+**Two namespace spellings are legal**, and the tree uses both: the full path
+(`AISafetyAtlas.Examples.Verification.Robot`, 47 files) or the directory holding
+it (`AISafetyAtlas.Examples.Verification`, 21 files). Either is findable from the
+module being witnessed, which is what the convention is for. A namespace
+agreeing with neither is not legal, and `scripts/check_examples_layout.py`
+decides all of this in the cheap gate — so this section is background, not
+something to check by hand. Files a script generates are skipped: they declare
+nothing.
 
 A new example for one module takes the mirror path. Renaming an existing one
 also touches `scripts/lean_build_targets.txt`,
@@ -121,11 +144,13 @@ is re-checked — a module that gains coverage must lose its entry.
 ### Cheap vs full validation
 
 ```console
-./scripts/agent_gate.sh   # schema + generated views + path checks (no lake)
+./scripts/agent_gate.sh          # schema + generated views + path checks (no lake)
+./scripts/agent_gate.sh --fast   # same, minus the validator self-tests
 ```
 
-Full Lean gate is under **Validation** below. Skip `lake build` for pure docs
-or agent-index edits.
+Full Lean gate is under **Validation** below, together with what `--fast` drops
+and when dropping it is not allowed. Skip `lake build` for pure docs or
+agent-index edits.
 
 ## Public Lean API
 
@@ -184,6 +209,38 @@ foundation may land ahead of its consumers when all four hold:
 
 A foundation is a `LAND-` artifact row, never headline coverage, and carries no
 statement-match grade against a source it does not state.
+
+## Statement freeze
+
+**A reviewed statement is frozen. Proofs are not.** A statement is reviewed
+once it carries a fidelity grade in `registry.yaml` or `conjectures.yaml`, or a
+pinned source in `docs/provenance/`.
+
+| may change freely | frozen |
+|---|---|
+| proof bodies, `have`/`let` structure, tactic choice | the binders, hypotheses, quantifiers and conclusion of the declaration |
+| new private helper lemmas | the axiom set — nothing may be added |
+| docstring prose that does not restate the claim | the claim a docstring or grade asserts |
+
+Weakening a hypothesis, narrowing a quantifier, adding a side condition, or
+specializing the conclusion is **not** a proof step, even when it makes the
+proof go through. It is a **schema event**: revise the statement in its own
+change, say which direction fidelity moved, and re-grade the row. A grade
+earned by the old statement does not transfer to the new one.
+
+The reason is that the kernel cannot see this failure. Every fidelity defect
+this repository has shipped and later fixed was in a definition or a statement,
+and every one compiled. An agent that may edit statements can always close a
+goal by editing the goal, and the build reports success either way.
+
+If a statement looks wrong, say so and stop — a `sorry` with a note naming the
+suspected defect is a better outcome than a proof of something else.
+
+`scripts/check_statement_freeze.py` hashes the signature of every ledger-graded
+declaration against `docs/status/statement-lock.json` and reports drift in the
+cheap gate. It is advisory and compares source text, so reformatting reports a
+change that is not one — the report is a question, never a verdict. Answer it,
+re-grade the row if fidelity moved, then `--write` to record the new statement.
 
 ## Coverage, landscape, and bridges
 
@@ -279,7 +336,7 @@ proof it failed to refute.
 
 **To search over devices, not just over values:** `InferenceDevice` carries its
 setup type as a field, so a statement quantifying over devices ranges over a proper
-class and nothing can enumerate it. `Examples.Inference.FinDevice` fixes both types
+class and nothing can enumerate it. `Examples.Inference.Enumerable.FinDevice` fixes both types
 (`U = Fin m`, `Setup = Fin n`), is a `Fintype`, and carries a `Decidable` instance
 for `WeaklyInfers`. `decide` then settles *"no device of this shape does X"* in the
 kernel — exhaustive and trusted, where sampling would be neither. The instance has
@@ -313,6 +370,71 @@ The gate ends with `pytest tests/` (malformed-shape regressions) and
 `ty check scripts/ tests/`. Both are skipped with a notice when the tool is not
 installed, so the gate still runs without them; CI installs both, so neither is
 optional on a pull request. Install with `python3 -m pip install pytest ty`.
+
+### The `--fast` lane (`--lean` is the old name)
+
+```console
+./scripts/agent_gate.sh --fast          # skips the five self-test steps
+./scripts/agent_gate.sh --fast --quiet  # both flags compose
+```
+
+`--fast` skips exactly five steps: `test_validators`, `test_source_neutral_views`,
+`test_a1_a3_pattern_a_harness`, `pytest tests/`, and `ty check`. Those five
+exercise the validator scripts themselves.
+
+**Correction, 2026-08-29.** This section used to say those five *"take no input
+from `AISafetyAtlas/`, `docs/`, or the ledgers"* and that *"editing Lean cannot
+change their verdict."* Both are false, and they were the stated reason the lane
+is safe. `test_validators` copies `registry.yaml`, `conjectures.yaml`,
+`tasks.yaml`, `formalization-search.json`, `AISafetyAtlas.lean`, the whole
+`AISafetyAtlas/` tree and several `docs/` trees into a temporary tree and runs
+the validators against them; `test_source_neutral_views` reads the live
+registry; the a1–a3 harness reads a reproduction script and provenance
+documents; and `tests/` reaches declaration locations and repository Markdown.
+Repository content is an input to all of them, so a `--fast` run can be green
+over a change they would reject.
+
+What justifies the lane is therefore **when** it is used, not independence — see
+the retry-loop paragraph below — and the rule that the full gate is owed before
+the commit stands unchanged.
+
+Everything that reads the tree, the ledgers, or the generated views *directly*
+still runs, so `--fast` still catches a rename that orphaned a docstring name, a
+module missing from the root import, a stale dependency graph, a mislaid example
+file, a changed graded statement, or a registry `line:` field that shifted.
+
+**Numbers are measurements, not constants.** On 2026-08-29 `test_validators`
+runs in ~12 s, down from ~53 s. Nothing was dropped to get there: the Lean
+masker stopped scanning one character at a time, and the import-line regex
+stopped running under `re.M`, where its leading `\s*` consumed newlines and made
+the engine rescan blank runs from every position. Whole-gate timings on one
+machine varied roughly threefold run to run, so no single figure for them is
+quoted here. Measure; do not inherit a number from this file.
+
+**This is a retry loop, not an iteration loop.** The gate belongs before a
+commit, not between edits, so `--fast` earns nothing on the first run — you owe
+the full gate anyway. Where it pays is the second run and after: the gate fails
+on a Lean-facing check, you fix, and you want to know whether the fix took. That
+retry is a fraction of the full gate, and the failures that put you in that loop are
+exactly the ones `--fast` still watches — a shifted registry `line:` field, a
+regenerated view that did not get regenerated, a docstring name orphaned by a
+rename. Fix, `--fast`, fix, `--fast`, then the full gate once to commit.
+
+**The full gate is mandatory before you commit**, and non-negotiable whenever
+you touched anything under `scripts/`, `tests/`, or the ledger schemas — those
+are precisely the inputs `--fast` stops watching, and its own last line says so.
+A green `--fast` is never a green change. CI runs the full gate regardless, so
+skipping it locally only moves the failure later.
+
+If you are reaching for the gate to find out whether Lean is happy, that is the
+wrong tool and the real cost. Ask the language server
+(`lean_diagnostic_messages` and friends): it answers per-file in seconds what a
+build reports minutes later, and unresolved names after a rename are exactly its
+job. When you do build, build the cone you changed —
+`lake build AISafetyAtlas.Causal.Query` — rather than bare `lake build`, which
+elaborates the root's whole closure. A no-op full build is ~4 s, so once the
+tree is warm the build is not what costs; the generators and the gate are, and
+both are once-per-commit.
 
 Full green (Lean + axioms):
 

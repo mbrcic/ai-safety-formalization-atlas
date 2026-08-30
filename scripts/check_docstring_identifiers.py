@@ -49,6 +49,23 @@ EXEMPT = {
     "No_Free_Lunch_ML", "qaryEntropy_def",
     # Mathlib lemmas and tactic-local names discussed in prose
     "klDiv_eq_zero_iff", "Finset.sum_fiberwise", "kraft_mcmillan_inequality",
+    # cited by AISafetyAtlas/Analysis/PolynomialGenericity.lean as the Mathlib
+    # result nearest to the one that module supplies: the finite-grid sibling
+    # of a.e.-nonvanishing, which is why the measure-theoretic form is absent
+    "MvPolynomial.schwartz_zippel_totalDegree",
+    # cited by the same module as the only measure-level currying statements
+    # Mathlib has: both are about `infinitePi`, not about `volume` on a finite
+    # product, which is why the finite form is the atlas's to write
+    "ProbabilityTheory.infinitePi_map_piCurry",
+    "infinitePi_map_piCurry_symm",
+    # cited by AISafetyAtlas/Analysis/NullImage.lean as the Mathlib lemma that
+    # identifies Hausdorff measure at the ambient dimension with Lebesgue volume,
+    # which is what turns a dimension bound into a null-set statement
+    "MeasureTheory.hausdorffMeasure_pi_real",
+    # cited by AISafetyAtlas/Analysis/MaximalMinor.lean as the square-matrix case
+    # Mathlib already has, which is why the rectangular one is the atlas's to write
+    "Matrix.linearIndependent_cols_iff_isUnit",
+    "Matrix.linearIndependent_cols_of_det_ne_zero",
     # cited by a vendored docstring (AISafetyAtlas/Upstream/Debate/Prob/Pmf.lean)
     # as the Mathlib lemma its primed variant restates
     "PMF.pure_apply",

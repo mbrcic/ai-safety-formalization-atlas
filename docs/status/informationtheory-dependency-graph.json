@@ -2,6 +2,56 @@
   "note": "Edges are: for a definition, its type and body; for a theorem, its statement only. Lean's module system does not export proof terms.",
   "cluster": "AISafetyAtlas.InformationTheory.",
   "declarations": {
+    "AISafetyAtlas.InformationTheory.CodeSym": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.InformationTheory.CodeSym.isDigit": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.InformationTheory.CodeSym"
+      ]
+    },
+    "AISafetyAtlas.InformationTheory.CodeSym.isDigit_ofBool": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.InformationTheory.CodeSym.isDigit",
+        "AISafetyAtlas.InformationTheory.CodeSym.ofBool"
+      ]
+    },
+    "AISafetyAtlas.InformationTheory.CodeSym.ofBool": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.InformationTheory.CodeSym",
+        "AISafetyAtlas.InformationTheory.CodeSym.one",
+        "AISafetyAtlas.InformationTheory.CodeSym.zero"
+      ]
+    },
+    "AISafetyAtlas.InformationTheory.CodeSym.ofBool_injective": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.InformationTheory.CodeSym",
+        "AISafetyAtlas.InformationTheory.CodeSym.ofBool"
+      ]
+    },
+    "AISafetyAtlas.InformationTheory.CodeSym.one": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.InformationTheory.CodeSym"
+      ]
+    },
+    "AISafetyAtlas.InformationTheory.CodeSym.sep": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.InformationTheory.CodeSym"
+      ]
+    },
+    "AISafetyAtlas.InformationTheory.CodeSym.zero": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.InformationTheory.CodeSym"
+      ]
+    },
     "AISafetyAtlas.InformationTheory.IsMarkovChain": {
       "kind": "definition",
       "deps": []
@@ -11,6 +61,55 @@
       "deps": [
         "AISafetyAtlas.InformationTheory.IsMarkovChain"
       ]
+    },
+    "AISafetyAtlas.InformationTheory.IsPrefixCode": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.InformationTheory.CodeSym"
+      ]
+    },
+    "AISafetyAtlas.InformationTheory.IsPrefixCode.injective": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.InformationTheory.CodeSym",
+        "AISafetyAtlas.InformationTheory.IsPrefixCode"
+      ]
+    },
+    "AISafetyAtlas.InformationTheory.IsPrefixCode.list": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.InformationTheory.CodeSym",
+        "AISafetyAtlas.InformationTheory.IsPrefixCode",
+        "AISafetyAtlas.InformationTheory.encodeList"
+      ]
+    },
+    "AISafetyAtlas.InformationTheory.IsPrefixCode.ofBoolList": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.InformationTheory.IsPrefixCode",
+        "AISafetyAtlas.InformationTheory.encodeBoolList"
+      ]
+    },
+    "AISafetyAtlas.InformationTheory.IsPrefixCode.pair": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.InformationTheory.CodeSym",
+        "AISafetyAtlas.InformationTheory.IsPrefixCode"
+      ]
+    },
+    "AISafetyAtlas.InformationTheory.SparseMonomial": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.InformationTheory.SparsePoly": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.InformationTheory.SparseMonomial"
+      ]
+    },
+    "AISafetyAtlas.InformationTheory.bits_injective": {
+      "kind": "theorem",
+      "deps": []
     },
     "AISafetyAtlas.InformationTheory.channelCapacity": {
       "kind": "definition",
@@ -86,6 +185,100 @@
       "kind": "theorem",
       "deps": [
         "AISafetyAtlas.InformationTheory.IsMarkovChain"
+      ]
+    },
+    "AISafetyAtlas.InformationTheory.encodeBoolList": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.InformationTheory.CodeSym",
+        "AISafetyAtlas.InformationTheory.CodeSym.ofBool",
+        "AISafetyAtlas.InformationTheory.CodeSym.sep"
+      ]
+    },
+    "AISafetyAtlas.InformationTheory.encodeBoolList_takeWhile": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.InformationTheory.CodeSym",
+        "AISafetyAtlas.InformationTheory.CodeSym.isDigit",
+        "AISafetyAtlas.InformationTheory.CodeSym.ofBool",
+        "AISafetyAtlas.InformationTheory.CodeSym.sep",
+        "AISafetyAtlas.InformationTheory.encodeBoolList"
+      ]
+    },
+    "AISafetyAtlas.InformationTheory.encodeInt": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.InformationTheory.CodeSym",
+        "AISafetyAtlas.InformationTheory.CodeSym.one",
+        "AISafetyAtlas.InformationTheory.CodeSym.zero",
+        "AISafetyAtlas.InformationTheory.encodeNat"
+      ]
+    },
+    "AISafetyAtlas.InformationTheory.encodeList": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.InformationTheory.CodeSym",
+        "AISafetyAtlas.InformationTheory.encodeNat"
+      ]
+    },
+    "AISafetyAtlas.InformationTheory.encodeMonomial": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.InformationTheory.CodeSym",
+        "AISafetyAtlas.InformationTheory.SparseMonomial",
+        "AISafetyAtlas.InformationTheory.encodeList",
+        "AISafetyAtlas.InformationTheory.encodeRat",
+        "AISafetyAtlas.InformationTheory.encodeVarPow"
+      ]
+    },
+    "AISafetyAtlas.InformationTheory.encodeNat": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.InformationTheory.CodeSym",
+        "AISafetyAtlas.InformationTheory.encodeBoolList"
+      ]
+    },
+    "AISafetyAtlas.InformationTheory.encodeRat": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.InformationTheory.CodeSym",
+        "AISafetyAtlas.InformationTheory.encodeInt",
+        "AISafetyAtlas.InformationTheory.encodeNat"
+      ]
+    },
+    "AISafetyAtlas.InformationTheory.encodeSparseList": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.InformationTheory.CodeSym",
+        "AISafetyAtlas.InformationTheory.SparsePoly",
+        "AISafetyAtlas.InformationTheory.encodeList",
+        "AISafetyAtlas.InformationTheory.encodeSparsePoly"
+      ]
+    },
+    "AISafetyAtlas.InformationTheory.encodeSparseList_injective": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.InformationTheory.CodeSym",
+        "AISafetyAtlas.InformationTheory.IsPrefixCode",
+        "AISafetyAtlas.InformationTheory.SparsePoly",
+        "AISafetyAtlas.InformationTheory.encodeSparseList"
+      ]
+    },
+    "AISafetyAtlas.InformationTheory.encodeSparsePoly": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.InformationTheory.CodeSym",
+        "AISafetyAtlas.InformationTheory.SparseMonomial",
+        "AISafetyAtlas.InformationTheory.SparsePoly",
+        "AISafetyAtlas.InformationTheory.encodeList",
+        "AISafetyAtlas.InformationTheory.encodeMonomial"
+      ]
+    },
+    "AISafetyAtlas.InformationTheory.encodeVarPow": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.InformationTheory.CodeSym",
+        "AISafetyAtlas.InformationTheory.encodeNat"
       ]
     },
     "AISafetyAtlas.InformationTheory.entropy_cond_errorPair_false": {
@@ -192,6 +385,69 @@
         "AISafetyAtlas.InformationTheory.IsMarkovChain"
       ]
     },
+    "AISafetyAtlas.InformationTheory.isPrefixCode_encodeBoolList": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.InformationTheory.IsPrefixCode",
+        "AISafetyAtlas.InformationTheory.encodeBoolList"
+      ]
+    },
+    "AISafetyAtlas.InformationTheory.isPrefixCode_encodeInt": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.InformationTheory.IsPrefixCode",
+        "AISafetyAtlas.InformationTheory.encodeInt"
+      ]
+    },
+    "AISafetyAtlas.InformationTheory.isPrefixCode_encodeMonomial": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.InformationTheory.CodeSym",
+        "AISafetyAtlas.InformationTheory.IsPrefixCode",
+        "AISafetyAtlas.InformationTheory.SparseMonomial",
+        "AISafetyAtlas.InformationTheory.encodeMonomial"
+      ]
+    },
+    "AISafetyAtlas.InformationTheory.isPrefixCode_encodeNat": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.InformationTheory.IsPrefixCode",
+        "AISafetyAtlas.InformationTheory.encodeNat"
+      ]
+    },
+    "AISafetyAtlas.InformationTheory.isPrefixCode_encodeRat": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.InformationTheory.IsPrefixCode",
+        "AISafetyAtlas.InformationTheory.encodeRat"
+      ]
+    },
+    "AISafetyAtlas.InformationTheory.isPrefixCode_encodeSparseList": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.InformationTheory.CodeSym",
+        "AISafetyAtlas.InformationTheory.IsPrefixCode",
+        "AISafetyAtlas.InformationTheory.SparsePoly",
+        "AISafetyAtlas.InformationTheory.encodeSparseList"
+      ]
+    },
+    "AISafetyAtlas.InformationTheory.isPrefixCode_encodeSparsePoly": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.InformationTheory.CodeSym",
+        "AISafetyAtlas.InformationTheory.IsPrefixCode",
+        "AISafetyAtlas.InformationTheory.SparsePoly",
+        "AISafetyAtlas.InformationTheory.encodeSparsePoly"
+      ]
+    },
+    "AISafetyAtlas.InformationTheory.isPrefixCode_encodeVarPow": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.InformationTheory.CodeSym",
+        "AISafetyAtlas.InformationTheory.IsPrefixCode",
+        "AISafetyAtlas.InformationTheory.encodeVarPow"
+      ]
+    },
     "AISafetyAtlas.InformationTheory.le_errorProb": {
       "kind": "theorem",
       "deps": [
@@ -289,6 +545,28 @@
       "kind": "definition",
       "deps": []
     },
+    "AISafetyAtlas.InformationTheory.ofSparseMonomial": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.InformationTheory.SparseMonomial",
+        "AISafetyAtlas.InformationTheory.sparseExponents"
+      ]
+    },
+    "AISafetyAtlas.InformationTheory.ofSparsePoly": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.InformationTheory.SparseMonomial",
+        "AISafetyAtlas.InformationTheory.SparsePoly",
+        "AISafetyAtlas.InformationTheory.ofSparseMonomial"
+      ]
+    },
+    "AISafetyAtlas.InformationTheory.ofSparsePoly_nil": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.InformationTheory.SparseMonomial",
+        "AISafetyAtlas.InformationTheory.ofSparsePoly"
+      ]
+    },
     "AISafetyAtlas.InformationTheory.preimage_errorIndicator_false": {
       "kind": "theorem",
       "deps": [
@@ -301,11 +579,23 @@
         "AISafetyAtlas.InformationTheory.errorIndicator"
       ]
     },
+    "AISafetyAtlas.InformationTheory.sparseExponents": {
+      "kind": "definition",
+      "deps": []
+    },
     "AISafetyAtlas.InformationTheory.sum_errorPair_true": {
       "kind": "theorem",
       "deps": [
         "AISafetyAtlas.InformationTheory.errorPair",
         "AISafetyAtlas.InformationTheory.errorProb"
+      ]
+    },
+    "AISafetyAtlas.InformationTheory.takeWhile_digits_append": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.InformationTheory.CodeSym",
+        "AISafetyAtlas.InformationTheory.CodeSym.isDigit",
+        "AISafetyAtlas.InformationTheory.CodeSym.sep"
       ]
     }
   }

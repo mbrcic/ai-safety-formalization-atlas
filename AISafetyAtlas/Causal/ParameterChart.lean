@@ -1,7 +1,7 @@
 module
 
 public import AISafetyAtlas.Causal.MarginClass
-public import AISafetyAtlas.Causal.Semialgebraic
+public import AISafetyAtlas.Analysis.Semialgebraic
 public import Mathlib.MeasureTheory.Constructions.Pi
 public import Mathlib.MeasureTheory.Measure.Lebesgue.Basic
 
@@ -45,6 +45,7 @@ The measure is the Lebesgue measure `MeasureTheory.volume` on
 namespace AISafetyAtlas.Causal
 
 open MeasureTheory
+open AISafetyAtlas.Analysis
 
 variable {C : Type*} [Fintype C] [DecidableEq C]
 

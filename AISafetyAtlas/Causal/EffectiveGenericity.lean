@@ -2,7 +2,7 @@ module
 
 public import AISafetyAtlas.Causal.Decision
 public import AISafetyAtlas.Causal.ParameterChart
-public import AISafetyAtlas.Causal.SparseEncoding
+public import AISafetyAtlas.InformationTheory.PrefixCode
 public import Mathlib.Algebra.MvPolynomial.Degrees
 public import Mathlib.Algebra.Polynomial.Eval.Defs
 public import Mathlib.Computability.TuringMachine.Computable
@@ -93,6 +93,7 @@ not existential. That is why the conclusions below are predicates *of* a list.
 namespace AISafetyAtlas.Causal
 
 open MeasureTheory MvPolynomial
+open AISafetyAtlas.Analysis AISafetyAtlas.InformationTheory
 
 variable {C : Type*} [Fintype C] [DecidableEq C]
 
@@ -509,7 +510,7 @@ fields, and the fields that quantify the input sit under them.
 **The input and output codes are fixed, not existential.** A predicate reading
 *"there exist a machine and encodings such that …"* is met by advice: pick an
 encoding that already carries the answer and let the machine copy its input.
-`AISafetyAtlas.Causal.SparseEncoding` supplies both codes as definitions, and both
+`AISafetyAtlas.InformationTheory.PrefixCode` supplies both codes as definitions, and both
 are proved prefix-free, so *"the machine outputs this"* is a statement about what
 it constructed.
 

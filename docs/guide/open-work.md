@@ -46,11 +46,18 @@ each item is where it is.
   is a shared transition-system-with-observations interface that an impossibility
   and a construction can both instantiate. Until then the `BOUNDARY_PARTNER`
   edges with their stated model deltas are the honest representation.
-- **Reuse is mostly internal.** `scripts/report_consumers.py` reports 21 of 105
-  declarations consumed outside `Examples/`. The kernel, joint observation and the
-  CRMDP link compose; the physical bridges (`LAND-SELFMEAS-003`) and the
-  accumulation layer are exercised only by their own witnesses. Give one a
-  downstream consumer, or retire it — not both.
+- **Reuse is mostly internal, and the share is falling.**
+  `scripts/report_consumers.py` reports 36 of 248 declarations consumed outside
+  `Examples/` (measured 2026-08-28). At v0.7 it was 21 of 105, so load-bearing
+  declarations grew by 71% while the corpus grew by 136% — the share fell from
+  20% to 15%. The kernel, joint observation and the CRMDP link compose:
+  `Knowledge.not_knowable_of_witness` is consumed by
+  `Wireheading.ObservationLimits`. The accumulation layer consumes the kernel
+  but nothing consumes it. Of the physical bridges (`LAND-SELFMEAS-003`), one
+  declaration of eleven now reaches a sibling module —
+  `properInclusion_iff_not_injective`, used by `Knowledge.Embedded.Finite` —
+  and the rest are exercised only by their own witnesses. Give one a downstream
+  consumer, or retire it — not both.
 - **Breuer residuals stay out of scope deliberately.** Physical apparatus
   construction, dynamics, the quantum/Hilbert-space treatment, EPR, and §3.4's
   continuity route are omitted from `LAND-SELFMEAS-002`. The grade is

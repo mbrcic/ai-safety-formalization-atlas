@@ -17,13 +17,6 @@
       "kind": "definition",
       "deps": []
     },
-    "AISafetyAtlas.Causal.BasicSemialgebraic": {
-      "kind": "definition",
-      "deps": [
-        "AISafetyAtlas.Causal.PolySign",
-        "AISafetyAtlas.Causal.PolySign.Holds"
-      ]
-    },
     "AISafetyAtlas.Causal.CID": {
       "kind": "definition",
       "deps": []
@@ -182,60 +175,6 @@
         "AISafetyAtlas.Causal.binaryDim"
       ]
     },
-    "AISafetyAtlas.Causal.ClosedBox": {
-      "kind": "definition",
-      "deps": []
-    },
-    "AISafetyAtlas.Causal.CodeSym": {
-      "kind": "definition",
-      "deps": []
-    },
-    "AISafetyAtlas.Causal.CodeSym.isDigit": {
-      "kind": "definition",
-      "deps": [
-        "AISafetyAtlas.Causal.CodeSym"
-      ]
-    },
-    "AISafetyAtlas.Causal.CodeSym.isDigit_ofBool": {
-      "kind": "theorem",
-      "deps": [
-        "AISafetyAtlas.Causal.CodeSym.isDigit",
-        "AISafetyAtlas.Causal.CodeSym.ofBool"
-      ]
-    },
-    "AISafetyAtlas.Causal.CodeSym.ofBool": {
-      "kind": "definition",
-      "deps": [
-        "AISafetyAtlas.Causal.CodeSym",
-        "AISafetyAtlas.Causal.CodeSym.one",
-        "AISafetyAtlas.Causal.CodeSym.zero"
-      ]
-    },
-    "AISafetyAtlas.Causal.CodeSym.ofBool_injective": {
-      "kind": "theorem",
-      "deps": [
-        "AISafetyAtlas.Causal.CodeSym",
-        "AISafetyAtlas.Causal.CodeSym.ofBool"
-      ]
-    },
-    "AISafetyAtlas.Causal.CodeSym.one": {
-      "kind": "definition",
-      "deps": [
-        "AISafetyAtlas.Causal.CodeSym"
-      ]
-    },
-    "AISafetyAtlas.Causal.CodeSym.sep": {
-      "kind": "definition",
-      "deps": [
-        "AISafetyAtlas.Causal.CodeSym"
-      ]
-    },
-    "AISafetyAtlas.Causal.CodeSym.zero": {
-      "kind": "definition",
-      "deps": [
-        "AISafetyAtlas.Causal.CodeSym"
-      ]
-    },
     "AISafetyAtlas.Causal.ConditionalTables": {
       "kind": "definition",
       "deps": []
@@ -252,8 +191,8 @@
     "AISafetyAtlas.Causal.ContainsChartBox": {
       "kind": "definition",
       "deps": [
+        "AISafetyAtlas.Analysis.ClosedBox",
         "AISafetyAtlas.Causal.ChartIndex",
-        "AISafetyAtlas.Causal.ClosedBox",
         "AISafetyAtlas.Causal.Model",
         "AISafetyAtlas.Causal.Model.chartSlice",
         "AISafetyAtlas.Causal.binaryDim"
@@ -457,8 +396,8 @@
     "AISafetyAtlas.Causal.IsCompactSemialgebraicClass": {
       "kind": "definition",
       "deps": [
+        "AISafetyAtlas.Analysis.IsSemialgebraic",
         "AISafetyAtlas.Causal.ChartIndex",
-        "AISafetyAtlas.Causal.IsSemialgebraic",
         "AISafetyAtlas.Causal.Model",
         "AISafetyAtlas.Causal.Model.chartSlice",
         "AISafetyAtlas.Causal.binaryDim"
@@ -477,41 +416,6 @@
         "AISafetyAtlas.Causal.Transcript"
       ]
     },
-    "AISafetyAtlas.Causal.IsPrefixCode": {
-      "kind": "definition",
-      "deps": [
-        "AISafetyAtlas.Causal.CodeSym"
-      ]
-    },
-    "AISafetyAtlas.Causal.IsPrefixCode.injective": {
-      "kind": "theorem",
-      "deps": [
-        "AISafetyAtlas.Causal.CodeSym",
-        "AISafetyAtlas.Causal.IsPrefixCode"
-      ]
-    },
-    "AISafetyAtlas.Causal.IsPrefixCode.list": {
-      "kind": "theorem",
-      "deps": [
-        "AISafetyAtlas.Causal.CodeSym",
-        "AISafetyAtlas.Causal.IsPrefixCode",
-        "AISafetyAtlas.Causal.encodeList"
-      ]
-    },
-    "AISafetyAtlas.Causal.IsPrefixCode.ofBoolList": {
-      "kind": "theorem",
-      "deps": [
-        "AISafetyAtlas.Causal.IsPrefixCode",
-        "AISafetyAtlas.Causal.encodeBoolList"
-      ]
-    },
-    "AISafetyAtlas.Causal.IsPrefixCode.pair": {
-      "kind": "theorem",
-      "deps": [
-        "AISafetyAtlas.Causal.CodeSym",
-        "AISafetyAtlas.Causal.IsPrefixCode"
-      ]
-    },
     "AISafetyAtlas.Causal.IsProbabilityMixture": {
       "kind": "definition",
       "deps": [
@@ -525,75 +429,6 @@
       "deps": [
         "AISafetyAtlas.Causal.Skeleton",
         "AISafetyAtlas.Causal.radiusErrors"
-      ]
-    },
-    "AISafetyAtlas.Causal.IsSemialgebraic": {
-      "kind": "definition",
-      "deps": [
-        "AISafetyAtlas.Causal.BasicSemialgebraic",
-        "AISafetyAtlas.Causal.PolySign"
-      ]
-    },
-    "AISafetyAtlas.Causal.IsSemialgebraic.basic": {
-      "kind": "theorem",
-      "deps": [
-        "AISafetyAtlas.Causal.BasicSemialgebraic",
-        "AISafetyAtlas.Causal.IsSemialgebraic",
-        "AISafetyAtlas.Causal.PolySign"
-      ]
-    },
-    "AISafetyAtlas.Causal.IsSemialgebraic.compl": {
-      "kind": "theorem",
-      "deps": [
-        "AISafetyAtlas.Causal.IsSemialgebraic"
-      ]
-    },
-    "AISafetyAtlas.Causal.IsSemialgebraic.inter": {
-      "kind": "theorem",
-      "deps": [
-        "AISafetyAtlas.Causal.IsSemialgebraic"
-      ]
-    },
-    "AISafetyAtlas.Causal.IsSemialgebraic.sdiff": {
-      "kind": "theorem",
-      "deps": [
-        "AISafetyAtlas.Causal.IsSemialgebraic"
-      ]
-    },
-    "AISafetyAtlas.Causal.IsSemialgebraic.setOf_and": {
-      "kind": "theorem",
-      "deps": [
-        "AISafetyAtlas.Causal.IsSemialgebraic"
-      ]
-    },
-    "AISafetyAtlas.Causal.IsSemialgebraic.setOf_congr": {
-      "kind": "theorem",
-      "deps": [
-        "AISafetyAtlas.Causal.IsSemialgebraic"
-      ]
-    },
-    "AISafetyAtlas.Causal.IsSemialgebraic.setOf_const_and": {
-      "kind": "theorem",
-      "deps": [
-        "AISafetyAtlas.Causal.IsSemialgebraic"
-      ]
-    },
-    "AISafetyAtlas.Causal.IsSemialgebraic.setOf_not": {
-      "kind": "theorem",
-      "deps": [
-        "AISafetyAtlas.Causal.IsSemialgebraic"
-      ]
-    },
-    "AISafetyAtlas.Causal.IsSemialgebraic.setOf_or": {
-      "kind": "theorem",
-      "deps": [
-        "AISafetyAtlas.Causal.IsSemialgebraic"
-      ]
-    },
-    "AISafetyAtlas.Causal.IsSemialgebraic.union": {
-      "kind": "theorem",
-      "deps": [
-        "AISafetyAtlas.Causal.IsSemialgebraic"
       ]
     },
     "AISafetyAtlas.Causal.LocalIntervention": {
@@ -1846,34 +1681,6 @@
         "AISafetyAtlas.Causal.Skeleton.observed"
       ]
     },
-    "AISafetyAtlas.Causal.PolySign": {
-      "kind": "definition",
-      "deps": []
-    },
-    "AISafetyAtlas.Causal.PolySign.Holds": {
-      "kind": "definition",
-      "deps": [
-        "AISafetyAtlas.Causal.PolySign"
-      ]
-    },
-    "AISafetyAtlas.Causal.PolySign.nonneg": {
-      "kind": "definition",
-      "deps": [
-        "AISafetyAtlas.Causal.PolySign"
-      ]
-    },
-    "AISafetyAtlas.Causal.PolySign.pos": {
-      "kind": "definition",
-      "deps": [
-        "AISafetyAtlas.Causal.PolySign"
-      ]
-    },
-    "AISafetyAtlas.Causal.PolySign.zero": {
-      "kind": "definition",
-      "deps": [
-        "AISafetyAtlas.Causal.PolySign"
-      ]
-    },
     "AISafetyAtlas.Causal.ProbMixture": {
       "kind": "definition",
       "deps": [
@@ -2801,16 +2608,6 @@
         "AISafetyAtlas.Causal.Skeleton.utilityParents"
       ]
     },
-    "AISafetyAtlas.Causal.SparseMonomial": {
-      "kind": "definition",
-      "deps": []
-    },
-    "AISafetyAtlas.Causal.SparsePoly": {
-      "kind": "definition",
-      "deps": [
-        "AISafetyAtlas.Causal.SparseMonomial"
-      ]
-    },
     "AISafetyAtlas.Causal.Transcript": {
       "kind": "definition",
       "deps": [
@@ -2850,13 +2647,6 @@
         "AISafetyAtlas.Causal.binaryDim"
       ]
     },
-    "AISafetyAtlas.Causal.basicSemialgebraic_union": {
-      "kind": "theorem",
-      "deps": [
-        "AISafetyAtlas.Causal.BasicSemialgebraic",
-        "AISafetyAtlas.Causal.PolySign"
-      ]
-    },
     "AISafetyAtlas.Causal.binaryDim": {
       "kind": "definition",
       "deps": []
@@ -2882,10 +2672,6 @@
       "deps": [
         "AISafetyAtlas.Causal.binaryDim"
       ]
-    },
-    "AISafetyAtlas.Causal.bits_injective": {
-      "kind": "theorem",
-      "deps": []
     },
     "AISafetyAtlas.Causal.card_binaryLocalIntervention": {
       "kind": "theorem",
@@ -2954,8 +2740,8 @@
     "AISafetyAtlas.Causal.chartBox": {
       "kind": "definition",
       "deps": [
-        "AISafetyAtlas.Causal.ChartIndex",
-        "AISafetyAtlas.Causal.ClosedBox"
+        "AISafetyAtlas.Analysis.ClosedBox",
+        "AISafetyAtlas.Causal.ChartIndex"
       ]
     },
     "AISafetyAtlas.Causal.chartDim": {
@@ -3056,120 +2842,26 @@
         "AISafetyAtlas.Causal.effectiveMarginClass"
       ]
     },
-    "AISafetyAtlas.Causal.encodeBoolList": {
-      "kind": "definition",
-      "deps": [
-        "AISafetyAtlas.Causal.CodeSym",
-        "AISafetyAtlas.Causal.CodeSym.ofBool",
-        "AISafetyAtlas.Causal.CodeSym.sep"
-      ]
-    },
-    "AISafetyAtlas.Causal.encodeBoolList_takeWhile": {
-      "kind": "theorem",
-      "deps": [
-        "AISafetyAtlas.Causal.CodeSym",
-        "AISafetyAtlas.Causal.CodeSym.isDigit",
-        "AISafetyAtlas.Causal.CodeSym.ofBool",
-        "AISafetyAtlas.Causal.CodeSym.sep",
-        "AISafetyAtlas.Causal.encodeBoolList"
-      ]
-    },
     "AISafetyAtlas.Causal.encodeFinsetFin": {
       "kind": "definition",
       "deps": [
-        "AISafetyAtlas.Causal.CodeSym",
-        "AISafetyAtlas.Causal.encodeBoolList"
-      ]
-    },
-    "AISafetyAtlas.Causal.encodeInt": {
-      "kind": "definition",
-      "deps": [
-        "AISafetyAtlas.Causal.CodeSym",
-        "AISafetyAtlas.Causal.CodeSym.one",
-        "AISafetyAtlas.Causal.CodeSym.zero",
-        "AISafetyAtlas.Causal.encodeNat"
-      ]
-    },
-    "AISafetyAtlas.Causal.encodeList": {
-      "kind": "definition",
-      "deps": [
-        "AISafetyAtlas.Causal.CodeSym",
-        "AISafetyAtlas.Causal.encodeNat"
-      ]
-    },
-    "AISafetyAtlas.Causal.encodeMonomial": {
-      "kind": "definition",
-      "deps": [
-        "AISafetyAtlas.Causal.CodeSym",
-        "AISafetyAtlas.Causal.SparseMonomial",
-        "AISafetyAtlas.Causal.encodeList",
-        "AISafetyAtlas.Causal.encodeRat",
-        "AISafetyAtlas.Causal.encodeVarPow"
-      ]
-    },
-    "AISafetyAtlas.Causal.encodeNat": {
-      "kind": "definition",
-      "deps": [
-        "AISafetyAtlas.Causal.CodeSym",
-        "AISafetyAtlas.Causal.encodeBoolList"
+        "AISafetyAtlas.InformationTheory.CodeSym",
+        "AISafetyAtlas.InformationTheory.encodeBoolList"
       ]
     },
     "AISafetyAtlas.Causal.encodeO24Var": {
       "kind": "definition",
       "deps": [
         "AISafetyAtlas.Causal.ChartIndex",
-        "AISafetyAtlas.Causal.CodeSym",
-        "AISafetyAtlas.Causal.CodeSym.one",
-        "AISafetyAtlas.Causal.CodeSym.zero",
         "AISafetyAtlas.Causal.O24Var",
         "AISafetyAtlas.Causal.ParentConfig",
         "AISafetyAtlas.Causal.UtilityConfig",
-        "AISafetyAtlas.Causal.encodeBoolList",
-        "AISafetyAtlas.Causal.encodeNat",
-        "AISafetyAtlas.Causal.finsetFunBits"
-      ]
-    },
-    "AISafetyAtlas.Causal.encodeRat": {
-      "kind": "definition",
-      "deps": [
-        "AISafetyAtlas.Causal.CodeSym",
-        "AISafetyAtlas.Causal.encodeInt",
-        "AISafetyAtlas.Causal.encodeNat"
-      ]
-    },
-    "AISafetyAtlas.Causal.encodeSparseList": {
-      "kind": "definition",
-      "deps": [
-        "AISafetyAtlas.Causal.CodeSym",
-        "AISafetyAtlas.Causal.SparsePoly",
-        "AISafetyAtlas.Causal.encodeList",
-        "AISafetyAtlas.Causal.encodeSparsePoly"
-      ]
-    },
-    "AISafetyAtlas.Causal.encodeSparseList_injective": {
-      "kind": "theorem",
-      "deps": [
-        "AISafetyAtlas.Causal.CodeSym",
-        "AISafetyAtlas.Causal.IsPrefixCode",
-        "AISafetyAtlas.Causal.SparsePoly",
-        "AISafetyAtlas.Causal.encodeSparseList"
-      ]
-    },
-    "AISafetyAtlas.Causal.encodeSparsePoly": {
-      "kind": "definition",
-      "deps": [
-        "AISafetyAtlas.Causal.CodeSym",
-        "AISafetyAtlas.Causal.SparseMonomial",
-        "AISafetyAtlas.Causal.SparsePoly",
-        "AISafetyAtlas.Causal.encodeList",
-        "AISafetyAtlas.Causal.encodeMonomial"
-      ]
-    },
-    "AISafetyAtlas.Causal.encodeVarPow": {
-      "kind": "definition",
-      "deps": [
-        "AISafetyAtlas.Causal.CodeSym",
-        "AISafetyAtlas.Causal.encodeNat"
+        "AISafetyAtlas.Causal.finsetFunBits",
+        "AISafetyAtlas.InformationTheory.CodeSym",
+        "AISafetyAtlas.InformationTheory.CodeSym.one",
+        "AISafetyAtlas.InformationTheory.CodeSym.zero",
+        "AISafetyAtlas.InformationTheory.encodeBoolList",
+        "AISafetyAtlas.InformationTheory.encodeNat"
       ]
     },
     "AISafetyAtlas.Causal.eq_family_of_isCausalBayesNetwork": {
@@ -3526,12 +3218,6 @@
         "AISafetyAtlas.Causal.IsCausalBayesNetwork"
       ]
     },
-    "AISafetyAtlas.Causal.isCompact_closedBox": {
-      "kind": "theorem",
-      "deps": [
-        "AISafetyAtlas.Causal.ClosedBox"
-      ]
-    },
     "AISafetyAtlas.Causal.isCompatibleGraph_parents": {
       "kind": "theorem",
       "deps": [
@@ -3541,165 +3227,31 @@
         "AISafetyAtlas.Causal.binaryDim"
       ]
     },
-    "AISafetyAtlas.Causal.isPrefixCode_encodeBoolList": {
-      "kind": "theorem",
-      "deps": [
-        "AISafetyAtlas.Causal.IsPrefixCode",
-        "AISafetyAtlas.Causal.encodeBoolList"
-      ]
-    },
     "AISafetyAtlas.Causal.isPrefixCode_encodeFinsetFin": {
       "kind": "theorem",
       "deps": [
-        "AISafetyAtlas.Causal.IsPrefixCode",
-        "AISafetyAtlas.Causal.encodeFinsetFin"
-      ]
-    },
-    "AISafetyAtlas.Causal.isPrefixCode_encodeInt": {
-      "kind": "theorem",
-      "deps": [
-        "AISafetyAtlas.Causal.IsPrefixCode",
-        "AISafetyAtlas.Causal.encodeInt"
-      ]
-    },
-    "AISafetyAtlas.Causal.isPrefixCode_encodeMonomial": {
-      "kind": "theorem",
-      "deps": [
-        "AISafetyAtlas.Causal.CodeSym",
-        "AISafetyAtlas.Causal.IsPrefixCode",
-        "AISafetyAtlas.Causal.SparseMonomial",
-        "AISafetyAtlas.Causal.encodeMonomial"
-      ]
-    },
-    "AISafetyAtlas.Causal.isPrefixCode_encodeNat": {
-      "kind": "theorem",
-      "deps": [
-        "AISafetyAtlas.Causal.IsPrefixCode",
-        "AISafetyAtlas.Causal.encodeNat"
+        "AISafetyAtlas.Causal.encodeFinsetFin",
+        "AISafetyAtlas.InformationTheory.IsPrefixCode"
       ]
     },
     "AISafetyAtlas.Causal.isPrefixCode_encodeO24Var": {
       "kind": "theorem",
       "deps": [
-        "AISafetyAtlas.Causal.IsPrefixCode",
         "AISafetyAtlas.Causal.O24Var",
-        "AISafetyAtlas.Causal.encodeO24Var"
-      ]
-    },
-    "AISafetyAtlas.Causal.isPrefixCode_encodeRat": {
-      "kind": "theorem",
-      "deps": [
-        "AISafetyAtlas.Causal.IsPrefixCode",
-        "AISafetyAtlas.Causal.encodeRat"
-      ]
-    },
-    "AISafetyAtlas.Causal.isPrefixCode_encodeSparseList": {
-      "kind": "theorem",
-      "deps": [
-        "AISafetyAtlas.Causal.CodeSym",
-        "AISafetyAtlas.Causal.IsPrefixCode",
-        "AISafetyAtlas.Causal.SparsePoly",
-        "AISafetyAtlas.Causal.encodeSparseList"
-      ]
-    },
-    "AISafetyAtlas.Causal.isPrefixCode_encodeSparsePoly": {
-      "kind": "theorem",
-      "deps": [
-        "AISafetyAtlas.Causal.CodeSym",
-        "AISafetyAtlas.Causal.IsPrefixCode",
-        "AISafetyAtlas.Causal.SparsePoly",
-        "AISafetyAtlas.Causal.encodeSparsePoly"
-      ]
-    },
-    "AISafetyAtlas.Causal.isPrefixCode_encodeVarPow": {
-      "kind": "theorem",
-      "deps": [
-        "AISafetyAtlas.Causal.CodeSym",
-        "AISafetyAtlas.Causal.IsPrefixCode",
-        "AISafetyAtlas.Causal.encodeVarPow"
-      ]
-    },
-    "AISafetyAtlas.Causal.isSemialgebraic_biInter": {
-      "kind": "theorem",
-      "deps": [
-        "AISafetyAtlas.Causal.IsSemialgebraic"
-      ]
-    },
-    "AISafetyAtlas.Causal.isSemialgebraic_biUnion": {
-      "kind": "theorem",
-      "deps": [
-        "AISafetyAtlas.Causal.IsSemialgebraic"
-      ]
-    },
-    "AISafetyAtlas.Causal.isSemialgebraic_closedBox": {
-      "kind": "theorem",
-      "deps": [
-        "AISafetyAtlas.Causal.ClosedBox",
-        "AISafetyAtlas.Causal.IsSemialgebraic"
-      ]
-    },
-    "AISafetyAtlas.Causal.isSemialgebraic_compl_basic": {
-      "kind": "theorem",
-      "deps": [
-        "AISafetyAtlas.Causal.BasicSemialgebraic",
-        "AISafetyAtlas.Causal.IsSemialgebraic",
-        "AISafetyAtlas.Causal.PolySign"
-      ]
-    },
-    "AISafetyAtlas.Causal.isSemialgebraic_empty": {
-      "kind": "theorem",
-      "deps": [
-        "AISafetyAtlas.Causal.IsSemialgebraic"
-      ]
-    },
-    "AISafetyAtlas.Causal.isSemialgebraic_not_holds": {
-      "kind": "theorem",
-      "deps": [
-        "AISafetyAtlas.Causal.IsSemialgebraic",
-        "AISafetyAtlas.Causal.PolySign",
-        "AISafetyAtlas.Causal.PolySign.Holds"
+        "AISafetyAtlas.Causal.encodeO24Var",
+        "AISafetyAtlas.InformationTheory.IsPrefixCode"
       ]
     },
     "AISafetyAtlas.Causal.isSemialgebraic_of_containsChartBox": {
       "kind": "theorem",
       "deps": [
+        "AISafetyAtlas.Analysis.ClosedBox",
+        "AISafetyAtlas.Analysis.IsSemialgebraic",
         "AISafetyAtlas.Causal.ChartIndex",
-        "AISafetyAtlas.Causal.ClosedBox",
         "AISafetyAtlas.Causal.ContainsChartBox",
-        "AISafetyAtlas.Causal.IsSemialgebraic",
         "AISafetyAtlas.Causal.Model",
         "AISafetyAtlas.Causal.Model.chartSlice",
         "AISafetyAtlas.Causal.binaryDim"
-      ]
-    },
-    "AISafetyAtlas.Causal.isSemialgebraic_setOf_eval_eq_zero": {
-      "kind": "theorem",
-      "deps": [
-        "AISafetyAtlas.Causal.IsSemialgebraic"
-      ]
-    },
-    "AISafetyAtlas.Causal.isSemialgebraic_setOf_eval_ne_zero": {
-      "kind": "theorem",
-      "deps": [
-        "AISafetyAtlas.Causal.IsSemialgebraic"
-      ]
-    },
-    "AISafetyAtlas.Causal.isSemialgebraic_setOf_eval_nonneg": {
-      "kind": "theorem",
-      "deps": [
-        "AISafetyAtlas.Causal.IsSemialgebraic"
-      ]
-    },
-    "AISafetyAtlas.Causal.isSemialgebraic_setOf_eval_pos": {
-      "kind": "theorem",
-      "deps": [
-        "AISafetyAtlas.Causal.IsSemialgebraic"
-      ]
-    },
-    "AISafetyAtlas.Causal.isSemialgebraic_univ": {
-      "kind": "theorem",
-      "deps": [
-        "AISafetyAtlas.Causal.IsSemialgebraic"
       ]
     },
     "AISafetyAtlas.Causal.jointProb_sum_two": {
@@ -3986,22 +3538,22 @@
     "AISafetyAtlas.Causal.o24EncodeInput": {
       "kind": "definition",
       "deps": [
-        "AISafetyAtlas.Causal.CodeSym",
         "AISafetyAtlas.Causal.O24Input",
         "AISafetyAtlas.Causal.O24Input.graph",
         "AISafetyAtlas.Causal.O24Input.observed",
         "AISafetyAtlas.Causal.O24Input.utilityParents",
         "AISafetyAtlas.Causal.encodeFinsetFin",
-        "AISafetyAtlas.Causal.encodeList",
-        "AISafetyAtlas.Causal.encodeNat"
+        "AISafetyAtlas.InformationTheory.CodeSym",
+        "AISafetyAtlas.InformationTheory.encodeList",
+        "AISafetyAtlas.InformationTheory.encodeNat"
       ]
     },
     "AISafetyAtlas.Causal.o24EncodeInput_injective": {
       "kind": "theorem",
       "deps": [
-        "AISafetyAtlas.Causal.CodeSym",
         "AISafetyAtlas.Causal.O24Input",
-        "AISafetyAtlas.Causal.o24EncodeInput"
+        "AISafetyAtlas.Causal.o24EncodeInput",
+        "AISafetyAtlas.InformationTheory.CodeSym"
       ]
     },
     "AISafetyAtlas.Causal.o24ExcludedSlice": {
@@ -4044,28 +3596,6 @@
         "AISafetyAtlas.Causal.Skeleton.utilityParents",
         "AISafetyAtlas.Causal.binaryDim",
         "AISafetyAtlas.Causal.o24Point"
-      ]
-    },
-    "AISafetyAtlas.Causal.ofSparseMonomial": {
-      "kind": "definition",
-      "deps": [
-        "AISafetyAtlas.Causal.SparseMonomial",
-        "AISafetyAtlas.Causal.sparseExponents"
-      ]
-    },
-    "AISafetyAtlas.Causal.ofSparsePoly": {
-      "kind": "definition",
-      "deps": [
-        "AISafetyAtlas.Causal.SparseMonomial",
-        "AISafetyAtlas.Causal.SparsePoly",
-        "AISafetyAtlas.Causal.ofSparseMonomial"
-      ]
-    },
-    "AISafetyAtlas.Causal.ofSparsePoly_nil": {
-      "kind": "theorem",
-      "deps": [
-        "AISafetyAtlas.Causal.SparseMonomial",
-        "AISafetyAtlas.Causal.ofSparsePoly"
       ]
     },
     "AISafetyAtlas.Causal.one_le_modelError_add": {
@@ -4176,10 +3706,6 @@
         "AISafetyAtlas.Causal.Transcript"
       ]
     },
-    "AISafetyAtlas.Causal.sparseExponents": {
-      "kind": "definition",
-      "deps": []
-    },
     "AISafetyAtlas.Causal.sub_floorMul_lt": {
       "kind": "theorem",
       "deps": [
@@ -4202,18 +3728,10 @@
       "kind": "theorem",
       "deps": []
     },
-    "AISafetyAtlas.Causal.takeWhile_digits_append": {
-      "kind": "theorem",
-      "deps": [
-        "AISafetyAtlas.Causal.CodeSym",
-        "AISafetyAtlas.Causal.CodeSym.isDigit",
-        "AISafetyAtlas.Causal.CodeSym.sep"
-      ]
-    },
     "AISafetyAtlas.Causal.utilityBox": {
       "kind": "definition",
       "deps": [
-        "AISafetyAtlas.Causal.ClosedBox",
+        "AISafetyAtlas.Analysis.ClosedBox",
         "AISafetyAtlas.Causal.UtilityConfig"
       ]
     },

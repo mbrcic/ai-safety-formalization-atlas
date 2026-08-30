@@ -24,9 +24,10 @@ question stated precisely enough to be false is a deliverable here, and you do
 not need Lean to contribute one. See
 [conjectures](conjectures.md).
 
-**Looking for a target rather than a task?** Run
-`python3 scripts/report_consumers.py --queue`. It lists every atlas declaration
-that nothing outside `Examples/` builds on. A theorem with no downstream
+**Looking for a target rather than a task?** Read the `work_queue` in
+[`docs/status/consumers.json`](../status/consumers.json) — every atlas
+declaration that nothing outside `Examples/` builds on. (`python3 scripts/report_consumers.py --queue` recomputes the same list in a
+couple of seconds; the committed file is what CI checks against.) A theorem with no downstream
 consumer has untested ergonomics — that is the gap CT-4 closed for
 `Verification.rice` and CT-16 opened for the bounded portfolio target. Giving
 one a real consumer, or arguing it should be retired, is contribution either

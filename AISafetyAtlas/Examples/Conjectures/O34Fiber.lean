@@ -1,7 +1,7 @@
 module
 
 public import AISafetyAtlas.Conjectures.MAIS
-public import AISafetyAtlas.Causal.Semialgebraic
+public import AISafetyAtlas.Analysis.Semialgebraic
 
 /-!
 # Adjudicating MAIS issue #4's complete `MAIS-O34(a)` criterion
@@ -27,7 +27,7 @@ opposite-orientation half, which builds the mate that two flat lines allow.
 The scope is the transcribed chart. Issue #4 part (b) is not covered.
 -/
 
-namespace AISafetyAtlas.Examples.Conjectures.O34
+namespace AISafetyAtlas.Examples.Conjectures.O34Fiber
 
 open AISafetyAtlas.Conjectures.MAIS
 open AISafetyAtlas.Conjectures.BinaryPair
@@ -508,7 +508,7 @@ public theorem o34RootShiftPoly_eval (a : ℝ) (gr : Orientation) (q : O34Index 
     eval q (o34RootShiftPoly a) = (o34ChartModel gr q).root - a := by
   simp [o34RootShiftPoly, o34ChartModel]
 
-open AISafetyAtlas.Causal MvPolynomial in
+open AISafetyAtlas.Causal AISafetyAtlas.Analysis MvPolynomial in
 /-- A child coordinate meeting a constant is a semialgebraic condition. -/
 private theorem isSemialgebraic_child_eq (gr : Orientation) (i : Fin 2) (a : ℝ) :
     IsSemialgebraic {q : O34Index → ℝ | (o34ChartModel gr q).child i = a} := by
@@ -517,7 +517,7 @@ private theorem isSemialgebraic_child_eq (gr : Orientation) (i : Fin 2) (a : ℝ
     (isSemialgebraic_setOf_eval_eq_zero _)
   rw [o34ChildShiftPoly_eval i a gr q, sub_eq_zero]
 
-open AISafetyAtlas.Causal MvPolynomial in
+open AISafetyAtlas.Causal AISafetyAtlas.Analysis MvPolynomial in
 /-- A child difference vanishing is a semialgebraic condition. -/
 private theorem isSemialgebraic_childDifference_eq_zero (gr : Orientation) (i : Fin 2) :
     IsSemialgebraic {q : O34Index → ℝ | childDifference gr (o34ChartGap q) i = 0} := by
@@ -526,7 +526,7 @@ private theorem isSemialgebraic_childDifference_eq_zero (gr : Orientation) (i : 
     (isSemialgebraic_setOf_eval_eq_zero _)
   rw [o34ChildDiffPoly_eval]
 
-open AISafetyAtlas.Causal MvPolynomial in
+open AISafetyAtlas.Causal AISafetyAtlas.Analysis MvPolynomial in
 private theorem isSemialgebraic_childDifference_ne_zero (gr : Orientation) (i : Fin 2) :
     IsSemialgebraic {q : O34Index → ℝ | childDifference gr (o34ChartGap q) i ≠ 0} := by
   refine IsSemialgebraic.setOf_congr
@@ -534,7 +534,7 @@ private theorem isSemialgebraic_childDifference_ne_zero (gr : Orientation) (i : 
     (isSemialgebraic_setOf_eval_ne_zero _)
   rw [o34ChildDiffPoly_eval]
 
-open AISafetyAtlas.Causal MvPolynomial in
+open AISafetyAtlas.Causal AISafetyAtlas.Analysis MvPolynomial in
 private theorem isSemialgebraic_rootDifference_eq_zero (gr : Orientation) (i : Fin 2) :
     IsSemialgebraic {q : O34Index → ℝ | rootDifference gr (o34ChartGap q) i = 0} := by
   refine IsSemialgebraic.setOf_congr
@@ -542,7 +542,7 @@ private theorem isSemialgebraic_rootDifference_eq_zero (gr : Orientation) (i : F
     (isSemialgebraic_setOf_eval_eq_zero _)
   rw [o34RootDiffPoly_eval]
 
-open AISafetyAtlas.Causal MvPolynomial in
+open AISafetyAtlas.Causal AISafetyAtlas.Analysis MvPolynomial in
 private theorem isSemialgebraic_rootDifference_ne_zero (gr : Orientation) (i : Fin 2) :
     IsSemialgebraic {q : O34Index → ℝ | rootDifference gr (o34ChartGap q) i ≠ 0} := by
   refine IsSemialgebraic.setOf_congr
@@ -550,7 +550,7 @@ private theorem isSemialgebraic_rootDifference_ne_zero (gr : Orientation) (i : F
     (isSemialgebraic_setOf_eval_ne_zero _)
   rw [o34RootDiffPoly_eval]
 
-open AISafetyAtlas.Causal MvPolynomial in
+open AISafetyAtlas.Causal AISafetyAtlas.Analysis MvPolynomial in
 /-- `ExactlyOneFlat` is a finite disjunction over `Fin 2`, hence semialgebraic
 whenever its two atoms are. -/
 private theorem isSemialgebraic_exactlyOneFlat
@@ -564,7 +564,7 @@ private theorem isSemialgebraic_exactlyOneFlat
   · simp [ExactlyOneFlat, Fin.exists_fin_two]
   · exact ((hz 0).setOf_and (hn 1)).setOf_or ((hz 1).setOf_and (hn 0))
 
-open AISafetyAtlas.Causal MvPolynomial in
+open AISafetyAtlas.Causal AISafetyAtlas.Analysis MvPolynomial in
 /-- The companion clause, after its real quantifier is eliminated. -/
 private theorem isSemialgebraic_companion_singleton {lam : ℝ}
     (hlam0 : 0 < lam) (hlam2 : lam < 1 / 2) (gr : Orientation) (z : Fin 2) :
@@ -584,7 +584,7 @@ private theorem isSemialgebraic_companion_singleton {lam : ℝ}
       ((isSemialgebraic_child_eq gr (other z) (1 - 2 * lam)).setOf_and
         (isSemialgebraic_child_eq gr z (1 - lam))))
 
-open AISafetyAtlas.Causal MvPolynomial in
+open AISafetyAtlas.Causal AISafetyAtlas.Analysis MvPolynomial in
 /-- The mate clause's nonemptiness condition, after its real quantifier is
 eliminated: two half-planes in the root coordinate. -/
 private theorem isSemialgebraic_companion_nonempty {lam : ℝ}
@@ -605,7 +605,7 @@ private theorem isSemialgebraic_companion_nonempty {lam : ℝ}
       (isSemialgebraic_setOf_eval_nonneg _)
     rw [map_neg, o34RootShiftPoly_eval _ gr q, neg_sub, sub_nonneg]
 
-open AISafetyAtlas.Causal MvPolynomial in
+open AISafetyAtlas.Causal AISafetyAtlas.Analysis MvPolynomial in
 /-- **The criterion is semialgebraic**, which is the adjective
 `prob:starter-set`(a) uses and the last unproved word of its part (a).
 
@@ -693,4 +693,4 @@ public theorem exists_pairModel_classFibre_iff_candidate {g : Fin 2 → Fin 2 �
   exact ⟨P, hP, rfl, o34_classFibre_iff_candidate hg hP⟩
 
 
-end AISafetyAtlas.Examples.Conjectures.O34
+end AISafetyAtlas.Examples.Conjectures.O34Fiber

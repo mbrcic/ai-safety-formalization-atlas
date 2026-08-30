@@ -11,8 +11,9 @@ public import AISafetyAtlas.Conjectures.MAIS.O27
 public import AISafetyAtlas.Conjectures.MAIS.Rates
 public import AISafetyAtlas.Conjectures.MAIS.O25
 public import AISafetyAtlas.Conjectures.MAIS.O26
+public import AISafetyAtlas.Conjectures.MAIS.O38
 /-!
-# Statement layer for the interventional MAIS-A2 questions
+# Statement layer for the MAIS agenda questions
 
 **This module declares nothing.** It is the aggregate import of the statement
 layer, kept so existing import paths and permalinks keep resolving. Each printed
@@ -29,6 +30,14 @@ should open that file rather than this one:
 | MAIS-O31 | `q:chain` | `MAIS/O31.lean`, chart and transport in `MAIS/O31Chart.lean` |
 | MAIS-O34 | `prob:starter-set` | `MAIS/O34.lean` |
 
+One problem here is **not** from A2. MAIS-O38 is A3's `prob:samples`, a
+dictionary-learning uniqueness question with no causal content, and it shares
+none of this layer's vocabulary:
+
+| printed | label | agenda | module |
+|---|---|---|---|
+| MAIS-O38 | `prob:samples` | A3 | `MAIS/O38.lean` |
+
 Shared vocabulary is in `MAIS/Common.lean`. Every declaration keeps the
 `AISafetyAtlas.Conjectures.MAIS` namespace it had before the split, so no name
 downstream changed.
@@ -39,8 +48,8 @@ printed margin class. Defining a proposition below asserts nothing about its
 truth; resolved rows are proved separately in `Examples/Conjectures/`. No
 declaration uses `sorry` or an added axiom.
 
-The source is MAIS-A2 at the revision pinned in
-`docs/provenance/mais-source-pin.md`. A conjecture is what gets doubted and
+The source is MAIS-A2 — and, for `MAIS/O38.lean` alone, MAIS-A3 — at the revision
+pinned in `docs/provenance/mais-source-pin.md`. A conjecture is what gets doubted and
 proved, so a specialization must not be baked into its statement. Witnesses may
 be as narrow as the prover likes, and where a witness is narrower than the
 statement, the resolution field in `conjectures.yaml` says so.

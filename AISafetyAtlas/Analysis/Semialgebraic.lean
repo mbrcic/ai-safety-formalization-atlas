@@ -7,11 +7,19 @@ public import Mathlib.Analysis.SpecialFunctions.Pow.Real
 /-!
 # Semialgebraic subsets of a finite-dimensional real coordinate space
 
-MAIS-A2 `prob:exact` opens *"Let `𝒩 ⊆ 𝕄(sk, λ)` be a **compact semialgebraic**
-class …"*. Neither word can be dropped, and Mathlib at the pinned revision has
-no semialgebraic sets at all — the word occurs nowhere in the library, and there
-is no o-minimality development either — so the notion is built here.
-Compactness is Mathlib's.
+Mathlib at the pinned revision has no semialgebraic sets at all — the word
+occurs nowhere in the library, and there is no o-minimality development either —
+so the notion is built here. Compactness is Mathlib's.
+
+Nothing below is specific to any one problem: `ι` is an arbitrary index type,
+the coordinate space is `ι → ℝ`, and no atlas definition is imported. Like
+`AISafetyAtlas.Analysis.PolynomialGenericity` it sits in `Analysis` so that it
+can be read against Mathlib rather than against the consumer that motivated it.
+That consumer is MAIS-A2 `prob:exact`, which opens *"Let `𝒩 ⊆ 𝕄(sk, λ)` be a
+**compact semialgebraic** class …"* — neither word can be dropped — and reaches
+this file through `AISafetyAtlas.Causal.ParameterChart`, instantiating
+`ι := ChartIndex G`. Where a design choice below was made for that consumer, it
+is named as such.
 
 The definition is the standard one (Bochnak–Coste–Roy §2.1): a finite union of
 sets each cut out by finitely many polynomial sign conditions. Allowing `≥`
@@ -31,12 +39,9 @@ the other two, and `IsSemialgebraic.sdiff` is what they write.
 What is deliberately absent is Tarski–Seidenberg. Nothing here concludes that
 the projection of a semialgebraic set, its topological closure, or a set defined
 by a quantified first-order formula is semialgebraic.
-
-Nothing here is specific to causal models; `ι` is any index type and the
-coordinate space is `ι → ℝ`. The causal use instantiates `ι := ChartIndex G`.
 -/
 
-namespace AISafetyAtlas.Causal
+namespace AISafetyAtlas.Analysis
 
 open MvPolynomial
 
@@ -438,4 +443,4 @@ public theorem IsSemialgebraic.setOf_const_and {c : Prop} {P : (ι → ℝ) → 
       (fun _ ↦ ⟨fun h ↦ absurd h.1 hc, False.elim⟩) ?_
     simpa using (isSemialgebraic_empty (ι := ι))
 
-end AISafetyAtlas.Causal
+end AISafetyAtlas.Analysis

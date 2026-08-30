@@ -130,7 +130,7 @@ The combinators are half there, and the difference is what decides how much
 So: ordinary but real work, not assembly from parts already on the shelf.
 
 **Built on 2026-08-21, and the estimate held.**
-[`AISafetyAtlas/Causal/SparseEncoding.lean`](../../AISafetyAtlas/Causal/SparseEncoding.lean)
+[`AISafetyAtlas/InformationTheory/PrefixCode.lean`](../../AISafetyAtlas/InformationTheory/PrefixCode.lean)
 supplies both codes from scratch over a three-symbol alphabet, with
 `IsPrefixCode` as the composable property and `IsPrefixCode.pair` /
 `IsPrefixCode.list` as the combinators the library did not have. Two decisions

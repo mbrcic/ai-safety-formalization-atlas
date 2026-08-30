@@ -2,7 +2,7 @@ module
 
 public import AISafetyAtlas.Knowledge.Devices
 public import AISafetyAtlas.Knowledge.Check
-public import AISafetyAtlas.Examples.Inference.FinDevice
+public import AISafetyAtlas.Examples.Inference.Enumerable
 
 /-!
 # The spine–device joint, run

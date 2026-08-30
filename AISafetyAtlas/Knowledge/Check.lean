@@ -27,7 +27,7 @@ theorem makes the output evidence rather than a report.
   them in the kernel at elaboration time; the instances are what lets a program
   settle them at runtime, on a model it read from a file.
 
-`Examples.Inference.FinDevice` carries its own instance for enumerating *all*
+`Examples.Inference.Enumerable.FinDevice` carries its own instance for enumerating *all*
 devices of a shape, which is a different job — that one quantifies over devices
 and needs both types pinned, while these take the device as given.
 

@@ -1,7 +1,7 @@
 # Conjectures side by side: source text, Lean statement, Lean read back
 
-Every live MAIS-linked ledger conjecture — the seven of the eight whose source
-is the MAIS agenda or one of its issues; CONJ-002 grades against an
+Every live MAIS-linked ledger conjecture — the eight of the nine whose source
+is a MAIS agenda or one of its issues; CONJ-002 grades against an
 information-theory survey and is out of scope here — in three columns of prose:
 **what the source prints**, **what the Lean says**, and **what the Lean says
 translated back into English from its binders rather than from its intent**. The last column is the
@@ -19,22 +19,30 @@ and what was not**, because the two are not the same and a table of ticks hides
 the difference: the repository artifacts were recomputed from a local clone
 checked out at the pinned commit with a clean tree — `MAIS-A2.tex`,
 `MAIS-A2.pdf` and all six `open-problems/*.md` pages match
-[`mais-source-pin.md`](mais-source-pin.md) exactly. The three issue-body hashes
-were **not** recomputed: issue bodies are served by the GitHub API rather than
-carried in the tree, so they are reproduced here as recorded on 2026-08-20 and a
-silent edit since then would not have been caught by this pass.
+[`mais-source-pin.md`](mais-source-pin.md) exactly.
+
+**Amended 2026-08-27**, when CONJ-025 was added from agenda **A3**. That pass
+fetched `agendas/A3/MAIS-A3.tex` and `open-problems/MAIS-O38.md` at the pinned
+commit and diffed them against `main`: identical, so the pin and the branch are
+not on different problems. It also re-fetched the three 2026-08-20 issue bodies,
+which still match, and read MAIS issue #30 for the first time. Everything else
+below was left as read on 2026-08-23 and was **not** re-derived; issue bodies are
+served by the GitHub API rather than carried in the tree, so a silent edit
+between readings would not have been caught.
 
 | artifact | value |
 |---|---|
 | MAIS repository | `github.com/lionellevine/MAIS` |
 | MAIS commit | `9dd29f8bf5ccd1e7701e300039b09ed4096b6516` |
 | `agendas/A2/MAIS-A2.tex` | sha256 `d61be3eed51f618dd3b9389693b14e066e89a9cef5e89985b4226fff658c3c4f` — recomputed 2026-08-23, matches pin |
-| MAIS issue #4 body | sha256 `f425da83395b457feb5615c9beed703675a977967890ebe1b97dd61efdd0b328` — as recorded 2026-08-20, not recomputed |
+| MAIS issue #4 body | sha256 `f425da83395b457feb5615c9beed703675a977967890ebe1b97dd61efdd0b328` — recorded 2026-08-20, re-fetched 2026-08-27, matches |
 | MAIS issue #4 author comment | sha256 `e290bb83bd980cc9a9b8a3610e21ec6e26a0aa5c3d2e036db10b2610d909bca8` — as recorded 2026-08-20, not recomputed; a rendering note only, not part of the mathematical candidate |
-| MAIS issue #8 body | sha256 `8e2e688eaac1a72f915aa787ad1e74676e6b72eff4f2796394e95b0a83fb8a96` — as recorded 2026-08-20, not recomputed |
+| MAIS issue #8 body | sha256 `8e2e688eaac1a72f915aa787ad1e74676e6b72eff4f2796394e95b0a83fb8a96` — recorded 2026-08-20, re-fetched 2026-08-27, matches |
+| `agendas/A3/MAIS-A3.tex` | sha256 `146f0cc95a0a5eb0cf3b2660c32d591169b0e346571b80ee63723a9906371387` — fetched 2026-08-27, the statement source for CONJ-025 |
+| MAIS issue #30 body | sha256 `6e2db10eb10242c075ca331fcf87a604511b9b31df3d55a5c4b0d2d2d95d05ab` — read 2026-08-27; context for CONJ-025, not its graded artifact |
 | atlas commit the Lean was read from | the tip of the branch this file is part of; the reproducible pin is the toolchain and build evidence below, not a hash this file could state about itself |
 | toolchain | `leanprover/lean4:v4.31.0`, Mathlib `fabf563a7c95a166b8d7b6efca11c8b4dc9d911f` |
-| build evidence, measured at that commit | root `lake build` 3331 jobs, `scripts/lean_build_targets.txt` 3996 jobs; `check_print_axioms` 2458 declarations ⊆ `{propext, Classical.choice, Quot.sound}` |
+| build evidence, measured at that commit | root `lake build` 3331 jobs, `scripts/lean_build_targets.txt` 4004 jobs; `check_print_axioms` 2495 declarations ⊆ `{propext, Classical.choice, Quot.sound}` |
 
 Two structural points about the reading below. The MAIS-O25 adaptivity
 constant `c` is bound in `maisO25_exactQueryRate`'s outer existential, before the
@@ -77,6 +85,7 @@ on each side. Every declaration kept its namespace, so no name below moved.
 | CONJ-010 | O31 | `…/MAIS/O31.lean`, chart and transport in `…/MAIS/O31Chart.lean` | `…/Examples/…/MAIS/O31.lean`, positive-measure counterexample in `…/O31Measure.lean` |
 | CONJ-005 | O34 | `…/MAIS/O34.lean` | `…/Examples/…/MAIS/O34.lean` |
 | CONJ-009 | O34 | `…/MAIS/O34.lean` | `…/Examples/…/MAIS/O34.lean`, fibre criterion in `…/Examples/Conjectures/O34Fiber.lean` |
+| CONJ-025 | O38 | `…/MAIS/O38.lean` | `…/Examples/…/MAIS/O38.lean` |
 
 `AISafetyAtlas/Conjectures/MAIS.lean` and its `Examples` counterpart are now
 aggregate shims that import these and declare nothing, so a permalink into
@@ -85,9 +94,11 @@ on both sides and no *conjecture* row; it has one target row per clause since
 2026-08-24, and the reason for the distinction is below.
 
 **Issue bodies are editable in place** and carry no revision history a permalink
-can address. The two hashes above are the bytes as read on 2026-08-23; an edit
-by their authors changes the hash and invalidates the grading that rests on it,
-which is the point of recording them.
+can address. The hashes above are the bytes as read on the dates each row states;
+an edit by their authors changes the hash and invalidates whatever rests on it,
+which is the point of recording them. Only #4 and #8 carry a *grade*: #30 is
+context for CONJ-025 and an edit to it invalidates a provenance note rather than
+a verdict.
 
 ## What the two grades promise, for a reader who does not read Lean
 
@@ -121,7 +132,7 @@ them. No proposition is the same statement as an instruction to construct
 something, so neither has a row at all, and the closing notes say what stands in
 their place.
 
-## The seven MAIS-linked rows at a glance
+## The eight MAIS-linked rows at a glance
 
 | Row | Source artifact | Target | Status | Scope | Fidelity |
 |---|---|---|---|---|---|
@@ -132,6 +143,7 @@ their place.
 | CONJ-010 | **issue #8** | MAIS-O31 | OPEN | `Same` | `Literal` |
 | CONJ-005 | agenda `prob:starter-set` | MAIS-O34 | RESOLVED | `Same` | `Selected` |
 | CONJ-009 | **issue #4** | MAIS-O34 | RESOLVED | `Same` | `Literal` |
+| CONJ-025 | agenda `prob:samples` (**A3**) | MAIS-O38 | RESOLVED | `Same` | `Selected` |
 
 ---
 
@@ -781,6 +793,137 @@ submission.
 
 Proved by `Examples.Conjectures.O34.maisO34_exactFiberCandidate_holds`, on the
 source's real two-variable chart.
+
+---
+
+# CONJ-025 — MAIS-O38
+
+Graded against **agenda A3**'s `prob:samples`. Status **RESOLVED**,
+affirmatively, scope `Same`, fidelity `Selected`. The only row here whose source
+is not MAIS-A2, and the only one with no causal content. The construction and
+proof are MAIS issue #30's, not the atlas's; the atlas transcribed and
+machine-checked them.
+
+### Source, verbatim
+
+```latex
+\begin{problem}[\Oid{38}: Polynomially many samples for growing sparsity]\label{prob:samples}
+Call a dataset $Y=\{A x_1,\dots,A x_N\}\subset\R^n$, generated by a matrix
+$A\in\R^{n\times m}$ and $k$-sparse codes $x_i\in\R^m$, \emph{uniquely coded} if
+for every $B\in\R^{n\times m}$ and $k$-sparse $\bar x_1,\dots,\bar x_N$ with
+$B\bar x_i=Ax_i$ for all $i$, there are a permutation matrix $P$ and invertible
+diagonal matrix $D$ with $B=APD$ and $\bar x_i=D^{-1}P^{-1}x_i$. Let
+$k=k(m)\to\infty$ (say $k=\lceil m^{\alpha}\rceil$ for some $\alpha\in(0,1)$, or
+even $k=\lceil\log m\rceil$) and $n\ge 2k$. Do there exist $N$ bounded by a
+polynomial in $m$ and $k$-sparse $x_1,\dots,x_N$ such that for almost every $A$
+satisfying the spark condition of order $k$, the dataset $Y$ is uniquely coded?
+(The spark condition---every set of at most $2k$ columns linearly
+independent---applies verbatim to matrices with non-unit columns, and
+``almost every'' refers to Lebesgue measure on $\R^{n\times m}$.)
+\end{problem}
+```
+
+### Lean, top level
+
+```lean
+@[expose] public noncomputable def maisO38_polynomialSamplesSuffice : Prop :=
+  ∀ k n : ℕ → ℕ, Filter.Tendsto k Filter.atTop Filter.atTop →
+    (∀ m, 2 * k m ≤ n m) → (∀ᶠ m in Filter.atTop, k m < m) →
+      O38PolynomialSampleAnswer k n
+
+@[expose] public noncomputable def O38PolynomialSampleAnswer (k n : ℕ → ℕ) : Prop :=
+  ∃ (N : ℕ → ℕ) (p : Polynomial ℕ),
+    (∀ m, N m ≤ p.eval m) ∧
+      ∀ᶠ m in Filter.atTop,
+        ∃ x : Fin (N m) → (Fin m → ℝ), GenericallyUniquelyCoding (k m) (n m) m (N m) x
+
+@[expose] public noncomputable def GenericallyUniquelyCoding (k n m N : ℕ)
+    (x : Fin N → (Fin m → ℝ)) : Prop :=
+  (∀ i, IsKSparse k (x i)) ∧
+    ∀ᵐ A : Fin n → Fin m → ℝ,
+      SparkCondition k (Matrix.of A) → UniquelyCoded k (Matrix.of A) x
+
+@[expose] public noncomputable def UniquelyCoded (k : ℕ) {n m N : ℕ}
+    (A : Matrix (Fin n) (Fin m) ℝ) (x : Fin N → (Fin m → ℝ)) : Prop :=
+  ∀ (B : Matrix (Fin n) (Fin m) ℝ) (x' : Fin N → (Fin m → ℝ)),
+    (∀ i, IsKSparse k (x' i)) → (∀ i, B *ᵥ x' i = A *ᵥ x i) →
+      ∃ P D : Matrix (Fin m) (Fin m) ℝ,
+        IsPermutationMatrix P ∧ IsInvertibleDiagonal D ∧
+          B = A * P * D ∧ ∀ i, x' i = (D⁻¹ * P⁻¹) *ᵥ x i
+```
+
+### Lean read back
+
+For every pair of functions `k` and `n` from naturals to naturals such that `k`
+tends to infinity and `2 * k m ≤ n m` at every `m`, there exist a function `N`
+from naturals to naturals and a polynomial `p` with natural coefficients such
+that `N m ≤ p.eval m` at every `m`, and such that for all sufficiently large `m`
+there exists a family of `N m` vectors in `Fin m → ℝ`, each of whose supports has
+at most `k m` elements, with the property that for Lebesgue-almost every function
+`A : Fin (n m) → Fin m → ℝ` — Lebesgue meaning the `n m · m`-fold product of the
+Lebesgue measure on `ℝ` — if every finite set of at most `2 * k m` column indices
+gives a linearly independent family of columns of `A`, then: for every matrix `B`
+of the same shape and every family `x'` of `N m` vectors each of whose supports
+has at most `k m` elements, if `B` applied to `x' i` equals `A` applied to `x i`
+at every `i`, then there exist a matrix `P` that is the permutation matrix of some
+permutation of `Fin m` and a matrix `D` that is the diagonal matrix of some
+nowhere-vanishing vector, with `B = A * P * D` and `x' i = (D⁻¹ * P⁻¹) *ᵥ x i` at
+every `i`.
+
+### The delta
+
+Print asks a yes/no question — *"Do there exist `N` … such that …?"* — and the
+Lean asserts the **affirmative branch**. That is what `Selected` records, on the
+same genre already graded that way at CONJ-004, CONJ-005 and CONJ-008.
+
+**One quantifier is print's and unwritten, and it is the whole of the delta.**
+Print never quantifies `m`: it writes *"Let `k = k(m) → ∞` … and `n ≥ 2k`"* and
+*"`N` bounded by a polynomial in `m`"*, both asymptotic, and then poses the
+question. The Lean reads the missing quantifier at `Filter.atTop`. Under the
+strictest alternative — a design at *every* `m` — the printed sentence is false,
+and that is a theorem rather than a worry:
+`Examples.Conjectures.MAIS.not_maisO38_everyDimensionReading` refutes
+`maisO38_everyDimensionReading` at `m = 1`, where `k 1 = 0` makes every code the
+zero vector and the dataset `{0}`, so every `B` reproduces it. Print's own named
+family `k = ⌈log m⌉` has `k 1 = 0` as well. On the eventual reading print's own
+`k(m) → ∞` excludes the case and no atlas condition on `k` appears anywhere,
+which `eventually_one_le_sparsity` is the proof of.
+
+**A second unwritten quantifier, read the same way.** Print says what `k` tends
+to and never says what it ranges over. Two of print's own phrases presuppose
+`k(m) < m`: *"`k`-sparse codes `xᵢ ∈ ℝᵐ`"* is no condition at all once `m ≤ k`,
+and *"the spark condition of order `k`"* is Definition 4.1's condition on a
+dictionary in `U_{n,m}`, which §2 places at `m > n`, giving `2k ≤ n < m`
+already. The Lean carries the domain as eventually `k m < m`.
+
+What turns on the choice is a theorem, not an argument. The wider reading is
+`maisO38_unboundedSparsityReading`, and it is **false**:
+`Examples.Conjectures.MAIS.not_maisO38_unboundedSparsityReading` refutes it at
+`k(m) = m`, `n(m) = 2m`, where `not_uniquelyCoded_of_full_sparsity_spark` kills
+every design at every spark-condition matrix and `ae_sparkCondition` closes the
+vacuous escape. That refutation has no sparse-coding content — a transvection is
+the whole argument — and by `rows_gt_cols_of_full_sparsity_spark` print's own
+`n ≥ 2k` forces the witness into `m < n`, an undercomplete dictionary on the
+wrong side of the agenda's own regime. **It is a warning about the printed
+sentence, not an answer**, the row stays `OPEN`, and
+`exists_admissibleGrowthLaw` checks the narrowed universal is not empty. MAIS
+issue #30 reads the domain as `1 ≤ k < m` independently.
+
+**The set braces are print's and the pairing is print's too.** `Y` is written
+`{A x₁, …, A x_N}`, and *uniquely coded* is then stated index by index —
+`B x̄ᵢ = A xᵢ` for all `i`, `x̄ᵢ = D⁻¹P⁻¹xᵢ` at the matching index. `UniquelyCoded`
+takes an indexed family, because a `Set` drops that pairing.
+
+**Non-vacuity is discharged**, which for an existential row is the obligation that
+matters: `Examples.Conjectures.MAIS.genericallyUniquelyCoding_two` exhibits two
+one-sparse coordinate probes meeting print's demand at `m = 2`, `k = 1`, for every
+ambient `n`, and pointwise rather than almost everywhere.
+
+**No candidate is graded here.** Unlike CONJ-009 and CONJ-010, whose graded
+artifact is a submitted issue, this row grades against the agenda. MAIS issue #30
+submits a candidate solution; it is `context_source_ref`, its construction is not
+transcribed, and its only influence is recorded in
+[`mais-o38-transcription.md`](mais-o38-transcription.md).
 
 ---
 

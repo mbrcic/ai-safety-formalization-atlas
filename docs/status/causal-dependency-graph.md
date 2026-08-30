@@ -10,7 +10,7 @@ Edges come from the elaborated Lean environment. This answers the question the p
 
 So `A → B` means *`B` occurs in `A`'s statement, or in `A`'s body when `A` is a definition*. A lemma used only inside a proof does not appear. Reading the table as a complete call graph would be wrong, and the two sections below are scoped so that they stay true under this limit.
 
-`493` authored declarations in `AISafetyAtlas.Causal.*` (271 theorems). Compiler-generated companions and projections are dropped.
+`422` authored declarations in `AISafetyAtlas.Causal.*` (229 theorems). Compiler-generated companions and projections are dropped.
 
 ## Load-bearing declarations
 
@@ -24,11 +24,9 @@ Named in the statements of eight or more others. A change to one of these is a c
 | `Skeleton` | 119 |
 | `Model.parents` | 53 |
 | `InterventionProfile` | 42 |
-| `CodeSym` | 42 |
 | `Model.cpt` | 41 |
 | `ProbMixture` | 39 |
 | `SCIM.graph` | 33 |
-| `IsSemialgebraic` | 31 |
 | `Skeleton.MarginClass` | 30 |
 | `SCIM.Policy` | 30 |
 | `ChartIndex` | 30 |
@@ -50,8 +48,6 @@ Named in the statements of eight or more others. A change to one of these is a c
 | `ShiftedQuery` | 17 |
 | `PolicyFamily` | 17 |
 | `IsProbabilityMixture` | 17 |
-| `IsPrefixCode` | 17 |
-| `encodeNat` | 16 |
 | `UtilityConfig` | 16 |
 | `SCIM.withPolicy` | 16 |
 | `SCM.IsWellFounded` | 15 |
@@ -65,20 +61,17 @@ Named in the statements of eight or more others. A change to one of these is a c
 | `DecisionNetwork` | 14 |
 | `pmfExpect` | 13 |
 | `Skeleton.ValidMargin` | 13 |
-| `PolySign` | 13 |
 | `O24Assignment` | 13 |
 | `instMeasurableSpaceModel` | 12 |
 | `fibreRep` | 12 |
 | `SCIM.instIsWellFoundedWithPolicy` | 12 |
 | `ParentConfig` | 12 |
 | `NodeKind` | 12 |
-| `ClosedBox` | 12 |
 | `CID.IsWellFounded` | 12 |
 | `RandomizedEstimator` | 11 |
 | `Model.jointProb` | 11 |
 | `MeasureEstimator` | 11 |
 | `LocalIntervention` | 11 |
-| `SparseMonomial` | 10 |
 | `Skeleton.utility` | 10 |
 | `Model.regret` | 10 |
 | `hardInterventionProfile` | 9 |
@@ -87,7 +80,6 @@ Named in the statements of eight or more others. A change to one of these is a c
 | `Model.ParentClosed` | 9 |
 | `DecisionNetwork.utility` | 9 |
 | `o24Size` | 8 |
-| `SparsePoly` | 8 |
 | `Skeleton.M1` | 8 |
 | `SCM.f` | 8 |
 | `SCM.exoJoint` | 8 |
@@ -123,7 +115,6 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 |---|---|---|
 | `AdmissibleFamily` | definition | `Model`, `Model.HasRegretAtMost`, `PolicyFamily`, `ProbMixture`, `Skeleton`, `Skeleton.observed` |
 | `Assignment` | definition | — |
-| `BasicSemialgebraic` | definition | `PolySign`, `PolySign.Holds` |
 | `CID` | definition | — |
 | `CID.IsDecision` | definition | `CID`, `CID.kind`, `NodeKind`, `NodeKind.decision` |
 | `CID.IsDescendant` | definition | `CID`, `CID.parents` |
@@ -144,18 +135,9 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 | `CID.utilities` | definition | `CID`, `CID.kind`, `NodeKind`, `NodeKind.utility` |
 | `ChartIndex` | definition | `ParentConfig` |
 | `ChartIndex.extend` | definition | `Assignment`, `ChartIndex`, `ParentConfig`, `binaryDim` |
-| `ClosedBox` | definition | — |
-| `CodeSym` | definition | — |
-| `CodeSym.isDigit` | definition | `CodeSym` |
-| `CodeSym.isDigit_ofBool` | theorem | `CodeSym.isDigit`, `CodeSym.ofBool` |
-| `CodeSym.ofBool` | definition | `CodeSym`, `CodeSym.one`, `CodeSym.zero` |
-| `CodeSym.ofBool_injective` | theorem | `CodeSym`, `CodeSym.ofBool` |
-| `CodeSym.one` | definition | `CodeSym` |
-| `CodeSym.sep` | definition | `CodeSym` |
-| `CodeSym.zero` | definition | `CodeSym` |
 | `ConditionalTables` | definition | — |
 | `ConditionalTables.family` | definition | `Assignment`, `ConditionalTables`, `ConditionalTables.table`, `InterventionalFamily` |
-| `ContainsChartBox` | definition | `ChartIndex`, `ClosedBox`, `Model`, `Model.chartSlice`, `binaryDim` |
+| `ContainsChartBox` | definition | `ChartIndex`, `Model`, `Model.chartSlice`, `binaryDim` |
 | `DecisionNetwork` | definition | — |
 | `DecisionNetwork.IsChance` | definition | `DecisionNetwork`, `DecisionNetwork.decision`, `DecisionNetwork.utility` |
 | `DecisionNetwork.IsDeterministicUtility` | definition | `Assignment`, `DecisionNetwork`, `DecisionNetwork.net`, `DecisionNetwork.utility`, `Model.cpt` |
@@ -178,27 +160,11 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 | `InterventionProfile` | definition | `LocalIntervention` |
 | `InterventionalFamily` | definition | `Assignment` |
 | `IsCausalBayesNetwork` | definition | `Assignment`, `ConditionalTables`, `ConditionalTables.table`, `InterventionalFamily`, `forcedTable` |
-| `IsCompactSemialgebraicClass` | definition | `ChartIndex`, `IsSemialgebraic`, `Model`, `Model.chartSlice`, `binaryDim` |
+| `IsCompactSemialgebraicClass` | definition | `ChartIndex`, `Model`, `Model.chartSlice`, `binaryDim` |
 | `IsCompatibleGraph` | definition | — |
 | `IsNonadaptiveRandomizedStrategy` | definition | `RandomizedQueryStrategy`, `ShiftedQuery`, `Skeleton`, `Transcript` |
-| `IsPrefixCode` | definition | `CodeSym` |
-| `IsPrefixCode.injective` | theorem | `CodeSym`, `IsPrefixCode` |
-| `IsPrefixCode.list` | theorem | `CodeSym`, `IsPrefixCode`, `encodeList` |
-| `IsPrefixCode.ofBoolList` | theorem | `IsPrefixCode`, `encodeBoolList` |
-| `IsPrefixCode.pair` | theorem | `CodeSym`, `IsPrefixCode` |
 | `IsProbabilityMixture` | definition | `InterventionProfile`, `LocalIntervention`, `Mixture` |
 | `IsRadius` | definition | `Skeleton`, `radiusErrors` |
-| `IsSemialgebraic` | definition | `BasicSemialgebraic`, `PolySign` |
-| `IsSemialgebraic.basic` | theorem | `BasicSemialgebraic`, `IsSemialgebraic`, `PolySign` |
-| `IsSemialgebraic.compl` | theorem | `IsSemialgebraic` |
-| `IsSemialgebraic.inter` | theorem | `IsSemialgebraic` |
-| `IsSemialgebraic.sdiff` | theorem | `IsSemialgebraic` |
-| `IsSemialgebraic.setOf_and` | theorem | `IsSemialgebraic` |
-| `IsSemialgebraic.setOf_congr` | theorem | `IsSemialgebraic` |
-| `IsSemialgebraic.setOf_const_and` | theorem | `IsSemialgebraic` |
-| `IsSemialgebraic.setOf_not` | theorem | `IsSemialgebraic` |
-| `IsSemialgebraic.setOf_or` | theorem | `IsSemialgebraic` |
-| `IsSemialgebraic.union` | theorem | `IsSemialgebraic` |
 | `LocalIntervention` | definition | — |
 | `MeasureEstimator` | definition | `Model`, `Skeleton`, `Transcript`, `instMeasurableSpaceModel` |
 | `MeasureEstimator.discretize` | definition | `MeasureEstimator`, `Model`, `Model.roundDown`, `RandomizedEstimator`, `Skeleton`, `Transcript`, `instMeasurableSpaceModel` |
@@ -332,11 +298,6 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 | `Policy` | definition | — |
 | `Policy.const` | definition | `Assignment`, `Policy` |
 | `PolicyFamily` | definition | `Policy`, `ProbMixture`, `Skeleton`, `Skeleton.observed` |
-| `PolySign` | definition | — |
-| `PolySign.Holds` | definition | `PolySign` |
-| `PolySign.nonneg` | definition | `PolySign` |
-| `PolySign.pos` | definition | `PolySign` |
-| `PolySign.zero` | definition | `PolySign` |
 | `ProbMixture` | definition | `IsProbabilityMixture`, `Mixture` |
 | `ProbMixture.dirac` | definition | `InterventionProfile`, `IsProbabilityMixture`, `LocalIntervention`, `Mixture`, `ProbMixture` |
 | `ProbMixture.dirac_apply` | theorem | `InterventionProfile`, `IsProbabilityMixture`, `LocalIntervention`, `Mixture`, `ProbMixture.dirac` |
@@ -432,21 +393,17 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 | `Skeleton.utilityLo` | definition | `Assignment` |
 | `Skeleton.utilityLo_le` | theorem | `Assignment`, `Skeleton.utilityLo` |
 | `Skeleton.utilityParents_mapRat` | theorem | `Skeleton`, `Skeleton.mapRat`, `Skeleton.utilityParents` |
-| `SparseMonomial` | definition | — |
-| `SparsePoly` | definition | `SparseMonomial` |
 | `Transcript` | definition | `ShiftedQuery`, `Skeleton` |
 | `UtilityConfig` | definition | — |
 | `UtilityConfig.extend` | definition | `Assignment`, `UtilityConfig`, `binaryDim` |
 | `acyclic_of_rank` | theorem | — |
 | `asg` | definition | `Assignment`, `binaryDim`, `binaryState` |
 | `assignment_two_eq` | theorem | `Assignment`, `asg`, `binaryDim` |
-| `basicSemialgebraic_union` | theorem | `BasicSemialgebraic`, `PolySign` |
 | `binaryDim` | definition | — |
 | `binaryState` | definition | — |
 | `binaryState_false` | theorem | `binaryState` |
 | `binaryState_true` | theorem | `binaryState` |
 | `binary_eq_zero_or_one` | theorem | `binaryDim` |
-| `bits_injective` | theorem | — |
 | `card_binaryLocalIntervention` | theorem | — |
 | `card_chartIndex` | theorem | `ChartIndex`, `ParentConfig`, `chartDim` |
 | `card_le_o24Size` | theorem | `o24Size` |
@@ -457,7 +414,7 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 | `chainParents_fixedPoint_not_unique` | theorem | — |
 | `chainParents_lt` | theorem | `chainParents` |
 | `chainParents_not_wellFounded` | theorem | `chainParents` |
-| `chartBox` | definition | `ChartIndex`, `ClosedBox` |
+| `chartBox` | definition | `ChartIndex` |
 | `chartDim` | definition | — |
 | `chartOn_mem_chartBox` | theorem | `ChartIndex`, `Model`, `Model.chartOn`, `binaryDim`, `chartBox` |
 | `countable_range_roundDown` | theorem | `Model`, `Model.roundDown` |
@@ -470,19 +427,8 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 | `effectiveMarginClass` | definition | `Model`, `Model.parents`, `O24Assignment`, `O24Assignment.at`, `O24Var`, `Skeleton`, `Skeleton.MarginClass`, `Skeleton.utilityParents`, `binaryDim`, `o24Value` |
 | `effectiveMarginClass_mono` | theorem | `Model`, `O24Assignment`, `Skeleton`, `binaryDim`, `effectiveMarginClass` |
 | `effectiveMarginClass_subset` | theorem | `Model`, `O24Assignment`, `Skeleton`, `Skeleton.MarginClass`, `binaryDim`, `effectiveMarginClass` |
-| `encodeBoolList` | definition | `CodeSym`, `CodeSym.ofBool`, `CodeSym.sep` |
-| `encodeBoolList_takeWhile` | theorem | `CodeSym`, `CodeSym.isDigit`, `CodeSym.ofBool`, `CodeSym.sep`, `encodeBoolList` |
-| `encodeFinsetFin` | definition | `CodeSym`, `encodeBoolList` |
-| `encodeInt` | definition | `CodeSym`, `CodeSym.one`, `CodeSym.zero`, `encodeNat` |
-| `encodeList` | definition | `CodeSym`, `encodeNat` |
-| `encodeMonomial` | definition | `CodeSym`, `SparseMonomial`, `encodeList`, `encodeRat`, `encodeVarPow` |
-| `encodeNat` | definition | `CodeSym`, `encodeBoolList` |
-| `encodeO24Var` | definition | `ChartIndex`, `CodeSym`, `CodeSym.one`, `CodeSym.zero`, `O24Var`, `ParentConfig`, `UtilityConfig`, `encodeBoolList`, `encodeNat`, `finsetFunBits` |
-| `encodeRat` | definition | `CodeSym`, `encodeInt`, `encodeNat` |
-| `encodeSparseList` | definition | `CodeSym`, `SparsePoly`, `encodeList`, `encodeSparsePoly` |
-| `encodeSparseList_injective` | theorem | `CodeSym`, `IsPrefixCode`, `SparsePoly`, `encodeSparseList` |
-| `encodeSparsePoly` | definition | `CodeSym`, `SparseMonomial`, `SparsePoly`, `encodeList`, `encodeMonomial` |
-| `encodeVarPow` | definition | `CodeSym`, `encodeNat` |
+| `encodeFinsetFin` | definition | — |
+| `encodeO24Var` | definition | `ChartIndex`, `O24Var`, `ParentConfig`, `UtilityConfig`, `finsetFunBits` |
 | `eq_family_of_isCausalBayesNetwork` | theorem | `ConditionalTables`, `ConditionalTables.family`, `InterventionalFamily`, `IsCausalBayesNetwork` |
 | `exactAnalystRisk` | definition | `AdmissibleFamily`, `Model`, `PolicyFamily`, `RandomizedEstimator`, `RandomizedQueryStrategy`, `Skeleton`, `exactExpectedError` |
 | `exactAnalystRisk_discretize_le` | theorem | `MeasureEstimator`, `MeasureEstimator.discretize`, `Model`, `RandomizedQueryStrategy`, `Skeleton`, `dimBound`, `exactAnalystRisk`, `measureAnalystRisk` |
@@ -526,30 +472,10 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 | `integral_toMeasure_modelError` | theorem | `Model`, `instMeasurableSpaceModel`, `modelError`, `pmfExpect` |
 | `isCausalBayesNetwork_family` | theorem | `ConditionalTables`, `ConditionalTables.family`, `IsCausalBayesNetwork` |
 | `isCausalBayesNetwork_iff` | theorem | `ConditionalTables`, `ConditionalTables.family`, `InterventionalFamily`, `IsCausalBayesNetwork` |
-| `isCompact_closedBox` | theorem | `ClosedBox` |
 | `isCompatibleGraph_parents` | theorem | `IsCompatibleGraph`, `Model`, `Model.parents`, `binaryDim` |
-| `isPrefixCode_encodeBoolList` | theorem | `IsPrefixCode`, `encodeBoolList` |
-| `isPrefixCode_encodeFinsetFin` | theorem | `IsPrefixCode`, `encodeFinsetFin` |
-| `isPrefixCode_encodeInt` | theorem | `IsPrefixCode`, `encodeInt` |
-| `isPrefixCode_encodeMonomial` | theorem | `CodeSym`, `IsPrefixCode`, `SparseMonomial`, `encodeMonomial` |
-| `isPrefixCode_encodeNat` | theorem | `IsPrefixCode`, `encodeNat` |
-| `isPrefixCode_encodeO24Var` | theorem | `IsPrefixCode`, `O24Var`, `encodeO24Var` |
-| `isPrefixCode_encodeRat` | theorem | `IsPrefixCode`, `encodeRat` |
-| `isPrefixCode_encodeSparseList` | theorem | `CodeSym`, `IsPrefixCode`, `SparsePoly`, `encodeSparseList` |
-| `isPrefixCode_encodeSparsePoly` | theorem | `CodeSym`, `IsPrefixCode`, `SparsePoly`, `encodeSparsePoly` |
-| `isPrefixCode_encodeVarPow` | theorem | `CodeSym`, `IsPrefixCode`, `encodeVarPow` |
-| `isSemialgebraic_biInter` | theorem | `IsSemialgebraic` |
-| `isSemialgebraic_biUnion` | theorem | `IsSemialgebraic` |
-| `isSemialgebraic_closedBox` | theorem | `ClosedBox`, `IsSemialgebraic` |
-| `isSemialgebraic_compl_basic` | theorem | `BasicSemialgebraic`, `IsSemialgebraic`, `PolySign` |
-| `isSemialgebraic_empty` | theorem | `IsSemialgebraic` |
-| `isSemialgebraic_not_holds` | theorem | `IsSemialgebraic`, `PolySign`, `PolySign.Holds` |
-| `isSemialgebraic_of_containsChartBox` | theorem | `ChartIndex`, `ClosedBox`, `ContainsChartBox`, `IsSemialgebraic`, `Model`, `Model.chartSlice`, `binaryDim` |
-| `isSemialgebraic_setOf_eval_eq_zero` | theorem | `IsSemialgebraic` |
-| `isSemialgebraic_setOf_eval_ne_zero` | theorem | `IsSemialgebraic` |
-| `isSemialgebraic_setOf_eval_nonneg` | theorem | `IsSemialgebraic` |
-| `isSemialgebraic_setOf_eval_pos` | theorem | `IsSemialgebraic` |
-| `isSemialgebraic_univ` | theorem | `IsSemialgebraic` |
+| `isPrefixCode_encodeFinsetFin` | theorem | `encodeFinsetFin` |
+| `isPrefixCode_encodeO24Var` | theorem | `O24Var`, `encodeO24Var` |
+| `isSemialgebraic_of_containsChartBox` | theorem | `ChartIndex`, `ContainsChartBox`, `Model`, `Model.chartSlice`, `binaryDim` |
 | `jointProb_sum_two` | theorem | `Assignment`, `InterventionProfile`, `Model`, `Model.jointProb`, `binaryDim` |
 | `le_pmfExpect` | theorem | `pmfExpect` |
 | `measurableSet_parents_eq` | theorem | `Model`, `Model.parents`, `instMeasurableSpaceModel` |
@@ -580,15 +506,12 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 | `not_inIdentifiedSet_of_neg` | theorem | `InIdentifiedSet`, `Model`, `Skeleton` |
 | `not_inIdentifiedSet_of_opposite_sign` | theorem | `Assignment`, `InIdentifiedSet`, `Model`, `ProbMixture`, `Skeleton`, `Skeleton.gap`, `Skeleton.observed` |
 | `o24ClassSize` | definition | — |
-| `o24EncodeInput` | definition | `CodeSym`, `O24Input`, `O24Input.graph`, `O24Input.observed`, `O24Input.utilityParents`, `encodeFinsetFin`, `encodeList`, `encodeNat` |
-| `o24EncodeInput_injective` | theorem | `CodeSym`, `O24Input`, `o24EncodeInput` |
+| `o24EncodeInput` | definition | `O24Input`, `O24Input.graph`, `O24Input.observed`, `O24Input.utilityParents`, `encodeFinsetFin` |
+| `o24EncodeInput_injective` | theorem | `O24Input`, `o24EncodeInput` |
 | `o24ExcludedSlice` | definition | `ChartIndex`, `O24Assignment`, `O24Var`, `UtilityConfig`, `chartBox` |
 | `o24Point` | definition | `ChartIndex`, `Model`, `Model.chartOn`, `O24Var`, `Skeleton`, `Skeleton.utility`, `Skeleton.utilityParents`, `UtilityConfig`, `UtilityConfig.extend`, `binaryDim` |
 | `o24Size` | definition | `chartDim` |
 | `o24Value` | definition | `Model`, `O24Var`, `Skeleton`, `Skeleton.utilityParents`, `binaryDim`, `o24Point` |
-| `ofSparseMonomial` | definition | `SparseMonomial`, `sparseExponents` |
-| `ofSparsePoly` | definition | `SparseMonomial`, `SparsePoly`, `ofSparseMonomial` |
-| `ofSparsePoly_nil` | theorem | `SparseMonomial`, `ofSparsePoly` |
 | `one_le_modelError_add` | theorem | `Model`, `Model.parents`, `modelError` |
 | `optimalPolicyFamily` | definition | `Model`, `Model.bestPolicy`, `PolicyFamily`, `ProbMixture`, `Skeleton`, `Skeleton.observed` |
 | `pmfExpect` | definition | — |
@@ -604,13 +527,11 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 | `radiusErrors` | definition | `InIdentifiedSet`, `Model`, `Skeleton`, `Skeleton.MarginClass`, `modelError` |
 | `ratBitLength` | definition | — |
 | `runRandomizedTranscript` | definition | `PolicyFamily`, `RandomizedQueryStrategy`, `Skeleton`, `Transcript` |
-| `sparseExponents` | definition | — |
 | `sub_floorMul_lt` | theorem | `floorMul` |
 | `sum_assignment_two` | theorem | `Assignment`, `asg`, `binaryDim` |
 | `summable_pmfExpect` | theorem | — |
 | `sup'_sub_inf'_bool` | theorem | — |
-| `takeWhile_digits_append` | theorem | `CodeSym`, `CodeSym.isDigit`, `CodeSym.sep` |
-| `utilityBox` | definition | `ClosedBox`, `UtilityConfig` |
+| `utilityBox` | definition | `UtilityConfig` |
 | `utility_mem_utilityBox` | theorem | `Skeleton`, `Skeleton.utility`, `Skeleton.utilityParents`, `UtilityConfig`, `UtilityConfig.extend`, `binaryDim`, `utilityBox` |
 | `wellFounded_iff_exists_rank` | theorem | — |
 | `wellFounded_of_rank` | theorem | — |

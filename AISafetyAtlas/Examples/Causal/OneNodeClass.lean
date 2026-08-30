@@ -46,7 +46,7 @@ witness, and `1 - 2λ = 4/5` meets it with room.
 
 namespace AISafetyAtlas.Examples.Causal.OneNodeClass
 
-open AISafetyAtlas.Causal
+open AISafetyAtlas.Causal AISafetyAtlas.Analysis
 
 /-! ## The skeleton -/
 

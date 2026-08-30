@@ -31,6 +31,31 @@ by itself a claim that paper-parity work is finished (see residual notes under
 `docs/provenance/`). Statement-match and `RELATED` are reported separately so
 specializations are not read as full source matches.
 
+### What separates the three
+
+Both `EXACT` and `EQUIVALENT` assert **complete coverage** of the printed
+statement. They differ in how it is rendered.
+
+- **`EXACT`** — the Lean statement *is* the printed statement: the source's own
+  objects, hypotheses and conclusion, transcribed rather than reformulated. A
+  record earns it only when no residual is outstanding; BY-005 was moved here
+  from `RELATED` on 2026-08-17 when the last two closed, which is the shape of
+  the promotion in general.
+- **`EQUIVALENT`** — the printed statement in full, through a different but
+  provably equivalent representation: the source's objects unpacked, or the
+  claim stated over the paper's own abstraction rather than its notation. Every
+  `EQUIVALENT` record carrying declarations documents that re-rendering in
+  `scope_delta`, and that documentation is what makes the equivalence
+  checkable rather than asserted.
+- **`RELATED`** — deliberately partial coverage, with the delta written down.
+
+**None of the three says anything about generality.** A transcription can still
+be more general than print, because a Lean statement inherits whatever the
+typeclass it is stated over admits. That axis is graded per printed
+statement in `docs/provenance/source-coverage-audit.md`, and it is independent:
+`EXACT` + `Wider` is a coherent and common combination, and so is `RELATED` +
+`Same` on the part that is covered.
+
 **A `RELATED` record that a reader can reach carries its delta as data.** When
 the record's module is on the public root import, or its row's bridge status has
 graduated past `HUMAN_REVIEW`, or the row exposes a `BRIDGE` declaration, the

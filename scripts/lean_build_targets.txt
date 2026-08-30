@@ -12,6 +12,7 @@ AISafetyAtlas.Conjectures.MAIS.O27
 AISafetyAtlas.Conjectures.MAIS.Rates
 AISafetyAtlas.Conjectures.MAIS.O25
 AISafetyAtlas.Conjectures.MAIS.O26
+AISafetyAtlas.Conjectures.MAIS.O38
 AISafetyAtlas.Examples.Conjectures.MAIS
 AISafetyAtlas.Examples.Conjectures.MAIS.Common
 AISafetyAtlas.Examples.Conjectures.MAIS.O23
@@ -23,6 +24,8 @@ AISafetyAtlas.Examples.Conjectures.MAIS.Rates
 AISafetyAtlas.Examples.Conjectures.MAIS.O25
 AISafetyAtlas.Examples.Conjectures.MAIS.O26
 AISafetyAtlas.Examples.Conjectures.MAIS.O27
+AISafetyAtlas.Examples.Conjectures.MAIS.O38
+AISafetyAtlas.Examples.Conjectures.MAIS.O38Candidate
 AISafetyAtlas.Examples.Conjectures.O34Fiber
 AISafetyAtlas.Conjectures.StochasticComplexity
 AISafetyAtlas.Causal.Decision
@@ -47,7 +50,7 @@ AISafetyAtlas.Examples.Causal.BayesianNetwork
 AISafetyAtlas.Examples.Causal.DecisionNetwork
 AISafetyAtlas.Examples.Causal.Decision
 AISafetyAtlas.Examples.Causal.Query
-AISafetyAtlas.Examples.Causal.Semialgebraic
+AISafetyAtlas.Examples.Analysis.Semialgebraic
 AISafetyAtlas.Examples.Causal.EffectiveGenericity
 AISafetyAtlas.Examples.Causal.OneNodeClass
 AISafetyAtlas.Causal.ModelSpace
@@ -61,7 +64,7 @@ AISafetyAtlas.Examples.Inference.ComplexityMeasure
 AISafetyAtlas.Examples.Inference.Device
 AISafetyAtlas.Examples.Inference.EntropyBound
 AISafetyAtlas.Examples.Inference.Existence
-AISafetyAtlas.Examples.Inference.FinDevice
+AISafetyAtlas.Examples.Inference.Enumerable
 AISafetyAtlas.Examples.Inference.FunctionFamily
 AISafetyAtlas.Examples.Inference.Halting
 AISafetyAtlas.Examples.Inference.Inversion
@@ -109,3 +112,6 @@ AISafetyAtlas.InformationTheory.DataProcessing
 AISafetyAtlas.InformationTheory.Fano
 AISafetyAtlas.Learning.Sharp
 AISafetyAtlas.Oversight.Debate
+AISafetyAtlas.Examples.Analysis.PolynomialGenericity
+AISafetyAtlas.Examples.Analysis.NullImage
+AISafetyAtlas.Examples.Analysis.MaximalMinor

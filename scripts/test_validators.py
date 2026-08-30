@@ -790,11 +790,15 @@ CASES = [
         "appear in both the live ledger and the retired archive",
     ),
     (
+        # This case names the *next* free id, so it moves every time a row
+        # lands. Left alone it turns into a no-op that passes for the wrong
+        # reason -- the mutation stops changing anything -- which is the one
+        # failure shape a regression suite cannot report on itself.
         "conjectures: next_id skips an unrecorded assignment",
         "validate_conjectures.py",
         "conjectures.yaml",
-        lambda d: d.__setitem__("next_id", 26),
-        "conjecture numbering skips assigned ids ['CONJ-025']",
+        lambda d: d.__setitem__("next_id", 27),
+        "conjecture numbering skips assigned ids ['CONJ-026']",
     ),
     (
         "conjectures: MAIS row using an atlas bridge",

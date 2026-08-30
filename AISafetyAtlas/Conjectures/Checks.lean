@@ -5,6 +5,7 @@ public import AISafetyAtlas.Causal.EffectiveGenericity
 public import AISafetyAtlas.Conjectures.MAIS
 public import AISafetyAtlas.Conjectures.MAIS.O27
 public import AISafetyAtlas.Conjectures.MAIS.O31
+public import AISafetyAtlas.Conjectures.MAIS.O38
 public import AISafetyAtlas.Conjectures.StochasticComplexity
 
 /-!
@@ -90,3 +91,7 @@ example : Prop := AISafetyAtlas.Conjectures.MAIS.maisO31_chainClassificationCand
 
 -- CONJ-024 (blocked, OPEN)
 -- No Lean declaration: AISafetyAtlas.Causal.sampledActionBudget, AISafetyAtlas.Causal.SwitchingSurface are recorded absent.
+
+-- CONJ-025 (claim, RESOLVED)
+example : Prop := AISafetyAtlas.Conjectures.MAIS.maisO38_polynomialSamplesSuffice
+#check @AISafetyAtlas.Conjectures.MAIS.o38PolynomialSampleCandidate
