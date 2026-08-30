@@ -318,9 +318,13 @@ stale without anyone noticing.
     by [`.github/workflows/pages.yml`](.github/workflows/pages.yml) on pushes that
     touch `site/` (verified 2026-08-29).
   - **Reuse is mostly internal, and the share is falling.**
-    `scripts/report_consumers.py` reports 36 of 248 declarations consumed
-    outside `Examples/` (measured 2026-08-28; 21 of 105 at v0.7, so the share
-    fell from 20% to 15% while the corpus more than doubled). The spine and its
+    `scripts/report_consumers.py` reports 38 of 248 declarations consumed
+    outside `Examples/` (measured 2026-08-30; 21 of 105 at v0.7, so the share
+    fell from 20% to 15% while the corpus more than doubled). Two of the 38 are
+    new on this branch and are the only reuse the MAIS ledger created:
+    `Causal.Model.ancestors_eq_univ_iff` reaches `Conjectures.BinaryPair` and
+    `Conjectures.MAIS.O31Chart`, and `Causal.Skeleton.behaviorEq_of_observed_eq_empty`
+    reaches `Conjectures.BinaryPair`. The spine and its
     two domain consumers compose. The accumulation layer consumes the kernel
     without being consumed. Of the physical bridges, one declaration of eleven
     now reaches a sibling module and the rest are exercised only by their own

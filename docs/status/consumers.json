@@ -1,8 +1,8 @@
 {
   "counts": {
     "declarations": 248,
-    "examples_only": 212,
-    "load_bearing": 36,
+    "examples_only": 210,
+    "load_bearing": 38,
     "no_consumer": 0
   },
   "declarations": {
@@ -15,10 +15,12 @@
     },
     "AISafetyAtlas.Causal.Model.ancestors_eq_univ_iff": {
       "consumers": [
+        "AISafetyAtlas.Conjectures.BinaryPair",
+        "AISafetyAtlas.Conjectures.MAIS.O31Chart",
         "AISafetyAtlas.Examples.Registry"
       ],
       "origin": "LAND-CAUSAL-COLLISION-001",
-      "tier": "examples-only"
+      "tier": "load-bearing"
     },
     "AISafetyAtlas.Causal.Model.jointProb_hardInterventionProfile": {
       "consumers": [
@@ -101,11 +103,12 @@
     },
     "AISafetyAtlas.Causal.Skeleton.behaviorEq_of_observed_eq_empty": {
       "consumers": [
+        "AISafetyAtlas.Conjectures.BinaryPair",
         "AISafetyAtlas.Examples.Causal.BehavioralCollision",
         "AISafetyAtlas.Examples.Registry"
       ],
       "origin": "LAND-CAUSAL-COLLISION-001",
-      "tier": "examples-only"
+      "tier": "load-bearing"
     },
     "AISafetyAtlas.Causal.eq_family_of_isCausalBayesNetwork": {
       "consumers": [
@@ -118,6 +121,7 @@
     "AISafetyAtlas.Causal.inIdentifiedSet_zero_of_behaviorEq": {
       "consumers": [
         "AISafetyAtlas.Examples.Causal.Decision",
+        "AISafetyAtlas.Examples.Conjectures.MAIS.O27",
         "AISafetyAtlas.Examples.Registry"
       ],
       "origin": "LAND-CAUSAL-DECISION-001",
@@ -566,6 +570,7 @@
     },
     "AISafetyAtlas.Examples.Causal.OneNodeClass.modelError_le_ten_mul": {
       "consumers": [
+        "AISafetyAtlas.Examples.Conjectures.MAIS.O25",
         "AISafetyAtlas.Examples.Registry"
       ],
       "origin": "LAND-CAUSAL-DECISION-001",
@@ -609,6 +614,7 @@
     "AISafetyAtlas.Examples.Causal.margin_class_not_identifiable": {
       "consumers": [
         "AISafetyAtlas.Examples.Causal.Decision",
+        "AISafetyAtlas.Examples.Conjectures.MAIS.O27",
         "AISafetyAtlas.Examples.Registry"
       ],
       "origin": "LAND-CAUSAL-COLLISION-001",
@@ -1913,7 +1919,6 @@
   "generated_by": "scripts/report_consumers.py --json",
   "work_queue": [
     "AISafetyAtlas.Causal.DecisionNetwork.mem_parents_utility_of_isUnmediated",
-    "AISafetyAtlas.Causal.Model.ancestors_eq_univ_iff",
     "AISafetyAtlas.Causal.Model.jointProb_hardInterventionProfile",
     "AISafetyAtlas.Causal.Model.regret_eq_zero_iff",
     "AISafetyAtlas.Causal.Model.value_const_sub",
@@ -1925,7 +1930,6 @@
     "AISafetyAtlas.Causal.SCIM.policy_ext_single",
     "AISafetyAtlas.Causal.SCM.eval_eq_f",
     "AISafetyAtlas.Causal.SCM.exoJoint_mul_prod",
-    "AISafetyAtlas.Causal.Skeleton.behaviorEq_of_observed_eq_empty",
     "AISafetyAtlas.Causal.eq_family_of_isCausalBayesNetwork",
     "AISafetyAtlas.Causal.inIdentifiedSet_zero_of_behaviorEq",
     "AISafetyAtlas.Causal.modelError_eq_zero_iff",
