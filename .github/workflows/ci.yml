@@ -24,7 +24,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
       # The gate skips tests/ when pytest is absent so a contributor without it
@@ -70,7 +70,7 @@ jobs:
     outputs:
       run_lean: ${{ steps.filter.outputs.run_lean }}
     steps:
-      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
           fetch-depth: 0
@@ -137,7 +137,7 @@ jobs:
           key: atlas-olean-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('lean-toolchain', 'lakefile.toml', 'lake-manifest.json', 'AISafetyAtlas/**/*.lean') }}
           restore-keys: |
             atlas-olean-${{ runner.os }}-${{ runner.arch }}-
-      - uses: leanprover/lean-action@38fbc41a8c28c4cbaec22d7f7de508ec2e7c0dd9 # v1
+      - uses: leanprover/lean-action@50fcf42d2e460296f1a34b402e990d1b24f8b596 # v1
         if: steps.filter.outputs.run_lean == 'true'
         with:
           # Mathlib oleans via CDN (fast); do not GitHub-cache the whole .lake
