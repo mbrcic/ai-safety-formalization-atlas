@@ -29,6 +29,19 @@ export LC_ALL=C
 
 cd "$(dirname "${BASH_SOURCE[0]}")/.."
 
+# GNU time, not the bash `time` keyword: only the former reports peak RSS, which
+# is the number this script exists to publish. It is not installed by default on
+# every host -- a self-hosted runner is the likely one to be missing it -- so it
+# is probed once here rather than discovered inside the loop. Without the probe a
+# missing binary surfaces as `FAIL <first module> (exit 127)`, which reads as a
+# broken proof and sends the reader to the wrong place entirely.
+TIME_BIN="${ATLAS_TIME_BIN:-/usr/bin/time}"
+if ! "$TIME_BIN" -f '%M %e' true >/dev/null 2>&1; then
+  echo "GNU time not usable at '$TIME_BIN' (needs -f support)." >&2
+  echo "Install it (Debian/Ubuntu: apt-get install time) or set ATLAS_TIME_BIN." >&2
+  exit 1
+fi
+
 # A module is ours when it has both a compiled artifact and a source. Scoping to
 # .lake/build/lib/lean/AISafetyAtlas is not enough on its own: lake does not
 # prune build output for a source that no longer exists, so an orphan left by a
@@ -56,7 +69,8 @@ mapfile -t modules < <(
 # declaration index filters out -- the question is whether the module put
 # anything in the environment, not whether it is public surface.
 aggregator_query="$(mktemp -t atlas-aggregators-XXXXXX.lean)"
-trap 'rm -f "$aggregator_query"' EXIT
+time_file="$(mktemp -t atlas-replay-time-XXXXXX)"
+trap 'rm -f "$aggregator_query" "$time_file"' EXIT
 {
   echo 'import AISafetyAtlas'
   awk 'NF && $1 !~ /^#/ { print "import " $1 }' scripts/lean_build_targets.txt
@@ -128,8 +142,12 @@ for module in "${modules[@]}"; do
     skipped=$((skipped + 1))
     continue
   fi
-  measurement=$(/usr/bin/time -f '%M %e' lake env leanchecker "$module" 2>&1) && status=0 || status=$?
-  stats=$(printf '%s\n' "$measurement" | tail -1)
+  # `-o`: a module whose last write lacks a newline would otherwise have time's
+  # line appended to it, and the peak would silently read 0. Non-zero exits
+  # prepend a "Command exited..." note, hence the last line.
+  measurement=$("$TIME_BIN" -f '%M %e' -o "$time_file" \
+    lake env leanchecker "$module" 2>&1) && status=0 || status=$?
+  stats=$(tail -1 "$time_file")
   module_kb=$(awk '{print $1+0}' <<<"$stats")
   if [ "$status" -ne 0 ]; then
     failed=$((failed + 1))
