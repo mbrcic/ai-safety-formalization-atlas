@@ -160,10 +160,11 @@ agent structure, so your `State` does not have to be one of ours.
 
 Three things worth knowing before you do:
 
-- **Your toolchain has to match, exactly.** Lean `v4.31.0`, Mathlib at the
-  `v4.31.0` tag, and PFR pinned by commit — PFR is a research development whose
-  API is not stable across revisions, which is why it is pinned that way. If your
-  project already sits on a different Mathlib, this is not a drop-in.
+- **Your toolchain has to match, exactly.** Lean `v4.33.0`, Mathlib at the
+  `v4.33.0` tag, and Foundation and PFR pinned by commit — PFR is a research
+  development whose API is not stable across revisions, which is why it is pinned
+  that way. If your project already sits on a different Mathlib, this is not a
+  drop-in.
 - **You inherit every dependency**, Mathlib, Foundation and PFR, because Lake
   resolves requirements per package rather than per import. Splitting the counting
   half of Ashby's law out of the PFR-importing module (`Control.VarietyCounting`)

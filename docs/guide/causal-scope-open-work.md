@@ -421,9 +421,11 @@ saving is the soundness direction of four theorems plus the shared path lemmas,
 against 5,086 lines under `Graph/DSep/` and a carrier bridge. That is a different
 trade from the one below, and it is made in that note.
 
-**The blocker is the toolchain.** `Causalean` is on `v4.33.0` / Mathlib
-`db584cd6`; this atlas is on `v4.31.0` / `fabf563a`, with PFR and Foundation
-pinned to match. Four Mathlib-sized packages would have to agree on one revision.
+**The toolchain blocker is closed.** `Causalean` is on `v4.33.0` / Mathlib
+`db584cd6`; this atlas moved to `v4.33.0` / `db584cd6` on 2026-08-31, with PFR
+and Foundation re-pinned to match. Whether the two agree on the *Mathlib commit*
+is not checked here and would have to be before a `require` is attempted; see
+[`d-separation-build-or-depend.md`](../provenance/d-separation-build-or-depend.md).
 
 **It is a `require`, not a vendored subtree.** `AISafetyAtlas/Upstream/` carries
 ported forks at 97, 1780 and 3428 lines. `Causalean` is 1053 files; its `SCM/`

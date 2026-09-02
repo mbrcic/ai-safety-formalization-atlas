@@ -72,6 +72,8 @@ in the repository can detect it.
 - [Source coverage audit](provenance/source-coverage-audit.md) — the statement-by-statement
   grading of every printed source the atlas transcribes: coverage, scope, and the
   readings that are choices rather than transcriptions
+- [Toolchain v4.33.0 migration](provenance/toolchain-v4330-migration.md) — what
+  moved, what broke, and which build records were deliberately not rewritten
 - [MAIS source pin](provenance/mais-source-pin.md) — the commit and per-file SHA-256
   the MAIS-A2 grading is anchored to
 

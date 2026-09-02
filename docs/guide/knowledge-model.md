@@ -2,7 +2,7 @@
 
 **Status: machine-checked.** Every Lean statement referenced here compiles with no
 `sorry`, `admit`, local `axiom`, `native_decide`, or `@[implemented_by]` in its
-trusted path, under Lean 4.31.0. Axiom profiles are given per result below; some
+trusted path, under Lean 4.33.0. Axiom profiles are given per result below; some
 are axiom-free, some depend on `propext`, `Classical.choice`, `Quot.sound`.
 
 ## The question

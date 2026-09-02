@@ -514,7 +514,9 @@ public theorem signPolicy_eq_of_behaviorEq (sk : Skeleton C dim Bool 𝕜)
   apply Policy.ext
   funext v d
   have hmask := hEq visible hvisible v w
+  -- `simp` rewrites both sides to the same term but no longer closes on it.
   simp [signPolicy, preferredDecision, hmask]
+  rfl
 
 /-- The constant-policy difference is the general utility-gap transform. -/
 public theorem value_const_sub (M : Model C dim 𝕜) (sk : Skeleton C dim Bool 𝕜)

@@ -654,8 +654,11 @@ public theorem p6_product_eq_quarter :
   have c3 : (Finset.univ.filter (fun x : Bool × Bool => x.2 = false)).card = 2 := by decide
   simp only [prop6Expr, Prop6Quadruple.k, Prop6Quadruple.m, Prop6Quadruple.n,
     prop6QuadrupleOf, cellAgreeProb, setupMass, pushOnImage, p6pmf, p6dev1, p6dev2]
-  norm_num [Finset.sum_filter, Fintype.sum_prod_type, Fintype.sum_bool,
-    Finset.filter_filter, c1, c3]
+  -- Split from one `norm_num` call: doing the rewriting and the arithmetic in a
+  -- single pass now normalises the filters into a shape `c1`/`c3` do not match.
+  simp only [Finset.sum_filter, Fintype.sum_prod_type, Fintype.sum_bool,
+    Finset.filter_filter]
+  norm_num [c1, c3]
 
 /-! ### Proposition 6's *printed* premise, witnessed
 

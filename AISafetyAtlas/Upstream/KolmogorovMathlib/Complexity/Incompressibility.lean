@@ -217,7 +217,7 @@ public theorem existsIncompressibleString (D : Map) (y : BitString) (n : ℕ) :
       obtain ⟨p, hp_prod, rfl⟩ := h_mem_len
       have h_len_le : programLength p ≤ m := by
         have : (programLength p : ENat) < ((m + 1 : ℕ) : ENat) := h_val_lt
-        exact Nat.lt_succ_iff.mp (ENat.coe_lt_coe.mp this)
+        exact Nat.lt_succ_iff.mp (ENat.natCast_lt_natCast.mp this)
       refine ⟨?_, ?_⟩
       · rw [generatedWords, List.mem_toFinset, List.mem_filterMap]
         exact ⟨p, mem_programsLe m p h_len_le, progToOut_eq_some.mpr hp_prod⟩
@@ -237,7 +237,7 @@ public theorem existsComplexString (U : Map) (L : ℕ) :
   let n := L + 1
   obtain ⟨s, _, h_complex⟩ := existsIncompressibleString U [] n
   refine ⟨s, ?_⟩
-  have h_lt : (L : ENat) < (n : ENat) := by exact ENat.coe_lt_coe.mpr (Nat.lt_succ_self L)
+  have h_lt : (L : ENat) < (n : ENat) := by exact ENat.natCast_lt_natCast.mpr (Nat.lt_succ_self L)
   exact lt_of_lt_of_le h_lt h_complex
 
 open Classical in
@@ -255,12 +255,12 @@ public theorem existsComplexInjective {f : ℕ → BitString} (hf : Function.Inj
     constructor
     · have h_K_le := h_contra n
       have h_K_lt : condK U (f n) [] < (L + 1 : ENat) :=
-        lt_of_le_of_lt h_K_le (ENat.coe_lt_coe.mpr (Nat.lt_succ_self L))
+        lt_of_le_of_lt h_K_le (ENat.natCast_lt_natCast.mpr (Nat.lt_succ_self L))
       obtain ⟨len_enat, h_mem_len, h_val_lt⟩ := (sInf_lt_iff).mp h_K_lt
       obtain ⟨p, hp_prod, rfl⟩ := h_mem_len
       have h_len_le : programLength p ≤ L := by
         have : (programLength p : ENat) < (L + 1 : ENat) := h_val_lt
-        exact ENat.coe_lt_coe.mp this |> Nat.lt_succ_iff.mp
+        exact ENat.natCast_lt_natCast.mp this |> Nat.lt_succ_iff.mp
       rw [generatedWords, List.mem_toFinset, List.mem_filterMap]
       refine ⟨p, mem_programsLe L p h_len_le, progToOut_eq_some.mpr hp_prod⟩
     · exact h_contra n

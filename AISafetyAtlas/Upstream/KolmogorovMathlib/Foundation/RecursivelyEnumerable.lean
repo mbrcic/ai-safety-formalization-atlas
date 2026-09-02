@@ -179,7 +179,10 @@ public lemma IsRE.existsInList {α β : Type*} [Primcodable α] [Primcodable β]
     h_rfind.map (Computable.const ()).to₂, ?_⟩
   intro a
   change (Nat.rfind (fun n ↦ Part.some (check a n))).Dom ↔ _
-  rw [Nat.rfind_dom]; simp_rw [Part.mem_some_iff]
+  -- Same `PFun` semireducibility as in `UnboundedSearch`: `rw` will not key-match
+  -- `Nat.rfind_dom`'s `p : ℕ →. Bool` against a bare `ℕ → Part Bool` lambda.
+  refine Nat.rfind_dom.trans ?_
+  simp_rw [Part.mem_some_iff]
   have hrfind_simp : (∃ n, true = check a n ∧ ∀ {m : ℕ}, m < n →
       (Part.some (check a m)).Dom) ↔ (∃ n, check a n = true) := by
     constructor

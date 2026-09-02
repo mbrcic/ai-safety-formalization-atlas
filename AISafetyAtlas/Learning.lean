@@ -102,7 +102,7 @@ public theorem sum_performance_eq_scaled_sum
       (card Y : ℝ) ^ (card X - m) * ∑ c : Fin m → Y, Φ c := by
   classical
   -- Classical decidable equality on `X` for range/complement subtypes.
-  letI : DecidableEq X := Classical.decEq X
+  let : DecidableEq X := Classical.decEq X
   let R : Set X := Set.range (σ : Fin m → X)
   let eRange : Fin m ≃ R := σ.toEquivRange
   let eSum : R ⊕ (Rᶜ : Set X) ≃ X := Equiv.Set.sumCompl R
@@ -507,9 +507,12 @@ public theorem ots_error_distribution_learner_indep
       = ∑ f : X → Y,
         if (∑ x : (Sᶜ : Set X), ℓ (predict B f (x : X)) (f (x : X))) = v
           then (1 : ℝ) else 0 := by
-  simpa [lossConfig] using
-    lossConfig_sum_learner_indep hℓ S A B
-      (fun w => if (∑ x : (Sᶜ : Set X), w x) = v then (1 : ℝ) else 0)
+  -- `simpa` no longer lands this: simp rewrites the goal's `∑ if _ then 1 else 0`
+  -- into a `Set.card`, and the two sides then differ only in their `Decidable`
+  -- instances, which prints as a mismatch between identical-looking types.
+  convert lossConfig_sum_learner_indep hℓ S A B
+      (fun w => if (∑ x : (Sᶜ : Set X), w x) = v then (1 : ℝ) else 0) using 3 <;>
+    simp [lossConfig]
 
 /-! ## Adaptive optimization NFL (Wolpert–Macready 1997, deterministic no-revisit)
 

@@ -1,6 +1,11 @@
 # d-separation: build, depend, or vendor
 
-**Status.** Assessment, 2026-08-21, still current. No code follows from it yet.
+**Status.** Assessment, 2026-08-21. **Blocker 1 closed 2026-08-31**: this
+repository now pins `leanprover/lean4:v4.33.0`, the same Lean release
+CausalForge pins, so the toolchain objection below no longer holds and the
+"depend" option is live for the first time. The verdict is unchanged — it turned
+on criteria 3 and 4, not on the toolchain — but the cost comparison has moved and
+should be re-run when a consumer is ready. No code follows from it yet.
 Written because the next increment on the causal layer needs d-separation, and
 the honest first move is to look for it rather than to write it.
 
@@ -67,11 +72,18 @@ structural lemmas about paths that both directions read.
 
 ## 4. What blocks depending today
 
-1. **Toolchain.** CausalForge is `leanprover/lean4:v4.33.0`. This repository
+1. ~~**Toolchain.** CausalForge is `leanprover/lean4:v4.33.0`. This repository
    pins `v4.31.0` with Mathlib `fabf563a7c95a166b8d7b6efca11c8b4dc9d911f`, and
    that pin is load-bearing: `PFR` is pinned by commit to the same Mathlib, and
    [the entropy-compatibility work](../guide/methodology.md) exists to keep those
-   two aligned. A `require` is not available without moving the whole stack.
+   two aligned. A `require` is not available without moving the whole stack.~~
+   **Closed 2026-08-31.** The whole stack did move, for the reasons in
+   [`toolchain-v4330-migration.md`](toolchain-v4330-migration.md): the atlas is
+   on `leanprover/lean4:v4.33.0` with Mathlib
+   `db584cd6d46c92f209a44c0f1c829460d327499d`, and `PFR` and `Foundation` were
+   re-pinned to revisions that resolve against it. Both projects are now on the
+   same Lean release. Whether they are on the *same Mathlib commit* is not
+   checked here and would have to be before a `require` is attempted.
 2. **Carrier mismatch.** `Causalean.DAG` is a structure with its own edge
    representation; `AISafetyAtlas.Causal.CID` carries `parents : V → Set V` and
    a `NodeKind` partition. Using their lemmas means a bridge and a proof
@@ -96,9 +108,11 @@ here until an incentive theorem lands with it.
 The three options, with what each costs, so the choice is made on numbers when
 a consumer is ready:
 
-* **Depend.** Blocked on the toolchain. Revisit if this repository moves to
-  `v4.33.0` for other reasons; it would then be the cheapest path by a wide
-  margin, and Apache-2.0 permits it with attribution.
+* **Depend.** No longer blocked on the Lean toolchain: this repository moved to
+  `v4.33.0` on 2026-08-31 for other reasons, which is the condition this bullet
+  named. On the numbers here it is now the cheapest path by a wide margin, and
+  Apache-2.0 permits it with attribution. What is left to check is the Mathlib
+  commit and blocker 3, its three vendored pins.
 * **Vendor the `DSep` subtree.** Apache-2.0 permits it with attribution and a
   `NOTICE`. 5,086 lines this repository would then own, maintain and re-verify
   against a Mathlib it was not written for. Cheap to copy, expensive to keep.

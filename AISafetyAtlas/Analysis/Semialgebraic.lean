@@ -132,7 +132,7 @@ public theorem basicSemialgebraic_union [DecidableEq (MvPolynomial ι ℝ × Pol
     BasicSemialgebraic (ps ∪ qs)
       = BasicSemialgebraic ps ∩ BasicSemialgebraic qs := by
   ext x
-  simp only [BasicSemialgebraic, Set.mem_setOf_eq, Set.mem_inter_iff,
+  simp only [BasicSemialgebraic, Set.mem_ofPred_eq, Set.mem_inter_iff,
     Finset.mem_union]
   constructor
   · intro h
@@ -218,7 +218,7 @@ public theorem isSemialgebraic_not_holds (p : MvPolynomial ι ℝ × PolySign) :
         = BasicSemialgebraic {(q, PolySign.pos)}
             ∪ BasicSemialgebraic {(-q, PolySign.pos)} := by
       ext x
-      simp only [Set.mem_setOf_eq, Set.mem_union, BasicSemialgebraic,
+      simp only [Set.mem_ofPred_eq, Set.mem_union, BasicSemialgebraic,
         Finset.mem_singleton, PolySign.Holds, forall_eq, map_neg]
       constructor
       · intro hx
@@ -233,7 +233,7 @@ public theorem isSemialgebraic_not_holds (p : MvPolynomial ι ℝ × PolySign) :
     have h : {x : ι → ℝ | ¬ PolySign.pos.Holds (eval x q)}
         = BasicSemialgebraic {(-q, PolySign.nonneg)} := by
       ext x
-      simp only [Set.mem_setOf_eq, BasicSemialgebraic, Finset.mem_singleton,
+      simp only [Set.mem_ofPred_eq, BasicSemialgebraic, Finset.mem_singleton,
         PolySign.Holds, forall_eq, map_neg]
       constructor
       · intro hx
@@ -246,7 +246,7 @@ public theorem isSemialgebraic_not_holds (p : MvPolynomial ι ℝ × PolySign) :
     have h : {x : ι → ℝ | ¬ PolySign.nonneg.Holds (eval x q)}
         = BasicSemialgebraic {(-q, PolySign.pos)} := by
       ext x
-      simp only [Set.mem_setOf_eq, BasicSemialgebraic, Finset.mem_singleton,
+      simp only [Set.mem_ofPred_eq, BasicSemialgebraic, Finset.mem_singleton,
         PolySign.Holds, forall_eq, map_neg]
       constructor
       · intro hx
@@ -264,7 +264,7 @@ public theorem isSemialgebraic_compl_basic
   have h : (BasicSemialgebraic ps)ᶜ
       = ⋃ p ∈ ps, {x : ι → ℝ | ¬ p.2.Holds (eval x p.1)} := by
     ext x
-    simp only [Set.mem_compl_iff, BasicSemialgebraic, Set.mem_setOf_eq,
+    simp only [Set.mem_compl_iff, BasicSemialgebraic, Set.mem_ofPred_eq,
       Set.mem_iUnion, exists_prop]
     constructor
     · intro hx
@@ -322,7 +322,7 @@ public theorem isSemialgebraic_closedBox [Fintype ι] (c : ι → ℝ) (r : ℝ)
         ((Finset.univ.image fun i : ι ↦ (X i - C (c i), PolySign.nonneg)) ∪
           (Finset.univ.image fun i : ι ↦ (C (c i + r) - X i, PolySign.nonneg))) := by
     ext x
-    simp only [ClosedBox, Set.mem_setOf_eq, BasicSemialgebraic, Finset.mem_union,
+    simp only [ClosedBox, Set.mem_ofPred_eq, BasicSemialgebraic, Finset.mem_union,
       Finset.mem_image, Finset.mem_univ, true_and]
     constructor
     · rintro hx p (⟨i, rfl⟩ | ⟨i, rfl⟩)
@@ -343,7 +343,7 @@ public theorem isCompact_closedBox [Fintype ι] (c : ι → ℝ) (r : ℝ) :
     IsCompact (ClosedBox c r) := by
   have hpi : ClosedBox c r = Set.univ.pi fun i ↦ Set.Icc (c i) (c i + r) := by
     ext x
-    simp only [ClosedBox, Set.mem_setOf_eq, Set.mem_univ_pi, Set.mem_Icc]
+    simp only [ClosedBox, Set.mem_ofPred_eq, Set.mem_univ_pi, Set.mem_Icc]
   rw [hpi]
   exact isCompact_univ_pi fun _ ↦ isCompact_Icc
 
@@ -391,7 +391,7 @@ public theorem isSemialgebraic_setOf_eval_ne_zero (p : MvPolynomial ι ℝ) :
   have h : {x : ι → ℝ | eval x p ≠ 0} =
       {x : ι → ℝ | 0 < eval x p} ∪ {x : ι → ℝ | 0 < eval x (-p)} := by
     ext x
-    simp only [Set.mem_setOf_eq, Set.mem_union, map_neg, ne_eq]
+    simp only [Set.mem_ofPred_eq, Set.mem_union, map_neg, ne_eq]
     constructor
     · intro hx
       rcases lt_trichotomy (eval x p) 0 with h | h | h

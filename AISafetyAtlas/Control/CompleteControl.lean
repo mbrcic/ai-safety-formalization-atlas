@@ -187,7 +187,7 @@ public theorem card_disturbance_le_card_regulator [DecidableEq R] [DecidableEq E
     Fintype.card D ≤ Fintype.card R := by
   by_contra hcon
   have hlt : Fintype.card R < Fintype.card D := Nat.lt_of_not_le hcon
-  haveI : Nonempty D := Fintype.card_pos_iff.mp (by omega)
+  have : Nonempty D := Fintype.card_pos_iff.mp (by omega)
   have h2 := two_le_card_admittedOutcomes T (f (Classical.arbitrary C)) hcol hlt
   rw [admittedOutcomes_of_isPerfectRegulator h _ Finset.univ_nonempty] at h2
   simp at h2
@@ -372,7 +372,7 @@ public theorem mutualInfo_outcome_disturbance_eq_zero [IsZeroOrProbabilityMeasur
     (hindep : IndepFun Cv Dv μ) :
     I[(fun ω => T (Dv ω) (f (Cv ω) (Dv ω))) : Dv ; μ] = 0 := by
   rw [outcome_eq_comp h Cv Dv]
-  haveI : FiniteRange (g ∘ Cv) := inferInstanceAs (FiniteRange (g ∘ Cv))
+  have : FiniteRange (g ∘ Cv) := inferInstanceAs (FiniteRange (g ∘ Cv))
   exact (hindep.comp hg measurable_id).mutualInfo_eq_zero (hg.comp hC) hD
 
 end Entropy

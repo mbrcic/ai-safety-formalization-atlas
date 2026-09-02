@@ -322,7 +322,7 @@ public theorem no_meshing_inference_distinguishes
   -- apparatus there are no reading sets and `Distinguishes` is uninhabitable,
   -- which is the case the source's statement also covers for free.
   obtain ⟨witness, -⟩ := U.2
-  haveI : Nonempty A := ⟨witness⟩
+  have : Nonempty A := ⟨witness⟩
   rw [M.infer_eq_union_singletons U] at hs₁U
   rcases hs₁U with ⟨a, ha, hs₁a⟩
   have hs₁_univ := mem_infer_univ_of_mem_infer M hs₁a
@@ -430,7 +430,7 @@ public theorem eq_restrict_of_infer_singleton_eq
     (M : InferenceMap Ω A) (hm : Meshing restrict M)
     {a : A} {s : Ω} (h : M.infer (ReadingSet.singleton a) = {s}) :
     a = restrict s := by
-  haveI : Nonempty A := ⟨a⟩
+  have : Nonempty A := ⟨a⟩
   have hsa : s ∈ M.infer (ReadingSet.singleton a) := by
     rw [h]; exact Set.mem_singleton s
   exact (restrict_eq_of_mem_infer_singleton restrict M hm hsa).symm

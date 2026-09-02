@@ -21,6 +21,11 @@ universe u v v' w w'
 
 variable {U : Type u}
 
+-- `linter.checkUnivs` (new at Lean v4.33) observes that these universes only
+-- occur together and could be merged. Merging them changes a public
+-- declaration's universe parameters, which is a statement change rather than
+-- a toolchain fix; it is not made as part of a version bump.
+set_option linter.checkUnivs false in
 /-- **Definition 12.** -/
 public structure SelfAwareDevice (U : Type u) where
   toDevice : InferenceDevice.{u, v} U
@@ -312,7 +317,10 @@ public theorem exists_not_corrects (C : InferenceDevice.{u, v} U) :
   intro ⟨x, hx, hfib⟩
   obtain ⟨w, hw⟩ := hx
   have h := hfib w hw
+  -- `h` reduces to `Y = decide (Y = false)`, i.e. `Y = !Y`. `simp` no longer
+  -- closes that on its own, so the two cases are named.
   simp [uncorrectable, SelfAwareDevice.ask] at h
+  cases hY : C.concl w <;> simp [hY] at h
 
 /-- **Theorem 7(i).** v2 writes the hypothesis twice as “`P` intelligible
 to `D′`”; the proof uses `P` intelligible to `D′` and `P′` intelligible

@@ -171,7 +171,7 @@ public theorem entropy_outcome_ge (μ : Measure Ω) [IsProbabilityMeasure μ]
     (hcol : ∀ r : R, Function.Injective fun d => T d r) :
     H[Dv ; μ] + H[Rv | Dv ; μ] - H[Rv ; μ] ≤ H[(fun ω => T (Dv ω) (Rv ω)) ; μ] := by
   have hmeas : Measurable fun ω => T (Dv ω) (Rv ω) := hT.comp (hD.prodMk hR)
-  haveI : FiniteRange fun ω => T (Dv ω) (Rv ω) :=
+  have : FiniteRange fun ω => T (Dv ω) (Rv ω) :=
     inferInstanceAs (FiniteRange ((fun p : D × R => T p.1 p.2) ∘ fun ω => (Dv ω, Rv ω)))
   have hkey : H[Dv | Rv ; μ] - 0 ≤ H[(fun ω => T (Dv ω) (Rv ω)) | Rv ; μ] := by
     rw [condEntropy_outcome_eq μ hD hR T hcol]
@@ -295,8 +295,8 @@ public theorem entropy_outcome_ge_sub_channelCapacity {O : Type*} [MeasurableSpa
     (T : D → R → E) (hT : Measurable fun p : D × R => T p.1 p.2)
     (hcol : ∀ r : R, Function.Injective fun d => T d r) :
     H[Dv ; μ] - channelCapacity O ≤ H[(fun ω => T (Dv ω) (σ (obs ω))) ; μ] := by
-  haveI : FiniteRange obs := ⟨Set.toFinite _⟩
-  haveI : FiniteRange (σ ∘ obs) := inferInstanceAs (FiniteRange (σ ∘ obs))
+  have : FiniteRange obs := ⟨Set.toFinite _⟩
+  have : FiniteRange (σ ∘ obs) := inferInstanceAs (FiniteRange (σ ∘ obs))
   have hmain := entropy_outcome_ge (Rv := σ ∘ obs) μ hD (hσ.comp hobs) T hT hcol
   have hnn : 0 ≤ H[σ ∘ obs | Dv ; μ] := condEntropy_nonneg _ _ _
   have hcap : H[σ ∘ obs ; μ] ≤ channelCapacity O :=

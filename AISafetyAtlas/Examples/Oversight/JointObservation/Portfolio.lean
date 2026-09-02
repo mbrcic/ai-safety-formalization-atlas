@@ -48,7 +48,16 @@ public inductive Principal
   | c
   | d
   | e
-  deriving DecidableEq, Fintype
+  deriving DecidableEq
+
+-- `deriving Fintype` is broken at the pinned Mathlib revision: the generated
+-- instance hands `Finset.mk` a `List.Nodup` proof where `Multiset.Nodup` is
+-- wanted, so it does not elaborate. Reproduced outside this repository in three
+-- lines. The instance is written out until that is fixed upstream; `decide`
+-- and `Finset.univ` behave identically either way.
+public instance : Fintype Principal where
+  elems := {Principal.c, Principal.d, Principal.e}
+  complete := by intro x; cases x <;> simp
 
 /-- Executions indexed by the private bits `(a,b,c)`. -/
 public inductive Exec
@@ -60,7 +69,16 @@ public inductive Exec
   | sigma101
   | sigma110
   | sigma111
-  deriving DecidableEq, Fintype
+  deriving DecidableEq
+
+-- `deriving Fintype` is broken at the pinned Mathlib revision: the generated
+-- instance hands `Finset.mk` a `List.Nodup` proof where `Multiset.Nodup` is
+-- wanted, so it does not elaborate. Reproduced outside this repository in three
+-- lines. The instance is written out until that is fixed upstream; `decide`
+-- and `Finset.univ` behave identically either way.
+public instance : Fintype Exec where
+  elems := {Exec.sigma000, Exec.sigma001, Exec.sigma010, Exec.sigma011, Exec.sigma100, Exec.sigma101, Exec.sigma110, Exec.sigma111}
+  complete := by intro x; cases x <;> simp
 
 /-- Bit `a` — the first index of `sigma_abc`, held privately by `C`. -/
 @[expose] public def bitC : Exec → Bool
@@ -126,7 +144,16 @@ public instance : DecidableEq arch.Execution := inferInstanceAs (DecidableEq Exe
 public inductive HazardIx
   | cd
   | de
-  deriving DecidableEq, Fintype
+  deriving DecidableEq
+
+-- `deriving Fintype` is broken at the pinned Mathlib revision: the generated
+-- instance hands `Finset.mk` a `List.Nodup` proof where `Multiset.Nodup` is
+-- wanted, so it does not elaborate. Reproduced outside this repository in three
+-- lines. The instance is written out until that is fixed upstream; `decide`
+-- and `Finset.univ` behave identically either way.
+public instance : Fintype HazardIx where
+  elems := {HazardIx.cd, HazardIx.de}
+  complete := by intro x; cases x <;> simp
 
 /-- The hazard family: both hazards at once, which is what makes coalition choice
 non-trivial — no single *narrow* coalition covers both. -/
@@ -142,13 +169,13 @@ non-trivial — no single *narrow* coalition covers both. -/
 @[expose] public def qCD : CandidateObservation arch where
   coalition := {.c, .d}
   Output := Bool
-  joint := fun x => x ⟨.c, by simp⟩ && x ⟨.d, by simp⟩
+  joint := fun x => x ⟨.c, (by simp only [arch]; exact Finset.mem_insert_self _ _)⟩ && x ⟨.d, (by simp only [arch]; exact Finset.mem_insert_of_mem (Finset.mem_singleton_self _))⟩
 
 /-- The narrow `D-E` observation, computed only from `D` and `E` evidence. -/
 @[expose] public def qDE : CandidateObservation arch where
   coalition := {.d, .e}
   Output := Bool
-  joint := fun x => Bool.xor (x ⟨.d, by simp⟩) (x ⟨.e, by simp⟩)
+  joint := fun x => Bool.xor (x ⟨.d, (by simp only [arch]; exact Finset.mem_insert_self _ _)⟩) (x ⟨.e, (by simp only [arch]; exact Finset.mem_insert_of_mem (Finset.mem_singleton_self _))⟩)
 
 /-- The broad grand-coalition observation, disclosing all three private bits. -/
 @[expose] public def qCDE : CandidateObservation arch where
@@ -164,7 +191,16 @@ public inductive CandIx
   | cd
   | de
   | cde
-  deriving DecidableEq, Fintype
+  deriving DecidableEq
+
+-- `deriving Fintype` is broken at the pinned Mathlib revision: the generated
+-- instance hands `Finset.mk` a `List.Nodup` proof where `Multiset.Nodup` is
+-- wanted, so it does not elaborate. Reproduced outside this repository in three
+-- lines. The instance is written out until that is fixed upstream; `decide`
+-- and `Finset.univ` behave identically either way.
+public instance : Fintype CandIx where
+  elems := {CandIx.cd, CandIx.de, CandIx.cde}
+  complete := by intro x; cases x <;> simp
 
 /-- The declared candidate family. **Supplied, not synthesized** — nothing here
 searches a mechanism library or generates a predicate. -/
@@ -250,15 +286,19 @@ public theorem qCDE_covers_hDE : Covers qCDE hDE :=
 public theorem kNarrow_covers : PortfolioCovers candidates hazards kNarrow := by
   intro j
   cases j with
-  | cd => exact ⟨.cd, by decide, qCD_covers_hCD⟩
-  | de => exact ⟨.de, by decide, qDE_covers_hDE⟩
+  | cd => exact ⟨.cd, by simp only [kNarrow]; exact Finset.mem_insert_self _ _,
+      qCD_covers_hCD⟩
+  | de => exact ⟨.de, by simp only [kNarrow]; exact Finset.mem_insert_of_mem (Finset.mem_singleton_self _),
+      qDE_covers_hDE⟩
 
 /-- One broad observation covers both hazards on its own. -/
 public theorem kBroad_covers : PortfolioCovers candidates hazards kBroad := by
   intro j
   cases j with
-  | cd => exact ⟨.cde, by decide, qCDE_covers_hCD⟩
-  | de => exact ⟨.cde, by decide, qCDE_covers_hDE⟩
+  | cd => exact ⟨.cde, by simp only [kBroad]; exact Finset.mem_singleton_self _,
+      qCDE_covers_hCD⟩
+  | de => exact ⟨.cde, by simp only [kBroad]; exact Finset.mem_singleton_self _,
+      qCDE_covers_hDE⟩
 
 /-- The generic consequence instantiated for the narrow portfolio. -/
 public theorem kNarrow_hazardEquivalent

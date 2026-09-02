@@ -320,8 +320,8 @@ public theorem entropy_outcome_ge_sub_chainEntropy [Fintype S] [Nonempty S]
     (hcol : ∀ r : R, Function.Injective fun d => T d r) :
     H[Dv ; μ] - (H[X 0 ; μ] + n * H[X 1 | X 0 ; μ])
       ≤ H[(fun ω => T (Dv ω) (σ (traj X (n + 1) ω))) ; μ] := by
-  haveI : FiniteRange (traj X (n + 1)) := ⟨Set.toFinite _⟩
-  haveI : FiniteRange (σ ∘ traj X (n + 1)) :=
+  have : FiniteRange (traj X (n + 1)) := ⟨Set.toFinite _⟩
+  have : FiniteRange (σ ∘ traj X (n + 1)) :=
     ⟨Set.Finite.subset (Set.finite_range σ) (Set.range_comp_subset_range _ _)⟩
   have hmain := entropy_outcome_ge (Rv := σ ∘ traj X (n + 1)) μ hD
     (hσ.comp (measurable_traj hX (n + 1))) T hT hcol

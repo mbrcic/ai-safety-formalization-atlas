@@ -869,7 +869,7 @@
             "survey-ref-026"
           ],
           "content_source_note": "Section 9/12's definition of the entropy of one step of a Markov chain: the average of the columns' entropies, each weighted by the proportion in which that state occurs when the sequence has settled to its equilibrium. Written from an equilibrium law and a transition kernel, with no sample space.",
-          "build_environment": "leanprover/lean4:v4.31.0; mathlib@fabf563a7c95a166b8d7b6efca11c8b4dc9d911f; PFR@38e94172b72c8ee8ad64b6365dfc22e559c62ebe",
+          "build_environment": "leanprover/lean4:v4.33.0; mathlib@db584cd6d46c92f209a44c0f1c829460d327499d; PFR@7d6404b79b11b1a89dd1b6f997a10b14c208c4ed",
           "build_command": "lake build AISafetyAtlas.Control.ChannelRate AISafetyAtlas.Examples.Control.ChannelRate",
           "scope_delta": {
             "summary": "The quantity section 9/15 calls channel capacity, which channelCapacity (the noiseless alphabet ceiling log |O|) is not. chainRate_eq_condEntropy identifies it with H[X1 | X0] on the canonical one-step chain. Checked against Ashby's own worked three-state insect chain, whose equilibrium is exactly (22/49, 21/49, 6/49) against his printed 0.449, 0.429, 0.122.",
@@ -889,7 +889,7 @@
             "survey-ref-026"
           ],
           "content_source_note": "Section 9/15: 'the entropy of a length of Markov chain is proportional to its length (provided always that it has settled down to equilibrium)'.",
-          "build_environment": "leanprover/lean4:v4.31.0; mathlib@fabf563a7c95a166b8d7b6efca11c8b4dc9d911f; PFR@38e94172b72c8ee8ad64b6365dfc22e559c62ebe",
+          "build_environment": "leanprover/lean4:v4.33.0; mathlib@db584cd6d46c92f209a44c0f1c829460d327499d; PFR@7d6404b79b11b1a89dd1b6f997a10b14c208c4ed",
           "build_command": "lake build AISafetyAtlas.Control.ChannelRate AISafetyAtlas.Examples.Control.ChannelRate",
           "scope_delta": {
             "summary": "Wider than print in two ways. The source asserts this without proof; it is proved here for a Markov stationary process. And the printed word 'proportional' is loose: the exact identity is H[X_0 ... X_n] = H[X_0] + n * rate, affine rather than linear. The two agree when H[X_0] equals the rate, which is what happens in the spun-coin case Ashby checks it against, so his own example cannot separate them. Same class of printed slip as section 11/8's H_D(E).",
@@ -909,7 +909,7 @@
             "survey-ref-026"
           ],
           "content_source_note": "Section 11/11: 'R's capacity as a regulator cannot exceed R's capacity as a channel of communication', with capacity taken to be section 9/15's entropy rate rather than the alphabet ceiling used by the section's exercises.",
-          "build_environment": "leanprover/lean4:v4.31.0; mathlib@fabf563a7c95a166b8d7b6efca11c8b4dc9d911f; PFR@38e94172b72c8ee8ad64b6365dfc22e559c62ebe",
+          "build_environment": "leanprover/lean4:v4.33.0; mathlib@db584cd6d46c92f209a44c0f1c829460d327499d; PFR@7d6404b79b11b1a89dd1b6f997a10b14c208c4ed",
           "build_command": "lake build AISafetyAtlas.Control.ChannelRate AISafetyAtlas.Examples.Control.ChannelRate",
           "scope_delta": {
             "summary": "Bounds the outcome entropy by Ashby's own entropy-rate capacity rather than by the alphabet ceiling, which is what section 11/11 asserts. The budget is the exact trajectory entropy H[X_0] + n * rate, not rate times time; a bare capacity-times-time budget is not an upper bound, because the initial state carries entropy of its own. entropy_outcome_ge_sub_channelCapacity is retained as the sharper form for the four noiseless exercises.",
@@ -929,7 +929,7 @@
             "survey-ref-026"
           ],
           "content_source_note": "Section 11/14: 'the fact that R is a perfect regulator gives C complete control over the output, in spite of the entrance of disturbing effects by way of D. Thus, perfect regulation of the outcome by R makes possible a complete control over the outcome by C.'",
-          "build_environment": "leanprover/lean4:v4.31.0; mathlib@fabf563a7c95a166b8d7b6efca11c8b4dc9d911f; PFR@38e94172b72c8ee8ad64b6365dfc22e559c62ebe",
+          "build_environment": "leanprover/lean4:v4.33.0; mathlib@db584cd6d46c92f209a44c0f1c829460d327499d; PFR@7d6404b79b11b1a89dd1b6f997a10b14c208c4ed",
           "build_command": "lake build AISafetyAtlas.Control.CompleteControl AISafetyAtlas.Examples.Control.CompleteControl",
           "scope_delta": {
             "summary": "Same as print. Under perfect regulation the outcome is a function of the controller's setting alone: the disturbance is eliminated rather than bounded. exists_strategy_forcing is complete control, and seq_outcome_eq is the printed compound target a, b, a, c, c, a produced regardless of D's values during the sequence.",
@@ -949,7 +949,7 @@
             "survey-ref-026"
           ],
           "content_source_note": "Section 11/14: 'The achievement of control may thus depend necessarily on the achievement of regulation.'",
-          "build_environment": "leanprover/lean4:v4.31.0; mathlib@fabf563a7c95a166b8d7b6efca11c8b4dc9d911f; PFR@38e94172b72c8ee8ad64b6365dfc22e559c62ebe",
+          "build_environment": "leanprover/lean4:v4.33.0; mathlib@db584cd6d46c92f209a44c0f1c829460d327499d; PFR@7d6404b79b11b1a89dd1b6f997a10b14c208c4ed",
           "build_command": "lake build AISafetyAtlas.Control.CompleteControl AISafetyAtlas.Examples.Control.CompleteControl",
           "scope_delta": {
             "summary": "Wider than print. The printed sentence is qualitative; here it is a count, and a count derived from section 11/10's own impossibility theorem rather than from a fresh argument. Perfect regulation collapses admittedOutcomes to a singleton, which two_le_card_admittedOutcomes forbids below a threshold of regulator variety, so |D| <= |R| and, by card_controller_le_card_regulator, |C| <= |R|. Requisite variety is charged twice, once for each of the regulator's two inputs.",
@@ -969,7 +969,7 @@
             "survey-ref-026"
           ],
           "content_source_note": "Section 11/14, Ex. 4: 'R to T must carry 2 bits/sec to neutralise D (from Ex. 2), and 20 bits/sec from C; as these two are independent (D's values and C's not correlated), the capacity must be at least 22 bits/sec.' Read from the Martino Fine Books 2015 reprint, book p. 285; the pinned scan omits Answers to Exercises, pp. 274 to 288.",
-          "build_environment": "leanprover/lean4:v4.31.0; mathlib@fabf563a7c95a166b8d7b6efca11c8b4dc9d911f; PFR@38e94172b72c8ee8ad64b6365dfc22e559c62ebe",
+          "build_environment": "leanprover/lean4:v4.33.0; mathlib@db584cd6d46c92f209a44c0f1c829460d327499d; PFR@7d6404b79b11b1a89dd1b6f997a10b14c208c4ed",
           "build_command": "lake build AISafetyAtlas.Control.CompleteControl AISafetyAtlas.Examples.Control.CompleteControl",
           "scope_delta": {
             "summary": "Narrower than the printed answer, and deliberately. What the model forces is the maximum of the two loads, not their sum. Additivity is a property of the table rather than of the diagram: Examples.Control.ashbyControl_capacity_lt_sum runs on Ashby's own answer to Ex. 1, a perfect regulator on Table 11/3/1 whose entire repertoire is log 3 where the additive reading demands log 9. This is not a correction to his arithmetic, since Ex. 4 inherits Ex. 2's attenuating T while Table 11/3/1 attenuates nothing; it is a limit on what section 11/14's diagram alone implies. channelCapacity_prod is the lemma that licenses the sum where the R to T link really is two independent sub-channels. Capacities here are per use, whereas Ashby quotes bits per second; ashbyCapacity converts.",
@@ -989,7 +989,7 @@
             "survey-ref-026"
           ],
           "content_source_note": "Section 11/14: a suitable regulator R 'may be able to form, with T, a compound channel to E that transmits fully from C while transmitting nothing from D.'",
-          "build_environment": "leanprover/lean4:v4.31.0; mathlib@fabf563a7c95a166b8d7b6efca11c8b4dc9d911f; PFR@38e94172b72c8ee8ad64b6365dfc22e559c62ebe",
+          "build_environment": "leanprover/lean4:v4.33.0; mathlib@db584cd6d46c92f209a44c0f1c829460d327499d; PFR@7d6404b79b11b1a89dd1b6f997a10b14c208c4ed",
           "build_command": "lake build AISafetyAtlas.Control.CompleteControl AISafetyAtlas.Examples.Control.CompleteControl",
           "scope_delta": {
             "summary": "Both clauses proved. This one is full transmission from C, when distinct targets name distinct outcomes. condEntropy_outcome_controller is transmission of nothing from D and needs no hypothesis on the disturbance's law at all; mutualInfo_outcome_disturbance_eq_zero is the form under Ashby's own side condition that D's values and C's are not correlated. The two-input factorization FactorsThrough, used by the Ex. 2 and Ex. 3 capacity bounds, is the atlas's reading of the printed diagram and is a hypothesis, not a consequence.",
@@ -1005,7 +1005,7 @@
           "relationship": "EXACT",
           "reproduced": true,
           "license": "Apache-2.0",
-          "build_environment": "leanprover/lean4:v4.31.0; mathlib@fabf563a7c95a166b8d7b6efca11c8b4dc9d911f; PFR@38e94172b72c8ee8ad64b6365dfc22e559c62ebe",
+          "build_environment": "leanprover/lean4:v4.33.0; mathlib@db584cd6d46c92f209a44c0f1c829460d327499d; PFR@7d6404b79b11b1a89dd1b6f997a10b14c208c4ed",
           "build_command": "lake build AISafetyAtlas.Control.RequisiteVariety AISafetyAtlas.Examples.Control.RequisiteVariety"
         },
         {
@@ -1017,7 +1017,7 @@
           "relationship": "EXACT",
           "reproduced": true,
           "license": "Apache-2.0",
-          "build_environment": "leanprover/lean4:v4.31.0; mathlib@fabf563a7c95a166b8d7b6efca11c8b4dc9d911f; PFR@38e94172b72c8ee8ad64b6365dfc22e559c62ebe",
+          "build_environment": "leanprover/lean4:v4.33.0; mathlib@db584cd6d46c92f209a44c0f1c829460d327499d; PFR@7d6404b79b11b1a89dd1b6f997a10b14c208c4ed",
           "build_command": "lake build AISafetyAtlas.Control.RequisiteVariety AISafetyAtlas.Examples.Control.RequisiteVariety"
         },
         {
@@ -1029,7 +1029,7 @@
           "relationship": "RELATED",
           "reproduced": true,
           "license": "Apache-2.0",
-          "build_environment": "leanprover/lean4:v4.31.0; mathlib@fabf563a7c95a166b8d7b6efca11c8b4dc9d911f; PFR@38e94172b72c8ee8ad64b6365dfc22e559c62ebe",
+          "build_environment": "leanprover/lean4:v4.33.0; mathlib@db584cd6d46c92f209a44c0f1c829460d327499d; PFR@7d6404b79b11b1a89dd1b6f997a10b14c208c4ed",
           "build_command": "lake build AISafetyAtlas.Control.RequisiteVariety AISafetyAtlas.Examples.Control.RequisiteVariety",
           "scope_delta": {
             "summary": "Unifies chapter 11's sections 11/5 and 11/9 into one statement with the repetition count k as a parameter, where the source argues them separately; and weakens the column condition from injectivity of every column to Set.InjOn on the fibre a strategy actually visits, so the theorem covers tables the printed statement excludes. Section 11/9's printed bound writes log V_R for an already-logarithmic V_R; the multiplicative form stated here is the reading its derivation supports.",
@@ -1045,7 +1045,7 @@
           "relationship": "RELATED",
           "reproduced": true,
           "license": "Apache-2.0",
-          "build_environment": "leanprover/lean4:v4.31.0; mathlib@fabf563a7c95a166b8d7b6efca11c8b4dc9d911f; PFR@38e94172b72c8ee8ad64b6365dfc22e559c62ebe",
+          "build_environment": "leanprover/lean4:v4.33.0; mathlib@db584cd6d46c92f209a44c0f1c829460d327499d; PFR@7d6404b79b11b1a89dd1b6f997a10b14c208c4ed",
           "build_command": "lake build AISafetyAtlas.Control.RequisiteVariety AISafetyAtlas.Examples.Control.RequisiteVariety",
           "scope_delta": {
             "summary": "The impossibility reading of section 11/10 ('the law states that certain events are impossible'), which the source states in prose rather than as a proposition: a regulator with strictly fewer moves than there are disturbances cannot hold the outcome fixed under any strategy. Derived from the counting law; not a separate printed statement.",
@@ -1061,7 +1061,7 @@
           "relationship": "RELATED",
           "reproduced": true,
           "license": "Apache-2.0",
-          "build_environment": "leanprover/lean4:v4.31.0; mathlib@fabf563a7c95a166b8d7b6efca11c8b4dc9d911f; PFR@38e94172b72c8ee8ad64b6365dfc22e559c62ebe",
+          "build_environment": "leanprover/lean4:v4.33.0; mathlib@db584cd6d46c92f209a44c0f1c829460d327499d; PFR@7d6404b79b11b1a89dd1b6f997a10b14c208c4ed",
           "build_command": "lake build AISafetyAtlas.Control.RequisiteVariety AISafetyAtlas.Examples.Control.RequisiteVariety",
           "scope_delta": {
             "summary": "Section 11/8 with the 11/9 slack K, over any measurable space with a zero-or-probability measure rather than Shannon's discrete sources. Not graded EXACT because the printed conclusion is misprinted: it reads H_D(E) where the derivation above it and the sentence below it both require H_D(R). The corrected inequality is what is proved. The 1961 typesetting also renders the relation as strict throughout; the non-strict reading is the only one the derivation supports.",
@@ -1077,7 +1077,7 @@
           "relationship": "RELATED",
           "reproduced": true,
           "license": "Apache-2.0",
-          "build_environment": "leanprover/lean4:v4.31.0; mathlib@fabf563a7c95a166b8d7b6efca11c8b4dc9d911f; PFR@38e94172b72c8ee8ad64b6365dfc22e559c62ebe",
+          "build_environment": "leanprover/lean4:v4.33.0; mathlib@db584cd6d46c92f209a44c0f1c829460d327499d; PFR@7d6404b79b11b1a89dd1b6f997a10b14c208c4ed",
           "build_command": "lake build AISafetyAtlas.Control.RequisiteVariety AISafetyAtlas.Examples.Control.RequisiteVariety",
           "scope_delta": {
             "summary": "Section 11/8's headline H(E) >= H(D) - H(R) for a determinate strategy. Stronger than the printed statement in that the source assumes H_R(E) >= H_R(D) as a hypothesis, whereas condEntropy_outcome_eq derives it — as an equality — from the table's column condition, tying the combinatorial and entropy halves of the chapter into one development.",
@@ -1093,7 +1093,7 @@
           "relationship": "RELATED",
           "reproduced": true,
           "license": "Apache-2.0",
-          "build_environment": "leanprover/lean4:v4.31.0; mathlib@fabf563a7c95a166b8d7b6efca11c8b4dc9d911f; PFR@38e94172b72c8ee8ad64b6365dfc22e559c62ebe",
+          "build_environment": "leanprover/lean4:v4.33.0; mathlib@db584cd6d46c92f209a44c0f1c829460d327499d; PFR@7d6404b79b11b1a89dd1b6f997a10b14c208c4ed",
           "build_command": "lake build AISafetyAtlas.Control.RequisiteVariety AISafetyAtlas.Examples.Control.RequisiteVariety",
           "scope_delta": {
             "summary": "This row's informal claim 'under perfect information' matches the counting sections 11/5-11/10 rather than 11/11. The claim's other qualifier, unbounded response speed, has no counterpart — chapter 11 is untimed and nothing here speaks to latency. This is the deterministic sensor-reading consequence: the bound uses the entropy of one observation, not Ashby's general channel-capacity rate. channelCapacity later added the noiseless alphabet ceiling used by the exercises, but it does not close the general section 11/11 claim.",
@@ -1109,7 +1109,7 @@
           "relationship": "RELATED",
           "reproduced": true,
           "license": "Apache-2.0",
-          "build_environment": "leanprover/lean4:v4.31.0; mathlib@fabf563a7c95a166b8d7b6efca11c8b4dc9d911f; PFR@38e94172b72c8ee8ad64b6365dfc22e559c62ebe",
+          "build_environment": "leanprover/lean4:v4.33.0; mathlib@db584cd6d46c92f209a44c0f1c829460d327499d; PFR@7d6404b79b11b1a89dd1b6f997a10b14c208c4ed",
           "build_command": "lake build AISafetyAtlas.Control.RequisiteVariety AISafetyAtlas.Examples.Control.RequisiteVariety",
           "scope_delta": {
             "summary": "A noiseless alphabet-ceiling consequence of section 11/11. channelCapacity O = log |O| and the rate lemmas reproduce the section's signal-counting exercises. This declaration on its own does not reproduce Ashby's general capacity: section 9/15 first computes a three-state Markov source at 0.842 bits per step and 2.53 bits per minute, then calls such a rate the natural measure of channel capacity; log |O| would instead give log 3 per step. That quantity is now declared rather than proxied — chainRate is section 9/12's equilibrium-weighted column entropy, chainRate_eq_condEntropy identifies it with the conditional entropy of one step, and entropy_outcome_ge_sub_chainEntropy carries the general claim — so the two capacities are formalized side by side, the alphabet ceiling here for the section's signal-counting exercises and the rate there for the general statement. The source-audit row is therefore Yes | Wider. Shannon's noisy capacity sup I(input : output) is still not modelled, and section 11/11 does not need it. The observation-variable model is wider than a deterministic sensor. The statement is necessary only; nothing here shows a channel of sufficient capacity admits a regulator that achieves constancy.",
@@ -1125,7 +1125,7 @@
           "relationship": "RELATED",
           "reproduced": true,
           "license": "Apache-2.0",
-          "build_environment": "leanprover/lean4:v4.31.0; mathlib@fabf563a7c95a166b8d7b6efca11c8b4dc9d911f; PFR@38e94172b72c8ee8ad64b6365dfc22e559c62ebe",
+          "build_environment": "leanprover/lean4:v4.33.0; mathlib@db584cd6d46c92f209a44c0f1c829460d327499d; PFR@7d6404b79b11b1a89dd1b6f997a10b14c208c4ed",
           "build_command": "lake build AISafetyAtlas.Control.RequisiteVariety AISafetyAtlas.Examples.Control.RequisiteVariety",
           "scope_delta": {
             "summary": "The form section 11/11's exercises use: complete regulation - the outcome held at a single value, Ashby's 'it is constancy that is to be transmitted' - forces the disturbance entropy below the channel capacity. Necessary only, and the three worked exercises are graded accordingly. Examples.Control.ship_disturbance_upper_limit answers Ex. 2, whose printed question - given that the telegraph and wheel are normally sufficient for full regulation, estimate an upper limit for the disturbances - is exactly what the law answers: log 9 + 5 log 50 in five seconds, counted by adding the two controls' capacities. Examples.Control.insect_optic_nerve_not_binding answers Ex. 1 by showing the constraint does not bind (2000 log 2 a second against ten dangers at 10 log 2), which is NOT an answer to the printed question 'is this sufficient to enable it to defend itself'. Examples.Control.general_intelligence_insufficient answers Ex. 3 in the direction the law does settle: ten signallers carrying 576000 log 2 a day cannot regulate ten divisions manoeuvring at 10^7 log 2, so complete regulation is impossible.",
@@ -1338,7 +1338,7 @@
             "touchette-lloyd-2003-preprint"
           ],
           "content_source_note": "Theorem 2 of arXiv:physics/0104007v2, strengthened to an exact identity: H(Z) - L_C = H(Z | X', X, C). The printed inequality is that quantity being nonnegative and the printed equality condition is it being zero, so both are corollaries (controlLoss_le_entropy_noise, controlLoss_eq_entropy_noise_iff) rather than separate arguments.",
-          "build_environment": "leanprover/lean4:v4.31.0; mathlib@fabf563a7c95a166b8d7b6efca11c8b4dc9d911f; PFR@38e94172b72c8ee8ad64b6365dfc22e559c62ebe",
+          "build_environment": "leanprover/lean4:v4.33.0; mathlib@db584cd6d46c92f209a44c0f1c829460d327499d; PFR@7d6404b79b11b1a89dd1b6f997a10b14c208c4ed",
           "build_command": "lake build AISafetyAtlas.Control.InformationLimits AISafetyAtlas.Examples.Control.InformationLimits",
           "scope_delta": {
             "summary": "The published Physica A text has now been read and its Theorem 2 matches the preprint's exactly. RELATED, not EXACT, for a substantive reason: the source defines L_C with a minimization over all conditional distributions {p(c|x)}, 'to ensure that L_C reflects the properties of the actuation channel and does not depend on one's choice of control inputs'. The atlas controlLoss is the unminimized H(X'|X,C), so every statement here is the pointwise-in-controller version, which implies the printed one at the minimizer but is not the same statement. This declaration is additionally a strengthening: the printed Theorem 2 is an inequality plus a separate equality condition, and both are corollaries of the identity proved here. Also holds over an arbitrary measurable space rather than the source's finite alphabets. Updated 2026-08-16: minControlLoss now defines eq. (28) itself and minControlLoss_le_entropy_noise proves Theorem 2's INEQUALITY of it, so the minimization caveat no longer applies to that half. It still applies to the equality case, which describes a minimizer that sInf need not have; that half stays pointwise as controlLoss_eq_entropy_noise_iff.",
@@ -1358,7 +1358,7 @@
             "touchette-lloyd-2003-preprint"
           ],
           "content_source_note": "Theorem 3: L_C = I(X' : Z | X, C). Uses the mutual-information chain rule added in AISafetyAtlas.InformationTheory.DataProcessing, which PFR does not carry.",
-          "build_environment": "leanprover/lean4:v4.31.0; mathlib@fabf563a7c95a166b8d7b6efca11c8b4dc9d911f; PFR@38e94172b72c8ee8ad64b6365dfc22e559c62ebe",
+          "build_environment": "leanprover/lean4:v4.33.0; mathlib@db584cd6d46c92f209a44c0f1c829460d327499d; PFR@7d6404b79b11b1a89dd1b6f997a10b14c208c4ed",
           "build_command": "lake build AISafetyAtlas.Control.InformationLimits AISafetyAtlas.Examples.Control.InformationLimits",
           "scope_delta": {
             "summary": "Theorem 3 of the published text, verbatim in content. The source's L_C carries a minimization over {p(c|x)}; this is the pointwise-in-controller statement, which is the STRONGER of the two, since it holds at every controller rather than at one. The printed statement is minControlLoss_eq_sInf_condMutualInfo, derived from this one by taking infima. RELATED rather than EXACT because the model of a policy set is the atlas's, not the paper's, and because the paper's controllability development is not mechanized — Theorem 1 characterizes perfect controllability and is deliberately omitted. The observability half of that earlier reason is stale and is withdrawn: AISafetyAtlas.Control.Observability mechanizes Theorem 5 as perfectlyObservable_iff_sensorLoss_eq_zero, Theorem 6 as condMutualInfo_eq_zero_of_sensorLoss_eq_zero, and Corollary 7 as mutualInfo_prod_eq_of_sensorLoss_eq_zero. Generalized from finite alphabets to any measurable space with a zero-or-probability measure.",
@@ -1378,7 +1378,7 @@
             "touchette-lloyd-2003-preprint"
           ],
           "content_source_note": "Theorem 4: L_C = I(X' : X,C,Z) - I(X' : X,C).",
-          "build_environment": "leanprover/lean4:v4.31.0; mathlib@fabf563a7c95a166b8d7b6efca11c8b4dc9d911f; PFR@38e94172b72c8ee8ad64b6365dfc22e559c62ebe",
+          "build_environment": "leanprover/lean4:v4.33.0; mathlib@db584cd6d46c92f209a44c0f1c829460d327499d; PFR@7d6404b79b11b1a89dd1b6f997a10b14c208c4ed",
           "build_command": "lake build AISafetyAtlas.Control.InformationLimits AISafetyAtlas.Examples.Control.InformationLimits",
           "scope_delta": {
             "summary": "Theorem 4 of the published text, verbatim in content. As for the Theorem 3 record: this is the pointwise-in-controller form, which is the stronger one, and the printed minimized statement is minControlLoss_eq_sInf_mutualInfo_sub. Generalized from finite alphabets to any measurable space with a zero-or-probability measure.",
@@ -1398,7 +1398,7 @@
             "touchette-lloyd-2003-preprint"
           ],
           "content_source_note": "Theorem 10, the paper's stated main result: closed-loop control beats the best open-loop control by at most the information the controller gathered, so one bit measured is worth at most one bit of control.",
-          "build_environment": "leanprover/lean4:v4.31.0; mathlib@fabf563a7c95a166b8d7b6efca11c8b4dc9d911f; PFR@38e94172b72c8ee8ad64b6365dfc22e559c62ebe",
+          "build_environment": "leanprover/lean4:v4.33.0; mathlib@db584cd6d46c92f209a44c0f1c829460d327499d; PFR@7d6404b79b11b1a89dd1b6f997a10b14c208c4ed",
           "build_command": "lake build AISafetyAtlas.Control.InformationLimits AISafetyAtlas.Examples.Control.InformationLimits",
           "scope_delta": {
             "summary": "The paper's step (50) — that a closed-loop controller is formally equivalent to an ensemble of open-loop controllers acting on the conditional supports — is justified in the source in one sentence beneath the proof: each conditional distribution p(x|c) is a legitimate input distribution, an element of P. entropyReduction_le_of_condEntropy_ge takes the step as an explicit hypothesis and asserts nothing about the model; entropyReduction_le_of_openLoopBound derives it from IsPlant and OpenLoopBound, which are atlas renderings rather than formulas the paper writes. OpenLoopBound is not the printed Delta-H-open-max: conditioning can change the joint law of state and noise, while the printed maximum varies the input law with a transition kernel fixed. openLoopMax narrows that mismatch by ranging over all input laws inside an independent-noise realization X'=F(X,C,Z), and isPurification_purifyMap now realizes every printed transition kernel that way, with openLoopMax_purifyMap showing the two reduction sets coincide; isGreatest_kernelOpenLoopMax proves the supremum attained, so it is the printed maximum. Theorem 10 is therefore Yes | Wider, stated against the realized maximum by exists_kernelEntropyReduction_le_at_max, which does not go through OpenLoopBound. OpenLoopBound is kept because its conditional-ensemble hypothesis is incomparable with that rendering. Theorems 5, 6 and 9 and Corollary 7 and Lemma 8 are formalized; Theorems 1 and 11 remain unformalized, and the quantum sections are out of scope.",
@@ -1418,7 +1418,7 @@
             "touchette-lloyd-2003-preprint"
           ],
           "content_source_note": "Equation (48), Delta H_open^max = max over p_X in P and c in C, with P stated below the equation as the set of all probability distributions for the initial state. The printed notation asserts the maximum is attained.",
-          "build_environment": "leanprover/lean4:v4.31.0; mathlib@fabf563a7c95a166b8d7b6efca11c8b4dc9d911f; PFR@38e94172b72c8ee8ad64b6365dfc22e559c62ebe",
+          "build_environment": "leanprover/lean4:v4.33.0; mathlib@db584cd6d46c92f209a44c0f1c829460d327499d; PFR@7d6404b79b11b1a89dd1b6f997a10b14c208c4ed",
           "build_command": "lake build AISafetyAtlas.Control.OpenLoopAttainment AISafetyAtlas.Examples.Control.OpenLoopAttainment",
           "scope_delta": {
             "summary": "The atlas previously rendered equation (48) as sSup with boundedness, which is formally weaker than print because max <= sSup. This proves the supremum is an element of the set, so the rendering IS the printed maximum. Probability measures on a finite state space are exactly the points of Mathlib's standard simplex via weights and ofWeights; in those coordinates the reduction is a finite sum of negMulLog terms whose inner argument is linear in the weights, by comp_ofWeights_real; continuity plus simplex compactness plus finiteness of the action alphabet give attainment.",
@@ -1438,7 +1438,7 @@
             "touchette-lloyd-2003-preprint"
           ],
           "content_source_note": "Theorem 10 with its right-hand side written against the attained maximum of equation (48) rather than against a supremum that bounds the family.",
-          "build_environment": "leanprover/lean4:v4.31.0; mathlib@fabf563a7c95a166b8d7b6efca11c8b4dc9d911f; PFR@38e94172b72c8ee8ad64b6365dfc22e559c62ebe",
+          "build_environment": "leanprover/lean4:v4.33.0; mathlib@db584cd6d46c92f209a44c0f1c829460d327499d; PFR@7d6404b79b11b1a89dd1b6f997a10b14c208c4ed",
           "build_command": "lake build AISafetyAtlas.Control.OpenLoopAttainment AISafetyAtlas.Examples.Control.OpenLoopAttainment",
           "scope_delta": {
             "summary": "The form equation (48)'s max notation promises: an explicit input distribution and action realize the bound. Closes the last residual recorded against the Theorem 10 row.",
@@ -1458,7 +1458,7 @@
             "touchette-lloyd-2003-preprint"
           ],
           "content_source_note": "Equation (7) and the two conditions stated above it in Section 2: (i) the extended transition matrix p(x'|x,c,z) is deterministic for all c and z, and (ii) tracing out z reproduces p(x'|x,c) = sum_z p(x'|x,c,z) p_Z(z). Condition (i) is carried by the type of the map rather than by a hypothesis. Condition (ii) is IsPurification.",
-          "build_environment": "leanprover/lean4:v4.31.0; mathlib@fabf563a7c95a166b8d7b6efca11c8b4dc9d911f; PFR@38e94172b72c8ee8ad64b6365dfc22e559c62ebe",
+          "build_environment": "leanprover/lean4:v4.33.0; mathlib@db584cd6d46c92f209a44c0f1c829460d327499d; PFR@7d6404b79b11b1a89dd1b6f997a10b14c208c4ed",
           "build_command": "lake build AISafetyAtlas.Control.Purification AISafetyAtlas.Examples.Control.Purification",
           "scope_delta": {
             "summary": "The paper asserts this representation for any non-deterministic channel and never constructs it. This constructs it, reading the paper's own phrase 'a randomly selected deterministic channel' literally: the seed is a random element of the finite space S x K -> T, drawn columnwise from the kernel, so no continuum seed is needed. Stronger than print, which offers the remark without a witness.",
@@ -1478,7 +1478,7 @@
             "touchette-lloyd-2003-preprint"
           ],
           "content_source_note": "Theorem 10, Delta H_closed <= Delta H_open^max + I(X;C), stated from the printed data alone: a joint law rho for the state and the action, and a Markov kernel kappa playing p(x'|x,c). No plant map and no seed occur in the statement.",
-          "build_environment": "leanprover/lean4:v4.31.0; mathlib@fabf563a7c95a166b8d7b6efca11c8b4dc9d911f; PFR@38e94172b72c8ee8ad64b6365dfc22e559c62ebe",
+          "build_environment": "leanprover/lean4:v4.33.0; mathlib@db584cd6d46c92f209a44c0f1c829460d327499d; PFR@7d6404b79b11b1a89dd1b6f997a10b14c208c4ed",
           "build_command": "lake build AISafetyAtlas.Control.Purification AISafetyAtlas.Examples.Control.Purification",
           "statement_match_note": "Graded EXACT on 2026-08-17 after the two residuals that had held it at RELATED were both closed. The family residual - that the earlier entropyReduction_le_openLoopMax held only inside the independent-noise realization X'=F(X,C,Z) - is closed by openLoopMax_purifyMap, which shows the two renderings of equation (48) generate the same set of reductions, so their suprema agree exactly. The sSup-versus-max residual is closed by isGreatest_kernelOpenLoopMax, which proves the supremum attained, so kernelOpenLoopMax is equation (48)'s printed maximum rather than a weaker supremum. No residual against the printed statement remains; the audit grades this printed row Yes and Wider."
         },
@@ -1495,7 +1495,7 @@
             "touchette-lloyd-2003-preprint"
           ],
           "content_source_note": "Theorem 9, Delta H_open <= max over c of Delta H_open^c, for an open-loop controller whose action law p_C is independent of the state, stated for an arbitrary Markov kernel.",
-          "build_environment": "leanprover/lean4:v4.31.0; mathlib@fabf563a7c95a166b8d7b6efca11c8b4dc9d911f; PFR@38e94172b72c8ee8ad64b6365dfc22e559c62ebe",
+          "build_environment": "leanprover/lean4:v4.33.0; mathlib@db584cd6d46c92f209a44c0f1c829460d327499d; PFR@7d6404b79b11b1a89dd1b6f997a10b14c208c4ed",
           "build_command": "lake build AISafetyAtlas.Control.Purification AISafetyAtlas.Examples.Control.Purification",
           "statement_match_note": "Graded EXACT on 2026-08-17. Both sides are stated from the printed data alone - an input law, an action law independent of the state, and an arbitrary Markov kernel - with no plant model in the statement. The one recorded obstruction was the claim that the source does not assume purification in the open-loop section; Section 2 of the published text states it for any non-deterministic channel, before Section 3, so that claim was false and is withdrawn. The printed attainment clause is separate and proved by exists_kernelEntropyReduction_dirac_eq_iSup. The audit grades this printed row Yes and Wider."
         },
@@ -1512,7 +1512,7 @@
             "touchette-lloyd-2003-preprint"
           ],
           "content_source_note": "Theorem 9's attainment clause: the subdynamics at c-hat = arg max over c of Delta H_open^c is open-loop optimal. A pure controller is a Dirac action law.",
-          "build_environment": "leanprover/lean4:v4.31.0; mathlib@fabf563a7c95a166b8d7b6efca11c8b4dc9d911f; PFR@38e94172b72c8ee8ad64b6365dfc22e559c62ebe",
+          "build_environment": "leanprover/lean4:v4.33.0; mathlib@db584cd6d46c92f209a44c0f1c829460d327499d; PFR@7d6404b79b11b1a89dd1b6f997a10b14c208c4ed",
           "build_command": "lake build AISafetyAtlas.Control.Purification AISafetyAtlas.Examples.Control.Purification",
           "scope_delta": {
             "summary": "Attainment here is immediate because the supremum is over the finite action alphabet K; equation (48)'s supremum over all input distributions needs a compactness argument and is proved attained separately by isGreatest_kernelOpenLoopMax.",
@@ -1532,7 +1532,7 @@
             "touchette-lloyd-2003-preprint"
           ],
           "content_source_note": "Equation (28) as the source writes it: L_C = min over the stochastic kernels {p(c|x)} of H(X'|X,C). Declared over Mathlib Kernel S K with IsMarkovKernel, realized as mu compProd kappa.comap X on Omega times K, so the action is drawn from the state and nothing else. This is the printed object rather than a rendering of it on a fixed sample space.",
-          "build_environment": "leanprover/lean4:v4.31.0; mathlib@fabf563a7c95a166b8d7b6efca11c8b4dc9d911f; PFR@38e94172b72c8ee8ad64b6365dfc22e559c62ebe",
+          "build_environment": "leanprover/lean4:v4.33.0; mathlib@db584cd6d46c92f209a44c0f1c829460d327499d; PFR@7d6404b79b11b1a89dd1b6f997a10b14c208c4ed",
           "build_command": "lake build AISafetyAtlas.Control.PolicyKernel AISafetyAtlas.Examples.Control.PolicyKernel",
           "scope_delta": {
             "summary": "The source's minimization itself, not a represented family standing in for it. minControlLoss_inputPolicies_eq_kernelMin proves it equal to the realized infimum over inputPolicies under finite alphabets, which is the printed setting; that closes what the provenance record had listed as the first of two reasons every record here is RELATED. The proof does not construct a kernel realization. Equation (28)'s own second displayed line is linear in p(c|x) because the numbers H(X'|x,c) belong to the actuation channel, so the minimum sits at a vertex of the simplex; the vertices are deterministic state feedbacks, which need no auxiliary randomness and so exist on every sample space. kernelControlLoss_eq_sum states that displayed line verbatim. minControlLoss_inputPolicies_attained exhibits the minimizer, which the source itself never does - it writes min where its own argument supports inf.",
@@ -1552,7 +1552,7 @@
             "touchette-lloyd-2003-preprint"
           ],
           "content_source_note": "A bounded-supremum rendering of equation (48): every probability measure on the state space and every control value are ranged over, with an independent noise law held fixed. The source instead starts from an arbitrary fixed transition kernel and writes a maximum.",
-          "build_environment": "leanprover/lean4:v4.31.0; mathlib@fabf563a7c95a166b8d7b6efca11c8b4dc9d911f; PFR@38e94172b72c8ee8ad64b6365dfc22e559c62ebe",
+          "build_environment": "leanprover/lean4:v4.33.0; mathlib@db584cd6d46c92f209a44c0f1c829460d327499d; PFR@7d6404b79b11b1a89dd1b6f997a10b14c208c4ed",
           "build_command": "lake build AISafetyAtlas.Control.OpenLoop AISafetyAtlas.Examples.Control.OpenLoop",
           "scope_delta": {
             "summary": "A closer rendering than OpenLoopBound, but not the printed object at full scope. openLoopMax varies the input law while holding the independent-noise subdynamics F and eta fixed, so each conditional law p(x|c) is genuinely included. Boundedness is load-bearing because Real.sSup of an unbounded set is 0; bddAbove_openLoopReductions supplies it from Fintype S. Two gaps once stood here and both are closed. First, the source fixes an arbitrary transition kernel p(x'|x,c) while the atlas assumes a deterministic F driven by a common noise seed independent of state and action; isPurification_purifyMap bridges the classes and openLoopMax_purifyMap shows the two reduction sets coincide. The independence cited at source step (30) belongs to Theorem 2, not Theorem 10, but Section 2 states purification globally for any channel. Second, the source writes max while the atlas had only a bounded sSup; isGreatest_kernelOpenLoopMax proves attainment. The source-audit row is Yes | Wider. entropyReduction_le_of_openLoopBound is kept alongside it because its hypothesis is incomparable.",
@@ -1572,7 +1572,7 @@
             "touchette-lloyd-2003-preprint"
           ],
           "content_source_note": "Equation (28) itself, the definition of the average control loss: L_C = min over {p(c|x)} of H(X' | X, C). Not a theorem and so uses no chain rule. The atlas feasible set is a parameter; inputPolicies is the measurable conditional-independence rendering on the current sample space, and NOT Set.univ. Its infimum is proved equal to the all-kernel minimum for finite alphabets by minControlLoss_inputPolicies_eq_kernelMin, against the object kernelMinControlLoss; that equality is not part of this declaration, which is why the parameterization is kept.",
-          "build_environment": "leanprover/lean4:v4.31.0; mathlib@fabf563a7c95a166b8d7b6efca11c8b4dc9d911f; PFR@38e94172b72c8ee8ad64b6365dfc22e559c62ebe",
+          "build_environment": "leanprover/lean4:v4.33.0; mathlib@db584cd6d46c92f209a44c0f1c829460d327499d; PFR@7d6404b79b11b1a89dd1b6f997a10b14c208c4ed",
           "build_command": "lake build AISafetyAtlas.Control.InformationLimits AISafetyAtlas.Examples.Control.InformationLimits",
           "scope_delta": {
             "summary": "Eq. (28) itself: the control loss minimized over the controller, with the source law of X, the noise Z and the actuation channel held fixed. The constraint set is exactly the paper's - the minimization is there, in its own words, 'to ensure that L_C reflects the properties of the actuation channel, and does not depend on one's choice of control inputs' - and IsPlant is what holds the channel fixed while the controller varies. Two modelling choices are recorded rather than hidden. Controllers are measurable maps on the ambient space rather than kernels x -> p(c|x), which loses nothing because the space may carry auxiliary randomness independent of X; and the quantity is an sInf rather than a min, so no attainment is assumed. The set of admitted controllers is a parameter, so the unconstrained minimum is the Set.univ case. Examples.Control.minControlLoss_lt_controlLoss_gate exhibits a plant and two controllers whose losses are 0 and log 2, so the minimization is not a formality.",
@@ -1592,7 +1592,7 @@
             "touchette-lloyd-2003-preprint"
           ],
           "content_source_note": "Theorem 2's inequality, L_C <= H(Z), stated of equation (28)'s minimum rather than of one controller. Purification and the independence step (30) are required at a single admitted controller, since an infimum is capped by any one member.",
-          "build_environment": "leanprover/lean4:v4.31.0; mathlib@fabf563a7c95a166b8d7b6efca11c8b4dc9d911f; PFR@38e94172b72c8ee8ad64b6365dfc22e559c62ebe",
+          "build_environment": "leanprover/lean4:v4.33.0; mathlib@db584cd6d46c92f209a44c0f1c829460d327499d; PFR@7d6404b79b11b1a89dd1b6f997a10b14c208c4ed",
           "build_command": "lake build AISafetyAtlas.Control.InformationLimits AISafetyAtlas.Examples.Control.InformationLimits",
           "scope_delta": {
             "summary": "Theorem 2's inequality at a represented policy infimum, not only pointwise in the controller. The pointwise bound transfers because an infimum is capped by one admitted member, and the realized-policy quantity is an upper ceiling on the source kernel infimum. The equality case is separate: it describes a minimizer and remains represented only under an attainment hypothesis for the supplied family P.",
@@ -1612,7 +1612,7 @@
             "touchette-lloyd-2003-preprint"
           ],
           "content_source_note": "Theorem 3, L_C = I(X' : Z | X, C), stated of equation (28)'s minimum. The pointwise equality controlLoss_eq_condMutualInfo holds at every admitted controller, so the two images coincide and so do their infima for any represented policy family; no minimizer is needed. A common all-kernel realization is not constructed here.",
-          "build_environment": "leanprover/lean4:v4.31.0; mathlib@fabf563a7c95a166b8d7b6efca11c8b4dc9d911f; PFR@38e94172b72c8ee8ad64b6365dfc22e559c62ebe",
+          "build_environment": "leanprover/lean4:v4.33.0; mathlib@db584cd6d46c92f209a44c0f1c829460d327499d; PFR@7d6404b79b11b1a89dd1b6f997a10b14c208c4ed",
           "build_command": "lake build AISafetyAtlas.Control.InformationLimits AISafetyAtlas.Examples.Control.InformationLimits",
           "scope_delta": {
             "summary": "Theorem 3 at a represented policy infimum. The two quantities are equal at every admitted controller, so their images under the loss map coincide and hence so do their infima for any represented family - the printed equality is obtainable without a minimizer. The source's all-kernel family is not declared or realized on a common Lean sample space. Generalized from finite alphabets to any measurable space with a zero-or-probability measure.",
@@ -1632,7 +1632,7 @@
             "touchette-lloyd-2003-preprint"
           ],
           "content_source_note": "Theorem 4, L_C = I(X' : X,C,Z) - I(X' : X,C), stated of equation (28)'s minimum, by the same pointwise-to-represented-family transfer as the Theorem 3 record. A common all-kernel realization is not constructed here.",
-          "build_environment": "leanprover/lean4:v4.31.0; mathlib@fabf563a7c95a166b8d7b6efca11c8b4dc9d911f; PFR@38e94172b72c8ee8ad64b6365dfc22e559c62ebe",
+          "build_environment": "leanprover/lean4:v4.33.0; mathlib@db584cd6d46c92f209a44c0f1c829460d327499d; PFR@7d6404b79b11b1a89dd1b6f997a10b14c208c4ed",
           "build_command": "lake build AISafetyAtlas.Control.InformationLimits AISafetyAtlas.Examples.Control.InformationLimits",
           "scope_delta": {
             "summary": "Theorem 4 at a represented policy infimum, by the same transfer as the Theorem 3 record: an equality holding at every admitted controller is an equality of the two infima for that family. The source's all-kernel feasible family is not declared or realized on a common Lean sample space. Generalized from finite alphabets to any measurable space with a zero-or-probability measure.",
@@ -1652,7 +1652,7 @@
             "touchette-lloyd-2003-preprint"
           ],
           "content_source_note": "Theorem 2's equality condition, L_C = H(Z) iff H(Z | X', X, C) = 0, stated of equation (28)'s minimum under the hypothesis that an admitted controller attains it - which is what the paper's min asserts and never exhibits.",
-          "build_environment": "leanprover/lean4:v4.31.0; mathlib@fabf563a7c95a166b8d7b6efca11c8b4dc9d911f; PFR@38e94172b72c8ee8ad64b6365dfc22e559c62ebe",
+          "build_environment": "leanprover/lean4:v4.33.0; mathlib@db584cd6d46c92f209a44c0f1c829460d327499d; PFR@7d6404b79b11b1a89dd1b6f997a10b14c208c4ed",
           "build_command": "lake build AISafetyAtlas.Control.InformationLimits AISafetyAtlas.Examples.Control.InformationLimits",
           "scope_delta": {
             "summary": "Theorem 2's equality case for a represented policy infimum. The printed condition describes a minimizer, so this takes 'C is admitted and no admitted controller loses less' as an explicit hypothesis for the supplied family P. It does not identify that minimizer with a minimizer of the source's all-kernel infimum. Without represented-family attainment the equality case stays pointwise as controlLoss_eq_entropy_noise_iff.",
@@ -1971,7 +1971,7 @@
           "relationship": "EQUIVALENT",
           "reproduced": true,
           "license": "Apache-2.0",
-          "build_environment": "leanprover/lean4:v4.31.0; mathlib@fabf563a7c95a166b8d7b6efca11c8b4dc9d911f",
+          "build_environment": "leanprover/lean4:v4.33.0; mathlib@db584cd6d46c92f209a44c0f1c829460d327499d",
           "build_command": "lake build AISafetyAtlas",
           "module": "Arrow/Arrow.lean; vendored as AISafetyAtlas.Upstream.Arrow",
           "declaration": "Impossibility"
@@ -2187,7 +2187,7 @@
           "relationship": "RELATED",
           "reproduced": true,
           "license": "Apache-2.0",
-          "build_environment": "leanprover/lean4:v4.31.0; mathlib@fabf563a7c95a166b8d7b6efca11c8b4dc9d911f",
+          "build_environment": "leanprover/lean4:v4.33.0; mathlib@db584cd6d46c92f209a44c0f1c829460d327499d",
           "build_command": "lake build AISafetyAtlas.Preference AISafetyAtlas.Examples.PublicAPI",
           "scope_delta": {
             "summary": "Six of the eight numbered results in the source are formalized. Real-valued rather than [-1,1]-valued rewards; the source's Conjecture 9 is stated as a predicate and not proved; Proposition 10 is absent; and no nontrivial reasonable-language witness exists — the only exhibited ReasonableLanguage inhabitant is degenerate, so Propositions 7 and 8 hold there without saying anything.",
@@ -2203,7 +2203,7 @@
           "relationship": "RELATED",
           "reproduced": true,
           "license": "Apache-2.0",
-          "build_environment": "leanprover/lean4:v4.31.0; mathlib@fabf563a7c95a166b8d7b6efca11c8b4dc9d911f",
+          "build_environment": "leanprover/lean4:v4.33.0; mathlib@db584cd6d46c92f209a44c0f1c829460d327499d",
           "build_command": "lake build AISafetyAtlas.Preference AISafetyAtlas.Examples.Registry",
           "scope_delta": {
             "summary": "Six of the eight numbered results in the source are formalized. Real-valued rather than [-1,1]-valued rewards; the source's Conjecture 9 is stated as a predicate and not proved; Proposition 10 is absent; and no nontrivial reasonable-language witness exists — the only exhibited ReasonableLanguage inhabitant is degenerate, so Propositions 7 and 8 hold there without saying anything.",
@@ -2219,7 +2219,7 @@
           "relationship": "RELATED",
           "reproduced": true,
           "license": "Apache-2.0",
-          "build_environment": "leanprover/lean4:v4.31.0; mathlib@fabf563a7c95a166b8d7b6efca11c8b4dc9d911f",
+          "build_environment": "leanprover/lean4:v4.33.0; mathlib@db584cd6d46c92f209a44c0f1c829460d327499d",
           "build_command": "lake build AISafetyAtlas.Preference AISafetyAtlas.Examples.Registry",
           "scope_delta": {
             "summary": "Six of the eight numbered results in the source are formalized. Real-valued rather than [-1,1]-valued rewards; the source's Conjecture 9 is stated as a predicate and not proved; Proposition 10 is absent; and no nontrivial reasonable-language witness exists — the only exhibited ReasonableLanguage inhabitant is degenerate, so Propositions 7 and 8 hold there without saying anything.",
@@ -2235,7 +2235,7 @@
           "relationship": "RELATED",
           "reproduced": true,
           "license": "Apache-2.0",
-          "build_environment": "leanprover/lean4:v4.31.0; mathlib@fabf563a7c95a166b8d7b6efca11c8b4dc9d911f",
+          "build_environment": "leanprover/lean4:v4.33.0; mathlib@db584cd6d46c92f209a44c0f1c829460d327499d",
           "build_command": "lake build AISafetyAtlas.Preference AISafetyAtlas.Examples.Registry",
           "scope_delta": {
             "summary": "Six of the eight numbered results in the source are formalized. Real-valued rather than [-1,1]-valued rewards; the source's Conjecture 9 is stated as a predicate and not proved; Proposition 10 is absent; and no nontrivial reasonable-language witness exists — the only exhibited ReasonableLanguage inhabitant is degenerate, so Propositions 7 and 8 hold there without saying anything.",
@@ -2251,7 +2251,7 @@
           "relationship": "RELATED",
           "reproduced": true,
           "license": "Apache-2.0",
-          "build_environment": "leanprover/lean4:v4.31.0; mathlib@fabf563a7c95a166b8d7b6efca11c8b4dc9d911f",
+          "build_environment": "leanprover/lean4:v4.33.0; mathlib@db584cd6d46c92f209a44c0f1c829460d327499d",
           "build_command": "lake build AISafetyAtlas.Preference.SourceComplexity AISafetyAtlas.Examples.SixTargets",
           "scope_delta": {
             "summary": "Six of the eight numbered results in the source are formalized. Real-valued rather than [-1,1]-valued rewards; the source's Conjecture 9 is stated as a predicate and not proved; Proposition 10 is absent; and no nontrivial reasonable-language witness exists — the only exhibited ReasonableLanguage inhabitant is degenerate, so Propositions 7 and 8 hold there without saying anything.",
@@ -2267,7 +2267,7 @@
           "relationship": "RELATED",
           "reproduced": true,
           "license": "Apache-2.0",
-          "build_environment": "leanprover/lean4:v4.31.0; mathlib@fabf563a7c95a166b8d7b6efca11c8b4dc9d911f",
+          "build_environment": "leanprover/lean4:v4.33.0; mathlib@db584cd6d46c92f209a44c0f1c829460d327499d",
           "build_command": "lake build AISafetyAtlas.Preference.SourceComplexity AISafetyAtlas.Examples.SixTargets",
           "scope_delta": {
             "summary": "Six of the eight numbered results in the source are formalized. Real-valued rather than [-1,1]-valued rewards; the source's Conjecture 9 is stated as a predicate and not proved; Proposition 10 is absent; and no nontrivial reasonable-language witness exists — the only exhibited ReasonableLanguage inhabitant is degenerate, so Propositions 7 and 8 hold there without saying anything.",
@@ -2283,7 +2283,7 @@
           "relationship": "RELATED",
           "reproduced": true,
           "license": "Apache-2.0",
-          "build_environment": "leanprover/lean4:v4.31.0; mathlib@fabf563a7c95a166b8d7b6efca11c8b4dc9d911f",
+          "build_environment": "leanprover/lean4:v4.33.0; mathlib@db584cd6d46c92f209a44c0f1c829460d327499d",
           "build_command": "lake build AISafetyAtlas.Preference.Reasonable AISafetyAtlas.Examples.PublicAPI",
           "scope_delta": {
             "summary": "Six of the eight numbered results in the source are formalized. Real-valued rather than [-1,1]-valued rewards; the source's Conjecture 9 is stated as a predicate and not proved; Proposition 10 is absent; and no nontrivial reasonable-language witness exists — the only exhibited ReasonableLanguage inhabitant is degenerate, so Propositions 7 and 8 hold there without saying anything.",
@@ -2299,7 +2299,7 @@
           "relationship": "RELATED",
           "reproduced": true,
           "license": "Apache-2.0",
-          "build_environment": "leanprover/lean4:v4.31.0; mathlib@fabf563a7c95a166b8d7b6efca11c8b4dc9d911f",
+          "build_environment": "leanprover/lean4:v4.33.0; mathlib@db584cd6d46c92f209a44c0f1c829460d327499d",
           "build_command": "lake build AISafetyAtlas.Preference.Reasonable AISafetyAtlas.Examples.PublicAPI",
           "scope_delta": {
             "summary": "Six of the eight numbered results in the source are formalized. Real-valued rather than [-1,1]-valued rewards; the source's Conjecture 9 is stated as a predicate and not proved; Proposition 10 is absent; and no nontrivial reasonable-language witness exists — the only exhibited ReasonableLanguage inhabitant is degenerate, so Propositions 7 and 8 hold there without saying anything.",
@@ -2315,7 +2315,7 @@
           "relationship": "RELATED",
           "reproduced": true,
           "license": "Apache-2.0",
-          "build_environment": "leanprover/lean4:v4.31.0; mathlib@fabf563a7c95a166b8d7b6efca11c8b4dc9d911f",
+          "build_environment": "leanprover/lean4:v4.33.0; mathlib@db584cd6d46c92f209a44c0f1c829460d327499d",
           "build_command": "lake build AISafetyAtlas.Preference.Complexity AISafetyAtlas.Examples.PublicAPI",
           "scope_delta": {
             "summary": "Six of the eight numbered results in the source are formalized. Real-valued rather than [-1,1]-valued rewards; the source's Conjecture 9 is stated as a predicate and not proved; Proposition 10 is absent; and no nontrivial reasonable-language witness exists — the only exhibited ReasonableLanguage inhabitant is degenerate, so Propositions 7 and 8 hold there without saying anything.",
@@ -2331,7 +2331,7 @@
           "relationship": "RELATED",
           "reproduced": true,
           "license": "Apache-2.0",
-          "build_environment": "leanprover/lean4:v4.31.0; mathlib@fabf563a7c95a166b8d7b6efca11c8b4dc9d911f",
+          "build_environment": "leanprover/lean4:v4.33.0; mathlib@db584cd6d46c92f209a44c0f1c829460d327499d",
           "build_command": "lake build AISafetyAtlas.Preference.Override AISafetyAtlas.Examples.Registry",
           "scope_delta": {
             "summary": "Six of the eight numbered results in the source are formalized. Real-valued rather than [-1,1]-valued rewards; the source's Conjecture 9 is stated as a predicate and not proved; Proposition 10 is absent; and no nontrivial reasonable-language witness exists — the only exhibited ReasonableLanguage inhabitant is degenerate, so Propositions 7 and 8 hold there without saying anything.",
@@ -2347,7 +2347,7 @@
           "relationship": "RELATED",
           "reproduced": true,
           "license": "Apache-2.0",
-          "build_environment": "leanprover/lean4:v4.31.0; mathlib@fabf563a7c95a166b8d7b6efca11c8b4dc9d911f",
+          "build_environment": "leanprover/lean4:v4.33.0; mathlib@db584cd6d46c92f209a44c0f1c829460d327499d",
           "build_command": "lake build AISafetyAtlas.Preference.Override AISafetyAtlas.Examples.Registry",
           "scope_delta": {
             "summary": "Six of the eight numbered results in the source are formalized. Real-valued rather than [-1,1]-valued rewards; the source's Conjecture 9 is stated as a predicate and not proved; Proposition 10 is absent; and no nontrivial reasonable-language witness exists — the only exhibited ReasonableLanguage inhabitant is degenerate, so Propositions 7 and 8 hold there without saying anything.",
@@ -2540,11 +2540,11 @@
         {
           "framework": "Lean",
           "repository": "https://github.com/leanprover-community/mathlib4",
-          "version": "fabf563a7c95a166b8d7b6efca11c8b4dc9d911f",
+          "version": "db584cd6d46c92f209a44c0f1c829460d327499d",
           "module": "Mathlib.Computability.Halting",
           "reproduced": true,
           "license": "Apache-2.0",
-          "build_environment": "leanprover/lean4:v4.31.0; mathlib@fabf563a7c95a166b8d7b6efca11c8b4dc9d911f",
+          "build_environment": "leanprover/lean4:v4.33.0; mathlib@db584cd6d46c92f209a44c0f1c829460d327499d",
           "build_command": "lake build AISafetyAtlas",
           "declaration": "ComputablePred.rice",
           "relationship": "EQUIVALENT"
@@ -2552,11 +2552,11 @@
         {
           "framework": "Lean",
           "repository": "https://github.com/leanprover-community/mathlib4",
-          "version": "fabf563a7c95a166b8d7b6efca11c8b4dc9d911f",
+          "version": "db584cd6d46c92f209a44c0f1c829460d327499d",
           "module": "Mathlib.Computability.Halting",
           "reproduced": true,
           "license": "Apache-2.0",
-          "build_environment": "leanprover/lean4:v4.31.0; mathlib@fabf563a7c95a166b8d7b6efca11c8b4dc9d911f",
+          "build_environment": "leanprover/lean4:v4.33.0; mathlib@db584cd6d46c92f209a44c0f1c829460d327499d",
           "build_command": "lake build AISafetyAtlas",
           "declaration": "ComputablePred.rice₂",
           "relationship": "EXACT"
@@ -2618,7 +2618,7 @@
         "interpretation_reviewed": true,
         "evidence": "docs/bridges/review-by-012-agentbehavior.md"
       },
-      "notes": "Mathlib v4.31.0 provides an equivalent extensional-function theorem and an exact code-set characterization. The atlas keeps those canonical wrappers and derives one semantic-to-code verification bridge for properties stated on partial input/output behavior; it makes no claim about a particular AI system. Isabelle Rice_2 independently verifies the ordinary undecidability result. Reproduced Rice_1 adds an explicit one-reduction and Rice_3 adds a c.e.-set interface, but neither is an additional survey coverage result or a current Lean migration target. Downstream consumer of Verification.rice: AISafetyAtlas.Verification.AgentBehavior.no_behavioral_safety_verifier models encoded agents as Mathlib program codes and proves no total BehavioralSafetyVerifier exists for a nontrivial I/O safety specification (CT-4 / R6-8). Melo et al. (arXiv:2408.08995) apply Rice to a comparable agent/program and non-trivial I/O-judge decision problem; the atlas formalizes the Rice packaging, not that paper’s full narrative or architecture proposals. Maintainer bridge review 2026-07-19 (REVIEWED): statement and scoped AI-safety interpretation accepted (see bridge_review evidence). Related literature: atlas-ref-melo-2024; related literature docs/guide/related-literature.md. Bridge REVIEWED (2026-07-19) applies to the AI-facing bridges Verification.rice and AgentBehavior.no_behavioral_safety_verifier (statement + scoped interpretation); it is not a re-audit of Mathlib Rice as novel AI-safety content. See docs/bridges/review-by-012-agentbehavior.md and docs/releases/v0.2.md.",
+      "notes": "Mathlib v4.33.0 provides an equivalent extensional-function theorem and an exact code-set characterization. The atlas keeps those canonical wrappers and derives one semantic-to-code verification bridge for properties stated on partial input/output behavior; it makes no claim about a particular AI system. Isabelle Rice_2 independently verifies the ordinary undecidability result. Reproduced Rice_1 adds an explicit one-reduction and Rice_3 adds a c.e.-set interface, but neither is an additional survey coverage result or a current Lean migration target. Downstream consumer of Verification.rice: AISafetyAtlas.Verification.AgentBehavior.no_behavioral_safety_verifier models encoded agents as Mathlib program codes and proves no total BehavioralSafetyVerifier exists for a nontrivial I/O safety specification (CT-4 / R6-8). Melo et al. (arXiv:2408.08995) apply Rice to a comparable agent/program and non-trivial I/O-judge decision problem; the atlas formalizes the Rice packaging, not that paper’s full narrative or architecture proposals. Maintainer bridge review 2026-07-19 (REVIEWED): statement and scoped AI-safety interpretation accepted (see bridge_review evidence). Related literature: atlas-ref-melo-2024; related literature docs/guide/related-literature.md. Bridge REVIEWED (2026-07-19) applies to the AI-facing bridges Verification.rice and AgentBehavior.no_behavioral_safety_verifier (statement + scoped interpretation); it is not a re-audit of Mathlib Rice as novel AI-safety content. See docs/bridges/review-by-012-agentbehavior.md and docs/releases/v0.2.md.",
       "formal_library_search": {
         "searched_on": "2026-07-28",
         "evidence_file": "docs/provenance/formalization-search.json",
@@ -2668,25 +2668,25 @@
         {
           "framework": "Lean",
           "repository": "https://github.com/FormalizedFormalLogic/Foundation",
-          "version": "b47cf447255addf88a5d72781d0d29641948eb6e",
+          "version": "30a16ffa93d79d73ab4d02427fa00f50e039bf29",
           "module": "Foundation.FirstOrder.Incompleteness.First",
           "declaration": "LO.FirstOrder.Arithmetic.exists_true_but_unprovable_sentence",
           "relationship": "EQUIVALENT",
           "reproduced": true,
           "license": "Apache-2.0",
-          "build_environment": "leanprover/lean4:v4.31.0; Foundation@b47cf447255addf88a5d72781d0d29641948eb6e",
+          "build_environment": "leanprover/lean4:v4.33.0; Foundation@30a16ffa93d79d73ab4d02427fa00f50e039bf29",
           "build_command": "lake build AISafetyAtlas"
         },
         {
           "framework": "Lean",
           "repository": "https://github.com/FormalizedFormalLogic/Foundation",
-          "version": "b47cf447255addf88a5d72781d0d29641948eb6e",
+          "version": "30a16ffa93d79d73ab4d02427fa00f50e039bf29",
           "module": "Foundation.FirstOrder.Incompleteness.Second",
           "declaration": "LO.FirstOrder.Arithmetic.consistent_unprovable",
           "relationship": "RELATED",
           "reproduced": true,
           "license": "Apache-2.0",
-          "build_environment": "leanprover/lean4:v4.31.0; Foundation@b47cf447255addf88a5d72781d0d29641948eb6e",
+          "build_environment": "leanprover/lean4:v4.33.0; Foundation@30a16ffa93d79d73ab4d02427fa00f50e039bf29",
           "build_command": "lake build AISafetyAtlas"
         }
       ],
@@ -2758,11 +2758,11 @@
         {
           "framework": "Lean",
           "repository": "https://github.com/leanprover-community/mathlib4",
-          "version": "fabf563a7c95a166b8d7b6efca11c8b4dc9d911f",
+          "version": "db584cd6d46c92f209a44c0f1c829460d327499d",
           "module": "Mathlib.Computability.Halting",
           "reproduced": true,
           "license": "Apache-2.0",
-          "build_environment": "leanprover/lean4:v4.31.0; mathlib@fabf563a7c95a166b8d7b6efca11c8b4dc9d911f",
+          "build_environment": "leanprover/lean4:v4.33.0; mathlib@db584cd6d46c92f209a44c0f1c829460d327499d",
           "build_command": "lake build AISafetyAtlas",
           "declaration": "ComputablePred.halting_problem_re",
           "relationship": "RELATED"
@@ -2770,11 +2770,11 @@
         {
           "framework": "Lean",
           "repository": "https://github.com/leanprover-community/mathlib4",
-          "version": "fabf563a7c95a166b8d7b6efca11c8b4dc9d911f",
+          "version": "db584cd6d46c92f209a44c0f1c829460d327499d",
           "module": "Mathlib.Computability.Halting",
           "reproduced": true,
           "license": "Apache-2.0",
-          "build_environment": "leanprover/lean4:v4.31.0; mathlib@fabf563a7c95a166b8d7b6efca11c8b4dc9d911f",
+          "build_environment": "leanprover/lean4:v4.33.0; mathlib@db584cd6d46c92f209a44c0f1c829460d327499d",
           "build_command": "lake build AISafetyAtlas",
           "declaration": "ComputablePred.halting_problem",
           "relationship": "EXACT"
@@ -2782,11 +2782,11 @@
         {
           "framework": "Lean",
           "repository": "https://github.com/leanprover-community/mathlib4",
-          "version": "fabf563a7c95a166b8d7b6efca11c8b4dc9d911f",
+          "version": "db584cd6d46c92f209a44c0f1c829460d327499d",
           "module": "Mathlib.Computability.Halting",
           "reproduced": true,
           "license": "Apache-2.0",
-          "build_environment": "leanprover/lean4:v4.31.0; mathlib@fabf563a7c95a166b8d7b6efca11c8b4dc9d911f",
+          "build_environment": "leanprover/lean4:v4.33.0; mathlib@db584cd6d46c92f209a44c0f1c829460d327499d",
           "build_command": "lake build AISafetyAtlas",
           "declaration": "ComputablePred.halting_problem_not_re",
           "relationship": "RELATED"
@@ -2819,7 +2819,7 @@
       },
       "ai_safety_relevance": "The survey identifies this result as relevant to limits on AI; no direct real-system implication is asserted here.",
       "ai_bridge_status": "HUMAN_REVIEW",
-      "notes": "Mathlib v4.31.0 formalizes recursive enumerability, noncomputability, and non-r.e. complement results for the fixed-input halting predicate.",
+      "notes": "Mathlib v4.33.0 formalizes recursive enumerability, noncomputability, and non-r.e. complement results for the fixed-input halting predicate.",
       "formal_library_search": {
         "searched_on": "2026-07-28",
         "evidence_file": "docs/provenance/formalization-search.json",
@@ -2874,7 +2874,7 @@
           "relationship": "EQUIVALENT",
           "reproduced": true,
           "license": "Apache-2.0",
-          "build_environment": "leanprover/lean4:v4.31.0; mathlib@fabf563a7c95a166b8d7b6efca11c8b4dc9d911f",
+          "build_environment": "leanprover/lean4:v4.31.0; mathlib@fabf563a7c95a166b8d7b6efca11c8b4dc9d911f (upstream pinned checkout)",
           "build_command": "scripts/reproduce_chaitin.sh"
         }
       ],
@@ -2941,10 +2941,10 @@
         {
           "framework": "Lean",
           "repository": "https://github.com/FormalizedFormalLogic/Foundation",
-          "version": "b47cf447255addf88a5d72781d0d29641948eb6e",
+          "version": "30a16ffa93d79d73ab4d02427fa00f50e039bf29",
           "reproduced": true,
           "license": "Apache-2.0",
-          "build_environment": "leanprover/lean4:v4.31.0; Foundation@b47cf447255addf88a5d72781d0d29641948eb6e",
+          "build_environment": "leanprover/lean4:v4.33.0; Foundation@30a16ffa93d79d73ab4d02427fa00f50e039bf29",
           "build_command": "lake build AISafetyAtlas",
           "module": "Foundation.FirstOrder.Incompleteness.Tarski",
           "declaration": "LO.FirstOrder.Arithmetic.undefinability_of_truth",
@@ -3130,7 +3130,7 @@
             "wolpert-1996-lack"
           ],
           "content_source_note": "The formalized content (uniform target average, off-training-set error learner-independence, homogeneous loss) is from Wolpert's 'Lack' paper. original_source_refs mirrors the survey's own citation (survey-ref-018 = the companion 'Existence' paper, which proves the converse); see docs/provenance/lean-wolpert-nfl.md.",
-          "build_environment": "leanprover/lean4:v4.31.0; mathlib@fabf563a7c95a166b8d7b6efca11c8b4dc9d911f",
+          "build_environment": "leanprover/lean4:v4.33.0; mathlib@db584cd6d46c92f209a44c0f1c829460d327499d",
           "build_command": "lake build AISafetyAtlas.Learning AISafetyAtlas.Examples.PublicAPI AISafetyAtlas.Examples.NFLConcrete",
           "scope_delta": {
             "summary": "Finite-domain supervised off-training-set uniform-averaging core under homogeneous loss only; cross-validation as a meta-algorithm, general loss, and stochastic learners from Wolpert 1996 are not mechanized. Distinct from the SSBD PAC no-free-lunch theorem (LAND-NFL-001).",
@@ -3235,7 +3235,7 @@
           "relationship": "RELATED",
           "reproduced": true,
           "license": "Apache-2.0",
-          "build_environment": "leanprover/lean4:v4.31.0; mathlib@fabf563a7c95a166b8d7b6efca11c8b4dc9d911f",
+          "build_environment": "leanprover/lean4:v4.33.0; mathlib@db584cd6d46c92f209a44c0f1c829460d327499d",
           "build_command": "lake build AISafetyAtlas.Learning AISafetyAtlas.Examples.PublicAPI AISafetyAtlas.Examples.NFLConcrete",
           "scope_delta": {
             "summary": "Finite-domain non-adaptive core plus a deterministic adaptive no-revisit strengthening; adaptive query trees, stochastic algorithms, and time-varying objectives from Wolpert-Macready 1997 are not mechanized. The sharp closed-under-permutation characterization is proved over the printed adaptive class in AISafetyAtlas.Learning.Sharp (CT-10), filed on this row.",
@@ -3257,7 +3257,7 @@
             "schumacher-vose-whitley-2001"
           ],
           "content_source_note": "CT-10. The closed-under-permutation characterization, both directions: aggregate performance is schedule-independent iff the weighting of objectives is invariant under permutations of the search domain. The printed condition is that the weight is constant on each basis class, and by their Lemma 1 a basis class is the permutation orbit, so it is the same condition as PermInvariant. The published 2004 JMMA paper has been read. Its Theorem 5, 'non-uniform sharpened NFL', confirms the assessment recorded here: the condition is that the weight is constant on each basis class, its Lemma 1(2) identifies a basis class with a permutation orbit, and the conclusion is quantified over any two non-repeating black-box (hence adaptive) algorithms, any k, any performance measure, AND any m in {1,...,|X|}. Schumacher-Vose-Whitley 2001 has also been read; its sharpened NFL is 'a No Free Lunch result holds over F iff F is closed under permutation', over the same adaptive algorithm class, and its NFL4 explicitly notes that weighted overall measures are not generally subject to NFL except under equal weighting.",
-          "build_environment": "leanprover/lean4:v4.31.0; mathlib@fabf563a7c95a166b8d7b6efca11c8b4dc9d911f",
+          "build_environment": "leanprover/lean4:v4.33.0; mathlib@db584cd6d46c92f209a44c0f1c829460d327499d",
           "build_command": "lake build AISafetyAtlas.Learning.Sharp AISafetyAtlas.Examples.Learning.Sharp",
           "scope_delta": {
             "summary": "Not EXACT or EQUIVALENT, but no longer on the algorithm axis. The printed theorem quantifies over non-repeating black-box search algorithms, which are ADAPTIVE, and nfl_adaptive_of_permInvariant now proves the sufficiency half over exactly that class: AdaptiveRule together with the no-revisit hypothesis. nfl_of_permInvariant is the fixed-schedule special case, kept because it is the form the rest of the atlas consumes. What still separates this from the source is the weight axis in the atlas's favour, and time-varying objectives, which remain out of scope. The paper's stochastic algorithms are NO LONGER out of scope: see the nfl_stochastic_of_permInvariant and mixtureTrace records on this row, where the printed quantifier is met at Droste-Jansen-Wegener's own definition. The weight axis is the widening: the atlas statement holds for an arbitrary real weight, including signed ones, where the source takes a probability distribution. The necessity half assumes less than the source and is therefore stronger. Note that quantifying over every sample length is not a sharpening: the source quantifies over m as well, as the published text confirms.",
@@ -3278,7 +3278,7 @@
             "droste-jansen-wegener-2002"
           ],
           "content_source_note": "Igel-Toussaint state Theorem 1 for 'any two (deterministic or stochastic, cf. [1]) algorithms a and b', citing Droste-Jansen-Wegener on randomized search heuristics. Everything else on this row quantifies over AdaptiveRule, which is deterministic, so the atlas covered a subclass of the printed one. StochasticRule closes that: a rule reads a choice at each step alongside the costs it has seen, and induced fixes the choice sequence to give a deterministic rule DEFINITIONALLY. The theorem is that two stochastic non-repeating rules over possibly different choice alphabets score alike against a permutation-invariant weighting, provided their choice weights carry the same total mass. no_free_lunch_stochastic_of_sharp is the printed uniform case with both masses one.",
-          "build_environment": "leanprover/lean4:v4.31.0; mathlib@fabf563a7c95a166b8d7b6efca11c8b4dc9d911f",
+          "build_environment": "leanprover/lean4:v4.33.0; mathlib@db584cd6d46c92f209a44c0f1c829460d327499d",
           "build_command": "lake build AISafetyAtlas.Learning.Sharp AISafetyAtlas.Examples.Learning.Sharp",
           "scope_delta": {
             "summary": "The modelling choice is the content. Randomness is NOT modelled as a weighted family of deterministic rules: that would prove only that No Free Lunch is preserved under mixtures, and would leave the residual it is meant to close, since nothing would say the source's algorithms ARE such mixtures — the same shape as the openLoopMax family residual on BY-005, which needed isPurification_purifyMap to close. Here the randomness sits where a randomized heuristic puts it, at the step, so induced needs no representation theorem. An arbitrary weight on choice SEQUENCES allows correlated choices, so independent per-step randomization is a special case and so is the abstract mixture picture, by taking the choice alphabet to index rules. The finite-choice residual recorded when this landed is CLOSED, at the primary source. Droste-Jansen-Wegener, Theoretical Computer Science 287 (2002) 131-144, is Igel-Toussaint's reference [1]; its Theorem 1 is stated for 'an arbitrary (randomized or deterministic) search heuristic' and its randomized half reads, at p. 134: 'The number of different deterministic search strategies is finite. Let m be its number. A randomized search strategy is a probability distribution p = (p1, ..., pm) and chooses the ith deterministic strategy with probability pi. ... the expected cost of a randomized search heuristic is the weighted average of the cost of the deterministic search heuristics. Since all deterministic search heuristics have the same cost, this also holds for all randomized search heuristics.' So the mixture model is DJW's definition rather than a rendering of one, finiteness of the strategy set is DJW's own observation rather than an atlas restriction, and the final sentence is mixtureTrace_eq_sum_mul, so the atlas proof follows the printed one step for step. Igel's own later survey (igel-2014) says the same in secondary form. mixtureTrace is that equation and nfl_mixture_of_permInvariant is the theorem over it, so the printed quantifier is met at the source's own definition. A is finite because X and Y are, and surjective_induced_playChoice records that the choice-sequence form reaches all of it. mixtureTrace_pointMass is the survey's remark that deterministic algorithms are the degenerate distributions. Nonempty on the choice alphabet remains a hypothesis print does not state, and applies only to the choice-sequence form. Examples.Learning.coinRule_realizations_differ checks the quantifier is not decoration — two choice sequences induce rules that open at different points — and nfl_coinRule_vs_probeRule scores that coin against the branching deterministic probeRule.",
@@ -3299,7 +3299,7 @@
             "igel-toussaint-2003"
           ],
           "content_source_note": "Igel-Toussaint's Theorem 3: the non-empty subsets of Y^X that are closed under permutation number 2^C(|X|+|Y|-1,|X|) - 1, out of 2^(|Y|^|X|) - 1 non-empty subsets in all. They state it citing their own earlier paper, where the proof is given, so this transcribes a printed count rather than supplying an argument the source lacks. The row pairs with nfl_adaptive_iff_permInvariant: that theorem says No Free Lunch holds exactly on the permutation-closed priors, and this one says almost no prior is permutation-closed. card_closedUnderPermutation is the count without the non-emptiness restriction, and fraction_closedUnderPermutation is the printed fraction, in Q.",
-          "build_environment": "leanprover/lean4:v4.31.0; mathlib@fabf563a7c95a166b8d7b6efca11c8b4dc9d911f",
+          "build_environment": "leanprover/lean4:v4.33.0; mathlib@db584cd6d46c92f209a44c0f1c829460d327499d",
           "build_command": "lake build AISafetyAtlas.Learning.Sharp AISafetyAtlas.Examples.Learning.Sharp",
           "scope_delta": {
             "summary": "Same scope as print, at print's own finite alphabets. The content is closedUnderPermutationEquivSet: a permutation-closed set is a union of orbits, an orbit is a basis class by the source's Lemma 1 (already in the tree as basisClass_histogram_eq_permOrbit), and a basis class is determined by the multiset of cost values an objective takes. So the orbits are exactly Sym Y |X|, and Mathlib's Sym.card_sym_eq_choose supplies the tally. spectrum is that multiset, surjective_spectrum shows none is missed, and preimage_image_spectrum is the recovery step. Counts are stated as card + 1 = 2^N so that no truncated natural subtraction appears in a hypothesis-free claim. NOT covered, and split out as its own audit row rather than absorbed here: the asymptotic claim that the fraction converges to zero double exponentially fast for |Y| > e|X|/(|X|-e), which is the point the section exists to make and needs an estimate on binomial coefficients that these counts do not supply.",
@@ -3319,7 +3319,7 @@
             "igel-toussaint-2004"
           ],
           "content_source_note": "Igel-Toussaint's Theorem 4, the argument the section exists to make: a non-trivial neighbourhood relation on the search space is not invariant under permutations of that space, so the characterization on this row is met by nothing that carries structure. Print defines the object at p. 318: 'A neighborhood relation on X is a symmetric function n: X x X -> {0,1}', non-trivial iff some pair of DISTINCT points neighbours and some pair of distinct points does not. exists_perm_rel_not_iff is that statement and its equation (6). forall_rel_of_permInvariant carries the proof: one instance of the relation at a pair of distinct points forces it at every pair of distinct points, by two-transitivity - a permutation assembled from two transpositions. rel_diag_iff_of_permInvariant is the diagonal half: an invariant relation is all-or-nothing off the diagonal and all-or-nothing on it, the two independently. No count is claimed or proved. forall_adj_or_forall_not_adj_of_permInvariant and exists_perm_adj_not_iff are the SimpleGraph corollaries, kept because that is the form a reader looking for graph automorphisms would search for. Examples.Learning.oneEdge_not_permInvariant is the smallest instance, one edge on three points. Examples.Learning.loopedEdge_not_permInvariant is that edge plus every self-loop: legal under print's definition, non-trivial in print's own sense, and not a SimpleGraph, so it is the witness the bare-relation form reaches and the graph form does not. Examples.Learning.top_permInvariant and Examples.Learning.bot_permInvariant occupy both branches of the graph dichotomy. Examples.Learning.eq_permInvariant is the diagonal, which is invariant but TRIVIAL in print's sense - it relates no two distinct points - so Theorem 4 says nothing about it; it is recorded to show the diagonal is a degree of freedom forall_rel_of_permInvariant does not constrain.",
-          "build_environment": "leanprover/lean4:v4.31.0; mathlib@fabf563a7c95a166b8d7b6efca11c8b4dc9d911f",
+          "build_environment": "leanprover/lean4:v4.33.0; mathlib@db584cd6d46c92f209a44c0f1c829460d327499d",
           "build_command": "lake build AISafetyAtlas.Learning.Sharp AISafetyAtlas.Examples.Learning.Sharp",
           "scope_delta": {
             "summary": "Wider than print on two axes. forall_rel_of_permInvariant is stated for an arbitrary binary relation on an arbitrary type: no finiteness, no symmetry, no irreflexivity, and nothing about search in the statement. Print's neighbourhood relation is symmetric; the proof never uses symmetry, so the hypothesis is dropped rather than assumed. The search reading is a corollary. Modelling print's relation as a SimpleGraph would be NARROWER than print, since SimpleGraph is symmetric AND irreflexive whereas print asks only for symmetry and constrains n(x,x) not at all. Examples.Learning.loopedEdge_not_permInvariant is a relation print's definition admits and SimpleGraph cannot express, an edge plus every self-loop, so the graph form cannot be instantiated at it. That is applicability rather than strength: loopedEdge is symmetric, and for symmetric r the graph 'fun a b => a != b and r a b' carries both non-triviality clauses, so the conclusion stays derivable from the graph form. The axis that buys strength is symmetry, witnessed by Examples.Learning.arrowRel_not_permInvariant, where print's theorem cannot be posed at all since no symmetric relation on a two-element type meets both non-triviality clauses. Note print's next sentence, which cuts against the reading here: 'There are only two trivial neighborhood relations, either every two points are neighbored or no points are neighbored.' Print counts off-diagonal behaviour and treats n(x,x) as immaterial rather than as a parameter, so the free diagonal is an inference from a definition that omits it, not something print asserts.",
@@ -3339,7 +3339,7 @@
             "igel-toussaint-2004"
           ],
           "content_source_note": "The necessary half of CT-10, and the half that is genuinely stronger than the source: permutation-invariance is forced by schedule-independence at the single sample length |X|, over non-adaptive schedules only, whereas the printed theorem assumes it for every sample length and for the larger class of adaptive non-repeating algorithms. A weaker hypothesis for the same conclusion.",
-          "build_environment": "leanprover/lean4:v4.31.0; mathlib@fabf563a7c95a166b8d7b6efca11c8b4dc9d911f",
+          "build_environment": "leanprover/lean4:v4.33.0; mathlib@db584cd6d46c92f209a44c0f1c829460d327499d",
           "build_command": "lake build AISafetyAtlas.Learning.Sharp AISafetyAtlas.Examples.Learning.Sharp",
           "scope_delta": {
             "summary": "Half of the printed iff, with a strictly weaker hypothesis than the source uses: only full-length schedules are probed, and only non-adaptive ones. Assuming NFL over a smaller class of algorithms makes this the stronger of the two halves. The hypothesis is weaker on three axes rather than one: fixed schedules rather than the whole algorithm class, a single sample length, and indicator measures only, which is exactly Igel-Toussaint's delta(k, c(Y)) form. Since the class appears in the hypothesis, a smaller one makes the theorem stronger. The sufficiency direction is now proved over the printed adaptive class by nfl_adaptive_of_permInvariant; time-varying objectives remain out of scope; the stochastic algorithms do not, and are covered by nfl_mixture_of_permInvariant on this same row.",
@@ -3359,7 +3359,7 @@
             "schumacher-vose-whitley-2001"
           ],
           "content_source_note": "Schumacher-Vose-Whitley's set formulation of closure under permutation, expressed as the statement that such a set's indicator is a permutation-invariant weight, so that their theorem is the indicator case of the weighted one.",
-          "build_environment": "leanprover/lean4:v4.31.0; mathlib@fabf563a7c95a166b8d7b6efca11c8b4dc9d911f",
+          "build_environment": "leanprover/lean4:v4.33.0; mathlib@db584cd6d46c92f209a44c0f1c829460d327499d",
           "build_command": "lake build AISafetyAtlas.Learning.Sharp AISafetyAtlas.Examples.Learning.Sharp",
           "scope_delta": {
             "summary": "Records the bridge from the set form to the weighted form rather than transcribing the 2001 paper, whose algorithm model and problem-description-length framing are not mechanized. The set-form NFL conclusion itself follows by composing with nfl_of_permInvariant; the worked instance is Examples.Learning.nfl_over_constants.",
@@ -3576,7 +3576,7 @@
           "declaration": "NFL.CodexFull.WolpertMacready.wolpert_macready and .wolpert_macready_avg (NFL/NFL/codex_full/WolpertMacready.lean); independently duplicated as NFL.ClaudeFull.WolpertMacready.* (NFL/NFL/claude_full/WolpertMacready.lean). The statement skeleton at NFL/NFL/WolpertMacready.lean is sorry-closed.",
           "inspection_state": "REPRODUCED",
           "relationship_review": "RELATED",
-          "notes": "UCSD DSC 291 (Learning Theory) course project, Spring 2026, formalizing three No Free Lunch theorems. Layout: NFL.lean imports a 69-line statement skeleton whose theorems are sorry-closed; the proofs live in codex_full/ and claude_full/, outputs of two AI coding agents on the same task, with the README designating codex_full/ as the deliverable. Built and audited 2026-07-28 at the repository's own pins (Lean v4.29.1, Mathlib 5e932f97). The default lake build target succeeds but warns 'declaration uses sorry' at WolpertMacready.lean lines 42 and 60; no oleans appear under codex_full/ or claude_full/, confirming both are outside the default closure. Built explicitly, both compile (1700 jobs each). Axiom audit reports [propext, Classical.choice, Quot.sound] for wolpert_macready and wolpert_macready_avg in both namespaces, with no sorryAx: both agent proofs are complete and kernel-checked. Delta against existing atlas coverage is narrow. BY-021 is already covered RELATED by the in-tree Lean AISafetyAtlas.Learning.no_free_lunch, and AISafetyAtlas.Learning.no_free_lunch_adaptive already proves the deterministic adaptive case including the full histogram (each fiber has cardinality |Y|^(|X|-m) independent of the rule). What this lead adds is stochastic algorithms: its SearchAlg.nextQuery is PMF-valued where AdaptiveRule is deterministic. It is not uniformly stronger — its performance functional is ENNReal-valued where the atlas admits signed real functionals — and it likewise omits the time-varying objectives that keep the atlas artifact at RELATED. Graded RELATED for consistency with that standard. Its other two theorems are more interesting than the Wolpert one: batch_stochastic_NFL is SSBD Thm 5.1, which the atlas holds only in Isabelle as LAND-NFL-001, though that AFP entry is strictly more general (arbitrary measure spaces, not Fintype-only), so this is a finite-domain special case rather than a Lean replacement; and exists_adversarial_target is an online adversarial NFL with no atlas analogue. The blocker is licensing: no license file, so nothing here is reusable, vendorable or promotable however good the proofs are. Version skew against atlas pins (Lean v4.31.0, Mathlib fabf563a) is secondary. Found via an incidental control query, not a systematic lead sweep of this row."
+          "notes": "UCSD DSC 291 (Learning Theory) course project, Spring 2026, formalizing three No Free Lunch theorems. Layout: NFL.lean imports a 69-line statement skeleton whose theorems are sorry-closed; the proofs live in codex_full/ and claude_full/, outputs of two AI coding agents on the same task, with the README designating codex_full/ as the deliverable. Built and audited 2026-07-28 at the repository's own pins (Lean v4.29.1, Mathlib 5e932f97). The default lake build target succeeds but warns 'declaration uses sorry' at WolpertMacready.lean lines 42 and 60; no oleans appear under codex_full/ or claude_full/, confirming both are outside the default closure. Built explicitly, both compile (1700 jobs each). Axiom audit reports [propext, Classical.choice, Quot.sound] for wolpert_macready and wolpert_macready_avg in both namespaces, with no sorryAx: both agent proofs are complete and kernel-checked. Delta against existing atlas coverage is narrow. BY-021 is already covered RELATED by the in-tree Lean AISafetyAtlas.Learning.no_free_lunch, and AISafetyAtlas.Learning.no_free_lunch_adaptive already proves the deterministic adaptive case including the full histogram (each fiber has cardinality |Y|^(|X|-m) independent of the rule). What this lead adds is stochastic algorithms: its SearchAlg.nextQuery is PMF-valued where AdaptiveRule is deterministic. It is not uniformly stronger — its performance functional is ENNReal-valued where the atlas admits signed real functionals — and it likewise omits the time-varying objectives that keep the atlas artifact at RELATED. Graded RELATED for consistency with that standard. Its other two theorems are more interesting than the Wolpert one: batch_stochastic_NFL is SSBD Thm 5.1, which the atlas holds only in Isabelle as LAND-NFL-001, though that AFP entry is strictly more general (arbitrary measure spaces, not Fintype-only), so this is a finite-domain special case rather than a Lean replacement; and exists_adversarial_target is an online adversarial NFL with no atlas analogue. The blocker is licensing: no license file, so nothing here is reusable, vendorable or promotable however good the proofs are. Version skew against atlas pins (Lean v4.33.0, Mathlib db584cd6) is secondary. Found via an incidental control query, not a systematic lead sweep of this row."
         }
       ],
       "tags": [
@@ -3688,7 +3688,7 @@
           "relationship": "RELATED",
           "reproduced": true,
           "license": "Apache-2.0",
-          "build_environment": "leanprover/lean4:v4.31.0; Mathlib fabf563a7c95a166b8d7b6efca11c8b4dc9d911f; atlas IN_TREE",
+          "build_environment": "leanprover/lean4:v4.33.0; Mathlib db584cd6d46c92f209a44c0f1c829460d327499d; atlas IN_TREE",
           "declarations": [
             "AISafetyAtlas.Inference.InferenceDevice",
             "AISafetyAtlas.Inference.IsProbe",
@@ -3924,10 +3924,10 @@
         {
           "framework": "Lean",
           "repository": "https://github.com/FormalizedFormalLogic/Foundation",
-          "version": "b47cf447255addf88a5d72781d0d29641948eb6e",
+          "version": "30a16ffa93d79d73ab4d02427fa00f50e039bf29",
           "reproduced": true,
           "license": "Apache-2.0",
-          "build_environment": "leanprover/lean4:v4.31.0; Foundation@b47cf447255addf88a5d72781d0d29641948eb6e",
+          "build_environment": "leanprover/lean4:v4.33.0; Foundation@30a16ffa93d79d73ab4d02427fa00f50e039bf29",
           "build_command": "lake build AISafetyAtlas",
           "module": "Foundation.FirstOrder.Incompleteness.Löb",
           "declaration": "LO.FirstOrder.Arithmetic.löb_theorem",
@@ -4181,7 +4181,7 @@
           "relationship": "RELATED",
           "reproduced": true,
           "license": "Apache-2.0",
-          "build_environment": "leanprover/lean4:v4.31.0; mathlib@fabf563a7c95a166b8d7b6efca11c8b4dc9d911f",
+          "build_environment": "leanprover/lean4:v4.33.0; mathlib@db584cd6d46c92f209a44c0f1c829460d327499d",
           "build_command": "lake build AISafetyAtlas.Verification.Robot AISafetyAtlas.Examples.Verification.Robot",
           "scope_delta": {
             "summary": "Lean packages the switching construction as SwitchingConstruction and machine-checks only the reduction half; the paper's SPA syntax, its Definition 3 non-triviality construction, and the paced Turing-machine simulation are not mechanized. Bridge is REVIEWED while the formalization stays RELATED.",
@@ -4393,7 +4393,7 @@
           "declaration": "Skalse.skalse_theorem1 (proofs/GoodhartProofs/Skalse/Theorem1.lean); also skalse_theorem3, skalse_corollary3, and a potential-shaping layer (ng_vstar_shaped, ng_qstar_shaped, ng_shaping_preserves_optimal, ng_necessity_lemma3) over a FiniteMDP/Bellman development",
           "inspection_state": "REPRODUCED",
           "relationship_review": "RELATED",
-          "notes": "Strongest of four Lean leads found by manual GitHub search on 2026-07-28; outside the six pinned corpora. Formalizes Skalse et al., 'Defining and Characterizing Reward Hacking' (NeurIPS 2022), with policies as occupancy vectors and value as an inner product (value R F = sum_i R i * F i); definitions checked non-degenerate at source level. Also carries Ng, Harada & Russell (1999) potential-based shaping over a FiniteMDP/Bellman development. Its ng_necessity_lemma3 proves an algebraic action-dependent ordering reversal, not the full Ng necessity theorem; an earlier note here overstated that. Independently built 2026-07-28 in an isolated elan 4.2.3 toolchain at the repository's own pins (Lean v4.30.0-rc2, Mathlib 9268b22206b0425419498769f780a91dee03bcf3) with 'lake exe cache get' then 'lake build': completed successfully, 3313 jobs, exit 0. Axiom audit via 'lake env lean' on skalse_theorem1, skalse_theorem3_only_if, skalse_corollary3, ng_vstar_shaped, ng_qstar_shaped and ng_shaping_preserves_optimal reports only [propext, Classical.choice, Quot.sound] for each; no sorryAx. RELATED rather than EXACT/EQUIVALENT: a reward-hacking characterization is not a formalization of the Goodhart/Strathern statement this row records. Not usable as atlas coverage without resolving version skew (atlas pins Lean v4.31.0 and Mathlib fabf563a7c95a166b8d7b6efca11c8b4dc9d911f). Companion paper (Sheridan 2026) is self-published and not peer reviewed; maintenance is unproven. The MDP/Bellman/shaping layer is a candidate Lean-native substrate for BY-039."
+          "notes": "Strongest of four Lean leads found by manual GitHub search on 2026-07-28; outside the six pinned corpora. Formalizes Skalse et al., 'Defining and Characterizing Reward Hacking' (NeurIPS 2022), with policies as occupancy vectors and value as an inner product (value R F = sum_i R i * F i); definitions checked non-degenerate at source level. Also carries Ng, Harada & Russell (1999) potential-based shaping over a FiniteMDP/Bellman development. Its ng_necessity_lemma3 proves an algebraic action-dependent ordering reversal, not the full Ng necessity theorem; an earlier note here overstated that. Independently built 2026-07-28 in an isolated elan 4.2.3 toolchain at the repository's own pins (Lean v4.30.0-rc2, Mathlib 9268b22206b0425419498769f780a91dee03bcf3) with 'lake exe cache get' then 'lake build': completed successfully, 3313 jobs, exit 0. Axiom audit via 'lake env lean' on skalse_theorem1, skalse_theorem3_only_if, skalse_corollary3, ng_vstar_shaped, ng_qstar_shaped and ng_shaping_preserves_optimal reports only [propext, Classical.choice, Quot.sound] for each; no sorryAx. RELATED rather than EXACT/EQUIVALENT: a reward-hacking characterization is not a formalization of the Goodhart/Strathern statement this row records. Not usable as atlas coverage without resolving version skew (atlas pins Lean v4.33.0 and Mathlib db584cd6d46c92f209a44c0f1c829460d327499d). Companion paper (Sheridan 2026) is self-published and not peer reviewed; maintenance is unproven. The MDP/Bellman/shaping layer is a candidate Lean-native substrate for BY-039."
         },
         {
           "repository": "https://github.com/RichardZandi/Impossibility",
@@ -4485,7 +4485,7 @@
           "relationship": "RELATED",
           "reproduced": true,
           "license": "Apache-2.0",
-          "build_environment": "leanprover/lean4:v4.31.0; mathlib@fabf563a7c95a166b8d7b6efca11c8b4dc9d911f",
+          "build_environment": "leanprover/lean4:v4.33.0; mathlib@db584cd6d46c92f209a44c0f1c829460d327499d",
           "build_command": "lake build AISafetyAtlas.Wireheading.CRMDP AISafetyAtlas.Examples.SixTargets",
           "scope_delta": {
             "summary": "One fixed deterministic transition rather than a class ranging over stochastic kernels; extrema supplied as structure fields rather than derived; a continuous reward interval rather than the source's finite uniform reward grid.",
@@ -4669,7 +4669,7 @@
           "relationship": "RELATED",
           "reproduced": true,
           "license": "Apache-2.0",
-          "build_environment": "leanprover/lean4:v4.31.0; mathlib@fabf563a7c95a166b8d7b6efca11c8b4dc9d911f",
+          "build_environment": "leanprover/lean4:v4.33.0; mathlib@db584cd6d46c92f209a44c0f1c829460d327499d",
           "build_command": "lake build AISafetyAtlas.Compositional.Symmetry",
           "scope_delta": {
             "summary": "The Angluin-style inductive core only, over an assumed symmetric configuration: simplified port routing, no full covering theory, no randomized symmetry breaking. Do not infer BY-043 from the A3 dependency alone.",
@@ -4745,7 +4745,7 @@
           "relationship": "EQUIVALENT",
           "reproduced": true,
           "license": "Apache-2.0",
-          "build_environment": "leanprover/lean4:v4.31.0; Mathlib fabf563a7c95a166b8d7b6efca11c8b4dc9d911f; atlas IN_TREE",
+          "build_environment": "leanprover/lean4:v4.33.0; Mathlib db584cd6d46c92f209a44c0f1c829460d327499d; atlas IN_TREE",
           "declarations": [
             "AISafetyAtlas.SelfAwareness.Model",
             "AISafetyAtlas.SelfAwareness.AgentAware",
@@ -4855,7 +4855,7 @@
           "relationship": "EQUIVALENT",
           "reproduced": true,
           "license": "Apache-2.0",
-          "build_environment": "leanprover/lean4:v4.31.0; Mathlib fabf563a7c95a166b8d7b6efca11c8b4dc9d911f; atlas IN_TREE",
+          "build_environment": "leanprover/lean4:v4.33.0; Mathlib db584cd6d46c92f209a44c0f1c829460d327499d; atlas IN_TREE",
           "declarations": [
             "AISafetyAtlas.Inference.ImageValue",
             "AISafetyAtlas.Inference.SetupBlock",
@@ -4946,7 +4946,7 @@
           "relationship": "EQUIVALENT",
           "reproduced": true,
           "license": "Apache-2.0",
-          "build_environment": "leanprover/lean4:v4.31.0; Mathlib fabf563a7c95a166b8d7b6efca11c8b4dc9d911f; atlas IN_TREE",
+          "build_environment": "leanprover/lean4:v4.33.0; Mathlib db584cd6d46c92f209a44c0f1c829460d327499d; atlas IN_TREE",
           "declarations": [
             "AISafetyAtlas.Inference.boolImplies",
             "AISafetyAtlas.Inference.TrueOn",
@@ -5027,7 +5027,7 @@
           "relationship": "EQUIVALENT",
           "reproduced": true,
           "license": "Apache-2.0",
-          "build_environment": "leanprover/lean4:v4.31.0; Mathlib fabf563a7c95a166b8d7b6efca11c8b4dc9d911f; atlas IN_TREE",
+          "build_environment": "leanprover/lean4:v4.33.0; Mathlib db584cd6d46c92f209a44c0f1c829460d327499d; atlas IN_TREE",
           "declarations": [
             "AISafetyAtlas.Inference.identityDevice",
             "AISafetyAtlas.Inference.identityDevice_weaklyInfers",
@@ -5126,7 +5126,7 @@
           "version": "IN_TREE",
           "license": "Apache-2.0",
           "reproduced": true,
-          "build_environment": "leanprover/lean4:v4.31.0; Mathlib fabf563a7c95a166b8d7b6efca11c8b4dc9d911f; atlas IN_TREE",
+          "build_environment": "leanprover/lean4:v4.33.0; Mathlib db584cd6d46c92f209a44c0f1c829460d327499d; atlas IN_TREE",
           "declarations": [
             "AISafetyAtlas.Inference.corollary21_ii_repaired",
             "AISafetyAtlas.Inference.KnowsEvent",
@@ -5185,14 +5185,14 @@
         {
           "framework": "Lean",
           "repository": "https://github.com/leanprover-community/mathlib4",
-          "version": "fabf563a7c95a166b8d7b6efca11c8b4dc9d911f",
+          "version": "db584cd6d46c92f209a44c0f1c829460d327499d",
           "module": "Mathlib.Logic.Function.Basic",
           "atlas_module": "AISafetyAtlas.Logic",
           "declaration": "Function.exists_fixed_point_of_surjective",
           "relationship": "EQUIVALENT",
           "reproduced": true,
           "license": "Apache-2.0",
-          "build_environment": "leanprover/lean4:v4.31.0; mathlib@fabf563a7c95a166b8d7b6efca11c8b4dc9d911f",
+          "build_environment": "leanprover/lean4:v4.33.0; mathlib@db584cd6d46c92f209a44c0f1c829460d327499d",
           "build_command": "lake build AISafetyAtlas.Logic; python3 scripts/check_print_axioms.py"
         }
       ],
@@ -5262,7 +5262,7 @@
           "version": "7ec3ef9813a7642fdabe5b73c71d1bed4d5488e2",
           "license": "Apache-2.0",
           "reproduced": true,
-          "build_environment": "leanprover/lean4:v4.31.0; vendored DASH core at upstream Lean v4.29.0-rc8 pin",
+          "build_environment": "leanprover/lean4:v4.33.0; vendored DASH core at upstream Lean v4.29.0-rc8 pin",
           "module": "DASHImpossibility.Trilemma",
           "atlas_module": "AISafetyAtlas.Explainability",
           "build_command": "lake build AISafetyAtlas (vendored axiom-free trilemma)"
@@ -5349,7 +5349,7 @@
           "version": "mbrcic/SocialChoiceLean port/lean-4.31 @ 74f491b (Mathlib/Lean v4.31.0)",
           "license": "MIT",
           "reproduced": true,
-          "build_environment": "leanprover/lean4:v4.31.0; Mathlib/Lean v4.31.0",
+          "build_environment": "leanprover/lean4:v4.33.0; Mathlib db584cd6d46c92f209a44c0f1c829460d327499d",
           "declaration": "gibbard_satterthwaite",
           "module": "SocialChoice.Impossibilities.GibbardSatterthwaite.Main",
           "atlas_module": "AISafetyAtlas.SocialChoice",
@@ -5551,7 +5551,7 @@
         "oversight",
         "computational-complexity"
       ],
-      "notes": "CT-7 (2026-07-20): machine-checked correctness of the stochastic-oracle debate protocol, arXiv 2311.14125. Both reproduction lanes are recorded: Path A builds upstream at its own toolchain (Lean/Mathlib v4.8.0) from a separate checkout; Path B (2026-08-20) vendors the Lean v4.31.0 port into AISafetyAtlas/Upstream/Debate/, where it compiles inside the atlas build closure behind the facade AISafetyAtlas.Oversight.Debate and adds the query-complexity half (alice_fast, bob_fast, vera_fast) that Path A never checked. The port is a toolchain migration only: no theorem weakened, generalized, or removed. The facade is deliberately NOT on the root import - the vendored tree declares roughly 157 root-namespace names - so root_import stays false and the kernel axiom audit reaches it through OFF_ROOT_FACADES in scripts/check_print_axioms.py. The Lipschitz hypothesis is witnessed in-tree by every_oracle_lipschitz_zero, proved here rather than vendored. Upstream caveats carried unchanged: correctness only (space complexity not formalized); time counts oracle queries only; Lipschitz oracle machine defined as a stronger variant. No AI-system reading without a separate reviewed bridge. Evidence: docs/provenance/debate-reproduction.md, vendor/debate/PROVENANCE.md. Possibility / scalable-oversight guarantee, not a Table-1 impossibility row - a live landscape anchor dual to the impossibility rows. No survey coverage.",
+      "notes": "CT-7 (2026-07-20): machine-checked correctness of the stochastic-oracle debate protocol, arXiv 2311.14125. Both reproduction lanes are recorded: Path A builds upstream at its own toolchain (Lean/Mathlib v4.8.0) from a separate checkout; Path B (2026-08-20) vendors the LukaHobor Lean v4.31.0 port into AISafetyAtlas/Upstream/Debate/, migrated in place to v4.33.0 on 2026-08-31, where it compiles inside the atlas build closure behind the facade AISafetyAtlas.Oversight.Debate and adds the query-complexity half (alice_fast, bob_fast, vera_fast) that Path A never checked. The port is a toolchain migration only: no theorem weakened, generalized, or removed. The facade is deliberately NOT on the root import - the vendored tree declares roughly 157 root-namespace names - so root_import stays false and the kernel axiom audit reaches it through OFF_ROOT_FACADES in scripts/check_print_axioms.py. The Lipschitz hypothesis is witnessed in-tree by every_oracle_lipschitz_zero, proved here rather than vendored. Upstream caveats carried unchanged: correctness only (space complexity not formalized); time counts oracle queries only; Lipschitz oracle machine defined as a stronger variant. No AI-system reading without a separate reviewed bridge. Evidence: docs/provenance/debate-reproduction.md, vendor/debate/PROVENANCE.md. Possibility / scalable-oversight guarantee, not a Table-1 impossibility row - a live landscape anchor dual to the impossibility rows. No survey coverage.",
       "original_source_refs": [],
       "related_result_ids": [],
       "root_import": false,
@@ -5578,7 +5578,7 @@
           "version": "dafe25df02300c0ebecf436aab32e953006cb0a1 (LukaHobor/debate port-lean-4.31; upstream de3a6e500ae1a65dfeea2f91ef519ebad9704be0)",
           "license": "Apache-2.0",
           "reproduced": true,
-          "build_environment": "leanprover/lean4:v4.31.0; Mathlib fabf563a7c95a166b8d7b6efca11c8b4dc9d911f; vendored into the atlas build closure",
+          "build_environment": "leanprover/lean4:v4.33.0; Mathlib db584cd6d46c92f209a44c0f1c829460d327499d; vendored into the atlas build closure",
           "declarations": [
             "completeness",
             "soundness",
@@ -5705,7 +5705,7 @@
           "version": "IN_TREE",
           "license": "Apache-2.0",
           "reproduced": true,
-          "build_environment": "leanprover/lean4:v4.31.0; Mathlib fabf563a7c95a166b8d7b6efca11c8b4dc9d911f; atlas IN_TREE",
+          "build_environment": "leanprover/lean4:v4.33.0; Mathlib db584cd6d46c92f209a44c0f1c829460d327499d; atlas IN_TREE",
           "declarations": [
             "k_safety_iff_finite_self_composition",
             "k_safety_iff_product_self_composition",
@@ -5765,7 +5765,7 @@
           "version": "IN_TREE",
           "license": "Apache-2.0",
           "reproduced": true,
-          "build_environment": "leanprover/lean4:v4.31.0; Mathlib fabf563a7c95a166b8d7b6efca11c8b4dc9d911f; atlas IN_TREE",
+          "build_environment": "leanprover/lean4:v4.33.0; Mathlib db584cd6d46c92f209a44c0f1c829460d327499d; atlas IN_TREE",
           "declarations": [
             "runFor_eq_of_view_eq",
             "invariant_of_automorphism",
@@ -5816,7 +5816,7 @@
           "version": "IN_TREE",
           "license": "Apache-2.0",
           "reproduced": true,
-          "build_environment": "leanprover/lean4:v4.31.0; Mathlib fabf563a7c95a166b8d7b6efca11c8b4dc9d911f; atlas IN_TREE",
+          "build_environment": "leanprover/lean4:v4.33.0; Mathlib db584cd6d46c92f209a44c0f1c829460d327499d; atlas IN_TREE",
           "declarations": [
             "rectangle_iff_exchange_closed",
             "coordinate_product_iff_spliceClosed",
@@ -5867,7 +5867,7 @@
           "version": "IN_TREE",
           "license": "Apache-2.0",
           "reproduced": true,
-          "build_environment": "leanprover/lean4:v4.31.0; Mathlib fabf563a7c95a166b8d7b6efca11c8b4dc9d911f; atlas IN_TREE",
+          "build_environment": "leanprover/lean4:v4.33.0; Mathlib db584cd6d46c92f209a44c0f1c829460d327499d; atlas IN_TREE",
           "declarations": [
             "AgentEquations.value_eq_of_agree_on_window",
             "AgentEquations.truncation_exact",
@@ -5929,7 +5929,7 @@
           "license": "Apache-2.0",
           "relationship": "RELATED",
           "reproduced": true,
-          "build_environment": "leanprover/lean4:v4.31.0; Mathlib fabf563a7c95a166b8d7b6efca11c8b4dc9d911f; atlas IN_TREE",
+          "build_environment": "leanprover/lean4:v4.33.0; Mathlib db584cd6d46c92f209a44c0f1c829460d327499d; atlas IN_TREE",
           "declarations": [
             "GoalPreservationSource.Model.selected_matches_initial",
             "GoalPreservationSource.Model.safe_modification",
@@ -5999,7 +5999,7 @@
           "version": "IN_TREE",
           "license": "Apache-2.0",
           "reproduced": true,
-          "build_environment": "leanprover/lean4:v4.31.0; Mathlib fabf563a7c95a166b8d7b6efca11c8b4dc9d911f; atlas IN_TREE",
+          "build_environment": "leanprover/lean4:v4.33.0; Mathlib db584cd6d46c92f209a44c0f1c829460d327499d; atlas IN_TREE",
           "declarations": [
             "covers_iff_no_collision",
             "not_covers_of_collisionWitness",
@@ -6099,7 +6099,7 @@
           "version": "IN_TREE",
           "license": "Apache-2.0",
           "reproduced": true,
-          "build_environment": "leanprover/lean4:v4.31.0; Mathlib fabf563a7c95a166b8d7b6efca11c8b4dc9d911f; atlas IN_TREE",
+          "build_environment": "leanprover/lean4:v4.33.0; Mathlib db584cd6d46c92f209a44c0f1c829460d327499d; atlas IN_TREE",
           "declarations": [
             "AISafetyAtlas.Knowledge.SelfReference.SelfState",
             "AISafetyAtlas.Knowledge.SelfReference.selfRead",
@@ -6180,7 +6180,7 @@
           "version": "IN_TREE",
           "license": "Apache-2.0",
           "reproduced": true,
-          "build_environment": "leanprover/lean4:v4.31.0; Mathlib fabf563a7c95a166b8d7b6efca11c8b4dc9d911f; atlas IN_TREE",
+          "build_environment": "leanprover/lean4:v4.33.0; Mathlib db584cd6d46c92f209a44c0f1c829460d327499d; atlas IN_TREE",
           "declarations": [
             "AISafetyAtlas.Knowledge.pairTarget",
             "AISafetyAtlas.Knowledge.ambiguity_le_pairTarget_left",
@@ -6270,7 +6270,7 @@
           "version": "IN_TREE",
           "license": "Apache-2.0",
           "reproduced": true,
-          "build_environment": "leanprover/lean4:v4.31.0; Mathlib fabf563a7c95a166b8d7b6efca11c8b4dc9d911f; atlas IN_TREE",
+          "build_environment": "leanprover/lean4:v4.33.0; Mathlib db584cd6d46c92f209a44c0f1c829460d327499d; atlas IN_TREE",
           "declarations": [
             "AISafetyAtlas.Knowledge.fibre",
             "AISafetyAtlas.Knowledge.ambiguity",
@@ -6356,7 +6356,7 @@
           "version": "IN_TREE",
           "license": "Apache-2.0",
           "reproduced": true,
-          "build_environment": "leanprover/lean4:v4.31.0; Mathlib fabf563a7c95a166b8d7b6efca11c8b4dc9d911f; atlas IN_TREE",
+          "build_environment": "leanprover/lean4:v4.33.0; Mathlib db584cd6d46c92f209a44c0f1c829460d327499d; atlas IN_TREE",
           "declarations": [
             "AISafetyAtlas.Knowledge.Temporal.KnowableFrom",
             "AISafetyAtlas.Knowledge.Temporal.KnowableAt",
@@ -6478,7 +6478,7 @@
           "version": "IN_TREE",
           "license": "Apache-2.0",
           "reproduced": true,
-          "build_environment": "leanprover/lean4:v4.31.0; Mathlib fabf563a7c95a166b8d7b6efca11c8b4dc9d911f; atlas IN_TREE",
+          "build_environment": "leanprover/lean4:v4.33.0; Mathlib db584cd6d46c92f209a44c0f1c829460d327499d; atlas IN_TREE",
           "declarations": [
             "AISafetyAtlas.Knowledge.knowable_id_iff_injective",
             "AISafetyAtlas.Knowledge.not_knowable_state_of_nontrivial_remainder",
@@ -6543,7 +6543,7 @@
           "license": "Apache-2.0",
           "reproduced": true,
           "relationship": "EQUIVALENT",
-          "build_environment": "leanprover/lean4:v4.31.0; Mathlib fabf563a7c95a166b8d7b6efca11c8b4dc9d911f; atlas IN_TREE",
+          "build_environment": "leanprover/lean4:v4.33.0; Mathlib db584cd6d46c92f209a44c0f1c829460d327499d; atlas IN_TREE",
           "declarations": [
             "AISafetyAtlas.Knowledge.Embedded.ReadingSet",
             "AISafetyAtlas.Knowledge.Embedded.ReadingSet.singleton",
@@ -6679,7 +6679,7 @@
           "license": "Apache-2.0",
           "reproduced": true,
           "relationship": "RELATED",
-          "build_environment": "leanprover/lean4:v4.31.0; Mathlib fabf563a7c95a166b8d7b6efca11c8b4dc9d911f; atlas IN_TREE",
+          "build_environment": "leanprover/lean4:v4.33.0; Mathlib db584cd6d46c92f209a44c0f1c829460d327499d; atlas IN_TREE",
           "declarations": [
             "AISafetyAtlas.Knowledge.Embedded.Composition.knowable_whole_state_iff_injective",
             "AISafetyAtlas.Knowledge.Embedded.Composition.properInclusion_iff_not_injective",
@@ -6809,7 +6809,7 @@
           "version": "IN_TREE",
           "license": "Apache-2.0",
           "reproduced": true,
-          "build_environment": "leanprover/lean4:v4.31.0; Mathlib fabf563a7c95a166b8d7b6efca11c8b4dc9d911f; atlas IN_TREE",
+          "build_environment": "leanprover/lean4:v4.33.0; Mathlib db584cd6d46c92f209a44c0f1c829460d327499d; atlas IN_TREE",
           "declarations": [
             "AISafetyAtlas.Knowledge.Knowable",
             "AISafetyAtlas.Knowledge.IndistinguishabilityWitness",
@@ -6915,7 +6915,7 @@
           "version": "IN_TREE",
           "license": "Apache-2.0",
           "reproduced": true,
-          "build_environment": "leanprover/lean4:v4.31.0; Mathlib fabf563a7c95a166b8d7b6efca11c8b4dc9d911f; atlas IN_TREE",
+          "build_environment": "leanprover/lean4:v4.33.0; Mathlib db584cd6d46c92f209a44c0f1c829460d327499d; atlas IN_TREE",
           "declarations": [
             "AISafetyAtlas.Knowledge.Devices.deviceObservation",
             "AISafetyAtlas.Knowledge.Devices.BlockAnswers",
@@ -7001,7 +7001,7 @@
           "version": "IN_TREE",
           "license": "Apache-2.0",
           "reproduced": true,
-          "build_environment": "leanprover/lean4:v4.31.0; Mathlib fabf563a7c95a166b8d7b6efca11c8b4dc9d911f; atlas IN_TREE",
+          "build_environment": "leanprover/lean4:v4.33.0; Mathlib db584cd6d46c92f209a44c0f1c829460d327499d; atlas IN_TREE",
           "declarations": [
             "AISafetyAtlas.Wireheading.ObservationLimits.observedHistory",
             "AISafetyAtlas.Wireheading.ObservationLimits.trueReturn",
@@ -7060,7 +7060,7 @@
           "version": "IN_TREE",
           "license": "Apache-2.0",
           "reproduced": true,
-          "build_environment": "leanprover/lean4:v4.31.0; Mathlib fabf563a7c95a166b8d7b6efca11c8b4dc9d911f; PFR 38e94172b72c8ee8ad64b6365dfc22e559c62ebe; atlas IN_TREE",
+          "build_environment": "leanprover/lean4:v4.33.0; Mathlib db584cd6d46c92f209a44c0f1c829460d327499d; PFR 7d6404b79b11b1a89dd1b6f997a10b14c208c4ed; atlas IN_TREE",
           "declarations": [
             "fano_of_log_le",
             "fano",
@@ -7147,7 +7147,7 @@
           "version": "IN_TREE",
           "license": "Apache-2.0",
           "reproduced": true,
-          "build_environment": "leanprover/lean4:v4.31.0; Mathlib fabf563a7c95a166b8d7b6efca11c8b4dc9d911f; atlas IN_TREE",
+          "build_environment": "leanprover/lean4:v4.33.0; Mathlib db584cd6d46c92f209a44c0f1c829460d327499d; atlas IN_TREE",
           "declarations": [
             "Forces",
             "not_forces_of_card_lt",
@@ -7231,7 +7231,7 @@
           "version": "IN_TREE",
           "license": "Apache-2.0",
           "reproduced": true,
-          "build_environment": "leanprover/lean4:v4.31.0; Mathlib fabf563a7c95a166b8d7b6efca11c8b4dc9d911f; PFR 38e94172b72c8ee8ad64b6365dfc22e559c62ebe; atlas IN_TREE",
+          "build_environment": "leanprover/lean4:v4.33.0; Mathlib db584cd6d46c92f209a44c0f1c829460d327499d; PFR 7d6404b79b11b1a89dd1b6f997a10b14c208c4ed; atlas IN_TREE",
           "declarations": [
             "condEntropy_eq_zero_of_knowable",
             "not_knowable_of_condEntropy_ne_zero",
@@ -7301,7 +7301,7 @@
           "version": "IN_TREE",
           "license": "Apache-2.0",
           "reproduced": true,
-          "build_environment": "leanprover/lean4:v4.31.0; Mathlib fabf563a7c95a166b8d7b6efca11c8b4dc9d911f; PFR 38e94172b72c8ee8ad64b6365dfc22e559c62ebe; atlas IN_TREE",
+          "build_environment": "leanprover/lean4:v4.33.0; Mathlib db584cd6d46c92f209a44c0f1c829460d327499d; PFR 7d6404b79b11b1a89dd1b6f997a10b14c208c4ed; atlas IN_TREE",
           "declarations": [
             "isMarkovChain_iff_measure_factorizes_singleton",
             "measure_preimage_inter_eq_tsum",
@@ -7408,7 +7408,7 @@
           "version": "IN_TREE",
           "license": "Apache-2.0",
           "reproduced": true,
-          "build_environment": "leanprover/lean4:v4.31.0; Mathlib fabf563a7c95a166b8d7b6efca11c8b4dc9d911f; atlas IN_TREE",
+          "build_environment": "leanprover/lean4:v4.33.0; Mathlib db584cd6d46c92f209a44c0f1c829460d327499d; atlas IN_TREE",
           "declarations": [
             "AISafetyAtlas.Causal.InterventionalFamily",
             "AISafetyAtlas.Causal.ConditionalTables",
@@ -7469,7 +7469,7 @@
           "version": "IN_TREE",
           "license": "Apache-2.0",
           "reproduced": true,
-          "build_environment": "leanprover/lean4:v4.31.0; Mathlib fabf563a7c95a166b8d7b6efca11c8b4dc9d911f; atlas IN_TREE",
+          "build_environment": "leanprover/lean4:v4.33.0; Mathlib db584cd6d46c92f209a44c0f1c829460d327499d; atlas IN_TREE",
           "declarations": [
             "AISafetyAtlas.Causal.DecisionNetwork",
             "AISafetyAtlas.Causal.DecisionPolicy",
@@ -7552,7 +7552,7 @@
           "version": "IN_TREE",
           "license": "Apache-2.0",
           "reproduced": true,
-          "build_environment": "leanprover/lean4:v4.31.0; Mathlib fabf563a7c95a166b8d7b6efca11c8b4dc9d911f; atlas IN_TREE",
+          "build_environment": "leanprover/lean4:v4.33.0; Mathlib db584cd6d46c92f209a44c0f1c829460d327499d; atlas IN_TREE",
           "declarations": [
             "LocalIntervention",
             "InterventionProfile",
@@ -7768,7 +7768,7 @@
           "version": "IN_TREE",
           "license": "Apache-2.0",
           "reproduced": true,
-          "build_environment": "leanprover/lean4:v4.31.0; Mathlib fabf563a7c95a166b8d7b6efca11c8b4dc9d911f; atlas IN_TREE",
+          "build_environment": "leanprover/lean4:v4.33.0; Mathlib db584cd6d46c92f209a44c0f1c829460d327499d; atlas IN_TREE",
           "declarations": [
             "AISafetyAtlas.Causal.Policy",
             "AISafetyAtlas.Causal.Policy.ext",
@@ -7943,7 +7943,7 @@
           "version": "IN_TREE",
           "license": "Apache-2.0",
           "reproduced": true,
-          "build_environment": "leanprover/lean4:v4.31.0; Mathlib fabf563a7c95a166b8d7b6efca11c8b4dc9d911f; atlas IN_TREE",
+          "build_environment": "leanprover/lean4:v4.33.0; Mathlib db584cd6d46c92f209a44c0f1c829460d327499d; atlas IN_TREE",
           "declarations": [
             "AISafetyAtlas.Causal.SCM",
             "AISafetyAtlas.Causal.wellFounded_of_rank",

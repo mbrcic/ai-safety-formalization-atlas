@@ -376,7 +376,7 @@ public theorem colDegree_le {k n m : ℕ} [NeZero m] (hkm : k < m)
       (by rw [hrb]; exact hs.2) p hp
   · have hempty : {t : Fin m | B.col j ≠ 0 ∧ B.col j ∈ windowSpan k A t} = ∅ := by
       ext s
-      simp only [Set.mem_setOf_eq, Set.mem_empty_iff_false, iff_false]
+      simp only [Set.mem_ofPred_eq, Set.mem_empty_iff_false, iff_false]
       exact fun hs => hne ⟨s, hs⟩
     simp [colDegree, hempty]
 
@@ -395,7 +395,7 @@ public theorem exists_smul_col_of_colDegree_eq {k n m : ℕ} [NeZero m] (hk1 : 1
     by_contra hc
     have hempty : {t : Fin m | B.col j ≠ 0 ∧ B.col j ∈ windowSpan k A t} = ∅ := by
       ext s
-      simp only [Set.mem_setOf_eq, Set.mem_empty_iff_false, iff_false]
+      simp only [Set.mem_ofPred_eq, Set.mem_empty_iff_false, iff_false]
       exact fun hs => hc ⟨s, hs⟩
     rw [colDegree, hempty] at hpos
     simp at hpos
@@ -596,7 +596,7 @@ private theorem mul_permMatrix_diagonal_apply {n m : ℕ} (A : Matrix (Fin n) (F
     (σ : Equiv.Perm (Fin m)) (d : Fin m → ℝ) (i : Fin n) (b : Fin m) :
     (A * σ.permMatrix ℝ * Matrix.diagonal d) i b = A i (σ.symm b) * d b := by
   rw [Matrix.mul_assoc, Matrix.mul_apply]
-  simp only [permMatrix_mul_diagonal_apply, Equiv.apply_eq_iff_eq_symm_apply,
+  simp only [permMatrix_mul_diagonal_apply, ← Equiv.eq_symm_apply,
     mul_ite, mul_zero, Finset.sum_ite_eq', Finset.mem_univ, if_true]
 
 /-- The column identity of Step 4, as the matrix factorisation print asks for. -/
@@ -1003,7 +1003,7 @@ public theorem exists_subset_windowSpan_le_of_not_badBlock {n m k : ℕ} [NeZero
     refine ⟨⟨⟨r, by omega⟩, ((fun i => (σ' i : Fin m)), f)⟩, ⟨j₀, ?_⟩, ?_⟩
     · simp only [choiceNormal]
       exact hf
-    · rw [sum_choiceNormal hkm]
+    · refine (sum_choiceNormal hkm _ _ _ _ _).trans ?_
       refine borderedMinor_eq_zero_of_mem_span _ _ ?_
       rw [show (Set.range fun i : Fin (⟨r, by omega⟩ : Fin (k + 1)).1 =>
           (A * C).col ((σ' i : Fin m)))
@@ -1166,14 +1166,14 @@ public theorem measurableSet_badPiece {n m k : ℕ} [NeZero m] (hkm : k ≤ m) (
       ((Fin n → Fin m → ℝ) × (Fin m → (Fin (m ^ 2 + 1) × Fin k → ℝ))) |
       ∀ ℓ, ε ≤ |choiceNormal hkm (Matrix.of p.2.1) t (D ℓ)
         (Matrix.of fun a b => p.1 (a, b)) (jj ℓ)|} := by
-    rw [Set.setOf_forall]
+    rw [Set.ofPred_forall]
     exact isClosed_iInter fun ℓ => isClosed_le continuous_const (hcont ℓ (jj ℓ)).abs
   have h2 : IsClosed {p : (Fin m × Fin m → ℝ) ×
       ((Fin n → Fin m → ℝ) × (Fin m → (Fin (m ^ 2 + 1) × Fin k → ℝ))) |
       ∀ ℓ, ∑ j, p.2.2 t (ℓ, j)
         * choiceNormal hkm (Matrix.of p.2.1) t (D ℓ)
             (Matrix.of fun a b => p.1 (a, b)) j = 0} := by
-    rw [Set.setOf_forall]
+    rw [Set.ofPred_forall]
     refine isClosed_iInter fun ℓ => isClosed_eq (continuous_finsetSum _ fun j _ => ?_)
       continuous_const
     exact Continuous.mul
@@ -1219,7 +1219,7 @@ public theorem measurableSet_badPair {n m k : ℕ} [NeZero m] (hkm : k ≤ m) :
                     * choiceNormal hkm (Matrix.of x.1) t (D ℓ)
                         (Matrix.of fun p q => C (p, q)) j = 0} := by
     ext x
-    simp only [Set.mem_setOf_eq, Set.mem_iUnion]
+    simp only [Set.mem_ofPred_eq, Set.mem_iUnion]
     constructor
     · rintro ⟨t, hbad⟩
       obtain ⟨D, C, h1, h2⟩ := (badBlock_iff_flat hkm _ t (fun q => x.2 t q)).1 hbad
@@ -1297,7 +1297,7 @@ public theorem ae_ae_not_badBlock {n m k : ℕ} [NeZero m] (hk1 : 1 ≤ k) (hkm 
   rw [MeasureTheory.ae_iff]
   refine measure_mono_null ?_ hcs
   intro A hA
-  simp only [Set.mem_setOf_eq, not_forall, not_not] at hA
+  simp only [Set.mem_ofPred_eq, not_forall, not_not] at hA
   exact hA
 
 open MeasureTheory AISafetyAtlas.Conjectures.MAIS in
@@ -1361,7 +1361,7 @@ public theorem o38PolynomialSampleCandidate_of_forcing
                   ForcingData k (Matrix.of A) B) :
     o38PolynomialSampleCandidate := by
   intro m k hm hk1 hkm
-  haveI : NeZero m := ⟨by omega⟩
+  have : NeZero m := ⟨by omega⟩
   obtain ⟨x, hx, hae⟩ := h m k hm hk1 hkm
   refine ⟨x, hx, fun n hn => ?_⟩
   filter_upwards [hae n hn] with A hforce hspark
@@ -1378,12 +1378,12 @@ public theorem o38PolynomialSampleCandidate_holds : o38PolynomialSampleCandidate
   classical
   refine o38PolynomialSampleCandidate_of_forcing ?_
   intro m k hm hk1 hkm
-  haveI : NeZero m := ⟨by omega⟩
+  have : NeZero m := ⟨by omega⟩
   -- Lemma 8: one coefficient array serves every `n` and almost every dictionary
   obtain ⟨cs, hcs⟩ : ∃ cs : Fin m → (Fin (m ^ 2 + 1) × Fin k → ℝ), ∀ n : ℕ,
       ∀ᵐ A : Fin n → Fin m → ℝ,
         ∀ t, ¬ BadBlock hkm.le (Matrix.of A) t (fun ℓ j => cs t (ℓ, j)) := by
-    haveI : (MeasureTheory.ae
+    have : (MeasureTheory.ae
         (volume : Measure (Fin m → (Fin (m ^ 2 + 1) × Fin k → ℝ)))).NeBot :=
       MeasureTheory.ae_neBot.2 (volume_ne_zero_pi_pi _ _)
     exact (MeasureTheory.ae_all_iff.2

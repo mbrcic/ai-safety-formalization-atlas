@@ -321,7 +321,7 @@ public instance instMeasurableSingletonClassModel :
               {M' : Model C dim ℝ | M'.cpt c a v = M.cpt c a v} := by
       ext M'
       simp only [Set.mem_singleton_iff, Set.mem_inter_iff, Set.mem_iInter,
-        Set.mem_setOf_eq]
+        Set.mem_ofPred_eq]
       constructor
       · rintro rfl
         exact ⟨rfl, fun _ _ _ ↦ rfl⟩
@@ -443,7 +443,7 @@ private theorem measurableSet_floor_eq {ε : ℝ} (c : C) (a : Fin (dim c))
   have heq : {M : Model C dim ℝ | ⌊M.cpt c a v / ε⌋ = n}
       = (fun M : Model C dim ℝ ↦ M.cpt c a v / ε) ⁻¹' Set.Ico (n : ℝ) (n + 1) := by
     ext M
-    simp only [Set.mem_setOf_eq, Set.mem_preimage, Set.mem_Ico]
+    simp only [Set.mem_ofPred_eq, Set.mem_preimage, Set.mem_Ico]
     exact Int.floor_eq_iff
   rw [heq]
   exact ((measurable_cpt c a v).div_const ε) measurableSet_Ico
@@ -456,7 +456,7 @@ private theorem measurableSet_roundKey_eq {ε : ℝ}
           ⋂ c : C, ⋂ a : Fin (dim c), ⋂ v : Assignment C dim,
             {M : Model C dim ℝ | ⌊M.cpt c a v / ε⌋ = k.2 c a v} := by
     ext M
-    simp only [Set.mem_setOf_eq, Set.mem_inter_iff, Set.mem_iInter, Model.roundKey,
+    simp only [Set.mem_ofPred_eq, Set.mem_inter_iff, Set.mem_iInter, Model.roundKey,
       Prod.ext_iff]
     constructor
     · rintro ⟨hp, hf⟩
@@ -475,14 +475,14 @@ public theorem measurable_roundDown {ε : ℝ} (hε : 0 < ε) :
   classical
   rcases isEmpty_or_nonempty (Model C dim ℝ) with hE | hN
   · exact fun s _ ↦ Subsingleton.measurableSet
-  · letI : MeasurableSpace ((C → Finset C) ×
+  · let : MeasurableSpace ((C → Finset C) ×
       ((c : C) → Fin (dim c) → Assignment C dim → ℤ)) := ⊤
     have hkey : Measurable fun M : Model C dim ℝ ↦ M.roundKey ε := by
       intro t _
       have heq : (fun M : Model C dim ℝ ↦ M.roundKey ε) ⁻¹' t
           = ⋃ k ∈ t, {M : Model C dim ℝ | M.roundKey ε = k} := by
         ext M
-        simp only [Set.mem_preimage, Set.mem_iUnion, Set.mem_setOf_eq, exists_prop]
+        simp only [Set.mem_preimage, Set.mem_iUnion, Set.mem_ofPred_eq, exists_prop]
         exact ⟨fun h ↦ ⟨_, h, rfl⟩, fun ⟨k, hk, hkey⟩ ↦ hkey ▸ hk⟩
       rw [heq]
       exact MeasurableSet.biUnion t.to_countable fun k _ ↦ measurableSet_roundKey_eq k

@@ -52,7 +52,7 @@ double-counting.
   `scripts/reproduce_chaitin.sh`.
 - **Gödel I/II, Tarski, Löb:** Lake dependency
   `FormalizedFormalLogic/Foundation` @
-  `b47cf447255addf88a5d72781d0d29641948eb6e` (Apache-2.0). Modules under
+  `30a16ffa93d79d73ab4d02427fa00f50e039bf29` (Apache-2.0). Modules under
   `Foundation.FirstOrder.Incompleteness.{First,Second,Tarski,Löb}`.
 - **Lawvere:** Mathlib declaration
   `Function.exists_fixed_point_of_surjective` at the repository's pinned

@@ -53,6 +53,11 @@ universe u v w t
 
 /-! ## Evidence architecture -/
 
+-- `linter.checkUnivs` (new at Lean v4.33) observes that these universes only
+-- occur together and could be merged. Merging them changes a public
+-- declaration's universe parameters, which is a statement change rather than
+-- a toolchain fix; it is not made as part of a version bump.
+set_option linter.checkUnivs false in
 /--
 A multi-principal evidence architecture.
 
@@ -138,6 +143,11 @@ public theorem observe_truthful
 
 /-! ## Candidate families -/
 
+-- `linter.checkUnivs` (new at Lean v4.33) observes that these universes only
+-- occur together and could be merged. Merging them changes a public
+-- declaration's universe parameters, which is a statement change rather than
+-- a toolchain fix; it is not made as part of a version bump.
+set_option linter.checkUnivs false in
 /--
 An indexed family of candidates.
 

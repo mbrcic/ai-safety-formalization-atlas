@@ -136,7 +136,7 @@ violating system exhibits a finite bad observation.
 -/
 public theorem isClosed_iff_hyperSafety (H : Hyperproperty Trace) :
     @IsClosed _ (prefixTopology prefixOf) H ↔ IsHyperSafetyOp prefixOf H := by
-  letI : TopologicalSpace (TraceSystem Trace) := prefixTopology prefixOf
+  let : TopologicalSpace (TraceSystem Trace) := prefixTopology prefixOf
   rw [← isOpen_compl_iff]
   constructor
   · intro hopen S hS
@@ -154,7 +154,7 @@ realizable finite observation is realized by some system satisfying it.
 -/
 public theorem dense_iff_hyperLiveness (H : Hyperproperty Trace) :
     @Dense _ (prefixTopology prefixOf) H ↔ IsHyperLivenessOp prefixOf H := by
-  letI : TopologicalSpace (TraceSystem Trace) := prefixTopology prefixOf
+  let : TopologicalSpace (TraceSystem Trace) := prefixTopology prefixOf
   rw [dense_iff_inter_open]
   constructor
   · intro hdense M hM
@@ -197,7 +197,7 @@ public theorem hyperSafety_hyperLiveness_decomposition (H : Hyperproperty Trace)
       IsHyperSafetyOp prefixOf safetyPart ∧
         IsHyperLivenessOp prefixOf livenessPart ∧
         H = safetyPart ∩ livenessPart := by
-  letI : TopologicalSpace (TraceSystem Trace) := prefixTopology prefixOf
+  let : TopologicalSpace (TraceSystem Trace) := prefixTopology prefixOf
   obtain ⟨C, D, hC, hD, hCD⟩ := topological_decomposition H
   refine ⟨C, D, ?_, ?_, hCD⟩
   · exact (isClosed_iff_hyperSafety prefixOf C).mp hC

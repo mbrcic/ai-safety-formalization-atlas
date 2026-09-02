@@ -228,7 +228,7 @@ public theorem chaitinBound (hU : isOptimalConditional U) :
       rw [h_match]
     have h_low : (2^k : ENat) < plainKNat U (g k) := by
       rw [hg_val]
-      exact lt_trans (ENat.coe_lt_coe.mpr h_gt) h_sound
+      exact lt_trans (ENat.natCast_lt_natCast.mpr h_gt) h_sound
     have h_top :
         plainKNat U (g k) ≤ (programLength (Nat.bits k) : ENat) + (cTotal : ENat) := by
       have h1 := h_bound_g (Nat.bits k)

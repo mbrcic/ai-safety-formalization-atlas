@@ -1,9 +1,25 @@
 # Project State
 
-Updated: 2026-08-30
+Updated: 2026-09-02
 
 **Unreleased work in progress.** `v0.7.0` below is still the last published
 release and nothing here supersedes it.
+
+**The toolchain is Lean v4.33.0 as of 2026-08-31, and that bump is what this
+branch is for.** Mathlib `db584cd6`, with PFR `7d6404b7` and Foundation
+`30a16ffa` re-pinned to revisions that resolve against it, replacing `v4.31.0`
+and `fabf563a`. It buys one thing: `Causalean` is on v4.33.0, so depending on it
+for the d-separation the causal layer lacks becomes a choice to cost rather than
+a second migration. Proofs changed and statements did not — 262 graded
+signatures and 1703 public names unchanged, the axiom audit covering the same
+2847 declarations name for name against the pre-migration tree, and every one of
+the 31 statement-level differences classified: a Mathlib class rename, six
+`deriving Fintype` instances written out because the upstream handler does not
+elaborate at this revision, two `linter.checkUnivs` suppressions that refuse a
+public universe-signature change, and one added private helper. The evidence,
+the four `by`-block adjudications a textual check cannot settle, and what is owed
+back are in
+[`toolchain-v4330-migration.md`](docs/provenance/toolchain-v4330-migration.md).
 
 **A causal-inference layer is what this tree adds most recently, and it is in no
 release.** Fourteen library modules and fifteen worked-example modules under

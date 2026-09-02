@@ -145,8 +145,9 @@ surjectivity obligation of the kind §4a of the formalization skill describes.
 ## Library capability, with the searches
 
 Both claims below were checked by grep against the Mathlib source tree the atlas
-builds from — `lake-manifest.json` rev `fabf563a7c95a166b8d7b6efca11c8b4dc9d911f`
-(`v4.31.0`) — not from documentation or memory.
+builds from — `lake-manifest.json` rev `db584cd6d46c92f209a44c0f1c829460d327499d`
+(`v4.33.0`; `fabf563a…`/`v4.31.0` when this was written) — not from documentation
+or memory.
 
 **Mathlib has no `MeasureSpace` instance on `Matrix`.**
 

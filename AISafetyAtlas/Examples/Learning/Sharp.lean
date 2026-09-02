@@ -98,7 +98,9 @@ public theorem nfl_fails_off_permInvariant :
       = observedValue (fun i => (id : Fin 2 → Fin 2) (querySecond i)) :=
     weightedPerformance_pointMass id observedValue querySecond
   rw [hfirst, hsecond]
+  -- `norm_num` now stops at the embedding application rather than reducing it.
   norm_num [observedValue, queryFirst, querySecond]
+  decide
 
 /-! ## A proper prior that satisfies it -/
 

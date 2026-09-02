@@ -133,7 +133,7 @@ GitHub Codespaces or any [Dev Container](.devcontainer/devcontainer.json).
 
 Build from the committed manifest; do not run `lake update` unless you are
 deliberately bumping a dependency (it re-resolves floating revisions off the
-pinned set and can break the Lean 4.31 build).
+pinned set and can break the Lean 4.33 build).
 
 Every proof here checks all the way to the Lean kernel — that's what lets you
 build on someone else's result without re-reading the proof text. Lean changes

@@ -9,6 +9,7 @@ on:
   pull_request:
   schedule:
     - cron: '0 6 * * 1'  # weekly Mon 06:00 UTC — catch Mathlib CDN / toolchain drift
+    - cron: '15 3 * * *'  # nightly 03:15 UTC — leanchecker, on the self-hosted runner
   workflow_dispatch:
 
 permissions:
@@ -27,6 +28,11 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
+          # check_migration_adjudicated.py reads lean-toolchain at the recorded
+          # baseline commit to decide whether this branch is a toolchain bump.
+          # A depth-1 checkout does not have that commit, and a check that
+          # cannot see its baseline would skip exactly when it is needed.
+          fetch-depth: 0
       # The gate skips tests/ when pytest is absent so a contributor without it
       # still gets every other check. CI installs it, so the skip never applies
       # here and the shape suite is not optional on a pull request. PyYAML is
@@ -62,11 +68,23 @@ jobs:
   # Lean build + axioms only when Lean toolchain or sources change.
   lean:
     needs: agent-gate
-    runs-on: ubuntu-latest
+    # Ordinary runs stay on the shared ubuntu-latest pool. Release tags, manual
+    # runs, and the nightly leanchecker cron move to the self-hosted runner
+    # (labels: self-hosted, leanchecker): leanchecker's cost tracks a module's
+    # import closure, and the worst single module needs more memory than a
+    # GitHub-hosted runner provides. See the leanchecker step below.
+    runs-on: >-
+      ${{ (github.event_name == 'workflow_dispatch' || startsWith(github.ref, 'refs/tags/v') ||
+           github.event.schedule == '15 3 * * *')
+          && fromJSON('["self-hosted", "leanchecker"]') || 'ubuntu-latest' }}
     # 30 minutes for ordinary runs, so a hung PR build is caught quickly. Only
-    # release tags and manual runs get the longer budget, and they get it
-    # because the leanchecker replay below needs it -- see that step.
-    timeout-minutes: ${{ (github.event_name == 'workflow_dispatch' || startsWith(github.ref, 'refs/tags/v')) && 75 || 30 }}
+    # release tags, manual runs, and the nightly leanchecker cron get the
+    # longer budget, and they get it because the leanchecker replay below
+    # needs it -- see that step.
+    timeout-minutes: >-
+      ${{ (github.event_name == 'workflow_dispatch' || startsWith(github.ref, 'refs/tags/v') ||
+           github.event.schedule == '15 3 * * *')
+          && 75 || 30 }}
     outputs:
       run_lean: ${{ steps.filter.outputs.run_lean }}
     steps:
@@ -150,6 +168,89 @@ jobs:
       - name: Kernel axiom check for headline declarations
         if: steps.filter.outputs.run_lean == 'true'
         run: python3 scripts/check_print_axioms.py
+      # The step above decides *what* to audit with two regexes over source
+      # text, and nothing checked that they reach what they claim to. They did
+      # not: `PUBLIC_THEOREM_RE` rejected a leading attribute, so every
+      # `@[simp] public theorem` -- 51 of them -- was collected by nothing and
+      # never passed to `#print axioms`. The count stayed plausible and the
+      # v4.33.0 migration's name-for-name comparison stayed green, because both
+      # sides were computed by the same regex and shared the hole.
+      #
+      # This step reaches the same surface by a different route: it walks the
+      # elaborated environment, drops what the compiler generated, and checks
+      # the axioms of everything else with `Lean.collectAxioms`. So it is both
+      # an independent second implementation of the audit and the thing that
+      # keeps the first one honest.
+      - name: Axiom audit reaches the whole public surface
+        if: steps.filter.outputs.run_lean == 'true'
+        run: python3 scripts/check_audit_coverage.py
+      # A third implementation of the same question, and the only one this
+      # repository did not write. `axiom-audit` has been in lake-manifest.json
+      # the whole time -- inherited through Foundation's lakefile -- and was
+      # referenced by nothing here, so two hand-rolled scanners were carrying a
+      # check an upstream tool already performs.
+      #
+      # `--modules-from` is not optional. The atlas root does not transitively
+      # import the whole library (that is what scripts/lean_build_targets.txt
+      # exists for), and auditing by root import reaches 5957 declarations
+      # against 9439 for the module sweep -- 3482 of them off-root, which is
+      # where the awkward material lives. Auditing the root alone would have
+      # looked like the broadest check here while being the narrowest.
+      - name: Axiom audit (upstream tool, independent of our scanners)
+        if: steps.filter.outputs.run_lean == 'true'
+        run: lake exe axiom-audit --root AISafetyAtlas --modules-from AISafetyAtlas
+      # `check_elaboration_drift.py --classify` sorts all 171 declarations whose
+      # elaborated type changed while their printed type did not into eleven
+      # substitution classes. That accounting is mechanical, but whether a class
+      # preserves meaning is a human verdict, and failure inside a class is
+      # correlated: if the `Monoid.toPow` verdict is wrong, all 75 declarations
+      # under it are wrong together. The file below states each class as a
+      # definitional equality the kernel settles, turning those verdicts into
+      # obligations it can check.
+      #
+      # Ungated: about four seconds against a Mathlib the steps above have already
+      # built. Expect it to go red eventually -- it fails when a later toolchain
+      # breaks an equality one of the adjudications rests on, which is the drift
+      # nothing else here can see. Re-adjudicate the class; do not delete the
+      # anchor.
+      - name: Elaboration-drift adjudications still hold at the pinned toolchain
+        if: steps.filter.outputs.run_lean == 'true'
+        run: lake env lean docs/provenance/elaboration-adjudication-v4310-v4330.lean
+      # The adjudications above settle the migration that has already happened.
+      # This settles the one nobody has declared: every check in this repository
+      # that could notice a statement changing meaning reads source, and the
+      # dangerous change is the one where the source does not move. An upstream
+      # rename behind an alias, a different instance chosen, a definition made
+      # reducible -- the text is identical, the build is green, the axiom audit
+      # still says proved, of something else. A Mathlib rebuild against a moved
+      # CDN artifact produces exactly this and nothing else here would see it.
+      #
+      # So: elaborate this tree, hold it to the recorded v4.33.0 baseline, and
+      # fail on the one bucket an ordinary branch can be held to. `--fatal
+      # silent` is the whole reason this is gateable. Adding, removing or
+      # visibly editing a statement is what a branch is for and would make a
+      # plain --compare red on every ordinary PR, which is why it was left
+      # unwired; but a declaration whose printed type is unchanged cannot have
+      # changed meaning through an edit, so a silent change is never work
+      # anyone asked for.
+      #
+      # Expect it to go red on a toolchain bump. That is correct and is the
+      # point: re-adjudicate the silent set, re-dump the baseline, and record
+      # the classes. Do not widen the flag.
+      #
+      # Cost: the dump elaborates the whole environment, measured at 342 s and
+      # 2.2 GB on an idle 12-core host against a tree the steps above have
+      # already built; a two-core hosted runner is slower. That is the largest
+      # single step on an ordinary pull request, so read it against this job's
+      # 30-minute budget before adding anything else here.
+      - name: No statement changed meaning behind an unchanged printed type
+        if: steps.filter.outputs.run_lean == 'true'
+        run: |
+          set -euo pipefail
+          dump="$RUNNER_TEMP/elab-current.json"
+          python3 scripts/check_elaboration_drift.py --dump "$dump" --raw
+          python3 scripts/check_elaboration_drift.py \
+            --compare docs/status/elab-baseline-v4330.json "$dump" --fatal silent
       # Independent kernel re-verification, strictly stronger than the axiom
       # check above: that one asks which axioms a declaration depends on, this
       # one replays every declaration the atlas compiled through the kernel and
@@ -167,33 +268,30 @@ jobs:
       # declares gets replayed. Passing no module argument would instead walk
       # every olean on the search path, Lean core included.
       #
-      # RELEASE TAGS AND MANUAL RUNS ONLY -- never on a pull request, a push to
-      # main, or the weekly schedule. Measured 2026-08-28 on a warm local tree:
-      # replaying the 318 atlas modules ran past 15 minutes without finishing,
-      # against 4 s for a no-op build and ~40 s for the axiom check. On a CI
-      # runner it is slower. `ROADMAP_IDEAS.md` §6.1.1 called this "one CI line"
-      # and "the single cheapest item in the file"; the line is cheap and the
-      # run is not, and wiring it into development would stall every PR.
+      # RELEASE TAGS, MANUAL RUNS, AND THE NIGHTLY CRON -- never on a pull
+      # request, a push to main, or the weekly drift schedule. The replay takes
+      # tens of minutes against 4 s for a no-op build and ~40 s for the axiom
+      # check, so wiring it into every PR would stall development regardless of
+      # runner.
       #
-      # Release-gating is also the honest scope for what it buys: the claim it
-      # supports is "this published artifact is independently re-verified",
-      # which is a property of a release, not of a work-in-progress branch.
+      # The nightly cron is what keeps it honest. Release tags are rare enough
+      # that gating on them alone leaves the step effectively unrun, and an
+      # unrun check is one that breaks silently and is discovered at the worst
+      # moment.
       - name: Independent kernel re-verification (leanchecker)
-        timeout-minutes: 45
+        # 90 minutes, not 45: one process per module is what keeps peak memory
+        # bounded, and it costs wall clock -- 239 modules in 1961 s. Passing
+        # every module to one `leanchecker` instead pays the union of their
+        # import closures and is OOM-killed, as is every 24-module chunk. The
+        # script reports its own peak on every run; see
+        # docs/provenance/toolchain-v4330-migration.md for the measured figures.
+        timeout-minutes: 90
         if: >-
           steps.filter.outputs.run_lean == 'true' &&
           (github.event_name == 'workflow_dispatch' ||
-           startsWith(github.ref, 'refs/tags/v'))
-        run: |
-          set -euo pipefail
-          mods=$(find .lake/build/lib/lean -name '*.olean' -printf '%P\n' \
-            | sed 's|\.olean$||; s|/|.|g' | sort)
-          if [ -z "$mods" ]; then
-            echo "No atlas oleans found — the build step did not produce them." >&2
-            exit 1
-          fi
-          echo "Re-verifying $(printf '%s\n' "$mods" | wc -l) atlas modules."
-          lake env leanchecker $mods
+           startsWith(github.ref, 'refs/tags/v') ||
+           github.event.schedule == '15 3 * * *')
+        run: bash scripts/kernel_replay.sh
       # The reuse report is the atlas's own primitives criterion as a number,
       # and it is what `docs/agent/INDEX.md` sends an agent to when it wants to
       # know what depends on a declaration. It used to take minutes -- a regex
@@ -209,15 +307,11 @@ jobs:
           git diff --exit-code --stat -- docs/status/consumers.json
           git diff --exit-code -- docs/status/consumers.json
 
-      # Split from the assertions below because the two costs are wildly
-      # different and were previously indistinguishable. Measured 2026-08-29:
-      # this step takes 261-307 s across five runs, including a scheduled run
-      # where nothing changed and the olean cache should have hit -- while the
-      # same build is 3.8 s locally on a warm tree, and running the nine models
-      # against the built binary is 0.49 s. So ~5 minutes of every CI run, about
-      # 47% of the whole thing, is here and unexplained. Timing the build
-      # separately says whether it is elaboration or the link of a 120 MB
-      # Mathlib-inclusive binary, which decides what, if anything, to do.
+      # Timed separately from the assertions below, because this build dominates
+      # the Lean job's wall clock -- far more than the model checks it feeds --
+      # and the two costs are indistinguishable when they run as one step.
+      # Timing it alone says whether the cost is elaboration or the link of a
+      # large Mathlib-inclusive binary.
       - name: Build atlas-check (timed separately -- see comment)
         if: steps.filter.outputs.run_lean == 'true'
         run: |

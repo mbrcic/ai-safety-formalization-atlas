@@ -75,7 +75,16 @@ public inductive Principal
   | dataOwner
   /-- Holds the model checkpoint and its access policy. -/
   | modelOwner
-  deriving DecidableEq, Fintype
+  deriving DecidableEq
+
+-- `deriving Fintype` is broken at the pinned Mathlib revision: the generated
+-- instance hands `Finset.mk` a `List.Nodup` proof where `Multiset.Nodup` is
+-- wanted, so it does not elaborate. Reproduced outside this repository in three
+-- lines. The instance is written out until that is fixed upstream; `decide`
+-- and `Finset.univ` behave identically either way.
+public instance : Fintype Principal where
+  elems := {Principal.dataOwner, Principal.modelOwner}
+  complete := by intro x; cases x <;> simp
 
 /-- The four executions, indexed by the two relational bits. -/
 public inductive Exec
@@ -87,7 +96,16 @@ public inductive Exec
   | sigma01
   /-- Restricted dataset, restricted checkpoint. -/
   | sigma11
-  deriving DecidableEq, Fintype
+  deriving DecidableEq
+
+-- `deriving Fintype` is broken at the pinned Mathlib revision: the generated
+-- instance hands `Finset.mk` a `List.Nodup` proof where `Multiset.Nodup` is
+-- wanted, so it does not elaborate. Reproduced outside this repository in three
+-- lines. The instance is written out until that is fixed upstream; `decide`
+-- and `Finset.univ` behave identically either way.
+public instance : Fintype Exec where
+  elems := {Exec.sigma00, Exec.sigma10, Exec.sigma01, Exec.sigma11}
+  complete := by intro x; cases x <;> simp
 
 /-- Whether the training dataset is access restricted in this execution. -/
 @[expose] public def datasetRestricted : Exec → Bool

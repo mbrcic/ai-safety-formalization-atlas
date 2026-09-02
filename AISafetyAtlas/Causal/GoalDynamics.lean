@@ -269,7 +269,7 @@ public theorem measurableSet_satisfies (π : GoalPolicy S A) :
               ({ω : ℕ → S | IsAchievementTime α (fun t ↦ statePairs π ω (k + t)) T} ∩
                 {ω : ℕ → S | Satisfies rest fun t ↦ statePairs π ω (k + T + 1 + t)}) := by
         ext ω
-        simp only [Satisfies, Set.mem_setOf_eq, Set.mem_iUnion, Set.mem_inter_iff,
+        simp only [Satisfies, Set.mem_ofPred_eq, Set.mem_iUnion, Set.mem_inter_iff,
           ← Nat.add_assoc]
       rw [hset]
       exact MeasurableSet.iUnion fun T ↦

@@ -36,27 +36,21 @@ fi
 # --fast (--lean is the old name, still accepted) skips the five steps that
 # exercise the validator scripts themselves.
 #
-# CORRECTION, 2026-08-29.  This comment used to claim those five "take no input
-# from AISafetyAtlas/ or docs/", so "a Lean edit cannot change their verdict".
-# That is false and was the stated reason the lane is safe.  test_validators
-# copies registry.yaml, conjectures.yaml, tasks.yaml, formalization-search.json,
-# AISafetyAtlas.lean, the whole AISafetyAtlas/ tree and several docs/ trees into
-# a temporary tree and runs the validators against them; test_source_neutral_views
-# reads the live registry; the a1-a3 harness reads a reproduction script and
-# provenance documents; and tests/ reaches declaration locations and repository
-# Markdown.  Repository content is an input to all of them.
+# Those five are NOT independent of repository content, and the lane must not be
+# justified that way.  test_validators copies registry.yaml, conjectures.yaml,
+# tasks.yaml, formalization-search.json, AISafetyAtlas.lean, the whole
+# AISafetyAtlas/ tree and several docs/ trees into a temporary tree and runs the
+# validators against them; test_source_neutral_views reads the live registry;
+# the a1-a3 harness reads a reproduction script and provenance documents; and
+# tests/ reaches declaration locations and repository Markdown.
 #
-# So the lane is justified by *when* it is used, not by independence: it is the
-# retry after a failure inside one edit cycle, and the full gate is owed before
-# the commit regardless -- non-negotiable if scripts/, tests/ or a ledger schema
-# was touched.  A green --fast is not a green change.
+# The lane is justified by *when* it is used: it is the retry after a failure
+# inside one edit cycle, and the full gate is owed before the commit regardless
+# -- non-negotiable if scripts/, tests/ or a ledger schema was touched.  A green
+# --fast is not a green change.
 #
-# Cost, measured 2026-08-29: test_validators is ~12 s, down from ~53 s.  Two
-# implementation fixes, no check removed: the Lean masker stopped scanning a
-# character at a time, and the import-line regex stopped running under re.M
-# where its leading \s* consumed newlines.  Whole-gate numbers on this machine
-# vary by roughly threefold run to run, so they are not quoted here: measure,
-# do not inherit a number.
+# Run times vary by roughly threefold between runs, so no figure is quoted here:
+# measure, do not inherit a number.
 # Everything that reads the tree, the ledgers, or the generated views still
 # runs.  See AGENTS.md "Validation" for when the full gate is mandatory.
 skip_self_tests() { [ "$lean_only" = 1 ]; }
@@ -115,11 +109,53 @@ python3 scripts/check_coverage_audit.py
 
 # Advisory: reports Wider/Beyond rows with no worked witness. Never blocks —
 # it produces a worklist, and most unwitnessed rows are fine.
+#
+# Truncated with `awk`, never `head`. This script runs under `pipefail`, and
+# `head` closes the pipe as soon as it has its lines: the writer then takes
+# SIGPIPE, Python turns that into a BrokenPipeError, and an *advisory* check
+# fails the whole gate for having had too much to say. `awk` reads its input to
+# the end, so the truncation stays a display choice. `check_scope_witnesses`
+# already prints 44 lines and grows with the registry, so this is the live case.
 echo "==> check_statement_freeze (advisory)"
-python3 scripts/check_statement_freeze.py | head -20
+python3 scripts/check_statement_freeze.py | awk 'NR <= 20'
 
 echo "==> check_scope_witnesses (advisory)"
-python3 scripts/check_scope_witnesses.py | head -1
+python3 scripts/check_scope_witnesses.py | awk 'NR <= 1'
+
+# Advisory: says what a branch did to statements as opposed to proofs. On a
+# feature branch new theorems are the point, so this never blocks; run it with
+# --fail-on-drift for a toolchain migration, where the answer should be none.
+# Skipped when origin/main is not fetched, as in a shallow CI checkout.
+echo "==> check_statement_drift (advisory)"
+if git rev-parse --verify --quiet origin/main >/dev/null; then
+  # Both summary lines matter: an adjudication is a declaration the tool cannot
+  # classify, and printing only the first line would hide whichever came second.
+  python3 scripts/check_statement_drift.py --ref origin/main \
+    | grep -E "^(adjudicate|statement drift)" || true
+else
+  echo "check_statement_drift skipped: origin/main is not available in this checkout"
+fi
+
+# Blocking, and the only check here that is. The advisory above never blocks
+# because a feature branch is supposed to add statements; a toolchain bump is
+# not, and the flag written for that case was never wired to anything. This
+# decides which situation it is from lean-toolchain rather than from intent, and
+# passes untouched on an ordinary branch.
+echo "==> check_migration_adjudicated"
+python3 scripts/check_migration_adjudicated.py
+
+# The silent elaboration changes a migration records rest on substitution-class
+# verdicts, and a verdict is only worth what still holds it up: a class widened,
+# a dump edited, or a regression in the classifier would leave the recorded
+# "every silent change is accounted for" true of nothing. Reading the committed
+# dumps needs no toolchain and takes a second, so the accounting is checked here
+# and not only in CI. The awk filter reads its input to the end -- `head` would
+# SIGPIPE the writer and, under pipefail, fail the gate for succeeding too
+# loudly -- and pipefail keeps the checker's own exit status.
+echo "==> check_elaboration_drift --classify"
+python3 scripts/check_elaboration_drift.py --classify \
+  docs/status/elab-baseline-v4310.json docs/status/elab-baseline-v4330.json \
+  | awk '/^elaboration classes:/ || /silent change\(s\)/ || /^check_elaboration_drift:/'
 
 echo "==> generate_non_claims --check"
 python3 scripts/generate_non_claims.py --check

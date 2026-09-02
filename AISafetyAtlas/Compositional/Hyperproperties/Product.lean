@@ -149,7 +149,7 @@ public theorem padBatch_mem_productSelfComposition {k : ℕ} {S : TraceSystem Tr
 public theorem productSelfComposition_empty {k : ℕ} (hk : 0 < k) :
     productSelfComposition k (∅ : TraceSystem Trace) = ∅ := by
   ext tup
-  simp only [productSelfComposition, Set.mem_setOf_eq, Set.mem_empty_iff_false,
+  simp only [productSelfComposition, Set.mem_ofPred_eq, Set.mem_empty_iff_false,
     iff_false, not_forall]
   exact ⟨⟨0, hk⟩, by simp⟩
 

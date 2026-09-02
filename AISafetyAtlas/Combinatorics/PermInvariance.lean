@@ -188,8 +188,11 @@ definition is about search.
 multiplicity at `y` is the number of domain points `f` sends to `y`. -/
 public theorem spectrum_eq_iff_histogram_eq [Fintype X] [DecidableEq Y]
     (f g : X → Y) : spectrum f = spectrum g ↔ histogram f = histogram g := by
-  simp only [← Sym.coe_inj, spectrum, Sym.coe_mk, Multiset.ext, funext_iff,
-    Multiset.count_map, histogram, Finset.card, Finset.filter, eq_comm]
+  -- `Sym.coe_inj` has to fire before `spectrum` unfolds: once the goal is an
+  -- equality of anonymous constructors the `Sym` type is gone and it cannot.
+  rw [← Sym.coe_inj]
+  simp only [spectrum, Sym.coe_mk, Multiset.ext, Multiset.count_map, histogram,
+    funext_iff, Finset.card, Finset.filter, eq_comm]
 
 /-- **Lemma 1, in the form the count needs.** Two objectives have the same
 spectrum exactly when one is a relabelling of the other. -/

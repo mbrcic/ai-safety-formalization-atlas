@@ -501,7 +501,7 @@ public theorem measureAnalystRisk_toMeasureEstimator [Nonempty C]
       = exactAnalystRisk sk modelClass n strategy estimator := by
   unfold measureAnalystRisk exactAnalystRisk
   refine congrArg sSup (Set.ext fun e ↦ ?_)
-  simp only [Set.mem_setOf_eq,
+  simp only [Set.mem_ofPred_eq,
     measureExpectedError_toMeasureEstimator sk _ _ strategy estimator n]
 
 /-! ## Every risk is non-negative
@@ -617,9 +617,9 @@ public theorem pmfExpect_discretize [Nonempty C] (M : Model C dim ℝ)
       = ∫ M', modelError M (M'.roundDown hε)
           ∂(estimator sk history : MeasureTheory.Measure (Model C dim ℝ)) := by
   classical
-  haveI : Countable ↥(Set.range fun M : Model C dim ℝ ↦ M.roundDown hε) :=
+  have : Countable ↥(Set.range fun M : Model C dim ℝ ↦ M.roundDown hε) :=
     (countable_range_roundDown hε).to_subtype
-  haveI : MeasureTheory.IsProbabilityMeasure
+  have : MeasureTheory.IsProbabilityMeasure
       (MeasureTheory.Measure.map
         (fun M : Model C dim ℝ ↦ (⟨M.roundDown hε, Set.mem_range_self M⟩ :
           ↥(Set.range fun M : Model C dim ℝ ↦ M.roundDown hε)))
@@ -858,7 +858,7 @@ public theorem measureMinimalBudget_eq_exactMinimalBudget [Nonempty C]
   unfold measureMinimalBudget exactMinimalBudget
   congr 1
   ext k
-  simp only [Set.mem_setOf_eq,
+  simp only [Set.mem_ofPred_eq,
     measureMinimaxRisk_eq_exactMinimaxRisk sk modelClass _ hq hm]
 
 /-! ## The equality is unconditional where the conjectures live

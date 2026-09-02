@@ -389,7 +389,7 @@ public theorem condEntropy_ge_of_openLoopBound (μ : Measure Ω) [IsProbabilityM
     (hC : Measurable C) (hplant : IsPlant F X C Z X') {Δopen : ℝ}
     (hopen : OpenLoopBound μ F X Z Δopen) (c : K) (hc : μ (C ⁻¹' {c}) ≠ 0) :
     H[X | C ← c ; μ] - Δopen ≤ H[X' | C ← c ; μ] := by
-  haveI : IsProbabilityMeasure (μ[|C ⁻¹' {c}]) := cond_isProbabilityMeasure hc
+  have : IsProbabilityMeasure (μ[|C ⁻¹' {c}]) := cond_isProbabilityMeasure hc
   -- on the fibre the control is constant, so the plant is open-loop there
   have hae : X' =ᵐ[μ[|C ⁻¹' {c}]] fun ω => F (X ω) c (Z ω) := by
     refine ae_cond_of_forall_mem (hC (measurableSet_singleton c)) fun ω hω => ?_
@@ -467,7 +467,7 @@ public theorem measurable_plantOutcome (F : S → K → N → T)
     {X : Ω → S} {C : Ω → K} {Z : Ω → N}
     (hX : Measurable X) (hC : Measurable C) (hZ : Measurable Z) :
     Measurable (plantOutcome F X C Z) := by
-  haveI : DiscreteMeasurableSpace ((S × K) × N) :=
+  have : DiscreteMeasurableSpace ((S × K) × N) :=
     MeasurableSingletonClass.toDiscreteMeasurableSpace
   exact (Measurable.of_discrete (f := fun p : (S × K) × N => F p.1.1 p.1.2 p.2)).comp
     ((hX.prodMk hC).prodMk hZ)
@@ -674,8 +674,8 @@ public theorem minControlLoss_eq_sInf_condMutualInfo (μ : Measure Ω)
     minControlLoss μ F X Z P
       = sInf ((fun C => I[plantOutcome F X C Z : Z | ⟨X, C⟩ ; μ]) '' P) := by
   refine congrArg sInf (Set.image_congr fun C hCP => ?_)
-  haveI := hfr C hCP
-  haveI := hfr' C hCP
+  have := hfr C hCP
+  have := hfr' C hCP
   exact controlLoss_eq_condMutualInfo μ hX (hC C hCP) hZ
     (measurable_plantOutcome F hX (hC C hCP) hZ) (hpure C hCP)
 
@@ -694,8 +694,8 @@ public theorem minControlLoss_eq_sInf_mutualInfo_sub (μ : Measure Ω)
       = sInf ((fun C => I[plantOutcome F X C Z : ⟨⟨X, C⟩, Z⟩ ; μ]
           - I[plantOutcome F X C Z : ⟨X, C⟩ ; μ]) '' P) := by
   refine congrArg sInf (Set.image_congr fun C hCP => ?_)
-  haveI := hfr C hCP
-  haveI := hfr' C hCP
+  have := hfr C hCP
+  have := hfr' C hCP
   exact controlLoss_eq_mutualInfo_sub μ hX (hC C hCP) hZ
     (measurable_plantOutcome F hX (hC C hCP) hZ) (hpure C hCP)
 

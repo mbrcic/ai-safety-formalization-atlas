@@ -168,8 +168,9 @@ public abbrev Profile := (Fin 2) → (Fin 2 → Fin 2)
 @[simp] public theorem factor_id (p : ℝ) (r : Fin 2) :
     interventionFactor p id r = bernoulli p r := by
   unfold interventionFactor
-  simp [Fin.sum_univ_two]
-  fin_cases r <;> simp [bernoulli]
+  -- `simp` alone now closes this; the sum lemma and the case split are no
+  -- longer reached.
+  simp
 
 /-- A profile from its two local interventions. -/
 @[expose] public def prof (fX fY : Fin 2 → Fin 2) : Profile := ![fX, fY]
@@ -1160,7 +1161,7 @@ public theorem separatedValues_eq_union (lam t : ℝ) :
     separatedValues lam t =
       Set.Icc lam (min (1 - lam) (t - lam)) ∪ Set.Icc (max lam (t + lam)) (1 - lam) := by
   ext s
-  simp only [separatedValues, Set.mem_setOf_eq, InMarginInterval, Set.mem_union,
+  simp only [separatedValues, Set.mem_ofPred_eq, InMarginInterval, Set.mem_union,
     Set.mem_Icc, le_min_iff, max_le_iff]
   constructor
   · rintro ⟨⟨hlo, hhi⟩, habs⟩

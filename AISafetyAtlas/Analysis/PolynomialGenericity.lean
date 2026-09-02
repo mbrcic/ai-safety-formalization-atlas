@@ -36,10 +36,10 @@ The two currying transfer lemmas the last two are proved through --
 `private`. They are named nowhere outside this file, so exporting them would pin
 an API surface no consumer reads.
 
-## Why the hypothesis is `NoAtoms` on each factor rather than Haar
+## Why the hypothesis is `NullSingletonClass` on each factor rather than Haar
 
 The induction needs exactly one thing from the measure on each coordinate: that
-a *finite* set is null, which is `NoAtoms`. Stating it that way costs nothing
+a *finite* set is null, which is `NullSingletonClass`. Stating it that way costs nothing
 and makes the Gaussian and uniform cases corollaries rather than separate
 proofs; Haar on `Fin n → ℝ` follows because it is a scalar multiple of
 `volume`. `SigmaFinite` is what `MeasureTheory.Measure.pi` and Tonelli need,
@@ -96,7 +96,7 @@ section Pi
 /-- The induction, with the instance arguments made explicit so that the
 inductive step may apply it at the shifted family `fun j => μ j.succ`. -/
 private theorem ae_eval_ne_zero_pi_aux :
-    ∀ (n : ℕ) (μ : Fin n → Measure ℝ), (∀ i, SigmaFinite (μ i)) → (∀ i, NoAtoms (μ i)) →
+    ∀ (n : ℕ) (μ : Fin n → Measure ℝ), (∀ i, SigmaFinite (μ i)) → (∀ i, NullSingletonClass (μ i)) →
       ∀ p : MvPolynomial (Fin n) ℝ, p ≠ 0 →
         ∀ᵐ x ∂(Measure.pi μ), MvPolynomial.eval x p ≠ 0 := by
   intro n
@@ -104,15 +104,17 @@ private theorem ae_eval_ne_zero_pi_aux :
   | zero =>
     intro μ _ _ p hp
     filter_upwards with x
-    have hx : MvPolynomial.eval x p = MvPolynomial.isEmptyRingEquiv ℝ (Fin 0) p := by
-      simp [MvPolynomial.isEmptyRingEquiv, MvPolynomial.isEmptyAlgEquiv,
-        MvPolynomial.aeval_def, Subsingleton.elim x isEmptyElim]
-    rw [hx]
-    exact fun h => hp ((map_eq_zero_iff _ (MvPolynomial.isEmptyRingEquiv ℝ (Fin 0)).injective).1 h)
+    -- No variables to evaluate at: `p` is a constant, and it is a nonzero one.
+    -- Routing through `isEmptyRingEquiv` no longer discharges the side goal, so
+    -- the constant is named directly.
+    have hC : p = MvPolynomial.C (MvPolynomial.coeff 0 p) := MvPolynomial.eq_C_of_isEmpty p
+    have hne : MvPolynomial.coeff 0 p ≠ 0 := fun h => hp (by rw [hC, h, map_zero])
+    rw [hC, MvPolynomial.eval_C]
+    exact hne
   | succ n ih =>
     intro μ hσ hA p hp
-    haveI : ∀ i, SigmaFinite (μ i) := hσ
-    haveI : ∀ i, NoAtoms (μ i) := hA
+    have : ∀ i, SigmaFinite (μ i) := hσ
+    have : ∀ i, NullSingletonClass (μ i) := hA
     -- Split off the zeroth variable: `q` is `p` read as a univariate polynomial
     -- in `X 0` over the remaining variables.
     set q : Polynomial (MvPolynomial (Fin n) ℝ) := MvPolynomial.finSuccEquiv ℝ n p with hqdef
@@ -124,7 +126,7 @@ private theorem ae_eval_ne_zero_pi_aux :
           MvPolynomial.eval s q.leadingCoeff ≠ 0 :=
       ih (fun j => μ j.succ) (fun j => hσ _) (fun j => hA _) _ hc
     -- Off that exceptional set the specialised univariate polynomial is nonzero,
-    -- so it has finitely many roots, and `NoAtoms` makes them null.
+    -- so it has finitely many roots, and `NullSingletonClass` makes them null.
     have key :
         ∀ᵐ s ∂(Measure.pi fun j : Fin n => μ j.succ),
           ∀ᵐ y ∂(μ 0), MvPolynomial.eval (Fin.cons y s) p ≠ 0 := by
@@ -134,7 +136,7 @@ private theorem ae_eval_ne_zero_pi_aux :
           Polynomial.leadingCoeff_map_of_leadingCoeff_ne_zero _ hs]
         exact hs
       have hnull : μ 0 {y : ℝ | (q.map (MvPolynomial.eval s)).IsRoot y} = 0 :=
-        (Polynomial.finite_setOf_isRoot hmap).measure_zero _
+        (Polynomial.finite_setOfPred_isRoot hmap).measure_zero _
       have hae : ∀ᵐ y ∂(μ 0), ¬ (q.map (MvPolynomial.eval s)).IsRoot y := by
         rw [MeasureTheory.ae_iff]; simpa using hnull
       filter_upwards [hae] with y hy
@@ -169,18 +171,18 @@ private theorem ae_eval_ne_zero_pi_aux :
 /-- **A nonzero polynomial is almost everywhere nonzero**, for any product of
 atomless measures on the coordinates.
 
-`NoAtoms` is the whole content of the hypothesis: the induction needs only that
+`NullSingletonClass` is the whole content of the hypothesis: the induction needs only that
 a finite set of roots is null in each coordinate. `SigmaFinite` is what
 `MeasureTheory.Measure.pi` and the Fubini step require. -/
 public theorem ae_eval_ne_zero_pi {n : ℕ} (μ : Fin n → Measure ℝ)
-    [∀ i, SigmaFinite (μ i)] [∀ i, NoAtoms (μ i)]
+    [∀ i, SigmaFinite (μ i)] [∀ i, NullSingletonClass (μ i)]
     {p : MvPolynomial (Fin n) ℝ} (hp : p ≠ 0) :
     ∀ᵐ x ∂(Measure.pi μ), MvPolynomial.eval x p ≠ 0 :=
   ae_eval_ne_zero_pi_aux n μ inferInstance inferInstance p hp
 
 /-- The null-set form of `ae_eval_ne_zero_pi`. -/
 public theorem measure_setOf_eval_eq_zero_pi {n : ℕ} (μ : Fin n → Measure ℝ)
-    [∀ i, SigmaFinite (μ i)] [∀ i, NoAtoms (μ i)]
+    [∀ i, SigmaFinite (μ i)] [∀ i, NullSingletonClass (μ i)]
     {p : MvPolynomial (Fin n) ℝ} (hp : p ≠ 0) :
     Measure.pi μ {x : Fin n → ℝ | MvPolynomial.eval x p = 0} = 0 := by
   have := ae_eval_ne_zero_pi μ hp
@@ -254,7 +256,7 @@ public theorem volume_setOf_exists_eval_eq_zero {ι : Type*} [Fintype ι]
         {x : ι → ℝ | MvPolynomial.eval x a = 0} ∪
           {x : ι → ℝ | ∃ p ∈ t, MvPolynomial.eval x p = 0} := by
       ext x
-      simp only [List.mem_cons, Set.mem_setOf_eq, Set.mem_union]
+      simp only [List.mem_cons, Set.mem_ofPred_eq, Set.mem_union]
       constructor
       · rintro ⟨p, hp | hp, hz⟩
         · exact Or.inl (hp ▸ hz)
@@ -353,7 +355,7 @@ transported across `volume_measurePreserving_uncurry` rather than looked up. -/
 public theorem volume_ne_zero_pi_pi (ι κ : Type*) [Fintype ι] [Fintype κ] :
     (volume : Measure (ι → κ → ℝ)) ≠ 0 := by
   intro h
-  haveI := isAddHaarMeasure_volume_pi (ι × κ)
+  have := isAddHaarMeasure_volume_pi (ι × κ)
   have hpos : 0 < (volume : Measure (ι × κ → ℝ)) Set.univ :=
     isOpen_univ.measure_pos volume Set.univ_nonempty
   refine hpos.ne' ?_

@@ -207,7 +207,7 @@ public theorem exists_independent_spanning_subfamily {ι' : Type*} [Fintype ι']
       Submodule.span ℝ (Set.range (u ∘ σ)) = Submodule.span ℝ (Set.range u) := by
   classical
   obtain ⟨b, hbsub, hbspan, hbind⟩ := exists_linearIndependent ℝ (Set.range u)
-  haveI : Fintype b := Set.Finite.fintype (Set.Finite.subset (Set.finite_range u) hbsub)
+  have : Fintype b := Set.Finite.fintype (Set.Finite.subset (Set.finite_range u) hbsub)
   obtain ⟨e⟩ : Nonempty (Fin (Fintype.card b) ≃ b) := ⟨(Fintype.equivFin b).symm⟩
   have hpre : ∀ x : b, ∃ i : ι', u i = (x : Fin n → ℝ) := fun x => hbsub x.2
   choose g hg using hpre

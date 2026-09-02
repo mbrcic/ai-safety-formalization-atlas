@@ -144,9 +144,11 @@ contains observed-law statistical policy, welfare-regret, margin/overlap, and
 minimax developments. Those are genuine nearby work, but they do not supply the
 combined RE24/A2 layer searched here: arbitrary local state-map mixtures, CID
 utility and policy-oracle behavior, and the A2 identified-set/error/radius
-packaging over causal world models. Its Lean 4.33 pin also differs from the
-atlas Lean 4.31 pin, so it is a future reproduction/adapter candidate rather
-than a dependency of this increment.
+packaging over causal world models. Its Lean 4.33 pin matched the atlas's own from
+2026-08-31, so the toolchain objection recorded here is closed; it remains a
+reproduction/adapter candidate rather than a dependency of this increment,
+because the carrier mismatch and its vendored dependencies are what actually
+block a `require`.
 
 ## 6. Residual scope deltas
 

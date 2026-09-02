@@ -213,7 +213,7 @@ public theorem o31BoxSet_eq :
     o31BoxSet = Set.Ioo (3 / 10 : ℝ) (1 / 2) ×ˢ
       (Set.Ioo (3 / 20 : ℝ) (1 / 4) ×ˢ Set.Ioo (13 / 20 : ℝ) (3 / 4)) := by
   ext p
-  simp only [o31BoxSet, Set.mem_setOf_eq, O31Box, Set.mem_prod, Set.mem_Ioo]
+  simp only [o31BoxSet, Set.mem_ofPred_eq, O31Box, Set.mem_prod, Set.mem_Ioo]
 
 /-- **Its Lebesgue measure is `1/500`.** The three edge lengths are `1/5`,
 `1/10` and `1/10`. -/

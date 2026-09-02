@@ -143,7 +143,7 @@
       ],
       "method": "Case-insensitive path glob for entropy across the pinned Mathlib tree, plus symbol grep for measureEntropy, condEntropy and mutualInfo across every package under .lake/packages.",
       "found": "In Mathlib: Dynamics/TopologicalEntropy (Bowen-Dinaburg entropy of a map on a space, a different object), Analysis/SpecialFunctions/BinaryEntropy (the real function h(p)), InformationTheory/KullbackLeibler (Basic and ChainRule), InformationTheory/Hamming and Coding. No Shannon entropy of a random variable, so no conditional entropy. No match for measureEntropy, condEntropy or mutualInfo in any locally pinned package. OUTSIDE Mathlib the picture differs: the PFR project (github.com/teorth/pfr, Apache-2.0, last push 2026-07-25) carries PFR/ForMathlib/Entropy with Basic, Measure, Kernel, Group and RuzsaDist, developing Shannon entropy, conditional entropy H[X|Y] and probability-kernel entropy, with a stated intent to port to Mathlib.",
-      "scope_limits": "One corpus at one revision for the negative, plus a web-level check for the positive. PFR pins leanprover/lean4:v4.33.0-rc1 against the atlas v4.31.0, so it is a Path-A reproduction candidate rather than a dependency, and pulling it for entropy alone would import a very large tree. Not attempted, and no atlas theorem currently needs it: the counting layer LAND-AMBIG-001 covers what is needed without committing to a distribution."
+      "scope_limits": "One corpus at one revision for the negative, plus a web-level check for the positive. PFR pinned leanprover/lean4:v4.33.0-rc1 against the atlas v4.31.0 when this was written, so it was a Path-A reproduction candidate rather than a dependency; as of 2026-08-31 the atlas is on v4.33.0 and PFR is a pinned dependency, though pulling it for entropy alone would still import a very large tree. Not attempted, and no atlas theorem currently needs it: the counting layer LAND-AMBIG-001 covers what is needed without committing to a distribution."
     },
     {
       "id": "NC-007",
@@ -251,7 +251,7 @@
             ]
           },
           "review": "Causalean supplies measure-theoretic SCM and SWIG structures, hard fixSet interventions, joint and observational kernels, do-calculus, and identification. CausalSmith supplies separate observed-law statistical policy, welfare-regret, margin/overlap, and minimax developments. Reviewed candidates did not combine arbitrary local state-map mixtures with a CID utility and policy-oracle layer or A2 identified-set, model-error, and radius packaging over causal world models.",
-          "scope_limits": "One third-party Lean repository at one revision. Keyword misses do not prove absence. The checked-in library index names an older commit and Lean toolchain than the checkout, so the search used the pinned tracked source tree and treats index results as orientation only. CausalForge pins Lean 4.33.0 while the atlas pins 4.31.0; no build reproduction or adapter was attempted."
+          "scope_limits": "One third-party Lean repository at one revision. Keyword misses do not prove absence. The checked-in library index names an older commit and Lean toolchain than the checkout, so the search used the pinned tracked source tree and treats index results as orientation only. CausalForge pins Lean 4.33.0; the atlas pinned 4.31.0 when this was written and moved to 4.33.0 on 2026-08-31, so the toolchain gap recorded here is closed. No build reproduction or adapter was attempted, then or since."
         }
       ]
     }

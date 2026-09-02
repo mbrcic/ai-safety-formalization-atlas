@@ -2,7 +2,7 @@
 
 **Status: machine-checked.** Every Lean statement referenced here compiles with no
 `sorry`, `admit`, local `axiom`, `native_decide`, or `@[implemented_by]` in its
-trusted path, under Lean 4.31.0. The kernel theorems depend only on `propext`,
+trusted path, under Lean 4.33.0. The kernel theorems depend only on `propext`,
 `Classical.choice`, and `Quot.sound`.
 
 ## The question

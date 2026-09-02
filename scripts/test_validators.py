@@ -32,7 +32,13 @@ DATA = [
     "tasks.yaml",
     "docs/provenance/formalization-search.json",
 ]
-EXTRA = ["AISafetyAtlas.lean"]
+EXTRA = [
+    "AISafetyAtlas.lean",
+    # Registry validation reads the pins an in-tree `build_environment` has to
+    # agree with straight from the files Lake uses, so the copy needs them too.
+    "lean-toolchain",
+    "lake-manifest.json",
+]
 SCRIPTS = [
     "validate_registry.py",
     "validate_conjectures.py",
@@ -139,15 +145,14 @@ def synthetic_conjecture(data: dict) -> dict:
 def synthetic_blocked_conjecture(data: dict) -> dict:
     """A schema-clean `blocked` record to mutate, independent of the ledger.
 
-    Same reasoning as `synthetic_conjecture`, for the same reason it was needed
-    sooner: on 2026-08-30 the last six `blocked` rows left the ledger, because a
-    row with no `lean`, no `Prop` and no `refutation` records a coverage fact
-    that belongs in the coverage map and the source directory rather than on the
-    conjecture board. The `blocked` kind and its rules stay — the next printed
-    problem the atlas cannot state may still want one — so the rules must stay
-    tested with no live row to hang them on. Three cases below previously
-    mutated `CONJ-018`, `CONJ-019` and `CONJ-020` and would now raise
-    `StopIteration` instead of testing anything.
+    Same reasoning as `synthetic_conjecture`, and more urgent here: the ledger
+    carries no live `blocked` rows, because a row with no `lean`, no `Prop` and
+    no `refutation` records a coverage fact that belongs in the coverage map and
+    the source directory rather than on the conjecture board. The `blocked`
+    kind and its rules stay — the next printed problem the atlas cannot state
+    may still want one — so the rules must stay tested with no live row to hang
+    them on. Mutating a real id here instead would raise `StopIteration` and
+    test nothing.
     """
     data["next_id"] = 27
     data["conjectures"].insert(

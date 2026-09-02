@@ -63,7 +63,7 @@ public def knowsTrueWitness :
   · intro u huW huX
     cases u with
     | mk candidate actual =>
-      simp only [trueWorlds, target, Set.mem_setOf_eq] at huW
+      simp only [trueWorlds, target, Set.mem_ofPred_eq] at huW
       simp only [observer, selectedBlock] at huX
       subst actual
       subst candidate
@@ -81,7 +81,7 @@ public def knowsTrueWitness :
       · exact (hg h).elim
     cases u with
     | mk candidate actual =>
-      simp only [trueWorlds, target, Set.mem_setOf_eq] at huW
+      simp only [trueWorlds, target, Set.mem_ofPred_eq] at huW
       simp only [observer, selectedBlock] at huX
       subst actual
       rw [hfalse] at huX

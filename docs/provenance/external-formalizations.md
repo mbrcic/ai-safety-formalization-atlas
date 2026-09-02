@@ -125,7 +125,7 @@ theorems.
   strengthen external clarity but is not required to re-open the “unknown
   license” block.
 - Revision inspected: `7ec3ef9813a7642fdabe5b73c71d1bed4d5488e2`
-- Toolchain at pin: Lean `v4.29.0-rc8` (atlas is on `v4.31.0` — no dependency)
+- Toolchain at pin: Lean `v4.29.0-rc8` (atlas is on `v4.33.0` — no dependency)
 - Principal declaration: `DASHImpossibility.attribution_impossibility`
   in `DASHImpossibility/Trilemma.lean`
   - Under the **Rashomon property** (symmetric features admit models ranking
@@ -189,7 +189,8 @@ Brcic–Yampolskiy survey row.
 - Reproduction environment: Lean 4.31.0 and Mathlib commit
   `fabf563a7c95a166b8d7b6efca11c8b4dc9d911f`
 - Local reproduction: `vNM01.Unique` passed on 2026-07-19 (1,545 jobs) at the
-  4.31.0 pin (matching the atlas toolchain after the downgrade), with nonfatal
+  4.31.0 pin (which matched the atlas toolchain at the time; the atlas moved to
+  v4.33.0 on 2026-08-31 and this external lane was not re-run), with nonfatal
   source linter or deprecation warnings and no incomplete-proof tokens found by
   the source scan.
 - Packaging caveat: the upstream revision contains raw Lean modules but no
@@ -228,8 +229,10 @@ over a vendored import closure (see below).
   - `chaitinGeneralized`: incompleteness for any general system that can
     express all co-r.e. relations (via an `Expresses` interface).
 - Reproduction environment (pinned upstream toolchain): Lean 4.31.0 and Mathlib
-  commit `fabf563a7c95a166b8d7b6efca11c8b4dc9d911f` (`v4.31.0`). This is now
-  also the atlas's own toolchain, so the vendored closure builds in-tree at the
+  commit `fabf563a7c95a166b8d7b6efca11c8b4dc9d911f` (`v4.31.0`). This was also
+  the atlas's own toolchain when it was recorded; the atlas moved to v4.33.0 on
+  2026-08-31 and the vendored closure was migrated with it, while this external
+  lane still reproduces upstream at its own pin. The vendored closure builds at the
   same pin without source edits.
 - Local reproduction (2026-07-19):
   - trust scan over the vendored Chaitin sources: no `sorry`, `admit`, `axiom`,
@@ -294,8 +297,8 @@ dependency** (module library — no vendoring):
 - Upstream:
   [`FormalizedFormalLogic/Foundation`](https://github.com/FormalizedFormalLogic/Foundation)
 - License: Apache-2.0
-- Revision: `b47cf447255addf88a5d72781d0d29641948eb6e`
-- Toolchain: Lean 4.31.0 / Mathlib `v4.31.0` (matches the atlas pin).
+- Revision: `30a16ffa93d79d73ab4d02427fa00f50e039bf29`
+- Toolchain: Lean 4.33.0 / Mathlib `v4.33.0` (matches the atlas pin).
 
 | Survey | Module | Declaration | Relationship | Atlas alias |
 |---|---|---|---|---|

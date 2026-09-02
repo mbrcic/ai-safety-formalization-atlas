@@ -8,7 +8,7 @@
 #   (no argument)  Path A — build UPSTREAM at its own toolchain (Lean/Mathlib
 #                  v4.8.0) from a separate checkout, so it stays a check on the
 #                  upstream artifact rather than on the atlas's copy of it.
-#   --in-tree      Path B — check the vendored port inside the atlas 4.31 build
+#   --in-tree      Path B — check the vendored port inside the atlas 4.33 build
 #                  closure: trust scan, build, kernel `#print axioms`.
 #
 # Evidence for both: docs/provenance/debate-reproduction.md. Neither is headline

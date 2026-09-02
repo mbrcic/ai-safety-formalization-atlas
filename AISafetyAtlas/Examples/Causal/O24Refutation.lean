@@ -276,7 +276,11 @@ public theorem eval_spec {G : Fin 2 → Finset (Fin 2)}
   have hpt : (fun i ↦ aeval θ ((Sum.elim MvPolynomial.X fun y ↦ MvPolynomial.C (u y)) i))
       = Sum.elim θ u := by
     funext i
-    cases i <;> simp
+    -- `simp` no longer reduces `Sum.elim f g (Sum.inl a)` on its own, and the
+    -- `aeval`/`algebraMap` step needs naming too.
+    cases i <;>
+      simp only [Sum.elim_inl, Sum.elim_inr, MvPolynomial.aeval_X,
+        MvPolynomial.aeval_C, Algebra.algebraMap_self, RingHom.id_apply]
   calc eval θ (spec u q)
       = aeval θ (MvPolynomial.bind₁ (Sum.elim MvPolynomial.X fun y ↦ MvPolynomial.C (u y))
           (MvPolynomial.map (algebraMap ℚ ℝ) q)) := rfl
@@ -673,7 +677,7 @@ public theorem not_o24ExcludedSetSmall_of_spec_eq_zero
     subst hw'
     have hz : eval (Sum.elim θ u₀) (MvPolynomial.map (algebraMap ℚ ℝ) q) = 0 := by
       rw [eval_map_eq_aeval, ← eval_spec, hzero, map_zero]
-    simp only [hU, Set.mem_setOf_eq, hz, abs_zero]
+    simp only [hU, Set.mem_ofPred_eq, hz, abs_zero]
     exact hmupos
   obtain ⟨V₁, V₂, -, hV₂open, hKV₁, hV₂mem, hVU⟩ :=
     generalized_tube_lemma hKcompact isCompact_singleton hUopen hKU
@@ -691,7 +695,7 @@ public theorem not_o24ExcludedSetSmall_of_spec_eq_zero
     by_contra hno
     refine hWpos (measure_mono_null ?_ (MeasureTheory.ae_iff.mp hae))
     intro x hx
-    simp only [Set.mem_setOf_eq]
+    simp only [Set.mem_ofPred_eq]
     intro hcontra
     exact hno ⟨x, hx, hcontra⟩
   obtain ⟨w, hWw, hbnd⟩ := hexists
@@ -707,7 +711,7 @@ public theorem not_o24ExcludedSetSmall_of_spec_eq_zero
     intro θ hθ
     refine ⟨hKsub hθ, q, hq, ?_⟩
     have hin := hVU (Set.mk_mem_prod (hKV₁ hθ) hWw.1)
-    rw [hU, Set.mem_setOf_eq, eval_map_eq_aeval] at hin
+    rw [hU, Set.mem_ofPred_eq, eval_map_eq_aeval] at hin
     exact hin
   have hfinal : ENNReal.ofReal vK ≤ ENNReal.ofReal ((S : ℝ) ^ a * mu ^ b) := by
     rw [← hvolK]

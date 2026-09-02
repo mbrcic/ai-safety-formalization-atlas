@@ -151,7 +151,7 @@ change.
 - BY-013 Unprovability is covered by classical Gödel first incompleteness
   (`LO.FirstOrder.Arithmetic.exists_true_but_unprovable_sentence`,
   relationship `EQUIVALENT`) from `FormalizedFormalLogic/Foundation` @
-  `b47cf447255addf88a5d72781d0d29641948eb6e`, exposed as
+  `30a16ffa93d79d73ab4d02427fa00f50e039bf29`, exposed as
   `AISafetyAtlas.Logic.godel_first_incompleteness`. Gödel second incompleteness
   (`consistent_unprovable`, `AISafetyAtlas.Logic.godel_second_incompleteness`)
   is recorded on the same row as a `RELATED` companion. Foundation is a Lake
@@ -218,7 +218,8 @@ one up does not re-open completed work.
    needed; do not claim BY-025 is formalized.
 3. **AI-native landscape (not survey coverage):** DeepMind doubly-efficient
    debate is **reproduced and vendored** (`LAND-DEBATE-001`, CT-7): Path A
-   builds upstream at v4.8, Path B carries the Lean 4.31 port in-tree behind the
+   builds upstream at v4.8, Path B carries the Lean v4.31.0 port in-tree —
+   migrated in place to v4.33.0 on 2026-08-31 — behind the
    `AISafetyAtlas.Oversight.Debate` facade. Driver
    `scripts/reproduce_debate.sh [--in-tree]`. **Attribution impossibility** is
    **in-atlas** as `AISafetyAtlas.Explainability.attribution_impossibility`

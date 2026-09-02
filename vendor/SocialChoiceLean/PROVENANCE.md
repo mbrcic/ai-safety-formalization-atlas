@@ -21,7 +21,7 @@
 
 The GS proof is redistributed **inlined** as a single public module,
 `AISafetyAtlas/Upstream/GibbardSatterthwaite.lean` (imports Mathlib only), which
-is part of the `AISafetyAtlas` Lake library and compiles in the atlas 4.31 build
+is part of the `AISafetyAtlas` Lake library and compiles in the atlas 4.33 build
 closure. There is **no** separate `SocialChoice` Lake library and no `require` on
 this directory in `lakefile.toml`.
 

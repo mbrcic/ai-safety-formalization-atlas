@@ -269,7 +269,9 @@ public theorem figSCIM_eval_two (π : figSCIM.Policy)
         then 1 else 0 := by
   rw [SCM.eval_eq_f,
     figSCIM.withPolicy_f_notMem π (v := 2) figSCIM_notMem_decisions_two]
+  -- `simp` normalises both sides to the same term but no longer closes on it.
   simp [figSCIM, figF]
+  rfl
 
 /-- `Eπ[U]` on this SCIM is the click probability. -/
 public theorem figSCIM_expectedUtility (π : figSCIM.Policy) :
@@ -307,7 +309,10 @@ public theorem figSCIM_expectedUtility_copy : figSCIM.expectedUtility figCopy = 
     rw [figSCIM_eval_two, if_pos]
     · norm_num
     · rw [figSCIM_eval_one, figSCIM_eval_zero]
-      simp [figCopy, figSCIM_eval_zero]
+      -- `simp` unfolds `figCopy` past its anonymous constructor, which destroys
+      -- the rewrite pattern; `simp only` stops where the lemma still applies.
+      simp only [figCopy]
+      rw [figSCIM_eval_zero]
   simp only [hval, mul_one]
   exact (figSCIM.withPolicy figCopy).exoJoint_sum
 
@@ -388,6 +393,7 @@ public theorem figCut_eval_two (π : figCut.Policy)
   rw [SCM.eval_eq_f,
     figCut.withPolicy_f_notMem π (v := 2) figSCIM_notMem_decisions_two]
   simp [figCut, SCIM.removeInfoLink, figSCIM, figF]
+  rfl
 
 /-- The post the policy settles on, independent of `ε` and of the opinion. -/
 @[expose] public noncomputable def figCutChoice (π : figCut.Policy) : Fin 2 :=

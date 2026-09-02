@@ -112,7 +112,7 @@ omit [MeasurableSingletonClass K] [MeasurableSingletonClass T] [Fintype K] [Fint
 /-- **The entropy of a measure given by its atom masses.** -/
 public theorem measureEntropy_ofWeights {w : S → ℝ} (hw : w ∈ stdSimplex ℝ S) :
     Hm[ofWeights w] = ∑ x, Real.negMulLog (w x) := by
-  haveI := isProbabilityMeasure_ofWeights hw
+  have := isProbabilityMeasure_ofWeights hw
   rw [measureEntropy_of_isProbabilityMeasure_finite (A := Finset.univ) (by simp)]
   exact Finset.sum_congr rfl fun x _ => by
     rw [show (ofWeights w).real {x} = w x from congrFun (weights_ofWeights hw) x]
@@ -155,9 +155,9 @@ public theorem openLoopObjective_eq (κ : Kernel (S × K) T) [IsMarkovKernel κ]
     {w : S → ℝ} (hw : w ∈ stdSimplex ℝ S) :
     openLoopObjective κ c w = kernelOpenLoopReductionAt κ (ofWeights w) c := by
   classical
-  haveI := isProbabilityMeasure_ofWeights hw
-  haveI : IsProbabilityMeasure (κ ∘ₘ ((ofWeights w).map fun x => (x, c))) := by
-    haveI : IsProbabilityMeasure ((ofWeights w).map fun x => (x, c)) :=
+  have := isProbabilityMeasure_ofWeights hw
+  have : IsProbabilityMeasure (κ ∘ₘ ((ofWeights w).map fun x => (x, c))) := by
+    have : IsProbabilityMeasure ((ofWeights w).map fun x => (x, c)) :=
       Measure.isProbabilityMeasure_map (measurable_id.prodMk measurable_const).aemeasurable
     infer_instance
   have hin : Hm[ofWeights w] = ∑ x, Real.negMulLog (w x) := measureEntropy_ofWeights hw

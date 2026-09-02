@@ -13,6 +13,7 @@ Atlas adaptations:
 * Unanimity def only; Strategyproofness = updateProfile + ResoluteStrategyproofness
 * `@[reducible]` on class-valued ballot constructors (package warningAsError)
 * 4.31 GSShim ballot-congruence helpers from the port
+* migrated in place to Lean v4.33.0 (2026-08-31): proofs only, no statement changed
 -/
 
 module
@@ -396,7 +397,7 @@ lemma topChoice_topRank {V A : Type} [Fintype V] [Fintype A] [Nonempty A]
     (P : Profile V A) (v : V) : TopRank P v (topChoice P v) := by
   intro d hd
   unfold topChoice Prefers
-  letI := P.pref v
+  let := P.pref v
   have hle := Finset.min'_le Finset.univ d (Finset.mem_univ d)
   exact lt_of_le_of_ne hle (Ne.symm hd)
 
@@ -407,7 +408,7 @@ lemma topRank_eq_topChoice {V A : Type} [Fintype V] [Fintype A] [Nonempty A]
   have hc_beats := htop (topChoice P v) (Ne.symm hne)
   have htop_beats := topChoice_topRank P v c hne
   unfold Prefers at hc_beats htop_beats
-  letI := P.pref v
+  let := P.pref v
   exact lt_asymm hc_beats htop_beats
 
 /-- TopRank implies the candidate equals the topChoice. -/
@@ -999,7 +1000,7 @@ lemma clonedRule_strategyproof {V A : Type} [Fintype V] [Fintype A] [Nonempty A]
         exact hpref
 
       -- Get the linear order
-      letI ord := (expandProfile v₁ v₂ hne P').pref v₁
+      let ord := (expandProfile v₁ v₂ hne P').pref v₁
 
       -- Use linear order properties
       unfold Prefers at hnot_v1 hnot_v2 hpref'
@@ -1290,7 +1291,7 @@ theorem gs_case1
   have hsp4' : ¬ (P.pref v₁).lt a b := by
     simpa using hsp4
 
-  letI := P.pref v₁
+  let := P.pref v₁
   have hle1 : a ≤ b := not_lt.mp hsp1'
   have hle2 : b ≤ a := not_lt.mp hsp4'
   have hba : a = b := le_antisymm hle1 hle2
@@ -1557,7 +1558,7 @@ lemma rank_ballotWithTopTwo_top {A : Type} [Fintype A]
     (a b : A) (hcard : 2 ≤ Fintype.card A) (hab : a ≠ b) :
     rank (ballotWithTopTwo (A := A) a b hcard hab) a = 0 := by
   classical
-  letI : Nonempty A := ⟨a⟩
+  let : Nonempty A := ⟨a⟩
   let r0 : LinearOrder A := someLinearOrder A
   let e := Fintype.equivFin A
   let n := Fintype.card A
@@ -1610,7 +1611,7 @@ lemma rank_ballotWithTopTwo_second {A : Type} [Fintype A]
     (a b : A) (hcard : 2 ≤ Fintype.card A) (hab : a ≠ b) :
     rank (ballotWithTopTwo (A := A) a b hcard hab) b = 1 := by
   classical
-  letI : Nonempty A := ⟨a⟩
+  let : Nonempty A := ⟨a⟩
   let r0 : LinearOrder A := someLinearOrder A
   let e := Fintype.equivFin A
   let n := Fintype.card A
@@ -2574,8 +2575,10 @@ lemma diffVoters_updateProfile_eq_erase
   ext v
   by_cases hve : v = v₃
   · subst hve
-    simp [diffVoters, hv₁, hv₂, updateProfile]
-  · simp [diffVoters, updateProfile, hve]
+    -- Go through the membership lemma rather than unfolding `diffVoters`: once
+    -- simp unfolds it to a filter, the set-builder no longer reduces at `v`.
+    simp [diffVoters_mem_iff, hv₁, hv₂, updateProfile]
+  · simp [diffVoters_mem_iff, updateProfile, hve]
 
 /-!
 ### Step (v), one-voter change: if `v₁` is fully decisive, changing one other voter’s ballot
@@ -3174,9 +3177,9 @@ lemma clonedVotingRule_resolute
     (f : VotingRule) (hf : Resolute f) (v₁ v₂ : V) (hne : v₁ ≠ v₂) :
     Resolute (@clonedVotingRule V A0 _ _ _ f v₁ v₂ hne) := by
   intro V' A' instV' instA' instNonemptyA' P
-  letI : Fintype V' := instV'
-  letI : Fintype A' := instA'
-  letI : Nonempty A' := instNonemptyA'
+  let : Fintype V' := instV'
+  let : Fintype A' := instA'
+  let : Nonempty A' := instNonemptyA'
   classical
   by_cases hV : V' = {w : V // w ≠ v₂}
   · cases hV
@@ -3193,8 +3196,8 @@ lemma clonedVotingRule_unanimity
     (f : VotingRule) (hf_unan : Unanimity f) (v₁ v₂ : V) (hne : v₁ ≠ v₂) :
     Unanimity (@clonedVotingRule V A0 _ _ _ f v₁ v₂ hne) := by
   intro V' A' instV' instA' _ P c htop
-  letI : Fintype V' := instV'
-  letI : Fintype A' := instA'
+  let : Fintype V' := instV'
+  let : Fintype A' := instA'
   classical
   by_cases hV : V' = {w : V // w ≠ v₂}
   · cases hV
@@ -3214,8 +3217,8 @@ lemma clonedVotingRule_strategyproof
       (@clonedVotingRule V A0 _ _ _ f v₁ v₂ hne)
       (clonedVotingRule_resolute (V := V) (A0 := A0) f hf v₁ v₂ hne) := by
   intro V' A' instV' instA' P v ballot x y hx hy
-  letI : Fintype V' := instV'
-  letI : Fintype A' := instA'
+  let : Fintype V' := instV'
+  let : Fintype A' := instA'
   classical
   by_cases hV : V' = {w : V // w ≠ v₂}
   · cases hV
@@ -3300,7 +3303,7 @@ public theorem gibbard_satterthwaite
               exact lt_of_lt_of_eq this hV.symm
 
             -- pick two distinct voters
-            letI : DecidableEq V := Classical.decEq V
+            let : DecidableEq V := Classical.decEq V
             rcases exists_pair_of_one_lt_card (α := V) hgt1 with ⟨v₁, v₂, hne⟩
 
             -- package the cloned rule as a VotingRule for the IH
@@ -3315,7 +3318,7 @@ public theorem gibbard_satterthwaite
               exact lt_of_lt_of_eq h hV
 
             -- IH on the cloned rule
-            haveI : Nonempty {w : V // w ≠ v₂} := ⟨⟨v₁, hne⟩⟩
+            have : Nonempty {w : V // w ≠ v₂} := ⟨⟨v₁, hne⟩⟩
             have hg_dict : ∃ d : {w : V // w ≠ v₂},
                 ∀ P' : Profile {w : V // w ≠ v₂} A,
                   clonedRule f v₁ v₂ hne P' = {topChoice P' d} := by

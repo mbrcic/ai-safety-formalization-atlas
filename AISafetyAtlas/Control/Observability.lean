@@ -75,7 +75,7 @@ public theorem entropy_eq_zero_iff (μ : Measure Ω) [IsProbabilityMeasure μ]
     rw [hreal]
     exact negMulLog_nonneg measureReal_nonneg measureReal_le_one
   have htotal : ∑ x ∈ FiniteRange.toFinset X, μ.real (X ⁻¹' {x}) = 1 := by
-    haveI := Measure.isProbabilityMeasure_map hX.aemeasurable (μ := μ)
+    have := Measure.isProbabilityMeasure_map hX.aemeasurable (μ := μ)
     rw [sum_measureReal_preimage_singleton _ fun x _ => hX (.singleton x), measureReal_def,
       ← Measure.map_apply hX (Finset.measurableSet _),
       (prob_compl_eq_zero_iff (Finset.measurableSet _)).1 (full_measure_of_finiteRange hX),
@@ -158,10 +158,10 @@ public theorem perfectlyObservable_iff_sensorLoss_eq_zero (μ : Measure Ω)
     refine Finset.sum_eq_zero fun c hc => ?_
     by_cases hcm : μ (C ⁻¹' {c}) = 0
     · simp [map_measureReal_apply hC (.singleton c), measureReal_def, hcm]
-    · haveI : IsProbabilityMeasure (μ[|C ⁻¹' {c}]) := cond_isProbabilityMeasure hcm
+    · have : IsProbabilityMeasure (μ[|C ⁻¹' {c}]) := cond_isProbabilityMeasure hcm
       rw [(entropy_eq_zero_iff _ hX).2 (hobs c hcm), mul_zero]
   · intro hsum c hc
-    haveI : IsProbabilityMeasure (μ[|C ⁻¹' {c}]) := cond_isProbabilityMeasure hc
+    have : IsProbabilityMeasure (μ[|C ⁻¹' {c}]) := cond_isProbabilityMeasure hc
     refine (entropy_eq_zero_iff _ hX).1 ?_
     have hz := (Finset.sum_eq_zero_iff_of_nonneg hnn).1 hsum c (hmem c hc)
     rcases mul_eq_zero.1 hz with h0 | h0

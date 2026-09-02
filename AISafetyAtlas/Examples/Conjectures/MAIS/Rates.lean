@@ -50,7 +50,7 @@ public theorem not_isPolyLogBudget_of_top {f : ℝ → ℕ∞}
   intro hbound
   obtain ⟨n, hn, -⟩ := hbound (1 / 2) (by norm_num) (by norm_num)
   rw [htop (1 / 2) (by norm_num)] at hn
-  exact (ENat.top_ne_coe n) hn
+  exact (ENat.top_ne_natCast n) hn
 
 /-- If adaptivity buys feasibility outright — a finite budget where the
 non-adaptive analyst has none — then it has beaten non-adaptive queries by more
@@ -63,7 +63,7 @@ public theorem not_nonadaptiveWithinConstant_of_top {c : ℝ} {adaptive nonadapt
   obtain ⟨⟨a, ha⟩, htop⟩ := h (1 / 2) (by norm_num) (by norm_num)
   obtain ⟨b, hb, -⟩ := hbound (1 / 2) (by norm_num) (by norm_num) a ha
   rw [htop] at hb
-  exact (ENat.top_ne_coe b) hb
+  exact (ENat.top_ne_natCast b) hb
 
 /-- The same discipline on MAIS-O26's two-sided rate. A `Θ` claim is an upper
 bound too, so a budget that is `⊤` at arbitrarily small targets must refute it.
@@ -78,7 +78,7 @@ public theorem not_isThetaWithMarginBound_of_top {f : ℝ → ℕ∞} {g : ℝ �
   have hhalf : (0 : ℝ) < ε₀ / 2 := by linarith
   obtain ⟨n, hn, -, -⟩ := hbound (ε₀ / 2) hhalf (by linarith)
   rw [htop (ε₀ / 2) hhalf] at hn
-  exact (ENat.top_ne_coe n) hn
+  exact (ENat.top_ne_natCast n) hn
 
 /-! ## The rate predicate really is a `Θ`
 

@@ -129,7 +129,10 @@ public theorem sum_massOn (μ : Measure U) [IsProbabilityMeasure μ]
   have : ((1 : ENNReal)).toReal = ((rangeFinset X).sum (fun x => μ (X ⁻¹' {x}))).toReal := by
     rw [hsum]
   rw [ENNReal.toReal_sum (fun x _ => measure_fibre_ne_top μ X x)] at this
-  simpa [massOn] using this.symm
+  -- The goal's sum is eta-contracted -- `(rangeFinset X).sum (massOn μ X)` --
+  -- and `simp [massOn]` no longer fires through that; `unfold` still does.
+  unfold massOn
+  simpa using this.symm
 
 /-- Joint masses marginalise onto the first coordinate. -/
 public theorem sum_massOn_marginal (μ : Measure U) [IsProbabilityMeasure μ]
@@ -1339,7 +1342,7 @@ public theorem accuracySupOn_eq_sup' (μ : Measure U) [IsProbabilityMeasure μ]
   constructor
   · rintro ⟨x, hx, rfl⟩
     refine ⟨x, ?_, rfl⟩
-    simp only [Finset.coe_filter, Set.mem_setOf_eq, positiveMassSetupsOn]
+    simp only [Finset.coe_filter, Set.mem_ofPred_eq, positiveMassSetupsOn]
     refine ⟨?_, hx⟩
     -- Positive mass forces a nonempty fibre, hence a realized value.
     by_contra hmem
@@ -1348,7 +1351,7 @@ public theorem accuracySupOn_eq_sup' (μ : Measure U) [IsProbabilityMeasure μ]
       simp only [Set.mem_preimage, Set.mem_singleton_iff, Set.mem_empty_iff_false, iff_false]
       intro hu
       exact hmem ((mem_rangeFinset C.setup x).mpr ⟨u, hu⟩)
-    rw [positiveMassSetOn, Set.mem_setOf_eq, massOn, hempty] at hx
+    rw [positiveMassSetOn, Set.mem_ofPred_eq, massOn, hempty] at hx
     simp at hx
   · rintro ⟨x, hx, rfl⟩
     exact ⟨x, (Finset.mem_filter.mp hx).2, rfl⟩

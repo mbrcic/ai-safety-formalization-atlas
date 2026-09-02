@@ -46,7 +46,7 @@ theorem exists_fixed_point_of_surjective {α β : Type*} (f : α → α → β)
 
 whose own docstring names it as Lawvere's fixed-point theorem for types and
 functions, alongside `cantor_surjective` and `cantor_injective`. Mathlib is
-pinned at `fabf563a7c95` and is already a dependency, so no external repository,
+pinned at `db584cd6d46c` and is already a dependency, so no external repository,
 vendoring, or reproduction is involved. This is `CLM-LAWVERE-001`.
 
 The third-party Lean 4 repository `mdnestor/LawvereFixedPoint` was inspected and

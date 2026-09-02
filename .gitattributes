@@ -1,0 +1,5 @@
+# The elaboration dumps are machine-read by check_elaboration_drift.py and by
+# nothing else. `-diff` renders a migration as one `Bin` line instead of 42,000
+# unreviewable ones, while leaving the bytes as plain text so git can still
+# zlib and delta them -- which committing them gzipped would have prevented.
+docs/status/elab-baseline-*.json -diff

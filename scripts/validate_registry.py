@@ -19,6 +19,27 @@ REGISTRY = ROOT / "registry.yaml"
 SEARCH_EVIDENCE = ROOT / "docs/provenance/formalization-search.json"
 PROJECT_REPOSITORY = "https://github.com/mbrcic/ai-safety-formalization-atlas"
 IN_TREE_VERSION = "IN_TREE"
+REVISION_SHAPE = re.compile(r"\b[0-9a-f]{40}\b")
+_PINNED_ENVIRONMENT: tuple[str, frozenset[str]] | None = None
+
+
+def pinned_environment() -> tuple[str, frozenset[str]]:
+    """The toolchain and dependency revisions this checkout actually builds at.
+
+    Read once from `lean-toolchain` and `lake-manifest.json`, which are the
+    copies Lake itself uses, so neither can drift from what a build does.
+    """
+    global _PINNED_ENVIRONMENT
+    if _PINNED_ENVIRONMENT is None:
+        toolchain = (ROOT / "lean-toolchain").read_text(encoding="utf-8").strip()
+        manifest = json.loads((ROOT / "lake-manifest.json").read_text(encoding="utf-8"))
+        revisions = {
+            package["rev"]
+            for package in manifest.get("packages", [])
+            if isinstance(package.get("rev"), str)
+        }
+        _PINNED_ENVIRONMENT = (toolchain, frozenset(revisions))
+    return _PINNED_ENVIRONMENT
 
 
 def fail(message: str) -> NoReturn:
@@ -1384,6 +1405,30 @@ def main() -> None:
                 tokens = command.split()
                 if not tokens:
                     fail(f"{result_id} reproduction command must not be empty")
+                # A record built by `lake build` — or by a reproduction script's
+                # `--in-tree` lane — is a claim about *this* checkout, so the
+                # environment it names can be checked rather than trusted. Across
+                # the v4.33.0 migration 101 of these named a toolchain the
+                # repository no longer used, and nothing noticed. External lanes
+                # are exempt on purpose: they build other projects at other
+                # projects' pins, which is the whole point of keeping them.
+                if tokens[:2] == ["lake", "build"] or "--in-tree" in tokens:
+                    toolchain, pinned_revisions = pinned_environment()
+                    if toolchain not in environment:
+                        fail(
+                            f"{result_id} is built in this tree by {command!r} but its "
+                            f"build_environment does not name the pinned toolchain "
+                            f"{toolchain!r}: {environment!r}"
+                        )
+                    unpinned = sorted(
+                        set(REVISION_SHAPE.findall(environment)) - pinned_revisions
+                    )
+                    if unpinned:
+                        fail(
+                            f"{result_id} is built in this tree but its build_environment "
+                            f"names revisions that lake-manifest.json does not pin: "
+                            f"{', '.join(unpinned)}"
+                        )
                 command_path = tokens[0]
                 script_path = Path(command_path)
                 if (

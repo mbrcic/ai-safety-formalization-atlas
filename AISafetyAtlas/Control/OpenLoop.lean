@@ -137,12 +137,12 @@ public theorem condEntropy_fibre_eq_openLoopEntropy (μ : Measure Ω) [IsFiniteM
     (hX : Measurable X) (hC : Measurable C) (hZ : Measurable Z)
     (hindep : IndepFun C (⟨X, Z⟩ : Ω → S × N) μ) (c : K) (hc : μ (C ⁻¹' {c}) ≠ 0) :
     H[plantOutcome F X C Z | C ← c ; μ] = openLoopEntropy μ F X Z c := by
-  haveI : IsProbabilityMeasure (μ[|C ⁻¹' {c}]) := cond_isProbabilityMeasure hc
+  have : IsProbabilityMeasure (μ[|C ⁻¹' {c}]) := cond_isProbabilityMeasure hc
   have hae : plantOutcome F X C Z =ᵐ[μ[|C ⁻¹' {c}]] fun ω => F (X ω) c (Z ω) := by
     refine ae_cond_of_forall_mem (hC (.singleton c)) fun ω hω => ?_
     simp only [Set.mem_preimage, Set.mem_singleton_iff] at hω
     simp [plantOutcome, hω]
-  haveI : DiscreteMeasurableSpace (S × N) := MeasurableSingletonClass.toDiscreteMeasurableSpace
+  have : DiscreteMeasurableSpace (S × N) := MeasurableSingletonClass.toDiscreteMeasurableSpace
   have hFm : Measurable (fun p : S × N => F p.1 c p.2) := .of_discrete
   have key : ∀ ν : Measure Ω, Measure.map (fun ω => F (X ω) c (Z ω)) ν
       = (ν.map (⟨X, Z⟩ : Ω → S × N)).map (fun p : S × N => F p.1 c p.2) := by
@@ -359,10 +359,10 @@ public theorem condEntropy_ge_of_openLoopMax [Fintype S] (μ : Measure Ω)
     (hX : Measurable X) (hC : Measurable C) (hZ : Measurable Z)
     (hindep : IndepFun (⟨X, C⟩ : Ω → S × K) Z μ) (c : K) (hc : μ (C ⁻¹' {c}) ≠ 0) :
     H[X | C ← c ; μ] - openLoopMax F (μ.map Z) ≤ H[plantOutcome F X C Z | C ← c ; μ] := by
-  haveI : IsProbabilityMeasure (μ[|C ⁻¹' {c}]) := cond_isProbabilityMeasure hc
-  haveI : IsProbabilityMeasure ((μ[|C ⁻¹' {c}]).map X) :=
+  have : IsProbabilityMeasure (μ[|C ⁻¹' {c}]) := cond_isProbabilityMeasure hc
+  have : IsProbabilityMeasure ((μ[|C ⁻¹' {c}]).map X) :=
     Measure.isProbabilityMeasure_map hX.aemeasurable
-  haveI : DiscreteMeasurableSpace (S × N) := MeasurableSingletonClass.toDiscreteMeasurableSpace
+  have : DiscreteMeasurableSpace (S × N) := MeasurableSingletonClass.toDiscreteMeasurableSpace
   have hFm : Measurable (fun p : S × N => F p.1 c p.2) := .of_discrete
   have hae : plantOutcome F X C Z =ᵐ[μ[|C ⁻¹' {c}]] fun ω => F (X ω) c (Z ω) := by
     refine ae_cond_of_forall_mem (hC (.singleton c)) fun ω hω => ?_

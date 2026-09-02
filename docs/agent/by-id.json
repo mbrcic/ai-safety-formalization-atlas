@@ -1036,7 +1036,7 @@
           ],
           "module": "Mathlib.Computability.Halting",
           "repository": "https://github.com/leanprover-community/mathlib4",
-          "version": "fabf563a7c95a166b8d7b6efca11c8b4dc9d911f"
+          "version": "db584cd6d46c92f209a44c0f1c829460d327499d"
         },
         {
           "framework": "Lean",
@@ -1047,7 +1047,7 @@
           ],
           "module": "Mathlib.Computability.Halting",
           "repository": "https://github.com/leanprover-community/mathlib4",
-          "version": "fabf563a7c95a166b8d7b6efca11c8b4dc9d911f"
+          "version": "db584cd6d46c92f209a44c0f1c829460d327499d"
         },
         {
           "framework": "Isabelle/HOL",
@@ -1106,7 +1106,7 @@
           ],
           "module": "Foundation.FirstOrder.Incompleteness.First",
           "repository": "https://github.com/FormalizedFormalLogic/Foundation",
-          "version": "b47cf447255addf88a5d72781d0d29641948eb6e"
+          "version": "30a16ffa93d79d73ab4d02427fa00f50e039bf29"
         },
         {
           "framework": "Lean",
@@ -1117,7 +1117,7 @@
           ],
           "module": "Foundation.FirstOrder.Incompleteness.Second",
           "repository": "https://github.com/FormalizedFormalLogic/Foundation",
-          "version": "b47cf447255addf88a5d72781d0d29641948eb6e"
+          "version": "30a16ffa93d79d73ab4d02427fa00f50e039bf29"
         }
       ],
       "lean_artifact": {
@@ -1153,7 +1153,7 @@
           ],
           "module": "Mathlib.Computability.Halting",
           "repository": "https://github.com/leanprover-community/mathlib4",
-          "version": "fabf563a7c95a166b8d7b6efca11c8b4dc9d911f"
+          "version": "db584cd6d46c92f209a44c0f1c829460d327499d"
         },
         {
           "framework": "Lean",
@@ -1164,7 +1164,7 @@
           ],
           "module": "Mathlib.Computability.Halting",
           "repository": "https://github.com/leanprover-community/mathlib4",
-          "version": "fabf563a7c95a166b8d7b6efca11c8b4dc9d911f"
+          "version": "db584cd6d46c92f209a44c0f1c829460d327499d"
         },
         {
           "framework": "Lean",
@@ -1175,7 +1175,7 @@
           ],
           "module": "Mathlib.Computability.Halting",
           "repository": "https://github.com/leanprover-community/mathlib4",
-          "version": "fabf563a7c95a166b8d7b6efca11c8b4dc9d911f"
+          "version": "db584cd6d46c92f209a44c0f1c829460d327499d"
         }
       ],
       "lean_artifact": {
@@ -1253,7 +1253,7 @@
           ],
           "module": "Foundation.FirstOrder.Incompleteness.Tarski",
           "repository": "https://github.com/FormalizedFormalLogic/Foundation",
-          "version": "b47cf447255addf88a5d72781d0d29641948eb6e"
+          "version": "30a16ffa93d79d73ab4d02427fa00f50e039bf29"
         }
       ],
       "lean_artifact": {
@@ -1337,13 +1337,13 @@
             "atlas_declaration": "AISafetyAtlas.Learning.homogeneous_of_learner_indep",
             "type": "NEW_PROOF",
             "file": "AISafetyAtlas/Learning.lean",
-            "line": 836
+            "line": 839
           },
           {
             "atlas_declaration": "AISafetyAtlas.Learning.homogeneous_iff_learner_indep",
             "type": "NEW_PROOF",
             "file": "AISafetyAtlas/Learning.lean",
-            "line": 883
+            "line": 886
           }
         ]
       },
@@ -1457,13 +1457,13 @@
             "atlas_declaration": "AISafetyAtlas.Combinatorics.card_closedUnderPermutation_nonempty",
             "type": "NEW_PROOF",
             "file": "AISafetyAtlas/Combinatorics/PermInvariance.lean",
-            "line": 320
+            "line": 323
           },
           {
             "atlas_declaration": "AISafetyAtlas.Combinatorics.exists_perm_rel_not_iff",
             "type": "NEW_PROOF",
             "file": "AISafetyAtlas/Combinatorics/PermInvariance.lean",
-            "line": 450
+            "line": 453
           },
           {
             "atlas_declaration": "AISafetyAtlas.Learning.no_free_lunch",
@@ -1475,7 +1475,7 @@
             "atlas_declaration": "AISafetyAtlas.Learning.no_free_lunch_adaptive",
             "type": "NEW_PROOF",
             "file": "AISafetyAtlas/Learning.lean",
-            "line": 677
+            "line": 680
           },
           {
             "atlas_declaration": "AISafetyAtlas.Learning.nfl_adaptive_of_permInvariant",
@@ -1734,7 +1734,7 @@
           ],
           "module": "Foundation.FirstOrder.Incompleteness.Löb",
           "repository": "https://github.com/FormalizedFormalLogic/Foundation",
-          "version": "b47cf447255addf88a5d72781d0d29641948eb6e"
+          "version": "30a16ffa93d79d73ab4d02427fa00f50e039bf29"
         }
       ],
       "lean_artifact": {
@@ -2282,7 +2282,7 @@
           ],
           "module": "Mathlib.Logic.Function.Basic",
           "repository": "https://github.com/leanprover-community/mathlib4",
-          "version": "fabf563a7c95a166b8d7b6efca11c8b4dc9d911f"
+          "version": "db584cd6d46c92f209a44c0f1c829460d327499d"
         }
       ],
       "lean_artifact": {
@@ -4034,7 +4034,7 @@
             "atlas_declaration": "AISafetyAtlas.Causal.Model.value_const_sub",
             "type": "NEW_PROOF",
             "file": "AISafetyAtlas/Causal/Decision.lean",
-            "line": 520
+            "line": 522
           },
           {
             "atlas_declaration": "AISafetyAtlas.Causal.Model.regret_eq_zero_iff",
@@ -4052,7 +4052,7 @@
             "atlas_declaration": "AISafetyAtlas.Causal.inIdentifiedSet_zero_of_behaviorEq",
             "type": "NEW_PROOF",
             "file": "AISafetyAtlas/Causal/Decision.lean",
-            "line": 610
+            "line": 612
           },
           {
             "atlas_declaration": "AISafetyAtlas.Examples.Causal.margin_class_not_identifiable_shared_optimal",
@@ -4064,13 +4064,13 @@
             "atlas_declaration": "AISafetyAtlas.Causal.not_inIdentifiedSet_of_neg",
             "type": "NEW_PROOF",
             "file": "AISafetyAtlas/Causal/Decision.lean",
-            "line": 626
+            "line": 628
           },
           {
             "atlas_declaration": "AISafetyAtlas.Causal.modelError_eq_zero_iff",
             "type": "NEW_PROOF",
             "file": "AISafetyAtlas/Causal/Decision.lean",
-            "line": 803
+            "line": 805
           },
           {
             "atlas_declaration": "AISafetyAtlas.Examples.Causal.not_inIdentifiedSet_high",
@@ -4191,13 +4191,13 @@
             "atlas_declaration": "AISafetyAtlas.Examples.Causal.StructuralModel.figSCIM_opinion_isMaterial",
             "type": "NEW_PROOF",
             "file": "AISafetyAtlas/Examples/Causal/StructuralModel.lean",
-            "line": 495
+            "line": 501
           },
           {
             "atlas_declaration": "AISafetyAtlas.Examples.Causal.StructuralModel.figSCIM_policy_not_const",
             "type": "NEW_PROOF",
             "file": "AISafetyAtlas/Examples/Causal/StructuralModel.lean",
-            "line": 483
+            "line": 489
           },
           {
             "atlas_declaration": "AISafetyAtlas.Examples.Causal.StructuralModel.utility_childless_has_teeth",

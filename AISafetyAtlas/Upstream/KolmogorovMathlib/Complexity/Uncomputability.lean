@@ -57,9 +57,9 @@ public lemma growthLemma (c : ℕ) :
   have h_len := length_natBits_le k
   have h_arith : (programLength (Nat.bits k) : ENat) + c ≤ (k : ENat) + c := by
     dsimp [programLength]
-    exact add_le_add (ENat.coe_le_coe.mpr h_len) (le_refl (c : ENat))
+    exact add_le_add (ENat.natCast_le_natCast.mpr h_len) (le_refl (c : ENat))
   have h_exp : (k : ENat) + c < (2^k : ENat) := by
-    apply ENat.coe_lt_coe.mpr
+    apply ENat.natCast_lt_natCast.mpr
     dsimp [k]
     exact growthArithmeticHelper c
   exact lt_of_le_of_lt h_arith h_exp
@@ -121,7 +121,7 @@ public theorem noComputableUnboundedLowerBound (U : Map) (hU : isOptimalConditio
   obtain ⟨k, hk⟩ := growthLemma c
   have h_top := hc k
   have h_find : 2^k < f (g k) := Nat.find_spec (h_unb (2^k))
-  have h_find_enat : (2^k : ENat) < (f (g k) : ENat) := ENat.coe_lt_coe.mpr h_find
+  have h_find_enat : (2^k : ENat) < (f (g k) : ENat) := ENat.natCast_lt_natCast.mpr h_find
   have h_chain_1 : (2^k : ENat) < plainKNat U (g k) :=
     lt_of_lt_of_le h_find_enat (h_lower (g k))
   have h_chain_2 : plainKNat U (g k) < (2^k : ENat) :=
@@ -137,6 +137,6 @@ public theorem notComputablePlainKNat (U : Map) (hU : isOptimalConditional U) :
   obtain ⟨n, hn⟩ := existsPlainKNatGt U M
   refine ⟨n, ?_⟩
   rw [h_f_eq n] at hn
-  exact ENat.coe_lt_coe.mp hn
+  exact ENat.natCast_lt_natCast.mp hn
 
 end Kolmogorov

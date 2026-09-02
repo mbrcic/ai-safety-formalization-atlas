@@ -44,9 +44,12 @@ below are conditional and should be opened only when the task needs them.
 | `AISafetyAtlas/Upstream/**` | Large vendored/collapsed proofs | Editing that formalization only |
 | `vendor/**` | Upstream vendor trees | Editing that vendored package only |
 | `.lake/**`, `**/CLAUDE.md`, `ai_context.txt` | Build cache / tool dumps | Never as task context |
-| [`docs/status/declaration-index.json`](docs/status/declaration-index.json) | The largest file in the repository (~155k tokens); it is a lookup table, never a read | Resolving one name — `rg '"AISafetyAtlas\.Foo\.bar"'`, or ask the Lean LSP |
-| `docs/status/*-dependency-graph.json` | Machine view of one cluster; `inference` alone is ~52k tokens | A tool consumes it. To *read* a cluster, open the `.md` sibling |
-| [`docs/provenance/source-coverage-audit.md`](docs/provenance/source-coverage-audit.md) | ~42k tokens of statement-by-statement grading | One source's section (`rg -A40 '^## 6\.'`) or one row, never the file |
+| [`docs/status/declaration-index.json`](docs/status/declaration-index.json) | ~214k tokens; it is a lookup table, never a read | Resolving one name — `rg '"AISafetyAtlas\.Foo\.bar"'`, or ask the Lean LSP |
+| `docs/status/*-dependency-graph.json` | Machine view of one cluster; `inference` ~58k tokens, `causal` ~41k | A tool consumes it. To *read* a cluster, open the `.md` sibling |
+| [`docs/provenance/source-coverage-audit.md`](docs/provenance/source-coverage-audit.md) | ~47k tokens of statement-by-statement grading | One source's section (`rg -A40 '^## 6\.'`) or one row, never the file |
+| [`docs/agent/by-id.json`](docs/agent/by-id.json) | ~46k tokens | One `BY-###` via `rg`, as with `registry.yaml` |
+| `docs/status/elab-baseline-*.json` | ~3M tokens each; a normal-form dump, unreadable by construction | Only `--compare` / `--classify`. Never open one |
+| [`docs/status/public-api.txt`](docs/status/public-api.txt) | ~31k tokens | One name via `rg`; the pin is the diff, not the read |
 | Accidental `https:/`, `http:/` trees | wget path debris (gitignored) | Delete if recreated |
 
 ### Lean surface rule
@@ -242,6 +245,110 @@ cheap gate. It is advisory and compares source text, so reformatting reports a
 change that is not one — the report is a question, never a verdict. Answer it,
 re-grade the row if fidelity moved, then `--write` to record the new statement.
 
+### The layer a text diff cannot reach
+
+Every check above reads source. On a toolchain bump the dangerous change is the
+one where the source does not move: an upstream rename behind an alias, a
+different instance chosen, a definition made reducible. The text is identical,
+the build is green, `axiom-audit` still says proved — of something else.
+
+`scripts/check_elaboration_drift.py` compares declarations by their **elaborated
+type**. It emits a normal form from Lean and hashes it in Python, never in Lean,
+because `String.hash` belongs to the toolchain under comparison and hashing there
+would make every declaration look changed in exactly the situation the tool
+exists for.
+
+```bash
+python3 scripts/check_elaboration_drift.py --self-test              # on either tree
+python3 scripts/check_elaboration_drift.py --dump out.json --raw    # on each tree
+python3 scripts/check_elaboration_drift.py --compare old.json new.json
+python3 scripts/check_elaboration_drift.py --classify old.json new.json
+
+# the standing check, and what CI runs on every branch that touches Lean
+python3 scripts/check_elaboration_drift.py --dump out.json --raw
+python3 scripts/check_elaboration_drift.py --compare \
+  docs/status/elab-baseline-v4330.json out.json --fatal silent
+```
+
+Dump `--raw`, which keeps the normal form instead of a digest of it, and commit
+that. A hashed dump halves to ~3 MB and loses the only thing `--classify` can
+work from, so the recorded class breakdown stops being reproducible from this
+repository.
+
+Commit them as **plain text, never gzipped**. Git already zlib-compresses every
+blob and deltas each dump against the one before it; a `.gz` defeats both, and
+this pair measured 734,042 bytes packed gzipped against 391,190 bytes packed as
+text. The 42,000-line diff that compression was meant to solve is handled by
+`.gitattributes` instead: `-diff` renders a migration as one `Bin` line and
+costs nothing. Nothing but `--compare` and `--classify` ever reads a dump.
+
+Run `--self-test` first on any tree you dump: it decides four known-answer cases
+against a real elaborator, and a fingerprint that never changes and one that
+always changes are both useless. `--dump` needs everything built, including
+`scripts/lean_build_targets.txt`, because module discovery is artifact-based — a
+target you did not build is silently not compared.
+
+A dump selects declarations **by the module they compiled into**, not by their
+name, and records which it did under `selector`. Selecting on the `AISafetyAtlas`
+name prefix misses everything our modules compile under someone else's namespace
+— the vendored `Kolmogorov.*` and debate `Comp.*` layers, 636 declarations, 72 of
+them on the public API pin, including the theorem
+`AISafetyAtlas.Logic.chaitin_incompleteness` is assigned from. `--compare` warns
+when the two dumps disagree on `selector`, because then the report counts the
+difference between the selectors as well as the difference between the trees.
+
+The bucket that matters is **silent**: printed type identical, elaborated type
+not. A hashed dump can only say *that* something moved, which is why the
+committed dumps are `--raw`.
+
+That bucket is also the only one a branch can be **gated** on, which is what
+`--fatal silent` selects. A plain `--compare` fails on any movement at all —
+the right question for a migration, and red on every ordinary pull request,
+since adding statements is what a branch is for. A declaration whose printed
+type is unchanged cannot have changed meaning through an edit, so a silent
+change is never work anyone asked for, and CI holds this tree to
+`docs/status/elab-baseline-v4330.json` on that bucket alone. It catches what no
+source-reading check can: a Mathlib rebuild against a moved artifact, an
+upstream alias, a different instance chosen.
+
+Expect it to go red on a toolchain bump. That is the tool working. Re-adjudicate
+the silent set, re-dump both sides, record the classes — do not widen the flag.
+`agent_gate.sh` separately runs `--classify` over the committed pair, which needs
+no toolchain and holds the recorded accounting to the class registry, so a class
+widened or a dump edited turns the cheap gate red without waiting for CI.
+
+The silent count grows with the library — 131 at 5358 declarations, 171 at 5994
+— because it counts declarations that happen to touch whatever upstream renamed.
+The number of *reasons* does not: there were eleven, and they come from upstream's
+churn. So a class is adjudicated once against an anchor that holds at both
+toolchains, recorded in `docs/status/elaboration-classes.json`, and never
+re-litigated; `--classify` matches a migration's silent set against the registry
+and exits non-zero only on what is left over.
+
+A class states its verdict as `removes` and `adds`, and both are enforced: a
+declaration is classified only when the classes that fired account for every
+constant that left *and* every constant that arrived. The `change` string is
+prose for a reader and is checked by nothing. Matching on the departure alone is
+unsound: `setOf` leaving would match the `setOf` class whatever replaced it, so
+`setOf -> Evil` would certify clean and an unrelated substitution in the same
+statement would be swallowed. A class excuses a
+*replacement*; a check that never reads the replacement is not checking it. **Reading two new classes is work
+that stays the same size as this library grows; reading 171 names is not.** A
+silent change that kept every constant and rearranged them is reported apart and
+can never be excused by a registry entry — that is a binder kind, an argument
+order or a universe moving, and it needs its own verdict.
+
+`docs/status/elab-baseline-v4310.json` and
+`docs/status/elab-baseline-v4330.json` are the two sides of the last
+migration, both module-selected and both kept because a dump cannot be
+regenerated once its tree moves; compare the next toolchain against the v4.33.0
+one. **Keep two.** When a bump lands, its two sides replace the previous pair;
+Foundation moves monthly, and a dump per toolchain we ever pinned turns a fixed
+cost into an accruing one. `tests/test_elaboration_drift.py` enforces the two.
+`docs/provenance/elaboration-adjudication-v4310-v4330.lean` holds the anchors,
+checkable at either toolchain, and `docs/status/migration-baseline.json` records
+the per-class counts for the migration itself.
+
 ## Coverage, landscape, and bridges
 
 - **Headline coverage:** reproduced registry formalizations with `EXACT` or
@@ -382,34 +489,27 @@ optional on a pull request. Install with `python3 -m pip install pytest ty`.
 `test_a1_a3_pattern_a_harness`, `pytest tests/`, and `ty check`. Those five
 exercise the validator scripts themselves.
 
-**Correction, 2026-08-29.** This section used to say those five *"take no input
-from `AISafetyAtlas/`, `docs/`, or the ledgers"* and that *"editing Lean cannot
-change their verdict."* Both are false, and they were the stated reason the lane
-is safe. `test_validators` copies `registry.yaml`, `conjectures.yaml`,
-`tasks.yaml`, `formalization-search.json`, `AISafetyAtlas.lean`, the whole
-`AISafetyAtlas/` tree and several `docs/` trees into a temporary tree and runs
-the validators against them; `test_source_neutral_views` reads the live
-registry; the a1–a3 harness reads a reproduction script and provenance
-documents; and `tests/` reaches declaration locations and repository Markdown.
-Repository content is an input to all of them, so a `--fast` run can be green
-over a change they would reject.
+Those five are **not** independent of repository content, and the lane must not
+be justified that way. `test_validators` copies `registry.yaml`,
+`conjectures.yaml`, `tasks.yaml`, `formalization-search.json`,
+`AISafetyAtlas.lean`, the whole `AISafetyAtlas/` tree and several `docs/` trees
+into a temporary tree and runs the validators against them;
+`test_source_neutral_views` reads the live registry; the a1–a3 harness reads a
+reproduction script and provenance documents; and `tests/` reaches declaration
+locations and repository Markdown. So a `--fast` run can be green over a change
+they would reject.
 
-What justifies the lane is therefore **when** it is used, not independence — see
-the retry-loop paragraph below — and the rule that the full gate is owed before
-the commit stands unchanged.
+What justifies the lane is **when** it is used, not independence — see the
+retry-loop paragraph below — and the full gate is owed before the commit.
 
 Everything that reads the tree, the ledgers, or the generated views *directly*
 still runs, so `--fast` still catches a rename that orphaned a docstring name, a
 module missing from the root import, a stale dependency graph, a mislaid example
 file, a changed graded statement, or a registry `line:` field that shifted.
 
-**Numbers are measurements, not constants.** On 2026-08-29 `test_validators`
-runs in ~12 s, down from ~53 s. Nothing was dropped to get there: the Lean
-masker stopped scanning one character at a time, and the import-line regex
-stopped running under `re.M`, where its leading `\s*` consumed newlines and made
-the engine rescan blank runs from every position. Whole-gate timings on one
-machine varied roughly threefold run to run, so no single figure for them is
-quoted here. Measure; do not inherit a number from this file.
+**Numbers are measurements, not constants.** Whole-gate timings vary by roughly
+threefold run to run, so no figure is quoted here. Measure; do not inherit a
+number from this file.
 
 **This is a retry loop, not an iteration loop.** The gate belongs before a
 commit, not between edits, so `--fast` earns nothing on the first run — you owe
@@ -443,8 +543,17 @@ Full green (Lean + axioms):
 python3 scripts/check_print_axioms.py
 lake build
 xargs lake build < scripts/lean_build_targets.txt
+lake exe axiom-audit --root AISafetyAtlas --modules-from AISafetyAtlas
 python3 scripts/generate_declaration_index.py --write   # after adding or renaming
 ```
+
+`axiom-audit` is upstream -- inherited through Foundation's lakefile and in
+`lake-manifest.json` all along -- so it is the one axiom check here that this
+repository did not write, and the reason to run it is that it shares no code
+with the two that it did. `--modules-from` is not optional: the root does not
+transitively import the whole library, and auditing by root import alone
+reaches 5957 declarations against 9439 for the module sweep, with the 3482 it
+misses being exactly the off-root material `lean_build_targets.txt` exists for.
 
 `generate_declaration_index.py` walks the **elaborated environment** and writes
 `docs/status/declaration-index.json`, which is what lets

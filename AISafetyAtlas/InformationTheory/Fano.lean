@@ -288,7 +288,7 @@ public theorem sum_errorPair_true (μ : Measure Ω) [IsProbabilityMeasure μ]
   have hWm : Measurable W := measurable_errorPair hX hX'
   have hpre : W ⁻¹' (F : Set (Bool × S)) = {ω | X ω ≠ X' ω} := by
     ext ω
-    simp only [Set.mem_preimage, hF, Finset.coe_filter, Set.mem_setOf_eq]
+    simp only [Set.mem_preimage, hF, Finset.coe_filter, Set.mem_ofPred_eq]
     constructor
     · rintro ⟨-, h⟩
       simpa [hW, errorPair, errorIndicator] using h

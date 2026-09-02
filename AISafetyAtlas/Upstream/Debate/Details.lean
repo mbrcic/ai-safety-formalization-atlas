@@ -1,7 +1,8 @@
 /-
 Vendored from `google-deepmind/debate` (Apache-2.0) via the Lean v4.31.0 port
-`LukaHobor/debate` @ `dafe25d`. Changed at the header only; ledger and
-rationale: `vendor/debate/PROVENANCE.md`.
+`LukaHobor/debate` @ `dafe25d`, and migrated in place to Lean v4.33.0. Changed at
+the header, and in proof scripts to build at that toolchain; no statement is
+altered. Ledger and rationale: `vendor/debate/PROVENANCE.md`.
 -/
 
 module
@@ -163,29 +164,36 @@ lemma debate_eq_transposed (o : Oracle) (alice : Alice) (bob : Bob) (vera : Vera
   have h : ∀ n, (steps alice bob vera n).prob (fun _ ↦ o) =
       alices o alice n >>= λ (p,y) ↦ shim y <$> bobs o bob vera p y := by
     intro n; induction' n with n h
-    · simp only [steps, alices, pure_bind, bobs, shim, map_eq, Comp.prob', Comp.prob_pure]
+    · simp only [steps, alices, pure_bind, bobs, shim, map_eq, Comp.prob']
+      exact Comp.prob_pure _ _
     · simp only [steps, h, alices, bobs, bind_assoc, Comp.prob', Comp.prob_bind]
       apply congr_arg₂ _ rfl; funext ⟨p,y⟩
       simp only [pure_bind, map_eq, bind_assoc, List.Vector.tail_cons, List.Vector.head_cons,
         bind_comm _ (bobs _ _ _ _ _)]
       apply congr_arg₂ _ rfl; funext r; match r with
-      | some r => simp only [shim, pure_bind, bind_pure, bind_const, Comp.prob_pure]
+      | some r => simp only [shim, pure_bind, bind_pure, bind_const, Comp.prob_pure]; exact Comp.prob_pure _ _
       | none =>
         simp only [shim, step, Comp.prob_bind, Comp.prob_allow_all]
         apply congr_arg₂ _ rfl; funext q
         simp only [bind_assoc, bind_comm _ ((bob _ _ _).prob _)]; apply congr_arg₂ _ rfl; funext s
         match s with
         | true =>
-          simp only [if_true, Comp.prob_bind, Comp.prob_pure, Comp.prob_sample', bind_assoc]
-          apply congr_arg₂ _ rfl; funext x; simp only [bind_const, pure_bind]
+          simp only [↓reduceIte, Comp.prob_bind, Comp.prob_pure, Comp.prob_sample',
+            bind_assoc, Nat.add_succ_sub_one, Nat.add_zero]
+          rw [Comp.sample'_bind]
+          simp only [Comp.prob_sample', pure_bind, Comp.prob_pure, bind_const]
+          refine (Comp.prob_sample' _ _ _).trans ?_; exact bind_congr fun x => Comp.prob_pure _ _
         | false =>
-          simp only [Bool.false_eq_true, ↓reduceIte, Comp.prob_bind, Comp.prob_allow_all,
-            Comp.prob_pure, Nat.add_succ_sub_one, Nat.add_zero, bind_assoc, pure_bind, bind_const]
+          simp only [Bool.false_eq_true, ↓reduceIte, Nat.add_succ_sub_one, Nat.add_zero,
+            bind_assoc, pure_bind, bind_const]
+          refine (Comp.prob_bind _ _ _).trans ?_
+          rw [Comp.prob_allow_all]
+          exact bind_congr fun x => Comp.prob_pure _ _
   simp only [debate, transposed, trace, extract, h, bind_assoc, map_eq, Comp.prob', Comp.prob_bind]
   apply congr_arg₂ _ rfl; funext ⟨p,y⟩; apply congr_arg₂ _ rfl; funext r; match r with
-  | some true => simp only [shim, pure_bind, Option.getD, Comp.prob_pure]
-  | some false => simp only [shim, pure_bind, Option.getD, Comp.prob_pure]
-  | none => simp only [shim, pure_bind, Option.getD, Comp.prob_pure]
+  | some true => simp only [shim, pure_bind, Option.getD, Comp.prob_pure]; exact (pure_bind _ _).trans (Comp.prob_pure _ _)
+  | some false => simp only [shim, pure_bind, Option.getD, Comp.prob_pure]; exact (pure_bind _ _).trans (Comp.prob_pure _ _)
+  | none => simp only [shim, pure_bind, Option.getD, Comp.prob_pure]; exact (pure_bind _ _).trans (Comp.prob_pure _ _)
 
 /-!
 # Close probabilities

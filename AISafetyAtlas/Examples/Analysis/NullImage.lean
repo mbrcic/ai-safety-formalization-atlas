@@ -32,7 +32,7 @@ This is why `volume_image_eq_zero_of_card_lt` asks for a *strict* inequality. -/
 public theorem volume_range_id_ne_zero :
     volume (Set.range fun s : Fin 1 → ℝ => s) ≠ 0 := by
   rw [Set.range_id']
-  haveI := isAddHaarMeasure_volume_pi (Fin 1)
+  have := isAddHaarMeasure_volume_pi (Fin 1)
   exact (isOpen_univ.measure_pos volume Set.univ_nonempty).ne'
 
 end AISafetyAtlas.Examples.Analysis.NullImage

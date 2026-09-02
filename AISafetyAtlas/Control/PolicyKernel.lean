@@ -210,7 +210,7 @@ public theorem condEntropy_atom_eq_atomLoss (μ : Measure Ω) [IsProbabilityMeas
     refine ae_cond_of_forall_mem (hXm.inter hCm) fun ω hω => ?_
     simp only [plantOutcome, Set.mem_inter_iff, Set.mem_preimage, Set.mem_singleton_iff] at hω ⊢
     rw [hω.1, hω.2]
-  haveI : DiscreteMeasurableSpace N := MeasurableSingletonClass.toDiscreteMeasurableSpace
+  have : DiscreteMeasurableSpace N := MeasurableSingletonClass.toDiscreteMeasurableSpace
   have hFm : Measurable (F x c) := .of_discrete
   -- entropy sees the noise only through its law, and the law is the same on both
   have key : ∀ ν : Measure Ω,
@@ -282,7 +282,7 @@ public theorem minAtomLoss_le_condEntropy [Fintype S] [Fintype K] (μ : Measure 
     (hX : Measurable X) (hZ : Measurable Z) (hC : Measurable C)
     (hpol : IsInputPolicy μ X Z C) {x : S} (hx : μ (X ⁻¹' {x}) ≠ 0) :
     minAtomLoss μ F X Z x ≤ H[plantOutcome F X C Z | C ; μ[|X ⁻¹' {x}]] := by
-  haveI : IsProbabilityMeasure (μ[|X ⁻¹' {x}]) := cond_isProbabilityMeasure hx
+  have : IsProbabilityMeasure (μ[|X ⁻¹' {x}]) := cond_isProbabilityMeasure hx
   rw [condEntropy_eq_sum_fintype _ _ _ hC]
   have hw : ∑ c : K, (μ[|X ⁻¹' {x}]).real (C ⁻¹' {c}) = 1 := by
     rw [sum_measureReal_preimage_singleton _ fun c _ => hC (.singleton c)]
@@ -357,7 +357,7 @@ policy needs no auxiliary randomness, so it exists on every sample space.
 -/
 public theorem isInputPolicy_comp (μ : Measure Ω) [IsProbabilityMeasure μ] {X : Ω → S}
     {Z : Ω → N} (hX : Measurable X) (f : S → K) : IsInputPolicy μ X Z (f ∘ X) := by
-  haveI : DiscreteMeasurableSpace S := MeasurableSingletonClass.toDiscreteMeasurableSpace
+  have : DiscreteMeasurableSpace S := MeasurableSingletonClass.toDiscreteMeasurableSpace
   refine ⟨(Measurable.of_discrete (f := f)).comp hX, ?_⟩
   rw [condIndepFun_iff]
   refine ae_of_all _ fun x => ?_
@@ -365,7 +365,7 @@ public theorem isInputPolicy_comp (μ : Measure Ω) [IsProbabilityMeasure μ] {X
   · rw [indepFun_iff_measure_inter_preimage_eq_mul]
     intro s t _ _
     simp [ProbabilityTheory.cond, Measure.restrict_eq_zero.2 hx]
-  · haveI : IsProbabilityMeasure (μ[|X ⁻¹' {x}]) := cond_isProbabilityMeasure hx
+  · have : IsProbabilityMeasure (μ[|X ⁻¹' {x}]) := cond_isProbabilityMeasure hx
     have hae : (fun _ : Ω => f x) =ᵐ[μ[|X ⁻¹' {x}]] f ∘ X := by
       refine ae_cond_of_forall_mem (hX (.singleton x)) fun ω hω => ?_
       simp only [Set.mem_preimage, Set.mem_singleton_iff] at hω
@@ -383,7 +383,7 @@ public theorem controlLoss_comp_eq [Fintype S] (μ : Measure Ω) [IsProbabilityM
     (f : S → K) [FiniteRange (plantOutcome F X (f ∘ X) Z)] :
     controlLoss μ X (f ∘ X) (plantOutcome F X (f ∘ X) Z)
       = ∑ x, μ.real (X ⁻¹' {x}) * atomLoss μ F X Z x (f x) := by
-  haveI : DiscreteMeasurableSpace S := MeasurableSingletonClass.toDiscreteMeasurableSpace
+  have : DiscreteMeasurableSpace S := MeasurableSingletonClass.toDiscreteMeasurableSpace
   have hfX : Measurable (f ∘ X) := (Measurable.of_discrete (f := f)).comp hX
   have hinj : Injective (fun s : S => (s, f s)) := fun _ _ h => (Prod.ext_iff.1 h).1
   have hmeas : Measurable ((fun s : S => (s, f s)) ∘ X) :=
@@ -563,7 +563,7 @@ public theorem condEntropy_atom_kernelMeasure (μ : Measure Ω) [IsProbabilityMe
     obtain ⟨hx', hc'⟩ := hp
     simp only [Set.mem_preimage, Set.mem_singleton_iff] at hx' hc'
     simp [plantOutcome, hx', hc']
-  haveI : DiscreteMeasurableSpace N := MeasurableSingletonClass.toDiscreteMeasurableSpace
+  have : DiscreteMeasurableSpace N := MeasurableSingletonClass.toDiscreteMeasurableSpace
   have hFm : Measurable (F x c) := .of_discrete
   have key : ∀ ν : Measure (Ω × K),
       Measure.map (fun p : Ω × K => F x c (Z p.1)) ν = (ν.map (Z ∘ Prod.fst)).map (F x c) := by
@@ -590,7 +590,7 @@ public theorem kernelControlLoss_eq_sum [Fintype S] [Fintype K] (μ : Measure Ω
     (hX : Measurable X) (hZ : Measurable Z) (κ : Kernel S K) [IsMarkovKernel κ] :
     kernelControlLoss μ F hX Z κ
       = ∑ x, μ.real (X ⁻¹' {x}) * ∑ c, (κ x {c}).toReal * atomLoss μ F X Z x c := by
-  haveI := isProbabilityMeasure_kernelMeasure μ hX κ
+  have := isProbabilityMeasure_kernelMeasure μ hX κ
   have hXt : Measurable (X ∘ (Prod.fst : Ω × K → Ω)) := hX.comp measurable_fst
   rw [kernelControlLoss, controlLoss,
     condEntropy_eq_sum_fintype _ _ _ (hXt.prodMk measurable_snd), Fintype.sum_prod_type]
@@ -684,7 +684,7 @@ public theorem kernelMinControlLoss_eq [Fintype S] [Fintype K] [Nonempty K] (μ 
     [IsProbabilityMeasure μ] (F : S → K → N → T) {X : Ω → S} {Z : Ω → N}
     (hX : Measurable X) (hZ : Measurable Z) :
     kernelMinControlLoss μ F hX Z = closedFormLoss μ F X Z := by
-  haveI : DiscreteMeasurableSpace S := MeasurableSingletonClass.toDiscreteMeasurableSpace
+  have : DiscreteMeasurableSpace S := MeasurableSingletonClass.toDiscreteMeasurableSpace
   have hbest : Measurable (bestAction μ F X Z) := .of_discrete
   have hmem : kernelControlLoss μ F hX Z (Kernel.deterministic _ hbest)
       ∈ {r | ∃ κ : Kernel S K, ∃ _ : IsMarkovKernel κ, kernelControlLoss μ F hX Z κ = r} :=

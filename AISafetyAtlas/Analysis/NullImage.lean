@@ -247,7 +247,7 @@ public theorem measurableSet_exists_of_isClosed {X Y : Type*} [TopologicalSpace 
   have hcov : {x | ∃ y, (y, x) ∈ F}
       = ⋃ i : ℕ, SetRel.image F (compactCovering Y i) := by
     ext x
-    simp only [Set.mem_setOf_eq, Set.mem_iUnion, SetRel.image]
+    simp only [Set.mem_ofPred_eq, Set.mem_iUnion, SetRel.image]
     constructor
     · rintro ⟨y, hy⟩
       obtain ⟨i, hi⟩ := exists_mem_compactCovering y

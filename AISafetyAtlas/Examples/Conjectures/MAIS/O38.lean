@@ -86,7 +86,7 @@ private theorem mul_permMatrix_diagonal_apply {n m : ℕ} (A : Matrix (Fin n) (F
     (σ : Equiv.Perm (Fin m)) (d : Fin m → ℝ) (i : Fin n) (b : Fin m) :
     (A * σ.permMatrix ℝ * Matrix.diagonal d) i b = A i (σ.symm b) * d b := by
   rw [Matrix.mul_assoc, Matrix.mul_apply]
-  simp only [permMatrix_mul_diagonal_apply, Equiv.apply_eq_iff_eq_symm_apply,
+  simp only [permMatrix_mul_diagonal_apply, ← Equiv.eq_symm_apply,
     mul_ite, mul_zero, Finset.sum_ite_eq', Finset.mem_univ, if_true]
 
 private theorem mulVec_single' {n m : ℕ} (B : Matrix (Fin n) (Fin m) ℝ) (q : Fin m) (c : ℝ) :
@@ -109,7 +109,7 @@ private theorem mul_left_cancel_of_mulVec_inj {n m : ℕ} {A : Matrix (Fin n) (F
     (h : A * X = A * Y) : X = Y := by
   rcases Nat.eq_zero_or_pos m with hm | hm
   · subst hm; ext i; exact absurd i.2 (by omega)
-  · haveI : Nonempty (Fin m) := ⟨⟨0, hm⟩⟩
+  · have : Nonempty (Fin m) := ⟨⟨0, hm⟩⟩
     exact Matrix.mul_right_injective_iff_mulVec_injective.2 hA h
 
 /-! ## The degeneracy at zero sparsity -/
@@ -149,8 +149,8 @@ public theorem not_genericallyUniquelyCoding_of_sparsity_zero {n m N : ℕ}
     (hn : 0 < n) (hm : 0 < m) (x : Fin N → (Fin m → ℝ)) :
     ¬ GenericallyUniquelyCoding 0 n m N x := by
   rintro ⟨hsp, hae⟩
-  haveI : Nonempty (Fin n) := ⟨⟨0, hn⟩⟩
-  haveI : Nonempty (Fin m) := ⟨⟨0, hm⟩⟩
+  have : Nonempty (Fin n) := ⟨⟨0, hn⟩⟩
+  have : Nonempty (Fin m) := ⟨⟨0, hm⟩⟩
   have hne : ∀ᵐ A : Fin n → Fin m → ℝ, A ≠ 0 := by refine ae_iff.2 ?_; simp
   have hfalse : ∀ᵐ _A : Fin n → Fin m → ℝ, False := by
     filter_upwards [hae, hne] with A h1 h2

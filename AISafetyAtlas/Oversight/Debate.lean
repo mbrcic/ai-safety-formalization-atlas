@@ -68,8 +68,8 @@ re-exports. Import it and qualify — `open AISafetyAtlas.Oversight` and then
 
 ## Provenance
 
-Upstream `google-deepmind/debate` (Apache-2.0), ported to Lean v4.31.0 and
-vendored under `AISafetyAtlas/Upstream/Debate/`. Pins, statement fidelity and
+Upstream `google-deepmind/debate` (Apache-2.0), ported to Lean v4.31.0, vendored
+under `AISafetyAtlas/Upstream/Debate/`, and migrated in place to v4.33.0. Pins, statement fidelity and
 every adaptation: `vendor/debate/PROVENANCE.md`. Reproduction evidence:
 `docs/provenance/debate-reproduction.md`.
 -/

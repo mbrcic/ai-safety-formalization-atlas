@@ -10,6 +10,7 @@ left the published artifact stale.
 from __future__ import annotations
 
 import importlib.util
+import json
 import subprocess
 import sys
 from pathlib import Path
@@ -138,6 +139,57 @@ def test_nonexistent_modules_do_not_resolve(module):
 
 def test_real_module_resolves_in_tree():
     assert registry.lean_module_exists("AISafetyAtlas.Control.RequisiteVariety")
+
+
+# --- validate_registry's in-tree environment check ----------------------------
+
+
+def test_pinned_environment_matches_the_files_lake_reads():
+    """The pins come from `lean-toolchain` and `lake-manifest.json`, not a copy.
+
+    A `build_environment` string that repeats the pins instead of reading them
+    is prose no check can contradict: 101 of them can name a toolchain the tree
+    left behind and nothing notices.
+    """
+    toolchain, revisions = registry.pinned_environment()
+    assert toolchain == (ROOT / "lean-toolchain").read_text(encoding="utf-8").strip()
+    manifest = json.loads((ROOT / "lake-manifest.json").read_text(encoding="utf-8"))
+    assert {p["rev"] for p in manifest["packages"]} == set(revisions)
+    assert toolchain.startswith("leanprover/lean4:")
+
+
+def test_every_in_tree_record_names_the_pinned_environment():
+    """Records built by `lake build` here, or by a script's `--in-tree` lane.
+
+    External lanes are exempt by design — they build other projects at other
+    projects' pins, which is the reason those lanes exist at all.
+    """
+    toolchain, revisions = registry.pinned_environment()
+    text = (ROOT / "registry.yaml").read_text(encoding="utf-8")
+    data = json.loads(text)
+
+    def walk(node):
+        if isinstance(node, dict):
+            if "build_environment" in node:
+                yield node
+            for value in node.values():
+                yield from walk(value)
+        elif isinstance(node, list):
+            for value in node:
+                yield from walk(value)
+
+    checked = 0
+    for record in walk(data):
+        command = record.get("build_command") or ""
+        tokens = command.split()
+        if tokens[:2] != ["lake", "build"] and "--in-tree" not in tokens:
+            continue
+        checked += 1
+        environment = record["build_environment"]
+        assert toolchain in environment, (command, environment)
+        named = set(registry.REVISION_SHAPE.findall(environment))
+        assert named <= set(revisions), (command, sorted(named - set(revisions)))
+    assert checked > 50, f"expected the bulk of the ledger to be in-tree, got {checked}"
 
 
 @pytest.mark.skipif(

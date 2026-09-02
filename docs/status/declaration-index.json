@@ -3,7 +3,7 @@
   "generated_by": "scripts/generate_declaration_index.py",
   "note": "Declaration index walked from the elaborated environment, not from source text. Consumed by the prose checks so that a name resolves only when it is a real declaration.",
   "prefix": "AISafetyAtlas",
-  "count": 4692,
+  "count": 4674,
   "declarations": [
     {
       "name": "AISafetyAtlas",
@@ -13946,21 +13946,6 @@
       "module": "AISafetyAtlas.Examples.Oversight.JointObservation.Portfolio"
     },
     {
-      "name": "AISafetyAtlas.Examples.Oversight.JointObservation.Portfolio.CandIx.enumList",
-      "kind": "def",
-      "module": "AISafetyAtlas.Examples.Oversight.JointObservation.Portfolio"
-    },
-    {
-      "name": "AISafetyAtlas.Examples.Oversight.JointObservation.Portfolio.CandIx.enumList_getElem?_ctorIdx_eq",
-      "kind": "theorem",
-      "module": "AISafetyAtlas.Examples.Oversight.JointObservation.Portfolio"
-    },
-    {
-      "name": "AISafetyAtlas.Examples.Oversight.JointObservation.Portfolio.CandIx.enumList_nodup",
-      "kind": "theorem",
-      "module": "AISafetyAtlas.Examples.Oversight.JointObservation.Portfolio"
-    },
-    {
       "name": "AISafetyAtlas.Examples.Oversight.JointObservation.Portfolio.EmittedView",
       "kind": "def",
       "module": "AISafetyAtlas.Examples.Oversight.JointObservation.Portfolio"
@@ -13968,21 +13953,6 @@
     {
       "name": "AISafetyAtlas.Examples.Oversight.JointObservation.Portfolio.Exec",
       "kind": "inductive",
-      "module": "AISafetyAtlas.Examples.Oversight.JointObservation.Portfolio"
-    },
-    {
-      "name": "AISafetyAtlas.Examples.Oversight.JointObservation.Portfolio.Exec.enumList",
-      "kind": "def",
-      "module": "AISafetyAtlas.Examples.Oversight.JointObservation.Portfolio"
-    },
-    {
-      "name": "AISafetyAtlas.Examples.Oversight.JointObservation.Portfolio.Exec.enumList_getElem?_ctorIdx_eq",
-      "kind": "theorem",
-      "module": "AISafetyAtlas.Examples.Oversight.JointObservation.Portfolio"
-    },
-    {
-      "name": "AISafetyAtlas.Examples.Oversight.JointObservation.Portfolio.Exec.enumList_nodup",
-      "kind": "theorem",
       "module": "AISafetyAtlas.Examples.Oversight.JointObservation.Portfolio"
     },
     {
@@ -14091,21 +14061,6 @@
       "module": "AISafetyAtlas.Examples.Oversight.JointObservation.Portfolio"
     },
     {
-      "name": "AISafetyAtlas.Examples.Oversight.JointObservation.Portfolio.HazardIx.enumList",
-      "kind": "def",
-      "module": "AISafetyAtlas.Examples.Oversight.JointObservation.Portfolio"
-    },
-    {
-      "name": "AISafetyAtlas.Examples.Oversight.JointObservation.Portfolio.HazardIx.enumList_getElem?_ctorIdx_eq",
-      "kind": "theorem",
-      "module": "AISafetyAtlas.Examples.Oversight.JointObservation.Portfolio"
-    },
-    {
-      "name": "AISafetyAtlas.Examples.Oversight.JointObservation.Portfolio.HazardIx.enumList_nodup",
-      "kind": "theorem",
-      "module": "AISafetyAtlas.Examples.Oversight.JointObservation.Portfolio"
-    },
-    {
       "name": "AISafetyAtlas.Examples.Oversight.JointObservation.Portfolio.Principal",
       "kind": "inductive",
       "module": "AISafetyAtlas.Examples.Oversight.JointObservation.Portfolio"
@@ -14138,21 +14093,6 @@
     {
       "name": "AISafetyAtlas.Examples.Oversight.JointObservation.Portfolio.Principal.e.elim",
       "kind": "def",
-      "module": "AISafetyAtlas.Examples.Oversight.JointObservation.Portfolio"
-    },
-    {
-      "name": "AISafetyAtlas.Examples.Oversight.JointObservation.Portfolio.Principal.enumList",
-      "kind": "def",
-      "module": "AISafetyAtlas.Examples.Oversight.JointObservation.Portfolio"
-    },
-    {
-      "name": "AISafetyAtlas.Examples.Oversight.JointObservation.Portfolio.Principal.enumList_getElem?_ctorIdx_eq",
-      "kind": "theorem",
-      "module": "AISafetyAtlas.Examples.Oversight.JointObservation.Portfolio"
-    },
-    {
-      "name": "AISafetyAtlas.Examples.Oversight.JointObservation.Portfolio.Principal.enumList_nodup",
-      "kind": "theorem",
       "module": "AISafetyAtlas.Examples.Oversight.JointObservation.Portfolio"
     },
     {
@@ -14446,21 +14386,6 @@
       "module": "AISafetyAtlas.Examples.Oversight.JointObservation.Procurement"
     },
     {
-      "name": "AISafetyAtlas.Examples.Oversight.JointObservation.Procurement.Exec.enumList",
-      "kind": "def",
-      "module": "AISafetyAtlas.Examples.Oversight.JointObservation.Procurement"
-    },
-    {
-      "name": "AISafetyAtlas.Examples.Oversight.JointObservation.Procurement.Exec.enumList_getElem?_ctorIdx_eq",
-      "kind": "theorem",
-      "module": "AISafetyAtlas.Examples.Oversight.JointObservation.Procurement"
-    },
-    {
-      "name": "AISafetyAtlas.Examples.Oversight.JointObservation.Procurement.Exec.enumList_nodup",
-      "kind": "theorem",
-      "module": "AISafetyAtlas.Examples.Oversight.JointObservation.Procurement"
-    },
-    {
       "name": "AISafetyAtlas.Examples.Oversight.JointObservation.Procurement.Exec.sigma00",
       "kind": "constructor",
       "module": "AISafetyAtlas.Examples.Oversight.JointObservation.Procurement"
@@ -14513,21 +14438,6 @@
     {
       "name": "AISafetyAtlas.Examples.Oversight.JointObservation.Procurement.Principal.dataOwner.elim",
       "kind": "def",
-      "module": "AISafetyAtlas.Examples.Oversight.JointObservation.Procurement"
-    },
-    {
-      "name": "AISafetyAtlas.Examples.Oversight.JointObservation.Procurement.Principal.enumList",
-      "kind": "def",
-      "module": "AISafetyAtlas.Examples.Oversight.JointObservation.Procurement"
-    },
-    {
-      "name": "AISafetyAtlas.Examples.Oversight.JointObservation.Procurement.Principal.enumList_getElem?_ctorIdx_eq",
-      "kind": "theorem",
-      "module": "AISafetyAtlas.Examples.Oversight.JointObservation.Procurement"
-    },
-    {
-      "name": "AISafetyAtlas.Examples.Oversight.JointObservation.Procurement.Principal.enumList_nodup",
-      "kind": "theorem",
       "module": "AISafetyAtlas.Examples.Oversight.JointObservation.Procurement"
     },
     {

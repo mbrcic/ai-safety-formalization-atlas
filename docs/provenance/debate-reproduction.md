@@ -17,7 +17,7 @@ Two lanes, both live:
 | Lane | What it checks | Driver |
 |---|---|---|
 | **Path A** (2026-07-20) | upstream, at its own toolchain, from a separate checkout | `scripts/reproduce_debate.sh` |
-| **Path B** (2026-08-20) | the Lean 4.31 port, vendored inside the atlas build closure, with an atlas import surface | `scripts/reproduce_debate.sh --in-tree` |
+| **Path B** (2026-08-20) | the Lean 4.31 port, vendored inside the atlas build closure and migrated in place to v4.33.0 on 2026-08-31, with an atlas import surface | `scripts/reproduce_debate.sh --in-tree` |
 
 Path A is not superseded: a port that silently broke something would still pass
 it, which is exactly why the lane is kept.
@@ -28,7 +28,7 @@ it, which is exactly why the lane is kept.
 |-------|--------|--------|
 | Repository | `github.com/google-deepmind/debate` | `github.com/LukaHobor/debate`, branch `port-lean-4.31` |
 | Revision | `de3a6e500ae1a65dfeea2f91ef519ebad9704be0` (single `main`, no release tag; last commit 2024-10-08) | `dafe25df02300c0ebecf436aab32e953006cb0a1` |
-| Toolchain | `leanprover/lean4:v4.8.0`, Mathlib `v4.8.0` | `leanprover/lean4:v4.31.0`, Mathlib `fabf563a7c95a166b8d7b6efca11c8b4dc9d911f` |
+| Toolchain | `leanprover/lean4:v4.8.0`, Mathlib `v4.8.0` | `leanprover/lean4:v4.33.0`, Mathlib `db584cd6d46c92f209a44c0f1c829460d327499d` — the branch name records where the port came from, not where it now builds |
 | Module | `Debate/Correct.lean` | `AISafetyAtlas.Upstream.Debate.Correct` |
 | Theorems | `completeness`, `soundness`, `correctness` (paper Theorem 6.2) | those three, plus `alice_fast`, `bob_fast`, `vera_fast` |
 | Atlas surface | none | `AISafetyAtlas.Oversight.Debate` |
@@ -49,12 +49,15 @@ it, which is exactly why the lane is kept.
 Result (2026-07-20): clean build, `Debate.Correct`, 1721/1721 targets; trust scan
 clean across 19 upstream Lean sources.
 
-## Path B — vendored into the atlas 4.31 tree
+## Path B — vendored into the atlas tree
 
 The original record deferred a port-then-wrap "until something downstream needs
-to build *on* debate"; the port arrived first. The atlas's Mathlib pin resolves
-to the exact commit the port pins, so the two build closures are identical and
-the development compiles in-tree unchanged. Pins, the three header adaptations
+to build *on* debate"; the port arrived first. The atlas's Mathlib pin resolved
+to the exact commit the port pinned, so the two build closures were identical and
+the development compiled in-tree unchanged. That held until 2026-08-31, when the
+atlas moved to v4.33.0 and the vendored tree was migrated with it: proof scripts
+in `Cost.lean` and `Details.lean` were rewritten and one private helper added, and
+no statement was altered. Pins, the three header adaptations
 and statement fidelity are in
 [`vendor/debate/PROVENANCE.md`](../../vendor/debate/PROVENANCE.md).
 

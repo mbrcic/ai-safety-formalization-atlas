@@ -123,7 +123,7 @@ public theorem exactMinimalBudget_of_empty
   have hempty : {n : ℕ∞ | ∃ m : ℕ, (m : ℕ∞) = n ∧
       exactMinimaxRisk (skel.mapRat ℝ) mc m ≤ ε} = ∅ := by
     ext n
-    simp only [Set.mem_setOf_eq, Set.mem_empty_iff_false, iff_false]
+    simp only [Set.mem_ofPred_eq, Set.mem_empty_iff_false, iff_false]
     rintro ⟨m, -, hm⟩
     exact h m hm
   unfold exactMinimalBudget

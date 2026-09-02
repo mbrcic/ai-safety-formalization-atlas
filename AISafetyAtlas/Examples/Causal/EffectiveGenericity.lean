@@ -220,7 +220,8 @@ public theorem encodeO24Var_inr_ne_inr_of_decision_ne (G : Fin 2 → Finset (Fin
       encodeO24Var (skel.mapRat ℝ).utilityParents G (.inr (false, v)) := by
   intro h
   have := (isPrefixCode_encodeO24Var _ _).injective h
-  simp at this
+  -- `simp` alone no longer takes the pair equality apart.
+  simp [Prod.ext_iff] at this
 
 /-- A table coordinate and a utility coordinate never share a name: the leading
 symbol says which kind of variable it is. Without this the decoder could read a

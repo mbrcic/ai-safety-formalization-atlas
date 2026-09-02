@@ -1,0 +1,123 @@
+{
+  "schema_version": 1,
+  "note": "Machine-readable record of a toolchain migration, so the claims in docs/provenance/toolchain-v4330-migration.md can be checked rather than read. This is a reproduction pin for one bump, NOT the live reference for scripts/check_statement_drift.py: after this branch merges the live baseline is its tip, and comparing forever against the pre-migration tree would keep the gate red over work that is already accounted for.",
+  "migration": {
+    "name": "v4.31.0 -> v4.33.0",
+    "declared_done": "2026-08-31",
+    "baseline_commit": "4edc04182b931a3ac0941d3b98120a6f1ca4fe85",
+    "baseline_toolchain": "leanprover/lean4:v4.31.0",
+    "target_toolchain": "leanprover/lean4:v4.33.0",
+    "pins": {
+      "mathlib": "db584cd6d46c92f209a44c0f1c829460d327499d",
+      "PFR": "7d6404b79b11b1a89dd1b6f997a10b14c208c4ed",
+      "Foundation": "30a16ffa93d79d73ab4d02427fa00f50e039bf29"
+    }
+  },
+  "measured": {
+    "axiom_audited_declarations": 2847,
+    "axiom_audited_set_identical_to_baseline": true,
+    "graded_statements_unchanged": 262,
+    "public_names_unchanged": 1703,
+    "statement_drift_differences": 31,
+    "proof_bodies_rewritten": 135,
+    "erratum": "Supersedes counts of 2753 and 1646 published on 2026-08-31. The scanner that produced them rejected a leading attribute, so every `@[simp] public theorem` was invisible to it; both sides of the comparison shared that blind spot, so it matched while never looking at 51 declarations. The counts above are the re-measurement against the same baseline commit with the repaired scanner: zero added and zero removed either way, as before."
+  },
+  "adjudications": [
+    {
+      "declaration": "instance AISafetyAtlas.Causal.instMeasurableSingletonClassModel",
+      "verdict": "proof",
+      "reason": "The field `measurableSet_singleton` is `Prop`-valued, so its body is a proof."
+    },
+    {
+      "declaration": "def AISafetyAtlas.Examples.Inference.PhysicalKnowledge.knowsTrueWitness",
+      "verdict": "proof",
+      "reason": "The only data field, `selector`, is untouched; both hunks move `Set.mem_setOf_eq` to `Set.mem_ofPred_eq` inside forall-typed proof obligations."
+    },
+    {
+      "declaration": "def AISafetyAtlas.Examples.Oversight.JointObservation.Portfolio.qCD",
+      "verdict": "proof",
+      "reason": "The changed terms are `Finset` membership arguments, which are `Prop`."
+    },
+    {
+      "declaration": "def AISafetyAtlas.Examples.Oversight.JointObservation.Portfolio.qDE",
+      "verdict": "proof",
+      "reason": "The changed terms are `Finset` membership arguments, which are `Prop`."
+    }
+  ],
+  "elaboration": {
+    "note": "The layer the other checks cannot reach. `check_statement_drift.py` compares source text, `check_public_api.py` compares names, `axiom-audit` answers whether a thing is still proved. None of them sees a declaration whose source is unchanged character for character and whose elaborated type is not. This section records that comparison, run once across the migration; it needs the pre-migration toolchain and so cannot be re-derived in CI from this tree alone. The standing check CI does run is narrower and different in kind: it compares this tree against elab-baseline-v4330.json and fails on a silent change, holding the tree steady rather than re-deriving the migration.",
+    "tool": "scripts/check_elaboration_drift.py",
+    "baseline_dump": "docs/status/elab-baseline-v4310.json",
+    "adjudication": "docs/provenance/elaboration-adjudication-v4310-v4330.lean",
+    "measured": {
+      "declarations_compared": 5994,
+      "modules": 255,
+      "source_declarations_added": 0,
+      "source_declarations_removed": 0,
+      "silent_changes": 171,
+      "visible_changes": 2,
+      "compiler_generated_changed": 25,
+      "compiler_generated_appeared_or_vanished": 18,
+      "silent_changes_with_same_constants_rearranged": 0,
+      "silent_changes_unaccounted_for": 0
+    },
+    "verdict": "No statement changed meaning. Every one of the 171 silent changes is one of eleven upstream constant substitutions, each pinned to a fact that holds at both v4.31.0 and v4.33.0 by the adjudication file. No silent change rearranged a statement that kept its constants, so no binder kind, argument order or universe moved. The two visible changes are the `NoAtoms` -> `NullSingletonClass` rename, for which upstream ships an alias. No declaration we wrote appeared or vanished; the eighteen that did are `enumList*` lemmas Mathlib's `deriving` handler emitted into our namespace, and none of them appears in our source.",
+    "silent_substitution_classes": [
+      {
+        "key": "Monoid.toPow",
+        "declarations": 75
+      },
+      {
+        "key": "setOf",
+        "declarations": 52
+      },
+      {
+        "key": "Real.normedCommRing",
+        "declarations": 18
+      },
+      {
+        "key": "Set.instHasSubset",
+        "declarations": 17
+      },
+      {
+        "key": "Finset.instHasSubset",
+        "declarations": 11
+      },
+      {
+        "key": "Finset.partialOrder",
+        "declarations": 6
+      },
+      {
+        "key": "Set.instHasSSubset",
+        "declarations": 1
+      },
+      {
+        "key": "HasSubset.Subset.trans",
+        "declarations": 1
+      },
+      {
+        "key": "AddMonoidAlgebra.addAddCommGroup",
+        "declarations": 1
+      },
+      {
+        "key": "LO.Arrow.arrow",
+        "declarations": 1
+      },
+      {
+        "key": "LO.FirstOrder.instLCWQOfQuantifierOfLogicalConnective",
+        "declarations": 1
+      }
+    ],
+    "coverage": {
+      "selector": "module",
+      "declarations_compared": 5994,
+      "declarations_in_our_modules_not_compared": 0,
+      "note": "Both dumps select declarations by the module they compiled into, so the comparison covers everything our modules build, including the vendored `Kolmogorov.*` and debate `Comp.*` layers that live under someone else's namespace. Selecting by the `AISafetyAtlas` name prefix instead misses 636 of them, which is why the selector is the module."
+    },
+    "reproducible_from_this_repository": "Every count in `measured` and every entry in `silent_substitution_classes` is re-derivable from this tree with no toolchain at all:\n  python3 scripts/check_elaboration_drift.py --compare docs/status/elab-baseline-v4310.json docs/status/elab-baseline-v4330.json\n  python3 scripts/check_elaboration_drift.py --classify docs/status/elab-baseline-v4310.json docs/status/elab-baseline-v4330.json\n`--compare` exits 1 whenever a silent set exists, which is the state this record adjudicates; `--classify` exits 0, meaning no silent change fell outside the eleven registered classes and none kept its constants and rearranged them. The anchors those classes are pinned to still need a toolchain: they are Lean, and `docs/provenance/elaboration-adjudication-v4310-v4330.lean` compiles at both v4.31.0 and v4.33.0.",
+    "current_dump": "docs/status/elab-baseline-v4330.json",
+    "classes": "docs/status/elaboration-classes.json",
+    "dump_format": "Both dumps are `--raw` (the normal form itself, not a digest of it) and are committed as plain text. Raw is what `--classify` needs; a hashed dump can say that a statement moved and not which constants moved in it. Plain text is what git needs: it zlib-compresses every blob and deltas each dump against the one before it, so this pair packs to 391,190 bytes as text against 734,042 gzipped. `.gitattributes` marks them `-diff`, which renders a migration as one `Bin` line without giving up either property.",
+    "how_classes_are_checked": "A class states `removes` and `adds`, and a declaration counts as classified only when the classes that fired account for every constant that left and every constant that arrived. Matching on the departure alone is unsound in two ways: it certifies `setOf -> anything`, and it swallows a second substitution riding along in the same statement. Both were demonstrated against an earlier rule that did so."
+  }
+}

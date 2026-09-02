@@ -63,22 +63,22 @@ public theorem rice (property : BehavioralProperty)
       eval program₁ = eval program₂ →
       (program₁ ∈ codes ↔ program₂ ∈ codes) := by
     intro program₁ program₂ sameBehavior
-    simp only [codes, Set.mem_setOf_eq, Holds]
+    simp only [codes, Set.mem_ofPred_eq, Holds]
     rw [sameBehavior]
   have computableCodes : ComputablePred fun code => code ∈ codes := by
-    simpa only [codes, Set.mem_setOf_eq, HasVerifier] using verifier
+    simpa only [codes, Set.mem_ofPred_eq, HasVerifier] using verifier
   have trivial : codes = ∅ ∨ codes = Set.univ :=
     (AISafetyAtlas.Computability.rice_code_iff codes extensional).mp computableCodes
   rcases nontrivial with ⟨⟨accepted, acceptedHolds⟩, ⟨rejected, rejectedFails⟩⟩
   rcases trivial with empty | universal
   · have acceptedMem : accepted ∈ codes := by
-      simpa only [codes, Set.mem_setOf_eq] using acceptedHolds
+      simpa only [codes, Set.mem_ofPred_eq] using acceptedHolds
     rw [empty] at acceptedMem
     exact acceptedMem
   · have rejectedMem : rejected ∈ codes := by
       rw [universal]
       exact Set.mem_univ rejected
     exact rejectedFails (by
-      simpa only [codes, Set.mem_setOf_eq] using rejectedMem)
+      simpa only [codes, Set.mem_ofPred_eq] using rejectedMem)
 
 end AISafetyAtlas.Verification

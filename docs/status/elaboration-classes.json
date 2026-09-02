@@ -1,0 +1,120 @@
+{
+  "note": "Standing verdicts on elaboration-level substitutions. `scripts/check_elaboration_drift.py --classify` matches the silent set of a migration against these and reports only what is left over, so a toolchain bump costs a reading of the classes upstream introduced rather than a reading of every declaration they touched. A class is only recorded here once its anchor -- a fact that decides the meaning and that can be stated in terms existing at both toolchains -- compiles on both trees. Anchors live in docs/provenance/elaboration-adjudication-*.lean.",
+  "how_a_class_is_checked": "`removes` and `adds` are the machine-checkable content of the verdict; `key` only names it and `change` only reads it aloud. A class fires on a declaration when every constant in `removes` left that statement. A declaration is classified only when the classes that fired between them account for BOTH sides: every constant that left is in some fired class's `removes`, and every constant that arrived is in some fired class's `adds`. Matching on the departure alone would certify `setOf -> anything`, and would swallow an unrelated substitution riding along in the same statement. `adds` is a superset rather than an equality because a constant the substitution introduces may already occur in the statement for other reasons, in which case it is not a new arrival; that direction is safe, since it can only leave an arrival unaccounted for and so fail closed.",
+  "classes": [
+    {
+      "key": "setOf",
+      "change": "setOf -> Set.ofPred",
+      "removes": ["setOf"],
+      "adds": ["Set.ofPred"],
+      "anchor": "a set is its membership predicate: (a in {x | p x}) = p a",
+      "adjudicated_in": "docs/provenance/elaboration-adjudication-v4310-v4330.lean"
+    },
+    {
+      "key": "Monoid.toPow",
+      "change": "Monoid.toPow -> Monoid.toNPow + NPow.toPow",
+      "removes": ["Monoid.toPow"],
+      "adds": ["Monoid.toNPow", "NPow.toPow"],
+      "anchor": "the power is fixed by its recursion; Monoid.npow is gone at 4.33 and NPow.npow absent at 4.31, so neither operation can be named at both versions but the recursion determines it uniquely",
+      "adjudicated_in": "docs/provenance/elaboration-adjudication-v4310-v4330.lean"
+    },
+    {
+      "key": "Real.normedCommRing",
+      "change": "the normed route on Real -> CommRing.toNonUnitalCommRing Real.commRing",
+      "removes": [
+        "NonUnitalNormedCommRing.toNonUnitalCommRing",
+        "NormedCommRing.toNonUnitalNormedCommRing",
+        "Real.normedCommRing"
+      ],
+      "adds": ["CommRing.toNonUnitalCommRing", "Real.commRing"],
+      "anchor": "the two instance terms are definitionally equal at both versions",
+      "adjudicated_in": "docs/provenance/elaboration-adjudication-v4310-v4330.lean"
+    },
+    {
+      "key": "Set.instHasSubset",
+      "change": "HasSubset.Subset -> LE.le, on Set",
+      "removes": ["HasSubset.Subset", "Set.instHasSubset"],
+      "adds": ["LE.le", "Set.instLE"],
+      "anchor": "(s subset t) = (s <= t) definitionally at both versions",
+      "adjudicated_in": "docs/provenance/elaboration-adjudication-v4310-v4330.lean"
+    },
+    {
+      "key": "Finset.instHasSubset",
+      "change": "HasSubset.Subset -> LE.le, on Finset",
+      "removes": ["Finset.instHasSubset", "HasSubset.Subset"],
+      "adds": ["Finset.instPartialOrder", "LE.le", "PartialOrder.toPreorder", "Preorder.toLE"],
+      "anchor": "(s subset t) = (s <= t) definitionally at both versions",
+      "adjudicated_in": "docs/provenance/elaboration-adjudication-v4310-v4330.lean"
+    },
+    {
+      "key": "Set.instHasSSubset",
+      "change": "HasSSubset.SSubset -> LT.lt, via the Set complete-lattice route",
+      "removes": ["HasSSubset.SSubset", "Set.instHasSSubset"],
+      "adds": [
+        "CompleteAtomicBooleanAlgebra.toCompleteBooleanAlgebra",
+        "CompleteBooleanAlgebra.toCompleteLattice",
+        "CompleteLattice.toConditionallyCompleteLattice",
+        "ConditionallyCompleteLattice.toConditionallyCompletePartialOrder",
+        "ConditionallyCompletePartialOrder.toConditionallyCompletePartialOrderSup",
+        "ConditionallyCompletePartialOrderSup.toPartialOrder",
+        "LT.lt",
+        "PartialOrder.toPreorder",
+        "Preorder.toLT",
+        "Set.instCompleteAtomicBooleanAlgebra"
+      ],
+      "anchor": "(s ssubset t) = (s < t) definitionally at both versions",
+      "adjudicated_in": "docs/provenance/elaboration-adjudication-v4310-v4330.lean"
+    },
+    {
+      "key": "Finset.partialOrder",
+      "change": "Finset.partialOrder -> Finset.instPartialOrder",
+      "removes": ["Finset.partialOrder"],
+      "adds": ["Finset.instPartialOrder"],
+      "anchor": "(s <= t) is the same membership implication at both versions",
+      "adjudicated_in": "docs/provenance/elaboration-adjudication-v4310-v4330.lean"
+    },
+    {
+      "key": "HasSubset.Subset.trans",
+      "change": "HasSubset.Subset.trans -> LE.le.trans, via the Set complete-lattice route",
+      "removes": ["HasSubset.Subset.trans", "Set.instIsTransSubset"],
+      "adds": [
+        "ChainCompletePartialOrder.instOfCompleteLattice",
+        "ChainCompletePartialOrder.toPartialOrder",
+        "CompleteAtomicBooleanAlgebra.toCompleteBooleanAlgebra",
+        "CompleteBooleanAlgebra.toCompleteLattice",
+        "LE.le.trans",
+        "PartialOrder.toPreorder",
+        "Set.instCompleteAtomicBooleanAlgebra"
+      ],
+      "anchor": "Comp.allow takes the inclusion proof as an argument, and proofs of one Prop are definitionally equal, so which proof term is written there cannot change the statement; that the two Props are the same one is the subset-is-le anchor",
+      "adjudicated_in": "docs/provenance/elaboration-adjudication-v4310-v4330.lean"
+    },
+    {
+      "key": "AddMonoidAlgebra.addAddCommGroup",
+      "change": "AddMonoidAlgebra.addAddCommGroup -> AddMonoidAlgebra.addCommGroup",
+      "removes": ["AddMonoidAlgebra.addAddCommGroup"],
+      "adds": ["AddMonoidAlgebra.addCommGroup"],
+      "anchor": "coefficients determine a polynomial, and coeff_sub and coeff_neg hold at both versions",
+      "adjudicated_in": "docs/provenance/elaboration-adjudication-v4310-v4330.lean"
+    },
+    {
+      "key": "LO.Arrow.arrow",
+      "change": "LO.Arrow.arrow -> LO.Arrow.instHArrow + LO.HArrow.hArrow",
+      "removes": ["LO.Arrow.arrow"],
+      "adds": ["LO.Arrow.instHArrow", "LO.HArrow.hArrow"],
+      "anchor": "the notation still means LO.Arrow.arrow at both versions; AISafetyAtlas.Logic.loeb also inherits its statement from the Foundation theorem it is assigned from",
+      "adjudicated_in": "docs/provenance/elaboration-adjudication-v4310-v4330.lean"
+    },
+    {
+      "key": "LO.FirstOrder.instLCWQOfQuantifierOfLogicalConnective",
+      "change": "the LO.FirstOrder LCWQ instance gains LogicalNeutral",
+      "removes": ["LO.FirstOrder.instLCWQOfQuantifierOfLogicalConnective"],
+      "adds": [
+        "LO.FirstOrder.Semiformula.instLogicalNeutral",
+        "LO.FirstOrder.instLCWQOfQuantifierOfLogicalConnectiveOfLogicalNeutral"
+      ],
+      "anchor": "AISafetyAtlas.Logic.tarski_undefinability is a thin wrapper whose proof is the Foundation theorem, so the kernel checks our statement against Foundation's at whichever version elaborates it",
+      "adjudicated_in": "docs/provenance/elaboration-adjudication-v4310-v4330.lean"
+    }
+  ]
+}

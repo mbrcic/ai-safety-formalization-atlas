@@ -409,10 +409,10 @@ parents, so `submodel_eval` holds either way. -/
     (x : Assignment V dom) : SCM V dom edom where
   dom_pos := M.dom_pos
   parents := fun v ↦ if v ∈ X then ∅ else M.parents v
-  acyclic := fun v hv ↦ M.acyclic v (hv.mono fun p w hp ↦ by
+  acyclic := fun v hv ↦ M.acyclic v (Relation.TransGen.mono (fun p w hp ↦ by
     by_cases hw : w ∈ X
     · rw [if_pos hw] at hp; exact absurd hp (Set.notMem_empty p)
-    · rwa [if_neg hw] at hp)
+    · rwa [if_neg hw] at hp) _ _ hv)
   f := fun v a e ↦ if v ∈ X then x v else M.f v a e
   f_parents := fun v a b e h ↦ by
     by_cases hv : v ∈ X
@@ -880,7 +880,8 @@ structural function would falsify that vertex's `f_parents`. -/
       parents := fun v ↦
         if v = d then M.graph.parents d \ {x} else M.graph.parents v
       acyclic := fun v hv ↦
-        M.graph.acyclic v (hv.mono fun a b hab ↦ removeInfoLink_sub M hab)
+        M.graph.acyclic v
+          (Relation.TransGen.mono (fun a b hab ↦ removeInfoLink_sub M hab) _ _ hv)
       utility_childless := by
         intro u hu v
         by_cases hv : v = d

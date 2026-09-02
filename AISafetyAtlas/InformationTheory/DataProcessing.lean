@@ -465,8 +465,8 @@ public theorem mutualInfo_chain_rule_pi {n : ℕ} {V' : Fin n → Type uV}
     I[Y : observationVectorPi X ; μ] =
       ∑ i : Fin n, I[Y : X i | observationPrefixPi X i ; μ] := by
   classical
-  letI : MeasurableSpace ((k : Fin n) × V' k) := ⊤
-  haveI : DiscreteMeasurableSpace ((k : Fin n) × V' k) := ⟨fun _ ↦ trivial⟩
+  let : MeasurableSpace ((k : Fin n) × V' k) := ⊤
+  have : DiscreteMeasurableSpace ((k : Fin n) × V' k) := ⟨fun _ ↦ trivial⟩
   have hTm : ∀ i, Measurable (observationTagged X i) :=
     fun i ↦ (Measurable.of_discrete).comp (hX i)
   have hPi : Measurable (observationVectorPi X) := measurable_pi_iff.mpr hX

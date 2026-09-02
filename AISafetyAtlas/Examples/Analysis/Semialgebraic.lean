@@ -63,7 +63,7 @@ public theorem halfPlane_not_compact : ¬ IsCompact halfPlane := by
     have h0 := (mem_halfPlane x).mp hx
     linarith
   have hle := hmax hmem
-  simp only [Set.mem_setOf_eq] at hle
+  simp only [Set.mem_ofPred_eq] at hle
   linarith
 
 /-! ## Unions stay semialgebraic -/
@@ -128,7 +128,7 @@ public theorem axis_compl_eq :
       ∪ BasicSemialgebraic {(-X 0, PolySign.pos)} := by
   ext x
   simp only [Set.mem_compl_iff, mem_axis, Set.mem_union, BasicSemialgebraic,
-    Set.mem_setOf_eq, Finset.mem_singleton, forall_eq, PolySign.Holds, map_neg,
+    Set.mem_ofPred_eq, Finset.mem_singleton, forall_eq, PolySign.Holds, map_neg,
     eval_X]
   constructor
   · intro hx

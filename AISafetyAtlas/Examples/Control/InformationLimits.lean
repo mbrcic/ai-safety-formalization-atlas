@@ -189,7 +189,7 @@ public theorem not_openLoopBound_erase :
         (fun _ => ()) (Real.log 2) := by
   intro h
   have hμ : (uniformOn (Set.univ : Set TwoBit)) Set.univ ≠ 0 := by
-    haveI : IsProbabilityMeasure (uniformOn (Set.univ : Set TwoBit)) := inferInstance
+    have : IsProbabilityMeasure (uniformOn (Set.univ : Set TwoBit)) := inferInstance
     simp
   have hkey := h Set.univ MeasurableSet.univ hμ ()
   rw [cond_univ] at hkey
@@ -241,9 +241,9 @@ public theorem controlLoss_gate_block :
       (fun _ => (0 : Fin 2)) (plantOutcome noiseGate (fun _ => ()) (fun _ => (0 : Fin 2)) id)
       ≤ H[plantOutcome noiseGate (fun _ => ()) (fun _ => (0 : Fin 2)) (id : Fin 2 → Fin 2)
           ; uniformOn (Set.univ : Set (Fin 2))] := by
-    haveI : FiniteRange (⟨fun _ => (), fun _ => (0 : Fin 2)⟩ : Fin 2 → Unit × Fin 2) :=
+    have : FiniteRange (⟨fun _ => (), fun _ => (0 : Fin 2)⟩ : Fin 2 → Unit × Fin 2) :=
       ⟨Set.toFinite _⟩
-    haveI : FiniteRange (plantOutcome noiseGate (fun _ => ())
+    have : FiniteRange (plantOutcome noiseGate (fun _ => ())
         (fun _ => (0 : Fin 2)) (id : Fin 2 → Fin 2)) := ⟨Set.toFinite _⟩
     exact condEntropy_le_entropy _ (by rw [hconst]; exact measurable_const) (by fun_prop)
   refine hle.trans ?_
@@ -255,9 +255,9 @@ action are both constant, so they say nothing about the outcome. -/
 public theorem controlLoss_gate_pass :
     controlLoss (uniformOn (Set.univ : Set (Fin 2))) (fun _ => ()) (fun _ => (1 : Fin 2))
         (plantOutcome noiseGate (fun _ => ()) (fun _ => (1 : Fin 2)) id) = Real.log 2 := by
-  haveI : FiniteRange (⟨fun _ => (), fun _ => (1 : Fin 2)⟩ : Fin 2 → Unit × Fin 2) :=
+  have : FiniteRange (⟨fun _ => (), fun _ => (1 : Fin 2)⟩ : Fin 2 → Unit × Fin 2) :=
     ⟨Set.toFinite _⟩
-  haveI : FiniteRange (id : Fin 2 → Fin 2) := ⟨Set.toFinite _⟩
+  have : FiniteRange (id : Fin 2 → Fin 2) := ⟨Set.toFinite _⟩
   have hid : plantOutcome noiseGate (fun _ => ()) (fun _ => (1 : Fin 2)) (id : Fin 2 → Fin 2)
       = (id : Fin 2 → Fin 2) := rfl
   have hindep : ProbabilityTheory.IndepFun (id : Fin 2 → Fin 2)
@@ -321,9 +321,9 @@ public theorem controlLoss_noiseReader :
   have hconst : plantOutcome shiftPlant (fun _ => ()) noiseReader (id : ZMod 2 → ZMod 2)
       = fun _ => (0 : ZMod 2) := funext fun ω => sub_self _
   refine le_antisymm ?_ (condEntropy_nonneg _ _ _)
-  haveI : FiniteRange (⟨fun _ => (), noiseReader⟩ : ZMod 2 → Unit × ZMod 2) :=
+  have : FiniteRange (⟨fun _ => (), noiseReader⟩ : ZMod 2 → Unit × ZMod 2) :=
     ⟨Set.toFinite _⟩
-  haveI : FiniteRange (plantOutcome shiftPlant (fun _ => ())
+  have : FiniteRange (plantOutcome shiftPlant (fun _ => ())
       noiseReader (id : ZMod 2 → ZMod 2)) := ⟨Set.toFinite _⟩
   refine le_trans (condEntropy_le_entropy _ (by rw [hconst]; exact measurable_const)
     (by fun_prop)) ?_
@@ -335,9 +335,9 @@ the state carrying nothing and the control fixed, the outcome is the noise. -/
 public theorem controlLoss_constant_shiftPlant :
     controlLoss (uniformOn (Set.univ : Set (ZMod 2))) (fun _ => ()) (fun _ => (0 : ZMod 2))
         (plantOutcome shiftPlant (fun _ => ()) (fun _ => (0 : ZMod 2)) id) = Real.log 2 := by
-  haveI : FiniteRange (⟨fun _ => (), fun _ => (0 : ZMod 2)⟩ : ZMod 2 → Unit × ZMod 2) :=
+  have : FiniteRange (⟨fun _ => (), fun _ => (0 : ZMod 2)⟩ : ZMod 2 → Unit × ZMod 2) :=
     ⟨Set.toFinite _⟩
-  haveI : FiniteRange (id : ZMod 2 → ZMod 2) := ⟨Set.toFinite _⟩
+  have : FiniteRange (id : ZMod 2 → ZMod 2) := ⟨Set.toFinite _⟩
   have hid : plantOutcome shiftPlant (fun _ => ()) (fun _ => (0 : ZMod 2))
       (id : ZMod 2 → ZMod 2) = (id : ZMod 2 → ZMod 2) := funext fun ω => sub_zero _
   have hindep : ProbabilityTheory.IndepFun (id : ZMod 2 → ZMod 2)
@@ -364,8 +364,8 @@ one rather than a bookkeeping choice.
 public theorem not_isInputPolicy_noiseReader :
     ¬ IsInputPolicy (uniformOn (Set.univ : Set (ZMod 2))) (fun _ => ())
         (id : ZMod 2 → ZMod 2) noiseReader := by
-  haveI : FiniteRange (id : ZMod 2 → ZMod 2) := ⟨Set.toFinite _⟩
-  haveI : FiniteRange (fun _ : ZMod 2 => ()) := ⟨Set.toFinite _⟩
+  have : FiniteRange (id : ZMod 2 → ZMod 2) := ⟨Set.toFinite _⟩
+  have : FiniteRange (fun _ : ZMod 2 => ()) := ⟨Set.toFinite _⟩
   intro hpolicy
   have h := hpolicy.condIndep
   have hzero : I[(id : ZMod 2 → ZMod 2) : (id : ZMod 2 → ZMod 2) | (fun _ : ZMod 2 => ()) ;
@@ -384,15 +384,15 @@ public theorem not_isInputPolicy_noiseReader :
   -- and the noise determines the noise-reader
   have h₂ : H[(id : ZMod 2 → ZMod 2) | ⟨(id : ZMod 2 → ZMod 2), fun _ : ZMod 2 => ()⟩ ;
       uniformOn (Set.univ : Set (ZMod 2))] = 0 := by
-    haveI : FiniteRange (⟨(id : ZMod 2 → ZMod 2), fun _ : ZMod 2 => ()⟩ :
+    have : FiniteRange (⟨(id : ZMod 2 → ZMod 2), fun _ : ZMod 2 => ()⟩ :
         ZMod 2 → ZMod 2 × Unit) := ⟨Set.toFinite _⟩
     -- `id` is the first projection of the pair it is conditioned on, so it adds
     -- nothing: pairing a variable with a function of it is an injective recoding
     set W : ZMod 2 → ZMod 2 × Unit := ⟨(id : ZMod 2 → ZMod 2), fun _ => ()⟩ with hWdef
     have hWm : Measurable W := by fun_prop
-    haveI : FiniteRange W := ⟨Set.toFinite _⟩
-    haveI : FiniteRange (Prod.fst ∘ W) := ⟨Set.toFinite _⟩
-    haveI : FiniteRange (⟨Prod.fst ∘ W, W⟩ : ZMod 2 → ZMod 2 × (ZMod 2 × Unit)) :=
+    have : FiniteRange W := ⟨Set.toFinite _⟩
+    have : FiniteRange (Prod.fst ∘ W) := ⟨Set.toFinite _⟩
+    have : FiniteRange (⟨Prod.fst ∘ W, W⟩ : ZMod 2 → ZMod 2 × (ZMod 2 × Unit)) :=
       ⟨Set.toFinite _⟩
     have hpair : H[⟨Prod.fst ∘ W, W⟩ ; uniformOn (Set.univ : Set (ZMod 2))]
         = H[W ; uniformOn (Set.univ : Set (ZMod 2))] :=

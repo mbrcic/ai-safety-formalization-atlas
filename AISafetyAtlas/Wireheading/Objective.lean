@@ -196,7 +196,7 @@ public theorem optimal_decisions_eq_of_pos_scaleUtility
     intro d
     exact value_scaleUtility c O start duration (dynamics d)
   ext d
-  simp only [Set.mem_setOf_eq, IsOptimal, hval]
+  simp only [Set.mem_ofPred_eq, IsOptimal, hval]
   constructor
   · rintro ⟨hmem, hle⟩
     refine ⟨hmem, fun other hother => ?_⟩

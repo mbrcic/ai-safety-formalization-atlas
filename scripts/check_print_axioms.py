@@ -18,14 +18,12 @@ that to the coincidence that published results happen to use these keywords,
 and `check_every_module_audited` asserts that no `.lean` under `AISafetyAtlas/`
 sits outside the audited set at all.
 
-Two of those clauses arrived on 2026-08-24 and each closed a gap that was
-latent rather than live. The consumer set was the *literal* list of build
-targets, so a module compiled through a target without being named would have
-been audited by nothing; every conjecture module happened to be listed. And
-definitions were audited nowhere off the facade, which mattered little while a
-conjecture was a `Prop` with a one-line body and matters a great deal under the
-answer-construction design, where a "determine X" problem is a `def` over a
-candidate answer and the body is the whole of the statement.
+Two of those clauses are load-bearing in ways that are easy to undo. The
+consumer set must be the transitive closure of the build targets, not the
+literal list: a module compiled through a target without being named would
+otherwise be audited by nothing. And definitions must be audited off the facade
+too, because under the answer-construction design a "determine X" problem is a
+`def` over a candidate answer, so the body is the whole of the statement.
 """
 
 from __future__ import annotations
@@ -62,8 +60,18 @@ END_RE = re.compile(r"^\s*end\s+([A-Za-z0-9_'.]+)\s*$")
 #
 # Lean identifiers admit Greek letters, subscripts, `!`, `?` and more, so
 # enumerating them is the wrong approach; the delimiters are the short list.
+# An attribute may precede `public` on the same line, and the prefix group here
+# must admit it, as `PUBLIC_DEF_RE` below does. Without it `@[simp] public
+# theorem foo` matches nothing and is dropped from the audit silently -- 51
+# attributed public theorems went unpassed to `#print axioms` that way. Nothing
+# downstream notices: the count stays plausible and the baseline comparison stays
+# green, because both sides of that comparison are computed by this same pattern
+# and so share the hole.
+# `scripts/check_audit_coverage.py` is what found it and what keeps it closed:
+# it asks the elaborated environment what is public, rather than asking this
+# regex what it happened to match.
 PUBLIC_THEOREM_RE = re.compile(
-    r"^\s*public\s+(?:theorem|lemma)\s+([^\s:({\[]+)"
+    r"^\s*(?:@\[[^\]]*\]\s*)?public\s+(?:theorem|lemma)\s+([^\s:({\[]+)"
 )
 # Specifications are `def`s, not theorems, and the conjecture layer is about to
 # carry more of them: under the answer-construction design a "determine X"
@@ -71,9 +79,16 @@ PUBLIC_THEOREM_RE = re.compile(
 # content and a `sorry` there would be invisible to a theorem-only scan. An
 # attribute may precede `public` on the same line (`@[expose] public …`), which
 # a `^\s*public` anchor silently skips.
+#
+# `instance` and `inductive` belong in that list too: a named `public instance`
+# can carry a `Prop`-valued field, so it is exactly as capable of hiding a
+# `sorry` as a `def` is, and a `public inductive` is the same shape of statement
+# a `public structure` already was. An *anonymous* instance has no
+# name here to match and is reached only through the declaration it serves; see
+# `docs/status/audit-coverage-exclusions.json` for that and the rest.
 PUBLIC_DEF_RE = re.compile(
     r"^\s*(?:@\[[^\]]*\]\s*)?public\s+(?:noncomputable\s+)?"
-    r"(?:def|abbrev|structure)\s+([^\s:({\[]+)"
+    r"(?:def|abbrev|structure|instance|inductive)\s+([^\s:({\[]+)"
 )
 # `facade_sources` follows `public import` because that is what re-exports a
 # declaration. A build target's own dependencies are reached by any import, so

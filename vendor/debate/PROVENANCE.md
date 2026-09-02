@@ -8,7 +8,8 @@
 | Pin revision | `dafe25df02300c0ebecf436aab32e953006cb0a1` (2026-08-20) |
 | License | Apache-2.0 (upstream `LICENSE`; text at repository root `LICENSE`) |
 | Original toolchain | `leanprover/lean4:v4.8.0`, Mathlib `v4.8.0` |
-| Port toolchain | `leanprover/lean4:v4.31.0`, Mathlib `fabf563a7c95a166b8d7b6efca11c8b4dc9d911f` — the same commit the atlas's `rev = "v4.31.0"` resolves to, which is what makes vendoring possible |
+| Port toolchain | `leanprover/lean4:v4.31.0`, Mathlib `fabf563a7c95a166b8d7b6efca11c8b4dc9d911f` — the commit the atlas's `rev` resolved to when this was vendored, which is what made vendoring possible |
+| Atlas toolchain now | `leanprover/lean4:v4.33.0`, Mathlib `db584cd6d46c92f209a44c0f1c829460d327499d` — the vendored tree was migrated in place on 2026-08-31; see [`toolchain-v4330-migration.md`](../../docs/provenance/toolchain-v4330-migration.md) |
 | Principal declarations | `completeness`, `soundness`, `correctness` (root namespace) |
 | Atlas facade | `AISafetyAtlas.Oversight.Debate.{completeness,soundness,correctness,alice_fast,bob_fast,vera_fast}` |
 | Landscape record | `LAND-DEBATE-001` |
@@ -51,11 +52,15 @@ the port's own prose are not vendored; the atlas supplies its own.
 
 ## Atlas adaptations
 
-Every change is in the file header. No statement, proof script, notation,
-declaration name, or namespace in any body is altered.
+Every change was in the file header until the v4.33.0 migration of 2026-08-31,
+which rewrote proof scripts in `Cost.lean` and `Details.lean` and added one
+`private lemma verabind_cost_eq_zero` there. **No statement, notation,
+declaration name, or namespace in any body is altered**, in those two files or
+any other; `scripts/check_statement_drift.py` is what checks that rather than
+this sentence asserting it.
 
 1. `module`, and each `import` rewritten to `public import` at the atlas module
-   path — the atlas package uses the Lean 4.31 module system and upstream does not.
+   path — the atlas package uses the Lean module system and upstream does not.
 2. One `@[expose] public section` per file, because cross-module `simp`/`rfl`
    steps here unfold definitions from other files. Keeping the file structure
    (rather than collapsing the tree as `Upstream/GibbardSatterthwaite.lean` does)

@@ -1,6 +1,8 @@
 /-
 Vendored from `google-deepmind/debate` (Apache-2.0) via the Lean v4.31.0 port
-`LukaHobor/debate` @ `dafe25d`. Changed at the header only; ledger and
+`LukaHobor/debate` @ `dafe25d`, and migrated in place to Lean v4.33.0. Changed at
+the header, and in proof scripts to build at that toolchain; no statement is
+altered, and one `private lemma verabind_cost_eq_zero` is added. Ledger and
 rationale: `vendor/debate/PROVENANCE.md`.
 -/
 
@@ -64,6 +66,19 @@ variable {k c s b e p q v : ℝ}
   simp only [vera, bob', alice', Comp.cost_bind, Comp.cost_estimate, Comp.cost_query, mul_one,
     Comp.prob_estimate, Comp.prob_query, Comp.cost_pure, exp_const, add_zero]
 
+/-- The vera-then-error branch costs nothing to anyone but Vera.
+
+`zero_cost` used to discharge this in place. At Lean v4.33 its `rw
+[Comp.cost_eq_zero]` no longer matches through the bind, so the bind is peeled
+by elaborating `Comp.cost_bind` as a term -- `rw` will not match it either. -/
+private lemma verabind_cost_eq_zero {i : OracleId} (m : i ∉ ({VeraId} : Set OracleId))
+    (v : Comp {VeraId} Bool) (o : OracleId → Oracle) :
+    (v.allow_all >>= fun d => (pure (Except.error d) : Comp Set.univ (Except Bool α))).cost o i
+      = 0 := by
+  refine (Comp.cost_bind _ _ _ _).trans ?_
+  rw [Comp.cost_allow_all, Comp.cost_eq_zero m]
+  simp only [Comp.cost_pure, exp_const, add_zero]
+
 /-!
 ### Alice and Bob cost
 -/
@@ -72,11 +87,12 @@ variable {k c s b e p q v : ℝ}
 lemma alice_steps_cost (o : Oracle) (bob : Bob) (vera : Vera) (n : ℕ):
     (steps (alice c q) bob vera n).cost (fun _ ↦ o) AliceId ≤ n * samples c q := by
   induction' n with n h
-  · simp only [Nat.zero_eq, steps, Comp.cost_pure, CharP.cast_eq_zero, zero_mul, le_refl]
+  · simp only [Nat.zero_eq, steps, CharP.cast_eq_zero, zero_mul]
+    exact le_of_eq (Comp.cost_pure _ _ _)
   · simp only [steps, Comp.cost_bind, Nat.cast_succ, add_mul, one_mul]
     refine add_le_add h (exp_le_of_forall_le (fun y m ↦ ?_))
     induction y
-    · simp only [Comp.cost_pure, Nat.cast_nonneg]
+    · exact (Comp.cost_pure _ _ _).le.trans (Nat.cast_nonneg _)
     · simp only [step, Comp.sample'_bind, pure_bind, Comp.cost_bind, alice_cost,
         Comp.prob_allow_all, add_le_iff_nonpos_right, Comp.cost_allow_all]
       refine exp_le_of_forall_le fun _ _ ↦ add_nonpos (by zero_cost) ?_
@@ -84,18 +100,23 @@ lemma alice_steps_cost (o : Oracle) (bob : Bob) (vera : Vera) (n : ℕ):
       induction x
       · simp only [Bool.false_eq_true, reduceIte, reduceCtorEq, ite_false, Comp.cost_bind, Comp.cost_allow_all, Comp.prob_allow_all,
           Comp.cost_pure, exp_const, add_zero]
-        zero_cost
-      · simp only [Bool.false_eq_true, reduceIte, reduceCtorEq, ite_true, Comp.cost_sample, Comp.cost_pure, exp_const, le_refl]
+        first
+          | exact verabind_cost_eq_zero (by not_mem) _ _
+          | exact le_of_eq (verabind_cost_eq_zero (by not_mem) _ _)
+      · simp only [Bool.false_eq_true, reduceIte, reduceCtorEq, ite_true]
+        refine le_of_eq ((Comp.cost_sample _ _ _ _).trans ?_)
+        exact exp_eq_zero fun x _ => Comp.cost_pure _ _ _
 
 /-- Bob makes few queries, regardless of Alice and Vera -/
 lemma bob_steps_cost (o : Oracle) (alice : Alice) (vera : Vera) (n : ℕ):
     (steps alice (bob s b q) vera n).cost (fun _ ↦ o) BobId ≤ n * samples ((b-s)/2) q := by
   induction' n with n h
-  · simp only [Nat.zero_eq, steps, Comp.cost_pure, CharP.cast_eq_zero, zero_mul, le_refl]
+  · simp only [Nat.zero_eq, steps, CharP.cast_eq_zero, zero_mul]
+    exact le_of_eq (Comp.cost_pure _ _ _)
   · simp only [steps, Comp.cost_bind, Nat.cast_succ, add_mul, one_mul]
     refine add_le_add h (exp_le_of_forall_le (fun y m ↦ ?_))
     induction y
-    · simp only [Comp.cost_pure, Nat.cast_nonneg]
+    · exact (Comp.cost_pure _ _ _).le.trans (Nat.cast_nonneg _)
     · simp only [step, Comp.sample'_bind, pure_bind, Comp.cost_bind, Comp.cost_allow_all,
         Comp.prob_allow_all]
       have b0 : ∀ y o, (alice n y).cost o BobId = 0 := by intro _ _; zero_cost
@@ -106,8 +127,10 @@ lemma bob_steps_cost (o : Oracle) (alice : Alice) (vera : Vera) (n : ℕ):
       induction x
       · simp only [Bool.false_eq_true, reduceIte, reduceCtorEq, ite_false, Comp.cost_bind, Comp.cost_allow_all, Comp.prob_allow_all,
           Comp.cost_pure, exp_const, add_zero]
-        zero_cost
-      · simp only [Bool.false_eq_true, reduceIte, reduceCtorEq, ite_true, Comp.cost_sample, Comp.cost_pure, exp_const]
+        exact verabind_cost_eq_zero (by not_mem) _ _
+      · simp only [Bool.false_eq_true, reduceIte, reduceCtorEq, ite_true]
+        refine (Comp.cost_sample _ _ _ _).trans ?_
+        exact exp_eq_zero fun x _ => Comp.cost_pure _ _ _
 
 /-- Alice makes few queries, regardless of Bob and Vera -/
 theorem alice_debate_cost (o : Oracle) (bob : Bob) (vera : Vera) (t : ℕ):
@@ -200,19 +223,27 @@ def postV (vera : Vera) (x : StateV n) : Comp AllIds (State n) := match x with
 lemma post_stepsV (alice : Alice) (bob : Bob) (vera : Vera) :
     (stepsV alice bob n).allow_all >>= postV vera = steps alice bob vera n := by
   induction' n with n h
-  · simp only [Nat.zero_eq, stepsV, Comp.allow_all, Comp.allow_pure, postV, pure_bind, steps]
+  · rfl
   · simp only [stepsV, Comp.allow_all_bind, bind_assoc, steps, ← h]
     apply congr_arg₂ _ rfl ?_
     ext x; induction' x with n y p
-    · simp only [Comp.allow_all_pure, postV, pure_bind, bind_assoc]
+    · -- `dsimp only` iota-reduces the match on the literal constructor. Every
+      -- rewrite here is then applied as a term: new in v4.33, `rw` first checks
+      -- that the target is type-correct at `implicit` transparency, and the type
+      -- synonyms `StateV` and `State` do not unfold there, so it refuses before
+      -- matching any pattern. Elaboration unifies up to defeq and is unaffected.
+      dsimp only
+      refine (congrArg (· >>= postV vera) (Comp.allow_all_pure _)).trans ?_
+      refine (pure_bind _ _).trans ?_
+      simp only [postV]
+      exact Eq.symm ((bind_assoc _ _ _).trans (bind_congr fun x => pure_bind _ _))
     · simp only [stepV, Comp.sample'_bind, pure_bind, Comp.allow_all_bind, Comp.allow_all_allow,
         bind_assoc, postV, step]
       apply congr_arg₂ _ rfl ?_; ext p; apply congr_arg₂ _ rfl ?_; ext b
       induction b
-      · simp only [Bool.false_eq_true, reduceIte, reduceCtorEq, ite_false, Comp.allow_all_pure, pure_bind, postV]
+      · rfl
       · simp only [Bool.false_eq_true, reduceIte, reduceCtorEq, ite_true]
-        rw [Comp.allow_all, Comp.allow, bind_assoc]
-        simp only [Comp.allow_all, Comp.allow_pure, pure_bind, Comp.sample'_bind, postV]
+        rfl
 
 /-- Vera makes few queries, regardless of Alice and Bob -/
 theorem vera_debate_cost (o : Oracle) (alice : Alice) (bob : Bob) (t : ℕ):
@@ -226,9 +257,10 @@ theorem vera_debate_cost (o : Oracle) (alice : Alice) (bob : Bob) (t : ℕ):
     induction x; repeat simp only [Comp.cost_pure, le_refl]
   · simp only [postV]
     induction x
-    · simp only [Comp.cost_bind, Comp.cost_allow_all, vera_cost, Comp.prob_allow_all,
-        Comp.cost_pure, exp_const, add_zero, le_refl]
-    · simp only [Comp.cost_pure, Nat.cast_nonneg]
+    · refine le_of_eq ((Comp.cost_bind _ _ _ _).trans ?_)
+      rw [Comp.cost_allow_all, vera_cost]
+      exact add_eq_left.mpr (exp_eq_zero fun x _ => Comp.cost_pure _ _ _)
+    · exact (Comp.cost_pure _ _ _).le.trans (Nat.cast_nonneg _)
 
 /-- A calculation used in `vera_fast` -/
 lemma log_200_mul_20000_le : Real.log 200 * 20000 ≤ 106000 := by

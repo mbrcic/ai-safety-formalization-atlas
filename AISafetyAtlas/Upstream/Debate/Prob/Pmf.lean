@@ -1,7 +1,7 @@
 /-
 Vendored from `google-deepmind/debate` (Apache-2.0) via the Lean v4.31.0 port
-`LukaHobor/debate` @ `dafe25d`. Changed at the header only; ledger and
-rationale: `vendor/debate/PROVENANCE.md`.
+`LukaHobor/debate` @ `dafe25d`, and migrated in place to Lean v4.33.0. Changed at
+the header only; ledger and rationale: `vendor/debate/PROVENANCE.md`.
 -/
 
 module

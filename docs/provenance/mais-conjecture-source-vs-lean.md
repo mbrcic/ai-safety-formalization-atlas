@@ -41,8 +41,8 @@ between readings would not have been caught.
 | `agendas/A3/MAIS-A3.tex` | sha256 `146f0cc95a0a5eb0cf3b2660c32d591169b0e346571b80ee63723a9906371387` — fetched 2026-08-27, the statement source for CONJ-025 |
 | MAIS issue [#30](https://github.com/lionellevine/MAIS/issues/30) body | sha256 `6e2db10eb10242c075ca331fcf87a604511b9b31df3d55a5c4b0d2d2d95d05ab` — read 2026-08-27; context for CONJ-025, not its graded artifact |
 | atlas commit the Lean was read from | the tip of the branch this file is part of; the reproducible pin is the toolchain and build evidence below, not a hash this file could state about itself |
-| toolchain | `leanprover/lean4:v4.31.0`, Mathlib `fabf563a7c95a166b8d7b6efca11c8b4dc9d911f` |
-| build evidence, measured at that commit | root `lake build` 3331 jobs, `scripts/lean_build_targets.txt` 4004 jobs; `check_print_axioms` 2495 declarations ⊆ `{propext, Classical.choice, Quot.sound}` |
+| toolchain | `leanprover/lean4:v4.33.0`, Mathlib `db584cd6d46c92f209a44c0f1c829460d327499d` — migrated from `v4.31.0` / `fabf563a7c95a166b8d7b6efca11c8b4dc9d911f` on 2026-08-31; no graded statement changed |
+| build evidence, measured at that commit | root `lake build` 3411 jobs, `scripts/lean_build_targets.txt` 4086 jobs; `check_print_axioms` 2847 declarations ⊆ `{propext, Classical.choice, Quot.sound}`, measured at the v4.33.0 pin. The audited set is identical name for name to the set audited at the pre-migration tip, so the migration moved none of it |
 
 Two structural points about the reading below. The MAIS-O25 adaptivity
 constant `c` is bound in `maisO25_exactQueryRate`'s outer existential, before the

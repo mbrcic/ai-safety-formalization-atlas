@@ -27,11 +27,16 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 
-from check_print_axioms import PUBLIC_THEOREM_RE  # noqa: E402
+from check_print_axioms import PUBLIC_DEF_RE, PUBLIC_THEOREM_RE  # noqa: E402
 
 
 def _name(line: str) -> str | None:
     match = PUBLIC_THEOREM_RE.match(line)
+    return match.group(1) if match else None
+
+
+def _def_name(line: str) -> str | None:
+    match = PUBLIC_DEF_RE.match(line)
     return match.group(1) if match else None
 
 
@@ -80,3 +85,77 @@ def test_greek_names_are_matched() -> None:
 def test_non_public_is_not_matched() -> None:
     assert _name("private theorem foo :") is None
     assert _name("theorem foo :") is None
+
+
+# --- Leading attributes -----------------------------------------------------
+#
+# The tests above pin the *name* grammar exhaustively and never once varied what
+# precedes `public`. That is exactly the shape the scanner got wrong: without an
+# `@[…]` prefix group, `@[simp] public theorem` matches nothing and every
+# attributed theorem drops out of the axiom audit in silence. An example suite is
+# only as good as the axes it varies.
+
+
+def test_simp_attribute_does_not_hide_a_theorem() -> None:
+    assert _name("@[simp] public theorem binaryState_true :") == "binaryState_true"
+
+
+def test_fun_prop_attribute_does_not_hide_a_theorem() -> None:
+    assert _name("@[fun_prop] public theorem measurable_setup :") == "measurable_setup"
+
+
+def test_attribute_with_several_entries() -> None:
+    assert _name("@[simp, norm_cast] public lemma foo :") == "foo"
+
+
+def test_attribute_with_arguments() -> None:
+    assert _name("@[deprecated (since := \"2026-01-01\")] public theorem foo :") == "foo"
+
+
+def test_indented_attribute() -> None:
+    assert _name("  @[simp] public theorem foo :") == "foo"
+
+
+def test_attribute_alone_is_still_not_a_public_theorem() -> None:
+    assert _name("@[simp] theorem foo :") is None
+    assert _name("@[simp] private theorem foo :") is None
+
+
+# --- The two patterns must agree on what may precede `public` ---------------
+
+
+def test_both_patterns_accept_the_same_prefixes() -> None:
+    """The invariant the bug violated, stated once instead of example by example.
+
+    `PUBLIC_DEF_RE` always admitted a leading attribute and `PUBLIC_THEOREM_RE`
+    did not. Nothing compared them, so the asymmetry survived every test in this
+    file. Whatever prefix one pattern accepts, the other must accept too --
+    they are collecting one surface, not two.
+    """
+    for prefix in ("", "@[simp] ", "@[simp, norm_cast] ", "  ", "  @[fun_prop] "):
+        assert _name(f"{prefix}public theorem foo :") == "foo", prefix
+        assert _def_name(f"{prefix}public def foo :") == "foo", prefix
+
+
+# --- Keywords the definition scan collects ---------------------------------
+
+
+def test_instance_and_inductive_are_collected() -> None:
+    """Both belong in the definition scan; see `PUBLIC_DEF_RE` for why.
+
+    A named `public instance` can carry a `Prop`-valued field and so can hide a
+    `sorry` exactly as a `def` can.
+    """
+    assert _def_name("public instance decidableRealized {m n : ℕ}") == "decidableRealized"
+    assert _def_name("public inductive Principal") == "Principal"
+    assert _def_name("public structure PairModel where") == "PairModel"
+    assert _def_name("public noncomputable def f :") == "f"
+
+
+def test_anonymous_instance_has_no_name_to_collect() -> None:
+    """Deliberate, and the reason `check_audit_coverage.py` exempts instances.
+
+    `public instance : Fintype X` names nothing, so no text pattern can collect
+    it; Lean names it. Its axioms are checked from the environment instead.
+    """
+    assert _def_name("public instance : Fintype X where") is None

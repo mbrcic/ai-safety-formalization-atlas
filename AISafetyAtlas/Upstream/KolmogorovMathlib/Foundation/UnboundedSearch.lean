@@ -64,8 +64,11 @@ public lemma Computable.natFind {α : Type*} [Primcodable α] {P : α → ℕ �
   have hr := Partrec.rfind hp2
   refine hr.of_eq (fun a ↦ ?_)
   change (Nat.rfind fun n ↦ Part.some (decide (P a n))) = Part.some (Nat.find (h a))
-  rw [Part.eq_some_iff, Nat.mem_rfind]
-  refine ⟨?_, ?_⟩
+  -- `rw [Nat.mem_rfind]` no longer fires: the lemma's `p : ℕ →. Bool` does not
+  -- match a bare `ℕ → Part Bool` lambda under `rw`'s keyed matching, since
+  -- `PFun` is semireducible. Elaborating the `.mpr` unifies them up to defeq.
+  rw [Part.eq_some_iff]
+  refine Nat.mem_rfind.mpr ⟨?_, ?_⟩
   · simp only [Part.mem_some_iff]
     exact (decide_eq_true (Nat.find_spec (h a))).symm
   · intro m hm
@@ -97,7 +100,7 @@ public lemma Computable.testP {P : ℕ → ℕ → Prop}
     {f g : ℕ → ℕ} (hf : Computable f) (hg : Computable g)
     (h_equiv : ∀ k n, P k n ↔ f n > g k) :
     ComputablePred (fun p : ℕ × ℕ ↦ P p.1 p.2) := by
-  letI : DecidableRel P := fun k n ↦ decidable_of_iff _ (h_equiv k n).symm
+  let : DecidableRel P := fun k n ↦ decidable_of_iff _ (h_equiv k n).symm
   let h_pair := (hg.comp Computable.fst).pair (hf.comp Computable.snd)
   let h_alg := Computable.natLt.comp h_pair
   have h_comp : Computable (fun p : ℕ × ℕ ↦ decide (P p.1 p.2)) :=
