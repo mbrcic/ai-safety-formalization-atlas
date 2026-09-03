@@ -48,8 +48,8 @@ KINDS: dict[str, dict] = {
     "lean-library": {
         "title": "Lean library change (a module under AISafetyAtlas/, not Examples/)",
         "sections": [
-            ("AGENTS.md", "Every library module needs a worked model"),
-            ("AGENTS.md", "Lean surface rule"),
+            ("docs/agent/policy/context-budget.md", "Every library module needs a worked model"),
+            ("docs/agent/policy/context-budget.md", "Lean surface rule"),
             ("docs/agent/policy/statement-freeze.md", "Statement freeze"),
             ("docs/agent/policy/parsimony-formalizations.md", "Parsimony (formalizations)"),
         ],
@@ -63,8 +63,8 @@ KINDS: dict[str, dict] = {
     "lean-examples": {
         "title": "Example or witness (AISafetyAtlas/Examples/)",
         "sections": [
-            ("AGENTS.md", "Examples layout rule"),
-            ("AGENTS.md", "Every library module needs a worked model"),
+            ("docs/agent/policy/context-budget.md", "Examples layout rule"),
+            ("docs/agent/policy/context-budget.md", "Every library module needs a worked model"),
         ],
         "commands": [
             "python3 scripts/check_examples_layout.py",

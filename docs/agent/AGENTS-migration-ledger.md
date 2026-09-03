@@ -32,18 +32,18 @@ addition to this migration.
 
 Ranges are inclusive. A parent heading's range intentionally includes its child
 rows; the overlap makes the hierarchy visible rather than implying duplicate
-content. Every row is **not moved** at this baseline.
+content. Every row is **moved** from this baseline.
 
 | # | Current heading | Lines | `preflight.py` consumer | Status |
 |---:|---|---:|---|---|
-| 1 | `Context budget (agents)` | 8–157 | — | Parent; not moved |
-| 2 | `Start here (small by design)` | 10–36 | — | Not moved |
-| 3 | `Do not read by default` | 37–54 | — | Not moved |
-| 4 | `Lean surface rule` | 55–81 | `lean-library` | Not moved |
-| 5 | `Examples layout rule` | 82–109 | `lean-examples` | Not moved |
-| 6 | `Tactics and search surface` | 110–126 | — | Not moved |
-| 7 | `Every library module needs a worked model` | 127–146 | `lean-library`, `lean-examples` | Not moved |
-| 8 | `Cheap vs full validation` | 147–157 | — | Not moved |
+| 1 | `Context budget (agents)` | 8–157 | — | Moved; links and EOF normalized |
+| 2 | `Start here (small by design)` | 10–36 | — | Moved with `Context budget` |
+| 3 | `Do not read by default` | 37–54 | — | Moved with `Context budget` |
+| 4 | `Lean surface rule` | 55–81 | `lean-library` | Moved with `Context budget` |
+| 5 | `Examples layout rule` | 82–109 | `lean-examples` | Moved with `Context budget` |
+| 6 | `Tactics and search surface` | 110–126 | — | Moved with `Context budget` |
+| 7 | `Every library module needs a worked model` | 127–146 | `lean-library`, `lean-examples` | Moved with `Context budget` |
+| 8 | `Cheap vs full validation` | 147–157 | — | Moved with `Context budget` |
 | 9 | `Public Lean API` | 158–183 | — | Moved; content unchanged, EOF normalized |
 | 10 | `Parsimony (formalizations)` | 184–215 | `lean-library` | Moved; link and EOF normalized |
 | 11 | `Statement freeze` | 216–380 | `lean-library` | Moved; content unchanged, EOF normalized |
@@ -74,3 +74,4 @@ Each future transfer adds one row here before its source block is removed:
 | `470069d:AGENTS.md` lines 158–183 | [`public-lean-api.md`](policy/public-lean-api.md) | Content verbatim; EOF normalized | One terminal blank line removed | Normalized `cmp` and path check |
 | `470069d:AGENTS.md` lines 184–215 | [`parsimony-formalizations.md`](policy/parsimony-formalizations.md) | Content verbatim; link and EOF normalized | One relative link and one terminal blank line normalized | Normalized `cmp`, path check, and `preflight` output comparison |
 | `470069d:AGENTS.md` lines 216–380 | [`statement-freeze.md`](policy/statement-freeze.md) | Content verbatim; EOF normalized | One terminal blank line removed; includes upstream #56 section (lines 248–276) | Normalized `cmp`, `preflight`, and full-gate output comparison |
+| `470069d:AGENTS.md` lines 8–157 | [`context-budget.md`](policy/context-budget.md) | Content verbatim; links and EOF normalized | 17 relative-link occurrences and one terminal blank line normalized | Path-resolved comparison, `preflight`, and full-gate output comparison |
