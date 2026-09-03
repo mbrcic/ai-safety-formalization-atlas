@@ -19,6 +19,8 @@ __pycache__/
 .tokensave/
 .mcp.json
 **/CLAUDE.md
+# The root adapter is deliberate and version-controlled.
+!/CLAUDE.md
 .github/workflows/CLAUDE.md
 
 # Accidental URL-as-path download debris (wget/curl without -O).
