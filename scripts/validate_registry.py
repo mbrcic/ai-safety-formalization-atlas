@@ -121,15 +121,35 @@ def valid_http_url(value: object) -> bool:
 LEAN_MODULE_SHAPE = re.compile(r"^[A-Z][A-Za-z0-9_']*(?:\.[A-Z][A-Za-z0-9_']*)+$")
 
 
+def exact_file(root: Path, relative: Path) -> bool:
+    """Whether ``relative`` is a file below ``root`` with exact path spelling.
+
+    Lean module names are case-sensitive even when a contributor's filesystem is
+    not.  ``Path.is_file()`` alone treats ``Aisafetyatlas`` as
+    ``AISafetyAtlas`` on default macOS volumes, turning a broken build target
+    into a passing validator result.
+    """
+    current = root
+    for component in relative.parts:
+        try:
+            names = {entry.name for entry in current.iterdir()}
+        except OSError:
+            return False
+        if component not in names:
+            return False
+        current /= component
+    return current.is_file()
+
+
 def lean_module_exists(module: str) -> bool:
     """Whether a dotted module name resolves, in this tree or a Lake package."""
-    rel = module.replace(".", "/") + ".lean"
-    if (ROOT / rel).is_file():
+    rel = Path(module.replace(".", "/") + ".lean")
+    if exact_file(ROOT, rel):
         return True
     packages = ROOT / ".lake" / "packages"
     if packages.is_dir():
         for package in packages.iterdir():
-            if (package / rel).is_file():
+            if exact_file(package, rel):
                 return True
     return False
 

@@ -132,6 +132,7 @@ def test_lean_module_shape_accepts_module_paths_and_rejects_prose():
     "Mathlib.Totally.Fictional",
     "AISafetyAtlas.Control.NoSuchModule",
     "Aisafetyatlas.Control.RequisiteVariety",
+    "AISafetyAtlas.Control.requisiteVariety",
 ])
 def test_nonexistent_modules_do_not_resolve(module):
     assert not registry.lean_module_exists(module)
