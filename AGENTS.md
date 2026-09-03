@@ -5,14 +5,22 @@ Agent map: [`docs/agent/INDEX.md`](docs/agent/INDEX.md). Human doc map:
 [`docs/README.md`](docs/README.md). Policy detail:
 [`docs/guide/methodology.md`](docs/guide/methodology.md).
 
+## Context budget (agents)
+
 Read the relocated policy at
 [`docs/agent/policy/context-budget.md`](docs/agent/policy/context-budget.md).
+
+## Public Lean API
 
 Read the relocated policy at
 [`docs/agent/policy/public-lean-api.md`](docs/agent/policy/public-lean-api.md).
 
+## Parsimony (formalizations)
+
 Read the relocated policy at
 [`docs/agent/policy/parsimony-formalizations.md`](docs/agent/policy/parsimony-formalizations.md).
+
+## Statement freeze
 
 Read the relocated policy at
 [`docs/agent/policy/statement-freeze.md`](docs/agent/policy/statement-freeze.md).
@@ -36,6 +44,8 @@ Read the relocated policy at
 
 Read the relocated policy at
 [`docs/agent/policy/proving-tactic-order.md`](docs/agent/policy/proving-tactic-order.md).
+
+## Validation
 
 Read the relocated policy at
 [`docs/agent/policy/validation.md`](docs/agent/policy/validation.md).

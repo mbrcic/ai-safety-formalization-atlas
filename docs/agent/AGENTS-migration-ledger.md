@@ -13,6 +13,27 @@ and the debt they create,” added by upstream
 That section transfers with `Statement freeze`; it is not a later policy
 addition to this migration.
 
+## Quick review
+
+The ten non-overlapping transfers below cover every instruction line from 8
+through 617 of the baseline. No instruction wording, command, number, caveat,
+or example was deleted, compressed, or rewritten. The only source-text
+normalizations are 19 relative Markdown-link paths (each preserves its resolved
+target) and one terminal empty line in nine destination files.
+
+| Baseline lines | Destination | Mechanical normalization |
+|---|---|---|
+| 8–157 | [`context-budget.md`](policy/context-budget.md) | 17 links; terminal empty line |
+| 158–183 | [`public-lean-api.md`](policy/public-lean-api.md) | terminal empty line |
+| 184–215 | [`parsimony-formalizations.md`](policy/parsimony-formalizations.md) | 1 link; terminal empty line |
+| 216–380 | [`statement-freeze.md`](policy/statement-freeze.md) | terminal empty line; includes upstream #56 (lines 248–276) |
+| 381–418 | [`coverage-landscape-and-bridges.md`](policy/coverage-landscape-and-bridges.md) | 1 link; terminal empty line |
+| 419–441 | [`documentation-layout.md`](policy/documentation-layout.md) | terminal empty line |
+| 442–452 | [`branch-version-and-publication.md`](policy/branch-version-and-publication.md) | terminal empty line |
+| 453–494 | [`proving-tactic-order.md`](policy/proving-tactic-order.md) | terminal empty line |
+| 495–611 | [`validation.md`](policy/validation.md) | terminal empty line |
+| 612–617 | [`audience-and-wording.md`](policy/audience-and-wording.md) | none |
+
 ## Refactor invariants
 
 - Until a transfer commit says otherwise, the source text remains the only
@@ -32,7 +53,8 @@ addition to this migration.
 
 Ranges are inclusive. A parent heading's range intentionally includes its child
 rows; the overlap makes the hierarchy visible rather than implying duplicate
-content. Every row is **moved** from this baseline.
+content. This inventory was recorded before relocation; its statuses below show
+the current state while preserving the baseline locations for review.
 
 | # | Current heading | Lines | `preflight.py` consumer | Status |
 |---:|---|---:|---|---|
