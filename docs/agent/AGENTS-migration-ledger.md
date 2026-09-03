@@ -45,7 +45,7 @@ content. Every row is **not moved** at this baseline.
 | 7 | `Every library module needs a worked model` | 127–146 | `lean-library`, `lean-examples` | Not moved |
 | 8 | `Cheap vs full validation` | 147–157 | — | Not moved |
 | 9 | `Public Lean API` | 158–183 | — | Moved; content unchanged, EOF normalized |
-| 10 | `Parsimony (formalizations)` | 184–215 | `lean-library` | Not moved |
+| 10 | `Parsimony (formalizations)` | 184–215 | `lean-library` | Moved; link and EOF normalized |
 | 11 | `Statement freeze` | 216–380 | `lean-library` | Parent; not moved |
 | 12 | `Conditional results, and the debt they create` | 248–276 | — | Not moved; added by upstream #56 |
 | 13 | `The layer a text diff cannot reach` | 277–380 | — | Not moved |
@@ -72,3 +72,4 @@ Each future transfer adds one row here before its source block is removed:
 | `470069d:AGENTS.md` lines 453–494 | [`proving-tactic-order.md`](policy/proving-tactic-order.md) | Content verbatim; EOF normalized | One terminal blank line removed | Normalized `cmp` and path check |
 | `470069d:AGENTS.md` lines 495–611 | [`validation.md`](policy/validation.md) | Content verbatim; EOF normalized | One terminal blank line removed | Normalized `cmp`, `preflight`, and full-gate output comparison |
 | `470069d:AGENTS.md` lines 158–183 | [`public-lean-api.md`](policy/public-lean-api.md) | Content verbatim; EOF normalized | One terminal blank line removed | Normalized `cmp` and path check |
+| `470069d:AGENTS.md` lines 184–215 | [`parsimony-formalizations.md`](policy/parsimony-formalizations.md) | Content verbatim; link and EOF normalized | One relative link and one terminal blank line normalized | Normalized `cmp`, path check, and `preflight` output comparison |

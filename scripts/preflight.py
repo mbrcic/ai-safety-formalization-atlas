@@ -51,7 +51,7 @@ KINDS: dict[str, dict] = {
             ("AGENTS.md", "Every library module needs a worked model"),
             ("AGENTS.md", "Lean surface rule"),
             ("AGENTS.md", "Statement freeze"),
-            ("AGENTS.md", "Parsimony (formalizations)"),
+            ("docs/agent/policy/parsimony-formalizations.md", "Parsimony (formalizations)"),
         ],
         "commands": [
             "python3 scripts/check_statement_freeze.py",
