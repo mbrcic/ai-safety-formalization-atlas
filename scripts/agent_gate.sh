@@ -19,9 +19,14 @@ done
 if [ "$quiet" = 1 ]; then
   gate_log="$(mktemp)"
   trap 'rm -f "$gate_log"' EXIT
-  inner=()
-  [ "$lean_only" = 1 ] && inner=(--fast)
-  if "$0" "${inner[@]}" >"$gate_log" 2>&1; then
+  # Under Bash 3.2 with `set -u`, expanding an empty array is an
+  # unbound-variable error. Keep the recursive command nonempty instead.
+  if [ "$lean_only" = 1 ]; then
+    quiet_command=("$0" --fast)
+  else
+    quiet_command=("$0")
+  fi
+  if "${quiet_command[@]}" >"$gate_log" 2>&1; then
     if [ "$lean_only" = 1 ]; then
       echo "agent_gate: ok (quiet, --fast; Python self-tests NOT run)"
     else
