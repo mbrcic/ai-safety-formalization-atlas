@@ -85,7 +85,9 @@ KINDS: dict[str, dict] = {
     },
     "generated": {
         "title": "Generated file — edit the source, not the output",
-        "sections": [("AGENTS.md", "Documentation layout")],
+        "sections": [
+            ("docs/agent/policy/documentation-layout.md", "Documentation layout")
+        ],
         "commands": [
             "python3 scripts/generate_registry_views.py",
             "python3 scripts/generate_dependency_graph.py --write",
@@ -95,7 +97,7 @@ KINDS: dict[str, dict] = {
     "docs": {
         "title": "Documentation",
         "sections": [
-            ("AGENTS.md", "Documentation layout"),
+            ("docs/agent/policy/documentation-layout.md", "Documentation layout"),
             ("AGENTS.md", "Audience and wording"),
         ],
         "commands": [
