@@ -1,3 +1,6 @@
+# macOS Finder metadata.
+.DS_Store
+
 # Lean/Lake build artifacts.
 /.lake/
 # The public page in /site is a static file deployed as-is; nothing to ignore.
