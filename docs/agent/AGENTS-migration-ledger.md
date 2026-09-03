@@ -49,7 +49,7 @@ content. Every row is **not moved** at this baseline.
 | 11 | `Statement freeze` | 216–380 | `lean-library` | Parent; not moved |
 | 12 | `Conditional results, and the debt they create` | 248–276 | — | Not moved; added by upstream #56 |
 | 13 | `The layer a text diff cannot reach` | 277–380 | — | Not moved |
-| 14 | `Coverage, landscape, and bridges` | 381–418 | `ledger` | Not moved |
+| 14 | `Coverage, landscape, and bridges` | 381–418 | `ledger` | Moved; link and EOF normalized |
 | 15 | `Documentation layout` | 419–441 | `generated`, `docs` | Moved; content unchanged, EOF normalized |
 | 16 | `Branch, version, and publication` | 442–452 | — | Not moved |
 | 17 | `Proving: tactic order and the exploration target` | 453–494 | — | Not moved |
@@ -66,3 +66,4 @@ Each future transfer adds one row here before its source block is removed:
 | _Example: lines 000–000_ | _path and heading_ | _verbatim / link-normalized / rewritten / removed_ | _none or exact reason_ | _exact command and result_ |
 
 | `470069d:AGENTS.md` lines 419–441 | [`documentation-layout.md`](policy/documentation-layout.md) | Content verbatim; EOF normalized | One terminal blank line removed | Normalized `cmp` and `preflight` output comparison |
+| `470069d:AGENTS.md` lines 381–418 | [`coverage-landscape-and-bridges.md`](policy/coverage-landscape-and-bridges.md) | Content verbatim; link and EOF normalized | One relative link and one terminal blank line normalized | Normalized `cmp`, path check, and `preflight` output comparison |

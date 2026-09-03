@@ -75,7 +75,10 @@ KINDS: dict[str, dict] = {
         "title": "Registry or conjecture ledger (registry.yaml, conjectures.yaml)",
         "sections": [
             ("CONTRIBUTING.md", "Evidence and registry changes"),
-            ("AGENTS.md", "Coverage, landscape, and bridges"),
+            (
+                "docs/agent/policy/coverage-landscape-and-bridges.md",
+                "Coverage, landscape, and bridges",
+            ),
         ],
         "commands": [
             "python3 scripts/generate_registry_views.py",
