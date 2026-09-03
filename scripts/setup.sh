@@ -33,7 +33,16 @@ require() {  # require <cmd> <why>
   fi
 }
 
-require python3 "the validators are pure-stdlib Python 3."
+require python3 "the validators are Python 3.9+ and its standard library."
+
+# The floor is real: str.removesuffix, str.removeprefix and functools.cache are
+# 3.9, and ten call sites across six validators use them. Ubuntu 20.04 still
+# ships 3.8 as python3, so this fires on a live platform rather than a
+# hypothetical one, and it is worth a sentence rather than an AttributeError.
+if ! python3 -c 'import sys; sys.exit(0 if sys.version_info >= (3, 9) else 1)'; then
+  echo "error: the validators need Python 3.9 or newer; python3 is $(python3 -V 2>&1)" >&2
+  exit 1
+fi
 
 if [ "$MODE" = "pointer" ]; then
   echo "==> pointer mode: skipping the Lean toolchain"
