@@ -13,44 +13,44 @@ Read the relocated policy at
 ## Public Lean API
 
 Read the relocated policy at
-[`docs/agent/policy/public-lean-api.md`](docs/agent/policy/public-lean-api.md).
+[`docs/agent/policy/lean-public-api.md`](docs/agent/policy/lean-public-api.md).
 
 ## Parsimony (formalizations)
 
 Read the relocated policy at
-[`docs/agent/policy/parsimony-formalizations.md`](docs/agent/policy/parsimony-formalizations.md).
+[`docs/agent/policy/lean-parsimony.md`](docs/agent/policy/lean-parsimony.md).
 
 ## Statement freeze
 
 Read the relocated policy at
-[`docs/agent/policy/statement-freeze.md`](docs/agent/policy/statement-freeze.md).
+[`docs/agent/policy/lean-statement-freeze.md`](docs/agent/policy/lean-statement-freeze.md).
 
 ## Coverage, landscape, and bridges
 
 Read the relocated policy at
-[`docs/agent/policy/coverage-landscape-and-bridges.md`](docs/agent/policy/coverage-landscape-and-bridges.md).
+[`docs/agent/policy/ledger-coverage.md`](docs/agent/policy/ledger-coverage.md).
 
 ## Documentation layout
 
 Read the unchanged policy at
-[`docs/agent/policy/documentation-layout.md`](docs/agent/policy/documentation-layout.md).
+[`docs/agent/policy/ledger-documentation.md`](docs/agent/policy/ledger-documentation.md).
 
 ## Branch, version, and publication
 
 Read the relocated policy at
-[`docs/agent/policy/branch-version-and-publication.md`](docs/agent/policy/branch-version-and-publication.md).
+[`docs/agent/policy/workflow-branch-publication.md`](docs/agent/policy/workflow-branch-publication.md).
 
 ## Proving: tactic order and the exploration target
 
 Read the relocated policy at
-[`docs/agent/policy/proving-tactic-order.md`](docs/agent/policy/proving-tactic-order.md).
+[`docs/agent/policy/lean-proving.md`](docs/agent/policy/lean-proving.md).
 
 ## Validation
 
 Read the relocated policy at
-[`docs/agent/policy/validation.md`](docs/agent/policy/validation.md).
+[`docs/agent/policy/workflow-validation.md`](docs/agent/policy/workflow-validation.md).
 
 ## Audience and wording
 
 Read the relocated policy at
-[`docs/agent/policy/audience-and-wording.md`](docs/agent/policy/audience-and-wording.md).
+[`docs/agent/policy/workflow-wording.md`](docs/agent/policy/workflow-wording.md).

@@ -50,8 +50,8 @@ KINDS: dict[str, dict] = {
         "sections": [
             ("docs/agent/policy/context-budget.md", "Every library module needs a worked model"),
             ("docs/agent/policy/context-budget.md", "Lean surface rule"),
-            ("docs/agent/policy/statement-freeze.md", "Statement freeze"),
-            ("docs/agent/policy/parsimony-formalizations.md", "Parsimony (formalizations)"),
+            ("docs/agent/policy/lean-statement-freeze.md", "Statement freeze"),
+            ("docs/agent/policy/lean-parsimony.md", "Parsimony (formalizations)"),
         ],
         "commands": [
             "python3 scripts/check_statement_freeze.py",
@@ -76,7 +76,7 @@ KINDS: dict[str, dict] = {
         "sections": [
             ("CONTRIBUTING.md", "Evidence and registry changes"),
             (
-                "docs/agent/policy/coverage-landscape-and-bridges.md",
+                "docs/agent/policy/ledger-coverage.md",
                 "Coverage, landscape, and bridges",
             ),
         ],
@@ -89,7 +89,7 @@ KINDS: dict[str, dict] = {
     "generated": {
         "title": "Generated file — edit the source, not the output",
         "sections": [
-            ("docs/agent/policy/documentation-layout.md", "Documentation layout")
+            ("docs/agent/policy/ledger-documentation.md", "Documentation layout")
         ],
         "commands": [
             "python3 scripts/generate_registry_views.py",
@@ -100,8 +100,8 @@ KINDS: dict[str, dict] = {
     "docs": {
         "title": "Documentation",
         "sections": [
-            ("docs/agent/policy/documentation-layout.md", "Documentation layout"),
-            ("docs/agent/policy/audience-and-wording.md", "Audience and wording"),
+            ("docs/agent/policy/ledger-documentation.md", "Documentation layout"),
+            ("docs/agent/policy/workflow-wording.md", "Audience and wording"),
         ],
         "commands": [
             "python3 scripts/check_docstring_identifiers.py",
@@ -110,7 +110,7 @@ KINDS: dict[str, dict] = {
     },
     "tooling": {
         "title": "Scripts, tests, or CI",
-        "sections": [("docs/agent/policy/validation.md", "Validation")],
+        "sections": [("docs/agent/policy/workflow-validation.md", "Validation")],
         "commands": ["python3 -m pytest -q tests/", "ty check"],
     },
 }
