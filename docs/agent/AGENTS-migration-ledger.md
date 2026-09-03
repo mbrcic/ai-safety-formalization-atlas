@@ -55,7 +55,7 @@ content. Every row is **not moved** at this baseline.
 | 17 | `Proving: tactic order and the exploration target` | 453–494 | — | Not moved |
 | 18 | `Validation` | 495–611 | `tooling` | Parent; not moved |
 | 19 | `The \`--fast\` lane (\`--lean\` is the old name)` | 513–611 | included by `Validation` | Not moved |
-| 20 | `Audience and wording` | 612–617 | `docs` | Not moved |
+| 20 | `Audience and wording` | 612–617 | `docs` | Moved verbatim |
 
 ## Transfer receipt template
 
@@ -68,3 +68,4 @@ Each future transfer adds one row here before its source block is removed:
 | `470069d:AGENTS.md` lines 419–441 | [`documentation-layout.md`](policy/documentation-layout.md) | Content verbatim; EOF normalized | One terminal blank line removed | Normalized `cmp` and `preflight` output comparison |
 | `470069d:AGENTS.md` lines 381–418 | [`coverage-landscape-and-bridges.md`](policy/coverage-landscape-and-bridges.md) | Content verbatim; link and EOF normalized | One relative link and one terminal blank line normalized | Normalized `cmp`, path check, and `preflight` output comparison |
 | `470069d:AGENTS.md` lines 442–452 | [`branch-version-and-publication.md`](policy/branch-version-and-publication.md) | Content verbatim; EOF normalized | One terminal blank line removed | Normalized `cmp` and path check |
+| `470069d:AGENTS.md` lines 612–617 | [`audience-and-wording.md`](policy/audience-and-wording.md) | Verbatim move | None | Exact `cmp` and `preflight` output comparison |

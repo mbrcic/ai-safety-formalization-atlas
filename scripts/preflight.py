@@ -101,7 +101,7 @@ KINDS: dict[str, dict] = {
         "title": "Documentation",
         "sections": [
             ("docs/agent/policy/documentation-layout.md", "Documentation layout"),
-            ("AGENTS.md", "Audience and wording"),
+            ("docs/agent/policy/audience-and-wording.md", "Audience and wording"),
         ],
         "commands": [
             "python3 scripts/check_docstring_identifiers.py",
