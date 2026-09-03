@@ -42,3 +42,7 @@ __pycache__/
 # `python3 scripts/render_coverage_artifact.py`. It had no reader in the tree
 # and cost 218 KB tracked.
 /docs/status/coverage-audit.html
+
+# Local interpreter for the validators, e.g. `python3 -m venv .venv` or
+# `uv venv --python 3.13 .venv`. The repository pins no Python of its own.
+/.venv/

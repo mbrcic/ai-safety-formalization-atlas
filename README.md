@@ -446,7 +446,10 @@ Nothing here needs the whole picture: take the row that matches what you
 have and ignore the rest.
 <!-- END GENERATED ROUTING -->
 
-No toolchain needed for the first row — the validators are pure-stdlib Python 3:
+No toolchain needed for the first row — the validators need only Python 3.9 or
+newer and its standard library. One check reads a ledger through PyYAML and is
+skipped with a notice if that is absent; `pytest` and `ty` are likewise optional
+locally. CI installs all three, so none of them is optional on a pull request:
 
 ```console
 scripts/setup.sh --pointer   # cheap validators only; no Lean toolchain

@@ -58,6 +58,16 @@ fi
 # measure, do not inherit a number.
 # Everything that reads the tree, the ledgers, or the generated views still
 # runs.  See AGENTS.md "Validation" for when the full gate is mandatory.
+
+# Ten call sites across six scripts use str.removesuffix / str.removeprefix and
+# functools.cache, all of which are Python 3.9. Checked once, here, because the
+# failure it replaces was an AttributeError raised from inside whichever
+# validator happened to run first -- which reads as a bug in that validator.
+if ! python3 -c 'import sys; sys.exit(0 if sys.version_info >= (3, 9) else 1)'; then
+  echo "error: the validators need Python 3.9 or newer; python3 is $(python3 -V 2>&1)" >&2
+  exit 1
+fi
+
 skip_self_tests() { [ "$lean_only" = 1 ]; }
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
@@ -168,8 +178,18 @@ python3 scripts/generate_non_claims.py --check
 echo "==> check_docstring_identifiers"
 python3 scripts/check_docstring_identifiers.py
 
-echo "==> check_conjecture_grade_prose"
-python3 scripts/check_conjecture_grade_prose.py
+# check_conjecture_grade_prose is the one gate script that reads a ledger through
+# the real YAML parser rather than the hand-rolled one, so PyYAML is a genuine
+# dependency of this step and of no other. Skipped with a notice like pytest and
+# ty below, rather than crashing with a traceback: a contributor who was told the
+# validators need no install should not meet a ModuleNotFoundError here.
+if python3 -c "import yaml" >/dev/null 2>&1; then
+  echo "==> check_conjecture_grade_prose"
+  python3 scripts/check_conjecture_grade_prose.py
+else
+  echo "==> check_conjecture_grade_prose"
+  echo "PyYAML not installed; skipping conjecture prose check (CI runs it)"
+fi
 
 echo "==> check_cited_declarations"
 python3 scripts/check_cited_declarations.py
