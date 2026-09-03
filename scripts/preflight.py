@@ -50,7 +50,7 @@ KINDS: dict[str, dict] = {
         "sections": [
             ("AGENTS.md", "Every library module needs a worked model"),
             ("AGENTS.md", "Lean surface rule"),
-            ("AGENTS.md", "Statement freeze"),
+            ("docs/agent/policy/statement-freeze.md", "Statement freeze"),
             ("docs/agent/policy/parsimony-formalizations.md", "Parsimony (formalizations)"),
         ],
         "commands": [
