@@ -18,7 +18,7 @@ Named in the statements of eight or more others. A change to one of these is a c
 
 | Declaration | Named by |
 |---|---|
-| `ClosedUnderPermutation` | 13 |
+| `ClosedUnderPermutation` | 16 |
 
 ## Definitions no statement and no example mentions
 

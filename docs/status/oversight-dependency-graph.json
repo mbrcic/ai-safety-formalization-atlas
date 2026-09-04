@@ -2,6 +2,155 @@
   "note": "Edges are: for a definition, its type and body; for a theorem, its statement only. Lean's module system does not export proof terms.",
   "cluster": "AISafetyAtlas.Oversight.",
   "declarations": {
+    "AISafetyAtlas.Oversight.Debate.Alice": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Oversight.Debate.Bob": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Oversight.Debate.Correct": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Oversight.Debate.Alice",
+        "AISafetyAtlas.Oversight.Debate.Bob",
+        "AISafetyAtlas.Oversight.Debate.Vera"
+      ]
+    },
+    "AISafetyAtlas.Oversight.Debate.Lipschitz": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Oversight.Debate.Oracle"
+      ]
+    },
+    "AISafetyAtlas.Oversight.Debate.Oracle": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Oversight.Debate.Params": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Oversight.Debate.Party": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Oversight.Debate.Vera": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Oversight.Debate.alice_fast": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Oversight.Debate.Bob",
+        "AISafetyAtlas.Oversight.Debate.Oracle",
+        "AISafetyAtlas.Oversight.Debate.Params",
+        "AISafetyAtlas.Oversight.Debate.Vera",
+        "AISafetyAtlas.Oversight.Debate.defaultParams",
+        "AISafetyAtlas.Oversight.Debate.honestAlice",
+        "AISafetyAtlas.Oversight.Debate.protocol"
+      ]
+    },
+    "AISafetyAtlas.Oversight.Debate.bob_fast": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Oversight.Debate.Alice",
+        "AISafetyAtlas.Oversight.Debate.Oracle",
+        "AISafetyAtlas.Oversight.Debate.Params",
+        "AISafetyAtlas.Oversight.Debate.Vera",
+        "AISafetyAtlas.Oversight.Debate.defaultParams",
+        "AISafetyAtlas.Oversight.Debate.honestBob",
+        "AISafetyAtlas.Oversight.Debate.protocol"
+      ]
+    },
+    "AISafetyAtlas.Oversight.Debate.completeness": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Oversight.Debate.Bob",
+        "AISafetyAtlas.Oversight.Debate.Lipschitz",
+        "AISafetyAtlas.Oversight.Debate.Oracle",
+        "AISafetyAtlas.Oversight.Debate.Params",
+        "AISafetyAtlas.Oversight.Debate.finalAnswer",
+        "AISafetyAtlas.Oversight.Debate.honestAlice",
+        "AISafetyAtlas.Oversight.Debate.protocol",
+        "AISafetyAtlas.Oversight.Debate.verifier"
+      ]
+    },
+    "AISafetyAtlas.Oversight.Debate.correctness": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Oversight.Debate.Correct",
+        "AISafetyAtlas.Oversight.Debate.Params",
+        "AISafetyAtlas.Oversight.Debate.defaultParams",
+        "AISafetyAtlas.Oversight.Debate.honestAlice",
+        "AISafetyAtlas.Oversight.Debate.honestBob",
+        "AISafetyAtlas.Oversight.Debate.verifier"
+      ]
+    },
+    "AISafetyAtlas.Oversight.Debate.defaultParams": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Oversight.Debate.Params"
+      ]
+    },
+    "AISafetyAtlas.Oversight.Debate.finalAnswer": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Oversight.Debate.Oracle"
+      ]
+    },
+    "AISafetyAtlas.Oversight.Debate.honestAlice": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Oversight.Debate.Alice"
+      ]
+    },
+    "AISafetyAtlas.Oversight.Debate.honestBob": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Oversight.Debate.Bob"
+      ]
+    },
+    "AISafetyAtlas.Oversight.Debate.protocol": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Oversight.Debate.Alice",
+        "AISafetyAtlas.Oversight.Debate.Bob",
+        "AISafetyAtlas.Oversight.Debate.Vera"
+      ]
+    },
+    "AISafetyAtlas.Oversight.Debate.soundness": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Oversight.Debate.Alice",
+        "AISafetyAtlas.Oversight.Debate.Lipschitz",
+        "AISafetyAtlas.Oversight.Debate.Oracle",
+        "AISafetyAtlas.Oversight.Debate.Params",
+        "AISafetyAtlas.Oversight.Debate.finalAnswer",
+        "AISafetyAtlas.Oversight.Debate.honestBob",
+        "AISafetyAtlas.Oversight.Debate.protocol",
+        "AISafetyAtlas.Oversight.Debate.verifier"
+      ]
+    },
+    "AISafetyAtlas.Oversight.Debate.vera_fast": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Oversight.Debate.Alice",
+        "AISafetyAtlas.Oversight.Debate.Bob",
+        "AISafetyAtlas.Oversight.Debate.Oracle",
+        "AISafetyAtlas.Oversight.Debate.Params",
+        "AISafetyAtlas.Oversight.Debate.defaultParams",
+        "AISafetyAtlas.Oversight.Debate.protocol",
+        "AISafetyAtlas.Oversight.Debate.verifier"
+      ]
+    },
+    "AISafetyAtlas.Oversight.Debate.verifier": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Oversight.Debate.Vera"
+      ]
+    },
     "AISafetyAtlas.Oversight.Forces": {
       "kind": "definition",
       "deps": []

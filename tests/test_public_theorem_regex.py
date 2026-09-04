@@ -150,6 +150,8 @@ def test_instance_and_inductive_are_collected() -> None:
     assert _def_name("public inductive Principal") == "Principal"
     assert _def_name("public structure PairModel where") == "PairModel"
     assert _def_name("public noncomputable def f :") == "f"
+    assert _def_name("public scoped instance instFoo : Foo") == "instFoo"
+    assert _def_name("public noncomputable scoped instance instBar : Bar") == "instBar"
 
 
 def test_anonymous_instance_has_no_name_to_collect() -> None:

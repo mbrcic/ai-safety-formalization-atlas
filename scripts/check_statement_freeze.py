@@ -85,6 +85,30 @@ def signature(text: str, line: int) -> str | None:
     return re.sub(r"\s+", " ", body).strip() or None
 
 
+# Frontier specification surfaces.
+#
+# Neither source below reaches these. They are not reproduced external
+# formalizations, so no registry `lean_artifact` row names them; and a
+# conjecture row freezes exactly one declaration, which for CONJ-026 is
+# `IsO70RankTable`. Yet they are the statements a silent edit would damage
+# most: each is the `P ↔ body` surface of a hypothesis the atlas *assumes and
+# does not prove*, and freezing the alias alone freezes nothing, because the
+# body sits behind a `def`. Weakening a frontier is the cheapest way to make a
+# conditional theorem look stronger than it is, and this is what notices.
+#
+# Kept as a literal rather than a new ledger field: there are two, they are
+# hand-chosen, and a diff to this list is exactly the review event that should
+# accompany adding or retiring a frontier.
+SPECIFICATION_SURFACES = {
+    "AISafetyAtlas.SingularLearning.eigenvalueLawStatement_iff":
+        "AISafetyAtlas/SingularLearning/EigenvalueLaw.lean",
+    "AISafetyAtlas.Conjectures.MAIS.o70ExactLocalPairsExist_iff":
+        "AISafetyAtlas/Conjectures/MAIS/O70.lean",
+    "AISafetyAtlas.Conjectures.MAIS.o70ZetaPoleBridge_iff":
+        "AISafetyAtlas/Conjectures/MAIS/O70.lean",
+}
+
+
 def declaration_line(text: str, name: str) -> int | None:
     """Locate an unqualified declaration in its defining module."""
     without_blocks = BLOCK_COMMENT.sub(
@@ -170,6 +194,22 @@ def current() -> dict[str, dict[str, str]]:
     for name, path, line in conjecture_declarations():
         if path not in sources:
             sources[path] = (ROOT / path).read_text(encoding="utf-8")
+        statement = signature(sources[path], line)
+        if statement is None:
+            raise RuntimeError(f"could not extract signature for {name}")
+        out[name] = {
+            "file": path,
+            "sha256": hashlib.sha256(statement.encode()).hexdigest()[:16],
+        }
+    for name, path in SPECIFICATION_SURFACES.items():
+        source = ROOT / path
+        if not source.is_file():
+            raise RuntimeError(f"specification surface file is missing: {path}")
+        if path not in sources:
+            sources[path] = source.read_text(encoding="utf-8")
+        line = declaration_line(sources[path], name)
+        if line is None:
+            raise RuntimeError(f"could not locate specification surface {name} in {path}")
         statement = signature(sources[path], line)
         if statement is None:
             raise RuntimeError(f"could not extract signature for {name}")

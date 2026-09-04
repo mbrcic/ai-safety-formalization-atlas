@@ -245,6 +245,35 @@ cheap gate. It is advisory and compares source text, so reformatting reports a
 change that is not one — the report is a question, never a verdict. Answer it,
 re-grade the row if fidelity moved, then `--write` to record the new statement.
 
+### Conditional results, and the debt they create
+
+A result proved under a proposition the atlas does not prove is a **conditional
+verification**, and the assumed proposition is a debt. `CONTRIBUTING.md` says how
+to report the result; this says how the debt is tracked.
+
+Every assumed proposition gets a row in the `FRONTIERS` registry at the top of
+`scripts/check_frontier_evidence.py`, which the cheap gate runs. The row names the
+frozen `..._iff` surface, the unconditional stress artifacts, and three fields no script
+can check: `owed_to`, `decision`, `reason`. The gate prints all of it on every run,
+which is the whole reason the registry is a literal in the checker rather than a
+fourth ledger with a validator and a generated view — three rows do not earn that,
+and the debt is more discoverable printed beside its own evidence than filed away.
+
+`owed_to` must not be collapsed. `"candidate"` means a submitted solution cites the
+proposition rather than deriving it, so assuming it leaves that derivation intact
+and verifying the submission does not require paying the debt. `"source"` means the
+printed problem statement asserts it. `"atlas"` means we chose a formulation the
+source did not, and the gap is of our own making — the expensive kind. Never report
+a total across the three.
+
+`decision` is `hold` or `discharge`, and a hold is a decision rather than a
+silence: the `reason` must say what discharging would cost and record that no
+maintainer has ruled, if none has. An artifact counts only when it does not itself
+assume the frontier — a theorem `frontier → X` reads exactly as strong whether the
+frontier is true or false, and the check enforces that. Passing this check does not
+show that the frontier is satisfiable: an artifact may only probe a formula, rule
+out a cheap branch, or verify that the asserted setting has a required property.
+
 ### The layer a text diff cannot reach
 
 Every check above reads source. On a toolchain bump the dangerous change is the

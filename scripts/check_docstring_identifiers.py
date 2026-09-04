@@ -40,7 +40,14 @@ EXTERNAL_ROOTS = {
     "Asymptotics",
 }
 BACKTICK_SPAN = re.compile(r"`([^`\n]+)`")
-NAME_RE = re.compile(r"[A-Za-z_][A-Za-z0-9_'.\u2032\u2081-\u2089]*")
+# Lean identifiers carry primes and subscripts. Prose and code must tokenize them
+# the *same* way: while only one side knew about subscripts, a real declaration
+# (`det_canonicalA_toBlocks₁₁_eq_zero`) read as one name inside backticks but as
+# two fragments in the source, so the checker called a live theorem unresolved -- and
+# the only way to quiet it was to exempt it, which would then have hidden a genuine
+# rename of that same name forever.
+IDENT_TAIL = r"[A-Za-z0-9_'.\u2032\u2081-\u2089]*"
+NAME_RE = re.compile(r"[A-Za-z_]" + IDENT_TAIL)
 # Names legitimately mentioned in prose that are not Lean identifiers of ours:
 # tactics, registry fields, and results in other libraries.
 EXEMPT = {
@@ -87,6 +94,50 @@ EXEMPT = {
     # Mathlib's asymptotic predicate, named in prose by the atlas theorem that
     # proves the rate predicate implies it
     "IsTheta",
+    # Mathlib results and structures the SingularLearning cluster's docstrings
+    # survey but does not call: each says what the pinned Mathlib does or does not
+    # already carry, which is the whole point of those passages. Every name below
+    # was checked against `.lake/packages/mathlib` at the pinned revision; the file
+    # named after it is where the pinned tree declares it.
+    #
+    # Mathlib/Topology/Instances/Matrix.lean — the *topological* matrix statements
+    # that `SingularLearning/MatrixAnalytic.lean` records as where Mathlib stops
+    "Continuous.matrix_det", "Continuous.matrix_adjugate", "continuousAt_matrix_inv",
+    # Mathlib/Analysis/Analytic/Constructions.lean and
+    # Mathlib/Analysis/Calculus/ContDiff/Operations.lean — `Ring.inverse` is
+    # analytic/`C^n` on the units of a normed algebra, the Banach-algebra route
+    # that same module explains it cannot take
+    "analyticAt_inverse", "analyticOnNhd_inverse", "contDiffAt_ringInverse",
+    # Mathlib/Analysis/SpecificLimits/Normed.lean and
+    # Mathlib/Analysis/Normed/Ring/Basic.lean — the instances that route needs
+    "HasSummableGeomSeries", "NormedRing",
+    # Mathlib/MeasureTheory/MeasurableSpace/Embedding.lean,
+    # Mathlib/Topology/Algebra/Module/Equiv.lean and
+    # Mathlib/Analysis/Normed/Lp/PiLp.lean — bundled-equivalence and Lp types
+    # named bare in prose, though the code only ever writes a projection of them
+    "MeasurableEquiv", "ContinuousLinearEquiv", "PiLp",
+    # Mathlib/Probability/ProductMeasure.lean — the infinite product measure and
+    # the only measure-level currying statement Mathlib has, which
+    # `SingularLearning/Coordinates.lean` cites to say it does *not* cover `volume`
+    "infinitePi", "MeasureTheory.Measure.infinitePi_map_piCurry",
+    # Mathlib/LinearAlgebra/Dimension/LinearMap.lean — the *upper* rank bounds on a
+    # composite, cited by `SingularLearning/ReducedRank.lean` as the reason
+    # Sylvester's inequality is the atlas's to prove
+    "rank_comp_le", "LinearMap.rank_comp_le", "rank_comp_le_left", "rank_comp_le_right",
+    # Mathlib/MeasureTheory/Measure/Haar/NormedSpace.lean,
+    # Mathlib/Analysis/SpecialFunctions/Gaussian/GaussianIntegral.lean and
+    # Mathlib/Analysis/Matrix/Order.lean — the change-of-variables, one-dimensional
+    # Gaussian and positivity facts `SingularLearning/GaussianQuadratic.lean`
+    # surveys before supplying the multivariate integral itself
+    "Measure.integral_comp_smul", "integral_gaussian", "Matrix.nonneg_iff_posSemidef",
+    # Mathlib/Algebra/BigOperators/Group/Finset/Defs.lean and
+    # Mathlib/Analysis/Normed/Group/Constructions.lean (the `to_additive` name of
+    # `Pi.norm_def'`) — named in prose to explain a rewriting step and the sup norm
+    "Finset.prod_div_distrib", "Pi.norm_def",
+    # a real atlas theorem (`SingularLearning/EliminationChart.lean`) that
+    # `code_identifiers` cannot see: its tokenizer stops at the subscripts in
+    # `toBlocks₁₁`, so the declaration reads as two fragments in code and as one
+    # name inside backticks
 }
 DEPS = [
     ROOT / ".lake" / "packages" / "PFR" / "PFR",
@@ -218,9 +269,10 @@ def code_identifiers() -> set[str]:
     for path in paths:
         code = re.sub(r"/-[-!]?.*?-/", " ", path.read_text(), flags=re.S)
         code = re.sub(r"--[^\n]*", " ", code)
-        names.update(re.findall(r"[A-Za-z_][A-Za-z0-9_'.]*", code))
+        names.update(re.findall(r"[A-Za-z_]" + IDENT_TAIL, code))
         # also register each dotted suffix, so `Namespace.thm` matches `thm`
-        for m in re.findall(r"[A-Za-z_][A-Za-z0-9_']*(?:\.[A-Za-z_][A-Za-z0-9_']*)+", code):
+        seg = r"[A-Za-z_][A-Za-z0-9_'\u2032\u2081-\u2089]*"
+        for m in re.findall(seg + r"(?:\." + seg + r")+", code):
             parts = m.split(".")
             for i in range(len(parts)):
                 names.add(".".join(parts[i:]))

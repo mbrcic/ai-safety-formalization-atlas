@@ -124,8 +124,35 @@ GENERATED_SUFFIX = re.compile(
     r"|brecOn\.eq|brecOn\.go)$"
 )
 
-HARNESS = """import AISafetyAtlas
-open Lean
+BUILD_TARGETS = ROOT / "scripts" / "lean_build_targets.txt"
+
+
+def consumer_modules() -> list[str]:
+    """Modules outside the root import closure, as `generate_declaration_index.py` reads them.
+
+    `CLUSTERS` is derived from the *directories* under `AISafetyAtlas/`, but the
+    harness used to import only `AISafetyAtlas`. Any domain the root does not
+    import therefore elaborated to an empty environment and its view was written
+    as `0 authored declarations` — which `--check` cannot catch, being a liveness
+    check only. `SingularLearning` was in exactly that state: thirty-two modules,
+    an empty view, and a green `--check` over it.
+
+    Module discovery on this repository is artifact-based, so the same list the
+    build uses is the right list here; `generate_declaration_index.py` already
+    reads it this way.
+    """
+    if not BUILD_TARGETS.is_file():
+        return []
+    out: list[str] = []
+    for raw in BUILD_TARGETS.read_text(encoding="utf-8").splitlines():
+        line = raw.strip()
+        if not line or line.startswith("#"):
+            continue
+        out.append(line)
+    return out
+
+
+HARNESS_BODY = """open Lean
 
 #eval show CoreM Unit from do
   let env ← getEnv
@@ -174,7 +201,9 @@ def is_authored(name: str) -> bool:
 def run_harness() -> dict[str, Node]:
     with tempfile.TemporaryDirectory(prefix="atlas-deps-") as tmp:
         harness = Path(tmp) / "DepGraph.lean"
-        harness.write_text(HARNESS, encoding="utf-8")
+        imports = ["import AISafetyAtlas",
+                   *[f"import {m}" for m in consumer_modules()]]
+        harness.write_text("\n".join([*imports, HARNESS_BODY]), encoding="utf-8")
         proc = subprocess.run(
             ["lake", "env", "lean", str(harness)],
             cwd=ROOT,

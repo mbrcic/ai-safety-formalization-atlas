@@ -18,57 +18,58 @@ Named in the statements of eight or more others. A change to one of these is a c
 
 | Declaration | Named by |
 |---|---|
-| `Model` | 253 |
-| `binaryDim` | 219 |
-| `Assignment` | 186 |
-| `Skeleton` | 119 |
+| `Model` | 336 |
+| `binaryDim` | 318 |
+| `Assignment` | 210 |
+| `Skeleton` | 205 |
+| `Model.parents` | 87 |
 | `ChartIndex` | 69 |
-| `Model.parents` | 57 |
-| `ControlledMarkovProcess` | 47 |
+| `Skeleton.MarginClass` | 57 |
+| `Skeleton.mapRat` | 51 |
+| `ProbMixture` | 48 |
+| `Model.cpt` | 48 |
+| `ControlledMarkovProcess` | 48 |
 | `InterventionProfile` | 45 |
-| `Model.cpt` | 43 |
 | `CompositeGoal` | 40 |
-| `Skeleton.mapRat` | 39 |
-| `ProbMixture` | 39 |
-| `Skeleton.utilityParents` | 35 |
-| `Skeleton.MarginClass` | 33 |
+| `Skeleton.utilityParents` | 38 |
 | `SCIM.graph` | 33 |
+| `Skeleton.gap` | 32 |
 | `SCIM.Policy` | 30 |
-| `Skeleton.gap` | 28 |
 | `SequentialGoal` | 28 |
+| `Skeleton.BehaviorEq` | 27 |
+| `modelError` | 25 |
+| `InIdentifiedSet` | 25 |
 | `ExoAssignment` | 25 |
+| `ShiftedQuery` | 24 |
+| `Mixture` | 24 |
 | `SCM` | 23 |
 | `GoalPolicy` | 23 |
+| `Skeleton.observed` | 22 |
 | `SCIM` | 22 |
 | `O24Var` | 22 |
-| `Mixture` | 22 |
 | `CID.IsDecision` | 22 |
+| `Skeleton.ValidMargin` | 21 |
 | `RandomizedQueryStrategy` | 21 |
 | `CID` | 21 |
 | `UtilityConfig` | 20 |
 | `SCM.eval` | 20 |
 | `Policy` | 19 |
 | `ParentConfig` | 19 |
+| `IsProbabilityMixture` | 19 |
 | `CID.parents` | 19 |
-| `modelError` | 17 |
 | `SubGoal` | 17 |
-| `Skeleton.observed` | 17 |
-| `ShiftedQuery` | 17 |
 | `PolicyFamily` | 17 |
 | `O24Assignment` | 17 |
-| `IsProbabilityMixture` | 17 |
+| `Model.jointProb` | 17 |
 | `SCIM.withPolicy` | 16 |
-| `Skeleton.BehaviorEq` | 15 |
+| `Model.factor` | 16 |
 | `SCM.IsWellFounded` | 15 |
-| `InIdentifiedSet` | 15 |
+| `pmfExpect` | 14 |
 | `Transcript` | 14 |
-| `Skeleton.ValidMargin` | 14 |
 | `Model.roundDown` | 14 |
-| `Model.factor` | 14 |
 | `Model.ancestors` | 14 |
 | `DecisionNetwork` | 14 |
-| `pmfExpect` | 13 |
-| `Model.jointProb` | 13 |
+| `O24Solution` | 13 |
 | `instMeasurableSpaceModel` | 12 |
 | `fibreRep` | 12 |
 | `achieveProb` | 12 |
@@ -79,9 +80,12 @@ Named in the statements of eight or more others. A change to one of these is a c
 | `Model.chartOn` | 11 |
 | `MeasureEstimator` | 11 |
 | `LocalIntervention` | 11 |
+| `exactMinimalBudget` | 10 |
+| `chartDim` | 10 |
 | `Skeleton.utility` | 10 |
 | `Skeleton.M1` | 10 |
 | `Model.regret` | 10 |
+| `Model.fibreScore` | 10 |
 | `o24Size` | 9 |
 | `immediateWins` | 9 |
 | `hardInterventionProfile` | 9 |
@@ -89,18 +93,19 @@ Named in the statements of eight or more others. A change to one of these is a c
 | `Skeleton.M4` | 9 |
 | `SCIM.expectedUtility` | 9 |
 | `Model.ParentClosed` | 9 |
+| `FirstActionData` | 9 |
 | `DecisionNetwork.utility` | 9 |
 | `asg` | 8 |
+| `Skeleton.M2` | 8 |
 | `SCM.f` | 8 |
 | `SCM.exoJoint` | 8 |
 | `Policy.prob` | 8 |
 | `Model.properAncestors` | 8 |
 | `Model.marginal` | 8 |
-| `Model.fibreScore` | 8 |
 | `GoalHistory` | 8 |
 | `GoalConditionedAgent` | 8 |
-| `FirstActionData` | 8 |
 | `DecisionNetwork.decision` | 8 |
+| `ControlledMarkovProcess.Communicating` | 8 |
 | `ControlledMarkovProcess.ActionIndependent` | 8 |
 | `ConditionalTables` | 8 |
 | `CID.kind` | 8 |
@@ -119,7 +124,6 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 - `O24Constructor`
 - `O24RecoveryModulus`
 - `flipIntervention`
-- `nonadaptiveExactMinimalBudget`
 - `optimalPolicyFamily`
 
 ## Direct dependencies

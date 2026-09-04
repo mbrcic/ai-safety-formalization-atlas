@@ -18,13 +18,16 @@ Named in the statements of eight or more others. A change to one of these is a c
 
 | Declaration | Named by |
 |---|---|
-| `AdaptiveRule` | 30 |
-| `ruleVisit` | 20 |
-| `ObjectiveWeight` | 16 |
-| `observed` | 12 |
-| `CostPerformance` | 11 |
+| `AdaptiveRule` | 32 |
+| `ruleVisit` | 24 |
+| `ObjectiveWeight` | 17 |
+| `observed` | 13 |
+| `CostPerformance` | 13 |
+| `PermInvariant` | 12 |
 | `SupervisedLearner` | 10 |
-| `PermInvariant` | 10 |
+| `weightedPerformance` | 9 |
+| `weightedTrace` | 8 |
+| `induced` | 8 |
 
 ## Definitions no statement and no example mentions
 

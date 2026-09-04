@@ -1,0 +1,5752 @@
+{
+  "note": "Edges are: for a definition, its type and body; for a theorem, its statement only. Lean's module system does not export proof terms.",
+  "cluster": "AISafetyAtlas.SingularLearning.",
+  "declarations": {
+    "AISafetyAtlas.SingularLearning.AWBalanced": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.AdmissibleRankData": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.Feasible"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.AnalyticAt.fromBlocks": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.AnalyticAt.fromCols": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.AnalyticAt.fromRows": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.AnalyticAt.matrix_mul": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.AnalyticOnNhd.matrix_mul": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.AnalyticOnNhd.sub_const": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.ChartSpace": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.EigenvalueLawStatement": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.chamberJFull"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.ElimChartDomain": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.elimDOf",
+        "AISafetyAtlas.SingularLearning.elimPtop"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.ElimChartImage": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.ElimChartDomain",
+        "AISafetyAtlas.SingularLearning.ElimCoordDomain",
+        "AISafetyAtlas.SingularLearning.ElimCoordsProd",
+        "AISafetyAtlas.SingularLearning.PairSpace",
+        "AISafetyAtlas.SingularLearning.elimPhiProd"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.ElimChartNbhd": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.ElimChartDomain",
+        "AISafetyAtlas.SingularLearning.ElimN0",
+        "AISafetyAtlas.SingularLearning.PairSpace"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.ElimCoordDomain": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.ElimCoordsProd",
+        "AISafetyAtlas.SingularLearning.elimPtop"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.ElimCoords": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.ElimCoordsProd": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.ElimN0": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.PairSpace",
+        "AISafetyAtlas.SingularLearning.elimDOf",
+        "AISafetyAtlas.SingularLearning.elimPbot",
+        "AISafetyAtlas.SingularLearning.elimPtop",
+        "AISafetyAtlas.SingularLearning.elimX",
+        "AISafetyAtlas.SingularLearning.frobeniusSq"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.ElimNbhdImage": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.ElimChartImage",
+        "AISafetyAtlas.SingularLearning.ElimChartNbhd",
+        "AISafetyAtlas.SingularLearning.ElimCoordsProd",
+        "AISafetyAtlas.SingularLearning.PairSpace",
+        "AISafetyAtlas.SingularLearning.elimPhiProd"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.Feasible": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.Feasible.rank_le": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.Feasible"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.HasEliminationChartAt": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.ChartSpace",
+        "AISafetyAtlas.SingularLearning.ParamSpace",
+        "AISafetyAtlas.SingularLearning.comparisonGerm",
+        "AISafetyAtlas.SingularLearning.rrrLoss"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.HasExactLocalPair": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.sublevelVolume",
+        "AISafetyAtlas.SingularLearning.volumeScale"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.HasLocalVolumeOrder": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.sublevelVolume",
+        "AISafetyAtlas.SingularLearning.volumeScale"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.HasZetaPoleOrder": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.zetaIntegral"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.HasZetaRealAxisOrder": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.zetaIntegral"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.IsEliminationChart": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.HasEliminationChartAt",
+        "AISafetyAtlas.SingularLearning.canonicalA",
+        "AISafetyAtlas.SingularLearning.canonicalB",
+        "AISafetyAtlas.SingularLearning.elimGauge",
+        "AISafetyAtlas.SingularLearning.elimH",
+        "AISafetyAtlas.SingularLearning.elimN",
+        "AISafetyAtlas.SingularLearning.elimP",
+        "AISafetyAtlas.SingularLearning.elimQ",
+        "AISafetyAtlas.SingularLearning.partialIdMatrix"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.IsOpNormBound": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.euclNorm"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.IsOpNormBound.mul": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.IsOpNormBound"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.IsOpNormBound.neg": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.IsOpNormBound"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.IsOpNormSqBound": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.IsOpNormSqBound.mono": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.IsOpNormSqBound"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.IsOpNormSqBound.mul": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.IsOpNormSqBound"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.IsOpNormSqBound.nonneg": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.IsOpNormSqBound"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.IsOpNormSqBound.smul": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.IsOpNormSqBound"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.PairSpace": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.ParamSpace": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.SameOrbit": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.SameOrbit.rank_eq": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.SameOrbit"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.SameOrbit.refl": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.SameOrbit"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.SameOrbit.symm": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.SameOrbit"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.SameOrbit.trans": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.SameOrbit"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.Set.BijOn.sub_const": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.act_inv_act": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.act_of_factor": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.admissible_of_mul_eq": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.AdmissibleRankData"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.analyticAt_A11": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.PairSpace"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.analyticAt_A11_inv": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.PairSpace"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.analyticAt_A21": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.PairSpace"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.analyticAt_adjugate_comp": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.analyticAt_adjugate_entry_of_entries": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.analyticAt_adjugate_of_entries": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.analyticAt_coords": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.ElimCoordsProd"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.analyticAt_det": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.analyticAt_det_comp": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.analyticAt_det_of_entries": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.analyticAt_elimBbarOf": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.PairSpace",
+        "AISafetyAtlas.SingularLearning.elimBbarOf"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.analyticAt_elimDOf": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.PairSpace",
+        "AISafetyAtlas.SingularLearning.elimDOf"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.analyticAt_elimLinv": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.PairSpace",
+        "AISafetyAtlas.SingularLearning.elimLinv"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.analyticAt_elimPbot": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.PairSpace",
+        "AISafetyAtlas.SingularLearning.elimDOf",
+        "AISafetyAtlas.SingularLearning.elimPbot"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.analyticAt_elimPhiProd_fst": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.ElimCoordsProd",
+        "AISafetyAtlas.SingularLearning.elimPhiProd"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.analyticAt_elimPhiProd_snd": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.ElimCoordsProd",
+        "AISafetyAtlas.SingularLearning.elimPhiProd"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.analyticAt_elimPsi_blocks": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.ElimChartDomain",
+        "AISafetyAtlas.SingularLearning.ElimCoords.A11",
+        "AISafetyAtlas.SingularLearning.ElimCoords.A21",
+        "AISafetyAtlas.SingularLearning.ElimCoords.D",
+        "AISafetyAtlas.SingularLearning.ElimCoords.SZ",
+        "AISafetyAtlas.SingularLearning.ElimCoords.Tp",
+        "AISafetyAtlas.SingularLearning.ElimCoords.U",
+        "AISafetyAtlas.SingularLearning.ElimCoords.XP",
+        "AISafetyAtlas.SingularLearning.ElimCoords.Y0",
+        "AISafetyAtlas.SingularLearning.ElimCoords.Y1",
+        "AISafetyAtlas.SingularLearning.PairSpace",
+        "AISafetyAtlas.SingularLearning.elimPsi"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.analyticAt_elimPtop": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.PairSpace",
+        "AISafetyAtlas.SingularLearning.elimDOf",
+        "AISafetyAtlas.SingularLearning.elimPtop"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.analyticAt_elimR": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.PairSpace",
+        "AISafetyAtlas.SingularLearning.elimDOf",
+        "AISafetyAtlas.SingularLearning.elimPbot",
+        "AISafetyAtlas.SingularLearning.elimPtop",
+        "AISafetyAtlas.SingularLearning.elimR"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.analyticAt_elimRYOf": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.PairSpace",
+        "AISafetyAtlas.SingularLearning.elimDOf",
+        "AISafetyAtlas.SingularLearning.elimPtop",
+        "AISafetyAtlas.SingularLearning.elimRYOf"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.analyticAt_elimSchur": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.PairSpace",
+        "AISafetyAtlas.SingularLearning.elimSchur"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.analyticAt_elimX": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.PairSpace",
+        "AISafetyAtlas.SingularLearning.elimX"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.analyticAt_elimYOf": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.PairSpace",
+        "AISafetyAtlas.SingularLearning.elimYOf"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.analyticAt_entry_comp": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.analyticAt_euclideanSpace_coord": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.analyticAt_fst": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.PairSpace"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.analyticAt_inv": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.analyticAt_inv_comp": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.analyticAt_matrix_entry": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.analyticAt_matrix_of_entries": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.analyticAt_psi_SZ": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.PairSpace",
+        "AISafetyAtlas.SingularLearning.elimSchur"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.analyticAt_psi_Tp": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.PairSpace",
+        "AISafetyAtlas.SingularLearning.elimDOf",
+        "AISafetyAtlas.SingularLearning.elimPtop",
+        "AISafetyAtlas.SingularLearning.elimRYOf",
+        "AISafetyAtlas.SingularLearning.elimSchur",
+        "AISafetyAtlas.SingularLearning.elimShear",
+        "AISafetyAtlas.SingularLearning.elimT",
+        "AISafetyAtlas.SingularLearning.elimX"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.analyticAt_psi_U": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.PairSpace",
+        "AISafetyAtlas.SingularLearning.elimBbarOf",
+        "AISafetyAtlas.SingularLearning.elimCI"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.analyticAt_psi_XP": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.PairSpace",
+        "AISafetyAtlas.SingularLearning.elimX"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.analyticAt_psi_Y0": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.PairSpace",
+        "AISafetyAtlas.SingularLearning.elimDOf",
+        "AISafetyAtlas.SingularLearning.elimPtop",
+        "AISafetyAtlas.SingularLearning.elimRYOf"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.analyticAt_psi_Y1": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.PairSpace",
+        "AISafetyAtlas.SingularLearning.elimDOf",
+        "AISafetyAtlas.SingularLearning.elimPtop",
+        "AISafetyAtlas.SingularLearning.elimRYOf"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.analyticAt_rrrLoss_of_entries": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.rrrLoss"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.analyticAt_rrrLoss_pair": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.rrrLoss"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.analyticAt_rrrLoss_symm_coords": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.matrixPairEquiv",
+        "AISafetyAtlas.SingularLearning.rrrLoss"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.analyticAt_snd": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.PairSpace"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.analyticAt_submatrix": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.analyticAt_submatrix_inv": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.analyticAt_zetaSq": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.zetaSq"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.analyticOnNhd_comp_add_const": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.analyticOnNhd_conj": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.analyticOnNhd_continuousLinearEquiv": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.analyticOnNhd_det": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.analyticOnNhd_elimCoordEquiv": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.ChartSpace",
+        "AISafetyAtlas.SingularLearning.ElimCoordsProd",
+        "AISafetyAtlas.SingularLearning.elimCoordEquiv",
+        "AISafetyAtlas.SingularLearning.elimGauge",
+        "AISafetyAtlas.SingularLearning.elimH",
+        "AISafetyAtlas.SingularLearning.elimN",
+        "AISafetyAtlas.SingularLearning.elimP",
+        "AISafetyAtlas.SingularLearning.elimQ"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.analyticOnNhd_elimParamEquiv": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.elimH",
+        "AISafetyAtlas.SingularLearning.elimN",
+        "AISafetyAtlas.SingularLearning.elimP",
+        "AISafetyAtlas.SingularLearning.elimParamEquiv"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.analyticOnNhd_elimPhiProd": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.ElimCoordsProd",
+        "AISafetyAtlas.SingularLearning.PairSpace",
+        "AISafetyAtlas.SingularLearning.elimPhiProd"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.analyticOnNhd_elimPhiProd_nbhd": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.ElimCoordsProd",
+        "AISafetyAtlas.SingularLearning.ElimNbhdImage",
+        "AISafetyAtlas.SingularLearning.PairSpace",
+        "AISafetyAtlas.SingularLearning.elimPhiProd"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.analyticOnNhd_elimPsiProd": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.ElimChartDomain",
+        "AISafetyAtlas.SingularLearning.ElimCoordsProd",
+        "AISafetyAtlas.SingularLearning.PairSpace",
+        "AISafetyAtlas.SingularLearning.elimPsiProd"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.analyticOnNhd_elimPsiProd_nbhd": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.ElimChartNbhd",
+        "AISafetyAtlas.SingularLearning.ElimCoordsProd",
+        "AISafetyAtlas.SingularLearning.PairSpace",
+        "AISafetyAtlas.SingularLearning.elimPsiProd"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.analyticOnNhd_euclCongr": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.euclCongr"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.analyticOnNhd_euclSplitEquiv": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.euclSplitEquiv"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.analyticOnNhd_euclSplitEquiv_symm": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.euclSplitEquiv"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.analyticOnNhd_inv": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.analyticOnNhd_inv_comp": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.analyticOnNhd_inv_fin": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.analyticOnNhd_matrixEuclEquiv": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.matrixEuclEquiv"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.analyticOnNhd_matrixEuclEquiv_symm": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.matrixEuclEquiv"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.analyticOnNhd_matrixPairEucl": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.matrixPairEucl"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.analyticOnNhd_matrixQuintEucl": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.matrixQuintEucl"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.analyticOnNhd_matrixReindexEquiv": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.matrixReindexEquiv"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.analyticOnNhd_rrrLoss_pair": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.rrrLoss"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.analyticOnNhd_rrrLoss_symm_coords": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.matrixPairEquiv",
+        "AISafetyAtlas.SingularLearning.rrrLoss"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.analyticOnNhd_submatrix_inv": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.awBalancedNumerator": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.awCases_exhaustive": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.AWBalanced"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.awLambda": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.AWBalanced",
+        "AISafetyAtlas.SingularLearning.awBalancedNumerator"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.awLambda_case_four": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.awLambda"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.awLambda_case_three": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.awLambda"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.awLambda_case_two": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.awLambda"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.awLambda_two_two_two_zero": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.awLambda"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.awMultiplicity": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.AWBalanced"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.awPair": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.awLambda",
+        "AISafetyAtlas.SingularLearning.awMultiplicity"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.awPair_one_one_one_zero": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.awPair"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.ball_eq_preimage_Ioo": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.bijOn_elimPsiProd": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.ElimChartDomain",
+        "AISafetyAtlas.SingularLearning.ElimChartImage",
+        "AISafetyAtlas.SingularLearning.ElimCoordsProd",
+        "AISafetyAtlas.SingularLearning.PairSpace",
+        "AISafetyAtlas.SingularLearning.elimPsiProd"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.bijOn_elimPsiProd_nbhd": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.ElimChartNbhd",
+        "AISafetyAtlas.SingularLearning.ElimCoordsProd",
+        "AISafetyAtlas.SingularLearning.ElimNbhdImage",
+        "AISafetyAtlas.SingularLearning.PairSpace",
+        "AISafetyAtlas.SingularLearning.elimPhiProd",
+        "AISafetyAtlas.SingularLearning.elimPsiProd"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.bijOn_matrixEuclEquiv": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.matrixEuclEquiv"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.bijOn_restrict": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.canonicalA": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.selCols"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.canonicalA_A12_zero": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.canonicalA",
+        "AISafetyAtlas.SingularLearning.elimReorderEquiv"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.canonicalA_A21_zero": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.canonicalA",
+        "AISafetyAtlas.SingularLearning.elimReorderEquiv"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.canonicalA_apply_iff": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.canonicalA"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.canonicalA_col_zero_of_ge": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.canonicalA"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.canonicalA_reindex": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.canonicalA",
+        "AISafetyAtlas.SingularLearning.elimH",
+        "AISafetyAtlas.SingularLearning.elimHiddenIdxNF",
+        "AISafetyAtlas.SingularLearning.elimInputIdx",
+        "AISafetyAtlas.SingularLearning.elimN"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.canonicalA_reorderEquiv_entry": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.canonicalA",
+        "AISafetyAtlas.SingularLearning.elimReorderEquiv"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.canonicalA_reorderEquiv_row_zero": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.canonicalA",
+        "AISafetyAtlas.SingularLearning.elimReorderEquiv"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.canonicalA_reordered_block_structure": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.canonicalA",
+        "AISafetyAtlas.SingularLearning.elimReorder"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.canonicalA_reordered_entries": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.canonicalA",
+        "AISafetyAtlas.SingularLearning.elimReorder"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.canonicalA_zero": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.canonicalA"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.canonicalB": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.selCols"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.canonicalB_apply_iff": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.canonicalB"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.canonicalB_col_lt": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.canonicalB"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.canonicalB_col_mid": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.canonicalB"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.canonicalB_col_zero_of_ge": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.canonicalB"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.canonicalB_mul_canonicalA": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.canonicalA",
+        "AISafetyAtlas.SingularLearning.canonicalB",
+        "AISafetyAtlas.SingularLearning.partialIdMatrix"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.canonicalB_reindex": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.canonicalB",
+        "AISafetyAtlas.SingularLearning.elimCI",
+        "AISafetyAtlas.SingularLearning.elimDstar",
+        "AISafetyAtlas.SingularLearning.elimH",
+        "AISafetyAtlas.SingularLearning.elimHiddenIdxNF",
+        "AISafetyAtlas.SingularLearning.elimJ",
+        "AISafetyAtlas.SingularLearning.elimOutputIdx",
+        "AISafetyAtlas.SingularLearning.elimP"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.canonicalB_zero": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.canonicalB"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.card_subtype_val_lt": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.cePbot": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.cePbot_hyp": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.IsOpNormSqBound",
+        "AISafetyAtlas.SingularLearning.cePbot"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.cePtop": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.cePtop_hyp": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.IsOpNormSqBound",
+        "AISafetyAtlas.SingularLearning.cePtop"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.cePtop_inv": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.cePtop"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.ce_elimR": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.cePbot",
+        "AISafetyAtlas.SingularLearning.cePtop",
+        "AISafetyAtlas.SingularLearning.elimR"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.chamberA2": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.chamberG",
+        "AISafetyAtlas.SingularLearning.chamberTheta",
+        "AISafetyAtlas.SingularLearning.kappaA2"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.chamberA2_localLarge": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.chamberIntegrand",
+        "AISafetyAtlas.SingularLearning.etaTwo"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.chamberA2_localLog": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.chamberIntegrand"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.chamberA2_localSmall": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.chamberIntegrand",
+        "AISafetyAtlas.SingularLearning.etaOne"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.chamberA4_upper": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.chamberI",
+        "AISafetyAtlas.SingularLearning.chamberTheta",
+        "AISafetyAtlas.SingularLearning.kappaA2"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.chamberA4_upper_eval": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.chamberCPlus",
+        "AISafetyAtlas.SingularLearning.chamberI",
+        "AISafetyAtlas.SingularLearning.chamberMinExponent",
+        "AISafetyAtlas.SingularLearning.chamberResonanceCount"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.chamberA5_edge": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.chamberFT",
+        "AISafetyAtlas.SingularLearning.chamberKappa4",
+        "AISafetyAtlas.SingularLearning.chamberOmegaEdge",
+        "AISafetyAtlas.SingularLearning.chamberVertexExponent"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.chamberA5_lower": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.chamberI",
+        "AISafetyAtlas.SingularLearning.chamberKappa3",
+        "AISafetyAtlas.SingularLearning.chamberMinExponent"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.chamberA5_lower_log": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.chamberI",
+        "AISafetyAtlas.SingularLearning.chamberKappa4",
+        "AISafetyAtlas.SingularLearning.chamberMinExponent",
+        "AISafetyAtlas.SingularLearning.chamberVertexExponent"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.chamberA5_lower_of_T0": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.chamberI",
+        "AISafetyAtlas.SingularLearning.chamberKappa3",
+        "AISafetyAtlas.SingularLearning.chamberMinExponent"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.chamberA5_matching": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.chamberI",
+        "AISafetyAtlas.SingularLearning.chamberMinExponent",
+        "AISafetyAtlas.SingularLearning.chamberVertexExponent"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.chamberA5_matching_of_T0": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.chamberI",
+        "AISafetyAtlas.SingularLearning.chamberMinExponent",
+        "AISafetyAtlas.SingularLearning.chamberVertexExponent"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.chamberA5_matching_three": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.chamberI",
+        "AISafetyAtlas.SingularLearning.chamberMinExponent",
+        "AISafetyAtlas.SingularLearning.chamberVertexExponent"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.chamberA5_vertex": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.chamberFT",
+        "AISafetyAtlas.SingularLearning.chamberKappa3",
+        "AISafetyAtlas.SingularLearning.chamberOmega",
+        "AISafetyAtlas.SingularLearning.chamberVertexExponent"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.chamberAbsVandermonde": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.chamberAbsVandermonde_comp": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.chamberAbsVandermonde"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.chamberAbsVandermonde_eq_abs": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.chamberAbsVandermonde",
+        "AISafetyAtlas.SingularLearning.chamberVandermonde"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.chamberBox": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.chamberBox_integral_ge": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.chamberBox",
+        "AISafetyAtlas.SingularLearning.chamberIntegrand",
+        "AISafetyAtlas.SingularLearning.etaOne",
+        "AISafetyAtlas.SingularLearning.etaTwo"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.chamberCPlus": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.kappaA2"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.chamberCPlus_pos": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.chamberCPlus"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.chamberCor816": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.chamberJFull",
+        "AISafetyAtlas.SingularLearning.chamberMinExponent",
+        "AISafetyAtlas.SingularLearning.chamberResonanceCount"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.chamberDelta": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.chamberDeltaPerm": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.chamberDeltaStrict"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.chamberDeltaPerm_one": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.chamberDeltaPerm",
+        "AISafetyAtlas.SingularLearning.chamberDeltaStrict"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.chamberDeltaPerm_subset_pi": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.chamberDeltaPerm"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.chamberDeltaStrict": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.chamberDeltaStrict_subset": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.chamberDelta",
+        "AISafetyAtlas.SingularLearning.chamberDeltaStrict"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.chamberDelta_ae_eq_strict": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.chamberDelta",
+        "AISafetyAtlas.SingularLearning.chamberDeltaStrict"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.chamberDelta_subset_pi": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.chamberDelta"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.chamberDiag": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.chamberEdgeBox": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.chamberEdgeBox_integral_ge": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.chamberEdgeBox",
+        "AISafetyAtlas.SingularLearning.chamberEdgeConst",
+        "AISafetyAtlas.SingularLearning.chamberEdgeWeight",
+        "AISafetyAtlas.SingularLearning.chamberIntegrand"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.chamberEdgeConst": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.etaOne",
+        "AISafetyAtlas.SingularLearning.etaTwo"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.chamberEdgeConst_pos": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.chamberEdgeConst"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.chamberEdgeLower": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.chamberEdgeLower_lt_of_mem": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.chamberEdgeBox",
+        "AISafetyAtlas.SingularLearning.chamberEdgeLower"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.chamberEdgeUpper": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.chamberEdgeWeight": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.chamberEdge_two_mul_upper_le_lower": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.chamberEdgeLower",
+        "AISafetyAtlas.SingularLearning.chamberEdgeUpper"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.chamberFT": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.chamberVandermonde"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.chamberFT_antitone_T": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.chamberDelta",
+        "AISafetyAtlas.SingularLearning.chamberFT"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.chamberFT_ge_prod": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.chamberFT",
+        "AISafetyAtlas.SingularLearning.chamberIntegrand",
+        "AISafetyAtlas.SingularLearning.chamberSepConst",
+        "AISafetyAtlas.SingularLearning.chamberSeparated"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.chamberFT_le_prod": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.chamberDelta",
+        "AISafetyAtlas.SingularLearning.chamberFT",
+        "AISafetyAtlas.SingularLearning.chamberIntegrand"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.chamberFT_nonneg": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.chamberDelta",
+        "AISafetyAtlas.SingularLearning.chamberFT"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.chamberG": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.chamberIntegrand"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.chamberG0_ge": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.chamberIntegrand"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.chamberG0_le": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.chamberIntegrand"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.chamberG1_bounds": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.chamberIntegrand",
+        "AISafetyAtlas.SingularLearning.chamberJ"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.chamberG2_bounds": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.chamberIntegrand",
+        "AISafetyAtlas.SingularLearning.gammaOne"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.chamberG_nonneg": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.chamberG"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.chamberG_split": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.chamberG",
+        "AISafetyAtlas.SingularLearning.chamberIntegrand"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.chamberI": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.chamberDelta",
+        "AISafetyAtlas.SingularLearning.chamberFT"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.chamberI_antitone_T": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.chamberI"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.chamberI_le_prod_chamberG": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.chamberG",
+        "AISafetyAtlas.SingularLearning.chamberI"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.chamberIndex_pos": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.chamberIntegral_Ioc_ge": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.chamberIntegrand"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.chamberIntegrand": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.chamberIntegrand_ge_endpoints": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.chamberIntegrand"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.chamberIntegrand_ge_large": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.chamberIntegrand"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.chamberIntegrand_ge_small": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.chamberIntegrand"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.chamberIntegrand_le": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.chamberIntegrand"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.chamberIntegrand_le_large": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.chamberIntegrand"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.chamberIntegrand_le_rpow": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.chamberIntegrand"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.chamberIntegrand_nonneg": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.chamberIntegrand"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.chamberJ": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.chamberJFull": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.chamberPhiT"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.chamberJFull_eq_factorial_mul_chamberI": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.chamberI",
+        "AISafetyAtlas.SingularLearning.chamberJFull"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.chamberJ_le_of_gt": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.chamberJ"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.chamberJ_le_of_lt": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.chamberJ"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.chamberJ_of_eq": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.chamberJ"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.chamberJ_of_ne": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.chamberJ"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.chamberKappa3": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.chamberSepConst",
+        "AISafetyAtlas.SingularLearning.etaOne",
+        "AISafetyAtlas.SingularLearning.etaTwo"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.chamberKappa3_pos": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.chamberKappa3"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.chamberKappa4": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.chamberEdgeConst",
+        "AISafetyAtlas.SingularLearning.chamberSepConst"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.chamberKappa4_pos": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.chamberKappa4"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.chamberMinExponent": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.chamberVertexExponent"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.chamberMinExponent_eq_sum_min": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.chamberMinExponent"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.chamberMinExponent_le": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.chamberMinExponent",
+        "AISafetyAtlas.SingularLearning.chamberVertexExponent"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.chamberMinExponent_pos": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.chamberMinExponent"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.chamberMinimizers": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.chamberMinExponent",
+        "AISafetyAtlas.SingularLearning.chamberVertexExponent"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.chamberMinimizers_adjacent": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.chamberMinimizers"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.chamberMinimizers_card": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.chamberMinimizers",
+        "AISafetyAtlas.SingularLearning.chamberResonanceCount"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.chamberMinimizers_nonempty": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.chamberMinimizers"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.chamberOmega": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.chamberBox"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.chamberOmegaEdge": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.chamberEdgeBox"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.chamberOmegaEdge_subset_chamberDelta": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.chamberDelta",
+        "AISafetyAtlas.SingularLearning.chamberOmegaEdge"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.chamberOmegaEdge_subset_pi": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.chamberOmegaEdge"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.chamberOmega_subset_chamberDelta": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.chamberDelta",
+        "AISafetyAtlas.SingularLearning.chamberOmega"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.chamberOmega_subset_pi": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.chamberOmega"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.chamberPhiT": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.chamberAbsVandermonde"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.chamberPhiT_comp_perm": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.chamberPhiT"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.chamberPhiT_eq_chamberFT": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.chamberDelta",
+        "AISafetyAtlas.SingularLearning.chamberFT",
+        "AISafetyAtlas.SingularLearning.chamberPhiT"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.chamberResonanceCount": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.chamberResonanceCount_le_one": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.chamberResonanceCount"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.chamberSepConst": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.chamberSepConst_pos": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.chamberSepConst"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.chamberSeparated": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.chamberSeparated.mem_chamberDelta": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.chamberDelta",
+        "AISafetyAtlas.SingularLearning.chamberSeparated"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.chamberSeparated_of_mem_chamberOmega": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.chamberOmega",
+        "AISafetyAtlas.SingularLearning.chamberSeparated"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.chamberSeparated_of_mem_chamberOmegaEdge": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.chamberOmegaEdge",
+        "AISafetyAtlas.SingularLearning.chamberSeparated"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.chamberT0_le": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.chamberTheta": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.chamberVandermonde": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.chamberVandermonde_eq_det": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.chamberVandermonde"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.chamberVandermonde_ge_const_mul": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.chamberSepConst",
+        "AISafetyAtlas.SingularLearning.chamberSeparated",
+        "AISafetyAtlas.SingularLearning.chamberVandermonde"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.chamberVandermonde_ge_prod": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.chamberSeparated",
+        "AISafetyAtlas.SingularLearning.chamberVandermonde"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.chamberVandermonde_le_prod": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.chamberDelta",
+        "AISafetyAtlas.SingularLearning.chamberVandermonde"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.chamberVandermonde_nonneg": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.chamberDelta",
+        "AISafetyAtlas.SingularLearning.chamberVandermonde"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.chamberVertexExponent": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.chamberVertexExponent_eq_min_of_resonance": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.chamberMinExponent",
+        "AISafetyAtlas.SingularLearning.chamberVertexExponent"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.chamberVertexExponent_succ": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.chamberVertexExponent"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.chartCoords": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.ChartSpace",
+        "AISafetyAtlas.SingularLearning.chartRearrange",
+        "AISafetyAtlas.SingularLearning.euclSplitEquiv",
+        "AISafetyAtlas.SingularLearning.matrixPairEquiv"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.chartCoords_apply": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.ChartSpace",
+        "AISafetyAtlas.SingularLearning.chartCoords",
+        "AISafetyAtlas.SingularLearning.euclideanProdEquiv",
+        "AISafetyAtlas.SingularLearning.matrixPairEquiv"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.chartGerm": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.chartInnerGerm",
+        "AISafetyAtlas.SingularLearning.euclideanProdEquiv"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.chartGerm_apply": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.chartGerm",
+        "AISafetyAtlas.SingularLearning.chartInnerGerm",
+        "AISafetyAtlas.SingularLearning.euclideanProdEquiv"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.chartGerm_chartCoords": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.ChartSpace",
+        "AISafetyAtlas.SingularLearning.chartCoords",
+        "AISafetyAtlas.SingularLearning.chartGerm",
+        "AISafetyAtlas.SingularLearning.comparisonGerm"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.chartGerm_eq_comparisonGerm": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.chartGerm",
+        "AISafetyAtlas.SingularLearning.comparisonGerm",
+        "AISafetyAtlas.SingularLearning.euclideanProdEquiv",
+        "AISafetyAtlas.SingularLearning.matrixPairEquiv"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.chartGerm_nonneg": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.chartGerm"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.chartInnerGerm": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.euclideanProdEquiv",
+        "AISafetyAtlas.SingularLearning.quadraticGerm",
+        "AISafetyAtlas.SingularLearning.residualGerm"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.chartInnerGerm_apply": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.chartInnerGerm",
+        "AISafetyAtlas.SingularLearning.euclideanProdEquiv",
+        "AISafetyAtlas.SingularLearning.quadraticGerm",
+        "AISafetyAtlas.SingularLearning.residualGerm"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.chartInnerGerm_apply_zero": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.chartInnerGerm",
+        "AISafetyAtlas.SingularLearning.euclideanProdEquiv",
+        "AISafetyAtlas.SingularLearning.residualGerm"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.chartRearrange": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.ChartSpace"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.chart_transport": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.coe_euclSplitEquiv_symm": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.euclSplitEquiv",
+        "AISafetyAtlas.SingularLearning.euclideanProdEquiv"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.coe_matrixOneEquiv": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.matrixOneEquiv"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.coe_matrixPairEquiv": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.matrixPairEquiv",
+        "AISafetyAtlas.SingularLearning.matrixPairMeasurableEquiv"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.coe_matrixPairEquiv_symm": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.matrixPairEquiv",
+        "AISafetyAtlas.SingularLearning.matrixPairMeasurableEquiv"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.coe_paramCoords": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.ParamSpace",
+        "AISafetyAtlas.SingularLearning.matrixPairEquiv",
+        "AISafetyAtlas.SingularLearning.paramCoords"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.coe_piCongrLeft_perm": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.comparisonGerm": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.frobeniusSq"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.comparisonGerm_elimCoordEquiv": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.ChartSpace",
+        "AISafetyAtlas.SingularLearning.ElimCoordsProd",
+        "AISafetyAtlas.SingularLearning.comparisonGerm",
+        "AISafetyAtlas.SingularLearning.elimCoordEquiv",
+        "AISafetyAtlas.SingularLearning.elimGauge",
+        "AISafetyAtlas.SingularLearning.elimH",
+        "AISafetyAtlas.SingularLearning.elimN",
+        "AISafetyAtlas.SingularLearning.elimP",
+        "AISafetyAtlas.SingularLearning.elimQ",
+        "AISafetyAtlas.SingularLearning.frobeniusSq"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.comparisonGerm_nonneg": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.comparisonGerm"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.comparisonGerm_transported": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.ChartSpace",
+        "AISafetyAtlas.SingularLearning.ElimCoords.SZ",
+        "AISafetyAtlas.SingularLearning.ElimCoords.Tp",
+        "AISafetyAtlas.SingularLearning.ElimCoords.U",
+        "AISafetyAtlas.SingularLearning.ElimCoords.Y0",
+        "AISafetyAtlas.SingularLearning.ElimCoordsProd",
+        "AISafetyAtlas.SingularLearning.PairSpace",
+        "AISafetyAtlas.SingularLearning.comparisonGerm",
+        "AISafetyAtlas.SingularLearning.elimBasePoint",
+        "AISafetyAtlas.SingularLearning.elimCoordEquiv",
+        "AISafetyAtlas.SingularLearning.elimGauge",
+        "AISafetyAtlas.SingularLearning.elimH",
+        "AISafetyAtlas.SingularLearning.elimJ",
+        "AISafetyAtlas.SingularLearning.elimN",
+        "AISafetyAtlas.SingularLearning.elimP",
+        "AISafetyAtlas.SingularLearning.elimPsi",
+        "AISafetyAtlas.SingularLearning.elimPsiProd",
+        "AISafetyAtlas.SingularLearning.elimQ",
+        "AISafetyAtlas.SingularLearning.frobeniusSq"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.continuousOn_frobeniusSq_elimX": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.ElimChartDomain",
+        "AISafetyAtlas.SingularLearning.PairSpace",
+        "AISafetyAtlas.SingularLearning.elimX",
+        "AISafetyAtlas.SingularLearning.frobeniusSq"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.continuous_A11_det": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.PairSpace"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.continuous_Ptop_det": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.PairSpace",
+        "AISafetyAtlas.SingularLearning.elimDOf",
+        "AISafetyAtlas.SingularLearning.elimPtop"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.continuous_coord_A11_det": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.ElimCoordsProd"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.continuous_coord_Ptop_det": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.ElimCoordsProd",
+        "AISafetyAtlas.SingularLearning.elimPtop"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.continuous_frobeniusSq": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.frobeniusSq"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.continuous_frobeniusSq_elimPbot": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.PairSpace",
+        "AISafetyAtlas.SingularLearning.elimDOf",
+        "AISafetyAtlas.SingularLearning.elimPbot",
+        "AISafetyAtlas.SingularLearning.frobeniusSq"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.continuous_frobeniusSq_elimPtop_sub_one": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.PairSpace",
+        "AISafetyAtlas.SingularLearning.elimDOf",
+        "AISafetyAtlas.SingularLearning.elimPtop",
+        "AISafetyAtlas.SingularLearning.frobeniusSq"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.continuous_residualGerm": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.residualGerm"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.continuous_residualX": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.residualX"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.continuous_residualY": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.residualY"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.continuous_rrrLoss_symm_coords": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.matrixPairEquiv",
+        "AISafetyAtlas.SingularLearning.rrrLoss"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.continuous_scalarIntegrand": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.curryLinearEquiv": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.det_canonicalA_reordered_eq_one": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.canonicalA",
+        "AISafetyAtlas.SingularLearning.elimReorder"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.det_mul_transpose_nonneg": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.det_one_add_gram_comm": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.det_one_add_smul_eq_prod_eigenvalues": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.det_one_add_smul_gram_comm": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.det_one_add_smul_transpose_mul_pos": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.det_transpose_mul_nonneg": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.dist_lt_of_euclideanProdEquiv_mem_ball": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.euclideanProdEquiv"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.dist_sq_euclideanProdEquiv": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.euclideanProdEquiv"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.dyadicShell": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.dyadicShell_subset_ball": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.dyadicShell"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.eigenvalueLawStatement_iff": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.EigenvalueLawStatement",
+        "AISafetyAtlas.SingularLearning.chamberAbsVandermonde"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.eigenvalueLaw_chamberJFull_pos": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.EigenvalueLawStatement",
+        "AISafetyAtlas.SingularLearning.chamberJFull"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.eigenvalueLaw_normalisation": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.EigenvalueLawStatement",
+        "AISafetyAtlas.SingularLearning.chamberJFull"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.eigenvalueLaw_one_one": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.EigenvalueLawStatement",
+        "AISafetyAtlas.SingularLearning.chamberJFull"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.eigenvalueLaw_ratio": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.EigenvalueLawStatement",
+        "AISafetyAtlas.SingularLearning.chamberJFull"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.eigenvalues_mul_transpose_nonneg": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.posSemidef_mul_transpose"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.eigenvalues_transpose_mul_nonneg": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.posSemidef_transpose_mul"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.elimAIdx": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.finSplit"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.elimAbar": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.elimAbar_of_gauge": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.PairSpace",
+        "AISafetyAtlas.SingularLearning.elimAbar",
+        "AISafetyAtlas.SingularLearning.elimL",
+        "AISafetyAtlas.SingularLearning.elimSchur",
+        "AISafetyAtlas.SingularLearning.elimX"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.elimBIdx": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.finSplit"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.elimBasePoint": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.PairSpace",
+        "AISafetyAtlas.SingularLearning.elimCI",
+        "AISafetyAtlas.SingularLearning.elimDstar",
+        "AISafetyAtlas.SingularLearning.elimH",
+        "AISafetyAtlas.SingularLearning.elimJ",
+        "AISafetyAtlas.SingularLearning.elimN",
+        "AISafetyAtlas.SingularLearning.elimP"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.elimBasePoint_mem_ElimChartNbhd": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.ElimChartNbhd",
+        "AISafetyAtlas.SingularLearning.PairSpace",
+        "AISafetyAtlas.SingularLearning.elimBasePoint",
+        "AISafetyAtlas.SingularLearning.elimH",
+        "AISafetyAtlas.SingularLearning.elimJ",
+        "AISafetyAtlas.SingularLearning.elimN",
+        "AISafetyAtlas.SingularLearning.elimP"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.elimBasePoint_product": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.elimBasePoint",
+        "AISafetyAtlas.SingularLearning.elimCmat",
+        "AISafetyAtlas.SingularLearning.elimH",
+        "AISafetyAtlas.SingularLearning.elimJ",
+        "AISafetyAtlas.SingularLearning.elimN",
+        "AISafetyAtlas.SingularLearning.elimP"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.elimBbar": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.elimBbarOf": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.elimLinv"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.elimBbarOf_elimBasePoint": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.elimBasePoint",
+        "AISafetyAtlas.SingularLearning.elimBbarOf",
+        "AISafetyAtlas.SingularLearning.elimH",
+        "AISafetyAtlas.SingularLearning.elimN",
+        "AISafetyAtlas.SingularLearning.elimP"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.elimBbar_of_elimBbarOf": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.PairSpace",
+        "AISafetyAtlas.SingularLearning.elimBbar",
+        "AISafetyAtlas.SingularLearning.elimBbarOf",
+        "AISafetyAtlas.SingularLearning.elimDOf",
+        "AISafetyAtlas.SingularLearning.elimYOf"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.elimCI": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.elimCI_mul_fromRows": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.elimCI"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.elimCmat": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.elimCI"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.elimCoordEquiv": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.ChartSpace",
+        "AISafetyAtlas.SingularLearning.ElimCoordsProd",
+        "AISafetyAtlas.SingularLearning.elimAIdx",
+        "AISafetyAtlas.SingularLearning.elimBIdx",
+        "AISafetyAtlas.SingularLearning.elimGauge",
+        "AISafetyAtlas.SingularLearning.elimH",
+        "AISafetyAtlas.SingularLearning.elimHTailIdx",
+        "AISafetyAtlas.SingularLearning.elimN",
+        "AISafetyAtlas.SingularLearning.elimOutputIdx",
+        "AISafetyAtlas.SingularLearning.elimP",
+        "AISafetyAtlas.SingularLearning.elimQ",
+        "AISafetyAtlas.SingularLearning.euclCongr",
+        "AISafetyAtlas.SingularLearning.matrixPairEucl",
+        "AISafetyAtlas.SingularLearning.matrixQuintEucl",
+        "AISafetyAtlas.SingularLearning.matrixReindexEquiv",
+        "AISafetyAtlas.SingularLearning.prodRegroup9"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.elimCoordEquiv_SZ": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.ChartSpace",
+        "AISafetyAtlas.SingularLearning.ElimCoordsProd",
+        "AISafetyAtlas.SingularLearning.elimCoordEquiv",
+        "AISafetyAtlas.SingularLearning.elimGauge",
+        "AISafetyAtlas.SingularLearning.elimH",
+        "AISafetyAtlas.SingularLearning.elimN",
+        "AISafetyAtlas.SingularLearning.elimP",
+        "AISafetyAtlas.SingularLearning.elimQ"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.elimCoordEquiv_Y0": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.ChartSpace",
+        "AISafetyAtlas.SingularLearning.ElimCoordsProd",
+        "AISafetyAtlas.SingularLearning.elimCoordEquiv",
+        "AISafetyAtlas.SingularLearning.elimGauge",
+        "AISafetyAtlas.SingularLearning.elimH",
+        "AISafetyAtlas.SingularLearning.elimN",
+        "AISafetyAtlas.SingularLearning.elimP",
+        "AISafetyAtlas.SingularLearning.elimQ"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.elimCoordsEquivProd": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.ElimCoords",
+        "AISafetyAtlas.SingularLearning.ElimCoords.A11",
+        "AISafetyAtlas.SingularLearning.ElimCoords.A21",
+        "AISafetyAtlas.SingularLearning.ElimCoords.D",
+        "AISafetyAtlas.SingularLearning.ElimCoords.SZ",
+        "AISafetyAtlas.SingularLearning.ElimCoords.Tp",
+        "AISafetyAtlas.SingularLearning.ElimCoords.U",
+        "AISafetyAtlas.SingularLearning.ElimCoords.XP",
+        "AISafetyAtlas.SingularLearning.ElimCoords.Y0",
+        "AISafetyAtlas.SingularLearning.ElimCoords.Y1",
+        "AISafetyAtlas.SingularLearning.ElimCoordsProd"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.elimDOf": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.elimBbarOf"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.elimDOf_elimBasePoint": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.elimBasePoint",
+        "AISafetyAtlas.SingularLearning.elimDOf",
+        "AISafetyAtlas.SingularLearning.elimDstar",
+        "AISafetyAtlas.SingularLearning.elimH",
+        "AISafetyAtlas.SingularLearning.elimN",
+        "AISafetyAtlas.SingularLearning.elimP"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.elimDstar": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.elimGauge": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.elimH",
+        "AISafetyAtlas.SingularLearning.elimN"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.elimGauge_eq_add": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.elimGauge",
+        "AISafetyAtlas.SingularLearning.elimH",
+        "AISafetyAtlas.SingularLearning.elimN"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.elimGauge_eq_add'": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.elimGauge",
+        "AISafetyAtlas.SingularLearning.elimH",
+        "AISafetyAtlas.SingularLearning.elimN"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.elimGauge_preserves_product": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.elimL",
+        "AISafetyAtlas.SingularLearning.elimLinv"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.elimGauge_preserves_product'": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.elimL",
+        "AISafetyAtlas.SingularLearning.elimLinv"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.elimH": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.elimHTailIdx": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.elimH",
+        "AISafetyAtlas.SingularLearning.finSplit"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.elimHiddenCoarseEquiv": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.finSplit"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.elimHiddenEquiv": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.elimH",
+        "AISafetyAtlas.SingularLearning.finSplit"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.elimHiddenIdx": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.elimH",
+        "AISafetyAtlas.SingularLearning.elimHiddenEquiv"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.elimHiddenIdxNF": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.elimH",
+        "AISafetyAtlas.SingularLearning.elimHiddenIdx",
+        "AISafetyAtlas.SingularLearning.elimReorderEquiv"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.elimHiddenIdxNF_inl_inl": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.elimH",
+        "AISafetyAtlas.SingularLearning.elimHiddenIdxNF"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.elimHiddenIdxNF_inl_inr": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.elimH",
+        "AISafetyAtlas.SingularLearning.elimHiddenIdxNF"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.elimHiddenIdxNF_inr_inl": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.elimH",
+        "AISafetyAtlas.SingularLearning.elimHiddenIdxNF"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.elimHiddenIdxNF_inr_inr": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.elimH",
+        "AISafetyAtlas.SingularLearning.elimHiddenIdxNF"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.elimHiddenIdxNF_val": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.elimH",
+        "AISafetyAtlas.SingularLearning.elimHiddenIdx",
+        "AISafetyAtlas.SingularLearning.elimHiddenIdxNF",
+        "AISafetyAtlas.SingularLearning.elimReorder"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.elimHiddenIdx_inl_inl": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.elimH",
+        "AISafetyAtlas.SingularLearning.elimHiddenIdx"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.elimHiddenIdx_inl_inr": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.elimH",
+        "AISafetyAtlas.SingularLearning.elimHiddenIdx"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.elimHiddenIdx_inr_inl": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.elimH",
+        "AISafetyAtlas.SingularLearning.elimHiddenIdx"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.elimHiddenIdx_inr_inr": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.elimH",
+        "AISafetyAtlas.SingularLearning.elimHiddenIdx"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.elimInputEquiv": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.elimN",
+        "AISafetyAtlas.SingularLearning.finSplit"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.elimInputIdx": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.elimInputEquiv",
+        "AISafetyAtlas.SingularLearning.elimN"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.elimInputIdx_inl_inl": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.elimInputIdx",
+        "AISafetyAtlas.SingularLearning.elimN"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.elimInputIdx_inl_inr": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.elimInputIdx",
+        "AISafetyAtlas.SingularLearning.elimN"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.elimInputIdx_inr": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.elimInputIdx",
+        "AISafetyAtlas.SingularLearning.elimN"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.elimJ": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.elimL": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.elimL_det_ne_zero": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.elimL"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.elimL_mul_elimLinv": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.elimL",
+        "AISafetyAtlas.SingularLearning.elimLinv"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.elimL_mul_self": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.elimL",
+        "AISafetyAtlas.SingularLearning.elimSchur",
+        "AISafetyAtlas.SingularLearning.elimX"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.elimLinv": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.elimLinv_elimBasePoint": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.elimBasePoint",
+        "AISafetyAtlas.SingularLearning.elimH",
+        "AISafetyAtlas.SingularLearning.elimLinv",
+        "AISafetyAtlas.SingularLearning.elimN",
+        "AISafetyAtlas.SingularLearning.elimP"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.elimLinv_mul_elimL": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.elimL",
+        "AISafetyAtlas.SingularLearning.elimLinv"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.elimN": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.elimOutputEquiv": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.elimP",
+        "AISafetyAtlas.SingularLearning.finSplit"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.elimOutputIdx": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.elimOutputEquiv",
+        "AISafetyAtlas.SingularLearning.elimP"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.elimOutputIdx_inl_inl": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.elimOutputIdx",
+        "AISafetyAtlas.SingularLearning.elimP"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.elimOutputIdx_inl_inr": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.elimOutputIdx",
+        "AISafetyAtlas.SingularLearning.elimP"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.elimOutputIdx_inr": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.elimOutputIdx",
+        "AISafetyAtlas.SingularLearning.elimP"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.elimP": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.elimParamEquiv": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.elimH",
+        "AISafetyAtlas.SingularLearning.elimHiddenIdx",
+        "AISafetyAtlas.SingularLearning.elimInputIdx",
+        "AISafetyAtlas.SingularLearning.elimN",
+        "AISafetyAtlas.SingularLearning.elimOutputIdx",
+        "AISafetyAtlas.SingularLearning.elimP",
+        "AISafetyAtlas.SingularLearning.matrixReindexEquiv"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.elimParamEquivNF": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.PairSpace",
+        "AISafetyAtlas.SingularLearning.ParamSpace",
+        "AISafetyAtlas.SingularLearning.elimH",
+        "AISafetyAtlas.SingularLearning.elimHiddenIdxNF",
+        "AISafetyAtlas.SingularLearning.elimInputIdx",
+        "AISafetyAtlas.SingularLearning.elimN",
+        "AISafetyAtlas.SingularLearning.elimOutputIdx",
+        "AISafetyAtlas.SingularLearning.elimP",
+        "AISafetyAtlas.SingularLearning.matrixReindexEquiv"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.elimParamEquivNF_elimBasePoint": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.PairSpace",
+        "AISafetyAtlas.SingularLearning.ParamSpace",
+        "AISafetyAtlas.SingularLearning.canonicalA",
+        "AISafetyAtlas.SingularLearning.canonicalB",
+        "AISafetyAtlas.SingularLearning.elimBasePoint",
+        "AISafetyAtlas.SingularLearning.elimH",
+        "AISafetyAtlas.SingularLearning.elimN",
+        "AISafetyAtlas.SingularLearning.elimP",
+        "AISafetyAtlas.SingularLearning.elimParamEquivNF"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.elimPblock": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.elimPblock_elimJ_elimDstar": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.elimDstar",
+        "AISafetyAtlas.SingularLearning.elimJ",
+        "AISafetyAtlas.SingularLearning.elimPblock"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.elimPbot": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.elimPblock"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.elimPbot_elimJ_elimDstar": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.elimDstar",
+        "AISafetyAtlas.SingularLearning.elimJ",
+        "AISafetyAtlas.SingularLearning.elimPbot"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.elimPbot_eq_zero_of_pblock": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.elimPblock",
+        "AISafetyAtlas.SingularLearning.elimPbot"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.elimPhi": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.ElimCoords",
+        "AISafetyAtlas.SingularLearning.ElimCoords.A11",
+        "AISafetyAtlas.SingularLearning.ElimCoords.A21",
+        "AISafetyAtlas.SingularLearning.ElimCoords.D",
+        "AISafetyAtlas.SingularLearning.ElimCoords.SZ",
+        "AISafetyAtlas.SingularLearning.ElimCoords.Tp",
+        "AISafetyAtlas.SingularLearning.ElimCoords.U",
+        "AISafetyAtlas.SingularLearning.ElimCoords.XP",
+        "AISafetyAtlas.SingularLearning.ElimCoords.Y0",
+        "AISafetyAtlas.SingularLearning.ElimCoords.Y1",
+        "AISafetyAtlas.SingularLearning.elimCI",
+        "AISafetyAtlas.SingularLearning.elimL",
+        "AISafetyAtlas.SingularLearning.elimPbot",
+        "AISafetyAtlas.SingularLearning.elimPtop",
+        "AISafetyAtlas.SingularLearning.elimRinv",
+        "AISafetyAtlas.SingularLearning.elimShearInv"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.elimPhiProd": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.ElimCoords",
+        "AISafetyAtlas.SingularLearning.ElimCoordsProd",
+        "AISafetyAtlas.SingularLearning.PairSpace",
+        "AISafetyAtlas.SingularLearning.elimCoordsEquivProd",
+        "AISafetyAtlas.SingularLearning.elimPhi"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.elimPhiProd_apply": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.ElimCoords",
+        "AISafetyAtlas.SingularLearning.ElimCoordsProd",
+        "AISafetyAtlas.SingularLearning.PairSpace",
+        "AISafetyAtlas.SingularLearning.elimCoordsEquivProd",
+        "AISafetyAtlas.SingularLearning.elimPhi",
+        "AISafetyAtlas.SingularLearning.elimPhiProd"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.elimPhi_elimPsi": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.elimDOf",
+        "AISafetyAtlas.SingularLearning.elimPhi",
+        "AISafetyAtlas.SingularLearning.elimPsi",
+        "AISafetyAtlas.SingularLearning.elimPtop"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.elimPhi_fst": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.ElimCoords",
+        "AISafetyAtlas.SingularLearning.ElimCoords.A11",
+        "AISafetyAtlas.SingularLearning.ElimCoords.A21",
+        "AISafetyAtlas.SingularLearning.ElimCoords.SZ",
+        "AISafetyAtlas.SingularLearning.ElimCoords.Tp",
+        "AISafetyAtlas.SingularLearning.ElimCoords.XP",
+        "AISafetyAtlas.SingularLearning.ElimCoords.Y1",
+        "AISafetyAtlas.SingularLearning.elimPhi",
+        "AISafetyAtlas.SingularLearning.elimShearInv"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.elimPhi_snd": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.ElimCoords",
+        "AISafetyAtlas.SingularLearning.ElimCoords.A11",
+        "AISafetyAtlas.SingularLearning.ElimCoords.A21",
+        "AISafetyAtlas.SingularLearning.ElimCoords.D",
+        "AISafetyAtlas.SingularLearning.ElimCoords.U",
+        "AISafetyAtlas.SingularLearning.ElimCoords.Y0",
+        "AISafetyAtlas.SingularLearning.ElimCoords.Y1",
+        "AISafetyAtlas.SingularLearning.elimCI",
+        "AISafetyAtlas.SingularLearning.elimL",
+        "AISafetyAtlas.SingularLearning.elimPbot",
+        "AISafetyAtlas.SingularLearning.elimPhi",
+        "AISafetyAtlas.SingularLearning.elimPtop",
+        "AISafetyAtlas.SingularLearning.elimRinv"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.elimPsi": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.ElimCoords",
+        "AISafetyAtlas.SingularLearning.elimCI",
+        "AISafetyAtlas.SingularLearning.elimLinv",
+        "AISafetyAtlas.SingularLearning.elimPbot",
+        "AISafetyAtlas.SingularLearning.elimPtop",
+        "AISafetyAtlas.SingularLearning.elimR",
+        "AISafetyAtlas.SingularLearning.elimSchur",
+        "AISafetyAtlas.SingularLearning.elimShear",
+        "AISafetyAtlas.SingularLearning.elimT",
+        "AISafetyAtlas.SingularLearning.elimX"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.elimPsiProd": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.ElimCoords",
+        "AISafetyAtlas.SingularLearning.ElimCoordsProd",
+        "AISafetyAtlas.SingularLearning.elimCoordsEquivProd",
+        "AISafetyAtlas.SingularLearning.elimPsi"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.elimPsiProd_eq": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.ElimCoords",
+        "AISafetyAtlas.SingularLearning.ElimCoordsProd",
+        "AISafetyAtlas.SingularLearning.elimCoordsEquivProd",
+        "AISafetyAtlas.SingularLearning.elimPsi",
+        "AISafetyAtlas.SingularLearning.elimPsiProd"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.elimPsiProd_image": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.ElimChartDomain",
+        "AISafetyAtlas.SingularLearning.ElimChartImage",
+        "AISafetyAtlas.SingularLearning.ElimCoordsProd",
+        "AISafetyAtlas.SingularLearning.PairSpace",
+        "AISafetyAtlas.SingularLearning.elimPsiProd"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.elimPsiProd_invOn": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.ElimChartDomain",
+        "AISafetyAtlas.SingularLearning.ElimChartImage",
+        "AISafetyAtlas.SingularLearning.ElimCoordsProd",
+        "AISafetyAtlas.SingularLearning.PairSpace",
+        "AISafetyAtlas.SingularLearning.elimPhiProd",
+        "AISafetyAtlas.SingularLearning.elimPsiProd"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.elimPsi_A11": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.ElimCoords.A11",
+        "AISafetyAtlas.SingularLearning.elimPsi"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.elimPsi_A21": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.ElimCoords.A21",
+        "AISafetyAtlas.SingularLearning.elimPsi"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.elimPsi_D": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.ElimCoords.D",
+        "AISafetyAtlas.SingularLearning.elimDOf",
+        "AISafetyAtlas.SingularLearning.elimPsi"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.elimPsi_SZ": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.ElimCoords.SZ",
+        "AISafetyAtlas.SingularLearning.elimPsi",
+        "AISafetyAtlas.SingularLearning.elimSchur"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.elimPsi_Tp": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.ElimCoords.Tp",
+        "AISafetyAtlas.SingularLearning.elimPsi",
+        "AISafetyAtlas.SingularLearning.elimRYOf",
+        "AISafetyAtlas.SingularLearning.elimSchur",
+        "AISafetyAtlas.SingularLearning.elimShear",
+        "AISafetyAtlas.SingularLearning.elimT",
+        "AISafetyAtlas.SingularLearning.elimX"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.elimPsi_U": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.ElimCoords.U",
+        "AISafetyAtlas.SingularLearning.elimBbarOf",
+        "AISafetyAtlas.SingularLearning.elimCI",
+        "AISafetyAtlas.SingularLearning.elimPsi"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.elimPsi_XP": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.ElimCoords.XP",
+        "AISafetyAtlas.SingularLearning.elimPsi",
+        "AISafetyAtlas.SingularLearning.elimX"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.elimPsi_Y0": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.ElimCoords.Y0",
+        "AISafetyAtlas.SingularLearning.elimPsi",
+        "AISafetyAtlas.SingularLearning.elimRYOf"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.elimPsi_Y1": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.ElimCoords.Y1",
+        "AISafetyAtlas.SingularLearning.elimPsi",
+        "AISafetyAtlas.SingularLearning.elimRYOf"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.elimPsi_bijOn": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.ElimChartDomain",
+        "AISafetyAtlas.SingularLearning.ElimCoords",
+        "AISafetyAtlas.SingularLearning.elimPsi"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.elimPsi_elimBasePoint_comparison": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.ElimCoords.SZ",
+        "AISafetyAtlas.SingularLearning.ElimCoords.Tp",
+        "AISafetyAtlas.SingularLearning.ElimCoords.U",
+        "AISafetyAtlas.SingularLearning.ElimCoords.Y0",
+        "AISafetyAtlas.SingularLearning.elimBasePoint",
+        "AISafetyAtlas.SingularLearning.elimH",
+        "AISafetyAtlas.SingularLearning.elimJ",
+        "AISafetyAtlas.SingularLearning.elimN",
+        "AISafetyAtlas.SingularLearning.elimP",
+        "AISafetyAtlas.SingularLearning.elimPsi"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.elimPsi_elimBasePoint_gauge": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.ElimCoords.A11",
+        "AISafetyAtlas.SingularLearning.ElimCoords.A21",
+        "AISafetyAtlas.SingularLearning.ElimCoords.D",
+        "AISafetyAtlas.SingularLearning.ElimCoords.XP",
+        "AISafetyAtlas.SingularLearning.ElimCoords.Y1",
+        "AISafetyAtlas.SingularLearning.elimBasePoint",
+        "AISafetyAtlas.SingularLearning.elimDstar",
+        "AISafetyAtlas.SingularLearning.elimH",
+        "AISafetyAtlas.SingularLearning.elimJ",
+        "AISafetyAtlas.SingularLearning.elimN",
+        "AISafetyAtlas.SingularLearning.elimP",
+        "AISafetyAtlas.SingularLearning.elimPsi"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.elimPsi_elimPhi": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.ElimCoords",
+        "AISafetyAtlas.SingularLearning.ElimCoords.A11",
+        "AISafetyAtlas.SingularLearning.ElimCoords.D",
+        "AISafetyAtlas.SingularLearning.elimPhi",
+        "AISafetyAtlas.SingularLearning.elimPsi",
+        "AISafetyAtlas.SingularLearning.elimPtop"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.elimPsi_invOn": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.ElimChartDomain",
+        "AISafetyAtlas.SingularLearning.ElimCoords",
+        "AISafetyAtlas.SingularLearning.elimPhi",
+        "AISafetyAtlas.SingularLearning.elimPsi"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.elimPtop": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.elimPblock"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.elimPtop_elimJ_elimDstar": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.elimDstar",
+        "AISafetyAtlas.SingularLearning.elimJ",
+        "AISafetyAtlas.SingularLearning.elimPtop"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.elimPtop_eq_one_of_pblock": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.elimPblock",
+        "AISafetyAtlas.SingularLearning.elimPtop"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.elimQ": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.elimQ_cast": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.elimQ"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.elimQ_eq_add": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.elimN",
+        "AISafetyAtlas.SingularLearning.elimQ"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.elimR": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.elimRYOf": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.elimDOf",
+        "AISafetyAtlas.SingularLearning.elimPbot",
+        "AISafetyAtlas.SingularLearning.elimPtop",
+        "AISafetyAtlas.SingularLearning.elimR",
+        "AISafetyAtlas.SingularLearning.elimYOf"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.elimRYOf_elimBasePoint": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.elimBasePoint",
+        "AISafetyAtlas.SingularLearning.elimH",
+        "AISafetyAtlas.SingularLearning.elimJ",
+        "AISafetyAtlas.SingularLearning.elimN",
+        "AISafetyAtlas.SingularLearning.elimP",
+        "AISafetyAtlas.SingularLearning.elimRYOf"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.elimR_eq_one_of_pblock": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.elimPblock",
+        "AISafetyAtlas.SingularLearning.elimPbot",
+        "AISafetyAtlas.SingularLearning.elimPtop",
+        "AISafetyAtlas.SingularLearning.elimR"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.elimR_mul_elimRinv": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.IsOpNormBound",
+        "AISafetyAtlas.SingularLearning.elimR",
+        "AISafetyAtlas.SingularLearning.elimRinv"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.elimR_mul_elimRinv_of_det": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.elimR",
+        "AISafetyAtlas.SingularLearning.elimRinv"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.elimR_mul_fromRows_self": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.elimR"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.elimReorder": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.elimReorderEquiv": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.elimReorder",
+        "AISafetyAtlas.SingularLearning.elimReorderInv"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.elimReorderInv": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.elimReorderInv_elimReorder": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.elimReorder",
+        "AISafetyAtlas.SingularLearning.elimReorderInv"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.elimReorderInv_lt": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.elimReorderInv"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.elimReorder_elimReorderInv": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.elimReorder",
+        "AISafetyAtlas.SingularLearning.elimReorderInv"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.elimReorder_hits_iff": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.elimReorder"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.elimReorder_lt": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.elimReorder"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.elimReorder_tau": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.elimReorder"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.elimRinv": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.elimRinv_mul_elimR": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.IsOpNormBound",
+        "AISafetyAtlas.SingularLearning.elimR",
+        "AISafetyAtlas.SingularLearning.elimRinv"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.elimRinv_mul_elimR_of_det": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.elimR",
+        "AISafetyAtlas.SingularLearning.elimRinv"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.elimSchur": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.elimSchur_elimBasePoint": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.elimBasePoint",
+        "AISafetyAtlas.SingularLearning.elimH",
+        "AISafetyAtlas.SingularLearning.elimN",
+        "AISafetyAtlas.SingularLearning.elimP",
+        "AISafetyAtlas.SingularLearning.elimSchur"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.elimShear": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.elimShearInv": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.elimShearInv_elimShear": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.elimShear",
+        "AISafetyAtlas.SingularLearning.elimShearInv"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.elimShear_elimShearInv": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.elimShear",
+        "AISafetyAtlas.SingularLearning.elimShearInv"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.elimT": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.elimX": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.elimX_elimBasePoint": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.elimBasePoint",
+        "AISafetyAtlas.SingularLearning.elimH",
+        "AISafetyAtlas.SingularLearning.elimN",
+        "AISafetyAtlas.SingularLearning.elimP",
+        "AISafetyAtlas.SingularLearning.elimX"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.elimYOf": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.elimBbarOf"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.elimYOf_elimBasePoint": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.elimBasePoint",
+        "AISafetyAtlas.SingularLearning.elimH",
+        "AISafetyAtlas.SingularLearning.elimN",
+        "AISafetyAtlas.SingularLearning.elimP",
+        "AISafetyAtlas.SingularLearning.elimYOf"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.elim_comparison_on_nbhd": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.ElimChartNbhd",
+        "AISafetyAtlas.SingularLearning.ElimCoords.SZ",
+        "AISafetyAtlas.SingularLearning.ElimCoords.Tp",
+        "AISafetyAtlas.SingularLearning.ElimCoords.U",
+        "AISafetyAtlas.SingularLearning.ElimCoords.Y0",
+        "AISafetyAtlas.SingularLearning.PairSpace",
+        "AISafetyAtlas.SingularLearning.elimCmat",
+        "AISafetyAtlas.SingularLearning.elimPsi",
+        "AISafetyAtlas.SingularLearning.frobeniusSq"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.elim_det_ne_zero": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.IsOpNormBound"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.elim_dimension_split": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.elimGauge",
+        "AISafetyAtlas.SingularLearning.elimH",
+        "AISafetyAtlas.SingularLearning.elimN",
+        "AISafetyAtlas.SingularLearning.elimP",
+        "AISafetyAtlas.SingularLearning.elimQ"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.elim_opNormBound_shear": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.IsOpNormBound"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.elim_opNormBound_top": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.IsOpNormBound"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.elim_opNormBound_topInv": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.IsOpNormBound"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.elim_opNormSqBound_elimR": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.IsOpNormSqBound",
+        "AISafetyAtlas.SingularLearning.elimR"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.elim_opNormSqBound_elimRinv": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.IsOpNormSqBound",
+        "AISafetyAtlas.SingularLearning.elimRinv"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.elim_opNormSqBounds_on_nbhd": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.ElimChartNbhd",
+        "AISafetyAtlas.SingularLearning.IsOpNormSqBound",
+        "AISafetyAtlas.SingularLearning.PairSpace",
+        "AISafetyAtlas.SingularLearning.elimDOf",
+        "AISafetyAtlas.SingularLearning.elimPbot",
+        "AISafetyAtlas.SingularLearning.elimPtop",
+        "AISafetyAtlas.SingularLearning.elimR",
+        "AISafetyAtlas.SingularLearning.elimRinv"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.elim_step2": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.elimAbar",
+        "AISafetyAtlas.SingularLearning.elimBbar",
+        "AISafetyAtlas.SingularLearning.elimCI",
+        "AISafetyAtlas.SingularLearning.elimCmat",
+        "AISafetyAtlas.SingularLearning.elimPblock",
+        "AISafetyAtlas.SingularLearning.elimT"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.elim_step3": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.elimR"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.elim_step3_inv": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.elimR",
+        "AISafetyAtlas.SingularLearning.elimRinv"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.elim_step6": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.elimAbar",
+        "AISafetyAtlas.SingularLearning.elimBbar",
+        "AISafetyAtlas.SingularLearning.elimCI",
+        "AISafetyAtlas.SingularLearning.elimCmat",
+        "AISafetyAtlas.SingularLearning.elimPbot",
+        "AISafetyAtlas.SingularLearning.elimPtop",
+        "AISafetyAtlas.SingularLearning.elimR",
+        "AISafetyAtlas.SingularLearning.elimRinv",
+        "AISafetyAtlas.SingularLearning.elimT",
+        "AISafetyAtlas.SingularLearning.frobeniusSq"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.elim_step6_at_psi": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.ElimCoords.SZ",
+        "AISafetyAtlas.SingularLearning.ElimCoords.Tp",
+        "AISafetyAtlas.SingularLearning.ElimCoords.U",
+        "AISafetyAtlas.SingularLearning.ElimCoords.Y0",
+        "AISafetyAtlas.SingularLearning.PairSpace",
+        "AISafetyAtlas.SingularLearning.elimCmat",
+        "AISafetyAtlas.SingularLearning.elimDOf",
+        "AISafetyAtlas.SingularLearning.elimPbot",
+        "AISafetyAtlas.SingularLearning.elimPsi",
+        "AISafetyAtlas.SingularLearning.elimPtop",
+        "AISafetyAtlas.SingularLearning.elimRinv",
+        "AISafetyAtlas.SingularLearning.elimX",
+        "AISafetyAtlas.SingularLearning.frobeniusSq"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.elim_step6_split": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.elimAbar",
+        "AISafetyAtlas.SingularLearning.elimBbar",
+        "AISafetyAtlas.SingularLearning.elimCI",
+        "AISafetyAtlas.SingularLearning.elimCmat",
+        "AISafetyAtlas.SingularLearning.elimPbot",
+        "AISafetyAtlas.SingularLearning.elimPtop",
+        "AISafetyAtlas.SingularLearning.elimR",
+        "AISafetyAtlas.SingularLearning.elimRinv",
+        "AISafetyAtlas.SingularLearning.elimT",
+        "AISafetyAtlas.SingularLearning.frobeniusSq"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.elimination_comparability": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.eq_of_hasLocalVolumeOrder_quadraticGerm": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.HasLocalVolumeOrder",
+        "AISafetyAtlas.SingularLearning.quadraticGerm"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.eq_zero_of_euclNorm_eq_zero": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.euclNorm"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.eq_zero_pair_of_eventually_zero": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.HasLocalVolumeOrder"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.etaOne": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.etaOne_pos": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.etaOne"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.etaTwo": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.etaTwo_pos": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.etaTwo"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.euclCongr": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.euclNorm": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.euclNorm_add_le": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.euclNorm"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.euclNorm_elim_sq": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.euclNorm"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.euclNorm_eq_sqrt": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.euclNorm"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.euclNorm_mulVec_sq": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.euclNorm"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.euclNorm_neg": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.euclNorm"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.euclNorm_nonneg": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.euclNorm"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.euclNorm_smul": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.euclNorm"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.euclNorm_sq": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.euclNorm"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.euclNorm_sum_sq": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.euclNorm"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.euclSplitEquiv": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.sumFunLinearEquiv"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.euclideanProdEquiv": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.euclideanProdEquiv_apply": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.euclideanProdEquiv"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.euclideanProdEquiv_mem_ball": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.euclideanProdEquiv"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.euclideanProdEquiv_zero": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.euclideanProdEquiv"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.euclideanSwap": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.euclideanProdEquiv"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.euclideanSwap_apply": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.euclideanProdEquiv",
+        "AISafetyAtlas.SingularLearning.euclideanSwap"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.eventually_log_div_comparable": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.eventually_tail_le_laplaceScale": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.laplaceScale"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.eventually_volumeScale_le_of_laplace": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.laplaceScale",
+        "AISafetyAtlas.SingularLearning.volumeScale"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.exactLocalPair_eq_volumeOrder": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.HasExactLocalPair",
+        "AISafetyAtlas.SingularLearning.HasLocalVolumeOrder"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.exactLocalPair_imp_volumeOrder": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.HasExactLocalPair",
+        "AISafetyAtlas.SingularLearning.HasLocalVolumeOrder"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.exactLocalPair_unique": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.HasExactLocalPair"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.exists_adapted_bases": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.canonicalA",
+        "AISafetyAtlas.SingularLearning.canonicalB"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.exists_chamberMinExponent": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.chamberMinExponent",
+        "AISafetyAtlas.SingularLearning.chamberVertexExponent"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.exists_factorization_iff_feasible": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.Feasible"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.exists_factorization_of_feasible": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.Feasible"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.exists_factorization_rank_self": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.exists_factorization_rank_succ": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.exists_frobeniusSq_conj_comparable": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.frobeniusSq"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.exists_hausdorffMeasure_eq_smul_volume": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.exists_lipschitzOnWith_ball": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.exists_notMem_of_countable": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.exists_rank_normal_form": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.partialIdMatrix"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.exists_resonant_vertex": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.chamberMinExponent",
+        "AISafetyAtlas.SingularLearning.chamberResonanceCount",
+        "AISafetyAtlas.SingularLearning.chamberVertexExponent"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.exists_transpose_mul_self_of_posDef": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.exists_units_to_canonical": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.SameOrbit",
+        "AISafetyAtlas.SingularLearning.canonicalA",
+        "AISafetyAtlas.SingularLearning.canonicalB"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.exists_volumeScale_div_bounds": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.volumeScale"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.exists_volume_ge_of_laplace_ge": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.laplaceAverage"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.exists_volume_ge_of_laplace_ge_log": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.laplaceAverage",
+        "AISafetyAtlas.SingularLearning.laplaceScale",
+        "AISafetyAtlas.SingularLearning.volumeScale"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.feasible_self": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.Feasible"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.finSplit": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.frobeniusSq": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.frobeniusSq_conj_le": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.frobeniusSq"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.frobeniusSq_elimGauge_eq": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.elimL",
+        "AISafetyAtlas.SingularLearning.elimLinv",
+        "AISafetyAtlas.SingularLearning.frobeniusSq"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.frobeniusSq_elimP_zero_of_pblock": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.elimPblock",
+        "AISafetyAtlas.SingularLearning.elimPbot",
+        "AISafetyAtlas.SingularLearning.elimPtop",
+        "AISafetyAtlas.SingularLearning.frobeniusSq"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.frobeniusSq_elimV": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.frobeniusSq"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.frobeniusSq_eq_norm_sq": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.frobeniusSq"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.frobeniusSq_eq_norm_sq'": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.frobeniusSq"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.frobeniusSq_eq_of_fromCols": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.frobeniusSq"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.frobeniusSq_eq_zero_iff": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.frobeniusSq"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.frobeniusSq_fromCols": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.frobeniusSq"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.frobeniusSq_fromRows": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.frobeniusSq"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.frobeniusSq_mul_le": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.IsOpNormSqBound",
+        "AISafetyAtlas.SingularLearning.frobeniusSq"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.frobeniusSq_mul_le_right": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.IsOpNormSqBound",
+        "AISafetyAtlas.SingularLearning.frobeniusSq"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.frobeniusSq_nonneg": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.frobeniusSq"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.frobeniusSq_reindex": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.frobeniusSq"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.frobeniusSq_smul": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.frobeniusSq"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.frobeniusSq_submatrix_col": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.frobeniusSq"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.frobeniusSq_submatrix_equiv": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.frobeniusSq"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.frobeniusSq_submatrix_row": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.frobeniusSq"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.frobeniusSq_transpose": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.frobeniusSq"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.frobeniusSq_zero": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.frobeniusSq"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.frobenius_norm_sq": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.fromRows_elimPtop_elimPbot": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.elimPblock",
+        "AISafetyAtlas.SingularLearning.elimPbot",
+        "AISafetyAtlas.SingularLearning.elimPtop"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.gammaOne": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.gammaOne_pos": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.gammaOne"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.gammaTail": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.gammaTail_nonneg": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.gammaTail"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.gaussianLaplace_residualGerm_eq_chamber": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.EigenvalueLawStatement",
+        "AISafetyAtlas.SingularLearning.chamberJFull",
+        "AISafetyAtlas.SingularLearning.residualGerm"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.gaussianLaplace_residualGerm_eq_chamber_tall": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.EigenvalueLawStatement",
+        "AISafetyAtlas.SingularLearning.chamberJFull",
+        "AISafetyAtlas.SingularLearning.residualGerm"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.gaussianLaplace_residualGerm_eq_det": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.frobeniusSq",
+        "AISafetyAtlas.SingularLearning.residualGerm"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.gaussianLaplace_residualGerm_one": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.residualGerm",
+        "AISafetyAtlas.SingularLearning.scalarJ"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.gaussian_ge_ball": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.gaussian_le_ball": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.hasDerivWithinAt_exp_neg_mul": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.hasExactLocalPair_of_volumeOrder": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.HasExactLocalPair",
+        "AISafetyAtlas.SingularLearning.HasLocalVolumeOrder"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.hasExactLocalPair_quadraticGerm": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.HasExactLocalPair",
+        "AISafetyAtlas.SingularLearning.quadraticGerm"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.hasLocalVolumeOrder_add": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.HasLocalVolumeOrder",
+        "AISafetyAtlas.SingularLearning.euclideanProdEquiv"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.hasLocalVolumeOrder_chartGerm": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.HasLocalVolumeOrder",
+        "AISafetyAtlas.SingularLearning.chartGerm",
+        "AISafetyAtlas.SingularLearning.residualGerm"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.hasLocalVolumeOrder_chartGerm_any": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.HasLocalVolumeOrder",
+        "AISafetyAtlas.SingularLearning.chartGerm",
+        "AISafetyAtlas.SingularLearning.residualGerm"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.hasLocalVolumeOrder_chartGerm_residual_zero": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.HasLocalVolumeOrder",
+        "AISafetyAtlas.SingularLearning.chartGerm"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.hasLocalVolumeOrder_chartGerm_zero_q": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.HasLocalVolumeOrder",
+        "AISafetyAtlas.SingularLearning.chartGerm",
+        "AISafetyAtlas.SingularLearning.residualGerm"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.hasLocalVolumeOrder_comp_add_const": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.HasLocalVolumeOrder"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.hasLocalVolumeOrder_comp_continuousLinearEquiv": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.HasLocalVolumeOrder"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.hasLocalVolumeOrder_comp_isometry": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.HasLocalVolumeOrder"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.hasLocalVolumeOrder_comp_linearIsometryEquiv": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.HasLocalVolumeOrder"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.hasLocalVolumeOrder_comp_of_analytic": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.HasLocalVolumeOrder"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.hasLocalVolumeOrder_comp_of_analytic'": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.HasLocalVolumeOrder"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.hasLocalVolumeOrder_comparable_iff": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.HasLocalVolumeOrder"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.hasLocalVolumeOrder_freeCoords": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.HasLocalVolumeOrder",
+        "AISafetyAtlas.SingularLearning.euclideanProdEquiv"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.hasLocalVolumeOrder_freeCoords_left": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.HasLocalVolumeOrder",
+        "AISafetyAtlas.SingularLearning.euclideanProdEquiv"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.hasLocalVolumeOrder_of_comparable": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.HasLocalVolumeOrder"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.hasLocalVolumeOrder_of_gaussianLaplace": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.HasLocalVolumeOrder",
+        "AISafetyAtlas.SingularLearning.laplaceScale"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.hasLocalVolumeOrder_quadraticGerm": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.HasLocalVolumeOrder",
+        "AISafetyAtlas.SingularLearning.quadraticGerm"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.hasLocalVolumeOrder_quadraticGerm_add": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.HasLocalVolumeOrder",
+        "AISafetyAtlas.SingularLearning.quadraticGerm"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.hasLocalVolumeOrder_residualGerm": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.EigenvalueLawStatement",
+        "AISafetyAtlas.SingularLearning.HasLocalVolumeOrder",
+        "AISafetyAtlas.SingularLearning.chamberMinExponent",
+        "AISafetyAtlas.SingularLearning.chamberResonanceCount",
+        "AISafetyAtlas.SingularLearning.residualGerm"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.hasLocalVolumeOrder_residualGerm_min": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.EigenvalueLawStatement",
+        "AISafetyAtlas.SingularLearning.HasLocalVolumeOrder",
+        "AISafetyAtlas.SingularLearning.chamberMinExponent",
+        "AISafetyAtlas.SingularLearning.chamberResonanceCount",
+        "AISafetyAtlas.SingularLearning.residualGerm"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.hasLocalVolumeOrder_residualGerm_one": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.HasLocalVolumeOrder",
+        "AISafetyAtlas.SingularLearning.residualGerm"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.hasLocalVolumeOrder_residualGerm_tall": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.EigenvalueLawStatement",
+        "AISafetyAtlas.SingularLearning.HasLocalVolumeOrder",
+        "AISafetyAtlas.SingularLearning.chamberMinExponent",
+        "AISafetyAtlas.SingularLearning.chamberResonanceCount",
+        "AISafetyAtlas.SingularLearning.residualGerm"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.hasLocalVolumeOrder_rrrLoss_canonical": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.HasLocalVolumeOrder",
+        "AISafetyAtlas.SingularLearning.canonicalA",
+        "AISafetyAtlas.SingularLearning.canonicalB",
+        "AISafetyAtlas.SingularLearning.chartGerm",
+        "AISafetyAtlas.SingularLearning.elimGauge",
+        "AISafetyAtlas.SingularLearning.elimH",
+        "AISafetyAtlas.SingularLearning.elimN",
+        "AISafetyAtlas.SingularLearning.elimP",
+        "AISafetyAtlas.SingularLearning.elimQ",
+        "AISafetyAtlas.SingularLearning.matrixPairCoords",
+        "AISafetyAtlas.SingularLearning.matrixPairEquiv",
+        "AISafetyAtlas.SingularLearning.partialIdMatrix",
+        "AISafetyAtlas.SingularLearning.rrrLoss"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.hasLocalVolumeOrder_rrrLoss_coords": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.HasEliminationChartAt",
+        "AISafetyAtlas.SingularLearning.HasLocalVolumeOrder",
+        "AISafetyAtlas.SingularLearning.chartGerm",
+        "AISafetyAtlas.SingularLearning.matrixPairCoords",
+        "AISafetyAtlas.SingularLearning.matrixPairEquiv",
+        "AISafetyAtlas.SingularLearning.rrrLoss"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.hasLocalVolumeOrder_rrrLoss_of_canonical": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.HasLocalVolumeOrder",
+        "AISafetyAtlas.SingularLearning.canonicalA",
+        "AISafetyAtlas.SingularLearning.canonicalB",
+        "AISafetyAtlas.SingularLearning.matrixPairCoords",
+        "AISafetyAtlas.SingularLearning.matrixPairEquiv",
+        "AISafetyAtlas.SingularLearning.partialIdMatrix",
+        "AISafetyAtlas.SingularLearning.rrrLoss"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.hasZetaPoleOrder_sqGerm": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.HasZetaPoleOrder",
+        "AISafetyAtlas.SingularLearning.sqGerm"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.iUnion_chamberDeltaPerm": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.chamberDeltaPerm",
+        "AISafetyAtlas.SingularLearning.chamberDiag"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.iUnion_dyadicShell": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.dyadicShell"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.image_eq_inter_preimage": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.image_exp_neg_mul_Ioi": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.injOn_exp_neg_mul": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.injective_of_mem_chamberDeltaPerm": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.chamberDeltaPerm"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.injective_of_notMem_chamberDiag": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.chamberDiag"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.integrableOn_chamberFT": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.chamberDelta",
+        "AISafetyAtlas.SingularLearning.chamberFT"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.integrableOn_chamberIntegrand": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.chamberIntegrand"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.integrableOn_chamberPhiT_perm": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.chamberDeltaPerm",
+        "AISafetyAtlas.SingularLearning.chamberPhiT"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.integrableOn_chamberPhiT_strict": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.chamberDeltaStrict",
+        "AISafetyAtlas.SingularLearning.chamberPhiT"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.integrableOn_exp_neg_mul": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.integrableOn_exp_neg_mul_rpow": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.integrableOn_exp_neg_rpow": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.integrableOn_exp_neg_rpow_Ioi_one": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.integrableOn_of_bounded": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.integrableOn_of_mem_Icc": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.integrableOn_of_power_bound": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.integrableOn_prod_chamberIntegrand": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.chamberIntegrand"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.integrableOn_rpow_Ioc": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.integrableOn_rpow_Ioc_of_pos": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.integrable_exp_neg_frobeniusSq": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.integrable_exp_neg_frobeniusSq'": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.frobeniusSq"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.integrable_exp_neg_sq_norm": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.integrable_exp_neg_sq_norm_mul": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.integrable_exp_neg_sum_sq": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.integrable_gaussian": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.integrable_residualGaussian": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.residualGaussian"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.integrable_scalarIntegrand": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.integrable_sq_strongDual_stdGaussian": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.integral_comp_linearMap": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.integral_det_one_one": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.frobeniusSq",
+        "AISafetyAtlas.SingularLearning.scalarJ"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.integral_det_transpose": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.frobeniusSq"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.integral_exp_neg_frobenius_mul": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.integral_exp_neg_frobenius_mul_gram": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.integral_exp_neg_frobenius_mul_norm": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.integral_exp_neg_mul_Ioi": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.integral_exp_neg_mul_eq_laplaceAverage": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.laplaceAverage",
+        "AISafetyAtlas.SingularLearning.sublevelVolume"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.integral_exp_neg_mul_rpow_Ioi": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.gammaTail"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.integral_exp_neg_quadraticForm": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.integral_exp_neg_quadraticForm_pi": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.integral_gaussian_eq": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.integral_matrix_one_one": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.integral_residualGaussian_inner": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.frobeniusSq",
+        "AISafetyAtlas.SingularLearning.residualGaussian"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.integral_rpow_Ioc_log": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.integral_rpow_Ioc_pos": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.integral_rpow_Ioc_zero": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.integral_sq_strongDual_stdGaussian": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.intervalIntegrable_abs_rpow_neg_zero": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.intervalIntegrable_abs_rpow_zero_one": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.intervalIntegral_abs_rpow_zero_one": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.invOn_sub_const": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.inv_mul_mul_mul_inv": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.isEliminationChart_of_feasible": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.IsEliminationChart"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.isEliminationChart_zero": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.IsEliminationChart"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.isHermitian_gram": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.isOpNormBound_half_of_sq": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.IsOpNormBound",
+        "AISafetyAtlas.SingularLearning.IsOpNormSqBound"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.isOpNormBound_one": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.IsOpNormBound"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.isOpNormSqBound_frobeniusSq": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.IsOpNormSqBound",
+        "AISafetyAtlas.SingularLearning.frobeniusSq"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.isOpNormSqBound_fromBlocks_lower": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.IsOpNormBound",
+        "AISafetyAtlas.SingularLearning.IsOpNormSqBound"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.isOpNormSqBound_iff_euclNorm": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.IsOpNormSqBound",
+        "AISafetyAtlas.SingularLearning.euclNorm"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.isOpNormSqBound_iff_isOpNormBound": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.IsOpNormBound",
+        "AISafetyAtlas.SingularLearning.IsOpNormSqBound"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.isOpNormSqBound_of_frobeniusSq_le": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.IsOpNormSqBound",
+        "AISafetyAtlas.SingularLearning.frobeniusSq"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.isOpNormSqBound_one": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.IsOpNormSqBound"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.isOpNormSqBound_quarter_of_mem": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.IsOpNormSqBound",
+        "AISafetyAtlas.SingularLearning.frobeniusSq"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.isOpen_ElimChartDomain": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.ElimChartDomain"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.isOpen_ElimChartImage": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.ElimChartImage",
+        "AISafetyAtlas.SingularLearning.ElimCoordsProd"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.isOpen_ElimChartNbhd": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.ElimChartNbhd",
+        "AISafetyAtlas.SingularLearning.PairSpace"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.isOpen_ElimCoordDomain": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.ElimCoordDomain",
+        "AISafetyAtlas.SingularLearning.ElimCoordsProd"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.isOpen_ElimNbhdImage": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.ElimCoordsProd",
+        "AISafetyAtlas.SingularLearning.ElimNbhdImage"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.isOpen_frobeniusSq_lt": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.frobeniusSq"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.isOpen_image_clm": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.isOpen_image_sub_const": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.isUnit_det_elimPtop_of_pblock": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.elimPblock",
+        "AISafetyAtlas.SingularLearning.elimPtop"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.isometry_euclideanSwap": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.euclideanSwap"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.kappaA2": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.gammaOne"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.kappaA2_ge_lower_far": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.gammaOne",
+        "AISafetyAtlas.SingularLearning.kappaA2"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.kappaA2_ge_lower_mid": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.kappaA2"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.kappaA2_ge_lower_small": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.kappaA2"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.kappaA2_ge_upper_eq": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.gammaOne",
+        "AISafetyAtlas.SingularLearning.kappaA2"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.kappaA2_ge_upper_ne": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.gammaOne",
+        "AISafetyAtlas.SingularLearning.kappaA2"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.kappaA2_pos": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.kappaA2"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.laplaceAverage": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.laplaceScale": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.laplaceScale_eq_volumeScale": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.laplaceScale",
+        "AISafetyAtlas.SingularLearning.volumeScale"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.laplaceScale_half_two": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.laplaceScale"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.laplaceScale_injective": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.laplaceScale"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.laplaceScale_pair_unique": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.laplaceScale"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.laplace_comparable_of_volume_comparable": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.gammaTail",
+        "AISafetyAtlas.SingularLearning.laplaceAverage"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.laplace_le_of_logBound": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.gammaTail",
+        "AISafetyAtlas.SingularLearning.laplaceAverage",
+        "AISafetyAtlas.SingularLearning.laplaceScale",
+        "AISafetyAtlas.SingularLearning.volumeScale"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.laplace_le_of_power_bound": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.gammaTail",
+        "AISafetyAtlas.SingularLearning.laplaceAverage"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.laplace_tail_le": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.le_chamberEdgeUpper_of_mem": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.chamberEdgeBox",
+        "AISafetyAtlas.SingularLearning.chamberEdgeUpper"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.le_measure_image_of_le_abs_det": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.le_norm_add_sq": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.le_span_of_basis_mem": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.le_sublevelVolume_add": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.euclideanProdEquiv",
+        "AISafetyAtlas.SingularLearning.sublevelVolume"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.lt_card_filter_iff": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.matrixEuclEquiv": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.matrixFunLinearEquiv"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.matrixFunLinearEquiv": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.matrixOneEquiv": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.matrixPairCoords": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.matrixPairEquiv"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.matrixPairEquiv": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.curryLinearEquiv",
+        "AISafetyAtlas.SingularLearning.matrixPairIndex"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.matrixPairEquiv_apply": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.matrixPairEquiv",
+        "AISafetyAtlas.SingularLearning.matrixPairIndex"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.matrixPairEquiv_apply_inl": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.matrixPairEquiv",
+        "AISafetyAtlas.SingularLearning.matrixPairIndex"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.matrixPairEquiv_apply_inr": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.matrixPairEquiv",
+        "AISafetyAtlas.SingularLearning.matrixPairIndex"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.matrixPairEquiv_symm_apply": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.matrixPairEquiv",
+        "AISafetyAtlas.SingularLearning.matrixPairIndex"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.matrixPairEucl": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.euclSplitEquiv",
+        "AISafetyAtlas.SingularLearning.matrixEuclEquiv"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.matrixPairIndex": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.matrixPairMeasurableEquiv": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.matrixPairIndex"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.matrixQuadEucl": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.euclSplitEquiv",
+        "AISafetyAtlas.SingularLearning.matrixEuclEquiv",
+        "AISafetyAtlas.SingularLearning.matrixTripleEucl"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.matrixQuintEucl": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.euclSplitEquiv",
+        "AISafetyAtlas.SingularLearning.matrixEuclEquiv",
+        "AISafetyAtlas.SingularLearning.matrixQuadEucl"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.matrixReindexEquiv": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.matrixTransposeEquiv": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.matrixTransposeEquiv_apply": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.matrixTransposeEquiv"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.matrixTripleEucl": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.euclSplitEquiv",
+        "AISafetyAtlas.SingularLearning.matrixEuclEquiv",
+        "AISafetyAtlas.SingularLearning.matrixPairEucl"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.matrix_inv_eq_smul_adjugate": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.measurableEmbedding_comp_perm": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.measurableEmbedding_coord": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.measurableSet_chamberBox": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.chamberBox"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.measurableSet_chamberDelta": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.chamberDelta"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.measurableSet_chamberDeltaPerm": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.chamberDeltaPerm"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.measurableSet_chamberDeltaStrict": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.chamberDeltaStrict"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.measurableSet_chamberEdgeBox": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.chamberEdgeBox"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.measurableSet_chamberOmega": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.chamberOmega"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.measurableSet_chamberOmegaEdge": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.chamberOmegaEdge"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.measurableSet_dyadicShell": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.dyadicShell"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.measurable_chamberFT": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.chamberFT"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.measurable_chamberIntegrand": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.chamberIntegrand"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.measurable_chamberPhiT": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.chamberPhiT"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.measurable_residualGaussian": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.residualGaussian"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.measurable_residualGerm": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.residualGerm"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.measurePreserving_comp_perm": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.measurePreserving_coord": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.measurePreserving_curry_symm": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.measurePreserving_euclideanProdEquiv": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.euclideanProdEquiv"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.measurePreserving_euclideanSwap": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.euclideanSwap"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.measurePreserving_matrixOneEquiv": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.matrixOneEquiv"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.measurePreserving_matrixPairEquiv": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.matrixPairEquiv"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.measurePreserving_matrixPairEquiv_symm": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.matrixPairEquiv"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.measurePreserving_matrixPairMeasurableEquiv": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.matrixPairMeasurableEquiv"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.measurePreserving_matrixTransposeEquiv": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.matrixTransposeEquiv"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.measureReal_dyadicShell_le": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.dyadicShell",
+        "AISafetyAtlas.SingularLearning.unitBallVolume"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.measureReal_image_sandwich": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.measure_image_le_of_abs_det_le": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.measure_image_le_of_lipschitzOnWith": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.mem_chamberDelta": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.chamberDelta"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.mem_chamberDeltaPerm": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.chamberDeltaPerm"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.mem_chamberDeltaStrict": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.chamberDeltaStrict"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.mem_chamberMinimizers": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.chamberMinExponent",
+        "AISafetyAtlas.SingularLearning.chamberMinimizers",
+        "AISafetyAtlas.SingularLearning.chamberVertexExponent"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.mem_dyadicShell": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.dyadicShell"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.meromorphicAt_zetaSq": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.zetaSq"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.meromorphicOrderAt_zetaSq": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.zetaSq"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.min_one_rpow_pos": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.min_rpow_two_mul": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.mul_congr_of_units": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.mul_mul_inv_mul": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.norm_add_sq_le": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.norm_eq_abs_coord": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.norm_sq_elimCoordEquiv_fst": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.ChartSpace",
+        "AISafetyAtlas.SingularLearning.ElimCoordsProd",
+        "AISafetyAtlas.SingularLearning.elimCoordEquiv",
+        "AISafetyAtlas.SingularLearning.elimGauge",
+        "AISafetyAtlas.SingularLearning.elimH",
+        "AISafetyAtlas.SingularLearning.elimN",
+        "AISafetyAtlas.SingularLearning.elimP",
+        "AISafetyAtlas.SingularLearning.elimQ",
+        "AISafetyAtlas.SingularLearning.frobeniusSq"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.norm_sq_euclCongr": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.euclCongr"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.norm_sq_euclSplitEquiv_symm": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.euclSplitEquiv"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.norm_sq_matrixEuclEquiv_symm": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.frobeniusSq",
+        "AISafetyAtlas.SingularLearning.matrixEuclEquiv"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.norm_sq_matrixPairEquiv": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.frobeniusSq",
+        "AISafetyAtlas.SingularLearning.matrixPairEquiv"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.norm_sq_matrixPairEucl": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.frobeniusSq",
+        "AISafetyAtlas.SingularLearning.matrixPairEucl"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.norm_sq_residual": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.frobeniusSq",
+        "AISafetyAtlas.SingularLearning.residualX",
+        "AISafetyAtlas.SingularLearning.residualY"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.normalized_chart": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.normalized_elimChart": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.ElimChartDomain",
+        "AISafetyAtlas.SingularLearning.ElimChartImage",
+        "AISafetyAtlas.SingularLearning.ElimCoordsProd",
+        "AISafetyAtlas.SingularLearning.PairSpace",
+        "AISafetyAtlas.SingularLearning.elimPsiProd"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.notMem_chamberDiag_of_injective": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.chamberDiag"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.not_eventually_volumeScale_le": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.volumeScale"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.not_eventually_volumeScale_le_of_mult_lt": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.volumeScale"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.not_opNormSqBound_elimR_three": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.IsOpNormSqBound",
+        "AISafetyAtlas.SingularLearning.cePbot",
+        "AISafetyAtlas.SingularLearning.cePtop",
+        "AISafetyAtlas.SingularLearning.elimR"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.one_add_mul_sq_pos": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.one_div_rpow_eq": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.one_le_log_of_three_le": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.one_le_sqrt_of_three_le": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.opNormSqBounds_of_mem_ElimChartNbhd": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.ElimChartNbhd",
+        "AISafetyAtlas.SingularLearning.IsOpNormSqBound",
+        "AISafetyAtlas.SingularLearning.PairSpace",
+        "AISafetyAtlas.SingularLearning.elimDOf",
+        "AISafetyAtlas.SingularLearning.elimPbot",
+        "AISafetyAtlas.SingularLearning.elimPtop",
+        "AISafetyAtlas.SingularLearning.elimX"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.orbitCoordEquiv": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.ParamSpace",
+        "AISafetyAtlas.SingularLearning.orbitParamEquiv",
+        "AISafetyAtlas.SingularLearning.paramCoords"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.orbitCoordEquiv_apply": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.matrixPairCoords",
+        "AISafetyAtlas.SingularLearning.orbitCoordEquiv"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.orbitCoordEquiv_symm_apply": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.matrixPairEquiv",
+        "AISafetyAtlas.SingularLearning.orbitCoordEquiv"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.orbitParamEquiv": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.ParamSpace"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.pair_unique_of_laplace_comparable": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.laplaceScale"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.pairwise_disjoint_chamberDeltaPerm": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.chamberDeltaPerm"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.pairwise_disjoint_dyadicShell": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.dyadicShell"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.paramCoords": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.ParamSpace",
+        "AISafetyAtlas.SingularLearning.matrixPairEquiv"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.partialIdMatrix": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.partialIdMatrix_eq_selCols": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.partialIdMatrix",
+        "AISafetyAtlas.SingularLearning.selCols"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.partialIdMatrix_reindex": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.elimCmat",
+        "AISafetyAtlas.SingularLearning.elimInputIdx",
+        "AISafetyAtlas.SingularLearning.elimJ",
+        "AISafetyAtlas.SingularLearning.elimN",
+        "AISafetyAtlas.SingularLearning.elimOutputIdx",
+        "AISafetyAtlas.SingularLearning.elimP",
+        "AISafetyAtlas.SingularLearning.partialIdMatrix"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.partialIdMatrix_zero": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.partialIdMatrix"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.pblock_base_witness": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.canonicalB"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.pblock_eq_iff": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.elimPblock",
+        "AISafetyAtlas.SingularLearning.elimPbot",
+        "AISafetyAtlas.SingularLearning.elimPtop"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.pi_ae_eq_iUnion_chamberDeltaPerm": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.chamberDeltaPerm"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.posDef_one_add_smul_mul_transpose": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.posSemidef_mul_transpose": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.posSemidef_transpose_mul": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.prodRegroup9": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.prod_chamberEdgeWeight": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.chamberEdgeWeight",
+        "AISafetyAtlas.SingularLearning.chamberVertexExponent"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.prod_chamberG_le": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.chamberG",
+        "AISafetyAtlas.SingularLearning.chamberTheta",
+        "AISafetyAtlas.SingularLearning.kappaA2"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.prod_chamberTheta": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.chamberResonanceCount",
+        "AISafetyAtlas.SingularLearning.chamberTheta"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.prod_le_sublevelVolume": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.euclideanProdEquiv",
+        "AISafetyAtlas.SingularLearning.sublevelVolume"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.quadraticGerm": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.quadraticGerm_add": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.euclideanProdEquiv",
+        "AISafetyAtlas.SingularLearning.quadraticGerm"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.quadraticGerm_add_exponent": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.quadraticGerm_eq_norm_sq": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.quadraticGerm"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.quadraticGerm_nonneg": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.quadraticGerm"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.rank_add_rank_le_of_mul": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.rank_canonicalA": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.canonicalA"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.rank_canonicalB": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.canonicalB"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.rank_canonical_of_pair": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.canonicalA",
+        "AISafetyAtlas.SingularLearning.canonicalB"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.rank_eq_card_of_transpose_mul_self": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.rank_mul_mul_inv": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.rank_partialIdMatrix": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.partialIdMatrix"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.rank_selCols": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.selCols"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.ranks_feasible_of_factorization": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.Feasible"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.ranks_feasible_of_mul_eq": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.Feasible"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.residualGaussian": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.frobeniusSq"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.residualGerm": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.frobeniusSq",
+        "AISafetyAtlas.SingularLearning.residualX",
+        "AISafetyAtlas.SingularLearning.residualY"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.residualGerm_eq_zero": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.residualGerm"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.residualGerm_hom": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.residualGerm"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.residualGerm_nonneg": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.residualGerm"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.residualGerm_smul": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.residualGerm"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.residualX": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.matrixPairEquiv"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.residualY": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.matrixPairEquiv"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.resonance_of_chamberVertexExponent_eq": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.chamberVertexExponent"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.resonance_of_two_minimizers": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.chamberMinimizers"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.rpow_le_laplaceScale": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.laplaceScale"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.rpow_neg_half": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.rpow_neg_half_eq": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.rpow_neg_one_div": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.rpow_one_add_large": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.rpow_one_add_small": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.rpow_sq_eq_abs_rpow": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.rpow_sub_one_mul": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.rrrLoss": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.rrrLoss_eq_frobenius": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.rrrLoss"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.rrrLoss_eq_frobeniusSq": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.frobeniusSq",
+        "AISafetyAtlas.SingularLearning.rrrLoss"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.rrrLoss_eq_integral_mulVec": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.rrrLoss"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.rrrLoss_eq_sum_sq": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.rrrLoss"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.rrrLoss_eq_zero_iff": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.rrrLoss"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.rrrLoss_nonneg": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.rrrLoss"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.sameOrbit_iff_rank_eq": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.SameOrbit"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.sameOrbit_of_fiber": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.SameOrbit"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.sameOrbit_of_rank_eq": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.SameOrbit"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.sameOrbit_of_toMatrix": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.SameOrbit"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.scalarIntegrand_ge_on_middle": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.scalarIntegrand_le_gaussian": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.scalarIntegrand_le_hyperbola": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.scalarIntegrand_le_one": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.scalarIntegrand_nonneg": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.scalarJ": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.scalarJ_eq_two_mul_Ioi": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.scalarJ"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.scalarJ_lower": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.scalarJ"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.scalarJ_piece_inner": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.scalarJ_piece_log": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.scalarJ_piece_tail": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.scalarJ_upper": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.scalarJ"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.selCols": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.selCols_ext": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.selCols"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.selCols_mul_selCols": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.selCols"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.setIntegral_chamberOmegaEdge_le_chamberI": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.chamberFT",
+        "AISafetyAtlas.SingularLearning.chamberI",
+        "AISafetyAtlas.SingularLearning.chamberOmegaEdge"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.setIntegral_chamberOmega_le_chamberI": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.chamberFT",
+        "AISafetyAtlas.SingularLearning.chamberI",
+        "AISafetyAtlas.SingularLearning.chamberOmega"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.setIntegral_chamberPhiT_perm": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.chamberDeltaPerm",
+        "AISafetyAtlas.SingularLearning.chamberDeltaStrict",
+        "AISafetyAtlas.SingularLearning.chamberPhiT"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.setIntegral_dyadicShell_homogeneous_le": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.dyadicShell"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.setIntegral_dyadicShell_le": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.dyadicShell"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.setIntegral_dyadicShell_rescale": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.dyadicShell"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.setIntegral_exp_antitone": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.setIntegral_tail_le": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.dyadicShell"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.setIntegral_tail_le_const": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.unitBallVolume"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.setIntegral_univ_pi_prod": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.smul_dyadicShell_zero": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.dyadicShell"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.smul_mul_smul_eq": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.span_range_coe_basis": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.sqGerm": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.sublevelVolume": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.sublevelVolume_add_le": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.euclideanProdEquiv",
+        "AISafetyAtlas.SingularLearning.sublevelVolume"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.sublevelVolume_comp_isometry": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.sublevelVolume"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.sublevelVolume_le_ball": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.sublevelVolume"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.sublevelVolume_le_prod": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.euclideanProdEquiv",
+        "AISafetyAtlas.SingularLearning.sublevelVolume"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.sublevelVolume_le_sublevelVolume": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.sublevelVolume"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.sublevelVolume_mono": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.sublevelVolume"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.sublevelVolume_mono_level": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.sublevelVolume"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.sublevelVolume_ne_top": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.sublevelVolume_quadraticGerm": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.quadraticGerm",
+        "AISafetyAtlas.SingularLearning.sublevelVolume"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.sublevel_quadraticGerm_eq": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.quadraticGerm"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.sumFunLinearEquiv": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.sum_fin_val_mul_two": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.summable_exp_mul_measureReal_dyadicShell": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.dyadicShell"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.summable_pow_mul_exp_neg_four_pow": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.superlevel_exp_eq_sublevel": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.sylvester_finrank_le": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.tendsto_div_const_nhdsGT": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.tendsto_gammaTail_atTop": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.gammaTail"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.tendsto_log_one_div": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.tendsto_setIntegral_tail_atTop": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.tendsto_volumeScale": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.volumeScale"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.trace_gram_comm": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.trace_mul_transpose": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.trace_transpose_mul": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.transpose_mul_self_selCols": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.selCols"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.two_mul_rrrLoss_elimParamEquivNF": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.PairSpace",
+        "AISafetyAtlas.SingularLearning.ParamSpace",
+        "AISafetyAtlas.SingularLearning.elimCmat",
+        "AISafetyAtlas.SingularLearning.elimH",
+        "AISafetyAtlas.SingularLearning.elimJ",
+        "AISafetyAtlas.SingularLearning.elimN",
+        "AISafetyAtlas.SingularLearning.elimP",
+        "AISafetyAtlas.SingularLearning.elimParamEquivNF",
+        "AISafetyAtlas.SingularLearning.frobeniusSq",
+        "AISafetyAtlas.SingularLearning.partialIdMatrix",
+        "AISafetyAtlas.SingularLearning.rrrLoss"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.two_mul_rrrLoss_eq_frobeniusSq": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.frobeniusSq",
+        "AISafetyAtlas.SingularLearning.rrrLoss"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.unitBallVolume": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.unitBallVolume_nonneg": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.unitBallVolume"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.volumeOrder_unique": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.HasLocalVolumeOrder"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.volumeScale": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.volumeScale_le_rpow_mul_log": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.volumeScale"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.volumeScale_mul_one": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.volumeScale"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.volume_chamberDiag": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.chamberDiag"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.volume_comparable_of_laplace_comparable": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.laplaceAverage"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.volume_comparable_of_laplace_comparable_log": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.laplaceAverage",
+        "AISafetyAtlas.SingularLearning.laplaceScale",
+        "AISafetyAtlas.SingularLearning.volumeScale"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.volume_comparable_of_laplace_log": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.laplaceAverage",
+        "AISafetyAtlas.SingularLearning.laplaceScale",
+        "AISafetyAtlas.SingularLearning.volumeScale"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.volume_hyperplane_eq_zero": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.volume_le_laplace": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.laplaceAverage"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.volume_le_of_laplace_le": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.laplaceAverage"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.volume_le_of_laplace_le_log": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.laplaceAverage",
+        "AISafetyAtlas.SingularLearning.laplaceScale",
+        "AISafetyAtlas.SingularLearning.volumeScale"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.volume_prod_split": {
+      "kind": "theorem",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.zetaIntegral": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.zetaIntegral_sqGerm": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.sqGerm",
+        "AISafetyAtlas.SingularLearning.zetaIntegral"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.zetaSq": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.SingularLearning.zetaSq_eq_inv": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.SingularLearning.zetaSq"
+      ]
+    },
+    "AISafetyAtlas.SingularLearning.zetaSq_ne_zero_denom": {
+      "kind": "theorem",
+      "deps": []
+    }
+  }
+}

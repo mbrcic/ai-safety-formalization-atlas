@@ -18,12 +18,13 @@ Named in the statements of eight or more others. A change to one of these is a c
 
 | Declaration | Named by |
 |---|---|
-| `Knowable` | 33 |
+| `Knowable` | 49 |
 | `Embedded.Restriction` | 23 |
 | `Embedded.InferenceMap` | 19 |
 | `Embedded.Meshing` | 14 |
 | `ambiguity` | 12 |
 | `Embedded.ProperInclusion` | 11 |
+| `Devices.BlockwiseCollision` | 10 |
 | `Embedded.MeasuresAllStates` | 9 |
 | `Embedded.InferenceMap.infer` | 8 |
 | `Embedded.Composition.ProductState` | 8 |

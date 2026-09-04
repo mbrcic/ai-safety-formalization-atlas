@@ -19,12 +19,12 @@ Named in the statements of eight or more others. A change to one of these is a c
 | Declaration | Named by |
 |---|---|
 | `CodeSym` | 42 |
+| `errorProb` | 21 |
 | `IsPrefixCode` | 17 |
+| `IsMarkovChain` | 17 |
 | `encodeNat` | 16 |
-| `errorPair` | 12 |
-| `IsMarkovChain` | 11 |
-| `errorProb` | 10 |
-| `channelCapacity` | 10 |
+| `channelCapacity` | 16 |
+| `errorPair` | 13 |
 | `SparseMonomial` | 10 |
 | `errorIndicator` | 8 |
 | `SparsePoly` | 8 |

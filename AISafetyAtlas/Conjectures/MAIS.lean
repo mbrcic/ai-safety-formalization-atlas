@@ -13,6 +13,8 @@ public import AISafetyAtlas.Conjectures.MAIS.O25
 public import AISafetyAtlas.Conjectures.MAIS.O26
 public import AISafetyAtlas.Conjectures.MAIS.O33
 public import AISafetyAtlas.Conjectures.MAIS.O38
+public import AISafetyAtlas.Conjectures.MAIS.O70
+public import AISafetyAtlas.Conjectures.MAIS.O70Proof
 /-!
 # Statement layer for the MAIS agenda questions
 

@@ -14,9 +14,11 @@ So this decides whether the branch is a migration by looking at the toolchain
 rather than at anybody's intent, and if it is, insists that the drift has been
 written down and that the record still matches what the checker reports now:
 
-* ``lean-toolchain`` unchanged against the baseline -> not a migration, pass. An
-  ordinary feature branch is *supposed* to add statements, and failing it on
-  drift would train everyone to ignore this.
+* the recorded completed migration is an ancestor and its toolchain is still
+  current -> not a migration, pass. An ordinary feature branch is *supposed* to
+  add statements, and failing it on drift would train everyone to ignore this;
+* without a completed-migration anchor, ``lean-toolchain`` unchanged against the
+  baseline -> not a migration, pass;
 * Changed, with no ``migration-baseline.json`` naming that baseline -> fail. The
   bump has not been measured.
 * Changed, with a record that disagrees with the live numbers -> fail, and print
@@ -60,6 +62,18 @@ def git(*args: str) -> str | None:
 def toolchain_at(ref: str) -> str | None:
     blob = git("show", f"{ref}:{TOOLCHAIN}")
     return blob.strip() if blob is not None else None
+
+
+def is_ancestor(ref: str) -> bool:
+    """Whether the current branch descends from the recorded completed bump."""
+    proc = subprocess.run(
+        ["git", "merge-base", "--is-ancestor", ref, "HEAD"],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    return proc.returncode == 0
 
 
 def working_toolchain() -> str:
@@ -116,6 +130,33 @@ def main() -> int:
             return 1
         ref = record["migration"]["baseline_commit"]
 
+    now = working_toolchain()
+
+    # Once the adjudicated migration has merged, feature branches must be
+    # compared with that completed tree, not forever with the pre-migration
+    # baseline. The old comparison remains reproducible from the record and its
+    # two committed elaboration dumps; this shortcut only decides that the
+    # current branch is not itself another toolchain migration.
+    if arguments.ref is None and record is not None:
+        completed = record["migration"].get("completed_commit")
+        if completed:
+            completed_toolchain = toolchain_at(completed)
+            if completed_toolchain is None:
+                print(
+                    "check_migration_adjudicated: cannot read "
+                    f"{TOOLCHAIN} at completed migration {completed} — is that "
+                    "commit fetched in this checkout?",
+                    file=sys.stderr,
+                )
+                return 1
+            if is_ancestor(completed) and completed_toolchain == now:
+                print(
+                    "check_migration_adjudicated ok: current branch descends from "
+                    f"completed migration {completed[:12]} and keeps "
+                    f"{now}; not a migration"
+                )
+                return 0
+
     before = toolchain_at(ref)
     if before is None:
         print(
@@ -125,7 +166,6 @@ def main() -> int:
         )
         return 1
 
-    now = working_toolchain()
     if before == now:
         print(
             f"check_migration_adjudicated ok: toolchain unchanged against {ref[:12]} "

@@ -28,11 +28,17 @@ conclude the formalization stopped where the rows did. Since 2026-08-24 every
 printed A2 target has a row, and the `kind` field says what sort of row it is.
 
 **The ledger is no longer A2-only.** CONJ-025 grades MAIS-O38 against agenda
-**A3**'s `prob:samples`, a dictionary-learning uniqueness question that shares
-none of the causal vocabulary the other rows are built on; every rule below
+**A3**'s `prob:samples`, a dictionary-learning uniqueness question, and CONJ-026
+grades MAIS-O70 against agenda **A6**'s `prob:calibration`, a singular-learning
+question about reduced-rank regression; neither shares the causal vocabulary the
+other rows are built on, and every rule below
 applies to it unchanged, including the `Same`-scope requirement. Its
 transcription is recorded in
 [`mais-o38-transcription.md`](../provenance/mais-o38-transcription.md).
+The O70 work has its own public review package:
+[`conditional verification`](../provenance/mais-o70-conditional-verification.md),
+[`frontier manifest`](../provenance/o70-frontier-manifest.md), and
+[`fidelity adjudications`](../provenance/mais-o70-fidelity-adjudications.md).
 
 | `kind` | What the source does | What `lean` points at | Resolved by |
 |---|---|---|---|
@@ -93,7 +99,7 @@ row uses it today; the positional `answer_admissible` list is what it is checked
 against, so it cannot be asserted of a row whose clauses agree.
 
 `scripts/validate_conjectures.py` prints the breakdown rather than one number,
-because *"eight recorded"* over a 14-row file is how this confusion started. Counts elsewhere in this guide are over conjecture rows — kinds
+because *"eight recorded"* over a 15-row file is how this confusion started. Counts elsewhere in this guide are over conjecture rows — kinds
 `claim` and `answer` — since a blocked row is not an open conjecture.
 
 ## Who proposed what
@@ -122,6 +128,7 @@ constructions as its own.
 | CONJ-010 | MAIS-O31 | Svyatoslav Novikov (kumino) with OpenAI Codex, MAIS [issue #8](https://github.com/lionellevine/MAIS/issues/8) | transcription only; the row is `OPEN` |
 | CONJ-023 | MAIS-O33 | Svyatoslav Novikov (kumino) with OpenAI Codex, MAIS [issue #9](https://github.com/lionellevine/MAIS/issues/9) | transcription, the machine-check, and two changes of instance — action-independent kernels and `δ = 1/2` — each of which removed a dependency the audit had priced as a project |
 | CONJ-025 | MAIS-O38 | David Holmes (26david26) with GPT 5.6 Sol, MAIS [issue #30](https://github.com/lionellevine/MAIS/issues/30) | transcription and the machine-check, together with four domain-neutral facts Mathlib lacked that the proof needs |
+| CONJ-026 | MAIS-O70 | Rob Sneiderman (Robby955), MAIS [issue #3](https://github.com/lionellevine/MAIS/issues/3) | transcription of the candidate table, the unconditional fiber-minimum arithmetic, the two-sided volume order under `EigenvalueLawStatement`, and all three printed clauses under that hypothesis together with `O70ExactLocalPairsExist`; the row is `OPEN`, and the atlas holds no unconditional inhabitant of `IsO70RankTable o70Pair` |
 
 The MAIS-O24 row is a fifth submitted antecedent — Svyatoslav Novikov (kumino)
 with OpenAI Codex, MAIS [issue #7](https://github.com/lionellevine/MAIS/issues/7)

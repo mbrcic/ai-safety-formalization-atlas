@@ -5,6 +5,7 @@
     "name": "v4.31.0 -> v4.33.0",
     "declared_done": "2026-08-31",
     "baseline_commit": "4edc04182b931a3ac0941d3b98120a6f1ca4fe85",
+    "completed_commit": "8a183683f2e2972cecd4de5c9734206b52e87464",
     "baseline_toolchain": "leanprover/lean4:v4.31.0",
     "target_toolchain": "leanprover/lean4:v4.33.0",
     "pins": {
