@@ -136,14 +136,6 @@ else
   echo "check_statement_drift skipped: origin/main is not available in this checkout"
 fi
 
-# Blocking, and the only check here that is. The advisory above never blocks
-# because a feature branch is supposed to add statements; a toolchain bump is
-# not, and the flag written for that case was never wired to anything. This
-# decides which situation it is from lean-toolchain rather than from intent, and
-# passes untouched on an ordinary branch.
-echo "==> check_migration_adjudicated"
-python3 scripts/check_migration_adjudicated.py
-
 # The silent elaboration changes a migration records rest on substitution-class
 # verdicts, and a verdict is only worth what still holds it up: a class widened,
 # a dump edited, or a regression in the classifier would leave the recorded
@@ -198,6 +190,42 @@ else
   echo "==> ty check"
   echo "ty not installed; skipping type check (CI runs it)"
 fi
+
+# Blocking. The advisory drift checks above
+# never block, because a feature branch is supposed to add statements; a
+# toolchain bump is not, and the flag written for that case was never wired to
+# anything. This decides which situation it is from lean-toolchain rather than
+# from intent, and passes untouched on an ordinary branch.
+#
+# It runs LAST, and that placement is load-bearing. It used to sit in the middle,
+# and because this script runs under `set -e`, a migration awaiting a human
+# verdict aborted the gate before six later stages ever executed --
+# check_elaboration_drift, generate_non_claims, check_docstring_identifiers,
+# check_conjecture_grade_prose, check_cited_declarations, check_docs_paths,
+# pytest and ty. Four of those were red for the whole time the migration sat
+# unadjudicated, and every report of "green except the migration item" was made
+# over a gate that had stopped early. A stage that blocks pending a human
+# decision must not stand in front of stages that do not.
+echo "==> check_migration_adjudicated"
+python3 scripts/check_migration_adjudicated.py
+
+# Blocking, and last for the same reason check_migration_adjudicated is late:
+# it fails pending human work -- an unconditional stress package for every
+# frontier -- and a stage that waits on a person must not stand in front of
+# stages that do not. Passing it does not establish that a frontier is
+# satisfiable. Every check above still runs and still reports before this one
+# can abort the script.
+#
+# It is not advisory, and the reason is this: a frontier that is
+# false rather than unproved makes every theorem standing on it *unapplicable*
+# rather than conditional, and does so invisibly -- the freeze, the axiom audit,
+# the scope grading, the worked examples and the kernel all stayed green over
+# one. An advisory line in a 40-stage log is exactly the surface that missed it.
+#
+# Its output is one line per frontier naming what backs it, so a passing run is
+# itself the record of the evidence package.
+echo "==> check_frontier_evidence"
+python3 scripts/check_frontier_evidence.py
 
 if skip_self_tests; then
   echo "agent_gate: ok (--lean; Python self-tests NOT run, lake build not run)"

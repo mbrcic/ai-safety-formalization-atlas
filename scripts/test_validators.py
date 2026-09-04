@@ -851,8 +851,8 @@ CASES = [
         "conjectures: next_id skips an unrecorded assignment",
         "validate_conjectures.py",
         "conjectures.yaml",
-        lambda d: d.__setitem__("next_id", 27),
-        "conjecture numbering skips assigned ids ['CONJ-026']",
+        lambda d: d.__setitem__("next_id", 28),
+        "conjecture numbering skips assigned ids ['CONJ-027']",
     ),
     (
         "conjectures: MAIS row using an atlas bridge",

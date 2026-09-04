@@ -1,7 +1,7 @@
 {
   "generated_by": "scripts/check_statement_freeze.py --write",
   "note": "Signature hashes of ledger-graded statements. A diff here is a schema event: say which way fidelity moved and re-grade the row.",
-  "count": 262,
+  "count": 266,
   "declarations": {
     "AISafetyAtlas.Causal.DecisionNetwork.mem_parents_utility_of_isUnmediated": {
       "file": "AISafetyAtlas/Causal/DecisionNetwork.lean",
@@ -135,6 +135,10 @@
       "file": "AISafetyAtlas/Conjectures/MAIS/O31.lean",
       "sha256": "b0a064174e37c4db"
     },
+    "AISafetyAtlas.Conjectures.MAIS.IsO70RankTable": {
+      "file": "AISafetyAtlas/Conjectures/MAIS/O70.lean",
+      "sha256": "779de4a6ebe50019"
+    },
     "AISafetyAtlas.Conjectures.MAIS.boltzmannMinimaxRisk": {
       "file": "AISafetyAtlas/Conjectures/MAIS/O29Experiment.lean",
       "sha256": "a30a1b5e20d7d590"
@@ -174,6 +178,14 @@
     "AISafetyAtlas.Conjectures.MAIS.maisO38_polynomialSamplesSuffice": {
       "file": "AISafetyAtlas/Conjectures/MAIS/O38.lean",
       "sha256": "a8ca4f2fefdb547e"
+    },
+    "AISafetyAtlas.Conjectures.MAIS.o70ExactLocalPairsExist_iff": {
+      "file": "AISafetyAtlas/Conjectures/MAIS/O70.lean",
+      "sha256": "7888a736ba537ace"
+    },
+    "AISafetyAtlas.Conjectures.MAIS.o70ZetaPoleBridge_iff": {
+      "file": "AISafetyAtlas/Conjectures/MAIS/O70.lean",
+      "sha256": "25083fbf3f3e0484"
     },
     "AISafetyAtlas.Conjectures.StochasticComplexity.eq_needs_no_null_points": {
       "file": "AISafetyAtlas/Conjectures/StochasticComplexity.lean",
@@ -1002,6 +1014,10 @@
     "AISafetyAtlas.SelfAwareness.Model.process_not_self_aware": {
       "file": "AISafetyAtlas/SelfAwareness.lean",
       "sha256": "e236787355115db3"
+    },
+    "AISafetyAtlas.SingularLearning.eigenvalueLawStatement_iff": {
+      "file": "AISafetyAtlas/SingularLearning/EigenvalueLaw.lean",
+      "sha256": "4e4c89ace9b1a6d9"
     },
     "AISafetyAtlas.SocialChoice.Utility.arrow": {
       "file": "AISafetyAtlas/SocialChoice/Utility.lean",

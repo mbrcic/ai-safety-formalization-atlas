@@ -254,6 +254,23 @@
           "scope_limits": "One third-party Lean repository at one revision. Keyword misses do not prove absence. The checked-in library index names an older commit and Lean toolchain than the checkout, so the search used the pinned tracked source tree and treats index results as orientation only. CausalForge pins Lean 4.33.0; the atlas pinned 4.31.0 when this was written and moved to 4.33.0 on 2026-08-31, so the toolchain gap recorded here is closed. No build reproduction or adapter was attempted, then or since."
         }
       ]
+    },
+    {
+      "id": "NC-010",
+      "claim": "The Mathlib revision this repository pins carries neither Sylvester's rank inequality in any form -- only the upper bounds rank_mul_le, rank_mul_le_left, rank_mul_le_right and rank_comp_le on the rank of a product -- nor any measure-preserving currying statement for the Lebesgue measure on a finite product. AISafetyAtlas.SingularLearning.ReducedRank proves sylvester_finrank_le and rank_add_rank_le_of_mul; AISafetyAtlas.SingularLearning.Coordinates proves measurePreserving_curry_symm.",
+      "asserted_in": [
+        "conjectures.yaml, CONJ-026 prior_art",
+        "AISafetyAtlas/SingularLearning/ReducedRank.lean, module docstring",
+        "AISafetyAtlas/SingularLearning/Coordinates.lean, module docstring"
+      ],
+      "searched_on": "2026-09-04",
+      "searched_by": "mbrcic",
+      "corpora": [
+        "mathlib"
+      ],
+      "method": "Content search over the Mathlib revision recorded in this repository's lake-manifest.json, db584cd6d46c92f209a44c0f1c829460d327499d (toolchain v4.33.0), which is NOT the older snapshot recorded under corpora.mathlib in this file. Rank side: case-sensitive search for 'Sylvester' across all of Mathlib, plus a search of Mathlib/LinearAlgebra for any inequality of the shape 'rank _ + rank _ <= _ + rank _', plus enumeration of every rank-of-product lemma in Mathlib/LinearAlgebra/Matrix/Rank.lean and Mathlib/LinearAlgebra/Dimension/LinearMap.lean. Measure side: search of Mathlib/MeasureTheory and Mathlib/Probability for every theorem naming curry or piCurry, for co-occurrences of curry with MeasurePreserving or Measure.map, and enumeration of the volume_measurePreserving_* and measurePreserving_pi* families in Mathlib/MeasureTheory/Constructions/Pi.lean.",
+      "found": "No Sylvester rank inequality in any form. The six files mentioning 'Sylvester' are Mathlib/RingTheory/Polynomial/Resultant/Basic.lean and Mathlib/RingTheory/Polynomial/DegreeLT.lean (the Sylvester matrix and resultant), Mathlib/Geometry/Euclidean/MongePoint.lean (Sylvester's theorem on the Monge point), Mathlib/LinearAlgebra/QuadraticForm/Signature.lean and Mathlib/LinearAlgebra/QuadraticForm/Real.lean (Sylvester's law of inertia), and Mathlib/LinearAlgebra/Matrix/HadamardMatrix.lean (Sylvester's Hadamard construction). None is a rank inequality. The rank-of-product lemmas found are upper bounds only: rank_mul_le, rank_mul_le_left, rank_mul_le_right (Matrix/Rank.lean:182,188,195) and rank_comp_le, rank_comp_le_left, rank_comp_le_right (Dimension/LinearMap.lean:53,70,76); the 'rank _ + rank _ <= _' hits in Mathlib/LinearAlgebra are quotient, product and submodule statements, not statements about a matrix product. On the measure side, the only Measure-level currying results are infinitePi_map_curry and infinitePi_map_curry_symm (Mathlib/Probability/ProductMeasure.lean:548,560), stated for the infinite product measure infinitePi and not for volume on a finite product; MeasurableEquiv.curry exists with no measure-preservation companion, and the volume_measurePreserving_* family covers piCongrLeft, arrowProdEquivProdArrow, sumPiEquivProdPi and piFinSuccAbove but not currying.",
+      "scope_limits": "One corpus, at the revision this repository pins, and that revision differs from the corpora.mathlib baseline snapshot recorded elsewhere in this file; the other five baseline corpora were not searched for this claim, and neither were PFR, Foundation, or any other package in the dependency tree. This is a keyword and shape search over source text, not a proof search: a statement carrying neither the name 'Sylvester' nor the arithmetic shape searched for, or one derivable in a few steps from lemmas that are present, would not have been found. It says nothing about unpinned third-party Lean developments, nor about Mathlib after this revision."
     }
   ],
   "results": {

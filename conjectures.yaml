@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "next_id": 26,
+  "next_id": 27,
   "description": "Open questions and their settled ledger records. An OPEN conjecture is a compiling Lean statement with no proof and asserts nothing; every RESOLVED row separately names the checked proof that settled it. Conjecture modules live under AISafetyAtlas.Conjectures.*, are never on the atlas root import, and never enter theorem counts. Tag vocabulary is shared with registry.yaml.",
   "conjectures": [
     {
@@ -479,6 +479,46 @@
       "source_scope": "Same",
       "source_fidelity": "Selected",
       "source_note": "First MAIS row whose source is agenda A3 rather than A2, and the first with no causal content. Fidelity is Selected because prob:samples asks a decide-whether question and this Prop states its affirmative branch. Scope is Same at the guarded reading: print's hypotheses k(m) -> infinity and n >= 2k are retained and are the ENTIRE hypothesis list, while the conclusion is required at every individual m satisfying 1 <= k(m) < m. The domain reading for k appears only as a guard on that conclusion, never as a premise, so the row narrows the printed claim in no direction. 2 <= m is not stated because 1 <= k(m) and k(m) < m force it. This replaces two earlier and weaker forms: one requiring designs only eventually, and one which guarded the conclusion but still assumed an atlas-supplied premise that k(m) < m eventually. At the time, check_statement_freeze.py read only registry results from by-id.json and therefore covered no CONJ row at all; even a conjecture drift after grading would have been invisible, not only this pre-grade weakening. This change extends the lock to every graded conjecture declaration. The submitted candidate already has the pointwise strength: AISafetyAtlas.Examples.Conjectures.MAIS.o38PolynomialSampleCandidate_holds proves m^3 + 2m codes work for every 2 <= m and 1 <= k < m. The proof does not use k(m) -> infinity at all, so a version omitting it would be true and strictly stronger -- and Beyond/AtlasOriginal rather than Same, since print writes that hypothesis. The graded row therefore keeps it, unused, and the fact that it is unused is recorded here and in the statement docstring rather than acted on. The two genuinely wider readings remain separate findings: demanding a design at every m without non-degeneracy is false at m = 1, and leaving k unbounded is false at k(m) = m. The issue's boundary theorem agrees with the latter finding. The proof of the candidate, including its Lemma 6 dimension/null argument and Lemma 8 Tonelli step, remains unchanged and kernel-checked."
+    },
+    {
+      "id": "CONJ-026",
+      "kind": "target",
+      "problem": "MAIS-O70",
+      "statement": "MAIS-A6 prob:calibration asks three things about reduced-rank regression y = BAx + noise with parameters (N, M, H) and realizable truth of rank r. P1: prove the local pair (lambda(w*), m(w*)) at a factorization w* = (A,B) in the zero fiber W_0 depends only on (rank A, rank B), graded by AISafetyAtlas.Conjectures.MAIS.O70DependsOnRanksOnly. P2: compute the resulting table, graded by IsO70RankTable, whose candidate is o70Pair. P3: hence characterize the strata on which lambda(w*) equals the minimum in thm:aw, graded by IsO70FiberMinimumTable together with IsO70AWValueStratumTable, whose candidate is o70Minimizers. All three are stated against print's own loss -- rrrLoss is the Gaussian expectation MAIS-O70.md prints, not the Frobenius form, which is derived -- and against the volume normalization def:local calls equivalent to its zeta definition. Progress: P3's arithmetic content is settled affirmatively and unconditionally by o70_fiber_minimum_correct: awLambda M N H r is a lower bound for the candidate table on every admissible rank stratum and is attained, at the uniform witness (a,b) = (r,r). Composed with admissible_of_mul_eq this reaches actual matrices in awLambda_le_of_factorization, so no factorization of any truth matrix carries a candidate value below the printed number. Because thm:aw itself glosses its minimum as the minimum of lambda(w) over W_0, this needs no Aoyagi-Watanabe hypothesis. P1 and P2 remain open unconditionally, and each stands behind two named frontier hypotheses rather than two unformalized arguments; it is the weaker two-sided volume order, not P1 or P2, that needs only the first of them. isO70VolumeOrderTable_o70Pair proves IsO70VolumeOrderTable o70Pair from EigenvalueLawStatement and nothing else: the two-sided volume order at the candidate's values, at every factorization of every truth matrix, with no admissibility hypothesis, since print's five feasibility inequalities hold at the actual ranks. The orbit reduction, the elimination chart, the Gaussian-to-compact localization and the chamber calculus are all formalized in AISafetyAtlas.SingularLearning. EigenvalueLawStatement is O70-EIGEN-LAW, the real Wishart density together with the eigenvalue Jacobian; the candidate cites it to Muirhead Theorems 3.2.1 and 3.2.17 after James 1954, and it is not proved in the atlas. From there isO70RankTable_o70Pair gives IsO70RankTable o70Pair and o70DependsOnRanksOnly_of_frontiers gives O70DependsOnRanksOnly, each under EigenvalueLawStatement together with the value-free hypothesis O70ExactLocalPairsExist, which asserts that some exact local pair exists and never what it is; isO70VolumeOrderTable_of_rankTable gives the converse direction. The two remaining frontiers are exactly O70-EIGEN-LAW and O70-EXACT-LOCAL, neither is formalized, and the atlas holds no unconditional inhabitant of IsO70RankTable o70Pair.",
+      "refutation": "Refute P3's arithmetic content by exhibiting an admissible rank stratum with positive dimensions whose candidate value is strictly below awLambda, contradicting o70_fiber_minimum_correct, or one that equals awLambda yet is excluded from o70Minimizers, contradicting o70_aw_value_strata_correct. Refute P1 or P2 by exhibiting matrices A, B over R with B * A = C whose actual local pair, in the sense of HasExactLocalPair applied to rrrLossCoords at matrixPairCoords A B, differs from o70Pair at their ranks. Nothing in the atlas asserts that no such pair exists, so P1 and P2 are open rather than contradicted. Such a pair would also refute at least one of the two frontier hypotheses, since isO70VolumeOrderTable_o70Pair derives the candidate's order table from EigenvalueLawStatement alone.",
+      "prior_art": "MAIS-A6 prob:calibration. MAIS issue #3 (Sneiderman, 2026) is the candidate whose Theorem 1.1 and Corollary 1.3 are transcribed as o70Pair; the atlas closes its discrete residual minimisation in residualMinCost_eq_argmin. thm:aw is Aoyagi-Watanabe 2005, transcribed as awLambda and awMultiplicity and asserted only as arithmetic. Two facts the pinned Mathlib lacks were proved here: Sylvester's rank inequality, absent in every form -- only upper bounds on the rank of a product are present -- in AISafetyAtlas.SingularLearning.ReducedRank; and currying for the product Lebesgue measure, in AISafetyAtlas.SingularLearning.Coordinates.",
+      "lean": "AISafetyAtlas.Conjectures.MAIS.IsO70RankTable",
+      "lean_module": "AISafetyAtlas.Conjectures.MAIS.O70",
+      "answer_candidate": [
+        "ℕ → ℕ → ℕ → ℕ → ℕ → ℕ → ℚ × ℕ",
+        "ℕ → ℕ → ℕ → ℕ → ℕ → ℕ → ℚ × ℕ",
+        "Set AISafetyAtlas.Conjectures.MAIS.O70RankStratum"
+      ],
+      "answer_admissible": [],
+      "answer_correct": [
+        "AISafetyAtlas.Conjectures.MAIS.O70DependsOnRanksOnly",
+        "AISafetyAtlas.Conjectures.MAIS.IsO70RankTable",
+        "AISafetyAtlas.Conjectures.MAIS.IsO70AWValueStratumTable"
+      ],
+      "admissibility_status": "Unformalized",
+      "blocked_on": "",
+      "absent_declarations": [],
+      "tags": [
+        "learning-theory"
+      ],
+      "proposed_by": "Atlas transcription of the printed determine-clause.",
+      "status": "OPEN",
+      "resolution": "",
+      "source_ref": [
+        "mais-a6-2026"
+      ],
+      "context_source_ref": [
+        "mais-o70-2026",
+        "mais-issue-3-2026"
+      ],
+      "source_scope": "Same",
+      "source_fidelity": "DetermineProblem",
+      "source_note": "Scope Same, fidelity DetermineProblem. Three clauses, three graded propositions, quantified as print quantifies them. Clause three is positional against a candidate of type Set O70RankStratum, so its graded proposition is IsO70AWValueStratumTable, the predicate that consumes a stratum set; IsO70FiberMinimumTable grades the table object of clause two and is what makes the printed value a minimum rather than merely a number, and o70_fiber_minimum_correct proves it unconditionally. Quantifiers: over every truth matrix, every factorization of it, and every rank stratum, with dimensions positive because rem:conventions excludes the vacuous case K identically zero, which for reduced-rank regression is exactly a vanishing dimension. Two normalization decisions are recorded rather than hidden. First, the local pair is fixed by the ball-volume asymptotic eq:volume rather than by def:local's primary zeta poles; print licenses this in its own word 'equivalently', and the atlas states the substitution without proving the equivalence. Second, HasExactLocalPair asks for exact asymptotics at all but countably many small radii, which matches def:local's assertion that the pair does not depend on the radius while making no claim about the constant c, a claim print never makes. The parameter space is transported to Euclidean coordinates by a reindexing proved measure-preserving, so no Jacobian is absorbed silently."
     }
   ]
 }
