@@ -57,6 +57,7 @@ def _install(monkeypatch, tmp_path, *, before: str, now: str, record, drift: str
     """
     monkeypatch.setattr(gate, "toolchain_at", lambda _ref: before)
     monkeypatch.setattr(gate, "working_toolchain", lambda: now)
+    monkeypatch.setattr(gate, "is_ancestor", lambda _ref: True)
     monkeypatch.setattr(gate, "run_drift", lambda _ref: (drift, 1))
     monkeypatch.setattr(sys, "argv", ["check_migration_adjudicated.py"])
 
@@ -122,6 +123,14 @@ def test_an_unreadable_baseline_fails_rather_than_skips(monkeypatch, tmp_path) -
 def test_an_ordinary_branch_passes(monkeypatch, tmp_path) -> None:
     """No toolchain move, so added statements are the point and must not block."""
     _install(monkeypatch, tmp_path, before="v4.33.0", now="v4.33.0", record=RECORD)
+    assert gate.main() == 0
+
+
+def test_a_branch_after_the_completed_migration_passes(monkeypatch, tmp_path) -> None:
+    """New statements after the merged bump are ordinary feature work."""
+    completed = json.loads(json.dumps(RECORD))
+    completed["migration"]["completed_commit"] = "completed123"
+    _install(monkeypatch, tmp_path, before="v4.33.0", now="v4.33.0", record=completed)
     assert gate.main() == 0
 
 

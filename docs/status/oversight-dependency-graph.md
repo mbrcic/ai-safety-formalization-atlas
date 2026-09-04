@@ -10,7 +10,7 @@ Edges come from the elaborated Lean environment. This answers the question the p
 
 So `A → B` means *`B` occurs in `A`'s statement, or in `A`'s body when `A` is a definition*. A lemma used only inside a proof does not appear. Reading the table as a complete call graph would be wrong, and the two sections below are scoped so that they stay true under this limit.
 
-`55` authored declarations in `AISafetyAtlas.Oversight.*` (20 theorems). Compiler-generated companions and projections are dropped.
+`75` authored declarations in `AISafetyAtlas.Oversight.*` (26 theorems). Compiler-generated companions and projections are dropped.
 
 ## Load-bearing declarations
 
@@ -18,15 +18,26 @@ Named in the statements of eight or more others. A change to one of these is a c
 
 | Declaration | Named by |
 |---|---|
-| `JointObservation.EvidenceArchitecture` | 47 |
-| `JointObservation.CandidateObservation` | 31 |
-| `JointObservation.CandidateObservation.Output` | 20 |
-| `JointObservation.Hazard` | 19 |
-| `JointObservation.EvidenceArchitecture.Execution` | 16 |
-| `JointObservation.Covers` | 14 |
-| `JointObservation.CandidateObservation.observe` | 10 |
-| `JointObservation.CandidateFamily` | 10 |
-| `JointObservation.CandidateFamily.Index` | 8 |
+| `JointObservation.EvidenceArchitecture` | 49 |
+| `JointObservation.CandidateObservation` | 39 |
+| `JointObservation.Covers` | 25 |
+| `JointObservation.Hazard` | 23 |
+| `JointObservation.EvidenceArchitecture.Execution` | 22 |
+| `JointObservation.CandidateObservation.Output` | 21 |
+| `JointObservation.EvidenceArchitecture.Principal` | 12 |
+| `JointObservation.CandidateObservation.observe` | 12 |
+| `JointObservation.CandidateFamily.Index` | 11 |
+| `JointObservation.CandidateFamily` | 11 |
+| `Debate.Oracle` | 11 |
+| `JointObservation.Portfolio` | 10 |
+| `Forces` | 9 |
+| `JointObservation.CollisionWitness` | 8 |
+| `JointObservation.CoalitionInput` | 8 |
+| `Debate.verifier` | 8 |
+| `Debate.protocol` | 8 |
+| `Debate.Params` | 8 |
+| `Debate.Bob` | 8 |
+| `Debate.Alice` | 8 |
 
 ## Definitions no statement and no example mentions
 
@@ -34,12 +45,33 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 
 **Instances always appear here.** Typeclass resolution names nothing, so an instance has no textual user even when every consumer depends on it. Deleting one because it is listed here is how a checker stops compiling.
 
+- `Debate.Party`
 - `JointObservation.decidableCovers`
 
 ## Direct dependencies
 
 | Declaration | Kind | Names |
 |---|---|---|
+| `Debate.Alice` | definition | — |
+| `Debate.Bob` | definition | — |
+| `Debate.Correct` | definition | `Debate.Alice`, `Debate.Bob`, `Debate.Vera` |
+| `Debate.Lipschitz` | definition | `Debate.Oracle` |
+| `Debate.Oracle` | definition | — |
+| `Debate.Params` | definition | — |
+| `Debate.Party` | definition | — |
+| `Debate.Vera` | definition | — |
+| `Debate.alice_fast` | theorem | `Debate.Bob`, `Debate.Oracle`, `Debate.Params`, `Debate.Vera`, `Debate.defaultParams`, `Debate.honestAlice`, `Debate.protocol` |
+| `Debate.bob_fast` | theorem | `Debate.Alice`, `Debate.Oracle`, `Debate.Params`, `Debate.Vera`, `Debate.defaultParams`, `Debate.honestBob`, `Debate.protocol` |
+| `Debate.completeness` | theorem | `Debate.Bob`, `Debate.Lipschitz`, `Debate.Oracle`, `Debate.Params`, `Debate.finalAnswer`, `Debate.honestAlice`, `Debate.protocol`, `Debate.verifier` |
+| `Debate.correctness` | theorem | `Debate.Correct`, `Debate.Params`, `Debate.defaultParams`, `Debate.honestAlice`, `Debate.honestBob`, `Debate.verifier` |
+| `Debate.defaultParams` | definition | `Debate.Params` |
+| `Debate.finalAnswer` | definition | `Debate.Oracle` |
+| `Debate.honestAlice` | definition | `Debate.Alice` |
+| `Debate.honestBob` | definition | `Debate.Bob` |
+| `Debate.protocol` | definition | `Debate.Alice`, `Debate.Bob`, `Debate.Vera` |
+| `Debate.soundness` | theorem | `Debate.Alice`, `Debate.Lipschitz`, `Debate.Oracle`, `Debate.Params`, `Debate.finalAnswer`, `Debate.honestBob`, `Debate.protocol`, `Debate.verifier` |
+| `Debate.vera_fast` | theorem | `Debate.Alice`, `Debate.Bob`, `Debate.Oracle`, `Debate.Params`, `Debate.defaultParams`, `Debate.protocol`, `Debate.verifier` |
+| `Debate.verifier` | definition | `Debate.Vera` |
 | `Forces` | definition | — |
 | `JointObservation.CandidateFamily` | definition | `JointObservation.EvidenceArchitecture` |
 | `JointObservation.CandidateObservation` | definition | `JointObservation.EvidenceArchitecture` |

@@ -76,6 +76,12 @@ in the repository can detect it.
   moved, what broke, and which build records were deliberately not rewritten
 - [MAIS source pin](provenance/mais-source-pin.md) — the commit and per-file SHA-256
   the MAIS-A2 grading is anchored to
+- [MAIS-O70 conditional verification](provenance/mais-o70-conditional-verification.md) —
+  release claim, unconditional fragment, three assumed frontiers, and validation order
+- [MAIS-O70 frontier manifest](provenance/o70-frontier-manifest.md) — exact assumed
+  propositions, consumers, source comparison, stress evidence, and debt
+- [MAIS-O70 fidelity adjudications](provenance/mais-o70-fidelity-adjudications.md) —
+  the two source readings that remain drafts until a human countersigns them
 
 This section is a **map, not an inventory**: `provenance/` holds triage notes,
 per-source clash logs and dated audits that a reader does not need in order to

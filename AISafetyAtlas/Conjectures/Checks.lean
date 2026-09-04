@@ -6,6 +6,7 @@ public import AISafetyAtlas.Conjectures.MAIS
 public import AISafetyAtlas.Conjectures.MAIS.O27
 public import AISafetyAtlas.Conjectures.MAIS.O31
 public import AISafetyAtlas.Conjectures.MAIS.O38
+public import AISafetyAtlas.Conjectures.MAIS.O70
 public import AISafetyAtlas.Conjectures.StochasticComplexity
 
 /-!
@@ -78,3 +79,9 @@ example : Prop := AISafetyAtlas.Conjectures.MAIS.maisO33_etaStarIsZero
 -- CONJ-025 (claim, RESOLVED)
 example : Prop := AISafetyAtlas.Conjectures.MAIS.maisO38_polynomialSamplesSuffice
 #check @AISafetyAtlas.Conjectures.MAIS.o38PolynomialSampleCandidate
+
+-- CONJ-026 (target, OPEN)
+#check @AISafetyAtlas.Conjectures.MAIS.IsO70RankTable
+#check @AISafetyAtlas.Conjectures.MAIS.O70DependsOnRanksOnly
+#check @AISafetyAtlas.Conjectures.MAIS.IsO70RankTable
+#check @AISafetyAtlas.Conjectures.MAIS.IsO70AWValueStratumTable
