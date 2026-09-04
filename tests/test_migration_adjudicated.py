@@ -154,3 +154,120 @@ def test_the_real_record_matches_the_real_tree() -> None:
     assert record["migration"]["baseline_commit"]
     assert record["measured"]["statement_drift_differences"] >= 0
     assert len(record["adjudications"]) >= 1
+
+
+# --- The default baseline ---------------------------------------------------
+#
+# Everything above monkeypatches `toolchain_at` and moves ROOT into a plain
+# temporary directory, so `live_baseline()` finds no repository, returns None,
+# and the recorded pin is used. That is the fallback path, and it means none of
+# those tests can tell whether the default was taken from the branch point or
+# from the record -- reverting the default would leave all of them green.
+#
+# These two build a real repository instead and let git answer.
+
+
+def _run(cwd, *args: str) -> str:
+    import subprocess
+
+    proc = subprocess.run(
+        ["git", "-c", "user.name=t", "-c", "user.email=t@example.invalid", *args],
+        cwd=cwd,
+        capture_output=True,
+        text=True,
+        check=True,
+    )
+    return proc.stdout.strip()
+
+
+def _repo(tmp_path: Path, *, upstream: bool):
+    """A history whose recorded pin and whose branch point disagree.
+
+    * `A` carries the old toolchain and is what the record pins.
+    * `B` carries the new one, and is where `origin/main` points.
+    * `HEAD` is an ordinary feature commit on top of `B` that adds a file --
+      the shape of every contribution made after a migration merges.
+
+    So the recorded pin says "the toolchain moved" and the branch point says it
+    did not, and only one of those is a true statement about this branch.
+    """
+    (tmp_path / "docs" / "status").mkdir(parents=True)
+    # `git init -b` needs git 2.28; Ubuntu 20.04 ships 2.25 and the branch name
+    # is never used here.
+    _run(tmp_path, "init", "-q")
+
+    (tmp_path / "lean-toolchain").write_text("leanprover/lean4:v4.31.0\n", encoding="utf-8")
+    _run(tmp_path, "add", "-A")
+    _run(tmp_path, "commit", "-q", "-m", "before the migration")
+    recorded = _run(tmp_path, "rev-parse", "HEAD")
+
+    (tmp_path / "lean-toolchain").write_text("leanprover/lean4:v4.33.0\n", encoding="utf-8")
+    _run(tmp_path, "add", "-A")
+    _run(tmp_path, "commit", "-q", "-m", "the migration")
+    migrated = _run(tmp_path, "rev-parse", "HEAD")
+    if upstream:
+        _run(tmp_path, "update-ref", "refs/remotes/origin/main", migrated)
+
+    (tmp_path / "new_module.txt").write_text("a declaration this branch adds\n", encoding="utf-8")
+    _run(tmp_path, "add", "-A")
+    _run(tmp_path, "commit", "-q", "-m", "an ordinary feature branch")
+    return recorded
+
+
+def _record_at(tmp_path: Path, recorded: str) -> Path:
+    path = tmp_path / "docs" / "status" / "migration-baseline.json"
+    record = dict(RECORD)
+    record["migration"] = {"baseline_commit": recorded}
+    path.write_text(json.dumps(record), encoding="utf-8")
+    return path
+
+
+def _point_at(monkeypatch, tmp_path: Path, path: Path) -> None:
+    monkeypatch.setattr(gate, "ROOT", tmp_path)
+    monkeypatch.setattr(gate, "BASELINE", path)
+    monkeypatch.setattr(sys, "argv", ["check_migration_adjudicated.py"])
+    # A feature branch must never reach the drift comparison at all: it is not a
+    # migration, so there is nothing to adjudicate. Returning counts that
+    # disagree with the record makes reaching it an audible failure rather than
+    # a silent pass.
+    monkeypatch.setattr(
+        gate,
+        "run_drift",
+        lambda _ref: ("statement drift against main: 38 difference(s)\n", 1),
+    )
+
+
+def test_default_baseline_is_the_branch_point_not_the_recorded_pin(
+    monkeypatch, tmp_path, capsys
+) -> None:
+    """A feature branch cut after a migration is not itself a migration.
+
+    Reverting the default to `record["migration"]["baseline_commit"]` makes this
+    fail: the pin's toolchain is v4.31.0, the tree's is v4.33.0, the gate reads
+    that as a bump, and the 38 measured differences do not match the recorded
+    31.
+    """
+    recorded = _repo(tmp_path, upstream=True)
+    _point_at(monkeypatch, tmp_path, _record_at(tmp_path, recorded))
+
+    assert gate.main() == 0
+    out = capsys.readouterr().out
+    assert "not a migration" in out, out
+    assert recorded[:12] not in out, f"took the recorded pin as its baseline:\n{out}"
+
+
+def test_without_an_upstream_ref_it_falls_back_to_the_recorded_pin(
+    monkeypatch, tmp_path, capsys
+) -> None:
+    """A shallow or forkless checkout keeps the old behaviour rather than none.
+
+    `merge-base` fails when `origin/main` is not in the checkout. The gate has
+    to stay a gate there, so it falls back to the record and -- on this
+    history -- correctly refuses.
+    """
+    recorded = _repo(tmp_path, upstream=False)
+    _point_at(monkeypatch, tmp_path, _record_at(tmp_path, recorded))
+
+    assert gate.main() == 1
+    err = capsys.readouterr().err
+    assert "no longer matches the tree" in err, err

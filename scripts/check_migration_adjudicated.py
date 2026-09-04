@@ -27,6 +27,12 @@ The record is a countersignature, not a proof: it says a human looked at each
 difference and judged it. What is enforced here is that the looking happened and
 that its subject is still the tree in front of us.
 
+The baseline defaults to the merge base with ``origin/main`` -- the tree this
+branch departs from -- and falls back to the recorded ``baseline_commit`` when
+that ref is not in the checkout. It is deliberately *not* the recorded pin by
+default: that pin names the commit one migration was measured against, so
+defaulting to it makes every later branch read as a migration.
+
 Usage:
     python3 scripts/check_migration_adjudicated.py
     python3 scripts/check_migration_adjudicated.py --ref <commit>
@@ -44,6 +50,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 BASELINE = ROOT / "docs" / "status" / "migration-baseline.json"
 TOOLCHAIN = "lean-toolchain"
+UPSTREAM = "origin/main"
 
 DRIFT_RE = re.compile(r"^statement drift against .*?: (\d+) difference")
 PROOFS_RE = re.compile(r"(\d+) proof body/bodies also rewritten")
@@ -55,6 +62,26 @@ def git(*args: str) -> str | None:
         ["git", *args], cwd=ROOT, capture_output=True, text=True, check=False
     )
     return proc.stdout if proc.returncode == 0 else None
+
+
+def live_baseline() -> str | None:
+    """The tree this branch actually departs from, which is not the record's pin.
+
+    ``migration-baseline.json`` pins the commit *one* migration was measured
+    against, and says so in its own note: it is a reproduction pin, not the live
+    reference, because "comparing forever against the pre-migration tree would
+    keep the gate red over work that is already accounted for". Defaulting to
+    that pin did what the note warned about -- every branch after the migration
+    merged reads as a migration, and the recorded difference count can then only
+    be matched by a branch that adds no declarations, which is to say by no Lean
+    contribution at all.
+
+    The merge base with the upstream default branch is the honest answer to "did
+    *this branch* move the toolchain". Falls back to the recorded pin when that
+    ref is not in the checkout, so a shallow clone behaves as before.
+    """
+    base = git("merge-base", "HEAD", UPSTREAM)
+    return base.strip() or None if base is not None else None
 
 
 def toolchain_at(ref: str) -> str | None:
@@ -97,7 +124,8 @@ def main() -> int:
     parser.add_argument(
         "--ref",
         default=None,
-        help="baseline to compare against; defaults to the recorded baseline_commit",
+        help="baseline to compare against; defaults to the merge base with "
+        f"{UPSTREAM}, or to the recorded baseline_commit if that ref is absent",
     )
     arguments = parser.parse_args()
 
@@ -106,6 +134,8 @@ def main() -> int:
         record = json.loads(BASELINE.read_text(encoding="utf-8"))
 
     ref = arguments.ref
+    if ref is None:
+        ref = live_baseline()
     if ref is None:
         if record is None:
             print(
