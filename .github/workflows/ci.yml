@@ -48,6 +48,7 @@ jobs:
           # Keep pytest, ty, and the interpreter used by agent_gate in one
           # environment.  Installing with a different pip than the executable
           # used by ty can make CI report a false unresolved-import failure.
+          echo "VIRTUAL_ENV=$ci_venv" >> "$GITHUB_ENV"
           echo "$ci_venv/bin" >> "$GITHUB_PATH"
       - name: Cheap agent gate
         run: ./scripts/agent_gate.sh

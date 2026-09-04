@@ -505,7 +505,10 @@ Cheap preflight:
 The gate ends with `pytest tests/` (malformed-shape regressions) and
 `ty check scripts/ tests/`. Both are skipped with a notice when the tool is not
 installed, so the gate still runs without them; CI installs both, so neither is
-optional on a pull request. Install with `python3 -m pip install pytest ty`.
+optional on a pull request. `check_conjecture_grade_prose` needs PyYAML and is
+skipped the same way. Install all three with
+`python3 -m pip install pytest ty pyyaml`. Everything else in the gate is the
+standard library of Python 3.9 or newer, which the gate checks before it starts.
 
 ### The `--fast` lane (`--lean` is the old name)
 

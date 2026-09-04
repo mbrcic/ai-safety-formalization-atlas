@@ -1,3 +1,6 @@
+# macOS Finder metadata.
+.DS_Store
+
 # Lean/Lake build artifacts.
 /.lake/
 # The public page in /site is a static file deployed as-is; nothing to ignore.
@@ -16,6 +19,8 @@ __pycache__/
 .tokensave/
 .mcp.json
 **/CLAUDE.md
+# The root adapter is deliberate and version-controlled.
+!/CLAUDE.md
 .github/workflows/CLAUDE.md
 
 # Accidental URL-as-path download debris (wget/curl without -O).
@@ -37,3 +42,7 @@ __pycache__/
 # `python3 scripts/render_coverage_artifact.py`. It had no reader in the tree
 # and cost 218 KB tracked.
 /docs/status/coverage-audit.html
+
+# Local interpreter for the validators, e.g. `python3 -m venv .venv` or
+# `uv venv --python 3.13 .venv`. The repository pins no Python of its own.
+/.venv/

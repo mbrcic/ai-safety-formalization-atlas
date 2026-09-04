@@ -23,6 +23,18 @@ import importlib.util
 import sys
 from pathlib import Path
 
+import pytest
+
+# The checker itself imports PyYAML, and `_load` executes it, so an absent
+# parser fails *collection* -- which interrupts the whole suite, not just this
+# module. agent_gate.sh skips the standalone check for the same reason; without
+# this the skip is illusory, because the gate's pytest step would still stop
+# here.
+pytest.importorskip(
+    "yaml",
+    reason="check_conjecture_grade_prose reads conjectures.yaml through PyYAML",
+)
+
 ROOT = Path(__file__).resolve().parent.parent
 SCRIPTS = ROOT / "scripts"
 
