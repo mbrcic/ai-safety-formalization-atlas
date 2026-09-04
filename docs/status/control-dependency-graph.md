@@ -18,22 +18,24 @@ Named in the statements of eight or more others. A change to one of these is a c
 
 | Declaration | Named by |
 |---|---|
-| `plantOutcome` | 27 |
-| `IsPerfectRegulator` | 16 |
-| `controlLoss` | 13 |
+| `plantOutcome` | 38 |
+| `controlLoss` | 20 |
+| `IsPerfectRegulator` | 17 |
+| `entropyReduction` | 15 |
+| `admittedOutcomes` | 14 |
+| `minControlLoss` | 12 |
+| `Purified` | 12 |
+| `kernelOpenLoopReductionAt` | 11 |
 | `purifySeed` | 10 |
 | `purifiedState` | 10 |
+| `ofWeights` | 10 |
 | `atomLoss` | 10 |
-| `admittedOutcomes` | 10 |
-| `Purified` | 10 |
 | `purifyMap` | 9 |
 | `purifiedLaw` | 9 |
-| `minControlLoss` | 9 |
-| `kernelOpenLoopReductionAt` | 9 |
-| `entropyReduction` | 9 |
+| `kernelEntropyReduction` | 9 |
 | `purifiedSeed` | 8 |
 | `purifiedAction` | 8 |
-| `ofWeights` | 8 |
+| `IsInputPolicy` | 8 |
 
 ## Definitions no statement and no example mentions
 

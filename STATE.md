@@ -40,12 +40,12 @@ aggregating `Causal` facade and that is
 deliberate — these are peer modules, so a consumer imports the one it needs.
 
 **On top of that layer sits the MAIS conjecture ledger, also in no release.**
-Thirteen MAIS-linked ledger rows span ten printed problem numbers -- nine of
-agenda A2, plus A3's `prob:samples`, whose row shares none of the causal
-vocabulary. Nine are conjectures or graded candidate answers in
-`AISafetyAtlas.Conjectures.MAIS`; four are determine-problem specifications over
+Fourteen MAIS-linked ledger rows span eleven printed problem numbers -- nine of
+agenda A2, plus A3's `prob:samples` and A6's `prob:calibration`, whose rows share
+none of the causal vocabulary. Nine are conjectures or graded candidate answers in
+`AISafetyAtlas.Conjectures.MAIS`; five are determine-problem specifications over
 a candidate answer. **Every row carries Lean.** The atlas covers fifteen printed
-problems in all, but the six it cannot state at all -- MAIS-O2, O28, O29(c),
+problems of agenda A2 in all, but the six it cannot state at all -- MAIS-O2, O28, O29(c),
 O30, O32 and O35 -- are recorded in the coverage matrix
 `docs/provenance/mais-a2-statement-coverage.md` and in the
 `mais-open-problems-2026` source entry, where MAIS-O1 and MAIS-O16 have always
@@ -197,7 +197,7 @@ public API, or axiom profile changed in either release.
 - Atlas Lean declarations: **248** (claim-row WRAPPER **13** / BRIDGE **5**).
 - Results stating a source claim: **49**; recording a formalization only: **37** (**28** on the public root import).
 - Reviewed AI-system bridges: **3**; statement-reviewed only: **1**.
-- Open conjectures: **3** of **10** recorded; the ledger also holds **4** determine-problem targets. Problems the atlas cannot state carry no row at all and are recorded against their source directory, so this line does not count them; a resolved row states which printed clause it covers, and one of them (CONJ-003) is true only because its class is empty.
+- Open conjectures: **3** of **10** recorded; the ledger also holds **5** determine-problem targets. Problems the atlas cannot state carry no row at all and are recorded against their source directory, so this line does not count them; a resolved row states which printed clause it covers, and one of them (CONJ-003) is true only because its class is empty.
 - Claim results with statement-match (`EXACT`/`EQUIVALENT`): **14**; with `RELATED`-only formalization: **7**. Counts are claim rows, not records: an artifact row's grade is on the row and never in this number.
 - Rows carrying atlas Lean: **49** (**20** of them claim rows); catalogued candidate leads: **5**.
 <!-- END GENERATED REGISTRY SNAPSHOT -->

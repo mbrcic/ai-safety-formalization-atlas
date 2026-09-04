@@ -87,7 +87,7 @@ PUBLIC_THEOREM_RE = re.compile(
 # name here to match and is reached only through the declaration it serves; see
 # `docs/status/audit-coverage-exclusions.json` for that and the rest.
 PUBLIC_DEF_RE = re.compile(
-    r"^\s*(?:@\[[^\]]*\]\s*)?public\s+(?:noncomputable\s+)?"
+    r"^\s*(?:@\[[^\]]*\]\s*)?public\s+(?:(?:noncomputable|scoped)\s+)*"
     r"(?:def|abbrev|structure|instance|inductive)\s+([^\s:({\[]+)"
 )
 # `facade_sources` follows `public import` because that is what re-exports a
