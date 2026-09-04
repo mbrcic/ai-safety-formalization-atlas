@@ -1,7 +1,7 @@
 {
   "generated_by": "scripts/check_statement_freeze.py --write",
   "note": "Signature hashes of ledger-graded statements. A diff here is a schema event: say which way fidelity moved and re-grade the row.",
-  "count": 267,
+  "count": 271,
   "declarations": {
     "AISafetyAtlas.Causal.DecisionNetwork.mem_parents_utility_of_isUnmediated": {
       "file": "AISafetyAtlas/Causal/DecisionNetwork.lean",
@@ -415,6 +415,18 @@
       "file": "AISafetyAtlas/Explainability.lean",
       "sha256": "a6a77f09f59854f1"
     },
+    "AISafetyAtlas.Fairness.approx_perfect_prediction_or_equal_base_rates": {
+      "file": "AISafetyAtlas/Fairness/ApproximateRiskAssignment.lean",
+      "sha256": "65b92388270af19e"
+    },
+    "AISafetyAtlas.Fairness.average_lower_bound": {
+      "file": "AISafetyAtlas/Fairness/ApproximateRiskAssignment.lean",
+      "sha256": "c004a7372506c703"
+    },
+    "AISafetyAtlas.Fairness.exists_slack_function": {
+      "file": "AISafetyAtlas/Fairness/ApproximateRiskAssignment.lean",
+      "sha256": "27e9abae14899b1e"
+    },
     "AISafetyAtlas.Fairness.negativeScore_eq": {
       "file": "AISafetyAtlas/Fairness/RiskAssignment.lean",
       "sha256": "aeb3376f0d0f224f"
@@ -426,6 +438,10 @@
     "AISafetyAtlas.Fairness.perfect_prediction_or_equal_base_rates": {
       "file": "AISafetyAtlas/Fairness/RiskAssignment.lean",
       "sha256": "45b91b5dc73e87b4"
+    },
+    "AISafetyAtlas.Fairness.perfect_prediction_or_equal_base_rates_of_approx": {
+      "file": "AISafetyAtlas/Fairness/ApproximateRiskAssignment.lean",
+      "sha256": "9c89d1ab53c29c63"
     },
     "AISafetyAtlas.Fairness.print_perfectPrediction_of_populated": {
       "file": "AISafetyAtlas/Fairness/RiskAssignment.lean",

@@ -307,7 +307,7 @@ Catalogued, no atlas Lean:
 | ID | Result | Atlas declarations |
 |---|---|---|
 | BY-007 | Arrow's impossibility theorem | `AISafetyAtlas.SocialChoice.Utility.arrow`<br>`AISafetyAtlas.SocialChoice.arrow` |
-| BY-010 | Fairness impossibility theorem | `AISafetyAtlas.Fairness.negativeScore_eq`<br>`AISafetyAtlas.Fairness.perfect_of_negativeScore_eq_zero`<br>`AISafetyAtlas.Fairness.perfect_prediction_or_equal_base_rates`<br>`AISafetyAtlas.Fairness.print_perfectPrediction_of_populated`<br>`AISafetyAtlas.Fairness.sum_score_eq_μ` |
+| BY-010 | Fairness impossibility theorem | `AISafetyAtlas.Fairness.approx_perfect_prediction_or_equal_base_rates`<br>`AISafetyAtlas.Fairness.average_lower_bound`<br>`AISafetyAtlas.Fairness.exists_slack_function`<br>`AISafetyAtlas.Fairness.negativeScore_eq`<br>`AISafetyAtlas.Fairness.perfect_of_negativeScore_eq_zero`<br>`AISafetyAtlas.Fairness.perfect_prediction_or_equal_base_rates`<br>`AISafetyAtlas.Fairness.perfect_prediction_or_equal_base_rates_of_approx`<br>`AISafetyAtlas.Fairness.print_perfectPrediction_of_populated`<br>`AISafetyAtlas.Fairness.sum_score_eq_μ` |
 | LAND-GS-002 | Gibbard–Satterthwaite theorem (Lean / SocialChoiceLean) | `AISafetyAtlas.SocialChoice.gibbard_satterthwaite` |
 
 Catalogued, no atlas Lean:

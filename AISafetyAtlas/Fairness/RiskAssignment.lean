@@ -95,9 +95,12 @@ every group and feature vector — perfect prediction wherever anybody stands.
 
 ## What is not claimed
 
-- **Theorem 1.2, the approximate version, is not here.** Print relaxes each
-  condition to an `ε`-approximate form and concludes an `f(ε)`-approximate form
-  of one of the two cases. Nothing in this module speaks to it.
+- **Theorem 1.2, the approximate version, is not in this module.** Print relaxes
+  each condition to an `ε`-approximate form and concludes an `f(ε)`-approximate
+  form of one of the two cases. That is
+  `AISafetyAtlas.Fairness.ApproximateRiskAssignment`, which imports this module
+  and reproves the theorem below as its `ε = 0` case. Nothing *here* is stated
+  approximately.
 - **No AI-system reading.** The declarations are about a population, a partition
   into two groups, and a matrix. Calling `X` a deployed classifier is an
   application line, not a theorem here.

@@ -11,7 +11,9 @@ public import AISafetyAtlas.Compositional
 public import AISafetyAtlas.Control
 public import AISafetyAtlas.Explainability
 public import AISafetyAtlas.Fairness.RiskAssignment
+public import AISafetyAtlas.Fairness.ApproximateRiskAssignment
 public import AISafetyAtlas.Examples.Fairness.RiskAssignment
+public import AISafetyAtlas.Examples.Fairness.ApproximateRiskAssignment
 public import AISafetyAtlas.Learning
 public import AISafetyAtlas.Learning.Sharp
 public import AISafetyAtlas.Knowledge
@@ -153,6 +155,7 @@ the result is not proved here.
 | `AISafetyAtlas.Computability` | Rice / halting (Mathlib wrappers) |
 | `AISafetyAtlas.Explainability` | Attribution impossibility |
 | `AISafetyAtlas.Fairness.RiskAssignment` | Kleinberg–Mullainathan–Raghavan Theorem 1.1: calibration within groups and balance for both classes force perfect prediction or equal base rates (`BY-010`) |
+| `AISafetyAtlas.Fairness.ApproximateRiskAssignment` | The same paper's Theorem 1.2: the `ε`-approximate conditions force an `f(ε)`-approximate form of one of the two conclusions (`BY-010`) |
 | `AISafetyAtlas.Inference` | Wolpert inference devices: weak/strong inference, Wolpert's own notion of control over a device, physical knowledge. **Not** Ashby or Touchette–Lloyd control — for those see `AISafetyAtlas.Control` |
 | `AISafetyAtlas.Learning` | Finite NFL cores |
 | `AISafetyAtlas.Learning.Sharp` | The closed-under-permutation NFL characterization, both directions (`CT-10`) |

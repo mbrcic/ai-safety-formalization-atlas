@@ -2,6 +2,50 @@
   "note": "Edges are: for a definition, its type and body; for a theorem, its statement only. Lean's module system does not export proof terms.",
   "cluster": "AISafetyAtlas.Fairness.",
   "declarations": {
+    "AISafetyAtlas.Fairness.ApproxBalancedNegative": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Fairness.Instance",
+        "AISafetyAtlas.Fairness.RiskAssignment",
+        "AISafetyAtlas.Fairness.WithinFactor",
+        "AISafetyAtlas.Fairness.negativeAverage"
+      ]
+    },
+    "AISafetyAtlas.Fairness.ApproxBalancedPositive": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Fairness.Instance",
+        "AISafetyAtlas.Fairness.RiskAssignment",
+        "AISafetyAtlas.Fairness.WithinFactor",
+        "AISafetyAtlas.Fairness.positiveAverage"
+      ]
+    },
+    "AISafetyAtlas.Fairness.ApproxCalibrated": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Fairness.Instance",
+        "AISafetyAtlas.Fairness.RiskAssignment",
+        "AISafetyAtlas.Fairness.RiskAssignment.v",
+        "AISafetyAtlas.Fairness.WithinFactor",
+        "AISafetyAtlas.Fairness.assigned",
+        "AISafetyAtlas.Fairness.assignedPos"
+      ]
+    },
+    "AISafetyAtlas.Fairness.ApproxEqualBaseRates": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Fairness.Instance",
+        "AISafetyAtlas.Fairness.baseRate"
+      ]
+    },
+    "AISafetyAtlas.Fairness.ApproxPerfectPrediction": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Fairness.Instance",
+        "AISafetyAtlas.Fairness.RiskAssignment",
+        "AISafetyAtlas.Fairness.positiveAverage"
+      ]
+    },
     "AISafetyAtlas.Fairness.BalancedNegative": {
       "kind": "definition",
       "deps": [
@@ -59,6 +103,87 @@
       "kind": "definition",
       "deps": []
     },
+    "AISafetyAtlas.Fairness.WithinFactor": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Fairness.approxBalancedNegative_of_balanced": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Fairness.ApproxBalancedNegative",
+        "AISafetyAtlas.Fairness.BalancedNegative",
+        "AISafetyAtlas.Fairness.Instance",
+        "AISafetyAtlas.Fairness.Instance.N",
+        "AISafetyAtlas.Fairness.RiskAssignment"
+      ]
+    },
+    "AISafetyAtlas.Fairness.approxBalancedNegative_zero_iff": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Fairness.ApproxBalancedNegative",
+        "AISafetyAtlas.Fairness.BalancedNegative",
+        "AISafetyAtlas.Fairness.Instance",
+        "AISafetyAtlas.Fairness.RiskAssignment"
+      ]
+    },
+    "AISafetyAtlas.Fairness.approxBalancedPositive_of_balanced": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Fairness.ApproxBalancedPositive",
+        "AISafetyAtlas.Fairness.BalancedPositive",
+        "AISafetyAtlas.Fairness.Instance",
+        "AISafetyAtlas.Fairness.RiskAssignment"
+      ]
+    },
+    "AISafetyAtlas.Fairness.approxBalancedPositive_zero_iff": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Fairness.ApproxBalancedPositive",
+        "AISafetyAtlas.Fairness.BalancedPositive",
+        "AISafetyAtlas.Fairness.Instance",
+        "AISafetyAtlas.Fairness.RiskAssignment"
+      ]
+    },
+    "AISafetyAtlas.Fairness.approxCalibrated_of_calibrated": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Fairness.ApproxCalibrated",
+        "AISafetyAtlas.Fairness.Calibrated",
+        "AISafetyAtlas.Fairness.Instance",
+        "AISafetyAtlas.Fairness.RiskAssignment"
+      ]
+    },
+    "AISafetyAtlas.Fairness.approxCalibrated_zero_iff": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Fairness.ApproxCalibrated",
+        "AISafetyAtlas.Fairness.Calibrated",
+        "AISafetyAtlas.Fairness.Instance",
+        "AISafetyAtlas.Fairness.RiskAssignment"
+      ]
+    },
+    "AISafetyAtlas.Fairness.approxEqualBaseRates_zero_iff": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Fairness.ApproxEqualBaseRates",
+        "AISafetyAtlas.Fairness.EqualBaseRates",
+        "AISafetyAtlas.Fairness.Instance"
+      ]
+    },
+    "AISafetyAtlas.Fairness.approx_perfect_prediction_or_equal_base_rates": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Fairness.ApproxBalancedNegative",
+        "AISafetyAtlas.Fairness.ApproxBalancedPositive",
+        "AISafetyAtlas.Fairness.ApproxCalibrated",
+        "AISafetyAtlas.Fairness.ApproxEqualBaseRates",
+        "AISafetyAtlas.Fairness.ApproxPerfectPrediction",
+        "AISafetyAtlas.Fairness.Instance",
+        "AISafetyAtlas.Fairness.Instance.N",
+        "AISafetyAtlas.Fairness.RiskAssignment",
+        "AISafetyAtlas.Fairness.slack"
+      ]
+    },
     "AISafetyAtlas.Fairness.assigned": {
       "kind": "definition",
       "deps": [
@@ -78,6 +203,14 @@
         "AISafetyAtlas.Fairness.RiskAssignment.X"
       ]
     },
+    "AISafetyAtlas.Fairness.assignedNeg_nonneg": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Fairness.Instance",
+        "AISafetyAtlas.Fairness.RiskAssignment",
+        "AISafetyAtlas.Fairness.assignedNeg"
+      ]
+    },
     "AISafetyAtlas.Fairness.assignedPos": {
       "kind": "definition",
       "deps": [
@@ -88,6 +221,14 @@
         "AISafetyAtlas.Fairness.RiskAssignment.X"
       ]
     },
+    "AISafetyAtlas.Fairness.assignedPos_nonneg": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Fairness.Instance",
+        "AISafetyAtlas.Fairness.RiskAssignment",
+        "AISafetyAtlas.Fairness.assignedPos"
+      ]
+    },
     "AISafetyAtlas.Fairness.assigned_eq_add": {
       "kind": "theorem",
       "deps": [
@@ -96,6 +237,54 @@
         "AISafetyAtlas.Fairness.assigned",
         "AISafetyAtlas.Fairness.assignedNeg",
         "AISafetyAtlas.Fairness.assignedPos"
+      ]
+    },
+    "AISafetyAtlas.Fairness.average_lower_bound": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Fairness.ApproxBalancedNegative",
+        "AISafetyAtlas.Fairness.ApproxBalancedPositive",
+        "AISafetyAtlas.Fairness.ApproxCalibrated",
+        "AISafetyAtlas.Fairness.Instance",
+        "AISafetyAtlas.Fairness.Instance.N",
+        "AISafetyAtlas.Fairness.RiskAssignment",
+        "AISafetyAtlas.Fairness.baseRate",
+        "AISafetyAtlas.Fairness.positiveAverage"
+      ]
+    },
+    "AISafetyAtlas.Fairness.baseRate": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Fairness.Instance",
+        "AISafetyAtlas.Fairness.Instance.N"
+      ]
+    },
+    "AISafetyAtlas.Fairness.continuous_slack": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Fairness.slack"
+      ]
+    },
+    "AISafetyAtlas.Fairness.exists_slack_function": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Fairness.ApproxBalancedNegative",
+        "AISafetyAtlas.Fairness.ApproxBalancedPositive",
+        "AISafetyAtlas.Fairness.ApproxCalibrated",
+        "AISafetyAtlas.Fairness.ApproxEqualBaseRates",
+        "AISafetyAtlas.Fairness.ApproxPerfectPrediction",
+        "AISafetyAtlas.Fairness.Instance",
+        "AISafetyAtlas.Fairness.Instance.N",
+        "AISafetyAtlas.Fairness.RiskAssignment"
+      ]
+    },
+    "AISafetyAtlas.Fairness.negativeAverage": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Fairness.Instance",
+        "AISafetyAtlas.Fairness.Instance.N",
+        "AISafetyAtlas.Fairness.RiskAssignment",
+        "AISafetyAtlas.Fairness.negativeScore"
       ]
     },
     "AISafetyAtlas.Fairness.negativeScore": {
@@ -115,6 +304,24 @@
         "AISafetyAtlas.Fairness.RiskAssignment",
         "AISafetyAtlas.Fairness.negativeScore",
         "AISafetyAtlas.Fairness.positiveScore"
+      ]
+    },
+    "AISafetyAtlas.Fairness.negativeScore_nonneg": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Fairness.Instance",
+        "AISafetyAtlas.Fairness.RiskAssignment",
+        "AISafetyAtlas.Fairness.negativeScore"
+      ]
+    },
+    "AISafetyAtlas.Fairness.perfectPrediction_of_approx_zero": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Fairness.ApproxPerfectPrediction",
+        "AISafetyAtlas.Fairness.Calibrated",
+        "AISafetyAtlas.Fairness.Instance",
+        "AISafetyAtlas.Fairness.PerfectPrediction",
+        "AISafetyAtlas.Fairness.RiskAssignment"
       ]
     },
     "AISafetyAtlas.Fairness.perfect_of_negativeScore_eq_zero": {
@@ -141,6 +348,43 @@
         "AISafetyAtlas.Fairness.RiskAssignment"
       ]
     },
+    "AISafetyAtlas.Fairness.perfect_prediction_or_equal_base_rates_of_approx": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Fairness.BalancedNegative",
+        "AISafetyAtlas.Fairness.BalancedPositive",
+        "AISafetyAtlas.Fairness.Calibrated",
+        "AISafetyAtlas.Fairness.EqualBaseRates",
+        "AISafetyAtlas.Fairness.Instance",
+        "AISafetyAtlas.Fairness.Instance.N",
+        "AISafetyAtlas.Fairness.PerfectPrediction",
+        "AISafetyAtlas.Fairness.RiskAssignment"
+      ]
+    },
+    "AISafetyAtlas.Fairness.positiveAverage": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Fairness.Instance",
+        "AISafetyAtlas.Fairness.RiskAssignment",
+        "AISafetyAtlas.Fairness.positiveScore"
+      ]
+    },
+    "AISafetyAtlas.Fairness.positiveAverage_le_one": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Fairness.Instance",
+        "AISafetyAtlas.Fairness.RiskAssignment",
+        "AISafetyAtlas.Fairness.positiveAverage"
+      ]
+    },
+    "AISafetyAtlas.Fairness.positiveAverage_nonneg": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Fairness.Instance",
+        "AISafetyAtlas.Fairness.RiskAssignment",
+        "AISafetyAtlas.Fairness.positiveAverage"
+      ]
+    },
     "AISafetyAtlas.Fairness.positiveScore": {
       "kind": "definition",
       "deps": [
@@ -148,6 +392,14 @@
         "AISafetyAtlas.Fairness.RiskAssignment",
         "AISafetyAtlas.Fairness.RiskAssignment.v",
         "AISafetyAtlas.Fairness.assignedPos"
+      ]
+    },
+    "AISafetyAtlas.Fairness.positiveScore_nonneg": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Fairness.Instance",
+        "AISafetyAtlas.Fairness.RiskAssignment",
+        "AISafetyAtlas.Fairness.positiveScore"
       ]
     },
     "AISafetyAtlas.Fairness.print_perfectPrediction_of_populated": {
@@ -159,12 +411,74 @@
         "AISafetyAtlas.Fairness.PerfectPrediction"
       ]
     },
+    "AISafetyAtlas.Fairness.slack": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Fairness.slack_nonneg": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Fairness.slack"
+      ]
+    },
+    "AISafetyAtlas.Fairness.slack_zero": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Fairness.slack"
+      ]
+    },
+    "AISafetyAtlas.Fairness.sqrt_le_slack": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Fairness.slack"
+      ]
+    },
     "AISafetyAtlas.Fairness.sum_assignedPos": {
       "kind": "theorem",
       "deps": [
         "AISafetyAtlas.Fairness.Instance",
         "AISafetyAtlas.Fairness.RiskAssignment",
         "AISafetyAtlas.Fairness.assignedPos"
+      ]
+    },
+    "AISafetyAtlas.Fairness.sum_score_bounds": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Fairness.ApproxCalibrated",
+        "AISafetyAtlas.Fairness.Instance",
+        "AISafetyAtlas.Fairness.RiskAssignment",
+        "AISafetyAtlas.Fairness.RiskAssignment.v",
+        "AISafetyAtlas.Fairness.WithinFactor",
+        "AISafetyAtlas.Fairness.assigned"
+      ]
+    },
+    "AISafetyAtlas.Fairness.sum_score_split": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Fairness.Instance",
+        "AISafetyAtlas.Fairness.RiskAssignment",
+        "AISafetyAtlas.Fairness.RiskAssignment.v",
+        "AISafetyAtlas.Fairness.assigned",
+        "AISafetyAtlas.Fairness.negativeScore",
+        "AISafetyAtlas.Fairness.positiveScore"
+      ]
+    },
+    "AISafetyAtlas.Fairness.tendsto_slack_zero": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Fairness.slack"
+      ]
+    },
+    "AISafetyAtlas.Fairness.withinFactor_self": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Fairness.WithinFactor"
+      ]
+    },
+    "AISafetyAtlas.Fairness.withinFactor_zero_iff": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Fairness.WithinFactor"
       ]
     }
   }

@@ -58,6 +58,10 @@ import AISafetyAtlas.Oversight.Debate
 #check AISafetyAtlas.Fairness.sum_score_eq_μ
 #check AISafetyAtlas.Fairness.negativeScore_eq
 #check AISafetyAtlas.Fairness.perfect_of_negativeScore_eq_zero
+#check AISafetyAtlas.Fairness.approx_perfect_prediction_or_equal_base_rates
+#check AISafetyAtlas.Fairness.exists_slack_function
+#check AISafetyAtlas.Fairness.average_lower_bound
+#check AISafetyAtlas.Fairness.perfect_prediction_or_equal_base_rates_of_approx
 #check AISafetyAtlas.Preference.exists_planner
 #check AISafetyAtlas.Preference.exists_reward
 #check AISafetyAtlas.Preference.consistent_rewards_eq_univ
