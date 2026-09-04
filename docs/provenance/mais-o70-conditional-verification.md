@@ -225,11 +225,11 @@ O70 modules are the new ones. The three axiom stages are three independent
 implementations of one question — a generated `#print axioms` harness, an
 environment walk, and an upstream tool this repository did not write — and each
 asserts that every audited declaration depends only on
-`{propext, Classical.choice, Quot.sound}`. No declaration count is quoted for
-this branch, because it was not measured on this tree; the recorded figure at
-`origin/main` and the v4.33.0 pin is 2847, in
-[`toolchain-v4330-migration.md`](toolchain-v4330-migration.md), and this branch
-adds 74 modules.
+`{propext, Classical.choice, Quot.sound}`. Measured on this tree,
+`check_print_axioms.py` reports **3868 declarations**, against the 2847 recorded
+at `origin/main` and the v4.33.0 pin in
+[`toolchain-v4330-migration.md`](toolchain-v4330-migration.md); this branch adds
+**78 modules**, every one of them registered in `scripts/lean_build_targets.txt`.
 
 An axiom audit reports the *binders* a theorem carries. It does not, and cannot,
 report whether a binder's proposition is satisfiable. See §8.
