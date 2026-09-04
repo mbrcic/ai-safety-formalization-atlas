@@ -114,14 +114,14 @@ monorepo in-tree. Reusable structure and honest grading over volume.
 <!-- BEGIN GENERATED REGISTRY SCOPE -->
 | Metric | Current |
 |---|---:|
-| Atlas Lean declarations | **248** |
+| Atlas Lean declarations | **253** |
 | Results stating a source claim | **49** |
 | Results recording a formalization only | **37** (28 on root import) |
 | Reviewed AI-system bridges | **3** |
 | Statement-reviewed bridges (interpretation withheld) | **1** |
 | Open conjectures | **3** |
 | Claim results with statement-match | **14** |
-| Claim results with `RELATED`-only formalization | **7** |
+| Claim results with `RELATED`-only formalization | **8** |
 
 `EXACT`/`EQUIVALENT` = conservative citation grade (completely
 formalization-covered source statements). `RELATED` = value-based scoped

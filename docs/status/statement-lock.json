@@ -1,7 +1,7 @@
 {
   "generated_by": "scripts/check_statement_freeze.py --write",
   "note": "Signature hashes of ledger-graded statements. A diff here is a schema event: say which way fidelity moved and re-grade the row.",
-  "count": 262,
+  "count": 267,
   "declarations": {
     "AISafetyAtlas.Causal.DecisionNetwork.mem_parents_utility_of_isUnmediated": {
       "file": "AISafetyAtlas/Causal/DecisionNetwork.lean",
@@ -414,6 +414,26 @@
     "AISafetyAtlas.Explainability.attribution_impossibility_weak": {
       "file": "AISafetyAtlas/Explainability.lean",
       "sha256": "a6a77f09f59854f1"
+    },
+    "AISafetyAtlas.Fairness.negativeScore_eq": {
+      "file": "AISafetyAtlas/Fairness/RiskAssignment.lean",
+      "sha256": "aeb3376f0d0f224f"
+    },
+    "AISafetyAtlas.Fairness.perfect_of_negativeScore_eq_zero": {
+      "file": "AISafetyAtlas/Fairness/RiskAssignment.lean",
+      "sha256": "4e0ed78b7f2779a9"
+    },
+    "AISafetyAtlas.Fairness.perfect_prediction_or_equal_base_rates": {
+      "file": "AISafetyAtlas/Fairness/RiskAssignment.lean",
+      "sha256": "45b91b5dc73e87b4"
+    },
+    "AISafetyAtlas.Fairness.print_perfectPrediction_of_populated": {
+      "file": "AISafetyAtlas/Fairness/RiskAssignment.lean",
+      "sha256": "8b0e0fa442a53e7c"
+    },
+    "AISafetyAtlas.Fairness.sum_score_eq_\u03bc": {
+      "file": "AISafetyAtlas/Fairness/RiskAssignment.lean",
+      "sha256": "9bbb0848a7ae7e19"
     },
     "AISafetyAtlas.Inference.PhysicalKnowledgeWitness.eq_target_on_of_refinesOn": {
       "file": "AISafetyAtlas/Inference/PhysicalKnowledge.lean",

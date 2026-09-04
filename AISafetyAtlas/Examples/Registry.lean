@@ -53,6 +53,11 @@ import AISafetyAtlas.Oversight.Debate
 #check AISafetyAtlas.Control.mutualInfo_prod_eq_of_sensorLoss_eq_zero
 #check AISafetyAtlas.SocialChoice.arrow
 #check AISafetyAtlas.SocialChoice.Utility.arrow
+#check AISafetyAtlas.Fairness.perfect_prediction_or_equal_base_rates
+#check AISafetyAtlas.Fairness.print_perfectPrediction_of_populated
+#check AISafetyAtlas.Fairness.sum_score_eq_μ
+#check AISafetyAtlas.Fairness.negativeScore_eq
+#check AISafetyAtlas.Fairness.perfect_of_negativeScore_eq_zero
 #check AISafetyAtlas.Preference.exists_planner
 #check AISafetyAtlas.Preference.exists_reward
 #check AISafetyAtlas.Preference.consistent_rewards_eq_univ

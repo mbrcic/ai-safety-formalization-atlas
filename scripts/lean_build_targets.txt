@@ -123,3 +123,5 @@ AISafetyAtlas.Oversight.Debate
 AISafetyAtlas.Examples.Analysis.PolynomialGenericity
 AISafetyAtlas.Examples.Analysis.NullImage
 AISafetyAtlas.Examples.Analysis.MaximalMinor
+AISafetyAtlas.Fairness.RiskAssignment
+AISafetyAtlas.Examples.Fairness.RiskAssignment
