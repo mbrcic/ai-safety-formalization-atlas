@@ -111,7 +111,9 @@ def main() -> int:
     parser.add_argument(
         "--ref",
         default=None,
-        help="baseline to compare against; defaults to the recorded baseline_commit",
+        help="baseline to compare against; by default the branch is first tested "
+        "against the record's completed_commit and passes if it descends from that "
+        "commit on the same toolchain, falling back to its baseline_commit",
     )
     arguments = parser.parse_args()
 

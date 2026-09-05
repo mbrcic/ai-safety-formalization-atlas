@@ -48,16 +48,41 @@ RECORD = {
 }
 
 
-def _install(monkeypatch, tmp_path, *, before: str, now: str, record, drift: str = DRIFT_OUTPUT):
+def _install(
+    monkeypatch,
+    tmp_path,
+    *,
+    before: str,
+    now: str,
+    record,
+    drift: str = DRIFT_OUTPUT,
+    at_completed: str | None = None,
+    ancestor: bool = True,
+):
     """Point the gate at a synthetic tree so no test depends on the real one.
 
     ``ROOT`` moves with ``BASELINE`` because the failure messages report the
     record's path relative to the root, and a baseline outside it raises
     ``ValueError`` before the test can see the exit code it came for.
+
+    ``toolchain_at`` answers per ref, not once for all of them. A single answer
+    cannot express the situation the ``completed_commit`` branch exists for --
+    the recorded baseline still on the old toolchain while the completed
+    migration is on the new one -- and a test that cannot express it passes
+    whether or not that branch is there.
     """
-    monkeypatch.setattr(gate, "toolchain_at", lambda _ref: before)
+    completed = None
+    if record is not None:
+        completed = record.get("migration", {}).get("completed_commit")
+
+    def _toolchain_at(ref):
+        if at_completed is not None and completed is not None and ref == completed:
+            return at_completed
+        return before
+
+    monkeypatch.setattr(gate, "toolchain_at", _toolchain_at)
     monkeypatch.setattr(gate, "working_toolchain", lambda: now)
-    monkeypatch.setattr(gate, "is_ancestor", lambda _ref: True)
+    monkeypatch.setattr(gate, "is_ancestor", lambda _ref: ancestor)
     monkeypatch.setattr(gate, "run_drift", lambda _ref: (drift, 1))
     monkeypatch.setattr(sys, "argv", ["check_migration_adjudicated.py"])
 
@@ -126,12 +151,60 @@ def test_an_ordinary_branch_passes(monkeypatch, tmp_path) -> None:
     assert gate.main() == 0
 
 
+DRIFT_AFTER_MIGRATION = (
+    "statement drift against main: 44 difference(s); 0 proof body/bodies also "
+    "rewritten (kernel-checked)\n"
+)
+
+
 def test_a_branch_after_the_completed_migration_passes(monkeypatch, tmp_path) -> None:
-    """New statements after the merged bump are ordinary feature work."""
+    """New statements after the merged bump are ordinary feature work.
+
+    This is the shape the gate shipped red on: ``baseline_commit`` still names
+    the pre-migration tree, so ``before != now`` and the plain equality shortcut
+    cannot fire. Only the ``completed_commit`` branch can pass this. The drift
+    count is deliberately wrong for the record, so falling through to the drift
+    comparison is an audible failure rather than a quiet pass -- delete the
+    ``completed_commit`` block and this test goes red, which is the whole point
+    of writing it this way.
+    """
     completed = json.loads(json.dumps(RECORD))
     completed["migration"]["completed_commit"] = "completed123"
-    _install(monkeypatch, tmp_path, before="v4.33.0", now="v4.33.0", record=completed)
+    _install(
+        monkeypatch,
+        tmp_path,
+        before="v4.31.0",
+        now="v4.33.0",
+        record=completed,
+        at_completed="v4.33.0",
+        drift=DRIFT_AFTER_MIGRATION,
+    )
     assert gate.main() == 0
+
+
+def test_a_branch_not_descended_from_the_completed_migration_still_refuses(
+    monkeypatch, tmp_path
+) -> None:
+    """The shortcut is for descendants of the merged bump, and only those.
+
+    A branch that bumps the toolchain on its own, without descending from the
+    adjudicated one, is a migration and still owes a verdict per difference. If
+    this passes, ``completed_commit`` has stopped being a fact about ancestry
+    and become an unconditional exemption.
+    """
+    completed = json.loads(json.dumps(RECORD))
+    completed["migration"]["completed_commit"] = "completed123"
+    _install(
+        monkeypatch,
+        tmp_path,
+        before="v4.31.0",
+        now="v4.33.0",
+        record=completed,
+        at_completed="v4.33.0",
+        drift=DRIFT_AFTER_MIGRATION,
+        ancestor=False,
+    )
+    assert gate.main() == 1
 
 
 def test_a_fully_adjudicated_bump_passes(monkeypatch, tmp_path) -> None:
