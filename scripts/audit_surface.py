@@ -216,7 +216,7 @@ SURFACES: tuple[Surface, ...] = (
     Surface(
         key="MAIS-O34",
         issue=4,
-        problem="prob:fiber",
+        problem="prob:starter-set(a)",
         layer=(
             "AISafetyAtlas/Conjectures/MAIS/O34.lean",
             "AISafetyAtlas/Conjectures/BinaryPair.lean",
