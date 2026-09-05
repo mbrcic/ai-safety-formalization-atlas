@@ -787,8 +787,64 @@
       "name": "Fairness impossibility theorem",
       "ai_bridge_status": "HUMAN_REVIEW",
       "informal_claim": "Common calibration and error-rate fairness criteria cannot all hold when base rates differ, subject to source assumptions.",
-      "formalizations": [],
-      "lean_artifact": null,
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declarations": [
+            "AISafetyAtlas.Fairness.perfect_prediction_or_equal_base_rates"
+          ],
+          "module": "AISafetyAtlas.Fairness.RiskAssignment",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        },
+        {
+          "framework": "Lean",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declarations": [
+            "AISafetyAtlas.Fairness.print_perfectPrediction_of_populated"
+          ],
+          "module": "AISafetyAtlas.Fairness.RiskAssignment",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Fairness.perfect_prediction_or_equal_base_rates",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Fairness/RiskAssignment.lean",
+            "line": 309
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Fairness.print_perfectPrediction_of_populated",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Fairness/RiskAssignment.lean",
+            "line": 358
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Fairness.sum_score_eq_μ",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Fairness/RiskAssignment.lean",
+            "line": 223
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Fairness.negativeScore_eq",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Fairness/RiskAssignment.lean",
+            "line": 230
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Fairness.perfect_of_negativeScore_eq_zero",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Fairness/RiskAssignment.lean",
+            "line": 284
+          }
+        ]
+      },
       "candidate_count": 0
     },
     "BY-011": {

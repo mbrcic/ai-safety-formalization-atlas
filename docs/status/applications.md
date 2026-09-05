@@ -306,6 +306,7 @@ it — which is what the entries above are.
 
 | Result | Declarations | Row |
 |---|---|---|
+| Fairness impossibility theorem | `AISafetyAtlas.Fairness.negativeScore_eq`<br>`AISafetyAtlas.Fairness.perfect_of_negativeScore_eq_zero`<br>`AISafetyAtlas.Fairness.perfect_prediction_or_equal_base_rates`<br>`AISafetyAtlas.Fairness.print_perfectPrediction_of_populated`<br>`AISafetyAtlas.Fairness.sum_score_eq_μ` | BY-010 |
 | Unprovability | `AISafetyAtlas.Logic.godel_first_incompleteness`<br>`AISafetyAtlas.Logic.godel_second_incompleteness` | BY-013 |
 | Undecidability | `AISafetyAtlas.Computability.halting_problem`<br>`AISafetyAtlas.Computability.halting_re`<br>`AISafetyAtlas.Computability.nonhalting_not_re` | BY-014 |
 | Chaitin incompleteness | `AISafetyAtlas.Logic.chaitin_bound`<br>`AISafetyAtlas.Logic.chaitin_incompleteness` | BY-015 |

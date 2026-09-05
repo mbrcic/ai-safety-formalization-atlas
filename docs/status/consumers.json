@@ -1,7 +1,7 @@
 {
   "counts": {
-    "declarations": 248,
-    "examples_only": 210,
+    "declarations": 253,
+    "examples_only": 215,
     "load_bearing": 38,
     "no_consumer": 0
   },
@@ -686,6 +686,43 @@
         "AISafetyAtlas.Examples.Registry"
       ],
       "origin": "LAND-ATTR-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Fairness.negativeScore_eq": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "BY-010",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Fairness.perfect_of_negativeScore_eq_zero": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "BY-010",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Fairness.perfect_prediction_or_equal_base_rates": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Fairness.RiskAssignment",
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "BY-010",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Fairness.print_perfectPrediction_of_populated": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Fairness.RiskAssignment",
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "BY-010",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Fairness.sum_score_eq_\u03bc": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "BY-010",
       "tier": "examples-only"
     },
     "AISafetyAtlas.Inference.PhysicalKnowledgeWitness.eq_target_on_of_refinesOn": {
@@ -1995,6 +2032,11 @@
     "AISafetyAtlas.Examples.Causal.\u0394_eq_half_sub_joint",
     "AISafetyAtlas.Explainability.attribution_impossibility",
     "AISafetyAtlas.Explainability.attribution_impossibility_weak",
+    "AISafetyAtlas.Fairness.negativeScore_eq",
+    "AISafetyAtlas.Fairness.perfect_of_negativeScore_eq_zero",
+    "AISafetyAtlas.Fairness.perfect_prediction_or_equal_base_rates",
+    "AISafetyAtlas.Fairness.print_perfectPrediction_of_populated",
+    "AISafetyAtlas.Fairness.sum_score_eq_\u03bc",
     "AISafetyAtlas.Inference.PhysicalKnowledgeWitness.eq_target_on_of_refinesOn",
     "AISafetyAtlas.Inference.PhysicallyKnows.weaklyInfers",
     "AISafetyAtlas.Inference.corollary20_ii",

@@ -2167,11 +2167,106 @@
         "survey-ref-034",
         "survey-ref-035"
       ],
-      "formalizations": [],
-      "lean_artifact": null,
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE",
+          "module": "AISafetyAtlas.Fairness.RiskAssignment",
+          "declaration": "AISafetyAtlas.Fairness.perfect_prediction_or_equal_base_rates",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "license": "Apache-2.0",
+          "content_source_refs": [
+            "survey-ref-034"
+          ],
+          "content_source_note": "Theorem 1.1 of arXiv:1609.05807v2, the exact characterization: an instance carrying a risk assignment that is calibrated within groups (A) and balanced for the negative (B) and positive (C) classes either allows perfect prediction or has equal base rates. Model and proof are Sections 1.1 and 2; the matrix notation of Section 2 is rendered as finite sums.",
+          "build_environment": "leanprover/lean4:v4.33.0; mathlib@db584cd6d46c92f209a44c0f1c829460d327499d",
+          "build_command": "lake build AISafetyAtlas.Fairness.RiskAssignment AISafetyAtlas.Examples.Fairness.RiskAssignment",
+          "scope_delta": {
+            "summary": "One quantifier, and it is forced. Print's perfect-prediction disjunct reads 'p_sigma equal to 0 or 1 for all sigma'; PerfectPrediction quantifies over the feature vectors somebody has. Section 1.1 never says whether a feature vector may have frequency zero in both groups, and the two readings disagree: at the permissive one the unrestricted sentence is false, refuted in-tree by Examples.Fairness.RiskAssignment.not_print_perfectPrediction on an instance meeting every hypothesis with p = 1/2 at an unpopulated vector; at the restrictive one nothing is lost, since print_perfectPrediction_of_populated recovers print's sentence verbatim and populated_print_perfectPrediction inhabits it. Print's hypotheses are otherwise taken unchanged, including the score upper bound v_b <= 1, which no step uses. Theorem 1.2, the approximate characterization, is not formalized.",
+            "evidence": "docs/provenance/kleinberg-fairness-tradeoffs.md"
+          }
+        },
+        {
+          "framework": "Lean",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE",
+          "module": "AISafetyAtlas.Fairness.RiskAssignment",
+          "declaration": "AISafetyAtlas.Fairness.print_perfectPrediction_of_populated",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "license": "Apache-2.0",
+          "content_source_refs": [
+            "survey-ref-034"
+          ],
+          "content_source_note": "Theorem 1.1's perfect-prediction disjunct at its printed quantifier -- 'p_sigma equal to 0 or 1 for all sigma' -- under the reading of Section 1.1 on which every feature vector belongs to somebody.",
+          "build_environment": "leanprover/lean4:v4.33.0; mathlib@db584cd6d46c92f209a44c0f1c829460d327499d",
+          "build_command": "lake build AISafetyAtlas.Fairness.RiskAssignment AISafetyAtlas.Examples.Fairness.RiskAssignment",
+          "scope_delta": {
+            "summary": "Print's sentence exactly, with the populated-instance hypothesis Section 1.1 leaves unwritten made explicit. It is a hypothesis print does not state, so the record is RELATED rather than a statement match; the hypothesis is inhabited by Examples.Fairness.RiskAssignment.populated.",
+            "evidence": "docs/provenance/kleinberg-fairness-tradeoffs.md"
+          }
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Fairness.perfect_prediction_or_equal_base_rates",
+            "type": "NEW_PROOF",
+            "source_declarations": [
+              "AISafetyAtlas.Fairness.Instance",
+              "AISafetyAtlas.Fairness.RiskAssignment",
+              "AISafetyAtlas.Fairness.Calibrated",
+              "AISafetyAtlas.Fairness.BalancedPositive",
+              "AISafetyAtlas.Fairness.BalancedNegative",
+              "AISafetyAtlas.Fairness.PerfectPrediction",
+              "AISafetyAtlas.Fairness.EqualBaseRates"
+            ]
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Fairness.print_perfectPrediction_of_populated",
+            "type": "NEW_PROOF",
+            "source_declarations": [
+              "AISafetyAtlas.Fairness.PerfectPrediction"
+            ]
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Fairness.sum_score_eq_μ",
+            "type": "NEW_PROOF",
+            "source_declarations": [
+              "AISafetyAtlas.Fairness.Calibrated",
+              "AISafetyAtlas.Fairness.sum_assignedPos"
+            ]
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Fairness.negativeScore_eq",
+            "type": "NEW_PROOF",
+            "source_declarations": [
+              "AISafetyAtlas.Fairness.sum_score_eq_μ",
+              "AISafetyAtlas.Fairness.assigned_eq_add"
+            ]
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Fairness.perfect_of_negativeScore_eq_zero",
+            "type": "NEW_PROOF",
+            "source_declarations": [
+              "AISafetyAtlas.Fairness.Calibrated",
+              "AISafetyAtlas.Fairness.negativeScore"
+            ]
+          }
+        ]
+      },
       "ai_safety_relevance": "The survey identifies this result as relevant to limits on AI; no direct real-system implication is asserted here.",
       "ai_bridge_status": "HUMAN_REVIEW",
-      "notes": "Statement-level equivalence to each cited source remains subject to source comparison.",
+      "public": {
+        "group": "Aggregation and multi-agent structure",
+        "title": "Fairness criteria that cannot coexist",
+        "attribution": "Kleinberg, Mullainathan & Raghavan",
+        "summary": "A risk score cannot be calibrated within both groups and equally accurate for both classes unless the groups have the same base rate or every case is already certain.",
+        "use": "Choosing between fairness criteria for a scoring system, when the groups being scored differ in how often the outcome occurs."
+      },
+      "notes": "Graded against survey-ref-034 only. survey-ref-035 (Saravanakumar, arXiv:2007.06024v2) attributes the statistical impossibility theorem to Kleinberg et al. (2016), then states a different causal claim over demographic parity, equalized odds and predictive parity: under its assumptions, a data-generating process satisfying one cannot satisfy either of the others. Figures 1--3 give a d-separation argument and Section 4.4 describes it as a proof, though the result is not isolated as a numbered theorem. The Lean records here formalize Kleinberg--Mullainathan--Raghavan's score-bin theorem, not that causal claim, and cite survey-ref-034 alone as their content source. Formalizing survey-ref-035 would require d-separation and its conditional-independence metrics, which this tree does not carry -- see docs/provenance/d-separation-build-or-depend.md.",
       "formal_library_search": {
         "searched_on": "2026-07-28",
         "evidence_file": "docs/provenance/formalization-search.json",

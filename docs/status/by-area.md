@@ -29,7 +29,7 @@ picking work. Grades and reproduction evidence:
 | [oversight](#oversight) | 7 | 1 |
 | [preference-inference](#preference-inference) | 1 | 1 |
 | [provability-logic](#provability-logic) | 7 | 1 |
-| [social-choice](#social-choice) | 2 | 6 |
+| [social-choice](#social-choice) | 3 | 5 |
 | [verification](#verification) | 4 | 4 |
 
 ## agent-incentives
@@ -307,6 +307,7 @@ Catalogued, no atlas Lean:
 | ID | Result | Atlas declarations |
 |---|---|---|
 | BY-007 | Arrow's impossibility theorem | `AISafetyAtlas.SocialChoice.Utility.arrow`<br>`AISafetyAtlas.SocialChoice.arrow` |
+| BY-010 | Fairness impossibility theorem | `AISafetyAtlas.Fairness.negativeScore_eq`<br>`AISafetyAtlas.Fairness.perfect_of_negativeScore_eq_zero`<br>`AISafetyAtlas.Fairness.perfect_prediction_or_equal_base_rates`<br>`AISafetyAtlas.Fairness.print_perfectPrediction_of_populated`<br>`AISafetyAtlas.Fairness.sum_score_eq_μ` |
 | LAND-GS-002 | Gibbard–Satterthwaite theorem (Lean / SocialChoiceLean) | `AISafetyAtlas.SocialChoice.gibbard_satterthwaite` |
 
 Catalogued, no atlas Lean:
@@ -315,7 +316,6 @@ Catalogued, no atlas Lean:
 |---|---|
 | BY-008 | Impossibility theorems in population ethics |
 | BY-009 | Impossibility theorems in AI alignment |
-| BY-010 | Fairness impossibility theorem |
 | LAND-GS-001 | Gibbard–Satterthwaite theorem |
 | LAND-PE-001 | Parfit mere addition / conditional normative reasoning (Åqvist E) |
 | LAND-TCS-ARROW-001 | Fourier-analytic Arrow theorem (TCSLib) |

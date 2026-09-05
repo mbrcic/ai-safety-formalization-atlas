@@ -201,3 +201,5 @@ AISafetyAtlas.Examples.SingularLearning.ChamberIntegral
 AISafetyAtlas.Examples.SingularLearning.MatrixNormBridge
 AISafetyAtlas.SingularLearning.MatrixAnalytic
 AISafetyAtlas.Examples.SingularLearning.MatrixAnalytic
+AISafetyAtlas.Fairness.RiskAssignment
+AISafetyAtlas.Examples.Fairness.RiskAssignment
