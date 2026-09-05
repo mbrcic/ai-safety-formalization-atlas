@@ -257,7 +257,7 @@
     },
     {
       "id": "NC-010",
-      "claim": "The Mathlib revision this repository pins carries neither Sylvester's rank inequality in any form -- only the upper bounds rank_mul_le, rank_mul_le_left, rank_mul_le_right and rank_comp_le on the rank of a product -- nor any measure-preserving currying statement for the Lebesgue measure on a finite product. AISafetyAtlas.SingularLearning.ReducedRank proves sylvester_finrank_le and rank_add_rank_le_of_mul; AISafetyAtlas.SingularLearning.Coordinates proves measurePreserving_curry_symm.",
+      "claim": "The Mathlib revision this repository pins lacks six results the MAIS-O70 layer needs, and this repository proves each of them. Two were checked when the layer landed: Sylvester's rank inequality in any form -- only the upper bounds rank_mul_le, rank_mul_le_left, rank_mul_le_right and rank_comp_le on the rank of a product are present -- and any measure-preserving currying statement for the Lebesgue measure on a finite product. AISafetyAtlas.SingularLearning.ReducedRank proves sylvester_finrank_le and rank_add_rank_le_of_mul; AISafetyAtlas.SingularLearning.Coordinates proves measurePreserving_curry_symm. The remaining four are recorded in the follow-up search below, which is what the claim about them rests on: no linear change of variables for the Bochner integral (AISafetyAtlas.SingularLearning.GaussianQuadratic proves integral_comp_linearMap), no Gaussian integral with a general positive-definite quadratic form (integral_exp_neg_quadraticForm, same module), no differentiability or analyticity statement for Matrix.det, Matrix.adjugate or Matrix.inv (AISafetyAtlas.SingularLearning.MatrixAnalytic), and no trace identity in Frobenius form (AISafetyAtlas.SingularLearning.GramSpectrum proves trace_mul_transpose). Each of the six is a packaged reusable statement absent from the pinned corpus, not a claim that the mathematics is new.",
       "asserted_in": [
         "conjectures.yaml, CONJ-026 prior_art",
         "AISafetyAtlas/SingularLearning/ReducedRank.lean, module docstring",
@@ -270,7 +270,41 @@
       ],
       "method": "Content search over the Mathlib revision recorded in this repository's lake-manifest.json, db584cd6d46c92f209a44c0f1c829460d327499d (toolchain v4.33.0), which is NOT the older snapshot recorded under corpora.mathlib in this file. Rank side: case-sensitive search for 'Sylvester' across all of Mathlib, plus a search of Mathlib/LinearAlgebra for any inequality of the shape 'rank _ + rank _ <= _ + rank _', plus enumeration of every rank-of-product lemma in Mathlib/LinearAlgebra/Matrix/Rank.lean and Mathlib/LinearAlgebra/Dimension/LinearMap.lean. Measure side: search of Mathlib/MeasureTheory and Mathlib/Probability for every theorem naming curry or piCurry, for co-occurrences of curry with MeasurePreserving or Measure.map, and enumeration of the volume_measurePreserving_* and measurePreserving_pi* families in Mathlib/MeasureTheory/Constructions/Pi.lean.",
       "found": "No Sylvester rank inequality in any form. The six files mentioning 'Sylvester' are Mathlib/RingTheory/Polynomial/Resultant/Basic.lean and Mathlib/RingTheory/Polynomial/DegreeLT.lean (the Sylvester matrix and resultant), Mathlib/Geometry/Euclidean/MongePoint.lean (Sylvester's theorem on the Monge point), Mathlib/LinearAlgebra/QuadraticForm/Signature.lean and Mathlib/LinearAlgebra/QuadraticForm/Real.lean (Sylvester's law of inertia), and Mathlib/LinearAlgebra/Matrix/HadamardMatrix.lean (Sylvester's Hadamard construction). None is a rank inequality. The rank-of-product lemmas found are upper bounds only: rank_mul_le, rank_mul_le_left, rank_mul_le_right (Matrix/Rank.lean:182,188,195) and rank_comp_le, rank_comp_le_left, rank_comp_le_right (Dimension/LinearMap.lean:53,70,76); the 'rank _ + rank _ <= _' hits in Mathlib/LinearAlgebra are quotient, product and submodule statements, not statements about a matrix product. On the measure side, the only Measure-level currying results are infinitePi_map_curry and infinitePi_map_curry_symm (Mathlib/Probability/ProductMeasure.lean:548,560), stated for the infinite product measure infinitePi and not for volume on a finite product; MeasurableEquiv.curry exists with no measure-preservation companion, and the volume_measurePreserving_* family covers piCongrLeft, arrowProdEquivProdArrow, sumPiEquivProdPi and piFinSuccAbove but not currying.",
-      "scope_limits": "One corpus, at the revision this repository pins, and that revision differs from the corpora.mathlib baseline snapshot recorded elsewhere in this file; the other five baseline corpora were not searched for this claim, and neither were PFR, Foundation, or any other package in the dependency tree. This is a keyword and shape search over source text, not a proof search: a statement carrying neither the name 'Sylvester' nor the arithmetic shape searched for, or one derivable in a few steps from lemmas that are present, would not have been found. It says nothing about unpinned third-party Lean developments, nor about Mathlib after this revision."
+      "scope_limits": "One corpus, at the revision this repository pins, and that revision differs from the corpora.mathlib baseline snapshot recorded elsewhere in this file; the other five baseline corpora were not searched for this claim, and neither were PFR, Foundation, or any other package in the dependency tree. This is a keyword and shape search over source text, not a proof search: a statement carrying neither the name 'Sylvester' nor the arithmetic shape searched for, or one derivable in a few steps from lemmas that are present, would not have been found. It says nothing about unpinned third-party Lean developments, nor about Mathlib after this revision.",
+      "followup_searches": [
+        {
+          "corpus": "mathlib",
+          "framework": "Lean 4 / Mathlib",
+          "repository": "https://github.com/leanprover-community/mathlib4.git",
+          "version": "db584cd6d46c92f209a44c0f1c829460d327499d",
+          "scope": "The whole Mathlib source tree at the revision this repository pins, db584cd6d46c92f209a44c0f1c829460d327499d (toolchain v4.33.0).",
+          "searched_on": "2026-09-05",
+          "searched_by": "mbrcic",
+          "queries": [
+            "integral_comp_linearMap",
+            "contDiff_matrix_det",
+            "analyticAt_matrix_det",
+            "analyticOnNhd_matrix_inv",
+            "trace_mul_transpose",
+            "integral_exp_neg_quadraticForm"
+          ],
+          "candidate_hits": {
+            "hit_count": 0,
+            "query_hit_counts": {
+              "integral_comp_linearMap": 0,
+              "contDiff_matrix_det": 0,
+              "analyticAt_matrix_det": 0,
+              "analyticOnNhd_matrix_inv": 0,
+              "trace_mul_transpose": 0,
+              "integral_exp_neg_quadraticForm": 0
+            },
+            "paths": [],
+            "matched_queries": []
+          },
+          "review": "Four further absences, each behind a name the result would carry if it were present, and each checked by enumerating the family Mathlib does have. (1) No linear change of variables for the Bochner integral: the integral_comp_* family is the scalar-dilation one (integral_comp_smul, integral_comp_inv_smul, integral_comp_mul_left and friends in MeasureTheory/Measure/Haar/NormedSpace.lean) plus polar coordinates; map_linearMap_addHaar_eq_smul_addHaar is the measure-level statement, with no integral-level companion. (2) No Gaussian integral with a general positive-definite quadratic form: Analysis/SpecialFunctions/Gaussian carries the isotropic GaussianFourier.integral_rexp_neg_mul_sq_norm and the one-dimensional integral_gaussian family, and Probability/Distributions/Gaussian/Multivariate.lean defines multivariateGaussian as a pushforward with no density, no determinant and no pdf. (3) No differentiability or analyticity of Matrix.det, Matrix.adjugate or Matrix.inv as maps of the entries: the chain stops at the topological Continuous.matrix_det (Topology/Instances/Matrix.lean:213), and no ContDiff or Analytic statement about any of the three exists. (4) No trace identity in Frobenius form: Matrix.trace_transpose_mul (Trace.lean:154) is the different statement trace (A^T B^T) = trace (A B), trace_conjTranspose_mul_self_eq_zero_iff is a vanishing criterion, and frobenius_norm_def is a norm statement under a scoped instance; nothing equates trace (X X^T) with the sum of squared entries.",
+          "scope_limits": "One corpus at one revision, keyword and shape search over source text rather than proof search. A statement carrying none of these names and none of the shapes enumerated -- or one derivable in a few steps from lemmas that are present, which is true of all four -- would not have been found. These are absences of a packaged, reusable statement, not of the mathematics."
+        }
+      ]
     }
   ],
   "results": {

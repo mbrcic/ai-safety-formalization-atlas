@@ -238,9 +238,11 @@ report whether a binder's proposition is satisfiable. See §8.
 
 ## 7. A reviewer's reading order
 
-The branch is 107 files against `origin/main`: 74 new Lean modules, 3 modified,
-plus ledgers, generated views and two reproduction scripts. Read it in five
-layers. The generated map of the whole layer is
+As merged at `87b4c4c` the change is 123 files: 78 new Lean modules and 3
+modified, plus ledgers, generated views and two reproduction scripts. The
+figures published against this work are the merged ones -- an earlier draft of
+this section counted 107 files and 74 modules, which was the branch before its
+last two rounds. Read it in five layers. The generated map of the whole layer is
 [`singularlearning-dependency-graph.md`](../status/singularlearning-dependency-graph.md);
 the layer's own overview docstring, which says in as many words what is still
 missing, is [`AISafetyAtlas/SingularLearning.lean`](../../AISafetyAtlas/SingularLearning.lean).
@@ -294,6 +296,30 @@ missing, is [`AISafetyAtlas/SingularLearning.lean`](../../AISafetyAtlas/Singular
    carries the semantic instances, the cross-check of the conditional chain
    against the unconditional `x²y²` germ, and the anti-vacuity witness. Then the
    [frontier manifest](o70-frontier-manifest.md), and this file.
+
+### How much of it a human has to read
+
+A conditional verification moves work rather than removing it, and the size of
+what it moves is measurable:
+
+```console
+python3 scripts/audit_surface.py --key MAIS-O70 --list
+```
+
+At `87b4c4c` that prints **343 statement lines, 1.5% of the layer's 22,627**:
+197 lines of conclusion -- the definitional closure of the graded statement
+inside the transcription modules, which answers *is this print's question?* --
+and 146 lines of assumed proposition and frozen `..._iff` body, which answers
+*are these the results they are named after?* Docstrings count, because a
+transcription is defended in its docstring and a reader deciding whether the
+statement is the printed one reads that argument, not only the binders.
+
+The number is a floor rather than a total: the closure stops at the
+transcription modules, so the chamber calculus a fuller reading would reach is
+not in it, and `--list` prints every declaration counted so the cut can be
+checked rather than trusted. The script exits non-zero when a listed
+declaration is gone, which is what keeps a published figure from going stale
+after a rename.
 
 ---
 
