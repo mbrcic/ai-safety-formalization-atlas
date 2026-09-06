@@ -575,8 +575,20 @@ python3 scripts/check_print_axioms.py
 lake build
 xargs lake build < scripts/lean_build_targets.txt
 lake exe axiom-audit --root AISafetyAtlas --modules-from AISafetyAtlas
+python3 scripts/check_audit_coverage.py
 python3 scripts/generate_declaration_index.py --write   # after adding or renaming
 ```
+
+`check_audit_coverage.py` is the one that catches what the other two axiom checks
+structurally cannot: a public declaration inside the regex audit's *stated* scope
+that the regex never collected, so it was neither audited nor recorded as skipped.
+It answers from the elaborated environment rather than from source text, which is
+why it is here and not in the cheap gate. A `deriving` clause is the usual way to
+trip it -- the generated instance helper has no source name a pattern can capture
+-- and the fix is either a better pattern in `check_print_axioms.py` or an entry
+in `docs/status/audit-coverage-exclusions.json` giving the reason. Excluding is
+not skipping: the exclusions are axiom-checked from the environment; the file
+records only that the *text* audit cannot reach them.
 
 `axiom-audit` is upstream -- inherited through Foundation's lakefile and in
 `lake-manifest.json` all along -- so it is the one axiom check here that this
