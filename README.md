@@ -538,6 +538,27 @@ adequacy, or system interpretation.
 Full tracks and rungs: [CONTRIBUTING.md](CONTRIBUTING.md). Issue forms for
 proposals that change coverage, dependencies, or the public Lean interface.
 
+### Tooling an agent may use
+
+None of this is required to contribute, and none of it is a dependency — the
+gate and CI use only what `lake-manifest.json` pins. It is listed because an
+agent that does not know these exist re-derives things the ecosystem already
+has.
+
+| tool | what it is | how to get it |
+|---|---|---|
+| [lean-lsp-mcp](https://github.com/oOo0oOo/lean-lsp-mcp) | the Lean language server over MCP: diagnostics, goal state, hover, references. Answers per file in seconds what `lake build` reports in minutes, which is the right tool after a rename | `uvx lean-lsp-mcp`, wired through a `.mcp.json` in the repository root. That file is **gitignored**, so each contributor writes their own: `{"mcpServers":{"lean-lsp":{"type":"stdio","command":"uvx","args":["lean-lsp-mcp"]}}}` |
+| [lean-explore](https://github.com/justincasher/lean-explore) | semantic search over Lean 4 declarations — by meaning, not by name | an MCP server; install per its README |
+| [LeanSearchClient](https://github.com/leanprover-community/LeanSearchClient) | [leansearch](https://leansearch.net) and [loogle](https://loogle.lean-lang.org) queries from inside Lean | **already a dependency** — in `lake-manifest.json`, no setup |
+| [lean4-skills](https://github.com/cameronfreer/lean4-skills) | "Lean 4 theorem proving skill and workflow pack for AI coding agents" — proof repair, golfing, axiom elimination. MIT | install into your agent harness; not published by this project and not required |
+
+**A semantic search is not evidence.** These indexes are not pinned by this
+repository, so a miss is not reproducible and cannot support a claim that a
+result does not exist.
+[`docs/agent/policy/lean-reuse-sources.md`](docs/agent/policy/lean-reuse-sources.md)
+says what such a claim may cite, and lists the libraries worth searching before
+you write a proof of your own.
+
 ## License
 
 Apache-2.0. Individual external formalizations remain subject to their own

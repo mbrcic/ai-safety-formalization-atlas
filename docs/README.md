@@ -35,6 +35,8 @@ and [`conjectures.yaml`](../conjectures.yaml).
   cannot know itself" conflates
 - [Joint observation model](guide/joint-observation-model.md) — what a coalition's evidence can decide
 - [AI safety literature map](guide/related-literature.md) — papers first: how the atlas addresses them
+- [Agent-instruction design](guide/agent-instruction-design.md) — dated evidence
+  and recommendations for maintainers; not default agent context
 
 ## Public project page
 
