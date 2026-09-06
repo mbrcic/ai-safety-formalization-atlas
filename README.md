@@ -512,7 +512,7 @@ has.
 | [lean-lsp-mcp](https://github.com/oOo0oOo/lean-lsp-mcp) | the Lean language server over MCP: diagnostics, goal state, hover, references. Answers per file in seconds what `lake build` reports in minutes, which is the right tool after a rename | `uvx lean-lsp-mcp`, wired through a `.mcp.json` in the repository root. That file is **gitignored**, so each contributor writes their own: `{"mcpServers":{"lean-lsp":{"type":"stdio","command":"uvx","args":["lean-lsp-mcp"]}}}` |
 | [lean-explore](https://github.com/justincasher/lean-explore) | semantic search over Lean 4 declarations — by meaning, not by name | an MCP server; install per its README |
 | [LeanSearchClient](https://github.com/leanprover-community/LeanSearchClient) | [leansearch](https://leansearch.net) and [loogle](https://loogle.lean-lang.org) queries from inside Lean | **already a dependency** — in `lake-manifest.json`, no setup |
-| `lean4` agent skills | proof repair, golfing, axiom elimination | harness- or editor-provided; not published by this project and not required |
+| [lean4-skills](https://github.com/cameronfreer/lean4-skills) | "Lean 4 theorem proving skill and workflow pack for AI coding agents" — proof repair, golfing, axiom elimination. MIT | install into your agent harness; not published by this project and not required |
 
 **A semantic search is not evidence.** These indexes are not pinned by this
 repository, so a miss is not reproducible and cannot support a claim that a

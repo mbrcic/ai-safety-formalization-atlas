@@ -20,13 +20,54 @@ names a place to look. This file is that list.
 
 ## Already on disk
 
-| what | where | note |
+Every entry in `lake-manifest.json`, at the revision recorded there, unpacked
+under `.lake/packages/`. A search here is free, offline and reproducible, and it
+is the search a `novelty_checks` record can actually cite.
+
+**Mathlib is one library among these, not a synonym for "the Lean library".**
+Several results this project needed were absent from Mathlib and present, or
+nearly present, in a sibling package.
+
+| package | what it holds | revision |
 |---|---|---|
-| Mathlib | `.lake/packages/mathlib` | **the revision that matters is the one in `lake-manifest.json`**, not the older snapshot recorded under `corpora.mathlib` in `formalization-search.json`. Two Mathlib revisions appear in this repository and they are not the same |
-| PFR, Foundation, AddCombi | `.lake/packages/` | additive combinatorics, first-order logic, entropy |
-| `plausible`, `aesop`, `batteries` | `.lake/packages/` | tactics; `plausible` is measured but banned from commits |
-| `LeanSearchClient` | `.lake/packages/` | already a dependency: `leansearch` and `loogle` queries from inside Lean |
-| vendored | `vendor/` | in-tree, with a `PROVENANCE.md` recording scope and pin |
+| [mathlib](https://github.com/leanprover-community/mathlib4) | the general mathematical library | `db584cd6d46c` |
+| [batteries](https://github.com/leanprover-community/batteries) | core data structures and lemmas below Mathlib | `4488d40d070b` |
+| [PFR](https://github.com/teorth/pfr) | the polynomial Freiman–Ruzsa development; entropy inequalities | `7d6404b79b11` |
+| [AddCombi](https://github.com/leanprover-community/add-combi) | additive combinatorics, a PFR dependency | `a78c4546df6d` |
+| [Foundation](https://github.com/FormalizedFormalLogic/Foundation) | first-order logic, provability, incompleteness | `30a16ffa93d7` |
+| [aesop](https://github.com/leanprover-community/aesop) | goal-directed proof search | `3448c0bcc5ce` |
+| [plausible](https://github.com/leanprover-community/plausible) | property testing. Measured, and **banned from commits** — see `lean-proving.md` | `b7eb3304aeae` |
+| [Qq](https://github.com/leanprover-community/quote4) | typed quotations for metaprogramming | `92c15be17b7c` |
+| [LeanSearchClient](https://github.com/leanprover-community/LeanSearchClient) | [leansearch](https://leansearch.net) and [loogle](https://loogle.lean-lang.org) from inside Lean | `5f4d51b81cbd` |
+
+The rest of the manifest is tooling rather than mathematics. It is listed
+because "is it a dependency?" is a question with one answer, and a partial list
+invites the wrong one:
+[axiom-audit](https://github.com/SnO2WMaN/axiom-audit) `827e715d3923` — the
+axiom check this project did not write;
+[checkdecls](https://github.com/PatrickMassot/checkdecls) `3d425859e73f`;
+[doc-gen4](https://github.com/leanprover/doc-gen4) `aceca4eeb5a7`;
+[import-graph](https://github.com/leanprover-community/import-graph) `16f02aa76428`;
+[ProofWidgets4](https://github.com/leanprover-community/ProofWidgets4) `4be2e3d5087e`;
+[leansqlite](https://github.com/leanprover/leansqlite) `6168b7549738`;
+[Cli](https://github.com/leanprover/lean4-cli) `6130a47896ce`;
+[UnicodeBasic](https://github.com/fgdorais/lean4-unicode-basic) `37e7d8cb7316`;
+[BibtexQuery](https://github.com/dupuisf/BibtexQuery) `852edafa268e`;
+[MD4Lean](https://github.com/acmepjz/md4lean) `31907cc18f48`.
+
+**The Mathlib revision that matters is the one above**, from
+`lake-manifest.json`. An older snapshot is recorded under `corpora.mathlib` in
+`docs/provenance/formalization-search.json`; the two are not the same, and a
+search citing the wrong one is not reproducible.
+
+## Vendored in this repository
+
+Already audited, with a `PROVENANCE.md` recording scope and pin.
+
+| tree | holds |
+|---|---|
+| `vendor/debate` | the doubly-efficient debate development |
+| `vendor/SocialChoiceLean` | the Gibbard–Satterthwaite development |
 
 ## Ecosystem candidates
 
