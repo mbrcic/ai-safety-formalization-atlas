@@ -28,9 +28,10 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
-          # check_migration_adjudicated.py reads lean-toolchain at the recorded
-          # baseline commit to decide whether this branch is a toolchain bump.
-          # A depth-1 checkout does not have that commit, and a check that
+          # check_migration_adjudicated.py reads lean-toolchain at the
+          # recorded completed_commit and baseline_commit to decide whether
+          # this branch is a toolchain bump, and tests ancestry against the
+          # first. A depth-1 checkout has neither commit, and a check that
           # cannot see its baseline would skip exactly when it is needed.
           fetch-depth: 0
       # The gate skips tests/ when pytest is absent so a contributor without it
