@@ -18,33 +18,43 @@ names a place to look. This file is that list.
 4. **The non-Lean corpora**, when the claim is that *no* formalization exists
    rather than that Lean lacks one.
 
-## Already on disk
+## Where the mathematics is
 
-Every entry in `lake-manifest.json`, at the revision recorded there, unpacked
-under `.lake/packages/`. A search here is free, offline and reproducible, and it
-is the search a `novelty_checks` record can actually cite.
+Reuse beats build, so the first question is *which library would already have
+this*. These are unpacked under `.lake/packages/` at the revision in
+`lake-manifest.json`, so searching them is free, offline and reproducible — and
+a search here is the kind a `novelty_checks` record can cite.
 
 **Mathlib is one library among these, not a synonym for "the Lean library".**
-Several results this project needed were absent from Mathlib and present, or
-nearly present, in a sibling package.
+More than one result this project needed was absent from Mathlib and present, or
+nearly present, next door. A contributor who reads "Mathlib does not have it" as
+"Lean does not have it" stops one library too early.
 
-| package | what it holds | revision |
+| if your result is about | look in | revision |
 |---|---|---|
-| [mathlib](https://github.com/leanprover-community/mathlib4) | the general mathematical library | `db584cd6d46c` |
-| [batteries](https://github.com/leanprover-community/batteries) | core data structures and lemmas below Mathlib | `4488d40d070b` |
-| [PFR](https://github.com/teorth/pfr) | the polynomial Freiman–Ruzsa development; entropy inequalities | `7d6404b79b11` |
-| [AddCombi](https://github.com/leanprover-community/add-combi) | additive combinatorics, a PFR dependency | `a78c4546df6d` |
-| [Foundation](https://github.com/FormalizedFormalLogic/Foundation) | first-order logic, provability, incompleteness | `30a16ffa93d7` |
-| [aesop](https://github.com/leanprover-community/aesop) | goal-directed proof search | `3448c0bcc5ce` |
-| [plausible](https://github.com/leanprover-community/plausible) | property testing. Measured, and **banned from commits** — see `lean-proving.md` | `b7eb3304aeae` |
-| [Qq](https://github.com/leanprover-community/quote4) | typed quotations for metaprogramming | `92c15be17b7c` |
-| [LeanSearchClient](https://github.com/leanprover-community/LeanSearchClient) | [leansearch](https://leansearch.net) and [loogle](https://loogle.lean-lang.org) from inside Lean | `5f4d51b81cbd` |
+| analysis, algebra, topology, measure theory, probability, linear algebra, order — the general body | [mathlib](https://github.com/leanprover-community/mathlib4) | `db584cd6d46c` |
+| lists, arrays, basic data structures and the lemmas below Mathlib | [batteries](https://github.com/leanprover-community/batteries) | `4488d40d070b` |
+| entropy inequalities, sumsets, the polynomial Freiman–Ruzsa development | [PFR](https://github.com/teorth/pfr) | `7d6404b79b11` |
+| additive combinatorics | [AddCombi](https://github.com/leanprover-community/add-combi) | `a78c4546df6d` |
+| first-order logic, provability, arithmetic, incompleteness | [Foundation](https://github.com/FormalizedFormalLogic/Foundation) | `30a16ffa93d7` |
+| doubly-efficient debate, interactive protocols | `vendor/debate` | in-tree, see its `PROVENANCE.md` |
+| social choice, Gibbard–Satterthwaite | `vendor/SocialChoiceLean` | in-tree, see its `PROVENANCE.md` |
 
-The rest of the manifest is tooling rather than mathematics. It is listed
-because "is it a dependency?" is a question with one answer, and a partial list
-invites the wrong one:
-[axiom-audit](https://github.com/SnO2WMaN/axiom-audit) `827e715d3923` — the
-axiom check this project did not write;
+The two `vendor/` trees are in this repository rather than under `.lake/`, and
+are already audited.
+
+## The rest of the manifest
+
+Tooling and tactics. **No mathematics to reuse lives here** — searching them for
+a theorem is a waste, and the split is the point of listing them apart. They are
+named in full because "is X a dependency?" has one answer and a partial list
+invites the wrong one.
+
+[aesop](https://github.com/leanprover-community/aesop) `3448c0bcc5ce`, goal-directed proof search;
+[plausible](https://github.com/leanprover-community/plausible) `b7eb3304aeae`, property testing — measured, and **banned from commits**, see `lean-proving.md`;
+[Qq](https://github.com/leanprover-community/quote4) `92c15be17b7c`, typed quotations;
+[LeanSearchClient](https://github.com/leanprover-community/LeanSearchClient) `5f4d51b81cbd`, which issues [leansearch](https://leansearch.net) and [loogle](https://loogle.lean-lang.org) queries from inside Lean — a way to search, not a thing to search;
+[axiom-audit](https://github.com/SnO2WMaN/axiom-audit) `827e715d3923`, the axiom check this project did not write;
 [checkdecls](https://github.com/PatrickMassot/checkdecls) `3d425859e73f`;
 [doc-gen4](https://github.com/leanprover/doc-gen4) `aceca4eeb5a7`;
 [import-graph](https://github.com/leanprover-community/import-graph) `16f02aa76428`;
@@ -59,15 +69,6 @@ axiom check this project did not write;
 `lake-manifest.json`. An older snapshot is recorded under `corpora.mathlib` in
 `docs/provenance/formalization-search.json`; the two are not the same, and a
 search citing the wrong one is not reproducible.
-
-## Vendored in this repository
-
-Already audited, with a `PROVENANCE.md` recording scope and pin.
-
-| tree | holds |
-|---|---|
-| `vendor/debate` | the doubly-efficient debate development |
-| `vendor/SocialChoiceLean` | the Gibbard–Satterthwaite development |
 
 ## Ecosystem candidates
 
