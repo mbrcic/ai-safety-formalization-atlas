@@ -52,6 +52,7 @@ KINDS: dict[str, dict] = {
             ("docs/agent/policy/context-budget.md", "Lean surface rule"),
             ("docs/agent/policy/lean-statement-freeze.md", "Statement freeze"),
             ("docs/agent/policy/lean-parsimony.md", "Parsimony (formalizations)"),
+            ("docs/agent/policy/lean-reuse-sources.md", "Search order"),
         ],
         "commands": [
             "python3 scripts/check_statement_freeze.py",

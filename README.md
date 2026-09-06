@@ -500,6 +500,26 @@ adequacy, or system interpretation.
 Full tracks and rungs: [CONTRIBUTING.md](CONTRIBUTING.md). Issue forms for
 proposals that change coverage, dependencies, or the public Lean interface.
 
+### Tooling an agent may use
+
+None of this is required to contribute, and none of it is a dependency — the
+gate and CI use only what `lake-manifest.json` pins. It is listed because an
+agent that does not know these exist re-derives things the ecosystem already
+has.
+
+| tool | what it is | how to get it |
+|---|---|---|
+| `lean-lsp-mcp` | the language server over MCP: diagnostics, goal state, hover, references. Answers per file in seconds what `lake build` reports in minutes, which is the right tool after a rename | `.mcp.json` in the repository root, which is **gitignored** — each contributor writes their own. `{"mcpServers":{"lean-lsp":{"type":"stdio","command":"uvx","args":["lean-lsp-mcp"]}}}` |
+| `lean-explore` | semantic search over Mathlib and other packages, by meaning rather than by name | an MCP server, installed outside this repository |
+| `LeanSearchClient` | `leansearch` and `loogle` queries from inside Lean | already a dependency; no setup |
+| `lean4` agent skills | proof repair, golfing, axiom elimination | editor- or harness-provided, outside this repository |
+
+**A semantic search is not evidence.** These indexes are not pinned by this
+repository, so a miss is not reproducible and cannot support a claim that a
+result does not exist. `docs/agent/policy/lean-reuse-sources.md` says what such
+a claim may cite, and lists the libraries worth searching before writing a proof
+of your own.
+
 ## License
 
 Apache-2.0. Individual external formalizations remain subject to their own

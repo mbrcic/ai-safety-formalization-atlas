@@ -18,6 +18,7 @@ performs the mechanical validation.
 | Context selection and repository navigation | [`context-budget.md`](docs/agent/policy/context-budget.md) |
 | Public Lean API | [`lean-public-api.md`](docs/agent/policy/lean-public-api.md) |
 | Lean parsimony | [`lean-parsimony.md`](docs/agent/policy/lean-parsimony.md) |
+| Where to search before building, and what a novelty claim may cite | [`lean-reuse-sources.md`](docs/agent/policy/lean-reuse-sources.md) |
 | Statement fidelity and toolchain drift | [`lean-statement-freeze.md`](docs/agent/policy/lean-statement-freeze.md) |
 | Coverage, ledgers, and bridges | [`ledger-coverage.md`](docs/agent/policy/ledger-coverage.md) |
 | Documentation ownership and generated views | [`ledger-documentation.md`](docs/agent/policy/ledger-documentation.md) |
