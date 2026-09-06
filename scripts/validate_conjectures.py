@@ -521,6 +521,30 @@ def main() -> None:
                 "so a graded source needs either a DOI locator or a content_sha256"
             )
 
+        # A directory may be cited as provenance — recording where a question
+        # was found is honest — but it may not be the thing a grade compares
+        # against. A statement-match grade relates two statements, and a curated
+        # list of pointers has none of its own.
+        #
+        # `validate_registry.py` has enforced this for registry rows all along.
+        # It was never enforced here, on the ledger where every MAIS row lives —
+        # so the one source most likely to invite the mistake, a master list of
+        # 92 numbered problems, was guarded on the wrong file. Every row happens
+        # to cite an agenda or an issue rather than the list, which is why
+        # nothing surfaced it.
+        directory_refs = sorted(
+            r for r in refs
+            if source_catalog[r].get("role") == "directory"
+        )
+        if directory_refs and not any(
+            source_catalog[r].get("role") != "directory" for r in refs
+        ):
+            fail(
+                f"{cid} is graded against directory sources {directory_refs} and "
+                "nothing else; grade against the work that states the problem, "
+                "not the list that points at it"
+            )
+
         scope = entry["source_scope"]
         if scope not in SOURCE_SCOPE_VALUES:
             fail(

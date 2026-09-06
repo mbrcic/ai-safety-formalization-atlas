@@ -119,10 +119,22 @@ hypothesis print actually carries — `def:local` speaks of a nonnegative
 **real-analytic** `K`, and meromorphic continuation of `ζ` is a consequence of
 resolution of singularities, which needs that analyticity.
 
-The bridge is therefore stated where it is used and at the germs it is used on,
-as `O70ZetaPoleBridge` in `Conjectures/MAIS/O70.lean`, alongside the other O70
-frontier. Those germs are polynomial, so the analyticity print asks for holds of
-them; and stating it there rather than here follows the same rule as
+A bridge is therefore stated where it is used and at the germs it is used on.
+There are two, and they are not interchangeable.
+
+`O70ZetaPoleBridge`, in `Conjectures/MAIS/O70.lean`, carries `MAIS-A6`'s
+`def:local`. It speaks of the loss itself, because MAIS-O70's points are exact
+factorizations where the loss vanishes and the centred band germ *is* the loss,
+and it consumes `HasExactLocalPair`.
+
+`A7ZetaVolumeBridge`, in `Conjectures/MAIS/A7Zeta.lean`, carries `MAIS-A7`'s
+`def:llc`. MAIS-O7's and MAIS-O77's points are saddles, where `L(w) ≠ 0` and the
+germ print integrates is `|L − L(w)|`; and it consumes `HasLocalVolumeOrder`,
+which is what those problems actually establish. Assuming the first would not
+deliver the second's consumers, at either the germ or the antecedent.
+
+Those germs are polynomial, so the analyticity print asks for holds of them; and
+stating each where it is consumed rather than here follows the same rule as
 `O70ExactLocalPairsExist` — formalize the specialized result that is consumed,
 not a general theory.
 -/

@@ -10,7 +10,7 @@ one.
 
 An open conjecture asserts nothing — defining a `Prop` is not claiming it, and
 that is the whole point of the mechanism. **Ten conjecture records are currently
-present: three open and seven resolved**, and each resolved row
+present: three open and eight resolved**, and each resolved row
 names the proof that settled it.
 
 ## Four kinds of row, because not every printed problem is a conjecture
@@ -37,7 +37,7 @@ transcription is recorded in
 [`mais-o38-transcription.md`](../provenance/mais-o38-transcription.md).
 The O70 work has its own public review package:
 [`conditional verification`](../provenance/mais-o70-conditional-verification.md),
-[`frontier manifest`](../provenance/o70-frontier-manifest.md), and
+[`frontier manifest`](../provenance/frontier-manifest.md), and
 [`fidelity adjudications`](../provenance/mais-o70-fidelity-adjudications.md).
 
 | `kind` | What the source does | What `lean` points at | Resolved by |
@@ -99,7 +99,7 @@ row uses it today; the positional `answer_admissible` list is what it is checked
 against, so it cannot be asserted of a row whose clauses agree.
 
 `scripts/validate_conjectures.py` prints the breakdown rather than one number,
-because *"eight recorded"* over a 15-row file is how this confusion started. Counts elsewhere in this guide are over conjecture rows — kinds
+because *"eight recorded"* over a 17-row file is how this confusion started. Counts elsewhere in this guide are over conjecture rows — kinds
 `claim` and `answer` — since a blocked row is not an open conjecture.
 
 ## Who proposed what

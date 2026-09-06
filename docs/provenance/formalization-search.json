@@ -305,6 +305,310 @@
           "scope_limits": "One corpus at one revision, keyword and shape search over source text rather than proof search. A statement carrying none of these names and none of the shapes enumerated -- or one derivable in a few steps from lemmas that are present, which is true of all four -- would not have been found. These are absences of a packaged, reusable statement, not of the mathematics."
         }
       ]
+    },
+    {
+      "id": "NC-011",
+      "claim": "The real Wishart density and the Jacobian of the eigenvalue decomposition of a symmetric matrix -- the two classical inputs the MAIS issue #3 candidate cites for its Proposition 8.11, and which AISafetyAtlas.SingularLearning.EigenvalueLawStatement assumes in their place -- are absent from all six baseline formalization corpora. So the O70-EIGEN-LAW frontier is held for availability, not merely for effort: no corpus supplies the result and none supplies the apparatus a proof would run on, namely Haar measure on the orthogonal group together with a coarea or change-of-variables formula for the eigendecomposition. This is a claim about the corpora, not about the mathematics, which is classical and dates to Wishart (1928) and James (1954).",
+      "asserted_in": [
+        "scripts/check_frontier_evidence.py, FRONTIERS registry, O70-EIGEN-LAW reason",
+        "docs/provenance/o70-frontier-manifest.md, O70-EIGEN-LAW section",
+        "AISafetyAtlas/SingularLearning/EigenvalueLaw.lean, module docstring"
+      ],
+      "searched_on": "2026-09-06",
+      "searched_by": "mbrcic",
+      "corpora": [
+        "mathlib",
+        "isabelle-afp",
+        "rocq-undecidability",
+        "hol4",
+        "hol-light",
+        "agda-stdlib"
+      ],
+      "method": "Whole-phrase search over the source text of each corpus at the pinned revision, for seven phrases naming the result or its apparatus: Wishart, Wishart density, joint eigenvalue density, eigenvalue Jacobian, multivariate gamma, coarea formula, Weyl integration formula. Four corpora were searched as shallow Git checkouts at the recorded revision; the Isabelle AFP was searched as the extracted afp-2026-02-06 release whose archive sha256 b059edd46073479ee8dde45004c2346a7365e5d94cded49d27257cfea66c8879 was recomputed on download and matched the corpora record. Mathlib was searched at db584cd6d46c92f209a44c0f1c829460d327499d, the revision this repository pins, which is NOT the older snapshot recorded under corpora.mathlib.",
+      "found": "Zero hits for the result in every corpus; the single recorded candidate is a false positive, identified below. Mathlib has no Wishart, no coarea or area formula, no eigenvalue-decomposition Jacobian, and no Haar measure on the orthogonal group usable for this; its one Selberg file is NumberTheory/SelbergSieve.lean, unrelated. The Isabelle AFP at the pinned release has 962 entries and 10673 theory files with zero occurrences of Wishart, coarea, joint eigenvalue density or multivariate gamma; Haar appears in two entries, Topological_Groups and Types_Tableaus_and_Goedels_God, neither about matrix ensembles, and no AFP entry concerns random matrices. The Rocq undecidability library, HOL4 and the Agda standard library have zero hits for every phrase. HOL Lights one hit is Multivariate/gamma.ml, matched on its path rather than its content because the search normalises the path into the haystack alongside the text; the file is headed \"The real and complex gamma functions and Euler-Mascheroni constant\" and is the single-variable Gamma function filed under HOL Lights Multivariate directory, not the multivariate gamma function Gamma_p that normalises the Wishart density. A wider grep of HOL Light for terms outside the seven recorded queries found only the Vandermonde determinant in 100/transcendence.ml, a step in Lindemann-Weierstrass, and the Beurling-Selberg majorant in Probability/characteristic_functions.ml, which is Fourier analysis and not the Selberg integral. A separate survey of public Lean outside the corpora, recorded in scope_limits rather than here because no corpus mechanism holds it, found the same absence with one signal: TauCetiProject/TauCetiRoadmap StandardDistributions/Suggested.lean states nonsingularWishartMeasure and choleskyJacobianDensity as targets, every one of them sorry, and even that roadmap reaches the density on symmetric matrices by the Cholesky route without stating the eigenvalue Jacobian.",
+      "scope_limits": "Six corpora at their pinned revisions, whole-phrase keyword search over source text rather than proof search: a formalization carrying none of the seven phrases, or one assembled in a few steps from lemmas that are present, would not have been found. The claim is the absence of a packaged, reusable statement, not of the mathematics. The non-corpus Lean survey behind the TauCeti observation in found covers GitHub code search over public Lean plus the file trees of TauCetiProject/TauCeti at d7bf8387e88bbf5f262414f5e112d480b24b2519, StatLean/Stat-Lean, dududuguo/HighDimProb, YuanheZ/lean-stat-learning-theory and lecopivo/SciLean; it is neither pinned nor reproducible from this repository and is recorded as a signal, not as evidence. Nothing here says whether EigenvalueLawStatement is true, and nothing here is an inhabitant of it.",
+      "followup_searches": [
+        {
+          "corpus": "mathlib",
+          "framework": "Lean 4 / Mathlib",
+          "repository": "https://github.com/leanprover-community/mathlib4.git",
+          "version": "db584cd6d46c92f209a44c0f1c829460d327499d",
+          "pinned_by": "git checkout",
+          "scope": "The whole Mathlib source tree at the revision this repository pins, db584cd6d46c92f209a44c0f1c829460d327499d (toolchain v4.33.0).",
+          "searched_on": "2026-09-06",
+          "searched_by": "mbrcic",
+          "queries": [
+            "Wishart",
+            "Wishart density",
+            "joint eigenvalue density",
+            "eigenvalue Jacobian",
+            "multivariate gamma",
+            "coarea formula",
+            "Weyl integration formula"
+          ],
+          "candidate_hits": {
+            "hit_count": 0,
+            "query_hit_counts": {
+              "Wishart": 0,
+              "Wishart density": 0,
+              "joint eigenvalue density": 0,
+              "eigenvalue Jacobian": 0,
+              "multivariate gamma": 0,
+              "coarea formula": 0,
+              "Weyl integration formula": 0
+            },
+            "paths": [],
+            "matched_queries": []
+          },
+          "review": "No hit. Mathlib carries neither the Wishart density nor the eigenvalue-decomposition Jacobian, and carries neither of the two things a proof of either would need: there is no coarea or area formula anywhere in MeasureTheory, and no Haar measure on the orthogonal group as a measure a change of variables could run over. The nearest present material is Analysis/Matrix/Spectrum.lean, which diagonalises a Hermitian matrix without any measure-theoretic Jacobian, and Probability/Distributions/Gaussian/Multivariate.lean, which defines the multivariate Gaussian as a pushforward with no density and no determinant.",
+          "scope_limits": "One corpus at one revision, whole-phrase search over source text. Says nothing about Mathlib after this revision, nor about unpinned Lean developments."
+        },
+        {
+          "corpus": "isabelle-afp",
+          "framework": "Isabelle/HOL",
+          "repository": "https://isa-afp.org/",
+          "version": "AFP release 2026-02-06",
+          "pinned_by": "archive sha256 recorded in corpora",
+          "scope": "All entry sources of the extracted afp-2026-02-06 release: 962 entries, 10673 .thy and .ML files.",
+          "searched_on": "2026-09-06",
+          "searched_by": "mbrcic",
+          "queries": [
+            "Wishart",
+            "Wishart density",
+            "joint eigenvalue density",
+            "eigenvalue Jacobian",
+            "multivariate gamma",
+            "coarea formula",
+            "Weyl integration formula"
+          ],
+          "candidate_hits": {
+            "hit_count": 0,
+            "query_hit_counts": {
+              "Wishart": 0,
+              "Wishart density": 0,
+              "joint eigenvalue density": 0,
+              "eigenvalue Jacobian": 0,
+              "multivariate gamma": 0,
+              "coarea formula": 0,
+              "Weyl integration formula": 0
+            },
+            "paths": [],
+            "matched_queries": []
+          },
+          "review": "No hit. The AFP has no random-matrix entry at all. Haar occurs in exactly two entries, Topological_Groups and Types_Tableaus_and_Goedels_God, neither of which concerns matrix ensembles, and the AFP has no coarea formula. The entries whose names suggest multivariate statistics -- Stochastic_Matrices, Matrix, Gauss_Jordan, Probability_Inequality_Completeness -- are linear algebra or discrete probability, not continuous multivariate distribution theory.",
+          "scope_limits": "One release, identified by the archive digest already recorded under corpora and recomputed on download. Whole-phrase search over entry source text, not proof search."
+        },
+        {
+          "corpus": "rocq-undecidability",
+          "framework": "Rocq/Coq",
+          "repository": "https://github.com/uds-psl/coq-library-undecidability.git",
+          "version": "c7257b736763d7b2bc3bd25ac47d5fb7ce749c9c",
+          "pinned_by": "git checkout",
+          "scope": "The whole coq-library-undecidability source tree at the pinned revision.",
+          "searched_on": "2026-09-06",
+          "searched_by": "mbrcic",
+          "queries": [
+            "Wishart",
+            "Wishart density",
+            "joint eigenvalue density",
+            "eigenvalue Jacobian",
+            "multivariate gamma",
+            "coarea formula",
+            "Weyl integration formula"
+          ],
+          "candidate_hits": {
+            "hit_count": 0,
+            "query_hit_counts": {
+              "Wishart": 0,
+              "Wishart density": 0,
+              "joint eigenvalue density": 0,
+              "eigenvalue Jacobian": 0,
+              "multivariate gamma": 0,
+              "coarea formula": 0,
+              "Weyl integration formula": 0
+            },
+            "paths": [],
+            "matched_queries": []
+          },
+          "review": "No hit for any of the seven phrases. Expected: the library is a computability development and contains no measure theory.",
+          "scope_limits": "One corpus at one revision; whole-phrase search over source text."
+        },
+        {
+          "corpus": "hol4",
+          "framework": "HOL4",
+          "repository": "https://github.com/HOL-Theorem-Prover/HOL.git",
+          "version": "3e2cd21c3c465ecd77540b1eb1146b4916158cdf",
+          "pinned_by": "git checkout",
+          "scope": "The whole HOL source tree at the pinned revision.",
+          "searched_on": "2026-09-06",
+          "searched_by": "mbrcic",
+          "queries": [
+            "Wishart",
+            "Wishart density",
+            "joint eigenvalue density",
+            "eigenvalue Jacobian",
+            "multivariate gamma",
+            "coarea formula",
+            "Weyl integration formula"
+          ],
+          "candidate_hits": {
+            "hit_count": 0,
+            "query_hit_counts": {
+              "Wishart": 0,
+              "Wishart density": 0,
+              "joint eigenvalue density": 0,
+              "eigenvalue Jacobian": 0,
+              "multivariate gamma": 0,
+              "coarea formula": 0,
+              "Weyl integration formula": 0
+            },
+            "paths": [],
+            "matched_queries": []
+          },
+          "review": "No hit for any of the seven phrases, across the whole tree including the probability and measure-theory developments.",
+          "scope_limits": "One corpus at one revision; whole-phrase search over source text."
+        },
+        {
+          "corpus": "agda-stdlib",
+          "framework": "Agda",
+          "repository": "https://github.com/agda/agda-stdlib.git",
+          "version": "5abbf1dc9423377df4db7a10f869665e53c4f13c",
+          "pinned_by": "git checkout",
+          "scope": "The whole agda-stdlib source tree at the pinned revision.",
+          "searched_on": "2026-09-06",
+          "searched_by": "mbrcic",
+          "queries": [
+            "Wishart",
+            "Wishart density",
+            "joint eigenvalue density",
+            "eigenvalue Jacobian",
+            "multivariate gamma",
+            "coarea formula",
+            "Weyl integration formula"
+          ],
+          "candidate_hits": {
+            "hit_count": 0,
+            "query_hit_counts": {
+              "Wishart": 0,
+              "Wishart density": 0,
+              "joint eigenvalue density": 0,
+              "eigenvalue Jacobian": 0,
+              "multivariate gamma": 0,
+              "coarea formula": 0,
+              "Weyl integration formula": 0
+            },
+            "paths": [],
+            "matched_queries": []
+          },
+          "review": "No hit for any of the seven phrases. Expected: the standard library has no measure theory.",
+          "scope_limits": "One corpus at one revision; whole-phrase search over source text."
+        },
+        {
+          "corpus": "hol-light",
+          "framework": "HOL Light",
+          "repository": "https://github.com/jrh13/hol-light.git",
+          "version": "b4caefbb21638893e0d74085b1209bff7b03bb3d",
+          "pinned_by": "git checkout",
+          "scope": "The whole hol-light source tree at the pinned revision, including Multivariate/ and Probability/.",
+          "searched_on": "2026-09-06",
+          "searched_by": "mbrcic",
+          "queries": [
+            "Wishart",
+            "Wishart density",
+            "joint eigenvalue density",
+            "eigenvalue Jacobian",
+            "multivariate gamma",
+            "coarea formula",
+            "Weyl integration formula"
+          ],
+          "candidate_hits": {
+            "hit_count": 1,
+            "query_hit_counts": {
+              "Wishart": 0,
+              "Wishart density": 0,
+              "joint eigenvalue density": 0,
+              "eigenvalue Jacobian": 0,
+              "multivariate gamma": 1,
+              "coarea formula": 0,
+              "Weyl integration formula": 0
+            },
+            "paths": [
+              "Multivariate/gamma.ml"
+            ],
+            "matched_queries": [
+              "multivariate gamma"
+            ]
+          },
+          "review": "No hit for the result. The one recorded candidate, Multivariate/gamma.ml, is a path match and not a content match: the search normalises each file path into the haystack with its text, so the phrase multivariate gamma is matched by the directory name Multivariate followed by the file name gamma.ml. That file is headed \"The real and complex gamma functions and Euler-Mascheroni constant\" and develops the single-variable Gamma function; the multivariate gamma function Gamma_p, which is what normalises the Wishart density, does not appear in HOL Light. HOL Light has the most developed multivariate analysis of the five non-Lean corpora, so this is the corpus where a genuine hit was most plausible.",
+          "scope_limits": "One corpus at one revision; whole-phrase search over source text and file paths, which is what produced the single false positive recorded here."
+        }
+      ]
+    },
+    {
+      "id": "NC-012",
+      "claim": "The Mathlib revision this repository pins carries neither of the two analytic results MAIS-O77(b) needs, and this repository proves both. First, a Gromoll--Meyer splitting along an arbitrary subspace whose Hessian block is nonsingular -- print's equation (9), L - L(w) = Q_alpha(xi) + g(zeta) with g(0) = 0 and no nondegeneracy asked of g -- proved here as exists_gromoll_meyer_splitting at C-infinity regularity. Second, print's Lemma 2 at its stated generality, the two-sided sublevel volume of an arbitrary nondegenerate indefinite quadratic form in n >= 3 variables perturbed by an arbitrary continuous germ vanishing at the origin, proved here as hasLocalVolumeOrder_abs_matrixQuadForm_add_germ. This is a claim about a pinned corpus, not a claim that the mathematics is new: both are classical, and the second consumes Mathlib's own Sylvester law of inertia, which is present.",
+      "asserted_in": [
+        "STATE.md, the singular-learning section",
+        "registry.yaml, MAIS issue #12 solution record",
+        "conjectures.yaml, CONJ-028 prior_art"
+      ],
+      "searched_on": "2026-09-06",
+      "searched_by": "mbrcic",
+      "corpora": [
+        "mathlib"
+      ],
+      "method": "Case-insensitive whole-phrase search over every .lean file of the Mathlib source tree at the revision this repository pins in lake-manifest.json, db584cd6d46c92f209a44c0f1c829460d327499d (toolchain v4.33.0), which is NOT the older snapshot recorded under corpora.mathlib in this file. Every hit was read.",
+      "found": "Gromoll, Morse lemma, Morse-Bott and MorseBott return zero files. The two splitting lemma hits are the split-exact-sequence lemma, unrelated to a critical-point splitting. The three sublevel hits state no volume asymptotic. law of inertia is present and is used by this repository rather than reproved -- recorded because a search finding nothing at all is the signature of a search run over the wrong tree.",
+      "scope_limits": "Mathlib only, and phrase-based. It does NOT cover the five other baseline corpora, so it cannot support a claim that either result is absent from every formalization corpus -- only from the Mathlib revision pinned here. NC-011 is the six-corpus sweep and covers a different proposition. A Mathlib declaration proving either statement under a name none of these phrases matches would not have been found.",
+      "followup_searches": [
+        {
+          "corpus": "mathlib",
+          "framework": "Lean",
+          "repository": "https://github.com/leanprover-community/mathlib4.git",
+          "version": "db584cd6d46c92f209a44c0f1c829460d327499d",
+          "pinned_by": "git checkout",
+          "scope": "Mathlib source tree, all .lean files",
+          "searched_on": "2026-09-06",
+          "searched_by": "mbrcic",
+          "queries": [
+            "Gromoll",
+            "splitting lemma",
+            "Morse lemma",
+            "Morse-Bott",
+            "MorseBott",
+            "sublevel",
+            "law of inertia"
+          ],
+          "candidate_hits": {
+            "hit_count": 7,
+            "query_hit_counts": {
+              "Gromoll": 0,
+              "splitting lemma": 3,
+              "Morse lemma": 0,
+              "Morse-Bott": 0,
+              "MorseBott": 0,
+              "sublevel": 2,
+              "law of inertia": 2
+            },
+            "paths": [
+              "Mathlib/Algebra/Exact/Basic.lean",
+              "Mathlib/CategoryTheory/Abelian/EpiWithInjectiveKernel.lean",
+              "Mathlib/CategoryTheory/Preadditive/Biproducts.lean",
+              "Mathlib/LinearAlgebra/QuadraticForm/Real.lean",
+              "Mathlib/LinearAlgebra/QuadraticForm/Signature.lean",
+              "Mathlib/Topology/Semicontinuity/Basic.lean",
+              "Mathlib/Topology/Sion.lean"
+            ],
+            "matched_queries": [
+              "splitting lemma",
+              "sublevel",
+              "law of inertia"
+            ]
+          },
+          "review": "No Gromoll--Meyer or Morse splitting in any form, and no sublevel-volume asymptotic. Sylvester's law of inertia is present and is consumed, not reproved.",
+          "scope_limits": "Phrase search over one corpus at one revision; it does not establish absence elsewhere, nor absence under a differently named statement."
+        }
+      ]
     }
   ],
   "results": {

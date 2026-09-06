@@ -14,6 +14,10 @@ public import AISafetyAtlas.Examples.Conjectures.MAIS.O38
 public import AISafetyAtlas.Examples.Conjectures.MAIS.O38Candidate
 public import AISafetyAtlas.Examples.Conjectures.MAIS.O70
 public import AISafetyAtlas.Examples.Conjectures.MAIS.O70Proof
+public import AISafetyAtlas.Examples.Conjectures.MAIS.O7
+public import AISafetyAtlas.Examples.Conjectures.MAIS.O77
+public import AISafetyAtlas.Examples.Conjectures.MAIS.O77Chart
+public import AISafetyAtlas.Examples.Conjectures.MAIS.A7Zeta
 
 /-!
 # Non-vacuity checks for the MAIS statement layer

@@ -52,6 +52,11 @@ SCANNED = [
     # asserting MAIS-O29(b) was retracted a day after a bound at print's own
     # quantifier landed. A summary that names theorems is a grading artifact.
     ROOT / "STATE.md",
+    # Generated, but scanned rather than trusted: its prose is copied from
+    # `mais_solution` blocks in `registry.yaml`, which no other check reads for
+    # declaration names. A verdict on someone else's mathematics that cites a
+    # theorem which no longer exists is exactly the failure this catches.
+    ROOT / "docs" / "status" / "mais-solutions.md",
 ]
 
 # Ledger and registry field names. These are schema, not declarations.

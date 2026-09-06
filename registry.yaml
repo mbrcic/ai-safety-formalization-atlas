@@ -672,7 +672,15 @@
       "role": "work",
       "retrieved": "2026-08-20",
       "content_sha256": "f425da83395b457feb5615c9beed703675a977967890ebe1b97dd61efdd0b328",
-      "notes": "The candidate complete criterion for MAIS-O34 part (a), transcribed by a conjecture row wherever that row is recorded, and the origin of the two-variable construction MAIS issue #6 credits. Part (b) — the first-order radius constant, the singular classification, and the graph-threshold program — is not transcribed. The issue's only author comment adds no mathematical claim: it says that LaTeX may not render on mobile and directs the reader to the PDF. Its body is preserved separately in docs/provenance/mais-source-pin.md for completeness, but it is not part of the graded candidate. Issue bodies are editable in place and carry no addressable revision, so the recorded hash is the body as read on 2026-08-20; an edit invalidates the grading resting on it. Open and unreviewed at that reading."
+      "notes": "The candidate complete criterion for MAIS-O34 part (a), transcribed by a conjecture row wherever that row is recorded, and the origin of the two-variable construction MAIS issue #6 credits. Part (b) — the first-order radius constant, the singular classification, and the graph-threshold program — is not transcribed. The issue's only author comment adds no mathematical claim: it says that LaTeX may not render on mobile and directs the reader to the PDF. Its body is preserved separately in docs/provenance/mais-source-pin.md for completeness, but it is not part of the graded candidate. Issue bodies are editable in place and carry no addressable revision, so the recorded hash is the body as read on 2026-08-20; an edit invalidates the grading resting on it. Open and unreviewed at that reading.",
+      "mais_solution": {
+        "problem": "MAIS-O34(a)",
+        "filed_by": "Robby955",
+        "verdict": "CHECKED",
+        "candidate_lean": "AISafetyAtlas.Conjectures.MAIS.maisO34_exactFiberCandidate",
+        "submitted": "A complete criterion for when the global behavioural fibre is a singleton, on the source's real three-parameter two-variable chart, together with a first-order radius constant, a singular classification, and a graph-threshold program.",
+        "checked": "The criterion is transcribed at the source's own quantifiers and proved, as maisO34_exactFiberCandidate_holds. Separately the atlas settles the margin-sufficiency subquestion negatively: positive margin alone does not force a singleton fibre. The rest of part (b) — the radius constant, the singular classification, the graph-threshold program — is not transcribed and carries no verdict here."
+      }
     },
     "mais-issue-6-2026": {
       "citation": "Math for AI Safety (MAIS), issue #6, “full solution pending review” for MAIS-O23, filed 2026-08-04.",
@@ -680,7 +688,14 @@
       "role": "work",
       "retrieved": "2026-08-19",
       "content_sha256": "4fd639c4322a3a3bd1b27fe6f14ee3de902961e0013485395e461d7cdc739a9b",
-      "notes": "The construction the atlas checks: three models on two binary variables with a common behavioral transform. Open and unreviewed when this row was written. The issue credits the prior two-variable construction in MAIS issue #4 (MAIS-O34) by a different author and states its own contribution as making the MAIS-O23 consequence explicit across all three graphs. The atlas claims no priority and does not assert the issue's conclusion; what is recorded here is that a stated part of it machine-checks. Body sha256 as read 2026-08-20; issue bodies are editable in place, so an edit invalidates this grading."
+      "notes": "The construction the atlas checks: three models on two binary variables with a common behavioral transform. Open and unreviewed when this row was written. The issue credits the prior two-variable construction in MAIS issue #4 (MAIS-O34) by a different author and states its own contribution as making the MAIS-O23 consequence explicit across all three graphs. The atlas claims no priority and does not assert the issue's conclusion; what is recorded here is that a stated part of it machine-checks. Body sha256 as read 2026-08-20; issue bodies are editable in place, so an edit invalidates this grading.",
+      "mais_solution": {
+        "problem": "MAIS-O23",
+        "verdict": "PARTIAL",
+        "candidate_lean": "AISafetyAtlas.Examples.Causal.margin_class_not_identifiable",
+        "submitted": "Filed as a full solution pending review: three models on two binary variables sharing a behavioural transform, making the MAIS-O23 consequence explicit across all three graphs.",
+        "checked": "The construction machine-checks, and the atlas goes past it: a positive-dimensional colliding family rather than a point, a narrower two-graph reading that does not depend on the edgeless model being admissible, and transport to the source's real chart rather than a rational restriction. What is verified is narrower than what is claimed. A collision at one skeleton is a possibility result, not the general question, so the atlas does not endorse the full-solution framing; the printed question is answered separately and graded against the agenda. The issue credits its own construction to MAIS issue #4, and the atlas claims no priority for it."
+      }
     },
     "mais-issue-8-2026": {
       "citation": "Math for AI Safety (MAIS), issue #8, “MAIS-O31: candidate complete solution — generic chamber classification for one intervention in a binary chain”, filed 2026-08-04 by kumino.",
@@ -688,35 +703,59 @@
       "role": "work",
       "retrieved": "2026-08-20",
       "content_sha256": "8e2e688eaac1a72f915aa787ad1e74676e6b72eff4f2796394e95b0a83fb8a96",
-      "notes": "The candidate a conjecture row transcribes wherever that row is recorded. The issue derives four affine diagnostics and a generic chamber classification, and explicitly claims no human or journal referee verification. The transcribing row now quantifies directly over every threshold t in (0,1), exactly as the issue does. Separate lemmas derive and bound thresholds produced by margin-admissible utility gaps in the surrounding agenda problem; those lemmas do not restrict the conjecture. Body sha256 as read 2026-08-20; issue bodies are editable in place, so an edit invalidates this grading."
+      "notes": "The candidate a conjecture row transcribes wherever that row is recorded. The issue derives four affine diagnostics and a generic chamber classification, and explicitly claims no human or journal referee verification. The transcribing row now quantifies directly over every threshold t in (0,1), exactly as the issue does. Separate lemmas derive and bound thresholds produced by margin-admissible utility gaps in the surrounding agenda problem; those lemmas do not restrict the conjecture. Body sha256 as read 2026-08-20; issue bodies are editable in place, so an edit invalidates this grading.",
+      "mais_solution": {
+        "problem": "MAIS-O31",
+        "filed_by": "kumino",
+        "verdict": "STATED_ONLY",
+        "candidate_lean": "AISafetyAtlas.Conjectures.MAIS.maisO31_chainClassificationCandidate",
+        "submitted": "A complete solution: four affine diagnostics and a generic chamber classification for one intervention in a binary chain.",
+        "checked": "Transcribed at the issue's own quantifiers — every threshold in the open unit interval, all four binary local interventions, literal coordinate equality, and the issue's own scope exclusions as the chamber disjunct — and it is not proved. The embedding into the printed margin class is proved in both directions, so the statement is not left semantically detached. The atlas separately refutes the printed heuristic's claim that the endpoint marginal is recoverable, on an explicit box of Lebesgue measure 1/500."
+      }
     },
     "mais-issue-7-2026": {
-      "citation": "Math for AI Safety (MAIS), issue #7, \u201cMAIS-O24: candidate negative resolution \u2014 clauses (a) and (c) are incompatible as written\u201d, filed 2026-08-04 by kumino.",
+      "citation": "Math for AI Safety (MAIS), issue #7, “MAIS-O24: candidate negative resolution — clauses (a) and (c) are incompatible as written”, filed 2026-08-04 by kumino.",
       "locator": "https://github.com/lionellevine/MAIS/issues/7",
       "role": "work",
       "retrieved": "2026-08-30",
       "content_sha256": "68e65b119a8923dd997e2ea75daea5331145706674a44ecc6d3f7c7b89a80ee7",
-      "notes": "Context for CONJ-012. The candidate argues that prob:effective's clauses (a) and (c) cannot both hold, so the printed problem has no solution. Its argument lives in an attachment, MAIS-O24-candidate-solution.pdf, sha256 fd096dea004135fbbed054619857b307881d6432925d1ff1cae5ae3f45d16477, which grades MAIS-O24 at revision 43016a3e5c94edfca55ba49bd3e16770f7ac5dae; open-problems/MAIS-O24.md is byte-identical between that revision and the pin except for its status line. The atlas transcribes the incompatibility, repairs one circular step in the argument's choice of measure, and machine-checks the result as AISafetyAtlas.Examples.Causal.O24Refutation.not_o24_identifies_and_excluded; see docs/provenance/mais-o24-refutation.md. The issue claims no human referee review. Body sha256 as read 2026-08-30, updated_at 2026-08-04T02:32:33Z, no comments at that reading; issue bodies are editable in place, so an edit invalidates this record."
+      "notes": "Context for CONJ-012. The candidate argues that prob:effective's clauses (a) and (c) cannot both hold, so the printed problem has no solution. Its argument lives in an attachment, MAIS-O24-candidate-solution.pdf, sha256 fd096dea004135fbbed054619857b307881d6432925d1ff1cae5ae3f45d16477, which grades MAIS-O24 at revision 43016a3e5c94edfca55ba49bd3e16770f7ac5dae; open-problems/MAIS-O24.md is byte-identical between that revision and the pin except for its status line. The atlas transcribes the incompatibility, repairs one circular step in the argument's choice of measure, and machine-checks the result as AISafetyAtlas.Examples.Causal.O24Refutation.not_o24_identifies_and_excluded; see docs/provenance/mais-o24-refutation.md. The issue claims no human referee review. Body sha256 as read 2026-08-30, updated_at 2026-08-04T02:32:33Z, no comments at that reading; issue bodies are editable in place, so an edit invalidates this record.",
+      "mais_solution": {
+        "problem": "MAIS-O24",
+        "filed_by": "kumino",
+        "verdict": "CHECKED",
+        "candidate_lean": "AISafetyAtlas.Examples.Causal.O24Refutation.not_o24_identifies_and_excluded",
+        "submitted": "A negative resolution: clauses (a) and (c) of the printed problem cannot both hold, so it has no solution.",
+        "checked": "The incompatibility holds and is machine-checked. The argument as written had a circular step in its choice of measure, which the atlas repaired before checking rather than reproducing. AISafetyAtlas.Causal.O24Solution is the solution type with the proof obligations as fields, and it is empty."
+      }
     },
     "mais-issue-9-2026": {
-      "citation": "Math for AI Safety (MAIS), issue #9, \u201cMAIS-O33: candidate negative resolution \u2014 the persistent-corruption threshold is zero\u201d, filed 2026-08-04 by kumino.",
+      "citation": "Math for AI Safety (MAIS), issue #9, “MAIS-O33: candidate negative resolution — the persistent-corruption threshold is zero”, filed 2026-08-04 by kumino.",
       "locator": "https://github.com/lionellevine/MAIS/issues/9",
       "role": "work",
       "retrieved": "2026-08-30",
       "content_sha256": "9ff124f8cd8fb65d7393780384776f87a42a5870ce477b50da8dd9c315e9bd25",
-      "notes": "Context for CONJ-023: the construction the atlas machine-checks. The body states the claim eta* = 0 and the argument lives in an attachment, MAIS-O33-candidate-solution.pdf (6 pages, MiKTeX pdfTeX-1.40.26), sha256 cf603983ca239bd933d5e3d0810ec5a660fbc1e587e2cce788c0e4edf12f45a6, read 2026-08-30. The note is audited in docs/provenance/mais-o33-statability.md, which found no error, and what the atlas added -- the transcription, the machine-check, and two changes of instance that each removed a dependency -- is in docs/provenance/mais-o33-refutation.md. The issue says its mathematics was generated by OpenAI Codex and offered under CC BY 4.0 with no human referee review claimed. Body sha256 as read 2026-08-30, updated_at 2026-08-04T02:33:16Z, no comments at that reading; issue bodies are editable in place, so an edit invalidates this record."
+      "notes": "Context for CONJ-023: the construction the atlas machine-checks. The body states the claim eta* = 0 and the argument lives in an attachment, MAIS-O33-candidate-solution.pdf (6 pages, MiKTeX pdfTeX-1.40.26), sha256 cf603983ca239bd933d5e3d0810ec5a660fbc1e587e2cce788c0e4edf12f45a6, read 2026-08-30. The note is audited in docs/provenance/mais-o33-statability.md, which found no error, and what the atlas added -- the transcription, the machine-check, and two changes of instance that each removed a dependency -- is in docs/provenance/mais-o33-refutation.md. The issue says its mathematics was generated by OpenAI Codex and offered under CC BY 4.0 with no human referee review claimed. Body sha256 as read 2026-08-30, updated_at 2026-08-04T02:33:16Z, no comments at that reading; issue bodies are editable in place, so an edit invalidates this record.",
+      "mais_solution": {
+        "problem": "MAIS-O33",
+        "filed_by": "kumino",
+        "verdict": "CHECKED",
+        "candidate_lean": "AISafetyAtlas.Conjectures.MAIS.maisO33_etaStarIsZero",
+        "submitted": "A negative resolution: the persistent-corruption threshold is zero.",
+        "checked": "The submitted value is confirmed, with a caveat the ledger states rather than hides. The upper half is the proved content; the lower half follows from the sign clause together with the supremum of the empty set being zero, not from a proof that the printed zero endpoint is tolerable, and the graded correct answer is the baseline-relative form. An independent audit of the note found no error. The issue reports that its mathematics was generated by an AI system with no human referee review claimed."
+      }
     },
     "mais-a6-2026": {
-      "citation": "Math for AI Safety (MAIS), research agenda MAIS-A6 \u2014 the agenda in which MAIS-O70 is stated as prob:calibration, together with def:local, thm:aw and rem:conventions, the definitions it quantifies over.",
+      "citation": "Math for AI Safety (MAIS), research agenda MAIS-A6 — the agenda in which MAIS-O70 is stated as prob:calibration, together with def:local, thm:aw and rem:conventions, the definitions it quantifies over.",
       "locator": "https://github.com/lionellevine/MAIS/blob/9dd29f8bf5ccd1e7701e300039b09ed4096b6516/agendas/A6/MAIS-A6.tex",
       "role": "work",
       "retrieved": "2026-09-03",
       "revision": "9dd29f8bf5ccd1e7701e300039b09ed4096b6516",
       "content_sha256": "3da2eda1b1fa9633d09e48c4ce3bab34bc22aeea4bfc72eeb04b6b919b1c1d3e",
-      "notes": "The statement source for CONJ-026. def:local defines the local pair by zeta poles, then adds that it does not depend on the radius nor on inserting a smooth positive density, and that lambda is equivalently the exponent in the ball-volume asymptotic eq:volume; the atlas takes that equivalent volume form as primary and records the substitution rather than proving the equivalence. thm:aw states the four-case global pair for reduced-rank regression and glosses it, in the same sentence, as the minimum of the local coefficient over the zero fiber with multiplicity the largest among the minimizers; that gloss is why O70's third clause needs no separate Aoyagi-Watanabe hypothesis. rem:conventions fixes the compact domain and prior and excludes the vacuous case K identically zero, which for reduced-rank regression is exactly a vanishing ambient dimension. Its support clause guarantees only a neighborhood of *a* minimizing factorization, which is weaker than thm:aw's largest-multiplicity claim needs; the scalar model M=N=H=1, r=0 is the smallest witness. The agenda is AI-written and not human-peer-reviewed."
+      "notes": "Context source for CONJ-026, which is graded against mais-o70-2026 instead: the predicates that row grades are volume-order predicates and this artifact defines the invariant otherwise. def:local defines the local pair by zeta poles, then adds that it does not depend on the radius nor on inserting a smooth positive density, and that lambda is equivalently the exponent in the ball-volume asymptotic eq:volume; the atlas takes that equivalent volume form as primary and records the substitution rather than proving the equivalence. thm:aw states the four-case global pair for reduced-rank regression and glosses it, in the same sentence, as the minimum of the local coefficient over the zero fiber with multiplicity the largest among the minimizers; that gloss is why O70's third clause needs no separate Aoyagi-Watanabe hypothesis. rem:conventions fixes the compact domain and prior and excludes the vacuous case K identically zero, which for reduced-rank regression is exactly a vanishing ambient dimension. Its support clause guarantees only a neighborhood of *a* minimizing factorization, which is weaker than thm:aw's largest-multiplicity claim needs; the scalar model M=N=H=1, r=0 is the smallest witness. The agenda is AI-written and not human-peer-reviewed."
     },
     "mais-o70-2026": {
-      "citation": "Math for AI Safety (MAIS), open problem MAIS-O70, \u201cLocal coefficients on the template\u201d, posed in agenda MAIS-A6 as prob:calibration.",
+      "citation": "Math for AI Safety (MAIS), open problem MAIS-O70, “Local coefficients on the template”, posed in agenda MAIS-A6 as prob:calibration.",
       "locator": "https://github.com/lionellevine/MAIS/blob/9dd29f8bf5ccd1e7701e300039b09ed4096b6516/open-problems/MAIS-O70.md",
       "role": "work",
       "retrieved": "2026-09-03",
@@ -730,7 +769,72 @@
       "role": "work",
       "retrieved": "2026-09-02",
       "content_sha256": "405c8cb324884607f3e827cdd915d8ac10ce01b969a7739616474b3fb8401cbe",
-      "notes": "Context for CONJ-026. The hash is of the PDF attached to the issue, not of the issue page: the attachment carries the mathematical content and is the artifact graded. Theorem 1.1 gives the local pair at a rank stratum and Corollary 1.3 restates the residual threshold as a discrete minimisation over an integer index; both are transcribed as o70Pair, and the atlas closes that minimisation in residualMinCost_eq_argmin. Definition 2.1 fixes the local pair by exact ball-volume asymptotics \u201cfor some (equivalently, all but countably many) small delta\u201d, and section 13 states that exactness at every radius would need subanalytic integration theory and is not claimed; the atlas's HasExactLocalPair matches that co-countable form. Section 13 also reports the support gap in the Aoyagi-Watanabe hypotheses that rem:conventions shares. The numerical receipts the issue cites are not reproducible from it. Not peer-reviewed."
+      "notes": "Context for CONJ-026. The hash is of the PDF attached to the issue, not of the issue page: the attachment carries the mathematical content and is the artifact graded. Theorem 1.1 gives the local pair at a rank stratum and Corollary 1.3 restates the residual threshold as a discrete minimisation over an integer index; both are transcribed as o70Pair, and the atlas closes that minimisation in residualMinCost_eq_argmin. Definition 2.1 fixes the local pair by exact ball-volume asymptotics “for some (equivalently, all but countably many) small delta”, and section 13 states that exactness at every radius would need subanalytic integration theory and is not claimed; the atlas's HasExactLocalPair matches that co-countable form. Section 13 also reports the support gap in the Aoyagi-Watanabe hypotheses that rem:conventions shares. The numerical receipts the issue cites are not reproducible from it. Not peer-reviewed.",
+      "mais_solution": {
+        "problem": "MAIS-O70",
+        "filed_by": "Sneiderman",
+        "verdict": "CONDITIONAL",
+        "candidate_lean": "AISafetyAtlas.Conjectures.MAIS.o70Pair",
+        "submitted": "A complete solution: the local learning coefficients of reduced-rank regression at every rank stratum, with the residual threshold restated as a discrete minimisation over an integer index.",
+        "checked": "The rank table is transcribed as o70Pair and machine-checked, but under two propositions the candidate cites rather than derives: the real-Wishart eigenvalue law and the existence of exact local pairs. Both are recorded as frontiers with their own evidence, and NC-011 shows that none of the six baseline formalization corpora supplies the first. The discrete minimisation behind Corollary 1.3 is closed unconditionally, as residualMinCost_eq_argmin. The candidate's own section 13 states that exactness at every radius is not claimed, and the atlas matches that co-countable form rather than strengthening it."
+      }
+    },
+    "mais-a7-2026": {
+      "citation": "Math for AI Safety (MAIS), research agenda MAIS-A7 — the singular-learning agenda containing MAIS-O7 and MAIS-O77 as Problems 3.7 and 3.9.",
+      "locator": "https://github.com/lionellevine/MAIS/blob/9dd29f8bf5ccd1e7701e300039b09ed4096b6516/agendas/A7/MAIS-A7.tex",
+      "role": "work",
+      "retrieved": "2026-09-05",
+      "revision": "9dd29f8bf5ccd1e7701e300039b09ed4096b6516",
+      "content_sha256": "c645a51bf02b16077d14adce56e1c55a2fcb66f5004bbd0aec57fb01a2d54b52",
+      "notes": "Context source for CONJ-027 and CONJ-028. CONJ-028 is graded against mais-o77-2026 instead, because the predicates it grades are volume-order predicates and this artifact defines the invariant otherwise. Definition def:llc defines the local invariant by the meromorphic continuation and leading pole of a zeta integral, then glosses the two-sided band volume, introduced with the words \"In words:\" and outside the definition environment. The atlas formalizes the operational two-sided volume order and does not prove the zeta-pole equivalence; that substitution is carried as the frontier A7-ZETA-BRIDGE (AISafetyAtlas.Conjectures.MAIS.A7ZetaVolumeBridge), with the results it buys stated conditionally in AISafetyAtlas/Conjectures/MAIS/A7Zeta.lean. No exact asymptotic constant is claimed either. Problem 3.7 conjectures monotonicity of the infimal coefficients along the critical-value ladder. Problem 3.9 asks for the local pair on the exact factorization fiber, whether it depends only on the two factor ranks, and the pair at every nonterminal critical set C_k. The target has distinct positive nonzero singular values and hidden width H greater than its rank. The agenda is AI-written and not human-peer-reviewed."
+    },
+    "mais-o7-2026": {
+      "citation": "Math for AI Safety (MAIS), open problem MAIS-O7, “Monotonicity along the rank ladder”, posed in agenda MAIS-A7 as Problem 3.7.",
+      "locator": "https://github.com/lionellevine/MAIS/blob/9dd29f8bf5ccd1e7701e300039b09ed4096b6516/open-problems/MAIS-O7.md",
+      "role": "work",
+      "retrieved": "2026-09-05",
+      "revision": "9dd29f8bf5ccd1e7701e300039b09ed4096b6516",
+      "content_sha256": "4b1add32acbf7d0e462e8b9d39144e5588a38cf446a1d57f7495ba183aaa3d8c",
+      "notes": "One-page statement of the conjecture that the infimum of the two-sided local coefficient on C_k is nondecreasing in k, with attainment requested. Its mathematical statement is unchanged at the candidate revision 43016a3e5c94edfca55ba49bd3e16770f7ac5dae; only status links differ."
+    },
+    "mais-o77-2026": {
+      "citation": "Math for AI Safety (MAIS), open problem MAIS-O77, “Local pairs on the matrix-factorization fiber and every saddle set”, posed in agenda MAIS-A7 as Problem 3.9.",
+      "locator": "https://github.com/lionellevine/MAIS/blob/9dd29f8bf5ccd1e7701e300039b09ed4096b6516/open-problems/MAIS-O77.md",
+      "role": "work",
+      "retrieved": "2026-09-05",
+      "revision": "9dd29f8bf5ccd1e7701e300039b09ed4096b6516",
+      "content_sha256": "07912e8c267f9b7866c12fe09a1277d5c880c0c9e60672c803be83a3b159a043",
+      "notes": "One-page restatement of MAIS-A7 Problem 3.9. Part (a) concerns every point of the exact factorization fiber; part (b) concerns every point of every nonterminal saddle set C_k. Its mathematical statement is unchanged at the candidate revision 43016a3e5c94edfca55ba49bd3e16770f7ac5dae; only status links differ."
+    },
+    "mais-issue-5-2026": {
+      "citation": "Math for AI Safety (MAIS), issue #5, candidate negative resolution of MAIS-O7, filed 2026-08-03.",
+      "locator": "https://github.com/lionellevine/MAIS/issues/5",
+      "role": "work",
+      "retrieved": "2026-09-05",
+      "content_sha256": "edbaf2f2435c8854ce681a19cc2f5da10474e944fc2c9254624f0db50b5061fa",
+      "notes": "Context for CONJ-027. The issue body points to the three-page candidate PDF MAIS-O07-candidate-solution.pdf, sha256 907ce2d0a5a11182995c4679acb6812109ecdb90e66da765a6f9037e5e9b59a8, archived alongside the issue #3 attachment in the shared literature tree after a 2026-09-06 audit found the graded artifact retained nowhere locally and reachable only through a GitHub attachment URL. The note gives the scalar M=N=r=1, H=2 counterexample: the rank-zero critical set is the origin with pair (1,1), while every point of the terminal fiber has pair (1/2,1), reversing the conjectured inequality. The note already quantifies over the terminal rung -- every point of C1 has pair (1/2,1) -- and states that the infimum is attained there; the rank-zero rung is a single point, so it is universal by construction. What the atlas adds is the certificate as one object: the exact exponent sets on both rungs, attainment as a proved proposition rather than an observation, and the whole of it for every positive target. The issue claims no human referee review. Issue bodies are editable in place, so an edit invalidates the body hash.",
+      "mais_solution": {
+        "problem": "MAIS-O7",
+        "verdict": "CHECKED",
+        "candidate_lean": "AISafetyAtlas.Conjectures.MAIS.O7CounterexampleAtEveryScale",
+        "submitted": "A negative resolution: in the scalar instance the rank-zero critical set has local pair (1,1) while the terminal fibre has (1/2,1), reversing the conjectured strict increase.",
+        "checked": "Confirmed and strengthened, though not in quantifier strength: the note already proves the pair at every point of the terminal rung and states that both infima are attained. o7CounterexampleAtEveryScale makes the two-rung certificate a single unconditional object -- the exact exponent set on each rung, attainment as a proposition, and every positive target. The conjectured increase is false. What was checked is the note's claim, not its argument: the note routes the rank-zero pair through the analytic Morse lemma at signature (2,2) and the atlas proves it by an explicit integral instead, so the note's own step is unverified. A 2026-09-06 audit added the two identifications the certificate rests on -- that its rank-zero rung is MAIS-A7's C_0 and its terminal rung that frame's exact-factorization fibre -- which had been transcriptions no check could see, and the descending-loss step that puts the instance inside print's stated setting."
+      }
+    },
+    "mais-issue-12-2026": {
+      "citation": "Math for AI Safety (MAIS), issue #12, candidate complete solution of MAIS-O77, filed 2026-08-03.",
+      "locator": "https://github.com/lionellevine/MAIS/issues/12",
+      "role": "work",
+      "retrieved": "2026-09-05",
+      "content_sha256": "c0a2c0a8cb66858ca0160765b1465fb1f55bdd9be47edf79283d43e82af6c984",
+      "notes": "Context for CONJ-028. The issue body points to the seven-page candidate PDF MAIS-O77-candidate-solution.pdf, sha256 5a4a919ffb30a110cd377e4df5c0a829c36ee11696bb8dc4211c6afde149a998, archived alongside the issue #3 attachment in the shared literature tree after a 2026-09-06 audit found the graded artifact retained nowhere locally and reachable only through a GitHub attachment URL. Part (a) explicitly overlaps the solution in MAIS issue #3 and relabels its multiplication-slice table; the atlas reuses the O70 implementation rather than duplicating it. The order-level table is machine-checked conditional only on EigenvalueLawStatement, the same Wishart frontier inherited from O70; the arithmetic minimum, the table-level minimizing-stratum predicate, and the extra maximum-tie-multiplicity assertion are unconditional. The minimal stratum is also checked at the germs, by isO77MinimizerCharacterization_o77Minimizers, which is conditional on EigenvalueLawStatement and on no further frontier. Part (b)'s all-saddle claim is now machine-checked unconditionally, as o77AllSaddlesHavePairOne_holds; part (a) remains conditional on EigenvalueLawStatement, so this source record represents only (b) as unconditionally verified. The issue claims no human referee review. Issue bodies are editable in place, so an edit invalidates the body hash.",
+      "mais_solution": {
+        "problem": "MAIS-O77",
+        "verdict": "PARTIAL",
+        "candidate_lean": "AISafetyAtlas.Conjectures.MAIS.O77AllSaddlesHavePairOne",
+        "submitted": "A complete solution to both clauses: the local pair at every exact factorization together with the minimal stratum, and the pair at every point of every nonterminal critical set.",
+        "checked": "Part (b) is proved unconditionally at print's own quantifiers, as o77AllSaddlesHavePairOne_holds, following the candidate's five printed steps rather than substituting a shortcut; two results it needs — the splitting of its equation (9) and its Lemma 2 — are absent from the Mathlib revision pinned here and were built here; NC-012 is that search, and it covers Mathlib alone, so it is not a claim about every formalization corpus. Part (a) is verified only under the eigenvalue-law frontier inherited from MAIS issue #3; that covers its minimal stratum too, checked at the germs rather than against the table. Four defects surfaced while checking, all of them the atlas's own -- each a statement that compiled, was axiom-clean, and was about something weaker than print. None was a defect in the submission; no error was found in it. The complete-solution claim is therefore not verified. The note's argument is followed, not replaced. Its equation (9) already writes the generalized splitting -- L - L(w) = Q_alpha(xi) + g(zeta) with g(0) = 0 and no nondegeneracy asked of g -- which is a Gromoll-Meyer splitting, and that is what was built. Only the name it gives the tool, the analytic Morse splitting lemma, is loose. Two departures are worth stating: the atlas proves the splitting C-infinity rather than analytic, which is all the note's Lemma 2 consumes, and loss_quartic_on_degenerateNull rules out a Morse-Bott normal form, which (9) does not claim and does not need. A 2026-09-06 audit closed the remaining prose step in part (a) by proving that the discrete minimisation the atlas computes with is the note's printed four-case closed formula, and pinned the note's own ten check-table values."
+      }
     },
     "mais-a3-2026": {
       "citation": "Math for AI Safety (MAIS), research agenda MAIS-A3, “The geometry and identifiability of superposition” — the agenda in which MAIS-O3, O36, O37, O38, O39, O40, O41, O42 and O43 are stated; MAIS-O38 is its Problem 4.8.",
@@ -756,7 +860,15 @@
       "role": "work",
       "retrieved": "2026-08-27",
       "content_sha256": "6e2db10eb10242c075ca331fcf87a604511b9b31df3d55a5c4b0d2d2d95d05ab",
-      "notes": "Context for CONJ-025. Re-read 2026-08-30: the issue contains TWO theorems. Its main claim -- N = m^3 + 2m codes depending only on m and k suffice for every n >= 2k and almost every spark-condition A, at every 1 <= k < m -- is transcribed as AISafetyAtlas.Conjectures.MAIS.o38PolynomialSampleCandidate and proved as AISafetyAtlas.Examples.Conjectures.MAIS.o38PolynomialSampleCandidate_holds. It resolves CONJ-025 at every non-degenerate m; its codes being independent of n is the one remaining axis on which it is stronger than the graded claim. Its second theorem, labelled boundary, states that at m >= 2, k >= m and n >= 2k no finite list of k-sparse codes is uniquely coded at any spark-condition A, and observes that this settles the literal reading in which k < m is nowhere imposed. AISafetyAtlas.Examples.Conjectures.MAIS.not_uniquelyCoded_of_full_sparsity_spark proves the same mathematical boundary independently and without the n >= 2k hypothesis; the issue's statement and observation are credited. The issue says its mathematics was produced and checked entirely by AI systems with no human verification. Body sha256 as read 2026-08-27 and re-verified unedited 2026-08-30. The atlas machine-check comment is issuecomment-5466534850, updated 2026-08-30T04:08:15Z, body sha256 db8715b6dd9554bb25720766957901bc83ad9c0a8a37d6812965b722a9b2e138. Issue bodies and comments are editable in place, so later edits invalidate these records."
+      "notes": "Context for CONJ-025. Re-read 2026-08-30: the issue contains TWO theorems. Its main claim -- N = m^3 + 2m codes depending only on m and k suffice for every n >= 2k and almost every spark-condition A, at every 1 <= k < m -- is transcribed as AISafetyAtlas.Conjectures.MAIS.o38PolynomialSampleCandidate and proved as AISafetyAtlas.Examples.Conjectures.MAIS.o38PolynomialSampleCandidate_holds. It resolves CONJ-025 at every non-degenerate m; its codes being independent of n is the one remaining axis on which it is stronger than the graded claim. Its second theorem, labelled boundary, states that at m >= 2, k >= m and n >= 2k no finite list of k-sparse codes is uniquely coded at any spark-condition A, and observes that this settles the literal reading in which k < m is nowhere imposed. AISafetyAtlas.Examples.Conjectures.MAIS.not_uniquelyCoded_of_full_sparsity_spark proves the same mathematical boundary independently and without the n >= 2k hypothesis; the issue's statement and observation are credited. The issue says its mathematics was produced and checked entirely by AI systems with no human verification. Body sha256 as read 2026-08-27 and re-verified unedited 2026-08-30. The atlas machine-check comment is issuecomment-5466534850, updated 2026-08-30T04:08:15Z, body sha256 db8715b6dd9554bb25720766957901bc83ad9c0a8a37d6812965b722a9b2e138. Issue bodies and comments are editable in place, so later edits invalidate these records.",
+      "mais_solution": {
+        "problem": "MAIS-O38",
+        "filed_by": "26david26",
+        "verdict": "CHECKED",
+        "candidate_lean": "AISafetyAtlas.Conjectures.MAIS.o38PolynomialSampleCandidate",
+        "submitted": "A complete solution in two theorems: that a polynomial number of fixed codes depending only on the dimension and the sparsity suffice below the sparsity bound, and a boundary theorem above it.",
+        "checked": "The main claim is transcribed and proved, and resolves the graded row at every non-degenerate dimension; its codes being independent of the ambient dimension is one axis on which it is stronger than the claim being graded. The boundary theorem is proved here independently and without one of its hypotheses. The atlas has posted this machine-check on the issue itself. The issue reports that its mathematics was produced and checked entirely by AI systems with no human verification."
+      }
     }
   },
   "results": [
@@ -7622,8 +7734,7 @@
           "atlas_module": "AISafetyAtlas.Causal.DecisionNetwork",
           "build_command": "lake build AISafetyAtlas.Causal.DecisionNetwork AISafetyAtlas.Examples.Causal.DecisionNetwork"
         }
-      ]
-    ,
+      ],
       "lean_artifact": {
         "declarations": [
           {
@@ -7639,15 +7750,14 @@
             "application": "Assumption 1 discharged on print's own Figure 1 training diagram. Without an inhabitant every theorem conditional on IsUnmediated would be vacuously true, including the Lemma 1(iii) step above."
           }
         ]
-      }
-    ,
+      },
       "public": {
-          "group": "What an observer can recover",
-          "summary": "A decision task written as a causal influence diagram with the decision and the utility as vertices of the network, together with expected utility, optimality and regret at the source's own quantifiers, and the unmediated-task assumption with the graph consequence the source draws from it.",
-          "use": "Stating a single-decision single-utility decision task where the decision node's table is the policy, and deriving that under an unmediated task the decision's only route to the utility is the direct edge.",
-          "title": "Decision tasks as influence diagrams",
-          "attribution": "Richens and Everitt, ICLR 2024, Section 2.2 and Appendix A.1"
-        }
+        "group": "What an observer can recover",
+        "summary": "A decision task written as a causal influence diagram with the decision and the utility as vertices of the network, together with expected utility, optimality and regret at the source's own quantifiers, and the unmediated-task assumption with the graph consequence the source draws from it.",
+        "use": "Stating a single-decision single-utility decision task where the decision node's table is the policy, and deriving that under an unmediated task the decision's only route to the utility is the direct edge.",
+        "title": "Decision tasks as influence diagrams",
+        "attribution": "Richens and Everitt, ICLR 2024, Section 2.2 and Appendix A.1"
+      }
     },
     {
       "id": "LAND-CAUSAL-COLLISION-001",

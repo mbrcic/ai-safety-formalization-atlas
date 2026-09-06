@@ -273,6 +273,15 @@ def normalize_module_name(value: str) -> str:
     return value.removesuffix(".lean").replace("/", ".")
 
 
+MAIS_VERDICTS = {"CHECKED", "PARTIAL", "CONDITIONAL", "STATED_ONLY"}
+MAIS_SOLUTION_FIELDS = {
+    "problem",
+    "filed_by",
+    "verdict",
+    "submitted",
+    "checked",
+    "candidate_lean",
+}
 SOURCE_ROLES = {"directory", "work"}
 SCOPE_DELTA_FIELDS = {"summary", "evidence"}
 NOVELTY_CHECK_ID = re.compile(r"NC-\d{3}")
@@ -659,6 +668,9 @@ def main() -> None:
     # The result-level root_import flag is checked later against the actual
     # module import closure.
 
+    corpus_records = search_evidence.get("corpora")
+    if not isinstance(corpus_records, dict):
+        corpus_records = {}
     novelty_checks = search_evidence.get("novelty_checks")
     if not isinstance(novelty_checks, list):
         fail("formalization-search.json must carry a novelty_checks list")
@@ -724,7 +736,26 @@ def main() -> None:
                 followup.get("version"), f"{cid}/{corpus} must record a revision"
             )
             if not GIT_REVISION.fullmatch(version):
-                fail(f"{cid}/{corpus} must pin a 40-character Git revision")
+                # A corpus that is not distributed as a Git repository -- the
+                # Isabelle AFP ships dated release archives -- pins by the
+                # digest its own corpora record already carries. That is not a
+                # weaker pin than a revision: the digest is recomputed on
+                # download and compared, where a revision is only read. What is
+                # refused is a follow-up that pins by neither, so the version
+                # must be the corpora record's own and that record must carry a
+                # digest, and the follow-up must say how it was pinned.
+                baseline = corpus_records.get(corpus)
+                if (
+                    not isinstance(baseline, dict)
+                    or "archive_sha256" not in baseline
+                    or version != str(baseline.get("version"))
+                ):
+                    fail(f"{cid}/{corpus} must pin a 40-character Git revision")
+                require_text(
+                    followup.get("pinned_by"),
+                    f"{cid}/{corpus} pins by archive digest and must record "
+                    "pinned_by",
+                )
             followup_date = require_text(
                 followup.get("searched_on"),
                 f"{cid}/{corpus} must record searched_on as an ISO date",
@@ -805,6 +836,50 @@ def main() -> None:
             )
         if retrieved is not None and not ISO_DATE.fullmatch(str(retrieved)):
             fail(f"{source_id} has an invalid `retrieved` date {retrieved!r}")
+
+        # A `mais_solution` block is a public verdict on someone else's
+        # mathematics, so every field it needs to be read correctly is required
+        # rather than optional. `verdict` is a closed vocabulary because the
+        # whole point of the view is that "the mathematics checks" and "the
+        # ledger grades this artifact" are different facts; a free-text verdict
+        # would let them blur back together. A body hash is required because an
+        # issue body is editable in place, so a verdict with no hash names no
+        # fixed artifact.
+        solution = source.get("mais_solution")
+        if solution is not None:
+            solution = require_mapping(
+                solution, f"{source_id} mais_solution must be an object"
+            )
+            unknown_fields = set(solution) - MAIS_SOLUTION_FIELDS
+            if unknown_fields:
+                fail(
+                    f"{source_id} mais_solution has unknown fields: "
+                    f"{sorted(unknown_fields)}"
+                )
+            for field in ("problem", "verdict", "submitted", "checked"):
+                require_text(
+                    solution.get(field),
+                    f"{source_id} mais_solution must record a non-empty {field}",
+                )
+            if solution["verdict"] not in MAIS_VERDICTS:
+                fail(
+                    f"{source_id} has unknown mais_solution verdict "
+                    f"{solution['verdict']!r}; expected one of "
+                    f"{sorted(MAIS_VERDICTS)}"
+                )
+            for field in ("filed_by", "candidate_lean"):
+                if field in solution:
+                    require_text(
+                        solution.get(field),
+                        f"{source_id} mais_solution {field} must be non-empty "
+                        "when present",
+                    )
+            if not source.get("content_sha256"):
+                fail(
+                    f"{source_id} carries a mais_solution verdict and must record "
+                    "content_sha256; an issue body is editable in place, so a "
+                    "verdict with no hash names no fixed artifact"
+                )
 
     directories = {
         source_id

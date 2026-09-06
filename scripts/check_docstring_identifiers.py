@@ -65,6 +65,13 @@ EXEMPT = {
     # product, which is why the finite form is the atlas's to write
     "ProbabilityTheory.infinitePi_map_piCurry",
     "infinitePi_map_piCurry_symm",
+    # cited by AISafetyAtlas/SingularLearning/SylvesterPair.lean as the Mathlib
+    # machinery behind Sylvester's law of inertia: the weighted-sum-of-squares
+    # normal form that lemma returns, the isometry class it returns it up to,
+    # and the determinant criterion that discharges its nondegeneracy hypothesis
+    "weightedSumSquares",
+    "QuadraticMap.IsometryEquiv",
+    "Matrix.separatingLeft_iff_det_ne_zero",
     # cited by AISafetyAtlas/Analysis/NullImage.lean as the Mathlib lemma that
     # identifies Hausdorff measure at the ambient dimension with Lebesgue volume,
     # which is what turns a dimension bound into a null-set statement
