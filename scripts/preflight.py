@@ -111,7 +111,7 @@ KINDS: dict[str, dict] = {
     "tooling": {
         "title": "Scripts, tests, or CI",
         "sections": [("docs/agent/policy/workflow-validation.md", "Validation")],
-        "commands": ["python3 -m pytest -q tests/", "ty check"],
+        "commands": ["python3 -m pytest -q tests/", "ty check scripts/ tests/"],
     },
 }
 
