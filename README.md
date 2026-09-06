@@ -509,16 +509,17 @@ has.
 
 | tool | what it is | how to get it |
 |---|---|---|
-| `lean-lsp-mcp` | the language server over MCP: diagnostics, goal state, hover, references. Answers per file in seconds what `lake build` reports in minutes, which is the right tool after a rename | `.mcp.json` in the repository root, which is **gitignored** — each contributor writes their own. `{"mcpServers":{"lean-lsp":{"type":"stdio","command":"uvx","args":["lean-lsp-mcp"]}}}` |
-| `lean-explore` | semantic search over Mathlib and other packages, by meaning rather than by name | an MCP server, installed outside this repository |
-| `LeanSearchClient` | `leansearch` and `loogle` queries from inside Lean | already a dependency; no setup |
-| `lean4` agent skills | proof repair, golfing, axiom elimination | editor- or harness-provided, outside this repository |
+| [lean-lsp-mcp](https://github.com/oOo0oOo/lean-lsp-mcp) | the Lean language server over MCP: diagnostics, goal state, hover, references. Answers per file in seconds what `lake build` reports in minutes, which is the right tool after a rename | `uvx lean-lsp-mcp`, wired through a `.mcp.json` in the repository root. That file is **gitignored**, so each contributor writes their own: `{"mcpServers":{"lean-lsp":{"type":"stdio","command":"uvx","args":["lean-lsp-mcp"]}}}` |
+| [lean-explore](https://github.com/justincasher/lean-explore) | semantic search over Lean 4 declarations — by meaning, not by name | an MCP server; install per its README |
+| [LeanSearchClient](https://github.com/leanprover-community/LeanSearchClient) | [leansearch](https://leansearch.net) and [loogle](https://loogle.lean-lang.org) queries from inside Lean | **already a dependency** — in `lake-manifest.json`, no setup |
+| `lean4` agent skills | proof repair, golfing, axiom elimination | harness- or editor-provided; not published by this project and not required |
 
 **A semantic search is not evidence.** These indexes are not pinned by this
 repository, so a miss is not reproducible and cannot support a claim that a
-result does not exist. `docs/agent/policy/lean-reuse-sources.md` says what such
-a claim may cite, and lists the libraries worth searching before writing a proof
-of your own.
+result does not exist.
+[`docs/agent/policy/lean-reuse-sources.md`](docs/agent/policy/lean-reuse-sources.md)
+says what such a claim may cite, and lists the libraries worth searching before
+you write a proof of your own.
 
 ## License
 
