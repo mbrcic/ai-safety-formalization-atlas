@@ -20,7 +20,9 @@ Named in the statements of eight or more others. A change to one of these is a c
 |---|---|
 | `Instance` | 20 |
 | `RiskAssignment` | 16 |
+| `PerfectPrediction` | 8 |
 | `Instance.n` | 8 |
+| `Calibrated` | 8 |
 
 ## Definitions no statement and no example mentions
 

@@ -113,3 +113,47 @@ either cheap enough for the standard gate or does not belong in CI at all.
 **Removing a gating.** State which window closes as a result, and what the check
 costs on every pull request. Both numbers belong in the change that makes it, so
 that the next reader can weigh the same trade this file weighed.
+
+## What the axiom audit can and cannot tell you
+
+`check_print_axioms.py` reports that every audited declaration rests only on
+`{propext, Classical.choice, Quot.sound}`. That is a real and useful fact: no
+declaration in the tree rests on a custom axiom, and none is `sorry`-backed.
+
+It is **not** a measure of how a theorem was proved, and it must not be read as
+one. `#print axioms` traverses a declaration's *type as well as its value*, so a
+declaration whose statement mentions a classically-built object reports that
+object's axioms whatever its proof does.
+
+Measured, 2026-09-07: a **freshly written, entirely pure** definition placed in
+the `AISafetyAtlas.Oversight.JointObservation` namespace reports
+`[propext, Classical.choice, Quot.sound]`. The dependency traces to
+`CandidateObservation.observe`, which reads a `Finset` coalition, and `Finset` is
+built as a `Quotient` of `List`. Every declaration in that cluster therefore
+reports choice through its own statement, and no proof route can remove it.
+
+Three consequences, in decreasing obviousness.
+
+1. **A dirty axiom line is not evidence of a classical proof.** It may be
+   entirely a fact about the statement's import closure. Anywhere a statement
+   mentions `Finset`, `Real`, a quotient or a `Classical.dec`-derived instance,
+   the audit is reporting the vocabulary rather than the argument.
+2. **A clean axiom line is not evidence of a checked proof** either — the
+   converse limitation, already recorded elsewhere in this repository and the one
+   `scripts/kernel_replay.sh` exists to close. An environment built by
+   metaprogramming reports whatever axioms it likes; `leanchecker` replays the
+   declarations through the kernel instead of asking them.
+3. **Constructivity claims need a different instrument.** A module wanting to say
+   "this proof is choice-free" cannot show it with `#print axioms` unless the
+   statement is choice-free too. Where the atlas makes such a claim it must name
+   the mechanism, not cite the audit; where it cannot, it should say so. The
+   worked instance is in
+   `AISafetyAtlas/Oversight/JointObservation/Coverage.lean`, whose docstring
+   declines the constructivity claim for exactly this reason.
+
+The audit's headline count is therefore a statement about *absence of custom
+axioms across a named set*, and `check_audit_coverage.py` is what bounds that
+set — 5545 public declarations reachable from the environment against 4441 in the
+regex audit's stated scope, with 11 documented exclusions. Neither number grades
+a proof.
+

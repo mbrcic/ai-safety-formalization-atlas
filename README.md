@@ -151,9 +151,9 @@ monorepo in-tree. Reusable structure and honest grading over volume.
 <!-- BEGIN GENERATED REGISTRY SCOPE -->
 | Metric | Current |
 |---|---:|
-| Atlas Lean declarations | **253** |
+| Atlas Lean declarations | **265** |
 | Results stating a source claim | **49** |
-| Results recording a formalization only | **37** (28 on root import) |
+| Results recording a formalization only | **42** (33 on root import) |
 | Reviewed AI-system bridges | **3** |
 | Statement-reviewed bridges (interpretation withheld) | **1** |
 | Open conjectures | **3** |
@@ -183,12 +183,12 @@ Add it to your `lakefile.toml`. There is no Reservoir entry, so require it by gi
 [[require]]
 name = "ai-safety-formalization-atlas"
 git = "https://github.com/mbrcic/ai-safety-formalization-atlas.git"
-rev = "v0.7.0"
+rev = "v0.8.0"
 ```
 
-`v0.7.0` is the published release and is what that stanza gets you. **The module
+`v0.8.0` is the published release and is what that stanza gets you. **The module
 list below describes the working tree, which is ahead of it** — anything added
-since the tag is not in `v0.7.0`, so check the tag's own module list before
+since the tag is not in `v0.8.0`, so check the tag's own module list before
 depending on a name you read here.
 
 Then `import AISafetyAtlas.Knowledge` (or whichever module below) and instantiate

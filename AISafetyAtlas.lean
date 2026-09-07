@@ -27,6 +27,7 @@ public import AISafetyAtlas.Causal.EffectiveGenericity
 public import AISafetyAtlas.Causal.Query
 public import AISafetyAtlas.Causal.ModelSpace
 public import AISafetyAtlas.Causal.StructuralModel
+public import AISafetyAtlas.Causal.Knowability
 public import AISafetyAtlas.Causal.Goal
 public import AISafetyAtlas.Causal.ControlledProcess
 public import AISafetyAtlas.Causal.GoalDynamics
@@ -72,6 +73,7 @@ public import AISafetyAtlas.Preference.Reasonable
 public import AISafetyAtlas.Preference.SourceComplexity
 public import AISafetyAtlas.Preference.Override
 public import AISafetyAtlas.Preference.Regret
+public import AISafetyAtlas.Preference.Knowability
 public import AISafetyAtlas.SelfAwareness
 public import AISafetyAtlas.SocialChoice
 public import AISafetyAtlas.SocialChoice.Utility
@@ -250,6 +252,8 @@ Import the specialization needed; the parent does not supply it.
 | `AISafetyAtlas.Preference.SourceComplexity` | Propositions 7 and 8 in the source's own parameterization |
 | `AISafetyAtlas.Preference.Override` | Overriding human reward functions |
 | `AISafetyAtlas.Preference.Regret` | Half-maximal regret is not ruled out by observation |
+| `AISafetyAtlas.Preference.Knowability` | Reward unidentifiability as a `Knowledge.Knowable` obstruction |
+| `AISafetyAtlas.Causal.Knowability` | Behavioural identifiability as a `Knowledge.Knowable` factorization |
 
 Each module docstring lists **primary** declarations (laws / instances /
 boundaries). Prefer those names over diving into `Upstream/` unless editing a

@@ -51,6 +51,9 @@ jobs:
           # used by ty can make CI report a false unresolved-import failure.
           echo "VIRTUAL_ENV=$ci_venv" >> "$GITHUB_ENV"
           echo "$ci_venv/bin" >> "$GITHUB_PATH"
+      # `-m lean` tests are NOT run here and must not be: this job has no
+      # toolchain, so they would skip silently rather than fail. The Lean job
+      # runs them after the build.
       - name: Cheap agent gate
         run: ./scripts/agent_gate.sh
       # Onboarding contract: setup.sh must parse, document itself, reject bad
@@ -100,7 +103,14 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          pattern='(\.lean$|^lakefile\.toml$|^lake-manifest\.json$|^lean-toolchain$|^scripts/lean_build_targets\.txt$|^scripts/check_print_axioms\.py$|^scripts/generate_declaration_index\.py$|^scripts/check_cited_declarations\.py$|^docs/status/declaration-index\.json$|^scripts/agent_gate\.sh$|^\.github/workflows/ci\.yml$)'
+          # `tests/`, `pytest.ini` and the reporters are in this pattern
+          # because the Lean job is the only place `pytest -m lean` runs. A
+          # change touching only a lean-marked test, or only the predicate
+          # reporter, would otherwise run agent-gate — where those tests skip
+          # for want of a toolchain — and skip this job, so the tests called the
+          # only evidence the intake check works would never execute on the
+          # change that edited them.
+          pattern='(\.lean$|^lakefile\.toml$|^lake-manifest\.json$|^lean-toolchain$|^scripts/lean_build_targets\.txt$|^scripts/check_print_axioms\.py$|^scripts/generate_declaration_index\.py$|^scripts/check_cited_declarations\.py$|^intake\.yaml$|^scripts/check_intake_statements\.py$|^scripts/report_predicate_duplicates\.py$|^tests/|^pytest\.ini$|^docs/status/declaration-index\.json$|^scripts/agent_gate\.sh$|^\.github/workflows/ci\.yml$)'
           run_lean=false
           if [ "${{ github.event_name }}" = "workflow_dispatch" ] || [ "${{ github.event_name }}" = "schedule" ]; then
             run_lean=true
@@ -200,6 +210,44 @@ jobs:
       - name: Kernel axiom check for headline declarations
         if: steps.filter.outputs.run_lean == 'true'
         run: python3 scripts/check_print_axioms.py
+      # The intake lane promises "a compiling `Prop`", and the cheap gate cannot
+      # check the `Prop` half: the declaration index records name, kind and
+      # module and no types. This elaborates each deposited name through the
+      # module its row advertises. It needs the build, so it lives here rather
+      # than in agent_gate.sh -- that job installs pytest and no toolchain, and
+      # the first real submission would have met a missing `lake`. While the
+      # lane is empty the step returns without invoking Lean at all.
+      - name: Intake statements elaborate to Prop
+        if: steps.filter.outputs.run_lean == 'true'
+        run: python3 scripts/check_intake_statements.py
+      # The tests marked `lean` shell out to `lake env lean`, so they skip
+      # themselves in the agent-gate job, which installs pytest and no
+      # toolchain. Eleven of them did — including every test of the intake
+      # harness, whose own header says those tests are the only evidence the
+      # check works, since the lane is empty. They run here, where the
+      # toolchain exists.
+      - name: Toolchain-dependent tests (pytest -m lean)
+        if: steps.filter.outputs.run_lean == 'true'
+        run: |
+          set -euo pipefail
+          # A venv, matching the agent-gate job. `pip install --user` against a
+          # distribution Python on ubuntu-latest hits PEP 668
+          # (externally-managed-environment); this job's whole purpose is to be
+          # the place these tests actually run, so it must not depend on that.
+          # The venv python is called directly rather than put on PATH, because
+          # `lake` has to stay resolvable in the same step.
+          lean_venv="$RUNNER_TEMP/atlas-lean-tests-venv"
+          python3 -m venv "$lean_venv"
+          # PyYAML as well as pytest, matching the agent-gate job: without it
+          # 33 tests do not collect at all, and a future `lean` test in one of
+          # those modules would disappear from this step rather than fail in it.
+          "$lean_venv/bin/python" -m pip install --quiet pytest pyyaml
+          # If the marker is ever misspelled, pytest selects nothing and exits
+          # 5, which `set -e` turns into a failed step. That is deliberate: a
+          # step whose whole purpose is running these tests must not be able to
+          # pass by running none. Do not add `|| true`.
+          "$lean_venv/bin/python" -m pytest tests/ -q --no-header \
+            -p no:cacheprovider -m lean
       # The step above decides *what* to audit with two regexes over source
       # text, and nothing checked that they reach what they claim to. They did
       # not: `PUBLIC_THEOREM_RE` rejected a leading attribute, so every

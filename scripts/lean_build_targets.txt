@@ -247,3 +247,7 @@ AISafetyAtlas.Conjectures.MAIS.A7Zeta
 AISafetyAtlas.Examples.Conjectures.MAIS.A7Zeta
 AISafetyAtlas.Fairness.RiskAssignment
 AISafetyAtlas.Examples.Fairness.RiskAssignment
+AISafetyAtlas.Preference.Knowability
+AISafetyAtlas.Examples.Preference.Knowability
+AISafetyAtlas.Compositional.Knowability
+AISafetyAtlas.Examples.Compositional.Knowability

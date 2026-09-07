@@ -10,7 +10,7 @@ Edges come from the elaborated Lean environment. This answers the question the p
 
 So `A → B` means *`B` occurs in `A`'s statement, or in `A`'s body when `A` is a definition*. A lemma used only inside a proof does not appear. Reading the table as a complete call graph would be wrong, and the two sections below are scoped so that they stay true under this limit.
 
-`83` authored declarations in `AISafetyAtlas.Preference.*` (50 theorems). Compiler-generated companions and projections are dropped.
+`85` authored declarations in `AISafetyAtlas.Preference.*` (52 theorems). Compiler-generated companions and projections are dropped.
 
 ## Load-bearing declarations
 
@@ -18,16 +18,17 @@ Named in the statements of eight or more others. A change to one of these is a c
 
 | Declaration | Named by |
 |---|---|
-| `Policy` | 42 |
-| `RewardFn` | 32 |
-| `Planner` | 22 |
-| `Pair` | 21 |
+| `Policy` | 44 |
+| `RewardFn` | 34 |
+| `Planner` | 24 |
+| `Pair` | 23 |
 | `Explains` | 15 |
 | `OverrideModel` | 14 |
 | `op6` | 9 |
 | `op4` | 9 |
 | `op2` | 9 |
 | `Source.ReasonableForF` | 9 |
+| `op3` | 8 |
 | `OverrideModel.resulting` | 8 |
 
 ## Definitions no statement and no example mentions
@@ -108,9 +109,11 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 | `greedyPlanner` | definition | `Planner`, `Policy`, `RewardFn`, `greedyAction` |
 | `greedy_rewardOf` | theorem | `Explains`, `Policy`, `RewardFn`, `greedyPlanner`, `rewardOf` |
 | `indifferentPlanner` | definition | `Planner` |
+| `knowable_reward_of_isEmpty_state` | theorem | `Pair`, `Planner`, `Policy`, `RewardFn`, `op3` |
 | `lemma_six` | theorem | `Explains`, `Policy`, `RewardFn`, `greedyPlanner`, `indifferentPlanner`, `negPlanner`, `rewardOf` |
 | `negPlanner` | definition | `Planner`, `Policy`, `RewardFn` |
 | `neg_twin` | theorem | `Explains`, `Planner` |
+| `not_knowable_reward` | theorem | `Pair`, `Planner`, `Policy`, `RewardFn`, `op3` |
 | `op1` | definition | `Pair`, `Planner`, `Policy`, `RewardFn` |
 | `op2` | definition | `Pair`, `Planner`, `Policy`, `RewardFn`, `greedyPlanner` |
 | `op3` | definition | `Pair`, `Planner`, `Policy`, `RewardFn` |

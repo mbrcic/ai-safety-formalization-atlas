@@ -374,9 +374,9 @@ for another kind to describe.
 
 **`source_note` is not a confession field.** It is required when the grade is not
 `Same`/`Literal`, and *welcome* when it is — a row at the printed quantifier
-often still made reading choices worth recording, and an earlier version of this
-schema rejected a note on such a row, which pushed every one of those
-disclosures into Lean docstrings where no reader of the ledger sees them. What is
+often still made reading choices worth recording. Rejecting a note on such a row
+pushes those disclosures into Lean docstrings, where no reader of the ledger
+sees them. What is
 still rejected is a fragment: a note is an argument or it is absent.
 
 A narrow *witness* is fine and always was. State the conjecture at the printed

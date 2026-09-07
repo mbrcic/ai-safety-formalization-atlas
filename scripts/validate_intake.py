@@ -25,6 +25,14 @@ under `AISafetyAtlas.Conjectures.Intake.*`, are never reachable from the atlas
 root import, and a `Prop`-valued definition asserts nothing on its own. `sorry`
 stays banned repo-wide.
 
+**What this file does not establish.** It resolves a deposited name against the
+elaborated declaration index, and checks the recorded kind and module. The index
+carries no types -- deliberately, see `generate_declaration_index.py` -- so
+nothing here can see that a deposited definition is `Prop`-valued rather than,
+say, a `Nat`. `scripts/check_intake_statements.py` elaborates the deposited
+names and is what makes the lane's headline promise true. The split is
+deliberate: this check is cheap and runs anywhere, that one needs a build.
+
 **Leaving the lane is a decision that gets recorded.** A row is `PROMOTED` when
 it becomes a conjecture row -- and must then name the `CONJ-` id it became, so
 the two ledgers cannot drift apart -- or `DECLINED` with a reason. Ids are never
@@ -49,6 +57,17 @@ DATE_RE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
 LEAN_PREFIX = "AISafetyAtlas.Conjectures.Intake."
 
 STATUSES = {"OPEN", "PROMOTED", "DECLINED"}
+
+# What a deposited name may be. The index records `kind`, so this much is free.
+# `def` only: the lane takes a statement, and a `theorem` is a *proof*, which is
+# a different deposit with a different bar. An `inductive` or a `constructor` is
+# neither.
+#
+# This is a necessary condition and not the check the lane's contract promises.
+# `Prop`-valuedness is a fact about the elaborated *type*, which the index does
+# not carry by design, and `scripts/check_intake_statements.py` is what
+# establishes it.
+DEPOSITABLE_KINDS = {"def"}
 
 REQUIRED = ("id", "statement", "lean", "lean_module", "proposed_by", "received", "status")
 OPTIONAL = ("why_it_matters", "outcome", "promoted_to")
@@ -106,14 +125,18 @@ def main() -> None:
     if not isinstance(next_id, int) or next_id < 1:
         fail("next_id must be a positive integer")
 
-    declarations: set[str] = set()
+    # name -> (kind, module). The kind and the module both carry weight below:
+    # a row's whole content is that a *proposition* compiles and that the module
+    # it advertises is the one that supplies it, and a bare name set can check
+    # neither.
+    declarations: dict[str, tuple[str, str]] = {}
     if DECLARATION_INDEX.exists():
         try:
             index = json.loads(DECLARATION_INDEX.read_text(encoding="utf-8"))
         except (OSError, json.JSONDecodeError) as error:
             fail(f"docs/status/declaration-index.json is unreadable: {error}")
         declarations = {
-            entry["name"]
+            entry["name"]: (str(entry.get("kind", "")), str(entry.get("module", "")))
             for entry in index.get("declarations", [])
             if isinstance(entry, dict) and isinstance(entry.get("name"), str)
         }
@@ -198,12 +221,40 @@ def main() -> None:
     # Resolution against the elaborated index runs last, after every structural
     # rule. A row that breaks both should hear about the cheap defect it can fix
     # from the ledger alone before the one that needs a build.
+    #
+    # This used to read `if declarations and ...`, which skipped resolution
+    # entirely whenever the index was missing or empty -- so a row naming a
+    # declaration that does not exist was accepted by an absent build product.
+    # A lane whose whole content is "this compiles" must not fail open on the
+    # only artifact that could say so.
+    if rows and not declarations:
+        fail(
+            "intake rows are present but docs/status/declaration-index.json is "
+            "missing or empty; a row's whole content is that its statement "
+            "compiles, so it cannot be admitted without the elaborated index. "
+            "Run scripts/generate_declaration_index.py --write after a build"
+        )
     for row in rows:
-        if declarations and row["lean"] not in declarations:
+        entry = declarations.get(row["lean"])
+        if entry is None:
             fail(
                 f"{row['id']} names {row['lean']!r}, which is not in the elaborated "
                 "declaration index; an intake row's whole content is that the "
                 "statement compiles"
+            )
+        kind, module = entry
+        if kind not in DEPOSITABLE_KINDS:
+            fail(
+                f"{row['id']} names {row['lean']!r}, which the elaborated index "
+                f"records as a {kind or 'declaration of unknown kind'}. The lane "
+                f"takes a statement, so it must be one of {sorted(DEPOSITABLE_KINDS)}"
+            )
+        if module != row["lean_module"]:
+            fail(
+                f"{row['id']} advertises lean_module {row['lean_module']!r}, but "
+                f"{row['lean']!r} is supplied by {module!r}. The module is an import "
+                "instruction for a reader, so a wrong one is a broken row rather "
+                "than a cosmetic mismatch"
             )
 
     open_rows = sum(1 for row in rows if row["status"] == "OPEN")

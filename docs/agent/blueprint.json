@@ -540,7 +540,16 @@
       "realized": true,
       "statability": null,
       "missing": [],
-      "escape_routes": []
+      "escape_routes": [
+        {
+          "axis": "RESTRICT_CLASS",
+          "status": "FORMALIZED"
+        },
+        {
+          "axis": "RESTRICT_CLASS",
+          "status": "FORMALIZED"
+        }
+      ]
     },
     "BY-011": {
       "id": "BY-011",
@@ -590,28 +599,28 @@
           "name": "AISafetyAtlas.Preference.Source.ReasonableForF.proposition_seven",
           "location": [
             "AISafetyAtlas/Preference/SourceComplexity.lean",
-            191
+            196
           ]
         },
         {
           "name": "AISafetyAtlas.Preference.Source.ReasonableForF.proposition_eight",
           "location": [
             "AISafetyAtlas/Preference/SourceComplexity.lean",
-            213
+            218
           ]
         },
         {
           "name": "AISafetyAtlas.Preference.ReasonableLanguage.proposition_seven",
           "location": [
             "AISafetyAtlas/Preference/Reasonable.lean",
-            196
+            203
           ]
         },
         {
           "name": "AISafetyAtlas.Preference.ReasonableLanguage.proposition_eight",
           "location": [
             "AISafetyAtlas/Preference/Reasonable.lean",
-            217
+            224
           ]
         },
         {
@@ -653,7 +662,7 @@
           "name": "AISafetyAtlas.Preference.Source.ReasonableForF.theorem_two_conditional",
           "location": [
             "AISafetyAtlas/Preference/SourceComplexity.lean",
-            273
+            278
           ]
         },
         {
@@ -1508,7 +1517,12 @@
       "realized": true,
       "statability": null,
       "missing": [],
-      "escape_routes": []
+      "escape_routes": [
+        {
+          "axis": "ADD_RESOURCE",
+          "status": "NAMED_ONLY"
+        }
+      ]
     },
     "CLM-LAWVERE-001": {
       "id": "CLM-LAWVERE-001",

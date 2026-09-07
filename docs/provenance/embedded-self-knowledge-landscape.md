@@ -125,7 +125,7 @@ weaker evidence than the corpus-level record and does not supersede it, so it is
 recorded here rather than by editing the row's `searched_on` date. Re-running the
 corpus-level search would require
 [`update_formalization_search.py`](../../scripts/update_formalization_search.py)
-against pinned local corpus checkouts, which were not available in this session.
+against pinned local corpus checkouts, which are not present in this tree.
 
 ## Brandenburger–Keisler and Abramsky–Zvesper
 
@@ -158,7 +158,7 @@ parent is `Ordered_Resolution_Prover`, which itself requires `Coinductive` and
 `Nested_Multisets_Ordinals`. Reproduction therefore goes through the full
 immutable AFP release, the pattern already used for `Deep_Learning`, via
 [`scripts/reproduce_isabelle.sh chandy-lamport`](../../scripts/reproduce_isabelle.sh).
-The full-release sha256 `b059edd4…` was computed independently in this session
+The full-release sha256 `b059edd4…` was computed independently
 and matches the pin already recorded in-tree for `Deep_Learning`.
 
 ### Reproduction (2026-08-11)

@@ -10,7 +10,7 @@ Edges come from the elaborated Lean environment. This answers the question the p
 
 So `A → B` means *`B` occurs in `A`'s statement, or in `A`'s body when `A` is a definition*. A lemma used only inside a proof does not appear. Reading the table as a complete call graph would be wrong, and the two sections below are scoped so that they stay true under this limit.
 
-`93` authored declarations in `AISafetyAtlas.Compositional.*` (50 theorems). Compiler-generated companions and projections are dropped.
+`96` authored declarations in `AISafetyAtlas.Compositional.*` (52 theorems). Compiler-generated companions and projections are dropped.
 
 ## Load-bearing declarations
 
@@ -20,10 +20,11 @@ Named in the statements of eight or more others. A change to one of these is a c
 |---|---|
 | `Hyperproperties.TraceSystem` | 28 |
 | `Hyperproperties.Hyperproperty` | 20 |
+| `Networks.Network` | 15 |
+| `Networks.Config` | 14 |
 | `Hyperproperties.Observation` | 13 |
-| `Networks.Network` | 11 |
-| `Networks.Config` | 9 |
 | `Hyperproperties.Realizes` | 9 |
+| `Networks.Algorithm` | 8 |
 
 ## Definitions no statement and no example mentions
 
@@ -103,12 +104,15 @@ None.
 | `Networks.SameView` | definition | `Networks.Config`, `Networks.Network`, `Networks.pathTo` |
 | `Networks.invariant_of_automorphism` | theorem | `Networks.Algorithm`, `Networks.Automorphism`, `Networks.Config`, `Networks.Invariant`, `Networks.Network`, `Networks.runFor` |
 | `Networks.invariant_of_constant` | theorem | `Networks.Automorphism`, `Networks.Config`, `Networks.Invariant`, `Networks.Network` |
+| `Networks.knowable_runFor` | theorem | `Networks.Algorithm`, `Networks.Config`, `Networks.Network`, `Networks.runFor`, `Networks.view` |
 | `Networks.no_unique_leader_of_fixedPointFree` | theorem | `Networks.Algorithm`, `Networks.Automorphism`, `Networks.Automorphism.toEquiv`, `Networks.Config`, `Networks.Invariant`, `Networks.Network`, `Networks.runFor`, `Symmetry.HasUniqueLeader` |
 | `Networks.pathTo` | definition | `Networks.Network` |
 | `Networks.runFor` | definition | `Networks.Algorithm`, `Networks.Config`, `Networks.Network` |
 | `Networks.runFor_eq_of_view_eq` | theorem | `Networks.Algorithm`, `Networks.Config`, `Networks.Network`, `Networks.SameView`, `Networks.runFor` |
+| `Networks.sameView_iff_view_eq` | theorem | `Networks.Config`, `Networks.Network`, `Networks.SameView`, `Networks.view` |
 | `Networks.step` | definition | `Networks.Algorithm`, `Networks.Algorithm.send`, `Networks.Algorithm.update`, `Networks.Config`, `Networks.Network`, `Networks.Network.port` |
 | `Networks.step_invariant` | theorem | `Networks.Algorithm`, `Networks.Automorphism`, `Networks.Config`, `Networks.Invariant`, `Networks.Network`, `Networks.step` |
+| `Networks.view` | definition | `Networks.Config`, `Networks.Network`, `Networks.pathTo` |
 | `RecombinationClosed` | definition | `coordinateProjection` |
 | `SpliceClosed` | definition | — |
 | `Symmetry.HasAtLeastTwo` | definition | — |

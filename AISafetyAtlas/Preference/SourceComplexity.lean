@@ -106,7 +106,12 @@ namespace ReasonableForF
 
 variable (L : ReasonableForF S A)
 
-/-- Compatibility, as in the source: the pair evaluates to the policy. -/
+/-- Compatibility, as in the source: the pair evaluates to the policy.
+
+`AISafetyAtlas.Preference.ReasonableLanguage.Compatible` is this same definition,
+character for character and with the same type, in the other language
+structure's namespace. `scripts/report_predicate_duplicates.py` surfaced the
+pair; the cross-reference is here so neither can be read as the only one. -/
 @[expose] public def Compatible (x : Pair S A) (π : Policy S A) : Prop := op3 x = π
 
 omit [Fintype A] [Nonempty A] [DecidableEq A] in

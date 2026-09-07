@@ -2450,6 +2450,20 @@
       },
       "tags": [
         "social-choice"
+      ],
+      "escape_routes": [
+        {
+          "axis": "RESTRICT_CLASS",
+          "status": "FORMALIZED",
+          "lean": "AISafetyAtlas.Examples.Fairness.RiskAssignment.equalRates_escape",
+          "note": "Restrict the instance class to equal base rates and the three criteria become jointly satisfiable. equalRates_escape is that statement: print's two numeric hypotheses, calibration, both balance conditions, equal base rates, and the failure of perfect prediction, in one conjunction. It is graded FORMALIZED because the restriction is inhabited by a checked model rather than argued, and the last conjunct is what makes this escape distinct rather than the other disjunct in disguise. The pointer named equalRates_conclusion until 2026-09-07; that theorem states the obstruction's own disjunction specialized to the witness, which is not the weakened claim, and two independent reviews caught it. What the escape costs is what the theorem says it costs: the groups must have the same base rate, which is a property of the population and not something a risk assignment can choose."
+        },
+        {
+          "axis": "RESTRICT_CLASS",
+          "status": "FORMALIZED",
+          "lean": "AISafetyAtlas.Examples.Fairness.RiskAssignment.perfect_escape",
+          "note": "The second disjunct is a second and independent restriction: restrict to perfectly predictable instances. perfect_escape is that statement, in the same shape as equalRates_escape, and its last conjunct is the failure of equal base rates, so neither witness satisfies both disjuncts and neither escape subsumes the other. The cost is that the features must determine the outcome, which is a property of the data rather than of the assignment. PerfectPrediction here is restricted to realized feature vectors; the module header records that reading, and print_perfectPrediction_of_populated is where the unrestricted sentence is recovered."
+        }
       ]
     },
     {
@@ -5196,7 +5210,14 @@
         "use": "The process-compositional version of a self-awareness limit; cycles are allowed.",
         "title": "Limited self-awareness",
         "attribution": "Brcic & Yampolskiy"
-      }
+      },
+      "escape_routes": [
+        {
+          "axis": "ADD_RESOURCE",
+          "status": "NAMED_ONLY",
+          "note": "The bounded resource the statement holds fixed is the awareness horizon, recorded directly as Model.available_finite - the module's non-claims say it is the fixed-horizon consequence of the source's bounded budget and positive minimum process cost, not derived here from a scalar budget. Dropping it is a real escape from Theorem 4.8 and therefore from the corollary: limited_self_awareness obtains its target from available_finite.exists_maximal, and with no maximal available composite that step has nothing to choose. It is graded NAMED_ONLY because no declaration in this tree states what happens in an unbounded horizon. That grade is about the tree and not about what is known: an adversarial review on 2026-09-07 exhibited the escape outside the tree, keeping every Model field except available_finite - the naturals under max, available = univ, aware o t := t < o, cost = id, minAwarenessCost = 1 - where every remaining field holds and every target has the observer t+1. So dropping the horizon does not merely stop this argument, it makes the conclusion false. Upgrading the grade needs a Model-minus-finiteness structure in the tree, which is a design decision about what the module's model class is and not a formality, so the route stays NAMED_ONLY until someone rules on it. Two things this route does not reach. The vertical obstruction survives it: not_aware_of_le and process_not_self_aware use only awareness_cost and minAwarenessCost_pos, so a constituent still cannot completely model its containing composite however large the horizon. And the strict positive awareness cost itself is the model's defining premise rather than a resource it holds fixed - weakening it abandons the source's reading of awareness as distinct active observation instead of escaping the theorem - so it is not recorded as a route on any axis in this vocabulary."
+        }
+      ]
     },
     {
       "id": "CLM-WOLPERT-KNOW-001",
@@ -6148,7 +6169,7 @@
         "compositionality",
         "multi-agent"
       ],
-      "notes": "Builds the network beneath AISafetyAtlas.Compositional.Symmetry, whose Protocol structure takes observational indistinguishability as a field. Here it is derived. runFor_eq_of_view_eq is the Angluin lemma: nodes whose views agree to depth n, meaning every port sequence of length at most n reaches equally-labelled nodes, are in the same state after n synchronous rounds, so an anonymous algorithm cannot see past the depth its messages have travelled. Automorphisms give the second route: invariant_of_automorphism shows a port-preserving permutation leaving the configuration invariant keeps it invariant through every round, and no_unique_leader_of_fixedPointFree concludes that a fixed-point-free automorphism rules out electing a unique leader, since the leader would have to be a fixed point. invariant_of_constant places the earlier constant-configuration symmetry inside this model. Deterministic and synchronous only, so Itai-Rodeh randomized symmetry breaking is out of scope. Message routing is simplified: the message received on port i is what the port-i neighbour sends on index i, rather than being routed back through the neighbour own port, which would need a port involution. The general covering and quotient machinery relating a network to its universal cover is not formalized. Upstream dependency for the survey-original BY-043. Not coverage of it; no status follows from this entry.",
+      "notes": "Builds the network beneath AISafetyAtlas.Compositional.Symmetry, whose Protocol structure takes observational indistinguishability as a field. Here it is derived. runFor_eq_of_view_eq is the Angluin lemma: nodes whose views agree to depth n, meaning every port sequence of length at most n reaches equally-labelled nodes, are in the same state after n synchronous rounds, so an anonymous algorithm cannot see past the depth its messages have travelled. Automorphisms give the second route: invariant_of_automorphism shows a port-preserving permutation leaving the configuration invariant keeps it invariant through every round, and no_unique_leader_of_fixedPointFree concludes that a fixed-point-free automorphism rules out electing a unique leader, since the leader would have to be a fixed point. invariant_of_constant places the earlier constant-configuration symmetry inside this model. step_equivariant is the law underneath the automorphism route, and is stated unconditionally: moving every node by a port-preserving permutation commutes with a synchronous round, with no invariance hypothesis, because anonymity means one update and one send are shared by every node. step_semiconj is that as Function.Semiconj, and invariant_iff_fixed says Invariant is exactly the fixed-point set of the action, so step_invariant is the law read at a fixed point rather than a second induction. These three are infrastructure landed ahead of a consumer by maintainer decision: nothing outside this module uses them yet, and they are prunable through the report_consumers work queue if nothing comes to. The intended consumer is the survey-original BY-043, whose symmetry-breaker taxonomy is stated over exactly this action; no BY-043 status follows from them. Deterministic and synchronous only, so Itai-Rodeh randomized symmetry breaking is out of scope. Message routing is simplified: the message received on port i is what the port-i neighbour sends on index i, rather than being routed back through the neighbour own port, which would need a port involution. The general covering and quotient machinery relating a network to its universal cover is not formalized. Upstream dependency for the survey-original BY-043. Not coverage of it; no status follows from this entry.",
       "original_source_refs": [],
       "related_result_ids": [
         "BY-043"
@@ -6164,6 +6185,9 @@
           "build_environment": "leanprover/lean4:v4.33.0; Mathlib db584cd6d46c92f209a44c0f1c829460d327499d; atlas IN_TREE",
           "declarations": [
             "runFor_eq_of_view_eq",
+            "step_equivariant",
+            "step_semiconj",
+            "invariant_iff_fixed",
             "invariant_of_automorphism",
             "no_unique_leader_of_fixedPointFree",
             "invariant_of_constant"
@@ -6179,6 +6203,9 @@
             "type": "NEW_PROOF",
             "source_declarations": [
               "runFor_eq_of_view_eq",
+              "step_equivariant",
+              "step_semiconj",
+              "invariant_iff_fixed",
               "invariant_of_automorphism",
               "no_unique_leader_of_fixedPointFree",
               "invariant_of_constant"
@@ -6193,6 +6220,350 @@
         "use": "Why identical agents cannot coordinate.",
         "title": "Symmetry in anonymous networks",
         "attribution": "Angluin"
+      }
+    },
+    {
+      "id": "LAND-PREF-KNOW-001",
+      "name": "Reward unidentifiability as a knowability obstruction",
+      "tags": [
+        "preference-inference",
+        "oversight"
+      ],
+      "notes": "A shared-API formulation, not new coverage. AISafetyAtlas.Preference.policy_neg_twin already states this content in the source's own form - the negated pair explains the same policy - and not_knowable_reward says that in the vocabulary AISafetyAtlas.Knowledge shares with Wireheading and Oversight, so a consumer holding a knowability question can reach it. It is NOT a restatement of the neighbouring policy_reward_unidentifiable, which asserts that every policy/reward pair admits some explaining planner; that is a different statement and the proof of not_knowable_reward does not use it. The world is the planner/reward pair Pair S A, the observation is the evaluated policy op3, the hidden property is Prod.snd, and the collision is the source's own anti-rational negation op4 together with the invariance op3_op4 it already proves. NOT additional BY-011 coverage, and NOT an audit or extension of the source's proof: restating a theorem through Knowable checks nothing about the printed argument. The nonemptiness hypotheses are load-bearing rather than defensive - knowable_reward_of_isEmpty_state proves that with no states the reward type is a subsingleton and recovery succeeds, so a reader who drops [Nonempty S] gets a false statement rather than a failed proof. The statement quantifies over all pairs and therefore excludes nothing about recovery on a restricted class of planners, or of a coarser target such as a reward equivalence class. The module asserts nothing about complexity and does not touch Preference.Complexity's standing non-claim on the anti-rational pair, which it uses only as a collision. Determines.refl and Determines.trans were added to the kernel in the same change and are recorded on LAND-KNOW-001, where they live; what they add there is names rather than laws. Determines is definitionally Knowable - both unfold to (exists f, forall x, B x = f (A x)) - so Determines.trans IS Knowable.mono at the same universes, each provable from the other by direct term application with no tactic, and Determines.refl is the identity-decoder instance of Knowable. Recording them as elementary laws the relation lacked would be wrong: the relation lacked the vocabulary, and Knowable.mono was and remains the single transport. Knowable.mono's own statement writes both names, its first hypothesis as a Determines and its second as a Knowable, which is what made the duplication easy to miss.",
+      "original_source_refs": [],
+      "related_result_ids": [
+        "BY-011",
+        "LAND-KNOW-001"
+      ],
+      "root_import": true,
+      "relations": [
+        {
+          "target": "LAND-KNOW-001",
+          "kind": "BUILDS_ON",
+          "note": "not_knowable_reward is the kernel's not_knowable_of_collision applied to op3 and Prod.snd; the module proves no factorization law of its own. Determines.refl and Determines.trans are added to the kernel itself rather than here."
+        }
+      ],
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE",
+          "license": "Apache-2.0",
+          "reproduced": true,
+          "build_environment": "leanprover/lean4:v4.33.0; Mathlib db584cd6d46c92f209a44c0f1c829460d327499d; atlas IN_TREE",
+          "declarations": [
+            "AISafetyAtlas.Preference.not_knowable_reward",
+            "AISafetyAtlas.Preference.knowable_reward_of_isEmpty_state"
+          ],
+          "module": "AISafetyAtlas.Preference.Knowability",
+          "atlas_module": "AISafetyAtlas.Preference",
+          "build_command": "lake build AISafetyAtlas.Preference.Knowability AISafetyAtlas.Examples.Preference.Knowability; python3 scripts/check_print_axioms.py"
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Preference.not_knowable_reward",
+            "type": "NEW_PROOF",
+            "source_declarations": [],
+            "application": "Cross-domain: the planner/reward obstruction expressed in the knowability kernel's vocabulary, so Preference is reachable from a question posed about observations. Restatement of existing BY-011 content, not new coverage of it."
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Preference.knowable_reward_of_isEmpty_state",
+            "type": "NEW_PROOF",
+            "source_declarations": [],
+            "application": "The scope boundary, proved rather than asserted: with no states the reward type is a subsingleton and the constant decoder succeeds, so not_knowable_reward's [Nonempty S] cannot be dropped."
+          }
+        ]
+      },
+      "public": {
+        "group": "What an observer can recover",
+        "summary": "Behaviour alone does not pin down the reward: no single rule turns every policy back into the goal that produced it.",
+        "use": "When behaviour is the only evidence about a goal.",
+        "title": "Reward is not knowable from policy",
+        "attribution": "Armstrong & Mindermann; a shared-API formulation of the row above, no novelty claimed"
+      }
+    },
+    {
+      "id": "LAND-COMP-TRACE-001",
+      "name": "A network's runs as a trace system",
+      "root_import": true,
+      "original_source_refs": [],
+      "related_result_ids": [
+        "LAND-ANGLUIN-001",
+        "LAND-HYPER-KNOW-001",
+        "LAND-KNOW-001"
+      ],
+      "tags": [
+        "compositionality",
+        "oversight"
+      ],
+      "notes": "The first producer of traces in the tree. AISafetyAtlas.Compositional.Hyperproperties defines TraceSystem, Realizes, IsBadObservation, IsKSafety, IsSafetyPredicate, the self-composition reduction and the prefix topology, and nothing anywhere produced a trace; the four modules that generate executions had no consumer reading them as traces, so both halves were live and unconnected. This connects the first of them. A Run is the whole synchronous execution as Nat to Config, a Snapshot is the atom saying that at round n the configuration is c, and realizes_systemOf characterizes exactly which finite observations a network's runs realize: those whose every snapshot is reached at its own round from some admitted initial configuration. NO general answer to what a system is: Trace and Prefix are free type parameters throughout Hyperproperties and prefixOf is supplied by the caller, so this instantiation commits nothing about how any other model should be read, and a shared transition-system interface remains a separate and much larger decision. BOTH READINGS OF A TRACE ARE BUILT. A run can be the round-indexed sequence of whole configurations, which is the outside view a global safety argument wants, or the sequence one node observes, which is the more faithful notion for an anonymous network because it is what a node actually has. ObsTrace is the second, and it is what makes anonymity statable rather than implicit in the absence of identifiers from the Algorithm type: not_knowable_node_of_fixedPointFree takes the node as the unknown, its observation trace as the observation and its own identity as the target, and a fixed-point-free automorphism of an invariant start leaves the observation fixed while moving the identity, which is exactly Knowledge.not_knowable_of_invariant_transform. Nonempty Node is load-bearing there rather than defensive: over an empty node type the decoder is vacuous and the identity is knowable, so dropping the instance gives a false statement rather than a failed proof. no_unique_leader_from_obsTrace is then strictly stronger than the configuration-level result, which evaluates a State to Prop predicate at one round: the predicate may read the node's entire observation history and still cannot single one out, so unbounded memory of a node's own past does not break the symmetry because the symmetry acts on the past too. THE FINER READINGS ARE STILL NOT BUILT: a node's own state sequence is not everything it could see, since Algorithm.update reads incoming messages and the state sequence does not determine them, so a node permitted to record received messages would know strictly more; ObsTrace is the coarsest honest choice rather than the finest possible one. The machinery becomes applicable but the worked example exercises little of it: connecting the types puts IsKSafety, IsHyperSafety, IsHyperLiveness, the self-composition reduction and the prefix topology within reach of a real dynamic model, while what is proved is a single k equals 1 certificate, no k of at least 2 hyperproperty of networks is stated, and non-interference, collusion and privacy under composition remain unformalized over this model. NOT new network mathematics and no BY-043 status follows: not_electsLeader_of_fixedPointFree is no_unique_leader_of_fixedPointFree transported across the producer and proves nothing the Angluin route did not already prove, and Networks remains an upstream dependency of the survey-original BY-043. ElectsLeader is not offered as the interesting hyperproperty; it is the one the tree can already refute, chosen so the producer is exercised by a theorem rather than by a definition. Landed ahead of a consumer by maintainer decision and prunable through the report_consumers work queue. Inherits every non-claim of Compositional.Networks: deterministic and synchronous only, no randomness, no asynchrony, simplified message routing.",
+      "relations": [
+        {
+          "target": "LAND-ANGLUIN-001",
+          "kind": "BUILDS_ON",
+          "note": "not_electsLeader_of_fixedPointFree is no_unique_leader_of_fixedPointFree transported across the producer; nothing further about networks is proved."
+        },
+        {
+          "target": "LAND-KNOW-001",
+          "kind": "BUILDS_ON",
+          "note": "not_knowable_node_of_fixedPointFree is the kernel's not_knowable_of_invariant_transform at the node-observation map, with the automorphism as the transform; the module proves no factorization law of its own."
+        }
+      ],
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE",
+          "license": "Apache-2.0",
+          "reproduced": true,
+          "build_environment": "leanprover/lean4:v4.33.0; Mathlib db584cd6d46c92f209a44c0f1c829460d327499d; atlas IN_TREE",
+          "declarations": [
+            "AISafetyAtlas.Compositional.Networks.realizes_systemOf",
+            "AISafetyAtlas.Compositional.Networks.not_electsLeader_of_fixedPointFree",
+            "AISafetyAtlas.Compositional.Networks.electsLeader_witnessed_by_one_snapshot",
+            "AISafetyAtlas.Compositional.Networks.ObsTrace",
+            "AISafetyAtlas.Compositional.Networks.obsTrace_automorphism",
+            "AISafetyAtlas.Compositional.Networks.not_knowable_node_of_fixedPointFree",
+            "AISafetyAtlas.Compositional.Networks.no_unique_leader_from_obsTrace",
+            "AISafetyAtlas.Compositional.Networks.obsSystem",
+            "AISafetyAtlas.Compositional.Networks.stateAtRound",
+            "AISafetyAtlas.Compositional.Networks.realizes_obsSystem",
+            "AISafetyAtlas.Compositional.Networks.systemOf",
+            "AISafetyAtlas.Compositional.Networks.runOf",
+            "AISafetyAtlas.Compositional.Networks.observedAt",
+            "AISafetyAtlas.Compositional.Networks.ElectsLeader"
+          ],
+          "module": "AISafetyAtlas.Compositional.NetworkTraces",
+          "atlas_module": "AISafetyAtlas.Compositional",
+          "build_command": "lake build AISafetyAtlas.Compositional.NetworkTraces; python3 scripts/check_print_axioms.py"
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Compositional.Networks.realizes_systemOf",
+            "type": "NEW_PROOF",
+            "source_declarations": [],
+            "application": "The producer/consumer interface: exactly which finite observations a network's runs realize. The trace theory had no producer in the tree before this."
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Compositional.Networks.not_electsLeader_of_fixedPointFree",
+            "type": "NEW_PROOF",
+            "source_declarations": [],
+            "application": "Angluin's conclusion as a statement about a whole trace system rather than one execution at a time. Transported, not re-proved."
+          }
+        ]
+      },
+      "public": {
+        "group": "Aggregation and multi-agent structure",
+        "summary": "A network's runs can be handed to the machinery that reasons about whole sets of executions.",
+        "use": "When a property is about all runs at once, not one run.",
+        "title": "A network's runs, as a system of traces",
+        "attribution": "after Angluin and Clarkson & Schneider; the connecting construction is the atlas's own, no novelty claimed"
+      }
+    },
+    {
+      "id": "LAND-HYPER-KNOW-001",
+      "name": "Finite-observation safety as a knowability factorization",
+      "root_import": true,
+      "original_source_refs": [],
+      "related_result_ids": [
+        "LAND-KNOW-001"
+      ],
+      "tags": [
+        "compositionality",
+        "oversight"
+      ],
+      "notes": "A shared-API formulation, not new coverage. AISafetyAtlas.Compositional.Hyperproperties.IsSafetyPredicate already says that every violating trace batch is witnessed by one finite observation all of whose realizers also violate; knowable_of_isSafetyPredicate says the same content as a factorization, with the batch as the unknown, the set of finite observations the batch realizes as the observation, and the safety predicate as the target. Two batches realizing the same observations cannot disagree, which is exactly the no-collision condition knowable_iff_no_collision needs. What is added is that the Hyperproperties cluster, which previously had no reference to AISafetyAtlas.Knowledge in either direction and no consumer outside AISafetyAtlas.Compositional, now consumes a shared law, so a question about what an observation settles reaches the trace theory. Landed ahead of a consumer by maintainer decision, and prunable through the report_consumers work queue. NOT a converse: knowability from realizedSet does not give IsSafetyPredicate back, because finiteness of the witnessing observation and the per-violation witness are both lost on the way in, and no attempt is made to recover them. NOT a trace producer: this connects the consumer side of the trace theory to the kernel and nothing here produces a trace. The producer is AISafetyAtlas.Compositional.NetworkTraces, catalogued as LAND-COMP-TRACE-001, which reads one of the four execution-generating modules as a TraceSystem; the other three, Compositional.Symmetry, Wireheading.CRMDP and Wireheading.GoalPreservation, still have no trace consumer. NOT a statement about IsKSafety, IsHyperSafety or IsHyperLiveness; only the ordinary batch predicate is routed. The property lands in Prop, so knowable_iff_no_collision's [Nonempty Y] is discharged by Prop being inhabited and the collision step closes with propext. Nothing here needs prefixOf decidable or Prefix and Trace finite.",
+      "relations": [
+        {
+          "target": "LAND-KNOW-001",
+          "kind": "BUILDS_ON",
+          "note": "knowable_of_isSafetyPredicate is the kernel's knowable_iff_no_collision applied to the realized-observation map and the safety predicate; the module proves no factorization law of its own."
+        }
+      ],
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE",
+          "license": "Apache-2.0",
+          "reproduced": true,
+          "build_environment": "leanprover/lean4:v4.33.0; Mathlib db584cd6d46c92f209a44c0f1c829460d327499d; atlas IN_TREE",
+          "declarations": [
+            "AISafetyAtlas.Compositional.Hyperproperties.knowable_of_isSafetyPredicate",
+            "AISafetyAtlas.Compositional.Hyperproperties.not_knowable_of_realizedSet_collision",
+            "AISafetyAtlas.Compositional.Hyperproperties.not_isSafetyPredicate_of_realizedSet_collision",
+            "AISafetyAtlas.Compositional.Hyperproperties.realizedSet"
+          ],
+          "module": "AISafetyAtlas.Compositional.Hyperproperties.Knowability",
+          "atlas_module": "AISafetyAtlas.Compositional",
+          "build_command": "lake build AISafetyAtlas.Compositional.Hyperproperties.Knowability; python3 scripts/check_print_axioms.py"
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Compositional.Hyperproperties.knowable_of_isSafetyPredicate",
+            "type": "NEW_PROOF",
+            "source_declarations": [],
+            "application": "Cross-domain: finite-observation safety expressed in the knowability kernel's vocabulary, so a question about what an observation settles reaches the trace theory. Restatement of existing Hyperproperties content, not new coverage."
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Compositional.Hyperproperties.not_isSafetyPredicate_of_realizedSet_collision",
+            "type": "NEW_PROOF",
+            "source_declarations": [],
+            "application": "The certificate direction a consumer holding a counterexample has: two batches realizing the same observations but disagreeing refute safety outright."
+          }
+        ]
+      },
+      "public": {
+        "group": "What an observer can recover",
+        "summary": "If a safety check reads only finitely much of a run, two runs that look alike must get the same verdict.",
+        "use": "When a monitor sees only finite evidence.",
+        "title": "Finite evidence decides a safety verdict",
+        "attribution": "after Clarkson & Schneider; a shared-API formulation, no novelty claimed"
+      }
+    },
+    {
+      "id": "LAND-CAUSAL-KNOW-001",
+      "name": "Behavioural identifiability as a knowability factorization",
+      "root_import": true,
+      "original_source_refs": [],
+      "related_result_ids": [
+        "LAND-CAUSAL-DECISION-001",
+        "LAND-KNOW-001"
+      ],
+      "tags": [
+        "interpretability",
+        "agent-incentives",
+        "oversight"
+      ],
+      "notes": "A shared-API formulation, not new coverage and no MAIS status follows from it. AISafetyAtlas.Causal.Skeleton.BehaviorEq already says two models agree on the masked gap response over every admissible visible set, assignment and mixture; behaviorEq_iff_behavior_eq proves that this is equality of a single observation map, in both directions, so bundling the bounded quantifier is a faithful repackaging rather than a change of statement. not_knowable_of_behaviorEq then reads a behaviourally equal pair with a differing attribute as a Knowledge collision. The generic form is what is new here, not the phenomenon: AISafetyAtlas.Examples.Causal already builds such pairs by hand in margin_class_not_identifiable, margin_class_not_identifiable_two_graphs, margin_class_not_identifiable_family and margin_class_not_identifiable_shared_optimal, and in the AISafetyAtlas.Examples.Causal.BehavioralCollision construction that answers MAIS-O23 in the negative. What those do not supply is the passage from a negated knowability to such a pair, which is exists_behaviorEq_pair_of_not_knowable, the kernel's exists_witness_of_not_knowable relabelled and classical as it is there. The Causal cluster previously had no reference to AISafetyAtlas.Knowledge in either direction, so this is the cluster's first shared-law edge. Landed ahead of a consumer by maintainer decision, and prunable through the report_consumers work queue. NOT a statement about InIdentifiedSet: that relation is about admissible policy families at a regret bound, a strictly weaker separator than behavioural equality, and inIdentifiedSet_zero_of_behaviorEq runs one way with no converse proved in the cluster; nothing here claims the identified set is the collision set of behavior. NOT a claim that any attribute is unidentifiable: every result is conditional on a supplied pair or a supplied failure. NOT an audit: restating identifiability through Knowable checks nothing about the printed argument. The observation is the masked gap family and nothing else, so a consumer whose policies read more than Delta-mask is outside every statement here.",
+      "relations": [
+        {
+          "target": "LAND-KNOW-001",
+          "kind": "BUILDS_ON",
+          "note": "Every theorem here is a kernel law at the causal observation: the collision law, the classical witness extraction, and Knowable.mono. The module proves no factorization law of its own."
+        },
+        {
+          "target": "LAND-CAUSAL-DECISION-001",
+          "kind": "BUILDS_ON",
+          "note": "Reads Skeleton, Model.Delta-mask and BehaviorEq from the decision layer and restates them; proves nothing further about causal models."
+        }
+      ],
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE",
+          "license": "Apache-2.0",
+          "reproduced": true,
+          "build_environment": "leanprover/lean4:v4.33.0; Mathlib db584cd6d46c92f209a44c0f1c829460d327499d; atlas IN_TREE",
+          "declarations": [
+            "AISafetyAtlas.Causal.behaviorEq_iff_behavior_eq",
+            "AISafetyAtlas.Causal.not_knowable_of_behaviorEq",
+            "AISafetyAtlas.Causal.exists_behaviorEq_pair_of_not_knowable",
+            "AISafetyAtlas.Causal.knowable_of_determines_behavior",
+            "AISafetyAtlas.Causal.behavior"
+          ],
+          "module": "AISafetyAtlas.Causal.Knowability",
+          "atlas_module": "AISafetyAtlas.Causal.Knowability",
+          "build_command": "lake build AISafetyAtlas.Causal.Knowability; python3 scripts/check_print_axioms.py"
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Causal.behaviorEq_iff_behavior_eq",
+            "type": "NEW_PROOF",
+            "source_declarations": [],
+            "application": "The faithfulness of the repackaging, proved in both directions: BehaviorEq's bounded quantifier bundled as a dependent function is the same statement."
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Causal.exists_behaviorEq_pair_of_not_knowable",
+            "type": "NEW_PROOF",
+            "source_declarations": [],
+            "application": "Cross-domain: from a failure of identifiability to a concrete behaviourally equal pair. The direction the hand-built collisions in Examples.Causal do not supply."
+          }
+        ]
+      },
+      "public": {
+        "group": "What an observer can recover",
+        "summary": "If two causal models act the same under every test, nothing that tells them apart can be read off their behaviour.",
+        "use": "When behaviour is the only evidence about a causal structure.",
+        "title": "Behaviour does not pin down a causal model",
+        "attribution": "a shared-API formulation over the atlas's own causal decision layer, no novelty claimed"
+      }
+    },
+    {
+      "id": "LAND-COMP-KNOW-001",
+      "name": "The Angluin view as a knowability factorization",
+      "tags": [
+        "compositionality",
+        "oversight"
+      ],
+      "notes": "A shared-API formulation, not new coverage. AISafetyAtlas.Compositional.Networks.runFor_eq_of_view_eq already proves the Angluin lemma - nodes whose views agree to depth n are in the same state after n rounds - and knowable_runFor says the same thing as a factorization: the node is the unknown, the depth-n view is the observation, the state after n rounds is the target property, and the Angluin lemma is exactly the no-collision condition knowable_iff_no_collision needs. NOT new BY-043 coverage: Networks is an upstream dependency for the survey-original result and remains one, and no status upgrade follows. NOT a new theorem about networks: the mathematics is entirely runFor_eq_of_view_eq's. What is added is that Compositional, which previously had no cross-domain library import in either direction, now consumes a shared law. It concludes Knowable rather than refuting it, which the kernel also does in Knowledge.Devices.knowable_probe_of_forall_blockAnswers, Knowledge.Check.knowable_of_findCollision_eq_none, and twice in Oversight.JointObservation. knowable_runFor carries no hypotheses, because the Angluin lemma holds for every network, algorithm, configuration and round count without qualification. No uniqueness claim is attached to it. Restating an existing theorem in a shared vocabulary is worth doing whether or not the restatement is the only one of its shape. The repackaging of SameView as a function on port sequences of bounded length is proved faithful in both directions by sameView_iff_view_eq, so nothing is lost or added on the way into the kernel. The statement is unconditional in the state type: knowable_iff_no_collision's [Nonempty Y] is discharged by a case split rather than imposed, because with no states there are no nodes either and the observation type is itself empty. Inherits every non-claim of Compositional.Networks - deterministic and synchronous only, no randomness, no asynchrony, simplified message routing - and asserts nothing about whether a node can compute the decoder, which is assembled classically. The cost is measured rather than asserted: runFor_eq_of_view_eq depends on propext and Quot.sound, and this proof of knowable_runFor adds Classical.choice, because it assembles the decoder through Function.extend, which needs a junk value on views no node realizes. That is a fact about this implementation and not about the theorem - nothing here shows the factorization requires choice, and no claim of strict logical strength is made either way.",
+      "original_source_refs": [],
+      "related_result_ids": [
+        "LAND-ANGLUIN-001",
+        "LAND-KNOW-001"
+      ],
+      "root_import": true,
+      "relations": [
+        {
+          "target": "LAND-KNOW-001",
+          "kind": "BUILDS_ON",
+          "note": "knowable_runFor is the kernel's knowable_iff_no_collision applied to the depth-n view and the state after n rounds; the module proves no factorization law of its own."
+        },
+        {
+          "target": "LAND-ANGLUIN-001",
+          "kind": "BUILDS_ON",
+          "note": "The no-collision premise is runFor_eq_of_view_eq verbatim. This row restates that theorem and proves nothing further about networks."
+        }
+      ],
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE",
+          "license": "Apache-2.0",
+          "reproduced": true,
+          "build_environment": "leanprover/lean4:v4.33.0; Mathlib db584cd6d46c92f209a44c0f1c829460d327499d; atlas IN_TREE",
+          "declarations": [
+            "AISafetyAtlas.Compositional.Networks.knowable_runFor",
+            "AISafetyAtlas.Compositional.Networks.sameView_iff_view_eq",
+            "AISafetyAtlas.Compositional.Networks.view"
+          ],
+          "module": "AISafetyAtlas.Compositional.Knowability",
+          "atlas_module": "AISafetyAtlas.Compositional",
+          "build_command": "lake build AISafetyAtlas.Compositional.Knowability AISafetyAtlas.Examples.Compositional.Knowability; python3 scripts/check_print_axioms.py"
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Compositional.Networks.knowable_runFor",
+            "type": "NEW_PROOF",
+            "source_declarations": [],
+            "application": "Cross-domain: the Angluin lemma expressed in the knowability kernel's vocabulary, so a question about what an observation settles reaches the network model. Restatement of existing LAND-ANGLUIN-001 content, not new coverage of it."
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Compositional.Networks.sameView_iff_view_eq",
+            "type": "NEW_PROOF",
+            "source_declarations": [],
+            "application": "The faithfulness of the repackaging, proved in both directions: an observation map must return one value, and SameView is a quantified family of equalities."
+          }
+        ]
+      },
+      "public": {
+        "group": "What an observer can recover",
+        "summary": "In an anonymous network, how far a node can see decides what state it ends up in.",
+        "use": "The positive side of the same law: when a limited observation is nonetheless enough.",
+        "title": "A node's view decides its state",
+        "attribution": "after Angluin; a shared-API formulation, no novelty claimed"
       }
     },
     {
@@ -7216,6 +7587,9 @@
             "AISafetyAtlas.Knowledge.Determines",
             "AISafetyAtlas.Knowledge.knowable_iff_factorsThrough",
             "AISafetyAtlas.Knowledge.knowable_iff_no_collision",
+            "AISafetyAtlas.Knowledge.not_knowable_of_invariant_transform",
+            "AISafetyAtlas.Knowledge.Determines.refl",
+            "AISafetyAtlas.Knowledge.Determines.trans",
             "AISafetyAtlas.Knowledge.not_knowable_of_collision",
             "AISafetyAtlas.Knowledge.not_knowable_of_witness",
             "AISafetyAtlas.Knowledge.exists_witness_of_not_knowable",
@@ -7257,6 +7631,18 @@
             "source_declarations": []
           },
           {
+            "atlas_declaration": "AISafetyAtlas.Knowledge.Determines.trans",
+            "type": "NEW_PROOF",
+            "source_declarations": [],
+            "application": "Names the composition of two recoveries on the Determines side. It is not a new law: it is defined as Knowable.mono, because Determines and Knowable applied at the same arguments are one proposition. Recorded here rather than on a consumer row because it is a kernel declaration."
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Knowledge.not_knowable_of_invariant_transform",
+            "type": "NEW_PROOF",
+            "source_declarations": [],
+            "application": "The packaged form of not_knowable_of_collision for the case where the colliding pair is produced by an observation-preserving map rather than found. Both Wireheading.ObservationLimits, with the environment complement, and Preference.Knowability, with the anti-rational negation, were building that pair by hand."
+          },
+          {
             "atlas_declaration": "AISafetyAtlas.Knowledge.exists_witness_of_not_knowable",
             "type": "NEW_PROOF",
             "source_declarations": []
@@ -7285,7 +7671,7 @@
           "axis": "ADD_INFORMATION",
           "status": "FORMALIZED",
           "lean": "AISafetyAtlas.Knowledge.Knowable.mono",
-          "note": "Knowability transfers to any more informative observation: if `finer` Determines `coarser` and the property is knowable from `coarser`, it is knowable from `finer`. The decoder is composed rather than reassembled, so the route is constructive and costs nothing beyond obtaining the finer observation. This is the only escape route in the ledger the tree proves rather than names."
+          "note": "Knowability transfers to any more informative observation: if `finer` Determines `coarser` and the property is knowable from `coarser`, it is knowable from `finer`. The decoder is composed rather than reassembled, so the route is constructive and costs nothing beyond obtaining the finer observation. It was for a long time the only escape route in the ledger the tree proves rather than names; BY-010 now carries two more, each inhabited by a checked model."
         },
         {
           "axis": "RESTRICT_CLASS",

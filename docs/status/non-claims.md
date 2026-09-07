@@ -11,9 +11,46 @@ rather than derives, printed results it does not reach, and inferences a
 reader might expect to follow from what is here and which do not. They are
 part of the result, not a disclaimer attached to it.
 
-**35 modules** carry one.
+**38 modules** carry one.
 
 ---
+
+## `AISafetyAtlas.Compositional.Hyperproperties.Knowability`
+
+- **Not new mathematics.** `IsSafetyPredicate` is unchanged and its consequences
+  are unchanged; `knowable_of_isSafetyPredicate` derives nothing the definition
+  did not already say. What is new is that it is said in the vocabulary
+  `Knowledge` shares with `Oversight`, `Preference` and `Wireheading`.
+- **Not a converse.** Knowability from `realizedSet` does **not** give back
+  `IsSafetyPredicate`. Factorization says the predicate is constant on batches
+  with equal realized-observation sets; safety says more, that each violation is
+  witnessed by a *single finite* observation all of whose realizers violate.
+  Finiteness and the per-violation witness are lost on the way in, and no attempt
+  is made to recover them.
+- **Not a trace producer.** This connects the *consumer* side of the trace theory
+  to the kernel, and nothing here produces a trace. The producer is
+  `AISafetyAtlas.Compositional.NetworkTraces`, which reads one of the four
+  execution-generating modules as a `TraceSystem`; the other three —
+  `Compositional.Symmetry`, `Wireheading.CRMDP` and
+  `Wireheading.GoalPreservation` — still have no trace consumer.
+- **Not** a claim about `IsKSafety`, `IsHyperSafety` or `IsHyperLiveness`. Only
+  the ordinary batch-predicate notion is routed.
+
+## `AISafetyAtlas.Compositional.Knowability`
+
+- **Not new BY-043 coverage.** `Networks` is an upstream dependency for the
+  survey-original result and says so; expressing its lemma through `Knowable`
+  changes nothing about that. Any ledger row must record this as a shared-API
+  formulation.
+- **Not a new theorem about networks.** `runFor_eq_of_view_eq` does all the
+  mathematical work. What is added is that `Compositional`, previously the
+  atlas's most isolated domain, now consumes a shared law.
+- **Deterministic and synchronous only**, inheriting every non-claim in
+  `Compositional.Networks` — no randomness, no asynchrony, and the simplified
+  message routing.
+- **Not** a claim that a node can *compute* the decoder. `Knowable` asserts a
+  function exists; it is silent about how a node would obtain one, and the
+  decoder here is assembled classically.
 
 ## `AISafetyAtlas.Compositional.Networks`
 
@@ -44,7 +81,10 @@ part of the result, not a disclaimer attached to it.
   coalition access restriction. Rectangularity asks whether a relation decomposes into
   local product constraints. Neither subsumes the other — a rectangular relation may be
   unobservable, and a non-rectangular one may be covered — but the indistinguishability
-  and bounded-witness patterns recur in both.
+  and bounded-witness patterns recur in both. Since `Networks.knowable_runFor` they
+  also share a kernel: both surfaces state their factorization question through
+  `AISafetyAtlas.Knowledge`, which makes the shapes comparable without making the
+  questions the same.
 
 Landscape / survey anchors: `LAND-HYPER-002`, `LAND-RECT-001`, `LAND-ANGLUIN-001`,
 BY-043 (RELATED). Cores compile; paper-parity residuals live in
@@ -360,6 +400,29 @@ No survey coverage row is claimed here; this is landscape infrastructure.
   the source's Appendix A discusses those separately.
 
 Survey row: **BY-011**. No AI-system bridge is asserted.
+
+## `AISafetyAtlas.Preference.Knowability`
+
+- **Not new mathematics, and not new BY-011 coverage.**
+  `AISafetyAtlas.Preference.policy_neg_twin` already states this content in the
+  source's own form: the negated pair explains the same policy. The neighbouring
+  `policy_reward_unidentifiable` is a *different* statement — for every policy
+  and reward some planner explains the pair — and is not what this restates. What is new here is that the same obstruction is expressed in the
+  vocabulary `AISafetyAtlas.Knowledge` shares with `Wireheading` and
+  `Oversight`, so a consumer holding a knowability question can reach it. Any
+  ledger row must record it as a shared-API formulation, never as coverage the
+  survey row did not already have.
+- **Not** an audit or an extension of the source's proof. Restating a theorem
+  through `Knowable` checks nothing about the printed argument.
+- **Not** a claim that the reward is unrecoverable on every model class. The
+  statement quantifies over *all* pairs; recovery may well succeed after
+  restricting the admissible planners, or for a coarser target such as a
+  reward equivalence class. `knowable_reward_of_isEmpty_state` below is one
+  such restriction, and it is a real one.
+- **Not** a statement about `AISafetyAtlas.Preference.Complexity`'s non-claim on
+  the anti-rational pair. That module declines to treat `(-p_g, -R_π̇)` as a
+  complexity comparison; this module uses `op4` only as a collision, and asserts
+  nothing about complexity.
 
 ## `AISafetyAtlas.Preference.Override`
 
