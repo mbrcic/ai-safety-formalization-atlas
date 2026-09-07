@@ -76,6 +76,9 @@ in the repository can detect it.
   readings that are choices rather than transcriptions
 - [Toolchain v4.33.0 migration](provenance/toolchain-v4330-migration.md) — what
   moved, what broke, and which build records were deliberately not rewritten
+- [Verification scheduling](provenance/verification-scheduling.md) — what CI runs
+  on which trigger and why: the cost ladder, the two gated checks, and the window
+  each gating leaves open
 - [MAIS source pin](provenance/mais-source-pin.md) — the commit and per-file SHA-256
   the MAIS-A2 grading is anchored to
 - [MAIS-O70 conditional verification](provenance/mais-o70-conditional-verification.md) —

@@ -89,6 +89,7 @@ jobs:
           && 75 || 30 }}
     outputs:
       run_lean: ${{ steps.filter.outputs.run_lean }}
+      run_migration: ${{ steps.filter.outputs.run_migration }}
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
@@ -128,6 +129,35 @@ jobs:
           fi
           echo "run_lean=$run_lean" >> "$GITHUB_OUTPUT"
           echo "Lean build required: $run_lean"
+
+          # A migration is decided by the toolchain moving, not by anybody's
+          # intent -- the same rule check_migration_adjudicated.py applies, and
+          # for the same reason: a branch that means to bump the toolchain and a
+          # branch that bumps it by accident need the same check to run. The
+          # baseline dump counts because re-dumping it *is* the migration act,
+          # and a branch that rewrites the baseline without re-comparing against
+          # it would otherwise gate itself out of the only check that reads it.
+          migration_pattern='(^lean-toolchain$|^lakefile\.toml$|^lake-manifest\.json$|^docs/status/elab-baseline-.*\.json$)'
+          run_migration=false
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            if git diff --name-only "${{ github.event.pull_request.base.sha }}" \
+                 "${{ github.event.pull_request.head.sha }}" \
+                 | grep -E "$migration_pattern" >/dev/null; then
+              run_migration=true
+            fi
+          elif [ "${{ github.event_name }}" = "push" ]; then
+            before="${{ github.event.before }}"
+            if [ -n "$before" ] && [ "$before" != "0000000000000000000000000000000000000000" ]; then
+              if git diff --name-only "$before" "${{ github.sha }}" \
+                   | grep -E "$migration_pattern" >/dev/null; then
+                run_migration=true
+              fi
+            else
+              run_migration=true
+            fi
+          fi
+          echo "run_migration=$run_migration" >> "$GITHUB_OUTPUT"
+          echo "Toolchain migration: $run_migration"
       - name: Skip notice
         if: steps.filter.outputs.run_lean != 'true'
         run: echo "No Lean-related paths changed; skipping lake build and axiom check."
@@ -231,22 +261,67 @@ jobs:
       # fail on the one bucket an ordinary branch can be held to. `--fatal
       # silent` is the whole reason this is gateable. Adding, removing or
       # visibly editing a statement is what a branch is for and would make a
-      # plain --compare red on every ordinary PR, which is why it was left
-      # unwired; but a declaration whose printed type is unchanged cannot have
-      # changed meaning through an edit, so a silent change is never work
-      # anyone asked for.
+      # plain --compare red on every ordinary PR; a declaration whose printed
+      # type is unchanged cannot have changed meaning through an edit, so a
+      # silent change is never work anyone asked for.
+      #
+      # WHEN IT RUNS -- toolchain migrations, the two schedules, release tags
+      # and manual runs. NOT on an ordinary pull request, and this is a change
+      # from how it was first wired.
+      #
+      # The dump elaborates the whole environment: 342 s and 2.2 GB on an idle
+      # 12-core host against a tree the steps above have already built, slower
+      # on a two-core hosted runner. It was the largest single step on an
+      # ordinary pull request, against a job budget of 30 minutes.
+      #
+      # It now runs on:
+      #
+      #   * `run_migration` -- lean-toolchain, lakefile.toml, lake-manifest.json
+      #     or a baseline dump moved. This is the dominant cause, and it fires on
+      #     the pull request that does it, before the merge, exactly as before.
+      #     lakefile.toml is in the list on its own account and not only through
+      #     the manifest: `leanOptions` such as autoImplicit or pp settings
+      #     change elaboration with no manifest movement at all.
+      #   * `schedule` -- both crons. The weekly one exists to catch Mathlib CDN
+      #     and toolchain drift, which is this check's own failure mode and
+      #     arrives with no commit attached; the nightly one bounds how long any
+      #     silent change can sit unnoticed to a day.
+      #   * release tags and `workflow_dispatch` -- nothing ships unverified,
+      #     and anyone who wants the answer now can have it.
+      #
+      # WHAT THIS GIVES UP, stated because it is a trade and not a free saving.
+      # Silent drift is usually caused by the environment moving under unchanged
+      # source, and those causes are all still gated above. But an ordinary
+      # atlas pull request *can* produce it: adding a typeclass instance changes
+      # resolution for declarations nobody edited, and so can an attribute, a
+      # notation, or a change to a definition's implicit arguments. In each case
+      # the printed type is unchanged and the elaborated type is not. That is
+      # the case that now waits for the nightly run instead of blocking the pull
+      # request, so the exposure window is a day rather than zero.
+      #
+      # It has never been observed firing on such a pull request here, and 342 s
+      # on every Lean-touching PR is a certain cost against an uncertain one --
+      # the maintainer's call, taken deliberately. If it starts catching things
+      # nightly that a PR introduced, the trade is wrong and this should go back.
+      #
+      # This mirrors the leanchecker gating below, with `run_migration` added
+      # because that is the event this check answers to and leanchecker does
+      # not. The decision, the cost ladder for every check in this job, and the
+      # window each gating leaves open are recorded in
+      # docs/provenance/verification-scheduling.md -- read that before changing
+      # a trigger here.
       #
       # Expect it to go red on a toolchain bump. That is correct and is the
       # point: re-adjudicate the silent set, re-dump the baseline, and record
-      # the classes. Do not widen the flag.
-      #
-      # Cost: the dump elaborates the whole environment, measured at 342 s and
-      # 2.2 GB on an idle 12-core host against a tree the steps above have
-      # already built; a two-core hosted runner is slower. That is the largest
-      # single step on an ordinary pull request, so read it against this job's
-      # 30-minute budget before adding anything else here.
+      # the classes. Do not widen the flag, and do not restore the unfiltered
+      # trigger without measuring the step again.
       - name: No statement changed meaning behind an unchanged printed type
-        if: steps.filter.outputs.run_lean == 'true'
+        if: >-
+          steps.filter.outputs.run_lean == 'true' &&
+          (steps.filter.outputs.run_migration == 'true' ||
+           github.event_name == 'schedule' ||
+           github.event_name == 'workflow_dispatch' ||
+           startsWith(github.ref, 'refs/tags/v'))
         run: |
           set -euo pipefail
           dump="$RUNNER_TEMP/elab-current.json"
