@@ -539,6 +539,8 @@ AISafetyAtlas.Control.Purification::openLoopReductions_purifyMap
 AISafetyAtlas.Control.Purification::plantOutcome_purified
 AISafetyAtlas.Control.Purification::prodMk_purified
 AISafetyAtlas.Control.Purification::prod_dirac_eq_map
+AISafetyAtlas.Control.RegulationCheck::ashby_bound_of_columnsInjective
+AISafetyAtlas.Control.RegulationCheck::exists_columnsInjective_false_and_bound_fails
 AISafetyAtlas.Control.RequisiteVariety::condEntropy_outcome_eq
 AISafetyAtlas.Control.RequisiteVariety::entropy_ge_of_condEntropy_ge
 AISafetyAtlas.Control.RequisiteVariety::entropy_ge_of_sensor
@@ -848,6 +850,14 @@ AISafetyAtlas.Examples.Causal.StructuralModel::tinyCID_observations
 AISafetyAtlas.Examples.Causal.StructuralModel::tinyCID_singleDecision
 AISafetyAtlas.Examples.Causal.StructuralModel::tinyCID_utilities
 AISafetyAtlas.Examples.Causal.StructuralModel::utility_childless_has_teeth
+AISafetyAtlas.Examples.Control.RegulationCheck::identityColumn_achievedVariety
+AISafetyAtlas.Examples.Control.RegulationCheck::identityColumn_columnsInjective
+AISafetyAtlas.Examples.Control.RegulationCheck::latinSquare_achievedVariety
+AISafetyAtlas.Examples.Control.RegulationCheck::latinSquare_columnsInjective
+AISafetyAtlas.Examples.Control.RegulationCheck::repeatedColumn_bound_fails
+AISafetyAtlas.Examples.Control.RegulationCheck::repeatedColumn_columnsInjective
+AISafetyAtlas.Examples.Control.RegulationCheck::wideTable_achievedVariety
+AISafetyAtlas.Examples.Control.RegulationCheck::wideTable_columnsInjective
 AISafetyAtlas.Examples.Fairness.RiskAssignment::equalRates_balancedNegative
 AISafetyAtlas.Examples.Fairness.RiskAssignment::equalRates_balancedPositive
 AISafetyAtlas.Examples.Fairness.RiskAssignment::equalRates_calibrated

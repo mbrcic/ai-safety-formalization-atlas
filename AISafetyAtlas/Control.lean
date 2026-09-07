@@ -8,6 +8,7 @@ public import AISafetyAtlas.Control.OpenLoop
 public import AISafetyAtlas.Control.OpenLoopAttainment
 public import AISafetyAtlas.Control.PolicyKernel
 public import AISafetyAtlas.Control.Purification
+public import AISafetyAtlas.Control.RegulationCheck
 public import AISafetyAtlas.Control.RequisiteVariety
 public import AISafetyAtlas.Control.VarietyCounting
 

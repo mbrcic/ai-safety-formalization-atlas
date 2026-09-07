@@ -3,7 +3,7 @@
   "generated_by": "scripts/generate_declaration_index.py",
   "note": "Declaration index walked from the elaborated environment, not from source text. Consumed by the prose checks so that a name resolves only when it is a real declaration.",
   "prefix": "AISafetyAtlas",
-  "count": 6522,
+  "count": 6541,
   "declarations": [
     {
       "name": "AISafetyAtlas",
@@ -8141,6 +8141,11 @@
       "module": "AISafetyAtlas.Control.InformationLimits"
     },
     {
+      "name": "AISafetyAtlas.Control.RegulationCheck",
+      "kind": "module",
+      "module": "AISafetyAtlas.Control.RegulationCheck"
+    },
+    {
       "name": "AISafetyAtlas.Control.RequisiteVariety",
       "kind": "module",
       "module": "AISafetyAtlas.Control.RequisiteVariety"
@@ -8149,6 +8154,11 @@
       "name": "AISafetyAtlas.Control.VarietyCounting",
       "kind": "module",
       "module": "AISafetyAtlas.Control.VarietyCounting"
+    },
+    {
+      "name": "AISafetyAtlas.Control.achievedVariety",
+      "kind": "def",
+      "module": "AISafetyAtlas.Control.RegulationCheck"
     },
     {
       "name": "AISafetyAtlas.Control.admittedOutcomes",
@@ -8179,6 +8189,11 @@
       "name": "AISafetyAtlas.Control.ashbyCapacity_rescale",
       "kind": "theorem",
       "module": "AISafetyAtlas.Control.ChannelRate"
+    },
+    {
+      "name": "AISafetyAtlas.Control.ashby_bound_of_columnsInjective",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Control.RegulationCheck"
     },
     {
       "name": "AISafetyAtlas.Control.ashby_logVariety_ge",
@@ -8299,6 +8314,11 @@
       "name": "AISafetyAtlas.Control.closedFormLoss_le_kernelControlLoss",
       "kind": "theorem",
       "module": "AISafetyAtlas.Control.PolicyKernel"
+    },
+    {
+      "name": "AISafetyAtlas.Control.columnsInjective",
+      "kind": "def",
+      "module": "AISafetyAtlas.Control.RegulationCheck"
     },
     {
       "name": "AISafetyAtlas.Control.compProd_fst_preimage",
@@ -8509,6 +8529,11 @@
       "name": "AISafetyAtlas.Control.exists_atomLoss_eq",
       "kind": "theorem",
       "module": "AISafetyAtlas.Control.PolicyKernel"
+    },
+    {
+      "name": "AISafetyAtlas.Control.exists_columnsInjective_false_and_bound_fails",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Control.RegulationCheck"
     },
     {
       "name": "AISafetyAtlas.Control.exists_entropyReduction_const_eq_iSup_openLoopReduction",
@@ -12631,6 +12656,11 @@
       "module": "AISafetyAtlas.Examples.Control.Purification"
     },
     {
+      "name": "AISafetyAtlas.Examples.Control.RegulationCheck",
+      "kind": "module",
+      "module": "AISafetyAtlas.Examples.Control.RegulationCheck"
+    },
+    {
       "name": "AISafetyAtlas.Examples.Control.RequisiteVariety",
       "kind": "module",
       "module": "AISafetyAtlas.Examples.Control.RequisiteVariety"
@@ -12911,6 +12941,21 @@
       "module": "AISafetyAtlas.Examples.Control.RequisiteVariety"
     },
     {
+      "name": "AISafetyAtlas.Examples.Control.identityColumn",
+      "kind": "def",
+      "module": "AISafetyAtlas.Examples.Control.RegulationCheck"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Control.identityColumn_achievedVariety",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Control.RegulationCheck"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Control.identityColumn_columnsInjective",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Control.RegulationCheck"
+    },
+    {
       "name": "AISafetyAtlas.Examples.Control.insect_optic_nerve_not_binding",
       "kind": "theorem",
       "module": "AISafetyAtlas.Examples.Control.RequisiteVariety"
@@ -12939,6 +12984,26 @@
       "name": "AISafetyAtlas.Examples.Control.kernelMinControlLoss_le_entropy_noise",
       "kind": "theorem",
       "module": "AISafetyAtlas.Examples.Control.PolicyKernel"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Control.latinSquare",
+      "kind": "def",
+      "module": "AISafetyAtlas.Examples.Control.RegulationCheck"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Control.latinSquare_achievedVariety",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Control.RegulationCheck"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Control.latinSquare_columnsInjective",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Control.RegulationCheck"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Control.latinStrategy",
+      "kind": "def",
+      "module": "AISafetyAtlas.Examples.Control.RegulationCheck"
     },
     {
       "name": "AISafetyAtlas.Examples.Control.measurable_noiseReader",
@@ -13011,6 +13076,21 @@
       "module": "AISafetyAtlas.Examples.Control.Purification"
     },
     {
+      "name": "AISafetyAtlas.Examples.Control.repeatedColumn",
+      "kind": "def",
+      "module": "AISafetyAtlas.Examples.Control.RegulationCheck"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Control.repeatedColumn_bound_fails",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Control.RegulationCheck"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Control.repeatedColumn_columnsInjective",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Control.RegulationCheck"
+    },
+    {
       "name": "AISafetyAtlas.Examples.Control.sensorLoss_eq_zero_of_injective",
       "kind": "theorem",
       "module": "AISafetyAtlas.Examples.Control.Observability"
@@ -13024,6 +13104,21 @@
       "name": "AISafetyAtlas.Examples.Control.ship_disturbance_upper_limit",
       "kind": "theorem",
       "module": "AISafetyAtlas.Examples.Control.RequisiteVariety"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Control.wideTable",
+      "kind": "def",
+      "module": "AISafetyAtlas.Examples.Control.RegulationCheck"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Control.wideTable_achievedVariety",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Control.RegulationCheck"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Control.wideTable_columnsInjective",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Control.RegulationCheck"
     },
     {
       "name": "AISafetyAtlas.Examples.Fairness.RiskAssignment",

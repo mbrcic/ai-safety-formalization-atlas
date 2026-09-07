@@ -22,7 +22,7 @@ LINK = re.compile(r"\]\(([^)]+)\)")
 # `docs/...` ending in a file extension, so ordinary sentences are not mistaken
 # for links.
 LEDGER_PATH = re.compile(r"\bdocs/[A-Za-z0-9_./-]+\.[A-Za-z0-9]{1,5}\b")
-LEDGERS = ["registry.yaml", "tasks.yaml", "conjectures.yaml"]
+LEDGERS = ["registry.yaml", "tasks.yaml", "conjectures.yaml", "intake.yaml"]
 
 SCAN_GLOBS = [
     "README.md",

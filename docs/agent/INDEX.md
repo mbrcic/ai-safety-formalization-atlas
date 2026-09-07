@@ -26,6 +26,9 @@ the task requires that particular inventory, domain, or evidence.
 | [`docs/guide/conjectures.md`](../guide/conjectures.md) | proposing or reviewing a conjecture |
 | [`docs/status/landscape-index.md`](../status/landscape-index.md) | auditing the atlas Lean surface or artifact rows |
 | [`docs/status/relations.md`](../status/relations.md) | asking how two results stand to each other, or which are characterizations rather than point impossibilities |
+| [`docs/agent/blueprint.json`](blueprint.json) | going from a Lean name to the claim it realizes, or from a claim to its declarations |
+| [`docs/status/uncovered-rows.md`](../status/uncovered-rows.md) | choosing what to formalize next, or asking why a row is empty |
+| [`docs/status/escape-routes.md`](../status/escape-routes.md) | asking what weakening gets out from under an obstruction, and whether the atlas proves it does |
 | [`docs/status/sources/brcic-yampolskiy-2023.md`](../status/sources/brcic-yampolskiy-2023.md) | auditing the survey source specifically |
 | [`docs/guide/open-work.md`](../guide/open-work.md) | choosing research work rather than a bounded task |
 | [`docs/guide/contributor-tasks.md`](../guide/contributor-tasks.md) | choosing or implementing a CT unit |

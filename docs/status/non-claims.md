@@ -11,7 +11,7 @@ rather than derives, printed results it does not reach, and inferences a
 reader might expect to follow from what is here and which do not. They are
 part of the result, not a disclaimer attached to it.
 
-**34 modules** carry one.
+**35 modules** carry one.
 
 ---
 
@@ -49,6 +49,29 @@ part of the result, not a disclaimer attached to it.
 Landscape / survey anchors: `LAND-HYPER-002`, `LAND-RECT-001`, `LAND-ANGLUIN-001`,
 BY-043 (RELATED). Cores compile; paper-parity residuals live in
 `docs/provenance/a1-a3-b1-b3-b7-reverification.md`.
+
+## `AISafetyAtlas.Control.RegulationCheck`
+
+- **Not a decision procedure for good regulation.** It decides one counting
+  obstruction on one table under one strategy. A regulator can fail for reasons
+  this never looks at.
+- **A `false` verdict is not a safety verdict.** It means the argument does not
+  apply here.
+- **Nothing about entropies.** The entropy forms of the law (11/8, 11/9) live in
+  `Control.RequisiteVariety` over a measure, and nothing finite decides them; the
+  checker covers the counting half only.
+- **Not a proof term.** Like the rest of `atlas-check`, the executable returns a
+  verdict and names the theorem that certifies it. The kernel has checked the
+  theorem, not the instance.
+- **Not a witness for the atlas widening, and the two must not be confused.**
+  `scripts/check_scope_witnesses.py` asks a different question: Ashby's rows are
+  graded `Wider` because the atlas takes a `Finset` of disturbances and an
+  arbitrary outcome type where the chapter takes a finite table, and closing one
+  of *those* rows needs an object living in the widened region that could not be
+  stated at the printed hypotheses. Every table here is `Fin n → Fin m → Fin k`
+  — Ashby's own finite case — so these witness that the hypothesis is
+  satisfiable and say nothing about the widening. That report stood at 17 of 51
+  rows witnessed before this module and stands there after it.
 
 ## `AISafetyAtlas.Control.VarietyCounting`
 

@@ -1,6 +1,6 @@
 # Project State
 
-Updated: 2026-09-06
+Updated: 2026-09-07
 
 **Unreleased work in progress.** `v0.7.0` below is still the last published
 release and nothing here supersedes it.
@@ -21,7 +21,36 @@ the four `by`-block adjudications a textual check cannot settle, and what is owe
 back are in
 [`toolchain-v4330-migration.md`](docs/provenance/toolchain-v4330-migration.md).
 
-**A fairness layer is what this tree adds most recently, and it is in no
+**The most recent change is a runnable form of Ashby's counting law, and a set
+of ledger surfaces that say what the tree does not have.** `atlas-check` gains a
+fifth kind, `regulation`, backed by `Control.RegulationCheck.columnsInjective`
+and the agreement theorem `ashby_bound_of_columnsInjective`. It is the first kind
+added for the *hypothesis* rather than the conclusion: the counting law is
+settled, and what no part of the build tests is whether any table satisfies the
+column condition it quantifies over. A `true` verdict is that missing
+satisfiability witness, produced by a running program against the four worked
+tables in `Examples.Control.RegulationCheck` — which include one where the
+hypothesis fails and the bound is *false*, so a `false` verdict can never be read
+as a clearance. Five more assertions in `scripts/check_atlas_check.sh`, which now
+runs 21.
+
+Beside it, three things the ledger could not previously say. Every row with no
+atlas Lean now carries a `statability` verdict saying why — 6 reproduced
+elsewhere, 4 triaged distinct, 3 candidate leads, 22 untriaged — and the
+validator fails without one, so [`uncovered rows`](docs/status/uncovered-rows.md)
+cannot develop holes as the ledger grows. Rows may carry `escape_routes`: what
+you weaken to get out from under an obstruction, graded `FORMALIZED` / `STATED` /
+`NAMED_ONLY` because the build checks none of them. And
+[`blueprint.md`](docs/status/blueprint.md) with
+[`blueprint.json`](docs/agent/blueprint.json) indexes claims against the Lean
+that realizes them in **both** directions — 131 declarations now resolve back to
+the claim they were written for, which no view here could previously answer.
+
+[`intake.yaml`](intake.yaml) is the front door below the conjecture board: a
+compiling `Prop` and a minimal row, with every grading field refused by name
+rather than left optional. It ships empty and reports itself that way.
+
+**A fairness layer is the most recent domain addition, and it is in no
 release.** Two modules under `AISafetyAtlas.Fairness`, carrying
 Kleinberg–Mullainathan–Raghavan's Theorem 1.1 (arXiv:1609.05807v2) against
 `BY-010`: calibration within groups, balance for the negative class and balance

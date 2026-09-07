@@ -31,6 +31,11 @@ DATA = [
     "conjectures.yaml",
     "tasks.yaml",
     "docs/provenance/formalization-search.json",
+    # A FORMALIZED escape route names a theorem, and the rule that the theorem
+    # must exist is only exercisable if the elaborated index travels with the
+    # copy. Without it the validator skips resolution -- deliberately, since the
+    # index is a build product -- and the seeded defect would be accepted.
+    "docs/status/declaration-index.json",
 ]
 EXTRA = [
     "AISafetyAtlas.lean",
@@ -559,6 +564,137 @@ CASES = [
             "strength", "high"
         ),
         "relation has unknown fields",
+    ),
+    # Escape routes and statability. Both fields say something the build cannot
+    # check -- what happens when a hypothesis is dropped, and why a row is
+    # empty -- so every guard that stops them asserting more than was
+    # established gets a case.
+    (
+        "registry: escape route axis outside the vocabulary",
+        "validate_registry.py",
+        "registry.yaml",
+        lambda d: first(d["results"], id="LAND-KNOW-001")["escape_routes"][0].__setitem__(
+            "axis", "TRY_HARDER"
+        ),
+        "escape route axis 'TRY_HARDER' is outside the vocabulary",
+    ),
+    (
+        "registry: escape route status outside the vocabulary",
+        "validate_registry.py",
+        "registry.yaml",
+        lambda d: first(d["results"], id="LAND-KNOW-001")["escape_routes"][0].__setitem__(
+            "status", "PROBABLY"
+        ),
+        "escape route status 'PROBABLY' is outside the vocabulary",
+    ),
+    (
+        "registry: escape route with no note",
+        "validate_registry.py",
+        "registry.yaml",
+        lambda d: first(d["results"], id="LAND-KNOW-001")["escape_routes"][0].pop("note"),
+        "must carry a non-empty note",
+    ),
+    (
+        "registry: FORMALIZED escape route naming no declaration",
+        "validate_registry.py",
+        "registry.yaml",
+        lambda d: first(d["results"], id="LAND-KNOW-001")["escape_routes"][0].pop("lean"),
+        "is FORMALIZED and must name",
+    ),
+    (
+        "registry: FORMALIZED escape route naming a theorem that does not exist",
+        "validate_registry.py",
+        "registry.yaml",
+        lambda d: first(d["results"], id="LAND-KNOW-001")["escape_routes"][0].__setitem__(
+            "lean", "AISafetyAtlas.Knowledge.knowable_by_wishing"
+        ),
+        "which is not an atlas declaration",
+    ),
+    (
+        "registry: unproved escape route claiming Lean",
+        "validate_registry.py",
+        "registry.yaml",
+        lambda d: first(d["results"], id="LAND-KNOW-001")["escape_routes"][1].__setitem__(
+            "lean", "AISafetyAtlas.Knowledge.Knowable.mono"
+        ),
+        "but names Lean",
+    ),
+    (
+        "registry: repeated escape route on one row",
+        "validate_registry.py",
+        "registry.yaml",
+        lambda d: first(d["results"], id="LAND-KNOW-001")["escape_routes"].append(
+            dict(first(d["results"], id="LAND-KNOW-001")["escape_routes"][1])
+        ),
+        "repeats escape route",
+    ),
+    (
+        "registry: escape route with an unknown field",
+        "validate_registry.py",
+        "registry.yaml",
+        lambda d: first(d["results"], id="LAND-KNOW-001")["escape_routes"][0].__setitem__(
+            "confidence", "high"
+        ),
+        "escape route has unknown fields",
+    ),
+    (
+        "registry: statability verdict outside the vocabulary",
+        "validate_registry.py",
+        "registry.yaml",
+        lambda d: first(d["results"], id="BY-002")["statability"].__setitem__(
+            "verdict", "TOO_HARD"
+        ),
+        "statability verdict 'TOO_HARD' is outside the vocabulary",
+    ),
+    (
+        "registry: statability verdict with no evidence",
+        "validate_registry.py",
+        "registry.yaml",
+        lambda d: first(d["results"], id="BY-002")["statability"].pop("note"),
+        "must carry a non-empty note saying what was checked",
+    ),
+    (
+        "registry: blocked row that names no missing primitive",
+        "validate_registry.py",
+        "registry.yaml",
+        lambda d: first(d["results"], id="BY-002")["statability"].__setitem__(
+            "verdict", "BLOCKED_ON_PRIMITIVE"
+        ),
+        "must name the missing primitives",
+    ),
+    (
+        "registry: missing primitives on a row that is not blocked",
+        "validate_registry.py",
+        "registry.yaml",
+        lambda d: first(d["results"], id="BY-002")["statability"].__setitem__(
+            "missing", ["resource-bounded complexity"]
+        ),
+        "not BLOCKED_ON_PRIMITIVE",
+    ),
+    (
+        "registry: statability verdict on a row that has Lean",
+        "validate_registry.py",
+        "registry.yaml",
+        lambda d: first(d["results"], id="LAND-KNOW-001").__setitem__(
+            "statability", {"verdict": "UNTRIAGED", "note": "nobody has looked"}
+        ),
+        "carries atlas Lean, so a statability verdict",
+    ),
+    (
+        "registry: uncovered row with no statability verdict",
+        "validate_registry.py",
+        "registry.yaml",
+        lambda d: first(d["results"], id="BY-002").pop("statability"),
+        "carries no atlas Lean and no statability verdict",
+    ),
+    (
+        "registry: statability with an unknown field",
+        "validate_registry.py",
+        "registry.yaml",
+        lambda d: first(d["results"], id="BY-002")["statability"].__setitem__(
+            "confidence", "low"
+        ),
+        "statability has unknown fields",
     ),
     (
         "registry: artifact with no formalization",

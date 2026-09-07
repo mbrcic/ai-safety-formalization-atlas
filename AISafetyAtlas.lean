@@ -9,6 +9,7 @@ public import AISafetyAtlas.Examples.Analysis.Semialgebraic
 public import AISafetyAtlas.Combinatorics.PermInvariance
 public import AISafetyAtlas.Compositional
 public import AISafetyAtlas.Control
+public import AISafetyAtlas.Examples.Control.RegulationCheck
 public import AISafetyAtlas.Explainability
 public import AISafetyAtlas.Fairness.RiskAssignment
 public import AISafetyAtlas.Examples.Fairness.RiskAssignment
@@ -113,7 +114,7 @@ than through this closure; its module docstring gives the reason.
 | Import | Domain |
 |---|---|
 | `AISafetyAtlas.Compositional` | Hyperproperties, rectangles, networks |
-| `AISafetyAtlas.Control` | Ashby's variety bounds and Touchette–Lloyd's information limits, in nine modules |
+| `AISafetyAtlas.Control` | Ashby's variety bounds and Touchette–Lloyd's information limits, in ten modules |
 | `AISafetyAtlas.Oversight.JointObservation` | Coalition evidence, coverage, collision, repair boundary |
 | `AISafetyAtlas.Wireheading` | Reward channels, self-modification |
 
@@ -123,12 +124,13 @@ with it, the same contract `Verification` keeps with its two bridges below.
 
 ### What `Control` aggregates
 
-Nine modules, each one printed development. `AISafetyAtlas.Control` carries all
+Ten modules, nine of them one printed development each and one a decision procedure. `AISafetyAtlas.Control` carries all
 of them; import one directly when only its result is wanted.
 
 | Import | Domain |
 |---|---|
 | `AISafetyAtlas.Control.RequisiteVariety` | Ashby's law: counting, logarithmic and entropy forms, and the sensor bound |
+| `AISafetyAtlas.Control.RegulationCheck` | The counting law decided on a finite table, with the agreement theorem behind `atlas-check`'s `regulation` kind. A `true` verdict witnesses that Ashby's column hypothesis is satisfiable at that table |
 | `AISafetyAtlas.Control.ChannelRate` | Ashby §9/12 and §9/15: channel capacity as an entropy rate, and the entropy of a length of Markov chain |
 | `AISafetyAtlas.Control.CompleteControl` | Ashby §11/14: perfect regulation makes complete control possible, and what that costs the regulator |
 | `AISafetyAtlas.Control.InformationLimits` | Touchette–Lloyd: control loss, and feedback bounded by what the sensor measured |
