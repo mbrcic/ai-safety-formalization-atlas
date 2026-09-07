@@ -1,8 +1,8 @@
 {
   "counts": {
     "declarations": 253,
-    "examples_only": 215,
-    "load_bearing": 38,
+    "examples_only": 214,
+    "load_bearing": 39,
     "no_consumer": 0
   },
   "declarations": {
@@ -261,10 +261,11 @@
     },
     "AISafetyAtlas.Control.ashby_variety_ge": {
       "consumers": [
+        "AISafetyAtlas.Control.RegulationCheck",
         "AISafetyAtlas.Examples.Registry"
       ],
       "origin": "BY-004",
-      "tier": "examples-only"
+      "tier": "load-bearing"
     },
     "AISafetyAtlas.Control.ashby_variety_ge_isSharp": {
       "consumers": [
@@ -1983,7 +1984,6 @@
     "AISafetyAtlas.Computability.rice",
     "AISafetyAtlas.Control.ashby_logVariety_ge",
     "AISafetyAtlas.Control.ashby_logVariety_ge_mul",
-    "AISafetyAtlas.Control.ashby_variety_ge",
     "AISafetyAtlas.Control.ashby_variety_ge_isSharp",
     "AISafetyAtlas.Control.card_ceilDiv_le_admittedOutcomes",
     "AISafetyAtlas.Control.card_le_mul_card_admittedOutcomes_mul",
