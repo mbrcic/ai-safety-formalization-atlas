@@ -24,6 +24,28 @@
   `REVIEWED` bridge supports a reviewed AI-system interpretation. Required on
   every `BRIDGE`. Generated view:
   [`docs/status/applications.md`](../../status/applications.md).
+- **Every uncovered row says why.** A row with no atlas Lean must carry a
+  `statability` verdict — `EXTERNAL_ONLY`, `TRIAGED_DISTINCT`,
+  `CANDIDATE_LEAD`, `BLOCKED_ON_PRIMITIVE` or `UNTRIAGED` — with a note saying
+  what was checked, and `missing` naming the primitives when blocked. The
+  validator fails without one. `UNTRIAGED` is a legitimate verdict and costs
+  one line; having none is not, because it makes "nobody looked" and "somebody
+  looked, and this is why" indistinguishable. A verdict on a row that *has*
+  Lean is rejected. Generated view:
+  [`docs/status/uncovered-rows.md`](../../status/uncovered-rows.md).
+- **Escape routes:** a row may record `escape_routes` — what you weaken to get
+  out from under the obstruction. Each entry takes an `axis` from the
+  vocabulary, a `status`, and a `note` saying what survives **and what it
+  costs**. `lean` is required exactly when the status is `FORMALIZED` and is
+  resolved against the elaborated declaration index. The three statuses are
+  graded apart because the build checks none of them: `FORMALIZED` (a theorem
+  proves the weakened statement), `STATED` (the weakening is written precisely,
+  nothing is proved about it), `NAMED_ONLY` (a direction named in prose). **Do
+  not grade a route `FORMALIZED` because a nearby theorem exists** — a bound
+  whose sufficiency direction is unproved is `NAMED_ONLY`; `BY-004` is the
+  worked refusal. Optional everywhere: a row with no route asserts nothing
+  about escapability. Generated view:
+  [`docs/status/escape-routes.md`](../../status/escape-routes.md).
 - **Layers:** (1) math theorem → (2) atlas interface → (3) AI-safety bridge →
   (4) real-system claim. Layers 3–4 need human review; Lean at 1–2 does not
   inherit an AI reading.

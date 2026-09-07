@@ -66,6 +66,26 @@
       "provability-logic",
       "social-choice",
       "verification"
+    ],
+    "escape_axis": [
+      "RESTRICT_CLASS",
+      "ADD_INFORMATION",
+      "RELAX_EXACTNESS",
+      "MOVE_TO_PRIOR",
+      "ADD_RESOURCE",
+      "WEAKEN_UNIFORMITY"
+    ],
+    "escape_route_status": [
+      "FORMALIZED",
+      "STATED",
+      "NAMED_ONLY"
+    ],
+    "statability": [
+      "EXTERNAL_ONLY",
+      "TRIAGED_DISTINCT",
+      "CANDIDATE_LEAD",
+      "BLOCKED_ON_PRIMITIVE",
+      "UNTRIAGED"
     ]
   },
   "source_catalog": {
@@ -910,7 +930,11 @@
       "candidate_formalizations": [],
       "tags": [
         "control-theory"
-      ]
+      ],
+      "statability": {
+        "verdict": "TRIAGED_DISTINCT",
+        "note": "A3 (2026-07-19) cleared every AFP 'observability' hit as distinct from Klamka's multivariable control-theoretic unobservability, which is the survey's cited source. Evidence: docs/provenance/a3-by001-unobservability-triage.md. Nothing existing covers it, so a fresh formalization is what this row is owed."
+      }
     },
     {
       "id": "BY-002",
@@ -947,7 +971,11 @@
       },
       "tags": [
         "control-theory"
-      ]
+      ],
+      "statability": {
+        "verdict": "UNTRIAGED",
+        "note": "The row's own note says statement-level equivalence to each cited source remains subject to source comparison, and no triage record exists. Nothing here says the result is hard, easy, or blocked -- only that nobody has read the source against the tree."
+      }
     },
     {
       "id": "BY-003",
@@ -982,7 +1010,11 @@
       },
       "tags": [
         "control-theory"
-      ]
+      ],
+      "statability": {
+        "verdict": "UNTRIAGED",
+        "note": "The row's own note says statement-level equivalence to each cited source remains subject to source comparison, and no triage record exists. Nothing here says the result is hard, easy, or blocked -- only that nobody has read the source against the tree."
+      }
     },
     {
       "id": "BY-004",
@@ -1451,7 +1483,14 @@
         "use": "Sizing what a safety controller has to be able to do.",
         "title": "Requisite variety",
         "attribution": "Ashby"
-      }
+      },
+      "escape_routes": [
+        {
+          "axis": "ADD_RESOURCE",
+          "status": "NAMED_ONLY",
+          "note": "Ashby's bound is an inequality in regulator variety and channel capacity, so more of either is the direction out. This is deliberately NOT graded FORMALIZED: `entropy_le_channelCapacity_of_complete` states its own limit -- it is a necessary condition only, and its docstring says that a channel of sufficient capacity is not thereby shown to admit a regulator achieving constancy, because nothing here constructs one. The route is the contrapositive of a bound, not a construction."
+        }
+      ]
     },
     {
       "id": "BY-005",
@@ -2090,7 +2129,11 @@
       },
       "tags": [
         "ethics"
-      ]
+      ],
+      "statability": {
+        "verdict": "UNTRIAGED",
+        "note": "The row's own note says statement-level equivalence to each cited source remains subject to source comparison, and no triage record exists. Nothing here says the result is hard, easy, or blocked -- only that nobody has read the source against the tree."
+      }
     },
     {
       "id": "BY-007",
@@ -2230,7 +2273,11 @@
       "tags": [
         "social-choice",
         "ethics"
-      ]
+      ],
+      "statability": {
+        "verdict": "TRIAGED_DISTINCT",
+        "note": "A1 (2026-07-19) found AFP CondNormReasHOL RELATED only and recorded it as the separate landscape row LAND-PE-001; it is not EXACT or EQUIVALENT to the Arrhenius 2011 impossibility package this row cites. Evidence: docs/provenance/a1-condnorm-parfit-triage.md."
+      }
     },
     {
       "id": "BY-009",
@@ -2267,7 +2314,11 @@
       "tags": [
         "social-choice",
         "decision-theory"
-      ]
+      ],
+      "statability": {
+        "verdict": "UNTRIAGED",
+        "note": "The row's own note says statement-level equivalence to each cited source remains subject to source comparison, and no triage record exists. Nothing here says the result is hard, easy, or blocked -- only that nobody has read the source against the tree."
+      }
     },
     {
       "id": "BY-010",
@@ -3262,7 +3313,11 @@
       },
       "tags": [
         "interpretability"
-      ]
+      ],
+      "statability": {
+        "verdict": "UNTRIAGED",
+        "note": "The row's own note says statement-level equivalence to each cited source remains subject to source comparison, and no triage record exists. Nothing here says the result is hard, easy, or blocked -- only that nobody has read the source against the tree."
+      }
     },
     {
       "id": "BY-018",
@@ -3301,7 +3356,11 @@
       "tags": [
         "learning-theory",
         "computability"
-      ]
+      ],
+      "statability": {
+        "verdict": "UNTRIAGED",
+        "note": "The row's own note says statement-level equivalence to each cited source remains subject to source comparison, and no triage record exists. Nothing here says the result is hard, easy, or blocked -- only that nobody has read the source against the tree."
+      }
     },
     {
       "id": "BY-019",
@@ -3338,7 +3397,11 @@
       "tags": [
         "multi-agent",
         "decision-theory"
-      ]
+      ],
+      "statability": {
+        "verdict": "UNTRIAGED",
+        "note": "The row's own note says statement-level equivalence to each cited source remains subject to source comparison, and no triage record exists. Nothing here says the result is hard, easy, or blocked -- only that nobody has read the source against the tree."
+      }
     },
     {
       "id": "BY-020",
@@ -3857,7 +3920,11 @@
       },
       "tags": [
         "learning-theory"
-      ]
+      ],
+      "statability": {
+        "verdict": "UNTRIAGED",
+        "note": "The row's own note says statement-level equivalence to each cited source remains subject to source comparison, and no triage record exists. Nothing here says the result is hard, easy, or blocked -- only that nobody has read the source against the tree."
+      }
     },
     {
       "id": "BY-023",
@@ -3897,7 +3964,11 @@
       "tags": [
         "preference-inference",
         "learning-theory"
-      ]
+      ],
+      "statability": {
+        "verdict": "UNTRIAGED",
+        "note": "The row's own note says statement-level equivalence to each cited source remains subject to source comparison, and no triage record exists. Nothing here says the result is hard, easy, or blocked -- only that nobody has read the source against the tree."
+      }
     },
     {
       "id": "BY-024",
@@ -4099,7 +4170,11 @@
       "tags": [
         "computability",
         "verification"
-      ]
+      ],
+      "statability": {
+        "verdict": "UNTRIAGED",
+        "note": "The row's own note says statement-level equivalence to each cited source remains subject to source comparison, and no triage record exists. Nothing here says the result is hard, easy, or blocked -- only that nobody has read the source against the tree."
+      }
     },
     {
       "id": "BY-026",
@@ -4142,7 +4217,11 @@
       },
       "tags": [
         "agent-incentives"
-      ]
+      ],
+      "statability": {
+        "verdict": "UNTRIAGED",
+        "note": "The row's own note says statement-level equivalence to each cited source remains subject to source comparison, and no triage record exists. Nothing here says the result is hard, easy, or blocked -- only that nobody has read the source against the tree."
+      }
     },
     {
       "id": "BY-027",
@@ -4249,7 +4328,11 @@
       },
       "tags": [
         "multi-agent"
-      ]
+      ],
+      "statability": {
+        "verdict": "UNTRIAGED",
+        "note": "The row's own note says statement-level equivalence to each cited source remains subject to source comparison, and no triage record exists. Nothing here says the result is hard, easy, or blocked -- only that nobody has read the source against the tree."
+      }
     },
     {
       "id": "BY-029",
@@ -4284,7 +4367,11 @@
       },
       "tags": [
         "interpretability"
-      ]
+      ],
+      "statability": {
+        "verdict": "UNTRIAGED",
+        "note": "The row's own note says statement-level equivalence to each cited source remains subject to source comparison, and no triage record exists. Nothing here says the result is hard, easy, or blocked -- only that nobody has read the source against the tree."
+      }
     },
     {
       "id": "BY-030",
@@ -4320,7 +4407,11 @@
       },
       "tags": [
         "interpretability"
-      ]
+      ],
+      "statability": {
+        "verdict": "UNTRIAGED",
+        "note": "The row's own note says statement-level equivalence to each cited source remains subject to source comparison, and no triage record exists. Nothing here says the result is hard, easy, or blocked -- only that nobody has read the source against the tree."
+      }
     },
     {
       "id": "BY-031",
@@ -4356,7 +4447,11 @@
       "tags": [
         "interpretability",
         "algorithmic-information"
-      ]
+      ],
+      "statability": {
+        "verdict": "UNTRIAGED",
+        "note": "The row's own note says statement-level equivalence to each cited source remains subject to source comparison, and no triage record exists. Nothing here says the result is hard, easy, or blocked -- only that nobody has read the source against the tree."
+      }
     },
     {
       "id": "BY-032",
@@ -4393,7 +4488,11 @@
       },
       "tags": [
         "verification"
-      ]
+      ],
+      "statability": {
+        "verdict": "UNTRIAGED",
+        "note": "The row's own note says statement-level equivalence to each cited source remains subject to source comparison, and no triage record exists. Nothing here says the result is hard, easy, or blocked -- only that nobody has read the source against the tree."
+      }
     },
     {
       "id": "BY-033",
@@ -4508,7 +4607,11 @@
       "tags": [
         "computational-complexity",
         "ethics"
-      ]
+      ],
+      "statability": {
+        "verdict": "UNTRIAGED",
+        "note": "The row's own note says statement-level equivalence to each cited source remains subject to source comparison, and no triage record exists. Nothing here says the result is hard, easy, or blocked -- only that nobody has read the source against the tree."
+      }
     },
     {
       "id": "BY-035",
@@ -4544,7 +4647,11 @@
       "tags": [
         "computational-complexity",
         "learning-theory"
-      ]
+      ],
+      "statability": {
+        "verdict": "TRIAGED_DISTINCT",
+        "note": "A2 (2026-07-19) found AFP Deep_Learning RELATED and recorded it as LAND-DL-001; it formalizes Cohen et al.-style network-capacity theorems rather than the Lin-Tegmark-Rolnick 2017 citation this row carries. Evidence: docs/provenance/a2-deep-learning-by035-triage.md."
+      }
     },
     {
       "id": "BY-036",
@@ -4580,7 +4687,11 @@
       "tags": [
         "computational-complexity",
         "learning-theory"
-      ]
+      ],
+      "statability": {
+        "verdict": "UNTRIAGED",
+        "note": "The row's own note says statement-level equivalence to each cited source remains subject to source comparison, and no triage record exists. Nothing here says the result is hard, easy, or blocked -- only that nobody has read the source against the tree."
+      }
     },
     {
       "id": "BY-037",
@@ -4661,7 +4772,11 @@
       ],
       "tags": [
         "agent-incentives"
-      ]
+      ],
+      "statability": {
+        "verdict": "CANDIDATE_LEAD",
+        "note": "Four candidate formalizations are catalogued on this row -- a Skalse Theorem 1 development with a potential-shaping layer, and three further Goodhart encodings. None has been adjudicated for statement match, licence or reproduction, so the row is a reading task rather than a proving task."
+      }
     },
     {
       "id": "BY-038",
@@ -4697,7 +4812,11 @@
       },
       "tags": [
         "agent-incentives"
-      ]
+      ],
+      "statability": {
+        "verdict": "UNTRIAGED",
+        "note": "The row's own note says statement-level equivalence to each cited source remains subject to source comparison, and no triage record exists. Nothing here says the result is hard, easy, or blocked -- only that nobody has read the source against the tree."
+      }
     },
     {
       "id": "BY-039",
@@ -4811,7 +4930,11 @@
       "tags": [
         "control-theory",
         "verification"
-      ]
+      ],
+      "statability": {
+        "verdict": "UNTRIAGED",
+        "note": "The row's own note says statement-level equivalence to each cited source remains subject to source comparison, and no triage record exists. Nothing here says the result is hard, easy, or blocked -- only that nobody has read the source against the tree."
+      }
     },
     {
       "id": "BY-041",
@@ -4847,7 +4970,11 @@
       "tags": [
         "information-theory",
         "multi-agent"
-      ]
+      ],
+      "statability": {
+        "verdict": "UNTRIAGED",
+        "note": "The row's own note says statement-level equivalence to each cited source remains subject to source comparison, and no triage record exists. Nothing here says the result is hard, easy, or blocked -- only that nobody has read the source against the tree."
+      }
     },
     {
       "id": "BY-042",
@@ -4881,7 +5008,11 @@
       "tags": [
         "interpretability",
         "multi-agent"
-      ]
+      ],
+      "statability": {
+        "verdict": "UNTRIAGED",
+        "note": "The row's own note says statement-level equivalence to each cited source remains subject to source comparison, and no triage record exists. Nothing here says the result is hard, easy, or blocked -- only that nobody has read the source against the tree."
+      }
     },
     {
       "id": "BY-043",
@@ -5473,7 +5604,11 @@
       "tags": [
         "computability",
         "provability-logic"
-      ]
+      ],
+      "statability": {
+        "verdict": "TRIAGED_DISTINCT",
+        "note": "NC-005 (2026-08-11) records a maintained, licensed, pinned categorical rendering: AFP Category_Set carries Lawveres_fixed_point_theorem over ETCS. That is one axiomatized category of sets rather than an arbitrary cartesian closed category, so it does not cover this row's statement; the atlas's own CLM-LAWVERE-001 is the types-and-functions specialization."
+      }
     },
     {
       "id": "LAND-ATTR-001",
@@ -5561,6 +5696,10 @@
         "use": "Independent confirmation.",
         "title": "Gibbard–Satterthwaite (independent proof)",
         "attribution": "Gibbard; Satterthwaite"
+      },
+      "statability": {
+        "verdict": "EXTERNAL_ONLY",
+        "note": "A formalization exists and is reproduced in Isabelle/HOL: the AFP Gibbard-Satterthwaite development; the atlas Lean interface is the separate row LAND-GS-002. No atlas Lean is owed here -- this row records the external artifact, and reproducing it in Lean would be duplication under lean-parsimony.md rather than coverage."
       }
     },
     {
@@ -5644,6 +5783,10 @@
         "use": "How much data a guarantee needs — not a second proof of the Wolpert averaging results.",
         "title": "No free lunch (PAC lower bound)",
         "attribution": "Shalev-Shwartz & Ben-David"
+      },
+      "statability": {
+        "verdict": "EXTERNAL_ONLY",
+        "note": "A formalization exists and is reproduced in Isabelle/HOL: the AFP PAC / sample-complexity no-free-lunch theorem (Understanding ML Thm 5.1), triaged CT-2 as distinct from BY-020 and BY-021 and from the in-tree Learning.no_free_lunch. No atlas Lean is owed here -- this row records the external artifact, and reproducing it in Lean would be duplication under lean-parsimony.md rather than coverage."
       }
     },
     {
@@ -5682,6 +5825,10 @@
         "use": "Population ethics arguments.",
         "title": "Conditional normative reasoning",
         "attribution": "Parent & Benzmüller; Parfit's paradox, Åqvist's system E"
+      },
+      "statability": {
+        "verdict": "EXTERNAL_ONLY",
+        "note": "A formalization exists and is reproduced in Isabelle/HOL: AFP CondNormReasHOL (Aqvist system E, Parfit mere addition), triaged A1 as RELATED only and not Arrhenius coverage. No atlas Lean is owed here -- this row records the external artifact, and reproducing it in Lean would be duplication under lean-parsimony.md rather than coverage."
       }
     },
     {
@@ -5720,6 +5867,10 @@
         "use": "Capability arguments about architecture, not size.",
         "title": "Deep versus shallow capacity",
         "attribution": "Cohen, Sharir & Shashua"
+      },
+      "statability": {
+        "verdict": "EXTERNAL_ONLY",
+        "note": "A formalization exists and is reproduced in Isabelle/HOL: AFP Deep_Learning (Bentkamp, after Cohen et al.), triaged A2 as RELATED to BY-035 and not the Lin-Tegmark-Rolnick citation. No atlas Lean is owed here -- this row records the external artifact, and reproducing it in Lean would be duplication under lean-parsimony.md rather than coverage."
       }
     },
     {
@@ -5751,6 +5902,10 @@
         "use": "The assumptions inside “maximizes expected utility”.",
         "title": "Expected utility representation",
         "attribution": "von Neumann & Morgenstern"
+      },
+      "statability": {
+        "verdict": "EXTERNAL_ONLY",
+        "note": "A formalization exists and is reproduced in Lean: a reproduced von Neumann-Morgenstern expected-utility development, recorded as provenance and not a Lake dependency. No atlas Lean is owed here -- this row records the external artifact, and reproducing it in Lean would be duplication under lean-parsimony.md rather than coverage."
       }
     },
     {
@@ -5775,7 +5930,11 @@
           "declaration": "ArrowTheorem.arrow_theorem"
         }
       ],
-      "lean_artifact": null
+      "lean_artifact": null,
+      "statability": {
+        "verdict": "CANDIDATE_LEAD",
+        "note": "TCSLib's Fourier-analytic Arrow theorem is source-inspected only and not reproduced. The row's own note records the reason it stops there: it is an alternative representation of a theorem the atlas already carries, deferred until a named theorem needs Fourier structure. So the lead is live but nothing is blocked on it."
+      }
     },
     {
       "id": "LAND-DEBATE-001",
@@ -5918,7 +6077,11 @@
           "build_command": "Exact build attempted 2026-07-28 with coqorg/coq:8.9.1@sha256:8e26609c5450aa795af6917cf169a65ab3952ba666d1b0c90e6b0179314a1149 and coqorg/coq:8.20@sha256:e50d77c4c5a9aa0d76ae1b343d79c5f922da3a75054b79c5dc635895438e4674: both fail at InternalNondet.v line 8 (`From Stdlib Require Import List`) after compiling the principal topology/property files."
         }
       ],
-      "lean_artifact": null
+      "lean_artifact": null,
+      "statability": {
+        "verdict": "CANDIDATE_LEAD",
+        "note": "The Coq development for Alpern-Schneider and Clarkson-Schneider was found outside all six pinned corpora and its repository-wide reproduction is recorded FAILED -- the principal declarations kernel-compile, then the tree fails on a Stdlib.List load-path binding. So the artifact is identified and unadjudicated, not absent. The atlas carries its own Compositional.Hyperproperties independently."
+      }
     },
     {
       "id": "LAND-HYPER-002",
@@ -6680,6 +6843,10 @@
         "use": "Why “a system cannot know itself” is too strong.",
         "title": "Distributed snapshots",
         "attribution": "Chandy & Lamport"
+      },
+      "statability": {
+        "verdict": "EXTERNAL_ONLY",
+        "note": "A formalization exists and is reproduced in Isabelle/HOL: AFP Chandy_Lamport, reproduced 2026-08-11 through the full immutable AFP release. No atlas Lean is owed here -- this row records the external artifact, and reproducing it in Lean would be duplication under lean-parsimony.md rather than coverage."
       }
     },
     {
@@ -7112,7 +7279,20 @@
         "use": "The shared core behind the observation results.",
         "title": "Knowability kernel",
         "attribution": "Workbench infrastructure"
-      }
+      },
+      "escape_routes": [
+        {
+          "axis": "ADD_INFORMATION",
+          "status": "FORMALIZED",
+          "lean": "AISafetyAtlas.Knowledge.Knowable.mono",
+          "note": "Knowability transfers to any more informative observation: if `finer` Determines `coarser` and the property is knowable from `coarser`, it is knowable from `finer`. The decoder is composed rather than reassembled, so the route is constructive and costs nothing beyond obtaining the finer observation. This is the only escape route in the ledger the tree proves rather than names."
+        },
+        {
+          "axis": "RESTRICT_CLASS",
+          "status": "STATED",
+          "note": "`knowable_iff_no_collision` makes the obstruction exactly a colliding pair, so removing every collision from the quantified domain removes the obstruction by the characterization itself. What it costs is not stated here: nothing says which restrictions are the ones a consumer can actually impose."
+        }
+      ]
     },
     {
       "id": "LAND-KNOW-DEVICE-001",
@@ -7272,7 +7452,29 @@
         "use": "Ties reward tampering to what an agent can know.",
         "title": "Unobservable return",
         "attribution": "Workbench infrastructure"
-      }
+      },
+      "escape_routes": [
+        {
+          "axis": "RESTRICT_CLASS",
+          "status": "STATED",
+          "note": "`not_knowable_trueReturn_of_complement_mem` is class-relative by construction: it asks only that some admissible environment class contain an indistinguishable pair whose returns differ. Restricting the class until no such pair survives removes the hypothesis, which is what the module means by the routes being exact. Nothing here proves knowability follows from the restriction; the unrestricted corollary `not_knowable_trueReturn` is what shows the full class is sufficient, not necessary."
+        },
+        {
+          "axis": "ADD_INFORMATION",
+          "status": "NAMED_ONLY",
+          "note": "Named as a route in the module docstring. The kernel's `Knowable.mono` is the general form and would apply to any observation refining the observed history, but no declaration instantiates it here, so what a richer observation would have to reveal is undetermined."
+        },
+        {
+          "axis": "RELAX_EXACTNESS",
+          "status": "NAMED_ONLY",
+          "note": "Named as a route in the module docstring. `Knowable` is exact recovery; the row's explicit non-claims say approximation is not addressed, so no bound on how well the return can be approximated is asserted either way."
+        },
+        {
+          "axis": "MOVE_TO_PRIOR",
+          "status": "NAMED_ONLY",
+          "note": "Named as a route in the module docstring. The statement quantifies over environments in a class rather than averaging over a prior; the row's explicit non-claims exclude prior-conditional estimation, so nothing is claimed about the Bayesian question."
+        }
+      ]
     },
     {
       "id": "LAND-FANO-001",

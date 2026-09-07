@@ -6,6 +6,7 @@ from __future__ import annotations
 import argparse
 import html
 import json
+from collections import Counter
 import re
 import sys
 from pathlib import Path
@@ -29,6 +30,10 @@ SOURCE_INDEX = ROOT / "docs/status/sources/README.md"
 SURVEY_SOURCE_REPORT = ROOT / "docs/status/sources/brcic-yampolskiy-2023.md"
 LANDSCAPE_INDEX = ROOT / "docs/status/landscape-index.md"
 RELATIONS = ROOT / "docs/status/relations.md"
+ESCAPE_ROUTES = ROOT / "docs/status/escape-routes.md"
+STATABILITY = ROOT / "docs/status/uncovered-rows.md"
+BLUEPRINT = ROOT / "docs/status/blueprint.md"
+BLUEPRINT_JSON = ROOT / "docs/agent/blueprint.json"
 APPLICATIONS = ROOT / "docs/status/applications.md"
 MAIS_SOLUTIONS = ROOT / "docs/status/mais-solutions.md"
 MAIS_SOURCE_REPORT = ROOT / "docs/status/sources/mais-2026.md"
@@ -1264,6 +1269,29 @@ RELATION_KIND_GLOSS = {
     "the note states the model delta",
 }
 
+STATABILITY_GLOSS = {
+    "EXTERNAL_ONLY": "a formalization exists and is reproduced outside the atlas; no atlas Lean is owed",
+    "TRIAGED_DISTINCT": "candidates were examined and found distinct, so a fresh formalization is owed",
+    "CANDIDATE_LEAD": "an artifact is identified and not yet adjudicated — a reading task, not a proving task",
+    "BLOCKED_ON_PRIMITIVE": "a named primitive is missing; the `missing` list is the work order",
+    "UNTRIAGED": "nobody has compared the source to the tree",
+}
+
+ESCAPE_AXIS_GLOSS = {
+    "RESTRICT_CLASS": "narrow the quantified class until the obstruction's witness is no longer in it",
+    "ADD_INFORMATION": "give the observer, regulator or learner a more informative input",
+    "RELAX_EXACTNESS": "accept an approximation where the result demands exact recovery",
+    "MOVE_TO_PRIOR": "replace worst-case over a class by an average over a prior",
+    "ADD_RESOURCE": "raise a bounded resource the statement holds fixed — capacity, budget, queries, time",
+    "WEAKEN_UNIFORMITY": "ask for the conclusion per instance rather than uniformly over the class",
+}
+
+ESCAPE_ROUTE_STATUS_GLOSS = {
+    "FORMALIZED": "a declaration in this tree proves the weakened statement; the route is checked",
+    "STATED": "the atlas says precisely what the weakening is, and proves nothing about it",
+    "NAMED_ONLY": "named as a direction in prose; neither stated precisely nor proved",
+}
+
 RESULT_SHAPE_GLOSS = {
     "CHARACTERIZATION": "necessary and sufficient — says what *is* achievable as well as what is not",
     "BOUND": "an inequality, so it degrades rather than switching off",
@@ -1271,6 +1299,362 @@ RESULT_SHAPE_GLOSS = {
     "POINT_IMPOSSIBILITY": "rules out one extreme configuration",
     "INFRASTRUCTURE": "definitions and transfer lemmas, no standalone claim",
 }
+
+
+def _blueprint_entries(registry: dict) -> list[dict]:
+    """One entry per concept: the claim, what realizes it, and what stands in the way.
+
+    A *concept* here is a ledger row that asserts something — a row with an
+    `informal_claim`. Artifact rows are deliberately excluded: they record a
+    formalization standing on its own account, so they have a declaration and no
+    sentence for it to realize, which is the wrong shape for this index.
+    """
+    locations = declaration_locations()
+    entries = []
+    for result in registry["results"]:
+        claim = result.get("informal_claim")
+        if not claim:
+            continue
+        declarations = [
+            record["atlas_declaration"]
+            for record in (result.get("lean_artifact") or {}).get("declarations", [])
+            if record.get("atlas_declaration")
+        ]
+        modules = sorted(
+            {
+                record["module"]
+                for record in result.get("formalizations") or []
+                if isinstance(record.get("module"), str)
+                and record["module"].startswith("AISafetyAtlas")
+            }
+        )
+        statability = result.get("statability") or {}
+        entries.append(
+            {
+                "id": result["id"],
+                "name": result["name"],
+                "claim": claim,
+                "tags": result.get("tags", []),
+                "declarations": [
+                    {"name": name, "location": locations.get(name)} for name in declarations
+                ],
+                "modules": modules,
+                "realized": bool(declarations or modules),
+                "statability": statability.get("verdict"),
+                "missing": statability.get("missing", []),
+                "escape_routes": [
+                    {"axis": route["axis"], "status": route["status"]}
+                    for route in result.get("escape_routes") or []
+                ],
+            }
+        )
+    return sorted(entries, key=lambda e: e["id"])
+
+
+def render_blueprint(registry: dict) -> str:
+    """The comprehension layer: informal claim <-> declaration, both directions.
+
+    Every other generated view in this repository names *declarations*. A reader
+    who has a Lean name and wants the sentence it realizes, or who has a claim
+    and wants to know whether anything realizes it, had nowhere to look.
+
+    Deliberately narrow. This does not model a concept graph, and it is not a
+    `leanblueprint`: it is the two-way index that the rows already contain and
+    nothing exposed. Rows with no Lean appear here as first-class entries with
+    their statability verdict, because a claim nothing realizes is exactly what
+    a reader most often needs to find.
+    """
+    entries = _blueprint_entries(registry)
+    realized = [entry for entry in entries if entry["realized"]]
+    unrealized = [entry for entry in entries if not entry["realized"]]
+
+    lines = [
+        "<!-- Generated by scripts/generate_registry_views.py; do not edit directly. -->",
+        "# Blueprint: claims and what realizes them",
+        "",
+        "Every other generated view here names **declarations**. This one names **claims**,",
+        "and links each to the Lean that realizes it — in both directions, so a reader",
+        "holding a theorem name can find the sentence it was written for.",
+        "",
+        f"**{len(realized)}** of **{len(entries)}** claim rows are realized by atlas Lean; "
+        f"**{len(unrealized)}** are not and say why in "
+        "[`uncovered-rows.md`](uncovered-rows.md).",
+        "",
+        "The machine-readable form is [`blueprint.json`](../agent/blueprint.json), which",
+        "carries the reverse index — declaration name to claim — and the file and line of",
+        "every declaration. Parsing the table below is not an API.",
+        "",
+        "**What this is not.** It is not a concept graph and not a `leanblueprint`: no",
+        "concept has a definition here independent of the row that states it, and nothing",
+        "is claimed about how two claims relate — that is",
+        "[`relations.md`](relations.md)'s question. It is the two-way index the rows",
+        "already contained and nothing exposed.",
+        "",
+        "## Claims with Lean",
+        "",
+        "| Claim | Realized by | Escape routes |",
+        "|---|---|---|",
+    ]
+    for entry in realized:
+        names = entry["declarations"] or [{"name": module} for module in entry["modules"]]
+        shown = ", ".join(f"`{item['name']}`" for item in names[:4])
+        if len(names) > 4:
+            shown += f" (+{len(names) - 4})"
+        routes = (
+            ", ".join(f"`{route['axis']}`" for route in entry["escape_routes"]) or "—"
+        )
+        lines.append(
+            f"| **{entry['id']}** — {_md_cell(entry['name'])}<br>{_md_cell(entry['claim'])} "
+            f"| {shown} | {routes} |"
+        )
+
+    lines += [
+        "",
+        "## Claims with no Lean",
+        "",
+        "A claim nothing realizes is the entry a reader most often needs, and the one an",
+        "index built from declarations can never show. The verdict says what was checked.",
+        "",
+        "| Claim | Verdict | Missing |",
+        "|---|---|---|",
+    ]
+    for entry in unrealized:
+        missing = ", ".join(f"`{item}`" for item in entry["missing"]) or "—"
+        verdict = f"`{entry['statability']}`" if entry["statability"] else "—"
+        lines.append(
+            f"| **{entry['id']}** — {_md_cell(entry['name'])}<br>{_md_cell(entry['claim'])} "
+            f"| {verdict} | {missing} |"
+        )
+    lines.append("")
+    return "\n".join(lines) + "\n"
+
+
+def render_blueprint_json(registry: dict) -> str:
+    """`blueprint.json` — the two-way index, for a program rather than a reader."""
+    entries = _blueprint_entries(registry)
+    reverse: dict[str, str] = {}
+    for entry in entries:
+        for declaration in entry["declarations"]:
+            reverse[declaration["name"]] = entry["id"]
+    payload = {
+        "schema_version": 1,
+        "generated_by": "scripts/generate_registry_views.py",
+        "note": (
+            "Claims and what realizes them, both directions. `claims` is keyed by "
+            "ledger id and carries the informal sentence, the atlas declarations "
+            "realizing it with their file and line, and -- when nothing realizes "
+            "it -- the statability verdict saying what was checked. "
+            "`declaration_to_claim` is the reverse index: given a Lean name, the "
+            "claim it was written for. A declaration absent from that index is not "
+            "unclaimed mathematics; most atlas declarations are supporting lemmas "
+            "and only the ones a ledger row names appear here."
+        ),
+        "claim_count": len(entries),
+        "realized_count": sum(1 for entry in entries if entry["realized"]),
+        "claims": {entry["id"]: entry for entry in entries},
+        "declaration_to_claim": dict(sorted(reverse.items())),
+    }
+    return json.dumps(payload, indent=2, ensure_ascii=False) + "\n"
+
+
+def render_statability(registry: dict) -> str:
+    """Why each uncovered row is uncovered — the map read as a work order.
+
+    The ledger has always recorded *that* a row carries no atlas Lean. A count
+    is not a queue: "query the map before proposing work" needs the map to
+    answer, and until this view existed it could only answer *how many*.
+
+    `UNTRIAGED` is deliberately a verdict rather than an absence. It is the
+    honest answer for most rows, and printing it is what stops "nobody has
+    looked" from being indistinguishable from "somebody looked, and this is
+    what they found".
+    """
+    results = registry["results"]
+    rows = [entry for entry in results if entry.get("statability")]
+    by_verdict = Counter(entry["statability"]["verdict"] for entry in rows)
+    order = [
+        "BLOCKED_ON_PRIMITIVE",
+        "TRIAGED_DISTINCT",
+        "CANDIDATE_LEAD",
+        "UNTRIAGED",
+        "EXTERNAL_ONLY",
+    ]
+
+    lines = [
+        "<!-- Generated by scripts/generate_registry_views.py; do not edit directly. -->",
+        "# Uncovered rows, and why",
+        "",
+        "Every ledger row that carries no atlas Lean, with the reason recorded rather than",
+        "left for a reader to infer. **Every such row must carry a verdict** — "
+        "`scripts/validate_registry.py` fails without one, so this page cannot quietly",
+        "develop holes as the ledger grows.",
+        "",
+        f"**{len(rows)}** rows carry no atlas Lean, out of **{len(results)}**. "
+        + ", ".join(f"**{by_verdict.get(v, 0)}** {v}" for v in order if by_verdict.get(v))
+        + ".",
+        "",
+        "Two things this page is not. It is **not a backlog**: `EXTERNAL_ONLY` rows are",
+        "finished work, and reproducing them in Lean would be duplication under",
+        "[`lean-parsimony.md`](../agent/policy/lean-parsimony.md) rather than coverage. And",
+        "an `UNTRIAGED` verdict is **not** a claim that a result is hard, easy, or blocked —",
+        "only that nobody has read the source against the tree.",
+        "",
+        "## Verdicts",
+        "",
+        "| Verdict | Meaning |",
+        "|---|---|",
+    ]
+    for verdict in order:
+        lines.append(f"| `{verdict}` | {STATABILITY_GLOSS[verdict]} |")
+
+    lines += [
+        "",
+        "## The queue",
+        "",
+        "In the order worth working: what is blocked, what is owed a proof, what is owed a",
+        "read, and what is owed a look.",
+        "",
+        "| Row | Verdict | Missing | What was checked |",
+        "|---|---|---|---|",
+    ]
+    for verdict in order:
+        for entry in sorted(rows, key=lambda e: e["id"]):
+            record = entry["statability"]
+            if record["verdict"] != verdict:
+                continue
+            missing = record.get("missing")
+            missing_cell = ", ".join(f"`{item}`" for item in missing) if missing else "—"
+            lines.append(
+                f"| {entry['id']} — {_md_cell(entry['name'])} | `{verdict}` | "
+                f"{missing_cell} | {_md_cell(record['note'])} |"
+            )
+
+    lines += [
+        "",
+        "## Blocking primitives recorded elsewhere",
+        "",
+        "No row on this page is `BLOCKED_ON_PRIMITIVE` today, and that is a fact about",
+        "where the blocks fall rather than a claim that nothing is blocked. The two the",
+        "tree does record both sit on rows that already carry Lean, so they are partial-",
+        "coverage blocks and not reasons a row is empty:",
+        "",
+        "| What is blocked | Missing primitive | Recorded in |",
+        "|---|---|---|",
+        "| Armstrong's Proposition 10 (`BY-011`), and MAIS-O1 / MAIS-O16 against "
+        "`AISafetyAtlas.Logic.loeb` | resource-bounded complexity — proof-length metrics, "
+        "arithmetized bounded provability, expansion certificates | "
+        "[`v0.7` release notes](../releases/v0.7.md), and the "
+        "`mais-open-problems-2026` source entry |",
+        "| A second consumer for the measure-theoretic `Control` layer | a probability "
+        "measure on `Wireheading`'s environment class with finite-range observables | "
+        "the blocked-consumer table in `AISafetyAtlas/Control.lean` |",
+        "",
+        "Both are the shape a `BLOCKED_ON_PRIMITIVE` verdict is for: a named absence with",
+        "a named consumer waiting on it. A row here earning that verdict is an improvement",
+        "on `UNTRIAGED`, because it converts a gap in reading into a gap in vocabulary.",
+        "",
+    ]
+    return "\n".join(lines) + "\n"
+
+
+def render_escape_routes(registry: dict) -> str:
+    """What you weaken to get out from under each obstruction.
+
+    An impossibility on its own does not help anyone build. The routes out are
+    the part a designer reads, and until this view existed they lived in module
+    docstrings where nothing could check them and no consumer could find them.
+
+    The status column is the point. A route the tree *proves* reopens and a
+    route someone named in a docstring are different claims, and one table that
+    did not separate them would be a worse artifact than no table.
+    """
+    results = registry["results"]
+    routed = [entry for entry in results if entry.get("escape_routes")]
+    routes = [(entry, route) for entry in routed for route in entry["escape_routes"]]
+    by_status = Counter(route["status"] for _, route in routes)
+
+    lines = [
+        "<!-- Generated by scripts/generate_registry_views.py; do not edit directly. -->",
+        "# Escape routes",
+        "",
+        "Every obstruction in this ledger rules something out. This page records, for the",
+        "rows where anyone has decided it, **what you weaken to get out from under it** —",
+        "and how much of that weakening the atlas actually establishes.",
+        "",
+        f"Coverage: **{len(routes)} routes** across **{len(routed)} rows**, out of "
+        f"**{len(results)}** results. "
+        + ", ".join(
+            f"**{by_status.get(status, 0)}** {status}"
+            for status in ("FORMALIZED", "STATED", "NAMED_ONLY")
+        )
+        + ".",
+        "",
+        "**A row with no route here is not a claim that its result is inescapable.** It is",
+        "a claim that nobody has decided the routes, exactly as an untyped row in",
+        "[`relations.md`](relations.md) is read. This view is a pilot; it was seeded by",
+        "lifting the routes the tree already asserted in prose, not by inventing new ones.",
+        "",
+        "## Why the status column carries the weight",
+        "",
+        "An escape route is a claim about what happens when a hypothesis is dropped, and",
+        "the build checks no such claim: a module compiles whether the route out is real,",
+        "vacuous, or backwards. So the three statuses are graded apart, and only the first",
+        "names a theorem.",
+        "",
+        "| Status | Meaning |",
+        "|---|---|",
+    ]
+    for status in ("FORMALIZED", "STATED", "NAMED_ONLY"):
+        lines.append(f"| `{status}` | {ESCAPE_ROUTE_STATUS_GLOSS[status]} |")
+
+    lines += [
+        "",
+        "## Axes",
+        "",
+        "| Axis | What it weakens |",
+        "|---|---|",
+    ]
+    for axis, gloss in sorted(ESCAPE_AXIS_GLOSS.items()):
+        lines.append(f"| `{axis}` | {gloss} |")
+
+    lines += [
+        "",
+        "## Routes",
+        "",
+        "| Result | Axis | Status | Proved by | What survives, and what it costs |",
+        "|---|---|---|---|---|",
+    ]
+    for entry in sorted(routed, key=lambda e: e["id"]):
+        for route in sorted(entry["escape_routes"], key=lambda r: r["axis"]):
+            lean = route.get("lean")
+            proved = f"`{lean}`" if lean else "—"
+            target = route.get("target")
+            if target:
+                proved = f"{proved} · {target}" if lean else target
+            lines.append(
+                f"| {entry['id']} — {_md_cell(entry['name'])} | `{route['axis']}` | "
+                f"`{route['status']}` | {proved} | {_md_cell(route['note'])} |"
+            )
+
+    lines += [
+        "",
+        "## How to add one",
+        "",
+        "Add an `escape_routes` entry to the row in [`registry.yaml`](../../registry.yaml):",
+        "an `axis` from the vocabulary, a `status`, and a `note` saying what survives the",
+        "weakening **and what it costs**. `lean` is required exactly when the status is",
+        "`FORMALIZED`, and is resolved against the elaborated declaration index, so a route",
+        "naming a renamed theorem fails the gate rather than reading as verified.",
+        "",
+        "Grading a route `FORMALIZED` because a nearby theorem exists is the failure this",
+        "field is most exposed to. `BY-004` is the worked example of refusing it: Ashby's",
+        "bound is an inequality, so *more capacity* is plainly the direction out, and the",
+        "route is still `NAMED_ONLY` — because the declaration that would prove it states",
+        "in its own docstring that it is a necessary condition only and constructs no",
+        "regulator.",
+        "",
+    ]
+    return "\n".join(lines) + "\n"
 
 
 def render_relations(registry: dict) -> str:
@@ -2052,6 +2436,10 @@ def main() -> None:
     stale |= update(SOURCE_INDEX, render_source_index(registry), args.check)
     stale |= update(LANDSCAPE_INDEX, render_landscape_index(registry), args.check)
     stale |= update(RELATIONS, render_relations(registry), args.check)
+    stale |= update(ESCAPE_ROUTES, render_escape_routes(registry), args.check)
+    stale |= update(STATABILITY, render_statability(registry), args.check)
+    stale |= update(BLUEPRINT, render_blueprint(registry), args.check)
+    stale |= update(BLUEPRINT_JSON, render_blueprint_json(registry), args.check)
     stale |= update(APPLICATIONS, render_applications(registry), args.check)
     stale |= update(
         MAIS_SOLUTIONS, render_mais_solutions(registry, conjectures), args.check
