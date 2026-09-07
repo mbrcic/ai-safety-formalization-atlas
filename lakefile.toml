@@ -1,6 +1,6 @@
 name = "ai-safety-formalization-atlas"
 version = "0.7.0"
-defaultTargets = ["AISafetyAtlas"]
+defaultTargets = ["AISafetyAtlas", "TauCeti"]
 
 [leanOptions]
 warningAsError = true
@@ -40,3 +40,19 @@ name = "AISafetyAtlas"
 [[lean_exe]]
 name = "atlas-check"
 root = "Main"
+
+# Vendored from TauCetiProject/TauCeti (Apache-2.0), a Lean library downstream of
+# Mathlib incubated by the Lean FRO and the Mathlib Initiative. Eight files: the
+# Morse lemma in a Banach space and its dependency cone. Vendored rather than
+# required because TauCeti pins Lean v4.34.0-rc2 on Mathlib `master`, while this
+# repository pins v4.33.0 through PFR, Foundation and AddCombi; Lake resolves one
+# Mathlib for the whole build, so a `require` would be a joint toolchain
+# migration rather than an import.
+#
+# The backport is two lines, both recorded in
+# docs/provenance/external-formalizations.md together with the upstream commit
+# and the statement-fidelity audit. Nothing here is on the public API pin: the
+# atlas consumes these through its own facades and grades none of them.
+[[lean_lib]]
+name = "TauCeti"
+srcDir = "vendor/TauCeti"

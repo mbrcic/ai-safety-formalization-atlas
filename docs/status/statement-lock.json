@@ -1,7 +1,7 @@
 {
   "generated_by": "scripts/check_statement_freeze.py --write",
   "note": "Signature hashes of ledger-graded statements. A diff here is a schema event: say which way fidelity moved and re-grade the row.",
-  "count": 271,
+  "count": 285,
   "declarations": {
     "AISafetyAtlas.Causal.DecisionNetwork.mem_parents_utility_of_isUnmediated": {
       "file": "AISafetyAtlas/Causal/DecisionNetwork.lean",
@@ -38,6 +38,10 @@
     "AISafetyAtlas.Causal.Model.\u0394mix_congr": {
       "file": "AISafetyAtlas/Causal/Model.lean",
       "sha256": "913847463c095f2f"
+    },
+    "AISafetyAtlas.Causal.O24Constructor": {
+      "file": "AISafetyAtlas/Causal/EffectiveGenericity.lean",
+      "sha256": "1dce7eca4cdd0666"
     },
     "AISafetyAtlas.Causal.O24Solution": {
       "file": "AISafetyAtlas/Causal/EffectiveGenericity.lean",
@@ -127,6 +131,18 @@
       "file": "AISafetyAtlas/Computability.lean",
       "sha256": "b3763f01d06b639b"
     },
+    "AISafetyAtlas.Conjectures.MAIS.IsBoltzmannRiskRate": {
+      "file": "AISafetyAtlas/Conjectures/MAIS/O29Experiment.lean",
+      "sha256": "2f872c1483bd7c12"
+    },
+    "AISafetyAtlas.Conjectures.MAIS.IsO27EdgeSurvivalRegion": {
+      "file": "AISafetyAtlas/Conjectures/MAIS/O27.lean",
+      "sha256": "ce9db0a5904a03b4"
+    },
+    "AISafetyAtlas.Conjectures.MAIS.IsO27FirstOrderConstantFunction": {
+      "file": "AISafetyAtlas/Conjectures/MAIS/O27.lean",
+      "sha256": "4d16a021b89bdbe8"
+    },
     "AISafetyAtlas.Conjectures.MAIS.IsO27RadiusVanishingCriterion": {
       "file": "AISafetyAtlas/Conjectures/MAIS/O27.lean",
       "sha256": "0e495dc4bddbfd8f"
@@ -135,9 +151,41 @@
       "file": "AISafetyAtlas/Conjectures/MAIS/O31.lean",
       "sha256": "b0a064174e37c4db"
     },
+    "AISafetyAtlas.Conjectures.MAIS.IsO70AWValueStratumTable": {
+      "file": "AISafetyAtlas/Conjectures/MAIS/O70.lean",
+      "sha256": "9063d0926b73f2a5"
+    },
     "AISafetyAtlas.Conjectures.MAIS.IsO70RankTable": {
       "file": "AISafetyAtlas/Conjectures/MAIS/O70.lean",
       "sha256": "779de4a6ebe50019"
+    },
+    "AISafetyAtlas.Conjectures.MAIS.IsO77MinimizerCharacterization": {
+      "file": "AISafetyAtlas/Conjectures/MAIS/O77.lean",
+      "sha256": "c0d58851be3c0df9"
+    },
+    "AISafetyAtlas.Conjectures.MAIS.IsO77SourceFiberVolumeOrderTable": {
+      "file": "AISafetyAtlas/Conjectures/MAIS/O77.lean",
+      "sha256": "d2f6e3ae8e3289b5"
+    },
+    "AISafetyAtlas.Conjectures.MAIS.IsO7Counterexample": {
+      "file": "AISafetyAtlas/Conjectures/MAIS/O7.lean",
+      "sha256": "fef0d9178198baca"
+    },
+    "AISafetyAtlas.Conjectures.MAIS.O70DependsOnRanksOnly": {
+      "file": "AISafetyAtlas/Conjectures/MAIS/O70.lean",
+      "sha256": "36e357d92e09da43"
+    },
+    "AISafetyAtlas.Conjectures.MAIS.O77AllSaddlesHavePairOne": {
+      "file": "AISafetyAtlas/Conjectures/MAIS/O77.lean",
+      "sha256": "0a67c33f5042cc02"
+    },
+    "AISafetyAtlas.Conjectures.MAIS.O7CounterexampleAtEveryScale": {
+      "file": "AISafetyAtlas/Conjectures/MAIS/O7.lean",
+      "sha256": "a80f9bc3dfb2094f"
+    },
+    "AISafetyAtlas.Conjectures.MAIS.a7ZetaVolumeBridge_iff": {
+      "file": "AISafetyAtlas/Conjectures/MAIS/A7Zeta.lean",
+      "sha256": "a8575ea2017e3f1f"
     },
     "AISafetyAtlas.Conjectures.MAIS.boltzmannMinimaxRisk": {
       "file": "AISafetyAtlas/Conjectures/MAIS/O29Experiment.lean",
@@ -167,6 +215,10 @@
       "file": "AISafetyAtlas/Conjectures/MAIS/O33.lean",
       "sha256": "9efb4def2d229d80"
     },
+    "AISafetyAtlas.Conjectures.MAIS.maisO33_etaStarIsZeroGivenBaseline": {
+      "file": "AISafetyAtlas/Conjectures/MAIS/O33.lean",
+      "sha256": "b8a73ec7b4c990b2"
+    },
     "AISafetyAtlas.Conjectures.MAIS.maisO34_exactFiberCandidate": {
       "file": "AISafetyAtlas/Conjectures/MAIS/O34.lean",
       "sha256": "8a241566e7382223"
@@ -178,6 +230,10 @@
     "AISafetyAtlas.Conjectures.MAIS.maisO38_polynomialSamplesSuffice": {
       "file": "AISafetyAtlas/Conjectures/MAIS/O38.lean",
       "sha256": "a8ca4f2fefdb547e"
+    },
+    "AISafetyAtlas.Conjectures.MAIS.o38PolynomialSampleCandidate": {
+      "file": "AISafetyAtlas/Conjectures/MAIS/O38.lean",
+      "sha256": "b277d6927a0d723b"
     },
     "AISafetyAtlas.Conjectures.MAIS.o70ExactLocalPairsExist_iff": {
       "file": "AISafetyAtlas/Conjectures/MAIS/O70.lean",

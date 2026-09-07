@@ -394,6 +394,235 @@ public theorem o70Lambda_self (M N H r : ℕ) (hr : r ≤ min M (min N H)) :
           push_cast at hq ⊢
           linarith
 
+/-! ### Multiplicity at, and below, the uniform witness
+
+The four private lemmas below compute the number of residual minimisers in the
+same four arithmetic regimes as `awLambda`.  Keeping this calculation separate
+from the coefficient calculation matters: equality of the coefficients alone
+does not definitionally identify their multiplicities. -/
+
+private theorem residualMultiplicity_of_lt_left (p n h : ℕ) (hlt : n + h < p) :
+    residualMultiplicity p n h = 1 := by
+  have hs : residualArgmin p n h = 0 := by unfold residualArgmin; omega
+  have hmin : residualMinCost p n h = residualCost p n h 0 := by
+    rw [residualMinCost_eq_argmin, hs]
+  have heq : (residualIndices n h).filter
+      (fun t => residualCost p n h t = residualMinCost p n h) = {0} := by
+    ext t
+    simp only [mem_filter, mem_singleton]
+    constructor
+    · rintro ⟨_ht, htmin⟩
+      have hz : ((t : ℤ) - 0) * ((t : ℤ) + 0 + p - h - n) = 0 := by
+        have hd := (residualCost_sub p n h 0 t).symm
+        rw [htmin, hmin] at hd
+        simpa using hd
+      rcases mul_eq_zero.mp hz with hz | hz
+      · exact_mod_cast sub_eq_zero.mp hz
+      · omega
+    · rintro rfl
+      exact ⟨zero_mem_residualIndices n h, hmin.symm⟩
+  rw [residualMultiplicity, heq, card_singleton]
+
+private theorem residualMultiplicity_of_lt_mid (p n h : ℕ) (hlt : p + h < n) :
+    residualMultiplicity p n h = 1 := by
+  have hs : residualArgmin p n h = h := by unfold residualArgmin; omega
+  have hmin : residualMinCost p n h = residualCost p n h h := by
+    rw [residualMinCost_eq_argmin, hs]
+  have heq : (residualIndices n h).filter
+      (fun t => residualCost p n h t = residualMinCost p n h) = {h} := by
+    ext t
+    simp only [mem_filter, mem_singleton]
+    constructor
+    · rintro ⟨ht, _htmin⟩
+      have hz : ((t : ℤ) - h) * ((t : ℤ) + h + p - h - n) = 0 := by
+        rw [← residualCost_sub]
+        omega
+      rcases mul_eq_zero.mp hz with hz | hz
+      · exact_mod_cast sub_eq_zero.mp hz
+      · simp only [residualIndices, mem_range, Nat.lt_succ_iff] at ht
+        omega
+    · rintro rfl
+      exact ⟨by simp only [residualIndices, mem_range, Nat.lt_succ_iff]; omega, hmin.symm⟩
+  rw [residualMultiplicity, heq, card_singleton]
+
+private theorem residualMultiplicity_of_lt_right (p n h : ℕ) (hlt : p + n < h) :
+    residualMultiplicity p n h = 1 := by
+  have hs : residualArgmin p n h = n := by unfold residualArgmin; omega
+  have hmin : residualMinCost p n h = residualCost p n h n := by
+    rw [residualMinCost_eq_argmin, hs]
+  have heq : (residualIndices n h).filter
+      (fun t => residualCost p n h t = residualMinCost p n h) = {n} := by
+    ext t
+    simp only [mem_filter, mem_singleton]
+    constructor
+    · rintro ⟨ht, _htmin⟩
+      have hz : ((t : ℤ) - n) * ((t : ℤ) + n + p - h - n) = 0 := by
+        rw [← residualCost_sub]
+        omega
+      rcases mul_eq_zero.mp hz with hz | hz
+      · exact_mod_cast sub_eq_zero.mp hz
+      · simp only [residualIndices, mem_range, Nat.lt_succ_iff] at ht
+        omega
+    · rintro rfl
+      exact ⟨by simp only [residualIndices, mem_range, Nat.lt_succ_iff]; omega, hmin.symm⟩
+  rw [residualMultiplicity, heq, card_singleton]
+
+private theorem residualMultiplicity_of_balanced_even (p n h : ℕ)
+    (hp : p ≤ n + h) (hn : n ≤ p + h) (hh : h ≤ p + n)
+    (hpar : (p + n + h) % 2 = 0) : residualMultiplicity p n h = 1 := by
+  have hs : residualArgmin p n h = (h + n - p) / 2 := by unfold residualArgmin; omega
+  set s := (h + n - p) / 2 with hsdef
+  have hsum : h + n - p = 2 * s := by omega
+  have hmin : residualMinCost p n h = residualCost p n h s := by
+    rw [residualMinCost_eq_argmin, hs]
+  have heq : (residualIndices n h).filter
+      (fun t => residualCost p n h t = residualMinCost p n h) = {s} := by
+    ext t
+    simp only [mem_filter, mem_singleton]
+    constructor
+    · rintro ⟨_ht, _htmin⟩
+      have hz : ((t : ℤ) - s) * ((t : ℤ) + s + p - h - n) = 0 := by
+        rw [← residualCost_sub]
+        omega
+      rcases mul_eq_zero.mp hz with hz | hz <;> omega
+    · rintro rfl
+      exact ⟨by simpa [hs, hsdef] using residualArgmin_mem p n h, hmin.symm⟩
+  rw [residualMultiplicity, heq, card_singleton]
+
+private theorem residualMultiplicity_of_balanced_odd (p n h : ℕ)
+    (hp : p ≤ n + h) (hn : n ≤ p + h) (hh : h ≤ p + n)
+    (hpar : (p + n + h) % 2 = 1) : residualMultiplicity p n h = 2 := by
+  have hs : residualArgmin p n h = (h + n - p) / 2 := by unfold residualArgmin; omega
+  set s := (h + n - p) / 2 with hsdef
+  have hsum : h + n - p = 2 * s + 1 := by omega
+  have hmin : residualMinCost p n h = residualCost p n h s := by
+    rw [residualMinCost_eq_argmin, hs]
+  have hslt : s < min h n := by omega
+  have heq : (residualIndices n h).filter
+      (fun t => residualCost p n h t = residualMinCost p n h) = {s, s + 1} := by
+    ext t
+    simp only [mem_filter, mem_insert, mem_singleton]
+    constructor
+    · rintro ⟨_ht, _htmin⟩
+      have hz : ((t : ℤ) - s) * ((t : ℤ) + s + p - h - n) = 0 := by
+        rw [← residualCost_sub]
+        omega
+      rcases mul_eq_zero.mp hz with hz | hz
+      · exact Or.inl (by omega)
+      · exact Or.inr (by omega)
+    · rintro (rfl | rfl)
+      · exact ⟨by simp [residualIndices]; omega, hmin.symm⟩
+      · refine ⟨by simp [residualIndices]; omega, ?_⟩
+        rw [hmin]
+        have hd := residualCost_sub p n h s (s + 1)
+        have hz : ((s + 1 : ℕ) : ℤ) + s + p - h - n = 0 := by omega
+        rw [hz, mul_zero] at hd
+        omega
+  rw [residualMultiplicity, heq]
+  simp
+
+/-- At the uniform rank witness `(r,r)`, the candidate's local multiplicity is
+exactly the multiplicity in the printed Aoyagi--Watanabe table. -/
+public theorem o70Multiplicity_self (M N H r : ℕ) (hr : r ≤ min M (min N H)) :
+    o70Multiplicity M N H r r r = awMultiplicity M N H r := by
+  simp only [le_min_iff] at hr
+  obtain ⟨hrM, hrN, hrH⟩ := hr
+  obtain ⟨p, rfl⟩ : ∃ p, M = p + r := ⟨M - r, by omega⟩
+  obtain ⟨n, rfl⟩ : ∃ n, N = n + r := ⟨N - r, by omega⟩
+  obtain ⟨h, rfl⟩ : ∃ h, H = h + r := ⟨H - r, by omega⟩
+  have hshape : o70Shape (p + r) (n + r) (h + r) r r r = (p, n, h) := by
+    simp [o70Shape]
+  simp only [o70Multiplicity, hshape]
+  unfold awMultiplicity
+  by_cases hA : n + h < p
+  · rw [residualMultiplicity_of_lt_left p n h hA, if_neg]
+    unfold AWBalanced
+    omega
+  · by_cases hB : p + h < n
+    · rw [residualMultiplicity_of_lt_mid p n h hB, if_neg]
+      unfold AWBalanced
+      omega
+    · by_cases hC : p + n < h
+      · rw [residualMultiplicity_of_lt_right p n h hC, if_neg]
+        unfold AWBalanced
+        omega
+      · have hbal : AWBalanced (p + r) (n + r) (h + r) r := by unfold AWBalanced; omega
+        by_cases hpar : ((p + r) + (n + r) + (h + r) + r) % 2 = 0
+        · rw [residualMultiplicity_of_balanced_even p n h (by omega) (by omega)
+            (by omega) (by omega), if_neg]
+          omega
+        · rw [residualMultiplicity_of_balanced_odd p n h (by omega) (by omega)
+            (by omega) (by omega), if_pos]
+          exact ⟨hbal, by omega⟩
+
+/-- Among strata tying the uniform witness's coefficient, the residual-index
+shift `t ↦ t + (a-r)` injects local minimisers into uniform-witness minimisers.
+Consequently no tied stratum has larger multiplicity. -/
+public theorem o70Multiplicity_le_self_of_lambda_eq (M N H r a b : ℕ)
+    (hab : AdmissibleRankData M N H r a b)
+    (heq : o70Lambda M N H r a b = awLambda M N H r) :
+    o70Multiplicity M N H r a b ≤ o70Multiplicity M N H r r r := by
+  obtain ⟨_hM, _hN, _hH, hr, hfeas⟩ := hab
+  obtain ⟨hrab, haHN, hbHM, hsum⟩ := hfeas
+  have hr0 : r ≤ min M (min N H) := hr
+  simp only [le_min_iff] at hr hrab haHN hbHM
+  have heqself := o70Lambda_self M N H r hr0
+  have hnum :
+      o70Q M N r r + residualMinCost (M - r) (N - r) (H - r) =
+        o70Q M N a b + residualMinCost (M - b) (N - a) (H + r - a - b) := by
+    have hrat := heq.trans heqself.symm
+    simp only [o70Lambda, o70Shape] at hrat
+    norm_num at hrat
+    exact_mod_cast hrat.symm
+  let F := (residualIndices (N - a) (H + r - a - b)).filter
+    (fun t => residualCost (M - b) (N - a) (H + r - a - b) t =
+      residualMinCost (M - b) (N - a) (H + r - a - b))
+  let G := (residualIndices (N - r) (H - r)).filter
+    (fun t => residualCost (M - r) (N - r) (H - r) t =
+      residualMinCost (M - r) (N - r) (H - r))
+  have himage : F.image (fun t => t + (a - r)) ⊆ G := by
+    intro u hu
+    simp only [mem_image] at hu
+    obtain ⟨t, htF, rfl⟩ := hu
+    simp only [F, mem_filter] at htF
+    obtain ⟨htmem, htmin⟩ := htF
+    have htle : t ≤ min (H + r - a - b) (N - a) := by
+      simpa only [residualIndices, mem_range, Nat.lt_succ_iff] using htmem
+    have hth := le_trans htle (min_le_left _ _)
+    have htn := le_trans htle (min_le_right _ _)
+    have hmem : t + (a - r) ∈ residualIndices (N - r) (H - r) := by
+      simp only [residualIndices, mem_range, Nat.lt_succ_iff, le_min_iff]
+      omega
+    have hid :
+        o70Q M N r r + residualCost (M - r) (N - r) (H - r) (t + (a - r)) =
+          o70Q M N a b + residualCost (M - b) (N - a) (H + r - a - b) t := by
+      unfold o70Q residualCost
+      have e1 : ((M - r : ℕ) : ℤ) = (M : ℤ) - r := by omega
+      have e2 : ((N - r : ℕ) : ℤ) = (N : ℤ) - r := by omega
+      have e3 : ((H - r : ℕ) : ℤ) = (H : ℤ) - r := by omega
+      have e4 : ((t + (a - r) : ℕ) : ℤ) = (t : ℤ) + a - r := by omega
+      have e5 : ((M - b : ℕ) : ℤ) = (M : ℤ) - b := by omega
+      have e6 : ((N - a : ℕ) : ℤ) = (N : ℤ) - a := by omega
+      have e7 : ((H + r - a - b : ℕ) : ℤ) = (H : ℤ) + r - a - b := by omega
+      rw [e1, e2, e3, e4, e5, e6, e7]
+      ring
+    simp only [G, mem_filter]
+    refine ⟨hmem, ?_⟩
+    rw [htmin] at hid
+    omega
+  have hinj : Set.InjOn (fun t : ℕ => t + (a - r)) F := by
+    intro x _ y _ hxy
+    exact Nat.add_right_cancel hxy
+  have hcard : F.card = (F.image (fun t => t + (a - r))).card := by
+    rw [card_image_iff.mpr hinj]
+  calc
+    o70Multiplicity M N H r a b = F.card := by rfl
+    _ = (F.image (fun t => t + (a - r))).card := hcard
+    _ ≤ G.card := card_le_card himage
+    _ = o70Multiplicity M N H r r r := by
+      simp only [o70Multiplicity, o70Shape_self]
+      rfl
+
 /-! ### The rank polytope: shifting a stratum back to the uniform witness
 
 The lower bound is a discrete minimisation over `(a, b)`, but it collapses: with
@@ -527,6 +756,172 @@ public theorem residualMultiplicity_le_two (p n h : ℕ) : residualMultiplicity 
 public theorem o70Multiplicity_le_two (M N H r a b : ℕ) :
     o70Multiplicity M N H r a b ≤ 2 :=
   residualMultiplicity_le_two _ _ _
+
+/-! ### The degenerate shapes
+
+A shape with a zero entry has an empty residual core, and both halves of the
+pair collapse.  The index `min h n` realises the minimum in all three cases at
+once: at `h = 0` and at `n = 0` the index range is `{0}` and the objective is
+`hn`, while at `p = 0` the factored objective `(h - t)(n - t) + tp` loses its
+second summand and the clamped vertex kills the first. -/
+
+private theorem residualCost_min_eq_zero_of_zero (p n h : ℕ)
+    (hz : p = 0 ∨ n = 0 ∨ h = 0) : residualCost p n h (min h n) = 0 := by
+  rw [residualCost_factored]
+  rcases hz with rfl | rfl | rfl
+  · rcases le_total h n with hc | hc
+    · rw [min_eq_left hc]; simp
+    · rw [min_eq_right hc]; simp
+  · rw [min_eq_right (Nat.zero_le h)]; simp
+  · rw [min_eq_left (Nat.zero_le n)]; simp
+
+private theorem residualMinCost_of_zero (p n h : ℕ)
+    (hz : p = 0 ∨ n = 0 ∨ h = 0) : residualMinCost p n h = 0 := by
+  refine le_antisymm ?_ (residualMinCost_nonneg p n h)
+  have hmem : min h n ∈ residualIndices n h := by
+    simp [residualIndices]
+  have := residualMinCost_le p n h (min h n) hmem
+  rwa [residualCost_min_eq_zero_of_zero p n h hz] at this
+
+private theorem residualMultiplicity_of_zero (p n h : ℕ)
+    (hz : p = 0 ∨ n = 0 ∨ h = 0) : residualMultiplicity p n h = 1 := by
+  set s := min h n with hsdef
+  have hmin : residualMinCost p n h = residualCost p n h s :=
+    (residualMinCost_of_zero p n h hz).trans
+      (residualCost_min_eq_zero_of_zero p n h hz).symm
+  have heq : (residualIndices n h).filter
+      (fun t => residualCost p n h t = residualMinCost p n h) = {s} := by
+    ext t
+    simp only [mem_filter, mem_singleton, residualIndices, mem_range,
+      Nat.lt_succ_iff]
+    constructor
+    · rintro ⟨ht, htmin⟩
+      have hzz : ((t : ℤ) - s) * ((t : ℤ) + s + p - h - n) = 0 := by
+        rw [← residualCost_sub]
+        omega
+      rcases hz with rfl | rfl | rfl <;>
+        rcases mul_eq_zero.mp hzz with hc | hc <;> omega
+    · rintro rfl
+      exact ⟨by omega, hmin.symm⟩
+  rw [residualMultiplicity, heq, card_singleton]
+
+/-! ### The balanced minimum, without the division
+
+The candidate's balanced numerator is stated over a denominator of `8`, and the
+residual minimum sits under a `2`.  Multiplying out by `4` keeps the identity in
+`ℤ` and puts the parity correction where the note puts it: at the half-integer
+vertex the two neighbouring indices tie, and the tie costs exactly `+1` in the
+numerator. -/
+
+private theorem four_mul_residualMinCost_of_balanced (p n h : ℕ)
+    (hp : p ≤ n + h) (hn : n ≤ p + h) (hh : h ≤ p + n) :
+    4 * residualMinCost p n h
+      = 2 * (h : ℤ) * ((p : ℤ) + n) - ((p : ℤ) - n) ^ 2 - (h : ℤ) ^ 2
+        + ((p + n + h) % 2 : ℕ) := by
+  set t := (h + n - p) / 2 with htdef
+  have htval : residualArgmin p n h = t := by
+    rw [htdef]; unfold residualArgmin; omega
+  rw [residualMinCost_eq_argmin, htval]
+  unfold residualCost
+  rcases Nat.even_or_odd (p + n + h) with hpar | hpar
+  · have hmod : (p + n + h) % 2 = 0 := Nat.even_iff.mp hpar
+    have hlin : (h : ℤ) + n - p = 2 * t := by omega
+    rw [hmod]
+    push_cast
+    linear_combination ((h : ℤ) + n - p - 2 * t) * hlin
+  · have hmod : (p + n + h) % 2 = 1 := Nat.odd_iff.mp hpar
+    have hlin : (h : ℤ) + n - p = 2 * t + 1 := by omega
+    rw [hmod]
+    push_cast
+    linear_combination ((h : ℤ) + n - p - 2 * t + 1) * hlin
+
+/-! ## The candidate answer in the other candidate's notation
+
+Issue #3's Corollary 1.3 states the zero-target pair as a discrete minimisation
+over an integer index, and that is the form the atlas transcribes and computes
+with.  Issue #12 states the same pair as a four-case closed formula with a
+parity correction — its equation (3) — and MAIS-O77(a) is graded against a table
+built from it.
+
+The two are the same function.  Until this was proved, that was a hand-check:
+`o77Pair` reuses `o70Pair`, so the machine-checked object was issue #3's
+representation of issue #12's answer, and the step between them lived in prose.
+
+One thing falls out of the proof.  Issue #12 opens its formula with a special
+case — "if any of `p`, `q`, `h` is zero, set `(Λ₀, m₀) = (0, 1)`" — and that
+branch is redundant: the four regimes below already return `(0, 1)` on every
+degenerate shape.  It is kept here because the note prints it, not because
+anything needs it. -/
+
+/-- **Issue #12's equation (3)**, the closed form of the local pair at the origin
+of the zero-target multiplication germ `(X, Y) ↦ ‖YX‖²_F` with `X : ℝ^{h×n}` and
+`Y : ℝ^{p×h}`, transcribed branch for branch.
+
+`n` is the note's `q`.  The balanced case carries `χ`, the parity of `p + q + h`,
+in both components. -/
+@[expose] public def zeroTargetClosedFormPair (p n h : ℕ) : ℚ × ℕ :=
+  if p = 0 ∨ n = 0 ∨ h = 0 then (0, 1)
+  else if p ≤ n + h ∧ n ≤ p + h ∧ h ≤ p + n then
+    ((2 * (h : ℚ) * ((p : ℚ) + n) - ((p : ℚ) - n) ^ 2 - (h : ℚ) ^ 2
+        + ((p + n + h) % 2 : ℕ)) / 8, 1 + (p + n + h) % 2)
+  else if n + h < p then ((h : ℚ) * n / 2, 1)
+  else if p + h < n then ((h : ℚ) * p / 2, 1)
+  else ((p : ℚ) * n / 2, 1)
+
+/-- **The two submitted representations of the zero-target pair agree**, at every
+shape and with no feasibility hypothesis.
+
+Left side: issue #3's minimisation, which is what `o70Pair` and hence `o77Pair`
+compute.  Right side: issue #12's printed closed form. -/
+public theorem residualPair_eq_zeroTargetClosedFormPair (p n h : ℕ) :
+    ((residualMinCost p n h : ℚ) / 2, residualMultiplicity p n h)
+      = zeroTargetClosedFormPair p n h := by
+  unfold zeroTargetClosedFormPair
+  by_cases hzero : p = 0 ∨ n = 0 ∨ h = 0
+  · rw [if_pos hzero, residualMinCost_of_zero p n h hzero,
+      residualMultiplicity_of_zero p n h hzero]
+    norm_num
+  rw [if_neg hzero]
+  by_cases hbal : p ≤ n + h ∧ n ≤ p + h ∧ h ≤ p + n
+  · obtain ⟨hp, hn, hh⟩ := hbal
+    rw [if_pos ⟨hp, hn, hh⟩, Prod.mk.injEq]
+    have hcost := four_mul_residualMinCost_of_balanced p n h hp hn hh
+    rcases Nat.even_or_odd (p + n + h) with hpar | hpar
+    · have hmod : (p + n + h) % 2 = 0 := Nat.even_iff.mp hpar
+      refine ⟨?_, by rw [residualMultiplicity_of_balanced_even p n h hp hn hh hmod, hmod]⟩
+      rw [hmod] at hcost
+      norm_num at hcost
+      have hQ := congrArg (fun z : ℤ => (z : ℚ)) hcost
+      push_cast at hQ
+      rw [hmod]
+      push_cast
+      linarith
+    · have hmod : (p + n + h) % 2 = 1 := Nat.odd_iff.mp hpar
+      refine ⟨?_, by rw [residualMultiplicity_of_balanced_odd p n h hp hn hh hmod, hmod]⟩
+      rw [hmod] at hcost
+      norm_num at hcost
+      have hQ := congrArg (fun z : ℤ => (z : ℚ)) hcost
+      push_cast at hQ
+      rw [hmod]
+      push_cast
+      linarith
+  rw [if_neg hbal]
+  have hcases : n + h < p ∨ p + h < n ∨ p + n < h := by
+    simp only [not_and_or, not_le] at hbal
+    omega
+  rcases hcases with hc | hc | hc
+  · rw [if_pos hc, residualMinCost_of_lt_left p n h hc,
+      residualMultiplicity_of_lt_left p n h hc]
+    push_cast
+    ring_nf
+  · rw [if_neg (by omega), if_pos hc, residualMinCost_of_lt_mid p n h hc,
+      residualMultiplicity_of_lt_mid p n h hc]
+    push_cast
+    ring_nf
+  · rw [if_neg (by omega), if_neg (by omega), residualMinCost_of_lt_right p n h hc,
+      residualMultiplicity_of_lt_right p n h hc]
+    push_cast
+    ring_nf
 
 /-- `q = Ma + bN - ab` is nonnegative on any stratum whose `a` respects its shape
 bound, since `q = Ma + b(N - a)`. -/

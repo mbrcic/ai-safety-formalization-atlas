@@ -35,11 +35,9 @@ the task requires that particular inventory, domain, or evidence.
 | `docs/status/<cluster>-dependency-graph.md` | **reading** one cluster's declaration dependencies |
 | Facade modules under `AISafetyAtlas/*.lean` | writing Lean for the relevant domain |
 
-**Two formats, one content.** Every cluster's dependency view exists as `.md`
-and as `.json`. The `.md` is the one to open; the `.json` exists for tools and
-is several times larger (`inference-dependency-graph.json` alone is ~52k
-tokens). The same rule holds for `docs/status/declaration-index.json`: it is a
-lookup table, not a document — resolve one name in it rather than reading it.
+**Open the cluster's `.md`.** Each domain's dependency view is one Markdown
+file. `docs/status/declaration-index.json` is different in kind: it is a lookup
+table, not a document — resolve one name in it rather than reading it.
 
 ## Lookup recipe
 

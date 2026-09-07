@@ -326,6 +326,55 @@ CASES = [
         "must pin a 40-character Git revision",
     ),
     (
+        "search evidence: archive-pinned follow-up drifting from its corpus record",
+        "validate_registry.py",
+        "docs/provenance/formalization-search.json",
+        lambda d: next(
+            followup
+            for check in d["novelty_checks"]
+            for followup in check.get("followup_searches", [])
+            if followup["corpus"] == "isabelle-afp"
+        ).__setitem__("version", "AFP release 1999-01-01"),
+        "must pin a 40-character Git revision",
+    ),
+    (
+        "search evidence: archive-pinned follow-up not saying how it was pinned",
+        "validate_registry.py",
+        "docs/provenance/formalization-search.json",
+        lambda d: next(
+            followup
+            for check in d["novelty_checks"]
+            for followup in check.get("followup_searches", [])
+            if followup["corpus"] == "isabelle-afp"
+        ).pop("pinned_by"),
+        "must record pinned_by",
+    ),
+    (
+        "registry: MAIS solution verdict outside the vocabulary",
+        "validate_registry.py",
+        "registry.yaml",
+        lambda d: d["source_catalog"]["mais-issue-5-2026"]["mais_solution"].__setitem__(
+            "verdict", "VERIFIED"
+        ),
+        "unknown mais_solution verdict",
+    ),
+    (
+        "registry: MAIS solution verdict with no account of what was checked",
+        "validate_registry.py",
+        "registry.yaml",
+        lambda d: d["source_catalog"]["mais-issue-5-2026"]["mais_solution"].pop(
+            "checked"
+        ),
+        "must record a non-empty checked",
+    ),
+    (
+        "registry: MAIS solution verdict against an unhashed issue body",
+        "validate_registry.py",
+        "registry.yaml",
+        lambda d: d["source_catalog"]["mais-issue-5-2026"].pop("content_sha256"),
+        "must record content_sha256",
+    ),
+    (
         "registry: public RELATED record with no scope delta",
         "validate_registry.py",
         "registry.yaml",
@@ -851,8 +900,8 @@ CASES = [
         "conjectures: next_id skips an unrecorded assignment",
         "validate_conjectures.py",
         "conjectures.yaml",
-        lambda d: d.__setitem__("next_id", 28),
-        "conjecture numbering skips assigned ids ['CONJ-027']",
+        lambda d: d.__setitem__("next_id", 30),
+        "conjecture numbering skips assigned ids ['CONJ-029']",
     ),
     (
         "conjectures: MAIS row using an atlas bridge",
@@ -892,6 +941,15 @@ CASES = [
             "source_ref", ["mathforaisafety-2026"]
         ),
         "unpinned sources",
+    ),
+    (
+        "conjectures: graded against a directory rather than a work",
+        "validate_conjectures.py",
+        "conjectures.yaml",
+        lambda d: synthetic_conjecture(d).__setitem__(
+            "source_ref", ["brcic-yampolskiy-2023"]
+        ),
+        "directory sources",
     ),
     (
         "conjectures: a narrowing labelled but not argued",
