@@ -45,16 +45,48 @@ object as an "agent" is not enough.
   encoded statement, not the adequacy of an informal AI-safety interpretation.
 - **Expand only when structure is reusable.** New dependencies, domains, and
   abstractions must support a precise theorem or unblock downstream proofs.
+  A foundation may land ahead of its consumers only on the four conditions in
+  [`lean-parsimony.md`](docs/agent/policy/lean-parsimony.md), one of which is an
+  expiry; [`scripts/report_consumers.py`](scripts/report_consumers.py) is how you
+  see which declarations have earned a consumer and which have not.
+- **Generic mathematics has two homes.** A domain-neutral result this tree needs
+  stays here *and* is offered upstream, and the decision is recorded either way.
+  [`lean-routing.md`](docs/agent/policy/lean-routing.md).
 
 ## Current foundation
 
-The initial survey inventory and cross-framework discovery pass are complete.
-The repository has verified external evidence and compiling Lean interfaces for
-computability limits, the halting problem, Arrow's theorem, and a utility
-representation of Arrow's theorem. See
-[formalization status](docs/status/formalization-status.md) for the maintained figures
-and [external formalizations](docs/provenance/external-formalizations.md) for reproduction
-evidence.
+**This section describes the tree, so it goes stale; [`STATE.md`](STATE.md) is
+the live record and wins wherever the two differ.** What follows is the shape
+of the foundation, not its figures — the maintained counts are in
+[formalization status](docs/status/formalization-status.md), and
+[external formalizations](docs/provenance/external-formalizations.md) carries
+the reproduction evidence.
+
+The survey inventory and the cross-framework discovery pass are complete, and
+the tree has grown well past them. Beyond the original computability,
+social-choice and utility interfaces it now carries: a knowability kernel with
+its specializations and the domain joints built on it; Wolpert's limits of
+inference at the source's own quantifiers, with the probability substrate that
+material needs; Ashby and Touchette–Lloyd behind a control facade; a causal
+layer with both causal Bayesian networks and structural causal models; a
+singular-learning layer; a fairness result; and a MAIS conjecture ledger of
+printed problems stated in Lean.
+
+Three things the reader should know about that growth, because none of them is
+visible from a count:
+
+- **The ledger is selective, and says so.** Most declarations in the tree are
+  supporting lemmas with no ledger row, which is intended. What is *not* left to
+  inference is why a ledger row carries no Lean — every such row now records a
+  verdict, browsable at [uncovered rows](docs/status/uncovered-rows.md).
+- **Not everything here is reachable from one import.** The root import is a
+  small stable facade; conjecture and singular-learning modules sit outside it
+  deliberately, and the per-module table in
+  [`AISafetyAtlas.lean`](AISafetyAtlas.lean) says what each parent supplies.
+- **Depth is not yet vocabulary.** Reuse is uneven — the knowability kernel is
+  consumed across domains, and several developments are consumed only by their
+  own examples. [`scripts/report_consumers.py`](scripts/report_consumers.py)
+  reports which is which, and is a work queue rather than a scoreboard.
 
 The squashed v0.1 foundation is published on `main`. Further work is
 developed off `main` and proposed as a small reviewed delta rather than by

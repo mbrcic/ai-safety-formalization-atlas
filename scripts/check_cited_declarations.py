@@ -91,7 +91,16 @@ EXTERNAL = {
 # (`accuracySupOn_eq_sup'`) are ordinary declarations, and a `\b` anchor at the
 # end silently drops the prime and then reports the unprimed name as missing.
 # That false positive was this script's own first bug.
-TOKEN = re.compile(r"\b[A-Za-zΔ][A-Za-z0-9_.Δ₀-₉]*_[A-Za-z0-9_.Δ₀-₉]*'*")
+# Lean identifiers are Unicode, and this alphabet was ASCII plus the two
+# characters somebody happened to need. `sum_score_eq_μ` is a real declaration
+# in `Fairness`, and the old pattern tokenized it as `sum_score_eq_` -- so a
+# grading artifact citing it correctly would have been reported as naming a
+# theorem that does not exist. Latent rather than live: no scanned artifact
+# cites one today, which is exactly why it would have been found the hard way.
+# Greek and the subscript block are what Lean names actually use.
+LEAN_LETTER = r"A-Za-z\u0370-\u03ff\u1f00-\u1fff"
+LEAN_TAIL = LEAN_LETTER + r"0-9_.\u2080-\u2089"
+TOKEN = re.compile(rf"\b[{LEAN_LETTER}][{LEAN_TAIL}]*_[{LEAN_TAIL}]*'*")
 SUFFIXES = (".py", ".sh", ".txt", ".md", ".json", ".yaml", ".lean", ".tex", ".pdf")
 
 

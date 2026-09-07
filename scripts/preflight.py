@@ -53,6 +53,7 @@ KINDS: dict[str, dict] = {
             ("docs/agent/policy/lean-statement-freeze.md", "Statement freeze"),
             ("docs/agent/policy/lean-parsimony.md", "Parsimony (formalizations)"),
             ("docs/agent/policy/lean-reuse-sources.md", "Search order"),
+            ("docs/agent/policy/lean-routing.md", "Keep **and** contribute — never \"send it away\""),
         ],
         "commands": [
             "python3 scripts/check_statement_freeze.py",
@@ -73,7 +74,7 @@ KINDS: dict[str, dict] = {
         ],
     },
     "ledger": {
-        "title": "Registry or conjecture ledger (registry.yaml, conjectures.yaml)",
+        "title": "Registry, conjecture board, or intake lane (registry.yaml, conjectures.yaml, intake.yaml)",
         "sections": [
             ("CONTRIBUTING.md", "Evidence and registry changes"),
             (
@@ -85,6 +86,7 @@ KINDS: dict[str, dict] = {
             "python3 scripts/generate_registry_views.py",
             "python3 scripts/validate_registry.py",
             "python3 scripts/validate_conjectures.py",
+            "python3 scripts/validate_intake.py",
         ],
     },
     "generated": {
@@ -157,7 +159,7 @@ def classify(path: str) -> list[str]:
         kinds.append("lean-library")
     elif path in {"AISafetyAtlas.lean", "Main.lean"}:
         kinds.append("lean-library")
-    if path in {"registry.yaml", "conjectures.yaml"}:
+    if path in {"registry.yaml", "conjectures.yaml", "intake.yaml"}:
         kinds.append("ledger")
     if path.startswith("docs/status/") or path == "docs/guide/contributor-tasks.md":
         kinds.append("generated")

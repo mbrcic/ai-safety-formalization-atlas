@@ -227,6 +227,42 @@ checkboxes restate the three questions above; they add no obligation.
 someone else's conjecture is a distinct contribution, and both are recorded:
 `proposed_by` names who asked the question.
 
+## The intake lane
+
+This page describes a **curated board**: every row is graded against a printed
+source and carries a scope and a fidelity verdict. That is the right bar for the
+board, and the wrong bar for the front door — it meant that for a long time the
+only way a statement entered this repository was for the maintainer to
+transcribe it, and the `proposed_by` fields above show exactly that. Every
+externally-originated row on the board came in as a GitHub issue and was
+transcribed by hand, because transcription-by-maintainer was the only path that
+existed.
+
+[`intake.yaml`](../../intake.yaml) is the other half. It takes **a compiling
+`Prop` and a minimal row, with no grade of any kind**: an id, the statement, the
+declaration, who proposed it, the date, and optionally why it matters. There is
+no `source_ref`, no `source_scope`, no `source_fidelity`, no `relationship` and
+no `ai_bridge_status` — and those fields are not merely unused,
+[`scripts/validate_intake.py`](../../scripts/validate_intake.py) **refuses**
+them. A proposer may deposit a statement; only a human grades one. That split
+is the reason the lane exists, and it is a check rather than a convention.
+
+Nothing in the lane is a result, nothing in it is coverage, and nothing in it is
+counted anywhere. Containment is the same as the board's and for the same
+reason: intake modules live under `AISafetyAtlas.Conjectures.Intake.*`, which is
+unreachable from the atlas root import, so a badly judged statement cannot reach
+the public API however it was merged.
+
+Leaving the lane is a recorded decision. A row is `PROMOTED` — and must then
+name the `CONJ-` id it became, so the two ledgers cannot drift apart — or
+`DECLINED` with a reason. Ids are never reused, so "not in the lane" is never
+the same as "never arrived".
+
+**The lane is currently empty and reports itself that way.** The machinery is
+live and no statement has been deposited; the same thing was true of the
+conjecture board at `v0.5.1`, and saying so is better than the alternative of a
+lane seeded with an invented row to look busy.
+
 ## Record shape
 
 A conjecture enters [`conjectures.yaml`](../../conjectures.yaml) only once its

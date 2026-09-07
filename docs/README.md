@@ -108,6 +108,12 @@ Regenerate with `python3 scripts/generate_registry_views.py` (also refreshes
 - [Relations and shapes](status/relations.md) — the ledger as a graph: how two
   results stand to each other, and which are characterizations rather than point
   impossibilities
+- [Blueprint](status/blueprint.md) — claims and what realizes them, both directions;
+  machine-readable as [blueprint.json](agent/blueprint.json)
+- [Uncovered rows](status/uncovered-rows.md) — every row with no atlas Lean and the
+  reason: reproduced elsewhere, triaged distinct, a lead to read, or nobody has looked
+- [Escape routes](status/escape-routes.md) — what you weaken to get out from under
+  each obstruction, and how much of that weakening the atlas actually proves
 - [Source reports](status/sources/) — per catalogued source: papers, formalizations,
   atlas declarations, bridge state
 - [MAIS submitted solutions](status/mais-solutions.md) — solutions other people

@@ -79,6 +79,9 @@ python3 scripts/validate_registry.py
 echo "==> validate_conjectures"
 python3 scripts/validate_conjectures.py
 
+echo "==> validate_intake"
+python3 scripts/validate_intake.py
+
 echo "==> validate_tasks"
 python3 scripts/validate_tasks.py
 
