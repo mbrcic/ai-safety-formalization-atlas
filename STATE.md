@@ -2,10 +2,10 @@
 
 Updated: 2026-09-07
 
-**`v0.8.0` is prepared and not yet tagged.** The note is
-[`docs/releases/v0.8.md`](docs/releases/v0.8.md). `v0.7.0` is still the last
-published release: the `v0.8.0` tag does not exist yet, and that tag — not this
-file and not the note — is what publication means here.
+**`v0.8.0` is the published release.** The note is
+[`docs/releases/v0.8.md`](docs/releases/v0.8.md), and the `v0.8.0` tag with its
+GitHub Release — not this file and not the note — is the canonical publication
+record.
 
 **The toolchain is Lean v4.33.0 as of 2026-08-31, bumped in its own branch
 and merged.** Mathlib `db584cd6`, with PFR `7d6404b7` and Foundation
@@ -304,7 +304,7 @@ bridge and is not a reviewed reading of Ashby's law in general — see
 Counts in the generated snapshot below are current for the branch; the release
 narrative that follows is not about it.
 
-Current phase: `v0.8.0` is **prepared, not tagged** — see
+Current phase: `v0.8.0` is **published** — see
 [`docs/releases/v0.8.md`](docs/releases/v0.8.md). It is a breadth release that
 spends its last third on the risk breadth creates. The atlas took on a community:
 MAIS open-problem agendas are carried as compiling Lean statements, seven settled
