@@ -10,7 +10,7 @@ Edges come from the elaborated Lean environment. This answers the question the p
 
 So `A → B` means *`B` occurs in `A`'s statement, or in `A`'s body when `A` is a definition*. A lemma used only inside a proof does not appear. Reading the table as a complete call graph would be wrong, and the two sections below are scoped so that they stay true under this limit.
 
-`114` authored declarations in `AISafetyAtlas.Knowledge.*` (75 theorems). Compiler-generated companions and projections are dropped.
+`117` authored declarations in `AISafetyAtlas.Knowledge.*` (78 theorems). Compiler-generated companions and projections are dropped.
 
 ## Load-bearing declarations
 
@@ -18,7 +18,7 @@ Named in the statements of eight or more others. A change to one of these is a c
 
 | Declaration | Named by |
 |---|---|
-| `Knowable` | 49 |
+| `Knowable` | 59 |
 | `Embedded.Restriction` | 23 |
 | `Embedded.InferenceMap` | 19 |
 | `Embedded.Meshing` | 14 |
@@ -56,6 +56,8 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 | `Check.knowable_of_findCollision_eq_none` | theorem | `Check.findCollision`, `Knowable` |
 | `Check.not_knowable_of_findCollision_eq_some` | theorem | `Check.findCollision`, `Knowable` |
 | `Determines` | definition | — |
+| `Determines.refl` | theorem | `Determines` |
+| `Determines.trans` | theorem | `Determines` |
 | `Devices.BlockAnswers` | definition | — |
 | `Devices.BlockwiseCollision` | definition | — |
 | `Devices.BlockwiseCollision.not_physicallyKnows` | theorem | `Devices.BlockwiseCollision` |
@@ -148,6 +150,7 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 | `not_knowable_of_card_lt` | theorem | `Knowable` |
 | `not_knowable_of_collision` | theorem | `Knowable` |
 | `not_knowable_of_condEntropy_ne_zero` | theorem | `Knowable` |
+| `not_knowable_of_invariant_transform` | theorem | `Knowable` |
 | `not_knowable_of_one_lt_ambiguity` | theorem | `Knowable`, `ambiguity` |
 | `not_knowable_of_witness` | theorem | `IndistinguishabilityWitness`, `Knowable` |
 | `not_knowable_pairTarget_of_not_knowable` | theorem | `Knowable`, `pairTarget` |

@@ -10,7 +10,7 @@ Edges come from the elaborated Lean environment. This answers the question the p
 
 So `A → B` means *`B` occurs in `A`'s statement, or in `A`'s body when `A` is a definition*. A lemma used only inside a proof does not appear. Reading the table as a complete call graph would be wrong, and the two sections below are scoped so that they stay true under this limit.
 
-`93` authored declarations in `AISafetyAtlas.Compositional.*` (50 theorems). Compiler-generated companions and projections are dropped.
+`119` authored declarations in `AISafetyAtlas.Compositional.*` (65 theorems). Compiler-generated companions and projections are dropped.
 
 ## Load-bearing declarations
 
@@ -18,12 +18,17 @@ Named in the statements of eight or more others. A change to one of these is a c
 
 | Declaration | Named by |
 |---|---|
-| `Hyperproperties.TraceSystem` | 28 |
-| `Hyperproperties.Hyperproperty` | 20 |
-| `Hyperproperties.Observation` | 13 |
-| `Networks.Network` | 11 |
-| `Networks.Config` | 9 |
-| `Hyperproperties.Realizes` | 9 |
+| `Hyperproperties.TraceSystem` | 33 |
+| `Networks.Config` | 30 |
+| `Networks.Network` | 28 |
+| `Hyperproperties.Hyperproperty` | 23 |
+| `Networks.Algorithm` | 20 |
+| `Hyperproperties.Observation` | 20 |
+| `Hyperproperties.Realizes` | 13 |
+| `Networks.Automorphism` | 12 |
+| `Networks.runFor` | 9 |
+| `Networks.Invariant` | 9 |
+| `Networks.Automorphism.toEquiv` | 9 |
 
 ## Definitions no statement and no example mentions
 
@@ -69,13 +74,17 @@ None.
 | `Hyperproperties.isOpen_cone` | theorem | `Hyperproperties.Cone`, `Hyperproperties.Observation`, `Hyperproperties.TraceSystem`, `Hyperproperties.prefixTopology` |
 | `Hyperproperties.k_safety_iff_finite_self_composition` | theorem | `Hyperproperties.FiniteSelfComposition`, `Hyperproperties.Hyperproperty`, `Hyperproperties.IsKSafety`, `Hyperproperties.SelfCompositionSafe`, `Hyperproperties.TraceSystem` |
 | `Hyperproperties.k_safety_iff_product_self_composition` | theorem | `Hyperproperties.Hyperproperty`, `Hyperproperties.IsKSafety`, `Hyperproperties.SelfCompositionSafe`, `Hyperproperties.TraceSystem`, `Hyperproperties.productSelfComposition`, `Hyperproperties.toBatch` |
+| `Hyperproperties.knowable_of_isSafetyPredicate` | theorem | `Hyperproperties.IsSafetyPredicate`, `Hyperproperties.Observation`, `Hyperproperties.realizedSet` |
 | `Hyperproperties.mem_toBatch` | theorem | `Hyperproperties.toBatch` |
+| `Hyperproperties.not_isSafetyPredicate_of_realizedSet_collision` | theorem | `Hyperproperties.IsSafetyPredicate`, `Hyperproperties.Observation`, `Hyperproperties.realizedSet` |
+| `Hyperproperties.not_knowable_of_realizedSet_collision` | theorem | `Hyperproperties.Observation`, `Hyperproperties.realizedSet` |
 | `Hyperproperties.padBatch` | definition | — |
 | `Hyperproperties.padBatch_mem` | theorem | `Hyperproperties.padBatch` |
 | `Hyperproperties.padBatch_mem_productSelfComposition` | theorem | `Hyperproperties.TraceSystem`, `Hyperproperties.padBatch`, `Hyperproperties.productSelfComposition` |
 | `Hyperproperties.prefixTopology` | definition | `Hyperproperties.Cone`, `Hyperproperties.Observation`, `Hyperproperties.Realizes`, `Hyperproperties.TraceSystem` |
 | `Hyperproperties.productSelfComposition` | definition | `Hyperproperties.TraceSystem` |
 | `Hyperproperties.productSelfComposition_empty` | theorem | `Hyperproperties.TraceSystem`, `Hyperproperties.productSelfComposition` |
+| `Hyperproperties.realizedSet` | definition | `Hyperproperties.Observation`, `Hyperproperties.Realizes` |
 | `Hyperproperties.selfCompositionSafe_empty_of_any` | theorem | `Hyperproperties.Hyperproperty`, `Hyperproperties.SelfCompositionSafe` |
 | `Hyperproperties.self_composition_is_safety` | theorem | `Hyperproperties.Hyperproperty`, `Hyperproperties.IsSafetyPredicate`, `Hyperproperties.SelfCompositionSafe` |
 | `Hyperproperties.toBatch` | definition | — |
@@ -98,17 +107,39 @@ None.
 | `Networks.Algorithm` | definition | — |
 | `Networks.Automorphism` | definition | `Networks.Network` |
 | `Networks.Config` | definition | — |
+| `Networks.ElectsLeader` | definition | `Hyperproperties.Hyperproperty`, `Hyperproperties.TraceSystem`, `Networks.Run`, `Symmetry.HasUniqueLeader` |
 | `Networks.Invariant` | definition | `Networks.Automorphism`, `Networks.Automorphism.toEquiv`, `Networks.Config`, `Networks.Network` |
 | `Networks.Network` | definition | — |
+| `Networks.ObsTrace` | definition | `Networks.Algorithm`, `Networks.Config`, `Networks.Network`, `Networks.runFor` |
+| `Networks.Run` | definition | `Networks.Config` |
 | `Networks.SameView` | definition | `Networks.Config`, `Networks.Network`, `Networks.pathTo` |
+| `Networks.Snapshot` | definition | `Networks.Config` |
+| `Networks.electsLeader_witnessed_by_one_snapshot` | theorem | `Hyperproperties.Hyperproperty`, `Hyperproperties.IsBadObservation`, `Hyperproperties.Observation`, `Hyperproperties.Realizes`, `Hyperproperties.TraceSystem`, `Networks.ElectsLeader`, `Networks.Run`, `Networks.Snapshot`, `Networks.observedAt` |
+| `Networks.invariant_iff_fixed` | theorem | `Networks.Automorphism`, `Networks.Automorphism.toEquiv`, `Networks.Config`, `Networks.Invariant`, `Networks.Network` |
 | `Networks.invariant_of_automorphism` | theorem | `Networks.Algorithm`, `Networks.Automorphism`, `Networks.Config`, `Networks.Invariant`, `Networks.Network`, `Networks.runFor` |
 | `Networks.invariant_of_constant` | theorem | `Networks.Automorphism`, `Networks.Config`, `Networks.Invariant`, `Networks.Network` |
+| `Networks.knowable_runFor` | theorem | `Networks.Algorithm`, `Networks.Config`, `Networks.Network`, `Networks.runFor`, `Networks.view` |
+| `Networks.no_unique_leader_from_obsTrace` | theorem | `Networks.Algorithm`, `Networks.Automorphism`, `Networks.Automorphism.toEquiv`, `Networks.Config`, `Networks.Invariant`, `Networks.Network`, `Networks.ObsTrace` |
 | `Networks.no_unique_leader_of_fixedPointFree` | theorem | `Networks.Algorithm`, `Networks.Automorphism`, `Networks.Automorphism.toEquiv`, `Networks.Config`, `Networks.Invariant`, `Networks.Network`, `Networks.runFor`, `Symmetry.HasUniqueLeader` |
+| `Networks.not_electsLeader_of_fixedPointFree` | theorem | `Hyperproperties.Hyperproperty`, `Hyperproperties.TraceSystem`, `Networks.Algorithm`, `Networks.Automorphism`, `Networks.Automorphism.toEquiv`, `Networks.Config`, `Networks.ElectsLeader`, `Networks.Invariant`, `Networks.Network`, `Networks.Run`, `Networks.systemOf` |
+| `Networks.not_knowable_node_of_fixedPointFree` | theorem | `Networks.Algorithm`, `Networks.Automorphism`, `Networks.Automorphism.toEquiv`, `Networks.Config`, `Networks.Invariant`, `Networks.Network`, `Networks.ObsTrace` |
+| `Networks.obsSystem` | definition | `Hyperproperties.TraceSystem`, `Networks.Algorithm`, `Networks.Config`, `Networks.Network`, `Networks.ObsTrace` |
+| `Networks.obsTrace_automorphism` | theorem | `Networks.Algorithm`, `Networks.Automorphism`, `Networks.Automorphism.toEquiv`, `Networks.Config`, `Networks.Invariant`, `Networks.Network`, `Networks.ObsTrace` |
+| `Networks.observedAt` | definition | `Networks.Config`, `Networks.Run`, `Networks.Snapshot` |
 | `Networks.pathTo` | definition | `Networks.Network` |
+| `Networks.realizes_obsSystem` | theorem | `Hyperproperties.Observation`, `Hyperproperties.Realizes`, `Networks.Algorithm`, `Networks.Config`, `Networks.Network`, `Networks.obsSystem`, `Networks.runFor`, `Networks.stateAtRound` |
+| `Networks.realizes_systemOf` | theorem | `Hyperproperties.Observation`, `Hyperproperties.Realizes`, `Networks.Algorithm`, `Networks.Config`, `Networks.Network`, `Networks.Run`, `Networks.Snapshot`, `Networks.observedAt`, `Networks.runFor`, `Networks.systemOf` |
 | `Networks.runFor` | definition | `Networks.Algorithm`, `Networks.Config`, `Networks.Network` |
 | `Networks.runFor_eq_of_view_eq` | theorem | `Networks.Algorithm`, `Networks.Config`, `Networks.Network`, `Networks.SameView`, `Networks.runFor` |
+| `Networks.runOf` | definition | `Networks.Algorithm`, `Networks.Config`, `Networks.Network`, `Networks.Run`, `Networks.runFor` |
+| `Networks.sameView_iff_view_eq` | theorem | `Networks.Config`, `Networks.Network`, `Networks.SameView`, `Networks.view` |
+| `Networks.stateAtRound` | definition | — |
 | `Networks.step` | definition | `Networks.Algorithm`, `Networks.Algorithm.send`, `Networks.Algorithm.update`, `Networks.Config`, `Networks.Network`, `Networks.Network.port` |
+| `Networks.step_equivariant` | theorem | `Networks.Algorithm`, `Networks.Automorphism`, `Networks.Automorphism.toEquiv`, `Networks.Config`, `Networks.Network`, `Networks.step` |
 | `Networks.step_invariant` | theorem | `Networks.Algorithm`, `Networks.Automorphism`, `Networks.Config`, `Networks.Invariant`, `Networks.Network`, `Networks.step` |
+| `Networks.step_semiconj` | theorem | `Networks.Algorithm`, `Networks.Automorphism`, `Networks.Automorphism.toEquiv`, `Networks.Config`, `Networks.Network`, `Networks.step` |
+| `Networks.systemOf` | definition | `Hyperproperties.TraceSystem`, `Networks.Algorithm`, `Networks.Config`, `Networks.Network`, `Networks.Run`, `Networks.runOf` |
+| `Networks.view` | definition | `Networks.Config`, `Networks.Network`, `Networks.pathTo` |
 | `RecombinationClosed` | definition | `coordinateProjection` |
 | `SpliceClosed` | definition | — |
 | `Symmetry.HasAtLeastTwo` | definition | — |

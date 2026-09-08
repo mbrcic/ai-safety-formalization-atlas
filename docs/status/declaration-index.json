@@ -3,7 +3,7 @@
   "generated_by": "scripts/generate_declaration_index.py",
   "note": "Declaration index walked from the elaborated environment, not from source text. Consumed by the prose checks so that a name resolves only when it is a real declaration.",
   "prefix": "AISafetyAtlas",
-  "count": 6541,
+  "count": 6593,
   "declarations": [
     {
       "name": "AISafetyAtlas",
@@ -919,6 +919,11 @@
       "name": "AISafetyAtlas.Causal.KernelEstimate",
       "kind": "def",
       "module": "AISafetyAtlas.Causal.Corruption"
+    },
+    {
+      "name": "AISafetyAtlas.Causal.Knowability",
+      "kind": "module",
+      "module": "AISafetyAtlas.Causal.Knowability"
     },
     {
       "name": "AISafetyAtlas.Causal.LocalIntervention",
@@ -2821,6 +2826,16 @@
       "module": "AISafetyAtlas.Causal.Model"
     },
     {
+      "name": "AISafetyAtlas.Causal.behavior",
+      "kind": "def",
+      "module": "AISafetyAtlas.Causal.Knowability"
+    },
+    {
+      "name": "AISafetyAtlas.Causal.behaviorEq_iff_behavior_eq",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Causal.Knowability"
+    },
+    {
       "name": "AISafetyAtlas.Causal.binaryDim",
       "kind": "def",
       "module": "AISafetyAtlas.Causal.Model"
@@ -3146,6 +3161,11 @@
       "module": "AISafetyAtlas.Causal.GoalDynamics"
     },
     {
+      "name": "AISafetyAtlas.Causal.exists_behaviorEq_pair_of_not_knowable",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Causal.Knowability"
+    },
+    {
       "name": "AISafetyAtlas.Causal.exists_isDeltaBounded_prescribing",
       "kind": "theorem",
       "module": "AISafetyAtlas.Causal.GoalDynamics"
@@ -3441,6 +3461,11 @@
       "module": "AISafetyAtlas.Causal.Model"
     },
     {
+      "name": "AISafetyAtlas.Causal.knowable_of_determines_behavior",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Causal.Knowability"
+    },
+    {
       "name": "AISafetyAtlas.Causal.le_pmfExpect",
       "kind": "theorem",
       "module": "AISafetyAtlas.Causal.Query"
@@ -3654,6 +3679,11 @@
       "name": "AISafetyAtlas.Causal.not_inIdentifiedSet_of_opposite_sign",
       "kind": "theorem",
       "module": "AISafetyAtlas.Causal.Decision"
+    },
+    {
+      "name": "AISafetyAtlas.Causal.not_knowable_of_behaviorEq",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Causal.Knowability"
     },
     {
       "name": "AISafetyAtlas.Causal.not_tolerantAt_of_common_corruption",
@@ -4146,6 +4176,11 @@
       "module": "AISafetyAtlas.Compositional.Hyperproperties"
     },
     {
+      "name": "AISafetyAtlas.Compositional.Hyperproperties.Knowability",
+      "kind": "module",
+      "module": "AISafetyAtlas.Compositional.Hyperproperties.Knowability"
+    },
+    {
       "name": "AISafetyAtlas.Compositional.Hyperproperties.Observation",
       "kind": "def",
       "module": "AISafetyAtlas.Compositional.Hyperproperties"
@@ -4251,9 +4286,24 @@
       "module": "AISafetyAtlas.Compositional.Hyperproperties.Product"
     },
     {
+      "name": "AISafetyAtlas.Compositional.Hyperproperties.knowable_of_isSafetyPredicate",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Compositional.Hyperproperties.Knowability"
+    },
+    {
       "name": "AISafetyAtlas.Compositional.Hyperproperties.mem_toBatch",
       "kind": "theorem",
       "module": "AISafetyAtlas.Compositional.Hyperproperties.Product"
+    },
+    {
+      "name": "AISafetyAtlas.Compositional.Hyperproperties.not_isSafetyPredicate_of_realizedSet_collision",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Compositional.Hyperproperties.Knowability"
+    },
+    {
+      "name": "AISafetyAtlas.Compositional.Hyperproperties.not_knowable_of_realizedSet_collision",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Compositional.Hyperproperties.Knowability"
     },
     {
       "name": "AISafetyAtlas.Compositional.Hyperproperties.padBatch",
@@ -4284,6 +4334,11 @@
       "name": "AISafetyAtlas.Compositional.Hyperproperties.productSelfComposition_empty",
       "kind": "theorem",
       "module": "AISafetyAtlas.Compositional.Hyperproperties.Product"
+    },
+    {
+      "name": "AISafetyAtlas.Compositional.Hyperproperties.realizedSet",
+      "kind": "def",
+      "module": "AISafetyAtlas.Compositional.Hyperproperties.Knowability"
     },
     {
       "name": "AISafetyAtlas.Compositional.Hyperproperties.selfCompositionSafe_empty_of_any",
@@ -4329,6 +4384,11 @@
       "name": "AISafetyAtlas.Compositional.IsRectangle",
       "kind": "def",
       "module": "AISafetyAtlas.Compositional.Rectangularity"
+    },
+    {
+      "name": "AISafetyAtlas.Compositional.Knowability",
+      "kind": "module",
+      "module": "AISafetyAtlas.Compositional.Knowability"
     },
     {
       "name": "AISafetyAtlas.Compositional.LocalContractBoundary",
@@ -4386,6 +4446,11 @@
       "module": "AISafetyAtlas.Compositional.LocalContractBoundary"
     },
     {
+      "name": "AISafetyAtlas.Compositional.NetworkTraces",
+      "kind": "module",
+      "module": "AISafetyAtlas.Compositional.NetworkTraces"
+    },
+    {
       "name": "AISafetyAtlas.Compositional.Networks",
       "kind": "module",
       "module": "AISafetyAtlas.Compositional.Networks"
@@ -4436,6 +4501,11 @@
       "module": "AISafetyAtlas.Compositional.Networks"
     },
     {
+      "name": "AISafetyAtlas.Compositional.Networks.ElectsLeader",
+      "kind": "def",
+      "module": "AISafetyAtlas.Compositional.NetworkTraces"
+    },
+    {
       "name": "AISafetyAtlas.Compositional.Networks.Invariant",
       "kind": "def",
       "module": "AISafetyAtlas.Compositional.Networks"
@@ -4456,8 +4526,33 @@
       "module": "AISafetyAtlas.Compositional.Networks"
     },
     {
+      "name": "AISafetyAtlas.Compositional.Networks.ObsTrace",
+      "kind": "def",
+      "module": "AISafetyAtlas.Compositional.NetworkTraces"
+    },
+    {
+      "name": "AISafetyAtlas.Compositional.Networks.Run",
+      "kind": "def",
+      "module": "AISafetyAtlas.Compositional.NetworkTraces"
+    },
+    {
       "name": "AISafetyAtlas.Compositional.Networks.SameView",
       "kind": "def",
+      "module": "AISafetyAtlas.Compositional.Networks"
+    },
+    {
+      "name": "AISafetyAtlas.Compositional.Networks.Snapshot",
+      "kind": "def",
+      "module": "AISafetyAtlas.Compositional.NetworkTraces"
+    },
+    {
+      "name": "AISafetyAtlas.Compositional.Networks.electsLeader_witnessed_by_one_snapshot",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Compositional.NetworkTraces"
+    },
+    {
+      "name": "AISafetyAtlas.Compositional.Networks.invariant_iff_fixed",
+      "kind": "theorem",
       "module": "AISafetyAtlas.Compositional.Networks"
     },
     {
@@ -4471,14 +4566,59 @@
       "module": "AISafetyAtlas.Compositional.Networks"
     },
     {
+      "name": "AISafetyAtlas.Compositional.Networks.knowable_runFor",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Compositional.Knowability"
+    },
+    {
+      "name": "AISafetyAtlas.Compositional.Networks.no_unique_leader_from_obsTrace",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Compositional.NetworkTraces"
+    },
+    {
       "name": "AISafetyAtlas.Compositional.Networks.no_unique_leader_of_fixedPointFree",
       "kind": "theorem",
       "module": "AISafetyAtlas.Compositional.Networks"
     },
     {
+      "name": "AISafetyAtlas.Compositional.Networks.not_electsLeader_of_fixedPointFree",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Compositional.NetworkTraces"
+    },
+    {
+      "name": "AISafetyAtlas.Compositional.Networks.not_knowable_node_of_fixedPointFree",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Compositional.NetworkTraces"
+    },
+    {
+      "name": "AISafetyAtlas.Compositional.Networks.obsSystem",
+      "kind": "def",
+      "module": "AISafetyAtlas.Compositional.NetworkTraces"
+    },
+    {
+      "name": "AISafetyAtlas.Compositional.Networks.obsTrace_automorphism",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Compositional.NetworkTraces"
+    },
+    {
+      "name": "AISafetyAtlas.Compositional.Networks.observedAt",
+      "kind": "def",
+      "module": "AISafetyAtlas.Compositional.NetworkTraces"
+    },
+    {
       "name": "AISafetyAtlas.Compositional.Networks.pathTo",
       "kind": "def",
       "module": "AISafetyAtlas.Compositional.Networks"
+    },
+    {
+      "name": "AISafetyAtlas.Compositional.Networks.realizes_obsSystem",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Compositional.NetworkTraces"
+    },
+    {
+      "name": "AISafetyAtlas.Compositional.Networks.realizes_systemOf",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Compositional.NetworkTraces"
     },
     {
       "name": "AISafetyAtlas.Compositional.Networks.runFor",
@@ -4491,14 +4631,49 @@
       "module": "AISafetyAtlas.Compositional.Networks"
     },
     {
+      "name": "AISafetyAtlas.Compositional.Networks.runOf",
+      "kind": "def",
+      "module": "AISafetyAtlas.Compositional.NetworkTraces"
+    },
+    {
+      "name": "AISafetyAtlas.Compositional.Networks.sameView_iff_view_eq",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Compositional.Knowability"
+    },
+    {
+      "name": "AISafetyAtlas.Compositional.Networks.stateAtRound",
+      "kind": "def",
+      "module": "AISafetyAtlas.Compositional.NetworkTraces"
+    },
+    {
       "name": "AISafetyAtlas.Compositional.Networks.step",
       "kind": "def",
+      "module": "AISafetyAtlas.Compositional.Networks"
+    },
+    {
+      "name": "AISafetyAtlas.Compositional.Networks.step_equivariant",
+      "kind": "theorem",
       "module": "AISafetyAtlas.Compositional.Networks"
     },
     {
       "name": "AISafetyAtlas.Compositional.Networks.step_invariant",
       "kind": "theorem",
       "module": "AISafetyAtlas.Compositional.Networks"
+    },
+    {
+      "name": "AISafetyAtlas.Compositional.Networks.step_semiconj",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Compositional.Networks"
+    },
+    {
+      "name": "AISafetyAtlas.Compositional.Networks.systemOf",
+      "kind": "def",
+      "module": "AISafetyAtlas.Compositional.NetworkTraces"
+    },
+    {
+      "name": "AISafetyAtlas.Compositional.Networks.view",
+      "kind": "def",
+      "module": "AISafetyAtlas.Compositional.Knowability"
     },
     {
       "name": "AISafetyAtlas.Compositional.RecombinationClosed",
@@ -11191,6 +11366,46 @@
       "module": "AISafetyAtlas.Examples.Causal.BehavioralCollision"
     },
     {
+      "name": "AISafetyAtlas.Examples.Compositional.Knowability",
+      "kind": "module",
+      "module": "AISafetyAtlas.Examples.Compositional.Knowability"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Compositional.allTrue",
+      "kind": "def",
+      "module": "AISafetyAtlas.Examples.Compositional.Knowability"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Compositional.allTrue_same_state",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Compositional.Knowability"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Compositional.allTrue_view",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Compositional.Knowability"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Compositional.apart",
+      "kind": "def",
+      "module": "AISafetyAtlas.Examples.Compositional.Knowability"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Compositional.apart_view_ne",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Compositional.Knowability"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Compositional.pair",
+      "kind": "def",
+      "module": "AISafetyAtlas.Examples.Compositional.Knowability"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Compositional.parity",
+      "kind": "def",
+      "module": "AISafetyAtlas.Examples.Compositional.Knowability"
+    },
+    {
       "name": "AISafetyAtlas.Examples.Conjectures.MAIS",
       "kind": "module",
       "module": "AISafetyAtlas.Examples.Conjectures.MAIS"
@@ -13171,6 +13386,11 @@
       "module": "AISafetyAtlas.Examples.Fairness.RiskAssignment"
     },
     {
+      "name": "AISafetyAtlas.Examples.Fairness.RiskAssignment.equalRates_escape",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Fairness.RiskAssignment"
+    },
+    {
       "name": "AISafetyAtlas.Examples.Fairness.RiskAssignment.equalRates_mu_lt_N",
       "kind": "theorem",
       "module": "AISafetyAtlas.Examples.Fairness.RiskAssignment"
@@ -13237,6 +13457,11 @@
     },
     {
       "name": "AISafetyAtlas.Examples.Fairness.RiskAssignment.perfect_conclusion",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Fairness.RiskAssignment"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Fairness.RiskAssignment.perfect_escape",
       "kind": "theorem",
       "module": "AISafetyAtlas.Examples.Fairness.RiskAssignment"
     },
@@ -16684,6 +16909,11 @@
       "name": "AISafetyAtlas.Examples.Oversight.revealing_column_injective",
       "kind": "theorem",
       "module": "AISafetyAtlas.Examples.Oversight.VarietyBound"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Preference.Knowability",
+      "kind": "module",
+      "module": "AISafetyAtlas.Examples.Preference.Knowability"
     },
     {
       "name": "AISafetyAtlas.Examples.PublicAPI",
@@ -22271,6 +22501,16 @@
       "module": "AISafetyAtlas.Knowledge"
     },
     {
+      "name": "AISafetyAtlas.Knowledge.Determines.refl",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Knowledge"
+    },
+    {
+      "name": "AISafetyAtlas.Knowledge.Determines.trans",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Knowledge"
+    },
+    {
       "name": "AISafetyAtlas.Knowledge.Devices",
       "kind": "module",
       "module": "AISafetyAtlas.Knowledge.Devices"
@@ -22814,6 +23054,11 @@
       "name": "AISafetyAtlas.Knowledge.not_knowable_of_condEntropy_ne_zero",
       "kind": "theorem",
       "module": "AISafetyAtlas.Knowledge.Entropy"
+    },
+    {
+      "name": "AISafetyAtlas.Knowledge.not_knowable_of_invariant_transform",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Knowledge"
     },
     {
       "name": "AISafetyAtlas.Knowledge.not_knowable_of_one_lt_ambiguity",
@@ -23911,6 +24156,11 @@
       "module": "AISafetyAtlas.Preference.Regret"
     },
     {
+      "name": "AISafetyAtlas.Preference.Knowability",
+      "kind": "module",
+      "module": "AISafetyAtlas.Preference.Knowability"
+    },
+    {
       "name": "AISafetyAtlas.Preference.Override",
       "kind": "module",
       "module": "AISafetyAtlas.Preference.Override"
@@ -24441,6 +24691,11 @@
       "module": "AISafetyAtlas.Preference"
     },
     {
+      "name": "AISafetyAtlas.Preference.knowable_reward_of_isEmpty_state",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Preference.Knowability"
+    },
+    {
       "name": "AISafetyAtlas.Preference.lemma_six",
       "kind": "theorem",
       "module": "AISafetyAtlas.Preference"
@@ -24454,6 +24709,11 @@
       "name": "AISafetyAtlas.Preference.neg_twin",
       "kind": "theorem",
       "module": "AISafetyAtlas.Preference"
+    },
+    {
+      "name": "AISafetyAtlas.Preference.not_knowable_reward",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Preference.Knowability"
     },
     {
       "name": "AISafetyAtlas.Preference.op1",

@@ -5,7 +5,7 @@ Every ledger row that carries no atlas Lean, with the reason recorded rather tha
 left for a reader to infer. **Every such row must carry a verdict** — `scripts/validate_registry.py` fails without one, so this page cannot quietly
 develop holes as the ledger grows.
 
-**35** rows carry no atlas Lean, out of **86**. **4** TRIAGED_DISTINCT, **3** CANDIDATE_LEAD, **22** UNTRIAGED, **6** EXTERNAL_ONLY.
+**35** rows carry no atlas Lean, out of **91**. **4** TRIAGED_DISTINCT, **3** CANDIDATE_LEAD, **22** UNTRIAGED, **6** EXTERNAL_ONLY.
 
 Two things this page is not. It is **not a backlog**: `EXTERNAL_ONLY` rows are
 finished work, and reproducing them in Lean would be duplication under

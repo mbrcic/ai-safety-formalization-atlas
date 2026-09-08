@@ -108,6 +108,30 @@ public theorem equalRates_conclusion :
     equalRates_mu_pos equalRates_mu_lt_N equalRates_calibrated
     equalRates_balancedNegative equalRates_balancedPositive
 
+/--
+**The equal-base-rate escape, as one statement.**
+
+Restricting the instance class to equal base rates makes all three fairness
+criteria jointly satisfiable, and this witness shows it: print's two numeric
+hypotheses hold, calibration and both balance conditions hold, base rates are
+equal, and prediction is *not* perfect — so this escape is realized rather than
+being the other disjunct in disguise.
+
+Nothing new is proved here. Every conjunct is one of the lemmas above; the
+theorem exists so that `registry.yaml`'s escape-route entry can point at a
+declaration that states the weakened claim, rather than at
+`equalRates_conclusion`, which states the obstruction's own disjunction.
+-/
+public theorem equalRates_escape :
+    (∀ t, 0 < equalRates.μ t) ∧ (∀ t, equalRates.μ t < equalRates.N t) ∧
+      Calibrated equalRates equalRatesAssignment ∧
+      BalancedNegative equalRates equalRatesAssignment ∧
+      BalancedPositive equalRates equalRatesAssignment ∧
+      EqualBaseRates equalRates ∧ ¬ PerfectPrediction equalRates :=
+  ⟨equalRates_mu_pos, equalRates_mu_lt_N, equalRates_calibrated,
+    equalRates_balancedNegative, equalRates_balancedPositive,
+    equalRates_equalBaseRates, equalRates_not_perfect⟩
+
 /-! ## An instance with perfect prediction and unequal base rates
 
 Three feature vectors — one certainly negative, one certainly positive, and one
@@ -223,6 +247,26 @@ public theorem perfect_conclusion :
   perfect_prediction_or_equal_base_rates perfect perfectAssignment
     perfect_mu_pos perfect_mu_lt_N perfect_calibrated
     perfect_balancedNegative perfect_balancedPositive
+
+/--
+**The perfect-prediction escape, as one statement.**
+
+The second restriction, and independent of the first: restricting to perfectly
+predictable instances also makes the three criteria jointly satisfiable, and
+this witness has unequal base rates, so neither escape subsumes the other.
+
+As with `equalRates_escape`, every conjunct is a lemma above and the theorem
+exists to give the escape-route entry something to point at.
+-/
+public theorem perfect_escape :
+    (∀ t, 0 < perfect.μ t) ∧ (∀ t, perfect.μ t < perfect.N t) ∧
+      Calibrated perfect perfectAssignment ∧
+      BalancedNegative perfect perfectAssignment ∧
+      BalancedPositive perfect perfectAssignment ∧
+      PerfectPrediction perfect ∧ ¬ EqualBaseRates perfect :=
+  ⟨perfect_mu_pos, perfect_mu_lt_N, perfect_calibrated,
+    perfect_balancedNegative, perfect_balancedPositive,
+    perfect_perfectPrediction, perfect_not_equalBaseRates⟩
 
 /-! ## The restrictive reading, inhabited
 

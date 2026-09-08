@@ -1,7 +1,7 @@
 {
   "generated_by": "scripts/check_statement_freeze.py --write",
   "note": "Signature hashes of ledger-graded statements. A diff here is a schema event: say which way fidelity moved and re-grade the row.",
-  "count": 285,
+  "count": 291,
   "declarations": {
     "AISafetyAtlas.Causal.DecisionNetwork.mem_parents_utility_of_isUnmediated": {
       "file": "AISafetyAtlas/Causal/DecisionNetwork.lean",
@@ -99,9 +99,17 @@
       "file": "AISafetyAtlas/Compositional/Hyperproperties.lean",
       "sha256": "59bf1221876bfda9"
     },
+    "AISafetyAtlas.Compositional.Networks.knowable_runFor": {
+      "file": "AISafetyAtlas/Compositional/Knowability.lean",
+      "sha256": "bdd2a532c89fa3a9"
+    },
     "AISafetyAtlas.Compositional.Networks.runFor_eq_of_view_eq": {
       "file": "AISafetyAtlas/Compositional/Networks.lean",
       "sha256": "6a2d68bbc245517c"
+    },
+    "AISafetyAtlas.Compositional.Networks.sameView_iff_view_eq": {
+      "file": "AISafetyAtlas/Compositional/Knowability.lean",
+      "sha256": "7fc30e7429e23369"
     },
     "AISafetyAtlas.Compositional.Symmetry.Protocol.no_unique_leader_from_symmetric_start": {
       "file": "AISafetyAtlas/Compositional/Symmetry.lean",
@@ -627,6 +635,10 @@
       "file": "AISafetyAtlas/InformationTheory/DataProcessing.lean",
       "sha256": "5b4a207fac062bd3"
     },
+    "AISafetyAtlas.Knowledge.Determines.trans": {
+      "file": "AISafetyAtlas/Knowledge.lean",
+      "sha256": "5852e711feab20ed"
+    },
     "AISafetyAtlas.Knowledge.Devices.BlockwiseCollision.not_physicallyKnows": {
       "file": "AISafetyAtlas/Knowledge/Devices.lean",
       "sha256": "63c90539d74a341a"
@@ -826,6 +838,10 @@
     "AISafetyAtlas.Knowledge.not_knowable_of_condEntropy_ne_zero": {
       "file": "AISafetyAtlas/Knowledge/Entropy.lean",
       "sha256": "4c3d4dab75bfcf29"
+    },
+    "AISafetyAtlas.Knowledge.not_knowable_of_invariant_transform": {
+      "file": "AISafetyAtlas/Knowledge.lean",
+      "sha256": "c3341045909c07a9"
     },
     "AISafetyAtlas.Knowledge.not_knowable_of_witness": {
       "file": "AISafetyAtlas/Knowledge.lean",
@@ -1067,9 +1083,17 @@
       "file": "AISafetyAtlas/Preference.lean",
       "sha256": "057406e9fa1881e4"
     },
+    "AISafetyAtlas.Preference.knowable_reward_of_isEmpty_state": {
+      "file": "AISafetyAtlas/Preference/Knowability.lean",
+      "sha256": "6420ddd4a48f66d8"
+    },
     "AISafetyAtlas.Preference.neg_twin": {
       "file": "AISafetyAtlas/Preference.lean",
       "sha256": "fd7dc931d40ea23e"
+    },
+    "AISafetyAtlas.Preference.not_knowable_reward": {
+      "file": "AISafetyAtlas/Preference/Knowability.lean",
+      "sha256": "43ed9142ffb39a0a"
     },
     "AISafetyAtlas.SelfAwareness.Model.limited_self_awareness": {
       "file": "AISafetyAtlas/SelfAwareness.lean",
