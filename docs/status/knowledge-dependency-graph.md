@@ -18,7 +18,7 @@ Named in the statements of eight or more others. A change to one of these is a c
 
 | Declaration | Named by |
 |---|---|
-| `Knowable` | 53 |
+| `Knowable` | 59 |
 | `Embedded.Restriction` | 23 |
 | `Embedded.InferenceMap` | 19 |
 | `Embedded.Meshing` | 14 |
