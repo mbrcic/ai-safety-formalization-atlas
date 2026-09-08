@@ -97,28 +97,44 @@ public theorem exists_lipschitzOnWith_ball
 
 /-! ## Lemma 6.4(i) -/
 
-/-- **Print's Lemma 6.4(i), order form.** If `φ` and `ψ` are mutually inverse analytic maps
-between open sets `U ∋ w` and `V ∋ φ w`, then the germ `g ∘ φ` has at `w` the same local pair
-that `g` has at `φ w`.
+/-- **Print's Lemma 6.4(i), order form, at the strength the proof consumes.** The analytic
+version below is the one print states and the one the chart assembly calls; this is the same
+argument with analyticity replaced by exactly what it is used for.
 
-The two radii the proof uses are `K * δ` on the target side (the image of the `δ`-ball is inside
-it) and `δ / L` (that ball is inside the image). `HasLocalVolumeOrder` quantifies over all
-sufficiently small radii, so both are available, and the mismatch between them is absorbed into
-the two constants — the same bookkeeping Lemma 8.6's factor of two already needed. -/
-public theorem hasLocalVolumeOrder_comp_of_analytic
+Reading the analytic proof, `AnalyticOnNhd` enters in three places and three only: a Lipschitz
+ball around `w` for `φ`, a Lipschitz ball around `φ w` for `ψ`, and continuity of `φ` at `w` for
+the vacuous branch. Nothing differentiates anything; no Jacobian is formed. Openness of `U` and
+`V` is likewise consumed only through those two balls, so it does not appear here either, and
+neither does `Set.MapsTo φ U V`: the ball around `φ w` already places it inside `V`.
+
+The reason to state it separately rather than to weaken the analytic statement — which the
+statement freeze would in any case forbid — is that a caller often has a `C^n` map and not an
+analytic one. Mathlib's inverse function theorem yields a `ContDiffAt` local inverse in a Banach
+space (`ContDiffAt.to_localInverse`), and `ContDiffAt.exists_lipschitzOnWith` turns that into
+both hypotheses below, so such a caller can transport a volume order without ever establishing
+analyticity.
+
+This lemma is not owed to any absence in Mathlib: OpenPartialHomeomorph.analyticAt_symm'
+in `Mathlib/Analysis/Calculus/FDeriv/Analytic.lean` is the Banach-space analytic inverse
+function theorem. It is preferred because it is strictly weaker in hypotheses than the
+analytic statement, which is a two-line corollary of it. -/
+public theorem hasLocalVolumeOrder_comp_of_lipschitz
     {g : EuclideanSpace ℝ (Fin D) → ℝ}
     {φ ψ : EuclideanSpace ℝ (Fin D) → EuclideanSpace ℝ (Fin D)}
     {U V : Set (EuclideanSpace ℝ (Fin D))} {w : EuclideanSpace ℝ (Fin D)}
-    (hU : IsOpen U) (hV : IsOpen V) (hw : w ∈ U)
-    (hmaps : Set.MapsTo φ U V) (hinv : Set.InvOn ψ φ U V)
-    (hφ : AnalyticOnNhd ℝ φ U) (hψ : AnalyticOnNhd ℝ ψ V)
+    (hw : w ∈ U) (hinv : Set.InvOn ψ φ U V)
+    (hφc : ContinuousAt φ w)
+    (hφ : ∃ ρ > 0, ∃ K : ℝ≥0, 0 < K ∧ Metric.ball w ρ ⊆ U ∧
+      LipschitzOnWith K φ (Metric.ball w ρ))
+    (hψ : ∃ σ > 0, ∃ L : ℝ≥0, 0 < L ∧ Metric.ball (φ w) σ ⊆ V ∧
+      LipschitzOnWith L ψ (Metric.ball (φ w) σ))
     {lam : ℝ} {m : ℕ} (h : HasLocalVolumeOrder g (φ w) lam m) :
     HasLocalVolumeOrder (g ∘ φ) w lam m := by
   rcases h with ⟨hzero, hlam, hm⟩ | ⟨hlam, hm, δ₀, hδ₀, hbound⟩
-  · exact Or.inl ⟨(hφ w hw).continuousAt.eventually hzero, hlam, hm⟩
+  · exact Or.inl ⟨hφc.eventually hzero, hlam, hm⟩
   refine Or.inr ⟨hlam, hm, ?_⟩
-  obtain ⟨ρ, hρ, K, hK, hρU, hlipφ⟩ := exists_lipschitzOnWith_ball hU hφ hw
-  obtain ⟨σ, hσ, L, hL, hσV, hlipψ⟩ := exists_lipschitzOnWith_ball hV hψ (hmaps hw)
+  obtain ⟨ρ, hρ, K, hK, hρU, hlipφ⟩ := hφ
+  obtain ⟨σ, hσ, L, hL, hσV, hlipψ⟩ := hψ
   have hKR : (0 : ℝ) < (K : ℝ) := by exact_mod_cast hK
   have hLR : (0 : ℝ) < (L : ℝ) := by exact_mod_cast hL
   set τ : ℝ := min σ δ₀ with hτdef
@@ -219,6 +235,29 @@ public theorem hasLocalVolumeOrder_comp_of_analytic
       _ = ((L : ℝ) ^ D * C₁) * volumeScale lam m ε := by ring
       _ ≤ max (c₂ / (K : ℝ) ^ D) ((L : ℝ) ^ D * C₁) * volumeScale lam m ε :=
           mul_le_mul_of_nonneg_right (le_max_right _ _) hvs
+
+/-- **Print's Lemma 6.4(i), order form.** If `φ` and `ψ` are mutually inverse analytic maps
+between open sets `U ∋ w` and `V ∋ φ w`, then the germ `g ∘ φ` has at `w` the same local pair
+that `g` has at `φ w`.
+
+The two radii the proof uses are `K * δ` on the target side (the image of the `δ`-ball is inside
+it) and `δ / L` (that ball is inside the image). `HasLocalVolumeOrder` quantifies over all
+sufficiently small radii, so both are available, and the mismatch between them is absorbed into
+the two constants — the same bookkeeping Lemma 8.6's factor of two already needed.
+
+The statement is unchanged; the proof now routes through
+`hasLocalVolumeOrder_comp_of_lipschitz`, which is where the argument lives. -/
+public theorem hasLocalVolumeOrder_comp_of_analytic
+    {g : EuclideanSpace ℝ (Fin D) → ℝ}
+    {φ ψ : EuclideanSpace ℝ (Fin D) → EuclideanSpace ℝ (Fin D)}
+    {U V : Set (EuclideanSpace ℝ (Fin D))} {w : EuclideanSpace ℝ (Fin D)}
+    (hU : IsOpen U) (hV : IsOpen V) (hw : w ∈ U)
+    (hmaps : Set.MapsTo φ U V) (hinv : Set.InvOn ψ φ U V)
+    (hφ : AnalyticOnNhd ℝ φ U) (hψ : AnalyticOnNhd ℝ ψ V)
+    {lam : ℝ} {m : ℕ} (h : HasLocalVolumeOrder g (φ w) lam m) :
+    HasLocalVolumeOrder (g ∘ φ) w lam m :=
+  hasLocalVolumeOrder_comp_of_lipschitz hw hinv (hφ w hw).continuousAt
+    (exists_lipschitzOnWith_ball hU hφ hw) (exists_lipschitzOnWith_ball hV hψ (hmaps hw)) h
 
 /-- **The same statement between two spaces of equal dimension.** The chart's source and target
 are counted differently — `HN + MH` on the parameter side, `q + (hn + ph) + g` on the chart side

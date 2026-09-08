@@ -67,14 +67,51 @@ identical models with different graphs are exhibited, not assumed.
 **If you want an open question instead of a theorem**,
 [`conjectures.yaml`](conjectures.yaml) tracks precise statements — mostly
 causal-identifiability questions from
-[MAIS](https://github.com/lionellevine/MAIS)'s open-problems agenda, plus one
-from an information-theory survey. Every conjecture entry names a closed, compiling `Prop`, and the ledger also holds determine-problem specifications and printed problems with no Lean object at all;
-defining one asserts nothing about its truth, and the four rows that are settled
+[MAIS](https://github.com/lionellevine/MAIS)'s open-problems agenda, together
+with three singular-learning problems from its A6 and A7 agendas, plus one
+question from an information-theory survey. Every conjecture entry names a closed, compiling `Prop`, and the ledger also holds determine-problem specifications and printed problems with no Lean object at all;
+defining one asserts nothing about its truth, and the rows that are settled
 say so and name the proof. Worked models establish that the hypotheses can be met
 where a row says so, and the rows whose antecedents still have no witness
 disclose it — the MAIS-O26 row needs a solution to MAIS-O24, and no such
 solution is exhibited in this tree, so that statement may hold vacuously. See
 [conjectures](docs/guide/conjectures.md).
+
+**Solutions other people submitted to those problems** are transcribed and
+checked here too, and what checking them found is a generated table:
+[MAIS submitted solutions](docs/status/mais-solutions.md). It separates two
+facts a reader will otherwise merge — whether the mathematics checks, and which
+artifact the ledger row is graded against — because a submission can be fully
+proved and still be graded against the printed problem rather than against
+itself. Checking someone's mathematics is not peer review and not co-authorship,
+and no row says a submission is accepted upstream.
+
+**If the question is singular learning**, the `AISafetyAtlas.SingularLearning.*`
+modules carry the local-pair machinery for the two-layer linear network
+`x ↦ BAx` against the square loss: the local invariant as MAIS-A7 defines it, by
+the band volume `vol{|L(w') − L(w)| < ε} ≍ ε^λ (log 1/ε)^(m−1)`, together with
+the elimination chart, the orbit reduction and the chamber calculus that the
+reduced-rank fibre needs. It is an off-root facade, so `import
+AISafetyAtlas.SingularLearning` is explicit rather than carried by the root.
+Three MAIS problems sit on top of it, and two of the answers are unconditional:
+**MAIS-O7 is false** — `isO7Counterexample` refutes the opposing-staircases
+conjecture at every positive scalar target — and **MAIS-O77(b) holds**, pair
+`(1,1)` at every point of every nonterminal critical set. The Morse lemma this
+rests on is not ours: eight modules of the Tau Ceti development are vendored
+under [`vendor/TauCeti/`](vendor/TauCeti/PROVENANCE.md), Apache-2.0 and pinned.
+
+**Some results in that layer are conditional, and the atlas says which.**
+MAIS-O77(a) and the first two clauses of MAIS-O70 are proved over propositions
+this tree states and does **not** prove — the real-Wishart eigenvalue law chief
+among them. A theorem `frontier → X` reads exactly as strong whether the
+frontier is true or false, and neither a green build nor a clean axiom audit
+tells the two apart, so each assumption is named, frozen, given unconditional
+stress artifacts, and recorded with who it is owed to and what discharging it
+would cost. Two of the three are owed to the *candidate solution*, which cites
+them rather than deriving them; one is owed to the printed source. The table is
+[the MAIS source report](docs/status/sources/mais-2026.md), and
+`scripts/check_frontier_evidence.py` prints the whole debt on every run.
+Passing that check is not evidence a frontier is true.
 
 **If the question is control**, `AISafetyAtlas.Control` carries Ashby's variety
 bounds and Touchette–Lloyd's information limits at their printed quantifiers: a
@@ -114,9 +151,9 @@ monorepo in-tree. Reusable structure and honest grading over volume.
 <!-- BEGIN GENERATED REGISTRY SCOPE -->
 | Metric | Current |
 |---|---:|
-| Atlas Lean declarations | **257** |
+| Atlas Lean declarations | **269** |
 | Results stating a source claim | **49** |
-| Results recording a formalization only | **37** (28 on root import) |
+| Results recording a formalization only | **42** (33 on root import) |
 | Reviewed AI-system bridges | **3** |
 | Statement-reviewed bridges (interpretation withheld) | **1** |
 | Open conjectures | **3** |
@@ -146,12 +183,12 @@ Add it to your `lakefile.toml`. There is no Reservoir entry, so require it by gi
 [[require]]
 name = "ai-safety-formalization-atlas"
 git = "https://github.com/mbrcic/ai-safety-formalization-atlas.git"
-rev = "v0.7.0"
+rev = "v0.8.0"
 ```
 
-`v0.7.0` is the published release and is what that stanza gets you. **The module
+`v0.8.0` is the published release and is what that stanza gets you. **The module
 list below describes the working tree, which is ahead of it** — anything added
-since the tag is not in `v0.7.0`, so check the tag's own module list before
+since the tag is not in `v0.8.0`, so check the tag's own module list before
 depending on a name you read here.
 
 Then `import AISafetyAtlas.Knowledge` (or whichever module below) and instantiate
@@ -204,6 +241,7 @@ import AISafetyAtlas.InformationTheory.Fano   -- peers, no facade: import the on
 import AISafetyAtlas.InformationTheory.DataProcessing
 import AISafetyAtlas.InformationTheory.ChannelCapacity
 import AISafetyAtlas.Combinatorics.PermInvariance -- relabelling-invariance machinery
+import AISafetyAtlas.SingularLearning         -- local pairs for the two-layer linear network (off-root facade)
 import AISafetyAtlas.Learning      -- finite NFL cores
 import AISafetyAtlas.Learning.Sharp -- the permutation-closed characterization, both directions
 import AISafetyAtlas.Preference    -- planner/reward unidentifiability (kernel)
@@ -373,8 +411,8 @@ process-compositional BY-044 interpretation has its own
 [source map and fidelity residual](docs/provenance/limited-self-awareness.md).
 
 **Landscape declarations** — results the library develops or reproduces on its
-own account rather than as coverage of a catalogued source. Seventeen rows carry
-`root_import: true`; most are the `Knowledge`, `Oversight` and `Compositional`
+own account rather than as coverage of a catalogued source. Most carry
+`root_import: true` — the count is in the table above; most are the `Knowledge`, `Oversight` and `Compositional`
 entry points listed above. The full list, with the declarations each row owns, is
 generated: [landscape index](docs/status/landscape-index.md), and how the rows
 stand to one another is [relations](docs/status/relations.md).
@@ -499,6 +537,27 @@ adequacy, or system interpretation.
 
 Full tracks and rungs: [CONTRIBUTING.md](CONTRIBUTING.md). Issue forms for
 proposals that change coverage, dependencies, or the public Lean interface.
+
+### Tooling an agent may use
+
+None of this is required to contribute, and none of it is a dependency — the
+gate and CI use only what `lake-manifest.json` pins. It is listed because an
+agent that does not know these exist re-derives things the ecosystem already
+has.
+
+| tool | what it is | how to get it |
+|---|---|---|
+| [lean-lsp-mcp](https://github.com/oOo0oOo/lean-lsp-mcp) | the Lean language server over MCP: diagnostics, goal state, hover, references. Answers per file in seconds what `lake build` reports in minutes, which is the right tool after a rename | `uvx lean-lsp-mcp`, wired through a `.mcp.json` in the repository root. That file is **gitignored**, so each contributor writes their own: `{"mcpServers":{"lean-lsp":{"type":"stdio","command":"uvx","args":["lean-lsp-mcp"]}}}` |
+| [lean-explore](https://github.com/justincasher/lean-explore) | semantic search over Lean 4 declarations — by meaning, not by name | an MCP server; install per its README |
+| [LeanSearchClient](https://github.com/leanprover-community/LeanSearchClient) | [leansearch](https://leansearch.net) and [loogle](https://loogle.lean-lang.org) queries from inside Lean | **already a dependency** — in `lake-manifest.json`, no setup |
+| [lean4-skills](https://github.com/cameronfreer/lean4-skills) | "Lean 4 theorem proving skill and workflow pack for AI coding agents" — proof repair, golfing, axiom elimination. MIT | install into your agent harness; not published by this project and not required |
+
+**A semantic search is not evidence.** These indexes are not pinned by this
+repository, so a miss is not reproducible and cannot support a claim that a
+result does not exist.
+[`docs/agent/policy/lean-reuse-sources.md`](docs/agent/policy/lean-reuse-sources.md)
+says what such a claim may cite, and lists the libraries worth searching before
+you write a proof of your own.
 
 ## License
 

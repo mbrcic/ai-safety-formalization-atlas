@@ -1,0 +1,4 @@
+{ "schema": "atlas-check/1", "kind": "regulation",
+  "disturbances": 3, "responses": 3,
+  "table": [[0,1,2],[1,2,0],[2,0,1]],
+  "strategy": [0,0,0] }

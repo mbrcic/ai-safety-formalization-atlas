@@ -9,6 +9,7 @@ public import AISafetyAtlas.Examples.Analysis.Semialgebraic
 public import AISafetyAtlas.Combinatorics.PermInvariance
 public import AISafetyAtlas.Compositional
 public import AISafetyAtlas.Control
+public import AISafetyAtlas.Examples.Control.RegulationCheck
 public import AISafetyAtlas.Explainability
 public import AISafetyAtlas.Fairness.RiskAssignment
 public import AISafetyAtlas.Fairness.ApproximateRiskAssignment
@@ -28,6 +29,7 @@ public import AISafetyAtlas.Causal.EffectiveGenericity
 public import AISafetyAtlas.Causal.Query
 public import AISafetyAtlas.Causal.ModelSpace
 public import AISafetyAtlas.Causal.StructuralModel
+public import AISafetyAtlas.Causal.Knowability
 public import AISafetyAtlas.Causal.Goal
 public import AISafetyAtlas.Causal.ControlledProcess
 public import AISafetyAtlas.Causal.GoalDynamics
@@ -73,6 +75,7 @@ public import AISafetyAtlas.Preference.Reasonable
 public import AISafetyAtlas.Preference.SourceComplexity
 public import AISafetyAtlas.Preference.Override
 public import AISafetyAtlas.Preference.Regret
+public import AISafetyAtlas.Preference.Knowability
 public import AISafetyAtlas.SelfAwareness
 public import AISafetyAtlas.SocialChoice
 public import AISafetyAtlas.SocialChoice.Utility
@@ -115,7 +118,7 @@ than through this closure; its module docstring gives the reason.
 | Import | Domain |
 |---|---|
 | `AISafetyAtlas.Compositional` | Hyperproperties, rectangles, networks |
-| `AISafetyAtlas.Control` | Ashby's variety bounds and Touchette–Lloyd's information limits, in nine modules |
+| `AISafetyAtlas.Control` | Ashby's variety bounds and Touchette–Lloyd's information limits, in ten modules |
 | `AISafetyAtlas.Oversight.JointObservation` | Coalition evidence, coverage, collision, repair boundary |
 | `AISafetyAtlas.Wireheading` | Reward channels, self-modification |
 
@@ -125,12 +128,13 @@ with it, the same contract `Verification` keeps with its two bridges below.
 
 ### What `Control` aggregates
 
-Nine modules, each one printed development. `AISafetyAtlas.Control` carries all
+Ten modules, nine of them one printed development each and one a decision procedure. `AISafetyAtlas.Control` carries all
 of them; import one directly when only its result is wanted.
 
 | Import | Domain |
 |---|---|
 | `AISafetyAtlas.Control.RequisiteVariety` | Ashby's law: counting, logarithmic and entropy forms, and the sensor bound |
+| `AISafetyAtlas.Control.RegulationCheck` | The counting law decided on a finite table, with the agreement theorem behind `atlas-check`'s `regulation` kind. A `true` verdict witnesses that Ashby's column hypothesis is satisfiable at that table |
 | `AISafetyAtlas.Control.ChannelRate` | Ashby §9/12 and §9/15: channel capacity as an entropy rate, and the entropy of a length of Markov chain |
 | `AISafetyAtlas.Control.CompleteControl` | Ashby §11/14: perfect regulation makes complete control possible, and what that costs the regulator |
 | `AISafetyAtlas.Control.InformationLimits` | Touchette–Lloyd: control loss, and feedback bounded by what the sensor measured |
@@ -251,6 +255,8 @@ Import the specialization needed; the parent does not supply it.
 | `AISafetyAtlas.Preference.SourceComplexity` | Propositions 7 and 8 in the source's own parameterization |
 | `AISafetyAtlas.Preference.Override` | Overriding human reward functions |
 | `AISafetyAtlas.Preference.Regret` | Half-maximal regret is not ruled out by observation |
+| `AISafetyAtlas.Preference.Knowability` | Reward unidentifiability as a `Knowledge.Knowable` obstruction |
+| `AISafetyAtlas.Causal.Knowability` | Behavioural identifiability as a `Knowledge.Knowable` factorization |
 
 Each module docstring lists **primary** declarations (laws / instances /
 boundaries). Prefer those names over diving into `Upstream/` unless editing a

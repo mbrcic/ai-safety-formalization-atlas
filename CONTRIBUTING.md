@@ -19,6 +19,7 @@ work, landscape entries, and new questions all move the workbench forward.
 | **Source check** | Verify a citation / DOI against the paper (CT-12) |
 | **Docs / UX** | Fix a docstring, primary-surface table, or example path |
 | **Issue** | File a clear gap: missing consumer, unclear non-claim, broken link |
+| **Statement** | Deposit a precise statement in the [intake lane](intake.yaml) — a compiling `Prop` and a minimal row, **no grade**. You do not have to say how it stands to any source; that judgement is a human's and happens on the board. See [conjectures](docs/guide/conjectures.md#the-intake-lane) |
 
 ### B. Lean with an agent (recommended default)
 

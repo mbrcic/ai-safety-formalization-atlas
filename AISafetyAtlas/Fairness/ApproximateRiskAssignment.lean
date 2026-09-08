@@ -17,14 +17,15 @@ model it is stated over are in `AISafetyAtlas.Fairness.RiskAssignment`.
 | declaration | says |
 |---|---|
 | `approx_perfect_prediction_or_equal_base_rates` | Theorem 1.2 at print's explicit `f`: the `ε`-approximate conditions force one of the two `slack ε`-approximate conclusions |
-| `exists_slack_function` | print's own sentence, as the existential over a continuous `f` vanishing at `0` |
+| `exists_slack_function` | Theorem 1.2's existential form for the approximate predicates reconstructed from the proof, with a continuous `f` vanishing at `0` |
 | `slack` | print's `f ε = √ε · max (1) (3√ε + 3/4)`, read off the end of §3 |
 | `perfect_prediction_or_equal_base_rates_of_approx` | Theorem 1.1 recovered as the `ε = 0` case, through the exact library statement |
 | `average_lower_bound` | §3's core: a group whose base rate is lower by more than `√ε` has its positive class scoring at least `1 - 2ε - (3/4)√ε` |
 
-`ApproxCalibrated`, `ApproxBalancedNegative` and `ApproxBalancedPositive` are
-print's (A′), (B′) and (C′); `ApproxPerfectPrediction` and
-`ApproxEqualBaseRates` are its two approximate conclusions. Non-vacuity
+`ApproxCalibrated` is the reading of print's (A′) reconstructed from the proof, while
+`ApproxBalancedNegative` and `ApproxBalancedPositive` implement the repaired
+(B′) and (C′) averages. `ApproxPerfectPrediction` and
+`ApproxEqualBaseRates` are the two approximate conclusions. Non-vacuity
 witnesses live in `AISafetyAtlas.Examples.Fairness.ApproximateRiskAssignment`.
 
 ## What print says
@@ -42,7 +43,7 @@ group `t` (`positiveAverage`) and `ν t` for the same over the negative class
 
 | print | here |
 |---|---|
-| (A′) | `WithinFactor ε (v b * assigned t b) (assignedPos t b)`, every `t` and `b` |
+| (A′), as reconstructed from the proof of (7) | `WithinFactor ε (v b * assigned t b) (assignedPos t b)`, every `t` and `b` |
 | (B′) | `WithinFactor ε (ν t) (ν u)`, both ordered pairs |
 | (C′) | `WithinFactor ε (γ t) (γ u)`, both ordered pairs |
 | `δ`-approximate perfect prediction | `1 - δ ≤ γ t` for both `t` |
@@ -52,20 +53,32 @@ group `t` (`positiveAverage`) and `ν t` for the same over the negative class
 pairs in (B′) and (C′) are print's *"we also require that these hold when `μ₁`
 and `μ₂` are interchanged"*.
 
-## Three things read off print rather than copied
+## Four things read off print rather than copied
 
-**(A′) is transcribed from the proof, not from the display.** §3 prints
+**(A′) is reconstructed from the proof, not copied from the display.** §3 prints
 
 > `(1 - ε)[nᵀ_t XV]_b ≤ [nᵀ_t P X]_b ≤ (1 - ε)[nᵀ_t XV]_b`
 
-with `(1 - ε)` on both sides, which collapses to an equality and would make (A′)
-say exactly what (A) says. The four lines that use it — the derivation of
+with `(1 - ε)` on both sides. Read literally, this forces
+`[nᵀ_t P X]_b = (1 - ε)[nᵀ_t XV]_b`; it is exact calibration only when
+`ε = 0`, not for positive `ε`. It therefore does not make Theorem 1.2 a
+restatement of Theorem 1.1. The four lines that use it — the derivation of
 `(1 - ε) μ t ≤ μ̂ t ≤ (1 + ε) μ t`, print's (7) — bound `[nᵀ_t XV]_b` above and
-below by `(1 ± ε)[nᵀ_t P X]_b`, so that is what `ApproxCalibrated` says: the
-approximated quantity is the score side, `v b * assigned t b`, and the reference
-is the positive-class side, `assignedPos t b`. The two sides of print's display
-are also the other way round from the use. `approxCalibrated_zero_iff` confirms
-the reading collapses to `Calibrated` at `ε = 0`.
+below by `(1 ± ε)[nᵀ_t P X]_b`. Accordingly `ApproxCalibrated` uses
+`(1 - ε) P ≤ S ≤ (1 + ε) P`, with the score side `S` as the approximated
+quantity and the positive-class side `P` as the reference. This is a defensible
+reconstruction of the proof's use, with the display's two sides transposed; it is
+neither the literal display nor equivalent to it. `approxCalibrated_zero_iff`
+confirms that this reconstruction collapses to `Calibrated` at `ε = 0`.
+
+**(B′) and (C′) also need a notational repair.** On PDF p. 12, the displayed
+fractions use `n_t` throughout the numerators, including in the term for the
+other group. The Lean definitions use each group's own score average and its
+group-indexed denominator (`negativeAverage` divides by `N t - μ t`, and
+`positiveAverage` by `μ t`), and the swapped requirement swaps the whole group
+expression. Thus the Lean `ApproxBalancedNegative` and
+`ApproxBalancedPositive` are the group-indexed reading needed by the argument,
+not a literal transcription of that display.
 
 **The approximate conclusions are not the exact ones weakened.** Print's
 `δ`-approximate perfect prediction is a statement about `γ`, not about `p`, so
@@ -360,8 +373,9 @@ public theorem sum_score_split (I : Instance F) (R : RiskAssignment F B) (t : Fi
   simp only [positiveScore, negativeScore, ← Finset.sum_add_distrib]
   exact Finset.sum_congr rfl fun b _ ↦ by rw [assigned_eq_add I R t b]; ring
 
-/-- **Print's (7).** Under (A′) the total expected score handed to group `t` is
-within a factor `ε` of `μ t`, which is what exact calibration makes it equal to. -/
+/-- **Version of print's (7) reconstructed from the proof.** Under the adopted (A′) reading,
+the total expected score handed to group `t` is within a factor `ε` of `μ t`,
+which is what exact calibration makes it equal to. -/
 public theorem sum_score_bounds (I : Instance F) (R : RiskAssignment F B) {ε : ℝ}
     (hA : ApproxCalibrated ε I R) (t : Fin 2) :
     WithinFactor ε (∑ b, R.v b * assigned I R t b) (I.μ t) := by
@@ -520,10 +534,11 @@ public theorem approx_perfect_prediction_or_equal_base_rates
     · exact h0
     · exact h1
 
-/-- **Print's sentence as printed**: the existential over a continuous `f`
-vanishing at `0`, witnessed by `slack`. The feature-vector and bin types are
-universe-`0` here because they are bound under the `∃`; the theorem above is the
-universe-polymorphic statement and is what every other consumer should use. -/
+/-- **Theorem 1.2's existential form for the adopted predicates**: the existential
+over a continuous `f` vanishing at `0`, witnessed by `slack`. The feature-vector
+and bin types are universe-`0` here because they are bound under the `∃`; the
+theorem above is the universe-polymorphic statement and is what every other
+consumer should use. -/
 public theorem exists_slack_function :
     ∃ f : ℝ → ℝ, Continuous f ∧ Filter.Tendsto f (nhds 0) (nhds 0) ∧
       ∀ (F B : Type) [Fintype F] [Fintype B] (I : Instance F) (R : RiskAssignment F B) (ε : ℝ),
@@ -535,11 +550,13 @@ public theorem exists_slack_function :
     fun _ _ _ _ I R _ hε hμ hμN hA hB hC ↦
       approx_perfect_prediction_or_equal_base_rates I R hε.le hμ hμN hA hB hC⟩
 
-/-- **Theorem 1.1 as the `ε = 0` case of Theorem 1.2.** The exact statement is
-proved independently in `AISafetyAtlas.Fairness.RiskAssignment` from §2's own
-argument; this re-derives it through §3's, which is a check that the `ε`-forms
-above really are relaxations of the conditions §2 uses and that
-`ApproxPerfectPrediction` at `δ = 0` really is print's first case. -/
+/-- **Theorem 1.1 recovered at `ε = 0` for the adopted predicates.** The exact
+statement is proved independently in `AISafetyAtlas.Fairness.RiskAssignment`
+from §2's own argument; this re-derives it through §3's forms reconstructed
+from the proof. At `ε = 0`, those forms reduce to the exact conditions, and
+`ApproxPerfectPrediction` at `δ = 0` gives print's first case under the exact
+calibration hypothesis. This does not identify the PDF's literal (A′) display
+with exact calibration for positive `ε`. -/
 public theorem perfect_prediction_or_equal_base_rates_of_approx
     (I : Instance F) (R : RiskAssignment F B)
     (hμ : ∀ t, 0 < I.μ t) (hμN : ∀ t, I.μ t < I.N t)

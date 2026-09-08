@@ -66,10 +66,14 @@ def test_source_stays_within_the_declared_floor(path: Path) -> None:
     try:
         tree = ast.parse(source, filename=str(path), feature_version=FLOOR)
     except SyntaxError as error:  # pragma: no cover - the failure this guards
-        pytest.fail(
+        # `raise AssertionError` rather than `pytest.fail`: pytest reports both
+        # the same way, and `pytest.fail` is wrapped in a decorator that `ty`
+        # resolves as a bound method, so the message lands in `pytrace` and the
+        # call type-checks as an error in a tree that is otherwise clean.
+        raise AssertionError(
             f"{path.relative_to(ROOT)} does not parse as Python "
             f"{FLOOR[0]}.{FLOOR[1]}: line {error.lineno}: {error.msg}"
-        )
+        ) from error
 
     offences: list[str] = []
     for node in ast.walk(tree):

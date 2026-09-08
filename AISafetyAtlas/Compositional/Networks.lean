@@ -144,15 +144,44 @@ does not change the node's state. -/
     (c : Config Node State) : Prop :=
   ∀ v, c (σ.toEquiv v) = c v
 
-/-- One round preserves invariance under an automorphism. -/
+/--
+**A round commutes with the automorphism action, unconditionally.**
+
+Moving every node by `σ` and then running a round is the same as running the
+round and then moving. No invariance hypothesis is needed: anonymity is what
+makes this true, since one `update` and one `send` are shared by every node and
+`σ.port_equivariant` carries the port structure along.
+
+This is the law; `Invariant` is a property of a particular configuration, and
+`step_invariant` below is what the law gives at a fixed point of the action.
+-/
+public theorem step_equivariant {N : Network Node deg} (σ : Automorphism N)
+    (A : Algorithm State Msg deg) (c : Config Node State) :
+    step N A (c ∘ σ.toEquiv) = (step N A c) ∘ σ.toEquiv := by
+  funext v
+  simp only [step, Function.comp_apply, σ.port_equivariant]
+
+/-- The action, in the form `Function.Semiconj` states it. -/
+public theorem step_semiconj {N : Network Node deg} (σ : Automorphism N)
+    (A : Algorithm State Msg deg) :
+    Function.Semiconj (fun c : Config Node State => c ∘ σ.toEquiv)
+      (step N A) (step N A) :=
+  fun c => (step_equivariant σ A c).symm
+
+/-- `Invariant σ c` says exactly that `c` is a fixed point of the `σ` action. -/
+public theorem invariant_iff_fixed {N : Network Node deg} (σ : Automorphism N)
+    (c : Config Node State) :
+    Invariant σ c ↔ c ∘ σ.toEquiv = c :=
+  ⟨fun h => funext h, fun h v => congrFun h v⟩
+
+/-- One round preserves invariance under an automorphism: the fixed-point set of
+the action is closed under `step`, which is `step_equivariant` read at a fixed
+point rather than a separate induction on the update. -/
 public theorem step_invariant {N : Network Node deg} (σ : Automorphism N)
     (A : Algorithm State Msg deg) {c : Config Node State} (hc : Invariant σ c) :
     Invariant σ (step N A c) := by
-  intro v
-  simp only [step, hc v]
-  congr 1
-  funext i
-  rw [σ.port_equivariant v i, hc (N.port v i)]
+  rw [invariant_iff_fixed] at hc ⊢
+  rw [← step_equivariant σ A c, hc]
 
 /-- Every round preserves invariance under an automorphism. -/
 public theorem invariant_of_automorphism {N : Network Node deg}

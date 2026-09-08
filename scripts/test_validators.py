@@ -31,6 +31,11 @@ DATA = [
     "conjectures.yaml",
     "tasks.yaml",
     "docs/provenance/formalization-search.json",
+    # A FORMALIZED escape route names a theorem, and the rule that the theorem
+    # must exist is only exercisable if the elaborated index travels with the
+    # copy. Without it the validator skips resolution -- deliberately, since the
+    # index is a build product -- and the seeded defect would be accepted.
+    "docs/status/declaration-index.json",
 ]
 EXTRA = [
     "AISafetyAtlas.lean",
@@ -326,6 +331,55 @@ CASES = [
         "must pin a 40-character Git revision",
     ),
     (
+        "search evidence: archive-pinned follow-up drifting from its corpus record",
+        "validate_registry.py",
+        "docs/provenance/formalization-search.json",
+        lambda d: next(
+            followup
+            for check in d["novelty_checks"]
+            for followup in check.get("followup_searches", [])
+            if followup["corpus"] == "isabelle-afp"
+        ).__setitem__("version", "AFP release 1999-01-01"),
+        "must pin a 40-character Git revision",
+    ),
+    (
+        "search evidence: archive-pinned follow-up not saying how it was pinned",
+        "validate_registry.py",
+        "docs/provenance/formalization-search.json",
+        lambda d: next(
+            followup
+            for check in d["novelty_checks"]
+            for followup in check.get("followup_searches", [])
+            if followup["corpus"] == "isabelle-afp"
+        ).pop("pinned_by"),
+        "must record pinned_by",
+    ),
+    (
+        "registry: MAIS solution verdict outside the vocabulary",
+        "validate_registry.py",
+        "registry.yaml",
+        lambda d: d["source_catalog"]["mais-issue-5-2026"]["mais_solution"].__setitem__(
+            "verdict", "VERIFIED"
+        ),
+        "unknown mais_solution verdict",
+    ),
+    (
+        "registry: MAIS solution verdict with no account of what was checked",
+        "validate_registry.py",
+        "registry.yaml",
+        lambda d: d["source_catalog"]["mais-issue-5-2026"]["mais_solution"].pop(
+            "checked"
+        ),
+        "must record a non-empty checked",
+    ),
+    (
+        "registry: MAIS solution verdict against an unhashed issue body",
+        "validate_registry.py",
+        "registry.yaml",
+        lambda d: d["source_catalog"]["mais-issue-5-2026"].pop("content_sha256"),
+        "must record content_sha256",
+    ),
+    (
         "registry: public RELATED record with no scope delta",
         "validate_registry.py",
         "registry.yaml",
@@ -510,6 +564,137 @@ CASES = [
             "strength", "high"
         ),
         "relation has unknown fields",
+    ),
+    # Escape routes and statability. Both fields say something the build cannot
+    # check -- what happens when a hypothesis is dropped, and why a row is
+    # empty -- so every guard that stops them asserting more than was
+    # established gets a case.
+    (
+        "registry: escape route axis outside the vocabulary",
+        "validate_registry.py",
+        "registry.yaml",
+        lambda d: first(d["results"], id="LAND-KNOW-001")["escape_routes"][0].__setitem__(
+            "axis", "TRY_HARDER"
+        ),
+        "escape route axis 'TRY_HARDER' is outside the vocabulary",
+    ),
+    (
+        "registry: escape route status outside the vocabulary",
+        "validate_registry.py",
+        "registry.yaml",
+        lambda d: first(d["results"], id="LAND-KNOW-001")["escape_routes"][0].__setitem__(
+            "status", "PROBABLY"
+        ),
+        "escape route status 'PROBABLY' is outside the vocabulary",
+    ),
+    (
+        "registry: escape route with no note",
+        "validate_registry.py",
+        "registry.yaml",
+        lambda d: first(d["results"], id="LAND-KNOW-001")["escape_routes"][0].pop("note"),
+        "must carry a non-empty note",
+    ),
+    (
+        "registry: FORMALIZED escape route naming no declaration",
+        "validate_registry.py",
+        "registry.yaml",
+        lambda d: first(d["results"], id="LAND-KNOW-001")["escape_routes"][0].pop("lean"),
+        "is FORMALIZED and must name",
+    ),
+    (
+        "registry: FORMALIZED escape route naming a theorem that does not exist",
+        "validate_registry.py",
+        "registry.yaml",
+        lambda d: first(d["results"], id="LAND-KNOW-001")["escape_routes"][0].__setitem__(
+            "lean", "AISafetyAtlas.Knowledge.knowable_by_wishing"
+        ),
+        "which is not an atlas declaration",
+    ),
+    (
+        "registry: unproved escape route claiming Lean",
+        "validate_registry.py",
+        "registry.yaml",
+        lambda d: first(d["results"], id="LAND-KNOW-001")["escape_routes"][1].__setitem__(
+            "lean", "AISafetyAtlas.Knowledge.Knowable.mono"
+        ),
+        "but names Lean",
+    ),
+    (
+        "registry: repeated escape route on one row",
+        "validate_registry.py",
+        "registry.yaml",
+        lambda d: first(d["results"], id="LAND-KNOW-001")["escape_routes"].append(
+            dict(first(d["results"], id="LAND-KNOW-001")["escape_routes"][1])
+        ),
+        "repeats escape route",
+    ),
+    (
+        "registry: escape route with an unknown field",
+        "validate_registry.py",
+        "registry.yaml",
+        lambda d: first(d["results"], id="LAND-KNOW-001")["escape_routes"][0].__setitem__(
+            "confidence", "high"
+        ),
+        "escape route has unknown fields",
+    ),
+    (
+        "registry: statability verdict outside the vocabulary",
+        "validate_registry.py",
+        "registry.yaml",
+        lambda d: first(d["results"], id="BY-002")["statability"].__setitem__(
+            "verdict", "TOO_HARD"
+        ),
+        "statability verdict 'TOO_HARD' is outside the vocabulary",
+    ),
+    (
+        "registry: statability verdict with no evidence",
+        "validate_registry.py",
+        "registry.yaml",
+        lambda d: first(d["results"], id="BY-002")["statability"].pop("note"),
+        "must carry a non-empty note saying what was checked",
+    ),
+    (
+        "registry: blocked row that names no missing primitive",
+        "validate_registry.py",
+        "registry.yaml",
+        lambda d: first(d["results"], id="BY-002")["statability"].__setitem__(
+            "verdict", "BLOCKED_ON_PRIMITIVE"
+        ),
+        "must name the missing primitives",
+    ),
+    (
+        "registry: missing primitives on a row that is not blocked",
+        "validate_registry.py",
+        "registry.yaml",
+        lambda d: first(d["results"], id="BY-002")["statability"].__setitem__(
+            "missing", ["resource-bounded complexity"]
+        ),
+        "not BLOCKED_ON_PRIMITIVE",
+    ),
+    (
+        "registry: statability verdict on a row that has Lean",
+        "validate_registry.py",
+        "registry.yaml",
+        lambda d: first(d["results"], id="LAND-KNOW-001").__setitem__(
+            "statability", {"verdict": "UNTRIAGED", "note": "nobody has looked"}
+        ),
+        "carries atlas Lean, so a statability verdict",
+    ),
+    (
+        "registry: uncovered row with no statability verdict",
+        "validate_registry.py",
+        "registry.yaml",
+        lambda d: first(d["results"], id="BY-002").pop("statability"),
+        "carries no atlas Lean and no statability verdict",
+    ),
+    (
+        "registry: statability with an unknown field",
+        "validate_registry.py",
+        "registry.yaml",
+        lambda d: first(d["results"], id="BY-002")["statability"].__setitem__(
+            "confidence", "low"
+        ),
+        "statability has unknown fields",
     ),
     (
         "registry: artifact with no formalization",
@@ -851,8 +1036,8 @@ CASES = [
         "conjectures: next_id skips an unrecorded assignment",
         "validate_conjectures.py",
         "conjectures.yaml",
-        lambda d: d.__setitem__("next_id", 28),
-        "conjecture numbering skips assigned ids ['CONJ-027']",
+        lambda d: d.__setitem__("next_id", 30),
+        "conjecture numbering skips assigned ids ['CONJ-029']",
     ),
     (
         "conjectures: MAIS row using an atlas bridge",
@@ -892,6 +1077,15 @@ CASES = [
             "source_ref", ["mathforaisafety-2026"]
         ),
         "unpinned sources",
+    ),
+    (
+        "conjectures: graded against a directory rather than a work",
+        "validate_conjectures.py",
+        "conjectures.yaml",
+        lambda d: synthetic_conjecture(d).__setitem__(
+            "source_ref", ["brcic-yampolskiy-2023"]
+        ),
+        "directory sources",
     ),
     (
         "conjectures: a narrowing labelled but not argued",

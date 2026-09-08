@@ -1,8 +1,8 @@
 {
   "counts": {
-    "declarations": 253,
-    "examples_only": 215,
-    "load_bearing": 38,
+    "declarations": 269,
+    "examples_only": 226,
+    "load_bearing": 43,
     "no_consumer": 0
   },
   "declarations": {
@@ -112,12 +112,26 @@
       "origin": "LAND-CAUSAL-COLLISION-001",
       "tier": "load-bearing"
     },
+    "AISafetyAtlas.Causal.behaviorEq_iff_behavior_eq": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-CAUSAL-KNOW-001",
+      "tier": "examples-only"
+    },
     "AISafetyAtlas.Causal.eq_family_of_isCausalBayesNetwork": {
       "consumers": [
         "AISafetyAtlas.Examples.Causal.BayesianNetwork",
         "AISafetyAtlas.Examples.Registry"
       ],
       "origin": "LAND-CAUSAL-PEARLCBN-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Causal.exists_behaviorEq_pair_of_not_knowable": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-CAUSAL-KNOW-001",
       "tier": "examples-only"
     },
     "AISafetyAtlas.Causal.inIdentifiedSet_zero_of_behaviorEq": {
@@ -176,12 +190,56 @@
       "origin": "LAND-HYPER-002",
       "tier": "load-bearing"
     },
+    "AISafetyAtlas.Compositional.Hyperproperties.knowable_of_isSafetyPredicate": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-HYPER-KNOW-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Compositional.Hyperproperties.not_isSafetyPredicate_of_realizedSet_collision": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-HYPER-KNOW-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Compositional.Networks.knowable_runFor": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Compositional.Knowability",
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-COMP-KNOW-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Compositional.Networks.not_electsLeader_of_fixedPointFree": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-COMP-TRACE-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Compositional.Networks.realizes_systemOf": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-COMP-TRACE-001",
+      "tier": "examples-only"
+    },
     "AISafetyAtlas.Compositional.Networks.runFor_eq_of_view_eq": {
       "consumers": [
+        "AISafetyAtlas.Compositional.Knowability",
         "AISafetyAtlas.Examples.PublicAPI",
         "AISafetyAtlas.Examples.Registry"
       ],
       "origin": "LAND-ANGLUIN-001",
+      "tier": "load-bearing"
+    },
+    "AISafetyAtlas.Compositional.Networks.sameView_iff_view_eq": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-COMP-KNOW-001",
       "tier": "examples-only"
     },
     "AISafetyAtlas.Compositional.Symmetry.Protocol.no_unique_leader_from_symmetric_start": {
@@ -261,10 +319,11 @@
     },
     "AISafetyAtlas.Control.ashby_variety_ge": {
       "consumers": [
+        "AISafetyAtlas.Control.RegulationCheck",
         "AISafetyAtlas.Examples.Registry"
       ],
       "origin": "BY-004",
-      "tier": "examples-only"
+      "tier": "load-bearing"
     },
     "AISafetyAtlas.Control.ashby_variety_ge_isSharp": {
       "consumers": [
@@ -688,23 +747,54 @@
       "origin": "LAND-ATTR-001",
       "tier": "examples-only"
     },
-    "AISafetyAtlas.Fairness.negativeScore_eq": {
+    "AISafetyAtlas.Fairness.approx_perfect_prediction_or_equal_base_rates": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Fairness.ApproximateRiskAssignment",
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "BY-010",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Fairness.average_lower_bound": {
       "consumers": [
         "AISafetyAtlas.Examples.Registry"
       ],
       "origin": "BY-010",
       "tier": "examples-only"
     },
-    "AISafetyAtlas.Fairness.perfect_of_negativeScore_eq_zero": {
+    "AISafetyAtlas.Fairness.exists_slack_function": {
       "consumers": [
         "AISafetyAtlas.Examples.Registry"
       ],
       "origin": "BY-010",
       "tier": "examples-only"
+    },
+    "AISafetyAtlas.Fairness.negativeScore_eq": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry",
+        "AISafetyAtlas.Fairness.ApproximateRiskAssignment"
+      ],
+      "origin": "BY-010",
+      "tier": "load-bearing"
+    },
+    "AISafetyAtlas.Fairness.perfect_of_negativeScore_eq_zero": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry",
+        "AISafetyAtlas.Fairness.ApproximateRiskAssignment"
+      ],
+      "origin": "BY-010",
+      "tier": "load-bearing"
     },
     "AISafetyAtlas.Fairness.perfect_prediction_or_equal_base_rates": {
       "consumers": [
         "AISafetyAtlas.Examples.Fairness.RiskAssignment",
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "BY-010",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Fairness.perfect_prediction_or_equal_base_rates_of_approx": {
+      "consumers": [
         "AISafetyAtlas.Examples.Registry"
       ],
       "origin": "BY-010",
@@ -967,6 +1057,13 @@
       "origin": "LAND-DPI-001",
       "tier": "examples-only"
     },
+    "AISafetyAtlas.Knowledge.Determines.trans": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-KNOW-001",
+      "tier": "examples-only"
+    },
     "AISafetyAtlas.Knowledge.Devices.BlockwiseCollision.not_physicallyKnows": {
       "consumers": [
         "AISafetyAtlas.Examples.Registry"
@@ -1156,6 +1253,8 @@
     },
     "AISafetyAtlas.Knowledge.Knowable.mono": {
       "consumers": [
+        "AISafetyAtlas.Causal.Knowability",
+        "AISafetyAtlas.Examples.Preference.Knowability",
         "AISafetyAtlas.Examples.Registry",
         "AISafetyAtlas.Knowledge.Accumulation",
         "AISafetyAtlas.Knowledge.Temporal",
@@ -1272,8 +1371,10 @@
     },
     "AISafetyAtlas.Knowledge.exists_witness_of_not_knowable": {
       "consumers": [
+        "AISafetyAtlas.Causal.Knowability",
         "AISafetyAtlas.Examples.Registry",
-        "AISafetyAtlas.Knowledge.Temporal"
+        "AISafetyAtlas.Knowledge.Temporal",
+        "AISafetyAtlas.Oversight.JointObservation.Coverage"
       ],
       "origin": "LAND-KNOW-001",
       "tier": "load-bearing"
@@ -1306,6 +1407,8 @@
     },
     "AISafetyAtlas.Knowledge.knowable_iff_no_collision": {
       "consumers": [
+        "AISafetyAtlas.Compositional.Hyperproperties.Knowability",
+        "AISafetyAtlas.Compositional.Knowability",
         "AISafetyAtlas.Examples.Registry",
         "AISafetyAtlas.Knowledge.Ambiguity",
         "AISafetyAtlas.Knowledge.Check",
@@ -1339,6 +1442,8 @@
     },
     "AISafetyAtlas.Knowledge.not_knowable_of_collision": {
       "consumers": [
+        "AISafetyAtlas.Causal.Knowability",
+        "AISafetyAtlas.Compositional.Hyperproperties.Knowability",
         "AISafetyAtlas.Examples.Knowledge.Ambiguity",
         "AISafetyAtlas.Examples.Oversight.Overseer",
         "AISafetyAtlas.Examples.Registry",
@@ -1346,7 +1451,7 @@
         "AISafetyAtlas.Knowledge.Embedded",
         "AISafetyAtlas.Knowledge.SelfReference",
         "AISafetyAtlas.Knowledge.Temporal",
-        "AISafetyAtlas.Wireheading.ObservationLimits"
+        "AISafetyAtlas.Oversight.JointObservation.Coverage"
       ],
       "origin": "LAND-KNOW-001",
       "tier": "load-bearing"
@@ -1357,6 +1462,16 @@
       ],
       "origin": "LAND-KNOWENTROPY-001",
       "tier": "examples-only"
+    },
+    "AISafetyAtlas.Knowledge.not_knowable_of_invariant_transform": {
+      "consumers": [
+        "AISafetyAtlas.Compositional.NetworkTraces",
+        "AISafetyAtlas.Examples.Registry",
+        "AISafetyAtlas.Preference.Knowability",
+        "AISafetyAtlas.Wireheading.ObservationLimits"
+      ],
+      "origin": "LAND-KNOW-001",
+      "tier": "load-bearing"
     },
     "AISafetyAtlas.Knowledge.not_knowable_of_witness": {
       "consumers": [
@@ -1815,11 +1930,27 @@
       "origin": "BY-011",
       "tier": "load-bearing"
     },
+    "AISafetyAtlas.Preference.knowable_reward_of_isEmpty_state": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Preference.Knowability",
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-PREF-KNOW-001",
+      "tier": "examples-only"
+    },
     "AISafetyAtlas.Preference.neg_twin": {
       "consumers": [
         "AISafetyAtlas.Examples.Registry"
       ],
       "origin": "BY-011",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Preference.not_knowable_reward": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Preference.Knowability",
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-PREF-KNOW-001",
       "tier": "examples-only"
     },
     "AISafetyAtlas.SelfAwareness.Model.limited_self_awareness": {
@@ -1969,21 +2100,27 @@
     "AISafetyAtlas.Causal.SCIM.policy_ext_single",
     "AISafetyAtlas.Causal.SCM.eval_eq_f",
     "AISafetyAtlas.Causal.SCM.exoJoint_mul_prod",
+    "AISafetyAtlas.Causal.behaviorEq_iff_behavior_eq",
     "AISafetyAtlas.Causal.eq_family_of_isCausalBayesNetwork",
+    "AISafetyAtlas.Causal.exists_behaviorEq_pair_of_not_knowable",
     "AISafetyAtlas.Causal.inIdentifiedSet_zero_of_behaviorEq",
     "AISafetyAtlas.Causal.modelError_eq_zero_iff",
     "AISafetyAtlas.Causal.not_inIdentifiedSet_of_neg",
     "AISafetyAtlas.Combinatorics.basisClass_histogram_eq_permOrbit",
     "AISafetyAtlas.Combinatorics.card_closedUnderPermutation_nonempty",
     "AISafetyAtlas.Combinatorics.exists_perm_rel_not_iff",
-    "AISafetyAtlas.Compositional.Networks.runFor_eq_of_view_eq",
+    "AISafetyAtlas.Compositional.Hyperproperties.knowable_of_isSafetyPredicate",
+    "AISafetyAtlas.Compositional.Hyperproperties.not_isSafetyPredicate_of_realizedSet_collision",
+    "AISafetyAtlas.Compositional.Networks.knowable_runFor",
+    "AISafetyAtlas.Compositional.Networks.not_electsLeader_of_fixedPointFree",
+    "AISafetyAtlas.Compositional.Networks.realizes_systemOf",
+    "AISafetyAtlas.Compositional.Networks.sameView_iff_view_eq",
     "AISafetyAtlas.Compositional.Symmetry.Protocol.no_unique_leader_from_symmetric_start",
     "AISafetyAtlas.Computability.halting_re",
     "AISafetyAtlas.Computability.nonhalting_not_re",
     "AISafetyAtlas.Computability.rice",
     "AISafetyAtlas.Control.ashby_logVariety_ge",
     "AISafetyAtlas.Control.ashby_logVariety_ge_mul",
-    "AISafetyAtlas.Control.ashby_variety_ge",
     "AISafetyAtlas.Control.ashby_variety_ge_isSharp",
     "AISafetyAtlas.Control.card_ceilDiv_le_admittedOutcomes",
     "AISafetyAtlas.Control.card_le_mul_card_admittedOutcomes_mul",
@@ -2032,9 +2169,11 @@
     "AISafetyAtlas.Examples.Causal.\u0394_eq_half_sub_joint",
     "AISafetyAtlas.Explainability.attribution_impossibility",
     "AISafetyAtlas.Explainability.attribution_impossibility_weak",
-    "AISafetyAtlas.Fairness.negativeScore_eq",
-    "AISafetyAtlas.Fairness.perfect_of_negativeScore_eq_zero",
+    "AISafetyAtlas.Fairness.approx_perfect_prediction_or_equal_base_rates",
+    "AISafetyAtlas.Fairness.average_lower_bound",
+    "AISafetyAtlas.Fairness.exists_slack_function",
     "AISafetyAtlas.Fairness.perfect_prediction_or_equal_base_rates",
+    "AISafetyAtlas.Fairness.perfect_prediction_or_equal_base_rates_of_approx",
     "AISafetyAtlas.Fairness.print_perfectPrediction_of_populated",
     "AISafetyAtlas.Fairness.sum_score_eq_\u03bc",
     "AISafetyAtlas.Inference.PhysicalKnowledgeWitness.eq_target_on_of_refinesOn",
@@ -2063,6 +2202,7 @@
     "AISafetyAtlas.InformationTheory.mutualInfo_comp_le",
     "AISafetyAtlas.InformationTheory.mutualInfo_eq_iff_isMarkovChain",
     "AISafetyAtlas.InformationTheory.mutualInfo_le_of_isMarkovChain",
+    "AISafetyAtlas.Knowledge.Determines.trans",
     "AISafetyAtlas.Knowledge.Devices.BlockwiseCollision.not_physicallyKnows",
     "AISafetyAtlas.Knowledge.Devices.BlockwiseCollision.not_weaklyInfers",
     "AISafetyAtlas.Knowledge.Devices.knowable_probe_of_forall_blockAnswers",
@@ -2155,7 +2295,9 @@
     "AISafetyAtlas.Preference.exists_reward",
     "AISafetyAtlas.Preference.explanation_at_least_behaviour",
     "AISafetyAtlas.Preference.explanation_complexity_eq_behaviour",
+    "AISafetyAtlas.Preference.knowable_reward_of_isEmpty_state",
     "AISafetyAtlas.Preference.neg_twin",
+    "AISafetyAtlas.Preference.not_knowable_reward",
     "AISafetyAtlas.SelfAwareness.Model.limited_self_awareness",
     "AISafetyAtlas.SelfAwareness.Model.not_agentAware_of_maximal",
     "AISafetyAtlas.SelfAwareness.Model.not_aware_of_le",

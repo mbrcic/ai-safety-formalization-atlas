@@ -1,0 +1,1882 @@
+{
+  "schema_version": 1,
+  "generated_by": "scripts/generate_registry_views.py",
+  "note": "Claims and what realizes them, both directions. `claims` is keyed by ledger id and carries the informal sentence, the atlas declarations realizing it with their file and line, and -- when nothing realizes it -- the statability verdict saying what was checked. `declaration_to_claim` is the reverse index: given a Lean name, the claim it was written for. A declaration absent from that index is not unclaimed mathematics; most atlas declarations are supporting lemmas and only the ones a ledger row names appear here.",
+  "claim_count": 49,
+  "realized_count": 22,
+  "claims": {
+    "BY-001": {
+      "id": "BY-001",
+      "name": "Unobservability",
+      "claim": "A system's internal state cannot in general be reconstructed from its observable outputs.",
+      "tags": [
+        "control-theory"
+      ],
+      "declarations": [],
+      "modules": [],
+      "realized": false,
+      "statability": "TRIAGED_DISTINCT",
+      "missing": [],
+      "escape_routes": []
+    },
+    "BY-002": {
+      "id": "BY-002",
+      "name": "Uncontrollability of dynamical systems",
+      "claim": "Some dynamical systems cannot be driven between arbitrary states by available controls.",
+      "tags": [
+        "control-theory"
+      ],
+      "declarations": [],
+      "modules": [],
+      "realized": false,
+      "statability": "UNTRIAGED",
+      "missing": [],
+      "escape_routes": []
+    },
+    "BY-003": {
+      "id": "BY-003",
+      "name": "Good Regulator Theorem",
+      "claim": "Every maximally simple optimal regulator must embody a model of the regulated system.",
+      "tags": [
+        "control-theory"
+      ],
+      "declarations": [],
+      "modules": [],
+      "realized": false,
+      "statability": "UNTRIAGED",
+      "missing": [],
+      "escape_routes": []
+    },
+    "BY-004": {
+      "id": "BY-004",
+      "name": "Law of Requisite Variety",
+      "claim": "Perfect regulation requires sufficient controller variety under perfect information and unbounded response speed.",
+      "tags": [
+        "control-theory",
+        "information-theory"
+      ],
+      "declarations": [
+        {
+          "name": "AISafetyAtlas.Control.ashby_variety_ge",
+          "location": [
+            "AISafetyAtlas/Control/VarietyCounting.lean",
+            134
+          ]
+        },
+        {
+          "name": "AISafetyAtlas.Control.card_ceilDiv_le_admittedOutcomes",
+          "location": [
+            "AISafetyAtlas/Control/VarietyCounting.lean",
+            274
+          ]
+        },
+        {
+          "name": "AISafetyAtlas.Control.ashby_variety_ge_isSharp",
+          "location": [
+            "AISafetyAtlas/Control/VarietyCounting.lean",
+            378
+          ]
+        },
+        {
+          "name": "AISafetyAtlas.Control.ashby_logVariety_ge_mul",
+          "location": [
+            "AISafetyAtlas/Control/VarietyCounting.lean",
+            210
+          ]
+        },
+        {
+          "name": "AISafetyAtlas.Control.ashby_logVariety_ge",
+          "location": [
+            "AISafetyAtlas/Control/VarietyCounting.lean",
+            176
+          ]
+        },
+        {
+          "name": "AISafetyAtlas.Control.card_le_mul_card_admittedOutcomes_mul",
+          "location": [
+            "AISafetyAtlas/Control/VarietyCounting.lean",
+            80
+          ]
+        },
+        {
+          "name": "AISafetyAtlas.Control.two_le_card_admittedOutcomes",
+          "location": [
+            "AISafetyAtlas/Control/VarietyCounting.lean",
+            158
+          ]
+        },
+        {
+          "name": "AISafetyAtlas.Control.entropy_ge_of_condEntropy_ge",
+          "location": [
+            "AISafetyAtlas/Control/RequisiteVariety.lean",
+            132
+          ]
+        },
+        {
+          "name": "AISafetyAtlas.Control.condEntropy_outcome_eq",
+          "location": [
+            "AISafetyAtlas/Control/RequisiteVariety.lean",
+            151
+          ]
+        },
+        {
+          "name": "AISafetyAtlas.Control.entropy_outcome_ge",
+          "location": [
+            "AISafetyAtlas/Control/RequisiteVariety.lean",
+            167
+          ]
+        },
+        {
+          "name": "AISafetyAtlas.Control.entropy_outcome_ge_of_strategy",
+          "location": [
+            "AISafetyAtlas/Control/RequisiteVariety.lean",
+            189
+          ]
+        },
+        {
+          "name": "AISafetyAtlas.Control.entropy_ge_of_sensor",
+          "location": [
+            "AISafetyAtlas/Control/RequisiteVariety.lean",
+            213
+          ]
+        },
+        {
+          "name": "AISafetyAtlas.Control.entropy_outcome_ge_sub_channelCapacity",
+          "location": [
+            "AISafetyAtlas/Control/RequisiteVariety.lean",
+            290
+          ]
+        },
+        {
+          "name": "AISafetyAtlas.Control.entropy_le_channelCapacity_of_complete",
+          "location": [
+            "AISafetyAtlas/Control/RequisiteVariety.lean",
+            319
+          ]
+        },
+        {
+          "name": "AISafetyAtlas.InformationTheory.channelCapacity_fun",
+          "location": [
+            "AISafetyAtlas/InformationTheory/ChannelCapacity.lean",
+            72
+          ]
+        },
+        {
+          "name": "AISafetyAtlas.InformationTheory.channelCapacity_prod",
+          "location": [
+            "AISafetyAtlas/InformationTheory/ChannelCapacity.lean",
+            78
+          ]
+        },
+        {
+          "name": "AISafetyAtlas.InformationTheory.channelCapacity_eq_of_card_eq_two_pow",
+          "location": [
+            "AISafetyAtlas/InformationTheory/ChannelCapacity.lean",
+            66
+          ]
+        },
+        {
+          "name": "AISafetyAtlas.InformationTheory.channelCapacity_eq_of_card_eq_pow",
+          "location": [
+            "AISafetyAtlas/InformationTheory/ChannelCapacity.lean",
+            56
+          ]
+        },
+        {
+          "name": "AISafetyAtlas.Oversight.not_forces_of_card_lt",
+          "location": [
+            "AISafetyAtlas/Oversight/VarietyBound.lean",
+            109
+          ]
+        }
+      ],
+      "modules": [
+        "AISafetyAtlas.Control.ChannelRate",
+        "AISafetyAtlas.Control.CompleteControl",
+        "AISafetyAtlas.Control.RequisiteVariety"
+      ],
+      "realized": true,
+      "statability": null,
+      "missing": [],
+      "escape_routes": [
+        {
+          "axis": "ADD_RESOURCE",
+          "status": "NAMED_ONLY"
+        }
+      ]
+    },
+    "BY-005": {
+      "id": "BY-005",
+      "name": "Information-theoretical control limits",
+      "claim": "Information constraints impose lower bounds on achievable control.",
+      "tags": [
+        "control-theory",
+        "information-theory"
+      ],
+      "declarations": [
+        {
+          "name": "AISafetyAtlas.Control.entropy_noise_sub_controlLoss",
+          "location": [
+            "AISafetyAtlas/Control/InformationLimits.lean",
+            179
+          ]
+        },
+        {
+          "name": "AISafetyAtlas.Control.entropyReduction_le_of_openLoopBound",
+          "location": [
+            "AISafetyAtlas/Control/InformationLimits.lean",
+            413
+          ]
+        },
+        {
+          "name": "AISafetyAtlas.Control.condEntropy_ge_of_openLoopBound",
+          "location": [
+            "AISafetyAtlas/Control/InformationLimits.lean",
+            387
+          ]
+        },
+        {
+          "name": "AISafetyAtlas.Control.controlLoss_le_entropy_noise",
+          "location": [
+            "AISafetyAtlas/Control/InformationLimits.lean",
+            208
+          ]
+        },
+        {
+          "name": "AISafetyAtlas.Control.controlLoss_eq_entropy_noise_iff",
+          "location": [
+            "AISafetyAtlas/Control/InformationLimits.lean",
+            224
+          ]
+        },
+        {
+          "name": "AISafetyAtlas.Control.controlLoss_eq_condMutualInfo",
+          "location": [
+            "AISafetyAtlas/Control/InformationLimits.lean",
+            243
+          ]
+        },
+        {
+          "name": "AISafetyAtlas.Control.controlLoss_eq_mutualInfo_sub",
+          "location": [
+            "AISafetyAtlas/Control/InformationLimits.lean",
+            263
+          ]
+        },
+        {
+          "name": "AISafetyAtlas.Control.condEntropy_le_condEntropy_of_forall",
+          "location": [
+            "AISafetyAtlas/Control/InformationLimits.lean",
+            289
+          ]
+        },
+        {
+          "name": "AISafetyAtlas.Control.entropyReduction_le_of_condEntropy_ge",
+          "location": [
+            "AISafetyAtlas/Control/InformationLimits.lean",
+            328
+          ]
+        },
+        {
+          "name": "AISafetyAtlas.Control.minControlLoss_le_entropy_noise",
+          "location": [
+            "AISafetyAtlas/Control/InformationLimits.lean",
+            602
+          ]
+        },
+        {
+          "name": "AISafetyAtlas.Control.minControlLoss_eq_sInf_condMutualInfo",
+          "location": [
+            "AISafetyAtlas/Control/InformationLimits.lean",
+            667
+          ]
+        },
+        {
+          "name": "AISafetyAtlas.Control.minControlLoss_eq_sInf_mutualInfo_sub",
+          "location": [
+            "AISafetyAtlas/Control/InformationLimits.lean",
+            686
+          ]
+        },
+        {
+          "name": "AISafetyAtlas.Control.minControlLoss_le",
+          "location": [
+            "AISafetyAtlas/Control/InformationLimits.lean",
+            571
+          ]
+        },
+        {
+          "name": "AISafetyAtlas.Control.minControlLoss_nonneg",
+          "location": [
+            "AISafetyAtlas/Control/InformationLimits.lean",
+            580
+          ]
+        },
+        {
+          "name": "AISafetyAtlas.Control.measurable_plantOutcome",
+          "location": [
+            "AISafetyAtlas/Control/InformationLimits.lean",
+            466
+          ]
+        },
+        {
+          "name": "AISafetyAtlas.Control.isPlant_plantOutcome",
+          "location": [
+            "AISafetyAtlas/Control/InformationLimits.lean",
+            458
+          ]
+        },
+        {
+          "name": "AISafetyAtlas.Control.minControlLoss_eq_entropy_noise_iff_of_attained",
+          "location": [
+            "AISafetyAtlas/Control/InformationLimits.lean",
+            639
+          ]
+        },
+        {
+          "name": "AISafetyAtlas.Control.kernelControlLoss_eq_sum",
+          "location": [
+            "AISafetyAtlas/Control/PolicyKernel.lean",
+            588
+          ]
+        },
+        {
+          "name": "AISafetyAtlas.Control.minControlLoss_inputPolicies_eq_kernelMin",
+          "location": [
+            "AISafetyAtlas/Control/PolicyKernel.lean",
+            713
+          ]
+        },
+        {
+          "name": "AISafetyAtlas.Control.minControlLoss_inputPolicies_attained",
+          "location": [
+            "AISafetyAtlas/Control/PolicyKernel.lean",
+            434
+          ]
+        },
+        {
+          "name": "AISafetyAtlas.Control.entropyReduction_le_condEntropy_form",
+          "location": [
+            "AISafetyAtlas/Control/OpenLoop.lean",
+            78
+          ]
+        },
+        {
+          "name": "AISafetyAtlas.Control.entropyReduction_le_iSup_openLoopReduction",
+          "location": [
+            "AISafetyAtlas/Control/OpenLoop.lean",
+            162
+          ]
+        },
+        {
+          "name": "AISafetyAtlas.Control.exists_entropyReduction_const_eq_iSup_openLoopReduction",
+          "location": [
+            "AISafetyAtlas/Control/OpenLoop.lean",
+            203
+          ]
+        },
+        {
+          "name": "AISafetyAtlas.Control.entropyReduction_le_openLoopMax",
+          "location": [
+            "AISafetyAtlas/Control/OpenLoop.lean",
+            399
+          ]
+        },
+        {
+          "name": "AISafetyAtlas.Control.perfectlyObservable_iff_sensorLoss_eq_zero",
+          "location": [
+            "AISafetyAtlas/Control/Observability.lean",
+            143
+          ]
+        },
+        {
+          "name": "AISafetyAtlas.Control.condMutualInfo_eq_zero_of_sensorLoss_eq_zero",
+          "location": [
+            "AISafetyAtlas/Control/Observability.lean",
+            182
+          ]
+        },
+        {
+          "name": "AISafetyAtlas.Control.mutualInfo_prod_eq_of_sensorLoss_eq_zero",
+          "location": [
+            "AISafetyAtlas/Control/Observability.lean",
+            200
+          ]
+        }
+      ],
+      "modules": [
+        "AISafetyAtlas.Control.InformationLimits",
+        "AISafetyAtlas.Control.OpenLoop",
+        "AISafetyAtlas.Control.OpenLoopAttainment",
+        "AISafetyAtlas.Control.PolicyKernel",
+        "AISafetyAtlas.Control.Purification"
+      ],
+      "realized": true,
+      "statability": null,
+      "missing": [],
+      "escape_routes": []
+    },
+    "BY-006": {
+      "id": "BY-006",
+      "name": "(Anti)codifiability thesis",
+      "claim": "The survey groups moral-particularist arguments against complete codification of virtue.",
+      "tags": [
+        "ethics"
+      ],
+      "declarations": [],
+      "modules": [],
+      "realized": false,
+      "statability": "UNTRIAGED",
+      "missing": [],
+      "escape_routes": []
+    },
+    "BY-007": {
+      "id": "BY-007",
+      "name": "Arrow's impossibility theorem",
+      "claim": "No rank-order voting rule satisfies Arrow's full set of fairness conditions for three or more alternatives.",
+      "tags": [
+        "social-choice",
+        "decision-theory"
+      ],
+      "declarations": [
+        {
+          "name": "AISafetyAtlas.SocialChoice.arrow",
+          "location": [
+            "AISafetyAtlas/SocialChoice.lean",
+            64
+          ]
+        },
+        {
+          "name": "AISafetyAtlas.SocialChoice.Utility.arrow",
+          "location": [
+            "AISafetyAtlas/SocialChoice/Utility.lean",
+            234
+          ]
+        }
+      ],
+      "modules": [],
+      "realized": true,
+      "statability": null,
+      "missing": [],
+      "escape_routes": []
+    },
+    "BY-008": {
+      "id": "BY-008",
+      "name": "Impossibility theorems in population ethics",
+      "claim": "No population axiology simultaneously satisfies the cited set of adequacy conditions.",
+      "tags": [
+        "social-choice",
+        "ethics"
+      ],
+      "declarations": [],
+      "modules": [],
+      "realized": false,
+      "statability": "TRIAGED_DISTINCT",
+      "missing": [],
+      "escape_routes": []
+    },
+    "BY-009": {
+      "id": "BY-009",
+      "name": "Impossibility theorems in AI alignment",
+      "claim": "The cited work derives incompatibilities among desiderata for utility-based value alignment.",
+      "tags": [
+        "social-choice",
+        "decision-theory"
+      ],
+      "declarations": [],
+      "modules": [],
+      "realized": false,
+      "statability": "UNTRIAGED",
+      "missing": [],
+      "escape_routes": []
+    },
+    "BY-010": {
+      "id": "BY-010",
+      "name": "Fairness impossibility theorem",
+      "claim": "Common calibration and error-rate fairness criteria cannot all hold when base rates differ, subject to source assumptions.",
+      "tags": [
+        "social-choice"
+      ],
+      "declarations": [
+        {
+          "name": "AISafetyAtlas.Fairness.perfect_prediction_or_equal_base_rates",
+          "location": [
+            "AISafetyAtlas/Fairness/RiskAssignment.lean",
+            312
+          ]
+        },
+        {
+          "name": "AISafetyAtlas.Fairness.print_perfectPrediction_of_populated",
+          "location": [
+            "AISafetyAtlas/Fairness/RiskAssignment.lean",
+            361
+          ]
+        },
+        {
+          "name": "AISafetyAtlas.Fairness.sum_score_eq_μ",
+          "location": [
+            "AISafetyAtlas/Fairness/RiskAssignment.lean",
+            226
+          ]
+        },
+        {
+          "name": "AISafetyAtlas.Fairness.negativeScore_eq",
+          "location": [
+            "AISafetyAtlas/Fairness/RiskAssignment.lean",
+            233
+          ]
+        },
+        {
+          "name": "AISafetyAtlas.Fairness.perfect_of_negativeScore_eq_zero",
+          "location": [
+            "AISafetyAtlas/Fairness/RiskAssignment.lean",
+            287
+          ]
+        },
+        {
+          "name": "AISafetyAtlas.Fairness.approx_perfect_prediction_or_equal_base_rates",
+          "location": [
+            "AISafetyAtlas/Fairness/ApproximateRiskAssignment.lean",
+            501
+          ]
+        },
+        {
+          "name": "AISafetyAtlas.Fairness.exists_slack_function",
+          "location": [
+            "AISafetyAtlas/Fairness/ApproximateRiskAssignment.lean",
+            542
+          ]
+        },
+        {
+          "name": "AISafetyAtlas.Fairness.average_lower_bound",
+          "location": [
+            "AISafetyAtlas/Fairness/ApproximateRiskAssignment.lean",
+            438
+          ]
+        },
+        {
+          "name": "AISafetyAtlas.Fairness.perfect_prediction_or_equal_base_rates_of_approx",
+          "location": [
+            "AISafetyAtlas/Fairness/ApproximateRiskAssignment.lean",
+            560
+          ]
+        }
+      ],
+      "modules": [
+        "AISafetyAtlas.Fairness.ApproximateRiskAssignment",
+        "AISafetyAtlas.Fairness.RiskAssignment"
+      ],
+      "realized": true,
+      "statability": null,
+      "missing": [],
+      "escape_routes": [
+        {
+          "axis": "RESTRICT_CLASS",
+          "status": "FORMALIZED"
+        },
+        {
+          "axis": "RESTRICT_CLASS",
+          "status": "FORMALIZED"
+        }
+      ]
+    },
+    "BY-011": {
+      "id": "BY-011",
+      "name": "Limits on preference deduction",
+      "claim": "Observed behaviour alone does not identify an agent's reward function and planning process without strong normative assumptions.",
+      "tags": [
+        "preference-inference",
+        "decision-theory"
+      ],
+      "declarations": [
+        {
+          "name": "AISafetyAtlas.Preference.exists_planner",
+          "location": [
+            "AISafetyAtlas/Preference.lean",
+            94
+          ]
+        },
+        {
+          "name": "AISafetyAtlas.Preference.exists_reward",
+          "location": [
+            "AISafetyAtlas/Preference.lean",
+            171
+          ]
+        },
+        {
+          "name": "AISafetyAtlas.Preference.consistent_rewards_eq_univ",
+          "location": [
+            "AISafetyAtlas/Preference.lean",
+            104
+          ]
+        },
+        {
+          "name": "AISafetyAtlas.Preference.neg_twin",
+          "location": [
+            "AISafetyAtlas/Preference.lean",
+            119
+          ]
+        },
+        {
+          "name": "AISafetyAtlas.Preference.greedy_rewardOf",
+          "location": [
+            "AISafetyAtlas/Preference.lean",
+            215
+          ]
+        },
+        {
+          "name": "AISafetyAtlas.Preference.Source.ReasonableForF.proposition_seven",
+          "location": [
+            "AISafetyAtlas/Preference/SourceComplexity.lean",
+            196
+          ]
+        },
+        {
+          "name": "AISafetyAtlas.Preference.Source.ReasonableForF.proposition_eight",
+          "location": [
+            "AISafetyAtlas/Preference/SourceComplexity.lean",
+            218
+          ]
+        },
+        {
+          "name": "AISafetyAtlas.Preference.ReasonableLanguage.proposition_seven",
+          "location": [
+            "AISafetyAtlas/Preference/Reasonable.lean",
+            203
+          ]
+        },
+        {
+          "name": "AISafetyAtlas.Preference.ReasonableLanguage.proposition_eight",
+          "location": [
+            "AISafetyAtlas/Preference/Reasonable.lean",
+            224
+          ]
+        },
+        {
+          "name": "AISafetyAtlas.Preference.explanation_at_least_behaviour",
+          "location": [
+            "AISafetyAtlas/Preference/Complexity.lean",
+            157
+          ]
+        },
+        {
+          "name": "AISafetyAtlas.Preference.degenerate_explanation_cheap",
+          "location": [
+            "AISafetyAtlas/Preference/Complexity.lean",
+            178
+          ]
+        },
+        {
+          "name": "AISafetyAtlas.Preference.explanation_complexity_eq_behaviour",
+          "location": [
+            "AISafetyAtlas/Preference/Complexity.lean",
+            195
+          ]
+        },
+        {
+          "name": "AISafetyAtlas.Preference.RegretModel.cannot_rule_out_half_maximal_regret",
+          "location": [
+            "AISafetyAtlas/Preference/Regret.lean",
+            63
+          ]
+        },
+        {
+          "name": "AISafetyAtlas.Preference.OverrideModel.mixtureValue_rationalise",
+          "location": [
+            "AISafetyAtlas/Preference/Override.lean",
+            212
+          ]
+        },
+        {
+          "name": "AISafetyAtlas.Preference.Source.ReasonableForF.theorem_two_conditional",
+          "location": [
+            "AISafetyAtlas/Preference/SourceComplexity.lean",
+            278
+          ]
+        },
+        {
+          "name": "AISafetyAtlas.Preference.OverrideModel.rationalise_strictly_better",
+          "location": [
+            "AISafetyAtlas/Preference/Override.lean",
+            113
+          ]
+        }
+      ],
+      "modules": [
+        "AISafetyAtlas.Preference",
+        "AISafetyAtlas.Preference.Complexity",
+        "AISafetyAtlas.Preference.Override",
+        "AISafetyAtlas.Preference.Reasonable",
+        "AISafetyAtlas.Preference.SourceComplexity"
+      ],
+      "realized": true,
+      "statability": null,
+      "missing": [],
+      "escape_routes": []
+    },
+    "BY-012": {
+      "id": "BY-012",
+      "name": "Rice's theorem",
+      "claim": "Every nontrivial extensional property of partial computable functions is undecidable.",
+      "tags": [
+        "computability",
+        "verification"
+      ],
+      "declarations": [
+        {
+          "name": "AISafetyAtlas.Computability.rice",
+          "location": [
+            "AISafetyAtlas/Computability.lean",
+            33
+          ]
+        },
+        {
+          "name": "AISafetyAtlas.Computability.rice_code_iff",
+          "location": [
+            "AISafetyAtlas/Computability.lean",
+            49
+          ]
+        },
+        {
+          "name": "AISafetyAtlas.Verification.rice",
+          "location": [
+            "AISafetyAtlas/Verification.lean",
+            57
+          ]
+        },
+        {
+          "name": "AISafetyAtlas.Verification.AgentBehavior.no_behavioral_safety_verifier",
+          "location": [
+            "AISafetyAtlas/Verification/AgentBehavior.lean",
+            85
+          ]
+        }
+      ],
+      "modules": [],
+      "realized": true,
+      "statability": null,
+      "missing": [],
+      "escape_routes": []
+    },
+    "BY-013": {
+      "id": "BY-013",
+      "name": "Unprovability",
+      "claim": "Sufficiently expressive consistent formal systems contain true statements they cannot prove, under the source's hypotheses.",
+      "tags": [
+        "provability-logic"
+      ],
+      "declarations": [
+        {
+          "name": "AISafetyAtlas.Logic.godel_first_incompleteness",
+          "location": [
+            "AISafetyAtlas/Logic.lean",
+            89
+          ]
+        },
+        {
+          "name": "AISafetyAtlas.Logic.godel_second_incompleteness",
+          "location": [
+            "AISafetyAtlas/Logic.lean",
+            103
+          ]
+        }
+      ],
+      "modules": [],
+      "realized": true,
+      "statability": null,
+      "missing": [],
+      "escape_routes": []
+    },
+    "BY-014": {
+      "id": "BY-014",
+      "name": "Undecidability",
+      "claim": "No effective procedure decides every instance of the relevant computation or decision problem.",
+      "tags": [
+        "computability"
+      ],
+      "declarations": [
+        {
+          "name": "AISafetyAtlas.Computability.halting_re",
+          "location": [
+            "AISafetyAtlas/Computability.lean",
+            59
+          ]
+        },
+        {
+          "name": "AISafetyAtlas.Computability.halting_problem",
+          "location": [
+            "AISafetyAtlas/Computability.lean",
+            66
+          ]
+        },
+        {
+          "name": "AISafetyAtlas.Computability.nonhalting_not_re",
+          "location": [
+            "AISafetyAtlas/Computability.lean",
+            74
+          ]
+        }
+      ],
+      "modules": [],
+      "realized": true,
+      "statability": null,
+      "missing": [],
+      "escape_routes": []
+    },
+    "BY-015": {
+      "id": "BY-015",
+      "name": "Chaitin incompleteness",
+      "claim": "A finitely specified formal theory cannot prove arbitrarily high lower bounds on Kolmogorov complexity.",
+      "tags": [
+        "algorithmic-information",
+        "provability-logic"
+      ],
+      "declarations": [
+        {
+          "name": "AISafetyAtlas.Logic.chaitin_incompleteness",
+          "location": [
+            "AISafetyAtlas/Logic.lean",
+            58
+          ]
+        },
+        {
+          "name": "AISafetyAtlas.Logic.chaitin_bound",
+          "location": [
+            "AISafetyAtlas/Logic.lean",
+            73
+          ]
+        }
+      ],
+      "modules": [],
+      "realized": true,
+      "statability": null,
+      "missing": [],
+      "escape_routes": []
+    },
+    "BY-016": {
+      "id": "BY-016",
+      "name": "Undefinability",
+      "claim": "Truth for a sufficiently expressive formal language is not definable within that language under the source's hypotheses.",
+      "tags": [
+        "provability-logic"
+      ],
+      "declarations": [
+        {
+          "name": "AISafetyAtlas.Logic.tarski_undefinability",
+          "location": [
+            "AISafetyAtlas/Logic.lean",
+            117
+          ]
+        }
+      ],
+      "modules": [],
+      "realized": true,
+      "statability": null,
+      "missing": [],
+      "escape_routes": []
+    },
+    "BY-017": {
+      "id": "BY-017",
+      "name": "Unsurveyability",
+      "claim": "Some proofs may exceed feasible human survey or comprehension even when mechanically checkable.",
+      "tags": [
+        "interpretability"
+      ],
+      "declarations": [],
+      "modules": [],
+      "realized": false,
+      "statability": "UNTRIAGED",
+      "missing": [],
+      "escape_routes": []
+    },
+    "BY-018": {
+      "id": "BY-018",
+      "name": "Unlearnability",
+      "claim": "Learning can be undecidable or computationally infeasible for specified concept classes and learning models.",
+      "tags": [
+        "learning-theory",
+        "computability"
+      ],
+      "declarations": [],
+      "modules": [],
+      "realized": false,
+      "statability": "UNTRIAGED",
+      "missing": [],
+      "escape_routes": []
+    },
+    "BY-019": {
+      "id": "BY-019",
+      "name": "Unpredictability of rational agents",
+      "claim": "No predictor can universally forecast the behaviour of rational agents in the cited strategic settings.",
+      "tags": [
+        "multi-agent",
+        "decision-theory"
+      ],
+      "declarations": [],
+      "modules": [],
+      "realized": false,
+      "statability": "UNTRIAGED",
+      "missing": [],
+      "escape_routes": []
+    },
+    "BY-020": {
+      "id": "BY-020",
+      "name": "No Free Lunch — supervised learning",
+      "claim": "Averaged uniformly over target functions, learning algorithms have no universal performance advantage.",
+      "tags": [
+        "learning-theory"
+      ],
+      "declarations": [
+        {
+          "name": "AISafetyAtlas.Learning.no_free_lunch_supervised",
+          "location": [
+            "AISafetyAtlas/Learning.lean",
+            372
+          ]
+        },
+        {
+          "name": "AISafetyAtlas.Learning.lossConfig_sum_learner_indep",
+          "location": [
+            "AISafetyAtlas/Learning.lean",
+            444
+          ]
+        },
+        {
+          "name": "AISafetyAtlas.Learning.ots_error_distribution_learner_indep",
+          "location": [
+            "AISafetyAtlas/Learning.lean",
+            500
+          ]
+        },
+        {
+          "name": "AISafetyAtlas.Learning.homogeneous_of_learner_indep",
+          "location": [
+            "AISafetyAtlas/Learning.lean",
+            839
+          ]
+        },
+        {
+          "name": "AISafetyAtlas.Learning.homogeneous_iff_learner_indep",
+          "location": [
+            "AISafetyAtlas/Learning.lean",
+            886
+          ]
+        }
+      ],
+      "modules": [
+        "AISafetyAtlas.Learning"
+      ],
+      "realized": true,
+      "statability": null,
+      "missing": [],
+      "escape_routes": []
+    },
+    "BY-021": {
+      "id": "BY-021",
+      "name": "No Free Lunch — optimization",
+      "claim": "Averaged uniformly over objective functions, optimization algorithms have equal aggregate performance.",
+      "tags": [
+        "learning-theory"
+      ],
+      "declarations": [
+        {
+          "name": "AISafetyAtlas.Learning.nfl_adaptive_iff_permInvariant",
+          "location": [
+            "AISafetyAtlas/Learning/Sharp.lean",
+            822
+          ]
+        },
+        {
+          "name": "AISafetyAtlas.Learning.nfl_mixture_of_permInvariant",
+          "location": [
+            "AISafetyAtlas/Learning/Sharp.lean",
+            604
+          ]
+        },
+        {
+          "name": "AISafetyAtlas.Learning.nfl_stochastic_of_permInvariant",
+          "location": [
+            "AISafetyAtlas/Learning/Sharp.lean",
+            485
+          ]
+        },
+        {
+          "name": "AISafetyAtlas.Combinatorics.card_closedUnderPermutation_nonempty",
+          "location": [
+            "AISafetyAtlas/Combinatorics/PermInvariance.lean",
+            323
+          ]
+        },
+        {
+          "name": "AISafetyAtlas.Combinatorics.exists_perm_rel_not_iff",
+          "location": [
+            "AISafetyAtlas/Combinatorics/PermInvariance.lean",
+            453
+          ]
+        },
+        {
+          "name": "AISafetyAtlas.Learning.no_free_lunch",
+          "location": [
+            "AISafetyAtlas/Learning.lean",
+            188
+          ]
+        },
+        {
+          "name": "AISafetyAtlas.Learning.no_free_lunch_adaptive",
+          "location": [
+            "AISafetyAtlas/Learning.lean",
+            680
+          ]
+        },
+        {
+          "name": "AISafetyAtlas.Learning.nfl_adaptive_of_permInvariant",
+          "location": [
+            "AISafetyAtlas/Learning/Sharp.lean",
+            325
+          ]
+        },
+        {
+          "name": "AISafetyAtlas.Combinatorics.basisClass_histogram_eq_permOrbit",
+          "location": [
+            "AISafetyAtlas/Combinatorics/PermInvariance.lean",
+            142
+          ]
+        },
+        {
+          "name": "AISafetyAtlas.Learning.exists_observed_eq",
+          "location": [
+            "AISafetyAtlas/Learning/Sharp.lean",
+            667
+          ]
+        },
+        {
+          "name": "AISafetyAtlas.Learning.card_observed_eq",
+          "location": [
+            "AISafetyAtlas/Learning/Sharp.lean",
+            689
+          ]
+        },
+        {
+          "name": "AISafetyAtlas.Learning.closedUnderPermutation_of_permInvariant",
+          "location": [
+            "AISafetyAtlas/Learning/Sharp.lean",
+            889
+          ]
+        },
+        {
+          "name": "AISafetyAtlas.Learning.no_free_lunch_adaptive_of_sharp",
+          "location": [
+            "AISafetyAtlas/Learning/Sharp.lean",
+            400
+          ]
+        },
+        {
+          "name": "AISafetyAtlas.Learning.closedUnderPermutation_of_nfl",
+          "location": [
+            "AISafetyAtlas/Learning/Sharp.lean",
+            905
+          ]
+        },
+        {
+          "name": "AISafetyAtlas.Learning.ruleVisit_permRule",
+          "location": [
+            "AISafetyAtlas/Learning/Sharp.lean",
+            264
+          ]
+        },
+        {
+          "name": "AISafetyAtlas.Learning.observed_permRule",
+          "location": [
+            "AISafetyAtlas/Learning/Sharp.lean",
+            235
+          ]
+        },
+        {
+          "name": "AISafetyAtlas.Learning.nfl_iff_permInvariant",
+          "location": [
+            "AISafetyAtlas/Learning/Sharp.lean",
+            798
+          ]
+        },
+        {
+          "name": "AISafetyAtlas.Learning.nfl_of_permInvariant",
+          "location": [
+            "AISafetyAtlas/Learning/Sharp.lean",
+            185
+          ]
+        },
+        {
+          "name": "AISafetyAtlas.Learning.permInvariant_of_nfl",
+          "location": [
+            "AISafetyAtlas/Learning/Sharp.lean",
+            760
+          ]
+        },
+        {
+          "name": "AISafetyAtlas.Learning.permInvariant_of_closedUnderPermutation",
+          "location": [
+            "AISafetyAtlas/Learning/Sharp.lean",
+            852
+          ]
+        },
+        {
+          "name": "AISafetyAtlas.Learning.no_free_lunch_embedding_of_sharp",
+          "location": [
+            "AISafetyAtlas/Learning/Sharp.lean",
+            921
+          ]
+        }
+      ],
+      "modules": [
+        "AISafetyAtlas.Learning",
+        "AISafetyAtlas.Learning.Sharp"
+      ],
+      "realized": true,
+      "statability": null,
+      "missing": [],
+      "escape_routes": []
+    },
+    "BY-022": {
+      "id": "BY-022",
+      "name": "Free lunches in continuous spaces and coevolution",
+      "claim": "The cited results identify settings where standard no-free-lunch symmetry fails.",
+      "tags": [
+        "learning-theory"
+      ],
+      "declarations": [],
+      "modules": [],
+      "realized": false,
+      "statability": "UNTRIAGED",
+      "missing": [],
+      "escape_routes": []
+    },
+    "BY-023": {
+      "id": "BY-023",
+      "name": "Unidentifiability",
+      "claim": "Observational data can be compatible with multiple latent, causal, or generative explanations.",
+      "tags": [
+        "preference-inference",
+        "learning-theory"
+      ],
+      "declarations": [],
+      "modules": [],
+      "realized": false,
+      "statability": "UNTRIAGED",
+      "missing": [],
+      "escape_routes": []
+    },
+    "BY-024": {
+      "id": "BY-024",
+      "name": "Physical limits on inference",
+      "claim": "Embedded physical inference devices face limits on prediction, observation, and mutual control.",
+      "tags": [
+        "information-theory"
+      ],
+      "declarations": [],
+      "modules": [
+        "AISafetyAtlas.Inference"
+      ],
+      "realized": true,
+      "statability": null,
+      "missing": [],
+      "escape_routes": []
+    },
+    "BY-025": {
+      "id": "BY-025",
+      "name": "Uncontainability",
+      "claim": "Perfect containment of a superintelligent program is undecidable in the formal model used by the source.",
+      "tags": [
+        "computability",
+        "verification"
+      ],
+      "declarations": [],
+      "modules": [],
+      "realized": false,
+      "statability": "UNTRIAGED",
+      "missing": [],
+      "escape_routes": []
+    },
+    "BY-026": {
+      "id": "BY-026",
+      "name": "Uninterruptibility",
+      "claim": "Available interruption proposals guarantee safe interruptibility only under restricted assumptions.",
+      "tags": [
+        "agent-incentives"
+      ],
+      "declarations": [],
+      "modules": [],
+      "realized": false,
+      "statability": "UNTRIAGED",
+      "missing": [],
+      "escape_routes": []
+    },
+    "BY-027": {
+      "id": "BY-027",
+      "name": "Löb's theorem (unverifiability)",
+      "claim": "Löb's theorem: if a sufficiently strong formal system T proves Prov_T(σ) → σ, then T already proves σ (under the source's arithmetic hypotheses).",
+      "tags": [
+        "provability-logic",
+        "verification"
+      ],
+      "declarations": [
+        {
+          "name": "AISafetyAtlas.Logic.loeb",
+          "location": [
+            "AISafetyAtlas/Logic.lean",
+            134
+          ]
+        }
+      ],
+      "modules": [],
+      "realized": true,
+      "statability": null,
+      "missing": [],
+      "escape_routes": []
+    },
+    "BY-028": {
+      "id": "BY-028",
+      "name": "Unpredictability of superhuman AI",
+      "claim": "A strictly less capable predictor cannot accurately predict every action of a more capable agent under the source's definitions.",
+      "tags": [
+        "multi-agent"
+      ],
+      "declarations": [],
+      "modules": [],
+      "realized": false,
+      "statability": "UNTRIAGED",
+      "missing": [],
+      "escape_routes": []
+    },
+    "BY-029": {
+      "id": "BY-029",
+      "name": "Unexplainability",
+      "claim": "The cited argument links complete AI explanation to proof, truth, and model-access assumptions.",
+      "tags": [
+        "interpretability"
+      ],
+      "declarations": [],
+      "modules": [],
+      "realized": false,
+      "statability": "UNTRIAGED",
+      "missing": [],
+      "escape_routes": []
+    },
+    "BY-030": {
+      "id": "BY-030",
+      "name": "Incomprehensibility",
+      "claim": "Some correct computations or explanations cannot be comprehended by a bounded verifier under the cited formalizations and assumptions.",
+      "tags": [
+        "interpretability"
+      ],
+      "declarations": [],
+      "modules": [],
+      "realized": false,
+      "statability": "UNTRIAGED",
+      "missing": [],
+      "escape_routes": []
+    },
+    "BY-031": {
+      "id": "BY-031",
+      "name": "k-incomprehensibility",
+      "claim": "The cited source defines intelligence and comprehension limits using an intensional Kolmogorov-complexity variant.",
+      "tags": [
+        "interpretability",
+        "algorithmic-information"
+      ],
+      "declarations": [],
+      "modules": [],
+      "realized": false,
+      "statability": "UNTRIAGED",
+      "missing": [],
+      "escape_routes": []
+    },
+    "BY-032": {
+      "id": "BY-032",
+      "name": "Unverifiability",
+      "claim": "A universal verifier for arbitrary computations cannot satisfy the cited completeness and correctness requirements.",
+      "tags": [
+        "verification"
+      ],
+      "declarations": [],
+      "modules": [],
+      "realized": false,
+      "statability": "UNTRIAGED",
+      "missing": [],
+      "escape_routes": []
+    },
+    "BY-033": {
+      "id": "BY-033",
+      "name": "Unverifiability of robot ethics",
+      "claim": "Theorem 1 (van Leeuwen & Wiedermann 2021): for any non-trivial robot property P there is no algorithmic procedure that tells, for an arbitrary robot with potentially unbounded memory, whether its actions always satisfy P. Corollary 1: same conclusion restricted to robots programmed by structured programs. (Paper Def. 3 defines non-triviality via a switchable base program pair; ethics/legality are motivating instances, not the only P.)",
+      "tags": [
+        "verification",
+        "ethics"
+      ],
+      "declarations": [
+        {
+          "name": "AISafetyAtlas.Verification.Robot.action_safety_unverifiable",
+          "location": [
+            "AISafetyAtlas/Verification/Robot.lean",
+            155
+          ]
+        }
+      ],
+      "modules": [
+        "AISafetyAtlas.Verification.Robot"
+      ],
+      "realized": true,
+      "statability": null,
+      "missing": [],
+      "escape_routes": []
+    },
+    "BY-034": {
+      "id": "BY-034",
+      "name": "Intractability of bottom-up ethics",
+      "claim": "Computational complexity obstructs exhaustive bottom-up evaluation of ethically relevant action consequences.",
+      "tags": [
+        "computational-complexity",
+        "ethics"
+      ],
+      "declarations": [],
+      "modules": [],
+      "realized": false,
+      "statability": "UNTRIAGED",
+      "missing": [],
+      "escape_routes": []
+    },
+    "BY-035": {
+      "id": "BY-035",
+      "name": "No-flattening theorems for deep learning",
+      "claim": "Some functions efficiently represented by deep networks require inefficiently large shallow representations.",
+      "tags": [
+        "computational-complexity",
+        "learning-theory"
+      ],
+      "declarations": [],
+      "modules": [],
+      "realized": false,
+      "statability": "TRIAGED_DISTINCT",
+      "missing": [],
+      "escape_routes": []
+    },
+    "BY-036": {
+      "id": "BY-036",
+      "name": "Efficiency of computing Boolean functions for multilayered perceptrons",
+      "claim": "The cited report constrains which Boolean functions multilayer perceptrons compute efficiently.",
+      "tags": [
+        "computational-complexity",
+        "learning-theory"
+      ],
+      "declarations": [],
+      "modules": [],
+      "realized": false,
+      "statability": "UNTRIAGED",
+      "missing": [],
+      "escape_routes": []
+    },
+    "BY-037": {
+      "id": "BY-037",
+      "name": "Goodhart's law (Strathern)",
+      "claim": "When a measure becomes a target, optimization pressure can destroy its value as a measure.",
+      "tags": [
+        "agent-incentives"
+      ],
+      "declarations": [],
+      "modules": [],
+      "realized": false,
+      "statability": "CANDIDATE_LEAD",
+      "missing": [],
+      "escape_routes": []
+    },
+    "BY-038": {
+      "id": "BY-038",
+      "name": "Campbell's law",
+      "claim": "Heavy decision use of a quantitative indicator creates pressure that corrupts the indicator and represented process.",
+      "tags": [
+        "agent-incentives"
+      ],
+      "declarations": [],
+      "modules": [],
+      "realized": false,
+      "statability": "UNTRIAGED",
+      "missing": [],
+      "escape_routes": []
+    },
+    "BY-039": {
+      "id": "BY-039",
+      "name": "Reward corruption unsolvability",
+      "claim": "No agent can in general distinguish all reward-channel corruption from genuine reward without additional assumptions.",
+      "tags": [
+        "agent-incentives"
+      ],
+      "declarations": [
+        {
+          "name": "AISafetyAtlas.Wireheading.CRMDP.Model.everitt_theorem_eleven",
+          "location": [
+            "AISafetyAtlas/Wireheading/CRMDP.lean",
+            338
+          ]
+        }
+      ],
+      "modules": [
+        "AISafetyAtlas.Wireheading.CRMDP"
+      ],
+      "realized": true,
+      "statability": null,
+      "missing": [],
+      "escape_routes": []
+    },
+    "BY-040": {
+      "id": "BY-040",
+      "name": "Uncontrollability of AI",
+      "claim": "Perfect explicit control of advanced AI fails in the source's degenerate self-referential conditions.",
+      "tags": [
+        "control-theory",
+        "verification"
+      ],
+      "declarations": [],
+      "modules": [],
+      "realized": false,
+      "statability": "UNTRIAGED",
+      "missing": [],
+      "escape_routes": []
+    },
+    "BY-041": {
+      "id": "BY-041",
+      "name": "Impossibility of unambiguous communication",
+      "claim": "Unambiguous communication is impossible under the source's strict assumptions about language and interpretation.",
+      "tags": [
+        "information-theory",
+        "multi-agent"
+      ],
+      "declarations": [],
+      "modules": [],
+      "realized": false,
+      "statability": "UNTRIAGED",
+      "missing": [],
+      "escape_routes": []
+    },
+    "BY-042": {
+      "id": "BY-042",
+      "name": "Unfairness of explainability",
+      "claim": "A verifier and a decision-maker have structurally unequal strategic positions when explanations omit the full execution trace.",
+      "tags": [
+        "interpretability",
+        "multi-agent"
+      ],
+      "declarations": [],
+      "modules": [],
+      "realized": false,
+      "statability": "UNTRIAGED",
+      "missing": [],
+      "escape_routes": []
+    },
+    "BY-043": {
+      "id": "BY-043",
+      "name": "Misaligned embodiment",
+      "claim": "Mistakenly cloned self-interested agents cannot perfectly control one another in the survey's model.",
+      "tags": [
+        "multi-agent",
+        "compositionality"
+      ],
+      "declarations": [
+        {
+          "name": "AISafetyAtlas.Compositional.Symmetry.Protocol.no_unique_leader_from_symmetric_start",
+          "location": [
+            "AISafetyAtlas/Compositional/Symmetry.lean",
+            96
+          ]
+        }
+      ],
+      "modules": [
+        "AISafetyAtlas.Compositional.Symmetry"
+      ],
+      "realized": true,
+      "statability": null,
+      "missing": [],
+      "escape_routes": []
+    },
+    "BY-044": {
+      "id": "BY-044",
+      "name": "Limited self-awareness",
+      "claim": "An agent cannot be perfectly self-aware across the survey's defined operational boundaries.",
+      "tags": [
+        "interpretability"
+      ],
+      "declarations": [
+        {
+          "name": "AISafetyAtlas.SelfAwareness.Model.not_aware_of_le",
+          "location": [
+            "AISafetyAtlas/SelfAwareness.lean",
+            148
+          ]
+        },
+        {
+          "name": "AISafetyAtlas.SelfAwareness.Model.process_not_self_aware",
+          "location": [
+            "AISafetyAtlas/SelfAwareness.lean",
+            163
+          ]
+        },
+        {
+          "name": "AISafetyAtlas.SelfAwareness.Model.not_agentAware_of_maximal",
+          "location": [
+            "AISafetyAtlas/SelfAwareness.lean",
+            175
+          ]
+        },
+        {
+          "name": "AISafetyAtlas.SelfAwareness.Model.limited_self_awareness",
+          "location": [
+            "AISafetyAtlas/SelfAwareness.lean",
+            196
+          ]
+        },
+        {
+          "name": "AISafetyAtlas.SelfAwareness.Model.not_perfectlySelfAware",
+          "location": [
+            "AISafetyAtlas/SelfAwareness.lean",
+            207
+          ]
+        }
+      ],
+      "modules": [
+        "AISafetyAtlas.SelfAwareness"
+      ],
+      "realized": true,
+      "statability": null,
+      "missing": [],
+      "escape_routes": [
+        {
+          "axis": "ADD_RESOURCE",
+          "status": "NAMED_ONLY"
+        }
+      ]
+    },
+    "CLM-LAWVERE-001": {
+      "id": "CLM-LAWVERE-001",
+      "name": "Lawvere fixed-point theorem (types and functions)",
+      "claim": "If a function f : α → (α → β) is surjective, then every endofunction g : β → β has a fixed point.",
+      "tags": [
+        "computability",
+        "provability-logic"
+      ],
+      "declarations": [
+        {
+          "name": "AISafetyAtlas.Logic.lawvere_fixed_point",
+          "location": [
+            "AISafetyAtlas/Logic.lean",
+            46
+          ]
+        }
+      ],
+      "modules": [],
+      "realized": true,
+      "statability": null,
+      "missing": [],
+      "escape_routes": []
+    },
+    "CLM-LAWVERE-CCC-001": {
+      "id": "CLM-LAWVERE-CCC-001",
+      "name": "Lawvere fixed-point theorem (Cartesian closed categories)",
+      "claim": "In a Cartesian closed category, if there are an object A and a weakly point-surjective morphism A → Y^A, then every endomorphism Y → Y has a fixed point.",
+      "tags": [
+        "computability",
+        "provability-logic"
+      ],
+      "declarations": [],
+      "modules": [],
+      "realized": false,
+      "statability": "TRIAGED_DISTINCT",
+      "missing": [],
+      "escape_routes": []
+    },
+    "CLM-WOLPERT-APPROX-001": {
+      "id": "CLM-WOLPERT-APPROX-001",
+      "name": "Bounds on inference accuracy, and the collapse of the exact limits",
+      "claim": "A target attaining at least three values is weakly inferred by some device, which is the hypothesis the 2008 corollary omits and the 2018 restatement supplies. Covariance accuracy is bounded below by a term depending only on the number of target values times the device's inference power, so for a binary target it is never negative. Under that accuracy both the mutual-inference theorem and the strong-inference inheritance theorem hold only exactly: two setup-distinguishable devices can each infer the other to within any positive epsilon, and a device can strongly infer another that infers a target almost perfectly while itself inferring that target with accuracy exactly zero.",
+      "tags": [
+        "information-theory"
+      ],
+      "declarations": [
+        {
+          "name": "AISafetyAtlas.Inference.identityDevice_weaklyInfers",
+          "location": [
+            "AISafetyAtlas/Inference/Existence.lean",
+            81
+          ]
+        },
+        {
+          "name": "AISafetyAtlas.Inference.exists_weaklyInfers_of_three_values",
+          "location": [
+            "AISafetyAtlas/Inference/Existence.lean",
+            118
+          ]
+        },
+        {
+          "name": "AISafetyAtlas.Inference.inferenceAccuracy_ge",
+          "location": [
+            "AISafetyAtlas/Inference/Stochastic/Bounds.lean",
+            83
+          ]
+        },
+        {
+          "name": "AISafetyAtlas.Inference.fig5_accuracy_gap",
+          "location": [
+            "AISafetyAtlas/Inference/Stochastic/Approximation.lean",
+            523
+          ]
+        },
+        {
+          "name": "AISafetyAtlas.Inference.exists_distinguishable_accuracy_near_one",
+          "location": [
+            "AISafetyAtlas/Inference/Stochastic/Approximation.lean",
+            321
+          ]
+        }
+      ],
+      "modules": [
+        "AISafetyAtlas.Inference.Existence"
+      ],
+      "realized": true,
+      "statability": null,
+      "missing": [],
+      "escape_routes": []
+    },
+    "CLM-WOLPERT-EPISTEMIC-001": {
+      "id": "CLM-WOLPERT-EPISTEMIC-001",
+      "name": "Epistemic consequences of physical knowledge",
+      "claim": "For Wolpert's physical-knowledge predicate, knowledge is truth-preserving under the stated context-refinement hypotheses but is not logically omniscient: known premises can force a consequence to be true without making it known. Distinguishability also prevents mutual knowledge of conclusions and, under the Corollary 24 hypotheses, forces at least three inequivalent binary targets to remain unknown.",
+      "tags": [
+        "interpretability",
+        "provability-logic"
+      ],
+      "declarations": [
+        {
+          "name": "AISafetyAtlas.Inference.corollary20_ii",
+          "location": [
+            "AISafetyAtlas/Inference/PhysicalKnowledge/Epistemic.lean",
+            82
+          ]
+        },
+        {
+          "name": "AISafetyAtlas.Inference.exists_three_inequivalent_not_weaklyInfers",
+          "location": [
+            "AISafetyAtlas/Inference/PhysicalKnowledge/Epistemic.lean",
+            387
+          ]
+        },
+        {
+          "name": "AISafetyAtlas.Inference.corollary23",
+          "location": [
+            "AISafetyAtlas/Inference/PhysicalKnowledge/Epistemic.lean",
+            418
+          ]
+        },
+        {
+          "name": "AISafetyAtlas.Inference.corollary24",
+          "location": [
+            "AISafetyAtlas/Inference/PhysicalKnowledge/Epistemic.lean",
+            449
+          ]
+        }
+      ],
+      "modules": [
+        "AISafetyAtlas.Inference.PhysicalKnowledge.Epistemic"
+      ],
+      "realized": true,
+      "statability": null,
+      "missing": [],
+      "escape_routes": []
+    },
+    "CLM-WOLPERT-KNOW-001": {
+      "id": "CLM-WOLPERT-KNOW-001",
+      "name": "Physical knowledge by inference devices",
+      "claim": "A device physically knows a realized target value over a set W when one selector of realized setup blocks answers every target probe correctly and has the required nonempty true/false intersections with W. This entails weak inference; on a W that refines a Boolean target it is truthful and cannot affirm both values; and every device has a Boolean target it physically knows at no value over any W.",
+      "tags": [
+        "interpretability"
+      ],
+      "declarations": [
+        {
+          "name": "AISafetyAtlas.Inference.PhysicallyKnows.weaklyInfers",
+          "location": [
+            "AISafetyAtlas/Inference/PhysicalKnowledge.lean",
+            146
+          ]
+        },
+        {
+          "name": "AISafetyAtlas.Inference.PhysicalKnowledgeWitness.eq_target_on_of_refinesOn",
+          "location": [
+            "AISafetyAtlas/Inference/PhysicalKnowledge.lean",
+            167
+          ]
+        },
+        {
+          "name": "AISafetyAtlas.Inference.physicallyKnows_false_iff_not_true",
+          "location": [
+            "AISafetyAtlas/Inference/PhysicalKnowledge.lean",
+            242
+          ]
+        },
+        {
+          "name": "AISafetyAtlas.Inference.not_physicallyKnows_true_and_false",
+          "location": [
+            "AISafetyAtlas/Inference/PhysicalKnowledge.lean",
+            273
+          ]
+        },
+        {
+          "name": "AISafetyAtlas.Inference.exists_never_physicallyKnown",
+          "location": [
+            "AISafetyAtlas/Inference/PhysicalKnowledge.lean",
+            287
+          ]
+        }
+      ],
+      "modules": [
+        "AISafetyAtlas.Inference.PhysicalKnowledge"
+      ],
+      "realized": true,
+      "statability": null,
+      "missing": [],
+      "escape_routes": []
+    }
+  },
+  "declaration_to_claim": {
+    "AISafetyAtlas.Combinatorics.basisClass_histogram_eq_permOrbit": "BY-021",
+    "AISafetyAtlas.Combinatorics.card_closedUnderPermutation_nonempty": "BY-021",
+    "AISafetyAtlas.Combinatorics.exists_perm_rel_not_iff": "BY-021",
+    "AISafetyAtlas.Compositional.Symmetry.Protocol.no_unique_leader_from_symmetric_start": "BY-043",
+    "AISafetyAtlas.Computability.halting_problem": "BY-014",
+    "AISafetyAtlas.Computability.halting_re": "BY-014",
+    "AISafetyAtlas.Computability.nonhalting_not_re": "BY-014",
+    "AISafetyAtlas.Computability.rice": "BY-012",
+    "AISafetyAtlas.Computability.rice_code_iff": "BY-012",
+    "AISafetyAtlas.Control.ashby_logVariety_ge": "BY-004",
+    "AISafetyAtlas.Control.ashby_logVariety_ge_mul": "BY-004",
+    "AISafetyAtlas.Control.ashby_variety_ge": "BY-004",
+    "AISafetyAtlas.Control.ashby_variety_ge_isSharp": "BY-004",
+    "AISafetyAtlas.Control.card_ceilDiv_le_admittedOutcomes": "BY-004",
+    "AISafetyAtlas.Control.card_le_mul_card_admittedOutcomes_mul": "BY-004",
+    "AISafetyAtlas.Control.condEntropy_ge_of_openLoopBound": "BY-005",
+    "AISafetyAtlas.Control.condEntropy_le_condEntropy_of_forall": "BY-005",
+    "AISafetyAtlas.Control.condEntropy_outcome_eq": "BY-004",
+    "AISafetyAtlas.Control.condMutualInfo_eq_zero_of_sensorLoss_eq_zero": "BY-005",
+    "AISafetyAtlas.Control.controlLoss_eq_condMutualInfo": "BY-005",
+    "AISafetyAtlas.Control.controlLoss_eq_entropy_noise_iff": "BY-005",
+    "AISafetyAtlas.Control.controlLoss_eq_mutualInfo_sub": "BY-005",
+    "AISafetyAtlas.Control.controlLoss_le_entropy_noise": "BY-005",
+    "AISafetyAtlas.Control.entropyReduction_le_condEntropy_form": "BY-005",
+    "AISafetyAtlas.Control.entropyReduction_le_iSup_openLoopReduction": "BY-005",
+    "AISafetyAtlas.Control.entropyReduction_le_of_condEntropy_ge": "BY-005",
+    "AISafetyAtlas.Control.entropyReduction_le_of_openLoopBound": "BY-005",
+    "AISafetyAtlas.Control.entropyReduction_le_openLoopMax": "BY-005",
+    "AISafetyAtlas.Control.entropy_ge_of_condEntropy_ge": "BY-004",
+    "AISafetyAtlas.Control.entropy_ge_of_sensor": "BY-004",
+    "AISafetyAtlas.Control.entropy_le_channelCapacity_of_complete": "BY-004",
+    "AISafetyAtlas.Control.entropy_noise_sub_controlLoss": "BY-005",
+    "AISafetyAtlas.Control.entropy_outcome_ge": "BY-004",
+    "AISafetyAtlas.Control.entropy_outcome_ge_of_strategy": "BY-004",
+    "AISafetyAtlas.Control.entropy_outcome_ge_sub_channelCapacity": "BY-004",
+    "AISafetyAtlas.Control.exists_entropyReduction_const_eq_iSup_openLoopReduction": "BY-005",
+    "AISafetyAtlas.Control.isPlant_plantOutcome": "BY-005",
+    "AISafetyAtlas.Control.kernelControlLoss_eq_sum": "BY-005",
+    "AISafetyAtlas.Control.measurable_plantOutcome": "BY-005",
+    "AISafetyAtlas.Control.minControlLoss_eq_entropy_noise_iff_of_attained": "BY-005",
+    "AISafetyAtlas.Control.minControlLoss_eq_sInf_condMutualInfo": "BY-005",
+    "AISafetyAtlas.Control.minControlLoss_eq_sInf_mutualInfo_sub": "BY-005",
+    "AISafetyAtlas.Control.minControlLoss_inputPolicies_attained": "BY-005",
+    "AISafetyAtlas.Control.minControlLoss_inputPolicies_eq_kernelMin": "BY-005",
+    "AISafetyAtlas.Control.minControlLoss_le": "BY-005",
+    "AISafetyAtlas.Control.minControlLoss_le_entropy_noise": "BY-005",
+    "AISafetyAtlas.Control.minControlLoss_nonneg": "BY-005",
+    "AISafetyAtlas.Control.mutualInfo_prod_eq_of_sensorLoss_eq_zero": "BY-005",
+    "AISafetyAtlas.Control.perfectlyObservable_iff_sensorLoss_eq_zero": "BY-005",
+    "AISafetyAtlas.Control.two_le_card_admittedOutcomes": "BY-004",
+    "AISafetyAtlas.Fairness.approx_perfect_prediction_or_equal_base_rates": "BY-010",
+    "AISafetyAtlas.Fairness.average_lower_bound": "BY-010",
+    "AISafetyAtlas.Fairness.exists_slack_function": "BY-010",
+    "AISafetyAtlas.Fairness.negativeScore_eq": "BY-010",
+    "AISafetyAtlas.Fairness.perfect_of_negativeScore_eq_zero": "BY-010",
+    "AISafetyAtlas.Fairness.perfect_prediction_or_equal_base_rates": "BY-010",
+    "AISafetyAtlas.Fairness.perfect_prediction_or_equal_base_rates_of_approx": "BY-010",
+    "AISafetyAtlas.Fairness.print_perfectPrediction_of_populated": "BY-010",
+    "AISafetyAtlas.Fairness.sum_score_eq_μ": "BY-010",
+    "AISafetyAtlas.Inference.PhysicalKnowledgeWitness.eq_target_on_of_refinesOn": "CLM-WOLPERT-KNOW-001",
+    "AISafetyAtlas.Inference.PhysicallyKnows.weaklyInfers": "CLM-WOLPERT-KNOW-001",
+    "AISafetyAtlas.Inference.corollary20_ii": "CLM-WOLPERT-EPISTEMIC-001",
+    "AISafetyAtlas.Inference.corollary23": "CLM-WOLPERT-EPISTEMIC-001",
+    "AISafetyAtlas.Inference.corollary24": "CLM-WOLPERT-EPISTEMIC-001",
+    "AISafetyAtlas.Inference.exists_distinguishable_accuracy_near_one": "CLM-WOLPERT-APPROX-001",
+    "AISafetyAtlas.Inference.exists_never_physicallyKnown": "CLM-WOLPERT-KNOW-001",
+    "AISafetyAtlas.Inference.exists_three_inequivalent_not_weaklyInfers": "CLM-WOLPERT-EPISTEMIC-001",
+    "AISafetyAtlas.Inference.exists_weaklyInfers_of_three_values": "CLM-WOLPERT-APPROX-001",
+    "AISafetyAtlas.Inference.fig5_accuracy_gap": "CLM-WOLPERT-APPROX-001",
+    "AISafetyAtlas.Inference.identityDevice_weaklyInfers": "CLM-WOLPERT-APPROX-001",
+    "AISafetyAtlas.Inference.inferenceAccuracy_ge": "CLM-WOLPERT-APPROX-001",
+    "AISafetyAtlas.Inference.not_physicallyKnows_true_and_false": "CLM-WOLPERT-KNOW-001",
+    "AISafetyAtlas.Inference.physicallyKnows_false_iff_not_true": "CLM-WOLPERT-KNOW-001",
+    "AISafetyAtlas.InformationTheory.channelCapacity_eq_of_card_eq_pow": "BY-004",
+    "AISafetyAtlas.InformationTheory.channelCapacity_eq_of_card_eq_two_pow": "BY-004",
+    "AISafetyAtlas.InformationTheory.channelCapacity_fun": "BY-004",
+    "AISafetyAtlas.InformationTheory.channelCapacity_prod": "BY-004",
+    "AISafetyAtlas.Learning.card_observed_eq": "BY-021",
+    "AISafetyAtlas.Learning.closedUnderPermutation_of_nfl": "BY-021",
+    "AISafetyAtlas.Learning.closedUnderPermutation_of_permInvariant": "BY-021",
+    "AISafetyAtlas.Learning.exists_observed_eq": "BY-021",
+    "AISafetyAtlas.Learning.homogeneous_iff_learner_indep": "BY-020",
+    "AISafetyAtlas.Learning.homogeneous_of_learner_indep": "BY-020",
+    "AISafetyAtlas.Learning.lossConfig_sum_learner_indep": "BY-020",
+    "AISafetyAtlas.Learning.nfl_adaptive_iff_permInvariant": "BY-021",
+    "AISafetyAtlas.Learning.nfl_adaptive_of_permInvariant": "BY-021",
+    "AISafetyAtlas.Learning.nfl_iff_permInvariant": "BY-021",
+    "AISafetyAtlas.Learning.nfl_mixture_of_permInvariant": "BY-021",
+    "AISafetyAtlas.Learning.nfl_of_permInvariant": "BY-021",
+    "AISafetyAtlas.Learning.nfl_stochastic_of_permInvariant": "BY-021",
+    "AISafetyAtlas.Learning.no_free_lunch": "BY-021",
+    "AISafetyAtlas.Learning.no_free_lunch_adaptive": "BY-021",
+    "AISafetyAtlas.Learning.no_free_lunch_adaptive_of_sharp": "BY-021",
+    "AISafetyAtlas.Learning.no_free_lunch_embedding_of_sharp": "BY-021",
+    "AISafetyAtlas.Learning.no_free_lunch_supervised": "BY-020",
+    "AISafetyAtlas.Learning.observed_permRule": "BY-021",
+    "AISafetyAtlas.Learning.ots_error_distribution_learner_indep": "BY-020",
+    "AISafetyAtlas.Learning.permInvariant_of_closedUnderPermutation": "BY-021",
+    "AISafetyAtlas.Learning.permInvariant_of_nfl": "BY-021",
+    "AISafetyAtlas.Learning.ruleVisit_permRule": "BY-021",
+    "AISafetyAtlas.Logic.chaitin_bound": "BY-015",
+    "AISafetyAtlas.Logic.chaitin_incompleteness": "BY-015",
+    "AISafetyAtlas.Logic.godel_first_incompleteness": "BY-013",
+    "AISafetyAtlas.Logic.godel_second_incompleteness": "BY-013",
+    "AISafetyAtlas.Logic.lawvere_fixed_point": "CLM-LAWVERE-001",
+    "AISafetyAtlas.Logic.loeb": "BY-027",
+    "AISafetyAtlas.Logic.tarski_undefinability": "BY-016",
+    "AISafetyAtlas.Oversight.not_forces_of_card_lt": "BY-004",
+    "AISafetyAtlas.Preference.OverrideModel.mixtureValue_rationalise": "BY-011",
+    "AISafetyAtlas.Preference.OverrideModel.rationalise_strictly_better": "BY-011",
+    "AISafetyAtlas.Preference.ReasonableLanguage.proposition_eight": "BY-011",
+    "AISafetyAtlas.Preference.ReasonableLanguage.proposition_seven": "BY-011",
+    "AISafetyAtlas.Preference.RegretModel.cannot_rule_out_half_maximal_regret": "BY-011",
+    "AISafetyAtlas.Preference.Source.ReasonableForF.proposition_eight": "BY-011",
+    "AISafetyAtlas.Preference.Source.ReasonableForF.proposition_seven": "BY-011",
+    "AISafetyAtlas.Preference.Source.ReasonableForF.theorem_two_conditional": "BY-011",
+    "AISafetyAtlas.Preference.consistent_rewards_eq_univ": "BY-011",
+    "AISafetyAtlas.Preference.degenerate_explanation_cheap": "BY-011",
+    "AISafetyAtlas.Preference.exists_planner": "BY-011",
+    "AISafetyAtlas.Preference.exists_reward": "BY-011",
+    "AISafetyAtlas.Preference.explanation_at_least_behaviour": "BY-011",
+    "AISafetyAtlas.Preference.explanation_complexity_eq_behaviour": "BY-011",
+    "AISafetyAtlas.Preference.greedy_rewardOf": "BY-011",
+    "AISafetyAtlas.Preference.neg_twin": "BY-011",
+    "AISafetyAtlas.SelfAwareness.Model.limited_self_awareness": "BY-044",
+    "AISafetyAtlas.SelfAwareness.Model.not_agentAware_of_maximal": "BY-044",
+    "AISafetyAtlas.SelfAwareness.Model.not_aware_of_le": "BY-044",
+    "AISafetyAtlas.SelfAwareness.Model.not_perfectlySelfAware": "BY-044",
+    "AISafetyAtlas.SelfAwareness.Model.process_not_self_aware": "BY-044",
+    "AISafetyAtlas.SocialChoice.Utility.arrow": "BY-007",
+    "AISafetyAtlas.SocialChoice.arrow": "BY-007",
+    "AISafetyAtlas.Verification.AgentBehavior.no_behavioral_safety_verifier": "BY-012",
+    "AISafetyAtlas.Verification.Robot.action_safety_unverifiable": "BY-033",
+    "AISafetyAtlas.Verification.rice": "BY-012",
+    "AISafetyAtlas.Wireheading.CRMDP.Model.everitt_theorem_eleven": "BY-039"
+  }
+}

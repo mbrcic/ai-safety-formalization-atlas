@@ -169,6 +169,10 @@ AISafetyAtlas.Causal.GoalDynamics::stepKernel_congr
 AISafetyAtlas.Causal.GoalDynamics::stepPMF_congr
 AISafetyAtlas.Causal.GoalDynamics::trajectoryLaw_congr
 AISafetyAtlas.Causal.GoalDynamics::trajectoryLaw_startState
+AISafetyAtlas.Causal.Knowability::behaviorEq_iff_behavior_eq
+AISafetyAtlas.Causal.Knowability::exists_behaviorEq_pair_of_not_knowable
+AISafetyAtlas.Causal.Knowability::knowable_of_determines_behavior
+AISafetyAtlas.Causal.Knowability::not_knowable_of_behaviorEq
 AISafetyAtlas.Causal.MarginClass::Model.cpt_mapRat
 AISafetyAtlas.Causal.MarginClass::Model.factor_mapRat
 AISafetyAtlas.Causal.MarginClass::Model.jointProb_mapRat
@@ -352,6 +356,9 @@ AISafetyAtlas.Combinatorics.PermInvariance::rel_diag_iff_of_permInvariant
 AISafetyAtlas.Combinatorics.PermInvariance::spectrum_eq_iff_histogram_eq
 AISafetyAtlas.Combinatorics.PermInvariance::spectrum_eq_iff_mem_permOrbit
 AISafetyAtlas.Combinatorics.PermInvariance::surjective_spectrum
+AISafetyAtlas.Compositional.Hyperproperties.Knowability::knowable_of_isSafetyPredicate
+AISafetyAtlas.Compositional.Hyperproperties.Knowability::not_isSafetyPredicate_of_realizedSet_collision
+AISafetyAtlas.Compositional.Hyperproperties.Knowability::not_knowable_of_realizedSet_collision
 AISafetyAtlas.Compositional.Hyperproperties.PrefixTopology::cone_empty
 AISafetyAtlas.Compositional.Hyperproperties.PrefixTopology::cone_union
 AISafetyAtlas.Compositional.Hyperproperties.PrefixTopology::dense_iff_hyperLiveness
@@ -377,6 +384,8 @@ AISafetyAtlas.Compositional.Hyperproperties::hypersafety_hyperliveness_decomposi
 AISafetyAtlas.Compositional.Hyperproperties::k_safety_iff_finite_self_composition
 AISafetyAtlas.Compositional.Hyperproperties::self_composition_is_safety
 AISafetyAtlas.Compositional.Hyperproperties::topological_decomposition
+AISafetyAtlas.Compositional.Knowability::knowable_runFor
+AISafetyAtlas.Compositional.Knowability::sameView_iff_view_eq
 AISafetyAtlas.Compositional.LocalContractBoundary::agreement_projections_univ
 AISafetyAtlas.Compositional.LocalContractBoundary::agreement_ssubset_product_of_projections
 AISafetyAtlas.Compositional.LocalContractBoundary::atMostOneTrace_bool_boundary
@@ -384,11 +393,21 @@ AISafetyAtlas.Compositional.LocalContractBoundary::atMostOneTrace_is_two_safety
 AISafetyAtlas.Compositional.LocalContractBoundary::not_exchangeClosed_agreement
 AISafetyAtlas.Compositional.LocalContractBoundary::not_isRectangle_agreement
 AISafetyAtlas.Compositional.LocalContractBoundary::not_pureTraceProperty_atMostOneTrace
+AISafetyAtlas.Compositional.NetworkTraces::electsLeader_witnessed_by_one_snapshot
+AISafetyAtlas.Compositional.NetworkTraces::no_unique_leader_from_obsTrace
+AISafetyAtlas.Compositional.NetworkTraces::not_electsLeader_of_fixedPointFree
+AISafetyAtlas.Compositional.NetworkTraces::not_knowable_node_of_fixedPointFree
+AISafetyAtlas.Compositional.NetworkTraces::obsTrace_automorphism
+AISafetyAtlas.Compositional.NetworkTraces::realizes_obsSystem
+AISafetyAtlas.Compositional.NetworkTraces::realizes_systemOf
+AISafetyAtlas.Compositional.Networks::invariant_iff_fixed
 AISafetyAtlas.Compositional.Networks::invariant_of_automorphism
 AISafetyAtlas.Compositional.Networks::invariant_of_constant
 AISafetyAtlas.Compositional.Networks::no_unique_leader_of_fixedPointFree
 AISafetyAtlas.Compositional.Networks::runFor_eq_of_view_eq
+AISafetyAtlas.Compositional.Networks::step_equivariant
 AISafetyAtlas.Compositional.Networks::step_invariant
+AISafetyAtlas.Compositional.Networks::step_semiconj
 AISafetyAtlas.Compositional.Rectangularity::ExchangeClosed.exchange_fst
 AISafetyAtlas.Compositional.Rectangularity::coordinateProjection_finitelySupported
 AISafetyAtlas.Compositional.Rectangularity::coordinate_product_iff_recombination_closed
@@ -539,6 +558,8 @@ AISafetyAtlas.Control.Purification::openLoopReductions_purifyMap
 AISafetyAtlas.Control.Purification::plantOutcome_purified
 AISafetyAtlas.Control.Purification::prodMk_purified
 AISafetyAtlas.Control.Purification::prod_dirac_eq_map
+AISafetyAtlas.Control.RegulationCheck::ashby_bound_of_columnsInjective
+AISafetyAtlas.Control.RegulationCheck::exists_columnsInjective_false_and_bound_fails
 AISafetyAtlas.Control.RequisiteVariety::condEntropy_outcome_eq
 AISafetyAtlas.Control.RequisiteVariety::entropy_ge_of_condEntropy_ge
 AISafetyAtlas.Control.RequisiteVariety::entropy_ge_of_sensor
@@ -848,6 +869,14 @@ AISafetyAtlas.Examples.Causal.StructuralModel::tinyCID_observations
 AISafetyAtlas.Examples.Causal.StructuralModel::tinyCID_singleDecision
 AISafetyAtlas.Examples.Causal.StructuralModel::tinyCID_utilities
 AISafetyAtlas.Examples.Causal.StructuralModel::utility_childless_has_teeth
+AISafetyAtlas.Examples.Control.RegulationCheck::identityColumn_achievedVariety
+AISafetyAtlas.Examples.Control.RegulationCheck::identityColumn_columnsInjective
+AISafetyAtlas.Examples.Control.RegulationCheck::latinSquare_achievedVariety
+AISafetyAtlas.Examples.Control.RegulationCheck::latinSquare_columnsInjective
+AISafetyAtlas.Examples.Control.RegulationCheck::repeatedColumn_bound_fails
+AISafetyAtlas.Examples.Control.RegulationCheck::repeatedColumn_columnsInjective
+AISafetyAtlas.Examples.Control.RegulationCheck::wideTable_achievedVariety
+AISafetyAtlas.Examples.Control.RegulationCheck::wideTable_columnsInjective
 AISafetyAtlas.Examples.Fairness.ApproximateRiskAssignment::mixedBins_calibrated
 AISafetyAtlas.Examples.Fairness.ApproximateRiskAssignment::mixedBins_mu_lt_N
 AISafetyAtlas.Examples.Fairness.ApproximateRiskAssignment::mixedBins_mu_pos
@@ -882,6 +911,7 @@ AISafetyAtlas.Examples.Fairness.RiskAssignment::equalRates_balancedPositive
 AISafetyAtlas.Examples.Fairness.RiskAssignment::equalRates_calibrated
 AISafetyAtlas.Examples.Fairness.RiskAssignment::equalRates_conclusion
 AISafetyAtlas.Examples.Fairness.RiskAssignment::equalRates_equalBaseRates
+AISafetyAtlas.Examples.Fairness.RiskAssignment::equalRates_escape
 AISafetyAtlas.Examples.Fairness.RiskAssignment::equalRates_mu_lt_N
 AISafetyAtlas.Examples.Fairness.RiskAssignment::equalRates_mu_pos
 AISafetyAtlas.Examples.Fairness.RiskAssignment::equalRates_not_perfect
@@ -890,6 +920,7 @@ AISafetyAtlas.Examples.Fairness.RiskAssignment::perfect_balancedNegative
 AISafetyAtlas.Examples.Fairness.RiskAssignment::perfect_balancedPositive
 AISafetyAtlas.Examples.Fairness.RiskAssignment::perfect_calibrated
 AISafetyAtlas.Examples.Fairness.RiskAssignment::perfect_conclusion
+AISafetyAtlas.Examples.Fairness.RiskAssignment::perfect_escape
 AISafetyAtlas.Examples.Fairness.RiskAssignment::perfect_mu_lt_N
 AISafetyAtlas.Examples.Fairness.RiskAssignment::perfect_mu_pos
 AISafetyAtlas.Examples.Fairness.RiskAssignment::perfect_not_equalBaseRates
@@ -1509,6 +1540,8 @@ AISafetyAtlas.Knowledge.SelfReference::selfComplete_iff_subsingleton_rest
 AISafetyAtlas.Knowledge.Temporal::collisionAt_of_not_knowableAt
 AISafetyAtlas.Knowledge.Temporal::knowableFrom_mono
 AISafetyAtlas.Knowledge.Temporal::not_knowableAt_of_collisionAt
+AISafetyAtlas.Knowledge::Determines.refl
+AISafetyAtlas.Knowledge::Determines.trans
 AISafetyAtlas.Knowledge::Knowable.mono
 AISafetyAtlas.Knowledge::exists_witness_of_not_knowable
 AISafetyAtlas.Knowledge::knowable_id_iff_injective
@@ -1516,6 +1549,7 @@ AISafetyAtlas.Knowledge::knowable_iff_factorsThrough
 AISafetyAtlas.Knowledge::knowable_iff_no_collision
 AISafetyAtlas.Knowledge::not_knowable_comp
 AISafetyAtlas.Knowledge::not_knowable_of_collision
+AISafetyAtlas.Knowledge::not_knowable_of_invariant_transform
 AISafetyAtlas.Knowledge::not_knowable_of_witness
 AISafetyAtlas.Knowledge::not_knowable_state_of_nontrivial_remainder
 AISafetyAtlas.Learning.Sharp::card_observed_eq
@@ -1608,6 +1642,8 @@ AISafetyAtlas.Preference.Complexity::degenerate_explanation_cheap
 AISafetyAtlas.Preference.Complexity::encodeExplanation_injective
 AISafetyAtlas.Preference.Complexity::explanation_at_least_behaviour
 AISafetyAtlas.Preference.Complexity::explanation_complexity_eq_behaviour
+AISafetyAtlas.Preference.Knowability::knowable_reward_of_isEmpty_state
+AISafetyAtlas.Preference.Knowability::not_knowable_reward
 AISafetyAtlas.Preference.Override::exists_overridesFor
 AISafetyAtlas.Preference.Override::mixtureValue_rationalise
 AISafetyAtlas.Preference.Override::noopValue_lt_mixtureValue_rationalise

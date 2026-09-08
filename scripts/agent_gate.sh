@@ -79,6 +79,9 @@ python3 scripts/validate_registry.py
 echo "==> validate_conjectures"
 python3 scripts/validate_conjectures.py
 
+echo "==> validate_intake"
+python3 scripts/validate_intake.py
+
 echo "==> validate_tasks"
 python3 scripts/validate_tasks.py
 
@@ -185,6 +188,31 @@ fi
 
 echo "==> check_cited_declarations"
 python3 scripts/check_cited_declarations.py
+
+# `generate_declaration_index.py --check` is deliberately NOT here either, for
+# the same reason and with a fresher scar. The declaration index is the
+# elaborated environment eight checks in this gate resolve names against, and it
+# was found twenty commits stale while this gate reported green -- so it was
+# added here, first, to close that. It elaborates through `lake`, which this
+# gate's CI job does not install, and the very next push met
+# `FileNotFoundError: 'lake'` in twelve seconds. CI regenerates the index in the
+# Lean job and asserts the committed copy is current with `git diff
+# --exit-code`, which is the enforcement; a local run that wants the same answer
+# runs the generator, not this script.
+#
+# The residual hazard is real and is not closed by this file: a local
+# `agent_gate.sh` can still be green against a stale index. That is the same
+# trade the intake check makes below, and it is recorded rather than papered.
+
+# `check_intake_statements.py` is deliberately NOT here. It elaborates the
+# deposited statements through `lake env lean`, and this gate's contract is the
+# first line of this file: schema, generated views and path checks, no build.
+# It sat here for one commit on the reasoning that an empty lane costs nothing,
+# which was true and irrelevant: the CI job that runs this gate installs pytest
+# and nothing else, so the *first* real intake submission would have met a
+# missing `lake` rather than a verdict. It runs in the Lean job instead, beside
+# `check_print_axioms.py`, which is the established home for a check that needs
+# the build.
 
 echo "==> check_docs_paths"
 python3 scripts/check_docs_paths.py

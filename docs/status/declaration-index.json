@@ -3,7 +3,7 @@
   "generated_by": "scripts/generate_declaration_index.py",
   "note": "Declaration index walked from the elaborated environment, not from source text. Consumed by the prose checks so that a name resolves only when it is a real declaration.",
   "prefix": "AISafetyAtlas",
-  "count": 5965,
+  "count": 6675,
   "declarations": [
     {
       "name": "AISafetyAtlas",
@@ -919,6 +919,11 @@
       "name": "AISafetyAtlas.Causal.KernelEstimate",
       "kind": "def",
       "module": "AISafetyAtlas.Causal.Corruption"
+    },
+    {
+      "name": "AISafetyAtlas.Causal.Knowability",
+      "kind": "module",
+      "module": "AISafetyAtlas.Causal.Knowability"
     },
     {
       "name": "AISafetyAtlas.Causal.LocalIntervention",
@@ -2821,6 +2826,16 @@
       "module": "AISafetyAtlas.Causal.Model"
     },
     {
+      "name": "AISafetyAtlas.Causal.behavior",
+      "kind": "def",
+      "module": "AISafetyAtlas.Causal.Knowability"
+    },
+    {
+      "name": "AISafetyAtlas.Causal.behaviorEq_iff_behavior_eq",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Causal.Knowability"
+    },
+    {
       "name": "AISafetyAtlas.Causal.binaryDim",
       "kind": "def",
       "module": "AISafetyAtlas.Causal.Model"
@@ -3146,6 +3161,11 @@
       "module": "AISafetyAtlas.Causal.GoalDynamics"
     },
     {
+      "name": "AISafetyAtlas.Causal.exists_behaviorEq_pair_of_not_knowable",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Causal.Knowability"
+    },
+    {
       "name": "AISafetyAtlas.Causal.exists_isDeltaBounded_prescribing",
       "kind": "theorem",
       "module": "AISafetyAtlas.Causal.GoalDynamics"
@@ -3441,6 +3461,11 @@
       "module": "AISafetyAtlas.Causal.Model"
     },
     {
+      "name": "AISafetyAtlas.Causal.knowable_of_determines_behavior",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Causal.Knowability"
+    },
+    {
       "name": "AISafetyAtlas.Causal.le_pmfExpect",
       "kind": "theorem",
       "module": "AISafetyAtlas.Causal.Query"
@@ -3654,6 +3679,11 @@
       "name": "AISafetyAtlas.Causal.not_inIdentifiedSet_of_opposite_sign",
       "kind": "theorem",
       "module": "AISafetyAtlas.Causal.Decision"
+    },
+    {
+      "name": "AISafetyAtlas.Causal.not_knowable_of_behaviorEq",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Causal.Knowability"
     },
     {
       "name": "AISafetyAtlas.Causal.not_tolerantAt_of_common_corruption",
@@ -4146,6 +4176,11 @@
       "module": "AISafetyAtlas.Compositional.Hyperproperties"
     },
     {
+      "name": "AISafetyAtlas.Compositional.Hyperproperties.Knowability",
+      "kind": "module",
+      "module": "AISafetyAtlas.Compositional.Hyperproperties.Knowability"
+    },
+    {
       "name": "AISafetyAtlas.Compositional.Hyperproperties.Observation",
       "kind": "def",
       "module": "AISafetyAtlas.Compositional.Hyperproperties"
@@ -4251,9 +4286,24 @@
       "module": "AISafetyAtlas.Compositional.Hyperproperties.Product"
     },
     {
+      "name": "AISafetyAtlas.Compositional.Hyperproperties.knowable_of_isSafetyPredicate",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Compositional.Hyperproperties.Knowability"
+    },
+    {
       "name": "AISafetyAtlas.Compositional.Hyperproperties.mem_toBatch",
       "kind": "theorem",
       "module": "AISafetyAtlas.Compositional.Hyperproperties.Product"
+    },
+    {
+      "name": "AISafetyAtlas.Compositional.Hyperproperties.not_isSafetyPredicate_of_realizedSet_collision",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Compositional.Hyperproperties.Knowability"
+    },
+    {
+      "name": "AISafetyAtlas.Compositional.Hyperproperties.not_knowable_of_realizedSet_collision",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Compositional.Hyperproperties.Knowability"
     },
     {
       "name": "AISafetyAtlas.Compositional.Hyperproperties.padBatch",
@@ -4284,6 +4334,11 @@
       "name": "AISafetyAtlas.Compositional.Hyperproperties.productSelfComposition_empty",
       "kind": "theorem",
       "module": "AISafetyAtlas.Compositional.Hyperproperties.Product"
+    },
+    {
+      "name": "AISafetyAtlas.Compositional.Hyperproperties.realizedSet",
+      "kind": "def",
+      "module": "AISafetyAtlas.Compositional.Hyperproperties.Knowability"
     },
     {
       "name": "AISafetyAtlas.Compositional.Hyperproperties.selfCompositionSafe_empty_of_any",
@@ -4329,6 +4384,11 @@
       "name": "AISafetyAtlas.Compositional.IsRectangle",
       "kind": "def",
       "module": "AISafetyAtlas.Compositional.Rectangularity"
+    },
+    {
+      "name": "AISafetyAtlas.Compositional.Knowability",
+      "kind": "module",
+      "module": "AISafetyAtlas.Compositional.Knowability"
     },
     {
       "name": "AISafetyAtlas.Compositional.LocalContractBoundary",
@@ -4386,6 +4446,11 @@
       "module": "AISafetyAtlas.Compositional.LocalContractBoundary"
     },
     {
+      "name": "AISafetyAtlas.Compositional.NetworkTraces",
+      "kind": "module",
+      "module": "AISafetyAtlas.Compositional.NetworkTraces"
+    },
+    {
       "name": "AISafetyAtlas.Compositional.Networks",
       "kind": "module",
       "module": "AISafetyAtlas.Compositional.Networks"
@@ -4436,6 +4501,11 @@
       "module": "AISafetyAtlas.Compositional.Networks"
     },
     {
+      "name": "AISafetyAtlas.Compositional.Networks.ElectsLeader",
+      "kind": "def",
+      "module": "AISafetyAtlas.Compositional.NetworkTraces"
+    },
+    {
       "name": "AISafetyAtlas.Compositional.Networks.Invariant",
       "kind": "def",
       "module": "AISafetyAtlas.Compositional.Networks"
@@ -4456,8 +4526,33 @@
       "module": "AISafetyAtlas.Compositional.Networks"
     },
     {
+      "name": "AISafetyAtlas.Compositional.Networks.ObsTrace",
+      "kind": "def",
+      "module": "AISafetyAtlas.Compositional.NetworkTraces"
+    },
+    {
+      "name": "AISafetyAtlas.Compositional.Networks.Run",
+      "kind": "def",
+      "module": "AISafetyAtlas.Compositional.NetworkTraces"
+    },
+    {
       "name": "AISafetyAtlas.Compositional.Networks.SameView",
       "kind": "def",
+      "module": "AISafetyAtlas.Compositional.Networks"
+    },
+    {
+      "name": "AISafetyAtlas.Compositional.Networks.Snapshot",
+      "kind": "def",
+      "module": "AISafetyAtlas.Compositional.NetworkTraces"
+    },
+    {
+      "name": "AISafetyAtlas.Compositional.Networks.electsLeader_witnessed_by_one_snapshot",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Compositional.NetworkTraces"
+    },
+    {
+      "name": "AISafetyAtlas.Compositional.Networks.invariant_iff_fixed",
+      "kind": "theorem",
       "module": "AISafetyAtlas.Compositional.Networks"
     },
     {
@@ -4471,14 +4566,59 @@
       "module": "AISafetyAtlas.Compositional.Networks"
     },
     {
+      "name": "AISafetyAtlas.Compositional.Networks.knowable_runFor",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Compositional.Knowability"
+    },
+    {
+      "name": "AISafetyAtlas.Compositional.Networks.no_unique_leader_from_obsTrace",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Compositional.NetworkTraces"
+    },
+    {
       "name": "AISafetyAtlas.Compositional.Networks.no_unique_leader_of_fixedPointFree",
       "kind": "theorem",
       "module": "AISafetyAtlas.Compositional.Networks"
     },
     {
+      "name": "AISafetyAtlas.Compositional.Networks.not_electsLeader_of_fixedPointFree",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Compositional.NetworkTraces"
+    },
+    {
+      "name": "AISafetyAtlas.Compositional.Networks.not_knowable_node_of_fixedPointFree",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Compositional.NetworkTraces"
+    },
+    {
+      "name": "AISafetyAtlas.Compositional.Networks.obsSystem",
+      "kind": "def",
+      "module": "AISafetyAtlas.Compositional.NetworkTraces"
+    },
+    {
+      "name": "AISafetyAtlas.Compositional.Networks.obsTrace_automorphism",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Compositional.NetworkTraces"
+    },
+    {
+      "name": "AISafetyAtlas.Compositional.Networks.observedAt",
+      "kind": "def",
+      "module": "AISafetyAtlas.Compositional.NetworkTraces"
+    },
+    {
       "name": "AISafetyAtlas.Compositional.Networks.pathTo",
       "kind": "def",
       "module": "AISafetyAtlas.Compositional.Networks"
+    },
+    {
+      "name": "AISafetyAtlas.Compositional.Networks.realizes_obsSystem",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Compositional.NetworkTraces"
+    },
+    {
+      "name": "AISafetyAtlas.Compositional.Networks.realizes_systemOf",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Compositional.NetworkTraces"
     },
     {
       "name": "AISafetyAtlas.Compositional.Networks.runFor",
@@ -4491,14 +4631,49 @@
       "module": "AISafetyAtlas.Compositional.Networks"
     },
     {
+      "name": "AISafetyAtlas.Compositional.Networks.runOf",
+      "kind": "def",
+      "module": "AISafetyAtlas.Compositional.NetworkTraces"
+    },
+    {
+      "name": "AISafetyAtlas.Compositional.Networks.sameView_iff_view_eq",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Compositional.Knowability"
+    },
+    {
+      "name": "AISafetyAtlas.Compositional.Networks.stateAtRound",
+      "kind": "def",
+      "module": "AISafetyAtlas.Compositional.NetworkTraces"
+    },
+    {
       "name": "AISafetyAtlas.Compositional.Networks.step",
       "kind": "def",
+      "module": "AISafetyAtlas.Compositional.Networks"
+    },
+    {
+      "name": "AISafetyAtlas.Compositional.Networks.step_equivariant",
+      "kind": "theorem",
       "module": "AISafetyAtlas.Compositional.Networks"
     },
     {
       "name": "AISafetyAtlas.Compositional.Networks.step_invariant",
       "kind": "theorem",
       "module": "AISafetyAtlas.Compositional.Networks"
+    },
+    {
+      "name": "AISafetyAtlas.Compositional.Networks.step_semiconj",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Compositional.Networks"
+    },
+    {
+      "name": "AISafetyAtlas.Compositional.Networks.systemOf",
+      "kind": "def",
+      "module": "AISafetyAtlas.Compositional.NetworkTraces"
+    },
+    {
+      "name": "AISafetyAtlas.Compositional.Networks.view",
+      "kind": "def",
+      "module": "AISafetyAtlas.Compositional.Knowability"
     },
     {
       "name": "AISafetyAtlas.Compositional.RecombinationClosed",
@@ -5231,6 +5406,16 @@
       "module": "AISafetyAtlas.Conjectures.MAIS"
     },
     {
+      "name": "AISafetyAtlas.Conjectures.MAIS.A7Zeta",
+      "kind": "module",
+      "module": "AISafetyAtlas.Conjectures.MAIS.A7Zeta"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.A7ZetaVolumeBridge",
+      "kind": "def",
+      "module": "AISafetyAtlas.Conjectures.MAIS.A7Zeta"
+    },
+    {
       "name": "AISafetyAtlas.Conjectures.MAIS.BinaryOptimalAction",
       "kind": "def",
       "module": "AISafetyAtlas.Conjectures.MAIS.O31Chart"
@@ -5294,6 +5479,21 @@
       "name": "AISafetyAtlas.Conjectures.MAIS.HasLinearRecoveryModulus",
       "kind": "def",
       "module": "AISafetyAtlas.Conjectures.MAIS.Common"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.HasO77FiberPairAt",
+      "kind": "def",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O77"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.HasO77TwoSidedPairAt",
+      "kind": "def",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O77"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.HasO7PairAt",
+      "kind": "def",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O7"
     },
     {
       "name": "AISafetyAtlas.Conjectures.MAIS.HasRealFirstOrderRadius",
@@ -5404,6 +5604,56 @@
       "name": "AISafetyAtlas.Conjectures.MAIS.IsO70VolumeOrderTable",
       "kind": "def",
       "module": "AISafetyAtlas.Conjectures.MAIS.O70"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.IsO77AWValueStratumTable",
+      "kind": "def",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O77"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.IsO77FiberMinimumTable",
+      "kind": "def",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O77"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.IsO77FiberVolumeOrderTable",
+      "kind": "def",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O77"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.IsO77MaximumMultiplicityOnMinimizers",
+      "kind": "def",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O77"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.IsO77MinimizerCharacterization",
+      "kind": "def",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O77"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.IsO77RungTangent",
+      "kind": "def",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O77Proof"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.IsO77SaddleRungPoint",
+      "kind": "def",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O77"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.IsO77SourceFiberVolumeOrderTable",
+      "kind": "def",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O77"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.IsO7Counterexample",
+      "kind": "def",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O7"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.IsO7Critical",
+      "kind": "def",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O7"
     },
     {
       "name": "AISafetyAtlas.Conjectures.MAIS.IsPermutationMatrix",
@@ -5991,6 +6241,11 @@
       "module": "AISafetyAtlas.Conjectures.MAIS.O38"
     },
     {
+      "name": "AISafetyAtlas.Conjectures.MAIS.O7",
+      "kind": "module",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O7"
+    },
+    {
       "name": "AISafetyAtlas.Conjectures.MAIS.O70",
       "kind": "module",
       "module": "AISafetyAtlas.Conjectures.MAIS.O70"
@@ -6059,6 +6314,181 @@
       "name": "AISafetyAtlas.Conjectures.MAIS.O70ZetaPoleBridge",
       "kind": "def",
       "module": "AISafetyAtlas.Conjectures.MAIS.O70"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.O77",
+      "kind": "module",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O77"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.O77AllSaddlesHavePairOne",
+      "kind": "def",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O77"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.O77Chart",
+      "kind": "module",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O77Chart"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.O77FiberDependsOnRanksOnlyAtVolumeOrder",
+      "kind": "def",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O77"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.O77Proof",
+      "kind": "module",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O77Proof"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.O77RankStratum",
+      "kind": "inductive",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O77"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.O77RankStratum.Admissible",
+      "kind": "def",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O77"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.O77RankStratum.H",
+      "kind": "def",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O77"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.O77RankStratum.M",
+      "kind": "def",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O77"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.O77RankStratum.N",
+      "kind": "def",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O77"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.O77RankStratum.a",
+      "kind": "def",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O77"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.O77RankStratum.b",
+      "kind": "def",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O77"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.O77RankStratum.mk.inj",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O77"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.O77RankStratum.r",
+      "kind": "def",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O77"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.O77SpectralFrame",
+      "kind": "inductive",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O77"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.O77SpectralFrame.leftMode",
+      "kind": "def",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O77"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.O77SpectralFrame.left_orthonormal",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O77"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.O77SpectralFrame.mk.congr_simp",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Conjectures.MAIS.O77"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.O77SpectralFrame.mk.inj",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O77"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.O77SpectralFrame.rightMode",
+      "kind": "def",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O77"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.O77SpectralFrame.right_orthonormal",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O77"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.O77SpectralFrame.row",
+      "kind": "def",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O77Proof"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.O77SpectralFrame.singularValue",
+      "kind": "def",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O77"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.O77SpectralFrame.singularValue_pos",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O77"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.O77SpectralFrame.singularValue_strict",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O77"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.O77SpectralFrame.target",
+      "kind": "def",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O77"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.O77SpectralFrame.target_eq",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O77"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.O77SpectralFrame.target_eq_sum_row",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O77Proof"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.O77SpectralFrame.target_rank",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O77"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.O77SpectralFrame.truncation",
+      "kind": "def",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O77"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.O77SpectralFrame.truncation_eq_sum_row",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O77Proof"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.O7CounterexampleAtEveryScale",
+      "kind": "def",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O7"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.O7Proof",
+      "kind": "module",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O7Proof"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.O7RungInfimumAttained",
+      "kind": "def",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O7"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.O7Space",
+      "kind": "def",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O7"
     },
     {
       "name": "AISafetyAtlas.Conjectures.MAIS.RadiusTendsToZero",
@@ -6161,9 +6591,19 @@
       "module": "AISafetyAtlas.Conjectures.MAIS.O38"
     },
     {
+      "name": "AISafetyAtlas.Conjectures.MAIS.a7ZetaVolumeBridge_iff",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Conjectures.MAIS.A7Zeta"
+    },
+    {
       "name": "AISafetyAtlas.Conjectures.MAIS.admissible_self",
       "kind": "theorem",
       "module": "AISafetyAtlas.Conjectures.MAIS.O70"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.analyticAt_o77LossCoords",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O77Proof"
     },
     {
       "name": "AISafetyAtlas.Conjectures.MAIS.analyticAt_rrrLossCoords",
@@ -6286,6 +6726,11 @@
       "module": "AISafetyAtlas.Conjectures.MAIS.O31"
     },
     {
+      "name": "AISafetyAtlas.Conjectures.MAIS.centeredBandGerm_o7_origin_eq",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O7Proof"
+    },
+    {
       "name": "AISafetyAtlas.Conjectures.MAIS.chamberExponentNum",
       "kind": "def",
       "module": "AISafetyAtlas.Conjectures.MAIS.O70"
@@ -6326,6 +6771,36 @@
       "module": "AISafetyAtlas.Conjectures.MAIS.O31"
     },
     {
+      "name": "AISafetyAtlas.Conjectures.MAIS.contDiff_o77LossCoords",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O77Proof"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.continuous_residualAmplitude",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O7Proof"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.det_o77SaddleBlock_ne_zero",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O77Proof"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.dotProduct_mulVec_add_add",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O77Chart"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.dotProduct_mulVec_symm",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O77Chart"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.eq_zero_of_truncation_gram_eigen",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O77Proof"
+    },
+    {
       "name": "AISafetyAtlas.Conjectures.MAIS.etaStar",
       "kind": "def",
       "module": "AISafetyAtlas.Conjectures.MAIS.O33"
@@ -6346,9 +6821,64 @@
       "module": "AISafetyAtlas.Conjectures.MAIS.O31Chart"
     },
     {
+      "name": "AISafetyAtlas.Conjectures.MAIS.exists_chart_of_orthogonal",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O77Chart"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.exists_o77_block_coords",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O77Chart"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.exists_o77_block_matrix",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O77Chart"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.exists_o77_chart",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O77Chart"
+    },
+    {
       "name": "AISafetyAtlas.Conjectures.MAIS.exists_residualMinCost",
       "kind": "theorem",
       "module": "AISafetyAtlas.Conjectures.MAIS.O70"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.fderiv_comp_affine_eq_zero",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O77Chart"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.fderiv_comp_clm_smul_eq_zero",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O77Chart"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.fderiv_fderiv_comp_affine",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O77Chart"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.fderiv_fderiv_const_mul",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O77Chart"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.fderiv_fderiv_o77_chart_apply",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O77Chart"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.fderiv_o77LossCoords_eq_zero",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O77Chart"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.fderiv_o77_chart_eq_zero",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O77Chart"
     },
     {
       "name": "AISafetyAtlas.Conjectures.MAIS.fibreMass",
@@ -6356,9 +6886,44 @@
       "module": "AISafetyAtlas.Conjectures.MAIS.O29"
     },
     {
+      "name": "AISafetyAtlas.Conjectures.MAIS.finrank_o77BlockSubspace",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O77Proof"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.finrank_range_o77BlockMap",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O77Proof"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.frobeniusSq_rung_blockVariation",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O77Proof"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.frobeniusSq_rung_full_variation",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O77Proof"
+    },
+    {
       "name": "AISafetyAtlas.Conjectures.MAIS.half_le_boltzmannMinimaxRisk_of_collision",
       "kind": "theorem",
       "module": "AISafetyAtlas.Conjectures.MAIS.O29Experiment"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.hasLocalVolumeOrder_o7_factorization",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O7Proof"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.hasLocalVolumeOrder_o7_origin",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O7Proof"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.hasLocalVolumeOrder_o7_terminal",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O7Proof"
     },
     {
       "name": "AISafetyAtlas.Conjectures.MAIS.hasLocalVolumeOrder_residualGerm_table",
@@ -6391,6 +6956,11 @@
       "module": "AISafetyAtlas.Conjectures.MAIS.O70"
     },
     {
+      "name": "AISafetyAtlas.Conjectures.MAIS.instDecidableAdmissible_1",
+      "kind": "def",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O77"
+    },
+    {
       "name": "AISafetyAtlas.Conjectures.MAIS.instDecidableEqO31Coordinate",
       "kind": "def",
       "module": "AISafetyAtlas.Conjectures.MAIS.O31"
@@ -6409,6 +6979,16 @@
       "name": "AISafetyAtlas.Conjectures.MAIS.instDecidableEqO70RankStratum.decEq",
       "kind": "def",
       "module": "AISafetyAtlas.Conjectures.MAIS.O70"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.instDecidableEqO77RankStratum",
+      "kind": "def",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O77"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.instDecidableEqO77RankStratum.decEq",
+      "kind": "def",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O77"
     },
     {
       "name": "AISafetyAtlas.Conjectures.MAIS.instDecidableO31CoordinateCandidate",
@@ -6506,6 +7086,51 @@
       "module": "AISafetyAtlas.Conjectures.MAIS.O70"
     },
     {
+      "name": "AISafetyAtlas.Conjectures.MAIS.isO77FiberVolumeOrderTable_o77Pair",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O77Proof"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.isO77MinimizerCharacterization_o77Minimizers",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O77Proof"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.isO77RungTangent_iff_null",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O77Proof"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.isO77RungTangent_of_null",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O77Proof"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.isO77SaddleRungPoint_iff_critical",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O77Proof"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.isO77SaddleRungPoint_of_critical",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O77Proof"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.isO77SourceFiberVolumeOrderTable_o77Pair",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O77Proof"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.isO7Counterexample",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O7Proof"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.isO7Critical_iff",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O7Proof"
+    },
+    {
       "name": "AISafetyAtlas.Conjectures.MAIS.isSemialgebraicPlaneSet_empty",
       "kind": "theorem",
       "module": "AISafetyAtlas.Conjectures.MAIS.O27"
@@ -6516,9 +7141,19 @@
       "module": "AISafetyAtlas.Conjectures.MAIS.O27"
     },
     {
+      "name": "AISafetyAtlas.Conjectures.MAIS.isSymm_o77SaddleBlock",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O77Proof"
+    },
+    {
       "name": "AISafetyAtlas.Conjectures.MAIS.le_residualMinCost",
       "kind": "theorem",
       "module": "AISafetyAtlas.Conjectures.MAIS.O70"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.leftMode_dotProduct_truncation_mulVec",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O77Proof"
     },
     {
       "name": "AISafetyAtlas.Conjectures.MAIS.maisO23_marginsDoNotSuffice",
@@ -6621,6 +7256,11 @@
       "module": "AISafetyAtlas.Conjectures.MAIS.O38"
     },
     {
+      "name": "AISafetyAtlas.Conjectures.MAIS.matrixQuadPolar_toMatrix",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O77Chart"
+    },
+    {
       "name": "AISafetyAtlas.Conjectures.MAIS.mem_o27RealEdgeSurvivalRegion_iff",
       "kind": "theorem",
       "module": "AISafetyAtlas.Conjectures.MAIS.O27"
@@ -6634,6 +7274,26 @@
       "name": "AISafetyAtlas.Conjectures.MAIS.mem_realRadiusErrors_iff",
       "kind": "theorem",
       "module": "AISafetyAtlas.Conjectures.MAIS.O27"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.mulVec_rightMode_eq_zero_of_null",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O77Proof"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.mul_transpose_mulVec_of_null",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O77Proof"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.mul_transpose_residual_add_of_null",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O77Proof"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.norm_sq_blockVariation_coords",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O77Proof"
     },
     {
       "name": "AISafetyAtlas.Conjectures.MAIS.not_eventually_rrrLossCoords_eq_zero_of_pos",
@@ -6846,12 +7506,22 @@
       "module": "AISafetyAtlas.Conjectures.MAIS.O70"
     },
     {
+      "name": "AISafetyAtlas.Conjectures.MAIS.o70Multiplicity_le_self_of_lambda_eq",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O70"
+    },
+    {
       "name": "AISafetyAtlas.Conjectures.MAIS.o70Multiplicity_le_two",
       "kind": "theorem",
       "module": "AISafetyAtlas.Conjectures.MAIS.O70"
     },
     {
       "name": "AISafetyAtlas.Conjectures.MAIS.o70Multiplicity_pos",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O70"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.o70Multiplicity_self",
       "kind": "theorem",
       "module": "AISafetyAtlas.Conjectures.MAIS.O70"
     },
@@ -6894,6 +7564,291 @@
       "name": "AISafetyAtlas.Conjectures.MAIS.o70_fiber_minimum_correct",
       "kind": "theorem",
       "module": "AISafetyAtlas.Conjectures.MAIS.O70"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.o77AllSaddlesHavePairOne_holds",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O77Chart"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.o77BlockMap",
+      "kind": "def",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O77Proof"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.o77BlockMap_apply",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O77Proof"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.o77BlockMap_injective",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O77Proof"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.o77BlockSubspace",
+      "kind": "def",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O77Proof"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.o77BlockSubspace_injective",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O77Proof"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.o77BlockVariation",
+      "kind": "def",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O77Proof"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.o77BlockVariation_injective",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O77Proof"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.o77FiberDependsOnRanksOnlyAtVolumeOrder",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O77Proof"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.o77HessianForm",
+      "kind": "def",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O77Proof"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.o77HessianForm_blockVariation",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O77Proof"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.o77HessianForm_blockVariation_eq_matrixForm",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O77Proof"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.o77HessianForm_eq_zero_of_rungTangent",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O77Proof"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.o77HessianForm_indefinite",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O77Proof"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.o77HessianForm_indefinite_of_rung",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O77Proof"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.o77HessianForm_saddleVariation",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O77Proof"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.o77HessianPolar",
+      "kind": "def",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O77Proof"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.o77HessianPolar_eq_zero_of_rungTangent",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O77Proof"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.o77HessianPolar_self",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O77Proof"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.o77HessianPolar_symm",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O77Proof"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.o77LossCoords",
+      "kind": "def",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O77"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.o77LossCoords_eq_pairLoss",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O77Chart"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.o77Minimizers",
+      "kind": "def",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O77"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.o77Pair",
+      "kind": "def",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O77"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.o77Pair_eq_candidate_closed_form",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O77"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.o77RegularCount",
+      "kind": "def",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O77"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.o77RegularCount_eq_o70Q",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O77"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.o77RegularCount_eq_sub",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O77"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.o77SaddleBlock_quadForm_indefinite",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O77Proof"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.o77Shape",
+      "kind": "def",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O77"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.o77Shape_eq_o70Shape",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O77"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.o77_all_saddles_zeta_pair_one",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Conjectures.MAIS.A7Zeta"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.o77_aw_value_strata_correct",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O77"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.o77_fiber_minimum_correct",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O77"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.o77_fiber_zeta_pair",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Conjectures.MAIS.A7Zeta"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.o77_maximum_multiplicity_on_minimizers",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O77"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.o77_saddle_spectral_det_ne_zero",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O77Proof"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.o77_saddle_two_sided_pair",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O77Chart"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.o77_saddle_zeta_pair",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Conjectures.MAIS.A7Zeta"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.o77_variation_block_dim_ge",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O77Proof"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.o7CounterexampleAtEveryScale",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O7Proof"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.o7Loss",
+      "kind": "def",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O7"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.o7Loss_at_factorization",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O7Proof"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.o7Loss_eq",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O7Proof"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.o7Loss_eq_rrrLossCoords",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Conjectures.MAIS.A7Zeta"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.o7RankZeroRung",
+      "kind": "def",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O7"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.o7RankZeroRung_eq_singleton",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O7Proof"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.o7RungExponents",
+      "kind": "def",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O7"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.o7RungInfimum",
+      "kind": "def",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O7"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.o7Target",
+      "kind": "def",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O7"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.o7Target_rank",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O7Proof"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.o7TerminalRung",
+      "kind": "def",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O7"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.o7_zeta_pair_rankZero",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Conjectures.MAIS.A7Zeta"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.o7_zeta_pair_terminal",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Conjectures.MAIS.A7Zeta"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.o7_zeta_refutation",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Conjectures.MAIS.A7Zeta"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.pos_dims_of_rung",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Conjectures.MAIS.A7Zeta"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.rank_truncation_le",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O77Proof"
     },
     {
       "name": "AISafetyAtlas.Conjectures.MAIS.realEdgeStrengthAtLeast_iff",
@@ -6944,6 +7899,11 @@
       "name": "AISafetyAtlas.Conjectures.MAIS.regretRadius_eq_sSup",
       "kind": "theorem",
       "module": "AISafetyAtlas.Conjectures.MAIS.O27"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.residualAmplitude_zero",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O7Proof"
     },
     {
       "name": "AISafetyAtlas.Conjectures.MAIS.residualArgmin",
@@ -7071,6 +8031,41 @@
       "module": "AISafetyAtlas.Conjectures.MAIS.O70"
     },
     {
+      "name": "AISafetyAtlas.Conjectures.MAIS.residualPair_eq_zeroTargetClosedFormPair",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O70"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.residual_eq_sum_row",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O77Proof"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.residual_mulVec_rightMode",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O77Proof"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.residual_mul_transpose_eq_zero",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O77Proof"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.rightMode_dotProduct_transpose_truncation_mulVec",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O77Proof"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.row_mulVec",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O77Proof"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.row_mul_transpose",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O77Proof"
+    },
+    {
       "name": "AISafetyAtlas.Conjectures.MAIS.rrrLossCoords",
       "kind": "def",
       "module": "AISafetyAtlas.Conjectures.MAIS.O70"
@@ -7079,6 +8074,11 @@
       "name": "AISafetyAtlas.Conjectures.MAIS.rrrLossCoords_zero_eq",
       "kind": "theorem",
       "module": "AISafetyAtlas.Conjectures.MAIS.O70Proof"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.rrrLoss_rung_blockVariation",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O77Proof"
     },
     {
       "name": "AISafetyAtlas.Conjectures.MAIS.runBoltzmannTranscript",
@@ -7091,6 +8091,21 @@
       "module": "AISafetyAtlas.Conjectures.MAIS.O29Experiment"
     },
     {
+      "name": "AISafetyAtlas.Conjectures.MAIS.rung_residual_mul_transpose",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O77Proof"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.rung_transpose_mul_residual",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O77Proof"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.saddleVariation",
+      "kind": "def",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O77Proof"
+    },
+    {
       "name": "AISafetyAtlas.Conjectures.MAIS.shareBinaryOptimum_iff_exists_common_action",
       "kind": "theorem",
       "module": "AISafetyAtlas.Conjectures.MAIS.O31Chart"
@@ -7101,14 +8116,94 @@
       "module": "AISafetyAtlas.Conjectures.MAIS.O31Chart"
     },
     {
+      "name": "AISafetyAtlas.Conjectures.MAIS.singularValue_sq_ne_of_lt",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O77Proof"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.splitLE_castAdd",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O77Chart"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.splitLE_natAdd",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O77Chart"
+    },
+    {
       "name": "AISafetyAtlas.Conjectures.MAIS.tolerantAt_of_uniformlyTolerable",
       "kind": "theorem",
       "module": "AISafetyAtlas.Conjectures.MAIS.O33"
     },
     {
+      "name": "AISafetyAtlas.Conjectures.MAIS.transpose_mulVec_leftMode_eq_zero_of_null",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O77Proof"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.transpose_mul_mulVec_of_null",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O77Proof"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.transpose_mul_residual_add_of_null",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O77Proof"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.transpose_mul_residual_eq_zero",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O77Proof"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.transpose_mul_row",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O77Proof"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.transpose_residual_mulVec_leftMode",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O77Proof"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.transpose_row_mulVec",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O77Proof"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.transpose_truncation_mulVec",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O77Proof"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.truncation_gram_no_eigenvector",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O77Proof"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.truncation_mulVec",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O77Proof"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.truncation_mulVec_rightMode",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O77Proof"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.two_mul_H_le_paramDim",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O77Proof"
+    },
+    {
       "name": "AISafetyAtlas.Conjectures.MAIS.uniformlyTolerable_of_within",
       "kind": "theorem",
       "module": "AISafetyAtlas.Conjectures.MAIS.O33"
+    },
+    {
+      "name": "AISafetyAtlas.Conjectures.MAIS.zeroTargetClosedFormPair",
+      "kind": "def",
+      "module": "AISafetyAtlas.Conjectures.MAIS.O70"
     },
     {
       "name": "AISafetyAtlas.Conjectures.MAIS.zero_mem_residualIndices",
@@ -7221,6 +8316,11 @@
       "module": "AISafetyAtlas.Control.InformationLimits"
     },
     {
+      "name": "AISafetyAtlas.Control.RegulationCheck",
+      "kind": "module",
+      "module": "AISafetyAtlas.Control.RegulationCheck"
+    },
+    {
       "name": "AISafetyAtlas.Control.RequisiteVariety",
       "kind": "module",
       "module": "AISafetyAtlas.Control.RequisiteVariety"
@@ -7229,6 +8329,11 @@
       "name": "AISafetyAtlas.Control.VarietyCounting",
       "kind": "module",
       "module": "AISafetyAtlas.Control.VarietyCounting"
+    },
+    {
+      "name": "AISafetyAtlas.Control.achievedVariety",
+      "kind": "def",
+      "module": "AISafetyAtlas.Control.RegulationCheck"
     },
     {
       "name": "AISafetyAtlas.Control.admittedOutcomes",
@@ -7259,6 +8364,11 @@
       "name": "AISafetyAtlas.Control.ashbyCapacity_rescale",
       "kind": "theorem",
       "module": "AISafetyAtlas.Control.ChannelRate"
+    },
+    {
+      "name": "AISafetyAtlas.Control.ashby_bound_of_columnsInjective",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Control.RegulationCheck"
     },
     {
       "name": "AISafetyAtlas.Control.ashby_logVariety_ge",
@@ -7379,6 +8489,11 @@
       "name": "AISafetyAtlas.Control.closedFormLoss_le_kernelControlLoss",
       "kind": "theorem",
       "module": "AISafetyAtlas.Control.PolicyKernel"
+    },
+    {
+      "name": "AISafetyAtlas.Control.columnsInjective",
+      "kind": "def",
+      "module": "AISafetyAtlas.Control.RegulationCheck"
     },
     {
       "name": "AISafetyAtlas.Control.compProd_fst_preimage",
@@ -7589,6 +8704,11 @@
       "name": "AISafetyAtlas.Control.exists_atomLoss_eq",
       "kind": "theorem",
       "module": "AISafetyAtlas.Control.PolicyKernel"
+    },
+    {
+      "name": "AISafetyAtlas.Control.exists_columnsInjective_false_and_bound_fails",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Control.RegulationCheck"
     },
     {
       "name": "AISafetyAtlas.Control.exists_entropyReduction_const_eq_iSup_openLoopReduction",
@@ -10246,9 +11366,54 @@
       "module": "AISafetyAtlas.Examples.Causal.BehavioralCollision"
     },
     {
+      "name": "AISafetyAtlas.Examples.Compositional.Knowability",
+      "kind": "module",
+      "module": "AISafetyAtlas.Examples.Compositional.Knowability"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Compositional.allTrue",
+      "kind": "def",
+      "module": "AISafetyAtlas.Examples.Compositional.Knowability"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Compositional.allTrue_same_state",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Compositional.Knowability"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Compositional.allTrue_view",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Compositional.Knowability"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Compositional.apart",
+      "kind": "def",
+      "module": "AISafetyAtlas.Examples.Compositional.Knowability"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Compositional.apart_view_ne",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Compositional.Knowability"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Compositional.pair",
+      "kind": "def",
+      "module": "AISafetyAtlas.Examples.Compositional.Knowability"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Compositional.parity",
+      "kind": "def",
+      "module": "AISafetyAtlas.Examples.Compositional.Knowability"
+    },
+    {
       "name": "AISafetyAtlas.Examples.Conjectures.MAIS",
       "kind": "module",
       "module": "AISafetyAtlas.Examples.Conjectures.MAIS"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Conjectures.MAIS.A7Zeta",
+      "kind": "module",
+      "module": "AISafetyAtlas.Examples.Conjectures.MAIS.A7Zeta"
     },
     {
       "name": "AISafetyAtlas.Examples.Conjectures.MAIS.BadBlock",
@@ -10346,6 +11511,11 @@
       "module": "AISafetyAtlas.Examples.Conjectures.MAIS.O38Candidate"
     },
     {
+      "name": "AISafetyAtlas.Examples.Conjectures.MAIS.O7",
+      "kind": "module",
+      "module": "AISafetyAtlas.Examples.Conjectures.MAIS.O7"
+    },
+    {
       "name": "AISafetyAtlas.Examples.Conjectures.MAIS.O70",
       "kind": "module",
       "module": "AISafetyAtlas.Examples.Conjectures.MAIS.O70"
@@ -10354,6 +11524,16 @@
       "name": "AISafetyAtlas.Examples.Conjectures.MAIS.O70Proof",
       "kind": "module",
       "module": "AISafetyAtlas.Examples.Conjectures.MAIS.O70Proof"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Conjectures.MAIS.O77",
+      "kind": "module",
+      "module": "AISafetyAtlas.Examples.Conjectures.MAIS.O77"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Conjectures.MAIS.O77Chart",
+      "kind": "module",
+      "module": "AISafetyAtlas.Examples.Conjectures.MAIS.O77Chart"
     },
     {
       "name": "AISafetyAtlas.Examples.Conjectures.MAIS.Rates",
@@ -10516,6 +11696,16 @@
       "module": "AISafetyAtlas.Examples.Conjectures.MAIS.O38Candidate"
     },
     {
+      "name": "AISafetyAtlas.Examples.Conjectures.MAIS.degenerateNullX",
+      "kind": "def",
+      "module": "AISafetyAtlas.Examples.Conjectures.MAIS.O77"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Conjectures.MAIS.degenerateNullY",
+      "kind": "def",
+      "module": "AISafetyAtlas.Examples.Conjectures.MAIS.O77"
+    },
+    {
       "name": "AISafetyAtlas.Examples.Conjectures.MAIS.designEquiv",
       "kind": "def",
       "module": "AISafetyAtlas.Examples.Conjectures.MAIS.O38Candidate"
@@ -10551,6 +11741,16 @@
       "module": "AISafetyAtlas.Examples.Conjectures.MAIS.O38"
     },
     {
+      "name": "AISafetyAtlas.Examples.Conjectures.MAIS.exists_block_matrix_wideFrame",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Conjectures.MAIS.O77Chart"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Conjectures.MAIS.exists_chart_wideFrame",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Conjectures.MAIS.O77Chart"
+    },
+    {
       "name": "AISafetyAtlas.Examples.Conjectures.MAIS.exists_edge_not_shared",
       "kind": "theorem",
       "module": "AISafetyAtlas.Examples.Conjectures.MAIS.O27"
@@ -10584,6 +11784,11 @@
       "name": "AISafetyAtlas.Examples.Conjectures.MAIS.exists_subset_windowSpan_le_of_not_badBlock",
       "kind": "theorem",
       "module": "AISafetyAtlas.Examples.Conjectures.MAIS.O38Candidate"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Conjectures.MAIS.fderiv_loss_wideFrame",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Conjectures.MAIS.O77Chart"
     },
     {
       "name": "AISafetyAtlas.Examples.Conjectures.MAIS.fibreScore_empty",
@@ -10651,6 +11856,16 @@
       "module": "AISafetyAtlas.Examples.Conjectures.MAIS.O38Candidate"
     },
     {
+      "name": "AISafetyAtlas.Examples.Conjectures.MAIS.isO77RungTangent_degenerateNull",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Conjectures.MAIS.O77"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Conjectures.MAIS.isRungPoint_wideFrame",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Conjectures.MAIS.O77Chart"
+    },
+    {
       "name": "AISafetyAtlas.Examples.Conjectures.MAIS.isTheta_of_isThetaWithMarginBound",
       "kind": "theorem",
       "module": "AISafetyAtlas.Examples.Conjectures.MAIS.Rates"
@@ -10664,6 +11879,16 @@
       "name": "AISafetyAtlas.Examples.Conjectures.MAIS.le_mixedTargetProbability",
       "kind": "theorem",
       "module": "AISafetyAtlas.Examples.Conjectures.MAIS.O31"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Conjectures.MAIS.loss_blockVariation_wideFrame",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Conjectures.MAIS.O77"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Conjectures.MAIS.loss_quartic_on_degenerateNull",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Conjectures.MAIS.O77"
     },
     {
       "name": "AISafetyAtlas.Examples.Conjectures.MAIS.lt_targetProbability",
@@ -11081,6 +12306,41 @@
       "module": "AISafetyAtlas.Examples.Conjectures.MAIS.O38Candidate"
     },
     {
+      "name": "AISafetyAtlas.Examples.Conjectures.MAIS.o77Pair_candidate_check_table",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Conjectures.MAIS.O77"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Conjectures.MAIS.o77Pair_minimum_below_partial_identity_stratum",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Conjectures.MAIS.O77"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Conjectures.MAIS.o77Pair_zeroFrame_split",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Conjectures.MAIS.O77"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Conjectures.MAIS.o77_indefinite_of_rung_wideFrame",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Conjectures.MAIS.O77"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Conjectures.MAIS.o7Loss_terminal_lt_rankZero",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Conjectures.MAIS.O7"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Conjectures.MAIS.o7RankZeroRung_eq_saddleRung",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Conjectures.MAIS.O7"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Conjectures.MAIS.o7TerminalRung_eq_fiber",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Conjectures.MAIS.O7"
+    },
+    {
       "name": "AISafetyAtlas.Examples.Conjectures.MAIS.oneNode_exactClassAssumptions",
       "kind": "theorem",
       "module": "AISafetyAtlas.Examples.Conjectures.MAIS.O25"
@@ -11089,6 +12349,46 @@
       "name": "AISafetyAtlas.Examples.Conjectures.MAIS.oneNode_isClassChartDim",
       "kind": "theorem",
       "module": "AISafetyAtlas.Examples.Conjectures.MAIS.O25"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Conjectures.MAIS.pair_rank2",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Conjectures.MAIS.O77Chart"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Conjectures.MAIS.rank2A",
+      "kind": "def",
+      "module": "AISafetyAtlas.Examples.Conjectures.MAIS.O77"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Conjectures.MAIS.rank2B",
+      "kind": "def",
+      "module": "AISafetyAtlas.Examples.Conjectures.MAIS.O77"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Conjectures.MAIS.rank2Frame",
+      "kind": "def",
+      "module": "AISafetyAtlas.Examples.Conjectures.MAIS.O77"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Conjectures.MAIS.rank2_gram_blocks_ne_zero",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Conjectures.MAIS.O77"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Conjectures.MAIS.rank2_nondegenerate",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Conjectures.MAIS.O77"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Conjectures.MAIS.rank2_spectral_det_ne_zero",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Conjectures.MAIS.O77"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Conjectures.MAIS.rank2_truncation_gram_ne_zero",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Conjectures.MAIS.O77"
     },
     {
       "name": "AISafetyAtlas.Examples.Conjectures.MAIS.realRegretRadius_collision_eq_one",
@@ -11104,6 +12404,31 @@
       "name": "AISafetyAtlas.Examples.Conjectures.MAIS.rows_gt_cols_of_full_sparsity_spark",
       "kind": "theorem",
       "module": "AISafetyAtlas.Examples.Conjectures.MAIS.O38"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Conjectures.MAIS.rungPoint_rank2",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Conjectures.MAIS.O77"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Conjectures.MAIS.scalarFrame",
+      "kind": "def",
+      "module": "AISafetyAtlas.Examples.Conjectures.MAIS.O77"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Conjectures.MAIS.scalarFrame.congr_simp",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Conjectures.MAIS.O7"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Conjectures.MAIS.scalarFrame_target",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Conjectures.MAIS.O7"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Conjectures.MAIS.scalarFrame_truncation_zero",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Conjectures.MAIS.O7"
     },
     {
       "name": "AISafetyAtlas.Examples.Conjectures.MAIS.sparkCondition_of_sparsity_zero",
@@ -11181,6 +12506,16 @@
       "module": "AISafetyAtlas.Examples.Conjectures.MAIS.O38Candidate"
     },
     {
+      "name": "AISafetyAtlas.Examples.Conjectures.MAIS.wideFrame",
+      "kind": "def",
+      "module": "AISafetyAtlas.Examples.Conjectures.MAIS.O77"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Conjectures.MAIS.wideFrame.congr_simp",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Conjectures.MAIS.O77"
+    },
+    {
       "name": "AISafetyAtlas.Examples.Conjectures.MAIS.windowAtom",
       "kind": "def",
       "module": "AISafetyAtlas.Examples.Conjectures.MAIS.O38Candidate"
@@ -11234,6 +12569,21 @@
       "name": "AISafetyAtlas.Examples.Conjectures.MAIS.windowSpan_eq_span_atoms",
       "kind": "theorem",
       "module": "AISafetyAtlas.Examples.Conjectures.MAIS.O38Candidate"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Conjectures.MAIS.zeroFrame",
+      "kind": "def",
+      "module": "AISafetyAtlas.Examples.Conjectures.MAIS.O77"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Conjectures.MAIS.zeroFrame_target",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Conjectures.MAIS.O77"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Conjectures.MAIS.zeroTargetClosedFormPair_one_one_one",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Conjectures.MAIS.O77"
     },
     {
       "name": "AISafetyAtlas.Examples.Conjectures.MAIS.zero_le_etaStar",
@@ -11521,6 +12871,11 @@
       "module": "AISafetyAtlas.Examples.Control.Purification"
     },
     {
+      "name": "AISafetyAtlas.Examples.Control.RegulationCheck",
+      "kind": "module",
+      "module": "AISafetyAtlas.Examples.Control.RegulationCheck"
+    },
+    {
       "name": "AISafetyAtlas.Examples.Control.RequisiteVariety",
       "kind": "module",
       "module": "AISafetyAtlas.Examples.Control.RequisiteVariety"
@@ -11801,6 +13156,21 @@
       "module": "AISafetyAtlas.Examples.Control.RequisiteVariety"
     },
     {
+      "name": "AISafetyAtlas.Examples.Control.identityColumn",
+      "kind": "def",
+      "module": "AISafetyAtlas.Examples.Control.RegulationCheck"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Control.identityColumn_achievedVariety",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Control.RegulationCheck"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Control.identityColumn_columnsInjective",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Control.RegulationCheck"
+    },
+    {
       "name": "AISafetyAtlas.Examples.Control.insect_optic_nerve_not_binding",
       "kind": "theorem",
       "module": "AISafetyAtlas.Examples.Control.RequisiteVariety"
@@ -11829,6 +13199,26 @@
       "name": "AISafetyAtlas.Examples.Control.kernelMinControlLoss_le_entropy_noise",
       "kind": "theorem",
       "module": "AISafetyAtlas.Examples.Control.PolicyKernel"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Control.latinSquare",
+      "kind": "def",
+      "module": "AISafetyAtlas.Examples.Control.RegulationCheck"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Control.latinSquare_achievedVariety",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Control.RegulationCheck"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Control.latinSquare_columnsInjective",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Control.RegulationCheck"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Control.latinStrategy",
+      "kind": "def",
+      "module": "AISafetyAtlas.Examples.Control.RegulationCheck"
     },
     {
       "name": "AISafetyAtlas.Examples.Control.measurable_noiseReader",
@@ -11901,6 +13291,21 @@
       "module": "AISafetyAtlas.Examples.Control.Purification"
     },
     {
+      "name": "AISafetyAtlas.Examples.Control.repeatedColumn",
+      "kind": "def",
+      "module": "AISafetyAtlas.Examples.Control.RegulationCheck"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Control.repeatedColumn_bound_fails",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Control.RegulationCheck"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Control.repeatedColumn_columnsInjective",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Control.RegulationCheck"
+    },
+    {
       "name": "AISafetyAtlas.Examples.Control.sensorLoss_eq_zero_of_injective",
       "kind": "theorem",
       "module": "AISafetyAtlas.Examples.Control.Observability"
@@ -11914,6 +13319,21 @@
       "name": "AISafetyAtlas.Examples.Control.ship_disturbance_upper_limit",
       "kind": "theorem",
       "module": "AISafetyAtlas.Examples.Control.RequisiteVariety"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Control.wideTable",
+      "kind": "def",
+      "module": "AISafetyAtlas.Examples.Control.RegulationCheck"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Control.wideTable_achievedVariety",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Control.RegulationCheck"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Control.wideTable_columnsInjective",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Control.RegulationCheck"
     },
     {
       "name": "AISafetyAtlas.Examples.Fairness.ApproximateRiskAssignment",
@@ -12181,6 +13601,11 @@
       "module": "AISafetyAtlas.Examples.Fairness.RiskAssignment"
     },
     {
+      "name": "AISafetyAtlas.Examples.Fairness.RiskAssignment.equalRates_escape",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Fairness.RiskAssignment"
+    },
+    {
       "name": "AISafetyAtlas.Examples.Fairness.RiskAssignment.equalRates_mu_lt_N",
       "kind": "theorem",
       "module": "AISafetyAtlas.Examples.Fairness.RiskAssignment"
@@ -12247,6 +13672,11 @@
     },
     {
       "name": "AISafetyAtlas.Examples.Fairness.RiskAssignment.perfect_conclusion",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Fairness.RiskAssignment"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Fairness.RiskAssignment.perfect_escape",
       "kind": "theorem",
       "module": "AISafetyAtlas.Examples.Fairness.RiskAssignment"
     },
@@ -15696,6 +17126,11 @@
       "module": "AISafetyAtlas.Examples.Oversight.VarietyBound"
     },
     {
+      "name": "AISafetyAtlas.Examples.Preference.Knowability",
+      "kind": "module",
+      "module": "AISafetyAtlas.Examples.Preference.Knowability"
+    },
+    {
       "name": "AISafetyAtlas.Examples.PublicAPI",
       "kind": "module",
       "module": "AISafetyAtlas.Examples.PublicAPI"
@@ -15761,6 +17196,11 @@
       "module": "AISafetyAtlas.Examples.SingularLearning.Coordinates"
     },
     {
+      "name": "AISafetyAtlas.Examples.SingularLearning.CriticalFiber",
+      "kind": "module",
+      "module": "AISafetyAtlas.Examples.SingularLearning.CriticalFiber"
+    },
+    {
       "name": "AISafetyAtlas.Examples.SingularLearning.DiffeoTransfer",
       "kind": "module",
       "module": "AISafetyAtlas.Examples.SingularLearning.DiffeoTransfer"
@@ -15781,14 +17221,54 @@
       "module": "AISafetyAtlas.Examples.SingularLearning.EliminationChart"
     },
     {
+      "name": "AISafetyAtlas.Examples.SingularLearning.FreeBlockBand",
+      "kind": "module",
+      "module": "AISafetyAtlas.Examples.SingularLearning.FreeBlockBand"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.SingularLearning.FreeBlockPair",
+      "kind": "module",
+      "module": "AISafetyAtlas.Examples.SingularLearning.FreeBlockPair"
+    },
+    {
       "name": "AISafetyAtlas.Examples.SingularLearning.GaussianQuadratic",
       "kind": "module",
       "module": "AISafetyAtlas.Examples.SingularLearning.GaussianQuadratic"
     },
     {
+      "name": "AISafetyAtlas.Examples.SingularLearning.GermPair",
+      "kind": "module",
+      "module": "AISafetyAtlas.Examples.SingularLearning.GermPair"
+    },
+    {
       "name": "AISafetyAtlas.Examples.SingularLearning.GramSpectrum",
       "kind": "module",
       "module": "AISafetyAtlas.Examples.SingularLearning.GramSpectrum"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.SingularLearning.HadamardCongruence",
+      "kind": "module",
+      "module": "AISafetyAtlas.Examples.SingularLearning.HadamardCongruence"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.SingularLearning.HessianBlock",
+      "kind": "module",
+      "module": "AISafetyAtlas.Examples.SingularLearning.HessianBlock"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.SingularLearning.IndefiniteBand",
+      "kind": "module",
+      "module": "AISafetyAtlas.Examples.SingularLearning.IndefiniteBand"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.SingularLearning.IndefiniteBlockPair",
+      "kind": "module",
+      "module": "AISafetyAtlas.Examples.SingularLearning.IndefiniteBlockPair"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.SingularLearning.IndefiniteQuadratic",
+      "kind": "module",
+      "module": "AISafetyAtlas.Examples.SingularLearning.IndefiniteQuadratic"
     },
     {
       "name": "AISafetyAtlas.Examples.SingularLearning.JacobianSandwich",
@@ -15821,6 +17301,16 @@
       "module": "AISafetyAtlas.Examples.SingularLearning.LossAnalytic"
     },
     {
+      "name": "AISafetyAtlas.Examples.SingularLearning.LossDerivative",
+      "kind": "module",
+      "module": "AISafetyAtlas.Examples.SingularLearning.LossDerivative"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.SingularLearning.LossExpansion",
+      "kind": "module",
+      "module": "AISafetyAtlas.Examples.SingularLearning.LossExpansion"
+    },
+    {
       "name": "AISafetyAtlas.Examples.SingularLearning.MatrixAnalytic",
       "kind": "module",
       "module": "AISafetyAtlas.Examples.SingularLearning.MatrixAnalytic"
@@ -15844,6 +17334,21 @@
       "name": "AISafetyAtlas.Examples.SingularLearning.PairTransfer",
       "kind": "module",
       "module": "AISafetyAtlas.Examples.SingularLearning.PairTransfer"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.SingularLearning.ParamSplit",
+      "kind": "module",
+      "module": "AISafetyAtlas.Examples.SingularLearning.ParamSplit"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.SingularLearning.QuadraticSolve",
+      "kind": "module",
+      "module": "AISafetyAtlas.Examples.SingularLearning.QuadraticSolve"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.SingularLearning.QuadraticSplit",
+      "kind": "module",
+      "module": "AISafetyAtlas.Examples.SingularLearning.QuadraticSplit"
     },
     {
       "name": "AISafetyAtlas.Examples.SingularLearning.RankRealization",
@@ -15871,9 +17376,19 @@
       "module": "AISafetyAtlas.Examples.SingularLearning.ResidualScalar"
     },
     {
+      "name": "AISafetyAtlas.Examples.SingularLearning.ShiftedBand",
+      "kind": "module",
+      "module": "AISafetyAtlas.Examples.SingularLearning.ShiftedBand"
+    },
+    {
       "name": "AISafetyAtlas.Examples.SingularLearning.StratumTransport",
       "kind": "module",
       "module": "AISafetyAtlas.Examples.SingularLearning.StratumTransport"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.SingularLearning.SylvesterPair",
+      "kind": "module",
+      "module": "AISafetyAtlas.Examples.SingularLearning.SylvesterPair"
     },
     {
       "name": "AISafetyAtlas.Examples.SingularLearning.Tauberian",
@@ -15886,6 +17401,11 @@
       "module": "AISafetyAtlas.Examples.SingularLearning.TauberianLog"
     },
     {
+      "name": "AISafetyAtlas.Examples.SingularLearning.TwoSidedBand",
+      "kind": "module",
+      "module": "AISafetyAtlas.Examples.SingularLearning.TwoSidedBand"
+    },
+    {
       "name": "AISafetyAtlas.Examples.SingularLearning.ZetaMonomial",
       "kind": "module",
       "module": "AISafetyAtlas.Examples.SingularLearning.ZetaMonomial"
@@ -15896,9 +17416,114 @@
       "module": "AISafetyAtlas.Examples.SingularLearning.ZetaPair"
     },
     {
+      "name": "AISafetyAtlas.Examples.SingularLearning.blockMatrix",
+      "kind": "def",
+      "module": "AISafetyAtlas.Examples.SingularLearning.IndefiniteBlockPair"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.SingularLearning.blockMatrix_det_ne_zero",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.SingularLearning.IndefiniteBlockPair"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.SingularLearning.blockMatrix_isSymm",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.SingularLearning.IndefiniteBlockPair"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.SingularLearning.blockMatrix_neg",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.SingularLearning.IndefiniteBlockPair"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.SingularLearning.blockMatrix_pos",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.SingularLearning.IndefiniteBlockPair"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.SingularLearning.blockModel",
+      "kind": "def",
+      "module": "AISafetyAtlas.Examples.SingularLearning.IndefiniteBlockPair"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.SingularLearning.blockModelLoss",
+      "kind": "def",
+      "module": "AISafetyAtlas.Examples.SingularLearning.IndefiniteBlockPair"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.SingularLearning.blockModelLoss_chart",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.SingularLearning.IndefiniteBlockPair"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.SingularLearning.blockModel_crit",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.SingularLearning.IndefiniteBlockPair"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.SingularLearning.blockModel_def",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.SingularLearning.IndefiniteBlockPair"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.SingularLearning.blockModel_hessian_block",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.SingularLearning.IndefiniteBlockPair"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.SingularLearning.blockModel_hessian_free",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.SingularLearning.IndefiniteBlockPair"
+    },
+    {
       "name": "AISafetyAtlas.Examples.SingularLearning.comparable_two_mul_sq",
       "kind": "theorem",
       "module": "AISafetyAtlas.Examples.SingularLearning.PairTransfer"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.SingularLearning.contDiff_blockModelLoss",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.SingularLearning.IndefiniteBlockPair"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.SingularLearning.contDiff_pairLoss_one_one_one",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.SingularLearning.LossDerivative"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.SingularLearning.continuous_evenGerm",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.SingularLearning.GermPair"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.SingularLearning.continuous_oddGerm",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.SingularLearning.GermPair"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.SingularLearning.coordAxis",
+      "kind": "def",
+      "module": "AISafetyAtlas.Examples.SingularLearning.ParamSplit"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.SingularLearning.coordFst",
+      "kind": "def",
+      "module": "AISafetyAtlas.Examples.SingularLearning.IndefiniteBlockPair"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.SingularLearning.coordSnd",
+      "kind": "def",
+      "module": "AISafetyAtlas.Examples.SingularLearning.IndefiniteBlockPair"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.SingularLearning.crit_zero_left",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.SingularLearning.LossDerivative"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.SingularLearning.crit_zero_right",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.SingularLearning.LossDerivative"
     },
     {
       "name": "AISafetyAtlas.Examples.SingularLearning.eq_half_one_of_hasExactLocalPair_sq",
@@ -15921,9 +17546,59 @@
       "module": "AISafetyAtlas.Examples.SingularLearning.PairTransfer"
     },
     {
+      "name": "AISafetyAtlas.Examples.SingularLearning.euclideanSingle_ne_zero",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.SingularLearning.ParamSplit"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.SingularLearning.evenGerm",
+      "kind": "def",
+      "module": "AISafetyAtlas.Examples.SingularLearning.GermPair"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.SingularLearning.evenGerm_zero",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.SingularLearning.GermPair"
+    },
+    {
       "name": "AISafetyAtlas.Examples.SingularLearning.exists_volumeScale_div_two_bounds",
       "kind": "theorem",
       "module": "AISafetyAtlas.Examples.SingularLearning.PairTransfer"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.SingularLearning.fderiv_fderiv_pairLoss_one",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.SingularLearning.LossDerivative"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.SingularLearning.fderiv_fderiv_pairLoss_zero",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.SingularLearning.LossDerivative"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.SingularLearning.fderiv_pairLoss_zero",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.SingularLearning.LossDerivative"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.SingularLearning.finrank_coordAxis",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.SingularLearning.ParamSplit"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.SingularLearning.finrank_coordAxis_orthogonal",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.SingularLearning.ParamSplit"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.SingularLearning.freeBlockBand_theta_linear",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.SingularLearning.FreeBlockBand"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.SingularLearning.freeBlockBand_theta_quadratic",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.SingularLearning.FreeBlockBand"
     },
     {
       "name": "AISafetyAtlas.Examples.SingularLearning.freeCoordGerm",
@@ -15951,9 +17626,39 @@
       "module": "AISafetyAtlas.Examples.SingularLearning.LocalPair"
     },
     {
+      "name": "AISafetyAtlas.Examples.SingularLearning.hasLocalVolumeOrder_abs_minkowski4",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.SingularLearning.SylvesterPair"
+    },
+    {
       "name": "AISafetyAtlas.Examples.SingularLearning.hasLocalVolumeOrder_add_example",
       "kind": "theorem",
       "module": "AISafetyAtlas.Examples.SingularLearning.PairTransfer"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.SingularLearning.hasLocalVolumeOrder_centeredBandGerm_blockModelLoss",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.SingularLearning.IndefiniteBlockPair"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.SingularLearning.hasLocalVolumeOrder_hyperbolic4_add_oddGerm",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.SingularLearning.GermPair"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.SingularLearning.hasLocalVolumeOrder_minkowski4_add_evenGerm",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.SingularLearning.GermPair"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.SingularLearning.hasLocalVolumeOrder_minkowski4_add_oddGerm",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.SingularLearning.GermPair"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.SingularLearning.hasLocalVolumeOrder_negMinkowski4_add_evenGerm",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.SingularLearning.GermPair"
     },
     {
       "name": "AISafetyAtlas.Examples.SingularLearning.hasLocalVolumeOrder_quadraticGerm_add_one_one",
@@ -15986,6 +17691,111 @@
       "module": "AISafetyAtlas.Examples.SingularLearning.PairTransfer"
     },
     {
+      "name": "AISafetyAtlas.Examples.SingularLearning.hyperbolic4",
+      "kind": "def",
+      "module": "AISafetyAtlas.Examples.SingularLearning.GermPair"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.SingularLearning.hyperbolic4_det",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.SingularLearning.GermPair"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.SingularLearning.hyperbolic4_isSymm",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.SingularLearning.GermPair"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.SingularLearning.lightConeDown",
+      "kind": "def",
+      "module": "AISafetyAtlas.Examples.SingularLearning.GermPair"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.SingularLearning.lightConeUp",
+      "kind": "def",
+      "module": "AISafetyAtlas.Examples.SingularLearning.GermPair"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.SingularLearning.matrixQuadForm_blockMatrix",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.SingularLearning.IndefiniteBlockPair"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.SingularLearning.matrixQuadForm_lightConeDown",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.SingularLearning.GermPair"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.SingularLearning.matrixQuadForm_lightConeUp",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.SingularLearning.GermPair"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.SingularLearning.matrixQuadForm_negMinkowski4",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.SingularLearning.GermPair"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.SingularLearning.matrixQuadForm_spaceWitness",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.SingularLearning.SylvesterPair"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.SingularLearning.matrixQuadForm_timeWitness",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.SingularLearning.SylvesterPair"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.SingularLearning.minkowski4",
+      "kind": "def",
+      "module": "AISafetyAtlas.Examples.SingularLearning.SylvesterPair"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.SingularLearning.minkowski4_det",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.SingularLearning.SylvesterPair"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.SingularLearning.minkowski4_isSymm",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.SingularLearning.SylvesterPair"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.SingularLearning.negMinkowski4",
+      "kind": "def",
+      "module": "AISafetyAtlas.Examples.SingularLearning.GermPair"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.SingularLearning.negMinkowski4_det",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.SingularLearning.GermPair"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.SingularLearning.negMinkowski4_isSymm",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.SingularLearning.GermPair"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.SingularLearning.oddGerm",
+      "kind": "def",
+      "module": "AISafetyAtlas.Examples.SingularLearning.GermPair"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.SingularLearning.oddGerm_zero",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.SingularLearning.GermPair"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.SingularLearning.pairLoss_one",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.SingularLearning.LossDerivative"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.SingularLearning.pairLoss_zero",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.SingularLearning.LossDerivative"
+    },
+    {
       "name": "AISafetyAtlas.Examples.SingularLearning.product_rule_consistent_one_one",
       "kind": "theorem",
       "module": "AISafetyAtlas.Examples.SingularLearning.PairTransfer"
@@ -16011,14 +17821,34 @@
       "module": "AISafetyAtlas.Examples.SingularLearning.PairTransfer"
     },
     {
+      "name": "AISafetyAtlas.Examples.SingularLearning.single_one_mem_coordAxis_orthogonal",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.SingularLearning.ParamSplit"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.SingularLearning.spaceWitness",
+      "kind": "def",
+      "module": "AISafetyAtlas.Examples.SingularLearning.SylvesterPair"
+    },
+    {
       "name": "AISafetyAtlas.Examples.SingularLearning.sublevelVolume_sq_le_two_mul",
       "kind": "theorem",
       "module": "AISafetyAtlas.Examples.SingularLearning.PairTransfer"
     },
     {
+      "name": "AISafetyAtlas.Examples.SingularLearning.target",
+      "kind": "def",
+      "module": "AISafetyAtlas.Examples.SingularLearning.LossDerivative"
+    },
+    {
       "name": "AISafetyAtlas.Examples.SingularLearning.tendsto_div_two_nhdsGT",
       "kind": "theorem",
       "module": "AISafetyAtlas.Examples.SingularLearning.PairTransfer"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.SingularLearning.timeWitness",
+      "kind": "def",
+      "module": "AISafetyAtlas.Examples.SingularLearning.SylvesterPair"
     },
     {
       "name": "AISafetyAtlas.Examples.SingularLearning.volumeScale_mul_one_example",
@@ -21081,6 +22911,16 @@
       "module": "AISafetyAtlas.Knowledge"
     },
     {
+      "name": "AISafetyAtlas.Knowledge.Determines.refl",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Knowledge"
+    },
+    {
+      "name": "AISafetyAtlas.Knowledge.Determines.trans",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Knowledge"
+    },
+    {
       "name": "AISafetyAtlas.Knowledge.Devices",
       "kind": "module",
       "module": "AISafetyAtlas.Knowledge.Devices"
@@ -21624,6 +23464,11 @@
       "name": "AISafetyAtlas.Knowledge.not_knowable_of_condEntropy_ne_zero",
       "kind": "theorem",
       "module": "AISafetyAtlas.Knowledge.Entropy"
+    },
+    {
+      "name": "AISafetyAtlas.Knowledge.not_knowable_of_invariant_transform",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Knowledge"
     },
     {
       "name": "AISafetyAtlas.Knowledge.not_knowable_of_one_lt_ambiguity",
@@ -22721,6 +24566,11 @@
       "module": "AISafetyAtlas.Preference.Regret"
     },
     {
+      "name": "AISafetyAtlas.Preference.Knowability",
+      "kind": "module",
+      "module": "AISafetyAtlas.Preference.Knowability"
+    },
+    {
       "name": "AISafetyAtlas.Preference.Override",
       "kind": "module",
       "module": "AISafetyAtlas.Preference.Override"
@@ -23251,6 +25101,11 @@
       "module": "AISafetyAtlas.Preference"
     },
     {
+      "name": "AISafetyAtlas.Preference.knowable_reward_of_isEmpty_state",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Preference.Knowability"
+    },
+    {
       "name": "AISafetyAtlas.Preference.lemma_six",
       "kind": "theorem",
       "module": "AISafetyAtlas.Preference"
@@ -23264,6 +25119,11 @@
       "name": "AISafetyAtlas.Preference.neg_twin",
       "kind": "theorem",
       "module": "AISafetyAtlas.Preference"
+    },
+    {
+      "name": "AISafetyAtlas.Preference.not_knowable_reward",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Preference.Knowability"
     },
     {
       "name": "AISafetyAtlas.Preference.op1",
@@ -23571,6 +25431,11 @@
       "module": "AISafetyAtlas.SingularLearning.Coordinates"
     },
     {
+      "name": "AISafetyAtlas.SingularLearning.CriticalFiber",
+      "kind": "module",
+      "module": "AISafetyAtlas.SingularLearning.CriticalFiber"
+    },
+    {
       "name": "AISafetyAtlas.SingularLearning.DiffeoTransfer",
       "kind": "module",
       "module": "AISafetyAtlas.SingularLearning.DiffeoTransfer"
@@ -23716,14 +25581,34 @@
       "module": "AISafetyAtlas.SingularLearning.AoyagiWatanabe"
     },
     {
+      "name": "AISafetyAtlas.SingularLearning.FreeBlockBand",
+      "kind": "module",
+      "module": "AISafetyAtlas.SingularLearning.FreeBlockBand"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.FreeBlockPair",
+      "kind": "module",
+      "module": "AISafetyAtlas.SingularLearning.FreeBlockPair"
+    },
+    {
       "name": "AISafetyAtlas.SingularLearning.GaussianQuadratic",
       "kind": "module",
       "module": "AISafetyAtlas.SingularLearning.GaussianQuadratic"
     },
     {
+      "name": "AISafetyAtlas.SingularLearning.GermPair",
+      "kind": "module",
+      "module": "AISafetyAtlas.SingularLearning.GermPair"
+    },
+    {
       "name": "AISafetyAtlas.SingularLearning.GramSpectrum",
       "kind": "module",
       "module": "AISafetyAtlas.SingularLearning.GramSpectrum"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.HadamardCongruence",
+      "kind": "module",
+      "module": "AISafetyAtlas.SingularLearning.HadamardCongruence"
     },
     {
       "name": "AISafetyAtlas.SingularLearning.HasEliminationChartAt",
@@ -23741,6 +25626,16 @@
       "module": "AISafetyAtlas.SingularLearning.LocalPair"
     },
     {
+      "name": "AISafetyAtlas.SingularLearning.HasLocalVolumeOrder.congr_of_eventuallyEq",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.IndefiniteBlockPair"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.HasStrictLocalVolumeOrder",
+      "kind": "def",
+      "module": "AISafetyAtlas.SingularLearning.TwoSidedBand"
+    },
+    {
       "name": "AISafetyAtlas.SingularLearning.HasZetaPoleOrder",
       "kind": "def",
       "module": "AISafetyAtlas.SingularLearning.ZetaPair"
@@ -23749,6 +25644,26 @@
       "name": "AISafetyAtlas.SingularLearning.HasZetaRealAxisOrder",
       "kind": "def",
       "module": "AISafetyAtlas.SingularLearning.ZetaPair"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.HessianBlock",
+      "kind": "module",
+      "module": "AISafetyAtlas.SingularLearning.HessianBlock"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.IndefiniteBand",
+      "kind": "module",
+      "module": "AISafetyAtlas.SingularLearning.IndefiniteBand"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.IndefiniteBlockPair",
+      "kind": "module",
+      "module": "AISafetyAtlas.SingularLearning.IndefiniteBlockPair"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.IndefiniteQuadratic",
+      "kind": "module",
+      "module": "AISafetyAtlas.SingularLearning.IndefiniteQuadratic"
     },
     {
       "name": "AISafetyAtlas.SingularLearning.IsEliminationChart",
@@ -23826,6 +25741,16 @@
       "module": "AISafetyAtlas.SingularLearning.LossAnalytic"
     },
     {
+      "name": "AISafetyAtlas.SingularLearning.LossDerivative",
+      "kind": "module",
+      "module": "AISafetyAtlas.SingularLearning.LossDerivative"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.LossExpansion",
+      "kind": "module",
+      "module": "AISafetyAtlas.SingularLearning.LossExpansion"
+    },
+    {
       "name": "AISafetyAtlas.SingularLearning.MatrixAnalytic",
       "kind": "module",
       "module": "AISafetyAtlas.SingularLearning.MatrixAnalytic"
@@ -23859,6 +25784,21 @@
       "name": "AISafetyAtlas.SingularLearning.ParamSpace",
       "kind": "def",
       "module": "AISafetyAtlas.SingularLearning.EliminationChart"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.ParamSplit",
+      "kind": "module",
+      "module": "AISafetyAtlas.SingularLearning.ParamSplit"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.QuadraticSolve",
+      "kind": "module",
+      "module": "AISafetyAtlas.SingularLearning.QuadraticSolve"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.QuadraticSplit",
+      "kind": "module",
+      "module": "AISafetyAtlas.SingularLearning.QuadraticSplit"
     },
     {
       "name": "AISafetyAtlas.SingularLearning.RankRealization",
@@ -23916,9 +25856,19 @@
       "module": "AISafetyAtlas.SingularLearning.ChartAnalytic"
     },
     {
+      "name": "AISafetyAtlas.SingularLearning.ShiftedBand",
+      "kind": "module",
+      "module": "AISafetyAtlas.SingularLearning.ShiftedBand"
+    },
+    {
       "name": "AISafetyAtlas.SingularLearning.StratumTransport",
       "kind": "module",
       "module": "AISafetyAtlas.SingularLearning.StratumTransport"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.SylvesterPair",
+      "kind": "module",
+      "module": "AISafetyAtlas.SingularLearning.SylvesterPair"
     },
     {
       "name": "AISafetyAtlas.SingularLearning.Tauberian",
@@ -23931,6 +25881,11 @@
       "module": "AISafetyAtlas.SingularLearning.TauberianLog"
     },
     {
+      "name": "AISafetyAtlas.SingularLearning.TwoSidedBand",
+      "kind": "module",
+      "module": "AISafetyAtlas.SingularLearning.TwoSidedBand"
+    },
+    {
       "name": "AISafetyAtlas.SingularLearning.ZetaMonomial",
       "kind": "module",
       "module": "AISafetyAtlas.SingularLearning.ZetaMonomial"
@@ -23941,6 +25896,11 @@
       "module": "AISafetyAtlas.SingularLearning.ZetaPair"
     },
     {
+      "name": "AISafetyAtlas.SingularLearning.abs_sq_sub_sq_ge",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.IndefiniteBand"
+    },
+    {
       "name": "AISafetyAtlas.SingularLearning.act_inv_act",
       "kind": "theorem",
       "module": "AISafetyAtlas.SingularLearning.OrbitNormalForm"
@@ -23949,6 +25909,36 @@
       "name": "AISafetyAtlas.SingularLearning.act_of_factor",
       "kind": "theorem",
       "module": "AISafetyAtlas.SingularLearning.OrbitNormalForm"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.adaptedBasis",
+      "kind": "def",
+      "module": "AISafetyAtlas.SingularLearning.ParamSplit"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.adaptedFamily",
+      "kind": "def",
+      "module": "AISafetyAtlas.SingularLearning.ParamSplit"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.adaptedFamily_inl",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.ParamSplit"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.adaptedFamily_inl_mem",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.ParamSplit"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.adaptedFamily_inr",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.ParamSplit"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.adaptedFamily_inr_mem",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.ParamSplit"
     },
     {
       "name": "AISafetyAtlas.SingularLearning.admissible_of_mul_eq",
@@ -24276,6 +26266,16 @@
       "module": "AISafetyAtlas.SingularLearning.ChartTransport"
     },
     {
+      "name": "AISafetyAtlas.SingularLearning.analyticOnNhd_paramSplitEquiv",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.ParamSplit"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.analyticOnNhd_paramSplitEquiv_symm",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.ParamSplit"
+    },
+    {
       "name": "AISafetyAtlas.SingularLearning.analyticOnNhd_rrrLoss_pair",
       "kind": "theorem",
       "module": "AISafetyAtlas.SingularLearning.LossAnalytic"
@@ -24289,6 +26289,11 @@
       "name": "AISafetyAtlas.SingularLearning.analyticOnNhd_submatrix_inv",
       "kind": "theorem",
       "module": "AISafetyAtlas.SingularLearning.MatrixAnalytic"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.associated_toQuadraticForm'",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.SylvesterPair"
     },
     {
       "name": "AISafetyAtlas.SingularLearning.awBalancedNumerator",
@@ -24346,6 +26351,61 @@
       "module": "AISafetyAtlas.SingularLearning.ZetaMonomial"
     },
     {
+      "name": "AISafetyAtlas.SingularLearning.bandCore",
+      "kind": "def",
+      "module": "AISafetyAtlas.SingularLearning.ShiftedBand"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.bandCore_subset",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.ShiftedBand"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.bandLaplace",
+      "kind": "def",
+      "module": "AISafetyAtlas.SingularLearning.IndefiniteBand"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.bandLaplace_eq_prod",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.IndefiniteBand"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.bandLaplace_eq_radial",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.IndefiniteBand"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.bandLaplace_ge",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.IndefiniteBand"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.bandLaplace_le",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.IndefiniteBand"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.bandLaplace_one_one_ge",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.IndefiniteBand"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.bandLowerConst",
+      "kind": "def",
+      "module": "AISafetyAtlas.SingularLearning.IndefiniteBand"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.bandUpperConst",
+      "kind": "def",
+      "module": "AISafetyAtlas.SingularLearning.IndefiniteBand"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.bandWindow",
+      "kind": "def",
+      "module": "AISafetyAtlas.SingularLearning.ShiftedBand"
+    },
+    {
       "name": "AISafetyAtlas.SingularLearning.bijOn_elimPsiProd",
       "kind": "theorem",
       "module": "AISafetyAtlas.SingularLearning.ChartAnalytic"
@@ -24364,6 +26424,16 @@
       "name": "AISafetyAtlas.SingularLearning.bijOn_restrict",
       "kind": "theorem",
       "module": "AISafetyAtlas.SingularLearning.ChartAssembly"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.blockW",
+      "kind": "def",
+      "module": "AISafetyAtlas.SingularLearning.HadamardCongruence"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.blockW_apply",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.HadamardCongruence"
     },
     {
       "name": "AISafetyAtlas.SingularLearning.canonicalA",
@@ -24499,6 +26569,11 @@
       "name": "AISafetyAtlas.SingularLearning.ce_elimR",
       "kind": "theorem",
       "module": "AISafetyAtlas.SingularLearning.EliminationChart"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.centeredBandGerm",
+      "kind": "def",
+      "module": "AISafetyAtlas.SingularLearning.TwoSidedBand"
     },
     {
       "name": "AISafetyAtlas.SingularLearning.chamberA2",
@@ -25121,6 +27196,16 @@
       "module": "AISafetyAtlas.SingularLearning.ChartAnalytic"
     },
     {
+      "name": "AISafetyAtlas.SingularLearning.coe_adaptedBasis",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.ParamSplit"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.coe_doubling",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.QuadraticSolve"
+    },
+    {
       "name": "AISafetyAtlas.SingularLearning.coe_euclSplitEquiv_symm",
       "kind": "theorem",
       "module": "AISafetyAtlas.SingularLearning.ChartCoords"
@@ -25151,6 +27236,26 @@
       "module": "AISafetyAtlas.SingularLearning.ChamberIntegral"
     },
     {
+      "name": "AISafetyAtlas.SingularLearning.coe_shear",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.CriticalFiber"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.coe_splitCLE",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.IndefiniteBlockPair"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.coe_splitCLE_symm",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.IndefiniteBlockPair"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.coe_splitLE",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.QuadraticSplit"
+    },
+    {
       "name": "AISafetyAtlas.SingularLearning.comparisonGerm",
       "kind": "def",
       "module": "AISafetyAtlas.SingularLearning.EliminationChart"
@@ -25169,6 +27274,41 @@
       "name": "AISafetyAtlas.SingularLearning.comparisonGerm_transported",
       "kind": "theorem",
       "module": "AISafetyAtlas.SingularLearning.ChartAssembly"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.congruence_expand",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.HessianBlock"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.congruence_of_solution",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.HessianBlock"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.contDiffAt_quadSolve",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.QuadraticSolve"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.contDiff_pairLoss",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.LossDerivative"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.contDiff_partialHessianAverage",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.HadamardCongruence"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.contDiff_quadMap",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.QuadraticSolve"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.contDiff_shiftedHessianAverage",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.CriticalFiber"
     },
     {
       "name": "AISafetyAtlas.SingularLearning.continuousOn_frobeniusSq_elimX",
@@ -25211,6 +27351,16 @@
       "module": "AISafetyAtlas.SingularLearning.ChartAnalytic"
     },
     {
+      "name": "AISafetyAtlas.SingularLearning.continuous_modelBandForm",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.ShiftedBand"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.continuous_modelBandGerm",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.QuadraticSplit"
+    },
+    {
       "name": "AISafetyAtlas.SingularLearning.continuous_residualGerm",
       "kind": "theorem",
       "module": "AISafetyAtlas.SingularLearning.ResidualGerm"
@@ -25251,6 +27401,16 @@
       "module": "AISafetyAtlas.SingularLearning.EliminationChart"
     },
     {
+      "name": "AISafetyAtlas.SingularLearning.det_fromBlocks_offDiagonal",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.HessianBlock"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.det_hessianBlock_ne_zero",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.HessianBlock"
+    },
+    {
       "name": "AISafetyAtlas.SingularLearning.det_mul_transpose_nonneg",
       "kind": "theorem",
       "module": "AISafetyAtlas.SingularLearning.GramSpectrum"
@@ -25276,6 +27436,11 @@
       "module": "AISafetyAtlas.SingularLearning.GramSpectrum"
     },
     {
+      "name": "AISafetyAtlas.SingularLearning.det_smul_ne_zero",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.IndefiniteBlockPair"
+    },
+    {
       "name": "AISafetyAtlas.SingularLearning.det_transpose_mul_nonneg",
       "kind": "theorem",
       "module": "AISafetyAtlas.SingularLearning.GramSpectrum"
@@ -25289,6 +27454,16 @@
       "name": "AISafetyAtlas.SingularLearning.dist_sq_euclideanProdEquiv",
       "kind": "theorem",
       "module": "AISafetyAtlas.SingularLearning.PairTransfer"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.dotProduct_mulVec_transpose",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.LossExpansion"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.doubling",
+      "kind": "def",
+      "module": "AISafetyAtlas.SingularLearning.QuadraticSolve"
     },
     {
       "name": "AISafetyAtlas.SingularLearning.dyadicShell",
@@ -26156,6 +28331,11 @@
       "module": "AISafetyAtlas.SingularLearning.EliminationChart"
     },
     {
+      "name": "AISafetyAtlas.SingularLearning.eq_zero_of_forall_froIP_eq_zero",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.LossExpansion"
+    },
+    {
       "name": "AISafetyAtlas.SingularLearning.eq_zero_pair_of_eventually_zero",
       "kind": "theorem",
       "module": "AISafetyAtlas.SingularLearning.LocalPair"
@@ -26256,6 +28436,16 @@
       "module": "AISafetyAtlas.SingularLearning.PairTransfer"
     },
     {
+      "name": "AISafetyAtlas.SingularLearning.euclideanProdEquiv_mem_ball_zero",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.FreeBlockPair"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.euclideanProdEquiv_symm_splitCLE",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.IndefiniteBlockPair"
+    },
+    {
       "name": "AISafetyAtlas.SingularLearning.euclideanProdEquiv_zero",
       "kind": "theorem",
       "module": "AISafetyAtlas.SingularLearning.PairTransfer"
@@ -26271,9 +28461,19 @@
       "module": "AISafetyAtlas.SingularLearning.CoordTransfer"
     },
     {
+      "name": "AISafetyAtlas.SingularLearning.euclideanSwap_zero",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.IndefiniteBand"
+    },
+    {
       "name": "AISafetyAtlas.SingularLearning.eventually_log_div_comparable",
       "kind": "theorem",
       "module": "AISafetyAtlas.SingularLearning.PairTransfer"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.eventually_quadMap_quadSolve",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.QuadraticSolve"
     },
     {
       "name": "AISafetyAtlas.SingularLearning.eventually_tail_le_laplaceScale",
@@ -26311,6 +28511,31 @@
       "module": "AISafetyAtlas.SingularLearning.ChamberIntegral"
     },
     {
+      "name": "AISafetyAtlas.SingularLearning.exists_congruence_isInvertible_of_symmetric_family",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.HadamardCongruence"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.exists_congruence_of_symmetric_family_param",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.HadamardCongruence"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.exists_contDiff_eqOn_of_contDiffOn",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.CriticalFiber"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.exists_critical_fiber",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.CriticalFiber"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.exists_diagonal_coords",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.SylvesterPair"
+    },
+    {
       "name": "AISafetyAtlas.SingularLearning.exists_factorization_iff_feasible",
       "kind": "theorem",
       "module": "AISafetyAtlas.SingularLearning.RankRealization"
@@ -26331,9 +28556,19 @@
       "module": "AISafetyAtlas.SingularLearning.RankRealization"
     },
     {
+      "name": "AISafetyAtlas.SingularLearning.exists_freeBlockBand_bounds",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.FreeBlockBand"
+    },
+    {
       "name": "AISafetyAtlas.SingularLearning.exists_frobeniusSq_conj_comparable",
       "kind": "theorem",
       "module": "AISafetyAtlas.SingularLearning.OrbitTransport"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.exists_gromoll_meyer_splitting",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.CriticalFiber"
     },
     {
       "name": "AISafetyAtlas.SingularLearning.exists_hausdorffMeasure_eq_smul_volume",
@@ -26346,9 +28581,64 @@
       "module": "AISafetyAtlas.SingularLearning.DiffeoTransfer"
     },
     {
+      "name": "AISafetyAtlas.SingularLearning.exists_lipschitzOnWith_ball_of_contDiffAt",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.IndefiniteBlockPair"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.exists_lipschitzOnWith_quadSolve",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.QuadraticSolve"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.exists_mem_ker_gram",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.HessianBlock"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.exists_model_congruence",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.GermPair"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.exists_normal_form_euclidean",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.HadamardCongruence"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.exists_normal_form_of_hessian_nondegenerate",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.HadamardCongruence"
+    },
+    {
       "name": "AISafetyAtlas.SingularLearning.exists_notMem_of_countable",
       "kind": "theorem",
       "module": "AISafetyAtlas.SingularLearning.LocalPair"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.exists_open_isInvertible",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.HadamardCongruence"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.exists_partial_congruence_normal_form",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.HadamardCongruence"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.exists_partial_congruence_normal_form_of_nhds",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.CriticalFiber"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.exists_partial_congruence_normal_form_of_vanishing",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.HadamardCongruence"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.exists_radius_of_continuousAt",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.FreeBlockBand"
     },
     {
       "name": "AISafetyAtlas.SingularLearning.exists_rank_normal_form",
@@ -26359,6 +28649,31 @@
       "name": "AISafetyAtlas.SingularLearning.exists_resonant_vertex",
       "kind": "theorem",
       "module": "AISafetyAtlas.SingularLearning.ChamberIntegral"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.exists_shiftedBandVolume_upper",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.ShiftedBand"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.exists_shiftedBand_bounds",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.ShiftedBand"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.exists_shifted_congruence_normal_form",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.CriticalFiber"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.exists_sign_split",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.IndefiniteBand"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.exists_signed_congruence_of_diagonal",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.GermPair"
     },
     {
       "name": "AISafetyAtlas.SingularLearning.exists_transpose_mul_self_of_posDef",
@@ -26386,6 +28701,31 @@
       "module": "AISafetyAtlas.SingularLearning.TauberianLog"
     },
     {
+      "name": "AISafetyAtlas.SingularLearning.exp_abs_width",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.IndefiniteBand"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.fderiv_fderiv_pairLoss_apply",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.LossDerivative"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.fderiv_fderiv_pairLoss_diag",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.LossDerivative"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.fderiv_pairLoss_apply",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.LossDerivative"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.fderiv_pairLoss_eq_zero_of",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.LossDerivative"
+    },
+    {
       "name": "AISafetyAtlas.SingularLearning.feasible_self",
       "kind": "theorem",
       "module": "AISafetyAtlas.SingularLearning.AoyagiWatanabe"
@@ -26396,9 +28736,139 @@
       "module": "AISafetyAtlas.SingularLearning.ChartTransport"
     },
     {
+      "name": "AISafetyAtlas.SingularLearning.finrank_euclidean_dual",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.IndefiniteBlockPair"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.finrank_orthogonal_add_finrank",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.ParamSplit"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.freeBlockBandSet",
+      "kind": "def",
+      "module": "AISafetyAtlas.SingularLearning.FreeBlockBand"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.freeBlockBandSet_slice",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.FreeBlockBand"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.freeBlockBandSet_slice_of_not_mem",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.FreeBlockBand"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.freeBlockBandSet_subset",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.FreeBlockBand"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.freeBlockBandSet_subset_preimage",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.FreeBlockPair"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.freeBlockGerm",
+      "kind": "def",
+      "module": "AISafetyAtlas.SingularLearning.FreeBlockPair"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.freeBlockGerm_euclideanProdEquiv",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.FreeBlockPair"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.freeBlockGerm_nonneg",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.FreeBlockPair"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.froIP",
+      "kind": "def",
+      "module": "AISafetyAtlas.SingularLearning.LossExpansion"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.froIPL",
+      "kind": "def",
+      "module": "AISafetyAtlas.SingularLearning.LossDerivative"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.froIPL_apply",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.LossDerivative"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.froIP_add_left",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.LossExpansion"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.froIP_add_right",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.LossExpansion"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.froIP_comm",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.LossExpansion"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.froIP_eq_trace",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.LossExpansion"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.froIP_mul_left",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.LossExpansion"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.froIP_mul_right",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.LossExpansion"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.froIP_residual_first_order",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.LossExpansion"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.froIP_self",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.LossExpansion"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.froIP_smul_right",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.LossExpansion"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.froIP_vecMulVec",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.LossExpansion"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.froIP_vecMulVec_vecMulVec",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.LossExpansion"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.froIPₗ",
+      "kind": "def",
+      "module": "AISafetyAtlas.SingularLearning.LossDerivative"
+    },
+    {
       "name": "AISafetyAtlas.SingularLearning.frobeniusSq",
       "kind": "def",
       "module": "AISafetyAtlas.SingularLearning.MatrixNormBridge"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.frobeniusSq_add",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.LossExpansion"
     },
     {
       "name": "AISafetyAtlas.SingularLearning.frobeniusSq_conj_le",
@@ -26451,6 +28921,16 @@
       "module": "AISafetyAtlas.SingularLearning.EliminationChart"
     },
     {
+      "name": "AISafetyAtlas.SingularLearning.frobeniusSq_full_variation",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.LossExpansion"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.frobeniusSq_full_variation_of_critical",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.LossExpansion"
+    },
+    {
       "name": "AISafetyAtlas.SingularLearning.frobeniusSq_mul_le",
       "kind": "theorem",
       "module": "AISafetyAtlas.SingularLearning.MatrixNormBridge"
@@ -26469,6 +28949,11 @@
       "name": "AISafetyAtlas.SingularLearning.frobeniusSq_reindex",
       "kind": "theorem",
       "module": "AISafetyAtlas.SingularLearning.MatrixNormBridge"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.frobeniusSq_rung_variation",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.LossExpansion"
     },
     {
       "name": "AISafetyAtlas.SingularLearning.frobeniusSq_smul",
@@ -26496,6 +28981,31 @@
       "module": "AISafetyAtlas.SingularLearning.MatrixNormBridge"
     },
     {
+      "name": "AISafetyAtlas.SingularLearning.frobeniusSq_variation_eq_dist_sq",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.LossExpansion"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.frobeniusSq_variation_eq_of_mul_left_eq_zero",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.LossExpansion"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.frobeniusSq_variation_eq_of_mul_right_eq_zero",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.LossExpansion"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.frobeniusSq_variation_eq_of_product_fixed",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.LossExpansion"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.frobeniusSq_vecMulVec",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.LossExpansion"
+    },
+    {
       "name": "AISafetyAtlas.SingularLearning.frobeniusSq_zero",
       "kind": "theorem",
       "module": "AISafetyAtlas.SingularLearning.MatrixNormBridge"
@@ -26504,6 +29014,11 @@
       "name": "AISafetyAtlas.SingularLearning.frobenius_norm_sq",
       "kind": "theorem",
       "module": "AISafetyAtlas.SingularLearning.GaussianQuadratic"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.fromBlocks_submatrix_sumComm",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.HessianBlock"
     },
     {
       "name": "AISafetyAtlas.SingularLearning.fromRows_elimPtop_elimPbot",
@@ -26551,6 +29066,11 @@
       "module": "AISafetyAtlas.SingularLearning.ResidualScalar"
     },
     {
+      "name": "AISafetyAtlas.SingularLearning.gaussianLaplace_residualGerm_one_one_two",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.IndefiniteQuadratic"
+    },
+    {
       "name": "AISafetyAtlas.SingularLearning.gaussian_ge_ball",
       "kind": "theorem",
       "module": "AISafetyAtlas.SingularLearning.DyadicLocalization"
@@ -26559,6 +29079,16 @@
       "name": "AISafetyAtlas.SingularLearning.gaussian_le_ball",
       "kind": "theorem",
       "module": "AISafetyAtlas.SingularLearning.DyadicLocalization"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.germCongruence",
+      "kind": "def",
+      "module": "AISafetyAtlas.SingularLearning.GermPair"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.germCongruence_splitLE",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.GermPair"
     },
     {
       "name": "AISafetyAtlas.SingularLearning.hasDerivWithinAt_exp_neg_mul",
@@ -26576,9 +29106,79 @@
       "module": "AISafetyAtlas.SingularLearning.PairTransfer"
     },
     {
+      "name": "AISafetyAtlas.SingularLearning.hasFDerivAt_apply_fst",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.HadamardCongruence"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.hasFDerivAt_pairLoss",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.LossDerivative"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.hasFDerivAt_pairProd",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.LossDerivative"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.hasLocalVolumeOrder_abs_add_germ_of_congruence",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.GermPair"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.hasLocalVolumeOrder_abs_matrixQuadForm",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.SylvesterPair"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.hasLocalVolumeOrder_abs_matrixQuadForm_add_germ",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.GermPair"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.hasLocalVolumeOrder_abs_of_congruent",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.IndefiniteBand"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.hasLocalVolumeOrder_abs_of_diagonal",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.IndefiniteBand"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.hasLocalVolumeOrder_abs_of_diagonal_indefinite",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.SylvesterPair"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.hasLocalVolumeOrder_abs_of_nondegenerate_indefinite",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.SylvesterPair"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.hasLocalVolumeOrder_abs_of_sq",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.IndefiniteQuadratic"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.hasLocalVolumeOrder_abs_residualAmplitude",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.IndefiniteQuadratic"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.hasLocalVolumeOrder_abs_sub_of_indefinite_block",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.IndefiniteBlockPair"
+    },
+    {
       "name": "AISafetyAtlas.SingularLearning.hasLocalVolumeOrder_add",
       "kind": "theorem",
       "module": "AISafetyAtlas.SingularLearning.PairTransfer"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.hasLocalVolumeOrder_centeredBandGerm_of_indefinite_block",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.IndefiniteBlockPair"
     },
     {
       "name": "AISafetyAtlas.SingularLearning.hasLocalVolumeOrder_chartGerm",
@@ -26631,9 +29231,19 @@
       "module": "AISafetyAtlas.SingularLearning.DiffeoTransfer"
     },
     {
+      "name": "AISafetyAtlas.SingularLearning.hasLocalVolumeOrder_comp_of_lipschitz",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.DiffeoTransfer"
+    },
+    {
       "name": "AISafetyAtlas.SingularLearning.hasLocalVolumeOrder_comparable_iff",
       "kind": "theorem",
       "module": "AISafetyAtlas.SingularLearning.PairTransfer"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.hasLocalVolumeOrder_freeBlockGerm",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.FreeBlockPair"
     },
     {
       "name": "AISafetyAtlas.SingularLearning.hasLocalVolumeOrder_freeCoords",
@@ -26644,6 +29254,21 @@
       "name": "AISafetyAtlas.SingularLearning.hasLocalVolumeOrder_freeCoords_left",
       "kind": "theorem",
       "module": "AISafetyAtlas.SingularLearning.CoordTransfer"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.hasLocalVolumeOrder_hyperbolicGerm",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.IndefiniteBand"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.hasLocalVolumeOrder_modelBandGerm",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.IndefiniteBand"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.hasLocalVolumeOrder_modelBandGerm_of_three_le",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.IndefiniteBand"
     },
     {
       "name": "AISafetyAtlas.SingularLearning.hasLocalVolumeOrder_of_comparable",
@@ -26681,6 +29306,11 @@
       "module": "AISafetyAtlas.SingularLearning.ResidualScalar"
     },
     {
+      "name": "AISafetyAtlas.SingularLearning.hasLocalVolumeOrder_residualGerm_one_one_two",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.IndefiniteQuadratic"
+    },
+    {
       "name": "AISafetyAtlas.SingularLearning.hasLocalVolumeOrder_residualGerm_tall",
       "kind": "theorem",
       "module": "AISafetyAtlas.SingularLearning.ResidualLaplace"
@@ -26701,9 +29331,49 @@
       "module": "AISafetyAtlas.SingularLearning.OrbitTransport"
     },
     {
+      "name": "AISafetyAtlas.SingularLearning.hasStrictFDerivAt_mul_const_mul_self",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.QuadraticSolve"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.hasStrictFDerivAt_quadMap",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.QuadraticSolve"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.hasStrictLocalVolumeOrder_of_hasLocalVolumeOrder",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.TwoSidedBand"
+    },
+    {
       "name": "AISafetyAtlas.SingularLearning.hasZetaPoleOrder_sqGerm",
       "kind": "theorem",
       "module": "AISafetyAtlas.SingularLearning.ZetaMonomial"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.hessianBlock_indefinite_at_zero",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.HessianBlock"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.hessianBlock_quadForm",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.HessianBlock"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.hessianBlock_quadForm_indefinite",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.HessianBlock"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.hyperbolicEquiv",
+      "kind": "def",
+      "module": "AISafetyAtlas.SingularLearning.IndefiniteBand"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.hyperbolicGerm",
+      "kind": "def",
+      "module": "AISafetyAtlas.SingularLearning.IndefiniteBand"
     },
     {
       "name": "AISafetyAtlas.SingularLearning.iUnion_chamberDeltaPerm",
@@ -26731,6 +29401,11 @@
       "module": "AISafetyAtlas.SingularLearning.LayerCake"
     },
     {
+      "name": "AISafetyAtlas.SingularLearning.injective_matrixPolarDual",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.IndefiniteBlockPair"
+    },
+    {
       "name": "AISafetyAtlas.SingularLearning.injective_of_mem_chamberDeltaPerm",
       "kind": "theorem",
       "module": "AISafetyAtlas.SingularLearning.ChamberIntegral"
@@ -26739,6 +29414,26 @@
       "name": "AISafetyAtlas.SingularLearning.injective_of_notMem_chamberDiag",
       "kind": "theorem",
       "module": "AISafetyAtlas.SingularLearning.ChamberIntegral"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.innerBand_ge",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.IndefiniteBand"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.innerBand_le_gaussian",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.IndefiniteBand"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.innerBand_one_ge",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.IndefiniteBand"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.inner_band_le",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.IndefiniteBand"
     },
     {
       "name": "AISafetyAtlas.SingularLearning.instDecidableAWBalanced",
@@ -26786,6 +29481,11 @@
       "module": "AISafetyAtlas.SingularLearning.ChamberIntegral"
     },
     {
+      "name": "AISafetyAtlas.SingularLearning.integrableOn_exp_abs",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.IndefiniteBand"
+    },
+    {
       "name": "AISafetyAtlas.SingularLearning.integrableOn_exp_neg_mul",
       "kind": "theorem",
       "module": "AISafetyAtlas.SingularLearning.Tauberian"
@@ -26806,6 +29506,21 @@
       "module": "AISafetyAtlas.SingularLearning.ChamberIntegral"
     },
     {
+      "name": "AISafetyAtlas.SingularLearning.integrableOn_exp_neg_sq_Ioi",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.IndefiniteBand"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.integrableOn_innerBand",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.IndefiniteBand"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.integrableOn_innerBand_outer",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.IndefiniteBand"
+    },
+    {
       "name": "AISafetyAtlas.SingularLearning.integrableOn_of_bounded",
       "kind": "theorem",
       "module": "AISafetyAtlas.SingularLearning.TauberianLog"
@@ -26821,9 +29536,24 @@
       "module": "AISafetyAtlas.SingularLearning.Tauberian"
     },
     {
+      "name": "AISafetyAtlas.SingularLearning.integrableOn_outerBand",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.IndefiniteBand"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.integrableOn_pow_mul_exp_neg_sq",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.IndefiniteBand"
+    },
+    {
       "name": "AISafetyAtlas.SingularLearning.integrableOn_prod_chamberIntegrand",
       "kind": "theorem",
       "module": "AISafetyAtlas.SingularLearning.ChamberIntegral"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.integrableOn_radialIntegrand",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.IndefiniteQuadratic"
     },
     {
       "name": "AISafetyAtlas.SingularLearning.integrableOn_rpow_Ioc",
@@ -26834,6 +29564,11 @@
       "name": "AISafetyAtlas.SingularLearning.integrableOn_rpow_Ioc_of_pos",
       "kind": "theorem",
       "module": "AISafetyAtlas.SingularLearning.ChamberIntegral"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.integrable_bandLaplace",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.IndefiniteBand"
     },
     {
       "name": "AISafetyAtlas.SingularLearning.integrable_exp_neg_frobeniusSq",
@@ -26896,6 +29631,11 @@
       "module": "AISafetyAtlas.SingularLearning.ResidualLaplace"
     },
     {
+      "name": "AISafetyAtlas.SingularLearning.integral_det_two_one",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.IndefiniteQuadratic"
+    },
+    {
       "name": "AISafetyAtlas.SingularLearning.integral_exp_neg_frobenius_mul",
       "kind": "theorem",
       "module": "AISafetyAtlas.SingularLearning.GaussianQuadratic"
@@ -26909,6 +29649,11 @@
       "name": "AISafetyAtlas.SingularLearning.integral_exp_neg_frobenius_mul_norm",
       "kind": "theorem",
       "module": "AISafetyAtlas.SingularLearning.GaussianQuadratic"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.integral_exp_neg_left",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.IndefiniteBand"
     },
     {
       "name": "AISafetyAtlas.SingularLearning.integral_exp_neg_mul_Ioi",
@@ -26936,6 +29681,11 @@
       "module": "AISafetyAtlas.SingularLearning.GaussianQuadratic"
     },
     {
+      "name": "AISafetyAtlas.SingularLearning.integral_exp_neg_right",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.IndefiniteBand"
+    },
+    {
       "name": "AISafetyAtlas.SingularLearning.integral_gaussian_eq",
       "kind": "theorem",
       "module": "AISafetyAtlas.SingularLearning.ResidualScalar"
@@ -26944,6 +29694,11 @@
       "name": "AISafetyAtlas.SingularLearning.integral_matrix_one_one",
       "kind": "theorem",
       "module": "AISafetyAtlas.SingularLearning.ResidualScalar"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.integral_one_div_Ioo",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.IndefiniteBand"
     },
     {
       "name": "AISafetyAtlas.SingularLearning.integral_residualGaussian_inner",
@@ -26994,6 +29749,16 @@
       "name": "AISafetyAtlas.SingularLearning.inv_mul_mul_mul_inv",
       "kind": "theorem",
       "module": "AISafetyAtlas.SingularLearning.OrbitTransport"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.isBoundedBilinearMap_mul_const_mul",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.QuadraticSolve"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.isClosed_shiftedBandSet",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.ShiftedBand"
     },
     {
       "name": "AISafetyAtlas.SingularLearning.isEliminationChart_of_feasible",
@@ -27096,6 +29861,11 @@
       "module": "AISafetyAtlas.SingularLearning.ChartAnalytic"
     },
     {
+      "name": "AISafetyAtlas.SingularLearning.isSymm_smul",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.IndefiniteBlockPair"
+    },
+    {
       "name": "AISafetyAtlas.SingularLearning.isUnit_det_elimPtop_of_pblock",
       "kind": "theorem",
       "module": "AISafetyAtlas.SingularLearning.EliminationChart"
@@ -27104,6 +29874,11 @@
       "name": "AISafetyAtlas.SingularLearning.isometry_euclideanSwap",
       "kind": "theorem",
       "module": "AISafetyAtlas.SingularLearning.CoordTransfer"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.isometry_paramSplitEquiv",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.ParamSplit"
     },
     {
       "name": "AISafetyAtlas.SingularLearning.kappaA2",
@@ -27156,6 +29931,11 @@
       "module": "AISafetyAtlas.SingularLearning.LaplaceScale"
     },
     {
+      "name": "AISafetyAtlas.SingularLearning.laplaceScale_half_one",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.IndefiniteQuadratic"
+    },
+    {
       "name": "AISafetyAtlas.SingularLearning.laplaceScale_half_two",
       "kind": "theorem",
       "module": "AISafetyAtlas.SingularLearning.ResidualScalar"
@@ -27164,6 +29944,11 @@
       "name": "AISafetyAtlas.SingularLearning.laplaceScale_injective",
       "kind": "theorem",
       "module": "AISafetyAtlas.SingularLearning.LaplaceScale"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.laplaceScale_one_one",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.IndefiniteBand"
     },
     {
       "name": "AISafetyAtlas.SingularLearning.laplaceScale_pair_unique",
@@ -27216,9 +30001,29 @@
       "module": "AISafetyAtlas.SingularLearning.PairTransfer"
     },
     {
+      "name": "AISafetyAtlas.SingularLearning.lossGerm_coupling_at_zero",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.HessianBlock"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.lossGerm_eq_quadForm",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.HessianBlock"
+    },
+    {
       "name": "AISafetyAtlas.SingularLearning.lt_card_filter_iff",
       "kind": "theorem",
       "module": "AISafetyAtlas.SingularLearning.ChamberIntegral"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.map_orthogonal_paramSplitEquiv_eq",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.ParamSplit"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.map_paramSplitEquiv_eq",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.ParamSplit"
     },
     {
       "name": "AISafetyAtlas.SingularLearning.matrixEuclEquiv",
@@ -27281,9 +30086,64 @@
       "module": "AISafetyAtlas.SingularLearning.Coordinates"
     },
     {
+      "name": "AISafetyAtlas.SingularLearning.matrixPolarBilin",
+      "kind": "def",
+      "module": "AISafetyAtlas.SingularLearning.IndefiniteBlockPair"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.matrixPolarBilin_apply",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.IndefiniteBlockPair"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.matrixPolarDual",
+      "kind": "def",
+      "module": "AISafetyAtlas.SingularLearning.IndefiniteBlockPair"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.matrixPolarDual_apply",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.IndefiniteBlockPair"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.matrixPolarEquiv",
+      "kind": "def",
+      "module": "AISafetyAtlas.SingularLearning.IndefiniteBlockPair"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.matrixPolarEquiv_apply",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.IndefiniteBlockPair"
+    },
+    {
       "name": "AISafetyAtlas.SingularLearning.matrixQuadEucl",
       "kind": "def",
       "module": "AISafetyAtlas.SingularLearning.ChartTransport"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.matrixQuadForm",
+      "kind": "def",
+      "module": "AISafetyAtlas.SingularLearning.SylvesterPair"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.matrixQuadForm_eq",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.SylvesterPair"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.matrixQuadForm_smul",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.IndefiniteBlockPair"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.matrixQuadPolar",
+      "kind": "def",
+      "module": "AISafetyAtlas.SingularLearning.IndefiniteBlockPair"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.matrixQuadPolar_self",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.IndefiniteBlockPair"
     },
     {
       "name": "AISafetyAtlas.SingularLearning.matrixQuintEucl",
@@ -27311,6 +30171,11 @@
       "module": "AISafetyAtlas.SingularLearning.ChartTransport"
     },
     {
+      "name": "AISafetyAtlas.SingularLearning.matrixTwoOneEquiv",
+      "kind": "def",
+      "module": "AISafetyAtlas.SingularLearning.IndefiniteQuadratic"
+    },
+    {
       "name": "AISafetyAtlas.SingularLearning.matrix_inv_eq_smul_adjugate",
       "kind": "theorem",
       "module": "AISafetyAtlas.SingularLearning.MatrixAnalytic"
@@ -27324,6 +30189,16 @@
       "name": "AISafetyAtlas.SingularLearning.measurableEmbedding_coord",
       "kind": "theorem",
       "module": "AISafetyAtlas.SingularLearning.ZetaMonomial"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.measurableSet_bandCore",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.ShiftedBand"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.measurableSet_bandWindow",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.ShiftedBand"
     },
     {
       "name": "AISafetyAtlas.SingularLearning.measurableSet_chamberBox",
@@ -27366,6 +30241,16 @@
       "module": "AISafetyAtlas.SingularLearning.DyadicLocalization"
     },
     {
+      "name": "AISafetyAtlas.SingularLearning.measurableSet_freeBlockBandSet",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.FreeBlockBand"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.measurableSet_shiftedBandSet",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.ShiftedBand"
+    },
+    {
       "name": "AISafetyAtlas.SingularLearning.measurable_chamberFT",
       "kind": "theorem",
       "module": "AISafetyAtlas.SingularLearning.ChamberIntegral"
@@ -27379,6 +30264,11 @@
       "name": "AISafetyAtlas.SingularLearning.measurable_chamberPhiT",
       "kind": "theorem",
       "module": "AISafetyAtlas.SingularLearning.ChamberIntegral"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.measurable_modelBandGerm",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.QuadraticSplit"
     },
     {
       "name": "AISafetyAtlas.SingularLearning.measurable_residualGaussian",
@@ -27441,6 +30331,31 @@
       "module": "AISafetyAtlas.SingularLearning.ResidualLaplace"
     },
     {
+      "name": "AISafetyAtlas.SingularLearning.measurePreserving_matrixTwoOneEquiv",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.IndefiniteQuadratic"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.measurePreserving_paramSplitEquiv",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.ParamSplit"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.measurePreserving_paramSplitEquiv_symm",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.ParamSplit"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.measurePreserving_splitLE",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.QuadraticSplit"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.measureReal_closedBall_eq",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.ShiftedBand"
+    },
+    {
       "name": "AISafetyAtlas.SingularLearning.measureReal_dyadicShell_le",
       "kind": "theorem",
       "module": "AISafetyAtlas.SingularLearning.DyadicLocalization"
@@ -27451,6 +30366,56 @@
       "module": "AISafetyAtlas.SingularLearning.JacobianSandwich"
     },
     {
+      "name": "AISafetyAtlas.SingularLearning.measureReal_le_shell",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.ShiftedBand"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.measureReal_sliceBand_le",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.ShiftedBand"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.measure_annulus",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.ShiftedBand"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.measure_bandCore_ge",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.ShiftedBand"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.measure_bandWindow_le",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.ShiftedBand"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.measure_freeBlockBandSet_eq_lintegral",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.FreeBlockBand"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.measure_freeBlockBandSet_ge",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.FreeBlockBand"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.measure_freeBlockBandSet_half_le_sublevelVolume",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.FreeBlockPair"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.measure_freeBlockBandSet_le",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.FreeBlockBand"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.measure_freeBlockBandSet_ne_top",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.FreeBlockBand"
+    },
+    {
       "name": "AISafetyAtlas.SingularLearning.measure_image_le_of_abs_det_le",
       "kind": "theorem",
       "module": "AISafetyAtlas.SingularLearning.JacobianSandwich"
@@ -27459,6 +30424,31 @@
       "name": "AISafetyAtlas.SingularLearning.measure_image_le_of_lipschitzOnWith",
       "kind": "theorem",
       "module": "AISafetyAtlas.SingularLearning.DiffeoTransfer"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.measure_preimage_sublevel",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.FreeBlockPair"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.measure_shell_ge",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.ShiftedBand"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.measure_shiftedBandSet_le",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.ShiftedBand"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.measure_shiftedBandSet_ne_top",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.ShiftedBand"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.measure_sliceBand_le",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.ShiftedBand"
     },
     {
       "name": "AISafetyAtlas.SingularLearning.mem_chamberDelta",
@@ -27486,6 +30476,16 @@
       "module": "AISafetyAtlas.SingularLearning.DyadicLocalization"
     },
     {
+      "name": "AISafetyAtlas.SingularLearning.mem_iff_paramSplitEquiv_castAdd_eq_zero",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.ParamSplit"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.mem_orthogonal_iff_paramSplitEquiv_natAdd_eq_zero",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.ParamSplit"
+    },
+    {
       "name": "AISafetyAtlas.SingularLearning.meromorphicAt_zetaSq",
       "kind": "theorem",
       "module": "AISafetyAtlas.SingularLearning.ZetaMonomial"
@@ -27506,6 +30506,76 @@
       "module": "AISafetyAtlas.SingularLearning.ChamberIntegral"
     },
     {
+      "name": "AISafetyAtlas.SingularLearning.modelBandForm",
+      "kind": "def",
+      "module": "AISafetyAtlas.SingularLearning.ShiftedBand"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.modelBandForm_euclideanSwap",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.ShiftedBand"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.modelBandForm_splitLE",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.ShiftedBand"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.modelBandGerm",
+      "kind": "def",
+      "module": "AISafetyAtlas.SingularLearning.QuadraticSplit"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.modelBandGerm_comp_euclideanSwap",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.IndefiniteBand"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.modelBandGerm_eq_abs_form",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.ShiftedBand"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.modelBandGerm_nonneg",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.QuadraticSplit"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.modelBandGerm_smul",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.QuadraticSplit"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.modelBandGerm_splitLE",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.QuadraticSplit"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.modelBandGerm_splitLE_swap",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.QuadraticSplit"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.mulDerivL",
+      "kind": "def",
+      "module": "AISafetyAtlas.SingularLearning.LossDerivative"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.mulDerivL_apply",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.LossDerivative"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.mulL",
+      "kind": "def",
+      "module": "AISafetyAtlas.SingularLearning.LossDerivative"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.mulL_apply",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.LossDerivative"
+    },
+    {
       "name": "AISafetyAtlas.SingularLearning.mul_congr_of_units",
       "kind": "theorem",
       "module": "AISafetyAtlas.SingularLearning.OrbitNormalForm"
@@ -27516,6 +30586,21 @@
       "module": "AISafetyAtlas.SingularLearning.OrbitTransport"
     },
     {
+      "name": "AISafetyAtlas.SingularLearning.mul_vecMulVec",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.LossExpansion"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.mulₗ",
+      "kind": "def",
+      "module": "AISafetyAtlas.SingularLearning.LossDerivative"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.nontrivial_euclideanSpace",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.ShiftedBand"
+    },
+    {
       "name": "AISafetyAtlas.SingularLearning.norm_add_sq_le",
       "kind": "theorem",
       "module": "AISafetyAtlas.SingularLearning.EliminationChart"
@@ -27524,6 +30609,16 @@
       "name": "AISafetyAtlas.SingularLearning.norm_eq_abs_coord",
       "kind": "theorem",
       "module": "AISafetyAtlas.SingularLearning.ZetaMonomial"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.norm_euclideanSwap",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.ShiftedBand"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.norm_lt_of_mem_ball_zero",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.FreeBlockPair"
     },
     {
       "name": "AISafetyAtlas.SingularLearning.norm_sq_elimCoordEquiv_fst",
@@ -27556,9 +30651,29 @@
       "module": "AISafetyAtlas.SingularLearning.ChartTransport"
     },
     {
+      "name": "AISafetyAtlas.SingularLearning.norm_sq_matrixTwoOneEquiv",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.IndefiniteQuadratic"
+    },
+    {
       "name": "AISafetyAtlas.SingularLearning.norm_sq_residual",
       "kind": "theorem",
       "module": "AISafetyAtlas.SingularLearning.ResidualGerm"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.norm_sq_sortProd_fst",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.IndefiniteBand"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.norm_sq_sortProd_snd",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.IndefiniteBand"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.norm_sq_splitLE",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.QuadraticSplit"
     },
     {
       "name": "AISafetyAtlas.SingularLearning.normalized_chart",
@@ -27636,6 +30751,36 @@
       "module": "AISafetyAtlas.SingularLearning.OrbitTransport"
     },
     {
+      "name": "AISafetyAtlas.SingularLearning.orthonormal_adaptedFamily",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.ParamSplit"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.outerBand_one_ge",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.IndefiniteBand"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.outer_band_le",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.IndefiniteBand"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.pairLoss",
+      "kind": "def",
+      "module": "AISafetyAtlas.SingularLearning.LossDerivative"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.pairLossDeriv",
+      "kind": "def",
+      "module": "AISafetyAtlas.SingularLearning.LossDerivative"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.pairLossDeriv_apply",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.LossDerivative"
+    },
+    {
       "name": "AISafetyAtlas.SingularLearning.pair_unique_of_laplace_comparable",
       "kind": "theorem",
       "module": "AISafetyAtlas.SingularLearning.LaplaceScale"
@@ -27654,6 +30799,51 @@
       "name": "AISafetyAtlas.SingularLearning.paramCoords",
       "kind": "def",
       "module": "AISafetyAtlas.SingularLearning.ChartCoords"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.paramSplitEquiv",
+      "kind": "def",
+      "module": "AISafetyAtlas.SingularLearning.ParamSplit"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.paramSplitEquiv_adaptedFamily_inl",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.ParamSplit"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.paramSplitEquiv_adaptedFamily_inr",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.ParamSplit"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.paramSplitEquiv_castAdd",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.ParamSplit"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.paramSplitEquiv_natAdd",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.ParamSplit"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.partialHessianAverage",
+      "kind": "def",
+      "module": "AISafetyAtlas.SingularLearning.HadamardCongruence"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.partialHessianAverage_apply",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.HadamardCongruence"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.partialHessianAverage_symm",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.HadamardCongruence"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.partialHessianAverage_zero",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.HadamardCongruence"
     },
     {
       "name": "AISafetyAtlas.SingularLearning.partialIdMatrix",
@@ -27691,6 +30881,11 @@
       "module": "AISafetyAtlas.SingularLearning.ChamberIntegral"
     },
     {
+      "name": "AISafetyAtlas.SingularLearning.polarPair",
+      "kind": "def",
+      "module": "AISafetyAtlas.SingularLearning.IndefiniteBand"
+    },
+    {
       "name": "AISafetyAtlas.SingularLearning.posDef_one_add_smul_mul_transpose",
       "kind": "theorem",
       "module": "AISafetyAtlas.SingularLearning.GramSpectrum"
@@ -27704,6 +30899,41 @@
       "name": "AISafetyAtlas.SingularLearning.posSemidef_transpose_mul",
       "kind": "theorem",
       "module": "AISafetyAtlas.SingularLearning.GramSpectrum"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.pow_mul_exp_neg_sq_le",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.IndefiniteBand"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.pow_mul_exp_neg_sq_le_exp_neg",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.IndefiniteBand"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.pow_sub_pow_le_mul_sq_sub_sq",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.ShiftedBand"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.pow_succ_sub_pow_succ_ge",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.ShiftedBand"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.preimage_shiftedBandSet_euclideanSwap",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.ShiftedBand"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.preimage_shiftedBandSet_subset",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.ShiftedBand"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.preimage_subset_freeBlockBandSet",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.FreeBlockPair"
     },
     {
       "name": "AISafetyAtlas.SingularLearning.prodRegroup9",
@@ -27731,6 +30961,26 @@
       "module": "AISafetyAtlas.SingularLearning.PairTransfer"
     },
     {
+      "name": "AISafetyAtlas.SingularLearning.quadMap",
+      "kind": "def",
+      "module": "AISafetyAtlas.SingularLearning.QuadraticSolve"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.quadMap_zero",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.QuadraticSolve"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.quadSolve",
+      "kind": "def",
+      "module": "AISafetyAtlas.SingularLearning.QuadraticSolve"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.quadSolve_zero",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.QuadraticSolve"
+    },
+    {
       "name": "AISafetyAtlas.SingularLearning.quadraticGerm",
       "kind": "def",
       "module": "AISafetyAtlas.SingularLearning.PairTransfer"
@@ -27754,6 +31004,46 @@
       "name": "AISafetyAtlas.SingularLearning.quadraticGerm_nonneg",
       "kind": "theorem",
       "module": "AISafetyAtlas.SingularLearning.PairTransfer"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.radialIntegrand",
+      "kind": "def",
+      "module": "AISafetyAtlas.SingularLearning.IndefiniteQuadratic"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.radialIntegrand_ge_on_annulus",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.IndefiniteQuadratic"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.radialIntegrand_le",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.IndefiniteQuadratic"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.radialIntegrand_nonneg",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.IndefiniteQuadratic"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.radialJ2",
+      "kind": "def",
+      "module": "AISafetyAtlas.SingularLearning.IndefiniteQuadratic"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.radialJ2_lower",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.IndefiniteQuadratic"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.radialJ2_upper",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.IndefiniteQuadratic"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.radial_two",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.IndefiniteBand"
     },
     {
       "name": "AISafetyAtlas.SingularLearning.rank_add_rank_le_of_mul",
@@ -27806,6 +31096,11 @@
       "module": "AISafetyAtlas.SingularLearning.ReducedRank"
     },
     {
+      "name": "AISafetyAtlas.SingularLearning.residualAmplitude",
+      "kind": "def",
+      "module": "AISafetyAtlas.SingularLearning.IndefiniteQuadratic"
+    },
+    {
       "name": "AISafetyAtlas.SingularLearning.residualGaussian",
       "kind": "def",
       "module": "AISafetyAtlas.SingularLearning.ResidualLaplace"
@@ -27829,6 +31124,11 @@
       "name": "AISafetyAtlas.SingularLearning.residualGerm_nonneg",
       "kind": "theorem",
       "module": "AISafetyAtlas.SingularLearning.ResidualGerm"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.residualGerm_one_one_two_eq_sq",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.IndefiniteQuadratic"
     },
     {
       "name": "AISafetyAtlas.SingularLearning.residualGerm_smul",
@@ -28026,6 +31326,11 @@
       "module": "AISafetyAtlas.SingularLearning.RankRealization"
     },
     {
+      "name": "AISafetyAtlas.SingularLearning.separatingLeft_of_det_ne_zero",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.SylvesterPair"
+    },
+    {
       "name": "AISafetyAtlas.SingularLearning.setIntegral_chamberOmegaEdge_le_chamberI",
       "kind": "theorem",
       "module": "AISafetyAtlas.SingularLearning.ChamberIntegral"
@@ -28076,6 +31381,106 @@
       "module": "AISafetyAtlas.SingularLearning.ChamberIntegral"
     },
     {
+      "name": "AISafetyAtlas.SingularLearning.shear",
+      "kind": "def",
+      "module": "AISafetyAtlas.SingularLearning.CriticalFiber"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.shear_apply",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.CriticalFiber"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.shiftedBandConst",
+      "kind": "def",
+      "module": "AISafetyAtlas.SingularLearning.ShiftedBand"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.shiftedBandConst_mono",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.ShiftedBand"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.shiftedBandConst_nonneg",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.ShiftedBand"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.shiftedBandConst_pos",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.ShiftedBand"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.shiftedBandLowerConst",
+      "kind": "def",
+      "module": "AISafetyAtlas.SingularLearning.ShiftedBand"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.shiftedBandLowerConst_le",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.ShiftedBand"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.shiftedBandLowerConst_pos",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.ShiftedBand"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.shiftedBandSet",
+      "kind": "def",
+      "module": "AISafetyAtlas.SingularLearning.ShiftedBand"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.shiftedBandSet_subset_closedBall",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.ShiftedBand"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.shiftedBandVolume",
+      "kind": "def",
+      "module": "AISafetyAtlas.SingularLearning.ShiftedBand"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.shiftedBandVolume_ge",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.ShiftedBand"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.shiftedBandVolume_le",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.ShiftedBand"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.shiftedBandVolume_le_of_three_le",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.ShiftedBand"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.shiftedBandVolume_swap",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.ShiftedBand"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.shiftedHessianAverage",
+      "kind": "def",
+      "module": "AISafetyAtlas.SingularLearning.CriticalFiber"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.shiftedHessianAverage_apply",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.CriticalFiber"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.shiftedHessianAverage_symm",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.CriticalFiber"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.shiftedHessianAverage_zero",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.CriticalFiber"
+    },
+    {
       "name": "AISafetyAtlas.SingularLearning.smul_dyadicShell_zero",
       "kind": "theorem",
       "module": "AISafetyAtlas.SingularLearning.DyadicLocalization"
@@ -28086,14 +31491,74 @@
       "module": "AISafetyAtlas.SingularLearning.ResidualGerm"
     },
     {
+      "name": "AISafetyAtlas.SingularLearning.smul_one_mulVec",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.HessianBlock"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.sortProd",
+      "kind": "def",
+      "module": "AISafetyAtlas.SingularLearning.IndefiniteBand"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.sortProd_fst",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.IndefiniteBand"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.sortProd_snd",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.IndefiniteBand"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.span_range_adaptedFamily_inl",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.ParamSplit"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.span_range_adaptedFamily_inr",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.ParamSplit"
+    },
+    {
       "name": "AISafetyAtlas.SingularLearning.span_range_coe_basis",
       "kind": "theorem",
       "module": "AISafetyAtlas.SingularLearning.OrbitNormalForm"
     },
     {
+      "name": "AISafetyAtlas.SingularLearning.splitCLE",
+      "kind": "def",
+      "module": "AISafetyAtlas.SingularLearning.IndefiniteBlockPair"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.splitLE",
+      "kind": "def",
+      "module": "AISafetyAtlas.SingularLearning.QuadraticSplit"
+    },
+    {
       "name": "AISafetyAtlas.SingularLearning.sqGerm",
       "kind": "def",
       "module": "AISafetyAtlas.SingularLearning.ZetaMonomial"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.strictSublevelVolume",
+      "kind": "def",
+      "module": "AISafetyAtlas.SingularLearning.TwoSidedBand"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.strictSublevelVolume_le_sublevel",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.TwoSidedBand"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.strictSublevelVolume_ne_top",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.TwoSidedBand"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.stronglyMeasurable_innerBand",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.IndefiniteBand"
     },
     {
       "name": "AISafetyAtlas.SingularLearning.sublevelVolume",
@@ -28111,9 +31576,19 @@
       "module": "AISafetyAtlas.SingularLearning.CoordTransfer"
     },
     {
+      "name": "AISafetyAtlas.SingularLearning.sublevelVolume_half_le_strict",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.TwoSidedBand"
+    },
+    {
       "name": "AISafetyAtlas.SingularLearning.sublevelVolume_le_ball",
       "kind": "theorem",
       "module": "AISafetyAtlas.SingularLearning.ResidualGerm"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.sublevelVolume_le_measure_freeBlockBandSet",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.FreeBlockPair"
     },
     {
       "name": "AISafetyAtlas.SingularLearning.sublevelVolume_le_prod",
@@ -28146,6 +31621,11 @@
       "module": "AISafetyAtlas.SingularLearning.PairTransfer"
     },
     {
+      "name": "AISafetyAtlas.SingularLearning.sublevelVolume_sq_eq_abs",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.IndefiniteQuadratic"
+    },
+    {
       "name": "AISafetyAtlas.SingularLearning.sublevel_quadraticGerm_eq",
       "kind": "theorem",
       "module": "AISafetyAtlas.SingularLearning.PairTransfer"
@@ -28159,6 +31639,11 @@
       "name": "AISafetyAtlas.SingularLearning.sum_fin_val_mul_two",
       "kind": "theorem",
       "module": "AISafetyAtlas.SingularLearning.ChamberIntegral"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.sum_weighted_sq_eq_split",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.IndefiniteBand"
     },
     {
       "name": "AISafetyAtlas.SingularLearning.summable_exp_mul_measureReal_dyadicShell",
@@ -28206,6 +31691,16 @@
       "module": "AISafetyAtlas.SingularLearning.LocalPair"
     },
     {
+      "name": "AISafetyAtlas.SingularLearning.toQuadraticForm'_apply",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.SylvesterPair"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.top_le_span_adaptedFamily",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.ParamSplit"
+    },
+    {
       "name": "AISafetyAtlas.SingularLearning.trace_gram_comm",
       "kind": "theorem",
       "module": "AISafetyAtlas.SingularLearning.GramSpectrum"
@@ -28226,6 +31721,26 @@
       "module": "AISafetyAtlas.SingularLearning.RankRealization"
     },
     {
+      "name": "AISafetyAtlas.SingularLearning.twoJ",
+      "kind": "def",
+      "module": "AISafetyAtlas.SingularLearning.IndefiniteQuadratic"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.twoJ_eq_radial",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.IndefiniteQuadratic"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.twoJ_lower",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.IndefiniteQuadratic"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.twoJ_upper",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.IndefiniteQuadratic"
+    },
+    {
       "name": "AISafetyAtlas.SingularLearning.two_mul_rrrLoss_elimParamEquivNF",
       "kind": "theorem",
       "module": "AISafetyAtlas.SingularLearning.ChartAssembly"
@@ -28236,6 +31751,11 @@
       "module": "AISafetyAtlas.SingularLearning.EliminationChart"
     },
     {
+      "name": "AISafetyAtlas.SingularLearning.unitBallReal_pos",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.IndefiniteBand"
+    },
+    {
       "name": "AISafetyAtlas.SingularLearning.unitBallVolume",
       "kind": "def",
       "module": "AISafetyAtlas.SingularLearning.DyadicLocalization"
@@ -28244,6 +31764,31 @@
       "name": "AISafetyAtlas.SingularLearning.unitBallVolume_nonneg",
       "kind": "theorem",
       "module": "AISafetyAtlas.SingularLearning.DyadicLocalization"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.unitDiskVolume",
+      "kind": "def",
+      "module": "AISafetyAtlas.SingularLearning.IndefiniteQuadratic"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.unitDiskVolume_pos",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.IndefiniteQuadratic"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.varied_product_eq",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.LossExpansion"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.vecMulVec_mul",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.LossExpansion"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.vecMulVec_mul_vecMulVec",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.LossExpansion"
     },
     {
       "name": "AISafetyAtlas.SingularLearning.volumeOrder_unique",
@@ -28264,6 +31809,11 @@
       "name": "AISafetyAtlas.SingularLearning.volumeScale_mul_one",
       "kind": "theorem",
       "module": "AISafetyAtlas.SingularLearning.PairTransfer"
+    },
+    {
+      "name": "AISafetyAtlas.SingularLearning.volumeScale_one_one",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.SingularLearning.FreeBlockPair"
     },
     {
       "name": "AISafetyAtlas.SingularLearning.volume_chamberDiag",

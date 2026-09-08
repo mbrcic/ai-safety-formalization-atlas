@@ -28,9 +28,10 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
-          # check_migration_adjudicated.py reads lean-toolchain at the recorded
-          # baseline commit to decide whether this branch is a toolchain bump.
-          # A depth-1 checkout does not have that commit, and a check that
+          # check_migration_adjudicated.py reads lean-toolchain at the
+          # recorded completed_commit and baseline_commit to decide whether
+          # this branch is a toolchain bump, and tests ancestry against the
+          # first. A depth-1 checkout has neither commit, and a check that
           # cannot see its baseline would skip exactly when it is needed.
           fetch-depth: 0
       # The gate skips tests/ when pytest is absent so a contributor without it
@@ -50,6 +51,9 @@ jobs:
           # used by ty can make CI report a false unresolved-import failure.
           echo "VIRTUAL_ENV=$ci_venv" >> "$GITHUB_ENV"
           echo "$ci_venv/bin" >> "$GITHUB_PATH"
+      # `-m lean` tests are NOT run here and must not be: this job has no
+      # toolchain, so they would skip silently rather than fail. The Lean job
+      # runs them after the build.
       - name: Cheap agent gate
         run: ./scripts/agent_gate.sh
       # Onboarding contract: setup.sh must parse, document itself, reject bad
@@ -88,6 +92,7 @@ jobs:
           && 75 || 30 }}
     outputs:
       run_lean: ${{ steps.filter.outputs.run_lean }}
+      run_migration: ${{ steps.filter.outputs.run_migration }}
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
@@ -98,7 +103,14 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          pattern='(\.lean$|^lakefile\.toml$|^lake-manifest\.json$|^lean-toolchain$|^scripts/lean_build_targets\.txt$|^scripts/check_print_axioms\.py$|^scripts/generate_declaration_index\.py$|^scripts/check_cited_declarations\.py$|^docs/status/declaration-index\.json$|^scripts/agent_gate\.sh$|^\.github/workflows/ci\.yml$)'
+          # `tests/`, `pytest.ini` and the reporters are in this pattern
+          # because the Lean job is the only place `pytest -m lean` runs. A
+          # change touching only a lean-marked test, or only the predicate
+          # reporter, would otherwise run agent-gate — where those tests skip
+          # for want of a toolchain — and skip this job, so the tests called the
+          # only evidence the intake check works would never execute on the
+          # change that edited them.
+          pattern='(\.lean$|^lakefile\.toml$|^lake-manifest\.json$|^lean-toolchain$|^scripts/lean_build_targets\.txt$|^scripts/check_print_axioms\.py$|^scripts/generate_declaration_index\.py$|^scripts/check_cited_declarations\.py$|^intake\.yaml$|^scripts/check_intake_statements\.py$|^scripts/report_predicate_duplicates\.py$|^tests/|^pytest\.ini$|^docs/status/declaration-index\.json$|^scripts/agent_gate\.sh$|^\.github/workflows/ci\.yml$)'
           run_lean=false
           if [ "${{ github.event_name }}" = "workflow_dispatch" ] || [ "${{ github.event_name }}" = "schedule" ]; then
             run_lean=true
@@ -127,6 +139,35 @@ jobs:
           fi
           echo "run_lean=$run_lean" >> "$GITHUB_OUTPUT"
           echo "Lean build required: $run_lean"
+
+          # A migration is decided by the toolchain moving, not by anybody's
+          # intent -- the same rule check_migration_adjudicated.py applies, and
+          # for the same reason: a branch that means to bump the toolchain and a
+          # branch that bumps it by accident need the same check to run. The
+          # baseline dump counts because re-dumping it *is* the migration act,
+          # and a branch that rewrites the baseline without re-comparing against
+          # it would otherwise gate itself out of the only check that reads it.
+          migration_pattern='(^lean-toolchain$|^lakefile\.toml$|^lake-manifest\.json$|^docs/status/elab-baseline-.*\.json$)'
+          run_migration=false
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            if git diff --name-only "${{ github.event.pull_request.base.sha }}" \
+                 "${{ github.event.pull_request.head.sha }}" \
+                 | grep -E "$migration_pattern" >/dev/null; then
+              run_migration=true
+            fi
+          elif [ "${{ github.event_name }}" = "push" ]; then
+            before="${{ github.event.before }}"
+            if [ -n "$before" ] && [ "$before" != "0000000000000000000000000000000000000000" ]; then
+              if git diff --name-only "$before" "${{ github.sha }}" \
+                   | grep -E "$migration_pattern" >/dev/null; then
+                run_migration=true
+              fi
+            else
+              run_migration=true
+            fi
+          fi
+          echo "run_migration=$run_migration" >> "$GITHUB_OUTPUT"
+          echo "Toolchain migration: $run_migration"
       - name: Skip notice
         if: steps.filter.outputs.run_lean != 'true'
         run: echo "No Lean-related paths changed; skipping lake build and axiom check."
@@ -169,6 +210,44 @@ jobs:
       - name: Kernel axiom check for headline declarations
         if: steps.filter.outputs.run_lean == 'true'
         run: python3 scripts/check_print_axioms.py
+      # The intake lane promises "a compiling `Prop`", and the cheap gate cannot
+      # check the `Prop` half: the declaration index records name, kind and
+      # module and no types. This elaborates each deposited name through the
+      # module its row advertises. It needs the build, so it lives here rather
+      # than in agent_gate.sh -- that job installs pytest and no toolchain, and
+      # the first real submission would have met a missing `lake`. While the
+      # lane is empty the step returns without invoking Lean at all.
+      - name: Intake statements elaborate to Prop
+        if: steps.filter.outputs.run_lean == 'true'
+        run: python3 scripts/check_intake_statements.py
+      # The tests marked `lean` shell out to `lake env lean`, so they skip
+      # themselves in the agent-gate job, which installs pytest and no
+      # toolchain. Eleven of them did — including every test of the intake
+      # harness, whose own header says those tests are the only evidence the
+      # check works, since the lane is empty. They run here, where the
+      # toolchain exists.
+      - name: Toolchain-dependent tests (pytest -m lean)
+        if: steps.filter.outputs.run_lean == 'true'
+        run: |
+          set -euo pipefail
+          # A venv, matching the agent-gate job. `pip install --user` against a
+          # distribution Python on ubuntu-latest hits PEP 668
+          # (externally-managed-environment); this job's whole purpose is to be
+          # the place these tests actually run, so it must not depend on that.
+          # The venv python is called directly rather than put on PATH, because
+          # `lake` has to stay resolvable in the same step.
+          lean_venv="$RUNNER_TEMP/atlas-lean-tests-venv"
+          python3 -m venv "$lean_venv"
+          # PyYAML as well as pytest, matching the agent-gate job: without it
+          # 33 tests do not collect at all, and a future `lean` test in one of
+          # those modules would disappear from this step rather than fail in it.
+          "$lean_venv/bin/python" -m pip install --quiet pytest pyyaml
+          # If the marker is ever misspelled, pytest selects nothing and exits
+          # 5, which `set -e` turns into a failed step. That is deliberate: a
+          # step whose whole purpose is running these tests must not be able to
+          # pass by running none. Do not add `|| true`.
+          "$lean_venv/bin/python" -m pytest tests/ -q --no-header \
+            -p no:cacheprovider -m lean
       # The step above decides *what* to audit with two regexes over source
       # text, and nothing checked that they reach what they claim to. They did
       # not: `PUBLIC_THEOREM_RE` rejected a leading attribute, so every
@@ -230,22 +309,67 @@ jobs:
       # fail on the one bucket an ordinary branch can be held to. `--fatal
       # silent` is the whole reason this is gateable. Adding, removing or
       # visibly editing a statement is what a branch is for and would make a
-      # plain --compare red on every ordinary PR, which is why it was left
-      # unwired; but a declaration whose printed type is unchanged cannot have
-      # changed meaning through an edit, so a silent change is never work
-      # anyone asked for.
+      # plain --compare red on every ordinary PR; a declaration whose printed
+      # type is unchanged cannot have changed meaning through an edit, so a
+      # silent change is never work anyone asked for.
+      #
+      # WHEN IT RUNS -- toolchain migrations, the two schedules, release tags
+      # and manual runs. NOT on an ordinary pull request, and this is a change
+      # from how it was first wired.
+      #
+      # The dump elaborates the whole environment: 342 s and 2.2 GB on an idle
+      # 12-core host against a tree the steps above have already built, slower
+      # on a two-core hosted runner. It was the largest single step on an
+      # ordinary pull request, against a job budget of 30 minutes.
+      #
+      # It now runs on:
+      #
+      #   * `run_migration` -- lean-toolchain, lakefile.toml, lake-manifest.json
+      #     or a baseline dump moved. This is the dominant cause, and it fires on
+      #     the pull request that does it, before the merge, exactly as before.
+      #     lakefile.toml is in the list on its own account and not only through
+      #     the manifest: `leanOptions` such as autoImplicit or pp settings
+      #     change elaboration with no manifest movement at all.
+      #   * `schedule` -- both crons. The weekly one exists to catch Mathlib CDN
+      #     and toolchain drift, which is this check's own failure mode and
+      #     arrives with no commit attached; the nightly one bounds how long any
+      #     silent change can sit unnoticed to a day.
+      #   * release tags and `workflow_dispatch` -- nothing ships unverified,
+      #     and anyone who wants the answer now can have it.
+      #
+      # WHAT THIS GIVES UP, stated because it is a trade and not a free saving.
+      # Silent drift is usually caused by the environment moving under unchanged
+      # source, and those causes are all still gated above. But an ordinary
+      # atlas pull request *can* produce it: adding a typeclass instance changes
+      # resolution for declarations nobody edited, and so can an attribute, a
+      # notation, or a change to a definition's implicit arguments. In each case
+      # the printed type is unchanged and the elaborated type is not. That is
+      # the case that now waits for the nightly run instead of blocking the pull
+      # request, so the exposure window is a day rather than zero.
+      #
+      # It has never been observed firing on such a pull request here, and 342 s
+      # on every Lean-touching PR is a certain cost against an uncertain one --
+      # the maintainer's call, taken deliberately. If it starts catching things
+      # nightly that a PR introduced, the trade is wrong and this should go back.
+      #
+      # This mirrors the leanchecker gating below, with `run_migration` added
+      # because that is the event this check answers to and leanchecker does
+      # not. The decision, the cost ladder for every check in this job, and the
+      # window each gating leaves open are recorded in
+      # docs/provenance/verification-scheduling.md -- read that before changing
+      # a trigger here.
       #
       # Expect it to go red on a toolchain bump. That is correct and is the
       # point: re-adjudicate the silent set, re-dump the baseline, and record
-      # the classes. Do not widen the flag.
-      #
-      # Cost: the dump elaborates the whole environment, measured at 342 s and
-      # 2.2 GB on an idle 12-core host against a tree the steps above have
-      # already built; a two-core hosted runner is slower. That is the largest
-      # single step on an ordinary pull request, so read it against this job's
-      # 30-minute budget before adding anything else here.
+      # the classes. Do not widen the flag, and do not restore the unfiltered
+      # trigger without measuring the step again.
       - name: No statement changed meaning behind an unchanged printed type
-        if: steps.filter.outputs.run_lean == 'true'
+        if: >-
+          steps.filter.outputs.run_lean == 'true' &&
+          (steps.filter.outputs.run_migration == 'true' ||
+           github.event_name == 'schedule' ||
+           github.event_name == 'workflow_dispatch' ||
+           startsWith(github.ref, 'refs/tags/v'))
         run: |
           set -euo pipefail
           dump="$RUNNER_TEMP/elab-current.json"
@@ -330,10 +454,8 @@ jobs:
         if: steps.filter.outputs.run_lean == 'true'
         run: |
           python3 scripts/generate_dependency_graph.py --write
-          git diff --exit-code --stat -- 'docs/status/*-dependency-graph.md' \
-            'docs/status/*-dependency-graph.json'
-          git diff --exit-code -- 'docs/status/*-dependency-graph.md' \
-            'docs/status/*-dependency-graph.json'
+          git diff --exit-code --stat -- 'docs/status/*-dependency-graph.md'
+          git diff --exit-code -- 'docs/status/*-dependency-graph.md'
       - name: Declaration index is current
         # `check_cited_declarations.py` runs in the cheap gate and answers from
         # this file, so a stale index makes that check answer about a tree that

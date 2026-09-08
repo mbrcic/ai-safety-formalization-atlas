@@ -3,7 +3,7 @@
   "generated_by": "scripts/generate_registry_views.py",
   "note": "Compact agent lookup over the single results ledger. Prefer this over registry.yaml; open the full YAML only for one id when notes or candidate-formalization detail is required. A row with an informal claim states something a source asserted; a row without one records a formalization standing on its own account. Each atlas declaration carries the file and line it is defined at, so opening one needs no repository search.",
   "claim_count": 49,
-  "artifact_count": 37,
+  "artifact_count": 42,
   "results_by_id": {
     "BY-001": {
       "id": "BY-001",
@@ -869,25 +869,25 @@
             "atlas_declaration": "AISafetyAtlas.Fairness.approx_perfect_prediction_or_equal_base_rates",
             "type": "NEW_PROOF",
             "file": "AISafetyAtlas/Fairness/ApproximateRiskAssignment.lean",
-            "line": 487
+            "line": 501
           },
           {
             "atlas_declaration": "AISafetyAtlas.Fairness.exists_slack_function",
             "type": "NEW_PROOF",
             "file": "AISafetyAtlas/Fairness/ApproximateRiskAssignment.lean",
-            "line": 527
+            "line": 542
           },
           {
             "atlas_declaration": "AISafetyAtlas.Fairness.average_lower_bound",
             "type": "NEW_PROOF",
             "file": "AISafetyAtlas/Fairness/ApproximateRiskAssignment.lean",
-            "line": 424
+            "line": 438
           },
           {
             "atlas_declaration": "AISafetyAtlas.Fairness.perfect_prediction_or_equal_base_rates_of_approx",
             "type": "NEW_PROOF",
             "file": "AISafetyAtlas/Fairness/ApproximateRiskAssignment.lean",
-            "line": 543
+            "line": 560
           }
         ]
       },
@@ -1057,25 +1057,25 @@
             "atlas_declaration": "AISafetyAtlas.Preference.Source.ReasonableForF.proposition_seven",
             "type": "NEW_PROOF",
             "file": "AISafetyAtlas/Preference/SourceComplexity.lean",
-            "line": 191
+            "line": 196
           },
           {
             "atlas_declaration": "AISafetyAtlas.Preference.Source.ReasonableForF.proposition_eight",
             "type": "NEW_PROOF",
             "file": "AISafetyAtlas/Preference/SourceComplexity.lean",
-            "line": 213
+            "line": 218
           },
           {
             "atlas_declaration": "AISafetyAtlas.Preference.ReasonableLanguage.proposition_seven",
             "type": "NEW_PROOF",
             "file": "AISafetyAtlas/Preference/Reasonable.lean",
-            "line": 196
+            "line": 203
           },
           {
             "atlas_declaration": "AISafetyAtlas.Preference.ReasonableLanguage.proposition_eight",
             "type": "NEW_PROOF",
             "file": "AISafetyAtlas/Preference/Reasonable.lean",
-            "line": 217
+            "line": 224
           },
           {
             "atlas_declaration": "AISafetyAtlas.Preference.explanation_at_least_behaviour",
@@ -1111,7 +1111,7 @@
             "atlas_declaration": "AISafetyAtlas.Preference.Source.ReasonableForF.theorem_two_conditional",
             "type": "NEW_PROOF",
             "file": "AISafetyAtlas/Preference/SourceComplexity.lean",
-            "line": 273
+            "line": 278
           },
           {
             "atlas_declaration": "AISafetyAtlas.Preference.OverrideModel.rationalise_strictly_better",
@@ -2755,6 +2755,9 @@
           "reproduced": true,
           "declarations": [
             "runFor_eq_of_view_eq",
+            "step_equivariant",
+            "step_semiconj",
+            "invariant_iff_fixed",
             "invariant_of_automorphism",
             "no_unique_leader_of_fixedPointFree",
             "invariant_of_constant"
@@ -2771,6 +2774,209 @@
             "type": "NEW_PROOF",
             "file": "AISafetyAtlas/Compositional/Networks.lean",
             "line": 107
+          }
+        ]
+      },
+      "candidate_count": 0
+    },
+    "LAND-PREF-KNOW-001": {
+      "id": "LAND-PREF-KNOW-001",
+      "name": "Reward unidentifiability as a knowability obstruction",
+      "ai_bridge_status": null,
+      "informal_claim": null,
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "relationship": null,
+          "reproduced": true,
+          "declarations": [
+            "AISafetyAtlas.Preference.not_knowable_reward",
+            "AISafetyAtlas.Preference.knowable_reward_of_isEmpty_state"
+          ],
+          "module": "AISafetyAtlas.Preference.Knowability",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Preference.not_knowable_reward",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Preference/Knowability.lean",
+            "line": 77
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Preference.knowable_reward_of_isEmpty_state",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Preference/Knowability.lean",
+            "line": 92
+          }
+        ]
+      },
+      "candidate_count": 0
+    },
+    "LAND-COMP-TRACE-001": {
+      "id": "LAND-COMP-TRACE-001",
+      "name": "A network's runs as a trace system",
+      "ai_bridge_status": null,
+      "informal_claim": null,
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "relationship": null,
+          "reproduced": true,
+          "declarations": [
+            "AISafetyAtlas.Compositional.Networks.realizes_systemOf",
+            "AISafetyAtlas.Compositional.Networks.not_electsLeader_of_fixedPointFree",
+            "AISafetyAtlas.Compositional.Networks.electsLeader_witnessed_by_one_snapshot",
+            "AISafetyAtlas.Compositional.Networks.ObsTrace",
+            "AISafetyAtlas.Compositional.Networks.obsTrace_automorphism",
+            "AISafetyAtlas.Compositional.Networks.not_knowable_node_of_fixedPointFree",
+            "AISafetyAtlas.Compositional.Networks.no_unique_leader_from_obsTrace",
+            "AISafetyAtlas.Compositional.Networks.obsSystem",
+            "AISafetyAtlas.Compositional.Networks.stateAtRound",
+            "AISafetyAtlas.Compositional.Networks.realizes_obsSystem",
+            "AISafetyAtlas.Compositional.Networks.systemOf",
+            "AISafetyAtlas.Compositional.Networks.runOf",
+            "AISafetyAtlas.Compositional.Networks.observedAt",
+            "AISafetyAtlas.Compositional.Networks.ElectsLeader"
+          ],
+          "module": "AISafetyAtlas.Compositional.NetworkTraces",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Compositional.Networks.realizes_systemOf",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Compositional/NetworkTraces.lean",
+            "line": 124
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Compositional.Networks.not_electsLeader_of_fixedPointFree",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Compositional/NetworkTraces.lean",
+            "line": 155
+          }
+        ]
+      },
+      "candidate_count": 0
+    },
+    "LAND-HYPER-KNOW-001": {
+      "id": "LAND-HYPER-KNOW-001",
+      "name": "Finite-observation safety as a knowability factorization",
+      "ai_bridge_status": null,
+      "informal_claim": null,
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "relationship": null,
+          "reproduced": true,
+          "declarations": [
+            "AISafetyAtlas.Compositional.Hyperproperties.knowable_of_isSafetyPredicate",
+            "AISafetyAtlas.Compositional.Hyperproperties.not_knowable_of_realizedSet_collision",
+            "AISafetyAtlas.Compositional.Hyperproperties.not_isSafetyPredicate_of_realizedSet_collision",
+            "AISafetyAtlas.Compositional.Hyperproperties.realizedSet"
+          ],
+          "module": "AISafetyAtlas.Compositional.Hyperproperties.Knowability",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Compositional.Hyperproperties.knowable_of_isSafetyPredicate",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Compositional/Hyperproperties/Knowability.lean",
+            "line": 89
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Compositional.Hyperproperties.not_isSafetyPredicate_of_realizedSet_collision",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Compositional/Hyperproperties/Knowability.lean",
+            "line": 122
+          }
+        ]
+      },
+      "candidate_count": 0
+    },
+    "LAND-CAUSAL-KNOW-001": {
+      "id": "LAND-CAUSAL-KNOW-001",
+      "name": "Behavioural identifiability as a knowability factorization",
+      "ai_bridge_status": null,
+      "informal_claim": null,
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "relationship": null,
+          "reproduced": true,
+          "declarations": [
+            "AISafetyAtlas.Causal.behaviorEq_iff_behavior_eq",
+            "AISafetyAtlas.Causal.not_knowable_of_behaviorEq",
+            "AISafetyAtlas.Causal.exists_behaviorEq_pair_of_not_knowable",
+            "AISafetyAtlas.Causal.knowable_of_determines_behavior",
+            "AISafetyAtlas.Causal.behavior"
+          ],
+          "module": "AISafetyAtlas.Causal.Knowability",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Causal.behaviorEq_iff_behavior_eq",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Causal/Knowability.lean",
+            "line": 92
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Causal.exists_behaviorEq_pair_of_not_knowable",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Causal/Knowability.lean",
+            "line": 124
+          }
+        ]
+      },
+      "candidate_count": 0
+    },
+    "LAND-COMP-KNOW-001": {
+      "id": "LAND-COMP-KNOW-001",
+      "name": "The Angluin view as a knowability factorization",
+      "ai_bridge_status": null,
+      "informal_claim": null,
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "relationship": null,
+          "reproduced": true,
+          "declarations": [
+            "AISafetyAtlas.Compositional.Networks.knowable_runFor",
+            "AISafetyAtlas.Compositional.Networks.sameView_iff_view_eq",
+            "AISafetyAtlas.Compositional.Networks.view"
+          ],
+          "module": "AISafetyAtlas.Compositional.Knowability",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Compositional.Networks.knowable_runFor",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Compositional/Knowability.lean",
+            "line": 105
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Compositional.Networks.sameView_iff_view_eq",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Compositional/Knowability.lean",
+            "line": 84
           }
         ]
       },
@@ -3202,13 +3408,13 @@
             "atlas_declaration": "AISafetyAtlas.Knowledge.knowable_id_iff_injective",
             "type": "NEW_PROOF",
             "file": "AISafetyAtlas/Knowledge.lean",
-            "line": 221
+            "line": 293
           },
           {
             "atlas_declaration": "AISafetyAtlas.Knowledge.not_knowable_state_of_nontrivial_remainder",
             "type": "NEW_PROOF",
             "file": "AISafetyAtlas/Knowledge.lean",
-            "line": 242
+            "line": 314
           }
         ]
       },
@@ -3440,6 +3646,9 @@
             "AISafetyAtlas.Knowledge.Determines",
             "AISafetyAtlas.Knowledge.knowable_iff_factorsThrough",
             "AISafetyAtlas.Knowledge.knowable_iff_no_collision",
+            "AISafetyAtlas.Knowledge.not_knowable_of_invariant_transform",
+            "AISafetyAtlas.Knowledge.Determines.refl",
+            "AISafetyAtlas.Knowledge.Determines.trans",
             "AISafetyAtlas.Knowledge.not_knowable_of_collision",
             "AISafetyAtlas.Knowledge.not_knowable_of_witness",
             "AISafetyAtlas.Knowledge.exists_witness_of_not_knowable",
@@ -3460,43 +3669,55 @@
             "atlas_declaration": "AISafetyAtlas.Knowledge.knowable_iff_factorsThrough",
             "type": "WRAPPER",
             "file": "AISafetyAtlas/Knowledge.lean",
-            "line": 118
+            "line": 143
           },
           {
             "atlas_declaration": "AISafetyAtlas.Knowledge.knowable_iff_no_collision",
             "type": "WRAPPER",
             "file": "AISafetyAtlas/Knowledge.lean",
-            "line": 135
+            "line": 160
           },
           {
             "atlas_declaration": "AISafetyAtlas.Knowledge.not_knowable_of_collision",
             "type": "NEW_PROOF",
             "file": "AISafetyAtlas/Knowledge.lean",
-            "line": 143
+            "line": 168
           },
           {
             "atlas_declaration": "AISafetyAtlas.Knowledge.not_knowable_of_witness",
             "type": "NEW_PROOF",
             "file": "AISafetyAtlas/Knowledge.lean",
-            "line": 152
+            "line": 177
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Knowledge.Determines.trans",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Knowledge.lean",
+            "line": 266
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Knowledge.not_knowable_of_invariant_transform",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Knowledge.lean",
+            "line": 196
           },
           {
             "atlas_declaration": "AISafetyAtlas.Knowledge.exists_witness_of_not_knowable",
             "type": "NEW_PROOF",
             "file": "AISafetyAtlas/Knowledge.lean",
-            "line": 162
+            "line": 207
           },
           {
             "atlas_declaration": "AISafetyAtlas.Knowledge.Knowable.mono",
             "type": "NEW_PROOF",
             "file": "AISafetyAtlas/Knowledge.lean",
-            "line": 191
+            "line": 244
           },
           {
             "atlas_declaration": "AISafetyAtlas.Knowledge.not_knowable_comp",
             "type": "NEW_PROOF",
             "file": "AISafetyAtlas/Knowledge.lean",
-            "line": 207
+            "line": 279
           }
         ]
       },
@@ -3588,19 +3809,19 @@
             "atlas_declaration": "AISafetyAtlas.Wireheading.ObservationLimits.not_knowable_trueReturn_of_complement_mem",
             "type": "NEW_PROOF",
             "file": "AISafetyAtlas/Wireheading/ObservationLimits.lean",
-            "line": 130
+            "line": 145
           },
           {
             "atlas_declaration": "AISafetyAtlas.Wireheading.ObservationLimits.not_knowable_trueReturn",
             "type": "NEW_PROOF",
             "file": "AISafetyAtlas/Wireheading/ObservationLimits.lean",
-            "line": 176
+            "line": 191
           },
           {
             "atlas_declaration": "AISafetyAtlas.Wireheading.ObservationLimits.returnOver_zeroEnv_complement",
             "type": "NEW_PROOF",
             "file": "AISafetyAtlas/Wireheading/ObservationLimits.lean",
-            "line": 161
+            "line": 176
           }
         ]
       },

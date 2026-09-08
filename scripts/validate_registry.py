@@ -17,6 +17,7 @@ from validate_current_state import lean_code_without_comments_or_strings
 ROOT = Path(__file__).resolve().parents[1]
 REGISTRY = ROOT / "registry.yaml"
 SEARCH_EVIDENCE = ROOT / "docs/provenance/formalization-search.json"
+DECLARATION_INDEX = ROOT / "docs/status/declaration-index.json"
 PROJECT_REPOSITORY = "https://github.com/mbrcic/ai-safety-formalization-atlas"
 IN_TREE_VERSION = "IN_TREE"
 REVISION_SHAPE = re.compile(r"\b[0-9a-f]{40}\b")
@@ -273,6 +274,15 @@ def normalize_module_name(value: str) -> str:
     return value.removesuffix(".lean").replace("/", ".")
 
 
+MAIS_VERDICTS = {"CHECKED", "PARTIAL", "CONDITIONAL", "STATED_ONLY"}
+MAIS_SOLUTION_FIELDS = {
+    "problem",
+    "filed_by",
+    "verdict",
+    "submitted",
+    "checked",
+    "candidate_lean",
+}
 SOURCE_ROLES = {"directory", "work"}
 SCOPE_DELTA_FIELDS = {"summary", "evidence"}
 NOVELTY_CHECK_ID = re.compile(r"NC-\d{3}")
@@ -308,6 +318,41 @@ BRIDGE_STATUS_VALUES = {"HUMAN_REVIEW", "STATEMENT_REVIEWED", "REVIEWED"}
 # Deliberately small: four kinds and five shapes are what the current ledger
 # actually needs, and a taxonomy nobody has to use is a taxonomy nobody checks.
 RELATION_KIND_VALUES = {"BOUNDARY_PARTNER", "BUILDS_ON", "INSTANTIATES", "REFINES"}
+
+# How an obstruction is escaped: which hypothesis you weaken to get out from
+# under it. An impossibility alone does not help anyone build, and the routes
+# out are the part a designer actually reads. These are deliberately *not*
+# `relation_kind` values: a relation is an edge between two ledger rows, and
+# most escape routes point at no row at all — "relax exactness" is a direction,
+# not a result someone has written down here.
+ESCAPE_AXIS_VALUES = {
+    "RESTRICT_CLASS",
+    "ADD_INFORMATION",
+    "RELAX_EXACTNESS",
+    "MOVE_TO_PRIOR",
+    "ADD_RESOURCE",
+    "WEAKEN_UNIFORMITY",
+}
+
+# How much of the route is actually established here. The three are ordered and
+# the distinction is the whole point of the field: a route the tree *proves*
+# reopens and a route someone *named in a docstring* are different claims, and
+# recording them at one status would be the overclaim this ledger exists to
+# prevent.
+ESCAPE_ROUTE_STATUS_VALUES = {"FORMALIZED", "STATED", "NAMED_ONLY"}
+
+# Why a row carries no atlas Lean. The ledger has always recorded *that* a row
+# is uncovered; the count alone is a map with no work order on it, and "query
+# the map before proposing work" needs the map to answer. These verdicts are
+# evidence-bearing: each says what was checked, so an untriaged row is visibly
+# untriaged rather than indistinguishable from one somebody decided about.
+STATABILITY_VALUES = {
+    "EXTERNAL_ONLY",
+    "TRIAGED_DISTINCT",
+    "CANDIDATE_LEAD",
+    "BLOCKED_ON_PRIMITIVE",
+    "UNTRIAGED",
+}
 RESULT_SHAPE_VALUES = {
     "ACHIEVABILITY",
     "BOUND",
@@ -436,6 +481,24 @@ def main() -> None:
     except (OSError, json.JSONDecodeError) as error:
         fail(str(error))
 
+    # The elaborated public surface, used to resolve escape-route pointers. The
+    # index is generated from Lean rather than from source text
+    # (`generate_declaration_index.py`), so a route that names a renamed theorem
+    # fails here instead of reading as verified. Absence is tolerated: the index
+    # is a build product, and `check_cited_declarations` is the check that
+    # insists on it being present and current.
+    atlas_declaration_names: set[str] = set()
+    if DECLARATION_INDEX.exists():
+        try:
+            index = json.loads(DECLARATION_INDEX.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError) as error:
+            fail(f"docs/status/declaration-index.json is unreadable: {error}")
+        atlas_declaration_names = {
+            entry["name"]
+            for entry in index.get("declarations", [])
+            if isinstance(entry, dict) and isinstance(entry.get("name"), str)
+        }
+
     data = require_mapping(data, "registry.yaml must contain an object")
     survey = require_mapping(data.get("survey", {}), "survey must be an object")
     results = data.get("results")
@@ -538,6 +601,42 @@ def main() -> None:
         fail(
             "relation_kind vocabulary must contain exactly "
             "BOUNDARY_PARTNER, BUILDS_ON, INSTANTIATES, and REFINES"
+        )
+    # The escape-route vocabularies. Controlled for the same reason as
+    # `relation_kind`: an open axis list turns the generated escape-route view
+    # into a place where anyone can assert any way out.
+    escape_axis_values = set(
+        require_text_list(
+            vocabulary.get("escape_axis"),
+            "escape_axis vocabulary must be a list of non-empty strings",
+        )
+    )
+    if escape_axis_values != ESCAPE_AXIS_VALUES:
+        fail(
+            "escape_axis vocabulary must contain exactly "
+            + ", ".join(sorted(ESCAPE_AXIS_VALUES))
+        )
+    escape_status_values = set(
+        require_text_list(
+            vocabulary.get("escape_route_status"),
+            "escape_route_status vocabulary must be a list of non-empty strings",
+        )
+    )
+    if escape_status_values != ESCAPE_ROUTE_STATUS_VALUES:
+        fail(
+            "escape_route_status vocabulary must contain exactly FORMALIZED, "
+            "STATED, and NAMED_ONLY"
+        )
+    statability_values = set(
+        require_text_list(
+            vocabulary.get("statability"),
+            "statability vocabulary must be a list of non-empty strings",
+        )
+    )
+    if statability_values != STATABILITY_VALUES:
+        fail(
+            "statability vocabulary must contain exactly "
+            + ", ".join(sorted(STATABILITY_VALUES))
         )
     result_shape_values = set(
         require_text_list(
@@ -659,6 +758,9 @@ def main() -> None:
     # The result-level root_import flag is checked later against the actual
     # module import closure.
 
+    corpus_records = search_evidence.get("corpora")
+    if not isinstance(corpus_records, dict):
+        corpus_records = {}
     novelty_checks = search_evidence.get("novelty_checks")
     if not isinstance(novelty_checks, list):
         fail("formalization-search.json must carry a novelty_checks list")
@@ -724,7 +826,26 @@ def main() -> None:
                 followup.get("version"), f"{cid}/{corpus} must record a revision"
             )
             if not GIT_REVISION.fullmatch(version):
-                fail(f"{cid}/{corpus} must pin a 40-character Git revision")
+                # A corpus that is not distributed as a Git repository -- the
+                # Isabelle AFP ships dated release archives -- pins by the
+                # digest its own corpora record already carries. That is not a
+                # weaker pin than a revision: the digest is recomputed on
+                # download and compared, where a revision is only read. What is
+                # refused is a follow-up that pins by neither, so the version
+                # must be the corpora record's own and that record must carry a
+                # digest, and the follow-up must say how it was pinned.
+                baseline = corpus_records.get(corpus)
+                if (
+                    not isinstance(baseline, dict)
+                    or "archive_sha256" not in baseline
+                    or version != str(baseline.get("version"))
+                ):
+                    fail(f"{cid}/{corpus} must pin a 40-character Git revision")
+                require_text(
+                    followup.get("pinned_by"),
+                    f"{cid}/{corpus} pins by archive digest and must record "
+                    "pinned_by",
+                )
             followup_date = require_text(
                 followup.get("searched_on"),
                 f"{cid}/{corpus} must record searched_on as an ISO date",
@@ -805,6 +926,50 @@ def main() -> None:
             )
         if retrieved is not None and not ISO_DATE.fullmatch(str(retrieved)):
             fail(f"{source_id} has an invalid `retrieved` date {retrieved!r}")
+
+        # A `mais_solution` block is a public verdict on someone else's
+        # mathematics, so every field it needs to be read correctly is required
+        # rather than optional. `verdict` is a closed vocabulary because the
+        # whole point of the view is that "the mathematics checks" and "the
+        # ledger grades this artifact" are different facts; a free-text verdict
+        # would let them blur back together. A body hash is required because an
+        # issue body is editable in place, so a verdict with no hash names no
+        # fixed artifact.
+        solution = source.get("mais_solution")
+        if solution is not None:
+            solution = require_mapping(
+                solution, f"{source_id} mais_solution must be an object"
+            )
+            unknown_fields = set(solution) - MAIS_SOLUTION_FIELDS
+            if unknown_fields:
+                fail(
+                    f"{source_id} mais_solution has unknown fields: "
+                    f"{sorted(unknown_fields)}"
+                )
+            for field in ("problem", "verdict", "submitted", "checked"):
+                require_text(
+                    solution.get(field),
+                    f"{source_id} mais_solution must record a non-empty {field}",
+                )
+            if solution["verdict"] not in MAIS_VERDICTS:
+                fail(
+                    f"{source_id} has unknown mais_solution verdict "
+                    f"{solution['verdict']!r}; expected one of "
+                    f"{sorted(MAIS_VERDICTS)}"
+                )
+            for field in ("filed_by", "candidate_lean"):
+                if field in solution:
+                    require_text(
+                        solution.get(field),
+                        f"{source_id} mais_solution {field} must be non-empty "
+                        "when present",
+                    )
+            if not source.get("content_sha256"):
+                fail(
+                    f"{source_id} carries a mais_solution verdict and must record "
+                    "content_sha256; an issue body is editable in place, so a "
+                    "verdict with no hash names no fixed artifact"
+                )
 
     directories = {
         source_id
@@ -1004,6 +1169,117 @@ def main() -> None:
                             f"{result_id} BUILDS_ON relation to {target} needs a Lean artifact on "
                             "both rows; without one the dependency is conceptual, not mechanical"
                         )
+        # Why this row carries no atlas Lean. Only meaningful on a row that
+        # carries none: on a covered row the question does not arise, and a
+        # verdict there would be a stale claim waiting to happen.
+        statability = result.get("statability")
+        if statability is not None:
+            statability = require_mapping(
+                statability, f"{result_id} statability must be an object"
+            )
+            extra = set(statability) - {"verdict", "note", "missing"}
+            if extra:
+                fail(f"{result_id} statability has unknown fields {sorted(extra)}")
+            verdict = statability.get("verdict")
+            if verdict not in statability_values:
+                fail(f"{result_id} statability verdict {verdict!r} is outside the vocabulary")
+            require_text(
+                statability.get("note"),
+                f"{result_id} statability must carry a non-empty note saying what "
+                "was checked; a verdict with no evidence is the thing this field exists to stop",
+            )
+            missing = statability.get("missing")
+            if verdict == "BLOCKED_ON_PRIMITIVE":
+                require_text_list(
+                    missing,
+                    f"{result_id} statability is BLOCKED_ON_PRIMITIVE and must name "
+                    "the missing primitives; the whole value of the verdict is that list",
+                )
+            elif missing is not None:
+                fail(
+                    f"{result_id} statability names missing primitives but is "
+                    f"{verdict}, not BLOCKED_ON_PRIMITIVE"
+                )
+            if result.get("lean_artifact") or any(
+                isinstance(record.get("module"), str)
+                and record["module"].startswith("AISafetyAtlas")
+                for record in result.get("formalizations") or []
+            ):
+                fail(
+                    f"{result_id} carries atlas Lean, so a statability verdict on it "
+                    "would answer a question that no longer arises"
+                )
+
+        # Escape routes: what you weaken to get out from under the obstruction.
+        # Optional everywhere. A row without one is not a claim that the result
+        # is inescapable — it is a claim that nobody has decided the routes,
+        # exactly as an untyped `relations` row is read.
+        escape_routes = result.get("escape_routes")
+        if escape_routes is not None:
+            if not isinstance(escape_routes, list) or not escape_routes:
+                fail(
+                    f"{result_id} escape_routes must be a non-empty list when "
+                    "present; drop the field rather than record an empty one"
+                )
+            seen_routes: set[tuple[str, str]] = set()
+            for route in escape_routes:
+                route = require_mapping(
+                    route, f"{result_id} escape_routes entries must be objects"
+                )
+                extra = set(route) - {"axis", "status", "note", "lean", "target"}
+                if extra:
+                    fail(f"{result_id} escape route has unknown fields {sorted(extra)}")
+                axis = route.get("axis")
+                status = route.get("status")
+                if axis not in escape_axis_values:
+                    fail(f"{result_id} escape route axis {axis!r} is outside the vocabulary")
+                if status not in escape_status_values:
+                    fail(f"{result_id} escape route status {status!r} is outside the vocabulary")
+                # The note carries what survives and what it costs. Without it
+                # an axis label is a gesture at a direction, not a route.
+                require_text(
+                    route.get("note"),
+                    f"{result_id} escape route {axis} must carry a non-empty note "
+                    "saying what survives the weakening and what it costs",
+                )
+                lean = route.get("lean")
+                if status == "FORMALIZED":
+                    lean = require_text(
+                        lean,
+                        f"{result_id} escape route {axis} is FORMALIZED and must name "
+                        "the declaration that proves the weakened statement",
+                    )
+                    if atlas_declaration_names and lean not in atlas_declaration_names:
+                        fail(
+                            f"{result_id} escape route {axis} names {lean!r}, which is "
+                            "not an atlas declaration in docs/status/declaration-index.json"
+                        )
+                elif lean is not None:
+                    fail(
+                        f"{result_id} escape route {axis} is {status} but names Lean; a "
+                        "declaration means the route is FORMALIZED, and if that "
+                        "declaration does not prove the weakened statement the route "
+                        "is not formalized by it"
+                    )
+                target = route.get("target")
+                if target is not None:
+                    if not isinstance(target, str) or not target:
+                        fail(f"{result_id} escape route target must be a non-empty string")
+                    if target == result_id:
+                        fail(f"{result_id} escape route points at itself")
+                    if target not in {r["id"] for r in results}:
+                        fail(f"{result_id} escape route names unknown result {target}")
+                    if target not in related_ids:
+                        fail(
+                            f"{result_id} escape route to {target} is not in "
+                            "related_result_ids; a route naming another row is an "
+                            "adjacency and must be recorded as one"
+                        )
+                key = (axis, target or lean or "")
+                if key in seen_routes:
+                    fail(f"{result_id} repeats escape route {axis}")
+                seen_routes.add(key)
+
         if not isinstance(result["formalizations"], list):
             fail(f"{result_id} formalizations must be a list")
         for record in result["formalizations"]:
@@ -1534,6 +1810,31 @@ def main() -> None:
                     f"{result_id} root_import={result['root_import']} disagrees with "
                     f"the public root import closure ({expected_root_import})"
                 )
+
+    # Every uncovered row says why. Run last, once every row's own shape has
+    # been checked: a malformed row should be reported as malformed rather than
+    # as missing a verdict it could not sensibly carry yet.
+    #
+    # The map of what is missing is load-bearing, and a count with no verdicts
+    # on it is a map nobody can work from. `UNTRIAGED` is a legitimate answer
+    # and costs one line; having no answer is not, because it makes "nobody has
+    # looked" indistinguishable from "somebody looked, and this is why".
+    for result in results:
+        if result.get("statability") is not None:
+            continue
+        if result.get("lean_artifact"):
+            continue
+        if any(
+            isinstance(record.get("module"), str)
+            and record["module"].startswith("AISafetyAtlas")
+            for record in result.get("formalizations") or []
+        ):
+            continue
+        fail(
+            f"{result['id']} carries no atlas Lean and no statability verdict; "
+            "record why -- UNTRIAGED is a valid verdict and says nobody has "
+            "compared the source to the tree yet"
+        )
 
     claims = sum(1 for r in results if "informal_claim" in r)
     print(

@@ -35,6 +35,8 @@ and [`conjectures.yaml`](../conjectures.yaml).
   cannot know itself" conflates
 - [Joint observation model](guide/joint-observation-model.md) — what a coalition's evidence can decide
 - [AI safety literature map](guide/related-literature.md) — papers first: how the atlas addresses them
+- [Agent-instruction design](guide/agent-instruction-design.md) — dated evidence
+  and recommendations for maintainers; not default agent context
 
 ## Public project page
 
@@ -74,14 +76,19 @@ in the repository can detect it.
   readings that are choices rather than transcriptions
 - [Toolchain v4.33.0 migration](provenance/toolchain-v4330-migration.md) — what
   moved, what broke, and which build records were deliberately not rewritten
+- [Verification scheduling](provenance/verification-scheduling.md) — what CI runs
+  on which trigger and why: the cost ladder, the two gated checks, and the window
+  each gating leaves open
 - [MAIS source pin](provenance/mais-source-pin.md) — the commit and per-file SHA-256
   the MAIS-A2 grading is anchored to
 - [MAIS-O70 conditional verification](provenance/mais-o70-conditional-verification.md) —
   release claim, unconditional fragment, three assumed frontiers, and validation order
-- [MAIS-O70 frontier manifest](provenance/o70-frontier-manifest.md) — exact assumed
+- [MAIS-O70 frontier manifest](provenance/frontier-manifest.md) — exact assumed
   propositions, consumers, source comparison, stress evidence, and debt
 - [MAIS-O70 fidelity adjudications](provenance/mais-o70-fidelity-adjudications.md) —
   the two source readings that remain drafts until a human countersigns them
+- [MAIS-O7/O77 verification](provenance/mais-o7-o77-verification.md) — source
+  receipts, volume-order fidelity, the O7 and O77(b) proofs, and the O77(a) frontier
 
 This section is a **map, not an inventory**: `provenance/` holds triage notes,
 per-source clash logs and dated audits that a reader does not need in order to
@@ -104,8 +111,17 @@ Regenerate with `python3 scripts/generate_registry_views.py` (also refreshes
 - [Relations and shapes](status/relations.md) — the ledger as a graph: how two
   results stand to each other, and which are characterizations rather than point
   impossibilities
+- [Blueprint](status/blueprint.md) — claims and what realizes them, both directions;
+  machine-readable as [blueprint.json](agent/blueprint.json)
+- [Uncovered rows](status/uncovered-rows.md) — every row with no atlas Lean and the
+  reason: reproduced elsewhere, triaged distinct, a lead to read, or nobody has looked
+- [Escape routes](status/escape-routes.md) — what you weaken to get out from under
+  each obstruction, and how much of that weakening the atlas actually proves
 - [Source reports](status/sources/) — per catalogued source: papers, formalizations,
   atlas declarations, bridge state
+- [MAIS submitted solutions](status/mais-solutions.md) — solutions other people
+  filed against the MAIS open-problems agenda, with what checking each one found,
+  kept apart from which artifact the ledger grades it against
 
 ## Bridges (human semantic review)
 

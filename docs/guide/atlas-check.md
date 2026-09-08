@@ -29,6 +29,7 @@ the counting form: AISafetyAtlas.Knowledge.knowable_iff_worstAmbiguity_le_one
 | `coalition` | Does what a coalition of principals can read determine the hazard? | [`Oversight.JointObservation.Covers`](../../AISafetyAtlas/Oversight/JointObservation/Coverage.lean), which is *definitionally* `Knowable` on the coalition's observation |
 | `device` | Does a Wolpert device answer probes of a target, and can it physically know a value? | [`Knowledge.Devices.BlockwiseCollision`](../../AISafetyAtlas/Knowledge/Devices.lean) and the two refutations it discharges |
 | `variety` | Can **any** overseer hold the outcome to a single target? | [`Oversight.VarietyCheck.cannotForce`](../../AISafetyAtlas/Oversight/VarietyCheck.lean) and `not_forces_of_cannotForce`, whose quantifier runs over every observation type |
+| `regulation` | Does Ashby's counting law **apply** to this regulation table, and what does it then force? | [`Control.RegulationCheck.columnsInjective`](../../AISafetyAtlas/Control/RegulationCheck.lean) and `ashby_bound_of_columnsInjective` |
 
 Every verdict also reports **worst ambiguity** — how many values one observation
 leaves open at its worst point. `1` is exact knowledge, and anything larger is the
@@ -55,11 +56,48 @@ equality only.
   "situations": 3, "interventions": 2, "effect": [[0,0],[1,1],[2,2]] }
 ```
 
+### `regulation`, and why a checker for a settled theorem is worth having
+
+`regulation` is the odd one here, because the theorem behind it is not in doubt.
+Ashby's counting law is proved, and running a program cannot make it more proved.
+
+What the checker answers is the *other* question, and it is the one this
+repository has got wrong six times: **does anything satisfy the hypothesis?**
+`Control.ashby_variety_ge` quantifies over tables whose every response column is
+injective, and no part of the build tests that such a table exists. A compiling,
+axiom-clean, correctly-transcribed theorem about nothing passes every other check
+in this tree. So a `true` verdict from `regulation` is a satisfiability witness —
+this table is in the region the theorem is about, exhibited by a running program
+rather than asserted in prose.
+
+The verdict is one-sided for the same reason `variety`'s is, but the failure mode
+is sharper. A `false` result means the column condition fails, so the law says
+nothing here — and on such a table the bound is not merely unproved but *false*,
+which
+[`exists_columnsInjective_false_and_bound_fails`](../../AISafetyAtlas/Control/RegulationCheck.lean)
+proves. Reading `false` as "the regulator did better" gets the conclusion
+backwards, so the printout says so in as many words.
+
+`table` has one row per disturbance and one column per response; `strategy` picks
+one response per disturbance. Entries are outcome codes compared for equality
+only. The bound reported holds for *every* strategy on the table, not only the
+one supplied — the strategy affects the variety achieved, never the bound.
+
+```json
+{ "schema": "atlas-check/1", "kind": "regulation",
+  "disturbances": 3, "responses": 3,
+  "table": [[0,1,2],[1,2,0],[2,0,1]],
+  "strategy": [0,0,0] }
+```
+
+Only the counting half of Ashby is decidable. The entropy forms (11/8, 11/9) live
+in `Control.RequisiteVariety` over a measure, and nothing finite decides them.
+
 ## Input
 
 States are `0 … states-1`; every array is indexed by state. Setup and target
 values are compared for equality only, so their numbering carries no other
-meaning. The seven models under
+meaning. The twelve models under
 [`docs/examples/atlas-check/`](../examples/atlas-check/) are runnable, and each names
 the Lean theorem it mirrors.
 

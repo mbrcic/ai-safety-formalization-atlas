@@ -1,9 +1,11 @@
 # Project State
 
-Updated: 2026-09-04
+Updated: 2026-09-08
 
-**Unreleased work in progress.** `v0.7.0` below is still the last published
-release and nothing here supersedes it.
+**`v0.8.0` is the published release.** The note is
+[`docs/releases/v0.8.md`](docs/releases/v0.8.md), and the `v0.8.0` tag with its
+GitHub Release — not this file and not the note — is the canonical publication
+record.
 
 **The toolchain is Lean v4.33.0 as of 2026-08-31, bumped in its own branch
 and merged.** Mathlib `db584cd6`, with PFR `7d6404b7` and Foundation
@@ -21,7 +23,36 @@ the four `by`-block adjudications a textual check cannot settle, and what is owe
 back are in
 [`toolchain-v4330-migration.md`](docs/provenance/toolchain-v4330-migration.md).
 
-**A fairness layer is what this tree adds most recently, and it is in no
+**The most recent change is a runnable form of Ashby's counting law, and a set
+of ledger surfaces that say what the tree does not have.** `atlas-check` gains a
+fifth kind, `regulation`, backed by `Control.RegulationCheck.columnsInjective`
+and the agreement theorem `ashby_bound_of_columnsInjective`. It is the first kind
+added for the *hypothesis* rather than the conclusion: the counting law is
+settled, and what no part of the build tests is whether any table satisfies the
+column condition it quantifies over. A `true` verdict is that missing
+satisfiability witness, produced by a running program against the four worked
+tables in `Examples.Control.RegulationCheck` — which include one where the
+hypothesis fails and the bound is *false*, so a `false` verdict can never be read
+as a clearance. Five more assertions in `scripts/check_atlas_check.sh`, which now
+runs 21.
+
+Beside it, three things the ledger could not previously say. Every row with no
+atlas Lean now carries a `statability` verdict saying why — 6 reproduced
+elsewhere, 4 triaged distinct, 3 candidate leads, 22 untriaged — and the
+validator fails without one, so [`uncovered rows`](docs/status/uncovered-rows.md)
+cannot develop holes as the ledger grows. Rows may carry `escape_routes`: what
+you weaken to get out from under an obstruction, graded `FORMALIZED` / `STATED` /
+`NAMED_ONLY` because the build checks none of them. And
+[`blueprint.md`](docs/status/blueprint.md) with
+[`blueprint.json`](docs/agent/blueprint.json) indexes claims against the Lean
+that realizes them in **both** directions — 131 declarations now resolve back to
+the claim they were written for, which no view here could previously answer.
+
+[`intake.yaml`](intake.yaml) is the front door below the conjecture board: a
+compiling `Prop` and a minimal row, with every grading field refused by name
+rather than left optional. It ships empty and reports itself that way.
+
+**A fairness layer is the most recent domain addition, and it is in no
 release.** Two modules under `AISafetyAtlas.Fairness`, carrying
 Kleinberg–Mullainathan–Raghavan's Theorem 1.1 (arXiv:1609.05807v2) against
 `BY-010`: calibration within groups, balance for the negative class and balance
@@ -44,19 +75,22 @@ is one no analyst would write. It is a claim that excluding it has to be
 *written*, because the data §1.1 specifies does not imply it. The reasoning is in
 [`kleinberg-fairness-tradeoffs.md`](docs/provenance/kleinberg-fairness-tradeoffs.md).
 
-**Theorem 1.2, the approximate characterization, now sits beside it.** §3 relaxes
-each of (A), (B) and (C) by a multiplicative `ε` and concludes an
-`f(ε)`-approximate form of one of the two cases; `AISafetyAtlas.Fairness.ApproximateRiskAssignment`
-carries that at print's own `f(ε) = √ε · max(1, 3√ε + 3/4)`, and reproves
-Theorem 1.1 as its `ε = 0` case. Two things on the page do not survive contact
-with a proof assistant. Print's display of (A′) carries the factor `(1 - ε)` on
-both sides, which collapses it to the exact condition and would make Theorem 1.2
-a restatement of Theorem 1.1; the Lean states what §3's own derivation of (7)
-uses instead, which is also the display with its two sides transposed. And §3
-divides by `1 - 2ε + ε² - γ₁` without excluding the case where that is not
-positive — harmless, since the conclusion already holds there, but it is a case
-the Lean has to take and print does not. Both records are `RELATED` for the
-first of those, not for a modelling choice.
+**Theorem 1.2, the approximate characterization, is an unreleased extension.**
+§3 relaxes each of (A), (B) and (C) by a multiplicative `ε` and concludes an
+`f(ε)`-approximate form of one of the two cases;
+`AISafetyAtlas.Fairness.ApproximateRiskAssignment` carries that at print's own
+`f(ε) = √ε · max(1, 3√ε + 3/4)`, and re-derives Theorem 1.1 at `ε = 0` for its
+adopted predicates. Several page-level repairs are recorded there. Print's
+display of (A′) carries `(1 - ε)` on both sides, forcing
+`P = (1 - ε)S`, which is exact calibration only when `ε = 0`; the Lean uses
+`(1 - ε)P ≤ S ≤ (1 + ε)P`, a defensible reconstruction of the proof's (7),
+with the two sides transposed, not a literal or equivalent display. The p. 12
+displays of (B′) and (C′) use `n_t` throughout the numerators for both groups;
+the Lean uses each group's own score term and swaps whole group expressions.
+Finally, §3 divides by `1 - 2ε + ε² - γ₁` without excluding the case where that
+is not positive — harmless, since the conclusion already holds there, but it is
+a case the Lean has to take and print does not. The approximate records are
+`RELATED` for these textual repairs, not for a modelling choice.
 
 **Under that sits a causal-inference layer, also in no release.** Fourteen library modules and fifteen worked-example modules under
 `AISafetyAtlas.Causal`, graded against three printed sources. Two different
@@ -76,10 +110,11 @@ aggregating `Causal` facade and that is
 deliberate — these are peer modules, so a consumer imports the one it needs.
 
 **On top of that layer sits the MAIS conjecture ledger, also in no release.**
-Fourteen MAIS-linked ledger rows span eleven printed problem numbers -- nine of
-agenda A2, plus A3's `prob:samples` and A6's `prob:calibration`, whose rows share
-none of the causal vocabulary. Nine are conjectures or graded candidate answers in
-`AISafetyAtlas.Conjectures.MAIS`; five are determine-problem specifications over
+Sixteen MAIS-linked ledger rows span thirteen printed problem numbers -- nine of
+agenda A2, plus A3's `prob:samples`, A6's `prob:calibration`, and agenda A7's
+opposing-staircases conjecture and fiber-stratification problem, whose rows share
+none of the causal vocabulary. Ten are conjectures or graded candidate answers in
+`AISafetyAtlas.Conjectures.MAIS`; six are determine-problem specifications over
 a candidate answer. **Every row carries Lean.** The atlas covers fifteen printed
 problems of agenda A2 in all, but the six it cannot state at all -- MAIS-O2, O28, O29(c),
 O30, O32 and O35 -- are recorded in the coverage matrix
@@ -88,10 +123,10 @@ O30, O32 and O35 -- are recorded in the coverage matrix
 been, rather than as ledger rows. They held one until 2026-08-30; a row with no
 `lean`, no `Prop` and no `refutation` states a fact about this repository's
 coverage, and putting one on the conjecture board per unstatable problem is how
-a selective ledger becomes a coverage index for a single agenda. Six of the nine
+a selective ledger becomes a coverage index for a single agenda. Seven of the ten
 take agenda
 clauses as their graded source and three grade candidate statements
-submitted to MAIS issues [#4](https://github.com/lionellevine/MAIS/issues/4), [#8](https://github.com/lionellevine/MAIS/issues/8) and [#9](https://github.com/lionellevine/MAIS/issues/9). Seven are resolved and two remain open. An open
+submitted to MAIS issues [#4](https://github.com/lionellevine/MAIS/issues/4), [#8](https://github.com/lionellevine/MAIS/issues/8) and [#5](https://github.com/lionellevine/MAIS/issues/5). Eight are resolved and two remain open. An open
 conjecture asserts nothing: it is a compiling statement with no proof, and the
 ledger records for each one what would refute it. The settled rows are the
 exception, and each names the theorem that settled it. Rows graded against a
@@ -102,11 +137,11 @@ ledger records that source problem rather than adding an atlas premise to rescue
 it; atlas-original variants and withdrawn encodings stay outside this ledger,
 recorded verbatim with their reason in
 `docs/provenance/retired-conjecture-rows.md` so that leaving is not an
-undocumented decision and the retired `CONJ-` numbers are never reused. Eight
-of the thirteen rows are resolved and each says which printed clause it covers
+undocumented decision and the retired `CONJ-` numbers are never reused. Nine
+of the sixteen rows are resolved and each says which printed clause it covers
 -- a resolved row that answers one clause of three is not a resolved printed
-problem. **Seven of those eight say something about their printed problem.** The
-eighth is CONJ-003 (MAIS-O26), which is true because it has no instances:
+problem. **Eight of those nine say something about their printed problem.** The
+ninth is CONJ-003 (MAIS-O26), which is true because it has no instances:
 `conj:exact` is stated over the class that `prob:effective`'s *"fix one list
 supplied by a solution"* names, `Examples.Causal.O24Refutation.isEmpty_o24Solution`
 proves no such solution exists, and a universal over an empty domain holds
@@ -114,7 +149,96 @@ without touching the `Theta(K log(1/epsilon))` rate the conjecture is about. It
 is counted as a resolved row because its `Prop` is proved, and it is not counted
 as a result.
 
-**The two newest results are negative, and both are answers to printed problems
+**A singular-learning layer is the newest thing in this tree, and it is in no
+release.** Fifty-three library modules under `AISafetyAtlas/SingularLearning/`,
+about 23,000 lines, each mirrored by a worked-example module, plus twenty
+modules under `AISafetyAtlas/Conjectures/MAIS/`. It exists for three printed
+problems the causal vocabulary cannot reach: agenda A6's `prob:calibration`
+(MAIS-O70, the local learning coefficients of reduced-rank regression) and
+agenda A7's Conjecture 3.10 and Problem 3.9 (MAIS-O7 and MAIS-O77). The
+invariant throughout is print's two-sided local pair. **A7 `def:llc` defines it
+by the zeta integral** -- `Z(z) = int_{B_d(w*)} |L(w) - L(w*)|^z dw` continued
+meromorphically, `-lambda` its largest pole, `m` that pole's order -- and glosses
+the band volume `vol{|L(w') - L(w)| < eps} ~ eps^lambda (log 1/eps)^(m-1)`
+immediately afterwards, with the words "In words:". Every theorem here is about
+the gloss; the substitution between the two is the frontier `A7-ZETA-BRIDGE`,
+carried in Lean rather than in a note. A7 writes strict bands, and the atlas
+records both the weak and the strict form and proves the strict one.
+
+**Two of the results are unconditional and one is not, and the split is the
+point.** `isO7Counterexample` **refutes MAIS-O7** at every positive scalar
+target: the rank-zero rung has pair `(1,1)` and the terminal fibre `(1/2,1)`,
+so the conjectured increase runs backwards. It proves the whole two-rung
+certificate -- the pair at every point of each rung, both exponent sets, both
+infima attained. The note is not weaker in quantifier strength -- it proves the
+pair at every point of the terminal rung and states that both infima are
+attained -- what the atlas adds is that certificate as one unconditional object.
+And
+`o7RankZeroRung_eq_saddleRung` identifies its rungs against A7's own `C_k`
+rather than asserting the specialization. `o77AllSaddlesHavePairOne_holds`
+**proves MAIS-O77(b)** at print's own quantifiers: pair `(1,1)` at every point
+of every nonterminal critical set, with axioms `propext`, `Classical.choice`
+and `Quot.sound` only. **MAIS-O77(a) and MAIS-O70's first two clauses are
+conditional**, and CONJ-026 and CONJ-028 stay `OPEN` for that reason alone.
+
+**Four propositions are assumed and not proved, and they are named.**
+`O70-EIGEN-LAW` is the real-Wishart density with the eigenvalue Jacobian,
+frozen at the test functions the derivation consumes; `O70-EXACT-LOCAL` is the
+existence of exact local pairs; `O70-ZETA-BRIDGE` and `A7-ZETA-BRIDGE` carry the
+substitution `MAIS-A6` `def:local` and `MAIS-A7` `def:llc` each make between
+their zeta definition of the pair and the band-volume gloss that follows it.
+Print asserts an equivalence; **each frontier assumes one direction only**,
+volume order to zeta-pole order, which is the direction the atlas results need
+and the weaker thing for a hypothesis to be. The
+last two are separate assumptions and the A7 one is strictly stronger: `O70`'s
+consumes `HasExactLocalPair` on a germ that vanishes, A7's consumes
+`HasLocalVolumeOrder` on a germ centred at a saddle. Two are owed to the
+candidate -- the submitted solution cites them rather than
+deriving them, so assuming them leaves its own derivation intact -- and two are
+owed to the source, because `def:local` and `def:llc` assert them. All four are on
+hold, each with a reason and none by silence. `scripts/check_frontier_evidence.py`
+holds each to a frozen surface, a manifest entry and unconditional stress
+artifacts, and prints the whole debt on every run; **passing it is not evidence
+a frontier is true**. `NC-011` records that none of the six baseline corpora
+supplies the eigenvalue law, so the blocker there is availability rather than
+effort. Per-problem coverage and the assumption table are generated into
+[`docs/status/sources/mais-2026.md`](docs/status/sources/mais-2026.md).
+
+**Four results this needed are absent from the Mathlib revision this repository
+pins, and were built here** -- `NC-010` and `NC-012` are the searches, both
+Mathlib-only, so this is a statement about one pinned corpus and not about every
+formalization corpus. A Gromoll-Meyer splitting along an arbitrary subspace whose Hessian
+block is nonsingular (`exists_gromoll_meyer_splitting`); print's own Lemma 2 at
+its stated generality, an arbitrary nondegenerate indefinite form in `n >= 3`
+variables plus an arbitrary continuous germ vanishing at the origin
+(`hasLocalVolumeOrder_abs_matrixQuadForm_add_germ`); Sylvester's rank
+inequality, which the pinned Mathlib has in no form -- only upper bounds on the
+rank of a product; and currying for the product Lebesgue measure. The Morse
+lemma itself is not ours: eight modules and 1,396 lines of the Tau Ceti
+development are vendored under `vendor/TauCeti/`, Apache-2.0, pinned at
+`d7bf8387`, with the scope and the toolchain gap recorded in its `PROVENANCE.md`.
+
+**Both A7 problems have submitted solutions, and neither was found to contain a
+mistake.** MAIS issue
+[#5](https://github.com/lionellevine/MAIS/issues/5) is `CHECKED` and issue
+[#12](https://github.com/lionellevine/MAIS/issues/12) `PARTIAL`. Issue #12's
+argument is **followed**: its equation (9) already writes the generalized
+splitting, `L - L(w) = Q_alpha(xi) + g(zeta)` with `g(0) = 0` and no
+nondegeneracy asked of `g`, which is Gromoll-Meyer, and that is what was built.
+Only its name for the tool is loose, and the atlas proves the splitting
+`C-infinity` rather than analytic -- everything its Lemma 2 consumes, with the
+regularity gap named rather than papered over.
+`Examples.Conjectures.MAIS.loss_quartic_on_degenerateNull` rules out a
+Morse-Bott normal form at a rung point, which (9) neither claims nor needs. Issue #5 is the one genuinely different route: it takes the
+rank-zero pair through the analytic Morse lemma at signature `(2,2)`, which does
+apply there, and the atlas proves it by an explicit integral instead. **So for
+#5 what is machine-checked is the claim and not the argument; for #12 it is
+both, up to the regularity of the chart.** Issue #12's complete-solution claim
+is still not verified, because part (a) rests on the frontier above. Verdicts, and what each column
+does and does not say, are in
+[`docs/status/mais-solutions.md`](docs/status/mais-solutions.md).
+
+**Two earlier results in the causal layer are negative, and both are answers to printed problems
 this tree could not state a week ago.** `Examples.Causal.O24Refutation.isEmpty_o24Solution`
 proves **MAIS-O24 has no solution** -- clauses (a) and (c) of `prob:effective`
 are incompatible for any list of polynomials and any constants, and neither (b)
@@ -196,7 +320,29 @@ bridge and is not a reviewed reading of Ashby's law in general — see
 Counts in the generated snapshot below are current for the branch; the release
 narrative that follows is not about it.
 
-Current phase: `v0.7.0` is **published** — see
+Current phase: `v0.8.0` is **published** — see
+[`docs/releases/v0.8.md`](docs/releases/v0.8.md). It is a breadth release that
+spends its last third on the risk breadth creates. The atlas took on a community:
+MAIS open-problem agendas are carried as compiling Lean statements, seven settled
+by the build, one submitted candidate conditionally verified against three named
+frontier hypotheses, two printed propositions refuted with countermodels. It also
+gained a causal layer, the Kleinberg–Mullainathan–Raghavan fairness trade-off with
+both escapes realized by witnesses, Ashby's counting law with a runnable check on
+its *hypothesis*, and a vendored doubly-efficient debate development, on a
+toolchain moved to Lean v4.33.0. Against that, v0.7 had recorded that one joint is
+not composition — one *transport* between two domains, which is a different count
+from consuming modules and is not conflated with it here. So `report_consumers.py
+--hub` now lists 10 modules consuming the knowability kernel, four of them added
+this release, and `Causal` and `Compositional.Hyperproperties`, which had no
+reference to it in either direction, reach it in one step — the trace
+theory that had defined `TraceSystem` and `IsKSafety` for two releases without
+anything producing a trace has a producer, and anonymity is a theorem rather than
+an absence of identifiers from a structure. The seven notions of agent behaviour
+still have no transports between them, and the release note says so in v0.7's own
+words. Two MAIS-O70 fidelity adjudications remain unsigned and no gate checks
+that file.
+
+Previously: `v0.7.0` — see
 [`docs/releases/v0.7.md`](docs/releases/v0.7.md). It is a depth release on
 Wolpert's *Physical limits of inference*, carried at the source's own
 quantifiers with the finiteness restrictions the proofs never used removed and
@@ -212,7 +358,7 @@ cited at the technical report's numbering rather than the published chapter's) a
 recorded two version traps. Theorem statements, the public API and the axiom
 profile all change; the reviewed-bridge count does not.
 
-Previously: `v0.6.0` is tagged and published. It answers one question — what
+`v0.6.0` is tagged and published. It answers one question — what
 an observer can recover about a system it is part of — with a knowability kernel
 and six specializations over it, adds Breuer's abstract self-measurement core at
 `EQUIVALENT`, mechanizes the survey's own §4.3 as BY-044 at `EQUIVALENT`, and ships
@@ -230,18 +376,18 @@ public API, or axiom profile changed in either release.
 
 <!-- BEGIN GENERATED REGISTRY SNAPSHOT -->
 <!-- Generated by scripts/generate_registry_views.py; do not edit by hand. -->
-- Atlas Lean declarations: **257** (claim-row WRAPPER **13** / BRIDGE **5**).
-- Results stating a source claim: **49**; recording a formalization only: **37** (**28** on the public root import).
+- Atlas Lean declarations: **269** (claim-row WRAPPER **13** / BRIDGE **5**).
+- Results stating a source claim: **49**; recording a formalization only: **42** (**33** on the public root import).
 - Reviewed AI-system bridges: **3**; statement-reviewed only: **1**.
-- Open conjectures: **3** of **10** recorded; the ledger also holds **5** determine-problem targets. Problems the atlas cannot state carry no row at all and are recorded against their source directory, so this line does not count them; a resolved row states which printed clause it covers, and one of them (CONJ-003) is true only because its class is empty.
+- Open conjectures: **3** of **11** recorded; the ledger also holds **6** determine-problem targets. Problems the atlas cannot state carry no row at all and are recorded against their source directory, so this line does not count them; a resolved row states which printed clause it covers, and one of them (CONJ-003) is true only because its class is empty.
 - Claim results with statement-match (`EXACT`/`EQUIVALENT`): **14**; with `RELATED`-only formalization: **8**. Counts are claim rows, not records: an artifact row's grade is on the row and never in this number.
-- Rows carrying atlas Lean: **50** (**21** of them claim rows); catalogued candidate leads: **5**.
+- Rows carrying atlas Lean: **55** (**21** of them claim rows); catalogued candidate leads: **5**.
 <!-- END GENERATED REGISTRY SNAPSHOT -->
 
 <!-- BEGIN GENERATED RELEASE STATUS -->
 <!-- Generated by scripts/generate_registry_views.py; do not edit by hand. -->
-- Package version: **`0.7.0`** (`lakefile.toml`, cross-checked against `CITATION.cff`).
-- Latest recorded release note: [`docs/releases/v0.7.md`](docs/releases/v0.7.md).
+- Package version: **`0.8.0`** (`lakefile.toml`, cross-checked against `CITATION.cff`).
+- Latest recorded release note: [`docs/releases/v0.8.md`](docs/releases/v0.8.md).
 - Published releases are the repository's git tags / GitHub Releases — that list, not this file, is the canonical published set.
 <!-- END GENERATED RELEASE STATUS -->
 
