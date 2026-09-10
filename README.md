@@ -151,7 +151,7 @@ monorepo in-tree. Reusable structure and honest grading over volume.
 <!-- BEGIN GENERATED REGISTRY SCOPE -->
 | Metric | Current |
 |---|---:|
-| Atlas Lean declarations | **265** |
+| Atlas Lean declarations | **269** |
 | Results stating a source claim | **49** |
 | Results recording a formalization only | **42** (33 on root import) |
 | Reviewed AI-system bridges | **3** |

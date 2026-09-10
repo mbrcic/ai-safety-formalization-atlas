@@ -502,39 +502,68 @@
           "name": "AISafetyAtlas.Fairness.perfect_prediction_or_equal_base_rates",
           "location": [
             "AISafetyAtlas/Fairness/RiskAssignment.lean",
-            309
+            312
           ]
         },
         {
           "name": "AISafetyAtlas.Fairness.print_perfectPrediction_of_populated",
           "location": [
             "AISafetyAtlas/Fairness/RiskAssignment.lean",
-            358
+            361
           ]
         },
         {
           "name": "AISafetyAtlas.Fairness.sum_score_eq_μ",
           "location": [
             "AISafetyAtlas/Fairness/RiskAssignment.lean",
-            223
+            226
           ]
         },
         {
           "name": "AISafetyAtlas.Fairness.negativeScore_eq",
           "location": [
             "AISafetyAtlas/Fairness/RiskAssignment.lean",
-            230
+            233
           ]
         },
         {
           "name": "AISafetyAtlas.Fairness.perfect_of_negativeScore_eq_zero",
           "location": [
             "AISafetyAtlas/Fairness/RiskAssignment.lean",
-            284
+            287
+          ]
+        },
+        {
+          "name": "AISafetyAtlas.Fairness.approx_perfect_prediction_or_equal_base_rates",
+          "location": [
+            "AISafetyAtlas/Fairness/ApproximateRiskAssignment.lean",
+            501
+          ]
+        },
+        {
+          "name": "AISafetyAtlas.Fairness.exists_slack_function",
+          "location": [
+            "AISafetyAtlas/Fairness/ApproximateRiskAssignment.lean",
+            542
+          ]
+        },
+        {
+          "name": "AISafetyAtlas.Fairness.average_lower_bound",
+          "location": [
+            "AISafetyAtlas/Fairness/ApproximateRiskAssignment.lean",
+            438
+          ]
+        },
+        {
+          "name": "AISafetyAtlas.Fairness.perfect_prediction_or_equal_base_rates_of_approx",
+          "location": [
+            "AISafetyAtlas/Fairness/ApproximateRiskAssignment.lean",
+            560
           ]
         }
       ],
       "modules": [
+        "AISafetyAtlas.Fairness.ApproximateRiskAssignment",
         "AISafetyAtlas.Fairness.RiskAssignment"
       ],
       "realized": true,
@@ -1764,9 +1793,13 @@
     "AISafetyAtlas.Control.mutualInfo_prod_eq_of_sensorLoss_eq_zero": "BY-005",
     "AISafetyAtlas.Control.perfectlyObservable_iff_sensorLoss_eq_zero": "BY-005",
     "AISafetyAtlas.Control.two_le_card_admittedOutcomes": "BY-004",
+    "AISafetyAtlas.Fairness.approx_perfect_prediction_or_equal_base_rates": "BY-010",
+    "AISafetyAtlas.Fairness.average_lower_bound": "BY-010",
+    "AISafetyAtlas.Fairness.exists_slack_function": "BY-010",
     "AISafetyAtlas.Fairness.negativeScore_eq": "BY-010",
     "AISafetyAtlas.Fairness.perfect_of_negativeScore_eq_zero": "BY-010",
     "AISafetyAtlas.Fairness.perfect_prediction_or_equal_base_rates": "BY-010",
+    "AISafetyAtlas.Fairness.perfect_prediction_or_equal_base_rates_of_approx": "BY-010",
     "AISafetyAtlas.Fairness.print_perfectPrediction_of_populated": "BY-010",
     "AISafetyAtlas.Fairness.sum_score_eq_μ": "BY-010",
     "AISafetyAtlas.Inference.PhysicalKnowledgeWitness.eq_target_on_of_refinesOn": "CLM-WOLPERT-KNOW-001",

@@ -251,3 +251,5 @@ AISafetyAtlas.Preference.Knowability
 AISafetyAtlas.Examples.Preference.Knowability
 AISafetyAtlas.Compositional.Knowability
 AISafetyAtlas.Examples.Compositional.Knowability
+AISafetyAtlas.Fairness.ApproximateRiskAssignment
+AISafetyAtlas.Examples.Fairness.ApproximateRiskAssignment

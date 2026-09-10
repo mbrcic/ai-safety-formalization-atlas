@@ -1,7 +1,7 @@
 {
   "generated_by": "scripts/check_statement_freeze.py --write",
   "note": "Signature hashes of ledger-graded statements. A diff here is a schema event: say which way fidelity moved and re-grade the row.",
-  "count": 291,
+  "count": 301,
   "declarations": {
     "AISafetyAtlas.Causal.DecisionNetwork.mem_parents_utility_of_isUnmediated": {
       "file": "AISafetyAtlas/Causal/DecisionNetwork.lean",
@@ -67,9 +67,17 @@
       "file": "AISafetyAtlas/Causal/MarginClass.lean",
       "sha256": "42ed7f227640770d"
     },
+    "AISafetyAtlas.Causal.behaviorEq_iff_behavior_eq": {
+      "file": "AISafetyAtlas/Causal/Knowability.lean",
+      "sha256": "37a149da69b0aa7d"
+    },
     "AISafetyAtlas.Causal.eq_family_of_isCausalBayesNetwork": {
       "file": "AISafetyAtlas/Causal/BayesianNetwork.lean",
       "sha256": "67f8473dc7fb6954"
+    },
+    "AISafetyAtlas.Causal.exists_behaviorEq_pair_of_not_knowable": {
+      "file": "AISafetyAtlas/Causal/Knowability.lean",
+      "sha256": "f9318f9633a3e9a7"
     },
     "AISafetyAtlas.Causal.inIdentifiedSet_zero_of_behaviorEq": {
       "file": "AISafetyAtlas/Causal/Decision.lean",
@@ -99,9 +107,25 @@
       "file": "AISafetyAtlas/Compositional/Hyperproperties.lean",
       "sha256": "59bf1221876bfda9"
     },
+    "AISafetyAtlas.Compositional.Hyperproperties.knowable_of_isSafetyPredicate": {
+      "file": "AISafetyAtlas/Compositional/Hyperproperties/Knowability.lean",
+      "sha256": "dd06f08f1782ea90"
+    },
+    "AISafetyAtlas.Compositional.Hyperproperties.not_isSafetyPredicate_of_realizedSet_collision": {
+      "file": "AISafetyAtlas/Compositional/Hyperproperties/Knowability.lean",
+      "sha256": "4dc81dff79e71446"
+    },
     "AISafetyAtlas.Compositional.Networks.knowable_runFor": {
       "file": "AISafetyAtlas/Compositional/Knowability.lean",
       "sha256": "bdd2a532c89fa3a9"
+    },
+    "AISafetyAtlas.Compositional.Networks.not_electsLeader_of_fixedPointFree": {
+      "file": "AISafetyAtlas/Compositional/NetworkTraces.lean",
+      "sha256": "33a683f3d91adb56"
+    },
+    "AISafetyAtlas.Compositional.Networks.realizes_systemOf": {
+      "file": "AISafetyAtlas/Compositional/NetworkTraces.lean",
+      "sha256": "aa3bdbca75a3b03f"
     },
     "AISafetyAtlas.Compositional.Networks.runFor_eq_of_view_eq": {
       "file": "AISafetyAtlas/Compositional/Networks.lean",
@@ -491,6 +515,18 @@
       "file": "AISafetyAtlas/Explainability.lean",
       "sha256": "a6a77f09f59854f1"
     },
+    "AISafetyAtlas.Fairness.approx_perfect_prediction_or_equal_base_rates": {
+      "file": "AISafetyAtlas/Fairness/ApproximateRiskAssignment.lean",
+      "sha256": "65b92388270af19e"
+    },
+    "AISafetyAtlas.Fairness.average_lower_bound": {
+      "file": "AISafetyAtlas/Fairness/ApproximateRiskAssignment.lean",
+      "sha256": "c004a7372506c703"
+    },
+    "AISafetyAtlas.Fairness.exists_slack_function": {
+      "file": "AISafetyAtlas/Fairness/ApproximateRiskAssignment.lean",
+      "sha256": "27e9abae14899b1e"
+    },
     "AISafetyAtlas.Fairness.negativeScore_eq": {
       "file": "AISafetyAtlas/Fairness/RiskAssignment.lean",
       "sha256": "aeb3376f0d0f224f"
@@ -502,6 +538,10 @@
     "AISafetyAtlas.Fairness.perfect_prediction_or_equal_base_rates": {
       "file": "AISafetyAtlas/Fairness/RiskAssignment.lean",
       "sha256": "45b91b5dc73e87b4"
+    },
+    "AISafetyAtlas.Fairness.perfect_prediction_or_equal_base_rates_of_approx": {
+      "file": "AISafetyAtlas/Fairness/ApproximateRiskAssignment.lean",
+      "sha256": "9c89d1ab53c29c63"
     },
     "AISafetyAtlas.Fairness.print_perfectPrediction_of_populated": {
       "file": "AISafetyAtlas/Fairness/RiskAssignment.lean",

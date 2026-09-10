@@ -1,8 +1,8 @@
-# BY-010: how Kleinberg–Mullainathan–Raghavan's Theorem 1.1 became a Lean statement
+# BY-010: how Kleinberg–Mullainathan–Raghavan's theorems became Lean statements
 
-**Status.** First formalization of the row, 2026-08-31. The exact
-characterization only; the approximate one (Theorem 1.2) is not attempted and is
-recorded below as a residual.
+**Status.** First formalization of the row, 2026-08-31, the exact
+characterization (Theorem 1.1). Extended 2026-09-04 with the approximate
+characterization (Theorem 1.2) and §3's argument for it.
 
 ## The source
 
@@ -77,13 +77,22 @@ operation the sums do not.
 | `AISafetyAtlas.Fairness.sum_score_eq_μ` | print's equation (2) |
 | `AISafetyAtlas.Fairness.negativeScore_eq` | the score left for the negative class |
 | `AISafetyAtlas.Fairness.perfect_of_negativeScore_eq_zero` | the `γ = 1` branch |
+| `AISafetyAtlas.Fairness.approx_perfect_prediction_or_equal_base_rates` | Theorem 1.2 at the explicit `f`, with the approximate predicates reconstructed from the proof |
+| `AISafetyAtlas.Fairness.exists_slack_function` | Theorem 1.2's existential form for those adopted predicates |
+| `AISafetyAtlas.Fairness.slack` | print's `f(ε) = √ε · max(1, 3√ε + 3/4)` |
+| `AISafetyAtlas.Fairness.average_lower_bound` | §3's core bound on `γ` when the base rates are far apart |
+| `AISafetyAtlas.Fairness.perfect_prediction_or_equal_base_rates_of_approx` | Theorem 1.1 re-derived as the `ε = 0` case |
 
-Witnesses in `AISafetyAtlas.Examples.Fairness.RiskAssignment`.
+Theorem 1.1 is in `AISafetyAtlas.Fairness.RiskAssignment`; Theorem 1.2 and the
+`ε`-approximate conditions are in
+`AISafetyAtlas.Fairness.ApproximateRiskAssignment`. Witnesses in the two mirror
+modules under `AISafetyAtlas.Examples.Fairness`.
 
 Reproduction:
 
 ```
 lake build AISafetyAtlas.Fairness.RiskAssignment AISafetyAtlas.Examples.Fairness.RiskAssignment
+lake build AISafetyAtlas.Fairness.ApproximateRiskAssignment AISafetyAtlas.Examples.Fairness.ApproximateRiskAssignment
 ```
 
 Axioms for every declaration named here are within
@@ -179,14 +188,139 @@ not imply it.
    quantifier directly rather than as an afterthought. It is also where the three
    nonnegativity hypotheses are consumed; nothing else in the proof uses them.
 
+## §3 and Theorem 1.2: page-level repairs and scope
+
+Theorem 1.2 relaxes each of (A), (B) and (C) by a multiplicative `ε` and
+concludes an `f(ε)`-approximate form of one of the two cases. Print states it
+existentially — *"there is a continuous function `f`, with `f(x)` going to `0` as
+`x` goes to `0`"* — and then constructs one at the end of §3. The Lean carries
+both: `slack` is print's construction,
+`approx_perfect_prediction_or_equal_base_rates` is the theorem at that explicit
+witness, and `exists_slack_function` is the corresponding existential theorem
+for the adopted predicates. The explicit form is the stronger one and is what
+everything else uses.
+
+The `ε`-approximate conditions, `WithinFactor ε x y` being `(1-ε)y ≤ x ≤ (1+ε)y`:
+
+| print | here |
+|---|---|
+| (A′) | `WithinFactor ε (v b * assigned t b) (assignedPos t b)`, every `t` and `b` |
+| (B′) | `WithinFactor ε (ν t) (ν u)`, both ordered pairs |
+| (C′) | `WithinFactor ε (γ t) (γ u)`, both ordered pairs |
+| `δ`-approximate perfect prediction | `1 - δ ≤ γ t`, both `t` |
+| `δ`-approximately equal base rates | `|ρ 0 - ρ 1| ≤ δ` |
+
+The two ordered pairs in (B′) and (C′) are print's *"we also require that these
+hold when `μ₁` and `μ₂` are interchanged"*. That each primed condition is a
+genuine relaxation of its unprimed one is checked in-tree at `ε = 0`:
+`approxCalibrated_zero_iff`, `approxBalancedPositive_zero_iff` and
+`approxBalancedNegative_zero_iff` are `iff`s, not implications.
+
+### (A′) as printed is not the adopted relaxation
+
+§3 prints
+
+> `(1 − ε)[nᵀ_t XV]_b ≤ [nᵀ_t P X]_b ≤ (1 − ε)[nᵀ_t XV]_b`
+
+with the **same** factor `(1 − ε)` on both sides. Read literally, that forces
+`[nᵀ_t P X]_b = (1 − ε)[nᵀ_t XV]_b`; it is exact calibration only at
+`ε = 0`, not for positive `ε`. It therefore does not make Theorem 1.2 a
+restatement of Theorem 1.1.
+
+The derivation immediately after, which produces print's (7), supports this
+reading: `(1 − ε)μ_t ≤ μ̂_t ≤ (1 + ε)μ_t`. It bounds
+`μ̂_t = ∑_b [nᵀ_t XV]_b` above by `(1 + ε)μ_t` and below by `(1 − ε)μ_t`, where
+`μ_t = ∑_b [nᵀ_t P X]_b`. So the approximated quantity is the score side, the
+reference is the positive-class side, and the right-hand factor is `(1 + ε)`.
+`ApproxCalibrated` is that use: `(1 − ε)P ≤ S ≤ (1 + ε)P`, with the score side
+`S` approximated and the positive-class side `P` as reference. This is a
+defensible reconstruction of the proof's use, with the display's two sides
+transposed; it is neither the literal display nor equivalent to it.
+
+That derivation is not itself clean — its third line prints
+`nᵀ_t XVe = ∑_b [nᵀ_t P X]_b`, which is not implied by the approximate hypotheses
+and should read `∑_b [nᵀ_t XV]_b`. So the reading adopted here is the one that
+makes the six-line chain valid, not one copied off a correct line. A reviewer who
+disagrees should say so: it changes the grade, and possibly the theorem.
+
+This is the reason the Theorem 1.2 records are graded `RELATED` and not a
+statement match: the Lean adopts the condition supported by print's proof,
+not the condition literally displayed on the page.
+
+### (B′) and (C′) use each group's own numerator
+
+On PDF p. 12, the displayed fractions use `n_t` throughout the numerators,
+including in the term for the other group. The Lean repairs this by using each
+group's own score average and group-indexed denominator: `negativeAverage` divides
+by `N t - μ t`, while `positiveAverage` divides by `μ t`. The swapped requirement
+swaps the whole group expression. Thus `ApproxBalancedNegative` and
+`ApproxBalancedPositive` are the group-indexed reading needed by the argument,
+not a literal transcription of the p. 12 display.
+
+### §3 divides by a quantity whose sign it never fixes
+
+After (10), print writes
+
+> `ρ₂/(1 − ρ₂) ≤ [(1 + ε − γ₁)/(1 − 2ε + ε² − γ₁)] · ρ₁/(1 − ρ₁)`
+
+which requires `1 − 2ε + ε² − γ₁ > 0`. Nothing earlier in §3 excludes
+`γ₁ ≥ (1 − ε)²`. The gap is harmless — that case has `γ₁ ≥ 1 − 2ε`, which is
+already at least as strong as the bound the division is being used to reach — but
+it has to be taken, and `core_bound` takes it as an explicit first branch. A
+reader checking §3 against the Lean will find one case there that is not on the
+page.
+
+### Where the Lean is stronger than print
+
+* Print says *"for all `ε > 0`"*; the Lean proves it for `ε ≥ 0`. At `ε = 0` the
+  argument still closes, because the strictness of the base-rate gap survives the
+  substitution `ρ_u ↦ ρ_t + √ε`. This is what lets
+  `perfect_prediction_or_equal_base_rates_of_approx` re-derive Theorem 1.1
+  through §3's argument rather than §2's — an independent check that the primed
+  conditions and the approximate conclusions are the right relaxations.
+* Print asks only that `f` be continuous with `f(x) → 0`; `slack` is exhibited,
+  and `continuous_slack` and `tendsto_slack_zero` are proved of it.
+* Print's algebra discards an `ε²` term and a `3ε^{3/2}ρ₁` term as it goes. The
+  Lean keeps them: `core_bound`'s `hident` is an exact ring identity, and the two
+  discarded terms appear as the named nonnegative quantities `hdrop₁` and
+  `hdrop₂`. Print's final bound is recovered, not approximated.
+
+### The two approximate conclusions are not the exact ones weakened
+
+Print's `δ`-approximate perfect prediction is a statement about the risk
+assignment — *"in each group, the average of the expected scores assigned to
+members of the positive class is at least `1 − δ`"* — where its exact perfect
+prediction is a statement about the instance, that every `p σ` is `0` or `1`.
+They are different predicates over different data, and `ApproxPerfectPrediction`
+accordingly takes the risk assignment as an argument where `PerfectPrediction`
+does not.
+
+One implication holds: `perfectPrediction_of_approx_zero` shows that at `δ = 0`,
+under exact calibration, the approximate form gives print's exact one. **The
+converse is false**, and `Examples.…ApproximateRiskAssignment.mixedBins` is the
+counterexample — two feature vectors that settle every person's class, so
+`PerfectPrediction` holds, collected into a single bin whose score calibration
+forces to `1/2`, so `γ = 1/2` and no `δ < 1/2` approximate form holds. Anyone
+reading the first disjunct of Theorem 1.2 as *"the instance nearly allows perfect
+prediction"* should read that witness first.
+
+`ApproxEqualBaseRates` has no such gap: at `δ = 0` it is `EqualBaseRates`, and
+`approxEqualBaseRates_zero_iff` is an `iff`.
+
+### Non-vacuity
+
+A conditional is valid when nothing satisfies its hypotheses, and the
+`ε`-approximate hypotheses are the ones that need inhabiting at a **positive**
+`ε` — an exactly calibrated instance satisfies them for trivial reasons.
+`nearMiss` is the witness that does not: one bin scoring `5/18` over two groups
+with base rates `1/4` and `5/16`, meeting (A′), (B′) and (C′) at `ε = 1/9` while
+`nearMiss_not_calibrated` shows (A) fails outright, so Theorem 1.1 says nothing
+about it. It lands on the second disjunct, and
+`nearMiss_not_approxPerfectPrediction` shows it lands there rather than
+satisfying both.
+
 ## What is not mechanized
 
-* **Theorem 1.2, the approximate characterization.** Print relaxes each of (A),
-  (B) and (C) to an `ε`-approximate form and concludes an `f(ε)`-approximate form
-  of perfect prediction or of equal base rates, for some continuous `f` with
-  `f(x) → 0` as `x → 0`. Nothing here speaks to it, and the row claims nothing
-  about it. This is the larger half of the paper's technical content and is the
-  natural next target on this row.
 * **§1.2's converse observations.** Print notes that the two escape cases *are*
   achievable — a perfect-prediction instance and an equal-base-rate instance each
   admit an assignment meeting all three conditions. The two witnesses in
@@ -194,16 +328,59 @@ not imply it.
   not as a graded statement of print's remark.
 * **The `> 2` group case.** Print says extending the definitions past two groups
   is straightforward; the Lean fixes `Fin 2`, as print's own statement does.
-* **Everything after §2.** The statistical-parity discussion, the special cases
-  of the model, and the algorithmic section are outside this row.
+* **Other material.** §3's approximate argument is mechanized above. The
+  statistical-parity discussion, the special cases of the model, and the
+  algorithmic section are outside this row.
 
 ## What a later reader should re-check
+
+### Manual review checklist (arXiv v2 PDF)
+
+Use the existing `survey-ref-034-kleinberg-mullainathan-raghavan-1609.05807.pdf`
+under `scratchpad/by-010-sources/` (arXiv v2, 17 Nov 2016). The page numbers below
+are the PDF's printed page numbers. The Lean files are
+[`RiskAssignment.lean`](../../AISafetyAtlas/Fairness/RiskAssignment.lean),
+[`ApproximateRiskAssignment.lean`](../../AISafetyAtlas/Fairness/ApproximateRiskAssignment.lean),
+and its
+[`worked examples`](../../AISafetyAtlas/Examples/Fairness/ApproximateRiskAssignment.lean).
+The main judgment is whether the reconstructed predicates express the intended
+approximation; the build verifies the theorem under those predicates.
+
+* **pp. 3–4 (model):** compare the population, groups, feature vectors, class
+  rates, and assignment matrix with `Fairness.Instance`,
+  `Fairness.RiskAssignment`, `assigned`, and `assignedPos`/`assignedNeg`.
+* **pp. 5–6 (theorems and approximate conclusions):** compare Theorem 1.1 on
+  p. 5 and Theorem 1.2 on p. 6 with
+  `perfect_prediction_or_equal_base_rates`,
+  `approx_perfect_prediction_or_equal_base_rates`,
+  `ApproxPerfectPrediction`, `ApproxEqualBaseRates`, and
+  `exists_slack_function`.
+* **p. 12 (A′, B′, C′):** check the displayed factors and group indices against
+  `WithinFactor`, `ApproxCalibrated`, `ApproxBalancedNegative`, and
+  `ApproxBalancedPositive`; in particular, verify the A′ reconstruction and the
+  own-numerator repair for B′/C′ described above.
+* **p. 13 (equations (7)–(8)):** check the score split and the two-sided bound
+  against `sum_score_split`, `sum_score_bounds`, `negativeScore_eq_sub`,
+  `ApproxBalancedPositive`, and `positiveAverage`.
+* **p. 14 (denominator split and `f`):** check the odds/denominator algebra and
+  the final function against `key_of_bounds`, `core_bound`,
+  `average_lower_bound`, `slack`, `continuous_slack`, and
+  `tendsto_slack_zero`.
+* **Worked witnesses:** check `nearMiss`, `separated`, and `mixedBins` in
+  `Examples.Fairness.ApproximateRiskAssignment`, including their failure or
+  satisfaction declarations, against the adopted predicates.
 
 1. That `Calibrated` is print's (A) and not the weaker *"calibrated in
    aggregate"* condition. Print quantifies over groups **and** bins; so does the
    Lean.
-2. That the permissive/restrictive split above is still the only place the Lean
-   and print differ. Any further hypothesis added to `Instance` or
+2. That the permissive/restrictive split above is still the only conclusion
+   narrowing in Theorem 1.1. Any further hypothesis added to `Instance` or
    `RiskAssignment` is a schema event and re-grades the row.
-3. That `v_le_one` is still unused. If a later proof starts using it, this note
-   is wrong about which of print's hypotheses are load-bearing.
+3. That `v_le_one` is still unused **in the Theorem 1.1 proof**. It is used in
+   the approximate layer, by `positiveScore_le_μ` and so by
+   `perfectPrediction_of_approx_zero`. If a later proof in
+   `Fairness/RiskAssignment.lean` starts using it, this note is wrong about which
+   of print's hypotheses are load-bearing there.
+4. That `ApproxCalibrated` still matches §3's *use* of (A′) rather than its
+   printed display. If a future reader concludes the display is right and the
+   proof is wrong, the Theorem 1.2 records need re-grading, not repair.

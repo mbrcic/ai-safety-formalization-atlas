@@ -1,8 +1,8 @@
 {
   "counts": {
-    "declarations": 265,
-    "examples_only": 224,
-    "load_bearing": 41,
+    "declarations": 269,
+    "examples_only": 226,
+    "load_bearing": 43,
     "no_consumer": 0
   },
   "declarations": {
@@ -747,23 +747,54 @@
       "origin": "LAND-ATTR-001",
       "tier": "examples-only"
     },
-    "AISafetyAtlas.Fairness.negativeScore_eq": {
+    "AISafetyAtlas.Fairness.approx_perfect_prediction_or_equal_base_rates": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Fairness.ApproximateRiskAssignment",
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "BY-010",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Fairness.average_lower_bound": {
       "consumers": [
         "AISafetyAtlas.Examples.Registry"
       ],
       "origin": "BY-010",
       "tier": "examples-only"
     },
-    "AISafetyAtlas.Fairness.perfect_of_negativeScore_eq_zero": {
+    "AISafetyAtlas.Fairness.exists_slack_function": {
       "consumers": [
         "AISafetyAtlas.Examples.Registry"
       ],
       "origin": "BY-010",
       "tier": "examples-only"
+    },
+    "AISafetyAtlas.Fairness.negativeScore_eq": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry",
+        "AISafetyAtlas.Fairness.ApproximateRiskAssignment"
+      ],
+      "origin": "BY-010",
+      "tier": "load-bearing"
+    },
+    "AISafetyAtlas.Fairness.perfect_of_negativeScore_eq_zero": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry",
+        "AISafetyAtlas.Fairness.ApproximateRiskAssignment"
+      ],
+      "origin": "BY-010",
+      "tier": "load-bearing"
     },
     "AISafetyAtlas.Fairness.perfect_prediction_or_equal_base_rates": {
       "consumers": [
         "AISafetyAtlas.Examples.Fairness.RiskAssignment",
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "BY-010",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Fairness.perfect_prediction_or_equal_base_rates_of_approx": {
+      "consumers": [
         "AISafetyAtlas.Examples.Registry"
       ],
       "origin": "BY-010",
@@ -2138,9 +2169,11 @@
     "AISafetyAtlas.Examples.Causal.\u0394_eq_half_sub_joint",
     "AISafetyAtlas.Explainability.attribution_impossibility",
     "AISafetyAtlas.Explainability.attribution_impossibility_weak",
-    "AISafetyAtlas.Fairness.negativeScore_eq",
-    "AISafetyAtlas.Fairness.perfect_of_negativeScore_eq_zero",
+    "AISafetyAtlas.Fairness.approx_perfect_prediction_or_equal_base_rates",
+    "AISafetyAtlas.Fairness.average_lower_bound",
+    "AISafetyAtlas.Fairness.exists_slack_function",
     "AISafetyAtlas.Fairness.perfect_prediction_or_equal_base_rates",
+    "AISafetyAtlas.Fairness.perfect_prediction_or_equal_base_rates_of_approx",
     "AISafetyAtlas.Fairness.print_perfectPrediction_of_populated",
     "AISafetyAtlas.Fairness.sum_score_eq_\u03bc",
     "AISafetyAtlas.Inference.PhysicalKnowledgeWitness.eq_target_on_of_refinesOn",

@@ -2347,7 +2347,7 @@
           "build_environment": "leanprover/lean4:v4.33.0; mathlib@db584cd6d46c92f209a44c0f1c829460d327499d",
           "build_command": "lake build AISafetyAtlas.Fairness.RiskAssignment AISafetyAtlas.Examples.Fairness.RiskAssignment",
           "scope_delta": {
-            "summary": "One quantifier, and it is forced. Print's perfect-prediction disjunct reads 'p_sigma equal to 0 or 1 for all sigma'; PerfectPrediction quantifies over the feature vectors somebody has. Section 1.1 never says whether a feature vector may have frequency zero in both groups, and the two readings disagree: at the permissive one the unrestricted sentence is false, refuted in-tree by Examples.Fairness.RiskAssignment.not_print_perfectPrediction on an instance meeting every hypothesis with p = 1/2 at an unpopulated vector; at the restrictive one nothing is lost, since print_perfectPrediction_of_populated recovers print's sentence verbatim and populated_print_perfectPrediction inhabits it. Print's hypotheses are otherwise taken unchanged, including the score upper bound v_b <= 1, which no step uses. Theorem 1.2, the approximate characterization, is not formalized.",
+            "summary": "One quantifier, and it is forced. Print's perfect-prediction disjunct reads 'p_sigma equal to 0 or 1 for all sigma'; PerfectPrediction quantifies over the feature vectors somebody has. Section 1.1 never says whether a feature vector may have frequency zero in both groups, and the two readings disagree: at the permissive one the unrestricted sentence is false, refuted in-tree by Examples.Fairness.RiskAssignment.not_print_perfectPrediction on an instance meeting every hypothesis with p = 1/2 at an unpopulated vector; at the restrictive one nothing is lost, since print_perfectPrediction_of_populated recovers print's sentence verbatim and populated_print_perfectPrediction inhabits it. Print's hypotheses are otherwise taken unchanged, including the score upper bound v_b <= 1, which no step uses. Theorem 1.2, the approximate characterization, is a separate record on this row.",
             "evidence": "docs/provenance/kleinberg-fairness-tradeoffs.md"
           }
         },
@@ -2368,6 +2368,46 @@
           "build_command": "lake build AISafetyAtlas.Fairness.RiskAssignment AISafetyAtlas.Examples.Fairness.RiskAssignment",
           "scope_delta": {
             "summary": "Print's sentence exactly, with the populated-instance hypothesis Section 1.1 leaves unwritten made explicit. It is a hypothesis print does not state, so the record is RELATED rather than a statement match; the hypothesis is inhabited by Examples.Fairness.RiskAssignment.populated.",
+            "evidence": "docs/provenance/kleinberg-fairness-tradeoffs.md"
+          }
+        },
+        {
+          "framework": "Lean",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE",
+          "module": "AISafetyAtlas.Fairness.ApproximateRiskAssignment",
+          "declaration": "AISafetyAtlas.Fairness.approx_perfect_prediction_or_equal_base_rates",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "license": "Apache-2.0",
+          "content_source_refs": [
+            "survey-ref-034"
+          ],
+          "content_source_note": "Theorem 1.2 of arXiv:1609.05807v2, the approximate characterization: an instance carrying a risk assignment satisfying the epsilon-approximate conditions (A'), (B') and (C') of Section 3 satisfies either the f(epsilon)-approximate form of perfect prediction or the f(epsilon)-approximate form of equal base rates. The witness f is print's own, f(x) = sqrt(x) * max(1, 3*sqrt(x) + 3/4), read off the last line of Section 3; exists_slack_function states the existential form over it, with the predicate repairs recorded below. Model and proof are Sections 1.1 and 3.",
+          "build_environment": "leanprover/lean4:v4.33.0; mathlib@db584cd6d46c92f209a44c0f1c829460d327499d",
+          "build_command": "lake build AISafetyAtlas.Fairness.ApproximateRiskAssignment AISafetyAtlas.Examples.Fairness.ApproximateRiskAssignment",
+          "scope_delta": {
+            "summary": "Approximate predicates reconstructed from Section 3's argument, rather than transcribed literally from its displays. Printed (A') forces P = (1-eps)S, where P is a bin's positive-class count and S its total assigned score; this is exact calibration only at eps = 0 and does not make Theorem 1.2 a restatement of Theorem 1.1. ApproxCalibrated instead requires (1-eps)P <= S <= (1+eps)P, changing both the upper sign and the direction to support equation (7). The (B') and (C') displays also use n_t throughout despite group-specific denominators; Lean uses each group's own numerator and interchanges whole groups, consistently with the defined class averages and equation (8). These repairs keep the record RELATED. Section 3 divides by 1 - 2eps + eps^2 - gamma_1 without excluding a nonpositive denominator; the Lean handles that case separately, where the required lower bound already holds. Both classes are explicitly nonempty in each group (0 < mu t < N t), making the printed averages defined. The result holds for eps >= 0, extending print's eps > 0 and supporting the recovery of Theorem 1.1 at zero.",
+            "evidence": "docs/provenance/kleinberg-fairness-tradeoffs.md"
+          }
+        },
+        {
+          "framework": "Lean",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE",
+          "module": "AISafetyAtlas.Fairness.ApproximateRiskAssignment",
+          "declaration": "AISafetyAtlas.Fairness.exists_slack_function",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "license": "Apache-2.0",
+          "content_source_refs": [
+            "survey-ref-034"
+          ],
+          "content_source_note": "Theorem 1.2 in print's own existential form: there is a continuous f with f(x) -> 0 as x -> 0 such that the epsilon-approximate conditions force one of the two f(epsilon)-approximate conclusions.",
+          "build_environment": "leanprover/lean4:v4.33.0; mathlib@db584cd6d46c92f209a44c0f1c829460d327499d",
+          "build_command": "lake build AISafetyAtlas.Fairness.ApproximateRiskAssignment AISafetyAtlas.Examples.Fairness.ApproximateRiskAssignment",
+          "scope_delta": {
+            "summary": "The feature-vector and bin types are quantified inside the existential and so are restricted to universe zero, where the explicit theorem is universe-polymorphic; print says nothing about universes. Continuity and the filter limit at zero express both regularity requirements of Theorem 1.2. The calibration-direction/sign repair and the group-index repairs documented for approx_perfect_prediction_or_equal_base_rates also apply here, as do its nonempty-class assumptions. This is the printed existential form with reconstructed predicates, not a literal transcription of the displayed hypotheses.",
             "evidence": "docs/provenance/kleinberg-fairness-tradeoffs.md"
           }
         }
@@ -2416,6 +2456,48 @@
             "source_declarations": [
               "AISafetyAtlas.Fairness.Calibrated",
               "AISafetyAtlas.Fairness.negativeScore"
+            ]
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Fairness.approx_perfect_prediction_or_equal_base_rates",
+            "type": "NEW_PROOF",
+            "source_declarations": [
+              "AISafetyAtlas.Fairness.ApproxCalibrated",
+              "AISafetyAtlas.Fairness.ApproxBalancedPositive",
+              "AISafetyAtlas.Fairness.ApproxBalancedNegative",
+              "AISafetyAtlas.Fairness.ApproxPerfectPrediction",
+              "AISafetyAtlas.Fairness.ApproxEqualBaseRates",
+              "AISafetyAtlas.Fairness.slack",
+              "AISafetyAtlas.Fairness.average_lower_bound"
+            ]
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Fairness.exists_slack_function",
+            "type": "NEW_PROOF",
+            "source_declarations": [
+              "AISafetyAtlas.Fairness.approx_perfect_prediction_or_equal_base_rates",
+              "AISafetyAtlas.Fairness.continuous_slack",
+              "AISafetyAtlas.Fairness.tendsto_slack_zero"
+            ]
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Fairness.average_lower_bound",
+            "type": "NEW_PROOF",
+            "source_declarations": [
+              "AISafetyAtlas.Fairness.ApproxCalibrated",
+              "AISafetyAtlas.Fairness.ApproxBalancedNegative",
+              "AISafetyAtlas.Fairness.ApproxBalancedPositive",
+              "AISafetyAtlas.Fairness.sum_score_bounds",
+              "AISafetyAtlas.Fairness.baseRate"
+            ]
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Fairness.perfect_prediction_or_equal_base_rates_of_approx",
+            "type": "NEW_PROOF",
+            "source_declarations": [
+              "AISafetyAtlas.Fairness.approx_perfect_prediction_or_equal_base_rates",
+              "AISafetyAtlas.Fairness.approxCalibrated_zero_iff",
+              "AISafetyAtlas.Fairness.perfectPrediction_of_approx_zero"
             ]
           }
         ]
