@@ -60,6 +60,13 @@ integration, and no SVD library. The candidate does not build them either; it ci
 the campaign's anti-recursion rule this module states the consumed identity, records its
 provenance, and stops.
 
+None of it is available to import. `NC-011` in `docs/provenance/formalization-search.json`
+searched all six baseline corpora at their pinned revisions -- Mathlib, the Isabelle AFP release
+whose archive digest it recomputed, the Rocq undecidability library, HOL4, HOL Light and the Agda
+standard library -- and found neither the Wishart density nor the eigenvalue-decomposition
+Jacobian in any of them, nor the two things a proof would run on. So this frontier is held for
+availability and not merely for effort.
+
 ## Stress evidence
 
 `eigenvalueLaw_normalisation` pins `Z` by the Gaussian normalisation at `T = 0`;

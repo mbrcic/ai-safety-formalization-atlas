@@ -88,17 +88,17 @@ def signature(text: str, line: int) -> str | None:
 # Frontier specification surfaces.
 #
 # Neither source below reaches these. They are not reproduced external
-# formalizations, so no registry `lean_artifact` row names them; and a
-# conjecture row freezes exactly one declaration, which for CONJ-026 is
-# `IsO70RankTable`. Yet they are the statements a silent edit would damage
+# formalizations, so no registry `lean_artifact` row names them; and no
+# conjecture row names them in `lean`, `answer_correct` or `answer_admissible`,
+# which is everything `graded_names` reads. Yet they are the statements a silent edit would damage
 # most: each is the `P ↔ body` surface of a hypothesis the atlas *assumes and
 # does not prove*, and freezing the alias alone freezes nothing, because the
 # body sits behind a `def`. Weakening a frontier is the cheapest way to make a
 # conditional theorem look stronger than it is, and this is what notices.
 #
-# Kept as a literal rather than a new ledger field: there are two, they are
-# hand-chosen, and a diff to this list is exactly the review event that should
-# accompany adding or retiring a frontier.
+# Kept as a literal rather than a new ledger field: there are a handful, they
+# are hand-chosen, and a diff to this list is exactly the review event that
+# should accompany adding or retiring a frontier.
 SPECIFICATION_SURFACES = {
     "AISafetyAtlas.SingularLearning.eigenvalueLawStatement_iff":
         "AISafetyAtlas/SingularLearning/EigenvalueLaw.lean",
@@ -106,6 +106,8 @@ SPECIFICATION_SURFACES = {
         "AISafetyAtlas/Conjectures/MAIS/O70.lean",
     "AISafetyAtlas.Conjectures.MAIS.o70ZetaPoleBridge_iff":
         "AISafetyAtlas/Conjectures/MAIS/O70.lean",
+    "AISafetyAtlas.Conjectures.MAIS.a7ZetaVolumeBridge_iff":
+        "AISafetyAtlas/Conjectures/MAIS/A7Zeta.lean",
 }
 
 
@@ -144,29 +146,72 @@ def conjecture_declarations() -> list[tuple[str, str, int]]:
     }
     resolved: list[tuple[str, str, int]] = []
     unresolved: list[str] = []
+    seen: set[str] = set()
     for row in rows:
-        name = row.get("lean")
-        if not name or not row.get("source_fidelity"):
+        if not row.get("source_fidelity"):
             continue
-        module = indexed_modules.get(name) or row.get("lean_module")
-        if not module:
-            unresolved.append(name)
-            continue
-        path = module.replace(".", "/") + ".lean"
-        source = ROOT / path
-        if not source.is_file():
-            unresolved.append(name)
-            continue
-        line = declaration_line(source.read_text(encoding="utf-8"), name)
-        if line is None:
-            unresolved.append(name)
-            continue
-        resolved.append((name, path, line))
+        for name in graded_names(row):
+            if name in seen:
+                continue
+            seen.add(name)
+            resolve_one(name, row, indexed_modules, resolved, unresolved)
     if unresolved:
         raise RuntimeError(
             "could not resolve graded conjecture declaration(s): "
             + ", ".join(unresolved))
     return resolved
+
+
+# A conjecture row grades more than its `lean` field. `answer_correct` holds the
+# predicates that decide whether a submitted answer is right, and
+# `answer_admissible` the ones that decide whether it is well formed; both are
+# frozen for exactly the reason `lean` is. Watching `lean` alone left ten
+# surfaces unguarded, among them `O77AllSaddlesHavePairOne` — the whole of
+# MAIS-O77(b) — `IsO7Counterexample` — the whole of the MAIS-O7 refutation —
+# and `o38PolynomialSampleCandidate`, which is what issue #30 submitted. Each
+# row names a *different* declaration in `lean`, so each of these was graded and
+# unwatched. Found on 2026-09-06, when the O77(b) surface was widened to print's
+# own hypothesis set and this check reported nothing at all.
+#
+# `answer_candidate` is deliberately not read: it holds *types*, not names.
+DECLARATION_NAME = re.compile(r"^[A-Za-z_][A-Za-z0-9_'!?]*(\.[A-Za-z_][A-Za-z0-9_'!?]*)+$")
+
+
+def graded_names(row: dict) -> list[str]:
+    """Every declaration name a conjecture row freezes."""
+    names: list[str] = []
+    lean = row.get("lean")
+    if lean:
+        names.append(lean)
+    for field in ("answer_correct", "answer_admissible"):
+        for entry in row.get(field) or []:
+            if isinstance(entry, str) and DECLARATION_NAME.fullmatch(entry):
+                names.append(entry)
+    return names
+
+
+def resolve_one(
+    name: str,
+    row: dict,
+    indexed_modules: dict[str, str],
+    resolved: list[tuple[str, str, int]],
+    unresolved: list[str],
+) -> None:
+    """Locate one graded declaration's definition site, or record it missing."""
+    module = indexed_modules.get(name) or row.get("lean_module")
+    if not module:
+        unresolved.append(name)
+        return
+    path = module.replace(".", "/") + ".lean"
+    source = ROOT / path
+    if not source.is_file():
+        unresolved.append(name)
+        return
+    line = declaration_line(source.read_text(encoding="utf-8"), name)
+    if line is None:
+        unresolved.append(name)
+        return
+    resolved.append((name, path, line))
 
 
 def current() -> dict[str, dict[str, str]]:

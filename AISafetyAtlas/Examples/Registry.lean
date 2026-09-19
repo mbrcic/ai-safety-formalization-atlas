@@ -148,6 +148,16 @@ import AISafetyAtlas.Oversight.Debate
 #check AISafetyAtlas.Oversight.Debate.vera_fast
 #check AISafetyAtlas.Compositional.Hyperproperties.k_safety_iff_finite_self_composition
 #check AISafetyAtlas.Compositional.Networks.runFor_eq_of_view_eq
+#check AISafetyAtlas.Preference.not_knowable_reward
+#check AISafetyAtlas.Preference.knowable_reward_of_isEmpty_state
+#check AISafetyAtlas.Compositional.Networks.realizes_systemOf
+#check AISafetyAtlas.Compositional.Networks.not_electsLeader_of_fixedPointFree
+#check AISafetyAtlas.Compositional.Hyperproperties.knowable_of_isSafetyPredicate
+#check AISafetyAtlas.Compositional.Hyperproperties.not_isSafetyPredicate_of_realizedSet_collision
+#check AISafetyAtlas.Causal.behaviorEq_iff_behavior_eq
+#check AISafetyAtlas.Causal.exists_behaviorEq_pair_of_not_knowable
+#check AISafetyAtlas.Compositional.Networks.knowable_runFor
+#check AISafetyAtlas.Compositional.Networks.sameView_iff_view_eq
 #check AISafetyAtlas.Compositional.rectangle_iff_exchange_closed
 #check AISafetyAtlas.Wireheading.AgentEquations.value_eq_of_agree_on_window
 #check AISafetyAtlas.Wireheading.GoalPreservationSource.Model.selected_matches_initial
@@ -195,6 +205,8 @@ import AISafetyAtlas.Oversight.Debate
 #check AISafetyAtlas.Knowledge.knowable_iff_no_collision
 #check AISafetyAtlas.Knowledge.not_knowable_of_collision
 #check AISafetyAtlas.Knowledge.not_knowable_of_witness
+#check AISafetyAtlas.Knowledge.Determines.trans
+#check AISafetyAtlas.Knowledge.not_knowable_of_invariant_transform
 #check AISafetyAtlas.Knowledge.exists_witness_of_not_knowable
 #check AISafetyAtlas.Knowledge.Knowable.mono
 #check AISafetyAtlas.Knowledge.not_knowable_comp

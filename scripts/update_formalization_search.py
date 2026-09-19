@@ -107,6 +107,34 @@ def git_remote(path: Path) -> str:
     ).stdout.strip()
 
 
+def corpus_identity(
+    corpus: str, root: Path, corpora: dict[str, Any]
+) -> tuple[str, str, str]:
+    """Repository, version and how the pair was established, for one corpus root.
+
+    A Git checkout reports its own remote and `HEAD`, which is what lets a
+    follow-up search a revision other than the baseline snapshot -- the reason
+    `NC-010` searched the Mathlib revision this repository pins rather than the
+    one recorded under `corpora`. A corpus with no Git checkout is identified
+    instead by `verify_corpus`, which for the Isabelle AFP checks the dated
+    release directory whose archive digest the `corpora` record already carries;
+    the identity then comes from that record, having been checked rather than
+    assumed.
+    """
+    if git_root(root) is not None:
+        return git_remote(root), git_revision(root), "git checkout"
+    if corpus not in corpora:
+        raise SystemExit(
+            f"novelty corpus {corpus} is not a Git checkout and is not in corpora"
+        )
+    metadata = corpora[corpus]
+    verify_corpus(corpus, root, metadata)
+    pinned = "archive sha256 recorded in corpora"
+    if "archive_sha256" not in metadata:
+        pinned = "corpora record"
+    return str(metadata["repository"]), str(metadata["version"]), pinned
+
+
 def source_files(root: Path) -> list[Path]:
     repository = git_root(root)
     if repository is not None:
@@ -261,9 +289,29 @@ def main() -> None:
         help="append or replace a structured follow-up search on one novelty check",
     )
     parser.add_argument(
+        "--novelty-check-new",
+        action="store_true",
+        help=(
+            "create the novelty check named by --novelty-check instead of "
+            "requiring it to exist; needs --novelty-check-claim, "
+            "--novelty-check-method, --novelty-check-found, "
+            "--novelty-check-scope-limits and at least one --novelty-asserted-in"
+        ),
+    )
+    parser.add_argument(
+        "--novelty-asserted-in",
+        action="append",
+        default=[],
+        help="where a new novelty check's claim is asserted; repeat as needed",
+    )
+    parser.add_argument(
         "--novelty-corpus-root",
         metavar="CORPUS=PATH",
-        help="pinned Git checkout used for a novelty-check follow-up",
+        help=(
+            "pinned corpus root used for a novelty-check follow-up: a Git "
+            "checkout, or a non-Git tree whose identity the corpora record "
+            "can verify (the dated Isabelle AFP release)"
+        ),
     )
     parser.add_argument(
         "--novelty-query",
@@ -334,7 +382,38 @@ def main() -> None:
                 "novelty follow-up is missing: " + ", ".join(missing_options)
             )
         novelty_checks = {check["id"]: check for check in evidence["novelty_checks"]}
-        if args.novelty_check not in novelty_checks:
+        if args.novelty_check_new:
+            if args.novelty_check in novelty_checks:
+                raise SystemExit(
+                    f"novelty check already exists: {args.novelty_check}"
+                )
+            seed_required = {
+                "--novelty-check-claim": args.novelty_check_claim,
+                "--novelty-check-method": args.novelty_check_method,
+                "--novelty-check-found": args.novelty_check_found,
+                "--novelty-check-scope-limits": args.novelty_check_scope_limits,
+                "--novelty-asserted-in": args.novelty_asserted_in,
+            }
+            seed_missing = [name for name, value in seed_required.items() if not value]
+            if seed_missing:
+                raise SystemExit(
+                    "new novelty check is missing: " + ", ".join(seed_missing)
+                )
+            created = {
+                "id": args.novelty_check,
+                "claim": args.novelty_check_claim,
+                "asserted_in": list(args.novelty_asserted_in),
+                "searched_on": args.searched_on,
+                "searched_by": args.searched_by,
+                "corpora": [],
+                "method": args.novelty_check_method,
+                "found": args.novelty_check_found,
+                "scope_limits": args.novelty_check_scope_limits,
+                "followup_searches": [],
+            }
+            evidence["novelty_checks"].append(created)
+            novelty_checks[args.novelty_check] = created
+        elif args.novelty_check not in novelty_checks:
             raise SystemExit(f"unknown novelty check: {args.novelty_check}")
         mapping = parse_mapping(
             [args.novelty_corpus_root], "--novelty-corpus-root"
@@ -344,14 +423,18 @@ def main() -> None:
         corpus, root = next(iter(mapping.items()))
         if not root.is_dir():
             raise SystemExit(f"novelty corpus root does not exist: {corpus}={root}")
+        repository, version, pinned_by = corpus_identity(
+            corpus, root, evidence["corpora"]
+        )
         hit = search_corpus(
             corpus, root, {args.novelty_check: args.novelty_query}
         )[args.novelty_check]
         followup = {
             "corpus": corpus,
             "framework": args.novelty_framework,
-            "repository": git_remote(root),
-            "version": git_revision(root),
+            "repository": repository,
+            "version": version,
+            "pinned_by": pinned_by,
             "scope": args.novelty_scope,
             "searched_on": args.searched_on,
             "searched_by": args.searched_by,

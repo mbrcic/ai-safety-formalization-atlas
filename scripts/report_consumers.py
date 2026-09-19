@@ -58,6 +58,7 @@ from validate_current_state import (  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[1]
 REGISTRY = ROOT / "registry.yaml"
+DECLARATION_INDEX = ROOT / "docs/status/declaration-index.json"
 LEAN_DIR = ROOT / "AISafetyAtlas"
 EXAMPLES_PREFIX = "AISafetyAtlas.Examples"
 
@@ -185,8 +186,18 @@ def consumers(
     mentions: dict[str, set[str]],
     sources: dict[str, tuple[Path, str]],
     visible: dict[str, set[str]],
+    drop_bare_leaf: bool = False,
 ) -> list[str]:
-    """Modules that can see `declaration` and name it without defining it."""
+    """Modules that can see `declaration` and name it without defining it.
+
+    `drop_bare_leaf` refuses the one-component form. Use it when the leaf is
+    carried by more than one declaration in the tree, where a bare mention is
+    evidence for all of them and therefore for none: `cw.sameObservation` is
+    `CollisionWitness`'s field, not
+    `Knowledge.IndistinguishabilityWitness.sameObservation`. A qualified
+    mention still counts, so `Knowledge.Knowable.mono` is not lost along with
+    it.
+    """
     leaf = declaration.rsplit(".", 1)[1]
     homes = definitions.get(leaf, set())
     if not homes:
@@ -199,6 +210,8 @@ def consumers(
         )
         homes = {fallback} if fallback else set()
     forms = set(qualified_forms(declaration))
+    if drop_bare_leaf:
+        forms.discard(leaf)
     found = []
     for module in sources:
         if module in homes:
@@ -208,6 +221,96 @@ def consumers(
         if forms & mentions[module]:
             found.append(module)
     return sorted(found)
+
+
+def indexed_names(prefix: str) -> list[str]:
+    """Every public declaration under `prefix`, from the elaborated index.
+
+    The index is a build product and records the *imported interface*, so this
+    is the honest denominator for "which of the kernel's laws does anything
+    use": a declaration absent here cannot be named by a consumer anyway. An
+    unreadable or missing index is an error rather than an empty answer,
+    because an empty answer from a completeness report is a lie.
+    """
+    if not DECLARATION_INDEX.exists():
+        raise SystemExit(
+            "report_consumers --hub needs docs/status/declaration-index.json; "
+            "run scripts/generate_declaration_index.py --write after a build"
+        )
+    index = json.loads(DECLARATION_INDEX.read_text(encoding="utf-8"))
+    return sorted(
+        entry["name"]
+        for entry in index.get("declarations", [])
+        if isinstance(entry, dict)
+        and isinstance(entry.get("name"), str)
+        and entry.get("kind") != "module"
+        and entry["name"].startswith(prefix)
+    )
+
+
+def ambiguous_leaves() -> set[str]:
+    """Leaf names carried by more than one declaration anywhere in the tree.
+
+    The source matcher resolves a use by dotted *suffix*, so a bare
+    `cw.sameObservation` is evidence for every declaration whose leaf is
+    `sameObservation`. `Knowledge.IndistinguishabilityWitness.sameObservation`
+    and `Oversight.JointObservation.CollisionWitness.sameObservation` are the
+    live pair: reading the second as a use of the first put three Oversight
+    modules on the kernel's consumer list for naming their own field.
+
+    A bare mention of a shared leaf is therefore evidence for every declaration
+    carrying it, and so for none. Hub mode does not drop those declarations --
+    that lost `Knowable.mono`, a real edge -- it requires a *qualified* mention
+    of them instead. The count is printed, because a completeness report that
+    quietly narrows part of its domain is the defect this rewrite exists to fix.
+    """
+    index = json.loads(DECLARATION_INDEX.read_text(encoding="utf-8"))
+    seen: dict[str, int] = {}
+    for entry in index.get("declarations", []):
+        if not isinstance(entry, dict) or entry.get("kind") == "module":
+            continue
+        name = entry.get("name")
+        if isinstance(name, str):
+            leaf = name.rsplit(".", 1)[-1]
+            seen[leaf] = seen.get(leaf, 0) + 1
+    return {leaf for leaf, count in seen.items() if count > 1}
+
+
+def hub_edges(
+    prefix: str,
+    definitions: dict[str, set[str]],
+    mentions: dict[str, set[str]],
+    sources: dict[str, tuple[Path, str]],
+    visible: dict[str, set[str]],
+) -> tuple[dict[str, set[str]], int, int]:
+    """Modules outside `prefix` and outside `Examples/`, to what they name.
+
+    A module *inside* the prefix is the prefix module itself or a submodule of
+    it -- tested as such rather than by string overlap, so passing a different
+    prefix does not silently exclude a same-named neighbour.
+
+    Returns the edges, how many declarations were scanned, and how many were
+    skipped as unattributable.
+    """
+    inside_root = prefix.rstrip(".")
+    ambiguous = ambiguous_leaves()
+    edges: dict[str, set[str]] = {}
+    scanned = 0
+    narrowed = 0
+    for declaration in indexed_names(prefix):
+        bare_is_ambiguous = declaration.rsplit(".", 1)[-1] in ambiguous
+        narrowed += bare_is_ambiguous
+        scanned += 1
+        for module in consumers(
+            declaration, definitions, mentions, sources, visible,
+            drop_bare_leaf=bare_is_ambiguous,
+        ):
+            if module == inside_root or module.startswith(prefix):
+                continue
+            if module.startswith(EXAMPLES_PREFIX):
+                continue
+            edges.setdefault(module, set()).add(declaration)
+    return edges, scanned, narrowed
 
 
 def main() -> None:
@@ -221,6 +324,15 @@ def main() -> None:
         "--queue",
         action="store_true",
         help="print only the declarations with no consumer doing mathematics",
+    )
+    parser.add_argument(
+        "--hub",
+        metavar="PREFIX",
+        nargs="?",
+        const="AISafetyAtlas.Knowledge.",
+        help="print which module outside PREFIX consumes each of its declarations. "
+             "PREFIX is optional and defaults to the knowability kernel; give it "
+             "with a trailing dot, as AISafetyAtlas.Control.",
     )
     args = parser.parse_args()
 
@@ -242,6 +354,35 @@ def main() -> None:
             examples_only.append((declaration, origin, found))
         else:
             load_bearing.append((declaration, origin, found))
+
+    if args.hub:
+        # Which domains reach a shared kernel, and through which of its laws.
+        # This answers "does the hub generalize" mechanically; what each
+        # instance takes as observation and as property is a semantic fact and
+        # lives in docs/guide/knowledge-model.md instead.
+        #
+        # The names come from the **elaborated declaration index**, not from the
+        # ledger. Reading the ledger here was a real defect and not a
+        # simplification: `lean_artifact.declarations` is a curated subset, so
+        # `Oversight.JointObservation.Residual`'s use of
+        # `knowable_iff_worstAmbiguity_le_one` was invisible -- that theorem is
+        # in LAND-AMBIG-001's formalization record but not in its artifact list.
+        # 73 of the kernel's 128 public declarations were unreachable this way,
+        # while the guide claimed the report was complete.
+        print(f"consumers of {args.hub}* outside it and outside Examples/:")
+        edges, scanned, narrowed = hub_edges(
+            args.hub, definitions, mentions, sources, visible
+        )
+        for module in sorted(edges):
+            print(f"  {module}")
+            for declaration in sorted(edges[module]):
+                print(f"      {declaration}")
+        print(f"{len(edges)} consuming module(s)")
+        print(
+            f"{scanned} declaration(s) scanned; {narrowed} required a qualified "
+            "mention because their leaf name is shared with another declaration"
+        )
+        return
 
     if args.json:
         # The whole point of this file is that reading it costs a few kilobytes

@@ -196,14 +196,24 @@ The itemized source map is
 
 ### Not proved, and not claimed
 
-- **No dynamics.** No transition relation anywhere. Nothing says *why* a collision
+- **No dynamics in the self-measurement layer.** No transition relation anywhere
+  in `Knowledge` or its specializations. Nothing there says *why* a collision
   arises or how a target moves between observations. A causal-innovation
   condition — the target changed since the last evidence-generating event — is
-  what would have to *imply* these collisions, and it is not stateable here.
-- **No achievability in Lean.** The constructive side is `LAND-CL-001`, reproduced
-  in Isabelle, with no Lean surface. It is a `BOUNDARY_PARTNER`, not a formal
-  dual: the two do not share a model. See
-  [relations](../status/relations.md).
+  what would have to *imply* these collisions, and it is not stateable in this
+  kernel. `Compositional.Networks` does have a transition relation and does
+  reach this kernel, which is why the exclusion is scoped rather than flat: what
+  it projects in is a *contemporaneous* question — what a node's depth-`n` view
+  settles about its state after `n` rounds — and not a claim about how a target
+  moves while an observer watches it.
+- **No achievability for the self-measurement results in Lean.** The constructive
+  side of *those* is `LAND-CL-001`, reproduced in Isabelle, with no Lean surface.
+  It is a `BOUNDARY_PARTNER`, not a formal dual: the two do not share a model.
+  See [relations](../status/relations.md). This is not the claim that the kernel
+  proves nothing positive — `Knowledge.Devices`, `Knowledge.Check`,
+  `Oversight.JointObservation` and `Compositional.Networks` all conclude
+  `Knowable`. It is the narrower claim that no Lean declaration here exhibits an
+  observer achieving what the self-measurement impossibilities rule out.
 - **No probability, entropy, or rates.** Finite counting only.
 - **No physical claim.** Nothing says a physically contained apparatus must have a
   colliding restriction. Bekenstein-style bounds motivate finite models; they do
@@ -219,15 +229,84 @@ The itemized source map is
 
 ## Where this is used
 
-`Oversight.JointObservation`'s coverage laws are this kernel applied to a
-coalition's evidence: `Covers` and `Refines` are definitionally `Knowable` and
-`Determines`, so the coverage and repair-boundary results discharge by calling the
-kernel rather than repeating a factorization argument. See
-[joint observation](joint-observation-model.md).
+Four domains project into this kernel. The table says what each one takes as the
+unknown, as the observation, and as the target, because those three choices are
+the whole content of an instance — the kernel supplies only the factorization
+law, and picking the wrong observation is how a knowability statement ends up
+being about nothing.
 
-`Wireheading.ObservationLimits` reads the CRMDP complement pair as a collision:
-the true return does not factor through the observed history, over a class
-containing a return-disagreeing complement pair.
+| Domain | Unknown | Observation | Target | Direction |
+|---|---|---|---|---|
+| `Oversight.JointObservation` | the world state | the coalition's joint evidence `q.observe` | the question `h` | both — `Covers` is definitionally `Knowable`, and coverage can hold or fail |
+| `Wireheading.ObservationLimits` | the environment | the observed history a fixed policy receives | the true finite-horizon return | refutes |
+| `Preference.Knowability` | the planner/reward pair | the evaluated policy `op3` | the reward `Prod.snd` | refutes |
+| `Compositional.Networks` | the node | its view to depth `n` | its state after `n` rounds | establishes |
+
+The kernel supports both directions and both are used.
+`knowable_iff_no_collision` is an equivalence; `Knowledge.Devices` and
+`Knowledge.Check` each conclude `Knowable`, and in `Oversight.JointObservation`
+so do `covers_of_refines`, which transports a coverage hypothesis to a finer
+observation, and `decideCoverage_covered_iff`, which reports coverage from a
+checker over a finite enumeration.
+
+`Compositional.Networks.knowable_runFor` derives knowability from a theorem its
+own domain already proved, and carries no hypotheses, because the Angluin lemma
+holds for every network, algorithm, configuration and round count without
+qualification. No uniqueness follows from that and none is claimed.
+
+### One proposition, four names
+
+`Knowable`, `Determines`, `Covers` and `Refines` all unfold to
+`∃ f, ∀ x, B x = f (A x)`. They are definitionally equal at full universe
+generality, not merely analogous:
+
+| Written | Unfolds to |
+|---|---|
+| `Knowable observation property` | `∃ decoder, ∀ ω, property ω = decoder (observation ω)` |
+| `Determines finer coarser` | `∃ k, ∀ ω, coarser ω = k (finer ω)` |
+| `Covers q h` | `∃ dh, ∀ σ, h σ = dh (q.observe σ)` |
+| `Refines q' q` | `∃ f, ∀ σ, q.observe σ = f (q'.observe σ)` |
+
+`Covers q h ↔ Knowable q.observe h` holds by `Iff.rfl`, and `Knowable.mono`
+writes two of the names in one statement: its first hypothesis is a `Determines`
+and its second a `Knowable`, and after unfolding both are the same proposition —
+which makes that theorem the transitivity of one relation stated as the
+monotonicity of another. `Determines.trans` is the same theorem again, at the
+same universes; each proves the other by direct term application, with no
+tactic.
+
+The four names are worth keeping, because they say what a factorization is
+*for*, and a reader of `Oversight` should not have to translate. But the
+collapse belongs here rather than in each reader's rediscovery of it: what a
+name adds is intent, not content.
+
+The two refutations share a law rather than an argument.
+`not_knowable_of_invariant_transform` is the shape both instantiate — an
+observation-preserving map that moves the target — with the environment
+complement in one case and the source's anti-rational negation `op4` in the
+other. `Oversight.JointObservation` reaches the kernel through `Knowable.mono`,
+`not_knowable_comp` and `knowable_iff_ambiguity_le_one` instead; its questions
+are about refinement and residual ambiguity rather than about a single collision.
+
+`python3 scripts/report_consumers.py --hub` prints the mechanical half of this
+table: every one of the kernel's public declarations, and which module outside
+the kernel names it. It enumerates the elaborated declaration index, so a
+projection added or removed shows up without anyone remembering to edit here.
+
+It read the *ledger* until 2026-09-07, which is not the same thing and was a
+defect: `lean_artifact.declarations` is a curated subset, so
+`Oversight.JointObservation.Residual`'s use of
+`knowable_iff_worstAmbiguity_le_one` was invisible, and 73 of the kernel's 128
+public declarations could not be reached at all. Two limits remain and the
+report states them itself. It matches by source text, so it counts a mention
+rather than an elaborated reference; and where a leaf name is shared by two
+declarations — `IndistinguishabilityWitness.sameObservation` and
+`CollisionWitness.sameObservation` are the live pair — a bare mention is
+evidence for both and therefore for neither, so those declarations are counted
+only on a qualified mention. The run prints how many needed that.
+
+What each instance takes as observation and as target is a semantic fact and is
+not generated.
 
 Row-by-row structure, including which results are characterizations rather than
 point impossibilities, is generated in [relations](../status/relations.md).

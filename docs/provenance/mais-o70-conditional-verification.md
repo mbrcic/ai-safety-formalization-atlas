@@ -91,7 +91,7 @@ None of them is a claim about the model's actual local learning coefficients.
 
 Full statements, match grades, risk assessments, stress evidence and
 per-declaration consumer tables are in
-[`o70-frontier-manifest.md`](o70-frontier-manifest.md). One line each here.
+[`frontier-manifest.md`](frontier-manifest.md). One line each here.
 
 * **`O70-EIGEN-LAW`** — `AISafetyAtlas.SingularLearning.EigenvalueLawStatement`,
   in [`SingularLearning/EigenvalueLaw.lean`](../../AISafetyAtlas/SingularLearning/EigenvalueLaw.lean):
@@ -295,7 +295,7 @@ missing, is [`AISafetyAtlas/SingularLearning.lean`](../../AISafetyAtlas/Singular
    [`Examples/Conjectures/MAIS/O70Proof.lean`](../../AISafetyAtlas/Examples/Conjectures/MAIS/O70Proof.lean)
    carries the semantic instances, the cross-check of the conditional chain
    against the unconditional `x²y²` germ, and the anti-vacuity witness. Then the
-   [frontier manifest](o70-frontier-manifest.md), and this file.
+   [frontier manifest](frontier-manifest.md), and this file.
 
 ### How much of it a human has to read
 

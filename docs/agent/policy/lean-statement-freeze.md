@@ -78,11 +78,39 @@ python3 scripts/check_elaboration_drift.py --dump out.json --raw    # on each tr
 python3 scripts/check_elaboration_drift.py --compare old.json new.json
 python3 scripts/check_elaboration_drift.py --classify old.json new.json
 
-# the standing check, and what CI runs on every branch that touches Lean
+# the standing check; run it by hand on any branch, at any time
 python3 scripts/check_elaboration_drift.py --dump out.json --raw
 python3 scripts/check_elaboration_drift.py --compare \
   docs/status/elab-baseline-v4330.json out.json --fatal silent
 ```
+
+**CI runs that pair on toolchain migrations, both schedules, release tags and
+manual runs — not on an ordinary pull request.** The dump elaborates the whole
+environment: 342 s and 2.2 GB measured, the largest single step there was on an
+ordinary pull request. A migration is decided by `lean-toolchain`,
+`lakefile.toml`, `lake-manifest.json` or a baseline dump moving, so the check
+still fires on the pull request that bumps the toolchain, before the merge. The
+nightly cron bounds how long a silent change can sit unnoticed to a day; the
+weekly one exists for the CDN-drift case that arrives with no commit attached.
+
+**This is a trade, not a free saving.** The dominant causes of silent drift are
+environmental and all still gated. But an ordinary atlas pull request can
+produce it too: adding a typeclass instance changes resolution for declarations
+nobody edited, and so can an attribute, a notation, or a change to a
+definition's implicit arguments. That case now waits for the nightly run rather
+than blocking the pull request — an exposure window of a day instead of zero. It
+has never been observed firing that way here, and the maintainer took the trade
+against a certain 342 s on every Lean-touching PR. If nightly starts catching
+things a pull request introduced, the trade is wrong.
+
+So it is *not* a check you may assume ran on the branch in front of you. If you
+added an instance, an attribute or a notation, or moved anything else that could
+shift the elaborated environment, run the pair above yourself.
+
+[`verification-scheduling.md`](../../provenance/verification-scheduling.md)
+records the decision, the cost of every other check in the same CI job, and the
+rule the gating follows — a check runs at the frequency of the cause it detects,
+not at the frequency of the files it reads.
 
 Dump `--raw`, which keeps the normal form instead of a digest of it, and commit
 that. A hashed dump halves to ~3 MB and loses the only thing `--classify` can
@@ -119,9 +147,12 @@ That bucket is also the only one a branch can be **gated** on, which is what
 `--fatal silent` selects. A plain `--compare` fails on any movement at all —
 the right question for a migration, and red on every ordinary pull request,
 since adding statements is what a branch is for. A declaration whose printed
-type is unchanged cannot have changed meaning through an edit, so a silent
-change is never work anyone asked for, and CI holds this tree to
-`docs/status/elab-baseline-v4330.json` on that bucket alone. It catches what no
+type is unchanged cannot have changed meaning through an edit **to itself**, so
+a silent change is never work anyone asked for, and CI holds this tree to
+`docs/status/elab-baseline-v4330.json` on that bucket alone. Read that
+restriction precisely: an edit *elsewhere* can still move it — a new instance
+changes resolution for declarations nobody touched — which is why the bucket is
+gateable without being empty on an ordinary branch. It catches what no
 source-reading check can: a Mathlib rebuild against a moved artifact, an
 upstream alias, a different instance chosen.
 

@@ -23,6 +23,9 @@ then regenerate the views and run the gate. Paper ↔ formalization map:
 
 ## Source review and human triage
 
+For commands, file ownership, and recording decisions, see the
+[source-review usage guide](../../guide/source-review.md).
+
 - **The source catalogue is authoritative:** If human review determines Atlas source metadata is wrong, edit `registry.yaml` directly, then re-evaluate the affected source with `python3 scripts/refresh_source_review.py --sources <source_id>`.
 - **`REVIEWED_NO_CHANGE` for intentional differences:** If human review explicitly determines that current Atlas metadata is correct and should remain unchanged, record `REVIEWED_NO_CHANGE` for that individual active machine finding in `docs/provenance/source-review-dispositions.json`.
 - **Human authorization boundary:** `reviewed_by` must name the human contributor responsible for the substantive review decision. An AI agent may mechanically edit `docs/provenance/source-review-dispositions.json` only after an explicit human `REVIEWED_NO_CHANGE` decision from that human decision-maker, using the canonical finding/fingerprint logic and validator. An agent must never independently convert a pending finding into `REVIEWED_NO_CHANGE`.

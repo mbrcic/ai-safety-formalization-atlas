@@ -10,7 +10,7 @@ one.
 
 An open conjecture asserts nothing — defining a `Prop` is not claiming it, and
 that is the whole point of the mechanism. **Ten conjecture records are currently
-present: three open and seven resolved**, and each resolved row
+present: three open and eight resolved**, and each resolved row
 names the proof that settled it.
 
 ## Four kinds of row, because not every printed problem is a conjecture
@@ -37,7 +37,7 @@ transcription is recorded in
 [`mais-o38-transcription.md`](../provenance/mais-o38-transcription.md).
 The O70 work has its own public review package:
 [`conditional verification`](../provenance/mais-o70-conditional-verification.md),
-[`frontier manifest`](../provenance/o70-frontier-manifest.md), and
+[`frontier manifest`](../provenance/frontier-manifest.md), and
 [`fidelity adjudications`](../provenance/mais-o70-fidelity-adjudications.md).
 
 | `kind` | What the source does | What `lean` points at | Resolved by |
@@ -99,7 +99,7 @@ row uses it today; the positional `answer_admissible` list is what it is checked
 against, so it cannot be asserted of a row whose clauses agree.
 
 `scripts/validate_conjectures.py` prints the breakdown rather than one number,
-because *"eight recorded"* over a 15-row file is how this confusion started. Counts elsewhere in this guide are over conjecture rows — kinds
+because *"eight recorded"* over a 17-row file is how this confusion started. Counts elsewhere in this guide are over conjecture rows — kinds
 `claim` and `answer` — since a blocked row is not an open conjecture.
 
 ## Who proposed what
@@ -227,6 +227,42 @@ checkboxes restate the three questions above; they add no obligation.
 someone else's conjecture is a distinct contribution, and both are recorded:
 `proposed_by` names who asked the question.
 
+## The intake lane
+
+This page describes a **curated board**: every row is graded against a printed
+source and carries a scope and a fidelity verdict. That is the right bar for the
+board, and the wrong bar for the front door — it meant that for a long time the
+only way a statement entered this repository was for the maintainer to
+transcribe it, and the `proposed_by` fields above show exactly that. Every
+externally-originated row on the board came in as a GitHub issue and was
+transcribed by hand, because transcription-by-maintainer was the only path that
+existed.
+
+[`intake.yaml`](../../intake.yaml) is the other half. It takes **a compiling
+`Prop` and a minimal row, with no grade of any kind**: an id, the statement, the
+declaration, who proposed it, the date, and optionally why it matters. There is
+no `source_ref`, no `source_scope`, no `source_fidelity`, no `relationship` and
+no `ai_bridge_status` — and those fields are not merely unused,
+[`scripts/validate_intake.py`](../../scripts/validate_intake.py) **refuses**
+them. A proposer may deposit a statement; only a human grades one. That split
+is the reason the lane exists, and it is a check rather than a convention.
+
+Nothing in the lane is a result, nothing in it is coverage, and nothing in it is
+counted anywhere. Containment is the same as the board's and for the same
+reason: intake modules live under `AISafetyAtlas.Conjectures.Intake.*`, which is
+unreachable from the atlas root import, so a badly judged statement cannot reach
+the public API however it was merged.
+
+Leaving the lane is a recorded decision. A row is `PROMOTED` — and must then
+name the `CONJ-` id it became, so the two ledgers cannot drift apart — or
+`DECLINED` with a reason. Ids are never reused, so "not in the lane" is never
+the same as "never arrived".
+
+**The lane is currently empty and reports itself that way.** The machinery is
+live and no statement has been deposited; the same thing was true of the
+conjecture board at `v0.5.1`, and saying so is better than the alternative of a
+lane seeded with an invented row to look busy.
+
 ## Record shape
 
 A conjecture enters [`conjectures.yaml`](../../conjectures.yaml) only once its
@@ -338,9 +374,9 @@ for another kind to describe.
 
 **`source_note` is not a confession field.** It is required when the grade is not
 `Same`/`Literal`, and *welcome* when it is — a row at the printed quantifier
-often still made reading choices worth recording, and an earlier version of this
-schema rejected a note on such a row, which pushed every one of those
-disclosures into Lean docstrings where no reader of the ledger sees them. What is
+often still made reading choices worth recording. Rejecting a note on such a row
+pushes those disclosures into Lean docstrings, where no reader of the ledger
+sees them. What is
 still rejected is a fragment: a note is an argument or it is absent.
 
 A narrow *witness* is fine and always was. State the conjecture at the printed

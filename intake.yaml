@@ -1,0 +1,6 @@
+{
+  "schema_version": 1,
+  "next_id": 1,
+  "description": "Statement intake. A compiling Prop and a minimal row, with no grade of any kind. This is the front door below the curated conjecture board: a proposer deposits a statement here, and a human decides on the board whether it is graded, promoted, or declined. Nothing in this lane is a result, nothing here is coverage, and no row may carry a source grade, a scope verdict, a fidelity verdict, a statement-match relationship or a bridge status -- scripts/validate_intake.py refuses those fields rather than leaving them optional. Ids are never reused: a row that leaves records why, so 'not in the lane' is never the same as 'never arrived'. The lane is currently empty and reports itself that way.",
+  "intake": []
+}

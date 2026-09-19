@@ -53,6 +53,7 @@ KINDS: dict[str, dict] = {
             ("docs/agent/policy/lean-statement-freeze.md", "Statement freeze"),
             ("docs/agent/policy/lean-parsimony.md", "Parsimony (formalizations)"),
             ("docs/agent/policy/lean-reuse-sources.md", "Search order"),
+            ("docs/agent/policy/lean-routing.md", "Keep **and** contribute — never \"send it away\""),
         ],
         "commands": [
             "python3 scripts/check_statement_freeze.py",
@@ -73,7 +74,7 @@ KINDS: dict[str, dict] = {
         ],
     },
     "ledger": {
-        "title": "Registry or conjecture ledger (registry.yaml, conjectures.yaml)",
+        "title": "Registry, conjecture board, or intake lane (registry.yaml, conjectures.yaml, intake.yaml)",
         "sections": [
             ("CONTRIBUTING.md", "Evidence and registry changes"),
             (
@@ -90,6 +91,7 @@ KINDS: dict[str, dict] = {
             "python3 scripts/validate_registry.py",
             "python3 scripts/validate_conjectures.py",
             "python3 scripts/validate_source_review.py",
+            "python3 scripts/validate_intake.py",
         ],
     },
     "generated": {
@@ -165,6 +167,7 @@ def classify(path: str) -> list[str]:
     if path in {
         "registry.yaml",
         "conjectures.yaml",
+        "intake.yaml",
         "docs/provenance/source-review-dispositions.json",
     }:
         kinds.append("ledger")

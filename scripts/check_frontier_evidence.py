@@ -9,7 +9,7 @@ each is blind for a different reason: the freeze faithfully freezes a false
 statement; the axiom audit sees no axiom footprint, because nobody proved it;
 the scope grading reads the extra width as a pass; the worked examples pin the
 reading of the definitions, which can be right while the proposition about them
-is false. `docs/provenance/o70-frontier-manifest.md` records the case this
+is false. `docs/provenance/frontier-manifest.md` records the case this
 repository ran into, under `O70-ZETA-BRIDGE`.
 
 The obligation that follows: before a frontier proposition may be
@@ -26,7 +26,7 @@ What it enforces, per frontier:
 * at least one consumer takes it as a hypothesis, found by scanning signatures
   rather than trusted from a table -- a frontier nothing stands on is not a
   frontier;
-* it has a section in `docs/provenance/o70-frontier-manifest.md`, the
+* it has a section in `docs/provenance/frontier-manifest.md`, the
   human-maintained record of what the atlas assumes and does not prove;
 * **and at least one stress artifact that does not itself assume the frontier.**
 
@@ -84,7 +84,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from check_statement_freeze import SPECIFICATION_SURFACES  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[1]
-MANIFEST = "docs/provenance/o70-frontier-manifest.md"
+MANIFEST = "docs/provenance/frontier-manifest.md"
 LOCK = "docs/status/statement-lock.json"
 LEAN_ROOT = "AISafetyAtlas"
 EXAMPLES_PREFIX = "AISafetyAtlas/Examples/"
@@ -168,9 +168,12 @@ FRONTIERS: tuple[Frontier, ...] = (
         decision="hold",
         reason=("Muirhead 3.2.1/3.2.17 after James 1954, which the candidate "
                 "cites and does not derive. Discharging it means real Wishart "
-                "theory, absent from the pinned Mathlib in every form: a "
-                "campaign, not a task. The source is a copyrighted monograph "
-                "and is unpinned. No maintainer has ruled."),
+                "theory, absent from all six baseline corpora and from their "
+                "apparatus -- no Haar measure on the orthogonal group, no "
+                "coarea formula -- which is NC-011 in "
+                "docs/provenance/formalization-search.json: a campaign, not a "
+                "task. The source is a copyrighted monograph and is unpinned. "
+                "No maintainer has ruled."),
         artifacts=(
             Artifact(
                 kind="script",
@@ -266,6 +269,68 @@ FRONTIERS: tuple[Frontier, ...] = (
                       "exactly and assuming nothing; hasExactLocalPair_sq gives "
                       "the same germ the same ball-volume pair, so the two "
                       "normalizations agree at a germ the atlas can check"),
+            ),
+        ),
+    ),
+    Frontier(
+        identifier="A7-ZETA-BRIDGE",
+        proposition="AISafetyAtlas.Conjectures.MAIS.A7ZetaVolumeBridge",
+        file="AISafetyAtlas/Conjectures/MAIS/A7Zeta.lean",
+        surface="AISafetyAtlas.Conjectures.MAIS.a7ZetaVolumeBridge_iff",
+        owed_to="source",
+        decision="hold",
+        reason=("MAIS-A7 def:llc defines the pair by the zeta pole and glosses "
+                "the band volume as equivalent -- the same move MAIS-A6 "
+                "def:local makes, and until 2026-09-06 the only one of the two "
+                "carried in prose rather than as a frontier. Discharging it "
+                "means the volume-to-zeta direction: a Mellin or Tauberian "
+                "passage from two-sided sublevel bounds to a meromorphic "
+                "continuation, which the pinned Mathlib has in no form. It is "
+                "strictly more than O70-ZETA-BRIDGE would give even if that "
+                "were proved -- this consumes HasLocalVolumeOrder where that "
+                "consumes HasExactLocalPair, and A7 quantifies over an "
+                "arbitrary point rather than over exact factorizations only, so "
+                "at a nonterminal rung the loss does not vanish and the centred "
+                "band germ is not the loss. A wider form is false; "
+                "ZetaPair.lean carries the "
+                "counterexample. No maintainer has ruled."),
+        artifacts=(
+            Artifact(
+                kind="lean",
+                name="AISafetyAtlas.Conjectures.MAIS."
+                     "hasLocalVolumeOrder_o7_origin",
+                file="AISafetyAtlas/Conjectures/MAIS/O7Proof.lean",
+                unconditional=True,
+                note="the antecedent at MAIS-O7's rank-zero rung, proved "
+                     "frontier-free by an explicit integral; a bridge "
+                     "transcribed at the wrong germ would not apply to it",
+            ),
+            Artifact(
+                kind="lean",
+                name="AISafetyAtlas.Conjectures.MAIS.o77_saddle_two_sided_pair",
+                file="AISafetyAtlas/Conjectures/MAIS/O77Chart.lean",
+                unconditional=True,
+                note="the antecedent at every point of every nonterminal O77 "
+                     "rung, proved unconditionally; what the bridge adds is the "
+                     "zeta reading of it and nothing else",
+            ),
+            Artifact(
+                kind="lean",
+                name="AISafetyAtlas.Conjectures.MAIS.pos_dims_of_rung",
+                file="AISafetyAtlas/Conjectures/MAIS/A7Zeta.lean",
+                unconditional=True,
+                note="a nonterminal rung forces both ambient dimensions "
+                     "positive, so the bridge's non-degeneracy hypotheses are "
+                     "discharged at the consumers rather than added to them",
+            ),
+            Artifact(
+                kind="lean",
+                name="AISafetyAtlas.Conjectures.MAIS.o77_all_saddles_zeta_pair_one",
+                file="AISafetyAtlas/Conjectures/MAIS/A7Zeta.lean",
+                unconditional=False,
+                note="MAIS-O77(b) in print's own definition; conditional by "
+                     "construction, and listed so the consumer is visible "
+                     "beside the assumption",
             ),
         ),
     ),
@@ -550,7 +615,7 @@ def main() -> int:
             "short of unconditional stress evidence. This check does not "
             "establish satisfiability; a false frontier still makes every "
             "theorem standing on it unapplicable rather than conditional -- see "
-            "docs/provenance/o70-frontier-manifest.md.")
+            "docs/provenance/frontier-manifest.md.")
         return 1
     print(
         f"check_frontier_evidence: {len(FRONTIERS)} frontier(s), each with a "

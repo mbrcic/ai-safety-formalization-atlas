@@ -15,6 +15,12 @@ public import AISafetyAtlas.Conjectures.MAIS.O33
 public import AISafetyAtlas.Conjectures.MAIS.O38
 public import AISafetyAtlas.Conjectures.MAIS.O70
 public import AISafetyAtlas.Conjectures.MAIS.O70Proof
+public import AISafetyAtlas.Conjectures.MAIS.O7
+public import AISafetyAtlas.Conjectures.MAIS.O7Proof
+public import AISafetyAtlas.Conjectures.MAIS.O77
+public import AISafetyAtlas.Conjectures.MAIS.O77Proof
+public import AISafetyAtlas.Conjectures.MAIS.O77Chart
+public import AISafetyAtlas.Conjectures.MAIS.A7Zeta
 /-!
 # Statement layer for the MAIS agenda questions
 
@@ -41,6 +47,8 @@ none of this layer's vocabulary:
 | printed | label | agenda | module |
 |---|---|---|---|
 | MAIS-O38 | `prob:samples` | A3 | `MAIS/O38.lean` |
+| MAIS-O7 | `q:stairs` | A7 | `MAIS/O7.lean`, proof in `MAIS/O7Proof.lean` |
+| MAIS-O77 | `prob:fiber` | A7 | `MAIS/O77.lean`, proofs in `MAIS/O77Proof.lean` and `MAIS/O77Chart.lean` |
 
 Shared vocabulary is in `MAIS/Common.lean`. Every declaration keeps the
 `AISafetyAtlas.Conjectures.MAIS` namespace it had before the split, so no name

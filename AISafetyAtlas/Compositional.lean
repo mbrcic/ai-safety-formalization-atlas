@@ -3,6 +3,9 @@ module
 public import AISafetyAtlas.Compositional.Hyperproperties
 public import AISafetyAtlas.Compositional.Hyperproperties.PrefixTopology
 public import AISafetyAtlas.Compositional.Hyperproperties.Product
+public import AISafetyAtlas.Compositional.Hyperproperties.Knowability
+public import AISafetyAtlas.Compositional.Knowability
+public import AISafetyAtlas.Compositional.NetworkTraces
 public import AISafetyAtlas.Compositional.LocalContractBoundary
 public import AISafetyAtlas.Compositional.Networks
 public import AISafetyAtlas.Compositional.Rectangularity
@@ -29,8 +32,12 @@ surface below; nested files hold proofs.
 | **Law** | `Hyperproperties.k_safety_iff_product_self_composition` | Synchronized-product form (nonempty systems) |
 | **Law** | `Hyperproperties.hyperSafety_of_isKSafety` | k-safety ⇒ operational hypersafety |
 | **Law** | `Hyperproperties.hyperSafety_hyperLiveness_decomposition` | Operational safety/liveness split via prefix topology |
+| **Law** | `Hyperproperties.knowable_of_isSafetyPredicate` | Finite-observation safety factors through the realized observations |
 | **Law** | `Networks.runFor_eq_of_view_eq` | Equal views ⇒ equal states after n rounds |
 | **Law** | `Networks.no_unique_leader_of_fixedPointFree` | No unique leader under free automorphism |
+| **Law** | `Networks.knowable_runFor` | The depth-`n` view decides the state after `n` rounds |
+| **Law** | `Networks.realizes_systemOf` | Which finite observations a network's runs realize |
+| **Boundary** | `Networks.not_electsLeader_of_fixedPointFree` | A symmetric start puts the whole system outside leader election |
 | **Helper** | `Symmetry.Protocol.no_unique_leader_from_symmetric_start` | Core symmetry invariant (observation as field) |
 
 Helpers retained but **not** headline: `coordinate_product_iff_recombination_closed`
@@ -53,7 +60,10 @@ arbitrary topology (use `PrefixTopology` for the operational reading).
   coalition access restriction. Rectangularity asks whether a relation decomposes into
   local product constraints. Neither subsumes the other — a rectangular relation may be
   unobservable, and a non-rectangular one may be covered — but the indistinguishability
-  and bounded-witness patterns recur in both.
+  and bounded-witness patterns recur in both. Since `Networks.knowable_runFor` they
+  also share a kernel: both surfaces state their factorization question through
+  `AISafetyAtlas.Knowledge`, which makes the shapes comparable without making the
+  questions the same.
 
 Landscape / survey anchors: `LAND-HYPER-002`, `LAND-RECT-001`, `LAND-ANGLUIN-001`,
 BY-043 (RELATED). Cores compile; paper-parity residuals live in

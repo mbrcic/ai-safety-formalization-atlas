@@ -15,7 +15,21 @@ This module reads them through `Knowledge.Knowable`. Fix the dynamics, a policy,
 a start state and a horizon; treat the **environment** as the unknown. Then the
 observed history is an observation map and the true return is a target property,
 and the complement pair is exactly a collision: same observation, different
-target. `Knowledge.not_knowable_of_collision` does the rest.
+target.
+
+Complementing is not merely *a* colliding pair — it is a map on environments
+that leaves the observed history fixed and moves the return. That is the shape
+`Knowledge.not_knowable_of_invariant_transform` names, and the unrestricted
+corollary below goes through it. `AISafetyAtlas.Preference.not_knowable_reward`
+is the same shape with the source's anti-rational negation `op4` in place of the
+complement, so the two domains now share a stated law rather than two hand-built
+collisions.
+
+The **class-relative** theorem does not use it and must not: complementing is
+not an endomap on `Subtype C` — the hypotheses give `C μ` and `C μ.complement`
+for one environment, where a transform needs `∀ ν, C ν → C ν.complement`. Adding
+that closure to make the lemma fit would narrow a public theorem to buy a
+refactor. It keeps its `not_knowable_of_witness` proof unchanged.
 
 ## What is stated, precisely
 
@@ -36,8 +50,9 @@ until no indistinguishable return-disagreeing pair survives, add information,
 relax exactness, or move to a prior.
 
 `not_knowable_trueReturn` is then the unrestricted corollary: over the whole of
-`Env State`, the zero environment and its complement witness the failure at every
-positive horizon.
+`Env State`, complementing really is an endomap, so the failure follows from
+`not_knowable_of_invariant_transform` at the zero environment, at every positive
+horizon.
 
 ## Primary surface
 
@@ -178,12 +193,11 @@ public theorem not_knowable_trueReturn (transition : State → Action → State)
     ¬ Knowable
         (observedHistory transition π s₀ n)
         (trueReturn transition t s₀ π) := by
-  refine not_knowable_of_collision
-    (ω₁ := zeroEnv State) (ω₂ := (zeroEnv State).complement)
-    (history_complement transition (zeroEnv State) π s₀ n).symm ?_
-  show returnOver transition t s₀ (zeroEnv State) π
-      ≠ returnOver transition t s₀ (zeroEnv State).complement π
+  refine not_knowable_of_invariant_transform Env.complement
+    (fun ν => history_complement transition ν π s₀ n) (zeroEnv State) ?_
+  show returnOver transition t s₀ (zeroEnv State).complement π
+      ≠ returnOver transition t s₀ (zeroEnv State) π
   rw [returnOver_zeroEnv, returnOver_zeroEnv_complement]
-  exact ne_of_lt (by exact_mod_cast horizonPos)
+  exact ne_of_gt (by exact_mod_cast horizonPos)
 
 end AISafetyAtlas.Wireheading.ObservationLimits

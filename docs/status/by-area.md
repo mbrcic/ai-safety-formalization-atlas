@@ -14,20 +14,20 @@ picking work. Grades and reproduction evidence:
 
 | Area | Shipped | Catalogued |
 |---|---:|---:|
-| [agent-incentives](#agent-incentives) | 8 | 3 |
+| [agent-incentives](#agent-incentives) | 9 | 3 |
 | [algorithmic-information](#algorithmic-information) | 1 | 1 |
-| [compositionality](#compositionality) | 4 | 1 |
+| [compositionality](#compositionality) | 7 | 1 |
 | [computability](#computability) | 3 | 3 |
 | [computational-complexity](#computational-complexity) | 1 | 4 |
 | [control-theory](#control-theory) | 3 | 4 |
 | [decision-theory](#decision-theory) | 2 | 3 |
 | [ethics](#ethics) | 1 | 4 |
 | [information-theory](#information-theory) | 16 | 2 |
-| [interpretability](#interpretability) | 16 | 5 |
+| [interpretability](#interpretability) | 17 | 5 |
 | [learning-theory](#learning-theory) | 2 | 7 |
 | [multi-agent](#multi-agent) | 3 | 5 |
-| [oversight](#oversight) | 7 | 1 |
-| [preference-inference](#preference-inference) | 1 | 1 |
+| [oversight](#oversight) | 12 | 1 |
+| [preference-inference](#preference-inference) | 2 | 1 |
 | [provability-logic](#provability-logic) | 7 | 1 |
 | [social-choice](#social-choice) | 3 | 5 |
 | [verification](#verification) | 4 | 4 |
@@ -37,6 +37,7 @@ picking work. Grades and reproduction evidence:
 | ID | Result | Atlas declarations |
 |---|---|---|
 | BY-039 | Reward corruption unsolvability | `AISafetyAtlas.Wireheading.CRMDP.Model.everitt_theorem_eleven` |
+| LAND-CAUSAL-KNOW-001 | Behavioural identifiability as a knowability factorization | `AISafetyAtlas.Causal.behaviorEq_iff_behavior_eq`<br>`AISafetyAtlas.Causal.exists_behaviorEq_pair_of_not_knowable` |
 | LAND-WIRE-OBJ-001 | Ring-Orseau objective factorization | `AISafetyAtlas.Wireheading.AgentEquations.value_eq_of_agree_on_window` |
 | LAND-GOAL-001 | Finite-percept on-policy goal-preservation induction step | `AISafetyAtlas.Wireheading.GoalPreservationSource.Model.selected_matches_initial` |
 | LAND-CRMDP-KNOW-001 | True return does not factor through the observed history | `AISafetyAtlas.Wireheading.ObservationLimits.not_knowable_trueReturn`<br>`AISafetyAtlas.Wireheading.ObservationLimits.not_knowable_trueReturn_of_complement_mem`<br>`AISafetyAtlas.Wireheading.ObservationLimits.returnOver_zeroEnv_complement` |
@@ -72,6 +73,9 @@ Catalogued, no atlas Lean:
 | BY-043 | Misaligned embodiment | `AISafetyAtlas.Compositional.Symmetry.Protocol.no_unique_leader_from_symmetric_start` |
 | LAND-HYPER-002 | k-safety self-composition and hyperproperty decomposition | `AISafetyAtlas.Compositional.Hyperproperties.k_safety_iff_finite_self_composition` |
 | LAND-ANGLUIN-001 | Port-labelled anonymous networks, views, and automorphisms | `AISafetyAtlas.Compositional.Networks.runFor_eq_of_view_eq` |
+| LAND-COMP-TRACE-001 | A network's runs as a trace system | `AISafetyAtlas.Compositional.Networks.not_electsLeader_of_fixedPointFree`<br>`AISafetyAtlas.Compositional.Networks.realizes_systemOf` |
+| LAND-HYPER-KNOW-001 | Finite-observation safety as a knowability factorization | `AISafetyAtlas.Compositional.Hyperproperties.knowable_of_isSafetyPredicate`<br>`AISafetyAtlas.Compositional.Hyperproperties.not_isSafetyPredicate_of_realizedSet_collision` |
+| LAND-COMP-KNOW-001 | The Angluin view as a knowability factorization | `AISafetyAtlas.Compositional.Networks.knowable_runFor`<br>`AISafetyAtlas.Compositional.Networks.sameView_iff_view_eq` |
 | LAND-RECT-001 | Rectangle, exchange, and unary-contract equivalences | `AISafetyAtlas.Compositional.rectangle_iff_exchange_closed` |
 
 Catalogued, no atlas Lean:
@@ -172,7 +176,7 @@ Catalogued, no atlas Lean:
 | LAND-SELFMEAS-001 | Self-measurement failure for an embedded observation | `AISafetyAtlas.Knowledge.knowable_id_iff_injective`<br>`AISafetyAtlas.Knowledge.not_knowable_state_of_nontrivial_remainder` |
 | LAND-SELFMEAS-002 | Breuer abstract embedded-measurement core | `AISafetyAtlas.Knowledge.Embedded.Meshing.restrict_surjective`<br>`AISafetyAtlas.Knowledge.Embedded.eq_restrict_of_infer_singleton_eq`<br>`AISafetyAtlas.Knowledge.Embedded.exists_singleton_infer_eq_of_infer_eq`<br>`AISafetyAtlas.Knowledge.Embedded.exists_state_not_exactly_measurable`<br>`AISafetyAtlas.Knowledge.Embedded.infer_singleton_eq_of_meshing`<br>`AISafetyAtlas.Knowledge.Embedded.no_meshing_inference_distinguishes`<br>`AISafetyAtlas.Knowledge.Embedded.no_meshing_inference_measures_all_states`<br>`AISafetyAtlas.Knowledge.Embedded.no_meshing_inference_measures_all_states_direct`<br>`AISafetyAtlas.Knowledge.Embedded.not_knowable_state_of_properInclusion` |
 | LAND-SELFMEAS-003 | Physical complement and finite-cardinality bridges to Breuer proper inclusion | `AISafetyAtlas.Knowledge.Embedded.Composition.measuresAll_fibreInference_of_injective`<br>`AISafetyAtlas.Knowledge.Embedded.Composition.meshing_and_measuresAll_fibreInference_of_bijective`<br>`AISafetyAtlas.Knowledge.Embedded.Composition.meshing_fibreInference_of_surjective`<br>`AISafetyAtlas.Knowledge.Embedded.Composition.no_meshing_measures_all_of_nontrivial_remainder`<br>`AISafetyAtlas.Knowledge.Embedded.Composition.no_meshing_measures_all_of_nontrivial_remainder_of_equiv`<br>`AISafetyAtlas.Knowledge.Embedded.Composition.not_meshing_of_not_surjective`<br>`AISafetyAtlas.Knowledge.Embedded.Composition.properInclusion_iff_not_injective`<br>`AISafetyAtlas.Knowledge.Embedded.Composition.properInclusion_of_nontrivial_remainder`<br>`AISafetyAtlas.Knowledge.Embedded.Composition.properInclusion_of_nontrivial_remainder_of_equiv`<br>`AISafetyAtlas.Knowledge.Embedded.Finite.no_meshing_measures_all_of_card_lt`<br>`AISafetyAtlas.Knowledge.Embedded.Finite.properInclusion_of_card_lt`<br>`AISafetyAtlas.Knowledge.Embedded.Finite.properInclusion_product_of_card_rest_ge_two` |
-| LAND-KNOW-001 | Exact knowability: the observation-factorization kernel | `AISafetyAtlas.Knowledge.Knowable.mono`<br>`AISafetyAtlas.Knowledge.exists_witness_of_not_knowable`<br>`AISafetyAtlas.Knowledge.knowable_iff_factorsThrough`<br>`AISafetyAtlas.Knowledge.knowable_iff_no_collision`<br>`AISafetyAtlas.Knowledge.not_knowable_comp`<br>`AISafetyAtlas.Knowledge.not_knowable_of_collision`<br>`AISafetyAtlas.Knowledge.not_knowable_of_witness` |
+| LAND-KNOW-001 | Exact knowability: the observation-factorization kernel | `AISafetyAtlas.Knowledge.Determines.trans`<br>`AISafetyAtlas.Knowledge.Knowable.mono`<br>`AISafetyAtlas.Knowledge.exists_witness_of_not_knowable`<br>`AISafetyAtlas.Knowledge.knowable_iff_factorsThrough`<br>`AISafetyAtlas.Knowledge.knowable_iff_no_collision`<br>`AISafetyAtlas.Knowledge.not_knowable_comp`<br>`AISafetyAtlas.Knowledge.not_knowable_of_collision`<br>`AISafetyAtlas.Knowledge.not_knowable_of_invariant_transform`<br>`AISafetyAtlas.Knowledge.not_knowable_of_witness` |
 | LAND-KNOW-DEVICE-001 | Transports between the knowability kernel and inference devices | `AISafetyAtlas.Knowledge.Devices.BlockwiseCollision.not_physicallyKnows`<br>`AISafetyAtlas.Knowledge.Devices.BlockwiseCollision.not_weaklyInfers`<br>`AISafetyAtlas.Knowledge.Devices.knowable_probe_of_forall_blockAnswers`<br>`AISafetyAtlas.Knowledge.Devices.not_blockAnswers_of_witness` |
 | LAND-CRMDP-KNOW-001 | True return does not factor through the observed history | `AISafetyAtlas.Wireheading.ObservationLimits.not_knowable_trueReturn`<br>`AISafetyAtlas.Wireheading.ObservationLimits.not_knowable_trueReturn_of_complement_mem`<br>`AISafetyAtlas.Wireheading.ObservationLimits.returnOver_zeroEnv_complement` |
 | LAND-FANO-001 | Fano's inequality at both printed constants, and its sharpness | `AISafetyAtlas.InformationTheory.entropy_le_fano`<br>`AISafetyAtlas.InformationTheory.fano`<br>`AISafetyAtlas.InformationTheory.fano_of_embedding`<br>`AISafetyAtlas.InformationTheory.fano_of_log_le`<br>`AISafetyAtlas.InformationTheory.fano_unrestricted` |
@@ -195,11 +199,12 @@ Catalogued, no atlas Lean:
 | CLM-WOLPERT-EPISTEMIC-001 | Epistemic consequences of physical knowledge | `AISafetyAtlas.Inference.corollary20_ii`<br>`AISafetyAtlas.Inference.corollary23`<br>`AISafetyAtlas.Inference.corollary24`<br>`AISafetyAtlas.Inference.exists_three_inequivalent_not_weaklyInfers` |
 | LAND-WOLPERT-KNOW-DEFECTS-001 | Countermodels to Wolpert 2018 epistemic claims | `AISafetyAtlas.Inference.corollary21_ii_repaired` |
 | LAND-ATTR-001 | Attribution impossibility (DASH trilemma) | `AISafetyAtlas.Explainability.attribution_impossibility`<br>`AISafetyAtlas.Explainability.attribution_impossibility_weak` |
+| LAND-CAUSAL-KNOW-001 | Behavioural identifiability as a knowability factorization | `AISafetyAtlas.Causal.behaviorEq_iff_behavior_eq`<br>`AISafetyAtlas.Causal.exists_behaviorEq_pair_of_not_knowable` |
 | LAND-SELFREF-001 | The self-model as a component of the state it models | `AISafetyAtlas.Knowledge.SelfReference.card_rest_le_one_of_selfComplete`<br>`AISafetyAtlas.Knowledge.SelfReference.not_selfComplete_of_two_rest`<br>`AISafetyAtlas.Knowledge.SelfReference.selfComplete_iff_subsingleton_rest` |
 | LAND-SELFMEAS-001 | Self-measurement failure for an embedded observation | `AISafetyAtlas.Knowledge.knowable_id_iff_injective`<br>`AISafetyAtlas.Knowledge.not_knowable_state_of_nontrivial_remainder` |
 | LAND-SELFMEAS-002 | Breuer abstract embedded-measurement core | `AISafetyAtlas.Knowledge.Embedded.Meshing.restrict_surjective`<br>`AISafetyAtlas.Knowledge.Embedded.eq_restrict_of_infer_singleton_eq`<br>`AISafetyAtlas.Knowledge.Embedded.exists_singleton_infer_eq_of_infer_eq`<br>`AISafetyAtlas.Knowledge.Embedded.exists_state_not_exactly_measurable`<br>`AISafetyAtlas.Knowledge.Embedded.infer_singleton_eq_of_meshing`<br>`AISafetyAtlas.Knowledge.Embedded.no_meshing_inference_distinguishes`<br>`AISafetyAtlas.Knowledge.Embedded.no_meshing_inference_measures_all_states`<br>`AISafetyAtlas.Knowledge.Embedded.no_meshing_inference_measures_all_states_direct`<br>`AISafetyAtlas.Knowledge.Embedded.not_knowable_state_of_properInclusion` |
 | LAND-SELFMEAS-003 | Physical complement and finite-cardinality bridges to Breuer proper inclusion | `AISafetyAtlas.Knowledge.Embedded.Composition.measuresAll_fibreInference_of_injective`<br>`AISafetyAtlas.Knowledge.Embedded.Composition.meshing_and_measuresAll_fibreInference_of_bijective`<br>`AISafetyAtlas.Knowledge.Embedded.Composition.meshing_fibreInference_of_surjective`<br>`AISafetyAtlas.Knowledge.Embedded.Composition.no_meshing_measures_all_of_nontrivial_remainder`<br>`AISafetyAtlas.Knowledge.Embedded.Composition.no_meshing_measures_all_of_nontrivial_remainder_of_equiv`<br>`AISafetyAtlas.Knowledge.Embedded.Composition.not_meshing_of_not_surjective`<br>`AISafetyAtlas.Knowledge.Embedded.Composition.properInclusion_iff_not_injective`<br>`AISafetyAtlas.Knowledge.Embedded.Composition.properInclusion_of_nontrivial_remainder`<br>`AISafetyAtlas.Knowledge.Embedded.Composition.properInclusion_of_nontrivial_remainder_of_equiv`<br>`AISafetyAtlas.Knowledge.Embedded.Finite.no_meshing_measures_all_of_card_lt`<br>`AISafetyAtlas.Knowledge.Embedded.Finite.properInclusion_of_card_lt`<br>`AISafetyAtlas.Knowledge.Embedded.Finite.properInclusion_product_of_card_rest_ge_two` |
-| LAND-KNOW-001 | Exact knowability: the observation-factorization kernel | `AISafetyAtlas.Knowledge.Knowable.mono`<br>`AISafetyAtlas.Knowledge.exists_witness_of_not_knowable`<br>`AISafetyAtlas.Knowledge.knowable_iff_factorsThrough`<br>`AISafetyAtlas.Knowledge.knowable_iff_no_collision`<br>`AISafetyAtlas.Knowledge.not_knowable_comp`<br>`AISafetyAtlas.Knowledge.not_knowable_of_collision`<br>`AISafetyAtlas.Knowledge.not_knowable_of_witness` |
+| LAND-KNOW-001 | Exact knowability: the observation-factorization kernel | `AISafetyAtlas.Knowledge.Determines.trans`<br>`AISafetyAtlas.Knowledge.Knowable.mono`<br>`AISafetyAtlas.Knowledge.exists_witness_of_not_knowable`<br>`AISafetyAtlas.Knowledge.knowable_iff_factorsThrough`<br>`AISafetyAtlas.Knowledge.knowable_iff_no_collision`<br>`AISafetyAtlas.Knowledge.not_knowable_comp`<br>`AISafetyAtlas.Knowledge.not_knowable_of_collision`<br>`AISafetyAtlas.Knowledge.not_knowable_of_invariant_transform`<br>`AISafetyAtlas.Knowledge.not_knowable_of_witness` |
 | LAND-KNOWENTROPY-001 | Knowability measured: zero conditional entropy, and Fano's floor on every decoder | `AISafetyAtlas.Knowledge.condEntropy_eq_zero_of_knowable`<br>`AISafetyAtlas.Knowledge.le_errorProb_of_decoder`<br>`AISafetyAtlas.Knowledge.not_knowable_of_condEntropy_ne_zero` |
 | LAND-CAUSAL-PEARLCBN-001 | Pearl causal Bayesian networks as a condition on an interventional family | `AISafetyAtlas.Causal.eq_family_of_isCausalBayesNetwork` |
 | LAND-CAUSAL-DECISIONNET-001 | Decision tasks as causal influence diagrams, with the decision and the utility as vertices | `AISafetyAtlas.Causal.DecisionNetwork.mem_parents_utility_of_isUnmediated`<br>`AISafetyAtlas.Examples.Causal.DecisionNetwork.figIsUnmediated` |
@@ -259,6 +264,11 @@ Catalogued, no atlas Lean:
 | ID | Result | Atlas declarations |
 |---|---|---|
 | LAND-DEBATE-001 | Doubly-efficient debate correctness (Brown-Cohen–Irving–Piliouras 2023) | `AISafetyAtlas.Oversight.Debate.alice_fast`<br>`AISafetyAtlas.Oversight.Debate.bob_fast`<br>`AISafetyAtlas.Oversight.Debate.completeness`<br>`AISafetyAtlas.Oversight.Debate.correctness`<br>`AISafetyAtlas.Oversight.Debate.soundness`<br>`AISafetyAtlas.Oversight.Debate.vera_fast` |
+| LAND-PREF-KNOW-001 | Reward unidentifiability as a knowability obstruction | `AISafetyAtlas.Preference.knowable_reward_of_isEmpty_state`<br>`AISafetyAtlas.Preference.not_knowable_reward` |
+| LAND-COMP-TRACE-001 | A network's runs as a trace system | `AISafetyAtlas.Compositional.Networks.not_electsLeader_of_fixedPointFree`<br>`AISafetyAtlas.Compositional.Networks.realizes_systemOf` |
+| LAND-HYPER-KNOW-001 | Finite-observation safety as a knowability factorization | `AISafetyAtlas.Compositional.Hyperproperties.knowable_of_isSafetyPredicate`<br>`AISafetyAtlas.Compositional.Hyperproperties.not_isSafetyPredicate_of_realizedSet_collision` |
+| LAND-CAUSAL-KNOW-001 | Behavioural identifiability as a knowability factorization | `AISafetyAtlas.Causal.behaviorEq_iff_behavior_eq`<br>`AISafetyAtlas.Causal.exists_behaviorEq_pair_of_not_knowable` |
+| LAND-COMP-KNOW-001 | The Angluin view as a knowability factorization | `AISafetyAtlas.Compositional.Networks.knowable_runFor`<br>`AISafetyAtlas.Compositional.Networks.sameView_iff_view_eq` |
 | LAND-JOINTOBS-001 | Coalition-indexed joint observation and the emitted-interface coverage boundary | `AISafetyAtlas.Oversight.JointObservation.covers_iff_no_collision` |
 | LAND-ACCUM-001 | Window ambiguity: accumulation bounds over a set of targets | `AISafetyAtlas.Knowledge.ambiguity_le_of_evidenceMonotone`<br>`AISafetyAtlas.Knowledge.ambiguity_le_pairTarget_left`<br>`AISafetyAtlas.Knowledge.ambiguity_le_pairTarget_of_evidenceMonotone`<br>`AISafetyAtlas.Knowledge.ambiguity_le_pairTarget_right`<br>`AISafetyAtlas.Knowledge.ambiguity_pairTarget_le_mul`<br>`AISafetyAtlas.Knowledge.not_knowable_pairTarget_of_not_knowable` |
 | LAND-AMBIG-001 | Finite fibre ambiguity and the counting obstruction | `AISafetyAtlas.Knowledge.ambiguity_le_of_comp`<br>`AISafetyAtlas.Knowledge.card_image_le_of_knowable`<br>`AISafetyAtlas.Knowledge.knowable_iff_ambiguity_le_one`<br>`AISafetyAtlas.Knowledge.not_knowable_of_card_lt` |
@@ -277,6 +287,7 @@ Catalogued, no atlas Lean:
 | ID | Result | Atlas declarations |
 |---|---|---|
 | BY-011 | Limits on preference deduction | `AISafetyAtlas.Preference.OverrideModel.mixtureValue_rationalise`<br>`AISafetyAtlas.Preference.OverrideModel.rationalise_strictly_better`<br>`AISafetyAtlas.Preference.ReasonableLanguage.proposition_eight`<br>`AISafetyAtlas.Preference.ReasonableLanguage.proposition_seven`<br>`AISafetyAtlas.Preference.RegretModel.cannot_rule_out_half_maximal_regret`<br>`AISafetyAtlas.Preference.Source.ReasonableForF.proposition_eight`<br>`AISafetyAtlas.Preference.Source.ReasonableForF.proposition_seven`<br>`AISafetyAtlas.Preference.Source.ReasonableForF.theorem_two_conditional`<br>`AISafetyAtlas.Preference.consistent_rewards_eq_univ`<br>`AISafetyAtlas.Preference.degenerate_explanation_cheap`<br>`AISafetyAtlas.Preference.exists_planner`<br>`AISafetyAtlas.Preference.exists_reward`<br>`AISafetyAtlas.Preference.explanation_at_least_behaviour`<br>`AISafetyAtlas.Preference.explanation_complexity_eq_behaviour`<br>`AISafetyAtlas.Preference.greedy_rewardOf`<br>`AISafetyAtlas.Preference.neg_twin` |
+| LAND-PREF-KNOW-001 | Reward unidentifiability as a knowability obstruction | `AISafetyAtlas.Preference.knowable_reward_of_isEmpty_state`<br>`AISafetyAtlas.Preference.not_knowable_reward` |
 
 Catalogued, no atlas Lean:
 

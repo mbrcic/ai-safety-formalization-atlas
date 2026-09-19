@@ -99,30 +99,45 @@ public theorem covers_iff_no_collision
     Covers q h ↔ ∀ σ τ, q.observe σ = q.observe τ → h σ = h τ :=
   Knowledge.knowable_iff_no_collision q.observe h
 
-/-- A collision witness refutes coverage. -/
+/--
+A collision witness refutes coverage.
+
+Routed through `Knowledge.not_knowable_of_collision` rather than through
+`covers_iff_no_collision`: a `CollisionWitness` supplies exactly that law's two
+arguments, so the refutation is a term rather than a detour through the
+fibrewise characterization.
+
+The route is the more elementary one — the collision law is choice-free where the
+characterization is not — but **`#print axioms` cannot show that here**, and no
+constructivity claim is made. Every declaration in this cluster reports
+`Classical.choice` through its own statement: `CandidateObservation.observe` reads
+a `Finset` coalition, and `Finset` is `Quotient`-built. The dependency is in the
+architecture, not in any proof, and no proof route removes it.
+-/
 public theorem not_covers_of_collisionWitness
     {q : CandidateObservation.{u, v, w} A}
     {h : Hazard A}
-    (cw : CollisionWitness q h) : ¬ Covers q h := by
-  intro hc
-  exact cw.hazardDiffers
-    ((covers_iff_no_collision q h).mp hc cw.left cw.right cw.sameObservation)
+    (cw : CollisionWitness q h) : ¬ Covers q h :=
+  Knowledge.not_knowable_of_collision cw.sameObservation cw.hazardDiffers
 
 /--
 Conversely, a failure of coverage yields a concrete colliding pair. Stated
 existentially: the constructive witness-producing form is `decideCoverage` in
 `FiniteDecision`.
+
+The classical extraction is not repeated here. `CollisionWitness q h` is
+`Knowledge.IndistinguishabilityWitness q.observe h` under a domain name, so this is
+the kernel's `exists_witness_of_not_knowable` with the fields relabelled.
 -/
 public theorem exists_collisionWitness_of_not_covers
     {q : CandidateObservation.{u, v, w} A}
     {h : Hazard A}
-    (hnc : ¬ Covers q h) : Nonempty (CollisionWitness q h) := by
-  classical
-  by_contra hempty
-  refine hnc ((covers_iff_no_collision q h).mpr ?_)
-  intro σ τ hst
-  by_contra hne
-  exact hempty ⟨{ left := σ, right := τ, sameObservation := hst, hazardDiffers := hne }⟩
+    (hnc : ¬ Covers q h) : Nonempty (CollisionWitness q h) :=
+  (Knowledge.exists_witness_of_not_knowable hnc).map fun w =>
+    { left := w.left
+      right := w.right
+      sameObservation := w.sameObservation
+      hazardDiffers := w.propertyDiffers }
 
 /-! ## Families -/
 

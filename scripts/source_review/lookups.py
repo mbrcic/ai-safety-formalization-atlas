@@ -114,7 +114,7 @@ def validate_public_url(url: str) -> None:
     try:
         addrinfo = socket.getaddrinfo(hostname_clean, None)
     except socket.gaierror as err:
-        raise UnsafeURLError(f"could not resolve host {hostname_clean}: {err}") from err
+        raise URLError(f"could not resolve host {hostname_clean}: {err}") from err
 
     if not addrinfo:
         raise UnsafeURLError(f"no addresses resolved for {hostname_clean}")
@@ -147,8 +147,6 @@ def fetch(
     retries: int,
 ) -> tuple[bytes | None, str, str]:
     """Return body, final URL, error; retry only transient public HTTP failures."""
-    validate_public_url(url)
-
     opener = build_opener(SafeRedirectHandler())
     for attempt in range(retries + 1):
         limiter.wait(url)
@@ -163,6 +161,7 @@ def fetch(
             },
         )
         try:
+            validate_public_url(url)
             with opener.open(request, timeout=timeout) as response:
                 body = response.read(max_bytes + 1)
                 if len(body) > max_bytes:

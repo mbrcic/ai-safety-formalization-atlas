@@ -332,11 +332,31 @@ def _rights_recorded_rows(
         ):
             continue
         rights = record["rights"]
-        order, result, scope = _rights_presentation(rights)
-        scope_text = _md_cell(scope)
-        safe_url = _safe_external_url(rights.get("url"))
-        if safe_url:
-            scope_text += f" ([terms]({safe_url}))"
+        entries = rights.get("entries", [])
+        signals = [
+            {
+                "url": entry["url"],
+                "details": f"Crossref rights metadata ({entry['content_version'] or 'unspecified'})",
+                "start": entry["start"],
+            }
+            for entry in entries
+        ] or [rights]
+        descriptions = []
+        labels = []
+        order = 3
+        for signal in signals:
+            signal_order, result, scope = _rights_presentation(signal)
+            order = min(order, signal_order)
+            labels.append(result)
+            description = _md_cell(scope)
+            if signal.get("start"):
+                description += f" Effective from: {_safe_md_text(signal['start'])}."
+            safe_url = _safe_external_url(signal.get("url"))
+            if safe_url:
+                description += f" ([terms]({safe_url}))"
+            descriptions.append(description)
+        result = "<br>".join(labels)
+        scope_text = "<br>".join(descriptions)
         if record.get("provider") == "arxiv":
             checked_record = _arxiv_methods_links(record, source)
         else:
@@ -598,6 +618,10 @@ def render_source_review(
         "",
         "## Potential metadata differences",
         "",
+        "Comparisons are conservative: uncertain equivalence, including journal abbreviations,",
+        "is listed for human review rather than counted as a match. A potential difference",
+        "does not by itself mean the Atlas citation is wrong.",
+        "",
         "| Source | Cited material | Field | Atlas citation value | Retrieved-record value | Lookup record | Human disposition |",
         "|---|---|---|---|---|---|---|",
         *(difference_rows or ["| — | — | — | No potential metadata differences. | — | — | — |"]),
@@ -667,6 +691,9 @@ def render_source_review(
         ),
         "",
         "## How to use this report",
+        "",
+        "See the [source-review usage guide](../../guide/source-review.md) for refresh commands,",
+        "offline checks, and recording human decisions. It applies to human contributors and agents.",
         "",
         "Start with possible published versions and retrieval gaps, then compare potential differences and decide whether",
         "an exposed value should be added to the atlas citation. Inspect every rights-related link",

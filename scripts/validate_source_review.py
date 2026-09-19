@@ -24,7 +24,7 @@ from source_review.findings import (  # noqa: E402
     compute_finding_fingerprint,
 )
 
-SCHEMA_VERSION = 3
+SCHEMA_VERSION = 4
 METADATA_FIELDS = (
     "identifier",
     "title",
@@ -222,9 +222,9 @@ def validate_record(source_id: str, source: dict[str, Any], value: object) -> st
         http_url(related.get("url"), f"{source_id} related DOI {index} URL")
         related_dois.append(related)
     rights = mapping(record.get("rights"), f"{source_id} rights must be an object")
-    if set(rights) != {"outcome", "details", "url"}:
+    if set(rights) not in ({"outcome", "details", "url"}, {"outcome", "details", "url", "entries"}):
         fail(
-            f"{source_id} rights must contain exactly ['details', 'outcome', 'url']"
+            f"{source_id} rights must contain details, outcome, url and optional entries"
         )
     rights_outcome = text(rights.get("outcome"), f"{source_id} rights outcome")
     if rights_outcome not in RIGHTS_OUTCOMES:
@@ -235,6 +235,17 @@ def validate_record(source_id: str, source: dict[str, Any], value: object) -> st
         f"{source_id} rights URL must be HTTP(S) or empty when unavailable",
         allow_empty=rights_outcome != "RIGHTS_RECORDED",
     )
+    if "entries" in rights:
+        entries = rights["entries"]
+        if not isinstance(entries, list) or not entries:
+            fail(f"{source_id} rights entries must be a non-empty list")
+        for index, raw_entry in enumerate(entries):
+            entry = mapping(raw_entry, f"{source_id} rights entry {index}")
+            if set(entry) != {"url", "content_version", "start"}:
+                fail(f"{source_id} rights entry {index} has invalid fields")
+            http_url(entry["url"], f"{source_id} rights entry {index} URL")
+            text(entry["content_version"], f"{source_id} rights entry {index} version", allow_empty=True)
+            text(entry["start"], f"{source_id} rights entry {index} start", allow_empty=True)
     text(record.get("notes"), f"{source_id} notes", allow_empty=True)
     status = text(record.get("status"), f"{source_id} status")
     if status not in RECORD_STATUSES:

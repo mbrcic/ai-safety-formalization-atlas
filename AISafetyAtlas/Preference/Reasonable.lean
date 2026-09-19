@@ -155,7 +155,14 @@ namespace ReasonableLanguage
 variable [Fintype A] [Nonempty A] [DecidableEq A]
 variable (L : ReasonableLanguage S A) (π : Policy S A) (x : Pair S A)
 
-/-- Compatibility, in the source's sense: the pair evaluates to the policy. -/
+/-- Compatibility, in the source's sense: the pair evaluates to the policy.
+
+`AISafetyAtlas.Preference.Source.ReasonableForF.Compatible` is this same
+definition, character for character and with the same type, in the namespace of
+the source-literal language structure. Neither is derived from the other, and a
+reader who finds one should know the other exists; whether they should be one
+declaration is a question about how far `Source.` mirrors are kept separate, not
+a question about the mathematics. -/
 @[expose] public def Compatible (x : Pair S A) (π : Policy S A) : Prop := op3 x = π
 
 /-- Any compatible pair lower-bounds the policy's complexity, up to `c`.

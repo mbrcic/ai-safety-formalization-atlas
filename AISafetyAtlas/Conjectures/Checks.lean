@@ -6,7 +6,9 @@ public import AISafetyAtlas.Conjectures.MAIS
 public import AISafetyAtlas.Conjectures.MAIS.O27
 public import AISafetyAtlas.Conjectures.MAIS.O31
 public import AISafetyAtlas.Conjectures.MAIS.O38
+public import AISafetyAtlas.Conjectures.MAIS.O7
 public import AISafetyAtlas.Conjectures.MAIS.O70
+public import AISafetyAtlas.Conjectures.MAIS.O77
 public import AISafetyAtlas.Conjectures.StochasticComplexity
 
 /-!
@@ -85,3 +87,13 @@ example : Prop := AISafetyAtlas.Conjectures.MAIS.maisO38_polynomialSamplesSuffic
 #check @AISafetyAtlas.Conjectures.MAIS.O70DependsOnRanksOnly
 #check @AISafetyAtlas.Conjectures.MAIS.IsO70RankTable
 #check @AISafetyAtlas.Conjectures.MAIS.IsO70AWValueStratumTable
+
+-- CONJ-027 (answer, RESOLVED)
+example : Prop := AISafetyAtlas.Conjectures.MAIS.O7CounterexampleAtEveryScale
+#check @AISafetyAtlas.Conjectures.MAIS.IsO7Counterexample
+
+-- CONJ-028 (target, OPEN)
+#check @AISafetyAtlas.Conjectures.MAIS.IsO77SourceFiberVolumeOrderTable
+#check @AISafetyAtlas.Conjectures.MAIS.IsO77SourceFiberVolumeOrderTable
+#check @AISafetyAtlas.Conjectures.MAIS.IsO77MinimizerCharacterization
+#check @AISafetyAtlas.Conjectures.MAIS.O77AllSaddlesHavePairOne

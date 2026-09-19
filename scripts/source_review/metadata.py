@@ -87,6 +87,17 @@ def crossref_external(message: dict[str, Any]) -> dict[str, Any]:
             "outcome": RIGHTS_RECORDED,
             "details": details,
             "url": chosen["URL"].strip(),
+            "entries": [
+                {
+                    "url": license_["URL"].strip(),
+                    "content_version": str(license_.get("content-version", "")).strip(),
+                    "start": (
+                        str(license_["start"].get("date-time", "")).strip()
+                        if isinstance(license_.get("start"), dict) else ""
+                    ),
+                }
+                for license_ in valid_licenses
+            ],
         }
     else:
         rights = {
@@ -331,8 +342,15 @@ def arxiv_metadata(body: bytes, requested_id: str) -> tuple[dict[str, Any], str]
     if entry is None:
         raise ValueError("arXiv API response contains no entry")
     returned_id = extract_arxiv_id(xml_text(entry, f"{ATOM_NAMESPACE}id"))
-    if returned_id and arxiv_base_id(returned_id) != arxiv_base_id(requested_id):
+    if not returned_id or not re.fullmatch(
+        r"(?:[0-9]{4}\.[0-9]{4,5}|[a-zA-Z][a-zA-Z.-]*/[0-9]{7})(?:v[0-9]+)?",
+        returned_id,
+    ):
+        raise ValueError("arXiv API response contains no valid preprint identifier")
+    if arxiv_base_id(returned_id) != arxiv_base_id(requested_id):
         raise ValueError("arXiv API response identifies a different preprint")
+    if re.search(r"v\d+$", requested_id, re.IGNORECASE) and returned_id != requested_id:
+        raise ValueError("arXiv API response identifies a different preprint version")
     authors = [
         name
         for author in entry.findall(f"{ATOM_NAMESPACE}author")

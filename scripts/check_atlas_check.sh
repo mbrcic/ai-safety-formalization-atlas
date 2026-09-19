@@ -91,6 +91,28 @@ expect oversight-repertoire-too-small.json "verdict: NO OVERSEER CAN FORCE THE O
 expect oversight-has-a-flattening-lever.json "verdict: THE COUNTING BOUND DOES NOT APPLY"
 expect oversight-has-a-flattening-lever.json "this is NOT a finding that oversight succeeds"
 
+# Ashby's counting law, decided on a finite table. This kind exists for the
+# hypothesis rather than the conclusion: the counting law is not in doubt, and
+# what nothing in the build tests is whether any table satisfies the column
+# condition it quantifies over. A `true` verdict here is that missing witness,
+# exhibited by a running program against the same objects the proofs use.
+# Lean: Examples.Control.RegulationCheck.latinSquare_columnsInjective and
+# latinSquare_achievedVariety.
+expect regulation-latin-square.json "THE COUNTING LAW APPLIES"
+expect regulation-latin-square.json "bound: 3/3 outcomes are forced; this strategy admits 3"
+
+# One response and four disturbances: the regulator has no repertoire, so the
+# bound is attained rather than slack. This is the case Ashby's slogan is about.
+# Lean: identityColumn_columnsInjective, identityColumn_achievedVariety.
+expect regulation-no-repertoire.json "bound: 4/1 outcomes are forced; this strategy admits 4"
+
+# A repeated column: the hypothesis fails, so the law is silent. The checker must
+# say so without letting silence read as a clearance -- and here the bound is
+# actually false, which is the difference the wording has to carry.
+# Lean: repeatedColumn_columnsInjective, repeatedColumn_bound_fails.
+expect regulation-column-repeats.json "ASHBY'S HYPOTHESIS FAILS ON THIS TABLE"
+expect regulation-column-repeats.json "this is NOT a finding that the regulator does better"
+
 # A model the reader must refuse rather than silently decide.
 # The X's must end the template: BSD `mktemp` substitutes them only there, so an
 # `.json` suffix made both calls resolve to the same name and the second failed.

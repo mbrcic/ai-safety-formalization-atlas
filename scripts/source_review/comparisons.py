@@ -15,7 +15,6 @@ from .schema import (
     POSSIBLE_CONFLICT,
     REVIEW_OUTCOMES,
     RIGHTS_RECORDED,
-    VENUE_STOP_WORDS,
     YEAR_RE,
     arxiv_base_id,
     catalogue_fields,
@@ -37,8 +36,6 @@ def text_match(catalogue_value: str, source_value: str) -> str:
     catalogue_normal = normalize(catalogue_value)
     source_normal = normalize(source_value)
     if catalogue_normal == source_normal:
-        return MATCH
-    if catalogue_normal in source_normal or source_normal in catalogue_normal:
         return MATCH
     return "POSSIBLE_CONFLICT"
 
@@ -80,39 +77,46 @@ def author_match(catalogue_value: str, authors: list[str]) -> str:
     if not authors:
         return "MISSING_IN_SOURCE"
 
-    def author_is_represented(author: str, target_tokens: set[str]) -> bool:
-        tokens = normalize(author).split()
-        return any(len(token) >= 2 and token in target_tokens for token in tokens)
+    def name_parts(name: str) -> tuple[str, list[str]]:
+        # Retrieved names may be "Family, Given"; catalogue names are
+        # "Given Family". Ambiguous compound names remain review questions.
+        if "," in name:
+            family, given = name.split(",", 1)
+            return normalize(family), normalize(given).split()
+        tokens = normalize(name).split()
+        return (tokens[-1], tokens[:-1]) if tokens else ("", [])
 
-    et_al_match = re.search(r"\bet\s+al\b", catalogue_value, flags=re.IGNORECASE)
-    if et_al_match:
-        leading_text = catalogue_value[: et_al_match.start()].strip(" ,")
-        leading_parts = [
-            p.strip()
-            for p in re.split(r",|\band\b", leading_text)
-            if p.strip()
-        ]
-        if not leading_parts:
-            leading_tokens = set(normalize(leading_text).split())
-            if not author_is_represented(authors[0], leading_tokens):
-                return "POSSIBLE_CONFLICT"
-            return MATCH
+    def same_person(cited: str, retrieved: str) -> bool:
+        family, given = name_parts(cited)
+        other_family, other_given = name_parts(retrieved)
+        if not family or family != other_family:
+            return False
+        if not given:
+            return True  # An explicitly surname-only citation.
+        if len(given) != len(other_given):
+            return False
+        return all(
+            left == right or (min(len(left), len(right)) == 1 and left[0] == right[0])
+            for left, right in zip(given, other_given)
+        )
 
-        for part in leading_parts:
-            part_tokens = set(normalize(part).split())
-            if not any(author_is_represented(author, part_tokens) for author in authors):
-                return "POSSIBLE_CONFLICT"
-
-        first_tokens = set(normalize(leading_parts[0]).split())
-        leading_scope = authors[: len(leading_parts)]
-        if not any(author_is_represented(author, first_tokens) for author in leading_scope):
-            return "POSSIBLE_CONFLICT"
-        return MATCH
-
-    catalogue_tokens = set(normalize(catalogue_value).split())
-    if all(author_is_represented(author, catalogue_tokens) for author in authors):
-        return MATCH
-    return "POSSIBLE_CONFLICT"
+    et_al = re.search(r"\bet\s+al\b", catalogue_value, flags=re.IGNORECASE)
+    leading = catalogue_value[:et_al.start()] if et_al else catalogue_value
+    cited_authors = [
+        part.strip(" ,;")
+        for part in re.split(r",|;|\band\b|&", leading)
+        if part.strip(" ,;")
+    ]
+    if not cited_authors or len(cited_authors) > len(authors):
+        return POSSIBLE_CONFLICT
+    if not et_al and len(cited_authors) != len(authors):
+        return POSSIBLE_CONFLICT
+    # Compare authors in order, without letting one shared first name or a
+    # repeated surname stand in for several different people.
+    return MATCH if all(
+        same_person(cited, retrieved)
+        for cited, retrieved in zip(cited_authors, authors)
+    ) else POSSIBLE_CONFLICT
 
 
 def date_match(catalogue_value: str, source_value: str, citation: str | None = None) -> str:
@@ -137,27 +141,14 @@ def volume_issue_match(catalogue_value: str, source_value: str) -> str:
     if not source_value:
         return "MISSING_IN_SOURCE"
 
-    def extract_vol_iss(val: str) -> tuple[str | None, str | None]:
-        vol_m = re.search(r"\b(?:vol\.?|volume)\s*([0-9a-z\-]+)", val, re.IGNORECASE)
-        iss_m = re.search(r"\b(?:no\.?|issue|number)\s*([0-9a-z\-]+)", val, re.IGNORECASE)
-        vol = vol_m.group(1).lower() if vol_m else None
-        iss = iss_m.group(1).lower() if iss_m else None
-        return vol, iss
+    def canonical(value: str) -> str:
+        # Normalize labels, not values: a matching volume cannot establish
+        # agreement about an absent issue or a discarded supplement suffix.
+        value = re.sub(r"\b(?:volume|vol)\b\.?", "vol", value, flags=re.IGNORECASE)
+        value = re.sub(r"\b(?:number|issue|no)\b\.?", "no", value, flags=re.IGNORECASE)
+        return normalize(value)
 
-    cat_v, cat_i = extract_vol_iss(catalogue_value)
-    src_v, src_i = extract_vol_iss(source_value)
-
-    if cat_v or cat_i or src_v or src_i:
-        if cat_v and src_v and cat_v != src_v:
-            return "POSSIBLE_CONFLICT"
-        if cat_i and src_i and cat_i != src_i:
-            return "POSSIBLE_CONFLICT"
-        if (cat_v and src_v and cat_v == src_v) or (cat_i and src_i and cat_i == src_i):
-            return MATCH
-        if (cat_v and not src_v) or (src_v and not cat_v) or (cat_i and not src_i) or (src_i and not cat_i):
-            return "POSSIBLE_CONFLICT"
-
-    return MATCH if normalize(catalogue_value) == normalize(source_value) else "POSSIBLE_CONFLICT"
+    return MATCH if canonical(catalogue_value) == canonical(source_value) else POSSIBLE_CONFLICT
 
 
 def pages_match(catalogue_value: str, source_value: str) -> str:
@@ -168,62 +159,25 @@ def pages_match(catalogue_value: str, source_value: str) -> str:
     if not source_value:
         return "MISSING_IN_SOURCE"
 
-    def clean_pages(val: str) -> list[str]:
-        normalized = re.sub(r"[–—]", "-", val)
-        return re.findall(r"\d+", normalized)
+    def canonical(value: str) -> str:
+        value = re.sub(r"\s*[-–—]\s*", "-", value.strip()).casefold()
+        # Only expand a shortened end in a simple numeric range. Keep page
+        # prefixes, additional ranges, and article identifiers intact.
+        match = re.fullmatch(r"([0-9]+)-([0-9]+)", value)
+        if match:
+            start, end = match.groups()
+            if len(end) < len(start):
+                expanded = start[:-len(end)] + end
+                if int(expanded) >= int(start):
+                    return f"{start}-{expanded}"
+        return value
 
-    cat_pages = clean_pages(catalogue_value)
-    src_pages = clean_pages(source_value)
-    if not cat_pages and not src_pages:
-        return MATCH if normalize(catalogue_value) == normalize(source_value) else "POSSIBLE_CONFLICT"
-    if not cat_pages:
-        return "MISSING_IN_CATALOGUE"
-    if not src_pages:
-        return "MISSING_IN_SOURCE"
-
-    if len(cat_pages) >= 2 and len(src_pages) >= 2:
-        cat_start, cat_end = cat_pages[0], cat_pages[1]
-        src_start, src_end = src_pages[0], src_pages[1]
-        if cat_start == src_start and (cat_end == src_end or cat_end.endswith(src_end) or src_end.endswith(cat_end)):
-            return MATCH
-        return "POSSIBLE_CONFLICT"
-
-    if len(cat_pages) == 1 and len(src_pages) == 1:
-        if cat_pages[0] == src_pages[0]:
-            return MATCH
-        return "POSSIBLE_CONFLICT"
-
-    return "POSSIBLE_CONFLICT"
+    return MATCH if canonical(catalogue_value) == canonical(source_value) else POSSIBLE_CONFLICT
 
 
 def venue_match(catalogue_value: str, source_value: str) -> str:
-    outcome = text_match(catalogue_value, source_value)
-    if outcome != "POSSIBLE_CONFLICT":
-        return outcome
-    catalogue_tokens = [
-        token
-        for token in normalize(catalogue_value).split()
-        if token not in VENUE_STOP_WORDS
-    ]
-    source_tokens = [
-        token for token in normalize(source_value).split() if token not in VENUE_STOP_WORDS
-    ]
-    if len(catalogue_tokens) >= 2:
-        position = 0
-        for catalogue_token in catalogue_tokens:
-            while position < len(source_tokens) and not source_tokens[position].startswith(
-                catalogue_token
-            ):
-                position += 1
-            if position == len(source_tokens):
-                break
-            position += 1
-        else:
-            return MATCH
-    catalogue_terms = set(catalogue_tokens)
-    source_terms = set(source_tokens)
-    meaningful = catalogue_terms & source_terms - {"the", "of", "in", "and", "for"}
-    return MATCH if len(meaningful) >= 2 else "POSSIBLE_CONFLICT"
+    # Shared words or plausible abbreviations are not proof of journal identity.
+    return text_match(catalogue_value, source_value)
 
 
 def metadata_comparisons(

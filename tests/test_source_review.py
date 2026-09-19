@@ -181,7 +181,7 @@ def test_doi_and_author_comparison_handle_ordinary_legacy_formats() -> None:
             "Proc. Example Math. Soc.",
             "Proceedings of the Example Mathematical Society",
         )
-        == "MATCH"
+        == "POSSIBLE_CONFLICT"
     )
     assert refresh.citation_pages("P. Example, \u201cExample\u201d") == ""
     assert refresh.citation_pages("Example, pp. 44-48") == "44-48"
@@ -425,7 +425,7 @@ def test_volume_issue_and_pages_numeric_boundaries() -> None:
     assert refresh.volume_issue_match("vol. 8", "vol. 80") == "POSSIBLE_CONFLICT"
     assert refresh.volume_issue_match("vol. 8, no. 1", "vol. 8, no. 10") == "POSSIBLE_CONFLICT"
     assert refresh.volume_issue_match("vol. 8, no. 1", "vol. 8, no. 1") == "MATCH"
-    assert refresh.volume_issue_match("vol. 8", "vol. 8, no. 1") == "MATCH"
+    assert refresh.volume_issue_match("vol. 8", "vol. 8, no. 1") == "POSSIBLE_CONFLICT"
 
     # Page range numeric boundaries
     assert refresh.pages_match("134", "1341-1390") == "POSSIBLE_CONFLICT"
@@ -768,12 +768,13 @@ def test_pages_match_range_vs_single_page_is_possible_conflict() -> None:
     assert refresh.pages_match("345", "346") == "POSSIBLE_CONFLICT"
 
 
-def test_load_cached_records_rejects_incompatible_schema(tmp_path: Path) -> None:
+@pytest.mark.parametrize("old_version", [2, 3])
+def test_load_cached_records_rejects_incompatible_schema(tmp_path: Path, old_version: int) -> None:
     from source_review.snapshot import load_cached_records
     cache_file = tmp_path / "cache.json"
     cache_file.write_text(
         json.dumps({
-            "schema_version": 2,
+            "schema_version": old_version,
             "records": {
                 "src-1": {
                     "lookup_status": "OK",
@@ -788,7 +789,7 @@ def test_load_cached_records_rejects_incompatible_schema(tmp_path: Path) -> None
 
     cache_file.write_text(
         json.dumps({
-            "schema_version": 3,
+            "schema_version": _refresh_module().SCHEMA_VERSION,
             "records": {
                 "src-1": {
                     "lookup_status": "OK",

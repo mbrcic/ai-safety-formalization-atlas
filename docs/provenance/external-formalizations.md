@@ -364,6 +364,57 @@ Keyword AFP “observability” hits (FSM testing, protocol refinement) are
 **DISTINCT** from Klamka control-theoretic unobservability. Candidates removed;
 see [`a3-by001-unobservability-triage.md`](a3-by001-unobservability-triage.md).
 
+## Lean 4: Tau Ceti — the Morse lemma in a Banach space (vendored)
+
+Surveyed and vendored 2026-09-05. [`TauCetiProject/TauCeti`](https://github.com/TauCetiProject/TauCeti)
+is a Lean library downstream of Mathlib, **incubated by the Lean FRO and the
+Mathlib Initiative**, whose mathematics is AI-authored against human-written
+roadmaps in a separate repository and reviewed against human-written rubrics in a
+third. Apache-2.0. At the surveyed revision: 4,430 files, 1,022,170 lines, of
+which nine contain `sorry` and none of those are under `Analysis/`.
+
+It contains what the frontier-lab survey above did not find and what Mathlib does
+not have: **the Morse lemma in a Banach space**, in the Palais form — near a
+nondegenerate critical point there are coordinates in which a smooth function is
+exactly its Hessian quadratic form.
+
+Eight modules, 1,396 lines, are vendored under [`vendor/TauCeti/`](../../vendor/TauCeti/):
+the Morse lemma and its dependency cone (Hadamard factorisation, averaged
+Hessian, parametric integrals, second-derivative transformation, and an analytic
+square root near `1` in a Banach algebra). The pin, the two-line backport, the
+build and axiom state, and a **declaration-by-declaration statement-fidelity
+audit** are in [`vendor/TauCeti/PROVENANCE.md`](../../vendor/TauCeti/PROVENANCE.md).
+
+Vendored rather than required because Tau Ceti pins Lean `v4.34.0-rc2` on Mathlib
+`master` while this repository pins `v4.33.0` through PFR, Foundation and
+AddCombi, and Lake resolves one Mathlib for the whole build.
+
+**Audit outcome: no fidelity defect found.** Two absences a consumer must carry
+rather than assume are recorded there — `exists_congruence_of_symmetric_family`
+does not claim its congruence family is invertible, and `exists_normal_form`
+requires global `ContDiff ℝ ∞` and does not diagonalise the Hessian (Sylvester is
+a separate step, held here as `hasLocalVolumeOrder_abs_of_diagonal`, which took
+the diagonalisation as a hypothesis until `hasLocalVolumeOrder_abs_matrixQuadForm`
+derived it from nondegeneracy and indefiniteness).
+
+**What it does not contain**, and what MAIS-O77(b) needed: a splitting lemma for a
+*degenerate* critical point (Gromoll–Meyer / Morse–Bott). Every theorem in the
+vendored cone assumes nondegeneracy, and the O77 rung points are degenerate. That
+absence upstream is unchanged; what changed is downstream of it. The atlas now
+builds the splitting itself, as `exists_gromoll_meyer_splitting`, on top of the
+vendored congruence family this section audits — so this paragraph records a gap
+in the vendored package, not an obstacle to O77(b).
+
+Beyond the vendored cone, the parts of Tau Ceti adjacent to this repository's
+analysis layer are `Analysis/Calculus/{Sard, ImplicitFunctionTheorem,
+InverseFunctionTheorem, ParametricFDeriv}`, `Analysis/Fredholm` (a
+Lyapunov–Schmidt normal form), `Analysis/PositiveDefinite`, and
+`Probability/{Kernel, Martingale, Moments, Ergodic}`. It reaches **none** of the
+logic, computability, social-choice, information-theory or causal layers: searches
+for entropy, KL divergence, conditional independence, d-separation, concentration
+inequalities and singular values return zero files. It is a pure-mathematics
+substrate, not a safety library, which is the division this repository wants.
+
 ## Isabelle reproduction environment
 
 - Official image: `makarius/isabelle:Isabelle2025-2`
@@ -373,3 +424,86 @@ see [`a3-by001-unobservability-triage.md`](a3-by001-unobservability-triage.md).
 
 The scripts verify archive hashes before extraction. Successful builds establish
 the cited Isabelle statements; they do not establish a direct AI-safety bridge.
+
+## Frontier-lab Lean corpora — watchlist (surveyed 2026-09-05)
+
+Not vendored, not depended on, not graded against. Recorded because three
+organisations began publishing large Lean 4 developments in August–September
+2026 and a later atlas gap may be answered by one of them. Re-survey before
+building any analysis or number-theory layer from scratch.
+
+The selection rule this list is kept under is the atlas's ingestion rule:
+take a result when it is a **building block used often enough** to repay the
+cost of importing it, and leave it upstream when it is expensive *and*
+unlikely to be reused — the frontier register is for the latter, and a thing
+that is hard but broadly reusable is better waited for than built here.
+
+| Source | Content | Licence | Toolchain |
+|---|---|---|---|
+| [`anthropics/fermats-last-theorem`](https://github.com/anthropics/fermats-last-theorem) | FLT (Frey–Serre–Ribet–Wiles). 45,945 files: `Definitions/` 1,450, `Theorems/` 14,974, `P2M/` 29,513 single-lemma Mathlib-adjacent files | Apache-2.0 | Lean 4.33.1 / Mathlib `v4.33.0` — the atlas's own line |
+| [`anthropics/formal-math`](https://github.com/anthropics/formal-math) | `zeta23/`: more than two thirds of the zeros of ζ are simple and on the critical line (Alpöge–Furman, arXiv:2608.13637) | Apache-2.0 | `v4.33.0-rc2` |
+| [`openai/PrimeGaps186`](https://github.com/openai/PrimeGaps186) | DHL[40,2] and gap ≤ 186, **conditional on three declared `axiom`s**, plus a Python numerical certificate | Apache-2.0 | — |
+| [`openai/LongGapsBetweenPrimes`](https://github.com/openai/LongGapsBetweenPrimes) | one long-gap bound | Apache-2.0 | — |
+| [`axiommath/*`](https://github.com/orgs/axiommath/repositories) | ~30 paper-artifact repositories: q-series, partitions, prime gaps, zero-free regions, a `PrimeNumberTheoremAnd` fork | mixed; **several carry no licence file** | — |
+
+### What the survey found, and did not
+
+Searched all three organisations for the terms the atlas's open work needs.
+Zero hits, organisation-wide, for `Morse`, `MorseLemma`, `localInverse`,
+`IsBoundedBilinearMap`, `RLCT`, `singular learning`, and `HasStrictFDeriv`
+inside `P2M/`. `Laplace` returns eleven hits, all Laplace *transform inversion*
+in the PNT fork — not Laplace's method or Watson's lemma. The `QuadraticForm`
+entries in `P2M/` are ternary forms over `ℚ_p`; `Gaussian` is Gauss sums;
+the 182 `Matrix` entries are Hecke and Galois-representation matrices.
+
+So none of it reaches the singular-learning layer.
+
+**Two claims made in the first version of this section were wrong, and are
+corrected here rather than quietly edited.** It said that no corpus supplied a
+Banach-space analytic inverse function theorem "that Mathlib also lacks", and
+that no Morse lemma existed anywhere. Both are false.
+
+*Mathlib has the Banach-space analytic inverse function theorem.* It is
+`OpenPartialHomeomorph.analyticAt_symm'` in
+`Mathlib/Analysis/Calculus/FDeriv/Analytic.lean`: if an open partial
+homeomorphism is analytic at a point with invertible derivative, its inverse is
+analytic at the image. Composed with `HasStrictFDerivAt.toOpenPartialHomeomorph`
+that is exactly the analytic local inverse, in any Banach space, at the pinned
+revision. The original search looked in
+`Mathlib/Analysis/Calculus/InverseFunctionTheorem/`, where the only analytic
+statement is the scalar `AnalyticAt.analyticAt_localInverse` — a directory-scoped
+search that missed a result filed under `FDeriv/`. The lesson is the one this
+repository already applies to sources: a negative result from a scoped search is
+a statement about the scope, not about the library.
+
+*A Morse lemma exists.* See the Tau Ceti section below.
+
+One item is adjacent in kind and worth knowing about:
+`formal-math/zeta23/Zeta23/LinAlg/Inertia.lean` proves `posIndex_conj_le`
+(inertia under pull-back) and `posIndex_add_le` for Hermitian matrices. The
+atlas gets what it needs from Mathlib's
+`QuadraticForm.equivalent_one_neg_one_weighted_sum_squared`, so importing this
+would be duplication under **Parsimony** unless a consumer appears that the
+Mathlib route cannot serve.
+
+### The transferable part is the verification stack, not the theorems
+
+- [`leanprover/comparator`](https://github.com/leanprover/comparator) (Apache-2.0)
+  with an independent Rust kernel, [`nanoda`](https://github.com/ammkrn/nanoda_lib)
+  (Apache-2.0), replays an exported environment: FLT reports
+  `Checked 1052234 declarations with no errors`. This is a **second kernel**,
+  which `lake exe axiom-audit` is not — the audit runs the same kernel that
+  produced the proof.
+- The Palomar submission layout (`Challenge.lean` / `Solution.lean` /
+  `comparator.json` / `formalization.yaml`, `Challenge` restricted to Mathlib)
+  lets the comparator confirm that the proved statement *and every constant it
+  mentions* match the challenge. MAIS candidate submissions are Palomar-shaped,
+  so `formal-math/.github/scripts/comparator-check.sh` mechanises part of the
+  statement-versus-proof check the atlas currently performs by reading.
+- `fermats-last-theorem/FinalCheck.lean` makes axiom drift a **build** failure
+  via `#guard_msgs in #print axioms`, where the atlas checks axioms out of band.
+- `openai/PrimeGaps186` discharges conditionality as declared `axiom`s with the
+  condition in the README headline. The atlas uses hypotheses and a `FRONTIERS`
+  row. Their form leaves a footprint in `#print axioms`; ours does not, which is
+  the reason `AGENTS.md` insists a clean axiom print is not evidence. Recorded
+  as a contrast, not as a recommendation to switch.

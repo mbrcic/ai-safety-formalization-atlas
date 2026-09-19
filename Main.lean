@@ -3,6 +3,7 @@ module
 public import AISafetyAtlas.Knowledge.Check
 public import AISafetyAtlas.Knowledge.Ambiguity
 public import AISafetyAtlas.Oversight.VarietyCheck
+public import AISafetyAtlas.Control.RegulationCheck
 public import Lean.Data.Json
 
 /-!
@@ -407,6 +408,62 @@ private def runVariety (j : Json) : Except String (List String) := do
     else
       throw "the effect table carries no outcomes, so there is nothing to force"
 
+/-- `kind: "regulation"` — Ashby's counting law on a finite regulation table.
+
+Distinct from `variety` and deliberately so. `variety` decides whether *any*
+overseer can force one outcome; this decides whether Ashby's column hypothesis
+holds on a given table and, when it does, reports the bound the law certifies
+against the variety the strategy actually achieves. The interesting half is the
+hypothesis: a `true` verdict exhibits a model satisfying it, which is the one
+thing a compiling theorem cannot do for itself. -/
+private def runRegulation (j : Json) : Except String (List String) := do
+  let disturbances ← natField j "disturbances"
+  let responses ← natField j "responses"
+  if disturbances = 0 then
+    throw "a regulation table needs at least one disturbance"
+  else if hresp : responses = 0 then
+    throw "a regulator with no responses has no repertoire to count"
+  else
+    let rows ← natTable j "table" disturbances responses
+    let strategyRaw ← natList j "strategy"
+    if strategyRaw.length ≠ disturbances then
+      throw s!"'strategy' has {strategyRaw.length} entries but the model declares {disturbances} disturbances"
+    else if strategyRaw.any (· ≥ responses) then
+      throw "'strategy' names a response outside the declared repertoire"
+    else
+      let outcomes := tableOutcomes rows
+      if hk : 0 < outcomes.size then
+      let table : Fin disturbances → Fin responses → Fin outcomes.size :=
+        fun d r =>
+          let raw := (rows[d.1]!)[r.1]?.getD 0
+          let idx := (outcomes.findIdx? (· == raw)).getD 0
+          if h : idx < outcomes.size then ⟨idx, h⟩ else ⟨0, hk⟩
+      let strategyArr := strategyRaw.toArray
+      let strategy : Fin disturbances → Fin responses :=
+        fun d =>
+          let raw := strategyArr[d.1]!
+          if h : raw < responses then ⟨raw, h⟩ else ⟨0, Nat.pos_of_ne_zero hresp⟩
+      let achieved := AISafetyAtlas.Control.achievedVariety table strategy
+      if AISafetyAtlas.Control.columnsInjective table then
+        pure [
+          "verdict: THE COUNTING LAW APPLIES, AND THIS TABLE SATISFIES IT",
+          s!"  no response column repeats an outcome, so the hypothesis is witnessed here",
+          s!"  bound: {disturbances}/{responses} outcomes are forced; this strategy admits {achieved}",
+          "  certified by AISafetyAtlas.Control.ashby_bound_of_columnsInjective",
+          "  the bound holds for every strategy on this table, not only the one given"
+        ]
+      else
+        pure [
+          "verdict: ASHBY'S HYPOTHESIS FAILS ON THIS TABLE",
+          s!"  some response column repeats an outcome, so the law says nothing here",
+          s!"  this strategy admits {achieved} outcome(s), reported and not certified",
+          "  this is NOT a finding that the regulator does better",
+          "  see AISafetyAtlas.Control.exists_columnsInjective_false_and_bound_fails,",
+          "  which exhibits a table where the bound is false rather than merely unproved"
+        ]
+      else
+        throw "the table carries no outcomes, so there is no variety to count"
+
 private def run (j : Json) : Except String (List String) := do
   let schema ← match (← field j "schema").getStr? with
     | .ok s => pure s
@@ -421,8 +478,9 @@ private def run (j : Json) : Except String (List String) := do
   | "coalition" => runCoalition j
   | "device" => runDevice j
   | "variety" => runVariety j
+  | "regulation" => runRegulation j
   | other =>
-      throw s!"unknown kind '{other}'; this build reads 'knowability', 'coalition', 'device' and 'variety'"
+      throw s!"unknown kind '{other}'; this build reads 'knowability', 'coalition', 'device', 'variety' and 'regulation'"
 
 public def main (args : List String) : IO UInt32 := do
   match args with

@@ -14,7 +14,7 @@ import unicodedata
 # Schema version acts as the cache and extraction compatibility boundary.
 # Increment this version whenever provider extraction semantics change in a
 # way that makes stored extracted evidence stale, invalidating the cache.
-SCHEMA_VERSION = 3
+SCHEMA_VERSION = 4
 
 METADATA_FIELDS = (
     "identifier",

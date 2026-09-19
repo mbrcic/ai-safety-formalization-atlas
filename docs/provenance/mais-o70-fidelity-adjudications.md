@@ -196,7 +196,7 @@ still awaits a human countersign; the status block at the top stands unchanged.
 
 The full frontier accounting for `O70ZetaPoleBridge` — statement, provenance,
 risk, and every declaration that consumes it — is in
-[`o70-frontier-manifest.md`](o70-frontier-manifest.md).
+[`frontier-manifest.md`](frontier-manifest.md).
 
 ---
 
@@ -234,7 +234,7 @@ adjudication 1, it still awaits countersign.
 
 - A global-RLCT hypothesis (`O70-AW-GLOBAL` in the planning notes) leaves the P3
   path **entirely**. It is not one of the atlas's frontier hypotheses; the three
-  that exist are listed in [`o70-frontier-manifest.md`](o70-frontier-manifest.md)
+  that exist are listed in [`frontier-manifest.md`](frontier-manifest.md)
   and none of them is a global-RLCT import. Numeric agreement with the published
   Aoyagi–Watanabe value survives only as an optional cross-check.
 - `IsO70FiberMinimumTable`'s lower-bound-plus-attainment shape is exactly print's
@@ -351,7 +351,7 @@ candidate's proof.** MAIS lists O70 as open with a full solution pending review;
 the atlas's own conjecture row for it is `OPEN`. The atlas holds no unconditional
 inhabitant of the P1/P2 targets: those stand behind named frontier hypotheses
 that are stated and not proved, enumerated in
-[`o70-frontier-manifest.md`](o70-frontier-manifest.md). What is established
+[`frontier-manifest.md`](frontier-manifest.md). What is established
 unconditionally is narrower than the problem, and is described there and in the
 conjecture row rather than here. This file records only *how the printed question
 was read*, and both readings are still awaiting a human countersign.
