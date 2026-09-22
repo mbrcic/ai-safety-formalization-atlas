@@ -3,7 +3,7 @@
   "generated_by": "scripts/generate_declaration_index.py",
   "note": "Declaration index walked from the elaborated environment, not from source text. Consumed by the prose checks so that a name resolves only when it is a real declaration.",
   "prefix": "AISafetyAtlas",
-  "count": 6691,
+  "count": 6688,
   "declarations": [
     {
       "name": "AISafetyAtlas",
@@ -13481,17 +13481,7 @@
       "module": "AISafetyAtlas.Examples.Fairness.ApproximateRiskAssignment"
     },
     {
-      "name": "AISafetyAtlas.Examples.Fairness.ApproximateRiskAssignment.nearMiss_scoreRelative_not_exact",
-      "kind": "theorem",
-      "module": "AISafetyAtlas.Examples.Fairness.ApproximateRiskAssignment"
-    },
-    {
       "name": "AISafetyAtlas.Examples.Fairness.ApproximateRiskAssignment.scoreRelativeSlack_at_cutoff",
-      "kind": "theorem",
-      "module": "AISafetyAtlas.Examples.Fairness.ApproximateRiskAssignment"
-    },
-    {
-      "name": "AISafetyAtlas.Examples.Fairness.ApproximateRiskAssignment.scoreRelativeSlack_at_zero",
       "kind": "theorem",
       "module": "AISafetyAtlas.Examples.Fairness.ApproximateRiskAssignment"
     },
@@ -13592,11 +13582,6 @@
     },
     {
       "name": "AISafetyAtlas.Examples.Fairness.ApproximateRiskAssignment.withinFactor_one_half_S1P2",
-      "kind": "theorem",
-      "module": "AISafetyAtlas.Examples.Fairness.ApproximateRiskAssignment"
-    },
-    {
-      "name": "AISafetyAtlas.Examples.Fairness.ApproximateRiskAssignment.withinFactor_one_half_S2P1",
       "kind": "theorem",
       "module": "AISafetyAtlas.Examples.Fairness.ApproximateRiskAssignment"
     },

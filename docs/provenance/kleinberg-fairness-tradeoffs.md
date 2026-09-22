@@ -258,11 +258,13 @@ same `ε`:
 * `ε = 1/2, S = 1, P = 2`: the main condition holds; the smaller repair fails.
 * `ε = 1/2, S = 2, P = 1`: the smaller repair holds; the main condition fails.
 
-These are kernel-checked numerical witnesses in the companion example module.
+Both failures follow from the kernel-checked numerical witness in the companion
+example module, with the roles of `S` and `P` swapped.
 For `0 ≤ ε < 1`, summing the smaller repair gives the reciprocal bounds
 `μ_t / (1 + ε) ≤ μ̂_t ≤ μ_t / (1 − ε)`. Those do not imply (7) at unchanged
-`ε`: its upper bound would require `1/(1−ε) ≤ 1+ε`, which fails when
-`0 < ε < 1`. The main condition gives (7) directly by summing over bins.
+`ε`: the lower half does hold, since `μ_t/(1+ε) ≥ (1−ε)μ_t`, but the upper
+half would require `1/(1−ε) ≤ 1+ε`, which fails when `0 < ε < 1`.
+The main condition gives (7) directly by summing over bins.
 **This is why the main formalization uses the other orientation:** it follows
 the subsequent proof with the same parameter and preserves the printed explicit
 `f(ε)`. It is a reason to choose that reconstruction, not a proof of authorial
