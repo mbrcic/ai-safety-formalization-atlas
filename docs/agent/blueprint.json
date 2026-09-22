@@ -537,28 +537,42 @@
           "name": "AISafetyAtlas.Fairness.approx_perfect_prediction_or_equal_base_rates",
           "location": [
             "AISafetyAtlas/Fairness/ApproximateRiskAssignment.lean",
-            501
+            522
           ]
         },
         {
           "name": "AISafetyAtlas.Fairness.exists_slack_function",
           "location": [
             "AISafetyAtlas/Fairness/ApproximateRiskAssignment.lean",
-            542
+            563
+          ]
+        },
+        {
+          "name": "AISafetyAtlas.Fairness.approx_tradeoff_of_score_relative_calibration",
+          "location": [
+            "AISafetyAtlas/Fairness/ApproximateRiskAssignment.lean",
+            652
+          ]
+        },
+        {
+          "name": "AISafetyAtlas.Fairness.exists_slack_function_score_relative",
+          "location": [
+            "AISafetyAtlas/Fairness/ApproximateRiskAssignment.lean",
+            689
           ]
         },
         {
           "name": "AISafetyAtlas.Fairness.average_lower_bound",
           "location": [
             "AISafetyAtlas/Fairness/ApproximateRiskAssignment.lean",
-            438
+            459
           ]
         },
         {
           "name": "AISafetyAtlas.Fairness.perfect_prediction_or_equal_base_rates_of_approx",
           "location": [
             "AISafetyAtlas/Fairness/ApproximateRiskAssignment.lean",
-            560
+            581
           ]
         }
       ],
@@ -1794,8 +1808,10 @@
     "AISafetyAtlas.Control.perfectlyObservable_iff_sensorLoss_eq_zero": "BY-005",
     "AISafetyAtlas.Control.two_le_card_admittedOutcomes": "BY-004",
     "AISafetyAtlas.Fairness.approx_perfect_prediction_or_equal_base_rates": "BY-010",
+    "AISafetyAtlas.Fairness.approx_tradeoff_of_score_relative_calibration": "BY-010",
     "AISafetyAtlas.Fairness.average_lower_bound": "BY-010",
     "AISafetyAtlas.Fairness.exists_slack_function": "BY-010",
+    "AISafetyAtlas.Fairness.exists_slack_function_score_relative": "BY-010",
     "AISafetyAtlas.Fairness.negativeScore_eq": "BY-010",
     "AISafetyAtlas.Fairness.perfect_of_negativeScore_eq_zero": "BY-010",
     "AISafetyAtlas.Fairness.perfect_prediction_or_equal_base_rates": "BY-010",

@@ -21,6 +21,8 @@ model it is stated over are in `AISafetyAtlas.Fairness.RiskAssignment`.
 | `slack` | print's `f ε = √ε · max (1) (3√ε + 3/4)`, read off the end of §3 |
 | `perfect_prediction_or_equal_base_rates_of_approx` | Theorem 1.1 recovered as the `ε = 0` case, through the exact library statement |
 | `average_lower_bound` | §3's core: a group whose base rate is lower by more than `√ε` has its positive class scoring at least `1 - 2ε - (3/4)√ε` |
+| `approx_tradeoff_of_score_relative_calibration` | the competing sign-only repair also gives an approximate trade-off, with `scoreRelativeSlack` instead of the unchanged `slack` |
+| `exists_slack_function_score_relative` | the existential conclusion of Theorem 1.2 for that competing repair |
 
 `ApproxCalibrated` is the reading of print's (A′) reconstructed from the proof, while
 `ApproxBalancedNegative` and `ApproxBalancedPositive` implement the repaired
@@ -71,6 +73,19 @@ reconstruction of the proof's use, with the display's two sides transposed; it i
 neither the literal display nor equivalent to it. `approxCalibrated_zero_iff`
 confirms that this reconstruction collapses to `Calibrated` at `ε = 0`.
 
+The adjacent (B′) and (C′) displays use `(1 - ε)` below and `(1 + ε)` above:
+the paper's own convention in the same paragraph supports fixing the second
+sign of (A′). It does not decide the orientation. The smaller repair retains
+`(1 - ε) S ≤ P ≤ (1 + ε) S`, which is `ApproxCalibratedScoreRelative` here.
+At `ε = 1/2`, `S = 1, P = 2` satisfies our main condition but not that repair;
+`S = 2, P = 1` satisfies that repair but not our main condition. Neither implies
+the other at the same tolerance. Summing the smaller repair gives
+`μ t / (1 + ε) ≤ μ̂ t ≤ μ t / (1 - ε)` for `0 ≤ ε < 1`, so it needs a changed
+tolerance to give the form of (7). The main formalization uses the transposed
+condition because it gives (7) directly at the original `ε` and preserves
+print's explicit `slack ε`. The corollary below verifies the competing repair
+with a continuous rescaled bound; it does not establish the unchanged bound.
+
 **(B′) and (C′) also need a notational repair.** On PDF p. 12, the displayed
 fractions use `n_t` throughout the numerators, including in the term for the
 other group. The Lean definitions use each group's own score average and its
@@ -79,6 +94,12 @@ group-indexed denominator (`negativeAverage` divides by `N t - μ t`, and
 expression. Thus the Lean `ApproxBalancedNegative` and
 `ApproxBalancedPositive` are the group-indexed reading needed by the argument,
 not a literal transcription of that display.
+
+For example, printed (C′) compares `q / μ₂` with `q / μ₁` using the same
+`q = nᵀ_t P Xv`. If `q > 0`, it cancels, leaving a constraint on class sizes
+alone; if `q = 0`, the display is vacuous. It therefore does not compare the
+two groups' positive-class averages. Distinct group indices in the numerators
+are necessary to express the balance condition and obtain print's (8).
 
 **The approximate conclusions are not the exact ones weakened.** Print's
 `δ`-approximate perfect prediction is a statement about `γ`, not about `p`, so
@@ -570,5 +591,111 @@ public theorem perfect_prediction_or_equal_base_rates_of_approx
   rcases h with h | h
   · exact Or.inl (perfectPrediction_of_approx_zero I R hμ hA h)
   · exact Or.inr ((approxEqualBaseRates_zero_iff I).1 h)
+
+/-! ## The competing repair: retain the displayed orientation -/
+
+/-- Repair only the second sign in the printed (A′): the positive-class count
+is within `1 ± ε` of the bin's total assigned score. This is different from
+`ApproxCalibrated` at the same `ε`. The balance predicates still use the repaired
+group indices described above. -/
+@[expose] public def ApproxCalibratedScoreRelative (ε : ℝ) (I : Instance F)
+    (R : RiskAssignment F B) : Prop :=
+  ∀ t b, WithinFactor ε (assignedPos I R t b) (R.v b * assigned I R t b)
+
+/-- A continuous error bound for the sign-only repair. Up to `ε = 1/2`, this is
+`slack (ε / (1 - ε))`. Beyond that point the denominator stays at `1/2`, so the
+bound remains continuous and is already at least `1`; the base-rate conclusion
+then holds for every instance. This is not a claim about the unchanged `slack ε`. -/
+@[expose] public noncomputable def scoreRelativeSlack (ε : ℝ) : ℝ :=
+  slack (ε / max (1 - ε) (1 / 2))
+
+public theorem continuous_scoreRelativeSlack : Continuous scoreRelativeSlack := by
+  unfold scoreRelativeSlack
+  apply continuous_slack.comp
+  exact continuous_id.div ((continuous_const.sub continuous_id).max continuous_const)
+    (fun x ↦ ne_of_gt (lt_of_lt_of_le (by norm_num : (0 : ℝ) < 1 / 2)
+      (le_max_right (1 - x) (1 / 2))))
+
+public theorem scoreRelativeSlack_zero : scoreRelativeSlack 0 = 0 := by
+  simp [scoreRelativeSlack, slack_zero]
+
+private theorem withinFactor_mono {ε δ x y : ℝ} (hεδ : ε ≤ δ) (hy : 0 ≤ y)
+    (h : WithinFactor ε x y) : WithinFactor δ x y := by
+  constructor <;> nlinarith [h.1, h.2]
+
+private theorem withinFactor_reverse {ε S P : ℝ} (hε : 0 ≤ ε) (hε1 : ε < 1)
+    (hP : 0 ≤ P) (h : WithinFactor ε P S) :
+    WithinFactor (ε / (1 - ε)) S P := by
+  have hd : 0 < 1 - ε := by linarith
+  have hδ : 0 ≤ ε / (1 - ε) := div_nonneg hε hd.le
+  have hid : ε / (1 - ε) * (1 - ε) = ε := div_mul_cancel₀ _ (ne_of_gt hd)
+  have hεδ : ε ≤ ε / (1 - ε) := by nlinarith [mul_nonneg hε hδ]
+  have hscale : (1 - ε / (1 - ε)) * (1 + ε) ≤ 1 := by
+    nlinarith [mul_nonneg hε hδ]
+  have hcancel : (1 - ε) * (1 + ε / (1 - ε)) = 1 := by nlinarith [hid]
+  constructor
+  · refine le_of_mul_le_mul_left (a := 1 + ε) ?_ (by linarith)
+    calc
+      (1 + ε) * ((1 - ε / (1 - ε)) * P)
+          = ((1 - ε / (1 - ε)) * (1 + ε)) * P := by ring
+      _ ≤ P := by simpa using mul_le_mul_of_nonneg_right hscale hP
+      _ ≤ (1 + ε) * S := h.2
+  · refine le_of_mul_le_mul_left (a := 1 - ε) ?_ hd
+    calc
+      (1 - ε) * S ≤ P := h.1
+      _ = (1 - ε) * ((1 + ε / (1 - ε)) * P) := by rw [← mul_assoc, hcancel, one_mul]
+
+/-- Theorem 1.2 also holds for the competing sign-only repair of (A′), with a
+rescaled error bound. For `ε < 1/2`, reverse calibration at `ε / (1 - ε)` and
+weaken both balance conditions to that tolerance, then apply the main theorem.
+For larger `ε`, the error bound already exceeds every possible base-rate gap. -/
+public theorem approx_tradeoff_of_score_relative_calibration
+    (I : Instance F) (R : RiskAssignment F B) {ε : ℝ} (hε : 0 ≤ ε)
+    (hμ : ∀ t, 0 < I.μ t) (hμN : ∀ t, I.μ t < I.N t)
+    (hA : ApproxCalibratedScoreRelative ε I R) (hB : ApproxBalancedNegative ε I R)
+    (hC : ApproxBalancedPositive ε I R) :
+    ApproxPerfectPrediction (scoreRelativeSlack ε) I R ∨
+      ApproxEqualBaseRates (scoreRelativeSlack ε) I := by
+  rcases le_or_gt (1 / 2 : ℝ) ε with hlarge | hsmall
+  · have hmax : max (1 - ε) (1 / 2) = 1 / 2 := max_eq_right (by linarith)
+    have hδ : 1 ≤ ε / (1 / 2) := by linarith
+    have hs : 1 ≤ Real.sqrt (ε / (1 / 2)) := by
+      nlinarith [Real.sq_sqrt (le_trans zero_le_one hδ), Real.sqrt_nonneg (ε / (1 / 2))]
+    have hf : 1 ≤ scoreRelativeSlack ε := by
+      rw [scoreRelativeSlack, hmax]
+      exact le_trans hs sqrt_le_slack
+    have hN : ∀ t, 0 < I.N t := fun t ↦ lt_trans (hμ t) (hμN t)
+    have hρ0 : ∀ t, 0 < baseRate I t := fun t ↦ div_pos (hμ t) (hN t)
+    have hρ1 : ∀ t, baseRate I t < 1 := fun t ↦ (div_lt_one (hN t)).2 (hμN t)
+    right
+    rw [ApproxEqualBaseRates, abs_le]
+    exact ⟨by linarith [hρ0 0, hρ1 1], by linarith [hρ0 1, hρ1 0]⟩
+  · have hε1 : ε < 1 := by linarith
+    have hd : 0 < 1 - ε := by linarith
+    have hδ : 0 ≤ ε / (1 - ε) := div_nonneg hε hd.le
+    have hεδ : ε ≤ ε / (1 - ε) := by
+      apply (le_div_iff₀ hd).2
+      nlinarith [sq_nonneg ε]
+    rw [scoreRelativeSlack, max_eq_left (show (1 / 2 : ℝ) ≤ 1 - ε by linarith)]
+    apply approx_perfect_prediction_or_equal_base_rates I R hδ hμ hμN
+    · exact fun t b ↦ withinFactor_reverse hε hε1 (assignedPos_nonneg I R t b) (hA t b)
+    · exact fun t u htu ↦ withinFactor_mono hεδ
+        (div_nonneg (negativeScore_nonneg I R u) (sub_nonneg.mpr (hμN u).le)) (hB t u htu)
+    · exact fun t u htu ↦ withinFactor_mono hεδ
+        (positiveAverage_nonneg I R (hμ u)) (hC t u htu)
+
+/-- The printed existential conclusion survives the sign-only repair of (A′).
+The continuous witness is `scoreRelativeSlack`, not the paper's unchanged `slack`. -/
+public theorem exists_slack_function_score_relative :
+    ∃ f : ℝ → ℝ, Continuous f ∧ Filter.Tendsto f (nhds 0) (nhds 0) ∧
+      ∀ (F B : Type) [Fintype F] [Fintype B] (I : Instance F) (R : RiskAssignment F B) (ε : ℝ),
+        0 < ε → (∀ t, 0 < I.μ t) → (∀ t, I.μ t < I.N t) →
+        ApproxCalibratedScoreRelative ε I R → ApproxBalancedNegative ε I R →
+        ApproxBalancedPositive ε I R →
+        ApproxPerfectPrediction (f ε) I R ∨ ApproxEqualBaseRates (f ε) I := by
+  refine ⟨scoreRelativeSlack, continuous_scoreRelativeSlack, ?_, ?_⟩
+  · simpa [scoreRelativeSlack_zero] using continuous_scoreRelativeSlack.tendsto 0
+  · exact fun _ _ _ _ I R _ hε hμ hμN hA hB hC ↦
+      approx_tradeoff_of_score_relative_calibration I R hε.le hμ hμN hA hB hC
 
 end AISafetyAtlas.Fairness

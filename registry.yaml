@@ -2410,6 +2410,46 @@
             "summary": "The feature-vector and bin types are quantified inside the existential and so are restricted to universe zero, where the explicit theorem is universe-polymorphic; print says nothing about universes. Continuity and the filter limit at zero express both regularity requirements of Theorem 1.2. The calibration-direction/sign repair and the group-index repairs documented for approx_perfect_prediction_or_equal_base_rates also apply here, as do its nonempty-class assumptions. This is the printed existential form with reconstructed predicates, not a literal transcription of the displayed hypotheses.",
             "evidence": "docs/provenance/kleinberg-fairness-tradeoffs.md"
           }
+        },
+        {
+          "framework": "Lean",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE",
+          "module": "AISafetyAtlas.Fairness.ApproximateRiskAssignment",
+          "declaration": "AISafetyAtlas.Fairness.approx_tradeoff_of_score_relative_calibration",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "license": "Apache-2.0",
+          "content_source_refs": [
+            "survey-ref-034"
+          ],
+          "content_source_note": "A competing formalization of Theorem 1.2 using the sign-only orientation displayed for (A') in Section 3: the positive-class mass is within a factor of the total assigned score. The balance predicates retain the group's own numerators and repaired group-index orientation from the main approximate formalization. The continuous witness is scoreRelativeSlack(epsilon) = slack(epsilon / max(1 - epsilon, 1/2)), rather than print's unchanged slack(epsilon).",
+          "build_environment": "leanprover/lean4:v4.33.0; mathlib@db584cd6d46c92f209a44c0f1c829460d327499d",
+          "build_command": "lake build AISafetyAtlas.Fairness.ApproximateRiskAssignment AISafetyAtlas.Examples.Fairness.ApproximateRiskAssignment",
+          "scope_delta": {
+            "summary": "This is a deliberate sign-only repair of (A'), not a claim that print's display and the main atlas orientation are equivalent. ApproxCalibratedScoreRelative reverses the two WithinFactor arguments, while the (B') and (C') predicates keep the same group-index repairs and nonempty-class hypotheses as approx_perfect_prediction_or_equal_base_rates. This proof rescales epsilon to epsilon/(1 - epsilon) below the 1/2 cutoff; scoreRelativeSlack floors that denominator at 1/2 and handles the global branch where the bound is already at least 1. Its continuous bound is not print's original slack, so the record is RELATED.",
+            "evidence": "docs/provenance/kleinberg-fairness-tradeoffs.md"
+          }
+        },
+        {
+          "framework": "Lean",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE",
+          "module": "AISafetyAtlas.Fairness.ApproximateRiskAssignment",
+          "declaration": "AISafetyAtlas.Fairness.exists_slack_function_score_relative",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "license": "Apache-2.0",
+          "content_source_refs": [
+            "survey-ref-034"
+          ],
+          "content_source_note": "Theorem 1.2's existential conclusion under the competing sign-only orientation of (A'): a continuous f tending to zero at zero is witnessed by scoreRelativeSlack, with the same repaired group-index balance predicates and nonempty-class assumptions as the main approximate formalization.",
+          "build_environment": "leanprover/lean4:v4.33.0; mathlib@db584cd6d46c92f209a44c0f1c829460d327499d",
+          "build_command": "lake build AISafetyAtlas.Fairness.ApproximateRiskAssignment AISafetyAtlas.Examples.Fairness.ApproximateRiskAssignment",
+          "scope_delta": {
+            "summary": "The existential surface is the sign-only competing repair, not a second statement of print's unchanged error bound. Its f is the continuous scoreRelativeSlack rescaling, and its (B') and (C') clauses retain the repaired group-specific averages and indices documented for approx_perfect_prediction_or_equal_base_rates. The same universe-zero existential packaging and explicit nonempty-class hypotheses remain, so this extends the RELATED scope rather than raising it to EXACT.",
+            "evidence": "docs/provenance/kleinberg-fairness-tradeoffs.md"
+          }
         }
       ],
       "lean_artifact": {
@@ -2478,6 +2518,27 @@
               "AISafetyAtlas.Fairness.approx_perfect_prediction_or_equal_base_rates",
               "AISafetyAtlas.Fairness.continuous_slack",
               "AISafetyAtlas.Fairness.tendsto_slack_zero"
+            ]
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Fairness.approx_tradeoff_of_score_relative_calibration",
+            "type": "NEW_PROOF",
+            "source_declarations": [
+              "AISafetyAtlas.Fairness.ApproxCalibratedScoreRelative",
+              "AISafetyAtlas.Fairness.ApproxBalancedPositive",
+              "AISafetyAtlas.Fairness.ApproxBalancedNegative",
+              "AISafetyAtlas.Fairness.ApproxPerfectPrediction",
+              "AISafetyAtlas.Fairness.ApproxEqualBaseRates",
+              "AISafetyAtlas.Fairness.scoreRelativeSlack",
+              "AISafetyAtlas.Fairness.approx_perfect_prediction_or_equal_base_rates"
+            ]
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Fairness.exists_slack_function_score_relative",
+            "type": "NEW_PROOF",
+            "source_declarations": [
+              "AISafetyAtlas.Fairness.approx_tradeoff_of_score_relative_calibration",
+              "AISafetyAtlas.Fairness.continuous_scoreRelativeSlack"
             ]
           },
           {

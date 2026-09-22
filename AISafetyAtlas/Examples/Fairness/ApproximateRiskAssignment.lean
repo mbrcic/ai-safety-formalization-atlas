@@ -3,7 +3,7 @@ module
 public import AISafetyAtlas.Fairness.ApproximateRiskAssignment
 
 /-!
-# Three instances that inhabit Theorem 1.2, and one that separates its first case
+# Three instances that inhabit Theorem 1.2, and witnesses for both calibration orientations
 
 `AISafetyAtlas.Fairness.ApproximateRiskAssignment` proves that a risk assignment
 meeting (A′), (B′) and (C′) forces one of two `slack ε`-approximate conclusions.
@@ -214,6 +214,85 @@ public theorem nearMiss_conclusion :
     (by norm_num) nearMiss_mu_pos nearMiss_mu_lt_N
     nearMiss_approxCalibrated nearMiss_approxBalancedNegative
     nearMiss_approxBalancedPositive
+
+/-! ### The competing sign-only calibration orientation
+
+The displayed orientation of (A′) reverses the two arguments of `WithinFactor`:
+it compares the positive-class mass with the total assigned score.  At group `1`
+of `nearMiss`, these are `5/8` and `5/9`; their ratio is `9/8`, so the displayed
+orientation fails at `ε = 1/9`, but is exact at the upper endpoint `ε = 1/8`.
+The balance witnesses below are unchanged, since both group averages are still
+exactly `5/18`.
+-/
+
+public theorem nearMiss_approxCalibratedScoreRelative :
+    ApproxCalibratedScoreRelative (1 / 8) nearMiss nearMissAssignment := by
+  intro t b
+  fin_cases t <;> fin_cases b <;>
+    simp [nearMiss_assignedPos, nearMiss_assigned, nearMissAssignment_v,
+      WithinFactor] <;> norm_num
+
+/-- The sign-only orientation is not implied by the original one at `ε = 1/9`:
+at group `1`, `5/8` is not within the upper factor `10/9` of `5/9`. -/
+public theorem nearMiss_not_approxCalibratedScoreRelative :
+    ¬ ApproxCalibratedScoreRelative (1 / 9) nearMiss nearMissAssignment := by
+  intro h
+  have h1 := h 1 0
+  rw [nearMiss_assignedPos, nearMiss_assigned, nearMissAssignment_v] at h1
+  norm_num [WithinFactor] at h1
+
+public theorem nearMiss_scoreRelative_approxBalancedPositive :
+    ApproxBalancedPositive (1 / 8) nearMiss nearMissAssignment := by
+  intro t u _
+  rw [nearMiss_positiveAverage, nearMiss_positiveAverage]
+  exact ⟨by norm_num, by norm_num⟩
+
+public theorem nearMiss_scoreRelative_approxBalancedNegative :
+    ApproxBalancedNegative (1 / 8) nearMiss nearMissAssignment := by
+  intro t u _
+  rw [nearMiss_negativeAverage, nearMiss_negativeAverage]
+  exact ⟨by norm_num, by norm_num⟩
+
+/-- The competing orientation also satisfies the tradeoff theorem, at its
+rescaled tolerance `ε = 1/8`; the witness remains genuinely non-exact. -/
+public theorem nearMiss_scoreRelative_conclusion :
+    ApproxPerfectPrediction (scoreRelativeSlack (1 / 8)) nearMiss nearMissAssignment
+      ∨ ApproxEqualBaseRates (scoreRelativeSlack (1 / 8)) nearMiss :=
+  approx_tradeoff_of_score_relative_calibration nearMiss nearMissAssignment
+    (by norm_num) nearMiss_mu_pos nearMiss_mu_lt_N
+    nearMiss_approxCalibratedScoreRelative
+    nearMiss_scoreRelative_approxBalancedNegative
+    nearMiss_scoreRelative_approxBalancedPositive
+
+public theorem nearMiss_scoreRelative_not_exact :
+    ¬ Calibrated nearMiss nearMissAssignment := nearMiss_not_calibrated
+
+/-! ### `WithinFactor` is not symmetric
+
+These two scalar pairs show the two implication directions fail at the same
+positive tolerance.  They are deliberately numerical: no model-level witness
+is needed to establish that the two orientations are distinct predicates.
+-/
+
+public theorem withinFactor_one_half_S1P2 :
+    WithinFactor (1 / 2 : ℝ) 1 2 ∧ ¬ WithinFactor (1 / 2 : ℝ) 2 1 := by
+  constructor <;> norm_num [WithinFactor]
+
+public theorem withinFactor_one_half_S2P1 :
+    ¬ WithinFactor (1 / 2 : ℝ) 2 1 ∧ WithinFactor (1 / 2 : ℝ) 1 2 := by
+  constructor <;> norm_num [WithinFactor]
+
+/-! ### Endpoints of the competing error bound -/
+
+public theorem scoreRelativeSlack_at_zero : scoreRelativeSlack 0 = 0 :=
+  scoreRelativeSlack_zero
+
+public theorem scoreRelativeSlack_at_cutoff :
+    scoreRelativeSlack (1 / 2 : ℝ) = 15 / 4 := by
+  rw [scoreRelativeSlack]
+  have hmax : max ((1 : ℝ) - 1 / 2) (1 / 2) = 1 / 2 := by norm_num
+  rw [hmax]
+  norm_num [slack]
 
 /-! ## `separated`: the other disjunct
 

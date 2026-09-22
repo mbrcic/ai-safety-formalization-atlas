@@ -10,7 +10,7 @@ Edges come from the elaborated Lean environment. This answers the question the p
 
 So `A → B` means *`B` occurs in `A`'s statement, or in `A`'s body when `A` is a definition*. A lemma used only inside a proof does not appear. Reading the table as a complete call graph would be wrong, and the two sections below are scoped so that they stay true under this limit.
 
-`56` authored declarations in `AISafetyAtlas.Fairness.*` (33 theorems). Compiler-generated companions and projections are dropped.
+`62` authored declarations in `AISafetyAtlas.Fairness.*` (37 theorems). Compiler-generated companions and projections are dropped.
 
 ## Load-bearing declarations
 
@@ -18,17 +18,21 @@ Named in the statements of eight or more others. A change to one of these is a c
 
 | Declaration | Named by |
 |---|---|
-| `Instance` | 51 |
-| `RiskAssignment` | 44 |
-| `Instance.N` | 17 |
-| `slack` | 15 |
-| `Calibrated` | 15 |
+| `Instance` | 54 |
+| `RiskAssignment` | 47 |
+| `Instance.N` | 19 |
+| `slack` | 16 |
+| `Calibrated` | 16 |
 | `PerfectPrediction` | 11 |
+| `ApproxPerfectPrediction` | 11 |
 | `BalancedPositive` | 10 |
 | `BalancedNegative` | 10 |
+| `ApproxEqualBaseRates` | 10 |
+| `ApproxBalancedPositive` | 10 |
+| `ApproxBalancedNegative` | 10 |
+| `WithinFactor` | 9 |
 | `EqualBaseRates` | 9 |
 | `Instance.n` | 8 |
-| `ApproxPerfectPrediction` | 8 |
 | `ApproxCalibrated` | 8 |
 
 ## Definitions no statement and no example mentions
@@ -46,6 +50,7 @@ None.
 | `ApproxBalancedNegative` | definition | `Instance`, `RiskAssignment`, `WithinFactor`, `negativeAverage` |
 | `ApproxBalancedPositive` | definition | `Instance`, `RiskAssignment`, `WithinFactor`, `positiveAverage` |
 | `ApproxCalibrated` | definition | `Instance`, `RiskAssignment`, `RiskAssignment.v`, `WithinFactor`, `assigned`, `assignedPos` |
+| `ApproxCalibratedScoreRelative` | definition | `Instance`, `RiskAssignment`, `RiskAssignment.v`, `WithinFactor`, `assigned`, `assignedPos` |
 | `ApproxEqualBaseRates` | definition | `Instance`, `baseRate` |
 | `ApproxPerfectPrediction` | definition | `Instance`, `RiskAssignment`, `positiveAverage` |
 | `BalancedNegative` | definition | `Instance`, `Instance.N`, `RiskAssignment`, `negativeScore` |
@@ -65,6 +70,7 @@ None.
 | `approxCalibrated_zero_iff` | theorem | `ApproxCalibrated`, `Calibrated`, `Instance`, `RiskAssignment` |
 | `approxEqualBaseRates_zero_iff` | theorem | `ApproxEqualBaseRates`, `EqualBaseRates`, `Instance` |
 | `approx_perfect_prediction_or_equal_base_rates` | theorem | `ApproxBalancedNegative`, `ApproxBalancedPositive`, `ApproxCalibrated`, `ApproxEqualBaseRates`, `ApproxPerfectPrediction`, `Instance`, `Instance.N`, `RiskAssignment`, `slack` |
+| `approx_tradeoff_of_score_relative_calibration` | theorem | `ApproxBalancedNegative`, `ApproxBalancedPositive`, `ApproxCalibratedScoreRelative`, `ApproxEqualBaseRates`, `ApproxPerfectPrediction`, `Instance`, `Instance.N`, `RiskAssignment`, `scoreRelativeSlack` |
 | `assigned` | definition | `Instance`, `Instance.n`, `RiskAssignment`, `RiskAssignment.X` |
 | `assignedNeg` | definition | `Instance`, `Instance.n`, `Instance.p`, `RiskAssignment`, `RiskAssignment.X` |
 | `assignedNeg_nonneg` | theorem | `Instance`, `RiskAssignment`, `assignedNeg` |
@@ -73,8 +79,10 @@ None.
 | `assigned_eq_add` | theorem | `Instance`, `RiskAssignment`, `assigned`, `assignedNeg`, `assignedPos` |
 | `average_lower_bound` | theorem | `ApproxBalancedNegative`, `ApproxBalancedPositive`, `ApproxCalibrated`, `Instance`, `Instance.N`, `RiskAssignment`, `baseRate`, `positiveAverage` |
 | `baseRate` | definition | `Instance`, `Instance.N` |
+| `continuous_scoreRelativeSlack` | theorem | `scoreRelativeSlack` |
 | `continuous_slack` | theorem | `slack` |
 | `exists_slack_function` | theorem | `ApproxBalancedNegative`, `ApproxBalancedPositive`, `ApproxCalibrated`, `ApproxEqualBaseRates`, `ApproxPerfectPrediction`, `Instance`, `Instance.N`, `RiskAssignment` |
+| `exists_slack_function_score_relative` | theorem | `ApproxBalancedNegative`, `ApproxBalancedPositive`, `ApproxCalibratedScoreRelative`, `ApproxEqualBaseRates`, `ApproxPerfectPrediction`, `Instance`, `Instance.N`, `RiskAssignment` |
 | `negativeAverage` | definition | `Instance`, `Instance.N`, `RiskAssignment`, `negativeScore` |
 | `negativeScore` | definition | `Instance`, `RiskAssignment`, `RiskAssignment.v`, `assignedNeg` |
 | `negativeScore_eq` | theorem | `Calibrated`, `Instance`, `RiskAssignment`, `negativeScore`, `positiveScore` |
@@ -89,6 +97,8 @@ None.
 | `positiveScore` | definition | `Instance`, `RiskAssignment`, `RiskAssignment.v`, `assignedPos` |
 | `positiveScore_nonneg` | theorem | `Instance`, `RiskAssignment`, `positiveScore` |
 | `print_perfectPrediction_of_populated` | theorem | `Instance`, `Instance.n`, `Instance.p`, `PerfectPrediction` |
+| `scoreRelativeSlack` | definition | `slack` |
+| `scoreRelativeSlack_zero` | theorem | `scoreRelativeSlack` |
 | `slack` | definition | — |
 | `slack_nonneg` | theorem | `slack` |
 | `slack_zero` | theorem | `slack` |

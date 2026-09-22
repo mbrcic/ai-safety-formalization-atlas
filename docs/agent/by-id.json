@@ -831,6 +831,28 @@
           "module": "AISafetyAtlas.Fairness.ApproximateRiskAssignment",
           "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
           "version": "IN_TREE"
+        },
+        {
+          "framework": "Lean",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declarations": [
+            "AISafetyAtlas.Fairness.approx_tradeoff_of_score_relative_calibration"
+          ],
+          "module": "AISafetyAtlas.Fairness.ApproximateRiskAssignment",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        },
+        {
+          "framework": "Lean",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declarations": [
+            "AISafetyAtlas.Fairness.exists_slack_function_score_relative"
+          ],
+          "module": "AISafetyAtlas.Fairness.ApproximateRiskAssignment",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
         }
       ],
       "lean_artifact": {
@@ -869,25 +891,37 @@
             "atlas_declaration": "AISafetyAtlas.Fairness.approx_perfect_prediction_or_equal_base_rates",
             "type": "NEW_PROOF",
             "file": "AISafetyAtlas/Fairness/ApproximateRiskAssignment.lean",
-            "line": 501
+            "line": 522
           },
           {
             "atlas_declaration": "AISafetyAtlas.Fairness.exists_slack_function",
             "type": "NEW_PROOF",
             "file": "AISafetyAtlas/Fairness/ApproximateRiskAssignment.lean",
-            "line": 542
+            "line": 563
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Fairness.approx_tradeoff_of_score_relative_calibration",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Fairness/ApproximateRiskAssignment.lean",
+            "line": 652
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Fairness.exists_slack_function_score_relative",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Fairness/ApproximateRiskAssignment.lean",
+            "line": 689
           },
           {
             "atlas_declaration": "AISafetyAtlas.Fairness.average_lower_bound",
             "type": "NEW_PROOF",
             "file": "AISafetyAtlas/Fairness/ApproximateRiskAssignment.lean",
-            "line": 438
+            "line": 459
           },
           {
             "atlas_declaration": "AISafetyAtlas.Fairness.perfect_prediction_or_equal_base_rates_of_approx",
             "type": "NEW_PROOF",
             "file": "AISafetyAtlas/Fairness/ApproximateRiskAssignment.lean",
-            "line": 560
+            "line": 581
           }
         ]
       },

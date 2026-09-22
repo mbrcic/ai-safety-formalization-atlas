@@ -60,6 +60,8 @@ import AISafetyAtlas.Oversight.Debate
 #check AISafetyAtlas.Fairness.perfect_of_negativeScore_eq_zero
 #check AISafetyAtlas.Fairness.approx_perfect_prediction_or_equal_base_rates
 #check AISafetyAtlas.Fairness.exists_slack_function
+#check AISafetyAtlas.Fairness.approx_tradeoff_of_score_relative_calibration
+#check AISafetyAtlas.Fairness.exists_slack_function_score_relative
 #check AISafetyAtlas.Fairness.average_lower_bound
 #check AISafetyAtlas.Fairness.perfect_prediction_or_equal_base_rates_of_approx
 #check AISafetyAtlas.Preference.exists_planner

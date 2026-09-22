@@ -1,7 +1,7 @@
 {
   "generated_by": "scripts/check_statement_freeze.py --write",
   "note": "Signature hashes of ledger-graded statements. A diff here is a schema event: say which way fidelity moved and re-grade the row.",
-  "count": 301,
+  "count": 303,
   "declarations": {
     "AISafetyAtlas.Causal.DecisionNetwork.mem_parents_utility_of_isUnmediated": {
       "file": "AISafetyAtlas/Causal/DecisionNetwork.lean",
@@ -519,6 +519,10 @@
       "file": "AISafetyAtlas/Fairness/ApproximateRiskAssignment.lean",
       "sha256": "65b92388270af19e"
     },
+    "AISafetyAtlas.Fairness.approx_tradeoff_of_score_relative_calibration": {
+      "file": "AISafetyAtlas/Fairness/ApproximateRiskAssignment.lean",
+      "sha256": "14cdf43ca7b2a181"
+    },
     "AISafetyAtlas.Fairness.average_lower_bound": {
       "file": "AISafetyAtlas/Fairness/ApproximateRiskAssignment.lean",
       "sha256": "c004a7372506c703"
@@ -526,6 +530,10 @@
     "AISafetyAtlas.Fairness.exists_slack_function": {
       "file": "AISafetyAtlas/Fairness/ApproximateRiskAssignment.lean",
       "sha256": "27e9abae14899b1e"
+    },
+    "AISafetyAtlas.Fairness.exists_slack_function_score_relative": {
+      "file": "AISafetyAtlas/Fairness/ApproximateRiskAssignment.lean",
+      "sha256": "996389439d40db65"
     },
     "AISafetyAtlas.Fairness.negativeScore_eq": {
       "file": "AISafetyAtlas/Fairness/RiskAssignment.lean",

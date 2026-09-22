@@ -227,6 +227,11 @@ with the **same** factor `(1 − ε)` on both sides. Read literally, that forces
 `ε = 0`, not for positive `ε`. It therefore does not make Theorem 1.2 a
 restatement of Theorem 1.1.
 
+The adjacent (B′) and (C′) displays, on the same page and in the same paragraph,
+use `(1 − ε)` for their lower bounds and `(1 + ε)` for their upper bounds. This
+is direct evidence from the paper's own convention that (A′)'s second minus is
+a typo. It supports the sign correction, but does not settle the orientation.
+
 The derivation immediately after, which produces print's (7), supports this
 reading: `(1 − ε)μ_t ≤ μ̂_t ≤ (1 + ε)μ_t`. It bounds
 `μ̂_t = ∑_b [nᵀ_t XV]_b` above by `(1 + ε)μ_t` and below by `(1 − ε)μ_t`, where
@@ -240,12 +245,50 @@ transposed; it is neither the literal display nor equivalent to it.
 That derivation is not itself clean — its third line prints
 `nᵀ_t XVe = ∑_b [nᵀ_t P X]_b`, which is not implied by the approximate hypotheses
 and should read `∑_b [nᵀ_t XV]_b`. So the reading adopted here is the one that
-makes the six-line chain valid, not one copied off a correct line. A reviewer who
-disagrees should say so: it changes the grade, and possibly the theorem.
+makes the six-line chain valid, not one copied off a correct line.
 
-This is the reason the Theorem 1.2 records are graded `RELATED` and not a
-statement match: the Lean adopts the condition supported by print's proof,
-not the condition literally displayed on the page.
+### The competing repair, and why the main theorem uses the other one
+
+The smaller edit changes only (A′)'s second minus to plus, keeping the displayed
+orientation: `(1 − ε)S_b ≤ P_b ≤ (1 + ε)S_b`. Here `S_b = [nᵀ_t XV]_b` and
+`P_b = [nᵀ_t PX]_b`. The main formalization instead uses
+`(1 − ε)P_b ≤ S_b ≤ (1 + ε)P_b`. Neither condition implies the other at the
+same `ε`:
+
+* `ε = 1/2, S = 1, P = 2`: the main condition holds; the smaller repair fails.
+* `ε = 1/2, S = 2, P = 1`: the smaller repair holds; the main condition fails.
+
+These are kernel-checked numerical witnesses in the companion example module.
+For `0 ≤ ε < 1`, summing the smaller repair gives the reciprocal bounds
+`μ_t / (1 + ε) ≤ μ̂_t ≤ μ_t / (1 − ε)`. Those do not imply (7) at unchanged
+`ε`: its upper bound would require `1/(1−ε) ≤ 1+ε`, which fails when
+`0 < ε < 1`. The main condition gives (7) directly by summing over bins.
+**This is why the main formalization uses the other orientation:** it follows
+the subsequent proof with the same parameter and preserves the printed explicit
+`f(ε)`. It is a reason to choose that reconstruction, not a proof of authorial
+intent or a claim that the smaller edit gives a false approximate theorem.
+
+The smaller repair is now `ApproxCalibratedScoreRelative`, and
+`approx_tradeoff_of_score_relative_calibration` proves its trade-off as a
+corollary of the main theorem. Reversing a multiplicative bound changes the
+tolerance to `δ = ε/(1−ε)`; since `δ ≥ ε`, both balance conditions can be
+weakened to that tolerance too. To give the existential theorem a continuous
+witness for **all** `ε > 0`, including `ε = 1`, we use
+
+`g(ε) = scoreRelativeSlack ε = slack (ε / max (1−ε) (1/2))`.
+
+For `0 ≤ ε ≤ 1/2`, this is exactly `f(ε/(1−ε))`. For `ε ≥ 1/2`, it is
+`f(2ε) ≥ 1`, so the base-rate conclusion holds automatically. The denominator
+is always positive, `continuous_scoreRelativeSlack` proves continuity, and
+`scoreRelativeSlack_zero` supplies the zero value. Together these discharge
+`exists_slack_function_score_relative`: Theorem 1.2's existential conclusion
+also holds with the smaller repair and the repaired balance predicates.
+**The unchanged explicit bound `f(ε)` for that repair is not established here.**
+
+The Theorem 1.2 records remain `RELATED`, not literal statement matches. The
+main theorem adopts the orientation supported by print's proof; the corollary
+retains the displayed orientation but corrects its sign and changes the explicit
+bound. Both also repair the balance predicates described next.
 
 ### (B′) and (C′) use each group's own numerator
 
@@ -256,6 +299,15 @@ by `N t - μ t`, while `positiveAverage` divides by `μ t`. The swapped requirem
 swaps the whole group expression. Thus `ApproxBalancedNegative` and
 `ApproxBalancedPositive` are the group-indexed reading needed by the argument,
 not a literal transcription of the p. 12 display.
+
+Concretely, (C′) compares `(1/μ₂) · q` with `(1/μ₁) · q`, where the same
+`q = nᵀ_t PXv` occurs in every numerator. For `q > 0` it cancels, leaving a
+condition on `μ₁` versus `μ₂` alone; for `q = 0` the inequalities are vacuous.
+The display therefore fails to compare the two groups' score averages. The
+same problem affects (B′), with negative-class sizes and a common negative
+score numerator. Correcting the numerator indices is necessary to express the
+balance conditions defined earlier and to obtain (8); it is not an optional
+choice of approximation convention like the orientation of (A′).
 
 ### §3 divides by a quantity whose sign it never fixes
 
@@ -359,6 +411,8 @@ approximation; the build verifies the theorem under those predicates.
   `WithinFactor`, `ApproxCalibrated`, `ApproxBalancedNegative`, and
   `ApproxBalancedPositive`; in particular, verify the A′ reconstruction and the
   own-numerator repair for B′/C′ described above.
+  Compare the two orientations at `ε = 1/2`, and check that the neighboring
+  displays support the sign correction without deciding the orientation.
 * **p. 13 (equations (7)–(8)):** check the score split and the two-sided bound
   against `sum_score_split`, `sum_score_bounds`, `negativeScore_eq_sub`,
   `ApproxBalancedPositive`, and `positiveAverage`.
@@ -369,6 +423,10 @@ approximation; the build verifies the theorem under those predicates.
 * **Worked witnesses:** check `nearMiss`, `separated`, and `mixedBins` in
   `Examples.Fairness.ApproximateRiskAssignment`, including their failure or
   satisfaction declarations, against the adopted predicates.
+* **Competing repair:** read `ApproxCalibratedScoreRelative`,
+  `scoreRelativeSlack`, `approx_tradeoff_of_score_relative_calibration`, and
+  `exists_slack_function_score_relative`. Check the rescaling and the
+  `ε ≥ 1/2` branch; this corollary uses `g(ε)`, not the unchanged `f(ε)`.
 
 1. That `Calibrated` is print's (A) and not the weaker *"calibrated in
    aggregate"* condition. Print quantifies over groups **and** bins; so does the

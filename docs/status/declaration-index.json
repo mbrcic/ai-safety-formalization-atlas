@@ -3,7 +3,7 @@
   "generated_by": "scripts/generate_declaration_index.py",
   "note": "Declaration index walked from the elaborated environment, not from source text. Consumed by the prose checks so that a name resolves only when it is a real declaration.",
   "prefix": "AISafetyAtlas",
-  "count": 6675,
+  "count": 6691,
   "declarations": [
     {
       "name": "AISafetyAtlas",
@@ -13416,6 +13416,11 @@
       "module": "AISafetyAtlas.Examples.Fairness.ApproximateRiskAssignment"
     },
     {
+      "name": "AISafetyAtlas.Examples.Fairness.ApproximateRiskAssignment.nearMiss_approxCalibratedScoreRelative",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Fairness.ApproximateRiskAssignment"
+    },
+    {
       "name": "AISafetyAtlas.Examples.Fairness.ApproximateRiskAssignment.nearMiss_approxEqualBaseRates",
       "kind": "theorem",
       "module": "AISafetyAtlas.Examples.Fairness.ApproximateRiskAssignment"
@@ -13441,6 +13446,11 @@
       "module": "AISafetyAtlas.Examples.Fairness.ApproximateRiskAssignment"
     },
     {
+      "name": "AISafetyAtlas.Examples.Fairness.ApproximateRiskAssignment.nearMiss_not_approxCalibratedScoreRelative",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Fairness.ApproximateRiskAssignment"
+    },
+    {
       "name": "AISafetyAtlas.Examples.Fairness.ApproximateRiskAssignment.nearMiss_not_approxPerfectPrediction",
       "kind": "theorem",
       "module": "AISafetyAtlas.Examples.Fairness.ApproximateRiskAssignment"
@@ -13452,6 +13462,36 @@
     },
     {
       "name": "AISafetyAtlas.Examples.Fairness.ApproximateRiskAssignment.nearMiss_positiveAverage",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Fairness.ApproximateRiskAssignment"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Fairness.ApproximateRiskAssignment.nearMiss_scoreRelative_approxBalancedNegative",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Fairness.ApproximateRiskAssignment"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Fairness.ApproximateRiskAssignment.nearMiss_scoreRelative_approxBalancedPositive",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Fairness.ApproximateRiskAssignment"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Fairness.ApproximateRiskAssignment.nearMiss_scoreRelative_conclusion",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Fairness.ApproximateRiskAssignment"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Fairness.ApproximateRiskAssignment.nearMiss_scoreRelative_not_exact",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Fairness.ApproximateRiskAssignment"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Fairness.ApproximateRiskAssignment.scoreRelativeSlack_at_cutoff",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Fairness.ApproximateRiskAssignment"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Fairness.ApproximateRiskAssignment.scoreRelativeSlack_at_zero",
       "kind": "theorem",
       "module": "AISafetyAtlas.Examples.Fairness.ApproximateRiskAssignment"
     },
@@ -13547,6 +13587,16 @@
     },
     {
       "name": "AISafetyAtlas.Examples.Fairness.ApproximateRiskAssignment.slack_one_sixtyfourth",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Fairness.ApproximateRiskAssignment"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Fairness.ApproximateRiskAssignment.withinFactor_one_half_S1P2",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Fairness.ApproximateRiskAssignment"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Fairness.ApproximateRiskAssignment.withinFactor_one_half_S2P1",
       "kind": "theorem",
       "module": "AISafetyAtlas.Examples.Fairness.ApproximateRiskAssignment"
     },
@@ -17926,6 +17976,11 @@
       "module": "AISafetyAtlas.Fairness.ApproximateRiskAssignment"
     },
     {
+      "name": "AISafetyAtlas.Fairness.ApproxCalibratedScoreRelative",
+      "kind": "def",
+      "module": "AISafetyAtlas.Fairness.ApproximateRiskAssignment"
+    },
+    {
       "name": "AISafetyAtlas.Fairness.ApproxEqualBaseRates",
       "kind": "def",
       "module": "AISafetyAtlas.Fairness.ApproximateRiskAssignment"
@@ -18101,6 +18156,11 @@
       "module": "AISafetyAtlas.Fairness.ApproximateRiskAssignment"
     },
     {
+      "name": "AISafetyAtlas.Fairness.approx_tradeoff_of_score_relative_calibration",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Fairness.ApproximateRiskAssignment"
+    },
+    {
       "name": "AISafetyAtlas.Fairness.assigned",
       "kind": "def",
       "module": "AISafetyAtlas.Fairness.RiskAssignment"
@@ -18141,12 +18201,22 @@
       "module": "AISafetyAtlas.Fairness.ApproximateRiskAssignment"
     },
     {
+      "name": "AISafetyAtlas.Fairness.continuous_scoreRelativeSlack",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Fairness.ApproximateRiskAssignment"
+    },
+    {
       "name": "AISafetyAtlas.Fairness.continuous_slack",
       "kind": "theorem",
       "module": "AISafetyAtlas.Fairness.ApproximateRiskAssignment"
     },
     {
       "name": "AISafetyAtlas.Fairness.exists_slack_function",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Fairness.ApproximateRiskAssignment"
+    },
+    {
+      "name": "AISafetyAtlas.Fairness.exists_slack_function_score_relative",
       "kind": "theorem",
       "module": "AISafetyAtlas.Fairness.ApproximateRiskAssignment"
     },
@@ -18224,6 +18294,16 @@
       "name": "AISafetyAtlas.Fairness.print_perfectPrediction_of_populated",
       "kind": "theorem",
       "module": "AISafetyAtlas.Fairness.RiskAssignment"
+    },
+    {
+      "name": "AISafetyAtlas.Fairness.scoreRelativeSlack",
+      "kind": "def",
+      "module": "AISafetyAtlas.Fairness.ApproximateRiskAssignment"
+    },
+    {
+      "name": "AISafetyAtlas.Fairness.scoreRelativeSlack_zero",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Fairness.ApproximateRiskAssignment"
     },
     {
       "name": "AISafetyAtlas.Fairness.slack",
