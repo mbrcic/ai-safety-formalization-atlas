@@ -1,0 +1,5 @@
+{
+  "schema_version": 1,
+  "description": "Human triage dispositions for automated source review findings. Each entry records an explicit human review decision for an individual machine finding that requires no repository change. reviewed_by identifies the human responsible for the substantive review decision; an AI agent may mechanically write a disposition only on that human's explicit instruction.",
+  "dispositions": {}
+}

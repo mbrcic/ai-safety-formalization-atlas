@@ -15,6 +15,8 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from check_frontier_evidence import FRONTIERS  # noqa: E402
 from check_print_axioms import OFF_ROOT_FACADES  # noqa: E402
+from source_review.catalog import render_source_catalog  # noqa: E402
+from source_review.report import render_source_review  # noqa: E402
 from check_statement_freeze import DECLARATION_NAME  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -22,12 +24,16 @@ REGISTRY = ROOT / "registry.yaml"
 CONJECTURES = ROOT / "conjectures.yaml"
 TASKS = ROOT / "tasks.yaml"
 SEARCH_EVIDENCE = ROOT / "docs/provenance/formalization-search.json"
+SOURCE_REVIEW = ROOT / "docs/provenance/source-review.json"
+SOURCE_REVIEW_DISPOSITIONS = ROOT / "docs/provenance/source-review-dispositions.json"
 STATUS = ROOT / "docs/status/formalization-status.md"
 BY_AREA = ROOT / "docs/status/by-area.md"
 CONTRIBUTOR_TASKS = ROOT / "docs/guide/contributor-tasks.md"
 CONJECTURE_CHECKS = ROOT / "AISafetyAtlas/Conjectures/Checks.lean"
 SOURCE_INDEX = ROOT / "docs/status/sources/README.md"
 SURVEY_SOURCE_REPORT = ROOT / "docs/status/sources/brcic-yampolskiy-2023.md"
+SOURCE_CATALOG_REPORT = ROOT / "docs/status/sources/source-catalog.md"
+SOURCE_REVIEW_REPORT = ROOT / "docs/status/sources/source-review.md"
 LANDSCAPE_INDEX = ROOT / "docs/status/landscape-index.md"
 RELATIONS = ROOT / "docs/status/relations.md"
 ESCAPE_ROUTES = ROOT / "docs/status/escape-routes.md"
@@ -899,16 +905,17 @@ def render_source_index(registry: dict) -> str:
     )
     lines += [
         "",
-        "## Per-source coverage reports",
+        "## Generated source reports",
         "",
         *(
             f"- [`{path.name}`]({path.name})"
             for path in report_paths
         ),
-        "" if report_paths else "No per-source report has been generated yet.",
+        "" if report_paths else "No source report has been generated yet.",
         "",
-        "A source without a report is one nothing has been drawn from yet. That is a",
-        "normal state, not a gap.",
+        "Coverage reports follow one catalogued source. The source catalog is a complete,",
+        "human-readable record of all metadata, provenance, and citing claims for every catalogued entry.",
+        "The source-review report is a generated, rate-limited metadata and rights comparison across works.",
         "",
     ]
     return "\n".join(lines)
@@ -2398,6 +2405,10 @@ def main() -> None:
     conjectures = json.loads(CONJECTURES.read_text(encoding="utf-8"))
     tasks = json.loads(TASKS.read_text(encoding="utf-8"))
     search_evidence = json.loads(SEARCH_EVIDENCE.read_text(encoding="utf-8"))
+    source_review = json.loads(SOURCE_REVIEW.read_text(encoding="utf-8"))
+    source_review_dispositions = json.loads(
+        SOURCE_REVIEW_DISPOSITIONS.read_text(encoding="utf-8")
+    )
     readme = README.read_text(encoding="utf-8")
     state = STATE.read_text(encoding="utf-8")
     site = SITE_PAGE.read_text(encoding="utf-8")
@@ -2424,6 +2435,18 @@ def main() -> None:
     )
     stale |= update(
         SURVEY_SOURCE_REPORT, render_survey_source_report(registry), args.check
+    )
+    stale |= update(
+        SOURCE_CATALOG_REPORT,
+        render_source_catalog(registry, source_review, conjectures),
+        args.check,
+    )
+    stale |= update(
+        SOURCE_REVIEW_REPORT,
+        render_source_review(
+            registry, source_review, source_review_dispositions
+        ),
+        args.check,
     )
     stale |= update(
         MAIS_SOURCE_REPORT,

@@ -31,6 +31,8 @@ DATA = [
     "conjectures.yaml",
     "tasks.yaml",
     "docs/provenance/formalization-search.json",
+    "docs/provenance/source-review.json",
+    "docs/provenance/source-review-dispositions.json",
     # A FORMALIZED escape route names a theorem, and the rule that the theorem
     # must exist is only exercisable if the elaborated index travels with the
     # copy. Without it the validator skips resolution -- deliberately, since the
@@ -46,6 +48,7 @@ EXTRA = [
 ]
 SCRIPTS = [
     "validate_registry.py",
+    "validate_source_review.py",
     "validate_conjectures.py",
     "validate_tasks.py",
     # validate_conjectures imports it for the Lean import-graph helpers.
@@ -62,6 +65,11 @@ def build_tree(tmp: Path) -> Path:
         shutil.copy2(ROOT / name, tmp / name)
     for name in SCRIPTS:
         shutil.copy2(ROOT / "scripts" / name, tmp / "scripts" / name)
+    shutil.copytree(
+        ROOT / "scripts/source_review",
+        tmp / "scripts/source_review",
+        dirs_exist_ok=True,
+    )
     # Registry validation checks that every recorded reproduction command
     # names an executable script, so the copies must carry them too.
     for script in sorted(ROOT.glob("scripts/reproduce_*.sh")):
@@ -196,6 +204,133 @@ def synthetic_blocked_conjecture(data: dict) -> dict:
 
 
 CASES = [
+    (
+        "source review: ledger cannot carry undocumented root fields",
+        "validate_source_review.py",
+        "docs/provenance/source-review.json",
+        lambda d: d.__setitem__("unexpected", True),
+        "must contain exactly",
+    ),
+    (
+        "source review: every work source must receive an outcome",
+        "validate_source_review.py",
+        "docs/provenance/source-review.json",
+        lambda d: d["records"].pop("survey-ref-018"),
+        "must evaluate every work source",
+    ),
+    (
+        "source review: source input changes invalidate its cached result",
+        "validate_source_review.py",
+        "docs/provenance/source-review.json",
+        lambda d: d["records"]["survey-ref-018"].__setitem__(
+            "input_fingerprint", "0" * 64
+        ),
+        "does not match registry.yaml",
+    ),
+    (
+        "source review: a status must follow its machine findings",
+        "validate_source_review.py",
+        "docs/provenance/source-review.json",
+        lambda d: d["records"]["survey-ref-018"].update(
+            {"lookup_status": "HTTP_ERROR", "status": "NO_AUTOMATED_FOLLOWUP"}
+        ),
+        "status does not match its recorded outcomes",
+    ),
+    (
+        "source review: related DOI evidence has a fixed shape",
+        "validate_source_review.py",
+        "docs/provenance/source-review.json",
+        lambda d: d["records"]["survey-ref-018"].__setitem__(
+            "related_dois",
+            [
+                {
+                    "doi": "10.1000/example",
+                    "url": "https://doi.org/10.1000/example",
+                    "unexpected": True,
+                }
+            ],
+        ),
+        "related DOI 0 must contain exactly",
+    ),
+    (
+        "source review dispositions: schema version must be 1",
+        "validate_source_review.py",
+        "docs/provenance/source-review-dispositions.json",
+        lambda d: d.update({"schema_version": 99}),
+        "must use schema_version 1",
+    ),
+    (
+        "source review dispositions: reject unknown work source",
+        "validate_source_review.py",
+        "docs/provenance/source-review-dispositions.json",
+        lambda d: d["dispositions"].__setitem__(
+            "nonexistent-src",
+            {
+                "rights": {
+                    "status": "REVIEWED_NO_CHANGE",
+                    "reason": "Verified manually",
+                    "reviewed_by": "human-reviewer",
+                    "reviewed_on": "2026-09-01",
+                    "finding_fingerprint": "0" * 64,
+                }
+            },
+        ),
+        "names unknown work source",
+    ),
+    (
+        "source review dispositions: reject nonexistent or inactive finding",
+        "validate_source_review.py",
+        "docs/provenance/source-review-dispositions.json",
+        lambda d: d["dispositions"].__setitem__(
+            "survey-ref-018",
+            {
+                "nonexistent:finding": {
+                    "status": "REVIEWED_NO_CHANGE",
+                    "reason": "Verified manually",
+                    "reviewed_by": "human-reviewer",
+                    "reviewed_on": "2026-09-01",
+                    "finding_fingerprint": "0" * 64,
+                }
+            },
+        ),
+        "disposition for nonexistent or inactive finding",
+    ),
+    (
+        "source review dispositions: stale finding fingerprint rejected",
+        "validate_source_review.py",
+        "docs/provenance/source-review-dispositions.json",
+        lambda d: d["dispositions"].__setitem__(
+            "survey-ref-018",
+            {
+                "rights": {
+                    "status": "REVIEWED_NO_CHANGE",
+                    "reason": "Verified manually",
+                    "reviewed_by": "human-reviewer",
+                    "reviewed_on": "2026-09-01",
+                    "finding_fingerprint": "0" * 64,
+                }
+            },
+        ),
+        "disposition fingerprint is stale",
+    ),
+    (
+        "source review dispositions: reviewed_by must be a non-empty identity",
+        "validate_source_review.py",
+        "docs/provenance/source-review-dispositions.json",
+        lambda d: d["dispositions"].__setitem__(
+            "survey-ref-018",
+            {
+                "rights": {
+                    "status": "REVIEWED_NO_CHANGE",
+                    "reason": "Verified manually",
+                    "reviewed_by": "   ",
+                    "reviewed_on": "2026-09-01",
+                    "finding_fingerprint": "c4504e2dbbcefb1be0d8d0866253bd99abe57bee8c22fd92d735b557f2d22d79",
+                }
+            },
+        ),
+        "reviewed_by",
+    ),
     (
         "registry: graded row citing only a directory source",
         "validate_registry.py",
@@ -1483,6 +1618,7 @@ def run_control() -> list[str]:
         tmp = build_tree(Path(raw))
         for script in (
             "validate_registry.py",
+            "validate_source_review.py",
             "validate_conjectures.py",
             "validate_tasks.py",
         ):

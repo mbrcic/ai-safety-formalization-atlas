@@ -22,7 +22,7 @@ Named in the statements of eight or more others. A change to one of these is a c
 | `RiskAssignment` | 47 |
 | `Instance.N` | 19 |
 | `slack` | 16 |
-| `Calibrated` | 16 |
+| `Calibrated` | 15 |
 | `PerfectPrediction` | 11 |
 | `ApproxPerfectPrediction` | 11 |
 | `BalancedPositive` | 10 |
@@ -30,8 +30,8 @@ Named in the statements of eight or more others. A change to one of these is a c
 | `ApproxEqualBaseRates` | 10 |
 | `ApproxBalancedPositive` | 10 |
 | `ApproxBalancedNegative` | 10 |
-| `WithinFactor` | 9 |
 | `EqualBaseRates` | 9 |
+| `WithinFactor` | 8 |
 | `Instance.n` | 8 |
 | `ApproxCalibrated` | 8 |
 

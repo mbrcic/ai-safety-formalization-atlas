@@ -21,11 +21,14 @@ own that a statement-match grade can be related to.
 | `mathforaisafety-2026` | 2026-08-07 | [https://www.mathforaisafety.org/](https://www.mathforaisafety.org/) |
 | `timaeus-projects-2026` | 2026-08-07 | [https://timaeus.co/projects](https://timaeus.co/projects) |
 
-## Per-source coverage reports
+## Generated source reports
 
 - [`brcic-yampolskiy-2023.md`](brcic-yampolskiy-2023.md)
 - [`mais-2026.md`](mais-2026.md)
+- [`source-catalog.md`](source-catalog.md)
+- [`source-review.md`](source-review.md)
 
 
-A source without a report is one nothing has been drawn from yet. That is a
-normal state, not a gap.
+Coverage reports follow one catalogued source. The source catalog is a complete,
+human-readable record of all metadata, provenance, and citing claims for every catalogued entry.
+The source-review report is a generated, rate-limited metadata and rights comparison across works.
