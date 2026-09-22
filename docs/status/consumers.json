@@ -1,7 +1,7 @@
 {
   "counts": {
-    "declarations": 269,
-    "examples_only": 226,
+    "declarations": 271,
+    "examples_only": 228,
     "load_bearing": 43,
     "no_consumer": 0
   },
@@ -755,6 +755,14 @@
       "origin": "BY-010",
       "tier": "examples-only"
     },
+    "AISafetyAtlas.Fairness.approx_tradeoff_of_score_relative_calibration": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Fairness.ApproximateRiskAssignment",
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "BY-010",
+      "tier": "examples-only"
+    },
     "AISafetyAtlas.Fairness.average_lower_bound": {
       "consumers": [
         "AISafetyAtlas.Examples.Registry"
@@ -763,6 +771,13 @@
       "tier": "examples-only"
     },
     "AISafetyAtlas.Fairness.exists_slack_function": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "BY-010",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Fairness.exists_slack_function_score_relative": {
       "consumers": [
         "AISafetyAtlas.Examples.Registry"
       ],
@@ -2170,8 +2185,10 @@
     "AISafetyAtlas.Explainability.attribution_impossibility",
     "AISafetyAtlas.Explainability.attribution_impossibility_weak",
     "AISafetyAtlas.Fairness.approx_perfect_prediction_or_equal_base_rates",
+    "AISafetyAtlas.Fairness.approx_tradeoff_of_score_relative_calibration",
     "AISafetyAtlas.Fairness.average_lower_bound",
     "AISafetyAtlas.Fairness.exists_slack_function",
+    "AISafetyAtlas.Fairness.exists_slack_function_score_relative",
     "AISafetyAtlas.Fairness.perfect_prediction_or_equal_base_rates",
     "AISafetyAtlas.Fairness.perfect_prediction_or_equal_base_rates_of_approx",
     "AISafetyAtlas.Fairness.print_perfectPrediction_of_populated",
