@@ -463,9 +463,9 @@ For the metadata and rights audit comparison, see [`source-review.md`](source-re
 
 - **Citation:** C. Schumacher, M. D. Vose, and L. D. Whitley, “The No Free Lunch and Problem Description Length,” in Proc. Genetic and Evolutionary Computation Conference (GECCO 2001), Morgan Kaufmann, 2001, pp. 565–570.
 - **Role:** `work`
-- **Locator:** —
+- **Locator:** [https://dl.acm.org/doi/10.5555/2955239.2955325](<https://dl.acm.org/doi/10.5555/2955239.2955325>)
 - **Cited in Atlas:** (Catalogue entry only; not directly cited on a claim or conjecture row)
-- **Audit check:** [No locator recorded in registry](source-review.md#gap-schumacher-vose-whitley-2001)
+- **Audit check:** [Lookup error or retrieval gap](source-review.md#gap-schumacher-vose-whitley-2001)
 
 <a id="survey-ref-001"></a>
 ### `survey-ref-001`
@@ -550,22 +550,22 @@ For the metadata and rights audit comparison, see [`source-review.md`](source-re
 <a id="survey-ref-023"></a>
 ### `survey-ref-023`
 
-- **Citation:** R. M. Karp, “Reducibility among combinatorial problems,” in Complexity of computer computations, Springer, 1972, pp. 85–103.
+- **Citation:** R. M. Karp, “Reducibility among combinatorial problems,” in Complexity of computer computations, Springer, 1972, pp. 85–103, doi: 10.1007/978-1-4684-2001-2_9.
 - **Role:** `work`
 - **Survey index:** Ref. #23 in Brcic & Yampolskiy (2023)
-- **Locator:** —
+- **Locator:** [https://doi.org/10.1007/978-1-4684-2001-2_9](<https://doi.org/10.1007/978-1-4684-2001-2_9>)
 - **Cited in Atlas:** (Catalogue entry only; not directly cited on a claim or conjecture row)
-- **Audit check:** [No locator recorded in registry](source-review.md#gap-survey-ref-023)
+- **Audit check:** [Potential venue difference](source-review.md#diff-survey-ref-023-venue); [No machine-readable license found](source-review.md#rights-survey-ref-023)
 
 <a id="survey-ref-024"></a>
 ### `survey-ref-024`
 
-- **Citation:** J. Klamka, “Controllability of dynamical systems. A survey,” vol. 61, no. No 2, pp. 335–342, 2013.
+- **Citation:** J. Klamka, “Controllability of dynamical systems. A survey,” Bulletin of the Polish Academy of Sciences: Technical Sciences, vol. 61, no. 2, pp. 335–342, 2013, doi: 10.2478/bpasts-2013-0031.
 - **Role:** `work`
 - **Survey index:** Ref. #24 in Brcic & Yampolskiy (2023)
-- **Locator:** —
+- **Locator:** [https://doi.org/10.2478/bpasts-2013-0031](<https://doi.org/10.2478/bpasts-2013-0031>)
 - **Cited in Atlas:** [`BY-002`](../formalization-status.md) (*Uncontrollability of dynamical systems*)
-- **Audit check:** [No locator recorded in registry](source-review.md#gap-survey-ref-024)
+- **Audit check:** [No machine-readable license found](source-review.md#rights-survey-ref-024)
 
 <a id="survey-ref-025"></a>
 ### `survey-ref-025`
@@ -583,9 +583,9 @@ For the metadata and rights audit comparison, see [`source-review.md`](source-re
 - **Citation:** R. W. Ashby, Introduction to Cybernetics.1961 Edition. Chapman & Hall, 1961.
 - **Role:** `work`
 - **Survey index:** Ref. #26 in Brcic & Yampolskiy (2023)
-- **Locator:** —
+- **Locator:** [https://archive.org/details/introductiontocy0000ashb](<https://archive.org/details/introductiontocy0000ashb>)
 - **Cited in Atlas:** [`BY-004`](../formalization-status.md) (*Law of Requisite Variety*)
-- **Audit check:** [No locator recorded in registry](source-review.md#gap-survey-ref-026)
+- **Audit check:** [title not extracted from Atlas citation](source-review.md#missing-cat-survey-ref-026-title); [Retrieved record did not expose date](source-review.md#missing-src-survey-ref-026-date); [No machine-readable license found](source-review.md#rights-survey-ref-026)
 
 <a id="survey-ref-027"></a>
 ### `survey-ref-027`
@@ -610,22 +610,22 @@ For the metadata and rights audit comparison, see [`source-review.md`](source-re
 <a id="survey-ref-029"></a>
 ### `survey-ref-029`
 
-- **Citation:** S. McKeever and M. Ridge, “The Many Moral Particularisms,” Can. J. Philos., vol. 35, no. 1, pp. 83–106, 2005.
+- **Citation:** S. McKeever and M. Ridge, “The Many Moral Particularisms,” Can. J. Philos., vol. 35, no. 1, pp. 83–106, 2005, doi: 10.1080/00455091.2005.10716582.
 - **Role:** `work`
 - **Survey index:** Ref. #29 in Brcic & Yampolskiy (2023)
-- **Locator:** —
+- **Locator:** [https://doi.org/10.1080/00455091.2005.10716582](<https://doi.org/10.1080/00455091.2005.10716582>)
 - **Cited in Atlas:** [`BY-006`](../formalization-status.md) (*(Anti)codifiability thesis*)
-- **Audit check:** [No locator recorded in registry](source-review.md#gap-survey-ref-029)
+- **Audit check:** [Potential venue difference](source-review.md#diff-survey-ref-029-venue)
 
 <a id="survey-ref-030"></a>
 ### `survey-ref-030`
 
-- **Citation:** P. S.-H. Tsu, “Can Virtue Be Codified?: An Inquiry on the Basis of Four Conceptions of Virtue,” in Virtue’s Reasons, Routledge, 2017.
+- **Citation:** P. S.-H. Tsu, “Can Virtue Be Codified?: An Inquiry on the Basis of Four Conceptions of Virtue,” in Virtue’s Reasons, Routledge, 2017, doi: 10.4324/9781315314259-5.
 - **Role:** `work`
 - **Survey index:** Ref. #30 in Brcic & Yampolskiy (2023)
-- **Locator:** —
+- **Locator:** [https://doi.org/10.4324/9781315314259-5](<https://doi.org/10.4324/9781315314259-5>)
 - **Cited in Atlas:** [`BY-006`](../formalization-status.md) (*(Anti)codifiability thesis*)
-- **Audit check:** [No locator recorded in registry](source-review.md#gap-survey-ref-030)
+- **Audit check:** [Potential title difference](source-review.md#diff-survey-ref-030-title); [Potential venue difference](source-review.md#diff-survey-ref-030-venue); [pages not extracted from Atlas citation](source-review.md#missing-cat-survey-ref-030-pages); [No machine-readable license found](source-review.md#rights-survey-ref-030)
 
 <a id="survey-ref-031"></a>
 ### `survey-ref-031`
@@ -710,12 +710,12 @@ For the metadata and rights audit comparison, see [`source-review.md`](source-re
 <a id="survey-ref-039"></a>
 ### `survey-ref-039`
 
-- **Citation:** G. J. Chaitin, Information, Randomness And Incompleteness: Papers On Algorithmic Information Theory. 1987.
+- **Citation:** G. J. Chaitin, Information, Randomness And Incompleteness: Papers On Algorithmic Information Theory. 1987, doi: 10.1142/0531.
 - **Role:** `work`
 - **Survey index:** Ref. #39 in Brcic & Yampolskiy (2023)
-- **Locator:** —
+- **Locator:** [https://doi.org/10.1142/0531](<https://doi.org/10.1142/0531>)
 - **Cited in Atlas:** [`BY-015`](../formalization-status.md) (*Chaitin incompleteness*)
-- **Audit check:** [No locator recorded in registry](source-review.md#gap-survey-ref-039)
+- **Audit check:** [title not extracted from Atlas citation](source-review.md#missing-cat-survey-ref-039-title); [authors not extracted from Atlas citation](source-review.md#missing-cat-survey-ref-039-authors); [No machine-readable license found](source-review.md#rights-survey-ref-039)
 
 <a id="survey-ref-040"></a>
 ### `survey-ref-040`
@@ -723,19 +723,19 @@ For the metadata and rights audit comparison, see [`source-review.md`](source-re
 - **Citation:** A. Tarski, “The Concept of Truth in Formalized Languages,” in Logic, Semantics, Metamathematics, A. Tarski, Ed. Oxford University Press, 1936, pp. 152–278.
 - **Role:** `work`
 - **Survey index:** Ref. #40 in Brcic & Yampolskiy (2023)
-- **Locator:** —
+- **Locator:** [https://archive.org/details/logicsemanticsme0000tars](<https://archive.org/details/logicsemanticsme0000tars>)
 - **Cited in Atlas:** [`BY-016`](../formalization-status.md) (*Undefinability*)
-- **Audit check:** [No locator recorded in registry](source-review.md#gap-survey-ref-040)
+- **Audit check:** [Potential title difference](source-review.md#diff-survey-ref-040-title); [Retrieved record did not expose authors](source-review.md#missing-src-survey-ref-040-authors); [Retrieved record did not expose date](source-review.md#missing-src-survey-ref-040-date); [Retrieved record did not expose venue](source-review.md#missing-src-survey-ref-040-venue); [Retrieved record did not expose pages](source-review.md#missing-src-survey-ref-040-pages); [No machine-readable license found](source-review.md#rights-survey-ref-040)
 
 <a id="survey-ref-041"></a>
 ### `survey-ref-041`
 
-- **Citation:** O. B. Bassler, “The Surveyability of Mathematical Proof: A Historical Perspective,” Synthese, vol. 148, no. 1, pp. 99–133, 2006.
+- **Citation:** O. B. Bassler, “The Surveyability of Mathematical Proof: A Historical Perspective,” Synthese, vol. 148, no. 1, pp. 99–133, 2006, doi: 10.1007/s11229-004-6221-7.
 - **Role:** `work`
 - **Survey index:** Ref. #41 in Brcic & Yampolskiy (2023)
-- **Locator:** —
+- **Locator:** [https://doi.org/10.1007/s11229-004-6221-7](<https://doi.org/10.1007/s11229-004-6221-7>)
 - **Cited in Atlas:** [`BY-017`](../formalization-status.md) (*Unsurveyability*)
-- **Audit check:** [No locator recorded in registry](source-review.md#gap-survey-ref-041)
+- **Audit check:** [No automated follow-up flagged](source-review.md#clear-survey-ref-041)
 
 <a id="survey-ref-042"></a>
 ### `survey-ref-042`
@@ -823,9 +823,9 @@ For the metadata and rights audit comparison, see [`source-review.md`](source-re
 - **Citation:** J. Peters, D. Janzing, and B. Schölkopf, Elements of Causal Inference: Foundations and Learning Algorithms. Cambridge, MA, USA: MIT Press, 2017.
 - **Role:** `work`
 - **Survey index:** Ref. #50 in Brcic & Yampolskiy (2023)
-- **Locator:** —
+- **Locator:** [https://people.math.ethz.ch/~jopeters/elements.html](<https://people.math.ethz.ch/~jopeters/elements.html>)
 - **Cited in Atlas:** [`BY-023`](../formalization-status.md) (*Unidentifiability*)
-- **Audit check:** [No locator recorded in registry](source-review.md#gap-survey-ref-050)
+- **Audit check:** [title not extracted from Atlas citation](source-review.md#missing-cat-survey-ref-050-title); [authors not extracted from Atlas citation](source-review.md#missing-cat-survey-ref-050-authors); [Retrieved record did not expose date](source-review.md#missing-src-survey-ref-050-date); [No machine-readable license found](source-review.md#rights-survey-ref-050)
 
 <a id="survey-ref-051"></a>
 ### `survey-ref-051`
@@ -904,19 +904,19 @@ For the metadata and rights audit comparison, see [`source-review.md`](source-re
 - **Citation:** L. Orseau and S. Armstrong, “Safely interruptible agents,” in Proceedings of the Thirty-Second Conference on Uncertainty in Artificial Intelligence, Arlington, Virginia, USA, Jun. 2016, pp. 557–566.
 - **Role:** `work`
 - **Survey index:** Ref. #58 in Brcic & Yampolskiy (2023)
-- **Locator:** —
+- **Locator:** [https://www.auai.org/uai2016/proceedings/papers/68.pdf](<https://www.auai.org/uai2016/proceedings/papers/68.pdf>)
 - **Cited in Atlas:** [`BY-026`](../formalization-status.md) (*Uninterruptibility*)
-- **Audit check:** [No locator recorded in registry](source-review.md#gap-survey-ref-058)
+- **Audit check:** [Retrieved record did not expose title](source-review.md#missing-src-survey-ref-058-title); [Retrieved record did not expose authors](source-review.md#missing-src-survey-ref-058-authors); [Retrieved record did not expose date](source-review.md#missing-src-survey-ref-058-date); [Retrieved record did not expose venue](source-review.md#missing-src-survey-ref-058-venue); [Retrieved record did not expose pages](source-review.md#missing-src-survey-ref-058-pages); [No machine-readable license found](source-review.md#rights-survey-ref-058)
 
 <a id="survey-ref-059"></a>
 ### `survey-ref-059`
 
-- **Citation:** D. Hadfield-Menell, A. Dragan, P. Abbeel, and S. Russell, “The off-switch game,” in Proceedings of the 26th International Joint Conference on Artificial Intelligence, Melbourne, Australia, Aug. 2017, pp. 220–227.
+- **Citation:** D. Hadfield-Menell, A. Dragan, P. Abbeel, and S. Russell, “The off-switch game,” in Proceedings of the 26th International Joint Conference on Artificial Intelligence, Melbourne, Australia, Aug. 2017, pp. 220–227, doi: 10.24963/ijcai.2017/32.
 - **Role:** `work`
 - **Survey index:** Ref. #59 in Brcic & Yampolskiy (2023)
-- **Locator:** —
+- **Locator:** [https://doi.org/10.24963/ijcai.2017/32](<https://doi.org/10.24963/ijcai.2017/32>)
 - **Cited in Atlas:** [`BY-026`](../formalization-status.md) (*Uninterruptibility*)
-- **Audit check:** [No locator recorded in registry](source-review.md#gap-survey-ref-059)
+- **Audit check:** [Potential venue difference](source-review.md#diff-survey-ref-059-venue); [pages not extracted from Atlas citation](source-review.md#missing-cat-survey-ref-059-pages); [No machine-readable license found](source-review.md#rights-survey-ref-059)
 
 <a id="survey-ref-060"></a>
 ### `survey-ref-060`
@@ -934,9 +934,9 @@ For the metadata and rights audit comparison, see [`source-review.md`](source-re
 - **Citation:** E. M. E. Mhamdi, R. Guerraoui, H. Hendrikx, and A. Maurer, “Dynamic safe interruptibility for decentralized multi-agent reinforcement learning,” in Proceedings of the 31st International Conference on Neural Information Processing Systems, Red Hook, NY, USA, Dec. 2017, pp. 129–139.
 - **Role:** `work`
 - **Survey index:** Ref. #61 in Brcic & Yampolskiy (2023)
-- **Locator:** —
+- **Locator:** [https://proceedings.neurips.cc/paper_files/paper/2017/hash/812b4ba287f5ee0bc9d43bbf5bbe87fb-Abstract.html](<https://proceedings.neurips.cc/paper_files/paper/2017/hash/812b4ba287f5ee0bc9d43bbf5bbe87fb-Abstract.html>)
 - **Cited in Atlas:** [`BY-026`](../formalization-status.md) (*Uninterruptibility*)
-- **Audit check:** [No locator recorded in registry](source-review.md#gap-survey-ref-061)
+- **Audit check:** [Potential authors difference](source-review.md#diff-survey-ref-061-authors); [Potential venue difference](source-review.md#diff-survey-ref-061-venue); [volume_issue not extracted from Atlas citation](source-review.md#missing-cat-survey-ref-061-volume_issue); [Retrieved record did not expose pages](source-review.md#missing-src-survey-ref-061-pages); [No machine-readable license found](source-review.md#rights-survey-ref-061)
 
 <a id="survey-ref-062"></a>
 ### `survey-ref-062`
@@ -994,9 +994,9 @@ For the metadata and rights audit comparison, see [`source-review.md`](source-re
 - **Citation:** J. Hernandez-orallo, “A formal definition of intelligence based on an intensional variant of Kolmogorov complexity,” in In Proceedings of the International Symposium of Engineering of Intelligent Systems (EIS’98, 1998, pp. 146–163.
 - **Role:** `work`
 - **Survey index:** Ref. #67 in Brcic & Yampolskiy (2023)
-- **Locator:** —
+- **Locator:** [https://dmip.webs.upv.es/papers/EIS98.pdf](<https://dmip.webs.upv.es/papers/EIS98.pdf>)
 - **Cited in Atlas:** [`BY-031`](../formalization-status.md) (*k-incomprehensibility*)
-- **Audit check:** [No locator recorded in registry](source-review.md#gap-survey-ref-067)
+- **Audit check:** [Retrieved record did not expose title](source-review.md#missing-src-survey-ref-067-title); [Retrieved record did not expose authors](source-review.md#missing-src-survey-ref-067-authors); [Retrieved record did not expose date](source-review.md#missing-src-survey-ref-067-date); [Retrieved record did not expose venue](source-review.md#missing-src-survey-ref-067-venue); [Retrieved record did not expose pages](source-review.md#missing-src-survey-ref-067-pages); [No machine-readable license found](source-review.md#rights-survey-ref-067)
 
 <a id="survey-ref-068"></a>
 ### `survey-ref-068`
@@ -1055,9 +1055,10 @@ For the metadata and rights audit comparison, see [`source-review.md`](source-re
 - **Citation:** C. S. Calude, S. Heidari, and J. Sifakis, “What Neural Networks Are (Not) Good For?,” Research report CDMTCS- 556, Aug. 2021.
 - **Role:** `work`
 - **Survey index:** Ref. #73 in Brcic & Yampolskiy (2023)
-- **Locator:** —
+- **Locator:** [https://www.cs.auckland.ac.nz/research/groups/CDMTCS/researchreports/publication-archive.php?selected-id=556](<https://www.cs.auckland.ac.nz/research/groups/CDMTCS/researchreports/publication-archive.php?selected-id=556>)
+- **Atlas notes:** The survey cites the 2021 technical report. The locator links to the official University of Auckland CDMTCS Research Report 556 archive page. A later journal publication is C. S. Calude, S. Heidari, and J. Sifakis, 'What perceptron neural networks are (not) good for?', Information Sciences, vol. 621, 2023, pp. 844–857, doi: 10.1016/j.ins.2022.11.083. Statement correspondence between the technical report and journal publication has been verified by the contributor; the technical-report citation is retained to preserve the survey's source reference.
 - **Cited in Atlas:** [`BY-036`](../formalization-status.md) (*Efficiency of computing Boolean functions for multilayered perceptrons*)
-- **Audit check:** [No locator recorded in registry](source-review.md#gap-survey-ref-073)
+- **Audit check:** [Potential title difference](source-review.md#diff-survey-ref-073-title); [Retrieved record did not expose authors](source-review.md#missing-src-survey-ref-073-authors); [Retrieved record did not expose date](source-review.md#missing-src-survey-ref-073-date); [Retrieved record did not expose venue](source-review.md#missing-src-survey-ref-073-venue); [No machine-readable license found](source-review.md#rights-survey-ref-073)
 
 <a id="survey-ref-074"></a>
 ### `survey-ref-074`

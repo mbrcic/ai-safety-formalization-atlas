@@ -1,7 +1,7 @@
 {
   "schema_version": 4,
-  "generated_at": "2026-09-19T18:59:11Z",
-  "source_fingerprint": "dfddec80755099a9ed13729b337f1b854d759c11d39460c4183abde355843c77",
+  "generated_at": "2026-09-23T23:46:07Z",
+  "source_fingerprint": "db8cce413d32013358e86756f1380c3fc14f3be1795080fbe0f1a91b6e28d578",
   "records": {
     "abramsky-zvesper-2010-lawvere-bk": {
       "input_fingerprint": "dfa19ffb17522e5ff53096980965c9725b79a002377731944c4a462de5900ec8",
@@ -2677,11 +2677,11 @@
       "notes": ""
     },
     "schumacher-vose-whitley-2001": {
-      "input_fingerprint": "b56d7cfad8323cc6f4fd83d7bf333dc67d2e1fbbd2318b7a7c3ee8b948935647",
-      "provider": "none",
-      "lookup_status": "MISSING_LOCATOR",
-      "checked_url": "",
-      "checked_on": "2026-09-19T18:58:18Z",
+      "input_fingerprint": "15776cacb46343e755089a1c63c151c792ed87ec4743832f043a5af3856c642f",
+      "provider": "html",
+      "lookup_status": "HTTP_ERROR",
+      "checked_url": "https://dl.acm.org/doi/10.5555/2955239.2955325",
+      "checked_on": "2026-09-22T10:01:46Z",
       "metadata": [
         {
           "field": "identifier",
@@ -2727,19 +2727,19 @@
         },
         {
           "field": "locator",
-          "catalogue_value": "—",
+          "catalogue_value": "https://dl.acm.org/doi/10.5555/2955239.2955325",
           "source_value": "—",
-          "outcome": "NOT_APPLICABLE"
+          "outcome": "UNAVAILABLE"
         }
       ],
       "rights": {
         "outcome": "RIGHTS_UNAVAILABLE",
-        "details": "No locator is recorded in registry.yaml.",
-        "url": ""
+        "details": "HTTP 403",
+        "url": "https://dl.acm.org/doi/10.5555/2955239.2955325"
       },
       "related_dois": [],
-      "status": "NEEDS_HUMAN",
-      "notes": "No locator is recorded in registry.yaml."
+      "status": "LOOKUP_FAILED",
+      "notes": "HTTP 403"
     },
     "survey-ref-001": {
       "input_fingerprint": "a9e9445d6265159d1a569d3b5d7728e2752b6282badb55dfdf635364a110be21",
@@ -3307,41 +3307,41 @@
       "notes": ""
     },
     "survey-ref-023": {
-      "input_fingerprint": "2155564abadd16f326b7bdbad71fbb2a264a5242b0b2cd13f39a92b5081a0656",
-      "provider": "none",
-      "lookup_status": "MISSING_LOCATOR",
-      "checked_url": "",
-      "checked_on": "2026-09-19T18:58:24Z",
+      "input_fingerprint": "e15758308ba75f7c537ebf976ac234313985f379ad983c046bc245373a08c00c",
+      "provider": "crossref",
+      "lookup_status": "OK",
+      "checked_url": "https://api.crossref.org/v1/works/10.1007%2F978-1-4684-2001-2_9",
+      "checked_on": "2026-09-22T10:13:33Z",
       "metadata": [
         {
           "field": "identifier",
-          "catalogue_value": "—",
-          "source_value": "—",
-          "outcome": "NOT_APPLICABLE"
+          "catalogue_value": "doi:10.1007/978-1-4684-2001-2_9",
+          "source_value": "doi:10.1007/978-1-4684-2001-2_9",
+          "outcome": "MATCH"
         },
         {
           "field": "title",
           "catalogue_value": "Reducibility among combinatorial problems,",
-          "source_value": "—",
-          "outcome": "UNAVAILABLE"
+          "source_value": "Reducibility among Combinatorial Problems",
+          "outcome": "MATCH"
         },
         {
           "field": "authors",
           "catalogue_value": "R. M. Karp",
-          "source_value": "—",
-          "outcome": "UNAVAILABLE"
+          "source_value": "Richard M. Karp",
+          "outcome": "MATCH"
         },
         {
           "field": "date",
           "catalogue_value": "1972",
-          "source_value": "—",
-          "outcome": "UNAVAILABLE"
+          "source_value": "1972",
+          "outcome": "MATCH"
         },
         {
           "field": "venue",
-          "catalogue_value": "in Complexity of computer computations, Springer, 1972, pp. 85–103",
-          "source_value": "—",
-          "outcome": "UNAVAILABLE"
+          "catalogue_value": "in Complexity of computer computations, Springer, 1972, pp. 85–103, doi: 10.1007/978-1-4684-2001-2_9",
+          "source_value": "Complexity of Computer Computations",
+          "outcome": "POSSIBLE_CONFLICT"
         },
         {
           "field": "volume_issue",
@@ -3352,89 +3352,89 @@
         {
           "field": "pages",
           "catalogue_value": "85–103",
-          "source_value": "—",
-          "outcome": "UNAVAILABLE"
+          "source_value": "85-103",
+          "outcome": "MATCH"
         },
         {
           "field": "locator",
-          "catalogue_value": "—",
-          "source_value": "—",
-          "outcome": "NOT_APPLICABLE"
+          "catalogue_value": "https://doi.org/10.1007/978-1-4684-2001-2_9",
+          "source_value": "https://doi.org/10.1007/978-1-4684-2001-2_9",
+          "outcome": "MATCH"
         }
       ],
       "rights": {
-        "outcome": "RIGHTS_UNAVAILABLE",
-        "details": "No locator is recorded in registry.yaml.",
+        "outcome": "NO_EXPLICIT_RIGHTS",
+        "details": "Crossref returned no explicit license or rights metadata.",
         "url": ""
       },
       "related_dois": [],
       "status": "NEEDS_HUMAN",
-      "notes": "No locator is recorded in registry.yaml."
+      "notes": ""
     },
     "survey-ref-024": {
-      "input_fingerprint": "987d405e5e6af8ad48746ef547fc05108a37548afe0101f20af01596b0f1c654",
-      "provider": "none",
-      "lookup_status": "MISSING_LOCATOR",
-      "checked_url": "",
-      "checked_on": "2026-09-19T18:58:24Z",
+      "input_fingerprint": "2d2dd4c0f0fcaee90dd3dfc93feadcf5f326e82552024aa3a1e115c3c8ea4cd3",
+      "provider": "crossref",
+      "lookup_status": "OK",
+      "checked_url": "https://api.crossref.org/v1/works/10.2478%2Fbpasts-2013-0031",
+      "checked_on": "2026-09-22T10:18:11Z",
       "metadata": [
         {
           "field": "identifier",
-          "catalogue_value": "—",
-          "source_value": "—",
-          "outcome": "NOT_APPLICABLE"
+          "catalogue_value": "doi:10.2478/bpasts-2013-0031",
+          "source_value": "doi:10.2478/bpasts-2013-0031",
+          "outcome": "MATCH"
         },
         {
           "field": "title",
           "catalogue_value": "Controllability of dynamical systems. A survey,",
-          "source_value": "—",
-          "outcome": "UNAVAILABLE"
+          "source_value": "Controllability of dynamical systems. A survey",
+          "outcome": "MATCH"
         },
         {
           "field": "authors",
           "catalogue_value": "J. Klamka",
-          "source_value": "—",
-          "outcome": "UNAVAILABLE"
+          "source_value": "J. Klamka",
+          "outcome": "MATCH"
         },
         {
           "field": "date",
           "catalogue_value": "2013",
-          "source_value": "—",
-          "outcome": "UNAVAILABLE"
+          "source_value": "2013-6-1",
+          "outcome": "MATCH"
         },
         {
           "field": "venue",
-          "catalogue_value": "vol. 61",
-          "source_value": "—",
-          "outcome": "UNAVAILABLE"
+          "catalogue_value": "Bulletin of the Polish Academy of Sciences: Technical Sciences",
+          "source_value": "Bulletin of the Polish Academy of Sciences: Technical Sciences",
+          "outcome": "MATCH"
         },
         {
           "field": "volume_issue",
-          "catalogue_value": "vol. 61, no. No 2",
-          "source_value": "—",
-          "outcome": "UNAVAILABLE"
+          "catalogue_value": "vol. 61, no. 2",
+          "source_value": "vol. 61, no. 2",
+          "outcome": "MATCH"
         },
         {
           "field": "pages",
           "catalogue_value": "335–342",
-          "source_value": "—",
-          "outcome": "UNAVAILABLE"
+          "source_value": "335-342",
+          "outcome": "MATCH"
         },
         {
           "field": "locator",
-          "catalogue_value": "—",
-          "source_value": "—",
-          "outcome": "NOT_APPLICABLE"
+          "catalogue_value": "https://doi.org/10.2478/bpasts-2013-0031",
+          "source_value": "https://doi.org/10.2478/bpasts-2013-0031",
+          "outcome": "MATCH"
         }
       ],
       "rights": {
-        "outcome": "RIGHTS_UNAVAILABLE",
-        "details": "No locator is recorded in registry.yaml.",
+        "outcome": "NO_EXPLICIT_RIGHTS",
+        "details": "Crossref returned no explicit license or rights metadata.",
         "url": ""
       },
       "related_dois": [],
       "status": "NEEDS_HUMAN",
-      "notes": "No locator is recorded in registry.yaml."
+      "notes": ""
     },
     "survey-ref-025": {
       "input_fingerprint": "b35b5e7b0077776fbf31589e1769ee084bfae181bdbdd7130ed7295ed472e6f5",
@@ -3502,11 +3502,11 @@
       "notes": ""
     },
     "survey-ref-026": {
-      "input_fingerprint": "c96f26d20c2e5a3dd820f05e2fe234c4a35c8c79e4a883aa02591ff5767bfe4e",
-      "provider": "none",
-      "lookup_status": "MISSING_LOCATOR",
-      "checked_url": "",
-      "checked_on": "2026-09-19T18:58:25Z",
+      "input_fingerprint": "6eb746d7f777798e319eedf8427600dee3105c125a67d8ab12e96d119a50c516",
+      "provider": "html",
+      "lookup_status": "OK",
+      "checked_url": "https://archive.org/details/introductiontocy0000ashb",
+      "checked_on": "2026-09-22T10:47:29Z",
       "metadata": [
         {
           "field": "identifier",
@@ -3517,8 +3517,8 @@
         {
           "field": "title",
           "catalogue_value": "—",
-          "source_value": "—",
-          "outcome": "NOT_APPLICABLE"
+          "source_value": "An introduction to cybernetics : Ashby, William Ross : Free Download, Borrow, and Streaming : Internet Archive",
+          "outcome": "MISSING_IN_CATALOGUE"
         },
         {
           "field": "authors",
@@ -3530,7 +3530,7 @@
           "field": "date",
           "catalogue_value": "1961",
           "source_value": "—",
-          "outcome": "UNAVAILABLE"
+          "outcome": "MISSING_IN_SOURCE"
         },
         {
           "field": "venue",
@@ -3552,19 +3552,19 @@
         },
         {
           "field": "locator",
-          "catalogue_value": "—",
-          "source_value": "—",
-          "outcome": "NOT_APPLICABLE"
+          "catalogue_value": "https://archive.org/details/introductiontocy0000ashb",
+          "source_value": "https://archive.org/details/introductiontocy0000ashb",
+          "outcome": "MATCH"
         }
       ],
       "rights": {
-        "outcome": "RIGHTS_UNAVAILABLE",
-        "details": "No locator is recorded in registry.yaml.",
-        "url": ""
+        "outcome": "NO_EXPLICIT_RIGHTS",
+        "details": "No explicit rights or license metadata was found in the source HTML.",
+        "url": "https://archive.org/details/introductiontocy0000ashb"
       },
       "related_dois": [],
       "status": "NEEDS_HUMAN",
-      "notes": "No locator is recorded in registry.yaml."
+      "notes": ""
     },
     "survey-ref-027": {
       "input_fingerprint": "a9d96efa0fa0a8de32e6bd6eb6b540e1c9a96c9258397c6c30df31448c13e4dd",
@@ -3704,106 +3704,113 @@
       "notes": ""
     },
     "survey-ref-029": {
-      "input_fingerprint": "0bfd7eb94fdb72e67569eef29cd7f949e39099735a0614f21219bfa2e268897b",
-      "provider": "none",
-      "lookup_status": "MISSING_LOCATOR",
-      "checked_url": "",
-      "checked_on": "2026-09-19T18:58:27Z",
+      "input_fingerprint": "ca9cd7c7573ed151db247425a83e68dc9c13b8f87d6a688aa699b33d875d9e02",
+      "provider": "crossref",
+      "lookup_status": "OK",
+      "checked_url": "https://api.crossref.org/v1/works/10.1080%2F00455091.2005.10716582",
+      "checked_on": "2026-09-22T11:16:04Z",
       "metadata": [
         {
           "field": "identifier",
-          "catalogue_value": "—",
-          "source_value": "—",
-          "outcome": "NOT_APPLICABLE"
+          "catalogue_value": "doi:10.1080/00455091.2005.10716582",
+          "source_value": "doi:10.1080/00455091.2005.10716582",
+          "outcome": "MATCH"
         },
         {
           "field": "title",
           "catalogue_value": "The Many Moral Particularisms,",
-          "source_value": "—",
-          "outcome": "UNAVAILABLE"
+          "source_value": "The Many Moral Particularisms",
+          "outcome": "MATCH"
         },
         {
           "field": "authors",
           "catalogue_value": "S. McKeever and M. Ridge",
-          "source_value": "—",
-          "outcome": "UNAVAILABLE"
+          "source_value": "Sean McKeever; Michael Ridge",
+          "outcome": "MATCH"
         },
         {
           "field": "date",
           "catalogue_value": "2005",
-          "source_value": "—",
-          "outcome": "UNAVAILABLE"
+          "source_value": "2005-3",
+          "outcome": "MATCH"
         },
         {
           "field": "venue",
           "catalogue_value": "Can. J. Philos",
-          "source_value": "—",
-          "outcome": "UNAVAILABLE"
+          "source_value": "Canadian Journal of Philosophy",
+          "outcome": "POSSIBLE_CONFLICT"
         },
         {
           "field": "volume_issue",
           "catalogue_value": "vol. 35, no. 1",
-          "source_value": "—",
-          "outcome": "UNAVAILABLE"
+          "source_value": "vol. 35, no. 1",
+          "outcome": "MATCH"
         },
         {
           "field": "pages",
           "catalogue_value": "83–106",
-          "source_value": "—",
-          "outcome": "UNAVAILABLE"
+          "source_value": "83-106",
+          "outcome": "MATCH"
         },
         {
           "field": "locator",
-          "catalogue_value": "—",
-          "source_value": "—",
-          "outcome": "NOT_APPLICABLE"
+          "catalogue_value": "https://doi.org/10.1080/00455091.2005.10716582",
+          "source_value": "https://doi.org/10.1080/00455091.2005.10716582",
+          "outcome": "MATCH"
         }
       ],
       "rights": {
-        "outcome": "RIGHTS_UNAVAILABLE",
-        "details": "No locator is recorded in registry.yaml.",
-        "url": ""
+        "outcome": "RIGHTS_RECORDED",
+        "details": "Crossref rights metadata (unspecified)",
+        "url": "https://www.cambridge.org/core/terms",
+        "entries": [
+          {
+            "url": "https://www.cambridge.org/core/terms",
+            "content_version": "unspecified",
+            "start": "2020-01-01T00:00:00Z"
+          }
+        ]
       },
       "related_dois": [],
       "status": "NEEDS_HUMAN",
-      "notes": "No locator is recorded in registry.yaml."
+      "notes": ""
     },
     "survey-ref-030": {
-      "input_fingerprint": "6be4686a0950e3f9beb06113f2ea028597d6e0786f708d6c5460dee3859aab6f",
-      "provider": "none",
-      "lookup_status": "MISSING_LOCATOR",
-      "checked_url": "",
-      "checked_on": "2026-09-19T18:58:27Z",
+      "input_fingerprint": "bb1253e4c9635841b2f8ac11061450d88cce28b59270d9a11670ca5b96e66de3",
+      "provider": "crossref",
+      "lookup_status": "OK",
+      "checked_url": "https://api.crossref.org/v1/works/10.4324%2F9781315314259-5",
+      "checked_on": "2026-09-22T11:23:18Z",
       "metadata": [
         {
           "field": "identifier",
-          "catalogue_value": "—",
-          "source_value": "—",
-          "outcome": "NOT_APPLICABLE"
+          "catalogue_value": "doi:10.4324/9781315314259-5",
+          "source_value": "doi:10.4324/9781315314259-5",
+          "outcome": "MATCH"
         },
         {
           "field": "title",
           "catalogue_value": "Can Virtue Be Codified?: An Inquiry on the Basis of Four Conceptions of Virtue,",
-          "source_value": "—",
-          "outcome": "UNAVAILABLE"
+          "source_value": "Can Virtue Be Codified?",
+          "outcome": "POSSIBLE_CONFLICT"
         },
         {
           "field": "authors",
           "catalogue_value": "P. S.-H. Tsu",
-          "source_value": "—",
-          "outcome": "UNAVAILABLE"
+          "source_value": "Peter Shiu-Hwa Tsu",
+          "outcome": "MATCH"
         },
         {
           "field": "date",
           "catalogue_value": "2017",
-          "source_value": "—",
-          "outcome": "UNAVAILABLE"
+          "source_value": "2017-2-17",
+          "outcome": "MATCH"
         },
         {
           "field": "venue",
-          "catalogue_value": "in Virtue’s Reasons, Routledge, 2017",
-          "source_value": "—",
-          "outcome": "UNAVAILABLE"
+          "catalogue_value": "in Virtue’s Reasons, Routledge, 2017, doi: 10.4324/9781315314259-5",
+          "source_value": "Virtue’s Reasons",
+          "outcome": "POSSIBLE_CONFLICT"
         },
         {
           "field": "volume_issue",
@@ -3814,24 +3821,24 @@
         {
           "field": "pages",
           "catalogue_value": "—",
-          "source_value": "—",
-          "outcome": "NOT_APPLICABLE"
+          "source_value": "65-87",
+          "outcome": "MISSING_IN_CATALOGUE"
         },
         {
           "field": "locator",
-          "catalogue_value": "—",
-          "source_value": "—",
-          "outcome": "NOT_APPLICABLE"
+          "catalogue_value": "https://doi.org/10.4324/9781315314259-5",
+          "source_value": "https://doi.org/10.4324/9781315314259-5",
+          "outcome": "MATCH"
         }
       ],
       "rights": {
-        "outcome": "RIGHTS_UNAVAILABLE",
-        "details": "No locator is recorded in registry.yaml.",
+        "outcome": "NO_EXPLICIT_RIGHTS",
+        "details": "Crossref returned no explicit license or rights metadata.",
         "url": ""
       },
       "related_dois": [],
       "status": "NEEDS_HUMAN",
-      "notes": "No locator is recorded in registry.yaml."
+      "notes": ""
     },
     "survey-ref-031": {
       "input_fingerprint": "dfc4510c7fff49177c3f62c69aba80a7eac8b58d453ea56d234efd5ef44a5085",
@@ -4354,35 +4361,35 @@
       "notes": ""
     },
     "survey-ref-039": {
-      "input_fingerprint": "a822a6e9bec3c72b81eb07b189e9652075a8a75d48458976f1c19f76360aaaf6",
-      "provider": "none",
-      "lookup_status": "MISSING_LOCATOR",
-      "checked_url": "",
-      "checked_on": "2026-09-19T18:58:42Z",
+      "input_fingerprint": "d3b34c409ab76533eae143e310eb7c26f03f73dc954adcf9c179c34d217ac84d",
+      "provider": "crossref",
+      "lookup_status": "OK",
+      "checked_url": "https://api.crossref.org/v1/works/10.1142%2F0531",
+      "checked_on": "2026-09-22T11:27:00Z",
       "metadata": [
         {
           "field": "identifier",
-          "catalogue_value": "—",
-          "source_value": "—",
-          "outcome": "NOT_APPLICABLE"
+          "catalogue_value": "doi:10.1142/0531",
+          "source_value": "doi:10.1142/0531",
+          "outcome": "MATCH"
         },
         {
           "field": "title",
           "catalogue_value": "—",
-          "source_value": "—",
-          "outcome": "NOT_APPLICABLE"
+          "source_value": "Information, Randomness & Incompleteness",
+          "outcome": "MISSING_IN_CATALOGUE"
         },
         {
           "field": "authors",
           "catalogue_value": "—",
-          "source_value": "—",
-          "outcome": "NOT_APPLICABLE"
+          "source_value": "Gregory J Chaitin",
+          "outcome": "MISSING_IN_CATALOGUE"
         },
         {
           "field": "date",
           "catalogue_value": "1987",
-          "source_value": "—",
-          "outcome": "UNAVAILABLE"
+          "source_value": "1987-12",
+          "outcome": "MATCH"
         },
         {
           "field": "venue",
@@ -4404,26 +4411,26 @@
         },
         {
           "field": "locator",
-          "catalogue_value": "—",
-          "source_value": "—",
-          "outcome": "NOT_APPLICABLE"
+          "catalogue_value": "https://doi.org/10.1142/0531",
+          "source_value": "https://doi.org/10.1142/0531",
+          "outcome": "MATCH"
         }
       ],
       "rights": {
-        "outcome": "RIGHTS_UNAVAILABLE",
-        "details": "No locator is recorded in registry.yaml.",
+        "outcome": "NO_EXPLICIT_RIGHTS",
+        "details": "Crossref returned no explicit license or rights metadata.",
         "url": ""
       },
       "related_dois": [],
       "status": "NEEDS_HUMAN",
-      "notes": "No locator is recorded in registry.yaml."
+      "notes": ""
     },
     "survey-ref-040": {
-      "input_fingerprint": "24b8bd2058bc8d08bc9239c82b022faa0d7cc6633cb63eae7faad75e48e1570c",
-      "provider": "none",
-      "lookup_status": "MISSING_LOCATOR",
-      "checked_url": "",
-      "checked_on": "2026-09-19T18:58:42Z",
+      "input_fingerprint": "fab593aba9017f1d67a4bba976d800f08b3f3c42d6c0126acfd961cd6b497473",
+      "provider": "html",
+      "lookup_status": "OK",
+      "checked_url": "https://archive.org/details/logicsemanticsme0000tars",
+      "checked_on": "2026-09-22T11:34:41Z",
       "metadata": [
         {
           "field": "identifier",
@@ -4434,26 +4441,26 @@
         {
           "field": "title",
           "catalogue_value": "The Concept of Truth in Formalized Languages,",
-          "source_value": "—",
-          "outcome": "UNAVAILABLE"
+          "source_value": "Logic, semantics, metamathematics : papers from 1923 to 1938 : Tarski, Alfred : Free Download, Borrow, and Streaming : Internet Archive",
+          "outcome": "POSSIBLE_CONFLICT"
         },
         {
           "field": "authors",
           "catalogue_value": "A. Tarski",
           "source_value": "—",
-          "outcome": "UNAVAILABLE"
+          "outcome": "MISSING_IN_SOURCE"
         },
         {
           "field": "date",
           "catalogue_value": "1936",
           "source_value": "—",
-          "outcome": "UNAVAILABLE"
+          "outcome": "MISSING_IN_SOURCE"
         },
         {
           "field": "venue",
           "catalogue_value": "in Logic, Semantics, Metamathematics, A. Tarski, Ed. Oxford University Press, 1936, pp. 152–278",
           "source_value": "—",
-          "outcome": "UNAVAILABLE"
+          "outcome": "MISSING_IN_SOURCE"
         },
         {
           "field": "volume_issue",
@@ -4465,88 +4472,95 @@
           "field": "pages",
           "catalogue_value": "152–278",
           "source_value": "—",
-          "outcome": "UNAVAILABLE"
+          "outcome": "MISSING_IN_SOURCE"
         },
         {
           "field": "locator",
-          "catalogue_value": "—",
-          "source_value": "—",
-          "outcome": "NOT_APPLICABLE"
+          "catalogue_value": "https://archive.org/details/logicsemanticsme0000tars",
+          "source_value": "https://archive.org/details/logicsemanticsme0000tars",
+          "outcome": "MATCH"
         }
       ],
       "rights": {
-        "outcome": "RIGHTS_UNAVAILABLE",
-        "details": "No locator is recorded in registry.yaml.",
-        "url": ""
+        "outcome": "NO_EXPLICIT_RIGHTS",
+        "details": "No explicit rights or license metadata was found in the source HTML.",
+        "url": "https://archive.org/details/logicsemanticsme0000tars"
       },
       "related_dois": [],
       "status": "NEEDS_HUMAN",
-      "notes": "No locator is recorded in registry.yaml."
+      "notes": ""
     },
     "survey-ref-041": {
-      "input_fingerprint": "1faecbd05d2eded8771ccebac7acee73f7885365f2fcaf4ec11c2168068f8f16",
-      "provider": "none",
-      "lookup_status": "MISSING_LOCATOR",
-      "checked_url": "",
-      "checked_on": "2026-09-19T18:58:42Z",
+      "input_fingerprint": "217c9190850eeac4c0edc7cc8c63742300ac18a4d68ae8ad3a517c7a54c8dc70",
+      "provider": "crossref",
+      "lookup_status": "OK",
+      "checked_url": "https://api.crossref.org/v1/works/10.1007%2Fs11229-004-6221-7",
+      "checked_on": "2026-09-22T11:47:05Z",
       "metadata": [
         {
           "field": "identifier",
-          "catalogue_value": "—",
-          "source_value": "—",
-          "outcome": "NOT_APPLICABLE"
+          "catalogue_value": "doi:10.1007/s11229-004-6221-7",
+          "source_value": "doi:10.1007/s11229-004-6221-7",
+          "outcome": "MATCH"
         },
         {
           "field": "title",
           "catalogue_value": "The Surveyability of Mathematical Proof: A Historical Perspective,",
-          "source_value": "—",
-          "outcome": "UNAVAILABLE"
+          "source_value": "The Surveyability of Mathematical Proof: A Historical Perspective",
+          "outcome": "MATCH"
         },
         {
           "field": "authors",
           "catalogue_value": "O. B. Bassler",
-          "source_value": "—",
-          "outcome": "UNAVAILABLE"
+          "source_value": "O. Bradley Bassler",
+          "outcome": "MATCH"
         },
         {
           "field": "date",
           "catalogue_value": "2006",
-          "source_value": "—",
-          "outcome": "UNAVAILABLE"
+          "source_value": "2006-1",
+          "outcome": "MATCH"
         },
         {
           "field": "venue",
           "catalogue_value": "Synthese",
-          "source_value": "—",
-          "outcome": "UNAVAILABLE"
+          "source_value": "Synthese",
+          "outcome": "MATCH"
         },
         {
           "field": "volume_issue",
           "catalogue_value": "vol. 148, no. 1",
-          "source_value": "—",
-          "outcome": "UNAVAILABLE"
+          "source_value": "vol. 148, no. 1",
+          "outcome": "MATCH"
         },
         {
           "field": "pages",
           "catalogue_value": "99–133",
-          "source_value": "—",
-          "outcome": "UNAVAILABLE"
+          "source_value": "99-133",
+          "outcome": "MATCH"
         },
         {
           "field": "locator",
-          "catalogue_value": "—",
-          "source_value": "—",
-          "outcome": "NOT_APPLICABLE"
+          "catalogue_value": "https://doi.org/10.1007/s11229-004-6221-7",
+          "source_value": "https://doi.org/10.1007/s11229-004-6221-7",
+          "outcome": "MATCH"
         }
       ],
       "rights": {
-        "outcome": "RIGHTS_UNAVAILABLE",
-        "details": "No locator is recorded in registry.yaml.",
-        "url": ""
+        "outcome": "RIGHTS_RECORDED",
+        "details": "Crossref rights metadata (tdm)",
+        "url": "http://www.springer.com/tdm",
+        "entries": [
+          {
+            "url": "http://www.springer.com/tdm",
+            "content_version": "tdm",
+            "start": "2006-01-01T00:00:00Z"
+          }
+        ]
       },
       "related_dois": [],
-      "status": "NEEDS_HUMAN",
-      "notes": "No locator is recorded in registry.yaml."
+      "status": "NO_AUTOMATED_FOLLOWUP",
+      "notes": ""
     },
     "survey-ref-042": {
       "input_fingerprint": "418851217e3e9c85dc964d777a93b606d15a858a881ff27448a1022ae37795b6",
@@ -5128,11 +5142,11 @@
       "notes": ""
     },
     "survey-ref-050": {
-      "input_fingerprint": "f729defac1fbb2b43e83573a439e287f64148f663a29ab2982be59da9ec12669",
-      "provider": "none",
-      "lookup_status": "MISSING_LOCATOR",
-      "checked_url": "",
-      "checked_on": "2026-09-19T18:58:49Z",
+      "input_fingerprint": "66c9ab1e82a7eac335ae8dd778d6d6dbc87e4661cd5ba6bf2230c8db10fa6bcc",
+      "provider": "html",
+      "lookup_status": "OK",
+      "checked_url": "https://people.math.ethz.ch/~jopeters/elements.html",
+      "checked_on": "2026-09-22T11:52:53Z",
       "metadata": [
         {
           "field": "identifier",
@@ -5143,20 +5157,20 @@
         {
           "field": "title",
           "catalogue_value": "—",
-          "source_value": "—",
-          "outcome": "NOT_APPLICABLE"
+          "source_value": "Jonas Peters",
+          "outcome": "MISSING_IN_CATALOGUE"
         },
         {
           "field": "authors",
           "catalogue_value": "—",
-          "source_value": "—",
-          "outcome": "NOT_APPLICABLE"
+          "source_value": "Jonas Peters",
+          "outcome": "MISSING_IN_CATALOGUE"
         },
         {
           "field": "date",
           "catalogue_value": "2017",
           "source_value": "—",
-          "outcome": "UNAVAILABLE"
+          "outcome": "MISSING_IN_SOURCE"
         },
         {
           "field": "venue",
@@ -5178,19 +5192,19 @@
         },
         {
           "field": "locator",
-          "catalogue_value": "—",
-          "source_value": "—",
-          "outcome": "NOT_APPLICABLE"
+          "catalogue_value": "https://people.math.ethz.ch/~jopeters/elements.html",
+          "source_value": "https://people.math.ethz.ch/~jopeters/elements.html",
+          "outcome": "MATCH"
         }
       ],
       "rights": {
-        "outcome": "RIGHTS_UNAVAILABLE",
-        "details": "No locator is recorded in registry.yaml.",
-        "url": ""
+        "outcome": "NO_EXPLICIT_RIGHTS",
+        "details": "No explicit rights or license metadata was found in the source HTML.",
+        "url": "https://people.math.ethz.ch/~jopeters/elements.html"
       },
       "related_dois": [],
       "status": "NEEDS_HUMAN",
-      "notes": "No locator is recorded in registry.yaml."
+      "notes": ""
     },
     "survey-ref-051": {
       "input_fingerprint": "132272063d1dfe14beaf17bb973fa0fd6801d43ab12d8ba7dbbcabfd51872758",
@@ -5655,11 +5669,11 @@
       "notes": ""
     },
     "survey-ref-058": {
-      "input_fingerprint": "19d208a3bf57beaf84c85487c29693e7fdeb5312d6eef430f94963a8bdaf6755",
-      "provider": "none",
-      "lookup_status": "MISSING_LOCATOR",
-      "checked_url": "",
-      "checked_on": "2026-09-19T18:58:53Z",
+      "input_fingerprint": "098e1731120a7a7375e0ab9971fa6e601313a327d72f1a5f712f86b9f45fe158",
+      "provider": "html",
+      "lookup_status": "OK",
+      "checked_url": "https://www.auai.org/uai2016/proceedings/papers/68.pdf",
+      "checked_on": "2026-09-22T12:13:27Z",
       "metadata": [
         {
           "field": "identifier",
@@ -5671,25 +5685,25 @@
           "field": "title",
           "catalogue_value": "Safely interruptible agents,",
           "source_value": "—",
-          "outcome": "UNAVAILABLE"
+          "outcome": "MISSING_IN_SOURCE"
         },
         {
           "field": "authors",
           "catalogue_value": "L. Orseau and S. Armstrong",
           "source_value": "—",
-          "outcome": "UNAVAILABLE"
+          "outcome": "MISSING_IN_SOURCE"
         },
         {
           "field": "date",
           "catalogue_value": "2016",
           "source_value": "—",
-          "outcome": "UNAVAILABLE"
+          "outcome": "MISSING_IN_SOURCE"
         },
         {
           "field": "venue",
           "catalogue_value": "in Proceedings of the Thirty-Second Conference on Uncertainty in Artificial Intelligence, Arlington, Virginia, USA, Jun. 2016, pp. 557–566",
           "source_value": "—",
-          "outcome": "UNAVAILABLE"
+          "outcome": "MISSING_IN_SOURCE"
         },
         {
           "field": "volume_issue",
@@ -5701,60 +5715,60 @@
           "field": "pages",
           "catalogue_value": "557–566",
           "source_value": "—",
-          "outcome": "UNAVAILABLE"
+          "outcome": "MISSING_IN_SOURCE"
         },
         {
           "field": "locator",
-          "catalogue_value": "—",
-          "source_value": "—",
-          "outcome": "NOT_APPLICABLE"
+          "catalogue_value": "https://www.auai.org/uai2016/proceedings/papers/68.pdf",
+          "source_value": "https://www.auai.org/uai2016/proceedings/papers/68.pdf",
+          "outcome": "MATCH"
         }
       ],
       "rights": {
-        "outcome": "RIGHTS_UNAVAILABLE",
-        "details": "No locator is recorded in registry.yaml.",
-        "url": ""
+        "outcome": "NO_EXPLICIT_RIGHTS",
+        "details": "No explicit rights or license metadata was found in the source HTML.",
+        "url": "https://www.auai.org/uai2016/proceedings/papers/68.pdf"
       },
       "related_dois": [],
       "status": "NEEDS_HUMAN",
-      "notes": "No locator is recorded in registry.yaml."
+      "notes": ""
     },
     "survey-ref-059": {
-      "input_fingerprint": "caa2a6ad5da1ca003894c0624f0a1e52e45ba7e3e0ebc688e216afdc93b4eeac",
-      "provider": "none",
-      "lookup_status": "MISSING_LOCATOR",
-      "checked_url": "",
-      "checked_on": "2026-09-19T18:58:53Z",
+      "input_fingerprint": "83498118c3537168624333f5065814f43d230d9e77b008bdf1ec4abe8f97b487",
+      "provider": "crossref",
+      "lookup_status": "OK",
+      "checked_url": "https://api.crossref.org/v1/works/10.24963%2Fijcai.2017%2F32",
+      "checked_on": "2026-09-22T13:57:01Z",
       "metadata": [
         {
           "field": "identifier",
-          "catalogue_value": "—",
-          "source_value": "—",
-          "outcome": "NOT_APPLICABLE"
+          "catalogue_value": "doi:10.24963/ijcai.2017/32",
+          "source_value": "doi:10.24963/ijcai.2017/32",
+          "outcome": "MATCH"
         },
         {
           "field": "title",
           "catalogue_value": "The off-switch game,",
-          "source_value": "—",
-          "outcome": "UNAVAILABLE"
+          "source_value": "The Off-Switch Game",
+          "outcome": "MATCH"
         },
         {
           "field": "authors",
           "catalogue_value": "D. Hadfield-Menell, A. Dragan, P. Abbeel, and S. Russell",
-          "source_value": "—",
-          "outcome": "UNAVAILABLE"
+          "source_value": "Dylan Hadfield-Menell; Anca Dragan; Pieter Abbeel; Stuart Russell",
+          "outcome": "MATCH"
         },
         {
           "field": "date",
           "catalogue_value": "2017",
-          "source_value": "—",
-          "outcome": "UNAVAILABLE"
+          "source_value": "2017-8",
+          "outcome": "MATCH"
         },
         {
           "field": "venue",
-          "catalogue_value": "in Proceedings of the 26th International Joint Conference on Artificial Intelligence, Melbourne, Australia, Aug. 2017, pp. 220–227",
-          "source_value": "—",
-          "outcome": "UNAVAILABLE"
+          "catalogue_value": "in Proceedings of the 26th International Joint Conference on Artificial Intelligence, Melbourne, Australia, Aug. 2017, pp. 220–227, doi: 10.24963/ijcai.2017/32",
+          "source_value": "Proceedings of the Twenty-Sixth International Joint Conference on Artificial Intelligence",
+          "outcome": "POSSIBLE_CONFLICT"
         },
         {
           "field": "volume_issue",
@@ -5765,24 +5779,24 @@
         {
           "field": "pages",
           "catalogue_value": "—",
-          "source_value": "—",
-          "outcome": "NOT_APPLICABLE"
+          "source_value": "220-227",
+          "outcome": "MISSING_IN_CATALOGUE"
         },
         {
           "field": "locator",
-          "catalogue_value": "—",
-          "source_value": "—",
-          "outcome": "NOT_APPLICABLE"
+          "catalogue_value": "https://doi.org/10.24963/ijcai.2017/32",
+          "source_value": "https://doi.org/10.24963/ijcai.2017/32",
+          "outcome": "MATCH"
         }
       ],
       "rights": {
-        "outcome": "RIGHTS_UNAVAILABLE",
-        "details": "No locator is recorded in registry.yaml.",
+        "outcome": "NO_EXPLICIT_RIGHTS",
+        "details": "Crossref returned no explicit license or rights metadata.",
         "url": ""
       },
       "related_dois": [],
       "status": "NEEDS_HUMAN",
-      "notes": "No locator is recorded in registry.yaml."
+      "notes": ""
     },
     "survey-ref-060": {
       "input_fingerprint": "6d7e9153575e34fadc279143cb0467f2b5574dfcc508eced78f1c83151d8f0bc",
@@ -5857,11 +5871,11 @@
       "notes": ""
     },
     "survey-ref-061": {
-      "input_fingerprint": "8be9b5e3637c98dc6eff57a159e69015f28fb5c5bec28db0bca734b995731f1b",
-      "provider": "none",
-      "lookup_status": "MISSING_LOCATOR",
-      "checked_url": "",
-      "checked_on": "2026-09-19T18:58:54Z",
+      "input_fingerprint": "961e23cfd7663027ff3fdf610a32a19afeec38d6be40077c98bad367415f1282",
+      "provider": "html",
+      "lookup_status": "OK",
+      "checked_url": "https://proceedings.neurips.cc/paper_files/paper/2017/hash/812b4ba287f5ee0bc9d43bbf5bbe87fb-Abstract.html",
+      "checked_on": "2026-09-22T14:55:03Z",
       "metadata": [
         {
           "field": "identifier",
@@ -5872,54 +5886,54 @@
         {
           "field": "title",
           "catalogue_value": "Dynamic safe interruptibility for decentralized multi-agent reinforcement learning,",
-          "source_value": "—",
-          "outcome": "UNAVAILABLE"
+          "source_value": "Dynamic Safe Interruptibility for Decentralized Multi-Agent Reinforcement Learning",
+          "outcome": "MATCH"
         },
         {
           "field": "authors",
           "catalogue_value": "E. M. E. Mhamdi, R. Guerraoui, H. Hendrikx, and A. Maurer",
-          "source_value": "—",
-          "outcome": "UNAVAILABLE"
+          "source_value": "El Mhamdi, El Mahdi; Guerraoui, Rachid; Hendrikx, Hadrien; Maurer, Alexandre",
+          "outcome": "POSSIBLE_CONFLICT"
         },
         {
           "field": "date",
           "catalogue_value": "2017",
-          "source_value": "—",
-          "outcome": "UNAVAILABLE"
+          "source_value": "2017",
+          "outcome": "MATCH"
         },
         {
           "field": "venue",
           "catalogue_value": "in Proceedings of the 31st International Conference on Neural Information Processing Systems, Red Hook, NY, USA, Dec. 2017, pp. 129–139",
-          "source_value": "—",
-          "outcome": "UNAVAILABLE"
+          "source_value": "Advances in Neural Information Processing Systems",
+          "outcome": "POSSIBLE_CONFLICT"
         },
         {
           "field": "volume_issue",
           "catalogue_value": "—",
-          "source_value": "—",
-          "outcome": "NOT_APPLICABLE"
+          "source_value": "vol. 30",
+          "outcome": "MISSING_IN_CATALOGUE"
         },
         {
           "field": "pages",
           "catalogue_value": "129–139",
           "source_value": "—",
-          "outcome": "UNAVAILABLE"
+          "outcome": "MISSING_IN_SOURCE"
         },
         {
           "field": "locator",
-          "catalogue_value": "—",
-          "source_value": "—",
-          "outcome": "NOT_APPLICABLE"
+          "catalogue_value": "https://proceedings.neurips.cc/paper_files/paper/2017/hash/812b4ba287f5ee0bc9d43bbf5bbe87fb-Abstract.html",
+          "source_value": "https://proceedings.neurips.cc/paper_files/paper/2017/hash/812b4ba287f5ee0bc9d43bbf5bbe87fb-Abstract.html",
+          "outcome": "MATCH"
         }
       ],
       "rights": {
-        "outcome": "RIGHTS_UNAVAILABLE",
-        "details": "No locator is recorded in registry.yaml.",
-        "url": ""
+        "outcome": "NO_EXPLICIT_RIGHTS",
+        "details": "No explicit rights or license metadata was found in the source HTML.",
+        "url": "https://proceedings.neurips.cc/paper_files/paper/2017/hash/812b4ba287f5ee0bc9d43bbf5bbe87fb-Abstract.html"
       },
       "related_dois": [],
       "status": "NEEDS_HUMAN",
-      "notes": "No locator is recorded in registry.yaml."
+      "notes": ""
     },
     "survey-ref-062": {
       "input_fingerprint": "b94080c8ed985fe3115948fa3c4491893c5a2518ce8fdc228c530b9fe9582d3f",
@@ -6261,11 +6275,11 @@
       "notes": ""
     },
     "survey-ref-067": {
-      "input_fingerprint": "99eb6ae75aeaf87d9adeef4a00d83164f0f17b2771fd78637db7b5d116910bbd",
-      "provider": "none",
-      "lookup_status": "MISSING_LOCATOR",
-      "checked_url": "",
-      "checked_on": "2026-09-19T18:58:58Z",
+      "input_fingerprint": "7d1804f1543a1f11670caece761fe52c3e214fd045088cd51174ae9c7c3daf61",
+      "provider": "html",
+      "lookup_status": "OK",
+      "checked_url": "https://dmip.webs.upv.es/papers/EIS98.pdf",
+      "checked_on": "2026-09-22T15:02:38Z",
       "metadata": [
         {
           "field": "identifier",
@@ -6277,25 +6291,25 @@
           "field": "title",
           "catalogue_value": "A formal definition of intelligence based on an intensional variant of Kolmogorov complexity,",
           "source_value": "—",
-          "outcome": "UNAVAILABLE"
+          "outcome": "MISSING_IN_SOURCE"
         },
         {
           "field": "authors",
           "catalogue_value": "J. Hernandez-orallo",
           "source_value": "—",
-          "outcome": "UNAVAILABLE"
+          "outcome": "MISSING_IN_SOURCE"
         },
         {
           "field": "date",
           "catalogue_value": "1998",
           "source_value": "—",
-          "outcome": "UNAVAILABLE"
+          "outcome": "MISSING_IN_SOURCE"
         },
         {
           "field": "venue",
           "catalogue_value": "in In Proceedings of the International Symposium of Engineering of Intelligent Systems (EIS’98, 1998, pp. 146–163",
           "source_value": "—",
-          "outcome": "UNAVAILABLE"
+          "outcome": "MISSING_IN_SOURCE"
         },
         {
           "field": "volume_issue",
@@ -6307,23 +6321,23 @@
           "field": "pages",
           "catalogue_value": "146–163",
           "source_value": "—",
-          "outcome": "UNAVAILABLE"
+          "outcome": "MISSING_IN_SOURCE"
         },
         {
           "field": "locator",
-          "catalogue_value": "—",
-          "source_value": "—",
-          "outcome": "NOT_APPLICABLE"
+          "catalogue_value": "https://dmip.webs.upv.es/papers/EIS98.pdf",
+          "source_value": "https://dmip.webs.upv.es/papers/EIS98.pdf",
+          "outcome": "MATCH"
         }
       ],
       "rights": {
-        "outcome": "RIGHTS_UNAVAILABLE",
-        "details": "No locator is recorded in registry.yaml.",
-        "url": ""
+        "outcome": "NO_EXPLICIT_RIGHTS",
+        "details": "No explicit rights or license metadata was found in the source HTML.",
+        "url": "https://dmip.webs.upv.es/papers/EIS98.pdf"
       },
       "related_dois": [],
       "status": "NEEDS_HUMAN",
-      "notes": "No locator is recorded in registry.yaml."
+      "notes": ""
     },
     "survey-ref-068": {
       "input_fingerprint": "54169444bf22e3a4d75a0cd314e86fb4cfb9f374c8e314a4fa757c8c8b8af327",
@@ -6670,11 +6684,11 @@
       "notes": ""
     },
     "survey-ref-073": {
-      "input_fingerprint": "4f9f6a48759e58646c6f7b1bb1567f7afce5678cdccadba31f8464a2f2d1277a",
-      "provider": "none",
-      "lookup_status": "MISSING_LOCATOR",
-      "checked_url": "",
-      "checked_on": "2026-09-19T18:59:02Z",
+      "input_fingerprint": "fcc7b97b8ab4b12621f9c02fda47486c4080f3df6e2f5a15b11018fb33de9682",
+      "provider": "html",
+      "lookup_status": "OK",
+      "checked_url": "https://www.cs.auckland.ac.nz/research/groups/CDMTCS/researchreports/publication-archive.php?selected-id=556",
+      "checked_on": "2026-09-23T18:49:25Z",
       "metadata": [
         {
           "field": "identifier",
@@ -6685,26 +6699,26 @@
         {
           "field": "title",
           "catalogue_value": "What Neural Networks Are (Not) Good For?,",
-          "source_value": "—",
-          "outcome": "UNAVAILABLE"
+          "source_value": "Research Reports",
+          "outcome": "POSSIBLE_CONFLICT"
         },
         {
           "field": "authors",
           "catalogue_value": "C. S. Calude, S. Heidari, and J. Sifakis",
           "source_value": "—",
-          "outcome": "UNAVAILABLE"
+          "outcome": "MISSING_IN_SOURCE"
         },
         {
           "field": "date",
           "catalogue_value": "2021",
           "source_value": "—",
-          "outcome": "UNAVAILABLE"
+          "outcome": "MISSING_IN_SOURCE"
         },
         {
           "field": "venue",
           "catalogue_value": "Research report CDMTCS- 556, Aug. 2021",
           "source_value": "—",
-          "outcome": "UNAVAILABLE"
+          "outcome": "MISSING_IN_SOURCE"
         },
         {
           "field": "volume_issue",
@@ -6720,19 +6734,19 @@
         },
         {
           "field": "locator",
-          "catalogue_value": "—",
-          "source_value": "—",
-          "outcome": "NOT_APPLICABLE"
+          "catalogue_value": "https://www.cs.auckland.ac.nz/research/groups/CDMTCS/researchreports/publication-archive.php?selected-id=556",
+          "source_value": "https://www.cs.auckland.ac.nz/research/groups/CDMTCS/researchreports/publication-archive.php?selected-id=556",
+          "outcome": "MATCH"
         }
       ],
       "rights": {
-        "outcome": "RIGHTS_UNAVAILABLE",
-        "details": "No locator is recorded in registry.yaml.",
-        "url": ""
+        "outcome": "NO_EXPLICIT_RIGHTS",
+        "details": "No explicit rights or license metadata was found in the source HTML.",
+        "url": "https://www.cs.auckland.ac.nz/research/groups/CDMTCS/researchreports/publication-archive.php?selected-id=556"
       },
       "related_dois": [],
       "status": "NEEDS_HUMAN",
-      "notes": "No locator is recorded in registry.yaml."
+      "notes": ""
     },
     "survey-ref-074": {
       "input_fingerprint": "f4205c2883f10473b2bd48bdc897c3c7a6fcd350c3720049342d72eaa9610c4b",

@@ -126,6 +126,7 @@
     },
     "schumacher-vose-whitley-2001": {
       "citation": "C. Schumacher, M. D. Vose, and L. D. Whitley, “The No Free Lunch and Problem Description Length,” in Proc. Genetic and Evolutionary Computation Conference (GECCO 2001), Morgan Kaufmann, 2001, pp. 565–570.",
+      "locator": "https://dl.acm.org/doi/10.5555/2955239.2955325",
       "role": "work"
     },
     "cover-thomas-2006": {
@@ -179,12 +180,14 @@
     },
     "survey-ref-023": {
       "survey_number": 23,
-      "citation": "R. M. Karp, “Reducibility among combinatorial problems,” in Complexity of computer computations, Springer, 1972, pp. 85–103.",
+      "citation": "R. M. Karp, “Reducibility among combinatorial problems,” in Complexity of computer computations, Springer, 1972, pp. 85–103, doi: 10.1007/978-1-4684-2001-2_9.",
+      "locator": "https://doi.org/10.1007/978-1-4684-2001-2_9",
       "role": "work"
     },
     "survey-ref-024": {
       "survey_number": 24,
-      "citation": "J. Klamka, “Controllability of dynamical systems. A survey,” vol. 61, no. No 2, pp. 335–342, 2013.",
+      "citation": "J. Klamka, “Controllability of dynamical systems. A survey,” Bulletin of the Polish Academy of Sciences: Technical Sciences, vol. 61, no. 2, pp. 335–342, 2013, doi: 10.2478/bpasts-2013-0031.",
+      "locator": "https://doi.org/10.2478/bpasts-2013-0031",
       "role": "work"
     },
     "survey-ref-025": {
@@ -196,6 +199,7 @@
     "survey-ref-026": {
       "survey_number": 26,
       "citation": "R. W. Ashby, Introduction to Cybernetics.1961 Edition. Chapman & Hall, 1961.",
+      "locator": "https://archive.org/details/introductiontocy0000ashb",
       "role": "work"
     },
     "survey-ref-027": {
@@ -212,12 +216,14 @@
     },
     "survey-ref-029": {
       "survey_number": 29,
-      "citation": "S. McKeever and M. Ridge, “The Many Moral Particularisms,” Can. J. Philos., vol. 35, no. 1, pp. 83–106, 2005.",
+      "citation": "S. McKeever and M. Ridge, “The Many Moral Particularisms,” Can. J. Philos., vol. 35, no. 1, pp. 83–106, 2005, doi: 10.1080/00455091.2005.10716582.",
+      "locator": "https://doi.org/10.1080/00455091.2005.10716582",
       "role": "work"
     },
     "survey-ref-030": {
       "survey_number": 30,
-      "citation": "P. S.-H. Tsu, “Can Virtue Be Codified?: An Inquiry on the Basis of Four Conceptions of Virtue,” in Virtue’s Reasons, Routledge, 2017.",
+      "citation": "P. S.-H. Tsu, “Can Virtue Be Codified?: An Inquiry on the Basis of Four Conceptions of Virtue,” in Virtue’s Reasons, Routledge, 2017, doi: 10.4324/9781315314259-5.",
+      "locator": "https://doi.org/10.4324/9781315314259-5",
       "role": "work"
     },
     "survey-ref-031": {
@@ -270,17 +276,20 @@
     },
     "survey-ref-039": {
       "survey_number": 39,
-      "citation": "G. J. Chaitin, Information, Randomness And Incompleteness: Papers On Algorithmic Information Theory. 1987.",
+      "citation": "G. J. Chaitin, Information, Randomness And Incompleteness: Papers On Algorithmic Information Theory. 1987, doi: 10.1142/0531.",
+      "locator": "https://doi.org/10.1142/0531",
       "role": "work"
     },
     "survey-ref-040": {
       "survey_number": 40,
       "citation": "A. Tarski, “The Concept of Truth in Formalized Languages,” in Logic, Semantics, Metamathematics, A. Tarski, Ed. Oxford University Press, 1936, pp. 152–278.",
+      "locator": "https://archive.org/details/logicsemanticsme0000tars",
       "role": "work"
     },
     "survey-ref-041": {
       "survey_number": 41,
-      "citation": "O. B. Bassler, “The Surveyability of Mathematical Proof: A Historical Perspective,” Synthese, vol. 148, no. 1, pp. 99–133, 2006.",
+      "citation": "O. B. Bassler, “The Surveyability of Mathematical Proof: A Historical Perspective,” Synthese, vol. 148, no. 1, pp. 99–133, 2006, doi: 10.1007/s11229-004-6221-7.",
+      "locator": "https://doi.org/10.1007/s11229-004-6221-7",
       "role": "work"
     },
     "survey-ref-042": {
@@ -334,6 +343,7 @@
     "survey-ref-050": {
       "survey_number": 50,
       "citation": "J. Peters, D. Janzing, and B. Schölkopf, Elements of Causal Inference: Foundations and Learning Algorithms. Cambridge, MA, USA: MIT Press, 2017.",
+      "locator": "https://people.math.ethz.ch/~jopeters/elements.html",
       "role": "work"
     },
     "survey-ref-051": {
@@ -382,11 +392,13 @@
     "survey-ref-058": {
       "survey_number": 58,
       "citation": "L. Orseau and S. Armstrong, “Safely interruptible agents,” in Proceedings of the Thirty-Second Conference on Uncertainty in Artificial Intelligence, Arlington, Virginia, USA, Jun. 2016, pp. 557–566.",
+      "locator": "https://www.auai.org/uai2016/proceedings/papers/68.pdf",
       "role": "work"
     },
     "survey-ref-059": {
       "survey_number": 59,
-      "citation": "D. Hadfield-Menell, A. Dragan, P. Abbeel, and S. Russell, “The off-switch game,” in Proceedings of the 26th International Joint Conference on Artificial Intelligence, Melbourne, Australia, Aug. 2017, pp. 220–227.",
+      "citation": "D. Hadfield-Menell, A. Dragan, P. Abbeel, and S. Russell, “The off-switch game,” in Proceedings of the 26th International Joint Conference on Artificial Intelligence, Melbourne, Australia, Aug. 2017, pp. 220–227, doi: 10.24963/ijcai.2017/32.",
+      "locator": "https://doi.org/10.24963/ijcai.2017/32",
       "role": "work"
     },
     "survey-ref-060": {
@@ -398,6 +410,7 @@
     "survey-ref-061": {
       "survey_number": 61,
       "citation": "E. M. E. Mhamdi, R. Guerraoui, H. Hendrikx, and A. Maurer, “Dynamic safe interruptibility for decentralized multi-agent reinforcement learning,” in Proceedings of the 31st International Conference on Neural Information Processing Systems, Red Hook, NY, USA, Dec. 2017, pp. 129–139.",
+      "locator": "https://proceedings.neurips.cc/paper_files/paper/2017/hash/812b4ba287f5ee0bc9d43bbf5bbe87fb-Abstract.html",
       "role": "work"
     },
     "survey-ref-062": {
@@ -433,6 +446,7 @@
     "survey-ref-067": {
       "survey_number": 67,
       "citation": "J. Hernandez-orallo, “A formal definition of intelligence based on an intensional variant of Kolmogorov complexity,” in In Proceedings of the International Symposium of Engineering of Intelligent Systems (EIS’98, 1998, pp. 146–163.",
+      "locator": "https://dmip.webs.upv.es/papers/EIS98.pdf",
       "role": "work"
     },
     "survey-ref-068": {
@@ -469,7 +483,9 @@
     "survey-ref-073": {
       "survey_number": 73,
       "citation": "C. S. Calude, S. Heidari, and J. Sifakis, “What Neural Networks Are (Not) Good For?,” Research report CDMTCS- 556, Aug. 2021.",
-      "role": "work"
+      "locator": "https://www.cs.auckland.ac.nz/research/groups/CDMTCS/researchreports/publication-archive.php?selected-id=556",
+      "role": "work",
+      "notes": "The survey cites the 2021 technical report. The locator links to the official University of Auckland CDMTCS Research Report 556 archive page. A later journal publication is C. S. Calude, S. Heidari, and J. Sifakis, 'What perceptron neural networks are (not) good for?', Information Sciences, vol. 621, 2023, pp. 844–857, doi: 10.1016/j.ins.2022.11.083. Statement correspondence between the technical report and journal publication has been verified by the contributor; the technical-report citation is retained to preserve the survey's source reference."
     },
     "survey-ref-074": {
       "survey_number": 74,
