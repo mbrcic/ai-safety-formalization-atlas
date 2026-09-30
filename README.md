@@ -1,3 +1,10 @@
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/assets/aisfa-logo-dark.svg">
+    <img src="docs/assets/aisfa-logo.svg" alt="AISFA: AI Safety Formalization Atlas. Two quotation corners above a solid gold square, the end-of-proof mark." width="310">
+  </picture>
+</p>
+
 # AI Safety Formalization Atlas
 
 [![CI](https://github.com/mbrcic/ai-safety-formalization-atlas/actions/workflows/ci.yml/badge.svg)](https://github.com/mbrcic/ai-safety-formalization-atlas/actions/workflows/ci.yml)
