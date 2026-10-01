@@ -197,7 +197,7 @@ Armstrong and Mindermann, NeurIPS 2018.
 > **Amended 2026-09-11.** This map was written against a paper that was **not
 > pinned anywhere** — no copy in the private literature store, no
 > manifest entry, no section in `docs/provenance/source-coverage-audit.md`. It
-> is now all three: manifest the private manifest of 2026-09-11, and
+> is now all three: manifested  2026-09-11, and
 > **section 20** of the coverage audit, graded row by row from rendered pages.
 > The table below is retained as written, and the audit section supersedes it
 > wherever they differ. Two rows below are now known to be wrong about the

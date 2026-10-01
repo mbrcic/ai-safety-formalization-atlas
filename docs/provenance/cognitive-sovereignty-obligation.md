@@ -30,12 +30,8 @@ published work, and none of them is gradeable as written:
 
 The first two have no operational content. The third has it and is not
 published. **Amended 2026-09-12:** the third is now *pinned* — the keynote
-notes are in the litsearch tree with a sha256, alongside
-`hec2026-ai-sovereignty-power-cognitive-control.md`
-(`d96bda81af49f868a7193d8e48a4a4070056e5d46e5a9775aaa4de4a44d46785`),
-`hec2026-claude-research.md`
-(`414b1ef679ac18f0601ba1fe03e2ae730bb23f38838e380de55a60512a19288e`) and the
-two transcripts. Pinned is not published: the five verbs remain ungradeable
+notes are held privately with a sha256, alongside the working files that
+accompany them. Pinned is not published: the five verbs remain ungradeable
 *against print*, and no row may claim coverage of them. What changes is that
 atlas-side interpretation of them can now be checked against a fixed document
 instead of against a recollection — the same standing this repository gives the
@@ -405,12 +401,9 @@ strictly stronger than reading 1, and reading 3 is comparable to neither.
    self-sourcing precedent — the `BY-*` rows are his own survey — the five-verb
    cut may be graded as his own reading of his own term rather than as
    third-party interpretation. Two things that does **not** change: the source
-   is still unpublished, so rows carry the sha256-pinned path and no locator,
+   is still unpublished, so rows carry a sha256 pin and no locator,
    the same standing as the power proposal; and it builds nothing, so *inspect*
-   and *contest* still have no object. One fact stays on the record because the
-   provenance has to: the five verbs' wording originates at
-   `cgpt-transcript.txt:714`, so adopting them as author is an act of adoption,
-   and that is what this entry records.
+   and *contest* still have no object.
 2. ~~Does Sourbut, Hammond & Wood, *Cooperation and Control in Delegation Games*
    (IJCAI 2024) represent SOV-1?~~ **Closed, 2026-09-08: no.** §3 states
    *"we make the simplifying assumption that there is a one-to-one correspondence
@@ -531,7 +524,7 @@ bear on this note, and item 7 and item 8 are *preserve* and *contest*.
 Fifteen works are pinned in
 the private manifest of 2026-09-12,
 sha256 `b4f4e264ac4c791afcc6754ad157eebb439e8f15e213b50552a5b6434808e37e`, which
-also hashes the five internal HEC2026 files. **Four have since been read** —
+also hashes the HEC2026 working files. **Four have since been read** —
 Jones & Sergot, Halpern & Moses, Keiding, and Herzig & Lorini from its text
 layer only — and three more (Clarkson & Schneider, Ramadge & Wonham,
 Myers-Sabelfeld-Zdancewic) in the private manifest of 2026-09-09. **None of

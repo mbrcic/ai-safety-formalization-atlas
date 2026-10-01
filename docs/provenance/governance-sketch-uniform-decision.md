@@ -4,8 +4,7 @@
 
 **Status.** Not a published source, not graded in
 [`source-coverage-audit.md`](source-coverage-audit.md), and no registry row
-cites it as print. It is an externally supplied sketch held in the user's
-literature tree, produced by a model that could see only the public branch of
+cites it as print. It is an externally supplied sketch, held privately, produced by a model that could see only the public branch of
 this atlas. This note exists so that the one result taken from it has a pinned
 origin rather than a remembered one.
 
@@ -162,6 +161,6 @@ Recorded so the omission is a decision rather than an oversight:
   are shown to match — "not an unrestricted iff between revocability and mandate
   preservation". Its §12 says a product of per-step retentions does not give
   eventual failure, and that mandate drift needs an explicitly fixed protected
-  family. Both land on `governance_kernel.md` in the user's own futurework tree,
+  family. Both land on a private working note of the maintainer's,
   whose §4 and §1.1 asserted the contrary; the dated strikes are there, not here,
   and neither claim ever entered this repository.

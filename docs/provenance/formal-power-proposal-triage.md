@@ -4,8 +4,7 @@
 
 **Status.** Not a published source, not graded in
 [`source-coverage-audit.md`](source-coverage-audit.md), and no registry row
-cites it as print. It is an internal proposal held in the user's own literature
-tree, and this note exists so that the one result taken from it has a pinned
+cites it as print. It is an internal proposal held privately, and this note exists so that the one result taken from it has a pinned
 origin rather than a remembered one.
 
 ## The document
@@ -14,9 +13,9 @@ Held privately; the files and their hashes:
 
 | File | sha256 |
 |---|---|
-| `FORMAL_SYSTEM-power.md` | `2ee1d90530cc43d2cb9eeb065cc9e6f5f78d5d44e9a727ac25989aa011f17584` |
-| `finite_models_power.py` | `8ca3f0c35ca15eaf14e4124ebcdcac7eaa47bbd69a34b7f47e9d60961101045e` |
-| `formal-power-transcript.md` | `25563b5ac68aa26fa28755d2bf7c052b58e9620634ef089fe2466433e5d2571d` |
+| the proposal | `2ee1d90530cc43d2cb9eeb065cc9e6f5f78d5d44e9a727ac25989aa011f17584` |
+| its finite-model script | `8ca3f0c35ca15eaf14e4124ebcdcac7eaa47bbd69a34b7f47e9d60961101045e` |
+| a companion working file | `25563b5ac68aa26fa28755d2bf7c052b58e9620634ef089fe2466433e5d2571d` |
 
 *A Formal System of Power, Sovereignty, and Cognitive Sovereignty.* Thirteen
 sections: a common dynamic substrate, qualitative power as strategy footprints
@@ -113,8 +112,7 @@ sovereignty, `D1`–`D8` dynamic, `C1`–`C12` cognitive and epistemic, `A1`–`
 derived AI-safety, `B1`–`B8` adapters to neighbouring theories. §9's fourteen
 specialization types and §11's five worked cases are prose and are not results.
 
-`PowerKernel_uncompiled.lean`, the 236-line draft §12 names, **is not in the
-folder** — the transcript links it to a sandbox path that no longer exists. So
+The 236-line Lean draft §12 names **was not supplied with the document**. So
 there is no prior Lean to reuse or attribute, and everything below is written
 here.
 

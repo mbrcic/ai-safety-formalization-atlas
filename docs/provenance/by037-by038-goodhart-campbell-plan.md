@@ -133,7 +133,7 @@ the proxy--goal link**:
 
 **The consequence for this row is a constraint, not an arrow: any rendering of
 BY-037 carrying only one function is a category error.** That is the arity point
-the subagent made against arrow E, and it applies to more than arrow E -- see the
+an earlier review made against arrow E, and it applies to more than arrow E -- see the
 amendment to arrow G, where this document made the same mistake.
 
 The ledger's own wording -- *"optimization pressure can destroy its value as a
@@ -387,7 +387,7 @@ question about shape.
 error, and this document made that error twice before catching it.**
 
 Manheim & Garrabrant's definition makes the goal and the proxy constitutive, and
-each of the four variants is a different way their *link* fails. The subagent
+each of the four variants is a different way their *link* fails. An earlier review
 refuted arrow E on precisely this ground -- `Arena.collapse` is one map's image,
 and there is no second object for it to come apart from. Arrow G was then written
 with the same defect and has been amended rather than repaired. So the constraint
@@ -509,7 +509,7 @@ also the reading closest to Goodhart's own sentence once the proxy framing is
 restored -- a regularity fitted on the bulk and then exploited in the tail, where
 it was never estimated.
 
-It is the worse *citation*, and the reason is the subagent's original refutation
+It is the worse *citation*, and the reason is that review's original refutation
 of arrow C, which stands: Manheim & Garrabrant number nothing. The statement above
 is this atlas's sharpening of their prose, not a transcription of a printed
 theorem, and the ledger's conventions do not let an unnumbered gloss be booked as

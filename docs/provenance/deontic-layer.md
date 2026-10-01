@@ -270,7 +270,7 @@ That is genuinely the state of the art and it is **not this module's object**.
 This module is deliberately *not* a deontic logic: no `O`, no `P` operator, no
 modal axiom, no semantics, no inference relation. Porting an embedding of
 Carmo–Jones or Åqvist `E` would be answering a different question — "which
-deontic logic does the atlas adopt?" — which is still open and is the user's to
+deontic logic does the atlas adopt?" — which is still open and is the maintainer's to
 take. If that question is ever answered yes, **those embeddings are where to
 start, and this note is the pointer.**
 

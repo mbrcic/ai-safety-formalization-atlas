@@ -1675,8 +1675,8 @@ this table. Sections 9 to 12 close that.
 
 **Which text.** The pinned file is the **long version**, arXiv:1705.08417v2,
 19 Aug 2017, 24 pp., sha256
-`68ed8a0dcadc93d5d494538d666cb09c428b7b81a1e8ff681a8d5f6fce153dad`, manifest
-the private manifest of 2026-09-09 in the literature directory. The atlas's
+`68ed8a0dcadc93d5d494538d666cb09c428b7b81a1e8ff681a8d5f6fce153dad`, manifested
+ 2026-09-09 in the literature directory. The atlas's
 modules cite "IJCAI 2017; long version arXiv:1705.08417"; the IJCAI proceedings
 paper has **not** been read, and no claim is made here that the two number
 their statements alike.
@@ -2180,8 +2180,8 @@ sections sharing a target is what it looks like when two papers share a section,
 which is exactly what happened here.
 
 **Which text.** `orseau-ring-authorversion-2011-self-modification-and-mortality-in-artificial-agents.pdf`,
-sha256 `e211682aa5cc9e1bcd7f0a277030a4a909ff52695ff4e1d0fa3905d9b223b52d`, manifest
-the private manifest of 2026-09-09. Ten pages by its own page numbering and its
+sha256 `e211682aa5cc9e1bcd7f0a277030a4a909ff52695ff4e1d0fa3905d9b223b52d`, manifested
+ 2026-09-09. Ten pages by its own page numbering and its
 own `pdfinfo`; Producer pdfTeX-1.40.10, CreationDate 2011-03-03. Title and
 authors are read off page 1: *Self-Modification and Mortality in Artificial
 Agents*, Laurent Orseau (UMR AgroParisTech 518 / INRA) and Mark Ring (IDSIA).
@@ -2809,8 +2809,8 @@ module needs no registry row of its own because this section's target module is
 73.
 
 **Which text, and a filename mismatch.** The file is `peleg1997.pdf`, sha256
-`99039339aae01cb8e903ebab…`, manifest the private manifest of 2026-09-09,
-user-supplied. **Its own first page reads "Soc Choice Welfare (1998) 15: 67–80"
+`99039339aae01cb8e903ebab…`, manifested  2026-09-09,
+maintainer-supplied. **Its own first page reads "Soc Choice Welfare (1998) 15: 67–80"
 and "© Springer-Verlag 1998"**, with "Received: 25 November 1994 / Accepted: 28
 June 1996". The filename and OpenAlex both say 1997; the document says 1998, and
 the heading above follows the document. This is the second filename-versus-
@@ -2939,8 +2939,8 @@ file, which are journal pages 1046 and 1047; Carter and Shnayderman from
 rendered pages 4 and 5, which are the article's own pages 4 and 5.
 
 **Which texts.** List and Valentini is the **published** *Ethics* version, sha256
-`93fb7dad01fa93d20ce33550…`, 32 pp., manifest
-the private manifest of 2026-09-09. Carter and Shnayderman, sha256
+`93fb7dad01fa93d20ce33550…`, 32 pp., manifested
+ 2026-09-09. Carter and Shnayderman, sha256
 `bb5bf47c635036527739b5d6…`, 11 pp., is **not** a final version: its own page 1
 gives the pagination as "1–11" and its running head reads "Political Studies
 Review 00(0)", so it carries no volume, issue or journal page numbers. It is the
@@ -3112,8 +3112,8 @@ rows grade `Yes`.
 
 **Graded for the first time on 2026-09-11**, and this closes the module-ledger's
 live debt. Statements read from rendered pages 1, 3 and 4 of the pinned file, 7
-pp., sha256 `66eb3448f8f36602d71f65c1…`, manifest
-the private manifest of 2026-09-11.
+pp., sha256 `66eb3448f8f36602d71f65c1…`, manifested
+ 2026-09-11.
 
 **What was actually wrong, and it was not the ledger line.** The module-ledger
 listed this module as owed against *"Melo, Maximo, Soma and Castro,
@@ -3180,8 +3180,8 @@ gap print's informality lets it step over.
 
 **Graded for the first time on 2026-09-11**, the same day the module it grades
 landed. Both printed pages read as rendered images, sha256
-`fdaa652dc63e69a5bcae88cd679d2b78…`, manifest
-the private manifest of 2026-09-11. The file was supplied by the user
+`fdaa652dc63e69a5bcae88cd679d2b78…`, manifested
+ 2026-09-11. The file was supplied by the maintainer
 after the triage note recorded that IEEE Xplore would not serve it.
 
 **Why this section exists, and what it corrects.** This two-page note is the
@@ -3471,7 +3471,7 @@ still holds.
 
 **Graded for the first time on 2026-09-13.** Held as
 `wooldridge-van-der-hoek-published-jal-2005-on-obligations-and-normative-ability.pdf`,
-sha256 `21970069…`, 25 pp., manifest the private manifest of 2026-09-13.
+sha256 `21970069…`, 25 pp., manifested  2026-09-13.
 Statements read from **rendered page images at journal pages 402, 403, 405, 407,
 408, 409 and 410**; §§6–8 and Examples 1–7 are located by text extraction and
 graded from their section prose, which is why no numbered statement of theirs is
@@ -3541,8 +3541,8 @@ object print then argues is the interesting one, by (2). The note is corrected.
 **Graded for the first time on 2026-09-13**, the same day the module was built.
 Held as
 `alfonseca-cebrian-fernandez-anta-coviello-abeliuk-rahwan-jair-2021-superintelligence-cannot-be-contained.pdf`,
-sha256 `ee8cfd46…`, 12 pp., manifest
-the private manifest of 2026-09-13. The running head reads *Journal of
+sha256 `ee8cfd46…`, 12 pp., manifested
+ 2026-09-13. The running head reads *Journal of
 Artificial Intelligence Research 70 (2021) 65-76, Submitted 06/2020; published
 01/2021*, so this is **the published text and not a preprint**. Statements read
 from a **rendered image of journal page 71**; pages 68, 69, 70, 72 and 73 are

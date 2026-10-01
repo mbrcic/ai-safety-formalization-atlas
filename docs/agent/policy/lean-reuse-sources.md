@@ -311,7 +311,7 @@ scriptable, and lawful:
 Send a `User-Agent` with a contact address; OpenAlex and arXiv both ask for it.
 
 **Only lawful routes.** A paper enters the private literature store
-from the publisher, the author, a repository, an open-access index, or the user.
+from the publisher, the author, a repository, an open-access index, or the maintainer.
 Sites that redistribute paywalled papers without a licence are not an option
 here, whatever the convenience: the sources manifest is a provenance record and
 has to be able to state where a file lawfully came from. When every index

@@ -61,7 +61,7 @@ further than the search behind it did.
 
 **Amended the same day: the source is now pinned and read.** The paragraph
 below was written while IEEE Xplore would not serve the note — the DOI and the
-Xplore record both returned empty content on 2026-09-11. **The user then
+Xplore record both returned empty content on 2026-09-11. **The maintainer then
 supplied the paper**, `klamka1972.pdf`, sha256
 `fdaa652dc63e69a5bcae88cd679d2b7832d7e07fea0bf2c1a7acb18f6f0a2751`, and both
 pages were read as rendered images. The comparison below was made against the
