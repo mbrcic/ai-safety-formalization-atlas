@@ -514,4 +514,71 @@ public theorem mixedBins_not_approxPerfectPrediction :
   rw [slack_one_sixtyfourth, mixedBins_positiveAverage] at h0
   norm_num at h0
 
+/-! ## The supporting statements, applied
+
+Each statement below is applied at an instance where its hypotheses hold and its
+conclusion is not trivially true. -/
+
+/-- The score split at `nearMiss`, group `0`: the bin's total score `5/18 · 3 = 5/6`
+is the positive class's `5/18 · 3/4 = 5/24` plus the negative class's `5/8`. -/
+public theorem nearMiss_score_split :
+    positiveScore nearMiss nearMissAssignment 0 + negativeScore nearMiss nearMissAssignment 0
+      = 5 / 6 := by
+  rw [← sum_score_split]
+  simp; norm_num
+
+/-- `separated` meets the upper bound of `positiveAverage_le_one` with equality in
+both groups: the positive class sits entirely in the unit bin. -/
+public theorem separated_positiveAverage_attains_one (t : Fin 2) :
+    positiveAverage separated separatedAssignment t ≤ 1 ∧
+      positiveAverage separated separatedAssignment t = 1 :=
+  ⟨positiveAverage_le_one separated separatedAssignment (separated_mu_pos t),
+    separated_positiveAverage t⟩
+
+/-- §3's core bound at `separated`, `ε = 1/64`: group `1`'s base rate `1/4` is
+more than `√ε = 1/8` below group `0`'s `1/2`, so the lemma forces group `1`'s
+positive class to average at least `1 - 2/64 - 3/32 = 7/8`. It averages `1`. -/
+public theorem separated_average_lower_bound :
+    (7 / 8 : ℝ) ≤ positiveAverage separated separatedAssignment 1 := by
+  have hsqrt : Real.sqrt (1 / 64 : ℝ) = 1 / 8 := by
+    rw [show (1 : ℝ) / 64 = (1 / 8) ^ 2 by norm_num, Real.sqrt_sq (by norm_num)]
+  have h := average_lower_bound separated separatedAssignment (ε := 1 / 64)
+    (by norm_num) (by norm_num) separated_mu_pos separated_mu_lt_N
+    separated_approxCalibrated separated_approxBalancedNegative
+    separated_approxBalancedPositive (t := 1) (u := 0) (by decide)
+    (by rw [separated_baseRate_zero, separated_baseRate_one, hsqrt]; norm_num)
+  rw [hsqrt] at h
+  linarith
+
+/-- Theorem 1.1 recovered through the approximate module, at an instance meeting
+all three exact conditions; `separated` lands on the first case. -/
+public theorem separated_exact_conclusion :
+    PerfectPrediction separated ∨ EqualBaseRates separated :=
+  perfect_prediction_or_equal_base_rates_of_approx separated separatedAssignment
+    separated_mu_pos separated_mu_lt_N separated_calibrated
+    separated_balancedNegative separated_balancedPositive
+
+/-- Print's existential form, instantiated at `nearMiss` with `ε = 1/9`. -/
+public theorem nearMiss_exists_slack_function :
+    ∃ f : ℝ → ℝ, Continuous f ∧ Filter.Tendsto f (nhds 0) (nhds 0) ∧
+      (ApproxPerfectPrediction (f (1 / 9)) nearMiss nearMissAssignment ∨
+        ApproxEqualBaseRates (f (1 / 9)) nearMiss) := by
+  obtain ⟨f, hf, hlim, h⟩ := exists_slack_function
+  exact ⟨f, hf, hlim, h (Fin 2) (Fin 1) nearMiss nearMissAssignment (1 / 9)
+    (by norm_num) nearMiss_mu_pos nearMiss_mu_lt_N nearMiss_approxCalibrated
+    nearMiss_approxBalancedNegative nearMiss_approxBalancedPositive⟩
+
+/-- The existential form for the competing sign-only repair, instantiated at
+`nearMiss` with `ε = 1/8`, where that orientation holds. -/
+public theorem nearMiss_exists_slack_function_score_relative :
+    ∃ f : ℝ → ℝ, Continuous f ∧ Filter.Tendsto f (nhds 0) (nhds 0) ∧
+      (ApproxPerfectPrediction (f (1 / 8)) nearMiss nearMissAssignment ∨
+        ApproxEqualBaseRates (f (1 / 8)) nearMiss) := by
+  obtain ⟨f, hf, hlim, h⟩ := exists_slack_function_score_relative
+  exact ⟨f, hf, hlim, h (Fin 2) (Fin 1) nearMiss nearMissAssignment (1 / 8)
+    (by norm_num) nearMiss_mu_pos nearMiss_mu_lt_N
+    nearMiss_approxCalibratedScoreRelative
+    nearMiss_scoreRelative_approxBalancedNegative
+    nearMiss_scoreRelative_approxBalancedPositive⟩
+
 end AISafetyAtlas.Examples.Fairness.ApproximateRiskAssignment

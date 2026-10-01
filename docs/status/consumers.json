@@ -1,8 +1,8 @@
 {
   "counts": {
-    "declarations": 271,
-    "examples_only": 228,
-    "load_bearing": 43,
+    "declarations": 375,
+    "examples_only": 317,
+    "load_bearing": 58,
     "no_consumer": 0
   },
   "declarations": {
@@ -38,6 +38,7 @@
     },
     "AISafetyAtlas.Causal.Model.value_const_sub": {
       "consumers": [
+        "AISafetyAtlas.Examples.Causal.Decision",
         "AISafetyAtlas.Examples.Registry"
       ],
       "origin": "LAND-CAUSAL-DECISION-001",
@@ -45,10 +46,11 @@
     },
     "AISafetyAtlas.Causal.Model.value_eq": {
       "consumers": [
+        "AISafetyAtlas.Causal.DecisionNetwork",
         "AISafetyAtlas.Examples.Registry"
       ],
       "origin": "LAND-CAUSAL-DECISION-001",
-      "tier": "examples-only"
+      "tier": "load-bearing"
     },
     "AISafetyAtlas.Causal.Model.value_le_sign": {
       "consumers": [
@@ -59,6 +61,7 @@
     },
     "AISafetyAtlas.Causal.Model.\u0394_fixProfile": {
       "consumers": [
+        "AISafetyAtlas.Examples.Causal.Model",
         "AISafetyAtlas.Examples.Registry"
       ],
       "origin": "LAND-CAUSAL-COLLISION-001",
@@ -80,6 +83,13 @@
       "origin": "LAND-CAUSAL-STRUCTURAL-001",
       "tier": "examples-only"
     },
+    "AISafetyAtlas.Causal.SCIM.observableLaw_withPolicy_eq_of_notDownstream": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-CAUSAL-STRUCTURAL-001",
+      "tier": "examples-only"
+    },
     "AISafetyAtlas.Causal.SCIM.policy_ext_single": {
       "consumers": [
         "AISafetyAtlas.Examples.Registry"
@@ -89,6 +99,7 @@
     },
     "AISafetyAtlas.Causal.SCM.eval_eq_f": {
       "consumers": [
+        "AISafetyAtlas.Examples.Causal.Incentive",
         "AISafetyAtlas.Examples.Causal.StructuralModel",
         "AISafetyAtlas.Examples.Registry"
       ],
@@ -129,6 +140,7 @@
     },
     "AISafetyAtlas.Causal.exists_behaviorEq_pair_of_not_knowable": {
       "consumers": [
+        "AISafetyAtlas.Examples.Causal.BehavioralCollision",
         "AISafetyAtlas.Examples.Registry"
       ],
       "origin": "LAND-CAUSAL-KNOW-001",
@@ -145,6 +157,7 @@
     },
     "AISafetyAtlas.Causal.modelError_eq_zero_iff": {
       "consumers": [
+        "AISafetyAtlas.Examples.Causal.Decision",
         "AISafetyAtlas.Examples.Registry"
       ],
       "origin": "LAND-CAUSAL-DECISION-001",
@@ -152,6 +165,7 @@
     },
     "AISafetyAtlas.Causal.not_inIdentifiedSet_of_neg": {
       "consumers": [
+        "AISafetyAtlas.Examples.Causal.Decision",
         "AISafetyAtlas.Examples.Registry"
       ],
       "origin": "LAND-CAUSAL-DECISION-001",
@@ -180,6 +194,38 @@
       "origin": "BY-021",
       "tier": "examples-only"
     },
+    "AISafetyAtlas.Compositional.AgentNetwork.symmetry_is_the_shared_cause": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Practitioner",
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "BY-043",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Compositional.Hyperproperties.Evaluation.sampling_misses_subsingleton": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Compositional.Hyperproperties.Evaluation",
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-EVAL-BLINDSPOT-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Compositional.Hyperproperties.Evaluation.traceProperty_knowable_of_score_decides": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Compositional.Hyperproperties.Evaluation",
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-EVAL-BLINDSPOT-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Compositional.Hyperproperties.exists_bad_trajectories_of_isKSafety": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Compositional.TraceSystem",
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-COMP-RUNTRACES-001",
+      "tier": "examples-only"
+    },
     "AISafetyAtlas.Compositional.Hyperproperties.k_safety_iff_finite_self_composition": {
       "consumers": [
         "AISafetyAtlas.Compositional.Hyperproperties.Product",
@@ -199,6 +245,7 @@
     },
     "AISafetyAtlas.Compositional.Hyperproperties.not_isSafetyPredicate_of_realizedSet_collision": {
       "consumers": [
+        "AISafetyAtlas.Examples.Compositional.Knowability",
         "AISafetyAtlas.Examples.Registry"
       ],
       "origin": "LAND-HYPER-KNOW-001",
@@ -214,6 +261,7 @@
     },
     "AISafetyAtlas.Compositional.Networks.not_electsLeader_of_fixedPointFree": {
       "consumers": [
+        "AISafetyAtlas.Examples.Compositional.NetworkTraces",
         "AISafetyAtlas.Examples.Registry"
       ],
       "origin": "LAND-COMP-TRACE-001",
@@ -221,6 +269,7 @@
     },
     "AISafetyAtlas.Compositional.Networks.realizes_systemOf": {
       "consumers": [
+        "AISafetyAtlas.Examples.Compositional.NetworkTraces",
         "AISafetyAtlas.Examples.Registry"
       ],
       "origin": "LAND-COMP-TRACE-001",
@@ -228,6 +277,7 @@
     },
     "AISafetyAtlas.Compositional.Networks.runFor_eq_of_view_eq": {
       "consumers": [
+        "AISafetyAtlas.Compositional.AgentNetwork",
         "AISafetyAtlas.Compositional.Knowability",
         "AISafetyAtlas.Examples.PublicAPI",
         "AISafetyAtlas.Examples.Registry"
@@ -265,6 +315,7 @@
         "AISafetyAtlas.Examples.HaltingExample",
         "AISafetyAtlas.Examples.PublicAPI",
         "AISafetyAtlas.Examples.Registry",
+        "AISafetyAtlas.Verification.Containment",
         "AISafetyAtlas.Verification.Robot"
       ],
       "origin": "BY-014",
@@ -298,13 +349,22 @@
       "consumers": [
         "AISafetyAtlas.Examples.PublicAPI",
         "AISafetyAtlas.Examples.Registry",
-        "AISafetyAtlas.Verification"
+        "AISafetyAtlas.Verification",
+        "AISafetyAtlas.Verification.FullAccess"
       ],
       "origin": "BY-012",
       "tier": "load-bearing"
     },
+    "AISafetyAtlas.Control.OversightBudget.oversight_reduction_le_budget": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "BY-005",
+      "tier": "examples-only"
+    },
     "AISafetyAtlas.Control.ashby_logVariety_ge": {
       "consumers": [
+        "AISafetyAtlas.Examples.Control.RequisiteVariety",
         "AISafetyAtlas.Examples.Registry"
       ],
       "origin": "BY-004",
@@ -312,6 +372,7 @@
     },
     "AISafetyAtlas.Control.ashby_logVariety_ge_mul": {
       "consumers": [
+        "AISafetyAtlas.Examples.Control.RequisiteVariety",
         "AISafetyAtlas.Examples.Registry"
       ],
       "origin": "BY-004",
@@ -327,6 +388,7 @@
     },
     "AISafetyAtlas.Control.ashby_variety_ge_isSharp": {
       "consumers": [
+        "AISafetyAtlas.Examples.Control.RequisiteVariety",
         "AISafetyAtlas.Examples.Registry"
       ],
       "origin": "BY-004",
@@ -334,6 +396,7 @@
     },
     "AISafetyAtlas.Control.card_ceilDiv_le_admittedOutcomes": {
       "consumers": [
+        "AISafetyAtlas.Examples.Control.RequisiteVariety",
         "AISafetyAtlas.Examples.Registry"
       ],
       "origin": "BY-004",
@@ -433,10 +496,11 @@
     },
     "AISafetyAtlas.Control.entropyReduction_le_of_openLoopBound": {
       "consumers": [
+        "AISafetyAtlas.Control.OversightBudget",
         "AISafetyAtlas.Examples.Registry"
       ],
       "origin": "BY-005",
-      "tier": "examples-only"
+      "tier": "load-bearing"
     },
     "AISafetyAtlas.Control.entropyReduction_le_openLoopMax": {
       "consumers": [
@@ -456,6 +520,7 @@
     },
     "AISafetyAtlas.Control.entropy_ge_of_sensor": {
       "consumers": [
+        "AISafetyAtlas.Examples.Control.OversightBudget",
         "AISafetyAtlas.Examples.Registry"
       ],
       "origin": "BY-004",
@@ -508,6 +573,7 @@
     },
     "AISafetyAtlas.Control.isPlant_plantOutcome": {
       "consumers": [
+        "AISafetyAtlas.Examples.Control.InformationLimits",
         "AISafetyAtlas.Examples.Registry"
       ],
       "origin": "BY-005",
@@ -531,6 +597,7 @@
     },
     "AISafetyAtlas.Control.minControlLoss_eq_entropy_noise_iff_of_attained": {
       "consumers": [
+        "AISafetyAtlas.Examples.Control.InformationLimits",
         "AISafetyAtlas.Examples.Registry"
       ],
       "origin": "BY-005",
@@ -538,6 +605,7 @@
     },
     "AISafetyAtlas.Control.minControlLoss_eq_sInf_condMutualInfo": {
       "consumers": [
+        "AISafetyAtlas.Examples.Control.InformationLimits",
         "AISafetyAtlas.Examples.Registry"
       ],
       "origin": "BY-005",
@@ -545,6 +613,7 @@
     },
     "AISafetyAtlas.Control.minControlLoss_eq_sInf_mutualInfo_sub": {
       "consumers": [
+        "AISafetyAtlas.Examples.Control.InformationLimits",
         "AISafetyAtlas.Examples.Registry"
       ],
       "origin": "BY-005",
@@ -614,6 +683,32 @@
       ],
       "origin": "BY-004",
       "tier": "load-bearing"
+    },
+    "AISafetyAtlas.Decision.J_linear": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Decision.Occupancy",
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-GOODHART-HACKABILITY-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Decision.MDP.run_congr_obs": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Decision.MDP",
+        "AISafetyAtlas.Examples.Registry",
+        "AISafetyAtlas.Wireheading.StochasticCRMDP",
+        "AISafetyAtlas.Wireheading.StochasticPolicy"
+      ],
+      "origin": "LAND-DEC-MDP-001",
+      "tier": "load-bearing"
+    },
+    "AISafetyAtlas.Decision.vPiBdd_eq_vPi": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Decision.BoundedValue",
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-BELLMAN-BDD-001",
+      "tier": "examples-only"
     },
     "AISafetyAtlas.Examples.Causal.DecisionNetwork.figIsUnmediated": {
       "consumers": [
@@ -732,6 +827,27 @@
       "origin": "LAND-CAUSAL-COLLISION-001",
       "tier": "examples-only"
     },
+    "AISafetyAtlas.Examples.LinearSystems.blind_not_determinesStateOn": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "BY-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Examples.LinearSystems.deaf_not_isCompletelyReachable": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "BY-002",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Examples.Sovereignty.steer_isSteering": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-SOV-STEERING-001",
+      "tier": "examples-only"
+    },
     "AISafetyAtlas.Explainability.attribution_impossibility": {
       "consumers": [
         "AISafetyAtlas.Examples.PublicAPI",
@@ -742,6 +858,7 @@
     },
     "AISafetyAtlas.Explainability.attribution_impossibility_weak": {
       "consumers": [
+        "AISafetyAtlas.Examples.Explainability",
         "AISafetyAtlas.Examples.Registry"
       ],
       "origin": "LAND-ATTR-001",
@@ -765,6 +882,7 @@
     },
     "AISafetyAtlas.Fairness.average_lower_bound": {
       "consumers": [
+        "AISafetyAtlas.Examples.Fairness.ApproximateRiskAssignment",
         "AISafetyAtlas.Examples.Registry"
       ],
       "origin": "BY-010",
@@ -772,6 +890,7 @@
     },
     "AISafetyAtlas.Fairness.exists_slack_function": {
       "consumers": [
+        "AISafetyAtlas.Examples.Fairness.ApproximateRiskAssignment",
         "AISafetyAtlas.Examples.Registry"
       ],
       "origin": "BY-010",
@@ -779,6 +898,7 @@
     },
     "AISafetyAtlas.Fairness.exists_slack_function_score_relative": {
       "consumers": [
+        "AISafetyAtlas.Examples.Fairness.ApproximateRiskAssignment",
         "AISafetyAtlas.Examples.Registry"
       ],
       "origin": "BY-010",
@@ -803,13 +923,15 @@
     "AISafetyAtlas.Fairness.perfect_prediction_or_equal_base_rates": {
       "consumers": [
         "AISafetyAtlas.Examples.Fairness.RiskAssignment",
-        "AISafetyAtlas.Examples.Registry"
+        "AISafetyAtlas.Examples.Registry",
+        "AISafetyAtlas.Fairness.Tradeoff"
       ],
       "origin": "BY-010",
-      "tier": "examples-only"
+      "tier": "load-bearing"
     },
     "AISafetyAtlas.Fairness.perfect_prediction_or_equal_base_rates_of_approx": {
       "consumers": [
+        "AISafetyAtlas.Examples.Fairness.ApproximateRiskAssignment",
         "AISafetyAtlas.Examples.Registry"
       ],
       "origin": "BY-010",
@@ -828,6 +950,63 @@
         "AISafetyAtlas.Examples.Registry"
       ],
       "origin": "BY-010",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Goodhart.Extremal.fits_underdetermined_off_observed": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Goodhart.Extremal",
+        "AISafetyAtlas.Examples.Registry",
+        "AISafetyAtlas.Goodhart.RegulatoryTarget"
+      ],
+      "origin": "LAND-GOODHART-SELECTION-001",
+      "tier": "load-bearing"
+    },
+    "AISafetyAtlas.Goodhart.RegulatoryTarget.certified_systems_were_never_examined": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Goodhart.RegulatoryTarget",
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-GOODHART-REGTARGET-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Goodhart.RegulatoryTarget.raising_the_bar_does_not_help": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Goodhart.RegulatoryTarget",
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-GOODHART-REGTARGET-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Goodhart.RegulatoryTarget.risk_unconstrained_on_certified": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Goodhart.RegulatoryTarget",
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-GOODHART-REGTARGET-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Goodhart.gap_selection_ge": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Goodhart.Regressional",
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-GOODHART-SELECTION-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Goodhart.unhackable_of_simplifies_common": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Goodhart.Hackability",
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-GOODHART-HACKABILITY-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Goodhart.zhuang_hadfield_menell_theorem_one": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Goodhart.Overoptimization",
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-GOODHART-OVEROPT-001",
       "tier": "examples-only"
     },
     "AISafetyAtlas.Inference.PhysicalKnowledgeWitness.eq_target_on_of_refinesOn": {
@@ -861,6 +1040,7 @@
     },
     "AISafetyAtlas.Inference.corollary23": {
       "consumers": [
+        "AISafetyAtlas.Examples.Inference.PhysicalKnowledge.Epistemic",
         "AISafetyAtlas.Examples.Registry"
       ],
       "origin": "CLM-WOLPERT-EPISTEMIC-001",
@@ -876,6 +1056,7 @@
     },
     "AISafetyAtlas.Inference.exists_distinguishable_accuracy_near_one": {
       "consumers": [
+        "AISafetyAtlas.Examples.Inference.StochasticApproximation",
         "AISafetyAtlas.Examples.Registry"
       ],
       "origin": "CLM-WOLPERT-APPROX-001",
@@ -883,6 +1064,7 @@
     },
     "AISafetyAtlas.Inference.exists_never_physicallyKnown": {
       "consumers": [
+        "AISafetyAtlas.Examples.Inference.PhysicalKnowledge",
         "AISafetyAtlas.Examples.Registry"
       ],
       "origin": "CLM-WOLPERT-KNOW-001",
@@ -906,6 +1088,7 @@
     },
     "AISafetyAtlas.Inference.fig5_accuracy_gap": {
       "consumers": [
+        "AISafetyAtlas.Examples.Inference.StochasticApproximation",
         "AISafetyAtlas.Examples.Registry"
       ],
       "origin": "CLM-WOLPERT-APPROX-001",
@@ -930,6 +1113,7 @@
     },
     "AISafetyAtlas.Inference.not_physicallyKnows_true_and_false": {
       "consumers": [
+        "AISafetyAtlas.Examples.Inference.PhysicalKnowledge",
         "AISafetyAtlas.Examples.Registry"
       ],
       "origin": "CLM-WOLPERT-KNOW-001",
@@ -937,6 +1121,7 @@
     },
     "AISafetyAtlas.Inference.physicallyKnows_false_iff_not_true": {
       "consumers": [
+        "AISafetyAtlas.Examples.Inference.PhysicalKnowledge",
         "AISafetyAtlas.Examples.Registry"
       ],
       "origin": "CLM-WOLPERT-KNOW-001",
@@ -983,6 +1168,7 @@
     },
     "AISafetyAtlas.InformationTheory.condMutualInfo_le_mutualInfo": {
       "consumers": [
+        "AISafetyAtlas.Examples.InformationTheory.DataProcessing",
         "AISafetyAtlas.Examples.Registry"
       ],
       "origin": "LAND-DPI-001",
@@ -990,6 +1176,7 @@
     },
     "AISafetyAtlas.InformationTheory.entropy_le_fano": {
       "consumers": [
+        "AISafetyAtlas.Examples.InformationTheory.Fano",
         "AISafetyAtlas.Examples.Registry"
       ],
       "origin": "LAND-FANO-001",
@@ -1038,6 +1225,7 @@
     },
     "AISafetyAtlas.InformationTheory.isMarkovChain_iff_measure_factorizes_singleton": {
       "consumers": [
+        "AISafetyAtlas.Examples.InformationTheory.DataProcessing",
         "AISafetyAtlas.Examples.Registry"
       ],
       "origin": "LAND-DPI-001",
@@ -1045,6 +1233,7 @@
     },
     "AISafetyAtlas.InformationTheory.measure_factorizes_of_isMarkovChain": {
       "consumers": [
+        "AISafetyAtlas.Examples.InformationTheory.DataProcessing",
         "AISafetyAtlas.Examples.Registry"
       ],
       "origin": "LAND-DPI-001",
@@ -1060,6 +1249,7 @@
     },
     "AISafetyAtlas.InformationTheory.mutualInfo_eq_iff_isMarkovChain": {
       "consumers": [
+        "AISafetyAtlas.Examples.InformationTheory.DataProcessing",
         "AISafetyAtlas.Examples.Registry"
       ],
       "origin": "LAND-DPI-001",
@@ -1072,12 +1262,53 @@
       "origin": "LAND-DPI-001",
       "tier": "examples-only"
     },
-    "AISafetyAtlas.Knowledge.Determines.trans": {
+    "AISafetyAtlas.Knowledge.Access.exists_indistinguishable_behaviour": {
       "consumers": [
+        "AISafetyAtlas.Examples.Knowledge.Access",
         "AISafetyAtlas.Examples.Registry"
       ],
-      "origin": "LAND-KNOW-001",
+      "origin": "LAND-ACCESS-ORDER-001",
       "tier": "examples-only"
+    },
+    "AISafetyAtlas.Knowledge.Access.no_blackBox_methodology": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Knowledge.Access",
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-ACCESS-ORDER-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Knowledge.Access.whiteBox_determines_blackBox": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Knowledge.Access",
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-ACCESS-ORDER-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Knowledge.Audit.audit_certifies_audited_not_deployed": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Knowledge.Audit",
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-AUDIT-LAG-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Knowledge.Audit.later_audit_does_not_close_the_gap": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Knowledge.Audit",
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-AUDIT-LAG-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Knowledge.Determines.trans": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry",
+        "AISafetyAtlas.Knowledge.Access"
+      ],
+      "origin": "LAND-KNOW-001",
+      "tier": "load-bearing"
     },
     "AISafetyAtlas.Knowledge.Devices.BlockwiseCollision.not_physicallyKnows": {
       "consumers": [
@@ -1095,6 +1326,7 @@
     },
     "AISafetyAtlas.Knowledge.Devices.knowable_probe_of_forall_blockAnswers": {
       "consumers": [
+        "AISafetyAtlas.Examples.Knowledge.Devices",
         "AISafetyAtlas.Examples.Registry"
       ],
       "origin": "LAND-KNOW-DEVICE-001",
@@ -1125,6 +1357,7 @@
     },
     "AISafetyAtlas.Knowledge.Embedded.Composition.meshing_fibreInference_of_surjective": {
       "consumers": [
+        "AISafetyAtlas.Examples.Knowledge.Embedded",
         "AISafetyAtlas.Examples.Registry"
       ],
       "origin": "LAND-SELFMEAS-003",
@@ -1132,6 +1365,7 @@
     },
     "AISafetyAtlas.Knowledge.Embedded.Composition.no_meshing_measures_all_of_nontrivial_remainder": {
       "consumers": [
+        "AISafetyAtlas.Examples.Knowledge.Embedded",
         "AISafetyAtlas.Examples.Registry"
       ],
       "origin": "LAND-SELFMEAS-003",
@@ -1139,6 +1373,7 @@
     },
     "AISafetyAtlas.Knowledge.Embedded.Composition.no_meshing_measures_all_of_nontrivial_remainder_of_equiv": {
       "consumers": [
+        "AISafetyAtlas.Examples.Knowledge.Embedded",
         "AISafetyAtlas.Examples.Registry"
       ],
       "origin": "LAND-SELFMEAS-003",
@@ -1170,6 +1405,7 @@
     },
     "AISafetyAtlas.Knowledge.Embedded.Composition.properInclusion_of_nontrivial_remainder_of_equiv": {
       "consumers": [
+        "AISafetyAtlas.Examples.Knowledge.Embedded",
         "AISafetyAtlas.Examples.Registry"
       ],
       "origin": "LAND-SELFMEAS-003",
@@ -1193,6 +1429,7 @@
     },
     "AISafetyAtlas.Knowledge.Embedded.Finite.properInclusion_product_of_card_rest_ge_two": {
       "consumers": [
+        "AISafetyAtlas.Examples.Knowledge.Embedded",
         "AISafetyAtlas.Examples.Registry"
       ],
       "origin": "LAND-SELFMEAS-003",
@@ -1230,6 +1467,7 @@
     },
     "AISafetyAtlas.Knowledge.Embedded.infer_singleton_eq_of_meshing": {
       "consumers": [
+        "AISafetyAtlas.Examples.Knowledge.Embedded",
         "AISafetyAtlas.Examples.Registry"
       ],
       "origin": "LAND-SELFMEAS-002",
@@ -1254,6 +1492,7 @@
     },
     "AISafetyAtlas.Knowledge.Embedded.no_meshing_inference_measures_all_states_direct": {
       "consumers": [
+        "AISafetyAtlas.Examples.Knowledge.Embedded",
         "AISafetyAtlas.Examples.Registry"
       ],
       "origin": "LAND-SELFMEAS-002",
@@ -1261,9 +1500,42 @@
     },
     "AISafetyAtlas.Knowledge.Embedded.not_knowable_state_of_properInclusion": {
       "consumers": [
+        "AISafetyAtlas.Examples.Knowledge.Embedded",
         "AISafetyAtlas.Examples.Registry"
       ],
       "origin": "LAND-SELFMEAS-002",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Knowledge.IncidentCount.count_is_not_a_measurement": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Practitioner",
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-INCIDENT-COUNT-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Knowledge.IncidentCount.count_not_determined_of_collision": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Practitioner",
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-INCIDENT-COUNT-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Knowledge.IncidentCount.knowable_of_report_carries_count": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Practitioner",
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-INCIDENT-COUNT-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Knowledge.IncidentCount.schema_fixes_the_count": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Practitioner",
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-INCIDENT-COUNT-001",
       "tier": "examples-only"
     },
     "AISafetyAtlas.Knowledge.Knowable.mono": {
@@ -1271,6 +1543,7 @@
         "AISafetyAtlas.Causal.Knowability",
         "AISafetyAtlas.Examples.Preference.Knowability",
         "AISafetyAtlas.Examples.Registry",
+        "AISafetyAtlas.Knowledge.Access",
         "AISafetyAtlas.Knowledge.Accumulation",
         "AISafetyAtlas.Knowledge.Temporal",
         "AISafetyAtlas.Oversight.JointObservation.RepairBoundary"
@@ -1304,6 +1577,7 @@
     },
     "AISafetyAtlas.Knowledge.Temporal.collisionAt_of_not_knowableAt": {
       "consumers": [
+        "AISafetyAtlas.Examples.Knowledge.Temporal",
         "AISafetyAtlas.Examples.Registry"
       ],
       "origin": "LAND-TEMPORAL-001",
@@ -1311,18 +1585,20 @@
     },
     "AISafetyAtlas.Knowledge.Temporal.knowableFrom_mono": {
       "consumers": [
-        "AISafetyAtlas.Examples.Registry"
+        "AISafetyAtlas.Examples.Registry",
+        "AISafetyAtlas.Knowledge.Audit"
       ],
       "origin": "LAND-TEMPORAL-001",
-      "tier": "examples-only"
+      "tier": "load-bearing"
     },
     "AISafetyAtlas.Knowledge.Temporal.not_knowableAt_of_collisionAt": {
       "consumers": [
         "AISafetyAtlas.Examples.Knowledge.Temporal",
-        "AISafetyAtlas.Examples.Registry"
+        "AISafetyAtlas.Examples.Registry",
+        "AISafetyAtlas.Knowledge.Audit"
       ],
       "origin": "LAND-TEMPORAL-001",
-      "tier": "examples-only"
+      "tier": "load-bearing"
     },
     "AISafetyAtlas.Knowledge.ambiguity_le_of_comp": {
       "consumers": [
@@ -1357,6 +1633,7 @@
     },
     "AISafetyAtlas.Knowledge.ambiguity_le_pairTarget_right": {
       "consumers": [
+        "AISafetyAtlas.Examples.Knowledge.Accumulation",
         "AISafetyAtlas.Examples.Registry"
       ],
       "origin": "LAND-ACCUM-001",
@@ -1364,6 +1641,7 @@
     },
     "AISafetyAtlas.Knowledge.ambiguity_pairTarget_le_mul": {
       "consumers": [
+        "AISafetyAtlas.Examples.Knowledge.Accumulation",
         "AISafetyAtlas.Examples.Registry"
       ],
       "origin": "LAND-ACCUM-001",
@@ -1388,6 +1666,7 @@
       "consumers": [
         "AISafetyAtlas.Causal.Knowability",
         "AISafetyAtlas.Examples.Registry",
+        "AISafetyAtlas.Knowledge.Access",
         "AISafetyAtlas.Knowledge.Temporal",
         "AISafetyAtlas.Oversight.JointObservation.Coverage"
       ],
@@ -1427,13 +1706,23 @@
         "AISafetyAtlas.Examples.Registry",
         "AISafetyAtlas.Knowledge.Ambiguity",
         "AISafetyAtlas.Knowledge.Check",
+        "AISafetyAtlas.Knowledge.IncidentCount",
         "AISafetyAtlas.Oversight.JointObservation.Coverage"
       ],
       "origin": "LAND-KNOW-001",
       "tier": "load-bearing"
     },
+    "AISafetyAtlas.Knowledge.knowable_iff_uniformlyActionable": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Knowledge.UniformAction",
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-KNOW-UNIFORM-001",
+      "tier": "examples-only"
+    },
     "AISafetyAtlas.Knowledge.le_errorProb_of_decoder": {
       "consumers": [
+        "AISafetyAtlas.Examples.Knowledge.Entropy",
         "AISafetyAtlas.Examples.Registry"
       ],
       "origin": "LAND-KNOWENTROPY-001",
@@ -1442,7 +1731,9 @@
     "AISafetyAtlas.Knowledge.not_knowable_comp": {
       "consumers": [
         "AISafetyAtlas.Examples.Registry",
-        "AISafetyAtlas.Oversight.JointObservation.RepairBoundary"
+        "AISafetyAtlas.Knowledge.Access",
+        "AISafetyAtlas.Oversight.JointObservation.RepairBoundary",
+        "AISafetyAtlas.Sovereignty.CapabilityAssessment"
       ],
       "origin": "LAND-KNOW-001",
       "tier": "load-bearing"
@@ -1458,21 +1749,30 @@
     "AISafetyAtlas.Knowledge.not_knowable_of_collision": {
       "consumers": [
         "AISafetyAtlas.Causal.Knowability",
+        "AISafetyAtlas.Compositional.Hyperproperties.Evaluation",
         "AISafetyAtlas.Compositional.Hyperproperties.Knowability",
+        "AISafetyAtlas.Examples.DeployedAssistant",
         "AISafetyAtlas.Examples.Knowledge.Ambiguity",
         "AISafetyAtlas.Examples.Oversight.Overseer",
         "AISafetyAtlas.Examples.Registry",
+        "AISafetyAtlas.Knowledge.Access",
+        "AISafetyAtlas.Knowledge.Audit",
         "AISafetyAtlas.Knowledge.Check",
         "AISafetyAtlas.Knowledge.Embedded",
+        "AISafetyAtlas.Knowledge.IncidentCount",
         "AISafetyAtlas.Knowledge.SelfReference",
         "AISafetyAtlas.Knowledge.Temporal",
-        "AISafetyAtlas.Oversight.JointObservation.Coverage"
+        "AISafetyAtlas.Oversight.JointObservation.Coverage",
+        "AISafetyAtlas.Oversight.JointObservation.Registry",
+        "AISafetyAtlas.Sovereignty.Capability",
+        "AISafetyAtlas.Sovereignty.CapabilityAssessment"
       ],
       "origin": "LAND-KNOW-001",
       "tier": "load-bearing"
     },
     "AISafetyAtlas.Knowledge.not_knowable_of_condEntropy_ne_zero": {
       "consumers": [
+        "AISafetyAtlas.Examples.Knowledge.Entropy",
         "AISafetyAtlas.Examples.Registry"
       ],
       "origin": "LAND-KNOWENTROPY-001",
@@ -1498,6 +1798,7 @@
     },
     "AISafetyAtlas.Knowledge.not_knowable_pairTarget_of_not_knowable": {
       "consumers": [
+        "AISafetyAtlas.Examples.Knowledge.Accumulation",
         "AISafetyAtlas.Examples.Registry"
       ],
       "origin": "LAND-ACCUM-001",
@@ -1510,6 +1811,29 @@
       ],
       "origin": "LAND-SELFMEAS-001",
       "tier": "load-bearing"
+    },
+    "AISafetyAtlas.Knowledge.not_uniformlyActionable_iff_exists_unservable": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Knowledge.UniformAction",
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-KNOW-UNIFORM-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Knowledge.uniformlyActionable_iff_fibrewiseAgreeable": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-KNOW-UNIFORM-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Knowledge.uniformlyActionable_of_pairwiseAgreeable_of_card_le_two": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Knowledge.UniformAction",
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-KNOW-UNIFORM-001",
+      "tier": "examples-only"
     },
     "AISafetyAtlas.Learning.card_observed_eq": {
       "consumers": [
@@ -1534,6 +1858,7 @@
     },
     "AISafetyAtlas.Learning.exists_observed_eq": {
       "consumers": [
+        "AISafetyAtlas.Examples.Learning.Sharp",
         "AISafetyAtlas.Examples.Registry"
       ],
       "origin": "BY-021",
@@ -1541,6 +1866,7 @@
     },
     "AISafetyAtlas.Learning.homogeneous_iff_learner_indep": {
       "consumers": [
+        "AISafetyAtlas.Examples.Learning",
         "AISafetyAtlas.Examples.Registry"
       ],
       "origin": "BY-020",
@@ -1562,6 +1888,7 @@
     },
     "AISafetyAtlas.Learning.nfl_adaptive_iff_permInvariant": {
       "consumers": [
+        "AISafetyAtlas.Examples.Learning.Sharp",
         "AISafetyAtlas.Examples.Registry"
       ],
       "origin": "BY-021",
@@ -1577,6 +1904,7 @@
     },
     "AISafetyAtlas.Learning.nfl_iff_permInvariant": {
       "consumers": [
+        "AISafetyAtlas.Examples.Learning.Sharp",
         "AISafetyAtlas.Examples.Registry"
       ],
       "origin": "BY-021",
@@ -1617,6 +1945,7 @@
     },
     "AISafetyAtlas.Learning.no_free_lunch_adaptive": {
       "consumers": [
+        "AISafetyAtlas.Examples.Learning.Sharp",
         "AISafetyAtlas.Examples.Registry"
       ],
       "origin": "BY-021",
@@ -1648,6 +1977,7 @@
     },
     "AISafetyAtlas.Learning.observed_permRule": {
       "consumers": [
+        "AISafetyAtlas.Examples.Learning.Sharp",
         "AISafetyAtlas.Examples.Registry"
       ],
       "origin": "BY-021",
@@ -1655,6 +1985,7 @@
     },
     "AISafetyAtlas.Learning.ots_error_distribution_learner_indep": {
       "consumers": [
+        "AISafetyAtlas.Examples.Learning",
         "AISafetyAtlas.Examples.Registry"
       ],
       "origin": "BY-020",
@@ -1677,10 +2008,51 @@
     },
     "AISafetyAtlas.Learning.ruleVisit_permRule": {
       "consumers": [
+        "AISafetyAtlas.Examples.Learning.Sharp",
         "AISafetyAtlas.Examples.Registry"
       ],
       "origin": "BY-021",
       "tier": "examples-only"
+    },
+    "AISafetyAtlas.LinearSystems.determinesStateOn_iff_isObservable": {
+      "consumers": [
+        "AISafetyAtlas.Examples.LinearSystems.Dynamics",
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "BY-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.LinearSystems.isCompletelyReachable_iff_isControllable": {
+      "consumers": [
+        "AISafetyAtlas.Examples.LinearSystems.Flow",
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "BY-002",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.LinearSystems.isObservable_iff_hautus": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-LINSYS-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.LinearSystems.not_determinesStateOn_of_not_isObservable": {
+      "consumers": [
+        "AISafetyAtlas.Examples.LinearSystems.Dynamics",
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "BY-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.LinearSystems.not_isReachable_of_not_isControllable": {
+      "consumers": [
+        "AISafetyAtlas.Examples.LinearSystems.Dynamics",
+        "AISafetyAtlas.Examples.Registry",
+        "AISafetyAtlas.LinearSystems.Flow"
+      ],
+      "origin": "BY-002",
+      "tier": "load-bearing"
     },
     "AISafetyAtlas.Logic.chaitin_bound": {
       "consumers": [
@@ -1715,6 +2087,7 @@
     },
     "AISafetyAtlas.Logic.lawvere_fixed_point": {
       "consumers": [
+        "AISafetyAtlas.Examples.Logic",
         "AISafetyAtlas.Examples.Registry"
       ],
       "origin": "CLM-LAWVERE-001",
@@ -1738,6 +2111,7 @@
     },
     "AISafetyAtlas.Oversight.Debate.alice_fast": {
       "consumers": [
+        "AISafetyAtlas.Examples.Oversight.Debate",
         "AISafetyAtlas.Examples.Registry"
       ],
       "origin": "LAND-DEBATE-001",
@@ -1745,6 +2119,7 @@
     },
     "AISafetyAtlas.Oversight.Debate.bob_fast": {
       "consumers": [
+        "AISafetyAtlas.Examples.Oversight.Debate",
         "AISafetyAtlas.Examples.Registry"
       ],
       "origin": "LAND-DEBATE-001",
@@ -1782,6 +2157,14 @@
       "origin": "LAND-DEBATE-001",
       "tier": "examples-only"
     },
+    "AISafetyAtlas.Oversight.JointObservation.consortium_covers_of_registry_covers": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Oversight.JointObservationRegistry",
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-AUDIT-REGISTRY-001",
+      "tier": "examples-only"
+    },
     "AISafetyAtlas.Oversight.JointObservation.covers_iff_no_collision": {
       "consumers": [
         "AISafetyAtlas.Examples.Registry",
@@ -1790,8 +2173,17 @@
       "origin": "LAND-JOINTOBS-001",
       "tier": "load-bearing"
     },
+    "AISafetyAtlas.Oversight.JointObservation.not_registry_covers_of_emit_collision": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Oversight.JointObservationRegistry",
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-AUDIT-REGISTRY-001",
+      "tier": "examples-only"
+    },
     "AISafetyAtlas.Oversight.exists_cannotForce_false_and_forces": {
       "consumers": [
+        "AISafetyAtlas.Examples.Oversight.VarietyCheck",
         "AISafetyAtlas.Examples.Registry"
       ],
       "origin": "LAND-OVERSIGHT-VARIETY-001",
@@ -1807,6 +2199,7 @@
     },
     "AISafetyAtlas.Oversight.forces_of_constant_effect_of_not_knowable": {
       "consumers": [
+        "AISafetyAtlas.Examples.Oversight.VarietyBound",
         "AISafetyAtlas.Examples.Registry"
       ],
       "origin": "LAND-OVERSIGHT-VARIETY-001",
@@ -1845,7 +2238,8 @@
     },
     "AISafetyAtlas.Preference.ReasonableLanguage.proposition_eight": {
       "consumers": [
-        "AISafetyAtlas.Examples.Registry"
+        "AISafetyAtlas.Examples.Registry",
+        "AISafetyAtlas.Examples.SixTargets"
       ],
       "origin": "BY-011",
       "tier": "examples-only"
@@ -1853,13 +2247,15 @@
     "AISafetyAtlas.Preference.ReasonableLanguage.proposition_seven": {
       "consumers": [
         "AISafetyAtlas.Examples.PublicAPI",
-        "AISafetyAtlas.Examples.Registry"
+        "AISafetyAtlas.Examples.Registry",
+        "AISafetyAtlas.Examples.SixTargets"
       ],
       "origin": "BY-011",
       "tier": "examples-only"
     },
     "AISafetyAtlas.Preference.RegretModel.cannot_rule_out_half_maximal_regret": {
       "consumers": [
+        "AISafetyAtlas.Examples.Preference.Regret",
         "AISafetyAtlas.Examples.PublicAPI",
         "AISafetyAtlas.Examples.Registry"
       ],
@@ -1868,6 +2264,7 @@
     },
     "AISafetyAtlas.Preference.Source.ReasonableForF.proposition_eight": {
       "consumers": [
+        "AISafetyAtlas.Examples.Preference.SourceComplexity",
         "AISafetyAtlas.Examples.PublicAPI",
         "AISafetyAtlas.Examples.Registry"
       ],
@@ -1876,6 +2273,7 @@
     },
     "AISafetyAtlas.Preference.Source.ReasonableForF.proposition_seven": {
       "consumers": [
+        "AISafetyAtlas.Examples.Preference.SourceComplexity",
         "AISafetyAtlas.Examples.PublicAPI",
         "AISafetyAtlas.Examples.Registry"
       ],
@@ -1884,7 +2282,16 @@
     },
     "AISafetyAtlas.Preference.Source.ReasonableForF.theorem_two_conditional": {
       "consumers": [
+        "AISafetyAtlas.Examples.Preference.SourceComplexity",
         "AISafetyAtlas.Examples.PublicAPI",
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "BY-011",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Preference.behaviour_le_of_evaluatesTo": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Preference.Complexity",
         "AISafetyAtlas.Examples.Registry"
       ],
       "origin": "BY-011",
@@ -1892,9 +2299,18 @@
     },
     "AISafetyAtlas.Preference.consistent_rewards_eq_univ": {
       "consumers": [
+        "AISafetyAtlas.Examples.Preference",
         "AISafetyAtlas.Examples.Registry"
       ],
       "origin": "BY-011",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Preference.consistent_rewards_of_trajectory_eq_univ": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Preference.Trajectory",
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-PREF-TRAJECTORY-001",
       "tier": "examples-only"
     },
     "AISafetyAtlas.Preference.degenerate_explanation_cheap": {
@@ -1916,6 +2332,7 @@
     },
     "AISafetyAtlas.Preference.exists_reward": {
       "consumers": [
+        "AISafetyAtlas.Examples.Preference",
         "AISafetyAtlas.Examples.PublicAPI",
         "AISafetyAtlas.Examples.Registry"
       ],
@@ -2027,12 +2444,459 @@
       "origin": "LAND-GS-002",
       "tier": "examples-only"
     },
+    "AISafetyAtlas.Sovereignty.AmendmentLog.unbroken_chain_is_not_a_constraint": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Practitioner",
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-SOV-CONST-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Sovereignty.Attestation.attestation_is_not_the_claim": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry",
+        "AISafetyAtlas.Examples.Sovereignty.Governance"
+      ],
+      "origin": "LAND-SOV-AUTH-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Sovereignty.Attestation.properties_are_independent": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry",
+        "AISafetyAtlas.Examples.Sovereignty.Governance"
+      ],
+      "origin": "LAND-SOV-AUTH-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Sovereignty.CapabilityAssessment.no_procedure_on_output_recovers_fallback": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry",
+        "AISafetyAtlas.Examples.Sovereignty.CapabilityAssessment"
+      ],
+      "origin": "LAND-SOV-ASSESSMENT-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Sovereignty.CapabilityAssessment.protocols_are_incomparable": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry",
+        "AISafetyAtlas.Examples.Sovereignty.CapabilityAssessment"
+      ],
+      "origin": "LAND-SOV-ASSESSMENT-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Sovereignty.CapabilityAssessment.withdrawal_settles_and_no_output_procedure_does": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry",
+        "AISafetyAtlas.Examples.Sovereignty.CapabilityAssessment"
+      ],
+      "origin": "LAND-SOV-ASSESSMENT-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Sovereignty.Conformity.passes_every_check_and_not_operable": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry",
+        "AISafetyAtlas.Examples.Sovereignty.Governance"
+      ],
+      "origin": "LAND-SOV-CATALOGUE-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Sovereignty.DelegationChain.power_over_a_matter_does_not_compose": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry",
+        "AISafetyAtlas.Examples.Sovereignty.Governance"
+      ],
+      "origin": "LAND-SOV-AUTH-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Sovereignty.DoxasticAgent.mem_of_agent_forces": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-SOV-BELIEF-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Sovereignty.Enforcement.undetectable_norm_is_unenforceable": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry",
+        "AISafetyAtlas.Examples.Sovereignty.Governance"
+      ],
+      "origin": "LAND-SOV-DEONTIC-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Sovereignty.Enlarges.forces": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry",
+        "AISafetyAtlas.Examples.Sovereignty.Capability"
+      ],
+      "origin": "LAND-SOV-CAPABILITY-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Sovereignty.Institution.exists_recognized_not_authorized": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-SOV-INSTITUTION-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Sovereignty.InstitutionalSetting.exists_empowered_possible_not_permitted": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-SOV-DEONTIC-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Sovereignty.MultiplyRetargetable.mostOrbit": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-SOV-RETARGETABLE-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Sovereignty.NormSystem.forbidden_iff_not_permitted_iff": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry",
+        "AISafetyAtlas.Examples.Sovereignty.Deontic"
+      ],
+      "origin": "LAND-SOV-DEONTIC-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Sovereignty.Plant.exists_robustInput_iff": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-SOV-DISTURB-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Sovereignty.Playable.trulyPlayable_of_finite": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-SOV-TRULYPLAYABLE-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Sovereignty.Refusal.safety_suite_admits_a_refusal": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Practitioner",
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-SOV-SERVICE-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Sovereignty.Represents.surjective_outcome": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-SOV-POWER-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Sovereignty.SafetyGame.mem_safetyKernel_iff_exists_maintaining": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry",
+        "AISafetyAtlas.Sovereignty.ShieldCheck"
+      ],
+      "origin": "LAND-SOV-SAFETYGAME-001",
+      "tier": "load-bearing"
+    },
+    "AISafetyAtlas.Sovereignty.Setting.not_independenceFree_of_universal_threat": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-SOV-INDEPENDENCE-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Sovereignty.Setting.republicanFree_of_independenceFree": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-SOV-INDEPENDENCE-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Sovereignty.ShutdownChannel.obedience_does_not_give_authority": {
+      "consumers": [
+        "AISafetyAtlas.Examples.DeployedAssistant",
+        "AISafetyAtlas.Examples.Registry",
+        "AISafetyAtlas.Examples.Sovereignty.Governance"
+      ],
+      "origin": "LAND-SOV-AUTH-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Sovereignty.SimpleGame.banzhafRaw_eq_swings_div": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-SOV-VOTINGPOWER-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Sovereignty.SimpleGame.shapleyShubik_eq_zero_iff": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-SOV-VOTINGPOWER-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Sovereignty.authorizedFrom_of_total": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry",
+        "AISafetyAtlas.Sovereignty.AmendmentLog"
+      ],
+      "origin": "LAND-SOV-CONST-001",
+      "tier": "load-bearing"
+    },
+    "AISafetyAtlas.Sovereignty.countsAs_validates_refl_and_trans": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry",
+        "AISafetyAtlas.Examples.Sovereignty.Institution"
+      ],
+      "origin": "LAND-SOV-INSTITUTION-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Sovereignty.demandwise_iff_exists_selector": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry",
+        "AISafetyAtlas.Examples.Sovereignty.Catalogue"
+      ],
+      "origin": "LAND-SOV-CATALOGUE-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Sovereignty.empowerment_eq_log_card_range": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry",
+        "AISafetyAtlas.Examples.Sovereignty.Empowerment"
+      ],
+      "origin": "LAND-SOV-EMPOWER-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Sovereignty.eu_determined_mostOrbit": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry",
+        "AISafetyAtlas.Examples.Sovereignty.EUDetermined"
+      ],
+      "origin": "LAND-SOV-RETARGETABLE-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Sovereignty.exists_mixed_value": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry",
+        "AISafetyAtlas.Examples.Sovereignty.Minimax"
+      ],
+      "origin": "LAND-SOV-MINIMAX-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Sovereignty.exists_output_rise_with_fallback_fall": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry",
+        "AISafetyAtlas.Examples.Sovereignty.CapabilityAssessment"
+      ],
+      "origin": "LAND-SOV-CAPABILITY-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Sovereignty.exists_success_le_inv": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry",
+        "AISafetyAtlas.Examples.Sovereignty.Evidence"
+      ],
+      "origin": "LAND-SOV-EVIDENCE-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Sovereignty.exists_uniformDecision_iff": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry",
+        "AISafetyAtlas.Examples.Sovereignty.Auditability"
+      ],
+      "origin": "LAND-SOV-AUDIT-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Sovereignty.fallback_not_knowable_from_assistedOutput": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry",
+        "AISafetyAtlas.Examples.Sovereignty.Capability",
+        "AISafetyAtlas.Sovereignty.CapabilityAssessment"
+      ],
+      "origin": "LAND-SOV-CAPABILITY-001",
+      "tier": "load-bearing"
+    },
+    "AISafetyAtlas.Sovereignty.forces_inter_of_shared_footprint": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry",
+        "AISafetyAtlas.Examples.Sovereignty.Quantifiers",
+        "AISafetyAtlas.Sovereignty.DelegationChain"
+      ],
+      "origin": "LAND-SOV-QUANT-001",
+      "tier": "load-bearing"
+    },
+    "AISafetyAtlas.Sovereignty.forces_of_simulates": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry",
+        "AISafetyAtlas.Examples.Sovereignty.Transfer"
+      ],
+      "origin": "LAND-SOV-TRANSFER-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Sovereignty.forces_superadditive": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry",
+        "AISafetyAtlas.Sovereignty.Playability",
+        "AISafetyAtlas.Sovereignty.PlayableConverse",
+        "AISafetyAtlas.Sovereignty.Rights"
+      ],
+      "origin": "LAND-SOV-POWER-001",
+      "tier": "load-bearing"
+    },
+    "AISafetyAtlas.Sovereignty.gameFormAcyclic_iff": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-SOV-STABILITY-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Sovereignty.influenceCapacity_eq_zero_iff": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry",
+        "AISafetyAtlas.Examples.Sovereignty.Influence"
+      ],
+      "origin": "LAND-SOV-INFL-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Sovereignty.lowerValue_diracLaw_eq_one_iff": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry",
+        "AISafetyAtlas.Examples.Sovereignty.Value"
+      ],
+      "origin": "LAND-SOV-VALUE-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Sovereignty.magnitude_does_not_decide_authorship": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry",
+        "AISafetyAtlas.Examples.Sovereignty.CogSov"
+      ],
+      "origin": "LAND-SOV-COGSOV-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Sovereignty.maintenanceFloor_of_practice_floor": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry",
+        "AISafetyAtlas.Examples.Sovereignty.Capability"
+      ],
+      "origin": "LAND-SOV-CAPABILITY-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Sovereignty.no_authority_from_ungrounded_cycles": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry",
+        "AISafetyAtlas.Examples.Sovereignty.Institution"
+      ],
+      "origin": "LAND-SOV-INSTITUTION-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Sovereignty.not_exists_gameForm_cofiniteEff": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry",
+        "AISafetyAtlas.Examples.Sovereignty.PlayableConverse"
+      ],
+      "origin": "LAND-SOV-PLAYABILITY-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Sovereignty.not_exists_label_agreeing_with_both": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry",
+        "AISafetyAtlas.Examples.Sovereignty.Authority"
+      ],
+      "origin": "LAND-SOV-AUTH-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Sovereignty.not_gameFormAcyclic_of_cycle": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-SOV-STABILITY-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Sovereignty.oughtImpliesCan_does_not_give_permission": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry",
+        "AISafetyAtlas.Examples.Sovereignty.Deontic"
+      ],
+      "origin": "LAND-SOV-DEONTIC-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Sovereignty.retainsFamily_and_not_demandwise": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry",
+        "AISafetyAtlas.Examples.Sovereignty.Service"
+      ],
+      "origin": "LAND-SOV-SERVICE-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Sovereignty.retainsFamily_of_represents": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry",
+        "AISafetyAtlas.Examples.Sovereignty.Rights"
+      ],
+      "origin": "LAND-SOV-POWER-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Sovereignty.safetyKernel_subset_of_adversaryLe": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry",
+        "AISafetyAtlas.Examples.Sovereignty.Outnumbered"
+      ],
+      "origin": "LAND-SOV-OUTNUMBERED-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Sovereignty.sov1_of_retainsFamily_singleton": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry",
+        "AISafetyAtlas.Examples.Sovereignty.Mandate"
+      ],
+      "origin": "LAND-SOV-POWER-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Sovereignty.transmitsZeroError_iff_exists_code": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-SOV-COMM-001",
+      "tier": "examples-only"
+    },
     "AISafetyAtlas.Verification.AgentBehavior.no_behavioral_safety_verifier": {
       "consumers": [
         "AISafetyAtlas.Examples.PublicAPI",
         "AISafetyAtlas.Examples.Registry"
       ],
-      "origin": "BY-012",
+      "origin": "LAND-VERIF-AGENTBEHAVIOR-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Verification.Containment.harming_undecidable": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry",
+        "AISafetyAtlas.Examples.Verification.Containment"
+      ],
+      "origin": "BY-025",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Verification.FullAccess.access_is_not_what_separates_them": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry",
+        "AISafetyAtlas.Examples.Verification.FullAccess"
+      ],
+      "origin": "LAND-VERIF-FULLACCESS-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Verification.FullAccess.fullAccessVerifier_exactArtifact": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry",
+        "AISafetyAtlas.Examples.Verification.FullAccess"
+      ],
+      "origin": "LAND-VERIF-FULLACCESS-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Verification.FullAccess.no_fullAccessVerifier_of_extensional": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry",
+        "AISafetyAtlas.Examples.Verification.FullAccess"
+      ],
+      "origin": "LAND-VERIF-FULLACCESS-001",
       "tier": "examples-only"
     },
     "AISafetyAtlas.Verification.Robot.action_safety_unverifiable": {
@@ -2042,6 +2906,14 @@
         "AISafetyAtlas.Examples.Verification.Robot"
       ],
       "origin": "BY-033",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Verification.Robot.alwaysSatisfies_run": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry",
+        "AISafetyAtlas.Examples.Verification.RobotRun"
+      ],
+      "origin": "LAND-VERIF-ROBOTRUN-001",
       "tier": "examples-only"
     },
     "AISafetyAtlas.Verification.rice": {
@@ -2056,9 +2928,19 @@
     "AISafetyAtlas.Wireheading.AgentEquations.value_eq_of_agree_on_window": {
       "consumers": [
         "AISafetyAtlas.Examples.PublicAPI",
-        "AISafetyAtlas.Examples.Registry"
+        "AISafetyAtlas.Examples.Registry",
+        "AISafetyAtlas.Examples.Wireheading.AgentEquations",
+        "AISafetyAtlas.Wireheading.AgentHistory"
       ],
       "origin": "LAND-WIRE-OBJ-001",
+      "tier": "load-bearing"
+    },
+    "AISafetyAtlas.Wireheading.AgentEquations.value_runHistory_eq_of_agree_on_window": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry",
+        "AISafetyAtlas.Examples.Wireheading.AgentEquations"
+      ],
+      "origin": "LAND-WIRE-AGENTHISTORY-001",
       "tier": "examples-only"
     },
     "AISafetyAtlas.Wireheading.CRMDP.Model.everitt_theorem_eleven": {
@@ -2067,6 +2949,21 @@
         "AISafetyAtlas.Examples.Registry"
       ],
       "origin": "BY-039",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Wireheading.GoalPreservation.scheduleModel_optimalAt": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry",
+        "AISafetyAtlas.Examples.Wireheading.GoalPreservationCarrier"
+      ],
+      "origin": "LAND-WIRE-GOALCARRIER-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Wireheading.GoalPreservationRun.Model.equation_thirteen": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-GOAL-002",
       "tier": "examples-only"
     },
     "AISafetyAtlas.Wireheading.GoalPreservationSource.Model.selected_matches_initial": {
@@ -2087,7 +2984,8 @@
     },
     "AISafetyAtlas.Wireheading.ObservationLimits.not_knowable_trueReturn_of_complement_mem": {
       "consumers": [
-        "AISafetyAtlas.Examples.Registry"
+        "AISafetyAtlas.Examples.Registry",
+        "AISafetyAtlas.Examples.Wireheading.ObservationLimits"
       ],
       "origin": "LAND-CRMDP-KNOW-001",
       "tier": "examples-only"
@@ -2099,6 +2997,21 @@
       ],
       "origin": "LAND-CRMDP-KNOW-001",
       "tier": "examples-only"
+    },
+    "AISafetyAtlas.Wireheading.RewardGrid.everitt_theorem_eleven_gridClass": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry",
+        "AISafetyAtlas.Examples.Wireheading.RewardGrid"
+      ],
+      "origin": "LAND-CRMDP-GRID-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Wireheading.ValueLearning.Beliefs.vrlValue_of_isCP": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-VRL-001",
+      "tier": "examples-only"
     }
   },
   "generated_by": "scripts/report_consumers.py --json",
@@ -2107,11 +3020,11 @@
     "AISafetyAtlas.Causal.Model.jointProb_hardInterventionProfile",
     "AISafetyAtlas.Causal.Model.regret_eq_zero_iff",
     "AISafetyAtlas.Causal.Model.value_const_sub",
-    "AISafetyAtlas.Causal.Model.value_eq",
     "AISafetyAtlas.Causal.Model.value_le_sign",
     "AISafetyAtlas.Causal.Model.\u0394_fixProfile",
     "AISafetyAtlas.Causal.Model.\u0394mix_congr",
     "AISafetyAtlas.Causal.SCIM.exists_isOptimalPolicy",
+    "AISafetyAtlas.Causal.SCIM.observableLaw_withPolicy_eq_of_notDownstream",
     "AISafetyAtlas.Causal.SCIM.policy_ext_single",
     "AISafetyAtlas.Causal.SCM.eval_eq_f",
     "AISafetyAtlas.Causal.SCM.exoJoint_mul_prod",
@@ -2124,6 +3037,10 @@
     "AISafetyAtlas.Combinatorics.basisClass_histogram_eq_permOrbit",
     "AISafetyAtlas.Combinatorics.card_closedUnderPermutation_nonempty",
     "AISafetyAtlas.Combinatorics.exists_perm_rel_not_iff",
+    "AISafetyAtlas.Compositional.AgentNetwork.symmetry_is_the_shared_cause",
+    "AISafetyAtlas.Compositional.Hyperproperties.Evaluation.sampling_misses_subsingleton",
+    "AISafetyAtlas.Compositional.Hyperproperties.Evaluation.traceProperty_knowable_of_score_decides",
+    "AISafetyAtlas.Compositional.Hyperproperties.exists_bad_trajectories_of_isKSafety",
     "AISafetyAtlas.Compositional.Hyperproperties.knowable_of_isSafetyPredicate",
     "AISafetyAtlas.Compositional.Hyperproperties.not_isSafetyPredicate_of_realizedSet_collision",
     "AISafetyAtlas.Compositional.Networks.knowable_runFor",
@@ -2134,6 +3051,7 @@
     "AISafetyAtlas.Computability.halting_re",
     "AISafetyAtlas.Computability.nonhalting_not_re",
     "AISafetyAtlas.Computability.rice",
+    "AISafetyAtlas.Control.OversightBudget.oversight_reduction_le_budget",
     "AISafetyAtlas.Control.ashby_logVariety_ge",
     "AISafetyAtlas.Control.ashby_logVariety_ge_mul",
     "AISafetyAtlas.Control.ashby_variety_ge_isSharp",
@@ -2147,7 +3065,6 @@
     "AISafetyAtlas.Control.controlLoss_eq_mutualInfo_sub",
     "AISafetyAtlas.Control.controlLoss_le_entropy_noise",
     "AISafetyAtlas.Control.entropyReduction_le_condEntropy_form",
-    "AISafetyAtlas.Control.entropyReduction_le_of_openLoopBound",
     "AISafetyAtlas.Control.entropy_ge_of_condEntropy_ge",
     "AISafetyAtlas.Control.entropy_ge_of_sensor",
     "AISafetyAtlas.Control.entropy_le_channelCapacity_of_complete",
@@ -2166,6 +3083,8 @@
     "AISafetyAtlas.Control.minControlLoss_nonneg",
     "AISafetyAtlas.Control.mutualInfo_prod_eq_of_sensorLoss_eq_zero",
     "AISafetyAtlas.Control.perfectlyObservable_iff_sensorLoss_eq_zero",
+    "AISafetyAtlas.Decision.J_linear",
+    "AISafetyAtlas.Decision.vPiBdd_eq_vPi",
     "AISafetyAtlas.Examples.Causal.DecisionNetwork.figIsUnmediated",
     "AISafetyAtlas.Examples.Causal.Model.jointProb_sum_shiftCollapse",
     "AISafetyAtlas.Examples.Causal.OneNodeClass.modelError_le_ten_mul",
@@ -2182,6 +3101,9 @@
     "AISafetyAtlas.Examples.Causal.not_inIdentifiedSet_high",
     "AISafetyAtlas.Examples.Causal.transform_identity_edgeless",
     "AISafetyAtlas.Examples.Causal.\u0394_eq_half_sub_joint",
+    "AISafetyAtlas.Examples.LinearSystems.blind_not_determinesStateOn",
+    "AISafetyAtlas.Examples.LinearSystems.deaf_not_isCompletelyReachable",
+    "AISafetyAtlas.Examples.Sovereignty.steer_isSteering",
     "AISafetyAtlas.Explainability.attribution_impossibility",
     "AISafetyAtlas.Explainability.attribution_impossibility_weak",
     "AISafetyAtlas.Fairness.approx_perfect_prediction_or_equal_base_rates",
@@ -2189,10 +3111,15 @@
     "AISafetyAtlas.Fairness.average_lower_bound",
     "AISafetyAtlas.Fairness.exists_slack_function",
     "AISafetyAtlas.Fairness.exists_slack_function_score_relative",
-    "AISafetyAtlas.Fairness.perfect_prediction_or_equal_base_rates",
     "AISafetyAtlas.Fairness.perfect_prediction_or_equal_base_rates_of_approx",
     "AISafetyAtlas.Fairness.print_perfectPrediction_of_populated",
     "AISafetyAtlas.Fairness.sum_score_eq_\u03bc",
+    "AISafetyAtlas.Goodhart.RegulatoryTarget.certified_systems_were_never_examined",
+    "AISafetyAtlas.Goodhart.RegulatoryTarget.raising_the_bar_does_not_help",
+    "AISafetyAtlas.Goodhart.RegulatoryTarget.risk_unconstrained_on_certified",
+    "AISafetyAtlas.Goodhart.gap_selection_ge",
+    "AISafetyAtlas.Goodhart.unhackable_of_simplifies_common",
+    "AISafetyAtlas.Goodhart.zhuang_hadfield_menell_theorem_one",
     "AISafetyAtlas.Inference.PhysicalKnowledgeWitness.eq_target_on_of_refinesOn",
     "AISafetyAtlas.Inference.PhysicallyKnows.weaklyInfers",
     "AISafetyAtlas.Inference.corollary20_ii",
@@ -2219,7 +3146,11 @@
     "AISafetyAtlas.InformationTheory.mutualInfo_comp_le",
     "AISafetyAtlas.InformationTheory.mutualInfo_eq_iff_isMarkovChain",
     "AISafetyAtlas.InformationTheory.mutualInfo_le_of_isMarkovChain",
-    "AISafetyAtlas.Knowledge.Determines.trans",
+    "AISafetyAtlas.Knowledge.Access.exists_indistinguishable_behaviour",
+    "AISafetyAtlas.Knowledge.Access.no_blackBox_methodology",
+    "AISafetyAtlas.Knowledge.Access.whiteBox_determines_blackBox",
+    "AISafetyAtlas.Knowledge.Audit.audit_certifies_audited_not_deployed",
+    "AISafetyAtlas.Knowledge.Audit.later_audit_does_not_close_the_gap",
     "AISafetyAtlas.Knowledge.Devices.BlockwiseCollision.not_physicallyKnows",
     "AISafetyAtlas.Knowledge.Devices.BlockwiseCollision.not_weaklyInfers",
     "AISafetyAtlas.Knowledge.Devices.knowable_probe_of_forall_blockAnswers",
@@ -2242,12 +3173,14 @@
     "AISafetyAtlas.Knowledge.Embedded.no_meshing_inference_distinguishes",
     "AISafetyAtlas.Knowledge.Embedded.no_meshing_inference_measures_all_states_direct",
     "AISafetyAtlas.Knowledge.Embedded.not_knowable_state_of_properInclusion",
+    "AISafetyAtlas.Knowledge.IncidentCount.count_is_not_a_measurement",
+    "AISafetyAtlas.Knowledge.IncidentCount.count_not_determined_of_collision",
+    "AISafetyAtlas.Knowledge.IncidentCount.knowable_of_report_carries_count",
+    "AISafetyAtlas.Knowledge.IncidentCount.schema_fixes_the_count",
     "AISafetyAtlas.Knowledge.SelfReference.card_rest_le_one_of_selfComplete",
     "AISafetyAtlas.Knowledge.SelfReference.not_selfComplete_of_two_rest",
     "AISafetyAtlas.Knowledge.SelfReference.selfComplete_iff_subsingleton_rest",
     "AISafetyAtlas.Knowledge.Temporal.collisionAt_of_not_knowableAt",
-    "AISafetyAtlas.Knowledge.Temporal.knowableFrom_mono",
-    "AISafetyAtlas.Knowledge.Temporal.not_knowableAt_of_collisionAt",
     "AISafetyAtlas.Knowledge.ambiguity_le_of_evidenceMonotone",
     "AISafetyAtlas.Knowledge.ambiguity_le_pairTarget_left",
     "AISafetyAtlas.Knowledge.ambiguity_le_pairTarget_of_evidenceMonotone",
@@ -2255,10 +3188,14 @@
     "AISafetyAtlas.Knowledge.ambiguity_pairTarget_le_mul",
     "AISafetyAtlas.Knowledge.condEntropy_eq_zero_of_knowable",
     "AISafetyAtlas.Knowledge.knowable_iff_factorsThrough",
+    "AISafetyAtlas.Knowledge.knowable_iff_uniformlyActionable",
     "AISafetyAtlas.Knowledge.le_errorProb_of_decoder",
     "AISafetyAtlas.Knowledge.not_knowable_of_card_lt",
     "AISafetyAtlas.Knowledge.not_knowable_of_condEntropy_ne_zero",
     "AISafetyAtlas.Knowledge.not_knowable_pairTarget_of_not_knowable",
+    "AISafetyAtlas.Knowledge.not_uniformlyActionable_iff_exists_unservable",
+    "AISafetyAtlas.Knowledge.uniformlyActionable_iff_fibrewiseAgreeable",
+    "AISafetyAtlas.Knowledge.uniformlyActionable_of_pairwiseAgreeable_of_card_le_two",
     "AISafetyAtlas.Learning.card_observed_eq",
     "AISafetyAtlas.Learning.closedUnderPermutation_of_nfl",
     "AISafetyAtlas.Learning.closedUnderPermutation_of_permInvariant",
@@ -2282,6 +3219,10 @@
     "AISafetyAtlas.Learning.permInvariant_of_closedUnderPermutation",
     "AISafetyAtlas.Learning.permInvariant_of_nfl",
     "AISafetyAtlas.Learning.ruleVisit_permRule",
+    "AISafetyAtlas.LinearSystems.determinesStateOn_iff_isObservable",
+    "AISafetyAtlas.LinearSystems.isCompletelyReachable_iff_isControllable",
+    "AISafetyAtlas.LinearSystems.isObservable_iff_hautus",
+    "AISafetyAtlas.LinearSystems.not_determinesStateOn_of_not_isObservable",
     "AISafetyAtlas.Logic.chaitin_bound",
     "AISafetyAtlas.Logic.chaitin_incompleteness",
     "AISafetyAtlas.Logic.godel_first_incompleteness",
@@ -2295,6 +3236,8 @@
     "AISafetyAtlas.Oversight.Debate.correctness",
     "AISafetyAtlas.Oversight.Debate.soundness",
     "AISafetyAtlas.Oversight.Debate.vera_fast",
+    "AISafetyAtlas.Oversight.JointObservation.consortium_covers_of_registry_covers",
+    "AISafetyAtlas.Oversight.JointObservation.not_registry_covers_of_emit_collision",
     "AISafetyAtlas.Oversight.exists_cannotForce_false_and_forces",
     "AISafetyAtlas.Oversight.forces_of_constant_effect",
     "AISafetyAtlas.Oversight.forces_of_constant_effect_of_not_knowable",
@@ -2307,7 +3250,9 @@
     "AISafetyAtlas.Preference.Source.ReasonableForF.proposition_eight",
     "AISafetyAtlas.Preference.Source.ReasonableForF.proposition_seven",
     "AISafetyAtlas.Preference.Source.ReasonableForF.theorem_two_conditional",
+    "AISafetyAtlas.Preference.behaviour_le_of_evaluatesTo",
     "AISafetyAtlas.Preference.consistent_rewards_eq_univ",
+    "AISafetyAtlas.Preference.consistent_rewards_of_trajectory_eq_univ",
     "AISafetyAtlas.Preference.degenerate_explanation_cheap",
     "AISafetyAtlas.Preference.exists_reward",
     "AISafetyAtlas.Preference.explanation_at_least_behaviour",
@@ -2323,13 +3268,70 @@
     "AISafetyAtlas.SocialChoice.Utility.arrow",
     "AISafetyAtlas.SocialChoice.arrow",
     "AISafetyAtlas.SocialChoice.gibbard_satterthwaite",
+    "AISafetyAtlas.Sovereignty.AmendmentLog.unbroken_chain_is_not_a_constraint",
+    "AISafetyAtlas.Sovereignty.Attestation.attestation_is_not_the_claim",
+    "AISafetyAtlas.Sovereignty.Attestation.properties_are_independent",
+    "AISafetyAtlas.Sovereignty.CapabilityAssessment.no_procedure_on_output_recovers_fallback",
+    "AISafetyAtlas.Sovereignty.CapabilityAssessment.protocols_are_incomparable",
+    "AISafetyAtlas.Sovereignty.CapabilityAssessment.withdrawal_settles_and_no_output_procedure_does",
+    "AISafetyAtlas.Sovereignty.Conformity.passes_every_check_and_not_operable",
+    "AISafetyAtlas.Sovereignty.DelegationChain.power_over_a_matter_does_not_compose",
+    "AISafetyAtlas.Sovereignty.DoxasticAgent.mem_of_agent_forces",
+    "AISafetyAtlas.Sovereignty.Enforcement.undetectable_norm_is_unenforceable",
+    "AISafetyAtlas.Sovereignty.Enlarges.forces",
+    "AISafetyAtlas.Sovereignty.Institution.exists_recognized_not_authorized",
+    "AISafetyAtlas.Sovereignty.InstitutionalSetting.exists_empowered_possible_not_permitted",
+    "AISafetyAtlas.Sovereignty.MultiplyRetargetable.mostOrbit",
+    "AISafetyAtlas.Sovereignty.NormSystem.forbidden_iff_not_permitted_iff",
+    "AISafetyAtlas.Sovereignty.Plant.exists_robustInput_iff",
+    "AISafetyAtlas.Sovereignty.Playable.trulyPlayable_of_finite",
+    "AISafetyAtlas.Sovereignty.Refusal.safety_suite_admits_a_refusal",
+    "AISafetyAtlas.Sovereignty.Represents.surjective_outcome",
+    "AISafetyAtlas.Sovereignty.Setting.not_independenceFree_of_universal_threat",
+    "AISafetyAtlas.Sovereignty.Setting.republicanFree_of_independenceFree",
+    "AISafetyAtlas.Sovereignty.ShutdownChannel.obedience_does_not_give_authority",
+    "AISafetyAtlas.Sovereignty.SimpleGame.banzhafRaw_eq_swings_div",
+    "AISafetyAtlas.Sovereignty.SimpleGame.shapleyShubik_eq_zero_iff",
+    "AISafetyAtlas.Sovereignty.countsAs_validates_refl_and_trans",
+    "AISafetyAtlas.Sovereignty.demandwise_iff_exists_selector",
+    "AISafetyAtlas.Sovereignty.empowerment_eq_log_card_range",
+    "AISafetyAtlas.Sovereignty.eu_determined_mostOrbit",
+    "AISafetyAtlas.Sovereignty.exists_mixed_value",
+    "AISafetyAtlas.Sovereignty.exists_output_rise_with_fallback_fall",
+    "AISafetyAtlas.Sovereignty.exists_success_le_inv",
+    "AISafetyAtlas.Sovereignty.exists_uniformDecision_iff",
+    "AISafetyAtlas.Sovereignty.forces_of_simulates",
+    "AISafetyAtlas.Sovereignty.gameFormAcyclic_iff",
+    "AISafetyAtlas.Sovereignty.influenceCapacity_eq_zero_iff",
+    "AISafetyAtlas.Sovereignty.lowerValue_diracLaw_eq_one_iff",
+    "AISafetyAtlas.Sovereignty.magnitude_does_not_decide_authorship",
+    "AISafetyAtlas.Sovereignty.maintenanceFloor_of_practice_floor",
+    "AISafetyAtlas.Sovereignty.no_authority_from_ungrounded_cycles",
+    "AISafetyAtlas.Sovereignty.not_exists_gameForm_cofiniteEff",
+    "AISafetyAtlas.Sovereignty.not_exists_label_agreeing_with_both",
+    "AISafetyAtlas.Sovereignty.not_gameFormAcyclic_of_cycle",
+    "AISafetyAtlas.Sovereignty.oughtImpliesCan_does_not_give_permission",
+    "AISafetyAtlas.Sovereignty.retainsFamily_and_not_demandwise",
+    "AISafetyAtlas.Sovereignty.retainsFamily_of_represents",
+    "AISafetyAtlas.Sovereignty.safetyKernel_subset_of_adversaryLe",
+    "AISafetyAtlas.Sovereignty.sov1_of_retainsFamily_singleton",
+    "AISafetyAtlas.Sovereignty.transmitsZeroError_iff_exists_code",
     "AISafetyAtlas.Verification.AgentBehavior.no_behavioral_safety_verifier",
+    "AISafetyAtlas.Verification.Containment.harming_undecidable",
+    "AISafetyAtlas.Verification.FullAccess.access_is_not_what_separates_them",
+    "AISafetyAtlas.Verification.FullAccess.fullAccessVerifier_exactArtifact",
+    "AISafetyAtlas.Verification.FullAccess.no_fullAccessVerifier_of_extensional",
     "AISafetyAtlas.Verification.Robot.action_safety_unverifiable",
-    "AISafetyAtlas.Wireheading.AgentEquations.value_eq_of_agree_on_window",
+    "AISafetyAtlas.Verification.Robot.alwaysSatisfies_run",
+    "AISafetyAtlas.Wireheading.AgentEquations.value_runHistory_eq_of_agree_on_window",
     "AISafetyAtlas.Wireheading.CRMDP.Model.everitt_theorem_eleven",
+    "AISafetyAtlas.Wireheading.GoalPreservation.scheduleModel_optimalAt",
+    "AISafetyAtlas.Wireheading.GoalPreservationRun.Model.equation_thirteen",
     "AISafetyAtlas.Wireheading.GoalPreservationSource.Model.selected_matches_initial",
     "AISafetyAtlas.Wireheading.ObservationLimits.not_knowable_trueReturn",
     "AISafetyAtlas.Wireheading.ObservationLimits.not_knowable_trueReturn_of_complement_mem",
-    "AISafetyAtlas.Wireheading.ObservationLimits.returnOver_zeroEnv_complement"
+    "AISafetyAtlas.Wireheading.ObservationLimits.returnOver_zeroEnv_complement",
+    "AISafetyAtlas.Wireheading.RewardGrid.everitt_theorem_eleven_gridClass",
+    "AISafetyAtlas.Wireheading.ValueLearning.Beliefs.vrlValue_of_isCP"
   ]
 }

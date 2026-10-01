@@ -97,4 +97,11 @@ example : ∀ p : Bool, ∃ q : Bool, flatTwoCycle q p := by
   intro p
   cases p <;> simp [flatTwoCycle]
 
+/-- **Perfect self-awareness is impossible here.** The corollary of Theorem 4.8,
+at the model the file builds: Theorem 4.8 says *some* available process has no
+available internal observer, and perfect self-awareness asks that *every* one
+does. The conclusion follows, and nothing had drawn it at a model. -/
+theorem cyclicModel_not_perfectlySelfAware : ¬ PerfectlySelfAware cyclicModel :=
+  cyclicModel.not_perfectlySelfAware
+
 end AISafetyAtlas.Examples.SelfAwareness

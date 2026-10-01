@@ -97,7 +97,7 @@ renaming a regulator does not make a bridge, and it does not make a joint either
   regulator, a plant, and a channel. Reading a learned policy as the regulator
   is an application line, not a theorem in this module; see
   `docs/status/applications.md` for how those are graded and
-  `docs/bridges/` for what review a bridge has to survive.
+  `docs/interpretation-reviews/` for what review a bridge has to survive.
 - **Not a claim that a controller with enough variety succeeds.** All of these
   are necessary conditions. `ashby_variety_ge_isSharp` says the
   counting bound is tight, not that meeting it suffices for any particular task.
@@ -109,7 +109,17 @@ renaming a regulator does not make a bridge, and it does not make a joint either
   variety bound into a control-loss bound or back. They sit side by side because
   they are the same question in two idioms, which is a claim about reading, not
   a proved correspondence.
-- **The survey's other control rows are still empty.** Dynamical
-  uncontrollability, the Good Regulator theorem, and uncontrollability of AI
-  carry no Lean on any branch.
+- **The Good Regulator theorem carries no Lean on any branch**, checked
+  2026-09-13. Conant and Ashby's theorem is an entropy statement about an
+  optimal regulator's conditional distribution; Ashby's law of requisite
+  variety, which is what this module has, is a different theorem by one of the
+  same authors. `BY-003`'s row note records what a formalization would have to
+  state.
+- **Dynamical uncontrollability is still unproved**, but no longer empty:
+  `AISafetyAtlas.LinearSystems` carries the Kalman and Hautus criteria and, since
+  2026-09-13, Klamka's counting test. All of it is algebraic — nothing there
+  defines a trajectory, a solution or an output signal — so "the state cannot be
+  driven, or reconstructed" is still not a theorem anywhere in this repository.
+- **Uncontrollability of AI carries no Lean.** `BY-040`'s source states no
+  theorem of its own; its row note records the reading.
 -/

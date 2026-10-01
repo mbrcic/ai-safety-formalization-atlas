@@ -98,9 +98,9 @@ public theorem runRandomizedTranscript_one_const (family : PolicyFamily skel)
 analyst's *expected* error is its error. This is what makes print's
 *"expected error"* a genuine generalization of the deterministic reading rather
 than a different quantity on the deterministic instances. -/
-public theorem pmfExpect_const_strategy (f : List ℚ → ℝ) (r : List ℚ) :
-    pmfExpect (PMF.pure r) f = f r :=
-  pmfExpect_pure r f
+public theorem expect_const_strategy (f : List ℚ → ℝ) (r : List ℚ) :
+    Decision.expect (PMF.pure r) f = f r :=
+  Decision.expect_pure r f
 
 /-! ## `N(ε)` is `⊤` when nothing achieves `ε`
 
@@ -143,5 +143,43 @@ public theorem exactMinimalBudget_emptyClass {m : ℕ}
   · apply sInf_le
     exact ⟨0, rfl⟩
   · exact bot_le
+
+/-! ## Four more leaves, applied generically over `skel`
+
+None of the four needs a concrete strategy, estimator, family or model: each
+conclusion holds for every instance of its type, so the argument itself can
+stay a bound variable and the application is the whole witness. -/
+
+/-- **The risk against the empty budget is zero, on `skel`.** -/
+public theorem trivial_exactAnalystRisk_empty (n : ℕ)
+    (strategy : RandomizedQueryStrategy (skel.mapRat ℝ))
+    (estimator : RandomizedEstimator (Fin 2) (binaryDim (Fin 2)) ℝ) :
+    exactAnalystRisk (skel.mapRat ℝ) ∅ n strategy estimator = 0 :=
+  exactAnalystRisk_empty (skel.mapRat ℝ) n strategy estimator
+
+/-- **The exact policy answer does not see masked coordinates, at
+`trivialQuery`.** Its visible set is `∅`, so the hypothesis is vacuous:
+nothing is visible to disagree on. -/
+public theorem trivialQuery_congr_observation (family : PolicyFamily skel)
+    (w : Assignment (Fin 2) (binaryDim (Fin 2))) :
+    exactPolicyAnswer skel family trivialQuery
+      = exactPolicyAnswer skel family { trivialQuery with observation := w } :=
+  exactPolicyAnswer_congr_observation skel family trivialQuery w
+    (fun c hc => absurd hc (Finset.notMem_empty c))
+
+/-- **The measure-valued expected error is at most one, on `skel`.** -/
+public theorem trivial_measureExpectedError_le_one
+    (M : Model (Fin 2) (binaryDim (Fin 2)) ℝ) (family : PolicyFamily (skel.mapRat ℝ))
+    (strategy : RandomizedQueryStrategy (skel.mapRat ℝ))
+    (estimator : MeasureEstimator (Fin 2) (binaryDim (Fin 2))) (n : ℕ) :
+    measureExpectedError (skel.mapRat ℝ) M family strategy estimator n ≤ 1 :=
+  measureExpectedError_le_one (skel.mapRat ℝ) M family strategy estimator n
+
+/-- **The measure-valued and exact minimax risks agree, on `skel`.** -/
+public theorem skel_measureMinimaxRisk_eq_exactMinimaxRisk
+    (modelClass : Set (Model (Fin 2) (binaryDim (Fin 2)) ℝ)) (n : ℕ) :
+    measureMinimaxRisk (skel.mapRat ℝ) modelClass n
+      = exactMinimaxRisk (skel.mapRat ℝ) modelClass n :=
+  measureMinimaxRisk_eq_exactMinimaxRisk_binary (skel.mapRat ℝ) modelClass n
 
 end AISafetyAtlas.Examples.Causal.Query

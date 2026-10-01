@@ -10,7 +10,7 @@ Edges come from the elaborated Lean environment. This answers the question the p
 
 So `A → B` means *`B` occurs in `A`'s statement, or in `A`'s body when `A` is a definition*. A lemma used only inside a proof does not appear. Reading the table as a complete call graph would be wrong, and the two sections below are scoped so that they stay true under this limit.
 
-`73` authored declarations in `AISafetyAtlas.Wireheading.*` (33 theorems). Compiler-generated companions and projections are dropped.
+`504` authored declarations in `AISafetyAtlas.Wireheading.*` (298 theorems). Compiler-generated companions and projections are dropped.
 
 ## Load-bearing declarations
 
@@ -18,14 +18,84 @@ Named in the statements of eight or more others. A change to one of these is a c
 
 | Declaration | Named by |
 |---|---|
-| `CRMDP.Env` | 22 |
-| `CRMDP.Policy` | 19 |
-| `CRMDP.History` | 10 |
-| `CRMDP.Env.complement` | 10 |
-| `Objective` | 9 |
-| `AgentEquations.History` | 8 |
-| `AgentEquations.Belief` | 8 |
-| `AgentEquations.Agent` | 8 |
+| `AgentEquations.History` | 237 |
+| `CRMDP.Policy` | 120 |
+| `AgentEquations.Belief` | 118 |
+| `DelusionBox.Act` | 98 |
+| `AgentEquations.Agent` | 96 |
+| `CRMDP.Env` | 78 |
+| `RewardGrid.GridEnv` | 75 |
+| `AgentEquations.actionValue` | 68 |
+| `AgentEquations.Agent.utility` | 61 |
+| `SelfMod.CompAct` | 51 |
+| `AgentEquations.value` | 46 |
+| `AgentEquations.Belief.IsSubprobability` | 46 |
+| `AgentEquations.Belief.cond` | 44 |
+| `CRMDP.StochPolicy` | 41 |
+| `AgentEquations.Agent.horizon` | 41 |
+| `RewardGrid.toEnv` | 38 |
+| `CRMDP.Obs` | 37 |
+| `ProgramPrior.Model` | 36 |
+| `CRMDP.Env.complement` | 35 |
+| `CRMDP.Reward` | 31 |
+| `RewardGrid.FullEnv` | 30 |
+| `DelusionBox.goalAgent` | 29 |
+| `CRMDP.History` | 28 |
+| `ValueLearning.Beliefs` | 26 |
+| `SelfMod.Exec` | 24 |
+| `ProgramPrior.Model.mass` | 23 |
+| `Mixture.posterior` | 21 |
+| `Mixture.mixtureBelief` | 21 |
+| `DelusionBox.shortHorizon` | 21 |
+| `CRMDP.stochReturnOver` | 21 |
+| `CRMDP.returnOver` | 21 |
+| `SelfMod.printValue` | 20 |
+| `DelusionBox.GlobalEnv` | 20 |
+| `Corruption.ComplementedClass.worstCaseRegret` | 18 |
+| `ProgramPrior.Model.belief` | 17 |
+| `ProgramPrior.Model.Consistent` | 17 |
+| `DelusionBox.rlAgent` | 17 |
+| `SelfMod.smValue` | 16 |
+| `RewardGrid.GridEnv.complement` | 16 |
+| `CRMDP.StochPolicy.ofDet` | 16 |
+| `CRMDP.Env.trueReward` | 16 |
+| `Corruption.ComplementedClass` | 15 |
+| `CRMDP.mixedReturnOver` | 15 |
+| `RewardGrid.gridReturn` | 14 |
+| `GoalPreservation.Schedule` | 14 |
+| `DelusionBox.diracBelief` | 14 |
+| `AgentEquations.historyMass` | 14 |
+| `ProgramPrior.Model.weight` | 13 |
+| `GoalPreservationSource.Model` | 13 |
+| `GoalPreservationRun.Model` | 13 |
+| `Objective` | 12 |
+| `Mixture.policyValue` | 12 |
+| `Corruption.ComplementedClass.worstPolicy` | 12 |
+| `ValueLearning.Beliefs.stateGiven` | 11 |
+| `RewardGrid.gridVal` | 11 |
+| `Mixture.policyActionValue` | 11 |
+| `CRMDP.Env.channel` | 11 |
+| `ValueLearning.Beliefs.utilityPrior` | 10 |
+| `ValueLearning.Beliefs.rewardGiven` | 10 |
+| `RewardGrid.stochBestPolicy` | 10 |
+| `RewardGrid.fullMixedReturn` | 10 |
+| `ProgramPrior.Model.run` | 10 |
+| `ValueLearning.Beliefs.marginalReward` | 9 |
+| `SelfMod.printInfiniteValue` | 9 |
+| `ProgramPrior.Model.setMass` | 9 |
+| `GoalPreservationSource.Model.qValue` | 9 |
+| `GoalPreservation.Model.OptimalAt` | 9 |
+| `GoalPreservation.Model` | 9 |
+| `DelusionBox.program` | 9 |
+| `ValueLearning.Beliefs.vrlValue` | 8 |
+| `RewardGrid.fullReturn` | 8 |
+| `RewardGrid.FullEnv.transition` | 8 |
+| `RewardGrid.FullEnv.grid` | 8 |
+| `GoalPreservationSource.Model.act` | 8 |
+| `DelusionBox.GlobalEnv.next` | 8 |
+| `DelusionBox.GlobalEnv.IsConstant` | 8 |
+| `CRMDP.returnWithStart` | 8 |
+| `CRMDP.Model` | 8 |
 
 ## Definitions no statement and no example mentions
 
@@ -34,23 +104,65 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 **Instances always appear here.** Typeclass resolution names nothing, so an instance has no textual user even when every consumer depends on it. Deleting one because it is listed here is how a checker stops compiling.
 
 - `ObservationLimits.complementWitness`
+- `ProgramPrior.Model.Consistent.below.snoc`
+- `RewardGrid.FullEnv.instInhabited`
 
 ## Direct dependencies
 
 | Declaration | Kind | Names |
 |---|---|---|
 | `AgentEquations.Agent` | definition | — |
+| `AgentEquations.Attains` | definition | `AgentEquations.Agent`, `AgentEquations.Belief`, `AgentEquations.History`, `AgentEquations.actionValue` |
 | `AgentEquations.Belief` | definition | — |
+| `AgentEquations.Belief.IsSubprobability` | definition | `AgentEquations.Belief` |
+| `AgentEquations.Belief.IsSubprobability.abs_tsum_mul_le` | theorem | `AgentEquations.Belief`, `AgentEquations.Belief.IsSubprobability`, `AgentEquations.Belief.cond`, `AgentEquations.History` |
+| `AgentEquations.Belief.IsSubprobability.summable_mul` | theorem | `AgentEquations.Belief`, `AgentEquations.Belief.IsSubprobability`, `AgentEquations.Belief.cond`, `AgentEquations.History` |
 | `AgentEquations.History` | definition | — |
+| `AgentEquations.abs_actionValue_le_horizonBudget` | theorem | `AgentEquations.Agent`, `AgentEquations.Agent.utility`, `AgentEquations.Belief`, `AgentEquations.Belief.IsSubprobability`, `AgentEquations.History`, `AgentEquations.actionValue`, `AgentEquations.horizonBudget` |
+| `AgentEquations.abs_infiniteValue_le` | theorem | `AgentEquations.Agent`, `AgentEquations.Agent.horizon`, `AgentEquations.Agent.utility`, `AgentEquations.Belief`, `AgentEquations.Belief.IsSubprobability`, `AgentEquations.History`, `AgentEquations.infiniteValue` |
+| `AgentEquations.abs_value_le_horizonBudget` | theorem | `AgentEquations.Agent`, `AgentEquations.Agent.utility`, `AgentEquations.Belief`, `AgentEquations.Belief.IsSubprobability`, `AgentEquations.History`, `AgentEquations.horizonBudget`, `AgentEquations.value` |
+| `AgentEquations.abs_value_succ_sub_le` | theorem | `AgentEquations.Agent`, `AgentEquations.Agent.horizon`, `AgentEquations.Agent.utility`, `AgentEquations.Belief`, `AgentEquations.Belief.IsSubprobability`, `AgentEquations.History`, `AgentEquations.value` |
 | `AgentEquations.actionValue` | definition | `AgentEquations.Agent`, `AgentEquations.Belief`, `AgentEquations.Belief.cond`, `AgentEquations.History`, `AgentEquations.value` |
-| `AgentEquations.bestAction` | definition | `AgentEquations.Agent`, `AgentEquations.Belief`, `AgentEquations.History`, `AgentEquations.actionValue` |
-| `AgentEquations.bestAction_max` | theorem | `AgentEquations.Agent`, `AgentEquations.Belief`, `AgentEquations.History`, `AgentEquations.actionValue`, `AgentEquations.bestAction` |
+| `AgentEquations.actionValue_bddAbove` | theorem | `AgentEquations.Agent`, `AgentEquations.Agent.utility`, `AgentEquations.Belief`, `AgentEquations.Belief.IsSubprobability`, `AgentEquations.History`, `AgentEquations.actionValue` |
+| `AgentEquations.actionValue_eq_sum` | theorem | `AgentEquations.Agent`, `AgentEquations.Belief`, `AgentEquations.Belief.cond`, `AgentEquations.History`, `AgentEquations.actionValue`, `AgentEquations.value` |
+| `AgentEquations.actionValue_summable` | theorem | `AgentEquations.Agent`, `AgentEquations.Agent.utility`, `AgentEquations.Belief`, `AgentEquations.Belief.IsSubprobability`, `AgentEquations.Belief.cond`, `AgentEquations.History`, `AgentEquations.value` |
+| `AgentEquations.attains_of_fintype` | theorem | `AgentEquations.Agent`, `AgentEquations.Attains`, `AgentEquations.Belief`, `AgentEquations.History` |
+| `AgentEquations.bestAction` | definition | `AgentEquations.Agent`, `AgentEquations.Attains`, `AgentEquations.Belief`, `AgentEquations.History`, `AgentEquations.actionValue` |
+| `AgentEquations.bestAction_max` | theorem | `AgentEquations.Agent`, `AgentEquations.Attains`, `AgentEquations.Belief`, `AgentEquations.History`, `AgentEquations.actionValue`, `AgentEquations.bestAction` |
+| `AgentEquations.historyMass` | definition | `AgentEquations.Belief`, `AgentEquations.History`, `AgentEquations.historyMass.go` |
+| `AgentEquations.historyMass.go` | definition | `AgentEquations.Belief`, `AgentEquations.History` |
+| `AgentEquations.historyMass_append_singleton` | theorem | `AgentEquations.Belief`, `AgentEquations.Belief.cond`, `AgentEquations.History`, `AgentEquations.historyMass` |
+| `AgentEquations.historyMass_nil` | theorem | `AgentEquations.Belief`, `AgentEquations.historyMass` |
+| `AgentEquations.historyMass_nonneg` | theorem | `AgentEquations.Belief`, `AgentEquations.Belief.cond`, `AgentEquations.History`, `AgentEquations.historyMass` |
+| `AgentEquations.historyMass_singleton` | theorem | `AgentEquations.Belief`, `AgentEquations.Belief.cond`, `AgentEquations.historyMass` |
+| `AgentEquations.horizonBudget` | definition | `AgentEquations.Agent` |
+| `AgentEquations.horizonBudget_nonneg` | theorem | `AgentEquations.Agent`, `AgentEquations.horizonBudget` |
+| `AgentEquations.infiniteActionValue` | definition | `AgentEquations.Agent`, `AgentEquations.Belief`, `AgentEquations.Belief.cond`, `AgentEquations.History`, `AgentEquations.infiniteValue` |
+| `AgentEquations.infiniteActionValue_bddAbove` | theorem | `AgentEquations.Agent`, `AgentEquations.Agent.horizon`, `AgentEquations.Agent.utility`, `AgentEquations.Belief`, `AgentEquations.Belief.IsSubprobability`, `AgentEquations.History`, `AgentEquations.infiniteActionValue` |
+| `AgentEquations.infiniteValue` | definition | `AgentEquations.Agent`, `AgentEquations.Belief`, `AgentEquations.History`, `AgentEquations.value` |
+| `AgentEquations.infiniteValue_eq` | theorem | `AgentEquations.Agent`, `AgentEquations.Agent.horizon`, `AgentEquations.Agent.utility`, `AgentEquations.Belief`, `AgentEquations.Belief.IsSubprobability`, `AgentEquations.History`, `AgentEquations.infiniteActionValue`, `AgentEquations.infiniteValue` |
+| `AgentEquations.length_ofDecisionHistory` | theorem | `AgentEquations.ofDecisionHistory` |
+| `AgentEquations.ofDecisionHistory` | definition | `AgentEquations.History` |
+| `AgentEquations.ofDecisionHistory_toDecisionHistory` | theorem | `AgentEquations.History`, `AgentEquations.ofDecisionHistory`, `AgentEquations.toDecisionHistory` |
+| `AgentEquations.runHistory` | definition | `AgentEquations.History`, `AgentEquations.ofDecisionHistory` |
+| `AgentEquations.runHistory_length` | theorem | `AgentEquations.runHistory` |
+| `AgentEquations.runHistory_zero` | theorem | `AgentEquations.History`, `AgentEquations.runHistory` |
+| `AgentEquations.tendsto_value_infiniteValue` | theorem | `AgentEquations.Agent`, `AgentEquations.Agent.horizon`, `AgentEquations.Agent.utility`, `AgentEquations.Belief`, `AgentEquations.Belief.IsSubprobability`, `AgentEquations.History`, `AgentEquations.infiniteValue`, `AgentEquations.value` |
+| `AgentEquations.toDecisionHistory` | definition | `AgentEquations.History` |
+| `AgentEquations.toDecisionHistory_injective` | theorem | `AgentEquations.History`, `AgentEquations.toDecisionHistory` |
+| `AgentEquations.toDecisionHistory_ofDecisionHistory` | theorem | `AgentEquations.ofDecisionHistory`, `AgentEquations.toDecisionHistory` |
 | `AgentEquations.truncation_exact` | theorem | `AgentEquations.Agent`, `AgentEquations.Agent.horizon`, `AgentEquations.Belief`, `AgentEquations.History`, `AgentEquations.value` |
 | `AgentEquations.value` | definition | `AgentEquations.Agent`, `AgentEquations.Belief`, `AgentEquations.History` |
+| `AgentEquations.value_cauchySeq` | theorem | `AgentEquations.Agent`, `AgentEquations.Agent.horizon`, `AgentEquations.Agent.utility`, `AgentEquations.Belief`, `AgentEquations.Belief.IsSubprobability`, `AgentEquations.History`, `AgentEquations.value` |
 | `AgentEquations.value_eq_of_agree_on_window` | theorem | `AgentEquations.Agent`, `AgentEquations.Agent.horizon`, `AgentEquations.Agent.utility`, `AgentEquations.Belief`, `AgentEquations.History`, `AgentEquations.value` |
 | `AgentEquations.value_eq_zero_of_horizon_vanishes` | theorem | `AgentEquations.Agent`, `AgentEquations.Agent.horizon`, `AgentEquations.Belief`, `AgentEquations.History`, `AgentEquations.value` |
+| `AgentEquations.value_error_le_tail` | theorem | `AgentEquations.Agent`, `AgentEquations.Agent.horizon`, `AgentEquations.Agent.utility`, `AgentEquations.Belief`, `AgentEquations.Belief.IsSubprobability`, `AgentEquations.History`, `AgentEquations.infiniteValue`, `AgentEquations.value` |
+| `AgentEquations.value_runHistory_eq_of_agree_on_window` | theorem | `AgentEquations.Agent`, `AgentEquations.Agent.horizon`, `AgentEquations.Agent.utility`, `AgentEquations.Belief`, `AgentEquations.History`, `AgentEquations.runHistory`, `AgentEquations.value` |
 | `AgentEquations.value_succ` | theorem | `AgentEquations.Agent`, `AgentEquations.Agent.horizon`, `AgentEquations.Agent.utility`, `AgentEquations.Belief`, `AgentEquations.History`, `AgentEquations.actionValue`, `AgentEquations.value` |
+| `AgentEquations.value_succ_eq_sup'` | theorem | `AgentEquations.Agent`, `AgentEquations.Agent.horizon`, `AgentEquations.Agent.utility`, `AgentEquations.Belief`, `AgentEquations.History`, `AgentEquations.actionValue`, `AgentEquations.value` |
 | `CRMDP.Env` | definition | — |
+| `CRMDP.Env.channel` | definition | `CRMDP.Env`, `CRMDP.Env.observed`, `CRMDP.Obs`, `CRMDP.Reward` |
+| `CRMDP.Env.channel_complement` | theorem | `CRMDP.Env`, `CRMDP.Env.channel`, `CRMDP.Env.complement`, `CRMDP.Obs` |
 | `CRMDP.Env.complement` | definition | `CRMDP.Env`, `CRMDP.Env.corruption`, `CRMDP.Env.rewardComplement`, `CRMDP.Env.trueReward`, `CRMDP.Reward` |
 | `CRMDP.Env.complement_involutive` | theorem | `CRMDP.Env`, `CRMDP.Env.complement` |
 | `CRMDP.Env.observed` | definition | `CRMDP.Env`, `CRMDP.Env.corruption`, `CRMDP.Env.trueReward`, `CRMDP.Reward` |
@@ -58,28 +170,150 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 | `CRMDP.Env.rewardComplement` | definition | `CRMDP.Reward` |
 | `CRMDP.Env.rewardComplement_involutive` | theorem | `CRMDP.Env.rewardComplement`, `CRMDP.Reward` |
 | `CRMDP.History` | definition | `CRMDP.Obs` |
+| `CRMDP.MixedModel` | definition | — |
+| `CRMDP.MixedModel.everitt_theorem_eleven` | theorem | `CRMDP.MixedModel`, `CRMDP.MixedModel.toComplementedClass`, `Corruption.ComplementedClass.worstCaseRegret`, `Corruption.ComplementedClass.worstPolicy` |
+| `CRMDP.MixedModel.toComplementedClass` | definition | `CRMDP.MixedModel`, `CRMDP.MixedModel.bestPolicy`, `CRMDP.MixedModel.bestPolicy_best`, `CRMDP.MixedModel.complement`, `CRMDP.MixedModel.complement_involutive`, `CRMDP.MixedModel.env`, `CRMDP.MixedModel.horizon`, `CRMDP.MixedModel.mdp`, `CRMDP.MixedModel.pol`, `CRMDP.MixedModel.start`, `CRMDP.MixedModel.worstEnvironment`, `CRMDP.MixedModel.worstEnvironment_worst`, `CRMDP.MixedModel.worstPolicy`, `CRMDP.MixedModel.worstPolicy_worst`, `CRMDP.mixedReturnOver`, `Corruption.ComplementedClass` |
 | `CRMDP.Model` | definition | — |
 | `CRMDP.Model.cannot_rule_out_half_maximal_regret` | theorem | `CRMDP.Env`, `CRMDP.Model`, `CRMDP.Model.toComplementedClass`, `CRMDP.Policy`, `Corruption.ComplementedClass.toRegretModel` |
 | `CRMDP.Model.everitt_theorem_eleven` | theorem | `CRMDP.Env`, `CRMDP.Model`, `CRMDP.Model.toComplementedClass`, `CRMDP.Policy`, `Corruption.ComplementedClass.worstCaseRegret`, `Corruption.ComplementedClass.worstPolicy` |
 | `CRMDP.Model.halfMaximalRegretBound` | theorem | `CRMDP.Env`, `CRMDP.Model`, `CRMDP.Model.toComplementedClass`, `CRMDP.Policy`, `Corruption.ComplementedClass.toRegretModel` |
 | `CRMDP.Model.toComplementedClass` | definition | `CRMDP.Env`, `CRMDP.Env.complement`, `CRMDP.Env.complement_involutive`, `CRMDP.Model`, `CRMDP.Model.bestPolicy`, `CRMDP.Model.bestPolicy_best`, `CRMDP.Model.horizon`, `CRMDP.Model.start`, `CRMDP.Model.transition`, `CRMDP.Model.worstEnvironment`, `CRMDP.Model.worstEnvironment_worst`, `CRMDP.Model.worstPolicy`, `CRMDP.Model.worstPolicy_worst`, `CRMDP.Policy`, `CRMDP.returnOver`, `Corruption.ComplementedClass` |
+| `CRMDP.Model.toStoch` | definition | `CRMDP.Model`, `CRMDP.Model.bestPolicy`, `CRMDP.Model.horizon`, `CRMDP.Model.start`, `CRMDP.Model.transition`, `CRMDP.Model.worstEnvironment`, `CRMDP.Model.worstPolicy`, `CRMDP.StochModel` |
+| `CRMDP.Model.toStoch_returnValue` | theorem | `CRMDP.Env`, `CRMDP.Model`, `CRMDP.Model.toComplementedClass`, `CRMDP.Model.toStoch`, `CRMDP.Policy`, `CRMDP.StochModel.toComplementedClass`, `Corruption.ComplementedClass.returnValue` |
 | `CRMDP.Obs` | definition | `CRMDP.Reward` |
-| `CRMDP.Policy` | definition | `CRMDP.History` |
+| `CRMDP.Policy` | definition | `CRMDP.Obs` |
 | `CRMDP.Reward` | definition | — |
-| `CRMDP.historyUpTo` | definition | `CRMDP.Env`, `CRMDP.History`, `CRMDP.Policy`, `CRMDP.run` |
+| `CRMDP.StochModel` | definition | — |
+| `CRMDP.StochModel.everitt_theorem_eleven` | theorem | `CRMDP.Env`, `CRMDP.Policy`, `CRMDP.StochModel`, `CRMDP.StochModel.toComplementedClass`, `Corruption.ComplementedClass.worstCaseRegret`, `Corruption.ComplementedClass.worstPolicy` |
+| `CRMDP.StochModel.toComplementedClass` | definition | `CRMDP.Env`, `CRMDP.Env.complement`, `CRMDP.Env.complement_involutive`, `CRMDP.Policy`, `CRMDP.StochModel`, `CRMDP.StochModel.bestPolicy`, `CRMDP.StochModel.bestPolicy_best`, `CRMDP.StochModel.horizon`, `CRMDP.StochModel.mdp`, `CRMDP.StochModel.start`, `CRMDP.StochModel.worstEnvironment`, `CRMDP.StochModel.worstEnvironment_worst`, `CRMDP.StochModel.worstPolicy`, `CRMDP.StochModel.worstPolicy_worst`, `CRMDP.stochReturnOver`, `Corruption.ComplementedClass` |
+| `CRMDP.StochModel.toMixed` | definition | `CRMDP.Env`, `CRMDP.Env.complement`, `CRMDP.Env.complement_involutive`, `CRMDP.MixedModel`, `CRMDP.Policy`, `CRMDP.StochModel`, `CRMDP.StochModel.bestPolicy`, `CRMDP.StochModel.horizon`, `CRMDP.StochModel.mdp`, `CRMDP.StochModel.start`, `CRMDP.StochModel.worstEnvironment`, `CRMDP.StochModel.worstPolicy`, `CRMDP.StochPolicy.ofDet` |
+| `CRMDP.StochModel.toMixed_returnValue` | theorem | `CRMDP.Env`, `CRMDP.MixedModel.toComplementedClass`, `CRMDP.Policy`, `CRMDP.StochModel`, `CRMDP.StochModel.toComplementedClass`, `CRMDP.StochModel.toMixed`, `Corruption.ComplementedClass.returnValue` |
+| `CRMDP.StochPolicy` | definition | `CRMDP.Obs` |
+| `CRMDP.StochPolicy.ofDet` | definition | `CRMDP.Obs`, `CRMDP.Policy`, `CRMDP.StochPolicy` |
+| `CRMDP.expectReward` | definition | `CRMDP.Reward` |
+| `CRMDP.expectReward_add_complement` | theorem | `CRMDP.Env.rewardComplement`, `CRMDP.Reward`, `CRMDP.expectReward` |
+| `CRMDP.expectReward_pure` | theorem | `CRMDP.Reward`, `CRMDP.expectReward` |
+| `CRMDP.historyUpTo` | definition | `CRMDP.Env`, `CRMDP.Env.channel`, `CRMDP.History`, `CRMDP.Obs`, `CRMDP.Policy` |
 | `CRMDP.history_complement` | theorem | `CRMDP.Env`, `CRMDP.Env.complement`, `CRMDP.History`, `CRMDP.Policy`, `CRMDP.historyUpTo` |
+| `CRMDP.mixedHistoryUpTo` | definition | `CRMDP.Env`, `CRMDP.Env.channel`, `CRMDP.History`, `CRMDP.Obs`, `CRMDP.StochPolicy` |
+| `CRMDP.mixedHistoryUpTo_ofDet` | theorem | `CRMDP.Env`, `CRMDP.History`, `CRMDP.Policy`, `CRMDP.StochPolicy.ofDet`, `CRMDP.mixedHistoryUpTo`, `CRMDP.stochHistoryUpTo` |
+| `CRMDP.mixedReturnOver` | definition | `CRMDP.Env`, `CRMDP.Env.trueReward`, `CRMDP.StochPolicy`, `CRMDP.expectReward`, `CRMDP.mixedStateAt` |
+| `CRMDP.mixedReturnOver_ofDet` | theorem | `CRMDP.Env`, `CRMDP.Policy`, `CRMDP.StochPolicy.ofDet`, `CRMDP.mixedReturnOver`, `CRMDP.stochReturnOver` |
+| `CRMDP.mixedReturn_add_complement` | theorem | `CRMDP.Env`, `CRMDP.Env.complement`, `CRMDP.StochPolicy`, `CRMDP.mixedReturnOver` |
+| `CRMDP.mixedRun` | definition | `CRMDP.Env`, `CRMDP.Env.channel`, `CRMDP.History`, `CRMDP.Obs`, `CRMDP.StochPolicy` |
+| `CRMDP.mixedRun_complement` | theorem | `CRMDP.Env`, `CRMDP.Env.complement`, `CRMDP.History`, `CRMDP.StochPolicy`, `CRMDP.mixedRun` |
+| `CRMDP.mixedRun_ofDet` | theorem | `CRMDP.Env`, `CRMDP.History`, `CRMDP.Policy`, `CRMDP.StochPolicy.ofDet`, `CRMDP.mixedRun`, `CRMDP.stochRun` |
+| `CRMDP.mixedStateAt` | definition | `CRMDP.Env`, `CRMDP.Env.channel`, `CRMDP.Obs`, `CRMDP.StochPolicy` |
+| `CRMDP.mixedStateAt_complement` | theorem | `CRMDP.Env`, `CRMDP.Env.complement`, `CRMDP.StochPolicy`, `CRMDP.mixedStateAt` |
+| `CRMDP.mixedStateAt_ofDet` | theorem | `CRMDP.Env`, `CRMDP.Policy`, `CRMDP.StochPolicy.ofDet`, `CRMDP.mixedStateAt`, `CRMDP.stochStateAt` |
+| `CRMDP.prob_bool_add` | theorem | — |
+| `CRMDP.prob_toReal_le_one` | theorem | — |
 | `CRMDP.returnOver` | definition | `CRMDP.Env`, `CRMDP.Env.trueReward`, `CRMDP.Policy`, `CRMDP.stateAt` |
+| `CRMDP.returnWithStart` | definition | `CRMDP.Env`, `CRMDP.Env.trueReward`, `CRMDP.Policy`, `CRMDP.stateAt` |
+| `CRMDP.returnWithStart_add_complement` | theorem | `CRMDP.Env`, `CRMDP.Env.complement`, `CRMDP.Policy`, `CRMDP.returnWithStart` |
+| `CRMDP.returnWithStart_add_complement_ne` | theorem | `CRMDP.Env`, `CRMDP.Env.complement`, `CRMDP.Policy`, `CRMDP.returnWithStart` |
+| `CRMDP.returnWithStart_eq_returnOver_add` | theorem | `CRMDP.Env`, `CRMDP.Env.trueReward`, `CRMDP.Policy`, `CRMDP.returnOver`, `CRMDP.returnWithStart` |
+| `CRMDP.returnWithStart_sub` | theorem | `CRMDP.Env`, `CRMDP.Policy`, `CRMDP.returnOver`, `CRMDP.returnWithStart` |
 | `CRMDP.return_add_complement` | theorem | `CRMDP.Env`, `CRMDP.Env.complement`, `CRMDP.Policy`, `CRMDP.returnOver` |
-| `CRMDP.run` | definition | `CRMDP.Env`, `CRMDP.History`, `CRMDP.Policy` |
+| `CRMDP.run` | definition | `CRMDP.Env`, `CRMDP.Env.channel`, `CRMDP.History`, `CRMDP.Obs`, `CRMDP.Policy` |
 | `CRMDP.run_complement` | theorem | `CRMDP.Env`, `CRMDP.Env.complement`, `CRMDP.History`, `CRMDP.Policy`, `CRMDP.run` |
-| `CRMDP.stateAt` | definition | `CRMDP.Env`, `CRMDP.History`, `CRMDP.Policy`, `CRMDP.run` |
+| `CRMDP.stateAt` | definition | `CRMDP.Env`, `CRMDP.Env.channel`, `CRMDP.Obs`, `CRMDP.Policy` |
 | `CRMDP.stateAt_complement` | theorem | `CRMDP.Env`, `CRMDP.Env.complement`, `CRMDP.Policy`, `CRMDP.stateAt` |
+| `CRMDP.stochHistoryUpTo` | definition | `CRMDP.Env`, `CRMDP.Env.channel`, `CRMDP.History`, `CRMDP.Obs`, `CRMDP.Policy` |
+| `CRMDP.stochHistoryUpTo_ofDet` | theorem | `CRMDP.Env`, `CRMDP.History`, `CRMDP.Policy`, `CRMDP.historyUpTo`, `CRMDP.stochHistoryUpTo` |
+| `CRMDP.stochReturnOver` | definition | `CRMDP.Env`, `CRMDP.Env.trueReward`, `CRMDP.Policy`, `CRMDP.expectReward`, `CRMDP.stochStateAt` |
+| `CRMDP.stochReturnOver_ofDet` | theorem | `CRMDP.Env`, `CRMDP.Policy`, `CRMDP.returnOver`, `CRMDP.stochReturnOver` |
+| `CRMDP.stochReturn_add_complement` | theorem | `CRMDP.Env`, `CRMDP.Env.complement`, `CRMDP.Policy`, `CRMDP.stochReturnOver` |
+| `CRMDP.stochRun` | definition | `CRMDP.Env`, `CRMDP.Env.channel`, `CRMDP.History`, `CRMDP.Obs`, `CRMDP.Policy` |
+| `CRMDP.stochRun_complement` | theorem | `CRMDP.Env`, `CRMDP.Env.complement`, `CRMDP.History`, `CRMDP.Policy`, `CRMDP.stochRun` |
+| `CRMDP.stochRun_ofDet` | theorem | `CRMDP.Env`, `CRMDP.History`, `CRMDP.Policy`, `CRMDP.run`, `CRMDP.stochRun` |
+| `CRMDP.stochStateAt` | definition | `CRMDP.Env`, `CRMDP.Env.channel`, `CRMDP.Obs`, `CRMDP.Policy` |
+| `CRMDP.stochStateAt_complement` | theorem | `CRMDP.Env`, `CRMDP.Env.complement`, `CRMDP.Policy`, `CRMDP.stochStateAt` |
+| `CRMDP.stochStateAt_ofDet` | theorem | `CRMDP.Env`, `CRMDP.Policy`, `CRMDP.stateAt`, `CRMDP.stochStateAt` |
+| `CRMDP.summable_expectReward` | theorem | `CRMDP.Reward` |
 | `Corruption.ComplementedClass` | definition | — |
 | `Corruption.ComplementedClass.everitt_theorem_eleven` | theorem | `Corruption.ComplementedClass`, `Corruption.ComplementedClass.worstCaseRegret`, `Corruption.ComplementedClass.worstPolicy` |
 | `Corruption.ComplementedClass.halfMaximalRegretBound` | theorem | `Corruption.ComplementedClass`, `Corruption.ComplementedClass.toRegretModel` |
 | `Corruption.ComplementedClass.regret` | definition | `Corruption.ComplementedClass`, `Corruption.ComplementedClass.bestPolicy`, `Corruption.ComplementedClass.returnValue` |
 | `Corruption.ComplementedClass.toRegretModel` | definition | `Corruption.ComplementedClass`, `Corruption.ComplementedClass.regret`, `Corruption.ComplementedClass.worstCaseRegret`, `Corruption.ComplementedClass.worstEnvironment_worst`, `Corruption.ComplementedClass.worstPolicy`, `Corruption.ComplementedClass.worstPolicy_worst` |
 | `Corruption.ComplementedClass.worstCaseRegret` | definition | `Corruption.ComplementedClass`, `Corruption.ComplementedClass.regret`, `Corruption.ComplementedClass.worstEnvironment` |
+| `DelusionBox.Act` | definition | — |
+| `DelusionBox.GlobalEnv` | definition | — |
+| `DelusionBox.GlobalEnv.IsConstant` | definition | `DelusionBox.GlobalEnv`, `DelusionBox.GlobalEnv.exec` |
+| `DelusionBox.GlobalEnv.globalHistory` | definition | `DelusionBox.Act`, `DelusionBox.GlobalEnv`, `DelusionBox.GlobalEnv.trace` |
+| `DelusionBox.GlobalEnv.globalObs` | definition | `DelusionBox.Act`, `DelusionBox.GlobalEnv`, `DelusionBox.GlobalEnv.globalHistory` |
+| `DelusionBox.GlobalEnv.globalObs_const_of_isConstant` | theorem | `DelusionBox.Act`, `DelusionBox.GlobalEnv`, `DelusionBox.GlobalEnv.IsConstant`, `DelusionBox.GlobalEnv.globalObs`, `DelusionBox.program` |
+| `DelusionBox.GlobalEnv.globalObs_identity` | theorem | `DelusionBox.Act`, `DelusionBox.GlobalEnv`, `DelusionBox.GlobalEnv.globalObs`, `DelusionBox.GlobalEnv.identity`, `DelusionBox.GlobalEnv.innerHistory`, `DelusionBox.program` |
+| `DelusionBox.GlobalEnv.globalObs_indep_inner` | theorem | `DelusionBox.Act`, `DelusionBox.GlobalEnv`, `DelusionBox.GlobalEnv.IsConstant`, `DelusionBox.GlobalEnv.globalObs`, `DelusionBox.program` |
+| `DelusionBox.GlobalEnv.innerHistory` | definition | `DelusionBox.Act`, `DelusionBox.GlobalEnv`, `DelusionBox.GlobalEnv.trace` |
+| `DelusionBox.GlobalEnv.innerHistory_congr_innerAction` | theorem | `DelusionBox.Act`, `DelusionBox.GlobalEnv`, `DelusionBox.GlobalEnv.innerHistory`, `DelusionBox.innerAction` |
+| `DelusionBox.GlobalEnv.innerRun` | definition | `DelusionBox.GlobalEnv` |
+| `DelusionBox.GlobalEnv.next` | definition | `AgentEquations.History`, `DelusionBox.Act`, `DelusionBox.GlobalEnv`, `DelusionBox.GlobalEnv.exec`, `DelusionBox.GlobalEnv.inner`, `DelusionBox.GlobalEnv.innerHistory`, `DelusionBox.innerAction`, `DelusionBox.program` |
+| `DelusionBox.GlobalEnv.next_const` | theorem | `AgentEquations.History`, `DelusionBox.Act`, `DelusionBox.GlobalEnv`, `DelusionBox.GlobalEnv.IsConstant`, `DelusionBox.GlobalEnv.next`, `DelusionBox.program` |
+| `DelusionBox.GlobalEnv.step` | definition | `DelusionBox.Act`, `DelusionBox.GlobalEnv`, `DelusionBox.GlobalEnv.exec`, `DelusionBox.GlobalEnv.inner`, `DelusionBox.innerAction`, `DelusionBox.program` |
+| `DelusionBox.GlobalEnv.trace` | definition | `DelusionBox.Act`, `DelusionBox.GlobalEnv`, `DelusionBox.GlobalEnv.step` |
+| `DelusionBox.GlobalEnv.trace_fst_foldl` | theorem | `DelusionBox.Act`, `DelusionBox.GlobalEnv`, `DelusionBox.GlobalEnv.innerRun`, `DelusionBox.GlobalEnv.step`, `DelusionBox.innerAction` |
+| `DelusionBox.GlobalEnv.trace_snd_const` | theorem | `DelusionBox.Act`, `DelusionBox.GlobalEnv`, `DelusionBox.GlobalEnv.IsConstant`, `DelusionBox.GlobalEnv.step`, `DelusionBox.program` |
+| `DelusionBox.GoalNever` | definition | `AgentEquations.History` |
+| `DelusionBox.GoalOutOfReach` | definition | `AgentEquations.Belief`, `AgentEquations.History` |
+| `DelusionBox.MixesAt` | definition | `AgentEquations.Agent`, `AgentEquations.Belief`, `AgentEquations.History`, `AgentEquations.actionValue` |
+| `DelusionBox.ReachedAtMostOnce` | definition | — |
+| `DelusionBox.ReachesIn` | definition | `AgentEquations.Belief`, `AgentEquations.History` |
+| `DelusionBox.actionValue_diracBelief` | theorem | `AgentEquations.Agent`, `AgentEquations.History`, `AgentEquations.actionValue`, `AgentEquations.value`, `DelusionBox.diracBelief` |
+| `DelusionBox.bestAction_ne_of_lt` | theorem | `AgentEquations.Agent`, `AgentEquations.Attains`, `AgentEquations.Belief`, `AgentEquations.History`, `AgentEquations.actionValue`, `AgentEquations.bestAction` |
+| `DelusionBox.coherentKnowledgeAgent` | definition | `AgentEquations.Agent`, `AgentEquations.Belief`, `AgentEquations.historyMass`, `DelusionBox.knowledgeAgent` |
+| `DelusionBox.companionGoalAgent` | definition | `AgentEquations.Agent`, `AgentEquations.History`, `DelusionBox.unitHorizon` |
+| `DelusionBox.companionGoalAgent_utility_eq` | theorem | `AgentEquations.Agent.utility`, `AgentEquations.History`, `DelusionBox.companionGoalAgent`, `DelusionBox.goalAgent` |
+| `DelusionBox.companionKnowledgeAgent` | definition | `AgentEquations.Agent`, `AgentEquations.History`, `DelusionBox.companionSpikeHorizon` |
+| `DelusionBox.companionKnowledgeAgent_utility_eq` | theorem | `AgentEquations.Agent.utility`, `AgentEquations.History`, `DelusionBox.companionKnowledgeAgent`, `DelusionBox.knowledgeAgent` |
+| `DelusionBox.companionSpikeHorizon` | definition | — |
+| `DelusionBox.companionSpikeHorizon_eq_zero` | theorem | `DelusionBox.companionSpikeHorizon` |
+| `DelusionBox.diracBelief` | definition | `AgentEquations.Belief`, `AgentEquations.History` |
+| `DelusionBox.diracBelief_isSubprobability` | theorem | `AgentEquations.Belief.IsSubprobability`, `AgentEquations.History`, `DelusionBox.diracBelief` |
+| `DelusionBox.goalAgent` | definition | `AgentEquations.Agent`, `AgentEquations.History`, `DelusionBox.shortHorizon` |
+| `DelusionBox.goalAgent_abs_utility_le_one` | theorem | `AgentEquations.Agent.utility`, `AgentEquations.History`, `DelusionBox.goalAgent` |
+| `DelusionBox.goalAgent_actionValue_le_of_outOfReach` | theorem | `AgentEquations.Belief`, `AgentEquations.Belief.IsSubprobability`, `AgentEquations.Belief.cond`, `AgentEquations.History`, `AgentEquations.actionValue`, `DelusionBox.GoalOutOfReach`, `DelusionBox.ReachedAtMostOnce`, `DelusionBox.goalAgent`, `DelusionBox.shortHorizon` |
+| `DelusionBox.goalAgent_actionValue_next_const` | theorem | `AgentEquations.History`, `AgentEquations.actionValue`, `DelusionBox.Act`, `DelusionBox.GlobalEnv`, `DelusionBox.GlobalEnv.IsConstant`, `DelusionBox.GlobalEnv.next`, `DelusionBox.diracBelief`, `DelusionBox.goalAgent`, `DelusionBox.program`, `DelusionBox.shortHorizon` |
+| `DelusionBox.goalAgent_actionValue_zero_of_not_goal` | theorem | `AgentEquations.Belief`, `AgentEquations.Belief.cond`, `AgentEquations.History`, `AgentEquations.actionValue`, `DelusionBox.goalAgent` |
+| `DelusionBox.goalAgent_horizon_ne` | theorem | `AgentEquations.Agent.horizon`, `DelusionBox.companionGoalAgent`, `DelusionBox.goalAgent` |
+| `DelusionBox.goalAgent_policyValue_nonneg` | theorem | `AgentEquations.Belief`, `AgentEquations.Belief.IsSubprobability`, `AgentEquations.History`, `DelusionBox.goalAgent`, `Mixture.policyValue` |
+| `DelusionBox.goalAgent_value_eq_zero_of_goalNever` | theorem | `AgentEquations.Belief`, `AgentEquations.History`, `AgentEquations.value`, `DelusionBox.GoalNever`, `DelusionBox.goalAgent` |
+| `DelusionBox.goalAgent_value_le_of_outOfReach` | theorem | `AgentEquations.Belief`, `AgentEquations.Belief.IsSubprobability`, `AgentEquations.History`, `AgentEquations.value`, `DelusionBox.GoalOutOfReach`, `DelusionBox.ReachedAtMostOnce`, `DelusionBox.goalAgent`, `DelusionBox.shortHorizon` |
+| `DelusionBox.goalAgent_value_le_shortHorizon` | theorem | `AgentEquations.Belief`, `AgentEquations.Belief.IsSubprobability`, `AgentEquations.History`, `AgentEquations.value`, `DelusionBox.ReachedAtMostOnce`, `DelusionBox.goalAgent`, `DelusionBox.shortHorizon` |
+| `DelusionBox.goalAgent_value_nonneg` | theorem | `AgentEquations.Belief`, `AgentEquations.Belief.IsSubprobability`, `AgentEquations.History`, `AgentEquations.value`, `DelusionBox.goalAgent` |
+| `DelusionBox.goalAgent_value_zero_snoc` | theorem | `AgentEquations.Belief`, `AgentEquations.History`, `AgentEquations.value`, `DelusionBox.goalAgent`, `DelusionBox.shortHorizon` |
+| `DelusionBox.innerAction` | definition | `DelusionBox.Act` |
+| `DelusionBox.knowledgeAgent` | definition | `AgentEquations.Agent`, `AgentEquations.History`, `DelusionBox.spikeHorizon` |
+| `DelusionBox.knowledgeAgent_horizon_ne` | theorem | `AgentEquations.Agent.horizon`, `AgentEquations.History`, `DelusionBox.companionKnowledgeAgent`, `DelusionBox.knowledgeAgent` |
+| `DelusionBox.lastReward` | definition | `AgentEquations.History` |
+| `DelusionBox.mixesAt_zero` | theorem | `AgentEquations.Agent`, `AgentEquations.Belief`, `AgentEquations.Belief.cond`, `AgentEquations.History`, `DelusionBox.MixesAt` |
+| `DelusionBox.mixture_lt_of_gap` | theorem | — |
+| `DelusionBox.mixture_lt_of_threshold` | theorem | — |
+| `DelusionBox.not_mixture_lt_of_threshold_without_rbar` | theorem | — |
+| `DelusionBox.predictionAgent` | definition | `AgentEquations.Agent`, `AgentEquations.History`, `DelusionBox.windowHorizon` |
+| `DelusionBox.program` | definition | `DelusionBox.Act` |
+| `DelusionBox.rlAgent` | definition | `AgentEquations.Agent`, `DelusionBox.lastReward`, `DelusionBox.windowHorizon` |
+| `DelusionBox.rlAgent_actionValue_le` | theorem | `AgentEquations.Belief`, `AgentEquations.Belief.IsSubprobability`, `AgentEquations.History`, `AgentEquations.actionValue`, `DelusionBox.rlAgent` |
+| `DelusionBox.rlAgent_actionValue_next_const` | theorem | `AgentEquations.History`, `AgentEquations.actionValue`, `DelusionBox.Act`, `DelusionBox.GlobalEnv`, `DelusionBox.GlobalEnv.IsConstant`, `DelusionBox.GlobalEnv.next`, `DelusionBox.diracBelief`, `DelusionBox.program`, `DelusionBox.rlAgent` |
+| `DelusionBox.rlAgent_actionValue_nonneg` | theorem | `AgentEquations.Belief`, `AgentEquations.Belief.IsSubprobability`, `AgentEquations.History`, `AgentEquations.actionValue`, `DelusionBox.rlAgent` |
+| `DelusionBox.rlAgent_actionValue_zero` | theorem | `AgentEquations.Belief`, `AgentEquations.Belief.cond`, `AgentEquations.History`, `AgentEquations.actionValue`, `DelusionBox.rlAgent` |
+| `DelusionBox.rlAgent_value_zero_snoc` | theorem | `AgentEquations.Belief`, `AgentEquations.History`, `AgentEquations.value`, `DelusionBox.rlAgent` |
+| `DelusionBox.shortHorizon` | definition | — |
+| `DelusionBox.shortHorizon_ahead` | theorem | `DelusionBox.shortHorizon` |
+| `DelusionBox.shortHorizon_le_goalAgent_policyActionValue` | theorem | `AgentEquations.Belief`, `AgentEquations.Belief.IsSubprobability`, `AgentEquations.History`, `DelusionBox.ReachesIn`, `DelusionBox.goalAgent`, `DelusionBox.shortHorizon`, `Mixture.policyActionValue` |
+| `DelusionBox.shortHorizon_le_goalAgent_policyValue` | theorem | `AgentEquations.Belief`, `AgentEquations.Belief.IsSubprobability`, `AgentEquations.History`, `DelusionBox.ReachesIn`, `DelusionBox.goalAgent`, `DelusionBox.shortHorizon`, `Mixture.policyValue` |
+| `DelusionBox.shortHorizon_pos` | theorem | `DelusionBox.shortHorizon` |
+| `DelusionBox.shortHorizon_succ_le` | theorem | `DelusionBox.shortHorizon` |
+| `DelusionBox.spikeHorizon` | definition | — |
+| `DelusionBox.statement_one` | theorem | `AgentEquations.Agent`, `AgentEquations.Belief`, `AgentEquations.History`, `AgentEquations.actionValue`, `DelusionBox.MixesAt` |
+| `DelusionBox.statement_one_of_posterior` | theorem | `AgentEquations.Agent`, `AgentEquations.Agent.utility`, `AgentEquations.Belief`, `AgentEquations.Belief.IsSubprobability`, `AgentEquations.History`, `AgentEquations.actionValue`, `Mixture.mixtureBelief`, `Mixture.policyActionValue`, `Mixture.posterior` |
+| `DelusionBox.statement_three` | theorem | `AgentEquations.Agent`, `AgentEquations.Belief`, `AgentEquations.History`, `AgentEquations.actionValue`, `DelusionBox.MixesAt` |
+| `DelusionBox.statement_three_of_posterior` | theorem | `AgentEquations.Agent`, `AgentEquations.Agent.utility`, `AgentEquations.Belief`, `AgentEquations.Belief.IsSubprobability`, `AgentEquations.History`, `AgentEquations.actionValue`, `Mixture.mixtureBelief`, `Mixture.policyActionValue`, `Mixture.posterior` |
+| `DelusionBox.statement_two` | theorem | `AgentEquations.Agent`, `AgentEquations.Belief`, `AgentEquations.History`, `AgentEquations.actionValue`, `DelusionBox.MixesAt` |
+| `DelusionBox.statement_two_of_posterior` | theorem | `AgentEquations.Agent`, `AgentEquations.Agent.utility`, `AgentEquations.Belief`, `AgentEquations.Belief.IsSubprobability`, `AgentEquations.History`, `AgentEquations.actionValue`, `Mixture.mixtureBelief`, `Mixture.policyActionValue`, `Mixture.posterior` |
+| `DelusionBox.threshold_unattainable_of_one_le` | theorem | — |
+| `DelusionBox.unitHorizon` | definition | — |
+| `DelusionBox.windowHorizon` | definition | — |
 | `GoalPreservation.Model` | definition | — |
 | `GoalPreservation.Model.OptimalAt` | definition | `GoalPreservation.Model`, `GoalPreservation.Model.act`, `GoalPreservation.Model.qValue` |
 | `GoalPreservation.Model.goal_preservation` | theorem | `GoalPreservation.Model`, `GoalPreservation.Model.OptimalAt`, `GoalPreservation.Model.act`, `GoalPreservation.Model.qValue`, `GoalPreservation.Model.run` |
@@ -87,13 +321,65 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 | `GoalPreservation.Model.qValue` | definition | `GoalPreservation.Model`, `GoalPreservation.Model.continuation`, `GoalPreservation.Model.discount`, `GoalPreservation.Model.next`, `GoalPreservation.Model.utility` |
 | `GoalPreservation.Model.run` | definition | `GoalPreservation.Model` |
 | `GoalPreservation.Model.run_optimal` | theorem | `GoalPreservation.Model`, `GoalPreservation.Model.OptimalAt`, `GoalPreservation.Model.run` |
+| `GoalPreservation.Schedule` | definition | — |
+| `GoalPreservation.length_stepHistory` | theorem | `GoalPreservation.stepHistory` |
+| `GoalPreservation.scheduleAct` | definition | `GoalPreservation.Schedule` |
+| `GoalPreservation.scheduleAct_surjective` | theorem | `GoalPreservation.Schedule`, `GoalPreservation.scheduleAct` |
+| `GoalPreservation.scheduleModel` | definition | `GoalPreservation.Model`, `GoalPreservation.Schedule`, `GoalPreservation.scheduleAct`, `GoalPreservation.scheduleAct_surjective`, `GoalPreservation.scheduleValue`, `GoalPreservation.stepHistory` |
+| `GoalPreservation.scheduleModel_optimalAt` | theorem | `GoalPreservation.Model.OptimalAt`, `GoalPreservation.Schedule`, `GoalPreservation.scheduleModel` |
+| `GoalPreservation.scheduleValue` | definition | `GoalPreservation.Schedule` |
+| `GoalPreservation.scheduleValue_bellman` | theorem | `GoalPreservation.Schedule`, `GoalPreservation.scheduleValue` |
+| `GoalPreservation.scheduleValue_le_of_isMax` | theorem | `GoalPreservation.Schedule`, `GoalPreservation.scheduleValue` |
+| `GoalPreservation.scheduleValue_summable` | theorem | `GoalPreservation.Schedule` |
+| `GoalPreservation.stepHistory` | definition | — |
+| `GoalPreservationRun.Model` | definition | — |
+| `GoalPreservationRun.Model.OptimalAt` | definition | `GoalPreservationRun.Model`, `GoalPreservationRun.Model.toSource`, `GoalPreservationSource.Model.OptimalAt` |
+| `GoalPreservationRun.Model.contValue_eq_qValue` | theorem | `GoalPreservationRun.Model`, `GoalPreservationRun.Model.act`, `GoalPreservationRun.Model.contValue`, `GoalPreservationRun.Model.qValue` |
+| `GoalPreservationRun.Model.contValue_le_initial` | theorem | `GoalPreservationRun.Model`, `GoalPreservationRun.Model.contValue`, `GoalPreservationRun.Model.initial` |
+| `GoalPreservationRun.Model.equation_thirteen` | theorem | `GoalPreservationRun.Model`, `GoalPreservationRun.Model.act`, `GoalPreservationRun.Model.initial`, `GoalPreservationRun.Model.qValue`, `GoalPreservationRun.Model.run` |
+| `GoalPreservationRun.Model.name` | definition | `GoalPreservationRun.Model`, `GoalPreservationRun.Model.act`, `GoalPreservationRun.Policy` |
+| `GoalPreservationRun.Model.name_eq_act` | theorem | `GoalPreservationRun.Model`, `GoalPreservationRun.Model.act`, `GoalPreservationRun.Model.name`, `GoalPreservationRun.Policy` |
+| `GoalPreservationRun.Model.optimalAt_initial` | theorem | `GoalPreservationRun.Model`, `GoalPreservationRun.Model.OptimalAt`, `GoalPreservationRun.Model.initial` |
+| `GoalPreservationRun.Model.optimalAt_next` | theorem | `GoalPreservationRun.Model`, `GoalPreservationRun.Model.OptimalAt`, `GoalPreservationRun.Model.act`, `GoalPreservationRun.Model.extend` |
+| `GoalPreservationRun.Model.qValue` | definition | `GoalPreservationRun.Model`, `GoalPreservationRun.Model.toSource`, `GoalPreservationSource.Model.qValue` |
+| `GoalPreservationRun.Model.run` | definition | `GoalPreservationRun.Model` |
+| `GoalPreservationRun.Model.run_contValue_eq_initial` | theorem | `GoalPreservationRun.Model`, `GoalPreservationRun.Model.contValue`, `GoalPreservationRun.Model.initial`, `GoalPreservationRun.Model.run` |
+| `GoalPreservationRun.Model.run_optimal` | theorem | `GoalPreservationRun.Model`, `GoalPreservationRun.Model.OptimalAt`, `GoalPreservationRun.Model.run` |
+| `GoalPreservationRun.Model.toSource` | definition | `GoalPreservationRun.Model`, `GoalPreservationRun.Model.act`, `GoalPreservationRun.Model.contValue`, `GoalPreservationRun.Model.contValue_le_initial`, `GoalPreservationRun.Model.discount`, `GoalPreservationRun.Model.discount_pos`, `GoalPreservationRun.Model.extend`, `GoalPreservationRun.Model.initial`, `GoalPreservationRun.Model.prob`, `GoalPreservationRun.Model.prob_pos`, `GoalPreservationRun.Model.prob_sum_one`, `GoalPreservationRun.Model.utility`, `GoalPreservationSource.Model` |
+| `GoalPreservationRun.Policy` | definition | — |
 | `GoalPreservationSource.Model` | definition | — |
 | `GoalPreservationSource.Model.OptimalAt` | definition | `GoalPreservationSource.Model`, `GoalPreservationSource.Model.act`, `GoalPreservationSource.Model.qValue` |
+| `GoalPreservationSource.Model.name` | definition | `GoalPreservationSource.Model`, `GoalPreservationSource.Model.act`, `GoalPreservationSource.Policy` |
+| `GoalPreservationSource.Model.name_eq_act` | theorem | `GoalPreservationSource.Model`, `GoalPreservationSource.Model.act`, `GoalPreservationSource.Model.name`, `GoalPreservationSource.Policy` |
 | `GoalPreservationSource.Model.qValue` | definition | `GoalPreservationSource.Model`, `GoalPreservationSource.Model.contValue`, `GoalPreservationSource.Model.discount`, `GoalPreservationSource.Model.extend`, `GoalPreservationSource.Model.prob`, `GoalPreservationSource.Model.utility` |
+| `GoalPreservationSource.Model.qValueWith` | definition | `GoalPreservationSource.Model`, `GoalPreservationSource.Model.contValue`, `GoalPreservationSource.Model.discount`, `GoalPreservationSource.Model.extend`, `GoalPreservationSource.Model.prob` |
+| `GoalPreservationSource.Model.qValueWith_eq_qValue_of_utility_fixed` | theorem | `GoalPreservationSource.Model`, `GoalPreservationSource.Model.qValue`, `GoalPreservationSource.Model.qValueWith`, `GoalPreservationSource.Model.utility` |
+| `GoalPreservationSource.Model.qValueWith_utility` | theorem | `GoalPreservationSource.Model`, `GoalPreservationSource.Model.qValue`, `GoalPreservationSource.Model.qValueWith`, `GoalPreservationSource.Model.utility` |
 | `GoalPreservationSource.Model.qValue_lt_of_lt` | theorem | `GoalPreservationSource.Model`, `GoalPreservationSource.Model.contValue`, `GoalPreservationSource.Model.extend`, `GoalPreservationSource.Model.initial`, `GoalPreservationSource.Model.qValue` |
 | `GoalPreservationSource.Model.qValue_selected_eq_initial` | theorem | `GoalPreservationSource.Model`, `GoalPreservationSource.Model.OptimalAt`, `GoalPreservationSource.Model.act`, `GoalPreservationSource.Model.initial`, `GoalPreservationSource.Model.qValue` |
 | `GoalPreservationSource.Model.safe_modification` | theorem | `GoalPreservationSource.Model`, `GoalPreservationSource.Model.OptimalAt`, `GoalPreservationSource.Model.act`, `GoalPreservationSource.Model.contValue`, `GoalPreservationSource.Model.extend`, `GoalPreservationSource.Model.initial` |
 | `GoalPreservationSource.Model.selected_matches_initial` | theorem | `GoalPreservationSource.Model`, `GoalPreservationSource.Model.OptimalAt`, `GoalPreservationSource.Model.act`, `GoalPreservationSource.Model.contValue`, `GoalPreservationSource.Model.extend`, `GoalPreservationSource.Model.initial` |
+| `GoalPreservationSource.Policy` | definition | — |
+| `Mixture.actionValue_mixture_le` | theorem | `AgentEquations.Agent`, `AgentEquations.Agent.utility`, `AgentEquations.Belief`, `AgentEquations.Belief.IsSubprobability`, `AgentEquations.History`, `AgentEquations.actionValue`, `Mixture.mixtureBelief`, `Mixture.posterior` |
+| `Mixture.mixtureBelief` | definition | `AgentEquations.Belief`, `AgentEquations.Belief.cond`, `AgentEquations.History`, `Mixture.posterior` |
+| `Mixture.mixtureBelief_cond` | theorem | `AgentEquations.Belief`, `AgentEquations.Belief.cond`, `AgentEquations.History`, `Mixture.mixtureBelief`, `Mixture.posterior` |
+| `Mixture.mixtureBelief_cond_mul_one_sub_posterior` | theorem | `AgentEquations.Belief`, `AgentEquations.Belief.cond`, `AgentEquations.History`, `Mixture.mixtureBelief`, `Mixture.posterior` |
+| `Mixture.mixtureBelief_cond_mul_posterior` | theorem | `AgentEquations.Belief`, `AgentEquations.Belief.cond`, `AgentEquations.History`, `Mixture.mixtureBelief`, `Mixture.posterior` |
+| `Mixture.mixtureBelief_cond_nonneg` | theorem | `AgentEquations.Belief`, `AgentEquations.Belief.cond`, `AgentEquations.History`, `Mixture.mixtureBelief` |
+| `Mixture.mixtureBelief_isSubprobability` | theorem | `AgentEquations.Belief`, `AgentEquations.Belief.IsSubprobability`, `Mixture.mixtureBelief` |
+| `Mixture.policyActionValue` | definition | `AgentEquations.Agent`, `AgentEquations.Belief`, `AgentEquations.Belief.cond`, `AgentEquations.History`, `Mixture.policyValue` |
+| `Mixture.policyActionValue_le_actionValue` | theorem | `AgentEquations.Agent`, `AgentEquations.Agent.utility`, `AgentEquations.Belief`, `AgentEquations.Belief.IsSubprobability`, `AgentEquations.History`, `AgentEquations.actionValue`, `Mixture.policyActionValue` |
+| `Mixture.policyActionValue_mixture` | theorem | `AgentEquations.Agent`, `AgentEquations.Belief`, `AgentEquations.Belief.cond`, `AgentEquations.History`, `Mixture.mixtureBelief`, `Mixture.policyActionValue`, `Mixture.posterior` |
+| `Mixture.policyValue` | definition | `AgentEquations.Agent`, `AgentEquations.Belief`, `AgentEquations.History` |
+| `Mixture.policyValue_le_value` | theorem | `AgentEquations.Agent`, `AgentEquations.Agent.utility`, `AgentEquations.Belief`, `AgentEquations.Belief.IsSubprobability`, `AgentEquations.History`, `AgentEquations.value`, `Mixture.policyValue` |
+| `Mixture.policyValue_mixture` | theorem | `AgentEquations.Agent`, `AgentEquations.Belief`, `AgentEquations.Belief.cond`, `AgentEquations.History`, `Mixture.mixtureBelief`, `Mixture.policyValue`, `Mixture.posterior` |
+| `Mixture.policyValue_succ` | theorem | `AgentEquations.Agent`, `AgentEquations.Agent.horizon`, `AgentEquations.Agent.utility`, `AgentEquations.Belief`, `AgentEquations.History`, `Mixture.policyActionValue`, `Mixture.policyValue` |
+| `Mixture.policyValue_zero` | theorem | `AgentEquations.Agent`, `AgentEquations.Agent.horizon`, `AgentEquations.Agent.utility`, `AgentEquations.Belief`, `AgentEquations.History`, `Mixture.policyValue` |
+| `Mixture.posterior` | definition | `AgentEquations.Belief`, `AgentEquations.History`, `AgentEquations.historyMass` |
+| `Mixture.posterior_le_one` | theorem | `AgentEquations.Belief`, `AgentEquations.Belief.cond`, `AgentEquations.History`, `Mixture.posterior` |
+| `Mixture.posterior_nil` | theorem | `AgentEquations.Belief`, `Mixture.posterior` |
+| `Mixture.posterior_nonneg` | theorem | `AgentEquations.Belief`, `AgentEquations.Belief.cond`, `AgentEquations.History`, `Mixture.posterior` |
+| `Mixture.value_mixture_le` | theorem | `AgentEquations.Agent`, `AgentEquations.Agent.utility`, `AgentEquations.Belief`, `AgentEquations.Belief.IsSubprobability`, `AgentEquations.History`, `AgentEquations.value`, `Mixture.mixtureBelief`, `Mixture.posterior` |
 | `Objective` | definition | — |
 | `Objective.IsOptimal` | definition | `Objective`, `Objective.decisionValue` |
 | `Objective.decisionValue` | definition | `Objective`, `Objective.value` |
@@ -112,3 +398,220 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 | `ObservationLimits.returnOver_zeroEnv_complement` | theorem | `CRMDP.Env.complement`, `CRMDP.Policy`, `CRMDP.returnOver`, `ObservationLimits.zeroEnv` |
 | `ObservationLimits.trueReturn` | definition | `CRMDP.Env`, `CRMDP.Policy`, `CRMDP.returnOver` |
 | `ObservationLimits.zeroEnv` | definition | `CRMDP.Env`, `CRMDP.Reward` |
+| `ProgramPrior.Model` | definition | — |
+| `ProgramPrior.Model.Consistent` | definition | `AgentEquations.History`, `ProgramPrior.Model` |
+| `ProgramPrior.Model.Consistent.below.nil` | definition | `AgentEquations.History`, `ProgramPrior.Model`, `ProgramPrior.Model.Consistent`, `ProgramPrior.Model.Consistent.nil` |
+| `ProgramPrior.Model.Consistent.below.snoc` | definition | `AgentEquations.History`, `ProgramPrior.Model`, `ProgramPrior.Model.Consistent`, `ProgramPrior.Model.Consistent.snoc`, `ProgramPrior.Model.run` |
+| `ProgramPrior.Model.Consistent.nil` | definition | `ProgramPrior.Model`, `ProgramPrior.Model.Consistent` |
+| `ProgramPrior.Model.Consistent.snoc` | definition | `AgentEquations.History`, `ProgramPrior.Model`, `ProgramPrior.Model.Consistent`, `ProgramPrior.Model.run` |
+| `ProgramPrior.Model.actionValue_eq_programSum` | theorem | `AgentEquations.Agent`, `AgentEquations.Agent.utility`, `AgentEquations.History`, `AgentEquations.actionValue`, `AgentEquations.value`, `ProgramPrior.Model`, `ProgramPrior.Model.Consistent`, `ProgramPrior.Model.belief`, `ProgramPrior.Model.mass`, `ProgramPrior.Model.run`, `ProgramPrior.Model.weight` |
+| `ProgramPrior.Model.belief` | definition | `AgentEquations.Belief`, `AgentEquations.History`, `ProgramPrior.Model`, `ProgramPrior.Model.mass` |
+| `ProgramPrior.Model.belief_isSubprobability` | theorem | `AgentEquations.Belief.IsSubprobability`, `ProgramPrior.Model`, `ProgramPrior.Model.belief` |
+| `ProgramPrior.Model.belief_nonneg` | theorem | `AgentEquations.Belief.cond`, `AgentEquations.History`, `ProgramPrior.Model`, `ProgramPrior.Model.belief` |
+| `ProgramPrior.Model.belief_sum` | theorem | `AgentEquations.Belief.cond`, `AgentEquations.History`, `ProgramPrior.Model`, `ProgramPrior.Model.belief`, `ProgramPrior.Model.mass` |
+| `ProgramPrior.Model.belief_summable` | theorem | `AgentEquations.Belief.cond`, `AgentEquations.History`, `ProgramPrior.Model`, `ProgramPrior.Model.belief` |
+| `ProgramPrior.Model.companionKnowledgeAgent` | definition | `AgentEquations.Agent`, `DelusionBox.companionKnowledgeAgent`, `ProgramPrior.Model`, `ProgramPrior.Model.mass` |
+| `ProgramPrior.Model.consistent_snoc` | theorem | `AgentEquations.History`, `ProgramPrior.Model`, `ProgramPrior.Model.Consistent`, `ProgramPrior.Model.run` |
+| `ProgramPrior.Model.expectation_eq_programSum` | theorem | `AgentEquations.Belief.cond`, `AgentEquations.History`, `ProgramPrior.Model`, `ProgramPrior.Model.Consistent`, `ProgramPrior.Model.belief`, `ProgramPrior.Model.mass`, `ProgramPrior.Model.run`, `ProgramPrior.Model.weight` |
+| `ProgramPrior.Model.historyMass_eq_mass` | theorem | `AgentEquations.History`, `AgentEquations.historyMass`, `ProgramPrior.Model`, `ProgramPrior.Model.belief`, `ProgramPrior.Model.mass` |
+| `ProgramPrior.Model.knowledgeAgent` | definition | `AgentEquations.Agent`, `DelusionBox.knowledgeAgent`, `ProgramPrior.Model`, `ProgramPrior.Model.mass` |
+| `ProgramPrior.Model.mass` | definition | `AgentEquations.History`, `ProgramPrior.Model`, `ProgramPrior.Model.Consistent`, `ProgramPrior.Model.weight` |
+| `ProgramPrior.Model.mass_eq_historyMass` | theorem | `AgentEquations.History`, `AgentEquations.historyMass`, `ProgramPrior.Model`, `ProgramPrior.Model.belief`, `ProgramPrior.Model.mass` |
+| `ProgramPrior.Model.mass_eq_setMass` | theorem | `AgentEquations.History`, `ProgramPrior.Model`, `ProgramPrior.Model.Consistent`, `ProgramPrior.Model.mass`, `ProgramPrior.Model.setMass` |
+| `ProgramPrior.Model.mass_mul_cond` | theorem | `AgentEquations.Belief.cond`, `AgentEquations.History`, `ProgramPrior.Model`, `ProgramPrior.Model.belief`, `ProgramPrior.Model.mass` |
+| `ProgramPrior.Model.mass_nil` | theorem | `ProgramPrior.Model`, `ProgramPrior.Model.mass`, `ProgramPrior.Model.weight` |
+| `ProgramPrior.Model.mass_nonneg` | theorem | `AgentEquations.History`, `ProgramPrior.Model`, `ProgramPrior.Model.mass` |
+| `ProgramPrior.Model.mass_pos_of_consistent` | theorem | `AgentEquations.History`, `ProgramPrior.Model`, `ProgramPrior.Model.Consistent`, `ProgramPrior.Model.mass`, `ProgramPrior.Model.weight` |
+| `ProgramPrior.Model.mass_snoc_le` | theorem | `AgentEquations.History`, `ProgramPrior.Model`, `ProgramPrior.Model.mass` |
+| `ProgramPrior.Model.mass_sum_extensions` | theorem | `AgentEquations.History`, `ProgramPrior.Model`, `ProgramPrior.Model.mass` |
+| `ProgramPrior.Model.point` | definition | `ProgramPrior.Model`, `ProgramPrior.Model.run` |
+| `ProgramPrior.Model.point_belief_eq` | theorem | `AgentEquations.Belief.cond`, `AgentEquations.History`, `DelusionBox.diracBelief`, `ProgramPrior.Model`, `ProgramPrior.Model.Consistent`, `ProgramPrior.Model.belief`, `ProgramPrior.Model.point`, `ProgramPrior.Model.run` |
+| `ProgramPrior.Model.point_consistent` | theorem | `AgentEquations.History`, `ProgramPrior.Model`, `ProgramPrior.Model.Consistent`, `ProgramPrior.Model.point` |
+| `ProgramPrior.Model.point_mass` | theorem | `AgentEquations.History`, `ProgramPrior.Model`, `ProgramPrior.Model.Consistent`, `ProgramPrior.Model.mass`, `ProgramPrior.Model.point` |
+| `ProgramPrior.Model.relative_weight_le` | theorem | `AgentEquations.History`, `ProgramPrior.Model`, `ProgramPrior.Model.Consistent`, `ProgramPrior.Model.mass`, `ProgramPrior.Model.weight` |
+| `ProgramPrior.Model.setMass` | definition | `ProgramPrior.Model`, `ProgramPrior.Model.weight` |
+| `ProgramPrior.Model.setMass_nonneg` | theorem | `ProgramPrior.Model`, `ProgramPrior.Model.setMass` |
+| `ProgramPrior.Model.value_point_eq` | theorem | `AgentEquations.Agent`, `AgentEquations.History`, `AgentEquations.value`, `DelusionBox.diracBelief`, `ProgramPrior.Model`, `ProgramPrior.Model.Consistent`, `ProgramPrior.Model.belief`, `ProgramPrior.Model.point`, `ProgramPrior.Model.run` |
+| `ProgramPrior.Model.weight_le_setMass` | theorem | `ProgramPrior.Model`, `ProgramPrior.Model.setMass`, `ProgramPrior.Model.weight` |
+| `ProgramPrior.Model.weight_lt_setMass` | theorem | `ProgramPrior.Model`, `ProgramPrior.Model.setMass`, `ProgramPrior.Model.weight` |
+| `RewardGrid.FullEnv` | definition | — |
+| `RewardGrid.FullEnv.complement` | definition | `RewardGrid.FullEnv`, `RewardGrid.FullEnv.grid`, `RewardGrid.FullEnv.transition`, `RewardGrid.GridEnv.complement` |
+| `RewardGrid.FullEnv.complement_involutive` | theorem | `RewardGrid.FullEnv`, `RewardGrid.FullEnv.complement` |
+| `RewardGrid.FullEnv.instFintype` | definition | `RewardGrid.FullEnv`, `RewardGrid.FullEnv.grid`, `RewardGrid.FullEnv.transition`, `RewardGrid.GridEnv`, `RewardGrid.GridEnv.instFintype` |
+| `RewardGrid.FullEnv.instInhabited` | definition | `RewardGrid.FullEnv`, `RewardGrid.GridEnv`, `RewardGrid.GridEnv.instInhabited` |
+| `RewardGrid.GridEnv` | definition | — |
+| `RewardGrid.GridEnv.complement` | definition | `RewardGrid.GridEnv`, `RewardGrid.GridEnv.corruption`, `RewardGrid.GridEnv.trueReward`, `RewardGrid.gridRev` |
+| `RewardGrid.GridEnv.complement_involutive` | theorem | `RewardGrid.GridEnv`, `RewardGrid.GridEnv.complement` |
+| `RewardGrid.GridEnv.instFintype` | definition | `RewardGrid.GridEnv`, `RewardGrid.GridEnv.corruption`, `RewardGrid.GridEnv.trueReward` |
+| `RewardGrid.GridEnv.instInhabited` | definition | `RewardGrid.GridEnv` |
+| `RewardGrid.GridEnv.observed` | definition | `RewardGrid.GridEnv`, `RewardGrid.GridEnv.corruption`, `RewardGrid.GridEnv.trueReward` |
+| `RewardGrid.GridEnv.observed_complement` | theorem | `RewardGrid.GridEnv`, `RewardGrid.GridEnv.complement`, `RewardGrid.GridEnv.observed` |
+| `RewardGrid.bestPolicy` | definition | `CRMDP.Policy`, `RewardGrid.GridEnv`, `RewardGrid.exists_max_gridReturn`, `RewardGrid.gridReturn` |
+| `RewardGrid.bestPolicy_best` | theorem | `CRMDP.Policy`, `RewardGrid.GridEnv`, `RewardGrid.bestPolicy`, `RewardGrid.gridReturn` |
+| `RewardGrid.channel_toEnv` | theorem | `CRMDP.Env.channel`, `CRMDP.Obs`, `RewardGrid.GridEnv`, `RewardGrid.gridChannel`, `RewardGrid.gridLabel`, `RewardGrid.toEnv` |
+| `RewardGrid.everitt_theorem_eleven_fullClass` | theorem | `CRMDP.Policy`, `Corruption.ComplementedClass.worstCaseRegret`, `Corruption.ComplementedClass.worstPolicy`, `RewardGrid.FullEnv`, `RewardGrid.toFullComplementedClass` |
+| `RewardGrid.everitt_theorem_eleven_fullMixedClass` | theorem | `CRMDP.StochPolicy`, `Corruption.ComplementedClass.worstCaseRegret`, `Corruption.ComplementedClass.worstPolicy`, `RewardGrid.FullEnv`, `RewardGrid.toFullMixedComplementedClass` |
+| `RewardGrid.everitt_theorem_eleven_gridClass` | theorem | `CRMDP.Policy`, `Corruption.ComplementedClass.worstCaseRegret`, `Corruption.ComplementedClass.worstPolicy`, `RewardGrid.GridEnv`, `RewardGrid.toComplementedClass` |
+| `RewardGrid.everitt_theorem_eleven_mixedGridClass` | theorem | `CRMDP.StochPolicy`, `Corruption.ComplementedClass.worstCaseRegret`, `Corruption.ComplementedClass.worstPolicy`, `RewardGrid.GridEnv`, `RewardGrid.toMixedComplementedClass` |
+| `RewardGrid.everitt_theorem_eleven_stochGridClass` | theorem | `CRMDP.Policy`, `Corruption.ComplementedClass.worstCaseRegret`, `Corruption.ComplementedClass.worstPolicy`, `RewardGrid.GridEnv`, `RewardGrid.toStochComplementedClass` |
+| `RewardGrid.exists_max_gridReturn` | theorem | `CRMDP.Policy`, `RewardGrid.GridEnv`, `RewardGrid.gridReturn` |
+| `RewardGrid.exists_max_stochGridReturn` | theorem | `CRMDP.Policy`, `CRMDP.stochReturnOver`, `RewardGrid.GridEnv`, `RewardGrid.toEnv` |
+| `RewardGrid.exists_min_gridReturn` | theorem | `CRMDP.Policy`, `RewardGrid.GridEnv`, `RewardGrid.gridReturn` |
+| `RewardGrid.exists_min_stochGridReturn` | theorem | `CRMDP.Policy`, `CRMDP.stochReturnOver`, `RewardGrid.GridEnv`, `RewardGrid.toEnv` |
+| `RewardGrid.extendSeq` | definition | — |
+| `RewardGrid.fullBest` | definition | `CRMDP.Policy`, `RewardGrid.FullEnv`, `RewardGrid.FullEnv.grid`, `RewardGrid.FullEnv.transition`, `RewardGrid.bestPolicy` |
+| `RewardGrid.fullBest_best` | theorem | `CRMDP.Policy`, `RewardGrid.FullEnv`, `RewardGrid.fullBest`, `RewardGrid.fullReturn` |
+| `RewardGrid.fullMin` | definition | `CRMDP.Policy`, `RewardGrid.FullEnv`, `RewardGrid.FullEnv.grid`, `RewardGrid.FullEnv.transition`, `RewardGrid.minPolicy` |
+| `RewardGrid.fullMin_min` | theorem | `CRMDP.Policy`, `RewardGrid.FullEnv`, `RewardGrid.fullMin`, `RewardGrid.fullReturn` |
+| `RewardGrid.fullMixedBest` | definition | `CRMDP.StochPolicy`, `CRMDP.StochPolicy.ofDet`, `RewardGrid.FullEnv`, `RewardGrid.FullEnv.grid`, `RewardGrid.FullEnv.transition`, `RewardGrid.stochBestPolicy` |
+| `RewardGrid.fullMixedBest_best` | theorem | `CRMDP.StochPolicy`, `RewardGrid.FullEnv`, `RewardGrid.fullMixedBest`, `RewardGrid.fullMixedReturn` |
+| `RewardGrid.fullMixedMin` | definition | `CRMDP.StochPolicy`, `CRMDP.StochPolicy.ofDet`, `RewardGrid.FullEnv`, `RewardGrid.FullEnv.grid`, `RewardGrid.FullEnv.transition`, `RewardGrid.stochMinPolicy` |
+| `RewardGrid.fullMixedMin_min` | theorem | `CRMDP.StochPolicy`, `RewardGrid.FullEnv`, `RewardGrid.fullMixedMin`, `RewardGrid.fullMixedReturn` |
+| `RewardGrid.fullMixedReturn` | definition | `CRMDP.StochPolicy`, `CRMDP.mixedReturnOver`, `RewardGrid.FullEnv`, `RewardGrid.FullEnv.grid`, `RewardGrid.FullEnv.transition`, `RewardGrid.toEnv` |
+| `RewardGrid.fullMixedReturn_add_complement` | theorem | `CRMDP.StochPolicy`, `RewardGrid.FullEnv`, `RewardGrid.FullEnv.complement`, `RewardGrid.fullMixedReturn` |
+| `RewardGrid.fullMixedReturn_ofDet` | theorem | `CRMDP.Policy`, `CRMDP.StochPolicy.ofDet`, `RewardGrid.FullEnv`, `RewardGrid.fullMixedReturn`, `RewardGrid.fullReturn` |
+| `RewardGrid.fullMixedSpreadEnv` | definition | `RewardGrid.FullEnv`, `RewardGrid.FullEnv.instFintype`, `RewardGrid.fullMixedBest`, `RewardGrid.fullMixedMin`, `RewardGrid.fullMixedReturn` |
+| `RewardGrid.fullMixedSpreadEnv_max` | theorem | `RewardGrid.FullEnv`, `RewardGrid.fullMixedBest`, `RewardGrid.fullMixedMin`, `RewardGrid.fullMixedReturn`, `RewardGrid.fullMixedSpreadEnv` |
+| `RewardGrid.fullMixedWorstEnv` | definition | `CRMDP.StochPolicy`, `RewardGrid.FullEnv`, `RewardGrid.FullEnv.instFintype`, `RewardGrid.fullMixedBest`, `RewardGrid.fullMixedReturn` |
+| `RewardGrid.fullMixedWorstEnv_worst` | theorem | `CRMDP.StochPolicy`, `RewardGrid.FullEnv`, `RewardGrid.fullMixedBest`, `RewardGrid.fullMixedReturn`, `RewardGrid.fullMixedWorstEnv` |
+| `RewardGrid.fullMixedWorstPolicy` | definition | `CRMDP.StochPolicy`, `RewardGrid.fullMixedMin`, `RewardGrid.fullMixedSpreadEnv` |
+| `RewardGrid.fullMixedWorstPolicy_worst` | theorem | `CRMDP.StochPolicy`, `RewardGrid.fullMixedBest`, `RewardGrid.fullMixedReturn`, `RewardGrid.fullMixedWorstEnv`, `RewardGrid.fullMixedWorstPolicy` |
+| `RewardGrid.fullRegret` | definition | `CRMDP.Policy`, `RewardGrid.FullEnv`, `RewardGrid.fullBest`, `RewardGrid.fullReturn` |
+| `RewardGrid.fullReturn` | definition | `CRMDP.Policy`, `RewardGrid.FullEnv`, `RewardGrid.FullEnv.grid`, `RewardGrid.FullEnv.transition`, `RewardGrid.gridReturn` |
+| `RewardGrid.fullReturn_add_complement` | theorem | `CRMDP.Policy`, `RewardGrid.FullEnv`, `RewardGrid.FullEnv.complement`, `RewardGrid.fullReturn` |
+| `RewardGrid.fullSpreadEnv` | definition | `RewardGrid.FullEnv`, `RewardGrid.FullEnv.instFintype`, `RewardGrid.fullBest`, `RewardGrid.fullMin`, `RewardGrid.fullReturn` |
+| `RewardGrid.fullSpreadEnv_max` | theorem | `RewardGrid.FullEnv`, `RewardGrid.fullBest`, `RewardGrid.fullMin`, `RewardGrid.fullReturn`, `RewardGrid.fullSpreadEnv` |
+| `RewardGrid.fullWorstEnv` | definition | `CRMDP.Policy`, `RewardGrid.FullEnv`, `RewardGrid.FullEnv.instFintype`, `RewardGrid.fullRegret` |
+| `RewardGrid.fullWorstEnv_worst` | theorem | `CRMDP.Policy`, `RewardGrid.FullEnv`, `RewardGrid.fullRegret`, `RewardGrid.fullWorstEnv` |
+| `RewardGrid.fullWorstPolicy` | definition | `CRMDP.Policy`, `RewardGrid.fullMin`, `RewardGrid.fullSpreadEnv` |
+| `RewardGrid.fullWorstPolicy_worst` | theorem | `CRMDP.Policy`, `RewardGrid.fullRegret`, `RewardGrid.fullWorstEnv`, `RewardGrid.fullWorstPolicy` |
+| `RewardGrid.gridChannel` | definition | `RewardGrid.GridEnv`, `RewardGrid.GridEnv.observed` |
+| `RewardGrid.gridLabel` | definition | `CRMDP.Obs`, `CRMDP.Reward`, `RewardGrid.gridVal` |
+| `RewardGrid.gridLabel_injective` | theorem | `CRMDP.Obs`, `RewardGrid.gridLabel` |
+| `RewardGrid.gridMixedReturn` | definition | `CRMDP.Env.trueReward`, `CRMDP.expectReward`, `RewardGrid.GridEnv`, `RewardGrid.gridChannel`, `RewardGrid.toEnv` |
+| `RewardGrid.gridMixedReturn_affine` | theorem | `RewardGrid.GridEnv`, `RewardGrid.gridMixedReturn` |
+| `RewardGrid.gridMixedReturn_congr` | theorem | `RewardGrid.GridEnv`, `RewardGrid.gridMixedReturn` |
+| `RewardGrid.gridMixedReturn_le` | theorem | `RewardGrid.GridEnv`, `RewardGrid.gridMixedReturn`, `RewardGrid.gridStochReturn` |
+| `RewardGrid.gridMixedReturn_ofDet` | theorem | `RewardGrid.GridEnv`, `RewardGrid.gridMixedReturn`, `RewardGrid.gridStochReturn` |
+| `RewardGrid.gridRegret` | definition | `CRMDP.Policy`, `RewardGrid.GridEnv`, `RewardGrid.bestPolicy`, `RewardGrid.gridReturn` |
+| `RewardGrid.gridReturn` | definition | `CRMDP.Policy`, `CRMDP.returnOver`, `RewardGrid.GridEnv`, `RewardGrid.toEnv` |
+| `RewardGrid.gridReturn_add_complement` | theorem | `CRMDP.Policy`, `RewardGrid.GridEnv`, `RewardGrid.GridEnv.complement`, `RewardGrid.gridReturn` |
+| `RewardGrid.gridReturn_eq_seqReturn` | theorem | `CRMDP.Policy`, `CRMDP.historyUpTo`, `RewardGrid.GridEnv`, `RewardGrid.gridReturn`, `RewardGrid.seqReturn`, `RewardGrid.toEnv` |
+| `RewardGrid.gridRev` | definition | — |
+| `RewardGrid.gridRev_involutive` | theorem | `RewardGrid.gridRev` |
+| `RewardGrid.gridStochReturn` | definition | `CRMDP.Env.trueReward`, `CRMDP.expectReward`, `RewardGrid.GridEnv`, `RewardGrid.gridChannel`, `RewardGrid.toEnv` |
+| `RewardGrid.gridStochReturn_congr` | theorem | `RewardGrid.GridEnv`, `RewardGrid.gridStochReturn` |
+| `RewardGrid.gridStochReturn_eq_lift` | theorem | `CRMDP.Policy`, `CRMDP.stochReturnOver`, `RewardGrid.GridEnv`, `RewardGrid.gridStochReturn`, `RewardGrid.toEnv` |
+| `RewardGrid.gridVal` | definition | `CRMDP.Reward` |
+| `RewardGrid.gridVal_gridRev` | theorem | `CRMDP.Env.rewardComplement`, `CRMDP.Reward`, `RewardGrid.gridRev`, `RewardGrid.gridVal` |
+| `RewardGrid.gridVal_injective` | theorem | `CRMDP.Reward`, `RewardGrid.gridVal` |
+| `RewardGrid.gridVal_last` | theorem | `RewardGrid.gridVal` |
+| `RewardGrid.gridVal_strictMono` | theorem | `RewardGrid.gridVal` |
+| `RewardGrid.gridVal_zero` | theorem | `RewardGrid.gridVal` |
+| `RewardGrid.halfMaximalRegretBound` | theorem | `CRMDP.Policy`, `Corruption.ComplementedClass.toRegretModel`, `RewardGrid.GridEnv`, `RewardGrid.toComplementedClass` |
+| `RewardGrid.historyUpTo_length` | theorem | `CRMDP.Env`, `CRMDP.Obs`, `CRMDP.Policy`, `CRMDP.historyUpTo` |
+| `RewardGrid.le_gridMixedReturn` | theorem | `RewardGrid.GridEnv`, `RewardGrid.gridMixedReturn`, `RewardGrid.gridStochReturn` |
+| `RewardGrid.minPolicy` | definition | `CRMDP.Policy`, `RewardGrid.GridEnv`, `RewardGrid.exists_min_gridReturn`, `RewardGrid.gridReturn` |
+| `RewardGrid.minPolicy_min` | theorem | `CRMDP.Policy`, `RewardGrid.GridEnv`, `RewardGrid.gridReturn`, `RewardGrid.minPolicy` |
+| `RewardGrid.min_le_mixedReturnOver` | theorem | `CRMDP.StochPolicy`, `CRMDP.mixedReturnOver`, `CRMDP.stochReturnOver`, `RewardGrid.GridEnv`, `RewardGrid.stochMinPolicy`, `RewardGrid.toEnv` |
+| `RewardGrid.mixedGridReturn_add_complement` | theorem | `CRMDP.StochPolicy`, `CRMDP.mixedReturnOver`, `RewardGrid.GridEnv`, `RewardGrid.GridEnv.complement`, `RewardGrid.toEnv` |
+| `RewardGrid.mixedReturnOver_le_best` | theorem | `CRMDP.StochPolicy`, `CRMDP.mixedReturnOver`, `CRMDP.stochReturnOver`, `RewardGrid.GridEnv`, `RewardGrid.stochBestPolicy`, `RewardGrid.toEnv` |
+| `RewardGrid.mixedReturnOver_toEnv` | theorem | `CRMDP.Obs`, `CRMDP.StochPolicy`, `CRMDP.mixedReturnOver`, `RewardGrid.GridEnv`, `RewardGrid.gridLabel`, `RewardGrid.gridMixedReturn`, `RewardGrid.toEnv` |
+| `RewardGrid.mixedReturnOver_toEnv_complement` | theorem | `CRMDP.Env.complement`, `CRMDP.StochPolicy`, `CRMDP.mixedReturnOver`, `RewardGrid.GridEnv`, `RewardGrid.GridEnv.complement`, `RewardGrid.toEnv` |
+| `RewardGrid.mixedStateAt_toEnv` | theorem | `CRMDP.Obs`, `CRMDP.StochPolicy`, `CRMDP.mixedStateAt`, `RewardGrid.GridEnv`, `RewardGrid.gridChannel`, `RewardGrid.gridLabel`, `RewardGrid.toEnv` |
+| `RewardGrid.mixedWorstEnv` | definition | `CRMDP.StochPolicy`, `CRMDP.StochPolicy.ofDet`, `CRMDP.mixedReturnOver`, `RewardGrid.GridEnv`, `RewardGrid.GridEnv.instFintype`, `RewardGrid.stochBestPolicy`, `RewardGrid.toEnv` |
+| `RewardGrid.mixedWorstEnv_worst` | theorem | `CRMDP.StochPolicy`, `CRMDP.StochPolicy.ofDet`, `CRMDP.mixedReturnOver`, `RewardGrid.GridEnv`, `RewardGrid.mixedWorstEnv`, `RewardGrid.stochBestPolicy`, `RewardGrid.toEnv` |
+| `RewardGrid.observed_toEnv_complement` | theorem | `CRMDP.Env.complement`, `CRMDP.Env.observed`, `CRMDP.Reward`, `RewardGrid.GridEnv`, `RewardGrid.GridEnv.complement`, `RewardGrid.toEnv` |
+| `RewardGrid.returnOver_toEnv_complement` | theorem | `CRMDP.Env.complement`, `CRMDP.Policy`, `CRMDP.returnOver`, `RewardGrid.GridEnv`, `RewardGrid.GridEnv.complement`, `RewardGrid.toEnv` |
+| `RewardGrid.run_congr_observed` | theorem | `CRMDP.Env`, `CRMDP.Env.observed`, `CRMDP.History`, `CRMDP.Policy`, `CRMDP.Reward`, `CRMDP.run` |
+| `RewardGrid.seqPolicy` | definition | `CRMDP.Obs`, `CRMDP.Policy` |
+| `RewardGrid.seqReturn` | definition | `RewardGrid.GridEnv`, `RewardGrid.GridEnv.trueReward`, `RewardGrid.gridVal`, `RewardGrid.seqState` |
+| `RewardGrid.seqReturn_eq_gridReturn` | theorem | `RewardGrid.GridEnv`, `RewardGrid.gridReturn`, `RewardGrid.seqPolicy`, `RewardGrid.seqReturn` |
+| `RewardGrid.seqReturn_extendSeq` | theorem | `RewardGrid.GridEnv`, `RewardGrid.extendSeq`, `RewardGrid.seqReturn` |
+| `RewardGrid.seqState` | definition | — |
+| `RewardGrid.seqState_congr` | theorem | `RewardGrid.seqState` |
+| `RewardGrid.spreadEnv` | definition | `RewardGrid.GridEnv`, `RewardGrid.GridEnv.instFintype`, `RewardGrid.bestPolicy`, `RewardGrid.gridReturn`, `RewardGrid.minPolicy` |
+| `RewardGrid.spreadEnv_max` | theorem | `RewardGrid.GridEnv`, `RewardGrid.bestPolicy`, `RewardGrid.gridReturn`, `RewardGrid.minPolicy`, `RewardGrid.spreadEnv` |
+| `RewardGrid.stateAt_eq_seqState` | theorem | `CRMDP.Env`, `CRMDP.Policy`, `CRMDP.historyUpTo`, `CRMDP.stateAt`, `RewardGrid.seqState` |
+| `RewardGrid.stateAt_seqPolicy` | theorem | `CRMDP.Env`, `CRMDP.stateAt`, `RewardGrid.seqPolicy`, `RewardGrid.seqState` |
+| `RewardGrid.stateAt_toEnv_complement` | theorem | `CRMDP.Env.complement`, `CRMDP.Policy`, `CRMDP.stateAt`, `RewardGrid.GridEnv`, `RewardGrid.GridEnv.complement`, `RewardGrid.toEnv` |
+| `RewardGrid.stochBestPolicy` | definition | `CRMDP.Policy`, `CRMDP.stochReturnOver`, `RewardGrid.GridEnv`, `RewardGrid.exists_max_stochGridReturn`, `RewardGrid.toEnv` |
+| `RewardGrid.stochBestPolicy_best` | theorem | `CRMDP.Policy`, `CRMDP.stochReturnOver`, `RewardGrid.GridEnv`, `RewardGrid.stochBestPolicy`, `RewardGrid.toEnv` |
+| `RewardGrid.stochGridRegret` | definition | `CRMDP.Policy`, `CRMDP.stochReturnOver`, `RewardGrid.GridEnv`, `RewardGrid.stochBestPolicy`, `RewardGrid.toEnv` |
+| `RewardGrid.stochGridReturn_add_complement` | theorem | `CRMDP.Policy`, `CRMDP.stochReturnOver`, `RewardGrid.GridEnv`, `RewardGrid.GridEnv.complement`, `RewardGrid.toEnv` |
+| `RewardGrid.stochMinPolicy` | definition | `CRMDP.Policy`, `CRMDP.stochReturnOver`, `RewardGrid.GridEnv`, `RewardGrid.exists_min_stochGridReturn`, `RewardGrid.toEnv` |
+| `RewardGrid.stochMinPolicy_min` | theorem | `CRMDP.Policy`, `CRMDP.stochReturnOver`, `RewardGrid.GridEnv`, `RewardGrid.stochMinPolicy`, `RewardGrid.toEnv` |
+| `RewardGrid.stochReturnOver_toEnv` | theorem | `CRMDP.Obs`, `CRMDP.Policy`, `CRMDP.stochReturnOver`, `RewardGrid.GridEnv`, `RewardGrid.gridLabel`, `RewardGrid.gridStochReturn`, `RewardGrid.toEnv` |
+| `RewardGrid.stochReturnOver_toEnv_complement` | theorem | `CRMDP.Env.complement`, `CRMDP.Policy`, `CRMDP.stochReturnOver`, `RewardGrid.GridEnv`, `RewardGrid.GridEnv.complement`, `RewardGrid.toEnv` |
+| `RewardGrid.stochSpreadEnv` | definition | `CRMDP.stochReturnOver`, `RewardGrid.GridEnv`, `RewardGrid.GridEnv.instFintype`, `RewardGrid.stochBestPolicy`, `RewardGrid.stochMinPolicy`, `RewardGrid.toEnv` |
+| `RewardGrid.stochSpreadEnv_max` | theorem | `CRMDP.stochReturnOver`, `RewardGrid.GridEnv`, `RewardGrid.stochBestPolicy`, `RewardGrid.stochMinPolicy`, `RewardGrid.stochSpreadEnv`, `RewardGrid.toEnv` |
+| `RewardGrid.stochStateAt_toEnv` | theorem | `CRMDP.Obs`, `CRMDP.Policy`, `CRMDP.stochStateAt`, `RewardGrid.GridEnv`, `RewardGrid.gridChannel`, `RewardGrid.gridLabel`, `RewardGrid.toEnv` |
+| `RewardGrid.stochStateAt_toEnv_complement` | theorem | `CRMDP.Env.complement`, `CRMDP.Policy`, `CRMDP.stochStateAt`, `RewardGrid.GridEnv`, `RewardGrid.GridEnv.complement`, `RewardGrid.toEnv` |
+| `RewardGrid.stochWorstEnv` | definition | `CRMDP.Policy`, `RewardGrid.GridEnv`, `RewardGrid.GridEnv.instFintype`, `RewardGrid.stochGridRegret` |
+| `RewardGrid.stochWorstEnv_worst` | theorem | `CRMDP.Policy`, `RewardGrid.GridEnv`, `RewardGrid.stochGridRegret`, `RewardGrid.stochWorstEnv` |
+| `RewardGrid.stochWorstPolicy` | definition | `CRMDP.Policy`, `RewardGrid.stochMinPolicy`, `RewardGrid.stochSpreadEnv` |
+| `RewardGrid.stochWorstPolicy_worst` | theorem | `CRMDP.Policy`, `RewardGrid.stochGridRegret`, `RewardGrid.stochWorstEnv`, `RewardGrid.stochWorstPolicy` |
+| `RewardGrid.toComplementedClass` | definition | `CRMDP.Policy`, `Corruption.ComplementedClass`, `RewardGrid.GridEnv`, `RewardGrid.GridEnv.complement`, `RewardGrid.GridEnv.complement_involutive`, `RewardGrid.bestPolicy`, `RewardGrid.bestPolicy_best`, `RewardGrid.gridReturn`, `RewardGrid.gridReturn_add_complement`, `RewardGrid.worstEnvironment`, `RewardGrid.worstEnvironment_worst`, `RewardGrid.worstPolicy`, `RewardGrid.worstPolicy_worst` |
+| `RewardGrid.toEnv` | definition | `CRMDP.Env`, `CRMDP.Reward`, `RewardGrid.GridEnv`, `RewardGrid.GridEnv.corruption`, `RewardGrid.GridEnv.trueReward`, `RewardGrid.gridVal` |
+| `RewardGrid.toEnv_corruption_gridVal` | theorem | `CRMDP.Env.corruption`, `CRMDP.Reward`, `RewardGrid.GridEnv`, `RewardGrid.GridEnv.corruption`, `RewardGrid.gridVal`, `RewardGrid.toEnv` |
+| `RewardGrid.toEnv_observed` | theorem | `CRMDP.Env.observed`, `CRMDP.Reward`, `RewardGrid.GridEnv`, `RewardGrid.GridEnv.observed`, `RewardGrid.gridVal`, `RewardGrid.toEnv` |
+| `RewardGrid.toEnv_trueReward` | theorem | `CRMDP.Env.trueReward`, `CRMDP.Reward`, `RewardGrid.GridEnv`, `RewardGrid.GridEnv.trueReward`, `RewardGrid.gridVal`, `RewardGrid.toEnv` |
+| `RewardGrid.toFullComplementedClass` | definition | `CRMDP.Policy`, `Corruption.ComplementedClass`, `RewardGrid.FullEnv`, `RewardGrid.FullEnv.complement`, `RewardGrid.FullEnv.complement_involutive`, `RewardGrid.fullBest`, `RewardGrid.fullBest_best`, `RewardGrid.fullReturn`, `RewardGrid.fullReturn_add_complement`, `RewardGrid.fullWorstEnv`, `RewardGrid.fullWorstEnv_worst`, `RewardGrid.fullWorstPolicy`, `RewardGrid.fullWorstPolicy_worst` |
+| `RewardGrid.toFullMixedComplementedClass` | definition | `CRMDP.StochPolicy`, `Corruption.ComplementedClass`, `RewardGrid.FullEnv`, `RewardGrid.FullEnv.complement`, `RewardGrid.FullEnv.complement_involutive`, `RewardGrid.fullMixedBest`, `RewardGrid.fullMixedBest_best`, `RewardGrid.fullMixedReturn`, `RewardGrid.fullMixedReturn_add_complement`, `RewardGrid.fullMixedWorstEnv`, `RewardGrid.fullMixedWorstEnv_worst`, `RewardGrid.fullMixedWorstPolicy`, `RewardGrid.fullMixedWorstPolicy_worst` |
+| `RewardGrid.toMixedComplementedClass` | definition | `CRMDP.StochPolicy`, `CRMDP.StochPolicy.ofDet`, `CRMDP.mixedReturnOver`, `Corruption.ComplementedClass`, `RewardGrid.GridEnv`, `RewardGrid.GridEnv.complement`, `RewardGrid.GridEnv.complement_involutive`, `RewardGrid.mixedGridReturn_add_complement`, `RewardGrid.mixedWorstEnv`, `RewardGrid.mixedWorstEnv_worst`, `RewardGrid.stochBestPolicy`, `RewardGrid.stochWorstPolicy`, `RewardGrid.toEnv` |
+| `RewardGrid.toStochComplementedClass` | definition | `CRMDP.Policy`, `CRMDP.stochReturnOver`, `Corruption.ComplementedClass`, `RewardGrid.GridEnv`, `RewardGrid.GridEnv.complement`, `RewardGrid.GridEnv.complement_involutive`, `RewardGrid.stochBestPolicy`, `RewardGrid.stochBestPolicy_best`, `RewardGrid.stochGridReturn_add_complement`, `RewardGrid.stochWorstEnv`, `RewardGrid.stochWorstEnv_worst`, `RewardGrid.stochWorstPolicy`, `RewardGrid.stochWorstPolicy_worst`, `RewardGrid.toEnv` |
+| `RewardGrid.trueReward_toEnv_complement` | theorem | `CRMDP.Env.complement`, `CRMDP.Env.trueReward`, `CRMDP.Reward`, `RewardGrid.GridEnv`, `RewardGrid.GridEnv.complement`, `RewardGrid.toEnv` |
+| `RewardGrid.worstEnvironment` | definition | `CRMDP.Policy`, `RewardGrid.GridEnv`, `RewardGrid.GridEnv.instFintype`, `RewardGrid.gridRegret` |
+| `RewardGrid.worstEnvironment_worst` | theorem | `CRMDP.Policy`, `RewardGrid.GridEnv`, `RewardGrid.gridRegret`, `RewardGrid.worstEnvironment` |
+| `RewardGrid.worstPolicy` | definition | `CRMDP.Policy`, `RewardGrid.minPolicy`, `RewardGrid.spreadEnv` |
+| `RewardGrid.worstPolicy_worst` | theorem | `CRMDP.Policy`, `RewardGrid.gridRegret`, `RewardGrid.worstEnvironment`, `RewardGrid.worstPolicy` |
+| `SelfMod.CompAct` | definition | — |
+| `SelfMod.Exec` | definition | — |
+| `SelfMod.IsInitialProgram` | definition | `AgentEquations.Agent`, `AgentEquations.Belief`, `AgentEquations.History`, `SelfMod.CompAct`, `SelfMod.Exec`, `SelfMod.Exec.run`, `SelfMod.printValue` |
+| `SelfMod.IsInitialProgramLimit` | definition | `AgentEquations.Agent`, `AgentEquations.Belief`, `AgentEquations.History`, `SelfMod.CompAct`, `SelfMod.Exec`, `SelfMod.Exec.run`, `SelfMod.printInfiniteValue` |
+| `SelfMod.abs_printValue_succ_sub_le` | theorem | `AgentEquations.Agent`, `AgentEquations.Agent.horizon`, `AgentEquations.Agent.utility`, `AgentEquations.Belief`, `AgentEquations.Belief.IsSubprobability`, `AgentEquations.History`, `SelfMod.CompAct`, `SelfMod.Exec`, `SelfMod.printValue` |
+| `SelfMod.abs_smValue_le_horizonBudget` | theorem | `AgentEquations.Agent`, `AgentEquations.Agent.utility`, `AgentEquations.Belief`, `AgentEquations.Belief.IsSubprobability`, `AgentEquations.History`, `AgentEquations.horizonBudget`, `SelfMod.CompAct`, `SelfMod.Exec`, `SelfMod.smValue` |
+| `SelfMod.abs_smValue_succ_sub_le` | theorem | `AgentEquations.Agent`, `AgentEquations.Agent.horizon`, `AgentEquations.Agent.utility`, `AgentEquations.Belief`, `AgentEquations.Belief.IsSubprobability`, `AgentEquations.History`, `SelfMod.CompAct`, `SelfMod.Exec`, `SelfMod.smValue` |
+| `SelfMod.exists_argmax_printInfiniteValue` | theorem | `AgentEquations.Agent`, `AgentEquations.Belief`, `AgentEquations.History`, `SelfMod.CompAct`, `SelfMod.Exec`, `SelfMod.printInfiniteValue` |
+| `SelfMod.exists_argmax_printValue` | theorem | `AgentEquations.Agent`, `AgentEquations.Belief`, `AgentEquations.History`, `SelfMod.CompAct`, `SelfMod.Exec`, `SelfMod.printValue` |
+| `SelfMod.printInfiniteValue` | definition | `AgentEquations.Agent`, `AgentEquations.Belief`, `AgentEquations.History`, `SelfMod.CompAct`, `SelfMod.Exec`, `SelfMod.printValue` |
+| `SelfMod.printValue` | definition | `AgentEquations.Agent`, `AgentEquations.Belief`, `AgentEquations.History`, `SelfMod.CompAct`, `SelfMod.Exec` |
+| `SelfMod.printValue_error_le_tail` | theorem | `AgentEquations.Agent`, `AgentEquations.Agent.horizon`, `AgentEquations.Agent.utility`, `AgentEquations.Belief`, `AgentEquations.Belief.IsSubprobability`, `AgentEquations.History`, `SelfMod.CompAct`, `SelfMod.Exec`, `SelfMod.printInfiniteValue`, `SelfMod.printValue` |
+| `SelfMod.printValue_succ_eq` | theorem | `AgentEquations.Agent`, `AgentEquations.Agent.horizon`, `AgentEquations.Agent.utility`, `AgentEquations.Belief`, `AgentEquations.Belief.cond`, `AgentEquations.History`, `SelfMod.CompAct`, `SelfMod.Exec`, `SelfMod.printValue`, `SelfMod.smValue` |
+| `SelfMod.printValue_zero` | theorem | `AgentEquations.Agent`, `AgentEquations.Agent.horizon`, `AgentEquations.Agent.utility`, `AgentEquations.Belief`, `AgentEquations.History`, `SelfMod.CompAct`, `SelfMod.Exec`, `SelfMod.printValue` |
+| `SelfMod.smInfiniteValue` | definition | `AgentEquations.Agent`, `AgentEquations.Belief`, `AgentEquations.History`, `SelfMod.CompAct`, `SelfMod.Exec`, `SelfMod.smValue` |
+| `SelfMod.smValue` | definition | `AgentEquations.Agent`, `AgentEquations.Belief`, `AgentEquations.History`, `SelfMod.CompAct`, `SelfMod.Exec` |
+| `SelfMod.smValue_eq_printValue` | theorem | `AgentEquations.Agent`, `AgentEquations.Belief`, `AgentEquations.History`, `SelfMod.CompAct`, `SelfMod.Exec`, `SelfMod.Exec.run`, `SelfMod.printValue`, `SelfMod.smValue` |
+| `SelfMod.smValue_error_le_tail` | theorem | `AgentEquations.Agent`, `AgentEquations.Agent.horizon`, `AgentEquations.Agent.utility`, `AgentEquations.Belief`, `AgentEquations.Belief.IsSubprobability`, `AgentEquations.History`, `SelfMod.CompAct`, `SelfMod.Exec`, `SelfMod.smInfiniteValue`, `SelfMod.smValue` |
+| `SelfMod.smValue_le_of_isInitialProgram` | theorem | `AgentEquations.Agent`, `AgentEquations.Belief`, `AgentEquations.History`, `SelfMod.CompAct`, `SelfMod.Exec`, `SelfMod.IsInitialProgram`, `SelfMod.smValue` |
+| `SelfMod.smValue_zero` | theorem | `AgentEquations.Agent`, `AgentEquations.Agent.horizon`, `AgentEquations.Agent.utility`, `AgentEquations.Belief`, `AgentEquations.History`, `SelfMod.CompAct`, `SelfMod.Exec`, `SelfMod.smValue` |
+| `SelfMod.survivalAgent` | definition | `AgentEquations.Agent`, `SelfMod.CompAct`, `SelfMod.survivalUtility` |
+| `SelfMod.survivalUtility` | definition | `AgentEquations.History`, `SelfMod.CompAct` |
+| `SelfMod.tendsto_printValue_printInfiniteValue` | theorem | `AgentEquations.Agent`, `AgentEquations.Agent.horizon`, `AgentEquations.Agent.utility`, `AgentEquations.Belief`, `AgentEquations.Belief.IsSubprobability`, `AgentEquations.History`, `SelfMod.CompAct`, `SelfMod.Exec`, `SelfMod.printInfiniteValue`, `SelfMod.printValue` |
+| `SelfMod.tendsto_smValue_smInfiniteValue` | theorem | `AgentEquations.Agent`, `AgentEquations.Agent.horizon`, `AgentEquations.Agent.utility`, `AgentEquations.Belief`, `AgentEquations.Belief.IsSubprobability`, `AgentEquations.History`, `SelfMod.CompAct`, `SelfMod.Exec`, `SelfMod.smInfiniteValue`, `SelfMod.smValue` |
+| `ValueLearning.Beliefs` | definition | — |
+| `ValueLearning.Beliefs.IsCP` | definition | `ValueLearning.Beliefs`, `ValueLearning.Beliefs.marginalReward`, `ValueLearning.Beliefs.rewardGiven`, `ValueLearning.Beliefs.stateGiven` |
+| `ValueLearning.Beliefs.IsCPVRLAction` | definition | `ValueLearning.Beliefs`, `ValueLearning.Beliefs.IsCP`, `ValueLearning.Beliefs.vrlValue` |
+| `ValueLearning.Beliefs.IsEEP` | definition | `ValueLearning.Beliefs`, `ValueLearning.Beliefs.posterior`, `ValueLearning.Beliefs.rewardGiven`, `ValueLearning.Beliefs.stateGiven`, `ValueLearning.Beliefs.utilityPrior` |
+| `ValueLearning.Beliefs.IsRLAction` | definition | `ValueLearning.Beliefs`, `ValueLearning.Beliefs.rlValue` |
+| `ValueLearning.Beliefs.IsUVRLAction` | definition | `ValueLearning.Beliefs`, `ValueLearning.Beliefs.vrlValue` |
+| `ValueLearning.Beliefs.IsUtilityAction` | definition | `ValueLearning.Beliefs`, `ValueLearning.Beliefs.utilityValue` |
+| `ValueLearning.Beliefs.condReward` | definition | `ValueLearning.Beliefs`, `ValueLearning.Beliefs.eval` |
+| `ValueLearning.Beliefs.isEEP_of_isCP` | theorem | `ValueLearning.Beliefs`, `ValueLearning.Beliefs.IsCP`, `ValueLearning.Beliefs.IsEEP`, `ValueLearning.Beliefs.utilityPrior` |
+| `ValueLearning.Beliefs.marginalReward` | definition | `ValueLearning.Beliefs`, `ValueLearning.Beliefs.condReward`, `ValueLearning.Beliefs.utilityPrior` |
+| `ValueLearning.Beliefs.marginalReward_nonneg` | theorem | `ValueLearning.Beliefs`, `ValueLearning.Beliefs.marginalReward` |
+| `ValueLearning.Beliefs.posterior` | definition | `ValueLearning.Beliefs`, `ValueLearning.Beliefs.condReward`, `ValueLearning.Beliefs.marginalReward`, `ValueLearning.Beliefs.utilityPrior` |
+| `ValueLearning.Beliefs.posterior_expectation` | theorem | `ValueLearning.Beliefs`, `ValueLearning.Beliefs.eval`, `ValueLearning.Beliefs.marginalReward`, `ValueLearning.Beliefs.posterior`, `ValueLearning.Beliefs.rewardVal` |
+| `ValueLearning.Beliefs.prior_mul_condReward_eq_zero_of_marginal_eq_zero` | theorem | `ValueLearning.Beliefs`, `ValueLearning.Beliefs.condReward`, `ValueLearning.Beliefs.marginalReward`, `ValueLearning.Beliefs.utilityPrior` |
+| `ValueLearning.Beliefs.prior_mul_condReward_le_marginal` | theorem | `ValueLearning.Beliefs`, `ValueLearning.Beliefs.condReward`, `ValueLearning.Beliefs.marginalReward`, `ValueLearning.Beliefs.utilityPrior` |
+| `ValueLearning.Beliefs.rlValue` | definition | `ValueLearning.Beliefs`, `ValueLearning.Beliefs.rewardGiven`, `ValueLearning.Beliefs.rewardVal`, `ValueLearning.Beliefs.stateGiven` |
+| `ValueLearning.Beliefs.sum_condReward` | theorem | `ValueLearning.Beliefs`, `ValueLearning.Beliefs.condReward` |
+| `ValueLearning.Beliefs.summable_prior_mul_condReward` | theorem | `ValueLearning.Beliefs`, `ValueLearning.Beliefs.condReward`, `ValueLearning.Beliefs.utilityPrior` |
+| `ValueLearning.Beliefs.support_of_isCP` | theorem | `ValueLearning.Beliefs`, `ValueLearning.Beliefs.IsCP`, `ValueLearning.Beliefs.marginalReward`, `ValueLearning.Beliefs.rewardGiven`, `ValueLearning.Beliefs.stateGiven` |
+| `ValueLearning.Beliefs.utilityValue` | definition | `ValueLearning.Beliefs`, `ValueLearning.Beliefs.eval`, `ValueLearning.Beliefs.rewardVal`, `ValueLearning.Beliefs.stateGiven` |
+| `ValueLearning.Beliefs.vrlValue` | definition | `ValueLearning.Beliefs`, `ValueLearning.Beliefs.eval`, `ValueLearning.Beliefs.posterior`, `ValueLearning.Beliefs.rewardGiven`, `ValueLearning.Beliefs.rewardVal`, `ValueLearning.Beliefs.stateGiven` |
+| `ValueLearning.Beliefs.vrlValue_eq_prior_mixture` | theorem | `ValueLearning.Beliefs`, `ValueLearning.Beliefs.IsCP`, `ValueLearning.Beliefs.eval`, `ValueLearning.Beliefs.posterior`, `ValueLearning.Beliefs.rewardGiven`, `ValueLearning.Beliefs.rewardVal`, `ValueLearning.Beliefs.stateGiven`, `ValueLearning.Beliefs.utilityPrior`, `ValueLearning.Beliefs.utilityValue`, `ValueLearning.Beliefs.vrlValue` |
+| `ValueLearning.Beliefs.vrlValue_eq_rlValue` | theorem | `ValueLearning.Beliefs`, `ValueLearning.Beliefs.marginalReward`, `ValueLearning.Beliefs.rewardGiven`, `ValueLearning.Beliefs.rlValue`, `ValueLearning.Beliefs.stateGiven`, `ValueLearning.Beliefs.vrlValue` |
+| `ValueLearning.Beliefs.vrlValue_eq_rlValue_of_isCP` | theorem | `ValueLearning.Beliefs`, `ValueLearning.Beliefs.IsCP`, `ValueLearning.Beliefs.rlValue`, `ValueLearning.Beliefs.vrlValue` |
+| `ValueLearning.Beliefs.vrlValue_of_isCP` | theorem | `ValueLearning.Beliefs`, `ValueLearning.Beliefs.IsCP`, `ValueLearning.Beliefs.eval`, `ValueLearning.Beliefs.posterior`, `ValueLearning.Beliefs.rewardGiven`, `ValueLearning.Beliefs.rewardVal`, `ValueLearning.Beliefs.stateGiven`, `ValueLearning.Beliefs.utilityPrior`, `ValueLearning.Beliefs.vrlValue` |
+| `ValueLearning.Beliefs.vrlValue_of_isEEP` | theorem | `ValueLearning.Beliefs`, `ValueLearning.Beliefs.IsEEP`, `ValueLearning.Beliefs.eval`, `ValueLearning.Beliefs.posterior`, `ValueLearning.Beliefs.rewardGiven`, `ValueLearning.Beliefs.rewardVal`, `ValueLearning.Beliefs.stateGiven`, `ValueLearning.Beliefs.utilityPrior`, `ValueLearning.Beliefs.vrlValue` |

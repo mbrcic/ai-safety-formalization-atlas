@@ -14,23 +14,23 @@ picking work. Grades and reproduction evidence:
 
 | Area | Shipped | Catalogued |
 |---|---:|---:|
-| [agent-incentives](#agent-incentives) | 9 | 3 |
+| [agent-incentives](#agent-incentives) | 20 | 3 |
 | [algorithmic-information](#algorithmic-information) | 1 | 1 |
-| [compositionality](#compositionality) | 7 | 1 |
-| [computability](#computability) | 3 | 3 |
+| [compositionality](#compositionality) | 9 | 1 |
+| [computability](#computability) | 5 | 2 |
 | [computational-complexity](#computational-complexity) | 1 | 4 |
-| [control-theory](#control-theory) | 3 | 4 |
-| [decision-theory](#decision-theory) | 2 | 3 |
-| [ethics](#ethics) | 1 | 4 |
-| [information-theory](#information-theory) | 16 | 2 |
-| [interpretability](#interpretability) | 17 | 5 |
+| [control-theory](#control-theory) | 12 | 2 |
+| [decision-theory](#decision-theory) | 20 | 3 |
+| [ethics](#ethics) | 3 | 4 |
+| [information-theory](#information-theory) | 25 | 2 |
+| [interpretability](#interpretability) | 18 | 5 |
 | [learning-theory](#learning-theory) | 2 | 7 |
-| [multi-agent](#multi-agent) | 3 | 5 |
-| [oversight](#oversight) | 12 | 1 |
+| [multi-agent](#multi-agent) | 28 | 5 |
+| [oversight](#oversight) | 25 | 1 |
 | [preference-inference](#preference-inference) | 2 | 1 |
-| [provability-logic](#provability-logic) | 7 | 1 |
-| [social-choice](#social-choice) | 3 | 5 |
-| [verification](#verification) | 4 | 4 |
+| [provability-logic](#provability-logic) | 8 | 1 |
+| [social-choice](#social-choice) | 6 | 5 |
+| [verification](#verification) | 14 | 3 |
 
 ## agent-incentives
 
@@ -39,12 +39,23 @@ picking work. Grades and reproduction evidence:
 | BY-039 | Reward corruption unsolvability | `AISafetyAtlas.Wireheading.CRMDP.Model.everitt_theorem_eleven` |
 | LAND-CAUSAL-KNOW-001 | Behavioural identifiability as a knowability factorization | `AISafetyAtlas.Causal.behaviorEq_iff_behavior_eq`<br>`AISafetyAtlas.Causal.exists_behaviorEq_pair_of_not_knowable` |
 | LAND-WIRE-OBJ-001 | Ring-Orseau objective factorization | `AISafetyAtlas.Wireheading.AgentEquations.value_eq_of_agree_on_window` |
+| LAND-WIRE-AGENTHISTORY-001 | Ring-Orseau histories on the Decision carrier | `AISafetyAtlas.Wireheading.AgentEquations.value_runHistory_eq_of_agree_on_window` |
+| LAND-WIRE-GOALCARRIER-001 | Self-modification on the Decision carrier | `AISafetyAtlas.Wireheading.GoalPreservation.scheduleModel_optimalAt` |
+| LAND-PREF-TRAJECTORY-001 | Preference unidentifiability at a trajectory | `AISafetyAtlas.Preference.consistent_rewards_of_trajectory_eq_univ` |
 | LAND-GOAL-001 | Finite-percept on-policy goal-preservation induction step | `AISafetyAtlas.Wireheading.GoalPreservationSource.Model.selected_matches_initial` |
+| LAND-VRL-001 | Value reinforcement learning and the consistency-preserving constraint | `AISafetyAtlas.Wireheading.ValueLearning.Beliefs.vrlValue_of_isCP` |
+| LAND-GOAL-002 | Theorem 16 equation (13) over the whole trajectory, without naming surjectivity | `AISafetyAtlas.Wireheading.GoalPreservationRun.Model.equation_thirteen` |
 | LAND-CRMDP-KNOW-001 | True return does not factor through the observed history | `AISafetyAtlas.Wireheading.ObservationLimits.not_knowable_trueReturn`<br>`AISafetyAtlas.Wireheading.ObservationLimits.not_knowable_trueReturn_of_complement_mem`<br>`AISafetyAtlas.Wireheading.ObservationLimits.returnOver_zeroEnv_complement` |
+| LAND-CRMDP-GRID-001 | Everitt et al. Theorem 11 over the source's own uniform reward grid | `AISafetyAtlas.Wireheading.RewardGrid.everitt_theorem_eleven_gridClass` |
 | LAND-CAUSAL-DECISIONNET-001 | Decision tasks as causal influence diagrams, with the decision and the utility as vertices | `AISafetyAtlas.Causal.DecisionNetwork.mem_parents_utility_of_isUnmediated`<br>`AISafetyAtlas.Examples.Causal.DecisionNetwork.figIsUnmediated` |
 | LAND-CAUSAL-COLLISION-001 | Margins do not imply behavioral identifiability | `AISafetyAtlas.Causal.Model.ancestors_eq_univ_iff`<br>`AISafetyAtlas.Causal.Model.jointProb_hardInterventionProfile`<br>`AISafetyAtlas.Causal.Model.Δ_fixProfile`<br>`AISafetyAtlas.Causal.Model.Δmix_congr`<br>`AISafetyAtlas.Causal.Skeleton.behaviorEq_of_observed_eq_empty`<br>`AISafetyAtlas.Examples.Causal.Model.jointProb_sum_shiftCollapse`<br>`AISafetyAtlas.Examples.Causal.behaviorEq_has_teeth`<br>`AISafetyAtlas.Examples.Causal.margin_class_not_identifiable`<br>`AISafetyAtlas.Examples.Causal.margin_class_not_identifiable_family`<br>`AISafetyAtlas.Examples.Causal.margin_class_not_identifiable_two_graphs`<br>`AISafetyAtlas.Examples.Causal.mm2_shape`<br>`AISafetyAtlas.Examples.Causal.transform_identity_edgeless`<br>`AISafetyAtlas.Examples.Causal.Δ_eq_half_sub_joint` |
 | LAND-CAUSAL-DECISION-001 | Causal decision policies, regret, and identified-set radius | `AISafetyAtlas.Causal.Model.regret_eq_zero_iff`<br>`AISafetyAtlas.Causal.Model.value_const_sub`<br>`AISafetyAtlas.Causal.Model.value_eq`<br>`AISafetyAtlas.Causal.Model.value_le_sign`<br>`AISafetyAtlas.Causal.inIdentifiedSet_zero_of_behaviorEq`<br>`AISafetyAtlas.Causal.modelError_eq_zero_iff`<br>`AISafetyAtlas.Causal.not_inIdentifiedSet_of_neg`<br>`AISafetyAtlas.Examples.Causal.OneNodeClass.modelError_le_ten_mul`<br>`AISafetyAtlas.Examples.Causal.card_fibreRep_empty`<br>`AISafetyAtlas.Examples.Causal.margin_class_not_identifiable_shared_optimal`<br>`AISafetyAtlas.Examples.Causal.not_inIdentifiedSet_high` |
-| LAND-CAUSAL-STRUCTURAL-001 | Structural causal models, causal influence diagrams, and materiality | `AISafetyAtlas.Causal.SCIM.exists_isOptimalPolicy`<br>`AISafetyAtlas.Causal.SCIM.policy_ext_single`<br>`AISafetyAtlas.Causal.SCM.eval_eq_f`<br>`AISafetyAtlas.Causal.SCM.exoJoint_mul_prod`<br>`AISafetyAtlas.Examples.Causal.StructuralModel.figSCIM_opinion_isMaterial`<br>`AISafetyAtlas.Examples.Causal.StructuralModel.figSCIM_policy_not_const`<br>`AISafetyAtlas.Examples.Causal.StructuralModel.utility_childless_has_teeth` |
+| LAND-CAUSAL-STRUCTURAL-001 | Structural causal models, causal influence diagrams, and materiality | `AISafetyAtlas.Causal.SCIM.exists_isOptimalPolicy`<br>`AISafetyAtlas.Causal.SCIM.observableLaw_withPolicy_eq_of_notDownstream`<br>`AISafetyAtlas.Causal.SCIM.policy_ext_single`<br>`AISafetyAtlas.Causal.SCM.eval_eq_f`<br>`AISafetyAtlas.Causal.SCM.exoJoint_mul_prod`<br>`AISafetyAtlas.Examples.Causal.StructuralModel.figSCIM_opinion_isMaterial`<br>`AISafetyAtlas.Examples.Causal.StructuralModel.figSCIM_policy_not_const`<br>`AISafetyAtlas.Examples.Causal.StructuralModel.utility_childless_has_teeth` |
+| LAND-GOODHART-SELECTION-001 | Selection on a proxy: the inflated gap, and the region the link was never observed in | `AISafetyAtlas.Goodhart.Extremal.fits_underdetermined_off_observed`<br>`AISafetyAtlas.Goodhart.gap_selection_ge` |
+| LAND-GOODHART-OVEROPT-001 | Optimizing a proxy over some of the attributes floors the rest | `AISafetyAtlas.Goodhart.zhuang_hadfield_menell_theorem_one` |
+| LAND-SOV-CAPABILITY-001 | A maintenance floor for fallback capability, and why assisted output does not report it | `AISafetyAtlas.Sovereignty.Enlarges.forces`<br>`AISafetyAtlas.Sovereignty.exists_output_rise_with_fallback_fall`<br>`AISafetyAtlas.Sovereignty.fallback_not_knowable_from_assistedOutput`<br>`AISafetyAtlas.Sovereignty.maintenanceFloor_of_practice_floor` |
+| LAND-GOODHART-REGTARGET-001 | Regulatory targets: the bar certifies exactly the systems its evidence never covered | `AISafetyAtlas.Goodhart.RegulatoryTarget.certified_systems_were_never_examined`<br>`AISafetyAtlas.Goodhart.RegulatoryTarget.raising_the_bar_does_not_help`<br>`AISafetyAtlas.Goodhart.RegulatoryTarget.risk_unconstrained_on_certified` |
+| LAND-GOODHART-HACKABILITY-001 | Hackability: two reward functions that disagree about which policy is better | `AISafetyAtlas.Decision.J_linear`<br>`AISafetyAtlas.Goodhart.unhackable_of_simplifies_common` |
 
 Catalogued, no atlas Lean:
 
@@ -70,13 +81,15 @@ Catalogued, no atlas Lean:
 
 | ID | Result | Atlas declarations |
 |---|---|---|
-| BY-043 | Misaligned embodiment | `AISafetyAtlas.Compositional.Symmetry.Protocol.no_unique_leader_from_symmetric_start` |
+| BY-043 | Misaligned embodiment | `AISafetyAtlas.Compositional.AgentNetwork.symmetry_is_the_shared_cause`<br>`AISafetyAtlas.Compositional.Symmetry.Protocol.no_unique_leader_from_symmetric_start` |
 | LAND-HYPER-002 | k-safety self-composition and hyperproperty decomposition | `AISafetyAtlas.Compositional.Hyperproperties.k_safety_iff_finite_self_composition` |
 | LAND-ANGLUIN-001 | Port-labelled anonymous networks, views, and automorphisms | `AISafetyAtlas.Compositional.Networks.runFor_eq_of_view_eq` |
 | LAND-COMP-TRACE-001 | A network's runs as a trace system | `AISafetyAtlas.Compositional.Networks.not_electsLeader_of_fixedPointFree`<br>`AISafetyAtlas.Compositional.Networks.realizes_systemOf` |
 | LAND-HYPER-KNOW-001 | Finite-observation safety as a knowability factorization | `AISafetyAtlas.Compositional.Hyperproperties.knowable_of_isSafetyPredicate`<br>`AISafetyAtlas.Compositional.Hyperproperties.not_isSafetyPredicate_of_realizedSet_collision` |
 | LAND-COMP-KNOW-001 | The Angluin view as a knowability factorization | `AISafetyAtlas.Compositional.Networks.knowable_runFor`<br>`AISafetyAtlas.Compositional.Networks.sameView_iff_view_eq` |
 | LAND-RECT-001 | Rectangle, exchange, and unary-contract equivalences | `AISafetyAtlas.Compositional.rectangle_iff_exchange_closed` |
+| LAND-COMP-RUNTRACES-001 | The trace system a policy set generates | `AISafetyAtlas.Compositional.Hyperproperties.exists_bad_trajectories_of_isKSafety` |
+| LAND-EVAL-BLINDSPOT-001 | What an evaluation that scores runs one at a time can and cannot see | `AISafetyAtlas.Compositional.Hyperproperties.Evaluation.sampling_misses_subsingleton`<br>`AISafetyAtlas.Compositional.Hyperproperties.Evaluation.traceProperty_knowable_of_score_decides` |
 
 Catalogued, no atlas Lean:
 
@@ -88,16 +101,17 @@ Catalogued, no atlas Lean:
 
 | ID | Result | Atlas declarations |
 |---|---|---|
-| BY-012 | Rice's theorem | `AISafetyAtlas.Computability.rice`<br>`AISafetyAtlas.Computability.rice_code_iff`<br>`AISafetyAtlas.Verification.AgentBehavior.no_behavioral_safety_verifier`<br>`AISafetyAtlas.Verification.rice` |
+| BY-012 | Rice's theorem | `AISafetyAtlas.Computability.rice`<br>`AISafetyAtlas.Computability.rice_code_iff`<br>`AISafetyAtlas.Verification.rice` |
 | BY-014 | Undecidability | `AISafetyAtlas.Computability.halting_problem`<br>`AISafetyAtlas.Computability.halting_re`<br>`AISafetyAtlas.Computability.nonhalting_not_re` |
+| BY-025 | Uncontainability | `AISafetyAtlas.Verification.Containment.harming_undecidable` |
 | CLM-LAWVERE-001 | Lawvere fixed-point theorem (types and functions) | `AISafetyAtlas.Logic.lawvere_fixed_point` |
+| LAND-VERIF-FULLACCESS-001 | Full access to the code: Rice bounds the behavioral half and nothing else | `AISafetyAtlas.Verification.FullAccess.access_is_not_what_separates_them`<br>`AISafetyAtlas.Verification.FullAccess.fullAccessVerifier_exactArtifact`<br>`AISafetyAtlas.Verification.FullAccess.no_fullAccessVerifier_of_extensional` |
 
 Catalogued, no atlas Lean:
 
 | ID | Result |
 |---|---|
 | BY-018 | Unlearnability |
-| BY-025 | Uncontainability |
 | CLM-LAWVERE-CCC-001 | Lawvere fixed-point theorem (Cartesian closed categories) |
 
 ## computational-complexity
@@ -119,16 +133,23 @@ Catalogued, no atlas Lean:
 
 | ID | Result | Atlas declarations |
 |---|---|---|
+| BY-001 | Unobservability | `AISafetyAtlas.Examples.LinearSystems.blind_not_determinesStateOn`<br>`AISafetyAtlas.LinearSystems.determinesStateOn_iff_isObservable`<br>`AISafetyAtlas.LinearSystems.not_determinesStateOn_of_not_isObservable` |
+| BY-002 | Uncontrollability of dynamical systems | `AISafetyAtlas.Examples.LinearSystems.deaf_not_isCompletelyReachable`<br>`AISafetyAtlas.LinearSystems.isCompletelyReachable_iff_isControllable`<br>`AISafetyAtlas.LinearSystems.not_isReachable_of_not_isControllable` |
 | BY-004 | Law of Requisite Variety | `AISafetyAtlas.Control.ashby_logVariety_ge`<br>`AISafetyAtlas.Control.ashby_logVariety_ge_mul`<br>`AISafetyAtlas.Control.ashby_variety_ge`<br>`AISafetyAtlas.Control.ashby_variety_ge_isSharp`<br>`AISafetyAtlas.Control.card_ceilDiv_le_admittedOutcomes`<br>`AISafetyAtlas.Control.card_le_mul_card_admittedOutcomes_mul`<br>`AISafetyAtlas.Control.condEntropy_outcome_eq`<br>`AISafetyAtlas.Control.entropy_ge_of_condEntropy_ge`<br>`AISafetyAtlas.Control.entropy_ge_of_sensor`<br>`AISafetyAtlas.Control.entropy_le_channelCapacity_of_complete`<br>`AISafetyAtlas.Control.entropy_outcome_ge`<br>`AISafetyAtlas.Control.entropy_outcome_ge_of_strategy`<br>`AISafetyAtlas.Control.entropy_outcome_ge_sub_channelCapacity`<br>`AISafetyAtlas.Control.two_le_card_admittedOutcomes`<br>`AISafetyAtlas.InformationTheory.channelCapacity_eq_of_card_eq_pow`<br>`AISafetyAtlas.InformationTheory.channelCapacity_eq_of_card_eq_two_pow`<br>`AISafetyAtlas.InformationTheory.channelCapacity_fun`<br>`AISafetyAtlas.InformationTheory.channelCapacity_prod`<br>`AISafetyAtlas.Oversight.not_forces_of_card_lt` |
-| BY-005 | Information-theoretical control limits | `AISafetyAtlas.Control.condEntropy_ge_of_openLoopBound`<br>`AISafetyAtlas.Control.condEntropy_le_condEntropy_of_forall`<br>`AISafetyAtlas.Control.condMutualInfo_eq_zero_of_sensorLoss_eq_zero`<br>`AISafetyAtlas.Control.controlLoss_eq_condMutualInfo`<br>`AISafetyAtlas.Control.controlLoss_eq_entropy_noise_iff`<br>`AISafetyAtlas.Control.controlLoss_eq_mutualInfo_sub`<br>`AISafetyAtlas.Control.controlLoss_le_entropy_noise`<br>`AISafetyAtlas.Control.entropyReduction_le_condEntropy_form`<br>`AISafetyAtlas.Control.entropyReduction_le_iSup_openLoopReduction`<br>`AISafetyAtlas.Control.entropyReduction_le_of_condEntropy_ge`<br>`AISafetyAtlas.Control.entropyReduction_le_of_openLoopBound`<br>`AISafetyAtlas.Control.entropyReduction_le_openLoopMax`<br>`AISafetyAtlas.Control.entropy_noise_sub_controlLoss`<br>`AISafetyAtlas.Control.exists_entropyReduction_const_eq_iSup_openLoopReduction`<br>`AISafetyAtlas.Control.isPlant_plantOutcome`<br>`AISafetyAtlas.Control.kernelControlLoss_eq_sum`<br>`AISafetyAtlas.Control.measurable_plantOutcome`<br>`AISafetyAtlas.Control.minControlLoss_eq_entropy_noise_iff_of_attained`<br>`AISafetyAtlas.Control.minControlLoss_eq_sInf_condMutualInfo`<br>`AISafetyAtlas.Control.minControlLoss_eq_sInf_mutualInfo_sub`<br>`AISafetyAtlas.Control.minControlLoss_inputPolicies_attained`<br>`AISafetyAtlas.Control.minControlLoss_inputPolicies_eq_kernelMin`<br>`AISafetyAtlas.Control.minControlLoss_le`<br>`AISafetyAtlas.Control.minControlLoss_le_entropy_noise`<br>`AISafetyAtlas.Control.minControlLoss_nonneg`<br>`AISafetyAtlas.Control.mutualInfo_prod_eq_of_sensorLoss_eq_zero`<br>`AISafetyAtlas.Control.perfectlyObservable_iff_sensorLoss_eq_zero` |
+| BY-005 | Information-theoretical control limits | `AISafetyAtlas.Control.OversightBudget.oversight_reduction_le_budget`<br>`AISafetyAtlas.Control.condEntropy_ge_of_openLoopBound`<br>`AISafetyAtlas.Control.condEntropy_le_condEntropy_of_forall`<br>`AISafetyAtlas.Control.condMutualInfo_eq_zero_of_sensorLoss_eq_zero`<br>`AISafetyAtlas.Control.controlLoss_eq_condMutualInfo`<br>`AISafetyAtlas.Control.controlLoss_eq_entropy_noise_iff`<br>`AISafetyAtlas.Control.controlLoss_eq_mutualInfo_sub`<br>`AISafetyAtlas.Control.controlLoss_le_entropy_noise`<br>`AISafetyAtlas.Control.entropyReduction_le_condEntropy_form`<br>`AISafetyAtlas.Control.entropyReduction_le_iSup_openLoopReduction`<br>`AISafetyAtlas.Control.entropyReduction_le_of_condEntropy_ge`<br>`AISafetyAtlas.Control.entropyReduction_le_of_openLoopBound`<br>`AISafetyAtlas.Control.entropyReduction_le_openLoopMax`<br>`AISafetyAtlas.Control.entropy_noise_sub_controlLoss`<br>`AISafetyAtlas.Control.exists_entropyReduction_const_eq_iSup_openLoopReduction`<br>`AISafetyAtlas.Control.isPlant_plantOutcome`<br>`AISafetyAtlas.Control.kernelControlLoss_eq_sum`<br>`AISafetyAtlas.Control.measurable_plantOutcome`<br>`AISafetyAtlas.Control.minControlLoss_eq_entropy_noise_iff_of_attained`<br>`AISafetyAtlas.Control.minControlLoss_eq_sInf_condMutualInfo`<br>`AISafetyAtlas.Control.minControlLoss_eq_sInf_mutualInfo_sub`<br>`AISafetyAtlas.Control.minControlLoss_inputPolicies_attained`<br>`AISafetyAtlas.Control.minControlLoss_inputPolicies_eq_kernelMin`<br>`AISafetyAtlas.Control.minControlLoss_le`<br>`AISafetyAtlas.Control.minControlLoss_le_entropy_noise`<br>`AISafetyAtlas.Control.minControlLoss_nonneg`<br>`AISafetyAtlas.Control.mutualInfo_prod_eq_of_sensorLoss_eq_zero`<br>`AISafetyAtlas.Control.perfectlyObservable_iff_sensorLoss_eq_zero` |
 | LAND-OVERSIGHT-VARIETY-001 | Seeing and doing are independent oversight capacities | `AISafetyAtlas.Oversight.exists_cannotForce_false_and_forces`<br>`AISafetyAtlas.Oversight.forces_of_constant_effect`<br>`AISafetyAtlas.Oversight.forces_of_constant_effect_of_not_knowable`<br>`AISafetyAtlas.Oversight.not_forces_of_cannotForce` |
+| LAND-SOV-DISTURB-001 | Reaching every state is not holding one: the quantifier a rank condition hides | `AISafetyAtlas.Sovereignty.Plant.exists_robustInput_iff` |
+| LAND-SOV-SAFETYGAME-001 | Holding a system inside a set forever, and getting back inside a budget | `AISafetyAtlas.Sovereignty.SafetyGame.mem_safetyKernel_iff_exists_maintaining` |
+| LAND-SOV-EMPOWER-001 | Empowerment of a deterministic channel is the capacity of its range | `AISafetyAtlas.Sovereignty.empowerment_eq_log_card_range` |
+| LAND-SOV-OUTNUMBERED-001 | Being outnumbered is not being outmatched | `AISafetyAtlas.Sovereignty.safetyKernel_subset_of_adversaryLe` |
+| LAND-LINSYS-001 | Kalman and Hautus: when a linear system's state is determined, and when it can be driven | `AISafetyAtlas.LinearSystems.isObservable_iff_hautus` |
+| LAND-SOV-CAPABILITY-001 | A maintenance floor for fallback capability, and why assisted output does not report it | `AISafetyAtlas.Sovereignty.Enlarges.forces`<br>`AISafetyAtlas.Sovereignty.exists_output_rise_with_fallback_fall`<br>`AISafetyAtlas.Sovereignty.fallback_not_knowable_from_assistedOutput`<br>`AISafetyAtlas.Sovereignty.maintenanceFloor_of_practice_floor` |
+| LAND-KNOW-UNIFORM-001 | Acting acceptably without identifying the state: the uniform decision boundary | `AISafetyAtlas.Knowledge.knowable_iff_uniformlyActionable`<br>`AISafetyAtlas.Knowledge.not_uniformlyActionable_iff_exists_unservable`<br>`AISafetyAtlas.Knowledge.uniformlyActionable_iff_fibrewiseAgreeable`<br>`AISafetyAtlas.Knowledge.uniformlyActionable_of_pairwiseAgreeable_of_card_le_two` |
 
 Catalogued, no atlas Lean:
 
 | ID | Result |
 |---|---|
-| BY-001 | Unobservability |
-| BY-002 | Uncontrollability of dynamical systems |
 | BY-003 | Good Regulator Theorem |
 | BY-040 | Uncontrollability of AI |
 
@@ -137,7 +158,25 @@ Catalogued, no atlas Lean:
 | ID | Result | Atlas declarations |
 |---|---|---|
 | BY-007 | Arrow's impossibility theorem | `AISafetyAtlas.SocialChoice.Utility.arrow`<br>`AISafetyAtlas.SocialChoice.arrow` |
-| BY-011 | Limits on preference deduction | `AISafetyAtlas.Preference.OverrideModel.mixtureValue_rationalise`<br>`AISafetyAtlas.Preference.OverrideModel.rationalise_strictly_better`<br>`AISafetyAtlas.Preference.ReasonableLanguage.proposition_eight`<br>`AISafetyAtlas.Preference.ReasonableLanguage.proposition_seven`<br>`AISafetyAtlas.Preference.RegretModel.cannot_rule_out_half_maximal_regret`<br>`AISafetyAtlas.Preference.Source.ReasonableForF.proposition_eight`<br>`AISafetyAtlas.Preference.Source.ReasonableForF.proposition_seven`<br>`AISafetyAtlas.Preference.Source.ReasonableForF.theorem_two_conditional`<br>`AISafetyAtlas.Preference.consistent_rewards_eq_univ`<br>`AISafetyAtlas.Preference.degenerate_explanation_cheap`<br>`AISafetyAtlas.Preference.exists_planner`<br>`AISafetyAtlas.Preference.exists_reward`<br>`AISafetyAtlas.Preference.explanation_at_least_behaviour`<br>`AISafetyAtlas.Preference.explanation_complexity_eq_behaviour`<br>`AISafetyAtlas.Preference.greedy_rewardOf`<br>`AISafetyAtlas.Preference.neg_twin` |
+| BY-011 | Limits on preference deduction | `AISafetyAtlas.Preference.OverrideModel.mixtureValue_rationalise`<br>`AISafetyAtlas.Preference.OverrideModel.rationalise_strictly_better`<br>`AISafetyAtlas.Preference.ReasonableLanguage.proposition_eight`<br>`AISafetyAtlas.Preference.ReasonableLanguage.proposition_seven`<br>`AISafetyAtlas.Preference.RegretModel.cannot_rule_out_half_maximal_regret`<br>`AISafetyAtlas.Preference.Source.ReasonableForF.proposition_eight`<br>`AISafetyAtlas.Preference.Source.ReasonableForF.proposition_seven`<br>`AISafetyAtlas.Preference.Source.ReasonableForF.theorem_two_conditional`<br>`AISafetyAtlas.Preference.behaviour_le_of_evaluatesTo`<br>`AISafetyAtlas.Preference.consistent_rewards_eq_univ`<br>`AISafetyAtlas.Preference.degenerate_explanation_cheap`<br>`AISafetyAtlas.Preference.exists_planner`<br>`AISafetyAtlas.Preference.exists_reward`<br>`AISafetyAtlas.Preference.explanation_at_least_behaviour`<br>`AISafetyAtlas.Preference.explanation_complexity_eq_behaviour`<br>`AISafetyAtlas.Preference.greedy_rewardOf`<br>`AISafetyAtlas.Preference.neg_twin` |
+| LAND-SOV-RETARGETABLE-001 | Retargetable decision-makers have orbit-level tendencies, up to theorem A.13 | `AISafetyAtlas.Sovereignty.MultiplyRetargetable.mostOrbit`<br>`AISafetyAtlas.Sovereignty.eu_determined_mostOrbit` |
+| LAND-DEC-MDP-001 | The rewardless Markov decision process, and the run it induces | `AISafetyAtlas.Decision.MDP.run_congr_obs` |
+| LAND-GOODHART-SELECTION-001 | Selection on a proxy: the inflated gap, and the region the link was never observed in | `AISafetyAtlas.Goodhart.Extremal.fits_underdetermined_off_observed`<br>`AISafetyAtlas.Goodhart.gap_selection_ge` |
+| LAND-GOODHART-OVEROPT-001 | Optimizing a proxy over some of the attributes floors the rest | `AISafetyAtlas.Goodhart.zhuang_hadfield_menell_theorem_one` |
+| LAND-SOV-POWER-001 | Peleg's game-form layer: alpha-effectivity, and the conditions it satisfies for free | `AISafetyAtlas.Sovereignty.Represents.surjective_outcome`<br>`AISafetyAtlas.Sovereignty.forces_superadditive`<br>`AISafetyAtlas.Sovereignty.retainsFamily_of_represents`<br>`AISafetyAtlas.Sovereignty.sov1_of_retainsFamily_singleton` |
+| LAND-SOV-STEERING-001 | Stepwise retention is not authorship: locally safe steps that lose the original mandate | `AISafetyAtlas.Examples.Sovereignty.steer_isSteering` |
+| LAND-SOV-SERVICE-001 | Safety without service: a delegate that refuses everything keeps every guarantee it already satisfies | `AISafetyAtlas.Sovereignty.Refusal.safety_suite_admits_a_refusal`<br>`AISafetyAtlas.Sovereignty.retainsFamily_and_not_demandwise` |
+| LAND-SOV-QUANT-001 | Two quantifier orders: a response is not a policy, and two guarantees are not one | `AISafetyAtlas.Sovereignty.forces_inter_of_shared_footprint` |
+| LAND-SOV-TRANSFER-001 | Resources, projections, and the refinement that carries a guarantee | `AISafetyAtlas.Sovereignty.forces_of_simulates` |
+| LAND-SOV-CATALOGUE-001 | Passing every demand separately is not being able to run | `AISafetyAtlas.Sovereignty.Conformity.passes_every_check_and_not_operable`<br>`AISafetyAtlas.Sovereignty.demandwise_iff_exists_selector` |
+| LAND-SOV-VALUE-001 | Values on a game form, with sure winning sitting inside them | `AISafetyAtlas.Sovereignty.lowerValue_diracLaw_eq_one_iff` |
+| LAND-SOV-BELIEF-001 | Deciding on one's own beliefs, while another party writes them | `AISafetyAtlas.Sovereignty.DoxasticAgent.mem_of_agent_forces` |
+| LAND-SOV-EVIDENCE-001 | What a decision can achieve on the evidence it has | `AISafetyAtlas.Sovereignty.exists_success_le_inv` |
+| LAND-SOV-MINIMAX-001 | Mixed strategies close the gap a pure commitment leaves | `AISafetyAtlas.Sovereignty.exists_mixed_value` |
+| LAND-SOV-VOTINGPOWER-001 | A zero power index names a null player only where the marginals cannot cancel | `AISafetyAtlas.Sovereignty.SimpleGame.banzhafRaw_eq_swings_div`<br>`AISafetyAtlas.Sovereignty.SimpleGame.shapleyShubik_eq_zero_iff` |
+| LAND-GOODHART-REGTARGET-001 | Regulatory targets: the bar certifies exactly the systems its evidence never covered | `AISafetyAtlas.Goodhart.RegulatoryTarget.certified_systems_were_never_examined`<br>`AISafetyAtlas.Goodhart.RegulatoryTarget.raising_the_bar_does_not_help`<br>`AISafetyAtlas.Goodhart.RegulatoryTarget.risk_unconstrained_on_certified` |
+| LAND-BELLMAN-BDD-001 | The bounded fixed point: a discounted policy value without a finite state space | `AISafetyAtlas.Decision.vPiBdd_eq_vPi` |
+| LAND-GOODHART-HACKABILITY-001 | Hackability: two reward functions that disagree about which policy is better | `AISafetyAtlas.Decision.J_linear`<br>`AISafetyAtlas.Goodhart.unhackable_of_simplifies_common` |
 
 Catalogued, no atlas Lean:
 
@@ -152,6 +191,8 @@ Catalogued, no atlas Lean:
 | ID | Result | Atlas declarations |
 |---|---|---|
 | BY-033 | Unverifiability of robot ethics | `AISafetyAtlas.Verification.Robot.action_safety_unverifiable` |
+| LAND-SOV-DEONTIC-001 | May, may not, can, and is empowered to are four different things | `AISafetyAtlas.Sovereignty.Enforcement.undetectable_norm_is_unenforceable`<br>`AISafetyAtlas.Sovereignty.InstitutionalSetting.exists_empowered_possible_not_permitted`<br>`AISafetyAtlas.Sovereignty.NormSystem.forbidden_iff_not_permitted_iff`<br>`AISafetyAtlas.Sovereignty.oughtImpliesCan_does_not_give_permission` |
+| LAND-SOV-INSTITUTION-001 | A Horn derivation is not counts-as, and the proof is two theorems | `AISafetyAtlas.Sovereignty.Institution.exists_recognized_not_authorized`<br>`AISafetyAtlas.Sovereignty.countsAs_validates_refl_and_trans`<br>`AISafetyAtlas.Sovereignty.no_authority_from_ungrounded_cycles` |
 
 Catalogued, no atlas Lean:
 
@@ -167,7 +208,7 @@ Catalogued, no atlas Lean:
 | ID | Result | Atlas declarations |
 |---|---|---|
 | BY-004 | Law of Requisite Variety | `AISafetyAtlas.Control.ashby_logVariety_ge`<br>`AISafetyAtlas.Control.ashby_logVariety_ge_mul`<br>`AISafetyAtlas.Control.ashby_variety_ge`<br>`AISafetyAtlas.Control.ashby_variety_ge_isSharp`<br>`AISafetyAtlas.Control.card_ceilDiv_le_admittedOutcomes`<br>`AISafetyAtlas.Control.card_le_mul_card_admittedOutcomes_mul`<br>`AISafetyAtlas.Control.condEntropy_outcome_eq`<br>`AISafetyAtlas.Control.entropy_ge_of_condEntropy_ge`<br>`AISafetyAtlas.Control.entropy_ge_of_sensor`<br>`AISafetyAtlas.Control.entropy_le_channelCapacity_of_complete`<br>`AISafetyAtlas.Control.entropy_outcome_ge`<br>`AISafetyAtlas.Control.entropy_outcome_ge_of_strategy`<br>`AISafetyAtlas.Control.entropy_outcome_ge_sub_channelCapacity`<br>`AISafetyAtlas.Control.two_le_card_admittedOutcomes`<br>`AISafetyAtlas.InformationTheory.channelCapacity_eq_of_card_eq_pow`<br>`AISafetyAtlas.InformationTheory.channelCapacity_eq_of_card_eq_two_pow`<br>`AISafetyAtlas.InformationTheory.channelCapacity_fun`<br>`AISafetyAtlas.InformationTheory.channelCapacity_prod`<br>`AISafetyAtlas.Oversight.not_forces_of_card_lt` |
-| BY-005 | Information-theoretical control limits | `AISafetyAtlas.Control.condEntropy_ge_of_openLoopBound`<br>`AISafetyAtlas.Control.condEntropy_le_condEntropy_of_forall`<br>`AISafetyAtlas.Control.condMutualInfo_eq_zero_of_sensorLoss_eq_zero`<br>`AISafetyAtlas.Control.controlLoss_eq_condMutualInfo`<br>`AISafetyAtlas.Control.controlLoss_eq_entropy_noise_iff`<br>`AISafetyAtlas.Control.controlLoss_eq_mutualInfo_sub`<br>`AISafetyAtlas.Control.controlLoss_le_entropy_noise`<br>`AISafetyAtlas.Control.entropyReduction_le_condEntropy_form`<br>`AISafetyAtlas.Control.entropyReduction_le_iSup_openLoopReduction`<br>`AISafetyAtlas.Control.entropyReduction_le_of_condEntropy_ge`<br>`AISafetyAtlas.Control.entropyReduction_le_of_openLoopBound`<br>`AISafetyAtlas.Control.entropyReduction_le_openLoopMax`<br>`AISafetyAtlas.Control.entropy_noise_sub_controlLoss`<br>`AISafetyAtlas.Control.exists_entropyReduction_const_eq_iSup_openLoopReduction`<br>`AISafetyAtlas.Control.isPlant_plantOutcome`<br>`AISafetyAtlas.Control.kernelControlLoss_eq_sum`<br>`AISafetyAtlas.Control.measurable_plantOutcome`<br>`AISafetyAtlas.Control.minControlLoss_eq_entropy_noise_iff_of_attained`<br>`AISafetyAtlas.Control.minControlLoss_eq_sInf_condMutualInfo`<br>`AISafetyAtlas.Control.minControlLoss_eq_sInf_mutualInfo_sub`<br>`AISafetyAtlas.Control.minControlLoss_inputPolicies_attained`<br>`AISafetyAtlas.Control.minControlLoss_inputPolicies_eq_kernelMin`<br>`AISafetyAtlas.Control.minControlLoss_le`<br>`AISafetyAtlas.Control.minControlLoss_le_entropy_noise`<br>`AISafetyAtlas.Control.minControlLoss_nonneg`<br>`AISafetyAtlas.Control.mutualInfo_prod_eq_of_sensorLoss_eq_zero`<br>`AISafetyAtlas.Control.perfectlyObservable_iff_sensorLoss_eq_zero` |
+| BY-005 | Information-theoretical control limits | `AISafetyAtlas.Control.OversightBudget.oversight_reduction_le_budget`<br>`AISafetyAtlas.Control.condEntropy_ge_of_openLoopBound`<br>`AISafetyAtlas.Control.condEntropy_le_condEntropy_of_forall`<br>`AISafetyAtlas.Control.condMutualInfo_eq_zero_of_sensorLoss_eq_zero`<br>`AISafetyAtlas.Control.controlLoss_eq_condMutualInfo`<br>`AISafetyAtlas.Control.controlLoss_eq_entropy_noise_iff`<br>`AISafetyAtlas.Control.controlLoss_eq_mutualInfo_sub`<br>`AISafetyAtlas.Control.controlLoss_le_entropy_noise`<br>`AISafetyAtlas.Control.entropyReduction_le_condEntropy_form`<br>`AISafetyAtlas.Control.entropyReduction_le_iSup_openLoopReduction`<br>`AISafetyAtlas.Control.entropyReduction_le_of_condEntropy_ge`<br>`AISafetyAtlas.Control.entropyReduction_le_of_openLoopBound`<br>`AISafetyAtlas.Control.entropyReduction_le_openLoopMax`<br>`AISafetyAtlas.Control.entropy_noise_sub_controlLoss`<br>`AISafetyAtlas.Control.exists_entropyReduction_const_eq_iSup_openLoopReduction`<br>`AISafetyAtlas.Control.isPlant_plantOutcome`<br>`AISafetyAtlas.Control.kernelControlLoss_eq_sum`<br>`AISafetyAtlas.Control.measurable_plantOutcome`<br>`AISafetyAtlas.Control.minControlLoss_eq_entropy_noise_iff_of_attained`<br>`AISafetyAtlas.Control.minControlLoss_eq_sInf_condMutualInfo`<br>`AISafetyAtlas.Control.minControlLoss_eq_sInf_mutualInfo_sub`<br>`AISafetyAtlas.Control.minControlLoss_inputPolicies_attained`<br>`AISafetyAtlas.Control.minControlLoss_inputPolicies_eq_kernelMin`<br>`AISafetyAtlas.Control.minControlLoss_le`<br>`AISafetyAtlas.Control.minControlLoss_le_entropy_noise`<br>`AISafetyAtlas.Control.minControlLoss_nonneg`<br>`AISafetyAtlas.Control.mutualInfo_prod_eq_of_sensorLoss_eq_zero`<br>`AISafetyAtlas.Control.perfectlyObservable_iff_sensorLoss_eq_zero` |
 | CLM-WOLPERT-APPROX-001 | Bounds on inference accuracy, and the collapse of the exact limits | `AISafetyAtlas.Inference.exists_distinguishable_accuracy_near_one`<br>`AISafetyAtlas.Inference.exists_weaklyInfers_of_three_values`<br>`AISafetyAtlas.Inference.fig5_accuracy_gap`<br>`AISafetyAtlas.Inference.identityDevice_weaklyInfers`<br>`AISafetyAtlas.Inference.inferenceAccuracy_ge` |
 | LAND-SELFREF-001 | The self-model as a component of the state it models | `AISafetyAtlas.Knowledge.SelfReference.card_rest_le_one_of_selfComplete`<br>`AISafetyAtlas.Knowledge.SelfReference.not_selfComplete_of_two_rest`<br>`AISafetyAtlas.Knowledge.SelfReference.selfComplete_iff_subsingleton_rest` |
 | LAND-ACCUM-001 | Window ambiguity: accumulation bounds over a set of targets | `AISafetyAtlas.Knowledge.ambiguity_le_of_evidenceMonotone`<br>`AISafetyAtlas.Knowledge.ambiguity_le_pairTarget_left`<br>`AISafetyAtlas.Knowledge.ambiguity_le_pairTarget_of_evidenceMonotone`<br>`AISafetyAtlas.Knowledge.ambiguity_le_pairTarget_right`<br>`AISafetyAtlas.Knowledge.ambiguity_pairTarget_le_mul`<br>`AISafetyAtlas.Knowledge.not_knowable_pairTarget_of_not_knowable` |
@@ -182,6 +223,15 @@ Catalogued, no atlas Lean:
 | LAND-FANO-001 | Fano's inequality at both printed constants, and its sharpness | `AISafetyAtlas.InformationTheory.entropy_le_fano`<br>`AISafetyAtlas.InformationTheory.fano`<br>`AISafetyAtlas.InformationTheory.fano_of_embedding`<br>`AISafetyAtlas.InformationTheory.fano_of_log_le`<br>`AISafetyAtlas.InformationTheory.fano_unrestricted` |
 | LAND-KNOWENTROPY-001 | Knowability measured: zero conditional entropy, and Fano's floor on every decoder | `AISafetyAtlas.Knowledge.condEntropy_eq_zero_of_knowable`<br>`AISafetyAtlas.Knowledge.le_errorProb_of_decoder`<br>`AISafetyAtlas.Knowledge.not_knowable_of_condEntropy_ne_zero` |
 | LAND-DPI-001 | The data-processing inequality, its equality case, and the conditioning counterexamples | `AISafetyAtlas.InformationTheory.condMutualInfo_le_mutualInfo`<br>`AISafetyAtlas.InformationTheory.isMarkovChain_iff_measure_factorizes`<br>`AISafetyAtlas.InformationTheory.isMarkovChain_iff_measure_factorizes_singleton`<br>`AISafetyAtlas.InformationTheory.measure_factorizes_of_isMarkovChain`<br>`AISafetyAtlas.InformationTheory.mutualInfo_comp_le`<br>`AISafetyAtlas.InformationTheory.mutualInfo_eq_iff_isMarkovChain`<br>`AISafetyAtlas.InformationTheory.mutualInfo_le_of_isMarkovChain` |
+| LAND-SOV-COMM-001 | Zero-error communication against an adversary is disjoint forceable regions | `AISafetyAtlas.Sovereignty.transmitsZeroError_iff_exists_code` |
+| LAND-SOV-INFL-001 | Influence is a capacity, and it is not power | `AISafetyAtlas.Sovereignty.influenceCapacity_eq_zero_iff` |
+| LAND-SOV-EMPOWER-001 | Empowerment of a deterministic channel is the capacity of its range | `AISafetyAtlas.Sovereignty.empowerment_eq_log_card_range` |
+| LAND-AUDIT-REGISTRY-001 | Audit registries along a value chain: what publishing declarations can settle | `AISafetyAtlas.Oversight.JointObservation.consortium_covers_of_registry_covers`<br>`AISafetyAtlas.Oversight.JointObservation.not_registry_covers_of_emit_collision` |
+| LAND-ACCESS-ORDER-001 | Forms of model access: three points on the informativeness order, and what no methodology repairs | `AISafetyAtlas.Knowledge.Access.exists_indistinguishable_behaviour`<br>`AISafetyAtlas.Knowledge.Access.no_blackBox_methodology`<br>`AISafetyAtlas.Knowledge.Access.whiteBox_determines_blackBox` |
+| LAND-SOV-ASSESSMENT-001 | Measuring unaided capability: withdrawal testing is forced, not chosen | `AISafetyAtlas.Sovereignty.CapabilityAssessment.no_procedure_on_output_recovers_fallback`<br>`AISafetyAtlas.Sovereignty.CapabilityAssessment.protocols_are_incomparable`<br>`AISafetyAtlas.Sovereignty.CapabilityAssessment.withdrawal_settles_and_no_output_procedure_does` |
+| LAND-AUDIT-LAG-001 | What an audit certifies: the audited version, not the deployed one | `AISafetyAtlas.Knowledge.Audit.audit_certifies_audited_not_deployed`<br>`AISafetyAtlas.Knowledge.Audit.later_audit_does_not_close_the_gap` |
+| LAND-INCIDENT-COUNT-001 | Counting AI incidents: the number a regime publishes is a property of its filing schema | `AISafetyAtlas.Knowledge.IncidentCount.count_is_not_a_measurement`<br>`AISafetyAtlas.Knowledge.IncidentCount.count_not_determined_of_collision`<br>`AISafetyAtlas.Knowledge.IncidentCount.knowable_of_report_carries_count`<br>`AISafetyAtlas.Knowledge.IncidentCount.schema_fixes_the_count` |
+| LAND-KNOW-UNIFORM-001 | Acting acceptably without identifying the state: the uniform decision boundary | `AISafetyAtlas.Knowledge.knowable_iff_uniformlyActionable`<br>`AISafetyAtlas.Knowledge.not_uniformlyActionable_iff_exists_unservable`<br>`AISafetyAtlas.Knowledge.uniformlyActionable_iff_fibrewiseAgreeable`<br>`AISafetyAtlas.Knowledge.uniformlyActionable_of_pairwiseAgreeable_of_card_le_two` |
 
 Catalogued, no atlas Lean:
 
@@ -210,7 +260,8 @@ Catalogued, no atlas Lean:
 | LAND-CAUSAL-DECISIONNET-001 | Decision tasks as causal influence diagrams, with the decision and the utility as vertices | `AISafetyAtlas.Causal.DecisionNetwork.mem_parents_utility_of_isUnmediated`<br>`AISafetyAtlas.Examples.Causal.DecisionNetwork.figIsUnmediated` |
 | LAND-CAUSAL-COLLISION-001 | Margins do not imply behavioral identifiability | `AISafetyAtlas.Causal.Model.ancestors_eq_univ_iff`<br>`AISafetyAtlas.Causal.Model.jointProb_hardInterventionProfile`<br>`AISafetyAtlas.Causal.Model.Δ_fixProfile`<br>`AISafetyAtlas.Causal.Model.Δmix_congr`<br>`AISafetyAtlas.Causal.Skeleton.behaviorEq_of_observed_eq_empty`<br>`AISafetyAtlas.Examples.Causal.Model.jointProb_sum_shiftCollapse`<br>`AISafetyAtlas.Examples.Causal.behaviorEq_has_teeth`<br>`AISafetyAtlas.Examples.Causal.margin_class_not_identifiable`<br>`AISafetyAtlas.Examples.Causal.margin_class_not_identifiable_family`<br>`AISafetyAtlas.Examples.Causal.margin_class_not_identifiable_two_graphs`<br>`AISafetyAtlas.Examples.Causal.mm2_shape`<br>`AISafetyAtlas.Examples.Causal.transform_identity_edgeless`<br>`AISafetyAtlas.Examples.Causal.Δ_eq_half_sub_joint` |
 | LAND-CAUSAL-DECISION-001 | Causal decision policies, regret, and identified-set radius | `AISafetyAtlas.Causal.Model.regret_eq_zero_iff`<br>`AISafetyAtlas.Causal.Model.value_const_sub`<br>`AISafetyAtlas.Causal.Model.value_eq`<br>`AISafetyAtlas.Causal.Model.value_le_sign`<br>`AISafetyAtlas.Causal.inIdentifiedSet_zero_of_behaviorEq`<br>`AISafetyAtlas.Causal.modelError_eq_zero_iff`<br>`AISafetyAtlas.Causal.not_inIdentifiedSet_of_neg`<br>`AISafetyAtlas.Examples.Causal.OneNodeClass.modelError_le_ten_mul`<br>`AISafetyAtlas.Examples.Causal.card_fibreRep_empty`<br>`AISafetyAtlas.Examples.Causal.margin_class_not_identifiable_shared_optimal`<br>`AISafetyAtlas.Examples.Causal.not_inIdentifiedSet_high` |
-| LAND-CAUSAL-STRUCTURAL-001 | Structural causal models, causal influence diagrams, and materiality | `AISafetyAtlas.Causal.SCIM.exists_isOptimalPolicy`<br>`AISafetyAtlas.Causal.SCIM.policy_ext_single`<br>`AISafetyAtlas.Causal.SCM.eval_eq_f`<br>`AISafetyAtlas.Causal.SCM.exoJoint_mul_prod`<br>`AISafetyAtlas.Examples.Causal.StructuralModel.figSCIM_opinion_isMaterial`<br>`AISafetyAtlas.Examples.Causal.StructuralModel.figSCIM_policy_not_const`<br>`AISafetyAtlas.Examples.Causal.StructuralModel.utility_childless_has_teeth` |
+| LAND-CAUSAL-STRUCTURAL-001 | Structural causal models, causal influence diagrams, and materiality | `AISafetyAtlas.Causal.SCIM.exists_isOptimalPolicy`<br>`AISafetyAtlas.Causal.SCIM.observableLaw_withPolicy_eq_of_notDownstream`<br>`AISafetyAtlas.Causal.SCIM.policy_ext_single`<br>`AISafetyAtlas.Causal.SCM.eval_eq_f`<br>`AISafetyAtlas.Causal.SCM.exoJoint_mul_prod`<br>`AISafetyAtlas.Examples.Causal.StructuralModel.figSCIM_opinion_isMaterial`<br>`AISafetyAtlas.Examples.Causal.StructuralModel.figSCIM_policy_not_const`<br>`AISafetyAtlas.Examples.Causal.StructuralModel.utility_childless_has_teeth` |
+| LAND-SOV-AUDIT-001 | What a channel can certify, and what it only has to be good enough to act on | `AISafetyAtlas.Sovereignty.exists_uniformDecision_iff` |
 
 Catalogued, no atlas Lean:
 
@@ -245,9 +296,34 @@ Catalogued, no atlas Lean:
 
 | ID | Result | Atlas declarations |
 |---|---|---|
-| BY-043 | Misaligned embodiment | `AISafetyAtlas.Compositional.Symmetry.Protocol.no_unique_leader_from_symmetric_start` |
+| BY-043 | Misaligned embodiment | `AISafetyAtlas.Compositional.AgentNetwork.symmetry_is_the_shared_cause`<br>`AISafetyAtlas.Compositional.Symmetry.Protocol.no_unique_leader_from_symmetric_start` |
 | LAND-ANGLUIN-001 | Port-labelled anonymous networks, views, and automorphisms | `AISafetyAtlas.Compositional.Networks.runFor_eq_of_view_eq` |
 | LAND-JOINTOBS-001 | Coalition-indexed joint observation and the emitted-interface coverage boundary | `AISafetyAtlas.Oversight.JointObservation.covers_iff_no_collision` |
+| LAND-SOV-TRULYPLAYABLE-001 | Truly playable effectivity functions, and the finite-domain corollary | `AISafetyAtlas.Sovereignty.Playable.trulyPlayable_of_finite` |
+| LAND-SOV-PLAYABILITY-001 | Pauly's playability conditions, the easy direction, and the converse that fails | `AISafetyAtlas.Sovereignty.not_exists_gameForm_cofiniteEff` |
+| LAND-SOV-RETARGETABLE-001 | Retargetable decision-makers have orbit-level tendencies, up to theorem A.13 | `AISafetyAtlas.Sovereignty.MultiplyRetargetable.mostOrbit`<br>`AISafetyAtlas.Sovereignty.eu_determined_mostOrbit` |
+| LAND-SOV-POWER-001 | Peleg's game-form layer: alpha-effectivity, and the conditions it satisfies for free | `AISafetyAtlas.Sovereignty.Represents.surjective_outcome`<br>`AISafetyAtlas.Sovereignty.forces_superadditive`<br>`AISafetyAtlas.Sovereignty.retainsFamily_of_represents`<br>`AISafetyAtlas.Sovereignty.sov1_of_retainsFamily_singleton` |
+| LAND-SOV-INDEPENDENCE-001 | The logical space of freedom, and the corner that cannot escape | `AISafetyAtlas.Sovereignty.Setting.not_independenceFree_of_universal_threat`<br>`AISafetyAtlas.Sovereignty.Setting.republicanFree_of_independenceFree` |
+| LAND-SOV-STEERING-001 | Stepwise retention is not authorship: locally safe steps that lose the original mandate | `AISafetyAtlas.Examples.Sovereignty.steer_isSteering` |
+| LAND-SOV-SERVICE-001 | Safety without service: a delegate that refuses everything keeps every guarantee it already satisfies | `AISafetyAtlas.Sovereignty.Refusal.safety_suite_admits_a_refusal`<br>`AISafetyAtlas.Sovereignty.retainsFamily_and_not_demandwise` |
+| LAND-SOV-QUANT-001 | Two quantifier orders: a response is not a policy, and two guarantees are not one | `AISafetyAtlas.Sovereignty.forces_inter_of_shared_footprint` |
+| LAND-SOV-TRANSFER-001 | Resources, projections, and the refinement that carries a guarantee | `AISafetyAtlas.Sovereignty.forces_of_simulates` |
+| LAND-SOV-CATALOGUE-001 | Passing every demand separately is not being able to run | `AISafetyAtlas.Sovereignty.Conformity.passes_every_check_and_not_operable`<br>`AISafetyAtlas.Sovereignty.demandwise_iff_exists_selector` |
+| LAND-SOV-COMM-001 | Zero-error communication against an adversary is disjoint forceable regions | `AISafetyAtlas.Sovereignty.transmitsZeroError_iff_exists_code` |
+| LAND-SOV-CONST-001 | An amendment chain is evidence about the amendment rule and nothing else | `AISafetyAtlas.Sovereignty.AmendmentLog.unbroken_chain_is_not_a_constraint`<br>`AISafetyAtlas.Sovereignty.authorizedFrom_of_total` |
+| LAND-SOV-DISTURB-001 | Reaching every state is not holding one: the quantifier a rank condition hides | `AISafetyAtlas.Sovereignty.Plant.exists_robustInput_iff` |
+| LAND-SOV-AUTH-001 | Authority is an input, and the links it does not come with | `AISafetyAtlas.Sovereignty.Attestation.attestation_is_not_the_claim`<br>`AISafetyAtlas.Sovereignty.Attestation.properties_are_independent`<br>`AISafetyAtlas.Sovereignty.DelegationChain.power_over_a_matter_does_not_compose`<br>`AISafetyAtlas.Sovereignty.ShutdownChannel.obedience_does_not_give_authority`<br>`AISafetyAtlas.Sovereignty.not_exists_label_agreeing_with_both` |
+| LAND-SOV-VALUE-001 | Values on a game form, with sure winning sitting inside them | `AISafetyAtlas.Sovereignty.lowerValue_diracLaw_eq_one_iff` |
+| LAND-SOV-INFL-001 | Influence is a capacity, and it is not power | `AISafetyAtlas.Sovereignty.influenceCapacity_eq_zero_iff` |
+| LAND-SOV-BELIEF-001 | Deciding on one's own beliefs, while another party writes them | `AISafetyAtlas.Sovereignty.DoxasticAgent.mem_of_agent_forces` |
+| LAND-SOV-COGSOV-001 | The cognitive-sovereignty predicate, and what belief change does not prove | `AISafetyAtlas.Sovereignty.magnitude_does_not_decide_authorship` |
+| LAND-SOV-MINIMAX-001 | Mixed strategies close the gap a pure commitment leaves | `AISafetyAtlas.Sovereignty.exists_mixed_value` |
+| LAND-SOV-OUTNUMBERED-001 | Being outnumbered is not being outmatched | `AISafetyAtlas.Sovereignty.safetyKernel_subset_of_adversaryLe` |
+| LAND-SOV-VOTINGPOWER-001 | A zero power index names a null player only where the marginals cannot cancel | `AISafetyAtlas.Sovereignty.SimpleGame.banzhafRaw_eq_swings_div`<br>`AISafetyAtlas.Sovereignty.SimpleGame.shapleyShubik_eq_zero_iff` |
+| LAND-AUDIT-REGISTRY-001 | Audit registries along a value chain: what publishing declarations can settle | `AISafetyAtlas.Oversight.JointObservation.consortium_covers_of_registry_covers`<br>`AISafetyAtlas.Oversight.JointObservation.not_registry_covers_of_emit_collision` |
+| LAND-SOV-STABILITY-001 | Keiding's cycle, stated at this repository's effectivity families | `AISafetyAtlas.Sovereignty.gameFormAcyclic_iff`<br>`AISafetyAtlas.Sovereignty.not_gameFormAcyclic_of_cycle` |
+| LAND-SOV-DEONTIC-001 | May, may not, can, and is empowered to are four different things | `AISafetyAtlas.Sovereignty.Enforcement.undetectable_norm_is_unenforceable`<br>`AISafetyAtlas.Sovereignty.InstitutionalSetting.exists_empowered_possible_not_permitted`<br>`AISafetyAtlas.Sovereignty.NormSystem.forbidden_iff_not_permitted_iff`<br>`AISafetyAtlas.Sovereignty.oughtImpliesCan_does_not_give_permission` |
+| LAND-SOV-INSTITUTION-001 | A Horn derivation is not counts-as, and the proof is two theorems | `AISafetyAtlas.Sovereignty.Institution.exists_recognized_not_authorized`<br>`AISafetyAtlas.Sovereignty.countsAs_validates_refl_and_trans`<br>`AISafetyAtlas.Sovereignty.no_authority_from_ungrounded_cycles` |
 
 Catalogued, no atlas Lean:
 
@@ -275,6 +351,19 @@ Catalogued, no atlas Lean:
 | LAND-TEMPORAL-001 | Time-indexed knowability, contemporaneous collisions, and delayed knowledge | `AISafetyAtlas.Knowledge.Temporal.collisionAt_of_not_knowableAt`<br>`AISafetyAtlas.Knowledge.Temporal.knowableFrom_mono`<br>`AISafetyAtlas.Knowledge.Temporal.not_knowableAt_of_collisionAt` |
 | LAND-KNOW-DEVICE-001 | Transports between the knowability kernel and inference devices | `AISafetyAtlas.Knowledge.Devices.BlockwiseCollision.not_physicallyKnows`<br>`AISafetyAtlas.Knowledge.Devices.BlockwiseCollision.not_weaklyInfers`<br>`AISafetyAtlas.Knowledge.Devices.knowable_probe_of_forall_blockAnswers`<br>`AISafetyAtlas.Knowledge.Devices.not_blockAnswers_of_witness` |
 | LAND-OVERSIGHT-VARIETY-001 | Seeing and doing are independent oversight capacities | `AISafetyAtlas.Oversight.exists_cannotForce_false_and_forces`<br>`AISafetyAtlas.Oversight.forces_of_constant_effect`<br>`AISafetyAtlas.Oversight.forces_of_constant_effect_of_not_knowable`<br>`AISafetyAtlas.Oversight.not_forces_of_cannotForce` |
+| LAND-SOV-INDEPENDENCE-001 | The logical space of freedom, and the corner that cannot escape | `AISafetyAtlas.Sovereignty.Setting.not_independenceFree_of_universal_threat`<br>`AISafetyAtlas.Sovereignty.Setting.republicanFree_of_independenceFree` |
+| LAND-SOV-AUDIT-001 | What a channel can certify, and what it only has to be good enough to act on | `AISafetyAtlas.Sovereignty.exists_uniformDecision_iff` |
+| LAND-SOV-AUTH-001 | Authority is an input, and the links it does not come with | `AISafetyAtlas.Sovereignty.Attestation.attestation_is_not_the_claim`<br>`AISafetyAtlas.Sovereignty.Attestation.properties_are_independent`<br>`AISafetyAtlas.Sovereignty.DelegationChain.power_over_a_matter_does_not_compose`<br>`AISafetyAtlas.Sovereignty.ShutdownChannel.obedience_does_not_give_authority`<br>`AISafetyAtlas.Sovereignty.not_exists_label_agreeing_with_both` |
+| LAND-SOV-EVIDENCE-001 | What a decision can achieve on the evidence it has | `AISafetyAtlas.Sovereignty.exists_success_le_inv` |
+| LAND-SOV-OUTNUMBERED-001 | Being outnumbered is not being outmatched | `AISafetyAtlas.Sovereignty.safetyKernel_subset_of_adversaryLe` |
+| LAND-VERIF-AGENTBEHAVIOR-001 | No total verifier for a nontrivial behavioural safety specification | `AISafetyAtlas.Verification.AgentBehavior.no_behavioral_safety_verifier` |
+| LAND-EVAL-BLINDSPOT-001 | What an evaluation that scores runs one at a time can and cannot see | `AISafetyAtlas.Compositional.Hyperproperties.Evaluation.sampling_misses_subsingleton`<br>`AISafetyAtlas.Compositional.Hyperproperties.Evaluation.traceProperty_knowable_of_score_decides` |
+| LAND-AUDIT-REGISTRY-001 | Audit registries along a value chain: what publishing declarations can settle | `AISafetyAtlas.Oversight.JointObservation.consortium_covers_of_registry_covers`<br>`AISafetyAtlas.Oversight.JointObservation.not_registry_covers_of_emit_collision` |
+| LAND-ACCESS-ORDER-001 | Forms of model access: three points on the informativeness order, and what no methodology repairs | `AISafetyAtlas.Knowledge.Access.exists_indistinguishable_behaviour`<br>`AISafetyAtlas.Knowledge.Access.no_blackBox_methodology`<br>`AISafetyAtlas.Knowledge.Access.whiteBox_determines_blackBox` |
+| LAND-GOODHART-REGTARGET-001 | Regulatory targets: the bar certifies exactly the systems its evidence never covered | `AISafetyAtlas.Goodhart.RegulatoryTarget.certified_systems_were_never_examined`<br>`AISafetyAtlas.Goodhart.RegulatoryTarget.raising_the_bar_does_not_help`<br>`AISafetyAtlas.Goodhart.RegulatoryTarget.risk_unconstrained_on_certified` |
+| LAND-SOV-ASSESSMENT-001 | Measuring unaided capability: withdrawal testing is forced, not chosen | `AISafetyAtlas.Sovereignty.CapabilityAssessment.no_procedure_on_output_recovers_fallback`<br>`AISafetyAtlas.Sovereignty.CapabilityAssessment.protocols_are_incomparable`<br>`AISafetyAtlas.Sovereignty.CapabilityAssessment.withdrawal_settles_and_no_output_procedure_does` |
+| LAND-AUDIT-LAG-001 | What an audit certifies: the audited version, not the deployed one | `AISafetyAtlas.Knowledge.Audit.audit_certifies_audited_not_deployed`<br>`AISafetyAtlas.Knowledge.Audit.later_audit_does_not_close_the_gap` |
+| LAND-INCIDENT-COUNT-001 | Counting AI incidents: the number a regime publishes is a property of its filing schema | `AISafetyAtlas.Knowledge.IncidentCount.count_is_not_a_measurement`<br>`AISafetyAtlas.Knowledge.IncidentCount.count_not_determined_of_collision`<br>`AISafetyAtlas.Knowledge.IncidentCount.knowable_of_report_carries_count`<br>`AISafetyAtlas.Knowledge.IncidentCount.schema_fixes_the_count` |
 
 Catalogued, no atlas Lean:
 
@@ -286,7 +375,7 @@ Catalogued, no atlas Lean:
 
 | ID | Result | Atlas declarations |
 |---|---|---|
-| BY-011 | Limits on preference deduction | `AISafetyAtlas.Preference.OverrideModel.mixtureValue_rationalise`<br>`AISafetyAtlas.Preference.OverrideModel.rationalise_strictly_better`<br>`AISafetyAtlas.Preference.ReasonableLanguage.proposition_eight`<br>`AISafetyAtlas.Preference.ReasonableLanguage.proposition_seven`<br>`AISafetyAtlas.Preference.RegretModel.cannot_rule_out_half_maximal_regret`<br>`AISafetyAtlas.Preference.Source.ReasonableForF.proposition_eight`<br>`AISafetyAtlas.Preference.Source.ReasonableForF.proposition_seven`<br>`AISafetyAtlas.Preference.Source.ReasonableForF.theorem_two_conditional`<br>`AISafetyAtlas.Preference.consistent_rewards_eq_univ`<br>`AISafetyAtlas.Preference.degenerate_explanation_cheap`<br>`AISafetyAtlas.Preference.exists_planner`<br>`AISafetyAtlas.Preference.exists_reward`<br>`AISafetyAtlas.Preference.explanation_at_least_behaviour`<br>`AISafetyAtlas.Preference.explanation_complexity_eq_behaviour`<br>`AISafetyAtlas.Preference.greedy_rewardOf`<br>`AISafetyAtlas.Preference.neg_twin` |
+| BY-011 | Limits on preference deduction | `AISafetyAtlas.Preference.OverrideModel.mixtureValue_rationalise`<br>`AISafetyAtlas.Preference.OverrideModel.rationalise_strictly_better`<br>`AISafetyAtlas.Preference.ReasonableLanguage.proposition_eight`<br>`AISafetyAtlas.Preference.ReasonableLanguage.proposition_seven`<br>`AISafetyAtlas.Preference.RegretModel.cannot_rule_out_half_maximal_regret`<br>`AISafetyAtlas.Preference.Source.ReasonableForF.proposition_eight`<br>`AISafetyAtlas.Preference.Source.ReasonableForF.proposition_seven`<br>`AISafetyAtlas.Preference.Source.ReasonableForF.theorem_two_conditional`<br>`AISafetyAtlas.Preference.behaviour_le_of_evaluatesTo`<br>`AISafetyAtlas.Preference.consistent_rewards_eq_univ`<br>`AISafetyAtlas.Preference.degenerate_explanation_cheap`<br>`AISafetyAtlas.Preference.exists_planner`<br>`AISafetyAtlas.Preference.exists_reward`<br>`AISafetyAtlas.Preference.explanation_at_least_behaviour`<br>`AISafetyAtlas.Preference.explanation_complexity_eq_behaviour`<br>`AISafetyAtlas.Preference.greedy_rewardOf`<br>`AISafetyAtlas.Preference.neg_twin` |
 | LAND-PREF-KNOW-001 | Reward unidentifiability as a knowability obstruction | `AISafetyAtlas.Preference.knowable_reward_of_isEmpty_state`<br>`AISafetyAtlas.Preference.not_knowable_reward` |
 
 Catalogued, no atlas Lean:
@@ -306,6 +395,7 @@ Catalogued, no atlas Lean:
 | CLM-WOLPERT-EPISTEMIC-001 | Epistemic consequences of physical knowledge | `AISafetyAtlas.Inference.corollary20_ii`<br>`AISafetyAtlas.Inference.corollary23`<br>`AISafetyAtlas.Inference.corollary24`<br>`AISafetyAtlas.Inference.exists_three_inequivalent_not_weaklyInfers` |
 | LAND-WOLPERT-KNOW-DEFECTS-001 | Countermodels to Wolpert 2018 epistemic claims | `AISafetyAtlas.Inference.corollary21_ii_repaired` |
 | CLM-LAWVERE-001 | Lawvere fixed-point theorem (types and functions) | `AISafetyAtlas.Logic.lawvere_fixed_point` |
+| LAND-SOV-INSTITUTION-001 | A Horn derivation is not counts-as, and the proof is two theorems | `AISafetyAtlas.Sovereignty.Institution.exists_recognized_not_authorized`<br>`AISafetyAtlas.Sovereignty.countsAs_validates_refl_and_trans`<br>`AISafetyAtlas.Sovereignty.no_authority_from_ungrounded_cycles` |
 
 Catalogued, no atlas Lean:
 
@@ -320,6 +410,9 @@ Catalogued, no atlas Lean:
 | BY-007 | Arrow's impossibility theorem | `AISafetyAtlas.SocialChoice.Utility.arrow`<br>`AISafetyAtlas.SocialChoice.arrow` |
 | BY-010 | Fairness impossibility theorem | `AISafetyAtlas.Fairness.approx_perfect_prediction_or_equal_base_rates`<br>`AISafetyAtlas.Fairness.approx_tradeoff_of_score_relative_calibration`<br>`AISafetyAtlas.Fairness.average_lower_bound`<br>`AISafetyAtlas.Fairness.exists_slack_function`<br>`AISafetyAtlas.Fairness.exists_slack_function_score_relative`<br>`AISafetyAtlas.Fairness.negativeScore_eq`<br>`AISafetyAtlas.Fairness.perfect_of_negativeScore_eq_zero`<br>`AISafetyAtlas.Fairness.perfect_prediction_or_equal_base_rates`<br>`AISafetyAtlas.Fairness.perfect_prediction_or_equal_base_rates_of_approx`<br>`AISafetyAtlas.Fairness.print_perfectPrediction_of_populated`<br>`AISafetyAtlas.Fairness.sum_score_eq_μ` |
 | LAND-GS-002 | Gibbard–Satterthwaite theorem (Lean / SocialChoiceLean) | `AISafetyAtlas.SocialChoice.gibbard_satterthwaite` |
+| LAND-SOV-TRULYPLAYABLE-001 | Truly playable effectivity functions, and the finite-domain corollary | `AISafetyAtlas.Sovereignty.Playable.trulyPlayable_of_finite` |
+| LAND-SOV-PLAYABILITY-001 | Pauly's playability conditions, the easy direction, and the converse that fails | `AISafetyAtlas.Sovereignty.not_exists_gameForm_cofiniteEff` |
+| LAND-SOV-STABILITY-001 | Keiding's cycle, stated at this repository's effectivity families | `AISafetyAtlas.Sovereignty.gameFormAcyclic_iff`<br>`AISafetyAtlas.Sovereignty.not_gameFormAcyclic_of_cycle` |
 
 Catalogued, no atlas Lean:
 
@@ -335,16 +428,25 @@ Catalogued, no atlas Lean:
 
 | ID | Result | Atlas declarations |
 |---|---|---|
-| BY-012 | Rice's theorem | `AISafetyAtlas.Computability.rice`<br>`AISafetyAtlas.Computability.rice_code_iff`<br>`AISafetyAtlas.Verification.AgentBehavior.no_behavioral_safety_verifier`<br>`AISafetyAtlas.Verification.rice` |
+| BY-012 | Rice's theorem | `AISafetyAtlas.Computability.rice`<br>`AISafetyAtlas.Computability.rice_code_iff`<br>`AISafetyAtlas.Verification.rice` |
+| BY-025 | Uncontainability | `AISafetyAtlas.Verification.Containment.harming_undecidable` |
 | BY-027 | Löb's theorem (unverifiability) | `AISafetyAtlas.Logic.loeb` |
 | BY-033 | Unverifiability of robot ethics | `AISafetyAtlas.Verification.Robot.action_safety_unverifiable` |
 | LAND-HYPER-002 | k-safety self-composition and hyperproperty decomposition | `AISafetyAtlas.Compositional.Hyperproperties.k_safety_iff_finite_self_composition` |
+| LAND-VERIF-ROBOTRUN-001 | A verified behaviour, run | `AISafetyAtlas.Verification.Robot.alwaysSatisfies_run` |
+| LAND-SOV-CONST-001 | An amendment chain is evidence about the amendment rule and nothing else | `AISafetyAtlas.Sovereignty.AmendmentLog.unbroken_chain_is_not_a_constraint`<br>`AISafetyAtlas.Sovereignty.authorizedFrom_of_total` |
+| LAND-SOV-SAFETYGAME-001 | Holding a system inside a set forever, and getting back inside a budget | `AISafetyAtlas.Sovereignty.SafetyGame.mem_safetyKernel_iff_exists_maintaining` |
+| LAND-SOV-COGSOV-001 | The cognitive-sovereignty predicate, and what belief change does not prove | `AISafetyAtlas.Sovereignty.magnitude_does_not_decide_authorship` |
+| LAND-VERIF-AGENTBEHAVIOR-001 | No total verifier for a nontrivial behavioural safety specification | `AISafetyAtlas.Verification.AgentBehavior.no_behavioral_safety_verifier` |
+| LAND-EVAL-BLINDSPOT-001 | What an evaluation that scores runs one at a time can and cannot see | `AISafetyAtlas.Compositional.Hyperproperties.Evaluation.sampling_misses_subsingleton`<br>`AISafetyAtlas.Compositional.Hyperproperties.Evaluation.traceProperty_knowable_of_score_decides` |
+| LAND-ACCESS-ORDER-001 | Forms of model access: three points on the informativeness order, and what no methodology repairs | `AISafetyAtlas.Knowledge.Access.exists_indistinguishable_behaviour`<br>`AISafetyAtlas.Knowledge.Access.no_blackBox_methodology`<br>`AISafetyAtlas.Knowledge.Access.whiteBox_determines_blackBox` |
+| LAND-VERIF-FULLACCESS-001 | Full access to the code: Rice bounds the behavioral half and nothing else | `AISafetyAtlas.Verification.FullAccess.access_is_not_what_separates_them`<br>`AISafetyAtlas.Verification.FullAccess.fullAccessVerifier_exactArtifact`<br>`AISafetyAtlas.Verification.FullAccess.no_fullAccessVerifier_of_extensional` |
+| LAND-AUDIT-LAG-001 | What an audit certifies: the audited version, not the deployed one | `AISafetyAtlas.Knowledge.Audit.audit_certifies_audited_not_deployed`<br>`AISafetyAtlas.Knowledge.Audit.later_audit_does_not_close_the_gap` |
 
 Catalogued, no atlas Lean:
 
 | ID | Result |
 |---|---|
-| BY-025 | Uncontainability |
 | BY-032 | Unverifiability |
 | BY-040 | Uncontrollability of AI |
 | LAND-HYPER-001 | Trace-property and hyperproperty classes (Alpern–Schneider decomposition; Clarkson–Schneider hierarchy) |

@@ -19,6 +19,7 @@ exists in the pinned public API or in an Examples module.
 
 from __future__ import annotations
 
+import collections
 import json
 import re
 import sys
@@ -43,6 +44,9 @@ EXTERNAL_ROOTS = {
     "MeasureTheory", "ProbabilityTheory", "PFR", "GaloisField", "IsUniform",
     "CondIndepFun", "IndepFun", "SimpleGraph", "FiniteRange",
     "IsProbabilityMeasure", "IsZeroOrProbabilityMeasure", "LinearOrder",
+    # d-separation is taken from the `Causalean` dependency; see
+    # docs/provenance/d-separation-build-or-depend.md.
+    "Causalean",
 }
 # Mathlib names that are lowercase-initial, so the "looks like an atlas
 # declaration" heuristic below would otherwise flag them.
@@ -89,12 +93,17 @@ def parse_sections(
     dict[str, list[tuple[int, ...]]],
     dict[str, list[str]],
     list[tuple[str, str]],
+    collections.Counter[str],
 ]:
-    """Row counts, printed tallies, row keys and Atlas-column cells, per section."""
+    """Row counts, printed tallies, row keys, Atlas cells, and the scope tally."""
     counts: dict[str, dict[str, int]] = {}
     summaries: dict[str, list[tuple[int, ...]]] = {}
     rows: dict[str, list[str]] = {}
     atlas_cells: list[tuple[str, str]] = []
+    # The scope axis, tallied on the same rows the coverage axis is tallied on.
+    # Without this the owed `Narrower`/`Mixed` debt is only ever hand-counted,
+    # and four hand counts of this file have produced four different answers.
+    scope_counts: collections.Counter[str] = collections.Counter()
     current: str | None = None
     for line in text.splitlines():
         if line.startswith("## "):
@@ -143,9 +152,48 @@ def parse_sections(
         if strip_markup(cells[0]) in {"#", "§", "source"} or set(strip_markup(cells[0])) <= {"-"}:
             continue  # header or separator row
         counts[current][classify(cells[3], cells[4])] += 1
+        scope_counts[strip_markup(cells[4])] += 1
         rows[current].append(strip_markup(cells[0]) + "||" + strip_markup(cells[2]))
         atlas_cells.append((current, cells[2]))
-    return counts, summaries, rows, atlas_cells
+    return counts, summaries, rows, atlas_cells, scope_counts
+
+
+SCOPE_GRADES = ("Same", "Wider", "Narrower", "Mixed", "Beyond")
+
+
+def tally_scope(
+    scope_counts: "collections.Counter[str]",
+) -> tuple[dict[str, int], int, int]:
+    """(per-grade counts, cells owed, cells recorded closed).
+
+    A scope cell may carry a qualifier -- `Wider (repaired)`, `Narrower, and
+    closed` -- so the grade is the leading word and the qualifier is read
+    separately. A cell that says it is closed is not owed; that distinction is
+    the whole point of counting, and collapsing it would report discharged work
+    as debt.
+
+    An unrecognised spelling raises rather than being dropped, for the same
+    reason `classify` raises: a row counted nowhere leaves the arithmetic
+    balanced while the total is wrong.
+    """
+    buckets = dict.fromkeys(SCOPE_GRADES + ("ungraded",), 0)
+    owed = 0
+    closed = 0
+    for cell, count in scope_counts.items():
+        text = cell.strip()
+        if text in {"—", "-", ""}:
+            buckets["ungraded"] += count
+            continue
+        grade = re.split(r"[,(]", text, maxsplit=1)[0].strip()
+        if grade not in SCOPE_GRADES:
+            raise Unclassifiable(f"unrecognised scope cell {cell!r}")
+        if "and closed" in text:
+            closed += count
+            continue
+        buckets[grade] += count
+        if grade in {"Narrower", "Mixed"}:
+            owed += count
+    return buckets, owed, closed
 
 
 def parse_totals(text: str) -> tuple[list[tuple[str, tuple[int, ...]]], tuple[int, ...]]:
@@ -271,6 +319,51 @@ def registry_modules() -> set[str]:
     return modules
 
 
+LEDGER_HEADING = "### The module ledger, checked"
+LEDGER_EXCLUDED = (
+    "AISafetyAtlas.Examples",
+    "AISafetyAtlas.Upstream",
+    "AISafetyAtlas.Conjectures",
+)
+
+
+def root_cluster_modules() -> list[str]:
+    """Library modules the root imports, outside examples and the two sandboxes.
+
+    These are the atlas's public surface. A module here that no registry row
+    hosts has no scope claims any script reads, so it is *silently compliant* --
+    which is how Sovereignty, Goodhart and Decision merged on 2026-09-10 with
+    fourteen modules and zero rows and every gate green.
+    """
+    modules: list[str] = []
+    for line in (ROOT / "AISafetyAtlas.lean").read_text().splitlines():
+        m = re.match(r"^(?:public )?import (AISafetyAtlas\.[A-Za-z0-9_.]+)\s*$", line)
+        if m and not m.group(1).startswith(LEDGER_EXCLUDED):
+            modules.append(m.group(1))
+    return modules
+
+
+def ledger_exempt_modules(text: str) -> set[str] | None:
+    """Modules named in the audit's module-ledger block.
+
+    `None` when the block is absent, which is itself a failure: the check would
+    otherwise pass by having nothing to read.
+    """
+    lines = text.splitlines()
+    start = next((i for i, l in enumerate(lines) if l.startswith(LEDGER_HEADING)), None)
+    if start is None:
+        return None
+    exempt: set[str] = set()
+    for line in lines[start + 1 :]:
+        if line.startswith("## "):
+            break
+        if line.startswith("* `"):
+            m = re.match(r"^\* `(AISafetyAtlas\.[A-Za-z0-9_.]+)`", line)
+            if m:
+                exempt.add(m.group(1))
+    return exempt
+
+
 def audit_target_modules(text: str) -> list[tuple[str, str]]:
     """`(source name, module)` for each `## N. source → `Module`` heading.
 
@@ -298,7 +391,7 @@ def audit_declared_headings(text: str) -> set[str]:
 def main() -> int:
     text = AUDIT.read_text()
     try:
-        per_section, summaries, section_rows, atlas_cells = parse_sections(text)
+        per_section, summaries, section_rows, atlas_cells, scope_counts = parse_sections(text)
     except Unclassifiable as exc:
         print(f"check_coverage_audit: {exc}", file=sys.stderr)
         return 1
@@ -381,6 +474,33 @@ def main() -> int:
     # The loop above only reaches sections that *declare* a target. A graded
     # section whose heading drops the `→ `Module`` suffix would be counted into
     # the totals and never checked, which is the whole point of the check.
+    # Every library module the root imports must be reachable from some ledger:
+    # a registry row, or an explicit line in the audit's module-ledger block.
+    # Without this, a cluster with no rows has no scope claims to check and is
+    # silently compliant -- the failure recorded at the top of the audit.
+    exempt = ledger_exempt_modules(text)
+    if exempt is None:
+        problems.append(
+            f"the audit has no {LEDGER_HEADING!r} block, so the module-ledger "
+            "check reads nothing and passes vacuously -- restore it"
+        )
+    else:
+        unledgered = [
+            m for m in root_cluster_modules() if m not in hosted and m not in exempt
+        ]
+        for m in unledgered:
+            problems.append(
+                f"`{m}` is imported by the root, hosts no IN_TREE registry row, and is "
+                f"not named in the audit's module-ledger block -- nothing reads its "
+                "scope claims. Add a row, or list it there with the reason"
+            )
+        stale = sorted(m for m in exempt if m in hosted)
+        for m in stale:
+            problems.append(
+                f"`{m}` is listed in the module-ledger block as holding no registry "
+                "row, but a row now hosts it -- remove the line"
+            )
+
     declared = audit_declared_headings(text)
     for name, counts in per_section.items():
         if any(counts.values()) and name not in declared:
@@ -423,6 +543,23 @@ def main() -> int:
         f"coverage audit ok: {len(totals_rows)} sources, "
         f"{grand[0]} Yes / {grand[1]} Partial / {grand[2]} No / {grand[3]} Beyond, "
         f"row counts and declaration names consistent"
+    )
+    buckets, owed, closed = tally_scope(scope_counts)
+    if sum(buckets.values()) + closed != sum(grand):
+        print(
+            "check_coverage_audit: the scope tally and the coverage tally count "
+            f"different rows ({sum(buckets.values()) + closed} vs {sum(grand)})",
+            file=sys.stderr,
+        )
+        return 1
+    print(
+        "  scope: "
+        + " / ".join(
+            f"{buckets[grade]} {grade}"
+            for grade in ("Same", "Wider", "Narrower", "Mixed", "Beyond", "ungraded")
+        )
+        + f", {closed} closed -- "
+        + f"{owed} cells owed a closure, a regrade, an unclosability proof or a cost"
     )
     return 0
 

@@ -194,6 +194,35 @@ Theorem 11.
 
 Armstrong and Mindermann, NeurIPS 2018.
 
+> **Amended 2026-09-11.** This map was written against a paper that was **not
+> pinned anywhere** — no copy in the private literature store, no
+> manifest entry, no section in `docs/provenance/source-coverage-audit.md`. It
+> is now all three: manifest the private manifest of 2026-09-11, and
+> **section 20** of the coverage audit, graded row by row from rendered pages.
+> The table below is retained as written, and the audit section supersedes it
+> wherever they differ. Two rows below are now known to be wrong about the
+> atlas, in the atlas's favour:
+>
+> * **Lemma 6 is not a specialization.** Its row calls the finite, nonempty
+>   action type a specialization "needed by the greedy construction". Print's §3
+>   fixes *"a finite action space"* and its policies inhabit it, so those
+>   instances are print's own hypotheses and the Lean statement is at print's
+>   binders. Section 20 grades the row `Same`.
+> * **Proposition 10 is not simply blocked.** Its row reads "needs
+>   resource-bounded complexity (`Kt`, `KT`); blocked upstream". That is right
+>   about what is missing and understates what is already here: the atlas's
+>   Proposition 7 is quantified over *any* natural-number-valued complexity
+>   assignment satisfying the source's own bound, so print's conclusion
+>   transfers to either time-bounded measure as soon as an instance is supplied.
+>   What is absent is print's proof that the two measures satisfy the bound —
+>   which print itself gives only as a sketch — and the algorithm-valued planner
+>   domain its second sentence needs. Section 20 grades it `Partial`.
+>
+> One row is also mis-attributed and is corrected in the audit rather than here:
+> the §4.1.2 half-maximal regret row belongs to **this** paper, not to Everitt
+> et al. Print attributes the inequality to Everitt and does not prove it, which
+> is exactly why the atlas carries it as a `HalfMaximalRegretBound` hypothesis.
+
 | Source | Lean | Divergence |
 |---|---|---|
 | planner `p : R → Π` | `Planner` | **generalization**: arbitrary behaviour and reward types |

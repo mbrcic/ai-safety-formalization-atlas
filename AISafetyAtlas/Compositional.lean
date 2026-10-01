@@ -4,8 +4,10 @@ public import AISafetyAtlas.Compositional.Hyperproperties
 public import AISafetyAtlas.Compositional.Hyperproperties.PrefixTopology
 public import AISafetyAtlas.Compositional.Hyperproperties.Product
 public import AISafetyAtlas.Compositional.Hyperproperties.Knowability
+public import AISafetyAtlas.Compositional.Hyperproperties.Evaluation
 public import AISafetyAtlas.Compositional.Knowability
 public import AISafetyAtlas.Compositional.NetworkTraces
+public import AISafetyAtlas.Compositional.TraceSystem
 public import AISafetyAtlas.Compositional.LocalContractBoundary
 public import AISafetyAtlas.Compositional.Networks
 public import AISafetyAtlas.Compositional.Rectangularity
@@ -54,7 +56,7 @@ arbitrary topology (use `PrefixTopology` for the operational reading).
   Symmetry are RELATED dependencies for that survey row at most.
 - **Not** full Angluin covering theory, randomized leader election, or
   assume-guarantee completeness (e.g. Dewes–Dimitrova GEDCs).
-- **Not** an AI-system bridge. No `ai_bridge_status` graduation from this facade.
+- **Not** an AI-system bridge. No `ai_interpretation_status` graduation from this facade.
 - **Not** the same question as `AISafetyAtlas.Oversight.JointObservation`. That surface
   asks whether a hazard label factors through an available observation, under typed
   coalition access restriction. Rectangularity asks whether a relation decomposes into

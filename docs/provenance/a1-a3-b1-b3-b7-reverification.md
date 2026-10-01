@@ -3,7 +3,7 @@
 Updated 2026-08-15. This is the durable residual-gap record for the
 compositional, wireheading, and preference-deduction increment.
 
-This record does not change any `relationship` or `ai_bridge_status`.
+This record does not change any `relationship` or `ai_interpretation_status`.
 
 ## Verification verdict
 

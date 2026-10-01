@@ -45,6 +45,10 @@ EXTRA = [
     # agree with straight from the files Lake uses, so the copy needs them too.
     "lean-toolchain",
     "lake-manifest.json",
+    # Every novelty check's `asserted_in` names a file that must resolve, and
+    # NC-012 asserts into the unreleased release note.
+    "STATE.md",
+    "docs/releases/unreleased.md",
 ]
 SCRIPTS = [
     "validate_registry.py",
@@ -54,6 +58,9 @@ SCRIPTS = [
     # validate_conjectures imports it for the Lean import-graph helpers.
     "validate_current_state.py",
     "lean_build_targets.txt",
+    # ...and NC-011 asserts into this one, so the `asserted_in` resolution
+    # check needs it present in the copy.
+    "check_frontier_evidence.py",
 ]
 
 
@@ -78,7 +85,7 @@ def build_tree(tmp: Path) -> Path:
     # the Lean sources must be present as files (they are never built here).
     shutil.copytree(ROOT / "AISafetyAtlas", tmp / "AISafetyAtlas", dirs_exist_ok=True)
     # ...and every scope_delta names an evidence document that must resolve.
-    for docs in ("docs/provenance", "docs/guide", "docs/bridges"):
+    for docs in ("docs/provenance", "docs/guide", "docs/interpretation-reviews"):
         shutil.copytree(ROOT / docs, tmp / docs, dirs_exist_ok=True)
     return tmp
 
@@ -103,6 +110,26 @@ def mutate(tmp: Path, name: str, change) -> None:
 
 def first(items, **match):
     return next(i for i in items if all(i[k] == v for k, v in match.items()))
+
+
+def uncovered(data: dict) -> dict:
+    """Any survey row that still carries a `statability` record.
+
+    The mutations below need a row with a verdict on it and no atlas Lean. They
+    used to name `BY-002`, and that broke on 2026-09-21 when `BY-002` was
+    promoted to covered and its verdict was retired — a row becoming covered is
+    the point of this repository, so pinning one by id was a bet against the
+    work. Picking whichever row still has a verdict keeps the rules exercised
+    for as long as any row is uncovered, and the assertion below says plainly
+    what happens when none is.
+    """
+    rows = [r for r in data["results"] if "statability" in r]
+    assert rows, (
+        "no result carries a statability record, so the statability rules below "
+        "test nothing; seed a synthetic uncovered row the way synthetic_conjecture "
+        "does rather than deleting these cases"
+    )
+    return rows[0]
 
 
 def synthetic_conjecture(data: dict) -> dict:
@@ -776,7 +803,7 @@ CASES = [
         "registry: statability verdict outside the vocabulary",
         "validate_registry.py",
         "registry.yaml",
-        lambda d: first(d["results"], id="BY-002")["statability"].__setitem__(
+        lambda d: uncovered(d)["statability"].__setitem__(
             "verdict", "TOO_HARD"
         ),
         "statability verdict 'TOO_HARD' is outside the vocabulary",
@@ -785,14 +812,14 @@ CASES = [
         "registry: statability verdict with no evidence",
         "validate_registry.py",
         "registry.yaml",
-        lambda d: first(d["results"], id="BY-002")["statability"].pop("note"),
+        lambda d: uncovered(d)["statability"].pop("note"),
         "must carry a non-empty note saying what was checked",
     ),
     (
         "registry: blocked row that names no missing primitive",
         "validate_registry.py",
         "registry.yaml",
-        lambda d: first(d["results"], id="BY-002")["statability"].__setitem__(
+        lambda d: uncovered(d)["statability"].__setitem__(
             "verdict", "BLOCKED_ON_PRIMITIVE"
         ),
         "must name the missing primitives",
@@ -801,7 +828,7 @@ CASES = [
         "registry: missing primitives on a row that is not blocked",
         "validate_registry.py",
         "registry.yaml",
-        lambda d: first(d["results"], id="BY-002")["statability"].__setitem__(
+        lambda d: uncovered(d)["statability"].__setitem__(
             "missing", ["resource-bounded complexity"]
         ),
         "not BLOCKED_ON_PRIMITIVE",
@@ -819,14 +846,14 @@ CASES = [
         "registry: uncovered row with no statability verdict",
         "validate_registry.py",
         "registry.yaml",
-        lambda d: first(d["results"], id="BY-002").pop("statability"),
+        lambda d: uncovered(d).pop("statability"),
         "carries no atlas Lean and no statability verdict",
     ),
     (
         "registry: statability with an unknown field",
         "validate_registry.py",
         "registry.yaml",
-        lambda d: first(d["results"], id="BY-002")["statability"].__setitem__(
+        lambda d: uncovered(d)["statability"].__setitem__(
             "confidence", "low"
         ),
         "statability has unknown fields",

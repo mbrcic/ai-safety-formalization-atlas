@@ -38,7 +38,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 SRC = ROOT / "AISafetyAtlas"
-PROSE = ["README.md", "STATE.md", "docs/guide", "docs/provenance", "docs/bridges"]
+PROSE = ["README.md", "STATE.md", "docs/guide", "docs/provenance", "docs/interpretation-reviews"]
 
 # Phrases that assert an absence. Kept literal and few: a wider net turns this
 # from a worklist into a wall of text, and a worklist nobody reads is worse than
@@ -59,6 +59,15 @@ CLAIMS = [
     (r"\bout of reach\b", "out of reach"),
     (r"\bis missing\b", "missing"),
     (r"\bare missing\b", "missing"),
+    # "Mathlib has no measure-theoretic form of it" sat in a shipped docstring
+    # and matched none of the patterns above, so the scanner reported 218 claims
+    # while missing the phrasing a Lean docstring most naturally reaches for.
+    (r"\bhas no\b", "has no"),
+    (r"\bhave no\b", "has no"),
+    (r"\bcarries no\b", "carries no"),
+    (r"\bcarry no\b", "carries no"),
+    (r"\bdoes not carry\b", "does not carry"),
+    (r"\bdo not carry\b", "does not carry"),
 ]
 PATTERNS = [(re.compile(p, re.I), label) for p, label in CLAIMS]
 

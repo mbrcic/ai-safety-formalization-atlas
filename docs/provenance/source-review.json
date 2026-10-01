@@ -1,7 +1,7 @@
 {
   "schema_version": 4,
-  "generated_at": "2026-09-23T23:46:07Z",
-  "source_fingerprint": "db8cce413d32013358e86756f1380c3fc14f3be1795080fbe0f1a91b6e28d578",
+  "generated_at": "2026-10-01T19:49:26Z",
+  "source_fingerprint": "26c9560441b3d722097acbd3ed75c361edb43f863214c7ed255e2f1f13bc4ded",
   "records": {
     "abramsky-zvesper-2010-lawvere-bk": {
       "input_fingerprint": "dfa19ffb17522e5ff53096980965c9725b79a002377731944c4a462de5900ec8",
@@ -205,6 +205,143 @@
       "status": "NEEDS_HUMAN",
       "notes": ""
     },
+    "atlas-ref-everitt-hutter-2016-vrl": {
+      "input_fingerprint": "c68a81c1c1b6bf0c8f2cf85dc75b7fead8c8032a6c927703d612a22e05c0c01d",
+      "provider": "html",
+      "lookup_status": "OK",
+      "checked_url": "https://arxiv.org/abs/1605.03143v1",
+      "checked_on": "2026-09-23T17:11:10Z",
+      "metadata": [
+        {
+          "field": "identifier",
+          "catalogue_value": "arxiv:1605.03143v1",
+          "source_value": "arxiv:1605.03143v1",
+          "outcome": "MATCH"
+        },
+        {
+          "field": "title",
+          "catalogue_value": "Avoiding Wireheading with Value Reinforcement Learning,",
+          "source_value": "Avoiding Wireheading with Value Reinforcement Learning",
+          "outcome": "MATCH"
+        },
+        {
+          "field": "authors",
+          "catalogue_value": "T. Everitt and M. Hutter",
+          "source_value": "Everitt, Tom; Hutter, Marcus",
+          "outcome": "MATCH"
+        },
+        {
+          "field": "date",
+          "catalogue_value": "1605",
+          "source_value": "2016/05/10",
+          "outcome": "POSSIBLE_CONFLICT"
+        },
+        {
+          "field": "venue",
+          "catalogue_value": "—",
+          "source_value": "—",
+          "outcome": "NOT_APPLICABLE"
+        },
+        {
+          "field": "volume_issue",
+          "catalogue_value": "vol. 9782",
+          "source_value": "—",
+          "outcome": "MISSING_IN_SOURCE"
+        },
+        {
+          "field": "pages",
+          "catalogue_value": "12-22",
+          "source_value": "—",
+          "outcome": "MISSING_IN_SOURCE"
+        },
+        {
+          "field": "locator",
+          "catalogue_value": "https://arxiv.org/abs/1605.03143v1",
+          "source_value": "https://arxiv.org/abs/1605.03143v1",
+          "outcome": "MATCH"
+        }
+      ],
+      "rights": {
+        "outcome": "RIGHTS_RECORDED",
+        "details": "Explicit license link on source page (view license).",
+        "url": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+      },
+      "related_dois": [],
+      "status": "NEEDS_HUMAN",
+      "notes": "arXiv API lookup failed (HTTP 406); checked the source locator instead."
+    },
+    "atlas-ref-gjt-2013-truly-playable": {
+      "input_fingerprint": "440133f0b616dfb8d19c60e127c228644d245144ad946b78fc1aed8c948cead3",
+      "provider": "crossref",
+      "lookup_status": "OK",
+      "checked_url": "https://api.crossref.org/v1/works/10.1007%2Fs10458-012-9192-y",
+      "checked_on": "2026-09-23T17:11:10Z",
+      "metadata": [
+        {
+          "field": "identifier",
+          "catalogue_value": "doi:10.1007/s10458-012-9192-y",
+          "source_value": "doi:10.1007/s10458-012-9192-y",
+          "outcome": "MATCH"
+        },
+        {
+          "field": "title",
+          "catalogue_value": "Strategic games and truly playable effectivity functions,",
+          "source_value": "Strategic games and truly playable effectivity functions",
+          "outcome": "MATCH"
+        },
+        {
+          "field": "authors",
+          "catalogue_value": "V. Goranko, W. Jamroga and P. Turrini",
+          "source_value": "Valentin Goranko; Wojciech Jamroga; Paolo Turrini",
+          "outcome": "MATCH"
+        },
+        {
+          "field": "date",
+          "catalogue_value": "2013",
+          "source_value": "2013-3",
+          "outcome": "MATCH"
+        },
+        {
+          "field": "venue",
+          "catalogue_value": "Autonomous Agents and Multi-Agent Systems 26(2): 288-314, 2013. doi: 10.1007/s10458-012-9192-y. Conference version: AAMAS 2011",
+          "source_value": "Autonomous Agents and Multi-Agent Systems",
+          "outcome": "POSSIBLE_CONFLICT"
+        },
+        {
+          "field": "volume_issue",
+          "catalogue_value": "—",
+          "source_value": "vol. 26, no. 2",
+          "outcome": "MISSING_IN_CATALOGUE"
+        },
+        {
+          "field": "pages",
+          "catalogue_value": "—",
+          "source_value": "288-314",
+          "outcome": "MISSING_IN_CATALOGUE"
+        },
+        {
+          "field": "locator",
+          "catalogue_value": "https://doi.org/10.1007/s10458-012-9192-y",
+          "source_value": "https://doi.org/10.1007/s10458-012-9192-y",
+          "outcome": "MATCH"
+        }
+      ],
+      "rights": {
+        "outcome": "RIGHTS_RECORDED",
+        "details": "Crossref rights metadata (tdm)",
+        "url": "http://www.springer.com/tdm",
+        "entries": [
+          {
+            "url": "http://www.springer.com/tdm",
+            "content_version": "tdm",
+            "start": "2012-01-18T00:00:00Z"
+          }
+        ]
+      },
+      "related_dois": [],
+      "status": "NEEDS_HUMAN",
+      "notes": ""
+    },
     "atlas-ref-majumdar-2026": {
       "input_fingerprint": "eea9ae07871b43f7259fe4a3ed1d8377800bfb17d5196f716959abcfacdf0e8c",
       "provider": "arxiv",
@@ -269,6 +406,71 @@
       "related_dois": [],
       "status": "NEEDS_HUMAN",
       "notes": ""
+    },
+    "atlas-ref-manheim-garrabrant-2018-goodhart-variants": {
+      "input_fingerprint": "ceb762390f90234dda9da68c85edc35a2992a8c0fba7f6ad729aced942f89624",
+      "provider": "html",
+      "lookup_status": "OK",
+      "checked_url": "https://arxiv.org/abs/1803.04585v4",
+      "checked_on": "2026-09-23T17:11:13Z",
+      "metadata": [
+        {
+          "field": "identifier",
+          "catalogue_value": "arxiv:1803.04585v4",
+          "source_value": "arxiv:1803.04585v4",
+          "outcome": "MATCH"
+        },
+        {
+          "field": "title",
+          "catalogue_value": "Categorizing Variants of Goodhart's Law,",
+          "source_value": "Categorizing Variants of Goodhart's Law",
+          "outcome": "MATCH"
+        },
+        {
+          "field": "authors",
+          "catalogue_value": "D. Manheim and S. Garrabrant",
+          "source_value": "Manheim, David; Garrabrant, Scott",
+          "outcome": "MATCH"
+        },
+        {
+          "field": "date",
+          "catalogue_value": "1803",
+          "source_value": "2018/03/13",
+          "outcome": "POSSIBLE_CONFLICT"
+        },
+        {
+          "field": "venue",
+          "catalogue_value": "—",
+          "source_value": "—",
+          "outcome": "NOT_APPLICABLE"
+        },
+        {
+          "field": "volume_issue",
+          "catalogue_value": "—",
+          "source_value": "—",
+          "outcome": "NOT_APPLICABLE"
+        },
+        {
+          "field": "pages",
+          "catalogue_value": "—",
+          "source_value": "—",
+          "outcome": "NOT_APPLICABLE"
+        },
+        {
+          "field": "locator",
+          "catalogue_value": "https://arxiv.org/abs/1803.04585v4",
+          "source_value": "https://arxiv.org/abs/1803.04585v4",
+          "outcome": "MATCH"
+        }
+      ],
+      "rights": {
+        "outcome": "RIGHTS_RECORDED",
+        "details": "Explicit license link on source page (view license).",
+        "url": "http://creativecommons.org/licenses/by-nc-sa/4.0/"
+      },
+      "related_dois": [],
+      "status": "NEEDS_HUMAN",
+      "notes": "arXiv API lookup failed (HTTP 406); checked the source locator instead."
     },
     "atlas-ref-melo-2024": {
       "input_fingerprint": "ae9b888d2461cc0f5f60266ed5fb726cf4adee8392e7f66bb2b3dd0592877391",
@@ -400,6 +602,136 @@
       "status": "NEEDS_HUMAN",
       "notes": ""
     },
+    "atlas-ref-pauly-2002-coalition-logic": {
+      "input_fingerprint": "f792fe21c190c9235fd4225cbbbc6e34523227f4cb2605793ba5ce44fbe0e45b",
+      "provider": "crossref",
+      "lookup_status": "OK",
+      "checked_url": "https://api.crossref.org/v1/works/10.1093%2Flogcom%2F12.1.149",
+      "checked_on": "2026-09-23T17:11:13Z",
+      "metadata": [
+        {
+          "field": "identifier",
+          "catalogue_value": "doi:10.1093/logcom/12.1.149",
+          "source_value": "doi:10.1093/logcom/12.1.149",
+          "outcome": "MATCH"
+        },
+        {
+          "field": "title",
+          "catalogue_value": "A Modal Logic for Coalitional Power in Games,",
+          "source_value": "A Modal Logic for Coalitional Power in Games",
+          "outcome": "MATCH"
+        },
+        {
+          "field": "authors",
+          "catalogue_value": "M. Pauly",
+          "source_value": "M. Pauly",
+          "outcome": "MATCH"
+        },
+        {
+          "field": "date",
+          "catalogue_value": "2002",
+          "source_value": "2002-2-1",
+          "outcome": "MATCH"
+        },
+        {
+          "field": "venue",
+          "catalogue_value": "Journal of Logic and Computation 12(1): 149-166, 2002. doi: 10.1093/logcom/12.1.149",
+          "source_value": "Journal of Logic and Computation",
+          "outcome": "POSSIBLE_CONFLICT"
+        },
+        {
+          "field": "volume_issue",
+          "catalogue_value": "—",
+          "source_value": "vol. 12, no. 1",
+          "outcome": "MISSING_IN_CATALOGUE"
+        },
+        {
+          "field": "pages",
+          "catalogue_value": "—",
+          "source_value": "149-166",
+          "outcome": "MISSING_IN_CATALOGUE"
+        },
+        {
+          "field": "locator",
+          "catalogue_value": "https://doi.org/10.1093/logcom/12.1.149",
+          "source_value": "https://doi.org/10.1093/logcom/12.1.149",
+          "outcome": "MATCH"
+        }
+      ],
+      "rights": {
+        "outcome": "NO_EXPLICIT_RIGHTS",
+        "details": "Crossref returned no explicit license or rights metadata.",
+        "url": ""
+      },
+      "related_dois": [],
+      "status": "NEEDS_HUMAN",
+      "notes": ""
+    },
+    "atlas-ref-ring-orseau-2011-delusion": {
+      "input_fingerprint": "9d9224a45a86261d169b0932d3cfa8d596a3533d7f8f66d265b6c9b2b573ee0f",
+      "provider": "crossref",
+      "lookup_status": "OK",
+      "checked_url": "https://api.crossref.org/v1/works/10.1007%2F978-3-642-22887-2_2",
+      "checked_on": "2026-09-23T17:11:14Z",
+      "metadata": [
+        {
+          "field": "identifier",
+          "catalogue_value": "doi:10.1007/978-3-642-22887-2_2",
+          "source_value": "doi:10.1007/978-3-642-22887-2_2",
+          "outcome": "MATCH"
+        },
+        {
+          "field": "title",
+          "catalogue_value": "Delusion, Survival, and Intelligent Agents,",
+          "source_value": "Delusion, Survival, and Intelligent Agents",
+          "outcome": "MATCH"
+        },
+        {
+          "field": "authors",
+          "catalogue_value": "M. Ring and L. Orseau",
+          "source_value": "Mark Ring; Laurent Orseau",
+          "outcome": "MATCH"
+        },
+        {
+          "field": "date",
+          "catalogue_value": "2011",
+          "source_value": "2011",
+          "outcome": "MATCH"
+        },
+        {
+          "field": "venue",
+          "catalogue_value": "in Artificial General Intelligence (AGI 2011), Lecture Notes in Artificial Intelligence",
+          "source_value": "Lecture Notes in Computer Science",
+          "outcome": "POSSIBLE_CONFLICT"
+        },
+        {
+          "field": "volume_issue",
+          "catalogue_value": "vol. 6830",
+          "source_value": "—",
+          "outcome": "MISSING_IN_SOURCE"
+        },
+        {
+          "field": "pages",
+          "catalogue_value": "11-20",
+          "source_value": "11-20",
+          "outcome": "MATCH"
+        },
+        {
+          "field": "locator",
+          "catalogue_value": "https://hal.science/hal-01000226v1",
+          "source_value": "https://hal.science/hal-01000226v1",
+          "outcome": "MATCH"
+        }
+      ],
+      "rights": {
+        "outcome": "NO_EXPLICIT_RIGHTS",
+        "details": "Crossref returned no explicit license or rights metadata.",
+        "url": ""
+      },
+      "related_dois": [],
+      "status": "NEEDS_HUMAN",
+      "notes": ""
+    },
     "atlas-ref-shalev-shwartz-ben-david-2014": {
       "input_fingerprint": "75527154271872288f2fbf7291e81ac96b159d0bdef4af07e582020ab63d308e",
       "provider": "html",
@@ -465,6 +797,71 @@
       "status": "NEEDS_HUMAN",
       "notes": ""
     },
+    "atlas-ref-turner-tadepalli-2022-retargetable": {
+      "input_fingerprint": "b4b929b015fa5be569b1a28e6dc94dcab55a988bc16b35153cae6ad7f11d1ee9",
+      "provider": "html",
+      "lookup_status": "OK",
+      "checked_url": "https://arxiv.org/abs/2206.13477v2",
+      "checked_on": "2026-09-23T17:11:16Z",
+      "metadata": [
+        {
+          "field": "identifier",
+          "catalogue_value": "arxiv:2206.13477v2",
+          "source_value": "arxiv:2206.13477v2",
+          "outcome": "MATCH"
+        },
+        {
+          "field": "title",
+          "catalogue_value": "Parametrically Retargetable Decision-Makers Tend To Seek Power,",
+          "source_value": "Parametrically Retargetable Decision-Makers Tend To Seek Power",
+          "outcome": "MATCH"
+        },
+        {
+          "field": "authors",
+          "catalogue_value": "A. M. Turner and P. Tadepalli",
+          "source_value": "Turner, Alexander Matt; Tadepalli, Prasad",
+          "outcome": "MATCH"
+        },
+        {
+          "field": "date",
+          "catalogue_value": "2022",
+          "source_value": "2022/06/27",
+          "outcome": "MATCH"
+        },
+        {
+          "field": "venue",
+          "catalogue_value": "—",
+          "source_value": "—",
+          "outcome": "NOT_APPLICABLE"
+        },
+        {
+          "field": "volume_issue",
+          "catalogue_value": "—",
+          "source_value": "—",
+          "outcome": "NOT_APPLICABLE"
+        },
+        {
+          "field": "pages",
+          "catalogue_value": "—",
+          "source_value": "—",
+          "outcome": "NOT_APPLICABLE"
+        },
+        {
+          "field": "locator",
+          "catalogue_value": "https://arxiv.org/abs/2206.13477v2",
+          "source_value": "https://arxiv.org/abs/2206.13477v2",
+          "outcome": "MATCH"
+        }
+      ],
+      "rights": {
+        "outcome": "RIGHTS_RECORDED",
+        "details": "Explicit license link on source page (view license).",
+        "url": "http://creativecommons.org/licenses/by/4.0/"
+      },
+      "related_dois": [],
+      "status": "NO_AUTOMATED_FOLLOWUP",
+      "notes": "arXiv API lookup failed (HTTP 406); checked the source locator instead."
+    },
     "atlas-ref-wang-dorchen-jin-2026": {
       "input_fingerprint": "598ef3f10d5399331a89ec9bee2ba6a2bb8368af902f9b6dca1e890fbf780a00",
       "provider": "arxiv",
@@ -525,6 +922,71 @@
         "outcome": "RIGHTS_RECORDED",
         "details": "Per-paper license link on the arXiv abstract page.",
         "url": "http://creativecommons.org/licenses/by/4.0/"
+      },
+      "related_dois": [],
+      "status": "NEEDS_HUMAN",
+      "notes": ""
+    },
+    "atlas-ref-zhuang-hadfield-menell-2020-misaligned-ai": {
+      "input_fingerprint": "83021a71b191c57ec6c37f690c9ad20043508ad2970bfd81ee87f39dd6a7bc53",
+      "provider": "html",
+      "lookup_status": "OK",
+      "checked_url": "https://proceedings.neurips.cc/paper/2020/hash/b607ba543ad05417b8507ee86c54fcb7-Abstract.html",
+      "checked_on": "2026-09-23T17:11:17Z",
+      "metadata": [
+        {
+          "field": "identifier",
+          "catalogue_value": "—",
+          "source_value": "—",
+          "outcome": "NOT_APPLICABLE"
+        },
+        {
+          "field": "title",
+          "catalogue_value": "Consequences of Misaligned AI,",
+          "source_value": "Consequences of Misaligned AI",
+          "outcome": "MATCH"
+        },
+        {
+          "field": "authors",
+          "catalogue_value": "S. Zhuang and D. Hadfield-Menell",
+          "source_value": "Zhuang, Simon; Hadfield-Menell, Dylan",
+          "outcome": "POSSIBLE_CONFLICT"
+        },
+        {
+          "field": "date",
+          "catalogue_value": "2020",
+          "source_value": "2020",
+          "outcome": "MATCH"
+        },
+        {
+          "field": "venue",
+          "catalogue_value": "Advances in Neural Information Processing Systems 33 (NeurIPS 2020)",
+          "source_value": "Advances in Neural Information Processing Systems",
+          "outcome": "POSSIBLE_CONFLICT"
+        },
+        {
+          "field": "volume_issue",
+          "catalogue_value": "—",
+          "source_value": "vol. 33",
+          "outcome": "MISSING_IN_CATALOGUE"
+        },
+        {
+          "field": "pages",
+          "catalogue_value": "—",
+          "source_value": "15763–15773",
+          "outcome": "MISSING_IN_CATALOGUE"
+        },
+        {
+          "field": "locator",
+          "catalogue_value": "https://proceedings.neurips.cc/paper/2020/hash/b607ba543ad05417b8507ee86c54fcb7-Abstract.html",
+          "source_value": "https://proceedings.neurips.cc/paper/2020/hash/b607ba543ad05417b8507ee86c54fcb7-Abstract.html",
+          "outcome": "MATCH"
+        }
+      ],
+      "rights": {
+        "outcome": "NO_EXPLICIT_RIGHTS",
+        "details": "No explicit rights or license metadata was found in the source HTML.",
+        "url": "https://proceedings.neurips.cc/paper/2020/hash/b607ba543ad05417b8507ee86c54fcb7-Abstract.html"
       },
       "related_dois": [],
       "status": "NEEDS_HUMAN",
@@ -739,6 +1201,78 @@
       "status": "LOOKUP_FAILED",
       "notes": "HTTP 403"
     },
+    "carter-shnayderman-2018-impossibility": {
+      "input_fingerprint": "1ca386355888cec9a028489565dbdf85a1c13dd09d61138e6e8ba78ed43615ea",
+      "provider": "crossref",
+      "lookup_status": "OK",
+      "checked_url": "https://api.crossref.org/v1/works/10.1177%2F1478929918771452",
+      "checked_on": "2026-09-23T17:11:18Z",
+      "metadata": [
+        {
+          "field": "identifier",
+          "catalogue_value": "doi:10.1177/1478929918771452",
+          "source_value": "doi:10.1177/1478929918771452",
+          "outcome": "MATCH"
+        },
+        {
+          "field": "title",
+          "catalogue_value": "The Impossibility of ‘Freedom as Independence’,",
+          "source_value": "The Impossibility of “Freedom as Independence”",
+          "outcome": "MATCH"
+        },
+        {
+          "field": "authors",
+          "catalogue_value": "I. Carter and R. Shnayderman",
+          "source_value": "Ian Carter; Ronen Shnayderman",
+          "outcome": "MATCH"
+        },
+        {
+          "field": "date",
+          "catalogue_value": "2018",
+          "source_value": "2019-5",
+          "outcome": "POSSIBLE_CONFLICT"
+        },
+        {
+          "field": "venue",
+          "catalogue_value": "Political Studies Review, 2018, doi: 10.1177/1478929918771452",
+          "source_value": "Political Studies Review",
+          "outcome": "POSSIBLE_CONFLICT"
+        },
+        {
+          "field": "volume_issue",
+          "catalogue_value": "—",
+          "source_value": "vol. 17, no. 2",
+          "outcome": "MISSING_IN_CATALOGUE"
+        },
+        {
+          "field": "pages",
+          "catalogue_value": "—",
+          "source_value": "136-146",
+          "outcome": "MISSING_IN_CATALOGUE"
+        },
+        {
+          "field": "locator",
+          "catalogue_value": "https://doi.org/10.1177/1478929918771452",
+          "source_value": "https://doi.org/10.1177/1478929918771452",
+          "outcome": "MATCH"
+        }
+      ],
+      "rights": {
+        "outcome": "RIGHTS_RECORDED",
+        "details": "Crossref rights metadata (tdm)",
+        "url": "https://journals.sagepub.com/page/policies/text-and-data-mining-license",
+        "entries": [
+          {
+            "url": "https://journals.sagepub.com/page/policies/text-and-data-mining-license",
+            "content_version": "tdm",
+            "start": "2018-05-23T00:00:00Z"
+          }
+        ]
+      },
+      "related_dois": [],
+      "status": "NEEDS_HUMAN",
+      "notes": ""
+    },
     "chandy-lamport-1985": {
       "input_fingerprint": "b29dd0e073467d99ee5f1037c81f460e31e79c2280dd1c588a66afa2ac647cb3",
       "provider": "crossref",
@@ -810,6 +1344,71 @@
       "related_dois": [],
       "status": "NEEDS_HUMAN",
       "notes": ""
+    },
+    "chen-ju-agotnes-2026-actual-alpha-powers": {
+      "input_fingerprint": "0b8547aa64a1f0b67044db17030d94134e6fa1f6c9d233a652f0bdaa9f2cfaaf",
+      "provider": "html",
+      "lookup_status": "OK",
+      "checked_url": "https://arxiv.org/abs/2607.10567v1",
+      "checked_on": "2026-09-23T17:11:19Z",
+      "metadata": [
+        {
+          "field": "identifier",
+          "catalogue_value": "arxiv:2607.10567v1",
+          "source_value": "arxiv:2607.10567v1",
+          "outcome": "MATCH"
+        },
+        {
+          "field": "title",
+          "catalogue_value": "Representation theorems for actual and alpha powers over general concurrent game frames without assuming independence of agents,",
+          "source_value": "Representation theorems for actual and alpha powers over general concurrent game frames without assuming independence of agents",
+          "outcome": "MATCH"
+        },
+        {
+          "field": "authors",
+          "catalogue_value": "Z. Chen, F. Ju, and T. Ågotnes",
+          "source_value": "Chen, Zixuan; Ju, Fengkui; Agotnes, Thomas",
+          "outcome": "MATCH"
+        },
+        {
+          "field": "date",
+          "catalogue_value": "2026",
+          "source_value": "2026/07/12",
+          "outcome": "MATCH"
+        },
+        {
+          "field": "venue",
+          "catalogue_value": "—",
+          "source_value": "—",
+          "outcome": "NOT_APPLICABLE"
+        },
+        {
+          "field": "volume_issue",
+          "catalogue_value": "—",
+          "source_value": "—",
+          "outcome": "NOT_APPLICABLE"
+        },
+        {
+          "field": "pages",
+          "catalogue_value": "—",
+          "source_value": "—",
+          "outcome": "NOT_APPLICABLE"
+        },
+        {
+          "field": "locator",
+          "catalogue_value": "https://arxiv.org/abs/2607.10567v1",
+          "source_value": "https://arxiv.org/abs/2607.10567v1",
+          "outcome": "MATCH"
+        }
+      ],
+      "rights": {
+        "outcome": "RIGHTS_RECORDED",
+        "details": "Explicit license link on source page (view license).",
+        "url": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+      },
+      "related_dois": [],
+      "status": "NO_AUTOMATED_FOLLOWUP",
+      "notes": "arXiv API lookup failed (HTTP 406); checked the source locator instead."
     },
     "cover-thomas-2006": {
       "input_fingerprint": "56fc80517a5424fc671d067b595742cf7dcf59a5d6985edbedc7eca35f187b10",
@@ -946,6 +1545,71 @@
       },
       "related_dois": [],
       "status": "NO_AUTOMATED_FOLLOWUP",
+      "notes": ""
+    },
+    "danlyng-econlib-2026": {
+      "input_fingerprint": "364d6d78ab81c09ada003b77a1541b2fbab11355c359a25896bffed9157444b3",
+      "provider": "html",
+      "lookup_status": "OK",
+      "checked_url": "https://github.com/danlyng/Econlib",
+      "checked_on": "2026-09-23T17:11:20Z",
+      "metadata": [
+        {
+          "field": "identifier",
+          "catalogue_value": "—",
+          "source_value": "—",
+          "outcome": "NOT_APPLICABLE"
+        },
+        {
+          "field": "title",
+          "catalogue_value": "—",
+          "source_value": "Econlib: A Lean 4 Library for Formal Political Economy",
+          "outcome": "MISSING_IN_CATALOGUE"
+        },
+        {
+          "field": "authors",
+          "catalogue_value": "—",
+          "source_value": "—",
+          "outcome": "NOT_APPLICABLE"
+        },
+        {
+          "field": "date",
+          "catalogue_value": "2026",
+          "source_value": "—",
+          "outcome": "MISSING_IN_SOURCE"
+        },
+        {
+          "field": "venue",
+          "catalogue_value": "—",
+          "source_value": "—",
+          "outcome": "NOT_APPLICABLE"
+        },
+        {
+          "field": "volume_issue",
+          "catalogue_value": "—",
+          "source_value": "—",
+          "outcome": "NOT_APPLICABLE"
+        },
+        {
+          "field": "pages",
+          "catalogue_value": "—",
+          "source_value": "—",
+          "outcome": "NOT_APPLICABLE"
+        },
+        {
+          "field": "locator",
+          "catalogue_value": "https://github.com/danlyng/Econlib",
+          "source_value": "https://github.com/danlyng/Econlib",
+          "outcome": "MATCH"
+        }
+      ],
+      "rights": {
+        "outcome": "RIGHTS_RECORDED",
+        "details": "Explicit license link on source page (LICENSE).",
+        "url": "https://github.com/danlyng/Econlib/blob/main/LICENSE"
+      },
+      "related_dois": [],
+      "status": "NEEDS_HUMAN",
       "notes": ""
     },
     "droste-jansen-wegener-2002": {
@@ -1085,6 +1749,278 @@
         "outcome": "NO_EXPLICIT_RIGHTS",
         "details": "Crossref returned no explicit license or rights metadata.",
         "url": ""
+      },
+      "related_dois": [],
+      "status": "NEEDS_HUMAN",
+      "notes": ""
+    },
+    "gokhale-leanforcontrol-2026": {
+      "input_fingerprint": "3f146a92c74711ce6794199c93769a7cb4b705bd7ba65cdb924ede71e39b0243",
+      "provider": "html",
+      "lookup_status": "OK",
+      "checked_url": "https://github.com/AnandGokhale/LeanForControl",
+      "checked_on": "2026-09-23T17:11:21Z",
+      "metadata": [
+        {
+          "field": "identifier",
+          "catalogue_value": "—",
+          "source_value": "—",
+          "outcome": "NOT_APPLICABLE"
+        },
+        {
+          "field": "title",
+          "catalogue_value": "—",
+          "source_value": "LeanForControl",
+          "outcome": "MISSING_IN_CATALOGUE"
+        },
+        {
+          "field": "authors",
+          "catalogue_value": "—",
+          "source_value": "—",
+          "outcome": "NOT_APPLICABLE"
+        },
+        {
+          "field": "date",
+          "catalogue_value": "2026",
+          "source_value": "—",
+          "outcome": "MISSING_IN_SOURCE"
+        },
+        {
+          "field": "venue",
+          "catalogue_value": "—",
+          "source_value": "—",
+          "outcome": "NOT_APPLICABLE"
+        },
+        {
+          "field": "volume_issue",
+          "catalogue_value": "—",
+          "source_value": "—",
+          "outcome": "NOT_APPLICABLE"
+        },
+        {
+          "field": "pages",
+          "catalogue_value": "—",
+          "source_value": "—",
+          "outcome": "NOT_APPLICABLE"
+        },
+        {
+          "field": "locator",
+          "catalogue_value": "https://github.com/AnandGokhale/LeanForControl",
+          "source_value": "https://github.com/AnandGokhale/LeanForControl",
+          "outcome": "MATCH"
+        }
+      ],
+      "rights": {
+        "outcome": "RIGHTS_RECORDED",
+        "details": "Explicit license link on source page (LICENSE).",
+        "url": "https://github.com/AnandGokhale/LeanForControl/blob/main/LICENSE"
+      },
+      "related_dois": [],
+      "status": "NEEDS_HUMAN",
+      "notes": ""
+    },
+    "governance-kernel-sketch-unpublished": {
+      "input_fingerprint": "eff3cdc70893a7c0373179b4b3e1a77e6c09fe8ca9f27b687642f2b52ea924d8",
+      "provider": "none",
+      "lookup_status": "MISSING_LOCATOR",
+      "checked_url": "",
+      "checked_on": "2026-09-23T17:11:21Z",
+      "metadata": [
+        {
+          "field": "identifier",
+          "catalogue_value": "—",
+          "source_value": "—",
+          "outcome": "NOT_APPLICABLE"
+        },
+        {
+          "field": "title",
+          "catalogue_value": "Governance, agency, and cognitive sovereignty: an Atlas integration specification,",
+          "source_value": "—",
+          "outcome": "UNAVAILABLE"
+        },
+        {
+          "field": "authors",
+          "catalogue_value": "—",
+          "source_value": "—",
+          "outcome": "NOT_APPLICABLE"
+        },
+        {
+          "field": "date",
+          "catalogue_value": "2026",
+          "source_value": "—",
+          "outcome": "UNAVAILABLE"
+        },
+        {
+          "field": "venue",
+          "catalogue_value": "unpublished sketch, 2026. The title is the document's own first line; it names no author and carries no venue. It was produced by a language model with access only to the public branch of this repository, and its section 0 declares its own contents a specification sketch",
+          "source_value": "—",
+          "outcome": "UNAVAILABLE"
+        },
+        {
+          "field": "volume_issue",
+          "catalogue_value": "—",
+          "source_value": "—",
+          "outcome": "NOT_APPLICABLE"
+        },
+        {
+          "field": "pages",
+          "catalogue_value": "—",
+          "source_value": "—",
+          "outcome": "NOT_APPLICABLE"
+        },
+        {
+          "field": "locator",
+          "catalogue_value": "—",
+          "source_value": "—",
+          "outcome": "NOT_APPLICABLE"
+        }
+      ],
+      "rights": {
+        "outcome": "RIGHTS_UNAVAILABLE",
+        "details": "No locator is recorded in registry.yaml.",
+        "url": ""
+      },
+      "related_dois": [],
+      "status": "NEEDS_HUMAN",
+      "notes": "No locator is recorded in registry.yaml."
+    },
+    "grossi-gabbay-van-der-torre-2010-norm-implementation": {
+      "input_fingerprint": "95fc59b293677d5c95f4ae4c782ce3f52f135eefc8bdefee4b53204cf26e3970",
+      "provider": "crossref",
+      "lookup_status": "OK",
+      "checked_url": "https://api.crossref.org/v1/works/10.1007%2F978-1-4419-6984-2_7",
+      "checked_on": "2026-09-23T17:11:21Z",
+      "metadata": [
+        {
+          "field": "identifier",
+          "catalogue_value": "doi:10.1007/978-1-4419-6984-2_7",
+          "source_value": "doi:10.1007/978-1-4419-6984-2_7",
+          "outcome": "MATCH"
+        },
+        {
+          "field": "title",
+          "catalogue_value": "The Norm Implementation Problem in Normative Multi-Agent Systems,",
+          "source_value": "The Norm Implementation Problem in Normative Multi-Agent Systems",
+          "outcome": "MATCH"
+        },
+        {
+          "field": "authors",
+          "catalogue_value": "D. Grossi, D. Gabbay, and L. van der Torre",
+          "source_value": "D. Grossi; D. Gabbay; L. van der Torre",
+          "outcome": "MATCH"
+        },
+        {
+          "field": "date",
+          "catalogue_value": "2010",
+          "source_value": "2010",
+          "outcome": "MATCH"
+        },
+        {
+          "field": "venue",
+          "catalogue_value": "in M. Dastani, K. V. Hindriks, and J.-J. Ch. Meyer (eds.), Specification and Verification of Multi-agent Systems, Springer, 2010, pp. 195–224",
+          "source_value": "Specification and Verification of Multi-agent Systems",
+          "outcome": "POSSIBLE_CONFLICT"
+        },
+        {
+          "field": "volume_issue",
+          "catalogue_value": "—",
+          "source_value": "—",
+          "outcome": "NOT_APPLICABLE"
+        },
+        {
+          "field": "pages",
+          "catalogue_value": "195–224",
+          "source_value": "195-224",
+          "outcome": "MATCH"
+        },
+        {
+          "field": "locator",
+          "catalogue_value": "https://doi.org/10.1007/978-1-4419-6984-2_7",
+          "source_value": "https://doi.org/10.1007/978-1-4419-6984-2_7",
+          "outcome": "MATCH"
+        }
+      ],
+      "rights": {
+        "outcome": "RIGHTS_RECORDED",
+        "details": "Crossref rights metadata (vor)",
+        "url": "https://www.springernature.com/gp/researchers/text-and-data-mining",
+        "entries": [
+          {
+            "url": "https://www.springernature.com/gp/researchers/text-and-data-mining",
+            "content_version": "tdm",
+            "start": "2010-01-01T00:00:00Z"
+          },
+          {
+            "url": "https://www.springernature.com/gp/researchers/text-and-data-mining",
+            "content_version": "vor",
+            "start": "2010-01-01T00:00:00Z"
+          }
+        ]
+      },
+      "related_dois": [],
+      "status": "NEEDS_HUMAN",
+      "notes": ""
+    },
+    "hautus-1969-controllability-observability": {
+      "input_fingerprint": "ceb09e7f9c3842d5dbb07818e18a16db12834927eb344cb6d6725a76f94a26c8",
+      "provider": "html",
+      "lookup_status": "OK",
+      "checked_url": "https://research.tue.nl/en/publications/controllability-and-observability-conditions-of-linear-autonomous/",
+      "checked_on": "2026-09-23T17:11:22Z",
+      "metadata": [
+        {
+          "field": "identifier",
+          "catalogue_value": "—",
+          "source_value": "—",
+          "outcome": "NOT_APPLICABLE"
+        },
+        {
+          "field": "title",
+          "catalogue_value": "Controllability and observability conditions of linear autonomous systems,",
+          "source_value": "Controllability and observability conditions of linear autonomous systems",
+          "outcome": "MATCH"
+        },
+        {
+          "field": "authors",
+          "catalogue_value": "M. L. J. Hautus",
+          "source_value": "M.L.J. Hautus",
+          "outcome": "MATCH"
+        },
+        {
+          "field": "date",
+          "catalogue_value": "1969",
+          "source_value": "1969",
+          "outcome": "MATCH"
+        },
+        {
+          "field": "venue",
+          "catalogue_value": "Indagationes Mathematicae (Proceedings)",
+          "source_value": "Indagationes Mathematicae (Proceedings)",
+          "outcome": "MATCH"
+        },
+        {
+          "field": "volume_issue",
+          "catalogue_value": "vol. 72, no. 5",
+          "source_value": "vol. 72, no. 5",
+          "outcome": "MATCH"
+        },
+        {
+          "field": "pages",
+          "catalogue_value": "443–448",
+          "source_value": "443–448",
+          "outcome": "MATCH"
+        },
+        {
+          "field": "locator",
+          "catalogue_value": "https://research.tue.nl/en/publications/controllability-and-observability-conditions-of-linear-autonomous",
+          "source_value": "https://research.tue.nl/en/publications/controllability-and-observability-conditions-of-linear-autonomous/",
+          "outcome": "MATCH"
+        }
+      ],
+      "rights": {
+        "outcome": "NO_EXPLICIT_RIGHTS",
+        "details": "No explicit rights or license metadata was found in the source HTML.",
+        "url": "https://research.tue.nl/en/publications/controllability-and-observability-conditions-of-linear-autonomous/"
       },
       "related_dois": [],
       "status": "NEEDS_HUMAN",
@@ -1297,6 +2233,208 @@
       "status": "NEEDS_HUMAN",
       "notes": ""
     },
+    "jones-sergot-1996-institutionalised-power": {
+      "input_fingerprint": "e9134b7dd8110348bf01afa3416cf8d3380b19c42b70af1f2d38e9bae0be4131",
+      "provider": "crossref",
+      "lookup_status": "OK",
+      "checked_url": "https://api.crossref.org/v1/works/10.1093%2Fjigpal%2F4.3.427",
+      "checked_on": "2026-09-23T17:11:22Z",
+      "metadata": [
+        {
+          "field": "identifier",
+          "catalogue_value": "doi:10.1093/jigpal/4.3.427",
+          "source_value": "doi:10.1093/jigpal/4.3.427",
+          "outcome": "MATCH"
+        },
+        {
+          "field": "title",
+          "catalogue_value": "A Formal Characterisation of Institutionalised Power,",
+          "source_value": "A Formal Characterisation of Institutionalised Power",
+          "outcome": "MATCH"
+        },
+        {
+          "field": "authors",
+          "catalogue_value": "A. J. I. Jones and M. Sergot",
+          "source_value": "ANDREW J. I. JONES; MAREK SERGOT",
+          "outcome": "MATCH"
+        },
+        {
+          "field": "date",
+          "catalogue_value": "1996",
+          "source_value": "1996",
+          "outcome": "MATCH"
+        },
+        {
+          "field": "venue",
+          "catalogue_value": "Journal of the IGPL",
+          "source_value": "Logic Journal of IGPL",
+          "outcome": "POSSIBLE_CONFLICT"
+        },
+        {
+          "field": "volume_issue",
+          "catalogue_value": "vol. 4, no. 3",
+          "source_value": "vol. 4, no. 3",
+          "outcome": "MATCH"
+        },
+        {
+          "field": "pages",
+          "catalogue_value": "427–443",
+          "source_value": "427-443",
+          "outcome": "MATCH"
+        },
+        {
+          "field": "locator",
+          "catalogue_value": "https://doi.org/10.1093/jigpal/4.3.427",
+          "source_value": "https://doi.org/10.1093/jigpal/4.3.427",
+          "outcome": "MATCH"
+        }
+      ],
+      "rights": {
+        "outcome": "NO_EXPLICIT_RIGHTS",
+        "details": "Crossref returned no explicit license or rights metadata.",
+        "url": ""
+      },
+      "related_dois": [],
+      "status": "NEEDS_HUMAN",
+      "notes": ""
+    },
+    "kalman-1963-linear-dynamical-systems": {
+      "input_fingerprint": "f7b2191f8183350324270272b9cf7580898f3e994801d572944f892cb76374e1",
+      "provider": "crossref",
+      "lookup_status": "OK",
+      "checked_url": "https://api.crossref.org/v1/works/10.1137%2F0301010",
+      "checked_on": "2026-09-23T17:11:23Z",
+      "metadata": [
+        {
+          "field": "identifier",
+          "catalogue_value": "doi:10.1137/0301010",
+          "source_value": "doi:10.1137/0301010",
+          "outcome": "MATCH"
+        },
+        {
+          "field": "title",
+          "catalogue_value": "Mathematical description of linear dynamical systems,",
+          "source_value": "Mathematical Description of Linear Dynamical Systems",
+          "outcome": "MATCH"
+        },
+        {
+          "field": "authors",
+          "catalogue_value": "R. E. Kalman",
+          "source_value": "R. E. Kalman",
+          "outcome": "MATCH"
+        },
+        {
+          "field": "date",
+          "catalogue_value": "1963",
+          "source_value": "1963-1",
+          "outcome": "MATCH"
+        },
+        {
+          "field": "venue",
+          "catalogue_value": "Journal of the Society for Industrial and Applied Mathematics, Series A: Control",
+          "source_value": "Journal of the Society for Industrial and Applied Mathematics Series A Control",
+          "outcome": "MATCH"
+        },
+        {
+          "field": "volume_issue",
+          "catalogue_value": "vol. 1, no. 2",
+          "source_value": "vol. 1, no. 2",
+          "outcome": "MATCH"
+        },
+        {
+          "field": "pages",
+          "catalogue_value": "152–192",
+          "source_value": "152-192",
+          "outcome": "MATCH"
+        },
+        {
+          "field": "locator",
+          "catalogue_value": "https://doi.org/10.1137/0301010",
+          "source_value": "https://doi.org/10.1137/0301010",
+          "outcome": "MATCH"
+        }
+      ],
+      "rights": {
+        "outcome": "NO_EXPLICIT_RIGHTS",
+        "details": "Crossref returned no explicit license or rights metadata.",
+        "url": ""
+      },
+      "related_dois": [],
+      "status": "NEEDS_HUMAN",
+      "notes": ""
+    },
+    "keiding-1985-stability-effectivity": {
+      "input_fingerprint": "7f26ad5a5004898815968591555af81d3f40044f46d47fea13155cb55c90b58b",
+      "provider": "crossref",
+      "lookup_status": "OK",
+      "checked_url": "https://api.crossref.org/v1/works/10.1007%2Fbf01770226",
+      "checked_on": "2026-09-23T17:11:24Z",
+      "metadata": [
+        {
+          "field": "identifier",
+          "catalogue_value": "doi:10.1007/bf01770226",
+          "source_value": "doi:10.1007/bf01770226",
+          "outcome": "MATCH"
+        },
+        {
+          "field": "title",
+          "catalogue_value": "Necessary and sufficient conditions for stability of effectivity functions,",
+          "source_value": "Unanimity games and Pareto optimality",
+          "outcome": "POSSIBLE_CONFLICT"
+        },
+        {
+          "field": "authors",
+          "catalogue_value": "H. Keiding",
+          "source_value": "E. Kalai; D. Samet",
+          "outcome": "POSSIBLE_CONFLICT"
+        },
+        {
+          "field": "date",
+          "catalogue_value": "1985",
+          "source_value": "1985-3",
+          "outcome": "MATCH"
+        },
+        {
+          "field": "venue",
+          "catalogue_value": "International Journal of Game Theory",
+          "source_value": "International Journal of Game Theory",
+          "outcome": "MATCH"
+        },
+        {
+          "field": "volume_issue",
+          "catalogue_value": "vol. 14, no. 2",
+          "source_value": "vol. 14, no. 1",
+          "outcome": "POSSIBLE_CONFLICT"
+        },
+        {
+          "field": "pages",
+          "catalogue_value": "93–101",
+          "source_value": "41-50",
+          "outcome": "POSSIBLE_CONFLICT"
+        },
+        {
+          "field": "locator",
+          "catalogue_value": "https://doi.org/10.1007/BF01770226",
+          "source_value": "https://doi.org/10.1007/BF01770226",
+          "outcome": "MATCH"
+        }
+      ],
+      "rights": {
+        "outcome": "RIGHTS_RECORDED",
+        "details": "Crossref rights metadata (tdm)",
+        "url": "http://www.springer.com/tdm",
+        "entries": [
+          {
+            "url": "http://www.springer.com/tdm",
+            "content_version": "tdm",
+            "start": "1985-03-01T00:00:00Z"
+          }
+        ]
+      },
+      "related_dois": [],
+      "status": "NEEDS_HUMAN",
+      "notes": ""
+    },
     "lawvere-1969-diagonal-ccc": {
       "input_fingerprint": "adb4425ec9489005d5a04127fe9d0361e4b53ca5bb8ab7218254c775e6b2d023",
       "provider": "crossref",
@@ -1364,6 +2502,143 @@
             "start": "1969-01-01T00:00:00Z"
           }
         ]
+      },
+      "related_dois": [],
+      "status": "NEEDS_HUMAN",
+      "notes": ""
+    },
+    "lin-wonham-1988-observability": {
+      "input_fingerprint": "1b4dd55becd8da76508cd8cc531d25bd692ac6a1c82f2d83363bd94f365c2380",
+      "provider": "crossref",
+      "lookup_status": "OK",
+      "checked_url": "https://api.crossref.org/v1/works/10.1016%2F0020-0255%2888%2990001-1",
+      "checked_on": "2026-09-23T17:11:25Z",
+      "metadata": [
+        {
+          "field": "identifier",
+          "catalogue_value": "doi:10.1016/0020-0255(88)90001-1",
+          "source_value": "doi:10.1016/0020-0255(88)90001-1",
+          "outcome": "MATCH"
+        },
+        {
+          "field": "title",
+          "catalogue_value": "On observability of discrete-event systems,",
+          "source_value": "On observability of discrete-event systems",
+          "outcome": "MATCH"
+        },
+        {
+          "field": "authors",
+          "catalogue_value": "F. Lin and W. M. Wonham",
+          "source_value": "F. Lin; W.M. Wonham",
+          "outcome": "MATCH"
+        },
+        {
+          "field": "date",
+          "catalogue_value": "1988",
+          "source_value": "1988-4",
+          "outcome": "MATCH"
+        },
+        {
+          "field": "venue",
+          "catalogue_value": "Information Sciences",
+          "source_value": "Information Sciences",
+          "outcome": "MATCH"
+        },
+        {
+          "field": "volume_issue",
+          "catalogue_value": "vol. 44, no. 3",
+          "source_value": "vol. 44, no. 3",
+          "outcome": "MATCH"
+        },
+        {
+          "field": "pages",
+          "catalogue_value": "173–198",
+          "source_value": "173-198",
+          "outcome": "MATCH"
+        },
+        {
+          "field": "locator",
+          "catalogue_value": "https://doi.org/10.1016/0020-0255(88)90001-1",
+          "source_value": "https://doi.org/10.1016/0020-0255(88)90001-1",
+          "outcome": "MATCH"
+        }
+      ],
+      "rights": {
+        "outcome": "RIGHTS_RECORDED",
+        "details": "Crossref rights metadata (tdm)",
+        "url": "https://www.elsevier.com/tdm/userlicense/1.0/",
+        "entries": [
+          {
+            "url": "https://www.elsevier.com/tdm/userlicense/1.0/",
+            "content_version": "tdm",
+            "start": "1988-04-01T00:00:00Z"
+          }
+        ]
+      },
+      "related_dois": [],
+      "status": "NO_AUTOMATED_FOLLOWUP",
+      "notes": ""
+    },
+    "list-valentini-2016-freedom-as-independence": {
+      "input_fingerprint": "4b30afdb7f310dc81250f4e302704bc05632380b32652cc31a2b772eafee7eea",
+      "provider": "crossref",
+      "lookup_status": "OK",
+      "checked_url": "https://api.crossref.org/v1/works/10.1086%2F686006",
+      "checked_on": "2026-09-23T17:11:26Z",
+      "metadata": [
+        {
+          "field": "identifier",
+          "catalogue_value": "doi:10.1086/686006",
+          "source_value": "doi:10.1086/686006",
+          "outcome": "MATCH"
+        },
+        {
+          "field": "title",
+          "catalogue_value": "Freedom as Independence,",
+          "source_value": "Freedom as Independence",
+          "outcome": "MATCH"
+        },
+        {
+          "field": "authors",
+          "catalogue_value": "C. List and L. Valentini",
+          "source_value": "Christian List; Laura Valentini",
+          "outcome": "MATCH"
+        },
+        {
+          "field": "date",
+          "catalogue_value": "2016",
+          "source_value": "2016-7",
+          "outcome": "MATCH"
+        },
+        {
+          "field": "venue",
+          "catalogue_value": "Ethics",
+          "source_value": "Ethics",
+          "outcome": "MATCH"
+        },
+        {
+          "field": "volume_issue",
+          "catalogue_value": "vol. 126, no. 4",
+          "source_value": "vol. 126, no. 4",
+          "outcome": "MATCH"
+        },
+        {
+          "field": "pages",
+          "catalogue_value": "1043–1074",
+          "source_value": "1043-1074",
+          "outcome": "MATCH"
+        },
+        {
+          "field": "locator",
+          "catalogue_value": "https://doi.org/10.1086/686006",
+          "source_value": "https://doi.org/10.1086/686006",
+          "outcome": "MATCH"
+        }
+      ],
+      "rights": {
+        "outcome": "NO_EXPLICIT_RIGHTS",
+        "details": "Crossref returned no explicit license or rights metadata.",
+        "url": ""
       },
       "related_dois": [],
       "status": "NEEDS_HUMAN",
@@ -2611,6 +3886,143 @@
       "status": "NEEDS_HUMAN",
       "notes": ""
     },
+    "peleg-1998-effectivity-functions-rights": {
+      "input_fingerprint": "4b897ae6dad516b4e844dceab20f262155c74fd880408ad153c5f5e9c591b2be",
+      "provider": "crossref",
+      "lookup_status": "OK",
+      "checked_url": "https://api.crossref.org/v1/works/10.1007%2Fs003550050092",
+      "checked_on": "2026-09-23T17:11:28Z",
+      "metadata": [
+        {
+          "field": "identifier",
+          "catalogue_value": "doi:10.1007/s003550050092",
+          "source_value": "doi:10.1007/s003550050092",
+          "outcome": "MATCH"
+        },
+        {
+          "field": "title",
+          "catalogue_value": "Effectivity functions, game forms, games, and rights,",
+          "source_value": "Effectivity functions, game forms, games, and rights",
+          "outcome": "MATCH"
+        },
+        {
+          "field": "authors",
+          "catalogue_value": "B. Peleg",
+          "source_value": "Bezalel Peleg",
+          "outcome": "MATCH"
+        },
+        {
+          "field": "date",
+          "catalogue_value": "1998",
+          "source_value": "1997-11-17",
+          "outcome": "POSSIBLE_CONFLICT"
+        },
+        {
+          "field": "venue",
+          "catalogue_value": "Social Choice and Welfare",
+          "source_value": "Social Choice and Welfare",
+          "outcome": "MATCH"
+        },
+        {
+          "field": "volume_issue",
+          "catalogue_value": "vol. 15, no. 1",
+          "source_value": "vol. 15, no. 1",
+          "outcome": "MATCH"
+        },
+        {
+          "field": "pages",
+          "catalogue_value": "67–80",
+          "source_value": "67-80",
+          "outcome": "MATCH"
+        },
+        {
+          "field": "locator",
+          "catalogue_value": "https://doi.org/10.1007/s003550050092",
+          "source_value": "https://doi.org/10.1007/s003550050092",
+          "outcome": "MATCH"
+        }
+      ],
+      "rights": {
+        "outcome": "RIGHTS_RECORDED",
+        "details": "Crossref rights metadata (tdm)",
+        "url": "http://www.springer.com/tdm",
+        "entries": [
+          {
+            "url": "http://www.springer.com/tdm",
+            "content_version": "tdm",
+            "start": "1997-11-17T00:00:00Z"
+          }
+        ]
+      },
+      "related_dois": [],
+      "status": "NEEDS_HUMAN",
+      "notes": ""
+    },
+    "power-sovereignty-proposal-unpublished": {
+      "input_fingerprint": "3c05d99de744ccfea3787835e3b6eaee3ae3576ee16531102d9f4e3c4a7087a1",
+      "provider": "none",
+      "lookup_status": "MISSING_LOCATOR",
+      "checked_url": "",
+      "checked_on": "2026-09-23T17:11:28Z",
+      "metadata": [
+        {
+          "field": "identifier",
+          "catalogue_value": "—",
+          "source_value": "—",
+          "outcome": "NOT_APPLICABLE"
+        },
+        {
+          "field": "title",
+          "catalogue_value": "A Formal System of Power, Sovereignty, and Cognitive Sovereignty,",
+          "source_value": "—",
+          "outcome": "UNAVAILABLE"
+        },
+        {
+          "field": "authors",
+          "catalogue_value": "—",
+          "source_value": "—",
+          "outcome": "NOT_APPLICABLE"
+        },
+        {
+          "field": "date",
+          "catalogue_value": "2026",
+          "source_value": "—",
+          "outcome": "UNAVAILABLE"
+        },
+        {
+          "field": "venue",
+          "catalogue_value": "unpublished note, 2026. The document names no author and carries no venue; it declares itself a proposed operational theory whose definitions are modeling choices",
+          "source_value": "—",
+          "outcome": "UNAVAILABLE"
+        },
+        {
+          "field": "volume_issue",
+          "catalogue_value": "—",
+          "source_value": "—",
+          "outcome": "NOT_APPLICABLE"
+        },
+        {
+          "field": "pages",
+          "catalogue_value": "—",
+          "source_value": "—",
+          "outcome": "NOT_APPLICABLE"
+        },
+        {
+          "field": "locator",
+          "catalogue_value": "—",
+          "source_value": "—",
+          "outcome": "NOT_APPLICABLE"
+        }
+      ],
+      "rights": {
+        "outcome": "RIGHTS_UNAVAILABLE",
+        "details": "No locator is recorded in registry.yaml.",
+        "url": ""
+      },
+      "related_dois": [],
+      "status": "NEEDS_HUMAN",
+      "notes": "No locator is recorded in registry.yaml."
+    },
     "richens-everitt-2024": {
       "input_fingerprint": "5755bbb693f1dd36d54752081f2a97411000a49dbc7e155f331abc14ee338212",
       "provider": "arxiv",
@@ -2740,6 +4152,71 @@
       "related_dois": [],
       "status": "LOOKUP_FAILED",
       "notes": "HTTP 403"
+    },
+    "skalse-2022-defining-characterizing-reward-hacking": {
+      "input_fingerprint": "ae172aca6101556ac2719df7f2a3ee2295505e0ddf22c361e25bf129a326083a",
+      "provider": "html",
+      "lookup_status": "OK",
+      "checked_url": "https://proceedings.neurips.cc/paper_files/paper/2022/hash/3d719fee332caa23d5038b8a90e81796-Abstract-Conference.html",
+      "checked_on": "2026-09-23T17:11:29Z",
+      "metadata": [
+        {
+          "field": "identifier",
+          "catalogue_value": "—",
+          "source_value": "doi:10.52202/068431-0687",
+          "outcome": "MISSING_IN_CATALOGUE"
+        },
+        {
+          "field": "title",
+          "catalogue_value": "Defining and Characterizing Reward Hacking,",
+          "source_value": "Defining and Characterizing Reward Gaming",
+          "outcome": "POSSIBLE_CONFLICT"
+        },
+        {
+          "field": "authors",
+          "catalogue_value": "J. Skalse, N. H. R. Howe, D. Krasheninnikov, and D. Krueger",
+          "source_value": "Skalse, Joar; Howe, Nikolaus; Krasheninnikov, Dmitrii; Krueger, David",
+          "outcome": "POSSIBLE_CONFLICT"
+        },
+        {
+          "field": "date",
+          "catalogue_value": "2022",
+          "source_value": "2022-12-06",
+          "outcome": "MATCH"
+        },
+        {
+          "field": "venue",
+          "catalogue_value": "in Advances in Neural Information Processing Systems 35 (NeurIPS 2022), 2022",
+          "source_value": "Advances in Neural Information Processing Systems",
+          "outcome": "POSSIBLE_CONFLICT"
+        },
+        {
+          "field": "volume_issue",
+          "catalogue_value": "—",
+          "source_value": "vol. 35",
+          "outcome": "MISSING_IN_CATALOGUE"
+        },
+        {
+          "field": "pages",
+          "catalogue_value": "—",
+          "source_value": "9460–9471",
+          "outcome": "MISSING_IN_CATALOGUE"
+        },
+        {
+          "field": "locator",
+          "catalogue_value": "https://proceedings.neurips.cc/paper_files/paper/2022/hash/3d719fee332caa23d5038b8a90e81796-Abstract-Conference.html",
+          "source_value": "https://proceedings.neurips.cc/paper_files/paper/2022/hash/3d719fee332caa23d5038b8a90e81796-Abstract-Conference.html",
+          "outcome": "MATCH"
+        }
+      ],
+      "rights": {
+        "outcome": "NO_EXPLICIT_RIGHTS",
+        "details": "No explicit rights or license metadata was found in the source HTML.",
+        "url": "https://proceedings.neurips.cc/paper_files/paper/2022/hash/3d719fee332caa23d5038b8a90e81796-Abstract-Conference.html"
+      },
+      "related_dois": [],
+      "status": "NEEDS_HUMAN",
+      "notes": ""
     },
     "survey-ref-001": {
       "input_fingerprint": "a9e9445d6265159d1a569d3b5d7728e2752b6282badb55dfdf635364a110be21",
@@ -7285,6 +8762,88 @@
       },
       "related_dois": [],
       "status": "NEEDS_HUMAN",
+      "notes": ""
+    },
+    "wooldridge-van-der-hoek-2005-obligations-normative-ability": {
+      "input_fingerprint": "b2e17537934228182cfe8ed31f1d1779b61d6f0fd15d82c8211bbd6bf6cc9b6f",
+      "provider": "crossref",
+      "lookup_status": "OK",
+      "checked_url": "https://api.crossref.org/v1/works/10.1016%2Fj.jal.2005.04.006",
+      "checked_on": "2026-09-23T17:11:31Z",
+      "metadata": [
+        {
+          "field": "identifier",
+          "catalogue_value": "doi:10.1016/j.jal.2005.04.006",
+          "source_value": "doi:10.1016/j.jal.2005.04.006",
+          "outcome": "MATCH"
+        },
+        {
+          "field": "title",
+          "catalogue_value": "On obligations and normative ability: Towards a logical analysis of the social contract,",
+          "source_value": "On obligations and normative ability: Towards a logical analysis of the social contract",
+          "outcome": "MATCH"
+        },
+        {
+          "field": "authors",
+          "catalogue_value": "M. Wooldridge and W. van der Hoek",
+          "source_value": "Michael Wooldridge; Wiebe van der Hoek",
+          "outcome": "MATCH"
+        },
+        {
+          "field": "date",
+          "catalogue_value": "2005",
+          "source_value": "2005-9",
+          "outcome": "MATCH"
+        },
+        {
+          "field": "venue",
+          "catalogue_value": "Journal of Applied Logic",
+          "source_value": "Journal of Applied Logic",
+          "outcome": "MATCH"
+        },
+        {
+          "field": "volume_issue",
+          "catalogue_value": "vol. 3, no. 3–4",
+          "source_value": "vol. 3, no. 3-4",
+          "outcome": "MATCH"
+        },
+        {
+          "field": "pages",
+          "catalogue_value": "396–420",
+          "source_value": "396-420",
+          "outcome": "MATCH"
+        },
+        {
+          "field": "locator",
+          "catalogue_value": "https://doi.org/10.1016/j.jal.2005.04.006",
+          "source_value": "https://doi.org/10.1016/j.jal.2005.04.006",
+          "outcome": "MATCH"
+        }
+      ],
+      "rights": {
+        "outcome": "RIGHTS_RECORDED",
+        "details": "Crossref rights metadata (vor)",
+        "url": "http://www.elsevier.com/open-access/userlicense/1.0/",
+        "entries": [
+          {
+            "url": "https://www.elsevier.com/tdm/userlicense/1.0/",
+            "content_version": "tdm",
+            "start": "2005-09-01T00:00:00Z"
+          },
+          {
+            "url": "https://www.elsevier.com/legal/tdmrep-license",
+            "content_version": "tdm",
+            "start": "2005-09-01T00:00:00Z"
+          },
+          {
+            "url": "http://www.elsevier.com/open-access/userlicense/1.0/",
+            "content_version": "vor",
+            "start": "2013-07-18T00:00:00Z"
+          }
+        ]
+      },
+      "related_dois": [],
+      "status": "NO_AUTOMATED_FOLLOWUP",
       "notes": ""
     },
     "yanofsky-2003-lawvere": {

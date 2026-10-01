@@ -135,6 +135,29 @@ public theorem verifier_queries_le (o : Debate.Oracle) (alice : Debate.Alice)
   refine le_trans (Debate.vera_fast o 1 one_pos 0 alice bob) ?_
   norm_num
 
+/-- **Honest Alice is cheap too**, and at `k = 1`, one round, that is a plain
+number: `5000 · log 400 + 1` doubled. The verifier bound above is the one this
+file already ran; the two debaters' bounds are the other half of the same
+result and nothing had run either. -/
+public theorem alice_queries_le (o : Debate.Oracle) (bob : Debate.Bob)
+    (vera : Debate.Vera) :
+    (Debate.protocol
+        (Debate.honestAlice (Debate.defaultParams 1 0 one_pos).c
+          (Debate.defaultParams 1 0 one_pos).q) bob vera 0).cost' o AliceId
+      ≤ (((0 : ℕ) : ℝ) + 1) * (5000 * (1 : ℝ) ^ 2 * Real.log (200 * (((0 : ℕ) : ℝ) + 1)) + 1) :=
+  Debate.alice_fast o 1 one_pos 0 bob vera
+
+/-- And honest Bob, whose constant is `20000/9` where Alice's is `5000` — the
+asymmetry is in the protocol, not in the analysis. -/
+public theorem bob_queries_le (o : Debate.Oracle) (alice : Debate.Alice)
+    (vera : Debate.Vera) :
+    (Debate.protocol alice
+        (Debate.honestBob (Debate.defaultParams 1 0 one_pos).s
+          (Debate.defaultParams 1 0 one_pos).b
+          (Debate.defaultParams 1 0 one_pos).q) vera 0).cost' o BobId
+      ≤ (((0 : ℕ) : ℝ) + 1) * (20000 / 9 * (1 : ℝ) ^ 2 * Real.log (200 * (((0 : ℕ) : ℝ) + 1)) + 1) :=
+  Debate.bob_fast o 1 one_pos 0 alice vera
+
 end
 
 end AISafetyAtlas.Examples.Oversight.Debate

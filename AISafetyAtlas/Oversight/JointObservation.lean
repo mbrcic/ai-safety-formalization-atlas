@@ -6,6 +6,7 @@ public import AISafetyAtlas.Oversight.JointObservation.Portfolio
 public import AISafetyAtlas.Oversight.JointObservation.FiniteDecision
 public import AISafetyAtlas.Oversight.JointObservation.RepairBoundary
 public import AISafetyAtlas.Oversight.JointObservation.Residual
+public import AISafetyAtlas.Oversight.JointObservation.Registry
 
 /-!
 # Joint observation — public facade
@@ -72,7 +73,7 @@ declared finite family. It makes a proposed portfolio checkable; producing one i
   `Portfolio.lean` defines what a correct portfolio would be and checks one bounded
   instance; it does not find portfolios, and its cost function is declared rather than
   derived.
-- **Not** an AI-system bridge. No `ai_bridge_status` graduation from this facade.
+- **Not** an AI-system bridge. No `ai_interpretation_status` graduation from this facade.
 - **Not** a generalization of `AISafetyAtlas.Compositional.Rectangularity`, and not
   generalized by it. Rectangularity asks whether an admissibility *relation* decomposes
   into local product constraints; coverage asks whether a hazard *label* is constant on

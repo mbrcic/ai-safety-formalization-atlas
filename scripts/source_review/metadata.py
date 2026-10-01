@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from html.parser import HTMLParser
 import re
-from typing import Any
+from typing import Any, cast
 from urllib.parse import quote, urlencode, urljoin, urlparse
 from xml.etree import ElementTree
 
@@ -23,7 +23,7 @@ from .schema import (
 def date_from_parts(value: object) -> str:
     if not isinstance(value, dict):
         return ""
-    parts = value.get("date-parts")
+    parts = cast(dict[str, Any], value).get("date-parts")
     if not isinstance(parts, list) or not parts or not isinstance(parts[0], list):
         return ""
     numbers = [str(part) for part in parts[0][:3] if isinstance(part, int)]

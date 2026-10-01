@@ -18,6 +18,20 @@ the license text redistributed alongside the Apache-2.0 vendored subtrees
 `GibbardSatterthwaite.lean`; multi-file provenance mirror is
 [`vendor/SocialChoiceLean/`](../../../vendor/SocialChoiceLean/).
 
+## Derived, outside `Upstream/`
+
+One tree is adapted rather than redistributed verbatim, and therefore does not
+live under `Upstream/`:
+
+| Subtree | Upstream | License | Pin / notes |
+|---|---|---|---|
+| `AISafetyAtlas/LinearSystems/` | [AnandGokhale/LeanForControl](https://github.com/AnandGokhale/LeanForControl) | Apache-2.0 | commit `c5cedca`; the `LinearSystems/` track only. Each atlas file header names the upstream file, its SHA-256, and the atlas changes (namespace, `module` marker and `public` visibility, `Architect`/`blueprint` removed, Mathlib v4.30.0-rc2 → v4.33.0, two proof repairs marked at the site). Registry row `LAND-LINSYS-001` |
+| `AISafetyAtlas/Analysis/Blackwell.lean` | [danlyng/Econlib](https://github.com/danlyng/Econlib) | Apache-2.0, **no upstream `NOTICE`**, so §4(a)–(c) and not §4(d) | commit `003655ccf010cdf44c4f67d6675167b54ce0e9df`; `Econlib/Math/Analysis/Blackwell.lean` only, SHA-256 `1879097686a79081481812eab72871a33ac01d635ef49369759a602b333f6c9d`. The file header names the upstream file, its hash and the atlas changes (namespace, per-declaration `public`/`@[expose]` in place of a `public section`, the two closed-invariant-set lemmas moved out of Mathlib's `ContractingWith` namespace, Lean/Mathlib v4.29.0 → v4.33.0 with three one-line repairs marked at the site). The seventeen-file `Optimization/DynamicProgramming/` subtree was read and **declined**. Registry row `LAND-BELLMAN-BDD-001` |
+
+Apache-2.0 §4 is satisfied for that tree by those per-file headers, which carry
+the attribution and state the changes, together with the repository root
+[`LICENSE`](../../LICENSE). The mathematics remains the upstream author's.
+
 Mathematical statements and proofs in vendored files remain the upstream
 authors'. Atlas changes are limited to module boundaries, visibility, and
 documentation unless a file header states otherwise.

@@ -167,7 +167,7 @@ robotics language or an ethical interpretation. The scope and external robotics
 precedents are recorded in `docs/guide/robot-verification-model.md`. Bridge
 review status (v0.2): BY-012 AgentBehavior and BY-033 robot are maintainer
 **`REVIEWED`** (robot formalization relationship remains **`RELATED`**; CT-3
-evidence at `docs/bridges/ct3-robot-review-package.md`). Finite-state and
+evidence at `docs/interpretation-reviews/ct3-robot-review-package.md`). Finite-state and
 otherwise bounded systems, sound incomplete methods, and real-system claims
 beyond the scoped interpretation packages remain outside the automatic
 conclusion. Live status: [`STATE.md`](STATE.md) and

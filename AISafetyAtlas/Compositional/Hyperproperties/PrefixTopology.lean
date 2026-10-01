@@ -128,6 +128,26 @@ realizes is also realized by a system satisfying `H`. -/
   ∀ M : Observation Prefix, (∃ S, Realizes prefixOf M S) →
     ∃ S ∈ H, Realizes prefixOf M S
 
+omit [DecidableEq Prefix] in
+/--
+**Clarkson & Schneider's Theorem 1, the inclusion half: `SHP ⊆ SSC`.**
+
+Every hypersafety hyperproperty is subset closed. If a subsystem violated `H`
+it would exhibit a bad observation, and the supersystem realizes every
+observation the subsystem does, so the supersystem would violate `H` too.
+
+The strictness half, `SHP ⊂ SSC`, is
+`Examples.Compositional.Hyperproperties.subsetClosed_not_hyperSafety`.
+-/
+public theorem subsetClosed_of_isHyperSafetyOp {H : Hyperproperty Trace}
+    (h : IsHyperSafetyOp prefixOf H) : SubsetClosed H := by
+  intro T hT T' hsub
+  by_contra hT'
+  obtain ⟨M, hreal, hbad⟩ := h T' hT'
+  exact hbad T (fun p hp => by
+    obtain ⟨t, ht, hpt⟩ := hreal p hp
+    exact ⟨t, hsub ht, hpt⟩) hT
+
 /--
 **Hypersafety is closedness.**
 

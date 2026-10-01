@@ -292,7 +292,7 @@ nondegenerate indefinite in `n >= 3` variables and `g` merely continuous with
 nondegenerate indefinite `2H`-dimensional Hessian block also holds at the witness
 point, where `2H = 4` and the block is `-2 s <y, x>`.
 
-**The deviation was ours.** `reviews/mais-issues-5-12/01-formalization-plan.md`
+**The deviation was ours.** The formalization plan for this work
 recorded the obligation as "every O77 saddle has the required Morse normal form",
 and the route built from it discharged the degenerate directions with
 `hasLocalVolumeOrder_freeCoords`, which requires the loss to be constant along

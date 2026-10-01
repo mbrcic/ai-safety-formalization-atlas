@@ -33,8 +33,13 @@ public structure FeatureIndex where
   /-- Group of each feature. -/
   groupOf : Fin P → Fin L
 
-/-- Membership of feature `j` in group `ℓ`. -/
-public def inGroup (fs : FeatureIndex) (ℓ : Fin fs.L) (j : Fin fs.P) : Prop :=
+/-- Membership of feature `j` in group `ℓ`.
+
+`@[expose]` for the reason `RashomonProperty` beside it carries one: this is a
+hypothesis a consumer has to *discharge* at a concrete feature index, and an
+unexposed body does not reduce in another module, so `inGroup fs 0 0` could be
+stated and not proved. Found 2026-09-22 when the first witness tried. -/
+@[expose] public def inGroup (fs : FeatureIndex) (ℓ : Fin fs.L) (j : Fin fs.P) : Prop :=
   fs.groupOf j = ℓ
 
 /-- Rashomon: within a group, models exist ranking two features oppositely. -/

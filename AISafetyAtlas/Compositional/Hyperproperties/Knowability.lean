@@ -42,11 +42,17 @@ the kernel stays free of trace vocabulary.
   Finiteness and the per-violation witness are lost on the way in, and no attempt
   is made to recover them.
 - **Not a trace producer.** This connects the *consumer* side of the trace theory
-  to the kernel, and nothing here produces a trace. The producer is
-  `AISafetyAtlas.Compositional.NetworkTraces`, which reads one of the four
-  execution-generating modules as a `TraceSystem`; the other three —
-  `Compositional.Symmetry`, `Wireheading.CRMDP` and
-  `Wireheading.GoalPreservation` — still have no trace consumer.
+  to the kernel, and nothing here produces a trace. The producers are
+  `AISafetyAtlas.Compositional.NetworkTraces`, which reads a network execution as
+  a `TraceSystem`, and `AISafetyAtlas.Compositional.TraceSystem`, which reads the
+  runs of a policy set on the `AISafetyAtlas.Decision` carrier as one. That
+  second producer reaches `Wireheading.CRMDP`, whose history type *is*
+  `Decision.History` at its own observation alphabet, so a corrupt-reward
+  policy's determined run is a trace here. It does **not** reach
+  `Compositional.Symmetry`, and it does not reach
+  `Wireheading.GoalPreservation`: that module's `Model.run` steps by its own
+  `next` field rather than by `Decision.detRun`, so its trajectories are not
+  `runTraces` traces even where its histories are `Decision.History`.
 - **Not** a claim about `IsKSafety`, `IsHyperSafety` or `IsHyperLiveness`. Only
   the ordinary batch-predicate notion is routed.
 

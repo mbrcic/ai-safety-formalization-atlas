@@ -293,6 +293,120 @@ public theorem minControlLoss_lt_controlLoss_gate :
   rw [hmin, controlLoss_gate_pass]
   exact Real.log_pos (by norm_num)
 
+/-! ## Eq. (28) in its information-theoretic forms, at the gate
+
+Theorems 3 and 4 rewrite the minimized control loss as an infimum of mutual
+informations. Both take `Purified` at every admitted controller, and until
+`purified_plantOutcome` existed nothing could supply it — so the two statements
+sat in the library with no application anywhere. Here they are, at the gate. -/
+
+/-- The constant state has finite range, and the instance search does not find
+it inside the quantified hypotheses below before running out of heartbeats.
+Named here so the three statements can be written as terms. -/
+public instance finiteRange_unit_state : FiniteRange (fun _ : Fin 2 => ()) :=
+  ⟨Set.toFinite _⟩
+
+/-- Likewise the noise. -/
+public instance finiteRange_id_noise : FiniteRange (id : Fin 2 → Fin 2) :=
+  ⟨Set.toFinite _⟩
+
+/-- The gate's two controllers are measurable, finite-ranged, and purified.
+Bundled once because all three statements below take the same package. -/
+public theorem gate_policies_purified :
+    (∀ C ∈ gatePolicies, Measurable C) ∧
+      (∀ C ∈ gatePolicies, Purified (uniformOn (Set.univ : Set (Fin 2)))
+        (fun _ => ()) C (id : Fin 2 → Fin 2)
+        (plantOutcome noiseGate (fun _ => ()) C id)) := by
+  refine ⟨fun C hC => ?_, fun C hC => ?_⟩
+  · rcases hC with rfl | rfl <;> exact measurable_const
+  · rcases hC with rfl | rfl <;>
+      exact purified_plantOutcome _ noiseGate measurable_const measurable_const measurable_id
+
+/-- **The plant of a controller is a plant.** `isPlant_forgetSecond` builds the
+relation by hand for one map; this is the general fact, which says that
+`plantOutcome` is not a separate object from `IsPlant` but the same one named as
+a function. Fired at the gate's blocking controller. -/
+public theorem gate_isPlant_block :
+    IsPlant noiseGate (fun _ : Fin 2 => ()) (fun _ => (0 : Fin 2)) (id : Fin 2 → Fin 2)
+      (plantOutcome noiseGate (fun _ : Fin 2 => ()) (fun _ => (0 : Fin 2)) id) :=
+  isPlant_plantOutcome noiseGate _ _ _
+
+/-- **Theorem 3 at the gate.** The minimized loss is the smallest conditional
+mutual information between the outcome and the noise, given what the controller
+knew. At this model that infimum is `0`, because blocking the noise attains it —
+which `minControlLoss_lt_controlLoss_gate` already established on the other
+side of the equality. -/
+public theorem gate_minControlLoss_eq_sInf_condMutualInfo :
+    minControlLoss (uniformOn (Set.univ : Set (Fin 2))) noiseGate (fun _ => ())
+        (id : Fin 2 → Fin 2) gatePolicies
+      = sInf ((fun C => I[plantOutcome noiseGate (fun _ => ()) C id :
+          (id : Fin 2 → Fin 2) | ⟨(fun _ => ()), C⟩ ;
+          uniformOn (Set.univ : Set (Fin 2))]) '' gatePolicies) :=
+  minControlLoss_eq_sInf_condMutualInfo _ noiseGate measurable_const measurable_id
+    gate_policies_purified.1 (fun _ _ => ⟨Set.toFinite _⟩) (fun _ _ => ⟨Set.toFinite _⟩)
+    gate_policies_purified.2
+
+/-- **Theorem 4 at the gate**, the same quantity as a difference of two mutual
+informations: what the outcome says about the whole triple, less what it says
+about the part the controller saw. -/
+public theorem gate_minControlLoss_eq_sInf_mutualInfo_sub :
+    minControlLoss (uniformOn (Set.univ : Set (Fin 2))) noiseGate (fun _ => ())
+        (id : Fin 2 → Fin 2) gatePolicies
+      = sInf ((fun C => I[plantOutcome noiseGate (fun _ => ()) C id :
+            ⟨⟨(fun _ => ()), C⟩, (id : Fin 2 → Fin 2)⟩ ;
+            uniformOn (Set.univ : Set (Fin 2))]
+          - I[plantOutcome noiseGate (fun _ => ()) C id : ⟨(fun _ => ()), C⟩ ;
+            uniformOn (Set.univ : Set (Fin 2))]) '' gatePolicies) :=
+  minControlLoss_eq_sInf_mutualInfo_sub _ noiseGate measurable_const measurable_id
+    gate_policies_purified.1 (fun _ _ => ⟨Set.toFinite _⟩) (fun _ _ => ⟨Set.toFinite _⟩)
+    gate_policies_purified.2
+
+/-- **The blocking controller is optimal over the admitted set.** Its loss is
+zero and no loss is negative, so it attains the minimum -- which is the
+hypothesis the attainment results take and which nothing had supplied. -/
+public theorem gate_block_is_optimal :
+    ∀ C' ∈ gatePolicies,
+      controlLoss (uniformOn (Set.univ : Set (Fin 2))) (fun _ => ())
+          (fun _ => (0 : Fin 2))
+          (plantOutcome noiseGate (fun _ => ()) (fun _ => (0 : Fin 2)) id)
+        ≤ controlLoss (uniformOn (Set.univ : Set (Fin 2))) (fun _ => ()) C'
+            (plantOutcome noiseGate (fun _ => ()) C' id) := by
+  intro C' _
+  rw [controlLoss_gate_block]
+  exact condEntropy_nonneg _ _ _
+
+/-- The noise is independent of what the blocking controller knew, which is the
+other hypothesis: the state is a point and the action is constant. -/
+public theorem gate_block_noise_independent :
+    H[(id : Fin 2 → Fin 2) | ⟨(fun _ : Fin 2 => ()), (fun _ : Fin 2 => (0 : Fin 2))⟩ ;
+        uniformOn (Set.univ : Set (Fin 2))]
+      = H[(id : Fin 2 → Fin 2) ; uniformOn (Set.univ : Set (Fin 2))] :=
+  (ProbabilityTheory.indepFun_const_right (id : Fin 2 → Fin 2) ((), (0 : Fin 2))).condEntropy_eq_entropy
+    measurable_id (by fun_prop)
+
+/--
+**The minimized loss equals the noise entropy exactly when the noise is
+determined by the outcome and what the controller knew.**
+
+At the gate the minimum is `0` and the noise carries `log 2`, so the left side
+is false — and the equivalence therefore says the right side is false too: the
+noise is *not* recoverable from the outcome together with the state and action.
+That is a statement about this model, reached from the general theorem rather
+than computed.
+-/
+public theorem gate_minControlLoss_eq_entropy_iff :
+    minControlLoss (uniformOn (Set.univ : Set (Fin 2))) noiseGate (fun _ => ())
+          (id : Fin 2 → Fin 2) gatePolicies
+        = H[(id : Fin 2 → Fin 2) ; uniformOn (Set.univ : Set (Fin 2))]
+      ↔ H[(id : Fin 2 → Fin 2) |
+            ⟨plantOutcome noiseGate (fun _ => ()) (fun _ => (0 : Fin 2)) id,
+              ⟨(fun _ : Fin 2 => ()), (fun _ : Fin 2 => (0 : Fin 2))⟩⟩ ;
+            uniformOn (Set.univ : Set (Fin 2))] = 0 :=
+  minControlLoss_eq_entropy_noise_iff_of_attained _ noiseGate (Or.inl rfl)
+    gate_block_is_optimal measurable_const measurable_const measurable_id
+    (purified_plantOutcome _ noiseGate measurable_const measurable_const measurable_id)
+    gate_block_noise_independent
+
 /-! ## The feasible set of eq. (28) is not `Set.univ`
 
 `minControlLoss` takes the admissible controllers as a parameter, and it matters

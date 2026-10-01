@@ -364,6 +364,64 @@ Keyword AFP “observability” hits (FSM testing, protocol refinement) are
 **DISTINCT** from Klamka control-theoretic unobservability. Candidates removed;
 see [`a3-by001-unobservability-triage.md`](a3-by001-unobservability-triage.md).
 
+**Superseded in part, 2026-09-11.** That verdict is still correct about the AFP
+hits it inspected, and its closing sentence “nothing existing covers it” is not.
+The six corpora behind it — `mathlib`, `isabelle-afp`, `rocq-undecidability`,
+`hol4`, `hol-light`, `agda-stdlib` — contain no member for the wider Lean
+ecosystem, so a Lean development outside Mathlib was invisible to it. One
+exists; see the next section.
+
+## Lean 4: LeanForControl — Kalman and Hautus criteria, adapted (BY-001, BY-002)
+
+Surveyed and adapted 2026-09-11.
+[`AnandGokhale/LeanForControl`](https://github.com/AnandGokhale/LeanForControl),
+Apache-2.0, Lean `v4.30.0-rc2` + Mathlib `v4.30.0-rc2`, commit `c5cedca`
+(2026-09-01), ~7.6k lines. “The intent of this repository is to build a database
+of control theoretic proofs in lean.”
+
+**Split, and only one half is usable here.**
+
+| Tree | Lines | Axioms beyond the allowlist | Disposition |
+|---|---|---|---|
+| `LinearSystems/` | 918 | none; Mathlib and `Architect` only | **adapted in-tree** as `AISafetyAtlas.LinearSystems` |
+| `Stability/`, `Comparison/`, `ODEs/`, `Dini/`, `Analysis/` | ~6.6k | seven custom `axiom`s | **not taken** |
+
+The seven are `exists_unique_trajectory` and `scalar_ode_exists_interval` (ODE
+existence and uniqueness — an assumed Picard–Lindelöf, which Mathlib proves),
+`exists_classKLGlobal_of_stability_properties`,
+`exists_classK_minorant_lipschitz`, `ClassK.exists_global_extension`,
+`exists_strictMono_lower_bound`, and `exists_strictMono_upper_bound_global`.
+Lyapunov, LaSalle and the class-K comparison library rest on them, so that half
+would not pass `check_print_axioms.py`. The upstream README states the axioms
+plainly; no `sorry` anywhere in the tree.
+
+**What was adapted.** Observability and controllability matrices, both Kalman
+rank criteria, the unobservable subspace, both Hautus eigenvalue tests over
+`ℂ`, and the duality. Provenance per file header (upstream path, SHA-256, atlas
+changes); notice in
+[`AISafetyAtlas/Upstream/LICENSE-NOTICE`](../../AISafetyAtlas/Upstream/LICENSE-NOTICE);
+registry row `LAND-LINSYS-001`. Adapted rather than vendored: the namespace,
+module boundary and Mathlib version all move, and two proofs needed repair at
+`v4.33.0`.
+
+**Disposition against BY-001 and BY-002: the *adapted* layer is still not
+coverage, and both rows are nonetheless covered.** The adapted layer is
+algebraic — no trajectory, no solution, no output signal — so it does not state
+“the state cannot be reconstructed from the outputs”, and its `TRIAGED_DISTINCT`
+verdict was right about that. **What changed on 2026-09-20 is that the atlas
+states it anyway, in modules that are not adapted from anywhere**, and on
+2026-09-21 both rows were promoted to covered on the strength of those. The
+verdicts are retired into the rows' notes, since policy rejects a statability
+verdict on a row that carries Lean.
+`AISafetyAtlas.LinearSystems.Dynamics` and `…Flow` are atlas-original and carry
+print's two properties with each algebraic criterion proved equivalent to the
+one named for it; the decisive reason building beat porting is that this
+upstream development has an analysis layer and a reachability file that are not
+connected to each other. Klamka 1972, which both rows cite, was obtained from
+the maintainer and read on 2026-09-11; section 25 of the coverage audit grades
+it statement by statement. Full reasoning:
+[`by001-by002-linear-systems-triage.md`](by001-by002-linear-systems-triage.md).
+
 ## Lean 4: Tau Ceti — the Morse lemma in a Banach space (vendored)
 
 Surveyed and vendored 2026-09-05. [`TauCetiProject/TauCeti`](https://github.com/TauCetiProject/TauCeti)
@@ -414,6 +472,162 @@ logic, computability, social-choice, information-theory or causal layers: search
 for entropy, KL divergence, conditional independence, d-separation, concentration
 inequalities and singular values return zero files. It is a pure-mathematics
 substrate, not a safety library, which is the division this repository wants.
+
+## Lean 4: audieleon/goodhart — Skalse and Ng, reproduced and read (BY-037)
+
+Reproduced 2026-07-28, statements read 2026-09-10.
+[`audieleon/goodhart`](https://github.com/audieleon/goodhart) at revision
+`29128f3f9bcafb30d019682b63c1b582bcadf7b9` — re-cloned on the reading date and
+still that revision. Apache-2.0, no `NOTICE` file. It is a Python reward-analysis
+tool with a Lean proof tree beside it; the tool's rules link to the theorems.
+It is the strongest of four Lean leads catalogued on BY-037 and the only
+`REPRODUCED` external Lean body outside the six pinned corpora, which is why it
+belongs here.
+
+**Reproduction.** Built independently in an isolated elan 4.2.3 toolchain at the
+repository's own pins — Lean `v4.30.0-rc2`, Mathlib
+`9268b22206b0425419498769f780a91dee03bcf3` — with `lake exe cache get` then
+`lake build`: 3,313 jobs, exit 0. Axiom audit on `skalse_theorem1`,
+`skalse_theorem3_only_if`, `skalse_corollary3`, `ng_vstar_shaped`,
+`ng_qstar_shaped` and `ng_shaping_preserves_optimal` reports only
+`[propext, Classical.choice, Quot.sound]` for each. No `sorryAx`.
+
+**The tree.** 3,237 lines under `proofs/GoodhartProofs/`: a basic file of
+arithmetic reward traps; an MDP layer carrying a finite MDP with `PMF`-valued
+transitions and the Ng–Harada–Russell potential-shaping results; and a Skalse
+layer of 1,351 lines across four files.
+
+### Statement-level comparison against Skalse et al. (NeurIPS 2022)
+
+Its model is the paper's linear algebra without the paper's reduction to it.
+Values are inner products, `value R F = ∑ i, R i * F i`, and policies are plain
+vectors — a `Finset (Fin d → ℝ)` in the finite files, an arbitrary `Set` in the
+open-set file. The docstrings call these occupancy measures; nothing constrains
+them to be any. Whether that widens or narrows the paper depends on the file.
+
+| Declaration | Printed statement | Verdict |
+|---|---|---|
+| `skalse_theorem1` | Theorem 1 | **Faithful core, missing reduction.** Over an open set with both rewards non-trivial, unhackable implies equivalent — the paper's conclusion, in the coordinates its proof works in. The printed theorem quantifies over MDPs and concludes for policy sets containing an open set; Propositions 1–2 and Lemma 1, which carry an MDP there, are absent. Nothing ties the dimension to the state-action count. |
+| `skalse_existence_two`, `skalse_existence_general` | Theorem 2 | **Not Theorem 2.** Both are self-labelled weak versions and both produce a witness that is trivial on the policy set — the general one uses the zero reward. Definition 1's convention and Theorem 2's own wording exclude exactly those witnesses. |
+| `skalse_existence_nontrivial_three` | Theorem 2, three-policy case | **A special case with supplied structure.** Needs three policies with three distinct values and a second reward that opposes one pair and is neutral on another. The paper derives the existence of such a direction; here it is a hypothesis. |
+| `skalse_theorem3_only_if` | Theorem 3, one direction | **Content assumed, not derived.** The hypothesis is that every equality-preserving reward is a scalar multiple of the first — a restatement of the printed dimension condition failing, not a consequence of it. The linear-algebra bridge that makes Theorem 3 a theorem is what is missing. |
+| `skalse_theorem3_if`, `skalse_corollary3` | Theorem 3 other direction, Corollary 3 | **Three-policy instances.** Same supplied structure as above; not the printed iff, and not Corollary 3's quantifier over finite policy sets. |
+| `two_policy_nontrivial_impossible`, `two_policy_strong_impossible` | — | **A refutation of the printed Theorem 2 on a two-element policy set**, and the most valuable declarations in the tree. With the true reward non-trivial there, a non-trivial unhackable proxy must be equivalent to it. The paper's proof has an off-by-one in its trivial-subspace dimension count; the argument is written out in [`by037-by038-goodhart-campbell-plan.md`](by037-by038-goodhart-campbell-plan.md) and was reached there from the printed proof, independently of this repository. |
+
+On the Ng side, the registry's earlier assessment stands after reading Theorem 1
+in the source: `ng_necessity_lemma3` proves an algebraic action-dependent
+ordering reversal, while Ng's necessity clause asserts that for a
+non-potential-based shaping function there *exist* proper transition
+probabilities and a reward function under which no optimal policy of the shaped
+MDP is optimal in the original. The sufficiency half is the better match.
+
+### Maintenance signals
+
+Two of its own READMEs disagree. The root one claims 24 rules backed by
+machine-verified Lean including formalizations of Ng 1999 and Skalse 2022, and
+separately records the three-policy correction; the one under `proofs/` says of
+Skalse "Not yet formalized. Future work." The tree contains the Skalse files, so
+the root README and the tree agree and the `proofs/` README is stale. The
+companion paper its `CITATION.cff` names — *Catching Goodhart's Law Before
+Training: Static Reward Analysis with Formal Guarantees*, Sheridan, 2026 —
+carries no venue, DOI or URL there, and no such paper was found by search on
+2026-09-10.
+
+### Disposition: cited, not vendored, not depended on
+
+Not depended on: it pins Lean `v4.30.0-rc2` on Mathlib `9268b222` while this
+repository pins `v4.33.0` on `db584cd6`, and Lake resolves one Mathlib for the
+whole build. Not vendored: both projects are Apache-2.0 and the upstream has no
+`NOTICE`, so a port would incur only §4(a)–(c), but the port would be worth
+roughly 230 of 1,351 Skalse lines and would carry declarations whose names
+promise more than their statements deliver into a tree whose discipline is
+catching exactly that. Read as a reference proof when the atlas builds its own
+Skalse layer; nothing here is copied and no attribution obligation is incurred.
+
+## Prove2Me / Formalpedia — Jordan form exists, outside every repository (2026-09-12)
+
+Searched while looking for Klamka's eq (5), the block-count bound recorded as the
+one open half of section 25 of [`source-coverage-audit.md`](source-coverage-audit.md).
+
+**What the repository search found: nothing.** A GitHub code search — run
+unfiltered, after calibrating it against a string known to be in
+`AnandGokhale/LeanForControl` — returns **no Jordan normal form in Lean
+anywhere**. Every hit for `jordan_normal_form` is a reference to the Isabelle
+AFP theory of that name or an entry in a list of axiom labels. Mathlib carries
+generalized eigenspaces, `minpoly`, and nilpotency, and no Jordan or Weyr block
+structure at the pinned revision. The only Lean `IsControllable` outside the
+adapted `LinearSystems` track is quantum Lie-algebra controllability in
+`Vilin97/lean-pool`, a different notion.
+
+**What [Prove2Me](https://prove2.me) has.** Its library
+[Formalpedia](https://beta.prove2.me/formalpedia) held 63,432 theorems, 58,292
+Lean-checked, when this was written. Proved there, from a Hefferon *Linear
+Algebra* chapter-five mission:
+
+* a **string basis for a nilpotent linear map** — the cyclic decomposition, over
+  an arbitrary field;
+* a **Jordan basis** for a linear map on a finite-dimensional complex space;
+* the vocabulary of similarity, Jordan blocks and Jordan matrices, over a
+  commutative ring;
+* the classical formula recovering the number of blocks of each size from the
+  kernel dimensions of the powers of `A - μ I`.
+
+Their own note on the first of these says Mathlib "does not provide a string
+basis, a cyclic decomposition for a nilpotent map, or Jordan canonical form;
+this statement fills that gap". Separately, a Bertsekas mission carries
+linear-systems control theory over the reals — observability in the sense of
+Bertsekas Definition 4.1.1, the unobservable-subspace consequence, and the
+algebraic Riccati fixed point. A search for `Hautus` there returns **zero**.
+
+**What was submitted, and what it is not.** Eq (5) is not in that library, so it
+was filed as an open problem:
+
+* `JordanBound.algMult_le_geomMult_mul_index` —
+  [prove2.me/theorems/c576bd1e-5241-42c6-ba34-7bca4e94e329](https://prove2.me/theorems/c576bd1e-5241-42c6-ba34-7bca4e94e329)
+* the algebraic multiplicity of an eigenvalue is at most the geometric
+  multiplicity times the index, which is Klamka's eq (5) cleared of its division
+* environment `mathlib_rev 0df444a`, Lean `v4.33.1`, the platform default
+
+**What was contributed upward, stated and proved.** The two supporting lemmas
+the Hautus pencil bound needed are atlas-original, domain-neutral linear
+algebra, and Formalpedia did not hold them. Both were submitted as statements
+and then closed with the atlas's own proofs, in the same environment:
+
+* `MatrixBlockRank.rank_fromCols_le` —
+  [prove2.me/theorems/ebcc89ce-abb1-475c-970a-e10eff78a363](https://prove2.me/theorems/ebcc89ce-abb1-475c-970a-e10eff78a363),
+  status `Proved`
+* `MatrixBlockRank.rank_fromRows_le` —
+  [prove2.me/theorems/9d952a8a-96f3-4f01-8307-10e7b6b71f17](https://prove2.me/theorems/9d952a8a-96f3-4f01-8307-10e7b6b71f17),
+  status `Proved`
+
+Both are `rank_fromCols_le` and `rank_fromRows_le` of
+`AISafetyAtlas.LinearSystems.MatrixLemmas`, transcribed to standalone form —
+the vertical case inlines the horizontal one as a private lemma so each file
+compiles alone. **This is also a portability result the atlas gets for free:**
+the proofs were written against Mathlib `db584cd` at Lean `v4.33.0` and the
+platform checked them unchanged against `0df444a` at `v4.33.1`.
+
+**What was not offered upward.** The Hautus characterisations themselves,
+the Kalman rank criteria and the controllability/observability duality are
+Anand Gokhale's mathematics, adapted here under Apache-2.0; the platform's
+statements and proofs are immutable and credit is permanent to the submitter,
+so nothing derived from that work has been uploaded.
+
+**This is a request, not a dependency, and not coverage.** The atlas builds at
+Lean `v4.33.0` against Mathlib `db584cd`; the platform's environments are
+`v4.33.1`, `v4.30.0` and `v4.29.0-rc3`, and it does not support reuse across its
+own environments, let alone into this repository. Anything proved there would
+have to be **ported**, and until it is, section 25's six `Partial` rows stay
+`Partial`. Nothing in the tree depends on the outcome.
+
+**A note on the corpus sweep this exposes.** The six corpora of
+[`formalization-search.json`](formalization-search.json) are `mathlib`,
+`isabelle-afp`, `rocq-undecidability`, `hol4`, `hol-light` and `agda-stdlib`.
+Formalpedia is a seventh kind of place — a library that is not a repository and
+not a proof assistant's standard corpus — and no recorded sweep reaches it. That
+is the same gap as the one recorded for `BY-001` and `BY-002` in
+[`by001-by002-linear-systems-triage.md`](by001-by002-linear-systems-triage.md),
+one step further out.
 
 ## Isabelle reproduction environment
 

@@ -202,6 +202,23 @@ public theorem hyperproperty_decomposition
       H = closedPart ∩ densePart :=
   topological_decomposition H
 
+/--
+**Subset closure**, Clarkson & Schneider's `SSC` (*Hyperproperties*, J. Computer
+Security 18(6), p. 1167):
+
+> `SSC ≜ { H ∈ HP | (∀T ∈ Prop: T ∈ H ⟹ (∀T′ ∈ Prop: T′ ⊆ T ⟹ T′ ∈ H)) }`
+
+They introduce it as *"the set of hyperproperties with which refinement works"*,
+because (2.8) — satisfaction and refinement agreeing, as they do for trace
+properties — holds exactly for the subset-closed hyperproperties.
+
+Their `H ∈ HP` and `T ∈ Prop` side conditions are structural here: `Hyperproperty`
+and `TraceSystem` are types, so the definition carries no well-formedness
+hypothesis.
+-/
+@[expose] public def SubsetClosed {Trace : Type*} (H : Hyperproperty Trace) : Prop :=
+  ∀ T ∈ H, ∀ T' ⊆ T, T' ∈ H
+
 /-- Topological hypersafety predicate for an explicitly supplied topology. -/
 public abbrev IsHyperSafety {Trace : Type*}
     [TopologicalSpace (TraceSystem Trace)]

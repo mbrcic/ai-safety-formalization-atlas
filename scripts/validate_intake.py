@@ -83,7 +83,7 @@ REFUSED = {
     "source_fidelity": "a fidelity verdict",
     "source_note": "a grading note",
     "relationship": "a statement-match grade",
-    "ai_bridge_status": "a bridge status",
+    "ai_interpretation_status": "a bridge status",
     "ai_safety_relevance": "an AI-system reading",
     "resolution": "a resolution, which only a settled board row has",
     "refutation": "a refutation clause, which the board requires and this lane does not",

@@ -52,6 +52,8 @@ SCANNED = [
     # asserting MAIS-O29(b) was retracted a day after a bound at print's own
     # quantifier landed. A summary that names theorems is a grading artifact.
     ROOT / "STATE.md",
+    # The history moved out of STATE.md on 2026-10-01 still names theorems.
+    ROOT / "docs" / "releases" / "unreleased.md",
     # Generated, but scanned rather than trusted: its prose is copied from
     # `mais_solution` blocks in `registry.yaml`, which no other check reads for
     # declaration names. A verdict on someone else's mathematics that cites a
@@ -64,8 +66,8 @@ FIELDS = {
     "source_ref", "context_source_ref", "source_scope", "source_fidelity",
     "source_note", "prior_art", "proposed_by", "lean_artifact", "scope_delta",
     "novelty_checks", "content_sha256", "next_id", "schema_version",
-    "root_import", "source_catalog", "atlas_declaration", "bridge_review",
-    "ai_bridge_status", "original_source_refs", "paper_reference",
+    "root_import", "source_catalog", "atlas_declaration", "interpretation_review",
+    "ai_interpretation_status", "original_source_refs", "paper_reference",
     "candidate_formalizations", "formal_library_search", "inspection_state",
     "relationship_review", "result_shape", "related_result_ids",
 }

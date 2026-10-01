@@ -278,7 +278,7 @@ Two unnumbered items are also left, and both are the source's own loose ends:
   the atlas claims only the stated direction.
 
 * **The quantum sections.** Out of scope.
-* **No AI-system bridge.** `ai_bridge_status` stays `HUMAN_REVIEW`.
+* **No AI-system bridge.** `ai_interpretation_status` stays `HUMAN_REVIEW`.
 
 ## What it composes with
 

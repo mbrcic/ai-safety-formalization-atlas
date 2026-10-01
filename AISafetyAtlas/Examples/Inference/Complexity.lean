@@ -250,4 +250,92 @@ public theorem witness_thm4_tight :
   rw [fine_complexity, coarse_complexity, emulationCost_eq, rangeFinset_gamma4]
   simp
 
+
+/-! ## The set-scope vocabulary, at the same pair of devices
+
+The set-scope form of Theorem 4 additionally asks for attainment of both
+minima, boundedness below of the answering images, and a pointwise
+emulation-cost bound -- four conditions the `Finset` form gets for free from
+finiteness and `witness_thm4` therefore never has to state. `witness_thm4_on`
+below discharges all four at this pair, via `coe_answeringSet`/
+`coe_emulationSet` transporting the same `Finset.exists_mem_eq_inf'` argument
+`minAnsweringLengthOn_eq_minAnsweringLength` already makes generically.
+-/
+
+/-- **Theorem 4, set-scope, from strong inference.** The four attainment
+hypotheses `inferenceComplexityOn_le_of_stronglyInfers` asks for beyond
+`hs`/`hw` are all supplied by finiteness of both devices' setup types, via
+`coe_answeringSet`/`coe_emulationSet` and `Finset.exists_mem_eq_inf'` — the same
+route `minAnsweringLengthOn_eq_minAnsweringLength` and `emulationCostAt_eq`
+already take for this pair. -/
+public theorem witness_thm4_on :
+    inferenceComplexityOn fineDevice (setupLength fineDevice) gamma4 -
+      inferenceComplexityOn coarseForcedDevice (setupLength coarseForcedDevice) gamma4 ≤
+    ((rangeFinset gamma4).card : ℝ) *
+      emulationCostOn fineDevice coarseForcedDevice
+        (setupLength fineDevice) (setupLength coarseForcedDevice) := by
+  classical
+  refine inferenceComplexityOn_le_of_stronglyInfers
+    (setupLength fineDevice) (setupLength coarseForcedDevice) gamma4
+    fine_stronglyInfers_coarse coarse_weaklyInfers_gamma4 ?_ ?_ ?_ ?_
+  · intro γ hne
+    have hFne : (answeringSet coarseForcedDevice gamma4 (probe γ)).Nonempty := by
+      rw [← Finset.coe_nonempty, coe_answeringSet]; exact hne
+    obtain ⟨x, hx, hxeq⟩ :=
+      Finset.exists_mem_eq_inf' hFne (setupLength coarseForcedDevice)
+    have hxOn : x ∈ answeringSetOn coarseForcedDevice gamma4 (probe γ) := by
+      rw [← coe_answeringSet]; exact hx
+    refine ⟨x, hxOn, ⟨x, hxOn, rfl⟩, ?_⟩
+    rintro y ⟨x', hx', rfl⟩
+    rw [← coe_answeringSet] at hx'
+    rw [← hxeq]
+    exact Finset.inf'_le (setupLength coarseForcedDevice) hx'
+  · intro x₂ hne
+    have hFne : (emulationSet fineDevice coarseForcedDevice x₂).Nonempty := by
+      rw [← Finset.coe_nonempty, coe_emulationSet]; exact hne
+    obtain ⟨x₁, hx₁, hxeq⟩ := Finset.exists_mem_eq_inf' hFne
+      (fun y => setupLength fineDevice y - setupLength coarseForcedDevice x₂)
+    have hx₁On : x₁ ∈ emulationSetOn fineDevice coarseForcedDevice x₂ := by
+      rw [← coe_emulationSet]; exact hx₁
+    refine ⟨x₁, hx₁On, ⟨x₁, hx₁On, rfl⟩, ?_⟩
+    rintro y ⟨x', hx', rfl⟩
+    rw [← coe_emulationSet] at hx'
+    rw [← hxeq]
+    exact Finset.inf'_le _ hx'
+  · intro γ
+    exact (Set.toFinite
+      (setupLength fineDevice '' answeringSetOn fineDevice gamma4 (probe γ))).bddBelow
+  · intro x₂ hx₂
+    exact le_csSup (Set.toFinite _).bddAbove ⟨x₂, hx₂, rfl⟩
+
+/-- **Answering-set membership is answering the probe**, at the coarse device. -/
+public theorem coarse_mem_answeringSet_iff (f : Bool → Bool) (x : Bool) :
+    x ∈ answeringSet coarseForcedDevice gamma4 f ↔
+      AnswersProbe coarseForcedDevice gamma4 f x :=
+  mem_answeringSet_iff_answersProbe coarseForcedDevice gamma4 f x
+
+/-- **Emulation-set membership is emulating at that setup.** The realizedness
+hypothesis is `coarse_realized`, which holds for every coarse setup. -/
+public theorem fine_mem_emulationSet_iff (x₂ : Bool) (x₁ : Fin 4) :
+    x₁ ∈ emulationSet fineDevice coarseForcedDevice x₂ ↔
+      EmulatesAt fineDevice coarseForcedDevice x₁ x₂ :=
+  mem_emulationSet_iff_emulatesAt fineDevice coarseForcedDevice x₂
+    (coarse_realized x₂) x₁
+
+/-- The finite emulation set and its set-scope counterpart agree, so the two
+readings of Theorem 4 are about the same object. -/
+public theorem fine_coe_emulationSet (x₂ : Bool) :
+    (emulationSet fineDevice coarseForcedDevice x₂ : Set (Fin 4))
+      = emulationSetOn fineDevice coarseForcedDevice x₂ :=
+  coe_emulationSet fineDevice coarseForcedDevice x₂
+
+/-- **The summed complexity is the printed `𝒞(Γ ∣ C)`** on this finite range,
+under the definition's own weak-inference hypothesis. -/
+public theorem coarse_inferenceComplexitySum_eq :
+    inferenceComplexitySum coarseForcedDevice (setupLength coarseForcedDevice) gamma4
+      = inferenceComplexity coarseForcedDevice (setupLength coarseForcedDevice)
+          gamma4 coarse_weaklyInfers_gamma4 :=
+  inferenceComplexitySum_eq coarseForcedDevice (setupLength coarseForcedDevice)
+    gamma4 coarse_weaklyInfers_gamma4
+
 end AISafetyAtlas.Examples.Inference.Complexity

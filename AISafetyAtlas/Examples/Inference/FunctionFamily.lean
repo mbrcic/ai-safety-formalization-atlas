@@ -169,4 +169,32 @@ public theorem universalReality_stipulations :
   setup_two := fun _ => ⟨0, 1, by simp [universalReality]⟩
   func_two := fun _ => ⟨0, 1, by simp [universalReality]⟩
 
+/-! ## The printed two-clause definition, exercised at the witness above -/
+
+/-- Uniqueness at the (only) universal device, applied to itself. -/
+public theorem universalReality_isUniversalFull_unique :
+    (() : Unit) = () :=
+  FullReality.isUniversalFull_unique universalReality universalReality_surj
+    universalReality_isUniversalFull universalReality_isUniversalFull
+
+/-- The first clause, named, at the witness. -/
+public theorem universalReality_stronglyInfers_of_isUniversalFull :
+    ∀ α' : Unit, α' ≠ () →
+      StronglyInfers (universalReality.device universalReality_surj ())
+        (universalReality.device universalReality_surj α') :=
+  FullReality.stronglyInfers_of_isUniversalFull universalReality universalReality_surj
+    universalReality_isUniversalFull
+
+/-- The second clause, named, at the witness. -/
+public theorem universalReality_weaklyInfers_of_isUniversalFull :
+    WeaklyInfers (universalReality.device universalReality_surj ()) altFunc :=
+  FullReality.weaklyInfers_of_isUniversalFull universalReality universalReality_surj
+    universalReality_isUniversalFull ()
+
+/-- Lemma 1's realisation step, at the reality that contains every admissible
+function and its certified source stipulations. -/
+public theorem everyFunctionReality_isReducedForm :
+    IsReducedForm everyFunctionReality.reducedForm :=
+  isReducedForm_of_reality everyFunctionReality stipulations
+
 end AISafetyAtlas.Examples.Inference.FunctionFamily

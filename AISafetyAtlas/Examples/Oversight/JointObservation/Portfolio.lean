@@ -427,4 +427,16 @@ public theorem kBroad_not_costOptimal :
   rw [kBroad_cost, kNarrow_cost] at hle
   omega
 
+/-- Every candidate's declared cost is positive, on this instance's three
+indices — `2 * (coalition size - 1) + outputBits` is at least `1` throughout. -/
+public theorem cost_pos : ∀ i : CandIx, 0 < cost i := by decide
+
+/-- **The one provable direction of the two orderings, at this instance.**
+`kNarrow` is cost-optimal, so it is inclusion-minimal too — which
+`kNarrow_inclusionMinimal` already established directly; this is the same
+fact reached through the general theorem instead. -/
+public theorem kNarrow_inclusionMinimal_of_costOptimal :
+    InclusionMinimalCovering candidates hazards kNarrow :=
+  inclusionMinimal_of_costOptimal cost_pos kNarrow_costOptimal
+
 end AISafetyAtlas.Examples.Oversight.JointObservation.Portfolio

@@ -10,7 +10,7 @@ Edges come from the elaborated Lean environment. This answers the question the p
 
 So `A → B` means *`B` occurs in `A`'s statement, or in `A`'s body when `A` is a definition*. A lemma used only inside a proof does not appear. Reading the table as a complete call graph would be wrong, and the two sections below are scoped so that they stay true under this limit.
 
-`117` authored declarations in `AISafetyAtlas.Knowledge.*` (78 theorems). Compiler-generated companions and projections are dropped.
+`157` authored declarations in `AISafetyAtlas.Knowledge.*` (108 theorems). Compiler-generated companions and projections are dropped.
 
 ## Load-bearing declarations
 
@@ -18,16 +18,29 @@ Named in the statements of eight or more others. A change to one of these is a c
 
 | Declaration | Named by |
 |---|---|
-| `Knowable` | 59 |
-| `Embedded.Restriction` | 23 |
-| `Embedded.InferenceMap` | 19 |
-| `Embedded.Meshing` | 14 |
+| `Knowable` | 115 |
+| `Embedded.Restriction` | 24 |
+| `UniformlyActionable` | 22 |
+| `Embedded.InferenceMap` | 20 |
+| `Determines` | 20 |
+| `Access.AccessSetting` | 17 |
+| `Embedded.Meshing` | 15 |
+| `Access.scoreAccess` | 15 |
+| `Embedded.ProperInclusion` | 14 |
+| `Embedded.MeasuresAllStates` | 13 |
+| `Embedded.Composition.ProductState` | 13 |
+| `Access.blackBox` | 13 |
 | `ambiguity` | 12 |
-| `Embedded.ProperInclusion` | 11 |
+| `Embedded.InferenceMap.infer` | 10 |
 | `Devices.BlockwiseCollision` | 10 |
-| `Embedded.MeasuresAllStates` | 9 |
-| `Embedded.InferenceMap.infer` | 8 |
-| `Embedded.Composition.ProductState` | 8 |
+| `Access.whiteBox` | 10 |
+| `Temporal.KnowableFrom` | 8 |
+| `IncidentCount.Reporting.report` | 8 |
+| `IncidentCount.Reporting.count` | 8 |
+| `Embedded.Composition.productRestriction` | 8 |
+| `Embedded.Composition.fibreInference` | 8 |
+| `Devices.BlockAnswers` | 8 |
+| `Audit.AuditSetup.report` | 8 |
 
 ## Definitions no statement and no example mentions
 
@@ -42,6 +55,27 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 
 | Declaration | Kind | Names |
 |---|---|---|
+| `Access.AccessSetting` | definition | — |
+| `Access.blackBox` | definition | `Access.AccessSetting`, `Access.AccessSetting.behaviour` |
+| `Access.exists_indistinguishable_behaviour` | theorem | `Access.AccessSetting`, `Access.AccessSetting.behaviour`, `Access.blackBox`, `Knowable` |
+| `Access.no_blackBox_methodology` | theorem | `Access.AccessSetting`, `Access.blackBox`, `Knowable` |
+| `Access.no_scoreAccess_methodology` | theorem | `Access.AccessSetting`, `Access.scoreAccess`, `Knowable` |
+| `Access.not_blackBox_determines_scoreAccess` | theorem | `Access.AccessSetting`, `Access.AccessSetting.behaviour`, `Access.AccessSetting.scores`, `Access.blackBox`, `Access.scoreAccess`, `Determines` |
+| `Access.not_blackBox_knowable_of_behaviour_collision` | theorem | `Access.AccessSetting`, `Access.AccessSetting.behaviour`, `Access.blackBox`, `Knowable` |
+| `Access.not_scoreAccess_determines_whiteBox` | theorem | `Access.AccessSetting`, `Access.AccessSetting.scores`, `Access.scoreAccess`, `Access.whiteBox`, `Determines` |
+| `Access.not_scoreAccess_knowable_of_score_collision` | theorem | `Access.AccessSetting`, `Access.AccessSetting.scores`, `Access.scoreAccess`, `Knowable` |
+| `Access.scoreAccess` | definition | `Access.AccessSetting`, `Access.AccessSetting.scores` |
+| `Access.scoreAccess_determines_blackBox` | theorem | `Access.AccessSetting`, `Access.blackBox`, `Access.scoreAccess`, `Determines` |
+| `Access.scoreAccess_knowable_of_blackBox` | theorem | `Access.AccessSetting`, `Access.blackBox`, `Access.scoreAccess`, `Knowable` |
+| `Access.whiteBox` | definition | `Access.AccessSetting` |
+| `Access.whiteBox_determines_blackBox` | theorem | `Access.AccessSetting`, `Access.blackBox`, `Access.whiteBox`, `Determines` |
+| `Access.whiteBox_determines_scoreAccess` | theorem | `Access.AccessSetting`, `Access.scoreAccess`, `Access.whiteBox`, `Determines` |
+| `Access.whiteBox_knowable` | theorem | `Access.AccessSetting`, `Access.whiteBox`, `Knowable` |
+| `Access.whiteBox_knowable_of_scoreAccess` | theorem | `Access.AccessSetting`, `Access.scoreAccess`, `Access.whiteBox`, `Knowable` |
+| `ActionConflict` | definition | — |
+| `Audit.AuditSetup` | definition | — |
+| `Audit.audit_certifies_audited_not_deployed` | theorem | `Audit.AuditSetup`, `Audit.AuditSetup.report`, `Audit.AuditSetup.version`, `Temporal.KnowableFrom` |
+| `Audit.later_audit_does_not_close_the_gap` | theorem | `Audit.AuditSetup`, `Audit.AuditSetup.report`, `Audit.AuditSetup.version`, `Temporal.CollisionAt`, `Temporal.EvidenceMonotone`, `Temporal.KnowableAt`, `Temporal.KnowableFrom` |
 | `Check.collisionPairs` | definition | — |
 | `Check.decidableBlockwiseCollision` | definition | `Devices.BlockwiseCollision` |
 | `Check.decidableRealized` | definition | — |
@@ -110,9 +144,17 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 | `Embedded.no_meshing_inference_measures_all_states` | theorem | `Embedded.InferenceMap`, `Embedded.MeasuresAllStates`, `Embedded.Meshing`, `Embedded.ProperInclusion`, `Embedded.Restriction` |
 | `Embedded.no_meshing_inference_measures_all_states_direct` | theorem | `Embedded.InferenceMap`, `Embedded.MeasuresAllStates`, `Embedded.Meshing`, `Embedded.ProperInclusion`, `Embedded.Restriction` |
 | `Embedded.not_knowable_state_of_properInclusion` | theorem | `Embedded.ProperInclusion`, `Embedded.Restriction`, `Knowable` |
+| `FibrewiseAgreeable` | definition | — |
+| `IncidentCount.Reporting` | definition | — |
+| `IncidentCount.count_is_not_a_measurement` | theorem | `IncidentCount.Reporting`, `IncidentCount.Reporting.count`, `IncidentCount.Reporting.report` |
+| `IncidentCount.count_not_determined_of_collision` | theorem | `IncidentCount.Reporting`, `IncidentCount.Reporting.count`, `IncidentCount.Reporting.report`, `Knowable` |
+| `IncidentCount.knowable_of_report_carries_count` | theorem | `IncidentCount.Reporting`, `IncidentCount.Reporting.count`, `IncidentCount.Reporting.report`, `Knowable` |
+| `IncidentCount.schema_fixes_the_count` | theorem | `IncidentCount.Reporting`, `IncidentCount.Reporting.count`, `IncidentCount.Reporting.report`, `Knowable` |
 | `IndistinguishabilityWitness` | definition | — |
 | `Knowable` | definition | — |
 | `Knowable.mono` | theorem | `Determines`, `Knowable` |
+| `PairwiseAgreeable` | definition | — |
+| `PairwiseAgreeable.of_uniformlyActionable` | theorem | `PairwiseAgreeable`, `UniformlyActionable` |
 | `SelfReference.SelfComplete` | definition | `Knowable`, `SelfReference.SelfState`, `SelfReference.selfRead` |
 | `SelfReference.SelfState` | definition | — |
 | `SelfReference.card_rest_le_one_of_selfComplete` | theorem | `SelfReference.SelfComplete` |
@@ -127,6 +169,9 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 | `Temporal.collisionAt_of_not_knowableAt` | theorem | `Temporal.CollisionAt`, `Temporal.KnowableAt` |
 | `Temporal.knowableFrom_mono` | theorem | `Temporal.EvidenceMonotone`, `Temporal.KnowableFrom` |
 | `Temporal.not_knowableAt_of_collisionAt` | theorem | `Temporal.CollisionAt`, `Temporal.KnowableAt` |
+| `UniformlyActionable` | definition | — |
+| `UniformlyActionable.mono` | theorem | `Determines`, `UniformlyActionable` |
+| `UniformlyActionable.mono_good` | theorem | `UniformlyActionable` |
 | `ambiguity` | definition | `fibre` |
 | `ambiguity_eq_zero_of_not_mem_image` | theorem | `ambiguity` |
 | `ambiguity_le_of_comp` | theorem | `ambiguity` |
@@ -144,6 +189,7 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 | `knowable_iff_ambiguity_le_one` | theorem | `Knowable`, `ambiguity` |
 | `knowable_iff_factorsThrough` | theorem | `Knowable` |
 | `knowable_iff_no_collision` | theorem | `Knowable` |
+| `knowable_iff_uniformlyActionable` | theorem | `Knowable`, `UniformlyActionable` |
 | `knowable_iff_worstAmbiguity_le_one` | theorem | `Knowable`, `worstAmbiguity` |
 | `le_errorProb_of_decoder` | theorem | — |
 | `not_knowable_comp` | theorem | `Knowable` |
@@ -155,7 +201,14 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 | `not_knowable_of_witness` | theorem | `IndistinguishabilityWitness`, `Knowable` |
 | `not_knowable_pairTarget_of_not_knowable` | theorem | `Knowable`, `pairTarget` |
 | `not_knowable_state_of_nontrivial_remainder` | theorem | `Knowable` |
+| `not_uniformlyActionable_iff_exists_unservable` | theorem | `UniformlyActionable` |
+| `not_uniformlyActionable_of_conflict` | theorem | `ActionConflict`, `UniformlyActionable` |
 | `pairTarget` | definition | — |
 | `remainderWitness` | definition | `IndistinguishabilityWitness` |
+| `uniformlyActionable_iff_fibrewiseAgreeable` | theorem | `FibrewiseAgreeable`, `UniformlyActionable` |
+| `uniformlyActionable_iff_iInter_nonempty` | theorem | `UniformlyActionable` |
+| `uniformlyActionable_of_injective` | theorem | `UniformlyActionable` |
+| `uniformlyActionable_of_pairwiseAgreeable_of_card_le_two` | theorem | `PairwiseAgreeable`, `UniformlyActionable` |
+| `uniformlyActionable_of_universal` | theorem | `UniformlyActionable` |
 | `worstAmbiguity` | definition | `ambiguity` |
 | `worstAmbiguity_le_of_comp` | theorem | `worstAmbiguity` |

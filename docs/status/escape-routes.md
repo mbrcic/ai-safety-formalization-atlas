@@ -5,7 +5,7 @@ Every obstruction in this ledger rules something out. This page records, for the
 rows where anyone has decided it, **what you weaken to get out from under it** —
 and how much of that weakening the atlas actually establishes.
 
-Coverage: **10 routes** across **5 rows**, out of **91** results. **3** FORMALIZED, **2** STATED, **5** NAMED_ONLY.
+Coverage: **12 routes** across **6 rows**, out of **144** results. **5** FORMALIZED, **2** STATED, **5** NAMED_ONLY.
 
 **A row with no route here is not a claim that its result is inescapable.** It is
 a claim that nobody has decided the routes, exactly as an untyped row in
@@ -50,6 +50,8 @@ names a theorem.
 | LAND-CRMDP-KNOW-001 — True return does not factor through the observed history | `RESTRICT_CLASS` | `STATED` | — | `not_knowable_trueReturn_of_complement_mem` is class-relative by construction: it asks only that some admissible environment class contain an indistinguishable pair whose returns differ. Restricting the class until no such pair survives removes the hypothesis, which is what the module means by the routes being exact. Nothing here proves knowability follows from the restriction; the unrestricted corollary `not_knowable_trueReturn` is what shows the full class is sufficient, not necessary. |
 | LAND-KNOW-001 — Exact knowability: the observation-factorization kernel | `ADD_INFORMATION` | `FORMALIZED` | `AISafetyAtlas.Knowledge.Knowable.mono` | Knowability transfers to any more informative observation: if `finer` Determines `coarser` and the property is knowable from `coarser`, it is knowable from `finer`. The decoder is composed rather than reassembled, so the route is constructive and costs nothing beyond obtaining the finer observation. It was for a long time the only escape route in the ledger the tree proves rather than names; BY-010 now carries two more, each inhabited by a checked model. |
 | LAND-KNOW-001 — Exact knowability: the observation-factorization kernel | `RESTRICT_CLASS` | `STATED` | — | `knowable_iff_no_collision` makes the obstruction exactly a colliding pair, so removing every collision from the quantified domain removes the obstruction by the characterization itself. What it costs is not stated here: nothing says which restrictions are the ones a consumer can actually impose. |
+| LAND-KNOW-UNIFORM-001 — Acting acceptably without identifying the state: the uniform decision boundary | `ADD_INFORMATION` | `FORMALIZED` | `AISafetyAtlas.Knowledge.UniformlyActionable.mono` | The sketch's first repair. A more informative observation keeps every uniform rule the coarser one had, because the fibres only shrink; the rule is composed with the recovery map rather than reassembled. Witnessed by Examples.Knowledge.UniformAction.uniformlyActionable_sighted, where the same two demands become servable once the observation separates the states. |
+| LAND-KNOW-UNIFORM-001 — Acting acceptably without identifying the state: the uniform decision boundary | `RELAX_EXACTNESS` | `FORMALIZED` | `AISafetyAtlas.Knowledge.UniformlyActionable.mono_good` | The sketch's second repair, and the reason this module exists. Widening what counts as acceptable keeps every rule, and uniformlyActionable_of_universal is the degenerate case a designer reaches for: one action acceptable everywhere needs no observation at all. Witnessed by Examples.Knowledge.UniformAction.fallback_repairs_a_real_failure, which pairs the repair with the failure it repairs. |
 
 ## How to add one
 

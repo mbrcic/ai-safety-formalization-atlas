@@ -112,4 +112,11 @@ public theorem modelError_roundDown_skewed (M : Model V dim3 ℝ) :
       ≤ (3 : ℝ) * (1 / 10) :=
   modelError_roundDown_le M skewed eps_pos 3 fun _ ↦ le_refl 3
 
+/-- **The rounded model still carries the same graph, cited by name.**
+`parents_roundDown_skewed` above proves the same equality directly by `rfl`;
+this is the application that grounds the general theorem itself. -/
+public theorem skewed_parents_roundDown :
+    (skewed.roundDown eps_pos).parents = skewed.parents :=
+  Model.parents_roundDown skewed eps_pos
+
 end AISafetyAtlas.Examples.Causal.ModelSpace

@@ -306,7 +306,7 @@ Quot.sound}`; `closedUnderPermutation_constants` needs only `{Quot.sound}`. No
 
 ## AI-safety bridge
 
-None graduated. `ai_bridge_status` remains `HUMAN_REVIEW` on both rows.
+None graduated. `ai_interpretation_status` remains `HUMAN_REVIEW` on both rows.
 
 ## Reproduction
 

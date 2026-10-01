@@ -49,7 +49,7 @@ unchanged:
   or that a real question factors into oracle bits.
 
 No AI-system reading follows without a separate reviewed bridge
-(the landscape row's `ai_bridge_status` is unreviewed).
+(the landscape row's `ai_interpretation_status` is unreviewed).
 
 ## Why this module is not on the root import
 

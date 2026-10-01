@@ -258,7 +258,7 @@ outcome admitted under every strategy.
   no dynamics — so nothing in this formalization speaks to response latency.
   Chapter 12 and the Conant–Ashby good-regulator theorem (`survey-ref-025`) are
   where that thread continues; neither is formalized.
-* **No bridge to a real regulator is claimed.** `ai_bridge_status` stays
+* **No bridge to a real regulator is claimed.** `ai_interpretation_status` stays
   `HUMAN_REVIEW`.
 
 ## Reproduction

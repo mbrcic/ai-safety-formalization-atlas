@@ -224,4 +224,18 @@ public theorem entropy_eq_fano_of_witness {n : ℕ} (hn : 2 ≤ n) (y₀ : Fin n
     rw [hcard]
   rw [hent, herr, hcardn, fano_witness_identity hn hp0]
 
+/-- **Fano's inequality itself, at the witness that attains it.**
+`entropy_eq_fano_of_witness` proves the equality by computing both sides; this
+applies the general bound to the same measure. Together they say the inequality
+is tight along the whole curve `p ∈ [0, 1]`, which is what the section claims
+and what neither statement establishes alone. -/
+public theorem fano_bound_at_witness {n : ℕ} (hn : 2 ≤ n) (y₀ : Fin n) {p : ℝ}
+    (hp0 : 0 ≤ p) (hp1 : p ≤ 1) :
+    H[(id : Fin n → Fin n) ; fanoWitness hn y₀ hp0 hp1]
+      ≤ errorProb (fanoWitness hn y₀ hp0 hp1) id (fun _ => y₀)
+          * Real.log (((Finset.univ : Finset (Fin n)).card : ℝ) - 1)
+        + binEntropy (errorProb (fanoWitness hn y₀ hp0 hp1) id (fun _ => y₀)) :=
+  entropy_le_fano (A := (Finset.univ : Finset (Fin n))) _ measurable_id
+    (fun _ => Finset.mem_univ _) (Finset.mem_univ y₀)
+
 end AISafetyAtlas.Examples.InformationTheory

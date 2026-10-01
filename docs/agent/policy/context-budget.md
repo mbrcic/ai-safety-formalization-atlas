@@ -31,7 +31,7 @@ below are conditional and should be opened only when the task needs them.
 
 | Path | Why | When to open |
 |---|---|---|
-| Full [`registry.yaml`](../../../registry.yaml) | Redundant with `by-id.json` | One `BY-###`, `CLM-*`, or `LAND-*` via `rg` for notes / candidates / bridge_review |
+| Full [`registry.yaml`](../../../registry.yaml) | Redundant with `by-id.json` | One `BY-###`, `CLM-*`, or `LAND-*` via `rg` for notes / candidates / interpretation_review |
 | [`docs/provenance/formalization-search.json`](../../provenance/formalization-search.json) | Large discovery dump | Regenerating evidence or deep candidate audit |
 | [`ROADMAP.md`](../../../ROADMAP.md) | Human strategy, not live tasking | Maintainer names roadmap work |
 | `AISafetyAtlas/Upstream/**` | Large vendored/collapsed proofs | Editing that formalization only |

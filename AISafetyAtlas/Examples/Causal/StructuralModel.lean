@@ -24,13 +24,13 @@ is determined by `A`'s noise alone, through one level of recursion. -/
 
 public abbrev Two := Fin 2
 
-public abbrev bits : Two → ℕ := fun _ ↦ 2
+public abbrev bits : Two → Type := fun _ ↦ Fin 2
 
 /-- `A = ε_A`, and `B = A`. -/
 public noncomputable def copyChain : SCM Two bits bits where
-  dom_pos := fun _ ↦ by norm_num
+  dom_nonempty := fun _ ↦ ⟨0⟩
   parents := fun v ↦ if v = 1 then {0} else ∅
-  acyclic := acyclic_of_rank (fun v ↦ if v = 1 then 1 else 0) (by
+  acyclic := Causal.acyclic_of_rank (fun v ↦ if v = 1 then 1 else 0) (by
     intro v p hp; fin_cases v <;> simp_all)
   f := fun v a e ↦ if v = 1 then a 0 else e
   f_parents := fun v a b e h ↦ by
@@ -40,7 +40,7 @@ public noncomputable def copyChain : SCM Two bits bits where
     · simp [hv]
   exoProb := fun _ _ ↦ 1 / 2
   exoProb_nonneg := fun _ _ ↦ by norm_num
-  exoProb_sum := fun _ ↦ by rw [Fin.sum_univ_two]; norm_num
+  exoProb_tsum := fun _ ↦ by rw [tsum_fintype, Fin.sum_univ_two]; norm_num
 
 /-- `copyChain` is evaluable: the rank `B ↦ 1`, `A ↦ 0` discharges the
 recursion's hypothesis, which is the cheapest route on a finite diagram.
@@ -66,12 +66,54 @@ public theorem copyChain_eval_one (ε : ExoAssignment Two bits) :
   simp only [copyChain]
   exact copyChain_eval_zero ε
 
+/-- **The joint law is a probability.** The structural model's induced
+distribution over endogenous assignments sums to one, which is the fact every
+expectation in this cluster silently rests on. -/
+public theorem copyChain_jointProb_sum :
+    ∑ w : EndoAssignment Two bits, copyChain.jointProb w = 1 :=
+  SCM.jointProb_sum copyChain
+
+/-- **Evaluation depends on the exogenous draw only through the vertex and its
+parents.** Two draws agreeing at `B` and agreeing on `B`'s evaluated parents
+give the same value at `B`. This is the locality that makes the recursion a
+recursion, and nothing had run it. -/
+public theorem copyChain_eval_congr (ε ε' : ExoAssignment Two bits)
+    (hε : ε 1 = ε' 1) (hp : ∀ p ∈ copyChain.parents 1, copyChain.eval ε p = copyChain.eval ε' p) :
+    copyChain.eval ε 1 = copyChain.eval ε' 1 :=
+  SCM.eval_congr copyChain ε ε' 1 hε hp
+
+/-! ## No rank function on the integer chain
+
+`chainParents` is the diagram print's own acyclicity admits and evaluation does
+not. The rank characterisation says why in one step: a well-founded parent
+relation with finite parent sets is exactly one carrying a rank into `ℕ`, and
+the chain has no bottom to start counting from. -/
+
+/-- Each vertex of the chain has one parent, so the characterisation applies. -/
+public theorem chainParents_finite (v : ℤ) : (chainParents v).Finite :=
+  Set.finite_singleton _
+
+/-- **So no rank exists.** Not merely that none is obvious: the equivalence
+turns `chainParents_not_wellFounded` into the non-existence directly. -/
+public theorem chainParents_no_rank :
+    ¬ ∃ rank : ℤ → ℕ, ∀ v, ∀ p ∈ chainParents v, rank p < rank v :=
+  fun h => chainParents_not_wellFounded
+    ((wellFounded_iff_exists_rank chainParents_finite).mpr h)
+
+/-- **And the determinacy really fails there**, which is why `eval` takes a
+well-foundedness hypothesis rather than print's word `acyclic`: the copying
+equation on that chain has two constant solutions. -/
+public theorem chainParents_two_solutions :
+    ∃ W W' : ℤ → Fin 2, W ≠ W' ∧
+      (∀ v, W v = W (v - 1)) ∧ (∀ v, W' v = W' (v - 1)) :=
+  chainParents_fixedPoint_not_unique
+
 /-! ## Intervening
 
 `do(A = 1)` forces the root, and `B` follows it. -/
 
 public theorem copyChain_do_root (ε : ExoAssignment Two bits)
-    (x : Assignment Two bits) :
+    (x : EndoAssignment Two bits) :
     (copyChain.submodel {0} x).eval ε 0 = x 0 :=
   SCM.submodel_eval _ _ _ _ (by simp)
 
@@ -100,6 +142,13 @@ public theorem tinyCID_observations : tinyCID.observations 1 = {0} := by
 
 public theorem tinyCID_singleDecision : tinyCID.IsSingleDecision :=
   ⟨1, tinyCID_decisions⟩
+
+/-- **A vertex is not both a decision and a utility.** Print states the two roles
+as separate sets and never says they are disjoint; the atlas derives it from the
+labelling, and this runs it at the diagram above where the two sets are `{1}`
+and `{2}`. -/
+public theorem tinyCID_roles_disjoint : Disjoint tinyCID.decisions tinyCID.utilities :=
+  CID.decisions_disjoint_utilities tinyCID
 
 /-- **Teeth for `utility_childless`.** The same graph with the utility node given
 a child fails that clause and nothing else, so the field is a real condition and
@@ -131,10 +180,10 @@ ones. That is an instance of Definition 4, not a restriction of it — print's
 and a model may decline to use it. -/
 
 /-- Three binary variables: opinion, post, click. -/
-public abbrev figDim : Fin 3 → ℕ := fun _ ↦ 2
+public abbrev figDim : Fin 3 → Type := fun _ ↦ Fin 2
 
 /-- Only the opinion is random. -/
-public abbrev figExo : Fin 3 → ℕ := fun v ↦ if v = 0 then 2 else 1
+public abbrev figExo : Fin 3 → Type := fun v ↦ Fin (if v = 0 then 2 else 1)
 
 /-- `O → D`, and both into `U`. -/
 public noncomputable def figCID : CID (Fin 3) where
@@ -158,14 +207,14 @@ public theorem figCID_parents_decision : figCID.parents 1 = {0} := by
 /-- The opinion node copies its own noise; the click fires when post and opinion
 agree. The post has no structural function until a policy supplies one, which is
 Definition 4's whole asymmetry. -/
-@[expose] public def figF (v : Fin 3) (a : Assignment (Fin 3) figDim)
-    (e : Fin (figExo v)) : Fin (figDim v) :=
+@[expose] public def figF (v : Fin 3) (a : EndoAssignment (Fin 3) figDim)
+    (e : figExo v) : figDim v :=
   if v = 0 then ⟨e.val % 2, Nat.mod_lt _ (by norm_num)⟩
   else if a 0 = a 1 then 1 else 0
 
 /-- The SCIM of Figure 2a. -/
 @[expose] public noncomputable def figSCIM : SCIM (Fin 3) figDim figExo where
-  dom_pos := by decide
+  dom_nonempty := by intro v; fin_cases v <;> exact ⟨0⟩
   graph := figCID
   utilityValue := fun _ _ i ↦ (i : ℝ)
   utilityValue_injective := by
@@ -185,9 +234,10 @@ Definition 4's whole asymmetry. -/
   exoProb_nonneg := by
     intro v e
     by_cases h : v = 0 <;> simp [h]
-  exoProb_sum := by
+  exoProb_tsum := by
     intro v
-    by_cases h : v = 0 <;> simp [h]
+    rw [tsum_fintype]
+    by_cases h : v = 0 <;> simp [h, Finset.sum_const]
 
 /-- Figure 2a's diagram is evaluable: the vertex index is a rank. Definition 5's
 `V*(M)` runs `W(ε)` in `Mπ`, so every statement below about `optimalValue` and
@@ -200,7 +250,7 @@ public instance instIsWellFoundedFigSCIM : figSCIM.graph.IsWellFounded :=
 @[simp] public theorem figSCIM_graph : figSCIM.graph = figCID := rfl
 
 @[simp] public theorem figSCIM_utilityValue (u : Fin 3)
-    (hu : figSCIM.graph.IsUtility u) (i : Fin (figDim u)) :
+    (hu : figSCIM.graph.IsUtility u) (i : figDim u) :
     figSCIM.utilityValue u hu i = (i : ℝ) := rfl
 
 public theorem figSCIM_utilities : figSCIM.graph.utilities = {2} := by
@@ -224,7 +274,7 @@ public theorem figCID_notDownstream_zero : figCID.NotDownstream 0 := by
 in *Desc_D*, `Pr^π(x)` is independent of `π` and we simply write `Pr(x)`."* Here
 `X` is the opinion, and the marginal really is the same under every policy. -/
 public theorem figSCIM_marginal_opinion_policy_free (π π' : figSCIM.Policy)
-    (x : Assignment (Fin 3) figDim) :
+    (x : EndoAssignment (Fin 3) figDim) :
     (figSCIM.withPolicy π).marginal {0} x
       = (figSCIM.withPolicy π').marginal {0} x :=
   figSCIM.marginal_withPolicy_eq_of_notDownstream π π' {0}
@@ -233,6 +283,21 @@ public theorem figSCIM_marginal_opinion_policy_free (π π' : figSCIM.Policy)
       simp only [Finset.mem_singleton] at hc
       subst hc
       exact figCID_notDownstream_zero) x
+
+/-- **The same printed sentence at the probability law, and inhabited.** This is
+the general statement, with no finite vertex set and an arbitrary set of
+observables; `SCM.measurable_exo` discharges both side conditions here because
+the diagram has finitely many vertices, so on print's own figure the general
+form costs nothing the finite one did not. -/
+public theorem figSCIM_observableLaw_opinion_policy_free (π π' : figSCIM.Policy) :
+    (figSCIM.withPolicy π).observableLaw {0} (SCM.measurable_exo _)
+      = (figSCIM.withPolicy π').observableLaw {0} (SCM.measurable_exo _) :=
+  figSCIM.observableLaw_withPolicy_eq_of_notDownstream π π' {0}
+    (by
+      intro c hc
+      simp only [Set.mem_singleton_iff] at hc
+      subst hc
+      exact figCID_notDownstream_zero) _ _
 
 /-! ### Evaluating a policy -/
 
@@ -367,7 +432,7 @@ public theorem figCut_mem_decisions_one : figCut.graph.IsDecision (1 : Fin 3) :=
 /-- A policy in `M_{O↛D}` cannot read the opinion: its parent set is empty. -/
 public theorem figCut_policy_const (π : figCut.Policy)
     (d : {d : Fin 3 // figCut.graph.IsDecision d})
-    (a b : Assignment (Fin 3) figDim) (e : Fin (figExo d.1)) :
+    (a b : EndoAssignment (Fin 3) figDim) (e : figExo d.1) :
     π.1 d a e = π.1 d b e := by
   refine π.2 d a b e fun p hp ↦ ?_
   have hd : (d : Fin 3) = 1 :=
@@ -410,7 +475,7 @@ public theorem figCut_eval_one (π : figCut.Policy)
 public theorem figCut_utilities : figCut.graph.utilities = {2} := figSCIM_utilities
 
 @[simp] public theorem figCut_utilityValue (u : Fin 3)
-    (hu : figCut.graph.IsUtility u) (i : Fin (figDim u)) :
+    (hu : figCut.graph.IsUtility u) (i : figDim u) :
     figCut.utilityValue u hu i = (i : ℝ) := rfl
 
 public theorem figCut_expectedUtility (π : figCut.Policy) :
@@ -454,25 +519,27 @@ public theorem figCut_expectedUtility_eq (π : figCut.Policy) :
         = ∏ v : Fin 3,
             (if v = 0 then (if (ε v).val = c.val then (1 : ℝ) else 0) else 1) := by
     intro ε
-    rw [Fin.prod_univ_three, if_pos rfl, if_neg (by decide : ¬((1 : Fin 3) = 0)),
-      if_neg (by decide : ¬((2 : Fin 3) = 0)), mul_one, mul_one]
+    rw [Fin.prod_univ_three]
+    simp only [show ¬((1 : Fin 3) = 0) by decide,
+      show ¬((2 : Fin 3) = 0) by decide, if_false, mul_one]
+    simp
   simp only [hval, hprod]
   rw [(figCut.withPolicy π).exoJoint_mul_prod
     (fun v e ↦ if v = 0 then (if e.val = c.val then (1 : ℝ) else 0) else 1)]
-  have hexo : ∀ (v : Fin 3) (e : Fin (figExo v)),
+  have hexo : ∀ (v : Fin 3) (e : figExo v),
       (figCut.withPolicy π).exoProb v e = if v = 0 then 1 / 2 else 1 := fun _ _ ↦ rfl
   simp only [hexo, Fin.prod_univ_three,
     if_neg (by decide : ¬((1 : Fin 3) = 0)),
     if_neg (by decide : ¬((2 : Fin 3) = 0)), if_true, one_mul]
-  have hsum : (∑ x : Fin (figExo 0),
+  have hsum : (∑ x : figExo 0,
       (1 : ℝ) / 2 * if (x : ℕ) = (c : ℕ) then 1 else 0) = 1 / 2 := by
     show (∑ x : Fin 2, (1 : ℝ) / 2 * if (x : ℕ) = (c : ℕ) then 1 else 0) = 1 / 2
     rw [Fin.sum_univ_two]
     fin_cases c <;> norm_num
-  have h1 : (∑ _x : Fin (figExo 1), (1 : ℝ)) = 1 := by
+  have h1 : (∑ _x : figExo 1, (1 : ℝ)) = 1 := by
     show (∑ _x : Fin 1, (1 : ℝ)) = 1
     simp
-  have h2 : (∑ _x : Fin (figExo 2), (1 : ℝ)) = 1 := by
+  have h2 : (∑ _x : figExo 2, (1 : ℝ)) = 1 := by
     show (∑ _x : Fin 1, (1 : ℝ)) = 1
     simp
   rw [hsum, h1, h2, mul_one, mul_one]
@@ -487,12 +554,12 @@ policy *may* read the opinion, and `figCopy` does; only in `M_{O↛D}` is every
 policy forced to commit blind. Without this the `1/2` would be a number computed
 on a second structure whose difference from the first was never exercised. -/
 public theorem figSCIM_policy_not_const :
-    ¬ ∀ (π : figSCIM.Policy) (a b : Assignment (Fin 3) figDim)
-        (e : Fin (figExo 1)),
+    ¬ ∀ (π : figSCIM.Policy) (a b : EndoAssignment (Fin 3) figDim)
+        (e : figExo 1),
         π.1 ⟨1, figSCIM_mem_decisions_one⟩ a e
           = π.1 ⟨1, figSCIM_mem_decisions_one⟩ b e := by
   intro h
-  have hne : ((0 : Fin (figDim 0))) = 1 :=
+  have hne : ((0 : figDim 0)) = 1 :=
     h figCopy (fun _ ↦ 0) (fun _ ↦ 1) 0
   exact absurd hne (by decide)
 
@@ -505,5 +572,287 @@ public theorem figSCIM_opinion_isMaterial :
   show figCut.optimalValue < figSCIM.optimalValue
   rw [figCut_optimalValue, figSCIM_optimalValue]
   norm_num
+
+/-- Countably many independent bits: the new product-law layer is inhabited
+outside the finite vertex class of the old joint-probability operations. -/
+@[expose] public noncomputable def independentBits : SCM ℕ (fun _ ↦ Fin 2) (fun _ ↦ Fin 2) where
+  dom_nonempty := fun _ ↦ ⟨0⟩
+  parents := fun _ ↦ ∅
+  acyclic := by
+    intro v hv
+    cases hv with
+    | single h => exact h
+    | tail _ h => exact h
+  f := fun _ _ e ↦ e
+  f_parents := by intros; rfl
+  exoProb := fun _ _ ↦ 1 / 2
+  exoProb_nonneg := by intros; norm_num
+  exoProb_tsum := by intro v; rw [tsum_fintype]; norm_num [Fin.sum_univ_two]
+
+/-- A cylinder event in the infinite product has the original bit probability. -/
+public theorem independentBits_first_zero :
+    (independentBits.exoLaw : MeasureTheory.Measure (ExoAssignment ℕ (fun _ ↦ Fin 2)))
+      {ε | ε 0 = 0} = 1 / 2 := by
+  have hm := independentBits.exoLaw_map_eval 0
+  have he := congrArg (fun μ : MeasureTheory.Measure (Fin 2) ↦ μ {0}) hm
+  rw [MeasureTheory.Measure.map_apply (measurable_pi_apply 0)
+    (measurableSet_singleton 0)] at he
+  change (independentBits.exoLaw : MeasureTheory.Measure (ExoAssignment ℕ (fun _ ↦ Fin 2)))
+    ((fun ε ↦ ε 0) ⁻¹' ({0} : Set (Fin 2))) = 1 / 2
+  rw [PMF.toMeasure_apply_singleton _ _ (measurableSet_singleton _)] at he
+  rw [he]
+  show ENNReal.ofReal (independentBits.exoProb 0 0) = 1 / 2
+  norm_num [independentBits, ENNReal.ofReal_div_of_pos]
+
+/-- The bits have no parents, so the recursion bottoms out at once. -/
+public instance instIsWellFoundedIndependentBits : independentBits.IsWellFounded :=
+  ⟨⟨fun v ↦ ⟨v, fun p hp ↦ absurd hp (by simp [independentBits])⟩⟩⟩
+
+/-- Each bit is its own noise. -/
+public theorem independentBits_eval (ε : ExoAssignment ℕ (fun _ ↦ Fin 2)) (v : ℕ) :
+    independentBits.eval ε v = ε v :=
+  independentBits.eval_eq_f ε v
+
+/-- Evaluation is measurable here, which is what `SCM.endoLaw` asks for and what
+a vertex reading infinitely many parents would not give. Each bit reads one
+coordinate. -/
+public theorem independentBits_measurable_eval :
+    Measurable fun ε : ExoAssignment ℕ (fun _ ↦ Fin 2) ↦ independentBits.eval ε := by
+  refine measurable_pi_lambda _ fun v ↦ ?_
+  simp only [independentBits_eval]
+  exact measurable_pi_apply v
+
+/-- **Print's induced joint distribution, outside the finite vertex class.**
+
+`SCM.jointProb` is a sum over the fibres of `eval` and cannot be written at
+`V = ℕ` at all; `SCM.endoLaw` is print's *"this induces a joint distribution"*
+and can. Here evaluation is the identity, so the induced joint is the exogenous
+law and the first bit is still fair. -/
+public theorem independentBits_endoLaw_first_zero :
+    (independentBits.endoLaw independentBits_measurable_eval :
+      MeasureTheory.Measure (Assignment ℕ (fun _ ↦ 2))) {w | w 0 = 0} = 1 / 2 := by
+  rw [SCM.endoLaw]
+  show ((independentBits.exoLaw : MeasureTheory.Measure (ExoAssignment ℕ (fun _ ↦ Fin 2))).map
+    (fun ε ↦ independentBits.eval ε)) {w | w 0 = 0} = 1 / 2
+  rw [MeasureTheory.Measure.map_apply independentBits_measurable_eval
+    (measurableSet_eq_fun (measurable_pi_apply 0) measurable_const)]
+  have hpre : (fun ε : ExoAssignment ℕ (fun _ ↦ Fin 2) ↦ independentBits.eval ε) ⁻¹'
+      {w : Assignment ℕ (fun _ ↦ 2) | w 0 = 0} = {ε | ε 0 = 0} := by
+    ext ε
+    simp [independentBits_eval]
+  rw [hpre]
+  exact independentBits_first_zero
+
+/-! ## The structural bookkeeping, at these two models
+
+The lemmas below are applied at `copyChain` and `figSCIM` rather than left
+general. `figIgnore` exists so that the policy-invariance statement compares two
+genuinely different policies instead of one against itself.
+-/
+
+/-- Ignoring the opinion: the decision that is constant whatever it observes. -/
+public noncomputable def figIgnore : figSCIM.Policy :=
+  ⟨fun _ _ _ ↦ 0, by intros; rfl⟩
+
+/-- **Installing a policy does not touch the graph.** -/
+public theorem figSCIM_withPolicy_parents :
+    (figSCIM.withPolicy figCopy).parents = figSCIM.graph.parents :=
+  AISafetyAtlas.Causal.SCIM.withPolicy_parents figSCIM figCopy
+
+/-- **The exogenous law does not depend on the policy.** Compared here at the
+copying policy and one that ignores its observation, so the statement is about
+two policies that differ. -/
+public theorem figSCIM_exoLaw_withPolicy_eq :
+    (figSCIM.withPolicy figCopy).exoLaw = (figSCIM.withPolicy figIgnore).exoLaw :=
+  AISafetyAtlas.Causal.SCIM.exoLaw_withPolicy_eq figSCIM figCopy figIgnore
+
+/-- The exogenous law of a singleton is the product of the exogenous
+probabilities, at the chain that evaluates. -/
+public theorem copyChain_exoLaw_singleton (ε : ExoAssignment Two bits) :
+    (copyChain.exoLaw : MeasureTheory.Measure (ExoAssignment Two bits)) {ε}
+      = ENNReal.ofReal (copyChain.exoJoint ε) :=
+  AISafetyAtlas.Causal.SCM.exoLaw_singleton copyChain ε
+
+/-- **The induced joint is nonnegative.** `instIsWellFoundedCopyChain` is what
+lets this be asked at all: the hypothesis is discharged, not assumed. -/
+public theorem copyChain_jointProb_nonneg (w : EndoAssignment Two bits) :
+    0 ≤ copyChain.jointProb w :=
+  AISafetyAtlas.Causal.SCM.jointProb_nonneg copyChain w
+
+/-! ## Print's expectation, and the finite sums that compute it
+
+`SCIM.expectedUtility`, `SCIM.optimalValue` and `SCM.jointProb` are finite sums
+and exist only at a finite vertex set. Print's `Eπ[U]` and `Pr(W = w)` are an
+expectation and a distribution under `P(ε)`, which denote at any vertex set.
+The converting lemmas are exercised here, so every value computed above is a
+value of print's object.
+-/
+
+/-- The utility vertices of `figSCIM` form a finite type, which is what print's
+sum over `𝐔` needs in order to denote. It is not a bound on the vertex set. -/
+public noncomputable instance instFintypeFigUtilities :
+    Fintype {v : Fin 3 // figSCIM.graph.IsUtility v} :=
+  Fintype.ofFinite _
+
+/-- **The copying policy earns `1` under print's expectation**, not merely under
+the finite sum that computes it. -/
+public theorem figSCIM_expectedUtilityLaw_copy :
+    figSCIM.expectedUtilityLaw figCopy (SCM.measurable_exo _) = 1 := by
+  rw [figSCIM.expectedUtilityLaw_eq figCopy]
+  exact figSCIM_expectedUtility_copy
+
+/-- **And it is optimal in print's sense**, which is a comparison of expectations
+and needs no attainment. -/
+public theorem figSCIM_isOptimalPolicyLaw_copy :
+    figSCIM.IsOptimalPolicyLaw figCopy fun _ ↦ SCM.measurable_exo _ := by
+  rw [← figSCIM.isOptimalPolicy_iff_law figCopy]
+  intro π
+  exact figSCIM_expectedUtility_copy ▸ figSCIM_expectedUtility_le_one π
+
+/-- **`V*(M)` maximises print's expectation.** The `Fintype` on the vertex set is
+here for the maximum print writes, not for the expectation. -/
+public theorem figSCIM_optimalValue_law :
+    figSCIM.optimalValue = Finset.univ.sup' Finset.univ_nonempty
+      fun π : figSCIM.Policy ↦ figSCIM.expectedUtilityLaw π (SCM.measurable_exo _) :=
+  figSCIM.optimalValue_eq_sup'_law
+
+/-- **The induced joint is the law's singleton mass**, at the chain where the
+finite sum is already computed. -/
+public theorem copyChain_endoLaw_singleton (w : EndoAssignment Two bits) :
+    (copyChain.endoLaw (SCM.measurable_exo _) :
+      MeasureTheory.Measure (EndoAssignment Two bits)).real {w} = copyChain.jointProb w :=
+  copyChain.endoLaw_singleton w
+
+/-! ## Domains that are not `Fin n`
+
+Print's Definition 1 writes `dom(V)` with no cardinality condition, and imposes
+finiteness only at Definition 4, on domains. `SCM` carries a family of **types**
+for that reason, and these two models are what makes the difference visible: one
+whose domains are `Bool` rather than an index into `Fin 2`, and one whose
+domains are **infinite**, where `SCM.jointProb` cannot be written at all.
+-/
+
+/-- A one-variable model whose domain is `Bool` — a type print's `dom(V)`
+admits and `Fin`-indexed domains name only up to an isomorphism nobody supplies.
+-/
+@[expose] public noncomputable def boolFlip : SCM Unit (fun _ ↦ Bool) (fun _ ↦ Bool) where
+  dom_nonempty := fun _ ↦ ⟨false⟩
+  parents := fun _ ↦ ∅
+  acyclic := by
+    intro v hv
+    cases hv with
+    | single h => exact h
+    | tail _ h => exact h
+  f := fun _ _ e ↦ !e
+  f_parents := by intros; rfl
+  exoProb := fun _ _ ↦ 1 / 2
+  exoProb_nonneg := by intros; norm_num
+  exoProb_tsum := by
+    intro v
+    rw [tsum_fintype, Fintype.sum_bool]
+    norm_num
+
+/-- It evaluates, and the value is the negated noise. -/
+public instance instIsWellFoundedBoolFlip : boolFlip.IsWellFounded :=
+  ⟨⟨fun v ↦ ⟨v, fun p hp ↦ absurd hp (by simp [boolFlip])⟩⟩⟩
+
+/-- **Print's recursion at a `Bool` domain.** -/
+public theorem boolFlip_eval (ε : ExoAssignment Unit (fun _ ↦ Bool)) (v : Unit) :
+    boolFlip.eval ε v = !ε v := by
+  rw [boolFlip.eval_eq_f ε v]
+  rfl
+
+/-- The finite sums apply to it too: `Bool` is a `Fintype`, so print's
+Definition 4 layer is available without the domains being `Fin`-indexed. -/
+public theorem boolFlip_jointProb_sum :
+    ∑ w : EndoAssignment Unit (fun _ ↦ Bool), boolFlip.jointProb w = 1 :=
+  boolFlip.jointProb_sum
+
+/-- **A model with infinite domains.** The exogenous variable is a geometric
+draw on `ℕ` and the endogenous variable copies it, so `dom` and `edom` are both
+`ℕ`. Nothing here can be summed over the assignment space; `SCM.eval` and
+`SCM.submodel` are exactly the operations print's Definition 1 and Definition 2
+name, and they do not ask to be. -/
+@[expose] public noncomputable def geometricCopy : SCM Unit (fun _ ↦ ℕ) (fun _ ↦ ℕ) where
+  dom_nonempty := fun _ ↦ ⟨0⟩
+  parents := fun _ ↦ ∅
+  acyclic := by
+    intro v hv
+    cases hv with
+    | single h => exact h
+    | tail _ h => exact h
+  f := fun _ _ e ↦ e
+  f_parents := by intros; rfl
+  exoProb := fun _ n ↦ (1 / 2 : ℝ) ^ (n + 1)
+  exoProb_nonneg := by
+    intro v n
+    positivity
+  exoProb_tsum := by
+    intro v
+    have h : ∑' n : ℕ, (1 / 2 : ℝ) ^ (n + 1) = (1 / 2 : ℝ) * ∑' n : ℕ, (1 / 2 : ℝ) ^ n := by
+      rw [← tsum_mul_left]
+      exact tsum_congr fun n ↦ by ring
+    rw [h, tsum_geometric_two]
+    norm_num
+
+/-- It evaluates. -/
+public instance instIsWellFoundedGeometricCopy : geometricCopy.IsWellFounded :=
+  ⟨⟨fun v ↦ ⟨v, fun p hp ↦ absurd hp (by simp [geometricCopy])⟩⟩⟩
+
+/-- **Print's recursion at an infinite domain.** -/
+public theorem geometricCopy_eval (ε : ExoAssignment Unit (fun _ ↦ ℕ)) (v : Unit) :
+    geometricCopy.eval ε v = ε v := by
+  rw [geometricCopy.eval_eq_f ε v]
+  rfl
+
+/-- **Print's Definition 2 at an infinite domain.** Forcing the variable to `7`
+makes it `7`, and no sum over the assignment space is written anywhere. -/
+public theorem geometricCopy_submodel_eval
+    (ε : ExoAssignment Unit (fun _ ↦ ℕ)) (x : EndoAssignment Unit (fun _ ↦ ℕ)) :
+    (geometricCopy.submodel {()} x).eval ε () = x () :=
+  SCM.submodel_eval _ _ _ _ (by simp)
+
+/-- The marginals really are a distribution on an infinite domain. -/
+public theorem geometricCopy_exoProb_tsum (v : Unit) :
+    ∑' n : ℕ, geometricCopy.exoProb v n = 1 :=
+  geometricCopy.exoProb_tsum v
+
+/-! ### A policy is its decision rule, and nothing else
+
+`policy_ext_single` is what makes `SCIM.Policy` print's `π` at *"single-decision
+settings with `𝐃 = {D}`"*: the type is a family indexed by decision vertices,
+and print's datum is one rule. The two must agree, and on this diagram they do.
+
+Both halves are here. `constPolicy` supplies two policies that genuinely differ,
+so the extensionality below is not a statement about a one-element type; and
+`policy_eq_of_agree_at_decision` is the extensionality itself.
+-/
+
+/-- The policy that plays a fixed post whatever it sees. -/
+@[expose] public noncomputable def constPolicy (k : Fin 2) : figSCIM.Policy :=
+  ⟨fun _ _ _ => k, fun _ _ _ _ _ => rfl⟩
+
+/-- **Two of them differ**, so `figSCIM.Policy` is not a singleton and the
+extensionality below has something to rule out. -/
+public theorem constPolicy_ne : constPolicy 0 ≠ constPolicy 1 := by
+  intro h
+  have := congrFun (congrFun (congrFun (Subtype.ext_iff.mp h)
+    ⟨1, figSCIM_mem_decisions_one⟩) (fun _ => 0)) 0
+  exact absurd this (by decide)
+
+/-- **A policy is determined by what it does at the one decision.** Print writes
+`π` for a single rule; the atlas carries a family indexed by decision vertices,
+and on a single-decision diagram the two agree. -/
+public theorem policy_eq_of_agree_at_decision (π π' : figSCIM.Policy)
+    (h : ∀ (hd : figSCIM.graph.IsDecision 1) a e, π.1 ⟨1, hd⟩ a e = π'.1 ⟨1, hd⟩ a e) :
+    π = π' :=
+  figSCIM.policy_ext_single figCID_decisions h
+
+/-- So a policy agreeing with a constant one at the decision *is* that constant
+one -- the direction an argument uses when it has pinned down the rule. -/
+public theorem eq_constPolicy_of_agree (π : figSCIM.Policy)
+    (h : ∀ (hd : figSCIM.graph.IsDecision 1) a e, π.1 ⟨1, hd⟩ a e = 0) :
+    π = constPolicy 0 :=
+  policy_eq_of_agree_at_decision π (constPolicy 0) (fun hd a e => h hd a e)
 
 end AISafetyAtlas.Examples.Causal.StructuralModel

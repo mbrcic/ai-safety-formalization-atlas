@@ -26,8 +26,12 @@ public import Mathlib.Algebra.Group.Pi.Basic
   lengths in a language `L` and defines "comparable complexity" via a constant
   `c`; here the language is abstracted away and only the additive bounds it
   supplies are assumed. The bounds are stated with ℕ-valued complexity. The
-  concrete plain-Kolmogorov instantiation of the same argument, for the first
-  degenerate pair, is in `AISafetyAtlas.Preference.Complexity`.
+  concrete plain-Kolmogorov instantiation of the same argument is in
+  `AISafetyAtlas.Preference.Complexity`, where `behaviour_le_of_evaluatesTo` is
+  `policy_le_of_compatible` with the structure field `op3` replaced by a real
+  evaluation map — a planner program run on a reward. Nothing instantiates
+  `ReasonableLanguage` itself at plain Kolmogorov complexity; that needs
+  policies as bit strings and is not done.
 
 ## Explicit non-claims
 

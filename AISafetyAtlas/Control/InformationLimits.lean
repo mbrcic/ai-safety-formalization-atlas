@@ -473,6 +473,34 @@ public theorem measurable_plantOutcome (F : S → K → N → T)
     ((hX.prodMk hC).prodMk hZ)
 
 /--
+**Every plant is purified, and until 2026-09-21 nothing in the tree said so.**
+
+`IsPlant` says the outcome is a function of the triple; `Purified` says the
+triple leaves no entropy in the outcome. Those are the same statement in two
+registers, and the register the theorems below take their hypothesis in is the
+second — so a worked model could satisfy `IsPlant` by `rfl` and still be unable
+to reach eq. (28)'s results, because nothing carried it across. `plantOutcome`
+is literally a composite of `⟨⟨X, C⟩, Z⟩`, and that is the whole proof.
+
+The absence had a visible cost: `minControlLoss_eq_sInf_condMutualInfo`,
+`minControlLoss_eq_sInf_mutualInfo_sub` and
+`minControlLoss_eq_entropy_noise_iff_of_attained` all take `Purified` as a
+hypothesis and none of them had a witness anywhere in `Examples/`.
+-/
+public theorem purified_plantOutcome (μ : Measure Ω) [IsZeroOrProbabilityMeasure μ]
+    (F : S → K → N → T) {X : Ω → S} {C : Ω → K} {Z : Ω → N}
+    (hX : Measurable X) (hC : Measurable C) (hZ : Measurable Z)
+    [FiniteRange X] [FiniteRange C] [FiniteRange Z] :
+    Purified μ X C Z (plantOutcome F X C Z) := by
+  have hW : Measurable (⟨⟨X, C⟩, Z⟩ : Ω → (S × K) × N) :=
+    (hX.prodMk hC).prodMk hZ
+  have hcomp : plantOutcome F X C Z
+      = (fun p : (S × K) × N => F p.1.1 p.1.2 p.2) ∘ (⟨⟨X, C⟩, Z⟩ : Ω → (S × K) × N) := rfl
+  rw [Purified, hcomp, chain_rule'' μ (by rw [← hcomp]; exact measurable_plantOutcome F hX hC hZ)
+    hW, entropy_comm (by rw [← hcomp]; exact measurable_plantOutcome F hX hC hZ) hW,
+    entropy_prod_comp hW μ (fun p : (S × K) × N => F p.1.1 p.1.2 p.2), sub_self]
+
+/--
 **The controllers eq. (28) minimizes over.** The paper's `{p(c|x)}` are channels
 from the *state* to the action: the control input is chosen on `x` and on nothing
 else. So a policy tells you nothing about the actuation noise that the state does

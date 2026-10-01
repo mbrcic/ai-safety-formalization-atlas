@@ -81,5 +81,5 @@ Details: [`external-formalizations.md`](../provenance/external-formalizations.md
 
 None of them, by themselves, asserts that a particular AI system is
 unverifiable, unaligned, or unsafe. Connecting them to an AI-system model
-remains a separate bridge layer under `ai_bridge_status` / human review
+remains a separate bridge layer under `ai_interpretation_status` / human review
 ([methodology](methodology.md)).

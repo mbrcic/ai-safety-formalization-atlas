@@ -56,6 +56,12 @@ EXAMPLES = LIB / "Examples"
 
 # Flat files that witness no single module. Closed set: see the module docstring.
 HARNESSES = {
+    # Cross-cluster scenarios, added 2026-09-16. They mirror no module BY
+    # DESIGN: the point of each is that it composes several, and before them
+    # seven of 238 example files touched more than one library cluster. A
+    # scenario that served one module would not be showing what these show.
+    "DeployedAssistant",
+    "Practitioner",
     "FirstContribution",
     "HaltingExample",
     "NFLConcrete",

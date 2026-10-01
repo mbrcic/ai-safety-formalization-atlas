@@ -30,6 +30,14 @@ open AISafetyAtlas.Inference
 /-! ## Corollary 3 is non-vacuous -/
 
 open AISafetyAtlas.Examples.Inference.Device in
+/-- Weak inference is invariant under negating the target, at the column
+device and its own conclusion. -/
+public theorem colDevice_weaklyInfers_not_iff :
+    WeaklyInfers colDevice (fun u => !(colDevice.concl u)) ↔
+      WeaklyInfers colDevice colDevice.concl :=
+  weaklyInfers_not_iff colDevice colDevice.concl
+
+open AISafetyAtlas.Examples.Inference.Device in
 /-- The row/column devices already used for the 2008 Theorem 1 example have
 different conclusion partitions. -/
 public theorem row_col_conclusions_inequivalent :
@@ -421,5 +429,46 @@ public theorem corollary21_ii_counterexample :
   ⟨cor21_refines_first_implication, cor21_refines_second_implication,
     cor21_first_implication_true, cor21_knows_composite,
     cor21_second_implication_not_true⟩
+
+/-! ## The corollaries that had no instance
+
+Corollaries 20(iii), 20(iv), 21(i), 21(ii-repaired) and 23 were proved in the
+library and applied nowhere. The models in this file inhabit all five, and two
+of them say something the file did not already record.
+-/
+
+/-- The implication is true on the block, which is what `corollary20_i` gives
+from knowing it — the premise the mixed-hypothesis corollaries take. -/
+public theorem implication_true_on_distributionWorlds :
+    TrueOn distributionWorlds (Implies gamma1 gamma2) :=
+  true_on_of_physicallyKnows_true distributionWorlds_refines_implication knows_implication
+
+/-- **Corollary 21(i): one side known, the other merely true.** Weaker than
+20(ii), which wants both known, and it still reaches the consequent. At this
+device the antecedent is known and the implication is true. -/
+public theorem cor21_i_at_distribution : TrueOn distributionWorlds gamma2 :=
+  corollary21_i distributionWorlds_refines_gamma1 distributionWorlds_refines_implication
+    (Or.inl ⟨knows_gamma1, implication_true_on_distributionWorlds⟩)
+
+/-- **Corollary 23: two distinguishable devices cannot both know the other's
+conclusion.** At least one direction of physical knowledge fails outright, at
+every block and every value. Wolpert's Theorem 1 lifted to the knowledge
+operator, at the distinguishable pair this file already imports. -/
+public theorem cor23_at_row_col :
+    (∀ (W : Set (Bool × Bool)) (γ : Bool),
+        ¬ PhysicallyKnows Device.rowDevice Device.colDevice.concl γ W) ∨
+      (∀ (W : Set (Bool × Bool)) (γ : Bool),
+        ¬ PhysicallyKnows Device.colDevice Device.rowDevice.concl γ W) :=
+  corollary23 Device.row_col_distinguishable
+
+/-! ## Two corollaries left without an instance, and why
+
+`corollary20_iii` composes two *known* implications and
+`corollary21_ii_repaired` needs one implication known and the neighbouring one
+true. The models here know exactly one implication each: the distribution
+device knows `Γ₁ ⇒ Γ₂` and nothing else, and `cor21Device` knows only the
+composite `Γ₁ ⇒ Γ₃` — which is what makes it a counterexample to the printed
+21(ii) in the first place. Inhabiting either would mean a third device built for
+the purpose, not a line at an existing one. -/
 
 end AISafetyAtlas.Examples.Inference.PhysicalKnowledge.Epistemic

@@ -158,4 +158,88 @@ public theorem ashbyControl_capacity_lt_sum :
   have : (0 : ℝ) < Real.log 3 := Real.log_pos (by norm_num)
   linarith
 
+
+/-! ## The two capacity bounds, at a factorization with room to spare
+
+`FactorsThrough` at the identity would make both bounds read
+`channelCapacity Three ≤ channelCapacity Three`, which is true and says nothing.
+The factorization below routes both halves through a four-symbol alphabet, so
+each bound is a statement about two different capacities.
+
+The three entropy results of `AISafetyAtlas.Control.CompleteControl` are **not**
+applied here. Each needs a probability space carrying a measurable, finite-range
+controller and disturbance variable, and `mutualInfo_outcome_disturbance_eq_zero`
+needs them independent. That is a construction rather than an application, and
+nothing under Examples/ currently supplies it.
+-/
+
+/-- A channel alphabet with one symbol to spare. -/
+@[expose] public def wideChannel : Three → Fin 4 := Fin.castSucc
+
+/-- The strategy read through that wider alphabet. -/
+@[expose] public def wideStrategy : Fin 4 → Fin 4 → Three :=
+  fun a b ↦
+    if ha : (a : ℕ) < 3 then
+      (if hb : (b : ℕ) < 3 then ashbyControlStrategy ⟨a, ha⟩ ⟨b, hb⟩ else 0)
+    else 0
+
+/-- Ashby's strategy factors through the wider channel on both sides. -/
+public theorem ashbyControl_factorsThrough :
+    FactorsThrough ashbyControlStrategy wideChannel wideChannel wideStrategy := by
+  intro c d
+  fin_cases c <;> fin_cases d <;> decide
+
+/-- **Ex. 2, controller side.** A perfect regulator whose targets are separated
+forces the controller's channel to carry at least the controller's variety. -/
+public theorem ashbyControl_controller_capacity_le :
+    channelCapacity Three ≤ channelCapacity (Fin 4) :=
+  channelCapacity_controller_le_channel ashbyControl_isPerfectRegulator
+    injective_id ashbyControl_factorsThrough
+
+/-- **Ex. 2, disturbance side.** The Latin-square hypothesis is
+`ashbyControlTable_columns_injective`, met by Ashby's own table. -/
+public theorem ashbyControl_disturbance_capacity_le :
+    channelCapacity Three ≤ channelCapacity (Fin 4) :=
+  channelCapacity_disturbance_le_channel ashbyControl_isPerfectRegulator
+    ashbyControlTable_columns_injective ashbyControl_factorsThrough
+
+/-! ## The three entropy identities, at a concrete probability space
+
+`Ω := Three`, `μ := uniformOn Set.univ` — the same finite-uniform device
+`InformationLimits.lean` uses throughout. `Cv := id` (varying with the
+controller alphabet) and `Dv := fun _ => 0` (constant, hence independent of
+*anything* by `indepFun_const_right`, the same trick that file uses). This is
+the construction the module docstring above says nothing under `Examples/`
+supplied.
+-/
+
+instance : FiniteRange (id : Three → Three) := ⟨Set.toFinite _⟩
+instance : FiniteRange (fun _ : Three => (0 : Three)) := ⟨Set.toFinite _⟩
+
+/-- **Transmitting nothing from `D`, at Ashby's own regulator.** -/
+public theorem ashbyControl_condEntropy_outcome_controller :
+    H[(fun ω => ashbyControlTable ((0 : Three)) (ashbyControlStrategy ω (0 : Three))) |
+        (id : Three → Three) ; uniformOn (Set.univ : Set Three)] = 0 :=
+  condEntropy_outcome_controller ashbyControl_isPerfectRegulator measurable_id
+    (fun _ : Three => (0 : Three)) measurable_id
+
+/-- **Transmitting fully from `C`, at Ashby's own regulator.** -/
+public theorem ashbyControl_entropy_outcome_eq_entropy_controller :
+    H[(fun ω => ashbyControlTable ((0 : Three)) (ashbyControlStrategy ω (0 : Three))) ;
+        uniformOn (Set.univ : Set Three)]
+      = H[(id : Three → Three) ; uniformOn (Set.univ : Set Three)] :=
+  entropy_outcome_eq_entropy_controller ashbyControl_isPerfectRegulator measurable_id
+    (fun _ : Three => (0 : Three)) injective_id
+
+/-- **Ashby's independence sentence, at Ashby's own regulator.** The
+disturbance is constant here, hence trivially independent of the controller
+— the cheapest instance of `IndepFun`, not a claim about a richer joint law. -/
+public theorem ashbyControl_mutualInfo_outcome_disturbance_eq_zero :
+    I[(fun ω => ashbyControlTable ((fun _ : Three => (0 : Three)) ω)
+        (ashbyControlStrategy ω ((fun _ : Three => (0 : Three)) ω))) :
+        (fun _ : Three => (0 : Three)) ; uniformOn (Set.univ : Set Three)] = 0 :=
+  mutualInfo_outcome_disturbance_eq_zero ashbyControl_isPerfectRegulator measurable_id
+    measurable_const measurable_id
+    (ProbabilityTheory.indepFun_const_right (id : Three → Three) (0 : Three))
+
 end AISafetyAtlas.Examples.Control
