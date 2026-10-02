@@ -29,6 +29,7 @@ LEAN_ROOT = ROOT / "AISafetyAtlas"
 MARKDOWN_ROOTS = (
     ROOT / "README.md",
     ROOT / "STATE.md",
+    ROOT / "docs" / "releases" / "unreleased.md",
     ROOT / "docs" / "guide",
     ROOT / "docs" / "provenance",
 )

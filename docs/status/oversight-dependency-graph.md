@@ -10,7 +10,7 @@ Edges come from the elaborated Lean environment. This answers the question the p
 
 So `A → B` means *`B` occurs in `A`'s statement, or in `A`'s body when `A` is a definition*. A lemma used only inside a proof does not appear. Reading the table as a complete call graph would be wrong, and the two sections below are scoped so that they stay true under this limit.
 
-`75` authored declarations in `AISafetyAtlas.Oversight.*` (26 theorems). Compiler-generated companions and projections are dropped.
+`95` authored declarations in `AISafetyAtlas.Oversight.*` (40 theorems). Compiler-generated companions and projections are dropped.
 
 ## Load-bearing declarations
 
@@ -18,26 +18,31 @@ Named in the statements of eight or more others. A change to one of these is a c
 
 | Declaration | Named by |
 |---|---|
-| `JointObservation.EvidenceArchitecture` | 49 |
-| `JointObservation.CandidateObservation` | 39 |
-| `JointObservation.Covers` | 25 |
-| `JointObservation.Hazard` | 23 |
-| `JointObservation.EvidenceArchitecture.Execution` | 22 |
-| `JointObservation.CandidateObservation.Output` | 21 |
-| `JointObservation.EvidenceArchitecture.Principal` | 12 |
-| `JointObservation.CandidateObservation.observe` | 12 |
+| `JointObservation.EvidenceArchitecture` | 57 |
+| `JointObservation.CandidateObservation` | 41 |
+| `JointObservation.Covers` | 36 |
+| `JointObservation.EvidenceArchitecture.Execution` | 30 |
+| `JointObservation.CandidateObservation.Output` | 29 |
+| `JointObservation.Hazard` | 27 |
+| `Forces` | 26 |
+| `JointObservation.EvidenceArchitecture.Principal` | 24 |
+| `JointObservation.CandidateObservation.observe` | 17 |
+| `JointObservation.consortiumCandidate` | 14 |
+| `Debate.Oracle` | 13 |
 | `JointObservation.CandidateFamily.Index` | 11 |
 | `JointObservation.CandidateFamily` | 11 |
-| `Debate.Oracle` | 11 |
 | `JointObservation.Portfolio` | 10 |
-| `Forces` | 9 |
-| `JointObservation.CollisionWitness` | 8 |
-| `JointObservation.CoalitionInput` | 8 |
+| `JointObservation.EvidenceArchitecture.privateState` | 10 |
+| `JointObservation.CoalitionInput` | 10 |
+| `Debate.protocol` | 10 |
+| `JointObservation.registryCandidate` | 9 |
+| `JointObservation.CollisionWitness` | 9 |
+| `JointObservation.CandidateObservation.postprocess` | 9 |
+| `Debate.Bob` | 9 |
+| `Debate.Alice` | 9 |
+| `JointObservation.EvidenceArchitecture.emit` | 8 |
 | `Debate.verifier` | 8 |
-| `Debate.protocol` | 8 |
 | `Debate.Params` | 8 |
-| `Debate.Bob` | 8 |
-| `Debate.Alice` | 8 |
 
 ## Definitions no statement and no example mentions
 
@@ -45,7 +50,6 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 
 **Instances always appear here.** Typeclass resolution names nothing, so an instance has no textual user even when every consumer depends on it. Deleting one because it is listed here is how a checker stops compiling.
 
-- `Debate.Party`
 - `JointObservation.decidableCovers`
 
 ## Direct dependencies
@@ -72,6 +76,7 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 | `Debate.soundness` | theorem | `Debate.Alice`, `Debate.Lipschitz`, `Debate.Oracle`, `Debate.Params`, `Debate.finalAnswer`, `Debate.honestBob`, `Debate.protocol`, `Debate.verifier` |
 | `Debate.vera_fast` | theorem | `Debate.Alice`, `Debate.Bob`, `Debate.Oracle`, `Debate.Params`, `Debate.defaultParams`, `Debate.protocol`, `Debate.verifier` |
 | `Debate.verifier` | definition | `Debate.Vera` |
+| `Decisive` | definition | `collapse` |
 | `Forces` | definition | — |
 | `JointObservation.CandidateFamily` | definition | `JointObservation.EvidenceArchitecture` |
 | `JointObservation.CandidateObservation` | definition | `JointObservation.EvidenceArchitecture` |
@@ -98,6 +103,10 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 | `JointObservation.PortfolioCovers` | definition | `JointObservation.CandidateFamily`, `JointObservation.CandidateFamily.Index`, `JointObservation.CandidateFamily.candidate`, `JointObservation.Covers`, `JointObservation.EvidenceArchitecture`, `JointObservation.HazardFamily`, `JointObservation.HazardFamily.Index`, `JointObservation.HazardFamily.hazard`, `JointObservation.Portfolio` |
 | `JointObservation.PortfolioIndistinguishable` | definition | `JointObservation.CandidateFamily`, `JointObservation.CandidateFamily.Index`, `JointObservation.CandidateFamily.candidate`, `JointObservation.CandidateObservation.Output`, `JointObservation.CandidateObservation.observe`, `JointObservation.EvidenceArchitecture`, `JointObservation.EvidenceArchitecture.Execution`, `JointObservation.Portfolio` |
 | `JointObservation.Refines` | definition | `JointObservation.CandidateObservation`, `JointObservation.CandidateObservation.Output`, `JointObservation.CandidateObservation.observe`, `JointObservation.EvidenceArchitecture`, `JointObservation.EvidenceArchitecture.Execution` |
+| `JointObservation.consortiumCandidate` | definition | `JointObservation.CandidateObservation`, `JointObservation.CoalitionInput`, `JointObservation.EvidenceArchitecture`, `JointObservation.EvidenceArchitecture.Principal` |
+| `JointObservation.consortiumCandidate_observe` | theorem | `JointObservation.CandidateObservation.Output`, `JointObservation.CandidateObservation.observe`, `JointObservation.EvidenceArchitecture`, `JointObservation.EvidenceArchitecture.Execution`, `JointObservation.EvidenceArchitecture.Principal`, `JointObservation.EvidenceArchitecture.privateState`, `JointObservation.consortiumCandidate` |
+| `JointObservation.consortium_covers_and_registry_does_not` | theorem | `JointObservation.Covers`, `JointObservation.EvidenceArchitecture`, `JointObservation.EvidenceArchitecture.EmittedView`, `JointObservation.EvidenceArchitecture.Execution`, `JointObservation.EvidenceArchitecture.Principal`, `JointObservation.EvidenceArchitecture.emit`, `JointObservation.EvidenceArchitecture.privateState`, `JointObservation.Hazard`, `JointObservation.consortiumCandidate`, `JointObservation.registryCandidate` |
+| `JointObservation.consortium_covers_of_registry_covers` | theorem | `JointObservation.Covers`, `JointObservation.EvidenceArchitecture`, `JointObservation.EvidenceArchitecture.Principal`, `JointObservation.Hazard`, `JointObservation.consortiumCandidate`, `JointObservation.registryCandidate` |
 | `JointObservation.covers_iff_no_collision` | theorem | `JointObservation.CandidateObservation`, `JointObservation.CandidateObservation.Output`, `JointObservation.CandidateObservation.observe`, `JointObservation.Covers`, `JointObservation.EvidenceArchitecture`, `JointObservation.EvidenceArchitecture.Execution`, `JointObservation.Hazard` |
 | `JointObservation.covers_iff_residual_le_one` | theorem | `JointObservation.CandidateObservation`, `JointObservation.CandidateObservation.Output`, `JointObservation.Covers`, `JointObservation.EvidenceArchitecture`, `JointObservation.EvidenceArchitecture.Execution`, `JointObservation.Hazard`, `JointObservation.residual` |
 | `JointObservation.covers_iff_worstResidual_le_one` | theorem | `JointObservation.CandidateObservation`, `JointObservation.CandidateObservation.Output`, `JointObservation.Covers`, `JointObservation.EvidenceArchitecture`, `JointObservation.EvidenceArchitecture.Execution`, `JointObservation.Hazard`, `JointObservation.worstResidual` |
@@ -112,18 +121,33 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 | `JointObservation.localCandidate` | definition | `JointObservation.CandidateObservation`, `JointObservation.CoalitionInput`, `JointObservation.EvidenceArchitecture`, `JointObservation.EvidenceArchitecture.EmittedView`, `JointObservation.EvidenceArchitecture.Principal`, `JointObservation.EvidenceArchitecture.emit` |
 | `JointObservation.localFamily` | definition | `JointObservation.CandidateFamily`, `JointObservation.EvidenceArchitecture`, `JointObservation.EvidenceArchitecture.Principal`, `JointObservation.localCandidate` |
 | `JointObservation.not_covers_of_collisionWitness` | theorem | `JointObservation.CandidateObservation`, `JointObservation.CollisionWitness`, `JointObservation.Covers`, `JointObservation.EvidenceArchitecture`, `JointObservation.Hazard` |
+| `JointObservation.not_registry_covers_of_emit_collision` | theorem | `JointObservation.Covers`, `JointObservation.EvidenceArchitecture`, `JointObservation.EvidenceArchitecture.EmittedView`, `JointObservation.EvidenceArchitecture.Execution`, `JointObservation.EvidenceArchitecture.Principal`, `JointObservation.EvidenceArchitecture.emit`, `JointObservation.EvidenceArchitecture.privateState`, `JointObservation.Hazard`, `JointObservation.registryCandidate` |
 | `JointObservation.observe_postprocess` | theorem | `JointObservation.CandidateObservation`, `JointObservation.CandidateObservation.Output`, `JointObservation.CandidateObservation.observe`, `JointObservation.CandidateObservation.postprocess`, `JointObservation.EvidenceArchitecture`, `JointObservation.EvidenceArchitecture.Execution` |
 | `JointObservation.observe_truthful` | theorem | `JointObservation.CandidateObservation`, `JointObservation.CandidateObservation.Output`, `JointObservation.CandidateObservation.coalition`, `JointObservation.CandidateObservation.joint`, `JointObservation.CandidateObservation.observe`, `JointObservation.EvidenceArchitecture`, `JointObservation.EvidenceArchitecture.Execution`, `JointObservation.EvidenceArchitecture.Principal`, `JointObservation.EvidenceArchitecture.privateState` |
 | `JointObservation.portfolioCovers_implies_hazardEquivalent` | theorem | `JointObservation.CandidateFamily`, `JointObservation.EvidenceArchitecture`, `JointObservation.EvidenceArchitecture.Execution`, `JointObservation.HazardFamily`, `JointObservation.HazardFamily.Index`, `JointObservation.HazardFamily.hazard`, `JointObservation.Portfolio`, `JointObservation.PortfolioCovers`, `JointObservation.PortfolioIndistinguishable` |
 | `JointObservation.postprocess_cannot_repair_collision` | theorem | `JointObservation.CandidateObservation`, `JointObservation.CandidateObservation.Output`, `JointObservation.CandidateObservation.postprocess`, `JointObservation.Covers`, `JointObservation.EvidenceArchitecture`, `JointObservation.Hazard` |
 | `JointObservation.privateSingletonCandidate` | definition | `JointObservation.CandidateObservation`, `JointObservation.CoalitionInput`, `JointObservation.EvidenceArchitecture`, `JointObservation.EvidenceArchitecture.Principal`, `JointObservation.EvidenceArchitecture.PrivateField` |
 | `JointObservation.refines_postprocess` | theorem | `JointObservation.CandidateObservation`, `JointObservation.CandidateObservation.Output`, `JointObservation.CandidateObservation.postprocess`, `JointObservation.EvidenceArchitecture`, `JointObservation.Refines` |
+| `JointObservation.registryCandidate` | definition | `JointObservation.CandidateObservation`, `JointObservation.CoalitionInput`, `JointObservation.EvidenceArchitecture`, `JointObservation.EvidenceArchitecture.EmittedView`, `JointObservation.EvidenceArchitecture.Principal`, `JointObservation.EvidenceArchitecture.emit` |
+| `JointObservation.registryCandidate_observe` | theorem | `JointObservation.CandidateObservation.Output`, `JointObservation.CandidateObservation.observe`, `JointObservation.EvidenceArchitecture`, `JointObservation.EvidenceArchitecture.Execution`, `JointObservation.EvidenceArchitecture.Principal`, `JointObservation.EvidenceArchitecture.emit`, `JointObservation.EvidenceArchitecture.privateState`, `JointObservation.registryCandidate` |
 | `JointObservation.residual` | definition | `JointObservation.CandidateObservation`, `JointObservation.CandidateObservation.Output`, `JointObservation.CandidateObservation.observe`, `JointObservation.EvidenceArchitecture`, `JointObservation.EvidenceArchitecture.Execution` |
 | `JointObservation.worstResidual` | definition | `JointObservation.CandidateObservation`, `JointObservation.CandidateObservation.Output`, `JointObservation.CandidateObservation.observe`, `JointObservation.EvidenceArchitecture`, `JointObservation.EvidenceArchitecture.Execution` |
 | `JointObservation.worstResidual_le_postprocess` | theorem | `JointObservation.CandidateObservation`, `JointObservation.CandidateObservation.Output`, `JointObservation.CandidateObservation.postprocess`, `JointObservation.EvidenceArchitecture`, `JointObservation.EvidenceArchitecture.Execution`, `JointObservation.decidableEqPostprocessOutput`, `JointObservation.worstResidual` |
+| `RobustlyForces` | definition | `Forces` |
+| `RobustlyForces.forces` | theorem | `Forces`, `RobustlyForces` |
+| `arena_collapse_eq` | theorem | `effectArena` |
 | `cannotForce` | definition | — |
+| `collapse` | definition | — |
+| `decisive_iff` | theorem | `Decisive` |
+| `effectArena` | definition | — |
 | `exists_cannotForce_false_and_forces` | theorem | `Forces`, `cannotForce` |
+| `exists_forces_iff_arena_forces` | theorem | `Forces`, `effectArena` |
+| `forces_iff_composite_constant` | theorem | `Forces` |
 | `forces_of_constant_effect` | theorem | `Forces` |
 | `forces_of_constant_effect_of_not_knowable` | theorem | `Forces` |
+| `forces_of_decisive` | theorem | `Decisive`, `Forces` |
+| `not_decisive_of_injective` | theorem | `Decisive` |
 | `not_forces_of_cannotForce` | theorem | `Forces`, `cannotForce` |
 | `not_forces_of_card_lt` | theorem | `Forces` |
+| `not_robustlyForces_of_exists_not` | theorem | `Forces`, `RobustlyForces` |
+| `robustlyForces_of_decisive` | theorem | `Decisive`, `RobustlyForces` |

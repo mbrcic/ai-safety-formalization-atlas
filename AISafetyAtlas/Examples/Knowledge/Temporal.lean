@@ -84,6 +84,15 @@ example : ¬ KnowableAt observe target 0 :=
   not_knowableAt_of_collisionAt
     ⟨(false, false), (true, false), rfl, by decide⟩
 
+/-- **And the converse direction, which is the one an argument uses.** The two
+failures above are exhibited by naming the colliding pair; this recovers such a
+pair *from* the failure, so an impossibility proved some other way still hands
+back a concrete witness. Run at the time-0 failure. -/
+theorem collision_recovered_at_zero : CollisionAt observe target 0 :=
+  collisionAt_of_not_knowableAt
+    (not_knowableAt_of_collisionAt
+      ⟨(false, false), (true, false), rfl, by decide⟩)
+
 /-! ## Both halves together
 
 `DelayedKnowable observe target 0 1` is exactly "the time-0 target is not

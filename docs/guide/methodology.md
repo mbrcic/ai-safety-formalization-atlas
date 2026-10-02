@@ -269,14 +269,14 @@ Whether a row has Lean behind it is read from the row, not stored beside it: a
 duplicating that fact, and a validator asserting the two agreed — a stored copy
 of something already computable is a second thing to keep in sync for no gain.
 
-`ai_bridge_status` is separate and has a defined lifecycle vocabulary:
+`ai_interpretation_status` is separate and has a defined lifecycle vocabulary:
 `HUMAN_REVIEW`, `STATEMENT_REVIEWED`, and `REVIEWED`. `HUMAN_REVIEW` (the
 default) means no theorem connecting the mathematics to an AI-system claim has
 passed semantic review. `STATEMENT_REVIEWED` means a maintainer has reviewed and
 accepted the encoded mathematical statement of the bridge, but not its
 AI-system interpretation. `REVIEWED` means both the mathematical statement and
 the AI-system interpretation have passed maintainer review. It is not a general
-progress state. Any status other than `HUMAN_REVIEW` requires a `bridge_review`
+progress state. Any status other than `HUMAN_REVIEW` requires a `interpretation_review`
 record (`reviewer`, `date`, `statement_reviewed`, `interpretation_reviewed`,
 `evidence`); a `HUMAN_REVIEW` row must carry none. The v0.1 release shipped all
 rows at `HUMAN_REVIEW`, and that historical snapshot is asserted only by the
@@ -339,16 +339,16 @@ inherit an AI-safety interpretation.
 
 ### Which declarations need bridge review?
 
-| Declaration type | Bridge review (`ai_bridge_status`)? |
+| Declaration type | Bridge review (`ai_interpretation_status`)? |
 |---|---|
 | `WRAPPER` / `REFERENCE` of classical math | **No** by default — classical content is not an AI-system claim. Row may still carry `HUMAN_REVIEW` until any BRIDGE on that row is reviewed. |
 | `BRIDGE` with AI-facing vocabulary (agents, verifiers, safety specs, robots, …) | **Yes** before treating the row as `STATEMENT_REVIEWED` or `REVIEWED`. |
 | `NEW_PROOF` of classical math only | Usually no AI bridge review unless an AI-system reading is asserted. |
-| Landscape entries | Not survey `ai_bridge_status`; document scope in landscape notes / literature map. |
+| Landscape entries | Not survey `ai_interpretation_status`; document scope in landscape notes / literature map. |
 
-**Row-level status:** `ai_bridge_status` is per survey result. When a row mixes
+**Row-level status:** `ai_interpretation_status` is per survey result. When a row mixes
 wrappers and bridges, a `REVIEWED` status documents the **AI-facing bridge(s)**
-named in `bridge_review.evidence`, not a re-review of every upstream classical
+named in `interpretation_review.evidence`, not a re-review of every upstream classical
 proof. State that clearly in the evidence file and release notes (see v0.2).
 
 ## New proofs and bridges
@@ -402,7 +402,7 @@ Validators do **not** prove:
    axioms beyond what `#print axioms` reports for the atlas wrapper theorems.
 
 "Validators pass" therefore never means "coverage labels and AI-safety
-interpretations are approved." Those remain under `ai_bridge_status` and human
+interpretations are approved." Those remain under `ai_interpretation_status` and human
 review.
 
 ## Blocking policy

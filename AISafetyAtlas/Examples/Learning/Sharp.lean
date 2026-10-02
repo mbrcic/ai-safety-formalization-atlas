@@ -52,6 +52,11 @@ namespace AISafetyAtlas.Examples.Learning
 open AISafetyAtlas.Learning
 open AISafetyAtlas.Combinatorics
 
+-- A few witnesses below let Lean infer their (Prop-valued) type from the
+-- applied term rather than restating it, to avoid a `Decidable`-instance
+-- diamond between this file's fresh elaboration and the source theorem's own.
+set_option linter.defProp false
+
 /-! ## A counterexample off the condition
 
 Domain and codomain are both `Fin 2`. The weight is concentrated on the identity
@@ -401,5 +406,161 @@ public theorem arrowRel_not_permInvariant :
       ¬ (arrowRel (π a) (π b) ↔ arrowRel a b) :=
   exists_perm_rel_not_iff ⟨0, 1, by decide, ⟨rfl, rfl⟩⟩
     ⟨1, 0, by decide, fun h => absurd h.1 (by decide)⟩
+
+/-! ## Section-3/4 vocabulary, applied at the witnesses above -/
+
+/-- 0-1 loss on `Bool` is homogeneous. -/
+public theorem homogeneous_zeroOne_bool : HomogeneousLoss
+    (fun a y : Bool => if a = y then (0 : ℝ) else 1) :=
+  homogeneous_zeroOne (Y := Bool)
+
+/-- The raw-embedding form of no-free-lunch, at `observedValue` and the same
+two one-query embeddings `nfl_fails_off_permInvariant` uses — this time
+summed unweighted over every objective, where the two agree. -/
+public def no_free_lunch_embedding_witness :=
+  no_free_lunch_embedding observedValue queryFirst querySecond
+
+/-- Relabelling `probeRule` by a permutation of its domain composes on the
+left of `ruleVisit`, at a concrete non-identity permutation. -/
+public theorem probeRule_ruleVisit_permRule :
+    ruleVisit (permRule (Equiv.swap (0 : Fin 3) 1) probeRule) (fun _ => 0) 1
+      = Equiv.swap (0 : Fin 3) 1 (ruleVisit probeRule (fun _ => 0) 1) :=
+  ruleVisit_permRule (Equiv.swap 0 1) probeRule (fun _ => 0) 1
+
+/-- The relabelled `probeRule` still never revisits. -/
+public theorem probeRule_injective_ruleVisit_permRule :
+    Function.Injective
+      (ruleVisit (permRule (Equiv.swap (0 : Fin 3) 1) probeRule) (fun _ => 0)) :=
+  injective_ruleVisit_permRule (Equiv.swap 0 1) probeRule (fun _ => 0)
+    (probeRule_noRevisit (fun _ => 0))
+
+/-- A schedule rule of one query visits exactly the schedule's point. -/
+public theorem queryFirst_ruleVisit_scheduleRule (c : Fin 1 → Fin 2) :
+    ruleVisit (Y := Fin 2) (scheduleRule queryFirst) c 0 = queryFirst 0 :=
+  ruleVisit_scheduleRule queryFirst c 0
+
+/-- Handing `playChoice` the constant sequence at `probeRule` recovers it. -/
+public theorem induced_playChoice_probeRule :
+    induced (playChoice (X := Fin 3) (Y := Fin 2) (m := 2)) (fun _ => probeRule)
+      = probeRule :=
+  induced_playChoice probeRule
+
+/-- **Every deterministic behaviour on the three-point domain is a realization
+of `playChoice`**, at the concrete alphabet this file already fixes. -/
+public theorem playChoice_surjective_at_probeRule :
+    ∃ c : Fin 2 → AdaptiveRule (Fin 3) (Fin 2) 2,
+      induced (playChoice (X := Fin 3) (Y := Fin 2) (m := 2)) c = probeRule :=
+  surjective_induced_playChoice probeRule
+
+/-- **NFL1, at the stochastic witness — the general statement itself.**
+`nfl_coinRule_vs_probeRule` is the uniform-weight specialization; this is the
+theorem it specializes. -/
+public def no_free_lunch_stochastic_of_sharp_witness
+    (Ψ : (Fin 2 → Fin 2) → ℝ) :=
+  no_free_lunch_stochastic_of_sharp sum_coinWeight sum_trivialWeight coinRule
+    probeStochastic coinRule_noRevisit
+    (fun c d => by rw [induced_probeStochastic c]; exact probeRule_noRevisit d) Ψ
+
+/-- **The deterministic case is the point-mass case of the mixture**, at
+`probeRule` and the uniform objective weight. -/
+public def mixtureTrace_pointMass_probeRule (Ψ : (Fin 2 → Fin 2) → ℝ) :=
+  mixtureTrace_pointMass (fun _ : Fin 3 → Fin 2 => (1 : ℝ)) Ψ probeRule
+
+/-- An embedding of the two-query schedule domain into the three-point domain
+of the adaptive witness. -/
+public def twoIntoThree : Fin 2 ↪ Fin 3 := ⟨Fin.castSucc, Fin.castSucc_injective 2⟩
+
+public noncomputable instance : DecidablePred (· ∈ constantObjectives (Fin 3) (Fin 2)) :=
+  Classical.decPred _
+
+/-- **Schumacher–Vose–Whitley's set form, at the class of adaptive rules
+themselves rather than schedules** — the constants prior against `probeRule`
+and a schedule rule. -/
+public def nfl_adaptive_of_closedUnderPermutation_witness
+    (Ψ : (Fin 2 → Fin 2) → ℝ) :=
+  nfl_adaptive_of_closedUnderPermutation (closedUnderPermutation_constants (Fin 3) (Fin 2))
+    probeRule (scheduleRule twoIntoThree) probeRule_noRevisit
+    (fun c => injective_ruleVisit_scheduleRule twoIntoThree c) Ψ
+
+/-- **A permutation-closed set is the union of the orbits it meets**, at the
+constants prior. -/
+public theorem constantObjectives_eq_iUnion_permOrbit :
+    constantObjectives (Fin 3) (Fin 2) =
+      ⋃ f ∈ constantObjectives (Fin 3) (Fin 2), permOrbit f :=
+  eq_iUnion_permOrbit (closedUnderPermutation_constants (Fin 3) (Fin 2))
+
+/-! ## The characterisations, run at these priors
+
+`nfl_iff_permInvariant` and its adaptive twin are the sharp form: permutation
+invariance is not merely sufficient for a free lunch to be absent, it is
+necessary. Until 2026-09-21 neither was applied, so only the sufficient halves
+this file already exercises had ever been used.
+-/
+
+/-- **The sharp theorem, forward**, at the uniform prior: every schedule scores
+the same, and that is *equivalent* to the prior being permutation-invariant. -/
+public theorem uniform_nfl_iff :
+    (∀ (m : ℕ) (Φ : CostPerformance m (Fin 2)) (σ τ : Fin m ↪ Fin 3),
+        weightedPerformance (fun _ : Fin 3 → Fin 2 => (1 : ℝ)) Φ σ
+          = weightedPerformance (fun _ : Fin 3 → Fin 2 => (1 : ℝ)) Φ τ)
+      ↔ PermInvariant (fun _ : Fin 3 → Fin 2 => (1 : ℝ)) :=
+  nfl_iff_permInvariant (fun _ : Fin 3 → Fin 2 => (1 : ℝ))
+
+/-- And the same equivalence over **adaptive rules**, which is the quantifier
+`probeRule` shows is not decoration. -/
+public theorem uniform_nfl_adaptive_iff :
+    (∀ (m : ℕ) (Ψ : (Fin m → Fin 2) → ℝ) (r₁ r₂ : AdaptiveRule (Fin 3) (Fin 2) m),
+        (∀ c, Function.Injective (ruleVisit r₁ c)) →
+        (∀ c, Function.Injective (ruleVisit r₂ c)) →
+        weightedTrace (fun _ : Fin 3 → Fin 2 => (1 : ℝ)) Ψ r₁
+          = weightedTrace (fun _ : Fin 3 → Fin 2 => (1 : ℝ)) Ψ r₂)
+      ↔ PermInvariant (fun _ : Fin 3 → Fin 2 => (1 : ℝ)) :=
+  nfl_adaptive_iff_permInvariant (fun _ : Fin 3 → Fin 2 => (1 : ℝ))
+
+/-- And every cost sequence one rule reads is read by the other at some
+objective, which is the surjectivity behind that count. -/
+public theorem probe_vs_schedule_exists_observed (f : Fin 3 → Fin 2) :
+    ∃ g : Fin 3 → Fin 2, observed (scheduleRule twoIntoThree) g = observed probeRule f :=
+  exists_observed_eq probeRule (scheduleRule twoIntoThree) probeRule_noRevisit
+    (fun c => injective_ruleVisit_scheduleRule twoIntoThree c) f
+
+/-- **Permuting the domain and permuting the objective are the same move.**
+`permRule` pushes a permutation through a rule, and what the pushed rule sees at
+an objective is what the original rule sees at the relabelled one. This is the
+equivariance the whole sharp theorem turns on, and nothing had run it on a rule
+that actually branches. -/
+public theorem probeRule_observed_perm (π : Equiv.Perm (Fin 3)) (f : Fin 3 → Fin 2) :
+    observed (permRule π probeRule) f = observed probeRule (f ∘ (π : Fin 3 → Fin 3)) :=
+  observed_permRule π probeRule f
+
+/-! ## The uniform-prior statement, at the same pair of rules
+
+`Learning.no_free_lunch_adaptive` is the unweighted form: no prior, no
+permutation invariance, just `m ≤ |X|` and two rules that never revisit. Nothing
+had run it, so the two hypotheses it does carry had never been met together.
+
+`probeRule` meets them against any schedule, and the pairing is chosen so the
+equality is not two identical sums: `observed_probeRule_ne` above records that
+the branching rule reads different cost sequences from objectives a schedule
+cannot tell apart.
+-/
+
+/-- **No free lunch for the branching rule against any schedule**, with no prior
+anywhere in the statement.
+
+Written as a `def` with the type inferred, in the same style as
+`no_free_lunch_embedding_witness` above and for the same reason: restating the
+sum spells `Fintype (Fin 3 → Fin 2)` a second time, and the instance the
+restatement picks is not the one the theorem's own statement carries. Letting
+the applied term supply its type keeps the two spellings the same term. -/
+public def nfl_adaptive_probeRule_vs_schedule (σ : Fin 2 ↪ Fin 3)
+    (Ψ : (Fin 2 → Fin 2) → ℝ) :=
+  no_free_lunch_adaptive (by simp) probeRule (scheduleRule σ)
+    probeRule_noRevisit (injective_ruleVisit_scheduleRule σ) Ψ
+
+/-- The same at a named schedule, so the general statement has an instance and
+not only a proof. -/
+public def nfl_adaptive_probeRule_vs_twoIntoThree (Ψ : (Fin 2 → Fin 2) → ℝ) :=
+  nfl_adaptive_probeRule_vs_schedule twoIntoThree Ψ
 
 end AISafetyAtlas.Examples.Learning

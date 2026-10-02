@@ -105,4 +105,80 @@ public theorem target_true_on_trueWorlds :
   true_on_of_physicallyKnows_true trueWorlds_refines_target
     observer_physicallyKnows_true
 
+/-! ## The weakened operator, at the same witness -/
+
+/-- **The modification is a weakening**, applied to the observer's own
+Definition 11 certificate. -/
+public theorem observer_weakPhysicallyKnows_true :
+    WeakPhysicallyKnows observer target true trueWorlds :=
+  weakPhysicallyKnows_of_physicallyKnows observer_physicallyKnows_true
+
+/-- A concrete `WeakKnowledgeWitness`, built the same way
+`weakPhysicallyKnows_of_physicallyKnows` builds one internally, but kept as a
+term rather than packed into `Nonempty` — `yes_block_correct` needs the term,
+not just its existence. -/
+public def weakKnowsTrueWitness :
+    WeakKnowledgeWitness observer target true trueWorlds where
+  target_realized := knowsTrueWitness.target_realized
+  selector := knowsTrueWitness.selector
+  yes_correct := fun u hu htrue =>
+    (knowsTrueWitness.correct ⟨true, knowsTrueWitness.target_realized⟩ u hu).mp htrue
+  no_correct := fun g _hg u _huW hu hfalse hval => by
+    have hval' := (knowsTrueWitness.correct g u hu).mpr hval
+    rw [hval'] at hfalse
+    exact Bool.noConfusion hfalse
+
+/-- **The weakened operator still entails weak inference on the known
+block**, at the concrete witness above. -/
+public theorem weakKnowsTrueWitness_yes_block_correct :
+    observer.concl (true, true) = true → target (true, true) = true :=
+  WeakKnowledgeWitness.yes_block_correct weakKnowsTrueWitness (true, true) rfl
+
+/-! ## The operator's own laws, at this observer
+
+Six statements about `PhysicallyKnows` had no application anywhere until
+2026-09-21, including the two that connect it to Wolpert's inference notion.
+The observer above satisfies the hypothesis of every one of them.
+-/
+
+/-- **Physical knowledge entails weak inference.** The bridge from Wolpert 2018's
+operator back to the 2008 device notion, which is what makes the two papers one
+development rather than two. -/
+public theorem observer_weaklyInfers : WeaklyInfers observer target :=
+  PhysicallyKnows.weaklyInfers observer_physicallyKnows_true
+
+/-- The same, straight from the certificate rather than from its existential
+wrapper — the form a construction uses when it still holds the witness. -/
+public theorem observer_weaklyInfers_from_witness : WeaklyInfers observer target :=
+  PhysicalKnowledgeWitness.weaklyInfers knowsTrueWitness
+
+/-- **Knowing a value is knowing its negation's negation.** The operator
+commutes with complementing the target. -/
+public theorem observer_knows_negation :
+    PhysicallyKnows observer (fun u => Bool.not (target u)) (Bool.not true) trueWorlds :=
+  PhysicallyKnows.negate observer_physicallyKnows_true
+
+/-- **Proposition 18 at this observer**: knowing the target is false is knowing
+the complement is true, so the two readings of a negative answer agree. -/
+public theorem observer_knows_false_iff :
+    PhysicallyKnows observer target false trueWorlds ↔
+      PhysicallyKnows observer (fun u => Bool.not (target u)) true trueWorlds :=
+  physicallyKnows_false_iff_not_true observer target trueWorlds
+
+/-- **And it cannot know both answers.** Consistency of the operator, at a
+refining block — which is the hypothesis that makes it consistency rather than
+an artefact of an empty block. -/
+public theorem observer_not_knows_both :
+    ¬ (PhysicallyKnows observer target true trueWorlds ∧
+        PhysicallyKnows observer target false trueWorlds) :=
+  not_physicallyKnows_true_and_false trueWorlds_refines_target
+
+/-- **Something is never known, whatever the block.** The observer's own
+conclusion: Wolpert's Theorem 1 carried into the knowledge operator, so no
+device is omniscient about itself. -/
+public theorem observer_has_an_unknowable :
+    ∃ Γ : Bool × Bool → Bool, ∀ (W : Set (Bool × Bool)) (γ : Bool),
+      ¬ PhysicallyKnows observer Γ γ W :=
+  exists_never_physicallyKnown observer
+
 end AISafetyAtlas.Examples.Inference.PhysicalKnowledge

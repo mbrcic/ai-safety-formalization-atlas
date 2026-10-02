@@ -72,4 +72,34 @@ theorem fig5_not_weaklyInfers : ¬ WeaklyInfers fig5Dev1 fig5Target.concl := by
   revert hx
   fin_cases x <;> decide
 
+/-! ## The two approximation results, at a concrete tolerance
+
+Both are stated for every `ε > 0`. Instantiating at one number is what turns
+"can be made arbitrarily close" into a claim a reader can check, and neither
+statement had been instantiated anywhere.
+-/
+
+/-- **Two distinguishable devices can each infer the other almost perfectly.**
+At `ε = 1/10`: accuracy above `9/10` in both directions, while Theorem 1 forbids
+*exact* mutual inference. The gap between "distinguishable" and "cannot infer"
+is therefore a gap about exactness and not about accuracy. -/
+public theorem mutual_accuracy_at_one_tenth :
+    ∃ (D₁ D₂ : InferenceDevice.{0, 0} (Fin 16)) (i₁ : DecidableEq D₁.Setup)
+      (i₂ : DecidableEq D₂.Setup) (p : FinPMF (Fin 16)),
+      Distinguishable D₁ D₂ ∧
+      1 - (1 / 10 : ℝ) < @inferenceAccuracy (Fin 16) _ D₁ i₁ Bool _ _ p D₂.concl ∧
+      1 - (1 / 10 : ℝ) < @inferenceAccuracy (Fin 16) _ D₂ i₂ Bool _ _ p D₁.concl :=
+  exists_distinguishable_accuracy_near_one (by norm_num)
+
+/-- **And strong inference buys no accuracy at all.** At the same tolerance:
+`fig5Dev2` strongly infers `fig5Dev1`, the weaker device scores above `9/10` on
+the target, and the stronger one scores exactly `0`. Strength in the inference
+order is not accuracy on a question. -/
+public theorem fig5_gap_at_one_tenth :
+    ∃ (q : ℝ) (h0 : 0 ≤ q) (h1 : q ≤ 1),
+      StronglyInfers fig5Dev2 fig5Dev1 ∧
+      1 - (1 / 10 : ℝ) < inferenceAccuracy fig5Dev1 (fig5PMF q h0 h1) fig5Target.concl ∧
+      inferenceAccuracy fig5Dev2 (fig5PMF q h0 h1) fig5Target.concl = 0 :=
+  fig5_accuracy_gap (by norm_num)
+
 end AISafetyAtlas.Examples.Inference.StochasticApproximation

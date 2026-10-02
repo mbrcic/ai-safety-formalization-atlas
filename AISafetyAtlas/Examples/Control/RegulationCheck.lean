@@ -104,4 +104,17 @@ public theorem repeatedColumn_bound_fails :
   rw [hone]
   norm_num
 
+/-- **The agreement theorem, at the Latin square.** `columnsInjective` reports
+`true`, so Ashby's bound applies, and it holds with room to spare. -/
+public theorem latinSquare_ashby_bound :
+    (3 : ℚ) / 3 ≤ achievedVariety latinSquare latinStrategy :=
+  ashby_bound_of_columnsInjective latinStrategy latinSquare_columnsInjective
+
+/-- **A `false` verdict is not a clearance** — the closed existential itself,
+cited by name. `repeatedColumn` above is the same witness unpacked. -/
+public theorem exists_columnsInjective_false_and_bound_fails_cited :
+    ∃ (T : Fin 2 → Fin 1 → Fin 1) (ρ : Fin 2 → Fin 1),
+      columnsInjective T = false ∧ ¬ ((2 : ℚ) / 1 ≤ achievedVariety T ρ) :=
+  exists_columnsInjective_false_and_bound_fails
+
 end AISafetyAtlas.Examples.Control

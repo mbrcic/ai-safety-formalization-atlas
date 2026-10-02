@@ -27,10 +27,11 @@ Two kinds of statement, kept apart deliberately.
   the value on a window depends only on the horizon weights and the utilities
   *inside* that window, so two objectives may disagree arbitrarily outside it.
 
-The result does not formalize AIXI, Solomonoff induction, convergence, or the
-paper's informal delusion-box arguments.  The paper states its results as
-arguments rather than numbered theorems, so nothing here reproduces a numbered
-source result. The source bounds utility in `[0,1]`; `Objective.utility` is
+The result does not formalize AIXI, Solomonoff induction, or convergence.  The
+paper's delusion box, its four agents and its Statements 1 to 3 are in
+`AISafetyAtlas.Wireheading.DelusionBox`, not here.  The paper states its results
+as arguments rather than numbered theorems, so nothing here reproduces a
+numbered source result. The source bounds utility in `[0,1]`; `Objective.utility` is
 real-valued without a range invariant, a harmless generalization for these
 algebraic locality and scaling lemmas but not an exact model match.
 -/

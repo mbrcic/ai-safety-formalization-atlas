@@ -321,6 +321,12 @@ public theorem decideCoverage_qEmitted_not_covered :
     (decideCoverage execEnum qEmitted hazard).covered = false := by
   decide
 
+/-- **C2's completeness specification, at this checker instance.** The checker
+agrees with `Covers` on `qCD`, both directions at once. -/
+public theorem decideCoverage_qCD_covered_iff :
+    (decideCoverage execEnum qCD hazard).covered = true ↔ Covers qCD hazard :=
+  decideCoverage_covered_iff execEnum qCD hazard
+
 /-! ## Scope
 
 Every statement above is about *informational* coverage under the fixed truthful

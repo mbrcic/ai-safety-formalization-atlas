@@ -241,7 +241,7 @@ def actionTransition : Bool → Bool → Bool := fun _ a => a
 theorem returnOver_actionTransition_one (μ : Env Bool) (π : Policy Bool Bool) :
     returnOver actionTransition 1 false μ π =
       μ.trueReward (π ((false, μ.observed false), [])) := by
-  simp [returnOver, stateAt, run, actionTransition]
+  simp [returnOver, stateAt, Decision.detStateAt, Decision.detRun, Env.channel, actionTransition]
 
 /-- Choose the better of the two action-states. -/
 noncomputable def greedyCRMDPPolicy (μ : Env Bool) : Policy Bool Bool :=
@@ -334,6 +334,43 @@ theorem nonzeroCRMDPModel_worstCaseRegret (π : Policy Bool Bool) :
     AISafetyAtlas.Wireheading.Corruption.ComplementedClass.regret,
     AISafetyAtlas.Wireheading.CRMDP.Model.toComplementedClass,
     nonzeroCRMDPModel, adversarialEnv_best_return, adversarialEnv_policy_return]
+
+/-! ### The same model under stochastic dynamics and mixed policies
+
+`Model.toStoch` and `StochModel.toMixed` carry `nonzeroCRMDPModel` up both
+widenings, so the stochastic and mixed readings of Theorem 11 are instantiated
+at a model with genuinely nonzero regret rather than at a bound one.
+-/
+
+/-- The concrete model as a stochastic corrupt-reward MDP. -/
+noncomputable def nonzeroStochModel :
+    AISafetyAtlas.Wireheading.CRMDP.StochModel Bool Bool :=
+  nonzeroCRMDPModel.toStoch
+
+/-- **Theorem 11 for stochastic dynamics**, at that model. -/
+theorem nonzeroStochModel_everitt_theorem_eleven (π : Policy Bool Bool) :
+    nonzeroStochModel.toComplementedClass.worstCaseRegret
+        nonzeroStochModel.toComplementedClass.worstPolicy / 2 ≤
+      nonzeroStochModel.toComplementedClass.worstCaseRegret π :=
+  AISafetyAtlas.Wireheading.CRMDP.StochModel.everitt_theorem_eleven
+    nonzeroStochModel π
+
+/-- **The two readings are about the same numbers**, which is what makes the
+widening a widening rather than a second development. -/
+theorem nonzeroStochModel_toMixed_returnValue
+    (μ : AISafetyAtlas.Wireheading.CRMDP.Env Bool) (π : Policy Bool Bool) :
+    nonzeroStochModel.toMixed.toComplementedClass.returnValue μ π
+      = nonzeroStochModel.toComplementedClass.returnValue μ π :=
+  AISafetyAtlas.Wireheading.CRMDP.StochModel.toMixed_returnValue
+    nonzeroStochModel μ π
+
+/-- **Theorem 11 for mixed policies**, at the same model again. -/
+theorem nonzeroMixedModel_everitt_theorem_eleven (π : Policy Bool Bool) :
+    nonzeroStochModel.toMixed.toComplementedClass.worstCaseRegret
+        nonzeroStochModel.toMixed.toComplementedClass.worstPolicy / 2 ≤
+      nonzeroStochModel.toMixed.toComplementedClass.worstCaseRegret π :=
+  AISafetyAtlas.Wireheading.CRMDP.MixedModel.everitt_theorem_eleven
+    nonzeroStochModel.toMixed π
 
 /-- The full CRMDP theorem is instantiated on a nonzero-regret model. -/
 example (π : Policy Bool Bool) :
@@ -500,6 +537,34 @@ example (π : Preference.Policy Unit Bool) (x : Pair Unit Bool)
     (h : ReasonableLanguage.Compatible x π) :
     degenerateLanguage.KPair (op1 (op5 π)) ≤ degenerateLanguage.KPair x + 2 * degenerateLanguage.c :=
   degenerateLanguage.indifferent_le_compatible π x h
+
+/-- **Proposition 7 in full, at the degenerate language.** All three degenerate
+pairs are compatible and within `2c` of any compatible pair — and here `c = 0`,
+so the three bounds read `0 ≤ 0`. That is the point: the proposition is true and
+empty at this language, which is what makes the existence of a *nontrivial*
+`c`-reasonable one the question the source argues informally and this repository
+does not settle. -/
+theorem degenerateLanguage_proposition_seven (π : Preference.Policy Unit Bool)
+    (x : Pair Unit Bool) (h : ReasonableLanguage.Compatible x π) :
+    (ReasonableLanguage.Compatible (op1 (op5 π)) π ∧
+        degenerateLanguage.KPair (op1 (op5 π))
+          ≤ degenerateLanguage.KPair x + 2 * degenerateLanguage.c) ∧
+      (ReasonableLanguage.Compatible (op2 (op6 π)) π ∧
+        degenerateLanguage.KPair (op2 (op6 π))
+          ≤ degenerateLanguage.KPair x + 2 * degenerateLanguage.c) ∧
+      (ReasonableLanguage.Compatible (op4 (op2 (op6 π))) π ∧
+        degenerateLanguage.KPair (op4 (op2 (op6 π)))
+          ≤ degenerateLanguage.KPair x + 2 * degenerateLanguage.c) :=
+  ReasonableLanguage.proposition_seven degenerateLanguage π x h
+
+/-- **And Proposition 8**: negating the reward keeps compatibility and moves the
+complexity by at most `c` in both directions. Empty here for the same reason. -/
+theorem degenerateLanguage_proposition_eight (π : Preference.Policy Unit Bool)
+    (x : Pair Unit Bool) (h : ReasonableLanguage.Compatible x π) :
+    ReasonableLanguage.Compatible (op4 x) π ∧
+      degenerateLanguage.KPair (op4 x) ≤ degenerateLanguage.KPair x + degenerateLanguage.c ∧
+      degenerateLanguage.KPair x ≤ degenerateLanguage.KPair (op4 x) + degenerateLanguage.c :=
+  ReasonableLanguage.proposition_eight degenerateLanguage π x h
 
 /-- The degenerate language again, in the source's own parameterization: the
 `F`-complexity is zero, so `c = 0`. -/

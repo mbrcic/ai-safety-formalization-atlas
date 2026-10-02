@@ -27,6 +27,7 @@ a convenient second one.
 namespace AISafetyAtlas.Examples.Knowledge.Devices
 
 open AISafetyAtlas.Inference
+open AISafetyAtlas.Knowledge
 open AISafetyAtlas.Knowledge.Devices
 open AISafetyAtlas.Examples.Inference.Enumerable
 
@@ -201,5 +202,76 @@ public theorem checker_enumeration_is_complete :
     ∀ i : Fin 4, i ∈ List.finRange 4 := by
   intro i
   simp
+
+/-- **The checker and the kernel agree in both directions**, at the block
+device's conclusion function (which does not determine the target, so
+`findCollision` is not `none` here — the other case from `not_knowable_of_
+findCollision_eq_some`, exercised through the general iff instead). -/
+public theorem findCollision_blockDevice_iff :
+    AISafetyAtlas.Knowledge.Check.findCollision (List.finRange 4)
+        blockDevice.toDevice.concl blockTarget = none ↔
+      AISafetyAtlas.Knowledge.Knowable blockDevice.toDevice.concl blockTarget :=
+  AISafetyAtlas.Knowledge.Check.findCollision_eq_none_iff checker_enumeration_is_complete
+    blockDevice.toDevice.concl blockTarget
+
+/-! ## §3's vocabulary, applied at the same device -/
+
+/-- **Definition 3, restated over `BlockAnswers`**, at the block device. -/
+public theorem blockDevice_weaklyInfers_iff_blockAnswers :
+    WeaklyInfers blockDevice.toDevice blockTarget ↔
+      ∀ (γ : Fin 2) (f : Fin 2 → Bool), IsProbe f γ → (∃ w : Fin 4, blockTarget w = γ) →
+        ∃ x : blockDevice.toDevice.Setup, blockDevice.toDevice.Realized x ∧
+          BlockAnswers blockDevice.toDevice blockTarget f x :=
+  weaklyInfers_iff_blockAnswers blockDevice.toDevice blockTarget
+
+/-- **One witness kills one block**, at the block device's known collision. -/
+public theorem blockDevice_witnessAt :
+    Nonempty (IndistinguishabilityWitness (deviceObservation blockDevice.toDevice)
+      (fun t => probe (0 : Fin 2) (blockTarget t))) :=
+  BlockwiseCollision.witnessAt blockDevice_blockwiseCollision (isProbe_probe (0 : Fin 2))
+    (⟨(0 : Fin 4), rfl⟩ : blockDevice.toDevice.Realized 0)
+
+/-! ### The converse direction, at two worlds the device cannot separate
+
+`blockAnswers_no_collision` concludes `f (Γ u) = f (Γ u')` from two worlds
+sharing a setup and a conclusion. Witnessing it at `u = u'` makes the conclusion
+`x = x` and asks nothing of the lemma, which is what an earlier witness here did
+on the identity device — where `concl` is injective, so the hypotheses *force*
+`u = u'` and no better witness exists on it. The device below reports only the
+first of two bits, so it genuinely lumps two distinct worlds together. -/
+
+/-- Two bits, of which the device reports only the first. -/
+@[expose] public def fstDevice : InferenceDevice (Bool × Bool) where
+  Setup := Unit
+  setup := fun _ => ()
+  concl := fun p => p.1
+  concl_surjective := fun b => ⟨(b, false), rfl⟩
+
+/-- Reading the first bit answers the block. -/
+public theorem fstDevice_blockAnswers :
+    BlockAnswers fstDevice (fun p => p.1) id () :=
+  fun _w _ => rfl
+
+/-- The two worlds below are distinct -- without this the statement would be an
+equation between a world and itself. -/
+public theorem fstDevice_worlds_ne :
+    ((false, false) : Bool × Bool) ≠ (false, true) := by decide
+
+/-- **An answering block carries no witness**: it cannot separate two distinct
+worlds that share its setup and its conclusion. -/
+public theorem fstDevice_blockAnswers_no_collision :
+    id ((false, false) : Bool × Bool).1 = id ((false, true) : Bool × Bool).1 :=
+  blockAnswers_no_collision (C := fstDevice) (Γ := fun p => p.1) (f := id) (x := ())
+    fstDevice_blockAnswers rfl rfl rfl
+
+/-- **An answering block on every realized setup makes the probe knowable.**
+The positive half of the block vocabulary: `fstDevice` answers on its single
+block, so reading its setup-and-conclusion pair recovers the probed value. The
+file proved the block answers and never drew the conclusion the notion exists
+for. -/
+public theorem fstDevice_probe_knowable :
+    Knowable (deviceObservation fstDevice) (fun t : Bool × Bool => id t.1) :=
+  knowable_probe_of_forall_blockAnswers (fun x _ => by
+    cases x; exact fstDevice_blockAnswers)
 
 end AISafetyAtlas.Examples.Knowledge.Devices

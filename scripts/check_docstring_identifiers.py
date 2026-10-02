@@ -33,6 +33,8 @@ LOWER_CAMEL = re.compile(r"^[a-z][A-Za-z0-9']*[a-z][A-Z][A-Za-z0-9']*$")
 ALL_LOWER = re.compile(r"^[a-z][a-z0-9']*$")
 # Head components owned by dependencies, not the atlas.
 EXTERNAL_ROOTS = {
+    # d-separation is taken from the `Causalean` dependency.
+    "Causalean",
     "Set", "Finset", "Nat", "Real", "Function", "Equiv", "PMF", "ZMod", "Measure",
     "Fin", "Prod", "Bool", "Classical", "ENNReal", "Filter", "Fintype", "Mathlib",
     "MeasureTheory", "ProbabilityTheory", "PFR", "GaloisField", "IsUniform",
@@ -52,7 +54,7 @@ NAME_RE = re.compile(r"[A-Za-z_]" + IDENT_TAIL)
 # tactics, registry fields, and results in other libraries.
 EXEMPT = {
     "push_neg", "native_decide", "norm_num", "fun_prop", "simp_all", "field_simp",
-    "ai_bridge_status", "scope_delta", "lean_artifact", "root_import",
+    "ai_interpretation_status", "scope_delta", "lean_artifact", "root_import",
     "No_Free_Lunch_ML", "qaryEntropy_def",
     # Mathlib lemmas and tactic-local names discussed in prose
     "klDiv_eq_zero_iff", "Finset.sum_fiberwise", "kraft_mcmillan_inequality",
@@ -325,7 +327,7 @@ _load_env_index()
 # Hand-written prose a consumer reads before ever opening a Lean file. Generated
 # views under docs/status/ are excluded: they are regenerated, not edited, and a
 # name is fixed at its source.
-PROSE = ["README.md", "STATE.md", "docs/guide", "docs/provenance", "docs/bridges"]
+PROSE = ["README.md", "STATE.md", "docs/guide", "docs/provenance", "docs/interpretation-reviews"]
 # Filenames look exactly like qualified names. `Stochastic.lean` names a file,
 # `.v` and `.thy` name other provers' sources, and none of them is a Lean name.
 FILE_SUFFIXES = (

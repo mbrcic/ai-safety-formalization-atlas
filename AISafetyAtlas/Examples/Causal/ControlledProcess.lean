@@ -156,4 +156,36 @@ public theorem no_common_estimate (m : ℕ) {Q : Fin (m + 2) → Fin 2 → Fin (
     (h1 : (env1 m).WithinBall Q (reconstructionRadius 101 (1 / 2))) : False :=
   ControlledMarkovProcess.not_withinBall_both (separated m) balls_disjoint_at_101_half h0 h1
 
+/-! ## The `2/3` arithmetic, and that none of its three premises is already impossible
+
+`Causal.not_both_two_thirds` concludes `False`, so its full
+antecedent is unsatisfiable — that is the result, and no model can witness it.
+The obligation inverts: each premise has to be shown compatible with the other
+two, or the impossibility could be resting on one premise nothing satisfies.
+Three leave-one-out models do that, and `two_thirds_forces_sum_gt_one` applies
+the lemma itself.
+-/
+
+/-- **The lemma, used.** Two success probabilities of at least `2/3` cannot
+belong to one law, which is the contrapositive form the indistinguishability
+step actually consumes. -/
+public theorem two_thirds_forces_sum_gt_one {p q : ℝ} (hp : 2 / 3 ≤ p)
+    (hq : 2 / 3 ≤ q) : ¬ (p + q ≤ 1) :=
+  fun hsum => Causal.not_both_two_thirds hsum hp hq
+
+/-- Drop the mass bound and the two success bounds are jointly satisfiable:
+both probabilities can be `1`. So `hsum` is doing work. -/
+public theorem two_thirds_both_without_sum :
+    (2 / 3 : ℝ) ≤ 1 ∧ (2 / 3 : ℝ) ≤ 1 := by norm_num
+
+/-- Drop the first success bound and the rest is satisfiable at `p = 0`,
+`q = 1`. So `hp` is doing work. -/
+public theorem sum_and_second_without_first :
+    (0 : ℝ) + 1 ≤ 1 ∧ (2 / 3 : ℝ) ≤ 1 := by norm_num
+
+/-- Drop the second and the rest is satisfiable at `p = 1`, `q = 0`, by the
+symmetry of the statement in `p` and `q`. So `hq` is doing work. -/
+public theorem sum_and_first_without_second :
+    (1 : ℝ) + 0 ≤ 1 ∧ (2 / 3 : ℝ) ≤ 1 := by norm_num
+
 end AISafetyAtlas.Examples.Causal.ControlledProcess

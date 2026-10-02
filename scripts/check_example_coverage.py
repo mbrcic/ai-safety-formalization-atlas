@@ -42,11 +42,6 @@ ROOT = Path(__file__).resolve().parent.parent
 # with the reason. Each entry is re-checked: gaining coverage is an error here,
 # so the list cannot silently outlive its justification.
 EXEMPT: dict[str, str] = {
-    "AISafetyAtlas/Inference/Stochastic/Gibbs.lean": (
-        "pure real arithmetic (Gibbs' inequality and its equality case), consumed "
-        "only through Stochastic.lean and Stochastic/Measure.lean, both of which "
-        "carry worked models"
-    ),
     "AISafetyAtlas/Upstream/KolmogorovMathlib/Foundation/NatEncoding.lean": (
         "staged for upstreaming to Mathlib, which carries its own test discipline"
     ),

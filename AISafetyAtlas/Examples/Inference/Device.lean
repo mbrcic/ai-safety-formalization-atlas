@@ -1073,6 +1073,152 @@ public theorem thm7_mk_nonvacuous :
     (fun _ => rfl) (fun _ => rfl)
     saSelfProbe_intelligible_question saSelfProbe_intelligible_question
 
+/-- **Theorem 7(i) as bijections, on the same witness.** `thm7_equiv` is the
+cross-universe form: it states the three equalities as `Nonempty (· ≃ ·)` rather
+than as an equality of cardinals, which is what lets the two devices live in
+different universes. It needed the same four premises `thm7_mk_nonvacuous`
+already supplies here and nothing had instantiated it, so the strongest of the
+three Theorem 7 forms was the one with no witness. -/
+public theorem thm7_equiv_nonvacuous :
+    Nonempty ({x // ∃ u, saSelfProbe.question u = x} ≃
+        {x // ∃ u, saSelfProbe.question u = x}) ∧
+      Nonempty ({x // ∃ u, saSelfProbe.question u = x} ≃
+        {x // ∃ u, saSelfProbe.question u = x}) ∧
+      Nonempty ({x // ∃ u, saSelfProbe.question u = x} ≃
+        {x // ∃ u, saSelfProbe.question u = x}) :=
+  thm7_equiv saSelfProbe saSelfProbe saSelfProbe.question saSelfProbe.question id id
+    (fun _ => rfl) (fun _ => rfl)
+    saSelfProbe_intelligible_question saSelfProbe_intelligible_question
+
+/-! ## The self-aware lemmas nothing had instantiated
+
+Each is applied on `saTrivial` or `saSelfProbe`, or on `saU` itself, which has
+exactly the four states the two admissibility results quantify over.
+-/
+
+/-- The function-valued detour is the identity on asking and on the image of
+`eval`: converting a self-aware device to its function-valued form and back
+changes neither. -/
+public theorem saTrivial_functionValued_roundTrip (u : saU) :
+    saTrivial.toFunctionValued.toSelfAware.ask u = saTrivial.ask u ∧
+      saTrivial.toFunctionValued.toSelfAware.ask u
+        = saTrivial.toFunctionValued.askOf u u :=
+  ⟨SelfAwareDevice.askOf_toFunctionValued_toSelfAware saTrivial u,
+    FunctionValuedSelfAware.toSelfAware_ask saTrivial.toFunctionValued u⟩
+
+/-- **The same argument at `saU`'s four states, named.** `saU` is `Bool × Bool`,
+so the four states the construction needs are its four elements, and the
+resulting device is two-valued on its question, its setup and its conclusion --
+which is what makes it admissible rather than a degenerate corrector-defeating
+trick. -/
+public theorem saU_admissibleUncorrectable_two_valued :
+    (∃ u u' : saU,
+      (admissibleUncorrectable saDevice (false, false) (false, true) (true, false)
+        (true, true) (by decide) (by decide) (by decide) (by decide) (by decide)
+        (by decide)).question u
+      ≠ (admissibleUncorrectable saDevice (false, false) (false, true) (true, false)
+        (true, true) (by decide) (by decide) (by decide) (by decide) (by decide)
+        (by decide)).question u') ∧
+    (∃ u u' : saU,
+      (admissibleUncorrectable saDevice (false, false) (false, true) (true, false)
+        (true, true) (by decide) (by decide) (by decide) (by decide) (by decide)
+        (by decide)).toDevice.setup u
+      ≠ (admissibleUncorrectable saDevice (false, false) (false, true) (true, false)
+        (true, true) (by decide) (by decide) (by decide) (by decide) (by decide)
+        (by decide)).toDevice.setup u') ∧
+    (∃ u u' : saU,
+      (admissibleUncorrectable saDevice (false, false) (false, true) (true, false)
+        (true, true) (by decide) (by decide) (by decide) (by decide) (by decide)
+        (by decide)).toDevice.concl u
+      ≠ (admissibleUncorrectable saDevice (false, false) (false, true) (true, false)
+        (true, true) (by decide) (by decide) (by decide) (by decide) (by decide)
+        (by decide)).toDevice.concl u') :=
+  admissibleUncorrectable_two_valued saDevice (false, false) (false, true)
+    (true, false) (true, true) (by decide) (by decide) (by decide) (by decide)
+    (by decide) (by decide)
+
+/-- Copying is reflexive, and a device built from a setup map and a surjective
+conclusion map reads both back. -/
+public theorem saDevice_copies_self : Copies saDevice saDevice :=
+  copies_rfl saDevice
+
+public theorem deviceOf_reads_back :
+    (deviceOf (fun u : saU => u.1) (fun u : saU => u.2)
+        (fun b => ⟨(false, b), rfl⟩)).setup = (fun u : saU => u.1) ∧
+      (deviceOf (fun u : saU => u.1) (fun u : saU => u.2)
+        (fun b => ⟨(false, b), rfl⟩)).concl = (fun u : saU => u.2) :=
+  deviceOf_setup_concl _ _ _
+
+/-! ### `IsUniversal`, on the two-device reality
+
+`isStrongRoot_of_isUniversal`, `strongRoot_eq_of_isUniversal` and
+`subsingleton_isUniversal` all take `IsUniversal R i`, which is
+`∀ j ≠ i, StronglyInfers (R i) (R j)`.
+
+**These were witnessed on a one-device reality until 2026-09-16, and that was a
+bad witness.** Over `Fin 1` there is no `j ≠ i`, so `IsUniversal` held by
+`absurd` without any property of the device: replacing `StronglyInfers`'s body
+with `False` would have left every one of those proofs compiling, which is
+precisely the silent vacuity the witness-debt report exists to catch. Two of them
+also had `(0 : Fin 1) = 0` for a statement.
+
+`prop4Reality` carries a real edge — `fine_stronglyInfers_coarse` — so
+`IsUniversal prop4Reality 0` is discharged by that inference rather than by the
+absence of a second index. -/
+
+/-- **`fineDevice` is universal in the two-device reality**: the only other index
+is `1`, and it strongly infers the device there. -/
+public theorem prop4Reality_isUniversal : IsUniversal prop4Reality 0 := by
+  intro j hj
+  fin_cases j
+  · exact absurd rfl hj
+  · exact fine_stronglyInfers_coarse
+
+/-- **"A universal device must be a root node."** -/
+public theorem prop4Reality_isStrongRoot_of_isUniversal :
+    IsStrongRoot prop4Reality 0 :=
+  isStrongRoot_of_isUniversal prop4Reality prop4Reality_isUniversal
+
+/-- **"...and there cannot be any other root node."** Applied against the root
+`prop4_nonvacuous` already exhibits, so the equation is between two roots that
+were each obtained independently. -/
+public theorem prop4Reality_strongRoot_eq_of_isUniversal
+    (r : Fin 2) (hr : IsStrongRoot prop4Reality r) : r = 0 :=
+  strongRoot_eq_of_isUniversal prop4Reality prop4Reality_isUniversal hr
+
+/-- The existential corollary: any two universal indices coincide, here applied
+to the universal index and an arbitrary one. -/
+public theorem prop4Reality_subsingleton_isUniversal
+    (j : Fin 2) (hj : IsUniversal prop4Reality j) : j = 0 :=
+  subsingleton_isUniversal prop4Reality j 0 hj prop4Reality_isUniversal
+
+/- `SelfAwareDevice.evalImage_toFunctionValued` is witnessed in
+`Examples/Inference/SelfAwareComplexity.lean`, at `boolDevice`. A comment here
+used to claim it was unwitnessable because its right-hand universe was an
+unconstrained metavariable; that was false, and it was asserted without ever
+being checked. All three universes are bound by the device argument. -/
+
+/-- Infallibility over all questions, over the realized ones, and as stated are
+the same condition -- on `saSelfProbe`, which is **not** infallible, so the
+equivalences are being read at a point where the condition fails rather than
+where it holds vacuously. -/
+public theorem saSelfProbe_infallible_readings :
+    (Infallible saSelfProbe ↔ InfallibleFor saSelfProbe {q | ∃ u, saSelfProbe.question u = q}) ∧
+      (Infallible saSelfProbe ↔ InfallibleFor saSelfProbe Set.univ) :=
+  ⟨infallible_iff_infallibleFor_realized saSelfProbe,
+    infallible_iff_infallibleFor_univ saSelfProbe⟩
+
+/-- **Four states are enough to defeat any corrector.** `saU` has exactly four,
+so `saDevice` -- print's own inference device here -- admits a self-aware device
+it does not correct, and the two-valued form of the same argument applies at the
+four states named explicitly. -/
+public theorem saU_four_state_uncorrectable :
+    (∃ D : SelfAwareDevice.{0, 0, 0} saU,
+      (∃ u u' : saU, D.question u ≠ D.question u') ∧
+        (∃ u u' : saU, D.eval (D.question u) u ≠ D.eval (D.question u') u') ∧
+        ¬ Corrects saDevice D) :=
+  exists_admissible_not_corrects_of_four_states saDevice (by decide)
+
 /-- It answers its own question `true` everywhere while concluding the second bit,
 so **Definition 13(ii) fails for it** — the contrast `saDev` alone cannot provide. -/
 public theorem saSelfProbe_not_infallible : ¬ Infallible saSelfProbe := by
@@ -1206,5 +1352,217 @@ public theorem conclInFamilyReality_not_universal :
     ¬ conclInFamilyReality.IsUniversalFull conclInFamilyReality_surj () :=
   conclInFamilyReality.not_isUniversalFull_of_concl_mem (α := ()) (β := ())
     conclInFamilyReality_surj rfl
+
+
+/-! ## Three more of the device vocabulary, at the row/column pair
+
+`row_col_distinguishable` already supplies the only hypothesis any of these
+needs; the rest are statements about a single device.
+-/
+
+/-- **Distinguishability is symmetric**, so the row/column pair separates in
+both directions. -/
+public theorem col_row_distinguishable : Distinguishable colDevice rowDevice :=
+  Distinguishable.symm row_col_distinguishable
+
+/-- **No device controls its own setup.** Proposition 1's self-reference limit,
+read at a device that does control something else. -/
+public theorem rowDevice_not_controls_own_setup :
+    ¬ Controls rowDevice rowDevice.setup :=
+  not_controls_own_setup rowDevice
+
+/-- **Semi-control unfolded to its probe form**, at the row device's own
+conclusion. -/
+public theorem rowDevice_semiControls_iff_probe :
+    SemiControls rowDevice rowDevice.concl ↔
+      ∀ (γ : Bool) (f : Bool → Bool), IsProbe f γ →
+        (∃ w : Bool × Bool, rowDevice.concl w = γ) →
+          ∃ x : rowDevice.Setup, rowDevice.Realized x ∧
+            ∀ w : Bool × Bool, rowDevice.setup w = x → f (rowDevice.concl w) = true :=
+  semiControls_iff_probe (C := rowDevice) rowDevice.concl
+
+
+/-! ## The general statements, fired at the devices above
+
+Fifteen of this module's library statements reached no application anywhere in
+`Examples/` until 2026-09-21, which for a debt report means nothing in the build
+would have noticed an unsatisfiable hypothesis among them. The devices this file
+already builds inhabit most of them directly; what is left needs
+`LargeSetupFibres`, and that predicate has no witness in the tree at all.
+-/
+
+/-- **Every device fails to infer something**, and at `rowDevice` the something
+is named: its own conclusion. Wolpert's Theorem 1 as an existence claim rather
+than as a statement about a fixed target. -/
+public theorem rowDevice_fails_somewhere : ∃ Γ : Bool × Bool → Bool, ¬ WeaklyInfers rowDevice Γ :=
+  exists_not_weaklyInfers rowDevice
+
+/-- **And fails to strongly infer some device** — itself, since no device
+strongly infers itself. -/
+public theorem rowDevice_fails_some_device :
+    ∃ C' : InferenceDevice.{0, 0} (Bool × Bool), ¬ StronglyInfers rowDevice C' :=
+  exists_not_stronglyInfers rowDevice
+
+/-- **No device controls its own conclusion**, at the one device here that
+controls anything. `controlDevice` controls the second coordinate and cannot
+control what it concludes, so control is not closed under the obvious
+self-application. -/
+public theorem controlDevice_not_controls_own_concl : ¬ Controls controlDevice controlDevice.concl :=
+  not_controls_own_concl controlDevice
+
+/-- **Control implies semi-control**, at the same witness, so the weaker notion
+is genuinely weaker-or-equal and not an unrelated definition. -/
+public theorem controlDevice_semiControls_snd :
+    SemiControls controlDevice (Prod.snd : Bool × Bool → Bool) :=
+  semiControls_of_controls controlDevice_controls_snd
+
+/-- The same implication by the classical route, which drops the `DecidableEq`
+the constructive one needs. Both are in the library and only this line says they
+agree on an inhabited instance. -/
+public theorem controlDevice_semiControls_snd_classical :
+    SemiControls controlDevice (Prod.snd : Bool × Bool → Bool) :=
+  semiControls_of_controls_classical controlDevice_controls_snd
+
+/-- **Two distinguishable devices cannot control each other's conclusions.**
+Theorem 1 transported along control, at the distinguishable pair this file
+already built. -/
+public theorem row_col_not_control_each_other :
+    ¬ (Controls rowDevice colDevice.concl ∧ Controls colDevice rowDevice.concl) :=
+  fun h => not_controls_both_of_distinguishable row_col_distinguishable h.1 h.2
+
+/-- **Weak inference read through probes on the image.** The characterisation
+turns a statement about every probe into one about the probes a value can carry,
+and `witnessInfers` satisfies it because it satisfies the definition. -/
+public theorem witnessInfers_imageProbes :
+    ∀ (γ : Bool) (f : Bool → Bool), IsProbeOnImage wTarget f γ → (∃ w, wTarget w = γ) →
+      ∃ x : witnessInfers.Setup, witnessInfers.Realized x ∧
+        ∀ w, witnessInfers.setup w = x → witnessInfers.concl w = f (wTarget w) :=
+  (weaklyInfers_iff_imageProbes witnessInfers wTarget).mp witnessInfers_weaklyInfers
+
+/-- And through probes on the source, which needs the target type to have two
+values — `Bool` does, and that hypothesis is what the two characterisations
+differ by. -/
+public theorem witnessInfers_sourceProbes :
+    ∀ (γ : Bool) (f : Bool → Bool), IsSourceProbe f γ → (∃ w, wTarget w = γ) →
+      ∃ x : witnessInfers.Setup, witnessInfers.Realized x ∧
+        ∀ w, witnessInfers.setup w = x → witnessInfers.concl w = f (wTarget w) :=
+  (weaklyInfers_iff_sourceProbes witnessInfers wTarget ⟨true, false, by decide⟩).mp
+    witnessInfers_weaklyInfers
+
+/-- **Some device weakly infers a target that takes two values on a region.**
+The construction Wolpert's positive half runs: a world set split by `inW`, a
+target taking two values inside it, and one outside for the device to fall back
+on. Here the region is the second coordinate and the target is the first. -/
+public theorem exists_device_inferring_fst :
+    ∃ C : InferenceDevice.{0, 0} (Bool × Bool), WeaklyInfers C (Prod.fst : Bool × Bool → Bool) :=
+  exists_weaklyInfers_of_two_values_on (Prod.fst : Bool × Bool → Bool) Prod.snd
+    ⟨(false, false), rfl⟩ ⟨(false, true), (true, true), rfl, rfl, by decide⟩
+
+/-- **And one device infers a whole family at once**, which is the statement
+that matters for an overseer asked to answer more than one question: the
+inferring device is built once and serves every target in the family. Taken here
+at a one-element family, so the construction is exercised rather than the
+indexing. -/
+public theorem exists_device_inferring_family :
+    ∃ C : InferenceDevice.{0, 0} (Bool × Bool),
+      ∀ _ : Unit, WeaklyInfers C (Prod.fst : Bool × Bool → Bool) :=
+  exists_weaklyInfers_family_of_values_attained_on (fun _ : Unit => (Prod.fst : Bool × Bool → Bool))
+    Prod.snd ⟨(false, true), rfl⟩ ⟨(false, false), rfl⟩
+    (fun _ u => ⟨(u.1, true), rfl, rfl⟩) (fun _ => ⟨(false, false), (true, false), by decide⟩)
+
+/-! ## A device whose setup fibres are large
+
+`LargeSetupFibres` asks every realized setup to hold three distinct worlds, and
+nothing in the tree inhabited it — which is why the four statements that take it
+as a hypothesis reached no application. `witnessInfers` cannot serve: its setup
+is the identity, so every fibre is a single point. One device with a constant
+setup over a three-element world set is the whole fix.
+-/
+
+/-- Three worlds, one setup, and the conclusion of `witnessInfers`. Because the
+setup is constant, its single realized value holds all three worlds. -/
+public abbrev blindTriple : InferenceDevice (Fin 3) where
+  Setup := Unit
+  setup := fun _ => ()
+  concl := wConcl
+  concl_surjective := wConcl_surjective
+
+/-- **The fibres are large**, by exhibiting the triple directly. -/
+public theorem blindTriple_largeSetupFibres : LargeSetupFibres blindTriple := by
+  rintro ⟨⟩ -
+  exact ⟨0, 1, 2, by decide, by decide, by decide, rfl, rfl, rfl⟩
+
+/-- **Some device strongly infers it.** Wolpert's positive result for strong
+inference, at the first model in this tree that meets its hypothesis. -/
+public theorem exists_device_stronglyInferring_blindTriple :
+    ∃ C' : InferenceDevice.{0, 0} (Fin 3), StronglyInfers C' blindTriple :=
+  exists_stronglyInfers_of_large_fibres blindTriple_largeSetupFibres
+
+/-- **The spare point lies in the fibre it was taken from.** The three
+projections out of a large fibre are what the strong inferrer is built on, and
+each is a statement about the construction that nothing checked until a device
+satisfied the hypothesis. -/
+public theorem blindTriple_sparePoint_in_fibre (u : Fin 3) :
+    blindTriple.setup (sparePoint blindTriple u) = blindTriple.setup u :=
+  sparePoint_in_fibre blindTriple_largeSetupFibres u
+
+/-- And it is distinct from the other two, which is what makes the fibre large
+rather than merely non-empty. -/
+public theorem blindTriple_sparePoint_distinct (u : Fin 3) :
+    sparePoint blindTriple u ≠ agreePoint blindTriple u ∧
+      sparePoint blindTriple u ≠ disagreePoint blindTriple u :=
+  ⟨sparePoint_ne_agree blindTriple_largeSetupFibres u,
+   sparePoint_ne_disagree blindTriple_largeSetupFibres u⟩
+
+/-! ## Three setup values, and what happens without them
+
+`weaklyInfers_iff_three_setups` is Wolpert's `|X(U)| > 2` condition stated as an
+equivalence: under `SetupRefinesConcl`, having three realized setup values is
+*the same thing* as weakly inferring some non-constant target. An equivalence
+needs both directions exhibited or it is a hypothesis nobody has met, so both
+are below, at devices that differ only in how many setup values they have.
+
+`witnessInfers` has three and does infer one. `boolDev` has two, and the
+equivalence read backwards is then a genuine impossibility: **no non-constant
+target at all** is weakly inferred, however it is chosen.
+-/
+
+/-- The setup separates every pair, so it refines the conclusion for free. -/
+public theorem witnessInfers_setupRefinesConcl : SetupRefinesConcl witnessInfers :=
+  fun _ _ h => congrArg wConcl h
+
+/-- Three realized setup values, which is print's `|X(U)| > 2`. -/
+public theorem witnessInfers_threeSetups : ThreeSetupValues witnessInfers :=
+  ⟨0, 1, 2, ⟨0, rfl⟩, ⟨1, rfl⟩, ⟨2, rfl⟩, by decide, by decide, by decide⟩
+
+/-- **The equivalence, at a device meeting its hypothesis.** -/
+public theorem witnessInfers_threeSetups_iff :
+    ThreeSetupValues witnessInfers ↔
+      ∃ Γ : Fin 3 → Bool, (∃ u v : Fin 3, Γ u ≠ Γ v) ∧ WeaklyInfers witnessInfers Γ :=
+  weaklyInfers_iff_three_setups witnessInfers_setupRefinesConcl
+
+/-- **So a non-constant target is weakly inferred** -- read off the count of
+setup values rather than constructed by hand. -/
+public theorem witnessInfers_exists_nonconstant :
+    ∃ Γ : Fin 3 → Bool, (∃ u v : Fin 3, Γ u ≠ Γ v) ∧ WeaklyInfers witnessInfers Γ :=
+  witnessInfers_threeSetups_iff.mp witnessInfers_threeSetups
+
+/-- A two-setup device also refines its conclusion. -/
+public theorem boolDev_setupRefinesConcl : SetupRefinesConcl boolDev := fun _ _ h => h
+
+/-- But it has only two setup values. -/
+public theorem boolDev_not_threeSetups : ¬ ThreeSetupValues boolDev := by
+  rintro ⟨x₁, x₂, x₃, -, -, -, h12, h13, h23⟩
+  revert h12 h13 h23
+  revert x₁ x₂ x₃
+  decide
+
+/-- **And so it weakly infers no non-constant target whatsoever.** The
+equivalence read backwards, which is the direction that turns a counting
+condition into an impossibility. -/
+public theorem boolDev_no_nonconstant_target :
+    ¬ ∃ Γ : Bool → Bool, (∃ u v : Bool, Γ u ≠ Γ v) ∧ WeaklyInfers boolDev Γ :=
+  fun h => boolDev_not_threeSetups
+    ((weaklyInfers_iff_three_setups boolDev_setupRefinesConcl).mpr h)
 
 end AISafetyAtlas.Examples.Inference.Device

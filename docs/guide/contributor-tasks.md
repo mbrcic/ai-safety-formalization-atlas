@@ -336,7 +336,7 @@ dual to the impossibility rows.
   Rice/halting with an explicit containment model, or stays mapped-only.
 - **Acceptance:** either a bridge declaration with stated modeled system,
   assumptions, quantifier order, conclusion, and the practical claim it does
-  **not** establish (`ai_bridge_status: HUMAN_REVIEW`), or a provenance note
+  **not** establish (`ai_interpretation_status: HUMAN_REVIEW`), or a provenance note
   recording why no clean statement map exists. Do not claim BY-025 is
   formalized.
 - **Does not change:** the Alfonseca/AgentBehavior packaging; no fake bridge
@@ -502,7 +502,7 @@ The original scoping follows.
   against van Leeuwen & Wiedermann Theorem 1: the modeled total-trace system,
   the explicit switching-construction certificate, and the `RELATED`
   classification.
-- **Review package:** [`ct3-robot-review-package.md`](../bridges/ct3-robot-review-package.md).
+- **Review package:** [`ct3-robot-review-package.md`](../interpretation-reviews/ct3-robot-review-package.md).
 - **Done (2026-07-19):** maintainer **reviewed** statement and scoped
   interpretation; accepts transparent **`RELATED`** packaging (Lean assumes
   `SwitchingConstruction`; not paper EXACT). Registry: formalization
@@ -520,7 +520,7 @@ The original scoping follows.
   Root import, PublicAPI smoke example, and BY-012 registry declaration updated.
 - **Bridge review (2026-07-19):** maintainer accepted statement and scoped
   interpretation; BY-012 is `REVIEWED`
-  ([`review-by-012-agentbehavior.md`](../bridges/review-by-012-agentbehavior.md)).
+  ([`review-by-012-agentbehavior.md`](../interpretation-reviews/review-by-012-agentbehavior.md)).
 
 ## CT-5 — Surface the generated atlas index in project navigation (S) — **done**
 
@@ -541,7 +541,7 @@ evidence above as the issue body. Suggested title:
 ## Completed
 
 - Bridge-status lifecycle vocabulary (`HUMAN_REVIEW` / `STATEMENT_REVIEWED` /
-  `REVIEWED`) with `bridge_review` evidence, enforced by
+  `REVIEWED`) with `interpretation_review` evidence, enforced by
   `scripts/validate_registry.py`; the v0.1 all-`HUMAN_REVIEW` snapshot now lives
   only in the release audit.
 - Structured `candidate_formalizations` schema; BY-015 Chaitin promoted to

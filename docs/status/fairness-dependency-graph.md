@@ -10,7 +10,7 @@ Edges come from the elaborated Lean environment. This answers the question the p
 
 So `A → B` means *`B` occurs in `A`'s statement, or in `A`'s body when `A` is a definition*. A lemma used only inside a proof does not appear. Reading the table as a complete call graph would be wrong, and the two sections below are scoped so that they stay true under this limit.
 
-`62` authored declarations in `AISafetyAtlas.Fairness.*` (37 theorems). Compiler-generated companions and projections are dropped.
+`64` authored declarations in `AISafetyAtlas.Fairness.*` (39 theorems). Compiler-generated companions and projections are dropped.
 
 ## Load-bearing declarations
 
@@ -18,19 +18,20 @@ Named in the statements of eight or more others. A change to one of these is a c
 
 | Declaration | Named by |
 |---|---|
-| `Instance` | 54 |
-| `RiskAssignment` | 47 |
-| `Instance.N` | 19 |
+| `Instance` | 57 |
+| `RiskAssignment` | 51 |
+| `Instance.N` | 23 |
+| `Calibrated` | 19 |
 | `slack` | 16 |
-| `Calibrated` | 15 |
-| `PerfectPrediction` | 11 |
-| `ApproxPerfectPrediction` | 11 |
-| `BalancedPositive` | 10 |
-| `BalancedNegative` | 10 |
-| `ApproxEqualBaseRates` | 10 |
+| `PerfectPrediction` | 16 |
+| `EqualBaseRates` | 14 |
+| `BalancedPositive` | 14 |
+| `BalancedNegative` | 14 |
+| `ApproxPerfectPrediction` | 13 |
+| `ApproxEqualBaseRates` | 12 |
 | `ApproxBalancedPositive` | 10 |
 | `ApproxBalancedNegative` | 10 |
-| `EqualBaseRates` | 9 |
+| `positiveAverage` | 8 |
 | `WithinFactor` | 8 |
 | `Instance.n` | 8 |
 | `ApproxCalibrated` | 8 |
@@ -79,6 +80,7 @@ None.
 | `assigned_eq_add` | theorem | `Instance`, `RiskAssignment`, `assigned`, `assignedNeg`, `assignedPos` |
 | `average_lower_bound` | theorem | `ApproxBalancedNegative`, `ApproxBalancedPositive`, `ApproxCalibrated`, `Instance`, `Instance.N`, `RiskAssignment`, `baseRate`, `positiveAverage` |
 | `baseRate` | definition | `Instance`, `Instance.N` |
+| `cannot_have_all_three` | theorem | `BalancedNegative`, `BalancedPositive`, `Calibrated`, `EqualBaseRates`, `Instance`, `Instance.N`, `PerfectPrediction`, `RiskAssignment` |
 | `continuous_scoreRelativeSlack` | theorem | `scoreRelativeSlack` |
 | `continuous_slack` | theorem | `slack` |
 | `exists_slack_function` | theorem | `ApproxBalancedNegative`, `ApproxBalancedPositive`, `ApproxCalibrated`, `ApproxEqualBaseRates`, `ApproxPerfectPrediction`, `Instance`, `Instance.N`, `RiskAssignment` |
@@ -91,6 +93,7 @@ None.
 | `perfect_of_negativeScore_eq_zero` | theorem | `Calibrated`, `Instance`, `Instance.n`, `Instance.p`, `RiskAssignment`, `negativeScore` |
 | `perfect_prediction_or_equal_base_rates` | theorem | `BalancedNegative`, `BalancedPositive`, `Calibrated`, `EqualBaseRates`, `Instance`, `Instance.N`, `PerfectPrediction`, `RiskAssignment` |
 | `perfect_prediction_or_equal_base_rates_of_approx` | theorem | `BalancedNegative`, `BalancedPositive`, `Calibrated`, `EqualBaseRates`, `Instance`, `Instance.N`, `PerfectPrediction`, `RiskAssignment` |
+| `population_escape_of_all_three` | theorem | `BalancedNegative`, `BalancedPositive`, `Calibrated`, `EqualBaseRates`, `Instance`, `Instance.N`, `PerfectPrediction`, `RiskAssignment` |
 | `positiveAverage` | definition | `Instance`, `RiskAssignment`, `positiveScore` |
 | `positiveAverage_le_one` | theorem | `Instance`, `RiskAssignment`, `positiveAverage` |
 | `positiveAverage_nonneg` | theorem | `Instance`, `RiskAssignment`, `positiveAverage` |

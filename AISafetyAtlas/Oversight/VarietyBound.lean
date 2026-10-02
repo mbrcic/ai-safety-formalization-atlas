@@ -1,5 +1,6 @@
 module
 
+public import AISafetyAtlas.Sovereignty.Arena
 public import AISafetyAtlas.Control.VarietyCounting
 public import AISafetyAtlas.Knowledge
 
@@ -67,9 +68,12 @@ the intervention repertoire, and the result is about the relation between them.
 - **Not** a claim about any deployed system. `Σ`, `Act` and `effect` are
   arbitrary finite data. Nothing here asserts that a real monitor's intervention
   set is small, and the bound is vacuous unless someone establishes that it is.
-- **Not** a claim that more interventions suffice. `not_forces_of_card_lt` is a
-  necessary condition. Its converse is false, and `hcol` is a hypothesis about
-  the effect table, not a conclusion.
+- **Not** a claim that more interventions suffice, and **not** a claim that
+  counting measures power. `not_forces_of_card_lt` is a necessary condition whose
+  converse is false, and `hcol` is a hypothesis about the effect table rather
+  than a conclusion. `fewer_acts_can_force_while_more_cannot` exhibits a
+  two-intervention repertoire that forces where a four-intervention one cannot;
+  what separates them is `collapse`, not size.
 - **Not** an independence claim about *knowability* in general. What is proved
   independent is coverage and forcing, in this model. `Knowledge.Knowable` on
   other data is a different statement.
@@ -151,5 +155,164 @@ public theorem forces_of_constant_effect_of_not_knowable {effect : Sit → Act �
     (hconst : ∀ σ, effect σ a = target) :
     Forces effect observe (fun _ => a) target :=
   forces_of_constant_effect hconst
+
+/-! ## What forcing actually needs: collapse, not count
+
+`not_forces_of_card_lt` is a bound on the *size* of the repertoire, and size is
+the wrong quantity. Its hypothesis `hcol` says every intervention is injective in
+the situation -- no act flattens the state space -- and that hypothesis is doing
+all the work. Drop it and one intervention suffices, whatever the counts:
+`forces_of_constant_effect` is that corner already.
+
+So a repertoire's power is not how many acts it holds but how far any one of them
+**collapses** the situations onto a single outcome. Two acts, one of which lands
+the world on the same point from wherever it started, beat a thousand acts that
+each preserve every distinction. This section names the quantity and proves the
+two existing theorems are its extremes.
+-/
+
+/--
+The **collapse** of an intervention: the outcomes it still admits as the
+situation varies.
+
+A small collapse is a powerful act. `collapse effect a = {x}` is an act that
+lands the world on `x` from wherever it started; a collapse as large as `Sit` is
+an act that preserves every distinction the situation makes. This is the quantity
+`not_forces_of_card_lt` and `forces_of_constant_effect` sit at opposite ends of.
+-/
+@[expose] public def collapse (effect : Sit → Act → Out) (a : Act) : Set Out :=
+  Set.range fun σ => effect σ a
+
+/-- An intervention is **decisive** for `target` when it collapses every
+situation onto it. -/
+@[expose] public def Decisive (effect : Sit → Act → Out) (a : Act)
+    (target : Out) : Prop :=
+  collapse effect a ⊆ {target}
+
+/-- Being decisive is being constant, spelled out. -/
+public theorem decisive_iff {effect : Sit → Act → Out} {a : Act} {target : Out} :
+    Decisive effect a target ↔ ∀ σ, effect σ a = target := by
+  constructor
+  · intro h σ; exact h ⟨σ, rfl⟩
+  · rintro h _ ⟨σ, rfl⟩; exact h σ
+
+/--
+**One decisive act forces, whatever the counts.**
+
+No hypothesis relates `Act` to `Sit`, and the observation is never consulted.
+This is `forces_of_constant_effect` in the vocabulary of collapse, and it is the
+formal content of the objection that a repertoire of two -- act, or do not --
+can beat a repertoire of thousands.
+-/
+public theorem forces_of_decisive {effect : Sit → Act → Out} {observe : Sit → Obs}
+    {a : Act} {target : Out} (h : Decisive effect a target) :
+    Forces effect observe (fun _ => a) target :=
+  forces_of_constant_effect (decisive_iff.mp h)
+
+/--
+**Forcing is exactly collapse along the policy.** The composite act-after-observe
+must land every situation on the target; nothing weaker will do, and the
+observation enters only by choosing which act is played where.
+-/
+public theorem forces_iff_composite_constant {effect : Sit → Act → Out}
+    {observe : Sit → Obs} {act : Obs → Act} {target : Out} :
+    Forces effect observe act target ↔
+      ∀ σ, effect σ (act (observe σ)) = target :=
+  Iff.rfl
+
+/--
+**The counting bound lives at the other end.** `hcol` says no intervention
+collapses two distinct situations, which rules out decisiveness outright as soon
+as there are two situations to collapse.
+
+So the two theorems do not compete: `not_forces_of_card_lt` is what remains once
+decisiveness has been assumed away, and this states the boundary between them
+rather than leaving it to the reader.
+-/
+public theorem not_decisive_of_injective [Nontrivial Sit] {effect : Sit → Act → Out}
+    {a : Act} (hinj : Injective fun σ => effect σ a) (target : Out) :
+    ¬ Decisive effect a target := by
+  intro hdec
+  obtain ⟨σ₁, σ₂, hne⟩ := exists_pair_ne Sit
+  exact hne (hinj (by
+    simp only []
+    rw [decisive_iff.mp hdec σ₁, decisive_iff.mp hdec σ₂]))
+
+/-! ## Where power becomes, and whether it stays
+
+Collapse is a property of one effect table, and an effect table is a snapshot.
+Power a configuration hands you is power another configuration can take back, so
+the repertoire is not the whole substrate; what the substrate does across its
+configurations is.
+
+`Γ : K → (Sit → Act → Out)` is that substrate and `k` a configuration it can be
+in. `RobustlyForces` is the property of *staying*: the guarantee survives every
+configuration, not merely the one you were handed. `HasStructuralPower` in
+`AISafetyAtlas.Sovereignty.Separations` is the same move on a game form, and this
+is its oversight-side counterpart.
+-/
+
+variable {K : Type*}
+
+/-- **Power that stays.** The policy forces the target in every configuration the
+substrate can be in, not merely in the present one. -/
+@[expose] public def RobustlyForces (Γ : K → Sit → Act → Out) (observe : Sit → Obs)
+    (act : Obs → Act) (target : Out) : Prop :=
+  ∀ k, Forces (Γ k) observe act target
+
+/-- Staying implies holding: a guarantee across all configurations is a guarantee
+in each one. -/
+public theorem RobustlyForces.forces {Γ : K → Sit → Act → Out} {observe : Sit → Obs}
+    {act : Obs → Act} {target : Out} (h : RobustlyForces Γ observe act target)
+    (k : K) : Forces (Γ k) observe act target := h k
+
+/-- **An act that stays decisive is power that stays.** The hypothesis is a
+condition on the substrate `Γ`, not on the agent holding the act. -/
+public theorem robustlyForces_of_decisive {Γ : K → Sit → Act → Out}
+    {observe : Sit → Obs} {a : Act} {target : Out}
+    (h : ∀ k, Decisive (Γ k) a target) :
+    RobustlyForces Γ observe (fun _ => a) target :=
+  fun k => forces_of_decisive (h k)
+
+/-- **Power does not stay if one configuration removes it.** However well the
+policy does elsewhere, a single configuration in which it fails is enough. -/
+public theorem not_robustlyForces_of_exists_not {Γ : K → Sit → Act → Out}
+    {observe : Sit → Obs} {act : Obs → Act} {target : Out}
+    (k : K) (h : ¬ Forces (Γ k) observe act target) :
+    ¬ RobustlyForces Γ observe act target :=
+  fun hall => h (hall k)
+
+/-! ## The same notion as the game-form side
+
+`AISafetyAtlas.Sovereignty.Arena` states forcing for one party against an opaque
+residue. This module's `Forces` is that notion with the policy named rather than
+quantified: the party settles a policy, the situation is the residue, and
+`effect`-after-`observe` resolves them. Making the identification explicit is what
+lets the counting and collapse results here be read as results about power rather
+than only about oversight.
+-/
+
+/-- **The overseer's arena.** The policy is what the overseer settles, the
+situation is what it does not. -/
+@[expose] public def effectArena (effect : Sit → Act → Out) (observe : Sit → Obs) :
+    Sovereignty.Arena (Obs → Act) Sit Out where
+  outcome := fun act σ => effect σ (act (observe σ))
+
+/-- **Oversight forcing is arena forcing, once the policy is quantified.** The
+only difference between the two statements is that `Forces` names the policy and
+`Arena.Forces` asks for one. -/
+public theorem exists_forces_iff_arena_forces {effect : Sit → Act → Out}
+    {observe : Sit → Obs} {target : Out} :
+    (∃ act, Forces effect observe act target) ↔
+      (effectArena effect observe).Forces {target} :=
+  Iff.rfl
+
+/-- The arena's collapse at a policy is the set of outcomes that policy still
+admits, which is `collapse` composed with the policy rather than with a single
+act. -/
+public theorem arena_collapse_eq {effect : Sit → Act → Out} {observe : Sit → Obs}
+    {act : Obs → Act} :
+    (effectArena effect observe).collapse act =
+      Set.range fun σ => effect σ (act (observe σ)) := rfl
 
 end AISafetyAtlas.Oversight

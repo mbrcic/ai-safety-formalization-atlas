@@ -73,6 +73,29 @@ public theorem no_constant_outcome (ρ : Fin 4 → Fin 2) :
     2 ≤ (admittedOutcomes ashbyTable ρ Finset.univ).card :=
   two_le_card_admittedOutcomes ashbyTable ρ ashbyTable_column_injective (by decide)
 
+/--
+**The ceiling form, at the same table.** `ashby_variety_ge` reads the bound as a
+rational quotient; the integer statement is the one a counting argument uses,
+and `⌈4/2⌉ = 2` is met exactly by `ashbyStrategy`. The two forms are the same
+law and the sharpness above witnesses both.
+-/
+public theorem ashbyTable_ceilDiv_bound :
+    (Fintype.card (Fin 4) + Fintype.card (Fin 2) - 1) / Fintype.card (Fin 2)
+      ≤ (admittedOutcomes ashbyTable ashbyStrategy Finset.univ).card :=
+  card_ceilDiv_le_admittedOutcomes ashbyTable ashbyStrategy (by decide)
+    ashbyTable_column_injective
+
+/--
+**Ashby's own units.** He states the law in bits, as *"the variety in the
+outcomes cannot be reduced below the variety in the disturbances less the
+variety in the regulator"*, and that is the logarithmic form rather than the
+quotient. `log 4 - log 2 ≤ log 2` at this table, with equality.
+-/
+public theorem ashbyTable_logVariety_bound :
+    Real.log (Fintype.card (Fin 4)) - Real.log (Fintype.card (Fin 2))
+      ≤ Real.log ((admittedOutcomes ashbyTable ashbyStrategy Finset.univ).card) :=
+  ashby_logVariety_ge ashbyTable ashbyStrategy ashbyTable_column_injective (by decide)
+
 /-! ## The multiplicity form
 
 Ashby added 11/9 for tables in which a column may repeat an entry. Then the
@@ -95,6 +118,32 @@ public theorem card_le_of_two_per_column :
           * (Finset.univ : Finset (Fin 2)).card) :=
   card_le_mul_card_admittedOutcomes_mul coarseTable (fun _ => 0) Finset.univ Finset.univ 2
     (fun _ _ => Finset.mem_univ _) (by decide)
+
+/--
+**The multiplicity form in Ashby's units**, on the table where the 11/5
+condition fails. Every column of `coarseTable` repeats each entry twice, so the
+repetition count enters the bound as a subtracted `log 2`: what the regulator
+cannot distinguish is variety the outcome does not have to carry.
+-/
+public theorem coarseTable_logVariety_bound :
+    Real.log (Fintype.card (Fin 4)) - Real.log 2 - Real.log (Fintype.card (Fin 2))
+      ≤ Real.log ((admittedOutcomes coarseTable (fun _ => 0) Finset.univ).card) :=
+  ashby_logVariety_ge_mul coarseTable (fun _ => 0) 2 (by decide) (by decide)
+
+/--
+**The bound is attained by a whole family, not only by this table.** `shiftTable`
+is the `r × c` shift and `ashby_variety_ge_isSharp` says its columns are
+injective and its admitted-outcome count is exactly the ceiling. At `r = 4`,
+`c = 2` that is `ashbyStrategy_card_eq_two` again, reached from the general
+construction instead of by evaluation — so sharpness is a property of the law
+and not a coincidence of one hand-written table.
+-/
+public theorem shiftTable_four_two_is_sharp :
+    (∀ k : ZMod 2, Function.Injective fun d : Fin 4 => shiftTable 4 2 (by norm_num) d k)
+      ∧ (admittedOutcomes (shiftTable 4 2 (by norm_num)) (shiftStrategy 4 2)
+            Finset.univ).card
+          = (Fintype.card (Fin 4) + Fintype.card (ZMod 2) - 1) / Fintype.card (ZMod 2) :=
+  ashby_variety_ge_isSharp 4 2 (by norm_num)
 
 /-! ## §11/11's exercises, at Ashby's own numbers
 

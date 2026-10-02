@@ -243,7 +243,7 @@ excludes.
 - **Anything normative.** `Covers` says a coalition's evidence *determines* the hazard.
   Whether such a coalition should exist, and under what governance, is a separate
   question.
-- **No AI-system bridge.** No `ai_bridge_status` graduation follows from these results.
+- **No AI-system bridge.** No `ai_interpretation_status` graduation follows from these results.
 
 ## The probabilistic version, and why this one is exact
 

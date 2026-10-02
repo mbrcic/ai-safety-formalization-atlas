@@ -11,7 +11,7 @@ rather than derives, printed results it does not reach, and inferences a
 reader might expect to follow from what is here and which do not. They are
 part of the result, not a disclaimer attached to it.
 
-**38 modules** carry one.
+**44 modules** carry one.
 
 ---
 
@@ -28,11 +28,17 @@ part of the result, not a disclaimer attached to it.
   Finiteness and the per-violation witness are lost on the way in, and no attempt
   is made to recover them.
 - **Not a trace producer.** This connects the *consumer* side of the trace theory
-  to the kernel, and nothing here produces a trace. The producer is
-  `AISafetyAtlas.Compositional.NetworkTraces`, which reads one of the four
-  execution-generating modules as a `TraceSystem`; the other three —
-  `Compositional.Symmetry`, `Wireheading.CRMDP` and
-  `Wireheading.GoalPreservation` — still have no trace consumer.
+  to the kernel, and nothing here produces a trace. The producers are
+  `AISafetyAtlas.Compositional.NetworkTraces`, which reads a network execution as
+  a `TraceSystem`, and `AISafetyAtlas.Compositional.TraceSystem`, which reads the
+  runs of a policy set on the `AISafetyAtlas.Decision` carrier as one. That
+  second producer reaches `Wireheading.CRMDP`, whose history type *is*
+  `Decision.History` at its own observation alphabet, so a corrupt-reward
+  policy's determined run is a trace here. It does **not** reach
+  `Compositional.Symmetry`, and it does not reach
+  `Wireheading.GoalPreservation`: that module's `Model.run` steps by its own
+  `next` field rather than by `Decision.detRun`, so its trajectories are not
+  `runTraces` traces even where its histories are `Decision.History`.
 - **Not** a claim about `IsKSafety`, `IsHyperSafety` or `IsHyperLiveness`. Only
   the ordinary batch-predicate notion is routed.
 
@@ -65,6 +71,19 @@ part of the result, not a disclaimer attached to it.
 * **Not BY-043.**  This remains an upstream dependency for the survey-original
   result, not coverage of it.  No status upgrade follows from it.
 
+## `AISafetyAtlas.Compositional.TraceSystem`
+
+* **Determined runs only.** The drawn run is a `PMF`; a trace system of
+  distributions is a different object and is not built here.
+* **Complete traces are finite histories.** Clarkson and Schneider's traces are
+  infinite; the histories here are finite, so `runTraces` is the system of
+  *stages* rather than of limits. Nothing here takes that limit, and a
+  hyperproperty about infinite behaviour is not reached by this module.
+* **No hyperproperty is exhibited.** `IsKSafety` is a hypothesis in everything
+  below. The module supplies the system, not a property of one.
+
+Landscape entry: `LAND-COMP-RUNTRACES-001`. No AI-system bridge is asserted.
+
 ## `AISafetyAtlas.Compositional`
 
 - **Not** a claim that arbitrary multi-agent safety properties factor into
@@ -75,7 +94,7 @@ part of the result, not a disclaimer attached to it.
   Symmetry are RELATED dependencies for that survey row at most.
 - **Not** full Angluin covering theory, randomized leader election, or
   assume-guarantee completeness (e.g. Dewes–Dimitrova GEDCs).
-- **Not** an AI-system bridge. No `ai_bridge_status` graduation from this facade.
+- **Not** an AI-system bridge. No `ai_interpretation_status` graduation from this facade.
 - **Not** the same question as `AISafetyAtlas.Oversight.JointObservation`. That surface
   asks whether a hazard label factors through an available observation, under typed
   coalition access restriction. Rectangularity asks whether a relation decomposes into
@@ -130,7 +149,7 @@ BY-043 (RELATED). Cores compile; paper-parity residuals live in
   regulator, a plant, and a channel. Reading a learned policy as the regulator
   is an application line, not a theorem in this module; see
   `docs/status/applications.md` for how those are graded and
-  `docs/bridges/` for what review a bridge has to survive.
+  `docs/interpretation-reviews/` for what review a bridge has to survive.
 - **Not a claim that a controller with enough variety succeeds.** All of these
   are necessary conditions. `ashby_variety_ge_isSharp` says the
   counting bound is tight, not that meeting it suffices for any particular task.
@@ -142,9 +161,19 @@ BY-043 (RELATED). Cores compile; paper-parity residuals live in
   variety bound into a control-loss bound or back. They sit side by side because
   they are the same question in two idioms, which is a claim about reading, not
   a proved correspondence.
-- **The survey's other control rows are still empty.** Dynamical
-  uncontrollability, the Good Regulator theorem, and uncontrollability of AI
-  carry no Lean on any branch.
+- **The Good Regulator theorem carries no Lean on any branch**, checked
+  2026-09-13. Conant and Ashby's theorem is an entropy statement about an
+  optimal regulator's conditional distribution; Ashby's law of requisite
+  variety, which is what this module has, is a different theorem by one of the
+  same authors. `BY-003`'s row note records what a formalization would have to
+  state.
+- **Dynamical uncontrollability is still unproved**, but no longer empty:
+  `AISafetyAtlas.LinearSystems` carries the Kalman and Hautus criteria and, since
+  2026-09-13, Klamka's counting test. All of it is algebraic — nothing there
+  defines a trajectory, a solution or an output signal — so "the state cannot be
+  driven, or reconstructed" is still not a theorem anywhere in this repository.
+- **Uncontrollability of AI carries no Lean.** `BY-040`'s source states no
+  theorem of its own; its row note records the reading.
 
 ## `AISafetyAtlas.Inference.Device`
 
@@ -315,7 +344,7 @@ exponentially is an estimate on binomial coefficients and is graded `No`.
 - **Not** full Wolpert 1996/1997 (stochastic algorithms, time-varying
   objectives, …). Graded **RELATED** for the atlas cores.
 
-No AI-system bridge; `ai_bridge_status` remains human review.
+No AI-system bridge; `ai_interpretation_status` remains human review.
 
 ## `AISafetyAtlas.Oversight.JointObservation.Residual`
 
@@ -348,7 +377,7 @@ No survey coverage row is claimed here; this is landscape infrastructure.
   `Portfolio.lean` defines what a correct portfolio would be and checks one bounded
   instance; it does not find portfolios, and its cost function is declared rather than
   derived.
-- **Not** an AI-system bridge. No `ai_bridge_status` graduation from this facade.
+- **Not** an AI-system bridge. No `ai_interpretation_status` graduation from this facade.
 - **Not** a generalization of `AISafetyAtlas.Compositional.Rectangularity`, and not
   generalized by it. Rectangularity asks whether an admissibility *relation* decomposes
   into local product constraints; coverage asks whether a hazard *label* is constant on
@@ -368,9 +397,12 @@ No survey coverage row is claimed here; this is landscape infrastructure.
 - **Not** a claim about any deployed system. `Σ`, `Act` and `effect` are
   arbitrary finite data. Nothing here asserts that a real monitor's intervention
   set is small, and the bound is vacuous unless someone establishes that it is.
-- **Not** a claim that more interventions suffice. `not_forces_of_card_lt` is a
-  necessary condition. Its converse is false, and `hcol` is a hypothesis about
-  the effect table, not a conclusion.
+- **Not** a claim that more interventions suffice, and **not** a claim that
+  counting measures power. `not_forces_of_card_lt` is a necessary condition whose
+  converse is false, and `hcol` is a hypothesis about the effect table rather
+  than a conclusion. `fewer_acts_can_force_while_more_cannot` exhibits a
+  two-intervention repertoire that forces where a four-intervention one cannot;
+  what separates them is `collapse`, not size.
 - **Not** an independence claim about *knowability* in general. What is proved
   independent is coverage and forcing, in this model. `Knowledge.Knowable` on
   other data is a different statement.
@@ -392,10 +424,19 @@ No survey coverage row is claimed here; this is landscape infrastructure.
   built from plain Kolmogorov complexity cannot, up to an additive constant.
 - **Not** a treatment of the source's anti-rational pair `(-p_g, -R_π̇)` or of
   its regret analysis.
-- **Not** a lower bound over arbitrary explanations. It is a bi-Lipschitz fact
-  about one canonical pairing encoding.
-- **Not** the formal core of the source's Proposition 7, which quantifies over
-  all compatible pairs; see `Reasonable.lean` for that.
+- **Not**, in `explanation_at_least_behaviour`, a lower bound over arbitrary
+  explanations: that one is a bi-Lipschitz fact about one canonical pairing
+  encoding. `behaviour_le_of_evaluatesTo` **is** over arbitrary compatible
+  pairs, and the two are separate statements about separate objects.
+- **Not** the whole of the source's Proposition 7. The lower bound half is here
+  at the source's quantifier; the upper half is here only for `readerPair`, and
+  the three named degenerate pairs of §5.1.2 live in `Reasonable.lean` over an
+  abstract measure.
+- **Not** an upper bound on the source's own degenerate pair `(p_π̇, R)` as a
+  function of the behaviour. `degeneratePair` builds its planner *from* the
+  behaviour, so such a bound needs the primitive recursiveness of the
+  constant-program map, which the pinned Mathlib does not state. `readerPair`
+  carries the upper bound instead and is compatible with the same behaviour.
 - **Not** a statement about resource-bounded or computable-in-practice priors;
   the source's Appendix A discusses those separately.
 
@@ -479,6 +520,20 @@ Survey row: **BY-011**. No AI-system bridge is asserted.
 
 Survey row: **BY-011**. No AI-system bridge is asserted.
 
+## `AISafetyAtlas.Preference.Trajectory`
+
+* **Memoryless policies only.** A history policy that genuinely consults its
+  past is not in the image of `ofMemoryless`, and nothing here says the
+  degeneracy extends to one. It does, trivially, by the same planner — what is
+  absent is a reason to state it, since `Preference`'s object is memoryless.
+* **Determined runs only.** The drawn run is a `PMF`; this module does not
+  touch it.
+* **No optimality anywhere.** A planner here is unconstrained, exactly as in
+  `AISafetyAtlas.Preference`. Nothing is maximized, so nothing follows about
+  inverse reinforcement learning under a rationality assumption.
+
+Landscape entry: `LAND-PREF-TRAJECTORY-001`. No AI-system bridge is asserted.
+
 ## `AISafetyAtlas.Preference`
 
 - **Not** “value learning is impossible” — only that *behaviour alone* does not
@@ -492,7 +547,7 @@ Survey row: **BY-011**. No AI-system bridge is asserted.
 - **Not** a nontrivial `c`-reasonable language existence proof; exhibited models
   may be degenerate.
 - **Not** a claim about any particular algorithm, dataset, or deployed system.
-- **Not** an AI-system bridge; `ai_bridge_status` remains human review.
+- **Not** an AI-system bridge; `ai_interpretation_status` remains human review.
 
 Survey row: **BY-011**. Statement maps / residuals:
 `docs/provenance/a1-a3-b1-b3-b7-statement-maps.md`,
@@ -519,6 +574,23 @@ Survey row: **BY-011**. Statement maps / residuals:
 - This is not a consciousness theorem, a Lawvere/Wolpert diagonal theorem, a
   Breuer self-measurement theorem, or a prohibition on partial self-monitoring.
 
+## `AISafetyAtlas.Verification.RobotRun`
+
+* **Open loop.** A `Behavior` does not read observations, so the induced policy
+  ignores everything except how long it has been running. That is the source's
+  object and not a simplification introduced here; a behaviour that reacts is a
+  different type and nothing here supplies one.
+* **No undecidability is re-proved.** `action_safety_unverifiable` stays where
+  it is and is untouched. This module carries its *predicate* to a run, not its
+  proof.
+* **Determined runs only.** The drawn run is a `PMF` and is not treated here.
+* **The scenario is a parameter, not a world.** `ofBehavior` fixes a scenario
+  and the world is given separately by a transition and an observation map.
+  Nothing here says the two agree; relating a `Scenario` to a `State` is a
+  modelling choice this module deliberately leaves open.
+
+Landscape entry: `LAND-VERIF-ROBOTRUN-001`. No AI-system bridge is asserted.
+
 ## `AISafetyAtlas.Verification`
 
 Does **not** claim every practical AI property is behavioral, that a particular
@@ -529,17 +601,69 @@ system is this evaluator, or that sound incomplete methods are impossible.
 * **Not AIXI.**  `ρ` is an arbitrary conditional weighting, not a universal
   prior; nothing here is about Solomonoff induction or incomputability.
 * **Not a probability measure.**  `ρ.cond` is a real-valued weight with no
-  normalization or nonnegativity assumed.  Equation (2) is written as a finite
-  sum over a `Fintype` of observations, not as an expectation.
+  normalization or nonnegativity assumed.  Equation (2) is written as a sum over
+  observations, not as an expectation.
+* **No finiteness on the observation type.**  Since 2026-09-13 the sum is
+  unconditional over an **arbitrary** `Obs`, which is the source's own
+  quantifier: its setup fixes only `a ∈ 𝒜` and `o ∈ 𝒪` and bounds neither.
+  No summability hypothesis was added to buy this — the three theorems below
+  need only congruence and the vanishing case, both of which hold of the
+  unconditional sum.  `actionValue_eq_sum` recovers the finite sum at a
+  `Fintype`, so the previous signature is an instance of this one.
+  **The implication this rested on is now proved.** `∑'` is Mathlib's
+  unconditional sum, which is `0` by convention at a family that is not
+  summable, so until 2026-09-13 the claim that the value here is the source's
+  value was a statement about the source's hypotheses that the tree did not
+  carry. `actionValue_summable` carries it: at
+  `Belief.IsSubprobability` and `|u| ≤ 1` — print's `ρ` a probability and its
+  `u : ℋ → [0,1]` — the observation family is summable at every depth, so the
+  sum denotes. `actionValue_eq_sum` still recovers the finite case. At a family
+  outside those hypotheses this module says something that is not the source's
+  equation, and nothing here claims otherwise.
+* **No finiteness on the action type either.**  Since 2026-09-13 `value` takes
+  the supremum over an **arbitrary** `Action`, which is again the source's own
+  quantifier: it bounds `𝒜` nowhere and then writes *argmax* in (1) and *max*
+  in (3).  Attainment is the source's presupposition, and it is carried as the
+  hypothesis `Attains` rather than bought with a `Fintype` instance the source
+  does not have.  `attains_of_fintype` discharges it at a finite action set and
+  `value_succ_eq_sup'` recovers the finite maximum, so the previous signatures
+  are instances of these.  No hypothesis was added to `value`, `actionValue`,
+  `value_eq_of_agree_on_window`, `value_eq_zero_of_horizon_vanishes` or
+  `truncation_exact`: none of them needs the maximum attained, or the action
+  type inhabited, and four of them never needed either.
+  **The implication this rested on is now proved, and one gap survives it.**
+  `⨆` is Mathlib's conditional supremum, which is `0` by convention at a family
+  that is empty or unbounded above.  `actionValue_bddAbove` shows
+  the family is bounded above at `Belief.IsSubprobability` and `|u| ≤ 1`, which
+  are print's own conditions, so the supremum denotes rather than defaulting;
+  `value_succ_eq_sup'` still recovers the finite case.  **Bounded is not
+  attained.**  Where the maximum is not attained, equation (3) here is a
+  supremum and the source's is a maximum, and those differ — which is why
+  `Attains` remains a hypothesis and is not derived from the bound.
 * **Unbounded utility codomain.** The source uses utilities in `[0,1]`;
   `Agent.utility` is real-valued without a range invariant. The recursive
   equalities and locality proof remain valid at this more general type.
 * **No infinite-horizon limit**, hence no convergence or contraction argument.
-* **Not the delusion box.**  The paper's Statements 1 to 7 are informal
-  arguments about four specific agents; none is formalized here, and the paper
-  does not state them as theorems.
+* **Not the delusion box, and not the four agents.**  Both are in
+  `AISafetyAtlas.Wireheading.DelusionBox`, which is built on this module.  The
+  paper's Statements 1 to 7 are informal arguments rather than theorems; three
+  of them are proved there with the premises their arguments use supplied as
+  named hypotheses, and four of them are not proved anywhere.
 
 Landscape entry: `LAND-WIRE-OBJ-001`.  No AI-system bridge is asserted.
+
+## `AISafetyAtlas.Wireheading.AgentHistory`
+
+* **No reward, no corruption.** The transport carries histories, not the MDP's
+  reward. `AISafetyAtlas.Wireheading.CRMDP` is the module that puts a reward on
+  this carrier; nothing here duplicates it.
+* **Determined runs only.** The results below are stated for `detRun`, whose
+  policy and transition are functions. The drawn run is a `PMF`, and relating
+  `value` to an expectation over it is a different statement, not proved here.
+* **Not a claim that the two clusters agree on anything else.** `Agent` and
+  `MDP` remain distinct structures; this joins their histories and nothing more.
+
+Landscape entry: `LAND-WIRE-AGENTHISTORY-001`. No AI-system bridge is asserted.
 
 ## `AISafetyAtlas.Wireheading.CRMDP`
 
@@ -565,6 +689,27 @@ Landscape entry: `LAND-WIRE-OBJ-001`.  No AI-system bridge is asserted.
 * **Not decoupled feedback** and not the source's later learnability results.
 
 Survey row: **BY-039**. No AI-system bridge is asserted.
+
+## `AISafetyAtlas.Wireheading.GoalPreservationRun`
+
+* **Finitely many percepts**, as in `GoalPreservationSource`: `E_{e_t}` is a
+  normalised `Finset` sum, not an integral. No measure theory.
+* **Not modification-independence itself.** Print derives `Q_t^re(æ_<t π(æ_<t))`
+  modification-independent from modification-independent `ρ` and `u_t` together
+  with its Appendix A Theorem 20 (optimal policy existence) and Theorem 21
+  (optimal policy name). Neither is reproduced. Here `contValue` is a function
+  of the name and the history, so modification-independence is built into the
+  signature rather than proved; `initial_optimal` asserts what Theorems 20 and
+  21 would supply. **This is the gap the atlas still owes on this source**, and
+  it is the same one `GoalPreservationSource` records.
+* **Policy modification only**, not utility modification. Print's Theorems 14
+  and 15 (hedonistic and ignorant agents) are not formalized anywhere in the
+  atlas.
+* **Not a claim about real self-modifying systems.** No AI-system bridge is
+  asserted.
+
+Landscape entry: `LAND-GOAL-001` (this module is a second declaration set on
+that row's source).
 
 ## `AISafetyAtlas.Wireheading.GoalPreservationSource`
 
@@ -604,23 +749,100 @@ Landscape entry: `LAND-GOAL-001`.  No AI-system bridge is asserted.
 Survey / landscape: consumer of BY-039 and `LAND-KNOW-001`; recorded as
 `LAND-CRMDP-KNOW-001`. No AI-system bridge is asserted.
 
+## `AISafetyAtlas.Wireheading.ValueLearning`
+
+* **One decision step, no sequential agent.** Print's §4 value functions are
+  themselves single-step (`V(a) = ∑_{s,r,u} …`); the sequential reading is
+  carried by its examples and by §6–§7. Nothing here iterates.
+* **Not Definition 2** (self-delusion types), **not Assumption 4**
+  (consistency of `B` and `C`), **not Assumption 15**, and none of the
+  appendix results — Definitions 17/21/26, Lemma 20, Theorems 22/25,
+  Corollary 24. `IsCP` is stated, and Assumption 6 (`A^CP ≠ ∅`) appears only as
+  a hypothesis where it is needed, never as a standing axiom.
+* **No existence claim for `A^CP`.** Assumption 6 is print's assumption, not a
+  theorem; `AISafetyAtlas.Examples.Wireheading.ValueLearning` exhibits a model
+  in which it holds, and one in which a non-CP action strictly beats every CP
+  action, so neither `IsCP` nor its negation is vacuous here.
+* **Not a claim that CP-VRL is safe.** Theorem 14 says the CP-VRL agent's value
+  function does not depend on the reward evidence. Print itself calls the
+  robust specification of `C(u)` consistent with `B(r ∣ s)` an open question
+  (its Table 1 caption).
+
+Landscape entry: `LAND-VRL-001`. No AI-system bridge is asserted.
+
 ## `AISafetyAtlas.Wireheading`
 
-- **Not** EXACT Everitt et al. Theorem 11: one CRMDP model fixes a deterministic
-  transition while the source class may range over stochastic kernels; extrema
-  are structure fields; rewards range over the continuous interval `[0,1]`
-  rather than a finite uniform grid. Graded **RELATED**.
-- **Not** a full Ring–Orseau delusion-box development or AIXI; AgentEquations is
-  a finite-horizon packaging of displayed equations under an arbitrary weight
-  `ρ`.
+- **Not** EXACT Everitt et al. Theorem 11, and what stands between is no longer a
+  missing axis but a missing **join**. Graded **RELATED**. Print's statement is
+  four things at once — rewards over a uniform grid, the three extrema derived
+  from finiteness rather than assumed, a transition that is a Markov kernel, and
+  a quantifier over *possibly stochastic* policies — and each is now closed by
+  some rendering. `AISafetyAtlas.Wireheading.RewardGrid` closes the first two:
+  `RewardGrid.everitt_theorem_eleven_gridClass` runs over the source's own finite
+  uniform grid and assumes no extremum.
+  `AISafetyAtlas.Wireheading.StochasticCRMDP` closes the third: `CRMDP.StochModel`
+  has a distribution-valued transition and expected returns, which at print's own
+  finite state set (Definition 7) is print's stochastic kernel exactly.
+  `AISafetyAtlas.Wireheading.StochasticPolicy` closes the fourth: `CRMDP.MixedModel`
+  reads a policy as a distribution over actions and
+  `CRMDP.MixedModel.everitt_theorem_eleven` proves the bound at print's own
+  quantifier over it. **No single rendering closes all four**, and that is what
+  keeps the grade RELATED. What is missing is named rather than carried out, and
+  it is **two** steps, not one: first the grid extrema over a
+  `AISafetyAtlas.Decision.MDP`, and only then affinity for mixed policies. The
+  affine-functional argument in the header of
+  `AISafetyAtlas.Wireheading.RewardGrid` is the second of those. Calling it *the*
+  obstruction overstates it -- the parts already proved do not route through it.
+- The renderings trade faithfulness against generality and none dominates.
+  `RewardGrid` is the most faithful — print's reward grid, extrema derived — and
+  is deterministic in the dynamics and in the policy both. `StochModel` is
+  general on the dynamics, `MixedModel` on the dynamics and the policy, and each
+  of those takes its extrema as fields. They are chained rather than merely
+  analogous: `CRMDP.Model.toStoch_returnValue` and
+  `CRMDP.StochModel.toMixed_returnValue` say the three statements of Theorem 11
+  are about the same numbers.
+- **Not** AIXI, and not all of Ring–Orseau. `AgentEquations` is a finite-horizon
+  packaging of the displayed equations under an arbitrary weight, and
+  `DelusionBox` adds §3's box, §2's four agents and Statements 1 to 3. What is
+  absent is §4's self-modification setting with Statements 5 to 7, and
+  **Statement 4** — the paper's positive claim, that the knowledge-seeking agent
+  will not consistently use the box. The cheap half of recovering it is built:
+  `historyMass` is the product of successive conditionals and
+  `coherentKnowledgeAgent` is print's `u(h) = -ρ(h)` at that mass. The
+  conclusion is not proved. `knowledge_uses_the_box` still refutes it at the
+  untied `knowledgeAgent`; `coherent_uses_the_box` shows the coherent agent at
+  the mixture belief still programs the box, so coherence is not Statement 4.
+  Print's argument about discarded program mass needs more than
+  `ProgramPrior.Model` supplies. **Statements 1 to 3 were graded `Partial` and
+  Narrower until 2026-09-20 and are now `Yes` and Wider**: their printed
+  arguments need premises print never states, and those premises are now derived
+  from print's own construction rather than assumed. Statement 2's two constants
+  are horizon weights of steps *later*, so its bounds hold at every depth —
+  `goalAgent_actionValue_le_of_outOfReach` above and
+  `shortHorizon_le_goalAgent_policyActionValue` below — and proving the first
+  consumed print's own *"the goal can be reached at most once"*, a side condition
+  this paper states and never uses. The two-hypothesis
+  decomposition was **refuted** and replaced by a posterior and a committed
+  policy; the four branch bounds are theorems about print's agent, with
+  `rlAgent_actionValue_next_const` carrying *"the agent can program the DB to
+  produce a constant reward of 1"*; and `r̄ < 1` is forced by print's threshold,
+  not assumed. The agent is still a parameter of each Statement theorem and
+  nothing was folded into `rlAgent`.
 - **Not** utility modification; GoalPreservationSource is policy self-mod only,
-  and still assumes domination / continuation structure rather than deriving
-  full optimal-policy-existence result (the technical report's Appendix A
-  Theorem 20, which the source's own proof of Theorem 12 invokes). Its finite
-  percept weights are normalized and full-support.
+  and does not derive the full optimal-policy-existence result (the technical
+  report's Appendix A Theorem 20, which the source's own proof of Theorem 12
+  invokes). Its finite percept weights are normalized and full-support. Its
+  domination hypothesis is no longer a cluster-level assumption:
+  `GoalPreservationRun.Model.contValue_le_initial` derives it from equation (7)
+  and the initial policy's optimality, and `GoalPreservationRun.Model.toSource`
+  hands `GoalPreservationSource` an interface with it already discharged.
 - **Not** multiprincipal / shared-evaluator infrastructure by itself — that is
   a possible consumer of these cores, not what this facade currently is.
 - **Not** an AI-system bridge without separate review.
+- **Not** a sequential VRL agent: `ValueLearning` is the source's single-step
+  decision problem, over a finite utility class, and asserts nothing about
+  whether a useful prior consistent with the reward channel can be specified —
+  which the source itself records as open.
 
 - **Not** a novelty claim for `ObservationLimits`: the impossibility is the
   source's and `CRMDP` already formalizes both of its steps. That module adds the
@@ -629,5 +851,5 @@ Survey / landscape: consumer of BY-039 and `LAND-KNOW-001`; recorded as
   estimation, and quantifies over environments rather than over agents.
 
 Survey / landscape: BY-039 (RELATED), `LAND-WIRE-OBJ-001`, `LAND-GOAL-001`,
-`LAND-CRMDP-KNOW-001`.
+`LAND-CRMDP-KNOW-001`, `LAND-VRL-001`.
 Residuals: `docs/provenance/a1-a3-b1-b3-b7-reverification.md`.

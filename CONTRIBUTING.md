@@ -82,7 +82,7 @@ theorem. `WorkbenchConsumers.lean` is the bar; trivial restatements stay out.
 - **Internal helper with a named in-tree consumer** → Lean only (no forced
   registry row)
 - **Found but not reproduced** → `candidate_formalizations`
-- **AI-system interpretation** → bridge package + `ai_bridge_status` (human review)
+- **AI-system interpretation** → bridge package + `ai_interpretation_status` (human review)
 
 Do not attach arbitrary useful theorems to a survey row just to land somewhere.
 Detail on grades: [methodology](docs/guide/methodology.md).
@@ -191,9 +191,9 @@ list of atlas modifications.
 For an AI-safety bridge, state the modeled system, assumptions, quantifier
 order, mathematical conclusion, and the practical claim it does not establish.
 Bridge interpretation remains subject to separate human review, tracked by the
-`ai_bridge_status` lifecycle: `HUMAN_REVIEW` (default), `STATEMENT_REVIEWED`
+`ai_interpretation_status` lifecycle: `HUMAN_REVIEW` (default), `STATEMENT_REVIEWED`
 (the encoded statement accepted, interpretation not), and `REVIEWED` (both
-accepted). Graduating a bridge past `HUMAN_REVIEW` requires a `bridge_review`
+accepted). Graduating a bridge past `HUMAN_REVIEW` requires a `interpretation_review`
 record (reviewer, date, the two review flags, and an evidence pointer); ordinary
 validation accepts a well-formed graduation, so recording a real review does not
 require editing a validator.

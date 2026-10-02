@@ -3,30 +3,96 @@
   "generated_by": "scripts/generate_registry_views.py",
   "note": "Compact agent lookup over the single results ledger. Prefer this over registry.yaml; open the full YAML only for one id when notes or candidate-formalization detail is required. A row with an informal claim states something a source asserted; a row without one records a formalization standing on its own account. Each atlas declaration carries the file and line it is defined at, so opening one needs no repository search.",
   "claim_count": 49,
-  "artifact_count": 42,
+  "artifact_count": 95,
   "results_by_id": {
     "BY-001": {
       "id": "BY-001",
       "name": "Unobservability",
-      "ai_bridge_status": "HUMAN_REVIEW",
+      "ai_interpretation_status": "HUMAN_REVIEW",
       "informal_claim": "A system's internal state cannot in general be reconstructed from its observable outputs.",
-      "formalizations": [],
-      "lean_artifact": null,
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "relationship": "EXACT",
+          "reproduced": true,
+          "declarations": [
+            "AISafetyAtlas.LinearSystems.determinesStateOn_iff_isObservable"
+          ],
+          "module": "AISafetyAtlas.LinearSystems.Dynamics",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.LinearSystems.determinesStateOn_iff_isObservable",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/LinearSystems/Dynamics.lean",
+            "line": 302
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.LinearSystems.not_determinesStateOn_of_not_isObservable",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/LinearSystems/Dynamics.lean",
+            "line": 269
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Examples.LinearSystems.blind_not_determinesStateOn",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Examples/LinearSystems/Dynamics.lean",
+            "line": 169
+          }
+        ]
+      },
       "candidate_count": 0
     },
     "BY-002": {
       "id": "BY-002",
       "name": "Uncontrollability of dynamical systems",
-      "ai_bridge_status": "HUMAN_REVIEW",
+      "ai_interpretation_status": "HUMAN_REVIEW",
       "informal_claim": "Some dynamical systems cannot be driven between arbitrary states by available controls.",
-      "formalizations": [],
-      "lean_artifact": null,
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "relationship": "EXACT",
+          "reproduced": true,
+          "declarations": [
+            "AISafetyAtlas.LinearSystems.isCompletelyReachable_iff_isControllable"
+          ],
+          "module": "AISafetyAtlas.LinearSystems.Flow",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.LinearSystems.isCompletelyReachable_iff_isControllable",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/LinearSystems/Flow.lean",
+            "line": 641
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.LinearSystems.not_isReachable_of_not_isControllable",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/LinearSystems/Dynamics.lean",
+            "line": 390
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Examples.LinearSystems.deaf_not_isCompletelyReachable",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Examples/LinearSystems/Flow.lean",
+            "line": 171
+          }
+        ]
+      },
       "candidate_count": 0
     },
     "BY-003": {
       "id": "BY-003",
       "name": "Good Regulator Theorem",
-      "ai_bridge_status": "HUMAN_REVIEW",
+      "ai_interpretation_status": "HUMAN_REVIEW",
       "informal_claim": "Every maximally simple optimal regulator must embody a model of the regulated system.",
       "formalizations": [],
       "lean_artifact": null,
@@ -35,7 +101,7 @@
     "BY-004": {
       "id": "BY-004",
       "name": "Law of Requisite Variety",
-      "ai_bridge_status": "REVIEWED",
+      "ai_interpretation_status": "REVIEWED",
       "informal_claim": "Perfect regulation requires sufficient controller variety under perfect information and unbounded response speed.",
       "formalizations": [
         {
@@ -329,7 +395,7 @@
             "atlas_declaration": "AISafetyAtlas.Oversight.not_forces_of_card_lt",
             "type": "BRIDGE",
             "file": "AISafetyAtlas/Oversight/VarietyBound.lean",
-            "line": 109
+            "line": 113
           }
         ]
       },
@@ -338,7 +404,7 @@
     "BY-005": {
       "id": "BY-005",
       "name": "Information-theoretical control limits",
-      "ai_bridge_status": "HUMAN_REVIEW",
+      "ai_interpretation_status": "HUMAN_REVIEW",
       "informal_claim": "Information constraints impose lower bounds on achievable control.",
       "formalizations": [
         {
@@ -527,6 +593,20 @@
           "module": "AISafetyAtlas.Control.InformationLimits",
           "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
           "version": "IN_TREE"
+        },
+        {
+          "framework": "Lean",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declarations": [
+            "Oversight",
+            "oversight_reduction_le_budget",
+            "blind_channel_buys_nothing",
+            "budget_is_the_channel_not_the_volume"
+          ],
+          "module": "AISafetyAtlas.Control.OversightBudget",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
         }
       ],
       "lean_artifact": {
@@ -589,31 +669,31 @@
             "atlas_declaration": "AISafetyAtlas.Control.minControlLoss_le_entropy_noise",
             "type": "NEW_PROOF",
             "file": "AISafetyAtlas/Control/InformationLimits.lean",
-            "line": 602
+            "line": 630
           },
           {
             "atlas_declaration": "AISafetyAtlas.Control.minControlLoss_eq_sInf_condMutualInfo",
             "type": "NEW_PROOF",
             "file": "AISafetyAtlas/Control/InformationLimits.lean",
-            "line": 667
+            "line": 695
           },
           {
             "atlas_declaration": "AISafetyAtlas.Control.minControlLoss_eq_sInf_mutualInfo_sub",
             "type": "NEW_PROOF",
             "file": "AISafetyAtlas/Control/InformationLimits.lean",
-            "line": 686
+            "line": 714
           },
           {
             "atlas_declaration": "AISafetyAtlas.Control.minControlLoss_le",
             "type": "NEW_PROOF",
             "file": "AISafetyAtlas/Control/InformationLimits.lean",
-            "line": 571
+            "line": 599
           },
           {
             "atlas_declaration": "AISafetyAtlas.Control.minControlLoss_nonneg",
             "type": "NEW_PROOF",
             "file": "AISafetyAtlas/Control/InformationLimits.lean",
-            "line": 580
+            "line": 608
           },
           {
             "atlas_declaration": "AISafetyAtlas.Control.measurable_plantOutcome",
@@ -631,7 +711,7 @@
             "atlas_declaration": "AISafetyAtlas.Control.minControlLoss_eq_entropy_noise_iff_of_attained",
             "type": "NEW_PROOF",
             "file": "AISafetyAtlas/Control/InformationLimits.lean",
-            "line": 639
+            "line": 667
           },
           {
             "atlas_declaration": "AISafetyAtlas.Control.kernelControlLoss_eq_sum",
@@ -692,6 +772,12 @@
             "type": "NEW_PROOF",
             "file": "AISafetyAtlas/Control/Observability.lean",
             "line": 200
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Control.OversightBudget.oversight_reduction_le_budget",
+            "type": "BRIDGE",
+            "file": "AISafetyAtlas/Control/OversightBudget.lean",
+            "line": 137
           }
         ]
       },
@@ -700,7 +786,7 @@
     "BY-006": {
       "id": "BY-006",
       "name": "(Anti)codifiability thesis",
-      "ai_bridge_status": "HUMAN_REVIEW",
+      "ai_interpretation_status": "HUMAN_REVIEW",
       "informal_claim": "The survey groups moral-particularist arguments against complete codification of virtue.",
       "formalizations": [],
       "lean_artifact": null,
@@ -709,7 +795,7 @@
     "BY-007": {
       "id": "BY-007",
       "name": "Arrow's impossibility theorem",
-      "ai_bridge_status": "HUMAN_REVIEW",
+      "ai_interpretation_status": "HUMAN_REVIEW",
       "informal_claim": "No rank-order voting rule satisfies Arrow's full set of fairness conditions for three or more alternatives.",
       "formalizations": [
         {
@@ -756,7 +842,7 @@
           },
           {
             "atlas_declaration": "AISafetyAtlas.SocialChoice.Utility.arrow",
-            "type": "BRIDGE",
+            "type": "WRAPPER",
             "file": "AISafetyAtlas/SocialChoice/Utility.lean",
             "line": 234
           }
@@ -767,7 +853,7 @@
     "BY-008": {
       "id": "BY-008",
       "name": "Impossibility theorems in population ethics",
-      "ai_bridge_status": "HUMAN_REVIEW",
+      "ai_interpretation_status": "HUMAN_REVIEW",
       "informal_claim": "No population axiology simultaneously satisfies the cited set of adequacy conditions.",
       "formalizations": [],
       "lean_artifact": null,
@@ -776,7 +862,7 @@
     "BY-009": {
       "id": "BY-009",
       "name": "Impossibility theorems in AI alignment",
-      "ai_bridge_status": "HUMAN_REVIEW",
+      "ai_interpretation_status": "HUMAN_REVIEW",
       "informal_claim": "The cited work derives incompatibilities among desiderata for utility-based value alignment.",
       "formalizations": [],
       "lean_artifact": null,
@@ -785,7 +871,7 @@
     "BY-010": {
       "id": "BY-010",
       "name": "Fairness impossibility theorem",
-      "ai_bridge_status": "HUMAN_REVIEW",
+      "ai_interpretation_status": "HUMAN_REVIEW",
       "informal_claim": "Common calibration and error-rate fairness criteria cannot all hold when base rates differ, subject to source assumptions.",
       "formalizations": [
         {
@@ -851,6 +937,18 @@
             "AISafetyAtlas.Fairness.exists_slack_function_score_relative"
           ],
           "module": "AISafetyAtlas.Fairness.ApproximateRiskAssignment",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        },
+        {
+          "framework": "Lean",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declarations": [
+            "cannot_have_all_three",
+            "population_escape_of_all_three"
+          ],
+          "module": "AISafetyAtlas.Fairness.Tradeoff",
           "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
           "version": "IN_TREE"
         }
@@ -930,7 +1028,7 @@
     "BY-011": {
       "id": "BY-011",
       "name": "Limits on preference deduction",
-      "ai_bridge_status": "HUMAN_REVIEW",
+      "ai_interpretation_status": "HUMAN_REVIEW",
       "informal_claim": "Observed behaviour alone does not identify an agent's reward function and planning process without strong normative assumptions.",
       "formalizations": [
         {
@@ -1061,31 +1159,31 @@
             "atlas_declaration": "AISafetyAtlas.Preference.exists_planner",
             "type": "NEW_PROOF",
             "file": "AISafetyAtlas/Preference.lean",
-            "line": 94
+            "line": 95
           },
           {
             "atlas_declaration": "AISafetyAtlas.Preference.exists_reward",
             "type": "NEW_PROOF",
             "file": "AISafetyAtlas/Preference.lean",
-            "line": 171
+            "line": 172
           },
           {
             "atlas_declaration": "AISafetyAtlas.Preference.consistent_rewards_eq_univ",
             "type": "NEW_PROOF",
             "file": "AISafetyAtlas/Preference.lean",
-            "line": 104
+            "line": 105
           },
           {
             "atlas_declaration": "AISafetyAtlas.Preference.neg_twin",
             "type": "NEW_PROOF",
             "file": "AISafetyAtlas/Preference.lean",
-            "line": 119
+            "line": 120
           },
           {
             "atlas_declaration": "AISafetyAtlas.Preference.greedy_rewardOf",
             "type": "NEW_PROOF",
             "file": "AISafetyAtlas/Preference.lean",
-            "line": 215
+            "line": 216
           },
           {
             "atlas_declaration": "AISafetyAtlas.Preference.Source.ReasonableForF.proposition_seven",
@@ -1103,31 +1201,37 @@
             "atlas_declaration": "AISafetyAtlas.Preference.ReasonableLanguage.proposition_seven",
             "type": "NEW_PROOF",
             "file": "AISafetyAtlas/Preference/Reasonable.lean",
-            "line": 203
+            "line": 207
           },
           {
             "atlas_declaration": "AISafetyAtlas.Preference.ReasonableLanguage.proposition_eight",
             "type": "NEW_PROOF",
             "file": "AISafetyAtlas/Preference/Reasonable.lean",
-            "line": 224
+            "line": 228
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Preference.behaviour_le_of_evaluatesTo",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Preference/Complexity.lean",
+            "line": 368
           },
           {
             "atlas_declaration": "AISafetyAtlas.Preference.explanation_at_least_behaviour",
             "type": "NEW_PROOF",
             "file": "AISafetyAtlas/Preference/Complexity.lean",
-            "line": 157
+            "line": 177
           },
           {
             "atlas_declaration": "AISafetyAtlas.Preference.degenerate_explanation_cheap",
             "type": "NEW_PROOF",
             "file": "AISafetyAtlas/Preference/Complexity.lean",
-            "line": 178
+            "line": 198
           },
           {
             "atlas_declaration": "AISafetyAtlas.Preference.explanation_complexity_eq_behaviour",
             "type": "NEW_PROOF",
             "file": "AISafetyAtlas/Preference/Complexity.lean",
-            "line": 195
+            "line": 215
           },
           {
             "atlas_declaration": "AISafetyAtlas.Preference.RegretModel.cannot_rule_out_half_maximal_regret",
@@ -1139,7 +1243,7 @@
             "atlas_declaration": "AISafetyAtlas.Preference.OverrideModel.mixtureValue_rationalise",
             "type": "NEW_PROOF",
             "file": "AISafetyAtlas/Preference/Override.lean",
-            "line": 212
+            "line": 216
           },
           {
             "atlas_declaration": "AISafetyAtlas.Preference.Source.ReasonableForF.theorem_two_conditional",
@@ -1151,7 +1255,7 @@
             "atlas_declaration": "AISafetyAtlas.Preference.OverrideModel.rationalise_strictly_better",
             "type": "NEW_PROOF",
             "file": "AISafetyAtlas/Preference/Override.lean",
-            "line": 113
+            "line": 117
           }
         ]
       },
@@ -1160,7 +1264,7 @@
     "BY-012": {
       "id": "BY-012",
       "name": "Rice's theorem",
-      "ai_bridge_status": "REVIEWED",
+      "ai_interpretation_status": "REVIEWED",
       "informal_claim": "Every nontrivial extensional property of partial computable functions is undecidable.",
       "formalizations": [
         {
@@ -1216,12 +1320,6 @@
             "type": "BRIDGE",
             "file": "AISafetyAtlas/Verification.lean",
             "line": 57
-          },
-          {
-            "atlas_declaration": "AISafetyAtlas.Verification.AgentBehavior.no_behavioral_safety_verifier",
-            "type": "BRIDGE",
-            "file": "AISafetyAtlas/Verification/AgentBehavior.lean",
-            "line": 85
           }
         ]
       },
@@ -1230,7 +1328,7 @@
     "BY-013": {
       "id": "BY-013",
       "name": "Unprovability",
-      "ai_bridge_status": "HUMAN_REVIEW",
+      "ai_interpretation_status": "HUMAN_REVIEW",
       "informal_claim": "Sufficiently expressive consistent formal systems contain true statements they cannot prove, under the source's hypotheses.",
       "formalizations": [
         {
@@ -1277,7 +1375,7 @@
     "BY-014": {
       "id": "BY-014",
       "name": "Undecidability",
-      "ai_bridge_status": "HUMAN_REVIEW",
+      "ai_interpretation_status": "HUMAN_REVIEW",
       "informal_claim": "No effective procedure decides every instance of the relevant computation or decision problem.",
       "formalizations": [
         {
@@ -1341,7 +1439,7 @@
     "BY-015": {
       "id": "BY-015",
       "name": "Chaitin incompleteness",
-      "ai_bridge_status": "HUMAN_REVIEW",
+      "ai_interpretation_status": "HUMAN_REVIEW",
       "informal_claim": "A finitely specified formal theory cannot prove arbitrarily high lower bounds on Kolmogorov complexity.",
       "formalizations": [
         {
@@ -1377,7 +1475,7 @@
     "BY-016": {
       "id": "BY-016",
       "name": "Undefinability",
-      "ai_bridge_status": "HUMAN_REVIEW",
+      "ai_interpretation_status": "HUMAN_REVIEW",
       "informal_claim": "Truth for a sufficiently expressive formal language is not definable within that language under the source's hypotheses.",
       "formalizations": [
         {
@@ -1407,7 +1505,7 @@
     "BY-017": {
       "id": "BY-017",
       "name": "Unsurveyability",
-      "ai_bridge_status": "HUMAN_REVIEW",
+      "ai_interpretation_status": "HUMAN_REVIEW",
       "informal_claim": "Some proofs may exceed feasible human survey or comprehension even when mechanically checkable.",
       "formalizations": [],
       "lean_artifact": null,
@@ -1416,7 +1514,7 @@
     "BY-018": {
       "id": "BY-018",
       "name": "Unlearnability",
-      "ai_bridge_status": "HUMAN_REVIEW",
+      "ai_interpretation_status": "HUMAN_REVIEW",
       "informal_claim": "Learning can be undecidable or computationally infeasible for specified concept classes and learning models.",
       "formalizations": [],
       "lean_artifact": null,
@@ -1425,7 +1523,7 @@
     "BY-019": {
       "id": "BY-019",
       "name": "Unpredictability of rational agents",
-      "ai_bridge_status": "HUMAN_REVIEW",
+      "ai_interpretation_status": "HUMAN_REVIEW",
       "informal_claim": "No predictor can universally forecast the behaviour of rational agents in the cited strategic settings.",
       "formalizations": [],
       "lean_artifact": null,
@@ -1434,7 +1532,7 @@
     "BY-020": {
       "id": "BY-020",
       "name": "No Free Lunch — supervised learning",
-      "ai_bridge_status": "HUMAN_REVIEW",
+      "ai_interpretation_status": "HUMAN_REVIEW",
       "informal_claim": "Averaged uniformly over target functions, learning algorithms have no universal performance advantage.",
       "formalizations": [
         {
@@ -1488,7 +1586,7 @@
     "BY-021": {
       "id": "BY-021",
       "name": "No Free Lunch — optimization",
-      "ai_bridge_status": "HUMAN_REVIEW",
+      "ai_interpretation_status": "HUMAN_REVIEW",
       "informal_claim": "Averaged uniformly over objective functions, optimization algorithms have equal aggregate performance.",
       "formalizations": [
         {
@@ -1704,7 +1802,7 @@
     "BY-022": {
       "id": "BY-022",
       "name": "Free lunches in continuous spaces and coevolution",
-      "ai_bridge_status": "HUMAN_REVIEW",
+      "ai_interpretation_status": "HUMAN_REVIEW",
       "informal_claim": "The cited results identify settings where standard no-free-lunch symmetry fails.",
       "formalizations": [],
       "lean_artifact": null,
@@ -1713,7 +1811,7 @@
     "BY-023": {
       "id": "BY-023",
       "name": "Unidentifiability",
-      "ai_bridge_status": "HUMAN_REVIEW",
+      "ai_interpretation_status": "HUMAN_REVIEW",
       "informal_claim": "Observational data can be compatible with multiple latent, causal, or generative explanations.",
       "formalizations": [],
       "lean_artifact": null,
@@ -1722,7 +1820,7 @@
     "BY-024": {
       "id": "BY-024",
       "name": "Physical limits on inference",
-      "ai_bridge_status": "HUMAN_REVIEW",
+      "ai_interpretation_status": "HUMAN_REVIEW",
       "informal_claim": "Embedded physical inference devices face limits on prediction, observation, and mutual control.",
       "formalizations": [
         {
@@ -1840,16 +1938,37 @@
     "BY-025": {
       "id": "BY-025",
       "name": "Uncontainability",
-      "ai_bridge_status": "HUMAN_REVIEW",
+      "ai_interpretation_status": "HUMAN_REVIEW",
       "informal_claim": "Perfect containment of a superintelligent program is undecidable in the formal model used by the source.",
-      "formalizations": [],
-      "lean_artifact": null,
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declarations": [
+            "AISafetyAtlas.Verification.Containment.harming_undecidable"
+          ],
+          "module": "AISafetyAtlas.Verification.Containment",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Verification.Containment.harming_undecidable",
+            "type": "BRIDGE",
+            "file": "AISafetyAtlas/Verification/Containment.lean",
+            "line": 163
+          }
+        ]
+      },
       "candidate_count": 0
     },
     "BY-026": {
       "id": "BY-026",
       "name": "Uninterruptibility",
-      "ai_bridge_status": "HUMAN_REVIEW",
+      "ai_interpretation_status": "HUMAN_REVIEW",
       "informal_claim": "Available interruption proposals guarantee safe interruptibility only under restricted assumptions.",
       "formalizations": [],
       "lean_artifact": null,
@@ -1858,7 +1977,7 @@
     "BY-027": {
       "id": "BY-027",
       "name": "Löb's theorem (unverifiability)",
-      "ai_bridge_status": "HUMAN_REVIEW",
+      "ai_interpretation_status": "HUMAN_REVIEW",
       "informal_claim": "Löb's theorem: if a sufficiently strong formal system T proves Prov_T(σ) → σ, then T already proves σ (under the source's arithmetic hypotheses).",
       "formalizations": [
         {
@@ -1888,7 +2007,7 @@
     "BY-028": {
       "id": "BY-028",
       "name": "Unpredictability of superhuman AI",
-      "ai_bridge_status": "HUMAN_REVIEW",
+      "ai_interpretation_status": "HUMAN_REVIEW",
       "informal_claim": "A strictly less capable predictor cannot accurately predict every action of a more capable agent under the source's definitions.",
       "formalizations": [],
       "lean_artifact": null,
@@ -1897,7 +2016,7 @@
     "BY-029": {
       "id": "BY-029",
       "name": "Unexplainability",
-      "ai_bridge_status": "HUMAN_REVIEW",
+      "ai_interpretation_status": "HUMAN_REVIEW",
       "informal_claim": "The cited argument links complete AI explanation to proof, truth, and model-access assumptions.",
       "formalizations": [],
       "lean_artifact": null,
@@ -1906,7 +2025,7 @@
     "BY-030": {
       "id": "BY-030",
       "name": "Incomprehensibility",
-      "ai_bridge_status": "HUMAN_REVIEW",
+      "ai_interpretation_status": "HUMAN_REVIEW",
       "informal_claim": "Some correct computations or explanations cannot be comprehended by a bounded verifier under the cited formalizations and assumptions.",
       "formalizations": [],
       "lean_artifact": null,
@@ -1915,7 +2034,7 @@
     "BY-031": {
       "id": "BY-031",
       "name": "k-incomprehensibility",
-      "ai_bridge_status": "HUMAN_REVIEW",
+      "ai_interpretation_status": "HUMAN_REVIEW",
       "informal_claim": "The cited source defines intelligence and comprehension limits using an intensional Kolmogorov-complexity variant.",
       "formalizations": [],
       "lean_artifact": null,
@@ -1924,7 +2043,7 @@
     "BY-032": {
       "id": "BY-032",
       "name": "Unverifiability",
-      "ai_bridge_status": "HUMAN_REVIEW",
+      "ai_interpretation_status": "HUMAN_REVIEW",
       "informal_claim": "A universal verifier for arbitrary computations cannot satisfy the cited completeness and correctness requirements.",
       "formalizations": [],
       "lean_artifact": null,
@@ -1933,7 +2052,7 @@
     "BY-033": {
       "id": "BY-033",
       "name": "Unverifiability of robot ethics",
-      "ai_bridge_status": "REVIEWED",
+      "ai_interpretation_status": "REVIEWED",
       "informal_claim": "Theorem 1 (van Leeuwen & Wiedermann 2021): for any non-trivial robot property P there is no algorithmic procedure that tells, for an arbitrary robot with potentially unbounded memory, whether its actions always satisfy P. Corollary 1: same conclusion restricted to robots programmed by structured programs. (Paper Def. 3 defines non-triviality via a switchable base program pair; ethics/legality are motivating instances, not the only P.)",
       "formalizations": [
         {
@@ -1963,7 +2082,7 @@
     "BY-034": {
       "id": "BY-034",
       "name": "Intractability of bottom-up ethics",
-      "ai_bridge_status": "HUMAN_REVIEW",
+      "ai_interpretation_status": "HUMAN_REVIEW",
       "informal_claim": "Computational complexity obstructs exhaustive bottom-up evaluation of ethically relevant action consequences.",
       "formalizations": [],
       "lean_artifact": null,
@@ -1972,7 +2091,7 @@
     "BY-035": {
       "id": "BY-035",
       "name": "No-flattening theorems for deep learning",
-      "ai_bridge_status": "HUMAN_REVIEW",
+      "ai_interpretation_status": "HUMAN_REVIEW",
       "informal_claim": "Some functions efficiently represented by deep networks require inefficiently large shallow representations.",
       "formalizations": [],
       "lean_artifact": null,
@@ -1981,7 +2100,7 @@
     "BY-036": {
       "id": "BY-036",
       "name": "Efficiency of computing Boolean functions for multilayered perceptrons",
-      "ai_bridge_status": "HUMAN_REVIEW",
+      "ai_interpretation_status": "HUMAN_REVIEW",
       "informal_claim": "The cited report constrains which Boolean functions multilayer perceptrons compute efficiently.",
       "formalizations": [],
       "lean_artifact": null,
@@ -1990,7 +2109,7 @@
     "BY-037": {
       "id": "BY-037",
       "name": "Goodhart's law (Strathern)",
-      "ai_bridge_status": "HUMAN_REVIEW",
+      "ai_interpretation_status": "HUMAN_REVIEW",
       "informal_claim": "When a measure becomes a target, optimization pressure can destroy its value as a measure.",
       "formalizations": [],
       "lean_artifact": null,
@@ -1999,7 +2118,7 @@
     "BY-038": {
       "id": "BY-038",
       "name": "Campbell's law",
-      "ai_bridge_status": "HUMAN_REVIEW",
+      "ai_interpretation_status": "HUMAN_REVIEW",
       "informal_claim": "Heavy decision use of a quantitative indicator creates pressure that corrupts the indicator and represented process.",
       "formalizations": [],
       "lean_artifact": null,
@@ -2008,7 +2127,7 @@
     "BY-039": {
       "id": "BY-039",
       "name": "Reward corruption unsolvability",
-      "ai_bridge_status": "HUMAN_REVIEW",
+      "ai_interpretation_status": "HUMAN_REVIEW",
       "informal_claim": "No agent can in general distinguish all reward-channel corruption from genuine reward without additional assumptions.",
       "formalizations": [
         {
@@ -2029,7 +2148,7 @@
             "atlas_declaration": "AISafetyAtlas.Wireheading.CRMDP.Model.everitt_theorem_eleven",
             "type": "NEW_PROOF",
             "file": "AISafetyAtlas/Wireheading/CRMDP.lean",
-            "line": 338
+            "line": 434
           }
         ]
       },
@@ -2038,7 +2157,7 @@
     "BY-040": {
       "id": "BY-040",
       "name": "Uncontrollability of AI",
-      "ai_bridge_status": "HUMAN_REVIEW",
+      "ai_interpretation_status": "HUMAN_REVIEW",
       "informal_claim": "Perfect explicit control of advanced AI fails in the source's degenerate self-referential conditions.",
       "formalizations": [],
       "lean_artifact": null,
@@ -2047,7 +2166,7 @@
     "BY-041": {
       "id": "BY-041",
       "name": "Impossibility of unambiguous communication",
-      "ai_bridge_status": "HUMAN_REVIEW",
+      "ai_interpretation_status": "HUMAN_REVIEW",
       "informal_claim": "Unambiguous communication is impossible under the source's strict assumptions about language and interpretation.",
       "formalizations": [],
       "lean_artifact": null,
@@ -2056,7 +2175,7 @@
     "BY-042": {
       "id": "BY-042",
       "name": "Unfairness of explainability",
-      "ai_bridge_status": "HUMAN_REVIEW",
+      "ai_interpretation_status": "HUMAN_REVIEW",
       "informal_claim": "A verifier and a decision-maker have structurally unequal strategic positions when explanations omit the full execution trace.",
       "formalizations": [],
       "lean_artifact": null,
@@ -2065,7 +2184,7 @@
     "BY-043": {
       "id": "BY-043",
       "name": "Misaligned embodiment",
-      "ai_bridge_status": "HUMAN_REVIEW",
+      "ai_interpretation_status": "HUMAN_REVIEW",
       "informal_claim": "Mistakenly cloned self-interested agents cannot perfectly control one another in the survey's model.",
       "formalizations": [
         {
@@ -2078,6 +2197,20 @@
           "module": "AISafetyAtlas.Compositional.Symmetry",
           "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
           "version": "IN_TREE"
+        },
+        {
+          "framework": "Lean",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declarations": [
+            "Fleet",
+            "evaluating_one_covers_its_peers",
+            "no_designated_agent_emerges",
+            "symmetry_is_the_shared_cause"
+          ],
+          "module": "AISafetyAtlas.Compositional.AgentNetwork",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
         }
       ],
       "lean_artifact": {
@@ -2087,6 +2220,12 @@
             "type": "NEW_PROOF",
             "file": "AISafetyAtlas/Compositional/Symmetry.lean",
             "line": 96
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Compositional.AgentNetwork.symmetry_is_the_shared_cause",
+            "type": "BRIDGE",
+            "file": "AISafetyAtlas/Compositional/AgentNetwork.lean",
+            "line": 128
           }
         ]
       },
@@ -2095,7 +2234,7 @@
     "BY-044": {
       "id": "BY-044",
       "name": "Limited self-awareness",
-      "ai_bridge_status": "STATEMENT_REVIEWED",
+      "ai_interpretation_status": "STATEMENT_REVIEWED",
       "informal_claim": "An agent cannot be perfectly self-aware across the survey's defined operational boundaries.",
       "formalizations": [
         {
@@ -2156,7 +2295,7 @@
     "CLM-WOLPERT-KNOW-001": {
       "id": "CLM-WOLPERT-KNOW-001",
       "name": "Physical knowledge by inference devices",
-      "ai_bridge_status": "HUMAN_REVIEW",
+      "ai_interpretation_status": "HUMAN_REVIEW",
       "informal_claim": "A device physically knows a realized target value over a set W when one selector of realized setup blocks answers every target probe correctly and has the required nonempty true/false intersections with W. This entails weak inference; on a W that refines a Boolean target it is truthful and cannot affirm both values; and every device has a Boolean target it physically knows at no value over any W.",
       "formalizations": [
         {
@@ -2225,7 +2364,7 @@
     "CLM-WOLPERT-EPISTEMIC-001": {
       "id": "CLM-WOLPERT-EPISTEMIC-001",
       "name": "Epistemic consequences of physical knowledge",
-      "ai_bridge_status": "HUMAN_REVIEW",
+      "ai_interpretation_status": "HUMAN_REVIEW",
       "informal_claim": "For Wolpert's physical-knowledge predicate, knowledge is truth-preserving under the stated context-refinement hypotheses but is not logically omniscient: known premises can force a consequence to be true without making it known. Distinguishability also prevents mutual knowledge of conclusions and, under the Corollary 24 hypotheses, forces at least three inequivalent binary targets to remain unknown.",
       "formalizations": [
         {
@@ -2283,7 +2422,7 @@
     "CLM-WOLPERT-APPROX-001": {
       "id": "CLM-WOLPERT-APPROX-001",
       "name": "Bounds on inference accuracy, and the collapse of the exact limits",
-      "ai_bridge_status": "HUMAN_REVIEW",
+      "ai_interpretation_status": "HUMAN_REVIEW",
       "informal_claim": "A target attaining at least three values is weakly inferred by some device, which is the hypothesis the 2008 corollary omits and the 2018 restatement supplies. Covariance accuracy is bounded below by a term depending only on the number of target values times the device's inference power, so for a binary target it is never negative. Under that accuracy both the mutual-inference theorem and the strong-inference inheritance theorem hold only exactly: two setup-distinguishable devices can each infer the other to within any positive epsilon, and a device can strongly infer another that infers a target almost perfectly while itself inferring that target with accuracy exactly zero.",
       "formalizations": [
         {
@@ -2359,7 +2498,7 @@
     "LAND-WOLPERT-KNOW-DEFECTS-001": {
       "id": "LAND-WOLPERT-KNOW-DEFECTS-001",
       "name": "Countermodels to Wolpert 2018 epistemic claims",
-      "ai_bridge_status": null,
+      "ai_interpretation_status": null,
       "informal_claim": null,
       "formalizations": [
         {
@@ -2406,7 +2545,7 @@
     "CLM-LAWVERE-001": {
       "id": "CLM-LAWVERE-001",
       "name": "Lawvere fixed-point theorem (types and functions)",
-      "ai_bridge_status": "HUMAN_REVIEW",
+      "ai_interpretation_status": "HUMAN_REVIEW",
       "informal_claim": "If a function f : α → (α → β) is surjective, then every endofunction g : β → β has a fixed point.",
       "formalizations": [
         {
@@ -2436,7 +2575,7 @@
     "CLM-LAWVERE-CCC-001": {
       "id": "CLM-LAWVERE-CCC-001",
       "name": "Lawvere fixed-point theorem (Cartesian closed categories)",
-      "ai_bridge_status": "HUMAN_REVIEW",
+      "ai_interpretation_status": "HUMAN_REVIEW",
       "informal_claim": "In a Cartesian closed category, if there are an object A and a weakly point-surjective morphism A → Y^A, then every endomorphism Y → Y has a fixed point.",
       "formalizations": [],
       "lean_artifact": null,
@@ -2445,7 +2584,7 @@
     "LAND-ATTR-001": {
       "id": "LAND-ATTR-001",
       "name": "Attribution impossibility (DASH trilemma)",
-      "ai_bridge_status": null,
+      "ai_interpretation_status": null,
       "informal_claim": null,
       "formalizations": [
         {
@@ -2479,7 +2618,7 @@
     "LAND-GS-001": {
       "id": "LAND-GS-001",
       "name": "Gibbard–Satterthwaite theorem",
-      "ai_bridge_status": null,
+      "ai_interpretation_status": null,
       "informal_claim": null,
       "formalizations": [
         {
@@ -2500,7 +2639,7 @@
     "LAND-GS-002": {
       "id": "LAND-GS-002",
       "name": "Gibbard–Satterthwaite theorem (Lean / SocialChoiceLean)",
-      "ai_bridge_status": null,
+      "ai_interpretation_status": null,
       "informal_claim": null,
       "formalizations": [
         {
@@ -2530,7 +2669,7 @@
     "LAND-NFL-001": {
       "id": "LAND-NFL-001",
       "name": "No-free-lunch theorem for machine learning (Shalev-Shwartz–Ben-David §5.1)",
-      "ai_bridge_status": null,
+      "ai_interpretation_status": null,
       "informal_claim": null,
       "formalizations": [
         {
@@ -2551,7 +2690,7 @@
     "LAND-PE-001": {
       "id": "LAND-PE-001",
       "name": "Parfit mere addition / conditional normative reasoning (Åqvist E)",
-      "ai_bridge_status": null,
+      "ai_interpretation_status": null,
       "informal_claim": null,
       "formalizations": [
         {
@@ -2572,7 +2711,7 @@
     "LAND-DL-001": {
       "id": "LAND-DL-001",
       "name": "Deep vs shallow network capacity (Cohen–Bentkamp)",
-      "ai_bridge_status": null,
+      "ai_interpretation_status": null,
       "informal_claim": null,
       "formalizations": [
         {
@@ -2593,7 +2732,7 @@
     "LAND-VNM-001": {
       "id": "LAND-VNM-001",
       "name": "von Neumann–Morgenstern expected utility",
-      "ai_bridge_status": null,
+      "ai_interpretation_status": null,
       "informal_claim": null,
       "formalizations": [
         {
@@ -2614,7 +2753,7 @@
     "LAND-TCS-ARROW-001": {
       "id": "LAND-TCS-ARROW-001",
       "name": "Fourier-analytic Arrow theorem (TCSLib)",
-      "ai_bridge_status": null,
+      "ai_interpretation_status": null,
       "informal_claim": null,
       "formalizations": [
         {
@@ -2635,7 +2774,7 @@
     "LAND-DEBATE-001": {
       "id": "LAND-DEBATE-001",
       "name": "Doubly-efficient debate correctness (Brown-Cohen–Irving–Piliouras 2023)",
-      "ai_bridge_status": null,
+      "ai_interpretation_status": null,
       "informal_claim": null,
       "formalizations": [
         {
@@ -2713,7 +2852,7 @@
     "LAND-HYPER-001": {
       "id": "LAND-HYPER-001",
       "name": "Trace-property and hyperproperty classes (Alpern–Schneider decomposition; Clarkson–Schneider hierarchy)",
-      "ai_bridge_status": null,
+      "ai_interpretation_status": null,
       "informal_claim": null,
       "formalizations": [
         {
@@ -2744,7 +2883,7 @@
     "LAND-HYPER-002": {
       "id": "LAND-HYPER-002",
       "name": "k-safety self-composition and hyperproperty decomposition",
-      "ai_bridge_status": null,
+      "ai_interpretation_status": null,
       "informal_claim": null,
       "formalizations": [
         {
@@ -2758,7 +2897,9 @@
             "isClosed_iff_hyperSafety",
             "dense_iff_hyperLiveness",
             "hyperSafety_of_isKSafety",
-            "hyperSafety_hyperLiveness_decomposition"
+            "hyperSafety_hyperLiveness_decomposition",
+            "SubsetClosed",
+            "subsetClosed_of_isHyperSafetyOp"
           ],
           "module": "AISafetyAtlas.Compositional.Hyperproperties",
           "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
@@ -2780,7 +2921,7 @@
     "LAND-ANGLUIN-001": {
       "id": "LAND-ANGLUIN-001",
       "name": "Port-labelled anonymous networks, views, and automorphisms",
-      "ai_bridge_status": null,
+      "ai_interpretation_status": null,
       "informal_claim": null,
       "formalizations": [
         {
@@ -2816,7 +2957,7 @@
     "LAND-PREF-KNOW-001": {
       "id": "LAND-PREF-KNOW-001",
       "name": "Reward unidentifiability as a knowability obstruction",
-      "ai_bridge_status": null,
+      "ai_interpretation_status": null,
       "informal_claim": null,
       "formalizations": [
         {
@@ -2853,7 +2994,7 @@
     "LAND-COMP-TRACE-001": {
       "id": "LAND-COMP-TRACE-001",
       "name": "A network's runs as a trace system",
-      "ai_bridge_status": null,
+      "ai_interpretation_status": null,
       "informal_claim": null,
       "formalizations": [
         {
@@ -2902,7 +3043,7 @@
     "LAND-HYPER-KNOW-001": {
       "id": "LAND-HYPER-KNOW-001",
       "name": "Finite-observation safety as a knowability factorization",
-      "ai_bridge_status": null,
+      "ai_interpretation_status": null,
       "informal_claim": null,
       "formalizations": [
         {
@@ -2926,13 +3067,13 @@
             "atlas_declaration": "AISafetyAtlas.Compositional.Hyperproperties.knowable_of_isSafetyPredicate",
             "type": "NEW_PROOF",
             "file": "AISafetyAtlas/Compositional/Hyperproperties/Knowability.lean",
-            "line": 89
+            "line": 95
           },
           {
             "atlas_declaration": "AISafetyAtlas.Compositional.Hyperproperties.not_isSafetyPredicate_of_realizedSet_collision",
             "type": "NEW_PROOF",
             "file": "AISafetyAtlas/Compositional/Hyperproperties/Knowability.lean",
-            "line": 122
+            "line": 128
           }
         ]
       },
@@ -2941,7 +3082,7 @@
     "LAND-CAUSAL-KNOW-001": {
       "id": "LAND-CAUSAL-KNOW-001",
       "name": "Behavioural identifiability as a knowability factorization",
-      "ai_bridge_status": null,
+      "ai_interpretation_status": null,
       "informal_claim": null,
       "formalizations": [
         {
@@ -2981,7 +3122,7 @@
     "LAND-COMP-KNOW-001": {
       "id": "LAND-COMP-KNOW-001",
       "name": "The Angluin view as a knowability factorization",
-      "ai_bridge_status": null,
+      "ai_interpretation_status": null,
       "informal_claim": null,
       "formalizations": [
         {
@@ -3019,7 +3160,7 @@
     "LAND-RECT-001": {
       "id": "LAND-RECT-001",
       "name": "Rectangle, exchange, and unary-contract equivalences",
-      "ai_bridge_status": null,
+      "ai_interpretation_status": null,
       "informal_claim": null,
       "formalizations": [
         {
@@ -3052,7 +3193,7 @@
     "LAND-WIRE-OBJ-001": {
       "id": "LAND-WIRE-OBJ-001",
       "name": "Ring-Orseau objective factorization",
-      "ai_bridge_status": null,
+      "ai_interpretation_status": null,
       "informal_claim": null,
       "formalizations": [
         {
@@ -3067,7 +3208,20 @@
             "Objective.value_scaleUtility",
             "Objective.optimal_decisions_eq_of_pos_scaleUtility",
             "Objective.value_congr",
-            "Objective.optimal_decisions_congr"
+            "Objective.optimal_decisions_congr",
+            "DelusionBox.GlobalEnv.innerHistory_congr_innerAction",
+            "DelusionBox.GlobalEnv.globalObs_identity",
+            "DelusionBox.GlobalEnv.globalObs_const_of_isConstant",
+            "DelusionBox.GlobalEnv.globalObs_indep_inner",
+            "DelusionBox.actionValue_diracBelief",
+            "DelusionBox.mixesAt_zero",
+            "DelusionBox.statement_one",
+            "DelusionBox.statement_two",
+            "DelusionBox.statement_three",
+            "DelusionBox.bestAction_ne_of_lt",
+            "SelfMod.Exec",
+            "SelfMod.smValue",
+            "SelfMod.survivalAgent"
           ],
           "module": "AISafetyAtlas.Wireheading.Objective",
           "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
@@ -3080,7 +3234,191 @@
             "atlas_declaration": "AISafetyAtlas.Wireheading.AgentEquations.value_eq_of_agree_on_window",
             "type": "NEW_PROOF",
             "file": "AISafetyAtlas/Wireheading/AgentEquations.lean",
-            "line": 162
+            "line": 343
+          }
+        ]
+      },
+      "candidate_count": 0
+    },
+    "LAND-WIRE-AGENTHISTORY-001": {
+      "id": "LAND-WIRE-AGENTHISTORY-001",
+      "name": "Ring-Orseau histories on the Decision carrier",
+      "ai_interpretation_status": null,
+      "informal_claim": null,
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "relationship": null,
+          "reproduced": true,
+          "declarations": [
+            "AgentEquations.toDecisionHistory",
+            "AgentEquations.ofDecisionHistory",
+            "AgentEquations.ofDecisionHistory_toDecisionHistory",
+            "AgentEquations.toDecisionHistory_ofDecisionHistory",
+            "AgentEquations.toDecisionHistory_injective",
+            "AgentEquations.runHistory",
+            "AgentEquations.runHistory_length",
+            "AgentEquations.value_runHistory_eq_of_agree_on_window"
+          ],
+          "module": "AISafetyAtlas.Wireheading.AgentHistory",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Wireheading.AgentEquations.value_runHistory_eq_of_agree_on_window",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Wireheading/AgentHistory.lean",
+            "line": 122
+          }
+        ]
+      },
+      "candidate_count": 0
+    },
+    "LAND-WIRE-GOALCARRIER-001": {
+      "id": "LAND-WIRE-GOALCARRIER-001",
+      "name": "Self-modification on the Decision carrier",
+      "ai_interpretation_status": null,
+      "informal_claim": null,
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "relationship": null,
+          "reproduced": true,
+          "declarations": [
+            "GoalPreservation.stepHistory",
+            "GoalPreservation.length_stepHistory",
+            "GoalPreservation.scheduleAct",
+            "GoalPreservation.scheduleAct_surjective",
+            "GoalPreservation.scheduleValue",
+            "GoalPreservation.scheduleValue_summable",
+            "GoalPreservation.scheduleValue_bellman",
+            "GoalPreservation.scheduleValue_le_of_isMax",
+            "GoalPreservation.scheduleModel",
+            "GoalPreservation.scheduleModel_optimalAt"
+          ],
+          "module": "AISafetyAtlas.Wireheading.GoalPreservationCarrier",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Wireheading.GoalPreservation.scheduleModel_optimalAt",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Wireheading/GoalPreservationCarrier.lean",
+            "line": 158
+          }
+        ]
+      },
+      "candidate_count": 0
+    },
+    "LAND-PREF-TRAJECTORY-001": {
+      "id": "LAND-PREF-TRAJECTORY-001",
+      "name": "Preference unidentifiability at a trajectory",
+      "ai_interpretation_status": null,
+      "informal_claim": null,
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "relationship": null,
+          "reproduced": true,
+          "declarations": [
+            "Preference.lastObs",
+            "Preference.lastObs_append",
+            "Preference.ofMemoryless",
+            "Preference.ofMemoryless_injective",
+            "Preference.lastObs_detHistoryUpTo",
+            "Preference.detStateAt_ofMemoryless_succ",
+            "Preference.trajectory_reward_unidentifiable",
+            "Preference.consistent_rewards_of_trajectory_eq_univ"
+          ],
+          "module": "AISafetyAtlas.Preference.Trajectory",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Preference.consistent_rewards_of_trajectory_eq_univ",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Preference/Trajectory.lean",
+            "line": 142
+          }
+        ]
+      },
+      "candidate_count": 0
+    },
+    "LAND-VERIF-ROBOTRUN-001": {
+      "id": "LAND-VERIF-ROBOTRUN-001",
+      "name": "A verified behaviour, run",
+      "ai_interpretation_status": null,
+      "informal_claim": null,
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "relationship": null,
+          "reproduced": true,
+          "declarations": [
+            "Decision.detHistoryUpTo_length",
+            "Verification.Robot.ofBehavior",
+            "Verification.Robot.actionAt_ofBehavior",
+            "Verification.Robot.detStateAt_ofBehavior_succ",
+            "Verification.Robot.alwaysSatisfies_run"
+          ],
+          "module": "AISafetyAtlas.Verification.RobotRun",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Verification.Robot.alwaysSatisfies_run",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Verification/RobotRun.lean",
+            "line": 89
+          }
+        ]
+      },
+      "candidate_count": 0
+    },
+    "LAND-COMP-RUNTRACES-001": {
+      "id": "LAND-COMP-RUNTRACES-001",
+      "name": "The trace system a policy set generates",
+      "ai_interpretation_status": null,
+      "informal_claim": null,
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "relationship": null,
+          "reproduced": true,
+          "declarations": [
+            "Hyperproperties.HistoryPrefix",
+            "Hyperproperties.detHistoryUpTo_prefix_succ",
+            "Hyperproperties.runTraces",
+            "Hyperproperties.mem_runTraces",
+            "Hyperproperties.runTraces_nonempty",
+            "Hyperproperties.runTraces_mono",
+            "Hyperproperties.bad_observation_prefixes_are_run_prefixes",
+            "Hyperproperties.exists_bad_trajectories_of_isKSafety"
+          ],
+          "module": "AISafetyAtlas.Compositional.TraceSystem",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Compositional.Hyperproperties.exists_bad_trajectories_of_isKSafety",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Compositional/TraceSystem.lean",
+            "line": 129
           }
         ]
       },
@@ -3089,7 +3427,7 @@
     "LAND-GOAL-001": {
       "id": "LAND-GOAL-001",
       "name": "Finite-percept on-policy goal-preservation induction step",
-      "ai_bridge_status": null,
+      "ai_interpretation_status": null,
       "informal_claim": null,
       "formalizations": [
         {
@@ -3115,7 +3453,78 @@
             "atlas_declaration": "AISafetyAtlas.Wireheading.GoalPreservationSource.Model.selected_matches_initial",
             "type": "NEW_PROOF",
             "file": "AISafetyAtlas/Wireheading/GoalPreservationSource.lean",
-            "line": 141
+            "line": 201
+          }
+        ]
+      },
+      "candidate_count": 0
+    },
+    "LAND-VRL-001": {
+      "id": "LAND-VRL-001",
+      "name": "Value reinforcement learning and the consistency-preserving constraint",
+      "ai_interpretation_status": null,
+      "informal_claim": null,
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declarations": [
+            "ValueLearning.Beliefs.isEEP_of_isCP",
+            "ValueLearning.Beliefs.vrlValue_of_isEEP",
+            "ValueLearning.Beliefs.vrlValue_of_isCP",
+            "ValueLearning.Beliefs.vrlValue_eq_prior_mixture",
+            "ValueLearning.Beliefs.posterior_expectation",
+            "ValueLearning.Beliefs.vrlValue_eq_rlValue",
+            "ValueLearning.Beliefs.sum_condReward",
+            "ValueLearning.Beliefs.marginalReward_nonneg"
+          ],
+          "module": "AISafetyAtlas.Wireheading.ValueLearning",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Wireheading.ValueLearning.Beliefs.vrlValue_of_isCP",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Wireheading/ValueLearning.lean",
+            "line": 388
+          }
+        ]
+      },
+      "candidate_count": 0
+    },
+    "LAND-GOAL-002": {
+      "id": "LAND-GOAL-002",
+      "name": "Theorem 16 equation (13) over the whole trajectory, without naming surjectivity",
+      "ai_interpretation_status": null,
+      "informal_claim": null,
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declarations": [
+            "GoalPreservationRun.Model.equation_thirteen",
+            "GoalPreservationRun.Model.run_optimal",
+            "GoalPreservationRun.Model.optimalAt_next",
+            "GoalPreservationRun.Model.contValue_le_initial",
+            "GoalPreservationRun.Model.run_contValue_eq_initial"
+          ],
+          "module": "AISafetyAtlas.Wireheading.GoalPreservationRun",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Wireheading.GoalPreservationRun.Model.equation_thirteen",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Wireheading/GoalPreservationRun.lean",
+            "line": 314
           }
         ]
       },
@@ -3124,7 +3533,7 @@
     "LAND-JOINTOBS-001": {
       "id": "LAND-JOINTOBS-001",
       "name": "Coalition-indexed joint observation and the emitted-interface coverage boundary",
-      "ai_bridge_status": null,
+      "ai_interpretation_status": null,
       "informal_claim": null,
       "formalizations": [
         {
@@ -3175,7 +3584,7 @@
     "LAND-SELFREF-001": {
       "id": "LAND-SELFREF-001",
       "name": "The self-model as a component of the state it models",
-      "ai_bridge_status": null,
+      "ai_interpretation_status": null,
       "informal_claim": null,
       "formalizations": [
         {
@@ -3222,7 +3631,7 @@
     "LAND-ACCUM-001": {
       "id": "LAND-ACCUM-001",
       "name": "Window ambiguity: accumulation bounds over a set of targets",
-      "ai_bridge_status": null,
+      "ai_interpretation_status": null,
       "informal_claim": null,
       "formalizations": [
         {
@@ -3288,7 +3697,7 @@
     "LAND-AMBIG-001": {
       "id": "LAND-AMBIG-001",
       "name": "Finite fibre ambiguity and the counting obstruction",
-      "ai_bridge_status": null,
+      "ai_interpretation_status": null,
       "informal_claim": null,
       "formalizations": [
         {
@@ -3347,7 +3756,7 @@
     "LAND-TEMPORAL-001": {
       "id": "LAND-TEMPORAL-001",
       "name": "Time-indexed knowability, contemporaneous collisions, and delayed knowledge",
-      "ai_bridge_status": null,
+      "ai_interpretation_status": null,
       "informal_claim": null,
       "formalizations": [
         {
@@ -3396,7 +3805,7 @@
     "LAND-CL-001": {
       "id": "LAND-CL-001",
       "name": "Chandy-Lamport distributed snapshot — termination, correctness, stable property detection",
-      "ai_bridge_status": null,
+      "ai_interpretation_status": null,
       "informal_claim": null,
       "formalizations": [
         {
@@ -3419,7 +3828,7 @@
     "LAND-SELFMEAS-001": {
       "id": "LAND-SELFMEAS-001",
       "name": "Self-measurement failure for an embedded observation",
-      "ai_bridge_status": null,
+      "ai_interpretation_status": null,
       "informal_claim": null,
       "formalizations": [
         {
@@ -3457,7 +3866,7 @@
     "LAND-SELFMEAS-002": {
       "id": "LAND-SELFMEAS-002",
       "name": "Breuer abstract embedded-measurement core",
-      "ai_bridge_status": null,
+      "ai_interpretation_status": null,
       "informal_claim": null,
       "formalizations": [
         {
@@ -3555,7 +3964,7 @@
     "LAND-SELFMEAS-003": {
       "id": "LAND-SELFMEAS-003",
       "name": "Physical complement and finite-cardinality bridges to Breuer proper inclusion",
-      "ai_bridge_status": null,
+      "ai_interpretation_status": null,
       "informal_claim": null,
       "formalizations": [
         {
@@ -3667,7 +4076,7 @@
     "LAND-KNOW-001": {
       "id": "LAND-KNOW-001",
       "name": "Exact knowability: the observation-factorization kernel",
-      "ai_bridge_status": null,
+      "ai_interpretation_status": null,
       "informal_claim": null,
       "formalizations": [
         {
@@ -3760,7 +4169,7 @@
     "LAND-KNOW-DEVICE-001": {
       "id": "LAND-KNOW-DEVICE-001",
       "name": "Transports between the knowability kernel and inference devices",
-      "ai_bridge_status": null,
+      "ai_interpretation_status": null,
       "informal_claim": null,
       "formalizations": [
         {
@@ -3818,7 +4227,7 @@
     "LAND-CRMDP-KNOW-001": {
       "id": "LAND-CRMDP-KNOW-001",
       "name": "True return does not factor through the observed history",
-      "ai_bridge_status": null,
+      "ai_interpretation_status": null,
       "informal_claim": null,
       "formalizations": [
         {
@@ -3861,10 +4270,48 @@
       },
       "candidate_count": 0
     },
+    "LAND-CRMDP-GRID-001": {
+      "id": "LAND-CRMDP-GRID-001",
+      "name": "Everitt et al. Theorem 11 over the source's own uniform reward grid",
+      "ai_interpretation_status": null,
+      "informal_claim": null,
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declarations": [
+            "RewardGrid.everitt_theorem_eleven_gridClass",
+            "RewardGrid.toComplementedClass",
+            "RewardGrid.exists_max_gridReturn",
+            "RewardGrid.exists_min_gridReturn",
+            "RewardGrid.gridVal_gridRev",
+            "RewardGrid.gridVal_strictMono",
+            "RewardGrid.gridReturn_add_complement",
+            "RewardGrid.run_congr_observed",
+            "RewardGrid.halfMaximalRegretBound"
+          ],
+          "module": "AISafetyAtlas.Wireheading.RewardGrid",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Wireheading.RewardGrid.everitt_theorem_eleven_gridClass",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Wireheading/RewardGrid.lean",
+            "line": 677
+          }
+        ]
+      },
+      "candidate_count": 0
+    },
     "LAND-FANO-001": {
       "id": "LAND-FANO-001",
       "name": "Fano's inequality at both printed constants, and its sharpness",
-      "ai_bridge_status": null,
+      "ai_interpretation_status": null,
       "informal_claim": null,
       "formalizations": [
         {
@@ -3926,7 +4373,7 @@
     "LAND-OVERSIGHT-VARIETY-001": {
       "id": "LAND-OVERSIGHT-VARIETY-001",
       "name": "Seeing and doing are independent oversight capacities",
-      "ai_bridge_status": null,
+      "ai_interpretation_status": null,
       "informal_claim": null,
       "formalizations": [
         {
@@ -3965,13 +4412,13 @@
             "atlas_declaration": "AISafetyAtlas.Oversight.forces_of_constant_effect",
             "type": "BRIDGE",
             "file": "AISafetyAtlas/Oversight/VarietyBound.lean",
-            "line": 136
+            "line": 140
           },
           {
             "atlas_declaration": "AISafetyAtlas.Oversight.forces_of_constant_effect_of_not_knowable",
             "type": "BRIDGE",
             "file": "AISafetyAtlas/Oversight/VarietyBound.lean",
-            "line": 148
+            "line": 152
           }
         ]
       },
@@ -3980,7 +4427,7 @@
     "LAND-KNOWENTROPY-001": {
       "id": "LAND-KNOWENTROPY-001",
       "name": "Knowability measured: zero conditional entropy, and Fano's floor on every decoder",
-      "ai_bridge_status": null,
+      "ai_interpretation_status": null,
       "informal_claim": null,
       "formalizations": [
         {
@@ -4024,7 +4471,7 @@
     "LAND-DPI-001": {
       "id": "LAND-DPI-001",
       "name": "The data-processing inequality, its equality case, and the conditioning counterexamples",
-      "ai_bridge_status": null,
+      "ai_interpretation_status": null,
       "informal_claim": null,
       "formalizations": [
         {
@@ -4101,7 +4548,7 @@
     "LAND-CAUSAL-PEARLCBN-001": {
       "id": "LAND-CAUSAL-PEARLCBN-001",
       "name": "Pearl causal Bayesian networks as a condition on an interventional family",
-      "ai_bridge_status": null,
+      "ai_interpretation_status": null,
       "informal_claim": null,
       "formalizations": [
         {
@@ -4142,7 +4589,7 @@
     "LAND-CAUSAL-DECISIONNET-001": {
       "id": "LAND-CAUSAL-DECISIONNET-001",
       "name": "Decision tasks as causal influence diagrams, with the decision and the utility as vertices",
-      "ai_bridge_status": null,
+      "ai_interpretation_status": null,
       "informal_claim": null,
       "formalizations": [
         {
@@ -4182,7 +4629,7 @@
             "atlas_declaration": "AISafetyAtlas.Causal.DecisionNetwork.mem_parents_utility_of_isUnmediated",
             "type": "NEW_PROOF",
             "file": "AISafetyAtlas/Causal/DecisionNetwork.lean",
-            "line": 299
+            "line": 347
           },
           {
             "atlas_declaration": "AISafetyAtlas.Examples.Causal.DecisionNetwork.figIsUnmediated",
@@ -4197,7 +4644,7 @@
     "LAND-CAUSAL-COLLISION-001": {
       "id": "LAND-CAUSAL-COLLISION-001",
       "name": "Margins do not imply behavioral identifiability",
-      "ai_bridge_status": null,
+      "ai_interpretation_status": null,
       "informal_claim": null,
       "formalizations": [
         {
@@ -4258,13 +4705,13 @@
             "atlas_declaration": "AISafetyAtlas.Examples.Causal.margin_class_not_identifiable",
             "type": "NEW_PROOF",
             "file": "AISafetyAtlas/Examples/Causal/BehavioralCollision.lean",
-            "line": 721
+            "line": 723
           },
           {
             "atlas_declaration": "AISafetyAtlas.Examples.Causal.margin_class_not_identifiable_two_graphs",
             "type": "NEW_PROOF",
             "file": "AISafetyAtlas/Examples/Causal/BehavioralCollision.lean",
-            "line": 770
+            "line": 772
           },
           {
             "atlas_declaration": "AISafetyAtlas.Examples.Causal.Model.jointProb_sum_shiftCollapse",
@@ -4306,31 +4753,31 @@
             "atlas_declaration": "AISafetyAtlas.Examples.Causal.transform_identity_edgeless",
             "type": "NEW_PROOF",
             "file": "AISafetyAtlas/Examples/Causal/BehavioralCollision.lean",
-            "line": 289
+            "line": 291
           },
           {
             "atlas_declaration": "AISafetyAtlas.Examples.Causal.Δ_eq_half_sub_joint",
             "type": "NEW_PROOF",
             "file": "AISafetyAtlas/Examples/Causal/BehavioralCollision.lean",
-            "line": 236
+            "line": 238
           },
           {
             "atlas_declaration": "AISafetyAtlas.Examples.Causal.margin_class_not_identifiable_family",
             "type": "NEW_PROOF",
             "file": "AISafetyAtlas/Examples/Causal/BehavioralCollision.lean",
-            "line": 618
+            "line": 620
           },
           {
             "atlas_declaration": "AISafetyAtlas.Examples.Causal.behaviorEq_has_teeth",
             "type": "NEW_PROOF",
             "file": "AISafetyAtlas/Examples/Causal/BehavioralCollision.lean",
-            "line": 684
+            "line": 686
           },
           {
             "atlas_declaration": "AISafetyAtlas.Examples.Causal.mm2_shape",
             "type": "NEW_PROOF",
             "file": "AISafetyAtlas/Examples/Causal/BehavioralCollision.lean",
-            "line": 519
+            "line": 521
           }
         ]
       },
@@ -4339,7 +4786,7 @@
     "LAND-CAUSAL-DECISION-001": {
       "id": "LAND-CAUSAL-DECISION-001",
       "name": "Causal decision policies, regret, and identified-set radius",
-      "ai_bridge_status": null,
+      "ai_interpretation_status": null,
       "informal_claim": null,
       "formalizations": [
         {
@@ -4385,31 +4832,31 @@
             "atlas_declaration": "AISafetyAtlas.Causal.Model.value_eq",
             "type": "NEW_PROOF",
             "file": "AISafetyAtlas/Causal/Decision.lean",
-            "line": 130
+            "line": 212
           },
           {
             "atlas_declaration": "AISafetyAtlas.Causal.Model.value_const_sub",
             "type": "NEW_PROOF",
             "file": "AISafetyAtlas/Causal/Decision.lean",
-            "line": 522
+            "line": 689
           },
           {
             "atlas_declaration": "AISafetyAtlas.Causal.Model.regret_eq_zero_iff",
             "type": "NEW_PROOF",
             "file": "AISafetyAtlas/Causal/Decision.lean",
-            "line": 345
+            "line": 512
           },
           {
             "atlas_declaration": "AISafetyAtlas.Causal.Model.value_le_sign",
             "type": "NEW_PROOF",
             "file": "AISafetyAtlas/Causal/Decision.lean",
-            "line": 448
+            "line": 615
           },
           {
             "atlas_declaration": "AISafetyAtlas.Causal.inIdentifiedSet_zero_of_behaviorEq",
             "type": "NEW_PROOF",
             "file": "AISafetyAtlas/Causal/Decision.lean",
-            "line": 612
+            "line": 779
           },
           {
             "atlas_declaration": "AISafetyAtlas.Examples.Causal.margin_class_not_identifiable_shared_optimal",
@@ -4421,13 +4868,13 @@
             "atlas_declaration": "AISafetyAtlas.Causal.not_inIdentifiedSet_of_neg",
             "type": "NEW_PROOF",
             "file": "AISafetyAtlas/Causal/Decision.lean",
-            "line": 628
+            "line": 795
           },
           {
             "atlas_declaration": "AISafetyAtlas.Causal.modelError_eq_zero_iff",
             "type": "NEW_PROOF",
             "file": "AISafetyAtlas/Causal/Decision.lean",
-            "line": 805
+            "line": 972
           },
           {
             "atlas_declaration": "AISafetyAtlas.Examples.Causal.not_inIdentifiedSet_high",
@@ -4439,7 +4886,7 @@
             "atlas_declaration": "AISafetyAtlas.Examples.Causal.OneNodeClass.modelError_le_ten_mul",
             "type": "NEW_PROOF",
             "file": "AISafetyAtlas/Examples/Causal/OneNodeClass.lean",
-            "line": 541
+            "line": 539
           },
           {
             "atlas_declaration": "AISafetyAtlas.Examples.Causal.card_fibreRep_empty",
@@ -4454,7 +4901,7 @@
     "LAND-CAUSAL-STRUCTURAL-001": {
       "id": "LAND-CAUSAL-STRUCTURAL-001",
       "name": "Structural causal models, causal influence diagrams, and materiality",
-      "ai_bridge_status": null,
+      "ai_interpretation_status": null,
       "informal_claim": null,
       "formalizations": [
         {
@@ -4524,43 +4971,2692 @@
             "atlas_declaration": "AISafetyAtlas.Causal.SCM.eval_eq_f",
             "type": "NEW_PROOF",
             "file": "AISafetyAtlas/Causal/StructuralModel.lean",
-            "line": 295
+            "line": 348
           },
           {
             "atlas_declaration": "AISafetyAtlas.Causal.SCM.exoJoint_mul_prod",
             "type": "NEW_PROOF",
             "file": "AISafetyAtlas/Causal/StructuralModel.lean",
-            "line": 256
+            "line": 306
           },
           {
             "atlas_declaration": "AISafetyAtlas.Causal.SCIM.policy_ext_single",
             "type": "NEW_PROOF",
             "file": "AISafetyAtlas/Causal/StructuralModel.lean",
-            "line": 714
+            "line": 800
           },
           {
             "atlas_declaration": "AISafetyAtlas.Causal.SCIM.exists_isOptimalPolicy",
             "type": "NEW_PROOF",
             "file": "AISafetyAtlas/Causal/StructuralModel.lean",
-            "line": 851
+            "line": 951
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Causal.SCIM.observableLaw_withPolicy_eq_of_notDownstream",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Causal/StructuralModel.lean",
+            "line": 1281
           },
           {
             "atlas_declaration": "AISafetyAtlas.Examples.Causal.StructuralModel.figSCIM_opinion_isMaterial",
             "type": "NEW_PROOF",
             "file": "AISafetyAtlas/Examples/Causal/StructuralModel.lean",
-            "line": 501
+            "line": 568
           },
           {
             "atlas_declaration": "AISafetyAtlas.Examples.Causal.StructuralModel.figSCIM_policy_not_const",
             "type": "NEW_PROOF",
             "file": "AISafetyAtlas/Examples/Causal/StructuralModel.lean",
-            "line": 489
+            "line": 556
           },
           {
             "atlas_declaration": "AISafetyAtlas.Examples.Causal.StructuralModel.utility_childless_has_teeth",
             "type": "NEW_PROOF",
             "file": "AISafetyAtlas/Examples/Causal/StructuralModel.lean",
-            "line": 107
+            "line": 156
+          }
+        ]
+      },
+      "candidate_count": 0
+    },
+    "LAND-SOV-TRULYPLAYABLE-001": {
+      "id": "LAND-SOV-TRULYPLAYABLE-001",
+      "name": "Truly playable effectivity functions, and the finite-domain corollary",
+      "ai_interpretation_status": null,
+      "informal_claim": null,
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declarations": [
+            "nonmonotonicCore",
+            "CompleteCore",
+            "TrulyPlayable",
+            "IsCrown",
+            "Playable.emptyFilter",
+            "Playable.emptyFilter_neBot",
+            "Playable.subsingleton_nonmonotonicCore_empty",
+            "nonmonotonicCore_effectivity_empty",
+            "trulyPlayable_effectivity",
+            "Playable.trulyPlayable_iff_nonmonotonicCore_empty_nonempty",
+            "Playable.trulyPlayable_iff_principal",
+            "Playable.trulyPlayable_iff_emptyFilter_principal",
+            "Playable.trulyPlayable_of_finite",
+            "Playable.trulyPlayable_of_finite_empty",
+            "Playable.trulyPlayable_of_exists_minimal",
+            "nonmonotonicCore_cofiniteEff_empty",
+            "not_trulyPlayable_cofiniteEff"
+          ],
+          "module": "AISafetyAtlas.Sovereignty.TrulyPlayable",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Sovereignty.Playable.trulyPlayable_of_finite",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Sovereignty/TrulyPlayable.lean",
+            "line": 290
+          }
+        ]
+      },
+      "candidate_count": 0
+    },
+    "LAND-SOV-PLAYABILITY-001": {
+      "id": "LAND-SOV-PLAYABILITY-001",
+      "name": "Pauly's playability conditions, the easy direction, and the converse that fails",
+      "ai_interpretation_status": null,
+      "informal_claim": null,
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declarations": [
+            "effectivity_playable",
+            "not_forces_empty",
+            "forces_univ_of_not_forces_empty_compl",
+            "not_forces_compl_of_forces",
+            "Individualistic",
+            "iUnion_effectivity_singleton_subset",
+            "individualistic_iff_exists_dictator",
+            "BlockChoice",
+            "forces_iInter_blockChoice",
+            "iInter_blockChoice_nonempty",
+            "exists_refineFixed",
+            "effectivity_univ_eq_nonempty"
+          ],
+          "module": "AISafetyAtlas.Sovereignty.Playability",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        },
+        {
+          "framework": "Lean",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declarations": [
+            "Playable",
+            "playable_effectivity",
+            "Playable.regular",
+            "Playable.mono_coalition",
+            "cofiniteEff",
+            "cofiniteEff_playable",
+            "not_exists_gameForm_cofiniteEff",
+            "IndividualisticEff",
+            "individualisticEff_effectivity_iff",
+            "cofiniteEff_individualisticEff",
+            "not_forall_individualisticEff_exists_gameForm",
+            "not_forall_individualisticEff_exists_dictator"
+          ],
+          "module": "AISafetyAtlas.Sovereignty.PlayableConverse",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Sovereignty.not_exists_gameForm_cofiniteEff",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Sovereignty/PlayableConverse.lean",
+            "line": 360
+          }
+        ]
+      },
+      "candidate_count": 0
+    },
+    "LAND-SOV-RETARGETABLE-001": {
+      "id": "LAND-SOV-RETARGETABLE-001",
+      "name": "Retargetable decision-makers have orbit-level tendencies, up to theorem A.13",
+      "ai_interpretation_status": null,
+      "informal_claim": null,
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declarations": [
+            "orbitIn",
+            "orbitFavouring",
+            "orbitAgainst",
+            "MostOrbit",
+            "MultiplyRetargetable",
+            "SimplyRetargetable",
+            "orbitIn_finite",
+            "MultiplyRetargetable.mostOrbit",
+            "SimplyRetargetable.mostOrbit",
+            "SimilarUnder",
+            "ContainsCopies",
+            "containsCopies_one_of_subset",
+            "ContainsCopies.mono"
+          ],
+          "module": "AISafetyAtlas.Sovereignty.Retargetable",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        },
+        {
+          "framework": "Lean",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declarations": [
+            "smul_mem_orbitIn",
+            "mostOrbit_of_orbitConditions",
+            "IncreasingUnderJointPerm",
+            "SupersetCopies",
+            "mostOrbit_of_supersetCopies",
+            "InvolutiveCopies",
+            "InvolutiveCopies.containsCopies",
+            "InvolutiveCopies.supersetCopies",
+            "increasingUnderJointPerm_of_hide",
+            "increasingUnderJointPerm_of_hide_invariant",
+            "euProfile",
+            "EUDetermined",
+            "euProfile_smul",
+            "EUDetermined.jointPermInvariant",
+            "eu_determined_mostOrbit"
+          ],
+          "module": "AISafetyAtlas.Sovereignty.EUDetermined",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Sovereignty.MultiplyRetargetable.mostOrbit",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Sovereignty/Retargetable.lean",
+            "line": 132
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Sovereignty.eu_determined_mostOrbit",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Sovereignty/EUDetermined.lean",
+            "line": 420
+          }
+        ]
+      },
+      "candidate_count": 0
+    },
+    "LAND-DEC-MDP-001": {
+      "id": "LAND-DEC-MDP-001",
+      "name": "The rewardless Markov decision process, and the run it induces",
+      "ai_interpretation_status": null,
+      "informal_claim": null,
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declarations": [
+            "MDP",
+            "MDP.ofDet",
+            "History",
+            "Policy",
+            "DetPolicy",
+            "Policy.ofDet",
+            "MDP.run",
+            "MDP.stateAt",
+            "MDP.historyUpTo",
+            "MDP.run_congr_obs",
+            "MDP.run_ofDet",
+            "detRun",
+            "detRun_congr_obs",
+            "genRun",
+            "genRun_id",
+            "genRun_pmf"
+          ],
+          "module": "AISafetyAtlas.Decision.MDP",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Decision.MDP.run_congr_obs",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Decision/MDP.lean",
+            "line": 286
+          }
+        ]
+      },
+      "candidate_count": 0
+    },
+    "LAND-GOODHART-SELECTION-001": {
+      "id": "LAND-GOODHART-SELECTION-001",
+      "name": "Selection on a proxy: the inflated gap, and the region the link was never observed in",
+      "ai_interpretation_status": null,
+      "informal_claim": null,
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declarations": [
+            "goal",
+            "gap",
+            "proxy",
+            "selected",
+            "measurableSet_selected",
+            "measureReal_selected",
+            "integral_gap_selected",
+            "tail_integral_ge",
+            "tail_integral_gt",
+            "gap_selection_ge",
+            "gap_selection_gt",
+            "gap_selection_gaussianReal_gt"
+          ],
+          "module": "AISafetyAtlas.Goodhart.Regressional",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        },
+        {
+          "framework": "Lean",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declarations": [
+            "selectedAt",
+            "mem_selectedAt",
+            "FitsOn",
+            "selected_disjoint_observed",
+            "fits_underdetermined_off_observed",
+            "regimeGoal",
+            "regimeGoal_eq_of_le",
+            "regimeGoal_eq_of_lt",
+            "regime_prediction_error",
+            "regime_underdetermines",
+            "regime_selected_disjoint_observed"
+          ],
+          "module": "AISafetyAtlas.Goodhart.Extremal",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Goodhart.gap_selection_ge",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Goodhart/Regressional.lean",
+            "line": 321
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Goodhart.Extremal.fits_underdetermined_off_observed",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Goodhart/Extremal.lean",
+            "line": 187
+          }
+        ]
+      },
+      "candidate_count": 0
+    },
+    "LAND-GOODHART-OVEROPT-001": {
+      "id": "LAND-GOODHART-OVEROPT-001",
+      "name": "Optimizing a proxy over some of the attributes floors the rest",
+      "ai_interpretation_status": null,
+      "informal_claim": null,
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declarations": [
+            "StrictMonoCoord",
+            "feasibleStates",
+            "restrictAttrs",
+            "isClosed_feasibleStates",
+            "continuous_restrictAttrs",
+            "proxyMax_unmentioned_eq_lowerBound",
+            "le_of_unmentioned_eq_lowerBound",
+            "monotone_of_strictMonoCoord",
+            "gap_le_of_unmentioned_eq_lowerBound",
+            "zhuang_hadfield_menell_theorem_one"
+          ],
+          "module": "AISafetyAtlas.Goodhart.Overoptimization",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Goodhart.zhuang_hadfield_menell_theorem_one",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Goodhart/Overoptimization.lean",
+            "line": 363
+          }
+        ]
+      },
+      "candidate_count": 0
+    },
+    "LAND-SOV-POWER-001": {
+      "id": "LAND-SOV-POWER-001",
+      "name": "Peleg's game-form layer: alpha-effectivity, and the conditions it satisfies for free",
+      "ai_interpretation_status": null,
+      "informal_claim": null,
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declarations": [
+            "Constitution",
+            "Constitution.induced",
+            "Constitution.Standing",
+            "Constitution.induced_empty",
+            "Constitution.MonotoneAssign",
+            "Constitution.MonotoneAlternatives",
+            "Constitution.MonotoneRights",
+            "Constitution.MonotoneCoalitions",
+            "Constitution.induced_mono",
+            "Superadditive",
+            "UpwardClosed",
+            "Represents",
+            "Constitution.ofGameForm",
+            "represents_ofGameForm",
+            "EffectivityEq",
+            "EffectivityEq.refl",
+            "EffectivityEq.symm",
+            "EffectivityEq.trans",
+            "effectivityEq_iff_represents_ofGameForm",
+            "Represents.superadditive",
+            "Represents.upwardClosed",
+            "Represents.surjective_outcome"
+          ],
+          "module": "AISafetyAtlas.Sovereignty.Rights",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        },
+        {
+          "framework": "Lean",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declarations": [
+            "retainsFamily_of_effectivityEq",
+            "effectivityEq_of_retainsFamily_univ",
+            "RetainsFamily",
+            "retainsFamily_of_represents",
+            "RetainsFamily.trans",
+            "RetainsFamily.mono_mandate",
+            "RetainsFamily.mono_coalition",
+            "principalCoalition",
+            "principalCoalition_of_aligned",
+            "principalCoalition_of_unaligned",
+            "singleton_subset_principalCoalition",
+            "SOV1",
+            "sov1_of_aligned",
+            "sov1_of_unaligned",
+            "sov1_of_retainsFamily_singleton",
+            "SOV1.mono_mandate",
+            "RetainsUnderFamily",
+            "retainsUnder_of_retainsUnderFamily",
+            "RetainsUnderFamily.mono_mandate",
+            "retainsWith_of_retainsFamily",
+            "retainsAgainst_of_retainsFamily"
+          ],
+          "module": "AISafetyAtlas.Sovereignty.Mandate",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        },
+        {
+          "framework": "Lean",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declarations": [
+            "GameForm",
+            "Forces",
+            "effectivity",
+            "Forces.mono",
+            "forces_univ",
+            "Forces.mono_coalition",
+            "forces_superadditive",
+            "Forces.inter_nonempty_of_disjoint",
+            "iInter_nonempty_of_pairwiseDisjoint",
+            "forces_of_forces_singletons",
+            "dominated_forces_univ",
+            "minCard_cannot_separate",
+            "ActualPower",
+            "ActualPower.forces",
+            "pinned_actualPower_singleton",
+            "pinned_not_actualPower_pair",
+            "pinned_forces_pair"
+          ],
+          "module": "AISafetyAtlas.Sovereignty.Separations",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        },
+        {
+          "framework": "Lean",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declarations": [
+            "ActionFrame",
+            "restrictJA",
+            "jointUnion",
+            "SafeFor",
+            "TightFor",
+            "AlphaPower",
+            "ActualPowerAt",
+            "alphaEff",
+            "actualEff",
+            "actualPowerAt_iff_out_eq",
+            "AlphaPower.mono",
+            "ActualPowerAt.alphaPower",
+            "IsGCGF",
+            "IsGCGF.mem_out_iff",
+            "IsGCGF.mem_av_iff",
+            "IsGCGF.out_anti_coalition",
+            "IsGCGF.out_eq_iUnion_av",
+            "IsGCGF.exists_av_univ_restrict",
+            "IsGCGF.alphaPower_mono_coalition",
+            "IsGCGF.not_alphaPower_empty",
+            "ActionFrame.ofGrand",
+            "ofGrand_out_univ",
+            "ofGrand_isGCGF",
+            "Serial",
+            "Independent",
+            "Deterministic",
+            "FrameClass",
+            "card_frameClass",
+            "IsFrame",
+            "isFrame_mono",
+            "isFrame_of_sid",
+            "gameFrame",
+            "gameOut_eq_outcomesOf",
+            "gameFrame_isGCGF",
+            "alphaPower_gameFrame",
+            "alphaEff_gameFrame",
+            "actualPowerAt_gameFrame",
+            "gameFrame_serial",
+            "gameFrame_independent",
+            "gameFrame_deterministic",
+            "gameFrame_isFrame_sid"
+          ],
+          "module": "AISafetyAtlas.Sovereignty.ConcurrentGameFrame",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Sovereignty.forces_superadditive",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Sovereignty/Separations.lean",
+            "line": 253
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Sovereignty.retainsFamily_of_represents",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Sovereignty/Mandate.lean",
+            "line": 122
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Sovereignty.sov1_of_retainsFamily_singleton",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Sovereignty/Mandate.lean",
+            "line": 258
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Sovereignty.Represents.surjective_outcome",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Sovereignty/Rights.lean",
+            "line": 320
+          }
+        ]
+      },
+      "candidate_count": 0
+    },
+    "LAND-SOV-INDEPENDENCE-001": {
+      "id": "LAND-SOV-INDEPENDENCE-001",
+      "name": "The logical space of freedom, and the corner that cannot escape",
+      "ai_interpretation_status": null,
+      "informal_claim": null,
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declarations": [
+            "Setting",
+            "Counts",
+            "worlds",
+            "Free",
+            "LiberalFree",
+            "MoralizedLiberalFree",
+            "IndependenceFree",
+            "RepublicanFree",
+            "free_of_free_not_moralized",
+            "free_of_free_robust",
+            "republicanFree_of_independenceFree",
+            "liberalFree_of_independenceFree",
+            "not_independenceFree_of_universal_threat",
+            "not_republicanFree_of_impermissible_threat"
+          ],
+          "module": "AISafetyAtlas.Sovereignty.Independence",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Sovereignty.Setting.not_independenceFree_of_universal_threat",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Sovereignty/Independence.lean",
+            "line": 232
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Sovereignty.Setting.republicanFree_of_independenceFree",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Sovereignty/Independence.lean",
+            "line": 212
+          }
+        ]
+      },
+      "candidate_count": 0
+    },
+    "LAND-SOV-STEERING-001": {
+      "id": "LAND-SOV-STEERING-001",
+      "name": "Stepwise retention is not authorship: locally safe steps that lose the original mandate",
+      "ai_interpretation_status": null,
+      "informal_claim": null,
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declarations": [
+            "StepKind",
+            "SteeringPath",
+            "StepSafe",
+            "AdjacentSafe",
+            "OriginalLost",
+            "IsSteering"
+          ],
+          "module": "AISafetyAtlas.Sovereignty.Steering",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Examples.Sovereignty.steer_isSteering",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Examples/Sovereignty/Steering.lean",
+            "line": 121
+          }
+        ]
+      },
+      "candidate_count": 0
+    },
+    "LAND-SOV-SERVICE-001": {
+      "id": "LAND-SOV-SERVICE-001",
+      "name": "Safety without service: a delegate that refuses everything keeps every guarantee it already satisfies",
+      "ai_interpretation_status": null,
+      "informal_claim": null,
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declarations": [
+            "Inert",
+            "Demandwise",
+            "Separating",
+            "inert_retainsFamily_iff",
+            "retainsFamily_and_not_demandwise",
+            "separating_not_demandwise_of_inert"
+          ],
+          "module": "AISafetyAtlas.Sovereignty.Service",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        },
+        {
+          "framework": "Lean",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declarations": [
+            "Audit",
+            "refusal_passes_safety",
+            "refusal_serves_nothing",
+            "safety_suite_admits_a_refusal",
+            "isRefusalHole",
+            "admitsRefusal",
+            "exists_refusal_hole_of_admitsRefusal",
+            "not_exists_refusal_hole_of_admitsRefusal_eq_false"
+          ],
+          "module": "AISafetyAtlas.Sovereignty.Refusal",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Sovereignty.retainsFamily_and_not_demandwise",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Sovereignty/Service.lean",
+            "line": 190
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Sovereignty.Refusal.safety_suite_admits_a_refusal",
+            "type": "BRIDGE",
+            "file": "AISafetyAtlas/Sovereignty/Refusal.lean",
+            "line": 105
+          }
+        ]
+      },
+      "candidate_count": 0
+    },
+    "LAND-SOV-QUANT-001": {
+      "id": "LAND-SOV-QUANT-001",
+      "name": "Two quantifier orders: a response is not a policy, and two guarantees are not one",
+      "ai_interpretation_status": null,
+      "informal_claim": null,
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declarations": [
+            "ForcesResp",
+            "forcesResp_of_forces",
+            "forces_inter_of_shared_footprint",
+            "forces_iInter_of_shared_footprint",
+            "DemandwiseResp",
+            "demandwiseResp_of_demandwise"
+          ],
+          "module": "AISafetyAtlas.Sovereignty.Quantifiers",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Sovereignty.forces_inter_of_shared_footprint",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Sovereignty/Quantifiers.lean",
+            "line": 90
+          }
+        ]
+      },
+      "candidate_count": 0
+    },
+    "LAND-SOV-TRANSFER-001": {
+      "id": "LAND-SOV-TRANSFER-001",
+      "name": "Resources, projections, and the refinement that carries a guarantee",
+      "ai_interpretation_status": null,
+      "informal_claim": null,
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declarations": [
+            "ForcesWithin",
+            "ForcesWithin.mono_resources",
+            "ForcesWithin.mono_threat",
+            "GameForm.map",
+            "forces_map_iff_forces_preimage",
+            "Simulates",
+            "forces_of_simulates",
+            "demandwise_of_simulates",
+            "simulates_univ_iff",
+            "simulates_empty_iff"
+          ],
+          "module": "AISafetyAtlas.Sovereignty.Transfer",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Sovereignty.forces_of_simulates",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Sovereignty/Transfer.lean",
+            "line": 247
+          }
+        ]
+      },
+      "candidate_count": 0
+    },
+    "LAND-SOV-CATALOGUE-001": {
+      "id": "LAND-SOV-CATALOGUE-001",
+      "name": "Passing every demand separately is not being able to run",
+      "ai_interpretation_status": null,
+      "informal_claim": null,
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declarations": [
+            "DemandwiseUniform",
+            "demandwise_of_demandwiseUniform",
+            "demandwise_iff_exists_selector",
+            "outcomesOf_nonempty",
+            "not_forces_of_disjoint_of_shared",
+            "not_demandwiseUniform_of_disjoint",
+            "retainsFamily_refl"
+          ],
+          "module": "AISafetyAtlas.Sovereignty.Catalogue",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        },
+        {
+          "framework": "Lean",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declarations": [
+            "Assessment",
+            "PassesEach",
+            "Operable",
+            "passesEach_of_operable",
+            "operable_meets_all_at_once",
+            "conflicting_requirements_are_not_operable",
+            "passes_every_check_and_not_operable",
+            "not_operable_of_subset_not_operable"
+          ],
+          "module": "AISafetyAtlas.Sovereignty.Conformity",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        },
+        {
+          "framework": "Lean",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declarations": [
+            "tableGame",
+            "operator",
+            "reqSets",
+            "footprintSubset",
+            "passesEachB",
+            "operableB",
+            "mem_outcomesOf_tableGame",
+            "demandwise_of_passesEachB",
+            "not_demandwiseUniform_of_operableB_eq_false"
+          ],
+          "module": "AISafetyAtlas.Sovereignty.ConformityCheck",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Sovereignty.demandwise_iff_exists_selector",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Sovereignty/Catalogue.lean",
+            "line": 114
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Sovereignty.Conformity.passes_every_check_and_not_operable",
+            "type": "BRIDGE",
+            "file": "AISafetyAtlas/Sovereignty/Conformity.lean",
+            "line": 134
+          }
+        ]
+      },
+      "candidate_count": 0
+    },
+    "LAND-SOV-AUDIT-001": {
+      "id": "LAND-SOV-AUDIT-001",
+      "name": "What a channel can certify, and what it only has to be good enough to act on",
+      "ai_interpretation_status": null,
+      "informal_claim": null,
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declarations": [
+            "residualFree_iff_factors",
+            "auditable_iff_exists_detector",
+            "not_exists_recovery_of_collision",
+            "UniformDecision",
+            "exists_uniformDecision_iff",
+            "selectionObs",
+            "selectionAuditable_iff_separates",
+            "selectionAuditable_mono",
+            "coverLabel",
+            "coverMonitor",
+            "cover_iff_selectionAuditable"
+          ],
+          "module": "AISafetyAtlas.Sovereignty.Auditability",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Sovereignty.exists_uniformDecision_iff",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Sovereignty/Auditability.lean",
+            "line": 139
+          }
+        ]
+      },
+      "candidate_count": 0
+    },
+    "LAND-SOV-COMM-001": {
+      "id": "LAND-SOV-COMM-001",
+      "name": "Zero-error communication against an adversary is disjoint forceable regions",
+      "ai_interpretation_status": null,
+      "informal_claim": null,
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declarations": [
+            "TransmitsZeroError",
+            "transmitsZeroError_iff_exists_code",
+            "TransmitsZeroError.comp_injective",
+            "TransmitsZeroError.of_comp"
+          ],
+          "module": "AISafetyAtlas.Sovereignty.Communication",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Sovereignty.transmitsZeroError_iff_exists_code",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Sovereignty/Communication.lean",
+            "line": 56
+          }
+        ]
+      },
+      "candidate_count": 0
+    },
+    "LAND-SOV-CONST-001": {
+      "id": "LAND-SOV-CONST-001",
+      "name": "An amendment chain is evidence about the amendment rule and nothing else",
+      "ai_interpretation_status": null,
+      "informal_claim": null,
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declarations": [
+            "AuthorizedFrom",
+            "authorizedFrom_of_stepwise",
+            "AuthorizedFrom.trans",
+            "AuthorizedFrom.mono",
+            "authorizedFrom_of_total"
+          ],
+          "module": "AISafetyAtlas.Sovereignty.Constitution",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        },
+        {
+          "framework": "Lean",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declarations": [
+            "ChangeLog",
+            "log_shows_only_rule_compliance",
+            "unbroken_chain_is_not_a_constraint",
+            "the_rule_carries_the_assurance"
+          ],
+          "module": "AISafetyAtlas.Sovereignty.AmendmentLog",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Sovereignty.authorizedFrom_of_total",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Sovereignty/Constitution.lean",
+            "line": 78
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Sovereignty.AmendmentLog.unbroken_chain_is_not_a_constraint",
+            "type": "BRIDGE",
+            "file": "AISafetyAtlas/Sovereignty/AmendmentLog.lean",
+            "line": 90
+          }
+        ]
+      },
+      "candidate_count": 0
+    },
+    "LAND-SOV-DISTURB-001": {
+      "id": "LAND-SOV-DISTURB-001",
+      "name": "Reaching every state is not holding one: the quantifier a rank condition hides",
+      "ai_interpretation_status": null,
+      "informal_claim": null,
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declarations": [
+            "Plant",
+            "Plant.terminal",
+            "Plant.RobustInput",
+            "Plant.reachesEvery_iff_surjective",
+            "Plant.exists_robustInput_iff",
+            "Plant.robustReachesEvery_of_disturbance_constant",
+            "isControllable_iff_reachesEvery"
+          ],
+          "module": "AISafetyAtlas.Sovereignty.Disturbance",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Sovereignty.Plant.exists_robustInput_iff",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Sovereignty/Disturbance.lean",
+            "line": 111
+          }
+        ]
+      },
+      "candidate_count": 0
+    },
+    "LAND-SOV-AUTH-001": {
+      "id": "LAND-SOV-AUTH-001",
+      "name": "Authority is an input, and the links it does not come with",
+      "ai_interpretation_status": null,
+      "informal_claim": null,
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declarations": [
+            "not_exists_label_agreeing_with_both",
+            "not_authority_implies_control",
+            "not_control_implies_authority",
+            "exists_verified_untrue",
+            "exists_all_four_combinations"
+          ],
+          "module": "AISafetyAtlas.Sovereignty.Authority",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        },
+        {
+          "framework": "Lean",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declarations": [
+            "Veto",
+            "Dominates",
+            "not_forces_of_veto",
+            "Veto.mono",
+            "not_dominates_of_controlled",
+            "Dominates.veto"
+          ],
+          "module": "AISafetyAtlas.Sovereignty.Domination",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        },
+        {
+          "framework": "Lean",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declarations": [
+            "RelayedCommand",
+            "run",
+            "run_delivered",
+            "run_withheld",
+            "principal_cannot_force",
+            "obedience_does_not_give_authority",
+            "relay_forces_idle",
+            "undeclinable_iff_inert"
+          ],
+          "module": "AISafetyAtlas.Sovereignty.ShutdownChannel",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        },
+        {
+          "framework": "Lean",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declarations": [
+            "Record",
+            "attestation_is_not_the_claim",
+            "attested_does_not_transfer",
+            "properties_are_independent",
+            "no_property_implies_another"
+          ],
+          "module": "AISafetyAtlas.Sovereignty.Attestation",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        },
+        {
+          "framework": "Lean",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declarations": [
+            "not_forces_of_free_coordinate",
+            "power_over_a_matter_does_not_compose",
+            "forces_both_of_shared_commitment"
+          ],
+          "module": "AISafetyAtlas.Sovereignty.DelegationChain",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Sovereignty.not_exists_label_agreeing_with_both",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Sovereignty/Authority.lean",
+            "line": 59
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Sovereignty.ShutdownChannel.obedience_does_not_give_authority",
+            "type": "BRIDGE",
+            "file": "AISafetyAtlas/Sovereignty/ShutdownChannel.lean",
+            "line": 117
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Sovereignty.Attestation.attestation_is_not_the_claim",
+            "type": "BRIDGE",
+            "file": "AISafetyAtlas/Sovereignty/Attestation.lean",
+            "line": 91
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Sovereignty.Attestation.properties_are_independent",
+            "type": "BRIDGE",
+            "file": "AISafetyAtlas/Sovereignty/Attestation.lean",
+            "line": 121
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Sovereignty.DelegationChain.power_over_a_matter_does_not_compose",
+            "type": "BRIDGE",
+            "file": "AISafetyAtlas/Sovereignty/DelegationChain.lean",
+            "line": 103
+          }
+        ]
+      },
+      "candidate_count": 0
+    },
+    "LAND-SOV-VALUE-001": {
+      "id": "LAND-SOV-VALUE-001",
+      "name": "Values on a game form, with sure winning sitting inside them",
+      "ai_interpretation_status": null,
+      "informal_claim": null,
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declarations": [
+            "spliceProfile",
+            "forces_iff_forall_spliceProfile",
+            "OutcomeLaw",
+            "OutcomeLaw.lowerValue",
+            "OutcomeLaw.upperValue",
+            "OutcomeLaw.lowerValue_le_upperValue",
+            "OutcomeLaw.opponentLowerValue",
+            "OutcomeLaw.opponentLowerValue_eq_one_sub_upperValue",
+            "OutcomeLaw.lowerValue_add_opponentLowerValue_le_one",
+            "diracLaw",
+            "lowerValue_diracLaw_eq_one_iff",
+            "OutcomeLaw.lowerValue_le_of_law_le",
+            "OutcomeLaw.le_law_inter",
+            "OutcomeLaw.lowerPayoff",
+            "OutcomeLaw.lowerPayoff_indicator",
+            "iInf_le_lintegral",
+            "prod_le_of_step_le",
+            "OutcomeLaw.ThresholdAbility",
+            "OutcomeLaw.le_lowerValue_of_thresholdAbility",
+            "OutcomeLaw.thresholdAbility_of_lt_lowerValue"
+          ],
+          "module": "AISafetyAtlas.Sovereignty.Value",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Sovereignty.lowerValue_diracLaw_eq_one_iff",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Sovereignty/Value.lean",
+            "line": 356
+          }
+        ]
+      },
+      "candidate_count": 0
+    },
+    "LAND-SOV-INFL-001": {
+      "id": "LAND-SOV-INFL-001",
+      "name": "Influence is a capacity, and it is not power",
+      "ai_interpretation_status": null,
+      "informal_claim": null,
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declarations": [
+            "eventGap",
+            "eventGap_eq_zero_iff",
+            "eq_of_eventGap_eq_zero",
+            "eventGap_map_le",
+            "eventGap_le_one",
+            "influenceCapacity",
+            "influenceCapacity_eq_zero_iff",
+            "supportEffectivity",
+            "supportEffectivity_congr"
+          ],
+          "module": "AISafetyAtlas.Sovereignty.Influence",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Sovereignty.influenceCapacity_eq_zero_iff",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Sovereignty/Influence.lean",
+            "line": 155
+          }
+        ]
+      },
+      "candidate_count": 0
+    },
+    "LAND-SOV-SAFETYGAME-001": {
+      "id": "LAND-SOV-SAFETYGAME-001",
+      "name": "Holding a system inside a set forever, and getting back inside a budget",
+      "ai_interpretation_status": null,
+      "informal_claim": null,
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declarations": [
+            "SafetyGame",
+            "SafetyGame.cpre",
+            "SafetyGame.safetyKernel",
+            "SafetyGame.subset_safetyKernel",
+            "SafetyGame.play",
+            "SafetyGame.Maintains",
+            "SafetyGame.mem_safetyKernel_iff_exists_maintaining",
+            "SafetyGame.recovery",
+            "SafetyGame.recoveryRank",
+            "SafetyGame.recoveryStrategy",
+            "SafetyGame.recovery_reaches",
+            "SafetyGame.recovery_mono_budget",
+            "SafetyGame.recovery_mono_viability",
+            "SafetyGame.prodGame",
+            "SafetyGame.maintains_prodGame",
+            "SafetyGame.danger_le_of_rate",
+            "SafetyGame.not_crossed_of_rate",
+            "SafetyGame.consStream",
+            "SafetyGame.playH",
+            "SafetyGame.playH_positional",
+            "SafetyGame.playH_shift",
+            "SafetyGame.mem_recovery_of_recovers",
+            "SafetyGame.mem_recovery_iff"
+          ],
+          "module": "AISafetyAtlas.Sovereignty.SafetyGame",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        },
+        {
+          "framework": "Lean",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declarations": [
+            "ofTable",
+            "keepsInside",
+            "actionAt",
+            "shrink",
+            "shieldCandidate",
+            "IsShield",
+            "exists_action_of_isShield",
+            "subset_safetyKernel_of_isShield",
+            "exists_maintaining_of_isShield",
+            "shieldAction"
+          ],
+          "module": "AISafetyAtlas.Sovereignty.ShieldCheck",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Sovereignty.SafetyGame.mem_safetyKernel_iff_exists_maintaining",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Sovereignty/SafetyGame.lean",
+            "line": 142
+          }
+        ]
+      },
+      "candidate_count": 0
+    },
+    "LAND-SOV-BELIEF-001": {
+      "id": "LAND-SOV-BELIEF-001",
+      "name": "Deciding on one's own beliefs, while another party writes them",
+      "ai_interpretation_status": null,
+      "informal_claim": null,
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declarations": [
+            "DoxasticAgent",
+            "DoxasticAgent.channel",
+            "DoxasticAgent.sender_forces",
+            "DoxasticAgent.mem_of_agent_forces",
+            "DoxasticAgent.beliefDecisive_not_sovereign",
+            "DoxasticAgent.sender_forces_range",
+            "SignalExperiment",
+            "SignalExperiment.marginal",
+            "SignalExperiment.posterior",
+            "SignalExperiment.sum_marginal",
+            "SignalExperiment.sum_marginal_mul_posterior",
+            "SignalExperiment.eq_prior_of_constant_posterior"
+          ],
+          "module": "AISafetyAtlas.Sovereignty.Belief",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Sovereignty.DoxasticAgent.mem_of_agent_forces",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Sovereignty/Belief.lean",
+            "line": 116
+          }
+        ]
+      },
+      "candidate_count": 0
+    },
+    "LAND-SOV-EVIDENCE-001": {
+      "id": "LAND-SOV-EVIDENCE-001",
+      "name": "What a decision can achieve on the evidence it has",
+      "ai_interpretation_status": null,
+      "informal_claim": null,
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declarations": [
+            "actionLaw",
+            "actionLaw_congr",
+            "exists_success_le_inv",
+            "exists_measure_le_inv_of_disjoint",
+            "success_add_le_one_add_eventGap",
+            "avgSuccess_le_one_add_eventGap",
+            "eventGap_ge_of_success"
+          ],
+          "module": "AISafetyAtlas.Sovereignty.Evidence",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Sovereignty.exists_success_le_inv",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Sovereignty/Evidence.lean",
+            "line": 105
+          }
+        ]
+      },
+      "candidate_count": 0
+    },
+    "LAND-SOV-COGSOV-001": {
+      "id": "LAND-SOV-COGSOV-001",
+      "name": "The cognitive-sovereignty predicate, and what belief change does not prove",
+      "ai_interpretation_status": null,
+      "informal_claim": null,
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declarations": [
+            "CogSov",
+            "cogSov_of_witness",
+            "not_cogSov",
+            "cogSov_mono_of_subsetClosed",
+            "magnitude_does_not_decide_authorship"
+          ],
+          "module": "AISafetyAtlas.Sovereignty.CogSov",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Sovereignty.magnitude_does_not_decide_authorship",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Sovereignty/CogSov.lean",
+            "line": 149
+          }
+        ]
+      },
+      "candidate_count": 0
+    },
+    "LAND-SOV-EMPOWER-001": {
+      "id": "LAND-SOV-EMPOWER-001",
+      "name": "Empowerment of a deterministic channel is the capacity of its range",
+      "ai_interpretation_status": null,
+      "informal_claim": null,
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declarations": [
+            "section'",
+            "section'_inter_preimage",
+            "isUniform_section",
+            "condEntropy_comp_id_eq_zero",
+            "mutualInfo_id_eq_entropy",
+            "mutualInfo_le_log_card_range",
+            "mutualInfo_section_eq",
+            "empowerment",
+            "empowerment_eq_log_card_range",
+            "empowerment_eq_channelCapacity_range"
+          ],
+          "module": "AISafetyAtlas.Sovereignty.Empowerment",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Sovereignty.empowerment_eq_log_card_range",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Sovereignty/Empowerment.lean",
+            "line": 141
+          }
+        ]
+      },
+      "candidate_count": 0
+    },
+    "LAND-SOV-MINIMAX-001": {
+      "id": "LAND-SOV-MINIMAX-001",
+      "name": "Mixed strategies close the gap a pure commitment leaves",
+      "ai_interpretation_status": null,
+      "informal_claim": null,
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declarations": [
+            "mixed",
+            "payoff",
+            "payoffLeft",
+            "payoffRight",
+            "mixed_nonempty",
+            "mixed_convex",
+            "mixed_isCompact",
+            "continuous_payoffLeft",
+            "continuous_payoffRight",
+            "exists_mixed_saddlePoint",
+            "exists_mixed_value"
+          ],
+          "module": "AISafetyAtlas.Sovereignty.Minimax",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Sovereignty.exists_mixed_value",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Sovereignty/Minimax.lean",
+            "line": 135
+          }
+        ]
+      },
+      "candidate_count": 0
+    },
+    "LAND-SOV-OUTNUMBERED-001": {
+      "id": "LAND-SOV-OUTNUMBERED-001",
+      "name": "Being outnumbered is not being outmatched",
+      "ai_interpretation_status": null,
+      "informal_claim": null,
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "relationship": null,
+          "reproduced": true,
+          "declarations": [
+            "not_forces_of_veto_outside",
+            "AdversaryLe",
+            "cpre_subset_of_adversaryLe",
+            "safetyKernel_subset_of_adversaryLe"
+          ],
+          "module": "AISafetyAtlas.Sovereignty.Outnumbered",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Sovereignty.safetyKernel_subset_of_adversaryLe",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Sovereignty/Outnumbered.lean",
+            "line": 113
+          }
+        ]
+      },
+      "candidate_count": 0
+    },
+    "LAND-VERIF-AGENTBEHAVIOR-001": {
+      "id": "LAND-VERIF-AGENTBEHAVIOR-001",
+      "name": "No total verifier for a nontrivial behavioural safety specification",
+      "ai_interpretation_status": null,
+      "informal_claim": null,
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declarations": [
+            "Agent",
+            "SafetySpec",
+            "Satisfies",
+            "SpecNontrivial",
+            "BehavioralSafetyVerifier",
+            "no_behavioral_safety_verifier"
+          ],
+          "module": "AISafetyAtlas.Verification.AgentBehavior",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Verification.AgentBehavior.no_behavioral_safety_verifier",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Verification/AgentBehavior.lean",
+            "line": 100
+          }
+        ]
+      },
+      "candidate_count": 0
+    },
+    "LAND-LINSYS-001": {
+      "id": "LAND-LINSYS-001",
+      "name": "Kalman and Hautus: when a linear system's state is determined, and when it can be driven",
+      "ai_interpretation_status": null,
+      "informal_claim": null,
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declarations": [
+            "AISafetyAtlas.LinearSystems.isObservable_iff_hautus"
+          ],
+          "module": "AISafetyAtlas.LinearSystems",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        },
+        {
+          "framework": "Lean",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declarations": [
+            "mulVec_kernel_trivial_iff_rank_eq_card_cols",
+            "mulVec_range_top_iff_rank_eq_card_rows",
+            "rank_fromCols_le",
+            "rank_fromRows_le"
+          ],
+          "module": "AISafetyAtlas.LinearSystems.MatrixLemmas",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        },
+        {
+          "framework": "Lean",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declarations": [
+            "controllabilityMatrix",
+            "controllabilityMatrix_apply",
+            "IsControllable",
+            "isControllable_iff_controllabilityMatrix_rank_eq"
+          ],
+          "module": "AISafetyAtlas.LinearSystems.Controllability",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        },
+        {
+          "framework": "Lean",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declarations": [
+            "observabilityMatrix",
+            "IsObservable",
+            "observabilityMatrix_apply",
+            "observabilityMatrix_mulVec_apply",
+            "isObservable_iff_observabilityMatrix_ker_trivial",
+            "isObservable_iff_observabilityMatrix_rank_eq"
+          ],
+          "module": "AISafetyAtlas.LinearSystems.Observability",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        },
+        {
+          "framework": "Lean",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declarations": [
+            "unobservableSubspace",
+            "mem_unobservableSubspace_iff",
+            "unobservableSubspace_eq_bot_iff_isObservable",
+            "A_mulVec_mem_unobservableSubspace_of_mem",
+            "hautusObservabilityMatrix",
+            "hautusObservabilityMatrix_mulVec_eq_zero_iff",
+            "not_isObservable_implies_hautus_failure",
+            "hautus_failure_implies_not_isObservable",
+            "isObservable_iff_hautus",
+            "controllabilityMatrix_transpose",
+            "isControllable_iff_isObservable_transpose",
+            "hautusControllabilityMatrix",
+            "hautusControllabilityMatrix_transpose",
+            "isControllable_iff_hautus",
+            "not_isControllable_of_rank_add_lt",
+            "finrank_ker_add_rank_eq",
+            "not_isControllable_of_finrank_ker_gt_rank",
+            "not_isControllable_of_finrank_ker_gt_width",
+            "finrank_ker_transpose_eq",
+            "not_isObservable_of_finrank_ker_gt_rank",
+            "not_isObservable_of_finrank_ker_gt_height",
+            "not_isControllable_and_not_isObservable_of_finrank_ker_gt_ranks",
+            "not_isControllable_and_not_isObservable_of_finrank_ker_gt_dims"
+          ],
+          "module": "AISafetyAtlas.LinearSystems.Hautus",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        },
+        {
+          "framework": "Lean",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declarations": [
+            "AISafetyAtlas.LinearSystems.finrank_ker_comp_le",
+            "AISafetyAtlas.LinearSystems.finrank_ker_pow_le",
+            "AISafetyAtlas.LinearSystems.finrank_maxGenEigenspace_le_mul_of_stabilizes",
+            "AISafetyAtlas.LinearSystems.finrank_maxGenEigenspace_le_index_mul",
+            "AISafetyAtlas.LinearSystems.rootMultiplicity_le_mul_finrank_eigenspace",
+            "AISafetyAtlas.LinearSystems.ceil_div_le_finrank_eigenspace",
+            "AISafetyAtlas.LinearSystems.eigenspace_mulVecLin_eq_ker",
+            "AISafetyAtlas.LinearSystems.charpoly_mulVecLin",
+            "AISafetyAtlas.LinearSystems.not_isControllable_of_ceil_div_gt_rank",
+            "AISafetyAtlas.LinearSystems.not_isControllable_of_ceil_div_gt_width",
+            "AISafetyAtlas.LinearSystems.not_isObservable_of_ceil_div_gt_rank",
+            "AISafetyAtlas.LinearSystems.not_isObservable_of_ceil_div_gt_height"
+          ],
+          "module": "AISafetyAtlas.LinearSystems.BlockBound",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        },
+        {
+          "framework": "Lean",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declarations": [
+            "AISafetyAtlas.LinearSystems.IsTrajectoryOn",
+            "AISafetyAtlas.LinearSystems.IsTrajectory",
+            "AISafetyAtlas.LinearSystems.isTrajectoryOn_univ_iff",
+            "AISafetyAtlas.LinearSystems.outputSignal",
+            "AISafetyAtlas.LinearSystems.DeterminesStateOn",
+            "AISafetyAtlas.LinearSystems.DeterminesInitialState",
+            "AISafetyAtlas.LinearSystems.hasDerivAt_mulVec",
+            "AISafetyAtlas.LinearSystems.IsTrajectoryOn.hasDerivAt_sub",
+            "AISafetyAtlas.LinearSystems.mulVec_pow_eq_zero_of_outputSignal_eq_zero",
+            "AISafetyAtlas.LinearSystems.isObservable_imp_determinesStateOn",
+            "AISafetyAtlas.LinearSystems.isObservable_imp_determinesInitialState",
+            "AISafetyAtlas.LinearSystems.eigenTrajectory",
+            "AISafetyAtlas.LinearSystems.eigenTrajectory_isTrajectoryOn",
+            "AISafetyAtlas.LinearSystems.not_determinesStateOn_of_not_isObservable",
+            "AISafetyAtlas.LinearSystems.determinesStateOn_iff_isObservable",
+            "AISafetyAtlas.LinearSystems.IsReachable",
+            "AISafetyAtlas.LinearSystems.not_isReachable_of_not_isControllable"
+          ],
+          "module": "AISafetyAtlas.LinearSystems.Dynamics",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        },
+        {
+          "framework": "Lean",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declarations": [
+            "AISafetyAtlas.LinearSystems.flow",
+            "AISafetyAtlas.LinearSystems.flow_mul_flow_neg",
+            "AISafetyAtlas.LinearSystems.commute_flow",
+            "AISafetyAtlas.LinearSystems.hasDerivAt_flow_entry",
+            "AISafetyAtlas.LinearSystems.hasDerivAt_flow_mulVec",
+            "AISafetyAtlas.LinearSystems.flow_isTrajectory",
+            "AISafetyAtlas.LinearSystems.continuous_flow",
+            "AISafetyAtlas.LinearSystems.drivingTerm",
+            "AISafetyAtlas.LinearSystems.drivenState",
+            "AISafetyAtlas.LinearSystems.drivenState_isTrajectory",
+            "AISafetyAtlas.LinearSystems.adjointFlow",
+            "AISafetyAtlas.LinearSystems.hasDerivAt_adjointFlow",
+            "AISafetyAtlas.LinearSystems.mem_unobservableSubspace_of_adjointFlow_eq_zero",
+            "AISafetyAtlas.LinearSystems.eq_zero_of_adjointFlow_eq_zero",
+            "AISafetyAtlas.LinearSystems.adjointSignal",
+            "AISafetyAtlas.LinearSystems.dotProduct_drivenState",
+            "AISafetyAtlas.LinearSystems.eqOn_zero_of_intervalIntegral_eq_zero",
+            "AISafetyAtlas.LinearSystems.adjointSignal_eq_zero_of_dotProduct_drivenState_eq_zero",
+            "AISafetyAtlas.LinearSystems.reachedSet",
+            "AISafetyAtlas.LinearSystems.exists_dotProduct_eq_zero_of_ne_top",
+            "AISafetyAtlas.LinearSystems.IsCompletelyReachable",
+            "AISafetyAtlas.LinearSystems.isCompletelyReachable_of_isControllable",
+            "AISafetyAtlas.LinearSystems.isCompletelyReachable_iff_isControllable",
+            "AISafetyAtlas.LinearSystems.isReachable_iff_isControllable"
+          ],
+          "module": "AISafetyAtlas.LinearSystems.Flow",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.LinearSystems.isObservable_iff_hautus",
+            "type": "REFERENCE",
+            "file": "AISafetyAtlas/LinearSystems/Hautus.lean",
+            "line": 301
+          }
+        ]
+      },
+      "candidate_count": 0
+    },
+    "LAND-SOV-VOTINGPOWER-001": {
+      "id": "LAND-SOV-VOTINGPOWER-001",
+      "name": "A zero power index names a null player only where the marginals cannot cancel",
+      "ai_interpretation_status": null,
+      "informal_claim": null,
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declarations": [
+            "SimpleGame",
+            "others",
+            "SimpleGame.Monotone'",
+            "SimpleGame.marginal",
+            "SimpleGame.NullPlayer",
+            "SimpleGame.Pivotal",
+            "SimpleGame.shapleyWeight",
+            "SimpleGame.shapleyShubik",
+            "SimpleGame.banzhafRaw",
+            "SimpleGame.sum_weighted_eq_zero_iff",
+            "SimpleGame.marginal_nonneg",
+            "SimpleGame.marginal_eq_one_iff_pivotal",
+            "SimpleGame.nullPlayer_iff_others",
+            "SimpleGame.shapleyWeight_pos",
+            "SimpleGame.shapleyShubik_eq_zero_iff",
+            "SimpleGame.banzhafRaw_eq_swings_div",
+            "SimpleGame.banzhafRaw_eq_zero_iff",
+            "SimpleGame.shapleyShubik_eq_zero_iff_banzhafRaw_eq_zero"
+          ],
+          "module": "AISafetyAtlas.Sovereignty.VotingPower",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Sovereignty.SimpleGame.shapleyShubik_eq_zero_iff",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Sovereignty/VotingPower.lean",
+            "line": 197
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Sovereignty.SimpleGame.banzhafRaw_eq_swings_div",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Sovereignty/VotingPower.lean",
+            "line": 222
+          }
+        ]
+      },
+      "candidate_count": 0
+    },
+    "LAND-SOV-CAPABILITY-001": {
+      "id": "LAND-SOV-CAPABILITY-001",
+      "name": "A maintenance floor for fallback capability, and why assisted output does not report it",
+      "ai_interpretation_status": null,
+      "informal_claim": null,
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declarations": [
+            "AISafetyAtlas.Sovereignty.AffineCapability",
+            "AISafetyAtlas.Sovereignty.MaintenanceFloor",
+            "AISafetyAtlas.Sovereignty.maintenanceFloor_of_practice_floor",
+            "AISafetyAtlas.Sovereignty.MaintenanceFloor.le_zero",
+            "AISafetyAtlas.Sovereignty.assistedOutput",
+            "AISafetyAtlas.Sovereignty.fallbackCapability",
+            "AISafetyAtlas.Sovereignty.fallback_not_knowable_from_assistedOutput",
+            "AISafetyAtlas.Sovereignty.exists_output_rise_with_fallback_fall",
+            "AISafetyAtlas.Sovereignty.Enlarges",
+            "AISafetyAtlas.Sovereignty.Enlarges.forces",
+            "AISafetyAtlas.Sovereignty.Enlarges.effectivity_subset"
+          ],
+          "module": "AISafetyAtlas.Sovereignty.Capability",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Sovereignty.maintenanceFloor_of_practice_floor",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Sovereignty/Capability.lean",
+            "line": 110
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Sovereignty.fallback_not_knowable_from_assistedOutput",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Sovereignty/Capability.lean",
+            "line": 157
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Sovereignty.exists_output_rise_with_fallback_fall",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Sovereignty/Capability.lean",
+            "line": 171
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Sovereignty.Enlarges.forces",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Sovereignty/Capability.lean",
+            "line": 221
+          }
+        ]
+      },
+      "candidate_count": 0
+    },
+    "LAND-EVAL-BLINDSPOT-001": {
+      "id": "LAND-EVAL-BLINDSPOT-001",
+      "name": "What an evaluation that scores runs one at a time can and cannot see",
+      "ai_interpretation_status": null,
+      "informal_claim": null,
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "relationship": null,
+          "reproduced": true,
+          "declarations": [
+            "AISafetyAtlas.Compositional.Hyperproperties.Evaluation.scoreSet",
+            "AISafetyAtlas.Compositional.Hyperproperties.Evaluation.traceProperty_knowable_of_score_decides",
+            "AISafetyAtlas.Compositional.Hyperproperties.Evaluation.not_knowable_of_score_collision",
+            "AISafetyAtlas.Compositional.Hyperproperties.Evaluation.sampling_misses_subsingleton"
+          ],
+          "module": "AISafetyAtlas.Compositional.Hyperproperties.Evaluation",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Compositional.Hyperproperties.Evaluation.traceProperty_knowable_of_score_decides",
+            "type": "BRIDGE",
+            "file": "AISafetyAtlas/Compositional/Hyperproperties/Evaluation.lean",
+            "line": 94
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Compositional.Hyperproperties.Evaluation.sampling_misses_subsingleton",
+            "type": "BRIDGE",
+            "file": "AISafetyAtlas/Compositional/Hyperproperties/Evaluation.lean",
+            "line": 136
+          }
+        ]
+      },
+      "candidate_count": 0
+    },
+    "LAND-AUDIT-REGISTRY-001": {
+      "id": "LAND-AUDIT-REGISTRY-001",
+      "name": "Audit registries along a value chain: what publishing declarations can settle",
+      "ai_interpretation_status": null,
+      "informal_claim": null,
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "relationship": null,
+          "reproduced": true,
+          "declarations": [
+            "AISafetyAtlas.Oversight.JointObservation.registryCandidate",
+            "AISafetyAtlas.Oversight.JointObservation.consortiumCandidate",
+            "AISafetyAtlas.Oversight.JointObservation.consortium_covers_of_registry_covers",
+            "AISafetyAtlas.Oversight.JointObservation.not_registry_covers_of_emit_collision",
+            "AISafetyAtlas.Oversight.JointObservation.consortium_covers_and_registry_does_not"
+          ],
+          "module": "AISafetyAtlas.Oversight.JointObservation.Registry",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Oversight.JointObservation.consortium_covers_of_registry_covers",
+            "type": "BRIDGE",
+            "file": "AISafetyAtlas/Oversight/JointObservation/Registry.lean",
+            "line": 115
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Oversight.JointObservation.not_registry_covers_of_emit_collision",
+            "type": "BRIDGE",
+            "file": "AISafetyAtlas/Oversight/JointObservation/Registry.lean",
+            "line": 133
+          }
+        ]
+      },
+      "candidate_count": 0
+    },
+    "LAND-ACCESS-ORDER-001": {
+      "id": "LAND-ACCESS-ORDER-001",
+      "name": "Forms of model access: three points on the informativeness order, and what no methodology repairs",
+      "ai_interpretation_status": null,
+      "informal_claim": null,
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "relationship": null,
+          "reproduced": true,
+          "declarations": [
+            "AISafetyAtlas.Knowledge.Access.AccessSetting",
+            "AISafetyAtlas.Knowledge.Access.whiteBox",
+            "AISafetyAtlas.Knowledge.Access.scoreAccess",
+            "AISafetyAtlas.Knowledge.Access.blackBox",
+            "AISafetyAtlas.Knowledge.Access.whiteBox_determines_blackBox",
+            "AISafetyAtlas.Knowledge.Access.whiteBox_knowable",
+            "AISafetyAtlas.Knowledge.Access.no_blackBox_methodology",
+            "AISafetyAtlas.Knowledge.Access.exists_indistinguishable_behaviour"
+          ],
+          "module": "AISafetyAtlas.Knowledge.Access",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Knowledge.Access.whiteBox_determines_blackBox",
+            "type": "BRIDGE",
+            "file": "AISafetyAtlas/Knowledge/Access.lean",
+            "line": 160
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Knowledge.Access.no_blackBox_methodology",
+            "type": "BRIDGE",
+            "file": "AISafetyAtlas/Knowledge/Access.lean",
+            "line": 236
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Knowledge.Access.exists_indistinguishable_behaviour",
+            "type": "BRIDGE",
+            "file": "AISafetyAtlas/Knowledge/Access.lean",
+            "line": 284
+          }
+        ]
+      },
+      "candidate_count": 0
+    },
+    "LAND-GOODHART-REGTARGET-001": {
+      "id": "LAND-GOODHART-REGTARGET-001",
+      "name": "Regulatory targets: the bar certifies exactly the systems its evidence never covered",
+      "ai_interpretation_status": null,
+      "informal_claim": null,
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "relationship": null,
+          "reproduced": true,
+          "declarations": [
+            "AISafetyAtlas.Goodhart.RegulatoryTarget.RegulatoryScheme",
+            "AISafetyAtlas.Goodhart.RegulatoryTarget.certified",
+            "AISafetyAtlas.Goodhart.RegulatoryTarget.risk_bounded_on_evidence_base",
+            "AISafetyAtlas.Goodhart.RegulatoryTarget.certified_disjoint_evidenceBase",
+            "AISafetyAtlas.Goodhart.RegulatoryTarget.certified_systems_were_never_examined",
+            "AISafetyAtlas.Goodhart.RegulatoryTarget.risk_unconstrained_on_certified",
+            "AISafetyAtlas.Goodhart.RegulatoryTarget.raising_the_bar_does_not_help",
+            "AISafetyAtlas.Goodhart.RegulatoryTarget.indicator_informative_and_certification_unconstrained"
+          ],
+          "module": "AISafetyAtlas.Goodhart.RegulatoryTarget",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Goodhart.RegulatoryTarget.certified_systems_were_never_examined",
+            "type": "BRIDGE",
+            "file": "AISafetyAtlas/Goodhart/RegulatoryTarget.lean",
+            "line": 170
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Goodhart.RegulatoryTarget.risk_unconstrained_on_certified",
+            "type": "BRIDGE",
+            "file": "AISafetyAtlas/Goodhart/RegulatoryTarget.lean",
+            "line": 187
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Goodhart.RegulatoryTarget.raising_the_bar_does_not_help",
+            "type": "BRIDGE",
+            "file": "AISafetyAtlas/Goodhart/RegulatoryTarget.lean",
+            "line": 203
+          }
+        ]
+      },
+      "candidate_count": 0
+    },
+    "LAND-SOV-ASSESSMENT-001": {
+      "id": "LAND-SOV-ASSESSMENT-001",
+      "name": "Measuring unaided capability: withdrawal testing is forced, not chosen",
+      "ai_interpretation_status": null,
+      "informal_claim": null,
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "relationship": null,
+          "reproduced": true,
+          "declarations": [
+            "AISafetyAtlas.Sovereignty.CapabilityAssessment.outputProtocol",
+            "AISafetyAtlas.Sovereignty.CapabilityAssessment.withdrawalProtocol",
+            "AISafetyAtlas.Sovereignty.CapabilityAssessment.withdrawal_recovers_fallback",
+            "AISafetyAtlas.Sovereignty.CapabilityAssessment.no_procedure_on_output_recovers_fallback",
+            "AISafetyAtlas.Sovereignty.CapabilityAssessment.protocols_are_incomparable",
+            "AISafetyAtlas.Sovereignty.CapabilityAssessment.withdrawal_settles_and_no_output_procedure_does"
+          ],
+          "module": "AISafetyAtlas.Sovereignty.CapabilityAssessment",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Sovereignty.CapabilityAssessment.no_procedure_on_output_recovers_fallback",
+            "type": "BRIDGE",
+            "file": "AISafetyAtlas/Sovereignty/CapabilityAssessment.lean",
+            "line": 142
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Sovereignty.CapabilityAssessment.protocols_are_incomparable",
+            "type": "BRIDGE",
+            "file": "AISafetyAtlas/Sovereignty/CapabilityAssessment.lean",
+            "line": 181
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Sovereignty.CapabilityAssessment.withdrawal_settles_and_no_output_procedure_does",
+            "type": "BRIDGE",
+            "file": "AISafetyAtlas/Sovereignty/CapabilityAssessment.lean",
+            "line": 193
+          }
+        ]
+      },
+      "candidate_count": 0
+    },
+    "LAND-VERIF-FULLACCESS-001": {
+      "id": "LAND-VERIF-FULLACCESS-001",
+      "name": "Full access to the code: Rice bounds the behavioral half and nothing else",
+      "ai_interpretation_status": null,
+      "informal_claim": null,
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "relationship": null,
+          "reproduced": true,
+          "declarations": [
+            "AISafetyAtlas.Verification.FullAccess.FullAccessVerifier",
+            "AISafetyAtlas.Verification.FullAccess.exactArtifact",
+            "AISafetyAtlas.Verification.FullAccess.no_fullAccessVerifier_of_extensional",
+            "AISafetyAtlas.Verification.FullAccess.fullAccessVerifier_exactArtifact",
+            "AISafetyAtlas.Verification.FullAccess.exactArtifact_not_extensional",
+            "AISafetyAtlas.Verification.FullAccess.access_is_not_what_separates_them"
+          ],
+          "module": "AISafetyAtlas.Verification.FullAccess",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Verification.FullAccess.no_fullAccessVerifier_of_extensional",
+            "type": "BRIDGE",
+            "file": "AISafetyAtlas/Verification/FullAccess.lean",
+            "line": 120
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Verification.FullAccess.fullAccessVerifier_exactArtifact",
+            "type": "BRIDGE",
+            "file": "AISafetyAtlas/Verification/FullAccess.lean",
+            "line": 150
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Verification.FullAccess.access_is_not_what_separates_them",
+            "type": "BRIDGE",
+            "file": "AISafetyAtlas/Verification/FullAccess.lean",
+            "line": 187
+          }
+        ]
+      },
+      "candidate_count": 0
+    },
+    "LAND-AUDIT-LAG-001": {
+      "id": "LAND-AUDIT-LAG-001",
+      "name": "What an audit certifies: the audited version, not the deployed one",
+      "ai_interpretation_status": null,
+      "informal_claim": null,
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "relationship": null,
+          "reproduced": true,
+          "declarations": [
+            "AISafetyAtlas.Knowledge.Audit.AuditSetup",
+            "AISafetyAtlas.Knowledge.Audit.audit_certifies_audited_not_deployed",
+            "AISafetyAtlas.Knowledge.Audit.later_audit_does_not_close_the_gap"
+          ],
+          "module": "AISafetyAtlas.Knowledge.Audit",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Knowledge.Audit.audit_certifies_audited_not_deployed",
+            "type": "BRIDGE",
+            "file": "AISafetyAtlas/Knowledge/Audit.lean",
+            "line": 86
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Knowledge.Audit.later_audit_does_not_close_the_gap",
+            "type": "BRIDGE",
+            "file": "AISafetyAtlas/Knowledge/Audit.lean",
+            "line": 108
+          }
+        ]
+      },
+      "candidate_count": 0
+    },
+    "LAND-INCIDENT-COUNT-001": {
+      "id": "LAND-INCIDENT-COUNT-001",
+      "name": "Counting AI incidents: the number a regime publishes is a property of its filing schema",
+      "ai_interpretation_status": null,
+      "informal_claim": null,
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "relationship": null,
+          "reproduced": true,
+          "declarations": [
+            "AISafetyAtlas.Knowledge.IncidentCount.Reporting",
+            "AISafetyAtlas.Knowledge.IncidentCount.count_not_determined_of_collision",
+            "AISafetyAtlas.Knowledge.IncidentCount.count_is_not_a_measurement",
+            "AISafetyAtlas.Knowledge.IncidentCount.schema_fixes_the_count",
+            "AISafetyAtlas.Knowledge.IncidentCount.knowable_of_report_carries_count"
+          ],
+          "module": "AISafetyAtlas.Knowledge.IncidentCount",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Knowledge.IncidentCount.count_not_determined_of_collision",
+            "type": "WRAPPER",
+            "file": "AISafetyAtlas/Knowledge/IncidentCount.lean",
+            "line": 85
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Knowledge.IncidentCount.count_is_not_a_measurement",
+            "type": "BRIDGE",
+            "file": "AISafetyAtlas/Knowledge/IncidentCount.lean",
+            "line": 102
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Knowledge.IncidentCount.schema_fixes_the_count",
+            "type": "WRAPPER",
+            "file": "AISafetyAtlas/Knowledge/IncidentCount.lean",
+            "line": 114
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Knowledge.IncidentCount.knowable_of_report_carries_count",
+            "type": "WRAPPER",
+            "file": "AISafetyAtlas/Knowledge/IncidentCount.lean",
+            "line": 121
+          }
+        ]
+      },
+      "candidate_count": 0
+    },
+    "LAND-KNOW-UNIFORM-001": {
+      "id": "LAND-KNOW-UNIFORM-001",
+      "name": "Acting acceptably without identifying the state: the uniform decision boundary",
+      "ai_interpretation_status": null,
+      "informal_claim": null,
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declarations": [
+            "AISafetyAtlas.Knowledge.UniformlyActionable",
+            "AISafetyAtlas.Knowledge.FibrewiseAgreeable",
+            "AISafetyAtlas.Knowledge.ActionConflict",
+            "AISafetyAtlas.Knowledge.uniformlyActionable_iff_fibrewiseAgreeable",
+            "AISafetyAtlas.Knowledge.uniformlyActionable_iff_iInter_nonempty",
+            "AISafetyAtlas.Knowledge.knowable_iff_uniformlyActionable",
+            "AISafetyAtlas.Knowledge.not_uniformlyActionable_iff_exists_unservable",
+            "AISafetyAtlas.Knowledge.not_uniformlyActionable_of_conflict",
+            "AISafetyAtlas.Knowledge.UniformlyActionable.mono",
+            "AISafetyAtlas.Knowledge.UniformlyActionable.mono_good",
+            "AISafetyAtlas.Knowledge.uniformlyActionable_of_universal",
+            "AISafetyAtlas.Knowledge.uniformlyActionable_of_injective",
+            "AISafetyAtlas.Knowledge.PairwiseAgreeable",
+            "AISafetyAtlas.Knowledge.PairwiseAgreeable.of_uniformlyActionable",
+            "AISafetyAtlas.Knowledge.uniformlyActionable_of_pairwiseAgreeable_of_card_le_two"
+          ],
+          "module": "AISafetyAtlas.Knowledge.UniformAction",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Knowledge.uniformlyActionable_iff_fibrewiseAgreeable",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Knowledge/UniformAction.lean",
+            "line": 105
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Knowledge.knowable_iff_uniformlyActionable",
+            "type": "WRAPPER",
+            "file": "AISafetyAtlas/Knowledge/UniformAction.lean",
+            "line": 157
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Knowledge.not_uniformlyActionable_iff_exists_unservable",
+            "type": "BRIDGE",
+            "file": "AISafetyAtlas/Knowledge/UniformAction.lean",
+            "line": 173
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Knowledge.uniformlyActionable_of_pairwiseAgreeable_of_card_le_two",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Knowledge/UniformAction.lean",
+            "line": 322
+          }
+        ]
+      },
+      "candidate_count": 0
+    },
+    "LAND-SOV-STABILITY-001": {
+      "id": "LAND-SOV-STABILITY-001",
+      "name": "Keiding's cycle, stated at this repository's effectivity families",
+      "ai_interpretation_status": null,
+      "informal_claim": null,
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "relationship": "EXACT",
+          "reproduced": true,
+          "declarations": [
+            "AISafetyAtlas.Sovereignty.Cycle",
+            "AISafetyAtlas.Sovereignty.Acyclic",
+            "AISafetyAtlas.Sovereignty.acyclic_iff",
+            "AISafetyAtlas.Sovereignty.not_acyclic_of_cycle",
+            "AISafetyAtlas.Sovereignty.GameFormAcyclic",
+            "AISafetyAtlas.Sovereignty.gameFormAcyclic_iff",
+            "AISafetyAtlas.Sovereignty.not_gameFormAcyclic_of_cycle",
+            "AISafetyAtlas.Sovereignty.acyclic_bot",
+            "AISafetyAtlas.Sovereignty.Cycle.not_mem_block_of_mem_B",
+            "AISafetyAtlas.Sovereignty.Cycle.ne_of_block_inter_B_nonempty",
+            "AISafetyAtlas.Sovereignty.Cycle.Snonempty",
+            "AISafetyAtlas.Sovereignty.Cycle.exists_block",
+            "AISafetyAtlas.Sovereignty.Cycle.idx",
+            "AISafetyAtlas.Sovereignty.Cycle.mem_block_idx",
+            "AISafetyAtlas.Sovereignty.Cycle.idx_eq_of_mem",
+            "AISafetyAtlas.Sovereignty.chainCondition_of_pairwise_disjoint",
+            "AISafetyAtlas.Sovereignty.WeakOrder",
+            "AISafetyAtlas.Sovereignty.WeakOrder.lt",
+            "AISafetyAtlas.Sovereignty.WeakOrder.refl",
+            "AISafetyAtlas.Sovereignty.Profile",
+            "AISafetyAtlas.Sovereignty.DominatesVia",
+            "AISafetyAtlas.Sovereignty.Dominated",
+            "AISafetyAtlas.Sovereignty.core",
+            "AISafetyAtlas.Sovereignty.Stable",
+            "AISafetyAtlas.Sovereignty.mem_core_iff",
+            "AISafetyAtlas.Sovereignty.not_mem_core_of_dominated",
+            "AISafetyAtlas.Sovereignty.not_stable_of_core_eq_empty",
+            "AISafetyAtlas.Sovereignty.exists_wellOrder_ge_of_acyclic",
+            "AISafetyAtlas.Sovereignty.not_stable_of_cycle",
+            "AISafetyAtlas.Sovereignty.NoEmptySet",
+            "AISafetyAtlas.Sovereignty.acyclic_of_stable",
+            "AISafetyAtlas.Sovereignty.acyclic_of_rank"
+          ],
+          "module": "AISafetyAtlas.Sovereignty.Stability",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Sovereignty.not_gameFormAcyclic_of_cycle",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Sovereignty/Stability.lean",
+            "line": 167
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Sovereignty.gameFormAcyclic_iff",
+            "type": "BRIDGE",
+            "file": "AISafetyAtlas/Sovereignty/Stability.lean",
+            "line": 157
+          }
+        ]
+      },
+      "candidate_count": 0
+    },
+    "LAND-SOV-DEONTIC-001": {
+      "id": "LAND-SOV-DEONTIC-001",
+      "name": "May, may not, can, and is empowered to are four different things",
+      "ai_interpretation_status": null,
+      "informal_claim": null,
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declarations": [
+            "AISafetyAtlas.Sovereignty.NormSystem",
+            "AISafetyAtlas.Sovereignty.NormSystem.Unclassified",
+            "AISafetyAtlas.Sovereignty.NormSystem.Conflicted",
+            "AISafetyAtlas.Sovereignty.NormSystem.Consistent",
+            "AISafetyAtlas.Sovereignty.NormSystem.Complete",
+            "AISafetyAtlas.Sovereignty.NormSystem.consistent_iff_no_conflicted",
+            "AISafetyAtlas.Sovereignty.NormSystem.complete_iff_no_unclassified",
+            "AISafetyAtlas.Sovereignty.NormSystem.status_exhaustive",
+            "AISafetyAtlas.Sovereignty.NormSystem.forbidden_iff_not_permitted_iff",
+            "AISafetyAtlas.Sovereignty.NormSystem.not_forbidden_of_unclassified",
+            "AISafetyAtlas.Sovereignty.InstitutionalSetting",
+            "AISafetyAtlas.Sovereignty.InstitutionalSetting.Separated",
+            "AISafetyAtlas.Sovereignty.InstitutionalSetting.exists_empowered_not_permitted",
+            "AISafetyAtlas.Sovereignty.InstitutionalSetting.exists_empowered_possible_not_permitted",
+            "AISafetyAtlas.Sovereignty.OughtImpliesCan",
+            "AISafetyAtlas.Sovereignty.oughtImpliesCan_does_not_give_permission",
+            "AISafetyAtlas.Sovereignty.InstitutionalSetting.regiment",
+            "AISafetyAtlas.Sovereignty.InstitutionalSetting.enforce",
+            "AISafetyAtlas.Sovereignty.InstitutionalSetting.regiment_norms",
+            "AISafetyAtlas.Sovereignty.InstitutionalSetting.enforce_possible",
+            "AISafetyAtlas.Sovereignty.InstitutionalSetting.regiment_empowered",
+            "AISafetyAtlas.Sovereignty.InstitutionalSetting.enforce_empowered",
+            "AISafetyAtlas.Sovereignty.InstitutionalSetting.enforce_permitted",
+            "AISafetyAtlas.Sovereignty.InstitutionalSetting.enforce_forbidden",
+            "AISafetyAtlas.Sovereignty.InstitutionalSetting.not_possible_of_regimented",
+            "AISafetyAtlas.Sovereignty.InstitutionalSetting.regiment_unpermitted_not_separated",
+            "AISafetyAtlas.Sovereignty.InstitutionalSetting.enforce_separated",
+            "AISafetyAtlas.Sovereignty.InstitutionalSetting.regiment_and_enforce_differ"
+          ],
+          "module": "AISafetyAtlas.Sovereignty.Deontic",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        },
+        {
+          "framework": "Lean",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declarations": [
+            "Regime",
+            "Detectable",
+            "Enforces",
+            "detectable_iff_constant_on_fibres",
+            "not_detectable_of_indistinguishable",
+            "unenforceable_of_indistinguishable",
+            "undetectable_norm_is_unenforceable",
+            "detectable_of_enforcement"
+          ],
+          "module": "AISafetyAtlas.Sovereignty.Enforcement",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        },
+        {
+          "framework": "Lean",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declarations": [
+            "ofBool",
+            "actPairs",
+            "findUnenforceable",
+            "not_enforces_of_findUnenforceable_eq_some",
+            "sanctionOf",
+            "enforces_sanctionOf_of_findUnenforceable_eq_none"
+          ],
+          "module": "AISafetyAtlas.Sovereignty.EnforcementCheck",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        },
+        {
+          "framework": "Lean",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declarations": [
+            "AATS",
+            "AATS.options",
+            "AATS.options_nonempty",
+            "AATS.Strategy",
+            "AATS.nonempty_strategy",
+            "AATS.Profile",
+            "AATS.out",
+            "AATS.out_univ_subsingleton",
+            "AATS.out_univ_nonempty",
+            "AATS.comp",
+            "AATS.comp_univ_subsingleton",
+            "Norm",
+            "Norm.bot",
+            "Norm.top",
+            "Norm.Le",
+            "Norm.RespectsNature",
+            "Norm.IsNontrivial",
+            "Norm.le_refl",
+            "Norm.le_trans",
+            "Norm.respectsNature_bot",
+            "Norm.bot_le_of_respectsNature",
+            "Norm.ofActPredicate",
+            "AATS.Conf",
+            "AATS.ConfProfile",
+            "AATS.confProfile_of_le",
+            "AATS.le_of_confProfile_singleton",
+            "AATS.Sat",
+            "AATS.sat_of_confProfile_mono",
+            "AATS.sat_of_le",
+            "AATS.sat_bot_of_respectsNature"
+          ],
+          "module": "AISafetyAtlas.Sovereignty.AATS",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Sovereignty.NormSystem.forbidden_iff_not_permitted_iff",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Sovereignty/Deontic.lean",
+            "line": 124
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Sovereignty.InstitutionalSetting.exists_empowered_possible_not_permitted",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Sovereignty/Deontic.lean",
+            "line": 197
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Sovereignty.oughtImpliesCan_does_not_give_permission",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Sovereignty/Deontic.lean",
+            "line": 327
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Sovereignty.Enforcement.undetectable_norm_is_unenforceable",
+            "type": "BRIDGE",
+            "file": "AISafetyAtlas/Sovereignty/Enforcement.lean",
+            "line": 153
+          }
+        ]
+      },
+      "candidate_count": 0
+    },
+    "LAND-SOV-INSTITUTION-001": {
+      "id": "LAND-SOV-INSTITUTION-001",
+      "name": "A Horn derivation is not counts-as, and the proof is two theorems",
+      "ai_interpretation_status": null,
+      "informal_claim": null,
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declarations": [
+            "AISafetyAtlas.Sovereignty.ConstitutiveRule",
+            "AISafetyAtlas.Sovereignty.Derives",
+            "AISafetyAtlas.Sovereignty.derives_mono_base",
+            "AISafetyAtlas.Sovereignty.no_authority_from_ungrounded_cycles",
+            "AISafetyAtlas.Sovereignty.CountsAs",
+            "AISafetyAtlas.Sovereignty.countsAs_refl",
+            "AISafetyAtlas.Sovereignty.countsAs_trans",
+            "AISafetyAtlas.Sovereignty.countsAs_validates_refl_and_trans",
+            "AISafetyAtlas.Sovereignty.Institution",
+            "AISafetyAtlas.Sovereignty.Institution.Recognized",
+            "AISafetyAtlas.Sovereignty.Institution.Authorized",
+            "AISafetyAtlas.Sovereignty.Institution.authorized_iff",
+            "AISafetyAtlas.Sovereignty.Institution.permitted_of_authorized",
+            "AISafetyAtlas.Sovereignty.Institution.exists_recognized_not_authorized"
+          ],
+          "module": "AISafetyAtlas.Sovereignty.Institution",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Sovereignty.countsAs_validates_refl_and_trans",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Sovereignty/Institution.lean",
+            "line": 151
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Sovereignty.no_authority_from_ungrounded_cycles",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Sovereignty/Institution.lean",
+            "line": 97
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Sovereignty.Institution.exists_recognized_not_authorized",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Sovereignty/Institution.lean",
+            "line": 205
+          }
+        ]
+      },
+      "candidate_count": 0
+    },
+    "LAND-BELLMAN-BDD-001": {
+      "id": "LAND-BELLMAN-BDD-001",
+      "name": "The bounded fixed point: a discounted policy value without a finite state space",
+      "ai_interpretation_status": null,
+      "informal_claim": null,
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declarations": [
+            "UniformBounded",
+            "abs_sub_le_of_monotone_discounting",
+            "liftBddFun",
+            "contractingWith_liftBddFun",
+            "bddFixedPoint",
+            "bddFixedPoint_isFixedPt",
+            "eq_bddFixedPoint",
+            "existsUnique_bdd_fixedPoint",
+            "isFixedPt_mem_of_isClosed"
+          ],
+          "module": "AISafetyAtlas.Analysis.Blackwell",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        },
+        {
+          "framework": "Lean",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declarations": [
+            "abs_expect_le",
+            "bellmanPolicyOp_uniformBounded",
+            "bellmanPolicyOp_mono",
+            "bellmanPolicyOp_discounting",
+            "bellmanPolicyOp_contractingWith_bdd",
+            "vPiBdd",
+            "vPiBdd_bellman",
+            "vPiBdd_unique",
+            "uniformBounded_of_fintype",
+            "vPiBdd_eq_vPi"
+          ],
+          "module": "AISafetyAtlas.Decision.BoundedValue",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Decision.vPiBdd_eq_vPi",
+            "type": "REFERENCE",
+            "file": "AISafetyAtlas/Decision/BoundedValue.lean",
+            "line": 212
+          }
+        ]
+      },
+      "candidate_count": 0
+    },
+    "LAND-GOODHART-HACKABILITY-001": {
+      "id": "LAND-GOODHART-HACKABILITY-001",
+      "name": "Hackability: two reward functions that disagree about which policy is better",
+      "ai_interpretation_status": null,
+      "informal_claim": null,
+      "formalizations": [
+        {
+          "framework": "Lean",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declarations": [
+            "stepKernel",
+            "stateDist",
+            "stateDist_zero",
+            "stateDist_succ",
+            "stateOcc",
+            "visitCount",
+            "actionEmbed",
+            "visitCount_eq_stateOcc_mul_actionEmbed",
+            "summable_stateOcc",
+            "stateOcc_nonneg",
+            "stateOcc_le",
+            "visitCount_nonneg",
+            "sum_stateOcc_eq",
+            "J",
+            "J_add",
+            "J_smul",
+            "J_linear",
+            "J_const",
+            "J_const_eq"
+          ],
+          "module": "AISafetyAtlas.Decision.Occupancy",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        },
+        {
+          "framework": "Lean",
+          "relationship": "RELATED",
+          "reproduced": true,
+          "declarations": [
+            "Hackable",
+            "Unhackable",
+            "Equivalent",
+            "Trivial",
+            "Simplifies",
+            "TrivialSimplification",
+            "Unhackable.symm",
+            "unhackable_of_equivalent",
+            "unhackable_of_trivial_left",
+            "unhackable_of_trivial_right",
+            "unhackable_not_transitive",
+            "unhackable_of_simplifies_common",
+            "simplifies_of_trivial",
+            "not_simplifies_of_trivial_base",
+            "HackableRewards",
+            "UnhackableRewards",
+            "SimplifiesRewards",
+            "trivial_of_const"
+          ],
+          "module": "AISafetyAtlas.Goodhart.Hackability",
+          "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
+          "version": "IN_TREE"
+        }
+      ],
+      "lean_artifact": {
+        "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.Decision.J_linear",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Decision/Occupancy.lean",
+            "line": 245
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Goodhart.unhackable_of_simplifies_common",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Goodhart/Hackability.lean",
+            "line": 173
           }
         ]
       },

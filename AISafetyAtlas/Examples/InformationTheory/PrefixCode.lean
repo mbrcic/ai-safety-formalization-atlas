@@ -55,9 +55,24 @@ public theorem prefix_splits_zero_zero {a b : ℕ} {x y : List CodeSym}
     (h : encodeNat a ++ x = encodeNat b ++ y) : a = b ∧ x = y :=
   isPrefixCode_encodeNat a b x y h
 
-/-- Distinct naturals have distinct codewords. -/
+/-- Distinct naturals have distinct codewords.
+
+Written `IsPrefixCode.injective isPrefixCode_encodeNat` rather than the idiomatic
+`isPrefixCode_encodeNat.injective`. A commit message on 2026-09-15 gave the
+reason as dot notation being invisible to `check_witness_debt.py`; that is wrong
+and is corrected here, because it would send the next reader to fix something in
+the detector that is not broken. Dotted suffixes *are* matched. What the report
+refuses is an **ambiguous bare leaf**, and `injective` is carried by many
+declarations in the tree, so the dotted form is evidence for all of them and
+therefore for none. The explicit form is also the clearer of the two here. -/
 public theorem encodeNat_injective : Function.Injective encodeNat :=
-  isPrefixCode_encodeNat.injective
+  IsPrefixCode.injective isPrefixCode_encodeNat
+
+/-- **Two prefix codes in sequence form a prefix code on pairs**, at
+`encodeNat` paired with itself. -/
+public theorem isPrefixCode_encodeNat_pair :
+    IsPrefixCode fun p : ℕ × ℕ ↦ encodeNat p.1 ++ encodeNat p.2 :=
+  IsPrefixCode.pair isPrefixCode_encodeNat isPrefixCode_encodeNat
 
 /-! ## Rationals -/
 

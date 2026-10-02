@@ -9,27 +9,90 @@
 
 [![CI](https://github.com/mbrcic/ai-safety-formalization-atlas/actions/workflows/ci.yml/badge.svg)](https://github.com/mbrcic/ai-safety-formalization-atlas/actions/workflows/ci.yml)
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/mbrcic/ai-safety-formalization-atlas?quickstart=1)
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21483033.svg)](https://doi.org/10.5281/zenodo.21483033)
+[![Software DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21483033.svg)](https://doi.org/10.5281/zenodo.21483033)
+[![Whitepaper DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23088951.svg)](https://doi.org/10.5281/zenodo.23088951)
 
-> **Quickstart:** [Open in Codespaces](https://codespaces.new/mbrcic/ai-safety-formalization-atlas?quickstart=1) — the toolchain provisions itself and one example compiles in minutes — then pick a [first task](docs/guide/contributor-tasks.md#open-now). Prefer local? `scripts/setup.sh --pointer` (docs only, no Lean) or `scripts/setup.sh --quick` (one example). Full detail: [Get started](#get-started).
+**Machine-checked mathematical infrastructure for AI safety.**
 
-**The open Lean library for formal AI-safety results.**
+AISFA is an open Lean 4 library for formalizing, reproducing, auditing and
+extending mathematical results relevant to AI safety: shared definitions,
+theorems, counterexamples, open conjectures, and reviewed bridges from the
+mathematics to AI systems.
 
-The Atlas develops, reproduces, and audits machine-checked AI-safety mathematics:
-shared definitions, theorems, counterexamples, and reviewed interpretation
-bridges. Researchers use it to sharpen and discover claims; engineers may use
-public facade cores as **reference specifications** inside larger assurance
-arguments. Runtime systems and product stacks normally remain downstream.
+- **Whitepaper:** [*The AI Safety Formalization Atlas: a machine-checked memory
+  for AI safety mathematics*](https://doi.org/10.5281/zenodo.23088951) (preprint,
+  2026; DOI for all versions)
+- **Software:** [DOI for all versions](https://doi.org/10.5281/zenodo.21483033);
+  latest release v0.8.0, [DOI](https://doi.org/10.5281/zenodo.22654735)
+- **Start:** [Open in Codespaces](https://codespaces.new/mbrcic/ai-safety-formalization-atlas?quickstart=1)
+  — the toolchain provisions itself and one example compiles in minutes — then
+  pick a [first task](docs/guide/contributor-tasks.md#open-now). Prefer local?
+  `scripts/setup.sh --pointer` (docs only, no Lean) or `scripts/setup.sh --quick`
+  (one example). Full detail: [Get started](#get-started).
 
-Most of AI safety lives in prose and scattered proofs, so every citation
-rebuilds the model from scratch and words it a little differently each time.
-This repo is durable memory against that: **ingredients and primitives** on one
-kernel-checked Lean surface, so impossibility, possibility, tradeoffs, and—when
-computable—governance or ethics claims name their objects once and reuse them,
-instead of every paper re-deriving its own. Humans and proof agents work here
-together.
+## At a glance
 
-## Why this exists
+<!-- BEGIN GENERATED REGISTRY SCOPE -->
+| Metric | Current |
+|---|---:|
+| Declarations recorded in the registry | **375** |
+| Results stating a source claim | **49** |
+| Results recording a formalization only | **95** (86 on root import) |
+| Reviewed AI-system bridges | **3** |
+| Statement-reviewed bridges (interpretation withheld) | **1** |
+| Open conjectures | **3** |
+| Claim results with statement-match | **16** |
+| Claim results with `RELATED`-only formalization | **9** |
+
+`EXACT`/`EQUIVALENT` = conservative citation grade (completely
+formalization-covered source statements). `RELATED` = value-based scoped
+formalization, with documented deltas; it does **not by itself** mean
+unfinished, but postponed until justified (paper residuals stay in
+provenance). The two grade rows count **claim results**, not
+formalization records: one result may carry several, and an artifact
+row's own grade is never in these numbers. Detail:
+[formalization status](docs/status/formalization-status.md);
+[by mathematical area](docs/status/by-area.md);
+per-source reports under [`docs/status/sources/`](docs/status/sources/).
+<!-- END GENERATED REGISTRY SCOPE -->
+
+Statement coverage of the 28 graded sources is **300 `Yes` / 17 `Partial` / 208
+`No` / 41 `Beyond`**, graded by hand against the printed text in
+[`source-coverage-audit.md`](docs/provenance/source-coverage-audit.md). Builds
+are reproducible against pinned Lean and Mathlib, and CI checks the axioms of
+every headline declaration. What the atlas does **not** have is counted too:
+[Library status](#library-status).
+
+## Why AISFA
+
+AI-safety mathematics lives in papers, prose, scattered proofs and incompatible
+formalisms, so every citation rebuilds the model and words it a little
+differently. AISFA turns claims into reusable, machine-checked objects with
+explicit assumptions, provenance and interpretation boundaries.
+
+It keeps three questions apart, because they fail independently:
+
+1. **Is the proof valid?** The Lean kernel decides this.
+2. **Is the formal statement the claim in the source?** Graded per statement,
+   by hand, in the coverage audit.
+3. **Does the result say anything about a real AI system?** Only through a
+   separately reviewed bridge, and a kernel-checked proof does not by itself
+   establish it.
+
+## Explore
+
+| If you want to | Go to |
+|---|---|
+| read the idea | [Whitepaper](https://doi.org/10.5281/zenodo.23088951) |
+| inspect the evidence | [Formalization status](docs/status/formalization-status.md), [source coverage audit](docs/provenance/source-coverage-audit.md) |
+| browse results | [Landscape index](docs/status/landscape-index.md), [by mathematical area](docs/status/by-area.md) |
+| work on an open problem | [Conjectures](docs/guide/conjectures.md), [open work](docs/guide/open-work.md) |
+| see how grading works | [Methodology](docs/guide/methodology.md) |
+| use the library | [Get started](#get-started), [depending on the Atlas](#depending-on-the-atlas-from-your-own-project) |
+| contribute | [First tasks](docs/guide/contributor-tasks.md#open-now), [contributing](#contributing) |
+| see where it is going | [Roadmap](ROADMAP.md) |
+
+## The longer argument
 
 **The situation.** AI systems are gaining capability faster than anyone is
 gaining understanding of them, and they are being deployed on the near side of
@@ -155,29 +218,33 @@ related computable governance/ethics. **Also:** keep cores usable as reference
 specifications downstream. **Not a goal:** growing counts, or growing a product
 monorepo in-tree. Reusable structure and honest grading over volume.
 
-<!-- BEGIN GENERATED REGISTRY SCOPE -->
-| Metric | Current |
-|---|---:|
-| Atlas Lean declarations | **271** |
-| Results stating a source claim | **49** |
-| Results recording a formalization only | **42** (33 on root import) |
-| Reviewed AI-system bridges | **3** |
-| Statement-reviewed bridges (interpretation withheld) | **1** |
-| Open conjectures | **3** |
-| Claim results with statement-match | **14** |
-| Claim results with `RELATED`-only formalization | **8** |
+The counts are under [At a glance](#at-a-glance).
 
-`EXACT`/`EQUIVALENT` = conservative citation grade (completely
-formalization-covered source statements). `RELATED` = value-based scoped
-formalization, with documented deltas; it does **not by itself** mean
-unfinished, but postponed until justified (paper residuals stay in
-provenance). The two grade rows count **claim results**, not
-formalization records: one result may carry several, and an artifact
-row's own grade is never in these numbers. Detail:
-[formalization status](docs/status/formalization-status.md);
-[by mathematical area](docs/status/by-area.md);
-per-source reports under [`docs/status/sources/`](docs/status/sources/).
-<!-- END GENERATED REGISTRY SCOPE -->
+**What the atlas does not have, stated here rather than left to be found.** The
+table above counts registry rows, not the tree: the working tree pins far more
+public names than it records results. Three ratios a reader is entitled to
+before reading further:
+
+- **Statement coverage of the graded sources: 300 `Yes` / 17 `Partial` / 208
+  `No` / 41 `Beyond`,** across 28 sources. A `No` is a printed statement the
+  atlas does not have. The per-statement grading is
+  [`source-coverage-audit.md`](docs/provenance/source-coverage-audit.md).
+- **Scope debt: 4 cells** graded `Narrower` or `Mixed` are owed a closure, a
+  regrade, an unclosability proof or a cost, and each declares one; 2 more
+  record a closure. The
+  standing rule is scope ≥ print, so each of those is a defect until discharged.
+  `scripts/check_coverage_audit.py` computes both figures.
+- **Witness debt: 3 theorems of 2,686 are ungrounded and 31 reach no worked
+  application** under `AISafetyAtlas/Examples/`. The second is the number that
+  says how much of the library the build actually exercises; the first also
+  counts a registry citation, and a citation is not built. Two of the three are
+  leaves, and both **cannot be witnessed at all**: their antecedent is a type the
+  tree proves empty. They are recorded in `docs/status/witness-vacuity.json` with
+  the emptiness proof named, stay inside both counts, and leave the work queue.
+
+None of these is an argument against the results that are here. They are the
+numbers that make the results legible, and they are generated rather than
+asserted.
 
 Published units must rebuild under documented commands and the axiom policy
 ([Validation](#validation)).
@@ -321,7 +388,7 @@ See the [`v0.7 release scope`](docs/releases/v0.7.md) and
   - [`docs/guide/`](docs/guide/) — methodology, open work, model notes, tasks
   - [`docs/status/`](docs/status/) — generated coverage tables and indexes
   - [`docs/provenance/`](docs/provenance/) — discovery search + external reproduction
-  - [`docs/bridges/`](docs/bridges/) — bridge review packages and evidence
+  - [`docs/interpretation-reviews/`](docs/interpretation-reviews/) — bridge review packages and evidence
   - [`docs/releases/`](docs/releases/) — release evidence notes
 
 ## Lean API
@@ -345,6 +412,10 @@ The stable entry points are conventional theorem names under domain namespaces:
 - `AISafetyAtlas.Verification.rice`
 - `AISafetyAtlas.Verification.AgentBehavior.no_behavioral_safety_verifier`
 - `AISafetyAtlas.Verification.Robot.action_safety_unverifiable`
+- `AISafetyAtlas.Composition.independent_iff_rectangular` and
+  `not_independent_of_failed_splice`
+- `AISafetyAtlas.Observability.factors_through_iff_fiber_invariant` and
+  `no_perfect_monitor_of_collision`
 - `AISafetyAtlas.Compositional` — rectangularity, hyperproperties, and network symmetry
 - `AISafetyAtlas.Wireheading` — objective, corruption, and goal-preservation cores
 - `AISafetyAtlas.Preference` — preference-unidentifiability and override cores
@@ -428,6 +499,14 @@ The one that has no facade bullet above:
 
 - `AISafetyAtlas.Explainability.attribution_impossibility` (DASH trilemma;
   not BY-029/BY-042 without a separate statement map)
+- `AISafetyAtlas.Composition.independent_iff_rectangular` (`LAND-COMP-001`,
+  native): a global safe set decomposes into independent per-agent contracts
+  iff it is splice-closed; certified multi-agent counterexamples in
+  [`AISafetyAtlas/Examples/Composition/`](AISafetyAtlas/Examples/Composition/)
+- `AISafetyAtlas.Observability.no_perfect_monitor_of_collision`
+  (`LAND-OBS-001`, native): perfect monitoring is exactly hazard
+  observability; see
+  [compositional boundaries](docs/provenance/compositional-boundaries.md)
 
 Reproduced external formalizations that carry no Lean interface are pinned in
 `registry.yaml`, listed in the

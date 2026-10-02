@@ -124,6 +124,43 @@ example :
     ambiguity (evidence 0) (pairTarget bit0 bit1) (evidence 0 (true, true, true)) = 4 := by
   decide
 
+/-! ## The two bounds as bounds, not as computed numbers
+
+Every equality above is settled by `decide`, which checks the arithmetic and
+exercises none of the general statements. These run the bounds themselves, so
+the theorems that say *widening never helps* and *widening costs at most the
+product* are applied rather than only illustrated.
+-/
+
+/-- **Widening never loses ambiguity**, in the second component. -/
+theorem right_component_le_pair :
+    ambiguity blind bit1 () ≤ ambiguity blind (pairTarget bit0 bit1) () :=
+  ambiguity_le_pairTarget_right blind bit0 bit1 ()
+
+/-- **And costs at most the product.** At this model the inequality is an
+equality — the example above computes `4 = 2 * 2` — so the general bound is
+tight and this is the instance that shows it. -/
+theorem pair_le_product :
+    ambiguity blind (pairTarget bit0 bit1) ()
+      ≤ ambiguity blind bit0 () * ambiguity blind bit1 () :=
+  ambiguity_pairTarget_le_mul blind bit0 bit1 ()
+
+/-- The blind observation cannot recover the first bit: the two histories that
+differ only there share its single observation. -/
+theorem not_knowable_blind_bit0 : ¬ Knowable blind bit0 := by
+  rintro ⟨d, hd⟩
+  have h0 := hd (false, false, false)
+  have h1 := hd (true, false, false)
+  rw [show blind (false, false, false) = blind (true, false, false) from rfl] at h0
+  exact absurd (h0.trans h1.symm) (by decide)
+
+/-- **An unknowable component makes the pair unknowable.** Accumulating targets
+cannot repair an observation that already fails on one of them, which is the
+direction that matters for an overseer adding questions rather than adding
+sensors. -/
+theorem not_knowable_blind_pair : ¬ Knowable blind (pairTarget bit0 bit1) :=
+  not_knowable_pairTarget_of_not_knowable not_knowable_blind_bit0
+
 /-! ## What this does not show
 
 Neither model has dynamics. The bits do not evolve; they are components of a

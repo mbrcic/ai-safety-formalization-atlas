@@ -1,0 +1,59 @@
+{
+  "note": "Edges are: for a definition, its type and body; for a theorem, its statement only. Lean's module system does not export proof terms.",
+  "cluster": "AISafetyAtlas.Composition.",
+  "declarations": {
+    "AISafetyAtlas.Composition.CoordinateSpliceClosed": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Composition.GlobalState"
+      ]
+    },
+    "AISafetyAtlas.Composition.CoordinateSpliceClosed.mem_of_forall_exists_eq": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Composition.CoordinateSpliceClosed",
+        "AISafetyAtlas.Composition.GlobalState"
+      ]
+    },
+    "AISafetyAtlas.Composition.GlobalState": {
+      "kind": "definition",
+      "deps": []
+    },
+    "AISafetyAtlas.Composition.IndependentlyExpressible": {
+      "kind": "definition",
+      "deps": [
+        "AISafetyAtlas.Composition.GlobalState"
+      ]
+    },
+    "AISafetyAtlas.Composition.IndependentlyExpressible.spliceClosed": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Composition.CoordinateSpliceClosed",
+        "AISafetyAtlas.Composition.GlobalState",
+        "AISafetyAtlas.Composition.IndependentlyExpressible"
+      ]
+    },
+    "AISafetyAtlas.Composition.independent_iff_eq_pi_projections": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Composition.GlobalState",
+        "AISafetyAtlas.Composition.IndependentlyExpressible"
+      ]
+    },
+    "AISafetyAtlas.Composition.independent_iff_rectangular": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Composition.CoordinateSpliceClosed",
+        "AISafetyAtlas.Composition.GlobalState",
+        "AISafetyAtlas.Composition.IndependentlyExpressible"
+      ]
+    },
+    "AISafetyAtlas.Composition.not_independent_of_failed_splice": {
+      "kind": "theorem",
+      "deps": [
+        "AISafetyAtlas.Composition.GlobalState",
+        "AISafetyAtlas.Composition.IndependentlyExpressible"
+      ]
+    }
+  }
+}

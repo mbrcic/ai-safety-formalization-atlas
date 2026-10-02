@@ -70,7 +70,7 @@ python3 -c "import json; d=json.load(open('docs/status/consumers.json')); print(
 ```
 
 Open [`registry.yaml`](../../registry.yaml) only when you need full notes,
-`candidate_formalizations`, or `bridge_review` detail for **one** id (prefer
+`candidate_formalizations`, or `interpretation_review` detail for **one** id (prefer
 `rg -n '"id": "BY-0xx"' -A 80 registry.yaml` over reading the whole file).
 
 ## Lean surface

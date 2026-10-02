@@ -79,7 +79,7 @@ def test_empty_lane_says_so() -> None:
         ("source_fidelity", "Literal"),
         ("source_scope", "Same"),
         ("relationship", "EXACT"),
-        ("ai_bridge_status", "REVIEWED"),
+        ("ai_interpretation_status", "REVIEWED"),
         ("source_ref", ["survey-ref-005"]),
         ("resolution", "settled"),
     ],

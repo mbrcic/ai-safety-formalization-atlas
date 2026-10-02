@@ -40,4 +40,14 @@ theorem prop12_small_fibre :
   rw [prop12_mass_false, prop12_rangeFinset]
   norm_num
 
+/-- **Proposition 12 is false as printed.** The inference complexity of the
+witness device exceeds the entropy bound the proposition asserts, so the bound
+cannot hold in general. Named here because a refutation with no application is
+a refutation nothing consumes. -/
+public theorem prop12_is_refuted :
+    ¬ (inferenceComplexityMeasure prop12Measure prop12Device prop12Gamma
+        prop12_weaklyInfers
+      ≤ (rangeFinset prop12Gamma).card * entropyOn prop12Measure prop12X) :=
+  prop12_refuted
+
 end AISafetyAtlas.Examples.Inference.EntropyBound

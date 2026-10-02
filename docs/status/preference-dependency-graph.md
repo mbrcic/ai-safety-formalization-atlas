@@ -10,7 +10,7 @@ Edges come from the elaborated Lean environment. This answers the question the p
 
 So `A → B` means *`B` occurs in `A`'s statement, or in `A`'s body when `A` is a definition*. A lemma used only inside a proof does not appear. Reading the table as a complete call graph would be wrong, and the two sections below are scoped so that they stay true under this limit.
 
-`85` authored declarations in `AISafetyAtlas.Preference.*` (52 theorems). Compiler-generated companions and projections are dropped.
+`116` authored declarations in `AISafetyAtlas.Preference.*` (73 theorems). Compiler-generated companions and projections are dropped.
 
 ## Load-bearing declarations
 
@@ -18,18 +18,25 @@ Named in the statements of eight or more others. A change to one of these is a c
 
 | Declaration | Named by |
 |---|---|
-| `Policy` | 44 |
-| `RewardFn` | 34 |
-| `Planner` | 24 |
-| `Pair` | 23 |
-| `Explains` | 15 |
-| `OverrideModel` | 14 |
-| `op6` | 9 |
-| `op4` | 9 |
-| `op2` | 9 |
-| `Source.ReasonableForF` | 9 |
+| `Policy` | 63 |
+| `RewardFn` | 46 |
+| `Planner` | 35 |
+| `Pair` | 26 |
+| `Explains` | 23 |
+| `OverrideModel` | 20 |
+| `OverrideModel.resulting` | 12 |
+| `OverrideModel.regret` | 12 |
+| `op6` | 11 |
+| `op4` | 11 |
+| `op2` | 11 |
+| `OverrideModel.noop` | 11 |
+| `ofMemoryless` | 10 |
+| `Source.ReasonableForF` | 10 |
+| `OverrideModel.value` | 10 |
+| `op5` | 9 |
+| `op1` | 9 |
 | `op3` | 8 |
-| `OverrideModel.resulting` | 8 |
+| `OverrideModel.optValue` | 8 |
 
 ## Definitions no statement and no example mentions
 
@@ -43,9 +50,11 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 
 | Declaration | Kind | Names |
 |---|---|---|
+| `EvaluatesTo` | definition | `evalPair` |
 | `Explains` | definition | `Planner` |
 | `HalfMaximalRegretBound` | definition | `RegretModel` |
 | `OverrideModel` | definition | — |
+| `OverrideModel.IsRationalPlanner` | definition | `OverrideModel`, `OverrideModel.optValue`, `OverrideModel.value`, `Planner`, `Policy`, `RewardFn` |
 | `OverrideModel.Overrides` | definition | `OverrideModel`, `OverrideModel.regret`, `RewardFn` |
 | `OverrideModel.OverridesFor` | definition | `Explains`, `OverrideModel`, `OverrideModel.regret`, `OverrideModel.resulting`, `Planner`, `Policy`, `RewardFn` |
 | `OverrideModel.exists_overridesFor` | theorem | `OverrideModel`, `OverrideModel.OverridesFor`, `OverrideModel.regret`, `Planner`, `Policy`, `RewardFn` |
@@ -54,11 +63,15 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 | `OverrideModel.noopValue` | definition | `OverrideModel`, `OverrideModel.noop`, `OverrideModel.resulting`, `OverrideModel.value`, `RewardFn` |
 | `OverrideModel.noopValue_lt_mixtureValue_rationalise` | theorem | `OverrideModel`, `OverrideModel.mixtureValue`, `OverrideModel.noop`, `OverrideModel.noopValue`, `OverrideModel.optValue`, `OverrideModel.resulting`, `OverrideModel.value`, `RewardFn` |
 | `OverrideModel.noop_overrides_of_suboptimal` | theorem | `OverrideModel`, `OverrideModel.Overrides`, `OverrideModel.noop`, `OverrideModel.optValue`, `OverrideModel.regret`, `OverrideModel.resulting`, `OverrideModel.value`, `RewardFn` |
+| `OverrideModel.not_overrides_noop_of_rationalPlanner` | theorem | `Explains`, `OverrideModel`, `OverrideModel.IsRationalPlanner`, `OverrideModel.Overrides`, `OverrideModel.noop`, `OverrideModel.resulting`, `Planner`, `Policy`, `RewardFn` |
 | `OverrideModel.optValue_isGreatest` | theorem | `OverrideModel`, `OverrideModel.optValue`, `OverrideModel.resulting`, `OverrideModel.value`, `RewardFn` |
 | `OverrideModel.overrides_of_overridesFor` | theorem | `OverrideModel`, `OverrideModel.Overrides`, `OverrideModel.OverridesFor`, `Planner`, `Policy`, `RewardFn` |
 | `OverrideModel.rationalise_strictly_better` | theorem | `OverrideModel`, `OverrideModel.noop`, `OverrideModel.optValue`, `OverrideModel.rationalise`, `OverrideModel.resulting`, `OverrideModel.value`, `RewardFn` |
 | `OverrideModel.regret` | definition | `OverrideModel`, `OverrideModel.optValue`, `OverrideModel.resulting`, `OverrideModel.value`, `RewardFn` |
+| `OverrideModel.regret_eq_noopValue_sub_of_rationalPlanner` | theorem | `Explains`, `OverrideModel`, `OverrideModel.IsRationalPlanner`, `OverrideModel.noop`, `OverrideModel.noopValue`, `OverrideModel.regret`, `OverrideModel.resulting`, `OverrideModel.value`, `Planner`, `Policy`, `RewardFn` |
 | `OverrideModel.regret_nonneg` | theorem | `OverrideModel`, `OverrideModel.regret`, `RewardFn` |
+| `OverrideModel.regret_noop_eq_zero_of_rationalPlanner` | theorem | `Explains`, `OverrideModel`, `OverrideModel.IsRationalPlanner`, `OverrideModel.noop`, `OverrideModel.regret`, `OverrideModel.resulting`, `Planner`, `Policy`, `RewardFn` |
+| `OverrideModel.regret_noop_eq_zero_or_overrides` | theorem | `OverrideModel`, `OverrideModel.Overrides`, `OverrideModel.noop`, `OverrideModel.regret`, `RewardFn` |
 | `OverrideModel.regret_rationalise` | theorem | `OverrideModel`, `OverrideModel.rationalise`, `OverrideModel.regret`, `RewardFn` |
 | `Pair` | definition | `Planner`, `Policy`, `RewardFn` |
 | `Planner` | definition | — |
@@ -89,17 +102,27 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 | `Source.ReasonableForF.proposition_eight` | theorem | `Pair`, `Policy`, `Source.ReasonableForF`, `Source.ReasonableForF.Compatible`, `Source.ReasonableForF.KPair`, `Source.ReasonableForF.c` |
 | `Source.ReasonableForF.proposition_seven` | theorem | `Policy`, `Source.ReasonableForF`, `Source.ReasonableForF.AmongLowestCompatible`, `op1`, `op2`, `op4`, `op5`, `op6` |
 | `Source.ReasonableForF.theorem_two_conditional` | theorem | `Pair`, `Policy`, `Source.ReasonableForF`, `Source.ReasonableForF.KPair`, `Source.ReasonableForF.NotAmongLowestCompatible`, `op1`, `op2`, `op4`, `op5`, `op6` |
+| `behaviour_le_of_evaluatesTo` | theorem | `EvaluatesTo` |
 | `computable_decodeBehaviour` | theorem | `decodeBehaviour` |
 | `computable_encodeExplanation` | theorem | `encodeExplanation` |
+| `computable_pairProgram` | theorem | `pairProgram` |
+| `computable_pairReward` | theorem | `pairReward` |
+| `computable_readerPair` | theorem | `readerPair` |
 | `consistent_rewards_eq_univ` | theorem | `Explains`, `Planner` |
+| `consistent_rewards_of_trajectory_eq_univ` | theorem | `Planner`, `Policy`, `RewardFn`, `ofMemoryless` |
 | `decodeBehaviour` | definition | — |
 | `decodeBehaviour_encodeExplanation` | theorem | `decodeBehaviour`, `encodeExplanation` |
+| `degeneratePair` | definition | `pairString` |
 | `degenerate_antirational` | theorem | `Explains`, `Policy`, `RewardFn`, `greedyPlanner`, `rewardOf` |
 | `degenerate_explanation_cheap` | theorem | `encodeExplanation` |
 | `degenerate_greedy` | theorem | `Explains`, `Policy`, `RewardFn`, `greedyPlanner`, `rewardOf` |
 | `degenerate_indifferent` | theorem | `Explains`, `indifferentPlanner` |
+| `detStateAt_ofMemoryless_succ` | theorem | `Policy`, `ofMemoryless` |
 | `encodeExplanation` | definition | — |
 | `encodeExplanation_injective` | theorem | `encodeExplanation` |
+| `evalPair` | definition | `pairProgram`, `pairReward` |
+| `evaluatesTo_degeneratePair` | theorem | `EvaluatesTo`, `degeneratePair` |
+| `evaluatesTo_readerPair` | theorem | `EvaluatesTo`, `readerPair` |
 | `exists_planner` | theorem | `Explains`, `Planner` |
 | `exists_reward` | theorem | `Explains`, `Planner` |
 | `explanation_at_least_behaviour` | theorem | `encodeExplanation` |
@@ -110,10 +133,15 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 | `greedy_rewardOf` | theorem | `Explains`, `Policy`, `RewardFn`, `greedyPlanner`, `rewardOf` |
 | `indifferentPlanner` | definition | `Planner` |
 | `knowable_reward_of_isEmpty_state` | theorem | `Pair`, `Planner`, `Policy`, `RewardFn`, `op3` |
+| `lastObs` | definition | — |
+| `lastObs_append` | theorem | `lastObs` |
+| `lastObs_detHistoryUpTo` | theorem | `Policy`, `lastObs`, `ofMemoryless` |
 | `lemma_six` | theorem | `Explains`, `Policy`, `RewardFn`, `greedyPlanner`, `indifferentPlanner`, `negPlanner`, `rewardOf` |
 | `negPlanner` | definition | `Planner`, `Policy`, `RewardFn` |
 | `neg_twin` | theorem | `Explains`, `Planner` |
 | `not_knowable_reward` | theorem | `Pair`, `Planner`, `Policy`, `RewardFn`, `op3` |
+| `ofMemoryless` | definition | `Policy`, `lastObs` |
+| `ofMemoryless_injective` | theorem | `Policy`, `ofMemoryless` |
 | `op1` | definition | `Pair`, `Planner`, `Policy`, `RewardFn` |
 | `op2` | definition | `Pair`, `Planner`, `Policy`, `RewardFn`, `greedyPlanner` |
 | `op3` | definition | `Pair`, `Planner`, `Policy`, `RewardFn` |
@@ -125,6 +153,16 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 | `op4_op4` | theorem | `Pair`, `op4` |
 | `op5` | definition | `Planner`, `Policy`, `RewardFn`, `indifferentPlanner` |
 | `op6` | definition | `Policy`, `RewardFn`, `rewardOf` |
+| `pairProgram` | definition | — |
+| `pairProgram_pairString` | theorem | `pairProgram`, `pairString` |
+| `pairReward` | definition | — |
+| `pairReward_pairString` | theorem | `pairReward`, `pairString` |
+| `pairString` | definition | — |
+| `partrec_evalPair` | theorem | `evalPair` |
+| `plainK_le_of_partrec` | theorem | — |
 | `policy_neg_twin` | theorem | `Explains`, `Planner`, `Policy`, `RewardFn` |
 | `policy_reward_unidentifiable` | theorem | `Explains`, `Planner`, `Policy`, `RewardFn` |
+| `readerPair` | definition | `pairString` |
+| `readerPair_complexity_eq_behaviour` | theorem | `readerPair` |
 | `rewardOf` | definition | `Policy`, `RewardFn` |
+| `trajectory_reward_unidentifiable` | theorem | `Explains`, `Planner`, `Policy`, `RewardFn`, `ofMemoryless` |

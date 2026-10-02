@@ -304,7 +304,7 @@ def validate_dispositions(
         active_findings = actionable_findings(source_id, source, record)
 
         for finding_id, disp_entry in sorted(source_disps.items()):
-            if finding_id not in active_findings:
+            if not isinstance(finding_id, str) or finding_id not in active_findings:
                 fail(
                     f"{source_id} has disposition for nonexistent or inactive finding {finding_id!r}; "
                     "dispositions may only target active machine findings"

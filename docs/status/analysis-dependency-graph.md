@@ -18,9 +18,9 @@ Named in the statements of eight or more others. A change to one of these is a c
 
 | Declaration | Named by |
 |---|---|
-| `IsSemialgebraic` | 33 |
+| `IsSemialgebraic` | 34 |
 | `PolySign` | 13 |
-| `ClosedBox` | 12 |
+| `ClosedBox` | 13 |
 
 ## Definitions no statement and no example mentions
 

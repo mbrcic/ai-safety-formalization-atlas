@@ -1,5 +1,6 @@
 module
 
+public import AISafetyAtlas.Decision.MDP
 public import AISafetyAtlas.Wireheading.Corruption
 public import Mathlib.Algebra.BigOperators.Group.Finset.Basic
 
@@ -12,6 +13,17 @@ construction: complement closure together with attained extrema.  Nothing there
 builds a corrupt-reward MDP, so the source's hypotheses never appear.
 
 This module supplies the missing structure and derives that consequence.
+
+## The dynamics are not this module's
+
+`run`, `stateAt` and `historyUpTo` are `AISafetyAtlas.Decision.detRun` and its
+projections, at the observation map `Env.channel`. The dynamics live on the
+rewardless carrier `AISafetyAtlas.Decision.MDP`, which has a transition and
+nothing else; the reward, the corruption channel and the observation map are
+what this module adds on top. In particular the **policy type is not part of the
+carrier**: a policy here reads the observed history *including corrupted
+rewards*, which is the whole point of the cluster, and a bare Markov decision
+process has no observation channel at all.
 
 ## What is modelled
 
@@ -81,13 +93,20 @@ public abbrev Obs (State : Type*) : Type _ := State × Reward
 /--
 An observed history in the source's shape: the initial observation followed by
 the actions taken and observations reached.
+
+This is `AISafetyAtlas.Decision.History` at the observation alphabet `Obs State`;
+the carrier leaves the alphabet a parameter precisely because what an agent sees
+is not part of the dynamics.
 -/
 public abbrev History (State Action : Type*) : Type _ :=
-  Obs State × List (Action × Obs State)
+  Decision.History (Obs State) Action
 
-/-- A policy sees the observed history, including observed rewards, and picks an
-action.  This is what makes the indistinguishability step non-trivial. -/
-public abbrev Policy (State Action : Type*) : Type _ := History State Action → Action
+/-- A policy sees the observed history, **including observed rewards**, and picks
+an action.  This is what makes the indistinguishability step non-trivial, and it
+is why the policy type is not a field of `AISafetyAtlas.Decision.MDP`: a bare
+Markov decision process has no observation channel to corrupt. -/
+public abbrev Policy (State Action : Type*) : Type _ :=
+  Decision.DetPolicy (Obs State) Action
 
 /--
 An environment: a true reward function and a corruption function over fixed
@@ -162,6 +181,24 @@ public theorem observed_complement (μ : Env State) (s : State) :
     μ.corruption s (μ.trueReward s)
   rw [rewardComplement_involutive]
 
+/--
+**The observation channel of an environment**: the state reached, labelled by the
+reward observed there.
+
+This is the observation map `AISafetyAtlas.Decision.MDP.run` takes.  Everything
+this cluster proves about complements being invisible to a trajectory is
+`Decision.MDP.run_congr_obs` — the run sees the world only through this map —
+together with `channel_complement` below.
+-/
+@[expose] public def channel (μ : Env State) (s : State) : Obs State :=
+  (s, μ.observed s)
+
+/-- **An environment and its complement present the same channel.**  This is
+`observed_complement` in the form the carrier's run consumes. -/
+public theorem channel_complement (μ : Env State) (s : State) :
+    μ.complement.channel s = μ.channel s := by
+  rw [channel, channel, observed_complement]
+
 end Env
 
 /-! ## Trajectories and observed histories -/
@@ -175,25 +212,20 @@ history so far.
 -/
 @[expose] public def run (transition : State → Action → State)
     (μ : Env State) (π : Policy State Action) (s₀ : State) :
-    ℕ → State × History State Action
-  | 0 => (s₀, ((s₀, μ.observed s₀), []))
-  | n + 1 =>
-      let prev := run transition μ π s₀ n
-      let a := π prev.2
-      let s := transition prev.1 a
-      (s, (prev.2.1, prev.2.2 ++ [(a, (s, μ.observed s))]))
+    ℕ → State × History State Action :=
+  Decision.detRun transition (Env.channel μ) π s₀
 
 /-- The state reached after `n` steps. -/
 @[expose] public def stateAt (transition : State → Action → State)
     (μ : Env State) (π : Policy State Action) (s₀ : State) (n : ℕ) : State :=
-  (run transition μ π s₀ n).1
+  Decision.detStateAt transition (Env.channel μ) π s₀ n
 
 /-- The observed history after `n` steps: the states visited, each labelled by
 the reward observed there, together with every action taken. -/
 @[expose] public def historyUpTo (transition : State → Action → State)
     (μ : Env State) (π : Policy State Action) (s₀ : State) (n : ℕ) :
     History State Action :=
-  (run transition μ π s₀ n).2
+  Decision.detHistoryUpTo transition (Env.channel μ) π s₀ n
 
 /--
 **No policy separates an environment from its complement.**
@@ -204,28 +236,21 @@ policy, which sees only the observed history, behaves identically in `μ` and
 -/
 public theorem run_complement (transition : State → Action → State)
     (μ : Env State) (π : Policy State Action) (s₀ : State) : ∀ n : ℕ,
-    run transition μ.complement π s₀ n = run transition μ π s₀ n := by
-  intro n
-  induction n with
-  | zero =>
-      simp only [run, Env.observed_complement]
-  | succ n ih =>
-      simp only [run, ih, Env.observed_complement]
+    run transition μ.complement π s₀ n = run transition μ π s₀ n :=
+  Decision.detRun_congr_obs transition (Env.channel_complement μ) π s₀
 
 /-- Visited states agree between an environment and its complement. -/
 public theorem stateAt_complement (transition : State → Action → State)
     (μ : Env State) (π : Policy State Action) (s₀ : State) (n : ℕ) :
-    stateAt transition μ.complement π s₀ n = stateAt transition μ π s₀ n := by
-  unfold stateAt
-  rw [run_complement]
+    stateAt transition μ.complement π s₀ n = stateAt transition μ π s₀ n :=
+  Decision.detStateAt_congr_obs transition (Env.channel_complement μ) π s₀ n
 
 /-- Observed histories agree between an environment and its complement. -/
 public theorem history_complement (transition : State → Action → State)
     (μ : Env State) (π : Policy State Action) (s₀ : State) (n : ℕ) :
     historyUpTo transition μ.complement π s₀ n =
-      historyUpTo transition μ π s₀ n := by
-  unfold historyUpTo
-  rw [run_complement]
+      historyUpTo transition μ π s₀ n :=
+  Decision.detHistoryUpTo_congr_obs transition (Env.channel_complement μ) π s₀ n
 
 /-- Finite-horizon true return: the sum of true rewards over the first `t`
 transitions, the source's `G_t(μ, π, s₀)`. -/
@@ -257,6 +282,77 @@ public theorem return_add_complement (transition : State → Action → State)
     linarith
   rw [Finset.sum_congr rfl hterm]
   simp
+
+/-! ## Definition 10 as printed, and why the proof of Theorem 11 cannot use it
+
+The source defines the return twice and the two do not agree. Definition 10
+prints `Ġ_t(μ, π, s₀) = 𝔼[∑_{k=0}^{t} Ṙ(s_k)]`, which counts the start state and
+has `t + 1` terms. The proof of Theorem 11 writes an undotted `G_t`, defines it
+nowhere, and computes with `∑_{k=1}^{t}` in the display under equation (3).
+
+`returnOver` above is the proof's sum. The two declarations here render the
+printed Definition 10 instead, and settle which of the two equation (3) admits:
+the printed one makes it read `t + 1`, so `return_add_complement` is false for
+it and the whole regret argument collapses. This is recorded rather than
+silently resolved.
+-/
+
+/-- **Definition 10 exactly as printed**: `Ġ_t`, summing the true reward from
+the start state, so `t + 1` terms rather than `returnOver`'s `t`. -/
+@[expose] public def returnWithStart (transition : State → Action → State)
+    (t : ℕ) (s₀ : State) (μ : Env State) (π : Policy State Action) : ℝ :=
+  ∑ k ∈ Finset.range (t + 1),
+    (μ.trueReward (stateAt transition μ π s₀ k) : ℝ)
+
+/-- The printed return is the proof's return plus the start state's reward. -/
+public theorem returnWithStart_eq_returnOver_add (transition : State → Action → State)
+    (t : ℕ) (s₀ : State) (μ : Env State) (π : Policy State Action) :
+    returnWithStart transition t s₀ μ π =
+      returnOver transition t s₀ μ π + (μ.trueReward s₀ : ℝ) := by
+  unfold returnWithStart returnOver
+  rw [Finset.sum_range_succ']
+  simp [stateAt, Decision.detStateAt, Decision.detRun, add_comm]
+
+/--
+**Print's equation (3) fails for print's own Definition 10.**
+
+With the printed `Ġ_t` the complementary returns sum to `t + 1`, not to `t`, so
+the identity the proof of Theorem 11 calls equation (3) is unavailable at the
+definition the paper actually gives. The atlas follows the proof.
+-/
+public theorem returnWithStart_add_complement (transition : State → Action → State)
+    (t : ℕ) (s₀ : State) (μ : Env State) (π : Policy State Action) :
+    returnWithStart transition t s₀ μ π +
+        returnWithStart transition t s₀ μ.complement π = (t : ℝ) + 1 := by
+  rw [returnWithStart_eq_returnOver_add, returnWithStart_eq_returnOver_add,
+    show ((μ.complement.trueReward s₀ : ℝ)) = 1 - (μ.trueReward s₀ : ℝ) from rfl]
+  have h := return_add_complement transition t s₀ μ π
+  linarith
+
+/--
+**The discrepancy does not reach Definition 10's regret.**
+
+`Reg` is a difference of two returns in the same environment from the same start
+state, so the start-state term the printed `Ġ` adds cancels. Definition 10's
+regret is therefore the regret the atlas builds on `returnOver`, and the
+`k = 0` versus `k = 1` disagreement bites in exactly one place: equation (3),
+where the returns are added rather than subtracted.
+-/
+public theorem returnWithStart_sub (transition : State → Action → State)
+    (t : ℕ) (s₀ : State) (μ : Env State) (π π' : Policy State Action) :
+    returnWithStart transition t s₀ μ π' - returnWithStart transition t s₀ μ π =
+      returnOver transition t s₀ μ π' - returnOver transition t s₀ μ π := by
+  rw [returnWithStart_eq_returnOver_add, returnWithStart_eq_returnOver_add]
+  ring
+
+/-- The inconsistency, stated as such: the printed return never satisfies
+equation (3). -/
+public theorem returnWithStart_add_complement_ne (transition : State → Action → State)
+    (t : ℕ) (s₀ : State) (μ : Env State) (π : Policy State Action) :
+    returnWithStart transition t s₀ μ π +
+        returnWithStart transition t s₀ μ.complement π ≠ (t : ℝ) := by
+  rw [returnWithStart_add_complement]
+  linarith
 
 /--
 A corrupt-reward MDP together with the extrema the regret argument needs.

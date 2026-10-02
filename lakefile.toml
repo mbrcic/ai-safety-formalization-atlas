@@ -56,3 +56,27 @@ root = "Main"
 [[lean_lib]]
 name = "TauCeti"
 srcDir = "vendor/TauCeti"
+
+# d-separation on finite DAGs: `Causalean.Graph.DAG.dSep`, the Bayes-Ball
+# reachability it is computed by, and the active-path characterisation. Taken
+# from a shared library rather than rebuilt, for the reason recorded in
+# docs/guide/methodology.md and measured in
+# docs/provenance/d-separation-build-or-depend.md: the closure is 2,483 lines
+# with no `sorry`, and nothing in it is a statement this repository grades.
+#
+# Pinned to a fork, not to upstream, and pinned by commit rather than by branch.
+# Upstream `Jiyuan-Tan/CausalSmith` is not on Lean's module system, and a
+# `module` file cannot import a non-`module` one -- transitively, so no
+# intermediate file escapes it. The fork converts exactly the four files in the
+# import closure of `Graph/DSep/Separation.lean` and changes one declaration's
+# visibility; §10 of the provenance note records why that one is forced. The
+# conversion is offered upstream in Jiyuan-Tan/CausalSmith#14. If it is taken,
+# this `require` re-points at upstream and nothing else here changes.
+#
+# Only the graph layer is consumed. `Causalean.SCM` carries arbitrary measurable
+# domains where `AISafetyAtlas.Causal.SCM` is finite, so its do-calculus does not
+# transfer at this repository's SCM -- see §8.3 of the provenance note.
+[[require]]
+name = "Causalean"
+git = "https://github.com/mbrcic/CausalSmith.git"
+rev = "3b83b4f69901a6d39dc4ba1cae12321d3defb331"

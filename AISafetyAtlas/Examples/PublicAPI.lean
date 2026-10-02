@@ -159,6 +159,43 @@ example {X Y : Type*} [Fintype X] [Fintype Y] [DecidableEq X] [DecidableEq Y]
       AISafetyAtlas.Learning.aggregateOffTrainingLoss S B :=
   AISafetyAtlas.Learning.no_free_lunch_supervised S A B
 
+-- Compositional expressibility: rectangularity characterization.
+example {Agent : Type*} {LocalState : Agent → Type*}
+    [Fintype Agent] [DecidableEq Agent] [Nonempty Agent]
+    {P : Set (AISafetyAtlas.Composition.GlobalState Agent LocalState)} :
+    AISafetyAtlas.Composition.IndependentlyExpressible P ↔
+      AISafetyAtlas.Composition.CoordinateSpliceClosed P :=
+  AISafetyAtlas.Composition.independent_iff_rectangular
+
+-- Compositional expressibility: one failed splice refutes local contracts.
+example {Agent : Type*} {LocalState : Agent → Type*} [DecidableEq Agent]
+    {P : Set (AISafetyAtlas.Composition.GlobalState Agent LocalState)}
+    {x y : AISafetyAtlas.Composition.GlobalState Agent LocalState} {i : Agent}
+    (hx : x ∈ P) (hy : y ∈ P)
+    (hbad : Function.update x i (y i) ∉ P) :
+    ¬ AISafetyAtlas.Composition.IndependentlyExpressible P :=
+  AISafetyAtlas.Composition.not_independent_of_failed_splice hx hy hbad
+
+-- Observability: hazard factorization through observations.
+example {Execution Observation : Type*}
+    (observe : Execution → Observation) (hazard : Set Execution) :
+    AISafetyAtlas.Observability.ObservationDetermined observe hazard ↔
+      Function.FactorsThrough (· ∈ hazard) observe :=
+  AISafetyAtlas.Observability.factors_through_iff_fiber_invariant
+    observe hazard
+
+-- Observability: no sound-and-complete monitor under observational collision.
+example {Execution Observation : Type*}
+    {observe : Execution → Observation} {hazard : Set Execution}
+    {safeExec unsafeExec : Execution}
+    (hsafe : safeExec ∉ hazard) (hunsafe : unsafeExec ∈ hazard)
+    (hobs : observe safeExec = observe unsafeExec) :
+    ¬ ∃ flagged,
+        AISafetyAtlas.Observability.SoundMonitor observe hazard flagged ∧
+        AISafetyAtlas.Observability.CompleteMonitor observe hazard flagged :=
+  AISafetyAtlas.Observability.no_perfect_monitor_of_collision
+    hsafe hunsafe hobs
+
 /-!
 ## Refactored facade-table contract
 

@@ -147,19 +147,61 @@ jobs:
           # baseline dump counts because re-dumping it *is* the migration act,
           # and a branch that rewrites the baseline without re-comparing against
           # it would otherwise gate itself out of the only check that reads it.
-          migration_pattern='(^lean-toolchain$|^lakefile\.toml$|^lake-manifest\.json$|^docs/status/elab-baseline-.*\.json$)'
+          #
+          # A dependency moving counts too, but only a dependency that was
+          # already there: a changed `rev` in lake-manifest.json moves the
+          # environment every existing declaration elaborates in. Adding a new
+          # package does not -- nothing already in the tree imports it -- so a
+          # lakefile or manifest edit that only adds a library is not a
+          # migration, and the drift check is not run for it. Lean options in
+          # lakefile.toml (`leanOptions`, `moreLeanArgs`, at package or library
+          # level) still count: they change elaboration with no manifest
+          # movement -- docs/provenance/verification-scheduling.md.
+          migrates() {
+            git diff --name-only "$1" "$2" \
+              | grep -E '(^lean-toolchain$|^docs/status/elab-baseline-.*\.json$)' >/dev/null && return 0
+            python3 - "$1" "$2" <<'PY'
+          import json, subprocess, sys
+          def revs(ref):
+              out = subprocess.run(["git", "show", f"{ref}:lake-manifest.json"],
+                                   capture_output=True, text=True)
+              if out.returncode != 0:
+                  return {}
+              return {p["name"]: p.get("rev") for p in json.loads(out.stdout)["packages"]}
+          def options(ref):
+              import tomllib
+              out = subprocess.run(["git", "show", f"{ref}:lakefile.toml"],
+                                   capture_output=True, text=True)
+              if out.returncode != 0:
+                  return None
+              cfg = tomllib.loads(out.stdout)
+              keys = ("leanOptions", "moreLeanArgs", "moreServerOptions")
+              libs = {lib.get("name"): {k: lib.get(k) for k in keys}
+                      for lib in cfg.get("lean_lib", [])}
+              return {k: cfg.get(k) for k in keys}, libs
+          a, b = revs(sys.argv[1]), revs(sys.argv[2])
+          moved = sorted(n for n in a.keys() & b.keys() if a[n] != b[n])
+          oa, ob = options(sys.argv[1]), options(sys.argv[2])
+          if oa and ob:
+              if oa[0] != ob[0]:
+                  moved.append("package Lean options")
+              moved += [f"Lean options of {n}" for n in oa[1].keys() & ob[1].keys()
+                        if oa[1][n] != ob[1][n]]
+          if moved:
+              print("Dependencies moved:", ", ".join(moved))
+          sys.exit(0 if moved else 1)
+          PY
+          }
           run_migration=false
           if [ "${{ github.event_name }}" = "pull_request" ]; then
-            if git diff --name-only "${{ github.event.pull_request.base.sha }}" \
-                 "${{ github.event.pull_request.head.sha }}" \
-                 | grep -E "$migration_pattern" >/dev/null; then
+            if migrates "${{ github.event.pull_request.base.sha }}" \
+                        "${{ github.event.pull_request.head.sha }}"; then
               run_migration=true
             fi
           elif [ "${{ github.event_name }}" = "push" ]; then
             before="${{ github.event.before }}"
             if [ -n "$before" ] && [ "$before" != "0000000000000000000000000000000000000000" ]; then
-              if git diff --name-only "$before" "${{ github.sha }}" \
-                   | grep -E "$migration_pattern" >/dev/null; then
+              if migrates "$before" "${{ github.sha }}"; then
                 run_migration=true
               fi
             else

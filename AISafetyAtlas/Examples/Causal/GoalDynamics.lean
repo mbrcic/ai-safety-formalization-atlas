@@ -87,4 +87,13 @@ public theorem isDeltaBounded_oneAction (agent : GoalConditionedAgent (Fin 2) (F
     (n : ℕ) {δ : ℝ} (hδ : 0 ≤ δ) : IsDeltaBounded oneActionEnv agent n δ :=
   isDeltaBounded_of_achieve_eq_optimal hδ fun Ψ s₀ ↦ achieve_eq_optimal _ s₀ Ψ
 
+/-! ## The achievement event is measurable, at the one-action policy -/
+
+/-- **`CompositeSatisfies` cuts out a measurable set of trajectories**, at the
+unique policy the one-action environment admits. -/
+public theorem measurableSet_compositeSatisfies_oneAction
+    (Ψ : CompositeGoal (Fin 2) (Fin 1)) :
+    MeasurableSet {ω : ℕ → Fin 2 | CompositeSatisfies Ψ (statePairs (fun _ _ ↦ 0) ω)} :=
+  measurableSet_compositeSatisfies (fun _ _ ↦ 0) Ψ
+
 end AISafetyAtlas.Examples.Causal.GoalDynamics

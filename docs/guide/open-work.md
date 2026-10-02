@@ -111,7 +111,7 @@ change.
   only BY-012 and BY-033 currently carry `REVIEWED` AI-facing bridge status.
 - **Done (v0.2):** `Verification.rice` + `AgentBehavior` (BY-012) and robot
   `action_safety_unverifiable` (BY-033, formalization `RELATED`) are maintainer
-  `REVIEWED` with evidence under `docs/bridges/`.
+  `REVIEWED` with evidence under `docs/interpretation-reviews/`.
 
 ## Formalization search
 

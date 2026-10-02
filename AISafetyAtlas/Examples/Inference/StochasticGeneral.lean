@@ -186,4 +186,321 @@ public theorem p6_miDistinguishabilitySum_eq_one :
   rw [miDistinguishabilitySum_eq]
   exact p6_miDistinguishabilityOn_eq_one
 
+/-! ## Ten more leaves of `Stochastic/Measure.lean`, on the same witness
+
+Each of these was shipped and unapplied: nothing in the tree instantiated it.
+The model is the one already built above -- no new construction, only the
+application. -/
+
+/-- **Independence is symmetric, witnessed.** -/
+public theorem p6_independentOn_symm :
+    IndependentOn p6measure p6dev2.setup p6dev1.setup :=
+  IndependentOn.symm p6measure p6_independentOn
+
+/-- **Definition 9's measurability, cited by name** rather than discharged
+silently by `fun_prop` as `meas₁` above does. -/
+public theorem p6_measurable_setup_cited : Measurable p6dev1.setup :=
+  measurable_setup p6dev1
+
+public theorem p6_measurable_concl_cited : Measurable p6dev1.concl :=
+  measurable_concl p6dev1
+
+/-- **The agreement indicator against a probe is measurable**, at the two
+devices' conclusions. -/
+public theorem p6_measurable_agree_probe :
+    Measurable (fun u : Bool × Bool => p6dev1.concl u == probe true (p6dev2.concl u)) :=
+  measurable_agree_probe p6dev1.concl measc₁ p6dev2.concl measc₂ true
+
+/-- **Gibbs' inequality over a general measure, at the witness.** The general
+form of `p6_entropyOn_pos`'s companion fact. -/
+public theorem p6_mutualInfoOn_nonneg :
+    0 ≤ mutualInfoOn p6measure p6dev1.setup p6dev2.setup :=
+  mutualInfoOn_nonneg p6measure p6dev1.setup p6dev2.setup meas₁ meas₂
+
+/-- **The joint range sits inside the product of the marginals' ranges.** -/
+public theorem p6_rangeFinset_prod_subset :
+    rangeFinset (fun u : Bool × Bool => (p6dev1.setup u, p6dev2.setup u)) ⊆
+      rangeFinset p6dev1.setup ×ˢ rangeFinset p6dev2.setup :=
+  rangeFinset_prod_subset p6dev1.setup p6dev2.setup
+
+/-- **Joint masses marginalise**, at the witness. -/
+public theorem p6_sum_massOn_marginal :
+    (rangeFinset p6dev2.setup).sum
+        (fun b => massOn p6measure (fun u => (p6dev1.setup u, p6dev2.setup u)) (false, b))
+      = massOn p6measure p6dev1.setup false :=
+  sum_massOn_marginal p6measure p6dev1.setup p6dev2.setup meas₁ meas₂ false
+
+/-- **The printed `max` and the `sup'` form agree**, unconditionally on a
+finite setup range. -/
+public theorem p6_accuracySupOn_eq_sup' :
+    accuracySupOn p6measure p6dev1 p6dev2.concl
+      = (positiveMassSetupsOn p6measure p6dev1).sup' (positiveMassSetupsOn_nonempty p6measure p6dev1)
+          (fun x => condExpectPmOn p6measure p6dev1.setup x p6dev2.concl) :=
+  accuracySupOn_eq_sup' p6measure p6dev1 p6dev2.concl
+
+/-- **Definition 9's accuracy is at most one**, over a general measure. -/
+public theorem p6_inferenceAccuracyOn_le_one :
+    inferenceAccuracyOn p6measure p6dev1 p6dev2.concl ≤ 1 :=
+  inferenceAccuracyOn_le_one p6measure p6dev1 p6dev2.concl
+
+/-! ## Reporting `true` unconditionally: the general `IsGreatest` and `ge` forms
+
+Fixing the report at the constant `true` makes every positively-massed setup
+value agree with it certainly, so the accuracy supremum collapses to the single
+value `1` -- cheap to compute and enough to inhabit both remaining conditional
+theorems. -/
+
+/-- **A constant report is certain wherever the setup has any mass at all.** -/
+public theorem p6_condExpectPmOn_dev1_true (x : Bool)
+    (hx : 0 < massOn p6measure p6dev1.setup x) :
+    condExpectPmOn p6measure p6dev1.setup x (fun _ => true) = 1 := by
+  have hset : (fun u : Bool × Bool => (p6dev1.setup u, true)) ⁻¹' {(x, true)}
+      = p6dev1.setup ⁻¹' {x} := by
+    ext u
+    simp
+  have hmass : massOn p6measure (fun u : Bool × Bool => (p6dev1.setup u, true)) (x, true)
+      = massOn p6measure p6dev1.setup x := by
+    show (p6measure ((fun u : Bool × Bool => (p6dev1.setup u, true)) ⁻¹' {(x, true)})).toReal
+      = massOn p6measure p6dev1.setup x
+    rw [hset]
+    rfl
+  have hagree : condAgreeOn p6measure p6dev1.setup x (fun _ => true) = 1 := by
+    show (if massOn p6measure p6dev1.setup x = 0 then 0
+        else massOn p6measure (fun u => (p6dev1.setup u, (fun _ => true) u)) (x, true)
+          / massOn p6measure p6dev1.setup x) = 1
+    rw [if_neg (ne_of_gt hx)]
+    show massOn p6measure (fun u : Bool × Bool => (p6dev1.setup u, true)) (x, true)
+        / massOn p6measure p6dev1.setup x = 1
+    rw [hmass]
+    exact div_self (ne_of_gt hx)
+  show 2 * condAgreeOn p6measure p6dev1.setup x (fun _ => true) - 1 = 1
+  rw [hagree]
+  ring
+
+/-- **The image, at `report := true`, is the single point `1`.** -/
+public theorem p6_isGreatest_dev1_true :
+    IsGreatest ((fun x => condExpectPmOn p6measure p6dev1.setup x (fun _ => true)) ''
+      positiveMassSetOn p6measure p6dev1) 1 := by
+  constructor
+  · refine ⟨false, ?_, p6_condExpectPmOn_dev1_true false ?_⟩
+    · show 0 < massOn p6measure p6dev1.setup false
+      rw [p6_massOn_dev1_false]; norm_num
+    · rw [p6_massOn_dev1_false]; norm_num
+  · rintro y ⟨x, hx, rfl⟩
+    exact (p6_condExpectPmOn_dev1_true x hx).le
+
+/-- **The printed `max` and the `sSup` form agree here**, over an arbitrary
+setup range -- the theorem `accuracySupOn_eq_sup'` cannot state, since it needs
+finiteness. -/
+public theorem p6_accuracySupOn_eq_of_isGreatest :
+    accuracySupOn p6measure p6dev1 (fun _ => true) = 1 :=
+  accuracySupOn_eq_of_isGreatest p6measure p6dev1 (fun _ => true) p6_isGreatest_dev1_true
+
+/-- **Proposition 8's general lower bound, at the witness.** The target is the
+constant report, whose realized range is the singleton `{true}`, so the printed
+factor is `1` and the bound reads off `accuracySupOn` directly. -/
+public theorem p6_inferenceAccuracySupOn_ge :
+    ((2 - ((rangeFinset (fun _ : Bool × Bool => true)).card : ℝ)) *
+        accuracySupOn p6measure p6dev1 p6dev1.concl) /
+        ((rangeFinset (fun _ : Bool × Bool => true)).card : ℝ)
+      ≤ inferenceAccuracySupOn p6measure p6dev1 (fun _ : Bool × Bool => true) :=
+  inferenceAccuracySupOn_ge p6measure p6dev1 meas₁ measc₁ (fun _ => true) measurable_const
+    ⟨false, by rw [p6_massOn_dev1_false]; norm_num⟩
+    (by
+      have hmem : true ∈ rangeFinset (fun _ : Bool × Bool => true) :=
+        self_mem_rangeFinset _ (false, false)
+      exact (Finset.card_pos.mpr ⟨true, hmem⟩).ne')
+
+/-! ## Interop, at the witness -/
+
+/-- **`toPMF` reads off the mass, at the witness.** -/
+public theorem p6_toPMF_apply : p6pmf.toPMF (false, false) = ENNReal.ofReal (p6pmf.mass (false, false)) :=
+  FinPMF.toPMF_apply p6pmf (false, false)
+
+/-- **And a Mathlib `PMF` survives the round trip through `FinPMF`**, at the
+witness. -/
+public theorem p6_toPMF_ofPMF :
+    (FinPMF.ofPMF p6pmf.toPMF).toPMF (false, false) = p6pmf.toPMF (false, false) :=
+  PMF.toPMF_ofPMF p6pmf.toPMF (false, false)
+
+/-! ## The pointwise Gibbs step, at one triple
+
+`gibbs_cell_eq_iff` needs no model at all -- three real numbers. The equality
+case at `q = p₁p₂` is the one the module exists for. -/
+
+/-- **Equality in the pointwise Gibbs step, at a triple where it holds.** -/
+public theorem gibbs_eq_iff_at_quarter :
+    ((if (1 / 4 : ℝ) = 0 then 0 else (1 / 4 : ℝ) * Real.log (1 / 2)) +
+        (if (1 / 4 : ℝ) = 0 then 0 else (1 / 4 : ℝ) * Real.log (1 / 2)) -
+        (if (1 / 4 : ℝ) = 0 then 0 else (1 / 4 : ℝ) * Real.log (1 / 4))
+      = (1 / 2 : ℝ) * (1 / 2) - 1 / 4) ↔ (1 / 4 : ℝ) = (1 / 2 : ℝ) * (1 / 2) :=
+  gibbs_cell_eq_iff (by norm_num) (by norm_num) (by norm_num)
+
+/-! ## Seven leaves of the finite layer, `Stochastic.lean`, on the same witness
+
+`p6pmf`/`p6dev1`/`p6dev2` are `FinPMF` objects already, so the finite-layer
+statements apply to them directly -- no widening through `Bridge.lean` needed. -/
+
+/-- **A mass function's values are at most one.** -/
+public theorem p6_mass_le_one : p6pmf.mass (false, false) ≤ 1 :=
+  FinPMF.mass_le_one p6pmf (false, false)
+
+/-- **Statistical independence is symmetric, at the witness.** -/
+public theorem p6_setups_independent_symm :
+    StatisticallyIndependent p6pmf p6dev2.setup p6dev1.setup :=
+  StatisticallyIndependent.symm p6_setups_independent
+
+/-- **Negation flips the `±1` reading.** -/
+public theorem p6_boolPm_not : boolPm (!true) = -boolPm true :=
+  boolPm_not true
+
+/-- **`cov = 1` iff exact inference, at the witness's own devices.** Both
+directions are exercised, since the iff is the leaf. -/
+public theorem p6_inferenceAccuracy_eq_one_iff :
+    inferenceAccuracy p6dev1 p6pmf p6dev2.concl = 1 ↔ WeaklyInfers p6dev1 p6dev2.concl :=
+  inferenceAccuracy_eq_one_iff p6dev1 p6pmf p6dev2.concl (fun _ => by norm_num [p6pmf])
+
+/-- **The finite-layer accuracy bound, at the witness.** -/
+public theorem p6_inferenceAccuracy_le_one :
+    inferenceAccuracy p6dev1 p6pmf p6dev2.concl ≤ 1 :=
+  inferenceAccuracy_le_one p6dev1 p6pmf p6dev2.concl
+
+/-- **Some setup value is realized.** -/
+public theorem p6_realizedSetups_nonempty : (Finset.univ.image p6dev1.setup).Nonempty :=
+  realizedSetups_nonempty p6dev1
+
+/-- **A positive pushforward mass names a realizing point.** -/
+public theorem p6_realized_of_pushOnImage_pos : ∃ u : Bool × Bool, p6dev1.setup u = false :=
+  realized_of_pushOnImage_pos p6pmf p6dev1.setup
+    (show (0 : ℝ) < pushOnImage p6pmf p6dev1.setup false by
+      rw [show pushOnImage p6pmf p6dev1.setup false = setupMass p6pmf p6dev1 false from rfl,
+        p6dev1_mass_false]
+      norm_num)
+
+/-! ## Six of the seven leaves of `Complexity/Measure.lean`, on the same witness -/
+
+/-- Both setup values of the first device carry positive mass -- both cases of
+the same fact `p6_massOn_dev1_false`/`p6_massOn_dev1_true` already established. -/
+public theorem p6_massOn_dev1_pos (x : Bool) : 0 < massOn p6measure p6dev1.setup x := by
+  cases x
+  · rw [p6_massOn_dev1_false]; norm_num
+  · rw [p6_massOn_dev1_true]; norm_num
+
+/-- **Definition 6's length is anti-symmetric under subtraction**, at the
+witness's two devices. -/
+public theorem p6_measureLength_sub_measureLength :
+    measureLength p6measure p6dev1 false - measureLength p6measure p6dev2 false
+      = Real.log (massOn p6measure p6dev2.setup false / massOn p6measure p6dev1.setup false) :=
+  measureLength_sub_measureLength p6measure p6dev1 p6dev2 false false
+    (p6_massOn_dev1_pos false)
+    (by rw [p6_massOn_dev2_false]; norm_num)
+
+/-- **The length is nonnegative**, at the witness. -/
+public theorem p6_relativeLength_nonneg : 0 ≤ relativeLength p6measure p6dev1 false :=
+  relativeLength_nonneg p6measure p6dev1 false
+
+/-- **The two forms of the union complexity agree**, at the witness. -/
+public theorem p6_unionInferenceComplexityOn_eq :
+    unionInferenceComplexityOn p6measure p6dev1 p6dev2.concl
+      = unionInferenceComplexity p6measure p6dev1 p6dev2.concl :=
+  unionInferenceComplexityOn_eq p6measure p6dev1 p6dev2.concl
+
+/-- **The answering mass is the sum of `exp(-length)` over the answering set**,
+at the witness. Every setup value of `p6dev1` carries positive mass, so
+`hpos` is free of any membership case-analysis. -/
+public theorem p6_answeringMass_eq_sum_exp :
+    answeringMass p6measure p6dev1 p6dev2.concl id
+      = (answeringSet p6dev1 p6dev2.concl id).sum
+          (fun x => Real.exp (-(measureLength p6measure p6dev1 x))) :=
+  answeringMass_eq_sum_exp p6measure p6dev1 meas₁ p6dev2.concl id
+    (fun x _ => p6_massOn_dev1_pos x)
+
+/-! ### A device whose setup carries no information
+
+`relativeLength_eq_zero_of_cond_eq` and its converse both need a setup value
+whose conditional law is the prior itself. Conditioning on the whole space does
+that for free: a device with a single setup value conditions on `Set.univ`,
+and `ProbabilityTheory.cond_univ` is exactly *"conditioning on everything
+changes nothing."* -/
+
+/-- **The device that never actually sets up anything**: one setup value, the
+first device's conclusion. -/
+@[expose] public noncomputable def constDevice : InferenceDevice (Bool × Bool) where
+  Setup := Unit
+  setup _ := ()
+  concl := p6dev1.concl
+  concl_surjective := p6dev1.concl_surjective
+
+/-- **Its one setup value's fibre is the whole space.** -/
+public theorem p6_constDevice_fibre_univ :
+    (constDevice.setup ⁻¹' {()} : Set (Bool × Bool)) = Set.univ :=
+  Set.eq_univ_of_forall (fun _ => rfl)
+
+/-- **So its conditional law is the prior, unconditionally.** -/
+public theorem p6_condLawOn_constDevice : condLawOn p6measure constDevice () = p6measure := by
+  show ProbabilityTheory.cond p6measure (constDevice.setup ⁻¹' {()}) = p6measure
+  rw [p6_constDevice_fibre_univ, ProbabilityTheory.cond_univ]
+
+/-- **A setup value that says nothing costs nothing, at the witness.** -/
+public theorem p6_relativeLength_eq_zero_of_cond_eq :
+    relativeLength p6measure constDevice () = 0 :=
+  relativeLength_eq_zero_of_cond_eq p6measure constDevice () p6_condLawOn_constDevice
+
+/-- **And conversely: zero length recovers the equality, at the witness.**
+
+The forward direction above proves `condLawOn = p6measure` directly; this cites
+the converse theorem to re-derive it from the length being zero, which is what
+grounds it. -/
+public theorem p6_relativeLength_zero_recovers_condLawOn :
+    condLawOn p6measure constDevice () = p6measure := by
+  have : IsFiniteMeasure (condLawOn p6measure constDevice ()) := by
+    rw [p6_condLawOn_constDevice]; infer_instance
+  exact condLawOn_eq_of_relativeLength_eq_zero p6measure constDevice ()
+    (by rw [p6_condLawOn_constDevice, InformationTheory.klDiv_self]; exact ENNReal.zero_ne_top)
+    p6_relativeLength_eq_zero_of_cond_eq
+
+/-! ## The last leaf: `sourceStochasticComplexity_eq`
+
+`p6pmf` is already exactly uniform, so it is its own witness for "uniform on
+every fibre" -- the constant `c := fun _ => 1/4` needs no case split. -/
+
+/-- **`massOn` against the identity reads off the mass function directly.** -/
+public theorem p6_massOn_id_eq (u : Bool × Bool) : massOn p6measure id u = p6pmf.mass u := by
+  rw [massOn_toMeasure]
+  show pushOnImage p6pmf id u = p6pmf.mass u
+  simp [pushOnImage, Finset.filter_eq']
+
+/-- **Every singleton carries positive measure.** -/
+public theorem p6_measure_singleton_ne_zero (u : Bool × Bool) : p6measure {u} ≠ 0 := by
+  intro h
+  have hzero : massOn p6measure id u = 0 := by
+    show (p6measure (id ⁻¹' {u})).toReal = 0
+    rw [show (id ⁻¹' {u} : Set (Bool × Bool)) = {u} from rfl, h]
+    rfl
+  rw [p6_massOn_id_eq] at hzero
+  norm_num [p6pmf] at hzero
+
+/-- **The source's `ε = 1` identity, at the witness.** `hagree` is free because
+every function out of a discrete space is measurable; `hpos` is free because
+both setup values carry positive mass; `huniform` is free because `p6pmf` is
+already constant. Nothing here is case analysis -- the witness was chosen so
+that the hardest three hypotheses collapse to `rfl`. -/
+public theorem p6_sourceStochasticComplexity_eq :
+    sourceStochasticComplexity p6measure p6pmf p6dev1 p6dev2.concl 1
+      = inferenceComplexityTotal p6dev1 (setupLength p6dev1) p6dev2.concl :=
+  sourceStochasticComplexity_eq p6measure p6pmf p6dev1 meas₁ p6dev2.concl
+    (fun _ => Measurable.of_discrete)
+    (fun u => p6_measure_singleton_ne_zero u)
+    (fun x _ => (p6_massOn_dev1_pos x).ne')
+    (fun _ => (1 / 4 : ℝ)) (fun _ => by norm_num)
+    (fun _ _ _ => rfl)
+
+/-- **`cov = 1` iff exact inference, over a general measure, at the witness.**
+The general-measure counterpart of `p6_inferenceAccuracy_eq_one_iff` above --
+missed in the first pass over `Stochastic/Measure.lean`, closed here. -/
+public theorem p6_inferenceAccuracyOn_eq_one_iff :
+    inferenceAccuracyOn p6measure p6dev1 p6dev2.concl = 1 ↔ WeaklyInfers p6dev1 p6dev2.concl :=
+  inferenceAccuracyOn_eq_one_iff p6measure p6dev1 meas₁ measc₁ p6dev2.concl measc₂
+    p6_measure_singleton_ne_zero ⟨(false, false)⟩
+
 end AISafetyAtlas.Examples.Inference.StochasticGeneral

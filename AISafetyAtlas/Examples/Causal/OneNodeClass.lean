@@ -137,10 +137,8 @@ public theorem cpt_const (M : Model (Fin 1) (binaryDim (Fin 1)) ℝ)
 /-- Both cells of the one table sum to one. -/
 public theorem cpt_zero_eq (M : Model (Fin 1) (binaryDim (Fin 1)) ℝ)
     (v : Assignment (Fin 1) (binaryDim (Fin 1))) :
-    M.cpt 0 0 v = 1 - M.cpt 0 1 v := by
-  have := M.cpt_sum 0 v
-  rw [Fin.sum_univ_two] at this
-  linarith
+    M.cpt 0 0 v = 1 - M.cpt 0 1 v :=
+  Skeleton.cpt_zero_eq M 0 v
 
 /-! ## The class is `𝕄(sk, λ)`, and it is what `prob:exact` asks for -/
 
@@ -663,5 +661,66 @@ public theorem two_over_25_le_of_inIdentifiedSet {δ : ℝ} (hδ : 0 ≤ δ)
     show (model (9 / 10) (by norm_num : (0:ℝ) ≤ 9/10) (by norm_num)).cpt 0 1 rep
       = 9 / 10 from rfl, this] at hbound
   linarith
+
+/-! ## Every margin-class lemma, applied
+
+`AISafetyAtlas.Causal.MarginClass` proves results that nothing instantiated.
+Each is applied below on `sk`, `lam` and `model`. Several are trivial at a single
+skeleton -- the two skeleton-comparison lemmas take two skeletons and are
+applied at `sk` against itself -- and say so.
+-/
+
+/-- `M5` forces every vertex to be an ancestor of the utility's parents together
+with the observed set. -/
+public theorem oneNode_ancestors_univ :
+    (model (1 / 2) (by norm_num) (by norm_num)).ancestors
+        (sk.utilityParents ∪ sk.observed) = Finset.univ :=
+  Skeleton.ancestors_eq_univ_of_M5 sk _ (sk_M5 _)
+
+/-- The gap never exceeds one in magnitude, which is exactly what makes it
+realizable by a utility into the unit interval. -/
+public theorem oneNode_gap_le_one (v : Assignment (Fin 1) (binaryDim (Fin 1))) :
+    |sk.gap v| ≤ 1 :=
+  Skeleton.gap_le_one sk v
+
+public theorem oneNode_realizable :
+    ∃ u : Bool → Assignment (Fin 1) (binaryDim (Fin 1)) → ℝ,
+      (∀ d v, 0 ≤ u d v ∧ u d v ≤ 1) ∧
+      (∀ d v w, (∀ z ∈ sk.utilityParents, v z = w z) → u d v = u d w) ∧
+      (∀ v, u true v - u false v = sk.gap v) :=
+  (Skeleton.realizable_iff sk).mp (oneNode_gap_le_one)
+
+/-- **Trivial instances, by construction.** Both lemmas say two skeletons with
+the same observed set and the same gap agree; at one skeleton against itself
+they hold by `rfl`, and there is no second skeleton in this file to compare. -/
+public theorem oneNode_gap_determines
+    (M M' : Model (Fin 1) (binaryDim (Fin 1)) ℝ) :
+    (sk.BehaviorEq M M' ↔ sk.BehaviorEq M M') ∧
+      (sk.MarginClass M lam ↔ sk.MarginClass M lam) :=
+  ⟨Skeleton.gap_determines_behaviorEq rfl rfl M M',
+    Skeleton.gap_determines_marginClass rfl rfl rfl M lam⟩
+
+/-- `M2` from the padded form: it is enough to check the margin on assignments
+that are zero off the utility's parents. -/
+public theorem oneNode_m2_of_padded : sk.M2 lam :=
+  Skeleton.m2_of_padded sk lam (fun z _ => by
+    rw [sk_gap z]
+    by_cases h : (z 0 : ℕ) = 1 <;> simp [h, lam] <;> norm_num)
+
+/-- The normalized utility lands in the unit interval and depends only on the
+parents, which is what `ofUtility` needs to build a skeleton from a raw utility. -/
+public theorem oneNode_normalizeUtility
+    (d : Bool) (v w : Assignment (Fin 1) (binaryDim (Fin 1)))
+    (h : ∀ z ∈ sk.utilityParents, v z = w z) :
+    (0 ≤ Skeleton.normalizeUtility sk.utility d v ∧ Skeleton.normalizeUtility sk.utility d v ≤ 1) ∧
+      Skeleton.normalizeUtility sk.utility d v = Skeleton.normalizeUtility sk.utility d w :=
+  ⟨Skeleton.normalizeUtility_mem_unitInterval sk.utility d v,
+    Skeleton.normalizeUtility_parents sk.utility_parents d v w h⟩
+
+/-- And the skeleton built from a raw utility carries the normalized one. -/
+public theorem oneNode_ofUtility_utility :
+    (Skeleton.ofUtility sk.observed sk.utilityParents sk.utility sk.utility_parents).utility
+      = Skeleton.normalizeUtility sk.utility :=
+  Skeleton.ofUtility_utility sk.observed sk.utilityParents sk.utility sk.utility_parents
 
 end AISafetyAtlas.Examples.Causal.OneNodeClass

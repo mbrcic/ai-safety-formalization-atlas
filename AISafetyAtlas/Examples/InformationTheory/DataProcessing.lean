@@ -421,4 +421,89 @@ public theorem condMutualInfo_eq_half_bit_of_intSum :
     linarith
 
 
+/-! ## The general chain vocabulary, at a concrete Markov chain
+
+`isMarkovChain_comp` already builds a genuine `IsMarkovChain` instance from
+any `X`, `Y` and a function of `Y` — no independent construction needed.
+-/
+
+private theorem bitFst_bitSnd_isMarkovChain :
+    IsMarkovChain bitFst bitSnd bitSnd twoBitsUniform :=
+  isMarkovChain_comp twoBitsUniform Measurable.of_discrete Measurable.of_discrete
+    (g := id) Measurable.of_discrete
+
+/-- **A Markov chain read backwards is a Markov chain**, at the two-bit
+witness. -/
+public theorem bitSnd_bitSnd_bitFst_isMarkovChain :
+    IsMarkovChain bitSnd bitSnd bitFst twoBitsUniform :=
+  IsMarkovChain.symm Measurable.of_discrete Measurable.of_discrete
+    bitFst_bitSnd_isMarkovChain
+
+/-- **The dual data-processing inequality**, at the two-bit witness: the
+source loses no more information than the intermediate variable does. -/
+public theorem bitFst_mutualInfo_le_of_isMarkovChain :
+    I[bitFst : bitSnd ; twoBitsUniform] ≤ I[bitSnd : bitSnd ; twoBitsUniform] :=
+  mutualInfo_le_of_isMarkovChain' twoBitsUniform Measurable.of_discrete
+    Measurable.of_discrete Measurable.of_discrete bitFst_bitSnd_isMarkovChain
+
+/-- The two-bit family, indexed by `Fin 2`, dependent-type form. -/
+@[expose] public def bitsPi : (i : Fin 2) → TwoBits → Fin 2
+  | 0 => bitFst
+  | 1 => bitSnd
+
+private instance : FiniteRange bitParity := ⟨Set.toFinite _⟩
+
+/-- **The finite chain rule at Cover--Thomas's own (dependent) generality**,
+at the two-bit family against the parity. -/
+public theorem mutualInfo_chain_rule_pi_bits :
+    I[bitParity : observationVectorPi bitsPi ; twoBitsUniform] =
+      ∑ i : Fin 2, I[bitParity : bitsPi i | observationPrefixPi bitsPi i ; twoBitsUniform] :=
+  mutualInfo_chain_rule_pi twoBitsUniform bitParity bitsPi Measurable.of_discrete
+    (fun _ => Measurable.of_discrete)
+
+/-! ## Four chain statements that had no instance
+
+The chain vocabulary above builds a genuine `IsMarkovChain` and uses it for the
+two data-processing inequalities. Four further statements about that same
+hypothesis reached no application until 2026-09-21: the factorisation form of
+the definition, in both directions, and the two inequalities that say what a
+chain costs.
+-/
+
+/-- **Conditioning on the middle variable cannot raise the information the ends
+share.** The inequality that makes the middle variable a bottleneck rather than
+a relabelling, at the two-bit chain. -/
+public theorem bitFst_condMutualInfo_le :
+    I[bitFst : bitSnd | bitSnd ; twoBitsUniform] ≤ I[bitFst : bitSnd ; twoBitsUniform] :=
+  condMutualInfo_le_mutualInfo twoBitsUniform Measurable.of_discrete
+    Measurable.of_discrete Measurable.of_discrete bitFst_bitSnd_isMarkovChain
+
+/-- **Equality holds exactly when the chain reverses**, so the data-processing
+inequality is strict unless no information was lost. At this chain the middle
+and last variables coincide, so it reverses and the two informations agree. -/
+public theorem bitFst_mutualInfo_eq_iff :
+    I[bitFst : bitSnd ; twoBitsUniform] = I[bitFst : bitSnd ; twoBitsUniform] ↔
+      IsMarkovChain bitFst bitSnd bitSnd twoBitsUniform :=
+  mutualInfo_eq_iff_isMarkovChain twoBitsUniform Measurable.of_discrete
+    Measurable.of_discrete Measurable.of_discrete bitFst_bitSnd_isMarkovChain
+
+/-- **The chain condition as a factorisation of measures**, which is the form
+(2.118) is usually written in and the form a probabilist would check. Derived
+from the conditional-independence definition at the two-bit chain. -/
+public theorem bitFst_measure_factorizes (x y z : Fin 2) :
+    twoBitsUniform (bitSnd ⁻¹' {y}) *
+        twoBitsUniform (bitFst ⁻¹' {x} ∩ bitSnd ⁻¹' {y} ∩ bitSnd ⁻¹' {z})
+      = twoBitsUniform (bitFst ⁻¹' {x} ∩ bitSnd ⁻¹' {y}) *
+          twoBitsUniform (bitSnd ⁻¹' {y} ∩ bitSnd ⁻¹' {z}) :=
+  measure_factorizes_of_isMarkovChain Measurable.of_discrete
+    bitFst_bitSnd_isMarkovChain x y z
+
+/-- **And the two are the same condition.** The equivalence run in the direction
+that recovers the definition from the factorisation, so a model checked the
+probabilist's way is a chain in this repository's sense too. -/
+public theorem bitFst_isMarkovChain_of_factorizes :
+    IsMarkovChain bitFst bitSnd bitSnd twoBitsUniform :=
+  (isMarkovChain_iff_measure_factorizes_singleton Measurable.of_discrete
+      Measurable.of_discrete Measurable.of_discrete).mpr bitFst_measure_factorizes
+
 end AISafetyAtlas.Examples.InformationTheory

@@ -54,6 +54,25 @@ theorem knowable_reward_empty_state :
   knowable_reward_of_isEmpty_state
 
 /-!
+## Theorem 1, policy form, at a concrete policy and reward
+
+`policy_reward_unidentifiable` and `policy_neg_twin` restate the kernel's
+`exists_planner`/`neg_twin` at the intended `Policy`/`RewardFn` reading. Reuse
+`constPlanner` and `payOne`'s reward for the instance.
+-/
+
+/-- Every policy admits a planner explaining it from `payOne`'s reward. -/
+theorem exists_planner_at_payOne :
+    ∃ p : Planner (RewardFn Bool Bool) (Policy Bool Bool),
+      Explains p payOne.2 (op3 payOne) :=
+  policy_reward_unidentifiable (op3 payOne) payOne.2
+
+/-- The anti-rational twin of `constPlanner` at `payOne`'s reward. -/
+theorem constPlanner_neg_twin :
+    Explains (fun R' => constPlanner (-R')) (-payOne.2) (constPlanner payOne.2) :=
+  policy_neg_twin constPlanner payOne.2
+
+/-!
 ## A composed refinement, using `Determines.trans`
 
 Three observations of the same world, each coarser than the last: the whole pair,
@@ -95,5 +114,24 @@ the decoder is composed, never rebuilt.
 theorem knowable_actionAtFalse_from_pair :
     Knowable (id : Pair Bool Bool → Pair Bool Bool) actionAtFalse :=
   Knowable.mono determines_op3 knowable_actionAtFalse_from_policy
+
+/-! ## Lemma 6, collected, at a policy
+
+`lemma_six` bundles the three compatibility results the source states together.
+Its three components were each witnessed here already; the collected form was
+not applied anywhere, so the bundle itself was unfalsifiable even though its
+parts were not. -/
+
+/-- A policy over two states and two actions that always plays `true`. -/
+def alwaysTrue : Policy Bool Bool := fun _ => true
+
+/-- **Lemma 6, applied.** All three pairs -- the indifferent planner at the zero
+reward, the greedy planner at `rewardOf`, and the anti-rational planner at its
+negation -- are compatible with one concrete policy. -/
+theorem alwaysTrue_lemma_six :
+    Explains (indifferentPlanner alwaysTrue) (0 : RewardFn Bool Bool) alwaysTrue ∧
+    Explains greedyPlanner (rewardOf alwaysTrue) alwaysTrue ∧
+    Explains (negPlanner greedyPlanner) (-rewardOf alwaysTrue) alwaysTrue :=
+  lemma_six alwaysTrue
 
 end AISafetyAtlas.Examples.Preference
