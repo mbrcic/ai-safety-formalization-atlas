@@ -9,10 +9,10 @@ Siblings: [`whiteBox_determines_blackBox`](review-whitebox-determines-blackbox.m
 
 | | |
 |---|---|
-| Verdict | ☐ `REVIEWED` ☐ `STATEMENT_REVIEWED` ☐ rejected — drop the `BRIDGE` grade |
-| Reviewer | |
-| Date | |
-| Note | |
+| Verdict | ☑ `REVIEWED` ☐ `STATEMENT_REVIEWED` ☐ rejected — drop the `BRIDGE` grade |
+| Reviewer | Mario Brcic (mbrcic) |
+| Date | 2026-10-04 |
+| Note | Accepted 2026-10-04: white box is the weights themselves (any static or dynamic analysis); the negative results concern behaviour alone and argue for looking inside. |
 
 ## The statement
 
@@ -26,15 +26,18 @@ public theorem exists_indistinguishable_behaviour {Y : Type*} [Nonempty Y]
 ## What to check
 
 1. **This is what makes a negative answer usable.** An auditor who cannot settle
-   a question from black-box access is handed **the two artifacts that access
-   cannot tell apart** — the obstruction becomes inspectable rather than a bare
-   failure. That is the practitioner value and the reason it is a separate
+   a question from black-box access learns that **two artifacts that access
+   cannot tell apart exist** — the obstruction has a definite shape rather than
+   being a bare failure. That is the practitioner value and the reason it is a separate
    declaration rather than a corollary left in prose.
 2. **It is classical**, via `exists_witness_of_not_knowable`, and `[Nonempty Y]`
    is needed. Non-constructive: it asserts the pair exists, it does not compute
    it. **Do not read it as "the auditor can produce the pair."**
 3. Behavioural agreement is at **every** input (`∀ i`), which is the strongest
    form of indistinguishability and the right one here.
+4. **The property is a function of the weights**, so the two artifacts differ in
+   their weights and white-box access — static or dynamic — tells them apart in
+   principle. The pair is invisible to behaviour alone, not to inspection.
 
 ## Allowed claim
 
@@ -49,6 +52,8 @@ public theorem exists_indistinguishable_behaviour {Y : Type*} [Nonempty Y]
   procedure finds it.
 - **Not** a claim that such a pair exists for any real deployment or any real
   question; conditional on the same unestablished hypothesis as its sibling.
+- **Not** about stochastic outputs. `blackBox` is the deterministic
+  input-output function at every input; a sampled deployment is not this model.
 - **Not** an adversarial claim. Nothing says anyone can *build* the second
   artifact, which would be a capability question.
 

@@ -6,7 +6,7 @@ public import AISafetyAtlas.Oversight.VarietyCheck
 /-!
 # Both corners, in one place
 
-`Oversight.VarietyBound` says coverage and control are independent capacities.
+`Oversight.VarietyBound` says coverage and control are separable capacities.
 Independence is a claim about two directions, and a claim about two directions
 needs two models. Here they are, as small as they go.
 

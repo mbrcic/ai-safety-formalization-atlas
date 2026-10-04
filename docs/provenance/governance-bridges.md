@@ -32,10 +32,10 @@ declarations, each over a named model, each witnessed.
 `Auditability` both existed and **neither imported the other**: one is about
 permission and prohibition with no observations, the other about labels and
 observations with no norms. The module is that edge. It also carries the
-converse — an enforcement that works *is* a detector, recovered from it — so
-detectability is not an accidental prerequisite but the same requirement, and a
-proposal that concedes a violation is undetectable while asserting it will be
-enforced is incoherent rather than optimistic.
+converse — under a complete norm system, an enforcement that works *is* a
+detector, recovered from it — so for complete norms a proposal that concedes a
+violation is undetectable while asserting it will be enforced is incoherent
+rather than optimistic. Detection to enforcement is not proved.
 
 The other five restate results the tree already had, over models it did not: a
 relayed command, an assessment, an attestation record, a free coordinate.

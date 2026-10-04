@@ -1572,7 +1572,7 @@
           "name": "AISafetyAtlas.Compositional.AgentNetwork.symmetry_is_the_shared_cause",
           "location": [
             "AISafetyAtlas/Compositional/AgentNetwork.lean",
-            128
+            129
           ]
         }
       ],

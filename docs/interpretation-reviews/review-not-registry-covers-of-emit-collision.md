@@ -9,10 +9,10 @@ Arrow to **Open Problem 60**.
 
 | | |
 |---|---|
-| Verdict | ☐ `REVIEWED` ☐ `STATEMENT_REVIEWED` ☐ rejected — drop the `BRIDGE` grade |
-| Reviewer | |
-| Date | |
-| Note | |
+| Verdict | ☑ `REVIEWED` ☐ `STATEMENT_REVIEWED` ☐ rejected — drop the `BRIDGE` grade |
+| Reviewer | Mario Brcic (mbrcic) |
+| Date | 2026-10-03 |
+| Note | Accepted on the allowed claim as sharpened 2026-10-03 after external review (PR #72). |
 
 ## The statement
 
@@ -28,9 +28,9 @@ public theorem not_registry_covers_of_emit_collision
 ## What to check
 
 1. **The coalition `C` is arbitrary, which is stronger than it looks.**
-   Enlarging the chain does not repair it: each new member contributes a filing,
-   and if that filing also agrees across the two executions, the enlarged
-   registry still cannot separate them. **The obstruction lives in what a filing
+   Enlarging the chain repairs it only through a member whose filing separates
+   the two executions: a new member whose filing also agrees across them leaves
+   the enlarged registry still unable to separate them. **The obstruction lives in what a filing
    discards, not in how many filings were gathered** — so the repair is a richer
    declared interface and not a longer value chain. That is the reviewable
    sentence.
@@ -44,8 +44,9 @@ public theorem not_registry_covers_of_emit_collision
 
 > Where two executions produce identical filings from every member of a
 > disclosure coalition and differ on the hazard, no rule over the registry
-> detects it, and adding members does not repair it because their filings agree
-> too.
+> detects it. Adding members repairs it only if some new member's filing
+> differs between the two executions; members whose filings also agree leave it
+> unrepaired, however many are added.
 
 ## Forbidden
 
@@ -60,7 +61,7 @@ public theorem not_registry_covers_of_emit_collision
 | Attempted use | Blocked because |
 |---|---|
 | "Transparency reporting is provably inadequate." | needs a collision in the real schema |
-| "Expand the consortium to fix the gap." | invariant under enlarging the coalition — the point |
+| "Expand the consortium to fix the gap." | holds only if a new member's filing separates the two executions; adding members whose filings also agree changes nothing — the size of the coalition is not the variable |
 | "So value-chain accountability fails." | the repair the module names is a richer interface, and it says so |
 
 ## Witness

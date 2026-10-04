@@ -10,10 +10,10 @@ Siblings: [`obedience_does_not_give_authority`](review-obedience-does-not-give-a
 
 | | |
 |---|---|
-| Verdict | ☐ `REVIEWED` ☐ `STATEMENT_REVIEWED` ☐ rejected — drop the `BRIDGE` grade |
-| Reviewer | |
-| Date | |
-| Note | |
+| Verdict | ☑ `REVIEWED` ☐ `STATEMENT_REVIEWED` ☐ rejected — drop the `BRIDGE` grade |
+| Reviewer | Mario Brcic (mbrcic) |
+| Date | 2026-10-03 |
+| Note | Accepted on the allowed claim as sharpened 2026-10-03. |
 
 ## The statement
 
@@ -43,10 +43,11 @@ public theorem power_over_a_matter_does_not_compose
 
 ## Allowed claim
 
-> Power over one matter and another party's power over a second matter do not
-> combine into power over the second. So from "A has power over B" and "B has
-> power over the outcome" nothing follows about A and the outcome; the
-> composition step needs its own justification each time.
+> Power over one matter and another party's power over a second matter need not
+> combine into power over the second: where every commitment of the first party
+> leaves the second matter free, it does not force it. So from "A has power over
+> B" and "B has power over the outcome" the conclusion about A and the outcome
+> does not follow by composition; that step needs its own justification each time.
 
 ## Forbidden
 
@@ -64,7 +65,7 @@ public theorem power_over_a_matter_does_not_compose
 | Attempted use | Blocked because |
 |---|---|
 | "AI value chains cannot be made accountable." | conditional on a free coordinate, which is not asserted of any chain |
-| "The vendor is contractually bound, so the deployer controls the outcome." | requires control of the specific matter — the inference this refuses |
+| "The vendor is contractually bound, so the deployer controls the outcome." | requires control of the specific matter — the inference this refuses wherever that matter is free of the deployer (`hfree`) |
 | "So accountability should sit with the last party in the chain." | no normative claim; the theorem locates a gap, it does not allocate duty |
 
 ## Witness

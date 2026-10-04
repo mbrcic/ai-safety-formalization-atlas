@@ -9,10 +9,10 @@ Arrow to Reuel, Bucknall et al., TMLR 04/2025, **Open Problem 60**.
 
 | | |
 |---|---|
-| Verdict | ☐ `REVIEWED` ☐ `STATEMENT_REVIEWED` ☐ rejected — drop the `BRIDGE` grade |
-| Reviewer | |
-| Date | |
-| Note | |
+| Verdict | ☑ `REVIEWED` ☐ `STATEMENT_REVIEWED` ☐ rejected — drop the `BRIDGE` grade |
+| Reviewer | Mario Brcic (mbrcic) |
+| Date | 2026-10-03 |
+| Note | Accepted on the allowed claim as sharpened 2026-10-03. |
 
 ## The statement
 
@@ -36,8 +36,10 @@ coalition and every hazard.
    value-chain disclosure regime.
 2. **`emit` is a function of private evidence.** No fabrication, no strategy, no
    deception. A party that files falsely is not modelled at all.
-3. **This is why filing is worth requiring**, and it is the direction most likely
-   to be skipped when the module is cited for its obstruction.
+3. **This is the upper-bound direction**: filings never settle more than the
+   evidence behind them. It is the direction most likely to be skipped when the
+   module is cited for its obstruction; it says nothing about whether filing is
+   worth requiring.
 
 ## Allowed claim
 
@@ -62,7 +64,7 @@ coalition and every hazard.
 |---|---|
 | "So regulators should demand raw evidence." | the theorem compares informativeness, not permissibility or cost |
 | "This covers parties lying on their filings." | `emit` is a function of private evidence; deception is outside the model |
-| "Registries are redundant." | the opposite: it is the statement that makes filing worth requiring |
+| "Registries are redundant." | nothing here compares a registry with no registry, or prices filing against pooling; worth and redundancy are both outside the statement |
 
 ## Witness
 

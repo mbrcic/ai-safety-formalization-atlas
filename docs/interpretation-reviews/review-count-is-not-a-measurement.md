@@ -14,10 +14,10 @@ Gipiškis, *Open Problems in AI Incident Governance*, arXiv:2607.05163v1, 6 July
 
 | | |
 |---|---|
-| Verdict | ☐ `REVIEWED` ☐ `STATEMENT_REVIEWED` ☐ rejected — drop the `BRIDGE` grade |
-| Reviewer | |
-| Date | |
-| Note | |
+| Verdict | ☑ `REVIEWED` ☐ `STATEMENT_REVIEWED` ☐ rejected — drop the `BRIDGE` grade |
+| Reviewer | Mario Brcic (mbrcic) |
+| Date | 2026-10-03 |
+| Note | Accepted on the allowed claim as sharpened 2026-10-03 after external review (PR #72); no claim that any real form repairs a collision. |
 
 ## The statement
 
@@ -36,8 +36,9 @@ honest or complete, and nothing relates it to `count`.
 
 1. **The quantifier over rules is the content.** Given a filing collision, *every*
    counting rule scores the two deployments identically while their true counts
-   differ. So no methodology is the repair — which is what makes the conclusion
-   about the **schema** rather than about anyone's counting practice.
+   differ. So no methodology is the repair. That points at what is recorded
+   rather than at anyone's counting practice; it does not show that any record
+   suffices.
 2. **The proof is `congrArg`.** That is honest and it is thin: the mathematical
    work is in `count_not_determined_of_collision` (graded `WRAPPER`, since it is
    `not_knowable_of_collision` applied), and what this declaration adds is the
@@ -54,13 +55,18 @@ honest or complete, and nothing relates it to `count`.
 ## Allowed claim
 
 > Where two deployments file identically and differ in how many incidents
-> actually occurred, the count a regime publishes is a function of its filing
-> schema and not of the incidents. Two deployments can be identical in everything
-> the regime records and differ in what happened, so a published count cannot be
-> compared across regimes, across time after a schema change, or against a target
-> expressed in incidents. Where the filing does determine the count, a counting
-> rule exists and the number means what it says — so the repair is in the schema,
-> never in the counting rule.
+> actually occurred, every counting rule gives them the same published number,
+> so that number does not determine how many incidents occurred. Comparing
+> published numbers with each other or with a target is always possible; what
+> such a comparison does not show is a fact about incidents. A published count
+> that meets a target expressed in incidents does not show that the incidents
+> meet it, and a difference between counts across regimes, or across a schema
+> change, may reflect the schemas rather than the incidents. No change of
+> counting rule removes such a collision. Only a form that records more could,
+> and only if what it records determines the true count — which presupposes an
+> answer to what counts as one incident, and that filings are complete and
+> honest. Neither is modelled here, and nothing here says such a form exists for
+> any real regime.
 
 ## Forbidden
 
@@ -80,7 +86,7 @@ honest or complete, and nothing relates it to `count`.
 | Attempted use | Blocked because |
 |---|---|
 | "Published AI incident counts are meaningless." | conditional on a collision in that schema, which is not established for any regime |
-| "So harmonise the counting methodology across jurisdictions." | the quantifier is over every rule — harmonising the rule changes nothing; harmonising the *schema* is the move |
+| "So harmonise the counting methodology across jurisdictions." | the quantifier is over every rule — under a collision, harmonising the rule changes nothing; harmonising what is recorded is the only candidate, and nothing here shows it succeeds |
 | "This shows incidents are under-counted." | direction-free: the collision says the count is undetermined, not that it is low |
 | "Firms will game the count." | no incentives, no strategy and no filer behaviour are modelled |
 

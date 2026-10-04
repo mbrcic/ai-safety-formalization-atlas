@@ -41,9 +41,10 @@ coalition without hypotheses.
 `not_registry_covers_of_emit_collision` is the other half and is Open Problem
 60's obstruction. If two executions produce identical filings from every member
 while differing on the hazard, no registry over that coalition settles it —
-**however many actors the chain contains**. Enrolling more filers does not help,
-because the obstruction is in what a filing discards, not in how many were
-collected.
+**however many actors the chain contains**. Enrolling more filers helps only if
+some new filing separates the two executions; filers whose filings also agree
+leave it unrepaired, because the obstruction is in what a filing discards, not
+in how many were collected.
 
 So *end-to-end* is the wrong axis when the coverage failure is per-actor: the
 repair is a richer declared interface, not a longer chain.
@@ -109,8 +110,8 @@ declared interface rather than about the hazard.
 
 Whatever a set of filings settles, the private evidence those filings were
 computed from settles too, by composing the registry's decision rule with
-`emit`. No hypothesis: this holds at every coalition and every hazard, and it is
-why filing is worth requiring at all.
+`emit`. No hypothesis: this holds at every coalition and every hazard. It bounds
+a registry from above; it says nothing about whether filing is worth requiring.
 -/
 public theorem consortium_covers_of_registry_covers
     {C : Finset A.Principal} {h : Hazard A}
@@ -124,9 +125,9 @@ public theorem consortium_covers_of_registry_covers
 identically, and which differ on the hazard, refute registry coverage outright.
 
 The coalition is arbitrary, so this says something stronger than it looks:
-enlarging the chain does not repair it. Each new member contributes a filing,
-and if that filing agrees across the two executions as well, the enlarged
-registry still cannot separate them. The obstruction lives in what a filing
+enlarging the chain repairs it only through a member whose filing separates the
+two executions. A new member whose filing agrees across them as well leaves the
+enlarged registry still unable to separate them, however many are added. The obstruction lives in what a filing
 discards, not in how many filings were gathered — so the repair is a richer
 declared interface and not a longer value chain.
 -/

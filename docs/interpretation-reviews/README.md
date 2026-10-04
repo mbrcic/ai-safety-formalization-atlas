@@ -6,7 +6,7 @@ an AI-safety reading over an AI-system model. **Layer 3 needs human review**, so
 every one of these declarations needs a signature before its reading may be
 cited.
 
-**37 bridges. 3 signed. 34 open.**
+**37 bridges. All signed: 30 `REVIEWED`, 7 `STATEMENT_REVIEWED`, none open** (2026-10-04).
 
 ## One bridge, one label
 
@@ -73,40 +73,40 @@ stating a reading over an AI-system model. `BY-007` now carries no bridge.
 
 | Bridge | Row | Status | |
 |---|---|---|---|
-| `Control.OversightBudget.oversight_reduction_le_budget` | `BY-005` | unsigned | [review](review-oversight-reduction-le-budget.md) |
-| `Verification.Containment.harming_undecidable` | `BY-025` | unsigned | [review](review-harming-undecidable.md) |
-| `Compositional.AgentNetwork.symmetry_is_the_shared_cause` | `BY-043` | unsigned | [review](review-symmetry-is-the-shared-cause.md) |
-| `Knowledge.Access.whiteBox_determines_blackBox` | `LAND-ACCESS-ORDER-001` | unsigned | [review](review-whitebox-determines-blackbox.md) |
-| `Knowledge.Access.no_blackBox_methodology` | `LAND-ACCESS-ORDER-001` | unsigned | [review](review-no-blackbox-methodology.md) |
-| `Knowledge.Access.exists_indistinguishable_behaviour` | `LAND-ACCESS-ORDER-001` | unsigned | [review](review-exists-indistinguishable-behaviour.md) |
-| `Knowledge.Audit.audit_certifies_audited_not_deployed` | `LAND-AUDIT-LAG-001` | unsigned | [review](review-audit-certifies-audited-not-deployed.md) |
-| `Knowledge.Audit.later_audit_does_not_close_the_gap` | `LAND-AUDIT-LAG-001` | unsigned | [review](review-later-audit-does-not-close-the-gap.md) |
-| `Oversight.JointObservation.consortium_covers_of_registry_covers` | `LAND-AUDIT-REGISTRY-001` | unsigned | [review](review-consortium-covers-of-registry-covers.md) |
-| `Oversight.JointObservation.not_registry_covers_of_emit_collision` | `LAND-AUDIT-REGISTRY-001` | unsigned | [review](review-not-registry-covers-of-emit-collision.md) |
-| `Compositional.Hyperproperties.Evaluation.traceProperty_knowable_of_score_decides` | `LAND-EVAL-BLINDSPOT-001` | unsigned | [review](review-traceproperty-knowable-of-score-decides.md) |
-| `Compositional.Hyperproperties.Evaluation.sampling_misses_subsingleton` | `LAND-EVAL-BLINDSPOT-001` | unsigned | [review](review-sampling-misses-subsingleton.md) |
-| `Goodhart.RegulatoryTarget.certified_systems_were_never_examined` | `LAND-GOODHART-REGTARGET-001` | unsigned | [review](review-certified-systems-were-never-examined.md) |
-| `Goodhart.RegulatoryTarget.risk_unconstrained_on_certified` | `LAND-GOODHART-REGTARGET-001` | unsigned | [review](review-risk-unconstrained-on-certified.md) |
-| `Goodhart.RegulatoryTarget.raising_the_bar_does_not_help` | `LAND-GOODHART-REGTARGET-001` | unsigned | [review](review-raising-the-bar-does-not-help.md) |
-| `Knowledge.IncidentCount.count_is_not_a_measurement` | `LAND-INCIDENT-COUNT-001` | unsigned | [review](review-count-is-not-a-measurement.md) |
-| `Knowledge.not_uniformlyActionable_iff_exists_unservable` | `LAND-KNOW-UNIFORM-001` | unsigned | [review](review-not-uniformlyactionable-iff-exists-unservable.md) |
-| `Oversight.forces_of_constant_effect` | `LAND-OVERSIGHT-VARIETY-001` | unsigned | [review](review-forces-of-constant-effect.md) |
-| `Oversight.forces_of_constant_effect_of_not_knowable` | `LAND-OVERSIGHT-VARIETY-001` | unsigned | [review](review-forces-of-constant-effect-of-not-knowable.md) |
-| `Sovereignty.CapabilityAssessment.no_procedure_on_output_recovers_fallback` | `LAND-SOV-ASSESSMENT-001` | unsigned | [review](review-no-procedure-on-output-recovers-fallback.md) |
-| `Sovereignty.CapabilityAssessment.protocols_are_incomparable` | `LAND-SOV-ASSESSMENT-001` | unsigned | [review](review-protocols-are-incomparable.md) |
-| `Sovereignty.CapabilityAssessment.withdrawal_settles_and_no_output_procedure_does` | `LAND-SOV-ASSESSMENT-001` | unsigned | [review](review-withdrawal-settles-and-no-output-procedure-does.md) |
-| `Sovereignty.ShutdownChannel.obedience_does_not_give_authority` | `LAND-SOV-AUTH-001` | unsigned | [review](review-obedience-does-not-give-authority.md) |
-| `Sovereignty.Attestation.attestation_is_not_the_claim` | `LAND-SOV-AUTH-001` | unsigned | [review](review-attestation-is-not-the-claim.md) |
-| `Sovereignty.Attestation.properties_are_independent` | `LAND-SOV-AUTH-001` | unsigned | [review](review-properties-are-independent.md) |
-| `Sovereignty.DelegationChain.power_over_a_matter_does_not_compose` | `LAND-SOV-AUTH-001` | unsigned | [review](review-power-over-a-matter-does-not-compose.md) |
-| `Sovereignty.Conformity.passes_every_check_and_not_operable` | `LAND-SOV-CATALOGUE-001` | unsigned | [review](review-passes-every-check-and-not-operable.md) |
-| `Sovereignty.AmendmentLog.unbroken_chain_is_not_a_constraint` | `LAND-SOV-CONST-001` | unsigned | [review](review-unbroken-chain-is-not-a-constraint.md) |
-| `Sovereignty.Enforcement.undetectable_norm_is_unenforceable` | `LAND-SOV-DEONTIC-001` | unsigned | [review](review-undetectable-norm-is-unenforceable.md) |
-| `Sovereignty.Refusal.safety_suite_admits_a_refusal` | `LAND-SOV-SERVICE-001` | unsigned | [review](review-safety-suite-admits-a-refusal.md) |
-| `Sovereignty.gameFormAcyclic_iff` | `LAND-SOV-STABILITY-001` | unsigned | [review](review-gameformacyclic-iff.md) |
-| `Verification.FullAccess.no_fullAccessVerifier_of_extensional` | `LAND-VERIF-FULLACCESS-001` | unsigned | [review](review-no-fullaccessverifier-of-extensional.md) |
-| `Verification.FullAccess.fullAccessVerifier_exactArtifact` | `LAND-VERIF-FULLACCESS-001` | unsigned | [review](review-fullaccessverifier-exactartifact.md) |
-| `Verification.FullAccess.access_is_not_what_separates_them` | `LAND-VERIF-FULLACCESS-001` | unsigned | [review](review-access-is-not-what-separates-them.md) |
+| `Control.OversightBudget.oversight_reduction_le_budget` | `BY-005` | `REVIEWED` | [review](review-oversight-reduction-le-budget.md) |
+| `Verification.Containment.harming_undecidable` | `BY-025` | `REVIEWED` | [review](review-harming-undecidable.md) |
+| `Compositional.AgentNetwork.symmetry_is_the_shared_cause` | `BY-043` | `STATEMENT_REVIEWED` | [review](review-symmetry-is-the-shared-cause.md) |
+| `Knowledge.Access.whiteBox_determines_blackBox` | `LAND-ACCESS-ORDER-001` | `REVIEWED` | [review](review-whitebox-determines-blackbox.md) |
+| `Knowledge.Access.no_blackBox_methodology` | `LAND-ACCESS-ORDER-001` | `REVIEWED` | [review](review-no-blackbox-methodology.md) |
+| `Knowledge.Access.exists_indistinguishable_behaviour` | `LAND-ACCESS-ORDER-001` | `REVIEWED` | [review](review-exists-indistinguishable-behaviour.md) |
+| `Knowledge.Audit.audit_certifies_audited_not_deployed` | `LAND-AUDIT-LAG-001` | `REVIEWED` | [review](review-audit-certifies-audited-not-deployed.md) |
+| `Knowledge.Audit.later_audit_does_not_close_the_gap` | `LAND-AUDIT-LAG-001` | `STATEMENT_REVIEWED` | [review](review-later-audit-does-not-close-the-gap.md) |
+| `Oversight.JointObservation.consortium_covers_of_registry_covers` | `LAND-AUDIT-REGISTRY-001` | `REVIEWED` | [review](review-consortium-covers-of-registry-covers.md) |
+| `Oversight.JointObservation.not_registry_covers_of_emit_collision` | `LAND-AUDIT-REGISTRY-001` | `REVIEWED` | [review](review-not-registry-covers-of-emit-collision.md) |
+| `Compositional.Hyperproperties.Evaluation.traceProperty_knowable_of_score_decides` | `LAND-EVAL-BLINDSPOT-001` | `REVIEWED` | [review](review-traceproperty-knowable-of-score-decides.md) |
+| `Compositional.Hyperproperties.Evaluation.sampling_misses_subsingleton` | `LAND-EVAL-BLINDSPOT-001` | `REVIEWED` | [review](review-sampling-misses-subsingleton.md) |
+| `Goodhart.RegulatoryTarget.certified_systems_were_never_examined` | `LAND-GOODHART-REGTARGET-001` | `STATEMENT_REVIEWED` | [review](review-certified-systems-were-never-examined.md) |
+| `Goodhart.RegulatoryTarget.risk_unconstrained_on_certified` | `LAND-GOODHART-REGTARGET-001` | `REVIEWED` | [review](review-risk-unconstrained-on-certified.md) |
+| `Goodhart.RegulatoryTarget.raising_the_bar_does_not_help` | `LAND-GOODHART-REGTARGET-001` | `STATEMENT_REVIEWED` | [review](review-raising-the-bar-does-not-help.md) |
+| `Knowledge.IncidentCount.count_is_not_a_measurement` | `LAND-INCIDENT-COUNT-001` | `REVIEWED` | [review](review-count-is-not-a-measurement.md) |
+| `Knowledge.not_uniformlyActionable_iff_exists_unservable` | `LAND-KNOW-UNIFORM-001` | `REVIEWED` | [review](review-not-uniformlyactionable-iff-exists-unservable.md) |
+| `Oversight.forces_of_constant_effect` | `LAND-OVERSIGHT-VARIETY-001` | `REVIEWED` | [review](review-forces-of-constant-effect.md) |
+| `Oversight.forces_of_constant_effect_of_not_knowable` | `LAND-OVERSIGHT-VARIETY-001` | `STATEMENT_REVIEWED` | [review](review-forces-of-constant-effect-of-not-knowable.md) |
+| `Sovereignty.CapabilityAssessment.no_procedure_on_output_recovers_fallback` | `LAND-SOV-ASSESSMENT-001` | `REVIEWED` | [review](review-no-procedure-on-output-recovers-fallback.md) |
+| `Sovereignty.CapabilityAssessment.protocols_are_incomparable` | `LAND-SOV-ASSESSMENT-001` | `REVIEWED` | [review](review-protocols-are-incomparable.md) |
+| `Sovereignty.CapabilityAssessment.withdrawal_settles_and_no_output_procedure_does` | `LAND-SOV-ASSESSMENT-001` | `REVIEWED` | [review](review-withdrawal-settles-and-no-output-procedure-does.md) |
+| `Sovereignty.ShutdownChannel.obedience_does_not_give_authority` | `LAND-SOV-AUTH-001` | `STATEMENT_REVIEWED` | [review](review-obedience-does-not-give-authority.md) |
+| `Sovereignty.Attestation.attestation_is_not_the_claim` | `LAND-SOV-AUTH-001` | `REVIEWED` | [review](review-attestation-is-not-the-claim.md) |
+| `Sovereignty.Attestation.properties_are_independent` | `LAND-SOV-AUTH-001` | `REVIEWED` | [review](review-properties-are-independent.md) |
+| `Sovereignty.DelegationChain.power_over_a_matter_does_not_compose` | `LAND-SOV-AUTH-001` | `REVIEWED` | [review](review-power-over-a-matter-does-not-compose.md) |
+| `Sovereignty.Conformity.passes_every_check_and_not_operable` | `LAND-SOV-CATALOGUE-001` | `REVIEWED` | [review](review-passes-every-check-and-not-operable.md) |
+| `Sovereignty.AmendmentLog.unbroken_chain_is_not_a_constraint` | `LAND-SOV-CONST-001` | `REVIEWED` | [review](review-unbroken-chain-is-not-a-constraint.md) |
+| `Sovereignty.Enforcement.undetectable_norm_is_unenforceable` | `LAND-SOV-DEONTIC-001` | `REVIEWED` | [review](review-undetectable-norm-is-unenforceable.md) |
+| `Sovereignty.Refusal.safety_suite_admits_a_refusal` | `LAND-SOV-SERVICE-001` | `REVIEWED` | [review](review-safety-suite-admits-a-refusal.md) |
+| `Sovereignty.gameFormAcyclic_iff` | `LAND-SOV-STABILITY-001` | `STATEMENT_REVIEWED` | [review](review-gameformacyclic-iff.md) |
+| `Verification.FullAccess.no_fullAccessVerifier_of_extensional` | `LAND-VERIF-FULLACCESS-001` | `REVIEWED` | [review](review-no-fullaccessverifier-of-extensional.md) |
+| `Verification.FullAccess.fullAccessVerifier_exactArtifact` | `LAND-VERIF-FULLACCESS-001` | `REVIEWED` | [review](review-fullaccessverifier-exactartifact.md) |
+| `Verification.FullAccess.access_is_not_what_separates_them` | `LAND-VERIF-FULLACCESS-001` | `REVIEWED` | [review](review-access-is-not-what-separates-them.md) |
 | `Oversight.not_forces_of_card_lt` | `BY-004` | **`REVIEWED` 2026-08-17** | [package](review-oversight-varietybound.md) |
 | `Verification.rice` | `BY-012` | **`REVIEWED` 2026-07-19** | [package](review-by-012-agentbehavior.md) |
 | `Verification.Robot.action_safety_unverifiable` | `BY-033` | **`REVIEWED` 2026-07-19** | [package](ct3-robot-review-package.md) |

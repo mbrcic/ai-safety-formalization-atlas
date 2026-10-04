@@ -34,8 +34,9 @@ than derived, because whether a real chain leaves a coordinate free is precisely
 the contestable question.
 
 `power_over_a_matter_does_not_compose` is the reading: power over one matter and
-another party's power over a second matter do not combine into power over the
-second. Power-over is relative to a matter; dropping the matter is what makes the
+another party's power over a second matter need not combine into power over the
+second — where every commitment of the first party leaves the second matter free,
+it does not force it. Power-over is relative to a matter; dropping the matter is what makes the
 composition look valid.
 
 `AISafetyAtlas.Examples.Sovereignty.Authority`'s `split` is the witness that the

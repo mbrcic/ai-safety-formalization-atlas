@@ -10,10 +10,10 @@ Context: the [`BY-004` package](review-oversight-varietybound.md), signed
 
 | | |
 |---|---|
-| Verdict | ☐ `REVIEWED` ☐ `STATEMENT_REVIEWED` ☐ rejected — drop the `BRIDGE` grade |
-| Reviewer | |
-| Date | |
-| Note | |
+| Verdict | ☐ `REVIEWED` ☑ `STATEMENT_REVIEWED` ☐ rejected — drop the `BRIDGE` grade |
+| Reviewer | Mario Brcic (mbrcic) |
+| Date | 2026-10-04 |
+| Note | Statement accepted 2026-10-04. Not separately vouched for: a restatement of forces_of_constant_effect with an unused hypothesis. |
 
 ## The statement
 
@@ -35,21 +35,22 @@ public theorem forces_of_constant_effect_of_not_knowable {effect : Sit → Act �
    earns a `BRIDGE` grade** — the argument for it is that the statement is the
    claim (*control survives total unknowability*) and a reader cannot see that in
    the shorter theorem; the argument against is that it proves nothing new.
-2. **The unknowability is total, not partial.** `¬ Knowable observe hazard` means
-   no decoder at all recovers the hazard from what the overseer reads. The
-   theorem holds at that extreme, which is what makes it a boundary rather than a
-   trade-off.
+2. **`¬ Knowable` is the failure of exact recovery, not total ignorance.** It means
+   no decoder recovers the hazard exactly from what the overseer reads. Since
+   `observe` is arbitrary, the theorem also holds at a constant observation —
+   the extreme — which is what makes it a boundary rather than a trade-off.
 3. It is the exact counterpart of `not_forces_of_card_lt`, which holds at
    **perfect** observation. The pair is the claim; each half alone is misleading.
 
 ## Allowed claim
 
-> An overseer can hold the outcome to a target even when its observations
-> determine nothing whatever about the hazard, provided some available
+> An overseer can hold the outcome to a target even when its observations do not
+> determine the hazard — even when it observes nothing at all — provided some available
 > intervention produces that outcome in every situation. Together with the
-> counting bound — which bites at perfect observation — this makes coverage and
-> control independent capacities in both directions: neither substitutes for the
-> other.
+> counting bound — which, with fewer interventions than situations and no
+> intervention merging two situations, bites even at perfect observation — this
+> shows coverage and control are separable in both directions: neither guarantees
+> the other.
 
 ## Forbidden
 

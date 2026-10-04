@@ -10,10 +10,10 @@ Arrow to **Open Problem 37**.
 
 | | |
 |---|---|
-| Verdict | ☐ `REVIEWED` ☐ `STATEMENT_REVIEWED` ☐ rejected — drop the `BRIDGE` grade |
-| Reviewer | |
-| Date | |
-| Note | |
+| Verdict | ☑ `REVIEWED` ☐ `STATEMENT_REVIEWED` ☐ rejected — drop the `BRIDGE` grade |
+| Reviewer | Mario Brcic (mbrcic) |
+| Date | 2026-10-04 |
+| Note | Accepted 2026-10-04: white box is the weights themselves (any static or dynamic analysis); the negative results concern behaviour alone and argue for looking inside. |
 
 ## The statement
 
@@ -42,14 +42,19 @@ input).
    for a different use. So this composes two steps and proves no new law; the
    content is that the three levels form a **chain** rather than two unrelated
    comparisons.
+4. **White box is the weights themselves.** Running the model, probing
+   activations, contrastive inputs and ablations are all functions of the
+   weights, so all of them are included in that level; it is the most an
+   investigator can have. Black box is the output at every input, which already
+   contains anything adaptive querying could reveal.
 
 ## Allowed claim
 
-> Forms of model access sit in an informativeness order, and what an
-> investigation can establish is monotone along it: anything establishable from a
-> weaker access level is establishable from a stronger one. Inside this model the
-> artifact determines the per-input scores, which determine the input-output
-> behaviour.
+> Under deterministic decoding (`readOut_scores`), the three modelled access
+> levels sit in an informativeness order, and what they determine is monotone
+> along it: any property with a decoder from a weaker level has one from a
+> stronger one. Inside this model the artifact determines the per-input scores,
+> which determine the input-output behaviour.
 
 ## Forbidden
 

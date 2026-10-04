@@ -12,10 +12,10 @@ are its halves.
 
 | | |
 |---|---|
-| Verdict | ☐ `REVIEWED` ☐ `STATEMENT_REVIEWED` ☐ rejected — drop the `BRIDGE` grade |
-| Reviewer | |
-| Date | |
-| Note | |
+| Verdict | ☑ `REVIEWED` ☐ `STATEMENT_REVIEWED` ☐ rejected — drop the `BRIDGE` grade |
+| Reviewer | Mario Brcic (mbrcic) |
+| Date | 2026-10-04 |
+| Note | Accepted 2026-10-04 on the allowed claim as sharpened. |
 
 ## The statement
 
@@ -45,9 +45,10 @@ public theorem access_is_not_what_separates_them
 
 ## Allowed claim
 
-> With access held fixed at the maximum, a verifier provably does not exist for
-> nontrivial properties depending only on the computed function, and provably
-> does exist for a property of the artifact itself. So framing a verification
+> With access held fixed at the maximum, a total, computable, always-correct
+> verifier provably does not exist for nontrivial properties depending only on
+> the computed function, and provably does exist for a property of the artifact
+> itself. So framing a verification
 > question as *"if only we had full access"* mislocates the obstruction for the
 > behaviour-only class, and says nothing at all about the rest.
 

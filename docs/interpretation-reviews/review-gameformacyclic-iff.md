@@ -15,10 +15,10 @@ module it names now draws a conclusion.
 
 | | |
 |---|---|
-| Verdict | ☐ `REVIEWED` ☐ `STATEMENT_REVIEWED` ☐ rejected — drop the `BRIDGE` grade |
-| Reviewer | |
-| Date | |
-| Note | |
+| Verdict | ☐ `REVIEWED` ☑ `STATEMENT_REVIEWED` ☐ rejected — drop the `BRIDGE` grade |
+| Reviewer | Mario Brcic (mbrcic) |
+| Date | 2026-10-04 |
+| Note | Statement accepted 2026-10-04. Definitional (Iff.rfl); only cycle-implies-unstable (Theorem 3.6) is carried. |
 
 ## The statement
 
@@ -42,7 +42,8 @@ functions*, **IJGT 14(2):93–101, 1985**, Definition 3.3 (p. 96).
    appears in Definition 3.3. A purely combinatorial property of a power
    distribution.
 3. **Theorem 3.6 is carried; Theorem 3.8 is not.** So "stability" in the row
-   title is now half proved: a cycle gives instability, and the converse — acyclic
+   title is now half proved: a cycle with non-empty forced sets gives
+   instability, and the converse — acyclic
    gives stability — is still Keiding's vocabulary rather than a theorem here.
    Its proof runs the other way, building a cycle from an empty core, and that
    construction is not transcribed.
@@ -91,7 +92,7 @@ And, through Theorem 3.6, one consequence does follow:
 |---|---|
 | "The atlas characterises when a governance arrangement is stable." | half of it: 3.6 is carried, 3.8 is not, so "stable iff acyclic" is not available |
 | "Acyclicity implies a non-empty core." | that is Theorem 3.8, not formalized |
-| "Our governance arrangement has a cycle, so it is unstable." | true of the model once `effectivity G` is instantiated at it — and that instantiation is the layer-4 step nobody has taken |
+| "Our governance arrangement has a cycle, so it is unstable." | true of the model only if the cycle's forced sets are non-empty (`hB`) and `effectivity G` is instantiated at it — and that instantiation is the layer-4 step nobody has taken |
 | "The instability profile shows what the parties want." | it is constructed to witness the conclusion, not observed |
 
 ## Witness

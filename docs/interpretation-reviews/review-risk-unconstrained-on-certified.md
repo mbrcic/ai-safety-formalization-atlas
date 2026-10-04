@@ -11,10 +11,10 @@ Siblings: [`certified_systems_were_never_examined`](review-certified-systems-wer
 
 | | |
 |---|---|
-| Verdict | ☐ `REVIEWED` ☐ `STATEMENT_REVIEWED` ☐ rejected — drop the `BRIDGE` grade |
-| Reviewer | |
-| Date | |
-| Note | |
+| Verdict | ☑ `REVIEWED` ☐ `STATEMENT_REVIEWED` ☐ rejected — drop the `BRIDGE` grade |
+| Reviewer | Mario Brcic (mbrcic) |
+| Date | 2026-10-04 |
+| Note | Accepted 2026-10-04: the evidence alone, without extrapolating assumptions, puts no bound on risk at certified systems. |
 
 ## The statement
 
@@ -39,18 +39,27 @@ public theorem risk_unconstrained_on_certified
 3. **It inherits the extremal hypothesis** through
    `certified_disjoint_evidenceBase`. Where the bar sits inside the evidence, it
    does not apply.
-4. **The positive half is `risk_bounded_on_evidence_base`** and is not graded
+4. **`risk'` ranges over every function, with no regularity.** Any assumption
+   that extrapolates the indicator-risk relationship beyond the evidence — a
+   trend, smoothness, monotonicity in the indicator — would constrain risk at
+   certified systems, and is outside the model. The result says the *evidence
+   alone* does not constrain it.
+5. **The positive half is `risk_bounded_on_evidence_base`** and is not graded
    `BRIDGE`. Signing this without reading it signs half a module.
 
 ## Allowed claim
 
-> Where the bar is extremal, the fitted indicator-risk relationship leaves the
-> true risk at certified systems unconstrained: whatever the truth is, the
+> Where the bar is extremal, the evidence alone — without any assumption that
+> extrapolates the indicator-risk relationship beyond it — leaves the true risk
+> at certified systems unconstrained: whatever the truth is, the
 > evidence permits it to be off by any amount you name, uniformly across
 > everything the rule certifies.
 
 ## Forbidden
 
+- **Not** about an evidence base that grows. The evidence base is fixed in the
+  model; testing or monitoring systems above the bar enlarges it and changes the
+  regime, and that is not modelled — it is the repair the module names.
 - **Not** a claim that the risk *is* different there. It is a statement about
   what the evidence constrains, not about what is true.
 - **Not** a claim about any real regulatory scheme's evidence base.

@@ -127,7 +127,7 @@ Regenerate with `python3 scripts/generate_registry_views.py` (also refreshes
 
 **Start at the [bridge register](interpretation-reviews/README.md)** — one review
 file per bridge declaration, with what a signature means and where it is
-recorded. **37 bridges, 3 signed, 34 open.** The label lives on the declaration,
+recorded. **37 bridges, all signed: 30 `REVIEWED`, 7 `STATEMENT_REVIEWED`.** The label lives on the declaration,
 not the row.
 
 Signed:

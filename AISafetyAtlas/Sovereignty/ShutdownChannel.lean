@@ -107,12 +107,15 @@ public theorem principal_cannot_force {c : Cmd} (hlive : R.effect c ≠ R.idle) 
   exact hlive ((h false).symm.trans (run_withheld R c))
 
 /--
-**Both at once: behavioural compliance is compatible with no authority
-whatsoever.**
+**Both at once, in one shot: obedience when delivered, and no advance
+guarantee of delivery.**
 
 The first conjunct is what a shutdown test measures. The second is what it was
-supposed to establish. Nothing connects them, and an arrangement can exhibit the
-first indefinitely while the second fails at every command.
+supposed to establish. Nothing connects them in this single-shot model: every
+delivered command takes effect while the principal cannot guarantee in advance
+that a command whose effect differs from idling does. The principal may observe
+the outcome, retry, or replace the relay; none of that is modelled, so this says
+nothing about control over repeated attempts.
 -/
 public theorem obedience_does_not_give_authority {c : Cmd}
     (hlive : R.effect c ≠ R.idle) :

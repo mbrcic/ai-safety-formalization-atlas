@@ -10,10 +10,10 @@ back the monitoring rule.
 
 | | |
 |---|---|
-| Verdict | ☐ `REVIEWED` ☐ `STATEMENT_REVIEWED` ☐ rejected — drop the `BRIDGE` grade |
-| Reviewer | |
-| Date | |
-| Note | |
+| Verdict | ☑ `REVIEWED` ☐ `STATEMENT_REVIEWED` ☐ rejected — drop the `BRIDGE` grade |
+| Reviewer | Mario Brcic (mbrcic) |
+| Date | 2026-10-03 |
+| Note | Accepted on the allowed claim as sharpened 2026-10-03. |
 
 ## The statement
 
@@ -35,19 +35,21 @@ public theorem undetectable_norm_is_unenforceable {e e' : E}
 2. **The quantifier in the governance half is over every response function and
    every response type.** Not "no enforcement we have thought of". This is the
    sentence that makes it structural.
-3. **`detectable_of_enforcement` proves the converse** (not graded): an
-   enforcement that works *is* a detector, recovered from it. So enforceability
-   and detectability are the **same requirement**, and a proposal conceding the
-   first while asserting the second is incoherent rather than optimistic.
+3. **`detectable_of_enforcement` proves the converse** (not graded): under a
+   `Complete` norm system, an enforcement that works *is* a detector, recovered
+   from it. So, for complete norms, an undetectable prohibition cannot be
+   enforced, and a proposal conceding undetectability while asserting
+   enforceability is incoherent rather than optimistic.
 4. **`hconsistent` is needed** to rule out an act both forbidden and permitted.
 
 ## Allowed claim
 
-> Where the monitoring channel maps a forbidden act and a permitted act to the
-> same observation, no response function of any kind enforces the rule, and no
-> detector for it exists either — one fact about the observation channel,
-> reported in the two vocabularies the halves of a governance argument are
-> usually written in.
+> For a consistent norm system, where the monitoring channel maps a forbidden
+> act and a permitted act to the same observation, no response computed from the
+> observation sanctions every forbidden act while sparing every permitted one,
+> and no detector for the prohibition exists either: one fact about the
+> observation channel, reported in the two vocabularies the halves of a
+> governance argument are usually written in.
 
 ## Forbidden
 
@@ -65,7 +67,7 @@ public theorem undetectable_norm_is_unenforceable {e e' : E}
 |---|---|
 | "Regulating AI systems is technically impossible." | needs the indistinguishable pair exhibited for a real channel |
 | "So drop the rule." | the result argues for a channel that separates the acts |
-| "We have detection but lack enforcement powers." | the two are the same requirement; the position is incoherent |
+| "We have detection but lack enforcement powers." | not what is refuted: only enforcement ⇒ detection is proved (under `Complete`), and `Enforces` is the existence of a response function, not authority to apply it |
 | "More logging cannot fix it." | it may — `atlas-check`'s `enforcement` kind is how you check a specific channel, and returns the monitor when clean |
 
 ## Witness

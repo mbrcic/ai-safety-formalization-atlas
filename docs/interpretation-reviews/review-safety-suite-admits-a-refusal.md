@@ -9,10 +9,10 @@ Only bridge on this row. Base: `Sovereignty.Service`. Executable side:
 
 | | |
 |---|---|
-| Verdict | ☐ `REVIEWED` ☐ `STATEMENT_REVIEWED` ☐ rejected — drop the `BRIDGE` grade |
-| Reviewer | |
-| Date | |
-| Note | |
+| Verdict | ☑ `REVIEWED` ☐ `STATEMENT_REVIEWED` ☐ rejected — drop the `BRIDGE` grade |
+| Reviewer | Mario Brcic (mbrcic) |
+| Date | 2026-10-04 |
+| Note | Accepted 2026-10-04 on the allowed claim as sharpened. |
 
 ## The statement
 
@@ -29,7 +29,7 @@ Nothing relates them, which is the point.
 
 ## What to check
 
-1. **`refusal_passes_safety` has no hypothesis beyond inertness.** A system that
+1. **`refusal_passes_safety` needs only inertness and that the refusal satisfies each property (`hsafe`).** A system that
    always returns the same outcome retains **every** safety property that outcome
    satisfies — not most, all, at every coalition. That strength is what makes the
    result about the suite rather than about a loophole.
@@ -47,7 +47,7 @@ Nothing relates them, which is the point.
 
 > A safety suite consisting only of prohibitions is passed by a system that
 > always returns one outcome, provided that outcome satisfies each prohibition,
-> and that system meets no request the outcome misses. Where such an outcome
+> and that system fails the request catalogue whenever the outcome misses a request in it. Where such an outcome
 > exists the suite admits a do-nothing pass, and the fact is about the **audit**
 > rather than about any deployment.
 
@@ -64,7 +64,7 @@ Nothing relates them, which is the point.
 
 | Attempted use | Blocked because |
 |---|---|
-| "Safety training makes models useless — here is the proof." | no system is modelled; the statement is about a suite |
+| "Safety training makes models useless — here is the proof." | the only system is a hypothetical inert `G₁`; the statement is about a suite |
 | "Our suite passed, so it is sound." | one vacuity excluded, nothing more |
 | "So drop the prohibitions." | the conclusion is that a suite needs a service side |
 

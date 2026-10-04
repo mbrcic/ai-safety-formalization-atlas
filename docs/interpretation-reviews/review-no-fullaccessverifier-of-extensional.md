@@ -14,10 +14,10 @@ it cannot be read off this theorem.
 
 | | |
 |---|---|
-| Verdict | ☐ `REVIEWED` ☐ `STATEMENT_REVIEWED` ☐ rejected — drop the `BRIDGE` grade |
-| Reviewer | |
-| Date | |
-| Note | |
+| Verdict | ☑ `REVIEWED` ☐ `STATEMENT_REVIEWED` ☐ rejected — drop the `BRIDGE` grade |
+| Reviewer | Mario Brcic (mbrcic) |
+| Date | 2026-10-04 |
+| Note | Accepted 2026-10-04 on the allowed claim as sharpened. |
 
 ## The statement
 
@@ -44,9 +44,9 @@ itself. Via `Computability.rice_code_iff`.
 
 ## Allowed claim
 
-> With full access to the source, no total and always-correct procedure decides a
-> nontrivial property that depends only on what the code computes. Having the
-> artifact does not help for that class of property.
+> With full access to the source, no total, computable and always-correct
+> procedure decides a nontrivial property that depends only on what the code
+> computes. Having the artifact does not help for that class of property.
 
 ## Forbidden
 

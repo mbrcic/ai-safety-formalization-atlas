@@ -8,10 +8,10 @@ Only bridge on this row. Base: `Sovereignty.Constitution`.
 
 | | |
 |---|---|
-| Verdict | ☐ `REVIEWED` ☐ `STATEMENT_REVIEWED` ☐ rejected — drop the `BRIDGE` grade |
-| Reviewer | |
-| Date | |
-| Note | |
+| Verdict | ☑ `REVIEWED` ☐ `STATEMENT_REVIEWED` ☐ rejected — drop the `BRIDGE` grade |
+| Reviewer | Mario Brcic (mbrcic) |
+| Date | 2026-10-03 |
+| Note | Accepted on the allowed claim as sharpened 2026-10-03. |
 
 ## The statement
 
@@ -28,18 +28,18 @@ public theorem unbroken_chain_is_not_a_constraint (origin : K) :
    bridge grade** — that is a fair verdict, and the declarations stay correct.
 2. **The content lives in `the_rule_carries_the_assurance`** (not graded):
    authorisation is monotone, so a chain under a stricter rule is a chain under
-   every weaker one and **never the reverse**. That asymmetry is the reviewable
+   every weaker one; **the reverse is not proved**. That asymmetry is the reviewable
    claim. If you want the grade moved there, say so and I re-grade.
 3. **This is not an argument against keeping logs.** `AuthorizedFrom` cannot even
    be evaluated without one.
 
 ## Allowed claim
 
-> The assurance value of a change-control record is inherited entirely from the
-> restrictiveness of the rule the changes were checked against: under a rule that
-> permits everything, an unbroken chain excludes no state at all. So a review that
-> confirms the record is complete without examining the rule has verified the half
-> that was never in doubt.
+> Under a rule that permits everything, an unbroken chain of authorised changes
+> from the origin excludes no state at all, so that the chain is unbroken does
+> not by itself establish that the record excludes anything; that depends on the
+> rule. A review that confirms the record is complete without examining the rule
+> has not shown that the record excludes any state.
 
 ## Forbidden
 

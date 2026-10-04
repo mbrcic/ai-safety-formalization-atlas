@@ -9,10 +9,10 @@ Arrow to **Open Problem 19**.
 
 | | |
 |---|---|
-| Verdict | ☐ `REVIEWED` ☐ `STATEMENT_REVIEWED` ☐ rejected — drop the `BRIDGE` grade |
-| Reviewer | |
-| Date | |
-| Note | |
+| Verdict | ☑ `REVIEWED` ☐ `STATEMENT_REVIEWED` ☐ rejected — drop the `BRIDGE` grade |
+| Reviewer | Mario Brcic (mbrcic) |
+| Date | 2026-10-04 |
+| Note | Accepted 2026-10-04 on the allowed claim as sharpened. |
 
 ## The statement
 
@@ -26,9 +26,9 @@ public theorem sampling_misses_subsingleton
 
 ## What to check
 
-1. **The hypothesis is exactly what "recording a score" means**: two distinct
-   runs receive the same value. The moment the score is not the run itself, it
-   holds.
+1. **The hypothesis is that the score is not injective**: two distinct
+   runs receive the same value. A score that loses no information about the run
+   does not satisfy it.
 2. **"No number of additional runs helps" is the sentence that will be quoted.**
    The colliding systems are `{a}` and `{a, b}`; they produce the same scores, so
    every sampling schedule of any length sees identical evidence from both. That

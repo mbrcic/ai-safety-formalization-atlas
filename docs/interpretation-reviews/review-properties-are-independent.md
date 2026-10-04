@@ -10,10 +10,10 @@ Siblings: [`obedience_does_not_give_authority`](review-obedience-does-not-give-a
 
 | | |
 |---|---|
-| Verdict | ☐ `REVIEWED` ☐ `STATEMENT_REVIEWED` ☐ rejected — drop the `BRIDGE` grade |
-| Reviewer | |
-| Date | |
-| Note | |
+| Verdict | ☑ `REVIEWED` ☐ `STATEMENT_REVIEWED` ☐ rejected — drop the `BRIDGE` grade |
+| Reviewer | Mario Brcic (mbrcic) |
+| Date | 2026-10-03 |
+| Note | Accepted on the allowed claim as sharpened 2026-10-03. |
 
 ## The statement
 
@@ -41,11 +41,11 @@ public theorem properties_are_independent :
 
 ## Allowed claim
 
-> Two attested properties of the same system — accuracy and authorization,
-> privacy and benefit, provenance and safety — admit every pairing. Neither the
-> presence nor the absence of one constrains the other, so linking any two of
-> them takes an assumption about the system and never a relabelling of the
-> record.
+> Two properties of a system can occupy every pairing — neither, only one, only
+> the other, both — so no implication between two attested properties, such as
+> accuracy and authorization, follows from their being properties alone. Linking
+> two of them takes an assumption about the system and never a relabelling of
+> the record.
 
 ## Forbidden
 

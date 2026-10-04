@@ -10,10 +10,10 @@ Siblings: [`obedience_does_not_give_authority`](review-obedience-does-not-give-a
 
 | | |
 |---|---|
-| Verdict | ☐ `REVIEWED` ☐ `STATEMENT_REVIEWED` ☐ rejected — drop the `BRIDGE` grade |
-| Reviewer | |
-| Date | |
-| Note | |
+| Verdict | ☑ `REVIEWED` ☐ `STATEMENT_REVIEWED` ☐ rejected — drop the `BRIDGE` grade |
+| Reviewer | Mario Brcic (mbrcic) |
+| Date | 2026-10-03 |
+| Note | Accepted on the allowed claim as sharpened 2026-10-03. |
 
 ## The statement
 
@@ -42,9 +42,8 @@ holds. **Nothing relates the two fields, which is the entire point.** `A4` from
 ## Allowed claim
 
 > Attestation and truth are different predicates. A record can assert what is not
-> so, whatever the signature scheme, because nothing about being a record relates
-> it to being true — so a proof that a claim was attested is not a proof of the
-> claim.
+> so, because nothing about being a record relates it to being true — so a proof
+> that a claim was attested is not, without more, a proof of the claim.
 
 ## Forbidden
 

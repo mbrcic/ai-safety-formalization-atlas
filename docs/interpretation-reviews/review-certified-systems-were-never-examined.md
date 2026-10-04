@@ -10,10 +10,10 @@ Arrow to Reuel, Bucknall et al., TMLR 04/2025, **Open Problem 92**.
 
 | | |
 |---|---|
-| Verdict | ☐ `REVIEWED` ☐ `STATEMENT_REVIEWED` ☐ rejected — drop the `BRIDGE` grade |
-| Reviewer | |
-| Date | |
-| Note | |
+| Verdict | ☐ `REVIEWED` ☑ `STATEMENT_REVIEWED` ☐ rejected — drop the `BRIDGE` grade |
+| Reviewer | Mario Brcic (mbrcic) |
+| Date | 2026-10-04 |
+| Note | Statement accepted 2026-10-04. AI reading withheld: immediate from the extremal hypothesis, with a fixed evidence base. |
 
 ## The statement
 
@@ -49,6 +49,9 @@ bar sits strictly above everything the evidence exhibits.
 
 ## Forbidden
 
+- **Not** about an evidence base that grows. The evidence base is fixed in the
+  model; testing or monitoring systems above the bar enlarges it and changes the
+  regime, and that is not modelled — it is the repair the module names.
 - **Not** "bright-line thresholds do not work." Confined to the extremal regime.
 - **Not** an evaluation of any proposed target. Which property indicates risk —
   R#92's first half — is empirical and untouched.
@@ -61,7 +64,7 @@ bar sits strictly above everything the evidence exhibits.
 | Attempted use | Blocked because |
 |---|---|
 | "Compute thresholds are proven ineffective." | needs the extremal hypothesis *and* a layer-4 assignment of `indicator`; neither is made |
-| "So certification is meaningless." | `risk_bounded_on_evidence_base` says the indicator predicts risk inside the evidence base |
+| "So certification is meaningless." | `risk_bounded_on_evidence_base` says that, given a fit of the link (`hfit`), the indicator predicts risk inside the evidence base |
 | "This is a published theorem." | atlas-original |
 
 ## Witness

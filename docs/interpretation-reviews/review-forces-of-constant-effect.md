@@ -13,10 +13,10 @@ context for this one.
 
 | | |
 |---|---|
-| Verdict | ☐ `REVIEWED` ☐ `STATEMENT_REVIEWED` ☐ rejected — drop the `BRIDGE` grade |
-| Reviewer | |
-| Date | |
-| Note | |
+| Verdict | ☑ `REVIEWED` ☐ `STATEMENT_REVIEWED` ☐ rejected — drop the `BRIDGE` grade |
+| Reviewer | Mario Brcic (mbrcic) |
+| Date | 2026-10-04 |
+| Note | Accepted 2026-10-04 as the control-without-coverage corner paired with BY-004's not_forces_of_card_lt. |
 
 ## The statement
 
@@ -41,8 +41,9 @@ outcome, whatever the overseer observes — the constant policy ignores `observe
    table where one intervention flattens every situation is a strong and unusual
    property. The theorem does not say such an intervention exists anywhere.
 3. **`observe` is quantified but unused.** Confirm that is deliberate — it is the
-   content: forcing is a property of the effect table and the repertoire, and
-   `Knowable` is a property of the observation, so neither constrains the other.
+   content: forcing *by a constant policy* is a property of the effect table
+   alone, and `Knowable` is a property of the observation; the Examples'
+   `coverage_and_control_are_independent` shows neither implies the other.
 
 ## Allowed claim
 
@@ -58,6 +59,8 @@ outcome, whatever the overseer observes — the constant policy ignores `observe
 - **Not** a recommendation to build such an intervention. No cost, no side
   effect and no feasibility is modelled.
 - **Not** a claim about any real oversight arrangement.
+- **Not** about a system that changes its own effect table. `effect` is fixed;
+  adaptation, deception or drift are outside the model.
 - **Not** a statement about partial control. `Forces` is a single target in every
   situation, with certainty.
 

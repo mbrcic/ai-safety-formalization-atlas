@@ -9,10 +9,10 @@ Siblings: [`no_procedure_on_output_recovers_fallback`](review-no-procedure-on-ou
 
 | | |
 |---|---|
-| Verdict | ☐ `REVIEWED` ☐ `STATEMENT_REVIEWED` ☐ rejected — drop the `BRIDGE` grade |
-| Reviewer | |
-| Date | |
-| Note | |
+| Verdict | ☑ `REVIEWED` ☐ `STATEMENT_REVIEWED` ☐ rejected — drop the `BRIDGE` grade |
+| Reviewer | Mario Brcic (mbrcic) |
+| Date | 2026-10-04 |
+| Note | Accepted 2026-10-04 on the allowed claim as qualified: one assisted result, borrowed part unconstrained; richer experimental designs are outside the model. |
 
 ## The statement
 
@@ -29,9 +29,9 @@ public theorem withdrawal_settles_and_no_output_procedure_does {R : Type u} [Rin
 1. **The positive half is immediate and that is the point.** Withdrawal testing
    settles the question because it *observes the quantity*. It is not a clever
    method; it is the definition of measuring the thing.
-2. **The conjunction is what a consumer cites.** "Withdrawal testing is forced
-   rather than chosen" is the sentence, and it is this declaration that carries
-   it. Decide whether the conjunction earns its own grade or whether the two
+2. **The conjunction is what a consumer cites.** "Evidence beyond assisted
+   output is forced, and withdrawal testing supplies it" is the sentence; the
+   declaration does not show withdrawal is the only such protocol. Decide whether the conjunction earns its own grade or whether the two
    halves suffice.
 3. **So the 6% study is not an instance of the obstruction — it is the expensive
    way around it.** Check you are content with that framing; it is the module's
@@ -40,13 +40,20 @@ public theorem withdrawal_settles_and_no_output_procedure_does {R : Type u} [Rin
 
 ## Allowed claim
 
-> Testing with the assistance removed recovers unaided capability; nothing
-> computed from ordinary observed work does, at any level of sophistication. A
-> consumer holding this pair has the argument that withdrawal testing is forced
-> rather than chosen.
+> In the same model — one assisted result, the sum of unaided capability and a
+> borrowed part that can take any value — testing with the assistance removed
+> recovers unaided capability by definition, and no function of that single
+> assisted result does. So within the model some evidence beyond the one
+> assisted result is needed. Withdrawal testing is one such; designs that vary
+> tasks, assistance or people are others the model does not cover.
 
 ## Forbidden
 
+- **Not** a claim that unaided capability cannot be estimated from assisted work
+  in general. The model sees one assisted result with nothing known about the
+  borrowed part; designs that vary tasks, assistance levels or people, or that
+  bound or measure the borrowed part, are outside it and may well estimate
+  unaided capability or its ratio to assisted performance.
 - **Not** that withdrawal testing is practical, ethical, or advisable in any
   setting. Feasibility, consent and cost are unmodelled.
 - **Not** evidence of any decline anywhere. See the sibling's forbidden list and

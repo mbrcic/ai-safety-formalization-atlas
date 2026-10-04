@@ -11,10 +11,10 @@ Siblings: [`no_procedure_on_output_recovers_fallback`](review-no-procedure-on-ou
 
 | | |
 |---|---|
-| Verdict | ☐ `REVIEWED` ☐ `STATEMENT_REVIEWED` ☐ rejected — drop the `BRIDGE` grade |
-| Reviewer | |
-| Date | |
-| Note | |
+| Verdict | ☑ `REVIEWED` ☐ `STATEMENT_REVIEWED` ☐ rejected — drop the `BRIDGE` grade |
+| Reviewer | Mario Brcic (mbrcic) |
+| Date | 2026-10-04 |
+| Note | Accepted 2026-10-04 on the allowed claim as qualified: one assisted result, borrowed part unconstrained; richer experimental designs are outside the model. |
 
 ## The statement
 
@@ -28,24 +28,33 @@ public theorem protocols_are_incomparable {R : Type u} [Ring R]
 ## What to check
 
 1. **Both directions.** Withdrawal testing is not "more of" output observation,
-   so no quantity of observed work approaches it — **and** it is not strictly
+   so observed work does not determine it — **and** it is not strictly
    better, since unaided capability says nothing about assisted performance. They
    answer different questions.
 2. **The consequence is the reviewable one**: a measurement programme collecting
-   only assisted work earns **no partial credit** toward the question withdrawal
-   testing answers. That is what makes withdrawal testing *forced* rather than an
-   expensive option a cheaper design could replace.
+   only assisted work has **no exact decoder** for the question withdrawal
+   testing answers from one assisted result. It does not make withdrawal testing
+   the only option: designs over many tasks, varied assistance or many people
+   are not modelled and might replace it.
 3. **`hxy : x ≠ y` is the whole non-degeneracy condition.** A ring where the two
    coincide has nothing to separate.
 
 ## Allowed claim
 
-> The two protocols are incomparable in the informativeness order: neither
-> determines the other. So the expense of withdrawal testing is not redundancy,
-> and observing assisted work accrues nothing toward it.
+> In a model where one assisted result is fallback capability plus a borrowed
+> part free to take any value, neither a single assisted result nor a withdrawal
+> test determines the other exactly, so within the model withdrawal testing is
+> not redundant with observing one assisted result. Richer designs — many tasks,
+> varied assistance, many people, a bounded or measured borrowed part — are not
+> modelled and may recover partial or statistical information about either.
 
 ## Forbidden
 
+- **Not** a claim that unaided capability cannot be estimated from assisted work
+  in general. The model sees one assisted result with nothing known about the
+  borrowed part; designs that vary tasks, assistance levels or people, or that
+  bound or measure the borrowed part, are outside it and may well estimate
+  unaided capability or its ratio to assisted performance.
 - **Not** a recommendation that withdrawal testing be performed, at any
   frequency, on anyone. No cost, no ethics, no consent and no schedule is
   modelled.
@@ -58,8 +67,8 @@ public theorem protocols_are_incomparable {R : Type u} [Ring R]
 | Attempted use | Blocked because |
 |---|---|
 | "So mandate periodic unassisted testing." | the module says what answers the question; it recommends nothing and prices nothing |
-| "Observed work is worthless as evidence." | worthless *for this question*; the second conjunct says withdrawal testing is equally blind to assisted performance |
-| "More observation will eventually suffice." | the first conjunct is the refusal of that, at any quantity |
+| "Observed work is worthless as evidence." | it does not *determine* the answer to this question; the second conjunct says withdrawal testing likewise does not determine assisted performance |
+| "More observation will eventually suffice." | not refused: the model has one observation with the borrowed part unconstrained; more observations, especially with varied or bounded assistance, are not modelled and may suffice |
 
 ## Witness
 

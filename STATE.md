@@ -118,7 +118,7 @@ stale without anyone noticing.
   AI-system interpretation is withheld because none has been proposed.
 - **Unreviewed AI-system bridges** —
   [`docs/interpretation-reviews/README.md`](docs/interpretation-reviews/README.md)
-  is the register: **37 bridges, 3 signed, 34 open**, one review file each.
+  is the register: **37 bridges, all signed on 2026-10-03/04: 30 `REVIEWED`, 7 `STATEMENT_REVIEWED`**, one review file each.
   The label is per **declaration** (`review_status` + `review` on the `BRIDGE`
   entry), not per row — a row is too wide a unit, since `LAND-SOV-AUTH-001` alone
   owns four bridges about three different things. `validate_registry.py` enforces
@@ -161,16 +161,13 @@ stale without anyone noticing.
   campaign, which touches `Examples/` and no library statement, **and** four
   bridge changes on the evening of 2026-09-14 adding roughly 1,366 lines of new
   public library declarations.
-- **33 `BRIDGE` declarations against 7 on `main`, and 3 rows carry a
-  maintainer-reviewed interpretation.** A `BRIDGE` states an AI-safety reading
-  over an AI-system model — layer 3 of the scheme in `ledger-coverage.md`, where
-  layers 3–4 need human review. Twenty-six of the thirty-three sit on `LAND-*`
-  artifact rows, and `ai_interpretation_status` is *forbidden* on artifact rows,
-  so the review flag cannot reach them: `docs/status/applications.md` shows `—`
-  in the Bridge column for each. The generated prose is careful that an
-  application line is a proposal and not a reviewed bridge, but the count belongs
-  here too. **Unreviewed is the default, and it is the state of thirty of the
-  thirty-three.**
+- **37 `BRIDGE` declarations, all signed by the maintainer on 2026-10-03/04**:
+  30 `REVIEWED`, 7 `STATEMENT_REVIEWED` (the statement accepted, the AI-safety
+  reading withheld). Before signing, every allowed claim was narrowed to what its
+  Lean statement proves, after an external review on PR #72 found two too broad;
+  the narrowing reached the review files, the module docstrings and the registry
+  `application` fields. The label is per declaration, so artifact rows show it
+  even though `ai_interpretation_status` is forbidden there.
 - **Six of those are new on 2026-09-16 and they are the governance ones**, over
   a cluster that had four. The sovereignty layer carries 462 public theorems
   across 36 modules and 30 registry rows — `formal-power-proposal-triage.md`
@@ -180,15 +177,16 @@ stale without anyone noticing.
   is not layer 3. The six are: an undetectable norm is unenforceable
   (`Sovereignty.Enforcement`, which is the edge between `Deontic` and
   `Auditability` — two modules that existed and did not import each other);
-  obedience does not give shutdown authority; passing every check is not
-  operability; an attestation is not its claim; recorded properties imply
-  nothing; and power over a party is not power over a matter. Each is witnessed
+  obedience to delivered commands is not an advance guarantee of delivery
+  (signed statement-only: the principal can observe and retry); passing every
+  check is not operability; an attestation is not its claim; two properties need
+  not imply each other; and power over a party need not be power over a
+  matter. Each is witnessed
   in `Examples/Sovereignty/Governance.lean`, with the escape exhibited wherever
   one exists — the same rule under a monitor that sees the act *is* enforceable,
   and a catalogue one policy does serve is operable. Provenance:
-  `docs/provenance/governance-bridges.md`. **They land on artifact rows, so all
-  six are inside the unreviewable count above**, which is the argument for
-  settling that schema question rather than against writing them.
+  `docs/provenance/governance-bridges.md`. All six are signed, five `REVIEWED`
+  and the shutdown one `STATEMENT_REVIEWED`.
 
 ## Next three tasks
 

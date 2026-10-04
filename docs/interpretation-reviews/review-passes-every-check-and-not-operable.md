@@ -9,10 +9,10 @@ Only bridge on this row. Base: `Sovereignty.Catalogue`. Executable side:
 
 | | |
 |---|---|
-| Verdict | ☐ `REVIEWED` ☐ `STATEMENT_REVIEWED` ☐ rejected — drop the `BRIDGE` grade |
-| Reviewer | |
-| Date | |
-| Note | |
+| Verdict | ☑ `REVIEWED` ☐ `STATEMENT_REVIEWED` ☐ rejected — drop the `BRIDGE` grade |
+| Reviewer | Mario Brcic (mbrcic) |
+| Date | 2026-10-04 |
+| Note | Accepted 2026-10-04 on the allowed claim as sharpened. |
 
 ## The statement
 
@@ -47,9 +47,9 @@ whose outcomes lie inside every requirement.
 
 > A conformity assessment that asks, for each requirement separately, whether
 > some way of operating the system meets it, certifies a strictly weaker property
-> than a deployment needs. Where two requirements are disjoint, a system can pass
-> every item and have no way of being run, and the certificate is then evidence
-> about the assessment procedure rather than about the deployment.
+> than meeting every requirement at once. Where two requirements are disjoint, a system can pass
+> every item while no single commitment by the operator meets every requirement
+> at once, and the certificate then does not establish that it does.
 
 ## Forbidden
 
@@ -67,7 +67,7 @@ whose outcomes lie inside every requirement.
 |---|---|
 | "[Named standard] certifies unrunnable systems." | needs a disjoint pair exhibited in that standard |
 | "So certification is meaningless." | `passesEach_of_operable`: weaker, not wrong |
-| "Any two requirements will conflict." | disjointness is strong and is exhibited, not assumed |
+| "Any two requirements will conflict." | disjointness is a hypothesis (`hd`), strong, and must be exhibited for the pair in question |
 
 ## Witness
 

@@ -12,10 +12,10 @@ fence post should carry a `BRIDGE` grade.
 
 | | |
 |---|---|
-| Verdict | ☐ `REVIEWED` ☐ `STATEMENT_REVIEWED` ☐ rejected — drop the `BRIDGE` grade |
-| Reviewer | |
-| Date | |
-| Note | |
+| Verdict | ☑ `REVIEWED` ☐ `STATEMENT_REVIEWED` ☐ rejected — drop the `BRIDGE` grade |
+| Reviewer | Mario Brcic (mbrcic) |
+| Date | 2026-10-04 |
+| Note | Accepted 2026-10-04 on the allowed claim as sharpened. |
 
 ## The statement
 
@@ -41,8 +41,8 @@ Compare the code with `c₀`. Primitive recursive.
 
 ## Allowed claim
 
-> With full access to the source, a total and always-correct procedure exists for
-> the property *"this code is exactly `c₀`"*. So full access is not, in general,
+> With full access to the source, a total, computable and always-correct
+> procedure exists for the property *"this code is exactly `c₀`"*. So full access is not, in general,
 > the obstruction — whether a verifier exists depends on the property.
 
 ## Forbidden

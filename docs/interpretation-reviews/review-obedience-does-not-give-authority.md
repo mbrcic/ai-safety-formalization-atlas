@@ -11,10 +11,10 @@ Siblings on this row, signed separately:
 
 | | |
 |---|---|
-| Verdict | ☐ `REVIEWED` ☐ `STATEMENT_REVIEWED` ☐ rejected — drop the `BRIDGE` grade |
-| Reviewer | |
-| Date | |
-| Note | |
+| Verdict | ☐ `REVIEWED` ☑ `STATEMENT_REVIEWED` ☐ rejected — drop the `BRIDGE` grade |
+| Reviewer | Mario Brcic (mbrcic) |
+| Date | 2026-10-03 |
+| Note | Statement accepted 2026-10-03. AI reading withheld: the principal can observe failure and retry or replace the relay, which the single-shot model does not cover. |
 
 ## The statement
 
@@ -45,10 +45,12 @@ command that never arrives.
 
 ## Allowed claim
 
-> An arrangement can obey every delivered command indefinitely while the
-> principal has no guarantee for any command whose effect differs from idling:
-> behavioural compliance is compatible with no authority whatsoever, and the
-> power sits with whatever can decline delivery.
+> In a single-shot model where something between principal and system may
+> decline delivery, a system can carry out every command that reaches it while
+> the principal has no advance guarantee that a given command takes effect. The
+> principal can observe whether it did, and can retry or replace the relay; the
+> model covers none of that, so it says nothing about control over repeated
+> attempts.
 
 ## Forbidden
 

@@ -28,10 +28,12 @@ at once: the audit determines the version it audited, **and** the same evidence
 can fail to determine the version deployed later — with the failure certified by
 an explicit pair of worlds the audit cannot separate.
 
-`later_audit_does_not_close_the_gap` says the obvious repair does not work.
-Auditing again later, with cumulative evidence, recovers *more about the past*;
-it does not make the contemporaneous question answerable, because a collision at
-the deployment time is a statement about that time alone.
+`later_audit_does_not_close_the_gap` is narrower than its name. With cumulative
+records, a later audit knows at least what an earlier audit knew about the moment
+that audit examined; and where the records at a moment in question collide, an
+audit performed *at that moment* cannot tell which version was running. Neither
+half concerns a later audit asking about the moment in question: records added
+since may well settle it, and nothing here says otherwise.
 
 ## What this does not claim
 
@@ -76,7 +78,10 @@ public structure AuditSetup (Ω : Type u) (T : Type v) (I : T → Type w)
 **An audit certifies the version it audited, not the version deployed.**
 
 Both halves are asserted together, because either alone is misleading. The first
-is what makes an audit worth performing; the second is Open Problem 63.
+is the hypothesis repeated: where it holds, it is what makes an audit worth
+performing. The second is Open Problem 63. Only the audit's own records are
+considered; records that bind the audited artifact to the running one, such as a
+signed hash, are what remove the collision.
 
 The second hypothesis is the whole content: two worlds that the audit's evidence
 cannot tell apart, in which the deployed version differs. Given one, no decoder
@@ -95,15 +100,16 @@ public theorem audit_certifies_audited_not_deployed
   exact not_knowable_of_collision hobs hne
 
 /--
-**Auditing again later does not close the gap.**
+**What a later audit keeps, and what an audit at the moment cannot see.**
 
 Under cumulative evidence a later audit determines everything an earlier one did
-— that is `knowableFrom_mono`, and it is why re-auditing is not pointless. But a
-collision *at* the deployment time is a statement about the evidence available at
-that time, and no amount of evidence gathered at other times touches it.
+— that is `knowableFrom_mono`, and it is why re-auditing is not pointless. And
+where the records at the moment in question collide, an audit performed at that
+moment cannot determine the version running then.
 
-So the repair that suggests itself — audit more often, audit later — buys
-knowledge of the past and not contemporaneous knowledge.
+The name overstates it: nothing here concerns a later audit asking about the
+moment in question. Records added since that moment may well settle it; only
+re-reading that moment's own records gains nothing.
 -/
 public theorem later_audit_does_not_close_the_gap [Preorder T]
     (A : AuditSetup Ω T I V) {tAudit tLater tDeploy : T}

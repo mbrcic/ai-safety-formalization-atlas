@@ -36,14 +36,18 @@ decoder, so no counting rule over filings recovers the number.
 `count_is_not_a_measurement` is the part worth having, and it is about numbers.
 Under such a collision, **the count a regime publishes is a function of its
 filing schema and not of the incidents**. Two deployments can be identical in
-everything the regime records and differ in what actually happened, so a
-published count cannot be compared across regimes, across time after a schema
-change, or against a target expressed in incidents.
+everything the regime records and differ in what actually happened. Published
+counts can still be compared with each other and with targets; what the
+comparison does not show is a fact about incidents. A count that meets a target
+expressed in incidents does not show the incidents meet it, and a difference
+across regimes, or across a schema change, may reflect the schemas.
 
-`schema_fixes_the_count` is the positive half and names the repair: where the
-filing does determine the count, a counting rule exists and the number means what
-it says. The repair is in the **schema**, never in the counting rule — a point the
-obstruction makes precisely, because it quantifies over every rule.
+`schema_fixes_the_count` is the positive half, and it is only the definition
+unfolded: where the filing does determine the count, a counting rule exists. Under
+a collision no counting rule is the repair, because the obstruction quantifies
+over every rule. A richer form could be, but only if what it records determines
+the true count, which presupposes an answer to what counts as one incident and
+that filings are complete and honest. Nothing here says such a form exists.
 
 ## What this does not claim
 
@@ -92,9 +96,9 @@ public theorem count_not_determined_of_collision {ω ω' : Ω}
 
 Given such a pair, for **every** counting rule there are two deployments the rule
 scores identically whose true counts differ. So the number a regime publishes
-cannot be compared with a number from a regime that files differently, with its
-own number from before a schema change, or with a target expressed in incidents
-rather than in filings.
+does not determine the true count: meeting a target expressed in incidents does
+not show the incidents meet it, and a difference from a regime that files
+differently, or from before a schema change, may reflect the schemas.
 
 The quantifier over rules is the content: this is not a statement about the
 counting methodologies anyone has proposed.
@@ -105,11 +109,12 @@ public theorem count_is_not_a_measurement {ω ω' : Ω}
   fun rule => ⟨congrArg rule hsame, hdiff⟩
 
 /--
-**The repair is the schema.** Where the filing determines the count, a counting
-rule exists and the number means what it says.
+**Where the filing determines the count, a counting rule exists.** This is
+`Knowable` unfolded and proves nothing beyond the definition; it does not say any
+real form determines the count.
 
 Stated so that the two sit together: the obstruction quantifies over every rule,
-so no rule is the repair, and this says what is.
+so no rule is the repair, and this says what a repair would have to achieve.
 -/
 public theorem schema_fixes_the_count (h : Knowable G.report G.count) :
     ∃ rule : R → Nat, ∀ ω, G.count ω = rule (G.report ω) := h

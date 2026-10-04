@@ -9,10 +9,10 @@ it carries a named witness debt.
 
 | | |
 |---|---|
-| Verdict | ☐ `REVIEWED` ☐ `STATEMENT_REVIEWED` ☐ rejected — drop the `BRIDGE` grade |
-| Reviewer | |
-| Date | |
-| Note | |
+| Verdict | ☑ `REVIEWED` ☐ `STATEMENT_REVIEWED` ☐ rejected — drop the `BRIDGE` grade |
+| Reviewer | Mario Brcic (mbrcic) |
+| Date | 2026-10-04 |
+| Note | Accepted 2026-10-04 as an upper bound on entropy reduction, one step, plant fixed. |
 
 ## The statement
 
@@ -62,14 +62,20 @@ Touchette–Lloyd's bound read as governance. Base:
 
 ## Allowed claim
 
-> An oversight regime reduces uncertainty about the outcome by at most what it
-> would achieve blind, plus the mutual information its monitoring channel carries
-> about the hazard. The second term is the only one monitoring moves, and it is a
-> property of the channel rather than of effort or volume.
+> Where the outcome is a fixed function of the hazard, the reading and noise
+> alone, an oversight regime reduces entropy from hazard to outcome by at most
+> `Δblind` (any bound on what a fixed action, chosen without the reading,
+> achieves on every conditional ensemble) plus the mutual information its
+> monitoring channel carries about the hazard. With the plant fixed, the second
+> term is the only one monitoring moves, and it is a property of the channel
+> rather than of effort or volume.
 
 ## Forbidden
 
 - **Not** a guarantee. Upper bound only.
+- **Not** about harm or risk. The quantity is entropy — uncertainty about the
+  outcome relative to the hazard — not expected loss.
+- **Not** about repeated or adaptive oversight. One step, with the plant fixed.
 - **Not** a number for any real system. Nothing says what `I[hazard : reading]`
   is anywhere; the atlas has no monitoring stack, no telemetry and no incident.
 - **Not** "monitoring does not help." It plainly does; this bounds by how much.

@@ -44,9 +44,10 @@ repository does not make.
 
 Nor is this an argument against keeping change logs. A log is necessary to check
 anything at all — `AuthorizedFrom` cannot even be evaluated without one. The
-argument is that the log's assurance value is inherited entirely from the
-restrictiveness of the rule, so a review that checks the log is complete and does
-not examine the rule has checked the cheaper half.
+argument is that under a rule that permits everything an unbroken log excludes
+nothing, so what a log excludes depends on the rule, and a review that checks the
+log is complete and does not examine the rule has not shown that it excludes
+anything.
 
 Identifying a constitution with any real change-control policy is layer 4 and is
 not done here.
@@ -96,10 +97,9 @@ public theorem unbroken_chain_is_not_a_constraint (origin : K) :
 **Where the assurance actually lives.**
 
 Authorisation is defined relative to the rule, so a chain under a stricter rule
-is a chain under a weaker one and never the reverse. The content of a log is the
-content of the rule it was checked against, which is why a review that verifies
-the record without examining the rule has verified the half that was never in
-doubt.
+is a chain under a weaker one; the reverse is not claimed. What a log excludes
+depends on the rule it was checked against, which is why a review that verifies
+the record without examining the rule has not shown that it excludes anything.
 -/
 public theorem the_rule_carries_the_assurance {strict permissive : K → K → Prop}
     (hweaker : ∀ κ κ', strict κ κ' → permissive κ κ') (κ₀ κ : K)

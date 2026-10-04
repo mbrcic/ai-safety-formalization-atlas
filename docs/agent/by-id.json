@@ -2225,7 +2225,7 @@
             "atlas_declaration": "AISafetyAtlas.Compositional.AgentNetwork.symmetry_is_the_shared_cause",
             "type": "BRIDGE",
             "file": "AISafetyAtlas/Compositional/AgentNetwork.lean",
-            "line": 128
+            "line": 129
           }
         ]
       },
@@ -5948,7 +5948,7 @@
             "atlas_declaration": "AISafetyAtlas.Sovereignty.AmendmentLog.unbroken_chain_is_not_a_constraint",
             "type": "BRIDGE",
             "file": "AISafetyAtlas/Sovereignty/AmendmentLog.lean",
-            "line": 90
+            "line": 91
           }
         ]
       },
@@ -6086,7 +6086,7 @@
             "atlas_declaration": "AISafetyAtlas.Sovereignty.ShutdownChannel.obedience_does_not_give_authority",
             "type": "BRIDGE",
             "file": "AISafetyAtlas/Sovereignty/ShutdownChannel.lean",
-            "line": 117
+            "line": 120
           },
           {
             "atlas_declaration": "AISafetyAtlas.Sovereignty.Attestation.attestation_is_not_the_claim",
@@ -6104,7 +6104,7 @@
             "atlas_declaration": "AISafetyAtlas.Sovereignty.DelegationChain.power_over_a_matter_does_not_compose",
             "type": "BRIDGE",
             "file": "AISafetyAtlas/Sovereignty/DelegationChain.lean",
-            "line": 103
+            "line": 104
           }
         ]
       },
@@ -6895,13 +6895,13 @@
             "atlas_declaration": "AISafetyAtlas.Oversight.JointObservation.consortium_covers_of_registry_covers",
             "type": "BRIDGE",
             "file": "AISafetyAtlas/Oversight/JointObservation/Registry.lean",
-            "line": 115
+            "line": 116
           },
           {
             "atlas_declaration": "AISafetyAtlas.Oversight.JointObservation.not_registry_covers_of_emit_collision",
             "type": "BRIDGE",
             "file": "AISafetyAtlas/Oversight/JointObservation/Registry.lean",
-            "line": 133
+            "line": 134
           }
         ]
       },
@@ -7034,19 +7034,19 @@
             "atlas_declaration": "AISafetyAtlas.Sovereignty.CapabilityAssessment.no_procedure_on_output_recovers_fallback",
             "type": "BRIDGE",
             "file": "AISafetyAtlas/Sovereignty/CapabilityAssessment.lean",
-            "line": 142
+            "line": 145
           },
           {
             "atlas_declaration": "AISafetyAtlas.Sovereignty.CapabilityAssessment.protocols_are_incomparable",
             "type": "BRIDGE",
             "file": "AISafetyAtlas/Sovereignty/CapabilityAssessment.lean",
-            "line": 181
+            "line": 184
           },
           {
             "atlas_declaration": "AISafetyAtlas.Sovereignty.CapabilityAssessment.withdrawal_settles_and_no_output_procedure_does",
             "type": "BRIDGE",
             "file": "AISafetyAtlas/Sovereignty/CapabilityAssessment.lean",
-            "line": 193
+            "line": 197
           }
         ]
       },
@@ -7125,13 +7125,13 @@
             "atlas_declaration": "AISafetyAtlas.Knowledge.Audit.audit_certifies_audited_not_deployed",
             "type": "BRIDGE",
             "file": "AISafetyAtlas/Knowledge/Audit.lean",
-            "line": 86
+            "line": 91
           },
           {
             "atlas_declaration": "AISafetyAtlas.Knowledge.Audit.later_audit_does_not_close_the_gap",
             "type": "BRIDGE",
             "file": "AISafetyAtlas/Knowledge/Audit.lean",
-            "line": 108
+            "line": 114
           }
         ]
       },
@@ -7165,25 +7165,25 @@
             "atlas_declaration": "AISafetyAtlas.Knowledge.IncidentCount.count_not_determined_of_collision",
             "type": "WRAPPER",
             "file": "AISafetyAtlas/Knowledge/IncidentCount.lean",
-            "line": 85
+            "line": 89
           },
           {
             "atlas_declaration": "AISafetyAtlas.Knowledge.IncidentCount.count_is_not_a_measurement",
             "type": "BRIDGE",
             "file": "AISafetyAtlas/Knowledge/IncidentCount.lean",
-            "line": 102
+            "line": 106
           },
           {
             "atlas_declaration": "AISafetyAtlas.Knowledge.IncidentCount.schema_fixes_the_count",
             "type": "WRAPPER",
             "file": "AISafetyAtlas/Knowledge/IncidentCount.lean",
-            "line": 114
+            "line": 119
           },
           {
             "atlas_declaration": "AISafetyAtlas.Knowledge.IncidentCount.knowable_of_report_carries_count",
             "type": "WRAPPER",
             "file": "AISafetyAtlas/Knowledge/IncidentCount.lean",
-            "line": 121
+            "line": 126
           }
         ]
       },
@@ -7461,7 +7461,7 @@
             "atlas_declaration": "AISafetyAtlas.Sovereignty.Enforcement.undetectable_norm_is_unenforceable",
             "type": "BRIDGE",
             "file": "AISafetyAtlas/Sovereignty/Enforcement.lean",
-            "line": 153
+            "line": 154
           }
         ]
       },

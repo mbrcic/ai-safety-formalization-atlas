@@ -11,10 +11,10 @@ declaration is now a `WRAPPER`; the content is here.
 
 | | |
 |---|---|
-| Verdict | ☐ `REVIEWED` ☐ `STATEMENT_REVIEWED` ☐ rejected — drop the `BRIDGE` grade |
-| Reviewer | |
-| Date | |
-| Note | |
+| Verdict | ☑ `REVIEWED` ☐ `STATEMENT_REVIEWED` ☐ rejected — drop the `BRIDGE` grade |
+| Reviewer | Mario Brcic (mbrcic) |
+| Date | 2026-10-04 |
+| Note | Accepted 2026-10-04 on the allowed claim as sharpened; existence only, no claim the policy is known or computable. |
 
 ## The statement
 
@@ -40,7 +40,7 @@ a *value*. This is its negation with the quantifiers pushed in.
    `{0,2}`, `{0,1}` are pairwise compatible and jointly empty. **This is the one
    structural difference from the kernel**: `Knowable` fails only through a pair,
    because equality is transitive, and compatibility of acceptable-action sets is
-   not. If you check only `ActionConflict`, you will pass a system that has no
+   not. If you check only `ActionConflict`, you can pass a system that has no
    uniform policy.
 3. **`Good` is exact and binary.** No cost, no ranking, no partial credit. The
    acceptability standard is an input, not something the theorem supplies.
@@ -51,9 +51,11 @@ a *value*. This is its negation with the quantifiers pushed in.
 
 ## Allowed claim
 
-> A monitor, reviewer or controller needs better sensing exactly where some set of
-> states it cannot separate admits no action acceptable throughout; everywhere
-> else the observation it already has is enough, however ambiguous. When no
+> A monitor, reviewer or controller has no uniform policy from its observation
+> exactly when some set of states it cannot separate admits no action acceptable
+> throughout; otherwise a uniform policy from the observation it already has
+> exists, however ambiguous that observation — though nothing says the policy is
+> known or computable. When no
 > uniform policy exists, the obstruction is exhibitable as a state whose
 > indistinguishable neighbourhood defeats every candidate action, and that
 > certificate is complete — no other kind of failure occurs.

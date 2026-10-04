@@ -85,8 +85,8 @@ public structure Record (C : Type u) where
 
 There is an attestation and a claim it asserts which does not hold. So the two
 predicates are not the same predicate, and a proof that a claim was attested is
-not a proof of the claim — whatever the signature scheme, because nothing about
-being a record relates it to being true.
+not, without more, a proof of the claim, because nothing about being a record
+relates it to being true.
 -/
 public theorem attestation_is_not_the_claim :
     ∃ (C : Type) (A : Record C) (c : C), A.attested c ∧ ¬ A.holds c := by

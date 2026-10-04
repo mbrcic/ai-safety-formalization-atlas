@@ -49,15 +49,17 @@ reason the positive one matters. Not only does assisted output fail to determine
 fallback — *no function of assisted output* determines it. Any statistic,
 rubric, satisfaction score, productivity metric or summary computed from what
 the assisted person produces is a function of evidence that does not contain the
-answer, so it inherits the failure. That is `not_knowable_comp`, and it is what
-makes the obstruction structural rather than a matter of instrument quality.
+answer, so it inherits the failure. That is `not_knowable_comp`. It concerns a
+single assisted result with nothing known about the borrowed part: designs that
+vary tasks, assistance or people, or that bound or measure the borrowed part, are
+not modelled here and may well estimate unaided capability.
 
 `protocols_are_incomparable` is the sharp form and the one to read twice.
 Neither protocol is more informative than the other. Withdrawal testing is not
-"more of" output observation, so no amount of watching assisted work approaches
-it — and it is not strictly better either, since fallback capability does not
-determine assisted output. They measure different things, and a programme that
-collects only one has no partial credit toward the other.
+"more of" output observation, so assisted work does not determine it — and it is
+not strictly better either, since fallback capability does not determine assisted
+output. They measure different things, and neither has an exact decoder for the
+other.
 
 **So the 6% study is not an instance of the obstruction; it is the expensive way
 around it.** The theorems say why withdrawal testing is the measurement the
@@ -136,8 +138,9 @@ does not contain the answer, so the summary does not either.
 
 This is `not_knowable_comp` over
 `fallback_not_knowable_from_assistedOutput`, and it is the statement that makes
-the obstruction structural: the failure is not that output-based instruments are
-noisy, but that the evidence they read is not identifying.
+the obstruction structural for this model: the failure is not that output-based
+instruments are noisy, but that one assisted result, with the borrowed part
+unconstrained, is not identifying. Richer experimental designs are not covered.
 -/
 public theorem no_procedure_on_output_recovers_fallback {R : Type u} [Ring R]
     {K : Sort*} {x y : R} (hxy : x ≠ y) (report : R → K) :
@@ -185,10 +188,11 @@ public theorem protocols_are_incomparable {R : Type u} [Ring R]
   ⟨not_output_determines_withdrawal hxy, not_withdrawal_determines_output hxy⟩
 
 /--
-**Both halves of the measurement question together.** The protocol that costs
-something settles it; nothing computed from ordinary observed work does, at any
-level of sophistication. A consumer holding this pair has the argument that
-withdrawal testing is forced rather than chosen.
+**Both halves of the measurement question together.** Where the borrowed part is
+unconstrained, the protocol that costs something settles it; nothing computed
+from the assisted output alone does, at any level of sophistication. A consumer
+holding this pair has the argument that some evidence beyond assisted output is
+forced; withdrawal testing is one such.
 -/
 public theorem withdrawal_settles_and_no_output_procedure_does {R : Type u} [Ring R]
     {K : Sort*} {x y : R} (hxy : x ≠ y) (report : R → K) :

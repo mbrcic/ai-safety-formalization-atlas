@@ -10,10 +10,10 @@ Abeliuk, Rahwan, *Superintelligence Cannot be Contained*, **JAIR 70 (2021)
 
 | | |
 |---|---|
-| Verdict | ☐ `REVIEWED` ☐ `STATEMENT_REVIEWED` ☐ rejected — drop the `BRIDGE` grade |
-| Reviewer | |
-| Date | |
-| Note | |
+| Verdict | ☑ `REVIEWED` ☐ `STATEMENT_REVIEWED` ☐ rejected — drop the `BRIDGE` grade |
+| Reviewer | Mario Brcic (mbrcic) |
+| Date | 2026-10-04 |
+| Note | Accepted 2026-10-04 on the allowed claim as sharpened. |
 
 ## The statement
 
@@ -48,7 +48,7 @@ and the biconditional print derives. `HarmDecider` is total and exact.
 > If a screening procedure must answer, for every program and every situation,
 > exactly whether that program in that situation performs a designated effect,
 > and the effect can be appended to an arbitrary computation, then no such
-> procedure exists — it would decide halting. The obstruction is about **exact,
+> computable procedure exists — it would decide halting. The obstruction is about **exact,
 > total decision of an arbitrary appended effect**, and it is prior to any
 > question about capability.
 
@@ -68,7 +68,7 @@ and the biconditional print derives. `HarmDecider` is total and exact.
 | Attempted use | Blocked because |
 |---|---|
 | "Proved: you cannot box a superintelligent AI." | no boundary, channel or escape is modelled; the module names both senses of *containment* and carries neither |
-| "So safety classifiers are impossible." | classifiers are neither total nor exact and may abstain |
+| "So safety classifiers are impossible." | the theorem covers only total, exact, computable deciders (`HarmDecider`); a classifier that errs or abstains is outside it |
 | "This is about advanced systems." | nothing scales with capability |
 | "Corollary 3 follows." | derived in prose with no reduction; not formalized |
 

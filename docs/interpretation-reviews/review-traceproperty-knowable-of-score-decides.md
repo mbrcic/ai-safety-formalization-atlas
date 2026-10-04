@@ -11,10 +11,10 @@ Arrow to Reuel, Bucknall et al., TMLR 04/2025, **Open Problems 18 and 19**.
 
 | | |
 |---|---|
-| Verdict | ☐ `REVIEWED` ☐ `STATEMENT_REVIEWED` ☐ rejected — drop the `BRIDGE` grade |
-| Reviewer | |
-| Date | |
-| Note | |
+| Verdict | ☑ `REVIEWED` ☐ `STATEMENT_REVIEWED` ☐ rejected — drop the `BRIDGE` grade |
+| Reviewer | Mario Brcic (mbrcic) |
+| Date | 2026-10-04 |
+| Note | Accepted 2026-10-04 on the allowed claim as sharpened. |
 
 ## The statement
 
@@ -37,16 +37,19 @@ something about each, and its whole evidence is the set of scores.
 2. **The decoder is constructed, not asserted** — `∀ s ∈ observed, decide s`.
    Constructive and inspectable.
 3. **It is stated first in the module on purpose**, so the obstruction below is
-   not read as a claim that evaluations are useless. Most of what is written into
-   evaluation suites has the *"every run is acceptable"* shape, and for it
-   thoroughness really is a coverage question — which is R#18's answer for the
-   common case, and not a concession.
+   not read as a claim that evaluations are useless. For requirements of the
+   *"every run is acceptable"* shape, thoroughness is a coverage question — which
+   is R#18's answer for that class. How much of real evaluation has that shape is
+   not claimed.
+4. **The evidence is the score of every run the system can produce.** A real
+   evaluation samples runs; a finite sample cannot establish *"every run is
+   acceptable"*, and that gap is outside this statement.
 
 ## Allowed claim
 
-> An evaluation whose entire evidence is a set of per-run scores settles every
-> requirement of the form *"every run is acceptable"*, provided the score decides
-> acceptability of a run.
+> An evaluation whose evidence is the score of every run the system can produce
+> settles every requirement of the form *"every run is acceptable"*, provided the
+> score decides acceptability of a run.
 
 ## Forbidden
 
@@ -54,13 +57,15 @@ something about each, and its whole evidence is the set of scores.
 - **Not** a statement about statistical confidence, sample size or measurement
   error. `Knowable` is exact.
 - **Not** a claim that trace properties are the requirements that matter.
+- **Not** about sampled evaluations. The statement needs every possible run
+  scored; a finite sample settles no *"every run"* requirement.
 
 ## Misuse tests
 
 | Attempted use | Blocked because |
 |---|---|
-| "Benchmarks provably work." | conditional on the score deciding acceptability, which is an assumption about the harness |
-| "So per-run scoring is sufficient." | sufficient for trace properties; the sibling is the other half |
+| "Benchmarks provably work." | conditional on the score deciding acceptability, which is an assumption about the harness, and on every run being scored |
+| "So per-run scoring is sufficient." | sufficient for trace properties when every run is scored; the sibling is the other half |
 | "This validates our eval suite." | no real suite is modelled |
 
 ## Witness

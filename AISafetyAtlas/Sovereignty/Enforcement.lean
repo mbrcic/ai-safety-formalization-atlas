@@ -42,11 +42,12 @@ every function from observations to responses.
 form: the failure is one fact about the observation channel, reported in the two
 vocabularies that each half of a governance argument is usually written in.
 
-The converse direction is `detectable_of_enforcement`: an enforcement that works
-*is* a detector, recovered from it. So detectability is not merely necessary by
-accident — enforceability and detectability are the same requirement, and a
-proposal that concedes the first while asserting the second is incoherent
-rather than optimistic.
+The converse direction is `detectable_of_enforcement`: under a complete norm
+system, an enforcement that works *is* a detector, recovered from it. So for
+complete norms an undetectable prohibition cannot be enforced, and a proposal
+that concedes undetectability while asserting enforceability is incoherent
+rather than optimistic. The other direction, detection to enforcement, is not
+proved here.
 
 ## What this does not claim
 

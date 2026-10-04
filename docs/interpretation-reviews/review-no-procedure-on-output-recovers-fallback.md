@@ -13,10 +13,10 @@ Context source: *International AI Safety Report 2026* (chair: Yoshua Bengio),
 
 | | |
 |---|---|
-| Verdict | ☐ `REVIEWED` ☐ `STATEMENT_REVIEWED` ☐ rejected — drop the `BRIDGE` grade |
-| Reviewer | |
-| Date | |
-| Note | |
+| Verdict | ☑ `REVIEWED` ☐ `STATEMENT_REVIEWED` ☐ rejected — drop the `BRIDGE` grade |
+| Reviewer | Mario Brcic (mbrcic) |
+| Date | 2026-10-04 |
+| Note | Accepted 2026-10-04 on the allowed claim as qualified: one assisted result, borrowed part unconstrained; richer experimental designs are outside the model. |
 
 ## The statement
 
@@ -33,9 +33,10 @@ The state is a pair: unaided capability and what is borrowed.
 ## What to check
 
 1. **`report` is arbitrary.** Any statistic, rubric, satisfaction score,
-   productivity metric or summary computed from assisted output. This is
-   `not_knowable_comp`, and it makes the obstruction structural rather than an
-   instrument-quality complaint.
+   productivity metric or summary computed from **one** assisted output. This is
+   `not_knowable_comp`: for that single result, with the borrowed part
+   unconstrained, no better instrument helps. It says nothing about instruments
+   that combine many results.
 2. **The decomposition `output = fallback + borrowed` is itself a model.** A
    setting where assistance and capability do not compose additively is not this
    one.
@@ -47,13 +48,21 @@ The state is a pair: unaided capability and what is borrowed.
 
 ## Allowed claim
 
-> Where assisted performance is the sum of unaided capability and what is
-> borrowed, no instrument computed from assisted output recovers unaided
-> capability, at any level of sophistication, because the evidence does not
-> contain the answer.
+> In a model where one assisted result is the sum of a person's unaided
+> capability and a borrowed part that can take any value, no function of that
+> single result recovers the unaided capability exactly. This is about one
+> observation with nothing known about the borrowed part. Designs that vary
+> tasks, assistance or people, or that bound or measure the borrowed part, are
+> not modelled and may well estimate unaided capability or the ratio of the two;
+> nothing here says otherwise.
 
 ## Forbidden
 
+- **Not** a claim that unaided capability cannot be estimated from assisted work
+  in general. The model sees one assisted result with nothing known about the
+  borrowed part; designs that vary tasks, assistance levels or people, or that
+  bound or measure the borrowed part, are outside it and may well estimate
+  unaided capability or its ratio to assisted performance.
 - **Not** that any deployed system causes cognitive offloading. Nothing here is
   evidence of decline, and the report's own caveat travels with every use of the
   6% figure: *"research into the relationship between use of AI and cognitive

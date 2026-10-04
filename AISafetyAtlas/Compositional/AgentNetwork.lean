@@ -119,11 +119,12 @@ public theorem no_designated_agent_emerges (σ : Networks.Automorphism F.topolog
 /--
 **One property, read twice.**
 
-The indistinguishability that makes a fleet cheap to evaluate is the same
-indistinguishability that stops any of its members becoming special. An
-architecture gets both or neither, and a design that assumes the cheap evaluation
-*and* a designated coordinator has assumed a contradiction it will discover at
-deployment.
+Both halves rest on indistinguishability: two agents with the same view run
+identically, and a symmetry moving every agent, with an initial configuration
+invariant under it, leaves no unique leader. The halves share no hypothesis, so
+this does not show that one cannot be had without the other; it shows that a
+design assuming a designated coordinator under such a symmetry has assumed
+something the protocol cannot deliver.
 -/
 public theorem symmetry_is_the_shared_cause (σ : Networks.Automorphism F.topology)
     (hmoves : ∀ v, σ.toEquiv v ≠ v) (role : State → Prop)

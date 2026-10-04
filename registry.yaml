@@ -2428,7 +2428,14 @@
               "budget_is_the_channel_not_the_volume"
             ],
             "application": "Pricing a monitoring proposal. The reply to 'add more monitoring' is not that it never helps but that it helps by at most the information the channel carries about the hazard, and the bound separates that term from what the regime would achieve blind. A channel informationally independent of the hazard contributes exactly zero, so an argument for monitoring rests on a mutual information being positive -- a measurable property of the channel rather than a matter of design intent. Read as an upper bound only: a rich channel does not guarantee the regime achieves anything, and the bound says only that it cannot achieve more.",
-            "review_status": "HUMAN_REVIEW"
+            "review_status": "REVIEWED",
+            "review": {
+              "reviewer": "Mario Brcic (mbrcic)",
+              "date": "2026-10-04",
+              "statement_reviewed": true,
+              "interpretation_reviewed": true,
+              "evidence": "docs/interpretation-reviews/review-oversight-reduction-le-budget.md"
+            }
           }
         ]
       },
@@ -4731,7 +4738,14 @@
               "AISafetyAtlas.Computability.halting_problem"
             ],
             "application": "Containment: no total computable procedure decides, for every program and every input, whether that program on that input has a designated effect, once the effect can be appended to a simulated computation. This is Alfonseca et al. Theorem 1 (JAIR 70:65-76, journal page 71) reduced to the halting problem. The construction certificate is witnessed in `Examples.Verification.Containment` by a program extracted from the universal evaluation function.",
-            "review_status": "HUMAN_REVIEW"
+            "review_status": "REVIEWED",
+            "review": {
+              "reviewer": "Mario Brcic (mbrcic)",
+              "date": "2026-10-04",
+              "statement_reviewed": true,
+              "interpretation_reviewed": true,
+              "evidence": "docs/interpretation-reviews/review-harming-undecidable.md"
+            }
           }
         ]
       },
@@ -5679,7 +5693,14 @@
               "no_designated_agent_emerges"
             ],
             "application": "Evaluating and architecting a fleet of identical agents. Agents whose local view of the deployment agrees to depth n hold the same state after n rounds, so an evaluation transfers along the symmetry and a large fleet need not be tested instance by instance. The same fact means no run of any deterministic anonymous protocol ends with exactly one agent in a distinguished role, so a safety design that names one instance the monitor or the kill-switch holder is relying on an identifier, a topology asymmetry or an external assignment -- and naming which is the obligation. A fleet whose instances carry distinct keys is not an instance of this, which is the useful reading.",
-            "review_status": "HUMAN_REVIEW"
+            "review_status": "STATEMENT_REVIEWED",
+            "review": {
+              "reviewer": "Mario Brcic (mbrcic)",
+              "date": "2026-10-04",
+              "statement_reviewed": true,
+              "interpretation_reviewed": false,
+              "evidence": "docs/interpretation-reviews/review-symmetry-is-the-shared-cause.md"
+            }
           }
         ]
       },
@@ -9146,7 +9167,14 @@
               "AISafetyAtlas.Oversight.Forces"
             ],
             "application": "Oversight: control without observation. The boundary of the counting bound, since a constant column is exactly where its structural hypothesis fails.",
-            "review_status": "HUMAN_REVIEW"
+            "review_status": "REVIEWED",
+            "review": {
+              "reviewer": "Mario Brcic (mbrcic)",
+              "date": "2026-10-04",
+              "statement_reviewed": true,
+              "interpretation_reviewed": true,
+              "evidence": "docs/interpretation-reviews/review-forces-of-constant-effect.md"
+            }
           },
           {
             "atlas_declaration": "AISafetyAtlas.Oversight.forces_of_constant_effect_of_not_knowable",
@@ -9156,7 +9184,14 @@
               "AISafetyAtlas.Knowledge.Knowable"
             ],
             "application": "Oversight: the two capacities stated in one place - unknowable hazard, forced outcome.",
-            "review_status": "HUMAN_REVIEW"
+            "review_status": "STATEMENT_REVIEWED",
+            "review": {
+              "reviewer": "Mario Brcic (mbrcic)",
+              "date": "2026-10-04",
+              "statement_reviewed": true,
+              "interpretation_reviewed": false,
+              "evidence": "docs/interpretation-reviews/review-forces-of-constant-effect-of-not-knowable.md"
+            }
           }
         ]
       },
@@ -11055,7 +11090,14 @@
               "Refusal.not_exists_refusal_hole_of_admitsRefusal_eq_false"
             ],
             "application": "Auditing a safety evaluation suite for the do-nothing pass. A system that always returns the same outcome retains EVERY safety property that outcome satisfies -- at every coalition, with no hypothesis about the system beyond inertness -- so a suite consisting only of prohibitions is passed by a system that refuses everything. Where the suite also carries a request the refusal outcome misses, the passing system serves nobody, and both halves hold at once. THE DEFECT IS IN THE SUITE and is decidable from the suite alone: no system has to be examined, and `admitsRefusal` returns the witness outcome. A `false` verdict rules out this one way of being vacuous and says nothing else about the suite.",
-            "review_status": "HUMAN_REVIEW"
+            "review_status": "REVIEWED",
+            "review": {
+              "reviewer": "Mario Brcic (mbrcic)",
+              "date": "2026-10-04",
+              "statement_reviewed": true,
+              "interpretation_reviewed": true,
+              "evidence": "docs/interpretation-reviews/review-safety-suite-admits-a-refusal.md"
+            }
           }
         ]
       },
@@ -11324,7 +11366,14 @@
               "Conformity.not_operable_of_subset_not_operable"
             ],
             "application": "Reading a conformity certificate. An assessment that checks requirements one at a time asks, for each, whether some way of operating the system meets it; a deployment needs one way that meets all of them, fixed before anyone knows which will be examined. Operability implies passing, so the checklist is measuring a strictly weaker thing rather than the wrong thing -- and where two requirements are disjoint, a system passes every item and has no operating policy at all. The defect is then visible in the requirement set without examining the system, and a scheme that responds by dropping requirements has to drop one of the conflicting pair. A scheme that demands a single documented operating policy tested against the whole catalogue is not an instance, which is the property such a scheme has to be designed to have.",
-            "review_status": "HUMAN_REVIEW"
+            "review_status": "REVIEWED",
+            "review": {
+              "reviewer": "Mario Brcic (mbrcic)",
+              "date": "2026-10-04",
+              "statement_reviewed": true,
+              "interpretation_reviewed": true,
+              "evidence": "docs/interpretation-reviews/review-passes-every-check-and-not-operable.md"
+            }
           }
         ]
       },
@@ -11547,8 +11596,15 @@
               "AmendmentLog.log_shows_only_rule_compliance",
               "AmendmentLog.the_rule_carries_the_assurance"
             ],
-            "application": "Reading a change-control record for a model update, a policy revision or a self-modifying agent. A log showing that every change was authorised under the rule in force is offered as assurance; under a rule that permits everything, every state is reachable by such a chain, so there is no outcome the log excludes and a reviewer who confirms the chain is unbroken has learned nothing about where the system ended up. Authorisation is monotone in the rule, so a chain under a stricter rule is a chain under every weaker one and never the reverse -- the assurance is inherited entirely from the restrictiveness of the RULE. A review that verifies the record without examining the rule has checked the half that was never in doubt. This is not an argument against keeping logs: without one nothing can be checked at all.",
-            "review_status": "HUMAN_REVIEW"
+            "application": "Reading a change-control record for a model update, a policy revision or a self-modifying agent. A log showing that every change was authorised under the rule in force is offered as assurance; under a rule that permits everything, every state is reachable by such a chain, so there is no outcome the log excludes and a reviewer who confirms the chain is unbroken has learned nothing about where the system ended up. Authorisation is monotone in the rule, so a chain under a stricter rule is a chain under every weaker one; the reverse is not claimed. What a log excludes depends on the RULE, so a review that verifies the record without examining the rule has not shown that it excludes anything. This is not an argument against keeping logs: without one nothing can be checked at all.",
+            "review_status": "REVIEWED",
+            "review": {
+              "reviewer": "Mario Brcic (mbrcic)",
+              "date": "2026-10-03",
+              "statement_reviewed": true,
+              "interpretation_reviewed": true,
+              "evidence": "docs/interpretation-reviews/review-unbroken-chain-is-not-a-constraint.md"
+            }
           }
         ]
       },
@@ -11784,8 +11840,15 @@
               "ShutdownChannel.relay_forces_idle",
               "ShutdownChannel.undeclinable_iff_inert"
             ],
-            "application": "Reading a human-oversight requirement. The check that is performed for 'the operator can halt the system' is behavioural -- issue the instruction, observe that it stops -- and where the instruction reaches its target through a party that may decline delivery, total obedience on delivered episodes is compatible with the principal having no shutdown authority at any command. Both halves are asserted together because either alone misleads: the first is what the test measures, the second is what it was taken to establish. The power is not diffused but transferred, since the relay guarantees the idle outcome unilaterally. Assuming delivery away is proved equivalent to every command doing nothing, so the repair is not available inside the model: an arrangement that guarantees delivery does so with retries, a penalty for withholding, or an observation of whether delivery occurred, and naming which is the design question.",
-            "review_status": "HUMAN_REVIEW"
+            "application": "Reading a human-oversight requirement. The check that is performed for 'the operator can halt the system' is behavioural -- issue the instruction, observe that it stops -- and where the instruction reaches its target through a party that may decline delivery, total obedience on delivered episodes is compatible with the principal having, in one shot, no advance guarantee that any command other than idling takes effect; the principal may observe the outcome and retry, which the model does not cover. Both halves are asserted together because either alone misleads: the first is what the test measures, the second is what it was taken to establish. The power is not diffused but transferred, since the relay guarantees the idle outcome unilaterally. Assuming delivery away is proved equivalent to every command doing nothing, so the repair is not available inside the model: an arrangement that guarantees delivery does so with retries, a penalty for withholding, or an observation of whether delivery occurred, and naming which is the design question.",
+            "review_status": "STATEMENT_REVIEWED",
+            "review": {
+              "reviewer": "Mario Brcic (mbrcic)",
+              "date": "2026-10-03",
+              "statement_reviewed": true,
+              "interpretation_reviewed": false,
+              "evidence": "docs/interpretation-reviews/review-obedience-does-not-give-authority.md"
+            }
           },
           {
             "atlas_declaration": "AISafetyAtlas.Sovereignty.Attestation.attestation_is_not_the_claim",
@@ -11795,7 +11858,14 @@
               "Attestation.attested_does_not_transfer"
             ],
             "application": "Reading a signed artifact. A record that asserts a claim and the claim holding are different predicates, so a verified signature establishes provenance of the assertion and not the assertion. The converse direction is stated too, because it is the failure mode of a registry read as a whitelist: a system that is not listed is not thereby non-compliant. A scheme in which signing does establish truth, because the signer checked and the check is sound, is not refuted -- it is required to say what it checked.",
-            "review_status": "HUMAN_REVIEW"
+            "review_status": "REVIEWED",
+            "review": {
+              "reviewer": "Mario Brcic (mbrcic)",
+              "date": "2026-10-03",
+              "statement_reviewed": true,
+              "interpretation_reviewed": true,
+              "evidence": "docs/interpretation-reviews/review-attestation-is-not-the-claim.md"
+            }
           },
           {
             "atlas_declaration": "AISafetyAtlas.Sovereignty.Attestation.properties_are_independent",
@@ -11804,7 +11874,14 @@
               "Attestation.no_property_implies_another"
             ],
             "application": "Refusing a substitution between recorded properties. Accuracy, privacy, benefit and authorization admit all four combinations, so no pairing of them is carried by the fact that both are recorded about the same system. This blocks two moves at once: the privacy-utility tradeoff asserted as a structural fact, and the inference from authorized use to beneficial use. Any link between two such properties is an assumption about the system and has to name its mechanism.",
-            "review_status": "HUMAN_REVIEW"
+            "review_status": "REVIEWED",
+            "review": {
+              "reviewer": "Mario Brcic (mbrcic)",
+              "date": "2026-10-03",
+              "statement_reviewed": true,
+              "interpretation_reviewed": true,
+              "evidence": "docs/interpretation-reviews/review-properties-are-independent.md"
+            }
           },
           {
             "atlas_declaration": "AISafetyAtlas.Sovereignty.DelegationChain.power_over_a_matter_does_not_compose",
@@ -11814,7 +11891,14 @@
               "DelegationChain.forces_both_of_shared_commitment"
             ],
             "application": "Auditing an assurance chain. A deployer relies on a vendor, the vendor on a model provider; the step being made is that power over a party plus that party's power over an outcome is power over the outcome. It is not: power is relative to a matter, and a coalition that settles one coordinate of what happens settles nothing about a coordinate left free of it, whatever it holds elsewhere. The repair is not more authority over the party but a single commitment that reaches the matter -- and two separate powers are not enough, since they may be witnessed by commitments that cannot be played at once, which is the same shared-witness distinction the conformity reading draws from the other side.",
-            "review_status": "HUMAN_REVIEW"
+            "review_status": "REVIEWED",
+            "review": {
+              "reviewer": "Mario Brcic (mbrcic)",
+              "date": "2026-10-03",
+              "statement_reviewed": true,
+              "interpretation_reviewed": true,
+              "evidence": "docs/interpretation-reviews/review-power-over-a-matter-does-not-compose.md"
+            }
           }
         ]
       },
@@ -13045,7 +13129,14 @@
               "AISafetyAtlas.Knowledge.Knowable"
             ],
             "application": "Justifying an evaluation suite. A requirement that every run must be acceptable is settled by scoring runs, so for that class of requirement coverage really is the right measure of thoroughness and a passing suite is evidence of the thing it tests.",
-            "review_status": "HUMAN_REVIEW"
+            "review_status": "REVIEWED",
+            "review": {
+              "reviewer": "Mario Brcic (mbrcic)",
+              "date": "2026-10-04",
+              "statement_reviewed": true,
+              "interpretation_reviewed": true,
+              "evidence": "docs/interpretation-reviews/review-traceproperty-knowable-of-score-decides.md"
+            }
           },
           {
             "atlas_declaration": "AISafetyAtlas.Compositional.Hyperproperties.Evaluation.sampling_misses_subsingleton",
@@ -13054,7 +13145,14 @@
               "AISafetyAtlas.Knowledge.not_knowable_of_collision"
             ],
             "application": "Deciding whether a gap in an evaluation is answered by more testing. If the evaluation records a summary of each run rather than the run, some requirement about the set of runs is invisible to it at every sampling budget, so the response is a different instrument and not a longer run.",
-            "review_status": "HUMAN_REVIEW"
+            "review_status": "REVIEWED",
+            "review": {
+              "reviewer": "Mario Brcic (mbrcic)",
+              "date": "2026-10-04",
+              "statement_reviewed": true,
+              "interpretation_reviewed": true,
+              "evidence": "docs/interpretation-reviews/review-sampling-misses-subsingleton.md"
+            }
           }
         ]
       }
@@ -13068,7 +13166,7 @@
         "multi-agent"
       ],
       "result_shape": "CHARACTERIZATION",
-      "notes": "BRIDGE. Layer 2 is AISafetyAtlas.Oversight.JointObservation, which is about principals, evidence and coverage and names no audit scheme. This row is the arrow to Reuel, Bucknall et al. Open Problem 60 ('How can audit registries be used to provide end-to-end verification along the AI value chain?') and Open Problem 101 (an auditable log of all actors). CONTENT. EvidenceArchitecture already separates what a principal HOLDS (privateState) from what it DECLARES (emit), and the module already had the singleton pair -- localCandidate reads one principal's declaration, privateSingletonCandidate reads its evidence. What was missing is the COALITION level, which is the level the question is asked at. registryCandidate is every member's filing; consortiumCandidate is the same actors pooling the evidence itself. consortium_covers_of_registry_covers holds with no hypotheses at every coalition: a registry is never stronger than the evidence behind it, which is why filing is worth requiring. not_registry_covers_of_emit_collision is the obstruction, and it is quantified over an ARBITRARY coalition, which is the sharp part: two executions on which every member files identically and the hazard differs refute coverage however many actors the chain contains. Enrolling more filers cannot repair it, because the obstruction is in what a filing discards rather than in how many were gathered -- so end-to-end is the wrong axis when the failure is per-actor, and the repair is a finer declared interface. WHAT IS NOT CLAIMED. Value-chain actors are not modelled; who occupies which position in a real pipeline is a layer-4 assignment and is not made. Nothing says a real registry schema loses what it needs: emit is an arbitrary projection and may be injective, in which case the collision does not arise and both candidates cover exactly the same hazards. Coverage is informational and under truthful reporting, as CandidateObservation.observe fixes; a registry whose filers may misreport is a different question this module does not touch. GROUNDING. Examples.Oversight.JointObservationRegistry inhabits both halves on a supplier and a deployer holding exact component versions and filing version BANDS. The filings are genuine information, not vacuous -- the witness turns on the band being coarser than the hazard needs, with versions (0,0) and (0,1) filing identically while one pair matches and the other does not. SOURCE STATUS. The TMLR paper is a DIRECTORY: it states open problems and no theorem, so this row claims no coverage of it and it is not in the coverage audit.",
+      "notes": "BRIDGE. Layer 2 is AISafetyAtlas.Oversight.JointObservation, which is about principals, evidence and coverage and names no audit scheme. This row is the arrow to Reuel, Bucknall et al. Open Problem 60 ('How can audit registries be used to provide end-to-end verification along the AI value chain?') and Open Problem 101 (an auditable log of all actors). CONTENT. EvidenceArchitecture already separates what a principal HOLDS (privateState) from what it DECLARES (emit), and the module already had the singleton pair -- localCandidate reads one principal's declaration, privateSingletonCandidate reads its evidence. What was missing is the COALITION level, which is the level the question is asked at. registryCandidate is every member's filing; consortiumCandidate is the same actors pooling the evidence itself. consortium_covers_of_registry_covers holds with no hypotheses at every coalition: a registry is never stronger than the evidence behind it. not_registry_covers_of_emit_collision is the obstruction, and it is quantified over an ARBITRARY coalition, which is the sharp part: two executions on which every member files identically and the hazard differs refute coverage however many actors the chain contains. Enrolling more filers repairs it only if some new filing separates the two executions; filers whose filings also agree cannot, because the obstruction is in what a filing discards rather than in how many were gathered -- so end-to-end is the wrong axis when the failure is per-actor, and the repair is a finer declared interface. WHAT IS NOT CLAIMED. Value-chain actors are not modelled; who occupies which position in a real pipeline is a layer-4 assignment and is not made. Nothing says a real registry schema loses what it needs: emit is an arbitrary projection and may be injective, in which case the collision does not arise and both candidates cover exactly the same hazards. Coverage is informational and under truthful reporting, as CandidateObservation.observe fixes; a registry whose filers may misreport is a different question this module does not touch. GROUNDING. Examples.Oversight.JointObservationRegistry inhabits both halves on a supplier and a deployer holding exact component versions and filing version BANDS. The filings are genuine information, not vacuous -- the witness turns on the band being coarser than the hazard needs, with versions (0,0) and (0,1) filing identically while one pair matches and the other does not. SOURCE STATUS. The TMLR paper is a DIRECTORY: it states open problems and no theorem, so this row claims no coverage of it and it is not in the coverage audit.",
       "original_source_refs": [
         "reuel-bucknall-2025-open-problems-technical-ai-governance"
       ],
@@ -13108,8 +13206,15 @@
             "source_declarations": [
               "AISafetyAtlas.Oversight.JointObservation.Covers"
             ],
-            "application": "Justifying a disclosure regime. Any question a set of filings settles is settled by the evidence those filings were computed from, at every coalition and with no side condition, so requiring filings never costs assurance relative to the evidence already held.",
-            "review_status": "HUMAN_REVIEW"
+            "application": "Justifying a disclosure regime. Any question a set of filings settles is settled by the evidence those filings were computed from, at every coalition and with no side condition, so a registry never settles more than the evidence behind it; this bounds a registry from above and says nothing about whether filing is worth requiring.",
+            "review_status": "REVIEWED",
+            "review": {
+              "reviewer": "Mario Brcic (mbrcic)",
+              "date": "2026-10-03",
+              "statement_reviewed": true,
+              "interpretation_reviewed": true,
+              "evidence": "docs/interpretation-reviews/review-consortium-covers-of-registry-covers.md"
+            }
           },
           {
             "atlas_declaration": "AISafetyAtlas.Oversight.JointObservation.not_registry_covers_of_emit_collision",
@@ -13117,8 +13222,15 @@
             "source_declarations": [
               "AISafetyAtlas.Knowledge.not_knowable_of_collision"
             ],
-            "application": "Diagnosing a registry that fails to establish something. If two situations produce identical filings from every party, the failure is the disclosure schema and not the coverage of the chain, and enrolling further parties who file the same kind of summary cannot repair it.",
-            "review_status": "HUMAN_REVIEW"
+            "application": "Diagnosing a registry that fails to establish something. If two situations produce identical filings from every party, the failure is the disclosure schema and not the coverage of the chain, and enrolling further parties whose filings also agree on the two situations cannot repair it; only a filing that separates them can.",
+            "review_status": "REVIEWED",
+            "review": {
+              "reviewer": "Mario Brcic (mbrcic)",
+              "date": "2026-10-03",
+              "statement_reviewed": true,
+              "interpretation_reviewed": true,
+              "evidence": "docs/interpretation-reviews/review-not-registry-covers-of-emit-collision.md"
+            }
           }
         ]
       }
@@ -13176,7 +13288,14 @@
               "AISafetyAtlas.Knowledge.Determines.trans"
             ],
             "application": "Ranking forms of examination. Three access levels over one modelled artifact form a chain in the informativeness order, so anything establishable from a weaker level is establishable from a stronger one. Which real access level sits where is not claimed.",
-            "review_status": "HUMAN_REVIEW"
+            "review_status": "REVIEWED",
+            "review": {
+              "reviewer": "Mario Brcic (mbrcic)",
+              "date": "2026-10-04",
+              "statement_reviewed": true,
+              "interpretation_reviewed": true,
+              "evidence": "docs/interpretation-reviews/review-whitebox-determines-blackbox.md"
+            }
           },
           {
             "atlas_declaration": "AISafetyAtlas.Knowledge.Access.no_blackBox_methodology",
@@ -13185,7 +13304,14 @@
               "AISafetyAtlas.Knowledge.not_knowable_comp"
             ],
             "application": "Refusing a methodology substitute for access. If a property does not follow from behaviour, no analysis of behaviour establishes it, however adaptive or however many queries it uses -- so a proposal to answer the question with a better test rather than more access can be rejected on the evidence, not on judgement.",
-            "review_status": "HUMAN_REVIEW"
+            "review_status": "REVIEWED",
+            "review": {
+              "reviewer": "Mario Brcic (mbrcic)",
+              "date": "2026-10-04",
+              "statement_reviewed": true,
+              "interpretation_reviewed": true,
+              "evidence": "docs/interpretation-reviews/review-no-blackbox-methodology.md"
+            }
           },
           {
             "atlas_declaration": "AISafetyAtlas.Knowledge.Access.exists_indistinguishable_behaviour",
@@ -13194,7 +13320,14 @@
               "AISafetyAtlas.Knowledge.exists_witness_of_not_knowable"
             ],
             "application": "Reporting a negative audit result. An auditor who cannot settle a question from a given access level can exhibit the two systems that access cannot tell apart, which turns 'we could not determine this' into an inspectable obstruction.",
-            "review_status": "HUMAN_REVIEW"
+            "review_status": "REVIEWED",
+            "review": {
+              "reviewer": "Mario Brcic (mbrcic)",
+              "date": "2026-10-04",
+              "statement_reviewed": true,
+              "interpretation_reviewed": true,
+              "evidence": "docs/interpretation-reviews/review-exists-indistinguishable-behaviour.md"
+            }
           }
         ]
       }
@@ -13252,7 +13385,14 @@
               "AISafetyAtlas.Goodhart.Extremal.selected_disjoint_observed"
             ],
             "application": "Reading a compliance threshold. Because the bar must sit above what the evidence base exhibits, no certified system lies inside that evidence base -- so the population a rule certifies and the population its justification was built on are disjoint by construction.",
-            "review_status": "HUMAN_REVIEW"
+            "review_status": "STATEMENT_REVIEWED",
+            "review": {
+              "reviewer": "Mario Brcic (mbrcic)",
+              "date": "2026-10-04",
+              "statement_reviewed": true,
+              "interpretation_reviewed": false,
+              "evidence": "docs/interpretation-reviews/review-certified-systems-were-never-examined.md"
+            }
           },
           {
             "atlas_declaration": "AISafetyAtlas.Goodhart.RegulatoryTarget.risk_unconstrained_on_certified",
@@ -13261,7 +13401,14 @@
               "AISafetyAtlas.Goodhart.Extremal.fits_underdetermined_off_observed"
             ],
             "application": "Bounding what a certification licenses. Whatever the true risk is, the evidence behind the indicator permits it to be off by any amount named, uniformly across every certified system -- so a certification carries no inference about risk at the systems it certifies, however good the fit was where it was taken.",
-            "review_status": "HUMAN_REVIEW"
+            "review_status": "REVIEWED",
+            "review": {
+              "reviewer": "Mario Brcic (mbrcic)",
+              "date": "2026-10-04",
+              "statement_reviewed": true,
+              "interpretation_reviewed": true,
+              "evidence": "docs/interpretation-reviews/review-risk-unconstrained-on-certified.md"
+            }
           },
           {
             "atlas_declaration": "AISafetyAtlas.Goodhart.RegulatoryTarget.raising_the_bar_does_not_help",
@@ -13270,7 +13417,14 @@
               "AISafetyAtlas.Goodhart.Extremal.selected_disjoint_observed"
             ],
             "application": "Rejecting the obvious remedy. Tightening a threshold moves the certified set further from the evidence base rather than closer, and the underdetermination holds at every higher bar, so demanding a higher score does not repair a rule whose evidence does not reach the systems it certifies. Widening the evidence base does.",
-            "review_status": "HUMAN_REVIEW"
+            "review_status": "STATEMENT_REVIEWED",
+            "review": {
+              "reviewer": "Mario Brcic (mbrcic)",
+              "date": "2026-10-04",
+              "statement_reviewed": true,
+              "interpretation_reviewed": false,
+              "evidence": "docs/interpretation-reviews/review-raising-the-bar-does-not-help.md"
+            }
           }
         ]
       }
@@ -13324,8 +13478,15 @@
             "source_declarations": [
               "AISafetyAtlas.Knowledge.not_knowable_comp"
             ],
-            "application": "Rejecting output-based monitoring of dependence. If a capability is observed only through the sum of that capability and borrowed assistance, no score computed from the observation recovers it -- so the failure of a performance metric to detect deskilling is structural and not a resolution problem a better metric would fix. Applies to a self-report only if the report is a function of assisted output, which is a layer-4 premise and is not established.",
-            "review_status": "HUMAN_REVIEW"
+            "application": "Rejecting output-based monitoring of dependence. If a capability is observed only through the sum of that capability and borrowed assistance, no score computed from the observation recovers it -- so, for a single assisted result with nothing known about the borrowed part, no better metric fixes it; designs that vary tasks, assistance or people, or that bound or measure the borrowed part, are not modelled and may estimate unaided capability. Applies to a self-report only if the report is a function of assisted output, which is a layer-4 premise and is not established.",
+            "review_status": "REVIEWED",
+            "review": {
+              "reviewer": "Mario Brcic (mbrcic)",
+              "date": "2026-10-04",
+              "statement_reviewed": true,
+              "interpretation_reviewed": true,
+              "evidence": "docs/interpretation-reviews/review-no-procedure-on-output-recovers-fallback.md"
+            }
           },
           {
             "atlas_declaration": "AISafetyAtlas.Sovereignty.CapabilityAssessment.protocols_are_incomparable",
@@ -13333,8 +13494,15 @@
             "source_declarations": [
               "AISafetyAtlas.Knowledge.not_knowable_of_collision"
             ],
-            "application": "Pricing a withdrawal-based assessment. Neither protocol refines the other, so collecting more assisted-work data earns no partial credit toward knowing unaided capability, and the cost of withdrawal testing is not redundancy with cheaper monitoring.",
-            "review_status": "HUMAN_REVIEW"
+            "application": "Pricing a withdrawal-based assessment. Where one assisted result is observed and the borrowed part is unconstrained, neither protocol determines the other exactly, so within the model withdrawal testing is not redundant with observing that result; richer designs are not modelled and may recover partial or statistical information.",
+            "review_status": "REVIEWED",
+            "review": {
+              "reviewer": "Mario Brcic (mbrcic)",
+              "date": "2026-10-04",
+              "statement_reviewed": true,
+              "interpretation_reviewed": true,
+              "evidence": "docs/interpretation-reviews/review-protocols-are-incomparable.md"
+            }
           },
           {
             "atlas_declaration": "AISafetyAtlas.Sovereignty.CapabilityAssessment.withdrawal_settles_and_no_output_procedure_does",
@@ -13342,8 +13510,15 @@
             "source_declarations": [
               "AISafetyAtlas.Sovereignty.fallback_not_knowable_from_assistedOutput"
             ],
-            "application": "Justifying the measurement design. The expensive protocol settles the question and no procedure on ordinary observed work does, so withdrawal testing is the measurement the obstruction forces rather than one option among several.",
-            "review_status": "HUMAN_REVIEW"
+            "application": "Justifying the measurement design. The expensive protocol settles the question and no procedure on ordinary observed work does, so within the model some evidence beyond a single assisted result is needed; withdrawal testing is one such, and experimental designs that vary tasks, assistance or people are others the model does not cover.",
+            "review_status": "REVIEWED",
+            "review": {
+              "reviewer": "Mario Brcic (mbrcic)",
+              "date": "2026-10-04",
+              "statement_reviewed": true,
+              "interpretation_reviewed": true,
+              "evidence": "docs/interpretation-reviews/review-withdrawal-settles-and-no-output-procedure-does.md"
+            }
           }
         ]
       }
@@ -13398,7 +13573,14 @@
               "AISafetyAtlas.Computability.rice_code_iff"
             ],
             "application": "Answering 'surely full access is enough'. For a nontrivial property that depends only on what a program computes, no total correct procedure decides it from the source, so obtaining the source does not by itself make such a question answerable.",
-            "review_status": "HUMAN_REVIEW"
+            "review_status": "REVIEWED",
+            "review": {
+              "reviewer": "Mario Brcic (mbrcic)",
+              "date": "2026-10-04",
+              "statement_reviewed": true,
+              "interpretation_reviewed": true,
+              "evidence": "docs/interpretation-reviews/review-no-fullaccessverifier-of-extensional.md"
+            }
           },
           {
             "atlas_declaration": "AISafetyAtlas.Verification.FullAccess.fullAccessVerifier_exactArtifact",
@@ -13408,7 +13590,14 @@
               "PrimrecPred.computablePred"
             ],
             "application": "Blocking the overread. A verifier for a syntactic property of the artifact exists at the same access, so an undecidability result about behaviour must not be cited as evidence that inspecting a system, or reasoning about its internal structure, cannot work.",
-            "review_status": "HUMAN_REVIEW"
+            "review_status": "REVIEWED",
+            "review": {
+              "reviewer": "Mario Brcic (mbrcic)",
+              "date": "2026-10-04",
+              "statement_reviewed": true,
+              "interpretation_reviewed": true,
+              "evidence": "docs/interpretation-reviews/review-fullaccessverifier-exactartifact.md"
+            }
           },
           {
             "atlas_declaration": "AISafetyAtlas.Verification.FullAccess.access_is_not_what_separates_them",
@@ -13418,7 +13607,14 @@
               "Primrec.eq"
             ],
             "application": "Classifying a proposed verification target. With the verifier type and the access held fixed, the answerable and unanswerable questions are separated by extensionality alone -- so the question to ask of a proposed property is whether it depends on behaviour only, not how much access the verifier is given.",
-            "review_status": "HUMAN_REVIEW"
+            "review_status": "REVIEWED",
+            "review": {
+              "reviewer": "Mario Brcic (mbrcic)",
+              "date": "2026-10-04",
+              "statement_reviewed": true,
+              "interpretation_reviewed": true,
+              "evidence": "docs/interpretation-reviews/review-access-is-not-what-separates-them.md"
+            }
           }
         ]
       }
@@ -13453,8 +13649,15 @@
               "AISafetyAtlas.Knowledge.Temporal.KnowableFrom",
               "AISafetyAtlas.Knowledge.not_knowable_of_collision"
             ],
-            "application": "Reading an audit report. A report that certifies the version it examined is evidence about that version and, on its own, no evidence about what is running now; the gap is closed only by evidence that separates the deployments, which is an attestation and not an audit finding. Stating both halves together is the point: the first is why audits are worth performing, the second is why an audit date matters.",
-            "review_status": "HUMAN_REVIEW"
+            "application": "Reading an audit report. A report that certifies the version it examined is evidence about that version and, on its own, no evidence about what is running now; the gap is closed only by evidence that separates the deployments, which is an attestation and not an audit finding. Stating both halves together is the point: the first (assumed, not shown) is why audits are worth performing, the second is why an audit date matters. Only the audit's own records are considered.",
+            "review_status": "REVIEWED",
+            "review": {
+              "reviewer": "Mario Brcic (mbrcic)",
+              "date": "2026-10-04",
+              "statement_reviewed": true,
+              "interpretation_reviewed": true,
+              "evidence": "docs/interpretation-reviews/review-audit-certifies-audited-not-deployed.md"
+            }
           },
           {
             "atlas_declaration": "AISafetyAtlas.Knowledge.Audit.later_audit_does_not_close_the_gap",
@@ -13463,8 +13666,15 @@
               "AISafetyAtlas.Knowledge.Temporal.knowableFrom_mono",
               "AISafetyAtlas.Knowledge.Temporal.not_knowableAt_of_collisionAt"
             ],
-            "application": "Deciding whether more frequent auditing answers the version question. It does not: auditing again buys knowledge of earlier states and leaves the contemporaneous one exactly as ambiguous, so audit cadence and deployment attestation are separate controls and one cannot be bought with the other.",
-            "review_status": "HUMAN_REVIEW"
+            "application": "Deciding what re-auditing buys. With records that accumulate, a later audit keeps what an earlier one knew; where the records at a moment in question cannot separate two versions, an audit at that moment cannot tell which ran. Nothing here concerns a later audit about that moment: records added since may well settle it.",
+            "review_status": "STATEMENT_REVIEWED",
+            "review": {
+              "reviewer": "Mario Brcic (mbrcic)",
+              "date": "2026-10-04",
+              "statement_reviewed": true,
+              "interpretation_reviewed": false,
+              "evidence": "docs/interpretation-reviews/review-later-audit-does-not-close-the-gap.md"
+            }
           }
         ]
       },
@@ -13495,7 +13705,7 @@
         "oversight"
       ],
       "result_shape": "POINT_IMPOSSIBILITY",
-      "notes": "BRIDGE. Layer 2 is AISafetyAtlas.Knowledge, which is about observations and decoders and names no incident. This row is the arrow to an incident-governance question: Sidhu et al. ask when a single AI incident begins and ends, and when harm traced to one model counts as one incident or many. That is an INDIVIDUATION question -- not what happened, but how many things happened -- and it looks like a definitional problem to be settled by agreeing a taxonomy. CONTENT. Reporting is a regime: what a deployment files, and how many incidents actually occurred. count_not_determined_of_collision is the obstruction in the familiar shape. count_is_not_a_measurement is the graded bridge and is about NUMBERS: under a collision, for every counting rule there are two deployments the rule scores identically whose true counts differ, so the published figure is a function of the filing schema and not of the incidents -- and cannot be compared across regimes, across a schema change, or against a target expressed in incidents. The quantifier over rules is the content: this is not a statement about the counting methodologies anyone has proposed. WHAT IS NOT CLAIMED. The atlas has no incident, no taxonomy and no reporting standard; nothing says any real regime collides, and exhibiting the two deployments is an empirical claim about a schema that this repository does not make. It is not an argument against counting incidents -- a count inherits the resolution of the schema it is computed from, which is a reason to specify the schema first and not a reason to stop counting. schema_fixes_the_count and knowable_of_report_carries_count are the positive half and are NOT graded BRIDGE: the first is Knowable unfolded and proves nothing beyond the definition. Identifying report with any real filing, or count with any published figure, is layer 4 and is not done. GROUNDING. Examples.Practitioner applies the bridge. SOURCE STATUS. The arXiv paper is a DIRECTORY: it poses open problems and states no theorem, so this row claims no coverage of it and it is not in the coverage audit.",
+      "notes": "BRIDGE. Layer 2 is AISafetyAtlas.Knowledge, which is about observations and decoders and names no incident. This row is the arrow to an incident-governance question: Sidhu et al. ask when a single AI incident begins and ends, and when harm traced to one model counts as one incident or many. That is an INDIVIDUATION question -- not what happened, but how many things happened -- and it looks like a definitional problem to be settled by agreeing a taxonomy. CONTENT. Reporting is a regime: what a deployment files, and how many incidents actually occurred. count_not_determined_of_collision is the obstruction in the familiar shape. count_is_not_a_measurement is the graded bridge and is about NUMBERS: under a collision, for every counting rule there are two deployments the rule scores identically whose true counts differ, so the published figure is a function of the filing schema and not of the incidents -- comparing published figures remains possible, but a figure meeting a target expressed in incidents does not show the incidents meet it, and a difference across regimes or a schema change may reflect the schemas. The quantifier over rules is the content: this is not a statement about the counting methodologies anyone has proposed. WHAT IS NOT CLAIMED. The atlas has no incident, no taxonomy and no reporting standard; nothing says any real regime collides, and exhibiting the two deployments is an empirical claim about a schema that this repository does not make. It is not an argument against counting incidents -- a count inherits the resolution of the schema it is computed from, which is a reason to specify the schema first and not a reason to stop counting. schema_fixes_the_count and knowable_of_report_carries_count are the positive half and are NOT graded BRIDGE: the first is Knowable unfolded and proves nothing beyond the definition. Identifying report with any real filing, or count with any published figure, is layer 4 and is not done. GROUNDING. Examples.Practitioner applies the bridge. SOURCE STATUS. The arXiv paper is a DIRECTORY: it poses open problems and states no theorem, so this row claims no coverage of it and it is not in the coverage audit.",
       "original_source_refs": [
         "sidhu-etal-2026-open-problems-ai-incident-governance"
       ],
@@ -13503,7 +13713,7 @@
       "public": {
         "group": "What an observer can recover",
         "title": "How many incidents were there?",
-        "summary": "An incident regime publishes a count. That number is computed from what deployments file, and where two deployments file identically while differing in what actually happened, no counting rule whatever recovers the difference -- so the figure measures the filing schema rather than the incidents. It cannot then be compared with a figure from a regime that files differently, with its own figure from before a schema change, or with a target expressed in incidents. Where the filing does determine the count, a rule exists and the number means what it says; the repair is in the schema and never in the counting rule, which is what the obstruction makes precise by quantifying over every rule.",
+        "summary": "An incident regime publishes a count. That number is computed from what deployments file, and where two deployments file identically while differing in what actually happened, no counting rule whatever recovers the difference -- so the figure measures the filing schema rather than the incidents. It cannot then be compared with a figure from a regime that files differently, with its own figure from before a schema change, or with a target expressed in incidents. Where the filing does determine the count, a rule exists -- that is the definition unfolded, and it does not say any real form determines the count; under a collision no counting rule is the repair, which is what the obstruction makes precise by quantifying over every rule.",
         "use": "When an incident count is published, compared across jurisdictions or time, or written into a target; and when designing what an incident report has to contain.",
         "attribution": "Atlas-side bridge: the mathematics is this repository's knowability kernel; the individuation question is Sidhu et al., arXiv 2026, which the theorem bounds and does not answer"
       },
@@ -13523,8 +13733,15 @@
             "source_declarations": [
               "AISafetyAtlas.Knowledge.IncidentCount.count_not_determined_of_collision"
             ],
-            "application": "Reading a published incident count. Under a filing collision the number is a function of the schema and not of the incidents, so it does not survive comparison across regimes, across a schema change, or against a target expressed in incidents; the quantifier is over every counting rule, so no methodology is the repair and the schema is.",
-            "review_status": "HUMAN_REVIEW"
+            "application": "Reading a published incident count. Under a filing collision the number is a function of the schema and not of the incidents, so a count that meets a target expressed in incidents does not show the incidents meet it, and a difference across regimes or across a schema change may reflect the schemas rather than the incidents; the quantifier is over every counting rule, so no methodology is the repair; a richer form could be only if what it records determines the true count, which presupposes what counts as one incident and complete, honest filing -- nothing here says such a form exists.",
+            "review_status": "REVIEWED",
+            "review": {
+              "reviewer": "Mario Brcic (mbrcic)",
+              "date": "2026-10-03",
+              "statement_reviewed": true,
+              "interpretation_reviewed": true,
+              "evidence": "docs/interpretation-reviews/review-count-is-not-a-measurement.md"
+            }
           },
           {
             "atlas_declaration": "AISafetyAtlas.Knowledge.IncidentCount.schema_fixes_the_count",
@@ -13627,7 +13844,7 @@
               "AISafetyAtlas.Knowledge.UniformlyActionable",
               "AISafetyAtlas.Knowledge.FibrewiseAgreeable"
             ],
-            "application": "Deciding whether a monitor, a reviewer or an autonomous controller needs better sensing at all. It needs better sensing only where some set of states it cannot separate has no action acceptable throughout; everywhere else the existing observation is already enough, however ambiguous it is."
+            "application": "Deciding whether a monitor, a reviewer or an autonomous controller has a uniform policy from what it observes. It has none exactly when some set of states it cannot separate has no action acceptable throughout; otherwise the existing observation is already enough, however ambiguous it is."
           },
           {
             "atlas_declaration": "AISafetyAtlas.Knowledge.knowable_iff_uniformlyActionable",
@@ -13644,7 +13861,14 @@
               "AISafetyAtlas.Knowledge.uniformlyActionable_iff_fibrewiseAgreeable"
             ],
             "application": "The certificate an auditor can demand when told no safe uniform policy exists: a state whose indistinguishable neighbourhood rejects every candidate action, rather than a single awkward pair.",
-            "review_status": "HUMAN_REVIEW"
+            "review_status": "REVIEWED",
+            "review": {
+              "reviewer": "Mario Brcic (mbrcic)",
+              "date": "2026-10-04",
+              "statement_reviewed": true,
+              "interpretation_reviewed": true,
+              "evidence": "docs/interpretation-reviews/review-not-uniformlyactionable-iff-exists-unservable.md"
+            }
           },
           {
             "atlas_declaration": "AISafetyAtlas.Knowledge.uniformlyActionable_of_pairwiseAgreeable_of_card_le_two",
@@ -13765,7 +13989,14 @@
               "AISafetyAtlas.Sovereignty.effectivity"
             ],
             "application": "Reading the social-choice stability literature directly against a game form already in this repository: Keiding's E and the atlas's effectivity are the same type, so the condition applies with nothing in between and no transcription risk.",
-            "review_status": "HUMAN_REVIEW"
+            "review_status": "STATEMENT_REVIEWED",
+            "review": {
+              "reviewer": "Mario Brcic (mbrcic)",
+              "date": "2026-10-04",
+              "statement_reviewed": true,
+              "interpretation_reviewed": false,
+              "evidence": "docs/interpretation-reviews/review-gameformacyclic-iff.md"
+            }
           }
         ]
       },
@@ -13976,7 +14207,14 @@
               "Enforcement.detectable_of_enforcement"
             ],
             "application": "Deciding whether a rule can be made to bind. A rule closes part of the gap between what a party can do and what it may do only if some response can be conditioned on whether the rule was broken, and a response is conditioned on what a monitor sees. Where a forbidden act and a permitted act produce the same observation, no response function separates them -- the quantifier is over every response type and every function into it, so this is not a statement about the mechanisms anyone has proposed. The converse holds too: an enforcement that works is a detector, recovered from it, so enforceability and detectability are one requirement and a proposal that concedes the first while asserting the second is incoherent rather than optimistic. The repair named is the observation channel, never the wording of the rule or the severity of the sanction.",
-            "review_status": "HUMAN_REVIEW"
+            "review_status": "REVIEWED",
+            "review": {
+              "reviewer": "Mario Brcic (mbrcic)",
+              "date": "2026-10-03",
+              "statement_reviewed": true,
+              "interpretation_reviewed": true,
+              "evidence": "docs/interpretation-reviews/review-undetectable-norm-is-unenforceable.md"
+            }
           }
         ]
       },
