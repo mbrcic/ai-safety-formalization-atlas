@@ -11,33 +11,45 @@ it carries a named witness debt.
 |---|---|
 | Verdict | ☑ `REVIEWED` ☐ `STATEMENT_REVIEWED` ☐ rejected — drop the `BRIDGE` grade |
 | Reviewer | Mario Brcic (mbrcic) |
-| Date | 2026-10-04 |
-| Note | Accepted 2026-10-04 as an upper bound on entropy reduction, one step, plant fixed. |
+| Date | 2026-10-05 |
+| Note | Accepted 2026-10-04 as an upper bound on entropy reduction, one step, plant fixed. Re-signed 2026-10-05 after the closure audit changed the statement: the first term is now the printed open-loop maximum, with noise independent of hazard and reading. |
 
 ## The statement
 
 ```lean
-public theorem oversight_reduction_le_budget [IsProbabilityMeasure μ]
+public theorem oversight_reduction_le_budget [IsProbabilityMeasure μ] [Fintype S]
     {F : S → K → N → T} {Z : Ω → N}
-    (hhaz : Measurable O.hazard) (hread : Measurable O.reading)
-    (hout : Measurable O.outcome)
+    (hhaz : Measurable O.hazard) (hread : Measurable O.reading) (hZ : Measurable Z)
     [FiniteRange O.hazard] [FiniteRange O.reading] [FiniteRange O.outcome]
     (hplant : IsPlant F O.hazard O.reading Z O.outcome)
-    {Δblind : ℝ} (hblind : OpenLoopBound μ F O.hazard Z Δblind) :
-    entropyReduction μ O.hazard O.outcome ≤ Δblind + I[O.hazard : O.reading ; μ]
+    (hindep : IndepFun (⟨O.hazard, O.reading⟩ : Ω → S × K) Z μ) :
+    entropyReduction μ O.hazard O.outcome
+      ≤ openLoopMax F (μ.map Z) + I[O.hazard : O.reading ; μ]
 ```
 
 Touchette–Lloyd's bound read as governance. Base:
-`Control.InformationLimits.entropyReduction_le_of_openLoopBound`.
+`Control.entropyReduction_le_openLoopMax`, Theorem 10 against the printed
+`ΔH_open^max`.
+
+**Changed 2026-10-05.** The signed statement carried a parameter `Δblind` with
+`hblind : OpenLoopBound μ F O.hazard Z Δblind`. The closure audit found that
+bound vacuous when the noise is informative (asked on every event); restricting
+it to the reading's fibres made `Δblind` depend on the channel (with the reading
+equal to the hazard, `0` is admissible), which broke item 3 below. The first term
+is now `openLoopMax F (μ.map Z)`, fixed by the plant and the noise law, never by
+the reading. The cost is the hypothesis `hindep`: the noise is independent of the
+hazard and the reading.
 
 ## What to check
 
 1. **It is an upper bound, never a lower one.** A regime with a rich channel may
    achieve nothing; the bound says only that it cannot achieve more. Reading it
    as a guarantee is the error a quantitative statement invites.
-2. **`Δblind` is a parameter, and its value is part of the model.** A regime
-   already effective blind has a large one and the theorem then says little —
-   correctly, because monitoring was never load-bearing there.
+2. **`openLoopMax F η` is fixed by the plant and the noise law.** A plant that
+   already reduces uncertainty a lot without observing anything has a large one
+   and the theorem then says little — correctly, because monitoring was never
+   load-bearing there. It is a maximum over every input distribution, so it can
+   exceed what open-loop control achieves on the actual hazard.
 3. **The two terms are separable, which is the practical content.** Mutual
    information is the only term monitoring moves, and it is a property of the
    channel rather than of effort, budget or attention.
@@ -63,12 +75,14 @@ Touchette–Lloyd's bound read as governance. Base:
 ## Allowed claim
 
 > Where the outcome is a fixed function of the hazard, the reading and noise
-> alone, an oversight regime reduces entropy from hazard to outcome by at most
-> `Δblind` (any bound on what a fixed action, chosen without the reading,
-> achieves on every conditional ensemble) plus the mutual information its
-> monitoring channel carries about the hazard. With the plant fixed, the second
-> term is the only one monitoring moves, and it is a property of the channel
-> rather than of effort or volume.
+> alone, and the noise is independent of the hazard and the reading, an
+> oversight regime reduces entropy from hazard to outcome by at most the
+> open-loop maximum `ΔH_open^max` (the most any constant action reduces it on any
+> input distribution, with the plant and the noise law fixed) plus the mutual
+> information its monitoring channel carries about the hazard. The first term
+> does not depend on the reading, so with the plant and noise law fixed the
+> second term is the only one monitoring moves, and it is a property of the
+> channel rather than of effort or volume.
 
 ## Forbidden
 
@@ -76,6 +90,8 @@ Touchette–Lloyd's bound read as governance. Base:
 - **Not** about harm or risk. The quantity is entropy — uncertainty about the
   outcome relative to the hazard — not expected loss.
 - **Not** about repeated or adaptive oversight. One step, with the plant fixed.
+- **Not** for noise correlated with the hazard or the reading. `hindep` is a
+  hypothesis; where it fails this bound is not established.
 - **Not** a number for any real system. Nothing says what `I[hazard : reading]`
   is anywhere; the atlas has no monitoring stack, no telemetry and no incident.
 - **Not** "monitoring does not help." It plainly does; this bounds by how much.

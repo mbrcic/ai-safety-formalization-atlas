@@ -16,9 +16,9 @@
           "relationship": "EXACT",
           "reproduced": true,
           "declarations": [
-            "AISafetyAtlas.LinearSystems.determinesStateOn_iff_isObservable"
+            "AISafetyAtlas.LinearSystems.determinesStateSolOn_iff_isObservable"
           ],
-          "module": "AISafetyAtlas.LinearSystems.Dynamics",
+          "module": "AISafetyAtlas.LinearSystems.Flow",
           "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
           "version": "IN_TREE"
         }
@@ -26,22 +26,34 @@
       "lean_artifact": {
         "declarations": [
           {
+            "atlas_declaration": "AISafetyAtlas.LinearSystems.determinesStateSolOn_iff_isObservable",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/LinearSystems/Flow.lean",
+            "line": 773
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Examples.LinearSystems.pair_not_determinesStateSolOn",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Examples/LinearSystems/Flow.lean",
+            "line": 394
+          },
+          {
             "atlas_declaration": "AISafetyAtlas.LinearSystems.determinesStateOn_iff_isObservable",
             "type": "NEW_PROOF",
             "file": "AISafetyAtlas/LinearSystems/Dynamics.lean",
-            "line": 308
+            "line": 311
           },
           {
             "atlas_declaration": "AISafetyAtlas.LinearSystems.not_determinesStateOn_of_not_isObservable",
             "type": "NEW_PROOF",
             "file": "AISafetyAtlas/LinearSystems/Dynamics.lean",
-            "line": 275
+            "line": 278
           },
           {
             "atlas_declaration": "AISafetyAtlas.Examples.LinearSystems.blind_not_determinesStateOn",
             "type": "NEW_PROOF",
             "file": "AISafetyAtlas/Examples/LinearSystems/Dynamics.lean",
-            "line": 169
+            "line": 170
           }
         ]
       },
@@ -58,7 +70,7 @@
           "relationship": "EXACT",
           "reproduced": true,
           "declarations": [
-            "AISafetyAtlas.LinearSystems.isCompletelyReachable_iff_isControllable"
+            "AISafetyAtlas.LinearSystems.isCompletelyReachableSol_iff_isControllable"
           ],
           "module": "AISafetyAtlas.LinearSystems.Flow",
           "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
@@ -68,16 +80,28 @@
       "lean_artifact": {
         "declarations": [
           {
+            "atlas_declaration": "AISafetyAtlas.LinearSystems.isCompletelyReachableSol_iff_isControllable",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/LinearSystems/Flow.lean",
+            "line": 871
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Examples.LinearSystems.pair_not_isCompletelyReachableSol",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Examples/LinearSystems/Flow.lean",
+            "line": 404
+          },
+          {
             "atlas_declaration": "AISafetyAtlas.LinearSystems.isCompletelyReachable_iff_isControllable",
             "type": "NEW_PROOF",
             "file": "AISafetyAtlas/LinearSystems/Flow.lean",
-            "line": 641
+            "line": 639
           },
           {
             "atlas_declaration": "AISafetyAtlas.LinearSystems.not_isReachable_of_not_isControllable",
             "type": "NEW_PROOF",
             "file": "AISafetyAtlas/LinearSystems/Dynamics.lean",
-            "line": 396
+            "line": 399
           },
           {
             "atlas_declaration": "AISafetyAtlas.Examples.LinearSystems.deaf_not_isCompletelyReachable",
@@ -621,13 +645,13 @@
             "atlas_declaration": "AISafetyAtlas.Control.entropyReduction_le_of_openLoopBound",
             "type": "NEW_PROOF",
             "file": "AISafetyAtlas/Control/InformationLimits.lean",
-            "line": 413
+            "line": 418
           },
           {
             "atlas_declaration": "AISafetyAtlas.Control.condEntropy_ge_of_openLoopBound",
             "type": "NEW_PROOF",
             "file": "AISafetyAtlas/Control/InformationLimits.lean",
-            "line": 387
+            "line": 392
           },
           {
             "atlas_declaration": "AISafetyAtlas.Control.controlLoss_le_entropy_noise",
@@ -669,49 +693,49 @@
             "atlas_declaration": "AISafetyAtlas.Control.minControlLoss_le_entropy_noise",
             "type": "NEW_PROOF",
             "file": "AISafetyAtlas/Control/InformationLimits.lean",
-            "line": 630
+            "line": 635
           },
           {
             "atlas_declaration": "AISafetyAtlas.Control.minControlLoss_eq_sInf_condMutualInfo",
             "type": "NEW_PROOF",
             "file": "AISafetyAtlas/Control/InformationLimits.lean",
-            "line": 695
+            "line": 700
           },
           {
             "atlas_declaration": "AISafetyAtlas.Control.minControlLoss_eq_sInf_mutualInfo_sub",
             "type": "NEW_PROOF",
             "file": "AISafetyAtlas/Control/InformationLimits.lean",
-            "line": 714
+            "line": 719
           },
           {
             "atlas_declaration": "AISafetyAtlas.Control.minControlLoss_le",
             "type": "NEW_PROOF",
             "file": "AISafetyAtlas/Control/InformationLimits.lean",
-            "line": 599
+            "line": 604
           },
           {
             "atlas_declaration": "AISafetyAtlas.Control.minControlLoss_nonneg",
             "type": "NEW_PROOF",
             "file": "AISafetyAtlas/Control/InformationLimits.lean",
-            "line": 608
+            "line": 613
           },
           {
             "atlas_declaration": "AISafetyAtlas.Control.measurable_plantOutcome",
             "type": "NEW_PROOF",
             "file": "AISafetyAtlas/Control/InformationLimits.lean",
-            "line": 466
+            "line": 471
           },
           {
             "atlas_declaration": "AISafetyAtlas.Control.isPlant_plantOutcome",
             "type": "NEW_PROOF",
             "file": "AISafetyAtlas/Control/InformationLimits.lean",
-            "line": 458
+            "line": 463
           },
           {
             "atlas_declaration": "AISafetyAtlas.Control.minControlLoss_eq_entropy_noise_iff_of_attained",
             "type": "NEW_PROOF",
             "file": "AISafetyAtlas/Control/InformationLimits.lean",
-            "line": 667
+            "line": 672
           },
           {
             "atlas_declaration": "AISafetyAtlas.Control.kernelControlLoss_eq_sum",
@@ -777,7 +801,7 @@
             "atlas_declaration": "AISafetyAtlas.Control.OversightBudget.oversight_reduction_le_budget",
             "type": "BRIDGE",
             "file": "AISafetyAtlas/Control/OversightBudget.lean",
-            "line": 145
+            "line": 159
           }
         ]
       },
@@ -2225,7 +2249,7 @@
             "atlas_declaration": "AISafetyAtlas.Compositional.AgentNetwork.symmetry_is_the_shared_cause",
             "type": "BRIDGE",
             "file": "AISafetyAtlas/Compositional/AgentNetwork.lean",
-            "line": 129
+            "line": 131
           }
         ]
       },
@@ -5609,7 +5633,7 @@
             "atlas_declaration": "AISafetyAtlas.Examples.Sovereignty.steer_isSteering",
             "type": "NEW_PROOF",
             "file": "AISafetyAtlas/Examples/Sovereignty/Steering.lean",
-            "line": 121
+            "line": 141
           }
         ]
       },
@@ -5644,7 +5668,7 @@
           "declarations": [
             "Audit",
             "refusal_passes_safety",
-            "refusal_serves_nothing",
+            "refusal_fails_catalogue",
             "safety_suite_admits_a_refusal",
             "isRefusalHole",
             "admitsRefusal",
@@ -5668,7 +5692,7 @@
             "atlas_declaration": "AISafetyAtlas.Sovereignty.Refusal.safety_suite_admits_a_refusal",
             "type": "BRIDGE",
             "file": "AISafetyAtlas/Sovereignty/Refusal.lean",
-            "line": 105
+            "line": 107
           }
         ]
       },
@@ -7125,13 +7149,13 @@
             "atlas_declaration": "AISafetyAtlas.Knowledge.Audit.audit_certifies_audited_not_deployed",
             "type": "BRIDGE",
             "file": "AISafetyAtlas/Knowledge/Audit.lean",
-            "line": 91
+            "line": 93
           },
           {
             "atlas_declaration": "AISafetyAtlas.Knowledge.Audit.later_audit_does_not_close_the_gap",
             "type": "BRIDGE",
             "file": "AISafetyAtlas/Knowledge/Audit.lean",
-            "line": 114
+            "line": 116
           }
         ]
       },
@@ -7516,7 +7540,7 @@
             "atlas_declaration": "AISafetyAtlas.Sovereignty.Institution.exists_recognized_not_authorized",
             "type": "NEW_PROOF",
             "file": "AISafetyAtlas/Sovereignty/Institution.lean",
-            "line": 210
+            "line": 215
           }
         ]
       },

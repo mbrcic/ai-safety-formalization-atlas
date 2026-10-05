@@ -17,8 +17,8 @@ module it names now draws a conclusion.
 |---|---|
 | Verdict | ☐ `REVIEWED` ☑ `STATEMENT_REVIEWED` ☐ rejected — drop the `BRIDGE` grade |
 | Reviewer | Mario Brcic (mbrcic) |
-| Date | 2026-10-04 |
-| Note | Statement accepted 2026-10-04. Definitional (Iff.rfl); only cycle-implies-unstable (Theorem 3.6) is carried. |
+| Date | 2026-10-05 |
+| Note | Statement accepted 2026-10-04. Allowed claim re-signed 2026-10-05 after the closure audit: the earlier "decided without reference to anyone's preferences" implied Theorem 3.8, which the Forbidden list excludes, and empty strategy types give cycles with empty blocking sets. Definitional (Iff.rfl); only cycle-implies-unstable (Theorem 3.6) is carried. |
 
 ## The statement
 
@@ -63,8 +63,12 @@ functions*, **IJGT 14(2):93–101, 1985**, Definition 3.3 (p. 96).
 
 > Keiding's acyclicity condition is stated at this repository's effectivity
 > families, and reading it at a game form's own power distribution is
-> definitional. Whether a power distribution can be blocked from every direction
-> at once is decided without reference to anyone's preferences.
+> definitional; the condition mentions only the effectivity family, never
+> preferences. A cycle whose blocking sets are non-empty makes the distribution
+> unstable (Theorem 3.6); the converse, that acyclicity gives stability (Theorem
+> 3.8), is not carried. `effectivity G` meets Keiding's Definition 2.1(i)
+> (`∅ ∉ E(S)`) only when every strategy type is inhabited; with an empty strategy
+> type there are cycles with empty blocking sets, and they certify nothing.
 
 And, through Theorem 3.6, one consequence does follow:
 
@@ -77,6 +81,8 @@ And, through Theorem 3.6, one consequence does follow:
 
 - **Not** that acyclicity gives stability. That is Theorem 3.8 and it is **not**
   formalized; only the cycle-implies-unstable direction is carried.
+- **Not** that every cycle certifies blocking: a cycle with an empty blocking
+  set, which arises when some strategy type is empty, carries no instability.
 - **Not** that any real arrangement is stable or unstable. No AI system, no
   deployment and no governance arrangement is modelled, and instantiating
   `effectivity G` at one is layer 4.

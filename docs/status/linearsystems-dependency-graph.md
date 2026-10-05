@@ -10,7 +10,7 @@ Edges come from the elaborated Lean environment. This answers the question the p
 
 So `A → B` means *`B` occurs in `A`'s statement, or in `A`'s body when `A` is a definition*. A lemma used only inside a proof does not appear. Reading the table as a complete call graph would be wrong, and the two sections below are scoped so that they stay true under this limit.
 
-`130` authored declarations in `AISafetyAtlas.LinearSystems.*` (106 theorems). Compiler-generated companions and projections are dropped.
+`144` authored declarations in `AISafetyAtlas.LinearSystems.*` (116 theorems). Compiler-generated companions and projections are dropped.
 
 ## Load-bearing declarations
 
@@ -18,14 +18,15 @@ Named in the statements of eight or more others. A change to one of these is a c
 
 | Declaration | Named by |
 |---|---|
-| `IsControllable` | 36 |
-| `IsObservable` | 35 |
+| `IsControllable` | 41 |
+| `IsObservable` | 40 |
 | `flow` | 25 |
 | `drivenState` | 12 |
 | `adjointFlow` | 12 |
+| `IsTrajectory` | 12 |
 | `unobservableSubspace` | 10 |
-| `IsTrajectory` | 9 |
 | `IsTrajectoryOn` | 8 |
+| `IsSolution` | 8 |
 
 ## Definitions no statement and no example mentions
 
@@ -42,12 +43,19 @@ None.
 | `A_mulVec_mem_unobservableSubspace_of_mem` | theorem | `unobservableSubspace` |
 | `DeterminesInitialState` | definition | `DeterminesStateOn` |
 | `DeterminesStateOn` | definition | `IsTrajectoryOn`, `outputSignal` |
+| `DeterminesStateSolOn` | definition | `IsSolution`, `outputSignal` |
 | `IsCompletelyReachable` | definition | `IsTrajectory` |
 | `IsCompletelyReachable.isReachable` | theorem | `IsCompletelyReachable`, `IsReachable` |
+| `IsCompletelyReachableSol` | definition | `IsSolution` |
 | `IsControllable` | definition | — |
 | `IsObservable` | definition | — |
 | `IsReachable` | definition | `IsTrajectory` |
+| `IsReachableSol` | definition | `IsSolution` |
+| `IsSolution` | definition | — |
+| `IsSolution.hasDerivAt_dotProduct_of_eigen` | theorem | `IsSolution` |
+| `IsSolution.hasDerivAt_sub` | theorem | `IsSolution` |
 | `IsTrajectory` | definition | `IsTrajectoryOn` |
+| `IsTrajectory.isSolution` | theorem | `IsSolution`, `IsTrajectory` |
 | `IsTrajectoryOn` | definition | — |
 | `IsTrajectoryOn.hasDerivAt_sub` | theorem | `IsTrajectoryOn` |
 | `MatrixLemmas.mulVec_kernel_trivial_iff_rank_eq_card_cols` | theorem | — |
@@ -68,6 +76,7 @@ None.
 | `controllabilityMatrix_apply` | theorem | `controllabilityMatrix` |
 | `controllabilityMatrix_transpose` | theorem | `controllabilityMatrix`, `observabilityMatrix` |
 | `determinesStateOn_iff_isObservable` | theorem | `DeterminesStateOn`, `IsObservable` |
+| `determinesStateSolOn_iff_isObservable` | theorem | `DeterminesStateSolOn`, `IsObservable` |
 | `dotCLM` | definition | — |
 | `dotCLM_apply` | theorem | `dotCLM` |
 | `dotProduct_drivenState` | theorem | `adjointSignal`, `drivenState`, `flow` |
@@ -109,6 +118,8 @@ None.
 | `hautusObservabilityMatrix` | definition | — |
 | `hautusObservabilityMatrix_mulVec_eq_zero_iff` | theorem | `hautusObservabilityMatrix` |
 | `hautus_failure_implies_not_isObservable` | theorem | `IsObservable`, `hautusObservabilityMatrix` |
+| `isCompletelyReachableSol_iff_isControllable` | theorem | `IsCompletelyReachableSol`, `IsControllable` |
+| `isCompletelyReachableSol_of_isControllable` | theorem | `IsCompletelyReachableSol`, `IsControllable` |
 | `isCompletelyReachable_iff_isControllable` | theorem | `IsCompletelyReachable`, `IsControllable` |
 | `isCompletelyReachable_of_isControllable` | theorem | `IsCompletelyReachable`, `IsControllable` |
 | `isControllable_iff_controllabilityMatrix_mulVec_surjective` | theorem | `IsControllable`, `controllabilityMatrix` |
@@ -120,6 +131,7 @@ None.
 | `isObservable_iff_observabilityMatrix_rank_eq` | theorem | `IsObservable`, `observabilityMatrix` |
 | `isObservable_imp_determinesInitialState` | theorem | `DeterminesInitialState`, `IsObservable` |
 | `isObservable_imp_determinesStateOn` | theorem | `DeterminesStateOn`, `IsObservable` |
+| `isObservable_imp_determinesStateSolOn` | theorem | `DeterminesStateSolOn`, `IsObservable` |
 | `isObservable_imp_zeroInput_state_eq` | theorem | `IsObservable` |
 | `isReachable_iff_isControllable` | theorem | `IsControllable`, `IsReachable` |
 | `isReachable_of_isControllable` | theorem | `IsControllable`, `IsReachable` |
@@ -135,6 +147,7 @@ None.
 | `mulVec_pow_eq_zero_of_outputSignal_eq_zero` | theorem | — |
 | `mulVec_pow_mem_unobservableSubspace` | theorem | `unobservableSubspace` |
 | `not_determinesStateOn_of_not_isObservable` | theorem | `DeterminesStateOn`, `IsObservable` |
+| `not_determinesStateSolOn_of_not_isObservable` | theorem | `DeterminesStateSolOn`, `IsObservable` |
 | `not_isControllable_and_not_isObservable_of_ceil_div_gt_dims` | theorem | `IsControllable`, `IsObservable` |
 | `not_isControllable_and_not_isObservable_of_ceil_div_gt_ranks` | theorem | `IsControllable`, `IsObservable` |
 | `not_isControllable_and_not_isObservable_of_ceil_div_minpoly_gt_dims` | theorem | `IsControllable`, `IsObservable` |
@@ -155,12 +168,14 @@ None.
 | `not_isObservable_of_ceil_div_minpoly_gt_rank` | theorem | `IsObservable` |
 | `not_isObservable_of_finrank_ker_gt_height` | theorem | `IsObservable` |
 | `not_isObservable_of_finrank_ker_gt_rank` | theorem | `IsObservable` |
+| `not_isReachableSol_of_not_isControllable` | theorem | `IsControllable`, `IsReachableSol` |
 | `not_isReachable_of_not_isControllable` | theorem | `IsControllable`, `IsReachable` |
 | `observabilityMatrix` | definition | — |
 | `observabilityMatrix_apply` | theorem | `observabilityMatrix` |
 | `observabilityMatrix_mulVec_apply` | theorem | `observabilityMatrix` |
 | `outputSignal` | definition | — |
 | `reachedSet` | definition | `drivenState` |
+| `reachedSet_one_eq_top` | theorem | `IsControllable`, `reachedSet` |
 | `rootMultiplicity_le_mul_finrank_eigenspace` | theorem | — |
 | `rootMultiplicity_minpoly_le_of_stabilizes` | theorem | — |
 | `shifted_isTrajectory` | theorem | `IsTrajectory`, `drivenState`, `flow` |

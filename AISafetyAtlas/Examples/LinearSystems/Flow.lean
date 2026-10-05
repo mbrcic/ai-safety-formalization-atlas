@@ -265,4 +265,186 @@ public theorem deaf_adjointSignal_eq_zero (z : Fin 1 → ℂ) :
   rw [drivenState, hterm]
   simp
 
+/-! ## A step input: a solution that is not a classical run -/
+
+/-- A unit step switched on at time `0`. -/
+public noncomputable def stepInput : ℝ → (Fin 1 → ℂ) :=
+  fun t => if 0 ≤ t then fun _ => 1 else 0
+
+/-- The ramp the integrator makes of it. -/
+public noncomputable def rampState : ℝ → (Fin 1 → ℂ) :=
+  fun t _ => ((max t 0 : ℝ) : ℂ)
+
+theorem measurable_stepInput : Measurable stepInput :=
+  Measurable.ite measurableSet_Ici measurable_const measurable_const
+
+theorem stepInput_intervalIntegrable (a b : ℝ) :
+    IntervalIntegrable stepInput MeasureTheory.volume a b := by
+  refine (intervalIntegrable_const (c := (fun _ => 1 : Fin 1 → ℂ))).mono_fun
+    measurable_stepInput.aestronglyMeasurable (Filter.Eventually.of_forall fun t => ?_)
+  show ‖stepInput t‖ ≤ ‖(fun _ => 1 : Fin 1 → ℂ)‖
+  by_cases h : 0 ≤ t <;> simp [stepInput, h]
+
+theorem integrator_rhs (x u : ℝ → (Fin 1 → ℂ)) :
+    (fun s => integratorA *ᵥ x s + integratorB *ᵥ u s) = u := by
+  funext s; simp [integratorA, integratorB]
+
+theorem hasDerivAt_rampState_pos {s : ℝ} (hs : 0 < s) :
+    HasDerivAt rampState (stepInput s) s := by
+  have heq : rampState =ᶠ[nhds s] fun t _ => ((t : ℝ) : ℂ) := by
+    filter_upwards [lt_mem_nhds hs] with t ht
+    funext i; simp [rampState, max_eq_left ht.le]
+  have h : HasDerivAt (fun t : ℝ => fun _ : Fin 1 => ((t : ℝ) : ℂ)) (fun _ => 1) s := by
+    rw [hasDerivAt_pi]; intro i; simpa using (hasDerivAt_id s).ofReal_comp
+  rw [show stepInput s = fun _ => 1 by simp [stepInput, hs.le]]
+  exact h.congr_of_eventuallyEq heq
+
+theorem hasDerivAt_rampState_neg {s : ℝ} (hs : s < 0) :
+    HasDerivAt rampState (stepInput s) s := by
+  have heq : rampState =ᶠ[nhds s] fun _ => (0 : Fin 1 → ℂ) := by
+    filter_upwards [gt_mem_nhds hs] with t ht
+    funext i; simp [rampState, max_eq_right ht.le]
+  rw [show stepInput s = 0 by simp [stepInput, not_le.mpr hs]]
+  exact (hasDerivAt_const s (0 : Fin 1 → ℂ)).congr_of_eventuallyEq heq
+
+theorem continuous_rampState : Continuous rampState :=
+  continuous_pi fun _ => Complex.continuous_ofReal.comp (continuous_id.max continuous_const)
+
+/-- **A step input drives the integrator along a solution.** -/
+public theorem integrator_step_isSolution :
+    IsSolution integratorA integratorB rampState stepInput := by
+  have hint : ∀ a b : ℝ, IntervalIntegrable
+      (fun s => integratorA *ᵥ rampState s + integratorB *ᵥ stepInput s)
+      MeasureTheory.volume a b := by
+    intro a b; rw [integrator_rhs]; exact stepInput_intervalIntegrable a b
+  refine ⟨continuous_rampState, hint, fun t => ?_⟩
+  rw [integrator_rhs]
+  have h0 : rampState 0 = 0 := by funext i; simp [rampState]
+  rw [h0, zero_add]
+  rcases le_or_gt 0 t with ht | ht
+  · rw [intervalIntegral.integral_eq_sub_of_hasDerivAt_of_le ht
+      continuous_rampState.continuousOn (fun s hs => hasDerivAt_rampState_pos hs.1)
+      (stepInput_intervalIntegrable 0 t), h0, sub_zero]
+  · rw [intervalIntegral.integral_symm, intervalIntegral.integral_eq_sub_of_hasDerivAt_of_le
+      ht.le continuous_rampState.continuousOn (fun s hs => hasDerivAt_rampState_neg hs.2)
+      (stepInput_intervalIntegrable t 0), h0]
+    have : rampState t = 0 := by funext i; simp [rampState, max_eq_right ht.le]
+    rw [this]; simp
+
+/-- **And it is not a classical run**: the ramp has a corner at `0`. -/
+public theorem integrator_step_not_isTrajectory :
+    ¬ IsTrajectory integratorA integratorB rampState stepInput := by
+  intro h
+  have h0 := h 0 trivial
+  rw [show integratorA *ᵥ rampState 0 + integratorB *ᵥ stepInput 0 = stepInput 0 from
+    congrFun (integrator_rhs rampState stepInput) 0] at h0
+  have hl : HasDerivWithinAt rampState (stepInput 0) (Set.Iic 0) 0 := h0.hasDerivWithinAt
+  have hz : HasDerivWithinAt rampState 0 (Set.Iic 0) 0 := by
+    refine (hasDerivWithinAt_const 0 _ (0 : Fin 1 → ℂ)).congr (fun t ht => ?_) ?_
+    · funext i; simp [rampState, max_eq_right (Set.mem_Iic.mp ht)]
+    · funext i; simp [rampState]
+  have huniq := (uniqueDiffOn_Iic (0 : ℝ) 0 (Set.mem_Iic.mpr le_rfl)).eq_deriv _ hl hz
+  have : stepInput 0 0 = 1 := by simp [stepInput]
+  rw [huniq] at this
+  simp at this
+
+/-! ## Both equivalences at print's solution class
+
+The degenerate witnesses above fail the criteria by having no readout (`C = 0`) or
+no input (`B = 0`). The two-state system below has both and still fails: the
+readout sees only the first coordinate and the input moves only the first
+coordinate, while `A = 0` never couples the second one in. -/
+
+/-- Two decoupled states. -/
+@[expose] public def pairA : Matrix (Fin 2) (Fin 2) ℂ := 0
+
+/-- Read the first state. -/
+@[expose] public def firstC : Matrix (Fin 1) (Fin 2) ℂ := !![1, 0]
+
+/-- Drive the first state. -/
+@[expose] public def firstB : Matrix (Fin 2) (Fin 1) ℂ := !![1; 0]
+
+/-- **A real readout that still misses a state.** -/
+public theorem pair_not_isObservable : ¬ IsObservable pairA firstC := by
+  intro h
+  have := h ![0, 1] fun k => by
+    fin_cases k <;> ext i <;> fin_cases i <;>
+      simp [firstC, pairA, Matrix.mulVec, dotProduct, Fin.sum_univ_two]
+  simpa using congrFun this 1
+
+/-- **A real input that still misses a state.** -/
+public theorem pair_not_isControllable : ¬ IsControllable pairA firstB := by
+  intro h
+  obtain ⟨u, hu⟩ := h ![0, 1]
+  have := congrFun hu 1
+  simp [Fin.sum_univ_two, firstB, pairA, Matrix.mulVec, dotProduct] at this
+
+/-- The integrator's output determines its state among solutions. -/
+public theorem integrator_determinesStateSolOn :
+    DeterminesStateSolOn integratorA integratorB integratorC Set.univ :=
+  isObservable_imp_determinesStateSolOn isOpen_univ integrator_isObservable
+
+/-- **The equivalence itself at the solution class**, read at the integrator. -/
+public theorem integrator_determinesStateSolOn_iff :
+    DeterminesStateSolOn integratorA integratorB integratorC Set.univ ↔
+      IsObservable integratorA integratorC :=
+  AISafetyAtlas.LinearSystems.determinesStateSolOn_iff_isObservable isOpen_univ ⟨0, trivial⟩
+
+/-- The pair's does not, even among solutions with jumps in the input. -/
+public theorem pair_not_determinesStateSolOn :
+    ¬ DeterminesStateSolOn pairA firstB firstC Set.univ :=
+  not_determinesStateSolOn_of_not_isObservable ⟨0, trivial⟩ pair_not_isObservable
+
+/-- The integrator reaches every state from every state along a solution. -/
+public theorem integrator_isCompletelyReachableSol :
+    IsCompletelyReachableSol integratorA integratorB :=
+  isCompletelyReachableSol_of_isControllable integrator_isControllable
+
+/-- The pair does not, whatever input is allowed, step inputs included. -/
+public theorem pair_not_isCompletelyReachableSol :
+    ¬ IsCompletelyReachableSol pairA firstB := fun h =>
+  pair_not_isControllable (isCompletelyReachableSol_iff_isControllable.mp h)
+
+/-! ## The analytic steps, applied -/
+
+/-- Two solutions under the same step input differ by a classical zero-input run:
+here the ramp against itself. -/
+public theorem integrator_step_sub_hasDerivAt :
+    HasDerivAt (fun s => rampState s - rampState s)
+      (integratorA *ᵥ (rampState 1 - rampState 1)) 1 :=
+  AISafetyAtlas.LinearSystems.IsSolution.hasDerivAt_sub integrator_step_isSolution
+    integrator_step_isSolution 1
+
+/-- The pair at rest, with no input, is a solution. -/
+public theorem pair_rest_isSolution :
+    IsSolution pairA firstB (fun _ => (0 : Fin 2 → ℂ)) (fun _ => 0) :=
+  ⟨continuous_const, fun a b => by simp, fun t => by simp⟩
+
+/-- The pair at rest is a classical run too. -/
+public theorem pair_rest_isTrajectory :
+    IsTrajectory pairA firstB (fun _ => (0 : Fin 2 → ℂ)) (fun _ => 0) := by
+  intro t _
+  simpa using hasDerivAt_const t (0 : Fin 2 → ℂ)
+
+/-- The covector that sees only the second state is a left eigenvector of
+`pairA` (eigenvalue `0`) and annihilates `firstB`. -/
+public theorem pair_second_eigen :
+    pairAᵀ *ᵥ ![0, 1] = (0 : ℂ) • ![0, 1] ∧ firstBᵀ *ᵥ ![0, 1] = 0 := by
+  constructor <;> ext i <;> fin_cases i <;>
+    simp [pairA, firstB, Matrix.mulVec, dotProduct, Fin.sum_univ_two]
+
+/-- Along a solution, the second-state readout solves `φ' = 0 · φ`. -/
+public theorem pair_second_readout_sol :
+    HasDerivAt (fun s : ℝ => (![0, 1] : Fin 2 → ℂ) ⬝ᵥ (fun _ : ℝ => (0 : Fin 2 → ℂ)) s)
+      (0 * ((![0, 1] : Fin 2 → ℂ) ⬝ᵥ (fun _ : ℝ => (0 : Fin 2 → ℂ)) 0)) (0 : ℝ) :=
+  AISafetyAtlas.LinearSystems.IsSolution.hasDerivAt_dotProduct_of_eigen pair_second_eigen.1
+    pair_second_eigen.2 pair_rest_isSolution 0
+
+/-- And along a classical run. -/
+public theorem pair_second_readout :
+    HasDerivAt (fun s : ℝ => (![0, 1] : Fin 2 → ℂ) ⬝ᵥ (fun _ : ℝ => (0 : Fin 2 → ℂ)) s)
+      (0 * ((![0, 1] : Fin 2 → ℂ) ⬝ᵥ (fun _ : ℝ => (0 : Fin 2 → ℂ)) 0)) (0 : ℝ) :=
+  AISafetyAtlas.LinearSystems.hasDerivAt_dotProduct_of_eigen pair_second_eigen.1
+    pair_second_eigen.2 pair_rest_isTrajectory 0
+
 end AISafetyAtlas.Examples.LinearSystems

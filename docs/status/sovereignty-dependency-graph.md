@@ -43,6 +43,7 @@ Named in the statements of eight or more others. A change to one of these is a c
 | `BlockChoice.rel` | 21 |
 | `Arena` | 21 |
 | `Represents` | 19 |
+| `InstitutionalSetting.possible` | 18 |
 | `GameAction` | 18 |
 | `SimpleGame` | 17 |
 | `OutcomeLaw.lowerValue` | 17 |
@@ -51,24 +52,24 @@ Named in the statements of eight or more others. A change to one of these is a c
 | `Setting` | 16 |
 | `Norm.Le` | 16 |
 | `IsGCGF` | 16 |
-| `InstitutionalSetting.possible` | 16 |
 | `AuthorizedFrom` | 16 |
 | `Strat` | 15 |
 | `SafetyGame.recovery` | 15 |
 | `OutcomeLaw.law` | 15 |
 | `Inert` | 15 |
+| `ConstitutiveRule` | 15 |
 | `AlphaPower` | 15 |
 | `payoff` | 14 |
 | `mixed` | 14 |
 | `fallbackCapability` | 14 |
 | `DemandwiseUniform` | 14 |
 | `Cycle` | 14 |
-| `ConstitutiveRule` | 14 |
 | `BlockChoice` | 14 |
 | `ActionFrame.out` | 14 |
 | `eventGap` | 13 |
 | `Simulates` | 13 |
 | `NormSystem` | 13 |
+| `InstitutionalSetting.empowered` | 13 |
 | `HasPowerOver` | 13 |
 | `Arena.Forces` | 13 |
 | `ActionFrame.av` | 13 |
@@ -80,7 +81,6 @@ Named in the statements of eight or more others. A change to one of these is a c
 | `ShutdownChannel.run` | 11 |
 | `SafetyGame.safetyKernel` | 11 |
 | `InstitutionalSetting.enforce` | 11 |
-| `InstitutionalSetting.empowered` | 11 |
 | `Enforcement.Enforces` | 11 |
 | `EffectivityEq` | 11 |
 | `Cycle.len` | 11 |
@@ -385,7 +385,7 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 | `Institution.Authorized` | definition | `Institution`, `Institution.Recognized`, `Institution.setting`, `InstitutionalSetting.norms`, `InstitutionalSetting.possible`, `NormSystem.permitted` |
 | `Institution.Recognized` | definition | `Derives`, `Institution`, `Institution.facts`, `Institution.rules` |
 | `Institution.authorized_iff` | theorem | `Institution`, `Institution.Authorized`, `Institution.Recognized`, `Institution.setting`, `InstitutionalSetting.norms`, `InstitutionalSetting.possible`, `NormSystem.permitted` |
-| `Institution.exists_recognized_not_authorized` | theorem | `Institution`, `Institution.Authorized`, `Institution.Recognized`, `Institution.facts`, `Institution.setting`, `InstitutionalSetting.Separated` |
+| `Institution.exists_recognized_not_authorized` | theorem | `ConstitutiveRule`, `ConstitutiveRule.conclusion`, `ConstitutiveRule.premises`, `ConstitutiveRule.trigger`, `Institution`, `Institution.Authorized`, `Institution.Recognized`, `Institution.facts`, `Institution.rules`, `Institution.setting`, `InstitutionalSetting.Separated`, `InstitutionalSetting.empowered`, `InstitutionalSetting.possible` |
 | `Institution.permitted_of_authorized` | theorem | `Institution`, `Institution.Authorized`, `Institution.setting`, `InstitutionalSetting.norms`, `NormSystem.permitted` |
 | `InstitutionalSetting` | definition | — |
 | `InstitutionalSetting.Separated` | definition | `InstitutionalSetting`, `InstitutionalSetting.empowered`, `InstitutionalSetting.norms`, `InstitutionalSetting.possible`, `NormSystem.permitted` |
@@ -512,8 +512,8 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 | `Refusal.exists_refusal_hole_of_admitsRefusal` | theorem | `Refusal.admitsRefusal` |
 | `Refusal.isRefusalHole` | definition | — |
 | `Refusal.not_exists_refusal_hole_of_admitsRefusal_eq_false` | theorem | `Refusal.admitsRefusal` |
+| `Refusal.refusal_fails_catalogue` | theorem | `Demandwise`, `GameForm`, `GameForm.strategy`, `Inert`, `Refusal.Audit`, `Refusal.Audit.mustServe` |
 | `Refusal.refusal_passes_safety` | theorem | `GameForm`, `GameForm.strategy`, `Inert`, `Refusal.Audit`, `Refusal.Audit.mustHold`, `RetainsFamily` |
-| `Refusal.refusal_serves_nothing` | theorem | `Demandwise`, `GameForm`, `GameForm.strategy`, `Inert`, `Refusal.Audit`, `Refusal.Audit.mustServe` |
 | `Refusal.safety_suite_admits_a_refusal` | theorem | `Demandwise`, `GameForm`, `GameForm.strategy`, `Inert`, `Refusal.Audit`, `Refusal.Audit.mustHold`, `Refusal.Audit.mustServe`, `RetainsFamily` |
 | `Represents` | definition | `Constitution`, `Constitution.induced`, `GameForm`, `effectivity` |
 | `Represents.superadditive` | theorem | `Constitution`, `Constitution.induced`, `GameForm`, `Represents`, `Superadditive` |

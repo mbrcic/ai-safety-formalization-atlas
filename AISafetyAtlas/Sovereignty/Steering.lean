@@ -59,6 +59,15 @@ public structure SteeringPath (N : Type u) (X : Type v) (n : ℕ) where
   C : Set N
   /-- Kind of the step from `i` to `i + 1`. -/
   kind : Fin n → StepKind
+  /-- **The mandate only coarsens.** Every acceptable set has a superset in the
+  next mandate: a step can make more outcomes acceptable, never drop a demand
+  outright. Without this, later mandates could be empty and every step would look
+  safe vacuously. -/
+  coarsens : ∀ i : Fin n, ∀ A ∈ mandate i.castSucc, ∃ B ∈ mandate i.succ, A ⊆ B
+  /-- A Memory step moves the mandate and leaves the game. -/
+  memory_keeps_game : ∀ i : Fin n, kind i = .memory → G i.succ = G i.castSucc
+  /-- Compass and Engine steps move the game and leave the mandate. -/
+  game_keeps_mandate : ∀ i : Fin n, kind i ≠ .memory → mandate i.succ = mandate i.castSucc
 
 namespace SteeringPath
 
@@ -85,12 +94,12 @@ This is the theorem-shaped cut of "little by little": no single step is a
 visible loss against the current mandate, and authorship of the original
 mandate is not retained.
 
-**What it does not constrain.** Nothing relates a later mandate to an earlier
-one, and `kind` is a label no definition reads. So a path whose later mandates
-are `∅` satisfies `AdjacentSafe` vacuously, `IsSteering` reduces to
-`OriginalLost`, and a step labelled `.engine` may move the mandate. A coarsening
-relation between consecutive mandates, and `kind` tied to which component
-changes, are open (closure audit 2026-10-05).
+**What the path constrains.** Each mandate coarsens the one before
+(`coarsens`), so a path cannot look safe by emptying the mandate; a Memory step
+leaves the game and a Compass or Engine step leaves the mandate (both added
+2026-10-05 after the closure audit found later mandates could be `∅` and `kind`
+unread). Compass and Engine are not told apart: both change the game, and which
+part of it is a reading, not a field.
 -/
 @[expose] public def IsSteering : Prop :=
   P.AdjacentSafe ∧ P.OriginalLost

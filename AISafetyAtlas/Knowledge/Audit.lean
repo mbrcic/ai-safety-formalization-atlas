@@ -24,9 +24,11 @@ Reuel, Bucknall et al., *Open Problems in Technical AI Governance*, TMLR
 
 An audit is evidence gathered at one time about a target at one time, and those
 two times need not agree. `audit_certifies_audited_not_deployed` says both halves
-at once: the audit determines the version it audited, **and** the same evidence
-can fail to determine the version deployed later — with the failure certified by
-an explicit pair of worlds the audit cannot separate.
+at once: the audit determines the version it audited (that half is the
+hypothesis `haudited` returned), **and** the same evidence can fail to determine
+the version at the deployment time — with the failure certified by an explicit
+pair of worlds the audit cannot separate. `T` carries no order, so "later" is the
+reading, not part of the statement.
 
 `later_audit_does_not_close_the_gap` is narrower than its name. With cumulative
 records, a later audit knows at least what an earlier audit knew about the moment

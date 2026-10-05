@@ -1125,21 +1125,42 @@
           "license": "Apache-2.0",
           "reproduced": true,
           "build_environment": "leanprover/lean4:v4.33.0; Mathlib db584cd6d46c92f209a44c0f1c829460d327499d; atlas IN_TREE",
-          "module": "AISafetyAtlas.LinearSystems.Dynamics",
-          "build_command": "lake build AISafetyAtlas.LinearSystems.Dynamics AISafetyAtlas.Examples.LinearSystems.Dynamics",
-          "declaration": "AISafetyAtlas.LinearSystems.determinesStateOn_iff_isObservable",
+          "module": "AISafetyAtlas.LinearSystems.Flow",
+          "build_command": "lake build AISafetyAtlas.LinearSystems.Flow AISafetyAtlas.Examples.LinearSystems.Flow",
+          "declaration": "AISafetyAtlas.LinearSystems.determinesStateSolOn_iff_isObservable",
           "relationship": "EXACT",
           "content_source_refs": [
             "survey-ref-021"
           ],
           "scope_delta": {
-            "summary": "The survey row asserts that a system's internal state cannot in general be reconstructed from its observable outputs. AISafetyAtlas.LinearSystems.Dynamics states that property - DeterminesStateOn: two trajectories under the same input that agree on the output agree on the state - and not_determinesStateOn_of_not_isObservable proves it FAILS whenever the Kalman observability condition does, with blind_not_determinesStateOn a named system where it fails. determinesStateOn_iff_isObservable is the full characterization, which page 726 of the cited source states and attributes to Chen and Desoer. THE CLASS IS THE SOURCE'S OWN, AND IS STATED HERE BECAUSE THE ROW'S SENTENCE DOES NOT CARRY IT: what is proved is the finite-dimensional linear time-invariant system x' = Ax + Bu, y = Cx over the complex numbers, which is exactly the object of survey-ref-021 (Klamka 1972) and not dynamical systems at large. WIDER THAN THE SOURCE ON ONE AXIS: the time window is a parameter and the equivalence holds on every non-empty open one, where print writes the system on the whole line. The necessity direction quantifies over an arbitrary input, but only over trajectories that are classical solutions (IsTrajectoryOn asks HasDerivAt at every time), so inputs admitting no classical solution, such as piecewise-constant ones with an injective input map, are not covered; the same solution concept bounds the sufficiency side (closure audit 2026-10-05). Graded statement by statement in section 25 of docs/provenance/source-coverage-audit.md; NC-013 in docs/provenance/formalization-search.json records that the six-corpus sweep found the continuous-time equivalence in no proof assistant on 2026-09-20.",
+            "summary": "The survey row asserts that a system's internal state cannot in general be reconstructed from its observable outputs. AISafetyAtlas.LinearSystems.Dynamics states that property - DeterminesStateOn: two trajectories under the same input that agree on the output agree on the state - and not_determinesStateOn_of_not_isObservable proves it FAILS whenever the Kalman observability condition does, with blind_not_determinesStateOn a named system where it fails. determinesStateOn_iff_isObservable is the full characterization, which page 726 of the cited source states and attributes to Chen and Desoer. THE CLASS IS THE SOURCE'S OWN, AND IS STATED HERE BECAUSE THE ROW'S SENTENCE DOES NOT CARRY IT: what is proved is the finite-dimensional linear time-invariant system x' = Ax + Bu, y = Cx over the complex numbers, which is exactly the object of survey-ref-021 (Klamka 1972) and not dynamical systems at large. WIDER THAN THE SOURCE ON ONE AXIS: the time window is a parameter and the equivalence holds on every non-empty open one, where print writes the system on the whole line. AT THE SOURCE'S SOLUTION CLASS (2026-10-05): the graded declaration is determinesStateSolOn_iff_isObservable, stated over IsSolution, the integral (Caratheodory) form x t = x 0 + integral of (Ax + Bu), which admits inputs with jumps -- the piecewise-continuous class print imports from Chen and Desoer (a step input is witnessed, integrator_step_isSolution; that the whole class gives solutions of this kind is standard and not proved here); integrator_step_isSolution and integrator_step_not_isTrajectory show a step input that is a solution and not a classical run. The classical-solution form determinesStateOn_iff_isObservable, on which the closure audit found the sufficiency side narrower than print, is kept beside it. pair_not_determinesStateSolOn is a non-degenerate witness (a real readout that misses a state). Graded statement by statement in section 25 of docs/provenance/source-coverage-audit.md; NC-013 in docs/provenance/formalization-search.json records that the six-corpus sweep found the continuous-time equivalence in no proof assistant on 2026-09-20.",
             "evidence": "docs/provenance/source-coverage-audit.md"
           }
         }
       ],
       "lean_artifact": {
         "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.LinearSystems.determinesStateSolOn_iff_isObservable",
+            "type": "NEW_PROOF",
+            "source_declarations": [
+              "AISafetyAtlas.LinearSystems.DeterminesStateSolOn",
+              "AISafetyAtlas.LinearSystems.IsSolution",
+              "AISafetyAtlas.LinearSystems.outputSignal",
+              "AISafetyAtlas.LinearSystems.IsObservable"
+            ],
+            "application": "Control: the outputs of a linear time-invariant system determine the state it passed through, on any non-empty open time window, EXACTLY WHEN the Kalman observability condition holds, at the source's solution class (integral-form solutions, inputs with jumps admitted). The survey row's claim is the failing direction of this equivalence."
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Examples.LinearSystems.pair_not_determinesStateSolOn",
+            "type": "NEW_PROOF",
+            "source_declarations": [
+              "AISafetyAtlas.Examples.LinearSystems.pairA",
+              "AISafetyAtlas.Examples.LinearSystems.firstB",
+              "AISafetyAtlas.Examples.LinearSystems.firstC"
+            ],
+            "application": "Control: a named system with a real readout whose outputs still do not determine its state, among solutions with arbitrary locally integrable inputs."
+          },
           {
             "atlas_declaration": "AISafetyAtlas.LinearSystems.determinesStateOn_iff_isObservable",
             "type": "NEW_PROOF",
@@ -1230,19 +1251,38 @@
           "build_environment": "leanprover/lean4:v4.33.0; Mathlib db584cd6d46c92f209a44c0f1c829460d327499d; atlas IN_TREE",
           "module": "AISafetyAtlas.LinearSystems.Flow",
           "build_command": "lake build AISafetyAtlas.LinearSystems.Flow AISafetyAtlas.Examples.LinearSystems.Flow",
-          "declaration": "AISafetyAtlas.LinearSystems.isCompletelyReachable_iff_isControllable",
+          "declaration": "AISafetyAtlas.LinearSystems.isCompletelyReachableSol_iff_isControllable",
           "relationship": "EXACT",
           "content_source_refs": [
             "survey-ref-021"
           ],
           "scope_delta": {
-            "summary": "The survey row asserts that some dynamical systems cannot be driven between arbitrary states by the available controls. IsCompletelyReachable is that property at the source's own quantifier - a run between ANY two states, not merely out of the origin - and isCompletelyReachable_iff_isControllable proves it equivalent to the Kalman controllability condition, with deaf_not_isCompletelyReachable a named system where it fails. THE CLASS IS THE SOURCE'S OWN, AND IS STATED HERE BECAUSE THE ROW'S SENTENCE DOES NOT CARRY IT: what is proved is the finite-dimensional linear time-invariant system x' = Ax + Bu over the complex numbers, the object of survey-ref-021 (Klamka 1972), and not dynamical systems at large. THE GRAMIAN IS NOT USED: reachedSet makes the states reached at a fixed time a subspace, an annihilating covector comes from the DUAL rather than an inner product, and the input that exposes the silence is the adjoint signal's own conjugate, so the integrand is a non-negative real. The one lemma Mathlib does not state in one piece is eqOn_zero_of_intervalIntegral_eq_zero. The necessity direction quantifies over an arbitrary input whose trajectory is a classical solution (IsTrajectory asks HasDerivAt at every time), so piecewise-constant inputs with an injective input map, the standard class, are not covered; the sufficiency direction produces a CONTINUOUS one. Reachability in IsCompletelyReachable puts no sign on the reaching time t₁ (closure audit 2026-10-05). NO TIME-WINDOW PARAMETER on this side, unlike the observability half, and section 25's Intro row discloses the asymmetry. NC-013 records that no proof assistant held this equivalence when the six-corpus sweep was run on 2026-09-20.",
+            "summary": "The survey row asserts that some dynamical systems cannot be driven between arbitrary states by the available controls. IsCompletelyReachable is that property at the source's own quantifier - a run between ANY two states, not merely out of the origin - and isCompletelyReachable_iff_isControllable proves it equivalent to the Kalman controllability condition, with deaf_not_isCompletelyReachable a named system where it fails. THE CLASS IS THE SOURCE'S OWN, AND IS STATED HERE BECAUSE THE ROW'S SENTENCE DOES NOT CARRY IT: what is proved is the finite-dimensional linear time-invariant system x' = Ax + Bu over the complex numbers, the object of survey-ref-021 (Klamka 1972), and not dynamical systems at large. THE GRAMIAN IS NOT USED: reachedSet makes the states reached at a fixed time a subspace, an annihilating covector comes from the DUAL rather than an inner product, and the input that exposes the silence is the adjoint signal's own conjugate, so the integrand is a non-negative real. The one lemma Mathlib does not state in one piece is eqOn_zero_of_intervalIntegral_eq_zero. AT THE SOURCE'S SOLUTION CLASS (2026-10-05): the graded declaration is isCompletelyReachableSol_iff_isControllable, over IsSolution, the integral (Caratheodory) form that admits inputs with jumps, the piecewise-continuous class print imports from Chen and Desoer (a step input is witnessed, integrator_step_isSolution; that the whole class gives solutions of this kind is standard and not proved here); so the necessity direction covers bang-bang and piecewise-constant inputs, and the sufficiency direction produces a CONTINUOUS input. Reaching is forward in time (0 < t1). The classical-solution form isCompletelyReachable_iff_isControllable, on which the closure audit found the necessity side narrower than print, is kept beside it. pair_not_isCompletelyReachableSol is a non-degenerate witness (a real input that misses a state). NO TIME-WINDOW PARAMETER on this side, unlike the observability half, and section 25's Intro row discloses the asymmetry. NC-013 records that no proof assistant held this equivalence when the six-corpus sweep was run on 2026-09-20.",
             "evidence": "docs/provenance/source-coverage-audit.md"
           }
         }
       ],
       "lean_artifact": {
         "declarations": [
+          {
+            "atlas_declaration": "AISafetyAtlas.LinearSystems.isCompletelyReachableSol_iff_isControllable",
+            "type": "NEW_PROOF",
+            "source_declarations": [
+              "AISafetyAtlas.LinearSystems.IsCompletelyReachableSol",
+              "AISafetyAtlas.LinearSystems.IsSolution",
+              "AISafetyAtlas.LinearSystems.IsControllable"
+            ],
+            "application": "Control: a linear time-invariant system can be driven from any state to any state, forward in time, EXACTLY WHEN the Kalman controllability condition holds, at the source's solution class (integral-form solutions, inputs with jumps admitted). The survey row's claim is the failing direction."
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Examples.LinearSystems.pair_not_isCompletelyReachableSol",
+            "type": "NEW_PROOF",
+            "source_declarations": [
+              "AISafetyAtlas.Examples.LinearSystems.pairA",
+              "AISafetyAtlas.Examples.LinearSystems.firstB"
+            ],
+            "application": "Control: a named system with a real input that still cannot reach every state, whatever locally integrable input is allowed."
+          },
           {
             "atlas_declaration": "AISafetyAtlas.LinearSystems.isCompletelyReachable_iff_isControllable",
             "type": "NEW_PROOF",
@@ -2193,7 +2233,7 @@
           "module": "AISafetyAtlas.Control.OversightBudget",
           "build_command": "lake build AISafetyAtlas.Control.OversightBudget",
           "scope_delta": {
-            "summary": "BRIDGE module. Touchette-Lloyd's bound read as an oversight budget, and the only quantitative bridge in the tree: the reduction an oversight regime achieves is at most a bound Δblind plus the mutual information its channel carries about the hazard, where Δblind is any bound on what a fixed action achieves on every conditional ensemble of positive measure -- including events defined through the noise, so Δblind can sit well above what a blind regime actually achieves and the bound is then weak. The two terms separate, and only the second is what monitoring moves. A witness is OWED for the two corollaries and the raised gate ceiling records it; see the module header for why a cheap model would be degenerate.",
+            "summary": "BRIDGE module. Touchette-Lloyd's bound read as an oversight budget, and the only quantitative bridge in the tree: the reduction an oversight regime achieves is at most the printed open-loop maximum openLoopMax F eta plus the mutual information its channel carries about the hazard, provided the noise is independent of the hazard and the reading. Since 2026-10-05 (closure audit) the first term is openLoopMax, fixed by the plant and the noise law and never by the reading; before, it was a parameter Delta-blind under OpenLoopBound, which was vacuous with informative noise when asked on every event and channel-dependent when asked on the reading's fibres. The two terms separate, and only the second is what monitoring moves. A witness is OWED for the two corollaries and the raised gate ceiling records it; see the module header for why a cheap model would be degenerate.",
             "evidence": "docs/provenance/practitioner-checkers.md"
           }
         }
@@ -2427,11 +2467,11 @@
               "blind_channel_buys_nothing",
               "budget_is_the_channel_not_the_volume"
             ],
-            "application": "Pricing a monitoring proposal. The reply to 'add more monitoring' is not that it never helps but that it helps by at most the information the channel carries about the hazard, and the bound separates that term from Δblind, a bound on what a fixed action achieves on every conditional ensemble (not the blind regime's actual performance, which it can exceed when the noise is informative). A channel informationally independent of the hazard contributes exactly zero, so an argument for monitoring rests on a mutual information being positive -- a measurable property of the channel rather than a matter of design intent. Read as an upper bound only: a rich channel does not guarantee the regime achieves anything, and the bound says only that it cannot achieve more.",
+            "application": "Pricing a monitoring proposal. The reply to 'add more monitoring' is not that it never helps but that it helps by at most the information the channel carries about the hazard, and the bound separates that term from the open-loop maximum, which depends on the plant and the noise law only, never on the reading (given noise independent of hazard and reading). A channel informationally independent of the hazard contributes exactly zero, so an argument for monitoring rests on a mutual information being positive -- a measurable property of the channel rather than a matter of design intent. Read as an upper bound only: a rich channel does not guarantee the regime achieves anything, and the bound says only that it cannot achieve more.",
             "review_status": "REVIEWED",
             "review": {
               "reviewer": "Mario Brcic (mbrcic)",
-              "date": "2026-10-04",
+              "date": "2026-10-05",
               "statement_reviewed": true,
               "interpretation_reviewed": true,
               "evidence": "docs/interpretation-reviews/review-oversight-reduction-le-budget.md"
@@ -10939,7 +10979,7 @@
         "multi-agent",
         "decision-theory"
       ],
-      "notes": "GROUNDING. No printed theorem is graded here, and this row claims none. The substrate is Peleg's game-form layer (GameForm, Forces, effectivity in AISafetyAtlas.Sovereignty.Separations, hosted by LAND-SOV-POWER-001, graded in section 21 of docs/provenance/source-coverage-audit.md) together with the atlas-side mandate layer (RetainsFamily in AISafetyAtlas.Sovereignty.Mandate). The concept this module renders is the HEC2026 keynote cut of cognitive sovereignty -- the capacity to remain the AUTHOR of your own memory, goals, judgment and action under AI mediation -- which is unpublished and therefore uncitable; docs/provenance/cognitive-sovereignty-obligation.md section 1 records all three published definitions and why none is gradeable as written. Everything in this row is atlas-side interpretation and would grade Beyond, not against Peleg. CONTENT. SteeringPath is a path of n + 1 game forms with a mandate family attached to each and a StepKind for each of the n adjacent steps, at a fixed principal coalition C: this is gradual steering of one principal, not a change of who occupies the slot. StepSafe i is retention of the LATER mandate across step i -- the step looks safe against what the principal now treats as its own mandate. AdjacentSafe is that for every step, OriginalLost is failure of retention from G 0 to G n against mandate 0, and IsSteering is their conjunction. THE CLAIM, AND WHY IT IS NOT VACUOUS. RetainsFamily.trans says retention composes at a FIXED family, so IsSteering is inhabited only because the family moves. AISafetyAtlas.Examples.Sovereignty.steer_isSteering is the witness: one principal (false) and one assistant (true), outcomes Fin 3 with 0 the original goal, 1 a substitute and 2 a disaster. Memory coarsens the mandate from {0} to {0, 1} with the game unchanged; Compass (reframed) reads a choice of 0 as 1, so the original option is still on the button and no longer means what it did; Engine (executed) hands naming to the assistant, which maps disaster to the substitute. steer_step0, steer_step1 and steer_step2 are the three adjacent retentions, steer_originalLost is the failure across the composition, and steer_retains_coarsened shows the path DOES retain the coarsened family end to end -- so the phenomenon is the moving mandate and not a failure of transitivity. NOT HERE. Nothing says a steering path is reachable by any particular assistant, nothing quantifies how much coarsening a step may do -- indeed nothing requires a later mandate to coarsen an earlier one at all, so later mandates set to the empty family make AdjacentSafe vacuous and IsSteering reduce to OriginalLost, and kind is a label no definition reads (closure audit 2026-10-05; the witness itself is sound) -- and the five verbs of the keynote cut (preserve, inspect, contest, redirect, recover) are named in the module docstring as interpretation and are not formalized.",
+      "notes": "GROUNDING. No printed theorem is graded here, and this row claims none. The substrate is Peleg's game-form layer (GameForm, Forces, effectivity in AISafetyAtlas.Sovereignty.Separations, hosted by LAND-SOV-POWER-001, graded in section 21 of docs/provenance/source-coverage-audit.md) together with the atlas-side mandate layer (RetainsFamily in AISafetyAtlas.Sovereignty.Mandate). The concept this module renders is the HEC2026 keynote cut of cognitive sovereignty -- the capacity to remain the AUTHOR of your own memory, goals, judgment and action under AI mediation -- which is unpublished and therefore uncitable; docs/provenance/cognitive-sovereignty-obligation.md section 1 records all three published definitions and why none is gradeable as written. Everything in this row is atlas-side interpretation and would grade Beyond, not against Peleg. CONTENT. SteeringPath is a path of n + 1 game forms with a mandate family attached to each and a StepKind for each of the n adjacent steps, at a fixed principal coalition C: this is gradual steering of one principal, not a change of who occupies the slot. StepSafe i is retention of the LATER mandate across step i -- the step looks safe against what the principal now treats as its own mandate. AdjacentSafe is that for every step, OriginalLost is failure of retention from G 0 to G n against mandate 0, and IsSteering is their conjunction. THE CLAIM, AND WHY IT IS NOT VACUOUS. RetainsFamily.trans says retention composes at a FIXED family, so IsSteering is inhabited only because the family moves. AISafetyAtlas.Examples.Sovereignty.steer_isSteering is the witness: one principal (false) and one assistant (true), outcomes Fin 3 with 0 the original goal, 1 a substitute and 2 a disaster. Memory coarsens the mandate from {0} to {0, 1} with the game unchanged; Compass (reframed) reads a choice of 0 as 1, so the original option is still on the button and no longer means what it did; Engine (executed) hands naming to the assistant, which maps disaster to the substitute. steer_step0, steer_step1 and steer_step2 are the three adjacent retentions, steer_originalLost is the failure across the composition, and steer_retains_coarsened shows the path DOES retain the coarsened family end to end -- so the phenomenon is the moving mandate and not a failure of transitivity. NOT HERE. Nothing says a steering path is reachable by any particular assistant, nothing quantifies how much coarsening a step may do (SteeringPath requires since 2026-10-05 that each mandate coarsens the one before, so a path cannot look safe by emptying the mandate, and that a Memory step keeps the game while Compass and Engine keep the mandate; the closure audit had found later mandates could be empty and kind unread; Compass and Engine are still not told apart), and the five verbs of the keynote cut (preserve, inspect, contest, redirect, recover) are named in the module docstring as interpretation and are not formalized.",
       "original_source_refs": [
         "peleg-1998-effectivity-functions-rights"
       ],
@@ -11048,7 +11088,7 @@
           "declarations": [
             "Audit",
             "refusal_passes_safety",
-            "refusal_serves_nothing",
+            "refusal_fails_catalogue",
             "safety_suite_admits_a_refusal",
             "isRefusalHole",
             "admitsRefusal",
@@ -11084,7 +11124,7 @@
             "source_declarations": [
               "Refusal.Audit",
               "Refusal.refusal_passes_safety",
-              "Refusal.refusal_serves_nothing",
+              "Refusal.refusal_fails_catalogue",
               "Refusal.admitsRefusal",
               "Refusal.exists_refusal_hole_of_admitsRefusal",
               "Refusal.not_exists_refusal_hole_of_admitsRefusal_eq_false"
@@ -11890,11 +11930,11 @@
               "DelegationChain.not_forces_of_free_coordinate",
               "DelegationChain.forces_both_of_shared_commitment"
             ],
-            "application": "Auditing an assurance chain. A deployer relies on a vendor, the vendor on a model provider; the step being made is that power over a party plus that party's power over an outcome is power over the outcome. It is not: power is relative to a matter, and a coalition that settles one coordinate of what happens settles nothing about a coordinate left free of it, whatever it holds elsewhere. The repair is not more authority over the party but a single commitment that reaches the matter -- and two separate powers are not enough, since they may be witnessed by commitments that cannot be played at once, which is the same shared-witness distinction the conformity reading draws from the other side.",
+            "application": "Auditing an assurance chain. A deployer relies on a vendor, the vendor on a model provider; the step to check is whether what the upstream party controls is the matter in question. Power is relative to a matter: a coalition that settles one coordinate of what happens settles nothing about a coordinate left free of it, whatever it holds elsewhere. The repair is a single commitment that reaches the matter -- and two separate powers are not enough, since they may be witnessed by commitments that cannot be played at once, which is the same shared-witness distinction the conformity reading draws from the other side.",
             "review_status": "REVIEWED",
             "review": {
               "reviewer": "Mario Brcic (mbrcic)",
-              "date": "2026-10-03",
+              "date": "2026-10-05",
               "statement_reviewed": true,
               "interpretation_reviewed": true,
               "evidence": "docs/interpretation-reviews/review-power-over-a-matter-does-not-compose.md"
@@ -13980,7 +14020,7 @@
               "AISafetyAtlas.Sovereignty.Cycle",
               "AISafetyAtlas.Sovereignty.Acyclic"
             ],
-            "application": "Auditing a distribution of power for an instability that no choice of preferences can repair. A cycle is a finite certificate, checkable against the effectivity family alone, that, given nonempty blocking sets, some coalition can always block whatever is proposed -- and it never mentions what anybody wants. This is the arrow from holding such a certificate to the arrangement failing Keiding's condition."
+            "application": "Auditing a distribution of power for instability: a cycle with nonempty blocking sets yields some preference profile under which every outcome is dominated (Keiding Theorem 3.6), so the arrangement is not stable across all profiles. A cycle is a finite certificate, checkable against the effectivity family alone, that, given nonempty blocking sets, some coalition can always block whatever is proposed -- and it never mentions what anybody wants. This is the arrow from holding such a certificate to the arrangement failing Keiding's condition."
           },
           {
             "atlas_declaration": "AISafetyAtlas.Sovereignty.gameFormAcyclic_iff",
@@ -13988,11 +14028,11 @@
             "source_declarations": [
               "AISafetyAtlas.Sovereignty.effectivity"
             ],
-            "application": "Reading the social-choice stability literature directly against a game form already in this repository: Keiding's E and the atlas's effectivity are the same type, so the condition applies with nothing in between and no transcription risk.",
+            "application": "Reading the social-choice stability literature directly against a game form already in this repository: Keiding's E and the atlas's effectivity are the same type, so the condition applies with nothing in between; effectivity G meets Def. 2.1(i) only when every strategy type is inhabited.",
             "review_status": "STATEMENT_REVIEWED",
             "review": {
               "reviewer": "Mario Brcic (mbrcic)",
-              "date": "2026-10-04",
+              "date": "2026-10-05",
               "statement_reviewed": true,
               "interpretation_reviewed": false,
               "evidence": "docs/interpretation-reviews/review-gameformacyclic-iff.md"
@@ -14235,7 +14275,7 @@
         "provability-logic"
       ],
       "result_shape": "INFRASTRUCTURE",
-      "notes": "GROUNDING. Jones and Sergot 1996, read from rendered page images at folios 427 and 431-435. WHAT THIS ROW IS FOR. Guarded Horn constitutive rules under a least fixed point are the cheapest formal object for 'the institution recognizes this act as creating this fact', and they are what an outside sketch supplied to this repository proposed as a rendering of counts-as. They are a BAD rendering of it, and this row makes that mechanical rather than advisory. Jones and Sergot deliberately reject RCM and RI at p.433 and PTR at p.435: their power is not monotone, not reflexive and does not compose. A least-fixed-point Horn derivation validates two of the three, and countsAs_refl and countsAs_trans are those two as theorems -- RI immediate from the given constructor, PTR by admissibility of cut, proved by induction on the second derivation. countsAs_validates_refl_and_trans packages both so a consumer tempted to cite that paper for CountsAs meets a theorem saying why they cannot. RCM, consequent weakening, is NOT EXPRESSIBLE here at all, since Fact is an opaque type with no entailment relation; it is neither validated nor rejected and that is recorded rather than glossed. WHAT IS NOT BUILT. The connective itself, and the minimal conditional model at p.435 whose f_s(alpha, X) : Set (Set W) is the type of effectivity. Building that is a separate decision and is not taken here. AUTHORITY. Authorized is recognized AND permitted AND practically possible. It is NOT the conjunction of LAND-SOV-DEONTIC-001's three axes: those are empowered, permitted, possible, and Authorized uses Recognized, not empowered (closure audit 2026-10-05). Recognized is also weak: Derives.given makes a fact that already holds recognized for every act, so exists_recognized_not_authorized reduces to the existence of an act that is not permitted. Tying recognition to empowerment, so that the separation of the axes does the work, is open. no_authority_from_ungrounded_cycles is the least-fixed-point payoff: with no ground facts and no premise-free rule nothing is derivable, so rules that only cite each other install nothing.",
+      "notes": "GROUNDING. Jones and Sergot 1996, read from rendered page images at folios 427 and 431-435. WHAT THIS ROW IS FOR. Guarded Horn constitutive rules under a least fixed point are the cheapest formal object for 'the institution recognizes this act as creating this fact', and they are what an outside sketch supplied to this repository proposed as a rendering of counts-as. They are a BAD rendering of it, and this row makes that mechanical rather than advisory. Jones and Sergot deliberately reject RCM and RI at p.433 and PTR at p.435: their power is not monotone, not reflexive and does not compose. A least-fixed-point Horn derivation validates two of the three, and countsAs_refl and countsAs_trans are those two as theorems -- RI immediate from the given constructor, PTR by admissibility of cut, proved by induction on the second derivation. countsAs_validates_refl_and_trans packages both so a consumer tempted to cite that paper for CountsAs meets a theorem saying why they cannot. RCM, consequent weakening, is NOT EXPRESSIBLE here at all, since Fact is an opaque type with no entailment relation; it is neither validated nor rejected and that is recorded rather than glossed. WHAT IS NOT BUILT. The connective itself, and the minimal conditional model at p.435 whose f_s(alpha, X) : Set (Set W) is the type of effectivity. Building that is a separate decision and is not taken here. AUTHORITY. Authorized is recognized AND permitted AND practically possible. It is NOT the conjunction of LAND-SOV-DEONTIC-001's three axes: those are empowered, permitted, possible, and Authorized uses Recognized, not empowered (closure audit 2026-10-05). Recognized is also weak: Derives.given makes a fact that already holds recognized for every act. exists_recognized_not_authorized therefore asks (since 2026-10-05) for a rule concluding the fact from ground facts and firing on every empowered act, and returns an EMPOWERED, possible act recognized through that firing and not permitted -- so the separation of the axes does the work. Before, it assumed the fact already held and reduced to the existence of an act that is not permitted. no_authority_from_ungrounded_cycles is the least-fixed-point payoff: with no ground facts and no premise-free rule nothing is derivable, so rules that only cite each other install nothing.",
       "original_source_refs": [
         "jones-sergot-1996-institutionalised-power"
       ],
@@ -14301,7 +14341,7 @@
             "source_declarations": [
               "AISafetyAtlas.Sovereignty.InstitutionalSetting.Separated"
             ],
-            "application": "Reviewing a system that treats 'the action was recognized by the rules' as sufficient. Recognition in this model is weak: a fact that already holds counts as recognized for every act (Derives.given does not look at the act), so the theorem shows only that some act is not permitted while every such fact is recognized. That recognition is not authorization in the stronger sense, with recognition tied to empowerment, is not proved here."
+            "application": "Reviewing a system that treats 'the action was recognized by the rules' as sufficient. An empowered, possible act that the institution's own rule makes count as bringing about a fact can still be one nobody may perform. The theorem asks for a rule that concludes the fact from ground facts and fires on every empowered act, so recognition comes from the act, not from the fact already holding (Recognized alone would be weak: Derives.given does not look at the act)."
           }
         ]
       },

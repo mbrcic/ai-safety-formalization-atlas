@@ -535,6 +535,24 @@ public theorem exists_dotProduct_eq_zero_of_ne_top {W : Submodule ℂ (Fin n →
     rw [← hfv]
     exact Finset.sum_congr rfl fun i _ => mul_comm _ _
 
+/-- **Under the rank criterion every state is reached from rest at time `1`, by a
+continuous input.** The step both sufficiency theorems below share. -/
+public theorem reachedSet_one_eq_top {A : Matrix (Fin n) (Fin n) ℂ}
+    {p : ℕ} {B : Matrix (Fin n) (Fin p) ℂ} (hc : IsControllable A B) :
+    reachedSet A B 1 = ⊤ := by
+  by_contra hne
+  obtain ⟨z, hz0, hz⟩ := exists_dotProduct_eq_zero_of_ne_top hne
+  have hsil := adjointSignal_eq_zero_of_dotProduct_drivenState_eq_zero A B
+    (z := z) (T := 1) one_pos
+    (fun u hu => hz _ (mem_reachedSet_iff.mpr ⟨u, hu, rfl⟩))
+  have hy : adjointFlow A z 1 = 0 := by
+    refine eq_zero_of_adjointFlow_eq_zero hc (S := Set.Ioo (-1 : ℝ) 0) isOpen_Ioo
+      ⟨-(1/2), by norm_num, by norm_num⟩ (fun σ hσ => ?_)
+    have hneg : -σ ∈ Set.Ioo (0 : ℝ) 1 := ⟨by linarith [hσ.2], by linarith [hσ.1]⟩
+    have h := hsil (-σ) hneg
+    rwa [adjointSignal, neg_neg] at h
+  exact hz0 (eq_zero_of_adjointFlow_eq_zero_at hy)
+
 /--
 **Klamka's complete state controllability, from the rank criterion.**
 
@@ -552,19 +570,7 @@ public theorem isReachable_of_isControllable {A : Matrix (Fin n) (Fin n) ℂ}
     {p : ℕ} {B : Matrix (Fin n) (Fin p) ℂ} (hc : IsControllable A B) :
     IsReachable A B := by
   classical
-  have htop : reachedSet A B 1 = ⊤ := by
-    by_contra hne
-    obtain ⟨z, hz0, hz⟩ := exists_dotProduct_eq_zero_of_ne_top hne
-    have hsil := adjointSignal_eq_zero_of_dotProduct_drivenState_eq_zero A B
-      (z := z) (T := 1) one_pos
-      (fun u hu => hz _ (mem_reachedSet_iff.mpr ⟨u, hu, rfl⟩))
-    have hy : adjointFlow A z 1 = 0 := by
-      refine eq_zero_of_adjointFlow_eq_zero hc (S := Set.Ioo (-1 : ℝ) 0) isOpen_Ioo
-        ⟨-(1/2), by norm_num, by norm_num⟩ (fun σ hσ => ?_)
-      have hneg : -σ ∈ Set.Ioo (0 : ℝ) 1 := ⟨by linarith [hσ.2], by linarith [hσ.1]⟩
-      have h := hsil (-σ) hneg
-      rwa [adjointSignal, neg_neg] at h
-    exact hz0 (eq_zero_of_adjointFlow_eq_zero_at hy)
+  have htop : reachedSet A B 1 = ⊤ := reachedSet_one_eq_top hc
   intro x₁
   obtain ⟨u, hu, hux⟩ := mem_reachedSet_iff.mp (htop ▸ Submodule.mem_top (x := x₁))
   exact ⟨drivenState A B u, u, 1, drivenState_isTrajectory A B hu,
@@ -574,11 +580,13 @@ public theorem isReachable_of_isControllable {A : Matrix (Fin n) (Fin n) ℂ}
 
 /-- **Complete state controllability at print's quantifier.** Print's phrase is
 *completely state controllable*, which asks for a run between **any** two states,
-not only out of the origin. -/
+not only out of the origin, forward in time: the target is reached at a time
+`t₁ > 0`. (Before 2026-10-05 the time carried no sign, so a run reaching `x₀`
+from `x₁` backward counted; closure audit.) -/
 @[expose] public def IsCompletelyReachable (A : Matrix (Fin n) (Fin n) ℂ)
     {p : ℕ} (B : Matrix (Fin n) (Fin p) ℂ) : Prop :=
   ∀ x₀ x₁ : Fin n → ℂ, ∃ (x : ℝ → (Fin n → ℂ)) (u : ℝ → (Fin p → ℂ)) (t₁ : ℝ),
-    IsTrajectory A B x u ∧ x 0 = x₀ ∧ x t₁ = x₁
+    0 < t₁ ∧ IsTrajectory A B x u ∧ x 0 = x₀ ∧ x t₁ = x₁
 
 /-- **A free run and a driven run add.** The state equation is affine in the
 state, so the shift by an initial condition costs nothing. -/
@@ -599,23 +607,11 @@ public theorem shifted_isTrajectory (A : Matrix (Fin n) (Fin n) ℂ)
 public theorem isCompletelyReachable_of_isControllable {A : Matrix (Fin n) (Fin n) ℂ}
     {p : ℕ} {B : Matrix (Fin n) (Fin p) ℂ} (hc : IsControllable A B) :
     IsCompletelyReachable A B := by
-  have htop : reachedSet A B 1 = ⊤ := by
-    by_contra hne
-    obtain ⟨z, hz0, hz⟩ := exists_dotProduct_eq_zero_of_ne_top hne
-    have hsil := adjointSignal_eq_zero_of_dotProduct_drivenState_eq_zero A B
-      (z := z) (T := 1) one_pos
-      (fun u hu => hz _ (mem_reachedSet_iff.mpr ⟨u, hu, rfl⟩))
-    have hy : adjointFlow A z 1 = 0 := by
-      refine eq_zero_of_adjointFlow_eq_zero hc (S := Set.Ioo (-1 : ℝ) 0) isOpen_Ioo
-        ⟨-(1/2), by norm_num, by norm_num⟩ (fun σ hσ => ?_)
-      have hneg : -σ ∈ Set.Ioo (0 : ℝ) 1 := ⟨by linarith [hσ.2], by linarith [hσ.1]⟩
-      have h := hsil (-σ) hneg
-      rwa [adjointSignal, neg_neg] at h
-    exact hz0 (eq_zero_of_adjointFlow_eq_zero_at hy)
+  have htop : reachedSet A B 1 = ⊤ := reachedSet_one_eq_top hc
   intro x₀ x₁
   obtain ⟨u, hu, hux⟩ := mem_reachedSet_iff.mp
     (htop ▸ Submodule.mem_top (x := x₁ - flow A 1 *ᵥ x₀))
-  refine ⟨fun t => flow A t *ᵥ x₀ + drivenState A B u t, u, 1,
+  refine ⟨fun t => flow A t *ᵥ x₀ + drivenState A B u t, u, 1, one_pos,
     shifted_isTrajectory A B hu x₀, ?_, ?_⟩
   · show flow A 0 *ᵥ x₀ + drivenState A B u 0 = x₀
     rw [flow_zero, Matrix.one_mulVec, drivenState_zero, add_zero]
@@ -627,7 +623,9 @@ public theorem isCompletelyReachable_of_isControllable {A : Matrix (Fin n) (Fin 
 from rest. -/
 public theorem IsCompletelyReachable.isReachable {A : Matrix (Fin n) (Fin n) ℂ}
     {p : ℕ} {B : Matrix (Fin n) (Fin p) ℂ} (h : IsCompletelyReachable A B) :
-    IsReachable A B := fun x₁ => h 0 x₁
+    IsReachable A B := fun x₁ =>
+  let ⟨x, u, t₁, _, hx, h0, h1⟩ := h 0 x₁
+  ⟨x, u, t₁, hx, h0, h1⟩
 
 /--
 **Klamka's criterion and Klamka's property are the same thing.**
@@ -660,5 +658,224 @@ public theorem isReachable_iff_isControllable {A : Matrix (Fin n) (Fin n) ℂ}
     exact not_isReachable_of_not_isControllable hc h
   · intro hc
     exact (isCompletelyReachable_of_isControllable hc).isReachable
+
+/-! ## Print's solution class
+
+`IsTrajectoryOn` asks for a derivative at every time, so only classical solutions
+count, and an input with jumps -- piecewise constant, the standard class print
+imports from Chen and Desoer -- has no trajectory at all. That made the necessity
+direction of reachability and the sufficiency direction of observability
+narrower than print. `IsSolution` is the integral form: a continuous state whose
+right-hand side is locally integrable and which satisfies
+`x t = x 0 + ∫₀ᵗ (A x + B u)`. Every classical run with continuous right-hand side
+is one (`IsTrajectory.isSolution`), and a step input gives one that is not
+classical (`integrator_step_isSolution` in the examples). That every
+piecewise-continuous input gives a solution of this kind is standard and is not
+proved here. Both equivalences hold at this class: observability by
+`determinesStateSolOn_iff_isObservable`, reachability by
+`isCompletelyReachableSol_iff_isControllable`.
+-/
+
+open MeasureTheory
+
+/-- **A solution in integral form** (Carathéodory): `x` is continuous, the
+right-hand side `A x + B u` is integrable on every bounded interval, and
+`x t = x 0 + ∫₀ᵗ (A x + B u)` at every time. -/
+@[expose] public def IsSolution (A : Matrix (Fin n) (Fin n) ℂ) {p : ℕ}
+    (B : Matrix (Fin n) (Fin p) ℂ) (x : ℝ → (Fin n → ℂ)) (u : ℝ → (Fin p → ℂ)) : Prop :=
+  Continuous x ∧ (∀ a b : ℝ, IntervalIntegrable (fun s => A *ᵥ x s + B *ᵥ u s) volume a b) ∧
+    ∀ t : ℝ, x t = x 0 + ∫ s in (0 : ℝ)..t, (A *ᵥ x s + B *ᵥ u s)
+
+/-- **A classical run with continuous right-hand side is a solution.** -/
+public theorem IsTrajectory.isSolution {A : Matrix (Fin n) (Fin n) ℂ} {p : ℕ}
+    {B : Matrix (Fin n) (Fin p) ℂ} {x : ℝ → (Fin n → ℂ)} {u : ℝ → (Fin p → ℂ)}
+    (hx : IsTrajectory A B x u) (hf : Continuous fun s => A *ᵥ x s + B *ᵥ u s) :
+    IsSolution A B x u := by
+  refine ⟨continuous_iff_continuousAt.mpr fun t => (hx t trivial).continuousAt,
+    fun a b => hf.intervalIntegrable a b, fun t => ?_⟩
+  rw [intervalIntegral.integral_eq_sub_of_hasDerivAt (fun s _ => hx s trivial)
+    (hf.intervalIntegrable 0 t)]
+  abel
+
+/-- **The difference of two solutions under the same input is a classical
+zero-input run.** The input cancels inside the integral, and what is left is the
+integral of a continuous function. -/
+public theorem IsSolution.hasDerivAt_sub {A : Matrix (Fin n) (Fin n) ℂ} {p : ℕ}
+    {B : Matrix (Fin n) (Fin p) ℂ} {x y : ℝ → (Fin n → ℂ)} {u : ℝ → (Fin p → ℂ)}
+    (hx : IsSolution A B x u) (hy : IsSolution A B y u) (t : ℝ) :
+    HasDerivAt (fun s => x s - y s) (A *ᵥ (x t - y t)) t := by
+  have hg : Continuous fun s => A *ᵥ (x s - y s) :=
+    continuous_const.matrix_mulVec (hx.1.sub hy.1)
+  have heq : (fun s => x s - y s) =
+      fun r => (x 0 - y 0) + ∫ s in (0 : ℝ)..r, A *ᵥ (x s - y s) := by
+    funext r
+    rw [hx.2.2 r, hy.2.2 r]
+    have hsub := intervalIntegral.integral_sub (hx.2.1 0 r) (hy.2.1 0 r)
+    have hcongr : (∫ s in (0 : ℝ)..r, ((A *ᵥ x s + B *ᵥ u s) - (A *ᵥ y s + B *ᵥ u s)))
+        = ∫ s in (0 : ℝ)..r, A *ᵥ (x s - y s) := by
+      congr 1; funext s; rw [Matrix.mulVec_sub]; abel
+    rw [← hcongr, hsub]
+    abel
+  rw [heq]
+  exact ((hg.integral_hasStrictDerivAt 0 t).hasDerivAt).const_add _
+
+/-- **Output determines state, at print's solution class**, on the window `S`. -/
+@[expose] public def DeterminesStateSolOn (A : Matrix (Fin n) (Fin n) ℂ) {p q : ℕ}
+    (B : Matrix (Fin n) (Fin p) ℂ) (C : Matrix (Fin q) (Fin n) ℂ) (S : Set ℝ) : Prop :=
+  ∀ (x y : ℝ → (Fin n → ℂ)) (u : ℝ → (Fin p → ℂ)),
+    IsSolution A B x u → IsSolution A B y u →
+      (∀ t ∈ S, outputSignal C x t = outputSignal C y t) → ∀ t ∈ S, x t = y t
+
+/-- **The rank criterion delivers observability at print's solution class.** -/
+public theorem isObservable_imp_determinesStateSolOn {A : Matrix (Fin n) (Fin n) ℂ}
+    {p q : ℕ} {B : Matrix (Fin n) (Fin p) ℂ} {C : Matrix (Fin q) (Fin n) ℂ} {S : Set ℝ}
+    (hS : IsOpen S) (hobs : IsObservable A C) : DeterminesStateSolOn A B C S := by
+  intro x y u hx hy hout t₀ ht₀
+  have hd : ∀ t ∈ S, HasDerivAt (fun s => x s - y s) (A *ᵥ ((fun s => x s - y s) t)) t :=
+    fun t _ => hx.hasDerivAt_sub hy t
+  have h0 : ∀ t ∈ S, C *ᵥ ((fun s => x s - y s) t) = 0 := by
+    intro t ht
+    have h := hout t ht
+    simp only [outputSignal] at h
+    rw [Matrix.mulVec_sub, h, sub_self]
+  have hall := mulVec_pow_eq_zero_of_outputSignal_eq_zero hS hd h0
+  exact sub_eq_zero.mp (hobs (x t₀ - y t₀) fun k => hall (k : ℕ) t₀ ht₀)
+
+/-- **And the criterion is necessary there**: the eigen-run and the rest run are
+solutions. -/
+public theorem not_determinesStateSolOn_of_not_isObservable {A : Matrix (Fin n) (Fin n) ℂ}
+    {p q : ℕ} {B : Matrix (Fin n) (Fin p) ℂ} {C : Matrix (Fin q) (Fin n) ℂ} {S : Set ℝ}
+    (hne : S.Nonempty) (hobs : ¬ IsObservable A C) : ¬ DeterminesStateSolOn A B C S := by
+  obtain ⟨μ, v, hv0, hAv, hCv⟩ :=
+    exists_eigenvector_of_unobservableSubspace_neBot A C
+      (fun hbot => hobs ((unobservableSubspace_eq_bot_iff_isObservable A C).mp hbot))
+  intro hdet
+  obtain ⟨t₀, ht₀⟩ := hne
+  have heig : IsSolution A B (eigenTrajectory μ v) (fun _ => 0) := by
+    refine IsTrajectory.isSolution (eigenTrajectory_isTrajectoryOn (B := B) hAv Set.univ) ?_
+    have hc : Continuous (eigenTrajectory μ v) := continuous_iff_continuousAt.mpr fun t =>
+      (hasDerivAt_eigenTrajectory μ v t).continuousAt
+    simpa using continuous_const.matrix_mulVec hc
+  have hzero : IsSolution A B (fun _ => (0 : Fin n → ℂ)) (fun _ => 0) :=
+    ⟨continuous_const, fun a b => by simp, fun t => by simp⟩
+  have hout : ∀ t ∈ S, outputSignal C (eigenTrajectory μ v) t
+      = outputSignal C (fun _ => (0 : Fin n → ℂ)) t := by
+    intro t _
+    simp only [outputSignal, eigenTrajectory, Matrix.mulVec_smul, hCv, smul_zero,
+      Matrix.mulVec_zero]
+  exact eigenTrajectory_ne_zero hv0 t₀ (hdet _ _ _ heig hzero hout t₀ ht₀)
+
+/--
+**Klamka's observability at print's solution class.** The rank criterion holds
+exactly when the output determines the state among integral-form solutions, on
+any non-empty open window.
+-/
+public theorem determinesStateSolOn_iff_isObservable {A : Matrix (Fin n) (Fin n) ℂ}
+    {p q : ℕ} {B : Matrix (Fin n) (Fin p) ℂ} {C : Matrix (Fin q) (Fin n) ℂ} {S : Set ℝ}
+    (hS : IsOpen S) (hne : S.Nonempty) :
+    DeterminesStateSolOn A B C S ↔ IsObservable A C := by
+  classical
+  refine ⟨fun hdet => ?_, isObservable_imp_determinesStateSolOn hS⟩
+  by_contra hobs
+  exact not_determinesStateSolOn_of_not_isObservable hne hobs hdet
+
+/-- **Reachability at print's solution class**: every state from rest. -/
+@[expose] public def IsReachableSol (A : Matrix (Fin n) (Fin n) ℂ) {p : ℕ}
+    (B : Matrix (Fin n) (Fin p) ℂ) : Prop :=
+  ∀ x₁ : Fin n → ℂ, ∃ (x : ℝ → (Fin n → ℂ)) (u : ℝ → (Fin p → ℂ)) (t₁ : ℝ),
+    IsSolution A B x u ∧ x 0 = 0 ∧ x t₁ = x₁
+
+/-- **Complete state controllability at print's solution class**: any state to
+any state, forward in time. -/
+@[expose] public def IsCompletelyReachableSol (A : Matrix (Fin n) (Fin n) ℂ) {p : ℕ}
+    (B : Matrix (Fin n) (Fin p) ℂ) : Prop :=
+  ∀ x₀ x₁ : Fin n → ℂ, ∃ (x : ℝ → (Fin n → ℂ)) (u : ℝ → (Fin p → ℂ)) (t₁ : ℝ),
+    0 < t₁ ∧ IsSolution A B x u ∧ x 0 = x₀ ∧ x t₁ = x₁
+
+/-- A readout along a left eigenvector of `A` that annihilates `B` solves
+`φ' = μ φ` along any solution. -/
+public theorem IsSolution.hasDerivAt_dotProduct_of_eigen {A : Matrix (Fin n) (Fin n) ℂ}
+    {p : ℕ} {B : Matrix (Fin n) (Fin p) ℂ} {μ : ℂ} {z : Fin n → ℂ}
+    (hz : Aᵀ *ᵥ z = μ • z) (hzB : Bᵀ *ᵥ z = 0) {x : ℝ → (Fin n → ℂ)}
+    {u : ℝ → (Fin p → ℂ)} (hx : IsSolution A B x u) (t : ℝ) :
+    HasDerivAt (fun s => z ⬝ᵥ x s) (μ * (z ⬝ᵥ x t)) t := by
+  have hval : ∀ s, z ⬝ᵥ (A *ᵥ x s + B *ᵥ u s) = μ * (z ⬝ᵥ x s) := by
+    intro s
+    rw [dotProduct_add, dotProduct_mulVec, dotProduct_mulVec,
+      ← Matrix.mulVec_transpose, ← Matrix.mulVec_transpose, hz, hzB, smul_dotProduct,
+      zero_dotProduct, add_zero, smul_eq_mul]
+  have hφ : Continuous fun s => z ⬝ᵥ x s := (dotCLM z).continuous.comp hx.1
+  have heq : (fun s => z ⬝ᵥ x s) = fun r => z ⬝ᵥ x 0 + ∫ s in (0 : ℝ)..r, μ * (z ⬝ᵥ x s) := by
+    funext r
+    rw [hx.2.2 r, dotProduct_add]
+    congr 1
+    rw [← dotCLM_apply, ← (dotCLM z).intervalIntegral_comp_comm (hx.2.1 0 r)]
+    simp only [dotCLM_apply, hval]
+  rw [heq]
+  exact (((continuous_const.mul hφ).integral_hasStrictDerivAt 0 t).hasDerivAt).const_add _
+
+/-- **If the rank criterion fails, some state is never reached by any solution.** -/
+public theorem not_isReachableSol_of_not_isControllable {A : Matrix (Fin n) (Fin n) ℂ}
+    {p : ℕ} {B : Matrix (Fin n) (Fin p) ℂ} (hc : ¬ IsControllable A B) :
+    ¬ IsReachableSol A B := by
+  classical
+  have hobs : ¬ IsObservable Aᵀ Bᵀ := fun h =>
+    hc ((isControllable_iff_isObservable_transpose A B).mpr h)
+  obtain ⟨μ, z, hz0, hAz, hBz⟩ :=
+    exists_eigenvector_of_unobservableSubspace_neBot Aᵀ Bᵀ
+      (fun hbot => hobs ((unobservableSubspace_eq_bot_iff_isObservable Aᵀ Bᵀ).mp hbot))
+  obtain ⟨i, hi⟩ : ∃ i, z i ≠ 0 := by
+    by_contra h
+    exact hz0 (funext fun i => not_not.mp (fun hne => h ⟨i, hne⟩))
+  intro hreach
+  obtain ⟨x, u, t₁, hx, hx0, hx1⟩ := hreach (fun j => if j = i then (z i)⁻¹ else 0)
+  have hzero : ∀ t : ℝ, z ⬝ᵥ x t = 0 := by
+    intro t
+    refine eq_zero_of_hasDerivAt_mul (μ := μ)
+      (fun s => hx.hasDerivAt_dotProduct_of_eigen hAz hBz s) ?_ t
+    rw [hx0, dotProduct_zero]
+  have hone : z ⬝ᵥ x t₁ = 1 := by
+    rw [hx1, dotProduct]
+    rw [Finset.sum_eq_single i]
+    · rw [if_pos rfl, mul_inv_cancel₀ hi]
+    · intro j _ hj; rw [if_neg hj, mul_zero]
+    · intro h; exact absurd (Finset.mem_univ i) h
+  rw [hzero t₁] at hone
+  exact zero_ne_one hone
+
+/-- **The rank criterion reaches every state from every state at time `1`, by a
+continuous input, along a solution.** -/
+public theorem isCompletelyReachableSol_of_isControllable {A : Matrix (Fin n) (Fin n) ℂ}
+    {p : ℕ} {B : Matrix (Fin n) (Fin p) ℂ} (hc : IsControllable A B) :
+    IsCompletelyReachableSol A B := by
+  intro x₀ x₁
+  obtain ⟨u, hu, hux⟩ := mem_reachedSet_iff.mp
+    (reachedSet_one_eq_top hc ▸ Submodule.mem_top (x := x₁ - flow A 1 *ᵥ x₀))
+  have htraj := shifted_isTrajectory A B hu x₀
+  have hcx : Continuous fun t => flow A t *ᵥ x₀ + drivenState A B u t :=
+    continuous_iff_continuousAt.mpr fun t => (htraj t trivial).continuousAt
+  have hBu : Continuous fun s => B *ᵥ u s := continuous_const.matrix_mulVec hu
+  refine ⟨fun t => flow A t *ᵥ x₀ + drivenState A B u t, u, 1, one_pos,
+    htraj.isSolution ((continuous_const.matrix_mulVec hcx).add hBu), ?_, ?_⟩
+  · show flow A 0 *ᵥ x₀ + drivenState A B u 0 = x₀
+    rw [flow_zero, Matrix.one_mulVec, drivenState_zero, add_zero]
+  · show flow A 1 *ᵥ x₀ + drivenState A B u 1 = x₁
+    rw [hux]
+    abel
+
+/--
+**Klamka's controllability at print's solution class.** The rank condition holds
+exactly when every state is reached from every state, forward in time, along an
+integral-form solution. The necessity direction covers inputs with jumps.
+-/
+public theorem isCompletelyReachableSol_iff_isControllable {A : Matrix (Fin n) (Fin n) ℂ}
+    {p : ℕ} {B : Matrix (Fin n) (Fin p) ℂ} :
+    IsCompletelyReachableSol A B ↔ IsControllable A B := by
+  classical
+  refine ⟨fun h => ?_, isCompletelyReachableSol_of_isControllable⟩
+  by_contra hc
+  exact not_isReachableSol_of_not_isControllable hc fun x₁ =>
+    let ⟨x, u, t₁, _, hx, h0, h1⟩ := h 0 x₁
+    ⟨x, u, t₁, hx, h0, h1⟩
 
 end AISafetyAtlas.LinearSystems

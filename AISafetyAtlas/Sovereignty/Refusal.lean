@@ -28,8 +28,10 @@ satisfy, and `mustServe`, the requests the deployment is for.
   **every** safety property that the refusal outcome satisfies. Not most of them:
   all of them, at every coalition, with no hypothesis about the system beyond
   inertness.
-* `refusal_serves_nothing` — and it meets no request that the refusal outcome
-  misses.
+* `refusal_fails_catalogue` — and it fails the service catalogue: some request,
+  one the refusal outcome misses, is not met. (Named refusal_serves_nothing
+  until 2026-10-05; the statement says the catalogue as a whole fails, not that no
+  request is served.)
 * `safety_suite_admits_a_refusal` states them together: a suite with a refusal
   outcome inside every safety property and outside some request is a suite a
   do-nothing system passes while being useless. **The defect is in the suite**,
@@ -89,7 +91,7 @@ public theorem refusal_passes_safety {G₀ G₁ : GameForm.{u, v, w} N X}
   retainsFamily_of_inert hinert hsafe
 
 /-- **And it meets no request its refusal misses.** -/
-public theorem refusal_serves_nothing {G₁ : GameForm.{u, v, w} N X}
+public theorem refusal_fails_catalogue {G₁ : GameForm.{u, v, w} N X}
     [∀ i, Nonempty (G₁.strategy i)] {refusal : X} (hinert : Inert G₁ refusal)
     {R : Set X} (hR : R ∈ A.mustServe) (hmiss : refusal ∉ R) (C₁ : Set N) :
     ¬ Demandwise G₁ C₁ A.mustServe :=
@@ -108,7 +110,7 @@ public theorem safety_suite_admits_a_refusal {G₀ G₁ : GameForm.{u, v, w} N X
     {R : Set X} (hR : R ∈ A.mustServe) (hmiss : refusal ∉ R) (C₀ C₁ : Set N) :
     RetainsFamily G₀ G₁ C₀ C₁ A.mustHold ∧ ¬ Demandwise G₁ C₁ A.mustServe :=
   ⟨refusal_passes_safety A hinert hsafe C₀ C₁,
-    refusal_serves_nothing A hinert hR hmiss C₁⟩
+    refusal_fails_catalogue A hinert hR hmiss C₁⟩
 
 /-! ## Deciding it -/
 

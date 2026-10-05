@@ -54,7 +54,10 @@ matrix exponential nor an existence theorem.
 **Solution concept.** `IsTrajectoryOn` asks `HasDerivAt` at every time, so only
 classical solutions count. An input admitting no classical solution (a
 piecewise-constant one with an injective input map, the standard class) has no
-trajectory here, and the results say nothing about it.
+trajectory here, and the results of this module say nothing about it. Print's
+class is the integral form: `AISafetyAtlas.LinearSystems.IsSolution` in `Flow`,
+where both equivalences are proved again (`determinesStateSolOn_iff_isObservable`,
+`isCompletelyReachableSol_iff_isControllable`).
 
 **Print does not define these notions.** Page 726 says *"It is well known [1]
 that the system `S` is completely state controllable (observable) if and only if

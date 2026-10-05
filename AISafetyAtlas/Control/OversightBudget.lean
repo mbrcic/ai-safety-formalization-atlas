@@ -1,6 +1,7 @@
 module
 
 public import AISafetyAtlas.Control.InformationLimits
+public import AISafetyAtlas.Control.OpenLoop
 
 /-!
 # You cannot oversee better than you observe, and here is by how much
@@ -23,19 +24,23 @@ The argument this module bounds is *"add more monitoring"*. Answering it needs a
 quantity, because the reply is not that monitoring never helps — it plainly does
 — but that it helps **by at most the information the channel actually carries
 about the hazard**. That is `oversight_reduction_le_budget`, and the right-hand
-side has two terms the practitioner can separate: `Δblind`, a bound on what a
-fixed action achieves on every conditional ensemble, and the mutual information
-of the monitoring channel.
+side has two terms the practitioner can separate: `openLoopMax F η`, the atlas's
+independent-noise rendering of Touchette and Lloyd's `ΔH_open^max`
+(`openLoopMax_purifyMap` shows it ranges over the printed family) — the most a
+constant action reduces uncertainty on any input distribution, with the plant
+`F` and the noise law `η` fixed — and the
+mutual information of the monitoring channel. The first never mentions the
+reading. The noise is assumed independent of the hazard and the reading.
 
 ## What is stated
 
 `Oversight` bundles a hazard, what the overseer reads, and the outcome.
 
 * `oversight_reduction_le_budget` — the reduction in uncertainty about the
-  outcome is at most `Δblind + I[hazard : reading]`.
+  outcome is at most `openLoopMax F η + I[hazard : reading]`.
 * `blind_channel_buys_nothing` — a monitoring channel independent of the hazard
-  contributes zero, so the regime does no better than acting blind. Not "little
-  better": the bound collapses to the blind term exactly.
+  contributes zero, so the regime does no better than the open-loop bound. Not
+  "little better": the bound collapses to the open-loop term exactly.
 * `budget_is_the_channel_not_the_volume` — the bound depends on the channel's
   mutual information and on nothing else about it, so duplicating a reading, or
   sampling it more often, moves the bound only insofar as it moves that quantity.
@@ -51,16 +56,18 @@ regime with a rich channel may still achieve nothing, because the bound says onl
 that it cannot achieve more. Reading it as a guarantee is the error it is easiest
 to make.
 
-`Δblind` is a parameter and its value is part of the model. A regime that is
-already effective blind has a large one, and the theorem then says little —
-correctly, because in that regime monitoring was never the load-bearing part.
-**`Δblind` is not the blind regime's performance.** `OpenLoopBound` asks the
-bound on every positive-measure event, including events defined through the
-noise, so it can force `Δblind` well above what acting blind achieves: with
-state and noise independent fair coins and an output `state xor noise`, the
-event "output is false" makes the state uniform and the output constant, so
-`Δblind ≥ H(state)` and the bound says nothing. Restricting `OpenLoopBound` to
-events of the reading is open.
+`openLoopMax F η` is fixed by the plant and the noise law. A plant that already
+reduces uncertainty a lot without observing anything has a large one, and the
+theorem then says little — correctly, because there monitoring was never the
+load-bearing part. It is a maximum over **every** input distribution, so it can
+exceed what open-loop control achieves on the actual hazard; the bound is a
+ceiling. **Why this term.** Until 2026-10-05 the first term was a parameter
+`Δblind` constrained by `OpenLoopBound`. Asked on every event, that constraint
+could be vacuous (informative noise forced `Δblind` up to the hazard's whole
+entropy); asked on the reading's fibres, `Δblind` came to depend on the channel
+(with the reading equal to the hazard, `0` is admissible), which breaks the
+separation this module is about. The printed maximum keeps both: it is not
+vacuous and it never mentions the channel (closure audit).
 
 Identifying `reading` with any real monitoring channel is layer 4 and is not done
 here.
@@ -73,8 +80,8 @@ rather than hidden: `blind_channel_buys_nothing` and
 `scripts/agent_gate.sh` carried a ceiling raised by two. The reason was never
 that the statements are doubtful — they are two lines from the bound above — but
 that inhabiting their hypotheses needs a probability space with `IsPlant` and
-`OpenLoopBound` discharged, and every *cheap* model of those makes every entropy
-zero. A witness where the bound reads `0 ≤ 0 + 0` would satisfy the checker and
+the open-loop bound discharged, and every *cheap* model of those makes every
+entropy zero. A witness where the bound reads `0 ≤ 0 + 0` would satisfy the checker and
 establish nothing, which is exactly the failure the witness discipline exists to
 catch.
 
@@ -82,8 +89,8 @@ catch.
 standard. Both regimes run on fair coins, so every entropy in sight is positive.
 `blindRegime` has a hazard carrying `log 4` and a channel that is a genuine coin
 independent of it: `blindRegime_entropyReduction_eq` shows the regime still
-reduces uncertainty by `log 2`, the blind term **exactly**, so the bound is
-attained — monitoring bought nothing while the regime achieved something, which
+reduces uncertainty by `log 2`, the open-loop term's bound **exactly**, so the
+bound is attained — monitoring bought nothing while the regime achieved something, which
 is the distinction this module exists to draw. `oneReadingRegime` and
 `twoReadingsRegime` differ in volume and in nothing else, one recording the same
 coin twice, and `duplication_mutualInfo_eq` puts both channels at `log 2` rather
@@ -131,70 +138,78 @@ public structure Oversight (Ω : Type uΩ) (S : Type uS) (K : Type uK) (T : Type
 
 variable (O : Oversight Ω S K T)
 
-omit [MeasurableSpace N] [MeasurableSingletonClass N] [Countable N] in
 /--
 **The budget.** An oversight regime reduces uncertainty about the outcome by at
-most `Δblind`, a bound on what a fixed action achieves on every conditional
-ensemble, plus the information its channel carries about the hazard.
+most `openLoopMax F η`, the most any constant action reduces it on any input
+distribution with the noise law `η` held fixed (the atlas's rendering of
+Touchette and Lloyd's `ΔH_open^max`), plus the information its channel carries
+about the hazard.
 
 This is Touchette and Lloyd's bound read as governance. The two terms are
-separable and that is the practical content: the second is the only one
+separable and that is the practical content: the first depends on the plant and
+the noise law only, never on the reading, so the second is the only one
 monitoring moves, and it is bounded by a property of the channel rather than by
-effort, budget or attention.
+effort, budget or attention. The price is that the noise is independent of the
+hazard and the reading.
+
+(Until 2026-10-05 the first term was a `Δblind` with `OpenLoopBound`. Asked on
+every event that bound could be vacuous; asked on the reading's fibres it came to
+depend on the channel, which breaks the separation. Closure audit.)
 -/
-public theorem oversight_reduction_le_budget [IsProbabilityMeasure μ]
+public theorem oversight_reduction_le_budget [IsProbabilityMeasure μ] [Fintype S]
     {F : S → K → N → T} {Z : Ω → N}
-    (hhaz : Measurable O.hazard) (hread : Measurable O.reading)
-    (hout : Measurable O.outcome)
+    (hhaz : Measurable O.hazard) (hread : Measurable O.reading) (hZ : Measurable Z)
     [FiniteRange O.hazard] [FiniteRange O.reading] [FiniteRange O.outcome]
     (hplant : IsPlant F O.hazard O.reading Z O.outcome)
-    {Δblind : ℝ} (hblind : OpenLoopBound μ F O.hazard Z Δblind) :
-    entropyReduction μ O.hazard O.outcome ≤ Δblind + I[O.hazard : O.reading ; μ] :=
-  entropyReduction_le_of_openLoopBound μ hhaz hread hout hplant hblind
+    (hindep : IndepFun (⟨O.hazard, O.reading⟩ : Ω → S × K) Z μ) :
+    entropyReduction μ O.hazard O.outcome
+      ≤ openLoopMax F (μ.map Z) + I[O.hazard : O.reading ; μ] := by
+  have hout : O.outcome = plantOutcome F O.hazard O.reading Z := funext hplant
+  have : FiniteRange (plantOutcome F O.hazard O.reading Z) := hout ▸ inferInstance
+  rw [hout]
+  exact entropyReduction_le_openLoopMax μ F hhaz hread hZ hindep
 
-omit [MeasurableSpace N] [MeasurableSingletonClass N] [Countable N] in
 /--
 **A channel that says nothing about the hazard buys nothing.**
 
 When the reading is informationally independent of the hazard, the budget
-collapses to the blind term exactly. Not "the gain is small" — the bound is the
-same bound the regime had before the channel existed, so every argument for the
-monitoring rests on the mutual information being positive, which is a measurable
-claim about the channel and not a matter of design intent.
+collapses to the open-loop term exactly. Not "the gain is small": the bound is
+the one an open-loop regime has, which does not mention the channel, so every
+argument for the monitoring rests on the mutual information being positive,
+which is a measurable claim about the channel and not a matter of design intent.
 -/
-public theorem blind_channel_buys_nothing [IsProbabilityMeasure μ]
+public theorem blind_channel_buys_nothing [IsProbabilityMeasure μ] [Fintype S]
     {F : S → K → N → T} {Z : Ω → N}
-    (hhaz : Measurable O.hazard) (hread : Measurable O.reading)
-    (hout : Measurable O.outcome)
+    (hhaz : Measurable O.hazard) (hread : Measurable O.reading) (hZ : Measurable Z)
     [FiniteRange O.hazard] [FiniteRange O.reading] [FiniteRange O.outcome]
     (hplant : IsPlant F O.hazard O.reading Z O.outcome)
-    {Δblind : ℝ} (hblind : OpenLoopBound μ F O.hazard Z Δblind)
-    (hindep : I[O.hazard : O.reading ; μ] = 0) :
-    entropyReduction μ O.hazard O.outcome ≤ Δblind := by
-  have h := oversight_reduction_le_budget O hhaz hread hout hplant hblind
-  rw [hindep, add_zero] at h
+    (hindep : IndepFun (⟨O.hazard, O.reading⟩ : Ω → S × K) Z μ)
+    (hzero : I[O.hazard : O.reading ; μ] = 0) :
+    entropyReduction μ O.hazard O.outcome ≤ openLoopMax F (μ.map Z) := by
+  have h := oversight_reduction_le_budget O hhaz hread hZ hplant hindep
+  rw [hzero, add_zero] at h
   exact h
 
-omit [MeasurableSpace N] [MeasurableSingletonClass N] [Countable N] in
 /--
 **The budget is the channel, not the volume.**
 
 Two regimes whose channels carry the same information about the hazard inherit
-the same bound, whatever else differs between them. So a proposal that adds
-readings, retains them longer, or samples them more often improves this bound
-only through the quantity named, and an argument that does not mention that
-quantity is not an argument about this bound at all.
+the same bound, whatever else differs between them: the open-loop term does not
+mention the channel. So a proposal that adds readings, retains them longer, or
+samples them more often improves this bound only through the quantity named, and
+an argument that does not mention that quantity is not an argument about this
+bound at all.
 -/
-public theorem budget_is_the_channel_not_the_volume [IsProbabilityMeasure μ]
+public theorem budget_is_the_channel_not_the_volume [IsProbabilityMeasure μ] [Fintype S]
     {F : S → K → N → T} {Z : Ω → N} (O' : Oversight Ω S K T)
-    (hhaz : Measurable O.hazard) (hread : Measurable O.reading)
-    (hout : Measurable O.outcome)
+    (hhaz : Measurable O.hazard) (hread : Measurable O.reading) (hZ : Measurable Z)
     [FiniteRange O.hazard] [FiniteRange O.reading] [FiniteRange O.outcome]
     (hplant : IsPlant F O.hazard O.reading Z O.outcome)
-    {Δblind : ℝ} (hblind : OpenLoopBound μ F O.hazard Z Δblind)
+    (hindep : IndepFun (⟨O.hazard, O.reading⟩ : Ω → S × K) Z μ)
     (hsame : I[O'.hazard : O'.reading ; μ] = I[O.hazard : O.reading ; μ]) :
-    entropyReduction μ O.hazard O.outcome ≤ Δblind + I[O'.hazard : O'.reading ; μ] := by
+    entropyReduction μ O.hazard O.outcome
+      ≤ openLoopMax F (μ.map Z) + I[O'.hazard : O'.reading ; μ] := by
   rw [hsame]
-  exact oversight_reduction_le_budget O hhaz hread hout hplant hblind
+  exact oversight_reduction_le_budget O hhaz hread hZ hplant hindep
 
 end AISafetyAtlas.Control.OversightBudget

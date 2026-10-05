@@ -152,9 +152,10 @@ is at most the entropy of the bit that survives plus the entropy of the bit that
 does not, and the latter is at most `log 2`.
 -/
 public theorem openLoopBound_forgetSecond {Ω : Type uΩ} [MeasurableSpace Ω]
-    (μ : Measure Ω) {X : Ω → TwoBit} (hX : Measurable X) :
-    OpenLoopBound μ forgetSecond X (fun _ => ()) (Real.log 2) := by
-  intro s _ _ _
+    (μ : Measure Ω) {X : Ω → TwoBit} (hX : Measurable X) {C : Ω → Unit} :
+    OpenLoopBound μ forgetSecond X C (fun _ => ()) (Real.log 2) := by
+  intro c _
+  set s := C ⁻¹' {c}
   have hfst : Measurable fun ω => (X ω).1 := measurable_fst.comp hX
   have hsnd : Measurable fun ω => (X ω).2 := measurable_snd.comp hX
   have hpair : H[X ; μ[|s]] ≤ H[fun ω => (X ω).1 ; μ[|s]] + H[fun ω => (X ω).2 ; μ[|s]] := by
@@ -185,14 +186,16 @@ would say nothing. What has to be shown is a plant and a `Δopen` for which the
 bound **fails**, and that is this.
 -/
 public theorem not_openLoopBound_erase :
-    ¬ OpenLoopBound (uniformOn (Set.univ : Set TwoBit)) eraseAll id
+    ¬ OpenLoopBound (uniformOn (Set.univ : Set TwoBit)) eraseAll id (fun _ => ())
         (fun _ => ()) (Real.log 2) := by
   intro h
-  have hμ : (uniformOn (Set.univ : Set TwoBit)) Set.univ ≠ 0 := by
+  have hpre : ((fun _ => ()) : TwoBit → Unit) ⁻¹' {()} = Set.univ := by ext; simp
+  have hμ : (uniformOn (Set.univ : Set TwoBit)) (((fun _ => ()) : TwoBit → Unit) ⁻¹' {()})
+      ≠ 0 := by
     have : IsProbabilityMeasure (uniformOn (Set.univ : Set TwoBit)) := inferInstance
     simp
-  have hkey := h Set.univ MeasurableSet.univ hμ ()
-  rw [cond_univ] at hkey
+  have hkey := h () hμ
+  rw [hpre, cond_univ] at hkey
   have hent : H[(id : TwoBit → TwoBit) ; uniformOn (Set.univ : Set TwoBit)]
       = Real.log 4 := by
     rw [IsUniform.entropy_eq' Set.finite_univ isUniform_uniformOn measurable_id]

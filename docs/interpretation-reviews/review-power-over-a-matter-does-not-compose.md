@@ -12,8 +12,8 @@ Siblings: [`obedience_does_not_give_authority`](review-obedience-does-not-give-a
 |---|---|
 | Verdict | ☑ `REVIEWED` ☐ `STATEMENT_REVIEWED` ☐ rejected — drop the `BRIDGE` grade |
 | Reviewer | Mario Brcic (mbrcic) |
-| Date | 2026-10-03 |
-| Note | Accepted on the allowed claim as sharpened 2026-10-03. |
+| Date | 2026-10-05 |
+| Note | Accepted on the allowed claim as sharpened 2026-10-03; re-signed 2026-10-05 after the closure audit found that nothing encodes power over a party and that, under the natural encoding, composition holds. The claim is now about two matters. |
 
 ## The statement
 
@@ -45,9 +45,10 @@ public theorem power_over_a_matter_does_not_compose
 
 > Power over one matter and another party's power over a second matter need not
 > combine into power over the second: where every commitment of the first party
-> leaves the second matter free, it does not force it. So from "A has power over
-> B" and "B has power over the outcome" the conclusion about A and the outcome
-> does not follow by composition; that step needs its own justification each time.
+> leaves the second matter free, it does not force it. This is about two matters,
+> not about power over a party: nothing here models one party's power over
+> another, and under the natural reading of that ("whatever B can force, A can
+> force") composition does hold.
 
 ## Forbidden
 
@@ -57,6 +58,9 @@ public theorem power_over_a_matter_does_not_compose
   holding the key, by being able to withdraw the input — is not an instance. That
   is the useful form: the property an accountability framework must establish is
   control of the **matter**, not of the party.
+- **Not** a refutation of "A has power over B and B over the outcome, so A over
+  the outcome." Read as A forcing whatever B forces, that inference holds; the
+  theorem concerns two different matters.
 - **Not** about blame, responsibility or liability, none of which is modelled.
 - **Not** about contracts, incentives or enforcement.
 

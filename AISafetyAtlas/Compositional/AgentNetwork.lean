@@ -70,14 +70,16 @@ in.
 
 `program` is shared by every node, which is what makes the fleet *identical
 agents* rather than a system of distinct components. `initial` is the starting
-configuration.
+configuration, per node. `Networks.Network` gives every node the same number
+`deg` of ports, so fleets of unequal degree are not covered.
 -/
 public structure Fleet (Node : Type*) (State Msg : Type*) (deg : ℕ) where
   /-- Who talks to whom, through which port. -/
   topology : Networks.Network Node deg
   /-- The one program every instance runs. -/
   program : Networks.Algorithm State Msg deg
-  /-- What every instance starts holding. -/
+  /-- What each instance starts holding: a configuration, so the starting state may
+  differ from node to node. -/
   initial : Networks.Config Node State
 
 variable (F : Fleet Node State Msg deg)

@@ -37,11 +37,11 @@ Named in the statements of eight or more others. A change to one of these is a c
 | `traj` | 9 |
 | `purifyMap` | 9 |
 | `purifiedLaw` | 9 |
+| `openLoopMax` | 9 |
 | `kernelEntropyReduction` | 9 |
 | `purifiedSeed` | 8 |
 | `purifiedAction` | 8 |
 | `achievedVariety` | 8 |
-| `OpenLoopBound` | 8 |
 | `IsInputPolicy` | 8 |
 
 ## Definitions no statement and no example mentions
@@ -65,9 +65,9 @@ None.
 | `IsPurification` | definition | — |
 | `OpenLoopBound` | definition | — |
 | `OversightBudget.Oversight` | definition | — |
-| `OversightBudget.blind_channel_buys_nothing` | theorem | `IsPlant`, `OpenLoopBound`, `OversightBudget.Oversight`, `OversightBudget.Oversight.hazard`, `OversightBudget.Oversight.outcome`, `OversightBudget.Oversight.reading`, `entropyReduction` |
-| `OversightBudget.budget_is_the_channel_not_the_volume` | theorem | `IsPlant`, `OpenLoopBound`, `OversightBudget.Oversight`, `OversightBudget.Oversight.hazard`, `OversightBudget.Oversight.outcome`, `OversightBudget.Oversight.reading`, `entropyReduction` |
-| `OversightBudget.oversight_reduction_le_budget` | theorem | `IsPlant`, `OpenLoopBound`, `OversightBudget.Oversight`, `OversightBudget.Oversight.hazard`, `OversightBudget.Oversight.outcome`, `OversightBudget.Oversight.reading`, `entropyReduction` |
+| `OversightBudget.blind_channel_buys_nothing` | theorem | `IsPlant`, `OversightBudget.Oversight`, `OversightBudget.Oversight.hazard`, `OversightBudget.Oversight.outcome`, `OversightBudget.Oversight.reading`, `entropyReduction`, `openLoopMax` |
+| `OversightBudget.budget_is_the_channel_not_the_volume` | theorem | `IsPlant`, `OversightBudget.Oversight`, `OversightBudget.Oversight.hazard`, `OversightBudget.Oversight.outcome`, `OversightBudget.Oversight.reading`, `entropyReduction`, `openLoopMax` |
+| `OversightBudget.oversight_reduction_le_budget` | theorem | `IsPlant`, `OversightBudget.Oversight`, `OversightBudget.Oversight.hazard`, `OversightBudget.Oversight.outcome`, `OversightBudget.Oversight.reading`, `entropyReduction`, `openLoopMax` |
 | `PerfectlyObservable` | definition | — |
 | `Purified` | definition | — |
 | `achievedVariety` | definition | `admittedOutcomes` |

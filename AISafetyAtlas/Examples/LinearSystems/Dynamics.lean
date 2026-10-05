@@ -120,7 +120,8 @@ public theorem integrator_hasDerivAt_mulVec (t : ℝ) :
 public theorem integrator_hasDerivAt_sub (t : ℝ) :
     HasDerivAt (fun s => rampTrajectory s - rampTrajectory s)
       (integratorA *ᵥ (rampTrajectory t - rampTrajectory t)) t :=
-  ramp_isTrajectory.hasDerivAt_sub ramp_isTrajectory (Set.mem_univ t)
+  AISafetyAtlas.LinearSystems.IsTrajectoryOn.hasDerivAt_sub ramp_isTrajectory ramp_isTrajectory
+    (Set.mem_univ t)
 
 /-- **Every Kalman row annihilates a silent free run**, here the rest state. -/
 public theorem integrator_mulVec_pow_eq_zero (k : ℕ) (t : ℝ) :

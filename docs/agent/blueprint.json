@@ -14,29 +14,43 @@
       ],
       "declarations": [
         {
+          "name": "AISafetyAtlas.LinearSystems.determinesStateSolOn_iff_isObservable",
+          "location": [
+            "AISafetyAtlas/LinearSystems/Flow.lean",
+            773
+          ]
+        },
+        {
+          "name": "AISafetyAtlas.Examples.LinearSystems.pair_not_determinesStateSolOn",
+          "location": [
+            "AISafetyAtlas/Examples/LinearSystems/Flow.lean",
+            394
+          ]
+        },
+        {
           "name": "AISafetyAtlas.LinearSystems.determinesStateOn_iff_isObservable",
           "location": [
             "AISafetyAtlas/LinearSystems/Dynamics.lean",
-            308
+            311
           ]
         },
         {
           "name": "AISafetyAtlas.LinearSystems.not_determinesStateOn_of_not_isObservable",
           "location": [
             "AISafetyAtlas/LinearSystems/Dynamics.lean",
-            275
+            278
           ]
         },
         {
           "name": "AISafetyAtlas.Examples.LinearSystems.blind_not_determinesStateOn",
           "location": [
             "AISafetyAtlas/Examples/LinearSystems/Dynamics.lean",
-            169
+            170
           ]
         }
       ],
       "modules": [
-        "AISafetyAtlas.LinearSystems.Dynamics"
+        "AISafetyAtlas.LinearSystems.Flow"
       ],
       "realized": true,
       "statability": null,
@@ -52,17 +66,31 @@
       ],
       "declarations": [
         {
+          "name": "AISafetyAtlas.LinearSystems.isCompletelyReachableSol_iff_isControllable",
+          "location": [
+            "AISafetyAtlas/LinearSystems/Flow.lean",
+            871
+          ]
+        },
+        {
+          "name": "AISafetyAtlas.Examples.LinearSystems.pair_not_isCompletelyReachableSol",
+          "location": [
+            "AISafetyAtlas/Examples/LinearSystems/Flow.lean",
+            404
+          ]
+        },
+        {
           "name": "AISafetyAtlas.LinearSystems.isCompletelyReachable_iff_isControllable",
           "location": [
             "AISafetyAtlas/LinearSystems/Flow.lean",
-            641
+            639
           ]
         },
         {
           "name": "AISafetyAtlas.LinearSystems.not_isReachable_of_not_isControllable",
           "location": [
             "AISafetyAtlas/LinearSystems/Dynamics.lean",
-            396
+            399
           ]
         },
         {
@@ -273,14 +301,14 @@
           "name": "AISafetyAtlas.Control.entropyReduction_le_of_openLoopBound",
           "location": [
             "AISafetyAtlas/Control/InformationLimits.lean",
-            413
+            418
           ]
         },
         {
           "name": "AISafetyAtlas.Control.condEntropy_ge_of_openLoopBound",
           "location": [
             "AISafetyAtlas/Control/InformationLimits.lean",
-            387
+            392
           ]
         },
         {
@@ -329,56 +357,56 @@
           "name": "AISafetyAtlas.Control.minControlLoss_le_entropy_noise",
           "location": [
             "AISafetyAtlas/Control/InformationLimits.lean",
-            630
+            635
           ]
         },
         {
           "name": "AISafetyAtlas.Control.minControlLoss_eq_sInf_condMutualInfo",
           "location": [
             "AISafetyAtlas/Control/InformationLimits.lean",
-            695
+            700
           ]
         },
         {
           "name": "AISafetyAtlas.Control.minControlLoss_eq_sInf_mutualInfo_sub",
           "location": [
             "AISafetyAtlas/Control/InformationLimits.lean",
-            714
+            719
           ]
         },
         {
           "name": "AISafetyAtlas.Control.minControlLoss_le",
           "location": [
             "AISafetyAtlas/Control/InformationLimits.lean",
-            599
+            604
           ]
         },
         {
           "name": "AISafetyAtlas.Control.minControlLoss_nonneg",
           "location": [
             "AISafetyAtlas/Control/InformationLimits.lean",
-            608
+            613
           ]
         },
         {
           "name": "AISafetyAtlas.Control.measurable_plantOutcome",
           "location": [
             "AISafetyAtlas/Control/InformationLimits.lean",
-            466
+            471
           ]
         },
         {
           "name": "AISafetyAtlas.Control.isPlant_plantOutcome",
           "location": [
             "AISafetyAtlas/Control/InformationLimits.lean",
-            458
+            463
           ]
         },
         {
           "name": "AISafetyAtlas.Control.minControlLoss_eq_entropy_noise_iff_of_attained",
           "location": [
             "AISafetyAtlas/Control/InformationLimits.lean",
-            667
+            672
           ]
         },
         {
@@ -455,7 +483,7 @@
           "name": "AISafetyAtlas.Control.OversightBudget.oversight_reduction_le_budget",
           "location": [
             "AISafetyAtlas/Control/OversightBudget.lean",
-            145
+            159
           ]
         }
       ],
@@ -1572,7 +1600,7 @@
           "name": "AISafetyAtlas.Compositional.AgentNetwork.symmetry_is_the_shared_cause",
           "location": [
             "AISafetyAtlas/Compositional/AgentNetwork.lean",
-            129
+            131
           ]
         }
       ],
@@ -1886,6 +1914,8 @@
     "AISafetyAtlas.Control.two_le_card_admittedOutcomes": "BY-004",
     "AISafetyAtlas.Examples.LinearSystems.blind_not_determinesStateOn": "BY-001",
     "AISafetyAtlas.Examples.LinearSystems.deaf_not_isCompletelyReachable": "BY-002",
+    "AISafetyAtlas.Examples.LinearSystems.pair_not_determinesStateSolOn": "BY-001",
+    "AISafetyAtlas.Examples.LinearSystems.pair_not_isCompletelyReachableSol": "BY-002",
     "AISafetyAtlas.Fairness.approx_perfect_prediction_or_equal_base_rates": "BY-010",
     "AISafetyAtlas.Fairness.approx_tradeoff_of_score_relative_calibration": "BY-010",
     "AISafetyAtlas.Fairness.average_lower_bound": "BY-010",
@@ -1939,6 +1969,8 @@
     "AISafetyAtlas.Learning.permInvariant_of_nfl": "BY-021",
     "AISafetyAtlas.Learning.ruleVisit_permRule": "BY-021",
     "AISafetyAtlas.LinearSystems.determinesStateOn_iff_isObservable": "BY-001",
+    "AISafetyAtlas.LinearSystems.determinesStateSolOn_iff_isObservable": "BY-001",
+    "AISafetyAtlas.LinearSystems.isCompletelyReachableSol_iff_isControllable": "BY-002",
     "AISafetyAtlas.LinearSystems.isCompletelyReachable_iff_isControllable": "BY-002",
     "AISafetyAtlas.LinearSystems.not_determinesStateOn_of_not_isObservable": "BY-001",
     "AISafetyAtlas.LinearSystems.not_isReachable_of_not_isControllable": "BY-002",

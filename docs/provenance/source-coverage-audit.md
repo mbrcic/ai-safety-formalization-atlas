@@ -3292,7 +3292,17 @@ is still not coverage of print. What covers the two rows' own informal claims is
 neither print nor the port but `AISafetyAtlas.LinearSystems.Dynamics` and
 `…Flow`, built here on 2026-09-20. **Both rows were promoted from uncovered to
 covered on 2026-09-21**, on the maintainer's decision, at `EXACT`; headline
-coverage moved 14 claim rows to 16. Their `statability` verdicts were retired
+coverage moved 14 claim rows to 16. **2026-10-05:** the definitional-closure audit
+found that `IsTrajectoryOn` admits only classical solutions, which left out the
+piecewise-continuous inputs print takes from Chen and Desoer, so the necessity
+side of reachability and the sufficiency side of observability were narrower
+than print. Both equivalences are now proved at the integral (Carathéodory)
+solution class, `determinesStateSolOn_iff_isObservable` and
+`isCompletelyReachableSol_iff_isControllable` in `AISafetyAtlas.LinearSystems.Flow`,
+with a step input witnessed as a solution that is not a classical run. That
+print's whole piecewise-continuous class gives solutions of this kind is
+standard and is not proved here; the grade rests on that standard inclusion. The rows
+stay `EXACT`, graded at those declarations. Their `statability` verdicts were retired
 into their notes rather than deleted, because policy rejects a verdict on a row
 that carries Lean and the `TRIAGED_DISTINCT` finding remains correct about the
 thing it was about — the external candidate, which is still not coverage. The

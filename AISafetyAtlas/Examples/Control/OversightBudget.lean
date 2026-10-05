@@ -9,7 +9,7 @@ public import AISafetyAtlas.Control.RequisiteVariety
 
 `AISafetyAtlas.Control.OversightBudget` carried two theorems that nothing in
 `Examples/` applied, and the module said so: inhabiting their hypotheses needs a
-probability space with `IsPlant` and `OpenLoopBound` discharged, and *"every
+probability space with `IsPlant` and the open-loop bound discharged, and *"every
 cheap model of those makes every entropy zero. A witness where the bound reads
 `0 ≤ 0 + 0` would satisfy the checker and establish nothing."*
 
@@ -21,7 +21,8 @@ named and explained rather than passed over.
   genuine coin rather than a constant, and a plant that keeps one bit. The
   channel is independent of the hazard, so the budget's second term vanishes —
   and `blindRegime_entropyReduction_eq` shows the regime still reduces
-  uncertainty by `log 2`, **exactly** the blind term. The bound is attained.
+  uncertainty by `log 2`, **exactly** the open-loop term's bound
+  (`openLoopMax_keepFirst_le`). The bound is attained.
   Monitoring bought nothing; the regime achieved something anyway, which is the
   distinction the theorem exists to draw.
 * `oneReading` and `twoReadings` differ in **volume and in nothing else**: the
@@ -101,9 +102,10 @@ and the control action never appears in it — which is what makes this an
 *open-loop* bound rather than a claim about the regime.
 -/
 public theorem openLoopBound_keepFirst {Ω : Type*} [MeasurableSpace Ω] (K : Type*)
-    (μ : Measure Ω) {X : Ω → Fin 2 × Fin 2} (hX : Measurable X) :
-    OpenLoopBound μ (keepFirst K) X (fun _ => ()) (Real.log 2) := by
-  intro s _ _ k
+    (μ : Measure Ω) {X : Ω → Fin 2 × Fin 2} (hX : Measurable X) {C : Ω → K} :
+    OpenLoopBound μ (keepFirst K) X C (fun _ => ()) (Real.log 2) := by
+  intro k _
+  set s := C ⁻¹' {k}
   have hfst : Measurable fun ω => (X ω).1 := measurable_fst.comp hX
   have hsnd : Measurable fun ω => (X ω).2 := measurable_snd.comp hX
   have hpair : H[X ; μ[|s]] ≤ H[fun ω => (X ω).1 ; μ[|s]] + H[fun ω => (X ω).2 ; μ[|s]] := by
@@ -116,6 +118,39 @@ public theorem openLoopBound_keepFirst {Ω : Type*} [MeasurableSpace Ω] (K : Ty
   have hgoal : H[fun ω => keepFirst K (X ω) k (() : Unit) ; μ[|s]]
       = H[fun ω => (X ω).1 ; μ[|s]] := rfl
   rw [hgoal]
+  linarith
+
+/--
+**The open-loop maximum of `keepFirst` is at most `log 2`.** On any input
+distribution, discarding one bit of a two-bit state removes at most `log 2` of
+entropy, whatever the action and the noise law. Subadditivity again, now at the
+printed `ΔH_open^max`.
+-/
+public theorem openLoopMax_keepFirst_le (K : Type*) [MeasurableSpace K] [Nonempty K]
+    (η : Measure Unit) [IsProbabilityMeasure η] :
+    openLoopMax (keepFirst K) η ≤ Real.log 2 := by
+  refine csSup_le ⟨_, Measure.dirac ((0 : Fin 2), (0 : Fin 2)), inferInstance,
+    Classical.arbitrary K, rfl⟩ ?_
+  rintro r ⟨ν, hν, c, rfl⟩
+  have hmap : (ν.prod η).map (fun p : (Fin 2 × Fin 2) × Unit => keepFirst K p.1 c p.2)
+      = ν.map Prod.fst := by
+    have h1 : (fun p : (Fin 2 × Fin 2) × Unit => keepFirst K p.1 c p.2)
+        = Prod.fst ∘ Prod.fst := rfl
+    rw [h1, ← Measure.map_map measurable_fst measurable_fst, Measure.map_fst_prod]
+    simp
+  unfold openLoopReductionAt
+  rw [hmap]
+  have hid : Hm[ν] = H[(fun p : Fin 2 × Fin 2 => p) ; ν] := by
+    rw [entropy_def]; congr; exact Measure.map_id.symm
+  have hfst : Hm[ν.map Prod.fst] = H[(fun p : Fin 2 × Fin 2 => p.1) ; ν] := by
+    rw [entropy_def]
+  have hpair : H[(fun p : Fin 2 × Fin 2 => p) ; ν]
+      ≤ H[(fun p : Fin 2 × Fin 2 => p.1) ; ν] + H[(fun p : Fin 2 × Fin 2 => p.2) ; ν] :=
+    entropy_pair_le_add (X := fun p : Fin 2 × Fin 2 => p.1)
+      (Y := fun p : Fin 2 × Fin 2 => p.2) measurable_fst measurable_snd ν
+  have hsnd : H[(fun p : Fin 2 × Fin 2 => p.2) ; ν] ≤ Real.log 2 := by
+    simpa using entropy_le_log_card (fun p : Fin 2 × Fin 2 => p.2) ν
+  rw [hid, hfst]
   linarith
 
 /-- The channel is a coin independent of the hazard, so it carries nothing about
@@ -135,10 +170,23 @@ and the bound is `log 2`.
 -/
 public theorem blindRegime_buys_nothing :
     entropyReduction blindLaw blindRegime.hazard blindRegime.outcome ≤ Real.log 2 :=
-  blind_channel_buys_nothing blindRegime measurable_fst measurable_snd
-    (measurable_fst.comp measurable_fst) isPlant_keepFirst
-    (openLoopBound_keepFirst (Fin 2) blindLaw measurable_fst) blind_mutualInfo_eq_zero
+  (blind_channel_buys_nothing blindRegime measurable_fst measurable_snd measurable_const
+    isPlant_keepFirst (indepFun_const ()) blind_mutualInfo_eq_zero).trans <| by
+    have := Measure.isProbabilityMeasure_map (μ := blindLaw) (f := fun _ : BlindΩ => ())
+      measurable_const.aemeasurable
+    exact openLoopMax_keepFirst_le (Fin 2) _
 
+
+/-- **The atlas's own open-loop rendering, at the same regime.** Theorem 10 through
+`OpenLoopBound` on the reading's fibres, which `keepFirst` meets at `log 2`. -/
+public theorem blindRegime_le_of_openLoopBound :
+    entropyReduction blindLaw blindRegime.hazard blindRegime.outcome
+      ≤ Real.log 2 + I[blindRegime.hazard : blindRegime.reading ; blindLaw] :=
+  AISafetyAtlas.Control.entropyReduction_le_of_openLoopBound blindLaw
+    (F := keepFirst (Fin 2)) (X := blindRegime.hazard) (C := blindRegime.reading)
+    (Z := fun _ => ()) (X' := blindRegime.outcome) measurable_fst measurable_snd
+    (measurable_fst.comp measurable_fst) isPlant_keepFirst
+    (openLoopBound_keepFirst (Fin 2) blindLaw measurable_fst)
 
 /-- A first coordinate of a product law is distributed as its own factor. -/
 public theorem entropy_fst_prod {A B : Type*} [MeasurableSpace A] [MeasurableSpace B]
@@ -189,7 +237,7 @@ public theorem blind_outcome_entropy :
   simpa [entropy_def] using h
 
 /-- **The bound is attained.** The regime reduces uncertainty by exactly the
-blind term, with an independent channel: monitoring bought nothing and the
+open-loop term's bound `log 2`, with an independent channel: monitoring bought nothing and the
 regime achieved something anyway. -/
 public theorem blindRegime_entropyReduction_eq :
     entropyReduction blindLaw blindRegime.hazard blindRegime.outcome = Real.log 2 := by
@@ -312,10 +360,13 @@ the hazard. Doubling the volume moved nothing.
 public theorem twoReadings_budget_eq_oneReading :
     entropyReduction volumeLaw oneReadingRegime.hazard oneReadingRegime.outcome
       ≤ Real.log 2 + I[twoReadingsRegime.hazard : twoReadingsRegime.reading ; volumeLaw] :=
-  budget_is_the_channel_not_the_volume oneReadingRegime twoReadingsRegime
-    measurable_id (by fun_prop) measurable_fst isPlant_oneReading
-    (openLoopBound_keepFirst (Fin 2 × Fin 2) volumeLaw measurable_id)
-    duplication_mutualInfo_eq
+  (budget_is_the_channel_not_the_volume oneReadingRegime twoReadingsRegime
+    measurable_id (by fun_prop) measurable_const isPlant_oneReading (indepFun_const ())
+    duplication_mutualInfo_eq).trans
+    (add_le_add_left (by
+      have := Measure.isProbabilityMeasure_map (μ := volumeLaw) (f := fun _ : VolumeΩ => ())
+        measurable_const.aemeasurable
+      exact openLoopMax_keepFirst_le (Fin 2 × Fin 2) _) _)
 
 
 

@@ -44,11 +44,11 @@ the act, the norms permit it, and it can actually be performed. It is **not**
 the conjunction of the three axes `AISafetyAtlas.Sovereignty.Deontic` keeps
 apart (empowered, permitted, possible): it uses `Recognized`, not `empowered`.
 `authorized_iff` is the decomposition, and `exists_recognized_not_authorized` is
-the failure mode — an act the institution recognizes and which is *not* thereby
-authorized. **Recognition here is weak:** `Derives.given` does not look at the
-act, so a fact that already holds is recognized for every act, and
-`exists_recognized_not_authorized` reduces to the existence of an act that is
-not permitted. Tying recognition to empowerment is open.
+the failure mode — an empowered act the institution recognizes, by firing one of
+its own rules, and which is *not* thereby authorized. `Recognized` itself is
+weak: `Derives.given` does not look at the act, so a fact that already holds is
+recognized for every act. The theorem therefore asks for recognition through a
+rule that fires on empowered acts, which is where the act matters.
 -/
 
 namespace AISafetyAtlas.Sovereignty
@@ -200,18 +200,27 @@ public theorem permitted_of_authorized {e : E} {f : F} (h : I.Authorized e f) :
     I.setting.norms.permitted e := h.2.1
 
 /--
-**Recognition is not authorization.** Whenever the three axes are separated
-there is an act the institution recognizes as bringing about a fact and which is
-nonetheless not authorized — because it is not permitted.
+**Recognition is not authorization.** Suppose the institution has a rule that
+concludes `f` from ground facts and fires on every empowered act. Whenever the
+three axes are separated there is an empowered act, possible to perform, that
+the institution recognizes as bringing about `f` **by firing that rule**, and
+which is nonetheless not authorized — because it is not permitted.
 
-This is `Deontic`'s separation doing work: an act that *counts* is not thereby
-an act that *may* be done.
+This is `Deontic`'s separation doing work: an act that *counts*, because the
+institution's own rule makes it count, is not thereby an act that *may* be done.
+(Until 2026-10-05 the hypothesis was that `f` already held, which made every act
+"recognized" through `Derives.given` and left only "some act is not permitted";
+closure audit.)
 -/
 public theorem exists_recognized_not_authorized
-    (hsep : I.setting.Separated) (f : F) (hf : I.facts f) :
-    ∃ e, I.Recognized e f ∧ ¬ I.Authorized e f := by
-  obtain ⟨e, -, hperm, -⟩ := hsep true false true
-  refine ⟨e, Derives.given hf, ?_⟩
+    (hsep : I.setting.Separated) {r : ConstitutiveRule E F} (hr : r ∈ I.rules)
+    (hprem : ∀ p ∈ r.premises, I.facts p) (htrig : ∀ e, I.setting.empowered e → r.trigger e) :
+    ∃ e, I.setting.empowered e ∧ I.setting.possible e ∧ I.Recognized e r.conclusion ∧
+      ¬ I.Authorized e r.conclusion := by
+  obtain ⟨e, hemp, hperm, hposs⟩ := hsep true false true
+  have he : I.setting.empowered e := hemp.mpr rfl
+  refine ⟨e, he, hposs.mpr rfl,
+    Derives.fire r hr (htrig e he) fun p hp => Derives.given (hprem p hp), ?_⟩
   rintro ⟨-, hp, -⟩
   simpa using hperm.mp hp
 

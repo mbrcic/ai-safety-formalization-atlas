@@ -76,6 +76,26 @@ public theorem executed_not_forces_original :
   mandate := ![original, coarsened, coarsened, coarsened]
   C := {false}
   kind := ![.memory, .compass, .engine]
+  coarsens := by
+    intro i A hA
+    fin_cases i
+    · refine ⟨{0, 1}, rfl, ?_⟩
+      have : A = ({0} : Set (Fin 3)) := hA
+      subst this; intro x hx; simp at hx; simp [hx]
+    · exact ⟨A, hA, le_rfl⟩
+    · exact ⟨A, hA, le_rfl⟩
+  memory_keeps_game := by
+    intro i hi
+    fin_cases i
+    · rfl
+    · exact absurd hi (by simp)
+    · exact absurd hi (by simp)
+  game_keeps_mandate := by
+    intro i hi
+    fin_cases i
+    · exact absurd rfl hi
+    · rfl
+    · rfl
 
 public theorem steer_step0 :
     steer.StepSafe 0 := by

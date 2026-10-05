@@ -35,7 +35,7 @@ mathematics to AI systems.
 <!-- BEGIN GENERATED REGISTRY SCOPE -->
 | Metric | Current |
 |---|---:|
-| Declarations recorded in the registry | **375** |
+| Declarations recorded in the registry | **379** |
 | Results stating a source claim | **49** |
 | Results recording a formalization only | **95** (86 on root import) |
 | AI-system bridges (`BRIDGE` declarations) | **37**: 30 interpretation-reviewed, 7 statement-reviewed only |

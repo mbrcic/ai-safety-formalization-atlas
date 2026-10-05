@@ -15,8 +15,9 @@ mandate.
 Three things are shown.
 
 * The rule fires: an empowered act **is recognized** as creating the mandate.
-* Recognition is **not** authorization — the same institution has an act it
-  recognizes and does not authorize, because the act is not permitted.
+* Recognition is **not** authorization — the same institution has an empowered act
+  its mandate rule makes count as creating the mandate, and does not authorize it,
+  because the act is not permitted.
 * A pair of rules that only cite each other, with no ground facts, derives
   **nothing**. Authority does not bootstrap.
 -/
@@ -65,12 +66,16 @@ public theorem office_authorizes_seven : office.Authorized 7 1 := by
     decide
 
 /--
-**Recognition is not authorization.** The same office recognizes some act as
-having already established the filed request, and does not authorize it.
+**Recognition is not authorization.** The same office has an empowered, possible
+act that its mandate rule makes count as creating the mandate, and which it does
+not authorize, because the act is not permitted.
 -/
 public theorem office_recognized_not_authorized :
-    ∃ e, office.Recognized e 0 ∧ ¬ office.Authorized e 0 :=
-  office.exists_recognized_not_authorized cube_separated 0 rfl
+    ∃ e, office.setting.empowered e ∧ office.setting.possible e ∧
+      office.Recognized e 1 ∧ ¬ office.Authorized e 1 :=
+  office.exists_recognized_not_authorized (r := mandateRule) cube_separated
+    (by simp [office]) (fun p hp => by simp_all [mandateRule, office, filed])
+    (fun _ he => he)
 
 /--
 **Authorization is three conditions and the characterisation is what takes it

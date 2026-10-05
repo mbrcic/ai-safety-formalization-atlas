@@ -3,7 +3,7 @@
   "generated_by": "scripts/generate_declaration_index.py",
   "note": "Declaration index walked from the elaborated environment, not from source text. Consumed by the prose checks so that a name resolves only when it is a real declaration.",
   "prefix": "AISafetyAtlas",
-  "count": 11546,
+  "count": 11585,
   "declarations": [
     {
       "name": "AISafetyAtlas",
@@ -16986,6 +16986,11 @@
       "module": "AISafetyAtlas.Examples.Control.OversightBudget"
     },
     {
+      "name": "AISafetyAtlas.Examples.Control.blindRegime_le_of_openLoopBound",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Control.OversightBudget"
+    },
+    {
       "name": "AISafetyAtlas.Examples.Control.blind_control_le_open_loop",
       "kind": "theorem",
       "module": "AISafetyAtlas.Examples.Control.Purification"
@@ -17477,6 +17482,11 @@
     },
     {
       "name": "AISafetyAtlas.Examples.Control.openLoopBound_keepFirst",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Control.OversightBudget"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Control.openLoopMax_keepFirst_le",
       "kind": "theorem",
       "module": "AISafetyAtlas.Examples.Control.OversightBudget"
     },
@@ -23116,6 +23126,16 @@
       "module": "AISafetyAtlas.Examples.LinearSystems.Flow"
     },
     {
+      "name": "AISafetyAtlas.Examples.LinearSystems.firstB",
+      "kind": "def",
+      "module": "AISafetyAtlas.Examples.LinearSystems.Flow"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.LinearSystems.firstC",
+      "kind": "def",
+      "module": "AISafetyAtlas.Examples.LinearSystems.Flow"
+    },
+    {
       "name": "AISafetyAtlas.Examples.LinearSystems.frozenC",
       "kind": "def",
       "module": "AISafetyAtlas.Examples.LinearSystems.Criteria"
@@ -23276,6 +23296,16 @@
       "module": "AISafetyAtlas.Examples.LinearSystems.Dynamics"
     },
     {
+      "name": "AISafetyAtlas.Examples.LinearSystems.integrator_determinesStateSolOn",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.LinearSystems.Flow"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.LinearSystems.integrator_determinesStateSolOn_iff",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.LinearSystems.Flow"
+    },
+    {
       "name": "AISafetyAtlas.Examples.LinearSystems.integrator_dotCLM_apply",
       "kind": "theorem",
       "module": "AISafetyAtlas.Examples.LinearSystems.Flow"
@@ -23376,6 +23406,11 @@
       "module": "AISafetyAtlas.Examples.LinearSystems.Flow"
     },
     {
+      "name": "AISafetyAtlas.Examples.LinearSystems.integrator_isCompletelyReachableSol",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.LinearSystems.Flow"
+    },
+    {
       "name": "AISafetyAtlas.Examples.LinearSystems.integrator_isCompletelyReachable_iff",
       "kind": "theorem",
       "module": "AISafetyAtlas.Examples.LinearSystems.Flow"
@@ -23426,6 +23461,21 @@
       "module": "AISafetyAtlas.Examples.LinearSystems.Flow"
     },
     {
+      "name": "AISafetyAtlas.Examples.LinearSystems.integrator_step_isSolution",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.LinearSystems.Flow"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.LinearSystems.integrator_step_not_isTrajectory",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.LinearSystems.Flow"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.LinearSystems.integrator_step_sub_hasDerivAt",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.LinearSystems.Flow"
+    },
+    {
       "name": "AISafetyAtlas.Examples.LinearSystems.integrator_zeroInput",
       "kind": "theorem",
       "module": "AISafetyAtlas.Examples.LinearSystems.Dynamics"
@@ -23444,6 +23494,61 @@
       "name": "AISafetyAtlas.Examples.LinearSystems.outputSignal_ramp",
       "kind": "theorem",
       "module": "AISafetyAtlas.Examples.LinearSystems.Dynamics"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.LinearSystems.pairA",
+      "kind": "def",
+      "module": "AISafetyAtlas.Examples.LinearSystems.Flow"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.LinearSystems.pair_not_determinesStateSolOn",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.LinearSystems.Flow"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.LinearSystems.pair_not_isCompletelyReachableSol",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.LinearSystems.Flow"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.LinearSystems.pair_not_isControllable",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.LinearSystems.Flow"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.LinearSystems.pair_not_isObservable",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.LinearSystems.Flow"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.LinearSystems.pair_rest_isSolution",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.LinearSystems.Flow"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.LinearSystems.pair_rest_isTrajectory",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.LinearSystems.Flow"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.LinearSystems.pair_second_eigen",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.LinearSystems.Flow"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.LinearSystems.pair_second_readout",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.LinearSystems.Flow"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.LinearSystems.pair_second_readout_sol",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.LinearSystems.Flow"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.LinearSystems.rampState",
+      "kind": "def",
+      "module": "AISafetyAtlas.Examples.LinearSystems.Flow"
     },
     {
       "name": "AISafetyAtlas.Examples.LinearSystems.rampTrajectory",
@@ -23499,6 +23604,11 @@
       "name": "AISafetyAtlas.Examples.LinearSystems.shift_isObservable",
       "kind": "theorem",
       "module": "AISafetyAtlas.Examples.LinearSystems.Criteria"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.LinearSystems.stepInput",
+      "kind": "def",
+      "module": "AISafetyAtlas.Examples.LinearSystems.Flow"
     },
     {
       "name": "AISafetyAtlas.Examples.LinearSystems.unitInput",
@@ -39141,6 +39251,11 @@
       "module": "AISafetyAtlas.LinearSystems.Dynamics"
     },
     {
+      "name": "AISafetyAtlas.LinearSystems.DeterminesStateSolOn",
+      "kind": "def",
+      "module": "AISafetyAtlas.LinearSystems.Flow"
+    },
+    {
       "name": "AISafetyAtlas.LinearSystems.Dynamics",
       "kind": "module",
       "module": "AISafetyAtlas.LinearSystems.Dynamics"
@@ -39166,6 +39281,11 @@
       "module": "AISafetyAtlas.LinearSystems.Flow"
     },
     {
+      "name": "AISafetyAtlas.LinearSystems.IsCompletelyReachableSol",
+      "kind": "def",
+      "module": "AISafetyAtlas.LinearSystems.Flow"
+    },
+    {
       "name": "AISafetyAtlas.LinearSystems.IsControllable",
       "kind": "def",
       "module": "AISafetyAtlas.LinearSystems.Controllability"
@@ -39181,9 +39301,34 @@
       "module": "AISafetyAtlas.LinearSystems.Dynamics"
     },
     {
+      "name": "AISafetyAtlas.LinearSystems.IsReachableSol",
+      "kind": "def",
+      "module": "AISafetyAtlas.LinearSystems.Flow"
+    },
+    {
+      "name": "AISafetyAtlas.LinearSystems.IsSolution",
+      "kind": "def",
+      "module": "AISafetyAtlas.LinearSystems.Flow"
+    },
+    {
+      "name": "AISafetyAtlas.LinearSystems.IsSolution.hasDerivAt_dotProduct_of_eigen",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.LinearSystems.Flow"
+    },
+    {
+      "name": "AISafetyAtlas.LinearSystems.IsSolution.hasDerivAt_sub",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.LinearSystems.Flow"
+    },
+    {
       "name": "AISafetyAtlas.LinearSystems.IsTrajectory",
       "kind": "def",
       "module": "AISafetyAtlas.LinearSystems.Dynamics"
+    },
+    {
+      "name": "AISafetyAtlas.LinearSystems.IsTrajectory.isSolution",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.LinearSystems.Flow"
     },
     {
       "name": "AISafetyAtlas.LinearSystems.IsTrajectoryOn",
@@ -39294,6 +39439,11 @@
       "name": "AISafetyAtlas.LinearSystems.determinesStateOn_iff_isObservable",
       "kind": "theorem",
       "module": "AISafetyAtlas.LinearSystems.Dynamics"
+    },
+    {
+      "name": "AISafetyAtlas.LinearSystems.determinesStateSolOn_iff_isObservable",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.LinearSystems.Flow"
     },
     {
       "name": "AISafetyAtlas.LinearSystems.dotCLM",
@@ -39501,6 +39651,16 @@
       "module": "AISafetyAtlas.LinearSystems.Hautus"
     },
     {
+      "name": "AISafetyAtlas.LinearSystems.isCompletelyReachableSol_iff_isControllable",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.LinearSystems.Flow"
+    },
+    {
+      "name": "AISafetyAtlas.LinearSystems.isCompletelyReachableSol_of_isControllable",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.LinearSystems.Flow"
+    },
+    {
       "name": "AISafetyAtlas.LinearSystems.isCompletelyReachable_iff_isControllable",
       "kind": "theorem",
       "module": "AISafetyAtlas.LinearSystems.Flow"
@@ -39554,6 +39714,11 @@
       "name": "AISafetyAtlas.LinearSystems.isObservable_imp_determinesStateOn",
       "kind": "theorem",
       "module": "AISafetyAtlas.LinearSystems.Dynamics"
+    },
+    {
+      "name": "AISafetyAtlas.LinearSystems.isObservable_imp_determinesStateSolOn",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.LinearSystems.Flow"
     },
     {
       "name": "AISafetyAtlas.LinearSystems.isObservable_imp_zeroInput_state_eq",
@@ -39629,6 +39794,11 @@
       "name": "AISafetyAtlas.LinearSystems.not_determinesStateOn_of_not_isObservable",
       "kind": "theorem",
       "module": "AISafetyAtlas.LinearSystems.Dynamics"
+    },
+    {
+      "name": "AISafetyAtlas.LinearSystems.not_determinesStateSolOn_of_not_isObservable",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.LinearSystems.Flow"
     },
     {
       "name": "AISafetyAtlas.LinearSystems.not_isControllable_and_not_isObservable_of_ceil_div_gt_dims",
@@ -39731,6 +39901,11 @@
       "module": "AISafetyAtlas.LinearSystems.Hautus"
     },
     {
+      "name": "AISafetyAtlas.LinearSystems.not_isReachableSol_of_not_isControllable",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.LinearSystems.Flow"
+    },
+    {
       "name": "AISafetyAtlas.LinearSystems.not_isReachable_of_not_isControllable",
       "kind": "theorem",
       "module": "AISafetyAtlas.LinearSystems.Dynamics"
@@ -39758,6 +39933,11 @@
     {
       "name": "AISafetyAtlas.LinearSystems.reachedSet",
       "kind": "def",
+      "module": "AISafetyAtlas.LinearSystems.Flow"
+    },
+    {
+      "name": "AISafetyAtlas.LinearSystems.reachedSet_one_eq_top",
+      "kind": "theorem",
       "module": "AISafetyAtlas.LinearSystems.Flow"
     },
     {
@@ -50756,12 +50936,12 @@
       "module": "AISafetyAtlas.Sovereignty.Refusal"
     },
     {
-      "name": "AISafetyAtlas.Sovereignty.Refusal.refusal_passes_safety",
+      "name": "AISafetyAtlas.Sovereignty.Refusal.refusal_fails_catalogue",
       "kind": "theorem",
       "module": "AISafetyAtlas.Sovereignty.Refusal"
     },
     {
-      "name": "AISafetyAtlas.Sovereignty.Refusal.refusal_serves_nothing",
+      "name": "AISafetyAtlas.Sovereignty.Refusal.refusal_passes_safety",
       "kind": "theorem",
       "module": "AISafetyAtlas.Sovereignty.Refusal"
     },
@@ -51646,6 +51826,16 @@
       "module": "AISafetyAtlas.Sovereignty.Steering"
     },
     {
+      "name": "AISafetyAtlas.Sovereignty.SteeringPath.coarsens",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Sovereignty.Steering"
+    },
+    {
+      "name": "AISafetyAtlas.Sovereignty.SteeringPath.game_keeps_mandate",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Sovereignty.Steering"
+    },
+    {
       "name": "AISafetyAtlas.Sovereignty.SteeringPath.kind",
       "kind": "def",
       "module": "AISafetyAtlas.Sovereignty.Steering"
@@ -51653,6 +51843,11 @@
     {
       "name": "AISafetyAtlas.Sovereignty.SteeringPath.mandate",
       "kind": "def",
+      "module": "AISafetyAtlas.Sovereignty.Steering"
+    },
+    {
+      "name": "AISafetyAtlas.Sovereignty.SteeringPath.memory_keeps_game",
+      "kind": "theorem",
       "module": "AISafetyAtlas.Sovereignty.Steering"
     },
     {
