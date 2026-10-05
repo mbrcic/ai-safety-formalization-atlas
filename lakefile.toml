@@ -56,3 +56,29 @@ root = "Main"
 [[lean_lib]]
 name = "TauCeti"
 srcDir = "vendor/TauCeti"
+
+# d-separation on finite DAGs: `Causalean.Graph.DAG.dSep`, the Bayes-Ball
+# reachability it is computed by, and the active-path characterisation. Taken
+# from a shared library rather than rebuilt, for the reason recorded in
+# docs/guide/methodology.md and measured in
+# docs/provenance/d-separation-build-or-depend.md: the closure is 2,483 lines
+# with no `sorry`, and nothing in it is a statement this repository grades.
+#
+# Pinned to upstream by commit rather than by branch. A `module` file cannot
+# import a non-`module` one -- transitively, so no intermediate file escapes it --
+# and the four files in the import closure of `Graph/DSep/Separation.lean` had to
+# be converted, with one declaration's visibility changed (§10 of the provenance
+# note records why that one is forced). That conversion was offered upstream in
+# Jiyuan-Tan/CausalSmith#14 and landed in b60f54a6 (2026-09-10), the commit pinned
+# here; until 2026-10-05 this pointed at a fork carrying the same patch
+# (mbrcic/CausalSmith 3b83b4f6). Only that part of upstream is converted: the rest
+# of `Causalean` is still non-`module`, which is fine because nothing here
+# imports it.
+#
+# Only the graph layer is consumed. `Causalean.SCM` carries arbitrary measurable
+# domains where `AISafetyAtlas.Causal.SCM` is finite, so its do-calculus does not
+# transfer at this repository's SCM -- see §8.3 of the provenance note.
+[[require]]
+name = "Causalean"
+git = "https://github.com/Jiyuan-Tan/CausalSmith.git"
+rev = "b60f54a69a101851ba3884cfa476d221b683d134"

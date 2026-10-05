@@ -154,8 +154,8 @@ CONTAINER_CASES: list[tuple[str, str, Mutation, str]] = [
     (
         "bridge vocabulary is null",
         REGISTRY,
-        lambda d: d["vocabulary"].__setitem__("ai_bridge_status", None),
-        "ai_bridge_status vocabulary must be a list of non-empty strings",
+        lambda d: d["vocabulary"].__setitem__("ai_interpretation_status", None),
+        "ai_interpretation_status vocabulary must be a list of non-empty strings",
     ),
     (
         "a result id is a list",
@@ -255,25 +255,25 @@ METADATA_CASES: list[tuple[str, str, Mutation, str]] = [
         "bridge status is a list",
         REGISTRY,
         lambda d: _first(d["results"], id="BY-001").__setitem__(
-            "ai_bridge_status", []
+            "ai_interpretation_status", []
         ),
-        "unknown ai_bridge_status",
+        "unknown ai_interpretation_status",
     ),
     (
         "bridge review date is a list",
         REGISTRY,
-        lambda d: _first(d["results"], id="BY-012")["bridge_review"].__setitem__(
+        lambda d: _first(d["results"], id="BY-012")["interpretation_review"].__setitem__(
             "date", ["2026-07-19"]
         ),
-        "bridge_review must record date as a non-empty string",
+        "interpretation_review must record date as a non-empty string",
     ),
     (
         "bridge review date is not an ISO date",
         REGISTRY,
-        lambda d: _first(d["results"], id="BY-012")["bridge_review"].__setitem__(
+        lambda d: _first(d["results"], id="BY-012")["interpretation_review"].__setitem__(
             "date", "last July"
         ),
-        "bridge_review date must be an ISO date",
+        "interpretation_review date must be an ISO date",
     ),
     (
         "source citation is a list",
@@ -460,6 +460,22 @@ def test_a_claim_from_another_source_is_admissible(tree: Path) -> None:
             "formal_library_search",
         ):
             row.pop(survey_only, None)
+        # The probe cites a DIRECTORY source, and ANY statement-match grade --
+        # `RELATED` included -- must cite a work that states the theorem, so a
+        # clone carrying formalizations is self-contradictory and the validator
+        # rightly rejects it. This passed silently while BY-001 was uncovered
+        # and had none; BY-001 was promoted on 2026-09-21 and the probe began
+        # failing on a rule it is not about. Strip the Lean rather than pin some
+        # other row that happens to be ungraded today: what is under test is
+        # whether the CLM- shape is admissible at all, and an uncovered row
+        # needs a statability verdict to say why it is uncovered.
+        row["formalizations"] = []
+        row["lean_artifact"] = None
+        row["statability"] = {
+            "verdict": "UNTRIAGED",
+            "note": "Admissibility probe; nothing has been searched for this row.",
+        }
+        row.pop("public", None)
         data["results"].append(row)
         path.write_text(json.dumps(data, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
         done = subprocess.run(

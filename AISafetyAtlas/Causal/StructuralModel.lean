@@ -1,6 +1,9 @@
 module
 
 public import AISafetyAtlas.Causal.Model
+public import Mathlib.Probability.ProductMeasure
+public import Mathlib.Probability.ProbabilityMassFunction.Constructions
+public import Mathlib.MeasureTheory.Measure.ProbabilityMeasure
 
 /-!
 # Structural causal models
@@ -26,9 +29,19 @@ Bayesian networks for analysing (nested) counterfactuals and 'individual-level'
 effects."* Neither is a special case of the other as rendered here.
 
 **Independence is a product of marginals.** Print carries one joint `P(ε)` and
-requires the exogenous variables to be mutually independent. On finite domains
-that is exactly the class of products of per-variable distributions, and the
-product is the form every later computation reads.
+requires the exogenous variables to be mutually independent. At a countably
+supported distribution that is exactly the class of products of per-variable
+distributions, and the product is the form every later computation reads.
+
+**Domains are types, because print's `dom(V)` carries no cardinality
+condition.** *"Finite"* occurs twice in the whole paper, both inside Definition
+4 and both qualifying domains, so Definitions 1 and 2 admit domains of any size.
+`SCM` therefore carries none: the marginal-sum field is unconditional, and every
+finiteness instance sits on the derived operation that needs it — the `Finset`
+sums of `jointProb` and `marginal`, the maximum over policies at Definition 5,
+and the singleton masses in the measure layer.
+`AISafetyAtlas.Examples.Causal.StructuralModel.geometricCopy` is a model with
+infinite domains that `eval` and `submodel` run on.
 
 **Evaluation is print's recursion, taken literally.** Print says the value of a
 variable at a fixed `ε` is *"given by recursive application of the structural
@@ -176,15 +189,27 @@ public theorem chainParents_fixedPoint_not_unique :
   ⟨fun _ ↦ 0, fun _ ↦ 1, fun h ↦ by simpa using congrFun h 0,
     fun _ ↦ rfl, fun _ ↦ rfl⟩
 
-variable {V : Type*} [Fintype V] [DecidableEq V] {dom edom : V → ℕ}
+variable {V : Type*} [Fintype V] [DecidableEq V] {dom edom : V → Type*}
+
+/--
+**An assignment to the endogenous variables**, print's `w`.
+
+`AISafetyAtlas.Causal.Assignment` is the same shape at `Fin`-indexed domains and
+belongs to the decision layer of section 6 of the coverage audit; this one is
+section 8's, and the two layers do not meet, so no bridge between them is owed.
+The difference is the axis: print's `dom(V)` carries no cardinality condition,
+and this is a family of **types**.
+-/
+public abbrev EndoAssignment (V : Type*) (dom : V → Type*) := (v : V) → dom v
 
 /-- An assignment to the exogenous variables. -/
-public abbrev ExoAssignment (V : Type*) (edom : V → ℕ) := (v : V) → Fin (edom v)
+public abbrev ExoAssignment (V : Type*) (edom : V → Type*) := (v : V) → edom v
 
 /-- **Definition 1.** A structural causal model with independent errors. -/
-public structure SCM (V : Type*) [DecidableEq V] (dom edom : V → ℕ) where
-  /-- Every endogenous variable has at least one state. -/
-  dom_pos : ∀ v, 0 < dom v
+public structure SCM (V : Type*) [DecidableEq V] (dom edom : V → Type*) where
+  /-- Every endogenous variable has at least one state, which is what makes the
+  structural functions well-typed. -/
+  dom_nonempty : ∀ v, Nonempty (dom v)
   /-- The endogenous parents `Pa_V ⊂ V`: a subset, with no cardinality bound,
   because print writes none. -/
   parents : V → Set V
@@ -201,17 +226,19 @@ public structure SCM (V : Type*) [DecidableEq V] (dom edom : V → ℕ) where
   acyclic : ∀ v, ¬ Relation.TransGen (fun p v ↦ p ∈ parents v) v v
   /-- `f^V : dom(Pa_V ∪ {E^V}) → dom(V)`, presented on full assignments with
   `f_parents` witnessing that only the parents are read. -/
-  f : (v : V) → Assignment V dom → Fin (edom v) → Fin (dom v)
+  f : (v : V) → EndoAssignment V dom → edom v → dom v
   /-- A structural function reads only its declared parents and its own
   exogenous variable. -/
   f_parents : ∀ v a b e, (∀ p ∈ parents v, a p = b p) → f v a e = f v b e
   /-- The distribution of the exogenous variable `E^V`. Mutual independence is
   rendered as one marginal per variable; see the module docstring. -/
-  exoProb : (v : V) → Fin (edom v) → ℝ
+  exoProb : (v : V) → edom v → ℝ
   /-- Each marginal is nonnegative. -/
   exoProb_nonneg : ∀ v e, 0 ≤ exoProb v e
-  /-- Each marginal is a probability distribution. -/
-  exoProb_sum : ∀ v, ∑ e : Fin (edom v), exoProb v e = 1
+  /-- Each marginal is a probability distribution. The sum is unconditional, so
+  it says what print says at a domain of any size; `exoProb_sum_fintype` is the
+  finite reading. -/
+  exoProb_tsum : ∀ v, ∑' e : edom v, exoProb v e = 1
 
 omit [Fintype V] in
 /-- **The hypothesis `eval` needs, carried where print needs it.**
@@ -234,18 +261,41 @@ namespace SCM
 
 variable (M : SCM V dom edom)
 
+omit [Fintype V] in
+/--
+**Print's Definition 1 imposes no cardinality condition and neither does `SCM`.**
+
+Print writes *"finite"* exactly twice in the whole paper, both inside Definition
+4 and both qualifying **domains**; Definition 1 writes `dom(V)` bare. So the
+domains here are a family of **types**, and every finiteness condition below sits
+on the derived operation that needs it rather than on the structure — the same
+move the vertex set made on 2026-08-21.
+
+`exoProb_sum_fintype` is `exoProb_tsum` at a finite exogenous domain, which is
+the case print's own Definition 4 admits and the case every witness in
+`AISafetyAtlas.Examples.Causal.StructuralModel` lives in.
+-/
+public theorem exoProb_sum_fintype [∀ v, Fintype (edom v)] (v : V) :
+    ∑ e : edom v, M.exoProb v e = 1 :=
+  (tsum_fintype (M.exoProb v)).symm.trans (M.exoProb_tsum v)
+
+section FiniteDomains
+
+variable [∀ v, Fintype (edom v)]
+
 /-- `P(ε)`: the exogenous variables are mutually independent, so the joint is
 the product of the marginals. -/
 @[expose] public noncomputable def exoJoint (ε : ExoAssignment V edom) : ℝ :=
   ∏ v : V, M.exoProb v (ε v)
 
+omit [∀ v, Fintype (edom v)] in
 public theorem exoJoint_nonneg (ε : ExoAssignment V edom) : 0 ≤ M.exoJoint ε :=
   Finset.prod_nonneg fun v _ ↦ M.exoProb_nonneg v (ε v)
 
 public theorem exoJoint_sum : ∑ ε : ExoAssignment V edom, M.exoJoint ε = 1 := by
   classical
-  have h : ∏ v : V, (∑ e : Fin (edom v), M.exoProb v e) = 1 :=
-    Finset.prod_eq_one fun v _ ↦ M.exoProb_sum v
+  have h : ∏ v : V, (∑ e : edom v, M.exoProb v e) = 1 :=
+    Finset.prod_eq_one fun v _ ↦ M.exoProb_sum_fintype v
   rw [← h, Finset.prod_univ_sum]
   simp [exoJoint, Fintype.piFinset_univ]
 
@@ -253,12 +303,14 @@ public theorem exoJoint_sum : ∑ ε : ExoAssignment V edom, M.exoJoint ε = 1 :
 a product of one factor per exogenous variable is the product of the marginal
 expectations. `exoJoint_sum` is the case `g = 1`, and this is what makes
 *"mutually independent"* usable rather than merely stated. -/
-public theorem exoJoint_mul_prod (g : (v : V) → Fin (edom v) → ℝ) :
+public theorem exoJoint_mul_prod (g : (v : V) → edom v → ℝ) :
     ∑ ε : ExoAssignment V edom, M.exoJoint ε * ∏ v : V, g v (ε v)
-      = ∏ v : V, ∑ e : Fin (edom v), M.exoProb v e * g v e := by
+      = ∏ v : V, ∑ e : edom v, M.exoProb v e * g v e := by
   classical
   rw [Finset.prod_univ_sum]
   simp [exoJoint, Fintype.piFinset_univ, ← Finset.prod_mul_distrib]
+
+end FiniteDomains
 
 /-! ## Evaluation
 
@@ -267,7 +319,8 @@ public theorem exoJoint_mul_prod (g : (v : V) → Fin (edom v) → ℝ) :
 /-- The default assignment. It is used only to extend a partial assignment on
 the parents of a vertex to a total one, which is what `f` expects; `f_parents`
 says no structural function reads the extension. -/
-@[expose] public def seed : Assignment V dom := fun v ↦ ⟨0, M.dom_pos v⟩
+@[expose] public noncomputable def seed : EndoAssignment V dom :=
+  fun v ↦ (M.dom_nonempty v).some
 
 omit [Fintype V] in
 /-- **`W(ε)`**: the value of every endogenous variable at a fixed `ε`.
@@ -281,7 +334,7 @@ is pinned to `Classical.propDecidable` here and in `eval_eq_f` so that the two
 
 There is no iteration count and no bound on the number of variables. -/
 @[expose] public noncomputable def eval (M : SCM V dom edom) [hM : M.IsWellFounded]
-    (ε : ExoAssignment V edom) : Assignment V dom :=
+    (ε : ExoAssignment V edom) : EndoAssignment V dom :=
   hM.wf.fix fun v ih ↦
     M.f v (fun p ↦ @dite _ (p ∈ M.parents v) (Classical.propDecidable _)
       (fun h ↦ ih p h) (fun _ ↦ M.seed p)) (ε v)
@@ -334,23 +387,31 @@ public theorem eval_eq_of_f_agree (M M' : SCM V dom edom)
 /-! ## The induced joint
 
 Print: *"Together with the distribution `P(ε)` over exogenous variables, this
-induces a joint distribution `Pr(W = w) = Σ_{ε | W(ε) = w} P(ε)`."* -/
+induces a joint distribution `Pr(W = w) = Σ_{ε | W(ε) = w} P(ε)`."*
+
+The sums below are where print's Definition 4 finiteness lives. `SCM.endoLaw` is
+the same object without them. -/
+
+section FiniteJoint
+
+variable [∀ v, Fintype (edom v)] [∀ v, Fintype (dom v)] [∀ v, DecidableEq (dom v)]
 
 /-- `Pr(V = w)`, the joint over all endogenous variables. -/
 @[expose] public noncomputable def jointProb (M : SCM V dom edom) [M.IsWellFounded]
-    (w : Assignment V dom) : ℝ :=
+    (w : EndoAssignment V dom) : ℝ :=
   ∑ ε ∈ Finset.univ.filter fun ε : ExoAssignment V edom ↦ M.eval ε = w,
     M.exoJoint ε
 
+omit [∀ v, Fintype (dom v)] in
 public theorem jointProb_nonneg (M : SCM V dom edom) [M.IsWellFounded]
-    (w : Assignment V dom) :
+    (w : EndoAssignment V dom) :
     0 ≤ M.jointProb w :=
   Finset.sum_nonneg fun ε _ ↦ M.exoJoint_nonneg ε
 
 /-- The induced joint is a probability distribution: the fibres of `eval`
 partition the exogenous assignments. -/
 public theorem jointProb_sum (M : SCM V dom edom) [M.IsWellFounded] :
-    ∑ w : Assignment V dom, M.jointProb w = 1 := by
+    ∑ w : EndoAssignment V dom, M.jointProb w = 1 := by
   classical
   rw [← M.exoJoint_sum]
   exact (Finset.sum_fiberwise_of_maps_to (fun ε _ ↦ Finset.mem_univ (M.eval ε))
@@ -361,8 +422,8 @@ public theorem jointProb_sum (M : SCM V dom edom) [M.IsWellFounded] :
 values `x` assigns them. Print writes `Pr^π(x)` for a *set* of variables, so the
 object graded is the marginal rather than the full joint. -/
 @[expose] public noncomputable def marginal (M : SCM V dom edom) [M.IsWellFounded]
-    (X : Finset V) (x : Assignment V dom) : ℝ :=
-  ∑ w ∈ Finset.univ.filter (fun w : Assignment V dom ↦ ∀ c ∈ X, w c = x c),
+    (X : Finset V) (x : EndoAssignment V dom) : ℝ :=
+  ∑ w ∈ Finset.univ.filter (fun w : EndoAssignment V dom ↦ ∀ c ∈ X, w c = x c),
     M.jointProb w
 
 /-- The marginal read off the exogenous draw instead of off the joint: the
@@ -370,12 +431,12 @@ fibres of `eval` partition the exogenous assignments, so summing `jointProb`
 over the `X`-fibre is summing `P(ε)` over the draws whose evaluation lands in
 it. This is what turns a statement about `eval` into a statement about `Pr`. -/
 public theorem marginal_eq_sum_exo (M : SCM V dom edom) [M.IsWellFounded]
-    (X : Finset V) (x : Assignment V dom) :
+    (X : Finset V) (x : EndoAssignment V dom) :
     M.marginal X x = ∑ ε ∈ Finset.univ.filter
         (fun ε : ExoAssignment V edom ↦ ∀ c ∈ X, M.eval ε c = x c), M.exoJoint ε := by
   classical
   simp only [marginal, jointProb, Finset.sum_filter]
-  have key : ∀ w : Assignment V dom,
+  have key : ∀ w : EndoAssignment V dom,
       (if (∀ c ∈ X, w c = x c) then
           ∑ ε : ExoAssignment V edom, (if M.eval ε = w then M.exoJoint ε else 0) else 0)
         = ∑ ε : ExoAssignment V edom,
@@ -392,6 +453,8 @@ public theorem marginal_eq_sum_exo (M : SCM V dom edom) [M.IsWellFounded]
   · intro w _ hw; simp [Ne.symm hw]
   · simp
 
+end FiniteJoint
+
 /-! ## Interventions
 
 Print, Definition 2: *"Let `M = ⟨E, V, F, P⟩` be an SCM, `X` a set of variables
@@ -406,8 +469,8 @@ parents, so `submodel_eval` holds either way. -/
 
 /-- **Definition 2.** The submodel `M_x`, the effect of `do(X = x)`. -/
 @[expose] public noncomputable def submodel (M : SCM V dom edom) (X : Finset V)
-    (x : Assignment V dom) : SCM V dom edom where
-  dom_pos := M.dom_pos
+    (x : EndoAssignment V dom) : SCM V dom edom where
+  dom_nonempty := M.dom_nonempty
   parents := fun v ↦ if v ∈ X then ∅ else M.parents v
   acyclic := fun v hv ↦ M.acyclic v (Relation.TransGen.mono (fun p w hp ↦ by
     by_cases hw : w ∈ X
@@ -421,14 +484,14 @@ parents, so `submodel_eval` holds either way. -/
       exact M.f_parents v a b e fun p hp ↦ h p (by rw [if_neg hv]; exact hp)
   exoProb := M.exoProb
   exoProb_nonneg := M.exoProb_nonneg
-  exoProb_sum := M.exoProb_sum
+  exoProb_tsum := M.exoProb_tsum
 
 omit [Fintype V] in
 /-- Forcing a variable only deletes edges, so the submodel inherits the
 recursion's hypothesis. This is what keeps `submodel_eval` stated at a submodel
 of an evaluable model rather than asking for the hypothesis twice. -/
 public instance instIsWellFoundedSubmodel (M : SCM V dom edom)
-    [hM : M.IsWellFounded] (X : Finset V) (x : Assignment V dom) :
+    [hM : M.IsWellFounded] (X : Finset V) (x : EndoAssignment V dom) :
     (M.submodel X x).IsWellFounded :=
   ⟨Subrelation.wf (fun {p v} hp ↦ by
       simp only [submodel] at hp
@@ -439,7 +502,7 @@ public instance instIsWellFoundedSubmodel (M : SCM V dom edom)
 omit [Fintype V] in
 /-- An intervened variable takes its forced value, whatever the exogenous draw. -/
 @[simp] public theorem submodel_eval (M : SCM V dom edom) [M.IsWellFounded]
-    (X : Finset V) (x : Assignment V dom) (ε : ExoAssignment V edom)
+    (X : Finset V) (x : EndoAssignment V dom) (ε : ExoAssignment V edom)
     {v : V} (hv : v ∈ X) :
     (M.submodel X x).eval ε v = x v := by
   rw [(M.submodel X x).eval_eq_f ε v]
@@ -448,7 +511,7 @@ omit [Fintype V] in
 omit [Fintype V] in
 /-- A variable outside the intervention keeps its own structural function. -/
 public theorem submodel_eval_notMem (M : SCM V dom edom) [M.IsWellFounded]
-    (X : Finset V) (x : Assignment V dom) (ε : ExoAssignment V edom)
+    (X : Finset V) (x : EndoAssignment V dom) (ε : ExoAssignment V edom)
     {v : V} (hv : v ∉ X) :
     (M.submodel X x).eval ε v = M.f v ((M.submodel X x).eval ε) (ε v) := by
   rw [(M.submodel X x).eval_eq_f ε v]
@@ -458,10 +521,10 @@ public theorem submodel_eval_notMem (M : SCM V dom edom) [M.IsWellFounded]
 SCM `M` replaces `f^X` with a function `g^X : dom(Pa_X ∪ {E^X}) → dom(X)`"* —
 the parents are the same, so acyclicity is inherited unchanged. -/
 @[expose] public noncomputable def softIntervention (M : SCM V dom edom)
-    (X : Finset V) (g : (v : V) → Assignment V dom → Fin (edom v) → Fin (dom v))
+    (X : Finset V) (g : (v : V) → EndoAssignment V dom → edom v → dom v)
     (hg : ∀ v a b e, (∀ p ∈ M.parents v, a p = b p) → g v a e = g v b e) :
     SCM V dom edom where
-  dom_pos := M.dom_pos
+  dom_nonempty := M.dom_nonempty
   parents := M.parents
   acyclic := M.acyclic
   f := fun v a e ↦ if v ∈ X then g v a e else M.f v a e
@@ -471,14 +534,14 @@ the parents are the same, so acyclicity is inherited unchanged. -/
     · simp only [if_neg hv]; exact M.f_parents v a b e h
   exoProb := M.exoProb
   exoProb_nonneg := M.exoProb_nonneg
-  exoProb_sum := M.exoProb_sum
+  exoProb_tsum := M.exoProb_tsum
 
 omit [Fintype V] in
 /-- A soft intervention keeps the parent map, so it keeps the recursion's
 hypothesis with it. -/
 public instance instIsWellFoundedSoftIntervention (M : SCM V dom edom)
     [hM : M.IsWellFounded] (X : Finset V)
-    (g : (v : V) → Assignment V dom → Fin (edom v) → Fin (dom v))
+    (g : (v : V) → EndoAssignment V dom → edom v → dom v)
     (hg : ∀ v a b e, (∀ p ∈ M.parents v, a p = b p) → g v a e = g v b e) :
     (M.softIntervention X g hg).IsWellFounded :=
   ⟨hM.wf⟩
@@ -535,6 +598,28 @@ unique. So the strengthening lives here, as a property of a diagram, and
 public class CID.IsWellFounded (G : CID V) : Prop where
   /-- The diagram's parent relation is well-founded. -/
   wf : WellFounded fun p v ↦ p ∈ G.parents v
+
+/-- **At a finite vertex set the hypothesis is free**: print's *"acyclic"* alone
+gives it, because a transitive irreflexive relation on a finite type is
+well-founded, and `CID.acyclic` is exactly irreflexivity of the transitive
+closure.
+
+This does **not** collapse the distinction the class exists for. At unbounded
+`V` the two really do differ — `chainParents` on `ℤ` is acyclic, is not
+well-founded, and admits two assignments satisfying `eval_eq_f`, which is why
+print's *"recursive application"* names nothing unique there. What this says is
+narrower and worth having: **wherever a statement already carries `[Fintype V]`,
+asking for the instance on top of `acyclic` asks for nothing.** Every such
+statement can drop the hypothesis, and `CID.admitsICI_iff` does.
+
+Not an `instance`: making it one would have `[Fintype V]` silently satisfy every
+`IsWellFounded` goal in the tree, which would hide the axis at exactly the
+declarations the coverage audit grades on it. -/
+public theorem CID.isWellFounded_of_fintype (G : CID V) : G.IsWellFounded :=
+  ⟨Subrelation.wf (r := Relation.TransGen fun p v ↦ p ∈ G.parents v)
+    (fun h ↦ Relation.TransGen.single h)
+    (@Finite.wellFounded_of_trans_of_irrefl V _ _
+      ⟨fun _ _ _ h₁ h₂ ↦ h₁.trans h₂⟩ ⟨G.acyclic⟩)⟩
 
 namespace CID
 
@@ -659,32 +744,33 @@ with print rather than print's own.
 `𝐃` is a set. Print's *"we will restrict our attention to single-decision
 settings with `𝐃 = {D}`"* scopes the theorems, not the definition, and it enters
 here as `CID.IsSingleDecision` wherever a statement needs it. -/
-public structure SCIM (V : Type*) [DecidableEq V] (dom edom : V → ℕ) where
+public structure SCIM (V : Type*) [DecidableEq V] (dom edom : V → Type*) where
   /-- Every endogenous variable has at least one state. -/
-  dom_pos : ∀ v, 0 < dom v
+  dom_nonempty : ∀ v, Nonempty (dom v)
   /-- *"`G` is a CID with finite-domain variables `V`"*. -/
   graph : CID V
   /-- *"where utility variable domains are a subset of `ℝ`"*: each utility
   vertex reads its states as reals. -/
-  utilityValue : (u : V) → graph.IsUtility u → Fin (dom u) → ℝ
+  utilityValue : (u : V) → graph.IsUtility u → dom u → ℝ
   /-- A *subset* of `ℝ`, so distinct states are distinct reals. -/
   utilityValue_injective :
     ∀ u (hu : graph.IsUtility u), Function.Injective (utilityValue u hu)
   /-- `F = {f^V}_{V ∈ 𝐕 \ 𝐃}`. Decision vertices have no structural function
   until a policy supplies one, which is what the non-membership proof records. -/
   f : (v : V) → ¬ graph.IsDecision v →
-    Assignment V dom → Fin (edom v) → Fin (dom v)
+    EndoAssignment V dom → edom v → dom v
   /-- *"specify how each non-decision endogenous variable depends on its parents
   in `G` and its associated exogenous variable"*. -/
   f_parents : ∀ v (hv : ¬ graph.IsDecision v) a b e,
     (∀ p ∈ graph.parents v, a p = b p) → f v hv a e = f v hv b e
   /-- `P`, one marginal per exogenous variable; independence is the product, as
   in `SCM`. -/
-  exoProb : (v : V) → Fin (edom v) → ℝ
+  exoProb : (v : V) → edom v → ℝ
   /-- Each marginal is nonnegative. -/
   exoProb_nonneg : ∀ v e, 0 ≤ exoProb v e
-  /-- Each marginal is a probability distribution. -/
-  exoProb_sum : ∀ v, ∑ e : Fin (edom v), exoProb v e = 1
+  /-- Each marginal is a probability distribution, unconditionally summed so
+  that it says what print says at a domain of any size. -/
+  exoProb_tsum : ∀ v, ∑' e : edom v, exoProb v e = 1
 
 namespace SCIM
 
@@ -699,15 +785,15 @@ Print writes one `π` because it has restricted to a single decision. This is on
 structural function per decision vertex; `policy_ext_single` proves that at
 print's restriction it is exactly print's datum. Indexing by the decision
 subtype rather than by a membership proof keeps `withPolicy` free of transports
-between `Fin (dom v)` and `Fin (dom d)`. -/
+between `dom v` and `dom d`. -/
 public abbrev Policy : Type _ :=
   {π : (d : {d : V // M.graph.IsDecision d}) →
-        Assignment V dom → Fin (edom d.1) → Fin (dom d.1) //
+        EndoAssignment V dom → edom d.1 → dom d.1 //
     ∀ d a b e, (∀ p ∈ M.graph.parents d.1, a p = b p) → π d a e = π d b e}
 
 /-- A policy may ignore its observations, so one always exists. -/
 public instance instNonemptyPolicy : Nonempty M.Policy :=
-  ⟨⟨fun d _ _ ↦ ⟨0, M.dom_pos d.1⟩, fun _ _ _ _ _ ↦ rfl⟩⟩
+  ⟨⟨fun d _ _ ↦ (M.dom_nonempty d.1).some, fun _ _ _ _ _ ↦ rfl⟩⟩
 
 /-- Two policies agreeing at the one decision are equal. This is what makes
 `Policy` print's `π` at *"single-decision settings with `𝐃 = {D}`"*. -/
@@ -727,7 +813,7 @@ public theorem policy_ext_single {d : V} (hd : M.graph.decisions = {d})
 /-- **`Mπ`.** *"The specification of a policy turns a SCIM `M` into an SCM
 `Mπ := ⟨E, V, F ∪ {π}, P⟩`."* -/
 @[expose] public noncomputable def withPolicy (π : M.Policy) : SCM V dom edom where
-  dom_pos := M.dom_pos
+  dom_nonempty := M.dom_nonempty
   parents := M.graph.parents
   acyclic := M.graph.acyclic
   f := fun v a e ↦
@@ -741,7 +827,7 @@ public theorem policy_ext_single {d : V} (hd : M.graph.decisions = {d})
       exact M.f_parents v h a b e hab
   exoProb := M.exoProb
   exoProb_nonneg := M.exoProb_nonneg
-  exoProb_sum := M.exoProb_sum
+  exoProb_tsum := M.exoProb_tsum
 
 omit [Fintype V] in
 /-- `Mπ` keeps the diagram's parents, so a well-founded diagram gives an
@@ -760,14 +846,14 @@ definitions of causal interventions apply"* at the diagram's own edges. -/
 omit [Fintype V] in
 /-- A non-decision vertex keeps its structural function in `Mπ`. -/
 public theorem withPolicy_f_notMem (π : M.Policy) {v : V}
-    (hv : ¬ M.graph.IsDecision v) (a : Assignment V dom) (e : Fin (edom v)) :
+    (hv : ¬ M.graph.IsDecision v) (a : EndoAssignment V dom) (e : edom v) :
     (M.withPolicy π).f v a e = M.f v hv a e := by
   simp [withPolicy, dif_neg hv]
 
 omit [Fintype V] in
 /-- A decision vertex takes the policy as its structural function in `Mπ`. -/
 public theorem withPolicy_f_mem (π : M.Policy) {d : V}
-    (hd : M.graph.IsDecision d) (a : Assignment V dom) (e : Fin (edom d)) :
+    (hd : M.graph.IsDecision d) (a : EndoAssignment V dom) (e : edom d) :
     (M.withPolicy π).f d a e = π.1 ⟨d, hd⟩ a e := by
   simp [withPolicy, dif_pos hd]
 
@@ -795,9 +881,11 @@ public theorem eval_withPolicy_eq_of_notDownstream [M.graph.IsWellFounded]
 Print asserts this without proof, one paragraph after Definition 4; it is what
 makes the *"simply write `Pr(x)`"* notation well defined, and it is what
 underwrites comparing `V*(M_{X↛D})` with `V*(M)` at Definition 5. -/
-public theorem marginal_withPolicy_eq_of_notDownstream [M.graph.IsWellFounded]
+public theorem marginal_withPolicy_eq_of_notDownstream
+    [∀ v, Fintype (edom v)] [∀ v, Fintype (dom v)] [∀ v, DecidableEq (dom v)]
+    [M.graph.IsWellFounded]
     (π π' : M.Policy) (X : Finset V) (hX : ∀ c ∈ X, M.graph.NotDownstream c)
-    (x : Assignment V dom) :
+    (x : EndoAssignment V dom) :
     (M.withPolicy π).marginal X x = (M.withPolicy π').marginal X x := by
   classical
   rw [SCM.marginal_eq_sum_exo, SCM.marginal_eq_sum_exo]
@@ -809,6 +897,16 @@ public theorem marginal_withPolicy_eq_of_notDownstream [M.graph.IsWellFounded]
   · intro h c hc
     rw [M.eval_withPolicy_eq_of_notDownstream π π' ε (hX c hc)]
     exact h c hc
+
+/-! ### Definition 4's and Definition 5's finiteness
+
+Print writes *"finite"* twice and both times inside Definition 4, qualifying
+**domains**. The expectation and the maximum over policies are exactly where
+that bites, so the instances sit here and nowhere above. -/
+
+section FiniteDecision
+
+variable [∀ v, Fintype (edom v)] [∀ v, Fintype (dom v)] [∀ v, DecidableEq (dom v)]
 
 /-- **`Eπ[U]`**, with `U := Σ_{U ∈ 𝐔} U`. The expectation is taken in `Mπ`,
 which is where print defines `Eπ`. -/
@@ -841,12 +939,14 @@ attaining it. -/
 @[expose] public noncomputable def optimalValue [M.graph.IsWellFounded] : ℝ :=
   Finset.univ.sup' Finset.univ_nonempty M.expectedUtility
 
+omit [∀ v, DecidableEq (dom v)] in
 public theorem expectedUtility_le_optimalValue [M.graph.IsWellFounded]
     (π : M.Policy) :
     M.expectedUtility π ≤ M.optimalValue := by
   unfold optimalValue
   exact Finset.le_sup' M.expectedUtility (Finset.mem_univ π)
 
+omit [∀ v, DecidableEq (dom v)] in
 /-- Print writes a `max`, and this is what makes it one. -/
 public theorem exists_isOptimalPolicy [M.graph.IsWellFounded] :
     ∃ π : M.Policy, M.IsOptimalPolicy π ∧ M.expectedUtility π = M.optimalValue := by
@@ -856,6 +956,8 @@ public theorem exists_isOptimalPolicy [M.graph.IsWellFounded] :
     unfold optimalValue
     exact hπ.symm
   exact ⟨π, fun π' ↦ hval ▸ M.expectedUtility_le_optimalValue π', hval⟩
+
+end FiniteDecision
 
 omit [Fintype V] in
 /-- Removing an information link only deletes edges. This is the one fact
@@ -874,7 +976,7 @@ Defined at a decision vertex, because erasing a parent of a vertex that *has* a
 structural function would falsify that vertex's `f_parents`. -/
 @[expose] public noncomputable def removeInfoLink {d : V}
     (hd : M.graph.IsDecision d) (x : V) : SCIM V dom edom where
-  dom_pos := M.dom_pos
+  dom_nonempty := M.dom_nonempty
   graph :=
     { M.graph with
       parents := fun v ↦
@@ -900,7 +1002,7 @@ structural function would falsify that vertex's `f_parents`. -/
     exact hab p (by simpa [if_neg hvd] using hp)
   exoProb := M.exoProb
   exoProb_nonneg := M.exoProb_nonneg
-  exoProb_sum := M.exoProb_sum
+  exoProb_tsum := M.exoProb_tsum
 
 omit [Fintype V] in
 /-- Removing an information link only deletes edges, so `M_{X↛D}` is evaluable
@@ -913,10 +1015,281 @@ public instance instIsWellFoundedRemoveInfoLink [hG : M.graph.IsWellFounded]
 
 /-- **Definition 5 (Materiality).** *"The observation `X ∈ Pa_D` is material if
 `V*(M_{X↛D}) < V*(M)`."* -/
-@[expose] public def IsMaterial [M.graph.IsWellFounded] {d : V}
+@[expose] public def IsMaterial [∀ v, Fintype (edom v)] [∀ v, Fintype (dom v)]
+    [∀ v, DecidableEq (dom v)] [M.graph.IsWellFounded] {d : V}
     (hd : M.graph.IsDecision d) {x : V}
     (_hx : x ∈ M.graph.parents d) : Prop :=
   (M.removeInfoLink hd x).optimalValue < M.optimalValue
+
+end SCIM
+
+/-! ## Probability laws without a finite vertex set
+
+The product measure uses the existing finite-domain marginals at any vertex
+cardinality. Evaluation laws require measurability explicitly; arbitrary
+functions of infinitely many parents need not be measurable. These laws do not
+yet replace the finite sums in expected utility or conditional expectation.
+-/
+
+namespace SCM
+
+open MeasureTheory
+
+variable {V : Type*} [DecidableEq V] {dom edom : V → Type*}
+  [∀ v, MeasurableSpace (edom v)] [∀ v, MeasurableSpace (dom v)]
+  (M : SCM V dom edom)
+
+omit [∀ v, MeasurableSpace (edom v)] [∀ v, MeasurableSpace (dom v)] in
+/-- **The marginals are summable**, which `exoProb_tsum` says rather than
+assumes: an unsummable family has unconditional sum zero, and print's is one. -/
+public theorem exoProb_summable (v : V) : Summable (M.exoProb v) := by
+  by_contra hns
+  have h := M.exoProb_tsum v
+  rw [tsum_eq_zero_of_not_summable hns] at h
+  exact zero_ne_one h
+
+omit [∀ v, MeasurableSpace (edom v)] [∀ v, MeasurableSpace (dom v)] in
+/-- The existing exogenous marginal as a probability mass function, at a domain
+of any size. -/
+@[expose] public noncomputable def exoPMF (v : V) : PMF (edom v) :=
+  ⟨fun e ↦ ENNReal.ofReal (M.exoProb v e), by
+    have h := ENNReal.ofReal_tsum_of_nonneg (M.exoProb_nonneg v) (M.exoProb_summable v)
+    rw [M.exoProb_tsum v, ENNReal.ofReal_one] at h
+    rw [h]
+    exact ENNReal.summable.hasSum⟩
+
+/-- Independent exogenous draws over an arbitrary vertex set. This is a
+probability measure even when the space of complete assignments is uncountable. -/
+@[expose] public noncomputable def exoLaw : ProbabilityMeasure (ExoAssignment V edom) :=
+  ⟨Measure.infinitePi (fun v ↦ (M.exoPMF v).toMeasure), inferInstance⟩
+
+omit [∀ v, MeasurableSpace (dom v)] in
+/-- Each coordinate of the product recovers the model's original marginal. -/
+public theorem exoLaw_map_eval (v : V) :
+    (M.exoLaw : Measure (ExoAssignment V edom)).map (fun ε ↦ ε v) =
+      (M.exoPMF v).toMeasure :=
+  Measure.infinitePi_map_eval _ v
+
+omit [∀ v, MeasurableSpace (dom v)] in
+/-- At a finite vertex set, this is Mathlib's ordinary finite product measure. -/
+public theorem exoLaw_eq_pi [Fintype V] :
+    (M.exoLaw : Measure (ExoAssignment V edom)) =
+      Measure.pi (fun v ↦ (M.exoPMF v).toMeasure) :=
+  Measure.infinitePi_eq_pi _
+
+omit [∀ v, MeasurableSpace (dom v)] in
+/-- The finite product has exactly the old exogenous joint weights. This is
+the bridge needed to recover the existing finite-sum calculations.
+
+The singleton-measurability instance is where print's Definition 4 finiteness
+shows up in the measure layer: a singleton of an arbitrary measurable space need
+not be measurable. -/
+public theorem exoLaw_singleton [Fintype V] [∀ v, MeasurableSingletonClass (edom v)]
+    (ε : ExoAssignment V edom) :
+    (M.exoLaw : Measure (ExoAssignment V edom)) {ε} = ENNReal.ofReal (M.exoJoint ε) := by
+  rw [M.exoLaw_eq_pi, Measure.pi_singleton]
+  simp only [PMF.toMeasure_apply_singleton _ _ (measurableSet_singleton _), exoJoint]
+  exact (ENNReal.ofReal_prod_of_nonneg (fun v _ ↦ M.exoProb_nonneg v (ε v))).symm
+
+/-- Joint law of any set of evaluated variables. Measurability is checked before
+a law can be constructed, so a nonmeasurable map cannot silently return zero. -/
+@[expose] public noncomputable def observableLaw [M.IsWellFounded] (X : Set V)
+    (hm : Measurable (fun ε : ExoAssignment V edom ↦ fun v : X ↦ M.eval ε v)) :
+    ProbabilityMeasure ((v : X) → dom v) :=
+  M.exoLaw.map hm.aemeasurable
+
+/-- **`Pr(W = w)` as a distribution rather than a finite sum.** The law of the
+complete evaluation, which exists at any vertex set because `SCM.exoLaw` does.
+
+`SCM.jointProb` is a sum over the fibre of `eval`, so it exists only at
+`[Fintype V]`; print's *"this induces a joint distribution"* asks for a
+distribution and names no cardinality. `SCM.endoLaw_singleton` is the converting
+lemma. Measurability is required for the same reason `SCM.observableLaw` requires
+it. -/
+@[expose] public noncomputable def endoLaw [M.IsWellFounded]
+    (hm : Measurable fun ε : ExoAssignment V edom ↦ M.eval ε) :
+    ProbabilityMeasure (EndoAssignment V dom) :=
+  M.exoLaw.map hm.aemeasurable
+
+omit [DecidableEq V] in
+/--
+**At a finite vertex set the measurability side condition vanishes.** The
+exogenous space is then a finite product of finite discrete spaces, so every map
+out of it is measurable and `observableLaw` carries no hypothesis print does not
+have. Beyond a finite vertex set the hypothesis is real: an arbitrary function of
+infinitely many parents need not be measurable.
+-/
+public theorem measurable_exo [Fintype V] [∀ v, DiscreteMeasurableSpace (edom v)]
+    [∀ v, Countable (edom v)]
+    {α : Type*} [MeasurableSpace α] (f : ExoAssignment V edom → α) : Measurable f :=
+  .of_discrete
+
+/-- **The induced joint is the law's singleton mass.** So `SCM.jointProb` is a
+computation of print's distribution and not a second reading of it. -/
+public theorem endoLaw_singleton [Fintype V] [∀ v, Fintype (edom v)]
+    [∀ v, Fintype (dom v)] [∀ v, DecidableEq (dom v)]
+    [∀ v, MeasurableSingletonClass (edom v)] [∀ v, DiscreteMeasurableSpace (edom v)]
+    [∀ v, Countable (edom v)] [∀ v, MeasurableSingletonClass (dom v)]
+    [M.IsWellFounded] (w : EndoAssignment V dom) :
+    (M.endoLaw (measurable_exo _) : Measure (EndoAssignment V dom)).real {w} = M.jointProb w := by
+  classical
+  have hset : (fun ε : ExoAssignment V edom ↦ M.eval ε) ⁻¹' {w}
+      = ↑(Finset.univ.filter fun ε : ExoAssignment V edom ↦ M.eval ε = w) := by
+    ext ε; simp
+  rw [endoLaw]
+  show (((M.exoLaw : Measure (ExoAssignment V edom)).map
+    (fun ε ↦ M.eval ε)).real {w}) = _
+  rw [measureReal_def, Measure.map_apply (measurable_exo _) (measurableSet_singleton w),
+    hset, ← measureReal_def, ← sum_measureReal_singleton, jointProb]
+  exact Finset.sum_congr rfl fun ε _ ↦ by
+    rw [measureReal_def, exoLaw_singleton, ENNReal.toReal_ofReal (M.exoJoint_nonneg ε)]
+
+end SCM
+
+namespace SCIM
+
+variable {V : Type*} [DecidableEq V] {dom edom : V → Type*}
+  [∀ v, MeasurableSpace (edom v)] [∀ v, MeasurableSpace (dom v)]
+  (M : SCIM V dom edom)
+
+/-! ## `Eπ[U]` against print's distribution rather than as a finite sum
+
+`SCIM.expectedUtility` above is a sum over `ExoAssignment V edom`, which exists
+only at `[Fintype V]`. Print's `Eπ[U]` is an expectation under `P(ε)`, and `P(ε)`
+denotes at any vertex set — it is the product measure `SCM.exoLaw`. So the finite
+sum is a computation of print's object and not print's object, and
+`SCIM.expectedUtilityLaw_eq` is the converting lemma that says so.
+
+**What stays finite here, and why that is print's own.** `𝐔` is a `Fintype`,
+carried as an instance on the subtype rather than derived from a finite vertex
+set. Print's `U := Σ_{U ∈ 𝐔} U` is a sum with no convergence clause attached, so
+at infinitely many utility vertices print's own expression names nothing; the
+instance is what makes it denote, exactly as `CID.IsWellFounded` is what makes
+*"recursive application"* denote. It is not a bound on `V`.
+
+**And measurability is asked for rather than assumed.** At an unbounded vertex
+set an evaluation reading infinitely many parents need not be measurable, and a
+Bochner integral of a nonmeasurable function is silently zero. The hypothesis is
+the same one `SCM.observableLaw` carries, discharged by `SCM.measurable_exo`
+wherever `V` is finite, so nothing print asserts is bought with a condition print
+lacks.
+-/
+
+open MeasureTheory in
+/-- **`Eπ[U]`, as print's expectation.** The integral of the total utility under
+the law of the utility vertices in `Mπ`.
+
+The space integrated over is `(u : 𝐔) → dom u`, which is finite whenever
+`𝐔` is, so the integrand is integrable for free; all of the unboundedness lives
+in `SCM.exoLaw`, which is where print puts it. -/
+@[expose] public noncomputable def expectedUtilityLaw [M.graph.IsWellFounded]
+    [Fintype {v : V // M.graph.IsUtility v}] (π : M.Policy)
+    (hm : Measurable fun ε : ExoAssignment V edom ↦
+      fun u : {v : V // M.graph.IsUtility v} ↦ (M.withPolicy π).eval ε u.1) : ℝ :=
+  ∫ w, ∑ u : {v : V // M.graph.IsUtility v}, M.utilityValue u.1 u.2 (w ⟨u.1, u.2⟩)
+    ∂((M.withPolicy π).observableLaw {v : V | M.graph.IsUtility v} hm :
+      Measure ((v : {v : V | M.graph.IsUtility v}) → dom v))
+
+open MeasureTheory in
+/-- **The finite sum is a computation of print's expectation.**
+
+At a finite vertex set the measurability side condition is free
+(`SCM.measurable_exo`), the exogenous space is finite, and the integral against
+the product measure is the weighted sum `SCIM.expectedUtility` already writes.
+So every result stated about that sum is a result about print's `Eπ[U]`. -/
+public theorem expectedUtilityLaw_eq [Fintype V] [∀ v, Fintype (edom v)]
+    [∀ v, Fintype (dom v)] [∀ v, DecidableEq (dom v)]
+    [∀ v, DiscreteMeasurableSpace (edom v)] [∀ v, Countable (edom v)]
+    [∀ v, DiscreteMeasurableSpace (dom v)] [∀ v, Countable (dom v)]
+    [M.graph.IsWellFounded]
+    [Fintype {v : V // M.graph.IsUtility v}] (π : M.Policy) :
+    M.expectedUtilityLaw π (SCM.measurable_exo _) = M.expectedUtility π := by
+  classical
+  rw [expectedUtilityLaw, SCM.observableLaw]
+  rw [show (((M.withPolicy π).exoLaw.map
+      (SCM.measurable_exo (V := V) (edom := edom) _).aemeasurable :
+        ProbabilityMeasure ((v : {v : V | M.graph.IsUtility v}) → dom v)) :
+      Measure ((v : {v : V | M.graph.IsUtility v}) → dom v)) =
+      ((M.withPolicy π).exoLaw : Measure (ExoAssignment V edom)).map
+        (fun ε ↦ fun u : {v : V // M.graph.IsUtility v} ↦ (M.withPolicy π).eval ε u.1) from rfl]
+  rw [integral_map (SCM.measurable_exo _).aemeasurable
+    (Measurable.aestronglyMeasurable Measurable.of_discrete)]
+  rw [integral_fintype (Integrable.of_finite)]
+  rw [expectedUtility]
+  refine Finset.sum_congr rfl fun ε _ ↦ ?_
+  have hmass : ((M.withPolicy π).exoLaw : Measure (ExoAssignment V edom)).real {ε}
+      = (M.withPolicy π).exoJoint ε := by
+    rw [Measure.real, SCM.exoLaw_singleton,
+      ENNReal.toReal_ofReal ((M.withPolicy π).exoJoint_nonneg ε)]
+  rw [hmass, smul_eq_mul]
+  congr 1
+  rw [Finset.attach_eq_univ]
+  exact Fintype.sum_equiv
+    (Equiv.subtypeEquivRight fun v ↦ (M.graph.mem_utilities_iff v).symm) _ _ fun _ ↦ rfl
+
+/-- **An optimal policy, at an unbounded vertex set.** Print's *"any policy `π`
+that maximises `Eπ[U]`"* is a comparison and not an attainment claim, so it
+denotes wherever the expectation does.
+
+**This is the half of Definition 5's sentence that generalises.** The other half
+— that a maximiser *exists* — is `SCIM.exists_isOptimalPolicy`, and it needs the
+policy space finite. Print states no condition delivering one over an unbounded
+policy space, so that half stays where finiteness supplies it. -/
+@[expose] public def IsOptimalPolicyLaw [M.graph.IsWellFounded]
+    [Fintype {v : V // M.graph.IsUtility v}] (π : M.Policy)
+    (hm : ∀ π' : M.Policy, Measurable fun ε : ExoAssignment V edom ↦
+      fun u : {v : V // M.graph.IsUtility v} ↦ (M.withPolicy π').eval ε u.1) : Prop :=
+  ∀ π' : M.Policy, M.expectedUtilityLaw π' (hm π') ≤ M.expectedUtilityLaw π (hm π)
+
+/-- The finite-sum reading of *"maximises"* is print's. -/
+public theorem isOptimalPolicy_iff_law [Fintype V] [∀ v, Fintype (edom v)]
+    [∀ v, Fintype (dom v)] [∀ v, DecidableEq (dom v)]
+    [∀ v, DiscreteMeasurableSpace (edom v)] [∀ v, Countable (edom v)]
+    [∀ v, DiscreteMeasurableSpace (dom v)] [∀ v, Countable (dom v)]
+    [M.graph.IsWellFounded]
+    [Fintype {v : V // M.graph.IsUtility v}] (π : M.Policy) :
+    M.IsOptimalPolicy π ↔ M.IsOptimalPolicyLaw π fun _ ↦ SCM.measurable_exo _ := by
+  simp only [IsOptimalPolicyLaw, M.expectedUtilityLaw_eq]
+  rfl
+
+open MeasureTheory in
+/-- **`V*(M)` maximises print's expectation**, not merely a finite sum that
+agrees with it. This is what leaves the `[Fintype V]` on `SCIM.optimalValue`
+doing only the two jobs the section preamble adjudicates as transcribing print:
+supplying the maximum print writes, and making print's sum over `𝐔` denote. -/
+public theorem optimalValue_eq_sup'_law [Fintype V] [∀ v, Fintype (edom v)]
+    [∀ v, Fintype (dom v)] [∀ v, DecidableEq (dom v)]
+    [∀ v, DiscreteMeasurableSpace (edom v)] [∀ v, Countable (edom v)]
+    [∀ v, DiscreteMeasurableSpace (dom v)] [∀ v, Countable (dom v)]
+    [M.graph.IsWellFounded]
+    [Fintype {v : V // M.graph.IsUtility v}] :
+    M.optimalValue = Finset.univ.sup' Finset.univ_nonempty
+      fun π : M.Policy ↦ M.expectedUtilityLaw π (SCM.measurable_exo _) := by
+  unfold optimalValue
+  congr 1
+  funext π
+  exact (M.expectedUtilityLaw_eq π).symm
+
+omit [∀ v, MeasurableSpace (dom v)] in
+/-- Policy changes preserve the independent exogenous law on arbitrary graphs. -/
+public theorem exoLaw_withPolicy_eq (π π' : M.Policy) :
+    (M.withPolicy π).exoLaw = (M.withPolicy π').exoLaw := rfl
+
+/-- The source's policy-invariance sentence at the level of probability laws,
+without a finite vertex or observation set. Measurability is required of the
+observables; no expectation or optimization hypothesis is used. -/
+public theorem observableLaw_withPolicy_eq_of_notDownstream [M.graph.IsWellFounded]
+    (π π' : M.Policy) (X : Set V) (hX : ∀ v ∈ X, M.graph.NotDownstream v)
+    (hm : Measurable (fun ε : ExoAssignment V edom ↦
+      fun v : X ↦ (M.withPolicy π).eval ε v))
+    (hm' : Measurable (fun ε : ExoAssignment V edom ↦
+      fun v : X ↦ (M.withPolicy π').eval ε v)) :
+    (M.withPolicy π).observableLaw X hm = (M.withPolicy π').observableLaw X hm' := by
+  apply Subtype.ext
+  change MeasureTheory.Measure.map _ _ = MeasureTheory.Measure.map _ _
+  congr 1
+  funext ε v
+  exact M.eval_withPolicy_eq_of_notDownstream π π' ε (hX v v.property)
 
 end SCIM
 

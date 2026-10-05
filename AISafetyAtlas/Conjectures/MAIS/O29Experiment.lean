@@ -267,8 +267,8 @@ and over the channel's noise. -/
 public noncomputable def boltzmannExpectedError (sk : Skeleton C dim Bool ℝ)
     (M : Model C dim ℝ) (β : ℝ) (strategy : BoltzmannQueryStrategy sk)
     (estimator : BoltzmannEstimator C dim) (n : ℕ) : ℝ :=
-  pmfExpect (runBoltzmannTranscript sk M β strategy n) fun history ↦
-    pmfExpect (estimator sk history) fun Mhat ↦ modelError M Mhat
+  Decision.expect (runBoltzmannTranscript sk M β strategy n) fun history ↦
+    Decision.expect (estimator sk history) fun Mhat ↦ modelError M Mhat
 
 /-- The supremum over the class, which is what a minimax risk maximizes. -/
 public noncomputable def boltzmannAnalystRisk (sk : Skeleton C dim Bool ℝ)
@@ -294,18 +294,18 @@ public theorem boltzmannExpectedError_nonneg (sk : Skeleton C dim Bool ℝ)
     (M : Model C dim ℝ) (β : ℝ) (strategy : BoltzmannQueryStrategy sk)
     (estimator : BoltzmannEstimator C dim) (n : ℕ) :
     0 ≤ boltzmannExpectedError sk M β strategy estimator n :=
-  pmfExpect_nonneg _ fun _ ↦ pmfExpect_nonneg _ fun Mhat ↦ modelError_nonneg M Mhat
+  Decision.expect_nonneg _ fun _ ↦ Decision.expect_nonneg _ fun Mhat ↦ modelError_nonneg M Mhat
 
 public theorem boltzmannExpectedError_le_one (sk : Skeleton C dim Bool ℝ)
     (M : Model C dim ℝ) (β : ℝ) (strategy : BoltzmannQueryStrategy sk)
     (estimator : BoltzmannEstimator C dim) (n : ℕ) :
     boltzmannExpectedError sk M β strategy estimator n ≤ 1 := by
-  refine pmfExpect_le _ (C := 1) (fun history ↦ ?_) 1 fun history ↦ ?_
-  · rw [abs_of_nonneg (pmfExpect_nonneg _ fun Mhat ↦ modelError_nonneg M Mhat)]
-    exact pmfExpect_le _ (fun Mhat ↦ by
+  refine Decision.expect_le _ (C := 1) (fun history ↦ ?_) 1 fun history ↦ ?_
+  · rw [abs_of_nonneg (Decision.expect_nonneg _ fun Mhat ↦ modelError_nonneg M Mhat)]
+    exact Decision.expect_le _ (fun Mhat ↦ by
       rw [abs_of_nonneg (modelError_nonneg M Mhat)]
       exact modelError_le_one M Mhat) 1 fun Mhat ↦ modelError_le_one M Mhat
-  · exact pmfExpect_le _ (fun Mhat ↦ by
+  · exact Decision.expect_le _ (fun Mhat ↦ by
       rw [abs_of_nonneg (modelError_nonneg M Mhat)]
       exact modelError_le_one M Mhat) 1 fun Mhat ↦ modelError_le_one M Mhat
 
@@ -372,9 +372,9 @@ omit [Nonempty C] in
 private theorem inner_error_abs_le_one {sk : Skeleton C dim Bool ℝ}
     [Nonempty C] (estimator : BoltzmannEstimator C dim)
     (N : Model C dim ℝ) (history : BoltzmannTranscript sk) :
-    |pmfExpect (estimator sk history) fun Mhat ↦ modelError N Mhat| ≤ 1 := by
-  rw [abs_of_nonneg (pmfExpect_nonneg _ fun Mhat ↦ modelError_nonneg N Mhat)]
-  exact pmfExpect_le _ (fun Mhat ↦ by
+    |Decision.expect (estimator sk history) fun Mhat ↦ modelError N Mhat| ≤ 1 := by
+  rw [abs_of_nonneg (Decision.expect_nonneg _ fun Mhat ↦ modelError_nonneg N Mhat)]
+  exact Decision.expect_le _ (fun Mhat ↦ by
     rw [abs_of_nonneg (modelError_nonneg N Mhat)]
     exact modelError_le_one N Mhat) 1 fun Mhat ↦ modelError_le_one N Mhat
 
@@ -426,14 +426,14 @@ public theorem half_le_boltzmannMinimaxRisk_of_collision
   have hlaw := runBoltzmannTranscript_congr hbeh strategy n
   have hsum : boltzmannExpectedError sk M β strategy estimator n
       + boltzmannExpectedError sk M' β strategy estimator n
-      = pmfExpect (runBoltzmannTranscript sk M β strategy n) fun history ↦
-          pmfExpect (estimator sk history) fun Mhat ↦
+      = Decision.expect (runBoltzmannTranscript sk M β strategy n) fun history ↦
+          Decision.expect (estimator sk history) fun Mhat ↦
             modelError M Mhat + modelError M' Mhat := by
     unfold boltzmannExpectedError
-    rw [← hlaw, ← pmfExpect_add _ (C := 1)
+    rw [← hlaw, ← Decision.expect_add_of_abs_le _ (C := 1)
       (inner_error_abs_le_one estimator M) (inner_error_abs_le_one estimator M')]
     exact congrArg _ (funext fun history ↦
-      (pmfExpect_add _ (C := 1)
+      (Decision.expect_add_of_abs_le _ (C := 1)
         (fun Mhat ↦ by
           rw [abs_of_nonneg (modelError_nonneg M Mhat)]
           exact modelError_le_one M Mhat)
@@ -443,12 +443,12 @@ public theorem half_le_boltzmannMinimaxRisk_of_collision
   have hone : 1 ≤ boltzmannExpectedError sk M β strategy estimator n
       + boltzmannExpectedError sk M' β strategy estimator n := by
     rw [hsum]
-    refine le_pmfExpect _ (C := 2) (fun history ↦ ?_) 1 fun history ↦ ?_
-    · rw [abs_of_nonneg (pmfExpect_nonneg _ fun Mhat ↦ by
+    refine Decision.le_expect _ (C := 2) (fun history ↦ ?_) 1 fun history ↦ ?_
+    · rw [abs_of_nonneg (Decision.expect_nonneg _ fun Mhat ↦ by
         have := modelError_nonneg M Mhat
         have := modelError_nonneg M' Mhat
         linarith)]
-      exact pmfExpect_le _ (C := 2) (fun Mhat ↦ by
+      exact Decision.expect_le _ (C := 2) (fun Mhat ↦ by
         rw [abs_of_nonneg (by
           have := modelError_nonneg M Mhat
           have := modelError_nonneg M' Mhat
@@ -459,7 +459,7 @@ public theorem half_le_boltzmannMinimaxRisk_of_collision
           have := modelError_le_one M Mhat
           have := modelError_le_one M' Mhat
           linarith
-    · refine le_pmfExpect _ (C := 2) (fun Mhat ↦ ?_) 1
+    · refine Decision.le_expect _ (C := 2) (fun Mhat ↦ ?_) 1
         fun Mhat ↦ one_le_modelError_add hpar Mhat
       rw [abs_of_nonneg (by
         have := modelError_nonneg M Mhat

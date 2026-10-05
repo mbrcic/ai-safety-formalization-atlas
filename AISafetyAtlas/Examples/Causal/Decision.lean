@@ -155,6 +155,50 @@ public theorem not_inIdentifiedSet_high :
   · rw [masked_identity_high]
     norm_num
 
+/-- **The value gap of the constant policies is the mixture gap.** Switching a
+constant policy from `false` to `true` moves the value by exactly `Δmix`, which
+is the identity every regret computation in this cluster reduces to and which
+nothing had run at a model. -/
+public theorem high_value_const_sub :
+    high.value skel ∅ (Policy.const ∅ true) identityProbMixture -
+      high.value skel ∅ (Policy.const ∅ false) identityProbMixture
+      = high.Δmix skel.gap identityProbMixture.1 :=
+  Model.value_const_sub high skel ∅ identityProbMixture
+
+/-! ## The identified-set relation, at the same two models
+
+`not_inIdentifiedSet_high` is the negative instance this file was built for.
+The relation's own structural facts had no witness anywhere until 2026-09-21,
+so an argument reading the identified set as an equivalence-like relation had
+nothing to lean on.
+-/
+
+/-- **Every margin-class model is in its own identified set.** Reflexivity at a
+non-negative tolerance, with the family being the model's own optimal one. -/
+public theorem inIdentifiedSet_high_self : InIdentifiedSet skel lam 0 high high :=
+  inIdentifiedSet_self skel lam 0 high high_mem le_rfl
+
+/-- **And the relation is symmetric**, so the order of the pair in
+`not_inIdentifiedSet_high` carries no information.
+
+Written `Causal.inIdentifiedSet_symm` rather than bare: an example file in this
+same cluster declares its own `inIdentifiedSet_symm`, so the bare leaf names two
+declarations and the debt report refuses it. -/
+public theorem inIdentifiedSet_high_self_symm : InIdentifiedSet skel lam 0 high high :=
+  Causal.inIdentifiedSet_symm skel lam 0 inIdentifiedSet_high_self
+
+/-- **A negative tolerance empties the relation.** Nothing is in anything's
+identified set at `δ < 0`, so the parameter has a floor and
+`not_inIdentifiedSet_high` at `δ = 0` is a statement about the models rather
+than about the tolerance. -/
+public theorem not_inIdentifiedSet_high_neg : ¬ InIdentifiedSet skel lam (-1) high high :=
+  not_inIdentifiedSet_of_neg skel lam (-1) high high (by norm_num)
+
+/-- **Model error is a metric on the nose at zero**: it vanishes exactly on
+equal models, so a zero error is an identity and not an approximation. -/
+public theorem modelError_high_self_eq_zero_iff : modelError high high = 0 ↔ high = high :=
+  modelError_eq_zero_iff high high
+
 /-! ## Normalization outside the binary case
 
 `realizable_iff` is a two-point statement and cannot say anything about a task
@@ -182,5 +226,45 @@ public theorem ternaryGap_realizable :
   have hinf : (0 : ℚ) ≤ Finset.univ.inf' Finset.univ_nonempty (fun d ↦ ternaryGap d v) :=
     Finset.le_inf' _ _ (fun d _ ↦ by fin_cases d <;> norm_num [ternaryGap])
   linarith
+
+
+/-! ## The decision layer's bookkeeping, at this pair
+
+`skel` and `identityProbMixture` are already here; what the regret and
+optimality statements additionally need is a policy. `Policy.const` supplies the
+deterministic `do(D = true)`, so the statements below are about an actual policy
+rather than a bound one.
+-/
+
+/-- The deterministic policy `do(D = true)`, on the skeleton's own observation
+set. -/
+@[expose] public def constTrue :
+    AISafetyAtlas.Causal.Policy (dim := binaryDim (Fin 2)) skel.observed Bool ℚ :=
+  AISafetyAtlas.Causal.Policy.const skel.observed true
+
+/-- **Regret is nonnegative**, at a model and a policy this file builds. -/
+public theorem high_regret_nonneg :
+    0 ≤ high.regret skel skel.observed constTrue identityProbMixture :=
+  AISafetyAtlas.Causal.Model.regret_nonneg high skel skel.observed constTrue
+    identityProbMixture
+
+/-- **Optimality is zero regret**, read at the same pair. -/
+public theorem high_isOptimal_iff_regret_zero :
+    high.IsOptimal skel skel.observed constTrue identityProbMixture ↔
+      high.regret skel skel.observed constTrue identityProbMixture = 0 :=
+  AISafetyAtlas.Causal.Model.isOptimal_iff_regret_zero high skel skel.observed
+    constTrue identityProbMixture
+
+/-- The mixture-weighted joint is nonnegative, at the identity mixture. -/
+public theorem high_jointProbMix_nonneg (v : AISafetyAtlas.Causal.Assignment (Fin 2) (binaryDim (Fin 2))) :
+    0 ≤ high.jointProbMix identityProbMixture.1 v :=
+  AISafetyAtlas.Causal.Model.jointProbMix_nonneg high identityProbMixture v
+
+/-- **A fibre representative agrees with what it represents on everything
+visible**, which is the whole point of collapsing to fibres. -/
+public theorem high_fibreRep_mem (v : AISafetyAtlas.Causal.Assignment (Fin 2) (binaryDim (Fin 2))) :
+    ∀ c ∈ (Finset.univ : Finset (Fin 2)),
+      AISafetyAtlas.Causal.fibreRep high Finset.univ v c = v c :=
+  AISafetyAtlas.Causal.fibreRep_mem high Finset.univ v
 
 end AISafetyAtlas.Examples.Causal

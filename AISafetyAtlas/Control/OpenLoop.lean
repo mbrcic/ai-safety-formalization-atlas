@@ -232,7 +232,7 @@ supplies it, since the reduction never exceeds the entropy of its own input
 distribution and that is at most `log |S|`.
 
 **What this buys, and what remains.** The atlas's `OpenLoopBound` quantifies over
-the *conditional ensembles of `μ`*, which is a different family: conditioning `μ`
+the *conditional ensembles `X | C = c` of `μ`*, which is a different family: conditioning `μ`
 can move the joint law of state and noise together, whereas the printed maximum
 moves the input distribution with the actuation channel fixed. Quantifying over
 **all** input distributions removes the mismatch, because each conditional law
@@ -344,8 +344,8 @@ omit [MeasurableSingletonClass T] [Countable K] [Countable T] in
 **Step (50), inside the independent-noise rendering.** On the event `C = c` the
 state's entropy drops by at most the rendered open-loop supremum.
 
-The atlas's earlier rendering `OpenLoopBound` had to be *assumed* to hold on every
-conditional ensemble of `μ`, and its relation to the printed `ΔH_open^max` was
+The atlas's earlier rendering `OpenLoopBound` had to be *assumed* to hold on the
+conditional ensembles `X | C = c` of `μ`, and its relation to the printed `ΔH_open^max` was
 recorded as "neither direction". That gap closes here: the conditional law of the
 state on the fibre is an input distribution like any other, so eq. (48)'s maximum
 covers it by construction. The source's own justification, mechanized —

@@ -87,8 +87,8 @@ Both readings are available here.
   `condEntropy_le_condEntropy_of_forall` averages one into the other.
 * `entropyReduction_le_of_openLoopBound` **derives** it, by mechanizing that
   sentence. `IsPlant` writes the actuation channel as a map `X' = F(X, C, Z)`;
-  `OpenLoopBound` says no constant control reduces the entropy of the state by
-  more than `Δopen`, on every conditional ensemble of `μ` — which is the
+  `OpenLoopBound` says the constant control `c` reduces the entropy of the state
+  by at most `Δopen` on each conditional ensemble `X | C = c` — which is the
   "each `p(x|c)` is an element of `P`" clause, stated as a hypothesis.
 
 `IsPlant` and `OpenLoopBound` are the atlas's rendering of the paper's model, not
@@ -347,9 +347,9 @@ definition rather than a sentence turns the assertion into a proof.
 
 Two ingredients. `IsPlant` says the final state is a fixed function of the
 initial state, the control action and the noise — the paper's actuation channel,
-written as a map. `OpenLoopBound` says no *constant* control reduces the entropy
-of the state by more than `Δopen`, **for every ensemble**, which is exactly the
-"instead of `supp(X)`" clause: the conditional ensembles `X | C = c` are not the
+written as a map. `OpenLoopBound` says the constant control `c` reduces the
+entropy of the state by at most `Δopen` **on each conditional ensemble
+`X | C = c`**, which is exactly the "instead of `supp(X)`" clause: the conditional ensembles `X | C = c` are not the
 one the bound was quoted for, so a bound quantified only over `supp(X)` would not
 transfer. -/
 
@@ -360,19 +360,24 @@ initial state, the control action and the noise. -/
   ∀ ω, X' ω = F (X ω) (C ω) (Z ω)
 
 /--
-**The open-loop maximum.** No control action applied *without* observing the
-state reduces the entropy of the state by more than `Δopen`.
+**The open-loop maximum.** On each fibre `C = c` of the control reading, the
+constant action `c`, applied *without* observing the state, reduces the entropy
+of the state by at most `Δopen`.
 
-Quantified over the **conditional ensembles** of `μ`, which is the source's own
-phrase: step (50) applies the bound on `supp(X|c)`, not on `supp(X)`. Asking for
-it on every conditional is exactly what the argument consumes, and no more —
-quantifying over all measures on `Ω` would be a strictly stronger hypothesis and
-so a weaker theorem.
+Quantified over the **conditional ensembles `X | C = c`**, which is the source's
+own phrase: step (50) applies the bound on `supp(X|c)`, not on `supp(X)`. That is
+exactly what the argument consumes, and no more. Until 2026-10-05 the bound was
+asked on every positive-measure event and every action, which includes events
+defined through the noise and can force `Δopen` far above what any constant
+action achieves (closure audit); every theorem assuming this is now stronger.
+When the reading is independent of state and noise, each fibre carries the law
+of `μ`, and the least admissible `Δopen` is the best reduction a constant action
+achieves blind.
 -/
 @[expose] public def OpenLoopBound (μ : Measure Ω) (F : S → K → N → T)
-    (X : Ω → S) (Z : Ω → N) (Δopen : ℝ) : Prop :=
-  ∀ s : Set Ω, MeasurableSet s → μ s ≠ 0 → ∀ k : K,
-    H[X ; μ[|s]] - Δopen ≤ H[fun ω => F (X ω) k (Z ω) ; μ[|s]]
+    (X : Ω → S) (C : Ω → K) (Z : Ω → N) (Δopen : ℝ) : Prop :=
+  ∀ c : K, μ (C ⁻¹' {c}) ≠ 0 →
+    H[X ; μ[|C ⁻¹' {c}]] - Δopen ≤ H[fun ω => F (X ω) c (Z ω) ; μ[|C ⁻¹' {c}]]
 
 omit [MeasurableSpace N] [MeasurableSingletonClass S] [MeasurableSingletonClass N]
   [MeasurableSingletonClass T] [Countable S] [Countable K] [Countable N] [Countable T] in
@@ -387,7 +392,7 @@ This is the paper's prose equivalence, discharged. Note where the strength of
 public theorem condEntropy_ge_of_openLoopBound (μ : Measure Ω) [IsProbabilityMeasure μ]
     {F : S → K → N → T} {X : Ω → S} {C : Ω → K} {Z : Ω → N} {X' : Ω → T}
     (hC : Measurable C) (hplant : IsPlant F X C Z X') {Δopen : ℝ}
-    (hopen : OpenLoopBound μ F X Z Δopen) (c : K) (hc : μ (C ⁻¹' {c}) ≠ 0) :
+    (hopen : OpenLoopBound μ F X C Z Δopen) (c : K) (hc : μ (C ⁻¹' {c}) ≠ 0) :
     H[X | C ← c ; μ] - Δopen ≤ H[X' | C ← c ; μ] := by
   have : IsProbabilityMeasure (μ[|C ⁻¹' {c}]) := cond_isProbabilityMeasure hc
   -- on the fibre the control is constant, so the plant is open-loop there
@@ -397,7 +402,7 @@ public theorem condEntropy_ge_of_openLoopBound (μ : Measure Ω) [IsProbabilityM
     rw [hplant ω, hCω]
   calc H[X | C ← c ; μ] - Δopen
       ≤ H[fun ω => F (X ω) c (Z ω) ; μ[|C ⁻¹' {c}]] :=
-        hopen _ (hC (measurableSet_singleton c)) hc c
+        hopen c hc
     _ = H[X' | C ← c ; μ] := (entropy_congr hae).symm
 
 omit [MeasurableSpace N] [MeasurableSingletonClass N] [Countable N] in
@@ -415,7 +420,7 @@ public theorem entropyReduction_le_of_openLoopBound (μ : Measure Ω) [IsProbabi
     (hX : Measurable X) (hC : Measurable C) (hX' : Measurable X')
     [FiniteRange X] [FiniteRange C] [FiniteRange X']
     (hplant : IsPlant F X C Z X') {Δopen : ℝ}
-    (hopen : OpenLoopBound μ F X Z Δopen) :
+    (hopen : OpenLoopBound μ F X C Z Δopen) :
     entropyReduction μ X X' ≤ Δopen + I[X : C ; μ] := by
   refine entropyReduction_le_of_condEntropy_ge μ hX hC hX' Δopen ?_
   refine condEntropy_le_condEntropy_of_forall μ hC Δopen fun c hc => ?_
@@ -471,6 +476,34 @@ public theorem measurable_plantOutcome (F : S → K → N → T)
     MeasurableSingletonClass.toDiscreteMeasurableSpace
   exact (Measurable.of_discrete (f := fun p : (S × K) × N => F p.1.1 p.1.2 p.2)).comp
     ((hX.prodMk hC).prodMk hZ)
+
+/--
+**Every plant is purified, and until 2026-09-21 nothing in the tree said so.**
+
+`IsPlant` says the outcome is a function of the triple; `Purified` says the
+triple leaves no entropy in the outcome. Those are the same statement in two
+registers, and the register the theorems below take their hypothesis in is the
+second — so a worked model could satisfy `IsPlant` by `rfl` and still be unable
+to reach eq. (28)'s results, because nothing carried it across. `plantOutcome`
+is literally a composite of `⟨⟨X, C⟩, Z⟩`, and that is the whole proof.
+
+The absence had a visible cost: `minControlLoss_eq_sInf_condMutualInfo`,
+`minControlLoss_eq_sInf_mutualInfo_sub` and
+`minControlLoss_eq_entropy_noise_iff_of_attained` all take `Purified` as a
+hypothesis and none of them had a witness anywhere in `Examples/`.
+-/
+public theorem purified_plantOutcome (μ : Measure Ω) [IsZeroOrProbabilityMeasure μ]
+    (F : S → K → N → T) {X : Ω → S} {C : Ω → K} {Z : Ω → N}
+    (hX : Measurable X) (hC : Measurable C) (hZ : Measurable Z)
+    [FiniteRange X] [FiniteRange C] [FiniteRange Z] :
+    Purified μ X C Z (plantOutcome F X C Z) := by
+  have hW : Measurable (⟨⟨X, C⟩, Z⟩ : Ω → (S × K) × N) :=
+    (hX.prodMk hC).prodMk hZ
+  have hcomp : plantOutcome F X C Z
+      = (fun p : (S × K) × N => F p.1.1 p.1.2 p.2) ∘ (⟨⟨X, C⟩, Z⟩ : Ω → (S × K) × N) := rfl
+  rw [Purified, hcomp, chain_rule'' μ (by rw [← hcomp]; exact measurable_plantOutcome F hX hC hZ)
+    hW, entropy_comm (by rw [← hcomp]; exact measurable_plantOutcome F hX hC hZ) hW,
+    entropy_prod_comp hW μ (fun p : (S × K) × N => F p.1.1 p.1.2 p.2), sub_self]
 
 /--
 **The controllers eq. (28) minimizes over.** The paper's `{p(c|x)}` are channels

@@ -242,4 +242,53 @@ public theorem card_le_o24Size_skel (G : Fin 2 → Finset (Fin 2)) :
     2 ≤ o24Size (skel.mapRat ℝ).utilityParents G := by
   simpa using card_le_o24Size (C := Fin 2) (skel.mapRat ℝ).utilityParents G
 
+/-! ## Three more of the reduction's structural facts, at this space
+
+`O24Solution.behaviorEq_imp_eq` and `O24Solution.marginClass_subset` are not
+here: both quantify over an `O24Solution`, and `not_o24Identifies_nil` is a
+refutation rather than an inhabitant, so applying them would need a solution
+this file does not have. The three below need only the two-vertex space.
+-/
+
+/-- **A model's own parent map is compatible**, so the graph is a legitimate
+chart index rather than a side hypothesis. -/
+public theorem isCompatibleGraph_parents_edgeless :
+    IsCompatibleGraph (edgeless.mapRat ℝ).parents :=
+  isCompatibleGraph_parents (edgeless.mapRat ℝ)
+
+/-- **The variable count is at most twice the size**, at the edgeless graph on
+two vertices. -/
+public theorem card_o24Var_le_edgeless :
+    Fintype.card (O24Var (∅ : Finset (Fin 2)) (fun _ ↦ ∅))
+      ≤ 2 * o24Size (∅ : Finset (Fin 2)) (fun _ ↦ ∅) :=
+  card_o24Var_le _ _
+
+/-- **The instance encoding is injective**, so the reduction's inputs are
+recoverable from their encodings. -/
+public theorem o24EncodeInput_injective_two :
+    Function.Injective (o24EncodeInput (m := 2)) :=
+  o24EncodeInput_injective
+
+
+/-! ## The rational-to-real transport, at the objects that use it
+
+Every real-valued statement in this file goes through `mapRat`. These three say
+the transport changes none of the combinatorial data it is applied to.
+-/
+
+/-- Transporting a model to the reals leaves its parent map alone. -/
+public theorem edgeless_parents_mapRat :
+    (edgeless.mapRat ℝ).parents = edgeless.parents :=
+  Model.parents_mapRat edgeless
+
+/-- And it leaves the skeleton's observation set alone. -/
+public theorem skel_observed_mapRat :
+    (skel.mapRat ℝ).observed = skel.observed :=
+  Skeleton.observed_mapRat skel
+
+/-- And its utility parents. -/
+public theorem skel_utilityParents_mapRat :
+    (skel.mapRat ℝ).utilityParents = skel.utilityParents :=
+  Skeleton.utilityParents_mapRat skel
+
 end AISafetyAtlas.Examples.Causal.EffectiveGenericity

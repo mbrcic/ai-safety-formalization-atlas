@@ -22,6 +22,7 @@ Root `AISafetyAtlas` also imports nested modules
 | **Source form** | `Source.ReasonableForF.proposition_eight` | `.SourceComplexity` | Prop. 8 both directions at **c** |
 | **Helper** | `ReasonableLanguage.proposition_seven` | `.Reasonable` | Reparameterized Prop. 7 at **2c** (used by plain-K path) |
 | **Specialization** | `explanation_complexity_eq_behaviour` | `.Complexity` | Plain-K bounds for one canonical encoding |
+| **Law** | `behaviour_le_of_evaluatesTo` | `.Complexity` | §5.1's lower bound at the source's quantifier: one constant over **every** pair that evaluates to the behaviour |
 | **Law** | `RegretModel.cannot_rule_out_half_maximal_regret` | `.Regret` | §4.1.2 style bridge; needs `HalfMaximalRegretBound` certificate |
 | **Definition** | `OverrideModel.OverridesFor` | `.Override` | Definition 11 relativized to a compatible pair |
 | **Boundary** | `Source.ReasonableForF.theorem_two_conditional` | `.SourceComplexity` | Informal Thm 2 **only if** Conjecture 9 predicate holds |
@@ -29,7 +30,7 @@ Root `AISafetyAtlas` also imports nested modules
 This file defines the core planner/reward API (`Planner`, `Explains`, Theorem 1
 halves, degenerate pairs). Nested modules hold complexity, regret, and override
 layers, and **this module does not import them** — it is a peer, not a facade,
-so seven of the rows above need the import named beside them (`.Regret` is
+so eight of the rows above need the import named beside them (`.Regret` is
 `AISafetyAtlas.Preference.Regret`, and so on) or `AISafetyAtlas` for all of
 them. The `Import` column says which; the `Declaration` column is the name, and
 is independent of it.
@@ -56,7 +57,7 @@ is independent of it.
 - **Not** a nontrivial `c`-reasonable language existence proof; exhibited models
   may be degenerate.
 - **Not** a claim about any particular algorithm, dataset, or deployed system.
-- **Not** an AI-system bridge; `ai_bridge_status` remains human review.
+- **Not** an AI-system bridge; `ai_interpretation_status` remains human review.
 
 Survey row: **BY-011**. Statement maps / residuals:
 `docs/provenance/a1-a3-b1-b3-b7-statement-maps.md`,

@@ -10,7 +10,7 @@ Edges come from the elaborated Lean environment. This answers the question the p
 
 So `A → B` means *`B` occurs in `A`'s statement, or in `A`'s body when `A` is a definition*. A lemma used only inside a proof does not appear. Reading the table as a complete call graph would be wrong, and the two sections below are scoped so that they stay true under this limit.
 
-`27` authored declarations in `AISafetyAtlas.Combinatorics.*` (20 theorems). Compiler-generated companions and projections are dropped.
+`85` authored declarations in `AISafetyAtlas.Combinatorics.*` (72 theorems). Compiler-generated companions and projections are dropped.
 
 ## Load-bearing declarations
 
@@ -19,6 +19,12 @@ Named in the statements of eight or more others. A change to one of these is a c
 | Declaration | Named by |
 |---|---|
 | `ClosedUnderPermutation` | 16 |
+| `cascadeShadow` | 13 |
+| `cascadeUpper` | 12 |
+| `cascadeTop` | 10 |
+| `permOrbit` | 8 |
+| `finRank` | 8 |
+| `colexRank` | 8 |
 
 ## Definitions no statement and no example mentions
 
@@ -38,20 +44,75 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 | `basisClass_histogram_eq_permOrbit` | theorem | `basisClass`, `histogram`, `permOrbit` |
 | `card_closedUnderPermutation` | theorem | `ClosedUnderPermutation` |
 | `card_closedUnderPermutation_nonempty` | theorem | `ClosedUnderPermutation` |
+| `card_image_val` | theorem | — |
+| `card_initFamily` | theorem | `initFamily` |
+| `card_initSeg` | theorem | `finRank` |
 | `card_nonempty_set_add_one` | theorem | — |
 | `card_nonempty_set_objective` | theorem | — |
+| `card_shadow_initFamily` | theorem | `cascadeShadow`, `initFamily` |
+| `cascadeShadow` | definition | — |
+| `cascadeShadow_cascadeUpper_le` | theorem | `cascadeShadow`, `cascadeUpper` |
+| `cascadeShadow_choose` | theorem | `cascadeShadow` |
+| `cascadeShadow_colexRank_succ` | theorem | `cascadeShadow`, `colexRank` |
+| `cascadeShadow_le_card_shadow` | theorem | `cascadeShadow` |
+| `cascadeShadow_le_card_shadow'` | theorem | `cascadeShadow` |
+| `cascadeShadow_le_choose` | theorem | `cascadeShadow` |
+| `cascadeShadow_le_iff_le_cascadeUpper` | theorem | `cascadeShadow`, `cascadeUpper` |
+| `cascadeShadow_mono` | theorem | `cascadeShadow` |
+| `cascadeShadow_step` | theorem | `cascadeShadow` |
+| `cascadeShadow_zero_right` | theorem | `cascadeShadow` |
+| `cascadeTop` | definition | — |
+| `cascadeTop_choose_le` | theorem | `cascadeTop` |
+| `cascadeTop_eq` | theorem | `cascadeTop` |
+| `cascadeTop_le_of_le_choose` | theorem | `cascadeTop` |
+| `cascadeTop_mono` | theorem | `cascadeTop` |
+| `cascadeTop_one` | theorem | `cascadeTop` |
+| `cascadeUpper` | definition | — |
+| `cascadeUpper_choose` | theorem | `cascadeUpper` |
+| `cascadeUpper_le_choose` | theorem | `cascadeUpper` |
+| `cascadeUpper_lt_choose` | theorem | `cascadeUpper` |
+| `cascadeUpper_mono` | theorem | `cascadeUpper` |
+| `cascadeUpper_one` | theorem | `cascadeUpper` |
+| `cascadeUpper_step` | theorem | `cascadeUpper` |
+| `cascadeUpper_zero_right` | theorem | `cascadeUpper` |
+| `choose_le_card_shadow_iterate` | theorem | — |
+| `choose_le_iff_le_cascadeTop` | theorem | `cascadeTop` |
 | `closedUnderPermutationEquivSet` | definition | `ClosedUnderPermutation`, `spectrum` |
 | `closedUnderPermutationNonemptyEquivSet` | definition | `ClosedUnderPermutation`, `spectrum` |
 | `closedUnderPermutation_iff_permOrbit_subset` | theorem | `ClosedUnderPermutation`, `permOrbit` |
 | `closedUnderPermutation_permOrbit` | theorem | `ClosedUnderPermutation`, `permOrbit` |
+| `colexRank` | definition | — |
+| `colexRank_empty` | theorem | `colexRank` |
+| `colexRank_erase_max` | theorem | `colexRank` |
+| `colexRank_erase_min_of_maximal` | theorem | `colexRank` |
+| `colexRank_lt_choose` | theorem | `colexRank` |
+| `colexRank_lt_colexRank` | theorem | `colexRank` |
+| `colexRank_singleton` | theorem | `colexRank` |
+| `exists_card_eq_cascadeUpper_of_le` | theorem | `cascadeUpper` |
+| `exists_embedding_range_eq` | theorem | — |
 | `exists_perm_adj_not_iff` | theorem | — |
 | `exists_perm_apply_eq_of_ne` | theorem | — |
 | `exists_perm_rel_not_iff` | theorem | — |
 | `exists_perm_rel_of_ne` | theorem | — |
+| `finRank` | definition | `colexRank` |
+| `finRank_injOn` | theorem | `finRank` |
+| `finRank_lt` | theorem | `finRank` |
+| `finRank_lt_finRank` | theorem | `finRank` |
 | `forall_adj_or_forall_not_adj_of_permInvariant` | theorem | — |
 | `forall_rel_of_permInvariant` | theorem | — |
 | `fraction_closedUnderPermutation` | theorem | `ClosedUnderPermutation` |
+| `galoisConnection_cascadeShadow_cascadeUpper` | theorem | `cascadeShadow`, `cascadeUpper` |
 | `histogram` | definition | — |
+| `image_finRank_powersetCard` | theorem | `finRank` |
+| `image_val_erase_min` | theorem | — |
+| `initFamily` | definition | `finRank` |
+| `initSeg_eq_initFamily` | theorem | `finRank`, `initFamily` |
+| `isInitSeg_initFamily` | theorem | `initFamily` |
+| `le_bound_of_choose_le` | theorem | — |
+| `le_cascadeTop_of_pos` | theorem | `cascadeTop` |
+| `le_cascadeUpper_cascadeShadow` | theorem | `cascadeShadow`, `cascadeUpper` |
+| `lt_succ_cascadeTop_choose` | theorem | `cascadeTop` |
+| `mem_initFamily_iff` | theorem | `finRank`, `initFamily` |
 | `mem_permOrbit_self` | theorem | `permOrbit` |
 | `permOrbit` | definition | — |
 | `preimage_image_spectrum` | theorem | `ClosedUnderPermutation`, `spectrum` |
@@ -59,4 +120,7 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 | `spectrum` | definition | — |
 | `spectrum_eq_iff_histogram_eq` | theorem | `histogram`, `spectrum` |
 | `spectrum_eq_iff_mem_permOrbit` | theorem | `permOrbit`, `spectrum` |
+| `sub_cascadeTop_choose_le` | theorem | `cascadeTop` |
+| `sub_cascadeTop_choose_lt` | theorem | `cascadeTop` |
+| `succ_le_choose_add` | theorem | — |
 | `surjective_spectrum` | theorem | `spectrum` |

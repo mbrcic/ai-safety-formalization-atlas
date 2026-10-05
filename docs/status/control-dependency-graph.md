@@ -10,7 +10,7 @@ Edges come from the elaborated Lean environment. This answers the question the p
 
 So `A → B` means *`B` occurs in `A`'s statement, or in `A`'s body when `A` is a definition*. A lemma used only inside a proof does not appear. Reading the table as a complete call graph would be wrong, and the two sections below are scoped so that they stay true under this limit.
 
-`203` authored declarations in `AISafetyAtlas.Control.*` (153 theorems). Compiler-generated companions and projections are dropped.
+`208` authored declarations in `AISafetyAtlas.Control.*` (157 theorems). Compiler-generated companions and projections are dropped.
 
 ## Load-bearing declarations
 
@@ -18,23 +18,30 @@ Named in the statements of eight or more others. A change to one of these is a c
 
 | Declaration | Named by |
 |---|---|
-| `plantOutcome` | 38 |
-| `controlLoss` | 20 |
+| `plantOutcome` | 45 |
+| `entropyReduction` | 23 |
+| `controlLoss` | 21 |
+| `admittedOutcomes` | 19 |
 | `IsPerfectRegulator` | 17 |
-| `entropyReduction` | 15 |
-| `admittedOutcomes` | 15 |
-| `minControlLoss` | 12 |
-| `Purified` | 12 |
+| `minControlLoss` | 15 |
+| `OversightBudget.Oversight.hazard` | 15 |
+| `Purified` | 14 |
 | `kernelOpenLoopReductionAt` | 11 |
+| `OversightBudget.Oversight.reading` | 11 |
+| `OversightBudget.Oversight.outcome` | 11 |
 | `purifySeed` | 10 |
 | `purifiedState` | 10 |
 | `ofWeights` | 10 |
 | `atomLoss` | 10 |
+| `IsPlant` | 10 |
+| `traj` | 9 |
 | `purifyMap` | 9 |
 | `purifiedLaw` | 9 |
+| `openLoopMax` | 9 |
 | `kernelEntropyReduction` | 9 |
 | `purifiedSeed` | 8 |
 | `purifiedAction` | 8 |
+| `achievedVariety` | 8 |
 | `IsInputPolicy` | 8 |
 
 ## Definitions no statement and no example mentions
@@ -57,6 +64,10 @@ None.
 | `IsPlant` | definition | — |
 | `IsPurification` | definition | — |
 | `OpenLoopBound` | definition | — |
+| `OversightBudget.Oversight` | definition | — |
+| `OversightBudget.blind_channel_buys_nothing` | theorem | `IsPlant`, `OversightBudget.Oversight`, `OversightBudget.Oversight.hazard`, `OversightBudget.Oversight.outcome`, `OversightBudget.Oversight.reading`, `entropyReduction`, `openLoopMax` |
+| `OversightBudget.budget_is_the_channel_not_the_volume` | theorem | `IsPlant`, `OversightBudget.Oversight`, `OversightBudget.Oversight.hazard`, `OversightBudget.Oversight.outcome`, `OversightBudget.Oversight.reading`, `entropyReduction`, `openLoopMax` |
+| `OversightBudget.oversight_reduction_le_budget` | theorem | `IsPlant`, `OversightBudget.Oversight`, `OversightBudget.Oversight.hazard`, `OversightBudget.Oversight.outcome`, `OversightBudget.Oversight.reading`, `entropyReduction`, `openLoopMax` |
 | `PerfectlyObservable` | definition | — |
 | `Purified` | definition | — |
 | `achievedVariety` | definition | `admittedOutcomes` |
@@ -238,6 +249,7 @@ None.
 | `purifiedRegroup` | definition | — |
 | `purifiedSeed` | definition | — |
 | `purifiedState` | definition | — |
+| `purified_plantOutcome` | theorem | `Purified`, `plantOutcome` |
 | `purifyMap` | definition | — |
 | `purifySeed` | definition | — |
 | `sensorLoss` | definition | — |

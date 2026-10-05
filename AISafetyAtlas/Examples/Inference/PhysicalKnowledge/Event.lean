@@ -25,6 +25,15 @@ namespace AISafetyAtlas.Examples.Inference.PhysicalKnowledge.Event
 open AISafetyAtlas.Inference
 open AISafetyAtlas.Examples.Inference.PhysicalKnowledge
 
+/-- The characteristic-function biconditionals, at a concrete world and event. -/
+theorem eventIndicator_trueWorlds_true_iff :
+    eventIndicator trueWorlds (false, true) = true ↔ (false, true) ∈ trueWorlds :=
+  eventIndicator_eq_true_iff trueWorlds (false, true)
+
+theorem eventIndicator_trueWorlds_false_iff :
+    eventIndicator trueWorlds (false, false) = false ↔ (false, false) ∉ trueWorlds :=
+  eventIndicator_eq_false_iff trueWorlds (false, false)
+
 private theorem indicator_trueWorlds :
     eventIndicator trueWorlds = target := by
   funext u

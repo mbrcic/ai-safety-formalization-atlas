@@ -65,11 +65,11 @@ weekly `0 6 * * 1` cron is an ordinary hosted run.
 | | |
 |---|---|
 | **Initial** | `if: steps.filter.outputs.run_lean == 'true'` — every pull request that touched a `.lean` file, a `lakefile`, a manifest, or one of several scripts. |
-| **Final** | Toolchain migrations, both schedules, release tags, and `workflow_dispatch`. Migration is decided from the diff: `lean-toolchain`, `lakefile.toml`, `lake-manifest.json`, or a baseline dump moved. |
+| **Final** | Toolchain migrations, both schedules, release tags, and `workflow_dispatch`. Migration is decided from the diff: `lean-toolchain` or a baseline dump moved, an existing package's `rev` in `lake-manifest.json` changed, or Lean options in `lakefile.toml` changed. Adding a new dependency is not a migration (2026-10-02: adding Causalean ran the step past the 30-minute pull-request budget). |
 | **Reason** | The check was **built for a migration**. It exists because on a toolchain bump the dangerous change is the one where the source does not move — an upstream rename behind an alias, a different instance chosen, a definition made reducible — and every other check here reads source. Its cost matches that origin: it elaborates the whole environment, 342 s and 2.2 GB on an idle 12-core host against an already-built tree, slower on a two-core hosted runner. That made it the largest single step on an ordinary pull request, and it was triggered by a file extension rather than by the event it was built for. |
 | **Check** | `python3 -c "import yaml; yaml.safe_load(open('.github/workflows/ci.yml'))"` parses; the step's `if:` names `run_migration`, `schedule`, `workflow_dispatch` and `refs/tags/v`. |
 
-**Why `lakefile.toml` is in the migration pattern on its own account.** The
+**Why Lean options in `lakefile.toml` count on their own account.** The
 manifest records resolved revisions, so a `rev` change reaches it. `leanOptions`
 — `autoImplicit`, `pp.*`, `maxHeartbeats` — do not: they change elaboration with
 no manifest movement at all. A pattern that trusted the manifest alone would

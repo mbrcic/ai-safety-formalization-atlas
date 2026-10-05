@@ -1,0 +1,111 @@
+# Bridge review — `Control.OversightBudget.oversight_reduction_le_budget`
+
+**Row `BY-005` · module `AISafetyAtlas/Control/OversightBudget.lean` · `HUMAN_REVIEW`**
+
+Only bridge on this row. **The only quantitative bridge in the repository**, and
+it carries a named witness debt.
+
+## Decision
+
+| | |
+|---|---|
+| Verdict | ☑ `REVIEWED` ☐ `STATEMENT_REVIEWED` ☐ rejected — drop the `BRIDGE` grade |
+| Reviewer | Mario Brcic (mbrcic) |
+| Date | 2026-10-05 |
+| Note | Accepted 2026-10-04 as an upper bound on entropy reduction, one step, plant fixed. Re-signed 2026-10-05 after the closure audit changed the statement: the first term is now the printed open-loop maximum, with noise independent of hazard and reading. |
+
+## The statement
+
+```lean
+public theorem oversight_reduction_le_budget [IsProbabilityMeasure μ] [Fintype S]
+    {F : S → K → N → T} {Z : Ω → N}
+    (hhaz : Measurable O.hazard) (hread : Measurable O.reading) (hZ : Measurable Z)
+    [FiniteRange O.hazard] [FiniteRange O.reading] [FiniteRange O.outcome]
+    (hplant : IsPlant F O.hazard O.reading Z O.outcome)
+    (hindep : IndepFun (⟨O.hazard, O.reading⟩ : Ω → S × K) Z μ) :
+    entropyReduction μ O.hazard O.outcome
+      ≤ openLoopMax F (μ.map Z) + I[O.hazard : O.reading ; μ]
+```
+
+Touchette–Lloyd's bound read as governance. Base:
+`Control.entropyReduction_le_openLoopMax`, Theorem 10 against the printed
+`ΔH_open^max`.
+
+**Changed 2026-10-05.** The signed statement carried a parameter `Δblind` with
+`hblind : OpenLoopBound μ F O.hazard Z Δblind`. The closure audit found that
+bound vacuous when the noise is informative (asked on every event); restricting
+it to the reading's fibres made `Δblind` depend on the channel (with the reading
+equal to the hazard, `0` is admissible), which broke item 3 below. The first term
+is now `openLoopMax F (μ.map Z)`, fixed by the plant and the noise law, never by
+the reading. The cost is the hypothesis `hindep`: the noise is independent of the
+hazard and the reading.
+
+## What to check
+
+1. **It is an upper bound, never a lower one.** A regime with a rich channel may
+   achieve nothing; the bound says only that it cannot achieve more. Reading it
+   as a guarantee is the error a quantitative statement invites.
+2. **`openLoopMax F η` is fixed by the plant and the noise law.** A plant that
+   already reduces uncertainty a lot without observing anything has a large one
+   and the theorem then says little — correctly, because monitoring was never
+   load-bearing there. It is a maximum over every input distribution, so it can
+   exceed what open-loop control achieves on the actual hazard.
+3. **The two terms are separable, which is the practical content.** Mutual
+   information is the only term monitoring moves, and it is a property of the
+   channel rather than of effort, budget or attention.
+4. **The witness debt, paid 2026-09-21.** This item read: the module's two
+   corollaries — `blind_channel_buys_nothing` and
+   `budget_is_the_channel_not_the_volume` — have no `Examples/` instance, the
+   gate carries a raised pin (`--max-ungrounded 11 --max-unapplied 317`, was
+   8/314), and *"declining to sign until a model with a real channel exists is a
+   reasonable verdict"*. That model exists.
+   `AISafetyAtlas.Examples.Control.OversightBudget` witnesses both at fair coins,
+   where the hazard carries `log 4` and the outcome `log 2` — so the
+   `0 ≤ 0 + 0` failure the item was guarding against is excluded by construction
+   rather than by assertion. For the blind channel the bound is **attained**
+   (`blindRegime_entropyReduction_eq`). For the duplication pair it is not, and
+   `oneReading_entropyReduction_eq` names the slack rather than leaving it
+   unsaid: the plant discards the reading, so the channel's `log 2` is budget
+   never spent. Both channels carry `log 2` of mutual information rather than
+   zero. The pin is lowered to `--max-ungrounded 3 --max-unapplied 299`, and
+   the three that remain are the provably vacuous `Causal.O24Solution` pair and
+   one theorem downstream of it. **The condition this item set for signing is
+   met**; the verdict itself is still the reviewer's.
+
+## Allowed claim
+
+> Where the outcome is a fixed function of the hazard, the reading and noise
+> alone, and the noise is independent of the hazard and the reading, an
+> oversight regime reduces entropy from hazard to outcome by at most the
+> open-loop maximum `ΔH_open^max` (the most any constant action reduces it on any
+> input distribution, with the plant and the noise law fixed) plus the mutual
+> information its monitoring channel carries about the hazard. The first term
+> does not depend on the reading, so with the plant and noise law fixed the
+> second term is the only one monitoring moves, and it is a property of the
+> channel rather than of effort or volume.
+
+## Forbidden
+
+- **Not** a guarantee. Upper bound only.
+- **Not** about harm or risk. The quantity is entropy — uncertainty about the
+  outcome relative to the hazard — not expected loss.
+- **Not** about repeated or adaptive oversight. One step, with the plant fixed.
+- **Not** for noise correlated with the hazard or the reading. `hindep` is a
+  hypothesis; where it fails this bound is not established.
+- **Not** a number for any real system. Nothing says what `I[hazard : reading]`
+  is anywhere; the atlas has no monitoring stack, no telemetry and no incident.
+- **Not** "monitoring does not help." It plainly does; this bounds by how much.
+- **Not** a budgeting instrument. No cost and no exchange rate is modelled.
+
+## Misuse tests
+
+| Attempted use | Blocked because |
+|---|---|
+| "Our monitoring gives X bits, so we are Y% safer." | upper bound, and nothing is measured |
+| "A second log stream doubles oversight." | the bound moves only with mutual information |
+| "Oversight is information-limited in practice." | requires measuring a real channel against a real hazard |
+
+## Witness
+
+**None hand-written.** `oversight_reduction_le_budget` is grounded only through
+the generated `Examples/Registry.lean`. See point 4.

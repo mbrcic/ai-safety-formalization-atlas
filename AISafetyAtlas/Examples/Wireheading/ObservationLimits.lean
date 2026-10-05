@@ -72,6 +72,27 @@ example :
       = observedHistory step alwaysStay () 1 (zeroEnv Unit).complement :=
   (history_complement step (zeroEnv Unit) alwaysStay () 1).symm
 
+/-- The two-element class: the zero environment and its complement. -/
+def pair : Env Unit → Prop :=
+  fun ν => ν = zeroEnv Unit ∨ ν = (zeroEnv Unit).complement
+
+/--
+**The class-relative statement, at a class that contains a complement pair.**
+
+This is the theorem the whole module is for, and the file exhibited every one of
+its hypotheses separately -- the pair, the equal histories, the returns `0` and
+`1` -- without ever putting them together. Inside `pair` the true return is not
+a function of what is observed.
+-/
+theorem pair_trueReturn_not_knowable :
+    ¬ Knowable
+        (fun ν : Subtype pair => observedHistory step alwaysStay () 1 ν.1)
+        (fun ν : Subtype pair => trueReturn step 1 () alwaysStay ν.1) :=
+  not_knowable_trueReturn_of_complement_mem (C := pair) step alwaysStay () 1 1
+    (Or.inl rfl) (Or.inr rfl) (by
+      rw [returnOver_zeroEnv, returnOver_zeroEnv_complement]
+      norm_num)
+
 /-! ## The escape route: restrict the class
 
 The class-relative statement needs a complement pair *inside* the class. A class

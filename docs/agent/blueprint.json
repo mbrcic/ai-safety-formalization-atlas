@@ -3,7 +3,7 @@
   "generated_by": "scripts/generate_registry_views.py",
   "note": "Claims and what realizes them, both directions. `claims` is keyed by ledger id and carries the informal sentence, the atlas declarations realizing it with their file and line, and -- when nothing realizes it -- the statability verdict saying what was checked. `declaration_to_claim` is the reverse index: given a Lean name, the claim it was written for. A declaration absent from that index is not unclaimed mathematics; most atlas declarations are supporting lemmas and only the ones a ledger row names appear here.",
   "claim_count": 49,
-  "realized_count": 22,
+  "realized_count": 25,
   "claims": {
     "BY-001": {
       "id": "BY-001",
@@ -12,10 +12,48 @@
       "tags": [
         "control-theory"
       ],
-      "declarations": [],
-      "modules": [],
-      "realized": false,
-      "statability": "TRIAGED_DISTINCT",
+      "declarations": [
+        {
+          "name": "AISafetyAtlas.LinearSystems.determinesStateSolOn_iff_isObservable",
+          "location": [
+            "AISafetyAtlas/LinearSystems/Flow.lean",
+            773
+          ]
+        },
+        {
+          "name": "AISafetyAtlas.Examples.LinearSystems.pair_not_determinesStateSolOn",
+          "location": [
+            "AISafetyAtlas/Examples/LinearSystems/Flow.lean",
+            394
+          ]
+        },
+        {
+          "name": "AISafetyAtlas.LinearSystems.determinesStateOn_iff_isObservable",
+          "location": [
+            "AISafetyAtlas/LinearSystems/Dynamics.lean",
+            311
+          ]
+        },
+        {
+          "name": "AISafetyAtlas.LinearSystems.not_determinesStateOn_of_not_isObservable",
+          "location": [
+            "AISafetyAtlas/LinearSystems/Dynamics.lean",
+            278
+          ]
+        },
+        {
+          "name": "AISafetyAtlas.Examples.LinearSystems.blind_not_determinesStateOn",
+          "location": [
+            "AISafetyAtlas/Examples/LinearSystems/Dynamics.lean",
+            170
+          ]
+        }
+      ],
+      "modules": [
+        "AISafetyAtlas.LinearSystems.Flow"
+      ],
+      "realized": true,
+      "statability": null,
       "missing": [],
       "escape_routes": []
     },
@@ -26,10 +64,48 @@
       "tags": [
         "control-theory"
       ],
-      "declarations": [],
-      "modules": [],
-      "realized": false,
-      "statability": "UNTRIAGED",
+      "declarations": [
+        {
+          "name": "AISafetyAtlas.LinearSystems.isCompletelyReachableSol_iff_isControllable",
+          "location": [
+            "AISafetyAtlas/LinearSystems/Flow.lean",
+            871
+          ]
+        },
+        {
+          "name": "AISafetyAtlas.Examples.LinearSystems.pair_not_isCompletelyReachableSol",
+          "location": [
+            "AISafetyAtlas/Examples/LinearSystems/Flow.lean",
+            404
+          ]
+        },
+        {
+          "name": "AISafetyAtlas.LinearSystems.isCompletelyReachable_iff_isControllable",
+          "location": [
+            "AISafetyAtlas/LinearSystems/Flow.lean",
+            639
+          ]
+        },
+        {
+          "name": "AISafetyAtlas.LinearSystems.not_isReachable_of_not_isControllable",
+          "location": [
+            "AISafetyAtlas/LinearSystems/Dynamics.lean",
+            399
+          ]
+        },
+        {
+          "name": "AISafetyAtlas.Examples.LinearSystems.deaf_not_isCompletelyReachable",
+          "location": [
+            "AISafetyAtlas/Examples/LinearSystems/Flow.lean",
+            171
+          ]
+        }
+      ],
+      "modules": [
+        "AISafetyAtlas.LinearSystems.Flow"
+      ],
+      "realized": true,
+      "statability": null,
       "missing": [],
       "escape_routes": []
     },
@@ -43,7 +119,7 @@
       "declarations": [],
       "modules": [],
       "realized": false,
-      "statability": "UNTRIAGED",
+      "statability": "TRIAGED_DISTINCT",
       "missing": [],
       "escape_routes": []
     },
@@ -186,7 +262,7 @@
           "name": "AISafetyAtlas.Oversight.not_forces_of_card_lt",
           "location": [
             "AISafetyAtlas/Oversight/VarietyBound.lean",
-            109
+            113
           ]
         }
       ],
@@ -225,14 +301,14 @@
           "name": "AISafetyAtlas.Control.entropyReduction_le_of_openLoopBound",
           "location": [
             "AISafetyAtlas/Control/InformationLimits.lean",
-            413
+            418
           ]
         },
         {
           "name": "AISafetyAtlas.Control.condEntropy_ge_of_openLoopBound",
           "location": [
             "AISafetyAtlas/Control/InformationLimits.lean",
-            387
+            392
           ]
         },
         {
@@ -281,56 +357,56 @@
           "name": "AISafetyAtlas.Control.minControlLoss_le_entropy_noise",
           "location": [
             "AISafetyAtlas/Control/InformationLimits.lean",
-            602
+            635
           ]
         },
         {
           "name": "AISafetyAtlas.Control.minControlLoss_eq_sInf_condMutualInfo",
           "location": [
             "AISafetyAtlas/Control/InformationLimits.lean",
-            667
+            700
           ]
         },
         {
           "name": "AISafetyAtlas.Control.minControlLoss_eq_sInf_mutualInfo_sub",
           "location": [
             "AISafetyAtlas/Control/InformationLimits.lean",
-            686
+            719
           ]
         },
         {
           "name": "AISafetyAtlas.Control.minControlLoss_le",
           "location": [
             "AISafetyAtlas/Control/InformationLimits.lean",
-            571
+            604
           ]
         },
         {
           "name": "AISafetyAtlas.Control.minControlLoss_nonneg",
           "location": [
             "AISafetyAtlas/Control/InformationLimits.lean",
-            580
+            613
           ]
         },
         {
           "name": "AISafetyAtlas.Control.measurable_plantOutcome",
           "location": [
             "AISafetyAtlas/Control/InformationLimits.lean",
-            466
+            471
           ]
         },
         {
           "name": "AISafetyAtlas.Control.isPlant_plantOutcome",
           "location": [
             "AISafetyAtlas/Control/InformationLimits.lean",
-            458
+            463
           ]
         },
         {
           "name": "AISafetyAtlas.Control.minControlLoss_eq_entropy_noise_iff_of_attained",
           "location": [
             "AISafetyAtlas/Control/InformationLimits.lean",
-            639
+            672
           ]
         },
         {
@@ -402,12 +478,20 @@
             "AISafetyAtlas/Control/Observability.lean",
             200
           ]
+        },
+        {
+          "name": "AISafetyAtlas.Control.OversightBudget.oversight_reduction_le_budget",
+          "location": [
+            "AISafetyAtlas/Control/OversightBudget.lean",
+            159
+          ]
         }
       ],
       "modules": [
         "AISafetyAtlas.Control.InformationLimits",
         "AISafetyAtlas.Control.OpenLoop",
         "AISafetyAtlas.Control.OpenLoopAttainment",
+        "AISafetyAtlas.Control.OversightBudget",
         "AISafetyAtlas.Control.PolicyKernel",
         "AISafetyAtlas.Control.Purification"
       ],
@@ -486,7 +570,7 @@
       "declarations": [],
       "modules": [],
       "realized": false,
-      "statability": "UNTRIAGED",
+      "statability": "TRIAGED_DISTINCT",
       "missing": [],
       "escape_routes": []
     },
@@ -578,7 +662,8 @@
       ],
       "modules": [
         "AISafetyAtlas.Fairness.ApproximateRiskAssignment",
-        "AISafetyAtlas.Fairness.RiskAssignment"
+        "AISafetyAtlas.Fairness.RiskAssignment",
+        "AISafetyAtlas.Fairness.Tradeoff"
       ],
       "realized": true,
       "statability": null,
@@ -607,35 +692,35 @@
           "name": "AISafetyAtlas.Preference.exists_planner",
           "location": [
             "AISafetyAtlas/Preference.lean",
-            94
+            95
           ]
         },
         {
           "name": "AISafetyAtlas.Preference.exists_reward",
           "location": [
             "AISafetyAtlas/Preference.lean",
-            171
+            172
           ]
         },
         {
           "name": "AISafetyAtlas.Preference.consistent_rewards_eq_univ",
           "location": [
             "AISafetyAtlas/Preference.lean",
-            104
+            105
           ]
         },
         {
           "name": "AISafetyAtlas.Preference.neg_twin",
           "location": [
             "AISafetyAtlas/Preference.lean",
-            119
+            120
           ]
         },
         {
           "name": "AISafetyAtlas.Preference.greedy_rewardOf",
           "location": [
             "AISafetyAtlas/Preference.lean",
-            215
+            216
           ]
         },
         {
@@ -656,35 +741,42 @@
           "name": "AISafetyAtlas.Preference.ReasonableLanguage.proposition_seven",
           "location": [
             "AISafetyAtlas/Preference/Reasonable.lean",
-            203
+            207
           ]
         },
         {
           "name": "AISafetyAtlas.Preference.ReasonableLanguage.proposition_eight",
           "location": [
             "AISafetyAtlas/Preference/Reasonable.lean",
-            224
+            228
+          ]
+        },
+        {
+          "name": "AISafetyAtlas.Preference.behaviour_le_of_evaluatesTo",
+          "location": [
+            "AISafetyAtlas/Preference/Complexity.lean",
+            368
           ]
         },
         {
           "name": "AISafetyAtlas.Preference.explanation_at_least_behaviour",
           "location": [
             "AISafetyAtlas/Preference/Complexity.lean",
-            157
+            177
           ]
         },
         {
           "name": "AISafetyAtlas.Preference.degenerate_explanation_cheap",
           "location": [
             "AISafetyAtlas/Preference/Complexity.lean",
-            178
+            198
           ]
         },
         {
           "name": "AISafetyAtlas.Preference.explanation_complexity_eq_behaviour",
           "location": [
             "AISafetyAtlas/Preference/Complexity.lean",
-            195
+            215
           ]
         },
         {
@@ -698,7 +790,7 @@
           "name": "AISafetyAtlas.Preference.OverrideModel.mixtureValue_rationalise",
           "location": [
             "AISafetyAtlas/Preference/Override.lean",
-            212
+            216
           ]
         },
         {
@@ -712,7 +804,7 @@
           "name": "AISafetyAtlas.Preference.OverrideModel.rationalise_strictly_better",
           "location": [
             "AISafetyAtlas/Preference/Override.lean",
-            113
+            117
           ]
         }
       ],
@@ -756,13 +848,6 @@
           "location": [
             "AISafetyAtlas/Verification.lean",
             57
-          ]
-        },
-        {
-          "name": "AISafetyAtlas.Verification.AgentBehavior.no_behavioral_safety_verifier",
-          "location": [
-            "AISafetyAtlas/Verification/AgentBehavior.lean",
-            85
           ]
         }
       ],
@@ -1175,7 +1260,7 @@
       "declarations": [],
       "modules": [],
       "realized": false,
-      "statability": "UNTRIAGED",
+      "statability": "TRIAGED_DISTINCT",
       "missing": [],
       "escape_routes": []
     },
@@ -1203,10 +1288,20 @@
         "computability",
         "verification"
       ],
-      "declarations": [],
-      "modules": [],
-      "realized": false,
-      "statability": "UNTRIAGED",
+      "declarations": [
+        {
+          "name": "AISafetyAtlas.Verification.Containment.harming_undecidable",
+          "location": [
+            "AISafetyAtlas/Verification/Containment.lean",
+            163
+          ]
+        }
+      ],
+      "modules": [
+        "AISafetyAtlas.Verification.Containment"
+      ],
+      "realized": true,
+      "statability": null,
       "missing": [],
       "escape_routes": []
     },
@@ -1271,7 +1366,7 @@
       "declarations": [],
       "modules": [],
       "realized": false,
-      "statability": "UNTRIAGED",
+      "statability": "TRIAGED_DISTINCT",
       "missing": [],
       "escape_routes": []
     },
@@ -1314,7 +1409,7 @@
       "declarations": [],
       "modules": [],
       "realized": false,
-      "statability": "UNTRIAGED",
+      "statability": "TRIAGED_DISTINCT",
       "missing": [],
       "escape_routes": []
     },
@@ -1398,7 +1493,7 @@
       "declarations": [],
       "modules": [],
       "realized": false,
-      "statability": "CANDIDATE_LEAD",
+      "statability": "TRIAGED_DISTINCT",
       "missing": [],
       "escape_routes": []
     },
@@ -1412,7 +1507,7 @@
       "declarations": [],
       "modules": [],
       "realized": false,
-      "statability": "UNTRIAGED",
+      "statability": "TRIAGED_DISTINCT",
       "missing": [],
       "escape_routes": []
     },
@@ -1428,7 +1523,7 @@
           "name": "AISafetyAtlas.Wireheading.CRMDP.Model.everitt_theorem_eleven",
           "location": [
             "AISafetyAtlas/Wireheading/CRMDP.lean",
-            338
+            434
           ]
         }
       ],
@@ -1451,7 +1546,7 @@
       "declarations": [],
       "modules": [],
       "realized": false,
-      "statability": "UNTRIAGED",
+      "statability": "TRIAGED_DISTINCT",
       "missing": [],
       "escape_routes": []
     },
@@ -1500,9 +1595,17 @@
             "AISafetyAtlas/Compositional/Symmetry.lean",
             96
           ]
+        },
+        {
+          "name": "AISafetyAtlas.Compositional.AgentNetwork.symmetry_is_the_shared_cause",
+          "location": [
+            "AISafetyAtlas/Compositional/AgentNetwork.lean",
+            131
+          ]
         }
       ],
       "modules": [
+        "AISafetyAtlas.Compositional.AgentNetwork",
         "AISafetyAtlas.Compositional.Symmetry"
       ],
       "realized": true,
@@ -1760,12 +1863,14 @@
     "AISafetyAtlas.Combinatorics.basisClass_histogram_eq_permOrbit": "BY-021",
     "AISafetyAtlas.Combinatorics.card_closedUnderPermutation_nonempty": "BY-021",
     "AISafetyAtlas.Combinatorics.exists_perm_rel_not_iff": "BY-021",
+    "AISafetyAtlas.Compositional.AgentNetwork.symmetry_is_the_shared_cause": "BY-043",
     "AISafetyAtlas.Compositional.Symmetry.Protocol.no_unique_leader_from_symmetric_start": "BY-043",
     "AISafetyAtlas.Computability.halting_problem": "BY-014",
     "AISafetyAtlas.Computability.halting_re": "BY-014",
     "AISafetyAtlas.Computability.nonhalting_not_re": "BY-014",
     "AISafetyAtlas.Computability.rice": "BY-012",
     "AISafetyAtlas.Computability.rice_code_iff": "BY-012",
+    "AISafetyAtlas.Control.OversightBudget.oversight_reduction_le_budget": "BY-005",
     "AISafetyAtlas.Control.ashby_logVariety_ge": "BY-004",
     "AISafetyAtlas.Control.ashby_logVariety_ge_mul": "BY-004",
     "AISafetyAtlas.Control.ashby_variety_ge": "BY-004",
@@ -1807,6 +1912,10 @@
     "AISafetyAtlas.Control.mutualInfo_prod_eq_of_sensorLoss_eq_zero": "BY-005",
     "AISafetyAtlas.Control.perfectlyObservable_iff_sensorLoss_eq_zero": "BY-005",
     "AISafetyAtlas.Control.two_le_card_admittedOutcomes": "BY-004",
+    "AISafetyAtlas.Examples.LinearSystems.blind_not_determinesStateOn": "BY-001",
+    "AISafetyAtlas.Examples.LinearSystems.deaf_not_isCompletelyReachable": "BY-002",
+    "AISafetyAtlas.Examples.LinearSystems.pair_not_determinesStateSolOn": "BY-001",
+    "AISafetyAtlas.Examples.LinearSystems.pair_not_isCompletelyReachableSol": "BY-002",
     "AISafetyAtlas.Fairness.approx_perfect_prediction_or_equal_base_rates": "BY-010",
     "AISafetyAtlas.Fairness.approx_tradeoff_of_score_relative_calibration": "BY-010",
     "AISafetyAtlas.Fairness.average_lower_bound": "BY-010",
@@ -1859,6 +1968,12 @@
     "AISafetyAtlas.Learning.permInvariant_of_closedUnderPermutation": "BY-021",
     "AISafetyAtlas.Learning.permInvariant_of_nfl": "BY-021",
     "AISafetyAtlas.Learning.ruleVisit_permRule": "BY-021",
+    "AISafetyAtlas.LinearSystems.determinesStateOn_iff_isObservable": "BY-001",
+    "AISafetyAtlas.LinearSystems.determinesStateSolOn_iff_isObservable": "BY-001",
+    "AISafetyAtlas.LinearSystems.isCompletelyReachableSol_iff_isControllable": "BY-002",
+    "AISafetyAtlas.LinearSystems.isCompletelyReachable_iff_isControllable": "BY-002",
+    "AISafetyAtlas.LinearSystems.not_determinesStateOn_of_not_isObservable": "BY-001",
+    "AISafetyAtlas.LinearSystems.not_isReachable_of_not_isControllable": "BY-002",
     "AISafetyAtlas.Logic.chaitin_bound": "BY-015",
     "AISafetyAtlas.Logic.chaitin_incompleteness": "BY-015",
     "AISafetyAtlas.Logic.godel_first_incompleteness": "BY-013",
@@ -1875,6 +1990,7 @@
     "AISafetyAtlas.Preference.Source.ReasonableForF.proposition_eight": "BY-011",
     "AISafetyAtlas.Preference.Source.ReasonableForF.proposition_seven": "BY-011",
     "AISafetyAtlas.Preference.Source.ReasonableForF.theorem_two_conditional": "BY-011",
+    "AISafetyAtlas.Preference.behaviour_le_of_evaluatesTo": "BY-011",
     "AISafetyAtlas.Preference.consistent_rewards_eq_univ": "BY-011",
     "AISafetyAtlas.Preference.degenerate_explanation_cheap": "BY-011",
     "AISafetyAtlas.Preference.exists_planner": "BY-011",
@@ -1890,7 +2006,7 @@
     "AISafetyAtlas.SelfAwareness.Model.process_not_self_aware": "BY-044",
     "AISafetyAtlas.SocialChoice.Utility.arrow": "BY-007",
     "AISafetyAtlas.SocialChoice.arrow": "BY-007",
-    "AISafetyAtlas.Verification.AgentBehavior.no_behavioral_safety_verifier": "BY-012",
+    "AISafetyAtlas.Verification.Containment.harming_undecidable": "BY-025",
     "AISafetyAtlas.Verification.Robot.action_safety_unverifiable": "BY-033",
     "AISafetyAtlas.Verification.rice": "BY-012",
     "AISafetyAtlas.Wireheading.CRMDP.Model.everitt_theorem_eleven": "BY-039"

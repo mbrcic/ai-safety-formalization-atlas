@@ -9,7 +9,7 @@ reviews, and release evidence are not mixed in one flat directory.
 | [`guide/`](guide/) | Human-facing explainers: methodology, open work, model notes, tasks | Yes |
 | [`provenance/`](provenance/) | Discovery evidence and external reproduction narrative | Search JSON is generated; narrative yes |
 | [`status/`](status/) | Generated coverage tables and indexes | **No** — regenerate |
-| [`bridges/`](bridges/) | Bridge review packages and human review evidence | Yes |
+| [`interpretation-reviews/`](interpretation-reviews/) | Human sign-off on a claim row's AI reading (`ai_interpretation_status`). Not Lean; see `type: BRIDGE` for bridges. | Yes |
 | [`releases/`](releases/) | Immutable release evidence notes | Freeze after release |
 
 Root project files still used for navigation: [`README.md`](../README.md),
@@ -123,16 +123,25 @@ Regenerate with `python3 scripts/generate_registry_views.py` (also refreshes
   filed against the MAIS open-problems agenda, with what checking each one found,
   kept apart from which artifact the ledger grades it against
 
-## Bridges (human semantic review)
+## Interpretation reviews (human semantic review)
 
-- [CT-3 robot review package](bridges/ct3-robot-review-package.md)
-- [BY-012 AgentBehavior review](bridges/review-by-012-agentbehavior.md)
-- [BY-044 SelfAwareness review](bridges/review-by-044-selfawareness.md) — statement
+**Start at the [bridge register](interpretation-reviews/README.md)** — one review
+file per bridge declaration, with what a signature means and where it is
+recorded. **37 bridges, all signed: 30 `REVIEWED`, 7 `STATEMENT_REVIEWED`.** The label lives on the declaration,
+not the row.
+
+Signed:
+
+- [CT-3 robot review package](interpretation-reviews/ct3-robot-review-package.md) — `BY-033`
+- [BY-012 AgentBehavior review](interpretation-reviews/review-by-012-agentbehavior.md)
+- [Oversight VarietyBound package](interpretation-reviews/review-oversight-varietybound.md) —
+  `BY-004`, accepted at `REVIEWED` 2026-08-17; also covers
+  `LAND-OVERSIGHT-VARIETY-001`, which cannot carry a signature of its own
+
+Reviewed but deliberately not graduated:
+
+- [BY-044 SelfAwareness review](interpretation-reviews/review-by-044-selfawareness.md) — statement
   reviewed; the AI-system interpretation is withheld
-- [Oversight VarietyBound package](bridges/review-oversight-varietybound.md) —
-  **prepared and unsigned.** The statement review is argued and the maintainer
-  decision is not made, so the row stays `HUMAN_REVIEW` and the reviewed-bridge
-  count does not include it
 
 ## Releases
 
@@ -149,6 +158,6 @@ Regenerate with `python3 scripts/generate_registry_views.py` (also refreshes
 
 - Registry `formal_library_search.evidence_file` points at
   `docs/provenance/formalization-search.json`.
-- Bridge `bridge_review.evidence` points at a file under `docs/bridges/`.
+- Bridge `interpretation_review.evidence` points at a file under `docs/interpretation-reviews/`.
 - Prefer links through this map or the root README rather than deep-coupling
   scripts to ad-hoc paths.

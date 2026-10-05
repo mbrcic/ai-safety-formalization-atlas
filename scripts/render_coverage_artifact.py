@@ -52,7 +52,19 @@ def render_blocks(lines: list[str]) -> str:
     out: list[str] = []
     i = 0
     while i < len(lines):
+        before = i
         line = lines[i]
+        # A sub-heading inside a section body. Without this branch `#` lines reach
+        # the paragraph loop below, which refuses to consume them and leaves `i`
+        # where it was -- an infinite loop that appends an empty <p> every pass.
+        # The audit's first in-section `###`, the module ledger, hit exactly that:
+        # nine minutes and six gigabytes with no output. The `before`/`advanced`
+        # guard at the end of this loop is so the next such branch fails loudly.
+        if line.startswith("#"):
+            level = min(len(line) - len(line.lstrip("#")) + 1, 6)
+            out.append(f"<h{level}>{inline(line.lstrip('#').strip())}</h{level}>")
+            i += 1
+            continue
         if line.startswith("|"):
             rows = []
             while i < len(lines) and lines[i].startswith("|"):
@@ -115,6 +127,11 @@ def render_blocks(lines: list[str]) -> str:
         text = " ".join(para)
         cls = "verdict" if text.lstrip().startswith("**") else "lede"
         out.append(f'<p class="{cls}">{inline(text)}</p>')
+        if i == before:
+            raise RuntimeError(
+                "render_coverage_artifact: no branch consumed line "
+                f"{i}, so this would loop forever: {lines[i]!r}"
+            )
     return "\n".join(out)
 
 

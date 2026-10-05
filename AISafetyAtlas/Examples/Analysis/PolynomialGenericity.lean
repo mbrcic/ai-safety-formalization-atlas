@@ -53,6 +53,33 @@ public theorem ae_eval_ne_zero_two :
   have := congrArg (MvPolynomial.eval (fun _ => (0 : ℝ))) h
   simp at this
 
+/-- The witness polynomial is nonzero — factored out for reuse below. -/
+private theorem hp_two : (X 0 * X 1 - 1 : MvPolynomial (Fin 2) ℝ) ≠ 0 := by
+  intro h
+  have := congrArg (MvPolynomial.eval (fun _ => (0 : ℝ))) h
+  simp at this
+
+/-- **The `Measure.pi` form, at the same witness polynomial**, against the
+product of two copies of Lebesgue measure on `ℝ`. -/
+public theorem ae_eval_ne_zero_two_pi :
+    ∀ᵐ x ∂(Measure.pi (fun _ : Fin 2 => (volume : Measure ℝ))),
+      MvPolynomial.eval x (X 0 * X 1 - 1 : MvPolynomial (Fin 2) ℝ) ≠ 0 :=
+  ae_eval_ne_zero_pi (fun _ : Fin 2 => (volume : Measure ℝ)) hp_two
+
+/-- The null-set form, at the same witness. -/
+public theorem measure_setOf_eval_eq_zero_two_pi :
+    Measure.pi (fun _ : Fin 2 => (volume : Measure ℝ))
+        {x : Fin 2 → ℝ | MvPolynomial.eval x (X 0 * X 1 - 1 : MvPolynomial (Fin 2) ℝ) = 0}
+      = 0 :=
+  measure_setOf_eval_eq_zero_pi (fun _ : Fin 2 => (volume : Measure ℝ)) hp_two
+
+/-- **The additive Haar form**, at Lebesgue measure on `Fin 2 → ℝ` itself — the
+cheapest additive Haar measure available. -/
+public theorem ae_eval_ne_zero_two_addHaar :
+    ∀ᵐ x ∂(volume : Measure (Fin 2 → ℝ)),
+      MvPolynomial.eval x (X 0 * X 1 - 1 : MvPolynomial (Fin 2) ℝ) ≠ 0 :=
+  ae_eval_ne_zero_addHaar (volume : Measure (Fin 2 → ℝ)) hp_two
+
 /-- **`p ≠ 0` is load-bearing.** At the zero polynomial every point is a root, so
 the conclusion fails outright — the lemma is not true for want of a hypothesis
 nothing satisfies. -/

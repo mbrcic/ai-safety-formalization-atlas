@@ -242,7 +242,7 @@ existed.
 `Prop` and a minimal row, with no grade of any kind**: an id, the statement, the
 declaration, who proposed it, the date, and optionally why it matters. There is
 no `source_ref`, no `source_scope`, no `source_fidelity`, no `relationship` and
-no `ai_bridge_status` — and those fields are not merely unused,
+no `ai_interpretation_status` — and those fields are not merely unused,
 [`scripts/validate_intake.py`](../../scripts/validate_intake.py) **refuses**
 them. A proposer may deposit a statement; only a human grades one. That split
 is the reason the lane exists, and it is a check rather than a convention.

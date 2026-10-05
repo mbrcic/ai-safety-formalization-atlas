@@ -1,6 +1,7 @@
 module
 
 public import AISafetyAtlas.Compositional.Knowability
+public import AISafetyAtlas.Compositional.Hyperproperties.Knowability
 
 /-!
 # A worked network where the view decodes the state
@@ -30,6 +31,7 @@ the mechanism rather than a necessity.
 namespace AISafetyAtlas.Examples.Compositional
 
 open AISafetyAtlas.Compositional.Networks
+open AISafetyAtlas.Compositional.Hyperproperties
 
 /-- Two nodes, one port each, each pointing at the other. -/
 @[expose] public def pair : Network (Fin 2) 1 where
@@ -66,5 +68,54 @@ public theorem apart_view_ne : view pair apart 0 0 ≠ view pair apart 0 1 := by
   intro h
   have := congrFun h ⟨[], Nat.le_refl 0⟩
   simp [view, pathTo, apart] at this
+
+/-! ## The collision that breaks finite-observation safety
+
+`not_isSafetyPredicate_of_realizedSet_collision` says an ordinary safety
+predicate cannot separate two batches that realize the same observations.
+Nothing had ever met its hypothesis, so the theorem was a statement about a
+collision no pair exhibited.
+
+The pair below is the standard one: a trace is a **public output and a secret**,
+the observer sees the public component only, and the predicate asks about the
+secret. Two batches that look identical to the observer differ under the
+predicate, so the predicate is not finite-observation safety -- which is the
+usual reason a confidentiality requirement is not a safety property.
+-/
+
+/-- A trace: what is published, and what is kept. -/
+public abbrev Leaky : Type := Bool × Bool
+
+/-- The observer sees the published component and nothing else. -/
+@[expose] public def publicPrefix : Bool → Leaky → Prop := fun p t => p = t.1
+
+/-- The predicate asks about the secret. -/
+@[expose] public def leaksSecret : Finset Leaky → Prop := fun b => (true, true) ∈ b
+
+/-- **Two batches the observer cannot tell apart.** Both publish `true`; they
+differ only in what they keep. -/
+public theorem realizedSet_collision :
+    realizedSet publicPrefix {(true, true)} = realizedSet publicPrefix {(true, false)} := by
+  ext M
+  constructor
+  · intro h p hp
+    obtain ⟨t, ht, hpt⟩ := h p hp
+    simp only [Finset.coe_singleton, Set.mem_singleton_iff] at ht
+    exact ⟨(true, false), by simp, by simpa [publicPrefix, ht] using hpt⟩
+  · intro h p hp
+    obtain ⟨t, ht, hpt⟩ := h p hp
+    simp only [Finset.coe_singleton, Set.mem_singleton_iff] at ht
+    exact ⟨(true, true), by simp, by simpa [publicPrefix, ht] using hpt⟩
+
+/-- **But the predicate tells them apart.** -/
+public theorem leaksSecret_separates :
+    leaksSecret {(true, true)} ≠ leaksSecret {(true, false)} := by
+  simp [leaksSecret]
+
+/-- **So it is not a finite-observation safety predicate.** No finite set of
+public prefixes witnesses the leak, because the leak is invisible in them. -/
+public theorem not_isSafetyPredicate_leaksSecret :
+    ¬ IsSafetyPredicate publicPrefix leaksSecret :=
+  not_isSafetyPredicate_of_realizedSet_collision realizedSet_collision leaksSecret_separates
 
 end AISafetyAtlas.Examples.Compositional

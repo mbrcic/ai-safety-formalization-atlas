@@ -1,0 +1,15 @@
+{
+  "note": "Unwitnessed leaves whose antecedent is provably uninhabited, so that no Examples/ application can ever be written for them. Read by scripts/check_witness_debt.py, which checks every name here against docs/status/declaration-index.json and fails if the theorem is no longer an unwitnessed leaf, if the emptiness proof no longer exists, or if either name is absent. These theorems stay inside the ungrounded and unapplied counts -- nothing in the build exercises them, and that is true -- and leave the work queue, because the work does not exist. An entry is a claim about the tree and is falsified the day somebody inhabits the type.",
+  "declarations": {
+    "AISafetyAtlas.Causal.O24Solution.behaviorEq_imp_eq": {
+      "empty_type": "AISafetyAtlas.Causal.O24Solution",
+      "emptiness_proof": "AISafetyAtlas.Examples.Causal.O24Refutation.isEmpty_o24Solution",
+      "reason": "Conclusion (a) of MAIS-A2 prob:effective, read off the bundle. A witness would need a term of O24Solution, and the refutation proves conclusions (a) and (c) cannot both hold, so the type is empty. CONJ-012 records the negative resolution."
+    },
+    "AISafetyAtlas.Causal.O24Solution.marginClass_subset": {
+      "empty_type": "AISafetyAtlas.Causal.O24Solution",
+      "emptiness_proof": "AISafetyAtlas.Examples.Causal.O24Refutation.isEmpty_o24Solution",
+      "reason": "The cut class of a hypothetical solution sits inside the margin class. Same empty antecedent: the theorem is about a solution to prob:effective, and there are none."
+    }
+  }
+}

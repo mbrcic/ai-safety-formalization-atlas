@@ -39,6 +39,21 @@ theorem stuckDevice_not_recursive : ¬ Recursive stuckDevice := by
   intro h
   exact Bool.noConfusion (h true false rfl)
 
+/-- A device whose setup takes the value `false` at no state: `false` is an
+unrealized setup value, so Definition 8's vacuous clause has a genuine
+instance to fire on. -/
+public abbrev sparseDevice : InferenceDevice.{0, 0} Bool :=
+  { Setup := Bool, setup := fun _ => true, concl := id,
+    concl_surjective := fun b => ⟨b, rfl⟩ }
+
+theorem sparseDevice_not_realized_false : ¬ sparseDevice.Realized false := by
+  rintro ⟨u, hu⟩
+  exact Bool.noConfusion hu
+
+/-- Halting holds vacuously at the unrealized setup value. -/
+theorem sparseDevice_haltsAt_false : HaltsAt sparseDevice false :=
+  haltsAt_of_not_realized sparseDevice sparseDevice_not_realized_false
+
 /-- The setup value of the stuck device is realized, so Definition 8's second
 half is not satisfied vacuously. -/
 theorem stuckDevice_realized : stuckDevice.Realized () := ⟨true, rfl⟩
@@ -135,5 +150,28 @@ theorem not_prefixFree_haltingDevice : ¬ PrefixFree uniformBool haltingDevice :
         Real.rpow_lt_rpow_of_exponent_gt (by norm_num) (by norm_num) h1
   intro hle
   nlinarith [hgt]
+
+/-- The uniform mass on `Bool`, as a `FinPMF`. -/
+noncomputable def boolPmf : FinPMF Bool where
+  mass := fun _ => 1 / 2
+  nonneg := fun _ => by norm_num
+  sum_one := by norm_num
+
+/-- **Definition 9's `Finset` mass bound**, at the uniform mass and the halting
+device: the two fibres' pushed-forward mass sums to exactly `1`, which is
+`≤ 1`. -/
+theorem boolPmf_sum_pushOnImage_le_one :
+    (Finset.univ : Finset Bool).sum (fun x => pushOnImage boolPmf haltingDevice.setup x)
+      ≤ 1 :=
+  sum_pushOnImage_le_one boolPmf haltingDevice Finset.univ
+
+/-- **The two readings of `PrefixFree` agree on a finite setup range.** The
+base-consistent and printed readings disagree at `haltingDevice`
+(`base2_sum_eq_one`/`not_prefixFree_haltingDevice`), but the *identification*
+between the `Finset`- and measure-scoped versions of each reading holds
+regardless. -/
+theorem prefixFreeOn_iff_prefixFree_haltingDevice :
+    PrefixFreeOn uniformBool haltingDevice ↔ PrefixFree uniformBool haltingDevice :=
+  prefixFreeOn_iff_prefixFree uniformBool haltingDevice
 
 end AISafetyAtlas.Examples.Inference.Halting

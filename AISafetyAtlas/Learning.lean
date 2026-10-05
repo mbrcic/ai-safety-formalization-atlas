@@ -38,7 +38,7 @@ Two classical **finite uniform-averaging** NFL cores:
 - **Not** full Wolpert 1996/1997 (stochastic algorithms, time-varying
   objectives, …). Graded **RELATED** for the atlas cores.
 
-No AI-system bridge; `ai_bridge_status` remains human review.
+No AI-system bridge; `ai_interpretation_status` remains human review.
 -/
 
 open Classical

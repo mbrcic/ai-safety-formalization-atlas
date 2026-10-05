@@ -58,6 +58,20 @@ Landscape entry: `LAND-GOAL-001`.  No AI-system bridge is asserted.
 
 namespace AISafetyAtlas.Wireheading.GoalPreservationSource
 
+/-- **Print's `Π`, the set of all policies.**
+
+Definition 3 reads: *"Let `Π = {(𝒜 × ℰ)* → 𝒜}` be the set of all policies, and
+let `ι : 𝒫 → Π` assign names to policies."*  So `Π` is the full function space
+from histories to actions, with `𝒜 = 𝒜̌ × 𝒫` — a world action paired with the
+name of the next policy.  That is exactly the codomain of `Model.act`, which is
+therefore `ι` and not merely an action-selection rule.
+
+Naming `Π` costs nothing and buys the distinction print draws immediately after:
+`𝒫` and `Π` are different sets, `ι` need not be onto, and *"some policies will
+necessarily lack names"*.  Nothing in this module assumes otherwise. -/
+public abbrev Policy (History WorldAction PolicyName : Type*) : Type _ :=
+  History → WorldAction × PolicyName
+
 /--
 A policy self-modification model with stochastic percepts.
 
@@ -97,6 +111,20 @@ namespace Model
 variable {History WorldAction PolicyName Percept : Type*} [Fintype Percept]
 variable (M : Model History WorldAction PolicyName Percept)
 
+/-- **Print's `ι`.**  Definition 3's naming map, which `act` already is: it
+sends a name to the policy that name denotes.  Stated separately so the
+quadruple `(𝒜̌, ℰ, 𝒫, ι)` has all four components present as objects.
+
+`ι` is **not** assumed surjective anywhere, which is print's own reading: it
+says *"some policies will necessarily lack names"*. -/
+@[expose] public def name : PolicyName → Policy History WorldAction PolicyName :=
+  M.act
+
+/-- `ι(p)` is `act p`, definitionally: naming the map changed nothing. -/
+public theorem name_eq_act (p : PolicyName) : M.name p = M.act p := rfl
+
+
+
 /-- The realistic `Q` value of a world-action and next-policy pair, as an
 expectation over percepts. -/
 @[expose] public noncomputable def qValue (h : History)
@@ -104,6 +132,38 @@ expectation over percepts. -/
   ∑ e : Percept, M.prob h a.1 e *
     (M.utility (M.extend h a.1 e) +
       M.discount * M.contValue a.2 (M.extend h a.1 e))
+
+/--
+**Print's Definition 12 carries an index on the utility function.** Equation (8)
+is `Q_t^re(æ_<k a_k) = 𝔼[u_t(ǎe_1:k) + γ V_t^{re,π_k+1}(æ_1:k) ∣ æ_<k ǎ_k]`, a
+family over `t`. This is that `Q` at an arbitrary member of the family, so the
+index is visible rather than silently fixed.
+-/
+@[expose] public noncomputable def qValueWith (u : History → ℝ) (h : History)
+    (a : WorldAction × PolicyName) : ℝ :=
+  ∑ e : Percept, M.prob h a.1 e *
+    (u (M.extend h a.1 e) +
+      M.discount * M.contValue a.2 (M.extend h a.1 e))
+
+/-- At the initial utility the family's member is `qValue`. -/
+public theorem qValueWith_utility : M.qValueWith M.utility = M.qValue := rfl
+
+/--
+**The index is degenerate at print's Definition 3, which is the model here.**
+In a *policy* self-modification model the action selects the next policy and
+nothing else — print, introducing the two models: modifications "do not affect
+the agent's utility function or belief" — so every member of print's family
+`u_t` is `u₁` and every `Q_t` is `qValue`. The family is non-trivial only at
+print's Definition 5, the utility self-modification model, which this cluster
+does not have.
+
+This is what makes the single-utility rendering print's Definition 12 at print's
+own Definition 3, rather than one member of a family the rendering dropped.
+-/
+public theorem qValueWith_eq_qValue_of_utility_fixed
+    (u : ℕ → History → ℝ) (hu : ∀ t, u t = M.utility) (t : ℕ) :
+    M.qValueWith (u t) = M.qValue := by
+  rw [hu t, qValueWith_utility]
 
 /-- A named policy chooses a `Q`-maximizing action at a history. -/
 @[expose] public def OptimalAt (p : PolicyName) (h : History) : Prop :=

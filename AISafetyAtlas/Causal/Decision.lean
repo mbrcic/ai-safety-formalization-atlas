@@ -47,6 +47,15 @@ public theorem Model.jointProbMix_nonneg (M : Model C dim 𝕜) (w : ProbMixture
   unfold Model.jointProbMix
   exact Finset.sum_nonneg fun σ _ ↦ mul_nonneg (w.2.1 σ) (M.jointProb_nonneg σ v)
 
+/-- **A point-mass mixture is the profile it sits on.** RE24 Definition 3's
+simplex contains the single profiles, and this is the identification. -/
+@[simp] public theorem Model.jointProbMix_dirac (M : Model C dim 𝕜)
+    (σ₀ : InterventionProfile C dim) (v : Assignment C dim) :
+    M.jointProbMix (ProbMixture.dirac (𝕜 := 𝕜) σ₀).1 v = M.jointProb σ₀ v := by
+  classical
+  unfold Model.jointProbMix
+  simp [ProbMixture.dirac, ite_mul]
+
 public theorem Model.jointProbMix_sum (M : Model C dim 𝕜) (w : ProbMixture C dim 𝕜) :
     ∑ v : Assignment C dim, M.jointProbMix w.1 v = 1 := by
   unfold Model.jointProbMix
@@ -109,6 +118,79 @@ public theorem fibreRep_idem (M : Model C dim 𝕜) (visible : Finset C)
     fibreRep M visible (fibreRep M visible v) = fibreRep M visible v := by
   funext c
   by_cases hc : c ∈ visible <;> simp [fibreRep, hc]
+
+/-- **The representatives are exactly the assignments already pinned off
+`visible`.** `fibreRep` picks one point per fibre by sending every invisible
+coordinate to the default state, so its image is the set of assignments that
+are already there. -/
+public theorem mem_image_fibreRep_iff (M : Model C dim 𝕜) (visible : Finset C)
+    (r : Assignment C dim) :
+    r ∈ Finset.univ.image (fibreRep M visible) ↔
+      ∀ c ∉ visible, r c = ⟨0, M.dim_pos c⟩ := by
+  classical
+  constructor
+  · rintro hr c hc
+    obtain ⟨v, -, rfl⟩ := Finset.mem_image.mp hr
+    simp [fibreRep, hc]
+  · intro h
+    refine Finset.mem_image.mpr ⟨r, Finset.mem_univ r, ?_⟩
+    funext c
+    by_cases hc : c ∈ visible
+    · simp [fibreRep, hc]
+    · rw [h c hc]
+      simp [fibreRep, hc]
+
+/--
+**One visible coordinate, split off.** A sum over the representatives of
+`visible` is a sum over the representatives of `visible` without `d`, and then
+over the states of `d`.
+
+The bijection is `(q, a) ↦ q[d ↦ a]`: a representative of `visible` is pinned
+to the default off `visible`, so zeroing its `d` coordinate lands in the smaller
+image and nothing else is touched. This is the combinatorial half of regrouping
+an expectation by one variable, and it carries no probability.
+-/
+public theorem sum_image_fibreRep_erase (M : Model C dim 𝕜) {visible : Finset C}
+    {d : C} (hd : d ∈ visible) (F : Assignment C dim → 𝕜) :
+    ∑ r ∈ Finset.univ.image (fibreRep M visible), F r
+      = ∑ q ∈ Finset.univ.image (fibreRep M (visible.erase d)),
+          ∑ a : Fin (dim d), F (Function.update q d a) := by
+  classical
+  rw [← Finset.sum_product']
+  refine (Finset.sum_nbij' (i := fun p : Assignment C dim × Fin (dim d) ↦
+      Function.update p.1 d p.2)
+    (j := fun r : Assignment C dim ↦ (Function.update r d ⟨0, M.dim_pos d⟩, r d))
+    ?_ ?_ ?_ ?_ ?_).symm
+  · rintro ⟨q, a⟩ hq
+    rw [Finset.mem_product] at hq
+    rw [mem_image_fibreRep_iff] at hq ⊢
+    intro c hc
+    have hcd : c ≠ d := fun hcd ↦ hc (hcd ▸ hd)
+    rw [Function.update_of_ne hcd]
+    exact hq.1 c (fun hx ↦ hc (Finset.mem_of_mem_erase hx))
+  · intro r hr
+    rw [mem_image_fibreRep_iff] at hr
+    rw [Finset.mem_product, mem_image_fibreRep_iff]
+    refine ⟨?_, Finset.mem_univ _⟩
+    intro c hc
+    show Function.update r d ⟨0, M.dim_pos d⟩ c = ⟨0, M.dim_pos c⟩
+    by_cases hcd : c = d
+    · subst hcd; simp
+    · rw [Function.update_of_ne hcd]
+      exact hr c fun hx ↦ hc (Finset.mem_erase.mpr ⟨hcd, hx⟩)
+  · rintro ⟨q, a⟩ hq
+    rw [Finset.mem_product, mem_image_fibreRep_iff] at hq
+    have hqd : q d = ⟨0, M.dim_pos d⟩ := hq.1 d (Finset.notMem_erase d visible)
+    refine Prod.ext ?_ ?_
+    · show Function.update (Function.update q d a) d ⟨0, M.dim_pos d⟩ = q
+      rw [Function.update_idem, ← hqd, Function.update_eq_self]
+    · show Function.update q d a d = a
+      simp
+  · intro r hr
+    show Function.update (Function.update r d ⟨0, M.dim_pos d⟩) d (r d) = r
+    rw [Function.update_idem, Function.update_eq_self]
+  · rintro ⟨q, a⟩ _
+    rfl
 
 namespace Model
 
@@ -210,6 +292,91 @@ public theorem Δmask_fibreRep (M : Model C dim 𝕜) (gap : Assignment C dim �
     simpa [fibreRep, hc] using hu c hc
   · intro hu c hc
     simpa [fibreRep, hc] using hu c hc
+
+/-! ## Expectations against a self-determining set
+
+`Model.marginal_eq_prod` collapses the joint onto a self-determining set when the
+integrand is an indicator. `sum_jointProb_mul` is the same collapse against an
+**arbitrary** integrand that reads only that set, which is the form an expected
+utility takes. Nothing here is about decisions; it is the law the agreement
+between this module's projection and
+`AISafetyAtlas.Causal.DecisionNetwork.expectedUtility` runs on.
+-/
+
+open Model in
+/--
+**An expectation against a self-determining set is a sum over its fibres.**
+
+If the integrand reads only `s`, and `s` carries its own factors under `σ`, then
+the whole joint collapses to the product of `s`'s factors at one representative
+per fibre. The discarded factors sum to one by acyclicity, which is what
+`Model.marginal_eq_prod` supplies; this lemma is that theorem with the indicator
+replaced by the integrand.
+-/
+public theorem sum_jointProb_mul (M : Model C dim 𝕜) (σ : InterventionProfile C dim)
+    {s : Finset C} (hdet : M.SelfDetermining σ s)
+    {g : Assignment C dim → 𝕜}
+    (hg : ∀ v w : Assignment C dim, (∀ c ∈ s, v c = w c) → g v = g w) :
+    ∑ v : Assignment C dim, M.jointProb σ v * g v
+      = ∑ r ∈ Finset.univ.image (fibreRep M s), (∏ c ∈ s, M.factor σ r c) * g r := by
+  classical
+  set inner : Assignment C dim → 𝕜 := fun r ↦
+    ∑ v ∈ Finset.univ.filter (fun v : Assignment C dim ↦ fibreRep M s v = r),
+      M.jointProb σ v * g v with hinner
+  have hfiber := (Finset.sum_fiberwise (s := (Finset.univ : Finset (Assignment C dim)))
+      (fibreRep M s) (fun v ↦ M.jointProb σ v * g v)).symm
+  rw [hfiber]
+  have hzero : ∀ r : Assignment C dim,
+      r ∉ Finset.univ.image (fibreRep M s) → inner r = 0 := by
+    intro r hr
+    have hempty :
+        Finset.univ.filter (fun v : Assignment C dim ↦ fibreRep M s v = r) = ∅ := by
+      ext v
+      constructor
+      · intro hv
+        exact (hr (Finset.mem_image.mpr ⟨v, Finset.mem_univ v,
+          (Finset.mem_filter.mp hv).2⟩)).elim
+      · intro hv
+        exact (Finset.notMem_empty v hv).elim
+    simp [hinner, hempty]
+  trans ∑ r ∈ Finset.univ.image (fibreRep M s), inner r
+  · exact (Finset.sum_subset (Finset.subset_univ _) (fun r _ hr ↦ hzero r hr)).symm
+  refine Finset.sum_congr rfl ?_
+  intro r hr
+  simp only [hinner]
+  have hfilter :
+      Finset.univ.filter (fun v : Assignment C dim ↦ fibreRep M s v = r) =
+        agreeSet s r := by
+    ext v
+    simp only [Finset.mem_filter, Finset.mem_univ, true_and, mem_agreeSet]
+    constructor
+    · intro hrep c hc
+      have := congrArg (fun f : Assignment C dim ↦ f c) hrep
+      simpa [fibreRep, hc] using this
+    · intro hag
+      rcases Finset.mem_image.mp hr with ⟨u, -, hu⟩
+      have hr_fixed : fibreRep M s r = r := by rw [← hu, fibreRep_idem]
+      funext c
+      by_cases hc : c ∈ s
+      · simp [fibreRep, hc, hag c hc]
+      · have hr0 := congrArg (fun f : Assignment C dim ↦ f c) hr_fixed
+        simpa [fibreRep, hc] using hr0
+  rw [hfilter]
+  have hgeq : ∀ v ∈ agreeSet s r, M.jointProb σ v * g v = M.jointProb σ v * g r := by
+    intro v hv
+    rw [hg v r (mem_agreeSet.mp hv)]
+  rw [Finset.sum_congr rfl hgeq, ← Finset.sum_mul, ← Model.marginal,
+    M.marginal_eq_prod σ hdet r]
+
+/-- The parent-closed form, which is the hypothesis a reader of the graph
+supplies. -/
+public theorem sum_jointProb_mul_of_parentClosed (M : Model C dim 𝕜)
+    (σ : InterventionProfile C dim) {s : Finset C} (hclosed : M.ParentClosed s)
+    {g : Assignment C dim → 𝕜}
+    (hg : ∀ v w : Assignment C dim, (∀ c ∈ s, v c = w c) → g v = g w) :
+    ∑ v : Assignment C dim, M.jointProb σ v * g v
+      = ∑ r ∈ Finset.univ.image (fibreRep M s), (∏ c ∈ s, M.factor σ r c) * g r :=
+  sum_jointProb_mul M σ (M.selfDetermining_of_parentClosed σ hclosed) hg
 
 /-! ## Fibrewise optimum -/
 

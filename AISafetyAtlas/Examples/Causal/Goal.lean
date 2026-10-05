@@ -130,4 +130,40 @@ public theorem immediateWin_fires :
       exact ⟨{((0 : Fin 2), (0 : Fin 2))}, ⟨Finset.subset_univ _, by decide⟩, rfl⟩)
     (Finset.mem_singleton_self _) (τ := τ) rfl
 
+/-! ## Uniqueness, membership and the two counting lemmas, at this space
+
+The four statements below apply the module's remaining structural results at the
+trajectory and the two-by-two space this file already built.
+-/
+
+/-- **The achievement time is unique.** `not_eventually_at_three` refutes one
+later time; this rules out every other time at once, which is what makes
+"the achievement time" a definite description. -/
+public theorem eventually_achievement_time_eq_two (T : ℕ)
+    (h : IsAchievementTime
+      ({ op := .eventually, target := {((0 : Fin 2), (1 : Fin 2))} }) τ T) :
+    T = 2 :=
+  IsAchievementTime.unique h eventually_at_two
+
+/-- **Membership in the bounded-goal set is a depth bound**, read at the
+depth-one goals this file counts. -/
+public theorem mem_boundedGoals_one
+    (psi : SequentialGoal (Fin 2) (Fin 2)) :
+    psi ∈ boundedGoals 1 ↔ 1 ≤ psi.depth ∧ psi.depth ≤ 1 :=
+  mem_boundedGoals
+
+/-- **Filtering a powerset by disjointness is a powerset of the difference.**
+This is Lemma 2's counting step, at two concrete sets. -/
+public theorem powerset_filter_disjoint_two :
+    (({0, 1} : Finset (Fin 2)).powerset.filter (fun T ↦ Disjoint T ({1} : Finset (Fin 2))))
+      = (({0, 1} : Finset (Fin 2)) \ {1}).powerset :=
+  powerset_filter_disjoint _ _
+
+/-- **The exceptional fraction bound in the form that allows the empty goal.**
+`exceptional_ratio_two` uses the `- 1` variant; this is the same bound without
+it, at the same `R = 8`. -/
+public theorem exceptional_ratio_with_empty_two :
+    ((2 ^ (48 - 8) : ℕ) : ℝ) / ((2 ^ 48 : ℕ) : ℝ) < 2 / 2 ^ 8 :=
+  exceptional_ratio_lt_with_empty (by norm_num)
+
 end AISafetyAtlas.Examples.Causal.Goal

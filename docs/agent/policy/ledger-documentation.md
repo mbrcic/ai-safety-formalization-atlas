@@ -6,7 +6,7 @@
 | `docs/guide/` | Human explainers (methodology, open work, tasks, …) |
 | `docs/status/` | **Generated** coverage tables — do not hand-edit |
 | `docs/provenance/` | Discovery evidence + external reproduction narrative |
-| `docs/bridges/` | Bridge review packages |
+| `docs/interpretation-reviews/` | Bridge review packages |
 | `docs/releases/` | Release evidence notes |
 
 After editing a maintained ledger — `registry.yaml`, `conjectures.yaml`, or

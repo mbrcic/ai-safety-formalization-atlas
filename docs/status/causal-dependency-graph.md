@@ -10,7 +10,7 @@ Edges come from the elaborated Lean environment. This answers the question the p
 
 So `A → B` means *`B` occurs in `A`'s statement, or in `A`'s body when `A` is a definition*. A lemma used only inside a proof does not appear. Reading the table as a complete call graph would be wrong, and the two sections below are scoped so that they stay true under this limit.
 
-`535` authored declarations in `AISafetyAtlas.Causal.*` (286 theorems). Compiler-generated companions and projections are dropped.
+`689` authored declarations in `AISafetyAtlas.Causal.*` (391 theorems). Compiler-generated companions and projections are dropped.
 
 ## Load-bearing declarations
 
@@ -18,97 +18,147 @@ Named in the statements of eight or more others. A change to one of these is a c
 
 | Declaration | Named by |
 |---|---|
-| `Model` | 341 |
-| `binaryDim` | 318 |
-| `Assignment` | 215 |
-| `Skeleton` | 210 |
-| `Model.parents` | 87 |
-| `ChartIndex` | 69 |
-| `Skeleton.MarginClass` | 57 |
-| `ProbMixture` | 53 |
-| `Skeleton.mapRat` | 51 |
-| `Model.cpt` | 48 |
+| `Model` | 359 |
+| `binaryDim` | 351 |
+| `Assignment` | 237 |
+| `Skeleton` | 211 |
+| `CID` | 131 |
+| `Model.parents` | 114 |
+| `ExoAssignment` | 95 |
+| `EndoAssignment` | 77 |
+| `SCIM.Policy` | 75 |
+| `SCIM.graph` | 71 |
+| `ChartIndex` | 71 |
+| `SCM.eval` | 66 |
+| `Skeleton.MarginClass` | 59 |
+| `Skeleton.mapRat` | 56 |
+| `ProbMixture` | 55 |
+| `SCIM.withPolicy` | 54 |
+| `Model.cpt` | 54 |
+| `CID.parents` | 51 |
+| `InterventionProfile` | 49 |
+| `SCIM` | 48 |
 | `ControlledMarkovProcess` | 48 |
-| `InterventionProfile` | 45 |
-| `CompositeGoal` | 40 |
-| `Skeleton.utilityParents` | 38 |
-| `Skeleton.gap` | 33 |
-| `SCIM.graph` | 33 |
-| `Skeleton.BehaviorEq` | 30 |
-| `SCIM.Policy` | 30 |
-| `SequentialGoal` | 28 |
-| `Skeleton.observed` | 27 |
-| `modelError` | 25 |
-| `InIdentifiedSet` | 25 |
-| `ExoAssignment` | 25 |
-| `ShiftedQuery` | 24 |
-| `Mixture` | 24 |
-| `SCM` | 23 |
+| `SCM` | 47 |
+| `Skeleton.utilityParents` | 43 |
+| `SCIM.instIsWellFoundedWithPolicy` | 41 |
+| `CompositeGoal` | 41 |
+| `CID.IsWellFounded` | 41 |
+| `CID.IsDecision` | 38 |
+| `Skeleton.gap` | 36 |
+| `CID.IsUtility` | 36 |
+| `Skeleton.observed` | 35 |
+| `DecisionNetwork.decision` | 35 |
+| `DecisionNetwork` | 35 |
+| `CID.IsDescendant` | 34 |
+| `Skeleton.BehaviorEq` | 33 |
+| `DecisionNetwork.net` | 33 |
+| `SCM.IsWellFounded` | 32 |
+| `Model.factor` | 30 |
+| `SequentialGoal` | 29 |
+| `Mixture` | 28 |
+| `InIdentifiedSet` | 28 |
+| `modelError` | 26 |
+| `Model.observationalProfile` | 26 |
+| `ShiftedQuery` | 25 |
+| `DecisionNetwork.utility` | 25 |
+| `fibreRep` | 24 |
+| `Policy` | 24 |
+| `Model.jointProb` | 24 |
+| `RandomizedQueryStrategy` | 23 |
+| `O24Var` | 23 |
+| `IsProbabilityMixture` | 23 |
 | `GoalPolicy` | 23 |
-| `SCIM` | 22 |
-| `O24Var` | 22 |
-| `CID.IsDecision` | 22 |
+| `SCIM.binDom` | 22 |
+| `UtilityConfig` | 21 |
 | `Skeleton.ValidMargin` | 21 |
-| `RandomizedQueryStrategy` | 21 |
-| `CID` | 21 |
-| `UtilityConfig` | 20 |
-| `SCM.eval` | 20 |
-| `Policy` | 19 |
-| `ParentConfig` | 19 |
-| `IsProbabilityMixture` | 19 |
-| `CID.parents` | 19 |
+| `Model.ancestors` | 21 |
+| `ParentConfig` | 20 |
+| `DecisionNetwork.Policy` | 20 |
+| `SCIM.unitExo` | 19 |
+| `PolicyFamily` | 19 |
+| `cidToDAG` | 18 |
+| `NodeKind` | 18 |
 | `SubGoal` | 17 |
-| `PolicyFamily` | 17 |
 | `O24Assignment` | 17 |
-| `Model.jointProb` | 17 |
-| `SCIM.withPolicy` | 16 |
-| `Model.factor` | 16 |
-| `SCM.IsWellFounded` | 15 |
-| `pmfExpect` | 14 |
+| `Model.roundDown` | 15 |
+| `Model.properAncestors` | 15 |
+| `CID.DecisionFree` | 15 |
 | `Transcript` | 14 |
-| `Model.roundDown` | 14 |
-| `Model.ancestors` | 14 |
-| `DecisionNetwork` | 14 |
+| `SCM.submodel` | 14 |
+| `SCM.f` | 14 |
+| `SCM.exoJoint` | 14 |
+| `Model.regret` | 14 |
+| `Model.ParentClosed` | 14 |
+| `DecisionNetwork.uval` | 14 |
+| `SCM.parents` | 13 |
+| `SCIM.iciWitness` | 13 |
 | `O24Solution` | 13 |
+| `DecisionNetwork.chanceContext` | 13 |
+| `CID.utilities` | 13 |
+| `CID.DSep` | 13 |
 | `instMeasurableSpaceModel` | 12 |
-| `fibreRep` | 12 |
+| `hardInterventionProfile` | 12 |
 | `achieveProb` | 12 |
-| `SCIM.instIsWellFoundedWithPolicy` | 12 |
-| `NodeKind` | 12 |
-| `CID.IsWellFounded` | 12 |
-| `RandomizedEstimator` | 11 |
-| `Model.chartOn` | 11 |
-| `MeasureEstimator` | 11 |
+| `Skeleton.utility` | 12 |
+| `SCIM.totalUtilityIn` | 12 |
+| `SCIM.expectedUtility` | 12 |
+| `RandomizedEstimator` | 12 |
+| `ProbMixture.dirac` | 12 |
+| `Model.chartOn` | 12 |
+| `MeasureEstimator` | 12 |
+| `CID.IsNonrequisite` | 12 |
+| `SCM.instIsWellFoundedSubmodel` | 11 |
+| `NodeKind.utility` | 11 |
+| `NodeKind.decision` | 11 |
+| `Model.value` | 11 |
+| `Model.marginal` | 11 |
 | `LocalIntervention` | 11 |
+| `CID.decisions` | 11 |
+| `CID.Seg2` | 11 |
+| `o24Size` | 10 |
 | `exactMinimalBudget` | 10 |
 | `chartDim` | 10 |
-| `Skeleton.utility` | 10 |
 | `Skeleton.M1` | 10 |
-| `Model.regret` | 10 |
+| `Model.withPolicy` | 10 |
 | `Model.fibreScore` | 10 |
-| `o24Size` | 9 |
+| `CID.Seg1` | 10 |
 | `immediateWins` | 9 |
-| `hardInterventionProfile` | 9 |
 | `compositeGoals` | 9 |
+| `asg` | 9 |
 | `Skeleton.M4` | 9 |
-| `SCIM.expectedUtility` | 9 |
-| `Model.ParentClosed` | 9 |
+| `Skeleton.M2` | 9 |
+| `SCM.measurable_exo` | 9 |
+| `SCM.exoLaw` | 9 |
+| `SCIM.iciF` | 9 |
+| `Policy.prob` | 9 |
+| `Model.mapRat` | 9 |
+| `Model.jointProbMix` | 9 |
+| `GoalHistory` | 9 |
 | `FirstActionData` | 9 |
-| `DecisionNetwork.utility` | 9 |
-| `asg` | 8 |
-| `Skeleton.M2` | 8 |
-| `SCM.f` | 8 |
-| `SCM.exoJoint` | 8 |
-| `Policy.prob` | 8 |
-| `Model.properAncestors` | 8 |
-| `Model.marginal` | 8 |
-| `GoalHistory` | 8 |
+| `DecisionNetwork.utilityMean` | 9 |
+| `DecisionNetwork.expectedUtility` | 9 |
+| `DecisionNetwork.IsUnmediated` | 9 |
+| `ConditionalTables` | 9 |
+| `CID.requisiteContextSet` | 9 |
+| `CID.requisiteContext` | 9 |
+| `boundedGoals` | 8 |
+| `SCM.jointProb` | 8 |
+| `SCM.exoProb` | 8 |
+| `InterventionalFamily` | 8 |
 | `GoalConditionedAgent` | 8 |
-| `DecisionNetwork.decision` | 8 |
+| `DecisionPolicy.prob` | 8 |
+| `DecisionNetwork.projectedSkeleton` | 8 |
+| `DecisionNetwork.projectedPolicy` | 8 |
 | `ControlledMarkovProcess.Communicating` | 8 |
 | `ControlledMarkovProcess.ActionIndependent` | 8 |
-| `ConditionalTables` | 8 |
+| `ConditionalTables.family` | 8 |
+| `CID.utilityDescendants` | 8 |
 | `CID.kind` | 8 |
+| `CID.IsRequisite` | 8 |
+| `CID.DSepSet` | 8 |
+| `CID.Blocked` | 8 |
+| `CID.AdmitsICI` | 8 |
 
 ## Definitions no statement and no example mentions
 
@@ -123,6 +173,7 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 - `IsRadius`
 - `O24Constructor`
 - `O24RecoveryModulus`
+- `SCIM.instUniqueUnitExo`
 - `flipIntervention`
 - `optimalPolicyFamily`
 
@@ -133,23 +184,85 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 | `AdmissibleFamily` | definition | `Model`, `Model.HasRegretAtMost`, `PolicyFamily`, `ProbMixture`, `Skeleton`, `Skeleton.observed` |
 | `Assignment` | definition | — |
 | `CID` | definition | — |
+| `CID.Activated` | definition | `CID`, `CID.IsDescendant` |
+| `CID.AdmitsICI` | definition | `CID`, `CID.IsWellFounded`, `SCIM`, `SCIM.HasICI`, `SCIM.graph` |
+| `CID.Blocked` | definition | `CID`, `CID.IsChainOrFork`, `CID.IsCollider`, `CID.IsDescendant` |
+| `CID.DSep` | definition | `CID`, `cidToDAG` |
+| `CID.DSepPath` | definition | `CID`, `CID.Blocked`, `CID.IsWalk` |
+| `CID.DSepSet` | definition | `CID`, `CID.Blocked`, `CID.IsWalk` |
+| `CID.DecisionFree` | definition | `CID`, `CID.IsDecision`, `CID.Seg1`, `CID.Seg2`, `CID.parents` |
+| `CID.IsActive` | definition | `CID`, `CID.Activated`, `CID.IsCollider` |
+| `CID.IsChainOrFork` | definition | `CID`, `CID.parents` |
+| `CID.IsCollider` | definition | `CID`, `CID.parents` |
 | `CID.IsDecision` | definition | `CID`, `CID.kind`, `NodeKind`, `NodeKind.decision` |
 | `CID.IsDescendant` | definition | `CID`, `CID.parents` |
+| `CID.IsNonrequisite` | definition | `CID`, `CID.DSep`, `CID.requisiteContext`, `CID.utilityDescendants` |
+| `CID.IsNonrequisiteSet` | definition | `CID`, `CID.DSepSet`, `CID.requisiteContextSet`, `CID.utilityDescendantsSet` |
+| `CID.IsRequisite` | definition | `CID`, `CID.IsNonrequisite` |
 | `CID.IsSingleDecision` | definition | `CID`, `CID.decisions` |
 | `CID.IsUtility` | definition | `CID`, `CID.kind`, `NodeKind`, `NodeKind.utility` |
+| `CID.IsWalk` | definition | `CID`, `CID.UAdj` |
 | `CID.IsWellFounded` | definition | `CID` |
 | `CID.NotDownstream` | definition | `CID`, `CID.IsDecision`, `CID.IsDescendant` |
+| `CID.Seg1` | definition | `CID`, `CID.IsDescendant` |
+| `CID.Seg2` | definition | `CID`, `CID.IsDescendant` |
+| `CID.UAdj` | definition | `CID`, `CID.parents` |
+| `CID.activated_of_mem` | theorem | `CID`, `CID.Activated` |
+| `CID.admitsICI_iff` | theorem | `CID`, `CID.AdmitsICI`, `CID.IsDescendant`, `CID.IsUtility`, `CID.decisions` |
+| `CID.admitsICI_iff_of_decisionFree` | theorem | `CID`, `CID.AdmitsICI`, `CID.DecisionFree`, `CID.IsDescendant`, `CID.IsUtility` |
+| `CID.admitsICI_of_pathThrough` | theorem | `CID`, `CID.AdmitsICI`, `CID.DecisionFree`, `CID.IsDescendant`, `CID.IsUtility` |
+| `CID.blocked_collider_iff` | theorem | `CID`, `CID.IsDescendant` |
+| `CID.blocked_singleton_iff` | theorem | `CID`, `CID.Blocked` |
+| `CID.coe_requisiteContext` | theorem | `CID`, `CID.requisiteContext`, `CID.requisiteContextSet` |
+| `CID.coe_utilityDescendants` | theorem | `CID`, `CID.utilityDescendants`, `CID.utilityDescendantsSet` |
+| `CID.dSepPath_iff_dSep` | theorem | `CID`, `CID.DSep`, `CID.DSepPath` |
+| `CID.dSepSet_iff_dSep` | theorem | `CID`, `CID.DSep`, `CID.DSepSet` |
+| `CID.dSepSet_iff_dSepPath` | theorem | `CID`, `CID.DSepPath`, `CID.DSepSet` |
+| `CID.dSep_iff_bbReachable` | theorem | `CID`, `CID.DSep`, `cidToDAG` |
+| `CID.dSep_iff_causalean` | theorem | `CID`, `CID.DSep`, `cidToDAG` |
+| `CID.decisionFree_of_singleDecision` | theorem | `CID`, `CID.DecisionFree`, `CID.decisions` |
 | `CID.decisions` | definition | `CID`, `CID.kind`, `NodeKind`, `NodeKind.decision` |
 | `CID.decisions_disjoint_utilities` | theorem | `CID`, `CID.decisions`, `CID.utilities` |
+| `CID.eq_of_seg1_of_seg2` | theorem | `CID`, `CID.Seg1`, `CID.Seg2` |
+| `CID.exists_parent_reflTransGen` | theorem | `CID`, `CID.parents` |
 | `CID.instDecidableIsDecision` | definition | `CID`, `CID.IsDecision`, `CID.kind`, `NodeKind`, `NodeKind.decision` |
 | `CID.instDecidableIsUtility` | definition | `CID`, `CID.IsUtility`, `CID.kind`, `NodeKind`, `NodeKind.utility` |
+| `CID.inter_subset_of_dSep` | theorem | `CID`, `CID.DSep` |
+| `CID.inter_subset_of_dSepSet` | theorem | `CID`, `CID.DSepSet` |
+| `CID.isChainOrFork_iff_not_isCollider` | theorem | `CID`, `CID.IsChainOrFork`, `CID.IsCollider`, `CID.UAdj` |
+| `CID.isNonrequisiteSet_iff` | theorem | `CID`, `CID.IsNonrequisite`, `CID.IsNonrequisiteSet` |
+| `CID.isNonrequisiteSet_iff_dSepPath` | theorem | `CID`, `CID.DSepPath`, `CID.IsNonrequisiteSet`, `CID.requisiteContextSet`, `CID.utilityDescendantsSet` |
+| `CID.isNonrequisite_of_utilityDescendants_eq_empty` | theorem | `CID`, `CID.IsNonrequisite`, `CID.utilityDescendants` |
+| `CID.isNonrequisite_or_isRequisite` | theorem | `CID`, `CID.IsNonrequisite`, `CID.IsRequisite` |
+| `CID.isRequisite_iff` | theorem | `CID`, `CID.IsNonrequisite`, `CID.IsRequisite` |
+| `CID.isWalk_singleton` | theorem | `CID`, `CID.IsWalk` |
+| `CID.isWellFounded_of_fintype` | theorem | `CID`, `CID.IsWellFounded` |
 | `CID.mem_decisions_iff` | theorem | `CID`, `CID.IsDecision`, `CID.decisions` |
+| `CID.mem_parentsFinset` | theorem | `CID`, `CID.parents`, `CID.parentsFinset` |
+| `CID.mem_requisiteContext` | theorem | `CID`, `CID.parents`, `CID.requisiteContext` |
+| `CID.mem_requisiteContextSet` | theorem | `CID`, `CID.parents`, `CID.requisiteContextSet` |
 | `CID.mem_utilities_iff` | theorem | `CID`, `CID.IsUtility`, `CID.utilities` |
+| `CID.mem_utilityDescendants` | theorem | `CID`, `CID.IsDescendant`, `CID.IsUtility`, `CID.utilityDescendants` |
+| `CID.mem_utilityDescendantsSet` | theorem | `CID`, `CID.IsDescendant`, `CID.IsUtility`, `CID.utilityDescendantsSet` |
 | `CID.notDownstream_of_mem_parents` | theorem | `CID`, `CID.NotDownstream`, `CID.parents` |
+| `CID.not_activated_of_mem_parents` | theorem | `CID`, `CID.Activated`, `CID.parents` |
+| `CID.not_admitsICI_of_not_pathThrough` | theorem | `CID`, `CID.AdmitsICI`, `CID.IsDescendant`, `CID.IsUtility` |
+| `CID.not_and_isRequisite` | theorem | `CID`, `CID.IsNonrequisite`, `CID.IsRequisite` |
+| `CID.not_blocked_iff` | theorem | `CID`, `CID.Blocked`, `CID.IsWalk`, `cidToDAG` |
+| `CID.not_blocked_iff_isActive` | theorem | `CID`, `CID.Blocked`, `CID.IsActive`, `CID.IsWalk` |
 | `CID.not_isDecision_of_notDownstream` | theorem | `CID`, `CID.IsDecision`, `CID.NotDownstream` |
+| `CID.not_isNonrequisite_iff` | theorem | `CID`, `CID.IsNonrequisite`, `CID.IsRequisite` |
+| `CID.not_mem_requisiteContext` | theorem | `CID`, `CID.requisiteContext` |
+| `CID.not_mem_requisiteContextSet` | theorem | `CID`, `CID.requisiteContextSet` |
 | `CID.observations` | definition | `CID`, `CID.parents` |
+| `CID.parentsFinset` | definition | `CID`, `CID.parents` |
+| `CID.requisiteContext` | definition | `CID`, `CID.parentsFinset` |
+| `CID.requisiteContextSet` | definition | `CID`, `CID.parents` |
+| `CID.requisite_sets_pairwise_disjoint` | theorem | `CID`, `CID.IsDecision`, `CID.parents`, `CID.requisiteContext`, `CID.utilityDescendants` |
 | `CID.structureNodes` | definition | `CID`, `CID.kind`, `NodeKind` |
 | `CID.utilities` | definition | `CID`, `CID.kind`, `NodeKind`, `NodeKind.utility` |
+| `CID.utilityDescendants` | definition | `CID`, `CID.IsDescendant`, `CID.utilities` |
+| `CID.utilityDescendantsSet` | definition | `CID`, `CID.IsDescendant`, `CID.IsUtility` |
 | `ChartIndex` | definition | `ParentConfig` |
 | `ChartIndex.extend` | definition | `Assignment`, `ChartIndex`, `ParentConfig`, `binaryDim` |
 | `CompositeGoal` | definition | `SequentialGoal` |
@@ -174,15 +287,39 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 | `DecisionNetwork.IsOptimal` | definition | `DecisionNetwork`, `DecisionNetwork.Policy`, `DecisionNetwork.expectedUtility` |
 | `DecisionNetwork.IsUnmediated` | definition | `DecisionNetwork`, `DecisionNetwork.decision`, `DecisionNetwork.net`, `DecisionNetwork.utility`, `Model.properAncestors`, `Model.properDescendants` |
 | `DecisionNetwork.Policy` | definition | `DecisionNetwork`, `DecisionNetwork.decision`, `DecisionNetwork.net`, `DecisionPolicy` |
+| `DecisionNetwork.chanceContext` | definition | `DecisionNetwork`, `DecisionNetwork.decision`, `DecisionNetwork.net`, `DecisionNetwork.utility`, `Model.properAncestors` |
 | `DecisionNetwork.decision_notMem_parents_of_isUnmediated` | theorem | `DecisionNetwork`, `DecisionNetwork.IsUnmediated`, `DecisionNetwork.decision`, `DecisionNetwork.net`, `DecisionNetwork.utility`, `Model.parents`, `Model.properAncestors` |
+| `DecisionNetwork.decision_notMem_parents_utility_of_notMem` | theorem | `DecisionNetwork`, `DecisionNetwork.decision`, `DecisionNetwork.net`, `DecisionNetwork.utility`, `Model.parents`, `Model.properAncestors` |
 | `DecisionNetwork.exists_utilityFunction` | theorem | `Assignment`, `DecisionNetwork`, `DecisionNetwork.IsDeterministicUtility`, `DecisionNetwork.net`, `DecisionNetwork.utility`, `Model.cpt`, `Model.parents` |
 | `DecisionNetwork.expectedUtility` | definition | `Assignment`, `DecisionNetwork`, `DecisionNetwork.Policy`, `DecisionNetwork.decision`, `DecisionNetwork.net`, `DecisionNetwork.utility`, `DecisionNetwork.uval`, `Model.jointProb`, `Model.observationalProfile`, `Model.withPolicy` |
+| `DecisionNetwork.expectedUtility_eq_contextSum` | theorem | `Assignment`, `DecisionNetwork`, `DecisionNetwork.IsUnmediated`, `DecisionNetwork.Policy`, `DecisionNetwork.chanceContext`, `DecisionNetwork.expectedUtility`, `DecisionNetwork.net`, `DecisionNetwork.policyUtility`, `Model.factor`, `Model.observationalProfile`, `fibreRep` |
+| `DecisionNetwork.expectedUtility_eq_value` | theorem | `DecisionNetwork`, `DecisionNetwork.IsUnmediated`, `DecisionNetwork.Policy`, `DecisionNetwork.decision`, `DecisionNetwork.expectedUtility`, `DecisionNetwork.net`, `DecisionNetwork.projectedPolicy`, `DecisionNetwork.projectedSkeleton`, `DecisionNetwork.utility`, `DecisionNetwork.uval`, `Model.observationalProfile`, `Model.parents`, `Model.value`, `ProbMixture.dirac` |
+| `DecisionNetwork.factor_observationalProfile` | theorem | `Assignment`, `Model`, `Model.cpt`, `Model.factor`, `Model.observationalProfile` |
 | `DecisionNetwork.instNonemptyPolicy` | theorem | `DecisionNetwork`, `DecisionNetwork.Policy` |
+| `DecisionNetwork.liftPolicy` | definition | `Assignment`, `DecisionNetwork`, `DecisionNetwork.Policy`, `DecisionNetwork.decision`, `DecisionNetwork.net`, `Model.parents`, `Policy`, `Policy.prob` |
+| `DecisionNetwork.mem_chanceContext_of_mem_parents_utility` | theorem | `DecisionNetwork`, `DecisionNetwork.chanceContext`, `DecisionNetwork.decision`, `DecisionNetwork.net`, `DecisionNetwork.utility`, `Model.parents` |
 | `DecisionNetwork.mem_parents_utility_of_isUnmediated` | theorem | `DecisionNetwork`, `DecisionNetwork.IsUnmediated`, `DecisionNetwork.decision`, `DecisionNetwork.net`, `DecisionNetwork.utility`, `Model.parents`, `Model.properAncestors` |
+| `DecisionNetwork.optimalValue_eq_expectedUtility` | theorem | `DecisionNetwork`, `DecisionNetwork.IsOptimal`, `DecisionNetwork.IsUnmediated`, `DecisionNetwork.Policy`, `DecisionNetwork.decision`, `DecisionNetwork.expectedUtility`, `DecisionNetwork.net`, `DecisionNetwork.projectedSkeleton`, `DecisionNetwork.utility`, `DecisionNetwork.uval`, `Model.observationalProfile`, `Model.optimalValue`, `Model.parents`, `ProbMixture.dirac` |
+| `DecisionNetwork.parentClosed_chanceContext` | theorem | `DecisionNetwork`, `DecisionNetwork.IsUnmediated`, `DecisionNetwork.chanceContext`, `DecisionNetwork.net`, `Model.ParentClosed` |
+| `DecisionNetwork.parents_decision_subset_chanceContext` | theorem | `DecisionNetwork`, `DecisionNetwork.chanceContext`, `DecisionNetwork.decision`, `DecisionNetwork.net`, `DecisionNetwork.utility`, `Model.parents`, `Model.properAncestors` |
+| `DecisionNetwork.policyUtility` | definition | `Assignment`, `DecisionNetwork`, `DecisionNetwork.Policy`, `DecisionNetwork.decision`, `DecisionNetwork.net`, `DecisionNetwork.utilityMean`, `DecisionPolicy.prob` |
+| `DecisionNetwork.policyUtility_congr` | theorem | `Assignment`, `DecisionNetwork`, `DecisionNetwork.Policy`, `DecisionNetwork.chanceContext`, `DecisionNetwork.policyUtility` |
+| `DecisionNetwork.projectedPolicy` | definition | `Assignment`, `DecisionNetwork`, `DecisionNetwork.Policy`, `DecisionNetwork.decision`, `DecisionNetwork.net`, `DecisionPolicy.prob`, `Model.parents`, `Policy` |
+| `DecisionNetwork.projectedPolicy_liftPolicy` | theorem | `DecisionNetwork`, `DecisionNetwork.decision`, `DecisionNetwork.liftPolicy`, `DecisionNetwork.net`, `DecisionNetwork.projectedPolicy`, `Model.parents`, `Policy` |
+| `DecisionNetwork.projectedSkeleton` | definition | `Assignment`, `DecisionNetwork`, `DecisionNetwork.decision`, `DecisionNetwork.net`, `DecisionNetwork.utility`, `DecisionNetwork.utilityMean`, `DecisionNetwork.uval`, `Model.parents`, `Skeleton` |
 | `DecisionNetwork.regret` | definition | `DecisionNetwork`, `DecisionNetwork.Policy`, `DecisionNetwork.expectedUtility` |
+| `DecisionNetwork.regret_eq_value_regret` | theorem | `DecisionNetwork`, `DecisionNetwork.IsOptimal`, `DecisionNetwork.IsUnmediated`, `DecisionNetwork.Policy`, `DecisionNetwork.decision`, `DecisionNetwork.net`, `DecisionNetwork.projectedPolicy`, `DecisionNetwork.projectedSkeleton`, `DecisionNetwork.regret`, `DecisionNetwork.utility`, `DecisionNetwork.uval`, `Model.observationalProfile`, `Model.parents`, `Model.regret`, `ProbMixture.dirac` |
 | `DecisionNetwork.regret_nonneg` | theorem | `DecisionNetwork`, `DecisionNetwork.IsOptimal`, `DecisionNetwork.Policy`, `DecisionNetwork.regret` |
 | `DecisionNetwork.regret_self` | theorem | `DecisionNetwork`, `DecisionNetwork.Policy`, `DecisionNetwork.regret` |
+| `DecisionNetwork.utilityMean` | definition | `Assignment`, `DecisionNetwork`, `DecisionNetwork.net`, `DecisionNetwork.utility`, `DecisionNetwork.uval`, `Model.cpt` |
+| `DecisionNetwork.utilityMean_congr` | theorem | `Assignment`, `DecisionNetwork`, `DecisionNetwork.net`, `DecisionNetwork.utility`, `DecisionNetwork.utilityMean`, `Model.parents` |
+| `DecisionNetwork.utilityMean_eq_uval_of_cpt_eq_one` | theorem | `Assignment`, `DecisionNetwork`, `DecisionNetwork.net`, `DecisionNetwork.utility`, `DecisionNetwork.utilityMean`, `DecisionNetwork.uval`, `Model.cpt` |
+| `DecisionNetwork.utilityMean_eq_uval_of_isDeterministicUtility` | theorem | `Assignment`, `DecisionNetwork`, `DecisionNetwork.IsDeterministicUtility`, `DecisionNetwork.net`, `DecisionNetwork.utility`, `DecisionNetwork.utilityMean`, `DecisionNetwork.uval`, `Model.parents` |
+| `DecisionNetwork.utilityMean_mem_unitInterval` | theorem | `Assignment`, `DecisionNetwork`, `DecisionNetwork.utility`, `DecisionNetwork.utilityMean`, `DecisionNetwork.uval` |
+| `DecisionNetwork.value_eq_contextSum` | theorem | `Assignment`, `DecisionNetwork`, `DecisionNetwork.IsUnmediated`, `DecisionNetwork.Policy`, `DecisionNetwork.chanceContext`, `DecisionNetwork.decision`, `DecisionNetwork.net`, `DecisionNetwork.policyUtility`, `DecisionNetwork.projectedPolicy`, `DecisionNetwork.projectedSkeleton`, `DecisionNetwork.utility`, `DecisionNetwork.uval`, `Model.factor`, `Model.observationalProfile`, `Model.parents`, `Model.value`, `ProbMixture.dirac`, `fibreRep` |
+| `DecisionNetwork.withPolicy_factor_observationalProfile` | theorem | `Assignment`, `DecisionPolicy`, `DecisionPolicy.prob`, `Model`, `Model.factor`, `Model.observationalProfile`, `Model.withPolicy` |
 | `DecisionPolicy` | definition | `Model` |
+| `EndoAssignment` | definition | — |
 | `ExoAssignment` | definition | — |
 | `FirstActionData` | definition | `CompositeGoal` |
 | `FirstActionEstimator` | definition | `FirstActionTranscript`, `KernelEstimate` |
@@ -258,6 +395,7 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 | `Model.isOptimal_iff_regret_zero` | theorem | `Model`, `Model.IsOptimal`, `Model.regret`, `Policy`, `ProbMixture`, `Skeleton` |
 | `Model.jointProb` | definition | `Assignment`, `InterventionProfile`, `Model`, `Model.factor` |
 | `Model.jointProbMix` | definition | `Assignment`, `InterventionProfile`, `LocalIntervention`, `Mixture`, `Model`, `Model.jointProb` |
+| `Model.jointProbMix_dirac` | theorem | `Assignment`, `InterventionProfile`, `IsProbabilityMixture`, `Mixture`, `Model`, `Model.jointProb`, `Model.jointProbMix`, `ProbMixture.dirac` |
 | `Model.jointProbMix_nonneg` | theorem | `Assignment`, `IsProbabilityMixture`, `Mixture`, `Model`, `Model.jointProbMix`, `ProbMixture` |
 | `Model.jointProbMix_sum` | theorem | `Assignment`, `IsProbabilityMixture`, `Mixture`, `Model`, `Model.jointProbMix`, `ProbMixture` |
 | `Model.jointProb_congr_at` | theorem | `Assignment`, `InterventionProfile`, `Model`, `Model.cpt`, `Model.jointProb` |
@@ -288,6 +426,7 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 | `Model.ofChart_chartOn` | theorem | `Model`, `Model.acyclic`, `Model.chartOn`, `Model.chartOn_mem_unitInterval`, `Model.ofChart`, `Model.parents`, `binaryDim` |
 | `Model.optimalValue` | definition | `Assignment`, `Model`, `Model.bestDecision`, `Model.fibreScore`, `ProbMixture`, `Skeleton`, `fibreRep` |
 | `Model.parentClosed_ancestors` | theorem | `Model`, `Model.ParentClosed`, `Model.ancestors` |
+| `Model.parentClosed_properAncestors` | theorem | `Model`, `Model.ParentClosed`, `Model.properAncestors` |
 | `Model.parents_mapRat` | theorem | `Model`, `Model.mapRat`, `Model.parents` |
 | `Model.parents_ofChart` | theorem | `ChartIndex`, `Model.ofChart`, `Model.parents`, `binaryDim` |
 | `Model.parents_roundDown` | theorem | `Model`, `Model.parents`, `Model.roundDown` |
@@ -310,6 +449,8 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 | `Model.signPolicy` | definition | `Assignment`, `Model`, `Model.preferredDecision`, `Policy`, `ProbMixture`, `Skeleton` |
 | `Model.signPolicy_eq_of_behaviorEq` | theorem | `Model`, `Model.signPolicy`, `Policy`, `ProbMixture`, `Skeleton`, `Skeleton.BehaviorEq`, `Skeleton.observed` |
 | `Model.subset_ancestors` | theorem | `Model`, `Model.ancestors` |
+| `Model.sum_jointProb_mul` | theorem | `Assignment`, `InterventionProfile`, `Model`, `Model.SelfDetermining`, `Model.factor`, `Model.jointProb`, `fibreRep` |
+| `Model.sum_jointProb_mul_of_parentClosed` | theorem | `Assignment`, `InterventionProfile`, `Model`, `Model.ParentClosed`, `Model.factor`, `Model.jointProb`, `fibreRep` |
 | `Model.sum_weighted_congr` | theorem | `Assignment`, `InterventionProfile`, `Model` |
 | `Model.tables` | definition | `ConditionalTables`, `Model`, `Model.cpt`, `Model.cpt_nonneg`, `Model.cpt_sum`, `Model.parents` |
 | `Model.value` | definition | `Assignment`, `Model`, `Model.fibreScore`, `Policy`, `Policy.prob`, `ProbMixture`, `Skeleton`, `fibreRep` |
@@ -354,48 +495,115 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 | `RandomizedEstimator.toMeasureEstimator` | definition | `MeasureEstimator`, `Model`, `RandomizedEstimator`, `Skeleton`, `Transcript`, `instMeasurableSpaceModel` |
 | `RandomizedQueryStrategy` | definition | `ShiftedQuery`, `Skeleton`, `Transcript` |
 | `SCIM` | definition | — |
+| `SCIM.HasICI` | definition | `CID.IsWellFounded`, `EndoAssignment`, `SCIM`, `SCIM.HasICIAt`, `SCIM.graph` |
+| `SCIM.HasICIAt` | definition | `CID.IsWellFounded`, `EndoAssignment`, `SCIM`, `SCIM.IsOptimalPolicy`, `SCIM.Policy`, `SCIM.condExp`, `SCIM.graph`, `SCIM.instIsWellFoundedWithPolicy`, `SCIM.nestedUtility`, `SCIM.totalUtilityIn`, `SCIM.withPolicy` |
 | `SCIM.IsMaterial` | definition | `CID.IsDecision`, `CID.IsWellFounded`, `CID.parents`, `SCIM`, `SCIM.graph`, `SCIM.instIsWellFoundedRemoveInfoLink`, `SCIM.optimalValue`, `SCIM.removeInfoLink` |
 | `SCIM.IsOptimalPolicy` | definition | `CID.IsWellFounded`, `SCIM`, `SCIM.Policy`, `SCIM.expectedUtility`, `SCIM.graph` |
-| `SCIM.Policy` | definition | `Assignment`, `CID.IsDecision`, `CID.parents`, `SCIM`, `SCIM.graph` |
+| `SCIM.IsOptimalPolicyLaw` | definition | `CID.IsUtility`, `CID.IsWellFounded`, `ExoAssignment`, `SCIM`, `SCIM.Policy`, `SCIM.expectedUtilityLaw`, `SCIM.graph`, `SCIM.instIsWellFoundedWithPolicy`, `SCIM.withPolicy`, `SCM.eval` |
+| `SCIM.PathThrough` | definition | `CID.IsDescendant`, `CID.IsUtility`, `SCIM`, `SCIM.graph` |
+| `SCIM.Policy` | definition | `CID.IsDecision`, `CID.parents`, `EndoAssignment`, `SCIM`, `SCIM.graph` |
+| `SCIM.binDom` | definition | — |
+| `SCIM.condExp` | definition | `CID.IsWellFounded`, `EndoAssignment`, `ExoAssignment`, `SCIM`, `SCIM.Policy`, `SCIM.contextFiber`, `SCIM.graph`, `SCIM.withPolicy`, `SCM.exoJoint` |
+| `SCIM.condExp_congr` | theorem | `CID.IsWellFounded`, `EndoAssignment`, `ExoAssignment`, `SCIM`, `SCIM.Policy`, `SCIM.condExp`, `SCIM.contextFiber`, `SCIM.graph` |
+| `SCIM.contextFiber` | definition | `CID.IsWellFounded`, `CID.parents`, `EndoAssignment`, `ExoAssignment`, `SCIM`, `SCIM.Policy`, `SCIM.graph`, `SCIM.instIsWellFoundedWithPolicy`, `SCIM.withPolicy`, `SCM.eval` |
+| `SCIM.eq_of_isUtility_isDescendant` | theorem | `CID`, `CID.IsDescendant`, `CID.IsUtility` |
 | `SCIM.eval_withPolicy_eq_of_notDownstream` | theorem | `CID.IsWellFounded`, `CID.NotDownstream`, `ExoAssignment`, `SCIM`, `SCIM.Policy`, `SCIM.graph`, `SCIM.instIsWellFoundedWithPolicy`, `SCIM.withPolicy`, `SCM.eval` |
+| `SCIM.eval_zero_of_not_seg` | theorem | `CID`, `CID.Seg1`, `CID.Seg2`, `EndoAssignment`, `ExoAssignment`, `SCIM.binDom`, `SCIM.iciF`, `SCIM.unitExo`, `SCM`, `SCM.IsWellFounded`, `SCM.eval`, `SCM.f` |
 | `SCIM.exists_isOptimalPolicy` | theorem | `CID.IsWellFounded`, `SCIM`, `SCIM.IsOptimalPolicy`, `SCIM.Policy`, `SCIM.expectedUtility`, `SCIM.graph`, `SCIM.optimalValue` |
+| `SCIM.exoLaw_withPolicy_eq` | theorem | `ExoAssignment`, `SCIM`, `SCIM.Policy`, `SCIM.withPolicy`, `SCM.exoLaw` |
 | `SCIM.expectedUtility` | definition | `CID.IsWellFounded`, `CID.utilities`, `ExoAssignment`, `SCIM`, `SCIM.Policy`, `SCIM.graph`, `SCIM.instIsWellFoundedWithPolicy`, `SCIM.utilityValue`, `SCIM.withPolicy`, `SCM.eval`, `SCM.exoJoint` |
+| `SCIM.expectedUtilityLaw` | definition | `CID.IsUtility`, `CID.IsWellFounded`, `ExoAssignment`, `SCIM`, `SCIM.Policy`, `SCIM.graph`, `SCIM.instIsWellFoundedWithPolicy`, `SCIM.utilityValue`, `SCIM.withPolicy`, `SCM.eval`, `SCM.observableLaw` |
+| `SCIM.expectedUtilityLaw_eq` | theorem | `CID.IsUtility`, `CID.IsWellFounded`, `ExoAssignment`, `SCIM`, `SCIM.Policy`, `SCIM.expectedUtility`, `SCIM.expectedUtilityLaw`, `SCIM.graph`, `SCIM.instIsWellFoundedWithPolicy`, `SCIM.withPolicy`, `SCM.eval`, `SCM.measurable_exo` |
+| `SCIM.expectedUtility_eq_sum` | theorem | `CID.IsWellFounded`, `ExoAssignment`, `SCIM`, `SCIM.Policy`, `SCIM.expectedUtility`, `SCIM.graph`, `SCIM.instIsWellFoundedWithPolicy`, `SCIM.totalUtilityIn`, `SCIM.withPolicy`, `SCM.exoJoint` |
 | `SCIM.expectedUtility_le_optimalValue` | theorem | `CID.IsWellFounded`, `SCIM`, `SCIM.Policy`, `SCIM.expectedUtility`, `SCIM.graph`, `SCIM.optimalValue` |
+| `SCIM.iciF` | definition | `CID`, `CID.Seg1`, `CID.Seg2`, `CID.parents`, `EndoAssignment`, `SCIM.binDom` |
+| `SCIM.iciF_none` | theorem | `CID`, `CID.Seg1`, `CID.Seg2`, `EndoAssignment`, `SCIM.binDom`, `SCIM.iciF` |
+| `SCIM.iciF_seg1` | theorem | `CID`, `CID.Seg1`, `CID.parents`, `EndoAssignment`, `SCIM.binDom`, `SCIM.iciF` |
+| `SCIM.iciF_seg2` | theorem | `CID`, `CID.Seg2`, `CID.parents`, `EndoAssignment`, `SCIM.binDom`, `SCIM.iciF` |
+| `SCIM.iciWitness` | definition | `CID`, `CID.IsDecision`, `CID.IsUtility`, `CID.parents`, `EndoAssignment`, `SCIM`, `SCIM.binDom`, `SCIM.iciF`, `SCIM.unitExo` |
+| `SCIM.iciWitness_condExp` | theorem | `CID`, `CID.DecisionFree`, `CID.IsDescendant`, `CID.IsWellFounded`, `ExoAssignment`, `SCIM.Policy`, `SCIM.binDom`, `SCIM.condExp`, `SCIM.iciWitness`, `SCIM.instIsWellFoundedIciWitness`, `SCIM.unitExo` |
+| `SCIM.iciWitness_contextFiber` | theorem | `CID`, `CID.DecisionFree`, `CID.IsDescendant`, `CID.IsWellFounded`, `ExoAssignment`, `SCIM.Policy`, `SCIM.binDom`, `SCIM.contextFiber`, `SCIM.iciWitness`, `SCIM.instIsWellFoundedIciWitness`, `SCIM.unitExo` |
+| `SCIM.iciWitness_exoJoint` | theorem | `CID`, `ExoAssignment`, `SCIM.Policy`, `SCIM.binDom`, `SCIM.iciWitness`, `SCIM.unitExo`, `SCIM.withPolicy`, `SCM.exoJoint` |
+| `SCIM.iciWitness_factualUtility` | theorem | `CID`, `CID.DecisionFree`, `CID.IsDescendant`, `CID.IsUtility`, `CID.IsWellFounded`, `ExoAssignment`, `SCIM.Policy`, `SCIM.binDom`, `SCIM.iciWitness`, `SCIM.instIsWellFoundedIciWitness`, `SCIM.instIsWellFoundedWithPolicy`, `SCIM.totalUtilityIn`, `SCIM.unitExo`, `SCIM.withPolicy`, `SCM.eval` |
+| `SCIM.iciWitness_forall_policy` | theorem | `CID`, `CID.DecisionFree`, `CID.IsDescendant`, `CID.IsUtility`, `CID.IsWellFounded`, `SCIM.Policy`, `SCIM.binDom`, `SCIM.condExp`, `SCIM.iciWitness`, `SCIM.instIsWellFoundedIciWitness`, `SCIM.instIsWellFoundedWithPolicy`, `SCIM.nestedUtility`, `SCIM.totalUtilityIn`, `SCIM.unitExo`, `SCIM.withPolicy` |
+| `SCIM.iciWitness_graph` | theorem | `CID`, `SCIM.binDom`, `SCIM.graph`, `SCIM.iciWitness`, `SCIM.unitExo` |
+| `SCIM.iciWitness_hasICI` | theorem | `CID`, `CID.DecisionFree`, `CID.IsDescendant`, `CID.IsUtility`, `CID.IsWellFounded`, `SCIM.HasICI`, `SCIM.binDom`, `SCIM.iciWitness`, `SCIM.instIsWellFoundedIciWitness`, `SCIM.unitExo` |
+| `SCIM.iciWitness_nestedUtility` | theorem | `CID`, `CID.DecisionFree`, `CID.IsDescendant`, `CID.IsUtility`, `CID.IsWellFounded`, `ExoAssignment`, `SCIM.Policy`, `SCIM.binDom`, `SCIM.iciWitness`, `SCIM.instIsWellFoundedIciWitness`, `SCIM.nestedUtility`, `SCIM.unitExo` |
+| `SCIM.iciWitness_responseTo` | theorem | `CID`, `CID.DecisionFree`, `CID.IsDescendant`, `CID.IsWellFounded`, `ExoAssignment`, `SCIM.Policy`, `SCIM.binDom`, `SCIM.iciWitness`, `SCIM.instIsWellFoundedIciWitness`, `SCIM.responseTo`, `SCIM.unitExo` |
+| `SCIM.iciWitness_totalUtility` | theorem | `CID`, `CID.IsDescendant`, `CID.IsUtility`, `EndoAssignment`, `ExoAssignment`, `SCIM.binDom`, `SCIM.iciF`, `SCIM.iciWitness`, `SCIM.totalUtilityIn`, `SCIM.unitExo`, `SCM`, `SCM.IsWellFounded`, `SCM.eval`, `SCM.f` |
+| `SCIM.iciWitness_withPolicy_f` | theorem | `CID`, `CID.IsDecision`, `EndoAssignment`, `SCIM.Policy`, `SCIM.binDom`, `SCIM.iciF`, `SCIM.iciWitness`, `SCIM.unitExo`, `SCIM.withPolicy`, `SCM.f` |
 | `SCIM.instFintypePolicy` | definition | `SCIM`, `SCIM.Policy` |
+| `SCIM.instIsWellFoundedIciWitness` | theorem | `CID`, `CID.IsWellFounded`, `SCIM.binDom`, `SCIM.graph`, `SCIM.iciWitness`, `SCIM.unitExo` |
 | `SCIM.instIsWellFoundedRemoveInfoLink` | theorem | `CID.IsDecision`, `CID.IsWellFounded`, `SCIM`, `SCIM.graph`, `SCIM.removeInfoLink` |
 | `SCIM.instIsWellFoundedWithPolicy` | theorem | `CID.IsWellFounded`, `SCIM`, `SCIM.Policy`, `SCIM.graph`, `SCIM.withPolicy`, `SCM.IsWellFounded` |
 | `SCIM.instNonemptyPolicy` | theorem | `SCIM`, `SCIM.Policy` |
-| `SCIM.marginal_withPolicy_eq_of_notDownstream` | theorem | `Assignment`, `CID.IsWellFounded`, `CID.NotDownstream`, `SCIM`, `SCIM.Policy`, `SCIM.graph`, `SCIM.instIsWellFoundedWithPolicy`, `SCIM.withPolicy`, `SCM.marginal` |
+| `SCIM.instUniqueUnitExo` | definition | `ExoAssignment`, `SCIM.unitExo` |
+| `SCIM.isOptimalPolicy_iff_law` | theorem | `CID.IsUtility`, `CID.IsWellFounded`, `ExoAssignment`, `SCIM`, `SCIM.IsOptimalPolicy`, `SCIM.IsOptimalPolicyLaw`, `SCIM.Policy`, `SCIM.graph`, `SCIM.instIsWellFoundedWithPolicy`, `SCIM.withPolicy`, `SCM.eval`, `SCM.measurable_exo` |
+| `SCIM.marginal_withPolicy_eq_of_notDownstream` | theorem | `CID.IsWellFounded`, `CID.NotDownstream`, `EndoAssignment`, `SCIM`, `SCIM.Policy`, `SCIM.graph`, `SCIM.instIsWellFoundedWithPolicy`, `SCIM.withPolicy`, `SCM.marginal` |
+| `SCIM.ne_decision_of_seg2` | theorem | `CID`, `CID.IsDescendant`, `CID.Seg2` |
+| `SCIM.nestedUtility` | definition | `CID.IsWellFounded`, `ExoAssignment`, `SCIM`, `SCIM.Policy`, `SCIM.graph`, `SCIM.point`, `SCIM.responseTo`, `SCIM.totalUtilityIn`, `SCIM.withPolicy`, `SCM.submodel` |
+| `SCIM.nestedUtility_eq_of_not_pathThrough` | theorem | `CID.IsWellFounded`, `ExoAssignment`, `SCIM`, `SCIM.PathThrough`, `SCIM.Policy`, `SCIM.graph`, `SCIM.instIsWellFoundedWithPolicy`, `SCIM.nestedUtility`, `SCIM.totalUtilityIn`, `SCIM.withPolicy` |
+| `SCIM.not_hasICI_of_not_pathThrough` | theorem | `CID.IsWellFounded`, `SCIM`, `SCIM.HasICI`, `SCIM.PathThrough`, `SCIM.graph` |
+| `SCIM.not_isDecision_of_isUtility` | theorem | `CID`, `CID.IsDecision`, `CID.IsUtility` |
+| `SCIM.not_isDecision_of_mem_parents_decision` | theorem | `CID`, `CID.DecisionFree`, `CID.IsDecision`, `CID.parents` |
+| `SCIM.not_isDecision_of_seg1` | theorem | `CID`, `CID.DecisionFree`, `CID.IsDecision`, `CID.Seg1` |
+| `SCIM.not_isDecision_of_seg2` | theorem | `CID`, `CID.DecisionFree`, `CID.IsDecision`, `CID.IsDescendant`, `CID.Seg2` |
+| `SCIM.not_seg_of_isUtility_ne` | theorem | `CID`, `CID.IsDescendant`, `CID.IsUtility`, `CID.Seg1`, `CID.Seg2` |
+| `SCIM.not_seg_of_mem_parents_decision` | theorem | `CID`, `CID.IsDescendant`, `CID.Seg1`, `CID.Seg2`, `CID.parents` |
+| `SCIM.observableLaw_withPolicy_eq_of_notDownstream` | theorem | `CID.IsWellFounded`, `CID.NotDownstream`, `ExoAssignment`, `SCIM`, `SCIM.Policy`, `SCIM.graph`, `SCIM.instIsWellFoundedWithPolicy`, `SCIM.withPolicy`, `SCM.eval`, `SCM.observableLaw` |
 | `SCIM.optimalValue` | definition | `CID.IsWellFounded`, `SCIM`, `SCIM.Policy`, `SCIM.expectedUtility`, `SCIM.graph`, `SCIM.instFintypePolicy` |
-| `SCIM.policy_ext_single` | theorem | `Assignment`, `CID.IsDecision`, `CID.decisions`, `CID.parents`, `SCIM`, `SCIM.Policy`, `SCIM.graph` |
-| `SCIM.removeInfoLink` | definition | `CID`, `CID.IsDecision`, `CID.kind`, `CID.parents`, `SCIM`, `SCIM.dom_pos`, `SCIM.exoProb`, `SCIM.exoProb_nonneg`, `SCIM.exoProb_sum`, `SCIM.f`, `SCIM.graph`, `SCIM.utilityValue` |
+| `SCIM.optimalValue_eq_sup'_law` | theorem | `CID.IsUtility`, `CID.IsWellFounded`, `ExoAssignment`, `SCIM`, `SCIM.Policy`, `SCIM.expectedUtilityLaw`, `SCIM.graph`, `SCIM.instFintypePolicy`, `SCIM.instIsWellFoundedWithPolicy`, `SCIM.instNonemptyPolicy`, `SCIM.optimalValue`, `SCIM.withPolicy`, `SCM.eval`, `SCM.measurable_exo` |
+| `SCIM.point` | definition | `EndoAssignment`, `SCIM`, `SCIM.dom_nonempty` |
+| `SCIM.point_self` | theorem | `SCIM`, `SCIM.point` |
+| `SCIM.policy_ext_single` | theorem | `CID.IsDecision`, `CID.decisions`, `CID.parents`, `EndoAssignment`, `SCIM`, `SCIM.Policy`, `SCIM.graph` |
+| `SCIM.removeInfoLink` | definition | `CID`, `CID.IsDecision`, `CID.kind`, `CID.parents`, `SCIM`, `SCIM.dom_nonempty`, `SCIM.exoProb`, `SCIM.exoProb_nonneg`, `SCIM.exoProb_tsum`, `SCIM.f`, `SCIM.graph`, `SCIM.utilityValue` |
 | `SCIM.removeInfoLink_sub` | theorem | `CID.parents`, `SCIM`, `SCIM.graph` |
-| `SCIM.withPolicy` | definition | `Assignment`, `CID.IsDecision`, `CID.instDecidableIsDecision`, `CID.parents`, `SCIM`, `SCIM.Policy`, `SCIM.dom_pos`, `SCIM.exoProb`, `SCIM.exoProb_nonneg`, `SCIM.exoProb_sum`, `SCIM.f`, `SCIM.graph`, `SCM` |
-| `SCIM.withPolicy_f_mem` | theorem | `Assignment`, `CID.IsDecision`, `CID.parents`, `SCIM`, `SCIM.Policy`, `SCIM.graph`, `SCIM.withPolicy`, `SCM.f` |
-| `SCIM.withPolicy_f_notMem` | theorem | `Assignment`, `CID.IsDecision`, `SCIM`, `SCIM.Policy`, `SCIM.f`, `SCIM.graph`, `SCIM.withPolicy`, `SCM.f` |
+| `SCIM.responseTo` | definition | `CID.IsWellFounded`, `ExoAssignment`, `SCIM`, `SCIM.Policy`, `SCIM.graph`, `SCIM.point`, `SCIM.withPolicy`, `SCM.eval`, `SCM.submodel` |
+| `SCIM.seg1_eval` | theorem | `CID`, `CID.Seg1`, `CID.parents`, `EndoAssignment`, `ExoAssignment`, `SCIM.binDom`, `SCIM.iciF`, `SCIM.unitExo`, `SCM`, `SCM.IsWellFounded`, `SCM.eval`, `SCM.f`, `SCM.parents` |
+| `SCIM.seg2_eval` | theorem | `CID`, `CID.Seg2`, `CID.parents`, `EndoAssignment`, `ExoAssignment`, `SCIM.binDom`, `SCIM.iciF`, `SCIM.unitExo`, `SCM`, `SCM.IsWellFounded`, `SCM.eval`, `SCM.f`, `SCM.parents` |
+| `SCIM.seg_propagate` | theorem | `EndoAssignment`, `ExoAssignment`, `SCIM.binDom`, `SCIM.unitExo`, `SCM`, `SCM.IsWellFounded`, `SCM.eval`, `SCM.f`, `SCM.parents` |
+| `SCIM.totalUtilityIn` | definition | `CID.utilities`, `ExoAssignment`, `SCIM`, `SCIM.graph`, `SCIM.utilityValue`, `SCM`, `SCM.IsWellFounded`, `SCM.eval` |
+| `SCIM.totalUtilityIn_congr` | theorem | `CID.IsUtility`, `ExoAssignment`, `SCIM`, `SCIM.graph`, `SCIM.totalUtilityIn`, `SCM`, `SCM.IsWellFounded`, `SCM.eval` |
+| `SCIM.unitExo` | definition | — |
+| `SCIM.withPolicy` | definition | `CID.IsDecision`, `CID.instDecidableIsDecision`, `CID.parents`, `EndoAssignment`, `SCIM`, `SCIM.Policy`, `SCIM.dom_nonempty`, `SCIM.exoProb`, `SCIM.exoProb_nonneg`, `SCIM.exoProb_tsum`, `SCIM.f`, `SCIM.graph`, `SCM` |
+| `SCIM.withPolicy_f_mem` | theorem | `CID.IsDecision`, `CID.parents`, `EndoAssignment`, `SCIM`, `SCIM.Policy`, `SCIM.graph`, `SCIM.withPolicy`, `SCM.f` |
+| `SCIM.withPolicy_f_notMem` | theorem | `CID.IsDecision`, `EndoAssignment`, `SCIM`, `SCIM.Policy`, `SCIM.f`, `SCIM.graph`, `SCIM.withPolicy`, `SCM.f` |
 | `SCIM.withPolicy_parents` | theorem | `CID.parents`, `SCIM`, `SCIM.Policy`, `SCIM.graph`, `SCIM.withPolicy`, `SCM.parents` |
 | `SCM` | definition | — |
 | `SCM.IsWellFounded` | definition | `SCM` |
-| `SCM.eval` | definition | `Assignment`, `ExoAssignment`, `SCM`, `SCM.IsWellFounded`, `SCM.IsWellFounded.wf`, `SCM.f`, `SCM.parents`, `SCM.seed` |
+| `SCM.endoLaw` | definition | `EndoAssignment`, `ExoAssignment`, `SCM`, `SCM.IsWellFounded`, `SCM.eval`, `SCM.exoLaw` |
+| `SCM.endoLaw_singleton` | theorem | `EndoAssignment`, `ExoAssignment`, `SCM`, `SCM.IsWellFounded`, `SCM.endoLaw`, `SCM.eval`, `SCM.jointProb`, `SCM.measurable_exo` |
+| `SCM.eval` | definition | `EndoAssignment`, `ExoAssignment`, `SCM`, `SCM.IsWellFounded`, `SCM.IsWellFounded.wf`, `SCM.f`, `SCM.parents`, `SCM.seed` |
 | `SCM.eval_congr` | theorem | `ExoAssignment`, `SCM`, `SCM.IsWellFounded`, `SCM.eval`, `SCM.parents` |
 | `SCM.eval_eq_f` | theorem | `ExoAssignment`, `SCM`, `SCM.IsWellFounded`, `SCM.eval`, `SCM.f` |
-| `SCM.eval_eq_of_f_agree` | theorem | `Assignment`, `ExoAssignment`, `SCM`, `SCM.IsWellFounded`, `SCM.eval`, `SCM.f`, `SCM.parents` |
+| `SCM.eval_eq_of_f_agree` | theorem | `EndoAssignment`, `ExoAssignment`, `SCM`, `SCM.IsWellFounded`, `SCM.eval`, `SCM.f`, `SCM.parents` |
+| `SCM.eval_submodel_singleton_of_eq` | theorem | `EndoAssignment`, `ExoAssignment`, `SCM`, `SCM.IsWellFounded`, `SCM.eval`, `SCM.instIsWellFoundedSubmodel`, `SCM.submodel` |
+| `SCM.eval_submodel_singleton_of_not_reaches` | theorem | `EndoAssignment`, `ExoAssignment`, `SCM`, `SCM.IsWellFounded`, `SCM.eval`, `SCM.instIsWellFoundedSubmodel`, `SCM.parents`, `SCM.submodel` |
 | `SCM.exoJoint` | definition | `ExoAssignment`, `SCM`, `SCM.exoProb` |
 | `SCM.exoJoint_mul_prod` | theorem | `ExoAssignment`, `SCM`, `SCM.exoJoint`, `SCM.exoProb` |
 | `SCM.exoJoint_nonneg` | theorem | `ExoAssignment`, `SCM`, `SCM.exoJoint` |
 | `SCM.exoJoint_sum` | theorem | `ExoAssignment`, `SCM`, `SCM.exoJoint` |
-| `SCM.instIsWellFoundedSoftIntervention` | theorem | `Assignment`, `SCM`, `SCM.IsWellFounded`, `SCM.parents`, `SCM.softIntervention` |
-| `SCM.instIsWellFoundedSubmodel` | theorem | `Assignment`, `SCM`, `SCM.IsWellFounded`, `SCM.submodel` |
-| `SCM.jointProb` | definition | `Assignment`, `ExoAssignment`, `SCM`, `SCM.IsWellFounded`, `SCM.eval`, `SCM.exoJoint` |
-| `SCM.jointProb_nonneg` | theorem | `Assignment`, `SCM`, `SCM.IsWellFounded`, `SCM.jointProb` |
-| `SCM.jointProb_sum` | theorem | `Assignment`, `SCM`, `SCM.IsWellFounded`, `SCM.jointProb` |
-| `SCM.marginal` | definition | `Assignment`, `SCM`, `SCM.IsWellFounded`, `SCM.jointProb` |
-| `SCM.marginal_eq_sum_exo` | theorem | `Assignment`, `ExoAssignment`, `SCM`, `SCM.IsWellFounded`, `SCM.eval`, `SCM.exoJoint`, `SCM.marginal` |
-| `SCM.seed` | definition | `Assignment`, `SCM`, `SCM.dom_pos` |
-| `SCM.softIntervention` | definition | `Assignment`, `SCM`, `SCM.acyclic`, `SCM.dom_pos`, `SCM.exoProb`, `SCM.exoProb_nonneg`, `SCM.exoProb_sum`, `SCM.f`, `SCM.parents` |
-| `SCM.submodel` | definition | `Assignment`, `SCM`, `SCM.dom_pos`, `SCM.exoProb`, `SCM.exoProb_nonneg`, `SCM.exoProb_sum`, `SCM.f`, `SCM.parents` |
-| `SCM.submodel_eval` | theorem | `Assignment`, `ExoAssignment`, `SCM`, `SCM.IsWellFounded`, `SCM.eval`, `SCM.instIsWellFoundedSubmodel`, `SCM.submodel` |
-| `SCM.submodel_eval_notMem` | theorem | `Assignment`, `ExoAssignment`, `SCM`, `SCM.IsWellFounded`, `SCM.eval`, `SCM.f`, `SCM.instIsWellFoundedSubmodel`, `SCM.submodel` |
+| `SCM.exoLaw` | definition | `ExoAssignment`, `SCM`, `SCM.exoPMF` |
+| `SCM.exoLaw_eq_pi` | theorem | `ExoAssignment`, `SCM`, `SCM.exoLaw`, `SCM.exoPMF` |
+| `SCM.exoLaw_map_eval` | theorem | `ExoAssignment`, `SCM`, `SCM.exoLaw`, `SCM.exoPMF` |
+| `SCM.exoLaw_singleton` | theorem | `ExoAssignment`, `SCM`, `SCM.exoJoint`, `SCM.exoLaw` |
+| `SCM.exoPMF` | definition | `SCM`, `SCM.exoProb` |
+| `SCM.exoProb_sum_fintype` | theorem | `SCM`, `SCM.exoProb` |
+| `SCM.exoProb_summable` | theorem | `SCM`, `SCM.exoProb` |
+| `SCM.instIsWellFoundedSoftIntervention` | theorem | `EndoAssignment`, `SCM`, `SCM.IsWellFounded`, `SCM.parents`, `SCM.softIntervention` |
+| `SCM.instIsWellFoundedSubmodel` | theorem | `EndoAssignment`, `SCM`, `SCM.IsWellFounded`, `SCM.submodel` |
+| `SCM.jointProb` | definition | `EndoAssignment`, `ExoAssignment`, `SCM`, `SCM.IsWellFounded`, `SCM.eval`, `SCM.exoJoint` |
+| `SCM.jointProb_nonneg` | theorem | `EndoAssignment`, `SCM`, `SCM.IsWellFounded`, `SCM.jointProb` |
+| `SCM.jointProb_sum` | theorem | `EndoAssignment`, `SCM`, `SCM.IsWellFounded`, `SCM.jointProb` |
+| `SCM.marginal` | definition | `EndoAssignment`, `SCM`, `SCM.IsWellFounded`, `SCM.jointProb` |
+| `SCM.marginal_eq_sum_exo` | theorem | `EndoAssignment`, `ExoAssignment`, `SCM`, `SCM.IsWellFounded`, `SCM.eval`, `SCM.exoJoint`, `SCM.marginal` |
+| `SCM.measurable_exo` | theorem | `ExoAssignment` |
+| `SCM.observableLaw` | definition | `ExoAssignment`, `SCM`, `SCM.IsWellFounded`, `SCM.eval`, `SCM.exoLaw` |
+| `SCM.seed` | definition | `EndoAssignment`, `SCM`, `SCM.dom_nonempty` |
+| `SCM.softIntervention` | definition | `EndoAssignment`, `SCM`, `SCM.acyclic`, `SCM.dom_nonempty`, `SCM.exoProb`, `SCM.exoProb_nonneg`, `SCM.exoProb_tsum`, `SCM.f`, `SCM.parents` |
+| `SCM.submodel` | definition | `EndoAssignment`, `SCM`, `SCM.dom_nonempty`, `SCM.exoProb`, `SCM.exoProb_nonneg`, `SCM.exoProb_tsum`, `SCM.f`, `SCM.parents` |
+| `SCM.submodel_eval` | theorem | `EndoAssignment`, `ExoAssignment`, `SCM`, `SCM.IsWellFounded`, `SCM.eval`, `SCM.instIsWellFoundedSubmodel`, `SCM.submodel` |
+| `SCM.submodel_eval_notMem` | theorem | `EndoAssignment`, `ExoAssignment`, `SCM`, `SCM.IsWellFounded`, `SCM.eval`, `SCM.f`, `SCM.instIsWellFoundedSubmodel`, `SCM.submodel` |
 | `Satisfies` | definition | `SequentialGoal`, `SubGoal` |
 | `SequentialGoal` | definition | `SubGoal` |
 | `SequentialGoal.depth` | definition | `SequentialGoal`, `SubGoal` |
@@ -489,6 +697,10 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 | `chartBox` | definition | `ChartIndex` |
 | `chartDim` | definition | — |
 | `chartOn_mem_chartBox` | theorem | `ChartIndex`, `Model`, `Model.chartOn`, `binaryDim`, `chartBox` |
+| `cidToDAG` | definition | `CID`, `CID.acyclic`, `CID.parents` |
+| `cidToDAG_edge` | theorem | `CID`, `CID.parents`, `cidToDAG` |
+| `cidToDAG_isCollider` | theorem | `CID`, `CID.IsCollider`, `cidToDAG` |
+| `cidToDAG_uAdj` | theorem | `CID`, `CID.UAdj`, `cidToDAG` |
 | `compositeGoals` | definition | `CompositeGoal`, `SequentialGoal`, `boundedGoals` |
 | `compositeSatisfies_of_immediateWin` | theorem | `CompositeGoal`, `CompositeSatisfies`, `SequentialGoal`, `immediateWins` |
 | `compositeSatisfies_of_now_disjunct` | theorem | `CompositeGoal`, `CompositeSatisfies`, `SequentialGoal`, `nowGoal` |
@@ -512,7 +724,7 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 | `exactAnalystRisk_discretize_le` | theorem | `MeasureEstimator`, `MeasureEstimator.discretize`, `Model`, `RandomizedQueryStrategy`, `Skeleton`, `dimBound`, `exactAnalystRisk`, `measureAnalystRisk` |
 | `exactAnalystRisk_empty` | theorem | `Model`, `RandomizedEstimator`, `RandomizedQueryStrategy`, `Skeleton`, `exactAnalystRisk` |
 | `exactAnalystRisk_nonneg` | theorem | `Model`, `RandomizedEstimator`, `RandomizedQueryStrategy`, `Skeleton`, `exactAnalystRisk` |
-| `exactExpectedError` | definition | `Model`, `PolicyFamily`, `RandomizedEstimator`, `RandomizedQueryStrategy`, `Skeleton`, `Transcript`, `modelError`, `pmfExpect`, `runRandomizedTranscript` |
+| `exactExpectedError` | definition | `Model`, `PolicyFamily`, `RandomizedEstimator`, `RandomizedQueryStrategy`, `Skeleton`, `Transcript`, `modelError`, `runRandomizedTranscript` |
 | `exactExpectedError_discretize_le` | theorem | `MeasureEstimator`, `MeasureEstimator.discretize`, `Model`, `PolicyFamily`, `RandomizedQueryStrategy`, `Skeleton`, `dimBound`, `exactExpectedError`, `measureExpectedError` |
 | `exactExpectedError_nonneg` | theorem | `Model`, `PolicyFamily`, `RandomizedEstimator`, `RandomizedQueryStrategy`, `Skeleton`, `exactExpectedError` |
 | `exactMinimalBudget` | definition | `Model`, `Skeleton`, `exactMinimaxRisk` |
@@ -525,6 +737,7 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 | `exists_achieveProb_ge` | theorem | `CompositeGoal`, `ControlledMarkovProcess`, `GoalPolicy`, `achieveProb`, `optimalProb` |
 | `exists_behaviorEq_pair_of_not_knowable` | theorem | `Assignment`, `Model`, `ProbMixture`, `Skeleton`, `Skeleton.BehaviorEq`, `Skeleton.observed`, `behavior` |
 | `exists_isDeltaBounded_prescribing` | theorem | `CompositeGoal`, `ControlledMarkovProcess`, `ControlledMarkovProcess.ActionIndependent`, `GoalConditionedAgent`, `IsDeltaBounded`, `SequentialGoal`, `compositeGoals`, `firstActionMap`, `immediateWins` |
+| `expect_discretize` | theorem | `MeasureEstimator`, `MeasureEstimator.discretize`, `Model`, `Model.roundDown`, `Skeleton`, `Transcript`, `instMeasurableSpaceModel`, `modelError` |
 | `fibreRep` | definition | `Assignment`, `Model`, `Model.dim_pos` |
 | `fibreRep_idem` | theorem | `Assignment`, `Model`, `fibreRep` |
 | `fibreRep_mem` | theorem | `Assignment`, `Model`, `fibreRep` |
@@ -544,7 +757,7 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 | `forcedTable` | definition | `Assignment` |
 | `goalsOfLength` | definition | `SequentialGoal` |
 | `hardInterventionProfile` | definition | `Assignment`, `InterventionProfile`, `LocalIntervention`, `fixIntervention`, `identityIntervention` |
-| `hasSum_pmf_toReal` | theorem | — |
+| `hasActivePath_iff_not_disjoint` | theorem | `CID`, `cidToDAG` |
 | `history_zero_const` | theorem | — |
 | `identityIntervention` | definition | — |
 | `immediateWins` | definition | `SequentialGoal`, `SubGoal`, `nowGoal` |
@@ -561,7 +774,7 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 | `instNonemptyBinaryModel` | theorem | `Model`, `binaryDim` |
 | `instNonemptyShiftedQuery` | theorem | `ShiftedQuery`, `Skeleton`, `binaryDim` |
 | `integrable_modelError` | theorem | `Model`, `instMeasurableSpaceModel`, `modelError` |
-| `integral_toMeasure_modelError` | theorem | `Model`, `instMeasurableSpaceModel`, `modelError`, `pmfExpect` |
+| `integral_toMeasure_modelError` | theorem | `Model`, `instMeasurableSpaceModel`, `modelError` |
 | `isCausalBayesNetwork_family` | theorem | `ConditionalTables`, `ConditionalTables.family`, `IsCausalBayesNetwork` |
 | `isCausalBayesNetwork_iff` | theorem | `ConditionalTables`, `ConditionalTables.family`, `InterventionalFamily`, `IsCausalBayesNetwork` |
 | `isCompatibleGraph_parents` | theorem | `IsCompatibleGraph`, `Model`, `Model.parents`, `binaryDim` |
@@ -574,7 +787,6 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 | `isSemialgebraic_of_containsChartBox` | theorem | `ChartIndex`, `ContainsChartBox`, `Model`, `Model.chartSlice`, `binaryDim` |
 | `jointProb_sum_two` | theorem | `Assignment`, `InterventionProfile`, `Model`, `Model.jointProb`, `binaryDim` |
 | `knowable_of_determines_behavior` | theorem | `Assignment`, `Model`, `ProbMixture`, `Skeleton`, `Skeleton.observed`, `behavior` |
-| `le_pmfExpect` | theorem | `pmfExpect` |
 | `liftPolicy` | definition | `FullHistory`, `FullPolicy`, `GoalPolicy` |
 | `measurableSet_compositeSatisfies` | theorem | `CompositeGoal`, `CompositeSatisfies`, `GoalPolicy`, `statePairs` |
 | `measurableSet_goalHistory` | theorem | `GoalHistory` |
@@ -590,7 +802,7 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 | `measureAnalystRisk` | definition | `AdmissibleFamily`, `MeasureEstimator`, `Model`, `PolicyFamily`, `RandomizedQueryStrategy`, `Skeleton`, `measureExpectedError` |
 | `measureAnalystRisk_nonneg` | theorem | `MeasureEstimator`, `Model`, `RandomizedQueryStrategy`, `Skeleton`, `measureAnalystRisk` |
 | `measureAnalystRisk_toMeasureEstimator` | theorem | `Model`, `RandomizedEstimator`, `RandomizedEstimator.toMeasureEstimator`, `RandomizedQueryStrategy`, `Skeleton`, `exactAnalystRisk`, `measureAnalystRisk` |
-| `measureExpectedError` | definition | `MeasureEstimator`, `Model`, `PolicyFamily`, `RandomizedQueryStrategy`, `Skeleton`, `Transcript`, `instMeasurableSpaceModel`, `modelError`, `pmfExpect`, `runRandomizedTranscript` |
+| `measureExpectedError` | definition | `MeasureEstimator`, `Model`, `PolicyFamily`, `RandomizedQueryStrategy`, `Skeleton`, `Transcript`, `instMeasurableSpaceModel`, `modelError`, `runRandomizedTranscript` |
 | `measureExpectedError_le_one` | theorem | `MeasureEstimator`, `Model`, `PolicyFamily`, `RandomizedQueryStrategy`, `Skeleton`, `measureExpectedError` |
 | `measureExpectedError_nonneg` | theorem | `MeasureEstimator`, `Model`, `PolicyFamily`, `RandomizedQueryStrategy`, `Skeleton`, `measureExpectedError` |
 | `measureExpectedError_toMeasureEstimator` | theorem | `Model`, `PolicyFamily`, `RandomizedEstimator`, `RandomizedEstimator.toMeasureEstimator`, `RandomizedQueryStrategy`, `Skeleton`, `exactExpectedError`, `measureExpectedError` |
@@ -601,8 +813,10 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 | `measureMinimaxRisk_eq_exactMinimaxRisk` | theorem | `Model`, `ShiftedQuery`, `Skeleton`, `exactMinimaxRisk`, `measureMinimaxRisk` |
 | `measureMinimaxRisk_eq_exactMinimaxRisk_binary` | theorem | `Model`, `Skeleton`, `binaryDim`, `exactMinimaxRisk`, `measureMinimaxRisk` |
 | `measureMinimaxRisk_le_exactMinimaxRisk` | theorem | `Model`, `ShiftedQuery`, `Skeleton`, `exactMinimaxRisk`, `measureMinimaxRisk` |
+| `mem_bbZAncestors_iff` | theorem | `CID`, `CID.IsDescendant`, `cidToDAG` |
 | `mem_boundedGoals` | theorem | `SequentialGoal`, `SequentialGoal.depth`, `boundedGoals` |
 | `mem_goalsOfLength` | theorem | `SequentialGoal`, `SubGoal`, `goalsOfLength` |
+| `mem_image_fibreRep_iff` | theorem | `Assignment`, `Model`, `Model.dim_pos`, `fibreRep` |
 | `modelError` | definition | `Model`, `Model.parents`, `cptError` |
 | `modelError_eq_zero_iff` | theorem | `Model`, `modelError` |
 | `modelError_le_one` | theorem | `Model`, `modelError` |
@@ -631,15 +845,6 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 | `optimalProbFull_eq` | theorem | `CompositeGoal`, `ControlledMarkovProcess`, `optimalProb`, `optimalProbFull` |
 | `optimalProb_le_one` | theorem | `CompositeGoal`, `ControlledMarkovProcess`, `optimalProb` |
 | `outputLaw` | definition | `FirstActionData`, `FirstActionEstimator`, `FirstActionStrategy`, `FirstActionTranscript`, `KernelEstimate`, `runFirstActionTranscript` |
-| `pmfExpect` | definition | — |
-| `pmfExpect_add` | theorem | `pmfExpect` |
-| `pmfExpect_add_const` | theorem | `pmfExpect` |
-| `pmfExpect_const` | theorem | `pmfExpect` |
-| `pmfExpect_discretize` | theorem | `MeasureEstimator`, `MeasureEstimator.discretize`, `Model`, `Model.roundDown`, `Skeleton`, `Transcript`, `instMeasurableSpaceModel`, `modelError`, `pmfExpect` |
-| `pmfExpect_le` | theorem | `pmfExpect` |
-| `pmfExpect_mono` | theorem | `pmfExpect` |
-| `pmfExpect_nonneg` | theorem | `pmfExpect` |
-| `pmfExpect_pure` | theorem | `pmfExpect` |
 | `polySize` | definition | `ratBitLength` |
 | `powerset_filter_disjoint` | theorem | — |
 | `radiusErrors` | definition | `InIdentifiedSet`, `Model`, `Skeleton`, `Skeleton.MarginClass`, `modelError` |
@@ -656,7 +861,7 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 | `stepPMF_congr` | theorem | `ControlledMarkovProcess`, `ControlledMarkovProcess.ActionIndependent`, `stepPMF` |
 | `sub_floorMul_lt` | theorem | `floorMul` |
 | `sum_assignment_two` | theorem | `Assignment`, `asg`, `binaryDim` |
-| `summable_pmfExpect` | theorem | — |
+| `sum_image_fibreRep_erase` | theorem | `Assignment`, `Model`, `fibreRep` |
 | `sup'_sub_inf'_bool` | theorem | — |
 | `trajectoryLaw` | definition | `ControlledMarkovProcess`, `GoalPolicy`, `stepKernel` |
 | `trajectoryLaw_congr` | theorem | `ControlledMarkovProcess`, `ControlledMarkovProcess.ActionIndependent`, `GoalPolicy`, `trajectoryLaw` |

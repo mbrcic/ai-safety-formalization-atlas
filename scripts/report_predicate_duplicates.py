@@ -17,8 +17,12 @@ same design decision that keeps `declaration-index.json` type-free. So this asks
 Lean directly.
 
 **What it does.** For every `AISafetyAtlas` definition whose type telescopes to
-`Prop`, it takes the definition's value, telescopes the binders, and prints a
-name-erased de Bruijn rendering of the body. The scan covers the root import
+`Prop`, `ℝ`, `ℝ≥0∞` or `ℝ≥0`, it takes the definition's value, telescopes the
+binders, and prints a name-erased de Bruijn rendering of the body. The numeric
+codomains were added on 2026-09-16: a `Prop`-only filter is blind to exactly the
+duplication that actually happened here, since `Decision.expect` and
+`Causal.Query.pmfExpect` were one real-valued definition written twice and this
+report could not see either. The scan covers the root import
 *plus* `scripts/lean_build_targets.txt`, which is the same domain
 `generate_declaration_index.py` walks and is reused from it: the root alone
 misses the MAIS conjecture layer, which `AISafetyAtlas.lean` does not import,
@@ -161,7 +165,14 @@ def report : MetaM Unit := do
     if n.isInternal then continue
     unless n.toString.startsWith "AISafetyAtlas" do continue
     unless ci.isDef do continue
-    let isPred ← forallTelescopeReducing ci.type fun _ b => return (← whnf b).isProp
+    -- `Prop` is not the only shape a duplicate hides in. `Decision.expect` and
+    -- `Causal.Query.pmfExpect` were the same real-valued definition written
+    -- twice, and a Prop-only filter could not see either of them. Numeric
+    -- codomains are included for that reason.
+    let isPred ← forallTelescopeReducing ci.type fun _ b => do
+      let b ← whnf b
+      if b.isProp then return true
+      return b.isConstOf ``Real || b.isConstOf ``ENNReal || b.isConstOf ``NNReal
     unless isPred do continue
     let some value := ci.value? | continue
     -- Telescope the parameters so that only the proposition's shape remains,

@@ -67,4 +67,23 @@ theorem inv_strictly_cheaper :
   have h : Real.log (4 : ℝ) < Real.log 9 := Real.log_lt_log (by norm_num) (by norm_num)
   linarith
 
+/-- **The complexity order inverts, at named numbers.** A device that strongly
+infers another can be *arbitrarily cheaper* on the same target while the weaker
+one is arbitrarily expensive — so inference strength and inference cost are not
+merely different orders, they can point opposite ways.
+
+Instantiated at `M = 100` and `δ = 1/10`: the weak device costs more than `100`
+and the strong one less than `2 log 2 + 1/10`. The general statement quantifies
+over every `M` and `δ` and had never been run at either. -/
+public theorem complexity_inversion_at_one_hundred :
+    ∃ (ε : ℝ) (hpos : 0 < ε) (hhalf : ε ≤ 1 / 2),
+      StronglyInfers invDevice' invDevice ∧
+      WeaklyInfers invDevice invGamma ∧
+      (100 : ℝ) < inferenceComplexityMeasure (invMeasure ε hpos.le (by linarith)) invDevice
+            invGamma inv_weaklyInfers ∧
+      inferenceComplexityMeasure (invMeasure ε hpos.le (by linarith)) invDevice'
+            invGamma (weaklyInfers_of_stronglyInfers inv_stronglyInfers inv_weaklyInfers)
+        < 2 * Real.log 2 + 1 / 10 :=
+  exists_complexity_inversion (M := 100) (by norm_num)
+
 end AISafetyAtlas.Examples.Inference.Inversion

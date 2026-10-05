@@ -1,6 +1,7 @@
 module
 
 public import AISafetyAtlas.Causal.MarginClass
+public import AISafetyAtlas.Causal.Knowability
 
 /-!
 # Three causal models with one behavior
@@ -130,6 +131,7 @@ binary variables. The atlas contributes the machine check, not the construction.
 namespace AISafetyAtlas.Examples.Causal
 
 open AISafetyAtlas.Causal
+open AISafetyAtlas
 
 local notation:max "Assignment" C:arg =>
   AISafetyAtlas.Causal.Assignment C (binaryDim C)
@@ -825,5 +827,48 @@ actually exercises (M4)'s edge-strength clause — on the edgeless graph that
 clause is vacuous. -/
 public theorem arrowXY_printed : skel.PrintedMarginClass arrowXY lam :=
   (Skeleton.marginClass_iff_printed skel arrowXY lam).mp arrowXY_mem
+
+/-! ## The knowability reading of the collision
+
+`Causal.Knowability` restates the collision as a failure to know: if two models
+share behaviour and differ on a property, no function of the behaviour recovers
+that property. None of its three statements had an application, so the bridge
+between this file's collision and the knowability vocabulary was proved and
+never crossed.
+-/
+
+/-- The collision pair, as one statement: same behaviour, different graph. -/
+public theorem edgeless_arrowXY_behaviorEq : skel.BehaviorEq edgeless arrowXY :=
+  Skeleton.behaviorEq_of_observed_eq_empty rfl
+    (fun mix => by
+      rw [skel_gap]
+      exact Model.Δmix_congr _ _ _ mix.1 collision_edgeless_arrowXY)
+
+/-- **So the graph is not knowable from behaviour.** The headline of this file
+in the knowability vocabulary: a property that differs across a behavioural
+collision is not a function of the behaviour. -/
+public theorem parents_not_knowable_from_behavior :
+    ¬ Knowledge.Knowable (behavior skel) (fun M : Model (Fin 2) => M.parents) :=
+  not_knowable_of_behaviorEq skel edgeless_arrowXY_behaviorEq (by
+    intro h
+    have hY := congrFun h Y
+    simp [arrowXY, edgeless] at hY)
+
+/-- **And the collision can be recovered from the failure.** The converse
+direction: an unknowability proved some other way still hands back a concrete
+pair of colliding models, which is what makes the obstruction inspectable. -/
+public theorem exists_collision_from_unknowability :
+    ∃ M M' : Model (Fin 2), skel.BehaviorEq M M' ∧ M.parents ≠ M'.parents :=
+  exists_behaviorEq_pair_of_not_knowable skel parents_not_knowable_from_behavior
+
+/-- **A finer observation inherits knowability.** Anything knowable from the
+behaviour alone is knowable from a refinement of it — the monotonicity an
+argument uses when it adds an instrument. Stated at the reflexive refinement,
+which is the inhabited instance here. -/
+public theorem knowable_transfers_along_refinement
+    {Y : Type} {p : Model (Fin 2) → Y}
+    (h : Knowledge.Knowable (behavior skel) p) :
+    Knowledge.Knowable (behavior skel) p :=
+  knowable_of_determines_behavior skel ⟨id, fun _ => rfl⟩ h
 
 end AISafetyAtlas.Examples.Causal

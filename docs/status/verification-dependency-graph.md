@@ -10,7 +10,7 @@ Edges come from the elaborated Lean environment. This answers the question the p
 
 So `A → B` means *`B` occurs in `A`'s statement, or in `A`'s body when `A` is a definition*. A lemma used only inside a proof does not appear. Reading the table as a complete call graph would be wrong, and the two sections below are scoped so that they stay true under this limit.
 
-`16` authored declarations in `AISafetyAtlas.Verification.*` (3 theorems). Compiler-generated companions and projections are dropped.
+`38` authored declarations in `AISafetyAtlas.Verification.*` (14 theorems). Compiler-generated companions and projections are dropped.
 
 ## Load-bearing declarations
 
@@ -18,6 +18,8 @@ Named in the statements of eight or more others. A change to one of these is a c
 
 | Declaration | Named by |
 |---|---|
+| `Robot.Behavior` | 12 |
+| `FullAccess.SyntacticProperty` | 10 |
 
 ## Definitions no statement and no example mentions
 
@@ -25,7 +27,7 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 
 **Instances always appear here.** Typeclass resolution names nothing, so an instance has no textual user even when every consumer depends on it. Deleting one because it is listed here is how a checker stops compiling.
 
-None.
+- `Containment.HarmReductionPair.toHarmReduction`
 
 ## Direct dependencies
 
@@ -38,6 +40,24 @@ None.
 | `AgentBehavior.SpecNontrivial` | definition | `AgentBehavior.SafetySpec`, `Nontrivial` |
 | `AgentBehavior.no_behavioral_safety_verifier` | theorem | `AgentBehavior.BehavioralSafetyVerifier`, `AgentBehavior.SafetySpec`, `AgentBehavior.SpecNontrivial` |
 | `BehavioralProperty` | definition | — |
+| `Containment.Assumption2` | definition | — |
+| `Containment.Assumption2.harmReductionPair` | definition | `Containment.Assumption2`, `Containment.Assumption2.computable_encode`, `Containment.HaltsOn`, `Containment.HarmReductionPair` |
+| `Containment.HaltsOn` | definition | — |
+| `Containment.HarmDecider` | definition | — |
+| `Containment.HarmReduction` | definition | — |
+| `Containment.HarmReductionPair` | definition | — |
+| `Containment.HarmReductionPair.toHarmReduction` | definition | `Containment.HarmReduction`, `Containment.HarmReductionPair`, `Containment.HarmReductionPair.encode`, `Containment.HarmReductionPair.haltHarm`, `Containment.HarmReductionPair.harms_iff_halts` |
+| `Containment.halting_problem_pair` | theorem | — |
+| `Containment.harming_undecidable` | theorem | `Containment.HarmDecider`, `Containment.HarmReduction` |
+| `Containment.harming_undecidable_of_assumption2` | theorem | `Containment.Assumption2`, `Containment.HaltsOn`, `Containment.HarmDecider` |
+| `Containment.harming_undecidable_pair` | theorem | `Containment.HarmDecider`, `Containment.HarmReductionPair` |
+| `FullAccess.FullAccessVerifier` | definition | `FullAccess.SyntacticProperty` |
+| `FullAccess.SyntacticProperty` | definition | — |
+| `FullAccess.access_is_not_what_separates_them` | theorem | `FullAccess.FullAccessVerifier`, `FullAccess.SyntacticProperty`, `FullAccess.exactArtifact` |
+| `FullAccess.exactArtifact` | definition | `FullAccess.SyntacticProperty` |
+| `FullAccess.exactArtifact_not_extensional` | theorem | `FullAccess.SyntacticProperty`, `FullAccess.exactArtifact` |
+| `FullAccess.fullAccessVerifier_exactArtifact` | theorem | `FullAccess.FullAccessVerifier`, `FullAccess.exactArtifact` |
+| `FullAccess.no_fullAccessVerifier_of_extensional` | theorem | `FullAccess.FullAccessVerifier`, `FullAccess.SyntacticProperty` |
 | `HasVerifier` | definition | `BehavioralProperty`, `Holds` |
 | `Holds` | definition | `BehavioralProperty` |
 | `Nontrivial` | definition | `BehavioralProperty`, `Holds` |
@@ -45,5 +65,9 @@ None.
 | `Robot.Behavior` | definition | — |
 | `Robot.SwitchingConstruction` | definition | `Robot.Behavior` |
 | `Robot.Verifier` | definition | `Robot.Behavior` |
+| `Robot.actionAt_ofBehavior` | theorem | `Robot.Behavior`, `Robot.ofBehavior` |
 | `Robot.action_safety_unverifiable` | theorem | `Robot.Behavior`, `Robot.SwitchingConstruction`, `Robot.Verifier` |
+| `Robot.alwaysSatisfies_run` | theorem | `Robot.AlwaysSatisfies`, `Robot.Behavior`, `Robot.ofBehavior` |
+| `Robot.detStateAt_ofBehavior_succ` | theorem | `Robot.Behavior`, `Robot.ofBehavior` |
+| `Robot.ofBehavior` | definition | `Robot.Behavior` |
 | `rice` | theorem | `BehavioralProperty`, `HasVerifier`, `Nontrivial` |

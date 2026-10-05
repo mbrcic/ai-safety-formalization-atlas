@@ -180,5 +180,70 @@ public theorem saDevice_selfAwareComplexity :
   rw [Finset.sum_congr rfl hterm]
   simp
 
+/-! ## §9 vocabulary applied at the witness -/
+
+/-- **Reading off the conclusion from membership in the answering set.** At the
+setup value that answers the `true` probe, the conclusion is exactly what the
+probe of `Γ` there asserts. -/
+theorem saDevice_concl_eq_of_mem_questionAnsweringSet :
+    saDevice.toDevice.concl 0 = probe true (saGamma 0) :=
+  concl_eq_of_mem_questionAnsweringSet saDevice_infallible (saDevice_answers true) 0
+    (by decide)
+
+/-- **The set-scope minimum question length recovers the `Finset` form**, on
+this device's finite setup range and a nonempty answering set. -/
+theorem saDevice_minQuestionLengthOn_eq :
+    minQuestionLengthOn saDevice (setupLength saBase) saGamma (probe true) =
+      minQuestionLength saDevice (setupLength saBase) saGamma (probe true) :=
+  minQuestionLengthOn_eq saDevice (setupLength saBase) saGamma (probe true)
+    (saDevice_answering_nonempty true)
+
+/-! ## The printed corollary at `|U| = 2`
+
+*"...and that there cannot be any other root node"* is one half of the
+monotheism theorem; the *"no admissible self-aware device on `Bool`"* result
+is a separate boundary. A self-aware device needs two distinct question values
+realized (Definition 12) for the corollary to say anything, and on `Bool` any
+such device's question is provably constant — so the boundary is exhibited at
+the cheapest possible device rather than left as an unapplied universal. -/
+
+/-- The cheapest self-aware device over `Bool`: the identity device with a
+constant question. -/
+public abbrev boolDevice : SelfAwareDevice.{0, 0, 0} Bool where
+  toDevice := deviceOf (id : Bool → Bool) (id : Bool → Bool) Function.surjective_id
+  Question := Unit
+  question := fun _ => ()
+  eval := fun _ u => u
+  pair_surjective := fun p => ⟨p.1, by cases p; simp [deviceOf]⟩
+
+/-- **The corollary, applied.** `boolDevice`'s question is (trivially)
+constant, matching what the theorem forces of *every* self-aware device over
+`Bool`. -/
+theorem boolDevice_question_constant :
+    boolDevice.question true = boolDevice.question false :=
+  no_admissible_selfAware_on_bool boolDevice true false
+
+/-- **The function-valued round trip leaves the question set alone**, at
+`boolDevice`.
+
+This was recorded as unwitnessable on the grounds that the statement carries an
+unconstrained universe metavariable, so that no call site could pin it. That was
+wrong and the claim was never tested: elaborated, the lemma is
+`evalImage.{u, v, u} (…) = evalImage.{u, v, w} D` with all three universes bound
+by `D`. The asymmetry is the round trip re-representing questions at `U → Bool`'s
+universe, both sides are `Set (U → Bool)`, and a concrete device pins everything.
+The sibling `askOf_toFunctionValued_toSelfAware` has the same shape and was
+already witnessed, which should have been the tell. -/
+public theorem boolDevice_evalImage_toFunctionValued :
+    evalImage boolDevice.toFunctionValued.toSelfAware = evalImage boolDevice :=
+  SelfAwareDevice.evalImage_toFunctionValued boolDevice
+
+/-- **Every device fails to correct some self-aware device.** The correction
+analogue of Theorem 1: whatever `saBase` is, there is a self-aware device whose
+answers it cannot repair. The library builds the uncorrectable device by
+diagonalising on the would-be corrector, and nothing had run it. -/
+public theorem saBase_fails_to_correct_something :
+    ∃ D : SelfAwareDevice.{0, 0, 0} (Fin 4), ¬ Corrects saBase D :=
+  exists_not_corrects saBase
 
 end AISafetyAtlas.Examples.Inference.SelfAwareComplexity

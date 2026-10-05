@@ -5,7 +5,7 @@ The ledger as a graph. `related_result_ids` in [`registry.yaml`](../../registry.
 `relations` records *how*, and `result_shape` records what kind of statement a
 row makes at all.
 
-Coverage: **30 typed edges** across **18 rows**, and **18 rows** carry a shape, out of **91** results (36 of which record untyped adjacency).
+Coverage: **31 typed edges** across **19 rows**, and **31 rows** carry a shape, out of **144** results (77 of which record untyped adjacency).
 This is a pilot scoped to the self-knowledge cluster. An untyped row is not a
 claim that the row has no relations — it is a claim that nobody has decided them.
 
@@ -18,11 +18,11 @@ row's prose.
 
 | Shape | Meaning | Rows |
 |---|---|---|
-| `ACHIEVABILITY` | a construction attaining something | LAND-CL-001 |
+| `ACHIEVABILITY` | a construction attaining something | LAND-CL-001, LAND-SOV-CAPABILITY-001 |
 | `BOUND` | an inequality, so it degrades rather than switching off | LAND-ACCUM-001 |
-| `CHARACTERIZATION` | necessary and sufficient — says what *is* achievable as well as what is not | LAND-AMBIG-001, LAND-JOINTOBS-001, LAND-KNOW-001, LAND-SELFMEAS-003, LAND-SELFREF-001 |
-| `INFRASTRUCTURE` | definitions and transfer lemmas, no standalone claim | LAND-CAUSAL-DECISION-001, LAND-CAUSAL-DECISIONNET-001, LAND-CAUSAL-PEARLCBN-001, LAND-CAUSAL-STRUCTURAL-001, LAND-KNOW-DEVICE-001, LAND-TEMPORAL-001 |
-| `POINT_IMPOSSIBILITY` | rules out one extreme configuration | BY-044, LAND-CAUSAL-COLLISION-001, LAND-CRMDP-KNOW-001, LAND-SELFMEAS-001, LAND-SELFMEAS-002 |
+| `CHARACTERIZATION` | necessary and sufficient — says what *is* achievable as well as what is not | LAND-ACCESS-ORDER-001, LAND-AMBIG-001, LAND-AUDIT-REGISTRY-001, LAND-EVAL-BLINDSPOT-001, LAND-GOODHART-REGTARGET-001, LAND-JOINTOBS-001, LAND-KNOW-001, LAND-KNOW-UNIFORM-001, LAND-SELFMEAS-003, LAND-SELFREF-001, LAND-SOV-ASSESSMENT-001, LAND-VERIF-FULLACCESS-001 |
+| `INFRASTRUCTURE` | definitions and transfer lemmas, no standalone claim | LAND-CAUSAL-DECISION-001, LAND-CAUSAL-DECISIONNET-001, LAND-CAUSAL-PEARLCBN-001, LAND-CAUSAL-STRUCTURAL-001, LAND-KNOW-DEVICE-001, LAND-SOV-DEONTIC-001, LAND-SOV-INSTITUTION-001, LAND-SOV-STABILITY-001, LAND-TEMPORAL-001 |
+| `POINT_IMPOSSIBILITY` | rules out one extreme configuration | BY-044, LAND-AUDIT-LAG-001, LAND-CAUSAL-COLLISION-001, LAND-CRMDP-KNOW-001, LAND-INCIDENT-COUNT-001, LAND-SELFMEAS-001, LAND-SELFMEAS-002 |
 
 ## Edge kinds
 
@@ -45,7 +45,7 @@ row's prose.
 | LAND-CAUSAL-DECISION-001 | `BUILDS_ON` | LAND-CAUSAL-COLLISION-001 — Margins do not imply behavioral identifiability | Consumes the causal Model, derived Skeleton utility gap, margin class, and masked transform layer. |
 | LAND-CAUSAL-KNOW-001 | `BUILDS_ON` | LAND-CAUSAL-DECISION-001 — Causal decision policies, regret, and identified-set radius | Reads Skeleton, Model.Delta-mask and BehaviorEq from the decision layer and restates them; proves nothing further about causal models. |
 | LAND-CAUSAL-KNOW-001 | `BUILDS_ON` | LAND-KNOW-001 — Exact knowability: the observation-factorization kernel | Every theorem here is a kernel law at the causal observation: the collision law, the classical witness extraction, and Knowable.mono. The module proves no factorization law of its own. |
-| LAND-CAUSAL-STRUCTURAL-001 | `BOUNDARY_PARTNER` | LAND-CAUSAL-DECISION-001 — Causal decision policies, regret, and identified-set radius | Parallel, not layered. Causal.Decision is the unmediated Assumption-1 projection and this is the mediated diagram; no declaration connects them, and that missing map is what keeps Richens and Everitt Section 2.2 at Narrower. |
+| LAND-CAUSAL-STRUCTURAL-001 | `BOUNDARY_PARTNER` | LAND-CAUSAL-DECISION-001 — Causal decision policies, regret, and identified-set radius | Parallel, not layered. Causal.Decision is the unmediated Assumption-1 projection and this is the mediated diagram; no declaration connects them. That missing map no longer holds Richens and Everitt Section 2.2 back: those rows closed on 2026-09-20 through Causal.DecisionNetwork instead (expectedUtility_eq_value, regret_eq_value_regret), and are graded Same in section 6 of the coverage audit. |
 | LAND-CL-001 | `BOUNDARY_PARTNER` | LAND-SELFMEAS-001 — Self-measurement failure for an embedded observation | Not a formal duality: the two do not share a model. This row is the generic whole-state specialization of the knowability kernel, not Breuer's theorem, which is LAND-SELFMEAS-002: an abstract restriction map from global states to apparatus states, with no dynamics, no messages and no algorithm; Chandy-Lamport's is a message-passing distributed system with channels, markers and a recording procedure. What the pair brackets is contemporaneity. The impossibility is about distinguishing the state one is in *now*; the construction recovers a consistent global state by giving up exactly that, recording a cut rather than an instant. |
 | LAND-COMP-KNOW-001 | `BUILDS_ON` | LAND-ANGLUIN-001 — Port-labelled anonymous networks, views, and automorphisms | The no-collision premise is runFor_eq_of_view_eq verbatim. This row restates that theorem and proves nothing further about networks. |
 | LAND-COMP-KNOW-001 | `BUILDS_ON` | LAND-KNOW-001 — Exact knowability: the observation-factorization kernel | knowable_runFor is the kernel's knowable_iff_no_collision applied to the depth-n view and the state after n rounds; the module proves no factorization law of its own. |
@@ -67,6 +67,7 @@ row's prose.
 | LAND-SELFREF-001 | `INSTANTIATES` | LAND-KNOW-001 — Exact knowability: the observation-factorization kernel | Takes the state to be Model times Rest and the observation to be the first projection, so the observer is a component of what it observes. |
 | LAND-TEMPORAL-001 | `BOUNDARY_PARTNER` | LAND-CL-001 — Chandy-Lamport distributed snapshot — termination, correctness, stable property detection | Model delta: this row is an arbitrary indexed family of observations over an arbitrary preorder, with no dynamics and no communication; Chandy-Lamport is a concrete message-passing system with an algorithm. The pair brackets contemporaneity, not one model's frontier: DelayedKnowable says the current target can be unreadable while a later reading settles it, and the snapshot algorithm is the motivating instance of that pattern rather than a construction inside this model: nothing here is applied to it, and no theorem connects the two. |
 | LAND-TEMPORAL-001 | `BUILDS_ON` | LAND-KNOW-001 — Exact knowability: the observation-factorization kernel | knowableFrom_mono is Knowable.mono and not_knowableAt_of_collisionAt is not_knowable_of_collision; no factorization argument is re-proved. |
+| LAND-VERIF-AGENTBEHAVIOR-001 | `BUILDS_ON` | BY-012 — Rice's theorem | no_behavioral_safety_verifier reduces to the atlas's rice packaging of Mathlib's ComputablePred.rice and reproves nothing. BY-012 is the row for that route; this row is the row for the statement Melo et al. make. |
 
 ## Boundary pairs
 
@@ -79,7 +80,7 @@ why every such edge is required to carry the delta.
 - **LAND-CAUSAL-STRUCTURAL-001** (INFRASTRUCTURE) — Structural causal models, causal influence diagrams, and materiality
 - **LAND-CAUSAL-DECISION-001** (INFRASTRUCTURE) — Causal decision policies, regret, and identified-set radius
 
-Parallel, not layered. Causal.Decision is the unmediated Assumption-1 projection and this is the mediated diagram; no declaration connects them, and that missing map is what keeps Richens and Everitt Section 2.2 at Narrower.
+Parallel, not layered. Causal.Decision is the unmediated Assumption-1 projection and this is the mediated diagram; no declaration connects them. That missing map no longer holds Richens and Everitt Section 2.2 back: those rows closed on 2026-09-20 through Causal.DecisionNetwork instead (expectedUtility_eq_value, regret_eq_value_regret), and are graded Same in section 6 of the coverage audit.
 
 ### LAND-CL-001 ↔ LAND-SELFMEAS-001
 

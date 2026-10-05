@@ -376,6 +376,7 @@ PUBLIC_GROUP_VALUES = {
     "Composition and interpretability",
     "Assembled from other proof assistants",
 }
+BRIDGE_REVIEW_DIR = "docs/interpretation-reviews/"
 BRIDGE_REVIEW_FIELDS = {
     "reviewer",
     "date",
@@ -404,40 +405,62 @@ CANDIDATE_REVIEW_STATES = {
 }
 
 
-def validate_bridge_review(result_id: str, result: dict) -> None:
-    """Enforce the bridge-review lifecycle: HUMAN_REVIEW carries no evidence; any
-    graduated status must supply a complete, consistent bridge_review record."""
-    status = result["ai_bridge_status"]
-    review = result.get("bridge_review")
+def validate_review_record(label: str, status: str, review, *, field: str) -> None:
+    """Enforce the review lifecycle: HUMAN_REVIEW carries no evidence; any graduated
+    status supplies a complete, consistent record.
+
+    Used at two scopes. A claim row's `interpretation_review` is about that row's
+    `informal_claim`. A `BRIDGE` declaration's `review` is about *that
+    declaration*, which is the unit a human actually reviews: a row may own four
+    bridges saying four different things, so one label on the row cannot say which
+    of them a reviewer signed.
+    """
     if status == "HUMAN_REVIEW":
         if review is not None:
-            fail(f"{result_id} is HUMAN_REVIEW and must not carry a bridge_review record")
+            fail(f"{label} is HUMAN_REVIEW and must not carry a {field} record")
         return
     review = require_mapping(
-        review, f"{result_id} bridge status {status} requires a bridge_review record"
+        review, f"{label} review status {status} requires a {field} record"
     )
     missing = BRIDGE_REVIEW_FIELDS - review.keys()
     if missing:
-        fail(f"{result_id} bridge_review missing fields: {sorted(missing)}")
+        fail(f"{label} {field} missing fields: {sorted(missing)}")
     if not isinstance(review["statement_reviewed"], bool) or not isinstance(
         review["interpretation_reviewed"], bool
     ):
-        fail(f"{result_id} bridge_review review flags must be booleans")
-    for field in ("reviewer", "date", "evidence"):
+        fail(f"{label} {field} review flags must be booleans")
+    for name in ("reviewer", "date", "evidence"):
         require_text(
-            review.get(field),
-            f"{result_id} bridge_review must record {field} as a non-empty string",
+            review.get(name),
+            f"{label} {field} must record {name} as a non-empty string",
         )
     # A review is dated evidence. An unparseable date is a review nobody can
     # place against the statement it reviewed.
     if not ISO_DATE.fullmatch(review["date"]):
-        fail(f"{result_id} bridge_review date must be an ISO date: {review['date']!r}")
+        fail(f"{label} {field} date must be an ISO date: {review['date']!r}")
     if not review["statement_reviewed"]:
-        fail(f"{result_id} graduated bridge status requires statement_reviewed to be true")
+        fail(f"{label} graduated review status requires statement_reviewed to be true")
     if status == "REVIEWED" and not review["interpretation_reviewed"]:
-        fail(f"{result_id} REVIEWED requires interpretation_reviewed to be true")
+        fail(f"{label} REVIEWED requires interpretation_reviewed to be true")
     if status == "STATEMENT_REVIEWED" and review["interpretation_reviewed"]:
-        fail(f"{result_id} STATEMENT_REVIEWED must not claim interpretation_reviewed; use REVIEWED")
+        fail(f"{label} STATEMENT_REVIEWED must not claim interpretation_reviewed; use REVIEWED")
+    # A label nobody can chase is not a review. The evidence has to be a file
+    # that exists, under the directory reviews live in.
+    evidence = review["evidence"]
+    if not evidence.startswith(BRIDGE_REVIEW_DIR):
+        fail(f"{label} {field} evidence must live under {BRIDGE_REVIEW_DIR}: {evidence!r}")
+    if not (ROOT / evidence).is_file():
+        fail(f"{label} {field} evidence does not exist: {evidence!r}")
+
+
+def validate_interpretation_review(result_id: str, result: dict) -> None:
+    """A claim row's own AI reading. Bridge declarations carry their own label."""
+    validate_review_record(
+        result_id,
+        result["ai_interpretation_status"],
+        result.get("interpretation_review"),
+        field="interpretation_review",
+    )
 
 def validate_candidate_formalizations(result_id: str, result: dict) -> None:
     """Structured non-coverage leads: manually discovered formalizations that are
@@ -574,13 +597,13 @@ def main() -> None:
     )
     bridge_status_values = set(
         require_text_list(
-            vocabulary.get("ai_bridge_status"),
-            "ai_bridge_status vocabulary must be a list of non-empty strings",
+            vocabulary.get("ai_interpretation_status"),
+            "ai_interpretation_status vocabulary must be a list of non-empty strings",
         )
     )
     if bridge_status_values != BRIDGE_STATUS_VALUES:
         fail(
-            "ai_bridge_status vocabulary must contain exactly "
+            "ai_interpretation_status vocabulary must contain exactly "
             "HUMAN_REVIEW, STATEMENT_REVIEWED, and REVIEWED"
         )
     if not license_values:
@@ -677,7 +700,7 @@ def main() -> None:
         "formalizations",
         "lean_artifact",
         "ai_safety_relevance",
-        "ai_bridge_status",
+        "ai_interpretation_status",
         "notes",
     }
     # ...and what only a survey row owes. `paper_reference` restates the
@@ -784,10 +807,22 @@ def main() -> None:
         )
         if not ISO_DATE.fullmatch(searched_on):
             fail(f"{cid} has an invalid searched_on date {check['searched_on']!r}")
-        require_text_list(
+        asserted_in = require_text_list(
             check.get("asserted_in"),
             f"{cid} asserted_in must be a list of non-empty strings",
         )
+        # Each entry is "<path>, <where in it>". The path half has to resolve:
+        # a novelty record is the evidence behind an absence claim, and one
+        # pointing at a file that is not in the tree is evidence of nothing.
+        # NC-011 named `docs/provenance/o70-frontier-manifest.md` for months
+        # while the file was `frontier-manifest.md`, and nothing noticed.
+        for entry in asserted_in:
+            target = ROOT / entry.split(",")[0].strip()
+            if not target.exists():
+                fail(
+                    f"{cid} asserted_in names {entry.split(',')[0].strip()!r}, "
+                    f"which is not in the tree"
+                )
         corpora = require_text_list(
             check.get("corpora"),
             f"{cid} corpora must be a list of non-empty strings",
@@ -1019,7 +1054,7 @@ def main() -> None:
         ):
             fail(f"{result_id} must have an informal claim")
         if not is_claim:
-            stray = {"ai_bridge_status", "bridge_review", "candidate_formalizations"} & result.keys()
+            stray = {"ai_interpretation_status", "interpretation_review", "candidate_formalizations"} & result.keys()
             if stray:
                 fail(
                     f"{result_id} is an artifact row and must not carry claim fields: "
@@ -1032,11 +1067,11 @@ def main() -> None:
         if (
             is_claim
             and (
-                not isinstance(result["ai_bridge_status"], str)
-                or result["ai_bridge_status"] not in bridge_status_values
+                not isinstance(result["ai_interpretation_status"], str)
+                or result["ai_interpretation_status"] not in bridge_status_values
             )
         ):
-            fail(f"{result_id} has unknown ai_bridge_status {result['ai_bridge_status']!r}")
+            fail(f"{result_id} has unknown ai_interpretation_status {result['ai_interpretation_status']!r}")
         tags = result["tags"]
         if not isinstance(tags, list) or not tags:
             fail(f"{result_id} must carry at least one tag")
@@ -1048,7 +1083,7 @@ def main() -> None:
         if len(set(tags)) != len(tags):
             fail(f"{result_id} repeats a tag")
         if is_claim:
-            validate_bridge_review(result_id, result)
+            validate_interpretation_review(result_id, result)
         if is_claim:
             validate_candidate_formalizations(result_id, result)
 
@@ -1377,7 +1412,7 @@ def main() -> None:
                 if isinstance(d, dict) and isinstance(d.get("type"), str)
             }
         interpretation_affecting = (
-            result.get("ai_bridge_status", "HUMAN_REVIEW") != "HUMAN_REVIEW"
+            result.get("ai_interpretation_status", "HUMAN_REVIEW") != "HUMAN_REVIEW"
             or "BRIDGE" in declaration_types
         )
         for record in result.get("formalizations") or []:
@@ -1529,7 +1564,38 @@ def main() -> None:
                         f"{declaration['atlas_declaration']} must record an "
                         "`application` line",
                     )
-                elif "application" in declaration:
+                    # The review label lives HERE and not on the row. A row is
+                    # too wide a unit to carry one: `LAND-SOV-AUTH-001` owns four
+                    # bridges about shutdown channels, attestations and
+                    # delegation, and a single status on the row cannot say which
+                    # of the four a human signed. One bridge, one label.
+                    bridge_label = (
+                        f"{result_id} BRIDGE {declaration['atlas_declaration']}"
+                    )
+                    review_status = declaration.get("review_status")
+                    if (
+                        not isinstance(review_status, str)
+                        or review_status not in bridge_status_values
+                    ):
+                        fail(
+                            f"{bridge_label} must carry a review_status in "
+                            f"{sorted(bridge_status_values)}"
+                        )
+                    validate_review_record(
+                        bridge_label,
+                        review_status,
+                        declaration.get("review"),
+                        field="review",
+                    )
+                else:
+                    stray = {"review_status", "review"} & declaration.keys()
+                    if stray:
+                        fail(
+                            f"{result_id} declaration "
+                            f"{declaration['atlas_declaration']} is {declaration['type']} "
+                            f"and must not carry bridge review fields: {sorted(stray)}"
+                        )
+                if declaration["type"] != "BRIDGE" and "application" in declaration:
                     require_text(
                         declaration["application"],
                         f"{result_id} declaration {declaration['atlas_declaration']} "

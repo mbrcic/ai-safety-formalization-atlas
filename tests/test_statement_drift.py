@@ -24,11 +24,29 @@ def _git_ok(*args: str) -> bool:
     return subprocess.run(["git", *args], cwd=ROOT, capture_output=True).returncode == 0
 
 
+def _untracked_lean() -> str:
+    """Lean sources git does not track yet.
+
+    `git diff HEAD` cannot see them, but `check_statement_drift.py` walks the
+    filesystem and reports each one as an `added file`. Without this the
+    `_TREE_MATCHES_HEAD` guard reads clean while the tree carries a new module,
+    and `test_no_drift_against_head_exits_zero` fails for the one reason it is
+    meant to skip on.
+    """
+    return subprocess.run(
+        ["git", "ls-files", "--others", "--exclude-standard", "--", "AISafetyAtlas"],
+        cwd=ROOT, capture_output=True, text=True,
+    ).stdout.strip()
+
+
 _BASELINE = json.loads(
     (ROOT / "docs/status/migration-baseline.json").read_text(encoding="utf-8")
 )["migration"]["baseline_commit"]
 _HAS_BASELINE = _git_ok("cat-file", "-e", f"{_BASELINE}^{{commit}}")
-_TREE_MATCHES_HEAD = _git_ok("diff", "--quiet", "HEAD", "--", "AISafetyAtlas")
+_TREE_MATCHES_HEAD = (
+    _git_ok("diff", "--quiet", "HEAD", "--", "AISafetyAtlas")
+    and not _untracked_lean()
+)
 
 
 def _load(name: str):

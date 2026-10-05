@@ -239,5 +239,5 @@ Two things a consumer must carry forward rather than assume:
 The result MAIS-O77(b) actually needs is a **splitting lemma for a *degenerate*
 critical point** (Gromoll–Meyer / Morse–Bott): the rung points of the O77 loss
 have degenerate Hessians, and every theorem above assumes nondegeneracy. Nothing
-here closes that gap. See `docs/provenance/mais-o7-o77-verification.md` §8.2 and
-`reviews/mais-issues-5-12/03-stage-4-finding.md`.
+here closes that gap. See `docs/provenance/mais-o7-o77-verification.md` §8.2,
+which carries the finding in full.

@@ -128,6 +128,36 @@ python3 scripts/check_example_coverage.py
 echo "==> check_coverage_audit"
 python3 scripts/check_coverage_audit.py
 
+# Witness debt, pinned so it cannot drift back up. Two numbers, because
+# "grounded" is weaker than "applied": the first counts a registry citation as
+# grounding and a citation instantiates nothing, so the second is the vacuity
+# figure. Lower either pin when the debt falls; raising one is a decision to
+# state out loud, not a way to make the gate quiet.
+echo "==> check_witness_debt"
+# Raised 8 -> 11 and 314 -> 317 on 2026-09-16 for the OversightBudget debt, and
+# LOWERED to 3 and 299 on 2026-09-21 when that debt was paid, then to 251 the
+# same day as the silent-vacuity queue was worked through Sovereignty, Ashby's
+# counting law, the control-loss cluster and Wolpert's devices. The second is the ratchet
+# that matters and it only goes down:
+# AISafetyAtlas.Examples.Control.OversightBudget carries both corollaries at fair
+# coins, where every entropy is positive, the blind-channel bound is attained and
+# the duplication bound's slack is named by oneReading_entropyReduction_eq; and
+# frozen_outcome_bound grounds Ashby's regulation bound at a chain whose rate is
+# zero and whose initial state is not, with frozen_bound_needs_initial proving
+# the same inequality false once H[X0] is dropped.
+# The 3 that remain are not work: 2 are the provably vacuous Causal.O24Solution
+# pair recorded in docs/status/witness-vacuity.json, with the third downstream of
+# one of them. Lower either pin when the debt falls; raising one is a decision to
+# state out loud, not a way to make the gate quiet.
+python3 scripts/check_witness_debt.py --max-ungrounded 3 --max-unapplied 31
+
+# A module named in no ledger is not distinguishable from one that needs no
+# ledger row unless somebody writes the reason down. Fourteen modules of the
+# 2026-09-10 merge sat in that state and the gate passed *because* their rows
+# were absent.
+echo "==> check_module_graded"
+python3 scripts/check_module_graded.py
+
 # Advisory: reports Wider/Beyond rows with no worked witness. Never blocks —
 # it produces a worklist, and most unwitnessed rows are fine.
 #
@@ -142,6 +172,12 @@ python3 scripts/check_statement_freeze.py | awk 'NR <= 20'
 
 echo "==> check_scope_witnesses (advisory)"
 python3 scripts/check_scope_witnesses.py | awk 'NR <= 1'
+
+# Advisory for the same reason, and the complementary axis: `check_scope_witnesses`
+# asks whether a widening is exhibited, this asks whether a narrowing has been
+# adjudicated. The audit's counting section names this check as owed and missing.
+echo "==> check_scope_owed (advisory)"
+python3 scripts/check_scope_owed.py | awk 'NR <= 1'
 
 # Advisory: says what a branch did to statements as opposed to proofs. On a
 # feature branch new theorems are the point, so this never blocks; run it with

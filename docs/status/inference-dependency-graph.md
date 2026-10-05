@@ -18,70 +18,79 @@ Named in the statements of eight or more others. A change to one of these is a c
 
 | Declaration | Named by |
 |---|---|
-| `InferenceDevice` | 371 |
-| `InferenceDevice.Setup` | 327 |
-| `InferenceDevice.setup` | 265 |
-| `InferenceDevice.concl` | 121 |
+| `InferenceDevice` | 386 |
+| `InferenceDevice.Setup` | 368 |
+| `InferenceDevice.setup` | 301 |
+| `InferenceDevice.concl` | 150 |
 | `FiniteRange` | 103 |
-| `InferenceDevice.Realized` | 90 |
-| `FinPMF` | 80 |
-| `WeaklyInfers` | 68 |
-| `SelfAwareDevice` | 63 |
-| `massOn` | 60 |
-| `instFiniteRangeOfFinite` | 55 |
-| `SelfAwareDevice.question` | 44 |
-| `SelfAwareDevice.Question` | 44 |
-| `probe` | 43 |
-| `StronglyInfers` | 43 |
-| `rangeFinset` | 41 |
-| `SelfAwareDevice.toDevice` | 32 |
-| `PhysicallyKnows` | 28 |
-| `pushOnImage` | 26 |
-| `inferenceAccuracy` | 24 |
-| `answeringSet` | 23 |
-| `IsProbe` | 23 |
-| `DeviceReality` | 23 |
+| `InferenceDevice.Realized` | 95 |
+| `FinPMF` | 83 |
+| `WeaklyInfers` | 82 |
+| `instFiniteRangeOfFinite` | 72 |
+| `SelfAwareDevice` | 66 |
+| `massOn` | 65 |
+| `StronglyInfers` | 50 |
+| `SelfAwareDevice.question` | 48 |
+| `SelfAwareDevice.Question` | 48 |
+| `rangeFinset` | 46 |
+| `probe` | 45 |
+| `SelfAwareDevice.toDevice` | 33 |
+| `PhysicallyKnows` | 33 |
+| `inferenceAccuracy` | 30 |
+| `pushOnImage` | 27 |
+| `DeviceReality` | 26 |
+| `answeringSet` | 25 |
+| `IsProbe` | 25 |
+| `Distinguishable` | 25 |
+| `FinPMF.mass` | 23 |
+| `SemiControls` | 22 |
 | `Intelligible` | 22 |
-| `Distinguishable` | 22 |
-| `condExpect` | 20 |
-| `FinPMF.mass` | 20 |
-| `measureLength` | 19 |
-| `SemiControls` | 19 |
+| `measureLength` | 21 |
+| `condExpect` | 21 |
+| `setupLength` | 20 |
+| `boolPm` | 20 |
+| `InfersDevice` | 20 |
+| `condExpectPmOn` | 19 |
 | `RefinesOn` | 19 |
-| `InfersDevice` | 19 |
-| `boolPm` | 18 |
-| `Prop6Quadruple` | 18 |
-| `setupLength` | 17 |
+| `Prop6Quadruple` | 19 |
+| `Implies` | 17 |
 | `FullReality` | 17 |
-| `condExpectPmOn` | 16 |
-| `Implies` | 16 |
-| `SelfAwareDevice.eval` | 14 |
+| `inferenceComplexityMeasure` | 15 |
+| `ex6PMF` | 15 |
+| `SelfAwareDevice.eval` | 15 |
+| `Copies` | 15 |
+| `setupMass` | 14 |
+| `inferenceAccuracyOn` | 14 |
 | `PhysicalKnowledgeWitness` | 14 |
+| `Infallible` | 14 |
 | `FinPMF.toMeasure` | 14 |
-| `inferenceComplexityMeasure` | 13 |
-| `Infallible` | 13 |
+| `prop6Expr` | 13 |
+| `TrueOn` | 13 |
+| `LargeSetupFibres` | 13 |
 | `realizedSetups` | 12 |
-| `inferenceAccuracyOn` | 12 |
-| `LargeSetupFibres` | 12 |
+| `inferenceComplexity` | 12 |
+| `IndependentOn` | 12 |
 | `FullReality.conclOf` | 12 |
-| `setupMass` | 11 |
-| `prop6Expr` | 11 |
-| `inferenceComplexity` | 11 |
+| `Controls` | 12 |
 | `fig6PMF` | 11 |
-| `ex6PMF` | 11 |
-| `TrueOn` | 11 |
-| `IndependentOn` | 11 |
-| `invMeasure` | 9 |
-| `invGamma` | 9 |
-| `inferenceComplexityTotal` | 9 |
+| `StatisticallyIndependent` | 11 |
+| `invMeasure` | 10 |
+| `invGamma` | 10 |
+| `inferenceComplexityTotal` | 10 |
+| `realizedValues` | 9 |
+| `positiveMassSetups` | 9 |
+| `mutualInfo` | 9 |
+| `ex6Device` | 9 |
 | `emulationCost` | 9 |
 | `FullReality.IsUniversalFull` | 9 |
-| `Copies` | 9 |
-| `Controls` | 9 |
 | `stochasticInferenceComplexity` | 8 |
-| `realizedValues` | 8 |
-| `positiveMassSetups` | 8 |
+| `prop12Gamma` | 8 |
+| `invDevice` | 8 |
+| `ex6Gamma` | 8 |
+| `entropyOn` | 8 |
 | `answeringSetOn` | 8 |
+| `accuracySupOn` | 8 |
+| `ThreeSetupValues` | 8 |
 
 ## Definitions no statement and no example mentions
 
@@ -89,12 +98,10 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 
 **Instances always appear here.** Typeclass resolution names nothing, so an instance has no textual user even when every consumer depends on it. Deleting one because it is listed here is how a checker stops compiling.
 
-- `PhysicalKnowledgeWitness.negate`
 - `asNat1`
 - `asNat2`
 - `cor2Target`
 - `countingDistinguishabilityOn`
-- `cycle3Reality`
 - `fig5Prod`
 - `relativeStochasticComplexity`
 - `selfAwareInferenceComplexityOn`

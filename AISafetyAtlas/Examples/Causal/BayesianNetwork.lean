@@ -134,4 +134,14 @@ public theorem not_isCausalBayesNetwork_badFamily :
   rw [show v10 0 = 1 from by simp [hv10], hzero'] at this
   norm_num at this
 
+/-- **Pearl's condition is exactly "comes from a table family".** The forward
+direction is what `edgeless_isCausalBayesNetwork` uses; the equivalence says
+nothing else can satisfy Definition 1.3.1 on an acyclic graph, so the tables are
+not one presentation among several. Run at the one-edge graph, whose acyclicity
+is `g2_acyclic` and whose family is `uniformTables`. -/
+public theorem g2_isCausalBayesNetwork_iff :
+    IsCausalBayesNetwork G2 uniformTables.family ↔
+      ∃ q : ConditionalTables (Fin 2) (binaryDim (Fin 2)) ℝ G2, uniformTables.family = q.family :=
+  isCausalBayesNetwork_iff g2_acyclic uniformTables.family
+
 end AISafetyAtlas.Examples.Causal.BayesianNetwork

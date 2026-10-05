@@ -1,7 +1,7 @@
 {
   "generated_by": "scripts/check_statement_freeze.py --write",
   "note": "Signature hashes of ledger-graded statements. A diff here is a schema event: say which way fidelity moved and re-grade the row.",
-  "count": 303,
+  "count": 411,
   "declarations": {
     "AISafetyAtlas.Causal.DecisionNetwork.mem_parents_utility_of_isUnmediated": {
       "file": "AISafetyAtlas/Causal/DecisionNetwork.lean",
@@ -51,6 +51,10 @@
       "file": "AISafetyAtlas/Causal/StructuralModel.lean",
       "sha256": "490f124086898995"
     },
+    "AISafetyAtlas.Causal.SCIM.observableLaw_withPolicy_eq_of_notDownstream": {
+      "file": "AISafetyAtlas/Causal/StructuralModel.lean",
+      "sha256": "2844b7f0f107b098"
+    },
     "AISafetyAtlas.Causal.SCIM.policy_ext_single": {
       "file": "AISafetyAtlas/Causal/StructuralModel.lean",
       "sha256": "91064f2b72b5d1c3"
@@ -61,7 +65,7 @@
     },
     "AISafetyAtlas.Causal.SCM.exoJoint_mul_prod": {
       "file": "AISafetyAtlas/Causal/StructuralModel.lean",
-      "sha256": "3062db4d955868da"
+      "sha256": "88794c3f78d5cb88"
     },
     "AISafetyAtlas.Causal.Skeleton.behaviorEq_of_observed_eq_empty": {
       "file": "AISafetyAtlas/Causal/MarginClass.lean",
@@ -102,6 +106,22 @@
     "AISafetyAtlas.Combinatorics.exists_perm_rel_not_iff": {
       "file": "AISafetyAtlas/Combinatorics/PermInvariance.lean",
       "sha256": "1a5a064851c1b686"
+    },
+    "AISafetyAtlas.Compositional.AgentNetwork.symmetry_is_the_shared_cause": {
+      "file": "AISafetyAtlas/Compositional/AgentNetwork.lean",
+      "sha256": "f577cfeded570e6e"
+    },
+    "AISafetyAtlas.Compositional.Hyperproperties.Evaluation.sampling_misses_subsingleton": {
+      "file": "AISafetyAtlas/Compositional/Hyperproperties/Evaluation.lean",
+      "sha256": "ff03262c7b9c6782"
+    },
+    "AISafetyAtlas.Compositional.Hyperproperties.Evaluation.traceProperty_knowable_of_score_decides": {
+      "file": "AISafetyAtlas/Compositional/Hyperproperties/Evaluation.lean",
+      "sha256": "eddb9df5ab89efcf"
+    },
+    "AISafetyAtlas.Compositional.Hyperproperties.exists_bad_trajectories_of_isKSafety": {
+      "file": "AISafetyAtlas/Compositional/TraceSystem.lean",
+      "sha256": "c434c236c1178d16"
     },
     "AISafetyAtlas.Compositional.Hyperproperties.k_safety_iff_finite_self_composition": {
       "file": "AISafetyAtlas/Compositional/Hyperproperties.lean",
@@ -279,6 +299,10 @@
       "file": "AISafetyAtlas/Conjectures/StochasticComplexity.lean",
       "sha256": "91e54d3cf9fcd88f"
     },
+    "AISafetyAtlas.Control.OversightBudget.oversight_reduction_le_budget": {
+      "file": "AISafetyAtlas/Control/OversightBudget.lean",
+      "sha256": "527170a95e9396dd"
+    },
     "AISafetyAtlas.Control.ashby_logVariety_ge": {
       "file": "AISafetyAtlas/Control/VarietyCounting.lean",
       "sha256": "c06ab71ce7c03c37"
@@ -305,7 +329,7 @@
     },
     "AISafetyAtlas.Control.condEntropy_ge_of_openLoopBound": {
       "file": "AISafetyAtlas/Control/InformationLimits.lean",
-      "sha256": "6dff9732a89b643a"
+      "sha256": "1808dc6610eed90a"
     },
     "AISafetyAtlas.Control.condEntropy_le_condEntropy_of_forall": {
       "file": "AISafetyAtlas/Control/InformationLimits.lean",
@@ -349,7 +373,7 @@
     },
     "AISafetyAtlas.Control.entropyReduction_le_of_openLoopBound": {
       "file": "AISafetyAtlas/Control/InformationLimits.lean",
-      "sha256": "c8030952cb8b4d48"
+      "sha256": "95f4b1f5e852b230"
     },
     "AISafetyAtlas.Control.entropyReduction_le_openLoopMax": {
       "file": "AISafetyAtlas/Control/OpenLoop.lean",
@@ -443,6 +467,18 @@
       "file": "AISafetyAtlas/Control/VarietyCounting.lean",
       "sha256": "0608318e920e0723"
     },
+    "AISafetyAtlas.Decision.J_linear": {
+      "file": "AISafetyAtlas/Decision/Occupancy.lean",
+      "sha256": "4d0672538beb37bd"
+    },
+    "AISafetyAtlas.Decision.MDP.run_congr_obs": {
+      "file": "AISafetyAtlas/Decision/MDP.lean",
+      "sha256": "46418f77ea4914a1"
+    },
+    "AISafetyAtlas.Decision.vPiBdd_eq_vPi": {
+      "file": "AISafetyAtlas/Decision/BoundedValue.lean",
+      "sha256": "ee7419bb4f7b0f7a"
+    },
     "AISafetyAtlas.Examples.Causal.DecisionNetwork.figIsUnmediated": {
       "file": "AISafetyAtlas/Examples/Causal/DecisionNetwork.lean",
       "sha256": "2f342a3f4a2922d9"
@@ -461,7 +497,7 @@
     },
     "AISafetyAtlas.Examples.Causal.StructuralModel.figSCIM_policy_not_const": {
       "file": "AISafetyAtlas/Examples/Causal/StructuralModel.lean",
-      "sha256": "c35e283c717e713f"
+      "sha256": "16768d0cdb30ac9a"
     },
     "AISafetyAtlas.Examples.Causal.StructuralModel.utility_childless_has_teeth": {
       "file": "AISafetyAtlas/Examples/Causal/StructuralModel.lean",
@@ -506,6 +542,26 @@
     "AISafetyAtlas.Examples.Causal.\u0394_eq_half_sub_joint": {
       "file": "AISafetyAtlas/Examples/Causal/BehavioralCollision.lean",
       "sha256": "654123a44b935bfc"
+    },
+    "AISafetyAtlas.Examples.LinearSystems.blind_not_determinesStateOn": {
+      "file": "AISafetyAtlas/Examples/LinearSystems/Dynamics.lean",
+      "sha256": "07f3da3824230292"
+    },
+    "AISafetyAtlas.Examples.LinearSystems.deaf_not_isCompletelyReachable": {
+      "file": "AISafetyAtlas/Examples/LinearSystems/Flow.lean",
+      "sha256": "ad6239c1defddd40"
+    },
+    "AISafetyAtlas.Examples.LinearSystems.pair_not_determinesStateSolOn": {
+      "file": "AISafetyAtlas/Examples/LinearSystems/Flow.lean",
+      "sha256": "dfaa39c78a98762b"
+    },
+    "AISafetyAtlas.Examples.LinearSystems.pair_not_isCompletelyReachableSol": {
+      "file": "AISafetyAtlas/Examples/LinearSystems/Flow.lean",
+      "sha256": "cf0383db8ca74c8f"
+    },
+    "AISafetyAtlas.Examples.Sovereignty.steer_isSteering": {
+      "file": "AISafetyAtlas/Examples/Sovereignty/Steering.lean",
+      "sha256": "32e4b8bd169a8401"
     },
     "AISafetyAtlas.Explainability.attribution_impossibility": {
       "file": "AISafetyAtlas/Explainability.lean",
@@ -558,6 +614,34 @@
     "AISafetyAtlas.Fairness.sum_score_eq_\u03bc": {
       "file": "AISafetyAtlas/Fairness/RiskAssignment.lean",
       "sha256": "9bbb0848a7ae7e19"
+    },
+    "AISafetyAtlas.Goodhart.Extremal.fits_underdetermined_off_observed": {
+      "file": "AISafetyAtlas/Goodhart/Extremal.lean",
+      "sha256": "c172014ef216dfdb"
+    },
+    "AISafetyAtlas.Goodhart.RegulatoryTarget.certified_systems_were_never_examined": {
+      "file": "AISafetyAtlas/Goodhart/RegulatoryTarget.lean",
+      "sha256": "b5af5c31e341eb7d"
+    },
+    "AISafetyAtlas.Goodhart.RegulatoryTarget.raising_the_bar_does_not_help": {
+      "file": "AISafetyAtlas/Goodhart/RegulatoryTarget.lean",
+      "sha256": "032852c775526457"
+    },
+    "AISafetyAtlas.Goodhart.RegulatoryTarget.risk_unconstrained_on_certified": {
+      "file": "AISafetyAtlas/Goodhart/RegulatoryTarget.lean",
+      "sha256": "2fc87f2318ada84b"
+    },
+    "AISafetyAtlas.Goodhart.gap_selection_ge": {
+      "file": "AISafetyAtlas/Goodhart/Regressional.lean",
+      "sha256": "31ce74839cb8b128"
+    },
+    "AISafetyAtlas.Goodhart.unhackable_of_simplifies_common": {
+      "file": "AISafetyAtlas/Goodhart/Hackability.lean",
+      "sha256": "b484368bf565314f"
+    },
+    "AISafetyAtlas.Goodhart.zhuang_hadfield_menell_theorem_one": {
+      "file": "AISafetyAtlas/Goodhart/Overoptimization.lean",
+      "sha256": "b1b64e1d3036b287"
     },
     "AISafetyAtlas.Inference.PhysicalKnowledgeWitness.eq_target_on_of_refinesOn": {
       "file": "AISafetyAtlas/Inference/PhysicalKnowledge.lean",
@@ -683,6 +767,26 @@
       "file": "AISafetyAtlas/InformationTheory/DataProcessing.lean",
       "sha256": "5b4a207fac062bd3"
     },
+    "AISafetyAtlas.Knowledge.Access.exists_indistinguishable_behaviour": {
+      "file": "AISafetyAtlas/Knowledge/Access.lean",
+      "sha256": "89d83d70dba9e86b"
+    },
+    "AISafetyAtlas.Knowledge.Access.no_blackBox_methodology": {
+      "file": "AISafetyAtlas/Knowledge/Access.lean",
+      "sha256": "13b7eaab34afdb20"
+    },
+    "AISafetyAtlas.Knowledge.Access.whiteBox_determines_blackBox": {
+      "file": "AISafetyAtlas/Knowledge/Access.lean",
+      "sha256": "f7f63873d5570e98"
+    },
+    "AISafetyAtlas.Knowledge.Audit.audit_certifies_audited_not_deployed": {
+      "file": "AISafetyAtlas/Knowledge/Audit.lean",
+      "sha256": "8b184435a6d4e943"
+    },
+    "AISafetyAtlas.Knowledge.Audit.later_audit_does_not_close_the_gap": {
+      "file": "AISafetyAtlas/Knowledge/Audit.lean",
+      "sha256": "e6ff1d9e0c995643"
+    },
     "AISafetyAtlas.Knowledge.Determines.trans": {
       "file": "AISafetyAtlas/Knowledge.lean",
       "sha256": "5852e711feab20ed"
@@ -787,6 +891,22 @@
       "file": "AISafetyAtlas/Knowledge/Embedded.lean",
       "sha256": "06c6f529081281d8"
     },
+    "AISafetyAtlas.Knowledge.IncidentCount.count_is_not_a_measurement": {
+      "file": "AISafetyAtlas/Knowledge/IncidentCount.lean",
+      "sha256": "85b9e7c8d5b5f902"
+    },
+    "AISafetyAtlas.Knowledge.IncidentCount.count_not_determined_of_collision": {
+      "file": "AISafetyAtlas/Knowledge/IncidentCount.lean",
+      "sha256": "3c9785055fdaf6e6"
+    },
+    "AISafetyAtlas.Knowledge.IncidentCount.knowable_of_report_carries_count": {
+      "file": "AISafetyAtlas/Knowledge/IncidentCount.lean",
+      "sha256": "479737a2f191ce21"
+    },
+    "AISafetyAtlas.Knowledge.IncidentCount.schema_fixes_the_count": {
+      "file": "AISafetyAtlas/Knowledge/IncidentCount.lean",
+      "sha256": "bc3a29afc69d863d"
+    },
     "AISafetyAtlas.Knowledge.Knowable.mono": {
       "file": "AISafetyAtlas/Knowledge.lean",
       "sha256": "34190022b620c3ac"
@@ -867,6 +987,10 @@
       "file": "AISafetyAtlas/Knowledge.lean",
       "sha256": "3564decca66d3288"
     },
+    "AISafetyAtlas.Knowledge.knowable_iff_uniformlyActionable": {
+      "file": "AISafetyAtlas/Knowledge/UniformAction.lean",
+      "sha256": "c55c98c1078838ce"
+    },
     "AISafetyAtlas.Knowledge.le_errorProb_of_decoder": {
       "file": "AISafetyAtlas/Knowledge/Entropy.lean",
       "sha256": "d9bb29e5c4e441da"
@@ -902,6 +1026,18 @@
     "AISafetyAtlas.Knowledge.not_knowable_state_of_nontrivial_remainder": {
       "file": "AISafetyAtlas/Knowledge.lean",
       "sha256": "20e2002a7d25f95b"
+    },
+    "AISafetyAtlas.Knowledge.not_uniformlyActionable_iff_exists_unservable": {
+      "file": "AISafetyAtlas/Knowledge/UniformAction.lean",
+      "sha256": "53fa55e6f5ff4b63"
+    },
+    "AISafetyAtlas.Knowledge.uniformlyActionable_iff_fibrewiseAgreeable": {
+      "file": "AISafetyAtlas/Knowledge/UniformAction.lean",
+      "sha256": "928613590f4a6e08"
+    },
+    "AISafetyAtlas.Knowledge.uniformlyActionable_of_pairwiseAgreeable_of_card_le_two": {
+      "file": "AISafetyAtlas/Knowledge/UniformAction.lean",
+      "sha256": "6f7ae94697d9ec2d"
     },
     "AISafetyAtlas.Learning.card_observed_eq": {
       "file": "AISafetyAtlas/Learning/Sharp.lean",
@@ -995,6 +1131,34 @@
       "file": "AISafetyAtlas/Learning/Sharp.lean",
       "sha256": "2df162b8fed643b5"
     },
+    "AISafetyAtlas.LinearSystems.determinesStateOn_iff_isObservable": {
+      "file": "AISafetyAtlas/LinearSystems/Dynamics.lean",
+      "sha256": "daf8024a801679dd"
+    },
+    "AISafetyAtlas.LinearSystems.determinesStateSolOn_iff_isObservable": {
+      "file": "AISafetyAtlas/LinearSystems/Flow.lean",
+      "sha256": "4f8d57c013f28075"
+    },
+    "AISafetyAtlas.LinearSystems.isCompletelyReachableSol_iff_isControllable": {
+      "file": "AISafetyAtlas/LinearSystems/Flow.lean",
+      "sha256": "5b03888bf0ca8d5a"
+    },
+    "AISafetyAtlas.LinearSystems.isCompletelyReachable_iff_isControllable": {
+      "file": "AISafetyAtlas/LinearSystems/Flow.lean",
+      "sha256": "b191180adcef008d"
+    },
+    "AISafetyAtlas.LinearSystems.isObservable_iff_hautus": {
+      "file": "AISafetyAtlas/LinearSystems/Hautus.lean",
+      "sha256": "aa2c881872cc88f3"
+    },
+    "AISafetyAtlas.LinearSystems.not_determinesStateOn_of_not_isObservable": {
+      "file": "AISafetyAtlas/LinearSystems/Dynamics.lean",
+      "sha256": "f20f5f4fd9a02171"
+    },
+    "AISafetyAtlas.LinearSystems.not_isReachable_of_not_isControllable": {
+      "file": "AISafetyAtlas/LinearSystems/Dynamics.lean",
+      "sha256": "67015a39ef5eb213"
+    },
     "AISafetyAtlas.Logic.chaitin_bound": {
       "file": "AISafetyAtlas/Logic.lean",
       "sha256": "6c4f052a85a0670a"
@@ -1047,9 +1211,17 @@
       "file": "AISafetyAtlas/Oversight/Debate.lean",
       "sha256": "f16f6ca4f57e2933"
     },
+    "AISafetyAtlas.Oversight.JointObservation.consortium_covers_of_registry_covers": {
+      "file": "AISafetyAtlas/Oversight/JointObservation/Registry.lean",
+      "sha256": "833253a65d58f50f"
+    },
     "AISafetyAtlas.Oversight.JointObservation.covers_iff_no_collision": {
       "file": "AISafetyAtlas/Oversight/JointObservation/Coverage.lean",
       "sha256": "0e7fa66873ea44b2"
+    },
+    "AISafetyAtlas.Oversight.JointObservation.not_registry_covers_of_emit_collision": {
+      "file": "AISafetyAtlas/Oversight/JointObservation/Registry.lean",
+      "sha256": "1b39a3c8778889e6"
     },
     "AISafetyAtlas.Oversight.exists_cannotForce_false_and_forces": {
       "file": "AISafetyAtlas/Oversight/VarietyCheck.lean",
@@ -1103,9 +1275,17 @@
       "file": "AISafetyAtlas/Preference/SourceComplexity.lean",
       "sha256": "d9146c773c336763"
     },
+    "AISafetyAtlas.Preference.behaviour_le_of_evaluatesTo": {
+      "file": "AISafetyAtlas/Preference/Complexity.lean",
+      "sha256": "ea654453abaf1669"
+    },
     "AISafetyAtlas.Preference.consistent_rewards_eq_univ": {
       "file": "AISafetyAtlas/Preference.lean",
       "sha256": "261c60c9120d3594"
+    },
+    "AISafetyAtlas.Preference.consistent_rewards_of_trajectory_eq_univ": {
+      "file": "AISafetyAtlas/Preference/Trajectory.lean",
+      "sha256": "dbc42acf221df835"
     },
     "AISafetyAtlas.Preference.degenerate_explanation_cheap": {
       "file": "AISafetyAtlas/Preference/Complexity.lean",
@@ -1179,13 +1359,245 @@
       "file": "AISafetyAtlas/SocialChoice.lean",
       "sha256": "1d4e255717ae9e28"
     },
+    "AISafetyAtlas.Sovereignty.AmendmentLog.unbroken_chain_is_not_a_constraint": {
+      "file": "AISafetyAtlas/Sovereignty/AmendmentLog.lean",
+      "sha256": "6ce71c8d441399e7"
+    },
+    "AISafetyAtlas.Sovereignty.Attestation.attestation_is_not_the_claim": {
+      "file": "AISafetyAtlas/Sovereignty/Attestation.lean",
+      "sha256": "f35e43e00884a103"
+    },
+    "AISafetyAtlas.Sovereignty.Attestation.properties_are_independent": {
+      "file": "AISafetyAtlas/Sovereignty/Attestation.lean",
+      "sha256": "b33a563def2768da"
+    },
+    "AISafetyAtlas.Sovereignty.CapabilityAssessment.no_procedure_on_output_recovers_fallback": {
+      "file": "AISafetyAtlas/Sovereignty/CapabilityAssessment.lean",
+      "sha256": "94ff22070dde49a1"
+    },
+    "AISafetyAtlas.Sovereignty.CapabilityAssessment.protocols_are_incomparable": {
+      "file": "AISafetyAtlas/Sovereignty/CapabilityAssessment.lean",
+      "sha256": "69afeb60b6cca92b"
+    },
+    "AISafetyAtlas.Sovereignty.CapabilityAssessment.withdrawal_settles_and_no_output_procedure_does": {
+      "file": "AISafetyAtlas/Sovereignty/CapabilityAssessment.lean",
+      "sha256": "189546114780f441"
+    },
+    "AISafetyAtlas.Sovereignty.Conformity.passes_every_check_and_not_operable": {
+      "file": "AISafetyAtlas/Sovereignty/Conformity.lean",
+      "sha256": "9210ab89bf1b71f7"
+    },
+    "AISafetyAtlas.Sovereignty.DelegationChain.power_over_a_matter_does_not_compose": {
+      "file": "AISafetyAtlas/Sovereignty/DelegationChain.lean",
+      "sha256": "df6009529ccd3545"
+    },
+    "AISafetyAtlas.Sovereignty.DoxasticAgent.mem_of_agent_forces": {
+      "file": "AISafetyAtlas/Sovereignty/Belief.lean",
+      "sha256": "33a6cf4dd0664627"
+    },
+    "AISafetyAtlas.Sovereignty.Enforcement.undetectable_norm_is_unenforceable": {
+      "file": "AISafetyAtlas/Sovereignty/Enforcement.lean",
+      "sha256": "c00e1829f9199d8f"
+    },
+    "AISafetyAtlas.Sovereignty.Enlarges.forces": {
+      "file": "AISafetyAtlas/Sovereignty/Capability.lean",
+      "sha256": "758f216671ad1409"
+    },
+    "AISafetyAtlas.Sovereignty.Institution.exists_recognized_not_authorized": {
+      "file": "AISafetyAtlas/Sovereignty/Institution.lean",
+      "sha256": "8055ef5f70462665"
+    },
+    "AISafetyAtlas.Sovereignty.InstitutionalSetting.exists_empowered_possible_not_permitted": {
+      "file": "AISafetyAtlas/Sovereignty/Deontic.lean",
+      "sha256": "0e766911af0e75dd"
+    },
+    "AISafetyAtlas.Sovereignty.MultiplyRetargetable.mostOrbit": {
+      "file": "AISafetyAtlas/Sovereignty/Retargetable.lean",
+      "sha256": "01ae683c846066ae"
+    },
+    "AISafetyAtlas.Sovereignty.NormSystem.forbidden_iff_not_permitted_iff": {
+      "file": "AISafetyAtlas/Sovereignty/Deontic.lean",
+      "sha256": "ad82d08276cd3a89"
+    },
+    "AISafetyAtlas.Sovereignty.Plant.exists_robustInput_iff": {
+      "file": "AISafetyAtlas/Sovereignty/Disturbance.lean",
+      "sha256": "05c1d94a2611f498"
+    },
+    "AISafetyAtlas.Sovereignty.Playable.trulyPlayable_of_finite": {
+      "file": "AISafetyAtlas/Sovereignty/TrulyPlayable.lean",
+      "sha256": "3ac5f0d767d5eab5"
+    },
+    "AISafetyAtlas.Sovereignty.Refusal.safety_suite_admits_a_refusal": {
+      "file": "AISafetyAtlas/Sovereignty/Refusal.lean",
+      "sha256": "db2a3f8a32740562"
+    },
+    "AISafetyAtlas.Sovereignty.Represents.surjective_outcome": {
+      "file": "AISafetyAtlas/Sovereignty/Rights.lean",
+      "sha256": "b55c134f8a215cdc"
+    },
+    "AISafetyAtlas.Sovereignty.SafetyGame.mem_safetyKernel_iff_exists_maintaining": {
+      "file": "AISafetyAtlas/Sovereignty/SafetyGame.lean",
+      "sha256": "2d1a9f35e5bbfd27"
+    },
+    "AISafetyAtlas.Sovereignty.Setting.not_independenceFree_of_universal_threat": {
+      "file": "AISafetyAtlas/Sovereignty/Independence.lean",
+      "sha256": "af5dca5ec229e07d"
+    },
+    "AISafetyAtlas.Sovereignty.Setting.republicanFree_of_independenceFree": {
+      "file": "AISafetyAtlas/Sovereignty/Independence.lean",
+      "sha256": "433445188236b934"
+    },
+    "AISafetyAtlas.Sovereignty.ShutdownChannel.obedience_does_not_give_authority": {
+      "file": "AISafetyAtlas/Sovereignty/ShutdownChannel.lean",
+      "sha256": "79dc3d1b7859060a"
+    },
+    "AISafetyAtlas.Sovereignty.SimpleGame.banzhafRaw_eq_swings_div": {
+      "file": "AISafetyAtlas/Sovereignty/VotingPower.lean",
+      "sha256": "9fd2dadf608fbcf6"
+    },
+    "AISafetyAtlas.Sovereignty.SimpleGame.shapleyShubik_eq_zero_iff": {
+      "file": "AISafetyAtlas/Sovereignty/VotingPower.lean",
+      "sha256": "b3cd67d67d62cf89"
+    },
+    "AISafetyAtlas.Sovereignty.authorizedFrom_of_total": {
+      "file": "AISafetyAtlas/Sovereignty/Constitution.lean",
+      "sha256": "04ae1f374ee602ae"
+    },
+    "AISafetyAtlas.Sovereignty.countsAs_validates_refl_and_trans": {
+      "file": "AISafetyAtlas/Sovereignty/Institution.lean",
+      "sha256": "6ecec702a2caabb8"
+    },
+    "AISafetyAtlas.Sovereignty.demandwise_iff_exists_selector": {
+      "file": "AISafetyAtlas/Sovereignty/Catalogue.lean",
+      "sha256": "068fe9f38884254c"
+    },
+    "AISafetyAtlas.Sovereignty.empowerment_eq_log_card_range": {
+      "file": "AISafetyAtlas/Sovereignty/Empowerment.lean",
+      "sha256": "c14b27bd0a606b53"
+    },
+    "AISafetyAtlas.Sovereignty.eu_determined_mostOrbit": {
+      "file": "AISafetyAtlas/Sovereignty/EUDetermined.lean",
+      "sha256": "b438092ef77b7637"
+    },
+    "AISafetyAtlas.Sovereignty.exists_mixed_value": {
+      "file": "AISafetyAtlas/Sovereignty/Minimax.lean",
+      "sha256": "df01e035fb90da1b"
+    },
+    "AISafetyAtlas.Sovereignty.exists_output_rise_with_fallback_fall": {
+      "file": "AISafetyAtlas/Sovereignty/Capability.lean",
+      "sha256": "7efba1bf0b8fb22f"
+    },
+    "AISafetyAtlas.Sovereignty.exists_success_le_inv": {
+      "file": "AISafetyAtlas/Sovereignty/Evidence.lean",
+      "sha256": "fe54c14d16ff0534"
+    },
+    "AISafetyAtlas.Sovereignty.exists_uniformDecision_iff": {
+      "file": "AISafetyAtlas/Sovereignty/Auditability.lean",
+      "sha256": "d61649d3f05adee2"
+    },
+    "AISafetyAtlas.Sovereignty.fallback_not_knowable_from_assistedOutput": {
+      "file": "AISafetyAtlas/Sovereignty/Capability.lean",
+      "sha256": "3d3570f2ddd7537b"
+    },
+    "AISafetyAtlas.Sovereignty.forces_inter_of_shared_footprint": {
+      "file": "AISafetyAtlas/Sovereignty/Quantifiers.lean",
+      "sha256": "4af5b467f5631a58"
+    },
+    "AISafetyAtlas.Sovereignty.forces_of_simulates": {
+      "file": "AISafetyAtlas/Sovereignty/Transfer.lean",
+      "sha256": "51182683dfcbeb71"
+    },
+    "AISafetyAtlas.Sovereignty.forces_superadditive": {
+      "file": "AISafetyAtlas/Sovereignty/Separations.lean",
+      "sha256": "ebadc832f915de3d"
+    },
+    "AISafetyAtlas.Sovereignty.gameFormAcyclic_iff": {
+      "file": "AISafetyAtlas/Sovereignty/Stability.lean",
+      "sha256": "591f4973627b3aa3"
+    },
+    "AISafetyAtlas.Sovereignty.influenceCapacity_eq_zero_iff": {
+      "file": "AISafetyAtlas/Sovereignty/Influence.lean",
+      "sha256": "c5f5beaacd3a9b2c"
+    },
+    "AISafetyAtlas.Sovereignty.lowerValue_diracLaw_eq_one_iff": {
+      "file": "AISafetyAtlas/Sovereignty/Value.lean",
+      "sha256": "cd7e2e7b9fc7c087"
+    },
+    "AISafetyAtlas.Sovereignty.magnitude_does_not_decide_authorship": {
+      "file": "AISafetyAtlas/Sovereignty/CogSov.lean",
+      "sha256": "0a5ddc68c4dca746"
+    },
+    "AISafetyAtlas.Sovereignty.maintenanceFloor_of_practice_floor": {
+      "file": "AISafetyAtlas/Sovereignty/Capability.lean",
+      "sha256": "7815dd45ed3a25a6"
+    },
+    "AISafetyAtlas.Sovereignty.no_authority_from_ungrounded_cycles": {
+      "file": "AISafetyAtlas/Sovereignty/Institution.lean",
+      "sha256": "252a360409b0a76a"
+    },
+    "AISafetyAtlas.Sovereignty.not_exists_gameForm_cofiniteEff": {
+      "file": "AISafetyAtlas/Sovereignty/PlayableConverse.lean",
+      "sha256": "51955eabf14e9e8f"
+    },
+    "AISafetyAtlas.Sovereignty.not_exists_label_agreeing_with_both": {
+      "file": "AISafetyAtlas/Sovereignty/Authority.lean",
+      "sha256": "4581dea729145291"
+    },
+    "AISafetyAtlas.Sovereignty.not_gameFormAcyclic_of_cycle": {
+      "file": "AISafetyAtlas/Sovereignty/Stability.lean",
+      "sha256": "911a7a1e850e412f"
+    },
+    "AISafetyAtlas.Sovereignty.oughtImpliesCan_does_not_give_permission": {
+      "file": "AISafetyAtlas/Sovereignty/Deontic.lean",
+      "sha256": "0756fe124c8edd87"
+    },
+    "AISafetyAtlas.Sovereignty.retainsFamily_and_not_demandwise": {
+      "file": "AISafetyAtlas/Sovereignty/Service.lean",
+      "sha256": "47771a452315d366"
+    },
+    "AISafetyAtlas.Sovereignty.retainsFamily_of_represents": {
+      "file": "AISafetyAtlas/Sovereignty/Mandate.lean",
+      "sha256": "51f171ab83c76149"
+    },
+    "AISafetyAtlas.Sovereignty.safetyKernel_subset_of_adversaryLe": {
+      "file": "AISafetyAtlas/Sovereignty/Outnumbered.lean",
+      "sha256": "3832f9753eb3f8f8"
+    },
+    "AISafetyAtlas.Sovereignty.sov1_of_retainsFamily_singleton": {
+      "file": "AISafetyAtlas/Sovereignty/Mandate.lean",
+      "sha256": "2f820a9544c3e60f"
+    },
+    "AISafetyAtlas.Sovereignty.transmitsZeroError_iff_exists_code": {
+      "file": "AISafetyAtlas/Sovereignty/Communication.lean",
+      "sha256": "aa0b86011ffa88a7"
+    },
     "AISafetyAtlas.Verification.AgentBehavior.no_behavioral_safety_verifier": {
       "file": "AISafetyAtlas/Verification/AgentBehavior.lean",
       "sha256": "0ecaea67d08c9344"
     },
+    "AISafetyAtlas.Verification.Containment.harming_undecidable": {
+      "file": "AISafetyAtlas/Verification/Containment.lean",
+      "sha256": "b39c48766f5a74a3"
+    },
+    "AISafetyAtlas.Verification.FullAccess.access_is_not_what_separates_them": {
+      "file": "AISafetyAtlas/Verification/FullAccess.lean",
+      "sha256": "3bca9ff69c29d13e"
+    },
+    "AISafetyAtlas.Verification.FullAccess.fullAccessVerifier_exactArtifact": {
+      "file": "AISafetyAtlas/Verification/FullAccess.lean",
+      "sha256": "51d329fa7e2a6f67"
+    },
+    "AISafetyAtlas.Verification.FullAccess.no_fullAccessVerifier_of_extensional": {
+      "file": "AISafetyAtlas/Verification/FullAccess.lean",
+      "sha256": "9732b5244cfc43c1"
+    },
     "AISafetyAtlas.Verification.Robot.action_safety_unverifiable": {
       "file": "AISafetyAtlas/Verification/Robot.lean",
       "sha256": "0e0d2fc254112967"
+    },
+    "AISafetyAtlas.Verification.Robot.alwaysSatisfies_run": {
+      "file": "AISafetyAtlas/Verification/RobotRun.lean",
+      "sha256": "6659e2467673478a"
     },
     "AISafetyAtlas.Verification.rice": {
       "file": "AISafetyAtlas/Verification.lean",
@@ -1195,9 +1607,21 @@
       "file": "AISafetyAtlas/Wireheading/AgentEquations.lean",
       "sha256": "a0c827b65ec1fccf"
     },
+    "AISafetyAtlas.Wireheading.AgentEquations.value_runHistory_eq_of_agree_on_window": {
+      "file": "AISafetyAtlas/Wireheading/AgentHistory.lean",
+      "sha256": "a2928d97ac617c65"
+    },
     "AISafetyAtlas.Wireheading.CRMDP.Model.everitt_theorem_eleven": {
       "file": "AISafetyAtlas/Wireheading/CRMDP.lean",
       "sha256": "a5945f8ca4c573b8"
+    },
+    "AISafetyAtlas.Wireheading.GoalPreservation.scheduleModel_optimalAt": {
+      "file": "AISafetyAtlas/Wireheading/GoalPreservationCarrier.lean",
+      "sha256": "b13e038a3b5141cb"
+    },
+    "AISafetyAtlas.Wireheading.GoalPreservationRun.Model.equation_thirteen": {
+      "file": "AISafetyAtlas/Wireheading/GoalPreservationRun.lean",
+      "sha256": "a0383135946f4af7"
     },
     "AISafetyAtlas.Wireheading.GoalPreservationSource.Model.selected_matches_initial": {
       "file": "AISafetyAtlas/Wireheading/GoalPreservationSource.lean",
@@ -1214,6 +1638,14 @@
     "AISafetyAtlas.Wireheading.ObservationLimits.returnOver_zeroEnv_complement": {
       "file": "AISafetyAtlas/Wireheading/ObservationLimits.lean",
       "sha256": "08b5d06467423301"
+    },
+    "AISafetyAtlas.Wireheading.RewardGrid.everitt_theorem_eleven_gridClass": {
+      "file": "AISafetyAtlas/Wireheading/RewardGrid.lean",
+      "sha256": "e3bc2767b15072f2"
+    },
+    "AISafetyAtlas.Wireheading.ValueLearning.Beliefs.vrlValue_of_isCP": {
+      "file": "AISafetyAtlas/Wireheading/ValueLearning.lean",
+      "sha256": "b44ab941333fd36f"
     }
   }
 }

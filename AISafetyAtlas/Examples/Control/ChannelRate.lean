@@ -131,4 +131,25 @@ public theorem ashbyInsect_perMinute (rate : ℝ) :
   rw [ashbyCapacity, ashbyCapacity]
   ring
 
+/-- **§9/15's conversion sentence, cited at the general lemma.** The printed
+capacity rescaling holds for any rate and step, not merely `1/3` against `1`. -/
+public theorem ashbyCapacity_rescale_general (rate : ℝ) :
+    ashbyCapacity rate (1 / 3) = 3 * ashbyCapacity rate 1 :=
+  ashbyCapacity_rescale rate 1 one_ne_zero 3
+
+/-- **Capacity times elapsed time recovers the entropy produced**, at Ashby's
+own per-step rate and step duration. -/
+public theorem ashbyCapacity_mul_one (rate : ℝ) :
+    ashbyCapacity rate 1 * 1 = rate :=
+  ashbyCapacity_mul rate 1 one_ne_zero
+
+/-- **§9/12's identification, at Ashby's own chain.** `chainRate` — the
+weighted average of column entropies — is the conditional entropy of one
+step of the canonical Markov chain drawing its start from the equilibrium
+law. -/
+public theorem ashbyInsect_chainRate_eq_condEntropy :
+    chainRate ashbyInsectLaw ashbyInsectKernel
+      = H[(Prod.snd : Loc × Loc → Loc) | Prod.fst ; ashbyInsectLaw ⊗ₘ ashbyInsectKernel] :=
+  chainRate_eq_condEntropy ashbyInsectLaw ashbyInsectKernel
+
 end AISafetyAtlas.Examples.Control

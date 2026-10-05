@@ -16,30 +16,45 @@ public import AISafetyAtlas.Verification
 - **Assumption:** the specification is nontrivial — some representable agent is
   safe and some is not.
 - **Conclusion:** no such total verifier exists.
-- **Source:** reduces through `AISafetyAtlas.Verification.rice` (semantic-to-code
-  bridge over Mathlib Rice), not by re-proving Rice. Classical statement:
-  H. G. Rice, *Classes of Recursively Enumerable Sets and Their Decision
-  Problems*, Trans. AMS 74(2):358–366, 1953 (survey BY-012 / `survey-ref-037`).
+- **Statement source:** Melo, Máximo, Soma and Castro,
+  [arXiv:2408.08995v1](https://arxiv.org/abs/2408.08995) (also Sci. Rep. 2025;
+  catalog `atlas-ref-melo-2024`, row `LAND-VERIF-AGENTBEHAVIOR-001`).
+- **Proof route:** reduces through `AISafetyAtlas.Verification.rice`
+  (semantic-to-code bridge over Mathlib Rice), not by re-proving Rice.
+  Classical statement: H. G. Rice, *Classes of Recursively Enumerable Sets and
+  Their Decision Problems*, Trans. AMS 74(2):358–366, 1953 (survey BY-012 /
+  `survey-ref-037`).
 
-## Related literature (computability packaging)
+## Which work plays which role
 
-This module packages classical Rice for an *encoded agent* and a nontrivial
-extensional I/O specification: no total sound-and-complete computable verifier
-exists for all program codes.
+**Corrected 2026-09-11, and the two used to be the other way round.** This
+header named Rice as the *source* and filed Melo et al. under *"related
+literature"*. Reading Melo et al. settles it: **they state the claim this
+module's theorem renders**, and Rice is the route to it. Their abstract's first
+sentence is *"The inner alignment problem, which asserts whether an arbitrary
+artificial intelligence (AI) model satisfices a non-trivial alignment function
+of its outputs given its inputs, is undecidable"*, and their *Formal Proof*
+section supplies the four things this module carries: the objects are **partial**
+functions (their own words, which matters because their title is *Machines that
+Halt*), the property is extensional, non-triviality comes with **both**
+witnesses, and "decides" means total, computable and correct in both directions.
 
-Melo, Máximo, Soma, and Castro ([arXiv:2408.08995](https://arxiv.org/abs/2408.08995);
-Sci. Rep. 2025; catalog `atlas-ref-melo-2024`) apply
-Rice to a stated decision problem: whether an arbitrary AI model (as a program)
-always satisfices a fixed non-trivial judge of input/output pairs. Basics and
-coverage estimate: `docs/guide/related-literature.md`. The atlas formalizes the
-Rice packaging, not their full narrative or architecture proposals.
+Print gives two routes — *"could simply be reduced to a restatement of Rice's
+Theorem"*, and an explicit Halting-Problem reduction. **This module takes the
+first**; nothing in the tree reduces to halting.
+
+Graded in section 24 of `docs/provenance/source-coverage-audit.md`: 5 Yes,
+0 Partial, 5 No, 1 Beyond. The atlas formalizes their undecidability claim and
+**not** their second half — the enumerable set of architecturally aligned models,
+the finite-input decidable case, or the proposed halting constraint on the judge.
+Basics and coverage estimate: `docs/guide/related-literature.md`.
 
 Related but distinct: Alfonseca et al., *Superintelligence cannot be contained*
 (JAIR 2021; `survey-ref-056`).
 
 Registry BY-012 (statement layer). Coverage:
 `docs/status/sources/brcic-yampolskiy-2023.md`. Review:
-`docs/bridges/review-by-012-agentbehavior.md`.
+`docs/interpretation-reviews/review-by-012-agentbehavior.md`.
 
 CT-4 / R6-8 consumer of `Verification.rice`. Does not claim that every
 practical safety property is extensional I/O behavior, that a particular

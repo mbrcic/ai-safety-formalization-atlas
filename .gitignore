@@ -2,7 +2,7 @@
 .DS_Store
 
 # Lean/Lake build artifacts.
-/.lake/
+/.lake
 # The public page in /site is a static file deployed as-is; nothing to ignore.
 # A nested doc-gen4 project used to live in /docbuild and was removed — see
 # docs/guide/open-work.md for why, and delete any leftover /docbuild locally.
@@ -46,3 +46,6 @@ __pycache__/
 # Local interpreter for the validators, e.g. `python3 -m venv .venv` or
 # `uv venv --python 3.13 .venv`. The repository pins no Python of its own.
 /.venv/
+
+# Local secrets (Prove2Me API key, etc.) — never commit
+.env

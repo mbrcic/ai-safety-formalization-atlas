@@ -1,6 +1,7 @@
 module
 
 public import AISafetyAtlas.Causal.Decision
+public import AISafetyAtlas.Decision.Expect
 public import AISafetyAtlas.Causal.MarginClass
 public import AISafetyAtlas.Causal.ModelSpace
 public import Mathlib.Probability.ProbabilityMassFunction.Constructions
@@ -97,95 +98,19 @@ variable {dim : C → ℕ}
 
 /-! ## Expectation against a `PMF`
 
-`PMF α` is a subtype of `α → ℝ≥0∞` for an arbitrary `α`, so it needs no
-measurable structure on the strategy or transcript spaces. That is why the
-expectation below is a `tsum` rather than a Bochner integral: the analyst's
-randomization lives on types (queries, models) that carry no σ-algebra and do
-not need one. -/
+**Moved to `AISafetyAtlas.Decision.Expect` on 2026-09-10.** `Decision.expect` and its
+bounded toolkit were written here first, and were then written twice more on
+another branch by developments that could not see them. All three are now one
+declaration, `AISafetyAtlas.Decision.expect`, with this file's names carried
+across: `Decision.summable_of_abs_le` is `Decision.summable_of_abs_le`, `Decision.expect_add_of_abs_le`
+is `Decision.expect_add_of_abs_le`, and the rest keep their shape.
 
-/-- The expected value of a real function against a probability mass function. -/
-public noncomputable def pmfExpect {α : Type*} (p : PMF α) (f : α → ℝ) : ℝ :=
-  ∑' a, (p a).toReal * f a
+The reason given here for a `tsum` rather than a Bochner integral is unchanged
+and is recorded in the new module: `PMF α` is a subtype of `α → ℝ≥0∞` for an
+arbitrary `α`, so the analyst's randomization over queries and models needs no
+σ-algebra. What is new there is `Decision.expect_eq_integral`, which hands over
+to Mathlib's integral wherever the measurable structure does exist. -/
 
-@[simp] public theorem pmfExpect_pure {α : Type*} (a : α) (f : α → ℝ) :
-    pmfExpect (PMF.pure a) f = f a := by
-  unfold pmfExpect
-  rw [tsum_eq_single a]
-  · simp
-  · intro b hb
-    simp [PMF.pure_apply, hb]
-
-/-! ## An expectation toolkit
-
-`pmfExpect` is a `tsum` in `ℝ`, so monotonicity is not free the way it would be
-in `ℝ≥0∞`: `tsum_le_tsum` wants summability on both sides. Every function pushed
-through it below is bounded — the printed error is bounded by `1` — so these
-lemmas take an explicit bound rather than trying to be general. -/
-
-/-- A `PMF`'s masses sum to `1` as reals. -/
-public theorem hasSum_pmf_toReal {α : Type*} (p : PMF α) :
-    HasSum (fun a ↦ (p a).toReal) 1 := by
-  have hne : ∀ a, p a ≠ ⊤ := fun a ↦ PMF.apply_ne_top p a
-  have hsum : ∑' a, (p a : ℝ≥0∞) ≠ ⊤ := by
-    rw [p.tsum_coe]; exact ENNReal.one_ne_top
-  have h := ENNReal.hasSum_toReal hsum
-  rwa [← ENNReal.tsum_toReal_eq hne, p.tsum_coe, ENNReal.toReal_one] at h
-
-public theorem summable_pmfExpect {α : Type*} (p : PMF α) {f : α → ℝ} {C : ℝ}
-    (hf : ∀ a, |f a| ≤ C) : Summable fun a ↦ (p a).toReal * f a := by
-  refine Summable.of_norm_bounded ((hasSum_pmf_toReal p).summable.mul_right C) fun a ↦ ?_
-  rw [Real.norm_eq_abs, abs_mul, abs_of_nonneg ENNReal.toReal_nonneg]
-  exact mul_le_mul_of_nonneg_left (hf a) ENNReal.toReal_nonneg
-
-@[simp] public theorem pmfExpect_const {α : Type*} (p : PMF α) (c : ℝ) :
-    pmfExpect p (fun _ ↦ c) = c := by
-  unfold pmfExpect
-  rw [tsum_mul_right, (hasSum_pmf_toReal p).tsum_eq, one_mul]
-
-public theorem pmfExpect_mono {α : Type*} (p : PMF α) {f g : α → ℝ} {C : ℝ}
-    (hf : ∀ a, |f a| ≤ C) (hg : ∀ a, |g a| ≤ C) (h : ∀ a, f a ≤ g a) :
-    pmfExpect p f ≤ pmfExpect p g :=
-  Summable.tsum_le_tsum (fun a ↦ mul_le_mul_of_nonneg_left (h a) ENNReal.toReal_nonneg)
-    (summable_pmfExpect p hf) (summable_pmfExpect p hg)
-
-public theorem pmfExpect_add_const {α : Type*} (p : PMF α) {f : α → ℝ} {C : ℝ}
-    (hf : ∀ a, |f a| ≤ C) (c : ℝ) :
-    pmfExpect p (fun a ↦ f a + c) = pmfExpect p f + c := by
-  unfold pmfExpect
-  have hsplit : ∀ a, (p a).toReal * (f a + c)
-      = (p a).toReal * f a + (p a).toReal * c := fun a ↦ by ring
-  simp only [hsplit]
-  rw [(summable_pmfExpect p hf).tsum_add ((hasSum_pmf_toReal p).summable.mul_right c),
-    tsum_mul_right, (hasSum_pmf_toReal p).tsum_eq, one_mul]
-
-/-- Expectation is additive on bounded functions.
-
-Stated with an explicit bound for the same reason the rest of this toolkit is:
-`pmfExpect` is a `tsum` in `ℝ`, so splitting one needs summability of both
-halves, and every function pushed through here is bounded by `1`. -/
-public theorem pmfExpect_add {α : Type*} (p : PMF α) {f g : α → ℝ} {C : ℝ}
-    (hf : ∀ a, |f a| ≤ C) (hg : ∀ a, |g a| ≤ C) :
-    pmfExpect p (fun a ↦ f a + g a) = pmfExpect p f + pmfExpect p g := by
-  unfold pmfExpect
-  have hsplit : ∀ a, (p a).toReal * (f a + g a)
-      = (p a).toReal * f a + (p a).toReal * g a := fun a ↦ by ring
-  simp only [hsplit]
-  exact (summable_pmfExpect p hf).tsum_add (summable_pmfExpect p hg)
-
-/-- A function bounded below has an expectation bounded below — the mirror of
-`pmfExpect_le`, and the direction a minimax **lower** bound needs. -/
-public theorem le_pmfExpect {α : Type*} (p : PMF α) {f : α → ℝ} {C : ℝ}
-    (hf : ∀ a, |f a| ≤ C) (c : ℝ) (h : ∀ a, c ≤ f a) : c ≤ pmfExpect p f := by
-  have hc : ∀ a, |(fun _ : α ↦ c) a| ≤ max C |c| := fun _ ↦ le_max_right _ _
-  have hf' : ∀ a, |f a| ≤ max C |c| := fun a ↦ (hf a).trans (le_max_left _ _)
-  simpa using pmfExpect_mono p hc hf' h
-
-/-- A bounded function has a bounded expectation. -/
-public theorem pmfExpect_le {α : Type*} (p : PMF α) {f : α → ℝ} {C : ℝ}
-    (hf : ∀ a, |f a| ≤ C) (c : ℝ) (h : ∀ a, f a ≤ c) : pmfExpect p f ≤ c := by
-  have hc : ∀ a, |(fun _ : α ↦ c) a| ≤ max C |c| := fun _ ↦ le_max_right _ _
-  have hf' : ∀ a, |f a| ≤ max C |c| := fun a ↦ (hf a).trans (le_max_left _ _)
-  simpa using pmfExpect_mono p hf' hc h
 
 /-! ## Queries and answers -/
 
@@ -311,8 +236,8 @@ public noncomputable def exactExpectedError [Nonempty C] (sk : Skeleton C dim Bo
     (M : Model C dim ℝ) (family : PolicyFamily sk)
     (strategy : RandomizedQueryStrategy sk)
     (estimator : RandomizedEstimator C dim ℝ) (n : ℕ) : ℝ :=
-  pmfExpect (runRandomizedTranscript sk family strategy n) fun history ↦
-    pmfExpect (estimator sk history) fun Mhat ↦ modelError M Mhat
+  Decision.expect (runRandomizedTranscript sk family strategy n) fun history ↦
+    Decision.expect (estimator sk history) fun Mhat ↦ modelError M Mhat
 
 /-- The supremum print maximizes over: *"the supremum, over models in the class
 and admissible adversaries, of the expected error"*.
@@ -441,21 +366,21 @@ public theorem integrable_modelError [Nonempty C] (M : Model C dim ℝ)
   rw [Real.norm_eq_abs, abs_of_nonneg (modelError_nonneg M M')]
   exact modelError_le_one M M'
 
-/-- Against a `PMF`'s own measure, the Bochner integral is the sum `pmfExpect`
+/-- Against a `PMF`'s own measure, the Bochner integral is the sum `Decision.expect`
 computes. This is what makes the inclusion above risk-preserving rather than
 merely type-correct. -/
 public theorem integral_toMeasure_modelError [Nonempty C] (M : Model C dim ℝ)
     (p : PMF (Model C dim ℝ)) :
-    ∫ M', modelError M M' ∂p.toMeasure = pmfExpect p fun M' ↦ modelError M M' := by
+    ∫ M', modelError M M' ∂p.toMeasure = Decision.expect p fun M' ↦ modelError M M' := by
   rw [PMF.integral_eq_tsum p _ (integrable_modelError M p.toMeasure)]
-  simp [pmfExpect, smul_eq_mul]
+  simp [Decision.expect, smul_eq_mul]
 
 /-- The expected error against an arbitrary output law. -/
 public noncomputable def measureExpectedError [Nonempty C] (sk : Skeleton C dim Bool ℝ)
     (M : Model C dim ℝ) (family : PolicyFamily sk)
     (strategy : RandomizedQueryStrategy sk)
     (estimator : MeasureEstimator C dim) (n : ℕ) : ℝ :=
-  pmfExpect (runRandomizedTranscript sk family strategy n) fun history ↦
+  Decision.expect (runRandomizedTranscript sk family strategy n) fun history ↦
     ∫ Mhat, modelError M Mhat ∂(estimator sk history : MeasureTheory.Measure _)
 
 /-- The supremum over the class and the admissible adversaries, at an arbitrary
@@ -509,16 +434,12 @@ public theorem measureAnalystRisk_toMeasureEstimator [Nonempty C]
 Needed so the infima are over sets bounded below, which is what makes the
 comparison below a statement about real numbers rather than about `sInf ∅`. -/
 
-public theorem pmfExpect_nonneg {α : Type*} (p : PMF α) {f : α → ℝ}
-    (hf : ∀ a, 0 ≤ f a) : 0 ≤ pmfExpect p f :=
-  tsum_nonneg fun a ↦ mul_nonneg ENNReal.toReal_nonneg (hf a)
-
 public theorem measureExpectedError_nonneg [Nonempty C] (sk : Skeleton C dim Bool ℝ)
     (M : Model C dim ℝ) (family : PolicyFamily sk)
     (strategy : RandomizedQueryStrategy sk)
     (estimator : MeasureEstimator C dim) (n : ℕ) :
     0 ≤ measureExpectedError sk M family strategy estimator n :=
-  pmfExpect_nonneg _ fun _ ↦
+  Decision.expect_nonneg _ fun _ ↦
     MeasureTheory.integral_nonneg fun M' ↦ modelError_nonneg M M'
 
 public theorem measureAnalystRisk_nonneg [Nonempty C] (sk : Skeleton C dim Bool ℝ)
@@ -610,10 +531,10 @@ and mapped back along the inclusion. -/
 
 /-- The discretized estimator's expectation is the original's, taken along the
 rounding map. -/
-public theorem pmfExpect_discretize [Nonempty C] (M : Model C dim ℝ)
+public theorem expect_discretize [Nonempty C] (M : Model C dim ℝ)
     (estimator : MeasureEstimator C dim) {ε : ℝ} (hε : 0 < ε)
     (sk : Skeleton C dim Bool ℝ) (history : Transcript sk) :
-    pmfExpect (estimator.discretize hε sk history) (fun M' ↦ modelError M M')
+    Decision.expect (estimator.discretize hε sk history) (fun M' ↦ modelError M M')
       = ∫ M', modelError M (M'.roundDown hε)
           ∂(estimator sk history : MeasureTheory.Measure (Model C dim ℝ)) := by
   classical
@@ -658,12 +579,12 @@ public theorem exactExpectedError_discretize_le [Nonempty C]
       ≤ measureExpectedError sk M family strategy estimator n
         + (dimBound C dim : ℝ) * ε := by
   have hstep : ∀ history : Transcript sk,
-      pmfExpect (estimator.discretize hε sk history) (fun M' ↦ modelError M M')
+      Decision.expect (estimator.discretize hε sk history) (fun M' ↦ modelError M M')
         ≤ (∫ M', modelError M M'
             ∂(estimator sk history : MeasureTheory.Measure (Model C dim ℝ)))
           + (dimBound C dim : ℝ) * ε := by
     intro history
-    rw [pmfExpect_discretize M estimator hε sk history]
+    rw [expect_discretize M estimator hε sk history]
     have hpt : ∀ M' : Model C dim ℝ,
         modelError M (M'.roundDown hε)
           ≤ modelError M M' + (dimBound C dim : ℝ) * ε := by
@@ -702,32 +623,32 @@ public theorem exactExpectedError_discretize_le [Nonempty C]
     rw [abs_of_nonneg h0]
     exact h1
   have hf1 : ∀ history : Transcript sk,
-      |pmfExpect (estimator.discretize hε sk history)
+      |Decision.expect (estimator.discretize hε sk history)
         (fun M' ↦ modelError M M')| ≤ 1 := by
     intro history
-    rw [abs_of_nonneg (pmfExpect_nonneg _ fun M' ↦ modelError_nonneg M M')]
-    exact pmfExpect_le _ (fun M' ↦ abs_modelError_le M M') 1
+    rw [abs_of_nonneg (Decision.expect_nonneg _ fun M' ↦ modelError_nonneg M M')]
+    exact Decision.expect_le _ (fun M' ↦ abs_modelError_le M M') 1
       fun M' ↦ modelError_le_one M M'
   unfold exactExpectedError measureExpectedError
-  calc pmfExpect (runRandomizedTranscript sk family strategy n)
-        (fun history ↦ pmfExpect (estimator.discretize hε sk history)
+  calc Decision.expect (runRandomizedTranscript sk family strategy n)
+        (fun history ↦ Decision.expect (estimator.discretize hε sk history)
           fun Mhat ↦ modelError M Mhat)
-      ≤ pmfExpect (runRandomizedTranscript sk family strategy n)
+      ≤ Decision.expect (runRandomizedTranscript sk family strategy n)
           (fun history ↦ (∫ Mhat, modelError M Mhat
             ∂(estimator sk history : MeasureTheory.Measure (Model C dim ℝ)))
               + (dimBound C dim : ℝ) * ε) :=
-        pmfExpect_mono _ (C := 1 + (dimBound C dim : ℝ) * ε)
+        Decision.expect_mono _ (C := 1 + (dimBound C dim : ℝ) * ε)
           (fun history ↦ (hf1 history).trans (by linarith))
           (fun history ↦ (abs_add_le _ _).trans (by
             have := hg1 history
             rw [abs_of_nonneg hK0]
             linarith))
           hstep
-    _ = pmfExpect (runRandomizedTranscript sk family strategy n)
+    _ = Decision.expect (runRandomizedTranscript sk family strategy n)
           (fun history ↦ ∫ Mhat, modelError M Mhat
             ∂(estimator sk history : MeasureTheory.Measure (Model C dim ℝ)))
           + (dimBound C dim : ℝ) * ε :=
-        pmfExpect_add_const _ hg1 _
+        Decision.expect_add_const _ hg1 _
 
 /-! ## Through the supremum and the infimum -/
 
@@ -736,7 +657,7 @@ public theorem exactExpectedError_nonneg [Nonempty C] (sk : Skeleton C dim Bool 
     (strategy : RandomizedQueryStrategy sk)
     (estimator : RandomizedEstimator C dim ℝ) (n : ℕ) :
     0 ≤ exactExpectedError sk M family strategy estimator n :=
-  pmfExpect_nonneg _ fun _ ↦ pmfExpect_nonneg _ fun M' ↦ modelError_nonneg M M'
+  Decision.expect_nonneg _ fun _ ↦ Decision.expect_nonneg _ fun M' ↦ modelError_nonneg M M'
 
 public theorem exactAnalystRisk_nonneg [Nonempty C] (sk : Skeleton C dim Bool ℝ)
     (modelClass : Set (Model C dim ℝ)) (n : ℕ)
@@ -752,7 +673,7 @@ public theorem measureExpectedError_le_one [Nonempty C] (sk : Skeleton C dim Boo
     (strategy : RandomizedQueryStrategy sk)
     (estimator : MeasureEstimator C dim) (n : ℕ) :
     measureExpectedError sk M family strategy estimator n ≤ 1 := by
-  refine pmfExpect_le _ (C := 1) (fun history ↦ ?_) 1 fun history ↦ ?_
+  refine Decision.expect_le _ (C := 1) (fun history ↦ ?_) 1 fun history ↦ ?_
   · rw [abs_of_nonneg (MeasureTheory.integral_nonneg fun M' ↦ modelError_nonneg M M')]
     calc ∫ M', modelError M M'
           ∂(estimator sk history : MeasureTheory.Measure (Model C dim ℝ))

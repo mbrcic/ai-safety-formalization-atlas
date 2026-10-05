@@ -108,7 +108,7 @@ def test_graded_section_without_a_target_heading_is_reported():
 
 def test_declared_headings_match_the_section_parser_keys():
     text = (ROOT / "docs" / "provenance" / "source-coverage-audit.md").read_text()
-    per_section, _, _, _ = audit.parse_sections(text)
+    per_section, *_ = audit.parse_sections(text)
     declared = audit.audit_declared_headings(text)
     graded = {name for name, counts in per_section.items() if any(counts.values())}
     assert graded <= declared, f"graded sections declaring no target: {graded - declared}"
@@ -155,7 +155,12 @@ def test_pinned_environment_matches_the_files_lake_reads():
     toolchain, revisions = registry.pinned_environment()
     assert toolchain == (ROOT / "lean-toolchain").read_text(encoding="utf-8").strip()
     manifest = json.loads((ROOT / "lake-manifest.json").read_text(encoding="utf-8"))
-    assert {p["rev"] for p in manifest["packages"]} == set(revisions)
+    # Path dependencies carry no `rev`: a package vendored inside another
+    # package's checkout is pinned by that package's own revision, not by one
+    # of its own. `pinned_environment` skips them and so must this.
+    assert {
+        p["rev"] for p in manifest["packages"] if isinstance(p.get("rev"), str)
+    } == set(revisions)
     assert toolchain.startswith("leanprover/lean4:")
 
 
@@ -268,3 +273,166 @@ def test_renderer_check_detects_a_stale_artifact(tmp_path):
         cwd=ROOT, capture_output=True, text=True,
     )
     assert result.returncode != 0, "a stale artifact passed --check"
+
+
+# --- the module-ledger check, added 2026-09-10 ---------------------------------
+#
+# The registry-row check above runs from a *section's target module*, so a module
+# graded in a row of some other section escapes it -- which is how DSep, Requisite
+# and Incentive were graded in section 8 and still held no registry row while
+# LAND-CAUSAL-STRUCTURAL-001 said they were not here. The ledger check runs from
+# the root's import list instead, so nothing public can be outside every ledger.
+
+
+def test_every_root_cluster_module_is_ledgered():
+    text = (ROOT / "docs" / "provenance" / "source-coverage-audit.md").read_text()
+    exempt = audit.ledger_exempt_modules(text)
+    assert exempt is not None, "the module-ledger block is missing from the audit"
+    hosted = audit.registry_modules()
+    unledgered = [
+        m for m in audit.root_cluster_modules() if m not in hosted and m not in exempt
+    ]
+    assert not unledgered, f"root modules in no ledger at all: {unledgered}"
+
+
+def test_ledger_block_lists_no_module_a_registry_row_already_hosts():
+    text = (ROOT / "docs" / "provenance" / "source-coverage-audit.md").read_text()
+    exempt = audit.ledger_exempt_modules(text) or set()
+    stale = sorted(m for m in exempt if m in audit.registry_modules())
+    assert not stale, f"listed as unhosted but a row hosts them: {stale}"
+
+
+def test_root_cluster_modules_excludes_examples_and_the_two_sandboxes():
+    modules = audit.root_cluster_modules()
+    assert modules, "the root import list parsed to nothing"
+    assert not [
+        m
+        for m in modules
+        if m.startswith(("AISafetyAtlas.Examples", "AISafetyAtlas.Upstream",
+                         "AISafetyAtlas.Conjectures"))
+    ]
+
+
+def test_ledger_parser_reads_bulleted_modules_and_stops_at_the_next_section():
+    text = "\n".join([
+        "### The module ledger, checked (2026-09-10)",
+        "",
+        "* `AISafetyAtlas.Decision.MDP` — Turner and Tadepalli, Definition D.6",
+        "* `AISafetyAtlas.Decision.Expect`",
+        "",
+        "## Totals",
+        "* `AISafetyAtlas.NotInTheBlock`",
+    ])
+    assert audit.ledger_exempt_modules(text) == {
+        "AISafetyAtlas.Decision.MDP",
+        "AISafetyAtlas.Decision.Expect",
+    }
+
+
+def test_ledger_parser_returns_none_when_the_block_is_renamed():
+    # main() turns this into a failure rather than a vacuous pass
+    text = "### The module ledger, RENAMED\n* `AISafetyAtlas.Decision.MDP`"
+    assert audit.ledger_exempt_modules(text) is None
+
+
+# --- the renderer's block loop, added 2026-09-10 --------------------------------
+#
+# `render_blocks` had no branch for a `#` line. A sub-heading inside a section body
+# therefore reached the paragraph loop, which will not consume a line starting with
+# `#` and left the index where it was: an infinite loop appending an empty <p>.
+# The audit's first in-section `###` -- the module ledger added the same day -- hit
+# it, and the symptom was nine minutes and six gigabytes with no output and no
+# error. These pin the branch and the guard that makes the next such gap loud.
+
+renderer = _load("render_coverage_artifact")
+
+
+def test_subheading_inside_a_block_renders_and_terminates():
+    html_out = renderer.render_blocks([
+        "Some lede paragraph.",
+        "",
+        "### The module ledger, checked",
+        "",
+        "* `AISafetyAtlas.Decision.MDP` — a source",
+    ])
+    assert "<h4>" in html_out, html_out
+    assert "The module ledger, checked" in html_out
+    assert "<li>" in html_out
+
+
+@pytest.mark.parametrize("heading,tag", [("# A", "h2"), ("## B", "h3"), ("### C", "h4")])
+def test_heading_levels_shift_by_one(heading, tag):
+    assert f"<{tag}>" in renderer.render_blocks([heading])
+
+
+def test_render_blocks_raises_rather_than_looping_on_an_unconsumable_line():
+    # No branch consumes this, and before the guard it spun forever. The point of
+    # the test is that the failure is an exception rather than a hang.
+    class Unconsumable(str):
+        def startswith(self, prefix, *a):  # noqa: D102
+            return True if prefix == ("|", "* ", "- ", "#") else str.startswith(self, prefix, *a)
+
+    with pytest.raises(RuntimeError, match="would loop forever"):
+        renderer.render_blocks([Unconsumable("x")])
+
+
+def test_the_real_audit_renders_quickly():
+    # A regression on the whole file: the defect above took nine minutes on it.
+    import time
+
+    text = (ROOT / "docs" / "provenance" / "source-coverage-audit.md").read_text()
+    start = time.monotonic()
+    renderer.render_blocks(text.splitlines())
+    assert time.monotonic() - start < 20, "the audit should render in well under a second"
+
+
+def test_scope_tally_reads_the_grade_out_of_a_qualified_cell():
+    """`Wider (repaired)` is Wider; the qualifier is not a separate grade."""
+    import collections
+
+    buckets, owed, closed = audit.tally_scope(
+        collections.Counter({"Wider": 2, "Wider (repaired)": 3})
+    )
+    assert buckets["Wider"] == 5
+    assert owed == 0
+    assert closed == 0
+
+
+def test_scope_tally_does_not_bill_a_closed_narrowing_as_debt():
+    """A cell that records its own closure is discharged work, not owed work.
+
+    Collapsing this into `Narrower` would report the closure as debt and make
+    the number grow every time somebody closed an axis.
+    """
+    import collections
+
+    buckets, owed, closed = audit.tally_scope(
+        collections.Counter({"Narrower": 4, "Narrower, and closed": 1})
+    )
+    assert buckets["Narrower"] == 4
+    assert owed == 4
+    assert closed == 1
+
+
+def test_scope_tally_counts_mixed_as_owed():
+    import collections
+
+    _, owed, _ = audit.tally_scope(collections.Counter({"Mixed": 3}))
+    assert owed == 3
+
+
+def test_scope_tally_treats_a_dash_as_ungraded_rather_than_dropping_it():
+    import collections
+
+    buckets, owed, closed = audit.tally_scope(collections.Counter({"—": 7, "-": 1, "": 1}))
+    assert buckets["ungraded"] == 9
+    assert (owed, closed) == (0, 0)
+
+
+def test_scope_tally_refuses_an_unrecognised_grade():
+    """Dropping an unknown spelling would leave the arithmetic balanced and the
+    total wrong -- the failure `classify` also refuses."""
+    import collections
+
+    with pytest.raises(audit.Unclassifiable):
+        audit.tally_scope(collections.Counter({"Broader": 1}))

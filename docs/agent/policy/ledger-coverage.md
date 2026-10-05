@@ -2,6 +2,13 @@
 
 - **Headline coverage:** reproduced registry formalizations with `EXACT` or
   `EQUIVALENT` only. `RELATED` does not increase the count.
+- **"Coverage" names three different metrics in this repo — always qualify
+  it.** *Headline coverage* (above) is registry rows at `EXACT`/`EQUIVALENT`.
+  *Example coverage* (`scripts/check_example_coverage.py`) is whether a module
+  has an `Examples/` file at all. *Source coverage*
+  (`docs/provenance/source-coverage-audit.md`) is a statement-by-statement
+  grade against a paper. A bare "coverage" in prose is ambiguous between the
+  three; name which one.
 - **Which record takes your edit:**
   | Where | Holds | Note |
   |---|---|---|
@@ -49,9 +56,30 @@
 - **Layers:** (1) math theorem → (2) atlas interface → (3) AI-safety bridge →
   (4) real-system claim. Layers 3–4 need human review; Lean at 1–2 does not
   inherit an AI reading.
-- **`ai_bridge_status`:** `HUMAN_REVIEW` → `STATEMENT_REVIEWED` → `REVIEWED`.
-  Non-`HUMAN_REVIEW` needs a real `bridge_review` record under `docs/bridges/`.
-  **Never invent** human review or graduate a bridge without authorization.
+- **A bridge is Lean.** `type: BRIDGE` on a declaration means that declaration
+  states an AI-safety reading over an AI-system model — layer 3 above. Counting
+  bridges means counting those declarations and nothing else.
+- **`ai_interpretation_status` is not a bridge count.** It is a review flag,
+  mandatory on every claim row and forbidden on artifact rows, recording whether
+  a human signed off on that row's AI reading. It is stamped `HUMAN_REVIEW` the
+  moment a row exists, so it grows when rows are added, not when Lean is written.
+  It was called `ai_bridge_status` until 2026-09-14; under that name it was
+  repeatedly mistaken for a bridge inventory, and one literature session produced
+  34 prose review drafts scoped to add **no Lean** because of the collision.
+- **`ai_interpretation_status`:** `HUMAN_REVIEW` → `STATEMENT_REVIEWED` → `REVIEWED`.
+  Non-`HUMAN_REVIEW` needs a real `interpretation_review` record under
+  `docs/interpretation-reviews/`. **Never invent** human review or graduate a
+  row without authorization.
+- **One bridge, one label.** The bridge review lives on the **declaration** —
+  `review_status` plus a `review` record on the `BRIDGE` entry — and never on the
+  row. A row is too wide a unit: `LAND-SOV-AUTH-001` owns four bridges about
+  three different things, and one status on the row cannot say which of them a
+  human signed. Same lifecycle and same record shape as above; the evidence must
+  be a file that exists under `docs/interpretation-reviews/`, and a non-`BRIDGE`
+  declaration may not carry either field. The row's own
+  `ai_interpretation_status` keeps its meaning — whether that row's
+  `informal_claim` has a signed AI reading — and answers a different question.
+  Register: [`docs/interpretation-reviews/README.md`](../../interpretation-reviews/README.md).
 - Prefer `STATEMENT_REVIEWED` over overclaiming real systems.
 - Robot (`action_safety_unverifiable`): **conditional reduction core**,
   relationship `RELATED`. Do not lengthen for paper show-off.

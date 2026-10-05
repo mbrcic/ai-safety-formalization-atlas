@@ -22,8 +22,12 @@ public import Mathlib.Order.Bounds.Basic
   against it.
 - **Conclusion.** Both an unrelativised regret predicate (`Overrides`) and
   Definition 11 relative to a compatible `(p, R)` (`OverridesFor`); equation
-  (2) for the rationalising action; and §B.2's claim that when the human is not
-  already optimal, rationalising yields greater value than action `0`. These are
+  (2) for the rationalising action; §B.2's claim that when the human is not
+  already optimal, rationalising yields greater value than action `0`; and
+  **both** of appendix B.1's branches about inaction — zero regret under a
+  fully rational planner (`regret_noop_eq_zero_of_rationalPlanner`) and positive
+  regret otherwise (`noop_overrides_of_suboptimal`) — together with the fact
+  that they exhaust the cases (`regret_noop_eq_zero_or_overrides`). These are
   scalar comparisons; no agent preference or choice rule is defined here.
 - **Difference from the source.** §B.2 also argues, informally and with an
   explicit "very plausible", that the agent can often do better still by choosing
@@ -226,6 +230,81 @@ public theorem noopValue_lt_mixtureValue_rationalise (ε : ℝ) (R : RewardFn S 
     M.noopValue R < M.mixtureValue ε R R := by
   rw [mixtureValue_rationalise]
   exact h
+
+/-! ### Appendix B.1's other branch, and why both are here
+
+Print writes two things about inaction two paragraphs apart, and they do not
+conflict because they assume different planners.
+
+> We already know that `π̇` is optimal with respect to `Ṙ` (by definition), so
+> the regret for `a = 0` is `0`.
+
+That is the **fully rational planner**: the decomposition explaining the
+human's own behaviour returns an optimal policy. Print then takes the other
+branch — a less-than-rational human, for whom inaction is strictly worse — and
+`noop_overrides_of_suboptimal` above is that one. The declarations below are the
+first, so the module carries both, and `regret_noop_eq_zero_or_overrides` is the
+dichotomy that makes them exhaustive rather than merely compatible.
+-/
+
+/--
+**Print's fully rational planner.** The planner returns, for every reward, a
+policy of optimal value — print's *"`π̇` is optimal with respect to `Ṙ` (by
+definition)"*, where the *by definition* is the rationality assumption on the
+decomposition and not a property of the human.
+-/
+@[expose] public def IsRationalPlanner (p : Planner (RewardFn S A) (Policy S A)) : Prop :=
+  ∀ R, M.value R (p R) = M.optValue R
+
+/--
+**Appendix B.1, the first branch.** If the human's behaviour under inaction is
+explained by a compatible pair whose planner is fully rational, then inaction
+has zero regret.
+-/
+public theorem regret_noop_eq_zero_of_rationalPlanner
+    {p : Planner (RewardFn S A) (Policy S A)} (hp : M.IsRationalPlanner p)
+    (R : RewardFn S A) (hexp : Explains p R (M.resulting M.noop)) :
+    M.regret R M.noop = 0 := by
+  have : M.value R (M.resulting M.noop) = M.optValue R := by
+    rw [← hexp]; exact hp R
+  simp [regret, this]
+
+/--
+**The closed form print draws from that branch.** With inaction at zero regret
+the optimum *is* the human's own value, so the regret of any other action is
+exactly how far below the untouched human it leaves them.
+-/
+public theorem regret_eq_noopValue_sub_of_rationalPlanner
+    {p : Planner (RewardFn S A) (Policy S A)} (hp : M.IsRationalPlanner p)
+    (R : RewardFn S A) (hexp : Explains p R (M.resulting M.noop)) (a : Act) :
+    M.regret R a = M.noopValue R - M.value R (M.resulting a) := by
+  have h : M.value R (M.resulting M.noop) = M.optValue R := by
+    rw [← hexp]; exact hp R
+  simp [regret, noopValue, h]
+
+/--
+**Under that branch inaction is not an override**, at any positive threshold —
+which is what makes print's first paragraph a claim about the agent's incentive
+and not a restatement of Definition 11.
+-/
+public theorem not_overrides_noop_of_rationalPlanner
+    {p : Planner (RewardFn S A) (Policy S A)} (hp : M.IsRationalPlanner p)
+    (R : RewardFn S A) (hexp : Explains p R (M.resulting M.noop))
+    {θ : ℝ} (hθ : 0 < θ) : ¬ M.Overrides R θ M.noop := by
+  rw [Overrides, M.regret_noop_eq_zero_of_rationalPlanner hp R hexp]
+  exact not_le.mpr hθ
+
+/--
+**The two branches are exhaustive.** Inaction either has no regret at all or is
+itself an override at every threshold up to its regret — print's two paragraphs
+are the two cases of this, and nothing in the model admits a third.
+-/
+public theorem regret_noop_eq_zero_or_overrides (R : RewardFn S A) :
+    M.regret R M.noop = 0 ∨
+      (0 < M.regret R M.noop ∧ ∀ θ ≤ M.regret R M.noop, M.Overrides R θ M.noop) := by
+  rcases eq_or_lt_of_le (M.regret_nonneg R M.noop) with h | h
+  · exact Or.inl h.symm
+  · exact Or.inr ⟨h, fun _ hθ => hθ⟩
 
 end OverrideModel
 

@@ -10,7 +10,7 @@ Edges come from the elaborated Lean environment. This answers the question the p
 
 So `A → B` means *`B` occurs in `A`'s statement, or in `A`'s body when `A` is a definition*. A lemma used only inside a proof does not appear. Reading the table as a complete call graph would be wrong, and the two sections below are scoped so that they stay true under this limit.
 
-`119` authored declarations in `AISafetyAtlas.Compositional.*` (65 theorems). Compiler-generated companions and projections are dropped.
+`137` authored declarations in `AISafetyAtlas.Compositional.*` (78 theorems). Compiler-generated companions and projections are dropped.
 
 ## Load-bearing declarations
 
@@ -18,17 +18,18 @@ Named in the statements of eight or more others. A change to one of these is a c
 
 | Declaration | Named by |
 |---|---|
-| `Hyperproperties.TraceSystem` | 33 |
-| `Networks.Config` | 30 |
-| `Networks.Network` | 28 |
-| `Hyperproperties.Hyperproperty` | 23 |
-| `Networks.Algorithm` | 20 |
-| `Hyperproperties.Observation` | 20 |
-| `Hyperproperties.Realizes` | 13 |
-| `Networks.Automorphism` | 12 |
-| `Networks.runFor` | 9 |
-| `Networks.Invariant` | 9 |
-| `Networks.Automorphism.toEquiv` | 9 |
+| `Hyperproperties.TraceSystem` | 63 |
+| `Hyperproperties.Hyperproperty` | 41 |
+| `Networks.Config` | 37 |
+| `Networks.Network` | 32 |
+| `Hyperproperties.Observation` | 26 |
+| `Networks.Algorithm` | 24 |
+| `Networks.Automorphism` | 17 |
+| `Hyperproperties.Realizes` | 17 |
+| `Networks.runFor` | 16 |
+| `Networks.Automorphism.toEquiv` | 14 |
+| `Networks.Invariant` | 12 |
+| `Networks.Run` | 11 |
 
 ## Definitions no statement and no example mentions
 
@@ -42,11 +43,20 @@ None.
 
 | Declaration | Kind | Names |
 |---|---|---|
+| `AgentNetwork.Fleet` | definition | — |
+| `AgentNetwork.evaluating_one_covers_its_peers` | theorem | `AgentNetwork.Fleet`, `AgentNetwork.Fleet.initial`, `AgentNetwork.Fleet.program`, `AgentNetwork.Fleet.topology`, `Networks.SameView`, `Networks.runFor` |
+| `AgentNetwork.no_designated_agent_emerges` | theorem | `AgentNetwork.Fleet`, `AgentNetwork.Fleet.initial`, `AgentNetwork.Fleet.program`, `AgentNetwork.Fleet.topology`, `Networks.Automorphism`, `Networks.Automorphism.toEquiv`, `Networks.Invariant`, `Networks.runFor`, `Symmetry.HasUniqueLeader` |
+| `AgentNetwork.symmetry_is_the_shared_cause` | theorem | `AgentNetwork.Fleet`, `AgentNetwork.Fleet.initial`, `AgentNetwork.Fleet.program`, `AgentNetwork.Fleet.topology`, `Networks.Automorphism`, `Networks.Automorphism.toEquiv`, `Networks.Invariant`, `Networks.SameView`, `Networks.runFor`, `Symmetry.HasUniqueLeader` |
 | `ExchangeClosed` | definition | — |
 | `ExchangeClosed.exchange_fst` | theorem | `ExchangeClosed` |
 | `FinitelySupported` | definition | — |
 | `Hyperproperties.Cone` | definition | `Hyperproperties.Observation`, `Hyperproperties.Realizes`, `Hyperproperties.TraceSystem` |
+| `Hyperproperties.Evaluation.not_knowable_of_score_collision` | theorem | `Hyperproperties.Evaluation.scoreSet`, `Hyperproperties.TraceSystem` |
+| `Hyperproperties.Evaluation.sampling_misses_subsingleton` | theorem | `Hyperproperties.Evaluation.scoreSet`, `Hyperproperties.TraceSystem` |
+| `Hyperproperties.Evaluation.scoreSet` | definition | `Hyperproperties.TraceSystem` |
+| `Hyperproperties.Evaluation.traceProperty_knowable_of_score_decides` | theorem | `Hyperproperties.Evaluation.scoreSet`, `Hyperproperties.TraceSystem` |
 | `Hyperproperties.FiniteSelfComposition` | definition | `Hyperproperties.TraceSystem` |
+| `Hyperproperties.HistoryPrefix` | definition | — |
 | `Hyperproperties.Hyperproperty` | definition | `Hyperproperties.TraceSystem` |
 | `Hyperproperties.IsBadObservation` | definition | `Hyperproperties.Hyperproperty`, `Hyperproperties.Observation`, `Hyperproperties.Realizes`, `Hyperproperties.TraceSystem` |
 | `Hyperproperties.IsHyperLiveness` | definition | `Hyperproperties.Hyperproperty`, `Hyperproperties.TraceSystem` |
@@ -58,12 +68,16 @@ None.
 | `Hyperproperties.Observation` | definition | — |
 | `Hyperproperties.Realizes` | definition | `Hyperproperties.Observation`, `Hyperproperties.TraceSystem` |
 | `Hyperproperties.SelfCompositionSafe` | definition | `Hyperproperties.Hyperproperty`, `Hyperproperties.IsBadObservation`, `Hyperproperties.Observation`, `Hyperproperties.Realizes` |
+| `Hyperproperties.SubsetClosed` | definition | `Hyperproperties.Hyperproperty`, `Hyperproperties.TraceSystem` |
 | `Hyperproperties.TraceSystem` | definition | — |
+| `Hyperproperties.bad_observation_prefixes_are_run_prefixes` | theorem | `Hyperproperties.HistoryPrefix`, `Hyperproperties.Observation`, `Hyperproperties.Realizes`, `Hyperproperties.runTraces` |
 | `Hyperproperties.card_toBatch_le` | theorem | `Hyperproperties.toBatch` |
 | `Hyperproperties.cone_empty` | theorem | `Hyperproperties.Cone`, `Hyperproperties.Observation`, `Hyperproperties.TraceSystem` |
 | `Hyperproperties.cone_union` | theorem | `Hyperproperties.Cone`, `Hyperproperties.Observation`, `Hyperproperties.TraceSystem` |
 | `Hyperproperties.dense_iff_hyperLiveness` | theorem | `Hyperproperties.Hyperproperty`, `Hyperproperties.IsHyperLivenessOp`, `Hyperproperties.TraceSystem`, `Hyperproperties.prefixTopology` |
+| `Hyperproperties.detHistoryUpTo_prefix_succ` | theorem | `Hyperproperties.HistoryPrefix` |
 | `Hyperproperties.eq_empty_of_realizes_empty` | theorem | `Hyperproperties.Observation`, `Hyperproperties.Realizes` |
+| `Hyperproperties.exists_bad_trajectories_of_isKSafety` | theorem | `Hyperproperties.HistoryPrefix`, `Hyperproperties.Hyperproperty`, `Hyperproperties.IsBadObservation`, `Hyperproperties.IsKSafety`, `Hyperproperties.Observation`, `Hyperproperties.TraceSystem`, `Hyperproperties.runTraces` |
 | `Hyperproperties.finiteSelfComposition_empty` | theorem | `Hyperproperties.FiniteSelfComposition`, `Hyperproperties.TraceSystem` |
 | `Hyperproperties.forall_batch_iff_forall_product` | theorem | `Hyperproperties.FiniteSelfComposition`, `Hyperproperties.Hyperproperty`, `Hyperproperties.SelfCompositionSafe`, `Hyperproperties.TraceSystem`, `Hyperproperties.productSelfComposition`, `Hyperproperties.toBatch` |
 | `Hyperproperties.hyperSafety_hyperLiveness_decomposition` | theorem | `Hyperproperties.Hyperproperty`, `Hyperproperties.IsHyperLivenessOp`, `Hyperproperties.IsHyperSafetyOp`, `Hyperproperties.TraceSystem` |
@@ -75,6 +89,7 @@ None.
 | `Hyperproperties.k_safety_iff_finite_self_composition` | theorem | `Hyperproperties.FiniteSelfComposition`, `Hyperproperties.Hyperproperty`, `Hyperproperties.IsKSafety`, `Hyperproperties.SelfCompositionSafe`, `Hyperproperties.TraceSystem` |
 | `Hyperproperties.k_safety_iff_product_self_composition` | theorem | `Hyperproperties.Hyperproperty`, `Hyperproperties.IsKSafety`, `Hyperproperties.SelfCompositionSafe`, `Hyperproperties.TraceSystem`, `Hyperproperties.productSelfComposition`, `Hyperproperties.toBatch` |
 | `Hyperproperties.knowable_of_isSafetyPredicate` | theorem | `Hyperproperties.IsSafetyPredicate`, `Hyperproperties.Observation`, `Hyperproperties.realizedSet` |
+| `Hyperproperties.mem_runTraces` | theorem | `Hyperproperties.TraceSystem`, `Hyperproperties.runTraces` |
 | `Hyperproperties.mem_toBatch` | theorem | `Hyperproperties.toBatch` |
 | `Hyperproperties.not_isSafetyPredicate_of_realizedSet_collision` | theorem | `Hyperproperties.IsSafetyPredicate`, `Hyperproperties.Observation`, `Hyperproperties.realizedSet` |
 | `Hyperproperties.not_knowable_of_realizedSet_collision` | theorem | `Hyperproperties.Observation`, `Hyperproperties.realizedSet` |
@@ -85,8 +100,12 @@ None.
 | `Hyperproperties.productSelfComposition` | definition | `Hyperproperties.TraceSystem` |
 | `Hyperproperties.productSelfComposition_empty` | theorem | `Hyperproperties.TraceSystem`, `Hyperproperties.productSelfComposition` |
 | `Hyperproperties.realizedSet` | definition | `Hyperproperties.Observation`, `Hyperproperties.Realizes` |
+| `Hyperproperties.runTraces` | definition | `Hyperproperties.TraceSystem` |
+| `Hyperproperties.runTraces_mono` | theorem | `Hyperproperties.TraceSystem`, `Hyperproperties.runTraces` |
+| `Hyperproperties.runTraces_nonempty` | theorem | `Hyperproperties.runTraces` |
 | `Hyperproperties.selfCompositionSafe_empty_of_any` | theorem | `Hyperproperties.Hyperproperty`, `Hyperproperties.SelfCompositionSafe` |
 | `Hyperproperties.self_composition_is_safety` | theorem | `Hyperproperties.Hyperproperty`, `Hyperproperties.IsSafetyPredicate`, `Hyperproperties.SelfCompositionSafe` |
+| `Hyperproperties.subsetClosed_of_isHyperSafetyOp` | theorem | `Hyperproperties.Hyperproperty`, `Hyperproperties.IsHyperSafetyOp`, `Hyperproperties.SubsetClosed` |
 | `Hyperproperties.toBatch` | definition | — |
 | `Hyperproperties.toBatch_mem_finiteSelfComposition` | theorem | `Hyperproperties.FiniteSelfComposition`, `Hyperproperties.TraceSystem`, `Hyperproperties.productSelfComposition`, `Hyperproperties.toBatch` |
 | `Hyperproperties.toBatch_padBatch` | theorem | `Hyperproperties.padBatch`, `Hyperproperties.toBatch` |

@@ -106,4 +106,107 @@ public theorem jointProb_sum_shiftCollapse :
     ∑ v : Assignment Bool categoricalDim, categoricalModel.jointProb shiftCollapse v = 1 :=
   categoricalModel.jointProb_sum shiftCollapse
 
+/-! ## Every model lemma, applied
+
+`AISafetyAtlas.Causal.Model` proves eighteen results that nothing instantiated.
+Each is applied below on `categoricalModel`, the ternary-root/binary-child model
+this file already builds, or on the binary helpers it shares with the rest of the
+cluster. Most are arithmetic facts about one model rather than discoveries; what
+they establish is that the hypotheses are inhabited.
+
+Names are written `Causal.Model.…` throughout: this file's own namespace ends in
+`Model`, so the short form resolves here and not to the library.
+-/
+
+/-- The binary state encoding and its inverse, at both values, and the count of
+local interventions on a binary pair. -/
+public theorem model_binary_facts :
+    binaryState false = 0 ∧ binaryState true = 1 ∧
+      finTwoEquiv.symm false = (0 : Fin 2) ∧ finTwoEquiv.symm true = (1 : Fin 2) ∧
+      Fintype.card (Fin 2 → Fin 2) = 4 :=
+  ⟨Causal.binaryState_false, Causal.binaryState_true, Causal.finTwoEquiv_symm_false,
+    Causal.finTwoEquiv_symm_true, Causal.card_binaryLocalIntervention⟩
+
+/-- Every assignment on a binary pair is one of the four `asg` values. -/
+public theorem model_assignment_two :
+    asg false false
+      = asg (finTwoEquiv (asg false false 0)) (finTwoEquiv (asg false false 1)) :=
+  Causal.assignment_two_eq _
+
+/-- The factorization, read the RE24 way and summed over the child's states. -/
+public theorem model_factor_readings :
+    categoricalModel.factor shiftCollapse witness true
+        = ∑ a, (if shiftCollapse true a = witness true then
+            categoricalModel.cpt true a witness else 0) :=
+  Causal.Model.factor_eq_re24 categoricalModel shiftCollapse witness true
+
+public theorem model_factor_sum :
+    (∑ b : Fin (categoricalDim true),
+      categoricalModel.factor shiftCollapse (Function.update witness true b) true) = 1 :=
+  Causal.Model.factor_sum categoricalModel shiftCollapse witness true
+
+/-- The joint law is a probability distribution, and collapses to a point mass
+under a profile that fixes every variable. -/
+public theorem model_jointProb_readings :
+    0 ≤ categoricalModel.jointProb shiftCollapse witness ∧
+      (∑ v : Assignment Bool categoricalDim,
+        categoricalModel.jointProb shiftCollapse v) = 1 ∧
+      categoricalModel.jointProb (Causal.fixProfile witness) witness = 1 :=
+  ⟨Causal.Model.jointProb_nonneg categoricalModel shiftCollapse witness,
+    Causal.Model.jointProb_sum categoricalModel shiftCollapse,
+    by rw [Causal.Model.jointProb_fixProfile categoricalModel witness witness]; simp⟩
+
+/-- Marginals: over no variables the mass is one, over a forced variable it is a
+point mass, and adding a variable to its own parents factorizes. -/
+public theorem model_marginal_empty :
+    categoricalModel.marginal shiftCollapse ∅ witness = 1 :=
+  Causal.Model.marginal_empty categoricalModel shiftCollapse witness
+
+public theorem model_marginal_forced :
+    categoricalModel.marginal
+      (Causal.hardInterventionProfile {true} witness) {true} witness = 1 := by
+  rw [Causal.Model.marginal_forced categoricalModel {true} witness
+    (Finset.mem_singleton_self true) witness]
+  simp
+
+public theorem model_marginal_insert_parents :
+    categoricalModel.marginal (Causal.Model.observationalProfile Bool categoricalDim)
+        (insert true (categoricalModel.parents true)) witness
+      = categoricalModel.marginal (Causal.Model.observationalProfile Bool categoricalDim)
+          (categoricalModel.parents true) witness *
+        categoricalModel.marginal
+          (Causal.hardInterventionProfile (categoricalModel.parents true) witness)
+          {true} witness :=
+  Causal.Model.marginal_insert_parents categoricalModel true witness
+
+/-- An empty hard intervention is the observational profile, and the difference
+operator is linear in a scalar. -/
+public theorem model_profile_and_delta :
+    Causal.hardInterventionProfile (∅ : Finset Bool) witness
+        = Causal.Model.observationalProfile Bool categoricalDim ∧
+      categoricalModel.Δ (fun _ => (2 : ℚ) * 1) shiftCollapse
+        = 2 * categoricalModel.Δ (fun _ => (1 : ℚ)) shiftCollapse :=
+  ⟨Causal.Model.hardInterventionProfile_empty witness,
+    Causal.Model.Δ_smul categoricalModel 2 (fun _ => 1) shiftCollapse⟩
+
+/-- `agreeSet` over everything is the single assignment, and filtering it on one
+more coordinate is the same as agreeing on that coordinate too. -/
+public theorem model_agreeSet_readings :
+    Causal.Model.agreeSet (Finset.univ : Finset Bool) witness = {witness} ∧
+      (Causal.Model.agreeSet (∅ : Finset Bool) witness).filter
+          (fun v => v true = witness true)
+        = Causal.Model.agreeSet (insert true (∅ : Finset Bool))
+            (Function.update witness true (witness true)) :=
+  ⟨Causal.Model.agreeSet_univ witness,
+    Causal.Model.agreeSet_filter ∅ witness (by simp) (witness true)⟩
+
+/-- **Forcing every variable collapses the expectation to a point value.**
+`Δ` averages a function against the model's law; under `fixProfile` the law is a
+point mass, so the average *is* the value there. This is the degenerate case
+every intervention argument checks itself against, and nothing had run it. -/
+public theorem categorical_Δ_fixProfile (g : Causal.Assignment Bool categoricalDim → ℚ)
+    (target : Causal.Assignment Bool categoricalDim) :
+    categoricalModel.Δ g (Causal.fixProfile target) = g target :=
+  Causal.Model.Δ_fixProfile categoricalModel g target
+
 end AISafetyAtlas.Examples.Causal.Model

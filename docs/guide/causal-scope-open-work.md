@@ -59,12 +59,12 @@ states had been used.
 
 | axis | rows it makes `Narrower` | introduced by | closable? |
 |---|---|---|---|
-| **A** unmediated projection | RE24 §2.2 value, §2.2 regret | `Causal.Model` having no decision or utility vertices | yes, by construction |
-| **B** finite domains | Everitt Defs. 1–2 | `dom edom : V → ℕ` on `SCM` | yes, by refactor — **still open** |
+| **A** unmediated projection | RE24 §2.2 value, §2.2 regret | `Causal.Model` having no decision or utility vertices | **CLOSED 2026-09-20**, by `DecisionNetwork.expectedUtility_eq_value` and `DecisionNetwork.regret_eq_value_regret` |
+| **B** finite domains | Everitt Defs. 1–2 | `dom edom : V → ℕ` on `SCM` | **CLOSED 2026-09-20**, by making the domains a family of types and moving every finiteness condition onto the operation that needs it |
 | **C** finite indegree | Everitt Defs. 1–5 | `parents : V → Finset V` on `SCM` and `CID` | **CLOSED 2026-08-22** |
 | **D** `ℕ`-ranked acyclicity | Everitt Defs. 1–5 | `acyclic : ∃ rank : V → ℕ` on `SCM` and `CID` | **CLOSED 2026-08-22** |
 | **E** well-foundedness of the parent relation | Everitt Defs. 1, 2, 4, 5 | `SCM.wellFounded` and `SCIM.graph_wellFounded` — what D shrank to | **CLOSED 2026-08-22**, by moving the field to a class |
-| **F** the expectation layer is a finite sum | Everitt Def. 1, Def. 5, policy row | `[Fintype V]` on `exoJoint`, `jointProb`, `expectedUtility` | yes in principle, by a measure — **open, and costed, and not recommended** |
+| **F** the expectation layer is a finite sum | Everitt Def. 1, Def. 5, policy row | `[Fintype V]` on `exoJoint`, `jointProb`, `expectedUtility` | **CLOSED 2026-09-20**, by an integral against `SCM.exoLaw` with the finite sums as its computation |
 
 Definitions 3, 4 and 5 introduce **nothing**: they are `Narrower` purely through
 C and D, reached via `CID` and `SCIM.graph`. Closing C and D moves four rows at
@@ -121,8 +121,36 @@ renderings sit in different vertex types, so it is a translation rather than a
 rewrite. The axis moved from *not closable* to *open and costed*, which is the
 honest gain.
 
-**Verdict: highest benefit per unit cost, and the only axis that unblocks
-anything else.** Do this one first if any.
+**Closed 2026-09-20, and the estimate above was wrong in three ways.**
+`DecisionNetwork.expectedUtility_eq_value` is the agreement, and
+`DecisionNetwork.regret_eq_value_regret` carries regret across it. Both rows moved
+`Narrower → Same`.
+
+1. **No new module, and no 809 lines.** It is about 330 lines added to
+   `Causal.Decision` and `Causal.DecisionNetwork`, of which the reusable part is
+   two lemmas about `fibreRep` — `mem_image_fibreRep_iff` and
+   `sum_image_fibreRep_erase` — that have nothing to do with decisions.
+2. **The reindexing equivalence was the wrong core step.** No
+   `Assignment C dim ≃ Assignment (C ∖ {D}) dim × Fin (dim D)` was needed. Both
+   sides collapse onto a parent-closed set first, by
+   `Model.sum_jointProb_mul_of_parentClosed`, and the coordinate comes out of the
+   *representatives* of that collapse, by `sum_image_fibreRep_erase`. The split
+   happens twice — once at the utility, once at the decision — and the same lemma
+   does both.
+3. **The `[0,1]` warning was right, and is the only part of the estimate that
+   was.** `Skeleton.utility_mem_unitInterval` is carried as an explicit
+   hypothesis `0 ≤ uval ≤ 1` on the agreement, not dropped, and it is RE24
+   Appendix A.2's own range.
+
+**What the closure did *not* need, and an earlier pass of the audit said it
+would:** `IsDeterministicUtility`. A `Skeleton`'s utility is a number, so the
+object the projection wants is the utility vertex's conditional *expectation*,
+`DecisionNetwork.utilityMean`, which every diagram has. Print's *U(pa_U)* is the
+special case — `utilityMean_eq_uval_of_isDeterministicUtility`.
+
+**The `No` rows are unaffected.** As the withdrawal above already says, Everitt's
+Theorems 9, 14, 16 and 18 need `d`-separation too, and A was one blocker of two.
+The other is still there.
 
 ---
 
@@ -132,8 +160,8 @@ anything else.** Do this one first if any.
 Finiteness first appears at Definition 4, where *"finite-domain variables"* is
 print's own phrase — so **this axis does not exist from Definition 4 onward**.
 
-**What the atlas has.** `dom edom : V → ℕ` on `SCM`, so every variable's domain
-is `Fin (dom v)`.
+**What the atlas had until 2026-09-20.** `dom edom : V → ℕ` on `SCM`, so every
+variable's domain was `Fin (dom v)`. It is now `dom edom : V → Type*`.
 
 **Cost.** A type-level refactor. `dom` becomes a family of types with a
 `Fintype`/`DecidableEq` instance where needed; 19 sites read `Fin (dom v)` or
@@ -168,10 +196,24 @@ With C, D and E closed, **domains are the only axis left on that row, so B
 closes Definition 2 outright.** Definition 1 does not follow: `SCM.jointProb`
 and `SCM.exoJoint_mul_prod` do carry `[Fintype V]`, so that row needs F as well.
 
-**Verdict: worth paying now, and it buys one row.** The earlier verdict — *"do
-not do this alone ... then it closes Definitions 1 and 2 outright"* — was right
-about the ordering and wrong about the yield, on the same miscount as before: it counted the axes
-this note enumerated rather than the binders the row's declarations carry.
+**Paid on 2026-09-20, and it bought two rows rather than one.** The verdict
+above said one, because Definition 1 also carried axis F; F closed earlier the
+same day, so both rows moved together.
+
+**What the refactor actually cost, against this note's estimate.** The `tsum`
+route was taken and was as cheap as predicted: `exoProb_tsum` is print's
+*"probability distribution `P(ε)`"* at a domain of any size, and
+`exoProb_sum_fintype` is its finite reading. Two things the estimate did not
+name. The **measure layer** — added the same morning and therefore not priced
+here — presupposed `Fin (edom v)`'s measurable structure throughout, so
+`exoLaw`, `observableLaw`, `endoLaw`, `measurable_exo` and `endoLaw_singleton`
+now carry measurable-space, singleton and countability instances; `exoPMF` is
+built from `exoProb_tsum` rather than from a finite sum. And the **decision
+layer** — `expectedUtility`, `optimalValue`, `instFintypePolicy`, and the whole
+of `Causal.Incentive` — needs `[∀ v, Fintype (dom v)]` and its siblings, which
+is print's own Definition 4 finiteness and so sits there by right rather than as
+a residue. `AdmitsICI` deliberately still quantifies over `Fin`-indexed domain
+families, so Definition 17 and Theorem 18 say exactly what they said before.
 
 ---
 
@@ -306,9 +348,10 @@ a `class SCM.IsWellFounded` instead leaves the bodies alone and adds
 
 **Benefit.** **Definition 4 closes on this alone** — its atlas column is
 `Causal.SCIM` and nothing else, so once the field is off the structure there is
-no second declaration in that cell. Definitions 1, 2 and 5 do not close: 1 and 2
-keep domains, and 1 and 5 keep axis F. E is also the **prerequisite for B** —
-until it lands, closing domains changes no grade at all.
+no second declaration in that cell. Definitions 1, 2 and 5 did not close on E alone: 1 and 2
+kept domains, and 1 and 5 kept axis F. E is also the **prerequisite for B** —
+until it lands, closing domains changes no grade at all. B and F both landed on
+2026-09-20, in that order, and the three rows closed with them.
 
 **Verdict: cheapest Lean per closed row, lowest risk, and the gate on B.**
 
@@ -359,8 +402,39 @@ two; the policy row's narrowing half goes and it becomes plainly `Wider`. So one
 grade moves, and only if F is done alone — Definitions 1 and 5 need B and E as
 well.
 
-**Verdict: costed, expensive, and not next — but not for the reason an earlier
-draft gave.** That draft said the Everitt layer is *elementary by design* and
+**Done on 2026-09-20, and two of the three pessimistic estimates below were
+wrong.** `SCIM.expectedUtilityLaw` is `Eπ[U]` as an integral against
+`SCM.exoLaw`, `SCM.endoLaw` is the induced joint as a distribution, and
+`SCIM.expectedUtilityLaw_eq` and `SCM.endoLaw_singleton` prove the finite sums
+compute them. Definition 5 went `Narrower` to `Same` and the policy row `Mixed`
+to `Wider`.
+
+**What this section got wrong, kept because the error is instructive.** It said
+a Kolmogorov extension at arbitrary `V` would have to be established or worked
+around first. It did not: `Measure.infinitePi` was in the pinned Mathlib, and
+`SCM.exoLaw` was built on it on 2026-09-14 for a different reason — the
+probability-law bridge — and then sat unread by the expectation layer for six
+days. The cost estimate priced building the measure; the measure already
+existed, and what remained was an integral, a converting lemma and two named
+hypotheses. **The estimate was of the wrong object**, which is the same failure
+as the count revisions this note opens with: it priced the axis as enumerated
+rather than as the code carried it.
+
+It also said F buys *one* cell. It bought two, and it did **not** buy the three
+the axis was listed against: Definition 1 still had domains, which B closed
+later the same day, and Definition 17 and
+Theorem 18 — which the audit had folded into this axis — turned out to carry
+conditioning rather than summation. `SCIM.condExp` conditions on `Pa^D = pa^D`,
+an event that can be **null** once `Pa^D` may be infinite, where print's
+conditional expectation names nothing at all. That is a different axis and is
+costed separately in the audit.
+
+**What it got right.** *"F does not buy continuous variables"* — unchanged and
+still worth saying. And the register argument below, which is why closing F
+turned out to be ordinary work rather than a change of kind.
+
+**The original verdict, kept: costed, expensive, and not next — but not for the
+reason an earlier draft gave.** That draft said the Everitt layer is *elementary by design* and
 that paying F would change the artifact's mathematical register. **The second
 half is false about the atlas** and the claim is withdrawn. 46 modules already
 import `MeasureTheory`, `ProbabilityTheory` or `MeasurableSpace`: `Control.*`
@@ -388,8 +462,10 @@ and infinite state spaces on the kernel need `dim : V → ℕ` to go, which is a
 B taken to its limit, not F. Anyone selling F as *"add measure theory"* or as
 *"support continuous models"* is selling two other things.
 
-So: expensive, one cell, and behind A and B in any ordering. Disclosed as a
-limit of these definitions — not as a limit of the atlas, which it is not.
+So: expensive, one cell, and behind A and B in any ordering. **That ordering
+was not followed and the reason is worth recording**: F came before B because
+its object already existed and B's does not. Disclosed as a limit of these
+definitions — not as a limit of the atlas, which it is not.
 
 ---
 
@@ -443,23 +519,26 @@ the atlas does not have: one adapter module mapping `Causal.Model` into a
 
 **So B and F are restated**: the general object exists in Lean under a compatible
 licence, and the open question is toolchain compatibility rather than
-mathematics. Neither should be paid by hand until that is settled. **Axis A is
-unaffected** — it is a bridge between two objects inside this tree, and nothing
-external supplies it. It stays first.
+mathematics. Neither should be paid by hand until that is settled. **Axis A was
+unaffected** — it is a bridge between two objects inside this tree, nothing
+external supplies it, and it was paid by hand on 2026-09-20.
 
 ---
 
 ## The order that buys the most
 
-1. **A** — two rows to `Same`, and the only remaining **working-stack**
-   narrowing: the margin, query and MAIS layers are all stated over
-   `Model.value`'s unmediated projection, so a mediated diagram gets the
-   definition and none of the results. It is a loss of *transfer*, not of
-   syntax — `DecisionNetwork` states RE24 §2.2 with the decision and utility as
-   vertices, and `IsUnmediated` is a hypothesis on it rather than a field, so a
-   diagram with `Desc_D ∩ Anc_U ≠ ∅` is one the atlas writes down and evaluates.
-   It also removes one of two blockers on the four `No` incentive theorems; the
-   other is `d`-separation, so it does not make them provable. **Still open.**
+1. ~~**A**~~ — **done 2026-09-20, and it bought the two rows it was priced to
+   buy.** RE24 §2.2 value and §2.2 regret are `Same`. It was the only remaining
+   **working-stack** narrowing: the margin, query and MAIS layers are all stated
+   over `Model.value`'s unmediated projection, and a mediated diagram used to get
+   the definition and none of the results. That transfer now has a theorem behind
+   it — `DecisionNetwork.expectedUtility_eq_value` — so a diagram satisfying
+   Assumption 1 gets the whole projection stack, and a diagram with
+   `Desc_D ∩ Anc_U ≠ ∅` is still one the atlas writes down and evaluates, just
+   without the transfer. It removed one of two blockers on the four `No`
+   incentive theorems; the other is `d`-separation, so they are still not
+   provable. See the retraction in the axis-A section above: the cost estimate
+   was wrong in three of its four parts.
 2. ~~**C + D together**~~ — **done 2026-08-22, and it bought one row, not
    three.** Definition 3 is `Same`. Definitions 4 and 5 stay `Narrower` on
    what D shrank to, now **axis E**; Definitions 1 and 2 keep that and domains
@@ -470,9 +549,11 @@ external supplies it. It stays first.
 4. **B** — Definitions 1 and 2 lose domains. Most expensive of the closable
    ones. With **E** discharged it now closes **Definition 2 outright**;
    Definition 1 keeps **F**, named on 2026-08-22, so that row needs both.
-5. **F** — the expectation layer's `[Fintype V]`. Priced above and **not
-   recommended**: it changes the layer's mathematical register and buys one
-   cell.
+5. ~~**F**~~ — **done 2026-09-20**, and it bought two cells rather than the one
+   priced: Definition 5 is `Same` and the policy row is `Wider`. It did not
+   change the layer's mathematical register, and the reason it was cheap is that
+   the measure it was priced to build already existed. See the retraction in the
+   axis-F section above.
 
    **A claim this list made on 2026-08-22 and now retracts.** It read: *"It is
    now the **only** open axis in §8, and with C and D closed it is the one thing

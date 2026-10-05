@@ -14,8 +14,9 @@ what every downstream result rests on.
 ## What is modelled
 
 A multi-principal system in which each principal holds **private evidence** about an
-execution and exposes a strictly coarser **emitted view** through a declared
-interface. An *observation candidate* is a computation over the private evidence of
+execution and exposes an **emitted view** through a declared interface. The
+emission is an arbitrary function of the private evidence, typically but not
+necessarily coarser. An *observation candidate* is a computation over the private evidence of
 one **coalition** of principals. The engineering question is which candidates can
 decide a hazard.
 
