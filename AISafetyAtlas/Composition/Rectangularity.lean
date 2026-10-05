@@ -2,6 +2,7 @@ module
 
 public import Mathlib.Data.Set.Prod
 public import Mathlib.Data.Fintype.Basic
+public import AISafetyAtlas.Compositional.Rectangularity
 
 /-!
 # Compositional expressibility: rectangularity of global safe sets
@@ -41,7 +42,11 @@ public import Mathlib.Data.Fintype.Basic
   observable in practice.
 
 The mathematics is established; the contribution is the mechanization and
-the reusable safety-facing interface. The `[Nonempty Agent]` hypothesis in
+the reusable safety-facing interface. **The canonical theorem is
+`AISafetyAtlas.Compositional.coordinate_product_iff_spliceClosed`**, which this
+module reads in agent-indexed vocabulary: the characterizations here are derived
+from it (`CoordinateSpliceClosed` is `Compositional.SpliceClosed`), adding the
+empty-set case and the refutation form. The `[Nonempty Agent]` hypothesis in
 the characterizations excludes only the degenerate empty-agent corner, where
 the empty product is a singleton and the empty set is splice-closed but not
 a product.
@@ -114,22 +119,9 @@ public theorem CoordinateSpliceClosed.mem_of_forall_exists_eq
     {z : GlobalState Agent LocalState}
     (hz : ∀ i, ∃ w ∈ P, w i = z i) : z ∈ P := by
   obtain ⟨x₀, hx₀⟩ := hne
-  have key : ∀ s : Finset Agent, ∃ g ∈ P, ∀ i ∈ s, g i = z i := by
-    intro s
-    induction s using Finset.induction_on with
-    | empty => exact ⟨x₀, hx₀, by simp⟩
-    | insert i s hi ih =>
-      obtain ⟨g, hg, hagree⟩ := ih
-      obtain ⟨w, hw, hwz⟩ := hz i
-      refine ⟨Function.update g i (w i), hP g hg w hw i, ?_⟩
-      intro j hj
-      rcases Finset.mem_insert.mp hj with rfl | hj'
-      · simpa using hwz
-      · have hne' : j ≠ i := fun h => hi (h ▸ hj')
-        rw [Function.update_of_ne hne']
-        exact hagree j hj'
-  obtain ⟨g, hg, hagree⟩ := key Finset.univ
-  exact (funext fun i => hagree i (Finset.mem_univ i) : g = z) ▸ hg
+  have h := AISafetyAtlas.Compositional.spliceClosed_piecewise_mem hP hx₀ z Finset.univ
+    fun i _ => hz i
+  rwa [Finset.piecewise_univ] at h
 
 /--
 The strongest independent local contracts are the projections: a global safe
@@ -146,9 +138,8 @@ public theorem independent_iff_eq_pi_projections
     rcases P.eq_empty_or_nonempty with rfl | hne
     · have i := Classical.arbitrary Agent
       rw [Set.pi_eq_empty (Set.mem_univ i) (by simp)]
-    · refine subset_antisymm (Set.subset_pi_eval_image _ _) fun z hz => ?_
-      exact h.spliceClosed.mem_of_forall_exists_eq hne fun i => by
-        simpa [eq_comm] using hz i (mem_univ i)
+    · exact (AISafetyAtlas.Compositional.coordinate_product_iff_spliceClosed P hne).mpr
+        h.spliceClosed
   · exact fun h => ⟨_, h⟩
 
 /--
@@ -164,9 +155,6 @@ public theorem independent_iff_rectangular
   rcases P.eq_empty_or_nonempty with rfl | hne
   · have i := Classical.arbitrary Agent
     exact ⟨fun _ => ∅, by rw [Set.pi_eq_empty (Set.mem_univ i) rfl]⟩
-  · rw [independent_iff_eq_pi_projections]
-    refine subset_antisymm (Set.subset_pi_eval_image _ _) fun z hz => ?_
-    exact hP.mem_of_forall_exists_eq hne fun i => by
-      simpa [eq_comm] using hz i (mem_univ i)
+  · exact ⟨_, (AISafetyAtlas.Compositional.coordinate_product_iff_spliceClosed P hne).mpr hP⟩
 
 end AISafetyAtlas.Composition

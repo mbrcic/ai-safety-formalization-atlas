@@ -70,8 +70,12 @@ srcDir = "vendor/TauCeti"
 # intermediate file escapes it. The fork converts exactly the four files in the
 # import closure of `Graph/DSep/Separation.lean` and changes one declaration's
 # visibility; §10 of the provenance note records why that one is forced. The
-# conversion is offered upstream in Jiyuan-Tan/CausalSmith#14. If it is taken,
-# this `require` re-points at upstream and nothing else here changes.
+# conversion was offered upstream in Jiyuan-Tan/CausalSmith#14, and upstream
+# landed exactly these four files on the module system, with the same forced
+# visibility change, in b60f54a6 (2026-09-10); the issue is closed. That is only
+# part of the work: the rest of `Causalean` is still non-`module`, and upstream
+# plans to convert it. Re-pointing this `require` at an upstream commit is now
+# possible and is a separate change; until it is made, the fork pin stands.
 #
 # Only the graph layer is consumed. `Causalean.SCM` carries arbitrary measurable
 # domains where `AISafetyAtlas.Causal.SCM` is finite, so its do-calculus does not

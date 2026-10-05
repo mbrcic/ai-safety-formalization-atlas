@@ -167,6 +167,22 @@ example {Agent : Type*} {LocalState : Agent → Type*}
       AISafetyAtlas.Composition.CoordinateSpliceClosed P :=
   AISafetyAtlas.Composition.independent_iff_rectangular
 
+-- Compositional expressibility: the strongest local contracts are the projections.
+example {Agent : Type*} {LocalState : Agent → Type*}
+    [Fintype Agent] [DecidableEq Agent] [Nonempty Agent]
+    {P : Set (AISafetyAtlas.Composition.GlobalState Agent LocalState)} :
+    AISafetyAtlas.Composition.IndependentlyExpressible P ↔
+      P = Set.pi Set.univ fun i => Function.eval i '' P :=
+  AISafetyAtlas.Composition.independent_iff_eq_pi_projections
+
+-- Compositional expressibility: a splice-closed set contains every recombination.
+example {Agent : Type*} {LocalState : Agent → Type*} [Fintype Agent] [DecidableEq Agent]
+    {P : Set (AISafetyAtlas.Composition.GlobalState Agent LocalState)}
+    (hP : AISafetyAtlas.Composition.CoordinateSpliceClosed P) (hne : P.Nonempty)
+    {z : AISafetyAtlas.Composition.GlobalState Agent LocalState}
+    (hz : ∀ i, ∃ w ∈ P, w i = z i) : z ∈ P :=
+  AISafetyAtlas.Composition.CoordinateSpliceClosed.mem_of_forall_exists_eq hP hne hz
+
 -- Compositional expressibility: one failed splice refutes local contracts.
 example {Agent : Type*} {LocalState : Agent → Type*} [DecidableEq Agent]
     {P : Set (AISafetyAtlas.Composition.GlobalState Agent LocalState)}

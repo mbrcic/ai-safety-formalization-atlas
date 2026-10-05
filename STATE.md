@@ -1,6 +1,6 @@
 # Project State
 
-Updated: 2026-10-01
+Updated: 2026-10-05
 
 **`v0.8.0` is the published release.** The note is
 [`docs/releases/v0.8.md`](docs/releases/v0.8.md), and the `v0.8.0` tag with its
@@ -55,16 +55,16 @@ regraded, which costings were wrong — is in
 [`docs/releases/unreleased.md`](docs/releases/unreleased.md), the draft of the
 next release note.
 
-**Current figures, as of 2026-10-01** (each is computed by the script named; the
+**Current figures, as of 2026-10-05** (each is computed by the script named; the
 script, not this file, is the authority):
 
-- Lean 637 files, 181,824 lines; public API pin 2,779 names
+- Lean 637 files, 182,419 lines; public API pin 2,789 names
   (`check_public_api.py`); registry results 144.
 - Statement coverage: 28 sources, 300 `Yes` / 17 `Partial` / 208 `No` / 41
   `Beyond` (`check_coverage_audit.py`).
 - Scope debt: 4 owed cells, each costed — Everitt's Definition 17 and Theorem 18,
   Turner and Tadepalli's A.12 and A.13 (`check_scope_owed.py`).
-- Witness debt: 3 of 2,686 pinned theorems ungrounded, 2 of them provably
+- Witness debt: 3 of 2,696 pinned theorems ungrounded, 2 of them provably
   unwitnessable; 31 reach no `Examples/` application (`check_witness_debt.py`).
 - Axioms: everything within `{propext, Classical.choice, Quot.sound}`
   (`check_print_axioms.py`, `axiom-audit`).

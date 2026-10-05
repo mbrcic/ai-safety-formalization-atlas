@@ -377,6 +377,17 @@ import still fails, so neither check a downstream normally runs would catch it.
 
 Reading the answer, whenever it comes, is the only thing that moves *depend*.
 
+**The answer, read 2026-10-05.** Upstream replied on 2026-09-13: commit
+[`b60f54a6`](https://github.com/Jiyuan-Tan/CausalSmith/commit/b60f54a69a)
+(2026-09-10) puts exactly the four files of the d-separation closure on the module
+system, with the same mechanics and the same one forced visibility change
+(`bbReachAux` made public); the differences from the fork are docstrings only.
+Issue #14 was closed on 2026-10-02. **Only part of the library is converted:** the
+rest of `Causalean` is still non-`module`, and upstream has said it plans to
+convert it. For this repository the part that matters is done, so re-pointing the
+`require` from the fork to an upstream commit is now possible; it has not been
+made, and the fork pin in `lakefile.toml` stands until it is.
+
 ### 9.1 What the upstream project is
 
 Measured the same day, from the GitHub API rather than from the clone:
@@ -507,8 +518,8 @@ from §8.4, which had *depend* blocked outright. The `require` is in
 demonstrated it has been folded in and deleted. The pinned commit must stay
 reachable, so the fork branch is not deleted even if upstream takes the port.
 
-**Depend, on upstream, still turns on upstream.** The port has not been offered
-as a pull request unasked: [issue #14](https://github.com/Jiyuan-Tan/CausalSmith/issues/14)
+**Depend, on upstream, turned on upstream, and upstream took the port** (see the
+note at the end of §9). The port was not offered as a pull request unasked: [issue #14](https://github.com/Jiyuan-Tan/CausalSmith/issues/14)
 asks the question, upstream has no Lean CI — the two workflows are `kb-lint` and
 `site` — so a maintainer would have to build any PR by hand, and a four-file
 diff arriving unrequested on a single-author repository inverts who carries that
