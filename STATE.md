@@ -138,6 +138,20 @@ stale without anyone noticing.
 - Published release history is in [`docs/releases/`](docs/releases/); the notes
   that used to sit in this section are kept verbatim at the end of
   `unreleased.md`.
+- **Planned for `v0.9`: the root import stops growing by default** (recorded
+  2026-10-05, from an external review of PR #72). The upgrade takes
+  `AISafetyAtlas.lean` from 83 to 251 imports, 20 to 107 of them `Examples/`
+  modules, and the public API pin from 1,836 to 2,779 names. That works against
+  [`lean-public-api.md`](docs/agent/policy/lean-public-api.md)'s "small stable
+  facade", and `Examples/` are not API yet `import AISafetyAtlas` still pays for
+  them. The rule to adopt: the root is a deliberately small set of canonical
+  primitives and facades; each cluster gets its own entry point
+  (`AISafetyAtlas.Control`, `.Sovereignty`, `.Causal`, `.Decision`,
+  `.Verification`, …); `Examples/` stay off the root unless they are shared
+  infrastructure. Constraint: the generators find modules through the root,
+  with off-root material listed in `scripts/lean_build_targets.txt`, so the
+  split must move them to the per-cluster roots in the same change. Its own PR,
+  not part of #72.
 
 ## Blocked
 
