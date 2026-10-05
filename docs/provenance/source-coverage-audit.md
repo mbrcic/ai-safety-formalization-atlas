@@ -293,9 +293,12 @@ kinds occur in this table, and each row now says which it is.
   by anything already proved.
 * **Working-stack.** The narrowing is on an object the rest of the tree is
   stated over, so existing theorems do not transfer to objects outside it. RE24
-  §2.2's value and regret are this: the margin, query and MAIS layers are all
-  stated over `Model.value`'s unmediated projection, so a mediated diagram —
-  which the atlas *can* write down, as `DecisionNetwork` — cannot use them.
+  §2.2's value and regret were this until 2026-09-20: the margin, query and MAIS
+  layers are all stated over `Model.value`'s unmediated projection, so a mediated
+  diagram — which the atlas *can* write down, as `DecisionNetwork` — cannot use
+  them. That is still true of mediated diagrams, but the §2.2 rows themselves
+  closed, because print takes the same projection under Assumption 1 and
+  `DecisionNetwork.expectedUtility_eq_value` proves the two agree there.
 
 The standing rule applies to both without discount: a `Narrower` cell is a
 defect until discharged, proved unclosable, or costed. The distinction says
@@ -319,11 +322,11 @@ which ones to pay first, not which ones to stop counting.
   generalising anything — it needs a construction — and **half of that
   construction landed on 2026-08-22**. `Causal.DecisionNetwork` is RE24
   Definition 4 with the decision and the utility as vertices, and print's
-  expected utility, optimality and regret are stated on it; what is missing is
-  the theorem that the projection agrees with it under Assumption 1, and the two
-  live in different vertex types, so that is a translation rather than a rewrite.
-  Until it exists the two rows stay `Narrower`, listed on the projection's
-  declarations alone. §6's own prose carries the detail; this list said "all in
+  expected utility, optimality and regret are stated on it. The other half, the
+  theorem that the projection agrees with it under Assumption 1 (a translation
+  between vertex types rather than a rewrite), **landed on 2026-09-20** as
+  `DecisionNetwork.expectedUtility_eq_value` and `regret_eq_value_regret`, and
+  the two rows are `Same`. §6's own prose carries the detail; this list said "all in
   §8" and was wrong to. Two further axes were open until 2026-08-20 and are closed
   rather than re-argued. The decision
   layer's rational instantiation is closed by the field-parametrization work; its stated obstruction turned
@@ -1116,11 +1119,13 @@ chart of a CID, which needs `D` and `U` as graph vertices — the same object th
 That is not a gap left open by neglect. The atlas's causal increment is the
 MAIS-A2 composite, whose whole point is to replace the measure-zero exception
 with margins, and margins are what the four `Beyond` rows record. The two
-`Narrower` rows are all one thing — the unmediated projection — and it is not
-closable by generalisation. Since 2026-08-21 the object it needs exists:
-`Causal.SCIM` has decision and utility vertices and a policy that is a structural
-function. What is not written is the map from a SCIM's decision vertex to
-`Model.value`, which is what would make these two rows the printed CID equation.
+rows that were `Narrower` were all one thing — the unmediated projection — and it
+was not closable by generalisation. **It closed by construction on 2026-09-20**:
+`Causal.DecisionNetwork` has decision and utility vertices, and
+`expectedUtility_eq_value` and `regret_eq_value_regret` prove the projection is
+the printed CID equation under Assumption 1, so both rows are `Same`. The map from
+a `Causal.SCIM` decision vertex to `Model.value` is still unwritten; nothing in
+this section needs it.
 
 ---
 
@@ -1652,9 +1657,10 @@ Assumption 1 remains a scope fence in this formalization rather than a
 hypothesis — `Causal.Decision` *is* the unmediated projection, and `Causal.SCIM`
 is a separate object no statement in that module is phrased over — which is why
 there is no declaration stating it. **Nothing here re-grades section 6.**
-Richens & Everitt's §2.2 value and regret are still the unmediated projection:
-`Model.value` takes a policy on a `Model`, and wiring it to a SCIM's decision
-vertex is a construction nobody has written.
+Richens & Everitt's §2.2 value and regret are the unmediated projection, and
+section 6 grades them `Same` since 2026-09-20 through `Causal.DecisionNetwork`,
+not through this section's objects: wiring `Model.value` to a SCIM's decision
+vertex is still a construction nobody has written.
 
 **Two ingredient sources are deliberately ungraded.** Uhler, Raskutti, Bühlmann
 & Yu 2013 and Meek 1995 motivate replacing a measure-zero exception with an
