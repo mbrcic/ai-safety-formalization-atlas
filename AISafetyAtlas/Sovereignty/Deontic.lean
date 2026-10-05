@@ -191,7 +191,7 @@ public theorem exists_empowered_not_permitted (h : I.Separated) :
          ⟨e₂, k₂.mpr rfl, fun he => by simpa using k₁.mp he⟩⟩
 
 /-- **And the one that matters for safety**: an act can be institutionally
-effective and forbidden at the same time. A system that only checks whether an
+effective and not permitted at the same time. A system that only checks whether an
 action is *possible* or whether it *counts* has not checked whether it is
 allowed. -/
 public theorem exists_empowered_possible_not_permitted (h : I.Separated) :

@@ -26,9 +26,10 @@ off the run's length.
 `value_eq_of_agree_on_window` says the depth-`n` value from a history depends
 only on the utility and horizon inside the reachable window. Stated at a bare
 history that is a claim about lists. Stated along a run it is a claim about an
-agent in a world: **two agents that agree on everything the run can reach in
-`n + m` steps score it identically, however wildly they differ past the
-horizon** -- which is the statement the source's argument actually uses.
+agent in a world: **two agents that agree on every history of length at most
+`n + m` score the run identically, however wildly they differ past the
+horizon**. The hypothesis is agreement on all such histories, not only on the
+ones the run can reach; narrowing it to the run's extensions is not done here.
 
 ## Explicit non-claims
 
@@ -112,7 +113,8 @@ public theorem runHistory_zero (f : State → Action → State) (obs : State →
 /-! ## The window, along a run -/
 
 /--
-**Two agents agreeing on the reachable window score a run identically.**
+**Two agents agreeing on every history up to length `n + m` score a run
+identically.**
 
 `value_eq_of_agree_on_window` stated where it has content: the history is not an
 arbitrary list but the one a policy and a transition actually produced, and the

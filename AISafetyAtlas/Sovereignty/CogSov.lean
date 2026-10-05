@@ -137,9 +137,11 @@ public theorem cogSov_mono_of_subsetClosed {Impl Defender Req Env Run Obs : Type
 
 Two protected transitions that produce exactly the same belief at every
 endorsed evidence and every request, one of which depends on nothing else and
-one of which does. The endorsed influence is therefore identical -- and
-maximal, since `F e j u₀` runs over the whole of `S` as `e` does -- while only
-the first satisfies `C3`'s endorsement condition.
+one of which does. The endorsed influence is therefore identical -- and can be
+maximal, when `g` is onto `S` -- while only the first satisfies `C3`'s
+endorsement condition. The two transitions agree at the realised unendorsed
+input `u₀`, not at every input: agreeing everywhere would make the second
+residual-free too.
 
 So no function of the magnitude of belief change separates the authorized case
 from the unauthorized one, which is print's conclusion. Print's other

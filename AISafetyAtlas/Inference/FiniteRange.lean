@@ -15,7 +15,7 @@ Wolpert states finiteness where it belongs: Definition 6 asks that `X(U)` and
 `FiniteRange` is that hypothesis. It lives in its own module because section 5's
 inference complexity and section 8's probability both need it and neither should
 depend on the other. It is deliberately **not** an import: the only Lean library
-carrying such a class is PFR, and this development does not depend on PFR.
+carrying such a class is PFR, and this module does not import it.
 -/
 
 namespace AISafetyAtlas.Inference

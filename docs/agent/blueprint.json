@@ -17,14 +17,14 @@
           "name": "AISafetyAtlas.LinearSystems.determinesStateOn_iff_isObservable",
           "location": [
             "AISafetyAtlas/LinearSystems/Dynamics.lean",
-            302
+            308
           ]
         },
         {
           "name": "AISafetyAtlas.LinearSystems.not_determinesStateOn_of_not_isObservable",
           "location": [
             "AISafetyAtlas/LinearSystems/Dynamics.lean",
-            269
+            275
           ]
         },
         {
@@ -62,7 +62,7 @@
           "name": "AISafetyAtlas.LinearSystems.not_isReachable_of_not_isControllable",
           "location": [
             "AISafetyAtlas/LinearSystems/Dynamics.lean",
-            390
+            396
           ]
         },
         {
@@ -455,7 +455,7 @@
           "name": "AISafetyAtlas.Control.OversightBudget.oversight_reduction_le_budget",
           "location": [
             "AISafetyAtlas/Control/OversightBudget.lean",
-            137
+            145
           ]
         }
       ],

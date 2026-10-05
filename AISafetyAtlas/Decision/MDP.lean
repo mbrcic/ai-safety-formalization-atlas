@@ -281,7 +281,9 @@ The recursion is `detRun` with `bind` where it had `let`.
 
 `detRun_congr_obs` under randomness: the recursion mentions the world outside the
 dynamics only through `obs`, and drawing the successor state or the action does
-not change that.
+not change that. As stated, the hypothesis makes the two observation maps agree
+everywhere, so the lemma is a congruence; the reading above describes the shape
+of `run`, which the lemma records.
 -/
 public theorem run_congr_obs (M : MDP State Action)
     {obs₁ obs₂ : State → Obs} (hobs : ∀ s, obs₁ s = obs₂ s)

@@ -93,9 +93,16 @@ public theorem not_forces_of_free_coordinate
 **Power over a matter does not compose along a chain.**
 
 `C` settles the first matter, `D` settles the second, and `C` does not settle the
-second. So from "`C` has power over what `D` does" and "`D` has power over the
-outcome" nothing follows about `C` and the outcome: the two arrows are about
-different matters and the composition is not available.
+second: power over one matter and another party's power over a second matter do
+not compose into power over the second. The conclusion restates the
+hypotheses, the third through `not_forces_of_free_coordinate`.
+
+**What it does not say.** Nothing here encodes power of `C` over the *party*
+`D`: the first hypothesis is about a coordinate `D` does not settle. Under the
+natural encoding of "`C` has power over `D`", `∀ A, Forces G D A → Forces G C A`,
+composition does hold, and with it these hypotheses are inconsistent. So this is
+not a counterexample to "power over a party plus that party's power over an
+outcome" (closure audit 2026-10-05).
 
 All three conjuncts are stated together because each alone is misleading. The
 first two are what an assurance chain documents; the third is what it is taken to

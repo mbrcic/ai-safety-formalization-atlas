@@ -84,6 +84,13 @@ guarantee it had, it still has. -/
 This is the theorem-shaped cut of "little by little": no single step is a
 visible loss against the current mandate, and authorship of the original
 mandate is not retained.
+
+**What it does not constrain.** Nothing relates a later mandate to an earlier
+one, and `kind` is a label no definition reads. So a path whose later mandates
+are `∅` satisfies `AdjacentSafe` vacuously, `IsSteering` reduces to
+`OriginalLost`, and a step labelled `.engine` may move the mandate. A coarsening
+relation between consecutive mandates, and `kind` tied to which component
+changes, are open (closure audit 2026-10-05).
 -/
 @[expose] public def IsSteering : Prop :=
   P.AdjacentSafe ∧ P.OriginalLost

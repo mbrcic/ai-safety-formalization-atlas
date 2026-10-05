@@ -39,11 +39,16 @@ the type of `effectivity`. Building that is a separate decision.
 
 ## Authority is three things, not one
 
-`Authorized` is the conjunction of the three axes
-`AISafetyAtlas.Sovereignty.Deontic` keeps apart: the institution recognizes the
-act, the norms permit it, and it can actually be performed. `authorized_iff` is
-the decomposition, and `exists_recognized_not_authorized` is the failure mode —
-an act the institution recognizes and which is *not* thereby authorized.
+`Authorized` is a conjunction of three conditions: the institution recognizes
+the act, the norms permit it, and it can actually be performed. It is **not**
+the conjunction of the three axes `AISafetyAtlas.Sovereignty.Deontic` keeps
+apart (empowered, permitted, possible): it uses `Recognized`, not `empowered`.
+`authorized_iff` is the decomposition, and `exists_recognized_not_authorized` is
+the failure mode — an act the institution recognizes and which is *not* thereby
+authorized. **Recognition here is weak:** `Derives.given` does not look at the
+act, so a fact that already holds is recognized for every act, and
+`exists_recognized_not_authorized` reduces to the existence of an act that is
+not permitted. Tying recognition to empowerment is open.
 -/
 
 namespace AISafetyAtlas.Sovereignty

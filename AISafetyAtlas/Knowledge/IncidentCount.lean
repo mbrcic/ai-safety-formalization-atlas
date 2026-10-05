@@ -100,8 +100,11 @@ does not determine the true count: meeting a target expressed in incidents does
 not show the incidents meet it, and a difference from a regime that files
 differently, or from before a schema change, may reflect the schemas.
 
-The quantifier over rules is the content: this is not a statement about the
-counting methodologies anyone has proposed.
+The quantifier over rules is what the statement adds: it is not about the
+counting methodologies anyone has proposed. The proof is the hypotheses
+restated (`congrArg` on `hsame`, and `hdiff`); the content is in reading them
+for every rule at once. `count` assumes the individuation question already has
+an answer: it says how many incidents there were.
 -/
 public theorem count_is_not_a_measurement {ω ω' : Ω}
     (hsame : G.report ω = G.report ω') (hdiff : G.count ω ≠ G.count ω') :

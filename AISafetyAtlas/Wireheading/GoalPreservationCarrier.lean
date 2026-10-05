@@ -48,9 +48,9 @@ supplies it.
   identity is a statement about series rather than about the world. A
   history-dependent utility is a different and harder model; nothing here rules
   it out and nothing here supplies it.
-* **Optimality is not proved here.** `scheduleValue_le_of_isMax` is the
-  ingredient; inhabiting `OptimalAt` needs an action that maximizes `u`, which
-  is a hypothesis about `u` and lands in `Examples`.
+* **Optimality needs a best action.** `scheduleModel_optimalAt` proves it from
+  `scheduleValue_le_of_isMax`, under the hypothesis that some action maximizes
+  `u`.
 
 Landscape entry: `LAND-WIRE-GOALCARRIER-001`. No AI-system bridge is asserted.
 -/

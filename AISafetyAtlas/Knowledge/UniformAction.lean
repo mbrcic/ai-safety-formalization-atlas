@@ -301,7 +301,7 @@ With at most two actions available, pairwise agreement on a fibre forces a
 common acceptable action, so `ActionConflict` becomes a *characterization* of
 failure rather than merely a sufficient obstruction.
 
-This is the Helly property at Helly number one: nonempty subsets of a
+This is the Helly property at Helly number two: nonempty subsets of a
 two-element set that pairwise intersect all share a point.
 
 **Why it is the right hypothesis, and where it comes from.** Lin and Wonham

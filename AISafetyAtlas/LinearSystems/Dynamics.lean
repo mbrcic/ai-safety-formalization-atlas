@@ -38,9 +38,10 @@ matrix exponential nor an existence theorem.
 
 **Three things are deliberately absent, and the audit's section 25 costs them.**
 
-* The converse, `DeterminesInitialState → IsObservable`. That direction has to
-  exhibit a trajectory through an unobservable state, so it needs `exp (t • A)`
-  and, to get from the first `n` Kalman rows to all of them, Cayley-Hamilton.
+* The converse at the initial state, `DeterminesInitialState → IsObservable`.
+  (The converse for the whole window, `DeterminesStateOn → IsObservable`, is
+  proved: `not_determinesStateOn_of_not_isObservable` and
+  `determinesStateOn_iff_isObservable`, through an eigen-run.)
 * Controllability as *reachability* in the sufficiency direction. That is in
   `AISafetyAtlas.LinearSystems.Flow`, which carries the flow, variation of
   constants and the adjoint argument, and it needs no Gramian.
@@ -49,6 +50,11 @@ matrix exponential nor an existence theorem.
   time in the window, which is stronger than agreeing at one, but it is still a
   statement about the states those runs pass through and not about the runs
   being the same object. Print does not use uniqueness either.
+
+**Solution concept.** `IsTrajectoryOn` asks `HasDerivAt` at every time, so only
+classical solutions count. An input admitting no classical solution (a
+piecewise-constant one with an injective input map, the standard class) has no
+trajectory here, and the results say nothing about it.
 
 **Print does not define these notions.** Page 726 says *"It is well known [1]
 that the system `S` is completely state controllable (observable) if and only if

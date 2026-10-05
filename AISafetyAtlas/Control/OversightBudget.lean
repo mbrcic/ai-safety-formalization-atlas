@@ -23,8 +23,9 @@ The argument this module bounds is *"add more monitoring"*. Answering it needs a
 quantity, because the reply is not that monitoring never helps — it plainly does
 — but that it helps **by at most the information the channel actually carries
 about the hazard**. That is `oversight_reduction_le_budget`, and the right-hand
-side has two terms the practitioner can separate: what a blind regime would
-achieve anyway, and the mutual information of the monitoring channel.
+side has two terms the practitioner can separate: `Δblind`, a bound on what a
+fixed action achieves on every conditional ensemble, and the mutual information
+of the monitoring channel.
 
 ## What is stated
 
@@ -53,6 +54,13 @@ to make.
 `Δblind` is a parameter and its value is part of the model. A regime that is
 already effective blind has a large one, and the theorem then says little —
 correctly, because in that regime monitoring was never the load-bearing part.
+**`Δblind` is not the blind regime's performance.** `OpenLoopBound` asks the
+bound on every positive-measure event, including events defined through the
+noise, so it can force `Δblind` well above what acting blind achieves: with
+state and noise independent fair coins and an output `state xor noise`, the
+event "output is false" makes the state uniform and the output constant, so
+`Δblind ≥ H(state)` and the bound says nothing. Restricting `OpenLoopBound` to
+events of the reading is open.
 
 Identifying `reading` with any real monitoring channel is layer 4 and is not done
 here.
@@ -126,8 +134,8 @@ variable (O : Oversight Ω S K T)
 omit [MeasurableSpace N] [MeasurableSingletonClass N] [Countable N] in
 /--
 **The budget.** An oversight regime reduces uncertainty about the outcome by at
-most what it would achieve blind, plus the information its channel carries about
-the hazard.
+most `Δblind`, a bound on what a fixed action achieves on every conditional
+ensemble, plus the information its channel carries about the hazard.
 
 This is Touchette and Lloyd's bound read as governance. The two terms are
 separable and that is the practical content: the second is the only one
