@@ -384,9 +384,12 @@ system, with the same mechanics and the same one forced visibility change
 (`bbReachAux` made public); the differences from the fork are docstrings only.
 Issue #14 was closed on 2026-10-02. **Only part of the library is converted:** the
 rest of `Causalean` is still non-`module`, and upstream has said it plans to
-convert it. For this repository the part that matters is done, so re-pointing the
-`require` from the fork to an upstream commit is now possible; it has not been
-made, and the fork pin in `lakefile.toml` stands until it is.
+convert it. For this repository the part that matters is done, and the `require` was
+re-pointed from the fork to upstream commit `b60f54a6` on 2026-10-05. The two
+pins share toolchain (v4.33.0), `lakefile.toml` and manifest (Mathlib `db584cd6`
+and every transitive pin); `AISafetyAtlas.Causal.DSep`, its examples and the root
+build against upstream, and the bridge theorems depend only on the standard
+axioms.
 
 ### 9.1 What the upstream project is
 
@@ -511,12 +514,14 @@ once four files stop exposing their bodies by default. They do.
 
 ### 10.4 What this does to the verdict
 
-**Depend, on a fork, is what this repository now does.** That is a change of kind
-from §8.4, which had *depend* blocked outright. The `require` is in
-`lakefile.toml`, pinned to the fork commit rather than to its branch, and
+**Depend, on a fork, is what this repository did until 2026-10-05; since then it
+depends on upstream** (see the note at the end of §9). That was a change of kind
+from §8.4, which had *depend* blocked outright. The `require` in `lakefile.toml`
+is pinned to upstream commit `b60f54a6` rather than to a branch, and
 `AISafetyAtlas.Causal.DSep` carries the bridge; the spike branch that first
-demonstrated it has been folded in and deleted. The pinned commit must stay
-reachable, so the fork branch is not deleted even if upstream takes the port.
+demonstrated it has been folded in and deleted. Earlier commits of this
+repository pin the fork commit, so the fork branch stays reachable and is not
+deleted.
 
 **Depend, on upstream, turned on upstream, and upstream took the port** (see the
 note at the end of §9). The port was not offered as a pull request unasked: [issue #14](https://github.com/Jiyuan-Tan/CausalSmith/issues/14)
