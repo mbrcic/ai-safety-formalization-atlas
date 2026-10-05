@@ -19,20 +19,20 @@ Named in the statements of eight or more others. A change to one of these is a c
 | Declaration | Named by |
 |---|---|
 | `plantOutcome` | 45 |
-| `entropyReduction` | 22 |
+| `entropyReduction` | 23 |
 | `controlLoss` | 21 |
 | `admittedOutcomes` | 19 |
 | `IsPerfectRegulator` | 17 |
 | `minControlLoss` | 15 |
+| `OversightBudget.Oversight.hazard` | 15 |
 | `Purified` | 14 |
-| `OversightBudget.Oversight.hazard` | 14 |
 | `kernelOpenLoopReductionAt` | 11 |
+| `OversightBudget.Oversight.reading` | 11 |
+| `OversightBudget.Oversight.outcome` | 11 |
 | `purifySeed` | 10 |
 | `purifiedState` | 10 |
 | `ofWeights` | 10 |
 | `atomLoss` | 10 |
-| `OversightBudget.Oversight.reading` | 10 |
-| `OversightBudget.Oversight.outcome` | 10 |
 | `IsPlant` | 10 |
 | `traj` | 9 |
 | `purifyMap` | 9 |

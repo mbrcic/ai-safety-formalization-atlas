@@ -1,8 +1,8 @@
 {
   "counts": {
-    "declarations": 375,
-    "examples_only": 317,
-    "load_bearing": 58,
+    "declarations": 379,
+    "examples_only": 322,
+    "load_bearing": 57,
     "no_consumer": 0
   },
   "declarations": {
@@ -496,14 +496,15 @@
     },
     "AISafetyAtlas.Control.entropyReduction_le_of_openLoopBound": {
       "consumers": [
-        "AISafetyAtlas.Control.OversightBudget",
+        "AISafetyAtlas.Examples.Control.OversightBudget",
         "AISafetyAtlas.Examples.Registry"
       ],
       "origin": "BY-005",
-      "tier": "load-bearing"
+      "tier": "examples-only"
     },
     "AISafetyAtlas.Control.entropyReduction_le_openLoopMax": {
       "consumers": [
+        "AISafetyAtlas.Control.OversightBudget",
         "AISafetyAtlas.Control.Purification",
         "AISafetyAtlas.Examples.Control.OpenLoop",
         "AISafetyAtlas.Examples.Registry"
@@ -835,6 +836,20 @@
       "tier": "examples-only"
     },
     "AISafetyAtlas.Examples.LinearSystems.deaf_not_isCompletelyReachable": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "BY-002",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Examples.LinearSystems.pair_not_determinesStateSolOn": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "BY-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Examples.LinearSystems.pair_not_isCompletelyReachableSol": {
       "consumers": [
         "AISafetyAtlas.Examples.Registry"
       ],
@@ -2022,6 +2037,22 @@
       "origin": "BY-001",
       "tier": "examples-only"
     },
+    "AISafetyAtlas.LinearSystems.determinesStateSolOn_iff_isObservable": {
+      "consumers": [
+        "AISafetyAtlas.Examples.LinearSystems.Flow",
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "BY-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.LinearSystems.isCompletelyReachableSol_iff_isControllable": {
+      "consumers": [
+        "AISafetyAtlas.Examples.LinearSystems.Flow",
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "BY-002",
+      "tier": "examples-only"
+    },
     "AISafetyAtlas.LinearSystems.isCompletelyReachable_iff_isControllable": {
       "consumers": [
         "AISafetyAtlas.Examples.LinearSystems.Flow",
@@ -3065,6 +3096,7 @@
     "AISafetyAtlas.Control.controlLoss_eq_mutualInfo_sub",
     "AISafetyAtlas.Control.controlLoss_le_entropy_noise",
     "AISafetyAtlas.Control.entropyReduction_le_condEntropy_form",
+    "AISafetyAtlas.Control.entropyReduction_le_of_openLoopBound",
     "AISafetyAtlas.Control.entropy_ge_of_condEntropy_ge",
     "AISafetyAtlas.Control.entropy_ge_of_sensor",
     "AISafetyAtlas.Control.entropy_le_channelCapacity_of_complete",
@@ -3103,6 +3135,8 @@
     "AISafetyAtlas.Examples.Causal.\u0394_eq_half_sub_joint",
     "AISafetyAtlas.Examples.LinearSystems.blind_not_determinesStateOn",
     "AISafetyAtlas.Examples.LinearSystems.deaf_not_isCompletelyReachable",
+    "AISafetyAtlas.Examples.LinearSystems.pair_not_determinesStateSolOn",
+    "AISafetyAtlas.Examples.LinearSystems.pair_not_isCompletelyReachableSol",
     "AISafetyAtlas.Examples.Sovereignty.steer_isSteering",
     "AISafetyAtlas.Explainability.attribution_impossibility",
     "AISafetyAtlas.Explainability.attribution_impossibility_weak",
@@ -3220,6 +3254,8 @@
     "AISafetyAtlas.Learning.permInvariant_of_nfl",
     "AISafetyAtlas.Learning.ruleVisit_permRule",
     "AISafetyAtlas.LinearSystems.determinesStateOn_iff_isObservable",
+    "AISafetyAtlas.LinearSystems.determinesStateSolOn_iff_isObservable",
+    "AISafetyAtlas.LinearSystems.isCompletelyReachableSol_iff_isControllable",
     "AISafetyAtlas.LinearSystems.isCompletelyReachable_iff_isControllable",
     "AISafetyAtlas.LinearSystems.isObservable_iff_hautus",
     "AISafetyAtlas.LinearSystems.not_determinesStateOn_of_not_isObservable",
