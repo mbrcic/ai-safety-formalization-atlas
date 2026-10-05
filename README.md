@@ -38,8 +38,8 @@ mathematics to AI systems.
 | Declarations recorded in the registry | **375** |
 | Results stating a source claim | **49** |
 | Results recording a formalization only | **95** (86 on root import) |
-| Reviewed AI-system bridges | **3** |
-| Statement-reviewed bridges (interpretation withheld) | **1** |
+| AI-system bridges (`BRIDGE` declarations) | **37**: 30 interpretation-reviewed, 7 statement-reviewed only |
+| Source-claim rows with a reviewed AI interpretation | **3** (+1 statement-reviewed only) |
 | Open conjectures | **3** |
 | Claim results with statement-match | **16** |
 | Claim results with `RELATED`-only formalization | **9** |
