@@ -1,9 +1,10 @@
 """The validators claim a Python floor; this checks the claim both ways.
 
-The floor was not chosen, it was measured: ``str.removesuffix``,
-``str.removeprefix`` and ``functools.cache`` are all 3.9, and ten call sites
-across six validators use them.  Nothing in ``scripts/`` or ``tests/`` needs
-3.10 or later, so 3.9 is the real requirement rather than a convenient one.
+The floor is 3.12, the maintainer's choice on 2026-10-06: it is the Python of
+the hosted CI runners and of every machine the atlas is developed on, and it
+brings ``tomllib``, which ``dependency_reach.py`` needs to read lake
+configuration exactly. The floor was 3.9 before that, measured from
+``str.removesuffix``, ``str.removeprefix`` and ``functools.cache``.
 
 Two failures are possible and both matter.  A script that reaches for a newer
 feature silently raises the floor, and on Ubuntu 20.04 -- whose ``python3`` is
@@ -25,7 +26,7 @@ import pytest
 
 
 ROOT = Path(__file__).resolve().parent.parent
-FLOOR = (3, 9)
+FLOOR = (3, 12)
 
 # Syntax is left to the parser: ast.parse(..., feature_version=FLOOR) rejects
 # match statements, except*, PEP 695 type aliases and generic parameter lists
@@ -39,12 +40,10 @@ FLOOR = (3, 9)
 # here uses `from __future__ import annotations`, so an annotation is never
 # evaluated. A PEP 604 union in a *runtime* position -- isinstance, a cast, a
 # default -- would run on 3.9 and is not caught here.
-ATTRIBUTES_ABOVE_FLOOR = {
-    "batched": (3, 12),  # itertools
-    "pairwise": (3, 10),  # itertools
-}
-MODULES_ABOVE_FLOOR = {
-    "tomllib": (3, 11),
+ATTRIBUTES_ABOVE_FLOOR: dict[str, tuple[int, int]] = {}
+MODULES_ABOVE_FLOOR: dict[str, tuple[int, int]] = {
+    "annotationlib": (3, 14),
+    "compression": (3, 14),
 }
 
 
@@ -123,7 +122,7 @@ def test_readme_names_the_floor() -> None:
     readme = (ROOT / "README.md").read_text(encoding="utf-8")
     assert "pure-stdlib Python 3" not in readme, (
         "README claims a pure-stdlib requirement; check_conjecture_grade_prose "
-        "imports PyYAML and six validators need 3.9"
+        "imports PyYAML"
     )
     assert f"Python {FLOOR[0]}.{FLOOR[1]} or\nnewer" in readme, (
         "README does not state the Python floor the validators enforce"
@@ -135,16 +134,21 @@ def test_the_floor_test_would_notice_newer_syntax(tmp_path: Path) -> None:
 
     ``except*`` is the case that motivated it. The first version of this file
     enumerated constructs by hand, and a hand-written list has no reason to
-    contain a construct nobody has used yet.
+    contain a construct nobody has used yet. Syntax newer than the floor does
+    not parse on an interpreter at the floor, so the mechanism is shown one
+    version below each sample's introduction, and the floor is shown to admit
+    the newest of them.
     """
     for source, introduced in (
-        ("try:\n    pass\nexcept* ValueError:\n    pass\n", "3.11"),
-        ("match x:\n    case 1:\n        pass\n", "3.10"),
-        ("type Alias = int\n", "3.12"),
+        ("try:\n    pass\nexcept* ValueError:\n    pass\n", (3, 11)),
+        ("match x:\n    case 1:\n        pass\n", (3, 10)),
+        ("type Alias = int\n", (3, 12)),
     ):
         with pytest.raises(SyntaxError):
-            ast.parse(source, feature_version=FLOOR)
-        assert ast.parse(source), f"the {introduced} sample is not valid on this interpreter"
+            ast.parse(source, feature_version=(introduced[0], introduced[1] - 1))
+        assert ast.parse(source, feature_version=FLOOR), (
+            f"the {introduced} sample is not admitted at the floor"
+        )
 
 
 def test_suite_collects_without_pyyaml(tmp_path: Path) -> None:

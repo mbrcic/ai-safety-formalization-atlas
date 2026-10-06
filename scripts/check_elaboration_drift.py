@@ -483,7 +483,7 @@ def write_dump(path: Path, payload: dict) -> None:
     path.write_text(text, encoding="utf-8")
 
 
-def do_dump(path: Path, raw: bool = False) -> int:
+def do_dump(path: Path, raw: bool = False, only_reaching: list[str] | None = None) -> int:
     modules = built_modules()
     if not modules:
         print(
@@ -492,7 +492,19 @@ def do_dump(path: Path, raw: bool = False) -> int:
             file=sys.stderr,
         )
         return 1
-    declarations = elaborate(modules, raw=raw)
+    # A scoped dump elaborates only the modules a moved dependency can reach
+    # (`dependency_reach.py`). It records that scope, so `--compare` holds the
+    # baseline to the same modules instead of reporting the rest as removed.
+    scope: dict | None = None
+    if only_reaching:
+        from dependency_reach import reach
+
+        scoped, reason = reach(only_reaching, modules)
+        print(f"check_elaboration_drift: {reason}")
+        if scoped is not None:
+            modules = scoped
+            scope = {"packages": sorted(only_reaching), "modules": scoped}
+    declarations = elaborate(modules, raw=raw) if modules else {}
     payload = {
         "toolchain": (ROOT / "lean-toolchain").read_text(encoding="utf-8").strip(),
         "commit": git("rev-parse", "HEAD"),
@@ -506,6 +518,8 @@ def do_dump(path: Path, raw: bool = False) -> int:
         "selector": "module",
         "declarations": declarations,
     }
+    if scope is not None:
+        payload["scope"] = scope
     write_dump(path, payload)
     print(
         f"check_elaboration_drift: wrote {len(declarations)} declaration(s) from "
@@ -721,6 +735,24 @@ def do_compare(old_path: Path, new_path: Path, show: int, fatal: str = "any") ->
     new = read_dump(new_path)
     old_decls, new_decls = old["declarations"], new["declarations"]
 
+    # A scoped dump looked at the modules a moved dependency reaches and nothing
+    # else; outside them the dependency cannot have changed anything, so the
+    # baseline is held to the same modules.
+    scope = new.get("scope")
+    if scope is not None:
+        in_scope = set(scope["modules"])
+        old_decls = {name: entry for name, entry in old_decls.items() if entry.get("module") in in_scope}
+        print(
+            f"check_elaboration_drift: scoped to {len(in_scope)} module(s) reaching "
+            f"{', '.join(scope['packages'])}"
+        )
+        if not in_scope:
+            print(
+                "check_elaboration_drift: no atlas module imports the moved package, "
+                "so it cannot have changed the meaning of any statement here"
+            )
+            return 0
+
     old_selector, new_selector = old.get("selector", "name"), new.get("selector", "name")
     if old_selector != new_selector:
         print(
@@ -838,6 +870,13 @@ def main() -> int:
         help="with --dump, keep the normal form instead of its digest, so a later "
         "--compare can say what moved and not only that something did (large)",
     )
+    parser.add_argument(
+        "--only-reaching",
+        metavar="PACKAGES",
+        help="with --dump, elaborate only the modules whose imports reach these "
+        "comma-separated packages (a scoped dependency move; see dependency_reach.py). "
+        "Falls back to every module when Mathlib carries one of them",
+    )
     parser.add_argument("--show", type=int, default=20, help="how many names to list per section")
     parser.add_argument(
         "--fatal",
@@ -857,6 +896,8 @@ def main() -> int:
     )
     if chosen != 1:
         parser.error("give exactly one of --dump, --compare, --classify or --self-test")
+    if arguments.only_reaching and not arguments.dump:
+        parser.error("--only-reaching only means anything with --dump")
     if arguments.raw and not arguments.dump:
         parser.error("--raw only means anything with --dump")
     if arguments.fatal != "any" and not arguments.compare:
@@ -864,7 +905,8 @@ def main() -> int:
     if arguments.self_test:
         return do_selftest()
     if arguments.dump:
-        return do_dump(arguments.dump, raw=arguments.raw)
+        only = [name for name in (arguments.only_reaching or "").split(",") if name]
+        return do_dump(arguments.dump, raw=arguments.raw, only_reaching=only or None)
     if arguments.classify:
         return do_classify(arguments.classify[0], arguments.classify[1], arguments.show)
     return do_compare(arguments.compare[0], arguments.compare[1], arguments.show, arguments.fatal)

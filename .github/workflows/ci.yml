@@ -70,29 +70,16 @@ jobs:
           fi
           scripts/setup.sh --pointer
 
-  # Lean build + axioms only when Lean toolchain or sources change.
-  lean:
-    needs: agent-gate
-    # Ordinary runs stay on the shared ubuntu-latest pool. Release tags, manual
-    # runs, and the nightly leanchecker cron move to the self-hosted runner
-    # (labels: self-hosted, leanchecker): leanchecker's cost tracks a module's
-    # import closure, and the worst single module needs more memory than a
-    # GitHub-hosted runner provides. See the leanchecker step below.
-    runs-on: >-
-      ${{ (github.event_name == 'workflow_dispatch' || startsWith(github.ref, 'refs/tags/v') ||
-           github.event.schedule == '15 3 * * *')
-          && fromJSON('["self-hosted", "leanchecker"]') || 'ubuntu-latest' }}
-    # 30 minutes for ordinary runs, so a hung PR build is caught quickly. Only
-    # release tags, manual runs, and the nightly leanchecker cron get the
-    # longer budget, and they get it because the leanchecker replay below
-    # needs it -- see that step.
-    timeout-minutes: >-
-      ${{ (github.event_name == 'workflow_dispatch' || startsWith(github.ref, 'refs/tags/v') ||
-           github.event.schedule == '15 3 * * *')
-          && 75 || 30 }}
+  # Which checks the Lean job runs, and on which runner. A separate job because
+  # `runs-on` and `timeout-minutes` are fixed before a job's first step runs.
+  decide:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
     outputs:
       run_lean: ${{ steps.filter.outputs.run_lean }}
       run_migration: ${{ steps.filter.outputs.run_migration }}
+      migration: ${{ steps.filter.outputs.migration }}
+      migration_packages: ${{ steps.filter.outputs.migration_packages }}
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
@@ -140,76 +127,115 @@ jobs:
           echo "run_lean=$run_lean" >> "$GITHUB_OUTPUT"
           echo "Lean build required: $run_lean"
 
-          # A migration is decided by the toolchain moving, not by anybody's
-          # intent -- the same rule check_migration_adjudicated.py applies, and
-          # for the same reason: a branch that means to bump the toolchain and a
-          # branch that bumps it by accident need the same check to run. The
-          # baseline dump counts because re-dumping it *is* the migration act,
-          # and a branch that rewrites the baseline without re-comparing against
-          # it would otherwise gate itself out of the only check that reads it.
+          # A migration is decided by what moved, not by anybody's intent -- the
+          # same rule check_migration_adjudicated.py applies to the toolchain.
+          # scripts/dependency_reach.py sorts the move:
           #
-          # A dependency moving counts too, but only a dependency that was
-          # already there: a changed `rev` in lake-manifest.json moves the
-          # environment every existing declaration elaborates in. Adding a new
-          # package does not -- nothing already in the tree imports it -- so a
-          # lakefile or manifest edit that only adds a library is not a
-          # migration, and the drift check is not run for it. Lean options in
-          # lakefile.toml (`leanOptions`, `moreLeanArgs`, at package or library
-          # level) still count: they change elaboration with no manifest
-          # movement -- docs/provenance/verification-scheduling.md.
-          migrates() {
-            git diff --name-only "$1" "$2" \
-              | grep -E '(^lean-toolchain$|^docs/status/elab-baseline-.*\.json$)' >/dev/null && return 0
-            python3 - "$1" "$2" <<'PY'
-          import json, subprocess, sys
-          def revs(ref):
-              out = subprocess.run(["git", "show", f"{ref}:lake-manifest.json"],
-                                   capture_output=True, text=True)
-              if out.returncode != 0:
-                  return {}
-              return {p["name"]: p.get("rev") for p in json.loads(out.stdout)["packages"]}
-          def options(ref):
-              import tomllib
-              out = subprocess.run(["git", "show", f"{ref}:lakefile.toml"],
-                                   capture_output=True, text=True)
-              if out.returncode != 0:
-                  return None
-              cfg = tomllib.loads(out.stdout)
-              keys = ("leanOptions", "moreLeanArgs", "moreServerOptions")
-              libs = {lib.get("name"): {k: lib.get(k) for k in keys}
-                      for lib in cfg.get("lean_lib", [])}
-              return {k: cfg.get(k) for k in keys}, libs
-          a, b = revs(sys.argv[1]), revs(sys.argv[2])
-          moved = sorted(n for n in a.keys() & b.keys() if a[n] != b[n])
-          oa, ob = options(sys.argv[1]), options(sys.argv[2])
-          if oa and ob:
-              if oa[0] != ob[0]:
-                  moved.append("package Lean options")
-              moved += [f"Lean options of {n}" for n in oa[1].keys() & ob[1].keys()
-                        if oa[1][n] != ob[1][n]]
-          if moved:
-              print("Dependencies moved:", ", ".join(moved))
-          sys.exit(0 if moved else 1)
-          PY
-          }
-          run_migration=false
+          #   whole  -- lean-toolchain, a baseline dump, Lean options in
+          #             lakefile.toml, Mathlib, or a package that arrives through
+          #             another one (`inherited` in the manifest). These reach
+          #             every module, so the drift check elaborates everything.
+          #   scoped -- a package this repository requires directly moved
+          #             (Causalean, PFR, Foundation). A module's elaboration
+          #             depends only on its imports, so the drift check elaborates
+          #             the modules whose imports reach that package.
+          #   none   -- nothing moved. Adding a package is not a move: nothing
+          #             already in the tree imports it.
+          #
+          # The kind also picks the runner below: a whole migration needs the
+          # self-hosted runner's budget. docs/provenance/verification-scheduling.md
+          # records the decision.
+          migration=none
+          migration_packages=
+          reason="no dependency moved"
+          base=
+          head=
           if [ "${{ github.event_name }}" = "pull_request" ]; then
-            if migrates "${{ github.event.pull_request.base.sha }}" \
-                        "${{ github.event.pull_request.head.sha }}"; then
-              run_migration=true
-            fi
+            base="${{ github.event.pull_request.base.sha }}"
+            head="${{ github.event.pull_request.head.sha }}"
           elif [ "${{ github.event_name }}" = "push" ]; then
             before="${{ github.event.before }}"
             if [ -n "$before" ] && [ "$before" != "0000000000000000000000000000000000000000" ]; then
-              if migrates "$before" "${{ github.sha }}"; then
-                run_migration=true
-              fi
+              base="$before"
+              head="${{ github.sha }}"
             else
-              run_migration=true
+              migration=whole
+              reason="no previous commit to compare against"
             fi
           fi
-          echo "run_migration=$run_migration" >> "$GITHUB_OUTPUT"
-          echo "Toolchain migration: $run_migration"
+          if [ -n "$base" ]; then
+            decision=$(python3 scripts/dependency_reach.py decide "$base" "$head")
+            migration=$(sed -n 's/^kind=//p' <<<"$decision")
+            migration_packages=$(sed -n 's/^packages=//p' <<<"$decision")
+            reason=$(sed -n 's/^reason=//p' <<<"$decision")
+          fi
+          run_migration=false
+          if [ "$migration" != none ]; then
+            run_migration=true
+          fi
+          {
+            echo "run_migration=$run_migration"
+            echo "migration=$migration"
+            echo "migration_packages=$migration_packages"
+          } >> "$GITHUB_OUTPUT"
+          echo "Dependency migration: $migration -- $reason"
+
+  # Lean build + axioms only when Lean toolchain or sources change.
+  lean:
+    needs: [agent-gate, decide]
+    # Ordinary runs stay on the shared ubuntu-latest pool. Release tags, manual
+    # runs, and the nightly leanchecker cron move to the self-hosted runner
+    # (labels: self-hosted, leanchecker): leanchecker's cost tracks a module's
+    # import closure, and the worst single module needs more memory than a
+    # GitHub-hosted runner provides. See the leanchecker step below.
+    #
+    # A whole dependency migration (see the decide job) moves there too: the
+    # drift check then elaborates the whole environment, which ran past the
+    # 30-minute budget on a two-core hosted runner (#73, 2026-10-06). Only a push
+    # or a pull request from a branch of this repository qualifies. A pull request
+    # from a fork runs its own code, and that code must never reach the
+    # self-hosted machine; it stays hosted with a longer budget instead.
+    runs-on: >-
+      ${{ (github.event_name == 'workflow_dispatch' || startsWith(github.ref, 'refs/tags/v') ||
+           github.event.schedule == '15 3 * * *' ||
+           (needs.decide.outputs.migration == 'whole' &&
+            (github.event_name != 'pull_request' ||
+             github.event.pull_request.head.repo.full_name == github.repository)))
+          && fromJSON('["self-hosted", "leanchecker"]') || 'ubuntu-latest' }}
+    # 30 minutes for ordinary runs, so a hung PR build is caught quickly.
+    # Release tags, manual runs and the nightly leanchecker cron get 75 because
+    # the leanchecker replay below needs it, and a whole migration on the
+    # self-hosted runner gets the same. A whole migration from a fork runs hosted
+    # and gets 150: the whole-environment dump took over 25 minutes there.
+    timeout-minutes: >-
+      ${{ (github.event_name == 'workflow_dispatch' || startsWith(github.ref, 'refs/tags/v') ||
+           github.event.schedule == '15 3 * * *' ||
+           (needs.decide.outputs.migration == 'whole' &&
+            (github.event_name != 'pull_request' ||
+             github.event.pull_request.head.repo.full_name == github.repository)))
+          && 75 || (needs.decide.outputs.migration == 'whole' && 150 || 30) }}
+    outputs:
+      run_lean: ${{ steps.filter.outputs.run_lean }}
+      run_migration: ${{ steps.filter.outputs.run_migration }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      # The decision is taken by the `decide` job, because the runner and the
+      # time budget of this job depend on it. Re-exported under the old step id
+      # so the conditions below read it as before.
+      - name: Decision from the decide job
+        id: filter
+        run: |
+          {
+            echo "run_lean=${{ needs.decide.outputs.run_lean }}"
+            echo "run_migration=${{ needs.decide.outputs.run_migration }}"
+            echo "migration=${{ needs.decide.outputs.migration }}"
+            echo "migration_packages=${{ needs.decide.outputs.migration_packages }}"
+          } >> "$GITHUB_OUTPUT"
+          echo "Lean build required: ${{ needs.decide.outputs.run_lean }}"
+          echo "Dependency migration: ${{ needs.decide.outputs.migration }}"
       - name: Skip notice
         if: steps.filter.outputs.run_lean != 'true'
         run: echo "No Lean-related paths changed; skipping lake build and axiom check."
@@ -369,6 +395,8 @@ jobs:
       #   * `run_migration` -- lean-toolchain, lakefile.toml, lake-manifest.json
       #     or a baseline dump moved. This is the dominant cause, and it fires on
       #     the pull request that does it, before the merge, exactly as before.
+      #     A scoped migration (a directly required package moved, see the
+      #     decide job) dumps only the modules whose imports reach it.
       #     lakefile.toml is in the list on its own account and not only through
       #     the manifest: `leanOptions` such as autoImplicit or pp settings
       #     change elaboration with no manifest movement at all.
@@ -415,7 +443,13 @@ jobs:
         run: |
           set -euo pipefail
           dump="$RUNNER_TEMP/elab-current.json"
-          python3 scripts/check_elaboration_drift.py --dump "$dump" --raw
+          # A scoped migration elaborates only the modules that import the moved
+          # package; every other trigger elaborates everything.
+          scope=()
+          if [ "${{ steps.filter.outputs.migration }}" = "scoped" ]; then
+            scope=(--only-reaching "${{ steps.filter.outputs.migration_packages }}")
+          fi
+          python3 scripts/check_elaboration_drift.py --dump "$dump" --raw "${scope[@]}"
           python3 scripts/check_elaboration_drift.py \
             --compare docs/status/elab-baseline-v4330.json "$dump" --fatal silent
       # Independent kernel re-verification, strictly stronger than the axiom
