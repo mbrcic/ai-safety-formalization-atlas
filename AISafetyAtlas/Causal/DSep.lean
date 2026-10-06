@@ -32,7 +32,7 @@ Every consumer reads the last and is therefore, through those lemmas, a consumer
 of print's own sentence.
 
 The Bayes-Ball machinery is not built here. It is taken from `Causalean`, whose
-`Causalean.DAG.IsActivePath` is print's clauses 1 and 2 read positively, and whose
+`Causalean.Graph.DAG.IsActiveWalk` is print's clauses 1 and 2 read positively, and whose
 `bbReachableVertices` computes it. That machinery is `Finset`-valued and asks for
 `[Fintype V]` throughout, which is exactly why print's definition could not be
 the imported predicate: importing it *is* the narrowing. This file supplies
@@ -40,7 +40,7 @@ print's definition, the carrier bridge, clause 3, and the two equivalences.
 
 ## Clause 3 is the whole content of this file
 
-Upstream's `Causalean.DAG.IsActivePath` constrains the **intermediate** vertices of a path
+Upstream's `Causalean.Graph.DAG.IsActiveWalk` constrains the **intermediate** vertices of a path
 only — its collider condition is indexed by `i + 2 < p.length`, so the two
 endpoints are unconstrained. Print's clause 3 blocks a path outright when either
 endpoint lies in `Z`. The two therefore disagree exactly when `X` or `Y` meets
@@ -127,7 +127,7 @@ two-cycle between `W` and `Y`, which `CID.acyclic` forbids.
 
 So the negation in clause 2 may be written either way, and the definition below
 transcribes print's *"chain or fork"* rather than *"not a collider"* — which is
-what upstream's `Causalean.DAG.IsActivePath` writes. -/
+what upstream's `Causalean.Graph.DAG.IsActiveWalk` writes. -/
 public theorem CID.isChainOrFork_iff_not_isCollider (G : CID V) {l m r : V}
     (hlm : G.UAdj l m) (hmr : G.UAdj m r) :
     G.IsChainOrFork l m r ↔ ¬ G.IsCollider l m r := by
@@ -552,7 +552,7 @@ an unblocked walk from `X` to `Y` yields an unblocked path from `X` to `Y` by
 deleting the segment between two occurrences of a repeated vertex.
 
 This is the axis the coverage audit carried open on Definitions 6 and 7 from
-2026-09-09. Upstream supplies nothing to reuse — `Causalean.DAG.IsActivePath`
+2026-09-09. Upstream supplies nothing to reuse — `Causalean.Graph.DAG.IsActiveWalk`
 takes a bare `List V` and no file under `Causalean/Graph/` mentions `Nodup`. -/
 public theorem CID.dSepSet_iff_dSepPath (G : CID V) (X Y Z : Set V) :
     G.DSepSet X Y Z ↔ G.DSepPath X Y Z := by
@@ -573,13 +573,13 @@ end Print
 
 variable {V : Type*} [DecidableEq V] [Fintype V]
 
-/-- A `CID` viewed as a `Causalean.DAG` on the same carrier.
+/-- A `CID` viewed as a `Causalean.Graph.DAG` on the same carrier.
 
 `u` is an edge into `v` exactly when `u` is a parent of `v`, and acyclicity is
 the same proposition on both sides, so `CID.acyclic` is the field verbatim.
 Decidability of the edge relation is supplied classically: `CID.parents` is a
 `Set`, carrying no decidability of its own, and nothing here is evaluated. -/
-@[expose] public noncomputable def cidToDAG (G : CID V) : Causalean.DAG V where
+@[expose] public noncomputable def cidToDAG (G : CID V) : Causalean.Graph.DAG V where
   edge := fun u v ↦ u ∈ G.parents v
   decEdge := fun _ _ ↦ Classical.propDecidable _
   acyclic := G.acyclic
@@ -591,7 +591,7 @@ public theorem cidToDAG_edge (G : CID V) (u v : V) :
 /-- **Definition 6.** `Z` d-separates `X` from `Y` when every path from a node
 in `X` to a node in `Y` is blocked.
 
-Clauses 1 and 2 are `Causalean.DAG.IsActivePath` read negatively. Clause 3 —
+Clauses 1 and 2 are `Causalean.Graph.DAG.IsActiveWalk` read negatively. Clause 3 —
 *"one or both of the endpoints of `p` is in `Z`"* — is carried twice, because it
 has two jobs on overlapping sets:
 
@@ -622,13 +622,13 @@ here as `CID.dSepSet_iff_dSepPath` because upstream carries no path machinery at
 all. -/
 @[expose] public noncomputable def CID.DSep (G : CID V) (X Y Z : Finset V) : Prop :=
   Disjoint (X \ Z) (Y \ Z) ∧
-    ¬ (cidToDAG G).HasActivePath (X \ Z) (Y \ Z) Z
+    ¬ (cidToDAG G).HasActiveWalk (X \ Z) (Y \ Z) Z
 
 /-- An active path between two sets is exactly a failure of Bayes-Ball
 disjointness. This is upstream's correctness theorem repackaged, and it needs no
 disjointness hypothesis of its own. -/
 public theorem hasActivePath_iff_not_disjoint (G : CID V) (A B Z : Finset V) :
-    (cidToDAG G).HasActivePath A B Z ↔
+    (cidToDAG G).HasActiveWalk A B Z ↔
       ¬ Disjoint ((cidToDAG G).bbReachableVertices Z A) B := by
   rw [Finset.not_disjoint_iff]
   constructor
@@ -636,11 +636,11 @@ public theorem hasActivePath_iff_not_disjoint (G : CID V) (A B Z : Finset V) :
     obtain ⟨x, hxA, hx⟩ := Finset.mem_image.mp hhead
     obtain ⟨y, hyB, hy⟩ := Finset.mem_image.mp hlast
     refine ⟨y, ?_, hyB⟩
-    exact ((cidToDAG G).bbReachableVertices_iff_activePath A Z y).mpr
+    exact ((cidToDAG G).bbReachableVertices_iff_activeWalk A Z y).mpr
       ⟨x, hxA, p, hlen, hact, hx.symm, hy.symm⟩
   · rintro ⟨y, hy, hyB⟩
     obtain ⟨x, hxA, p, hlen, hact, hhead, hlast⟩ :=
-      ((cidToDAG G).bbReachableVertices_iff_activePath A Z y).mp hy
+      ((cidToDAG G).bbReachableVertices_iff_activeWalk A Z y).mp hy
     exact ⟨p, hlen, hact, Finset.mem_image.mpr ⟨x, hxA, hhead.symm⟩,
       Finset.mem_image.mpr ⟨y, hyB, hlast.symm⟩⟩
 
@@ -693,7 +693,7 @@ public theorem CID.dSep_iff_causalean (G : CID V) {X Y Z : Finset V}
     G.DSep X Y Z ↔ (cidToDAG G).dSep X Y Z := by
   have hX : X \ Z = X := Finset.sdiff_eq_self_of_disjoint hXZ
   have hY : Y \ Z = Y := Finset.sdiff_eq_self_of_disjoint hYZ
-  rw [CID.dSep_iff_bbReachable, hX, hY, Causalean.DAG.dSep]
+  rw [CID.dSep_iff_bbReachable, hX, hY, Causalean.Graph.DAG.dSep]
   exact ⟨fun h ↦ ⟨h.1, hXZ, hYZ, h.2⟩, fun h ↦ ⟨h.1, h.2.2.2⟩⟩
 
 /-! ## Print's definition and the computation are the same predicate
@@ -720,11 +720,11 @@ when some vertex of `Z` is one of its descendants — which is the failure of
 carries the `W ∈ Z` half, by `CID.blocked_collider_iff`. -/
 public theorem mem_bbZAncestors_iff (G : CID V) (Z : Finset V) (m : V) :
     m ∈ (cidToDAG G).bbZAncestors Z ↔ ∃ z ∈ Z, G.IsDescendant m z := by
-  rw [Causalean.DAG.bbZAncestors, Causalean.DAG.ancestralSet, Finset.mem_union]
+  rw [Causalean.Graph.DAG.bbZAncestors, Causalean.Graph.DAG.ancestralSet, Finset.mem_union]
   constructor
   · rintro (hm | hm)
     · exact ⟨m, hm, Relation.ReflTransGen.refl⟩
-    · simp only [Causalean.DAG.ancestorsSet, Finset.mem_filter, Finset.mem_univ,
+    · simp only [Causalean.Graph.DAG.ancestorsSet, Finset.mem_filter, Finset.mem_univ,
         true_and] at hm
       obtain ⟨z, hz, ha⟩ := hm
       exact ⟨z, hz, (((cidToDAG G).isAncestor_iff_transGen).mp ha).to_reflTransGen⟩
@@ -732,7 +732,7 @@ public theorem mem_bbZAncestors_iff (G : CID V) (Z : Finset V) (m : V) :
     rcases Relation.reflTransGen_iff_eq_or_transGen.mp hd with rfl | ht
     · exact Or.inl hz
     · refine Or.inr ?_
-      simp only [Causalean.DAG.ancestorsSet, Finset.mem_filter, Finset.mem_univ, true_and]
+      simp only [Causalean.Graph.DAG.ancestorsSet, Finset.mem_filter, Finset.mem_univ, true_and]
       exact ⟨z, hz, ((cidToDAG G).isAncestor_iff_transGen).mpr ht⟩
 
 /-- **A path is unblocked exactly when it is active and misses `Z` at both
@@ -745,7 +745,7 @@ conditions, which upstream carries in `dSep`'s disjointness hypotheses instead. 
 public theorem CID.not_blocked_iff (G : CID V) {Z : Finset V} {p : List V}
     (hw : G.IsWalk p) :
     ¬ G.Blocked (↑Z) p ↔
-      (cidToDAG G).IsActivePath Z p ∧ (∀ x, p.head? = some x → x ∉ Z) ∧
+      (cidToDAG G).IsActiveWalk Z p ∧ (∀ x, p.head? = some x → x ∉ Z) ∧
         (∀ y, p.getLast? = some y → y ∉ Z) := by
   simp only [CID.Blocked, not_or, Finset.mem_coe]
   constructor
@@ -790,7 +790,7 @@ run. Every consumer of `CID.DSep` — Definition 7 below it, and Theorem 9 beyon
 
 The two halves of the right-hand side are the two lengths a path can have. A
 one-vertex path is blocked only by clause 3, so it is `Disjoint (X \ Z) (Y \ Z)`;
-everything longer is upstream's `HasActivePath`. -/
+everything longer is upstream's `HasActiveWalk`. -/
 public theorem CID.dSepSet_iff_dSep (G : CID V) (X Y Z : Finset V) :
     G.DSepSet ↑X ↑Y ↑Z ↔ G.DSep X Y Z := by
   constructor

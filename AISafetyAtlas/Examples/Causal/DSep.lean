@@ -7,7 +7,7 @@ public import AISafetyAtlas.Causal.DSep
 
 The d-separation module states Everitt et al.'s Definition 6 at print's
 generality, which admits `X`, `Y` and `Z` that overlap, while the upstream
-`Causalean.DAG.dSep` requires the three to be pairwise disjoint. That is a claim
+`Causalean.Graph.DAG.dSep` requires the three to be pairwise disjoint. That is a claim
 about a difference, and a difference nothing exhibits is a difference nobody has
 checked. This module exhibits it.
 
@@ -28,7 +28,7 @@ Two general facts and one diagram:
 
 Taken together these say the widening is real rather than notational: there is a
 diagram and a triple of sets at which `CID.DSep` holds and
-`Causalean.DAG.dSep` fails, and the failure is not a disagreement about
+`Causalean.Graph.DAG.dSep` fails, and the failure is not a disagreement about
 d-separation but about what the predicate is allowed to be asked.
 
 ## And a second diagram, on a carrier that is not finite
@@ -292,7 +292,7 @@ public theorem edgeCID_mem_bbZAncestors :
 ends**, at the single edge of `edgeCID` with nothing conditioned on. -/
 public theorem edgeCID_not_blocked_iff :
     ¬ edgeCID.Blocked (↑(∅ : Finset (Fin 2))) [0, 1] ↔
-      (cidToDAG edgeCID).IsActivePath ∅ [0, 1] ∧
+      (cidToDAG edgeCID).IsActiveWalk ∅ [0, 1] ∧
         (∀ x, ([0, 1] : List (Fin 2)).head? = some x → x ∉ (∅ : Finset (Fin 2))) ∧
         (∀ y, ([0, 1] : List (Fin 2)).getLast? = some y → y ∉ (∅ : Finset (Fin 2))) :=
   CID.not_blocked_iff edgeCID (by
