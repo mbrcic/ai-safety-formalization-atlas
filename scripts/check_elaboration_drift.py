@@ -82,6 +82,14 @@ PREFIX = "AISafetyAtlas"
 # *upstream* churned rather than to how large this library has become.
 CLASSES_PATH = ROOT / "docs" / "status" / "elaboration-classes.json"
 
+# Silent changes ruled on one declaration at a time. A class excuses an upstream
+# substitution wherever it recurs; an edit inside this library that changes the
+# meaning of statements nobody edited (a definition re-encoded, a structure
+# given new arguments) has no class, and policy says each such change needs its
+# own verdict. An entry pins both fingerprints by digest, so it excuses exactly
+# the change that was read and nothing that comes after it.
+ACCEPTED_PATH = ROOT / "docs" / "status" / "elaboration-accepted.json"
+
 MARK_BEGIN = "ATLAS-ELAB-BEGIN"
 MARK_END = "ATLAS-ELAB-END"
 SEP = "\t"
@@ -462,6 +470,42 @@ def read_dump(path: Path) -> dict:
     return json.loads(path.read_text(encoding="utf-8"))
 
 
+def fp_digest(fp: str) -> str:
+    """The digest an accepted-verdict entry records for a raw fingerprint."""
+    return hashlib.sha256(fp.encode("utf-8")).hexdigest()
+
+
+def split_accepted(
+    silent: list[str],
+    old_decls: dict[str, dict],
+    new_decls: dict[str, dict],
+    accepted_path: Path = ACCEPTED_PATH,
+) -> tuple[list[str], list[str]]:
+    """Split a silent set into the changes a recorded verdict covers and the rest.
+
+    A declaration is covered only when its name is recorded and **both** digests
+    match: the baseline fingerprint the verdict was read against and the
+    fingerprint it accepted. A later change to the same declaration therefore
+    stays silent and fails. Entries are matched against raw fingerprints; a
+    hashed dump's fingerprint is already a digest, matches nothing here, and so
+    fails closed.
+    """
+    if not accepted_path.is_file():
+        return [], list(silent)
+    registry = json.loads(accepted_path.read_text(encoding="utf-8"))
+    pinned = {
+        entry["name"]: (entry["baseline"], entry["current"])
+        for verdict in registry["verdicts"]
+        for entry in verdict["declarations"]
+    }
+    covered: list[str] = []
+    remaining: list[str] = []
+    for name in silent:
+        digests = (fp_digest(old_decls[name]["fp"]), fp_digest(new_decls[name]["fp"]))
+        (covered if pinned.get(name) == digests else remaining).append(name)
+    return covered, remaining
+
+
 def write_dump(path: Path, payload: dict) -> None:
     """A dump, as plain text.
 
@@ -730,7 +774,13 @@ def do_classify(old_path: Path, new_path: Path, show: int) -> int:
     return 0
 
 
-def do_compare(old_path: Path, new_path: Path, show: int, fatal: str = "any") -> int:
+def do_compare(
+    old_path: Path,
+    new_path: Path,
+    show: int,
+    fatal: str = "any",
+    accepted_path: Path = ACCEPTED_PATH,
+) -> int:
     old = read_dump(old_path)
     new = read_dump(new_path)
     old_decls, new_decls = old["declarations"], new["declarations"]
@@ -767,6 +817,7 @@ def do_compare(old_path: Path, new_path: Path, show: int, fatal: str = "any") ->
     buckets = classify(old_decls, new_decls)
     added, removed = buckets["added"], buckets["removed"]
     silent, visible, generated = buckets["silent"], buckets["visible"], buckets["generated"]
+    accepted, silent = split_accepted(silent, old_decls, new_decls, accepted_path)
     shared = set(old_decls) & set(new_decls)
 
     print(
@@ -778,6 +829,11 @@ def do_compare(old_path: Path, new_path: Path, show: int, fatal: str = "any") ->
         f"  {len(shared)} declaration(s) in both, {len(added)} added, {len(removed)} removed"
     )
     print(f"  {len(silent)} changed meaning with an IDENTICAL printed type")
+    if accepted:
+        print(
+            f"  {len(accepted)} more did so and are covered by a recorded verdict "
+            f"({accepted_path.name})"
+        )
     print(f"  {len(visible)} changed with a visibly different type")
     print(
         f"  {len(generated)} compiler-generated changed and {derived_moved} appeared or "

@@ -189,6 +189,19 @@ silent change that kept every constant and rearranged them is reported apart and
 can never be excused by a registry entry — that is a binder kind, an argument
 order or a universe moving, and it needs its own verdict.
 
+That verdict is recorded one declaration at a time in
+`docs/status/elaboration-accepted.json`, which `--compare` reads. It is also
+where a change made *inside* this library goes when it moves statements nobody
+edited: a definition re-encoded, a structure given new arguments. Such a change
+has no upstream substitution for a class to name. Each entry pins the sha256 of
+the declaration's baseline fingerprint and of the fingerprint accepted, so it
+covers that one change. A later change to the same declaration is silent again
+and fails, and an entry read against another baseline covers nothing. Every
+verdict names its cause and says why the statement still means what it meant;
+`tests/test_elaboration_drift.py` checks each entry against the committed
+baseline. The first one (2026-10-06) covers 29 examples in
+`Examples.Causal.StructuralModel` after `95cba821` made `SCM` domains types.
+
 `docs/status/elab-baseline-v4310.json` and
 `docs/status/elab-baseline-v4330.json` are the two sides of the last
 migration, both module-selected and both kept because a dump cannot be
