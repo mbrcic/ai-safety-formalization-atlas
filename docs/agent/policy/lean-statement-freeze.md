@@ -89,7 +89,13 @@ manual runs — not on an ordinary pull request.** The dump elaborates the whole
 environment: 342 s and 2.2 GB measured, the largest single step there was on an
 ordinary pull request. A migration is decided by `lean-toolchain`,
 `lakefile.toml`, `lake-manifest.json` or a baseline dump moving, so the check
-still fires on the pull request that bumps the toolchain, before the merge. The
+still fires on the pull request that bumps the toolchain, before the merge. A
+moved package this repository requires directly is a *scoped* migration: the
+dump covers only the modules whose imports reach it
+(`check_elaboration_drift.py --dump out.json --raw --only-reaching Causalean`),
+and the comparison holds the baseline to the same modules. Mathlib, the
+toolchain, Lean options and inherited packages stay whole
+(`docs/provenance/verification-scheduling.md`). The
 nightly cron bounds how long a silent change can sit unnoticed to a day; the
 weekly one exists for the CDN-drift case that arrives with no commit attached.
 

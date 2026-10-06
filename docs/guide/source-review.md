@@ -25,7 +25,7 @@ Do not resolve findings by editing generated evidence or Markdown.
 
 ## Check the saved audit offline
 
-Run commands from the repository root with Python 3.9 or newer. These checks do
+Run commands from the repository root with Python 3.12 or newer. These checks do
 not query providers or rewrite the snapshot and reports:
 
 ```console

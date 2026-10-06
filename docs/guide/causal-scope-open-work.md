@@ -487,7 +487,7 @@ assesses it on its own terms and reaches a different verdict.** Its conclusion i
 *do not depend and do not build yet* — and, when a consumer is ready, build the
 fragment rather than depend — and the reasons do not apply to the axes priced here.
 *d*-separation is a predicate on a **finite** graph, so none of the measurable
-generality that settles B and F is relevant to it; `Causalean.DAG` carries
+generality that settles B and F is relevant to it; `Causalean.Graph.DAG` carries
 `[Fintype V]` exactly as `CID` does. And a dependency would supply the predicate
 and nothing else: `Causalean` has no decision/utility partition, so none of the
 value-of-information or control-incentive machinery, and each of Theorems 9, 14,

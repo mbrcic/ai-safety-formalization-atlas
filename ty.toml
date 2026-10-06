@@ -1,6 +1,8 @@
 # The validators import each other by bare module name (`from
 # validate_current_state import ...`), and tests/ imports one script directly.
 # Declaring both roots keeps those resolvable, so the type check reports real
-# problems instead of import noise.
+# problems instead of import noise. The Python version is the validators' floor
+# (tests/test_python_floor.py); without it ty guesses from where it is installed.
 [environment]
 root = ["scripts", "tests", "."]
+python-version = "3.12"

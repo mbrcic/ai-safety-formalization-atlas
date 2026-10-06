@@ -26,7 +26,7 @@ assesses `CausalForge`, and concludes that the atlas's open *domain* and
 already carries arbitrary measurable domains and a measure-valued exogenous
 distribution. That conclusion is about the **SCM**. This note is about
 **d-separation**, which is a predicate on a finite graph and needs none of that
-generality — `Causalean.DAG` carries `[Fintype V]` exactly as `CID` does. The two
+generality — `Causalean.Graph.DAG` carries `[Fintype V]` exactly as `CID` does. The two
 questions have the same upstream and different answers, and the verdict below is
 the one that governs d-separation.
 
@@ -69,7 +69,7 @@ the first thing any decision here would have to fix.
 
 | what | detail |
 |---|---|
-| `Causalean.DAG.dSep` | pairwise disjointness plus absence of Bayes-Ball reachability from source to target given the conditioning set |
+| `Causalean.Graph.DAG.dSep` | pairwise disjointness plus absence of Bayes-Ball reachability from source to target given the conditioning set |
 | decidability | `instance decDSep` — d-separation is *computable* there, by reachability and disjointness |
 | size | 5,086 lines under `Graph/DSep/` alone: active paths, ancestral sets, Bayes Ball, ordered local SG, backdoor bridges |
 | `sorry` | none in `Graph/` or `SCM/` |
@@ -110,7 +110,7 @@ structural lemmas about paths that both directions read.
    re-pinned to revisions that resolve against it. Both projects are now on the
    same Lean release. Whether they are on the *same Mathlib commit* is not
    checked here and would have to be before a `require` is attempted.
-2. **Carrier mismatch.** `Causalean.DAG` is a structure with its own edge
+2. **Carrier mismatch.** `Causalean.Graph.DAG` is a structure with its own edge
    representation; `AISafetyAtlas.Causal.CID` carries `parents : V → Set V` and
    a `NodeKind` partition. Using their lemmas means a bridge and a proof
    that it preserves the predicate — real work, and the place a subtle error
@@ -234,7 +234,7 @@ was at `0bc3544` and that clone was not retained.
 incentive object anywhere in `Causalean`. A dependency supplies the predicate
 and none of the four incentive concepts.
 
-§4.2, the carrier mismatch, is now the **only** real cost. `Causalean.DAG` is
+§4.2, the carrier mismatch, is now the **only** real cost. `Causalean.Graph.DAG` is
 `edge : V → V → Prop` with `decEdge` and `[DecidableEq V] [Fintype V]`;
 `AISafetyAtlas.Causal.CID` is `parents : V → Set V` with the same acyclicity
 phrasing (`¬ Relation.TransGen · v v`), so the bridge is `edge u v := u ∈
@@ -391,6 +391,20 @@ and every transitive pin); `AISafetyAtlas.Causal.DSep`, its examples and the roo
 build against upstream, and the bridge theorems depend only on the standard
 axioms.
 
+**Upstream history replaced, 2026-10-06.** Upstream replaced its history with a
+single commit, `e298f649` ("run records move to a dataset"), so `b60f54a6` no longer
+resolves from a clone and CI failed at dependency checkout. The `require` now pins
+`e298f649`. It moves the graph layer into the namespace `Causalean.Graph` and renames
+`IsActivePath`/`HasActivePath` to `IsActiveWalk`/`HasActiveWalk` (and
+`bbReachableVertices_iff_activePath` to `bbReachableVertices_iff_activeWalk`). The
+bodies of `DAG`, `IsActiveWalk`, `HasActiveWalk`, `dSep`, `bbReachableVertices`,
+`bbZAncestors`, `ancestorsSet` and `ancestralSet` match the old ones after the rename.
+The closure is 2,595 lines at `e298f649` (2,483 at `b60f54a6`),
+with no `sorry`.
+The atlas's own declaration names, `hasActivePath_iff_not_disjoint` included, are
+unchanged. Commits of this repository from 2026-10-05 to this repin pin `b60f54a6`
+and no longer fetch their dependencies.
+
 ### 9.1 What the upstream project is
 
 Measured the same day, from the GitHub API rather than from the clone:
@@ -438,7 +452,7 @@ done, on a fork, and built.
 what §8 predicted:
 
 ```lean
-noncomputable def cidToDAG (G : CID V) : Causalean.DAG V where
+noncomputable def cidToDAG (G : CID V) : Causalean.Graph.DAG V where
   edge := fun u v ↦ u ∈ G.parents v
   decEdge := fun _ _ ↦ Classical.propDecidable _
   acyclic := G.acyclic
@@ -517,7 +531,7 @@ once four files stop exposing their bodies by default. They do.
 **Depend, on a fork, is what this repository did until 2026-10-05; since then it
 depends on upstream** (see the note at the end of §9). That was a change of kind
 from §8.4, which had *depend* blocked outright. The `require` in `lakefile.toml`
-is pinned to upstream commit `b60f54a6` rather than to a branch, and
+is pinned to an upstream commit (`e298f649` since 2026-10-06) rather than to a branch, and
 `AISafetyAtlas.Causal.DSep` carries the bridge; the spike branch that first
 demonstrated it has been folded in and deleted. Earlier commits of this
 repository pin the fork commit, so the fork branch stays reachable and is not
@@ -555,7 +569,7 @@ which is the sharper version of what §3 and §8.3 each said once.
 The split this section predicted — machinery imported, fidelity built — turned
 out sharper than §10.4 states, and in a direction that matters for the next
 decision. Everitt's Definition 6 bounds no vertex set and quantifies over *a set
-of nodes*; upstream's `Causalean.DAG.IsActivePath` and `bbZAncestors` are
+of nodes*; upstream's `Causalean.Graph.DAG.IsActiveWalk` and `bbZAncestors` are
 `Finset`-valued under `[Fintype V]` throughout. So the imported predicate could
 not carry print's statement at all, and the coverage audit recorded the import
 as a *reopening* of a vertex-set axis section 8 had closed a month earlier.

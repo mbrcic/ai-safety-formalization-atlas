@@ -61,7 +61,7 @@ srcDir = "vendor/TauCeti"
 # reachability it is computed by, and the active-path characterisation. Taken
 # from a shared library rather than rebuilt, for the reason recorded in
 # docs/guide/methodology.md and measured in
-# docs/provenance/d-separation-build-or-depend.md: the closure is 2,483 lines
+# docs/provenance/d-separation-build-or-depend.md: the closure is 2,595 lines at e298f649
 # with no `sorry`, and nothing in it is a statement this repository grades.
 #
 # Pinned to upstream by commit rather than by branch. A `module` file cannot
@@ -69,11 +69,13 @@ srcDir = "vendor/TauCeti"
 # and the four files in the import closure of `Graph/DSep/Separation.lean` had to
 # be converted, with one declaration's visibility changed (§10 of the provenance
 # note records why that one is forced). That conversion was offered upstream in
-# Jiyuan-Tan/CausalSmith#14 and landed in b60f54a6 (2026-09-10), the commit pinned
-# here; until 2026-10-05 this pointed at a fork carrying the same patch
-# (mbrcic/CausalSmith 3b83b4f6). Only that part of upstream is converted: the rest
-# of `Causalean` is still non-`module`, which is fine because nothing here
-# imports it.
+# Jiyuan-Tan/CausalSmith#14 and landed in b60f54a6 (2026-09-10). Until 2026-10-05
+# this pointed at a fork carrying the same patch (mbrcic/CausalSmith 3b83b4f6),
+# then at b60f54a6. On 2026-10-06 upstream replaced its history with one commit,
+# e298f649, so b60f54a6 no longer resolves from a clone; this pin follows it.
+# e298f649 moves the graph layer into `Causalean.Graph` and renames active paths
+# to active walks (`IsActiveWalk`, `HasActiveWalk`); the definitions are otherwise
+# unchanged, and its lakefile sets `requiresModuleSystem = true`.
 #
 # Only the graph layer is consumed. `Causalean.SCM` carries arbitrary measurable
 # domains where `AISafetyAtlas.Causal.SCM` is finite, so its do-calculus does not
@@ -81,4 +83,4 @@ srcDir = "vendor/TauCeti"
 [[require]]
 name = "Causalean"
 git = "https://github.com/Jiyuan-Tan/CausalSmith.git"
-rev = "b60f54a69a101851ba3884cfa476d221b683d134"
+rev = "e298f64908520f29348e3f480b72db63d37dd574"

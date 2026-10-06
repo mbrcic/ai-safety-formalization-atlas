@@ -59,12 +59,12 @@ fi
 # Everything that reads the tree, the ledgers, or the generated views still
 # runs.  See AGENTS.md "Validation" for when the full gate is mandatory.
 
-# Ten call sites across six scripts use str.removesuffix / str.removeprefix and
-# functools.cache, all of which are Python 3.9. Checked once, here, because the
-# failure it replaces was an AttributeError raised from inside whichever
-# validator happened to run first -- which reads as a bug in that validator.
-if ! python3 -c 'import sys; sys.exit(0 if sys.version_info >= (3, 9) else 1)'; then
-  echo "error: the validators need Python 3.9 or newer; python3 is $(python3 -V 2>&1)" >&2
+# The floor is Python 3.12; tests/test_python_floor.py says why. Checked once,
+# here, because the failure it replaces was an AttributeError raised from inside
+# whichever validator happened to run first -- which reads as a bug in that
+# validator.
+if ! python3 -c 'import sys; sys.exit(0 if sys.version_info >= (3, 12) else 1)'; then
+  echo "error: the validators need Python 3.12 or newer; python3 is $(python3 -V 2>&1)" >&2
   exit 1
 fi
 
