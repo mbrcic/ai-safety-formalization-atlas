@@ -1,0 +1,158 @@
+{
+ "note": "Silent elaboration changes ruled on one declaration at a time, read by check_elaboration_drift.py --compare. Each entry pins the sha256 of the baseline fingerprint (docs/status/elab-baseline-v4330.json) and of the fingerprint accepted, so it covers exactly that change: any later change to the declaration is silent again and fails. Add an entry only with a verdict that says why the statement still means what it meant.",
+ "verdicts": [
+  {
+   "key": "domains-as-types",
+   "ruled": "2026-10-06",
+   "cause": "95cba821 (reached main in #72): SCM and SCIM take domain types `dom edom : V -> Type*` instead of domain sizes `V -> Nat` with values in `Fin (dom v)`, and ExoAssignment is `(v : V) -> edom v`.",
+   "verdict": "Same models. The examples were re-encoded from a size n to the type Fin n (bits, figDim: 2 to Fin 2; figExo: if v = 0 then 2 else 1 to Fin (if v = 0 then 2 else 1)), so every variable keeps the domain Fin n it had. The mechanisms (figF and the copy chain's) keep their bodies; only their types follow the encoding. Two well-formedness fields changed shape and, at these finite domains, state the same facts: dom_pos (0 < n) became dom_nonempty (Nonempty (Fin n)), and exoProb_sum (a Finset sum of 1) became exoProb_tsum (a tsum of 1, equal to the finite sum by tsum_fintype). The printed types are unchanged because they name bits, figDim and figExo, whose definitions moved. The universe arguments [0] -> [0,0,0] come from the two new Type* parameters.",
+   "declarations": [
+    {
+     "name": "AISafetyAtlas.Examples.Causal.StructuralModel.copyChain",
+     "baseline": "d8cc8a9f301d77ca444e9e13b6af201024f519ba7dcbf9bdf3ef394755895e6f",
+     "current": "09ce8a4224fcf83684104dc9bcb80c57bce5a83f8a1bfb2f4783ab144d820e79"
+    },
+    {
+     "name": "AISafetyAtlas.Examples.Causal.StructuralModel.copyChain_eval_one",
+     "baseline": "9b7c76556565681ebc1a738debf1cabee2a0331a3bc530d48d576d38c61e6edf",
+     "current": "b1225032886ea7c5bfbf46f336150fd88d826e7323ecb509d9f2abd9fc163418"
+    },
+    {
+     "name": "AISafetyAtlas.Examples.Causal.StructuralModel.copyChain_eval_zero",
+     "baseline": "3104e87a50edb9276ed9ef0f92ddece5febdeb7507fe32bfde0d3b0f204278e1",
+     "current": "b052130d95a7362acf0e84a1eff9fdba8139eb8ca3e3660942d2a5328b08553c"
+    },
+    {
+     "name": "AISafetyAtlas.Examples.Causal.StructuralModel.figCopy",
+     "baseline": "406d45d0944990cf3dff3ddfb62c39b37d4c7d8e5574ab0dacc0c28b784c92ee",
+     "current": "4cd3a8eb0d7529b6c61409d7cf56cebc0b3d11bf698cebff8d2f7fd517fb8208"
+    },
+    {
+     "name": "AISafetyAtlas.Examples.Causal.StructuralModel.figCut",
+     "baseline": "60695771ac78692dbc1818d86a87e5babf1ad3d76d550bc80fe91ce0b20a3df6",
+     "current": "3e335490f49ecb6ccdf4c1e588210e79abe1a115a297d6db1ac25a75b8151b1d"
+    },
+    {
+     "name": "AISafetyAtlas.Examples.Causal.StructuralModel.figCutChoice",
+     "baseline": "4f86bc0954f62fb93eaebb2dc1d8fa44ce51bbef4f2f9190b2aed196f10080a1",
+     "current": "c412bf76e18caa49c9767b5dfcf7af845a354b2ff544926ee05f802a51a45425"
+    },
+    {
+     "name": "AISafetyAtlas.Examples.Causal.StructuralModel.figCut_eval_one",
+     "baseline": "8f421346b81b9307cbe77ae44794ae4aca4903c8f17c7b7e8fcc4368ed9bc2a4",
+     "current": "f9e0497a014e9a73bda12d3841cf523ab10e34ab91f9d80829f77b39dc515336"
+    },
+    {
+     "name": "AISafetyAtlas.Examples.Causal.StructuralModel.figCut_eval_two",
+     "baseline": "a2561549a27edb7a5e147f9af71d09ca88e2fdf5936801537e0b2a2ca3ab4958",
+     "current": "18e64af806be2b612f8fe19c9f76eabf790c9d4a1d28fe8e899b7648ca09359b"
+    },
+    {
+     "name": "AISafetyAtlas.Examples.Causal.StructuralModel.figCut_eval_zero",
+     "baseline": "3e6b3f398151d19484a85b6ad9f5a2a1390a68dea2fd78d0dbe840689f92ac63",
+     "current": "deb4bc76273d48f36f1c0bd874431caee47f2ed4fc0d98ede1755c7356fdd7de"
+    },
+    {
+     "name": "AISafetyAtlas.Examples.Causal.StructuralModel.figCut_expectedUtility",
+     "baseline": "cc9e46a9c22e7a72b7927c6e9648a9677232d6756b6f65125e076eea03848e32",
+     "current": "419d2b6512ea9edfd1e19738cfbebf07c768d5303f09d0ab4f9b2f2f9c9b2706"
+    },
+    {
+     "name": "AISafetyAtlas.Examples.Causal.StructuralModel.figCut_expectedUtility_eq",
+     "baseline": "937189eeaf215e8cccff07b52e90e9a17bbb022ca0561d40b54a21a70a4033e2",
+     "current": "90539251a0bfefd069d4e8fa57a74c0a8583672b507a97a880bb0b39205b570c"
+    },
+    {
+     "name": "AISafetyAtlas.Examples.Causal.StructuralModel.figCut_mem_decisions_one",
+     "baseline": "f08f6df63814361d57d2b14211c3aef109f0bc252ab177b279b8d66ce207eb6e",
+     "current": "d8b913cb7ffbe7bd21efb2926faa0d1cdf6501bccbf0ae0905e765b126d36b22"
+    },
+    {
+     "name": "AISafetyAtlas.Examples.Causal.StructuralModel.figCut_optimalValue",
+     "baseline": "8d1d834c38c374120fc9aed2188f3e29bed99a940d4c42a08dd832799a8bf522",
+     "current": "9f512ca0434bdf1f8dd1436ff054dfa9310f52a29f613f99abf72c2ea9304b6e"
+    },
+    {
+     "name": "AISafetyAtlas.Examples.Causal.StructuralModel.figCut_parents_one",
+     "baseline": "006cbdae042888413a2ebead35cb645fa2792a2049a9cb59e9af51994c1faa41",
+     "current": "44c4eb2292fc749fe9b4823383646ede27e82e50f7364de5cb6e97c9575d68d9"
+    },
+    {
+     "name": "AISafetyAtlas.Examples.Causal.StructuralModel.figCut_utilities",
+     "baseline": "e56f86b1564673e52091cb47942b0524c5200ad6a2c7ee20baef5c47cb3cdd37",
+     "current": "e2720a6bf9345d6160f1dfd8f514ee314ae846f827e1b7025c504e2b69db65ae"
+    },
+    {
+     "name": "AISafetyAtlas.Examples.Causal.StructuralModel.figSCIM",
+     "baseline": "60695771ac78692dbc1818d86a87e5babf1ad3d76d550bc80fe91ce0b20a3df6",
+     "current": "3e335490f49ecb6ccdf4c1e588210e79abe1a115a297d6db1ac25a75b8151b1d"
+    },
+    {
+     "name": "AISafetyAtlas.Examples.Causal.StructuralModel.figSCIM_eval_one",
+     "baseline": "514a19544f3afad806251cb630a84f6afb91861c8f8757f4c33ada2d04fe6021",
+     "current": "d869b4ef793b5d32e3dd49b3cfdbb0675cc61589267abda908d2c9ad8817482e"
+    },
+    {
+     "name": "AISafetyAtlas.Examples.Causal.StructuralModel.figSCIM_eval_two",
+     "baseline": "638cefdeb5018d07c48b33dcccd7f81f6a91c5ace8719af6d45b38860e294a4f",
+     "current": "6be66e9cf27db02ee558b2368352a35734e205faa18989afe5e73769ece7fab8"
+    },
+    {
+     "name": "AISafetyAtlas.Examples.Causal.StructuralModel.figSCIM_eval_zero",
+     "baseline": "733ab60fe19f76da48439ad6e768a896ca7cc46640d16fcbeeab806a5bf52490",
+     "current": "b86dea6f8c502e98d14c8fe22e96dcd97f25c2e9039befacac5e82570ee25730"
+    },
+    {
+     "name": "AISafetyAtlas.Examples.Causal.StructuralModel.figSCIM_expectedUtility",
+     "baseline": "bb0568957d1a98208a30165d2a112f43495e5183ae05363dcb94bd97d2e85eb4",
+     "current": "596c3f9ee3398491eb4e632be8d2b61def221ec00de9c4766e94acd0c718ccfb"
+    },
+    {
+     "name": "AISafetyAtlas.Examples.Causal.StructuralModel.figSCIM_expectedUtility_copy",
+     "baseline": "8d4caeb0bd12cc6e21048c8c37c726410963c08398be02d1b8b7f8eeaf55beb3",
+     "current": "b38c9c6eb25b7e8b3d3c1e4709313bdb13dfed74d2f45282d4d3d08d804620a6"
+    },
+    {
+     "name": "AISafetyAtlas.Examples.Causal.StructuralModel.figSCIM_expectedUtility_le_one",
+     "baseline": "4ce94163d97b4ac43db91f9e536e3a74c802a191e8cb53c77ca88b1bde0f99b5",
+     "current": "af07d416a46fdc269148344c07d5b36b68231811d903fc3e98bb7775948c485f"
+    },
+    {
+     "name": "AISafetyAtlas.Examples.Causal.StructuralModel.figSCIM_graph",
+     "baseline": "f150e64ecc947abdf5d01ca4ab80d16ea7e02e02208ac0b5f9e0b6e44d67d385",
+     "current": "cad84ca57b72034cb4e45517ff6e063081fa57fb3b45acd66720afe47b19670a"
+    },
+    {
+     "name": "AISafetyAtlas.Examples.Causal.StructuralModel.figSCIM_opinion_isMaterial",
+     "baseline": "669cdb629298bd4c91f0cd2f2290f7f34a6554e7aaf46750ab9a92843057895c",
+     "current": "9875c763ac77847b012b1a6e541cb9aee2d41127a3f8d062717d6f133d39e402"
+    },
+    {
+     "name": "AISafetyAtlas.Examples.Causal.StructuralModel.figSCIM_optimalValue",
+     "baseline": "67a2bc758b608d57d6553a3210609d7da8dff907d9d55069c85ff058ea35d5c5",
+     "current": "40be62c9925d41f2b56fbd1637a39950a315ed61ca7129e0d02cd98bb934fb35"
+    },
+    {
+     "name": "AISafetyAtlas.Examples.Causal.StructuralModel.figSCIM_utilities",
+     "baseline": "da2058dff14c6a9eeabb4d8d5a48df763146d7e67eeedc9ca964b7b7a307d231",
+     "current": "6c3e94a78a6502065a4f08b30f5af1131e89d2e754c1850f52b7a7232776faf1"
+    },
+    {
+     "name": "AISafetyAtlas.Examples.Causal.StructuralModel.instIsWellFoundedCopyChain",
+     "baseline": "2a8c20841be2d9ef25ec43c3c983b896b6c11fb759517fd0f806779c7101be08",
+     "current": "f1f3dd8d4a6dcbed3e543dfe3755bddcae5ed2588f413f4a77059207255711be"
+    },
+    {
+     "name": "AISafetyAtlas.Examples.Causal.StructuralModel.instIsWellFoundedFigCut",
+     "baseline": "3946f4dd28d6fffb1c7ed793d1b887cb4a48cd94a9c92725cb610a0a6f9a2530",
+     "current": "8f03788ccf70020971a8affbb8ec94b33cd35cf185d63e4c0d201c1c34707617"
+    },
+    {
+     "name": "AISafetyAtlas.Examples.Causal.StructuralModel.instIsWellFoundedFigSCIM",
+     "baseline": "416943562c4a19e1341758f80026a63318f965da7f4df4b4043f5961f06064f7",
+     "current": "e46152f8df21b3bf440db124d83ccfda4fb27dd32385c913dff25aa3efd5c7de"
+    }
+   ]
+  }
+ ]
+}

@@ -21,6 +21,7 @@ Run: `python3 -m pytest tests/ -q`
 from __future__ import annotations
 
 import importlib.util
+import json
 import subprocess
 import sys
 from pathlib import Path
@@ -499,3 +500,70 @@ def test_a_source_outside_every_target_is_still_not_a_module(tmp_path: Path) -> 
         oleans=["AISafetyAtlas", "AISafetyAtlas.Live"],
     )
     assert drift.built_modules(tmp_path) == ["AISafetyAtlas", "AISafetyAtlas.Live"]
+
+
+# --- Verdicts recorded one declaration at a time ------------------------------
+#
+# An edit inside this library can change what an unedited statement means; no
+# substitution class can excuse that, so each one is ruled on and pinned by both
+# fingerprints. These hold the pin to exactly the change that was read.
+
+
+def _accepted(tmp_path: Path, name: str, old_fp: str, new_fp: str) -> Path:
+    path = tmp_path / "accepted.json"
+    path.write_text(
+        json.dumps(
+            {
+                "verdicts": [
+                    {
+                        "key": "k",
+                        "declarations": [
+                            {
+                                "name": name,
+                                "baseline": drift.fp_digest(old_fp),
+                                "current": drift.fp_digest(new_fp),
+                            }
+                        ],
+                    }
+                ]
+            }
+        ),
+        encoding="utf-8",
+    )
+    return path
+
+
+def test_a_recorded_verdict_covers_exactly_its_change(tmp_path: Path) -> None:
+    old = _dump(tmp_path, "old.json", {"T.foo": _decl("aaaa", "P")})
+    new = _dump(tmp_path, "new.json", {"T.foo": _decl("zzzz", "P")})
+    accepted = _accepted(tmp_path, "T.foo", "aaaa", "zzzz")
+    assert drift.do_compare(old, new, 0, "silent", accepted) == 0
+
+
+def test_a_later_change_to_an_accepted_declaration_fails(tmp_path: Path) -> None:
+    """The verdict read one change; a second one is not covered by it."""
+    old = _dump(tmp_path, "old.json", {"T.foo": _decl("aaaa", "P")})
+    new = _dump(tmp_path, "new.json", {"T.foo": _decl("yyyy", "P")})
+    accepted = _accepted(tmp_path, "T.foo", "aaaa", "zzzz")
+    assert drift.do_compare(old, new, 0, "silent", accepted) == 1
+
+
+def test_a_verdict_read_against_another_baseline_covers_nothing(tmp_path: Path) -> None:
+    old = _dump(tmp_path, "old.json", {"T.foo": _decl("bbbb", "P")})
+    new = _dump(tmp_path, "new.json", {"T.foo": _decl("zzzz", "P")})
+    accepted = _accepted(tmp_path, "T.foo", "aaaa", "zzzz")
+    assert drift.do_compare(old, new, 0, "silent", accepted) == 1
+
+
+def test_every_recorded_verdict_was_read_against_the_committed_baseline() -> None:
+    """A typo in a name or a digest would leave an entry that covers nothing."""
+    registry = json.loads(drift.ACCEPTED_PATH.read_text(encoding="utf-8"))
+    baseline = drift.read_dump(ROOT / "docs" / "status" / "elab-baseline-v4330.json")
+    for verdict in registry["verdicts"]:
+        assert verdict["verdict"] and verdict["cause"], verdict["key"]
+        for entry in verdict["declarations"]:
+            assert entry["name"] in baseline["declarations"], entry["name"]
+            assert entry["baseline"] == drift.fp_digest(
+                baseline["declarations"][entry["name"]]["fp"]
+            ), entry["name"]
+            assert entry["current"] != entry["baseline"], entry["name"]
