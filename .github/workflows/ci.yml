@@ -184,10 +184,12 @@ jobs:
   lean:
     needs: [agent-gate, decide]
     # Ordinary runs stay on the shared ubuntu-latest pool. Release tags, manual
-    # runs, and the nightly leanchecker cron move to the self-hosted runner
-    # (labels: self-hosted, leanchecker): leanchecker's cost tracks a module's
-    # import closure, and the worst single module needs more memory than a
-    # GitHub-hosted runner provides. See the leanchecker step below.
+    # runs, and both crons move to the self-hosted runner (labels: self-hosted,
+    # leanchecker): the kernel replay below runs one process per module, many
+    # at once, and a two-core hosted runner would run them nearly one at a
+    # time. See the leanchecker step below. The weekly cron moved here on
+    # 2026-10-12: it runs the whole-environment drift dump, which took over 25
+    # minutes on a two-core hosted runner and timed out at 30 every Monday.
     #
     # A whole dependency migration (see the decide job) moves there too: the
     # drift check then elaborates the whole environment, which ran past the
@@ -197,19 +199,19 @@ jobs:
     # self-hosted machine; it stays hosted with a longer budget instead.
     runs-on: >-
       ${{ (github.event_name == 'workflow_dispatch' || startsWith(github.ref, 'refs/tags/v') ||
-           github.event.schedule == '15 3 * * *' ||
+           github.event_name == 'schedule' ||
            (needs.decide.outputs.migration == 'whole' &&
             (github.event_name != 'pull_request' ||
              github.event.pull_request.head.repo.full_name == github.repository)))
           && fromJSON('["self-hosted", "leanchecker"]') || 'ubuntu-latest' }}
     # 30 minutes for ordinary runs, so a hung PR build is caught quickly.
-    # Release tags, manual runs and the nightly leanchecker cron get 75 because
-    # the leanchecker replay below needs it, and a whole migration on the
-    # self-hosted runner gets the same. A whole migration from a fork runs hosted
-    # and gets 150: the whole-environment dump took over 25 minutes there.
+    # Release tags, manual runs and both crons get 75 for the drift dump and
+    # the kernel replay below, and a whole migration on the self-hosted runner
+    # gets the same. A whole migration from a fork runs hosted and gets 150: the
+    # whole-environment dump took over 25 minutes there.
     timeout-minutes: >-
       ${{ (github.event_name == 'workflow_dispatch' || startsWith(github.ref, 'refs/tags/v') ||
-           github.event.schedule == '15 3 * * *' ||
+           github.event_name == 'schedule' ||
            (needs.decide.outputs.migration == 'whole' &&
             (github.event_name != 'pull_request' ||
              github.event.pull_request.head.repo.full_name == github.repository)))
@@ -460,7 +462,14 @@ jobs:
       # `#print axioms` cannot see, because a hacked environment reports
       # whatever axioms it likes.
       #
-      # `leanchecker` ships with the toolchain (Lean >= v4.28.0); the separate
+      # The replay is the toolchain's own `replayFromImports` (from the
+      # `leanchecker` that ships with Lean >= v4.28.0), run by
+      # scripts/kernel_replay.lean on exactly one module at a time.
+      # `leanchecker M` itself replays every module under the prefix M, which
+      # made a per-module loop replay each parent's subtree twice. The script
+      # refuses to run if its copy differs from the installed toolchain's, and
+      # tests/test_kernel_replay.py checks that a theorem of False added with
+      # the kernel switched off is still rejected. The separate
       # leanprover/lean4checker repository is archived and must not be cloned.
       #
       # Scope is the atlas's own modules. Their oleans are exactly the ones
@@ -480,13 +489,15 @@ jobs:
       # unrun check is one that breaks silently and is discovered at the worst
       # moment.
       - name: Independent kernel re-verification (leanchecker)
-        # 90 minutes, not 45: one process per module is what keeps peak memory
-        # bounded, and it costs wall clock -- 239 modules in 1961 s. Passing
-        # every module to one `leanchecker` instead pays the union of their
-        # import closures and is OOM-killed, as is every 24-module chunk. The
-        # script reports its own peak on every run; see
-        # docs/provenance/toolchain-v4330-migration.md for the measured figures.
-        timeout-minutes: 90
+        # One process per module, run in parallel and sized from the host's
+        # memory. Every nightly run from 2026-10-07 to 2026-10-12 was killed at
+        # the 75-minute job limit while the old serial `leanchecker` loop was
+        # still replaying (375 of 546 modules after 58 minutes). Replaying each
+        # module exactly once needs at most 3.8 GB for any module; on a computer
+        # at three in parallel all 546 took 865 s (2026-10-12). The script
+        # reports its own peak and wall clock on every run, so size this limit
+        # from those, not from this comment.
+        timeout-minutes: 30
         if: >-
           steps.filter.outputs.run_lean == 'true' &&
           (github.event_name == 'workflow_dispatch' ||

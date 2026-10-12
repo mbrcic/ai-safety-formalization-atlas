@@ -48,20 +48,34 @@ Measured figures, not estimates. Times vary by runner; the ratios do not.
 | elaboration adjudication anchors (`.lean`) | ~4 s | any Lean-touching change | a later toolchain breaking an equality a recorded verdict rests on |
 | `report_consumers.py` | ~2 s | any Lean-touching change | a stale reuse report |
 | **`check_elaboration_drift.py --dump` + `--compare --fatal silent`** | **342 s, 2.2 GB** | **migration, both schedules, release tags, manual** | a declaration whose printed type is unchanged and whose *elaborated* type moved |
-| **`leanchecker` kernel replay** | **1961 s over 239 modules** | **nightly cron, release tags, manual** | an environment built by metaprogramming rather than by proving |
+| **kernel replay (`kernel_replay.sh`)** | **865 s over 546 modules, 3.8 GB peak, 3 in parallel on a computer** | **nightly cron, release tags, manual** | an environment built by metaprogramming rather than by proving |
 
 The two bold rows are the gated ones. Everything above them is cheap enough that
 gating would cost more in reasoning than it saves in runtime.
 
-Runner and budget follow the same split: workflow dispatch, release tags and the
-nightly `15 3 * * *` cron get the self-hosted `leanchecker` runner and a
-75-minute budget; everything else gets `ubuntu-latest` and 30 minutes. The
-weekly `0 6 * * 1` cron is an ordinary hosted run. A **whole** dependency
+Runner and budget follow the same split: workflow dispatch, release tags and
+both crons get the self-hosted `leanchecker` runner and a 75-minute budget;
+everything else gets `ubuntu-latest` and 30 minutes. A **whole** dependency
 migration (below) on a push or on a pull request from a branch of this
 repository also gets the self-hosted runner and 75 minutes. A pull request from a
 fork never does, because its code would run on that machine; it stays hosted and
 gets 150 minutes. The `decide` job takes this decision before the Lean job starts,
 because a job's runner and budget are fixed before its first step.
+
+**2026-10-07 to 2026-10-12: every scheduled run timed out.** #72 took the tree
+from 389 to 612 modules. The nightly run was killed at its 75-minute limit with
+375 of 546 modules replayed after 58 minutes, and the weekly cron, then hosted
+with 30 minutes, never finished the whole-environment drift dump. The cause of
+the first was not the kernel: `leanchecker M` replays every module whose name
+has M as a prefix, in one process, so the per-module loop replayed each parent
+module's subtree a second time -- 918 module-replays for 612 modules, and the
+~18 GB peak came from parents with fifty-odd children. The replay is now
+`scripts/kernel_replay.lean`, the toolchain's own `replayFromImports` applied to
+exactly one module, run in parallel; the weekly cron moved to the self-hosted
+runner. Effectiveness is pinned by `tests/test_kernel_replay.py`: a theorem of
+`False` added with the kernel switched off is rejected (and `#print axioms`
+reports it as axiom-free), and the copied function must match the installed
+toolchain's byte for byte.
 
 ## The decision this file was written for
 
