@@ -21,8 +21,16 @@ concurrency:
 
 jobs:
   # Schema, generated views, and path checks — always (docs-only PRs stay cheap).
+  # When the Actions variable ATLAS_RUNNER (a JSON list of runner labels) is
+  # set, every job runs there; unset, jobs run on ubuntu-latest, with the
+  # self-hosted exceptions the lean job names below. A pull request from a fork
+  # never takes the variable: its code would run on that machine.
   agent-gate:
-    runs-on: ubuntu-latest
+    runs-on: >-
+      ${{ vars.ATLAS_RUNNER &&
+           (github.event_name != 'pull_request' ||
+            github.event.pull_request.head.repo.full_name == github.repository)
+          && fromJSON(vars.ATLAS_RUNNER) || 'ubuntu-latest' }}
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -73,7 +81,11 @@ jobs:
   # Which checks the Lean job runs, and on which runner. A separate job because
   # `runs-on` and `timeout-minutes` are fixed before a job's first step runs.
   decide:
-    runs-on: ubuntu-latest
+    runs-on: >-
+      ${{ vars.ATLAS_RUNNER &&
+           (github.event_name != 'pull_request' ||
+            github.event.pull_request.head.repo.full_name == github.repository)
+          && fromJSON(vars.ATLAS_RUNNER) || 'ubuntu-latest' }}
     timeout-minutes: 5
     outputs:
       run_lean: ${{ steps.filter.outputs.run_lean }}
@@ -198,12 +210,16 @@ jobs:
     # from a fork runs its own code, and that code must never reach the
     # self-hosted machine; it stays hosted with a longer budget instead.
     runs-on: >-
-      ${{ (github.event_name == 'workflow_dispatch' || startsWith(github.ref, 'refs/tags/v') ||
+      ${{ vars.ATLAS_RUNNER &&
+           (github.event_name != 'pull_request' ||
+            github.event.pull_request.head.repo.full_name == github.repository)
+          && fromJSON(vars.ATLAS_RUNNER) ||
+          ((github.event_name == 'workflow_dispatch' || startsWith(github.ref, 'refs/tags/v') ||
            github.event_name == 'schedule' ||
            (needs.decide.outputs.migration == 'whole' &&
             (github.event_name != 'pull_request' ||
              github.event.pull_request.head.repo.full_name == github.repository)))
-          && fromJSON('["self-hosted", "leanchecker"]') || 'ubuntu-latest' }}
+          && fromJSON('["self-hosted", "leanchecker"]') || 'ubuntu-latest') }}
     # 30 minutes for ordinary runs, so a hung PR build is caught quickly.
     # Release tags, manual runs and both crons get 75 for the drift dump and
     # the kernel replay below, and a whole migration on the self-hosted runner

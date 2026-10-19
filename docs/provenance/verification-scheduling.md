@@ -62,6 +62,11 @@ fork never does, because its code would run on that machine; it stays hosted and
 gets 150 minutes. The `decide` job takes this decision before the Lean job starts,
 because a job's runner and budget are fixed before its first step.
 
+When the Actions variable `ATLAS_RUNNER` is set to a JSON list of runner
+labels, every job runs on those runners instead, budgets unchanged; the split
+above is what applies when it is unset. A pull request from a fork never
+takes the variable.
+
 **2026-10-07 to 2026-10-12: every scheduled run timed out.** #72 took the tree
 from 389 to 612 modules. The nightly run was killed at its 75-minute limit with
 375 of 546 modules replayed after 58 minutes, and the weekly cron, then hosted
