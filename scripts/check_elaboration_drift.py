@@ -750,10 +750,18 @@ def do_dump(
         )
         rows = full_environment_rows(modules, True if wanted is None else wanted)
         mismatched = []
+        absent: list[str] = []
         for key, entry in declarations.items():
             row = rows.get(names[key])
             if row is None:
-                mismatched.append(f"{key} (absent from the full environment)")
+                # An on-demand constant a shard realized in one of our modules
+                # can also sit in an upstream module, whose copy the full
+                # environment keeps; a single sweep then never reports it, so
+                # neither does this. A hand-written declaration cannot do that.
+                if entry["generated"]:
+                    absent.append(key)
+                else:
+                    mismatched.append(f"{key} (absent from the full environment)")
                 continue
             _, kind, module, generated, fp, pp_text = row
             entry["pp"] = pp_text
@@ -773,6 +781,8 @@ def do_dump(
             for line in mismatched[:20]:
                 print(f"check_elaboration_drift: shard disagrees: {line}", file=sys.stderr)
             return 1
+        for key in absent:
+            del declarations[key]
         extra = set(rows) - set(names.values())
         if extra:
             print(
