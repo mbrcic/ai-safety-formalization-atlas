@@ -47,7 +47,7 @@ Measured figures, not estimates. Times vary by runner; the ratios do not.
 | `check_print_axioms.py`, `axiom-audit` | ~40 s | any Lean-touching change | a declaration that stopped being proved |
 | elaboration adjudication anchors (`.lean`) | ~4 s | any Lean-touching change | a later toolchain breaking an equality a recorded verdict rests on |
 | `report_consumers.py` | ~2 s | any Lean-touching change | a stale reuse report |
-| **`check_elaboration_drift.py --dump` + `--compare --fatal silent`** | **342 s, 2.2 GB** | **migration, both schedules, release tags, manual** | a declaration whose printed type is unchanged and whose *elaborated* type moved |
+| **`check_elaboration_drift.py --dump --pp-against` + `--compare --fatal silent`** | **336 s at 3 in parallel on a computer (2678 s as one process, 613 modules)** | **migration, both schedules, release tags, manual** | a declaration whose printed type is unchanged and whose *elaborated* type moved |
 | **kernel replay (`kernel_replay.sh`)** | **865 s over 546 modules, 3.8 GB peak, 3 in parallel on a computer** | **nightly cron, release tags, manual** | an environment built by metaprogramming rather than by proving |
 
 The two bold rows are the gated ones. Everything above them is cheap enough that
@@ -61,6 +61,26 @@ repository also gets the self-hosted runner and 75 minutes. A pull request from 
 fork never does, because its code would run on that machine; it stays hosted and
 gets 150 minutes. The `decide` job takes this decision before the Lean job starts,
 because a job's runner and budget are fixed before its first step.
+
+**2026-10-19: the drift dump, made parallel without changing its answer.** At
+613 modules one process took 2678 s: about 830 s rendering fingerprints (some
+types expand to megabytes once their shared subterms are written out) and about
+1730 s pretty-printing every type, a printed form `--compare` reads only for a
+declaration whose fingerprint moved. The dump now runs in two passes. The first
+fingerprints in parallel shards, each importing only its own modules; a
+fingerprint renders the stored type, so what else a shard loads cannot change
+it, and the rendering memoizes shared subterms. The second loads every module
+exactly as the single sweep did and prints only what `--compare` will read
+(`--pp-against`); it also supplies module and fingerprint for every
+compiler-generated declaration, because a constant Lean creates on demand (a
+`congr_simp` lemma) can sit in several modules and only the full environment
+says which copy a single sweep reports. The dump stops if the shards and the
+full environment disagree on a hand-written declaration or on the set of
+declarations. Measured against the single-process output at 613 modules: every
+fingerprint, kind, module and generated flag identical, every printed form it
+writes identical, and `--compare` output identical. A baseline is still written
+without `--pp-against`, and `--compare` refuses a `--pp-against` dump as its
+old side. A scoped dump keeps the single sweep.
 
 **2026-10-07 to 2026-10-12: every scheduled run timed out.** #72 took the tree
 from 389 to 612 modules. The nightly run was killed at its 75-minute limit with
