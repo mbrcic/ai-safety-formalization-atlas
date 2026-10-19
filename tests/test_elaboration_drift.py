@@ -160,6 +160,84 @@ def test_declarations_are_selected_by_module_and_not_by_name() -> None:
     assert "isPrefixOf n" not in source
 
 
+# --- Fast without becoming a different check --------------------------------
+#
+# The sweep fingerprints in parallel shards and prints types only where the
+# fingerprint moved. Each test below pins one way that could quietly change the
+# answer.
+
+
+def test_a_shard_reports_only_its_own_modules() -> None:
+    """A shard imports other atlas modules transitively; it must not report them,
+    or two shards would report one declaration and the key check would fire."""
+    source = drift.harness_source(["AISafetyAtlas.A"], select=["AISafetyAtlas.A"])
+    assert 'unless #["AISafetyAtlas.A"].contains m do' in source
+    assert 'unless m.startsWith "AISafetyAtlas."' in source
+
+
+def test_shards_cover_every_module_exactly_once() -> None:
+    modules = [f"AISafetyAtlas.M{i}" for i in range(23)]
+    shards = drift._shards(modules, 5)
+    flat = [module for shard in shards for module in shard]
+    assert sorted(flat) == sorted(modules)
+    assert len(shards) == 5
+
+
+def _row(name: str, module: str, fp: str = "(c X [])") -> list[str]:
+    return [name, "theorem", module, "true", fp, ""]
+
+
+def test_an_on_demand_constant_in_two_shards_is_handed_back(monkeypatch) -> None:
+    """`CID.mk.congr_simp` is realized in two modules; one environment keeps one
+    copy, two shards each see theirs. That is reported for the full-environment
+    pass to settle, not raised as a clash and not silently resolved."""
+    shard_rows = iter([[_row("T.foo.congr_simp", "AISafetyAtlas.A")],
+                       [_row("T.foo.congr_simp", "AISafetyAtlas.B")]])
+    monkeypatch.setattr(drift, "_run_harness", lambda source: next(shard_rows))
+    monkeypatch.setattr(drift, "_shards", lambda modules, count: [["AISafetyAtlas.A"], ["AISafetyAtlas.B"]])
+    decls, names, duplicated = drift.elaborate(["AISafetyAtlas.A", "AISafetyAtlas.B"], raw=True, jobs=2)
+    assert duplicated == {"T.foo.congr_simp"}
+    assert list(decls) == ["T.foo.congr_simp"]
+
+
+def test_two_different_declarations_sharing_a_key_still_fail(monkeypatch) -> None:
+    """Private `helper` in two modules shares the key `helper`: a real clash."""
+    shard_rows = iter([[_row("_private.AISafetyAtlas.A.0.helper", "AISafetyAtlas.A")],
+                       [_row("_private.AISafetyAtlas.B.0.helper", "AISafetyAtlas.B")]])
+    monkeypatch.setattr(drift, "_run_harness", lambda source: next(shard_rows))
+    monkeypatch.setattr(drift, "_shards", lambda modules, count: [["AISafetyAtlas.A"], ["AISafetyAtlas.B"]])
+    try:
+        drift.elaborate(["AISafetyAtlas.A", "AISafetyAtlas.B"], raw=True, jobs=2)
+    except SystemExit:
+        return
+    raise AssertionError("a key shared by two different declarations was accepted")
+
+
+def test_the_print_pass_prints_only_what_it_is_asked_for() -> None:
+    source = drift.harness_source(["AISafetyAtlas.A"], fp=False, pp={"AISafetyAtlas.A.foo"})
+    assert 'let wantPp := #["AISafetyAtlas.A.foo"].contains s!"{n}"' in source
+    assert 'let fp := ""' in source
+    full = drift.harness_source(["AISafetyAtlas.A"])
+    assert "wantPp" not in full and "let fp := atlasFp ps ci.type" in full
+
+
+def test_a_dump_printed_only_where_it_moved_is_never_a_baseline(tmp_path: Path) -> None:
+    """Its unchanged declarations carry an empty printed form. As the old side,
+    every one would read as visibly changed and a silent change would hide."""
+    partial = {"toolchain": "x", "commit": "c" * 40, "raw": True,
+               "printed": "changed against base.json",
+               "declarations": {"T.foo": _decl("aaaa", "")}}
+    full = {"toolchain": "x", "commit": "d" * 40, "raw": True,
+            "declarations": {"T.foo": _decl("aaaa", "P")}}
+    old, new = tmp_path / "old.json", tmp_path / "new.json"
+    drift.write_dump(old, partial)
+    drift.write_dump(new, full)
+    assert drift.do_compare(old, new, show=5) == 2
+    assert drift.do_classify(old, new, show=5) == 2
+    # As the new side it is what CI writes, and it compares normally.
+    assert drift.do_compare(new, old, show=5, fatal="silent") == 0
+
+
 # --- Keeping the cost of the next migration flat ----------------------------
 
 

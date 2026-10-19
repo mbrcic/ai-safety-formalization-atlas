@@ -54,8 +54,10 @@ Usage:
     python3 scripts/check_elaboration_drift.py --classify old.json new.json
 
     # the standing check on an ordinary branch: dump this tree and hold it to the
-    # recorded baseline, where only a silent change is a failure
-    python3 scripts/check_elaboration_drift.py --dump current.json --raw
+    # recorded baseline, where only a silent change is a failure. --pp-against
+    # prints only what that comparison reads; the dump is then no baseline.
+    python3 scripts/check_elaboration_drift.py --dump current.json --raw \
+        --pp-against docs/status/elab-baseline-v4330.json
     python3 scripts/check_elaboration_drift.py --compare \
         docs/status/elab-baseline-v4330.json current.json --fatal silent
 """
@@ -66,6 +68,7 @@ import argparse
 import collections
 import hashlib
 import json
+import os
 import re
 import subprocess
 import sys
@@ -163,36 +166,90 @@ NORMALIZER = [
     '    | none => s!"?{n}"',
     '  | .mvar _ => "?m"',
     "",
+    # Each distinct subterm is rendered once per declaration and reused. A
+    # type is a DAG, and the rendering writes every shared subterm out in full:
+    # the largest fingerprints run to megabytes, 92 MB over the tree, and
+    # walking every copy was most of the sweep. The rendering of a subterm does
+    # not depend on where it sits -- bound variables are de Bruijn indices -- so
+    # reusing it cannot change a byte of the output.
     "open Lean in",
-    "private partial def atlasFp (ps : List (Name × Nat)) : Expr → String",
+    "private partial def atlasFpM (ps : List (Name × Nat)) (e : Expr) :",
+    "    StateM (Std.HashMap Expr String) String := do",
+    "  if let some r := (← get).get? e then return r",
+    "  let r ← match e with",
     # Bound variables are de Bruijn indices already, so binder *names* never
     # reach the rendering and renaming one is invisible here. Binder *kinds* do
     # reach it: `{x : α}` and `[x : α]` resolve differently and must not agree.
-    '  | .bvar i => s!"(b {i})"',
-    '  | .fvar _ => "(fv)"',
-    '  | .mvar _ => "(mv)"',
-    '  | .sort l => s!"(s {atlasLvl ps l})"',
-    "  | .const n ls =>",
-    '      s!"(c {n} [{String.intercalate "," (ls.map (atlasLvl ps))}])"',
-    '  | .app f a => s!"(@ {atlasFp ps f} {atlasFp ps a})"',
-    "  | .lam _ t b bi =>",
-    '      s!"(L {atlasBi bi} {atlasFp ps t} {atlasFp ps b})"',
-    "  | .forallE _ t b bi =>",
-    '      s!"(F {atlasBi bi} {atlasFp ps t} {atlasFp ps b})"',
-    "  | .letE _ t v b _ =>",
-    '      s!"(E {atlasFp ps t} {atlasFp ps v} {atlasFp ps b})"',
-    '  | .lit (.natVal n) => s!"(n {n})"',
-    '  | .lit (.strVal s) => s!"(t {s})"',
-    '  | .proj n i e => s!"(p {n} {i} {atlasFp ps e})"',
+    '    | .bvar i => pure s!"(b {i})"',
+    '    | .fvar _ => pure "(fv)"',
+    '    | .mvar _ => pure "(mv)"',
+    '    | .sort l => pure s!"(s {atlasLvl ps l})"',
+    "    | .const n ls =>",
+    '        pure s!"(c {n} [{String.intercalate "," (ls.map (atlasLvl ps))}])"',
+    '    | .app f a => return s!"(@ {← atlasFpM ps f} {← atlasFpM ps a})"',
+    "    | .lam _ t b bi =>",
+    '        return s!"(L {atlasBi bi} {← atlasFpM ps t} {← atlasFpM ps b})"',
+    "    | .forallE _ t b bi =>",
+    '        return s!"(F {atlasBi bi} {← atlasFpM ps t} {← atlasFpM ps b})"',
+    "    | .letE _ t v b _ =>",
+    '        return s!"(E {← atlasFpM ps t} {← atlasFpM ps v} {← atlasFpM ps b})"',
+    '    | .lit (.natVal n) => pure s!"(n {n})"',
+    '    | .lit (.strVal s) => pure s!"(t {s})"',
+    '    | .proj n i x => return s!"(p {n} {i} {← atlasFpM ps x})"',
     # `mdata` carries elaborator bookkeeping, never meaning.
-    "  | .mdata _ e => atlasFp ps e",
+    "    | .mdata _ x => atlasFpM ps x",
+    "  modify (·.insert e r)",
+    "  return r",
+    "",
+    "open Lean in",
+    "private def atlasFp (ps : List (Name × Nat)) (e : Expr) : String :=",
+    "  (atlasFpM ps e).run' {}",
     "",
 ]
 
 
-def harness_source(modules: list[str]) -> str:
-    """A `run_cmd` printing a normalized rendering of every atlas type."""
+def _lean_strings(values: list[str]) -> str:
+    return "#[" + ", ".join(json.dumps(v, ensure_ascii=False) for v in values) + "]"
+
+
+def harness_source(
+    modules: list[str],
+    *,
+    select: list[str] | None = None,
+    fp: bool | str = True,
+    pp: bool | set[str] = True,
+    only: set[str] | None = None,
+) -> str:
+    """A `run_cmd` printing a normalized rendering of every atlas type.
+
+    `select` keeps only declarations compiled into those modules, which is how a
+    shard of a parallel sweep reports its own modules and nothing it merely
+    imports. `fp=False` skips the fingerprint, `fp="generated"` computes it for
+    compiler-generated declarations only, and `pp` limits the printed form
+    to the named declarations (full names); `only` emits rows for the named
+    declarations alone, for the second pass.
+    """
     imports = [f"import all {module}" for module in modules]
+    select_check = (
+        [f"    unless {_lean_strings(select)}.contains m do", "      continue"]
+        if select is not None
+        else []
+    )
+    only_check = (
+        [f'    unless {_lean_strings(sorted(only))}.contains s!"{{n}}" do', "      continue"]
+        if only is not None
+        else []
+    )
+    if fp == "generated":
+        fp_line = '    let fp := if generated then atlasFp ps ci.type else ""'
+    else:
+        fp_line = "    let fp := atlasFp ps ci.type" if fp else '    let fp := ""'
+    if pp is True:
+        pp_gate = []
+    elif pp is False:
+        pp_gate = ["    let wantPp := false"]
+    else:
+        pp_gate = [f'    let wantPp := {_lean_strings(sorted(pp))}.contains s!"{{n}}"']
     return "\n".join(
         [
             "module",
@@ -224,6 +281,8 @@ def harness_source(modules: list[str]) -> str:
             '      | none => ""',
             f'    unless m.startsWith "{PREFIX}." || m == "{PREFIX}" do',
             "      continue",
+            *select_check,
+            *only_check,
             "    let kind :=",
             "      match ci with",
             '      | .thmInfo _ => "theorem"',
@@ -240,10 +299,12 @@ def harness_source(modules: list[str]) -> str:
             "    let range ← Lean.findDeclarationRanges? n",
             "    let generated := structural || range.isNone",
             "    let ps := ci.levelParams.zipIdx",
-            "    let fp := atlasFp ps ci.type",
+            fp_line,
             # Printed only so a human reading a reported difference can see what
             # moved. The verdict is never taken from this string.
+            *pp_gate,
             "    let pp ← (do",
+            *(["      if !wantPp then return \"\""] if pp_gate else []),
             "      try",
             "        let f ← Lean.Meta.ppExpr ci.type",
             '        pure ((toString f).replace "\\n" " ")',
@@ -408,10 +469,11 @@ def source_name(name: str) -> str:
     return match.group("name") if match else name
 
 
-def elaborate(modules: list[str], raw: bool = False) -> dict[str, dict]:
+def _run_harness(source: str) -> list[list[str]]:
+    """Elaborate one harness and return its rows, split into their six fields."""
     with tempfile.TemporaryDirectory(prefix="atlas-elab-drift-") as tmp:
         harness = Path(tmp) / "ElabDrift.lean"
-        harness.write_text(harness_source(modules), encoding="utf-8")
+        harness.write_text(source, encoding="utf-8")
         proc = subprocess.run(
             ["lake", "env", "lean", str(harness)],
             cwd=ROOT,
@@ -425,16 +487,92 @@ def elaborate(modules: list[str], raw: bool = False) -> dict[str, dict]:
         print(f"check_elaboration_drift: lean failed (exit {proc.returncode})", file=sys.stderr)
         raise SystemExit(1)
     body = blob.split(MARK_BEGIN, 1)[1].split(MARK_END, 1)[0]
+    return [parts for line in body.splitlines() if line.strip()
+            for parts in [line.split(SEP)] if len(parts) == 6]
+
+
+def drift_jobs(modules: int) -> int:
+    """How many harnesses run at once: ATLAS_DRIFT_JOBS, else what memory allows.
+
+    Each shard imports the closure of its own modules, which peaked near 3.7 GB
+    for the whole tree, so the default budgets ATLAS_DRIFT_GB_PER_JOB (5) each
+    against available memory, capped at the core count and the module count.
+    """
+    if os.environ.get("ATLAS_DRIFT_JOBS"):
+        return max(1, int(os.environ["ATLAS_DRIFT_JOBS"]))
+    try:
+        with open("/proc/meminfo", encoding="utf-8") as meminfo:
+            avail_kb = next(int(line.split()[1]) for line in meminfo
+                            if line.startswith("MemAvailable:"))
+    except (OSError, StopIteration, ValueError):
+        return 1
+    per_job = float(os.environ.get("ATLAS_DRIFT_GB_PER_JOB", "5"))
+    return max(1, min(int(avail_kb / 1048576 / per_job), os.cpu_count() or 1, modules))
+
+
+def _shards(modules: list[str], count: int) -> list[list[str]]:
+    """Split modules into `count` shards of similar compiled size.
+
+    Largest first, each to the currently lightest shard. The olean size stands
+    in for how much there is to fingerprint, so one shard does not end up
+    holding every large module and finishing long after the rest.
+    """
+    lib = ROOT / ".lake" / "build" / "lib" / "lean"
+
+    def size(module: str) -> int:
+        path = lib / (module.replace(".", "/") + ".olean")
+        return path.stat().st_size if path.is_file() else 0
+
+    shards: list[list[str]] = [[] for _ in range(count)]
+    loads = [0] * count
+    for module in sorted(modules, key=size, reverse=True):
+        lightest = loads.index(min(loads))
+        shards[lightest].append(module)
+        loads[lightest] += size(module) + 1  # + 1: unsized modules still spread
+    return [shard for shard in shards if shard]
+
+
+def elaborate(
+    modules: list[str],
+    raw: bool = False,
+    *,
+    pp: bool | set[str] = True,
+    jobs: int = 1,
+) -> tuple[dict[str, dict], dict[str, str], set[str]]:
+    """Fingerprint every declaration the modules compile.
+
+    Returns the declarations by key, each key's full Lean name, and the full
+    names more than one shard reported. Those are constants Lean creates on
+    demand -- a `congr_simp` lemma is realized in whichever module first needs
+    it, so two modules can each hold one. A single environment keeps one copy;
+    which one is the full environment's business, so the caller re-reads these
+    from it rather than guessing. With
+    `jobs > 1` the modules are split into shards elaborated in parallel, each
+    importing only its own modules and reporting only declarations compiled
+    into them. A fingerprint is a rendering of the stored type, so which other
+    modules a shard happens to load cannot change it.
+    """
+    if jobs > 1 and len(modules) > 1:
+        from concurrent.futures import ThreadPoolExecutor
+
+        shards = _shards(modules, min(jobs, len(modules)))
+        with ThreadPoolExecutor(max_workers=len(shards)) as pool:
+            parts = pool.map(
+                lambda shard: _run_harness(harness_source(shard, select=shard, pp=pp)),
+                shards,
+            )
+            rows = [row for part in parts for row in part]
+    else:
+        rows = _run_harness(harness_source(modules, pp=pp))
 
     out: dict[str, dict] = {}
-    for line in body.splitlines():
-        if not line.strip():
-            continue
-        parts = line.split(SEP)
-        if len(parts) != 6:
-            continue
-        name, kind, module, generated, fp, pp = parts
+    names: dict[str, str] = {}
+    duplicated: set[str] = set()
+    for name, kind, module, generated, fp, pp_text in rows:
         key = source_name(name)
+        if key in out and names[key] == name and out[key]["module"] != module:
+            duplicated.add(name)
+            continue
         # `source_name` drops the module qualification from a private name, and
         # the modules now in scope contain declarations called `Alice`, `Bob` and
         # `Comp`. Two declarations sharing a key would silently overwrite one
@@ -453,12 +591,35 @@ def elaborate(modules: list[str], raw: bool = False) -> dict[str, dict]:
             # Hashed here, in Python, so the digest does not depend on which
             # Lean version produced the rendering.
             "fp": fp if raw else hashlib.sha256(fp.encode("utf-8")).hexdigest()[:32],
-            "pp": pp,
+            "pp": pp_text,
         }
+        names[key] = name
     if not out:
         print("check_elaboration_drift: harness produced no rows", file=sys.stderr)
         raise SystemExit(1)
-    return out
+    return out, names, duplicated
+
+
+def full_environment_rows(modules: list[str], printed: bool | set[str]) -> dict[str, list[str]]:
+    """Every atlas row from one environment of every module, as a single sweep has it.
+
+    Two things need that environment. The printed form depends on which
+    notations and delaborators are in scope -- a later module can add notation
+    for an earlier definition, so printing with fewer modules loaded could make
+    a silent change look visible, the one error this check must not make. And a
+    constant Lean creates on demand (a `congr_simp` lemma, realized in whichever
+    module first needs it) can sit in several modules; one environment keeps one
+    copy, a shard keeps whichever of its own it met first, and only this
+    environment says which copy a single sweep reports. Such constants have no
+    source position, so they are always `generated`, and their fingerprints are
+    taken from here.
+    """
+    rows = _run_harness(harness_source(modules, fp="generated", pp=printed))
+    return {row[0]: row for row in rows}
+
+
+def _comparable_fp(fp: str, raw: bool) -> str:
+    return hashlib.sha256(fp.encode("utf-8")).hexdigest()[:32] if raw else fp
 
 
 def git(*args: str) -> str:
@@ -527,7 +688,12 @@ def write_dump(path: Path, payload: dict) -> None:
     path.write_text(text, encoding="utf-8")
 
 
-def do_dump(path: Path, raw: bool = False, only_reaching: list[str] | None = None) -> int:
+def do_dump(
+    path: Path,
+    raw: bool = False,
+    only_reaching: list[str] | None = None,
+    pp_against: Path | None = None,
+) -> int:
     modules = built_modules()
     if not modules:
         print(
@@ -548,7 +714,83 @@ def do_dump(path: Path, raw: bool = False, only_reaching: list[str] | None = Non
         if scoped is not None:
             modules = scoped
             scope = {"packages": sorted(only_reaching), "modules": scoped}
-    declarations = elaborate(modules, raw=raw) if modules else {}
+    # Two passes. The first fingerprints in parallel and prints nothing; the
+    # second prints, in one process over every module, only what needs a
+    # printed form. Without `pp_against` that is everything, which is what a
+    # baseline needs. With it, it is the declarations whose fingerprint differs
+    # from that baseline's -- the only ones `--compare` reads a printed form
+    # for (silent against visible) -- and usually there are none.
+    #
+    # A scoped dump keeps the single sweep it always was: it imports only the
+    # reaching modules and reports what they transitively bring in, which a
+    # set of shards would not reproduce, and it is small enough not to need
+    # the speed.
+    declarations: dict[str, dict] = {}
+    if modules and scope is not None:
+        declarations, _, _ = elaborate(modules, raw=raw)
+    elif modules:
+        jobs = drift_jobs(len(modules))
+        print(f"check_elaboration_drift: fingerprinting {len(modules)} module(s), {jobs} at once")
+        declarations, names, duplicated = elaborate(modules, raw=raw, pp=False, jobs=jobs)
+        if pp_against is None:
+            wanted = None  # a baseline: print everything, as a full sweep does
+        else:
+            baseline = read_dump(pp_against)
+            base_raw = bool(baseline.get("raw"))
+            wanted = {
+                names[key]
+                for key, entry in declarations.items()
+                if key in baseline["declarations"]
+                and _comparable_fp(baseline["declarations"][key]["fp"], base_raw and not raw)
+                != _comparable_fp(entry["fp"], raw and not base_raw)
+            }
+        print(
+            "check_elaboration_drift: reading the full environment, printing "
+            + ("every declaration" if wanted is None else f"{len(wanted)} declaration(s)")
+        )
+        rows = full_environment_rows(modules, True if wanted is None else wanted)
+        mismatched = []
+        absent: list[str] = []
+        for key, entry in declarations.items():
+            row = rows.get(names[key])
+            if row is None:
+                # An on-demand constant a shard realized in one of our modules
+                # can also sit in an upstream module, whose copy the full
+                # environment keeps; a single sweep then never reports it, so
+                # neither does this. A hand-written declaration cannot do that.
+                if entry["generated"]:
+                    absent.append(key)
+                else:
+                    mismatched.append(f"{key} (absent from the full environment)")
+                continue
+            _, kind, module, generated, fp, pp_text = row
+            entry["pp"] = pp_text
+            if generated.strip() == "true":
+                entry.update(
+                    kind=kind,
+                    module=module,
+                    generated=True,
+                    fp=fp if raw else hashlib.sha256(fp.encode("utf-8")).hexdigest()[:32],
+                )
+            elif (kind, module) != (entry["kind"], entry["module"]) or entry["generated"]:
+                mismatched.append(f"{key} ({entry['module']} in its shard, {module} in full)")
+        # A hand-written declaration lives in exactly one module, so the shard
+        # and the full environment must agree on it. If they do not, the
+        # parallel sweep is not the sweep it replaces; say so and stop.
+        if mismatched:
+            for line in mismatched[:20]:
+                print(f"check_elaboration_drift: shard disagrees: {line}", file=sys.stderr)
+            return 1
+        for key in absent:
+            del declarations[key]
+        extra = set(rows) - set(names.values())
+        if extra:
+            print(
+                f"check_elaboration_drift: {len(extra)} declaration(s) in the full "
+                f"environment and in no shard, e.g. {sorted(extra)[:3]}",
+                file=sys.stderr,
+            )
+            return 1
     payload = {
         "toolchain": (ROOT / "lean-toolchain").read_text(encoding="utf-8").strip(),
         "commit": git("rev-parse", "HEAD"),
@@ -562,6 +804,11 @@ def do_dump(path: Path, raw: bool = False, only_reaching: list[str] | None = Non
         "selector": "module",
         "declarations": declarations,
     }
+    if pp_against is not None and scope is None:
+        # Printed forms are present only where the fingerprint moved. A dump
+        # like this can be compared against its baseline and can never serve
+        # as one: unchanged declarations carry an empty printed form.
+        payload["printed"] = f"changed against {pp_against}"
     if scope is not None:
         payload["scope"] = scope
     write_dump(path, payload)
@@ -696,6 +943,8 @@ def do_classify(old_path: Path, new_path: Path, show: int) -> int:
     only state that needs a person.
     """
     old, new = read_dump(old_path), read_dump(new_path)
+    if _refuse_partial_baseline(old, old_path):
+        return 2
     if not (old.get("raw") and new.get("raw")):
         print(
             "check_elaboration_drift: --classify needs dumps written with --raw; a "
@@ -774,6 +1023,22 @@ def do_classify(old_path: Path, new_path: Path, show: int) -> int:
     return 0
 
 
+def _refuse_partial_baseline(old: dict, old_path: Path) -> bool:
+    """A dump written with --pp-against has no printed form for most entries.
+
+    As the old side of a comparison every unchanged-print declaration would
+    read as visibly changed, and a silent one would hide among them.
+    """
+    if "printed" not in old:
+        return False
+    print(
+        f"check_elaboration_drift: {old_path} has printed forms only where the "
+        f"fingerprint moved ({old['printed']}); write a baseline without --pp-against",
+        file=sys.stderr,
+    )
+    return True
+
+
 def do_compare(
     old_path: Path,
     new_path: Path,
@@ -783,6 +1048,8 @@ def do_compare(
 ) -> int:
     old = read_dump(old_path)
     new = read_dump(new_path)
+    if _refuse_partial_baseline(old, old_path):
+        return 2
     old_decls, new_decls = old["declarations"], new["declarations"]
 
     # A scoped dump looked at the modules a moved dependency reaches and nothing
@@ -933,6 +1200,14 @@ def main() -> int:
         "comma-separated packages (a scoped dependency move; see dependency_reach.py). "
         "Falls back to every module when Mathlib carries one of them",
     )
+    parser.add_argument(
+        "--pp-against",
+        type=Path,
+        metavar="BASELINE",
+        help="with --dump, print types only where the fingerprint differs from "
+        "BASELINE -- all --compare against it reads -- instead of printing every "
+        "declaration; the dump cannot then serve as a baseline itself",
+    )
     parser.add_argument("--show", type=int, default=20, help="how many names to list per section")
     parser.add_argument(
         "--fatal",
@@ -954,6 +1229,8 @@ def main() -> int:
         parser.error("give exactly one of --dump, --compare, --classify or --self-test")
     if arguments.only_reaching and not arguments.dump:
         parser.error("--only-reaching only means anything with --dump")
+    if arguments.pp_against and not arguments.dump:
+        parser.error("--pp-against only means anything with --dump")
     if arguments.raw and not arguments.dump:
         parser.error("--raw only means anything with --dump")
     if arguments.fatal != "any" and not arguments.compare:
@@ -962,7 +1239,12 @@ def main() -> int:
         return do_selftest()
     if arguments.dump:
         only = [name for name in (arguments.only_reaching or "").split(",") if name]
-        return do_dump(arguments.dump, raw=arguments.raw, only_reaching=only or None)
+        return do_dump(
+            arguments.dump,
+            raw=arguments.raw,
+            only_reaching=only or None,
+            pp_against=arguments.pp_against,
+        )
     if arguments.classify:
         return do_classify(arguments.classify[0], arguments.classify[1], arguments.show)
     return do_compare(arguments.compare[0], arguments.compare[1], arguments.show, arguments.fatal)

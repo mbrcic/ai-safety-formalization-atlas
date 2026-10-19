@@ -451,9 +451,14 @@ jobs:
           if [ "${{ steps.filter.outputs.migration }}" = "scoped" ]; then
             scope=(--only-reaching "${{ steps.filter.outputs.migration_packages }}")
           fi
-          python3 scripts/check_elaboration_drift.py --dump "$dump" --raw "${scope[@]}"
+          # --pp-against: fingerprint in parallel, then print only declarations
+          # whose fingerprint moved against the baseline -- the only printed
+          # forms --compare reads. Printing all of them was most of the step.
+          baseline=docs/status/elab-baseline-v4330.json
+          python3 scripts/check_elaboration_drift.py --dump "$dump" --raw \
+            --pp-against "$baseline" "${scope[@]}"
           python3 scripts/check_elaboration_drift.py \
-            --compare docs/status/elab-baseline-v4330.json "$dump" --fatal silent
+            --compare "$baseline" "$dump" --fatal silent
       # Independent kernel re-verification, strictly stronger than the axiom
       # check above: that one asks which axioms a declaration depends on, this
       # one replays every declaration the atlas compiled through the kernel and
