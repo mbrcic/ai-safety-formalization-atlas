@@ -47,7 +47,7 @@ Measured figures, not estimates. Times vary by runner; the ratios do not.
 | `check_print_axioms.py`, `axiom-audit` | ~40 s | any Lean-touching change | a declaration that stopped being proved |
 | elaboration adjudication anchors (`.lean`) | ~4 s | any Lean-touching change | a later toolchain breaking an equality a recorded verdict rests on |
 | `report_consumers.py` | ~2 s | any Lean-touching change | a stale reuse report |
-| **`check_elaboration_drift.py --dump --pp-against` + `--compare --fatal silent`** | **336 s at 3 in parallel on a computer (2678 s as one process, 613 modules)** | **migration, both schedules, release tags, manual** | a declaration whose printed type is unchanged and whose *elaborated* type moved |
+| **`check_elaboration_drift.py --dump --pp-against` + `--compare --fatal silent`** | **76 s on the self-hosted runner; 336 s at 3 in parallel on a computer (2678 s as one process, 613 modules)** | **migration, both schedules, release tags, manual** | a declaration whose printed type is unchanged and whose *elaborated* type moved |
 | **kernel replay (`kernel_replay.sh`)** | **865 s over 546 modules, 3.8 GB peak, 3 in parallel on a computer** | **nightly cron, release tags, manual** | an environment built by metaprogramming rather than by proving |
 
 The two bold rows are the gated ones. Everything above them is cheap enough that
