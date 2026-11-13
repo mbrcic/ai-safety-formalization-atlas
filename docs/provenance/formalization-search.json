@@ -548,7 +548,7 @@
    "id": "NC-012",
    "claim": "The Mathlib revision this repository pins carries neither of the two analytic results MAIS-O77(b) needs, and this repository proves both. First, a Gromoll--Meyer splitting along an arbitrary subspace whose Hessian block is nonsingular -- print's equation (9), L - L(w) = Q_alpha(xi) + g(zeta) with g(0) = 0 and no nondegeneracy asked of g -- proved here as exists_gromoll_meyer_splitting at C-infinity regularity. Second, print's Lemma 2 at its stated generality, the two-sided sublevel volume of an arbitrary nondegenerate indefinite quadratic form in n >= 3 variables perturbed by an arbitrary continuous germ vanishing at the origin, proved here as hasLocalVolumeOrder_abs_matrixQuadForm_add_germ. This is a claim about a pinned corpus, not a claim that the mathematics is new: both are classical, and the second consumes Mathlib's own Sylvester law of inertia, which is present.",
    "asserted_in": [
-    "docs/releases/unreleased.md, the singular-learning section",
+    "docs/releases/unreleased.md, the singular-learning section of the draft as it stood at commit 0698d27b, before the v0.9.0 release reset it",
     "registry.yaml, MAIS issue #12 solution record",
     "conjectures.yaml, CONJ-028 prior_art"
    ],
