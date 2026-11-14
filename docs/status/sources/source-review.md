@@ -5,7 +5,7 @@ Every catalogue entry whose role is `work` was evaluated by the rate-limited
 refresh recorded in
 [`source-review.json`](../../provenance/source-review.json). This snapshot uses Crossref for DOI records; arXiv's API plus its abstract page for arXiv records; and the linked public HTML record otherwise; it makes no legal determination about reuse.
 
-Snapshot generated **2026-10-01T19:49:26Z** · **132** works evaluated. Full refreshes reuse compatible records within the cache-age window; selective refreshes intentionally preserve compatible non-target records. `checked_on` is the timestamp of the individual source query.
+Snapshot generated **2026-11-13T23:37:31Z** · **132** works evaluated. Full refreshes reuse compatible records within the cache-age window; selective refreshes intentionally preserve compatible non-target records. `checked_on` is the timestamp of the individual source query.
 
 **Cited material** is the locator currently recorded by the atlas. **Lookup record** is the public record used for the automatic comparison, so both versions are one click away in every review table. Compared atlas and retrieved values are adjacent.
 

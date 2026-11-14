@@ -145,7 +145,9 @@ Reviewed but deliberately not graduated:
 
 ## Releases
 
-- [v0.7 release](releases/v0.7.md) — current published release (`0.7.0`, tagged)
+- [v0.9 release](releases/v0.9.md) — current published release (`0.9.0`, tagged)
+- [v0.8 release](releases/v0.8.md) — historical (`0.8.0`, tagged)
+- [v0.7 release](releases/v0.7.md) — historical (`0.7.0`, tagged)
 - [v0.6 release](releases/v0.6.md) — historical (`0.6.0`, tagged)
 - [v0.5.1 release](releases/v0.5.1.md) — historical (`0.5.1`, tagged)
 - [v0.5 release](releases/v0.5.md) — historical (`0.5.0`, tagged)
