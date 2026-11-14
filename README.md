@@ -23,7 +23,7 @@ mathematics to AI systems.
   for AI safety mathematics*](https://doi.org/10.5281/zenodo.23088951) (preprint,
   2026; DOI for all versions)
 - **Software:** [DOI for all versions](https://doi.org/10.5281/zenodo.21483033);
-  latest release v0.9.0
+  latest release v0.9.0, [DOI](https://doi.org/10.5281/zenodo.24210089)
 - **Start:** [Open in Codespaces](https://codespaces.new/mbrcic/ai-safety-formalization-atlas?quickstart=1)
   — the toolchain provisions itself and one example compiles in minutes — then
   pick a [first task](docs/guide/contributor-tasks.md#open-now). Prefer local?
