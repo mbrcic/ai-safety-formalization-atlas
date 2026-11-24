@@ -369,4 +369,79 @@ public theorem perm_differs_at_top (q : Station) (hq : q ≠ 8) :
     trains.Perm eta1' noCrash q ∧ ¬ trains.Perm Norm.top noCrash q :=
   ⟨perm_noCrash q hq, not_perm_top_noCrash q⟩
 
+/-! ## Print's remark on Proposition 2: the converse needs non-triviality
+
+Page 10 of print's remark: *"Suppose that `η'` is such that it forbids every
+action for every agent `i` in a particular state `q`. Then, for any `C`, no
+strategy `σ_C` exists that is `η'`-conformant ... we would have `η ≼ η'` for any
+`η`, which obviously need not be the case."* The system below is print's
+scenario: one agent, two states, every action available everywhere, and `η'`
+forbids every action at `true`. -/
+
+/-- **A two-state system with one agent** whose two actions are available
+everywhere; the agent's action is the next state. -/
+@[expose] public def switchAATS : AATS Bool Unit (fun _ => Bool) Unit where
+  init := false
+  precond := fun _ _ => Set.univ
+  step := fun _ j => some (j ())
+  interp := fun _ => ∅
+  nontrivial := fun _ _ => ⟨false, Set.mem_univ _⟩
+  consistent := fun _ _ => by simp
+
+/-- **Print's `η'`**: every action is forbidden at state `true`. -/
+@[expose] public def forbidAtTrue : Norm Bool Unit (fun _ => Bool) := fun _ _ => {true}
+
+/-- **An `η` that `η'` does not dominate**: every action is forbidden at `false`. -/
+@[expose] public def forbidAtFalse : Norm Bool Unit (fun _ => Bool) := fun _ _ => {false}
+
+/--
+**The converse of Proposition 2 fails without non-triviality**, at print's own
+scenario. Both norms respect nature, `η'` is not non-trivial, every
+`η'`-conformant strategy is `η`-conformant, one agent at a time and profile by
+profile, and still `η ⋠ η'`. So the hypothesis `hnt` of
+`AATS.le_of_confProfile_singleton` cannot be dropped.
+-/
+public theorem forbidAtTrue_converse_fails :
+    Norm.RespectsNature switchAATS forbidAtTrue ∧
+    Norm.RespectsNature switchAATS forbidAtFalse ∧
+    ¬ Norm.IsNontrivial forbidAtTrue ∧
+    (∀ (i : Unit) (σ : switchAATS.Strategy i),
+      switchAATS.Conf forbidAtTrue σ → switchAATS.Conf forbidAtFalse σ) ∧
+    (∀ (C : Set Unit) (σ : switchAATS.Profile C),
+      switchAATS.ConfProfile forbidAtTrue σ → switchAATS.ConfProfile forbidAtFalse σ) ∧
+    ¬ Norm.Le forbidAtFalse forbidAtTrue := by
+  refine ⟨fun _ _ q hq => absurd (Set.mem_univ q) hq,
+    fun _ _ q hq => absurd (Set.mem_univ q) hq, fun h => ?_,
+    fun _ σ hσ => absurd rfl (hσ true), fun _ σ hσ i => absurd rfl (hσ i true), fun h => ?_⟩
+  · obtain ⟨j, hj⟩ := h true
+    exact hj () rfl
+  · have : false ∈ forbidAtTrue () true := h () true rfl
+    simp [forbidAtTrue] at this
+
+/-! ## Print's page-410 chain on the train system -/
+
+/-- **Print's `A φ` at the trivially true objective**: the empty coalition, under
+`η_⊥`, keeps every computation in `Set.univ`. -/
+public theorem sat_bot_empty_univ (q : Station) :
+    trains.Sat (Norm.bot trains) ∅ Set.univ q :=
+  ⟨fun i => absurd i.2 (Set.notMem_empty _), fun i => absurd i.2 (Set.notMem_empty _),
+    fun _ _ => Set.mem_univ _⟩
+
+/-- **`A φ → O_η φ`**: so `Set.univ` is obligatory under the strict norm `η₂`. -/
+public theorem oblig_eta2_univ (q : Station) : trains.Oblig eta2 Set.univ q :=
+  AATS.oblig_of_sat_bot_empty trains (sat_bot_empty_univ q)
+
+/-- **`O_η φ → P_η φ`** at `η₂`, which respects nature and is non-trivial. -/
+example (q : Station) : trains.Perm eta2 Set.univ q :=
+  AATS.perm_of_oblig trains respectsNature_eta2 isNontrivial_eta2 (oblig_eta2_univ q)
+
+/-- The grand coalition's computation exists, at every state. -/
+example (q : Station) : (trains.comp bothIdle q).Nonempty :=
+  AATS.comp_univ_nonempty trains bothIdle q
+
+/-- And it is a computation of the empty coalition's profile. -/
+example (q : Station) (σ₀ : trains.Profile (∅ : Set Train)) :
+    trains.comp bothIdle q ⊆ trains.comp σ₀ q :=
+  AATS.comp_subset_comp_empty trains bothIdle σ₀ q
+
 end AISafetyAtlas.Examples.Sovereignty

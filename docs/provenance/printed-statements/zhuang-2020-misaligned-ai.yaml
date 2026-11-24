@@ -1,0 +1,174 @@
+source:
+  citation: >-
+    Simon Zhuang and Dylan Hadfield-Menell, "Consequences of Misaligned AI", 34th
+    Conference on Neural Information Processing Systems (NeurIPS 2020), Vancouver,
+    Canada. (Read from PDF p. 1: title block and footer.)
+  file: zhuang-hadfield-menell-published-neurips-2020-consequences-of-misaligned-ai.pdf
+  sha256: bb5c7b5d179c6d63a777ef946c0449adeffc036036883280248ce0e50ae32710
+  page_offset: 0
+  standing: |
+    Roles (p. 3, footnote 1): ``We use ``human" and ``robot" to refer to any
+    designer and any AI agent, respectively, in our model.''
+
+    Feasible set, constraint function, lower bounds (§2.1.1, p. 3): row S18-R01
+    (zhm-attribute-space). True utility on all of $\mathbb{R}^L$, continuous and
+    strictly increasing in each attribute: row S18-R02 (zhm-utility).
+
+    Instance (p. 3), see zhm-instance.
+
+    Black box (§2.1.2, p. 4): ``The human's task is to design their proxy metric so
+    that the robot will cause increases in human utility. We treat the robot as a
+    black box: beyond increasing proxy utility, the human has no idea how the robot
+    will behave. We can make claims for all optimizations sequences, such as
+    guaranteed increases or decreases in utility, or the worst-case optimization
+    sequence, yielding lower bounds on utility.''
+
+    Silent (§2.1, pp. 3--4): no lower bound on $J$ (a non-empty proxy set is not
+    required: only $\mathcal{J} \subset \{1, \ldots, L\}$ and
+    $J = |\mathcal{J}| \le J^{\max} < L$); no continuity or monotonicity is stated
+    for the proxy utility $\tilde{U}$.
+
+definitions:
+  - id: zhm-instance
+    label: instance of the problem (§2.1.1)
+    pdf_page: 3
+    book_page: 3
+    latex: |
+      Each tuple $(\mathcal{S}, U, s^{(0)})$ defines an instance of the problem.
+      The attributes represent the aspects of the world that the human cares about.
+      We associate higher values with more desirable states of the world. However,
+      $C$ represents a physical constraint that limits the set of realizable
+      states. This forces an agent to make tradeoffs between these attributes.
+
+      The human seeks to maximize utility, but they cannot change the state of the
+      world on their own. Instead, they must work through the robot.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+statements:
+  - id: zhm-attribute-space
+    audit_row: S18-R01
+    locator: §2.1.1 attribute space
+    pdf_page: 3
+    book_page: 3
+    label: Attribute Space (§2.1.1 Human Model)
+    latex: |
+      \textbf{Attribute Space} Let \emph{attribute space}
+      $\mathcal{S} \subset \mathbb{R}^L$ denote the set of feasible states of the
+      world, with $L$ attributes that define the support of the human's utility
+      function. The world starts in \emph{initial state}
+      $s^{(0)} \in \mathcal{S}$. We assume that $\mathcal{S}$ is closed, and
+      $\mathcal{S}$ can be written as $\{s \in \mathbb{R}^L : C(s) \le 0\}$ where
+      \emph{constraint function} $C : \mathbb{R}^L \to \mathbb{R}$ is a continuous
+      function strictly increasing in each attribute. Furthermore, each attribute
+      is bounded below at $b_i$.
+    uses: []
+    note: >-
+      "bounded below at $b_i$" is not printed as a condition on $\mathcal{S}$ or on
+      $\mathbb{R}^L$ explicitly; $\{s : C(s) \le 0\}$ with $C$ strictly increasing
+      is unbounded below unless the bound $b_i$ is read as an extra restriction of
+      $\mathcal{S}$.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind) + Grok (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: zhm-utility
+    audit_row: S18-R02
+    locator: §2.1.1 utility
+    pdf_page: 3
+    book_page: 3
+    label: Utility Function (§2.1.1 Human Model)
+    latex: |
+      \textbf{Utility Function} The human has a \emph{utility function}
+      $U : \mathbb{R}^L \to \mathbb{R}$ that represents the utility of a (possibly
+      infeasible) state $s \in \mathbb{R}^L$. This represents the human's
+      preference over states of the world. We assume that $U$ is continuous and
+      strictly increasing in each attribute. The human seeks to maximize $U(s)$
+      subject to $s \in \mathcal{S}$.
+    uses: [zhm-attribute-space]
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind) + Grok (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: zhm-proxy
+    audit_row: S18-R03
+    locator: §2.1.2 proxy attributes and proxy utility
+    pdf_page: 4
+    book_page: 4
+    label: Proxy Attributes; Proxy Utility Function (§2.1.2 Robot Model)
+    latex: |
+      \textbf{Proxy Attributes} The human chooses a set of \emph{proxy attributes}
+      $\mathcal{J} \subset \{1, ..., L\}$ of relevant attributes to give to the
+      robot. Let $J^{\max} < L$ be the maximum possible number of proxy
+      attributes, so $J = |\mathcal{J}| \le J^{\max}$. For a given state
+      $s \in \mathcal{S}$, define $s_{\mathcal{J}} = (s_j)_{j \in \mathcal{J}}$.
+      Furthermore, we define the set of \emph{unmentioned attributes}
+      $\mathcal{K} = \{1, ..., L\} \backslash \mathcal{J}$ and
+      $s_{\mathcal{K}} = (s_k)_{k \in \mathcal{K}}$.
+
+      \textbf{Proxy Utility Function} The robot is also given a \emph{proxy utility
+      function} $\tilde{U} : \mathbb{R}^J \to \mathbb{R}$, which represents an
+      objective function for the robot to optimize, which takes in only the value
+      of proxy attributes as input.
+    context: |
+      Section intro (p. 4): "The human endows the robot with a set of proxy
+      attributes and a proxy utility function as the objective function to
+      optimize. The robot provides incremental improvement to the world on the
+      given metric, constrained only by the feasibility requirement of the
+      subsequent states of the world. In particular, the robot has no inherent
+      connection to the human's utility function."
+    uses: [zhm-attribute-space]
+    note: >-
+      Printed with calligraphic $\mathcal{J}$, $\mathcal{K}$ for the index sets and
+      italic $J$ for $|\mathcal{J}|$; the atlas quotation writes $J$ for the set.
+      $s_{\mathcal{J}}$ is defined only for $s \in \mathcal{S}$.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 200}
+    checked: {by: 'Codex (blind) + Grok (blind) + Codex (anchored re-read); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: zhm-incremental-optimization
+    audit_row: S18-R04
+    locator: §2.1.2 incremental optimization
+    pdf_page: 4
+    book_page: 4
+    label: Incremental Optimization (§2.1.2 Robot Model)
+    latex: |
+      \textbf{Incremental Optimization} The robot incrementally optimizes the world
+      for its proxy utility function. We model this as a \emph{rate function}, a
+      continuous mapping from $\mathbb{R}^+$ to $\mathbb{R}^L$, notated as
+      $t \mapsto f(t)$, where we refer to $t$ as \emph{time}. The rate function is
+      essentially the derivative of $s$ with respect to time. The state at each
+      $t$ is $s^{(t)} = s^{(0)} + \int_0^t f(u)du$. We denote the function
+      $t \mapsto s^{(t)}$ to be the \emph{optimization sequence}. We require that
+      the entire sequence be feasible, i.e. that $s^{(t)} \in \mathcal{S}$. for
+      all $t \in [0, \infty)$
+    uses: [zhm-attribute-space, zhm-proxy]
+    note: >-
+      The stray period after "$s^{(t)} \in \mathcal{S}$" and the missing final
+      period are printed. The domain is written $\mathbb{R}^+$ while feasibility is
+      required on $[0, \infty)$.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 200}
+    checked: {by: 'Codex (blind) + Grok (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: zhm-complete-optimization
+    audit_row: S18-R05
+    locator: §2.1.2 Complete Optimization
+    pdf_page: 4
+    book_page: 4
+    label: Complete Optimization (§2.1.2 Robot Model)
+    latex: |
+      \textbf{Complete Optimization} Furthermore, we assume that
+      $\limsup_{t \to \infty} \tilde{U}(s^{(t)}_{\mathcal{J}})
+       = \sup_{s \in \mathcal{S}} \tilde{U}(s_{\mathcal{J}})$. If possible, we
+      also require that
+      $\lim_{t \to \infty} \tilde{U}(s^{(t)}_{\mathcal{J}})
+       = \sup_{s \in \mathcal{S}} \tilde{U}(s_{\mathcal{J}})$. Essentially, this
+      states that the robot will eventually reach the optimal state for proxy
+      utility (if the limit is finite) or will increase proxy utility to
+      arbitrarily large values.
+    uses: [zhm-attribute-space, zhm-proxy, zhm-incremental-optimization]
+    note: >-
+      Printed with the restriction $s_{\mathcal{J}}$ on both sides; the atlas
+      quotation ("limsup Ũ(s⁽ᵗ⁾) = sup Ũ(s)") drops the subscript. "If possible"
+      leaves the lim condition's status unspecified.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 200}
+    checked: {by: 'Codex (blind) + Grok (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+excerpts: []

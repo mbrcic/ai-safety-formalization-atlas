@@ -109,6 +109,51 @@ public theorem isTrajectoryOn_univ_iff {A : Matrix (Fin n) (Fin n) ℂ}
     (x : ℝ → (Fin n → ℂ)) : ℝ → (Fin q → ℂ) :=
   fun t => C *ᵥ x t
 
+/-- Klamka (1972), Introduction, p. 725: the state equation over a time field `K`
+and a normed coefficient algebra `F`, with the ambient derivative at each time in `s`. -/
+@[expose] public def IsTrajectoryOnOver {K F : Type*} [NontriviallyNormedField K]
+    [NormedRing F] [NormedAlgebra K F] (A : Matrix (Fin n) (Fin n) F)
+    (B : Matrix (Fin n) (Fin p) F) (s : Set K) (x : K → (Fin n → F))
+    (u : K → (Fin p → F)) : Prop :=
+  ∀ t ∈ s, HasDerivAt x (A *ᵥ x t + B *ᵥ u t) t
+
+/-- Klamka (1972), Introduction, p. 725: the state equation using derivatives
+within the time domain `s`. -/
+@[expose] public def IsTrajectoryWithin {K F : Type*} [NontriviallyNormedField K]
+    [NormedRing F] [NormedAlgebra K F] (A : Matrix (Fin n) (Fin n) F)
+    (B : Matrix (Fin n) (Fin p) F) (s : Set K) (x : K → (Fin n → F))
+    (u : K → (Fin p → F)) : Prop :=
+  ∀ t ∈ s, HasDerivWithinAt x (A *ᵥ x t + B *ᵥ u t) s t
+
+/-- Klamka (1972), Introduction, p. 725: the output equation `y(t) = Cx(t)`
+over any time carrier and coefficient semiring. -/
+@[expose] public def outputSignalOver {K F : Type*} [Semiring F]
+    (C : Matrix (Fin q) (Fin n) F) (x : K → (Fin n → F)) : K → (Fin q → F) :=
+  fun t ↦ C *ᵥ x t
+
+/-- For Klamka's state equation (1972, Introduction, p. 725), the ambient and
+within-domain derivatives give equivalent trajectory predicates on an open time domain. -/
+public theorem isTrajectoryWithin_iff_isTrajectoryOnOver {K F : Type*}
+    [NontriviallyNormedField K] [NormedRing F] [NormedAlgebra K F]
+    {A : Matrix (Fin n) (Fin n) F} {B : Matrix (Fin n) (Fin p) F}
+    {s : Set K} {x : K → (Fin n → F)} {u : K → (Fin p → F)} (hs : IsOpen s) :
+    IsTrajectoryWithin A B s x u ↔ IsTrajectoryOnOver A B s x u :=
+  ⟨fun h t ht ↦ (h t ht).hasDerivAt (hs.mem_nhds ht), fun h t ht ↦ (h t ht).hasDerivWithinAt⟩
+
+/-- Klamka's state equation (1972, Introduction, p. 725) at real time and
+complex coefficients recovers the existing trajectory predicate on every set of times. -/
+public theorem isTrajectoryOnOver_real_complex_iff (A : Matrix (Fin n) (Fin n) ℂ)
+    (B : Matrix (Fin n) (Fin p) ℂ) (s : Set ℝ) (x : ℝ → (Fin n → ℂ))
+    (u : ℝ → (Fin p → ℂ)) :
+    IsTrajectoryOnOver A B s x u ↔ IsTrajectoryOn A B s x u :=
+  Iff.rfl
+
+/-- Klamka's output equation (1972, Introduction, p. 725) at real time and
+complex coefficients recovers the existing output signal. -/
+public theorem outputSignalOver_real_complex (C : Matrix (Fin q) (Fin n) ℂ)
+    (x : ℝ → (Fin n → ℂ)) : outputSignalOver C x = outputSignal C x :=
+  rfl
+
 /--
 **Complete state observability, as the property rather than as the criterion.**
 The output signal determines the state the system started in.

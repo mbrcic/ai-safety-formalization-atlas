@@ -179,6 +179,23 @@ public theorem model_marginal_insert_parents :
           {true} witness :=
   Causal.Model.marginal_insert_parents categoricalModel true witness
 
+/-- Pearl's Property 2 in the finite layer: setting `true`'s parents leaves it its
+own mechanism. -/
+public theorem model_marginal_singleton_do_parents :
+    categoricalModel.marginal
+        (Causal.hardInterventionProfile (categoricalModel.parents true ∪ ∅) witness)
+        {true} witness = categoricalModel.cpt true (witness true) witness :=
+  Causal.Model.marginal_singleton_do_parents categoricalModel
+    (c := true) (extra := ∅) (Finset.notMem_empty true) witness
+
+/-- Constraining a marginal at an already-forced variable changes nothing. -/
+public theorem model_marginal_union_targets :
+    categoricalModel.marginal (Causal.hardInterventionProfile {true} witness)
+        ({false} ∪ {true}) witness
+      = categoricalModel.marginal (Causal.hardInterventionProfile {true} witness)
+          {false} witness :=
+  Causal.Model.marginal_union_targets categoricalModel {true} witness subset_rfl
+
 /-- An empty hard intervention is the observational profile, and the difference
 operator is linear in a scalar. -/
 public theorem model_profile_and_delta :

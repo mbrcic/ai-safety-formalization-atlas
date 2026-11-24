@@ -173,6 +173,24 @@ public theorem frozenC_rootMultiplicity :
   rw [hchar]
   simpa using Polynomial.rootMultiplicity_X_sub_C_pow (1 : ℂ) 2
 
+/-- **Print's `λᵢ` at the frozen system**: one distinct eigenvalue, so `k = 1`,
+within print's `k ≤ n = 2` (`card_distinctEigenvalues_le`). -/
+public theorem frozenC_distinctEigenvalues : distinctEigenvalues frozenC = {1} := by
+  have hchar : frozenC.charpoly
+      = (Polynomial.X - Polynomial.C (1 : ℂ)) ^ 2 := by
+    rw [← charpoly_mulVecLin, frozenC, Matrix.mulVecLin_one]
+    rw [← Module.End.one_eq_id, LinearMap.charpoly_one]
+    congr 1
+    simp
+  rw [distinctEigenvalues, hchar, Polynomial.roots_pow, Polynomial.roots_X_sub_C]
+  simp
+
+/-- `mem_distinctEigenvalues_iff` at the frozen system: its one listed value is
+an eigenvalue of the map it induces. -/
+public theorem frozenC_hasEigenvalue_one :
+    Module.End.HasEigenvalue (Matrix.mulVecLin frozenC) 1 :=
+  (mem_distinctEigenvalues_iff frozenC 1).mp (by simp [frozenC_distinctEigenvalues])
+
 /-- **Print's test fires, at print's own quantities.** With `nᵢ = 2` and a
 stabilizing exponent of `1`, the ceiling is `2`, which exceeds the single input
 column. -/
@@ -332,5 +350,8 @@ public theorem frozenC_finrank_maxGenEigenspace_le :
       ≤ Module.End.maxGenEigenspaceIndex (Matrix.mulVecLin frozenC) 1 *
           Module.finrank ℂ (Module.End.eigenspace (Matrix.mulVecLin frozenC) 1) :=
   finrank_maxGenEigenspace_le_index_mul (Matrix.mulVecLin frozenC) 1
+
+/-- Print's `k ≤ n` at `frozenC`. -/
+example := AISafetyAtlas.LinearSystems.card_distinctEigenvalues_le frozenC
 
 end AISafetyAtlas.Examples.LinearSystems

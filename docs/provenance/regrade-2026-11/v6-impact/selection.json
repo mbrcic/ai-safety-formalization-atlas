@@ -1,0 +1,2197 @@
+{
+ "001": {
+  "decided_by": "majority",
+  "row_id": "S04-R08",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "002": {
+  "decided_by": "adjudication",
+  "row_id": "S20-R41",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "003": {
+  "decided_by": "majority",
+  "row_id": "S26-R03",
+  "scope": "Wider",
+  "tags": [
+   "carrier",
+   "definition"
+  ]
+ },
+ "007": {
+  "decided_by": "fix-w2+unanimous",
+  "row_id": "S16-R15",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "008": {
+  "decided_by": "majority",
+  "row_id": "S25-R09",
+  "scope": "Wider",
+  "tags": [
+   "carrier",
+   "argued"
+  ]
+ },
+ "009": {
+  "decided_by": "majority",
+  "row_id": "S05-R06",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "010": {
+  "decided_by": "fix-w4+unanimous+adversarial-r3",
+  "row_id": "S11-R03",
+  "scope": "Wider",
+  "tags": [
+   "carrier",
+   "proxy",
+   "definition"
+  ]
+ },
+ "011": {
+  "decided_by": "majority",
+  "row_id": "S04-R04",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "012": {
+  "decided_by": "fix-w4b+unanimous+ruling-2026-11-21",
+  "row_id": "S08-R07",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "013": {
+  "decided_by": "majority",
+  "row_id": "S27-R02",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "014": {
+  "decided_by": "majority+adversarial-r3",
+  "row_id": "S22-R08",
+  "scope": "Wider",
+  "tags": [
+   "reading"
+  ]
+ },
+ "015": {
+  "decided_by": "majority",
+  "row_id": "S28-R10",
+  "scope": "Wider",
+  "tags": [
+   "carrier",
+   "reading"
+  ]
+ },
+ "016": {
+  "decided_by": "fix-w6+split+adversarial-r3",
+  "row_id": "S20-R24",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "017": {
+  "decided_by": "majority",
+  "row_id": "S01-R02",
+  "scope": "Same",
+  "tags": [
+   "argued"
+  ]
+ },
+ "018": {
+  "decided_by": "fix-w7+split+wave-7",
+  "row_id": "S17-R07",
+  "scope": "Same",
+  "tags": [
+   "reading"
+  ]
+ },
+ "020": {
+  "decided_by": "fix-w3+unanimous",
+  "row_id": "S01-R04",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "021": {
+  "decided_by": "fix-w5+split+ruling-2026-11-21",
+  "row_id": "S20-R27",
+  "scope": "Wider",
+  "tags": [
+   "carrier",
+   "reading"
+  ]
+ },
+ "022": {
+  "decided_by": "majority",
+  "row_id": "S16-R01",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "023": {
+  "decided_by": "fix-w3+unanimous",
+  "row_id": "S16-R14",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "024": {
+  "decided_by": "majority",
+  "row_id": "S05-R08",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "026": {
+  "decided_by": "majority",
+  "row_id": "S05-R02",
+  "scope": "Wider",
+  "tags": [
+   "carrier",
+   "reading"
+  ]
+ },
+ "027": {
+  "decided_by": "majority",
+  "row_id": "S09-R06",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "028": {
+  "decided_by": "fix-w4+unanimous+ruling-2026-11-21",
+  "row_id": "S11-R01",
+  "scope": "Wider",
+  "tags": [
+   "carrier",
+   "reading",
+   "proxy",
+   "definition"
+  ]
+ },
+ "029": {
+  "decided_by": "fix-w3+adjudication+adversarial-r3",
+  "row_id": "S03-R10",
+  "scope": "Wider",
+  "tags": [
+   "carrier",
+   "reading"
+  ]
+ },
+ "030": {
+  "decided_by": "majority",
+  "row_id": "S06-R02",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "031": {
+  "decided_by": "majority+adversarial-r3",
+  "row_id": "S14-R01",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "033": {
+  "decided_by": "majority",
+  "row_id": "S12-R03",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "034": {
+  "decided_by": "majority",
+  "row_id": "S21-R19",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "035": {
+  "decided_by": "fix-w5+split+ruling-2026-11-21",
+  "row_id": "S15-R06",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "036": {
+  "decided_by": "majority",
+  "row_id": "S21-R13",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "037": {
+  "decided_by": "majority+adversarial-r3",
+  "row_id": "S19-R06",
+  "scope": "Wider",
+  "tags": [
+   "carrier",
+   "reading"
+  ]
+ },
+ "038": {
+  "decided_by": "majority",
+  "row_id": "S20-R37",
+  "scope": "Wider",
+  "tags": [
+   "carrier",
+   "reading"
+  ]
+ },
+ "039": {
+  "decided_by": "majority",
+  "row_id": "S23-R01",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "040": {
+  "decided_by": "majority",
+  "row_id": "S09-R09",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "041": {
+  "decided_by": "fix-w2+unanimous",
+  "row_id": "S23-R05",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "042": {
+  "decided_by": "fix-w2+unanimous",
+  "row_id": "S09-R11",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "043": {
+  "decided_by": "majority",
+  "row_id": "S26-R05",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "044": {
+  "decided_by": "adjudication",
+  "row_id": "S13-R12",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "045": {
+  "decided_by": "fix-w3+unanimous",
+  "row_id": "S02-R05",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "046": {
+  "decided_by": "adjudication+repair",
+  "row_id": "S09-R14",
+  "scope": "Wider",
+  "tags": [
+   "reading",
+   "argued",
+   "proxy"
+  ]
+ },
+ "047": {
+  "decided_by": "majority",
+  "row_id": "S22-R07",
+  "scope": "Wider",
+  "tags": [
+   "reading"
+  ]
+ },
+ "048": {
+  "decided_by": "fix-w6+split+adversarial-r3",
+  "row_id": "S20-R21",
+  "scope": "Wider",
+  "tags": [
+   "carrier",
+   "reading",
+   "definition"
+  ]
+ },
+ "050": {
+  "decided_by": "fix-w7+split+wave-7",
+  "row_id": "S26-R01",
+  "scope": "Wider",
+  "tags": [
+   "carrier",
+   "reading",
+   "argued",
+   "definition"
+  ]
+ },
+ "051": {
+  "decided_by": "adjudication",
+  "row_id": "S17-R03",
+  "scope": "Wider",
+  "tags": [
+   "reading"
+  ]
+ },
+ "052": {
+  "decided_by": "majority",
+  "row_id": "S12-R07",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "053": {
+  "decided_by": "majority",
+  "row_id": "S27-R22",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "054": {
+  "decided_by": "majority",
+  "row_id": "S21-R03",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "055": {
+  "decided_by": "majority",
+  "row_id": "S27-R13",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "060": {
+  "decided_by": "fix-w6+split+adversarial-r3",
+  "row_id": "S24-R02",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "061": {
+  "decided_by": "majority",
+  "row_id": "S04-R03",
+  "scope": "Wider",
+  "tags": [
+   "carrier",
+   "argued"
+  ]
+ },
+ "062": {
+  "decided_by": "adjudication",
+  "row_id": "S06-R06",
+  "scope": "Wider",
+  "tags": [
+   "carrier",
+   "argued"
+  ]
+ },
+ "063": {
+  "decided_by": "adjudication+adversarial-r3",
+  "row_id": "S08-R01",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "064": {
+  "decided_by": "majority+adversarial-r3",
+  "row_id": "S06-R09",
+  "scope": "Wider",
+  "tags": [
+   "carrier",
+   "reading"
+  ]
+ },
+ "065": {
+  "decided_by": "fix-w6+split+adversarial-r3",
+  "row_id": "S21-R10",
+  "scope": "Wider",
+  "tags": [
+   "carrier",
+   "reading"
+  ]
+ },
+ "067": {
+  "decided_by": "majority",
+  "row_id": "S16-R02",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "068": {
+  "decided_by": "majority",
+  "row_id": "S12-R13",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "069": {
+  "decided_by": "majority",
+  "row_id": "S27-R04",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "070": {
+  "decided_by": "adjudication+rule",
+  "row_id": "S02-R08",
+  "scope": "Wider",
+  "tags": [
+   "reading"
+  ]
+ },
+ "071": {
+  "decided_by": "majority+adversarial-r3",
+  "row_id": "S25-R15",
+  "scope": "Wider",
+  "tags": [
+   "argued"
+  ]
+ },
+ "072": {
+  "decided_by": "majority+adversarial-r3",
+  "row_id": "S14-R05",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "073": {
+  "decided_by": "fix-w4b+adjudication+rule+ruling-2026-11-21",
+  "row_id": "S13-R01",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "075": {
+  "decided_by": "majority",
+  "row_id": "S20-R07",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "076": {
+  "decided_by": "fix-w4+adjudication",
+  "row_id": "S20-R09",
+  "scope": "Wider",
+  "tags": [
+   "carrier",
+   "reading"
+  ]
+ },
+ "077": {
+  "decided_by": "majority",
+  "row_id": "S27-R03",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "079": {
+  "decided_by": "majority",
+  "row_id": "S21-R11",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "080": {
+  "decided_by": "fix-w4+unanimous",
+  "row_id": "S09-R10",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "081": {
+  "decided_by": "majority",
+  "row_id": "S23-R02",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "082": {
+  "decided_by": "majority",
+  "row_id": "S25-R03",
+  "scope": "Wider",
+  "tags": [
+   "carrier",
+   "argued"
+  ]
+ },
+ "084": {
+  "decided_by": "majority+adversarial-r3",
+  "row_id": "S05-R07",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "086": {
+  "decided_by": "majority",
+  "row_id": "S03-R02",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "087": {
+  "decided_by": "fix-w5+unanimous+ruling-2026-11-21",
+  "row_id": "S11-R04",
+  "scope": "Wider",
+  "tags": [
+   "definition"
+  ]
+ },
+ "088": {
+  "decided_by": "adjudication+adversarial-r3",
+  "row_id": "S11-R06",
+  "scope": "Same",
+  "tags": [
+   "definition"
+  ]
+ },
+ "089": {
+  "decided_by": "fix-w7+split+wave-7",
+  "row_id": "S04-R06",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "090": {
+  "decided_by": "fix-w4b+adjudication+ruling-2026-11-21",
+  "row_id": "S07-R01",
+  "scope": "Wider",
+  "tags": [
+   "carrier",
+   "reading",
+   "provisional",
+   "argued"
+  ]
+ },
+ "092": {
+  "decided_by": "majority",
+  "row_id": "S21-R17",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "093": {
+  "decided_by": "fix-w1+unanimous",
+  "row_id": "S21-R08",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "094": {
+  "decided_by": "majority",
+  "row_id": "S20-R08",
+  "scope": "Wider",
+  "tags": [
+   "carrier",
+   "definition"
+  ]
+ },
+ "095": {
+  "decided_by": "fix-w4+adjudication",
+  "row_id": "S13-R05",
+  "scope": "Wider",
+  "tags": [
+   "provisional"
+  ]
+ },
+ "098": {
+  "decided_by": "majority",
+  "row_id": "S12-R10",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "099": {
+  "decided_by": "majority+adversarial-r3",
+  "row_id": "S15-R03",
+  "scope": "Wider",
+  "tags": [
+   "carrier",
+   "reading"
+  ]
+ },
+ "100": {
+  "decided_by": "majority",
+  "row_id": "S23-R09",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "101": {
+  "decided_by": "majority",
+  "row_id": "S27-R11",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "102": {
+  "decided_by": "adjudication",
+  "row_id": "S22-R16",
+  "scope": "Same",
+  "tags": [
+   "reading"
+  ]
+ },
+ "103": {
+  "decided_by": "fix-w2+unanimous",
+  "row_id": "S21-R16",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "104": {
+  "decided_by": "majority",
+  "row_id": "S23-R11",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "106": {
+  "decided_by": "fix-w6+split+adversarial-r3",
+  "row_id": "S20-R18",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "107": {
+  "decided_by": "majority",
+  "row_id": "S21-R15",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "108": {
+  "decided_by": "adjudication",
+  "row_id": "S06-R03",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "109": {
+  "decided_by": "fix-w2+adjudication+ruling-2026-11-21",
+  "row_id": "S13-R11",
+  "scope": "Wider",
+  "tags": [
+   "carrier",
+   "proxy",
+   "definition"
+  ]
+ },
+ "110": {
+  "decided_by": "majority",
+  "row_id": "S14-R11",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "111": {
+  "decided_by": "majority",
+  "row_id": "S20-R05",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "112": {
+  "decided_by": "fix-w1+unanimous",
+  "row_id": "S21-R06",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "113": {
+  "decided_by": "majority+adversarial-r3",
+  "row_id": "S08-R08",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "114": {
+  "decided_by": "majority",
+  "row_id": "S21-R22",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "115": {
+  "decided_by": "fix-w3+unanimous",
+  "row_id": "S15-R02",
+  "scope": "Wider",
+  "tags": [
+   "reading",
+   "definition"
+  ]
+ },
+ "116": {
+  "decided_by": "fix-w4+unanimous",
+  "row_id": "S22-R03",
+  "scope": "Same",
+  "tags": [
+   "reading"
+  ]
+ },
+ "117": {
+  "decided_by": "fix-w4b+unanimous+ruling-2026-11-21",
+  "row_id": "S08-R04",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "118": {
+  "decided_by": "fix-w1+unanimous",
+  "row_id": "S17-R09",
+  "scope": "Same",
+  "tags": [
+   "reading"
+  ]
+ },
+ "119": {
+  "decided_by": "majority",
+  "row_id": "S12-R14",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "120": {
+  "decided_by": "fix-w4+unanimous",
+  "row_id": "S10-R17",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "121": {
+  "decided_by": "fix-w6+split+adversarial-r3",
+  "row_id": "S10-R03",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "122": {
+  "decided_by": "fix-w3+unanimous",
+  "row_id": "S01-R07",
+  "scope": "Same",
+  "tags": [
+   "argued"
+  ]
+ },
+ "123": {
+  "decided_by": "fix-w2+unanimous",
+  "row_id": "S18-R04",
+  "scope": "Wider",
+  "tags": [
+   "reading"
+  ]
+ },
+ "124": {
+  "decided_by": "fix-w4b+adjudication",
+  "row_id": "S08-R02",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "125": {
+  "decided_by": "fix-w6+split+adversarial-r3",
+  "row_id": "S05-R14",
+  "scope": "Wider",
+  "tags": [
+   "carrier",
+   "reading"
+  ]
+ },
+ "126": {
+  "decided_by": "majority",
+  "row_id": "S04-R14",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "127": {
+  "decided_by": "majority",
+  "row_id": "S20-R06",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "129": {
+  "decided_by": "majority",
+  "row_id": "S22-R02",
+  "scope": "Wider",
+  "tags": [
+   "carrier",
+   "reading"
+  ]
+ },
+ "130": {
+  "decided_by": "fix-w4+adjudication",
+  "row_id": "S13-R03",
+  "scope": "Wider",
+  "tags": [
+   "carrier",
+   "reading",
+   "definition"
+  ]
+ },
+ "131": {
+  "decided_by": "fix-w5+split+ruling-2026-11-21",
+  "row_id": "S11-R10",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "132": {
+  "decided_by": "majority",
+  "row_id": "S12-R11",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "133": {
+  "decided_by": "fix-w6+split+adversarial-r3",
+  "row_id": "S20-R36",
+  "scope": "Wider",
+  "tags": [
+   "carrier",
+   "reading"
+  ]
+ },
+ "134": {
+  "decided_by": "majority",
+  "row_id": "S27-R12",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "136": {
+  "decided_by": "majority",
+  "row_id": "S16-R08",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "137": {
+  "decided_by": "fix-w3+adjudication",
+  "row_id": "S02-R06",
+  "scope": "Same",
+  "tags": [
+   "reading",
+   "argued"
+  ]
+ },
+ "138": {
+  "decided_by": "fix-w1+unanimous",
+  "row_id": "S21-R09",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "139": {
+  "decided_by": "fix-w4+unanimous",
+  "row_id": "S21-R21",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "140": {
+  "decided_by": "fix-w3+unanimous",
+  "row_id": "S16-R16",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "142": {
+  "decided_by": "majority+adversarial-r3",
+  "row_id": "S25-R13",
+  "scope": "Wider",
+  "tags": [
+   "argued"
+  ]
+ },
+ "143": {
+  "decided_by": "majority",
+  "row_id": "S04-R12",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "144": {
+  "decided_by": "majority",
+  "row_id": "S27-R09",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "145": {
+  "decided_by": "majority",
+  "row_id": "S27-R23",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "146": {
+  "decided_by": "majority",
+  "row_id": "S20-R16",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "148": {
+  "decided_by": "fix-w3+adjudication",
+  "row_id": "S07-R03",
+  "scope": "Wider",
+  "tags": [
+   "carrier",
+   "reading",
+   "definition"
+  ]
+ },
+ "149": {
+  "decided_by": "fix-w1+unanimous",
+  "row_id": "S06-R05",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "150": {
+  "decided_by": "majority",
+  "row_id": "S16-R12",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "151": {
+  "decided_by": "fix-w3+adjudication",
+  "row_id": "S02-R03",
+  "scope": "Same",
+  "tags": [
+   "reading",
+   "argued"
+  ]
+ },
+ "152": {
+  "decided_by": "fix-w6+split+adversarial-r3",
+  "row_id": "S20-R15",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "153": {
+  "decided_by": "fix-w6+split+adversarial-r3",
+  "row_id": "S20-R22",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "154": {
+  "decided_by": "majority",
+  "row_id": "S12-R09",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "155": {
+  "decided_by": "majority",
+  "row_id": "S03-R06",
+  "scope": "Wider",
+  "tags": [
+   "reading"
+  ]
+ },
+ "156": {
+  "decided_by": "fix-w1+unanimous",
+  "row_id": "S22-R05",
+  "scope": "Wider",
+  "tags": [
+   "reading",
+   "definition"
+  ]
+ },
+ "157": {
+  "decided_by": "majority",
+  "row_id": "S23-R12",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "158": {
+  "decided_by": "fix-w3+unanimous",
+  "row_id": "S01-R03",
+  "scope": "Wider",
+  "tags": [
+   "carrier",
+   "argued"
+  ]
+ },
+ "160": {
+  "decided_by": "fix-w4+unanimous+ruling-2026-11-21",
+  "row_id": "S11-R08",
+  "scope": "Wider",
+  "tags": [
+   "carrier",
+   "reading",
+   "provisional",
+   "proxy"
+  ]
+ },
+ "161": {
+  "decided_by": "adjudication",
+  "row_id": "S18-R01",
+  "scope": "Wider",
+  "tags": [
+   "carrier",
+   "reading",
+   "definition"
+  ]
+ },
+ "162": {
+  "decided_by": "majority",
+  "row_id": "S16-R04",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "163": {
+  "decided_by": "majority",
+  "row_id": "S23-R03",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "164": {
+  "decided_by": "majority",
+  "row_id": "S13-R08",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "166": {
+  "decided_by": "adjudication",
+  "row_id": "S22-R15",
+  "scope": "Same",
+  "tags": [
+   "reading"
+  ]
+ },
+ "168": {
+  "decided_by": "majority",
+  "row_id": "S23-R07",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "169": {
+  "decided_by": "majority",
+  "row_id": "S16-R17",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "171": {
+  "decided_by": "fix-w6+split+adversarial-r3",
+  "row_id": "S13-R07",
+  "scope": "Same",
+  "tags": [
+   "reading"
+  ]
+ },
+ "172": {
+  "decided_by": "fix-w6+split+adversarial-r3",
+  "row_id": "S26-R06",
+  "scope": "Wider",
+  "tags": [
+   "carrier",
+   "reading"
+  ]
+ },
+ "173": {
+  "decided_by": "majority+adversarial-r3",
+  "row_id": "S14-R02",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "174": {
+  "decided_by": "fix-w6+split+adversarial-r3",
+  "row_id": "S20-R19",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "175": {
+  "decided_by": "majority",
+  "row_id": "S20-R17",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "176": {
+  "decided_by": "majority",
+  "row_id": "S06-R04",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "177": {
+  "decided_by": "majority",
+  "row_id": "S09-R08",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "178": {
+  "decided_by": "majority",
+  "row_id": "S21-R14",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "179": {
+  "decided_by": "majority",
+  "row_id": "S13-R06",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "181": {
+  "decided_by": "adjudication",
+  "row_id": "S11-R07",
+  "scope": "Wider",
+  "tags": [
+   "carrier",
+   "reading",
+   "definition"
+  ]
+ },
+ "182": {
+  "decided_by": "majority",
+  "row_id": "S27-R06",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "183": {
+  "decided_by": "fix-w4b+adjudication+ruling-2026-11-21",
+  "row_id": "S03-R05",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "184": {
+  "decided_by": "majority+adversarial-r3",
+  "row_id": "S26-R04",
+  "scope": "Wider",
+  "tags": [
+   "carrier",
+   "reading",
+   "argued"
+  ]
+ },
+ "185": {
+  "decided_by": "majority",
+  "row_id": "S09-R15",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "187": {
+  "decided_by": "majority",
+  "row_id": "S12-R05",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "188": {
+  "decided_by": "fix-w7+split+wave-7",
+  "row_id": "S04-R05",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "189": {
+  "decided_by": "majority",
+  "row_id": "S06-R08",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "191": {
+  "decided_by": "fix-w2+unanimous",
+  "row_id": "S20-R02",
+  "scope": "Wider",
+  "tags": [
+   "reading",
+   "definition"
+  ]
+ },
+ "192": {
+  "decided_by": "majority",
+  "row_id": "S23-R10",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "193": {
+  "decided_by": "fix-w5+split+ruling-2026-11-21",
+  "row_id": "S20-R39",
+  "scope": "Wider",
+  "tags": [
+   "carrier",
+   "reading",
+   "provisional"
+  ]
+ },
+ "194": {
+  "decided_by": "majority",
+  "row_id": "S05-R12",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "195": {
+  "decided_by": "majority+adversarial-r3",
+  "row_id": "S14-R09",
+  "scope": "Wider",
+  "tags": [
+   "carrier",
+   "argued"
+  ]
+ },
+ "197": {
+  "decided_by": "majority",
+  "row_id": "S20-R25",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "198": {
+  "decided_by": "fix-w2+adjudication+ruling-2026-11-21",
+  "row_id": "S03-R07",
+  "scope": "Same",
+  "tags": [
+   "reading",
+   "provisional"
+  ]
+ },
+ "199": {
+  "decided_by": "majority",
+  "row_id": "S27-R01",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "200": {
+  "decided_by": "majority",
+  "row_id": "S21-R01",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "201": {
+  "decided_by": "fix-w4+unanimous+ruling-2026-11-21",
+  "row_id": "S01-R06",
+  "scope": "Same",
+  "tags": [
+   "provisional",
+   "argued"
+  ]
+ },
+ "202": {
+  "decided_by": "majority",
+  "row_id": "S11-R05",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "203": {
+  "decided_by": "majority",
+  "row_id": "S20-R03",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "205": {
+  "decided_by": "fix-w7+split+wave-7",
+  "row_id": "S07-R05",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "206": {
+  "decided_by": "fix-w6+split+adversarial-r3",
+  "row_id": "S20-R38",
+  "scope": "Wider",
+  "tags": [
+   "carrier",
+   "reading"
+  ]
+ },
+ "207": {
+  "decided_by": "fix-w5b+unanimous+ruling-2026-11-21",
+  "row_id": "S11-R12",
+  "scope": "Wider",
+  "tags": [
+   "carrier",
+   "reading"
+  ]
+ },
+ "208": {
+  "decided_by": "fix-w3+unanimous",
+  "row_id": "S01-R08",
+  "scope": "Wider",
+  "tags": [
+   "carrier",
+   "argued"
+  ]
+ },
+ "211": {
+  "decided_by": "fix-w2+unanimous",
+  "row_id": "S06-R11",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "212": {
+  "decided_by": "majority",
+  "row_id": "S23-R13",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "213": {
+  "decided_by": "adjudication",
+  "row_id": "S20-R11",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "214": {
+  "decided_by": "fix-w2+unanimous+adversarial-r3",
+  "row_id": "S15-R01",
+  "scope": "Wider",
+  "tags": [
+   "carrier",
+   "reading"
+  ]
+ },
+ "215": {
+  "decided_by": "fix-w6+split+adversarial-r3",
+  "row_id": "S23-R14",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "216": {
+  "decided_by": "majority",
+  "row_id": "S05-R11",
+  "scope": "Wider",
+  "tags": [
+   "carrier",
+   "argued"
+  ]
+ },
+ "218": {
+  "decided_by": "majority",
+  "row_id": "S05-R03",
+  "scope": "Same",
+  "tags": [
+   "argued"
+  ]
+ },
+ "219": {
+  "decided_by": "majority",
+  "row_id": "S12-R08",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "220": {
+  "decided_by": "adjudication+rule+correction",
+  "row_id": "S11-R09",
+  "scope": "Wider",
+  "tags": [
+   "carrier",
+   "reading"
+  ]
+ },
+ "224": {
+  "decided_by": "majority+defect-pass+repair",
+  "row_id": "S28-R13",
+  "scope": "Wider",
+  "tags": [
+   "reading"
+  ]
+ },
+ "225": {
+  "decided_by": "majority",
+  "row_id": "S27-R21",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "226": {
+  "decided_by": "majority",
+  "row_id": "S16-R03",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "227": {
+  "decided_by": "majority+adversarial-r3",
+  "row_id": "S19-R04",
+  "scope": "Wider",
+  "tags": [
+   "carrier",
+   "reading"
+  ]
+ },
+ "228": {
+  "decided_by": "fix-w6+split+adversarial-r3",
+  "row_id": "S21-R24",
+  "scope": "Same",
+  "tags": [
+   "reading"
+  ]
+ },
+ "229": {
+  "decided_by": "majority",
+  "row_id": "S20-R43",
+  "scope": "Wider",
+  "tags": [
+   "carrier",
+   "reading"
+  ]
+ },
+ "230": {
+  "decided_by": "fix-w1+unanimous",
+  "row_id": "S17-R06",
+  "scope": "Same",
+  "tags": [
+   "reading"
+  ]
+ },
+ "231": {
+  "decided_by": "fix-w1+unanimous",
+  "row_id": "S03-R09",
+  "scope": "Same",
+  "tags": [
+   "reading"
+  ]
+ },
+ "232": {
+  "decided_by": "majority",
+  "row_id": "S15-R04",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "233": {
+  "decided_by": "majority+adversarial-r3",
+  "row_id": "S14-R08",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "234": {
+  "decided_by": "majority+adversarial-r3",
+  "row_id": "S08-R03",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "235": {
+  "decided_by": "fix-w6+split+adversarial-r3",
+  "row_id": "S20-R29",
+  "scope": "Wider",
+  "tags": [
+   "carrier",
+   "reading"
+  ]
+ },
+ "236": {
+  "decided_by": "fix-w2+unanimous",
+  "row_id": "S16-R07",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "237": {
+  "decided_by": "fix-w4+unanimous",
+  "row_id": "S10-R12",
+  "scope": "Wider",
+  "tags": [
+   "provisional"
+  ]
+ },
+ "238": {
+  "decided_by": "majority",
+  "row_id": "S12-R12",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "239": {
+  "decided_by": "fix-w6+split+adversarial-r3",
+  "row_id": "S20-R23",
+  "scope": "Wider",
+  "tags": [
+   "carrier",
+   "reading"
+  ]
+ },
+ "240": {
+  "decided_by": "fix-w5b+split+ruling-2026-11-21",
+  "row_id": "S13-R09",
+  "scope": "Wider",
+  "tags": [
+   "carrier",
+   "definition"
+  ]
+ },
+ "242": {
+  "decided_by": "fix-w2+adjudication",
+  "row_id": "S27-R10",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "243": {
+  "decided_by": "majority+adversarial-r3",
+  "row_id": "S14-R04",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "244": {
+  "decided_by": "fix-w6+split+adversarial-r3",
+  "row_id": "S09-R07",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "246": {
+  "decided_by": "adjudication+repair",
+  "row_id": "S21-R23",
+  "scope": "Wider",
+  "tags": [
+   "reading"
+  ]
+ },
+ "247": {
+  "decided_by": "majority",
+  "row_id": "S14-R07",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "248": {
+  "decided_by": "majority",
+  "row_id": "S20-R10",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "249": {
+  "decided_by": "fix-w7+split+wave-7",
+  "row_id": "S16-R13",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "250": {
+  "decided_by": "majority",
+  "row_id": "S22-R04",
+  "scope": "Same",
+  "tags": [
+   "reading"
+  ]
+ },
+ "253": {
+  "decided_by": "fix-w2+unanimous+adversarial-r3",
+  "row_id": "S18-R02",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "254": {
+  "decided_by": "fix-w4+unanimous",
+  "row_id": "S17-R02",
+  "scope": "Same",
+  "tags": [
+   "reading"
+  ]
+ },
+ "255": {
+  "decided_by": "majority",
+  "row_id": "S22-R14",
+  "scope": "Wider",
+  "tags": [
+   "reading"
+  ]
+ },
+ "256": {
+  "decided_by": "majority",
+  "row_id": "S08-R06",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "257": {
+  "decided_by": "fix-w1+unanimous",
+  "row_id": "S15-R07",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "258": {
+  "decided_by": "majority",
+  "row_id": "S16-R11",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "259": {
+  "decided_by": "fix-w3+unanimous",
+  "row_id": "S07-R02",
+  "scope": "Wider",
+  "tags": [
+   "carrier",
+   "reading",
+   "provisional"
+  ]
+ },
+ "260": {
+  "decided_by": "majority+adversarial-r3",
+  "row_id": "S14-R03",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "261": {
+  "decided_by": "fix-w3+unanimous",
+  "row_id": "S02-R01",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "262": {
+  "decided_by": "majority+adversarial-r3",
+  "row_id": "S01-R01",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "263": {
+  "decided_by": "fix-w3+adjudication+pre-release",
+  "row_id": "S18-R05",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "264": {
+  "decided_by": "adjudication",
+  "row_id": "S13-R10",
+  "scope": "Wider",
+  "tags": [
+   "carrier",
+   "definition"
+  ]
+ },
+ "265": {
+  "decided_by": "fix-w2+unanimous",
+  "row_id": "S16-R10",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "266": {
+  "decided_by": "majority",
+  "row_id": "S23-R08",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "267": {
+  "decided_by": "adjudication",
+  "row_id": "S06-R01",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "268": {
+  "decided_by": "majority",
+  "row_id": "S12-R27",
+  "scope": "Wider",
+  "tags": [
+   "carrier",
+   "reading"
+  ]
+ },
+ "269": {
+  "decided_by": "majority",
+  "row_id": "S06-R07",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "270": {
+  "decided_by": "fix-w2+unanimous",
+  "row_id": "S18-R03",
+  "scope": "Wider",
+  "tags": [
+   "carrier",
+   "reading"
+  ]
+ },
+ "271": {
+  "decided_by": "adjudication+repair",
+  "row_id": "S21-R05",
+  "scope": "Wider",
+  "tags": [
+   "reading",
+   "definition"
+  ]
+ },
+ "272": {
+  "decided_by": "majority",
+  "row_id": "S21-R02",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "274": {
+  "decided_by": "fix-w6+split+adversarial-r3",
+  "row_id": "S20-R20",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "276": {
+  "decided_by": "majority",
+  "row_id": "S05-R05",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "277": {
+  "decided_by": "fix-w3+adjudication+adversarial-r3",
+  "row_id": "S11-R11",
+  "scope": "Wider",
+  "tags": [
+   "carrier",
+   "reading"
+  ]
+ },
+ "279": {
+  "decided_by": "majority",
+  "row_id": "S25-R07",
+  "scope": "Wider",
+  "tags": [
+   "argued"
+  ]
+ },
+ "280": {
+  "decided_by": "adjudication+rule",
+  "row_id": "S20-R04",
+  "scope": "Wider",
+  "tags": [
+   "definition"
+  ]
+ },
+ "281": {
+  "decided_by": "fix-w3+adjudication",
+  "row_id": "S28-R09",
+  "scope": "Same",
+  "tags": [
+   "reading"
+  ]
+ },
+ "282": {
+  "decided_by": "majority",
+  "row_id": "S17-R01",
+  "scope": "Same",
+  "tags": [
+   "definition"
+  ]
+ },
+ "283": {
+  "decided_by": "majority",
+  "row_id": "S16-R05",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "284": {
+  "decided_by": "fix-w1+adjudication",
+  "row_id": "S19-R05",
+  "scope": "Same",
+  "tags": [
+   "reading"
+  ]
+ },
+ "286": {
+  "decided_by": "fix-w6+split+adversarial-r3",
+  "row_id": "S20-R31",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "288": {
+  "decided_by": "majority",
+  "row_id": "S27-R05",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "289": {
+  "decided_by": "adjudication+adversarial-r3",
+  "row_id": "S09-R12",
+  "scope": "Wider",
+  "tags": [
+   "carrier",
+   "reading",
+   "provisional"
+  ]
+ },
+ "291": {
+  "decided_by": "majority",
+  "row_id": "S21-R12",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "292": {
+  "decided_by": "majority+adversarial-r3",
+  "row_id": "S19-R07",
+  "scope": "Wider",
+  "tags": [
+   "carrier",
+   "reading"
+  ]
+ },
+ "293": {
+  "decided_by": "fix-w7+split+wave-7",
+  "row_id": "S07-R04",
+  "scope": "Wider",
+  "tags": [
+   "carrier",
+   "reading"
+  ]
+ },
+ "295": {
+  "decided_by": "fix-w2+unanimous",
+  "row_id": "S17-R08",
+  "scope": "Same",
+  "tags": [
+   "reading"
+  ]
+ },
+ "296": {
+  "decided_by": "majority",
+  "row_id": "S23-R04",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "297": {
+  "decided_by": "fix-w4b+unanimous+ruling-2026-11-21",
+  "row_id": "S08-R19",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "298": {
+  "decided_by": "majority",
+  "row_id": "S22-R06",
+  "scope": "Same",
+  "tags": [
+   "reading"
+  ]
+ },
+ "299": {
+  "decided_by": "adjudication",
+  "row_id": "S25-R01",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "301": {
+  "decided_by": "fix-w4b+unanimous+ruling-2026-11-21",
+  "row_id": "S08-R05",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "302": {
+  "decided_by": "fix-w4b+unanimous",
+  "row_id": "S10-R16",
+  "scope": "Wider",
+  "tags": [
+   "reading"
+  ]
+ },
+ "303": {
+  "decided_by": "majority",
+  "row_id": "S23-R06",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "304": {
+  "decided_by": "fix-w1+adjudication",
+  "row_id": "S13-R02",
+  "scope": "Wider",
+  "tags": [
+   "carrier",
+   "reading",
+   "definition"
+  ]
+ },
+ "305": {
+  "decided_by": "fix-w1+adjudication",
+  "row_id": "S03-R04",
+  "scope": "Wider",
+  "tags": [
+   "argued"
+  ]
+ },
+ "306": {
+  "decided_by": "majority",
+  "row_id": "S05-R04",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "307": {
+  "decided_by": "fix-w4b+adjudication+ruling-2026-11-21",
+  "row_id": "S11-R02",
+  "scope": "Wider",
+  "tags": [
+   "carrier",
+   "proxy",
+   "definition"
+  ]
+ },
+ "308": {
+  "decided_by": "fix-w1+unanimous",
+  "row_id": "S21-R07",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "309": {
+  "decided_by": "adjudication",
+  "row_id": "S09-R13",
+  "scope": "Wider",
+  "tags": [
+   "carrier",
+   "argued"
+  ]
+ },
+ "311": {
+  "decided_by": "fix-w6+split+adversarial-r3",
+  "row_id": "S08-R20",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "312": {
+  "decided_by": "majority",
+  "row_id": "S28-R05",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ },
+ "313": {
+  "decided_by": "adjudication",
+  "row_id": "S21-R20",
+  "scope": "Wider",
+  "tags": [
+   "carrier",
+   "definition"
+  ]
+ },
+ "314": {
+  "decided_by": "fix-w5+split+ruling-2026-11-21",
+  "row_id": "S02-R02",
+  "scope": "Wider",
+  "tags": [
+   "carrier",
+   "reading",
+   "argued"
+  ]
+ },
+ "315": {
+  "decided_by": "majority",
+  "row_id": "S16-R06",
+  "scope": "Wider",
+  "tags": [
+   "carrier"
+  ]
+ }
+}

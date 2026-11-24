@@ -347,5 +347,77 @@ public theorem exists_argmax_printValue_prog (n t : ℕ)
           (stayProg 3) t n h y :=
   exists_argmax_printValue _ _ _ t n h
 
-end AISafetyAtlas.Examples.Wireheading.SelfMod
+/-! ## Equation (4) at the limit, and footnote 5's tie rule -/
 
+/-- **Print's recursion (4) holds for the limit value**, at the survival agent. -/
+public theorem printInfiniteValue_eq_stay (t : ℕ) (h : History (CompAct Act Code) Obs)
+    (y : CompAct Act Code) :
+    printInfiniteValue sure survivor stay t h y = survivor.horizon t h.length * survivor.utility h +
+      ∑' o : Obs, sure.cond h y o *
+        printInfiniteValue sure survivor stay t (h ++ [(y, o)]) (stay.run y.2 (h ++ [(y, o)])) :=
+  printInfiniteValue_eq sure_isSubprobability survivor survivor_abs_utility_le_one stay t
+    (survivor_horizon_summable t) h y
+
+/-- The lexicographically least maximiser exists at this finite `𝒴`. -/
+public theorem exists_lex_argmax_printInfiniteValue_stay (t : ℕ)
+    (h : History (CompAct Act Code) Obs) :
+    ∃ y : CompAct Act Code, (∀ y', printInfiniteValue sure survivor stay t h y' ≤
+        printInfiniteValue sure survivor stay t h y) ∧
+      ∀ z, (∀ y', printInfiniteValue sure survivor stay t h y' ≤
+        printInfiniteValue sure survivor stay t h z) → toLex y ≤ toLex z :=
+  exists_lex_argmax_printInfiniteValue sure survivor stay t h
+
+/-- An agent with zero horizon: every compound action ties, which is where the
+tie rule says something. -/
+@[expose] public def mute : Agent (CompAct Act Code) Obs where
+  utility := fun _ => 0
+  horizon := fun _ _ => 0
+
+/-- Every truncated value of the muted agent is zero. -/
+public theorem printValue_mute (t n : ℕ) (h : History (CompAct Act Code) Obs)
+    (y : CompAct Act Code) : printValue sure mute stay t n h y = 0 := by
+  induction n generalizing h y with
+  | zero => simp [printValue, mute]
+  | succ n ih =>
+    simp only [printValue, ih]
+    simp [mute]
+
+/-- Hence its limit value is zero: every compound action is a maximiser. -/
+public theorem printInfiniteValue_mute (t : ℕ) (h : History (CompAct Act Code) Obs)
+    (y : CompAct Act Code) : printInfiniteValue sure mute stay t h y = 0 := by
+  have hz : (fun n ↦ printValue sure mute stay t n h y) = fun _ ↦ 0 :=
+    funext fun n ↦ printValue_mute t n h y
+  rw [printInfiniteValue, hz]
+  exact tendsto_const_nhds.limUnder_eq
+
+/-- **`c₀ = false` is the tie-broken initial program**: it outputs `((), false)`,
+the lexicographically least of the tied compound actions. -/
+public theorem stay_isLexInitialProgramLimit :
+    IsLexInitialProgramLimit sure mute stay (false : Code) := by
+  intro h
+  refine ⟨fun y => by rw [printInfiniteValue_mute, printInfiniteValue_mute], fun z _ => ?_⟩
+  obtain ⟨⟨⟩, b⟩ := z
+  simp only [stay]
+  cases b <;> decide
+
+/-- The simpleton code also produces a maximiser, so it is an initial program
+without the tie rule. -/
+public theorem stay_true_isInitialProgramLimit :
+    IsInitialProgramLimit sure mute stay (true : Code) :=
+  fun h y => by rw [printInfiniteValue_mute, printInfiniteValue_mute]
+
+/-- **But the tie rule excludes it**: print's `c₀` is determined, and it is
+`false`. -/
+public theorem stay_true_not_isLexInitialProgramLimit :
+    ¬ IsLexInitialProgramLimit sure mute stay (true : Code) := by
+  intro hc
+  have := AISafetyAtlas.Wireheading.SelfMod.IsLexInitialProgramLimit.run_eq hc stay_isLexInitialProgramLimit []
+  simp [stay] at this
+
+/-- The tie-broken initial program is an initial program, at the witness. -/
+public theorem stay_isInitialProgramLimit_of_lex :
+    IsInitialProgramLimit sure mute stay (false : Code) :=
+  AISafetyAtlas.Wireheading.SelfMod.IsLexInitialProgramLimit.isInitialProgramLimit
+    stay_isLexInitialProgramLimit
+
+end AISafetyAtlas.Examples.Wireheading.SelfMod

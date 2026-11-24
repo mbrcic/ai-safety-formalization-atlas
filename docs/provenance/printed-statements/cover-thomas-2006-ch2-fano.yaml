@@ -1,0 +1,259 @@
+source:
+  citation: >-
+    Thomas M. Cover and Joy A. Thomas, Elements of Information Theory, 2nd ed.,
+    Wiley-Interscience, 2006. Chapter 2, section 2.10.
+  file: >-
+    [Wiley Series in Telecommunications and Signal Processing] Thomas M. Cover,
+    Joy A. Thomas - Elements of Information Theory (2006, Wiley-Interscience).pdf
+  sha256: fed9b82d0904c75b47027524e11a12b6dbac31cf4f25319414679050d125dd6f
+  page_offset: 26
+  standing: |
+    Discrete random variables with probability mass functions (§2.1, p. 13, PDF
+    p. 39; transcribed in cover-thomas-2006-ch2, source.standing). Logarithms to
+    base 2 (p. 14, PDF p. 40; see cover-thomas-2006-ch2#ct2-def-entropy).
+    The setting of §2.10 (p. 37--38, PDF p. 63--64): "Suppose that we wish to
+    estimate a random variable $X$ with a distribution $p(x)$. We observe a random
+    variable $Y$ that is related to $X$ by the conditional distribution $p(y|x)$.
+    From $Y$, we calculate a function $g(Y) = \hat{X}$, where $\hat{X}$ is an
+    estimate of $X$ and takes on values in $\hat{\mathcal{X}}$. We will not restrict
+    the alphabet $\hat{\mathcal{X}}$ to be equal to $\mathcal{X}$, and we will also
+    allow the function $g(Y)$ to be random. We wish to bound the probability that
+    $\hat{X} \ne X$. We observe that $X \to Y \to \hat{X}$ forms a Markov chain."
+    No finiteness of $\mathcal{X}$ and no lower bound on $|\mathcal{X}|$ is stated in
+    §2.10, although (2.130) uses $\log|\mathcal{X}|$, (2.132) divides by
+    $\log|\mathcal{X}|$ and (2.140) uses $\log(|\mathcal{X}| - 1)$ (source card S02
+    records the pages searched: PDF pp. 39--41, 43, 60, 63--66). The Remark on
+    p. 40 (PDF p. 66) introduces its own finite alphabet $X \in \{1, 2, \ldots, m\}$.
+
+definitions:
+  - id: ct2-def-binary-entropy
+    label: Example 2.1.1 (binary entropy function $H(p)$)
+    pdf_page: 41
+    book_page: 15
+    latex: |
+      \textbf{\emph{Example 2.1.1}} Let
+      \[ X = \begin{cases} 1 & \text{with probability } p, \\
+         0 & \text{with probability } 1 - p. \end{cases} \tag{2.4} \]
+      Then
+      \[ H(X) = -p \log p - (1 - p) \log(1 - p) \overset{\text{def}}{=\!=} H(p).
+         \tag{2.5} \]
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: ct2-def-probability-of-error
+    label: Definition of the probability of error (2.129)
+    pdf_page: 64
+    book_page: 38
+    latex: |
+      Define the probability of error
+      \[ P_e = \Pr\left\{\hat{X} \ne X\right\}. \tag{2.129} \]
+    context: |
+      Preceded by the setting quoted in source.standing (estimate
+      $\hat{X} = g(Y)$ with values in $\hat{\mathcal{X}}$, $g$ possibly random,
+      $X \to Y \to \hat{X}$).
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+statements:
+  - id: ct2-thm-2.10.1-first
+    audit_row: S02-R01
+    locator: Thm 2.10.1, 1st ineq.
+    pdf_page: 64
+    book_page: 38
+    label: Theorem 2.10.1 (Fano's Inequality), first inequality of (2.130)
+    grades: 'the first inequality, $H(P_e) + P_e \log|\mathcal{X}| \ge H(X|\hat{X})$'
+    latex: |
+      \textbf{Theorem 2.10.1} (\emph{Fano's Inequality}) \emph{For any estimator
+      $\hat{X}$ such that $X \to Y \to \hat{X}$, with $P_e = \Pr(X \ne \hat{X})$, we
+      have}
+      \[ H(P_e) + P_e \log|\mathcal{X}| \ge H(X|\hat{X}) \ge H(X|Y). \tag{2.130} \]
+    note: >-
+      The row grades the first inequality, $H(P_e) + P_e \log|\mathcal{X}| \ge
+      H(X|\hat{X})$; the whole printed theorem is transcribed. The proof states it
+      separately as (2.137) on p. 39 (PDF p. 65), proved "first ignor[ing] the role
+      of $Y$". The theorem writes $\Pr(X \ne \hat{X})$, (2.129) writes
+      $\Pr\{\hat{X} \ne X\}$.
+    uses: [ct2-def-probability-of-error, ct2-def-binary-entropy,
+      cover-thomas-2006-ch2#ct2-def-entropy,
+      cover-thomas-2006-ch2#ct2-def-conditional-entropy,
+      cover-thomas-2006-ch2#ct2-def-markov]
+    proof_pages: 64-65
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind) + Codex (anchored re-read); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: ct2-thm-2.10.1-second
+    audit_row: S02-R02
+    locator: Thm 2.10.1, 2nd ineq.
+    pdf_page: 64
+    book_page: 38
+    label: Theorem 2.10.1 (Fano's Inequality), second inequality of (2.130)
+    grades: 'the second inequality, $H(X|\hat{X}) \ge H(X|Y)$'
+    latex: |
+      \textbf{Theorem 2.10.1} (\emph{Fano's Inequality}) \emph{For any estimator
+      $\hat{X}$ such that $X \to Y \to \hat{X}$, with $P_e = \Pr(X \ne \hat{X})$, we
+      have}
+      \[ H(P_e) + P_e \log|\mathcal{X}| \ge H(X|\hat{X}) \ge H(X|Y). \tag{2.130} \]
+    note: >-
+      The row grades the second inequality, $H(X|\hat{X}) \ge H(X|Y)$. The proof
+      (p. 39, PDF p. 65) obtains it from the data-processing inequality (Theorem
+      2.8.1): "$I(X; \hat{X}) \le I(X; Y)$ since $X \to Y \to \hat{X}$ is a Markov
+      chain, and therefore $H(X|\hat{X}) \ge H(X|Y)$."
+    uses: [cover-thomas-2006-ch2#ct2-def-conditional-entropy,
+      cover-thomas-2006-ch2#ct2-def-markov,
+      cover-thomas-2006-ch2#ct2-thm-2.8.1]
+    proof_pages: 65
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind) + Codex (anchored re-read); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: ct2-thm-2.10.1
+    audit_row: S02-R03
+    locator: Thm 2.10.1, chained
+    pdf_page: 64
+    book_page: 38
+    label: Theorem 2.10.1 (Fano's Inequality), both inequalities of (2.130)
+    latex: |
+      \textbf{Theorem 2.10.1} (\emph{Fano's Inequality}) \emph{For any estimator
+      $\hat{X}$ such that $X \to Y \to \hat{X}$, with $P_e = \Pr(X \ne \hat{X})$, we
+      have}
+      \[ H(P_e) + P_e \log|\mathcal{X}| \ge H(X|\hat{X}) \ge H(X|Y). \tag{2.130} \]
+    note: >-
+      Restated at the end of the proof as (2.138), p. 39 (PDF p. 65).
+    uses: [ct2-def-probability-of-error, ct2-def-binary-entropy,
+      cover-thomas-2006-ch2#ct2-def-entropy,
+      cover-thomas-2006-ch2#ct2-def-conditional-entropy,
+      cover-thomas-2006-ch2#ct2-def-markov]
+    proof_pages: 64-65
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: ct2-cor-2.139
+    audit_row: S02-R04
+    locator: Cor. (2.139)
+    pdf_page: 65
+    book_page: 39
+    label: Corollary (unnumbered), (2.139)
+    latex: |
+      \textbf{Corollary} \emph{For any two random variables $X$ and $Y$, let
+      $p = \Pr(X \ne Y)$.}
+      \[ H(p) + p \log|\mathcal{X}| \ge H(X|Y). \tag{2.139} \]
+    note: >-
+      Proof as printed: "Let $\hat{X} = Y$ in Fano's inequality." Neither the
+      statement nor the proof says what alphabet $Y$ takes values in; the event
+      $X \ne Y$ presupposes $X$ and $Y$ are comparable.
+    uses: [ct2-def-binary-entropy, cover-thomas-2006-ch2#ct2-def-conditional-entropy,
+      ct2-thm-2.10.1]
+    proof_pages: 65
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: ct2-cor-2.140
+    audit_row: S02-R05
+    locator: Cor. (2.140)
+    pdf_page: 65
+    book_page: 39
+    label: Corollary (unnumbered), (2.140)
+    latex: |
+      \textbf{Corollary} \emph{Let $P_e = \Pr(X \ne \hat{X})$, and let
+      $\hat{X} : \mathcal{Y} \to \mathcal{X}$; then}
+      \[ H(P_e) + P_e \log(|\mathcal{X}| - 1) \ge H(X|Y). \tag{2.140} \]
+    context: |
+      Introduced by: "For any two random variables $X$ and $Y$, if the estimator
+      $g(Y)$ takes values in the set $\mathcal{X}$, we can strengthen the inequality
+      slightly by replacing $\log|\mathcal{X}|$ with $\log(|\mathcal{X}| - 1)$."
+    note: >-
+      The statement writes $\hat{X} : \mathcal{Y} \to \mathcal{X}$ (a function of
+      $Y$); the introducing sentence says only that $g(Y)$ takes values in
+      $\mathcal{X}$ and does not repeat that $g$ may be random (allowed in the
+      section setting). The proof (2.141)--(2.142) reads "the proof of the theorem
+      goes through without change, except that" the bound on
+      $H(X|E, \hat{X})$ uses $\log(|\mathcal{X}| - 1)$.
+    uses: [ct2-def-probability-of-error, ct2-def-binary-entropy,
+      cover-thomas-2006-ch2#ct2-def-conditional-entropy, ct2-thm-2.10.1]
+    proof_pages: 65
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: ct2-eq-2.131
+    audit_row: S02-R06
+    locator: (2.131)
+    pdf_page: 64
+    book_page: 38
+    label: weakened form (2.131), part of the italic statement of Theorem 2.10.1
+    latex: |
+      \emph{This inequality can be weakened to}
+      \[ 1 + P_e \log|\mathcal{X}| \ge H(X|Y) \tag{2.131} \]
+    context: |
+      Follows (2.130) directly; set in italics as a continuation of the theorem
+      statement.
+    uses: [ct2-thm-2.10.1, ct2-def-probability-of-error,
+      cover-thomas-2006-ch2#ct2-def-conditional-entropy]
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: ct2-eq-2.132
+    audit_row: S02-R07
+    locator: (2.132)
+    pdf_page: 64
+    book_page: 38
+    label: weakened form (2.132), part of the italic statement of Theorem 2.10.1
+    latex: |
+      \emph{or}
+      \[ P_e \ge \frac{H(X|Y) - 1}{\log|\mathcal{X}|}. \tag{2.132} \]
+    context: |
+      Follows (2.131): "\emph{This inequality can be weakened to} [(2.131)]
+      \emph{or} [(2.132)]".
+    note: >-
+      Division by $\log|\mathcal{X}|$ with no stated condition $|\mathcal{X}| \ge 2$
+      (for $|\mathcal{X}| = 1$ the denominator is $0$).
+    uses: [ct2-thm-2.10.1, ct2-def-probability-of-error,
+      cover-thomas-2006-ch2#ct2-def-conditional-entropy]
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind) + Codex (anchored re-read); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: ct2-remark-no-observation
+    audit_row: S02-R08
+    locator: Remark
+    pdf_page: 66
+    book_page: 40
+    label: Remark, (2.143)
+    latex: |
+      \textbf{\emph{Remark}} Suppose that there is no knowledge of $Y$. Thus, $X$
+      must be guessed without any information. Let $X \in \{1, 2, \ldots, m\}$ and
+      $p_1 \ge p_2 \ge \cdots \ge p_m$. Then the best guess of $X$ is $\hat{X} = 1$
+      and the resulting probability of error is $P_e = 1 - p_1$. Fano's inequality
+      becomes
+      \[ H(P_e) + P_e \log(m - 1) \ge H(X). \tag{2.143} \]
+    note: >-
+      "Fano's inequality" here is the $\log(|\mathcal{X}| - 1)$ form (2.140) with
+      $|\mathcal{X}| = m$ and $H(X|Y)$ replaced by $H(X)$; the remark does not cite
+      which form. As printed, (2.143) is stated for the best guess $\hat{X} = 1$
+      with $P_e = 1 - p_1$ under the ordering $p_1 \ge \cdots \ge p_m$.
+    uses: [ct2-def-binary-entropy, cover-thomas-2006-ch2#ct2-def-entropy, ct2-cor-2.140]
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: ct2-example-sharp
+    audit_row: S02-R09
+    locator: Example
+    pdf_page: 66
+    book_page: 40
+    label: continuation of the Remark, (2.144) (not labelled "Example" in print)
+    latex: |
+      The probability mass function
+      \[ (p_1, p_2, \ldots, p_m) = \left(1 - P_e, \frac{P_e}{m - 1}, \ldots,
+         \frac{P_e}{m - 1}\right) \tag{2.144} \]
+      achieves this bound with equality. Thus, Fano's inequality is sharp.
+    context: |
+      "this bound" is (2.143) of the preceding Remark.
+    note: >-
+      The audit's locator "Example" does not match a printed label: the passage is
+      an unlabelled paragraph continuing the Remark on the same page. No quantifier
+      over $P_e$ is printed; read with the Remark's ordering $p_1 \ge \cdots \ge
+      p_m$, (2.144) requires $1 - P_e \ge P_e/(m - 1)$, which the passage does not
+      state.
+    uses: [ct2-remark-no-observation, ct2-def-binary-entropy,
+      cover-thomas-2006-ch2#ct2-def-entropy]
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+excerpts: []

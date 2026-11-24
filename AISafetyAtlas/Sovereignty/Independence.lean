@@ -48,7 +48,10 @@ possibility, and which possible worlds matter, can be spelled out in a variety o
 ways"* -- so `Setting.relevant` is a field and no theorem below fixes it. Print's
 footnote 8 is equally explicit that relevance of *constraints* must not be
 moralized, which is why `constrains` and `permitted` are separate fields rather
-than one filtered relation.
+than one filtered relation. The condition itself is `RelevanceSpec.NonMoralized`:
+under it the non-moralized conceptions ignore the moral criteria
+(`Setting.free_not_moralized_withCriteria_iff`), and without it the moralization
+question can collapse (`Setting.free_not_moralized_iff_of_moralized`).
 
 ## What Carter and Shnayderman prove, and about which corner
 
@@ -134,7 +137,9 @@ actual world, and print's parameter: which worlds are *relevant*.
 `permitted w i a` is the moralized exemption -- the constraint is morally
 permitted, so a moralized conception does not count it. Print's footnote 8
 forbids building permissibility into which constraints are *relevant*, which is
-why these are two fields and not one.
+why these are two fields and not one. Separate fields do not by themselves exclude
+a `constrains` built from `permitted`; footnote 8 is stated as
+`RelevanceSpec.NonMoralized`, a hypothesis where it is used.
 -/
 public structure Setting (N : Type u) (A : Type v) (W : Type w) where
   /-- The actual world. -/
@@ -249,6 +254,92 @@ public theorem not_republicanFree_of_impermissible_threat
   obtain ⟨w, hw, hc, hp⟩ := h i a
   intro hfree
   exact hfree w (by simpa [worlds] using hw) ⟨hc, fun _ => hp⟩
+
+end Setting
+
+/-! ## Footnote 8: relevance is not moralized
+
+List and Valentini (footnote 8, PDF p. 4, printed p. 1046): *"we do not build
+criteria of moral permissibility or impermissibility into the specification of
+'relevant' constraints; i.e., the notion of 'relevance' should not be 'moralized'
+in the technical sense of the moralization question"*.
+
+One `Setting` fixes one permissibility relation, so whether its `constrains` was
+*built from* `permitted` is not visible in it. The condition is a property of the
+specification: the map from moral criteria to the relevant constraints. It is
+non-moralized when that map is constant. -/
+
+/-- **A specification of relevant constraints**, as a function of the moral
+criteria: given which constraints are morally permissible, which constraints are
+relevant (List and Valentini, p. 1046: *"freedom to do X is the absence of relevant
+constraints"*). -/
+public abbrev RelevanceSpec (N : Type u) (A : Type v) (W : Type w) : Type _ :=
+  (W → N → A → Prop) → (W → N → A → Prop)
+
+/-- **List and Valentini's footnote 8**: the specification of relevant constraints
+does not depend on the criteria of moral permissibility. -/
+@[expose] public def RelevanceSpec.NonMoralized {N : Type u} {A : Type v} {W : Type w}
+    (spec : RelevanceSpec N A W) : Prop :=
+  ∀ p q, spec p = spec q
+
+/-- **A relevance specification that is moralized**: the relevant constraints are
+the physical ones that are not morally permissible, which footnote 8 excludes. -/
+@[expose] public def RelevanceSpec.moralized {N : Type u} {A : Type v} {W : Type w}
+    (phys : W → N → A → Prop) : RelevanceSpec N A W :=
+  fun p w i a => phys w i a ∧ ¬ p w i a
+
+namespace Setting
+
+variable {N : Type u} {A : Type v} {W : Type w} (S : Setting N A W)
+
+/-- The setting `S` with its constraints given by the specification `spec` at the
+moral criteria `p`, and `p` as its moralized exemption. -/
+@[expose] public def withCriteria (spec : RelevanceSpec N A W) (p : W → N → A → Prop) :
+    Setting N A W :=
+  { S with constrains := spec p, permitted := p }
+
+/-- **Under footnote 8, the non-moralized conceptions do not see the moral
+criteria**: changing the permissibility relation leaves `Free false r` (cases 1
+and 3) unchanged, at either answer to the robustness question. -/
+public theorem free_not_moralized_withCriteria_iff {spec : RelevanceSpec N A W}
+    (hspec : spec.NonMoralized) (p q : W → N → A → Prop) {r : Bool} {i : N} {a : A} :
+    (S.withCriteria spec p).Free false r i a ↔ (S.withCriteria spec q).Free false r i a := by
+  simp only [Free, Counts, withCriteria, worlds, hspec p q, Bool.false_eq_true, false_implies,
+    and_true]
+
+/-- **Under footnote 8, more permissions can only enlarge moralized freedom**
+(cases 2 and 4): the relevant constraints stay fixed, and exempting more of them
+removes counters. -/
+public theorem free_moralized_withCriteria_mono {spec : RelevanceSpec N A W}
+    (hspec : spec.NonMoralized) {p q : W → N → A → Prop}
+    (hpq : ∀ w i a, p w i a → q w i a) {r : Bool} {i : N} {a : A}
+    (h : (S.withCriteria spec p).Free true r i a) :
+    (S.withCriteria spec q).Free true r i a := by
+  intro w hw hc
+  refine h w hw ⟨?_, fun _ hp => hc.2 rfl (hpq w i a hp)⟩
+  have hc1 : spec q w i a := hc.1
+  rw [hspec q p] at hc1
+  exact hc1
+
+/-- **Why footnote 8 is needed**: with a moralized relevance specification the
+moralization question has no effect. `Free false r` and `Free true r` coincide, so
+case 1 is case 2 and case 3 is case 4. -/
+public theorem free_not_moralized_iff_of_moralized (phys p : W → N → A → Prop)
+    {r : Bool} {i : N} {a : A} :
+    (S.withCriteria (RelevanceSpec.moralized phys) p).Free false r i a ↔
+      (S.withCriteria (RelevanceSpec.moralized phys) p).Free true r i a := by
+  refine ⟨free_of_free_not_moralized _, fun h w hw hc => h w hw ⟨hc.1, fun _ => hc.1.2⟩⟩
+
+/-- A moralized relevance specification violates footnote 8 as soon as some
+physical constraint exists. -/
+public theorem not_nonMoralized_moralized {phys : W → N → A → Prop}
+    (h : ∃ w i a, phys w i a) : ¬ (RelevanceSpec.moralized phys).NonMoralized := by
+  intro hspec
+  obtain ⟨w, i, a, hw⟩ := h
+  have := congrFun (congrFun (congrFun (hspec (fun _ _ _ => False) (fun _ _ _ => True)) w) i) a
+  simp only [RelevanceSpec.moralized, not_false_eq_true, and_true, not_true_eq_false,
+    and_false, eq_iff_iff, iff_false] at this
+  exact this hw
 
 end Setting
 

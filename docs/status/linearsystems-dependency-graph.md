@@ -10,7 +10,7 @@ Edges come from the elaborated Lean environment. This answers the question the p
 
 So `A → B` means *`B` occurs in `A`'s statement, or in `A`'s body when `A` is a definition*. A lemma used only inside a proof does not appear. Reading the table as a complete call graph would be wrong, and the two sections below are scoped so that they stay true under this limit.
 
-`144` authored declarations in `AISafetyAtlas.LinearSystems.*` (116 theorems). Compiler-generated companions and projections are dropped.
+`153` authored declarations in `AISafetyAtlas.LinearSystems.*` (121 theorems). Compiler-generated companions and projections are dropped.
 
 ## Load-bearing declarations
 
@@ -25,7 +25,7 @@ Named in the statements of eight or more others. A change to one of these is a c
 | `adjointFlow` | 12 |
 | `IsTrajectory` | 12 |
 | `unobservableSubspace` | 10 |
-| `IsTrajectoryOn` | 8 |
+| `IsTrajectoryOn` | 9 |
 | `IsSolution` | 8 |
 
 ## Definitions no statement and no example mentions
@@ -58,6 +58,8 @@ None.
 | `IsTrajectory.isSolution` | theorem | `IsSolution`, `IsTrajectory` |
 | `IsTrajectoryOn` | definition | — |
 | `IsTrajectoryOn.hasDerivAt_sub` | theorem | `IsTrajectoryOn` |
+| `IsTrajectoryOnOver` | definition | — |
+| `IsTrajectoryWithin` | definition | — |
 | `MatrixLemmas.mulVec_kernel_trivial_iff_rank_eq_card_cols` | theorem | — |
 | `MatrixLemmas.mulVec_range_top_iff_rank_eq_card_rows` | theorem | — |
 | `MatrixLemmas.rank_fromCols_le` | theorem | — |
@@ -66,6 +68,7 @@ None.
 | `adjointFlow_zero` | theorem | `adjointFlow` |
 | `adjointSignal` | definition | `adjointFlow` |
 | `adjointSignal_eq_zero_of_dotProduct_drivenState_eq_zero` | theorem | `adjointSignal`, `drivenState`, `flow` |
+| `card_distinctEigenvalues_le` | theorem | `distinctEigenvalues` |
 | `ceil_div_le_finrank_eigenspace` | theorem | — |
 | `charpoly_mulVecLin` | theorem | — |
 | `commute_flow` | theorem | `flow` |
@@ -77,6 +80,7 @@ None.
 | `controllabilityMatrix_transpose` | theorem | `controllabilityMatrix`, `observabilityMatrix` |
 | `determinesStateOn_iff_isObservable` | theorem | `DeterminesStateOn`, `IsObservable` |
 | `determinesStateSolOn_iff_isObservable` | theorem | `DeterminesStateSolOn`, `IsObservable` |
+| `distinctEigenvalues` | definition | — |
 | `dotCLM` | definition | — |
 | `dotCLM_apply` | theorem | `dotCLM` |
 | `dotProduct_drivenState` | theorem | `adjointSignal`, `drivenState`, `flow` |
@@ -135,10 +139,13 @@ None.
 | `isObservable_imp_zeroInput_state_eq` | theorem | `IsObservable` |
 | `isReachable_iff_isControllable` | theorem | `IsControllable`, `IsReachable` |
 | `isReachable_of_isControllable` | theorem | `IsControllable`, `IsReachable` |
+| `isTrajectoryOnOver_real_complex_iff` | theorem | `IsTrajectoryOn`, `IsTrajectoryOnOver` |
 | `isTrajectoryOn_univ_iff` | theorem | `IsTrajectoryOn` |
+| `isTrajectoryWithin_iff_isTrajectoryOnOver` | theorem | `IsTrajectoryOnOver`, `IsTrajectoryWithin` |
 | `maxGenEigenspaceIndex_eq_rootMultiplicity_minpoly` | theorem | — |
 | `maxGenEigenspace_eq_genEigenspace_rootMultiplicity_minpoly` | theorem | — |
 | `maxGenEigenspace_mulVecLin_eq_rootMultiplicity_minpoly` | theorem | — |
+| `mem_distinctEigenvalues_iff` | theorem | `distinctEigenvalues` |
 | `mem_reachedSet_iff` | theorem | `drivenState`, `reachedSet` |
 | `mem_unobservableSubspace_iff` | theorem | `unobservableSubspace` |
 | `mem_unobservableSubspace_of_adjointFlow_eq_zero` | theorem | `adjointFlow`, `unobservableSubspace` |
@@ -174,6 +181,8 @@ None.
 | `observabilityMatrix_apply` | theorem | `observabilityMatrix` |
 | `observabilityMatrix_mulVec_apply` | theorem | `observabilityMatrix` |
 | `outputSignal` | definition | — |
+| `outputSignalOver` | definition | — |
+| `outputSignalOver_real_complex` | theorem | `outputSignal`, `outputSignalOver` |
 | `reachedSet` | definition | `drivenState` |
 | `reachedSet_one_eq_top` | theorem | `IsControllable`, `reachedSet` |
 | `rootMultiplicity_le_mul_finrank_eigenspace` | theorem | — |

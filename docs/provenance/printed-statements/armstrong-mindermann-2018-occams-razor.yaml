@@ -1,0 +1,640 @@
+source:
+  citation: >-
+    Sören Mindermann and Stuart Armstrong, "Occam's razor is insufficient to infer
+    the preferences of irrational agents", 32nd Conference on Neural Information
+    Processing Systems (NeurIPS 2018), Montréal, Canada (footer of PDF p. 1;
+    author order as printed on the page, both marked "Equal contribution").
+    Advances in Neural Information Processing Systems 31, pp. 5598--5609 (page
+    range from the NeurIPS metadata record, not printed in this PDF; the audit and
+    registry cite the authors as Armstrong & Mindermann, following that record).
+    Publisher's main PDF; Proposition 10 and Definition 11 are in the publisher's
+    supplemental, transcribed in armstrong-mindermann-2018-occam-appendix.yaml.
+  file: armstrong-mindermann-neurips-2018-occams-razor-insufficient-infer-preferences-irrational-agents.pdf
+  sha256: 7e580c07450226dc9891c3120d94817df16a46291783f0318c9764b9e2f80375
+  page_offset: 0
+  standing: |
+    Environment (§3, p. 3): "The environment $M$ in which the human operates is an
+    MDP/R, a Markov Decision Process without reward function (a \emph{world-model}
+    [Hadfield-Menell et al., 2017]). An MDP/R is defined as a tuple,
+    $\langle \mathcal{S}, \mathcal{A}, T, \hat{s} \rangle$ consisting of a discrete
+    state space $\mathcal{S}$, a finite action space $\mathcal{A}$, a fixed starting
+    state $\hat{s}$, and a probabilistic transition function
+    $T : \mathcal{S} \times \mathcal{A} \times \mathcal{S} \to [0, 1]$ to the next
+    state (also called the \emph{dynamics}). At each step, the human is in a certain
+    state $s$, takes a certain action $a$, and ends up in a new state $s'$ as given
+    by $T(s' \mid s, a)$."
+
+    Rewards and policies (§3, p. 3): transcribed as statements am-reward-space and
+    am-policy-space below (rows S20-R02, S20-R03).
+
+    Settings (§3, p. 3): "The results of this paper apply to both discounted rewards
+    and episodic environments settings$^6$." Footnote 6 (p. 3): "The setting is only
+    chosen for notational convenience: it also emulates discrete POMDPs,
+    non-Markovianness (eg by encoding the whole history in the state) and
+    pseudo-random policies."
+
+    Agent's knowledge (§3.2, p. 3): "In order to simplify the problem and separate
+    out the effect of the agent's learning, we will assume the agent has perfect
+    knowledge of the human policy $\dot{\pi}$ and of the environment $M$. At this
+    point, the agent cannot learn anything by observing the human's actions, as it
+    can already perfectly predict these."
+
+    Language dependence of complexity (§5, p. 5): "Firstly, simplicity in
+    algorithmic information theory is relative to the computer language (or
+    equivalently Universal Turing Machine) $L$ used [Ming and Vitányi, 2014, Calude,
+    2002], and there exists languages in which the theorem is clearly false: one
+    could choose a degenerate language in which $(\dot{p}, \dot{R})$ is encoded by
+    the string `0', for example, and all other planner-reward pairs are of extremely
+    long length. What constitutes a `reasonable' language is a long-standing open
+    problem, see Leike et al. [2017] and Müller [2010]. For any pair of languages,
+    complexities differ only by a constant, the amount required for one language to
+    describe the other, but this constant can be arbitrarily large."
+
+    Silences (read on the page images of pp. 3--7): no discount factor, horizon or
+    formula for the value $V^\pi_R(s)$ is given (it is defined in words only, p. 4;
+    see am-def-value); no tie-breaking rule is given for the $\operatorname{argmax}$
+    / $\operatorname{argmin}$ in the greedy planners (p. 5); finiteness of
+    $\mathcal{S}$ is not stated (only "discrete", p. 3); the negative $-R$ of a
+    general reward function is used (Definition 5, p. 5) but only $-R_\pi$ is
+    defined in words ("the negative of $R_\pi$", p. 5); "degenerate" is not defined
+    beyond the three pairs constructed in §5.1 (p. 5).
+
+definitions:
+  - id: am-def-value
+    label: value and optimal value (§4.1.2, in text)
+    pdf_page: 4
+    book_page: 4
+    latex: |
+      Specifically, let $V^\pi_R(s)$ be the expected return of reward function $R$
+      from state $s$, given that the agent follows policy $\pi$. If $\pi$ was the
+      optimal policy for $R$, then this can be written as $V^*_R(s)$.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: am-def-kolmogorov
+    label: simplicity measure; $K_L$ (§5, in text; §5.1.2, in text)
+    pdf_page: 5-6
+    book_page: 5-6
+    latex: |
+      Our simplicity measure is minimum description length of an object,
+      defined as Kolmogorov complexity [Kolmogorov, 1965], the length of the shortest
+      program that outputs a string describing the object. This is the most general
+      formalization of Occam's razor we know of [Vitanyi and Li, 1997]. Appendix A
+      explores how the results extend to other measures of complexity, such as those
+      that include computation time.
+
+      [\ldots] Let $K_L$ denote Kolmogorov complexity in the language L: the shortest
+      algorithm in $L$ that generates a particular object.
+    note: Two passages, p. 5 (§5) and p. 6 (§5.1.2), joined by [\ldots].
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: am-def-trivial-reward
+    label: trivial constant reward function 0 (§5.1.1, in text)
+    pdf_page: 5
+    book_page: 5
+    latex: |
+      We can define the trivial constant reward function $0$, [\ldots]
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: am-def-reasonable
+    label: "'reasonable' (§6, in text)"
+    pdf_page: 7
+    book_page: 7
+    latex: |
+      We use reasonable to mean `compatible with human judgements about
+      rationality'. Since we do not have direct access to such a decomposition, the
+      complexity argument will be about showing the complexity of these human
+      judgements.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+statements:
+  - id: am-reward-space
+    audit_row: S20-R02
+    locator: §3 reward space
+    pdf_page: 3
+    book_page: 3
+    label: definition in text (§3)
+    latex: |
+      Let $\mathcal{R} = \{R : \mathcal{S} \times \mathcal{A} \to [-1, 1]\}
+      = [-1, 1]^{\mathcal{S} \times \mathcal{A}}$ be the space of candidate reward
+      functions; a given $R$ will map any state-reward pair to a reward value in the
+      interval $[-1, 1]$.
+    uses: []
+    note: >-
+      "state-reward pair" is printed where the domain just given is state-action
+      pairs ($\mathcal{S} \times \mathcal{A}$); transcribed as printed.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind) + Codex (anchored re-read); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: am-policy-space
+    audit_row: S20-R03
+    locator: §3 policy space
+    pdf_page: 3
+    book_page: 3
+    label: definition in text (§3)
+    latex: |
+      Let $\Pi$ be the space of deterministic, Markovian policies. So $\Pi$ is the
+      space of functions $\mathcal{S} \to \mathcal{A}$. The human will be following
+      the policy $\dot{\pi} \in \Pi$.
+    uses: []
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: am-planner
+    audit_row: S20-R04
+    locator: §3.1 planner and pair
+    pdf_page: 3
+    book_page: 3
+    label: definition in text (§3.1)
+    latex: |
+      This bridge will be modeled as a \emph{planner} $p : \mathcal{R} \to \Pi$, a
+      function that takes a reward and outputs a policy. This planner encodes all the
+      rationality, irrationality, and biases of the human. Let $\mathcal{P}$ be the
+      set of planners. The human is therefore defined by a \emph{planner-reward} pair
+      $(p, R) \in \mathcal{P} \times \mathcal{R}$. Similarly, $(p, R)$ with
+      $p(R) = \pi$ is a \emph{decomposition} of the policy $\pi$. The task of the
+      agent is to find a `good' decomposition of the human policy $\dot{\pi}$.
+    context: |
+      Preceded by: "Therefore there is something that bridges between the reward
+      function and the policy: a piece of greater or lesser rationality that
+      transforms knowledge of the reward function into a plan of action."
+    uses: [am-reward-space, am-policy-space]
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind) + Codex (anchored re-read); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: am-compatible
+    audit_row: S20-R05
+    locator: §3.2 compatible
+    pdf_page: 3
+    book_page: 3
+    label: definition in text (§3.2)
+    latex: |
+      Then a pair $(p, R)$ is defined to be \emph{compatible} with $\dot{\pi}$, if
+      $p(R) = \dot{\pi}$ --- thus that pair is a possible candidate for decomposing
+      the human policy into the human's planner and reward function.
+    uses: [am-planner, am-policy-space]
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: am-thm1a
+    audit_row: S20-R06
+    locator: Theorem 1, first half
+    pdf_page: 4
+    book_page: 4
+    label: Theorem 1 (first paragraph)
+    latex: |
+      \textbf{Theorem 1.} \emph{For all $\pi \in \Pi$ and $R \in \mathcal{R}$, there
+      exists a $p \in \mathcal{P}$ such that $p(R) = \pi$.}
+    context: |
+      Introduced by (§4.1.1): "Firstly, we note that compatibility
+      ($p(R) = \dot{\pi}$), puts no restriction on $R$, and few restrictions on $p$:"
+    uses: [am-policy-space, am-reward-space, am-planner]
+    proof_pages: 4
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: am-thm1b
+    audit_row: S20-R07
+    locator: Theorem 1, second half
+    pdf_page: 4
+    book_page: 4
+    label: Theorem 1 (second paragraph)
+    latex: |
+      \emph{For all $p \in \mathcal{P}$ and $\pi \in \Pi$ in the image of $p$, there
+      exists an $R$ such that $p(R) = \pi$.}
+    context: |
+      Printed as a second italic paragraph of Theorem 1, directly after
+      am-thm1a, with no label of its own.
+    uses: [am-planner, am-policy-space, am-reward-space]
+    proof_pages: 4
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: am-regret
+    audit_row: S20-R08
+    locator: §4.1.2 regret
+    pdf_page: 4
+    book_page: 4
+    label: definition in text (§4.1.2)
+    latex: |
+      The regret of $\pi$ for $R$ at $s$ is given by the difference:
+      \[ \mathrm{Reg}(\pi, R)(s) = V^*_R(s) - V^\pi_R(s). \]
+    uses: [am-def-value, am-policy-space, am-reward-space]
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind) + Codex (anchored re-read); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: am-worst-case
+    audit_row: S20-R09
+    locator: §4.1.2 worst case
+    pdf_page: 4
+    book_page: 4
+    label: displayed inequality (§4.1.2), its two maxima
+    latex: |
+      Then Everitt et al. [2017] demonstrates that for any $\pi$,
+      \[ \max_{R \in \mathcal{R}} \mathrm{Reg}(\pi, R)(s) \geq \frac{1}{2}
+         \left( \max_{\pi' \in \Pi, R \in \mathcal{R}} \mathrm{Reg}(\pi', R)(s)
+         \right). \]
+    uses: [am-regret, am-reward-space, am-policy-space]
+    note: >-
+      The page has no separate definition of either maximum; the two maxima the row
+      names occur only inside this display, so the display (same as S20-R10) is the
+      printed source. The display is unnumbered. $s$ is free in the display (no
+      quantifier on $s$ is printed).
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind) + Codex (anchored re-read); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: am-half-maximal
+    audit_row: S20-R10
+    locator: §4.1.2 the half-maximal bound
+    pdf_page: 4
+    book_page: 4
+    label: displayed inequality (§4.1.2), attributed to Everitt et al. [2017]
+    latex: |
+      Then Everitt et al. [2017] demonstrates that for any $\pi$,
+      \[ \max_{R \in \mathcal{R}} \mathrm{Reg}(\pi, R)(s) \geq \frac{1}{2}
+         \left( \max_{\pi' \in \Pi, R \in \mathcal{R}} \mathrm{Reg}(\pi', R)(s)
+         \right). \]
+    context: |
+      Preceded by: "In that case, Everitt et al. [2017] demonstrated that whatever
+      policy $\pi$ the agent follows, there is a $R \in \mathcal{R}$ for which $\pi$
+      is half as bad as the worst policy the agent could have followed."
+    uses: [am-regret, am-reward-space, am-policy-space]
+    note: >-
+      Cited result, not proved in this paper. $s$ is free in the display.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: am-half-maximal-conclusion
+    audit_row: S20-R11
+    locator: §4.1.2 conclusion
+    pdf_page: 4
+    book_page: 4
+    label: remark (last sentence of §4.1.2)
+    latex: |
+      So for any compatible $(p, R) = \dot{\pi}$, we cannot rule out that maximizing
+      $R$ leads to at least half of the worst-case regret.
+    uses: [am-compatible, am-half-maximal]
+    note: >-
+      "$(p, R) = \dot{\pi}$" equates a pair with a policy as printed; the evident
+      reading is $p(R) = \dot{\pi}$, i.e. the compatibility just named.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: am-thm2
+    audit_row: S20-R12
+    locator: Theorem 2 (informal)
+    pdf_page: 5
+    book_page: 5
+    label: Theorem 2 (Informal simplicity theorem)
+    latex: |
+      \textbf{Theorem 2} (Informal simplicity theorem)\textbf{.} \emph{Let
+      $(\dot{p}, \dot{R})$ be a `reasonable' planner-reward pair that captures our
+      judgements about the biases and rationality of a human with policy
+      $\dot{\pi} = \dot{p}(\dot{R})$. Then there are degenerate planner-reward pairs,
+      compatible with $\dot{\pi}$, of lower complexity than $(\dot{p}, \dot{R})$, and
+      a pair $(\dot{p}', -\dot{R})$ of similar complexity to $(\dot{p}, \dot{R})$, but
+      with opposite reward function.}
+    uses: [am-planner, am-compatible, am-def-kolmogorov, am-def-reasonable]
+    note: >-
+      Informal; no proof. The text after it (p. 5) says the paper gives Propositions
+      3 and 4 as semi-formal versions (formalised as Propositions 7 and 8) and that
+      "the fact that any `reasonable' $(\dot{p}, \dot{R})$ is expected to be of
+      higher complexity, will be addressed in Section 6" (Conjecture 9).
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind) + Codex (anchored re-read); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: am-greedy
+    audit_row: S20-R15
+    locator: §5.1.1 greedy planner
+    pdf_page: 5
+    book_page: 5
+    label: definition in text (§5.1.1)
+    latex: |
+      We can define the trivial constant reward function $0$, and the greedy planner
+      $p_g$. The greedy planner $p_g$ acts by taking the action that maximises the
+      immediate reward in the current state and the next action. Thus$^8$
+      $p_g(R)(s) = \operatorname{argmax}_a R(s, a)$. We can also define the
+      anti-greedy planner $-p_g$, with $-p_g(R)(s) = \operatorname{argmin}_a R(s, a)$.
+      In general, it will be useful to define the negative of a planner:
+    context: |
+      Footnote 8 (p. 5): "Recall that $p_g$ is a planner, $p_g(R)$ is a policy, so
+      $p_g(R)$ can be applied to states, and $p_g(R)(s)$ is an action."
+    uses: [am-planner, am-reward-space, am-def-trivial-reward]
+    note: >-
+      "in the current state and the next action" transcribed as printed. No
+      tie-breaking rule for argmax/argmin is printed. The definition of $-p_g$ here
+      and Definition 5 applied to $p_g$ agree:
+      $p_g(-R)(s) = \operatorname{argmax}_a (-R(s,a)) = \operatorname{argmin}_a R(s,a)$
+      as sets, but the page does not state this.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind) + Codex (anchored re-read); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: am-def5
+    audit_row: S20-R16
+    locator: Definition 5
+    pdf_page: 5
+    book_page: 5
+    label: Definition 5
+    latex: |
+      \textbf{Definition 5.} If $p : \mathcal{R} \to \Pi$ is a planner, the planner
+      $-p$ is defined by $-p(R) = p(-R)$.
+    uses: [am-planner]
+    note: >-
+      Body set upright, not italic. $-R$ for a general $R \in \mathcal{R}$ is not
+      separately defined (see standing, silences).
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: am-indifferent
+    audit_row: S20-R17
+    locator: §5.1.1 indifferent planner and policy indicator
+    pdf_page: 5
+    book_page: 5
+    label: definition in text (§5.1.1)
+    latex: |
+      For any given policy $\pi$, we can define the \emph{indifferent} planner
+      $p_\pi$, which maps any reward function to $\pi$. We can also define the reward
+      function $R_\pi$, so that $R_\pi(s, a) = 1$ if $\pi(s) = a$, and
+      $R_\pi(s, a) = 0$ otherwise. The reward function $-R_\pi$ is defined to be the
+      negative of $R_\pi$. Then:
+    uses: [am-planner, am-policy-space, am-reward-space]
+    note: '"Then:" leads into Lemma 6 at the top of p. 6.'
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: am-lemma6
+    audit_row: S20-R18
+    locator: Lemma 6
+    pdf_page: 6
+    book_page: 6
+    label: Lemma 6
+    latex: |
+      \textbf{Lemma 6.} \emph{The pairs $(p_\pi, 0)$, $(p_g, R_\pi)$, and
+      $(-p_g, -R_\pi)$ are all compatible with $\pi$.}
+    uses: [am-indifferent, am-greedy, am-def5, am-compatible, am-def-trivial-reward]
+    proof_pages: 6
+    note: >-
+      "compatible with $\pi$" for an arbitrary policy $\pi$, extending the
+      definition of compatibility (stated for $\dot{\pi}$, p. 3). The proof uses
+      $p_g(R_\pi)(s) = \operatorname{argmax}_a R_\pi(s,a) = \pi(s)$, i.e. treats
+      the argmax as the unique maximiser.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: am-basic-ops
+    audit_row: S20-R19
+    locator: §5.1.2 basic operations
+    pdf_page: 6
+    book_page: 6
+    label: list in text (§5.1.2)
+    latex: |
+      We will look the operations that build the degenerate planner-reward pairs from
+      any compatible pair:
+      \begin{enumerate}
+      \item For any planner $p$, $f_1(p) = (p, 0)$ as a planner-reward pair.
+      \item For any reward function $R$, $f_2(R) = (p_g, R)$.
+      \item For any planner-reward pair $(p, R)$, $f_3(p, R) = p(R)$.
+      \item For any planner-reward pair $(p, R)$, $f_4(p, R) = (-p, -R)$.
+      \item For any policy $\pi$, $f_5(\pi) = p_\pi$.
+      \item For any policy $\pi$, $f_6(\pi) = R_\pi$.
+      \end{enumerate}
+      These will be called the basic operations, [\ldots]
+    uses: [am-planner, am-greedy, am-def5, am-indifferent, am-def-trivial-reward]
+    note: '"We will look the operations" (missing "at") transcribed as printed.'
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind) + Codex (anchored re-read); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: am-composite-ops
+    audit_row: S20-R20
+    locator: §5.1.2 composite operations
+    pdf_page: 6
+    book_page: 6
+    label: definition in text (§5.1.2)
+    latex: |
+      From these basic operations, we can define three composite operations that map
+      any compatible planner-reward pair to one of the degenerate pairs (the element
+      $F_4 = f_4$ is useful for later definitions). Thus define
+      \[ F = \{F_1 = f_1 \circ f_5 \circ f_3,\ \ F_2 = f_2 \circ f_6 \circ f_3,\ \
+         F_3 = f_4 \circ f_2 \circ f_6 \circ f_3,\ \ F_4 = f_4\}. \]
+      For any $\dot{\pi}$-compatible pair $(p, R)$ we have
+      $F_1(p, R) = (p_{\dot{\pi}}, 0)$, $F_2(p, R) = (p_g, R_{\dot{\pi}})$, and
+      $F_3(p, R) = (-p_g, -R_{\dot{\pi}})$ (see the proof of Proposition 7).
+    uses: [am-basic-ops, am-compatible]
+    proof_pages: 7
+    note: >-
+      "three composite operations" but $F$ has four elements (the fourth, $F_4$, is
+      flagged in the parenthesis).
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind) + Codex (anchored re-read); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: am-f-complexity
+    audit_row: S20-R21
+    locator: §5.1.2 F-complexity, c-reasonable
+    pdf_page: 6
+    book_page: 6
+    label: definition in text (§5.1.2)
+    latex: |
+      We define the $F$-complexity of $L$ as
+      \[ \max_{(p,R), F_i \in F} K_L(F_i(p, R)) - K_L(p, R). \]
+      Thus the $F$-complexity of $L$ is how much the $F_i$ potentially
+      increase$^{10}$ the complexity of pairs.
+
+      For a constant $c \geq 0$, this allows us to formalise what we mean by $L$
+      being a $c$-reasonable language for $F$: that the $F$-complexity of $L$ is at
+      most $c$. A reasonable language is a $c$-reasonable language for a $c$ that we
+      feel is intuitively low enough.
+    uses: [am-def-kolmogorov, am-composite-ops]
+    note: >-
+      The range of $(p,R)$ under the max is not printed (all of
+      $\mathcal{P} \times \mathcal{R}$ or only compatible pairs). Footnote 10 is in
+      excerpt am-fn10 (it contains a printed slip).
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: am-comparable
+    audit_row: S20-R22
+    locator: §5.1.3 comparable complexity
+    pdf_page: 6
+    book_page: 6
+    label: definition in text (§5.1.3)
+    latex: |
+      To formalise the concepts `of lowest complexity', and `of comparable
+      complexity', choose a constant $c \geq 0$, then $(p, R)$ and $(p', R')$ are of
+      `comparable complexity' if
+      \[ ||K_L(p, R) - K_L(p', R')|| \leq c. \]
+    uses: [am-def-kolmogorov]
+    note: Double bars $||\cdot||$ printed where an absolute value is meant.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind) + Codex (anchored re-read); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: am-lowest
+    audit_row: S20-R23
+    locator: §5.1.3 amongst the lowest
+    pdf_page: 6
+    book_page: 6
+    label: definition in text (§5.1.3)
+    latex: |
+      For a set $S \subset \mathcal{P} \times \mathcal{R}$, the pair
+      $(p, R) \in S$ is amongst the lowest complexity in $S$ if
+      \[ ||K_L(p, R) - \min_{(p', R') \in S} K_L(p', R')|| \leq c, \]
+      thus $K_L$ is within distance $c$ of the minimum complexity element of $S$.
+    uses: [am-def-kolmogorov, am-comparable]
+    note: >-
+      $c$ is the constant chosen in the preceding sentence (am-comparable). Double
+      bars as absolute value. Existence of the min is not discussed.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind) + Codex (anchored re-read); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: am-prop7
+    audit_row: S20-R24
+    locator: Proposition 7
+    pdf_page: 7
+    book_page: 7
+    label: Proposition 7
+    latex: |
+      \textbf{Proposition 7.} \emph{If $\dot{\pi}$ is the human policy, $c$ defines a
+      reasonable measure of comparable complexity, and $L$ is a $c$-reasonable
+      language for $F$, then the degenerate planner-reward pairs
+      $(p_{\dot{\pi}}, 0)$, $(p_g, R_{\dot{\pi}})$, and $(-p_g, -R_{\dot{\pi}})$ are
+      amongst the pairs of lowest complexity among the pairs compatible with
+      $\dot{\pi}$.}
+    context: |
+      Introduced (end of p. 6) by: "Now formalize Proposition 3:". Proposition 3
+      (p. 5): "\textbf{Proposition 3.} \emph{If $\dot{\pi}$ is a human policy, and $L$
+      is a `reasonable' computer language, then there exists degenerate
+      planner-reward pairs amongst the pairs of lowest complexity compatible with
+      $\dot{\pi}$.}"
+    uses: [am-lemma6, am-composite-ops, am-f-complexity, am-comparable, am-lowest, am-compatible]
+    proof_pages: 7
+    note: >-
+      "c defines a reasonable measure of comparable complexity" is not defined
+      further on the page. The proof is in excerpt am-prop7-proof-step.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: am-negation-compatible
+    audit_row: S20-R25
+    locator: §5.2 negation preserves compatibility
+    pdf_page: 7
+    book_page: 7
+    label: remark in text (§5.2)
+    latex: |
+      If $(\dot{p}, \dot{R})$ is compatible with $\dot{\pi}$, then so is
+      $(-\dot{p}, -\dot{R}) = f_4(\dot{p}, \dot{R}) = F_4(\dot{p}, \dot{R})$. This
+      immediately implies the formalisation of Proposition 4:
+    uses: [am-compatible, am-def5, am-basic-ops, am-composite-ops]
+    note: >-
+      No proof beyond the sentence; follows from Definition 5
+      ($-\dot{p}(-\dot{R}) = \dot{p}(\dot{R})$), which the page does not spell out
+      here.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: am-prop8
+    audit_row: S20-R26
+    locator: Proposition 8
+    pdf_page: 7
+    book_page: 7
+    label: Proposition 8
+    latex: |
+      \textbf{Proposition 8.} \emph{If $\dot{\pi}$ is a human policy, $c$ defines a
+      reasonable measure of comparable complexity, $L$ is a $c$-reasonable language
+      for $F$, and $(\dot{p}, \dot{R})$ is compatible with $\dot{\pi}$, then
+      $(-\dot{p}, -\dot{R})$ is of comparable complexity to $(\dot{p}, \dot{R})$.}
+    context: |
+      Proposition 4 (p. 5), which this formalises: "\textbf{Proposition 4.} \emph{If
+      $\dot{\pi}$ is a human policy, and $L$ is a `reasonable' computer language with
+      $(\dot{p}, \dot{R})$ a compatible planner-reward pair, then there exist a pair
+      $(\dot{p}', -\dot{R})$ of comparable complexity to $(\dot{p}, \dot{R})$, but
+      opposite reward function.}"
+    uses: [am-negation-compatible, am-f-complexity, am-comparable, am-def5, am-compatible]
+    proof_pages: 7
+    note: >-
+      No proof environment; the justification is the preceding sentence
+      (am-negation-compatible). Comparable complexity in both directions needs the
+      $F$-complexity bound for $F_4$ applied to $(\dot{p},\dot{R})$ and to
+      $(-\dot{p},-\dot{R})$; footnote 10 (excerpt am-fn10) is where the page uses
+      $F_4 \circ F_4 = \mathrm{id}$.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: am-lower-bound
+    audit_row: S20-R27
+    locator: §5.1 lower bound
+    pdf_page: 5
+    book_page: 5
+    label: argument in text (§5.1)
+    latex: |
+      The argument in this subsection will be that 1) the complexity of $\dot{\pi}$
+      is close to a lower bound on any pair compatible with it and 2) degenerate
+      decompositions are themselves close to this bound. The first statement follows
+      because for any decomposition $(p, R)$ compatible with $\dot{\pi}$, the map
+      $(p, R) \mapsto p(R) = \dot{\pi}$ will be a simple one, adding little
+      complexity. And if a compatible pair $(p', R')$ can be from $\dot{\pi}$ with
+      little extra complexity, then it too will have a complexity close to the
+      minimal complexity of any other pair compatible with it. Therefore we will
+      first produce three degenerate pairs that can be simply constructed from
+      $\dot{\pi}$.
+    uses: [am-compatible, am-planner, am-def-kolmogorov]
+    note: >-
+      Informal argument, not a numbered result. "can be from $\dot{\pi}$" (a verb,
+      presumably "constructed", is missing) transcribed as printed.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: am-conj9
+    audit_row: S20-R29
+    locator: Conjecture 9
+    pdf_page: 9
+    book_page: 9
+    label: Conjecture 9 (Informal complexity proposition)
+    latex: |
+      \textbf{Conjecture 9} (Informal complexity proposition)\textbf{.} If
+      $\dot{\pi}$ is a human policy, and $L$ is a `reasonable' computer language with
+      $(\dot{p}, \dot{R})$ a `reasonable' compatible planner-reward pair, then the
+      complexity of $(\dot{p}, \dot{R})$ is not close to minimal amongst the pairs
+      compatible with $\dot{\pi}$.
+    uses: [am-compatible, am-f-complexity, am-def-reasonable, am-lowest, am-def-kolmogorov]
+    note: >-
+      Body set upright, not italic. "not close to minimal" has no tolerance attached;
+      the paper's formal notion nearest to it is "amongst the lowest complexity"
+      with constant $c$ (p. 6), which this conjecture does not name.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind) + Codex (anchored re-read); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+excerpts:
+  - id: am-fn10
+    for: [am-f-complexity, am-prop8]
+    reason: >-
+      Footnote 10 to the F-complexity definition; it carries a printed slip
+      ($K_F$ for $K_L$ in the last term, and an unbalanced parenthesis) and is where
+      the page uses $F_4 \circ F_4 = \mathrm{id}$, the step a two-sided
+      comparability (Proposition 8) needs.
+    pdf_page: 6
+    latex: |
+      $^{10}$$F$-complexity is non-negative: $F_4 \circ F_4$ is the identity, so that
+      $K_L(F_4(p, R)) - K_L(p, R) =
+      -(K_L(F_4(F_4(p, R)) - K_L(F_4(p, R))$, meaning that
+      $\max_{(p,R),F_4} K_L(F_4(p, R)) - K_F(p, R)$ must be non-negative; this is a
+      reason to include $F_4$ in the definition of $F$.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: am-prop7-proof-step
+    for: [am-prop7]
+    reason: >-
+      Shows how the proof reads "amongst the lowest complexity": it compares with
+      the simplest compatible pair (assumes the minimum is attained) and uses only
+      the one-sided bound from $c$-reasonableness, with the remaining two pairs
+      left to "the same argument".
+    pdf_page: 7
+    latex: |
+      Now pick $(p, R)$ to be the simplest pair compatible with $\dot{\pi}$. Since
+      $L$ is $c$-reasonable for $F$, $K_L(p_{\dot{\pi}}, 0) \leq c + K_L(p, R)$.
+      Hence $(p_{\dot{\pi}}, 0)$ is of lowest complexity among the pairs compatible
+      with $\dot{\pi}$; the same argument applies for the other two degenerate pairs.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}

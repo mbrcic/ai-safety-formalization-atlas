@@ -11,7 +11,7 @@ rather than derives, printed results it does not reach, and inferences a
 reader might expect to follow from what is here and which do not. They are
 part of the result, not a disclaimer attached to it.
 
-**44 modules** carry one.
+**45 modules** carry one.
 
 ---
 
@@ -226,16 +226,18 @@ No survey coverage row is claimed here; this is workbench infrastructure.
   A contained subsystem can in principle encode the whole state, be perfectly
   correlated with the rest, or be modelled at a resolution where the remainder
   is a singleton.
-* **Not** Breuer’s theorem itself. The graded paper core remains
-  `Knowledge.Embedded`. These results are atlas physical modelling, graded
-  separately.
+* **Not** Breuer’s §3.5 theorems. The graded paper core remains
+  `Knowledge.Embedded`, and the complement-model results above are atlas
+  physical modelling, graded separately. The exception is the last section,
+  which states Breuer's footnote 4 (p. 208) as printed.
 * **Not** Bekenstein, dynamics, quantum states, or AI-system conclusions.
 
 ## `AISafetyAtlas.Knowledge.Embedded.Finite`
 
 * Not “every physical containment has a cardinality gap.”
 * Not a quantum / continuum result.
-* Not Breuer’s paper theorem (that remains `Knowledge.Embedded`).
+* Not Breuer’s §3.5 theorems (those remain `Knowledge.Embedded`). The two §3.4
+  declarations above are the paper's finite remark, stated as printed.
 
 ## `AISafetyAtlas.Knowledge.Embedded`
 
@@ -248,7 +250,9 @@ physically contained apparatus must have a non-injective restriction; the source
 does not derive it either, and Breuer's own counterexample shows containment need
 not force a collision. Deriving it under stated hypotheses is
 `Knowledge.Embedded.Composition` and `.Finite`, graded separately as atlas
-modelling rather than as the paper.
+modelling rather than as the paper. Those two modules also carry printed
+statements outside §3.5: Breuer's §3.4 finite remark (`.Finite`) and footnote 4's
+non-meshing bijection (`.Composition`).
 
 Nothing here concerns AI systems. No self-monitoring, introspection, or
 observability reading follows without a separate reviewed bridge.
@@ -418,6 +422,14 @@ No survey coverage row is claimed here; this is landscape infrastructure.
   verdict and names the theorem that certifies it; the kernel has checked the
   theorem, not the instance.
 
+## `AISafetyAtlas.Preference.AnyGreedy`
+
+- **Not** a claim that the greedy planner is unique: at a tied reward, two
+  greedy planners may differ, and the witnesses exhibit one that differs from
+  `AISafetyAtlas.Preference.greedyPlanner` at the zero reward.
+- **Not** a construction of a nontrivial reasonable language; as in
+  `AISafetyAtlas.Preference.SourceComplexity`, the language is a hypothesis.
+
 ## `AISafetyAtlas.Preference.Complexity`
 
 - **Not** a claim that no prior can distinguish the pairs — only that a prior
@@ -429,14 +441,10 @@ No survey coverage row is claimed here; this is landscape infrastructure.
   encoding. `behaviour_le_of_evaluatesTo` **is** over arbitrary compatible
   pairs, and the two are separate statements about separate objects.
 - **Not** the whole of the source's Proposition 7. The lower bound half is here
-  at the source's quantifier; the upper half is here only for `readerPair`, and
-  the three named degenerate pairs of §5.1.2 live in `Reasonable.lean` over an
-  abstract measure.
-- **Not** an upper bound on the source's own degenerate pair `(p_π̇, R)` as a
-  function of the behaviour. `degeneratePair` builds its planner *from* the
-  behaviour, so such a bound needs the primitive recursiveness of the
-  constant-program map, which the pinned Mathlib does not state. `readerPair`
-  carries the upper bound instead and is compatible with the same behaviour.
+  at the source's quantifier; the upper half is here for `readerPair` and for
+  the source's own indifferent pair `degeneratePair r` at each fixed reward
+  (`degeneratePair_complexity_eq_behaviour`), and the three named degenerate
+  pairs of §5.1.2 live in `Reasonable.lean` over an abstract measure.
 - **Not** a statement about resource-bounded or computable-in-practice priors;
   the source's Appendix A discusses those separately.
 
@@ -694,14 +702,18 @@ Survey row: **BY-039**. No AI-system bridge is asserted.
 
 * **Finitely many percepts**, as in `GoalPreservationSource`: `E_{e_t}` is a
   normalised `Finset` sum, not an integral. No measure theory.
-* **Not modification-independence itself.** Print derives `Q_t^re(æ_<t π(æ_<t))`
+* **Not the existence of an optimal named policy.** Print derives `Q_t^re(æ_<t π(æ_<t))`
   modification-independent from modification-independent `ρ` and `u_t` together
   with its Appendix A Theorem 20 (optimal policy existence) and Theorem 21
   (optimal policy name). Neither is reproduced. Here `contValue` is a function
   of the name and the history, so modification-independence is built into the
   signature rather than proved; `initial_optimal` asserts what Theorems 20 and
-  21 would supply. **This is the gap the atlas still owes on this source**, and
-  it is the same one `GoalPreservationSource` records.
+  21 would supply. On histories that record names, `ModIndepModel` derives the
+  modification-independence of `V₁^{re,π₁}` from modification-independent `ρ`
+  and `u₁`, `γ < 1` and a bounded `V₁^{re,π₁}` (`ModIndepModel.initial_check`);
+  the existence of an optimal named policy (`initial_optimal`, Theorems 20 and
+  21) is still asserted there. **That existence is the gap the atlas still owes
+  on this source**, and `GoalPreservationSource` records it too.
 * **Policy modification only**, not utility modification. Print's Theorems 14
   and 15 (hedonistic and ignorant agents) are not formalized anywhere in the
   atlas.

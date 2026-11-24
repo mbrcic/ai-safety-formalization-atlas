@@ -8,7 +8,7 @@ public import AISafetyAtlas.InformationTheory.Determinism
 /-!
 # Ashby's Law of Requisite Variety
 
-W. Ross Ashby, *An Introduction to Cybernetics* (Chapman & Hall, 1961),
+W. Ross Ashby, *An Introduction to Cybernetics* (Chapman & Hall, 1956; second impression 1957),
 chapter 11 — the source cited by `BY-004`. Ashby's slogan is *only variety can
 destroy variety*: a regulator cannot hold the outcome steadier than its own
 repertoire allows.
@@ -141,6 +141,29 @@ public theorem entropy_ge_of_condEntropy_ge (μ : Measure Ω) [IsZeroOrProbabili
   have h₄ : H[Ev | Rv ; μ] ≤ H[Ev ; μ] := condEntropy_le_entropy (μ := μ) hE hR
   linarith
 
+omit [MeasurableSingletonClass E] [Countable E] in
+/--
+**Ashby 11/8, the intermediate line.** *"But always, by algebraic necessity,
+`H(R, E) ≤ H(R) + H(E)` so `H(D) + H_D(R) ≤ H(R) + H_R(E)`"* (W. R. Ashby, *An
+Introduction to Cybernetics*, §11/8, book p. 208), under the same hypothesis
+`H_R(E) ≥ H_R(D)` as `entropy_ge_of_condEntropy_ge`, up to the slack `K`, and
+for any three variables whatever.
+
+Print's line `H(R, E) ≤ H(R) + H(E)` is subadditivity, PFR's
+`ProbabilityTheory.entropy_pair_le_add`; together with
+`condEntropy_le_entropy` it turns this line into the final one.
+-/
+public theorem entropy_add_condEntropy_le_of_condEntropy_ge (μ : Measure Ω)
+    [IsZeroOrProbabilityMeasure μ] {Dv : Ω → D} {Rv : Ω → R} {Ev : Ω → E}
+    (hD : Measurable Dv) (hR : Measurable Rv)
+    [FiniteRange Dv] [FiniteRange Rv]
+    (K : ℝ) (hkey : H[Dv | Rv ; μ] - K ≤ H[Ev | Rv ; μ]) :
+    H[Dv ; μ] + H[Rv | Dv ; μ] - K ≤ H[Rv ; μ] + H[Ev | Rv ; μ] := by
+  have h₁ : H[⟨Dv, Rv⟩ ; μ] = H[Rv ; μ] + H[Dv | Rv ; μ] := chain_rule μ hD hR
+  have h₂ : H[⟨Rv, Dv⟩ ; μ] = H[Dv ; μ] + H[Rv | Dv ; μ] := chain_rule μ hR hD
+  have h₃ : H[⟨Dv, Rv⟩ ; μ] = H[⟨Rv, Dv⟩ ; μ] := entropy_comm hD hR μ
+  linarith
+
 omit [Countable E] [Countable R] in
 /--
 **The table hypothesis is a theorem, and an equality.** If every response
@@ -197,6 +220,201 @@ public theorem entropy_outcome_ge_of_strategy (μ : Measure Ω) [IsProbabilityMe
   rw [hzero] at h
   simp only [Function.comp_apply] at h
   linarith
+
+/--
+**Ashby 11/8's minimum, for any three variables.** Print (§11/8, book p. 208):
+*"If this minimum is to be affected by a relation between the D- and R-sources,
+it can be made least when `H_D(R) = 0`, i.e. when R is a determinate function of
+D. When this is so, then H(E)'s minimum is `H(D) − H(R)`."* The setting is
+§11/8's *"three variables … without any regard for how they are related
+causally"*, under its premise `H_R(E) ≥ H_R(D)`.
+
+So the outcome `Ev` is arbitrary here — not the value of a table at
+`(D, R)`, as in `entropy_outcome_ge_of_strategy` — and determinacy is print's
+`H_D(R) = 0` itself rather than `R = ρ ∘ D`; `condEntropy_comp_self_left`
+discharges it for any strategy `ρ`. This is `entropy_ge_of_condEntropy_ge` at
+`K = 0` with the `H[Rv | Dv]` term removed.
+-/
+public theorem entropy_ge_sub_of_condEntropy_eq_zero (μ : Measure Ω)
+    [IsZeroOrProbabilityMeasure μ]
+    {Dv : Ω → D} {Rv : Ω → R} {Ev : Ω → E}
+    (hD : Measurable Dv) (hR : Measurable Rv) (hE : Measurable Ev)
+    [FiniteRange Dv] [FiniteRange Rv] [FiniteRange Ev]
+    (hdet : H[Rv | Dv ; μ] = 0) (hkey : H[Dv | Rv ; μ] ≤ H[Ev | Rv ; μ]) :
+    H[Dv ; μ] - H[Rv ; μ] ≤ H[Ev ; μ] := by
+  have h := entropy_ge_of_condEntropy_ge μ hD hR hE 0 (by linarith)
+  rw [hdet] at h
+  linarith
+
+/-! ### §11/8's minimum is attained
+
+Print says the bound is a *minimum*: *"When this is so, then H(E)'s minimum is
+`H(D) − H(R)`"* (§11/8, book p. 208). `entropy_ge_sub_of_condEntropy_eq_zero` is the
+bound; the declarations below supply the attainment, at the same scope. An `E`
+attaining it must satisfy `H(E) = H(D | R) = H(E | R)`, so it is independent of
+`R` and carries entropy exactly `H(D | R)`. The given sample space need not carry
+such a variable: on three equally likely points with `R` splitting them two and
+one, no variable meeting the premise attains the bound
+(no_attaining_on_three in
+`docs/provenance/refutations/ashby-11-8-minimum-literal.lean`). So the attaining
+`E` lives on `Ω × Fin (n + 1)`, with `(D, R)` copied on the first factor and `E`
+the second. -/
+
+/-- The weights of `(1 - t) · δ₀ + t · uniform` on `Fin (n + 1)`. -/
+private noncomputable def mixWeight (n : ℕ) (t : ℝ) (i : Fin (n + 1)) : ℝ :=
+  (if i = 0 then 1 - t else 0) + t / (n + 1)
+
+private theorem mixWeight_nonneg (n : ℕ) {t : ℝ} (ht0 : 0 ≤ t) (ht1 : t ≤ 1)
+    (i : Fin (n + 1)) : 0 ≤ mixWeight n t i := by
+  unfold mixWeight
+  have : 0 ≤ t / (n + 1) := by positivity
+  split_ifs <;> linarith
+
+private theorem mixWeight_sum (n : ℕ) (t : ℝ) : ∑ i, mixWeight n t i = 1 := by
+  unfold mixWeight
+  rw [Finset.sum_add_distrib, Finset.sum_ite_eq' Finset.univ (0 : Fin (n + 1))]
+  simp only [Finset.mem_univ, if_true, Finset.sum_const, Finset.card_univ, Fintype.card_fin,
+    nsmul_eq_mul]
+  push_cast
+  field_simp
+  ring
+
+/-- The measure `(1 - t) · δ₀ + t · uniform` on `Fin (n + 1)`. -/
+private noncomputable def mixMeasure (n : ℕ) (t : ℝ) : Measure (Fin (n + 1)) :=
+  ∑ i, ENNReal.ofReal (mixWeight n t i) • Measure.dirac i
+
+private theorem mixMeasure_singleton (n : ℕ) (t : ℝ) (j : Fin (n + 1)) :
+    mixMeasure n t {j} = ENNReal.ofReal (mixWeight n t j) := by
+  simp [mixMeasure, Finset.sum_apply, Set.indicator]
+
+private theorem mixMeasure_univ (n : ℕ) {t : ℝ} (ht0 : 0 ≤ t) (ht1 : t ≤ 1) :
+    mixMeasure n t Set.univ = 1 := by
+  simp only [mixMeasure, Measure.coe_finsetSum, Finset.sum_apply, Measure.smul_apply,
+    measure_univ, smul_eq_mul, mul_one]
+  rw [← ENNReal.ofReal_sum_of_nonneg (fun i _ => mixWeight_nonneg n ht0 ht1 i), mixWeight_sum,
+    ENNReal.ofReal_one]
+
+private theorem mixMeasure_entropy (n : ℕ) {t : ℝ} (ht0 : 0 ≤ t) (ht1 : t ≤ 1) :
+    Hm[mixMeasure n t] = ∑ i, negMulLog (mixWeight n t i) := by
+  have : IsProbabilityMeasure (mixMeasure n t) := ⟨mixMeasure_univ n ht0 ht1⟩
+  rw [measureEntropy_of_isProbabilityMeasure, tsum_fintype]
+  refine Finset.sum_congr rfl fun i _ => ?_
+  rw [Measure.real, mixMeasure_singleton, ENNReal.toReal_ofReal (mixWeight_nonneg n ht0 ht1 i)]
+
+/--
+**Every entropy up to `log (n + 1)` is the entropy of a law on `n + 1` points.** The
+family `(1 - t) · δ₀ + t · uniform` runs continuously from entropy `0` at `t = 0`
+to `log (n + 1)` at `t = 1`, and the intermediate value theorem picks `t`.
+
+Used by `exists_entropy_eq_sub_of_condEntropy_eq_zero` to build the outcome that
+attains Ashby's §11/8 minimum (*"H(E)'s minimum is `H(D) − H(R)`"*, book p. 208),
+whose entropy must be exactly `H(D | R)`.
+-/
+public theorem exists_measureEntropy_eq (n : ℕ) {h : ℝ} (h0 : 0 ≤ h) (hn : h ≤ log (n + 1)) :
+    ∃ ν : Measure (Fin (n + 1)), IsProbabilityMeasure ν ∧ Hm[ν] = h := by
+  set f : ℝ → ℝ := fun t => ∑ i, negMulLog (mixWeight n t i)
+  have hf : Continuous f := by
+    refine continuous_finsetSum _ fun i _ => continuous_negMulLog.comp ?_
+    unfold mixWeight
+    by_cases hi : i = 0 <;> simp only [hi, if_true, if_false] <;> fun_prop
+  have hf0 : f 0 = 0 := by
+    simp only [f, mixWeight]
+    refine Finset.sum_eq_zero fun i _ => ?_
+    split_ifs <;> simp
+  have hf1 : f 1 = log (n + 1) := by
+    simp only [f, mixWeight, sub_self, ite_self, zero_add, Finset.sum_const, Finset.card_univ,
+      Fintype.card_fin, nsmul_eq_mul, negMulLog]
+    have : (0 : ℝ) < n + 1 := by positivity
+    rw [one_div, Real.log_inv]
+    push_cast
+    field_simp
+  obtain ⟨t, ⟨ht0, ht1⟩, hft⟩ :=
+    intermediate_value_Icc zero_le_one hf.continuousOn (show h ∈ Set.Icc (f 0) (f 1) by
+      rw [hf0, hf1]; exact ⟨h0, hn⟩)
+  exact ⟨mixMeasure n t, ⟨mixMeasure_univ n ht0 ht1⟩, (mixMeasure_entropy n ht0 ht1).trans hft⟩
+
+/--
+**Ashby 11/8's minimum is attained.** Print (§11/8, book p. 208): *"it can be made
+least when `H_D(R) = 0`, i.e. when R is a determinate function of D. When this is
+so, then H(E)'s minimum is `H(D) − H(R)`."* `entropy_ge_sub_of_condEntropy_eq_zero`
+proves the bound for every `E` meeting §11/8's premise `H_R(E) ≥ H_R(D)`; this
+proves that some such `E` meets it with equality, at the same scope (any measure
+that is zero or a probability, finite-range `D` and `R`, `H_D(R) = 0`).
+
+The outcome is §11/8's *"without any regard for how they are related causally"*:
+on `Ω × Fin (n + 1)` under `μ.prod ν`, `(D, R)` is copied on the first factor (with
+its joint law, the `IdentDistrib` conjunct) and `E` is the second factor, so `E` is
+independent of `R` and its law `ν` is chosen with entropy `H(D | R)`. The copy
+still has `H_D(R) = 0`, meets the premise, and `H(E) = H(D) − H(R)`.
+
+The extension is needed: on the given `Ω` such an `E` need not exist. Nor can it
+be required to be a table outcome: when `E` must be `T (D, R)` with injective
+columns the minimum is not attained in general. Both are proved at one instance in
+`docs/provenance/refutations/ashby-11-8-minimum-literal.lean`.
+-/
+public theorem exists_entropy_eq_sub_of_condEntropy_eq_zero (μ : Measure Ω)
+    [IsZeroOrProbabilityMeasure μ] {Dv : Ω → D} {Rv : Ω → R}
+    (hD : Measurable Dv) (hR : Measurable Rv) [FiniteRange Dv] [FiniteRange Rv]
+    (hdet : H[Rv | Dv ; μ] = 0) :
+    ∃ (n : ℕ) (ν : Measure (Fin (n + 1))), IsProbabilityMeasure ν ∧
+      IdentDistrib (fun p : Ω × Fin (n + 1) => (Dv p.1, Rv p.1)) (fun ω => (Dv ω, Rv ω))
+        (μ.prod ν) μ ∧
+      H[Rv ∘ Prod.fst | Dv ∘ Prod.fst ; μ.prod ν] = 0 ∧
+      H[Dv ∘ Prod.fst | Rv ∘ Prod.fst ; μ.prod ν]
+        ≤ H[(Prod.snd : Ω × Fin (n + 1) → Fin (n + 1)) | Rv ∘ Prod.fst ; μ.prod ν] ∧
+      H[(Prod.snd : Ω × Fin (n + 1) → Fin (n + 1)) ; μ.prod ν] = H[Dv ; μ] - H[Rv ; μ] := by
+  -- `H[D | R] = H[D] - H[R]` once `H[R | D] = 0`
+  have h₁ : H[⟨Dv, Rv⟩ ; μ] = H[Rv ; μ] + H[Dv | Rv ; μ] := chain_rule μ hD hR
+  have h₂ : H[⟨Rv, Dv⟩ ; μ] = H[Dv ; μ] + H[Rv | Dv ; μ] := chain_rule μ hR hD
+  have h₃ : H[⟨Dv, Rv⟩ ; μ] = H[⟨Rv, Dv⟩ ; μ] := entropy_comm hD hR μ
+  have hgap : H[Dv | Rv ; μ] = H[Dv ; μ] - H[Rv ; μ] := by linarith
+  -- a law on `Fin (n + 1)` with entropy `H[D | R]`
+  set n := (FiniteRange.toFinset Dv).card
+  have hlogD : H[Dv ; μ] ≤ log (n + 1) := by
+    have h := measureEntropy_le_log_card_of_mem (μ.map Dv) (full_measure_of_finiteRange hD)
+    rw [← entropy_def] at h
+    refine h.trans ?_
+    rcases Nat.eq_zero_or_pos n with h0 | h0
+    · simp only [n] at h0 ⊢; rw [h0]; simp
+    · exact Real.log_le_log (by exact_mod_cast h0) (by simp [n])
+  obtain ⟨ν, hν, hνH⟩ := exists_measureEntropy_eq n (condEntropy_nonneg Dv Rv μ)
+    ((condEntropy_le_entropy μ hD hR).trans hlogD)
+  refine ⟨n, ν, hν, ?_⟩
+  -- the copy of `(D, R)` on the first factor has the law of `(D, R)`
+  have hpair : Measurable fun ω => (Dv ω, Rv ω) := hD.prodMk hR
+  have hlaw : IdentDistrib (fun p : Ω × Fin (n + 1) => (Dv p.1, Rv p.1))
+      (fun ω => (Dv ω, Rv ω)) (μ.prod ν) μ := by
+    refine ⟨(hpair.comp measurable_fst).aemeasurable, hpair.aemeasurable, ?_⟩
+    rw [show (fun p : Ω × Fin (n + 1) => (Dv p.1, Rv p.1)) = (fun ω => (Dv ω, Rv ω)) ∘ Prod.fst
+      from rfl, ← Measure.map_map hpair measurable_fst, Measure.map_fst_prod, measure_univ,
+      one_smul]
+  have hD' : Measurable (Dv ∘ Prod.fst : Ω × Fin (n + 1) → D) := hD.comp measurable_fst
+  have hR' : Measurable (Rv ∘ Prod.fst : Ω × Fin (n + 1) → R) := hR.comp measurable_fst
+  have hlawD : IdentDistrib (Dv ∘ Prod.fst : Ω × Fin (n + 1) → D) Dv (μ.prod ν) μ :=
+    hlaw.comp measurable_fst
+  have hlawR : IdentDistrib (Rv ∘ Prod.fst : Ω × Fin (n + 1) → R) Rv (μ.prod ν) μ :=
+    hlaw.comp measurable_snd
+  have hlawRD : IdentDistrib (fun p : Ω × Fin (n + 1) => (Rv p.1, Dv p.1))
+      (fun ω => (Rv ω, Dv ω)) (μ.prod ν) μ :=
+    hlaw.comp measurable_swap
+  -- the fresh factor is independent of the copy of `R`, with entropy `H[D | R]`
+  have : FiniteRange (Prod.snd : Ω × Fin (n + 1) → Fin (n + 1)) := ⟨Set.toFinite _⟩
+  have hind : IndepFun (Prod.snd : Ω × Fin (n + 1) → Fin (n + 1)) (Rv ∘ Prod.fst) (μ.prod ν) :=
+    (indepFun_fst_snd.comp hR measurable_id).symm
+  have hsnd : H[(Prod.snd : Ω × Fin (n + 1) → Fin (n + 1)) ; μ.prod ν] = H[Dv | Rv ; μ] := by
+    rcases eq_zero_or_isProbabilityMeasure μ with rfl | _
+    · simp
+    · rw [entropy_def, Measure.map_snd_prod, measure_univ, one_smul, hνH]
+  have hcondE : H[(Prod.snd : Ω × Fin (n + 1) → Fin (n + 1)) | Rv ∘ Prod.fst ; μ.prod ν]
+      = H[Dv | Rv ; μ] := by
+    rw [hind.condEntropy_eq_entropy measurable_snd hR', hsnd]
+  have hcondD : H[Dv ∘ Prod.fst | Rv ∘ Prod.fst ; μ.prod ν] = H[Dv | Rv ; μ] := by
+    rw [chain_rule'' _ hD' hR', chain_rule'' _ hD hR, hlawR.entropy_congr]
+    exact congrArg (· - H[Rv ; μ]) hlaw.entropy_congr
+  have hdet' : H[Rv ∘ Prod.fst | Dv ∘ Prod.fst ; μ.prod ν] = 0 := by
+    rw [chain_rule'' _ hR' hD', hlawD.entropy_congr, ← hdet, chain_rule'' _ hR hD]
+    exact congrArg (· - H[Dv ; μ]) hlawRD.entropy_congr
+  exact ⟨hlaw, hdet', by rw [hcondD, hcondE], by rw [hsnd, hgap]⟩
 
 /--
 **A regulator can be no better than its sensor.** Ashby assumes the regulator

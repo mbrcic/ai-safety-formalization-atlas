@@ -1,0 +1,576 @@
+source:
+  citation: >-
+    Alexander Matt Turner and Prasad Tadepalli, Parametrically Retargetable
+    Decision-Makers Tend To Seek Power, arXiv:2206.13477v2 [cs.AI], 11 Oct 2022.
+    Section 3; Appendix A (A.6, A.7, A.12, A.13); Appendix B (B.4, B.7-B.11);
+    Appendix D (D.6). The arXiv v2 numbering; the NeurIPS 2022 version is not in
+    the literature directory.
+  file: turner-tadepalli-arxiv-v2-2022-parametrically-retargetable-decision-makers-tend-to-seek-power.pdf
+  sha256: 5e4e811bd5a8cbf62203f29e9b7e430d0597d123397ab9f2be12ade6878a694e
+  page_offset: 0
+  standing: |
+    (File: the PDF's xref table is damaged; pdftoppm reconstructs it and every page
+    used here renders.)
+
+    Parameters (§3, p. 4): "To define our notion of ``retargeting'', we assume that
+    $\Theta$ is a subset of a set acted on by symmetric group $S_d$, which consists
+    of all permutations on $d$ items (\emph{e.g.} in the \textsc{rl} setting, this
+    might represent states or observations)."
+
+    Outcome sets (footnote 2, p. 4): "We often interpret $A$ and $B$ as
+    probability-theoretic events, but no such structure is demanded by our
+    results."
+
+    Closure under permutation (footnote 3, p. 4, attached to the text after
+    Definition 3.3): "The function's retargetability is ``simple'' because we are
+    not yet worrying about \emph{e.g.} which parameter inputs are considered
+    plausible: Because $S_d$ acts on $\Theta$, definition 3.3 implicitly assumes
+    $\Theta$ is closed under permutation." Definitions 3.2 and 3.5 and Lemma B.7
+    instead say "a subset of a set acted on by $S_d$"; Lemma B.9 adds "and is
+    closed under permutation by $S_d$" explicitly.
+
+    Objective (App. A.1, p. 13): "In general, we suppose the agent has an objective
+    function $\mathbf{u} \in \mathbb{R}^d$ which maps outcomes to real numbers.
+    [\ldots] However, we need not restrict ourselves to the \textsc{mdp} setting."
+    Footnote 7 (p. 12): "Our results on outcome lotteries hold for generic
+    $\mathbf{x}' \in \mathbb{R}^d$, but we find it conceptually helpful to consider
+    the non-negative unit vector case."
+
+    Silent on finiteness of the vector sets in Definitions A.6, A.7, A.12 and
+    Theorem A.13 and Lemmas B.9-B.11: A.12 takes $f$ on the full power set
+    $\mathcal{P}(\mathbb{R}^d)$ and indexes $g$ by the cardinalities $|X_i|$;
+    finiteness is stated locally elsewhere (Definitions A.2, A.3, A.5,
+    Proposition A.11: "Let $A, B \subseteq C \subsetneq \mathbb{R}^d$ be finite").
+    Pages searched: PDF pp. 12-15 and 19-21 (source card S16).
+
+definitions:
+  - id: tt-def-permutation-matrix
+    label: permutation of $\mathbf{u}$ (App. A, running prose)
+    pdf_page: 12
+    book_page: 12
+    latex: |
+      $\mathbf{u}$ can be permuted as follows. The outcome permutation
+      $\phi \in S_d$ inducing an $d \times d$ permutation matrix $\mathbf{P}_\phi$
+      in row representation: $(\mathbf{P}_\phi)_{ij} = 1$ if $i = \phi(j)$ and $0$
+      otherwise.
+    note: >-
+      The sentence has no main verb as printed ("The outcome permutation [\ldots]
+      inducing [\ldots]"), and "an $d \times d$"; both kept. Definition A.6 uses
+      $\mathbf{P}_\phi$ for $\phi \cdot X$; Lemma B.11 writes $\phi \cdot
+      \mathbf{u}$ and its proof uses $\mathbf{P}_\phi \mathbf{u}$.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: tt-remark-two-functions
+    label: Remark (after Definition 3.2, restated in Appendix B)
+    pdf_page: 15
+    book_page: 15
+    latex: |
+      \textbf{Remark.} In stating their equivalent of definition 3.2, Turner et al.
+      [2021] define two functions $f_1(\theta) := f(B \mid \theta)$ and
+      $f_2(\theta) := f(A \mid \theta)$ (both having type signature
+      $f_i : \Theta \to \mathbb{R}$). For compatibility, proofs also use this
+      notation.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+statements:
+  - id: tt-def-3.1
+    audit_row: S16-R01
+    locator: Def. 3.1
+    pdf_page: 4
+    book_page: 4
+    label: Definition 3.1 (Orbit of a parameter)
+    latex: |
+      \textbf{Definition 3.1} (Orbit of a parameter)\textbf{.} Let
+      $\theta \in \Theta$. The \emph{orbit} of $\theta$ under the symmetric group
+      $S_d$ is $S_d \cdot \theta := \{\phi \cdot \theta \mid \phi \in S_d\}$.
+      Sometimes, $\Theta$ is not closed under permutation. In that case, the
+      \emph{orbit inside} $\Theta$ is
+      $\mathrm{Orbit}|_\Theta(\theta) := (S_d \cdot \theta) \cap \Theta$.
+    uses: []
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind) + Grok (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: tt-def-3.2
+    audit_row: S16-R02
+    locator: Def. 3.2
+    pdf_page: 4
+    book_page: 4
+    label: Definition 3.2 (Inequalities which hold for most orbit elements)
+    latex: |
+      \textbf{Definition 3.2} (Inequalities which hold for most orbit
+      elements)\textbf{.} Suppose $\Theta$ is a subset of a set acted on by $S_d$,
+      the symmetric group on $d$ elements. Let
+      $f : \{A, B\} \times \Theta \to \mathbb{R}$ and let $n \geq 1$. We write
+      $f(B \mid \theta) \geq^{n}_{\text{most: }\Theta} f(A \mid \theta)$ when, for
+      \emph{all} $\theta \in \Theta$, the following cardinality inequality holds:
+      \[ \left|\left\{\theta' \in \mathrm{Orbit}|_\Theta(\theta) \mid
+         f(B \mid \theta') > f(A \mid \theta')\right\}\right| \geq
+         n \left|\left\{\theta' \in \mathrm{Orbit}|_\Theta(\theta) \mid
+         f(B \mid \theta') < f(A \mid \theta')\right\}\right|. \tag{2} \]
+    note: >-
+      Restated word for word at the start of Appendix B (PDF p. 15), followed by
+      the Remark tt-remark-two-functions. The appendix results apply it with
+      $\Theta := \mathbb{R}^d$ ("$\geq^n_{\text{most: }\mathbb{R}^d}$") and with
+      two functions $f_1, f_2$ in place of $f(B \mid \cdot), f(A \mid \cdot)$.
+    uses: [tt-def-3.1, tt-remark-two-functions]
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind) + Grok (blind) + Codex (anchored re-read); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: tt-def-3.3
+    audit_row: S16-R03
+    locator: Def. 3.3
+    pdf_page: 4
+    book_page: 4
+    label: Definition 3.3 (Simply-retargetable function)
+    latex: |
+      \textbf{Definition 3.3} (Simply-retargetable function)\textbf{.} Let $\Theta$
+      be a set acted on by $S_d$, and let
+      $f : \{A, B\} \times \Theta \to \mathbb{R}$. If
+      $\exists \phi \in S_d : \forall \theta^A \in \Theta :
+      f(B \mid \theta^A) < f(A \mid \theta^A) \implies
+      f(A \mid \phi \cdot \theta^A) < f(B \mid \phi \cdot \theta^A)$, then $f$ is a
+      $(\Theta, A \overset{\text{simple}}{\to} B)$\emph{-retargetable function}.
+    note: >-
+      "a set acted on by $S_d$" (not "a subset of"); footnote 3 (in
+      `source.standing`) reads this as closure of $\Theta$ under permutation.
+      Restated identically on PDF p. 18.
+    uses: []
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind) + Grok (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: tt-def-3.5
+    audit_row: S16-R04
+    locator: Def. 3.5
+    pdf_page: 4-5
+    book_page: 4-5
+    label: Definition 3.5 (Multiply retargetable function)
+    latex: |
+      \textbf{Definition 3.5} (Multiply retargetable function)\textbf{.} Let
+      $\Theta$ be a subset of a set acted on by $S_d$, and let
+      $f : \{A, B\} \times \Theta \to \mathbb{R}$.
+
+      $f$ is a $(\Theta, A \overset{n}{\to} B)$\emph{-retargetable function} when,
+      for each $\theta \in \Theta$, we can choose permutations
+      $\phi_1, \ldots, \phi_n \in S_d$ which satisfy the following conditions:
+      Consider any $\theta^A \in \mathrm{Orbit}|_{\Theta, A>B}(\theta) :=
+      \left\{\theta^* \in \mathrm{Orbit}|_\Theta(\theta) \mid
+      f(A \mid \theta^*) > f(B \mid \theta^*)\right\}$.
+      \begin{enumerate}
+      \item \textbf{Retargetable via $n$ permutations.}
+        $\forall i = 1, \ldots, n : f\left(A \mid \phi_i \cdot \theta^A\right) <
+        f\left(B \mid \phi_i \cdot \theta^A\right)$.
+      \item \textbf{Parameter permutation is allowed by $\Theta$.}
+        $\forall i : \phi_i \cdot \theta^A \in \Theta$.
+      \item \textbf{Permuted parameters are distinct.}
+        $\forall i \neq j, \theta' \in \mathrm{Orbit}|_{\Theta, A>B}(\theta) :
+        \phi_i \cdot \theta^A \neq \phi_j \cdot \theta'$.
+      \end{enumerate}
+    note: >-
+      Starts at the foot of PDF p. 4 and the three items are at the top of p. 5;
+      restated identically on PDF p. 17 (where source card S16 located it).
+      $n$ is not introduced in the definition.
+    uses: [tt-def-3.1]
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind) + Grok (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: tt-prop-3.4
+    audit_row: S16-R05
+    locator: Prop. 3.4
+    pdf_page: 4-5
+    book_page: 4-5
+    label: Proposition 3.4 (Simply-retargetable functions have orbit-level tendencies)
+    latex: |
+      \textbf{Proposition 3.4} (Simply-retargetable functions have orbit-level
+      tendencies)\textbf{.}
+      \emph{If $f$ is $(\Theta, A \overset{\text{simple}}{\to} B)$-retargetable,
+      then $f(B \mid \theta) \geq^{1}_{\text{most: }\Theta} f(A \mid \theta)$.}
+    note: >-
+      Displayed, centred, in italics. Restated on PDF p. 18 with its proof. The
+      proof (excerpt tt-prop-3.4-proof-closure) obtains Definition 3.5's item 2
+      from closure of $\Theta$ under permutation, then ends "apply lemma B.7",
+      although what it has established is Theorem 3.6's hypothesis
+      ($(\Theta, A \overset{1}{\to} B)$-retargetable); Lemma B.7's own proof ends
+      by applying Theorem 3.6. Likely a slip for "theorem 3.6"; not repaired.
+    uses: [tt-def-3.3, tt-def-3.2, tt-def-3.5]
+    proof_pages: 18
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind) + Codex (anchored re-read); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: tt-thm-3.6
+    audit_row: S16-R06
+    locator: Thm. 3.6
+    pdf_page: 5
+    book_page: 5
+    label: Theorem 3.6 (Multiply retargetable functions have orbit-level tendencies)
+    latex: |
+      \textbf{Theorem 3.6} (Multiply retargetable functions have orbit-level
+      tendencies)\textbf{.}
+      \emph{If $f$ is $(\Theta, A \overset{n}{\to} B)$-retargetable, then
+      $f(B \mid \theta) \geq^{n}_{\text{most: }\Theta} f(A \mid \theta)$.}
+    note: >-
+      Displayed, centred, in italics. Proof outline on PDF p. 5; full proof on PDF p. 18 (restated there, heading
+      on p. 17). In the proof, eq. (20) prints
+      "$|\mathrm{Orbit}|_{\Theta,B>A}(\theta)]|$" with a stray bracket.
+    uses: [tt-def-3.5, tt-def-3.2]
+    proof_pages: 5, 18
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind) + Grok (blind) + Codex (anchored re-read); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: tt-def-A.6
+    audit_row: S16-R07
+    locator: Def. A.6
+    pdf_page: 14
+    book_page: 14
+    label: Definition A.6 (Similarity of vector sets)
+    latex: |
+      \textbf{Definition A.6} (Similarity of vector sets)\textbf{.} For
+      $\phi \in S_d$ and $X \subseteq \mathbb{R}^d$,
+      $\phi \cdot X := \left\{\mathbf{P}_\phi \mathbf{x} \mid \mathbf{x} \in X\right\}$.
+      $X' \subseteq \mathbb{R}^{|\mathcal{S}|}$ \emph{is similar to} $X$ when
+      $\exists \phi : \phi \cdot X' = X$. $\phi$ is an \emph{involution} if
+      $\phi = \phi^{-1}$ (it either transposes states, or fixes them). $X$
+      \emph{contains a copy of} $X'$ when $X'$ is similar to a subset of $X$ via an
+      involution $\phi$.
+    note: >-
+      Printed slip, kept: "$X' \subseteq \mathbb{R}^{|\mathcal{S}|}$" where the
+      rest of the definition and Appendix A use $\mathbb{R}^d$ ($|\mathcal{S}|$ is
+      the MDP state count, $d = |\mathcal{S}|$ in the MDP case, p. 13). "(it either
+      transposes states, or fixes them)" glosses an involution as a product of
+      disjoint transpositions in MDP terms.
+    uses: [tt-def-permutation-matrix]
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind) + Codex (anchored re-read); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: tt-def-A.7
+    audit_row: S16-R08
+    locator: Def. A.7
+    pdf_page: 14
+    book_page: 14
+    label: Definition A.7 (Containment of set copies), with footnote 8
+    latex: |
+      \textbf{Definition A.7} (Containment of set copies)\textbf{.} Let $n$ be a
+      positive integer, and let $A, B \subseteq \mathbb{R}^d$. We say that $B$
+      \emph{contains $n$ copies of} $A$ when there exist involutions
+      $\phi_1, \ldots, \phi_n \in S_d$ such that
+      $\forall i : \phi_i \cdot A =: B_i \subseteq B$ and
+      $\forall j \neq i : \phi_i \cdot B_j = B_j$.${}^{8}$
+
+      ${}^{8}$Technically, definition A.7 implies that $A$ contains $n$ copies of
+      $A$ holds for all $n$, via $n$ applications of the identity permutation. For
+      our purposes, this provides greater generality, as all of the relevant
+      results still hold. Enforcing pairwise disjointness of the $B_i$ would handle
+      these issues, but would narrow our results to not apply \emph{e.g.} when the
+      $B_i$ share a constant vector.
+    context: |
+      Followed by the example: "$B := \{\mathbf{e}_{[\text{fruit}]},
+      \mathbf{e}_{[\text{cherries}]}\}$ contains two copies of
+      $A := \{\mathbf{e}_{[\text{ghost}]}\}$ via $\phi_1 := [\text{ghost}]
+      \leftrightarrow [\text{fruit}]$ and $\phi_2 := [\text{ghost}]
+      \leftrightarrow [\text{cherries}]$." (The subscripts are printed as Pac-Man
+      icons: a ghost, a single red fruit, and cherries; the paper names only the
+      ghost in prose, p. 3.)
+    uses: [tt-def-A.6, tt-def-permutation-matrix]
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind) + Codex (anchored re-read); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: tt-lemma-B.7
+    audit_row: S16-R09
+    locator: Lemma B.7
+    pdf_page: 18-19
+    book_page: 18-19
+    label: Lemma B.7 (Quantitative general orbit lemma)
+    latex: |
+      \textbf{Lemma B.7} (Quantitative general orbit lemma)\textbf{.} \emph{Let
+      $\Theta$ be a subset of a set acted on by $S_d$, and let
+      $f : \mathbf{E} \times \Theta \to \mathbb{R}$. Consider
+      $A, B \in \mathbf{E}$.}
+
+      \emph{For each $\theta \in \Theta$, choose involutions
+      $\phi_1, \ldots, \phi_n \in S_d$. Let
+      $\theta^* \in \mathrm{Orbit}|_\Theta(\theta)$.}
+      \begin{enumerate}
+      \item \textbf{\emph{Retargetable under parameter permutation.}} \emph{There
+        exist $B^\star_i \in \mathbf{E}$ such that if
+        $f(B \mid \theta^*) < f(A \mid \theta^*)$, then
+        $\forall i : f\left(A \mid \theta^*\right) \leq
+        f\left(B^\star_i \mid \phi_i \cdot \theta^*\right)$.}
+      \item \emph{$\Theta$ \textbf{is closed under certain symmetries.}
+        $f(B \mid \theta^*) < f(A \mid \theta^*) \implies
+        \forall i : \phi_i \cdot \theta^* \in \Theta$.}
+      \item \emph{$f$ \textbf{is increasing on certain inputs.}
+        $\forall i : f(B^\star_i \mid \theta^*) \leq f(B \mid \theta^*)$.}
+      \item \textbf{\emph{Increasing under alternate symmetries.}} \emph{For
+        $j = 1, \ldots, n$ and $i \neq j$, if
+        $f(A \mid \theta^*) < f(B \mid \theta^*)$, then
+        $f\left(B^\star_j \mid \theta^*\right) \leq
+        f\left(B^\star_j \mid \phi_i \cdot \theta^*\right)$.}
+      \end{enumerate}
+      \emph{If these conditions hold for all $\theta \in \Theta$, then}
+      \[ f(B \mid \theta) \geq^{n}_{\text{most: }\Theta} f(A \mid \theta). \tag{23} \]
+    note: >-
+      Items 1-4 run from the foot of PDF p. 18 onto p. 19. $\mathbf{E}$ is not
+      introduced beyond "$f : \mathbf{E} \times \Theta \to \mathbb{R}$"; $n$ is not
+      introduced. The quantification of $\theta^*$ is left implicit ("Let
+      $\theta^* \in \mathrm{Orbit}|_\Theta(\theta)$" then "If these conditions hold
+      for all $\theta \in \Theta$"); the proof reads it as every $\theta^*$ in the
+      orbit. The $B^\star_i$ are existential in item 1 and reused in items 3-4.
+      Table 3 (PDF p. 18) gives a function meeting items 1-3 but not item 4 for
+      which the $n = 2$ conclusion fails ("Therefore, item 4 is generally
+      required."). The proof ends "Apply theorem 3.6".
+    uses: [tt-def-3.1, tt-def-3.2, tt-def-A.6, tt-def-3.5, tt-thm-3.6]
+    proof_pages: 19
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind) + Codex (anchored re-read); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: tt-def-B.4
+    audit_row: S16-R10
+    locator: Def. B.4
+    pdf_page: 16
+    book_page: 16
+    label: Definition B.4 (Functions which are increasing under joint permutation)
+    latex: |
+      \textbf{Definition B.4} (Functions which are increasing under joint
+      permutation)\textbf{.} Suppose that $S_d$ acts on sets
+      $\mathbf{E}_1, \ldots, \mathbf{E}_m$, and let
+      $f : \prod_{i=1}^m \mathbf{E}_i \to \mathbb{R}$. $f(X_1, \ldots, X_m)$ is
+      \emph{increasing under joint permutation by} $P \subseteq S_d$ when
+      $\forall \phi \in P : f(X_1, \ldots, X_m) \leq
+      f(\phi \cdot X_1, \ldots, \phi \cdot X_m)$. If equality always holds, then
+      $f(X_1, \ldots, X_m)$ is \emph{invariant under joint permutation by} $P$.
+    note: >-
+      The property is attached to "$f(X_1, \ldots, X_m)$" with $X_1, \ldots, X_m$
+      free: as printed it can be read at a fixed argument tuple or for all tuples.
+      Lemma B.9 adds "for all $X \in \mathbf{E}, \theta \in \Theta$" explicitly;
+      Lemma B.10 concludes it for "$f(A \mid \theta)$".
+    uses: []
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind) + Grok (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: tt-def-B.8
+    audit_row: S16-R11
+    locator: Def. B.8
+    pdf_page: 19
+    book_page: 19
+    label: Definition B.8 (Superset-of-copy containment)
+    latex: |
+      \textbf{Definition B.8} (Superset-of-copy containment)\textbf{.} Let
+      $A, B \subseteq \mathbb{R}^d$. $B$ \emph{contains $n$ superset-copies
+      $B^\star_i$ of $A$} when there exist involutions $\phi_1, \ldots, \phi_n$ such
+      that $\phi_i \cdot A \subseteq B^\star_i \subseteq B$, and whenever
+      $i \neq j$, $\phi_i \cdot B^\star_j = B^\star_j$.
+    note: >-
+      Unlike Definition A.7, $n$ is not stated to be a positive integer and the
+      involutions are not stated to lie in $S_d$.
+    uses: [tt-def-A.6, tt-def-permutation-matrix]
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind) + Grok (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: tt-lemma-B.9
+    audit_row: S16-R12
+    locator: Lemma B.9
+    pdf_page: 20
+    book_page: 20
+    label: Lemma B.9 (Looser sufficient conditions for orbit-level incentives)
+    latex: |
+      \textbf{Lemma B.9} (Looser sufficient conditions for orbit-level
+      incentives)\textbf{.} \emph{Suppose that $\Theta$ is a subset of a set acted
+      on by $S_d$ and is closed under permutation by $S_d$. Let
+      $A, B \in \mathbf{E} \subseteq \mathcal{P}\left(\mathbb{R}^d\right)$. Suppose
+      that $B$ contains $n$ superset-copies $B^\star_i \in \mathbf{E}$ of $A$ via
+      $\phi_i$. Suppose that $f(X \mid \theta)$ is increasing under joint
+      permutation by $\phi_1, \ldots, \phi_n \in S_d$ for all
+      $X \in \mathbf{E}, \theta \in \Theta$, and suppose that
+      $\forall i : \phi_i \cdot A \in \mathbf{E}$. Suppose that $f$ is
+      monotonically increasing on its first argument. Then
+      $f(B \mid \theta) \geq^{n}_{\text{most: }\Theta} f(A \mid \theta)$.}
+    note: >-
+      The type of $f$ is not printed (from the conclusion and Lemma B.7,
+      $f : \mathbf{E} \times \Theta \to \mathbb{R}$). "Monotonically increasing on
+      its first argument" is not defined in the paper; Lemma B.6 (PDF p. 17) uses
+      "order-preserving with respect to set inclusion on its first argument", and
+      the proof's item 1 and item 3 use it as: $X \subseteq Y$ implies
+      $f(X \mid \theta) \le f(Y \mid \theta)$.
+    uses: [tt-def-B.8, tt-def-B.4, tt-def-3.2, tt-lemma-B.7]
+    proof_pages: 20
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind) + Codex (anchored re-read); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: tt-lemma-B.10
+    audit_row: S16-R13
+    locator: Lemma B.10
+    pdf_page: 20
+    book_page: 20
+    label: Lemma B.10 (Hiding an argument which is invariant under certain permutations)
+    latex: |
+      \textbf{Lemma B.10} (Hiding an argument which is invariant under certain
+      permutations)\textbf{.} \emph{Let $\mathbf{E}_1$, $\mathbf{E}_2$, $\Theta$ be
+      subsets of sets which are acted on by $S_d$. Let $A \in \mathbf{E}_1$,
+      $C \in \mathbf{E}_2$. Suppose there exist $\phi_1, \ldots, \phi_n \in S_d$
+      such that $\phi_i \cdot C = C$. Suppose
+      $h : \mathbf{E}_1 \times \mathbf{E}_2 \times \Theta \to \mathbb{R}$
+      satisfies $\forall i : h(A, C \mid \theta) \leq
+      h(\phi_i \cdot A, \phi_i \cdot C \mid \phi_i \cdot \theta)$. For any
+      $X \in \mathbf{E}_1$, let $f(X \mid \theta) := h(X, C \mid \theta)$. Then
+      $f(A \mid \theta)$ is increasing under joint permutation by $\phi_i$.}
+
+      \emph{Furthermore, if $h$ is} \textup{invariant} \emph{under joint
+      permutation by $\phi_i$, then so is $f$.}
+    note: >-
+      "invariant" is set upright inside the italic statement (emphasis by
+      contrast). The hypothesis on $h$ is printed at the fixed $A$ (and with
+      $\theta$ free); the proof, eqs. (40)-(43), applies it at an arbitrary $X$:
+      "$f(X \mid \theta) := h(X, C \mid \theta) \le h(\phi_i \cdot X, \phi_i \cdot
+      C \mid \phi_i \cdot \theta)$ [\ldots] Equation (41) holds by assumption."
+    uses: [tt-def-B.4]
+    proof_pages: 20
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind) + Grok (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: tt-def-A.12
+    audit_row: S16-R14
+    locator: Def. A.12
+    pdf_page: 15
+    book_page: 15
+    label: Definition A.12 (EU-determined functions)
+    latex: |
+      \textbf{Definition A.12} (EU-determined functions)\textbf{.} Let
+      $\mathcal{P}\left(\mathbb{R}^d\right)$ be the power set of $\mathbb{R}^d$,
+      and let $f : \prod_{i=1}^m \mathcal{P}\left(\mathbb{R}^d\right) \times
+      \mathbb{R}^d \to \mathbb{R}$. $f$ is an \emph{EU-determined function} if there
+      exists a family of functions $\{g^{\omega_1, \ldots, \omega_m}\}$ such that
+      \[ f(X_1, \ldots, X_m \mid \mathbf{u}) = g^{|X_1|, \ldots, |X_m|}\left(
+         \left[\mathbf{x}_1^\top \mathbf{u}\right]_{\mathbf{x}_1 \in X_1}, \ldots,
+         \left[\mathbf{x}_m^\top \mathbf{u}\right]_{\mathbf{x}_m \in X_m}\right),
+         \tag{4} \]
+      where $[r_i]$ is the multiset of its elements $r_i$.
+    note: >-
+      Restated word for word in Appendix B.2.1 (PDF p. 20). The range of the
+      indices $\omega_i$ and the codomain of each $g$ are not stated; no
+      finiteness of the $X_i$ is required (see `source.standing`).
+    uses: []
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: tt-lemma-B.11
+    audit_row: S16-R15
+    locator: Lemma B.11
+    pdf_page: 20
+    book_page: 20
+    label: Lemma B.11 (EU-determined functions are invariant under joint permutation)
+    latex: |
+      \textbf{Lemma B.11} (EU-determined functions are invariant under joint
+      permutation)\textbf{.} \emph{Suppose that
+      $f : \prod_{i=1}^m \mathcal{P}\left(\mathbb{R}^d\right) \times \mathbb{R}^d
+      \to \mathbb{R}$ is an EU-determined function. Then for any $\phi \in S_d$ and
+      $X_1, \ldots, X_m, \mathbf{u}$, we have
+      $f(X_1, \ldots, X_m \mid \mathbf{u}) =
+      f(\phi \cdot X_1, \ldots, \phi \cdot X_m \mid \phi \cdot \mathbf{u})$.}
+    note: >-
+      $\phi \cdot \mathbf{u}$ is not defined separately; the proof (PDF p. 21,
+      eq. (47)) uses $\mathbf{P}_\phi \mathbf{u}$.
+    uses: [tt-def-A.12, tt-def-A.6, tt-def-permutation-matrix]
+    proof_pages: 21
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind) + Grok (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: tt-thm-A.13
+    audit_row: S16-R16
+    locator: Thm. A.13
+    pdf_page: 15
+    book_page: 15
+    label: Theorem A.13 (Orbit tendencies occur for EU-determined decision-making functions)
+    latex: |
+      \textbf{Theorem A.13} (Orbit tendencies occur for EU-determined
+      decision-making functions)\textbf{.} \emph{Let
+      $A, B, C \subseteq \mathbb{R}^d$ be such that $B$ contains $n$ copies of $A$
+      via $\phi_i$ such that $\phi_i \cdot C = C$. Let
+      $h : \prod_{i=1}^2 \mathcal{P}\left(\mathbb{R}^d\right) \times \mathbb{R}^d
+      \to \mathbb{R}$ be an EU-determined function, and let
+      $p(X \mid \mathbf{u}) := h(X, C \mid \mathbf{u})$. Suppose that $p$ returns
+      a probability of selecting an element of $X$ from $C$. Then
+      $p(B \mid \mathbf{u}) \geq^{n}_{\text{most: }\mathbb{R}^d}
+      p(A \mid \mathbf{u})$.}
+    note: >-
+      Restated word for word on PDF p. 21 with its proof. $\prod_{i=1}^2$ is
+      Definition A.12 at $m = 2$. "Returns a probability of selecting an element of
+      $X$ from $C$" is not defined further; the proof reads it as the monotonicity
+      $X' \subseteq X \Rightarrow p(X' \mid \mathbf{u}) \le p(X \mid \mathbf{u})$
+      and needs that to apply Lemma B.9 (excerpt tt-thm-A.13-proof-monotonicity).
+      The proof names the function $f$ where the statement names it $p$.
+    uses: [tt-def-A.7, tt-def-A.12, tt-def-3.2, tt-def-3.1, tt-def-permutation-matrix]
+    proof_pages: 21
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind) + Codex (anchored re-read); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: tt-def-D.6
+    audit_row: S16-R17
+    locator: Def. D.6
+    pdf_page: 35
+    book_page: 35
+    label: Definition D.6 (Rewardless MDP [Turner et al., 2021])
+    latex: |
+      \textbf{Definition D.6} (Rewardless \textsc{mdp} [Turner et al.,
+      2021])\textbf{.} $\langle \mathcal{S}, \mathcal{A}, T \rangle$ is a
+      rewardless \textsc{mdp} with finite state and action spaces $\mathcal{S}$ and
+      $\mathcal{A}$, and stochastic transition function
+      $T : \mathcal{S} \times \mathcal{A} \to \Delta(\mathcal{S})$. We treat the
+      discount rate $\gamma$ as a variable with domain $[0, 1]$.
+    note: >-
+      $\Delta(\mathcal{S})$ is not defined here (used as the set of probability
+      distributions, as in Definition A.8's $\Delta(\mathbb{R}^d)$, p. 14).
+      Definition D.8 (same page) defines the visit distribution only for
+      $\gamma \in [0, 1)$.
+    uses: []
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind) + Grok (blind) + Codex (anchored re-read); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+excerpts:
+  - id: tt-prop-3.4-proof-closure
+    for: [tt-prop-3.4, tt-def-3.3]
+    reason: >-
+      The step where closure of $\Theta$ under permutation enters Proposition 3.4
+      (Definition 3.3 says "a set acted on by $S_d$"; footnote 3 reads that as
+      closure). Also shows the final "apply lemma B.7" noted on the statement.
+    pdf_page: 18
+    latex: |
+      \emph{Proof.} Given that $f$ is a
+      $(\Theta, A \overset{\text{simple}}{\to} B)$-retargetable function
+      (definition 3.3), we want to show that $f$ is a
+      $(\Theta, A \overset{1}{\to} B)$-retargetable function (definition 3.5 when
+      $n = 1$). Definition 3.5's item 1 is true by assumption. Since $\Theta$ is
+      acted on by $S_d$, $\Theta$ is closed under permutation and so definition
+      3.5's item 2 holds. When $n = 1$, there are no $i \neq j$, and so definition
+      3.5's item 3 is tautologically true.
+
+      Then $f$ is a $(\Theta, A \overset{1}{\to} B)$-retargetable function; apply
+      lemma B.7.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: tt-thm-A.13-proof-monotonicity
+    for: [tt-thm-A.13]
+    reason: >-
+      The proof reads "returns a probability of selecting an element of $X$ from
+      $C$" as monotonicity under inclusion, the hypothesis Lemma B.9 needs and the
+      statement does not print in those words; it also sets
+      $\Theta := \mathbb{R}^d$.
+    pdf_page: 21
+    latex: |
+      \emph{Proof.} By assumption, there exists a family of functions
+      $\left\{g^{i,|C|}\right\}$ such that for all $X \subseteq \mathbb{R}^d$,
+      $h(X, C \mid \mathbf{u}) = g^{|X|,|C|}\left(\left[\mathbf{x}^\top
+      \mathbf{u}\right]_{\mathbf{x} \in X}, \left[\mathbf{c}^\top
+      \mathbf{u}\right]_{\mathbf{c} \in C}\right)$. Therefore, lemma B.11 shows that
+      $h(A, C \mid \mathbf{u})$ is invariant under joint permutation by the
+      $\phi_i$. Letting $\Theta := \mathbb{R}^d$, apply lemma B.10 to conclude that
+      $f(X \mid \mathbf{u})$ is invariant under joint permutation by the $\phi_i$.
+
+      Since $f$ returns a probability of selecting an element of $X$, $f$ obeys the
+      monotonicity probability axiom: If $X' \subseteq X$, then
+      $f(X' \mid \mathbf{u}) \leq f(X \mid \mathbf{u})$. Then
+      $f(B \mid \mathbf{u}) \geq^{n}_{\text{most: }\mathbb{R}^d}
+      f(A \mid \mathbf{u})$ by lemma B.9.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}

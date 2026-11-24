@@ -3,6 +3,7 @@ module
 public import AISafetyAtlas.LinearSystems.Hautus
 public import Mathlib.LinearAlgebra.Eigenspace.Zero
 public import Mathlib.LinearAlgebra.Eigenspace.Minpoly
+public import Mathlib.LinearAlgebra.Eigenspace.Charpoly
 public import Mathlib.LinearAlgebra.Matrix.Charpoly.Minpoly
 
 /-!
@@ -336,6 +337,32 @@ public theorem charpoly_mulVecLin (A : Matrix (Fin n) (Fin n) ℂ) :
   congr 1
   rw [LinearMap.toMatrix_eq_toMatrix']
   exact LinearMap.toMatrix'_toLin' A
+
+/--
+**Klamka's `λᵢ`, `i = 1, 2, …, k`.** Print's notation list (Klamka 1972, p. 725):
+*"`λᵢ` distinct eigenvalues of `A`, where `i = 1,2,⋯,k`, where `k ≤ n`"*. The
+distinct roots of the characteristic polynomial; `mem_distinctEigenvalues_iff`
+shows they are exactly the eigenvalues of the map `A` induces, and
+`card_distinctEigenvalues_le` is print's `k ≤ n`. Print's `nᵢ` is
+`A.charpoly.rootMultiplicity λᵢ`, the quantity the Klamka tests below read.
+-/
+@[expose] public noncomputable def distinctEigenvalues (A : Matrix (Fin n) (Fin n) ℂ) :
+    Finset ℂ :=
+  A.charpoly.roots.toFinset
+
+/-- The members of `distinctEigenvalues A` are the eigenvalues of `A`. -/
+public theorem mem_distinctEigenvalues_iff (A : Matrix (Fin n) (Fin n) ℂ) (μ : ℂ) :
+    μ ∈ distinctEigenvalues A ↔ Module.End.HasEigenvalue A.mulVecLin μ := by
+  rw [distinctEigenvalues, Multiset.mem_toFinset, Polynomial.mem_roots A.charpoly_monic.ne_zero,
+    Module.End.hasEigenvalue_iff_isRoot_charpoly, charpoly_mulVecLin]
+
+/-- **Print's `k ≤ n`.** An `n × n` matrix has at most `n` distinct eigenvalues. -/
+public theorem card_distinctEigenvalues_le (A : Matrix (Fin n) (Fin n) ℂ) :
+    (distinctEigenvalues A).card ≤ n :=
+  calc (distinctEigenvalues A).card ≤ Multiset.card A.charpoly.roots :=
+        Multiset.toFinset_card_le _
+    _ ≤ A.charpoly.natDegree := Polynomial.card_roots' _
+    _ = n := by rw [Matrix.charpoly_natDegree_eq_dim, Fintype.card_fin]
 
 /--
 **Klamka's Theorem 1, at print's own antecedent.**

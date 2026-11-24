@@ -10,7 +10,7 @@ Edges come from the elaborated Lean environment. This answers the question the p
 
 So `A → B` means *`B` occurs in `A`'s statement, or in `A`'s body when `A` is a definition*. A lemma used only inside a proof does not appear. Reading the table as a complete call graph would be wrong, and the two sections below are scoped so that they stay true under this limit.
 
-`116` authored declarations in `AISafetyAtlas.Preference.*` (73 theorems). Compiler-generated companions and projections are dropped.
+`339` authored declarations in `AISafetyAtlas.Preference.*` (222 theorems). Compiler-generated companions and projections are dropped.
 
 ## Load-bearing declarations
 
@@ -18,25 +18,69 @@ Named in the statements of eight or more others. A change to one of these is a c
 
 | Declaration | Named by |
 |---|---|
-| `Policy` | 63 |
-| `RewardFn` | 46 |
-| `Planner` | 35 |
-| `Pair` | 26 |
-| `Explains` | 23 |
-| `OverrideModel` | 20 |
-| `OverrideModel.resulting` | 12 |
-| `OverrideModel.regret` | 12 |
-| `op6` | 11 |
-| `op4` | 11 |
-| `op2` | 11 |
+| `RewardFn` | 238 |
+| `Policy` | 226 |
+| `Planner` | 113 |
+| `Pair` | 109 |
+| `rewardOf` | 34 |
+| `op5` | 33 |
+| `op1` | 33 |
+| `op6` | 31 |
+| `Explains` | 31 |
+| `OverrideModel` | 30 |
+| `op4` | 26 |
+| `greedyPlanner` | 25 |
+| `Source.ReasonableForF` | 24 |
+| `Source.ReasonableForF.Compatible` | 23 |
+| `op2` | 21 |
+| `Source.TimedLanguage` | 21 |
+| `Source.AmongLowestFor` | 21 |
+| `OverrideModel.resulting` | 21 |
+| `IsGreedy` | 21 |
+| `OverrideModel.value` | 18 |
+| `IsBoundedReward` | 17 |
+| `Source.TimedLanguage.CodePair` | 15 |
+| `Source.ReasonableForF.KPair` | 15 |
+| `ReasonableLanguage.Compatible` | 15 |
+| `OverrideModel.regret` | 15 |
+| `negPlanner` | 14 |
+| `indifferentPlanner` | 14 |
+| `Source.ReasonableForFOf` | 14 |
+| `OverrideModel.optValue` | 14 |
+| `Discounted.liftReward` | 13 |
+| `op2Of` | 12 |
+| `greedyOn` | 12 |
+| `Source.TimedLanguage.CodeCompatible` | 12 |
+| `Source.CodePlanning` | 12 |
+| `Discounted.argmaxPolicy` | 12 |
+| `Source.TimedLanguage.GenReward` | 11 |
+| `Source.ReasonableForFOf.KPair` | 11 |
+| `Source.ReasonableForF.c` | 11 |
 | `OverrideModel.noop` | 11 |
+| `plainKPolicy` | 10 |
+| `pairProgram` | 10 |
+| `op3` | 10 |
 | `ofMemoryless` | 10 |
-| `Source.ReasonableForF` | 10 |
-| `OverrideModel.value` | 10 |
-| `op5` | 9 |
-| `op1` | 9 |
-| `op3` | 8 |
-| `OverrideModel.optValue` | 8 |
+| `Source.ReasonableForFOf.c` | 10 |
+| `Source.CodePlanning.codeKT` | 10 |
+| `Source.AmongLowestIn` | 10 |
+| `Discounted.twistReward` | 10 |
+| `Discounted.optValueAt` | 10 |
+| `Discounted.augmentMDP` | 10 |
+| `Discounted.augValue` | 10 |
+| `Discounted.augStart` | 10 |
+| `ComparableComplexity` | 10 |
+| `Source.ReasonableForF.AmongLowestCompatible` | 9 |
+| `Source.CodePlanning.GenCodePlanner` | 9 |
+| `Discounted.mixPolicy` | 9 |
+| `BoundedRewardFn` | 9 |
+| `Source.TimedLanguage.len` | 8 |
+| `Source.TimedLanguage.c` | 8 |
+| `Source.CodePlanning.codeKt` | 8 |
+| `ReasonableLanguage.c` | 8 |
+| `ReasonableLanguage.KPair` | 8 |
+| `ReasonableLanguage` | 8 |
+| `CodesPolicy` | 8 |
 
 ## Definitions no statement and no example mentions
 
@@ -44,20 +88,122 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 
 **Instances always appear here.** Typeclass resolution names nothing, so an instance has no textual user even when every consumer depends on it. Deleting one because it is listed here is how a checker stops compiling.
 
-- `Source.Fmap`
+- `Discounted.discountedClass`
 
 ## Direct dependencies
 
 | Declaration | Kind | Names |
 |---|---|---|
+| `AmongLowest` | definition | `Pair` |
+| `BoundedRewardFn` | definition | `IsBoundedReward`, `RewardFn` |
+| `CodesPolicy` | definition | `Policy`, `pairProgram` |
+| `CodesReward` | definition | `RewardFn`, `pairProgram` |
+| `ComparableComplexity` | definition | `Pair` |
+| `ComparableComplexity.symm` | theorem | `ComparableComplexity`, `Pair` |
+| `ComparableComplexityIn` | definition | `Pair` |
+| `Describes` | definition | `CodesPolicy`, `CodesReward`, `Pair`, `Planner`, `Policy`, `RewardFn`, `pairProgram`, `pairReward`, `runOn` |
+| `Describes.describesHybrid` | theorem | `Describes`, `DescribesHybrid`, `Pair` |
+| `DescribesExact` | definition | `CodesPolicy`, `ExactCodesReward`, `Pair`, `Planner`, `Policy`, `RewardFn`, `pairProgram`, `pairReward`, `runOn` |
+| `DescribesExact.describesHybrid` | theorem | `DescribesExact`, `DescribesHybrid`, `Pair` |
+| `DescribesHybrid` | definition | `CodesPolicy`, `CodesReward`, `ExactCodesReward`, `Pair`, `Planner`, `Policy`, `RewardFn`, `pairProgram`, `pairReward`, `runOn` |
+| `Discounted.abs_le_one_of_isBoundedReward` | theorem | `IsBoundedReward`, `RewardFn` |
+| `Discounted.abs_twistReward_le` | theorem | `Discounted.twistReward`, `RewardFn` |
+| `Discounted.abs_vPiBdd_le` | theorem | — |
+| `Discounted.abs_vPi_le` | theorem | — |
+| `Discounted.argmaxPolicy` | definition | `RewardFn` |
+| `Discounted.argmax_regret_eq_zero_of_subsingleton` | theorem | `Discounted.argmaxPolicy`, `RewardFn` |
+| `Discounted.argmax_regret_le_two_div` | theorem | `Discounted.argmaxPolicy`, `IsBoundedReward`, `RewardFn` |
+| `Discounted.argmax_regret_signReward` | theorem | `Discounted.argmaxPolicy`, `Discounted.signReward` |
+| `Discounted.augActionValue` | definition | `Discounted.augmentMDP`, `Discounted.mixPolicy` |
+| `Discounted.augActionValueBdd` | definition | `Discounted.augmentMDP`, `Discounted.mixPolicy` |
+| `Discounted.augActionValue_liftReward` | theorem | `Discounted.augActionValue`, `Discounted.discountedOverride`, `Discounted.liftReward`, `OverrideModel.resulting`, `OverrideModel.value`, `RewardFn` |
+| `Discounted.augRegret` | definition | `Discounted.augActionValue` |
+| `Discounted.augRegret_eq_regret` | theorem | `Discounted.augRegret`, `Discounted.discountedOverride`, `Discounted.liftReward`, `OverrideModel.regret`, `RewardFn` |
+| `Discounted.augRegret_noop` | theorem | `Discounted.augRegret`, `Discounted.liftReward`, `Discounted.optValueAt`, `RewardFn` |
+| `Discounted.augRegret_overriding` | theorem | `Discounted.augRegret`, `Discounted.liftReward`, `Discounted.optValueAt`, `RewardFn` |
+| `Discounted.augStart` | definition | — |
+| `Discounted.augValue` | definition | `Discounted.augmentMDP` |
+| `Discounted.augValue_mixPolicy_none` | theorem | `Discounted.augActionValue`, `Discounted.augStart`, `Discounted.augValue`, `Discounted.mixPolicy` |
+| `Discounted.augValue_mixPolicy_some` | theorem | `Discounted.augActionValue`, `Discounted.augStart`, `Discounted.augValue`, `Discounted.mixPolicy` |
+| `Discounted.augmentMDP` | definition | — |
+| `Discounted.beliefValue` | definition | `Discounted.augActionValue`, `Discounted.liftReward`, `Discounted.twistReward`, `RewardFn` |
+| `Discounted.beliefValueBdd` | definition | `Discounted.abs_twistReward_le`, `Discounted.augActionValueBdd`, `Discounted.liftReward`, `Discounted.twistReward`, `RewardFn` |
+| `Discounted.beliefValueBdd_noop` | theorem | `Discounted.beliefValueBdd`, `Discounted.optValueBdd`, `RewardFn` |
+| `Discounted.beliefValueBdd_overriding` | theorem | `Discounted.beliefValueBdd`, `Discounted.optValueBdd`, `RewardFn` |
+| `Discounted.beliefValueBdd_some` | theorem | `Discounted.beliefValueBdd`, `RewardFn` |
+| `Discounted.beliefValue_noop` | theorem | `Discounted.beliefValue`, `Discounted.optValueAt`, `RewardFn` |
+| `Discounted.beliefValue_overriding` | theorem | `Discounted.argmaxPolicy`, `Discounted.beliefValue`, `Discounted.discountedOverride`, `OverrideModel.mixtureValue`, `RewardFn` |
+| `Discounted.beliefValue_some` | theorem | `Discounted.beliefValue`, `RewardFn` |
+| `Discounted.discountedClass` | definition | `BoundedRewardFn`, `Discounted.argmaxPolicy`, `Discounted.isBoundedReward_signReward`, `Discounted.signReward`, `IsBoundedReward`, `RewardFn` |
+| `Discounted.discountedOverride` | definition | `Discounted.argmaxPolicy`, `Discounted.optValueAt`, `Discounted.vPi_argmaxPolicy`, `Discounted.vPi_le_optValueAt`, `OverrideModel`, `Policy`, `RewardFn` |
+| `Discounted.discounted_half_maximal_regret` | theorem | `BoundedRewardFn`, `Discounted.abs_le_one_of_isBoundedReward`, `IsBoundedReward`, `RewardFn` |
+| `Discounted.expect_map_of_injective` | theorem | — |
+| `Discounted.half_maximal_regret_of_signReward` | theorem | `BoundedRewardFn`, `Discounted.isBoundedReward_signReward`, `Discounted.signReward`, `IsBoundedReward`, `RewardFn` |
+| `Discounted.isBoundedReward_signReward` | theorem | `Discounted.signReward`, `IsBoundedReward` |
+| `Discounted.liftReward` | definition | `RewardFn` |
+| `Discounted.mixPolicy` | definition | — |
+| `Discounted.optValueAt` | definition | `RewardFn` |
+| `Discounted.optValueBdd` | definition | `RewardFn` |
+| `Discounted.optValueBdd_eq_of_max` | theorem | `Discounted.optValueBdd`, `RewardFn` |
+| `Discounted.signReward` | definition | `RewardFn` |
+| `Discounted.startRegret_liftReward_eq_augRegret` | theorem | `Discounted.augRegret`, `Discounted.augStart`, `Discounted.augValue`, `Discounted.liftReward`, `Discounted.mixPolicy`, `Discounted.optValueAt`, `RewardFn`, `startRegret` |
+| `Discounted.startRegret_liftReward_of_optimal` | theorem | `Discounted.augStart`, `Discounted.augValue`, `Discounted.discountedOverride`, `Discounted.liftReward`, `Discounted.mixPolicy`, `Discounted.optValueAt`, `OverrideModel.regret`, `RewardFn`, `startRegret` |
+| `Discounted.twistReward` | definition | `RewardFn` |
+| `Discounted.vPiBdd_augmentMDP` | theorem | `Discounted.augmentMDP` |
+| `Discounted.vPiBdd_const_reward` | theorem | — |
+| `Discounted.vPi_argmaxPolicy` | theorem | `Discounted.argmaxPolicy`, `Discounted.optValueAt`, `RewardFn` |
+| `Discounted.vPi_augmentMDP` | theorem | `Discounted.augmentMDP` |
+| `Discounted.vPi_const_reward` | theorem | — |
+| `Discounted.vPi_le_optValueAt` | theorem | `Discounted.optValueAt`, `RewardFn` |
+| `Discounted.vPi_neg` | theorem | — |
+| `Episodic.augActionValueEp` | definition | `Discounted.augmentMDP`, `Discounted.mixPolicy` |
+| `Episodic.augActionValueTerm` | definition | `Discounted.augmentMDP`, `Discounted.mixPolicy` |
+| `Episodic.beliefValueEp` | definition | `Discounted.liftReward`, `Discounted.twistReward`, `Episodic.augActionValueEp`, `RewardFn` |
+| `Episodic.beliefValueEp_none` | theorem | `Episodic.beliefValueEp`, `RewardFn` |
+| `Episodic.beliefValueEp_noop` | theorem | `Episodic.beliefValueEp`, `Episodic.optValueEp`, `RewardFn` |
+| `Episodic.beliefValueEp_overriding` | theorem | `Episodic.beliefValueEp`, `Episodic.optValueEp`, `RewardFn` |
+| `Episodic.beliefValueEp_some` | theorem | `Episodic.beliefValueEp`, `RewardFn` |
+| `Episodic.beliefValueTerm` | definition | `Discounted.liftReward`, `Discounted.twistReward`, `Episodic.augActionValueTerm`, `RewardFn` |
+| `Episodic.beliefValueTerm_clockMDP` | theorem | `Episodic.beliefValueEp`, `Episodic.beliefValueTerm`, `Episodic.clockMDP`, `RewardFn` |
+| `Episodic.beliefValueTerm_none` | theorem | `Episodic.beliefValueTerm`, `RewardFn` |
+| `Episodic.beliefValueTerm_noop` | theorem | `Episodic.beliefValueTerm`, `Episodic.optValueTerm`, `RewardFn` |
+| `Episodic.beliefValueTerm_overriding` | theorem | `Episodic.beliefValueTerm`, `Episodic.optValueTerm`, `RewardFn` |
+| `Episodic.beliefValueTerm_some` | theorem | `Episodic.beliefValueTerm`, `RewardFn` |
+| `Episodic.clockMDP` | definition | — |
+| `Episodic.episodic_half_maximal_regret` | theorem | `BoundedRewardFn`, `IsBoundedReward`, `RewardFn` |
+| `Episodic.optValueEp` | definition | `RewardFn` |
+| `Episodic.optValueEp_eq_of_max` | theorem | `Episodic.optValueEp`, `RewardFn` |
+| `Episodic.optValueTerm` | definition | `RewardFn` |
+| `Episodic.optValueTerm_eq_of_max` | theorem | `Episodic.optValueTerm`, `RewardFn` |
+| `Episodic.vPiEpisodic_augmentMDP` | theorem | `Discounted.augmentMDP` |
+| `Episodic.vPiStopped_augmentMDP` | theorem | `Discounted.augmentMDP` |
+| `Episodic.vPiStopped_clockMDP` | theorem | `Episodic.clockMDP`, `RewardFn` |
+| `Episodic.vPiTerm_augmentMDP` | theorem | `Discounted.augmentMDP` |
+| `Episodic.vPiTerm_clockMDP` | theorem | `Episodic.clockMDP`, `RewardFn` |
 | `EvaluatesTo` | definition | `evalPair` |
+| `ExactCodesReward` | definition | `RewardFn`, `pairProgram` |
+| `ExactCodesReward.codesReward` | theorem | `CodesReward`, `ExactCodesReward`, `RewardFn` |
 | `Explains` | definition | `Planner` |
 | `HalfMaximalRegretBound` | definition | `RegretModel` |
+| `IsAgentOptimum` | definition | `Policy`, `RewardFn` |
+| `IsAgentOptimum.isGreatest` | theorem | `IsAgentOptimum`, `Policy`, `RewardFn` |
+| `IsAgentOptimum.sub_value_nonneg` | theorem | `IsAgentOptimum`, `Policy`, `RewardFn` |
+| `IsBoundedReward` | definition | `RewardFn` |
+| `IsBoundedReward.neg` | theorem | `IsBoundedReward`, `RewardFn` |
+| `IsGreedy` | definition | `Planner`, `Policy`, `RewardFn` |
+| `IsGreedy.apply_rewardOf` | theorem | `IsGreedy`, `Planner`, `Policy`, `RewardFn`, `rewardOf` |
+| `IsGreedy.exists_extend` | theorem | `BoundedRewardFn`, `IsBoundedReward`, `IsGreedy`, `Planner`, `Policy`, `RewardFn` |
+| `IsGreedy.negPlanner_min` | theorem | `IsGreedy`, `Planner`, `Policy`, `RewardFn`, `negPlanner` |
+| `IsGreedy.negPlanner_neg_rewardOf` | theorem | `IsGreedy`, `Planner`, `Policy`, `RewardFn`, `negPlanner`, `rewardOf` |
 | `OverrideModel` | definition | — |
 | `OverrideModel.IsRationalPlanner` | definition | `OverrideModel`, `OverrideModel.optValue`, `OverrideModel.value`, `Planner`, `Policy`, `RewardFn` |
 | `OverrideModel.Overrides` | definition | `OverrideModel`, `OverrideModel.regret`, `RewardFn` |
 | `OverrideModel.OverridesFor` | definition | `Explains`, `OverrideModel`, `OverrideModel.regret`, `OverrideModel.resulting`, `Planner`, `Policy`, `RewardFn` |
+| `OverrideModel.StrictlyOverridesFor` | definition | `OverrideModel`, `OverrideModel.OverridesFor`, `Planner`, `Policy`, `RewardFn` |
+| `OverrideModel.StrictlyOverridesFor.value_lt_optValue` | theorem | `Explains`, `OverrideModel`, `OverrideModel.StrictlyOverridesFor`, `OverrideModel.optValue`, `OverrideModel.resulting`, `OverrideModel.value`, `Planner`, `Policy`, `RewardFn` |
 | `OverrideModel.exists_overridesFor` | theorem | `OverrideModel`, `OverrideModel.OverridesFor`, `OverrideModel.regret`, `Planner`, `Policy`, `RewardFn` |
+| `OverrideModel.exists_strictlyOverridesFor` | theorem | `OverrideModel`, `OverrideModel.StrictlyOverridesFor`, `OverrideModel.optValue`, `OverrideModel.regret`, `OverrideModel.resulting`, `OverrideModel.value`, `Planner`, `Policy`, `RewardFn` |
+| `OverrideModel.isAgentOptimum` | theorem | `IsAgentOptimum`, `OverrideModel`, `OverrideModel.optValue`, `OverrideModel.rationalise`, `OverrideModel.resulting`, `OverrideModel.value` |
 | `OverrideModel.mixtureValue` | definition | `OverrideModel`, `OverrideModel.optValue`, `OverrideModel.rationalise`, `OverrideModel.resulting`, `OverrideModel.value`, `RewardFn` |
 | `OverrideModel.mixtureValue_rationalise` | theorem | `OverrideModel`, `OverrideModel.mixtureValue`, `OverrideModel.optValue`, `RewardFn` |
 | `OverrideModel.noopValue` | definition | `OverrideModel`, `OverrideModel.noop`, `OverrideModel.resulting`, `OverrideModel.value`, `RewardFn` |
@@ -65,6 +211,9 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 | `OverrideModel.noop_overrides_of_suboptimal` | theorem | `OverrideModel`, `OverrideModel.Overrides`, `OverrideModel.noop`, `OverrideModel.optValue`, `OverrideModel.regret`, `OverrideModel.resulting`, `OverrideModel.value`, `RewardFn` |
 | `OverrideModel.not_overrides_noop_of_rationalPlanner` | theorem | `Explains`, `OverrideModel`, `OverrideModel.IsRationalPlanner`, `OverrideModel.Overrides`, `OverrideModel.noop`, `OverrideModel.resulting`, `Planner`, `Policy`, `RewardFn` |
 | `OverrideModel.optValue_isGreatest` | theorem | `OverrideModel`, `OverrideModel.optValue`, `OverrideModel.resulting`, `OverrideModel.value`, `RewardFn` |
+| `OverrideModel.overridesFor_iff_overridesForAt` | theorem | `OverrideModel`, `OverrideModel.OverridesFor`, `OverrideModel.optValue`, `OverrideModel.resulting`, `OverrideModel.value`, `OverridesForAt`, `Planner`, `Policy`, `RewardFn` |
+| `OverrideModel.overridesFor_iff_overridesFromStart` | theorem | `OverrideModel`, `OverrideModel.OverridesFor`, `OverrideModel.resulting`, `OverrideModel.value`, `OverridesFromStart`, `Planner`, `Policy`, `RewardFn` |
+| `OverrideModel.overridesFor_of_strictlyOverridesFor` | theorem | `OverrideModel`, `OverrideModel.OverridesFor`, `OverrideModel.StrictlyOverridesFor`, `Planner`, `Policy`, `RewardFn` |
 | `OverrideModel.overrides_of_overridesFor` | theorem | `OverrideModel`, `OverrideModel.Overrides`, `OverrideModel.OverridesFor`, `Planner`, `Policy`, `RewardFn` |
 | `OverrideModel.rationalise_strictly_better` | theorem | `OverrideModel`, `OverrideModel.noop`, `OverrideModel.optValue`, `OverrideModel.rationalise`, `OverrideModel.resulting`, `OverrideModel.value`, `RewardFn` |
 | `OverrideModel.regret` | definition | `OverrideModel`, `OverrideModel.optValue`, `OverrideModel.resulting`, `OverrideModel.value`, `RewardFn` |
@@ -73,6 +222,10 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 | `OverrideModel.regret_noop_eq_zero_of_rationalPlanner` | theorem | `Explains`, `OverrideModel`, `OverrideModel.IsRationalPlanner`, `OverrideModel.noop`, `OverrideModel.regret`, `OverrideModel.resulting`, `Planner`, `Policy`, `RewardFn` |
 | `OverrideModel.regret_noop_eq_zero_or_overrides` | theorem | `OverrideModel`, `OverrideModel.Overrides`, `OverrideModel.noop`, `OverrideModel.regret`, `RewardFn` |
 | `OverrideModel.regret_rationalise` | theorem | `OverrideModel`, `OverrideModel.rationalise`, `OverrideModel.regret`, `RewardFn` |
+| `OverrideModel.strictlyOverridesFor_iff_strictlyOverridesForAt` | theorem | `OverrideModel`, `OverrideModel.StrictlyOverridesFor`, `OverrideModel.optValue`, `OverrideModel.resulting`, `OverrideModel.value`, `Planner`, `Policy`, `RewardFn`, `StrictlyOverridesForAt` |
+| `OverridesForAt` | definition | `Explains`, `Planner`, `Policy`, `RewardFn` |
+| `OverridesFromStart` | definition | `Explains`, `Planner`, `startRegret` |
+| `OverridesFromStart.eq_and_exists_lt` | theorem | `OverridesFromStart`, `Planner` |
 | `Pair` | definition | `Planner`, `Policy`, `RewardFn` |
 | `Planner` | definition | — |
 | `Policy` | definition | — |
@@ -83,27 +236,103 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 | `ReasonableLanguage.indifferent_le_compatible` | theorem | `Pair`, `Policy`, `ReasonableLanguage`, `ReasonableLanguage.Compatible`, `ReasonableLanguage.KPair`, `ReasonableLanguage.c`, `op1`, `op5` |
 | `ReasonableLanguage.policy_le_of_compatible` | theorem | `Pair`, `Policy`, `ReasonableLanguage`, `ReasonableLanguage.Compatible`, `ReasonableLanguage.KPair`, `ReasonableLanguage.KPolicy`, `ReasonableLanguage.c` |
 | `ReasonableLanguage.proposition_eight` | theorem | `Pair`, `Policy`, `ReasonableLanguage`, `ReasonableLanguage.Compatible`, `ReasonableLanguage.KPair`, `ReasonableLanguage.c`, `op4` |
+| `ReasonableLanguage.proposition_eight_comparable` | theorem | `ComparableComplexity`, `Pair`, `Policy`, `ReasonableLanguage`, `ReasonableLanguage.Compatible`, `ReasonableLanguage.KPair`, `ReasonableLanguage.c`, `op4` |
 | `ReasonableLanguage.proposition_seven` | theorem | `Pair`, `Policy`, `ReasonableLanguage`, `ReasonableLanguage.Compatible`, `ReasonableLanguage.KPair`, `ReasonableLanguage.c`, `op1`, `op2`, `op4`, `op5`, `op6` |
 | `RegretModel` | definition | — |
 | `RegretModel.bad_compatible_rewards_nonempty` | theorem | `Explains`, `HalfMaximalRegretBound`, `Planner`, `RegretModel`, `RegretModel.regret`, `RegretModel.worstCaseRegret`, `RegretModel.worstPolicy` |
 | `RegretModel.cannot_rule_out_half_maximal_regret` | theorem | `Explains`, `HalfMaximalRegretBound`, `Planner`, `RegretModel`, `RegretModel.regret`, `RegretModel.worstCaseRegret`, `RegretModel.worstPolicy` |
 | `RewardFn` | definition | — |
+| `Source.AmongLowestFor` | definition | `Pair`, `Policy`, `Source.ReasonableForF.Compatible` |
+| `Source.AmongLowestIn` | definition | — |
+| `Source.CodePlanning` | definition | `Source.TimedLanguage` |
+| `Source.CodePlanning.Wrapping` | definition | `Policy`, `RewardFn`, `Source.CodePlanning`, `Source.TimedLanguage` |
+| `Source.CodePlanning.amongLowestIn_wrap` | theorem | `Policy`, `RewardFn`, `Source.AmongLowestIn`, `Source.CodePlanning`, `Source.CodePlanning.GenCodePlanner`, `Source.CodePlanning.Wrapping`, `Source.CodePlanning.Wrapping.wrapReward`, `Source.CodePlanning.codePairComplexity`, `Source.TimedLanguage`, `Source.TimedLanguage.CodeCompatible`, `Source.TimedLanguage.CodePair`, `Source.TimedLanguage.GenPolicy`, `Source.TimedLanguage.c`, `Source.TimedLanguage.len` |
+| `Source.CodePlanning.codeKT` | definition | `Source.CodePlanning`, `Source.CodePlanning.codePairComplexity`, `Source.TimedLanguage`, `Source.TimedLanguage.CodePair` |
+| `Source.CodePlanning.codeKt` | definition | `Source.CodePlanning`, `Source.CodePlanning.codePairComplexity`, `Source.TimedLanguage`, `Source.TimedLanguage.CodePair`, `Source.logTime` |
+| `Source.CodePlanning.codePairComplexity` | definition | `Policy`, `RewardFn`, `Source.CodePlanning`, `Source.CodePlanning.GenCodePlanner`, `Source.TimedLanguage`, `Source.TimedLanguage.CodePair`, `Source.TimedLanguage.GenReward`, `Source.TimedLanguage.descCost` |
+| `Source.CodePlanning.codePairComplexity_wrap_le` | theorem | `Policy`, `RewardFn`, `Source.CodePlanning`, `Source.CodePlanning.GenCodePlanner`, `Source.CodePlanning.Wrapping`, `Source.CodePlanning.Wrapping.wrapReward`, `Source.CodePlanning.codePairComplexity`, `Source.TimedLanguage`, `Source.TimedLanguage.GenPolicy`, `Source.TimedLanguage.c`, `Source.TimedLanguage.len`, `Source.TimedLanguage.policyComplexity` |
+| `Source.CodePlanning.policyComplexity_le_codePairComplexity` | theorem | `Policy`, `Source.CodePlanning`, `Source.CodePlanning.codePairComplexity`, `Source.TimedLanguage`, `Source.TimedLanguage.CodeCompatible`, `Source.TimedLanguage.CodePair`, `Source.TimedLanguage.c`, `Source.TimedLanguage.policyComplexity` |
+| `Source.CodePlanning.proposition_ten_antigreedy` | theorem | `Policy`, `RewardFn`, `Source.AmongLowestIn`, `Source.CodePlanning`, `Source.CodePlanning.GenCodePlanner`, `Source.CodePlanning.Wrapping`, `Source.CodePlanning.codeKT`, `Source.CodePlanning.codeKt`, `Source.TimedLanguage`, `Source.TimedLanguage.CodeCompatible`, `Source.TimedLanguage.CodePair`, `Source.TimedLanguage.GenReward`, `Source.TimedLanguage.c`, `Source.TimedLanguage.len`, `greedyPlanner`, `rewardOf` |
+| `Source.CodePlanning.proposition_ten_antigreedy_of_isGreedy` | theorem | `IsGreedy`, `Planner`, `Policy`, `RewardFn`, `Source.AmongLowestIn`, `Source.CodePlanning`, `Source.CodePlanning.GenCodePlanner`, `Source.CodePlanning.Wrapping`, `Source.CodePlanning.codeKT`, `Source.CodePlanning.codeKt`, `Source.TimedLanguage`, `Source.TimedLanguage.CodeCompatible`, `Source.TimedLanguage.CodePair`, `Source.TimedLanguage.GenReward`, `Source.TimedLanguage.c`, `Source.TimedLanguage.len`, `rewardOf` |
+| `Source.CodePlanning.proposition_ten_greedy` | theorem | `Policy`, `RewardFn`, `Source.AmongLowestIn`, `Source.CodePlanning`, `Source.CodePlanning.GenCodePlanner`, `Source.CodePlanning.Wrapping`, `Source.CodePlanning.codeKT`, `Source.CodePlanning.codeKt`, `Source.TimedLanguage`, `Source.TimedLanguage.CodeCompatible`, `Source.TimedLanguage.CodePair`, `Source.TimedLanguage.GenReward`, `Source.TimedLanguage.c`, `Source.TimedLanguage.len`, `greedyPlanner`, `rewardOf` |
+| `Source.CodePlanning.proposition_ten_greedy_of_isGreedy` | theorem | `IsGreedy`, `Planner`, `Policy`, `RewardFn`, `Source.AmongLowestIn`, `Source.CodePlanning`, `Source.CodePlanning.GenCodePlanner`, `Source.CodePlanning.Wrapping`, `Source.CodePlanning.codeKT`, `Source.CodePlanning.codeKt`, `Source.TimedLanguage`, `Source.TimedLanguage.CodeCompatible`, `Source.TimedLanguage.CodePair`, `Source.TimedLanguage.GenReward`, `Source.TimedLanguage.c`, `Source.TimedLanguage.len`, `rewardOf` |
+| `Source.ConjectureNine` | definition | `Pair`, `Policy`, `Source.ReasonableForF`, `Source.ReasonableForF.Compatible`, `Source.ReasonableForF.NotAmongLowestCompatible` |
+| `Source.ConjectureNine.theorem_two` | theorem | `Pair`, `Policy`, `Source.ConjectureNine`, `Source.ReasonableForF`, `Source.ReasonableForF.Compatible`, `Source.ReasonableForF.KPair`, `op1`, `op2`, `op4`, `op5`, `op6` |
+| `Source.ConjectureNineOf` | definition | `Pair`, `Planner`, `Policy`, `RewardFn`, `Source.AmongLowestFor`, `Source.ReasonableForF.Compatible`, `Source.ReasonableForFOf`, `Source.ReasonableForFOf.KPair`, `Source.ReasonableForFOf.c` |
+| `Source.ConjectureNineOf.theorem_two_of_isGreedy` | theorem | `IsGreedy`, `Pair`, `Planner`, `Policy`, `RewardFn`, `Source.ConjectureNineOf`, `Source.ReasonableForF.Compatible`, `Source.ReasonableForFOf`, `Source.ReasonableForFOf.KPair`, `op1`, `op2Of`, `op4`, `op5`, `op6` |
 | `Source.Fmap` | definition | `Pair` |
+| `Source.FmapOf` | definition | `Pair`, `Planner`, `Policy`, `RewardFn` |
+| `Source.FmapOf_greedyPlanner` | theorem | `Pair`, `Source.Fmap`, `Source.FmapOf`, `greedyPlanner` |
 | `Source.ReasonableForF` | definition | — |
 | `Source.ReasonableForF.AmongLowestCompatible` | definition | `Pair`, `Policy`, `Source.ReasonableForF`, `Source.ReasonableForF.Compatible`, `Source.ReasonableForF.KPair`, `Source.ReasonableForF.c` |
 | `Source.ReasonableForF.Compatible` | definition | `Pair`, `Policy`, `op3` |
 | `Source.ReasonableForF.NotAmongLowestCompatible` | definition | `Pair`, `Policy`, `Source.ReasonableForF`, `Source.ReasonableForF.Compatible`, `Source.ReasonableForF.KPair`, `Source.ReasonableForF.c` |
+| `Source.ReasonableForF.amongLowestCompatible_iff` | theorem | `AmongLowest`, `Pair`, `Policy`, `Source.ReasonableForF`, `Source.ReasonableForF.AmongLowestCompatible`, `Source.ReasonableForF.Compatible`, `Source.ReasonableForF.KPair`, `Source.ReasonableForF.c` |
+| `Source.ReasonableForF.amongLowestCompatible_iff_amongLowestFor` | theorem | `Pair`, `Policy`, `Source.AmongLowestFor`, `Source.ReasonableForF`, `Source.ReasonableForF.AmongLowestCompatible`, `Source.ReasonableForF.KPair`, `Source.ReasonableForF.c` |
+| `Source.ReasonableForF.amongLowestCompatible_iff_toReasonableForFOf` | theorem | `Pair`, `Policy`, `Source.AmongLowestFor`, `Source.ReasonableForF`, `Source.ReasonableForF.AmongLowestCompatible`, `Source.ReasonableForF.toReasonableForFOf`, `Source.ReasonableForFOf.KPair`, `Source.ReasonableForFOf.c`, `greedyPlanner` |
 | `Source.ReasonableForF.antirational_amongLowest` | theorem | `Policy`, `Source.ReasonableForF`, `Source.ReasonableForF.AmongLowestCompatible`, `op2`, `op4`, `op6` |
 | `Source.ReasonableForF.compatible_iff` | theorem | `Pair`, `Policy`, `ReasonableLanguage.Compatible`, `Source.ReasonableForF.Compatible` |
 | `Source.ReasonableForF.compatible_indifferent` | theorem | `Policy`, `Source.ReasonableForF.Compatible`, `op1`, `op5` |
+| `Source.ReasonableForF.fComplexity_le` | theorem | `Source.ReasonableForF`, `Source.ReasonableForF.KPair`, `Source.ReasonableForF.c`, `Source.fComplexity` |
 | `Source.ReasonableForF.greedy_amongLowest` | theorem | `Policy`, `Source.ReasonableForF`, `Source.ReasonableForF.AmongLowestCompatible`, `op2`, `op6` |
 | `Source.ReasonableForF.indifferent_amongLowest` | theorem | `Policy`, `Source.ReasonableForF`, `Source.ReasonableForF.AmongLowestCompatible`, `op1`, `op5` |
 | `Source.ReasonableForF.notAmongLowest_iff` | theorem | `Pair`, `Policy`, `Source.ReasonableForF`, `Source.ReasonableForF.AmongLowestCompatible`, `Source.ReasonableForF.Compatible`, `Source.ReasonableForF.NotAmongLowestCompatible` |
 | `Source.ReasonableForF.proposition_eight` | theorem | `Pair`, `Policy`, `Source.ReasonableForF`, `Source.ReasonableForF.Compatible`, `Source.ReasonableForF.KPair`, `Source.ReasonableForF.c` |
+| `Source.ReasonableForF.proposition_eight_comparable` | theorem | `ComparableComplexity`, `Pair`, `Policy`, `Source.ReasonableForF`, `Source.ReasonableForF.Compatible`, `Source.ReasonableForF.KPair`, `Source.ReasonableForF.c` |
 | `Source.ReasonableForF.proposition_seven` | theorem | `Policy`, `Source.ReasonableForF`, `Source.ReasonableForF.AmongLowestCompatible`, `op1`, `op2`, `op4`, `op5`, `op6` |
 | `Source.ReasonableForF.theorem_two_conditional` | theorem | `Pair`, `Policy`, `Source.ReasonableForF`, `Source.ReasonableForF.KPair`, `Source.ReasonableForF.NotAmongLowestCompatible`, `op1`, `op2`, `op4`, `op5`, `op6` |
+| `Source.ReasonableForF.toReasonableForFOf` | definition | `Source.ReasonableForF`, `Source.ReasonableForF.KPair`, `Source.ReasonableForF.c`, `Source.ReasonableForFOf`, `greedyPlanner` |
+| `Source.ReasonableForF.toReasonableForF_toReasonableForFOf` | theorem | `Source.ReasonableForF`, `Source.ReasonableForF.toReasonableForFOf`, `Source.ReasonableForFOf.toReasonableForF` |
+| `Source.ReasonableForFOf` | definition | `Planner`, `Policy`, `RewardFn` |
+| `Source.ReasonableForFOf.fComplexityOf_le` | theorem | `Planner`, `Policy`, `RewardFn`, `Source.ReasonableForFOf`, `Source.ReasonableForFOf.KPair`, `Source.ReasonableForFOf.c`, `Source.fComplexityOf` |
+| `Source.ReasonableForFOf.proposition_eight_any_planner` | theorem | `Pair`, `Planner`, `Policy`, `RewardFn`, `Source.ReasonableForF.Compatible`, `Source.ReasonableForFOf`, `Source.ReasonableForFOf.KPair`, `Source.ReasonableForFOf.c` |
+| `Source.ReasonableForFOf.proposition_eight_comparable_any_planner` | theorem | `ComparableComplexity`, `Pair`, `Planner`, `Policy`, `RewardFn`, `Source.ReasonableForF.Compatible`, `Source.ReasonableForFOf`, `Source.ReasonableForFOf.KPair`, `Source.ReasonableForFOf.c` |
+| `Source.ReasonableForFOf.proposition_seven_of_isGreedy` | theorem | `IsGreedy`, `Planner`, `Policy`, `RewardFn`, `Source.AmongLowestFor`, `Source.ReasonableForFOf`, `Source.ReasonableForFOf.KPair`, `Source.ReasonableForFOf.c`, `op1`, `op2Of`, `op4`, `op5`, `op6` |
+| `Source.ReasonableForFOf.theorem_two_conditional_of_isGreedy` | theorem | `IsGreedy`, `Pair`, `Planner`, `Policy`, `RewardFn`, `Source.AmongLowestFor`, `Source.ReasonableForF.Compatible`, `Source.ReasonableForFOf`, `Source.ReasonableForFOf.KPair`, `Source.ReasonableForFOf.c`, `op1`, `op2Of`, `op4`, `op5`, `op6` |
+| `Source.ReasonableForFOf.toReasonableForF` | definition | `Source.ReasonableForF`, `Source.ReasonableForFOf`, `Source.ReasonableForFOf.KPair`, `Source.ReasonableForFOf.c`, `greedyPlanner` |
+| `Source.TimedLanguage` | definition | — |
+| `Source.TimedLanguage.CodeCompatible` | definition | `Policy`, `RewardFn`, `Source.TimedLanguage`, `Source.TimedLanguage.CodePair`, `Source.TimedLanguage.GenReward` |
+| `Source.TimedLanguage.CodePair` | definition | `Policy`, `RewardFn` |
+| `Source.TimedLanguage.KT` | definition | `Pair`, `Source.TimedLanguage`, `Source.TimedLanguage.pairComplexity` |
+| `Source.TimedLanguage.Kt` | definition | `Pair`, `Source.TimedLanguage`, `Source.TimedLanguage.pairComplexity`, `Source.logTime` |
+| `Source.TimedLanguage.codeCompatible_iff_of_extensional` | theorem | `Planner`, `Policy`, `RewardFn`, `Source.ReasonableForF.Compatible`, `Source.TimedLanguage`, `Source.TimedLanguage.CodeCompatible`, `Source.TimedLanguage.GenReward` |
+| `Source.TimedLanguage.descCost` | definition | `Source.TimedLanguage`, `Source.TimedLanguage.app`, `Source.TimedLanguage.len`, `Source.TimedLanguage.time` |
+| `Source.TimedLanguage.pairComplexity` | definition | `Pair`, `Planner`, `Policy`, `RewardFn`, `Source.TimedLanguage`, `Source.TimedLanguage.GenPlanner`, `Source.TimedLanguage.GenReward`, `Source.TimedLanguage.descCost` |
+| `Source.TimedLanguage.policyComplexity` | definition | `Policy`, `Source.TimedLanguage`, `Source.TimedLanguage.GenPolicy`, `Source.TimedLanguage.len`, `Source.TimedLanguage.time` |
+| `Source.TimedLanguage.proposition_ten_indifferent` | theorem | `Policy`, `Source.AmongLowestFor`, `Source.TimedLanguage`, `Source.TimedLanguage.KT`, `Source.TimedLanguage.Kt`, `Source.TimedLanguage.c`, `op1`, `op5` |
+| `Source.amongLowestFor_iff_amongLowestIn` | theorem | `Pair`, `Policy`, `Source.AmongLowestFor`, `Source.AmongLowestIn`, `Source.ReasonableForF.Compatible` |
+| `Source.antirational_amongLowestFor` | theorem | `Pair`, `Policy`, `Source.AmongLowestFor`, `op2`, `op4`, `op6` |
+| `Source.antirational_amongLowestFor_of_isGreedy` | theorem | `IsGreedy`, `Pair`, `Planner`, `Policy`, `RewardFn`, `Source.AmongLowestFor`, `op2Of`, `op4`, `op6` |
+| `Source.conjectureNineOf_greedyPlanner_iff` | theorem | `Pair`, `Policy`, `Source.ConjectureNine`, `Source.ConjectureNineOf`, `Source.ReasonableForF`, `Source.ReasonableForFOf`, `Source.ReasonableForFOf.toReasonableForF`, `greedyPlanner` |
+| `Source.fComplexity` | definition | `Pair`, `Source.Fmap` |
+| `Source.fComplexityOf` | definition | `Pair`, `Planner`, `Policy`, `RewardFn`, `Source.FmapOf` |
+| `Source.fComplexityOf_greedyPlanner` | theorem | `Pair`, `Source.fComplexity`, `Source.fComplexityOf`, `greedyPlanner` |
+| `Source.fComplexityOf_le_iff` | theorem | `Pair`, `Planner`, `Policy`, `RewardFn`, `Source.FmapOf`, `Source.fComplexityOf` |
+| `Source.fComplexityOf_le_iff_nat` | theorem | `Pair`, `Planner`, `Policy`, `RewardFn`, `Source.FmapOf`, `Source.fComplexityOf` |
+| `Source.fComplexityOf_nonneg` | theorem | `Pair`, `Planner`, `Policy`, `RewardFn`, `Source.fComplexityOf` |
+| `Source.fComplexity_le_iff` | theorem | `Pair`, `Source.Fmap`, `Source.fComplexity` |
+| `Source.fComplexity_le_iff_nat` | theorem | `Pair`, `Source.Fmap`, `Source.fComplexity` |
+| `Source.fComplexity_nonneg` | theorem | `Pair`, `Source.fComplexity` |
+| `Source.greedy_amongLowestFor` | theorem | `Pair`, `Policy`, `Source.AmongLowestFor`, `op2`, `op6` |
+| `Source.greedy_amongLowestFor_of_isGreedy` | theorem | `IsGreedy`, `Pair`, `Planner`, `Policy`, `RewardFn`, `Source.AmongLowestFor`, `op2Of`, `op6` |
+| `Source.indifferent_amongLowestFor` | theorem | `Pair`, `Policy`, `Source.AmongLowestFor`, `op1`, `op5` |
+| `Source.logTime` | definition | — |
+| `Source.logTime_add_le` | theorem | `Source.logTime` |
+| `Source.logTime_mono` | theorem | `Source.logTime` |
+| `Source.not_conjectureNineOf_of_indifferent` | theorem | `Pair`, `Planner`, `Policy`, `RewardFn`, `Source.ConjectureNineOf`, `Source.ReasonableForFOf`, `op1`, `op5` |
+| `Source.not_conjectureNine_of_indifferent` | theorem | `Pair`, `Policy`, `Source.ConjectureNine`, `Source.ReasonableForF`, `op1`, `op5` |
+| `Source.proposition_seven_of_bounds` | theorem | `Pair`, `Policy`, `Source.AmongLowestFor`, `Source.Fmap`, `op1`, `op2`, `op4`, `op5`, `op6` |
+| `Source.proposition_seven_of_bounds_of_isGreedy` | theorem | `IsGreedy`, `Pair`, `Planner`, `Policy`, `RewardFn`, `Source.AmongLowestFor`, `Source.FmapOf`, `op1`, `op2Of`, `op4`, `op5`, `op6` |
+| `StrictlyOverridesForAt` | definition | `OverridesForAt`, `Planner`, `Policy`, `RewardFn` |
+| `StrictlyOverridesForAt.value_lt` | theorem | `Explains`, `Planner`, `Policy`, `RewardFn`, `StrictlyOverridesForAt` |
+| `amongLowestFor_iff_amongLowest` | theorem | `AmongLowest`, `Pair`, `Policy`, `Source.AmongLowestFor`, `Source.ReasonableForF.Compatible` |
+| `amongLowest_iff_min` | theorem | `AmongLowest`, `Pair` |
 | `behaviour_le_of_evaluatesTo` | theorem | `EvaluatesTo` |
+| `comparableComplexityIn_iff` | theorem | `ComparableComplexity`, `ComparableComplexityIn`, `Pair` |
+| `comparableComplexity_iff` | theorem | `ComparableComplexity`, `Pair` |
+| `complexity_eq_behaviour_of_evaluatesTo` | theorem | `EvaluatesTo` |
 | `computable_decodeBehaviour` | theorem | `decodeBehaviour` |
+| `computable_degeneratePair` | theorem | `degeneratePair` |
 | `computable_encodeExplanation` | theorem | `encodeExplanation` |
 | `computable_pairProgram` | theorem | `pairProgram` |
 | `computable_pairReward` | theorem | `pairReward` |
@@ -113,56 +342,94 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 | `decodeBehaviour` | definition | — |
 | `decodeBehaviour_encodeExplanation` | theorem | `decodeBehaviour`, `encodeExplanation` |
 | `degeneratePair` | definition | `pairString` |
+| `degeneratePair_complexity_eq_behaviour` | theorem | `degeneratePair` |
 | `degenerate_antirational` | theorem | `Explains`, `Policy`, `RewardFn`, `greedyPlanner`, `rewardOf` |
 | `degenerate_explanation_cheap` | theorem | `encodeExplanation` |
 | `degenerate_greedy` | theorem | `Explains`, `Policy`, `RewardFn`, `greedyPlanner`, `rewardOf` |
 | `degenerate_indifferent` | theorem | `Explains`, `indifferentPlanner` |
+| `degenerate_near_minimal_exact` | theorem | `Pair`, `Planner`, `Policy`, `ReasonableLanguage.Compatible`, `RewardFn`, `greedyOn`, `indifferentPlanner`, `negPlanner`, `plainKPairExact`, `plainKPolicy`, `rewardOf` |
+| `degenerate_near_minimal_hybrid` | theorem | `Pair`, `Planner`, `Policy`, `ReasonableLanguage.Compatible`, `RewardFn`, `greedyOn`, `indifferentPlanner`, `negPlanner`, `plainKPairHybrid`, `plainKPolicy`, `rewardOf` |
+| `describes_degeneratePair` | theorem | `CodesPolicy`, `CodesReward`, `Describes`, `Planner`, `Policy`, `RewardFn`, `degeneratePair`, `indifferentPlanner` |
 | `detStateAt_ofMemoryless_succ` | theorem | `Policy`, `ofMemoryless` |
 | `encodeExplanation` | definition | — |
 | `encodeExplanation_injective` | theorem | `encodeExplanation` |
 | `evalPair` | definition | `pairProgram`, `pairReward` |
+| `evalPair_eq_runOn` | theorem | `evalPair`, `pairProgram`, `pairReward`, `runOn` |
 | `evaluatesTo_degeneratePair` | theorem | `EvaluatesTo`, `degeneratePair` |
 | `evaluatesTo_readerPair` | theorem | `EvaluatesTo`, `readerPair` |
+| `exists_covering_listing` | theorem | — |
+| `exists_evaluatesTo_of_describes` | theorem | `CodesPolicy`, `Describes`, `EvaluatesTo`, `Pair`, `Policy`, `ReasonableLanguage.Compatible` |
 | `exists_planner` | theorem | `Explains`, `Planner` |
 | `exists_reward` | theorem | `Explains`, `Planner` |
 | `explanation_at_least_behaviour` | theorem | `encodeExplanation` |
 | `explanation_complexity_eq_behaviour` | theorem | `encodeExplanation` |
+| `firstMax` | definition | — |
 | `greedyAction` | definition | `RewardFn` |
 | `greedyAction_max` | theorem | `RewardFn`, `greedyAction` |
+| `greedyOn` | definition | `Planner`, `Policy`, `RewardFn`, `firstMax` |
+| `greedyOn_max` | theorem | `RewardFn`, `greedyOn` |
+| `greedyOn_rewardOf` | theorem | `Policy`, `greedyOn`, `rewardOf` |
 | `greedyPlanner` | definition | `Planner`, `Policy`, `RewardFn`, `greedyAction` |
+| `greedyPlanner_apply` | theorem | `RewardFn`, `greedyAction`, `greedyPlanner` |
 | `greedy_rewardOf` | theorem | `Explains`, `Policy`, `RewardFn`, `greedyPlanner`, `rewardOf` |
 | `indifferentPlanner` | definition | `Planner` |
+| `isBoundedReward_rewardOf` | theorem | `IsBoundedReward`, `Policy`, `rewardOf` |
+| `isBoundedReward_zero` | theorem | `IsBoundedReward`, `RewardFn` |
+| `isGreedy_greedyOn` | theorem | `IsGreedy`, `greedyOn` |
+| `isGreedy_greedyPlanner` | theorem | `IsGreedy`, `greedyPlanner` |
 | `knowable_reward_of_isEmpty_state` | theorem | `Pair`, `Planner`, `Policy`, `RewardFn`, `op3` |
 | `lastObs` | definition | — |
 | `lastObs_append` | theorem | `lastObs` |
 | `lastObs_detHistoryUpTo` | theorem | `Policy`, `lastObs`, `ofMemoryless` |
 | `lemma_six` | theorem | `Explains`, `Policy`, `RewardFn`, `greedyPlanner`, `indifferentPlanner`, `negPlanner`, `rewardOf` |
+| `lemma_six_of_isGreedy` | theorem | `Explains`, `IsGreedy`, `Planner`, `Policy`, `RewardFn`, `indifferentPlanner`, `negPlanner`, `rewardOf` |
 | `negPlanner` | definition | `Planner`, `Policy`, `RewardFn` |
+| `negPlanner_greedyOn_neg_rewardOf` | theorem | `Policy`, `RewardFn`, `greedyOn`, `negPlanner`, `rewardOf` |
 | `neg_twin` | theorem | `Explains`, `Planner` |
+| `not_comparableComplexityIn_top` | theorem | `ComparableComplexityIn`, `Pair` |
 | `not_knowable_reward` | theorem | `Pair`, `Planner`, `Policy`, `RewardFn`, `op3` |
 | `ofMemoryless` | definition | `Policy`, `lastObs` |
 | `ofMemoryless_injective` | theorem | `Policy`, `ofMemoryless` |
 | `op1` | definition | `Pair`, `Planner`, `Policy`, `RewardFn` |
 | `op2` | definition | `Pair`, `Planner`, `Policy`, `RewardFn`, `greedyPlanner` |
+| `op2Of` | definition | `Pair`, `Planner`, `Policy`, `RewardFn` |
+| `op2Of_greedyPlanner` | theorem | `Pair`, `RewardFn`, `greedyPlanner`, `op2`, `op2Of` |
 | `op3` | definition | `Pair`, `Planner`, `Policy`, `RewardFn` |
 | `op3_op1_op5` | theorem | `Policy`, `op1`, `op3`, `op5` |
+| `op3_op2Of_op6` | theorem | `IsGreedy`, `Planner`, `Policy`, `RewardFn`, `op2Of`, `op3`, `op6` |
 | `op3_op2_op6` | theorem | `Policy`, `op2`, `op3`, `op6` |
 | `op3_op4` | theorem | `Pair`, `Policy`, `op3`, `op4` |
+| `op3_op4_op2Of_op6` | theorem | `IsGreedy`, `Planner`, `Policy`, `RewardFn`, `op2Of`, `op3`, `op4`, `op6` |
 | `op3_op4_op2_op6` | theorem | `Policy`, `op2`, `op3`, `op4`, `op6` |
 | `op4` | definition | `Pair`, `Planner`, `Policy`, `RewardFn` |
 | `op4_op4` | theorem | `Pair`, `op4` |
 | `op5` | definition | `Planner`, `Policy`, `RewardFn`, `indifferentPlanner` |
 | `op6` | definition | `Policy`, `RewardFn`, `rewardOf` |
+| `overridesFromStart_iff` | theorem | `Explains`, `OverridesFromStart`, `Planner`, `startRegret` |
 | `pairProgram` | definition | — |
 | `pairProgram_pairString` | theorem | `pairProgram`, `pairString` |
 | `pairReward` | definition | — |
 | `pairReward_pairString` | theorem | `pairReward`, `pairString` |
 | `pairString` | definition | — |
 | `partrec_evalPair` | theorem | `evalPair` |
+| `plainKPair` | definition | `Describes`, `Pair` |
+| `plainKPairExact` | definition | `DescribesExact`, `Pair` |
+| `plainKPairExact_degenerate_le` | theorem | `Pair`, `Planner`, `Policy`, `RewardFn`, `greedyOn`, `indifferentPlanner`, `negPlanner`, `plainKPairExact`, `plainKPolicy`, `rewardOf` |
+| `plainKPairHybrid` | definition | `DescribesHybrid`, `Pair` |
+| `plainKPairHybrid_le_plainKPair` | theorem | `Pair`, `plainKPair`, `plainKPairHybrid` |
+| `plainKPairHybrid_le_plainKPairExact` | theorem | `Pair`, `plainKPairExact`, `plainKPairHybrid` |
+| `plainKPair_le_of_describes` | theorem | `Describes`, `Pair`, `plainKPair` |
+| `plainKPolicy` | definition | `CodesPolicy`, `Policy` |
+| `plainKPolicy_le_of_codesPolicy` | theorem | `CodesPolicy`, `Policy`, `plainKPolicy` |
+| `plainKPolicy_le_plainKPairExact_of_compatible` | theorem | `Pair`, `Policy`, `ReasonableLanguage.Compatible`, `plainKPairExact`, `plainKPolicy` |
+| `plainKPolicy_le_plainKPairHybrid_of_compatible` | theorem | `Pair`, `Policy`, `ReasonableLanguage.Compatible`, `plainKPairHybrid`, `plainKPolicy` |
+| `plainKPolicy_le_plainKPair_of_compatible` | theorem | `Pair`, `Policy`, `ReasonableLanguage.Compatible`, `plainKPair`, `plainKPolicy` |
 | `plainK_le_of_partrec` | theorem | — |
 | `policy_neg_twin` | theorem | `Explains`, `Planner`, `Policy`, `RewardFn` |
 | `policy_reward_unidentifiable` | theorem | `Explains`, `Planner`, `Policy`, `RewardFn` |
 | `readerPair` | definition | `pairString` |
 | `readerPair_complexity_eq_behaviour` | theorem | `readerPair` |
 | `rewardOf` | definition | `Policy`, `RewardFn` |
+| `runOn` | definition | — |
+| `startRegret` | definition | — |
 | `trajectory_reward_unidentifiable` | theorem | `Explains`, `Planner`, `Policy`, `RewardFn`, `ofMemoryless` |

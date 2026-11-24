@@ -1,0 +1,210 @@
+source:
+  citation: >-
+    Judea Pearl, Causality: Models, Reasoning, and Inference, Second Edition,
+    Cambridge University Press, 2009. Chapter 1, section 1.3 (Causal Bayesian
+    Networks).
+  file: pearl-2009-causality-second-edition.pdf
+  sha256: 0c1e7bd1676260feb5ec909839b01f1ff16538febfe23755192e565895202e4c
+  page_offset: 22
+  standing: |
+    Finite discrete variables, §1.1.2, p. 2 (PDF p. 24): "The bulk of the
+    discussion in this book will focus on systems with a finite number of discrete
+    variables and thus will require only rudimentary notation and elementary
+    concepts in probability theory. Extensions to continuous variables will be
+    outlined but not elaborated in full generality."
+    Notation, footnote 5, p. 14 (PDF p. 36): "Lowercase symbols (e.g., $x_j$,
+    $pa_j$) denote particular realizations of the corresponding variables (e.g.,
+    $X_j$, $PA_j$)."
+    Autonomy, §1.3.1, p. 22 (PDF p. 44): "The source of this flexibility rests on
+    the assumption that each parent--child relationship in the network represents a
+    stable and autonomous physical mechanism -- in other words, that it is
+    conceivable to change one such relationship \emph{without} changing the others."
+    Locality of interventions, p. 23 (PDF p. 45): "by virtue of autonomy, we assume
+    that the change is local, and does not spread over to mechanisms other than
+    those specified."
+    Footnote 10, p. 24 (PDF p. 46): "The notation $P_x(v)$ will be replaced in
+    subsequent chapters with $P(v \mid do(x))$ and $P(v \mid \hat{x})$ to
+    facilitate algebraic manipulations."
+    Silent (source card S07, pages searched PDF pp. 24--28, 33--48): no bound on
+    the number of values a discrete variable takes beyond "finite number of
+    discrete variables"; no standing strict-positivity assumption, and no
+    convention for the conditionals $P(v_i \mid pa_i)$ in Definition 1.3.1 (iii)
+    or (1.37) at a parent configuration of probability zero. Strict positivity is
+    mentioned only for uniqueness of $PA_j$, p. 15 (PDF p. 37): "the set $PA_j$ is
+    unique whenever the distribution $P(v)$ is strictly positive".
+
+definitions:
+  - id: pearl-def-dag-kinship
+    label: directed acyclic graph, parents, family (§1.2.1)
+    pdf_page: 35
+    book_page: 13
+    latex: |
+      [\ldots] both directed and acyclic (Figure 1.1(b)) is called a \emph{directed
+      acyclic graph} (DAG), and such graphs will occupy much of our discussion of
+      causality. We make free use of the terminology of kinship (e.g.,
+      \emph{parents, children, descendants, ancestors, spouses}) to denote various
+      relationships in a graph. These kinship relations are defined along the full
+      arrows in the graph, including arrows that form directed cycles but ignoring
+      bidirected and undirected edges. [\ldots] A \emph{family} in a graph is a set
+      of nodes containing a node and all its parents.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: pearl-eq-1.33
+    label: DAG product decomposition (1.33)
+    pdf_page: 37-38
+    book_page: 15-16
+    latex: |
+      Clearly, every distribution satisfying (1.32) must decompose (using the chain
+      rule of (1.30)) into the product
+      \[ P(x_1, \ldots, x_n) = \prod_i P(x_i \mid pa_i). \tag{1.33} \]
+    context: |
+      $PA_j$ is the parent set of $X_j$: "an arrow from $X_i$ to $X_j$ assigns
+      $X_i$, as a Markovian parent of $X_j$" (p. 15, PDF p. 37).
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: pearl-def-1.2.2
+    label: Definition 1.2.2 (Markov Compatibility)
+    pdf_page: 38
+    book_page: 16
+    latex: |
+      \textbf{Definition 1.2.2 (Markov Compatibility)}
+      \emph{If a probability function $P$ admits the factorization of} (1.33)
+      \emph{relative to DAG $G$, we say that $G$} represents $P$, \emph{that $G$
+      and $P$ are} compatible, \emph{or that $P$ is} Markov relative \emph{to $G$}.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+statements:
+  - id: pearl-eq-1.37
+    audit_row: S07-R01
+    locator: eq. (1.37)
+    pdf_page: 46
+    book_page: 24
+    label: equation (1.37), truncated factorization
+    latex: |
+      Definition 1.3.1 imposes constraints on the interventional space
+      $\boldsymbol{P}_*$ that permit us to encode this vast space economically, in
+      the form of a single Bayesian network $G$. These constraints enable us to
+      compute the distribution $P_x(v)$ resulting from any intervention
+      $do(X = x)$ as a \emph{truncated factorization}
+      \[ P_x(v) = \prod_{\{i \mid V_i \notin X\}} P(v_i \mid pa_i)
+         \qquad \text{for all } v \text{ consistent with } x, \tag{1.37} \]
+      which follows from (and implies) conditions (i)--(iii), thus justifying the
+      family deletion procedure on $G$, as in (1.36).
+    note: >-
+      No proof is printed; "follows from (and implies)" is asserted. The
+      conditionals $P(v_i \mid pa_i)$ are those of the pre-intervention $P$; the
+      zero-probability parent configuration is not addressed (see
+      source.standing).
+    uses: [pearl-def-1.3.1, pearl-eq-1.33, pearl-def-dag-kinship]
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 200}
+    checked: {by: 'Codex (blind) + Grok (blind) + Codex (anchored re-read); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: pearl-eq-1.37-full-profile
+    audit_row: S07-R02
+    locator: eq. (1.37) full-profile corollaries
+    pdf_page: 46
+    book_page: 24
+    label: not printed
+    latex: null
+    note: >-
+      No printed statement found. Searched the page images of §1.3.1 (PDF pp.
+      44--46) and the text layer of all of chapter 1 (PDF pp. 1--60) for
+      "Corollary" (no occurrence) and every page citing (1.37) (PDF pp. 46, 54,
+      96): p. 54 (§1.4.1) says the pruned functional model "coincides with the
+      truncated factorization obtained by pruning families from a causal Bayesian
+      network (equation (1.37))"; p. 96 (§3.2.3) extends it to $do(S = s)$. None
+      states the case $X = V$ or an outcome function evaluated at the forced value.
+      What print does contain: (1.37) with $X = V$ gives an empty product, "for
+      all $v$ consistent with $x$"; and Definition 1.3.1 (ii), $P_x(v_i) = 1$ for
+      all $V_i \in X$ whenever $v_i$ is consistent with $X = x$. The audit's own
+      note agrees: "Pearl states the truncated product and does not separately
+      assert this consequence of it."
+    uses: [pearl-eq-1.37, pearl-def-1.3.1]
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'absence confirmed by a search of the whole chapter (Claude, 2026-11-14)', date: 2026-11-15}
+
+  - id: pearl-def-1.3.1
+    audit_row: S07-R03
+    locator: Def. 1.3.1
+    pdf_page: 45-46
+    book_page: 23-24
+    label: Definition 1.3.1 (Causal Bayesian Network)
+    latex: |
+      \textbf{Definition 1.3.1 (Causal Bayesian Network)}
+      \emph{Let $P(v)$ be a probability distribution on a set $V$ of variables, and
+      let $P_x(v)$ denote the distribution resulting from the intervention
+      $do(X = x)$ that sets a subset $X$ of variables to constants $x$.}\textsuperscript{10}
+      \emph{Denote by $\boldsymbol{P}_*$ the set of all interventional
+      distributions $P_x(v)$, $X \subseteq V$, including $P(v)$, which represents no
+      intervention (i.e., $X = \phi$). A DAG $G$ is said to be a} causal Bayesian
+      network \emph{compatible with $\boldsymbol{P}_*$ if and only if the following
+      three conditions hold for every $P_x \in P_*$:}
+      \begin{enumerate}
+      \item[(i)] \emph{$P_x(v)$ is Markov relative to $G$;}
+      \item[(ii)] \emph{$P_x(v_i) = 1$ for all $V_i \in X$ whenever $v_i$ is
+        consistent with $X = x$;}
+      \item[(iii)] \emph{$P_x(v_i \mid pa_i) = P(v_i \mid pa_i)$ for all
+        $V_i \notin X$ whenever $pa_i$ is consistent with $X = x$,} i.e., each
+        \emph{$P(v_i \mid pa_i)$ remains invariant to interventions not involving
+        $V_i$.}
+      \end{enumerate}
+    note: >-
+      The definition straddles PDF pp. 45--46 (book pp. 23--24); footnote 10 is
+      quoted in source.standing. The $P_*$ in "for every $P_x \in P_*$" is set in
+      italic, not bold as elsewhere; read as the same set. The definition does not
+      say how $P_x$ is produced from $P$ beyond "the distribution resulting from the
+      intervention"; the conditions are the only constraint.
+    uses: [pearl-def-1.2.2, pearl-eq-1.33, pearl-def-dag-kinship]
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 200}
+    checked: {by: 'Codex (blind) + Grok (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: pearl-property-1
+    audit_row: S07-R04
+    locator: Property 1, eq. (1.38)
+    pdf_page: 46
+    book_page: 24
+    label: Property 1, (1.38)
+    latex: |
+      \textbf{Property 1}
+      \emph{For all $i$,}
+      \[ P(v_i \mid pa_i) = P_{pa_i}(v_i). \tag{1.38} \]
+    context: |
+      Introduced by: "It is not hard to show that, whenever $G$ is a causal Bayes
+      network with respect to $\boldsymbol{P}_*$, the following two properties must
+      hold." Followed by: "Property 1 renders every parent set $PA_i$
+      \emph{exogenous} relative to its child $V_i$, ensuring that the conditional
+      probability $P(v_i \mid pa_i)$ coincides with the effect (on $V_i$) of
+      setting $PA_i$ to $pa_i$ by external control."
+    note: >-
+      No proof printed ("It is not hard to show"). No positivity condition on
+      $P(pa_i)$ is stated for the left-hand conditional.
+    uses: [pearl-def-1.3.1, pearl-def-dag-kinship]
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 200}
+    checked: {by: 'Codex (blind) + Grok (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: pearl-property-2
+    audit_row: S07-R05
+    locator: Property 2, eq. (1.39)
+    pdf_page: 46
+    book_page: 24
+    label: Property 2, (1.39)
+    latex: |
+      \textbf{Property 2}
+      \emph{For all $i$ and for every subset $S$ of variables disjoint of
+      $\{V_i, PA_i\}$, we have}
+      \[ P_{pa_i, s}(v_i) = P_{pa_i}(v_i). \tag{1.39} \]
+    context: |
+      Introduced by the same sentence as Property 1. Followed by: "Property 2
+      expresses the notion of invariance; once we control its direct causes $PA_i$,
+      no other interventions will affect the probability of $V_i$."
+    note: >-
+      No proof printed. "disjoint of $\{V_i, PA_i\}$" is read as disjoint from
+      $V_i$ and from every member of $PA_i$.
+    uses: [pearl-def-1.3.1, pearl-def-dag-kinship]
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 200}
+    checked: {by: 'Codex (blind) + Grok (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+excerpts: []

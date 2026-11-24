@@ -272,6 +272,125 @@ public theorem injective_ruleVisit_permRule {m : ℕ} (π : Equiv.Perm X)
   intro a b hab
   exact h (π.injective hab)
 
+/-! ### The trace theorem at print's own objects
+
+Schumacher–Vose–Whitley state their theorem for a **search operator** `g : T → X`
+on traces, not for a rule on cost histories. The objects below are theirs: a trace
+is the list of `(point, value)` pairs read so far, a run starts from the empty
+trace and appends `(g(Tₘ), f(g(Tₘ)))`, and `σA` is the algorithm whose operator is
+`σg(φ) = σ⁻¹(g(σₓ(φ)))`. Nothing is assumed of `X` or `Y`: no finiteness, and no
+non-repetition, which the theorem's proof never uses. -/
+
+/-- Print's run from the empty trace: `T₀ = ⟨⟩` and
+`T_{m+1} = Tₘ ‖ (g(Tₘ), f(g(Tₘ)))`, for a search operator `g`. -/
+@[expose] public def traceRun (g : List (X × Y) → X) (f : X → Y) : ℕ → List (X × Y)
+  | 0 => []
+  | n + 1 => traceRun g f n ++ [(g (traceRun g f n), f (g (traceRun g f n)))]
+
+/-- Print's `σₓ(φ)`: apply `σ` to the points of the trace `φ`, leaving its values. -/
+@[expose] public def traceMapX (σ : X → X) (φ : List (X × Y)) : List (X × Y) :=
+  φ.map (Prod.map σ id)
+
+/-- Print's permuted algorithm `σA`, by its search operator
+`σg(φ) = σ⁻¹(g(σₓ(φ)))`. -/
+@[expose] public def permSearch (σ : Equiv.Perm X) (g : List (X × Y) → X) :
+    List (X × Y) → X :=
+  fun φ => σ.symm (g (traceMapX σ φ))
+
+/-- The induction in print's proof: relabelling the points of `σA`'s trace on `f`
+gives `A`'s trace on `σf`. -/
+public theorem traceMapX_traceRun_permSearch (σ : Equiv.Perm X) (g : List (X × Y) → X)
+    (f : X → Y) (n : ℕ) :
+    traceMapX σ (traceRun (permSearch σ g) f n) = traceRun g (f ∘ σ.symm) n := by
+  induction n with
+  | zero => rfl
+  | succ n ih =>
+    simp only [traceRun, traceMapX, List.map_append, List.map_cons, List.map_nil,
+      Prod.map, id, permSearch, Equiv.apply_symm_apply, Function.comp] at ih ⊢
+    rw [ih]
+
+/--
+**Schumacher–Vose–Whitley's theorem (§3).** *"If `Tₙ(A, σf) = ⟨(x₀,y₀), …,
+(x_{n−1},y_{n−1})⟩` then `Tₙ(σA, f) = ⟨(σ⁻¹(x₀),y₀), …, (σ⁻¹(x_{n−1}),y_{n−1})⟩`."*
+Print's `σf(x) = f(σ⁻¹(x))` is `f ∘ σ.symm`. Stated for every search operator, at
+arbitrary `X` and `Y`, and at every length `n`.
+-/
+public theorem traceRun_permSearch (σ : Equiv.Perm X) (g : List (X × Y) → X)
+    (f : X → Y) (n : ℕ) :
+    traceRun (permSearch σ g) f n = traceMapX σ.symm (traceRun g (f ∘ σ.symm) n) := by
+  rw [← traceMapX_traceRun_permSearch σ g f n, traceMapX, traceMapX, List.map_map]
+  conv_lhs => rw [← List.map_id (traceRun (permSearch σ g) f n)]
+  congr 1
+  funext p
+  simp [Prod.map]
+
+/-! #### Bridge: a search operator is an adaptive rule
+
+The adaptive model above encodes an algorithm by the point it picks from the cost
+history alone. A search operator is one: run from the empty trace, the points of
+its trace are themselves functions of the values read so far, so the trace can be
+replayed from the values. `searchRule` is that encoding, and the three lemmas below
+say it is faithful: replaying the observed costs gives print's trace, the rule
+visits print's points, and print's `σA` is `permRule σ⁻¹`. -/
+
+/-- The trace a search operator builds from a cost history `c` of length `n`:
+print's `Tₙ`, replayed from its values. -/
+@[expose] public def replay (g : List (X × Y) → X) : (n : ℕ) → (Fin n → Y) → List (X × Y)
+  | 0, _ => []
+  | n + 1, c => replay g n (Fin.init c) ++ [(g (replay g n (Fin.init c)), c (Fin.last n))]
+
+/-- The adaptive rule of a search operator: at step `k`, apply `g` to the trace
+replayed from the `k` costs read so far. -/
+@[expose] public def searchRule (m : ℕ) (g : List (X × Y) → X) : AdaptiveRule X Y m :=
+  fun k c => g (replay g k c)
+
+/-- Replaying the first `n` observed costs gives print's `Tₙ`. -/
+public theorem replay_obsPrefix {m : ℕ} (g : List (X × Y) → X) (f : X → Y) (n : ℕ)
+    (h : n ≤ m) : replay g n (obsPrefix (searchRule m g) f n h) = traceRun g f n := by
+  induction n with
+  | zero => rfl
+  | succ n ih =>
+    have hstep : obsPrefix (searchRule m g) f (n + 1) h
+        = Fin.snoc (obsPrefix (searchRule m g) f n (Nat.le_of_succ_le h))
+            (f (g (replay g n (obsPrefix (searchRule m g) f n (Nat.le_of_succ_le h))))) := rfl
+    rw [hstep, replay, Fin.init_snoc, Fin.snoc_last, ih (Nat.le_of_succ_le h), traceRun]
+
+/-- **The encoding is faithful on traces**: replaying everything the rule observes
+on `f` gives print's trace `Tₘ(A, f)`. -/
+public theorem replay_observed {m : ℕ} (g : List (X × Y) → X) (f : X → Y) :
+    replay g m (observed (searchRule m g) f) = traceRun g f m :=
+  replay_obsPrefix g f m le_rfl
+
+/-- **The encoding is faithful on points**: at step `k` the rule queries `g(T_k)`,
+print's `k`-th point. -/
+public theorem ruleVisit_searchRule {m : ℕ} (g : List (X × Y) → X) (f : X → Y)
+    (k : Fin m) :
+    ruleVisit (searchRule m g) (observed (searchRule m g) f) k = g (traceRun g f k) := by
+  have hargs : (fun i : Fin (k : ℕ) => observed (searchRule m g) f (i.castLE k.isLt.le))
+      = obsPrefix (searchRule m g) f (k : ℕ) k.isLt.le := by
+    funext i
+    exact (obsPrefix_castLE (searchRule m g) f k.isLt.le k.isLt.le le_rfl i).symm
+  change g (replay g k _) = _
+  rw [hargs, replay_obsPrefix]
+
+/-- Relabelling the points of a replayed `σA` trace gives the replayed `A` trace. -/
+public theorem traceMapX_replay_permSearch (σ : Equiv.Perm X) (g : List (X × Y) → X) :
+    ∀ (n : ℕ) (c : Fin n → Y), traceMapX σ (replay (permSearch σ g) n c) = replay g n c
+  | 0, _ => rfl
+  | n + 1, c => by
+    have ih := traceMapX_replay_permSearch σ g n (Fin.init c)
+    simp only [replay, traceMapX, List.map_append, List.map_cons, List.map_nil,
+      Prod.map, id, permSearch, Equiv.apply_symm_apply] at ih ⊢
+    rw [ih]
+
+/-- **Print's `σA` is `permRule σ⁻¹`** in the adaptive encoding, so every theorem
+above about `permRule` is a theorem about print's permuted algorithm. -/
+public theorem searchRule_permSearch {m : ℕ} (σ : Equiv.Perm X) (g : List (X × Y) → X) :
+    searchRule m (permSearch σ g) = permRule σ.symm (searchRule m g) := by
+  funext k c
+  change σ.symm (g (traceMapX σ (replay (permSearch σ g) k c))) = σ.symm (g (replay g k c))
+  rw [traceMapX_replay_permSearch]
+
 /--
 **Any two no-revisit rules agree on a trajectory, up to a permutation.**
 

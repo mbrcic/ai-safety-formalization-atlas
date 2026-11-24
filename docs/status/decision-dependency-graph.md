@@ -10,7 +10,7 @@ Edges come from the elaborated Lean environment. This answers the question the p
 
 So `A → B` means *`B` occurs in `A`'s statement, or in `A`'s body when `A` is a definition*. A lemma used only inside a proof does not appear. Reading the table as a complete call graph would be wrong, and the two sections below are scoped so that they stay true under this limit.
 
-`114` authored declarations in `AISafetyAtlas.Decision.*` (80 theorems). Compiler-generated companions and projections are dropped.
+`144` authored declarations in `AISafetyAtlas.Decision.*` (99 theorems). Compiler-generated companions and projections are dropped.
 
 ## Load-bearing declarations
 
@@ -18,24 +18,28 @@ Named in the statements of eight or more others. A change to one of these is a c
 
 | Declaration | Named by |
 |---|---|
-| `MDP` | 144 |
-| `History` | 111 |
+| `MDP` | 241 |
+| `History` | 117 |
 | `DetPolicy` | 54 |
-| `expect` | 30 |
-| `J` | 30 |
+| `vPi` | 36 |
+| `Policy` | 35 |
+| `expect` | 34 |
+| `J` | 32 |
+| `vPiBdd` | 26 |
+| `MDP.ofDet` | 25 |
 | `detHistoryUpTo` | 23 |
-| `Policy` | 23 |
-| `MDP.ofDet` | 20 |
+| `vPiEpisodic` | 21 |
 | `Policy.ofDet` | 19 |
+| `MDP.transition` | 16 |
 | `MDP.stateAt` | 15 |
-| `vPiBdd` | 13 |
+| `MDP.run` | 15 |
+| `vPiTerm` | 13 |
 | `bellmanPolicyOp` | 13 |
-| `MDP.run` | 13 |
 | `vStar` | 11 |
+| `vPiStopped` | 11 |
 | `stateOcc` | 11 |
-| `MDP.transition` | 10 |
-| `vPi` | 9 |
 | `detStateAt` | 9 |
+| `visitCount` | 8 |
 | `bellmanOptOp` | 8 |
 
 ## Definitions no statement and no example mentions
@@ -52,6 +56,7 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 |---|---|---|
 | `DetPolicy` | definition | `History` |
 | `History` | definition | — |
+| `History.lastObs` | definition | `History` |
 | `History.mapObs` | definition | `History` |
 | `History.mapObs_injective` | theorem | `History`, `History.mapObs` |
 | `J` | definition | `MDP`, `visitCount` |
@@ -80,11 +85,13 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 | `MDP.stateAt_update_decomp` | theorem | `History`, `MDP`, `MDP.stateAt`, `Policy` |
 | `Policy` | definition | `History` |
 | `Policy.ofDet` | definition | `DetPolicy`, `History`, `Policy` |
+| `Policy.ofStationary` | definition | `History`, `History.lastObs`, `Policy` |
 | `TruncHist` | definition | — |
 | `TruncHist.instDecidableEq` | definition | `TruncHist` |
 | `TruncHist.instFintype` | definition | `TruncHist` |
 | `abs_expect_le` | theorem | `expect` |
 | `abs_expect_sub_le` | theorem | `expect` |
+| `abs_vPiEpisodic_le` | theorem | `MDP`, `vPiEpisodic` |
 | `actionEmbed` | definition | — |
 | `bellmanOptOp` | definition | `MDP`, `qVal` |
 | `bellmanOptOp_contractingWith` | theorem | `MDP`, `bellmanOptOp` |
@@ -116,16 +123,27 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 | `expect_mono` | theorem | `expect` |
 | `expect_nonneg` | theorem | `expect` |
 | `expect_pure` | theorem | `expect` |
+| `expectedReward` | definition | `MDP`, `Policy`, `pairLaw` |
 | `genRun` | definition | `History` |
 | `genRun_id` | theorem | `DetPolicy`, `History`, `detRun`, `genRun` |
 | `genRun_pmf` | theorem | `History`, `MDP`, `MDP.run`, `MDP.transition`, `Policy`, `genRun` |
 | `hasSum_prob` | theorem | — |
+| `histJ` | definition | `MDP`, `Policy`, `histVisitCount` |
+| `histJ_eq_tsum_expectedReward` | theorem | `MDP`, `Policy`, `expectedReward`, `histJ` |
+| `histJ_linear` | theorem | `MDP`, `Policy`, `histJ` |
+| `histJ_ofStationary` | theorem | `J`, `MDP`, `Policy.ofStationary`, `histJ` |
+| `histVisitCount` | definition | `MDP`, `Policy`, `pairLaw` |
+| `histVisitCount_nonneg` | theorem | `MDP`, `Policy`, `histVisitCount` |
+| `histVisitCount_ofStationary` | theorem | `MDP`, `Policy.ofStationary`, `histVisitCount`, `visitCount` |
+| `lastObs_of_mem_support_run` | theorem | `History`, `History.lastObs`, `MDP`, `MDP.run`, `Policy` |
 | `le_expect` | theorem | `expect` |
 | `le_of_affine_of_det_le` | theorem | `DetPolicy`, `History`, `Policy`, `Policy.ofDet` |
 | `le_of_affine_of_le_det` | theorem | `DetPolicy`, `History`, `Policy`, `Policy.ofDet` |
+| `maskReward` | definition | — |
 | `mem_shortHistories` | theorem | `History`, `shortHistories` |
 | `ofTruncPolicy` | definition | `DetPolicy`, `History`, `TruncHist` |
 | `ofTruncPolicy_truncatePolicy` | theorem | `DetPolicy`, `History`, `ofTruncPolicy`, `truncatePolicy` |
+| `pairLaw` | definition | `History`, `MDP`, `MDP.run`, `Policy` |
 | `qStar` | definition | `MDP`, `qVal`, `vStar` |
 | `qVal` | definition | `MDP`, `MDP.transition`, `expect` |
 | `shortHistories` | definition | `History`, `TruncHist`, `TruncHist.instFintype` |
@@ -136,8 +154,11 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 | `stateOcc_le` | theorem | `MDP`, `stateOcc` |
 | `stateOcc_nonneg` | theorem | `MDP`, `stateOcc` |
 | `stepKernel` | definition | `MDP`, `MDP.transition` |
+| `stopMDP` | definition | `MDP`, `MDP.transition` |
+| `sum_histVisitCount_eq` | theorem | `MDP`, `Policy`, `histVisitCount` |
 | `sum_stateOcc_eq` | theorem | `MDP`, `stateOcc` |
 | `sum_toReal_eq_one` | theorem | — |
+| `summable_histVisitCount` | theorem | `MDP`, `Policy`, `pairLaw` |
 | `summable_of_abs_le` | theorem | — |
 | `summable_of_bounded` | theorem | — |
 | `summable_prob` | theorem | — |
@@ -153,6 +174,19 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 | `vPiBdd_bounded` | theorem | `MDP`, `vPiBdd` |
 | `vPiBdd_eq_vPi` | theorem | `MDP`, `vPi`, `vPiBdd` |
 | `vPiBdd_unique` | theorem | `MDP`, `bellmanPolicyOp`, `vPiBdd` |
+| `vPiEpisodic` | definition | `MDP` |
+| `vPiEpisodic_const_reward` | theorem | `MDP`, `vPiEpisodic` |
+| `vPiEpisodic_stopMDP_of_mem` | theorem | `MDP`, `maskReward`, `stopMDP`, `vPiEpisodic` |
+| `vPiEpisodic_succ` | theorem | `MDP`, `MDP.transition`, `expect`, `vPiEpisodic` |
+| `vPiEpisodic_zero` | theorem | `MDP`, `vPiEpisodic` |
+| `vPiStopped` | definition | `MDP` |
+| `vPiStopped_empty` | theorem | `MDP`, `vPiEpisodic`, `vPiStopped` |
+| `vPiStopped_eq_vPiEpisodic` | theorem | `MDP`, `maskReward`, `stopMDP`, `vPiEpisodic`, `vPiStopped` |
+| `vPiStopped_of_mem` | theorem | `MDP`, `vPiStopped` |
+| `vPiStopped_succ_of_notMem` | theorem | `MDP`, `MDP.transition`, `expect`, `vPiStopped` |
+| `vPiStopped_zero` | theorem | `MDP`, `vPiStopped` |
+| `vPiTerm` | definition | `MDP`, `vPiStopped` |
+| `vPiTerm_eq_of_tendsto` | theorem | `MDP`, `vPiStopped`, `vPiTerm` |
 | `vPi_bellman` | theorem | `MDP`, `MDP.transition`, `expect`, `vPi` |
 | `vPi_isFixedPt` | theorem | `MDP`, `bellmanPolicyOp`, `vPi` |
 | `vPi_unique` | theorem | `MDP`, `bellmanPolicyOp`, `vPi` |

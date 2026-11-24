@@ -1,0 +1,556 @@
+source:
+  citation: >-
+    W. Ross Ashby, An Introduction to Cybernetics, Chapman & Hall, London, 1957
+    (second impression; copyright 1956). Electronic edition prepared for the
+    Principia Cybernetica Web, 1999. Chapter 11, Requisite Variety.
+  file: ashby-1961-introduction-to-cybernetics.pdf
+  sha256: 26bd434d9b5d8e430c9b6aea107983249a7196b438502d4624847ab7b8c15da6
+  page_offset: null
+  standing: |
+    Page numbering: each PDF page shows two facing book pages side by side, so no
+    constant offset exists; each entry gives both. PDF p. 108 = book pp. 202--203
+    (chapter 11 opens on p. 202), ..., PDF p. 114 = book pp. 214--215. Earlier
+    chapters do not follow the same formula (PDF p. 69 = book pp. 126--127).
+    Edition: the title page (PDF p. 1) reads "SECOND IMPRESSION", "LONDON CHAPMAN &
+    HALL LTD [\ldots] 1957"; the copyright box reads "Copyright \copyright{} 1956,
+    1999 by The Estate of W. Ross Ashby". The file name's "1961" is not printed in
+    the document.
+
+    Typography of this file: the relations $\ge$ and $\le$ in chapter 11 are
+    printed as $>$ and $<$ with an underline (a substitute glyph); they are
+    transcribed as $\ge$, $\le$. The scan prints "$D$, $S$" where the possessive
+    "D's" is meant (e.g. §11/6, §11/8); transcribed as printed.
+
+    The game (§11/3--11/4, pp. 202--203, PDF p. 108): "$D$ must play first, by
+    selecting a number, and thus a particular row. $R$, knowing this number, then
+    selects a Greek letter, and thus a particular column. The italic letter
+    specified by the intersection of the row and column is the \textbf{outcome.}"
+
+    The restriction of §11/5 (p. 204, PDF p. 109): "From all possible tables let
+    us eliminate those that make \emph{R's} game too easy to be of interest.
+    [\ldots] Let us consider, then, only those tables in which \emph{no column
+    contains a repeated outcome.} When this is so $R$ must select his move on
+    \emph{full} knowledge of \emph{D's} move; i.e. any change of \emph{D's} move
+    must require a change on \emph{R's} part. (Nothing is assumed here about how
+    the outcomes in one column are related to those in another, so these relations
+    are unrestricted.)"
+
+    §11/8 setting (p. 207, PDF p. 110): "Let $D$, $R$, and $E$ be three
+    variables, such that each is an information source, though ``source'' here is
+    not to imply that they are acting independently. Without any regard for how
+    they are related causally, a variety of entropies can be calculated, or
+    measured empirically."
+
+    §11/14 setting (p. 213, PDF p. 113): "Thus the whole represents a system with
+    two independent inputs, $C$ and $D$." and "(It is assumed for convenience
+    that the components move in step.)"
+
+    Silent (source card S03, pages searched PDF pp. 108--115): no finiteness
+    assumption is stated for the chapter as a whole; §11/5 itself names an
+    $r$-row, c-column table.
+
+definitions:
+  - id: ashby-def-variety
+    label: variety (§7/7)
+    pdf_page: 69
+    book_page: 126
+    latex: |
+      The word \textbf{variety}, in relation to a set of distinguishable elements,
+      will be used to mean either (i) the number of distinct elements, or (ii) the
+      logarithm to the base 2 of the number, the context indicating the sense used.
+      When variety is measured in the logarithmic form its unit is the ``bit'', a
+      contraction of ``BInary digiT''.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 200}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: ashby-def-strategy
+    label: R's strategy as a transformation (§11/5)
+    pdf_page: 109
+    book_page: 204-205
+    latex: |
+      Now, some target being given, let $R$ specify what his move will be for each
+      move by $D$. What is essential is that, win or lose, he must specify one and
+      only one move in response to each possible move of $D$. [\ldots] He is, of
+      course, specifying a transformation (which must be singlevalued, as $R$ may
+      not make two moves simultaneously) [\ldots] This transformation uniquely
+      specifies a set of outcomes---those that will actually occur if $D$, over a
+      sequence of plays, includes every possible move at least once.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: ashby-def-entropy
+    label: entropy (§9/11)
+    pdf_page: 94
+    book_page: 174-175
+    latex: |
+      Conversely, any set of probabilities---any set of positive fractions that adds
+      up to 1---can be regarded as corresponding to some set whose members show
+      variety. Shannon's calculation proceeds from the probabilities by the
+      calculation, if the probabilities are $p_1, p_2, \ldots, p_n$, of
+      \[ - p_1 \log p_1 - p_2 \log p_2 - \ldots\ p_n \log p_n , \]
+      a quantity which he calls the \textbf{entropy} of the set of probabilities and
+      which he denotes by $H$. [\ldots] The word ``entropy'' will be used in this
+      book solely as it is used by Shannon, any broader concept being referred to
+      as ``variety'' or in some other way.
+    note: >-
+      The display prints no minus sign before the last term ("$- \ldots\ p_n \log
+      p_n$"); transcribed as printed.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 200}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: ashby-def-entropy-per-step
+    label: entropy of one step of a Markov chain (§9/12)
+    pdf_page: 94
+    book_page: 175
+    latex: |
+      Such a combination is used to find the entropy appropriate to a Markov chain.
+      Each column (or row if written in the transposed form) has a set of
+      probabilities that sum to 1. Each can therefore provide an entropy. Shannon
+      defines the entropy (of one step of the chain) as the average of these
+      entropies, each being weighted by the proportion in which that state,
+      corresponding to the column, occurs \emph{when the sequence has settled to its
+      equilibrium} (S.9/6).
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 200}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: ashby-def-channel-capacity
+    label: channel capacity (§9/15)
+    pdf_page: 96-97
+    book_page: 179-180
+    latex: |
+      \textbf{9/15.} \emph{Channel capacity.} It is necessary to distinguish two
+      ways of reckoning ``entropy'' in relation to a Markov chain, even after the
+      unit (logarithmic base) has been decided. The figure calculated in S.9/12,
+      from the transition probabilities, gives the entropy, or variety to be
+      expected, at the next, single, step of the chain. [\ldots] So the chain as a
+      whole has an uncertainty, or entropy, of 1 bit \emph{per step.} [\ldots]
+      Briefly it can be said that \emph{the entropy of a length of Markov chain is
+      proportional to its length} (provided always that it has settled down to
+      equilibrium).
+      Quite another way of making the measurement on the chain is introduced when
+      one considers how fast \emph{in time} the chain is being produced by some
+      real physical process. [\ldots] Thus if (as in S.9/12) the insects' ``unit
+      time'' for one step is twenty seconds, then as each 20 seconds produces 0 84
+      bits, 60 seconds will produce (60/20)0 84 bits; so each insect is producing
+      variety of location at the rate of 2 53 bits \emph{per minute.}
+      Such a rate is the most natural way of measuring the capacity of a channel,
+      which is simply anything that can be driven by its input to take, at each
+      moment, one of a variety of states, and which can transmit that state to some
+      receiver. The rate at which it can transmit depends both on how fast the
+      steps can succeed one another and on the variety available at each step.
+    note: >-
+      Decimal points are missing in the scan ("0 84", "2 53"); transcribed as
+      printed.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 200}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: ashby-def-entropy-notation-11-8
+    label: entropy notation of §11/8
+    pdf_page: 110
+    book_page: 207
+    latex: |
+      There is $H(D,R,E)$, the entropy of the vector that has the three as
+      components; there is $H_D(E)$, the uncertainty in $E$ when $D$, $S$ state is
+      known; there is $H_{ED}(R)$, the uncertainty in $R$ when both $E$ and $D$ are
+      known; and so on.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 200}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: ashby-def-regulation-11-11
+    label: regulation (§11/11)
+    pdf_page: 111
+    book_page: 209
+    latex: |
+      There is first a set of disturbances $D$, that start in the world outside the
+      organism, often far from it, and that threaten, if the regulator $R$ does
+      nothing, to drive the essential variables $E$ outside their proper range of
+      values. The values of $E$ correspond to the ``outcomes'' of the previous
+      sections. Of all these $E$-values only a few ($\eta$) are compatible with the
+      organism's life, or are unobjectionable, so that the regulator $R$, to be
+      successful, must take its value in a way so related to that of $D$ that the
+      outcome is, if possible, always within the acceptable set 17, i.e. within
+      physiological limits. [\ldots]
+      The Table $T$ is first assumed to be given. [\ldots] $D$ takes an arbitrary
+      value, $R$ takes some value determined by \emph{D's} value, the Table
+      determines an outcome, and this either is or is not in $\eta$. [\ldots] If
+      $R$ \emph{is} a well-made regulator---one that works successfully---then $R$
+      \emph{is} such a transformation of $D$ that all the outcomes fall within
+      $\eta$. \emph{In this case R and T together are acting as the barrier F}
+      (S.10/5.)
+    note: >-
+      "the acceptable set 17" is a scan error for the set $\eta$; transcribed as
+      printed.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 200}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+statements:
+  - id: ashby-11-5
+    audit_row: S03-R01
+    locator: 11/5
+    pdf_page: 110
+    book_page: 206
+    label: §11/5, general statement
+    latex: |
+      In general: If no two elements in the same column are equal, and if a set of
+      outcomes is selected by $R$, one from each row, and if the table has $r$ rows
+      and c columns, then \emph{the variety in the selected set of outcomes cannot
+      be fewer than r/c.}
+    context: |
+      Earlier in §11/5, for Table 11/5/1 (p. 205, PDF p. 109): "It can now be stated
+      that the variety in this set of outcomes cannot be less than
+      $\dfrac{D\text{'s variety}}{R\text{'s variety}}$ i.e., in this case, 9/3."
+      The argument preceding the general statement (p. 206) considers "the least
+      possible variety, assuming that everything falls as favourably as
+      possible".
+    note: >-
+      Variety here is the count sense (i) of §7/7 (it is compared with $r/c$).
+      No rounding is stated: $r/c$ need not be an integer.
+    uses: [ashby-def-variety, ashby-def-strategy]
+    proof_pages: 109-110
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 200}
+    checked: {by: 'Codex (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: ashby-11-5-gen
+    audit_row: S03-R02
+    locator: 11/5 gen.
+    pdf_page: 110
+    book_page: 206
+    label: §11/5, general statement (the same sentence as S03-R01)
+    latex: |
+      In general: If no two elements in the same column are equal, and if a set of
+      outcomes is selected by $R$, one from each row, and if the table has $r$ rows
+      and c columns, then \emph{the variety in the selected set of outcomes cannot
+      be fewer than r/c.}
+    note: >-
+      The audit's "multiplied form" ($r \le c \cdot$ variety) is not printed
+      anywhere in §11/5 (PDF pp. 109--110); the only general statement is this
+      ratio form, and the only other form is the Table 11/5/1 instance
+      "$D$'s variety / $R$'s variety, i.e., in this case, 9/3".
+    uses: [ashby-def-variety, ashby-def-strategy]
+    proof_pages: 109-110
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 200}
+    checked: {by: 'Codex (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: ashby-11-6
+    audit_row: S03-R03
+    locator: 11/6
+    pdf_page: 110
+    book_page: 206
+    label: §11/6
+    latex: |
+      If next $R$ uses, or has available, two moves, then the variety of the
+      outcomes can be reduced to a half (but not lower). If $R$ has three moves, it
+      can be reduced to a third (but not lower); and so on. Thus if the variety in
+      the outcomes is to be reduced to some assigned number, or assigned fraction
+      of $D$, $S$ variety, $R$, $S$ variety \emph{must} be increased to at least
+      the appropriate minimum. \emph{Only variety in R, S moves can force down the
+      variety in the outcomes.}
+    context: |
+      Opening of §11/6: "We can now look at this game (still with the restriction
+      that no element may be repeated in a column) from a slightly different point
+      of view. If $R$, $S$ move is unvarying, so that he produces the same move,
+      whatever $D$, $S$ move, then \emph{the variety in the outcomes will be as large
+      as the variety in D'S moves. D} now is, as it were, exerting full control over
+      the outcomes."
+    note: >-
+      "$D$, $S$" / "$R$, $S$" are the scan's rendering of "D's" / "R's". "can be
+      reduced to a half" is an attainability claim made without a construction;
+      the §11/5 argument it rests on assumes "everything falls as favourably as
+      possible". No rounding is distinguished.
+    uses: [ashby-11-5, ashby-def-variety]
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 200}
+    checked: {by: 'Codex (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: ashby-11-7
+    audit_row: S03-R04
+    locator: 11/7
+    pdf_page: 110
+    book_page: 206-207
+    label: §11/7, the law of Requisite Variety (logarithmic form)
+    latex: |
+      \textbf{11/7.} If the varieties are measured logarithmically (as is almost
+      always convenient), and if the same conditions hold, then the theorem takes a
+      very simple form. Let $V_D$ be the variety of $D$, $V_R$ that of $R$, and
+      $\mathrm{V_O}$ that of the outcome (all measured logarithmically).
+      Then the previous section has proved that $\mathrm{V_O}$ cannot be less,
+      numerically, than the value of $V_D - V_R$. Thus $\mathrm{V_O}$'s minimum is
+      $V_D - V_R$.
+      If $V_D$ is given and fixed, $V_D - V_R$ can be lessened only by a
+      corresponding increase in $V_R$. Thus \emph{the variety in the outcomes,} if
+      minimal, \emph{can be decreased further only by a corresponding increase in
+      that of R.} (A more general statement is given in S.11/9.)
+      This is the law of Requisite Variety. To put it more picturesquely:
+      \emph{only variety in R can force down the variety due to D;}
+      \textbf{variety can destroy variety.}
+    note: >-
+      The page breaks between "(all measured logarithmically)." (p. 206) and "Then
+      the previous section" (p. 207). $\mathrm{V_O}$ is set upright in §11/7 and
+      italic $V_O$ in §11/9. "Thus $\mathrm{V_O}$'s minimum is $V_D - V_R$" asserts
+      attainment as well as the bound.
+    uses: [ashby-def-variety, ashby-11-5, ashby-11-6]
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 200}
+    checked: {by: 'Codex (blind) + Codex (anchored re-read); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: ashby-11-8
+    audit_row: S03-R05
+    locator: 11/8
+    pdf_page: 111
+    book_page: 208
+    label: §11/8, conclusion of the entropy derivation
+    latex: |
+      But always, by algebraic necessity,
+      \[ H(R, E) \le H(R) + H(E) \]
+      so
+      \[ H(D) + H_D(R) \le H(R) + H_R(E) \]
+      i.\,e.
+      \[ H(E) \ge H(D) + H_D(E) - H(R). \]
+    context: |
+      Follows the derivation on p. 207 (PDF p. 110), transcribed as excerpt
+      ashby-11-8-derivation.
+    note: >-
+      Printed slip: the last line has $H_D(E)$ where the two lines above it give
+      $H_D(R)$ (from $H(D) + H_D(R) \le H(R) + H_R(E) \le H(R) + H(E)$ follows
+      $H(E) \ge H(D) + H_D(R) - H(R)$). The next paragraph sets $H_D(R) = 0$,
+      consistent with $H_D(R)$ being the intended term. Transcribed as printed.
+    uses: [ashby-def-entropy, ashby-def-entropy-notation-11-8, ashby-11-8-hyp]
+    proof_pages: 110-111
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 200}
+    checked: {by: 'Codex (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: ashby-11-8-hyp
+    audit_row: S03-R06
+    locator: 11/8 hyp.
+    pdf_page: 110
+    book_page: 207
+    label: §11/8, the entropy form of the column condition
+    latex: |
+      The condition introduced in S.11/5 (that no element shall occur twice in a
+      column) here corresponds to the condition that if $R$ is fixed, or given, the
+      entropy of $E$ (corresponding to that of the outcome) is not to be less than
+      that of $D$, i.e.
+      \[ H_R(E) \ge H_R(D) \]
+    note: >-
+      Stated as a correspondence and adopted as the premise of the derivation; no
+      derivation of it from the column condition is printed.
+    uses: [ashby-def-entropy, ashby-def-entropy-notation-11-8]
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 200}
+    checked: {by: 'Codex (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: ashby-11-8-determinate
+    audit_row: S03-R07
+    locator: 11/8
+    pdf_page: 111
+    book_page: 208
+    label: §11/8, minimum for determinate R
+    latex: |
+      Thus the entropy of the \emph{E's} has a certain minimum. If this minimum is
+      to be affected by a relation between the $D$- and $R$-sources, it can be made
+      least when $H_D(R) = 0$, i.e. when \emph{R is a determinate function of D.}
+      When this is so, then \emph{H(E)'s} minimum is $H(D) - H(R)$, a deduction
+      similar to that of the previous section. It says simply that the minimal
+      value of \emph{E's} entropy can be forced down below that of $D$ only by an
+      equal \emph{increase} in that of $R$.
+    context: |
+      Follows directly the display ending "$H(E) \ge H(D) + H_D(E) - H(R)$."
+    note: >-
+      "it can be made least when $H_D(R) = 0$" refers to the term printed as
+      $H_D(E)$ in the preceding line (see ashby-11-8).
+    uses: [ashby-11-8, ashby-def-entropy, ashby-def-entropy-notation-11-8]
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 200}
+    checked: {by: 'Codex (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: ashby-11-9
+    audit_row: S03-R08
+    locator: 11/9
+    pdf_page: 111
+    book_page: 208
+    label: §11/9, extension to k-fold repetition
+    latex: |
+      \textbf{11/9.} The theorems just established can easily be modified to give a
+      worth-while extension.
+      Consider the case when, even when $R$ does nothing (i.e. produces the same
+      move whatever $D$ does) the variety of outcome is \emph{less} than that of
+      $D$. This is the case in Table 11/4/1. Thus if $R$ gives the reply $\alpha$ to
+      all \emph{D's} moves, then the outcomes are $a$, $b$ or $d$---a variety of
+      three, less than \emph{D's} variety of five. To get a manageable calculation,
+      suppose that within each column each element is now repeated k times (instead
+      of the ``once only'' of S.11/5). The same argument as before, modified in that
+      $kn$ rows may provide only one outcome, leads to the theorem that
+      \[ V_O \ge V_D - \log k - \log V_R , \]
+      in which the varieties are measured logarithmically.
+    note: >-
+      Printed slip: "$\log V_R$" where $V_R$ is, by the same sentence ("in which
+      the varieties are measured logarithmically") and by §11/7, already
+      logarithmic; the bound that matches §11/7 at $k = 1$ is
+      $V_O \ge V_D - \log k - V_R$. Transcribed as printed. The entropy form in the
+      same section, $H(D) - K - H(R)$, has no logarithm on the $R$ term (excerpt
+      ashby-11-9-entropy). "k" is set upright in "repeated k times" and italic in
+      "$kn$" and "$\log k$".
+    uses: [ashby-11-7, ashby-11-5, ashby-def-variety]
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 200}
+    checked: {by: 'Codex (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: ashby-11-10
+    audit_row: S03-R09
+    locator: 11/10
+    pdf_page: 111
+    book_page: 208-209
+    label: §11/10, status of the law
+    latex: |
+      \textbf{11/10.} The law states that certain events are impossible. It is
+      important that we should be clear as to the origin of the impossibility.
+      Thus, what has the statement to fear from experiment?
+      It has nothing to do with the properties of matter. So if the law is stated
+      in the form ``No machine can \ldots'', it is not to be overthrown by the
+      invention of some new device or some new electronic circuit, or the discovery
+      of some new element. It does not even have anything to do with the properties
+      of the machine in the general sense of Chapter 4; for it comes from the
+      \emph{Table,} such as that of S.11/4; this Table says simply that certain
+      $D$-$R$ combinations lead to certain outcomes, but is quite independent of
+      whatever it is that determines the outcome. Experiments can only
+      \emph{provide} such tables.
+      The theorem is primarily a statement about possible arrangements in a
+      rectangular table. It says that certain types of arrangement cannot be made.
+      It is thus no more dependent on special properties of machines than is, say,
+      the ``theorem'' that four objects can be arranged to form a square while three
+      can not. The law therefore owes nothing to experiment.
+    note: >-
+      Methodological; it names no new quantitative statement. The page breaks
+      after "it is not to be over-" (p. 208).
+    uses: [ashby-11-5, ashby-11-7]
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 200}
+    checked: {by: 'Codex (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: ashby-11-11
+    audit_row: S03-R10
+    locator: 11/11
+    pdf_page: 112
+    book_page: 211
+    label: §11/11, regulator capacity and channel capacity
+    latex: |
+      The law of Requisite Variety says that \emph{R's capacity as a regulator
+      cannot exceed R's capacity as a channel of communication.}
+    context: |
+      Immediately preceding, end of p. 210 (PDF p. 112): "We can now select a
+      portion of the diagram, and focus attention on $R$ as a transmitter:
+      $\boxed{D} \to \boxed{R} \to \boxed{T}$". Earlier on p. 210: "The arrows
+      represent actual channels of communication. For the variety in $D$
+      determines the variety in $R$, and that in $T$ is determined by that in both
+      $D$ and $R$." and "More commonly, a further suppression at $E$ \emph{is}
+      necessary; it can be achieved, as we saw in S.11/6, only by further variety
+      at $R$."
+    note: >-
+      Neither "capacity as a regulator" nor "capacity as a channel" is defined in
+      §11/11; the only printed definition of channel capacity in the book is the
+      rate of §9/15 (definition ashby-def-channel-capacity).
+    uses: [ashby-def-regulation-11-11, ashby-def-channel-capacity,
+      ashby-def-entropy-per-step, ashby-11-7]
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 200}
+    checked: {by: 'Codex (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: ashby-11-14
+    audit_row: S03-R13
+    locator: 11/14
+    pdf_page: 113-114
+    book_page: 213-214
+    label: §11/14, Control
+    latex: |
+      Suppose now that $R$ \emph{is} a perfect regulator. If C sets $a$ as the
+      target, then (through \emph{R's} agency) $E$ will take the value \emph{a,
+      whatever value D may take.} Similarly, if C sets $b$ as target, $b$ will
+      appear as outcome whatever value $D$ may take. And so on. And if C sets a
+      particular sequence---\emph{a, b, a. c, c, a,} say---as sequential or
+      compound target, then that sequence will be produced, regardless of
+      \emph{D's} values during the sequence. (It is assumed for convenience that
+      the components move in step.) Thus the fact that $R$ is a perfect regulator
+      gives C complete control over the output, in spite of the entrance of
+      disturbing effects by way of $D$. Thus, \emph{perfect} \textbf{regulation}
+      \emph{of the outcome by R makes possible a complete} \textbf{control}
+      \emph{over the outcome by C.}
+      We can see the same facts from yet another point of view. If an attempt at
+      control, by C over $E$:
+      \[ \boxed{C} \to \boxed{E} \]
+      is disturbed or made noisy by another, independent, input $D$, \emph{so} that
+      the connexions are
+      \[ \begin{array}{ccc}
+           \boxed{D} & & \\
+           & \searrow & \\
+           & & \boxed{E} \\
+           & \nearrow & \\
+           \boxed{C} & &
+         \end{array}
+         \quad\text{or}\quad
+         \begin{array}{cccc}
+           \boxed{D} & & & \\
+           & \searrow & & \\
+           & & \boxed{T} \to & \boxed{E} \\
+           & \nearrow & & \\
+           \boxed{C} & & &
+         \end{array} \]
+      then a suitable regulator $R$, taking information from both C and $D$, and
+      interposed between C and $T$:
+      \[ \begin{array}{ccccc}
+           \boxed{D} & \to & \boxed{T} & \to & \boxed{E} \\
+           & \searrow & \uparrow & & \\
+           \boxed{C} & \to & \boxed{R} & &
+         \end{array} \]
+      may be able to form, with $T$, a compound channel to $E$ that \emph{transmits
+      fully from C while transmitting nothing from D.}
+      The achievement of control may thus depend necessarily on the achievement of
+      regulation. The two are thus intimately related.
+    context: |
+      Earlier in §11/14 (p. 213, PDF p. 113): "Suppose the decision of what outcome
+      is to be the target is made by some controller, C, whom $R$ must obey. C's
+      decision will affect \emph{R's} choice of $\alpha$, $\beta$ or $\gamma$; so
+      the diagram of immediate effects is [diagram: $D \to T \to E$; $D \searrow
+      R$; $C \to R$; $R \nearrow T$] Thus the whole represents a system with two
+      independent inputs, $C$ and $D$."
+    note: >-
+      Diagrams are drawn with arrays: boxes and arrow directions as printed,
+      spacing approximate (in the last one, $\searrow$ runs from $D$ to $R$ and
+      $\uparrow$ from $R$ to $T$). The diagram quoted in `context` (p. 213) is
+      described in brackets; there the arrow from $R$ to $T$ is $\nearrow$.
+      "perfect regulator" is not
+      given a separate definition in §11/14; "well-made regulator" in §11/11 is one
+      for which "all the outcomes fall within $\eta$". The sequence is printed
+      "\emph{a, b, a. c, c, a,}" with a full stop after the second $a$. "may be
+      able to form" is printed as a possibility, not a theorem.
+    uses: [ashby-def-regulation-11-11, ashby-def-strategy]
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 200}
+    checked: {by: 'Codex (blind) + Codex (anchored re-read); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+excerpts:
+  - id: ashby-11-8-derivation
+    for: [ashby-11-8]
+    reason: >-
+      Printed slip in the conclusion of §11/8 ($H_D(E)$ for $H_D(R)$); this
+      derivation, immediately preceding it, carries $H_D(R)$ throughout.
+    pdf_page: 110
+    latex: |
+      Now whatever the causal or other relations between $D$, $R$ and $E$,
+      algebraic necessity requires that their entropies must be related so that
+      \[ H(D) + H_D(R) = H(R) + H_R(D) \]
+      for each side of the equation equals $H(R,D)$. Substitute $\mathrm{H_R}(E)$
+      for $\mathrm{H_R}(D)$, and we get
+      \[ H(D) + H_D(R) \le H(R) + H_R(E) \]
+      \[ \le H(R,E). \]
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 200}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: ashby-11-9-entropy
+    for: [ashby-11-9]
+    reason: >-
+      Printed slip "$\log V_R$" in §11/9; the entropy form of the same extension,
+      in the same section, subtracts $H(R)$ with no logarithm, showing the intended
+      shape $V_D - \log k - V_R$ with $K$ in the role of $\log k$.
+    pdf_page: 111
+    latex: |
+      An exactly similar modification may be made to the theorem in terms of
+      entropies, by supposing, not as in S.11/8 that
+      \[ H_R(E) \ge H_R(D), \text{ but that} \]
+      \[ H_R(E) \ge H_R(D) - K. \]
+      \emph{H(E)'s} minimum then becomes
+      \[ H(D) - K - H(R), \]
+      with a similar interpretation.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 200}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}

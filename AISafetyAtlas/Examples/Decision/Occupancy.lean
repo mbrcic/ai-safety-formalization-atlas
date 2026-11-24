@@ -1,6 +1,7 @@
 module
 
 public import AISafetyAtlas.Decision.Occupancy
+public import AISafetyAtlas.Decision.OccupancyHistory
 public import AISafetyAtlas.Examples.Decision.DiscountedValue
 
 /-!
@@ -136,5 +137,53 @@ public theorem J_const_here (c : ℝ) (π : Unit → PMF Bool) :
 public theorem J_const_eq_here (c : ℝ) (π : Unit → PMF Bool) :
     J oneState startHere half (fun _ _ => c) π = c * 2 := by
   rw [J_const_eq oneState startHere half_lt_one c π, horizon_half]
+
+/-! ## Non-stationary policies -/
+
+/-- A policy that reads the whole history: take `true` exactly when the history has
+even length. Not stationary: on the one-state model the state never changes, so a
+stationary policy would take the same action at every step. -/
+@[expose] public noncomputable def alternate : Policy Unit Bool :=
+  fun h => PMF.pure (decide (Even h.2.length))
+
+/-- **The whole discounted horizon is spent somewhere** at a non-stationary policy. -/
+public theorem sum_histVisitCount_alternate :
+    ∑ s, ∑ a, histVisitCount oneState alternate startHere half s a = 2 := by
+  rw [sum_histVisitCount_eq oneState alternate startHere half_lt_one, horizon_half]
+
+/-- Linearity of print's `J_ℛ` at the non-stationary policy. -/
+public theorem histJ_linear_alternate (c₁ c₂ : ℝ) (R₁ R₂ : Unit → Bool → ℝ) :
+    histJ oneState startHere half (fun s a => c₁ * R₁ s a + c₂ * R₂ s a) alternate
+      = c₁ * histJ oneState startHere half R₁ alternate
+        + c₂ * histJ oneState startHere half R₂ alternate :=
+  histJ_linear oneState startHere half c₁ c₂ R₁ R₂ alternate
+
+/-- Print's "Note that `J(π) = ⟨ℛ, F^π⟩`" at the non-stationary policy: value is the
+discounted sum of the expected rewards along the run. -/
+public theorem histJ_alternate_eq_tsum (R : Unit → Bool → ℝ) :
+    histJ oneState startHere half R alternate
+      = ∑' n : ℕ, (half : ℝ) ^ n * expectedReward oneState alternate startHere R n :=
+  histJ_eq_tsum_expectedReward oneState startHere half_lt_one R alternate
+
+/-- Visit counts at the non-stationary policy are non-negative, and the run's
+starting point, which is in its support, has the state as its history's current
+state. -/
+public theorem alternate_nonneg_and_lastObs (a : Bool) :
+    0 ≤ histVisitCount oneState alternate startHere half () a ∧
+      (((), ((), [])) : Unit × History Unit Bool).2.lastObs = () :=
+  ⟨histVisitCount_nonneg oneState alternate startHere half () a,
+    lastObs_of_mem_support_run oneState alternate () 0 ((), ((), []))
+      (by simp [MDP.run])⟩
+
+/-- At a stationary policy the non-stationary visit counts are the stationary ones. -/
+public theorem histVisitCount_ofStationary_here (π : Unit → PMF Bool) (a : Bool) :
+    histVisitCount oneState (Policy.ofStationary π) startHere half () a
+      = visitCount oneState π startHere half () a :=
+  histVisitCount_ofStationary oneState π startHere half () a
+
+/-- And so are the values. -/
+public theorem histJ_ofStationary_here (R : Unit → Bool → ℝ) (π : Unit → PMF Bool) :
+    histJ oneState startHere half R (Policy.ofStationary π) = J oneState startHere half R π :=
+  histJ_ofStationary oneState startHere half R π
 
 end AISafetyAtlas.Examples.Decision

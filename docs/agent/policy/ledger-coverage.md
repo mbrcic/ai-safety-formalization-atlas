@@ -7,7 +7,8 @@
   *Example coverage* (`scripts/check_example_coverage.py`) is whether a module
   has an `Examples/` file at all. *Source coverage*
   (`docs/provenance/source-coverage-audit.md`) is a statement-by-statement
-  grade against a paper. A bare "coverage" in prose is ambiguous between the
+  grade against a paper, graded by `docs/guide/scope-grading.md` (SPEC v6;
+  coverage there is computed from scope). A bare "coverage" in prose is ambiguous between the
   three; name which one.
 - **Which record takes your edit:**
   | Where | Holds | Note |

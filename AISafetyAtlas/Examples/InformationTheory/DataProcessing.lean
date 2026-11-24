@@ -2,6 +2,7 @@ module
 
 public import AISafetyAtlas.InformationTheory.DataProcessing
 public import AISafetyAtlas.InformationTheory.Fano
+public import Mathlib.Probability.Distributions.Geometric
 
 /-!
 # Data processing — worked consequences
@@ -172,6 +173,130 @@ public theorem le_errorProb_of_markov {A : Finset S} (μ : Measure Ω)
   have hstep := condEntropy_le_condEntropy_of_isMarkovChain μ hX hY hX' hmarkov
   have hmain := le_errorProb (A := A) μ hX hX' hXA hA
   rw [div_le_iff₀ hlog] at hmain
+  linarith
+
+/-! ## Observation and estimate of unrestricted alphabet
+
+The chained Fano statements above carry `FiniteRange Y` and `FiniteRange X'`.
+Cover & Thomas's §2.10 restricts neither: "We will not restrict the alphabet
+`𝒳̂`" (PDF pp. 63-64), and their discrete variables may have infinite alphabets.
+The six statements below are the same chains with both binders dropped, through
+`condEntropy_le_condEntropy_of_isMarkovChain_countable` and the countable-alphabet
+Fano theorems. Only `X`, whose alphabet the constant measures, has finite range.
+-/
+
+omit [MeasurableSpace Ω] [MeasurableSpace S] [MeasurableSingletonClass S] [Countable S]
+  [DecidableEq S] in
+private theorem finiteRange_of_mem {A : Finset S} {X : Ω → S} (hXA : ∀ ω, X ω ∈ A) :
+    FiniteRange X :=
+  ⟨A.finite_toSet.subset (by rintro _ ⟨ω, rfl⟩; exact hXA ω)⟩
+
+/--
+**Cover & Thomas (2.140) along a Markov chain, observation of unrestricted
+alphabet.** `fano_of_markov` with `FiniteRange Y` dropped; `FiniteRange X'` is
+not assumed either, since `hX'A` implies it.
+-/
+public theorem fano_of_markov_countable {A : Finset S} (μ : Measure Ω) [IsProbabilityMeasure μ]
+    {X : Ω → S} {Y : Ω → T} {X' : Ω → S}
+    (hX : Measurable X) (hY : Measurable Y) (hX' : Measurable X')
+    (hXA : ∀ ω, X ω ∈ A) (hX'A : ∀ ω, X' ω ∈ A)
+    [FiniteRange X] (hmarkov : IsMarkovChain X Y X' μ) :
+    H[X | Y ; μ]
+      ≤ errorProb μ X X' * Real.log ((A.card : ℝ) - 1)
+        + binEntropy (errorProb μ X X') := by
+  have : FiniteRange X' := finiteRange_of_mem hX'A
+  exact le_trans (condEntropy_le_condEntropy_of_isMarkovChain_countable μ hX hY hX' hmarkov)
+    (fano (A := A) μ hX hX' hXA hX'A)
+
+/--
+**Cover & Thomas's corollary (2.140) as printed**: `X̂ = g(Y)` with
+`X̂ : 𝒴 → 𝒳`, for an observation `Y` of unrestricted alphabet ("Let `Y` be any
+discrete random variable"). `fano_of_estimator_chain` with `FiniteRange Y`
+dropped, instantiating `fano_of_markov_countable` at
+`isMarkovChain_comp_countable`. No measurability of `g` is assumed: `𝒴` is
+countable with measurable singletons, so every `g` is measurable.
+-/
+public theorem fano_of_estimator_chain_countable {A : Finset S} (μ : Measure Ω)
+    [IsProbabilityMeasure μ] {X : Ω → S} {Y : Ω → T} {g : T → S}
+    (hX : Measurable X) (hY : Measurable Y)
+    (hXA : ∀ ω, X ω ∈ A) (hgA : ∀ ω, g (Y ω) ∈ A) [FiniteRange X] :
+    H[X | Y ; μ]
+      ≤ errorProb μ X (g ∘ Y) * Real.log ((A.card : ℝ) - 1)
+        + binEntropy (errorProb μ X (g ∘ Y)) :=
+  fano_of_markov_countable (A := A) μ hX hY ((Measurable.of_discrete (f := g)).comp hY) hXA hgA
+    (isMarkovChain_comp_countable hY g)
+
+/--
+**Theorem 2.10.1 with both inequalities chained, at §2.10's generality**:
+neither the observation nor the estimate is confined to a finite alphabet.
+`fano_of_markov_unrestricted` with `FiniteRange Y` and `FiniteRange X'` dropped.
+-/
+public theorem fano_of_markov_unrestricted_countable {A : Finset S} (μ : Measure Ω)
+    [IsProbabilityMeasure μ]
+    {X : Ω → S} {Y : Ω → T} {X' : Ω → S}
+    (hX : Measurable X) (hY : Measurable Y) (hX' : Measurable X')
+    (hXA : ∀ ω, X ω ∈ A) [FiniteRange X]
+    (hmarkov : IsMarkovChain X Y X' μ) :
+    H[X | Y ; μ]
+      ≤ errorProb μ X X' * Real.log (A.card : ℝ)
+        + binEntropy (errorProb μ X X') :=
+  le_trans (condEntropy_le_condEntropy_of_isMarkovChain_countable μ hX hY hX' hmarkov)
+    (fano_unrestricted_countable (A := A) μ hX hX' hXA)
+
+omit [DecidableEq S] in
+/--
+**Theorem 2.10.1 chained, estimate in another alphabet of unrestricted size.**
+`fano_of_markov_embedding` with `FiniteRange Y`, `FiniteRange X'` and the
+derived `FiniteRange (errorPair (ι ∘ X) X')` dropped.
+-/
+public theorem fano_of_markov_embedding_countable {U : Type uU} [MeasurableSpace U]
+    [MeasurableSingletonClass U] [Countable U] [DecidableEq U]
+    {A : Finset S} (μ : Measure Ω) [IsProbabilityMeasure μ]
+    {X : Ω → S} {Y : Ω → T} {X' : Ω → U} {ι : S → U} (hι : Injective ι)
+    (hX : Measurable X) (hY : Measurable Y) (hX' : Measurable X')
+    (hXA : ∀ ω, X ω ∈ A) [FiniteRange X]
+    (hmarkov : IsMarkovChain X Y X' μ) :
+    H[X | Y ; μ]
+      ≤ errorProb μ (ι ∘ X) X' * Real.log (A.card : ℝ)
+        + binEntropy (errorProb μ (ι ∘ X) X') :=
+  le_trans (condEntropy_le_condEntropy_of_isMarkovChain_countable μ hX hY hX' hmarkov)
+    (fano_of_embedding_countable (A := A) μ hι hX hX' hXA)
+
+/--
+**Cover & Thomas (2.131) at the printed quantity and generality**: the one-bit
+weakening `H(X|Y) ≤ 1 + P_e log|𝒳|` (at natural logarithm, `log 2`), with the
+observation and the estimate of unrestricted alphabet.
+`fano_le_log_two_add_of_markov` with `FiniteRange Y` and `FiniteRange X'` dropped.
+-/
+public theorem fano_le_log_two_add_of_markov_countable {A : Finset S} (μ : Measure Ω)
+    [IsProbabilityMeasure μ]
+    {X : Ω → S} {Y : Ω → T} {X' : Ω → S}
+    (hX : Measurable X) (hY : Measurable Y) (hX' : Measurable X')
+    (hXA : ∀ ω, X ω ∈ A) [FiniteRange X]
+    (hmarkov : IsMarkovChain X Y X' μ) :
+    H[X | Y ; μ] ≤ Real.log 2 + errorProb μ X X' * Real.log (A.card : ℝ) := by
+  have h := fano_of_markov_unrestricted_countable (A := A) μ hX hY hX' hXA hmarkov
+  have hb : binEntropy (errorProb μ X X') ≤ Real.log 2 := binEntropy_le_log_two
+  linarith
+
+/--
+**Cover & Thomas (2.132) at the printed quantity and generality**: the error
+probability is at least `(H(X|Y) − 1) / log|𝒳|`, with the observation and the
+estimate of unrestricted alphabet. `le_errorProb_of_markov` with
+`FiniteRange Y` and `FiniteRange X'` dropped.
+-/
+public theorem le_errorProb_of_markov_countable {A : Finset S} (μ : Measure Ω)
+    [IsProbabilityMeasure μ]
+    {X : Ω → S} {Y : Ω → T} {X' : Ω → S}
+    (hX : Measurable X) (hY : Measurable Y) (hX' : Measurable X')
+    (hXA : ∀ ω, X ω ∈ A) (hA : 2 ≤ A.card) [FiniteRange X]
+    (hmarkov : IsMarkovChain X Y X' μ) :
+    (H[X | Y ; μ] - Real.log 2) / Real.log (A.card : ℝ) ≤ errorProb μ X X' := by
+  have hlog : 0 < Real.log (A.card : ℝ) := by
+    refine Real.log_pos ?_
+    exact_mod_cast hA
+  rw [div_le_iff₀ hlog]
+  have := fano_le_log_two_add_of_markov_countable (A := A) μ hX hY hX' hXA hmarkov
   linarith
 
 omit [DecidableEq S] in
@@ -505,5 +630,167 @@ public theorem bitFst_isMarkovChain_of_factorizes :
     IsMarkovChain bitFst bitSnd bitSnd twoBitsUniform :=
   (isMarkovChain_iff_measure_factorizes_singleton Measurable.of_discrete
       Measurable.of_discrete Measurable.of_discrete).mpr bitFst_measure_factorizes
+
+/-! ## Witnesses at an infinite alphabet
+
+Every countable-conditioning statement, instantiated where `FiniteRange` fails:
+the sample space is `ℕ` under the geometric law with parameter `1/2` (the flip
+count of Cover & Thomas's Problem 2.1, shifted to start at `0`), the observation
+is the identity, which takes every natural number, and the truth is its parity.
+-/
+
+/-- The geometric law with success probability `1/2` on `ℕ`. -/
+public noncomputable abbrev flipLaw : Measure ℕ :=
+  geometricMeasure ⟨1 / 2, by norm_num, by norm_num⟩
+
+/-- The parity of a natural number, valued in `ℕ`. -/
+@[expose] public def natParity : ℕ → ℕ := fun n => n % 2
+
+/-- Parity lands in `{0, 1}`. -/
+public theorem natParity_mem (n : ℕ) : natParity n ∈ ({0, 1} : Finset ℕ) := by
+  rcases Nat.mod_two_eq_zero_or_one n with h | h <;> simp [natParity, h]
+
+public instance : FiniteRange natParity :=
+  ⟨(({0, 1} : Finset ℕ).finite_toSet).subset (by rintro _ ⟨n, rfl⟩; exact natParity_mem n)⟩
+
+/-- The observation is the identity on `ℕ`: it has infinite range. -/
+public theorem not_finiteRange_id_nat : ¬ FiniteRange (id : ℕ → ℕ) := by
+  rintro ⟨h⟩
+  exact Set.infinite_univ (h.subset (fun n _ => ⟨n, rfl⟩))
+
+/-- Parity behind the identity is a Markov chain `X → Y → X̂` with `X̂ = Y`, the
+identity estimator, read off `isMarkovChain_comp_countable`; and its reverse. -/
+public theorem natParity_id_id_isMarkovChain :
+    IsMarkovChain natParity (id : ℕ → ℕ) (id : ℕ → ℕ) flipLaw :=
+  isMarkovChain_comp_countable (X := natParity) measurable_id id
+
+/-- The chain read backwards, by `isMarkovChain_comm`. -/
+public theorem id_id_natParity_isMarkovChain :
+    IsMarkovChain (id : ℕ → ℕ) (id : ℕ → ℕ) natParity flipLaw :=
+  isMarkovChain_comm.mp natParity_id_id_isMarkovChain
+
+/-- `hasSum_condEntropy` with the infinite-range observation `id`. -/
+public theorem hasSum_condEntropy_natParity :
+    HasSum (fun y => (flipLaw.map id).real {y} * H[natParity | id ← y ; flipLaw])
+    H[natParity | (id : ℕ → ℕ) ; flipLaw] :=
+  hasSum_condEntropy Measurable.of_discrete id
+
+/-- `entropy_le_log_card_toFinset` at the parity. -/
+public theorem entropy_natParity_le_log_card :
+    H[natParity ; flipLaw] ≤ Real.log (FiniteRange.toFinset natParity).card :=
+  entropy_le_log_card_toFinset Measurable.of_discrete flipLaw
+
+/-- `condEntropy_le_entropy_countable` with the infinite-range observation `id`. -/
+public theorem condEntropy_natParity_id_le_entropy :
+    H[natParity | (id : ℕ → ℕ) ; flipLaw] ≤ H[natParity ; flipLaw] :=
+  condEntropy_le_entropy_countable Measurable.of_discrete measurable_id
+
+/-- `condEntropy_eq_entropy_of_indepFun` against a constant conditioner. -/
+public theorem condEntropy_natParity_const_eq_entropy :
+    H[natParity | (fun _ : ℕ => (0 : ℕ)) ; flipLaw] = H[natParity ; flipLaw] :=
+  condEntropy_eq_entropy_of_indepFun Measurable.of_discrete measurable_const
+    (indepFun_const_right _ _)
+
+/-- `hasSum_condEntropy_pair` with both conditioners `id`. -/
+public theorem hasSum_condEntropy_pair_natParity :
+    HasSum (fun y => flipLaw.real (id ⁻¹' {y}) * H[natParity | id ; flipLaw[|id ⁻¹' {y}]])
+    H[natParity | ⟨(id : ℕ → ℕ), (id : ℕ → ℕ)⟩ ; flipLaw] :=
+  hasSum_condEntropy_pair Measurable.of_discrete measurable_id measurable_id
+
+/-- `condEntropy_comp_of_injective_countable` at the injective `Nat.succ`. -/
+public theorem condEntropy_natParity_succ_eq :
+    H[natParity | Nat.succ ∘ (id : ℕ → ℕ) ; flipLaw] = H[natParity | id ; flipLaw] :=
+  condEntropy_comp_of_injective_countable Measurable.of_discrete measurable_id Nat.succ_injective
+
+/-- `condEntropy_pair_eq_of_isMarkovChain` at the parity chain. -/
+public theorem condEntropy_natParity_pair_eq :
+    H[natParity | ⟨(id : ℕ → ℕ), (id : ℕ → ℕ)⟩ ; flipLaw] = H[natParity | id ; flipLaw] :=
+  condEntropy_pair_eq_of_isMarkovChain Measurable.of_discrete measurable_id measurable_id
+    natParity_id_id_isMarkovChain
+
+/-- `condEntropy_pair_le_countable` with an infinite-range first conditioner. -/
+public theorem condEntropy_natParity_pair_le :
+    H[natParity | ⟨(id : ℕ → ℕ), natParity⟩ ; flipLaw] ≤ H[natParity | natParity ; flipLaw] :=
+  condEntropy_pair_le_countable Measurable.of_discrete measurable_id Measurable.of_discrete
+
+/-- `condEntropy_le_condEntropy_of_isMarkovChain_countable` at the parity chain,
+with infinite-range `Y` and `Z`. -/
+public theorem condEntropy_natParity_le_of_isMarkovChain :
+    H[natParity | (id : ℕ → ℕ) ; flipLaw] ≤ H[natParity | (id : ℕ → ℕ) ; flipLaw] :=
+  condEntropy_le_condEntropy_of_isMarkovChain_countable flipLaw Measurable.of_discrete
+    measurable_id measurable_id natParity_id_id_isMarkovChain
+
+/-- `condEntropy_comp_ge_countable` with the infinite-range observation `id`. -/
+public theorem condEntropy_natParity_le_comp :
+    H[natParity | (id : ℕ → ℕ) ; flipLaw] ≤ H[natParity | natParity ∘ id ; flipLaw] :=
+  condEntropy_comp_ge_countable Measurable.of_discrete measurable_id natParity
+
+/-- **Fano at the identity estimator** (Theorem 2.10.1 / (2.139)): truth the
+parity, estimate the infinite-range identity. Outside `fano_unrestricted`. -/
+public theorem fano_unrestricted_countable_natParity : H[natParity | (id : ℕ → ℕ) ; flipLaw]
+    ≤ errorProb flipLaw natParity id * Real.log (({0, 1} : Finset ℕ).card : ℝ)
+      + binEntropy (errorProb flipLaw natParity id) :=
+  fano_unrestricted_countable flipLaw Measurable.of_discrete measurable_id natParity_mem
+
+/-- The parity as a `Fin 2`-valued truth, estimated across alphabets by the
+identity on `ℕ` through `Fin.val`. -/
+public theorem fano_of_embedding_countable_natParity :
+    H[(fun n : ℕ => (⟨n % 2, Nat.mod_lt _ (by norm_num)⟩ : Fin 2)) | (id : ℕ → ℕ) ; flipLaw]
+    ≤ errorProb flipLaw (Fin.val ∘ fun n : ℕ => (⟨n % 2, Nat.mod_lt _ (by norm_num)⟩ : Fin 2)) id
+        * Real.log ((Finset.univ : Finset (Fin 2)).card : ℝ)
+      + binEntropy (errorProb flipLaw
+          (Fin.val ∘ fun n : ℕ => (⟨n % 2, Nat.mod_lt _ (by norm_num)⟩ : Fin 2)) id) :=
+  fano_of_embedding_countable flipLaw Fin.val_injective Measurable.of_discrete measurable_id
+    (fun _ => Finset.mem_univ _)
+
+/-- **(2.140) as printed**, with the observation the identity on `ℕ` and the
+estimate its parity. Outside `fano_of_estimator_chain`. -/
+public theorem fano_of_estimator_chain_countable_natParity : H[natParity | (id : ℕ → ℕ) ; flipLaw]
+    ≤ errorProb flipLaw natParity (natParity ∘ id) * Real.log (({0, 1} : Finset ℕ).card - 1 : ℝ)
+      + binEntropy (errorProb flipLaw natParity (natParity ∘ id)) :=
+  fano_of_estimator_chain_countable flipLaw Measurable.of_discrete measurable_id
+    natParity_mem (fun n => natParity_mem n)
+
+/-- `fano_of_markov_countable` with the infinite-range observation `id`. -/
+public theorem fano_of_markov_countable_natParity : H[natParity | (id : ℕ → ℕ) ; flipLaw]
+    ≤ errorProb flipLaw natParity (natParity ∘ id) * Real.log (({0, 1} : Finset ℕ).card - 1 : ℝ)
+      + binEntropy (errorProb flipLaw natParity (natParity ∘ id)) :=
+  fano_of_markov_countable flipLaw Measurable.of_discrete measurable_id Measurable.of_discrete
+    natParity_mem (fun n => natParity_mem n) (isMarkovChain_comp_countable measurable_id natParity)
+
+/-- **Theorem 2.10.1 chained, observation and estimate both the identity on
+`ℕ`.** Outside `fano_of_markov_unrestricted`. -/
+public theorem fano_of_markov_unrestricted_countable_natParity :
+    H[natParity | (id : ℕ → ℕ) ; flipLaw]
+    ≤ errorProb flipLaw natParity id * Real.log (({0, 1} : Finset ℕ).card : ℝ)
+      + binEntropy (errorProb flipLaw natParity id) :=
+  fano_of_markov_unrestricted_countable flipLaw Measurable.of_discrete measurable_id
+    measurable_id natParity_mem natParity_id_id_isMarkovChain
+
+/-- `fano_of_markov_embedding_countable` at `ι = id`, with infinite-range
+observation and estimate. -/
+public theorem fano_of_markov_embedding_countable_natParity :
+    H[natParity | (id : ℕ → ℕ) ; flipLaw]
+    ≤ errorProb flipLaw (id ∘ natParity) id * Real.log (({0, 1} : Finset ℕ).card : ℝ)
+      + binEntropy (errorProb flipLaw (id ∘ natParity) id) :=
+  fano_of_markov_embedding_countable flipLaw injective_id Measurable.of_discrete measurable_id
+    measurable_id natParity_mem natParity_id_id_isMarkovChain
+
+/-- **(2.131) with the identity estimator on `ℕ`.** Outside
+`fano_le_log_two_add_of_markov`. -/
+public theorem fano_le_log_two_add_of_markov_countable_natParity :
+    H[natParity | (id : ℕ → ℕ) ; flipLaw]
+    ≤ Real.log 2 + errorProb flipLaw natParity id * Real.log (({0, 1} : Finset ℕ).card : ℝ) :=
+  fano_le_log_two_add_of_markov_countable flipLaw Measurable.of_discrete measurable_id
+    measurable_id natParity_mem natParity_id_id_isMarkovChain
+
+/-- **(2.132) with the identity estimator on `ℕ`.** Outside
+`le_errorProb_of_markov`. -/
+public theorem le_errorProb_of_markov_countable_natParity :
+    (H[natParity | (id : ℕ → ℕ) ; flipLaw] - Real.log 2)
+      / Real.log (({0, 1} : Finset ℕ).card : ℝ)
+    ≤ errorProb flipLaw natParity id :=
+  le_errorProb_of_markov_countable flipLaw Measurable.of_discrete measurable_id measurable_id
+    natParity_mem (by decide) natParity_id_id_isMarkovChain
 
 end AISafetyAtlas.Examples.InformationTheory

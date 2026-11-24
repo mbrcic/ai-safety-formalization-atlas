@@ -175,4 +175,38 @@ public theorem dictator_exists_represents_iff :
       Superadditive dictatorConstitution.induced :=
   Constitution.exists_represents_iff_superadditive dictator_isEF dictator_monotoneAlternatives
 
+/-! ## Pauly's page-152 properties, on this society -/
+
+/-- Playable, hence regular in Pauly's sense. -/
+example : EFRegular dictatorConstitution.induced :=
+  Playable.efRegular dictator_playable
+
+/-- And coalition-monotonic. -/
+example : CoalitionMonotone dictatorConstitution.induced :=
+  Playable.coalitionMonotone dictator_playable
+
+/-- And `N`-maximal. -/
+example : CMaximal Set.univ dictatorConstitution.induced :=
+  Playable.cMaximal_univ dictator_playable
+
+/-- Outcome-monotonic and superadditive, read off playability. -/
+example : UpwardClosed dictatorConstitution.induced ∧
+    Superadditive dictatorConstitution.induced :=
+  ⟨Playable.upwardClosed dictator_playable, Playable.superadditive dictator_playable⟩
+
+/-- **The society is maximal at every coalition**, which playability does not
+give: a coalition holding the right is effective for every non-empty set, and
+one without it faces a complement that is. -/
+public theorem dictator_efMaximal : EFMaximal dictatorConstitution.induced := by
+  intro C A hA
+  rw [dictator_mem_induced] at hA ⊢
+  refine ⟨fun hC => ?_, fun hC => ?_⟩
+  · by_contra hne
+    rw [Set.not_nonempty_iff_eq_empty] at hne
+    refine hA ⟨fun h => absurd hC (Set.mem_compl_iff _ _ |>.1 h), fun _ => ?_⟩
+    rw [hne, Set.compl_empty]
+  · by_contra hne
+    refine hA ⟨fun _ => Set.nonempty_compl.2 hne, fun h => absurd ?_ h⟩
+    exact Set.mem_compl_iff _ _ |>.2 hC
+
 end AISafetyAtlas.Examples.Sovereignty

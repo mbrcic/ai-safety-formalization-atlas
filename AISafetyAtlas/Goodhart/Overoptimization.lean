@@ -2,6 +2,7 @@ module
 
 public import Mathlib.MeasureTheory.Integral.IntervalIntegral.Basic
 public import Mathlib.Topology.Algebra.Order.LiminfLimsup
+public import Mathlib.Topology.Instances.EReal.Lemmas
 
 /-!
 # Overoptimization: a proxy over a strict subset of the attributes floors the rest
@@ -29,6 +30,15 @@ Goodhart cluster uses elsewhere:
   state with the same proxy attributes. Optimizing the proxy does not merely
   fail to raise the goal; it lands on the gap-maximal point of its own level
   set.
+
+Print's setup objects are also named on their own, so that a row can cite the
+object rather than a theorem's binders: `proxyObjective` (the robot's objective
+`s ↦ Ũ(s_J)`), `HumanOptimal` (the human maximizing `U` over the feasible
+states), and `OptimizationSequence` (rate function, integral representation and
+feasibility); `zhuang_hadfield_menell_theorem_one_of_optimizationSequence` is
+Theorem 1 read through the last, and
+`gap_le_of_unmentioned_eq_lowerBound_of_strictMonoCoord` is the gap corollary at
+print's continuous, strictly increasing utility.
 
 ## Provenance
 
@@ -174,6 +184,39 @@ utility is a function of this and not of the state, so print's "based on `J`
 attributes" is structural here rather than an asserted independence. -/
 @[expose] public def restrictAttrs {ι : Type*} (J : Set ι) (s : ι → ℝ) : J → ℝ :=
   fun j => s j.1
+
+/-- **The robot's objective**: a proxy utility `Ũ : ℝ^J → ℝ` read on a state
+through its proxy attributes, `s ↦ Ũ(s_J)` (Zhuang and Hadfield-Menell, §3,
+*Proxy Utility Function*, `zhm-proxy`, PDF p. 4: "an objective function for the
+robot to optimize, which takes in only the value of proxy attributes as
+input"). No hypothesis on `Ũ` is carried: print's definition has none, and the
+continuity and monotonicity Theorem 1 asks for are its hypotheses, not part of
+the object. -/
+@[expose] public def proxyObjective {ι : Type*} (J : Set ι) (Ut : (J → ℝ) → ℝ) :
+    (ι → ℝ) → ℝ :=
+  fun s => Ut (restrictAttrs J s)
+
+/-- **The human's problem** (Zhuang and Hadfield-Menell, §3, *Utility
+Function*, `zhm-utility`, PDF p. 3: "The human seeks to maximize `U(s)` subject
+to `s ∈ 𝒮`"): `s` is feasible and maximizes the human's utility over the
+feasible states. -/
+@[expose] public def HumanOptimal {ι : Type*} (C : (ι → ℝ) → ℝ) (b : ι → ℝ)
+    (U : (ι → ℝ) → ℝ) (s : ι → ℝ) : Prop :=
+  s ∈ feasibleStates C b ∧ IsMaxOn U (feasibleStates C b) s
+
+/-- **An optimization sequence** (Zhuang and Hadfield-Menell, §3, *Incremental
+Optimization*, `zhm-incremental-optimization`, PDF p. 4): a rate function `f`
+continuous on `ℝ⁺ = [0, ∞)`, the states `s(t) = s(0) + ∫₀ᵗ f(u) du` it generates
+from the initial state `s0`, and feasibility of the entire sequence,
+`s(t) ∈ 𝒮` for all `t ∈ [0, ∞)`. Stated on its own, with no proxy, no
+convergence and no Complete Optimization, which are Theorem 1's further
+hypotheses rather than part of the definition. The attribute space is
+`Fin L → ℝ`, print's `ℝ^L`, where the integral is defined. -/
+@[expose] public def OptimizationSequence {L : ℕ} (C : (Fin L → ℝ) → ℝ) (b : Fin L → ℝ)
+    (s0 : Fin L → ℝ) (f s : ℝ → (Fin L → ℝ)) : Prop :=
+  ContinuousOn f (Ici 0) ∧
+    (∀ t ∈ Ici (0:ℝ), s t = s0 + ∫ u in (0:ℝ)..t, f u) ∧
+    ∀ t ∈ Ici (0:ℝ), s t ∈ feasibleStates C b
 
 /-- The feasible states are closed, from continuity of the constraint function.
 Print assumes this separately; it is a consequence. -/
@@ -344,6 +387,27 @@ public theorem gap_le_of_unmentioned_eq_lowerBound {ι : Type*}
   rw [hview]
   linarith
 
+/-- **The gap corollary at print's assumptions on the human's utility**
+(Zhuang and Hadfield-Menell, §3, `zhm-utility`, PDF p. 3: "We assume that `U` is
+continuous and strictly increasing in each attribute"), at print's attribute
+space `ℝ^L`. A corollary of `gap_le_of_unmentioned_eq_lowerBound`, which keeps
+the weaker hypothesis `Monotone U` and stays the more general statement; this
+one carries print's two assumptions as print states them.
+
+The continuity binder is named with a leading underscore because print carries
+it and the proof does not use it: monotonicity, which
+`monotone_of_strictMonoCoord` derives from strict monotonicity in each
+attribute, is all the argument consumes. -/
+public theorem gap_le_of_unmentioned_eq_lowerBound_of_strictMonoCoord {L : ℕ}
+    {C : (Fin L → ℝ) → ℝ} {b : Fin L → ℝ} {J : Set (Fin L)} {U : (Fin L → ℝ) → ℝ}
+    {Ut : (J → ℝ) → ℝ} (_hUcont : Continuous U) (hUmono : StrictMonoCoord U)
+    {sstar s : Fin L → ℝ}
+    (hfloor : ∀ k ∉ J, sstar k = b k) (hs : s ∈ feasibleStates C b)
+    (hJeq : ∀ j ∈ J, s j = sstar j) :
+    Ut (restrictAttrs J s) - U s ≤ Ut (restrictAttrs J sstar) - U sstar :=
+  gap_le_of_unmentioned_eq_lowerBound (C := C) (monotone_of_strictMonoCoord hUmono)
+    hfloor hs hJeq
+
 /-- **Zhuang and Hadfield-Menell, Theorem 1**, at print's binders.
 
 > For any continuous strictly increasing proxy utility function based on `J < L`
@@ -385,5 +449,94 @@ public theorem zhuang_hadfield_menell_theorem_one {L : ℕ}
   intro x hx
   rw [hval]
   exact hM.1 ⟨x, hx, rfl⟩
+
+/-- **Theorem 1, with the optimization sequence packaged** as print's
+`OptimizationSequence`. The same statement as `zhuang_hadfield_menell_theorem_one`,
+whose three sequence binders are the three conjuncts of `hseq`. -/
+public theorem zhuang_hadfield_menell_theorem_one_of_optimizationSequence {L : ℕ}
+    (C : (Fin L → ℝ) → ℝ) (hCcont : Continuous C) (hCmono : StrictMonoCoord C)
+    (b : Fin L → ℝ) (J : Set (Fin L)) (hJ : J.Nonempty)
+    (Ut : (J → ℝ) → ℝ) (hUtcont : Continuous Ut) (hUtmono : StrictMonoCoord Ut)
+    (s0 : Fin L → ℝ) (f s : ℝ → (Fin L → ℝ)) (hseq : OptimizationSequence C b s0 f s)
+    (M : ℝ) (hM : IsLUB ((fun x => Ut (restrictAttrs J x)) '' feasibleStates C b) M)
+    (hcomplete : limsup (fun t => Ut (restrictAttrs J (s t))) atTop = M)
+    (sstar : Fin L → ℝ) (hconv : Tendsto s atTop (𝓝 sstar)) :
+    ∀ k ∉ J, sstar k = b k :=
+  zhuang_hadfield_menell_theorem_one C hCcont hCmono b J hJ Ut hUtcont hUtmono s0 f
+    hseq.1 s hseq.2.1 hseq.2.2 M hM hcomplete sstar hconv
+
+/-! ## Complete Optimization in the extended reals
+
+Theorem 1 above carries Complete Optimization as a real equation against a real
+least upper bound `M`. Print's assumption also admits the case where the proxy
+is unbounded on the feasible set: *"limsup_{t→∞} Ũ(s(t)_J) = sup_{s ∈ 𝒮} Ũ(s_J)
+... or will increase proxy utility to arbitrarily large values"* (Zhuang and
+Hadfield-Menell, §2.1.2, PDF p. 4). In `EReal` both cases are one equation, with
+the supremum allowed to be `⊤`, and no real least upper bound is presupposed.
+-/
+
+/-- **Complete Optimization** (Zhuang and Hadfield-Menell, §2.1.2, PDF p. 4):
+limsup_{t→∞} Ũ(s(t)_J) = sup_{s ∈ 𝒮} Ũ(s_J), both sides in the extended reals,
+so a proxy that is unbounded on the feasible set and driven to arbitrarily large
+values satisfies it with supremum `⊤`. -/
+@[expose] public def CompleteOptimization {ι : Type*} (C : (ι → ℝ) → ℝ) (b : ι → ℝ)
+    (J : Set ι) (Ut : (J → ℝ) → ℝ) (s : ℝ → (ι → ℝ)) : Prop :=
+  limsup (fun t => (Ut (restrictAttrs J (s t)) : EReal)) atTop =
+    sSup ((fun x => (Ut (restrictAttrs J x) : EReal)) '' feasibleStates C b)
+
+/-- **Print's stronger requirement** (Zhuang and Hadfield-Menell, §2.1.2, PDF
+p. 4): *"If possible, we also require that `lim_{t→∞} Ũ(s(t)_J) =
+sup_{s ∈ 𝒮} Ũ(s_J)`"*, the limit and not only the limsup, in the extended
+reals. -/
+@[expose] public def StrongCompleteOptimization {ι : Type*} (C : (ι → ℝ) → ℝ)
+    (b : ι → ℝ) (J : Set ι) (Ut : (J → ℝ) → ℝ) (s : ℝ → (ι → ℝ)) : Prop :=
+  Tendsto (fun t => (Ut (restrictAttrs J (s t)) : EReal)) atTop
+    (𝓝 (sSup ((fun x => (Ut (restrictAttrs J x) : EReal)) '' feasibleStates C b)))
+
+/-- The limit form implies the limsup form: print's second requirement is
+stronger than its first. -/
+public theorem StrongCompleteOptimization.completeOptimization {ι : Type*}
+    {C : (ι → ℝ) → ℝ} {b : ι → ℝ} {J : Set ι} {Ut : (J → ℝ) → ℝ}
+    {s : ℝ → (ι → ℝ)} (h : StrongCompleteOptimization C b J Ut s) :
+    CompleteOptimization C b J Ut s :=
+  h.limsup_eq
+
+/-- **Zhuang and Hadfield-Menell, Theorem 1, with Complete Optimization in the
+extended reals.** The same conclusion as `zhuang_hadfield_menell_theorem_one`,
+with the binders `M`, `hM` and the real limsup equation replaced by
+`CompleteOptimization`, print's assumption with the supremum allowed to be
+infinite. Under convergence the supremum turns out finite, which the proof
+derives rather than assumes. -/
+public theorem zhuang_hadfield_menell_theorem_one_ereal {L : ℕ}
+    (C : (Fin L → ℝ) → ℝ) (hCcont : Continuous C) (hCmono : StrictMonoCoord C)
+    (b : Fin L → ℝ) (J : Set (Fin L)) (hJ : J.Nonempty)
+    (Ut : (J → ℝ) → ℝ) (hUtcont : Continuous Ut) (hUtmono : StrictMonoCoord Ut)
+    (s0 : Fin L → ℝ) (f : ℝ → (Fin L → ℝ)) (_hf : ContinuousOn f (Ici 0))
+    (s : ℝ → (Fin L → ℝ))
+    (_hs : ∀ t ∈ Ici (0:ℝ), s t = s0 + ∫ u in (0:ℝ)..t, f u)
+    (hfeas : ∀ t ∈ Ici (0:ℝ), s t ∈ feasibleStates C b)
+    (hcomplete : CompleteOptimization C b J Ut s)
+    (sstar : Fin L → ℝ) (hconv : Tendsto s atTop (𝓝 sstar)) :
+    ∀ k ∉ J, sstar k = b k := by
+  have hevfeas : ∀ᶠ t in atTop, s t ∈ feasibleStates C b := by
+    filter_upwards [eventually_ge_atTop (0:ℝ)] with t ht using hfeas t ht
+  have hmem : sstar ∈ feasibleStates C b :=
+    (isClosed_feasibleStates hCcont b).mem_of_tendsto hconv hevfeas
+  have htend : Tendsto (fun t => Ut (restrictAttrs J (s t))) atTop
+      (𝓝 (Ut (restrictAttrs J sstar))) :=
+    ((hUtcont.comp (continuous_restrictAttrs J)).tendsto sstar).comp hconv
+  have htendE : Tendsto (fun t => (Ut (restrictAttrs J (s t)) : EReal)) atTop
+      (𝓝 (Ut (restrictAttrs J sstar) : EReal)) :=
+    (continuous_coe_real_ereal.tendsto _).comp htend
+  have hval : (Ut (restrictAttrs J sstar) : EReal) =
+      sSup ((fun x => (Ut (restrictAttrs J x) : EReal)) '' feasibleStates C b) := by
+    rw [← hcomplete, htendE.limsup_eq]
+  intro k hk
+  refine proxyMax_unmentioned_eq_lowerBound hCcont hCmono hJ hUtmono hmem ?_ hk
+  intro x hx
+  have h : (Ut (restrictAttrs J x) : EReal) ≤ (Ut (restrictAttrs J sstar) : EReal) := by
+    rw [hval]
+    exact le_sSup ⟨x, hx, rfl⟩
+  exact_mod_cast h
 
 end AISafetyAtlas.Goodhart

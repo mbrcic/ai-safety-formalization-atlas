@@ -238,4 +238,11 @@ public theorem fano_bound_at_witness {n : ℕ} (hn : 2 ≤ n) (y₀ : Fin n) {p 
   entropy_le_fano (A := (Finset.univ : Finset (Fin n))) _ measurable_id
     (fun _ => Finset.mem_univ _) (Finset.mem_univ y₀)
 
+/-- **The mode beats any guess made with no information**, at a point mass: guessing
+the sure value has error at most that of guessing the other one. -/
+example : errorProb (Measure.dirac true) id (fun _ => true)
+      ≤ errorProb (Measure.dirac true) id (fun _ : Bool => false) :=
+  errorProb_mode_le_of_indepFun _ measurable_id measurable_const
+    (indepFun_const_left _ _) (fun _ => prob_le_one.trans_eq (by simp))
+
 end AISafetyAtlas.Examples.InformationTheory

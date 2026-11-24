@@ -1,0 +1,295 @@
+source:
+  citation: >-
+    Tom Everitt, Daniel Filan, Mayank Daswani and Marcus Hutter, Self-Modification
+    of Policy and Utility Function in Rational Agents, technical report,
+    arXiv:1605.03142v1 [cs.AI], 10 May 2016, 19 pp. (title page footnote: "A
+    shorter version of this paper will be presented at AGI-16").
+  file: everitt-filan-daswani-hutter-arxiv-v1-2016-self-modification-of-policy-and-utility-function.pdf
+  sha256: 1b7a3c091bd2c02b30d9bc9201bf09b5c6f9af839d30240458da917a3f750461
+  page_offset: 0
+  standing: |
+    Notation in the macros: $\ae$ is the action-percept ligature, $\check{\ae}$ and
+    $\check{a}$ carry the printed check accent.
+
+    \S2, p. 2: "GRL generalises the standard (PO)PMD models of reinforcement
+    learning (Kaelbling et al., 1998; Sutton and Barto, 1998) by making no Markov
+    or ergodicity assumptions (Hutter, 2005, Sec. 4.3.3 and Def. 5.3.7)."
+
+    \S2, p. 3: "In the \emph{standard cybernetic model}, an \emph{agent} interacts
+    with an \emph{environment} in cycles. The agent picks \emph{actions} $a$ from a
+    finite set $\mathcal{A}$ of actions, and the environment responds with a
+    \emph{percept} $e$ from a finite set $\mathcal{E}$ of percepts (see Fig. 1). An
+    \emph{action-percept pair} is an action concatenated with a percept, denoted
+    $\ae = ae$. Indices denote the time step; for example, $a_t$ is the action
+    taken at time $t$, and $\ae_t$ is the action-percept pair at time $t$.
+    Sequences are denoted $x_{n:m} = x_n x_{n+1} \ldots x_m$ for $n \le m$, and
+    $x_{<t} = x_{1:t-1}$. A \emph{history} is a sequence of action-percept pairs
+    $\ae_{<t}$. The letter $h = \ae_{<t}$ denotes an arbitrary history. We let
+    $\epsilon$ denote the empty string, which is the history before any action has
+    been taken."
+
+    p. 3: "A \emph{belief} $\rho$ is a probabilistic function that returns percepts
+    based on the history. Formally, $\rho : (\mathcal{A} \times \mathcal{E})^*
+    \times \mathcal{A} \to \bar{\Delta}\mathcal{E}$, where $\bar{\Delta}\mathcal{E}$
+    is the set of full-support probability distributions on $\mathcal{E}$. An agent
+    is defined by a \emph{policy} $\pi : (\mathcal{A} \times \mathcal{E})^* \to
+    \mathcal{A}$ that selects a next action depending on the history. We sometimes
+    use the notation $\pi(a_t \mid \ae_{<t})$, with $\pi(a_t \mid \ae_{<t}) = 1$
+    when $\pi(\ae_{<t}) = a_t$ and 0 otherwise. A belief $\rho$ and a policy $\pi$
+    induce a probability measure $\rho^\pi$ on $(\mathcal{A} \times
+    \mathcal{E})^\infty$ via $\rho^\pi(a_t \mid \ae_{<t}) = \pi(a_t \mid \ae_{<t})$
+    and $\rho^\pi(e_t \mid \ae_{<t} a_t) = \rho(e_t \mid \ae_{<t} a_t)$. Utility
+    functions are mappings $\tilde{u} : (\mathcal{A} \times \mathcal{E})^\infty \to
+    \mathbb{R}$. We will assume that the utility of an infinite history
+    $\ae_{1:\infty}$ is the \emph{discounted sum} of \emph{instantaneous utilities}
+    $u : (\mathcal{A} \times \mathcal{E})^* \to [0, 1]$. That is, for some
+    \emph{discount factor} $\gamma \in (0, 1)$, $\tilde{u}(\ae_{1:\infty}) =
+    \sum_{t=1}^{\infty} \gamma^{t-1} u(\ae_{<t})$."
+
+    p. 4: "Henceforth, we will refer to instantaneous utility functions
+    $u(\ae_{<t})$ as simply utility functions. By default, expectations are with
+    respect to the agent's belief $\rho$, so $\mathbb{E} = \mathbb{E}_\rho$. To help
+    the reader, we sometimes write the sampled variable as a subscript."
+
+    p. 4: "The arg max of a function $f$ is defined as the set of optimising
+    arguments $\arg\max_x f(x) := \{x : \forall y, f(x) \ge f(y)\}$. When we do not
+    care about which element of $\arg\max_x f(x)$ is chosen, we write $z =
+    \arg\max_x f(x)$, and assume that potential arg max-ties are broken
+    arbitrarily."
+
+    p. 5, footnote 2 (to Definition 3): "Note that the action set is infinite if
+    $\mathcal{P}$ is infinite. We will show that an optimal policy over $\mathcal{A}
+    = \check{\mathcal{A}} \times \mathcal{P}$ still exists in Appendix A."
+
+    p. 5, after Definition 3: "The interpretation is that for every $t$, the action
+    $a_t = (\check{a}_t, p_{t+1})$ selects a new policy $\pi_{t+1} =
+    \iota(p_{t+1})$ that will be used at the next time step. We will often use the
+    shorter notation $a_t = (\check{a}_t, \pi_{t+1})$, keeping in mind that only
+    policies with names can be selected. The new policy $\pi_{t+1}$ is in turn used
+    to select the next action $a_{t+1} = \pi_{t+1}(\ae_{1:t})$, and so on. [\ldots]
+    Note that $\mathcal{P} = \Pi$ is not an option, as it entails a contradiction
+    $|\Pi| = |(\check{\mathcal{A}} \times \Pi \times
+    \mathcal{E})|^{|(\check{\mathcal{A}} \times \Pi \times \mathcal{E})^*|} >
+    2^{|\Pi|} > |\Pi|$ (the powerset of a set with more than one element is always
+    greater than the set itself). Some policies will necessarily lack names."
+
+    p. 7: "\textbf{Assumption 8} (Modification independence)\textbf{.} The belief
+    $\rho$ and all utility functions $u \in \mathcal{U}$ are modification
+    independent."
+
+    p. 9, \S5: "Since the set $\mathcal{A} = \check{\mathcal{A}} \times \mathcal{U}$
+    is infinite if $\mathcal{U}$ is infinite, the existence of optimal policies is
+    not immediate. For policy self-modification it may also be that the optimal
+    policy does not have a name, so that it cannot be chosen by the first action.
+    Theorems 20 and 21 in Appendix A verify that an optimal policy/action always
+    exists, and that we can assume that an optimal policy has a name."
+
+    p. 13, after Theorem 16 and Example 17: "One subtlety to note is that Theorem 16
+    only holds \emph{on-policy}: that is, for the action sequence that is actually
+    chosen by the agent. It can be the case that $\pi_t$ acts badly on histories
+    that should not be reachable under the current policy. However, this should
+    never affect the agent's actual actions."
+
+definitions:
+  - id: efdh-def-3
+    label: Definition 3 (Policy self-modification)
+    pdf_page: 5
+    book_page: 5
+    latex: |
+      \textbf{Definition 3} (Policy self-modification)\textbf{.} A \emph{policy
+      self-modification model} is a modified cybernetic model defined by a quadruple
+      $(\check{\mathcal{A}}, \mathcal{E}, \mathcal{P}, \iota)$. $\mathcal{P}$ is a
+      non-empty set of \emph{names}. The agent selects actions\textsuperscript{2}
+      from $\mathcal{A} = (\check{\mathcal{A}} \times \mathcal{P})$, where
+      $\check{\mathcal{A}}$ is a finite set of \emph{world actions}. Let $\Pi =
+      \{(\mathcal{A} \times \mathcal{E})^* \to \mathcal{A}\}$ be the set of all
+      policies, and let $\iota : \mathcal{P} \to \Pi$ assign names to policies.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: efdh-def-2
+    label: Definition 2 (Standard Value Functions) and optimal Q- and V-values
+    pdf_page: 4
+    book_page: 4
+    latex: |
+      \textbf{Definition 2} (Standard Value Functions)\textbf{.} The \emph{standard
+      $Q$-value} and \emph{$V$-value} (belief expected utility) of a history
+      $\ae_{<t}$ and a policy $\pi$ are defined as
+      \[ Q^\pi(\ae_{<t} a_t) = \mathbb{E}_{e_t}[u(\ae_{1:t}) + \gamma
+         V^\pi(\ae_{1:t}) \mid \ae_{<t} a_t] \tag{1} \]
+      \[ V^\pi(\ae_{<t}) = Q^\pi(\ae_{<t} \pi(\ae_{<t})). \tag{2} \]
+      The \emph{optimal $Q$ and $V$-values} are defined as $Q^* = \sup_\pi Q^\pi$
+      and $V^* = \sup_\pi V^\pi$. A policy $\pi^*$ is \emph{optimal with respect to
+      $Q$ and $V$} if for any $\ae_{<t} a_t$, $V^{\pi^*}(\ae_{<t}) = V^*(\ae_{<t})$
+      and $Q^{\pi^*}(\ae_{<t} a_t) = Q^*(\ae_{<t} a_t)$.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: efdh-def-5
+    label: Definition 5 (Utility self-modification) and the unifying convention $u_t := u_1$
+    pdf_page: 6
+    book_page: 6
+    latex: |
+      \textbf{Definition 5} (Utility self-modification)\textbf{.} The \emph{utility
+      self-modification model} is a modified cybernetic model. The agent selects
+      actions from $\mathcal{A} = (\check{\mathcal{A}} \times \mathcal{U})$ where
+      $\check{\mathcal{A}}$ is a set of \emph{world actions} and $\mathcal{U}$ is a
+      set of utility functions $(\check{\mathcal{A}} \times \mathcal{E})^* \to [0,
+      1]$.
+
+      To unify the models of policy and utility modification, for policy-modifying
+      agents we define $u_t := u_1$ and for utility modifying agents we define
+      $\pi_t$ by $\pi_t(h) = \arg\max_a Q^*_{u_t}(ha)$. Choices for $Q^*_{u_t}$
+      will be discussed in subsequent sections. Indeed, policy and utility
+      modification is almost entirely unified by $\mathcal{P} = \mathcal{U}$ and
+      $\iota(u_t)$ an optimal policy for $Q^*_{u_t}$. Utility modification may also
+      have the additional effect of changing the evaluation of future actions,
+      however (see Section 4). Similarly to policy modification, the history induced
+      by Definition 5 has type $a_1 e_1 a_2 e_2 \cdots = \check{a}_1 u_2 e_1
+      \check{a}_2 u_3 e_2 \cdots \in (\check{\mathcal{A}} \times \mathcal{U} \times
+      \mathcal{E})^\infty$. Given that $\pi_t$ is determined from $u_t$, the
+      definitions of the realistic and ignorant measures $\rho_{\mathrm{re}}$ and
+      $\rho_{\mathrm{ig}}$ apply analogously to the utility modification case as
+      well.
+    note: >-
+      "modified cybernetic model" (used in Definitions 3 and 5) is not defined
+      further on pp. 3--6; the standard cybernetic model is in source.standing.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: efdh-def-7
+    label: Definition 7 (Modification-independence)
+    pdf_page: 7
+    book_page: 7
+    latex: |
+      \textbf{Definition 7} (Modification-independence)\textbf{.} For any history
+      $\ae_{<t} = \check{a}_1 \pi_2 e_1 \ldots \check{a}_{t-1} \pi_t e_{t-1}$, let
+      $\check{\ae}_{<t} = \check{a}_1 e_1 \ldots \check{a}_{t-1} e_{t-1}$ be the part
+      without modifications recorded, and similarly for histories containing utility
+      modifications. A function $f$ is \emph{modification-independent}, if either
+      \begin{itemize}
+      \item $f : (\check{\mathcal{A}} \times \mathcal{E})^* \to \mathcal{A}$, or
+      \item $f : (\mathcal{A} \times \mathcal{E})^* \to \mathcal{A}$ and
+        $\check{\ae}_{<t} = \check{\ae}'_{<t}$ implies $f(\ae_{<t}) = f(\ae'_{<t})$.
+      \end{itemize}
+      When $f : (\mathcal{A} \times \mathcal{E})^* \to \mathcal{A}$ is
+      modification-independent, we may abuse notation and write
+      $f(\check{\ae}_{<t})$.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: efdh-optimal-policy
+    label: optimal policy for V (paragraph after Definition 12)
+    pdf_page: 8
+    book_page: 8
+    latex: |
+      For $V$ any of $V^{\mathrm{he}}$, $V^{\mathrm{ig}}$, or $V^{\mathrm{re}}$, we
+      say that $\pi^*$ is an \emph{optimal policy for $V$} if $V^{\pi^*}(h) =
+      \sup_{p'} V^{\pi'}(h)$ for any history $h$. We also define $V^* = V^{\pi^*}$
+      and $Q^* = Q^{\pi^*}$ for arbitrary optimal policy $\pi^*$.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 220}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+excerpts: []
+
+statements:
+  - id: efdh-def-3-stmt
+    audit_row: S10-R03
+    locator: Def. 3
+    pdf_page: 5
+    book_page: 5
+    label: Definition 3 (Policy self-modification)
+    latex: |
+      \textbf{Definition 3} (Policy self-modification)\textbf{.} A \emph{policy
+      self-modification model} is a modified cybernetic model defined by a quadruple
+      $(\check{\mathcal{A}}, \mathcal{E}, \mathcal{P}, \iota)$. $\mathcal{P}$ is a
+      non-empty set of \emph{names}. The agent selects actions\textsuperscript{2}
+      from $\mathcal{A} = (\check{\mathcal{A}} \times \mathcal{P})$, where
+      $\check{\mathcal{A}}$ is a finite set of \emph{world actions}. Let $\Pi =
+      \{(\mathcal{A} \times \mathcal{E})^* \to \mathcal{A}\}$ be the set of all
+      policies, and let $\iota : \mathcal{P} \to \Pi$ assign names to policies.
+    note: >-
+      Footnote 2 and the interpretation paragraph that follows (selection
+      $a_t = (\check{a}_t, p_{t+1})$, "only policies with names can be selected",
+      $\mathcal{P} = \Pi$ impossible) are in source.standing. Same text as
+      definition efdh-def-3, listed here as the graded row.
+    uses: [efdh-def-3]
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: efdh-def-12
+    audit_row: S10-R12
+    locator: Def. 12, eqs. (7) and (8)
+    pdf_page: 8
+    book_page: 8
+    label: Definition 12 (Realistic Value Functions)
+    latex: |
+      \textbf{Definition 12} (Realistic Value Functions)\textbf{.} A \emph{realistic
+      agent} is a policy optimising the \emph{realistic value
+      functions}:\textsuperscript{4}
+      \[ V_t^{\mathrm{re},\pi}(\ae_{<k}) = Q_t^{\mathrm{re}}(\ae_{<k}\pi(\ae_{<k}))
+         \tag{7} \]
+      \[ Q_t^{\mathrm{re}}(\ae_{<k} a_k) = \mathbb{E}_{e_k}\left[u_t(\check{\ae}_{1:k})
+         + \gamma V_t^{\mathrm{re},\pi_{k+1}}(\ae_{1:k}) \mid \check{\ae}_{<k}
+         \check{a}_k\right]. \tag{8} \]
+      \textsuperscript{4}Note that a policy argument to $Q^{\mathrm{re}}$ would be
+      superfluous, as the action $a_k$ determines the next step policy $\pi_{k+1}$.
+    uses: [efdh-def-3, efdh-def-5, efdh-def-7, efdh-optimal-policy]
+    note: >-
+      "optimising" is given meaning by the paragraph after the definition
+      (efdh-optimal-policy), which prints $\sup_{p'} V^{\pi'}(h)$: the bound
+      variable under sup is $p'$ while the policy in the superscript is $\pi'$
+      (transcribed as printed; read at 220 dpi).
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 220}
+    checked: {by: 'Codex (blind) + Codex (anchored re-read); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: efdh-thm-16
+    audit_row: S10-R16
+    locator: Thm. 16, eq. (13)
+    pdf_page: 11-12
+    book_page: 11-12
+    label: Theorem 16 (Realistic policy-modifying agents make safe modifications)
+    latex: |
+      \textbf{Theorem 16} (Realistic policy-modifying agents make safe
+      modifications)\textbf{.} \emph{Let $\rho$ and $u_1$ be
+      modification-independent. Consider a self-modifying agent whose initial policy
+      $\pi_1 = \iota(p_1)$ optimises the realistic value function
+      $V_1^{\mathrm{re}}$. Then, for every $t \ge 1$, for all percept sequences
+      $e_{<t}$, and for the action sequence $a_{<t}$ given by $a_i =
+      \pi_i(\ae_{<i})$, we have}
+      \[ Q_1^{\mathrm{re}}(\ae_{<t}\pi_t(\ae_{<t})) =
+         Q_1^{\mathrm{re}}(\ae_{<t}\pi_1(\ae_{<t})). \tag{13} \]
+    note: >-
+      The statement starts at the foot of PDF p. 11 and its quantifiers and
+      conclusion are on p. 12. The on-policy remark on p. 13 is in source.standing.
+      The proof invokes Theorem 20 (Appendix A) for a non-modifying
+      modification-independent optimal policy.
+    uses: [efdh-def-3, efdh-def-5, efdh-def-7, efdh-def-12, efdh-optimal-policy]
+    proof_pages: 12
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 220}
+    checked: {by: 'Codex (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: efdh-eq-14
+    audit_row: S10-R17
+    locator: eq. (14)
+    pdf_page: 12
+    book_page: 12
+    label: eq. (14), induction step in the proof of Theorem 16
+    latex: |
+      We now prove Eq. (13) by induction. That is, assuming that $\pi_t$ picks
+      actions optimally according to $Q_1^{\mathrm{re}}$, then $\pi_{t+1}$ will do so
+      too:
+      \[ Q_1^{\mathrm{re}}(\ae_{<t}\pi_t(\ae_{<t})) = \sup_a
+         Q_1^{\mathrm{re}}(\ae_{<t}a) \implies
+         Q_1^{\mathrm{re}}(\ae_{1:t}\pi_{t+1}(\ae_{1:t})) = \sup_a
+         Q_1^{\mathrm{re}}(\ae_{1:t}a). \tag{14} \]
+    context: |
+      Inside the proof of Theorem 16; the next sentence gives the base case:
+      "The base case of the induction $Q_1^{\mathrm{re}}(\pi_1(\epsilon)) = \sup_a
+      Q_1^{\mathrm{re}}(a)$ follows immediately from the assumption of the theorem
+      that $\pi_1$ is $V^{\mathrm{re}}$-optimal (recall that $\epsilon$ is the empty
+      history)."
+    uses: [efdh-def-12, efdh-thm-16]
+    proof_pages: 12
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 220}
+    checked: {by: 'Codex (blind) + Codex (anchored re-read); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}

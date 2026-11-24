@@ -10,7 +10,7 @@ Edges come from the elaborated Lean environment. This answers the question the p
 
 So `A → B` means *`B` occurs in `A`'s statement, or in `A`'s body when `A` is a definition*. A lemma used only inside a proof does not appear. Reading the table as a complete call graph would be wrong, and the two sections below are scoped so that they stay true under this limit.
 
-`38` authored declarations in `AISafetyAtlas.Verification.*` (14 theorems). Compiler-generated companions and projections are dropped.
+`61` authored declarations in `AISafetyAtlas.Verification.*` (28 theorems). Compiler-generated companions and projections are dropped.
 
 ## Load-bearing declarations
 
@@ -19,7 +19,12 @@ Named in the statements of eight or more others. A change to one of these is a c
 | Declaration | Named by |
 |---|---|
 | `Robot.Behavior` | 12 |
+| `AgentBehavior.SafetySpec` | 12 |
+| `AgentBehavior.Agent` | 11 |
 | `FullAccess.SyntacticProperty` | 10 |
+| `AgentBehavior.Satisfies` | 10 |
+| `AgentBehavior.Judge` | 10 |
+| `Containment.Assumption2Harm` | 9 |
 
 ## Definitions no statement and no example mentions
 
@@ -35,21 +40,44 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 |---|---|---|
 | `AgentBehavior.Agent` | definition | — |
 | `AgentBehavior.BehavioralSafetyVerifier` | definition | `AgentBehavior.SafetySpec` |
+| `AgentBehavior.Judge` | definition | — |
+| `AgentBehavior.JudgeNontrivial` | definition | `AgentBehavior.Judge` |
 | `AgentBehavior.SafetySpec` | definition | `BehavioralProperty` |
 | `AgentBehavior.Satisfies` | definition | `AgentBehavior.Agent`, `AgentBehavior.SafetySpec`, `Holds` |
 | `AgentBehavior.SpecNontrivial` | definition | `AgentBehavior.SafetySpec`, `Nontrivial` |
+| `AgentBehavior.halting_reduces_to_judgeSpec` | theorem | `AgentBehavior.Agent`, `AgentBehavior.Judge`, `AgentBehavior.JudgeNontrivial`, `AgentBehavior.Satisfies`, `AgentBehavior.judgeSpec` |
+| `AgentBehavior.halting_reduces_to_spec` | theorem | `AgentBehavior.Agent`, `AgentBehavior.SafetySpec`, `AgentBehavior.Satisfies`, `AgentBehavior.SpecNontrivial` |
+| `AgentBehavior.halting_reduces_to_spec_of_none_not_mem` | theorem | `AgentBehavior.Agent`, `AgentBehavior.SafetySpec`, `AgentBehavior.Satisfies`, `AgentBehavior.SpecNontrivial` |
+| `AgentBehavior.judgeSpec` | definition | `AgentBehavior.Judge`, `AgentBehavior.SafetySpec` |
+| `AgentBehavior.judgeSpecOutputs` | definition | `AgentBehavior.Judge`, `AgentBehavior.SafetySpec` |
+| `AgentBehavior.judgeSpecOutputs_compl_re` | theorem | `AgentBehavior.Agent`, `AgentBehavior.Judge`, `AgentBehavior.Satisfies`, `AgentBehavior.judgeSpecOutputs` |
+| `AgentBehavior.judgeSpec_nontrivial` | theorem | `AgentBehavior.Judge`, `AgentBehavior.JudgeNontrivial`, `AgentBehavior.SpecNontrivial`, `AgentBehavior.judgeSpec` |
 | `AgentBehavior.no_behavioral_safety_verifier` | theorem | `AgentBehavior.BehavioralSafetyVerifier`, `AgentBehavior.SafetySpec`, `AgentBehavior.SpecNontrivial` |
+| `AgentBehavior.none_mem_judgeSpecOutputs` | theorem | `AgentBehavior.Judge`, `AgentBehavior.SafetySpec`, `AgentBehavior.judgeSpecOutputs` |
+| `AgentBehavior.none_not_mem_judgeSpec` | theorem | `AgentBehavior.Judge`, `AgentBehavior.SafetySpec`, `AgentBehavior.judgeSpec` |
+| `AgentBehavior.not_exists_halting_reduction_judgeSpecOutputs` | theorem | `AgentBehavior.Agent`, `AgentBehavior.Judge`, `AgentBehavior.Satisfies`, `AgentBehavior.judgeSpecOutputs` |
+| `AgentBehavior.not_exists_halting_reduction_of_compl_re` | theorem | `AgentBehavior.Agent`, `AgentBehavior.SafetySpec`, `AgentBehavior.Satisfies` |
 | `BehavioralProperty` | definition | — |
 | `Containment.Assumption2` | definition | — |
 | `Containment.Assumption2.harmReductionPair` | definition | `Containment.Assumption2`, `Containment.Assumption2.computable_encode`, `Containment.HaltsOn`, `Containment.HarmReductionPair` |
+| `Containment.Assumption2Harm` | definition | — |
+| `Containment.Assumption2Harm.haltHarm_dom_iff` | theorem | `Containment.Assumption2Harm`, `Containment.haltHarmOf` |
+| `Containment.Assumption2Harm.harmHumans_executed_iff` | theorem | `Containment.Assumption2Harm` |
+| `Containment.Assumption2Harm.harmReductionPair` | definition | `Containment.Assumption2Harm`, `Containment.HarmReductionPair`, `Containment.haltHarmOf` |
 | `Containment.HaltsOn` | definition | — |
 | `Containment.HarmDecider` | definition | — |
 | `Containment.HarmReduction` | definition | — |
 | `Containment.HarmReductionPair` | definition | — |
 | `Containment.HarmReductionPair.toHarmReduction` | definition | `Containment.HarmReduction`, `Containment.HarmReductionPair`, `Containment.HarmReductionPair.encode`, `Containment.HarmReductionPair.haltHarm`, `Containment.HarmReductionPair.harms_iff_halts` |
+| `Containment.SequentialHarm` | definition | — |
+| `Containment.SequentialHarm.harms_haltHarmOf_iff_halts` | theorem | `Containment.Assumption2Harm`, `Containment.SequentialHarm`, `Containment.haltHarmOf` |
+| `Containment.SequentialHarm.harms_iff_executed` | theorem | `Containment.Assumption2Harm`, `Containment.SequentialHarm`, `Containment.haltHarmOf` |
+| `Containment.SequentialHarm.toHarmReductionPair` | definition | `Containment.Assumption2Harm`, `Containment.HarmReductionPair`, `Containment.SequentialHarm`, `Containment.SequentialHarm.harms_haltHarmOf_iff_halts`, `Containment.haltHarmOf` |
+| `Containment.haltHarmOf` | definition | — |
 | `Containment.halting_problem_pair` | theorem | — |
 | `Containment.harming_undecidable` | theorem | `Containment.HarmDecider`, `Containment.HarmReduction` |
 | `Containment.harming_undecidable_of_assumption2` | theorem | `Containment.Assumption2`, `Containment.HaltsOn`, `Containment.HarmDecider` |
+| `Containment.harming_undecidable_of_assumption2Harm` | theorem | `Containment.Assumption2Harm`, `Containment.HarmDecider`, `Containment.haltHarmOf` |
 | `Containment.harming_undecidable_pair` | theorem | `Containment.HarmDecider`, `Containment.HarmReductionPair` |
 | `FullAccess.FullAccessVerifier` | definition | `FullAccess.SyntacticProperty` |
 | `FullAccess.SyntacticProperty` | definition | — |

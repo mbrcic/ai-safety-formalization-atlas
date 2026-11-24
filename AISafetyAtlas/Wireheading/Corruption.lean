@@ -2,6 +2,8 @@ module
 
 public import AISafetyAtlas.Preference.Regret
 public import Mathlib.Tactic.Linarith
+public import Mathlib.Algebra.Order.Archimedean.Real.Basic
+public import Mathlib.Order.ConditionallyCompleteLattice.Indexed
 
 /-!
 # Corrupt-reward no-free-lunch theorem
@@ -53,6 +55,51 @@ public structure ComplementedClass (Environment Policy : Type*) where
             (bestPolicy (worstEnvironment worstPolicy)) -
           returnValue (worstEnvironment worstPolicy) worstPolicy
 
+/-! ## Definition 10 on an arbitrary class
+
+Everitt et al., IJCAI 2017, Definition 10: *"The regret of `π` is
+`Reg(μ, π, s₀, t) = max_{π'} [Ġ_t(μ, π', s₀) − Ġ_t(μ, π, s₀)]`, and the
+worst-case regret for a class `ℳ` is `Reg(ℳ, π, s₀, t) = max_{μ ∈ ℳ} Reg(μ, π, s₀, t)`."*
+
+`ComplementedClass.regret` exists only on a class closed under complements.
+`regretOf` and `worstCaseRegretOf` are Definition 10 on **any** return function
+`G` (print's `Ġ_t` at fixed `s₀, t`) and any class `ℳ` (a set of environments,
+so a singleton class is expressible). Print writes `max`, presupposing
+attainment; these are real suprema, which are print's maxima wherever the maxima
+exist (`regretOf_eq_of_max`, `worstCaseRegretOf_eq_of_max`). At an unattained or
+unbounded supremum, or an empty class, the value is Mathlib's junk value and is
+not print's.
+-/
+
+/-- Definition 10's regret of `π` in `μ`, for any return function `G`. -/
+@[expose] public noncomputable def regretOf {Environment Policy : Type*}
+    (G : Environment → Policy → ℝ) (μ : Environment) (π : Policy) : ℝ :=
+  ⨆ π' : Policy, G μ π' - G μ π
+
+/-- Definition 10's worst-case regret of `π` over a class `ℳ`. -/
+@[expose] public noncomputable def worstCaseRegretOf {Environment Policy : Type*}
+    (G : Environment → Policy → ℝ) (ℳ : Set Environment) (π : Policy) : ℝ :=
+  ⨆ μ : ℳ, regretOf G μ π
+
+/-- Where an optimal policy exists, `regretOf` is print's maximum. -/
+public theorem regretOf_eq_of_max {Environment Policy : Type*}
+    (G : Environment → Policy → ℝ) (μ : Environment) (π b : Policy)
+    (hb : ∀ π', G μ π' ≤ G μ b) :
+    regretOf G μ π = G μ b - G μ π := by
+  have : Nonempty Policy := ⟨b⟩
+  have hle : ∀ π', G μ π' - G μ π ≤ G μ b - G μ π := fun π' => by linarith [hb π']
+  exact (ciSup_le hle).antisymm (le_ciSup ⟨_, Set.forall_mem_range.2 hle⟩ b)
+
+/-- Where a worst environment exists in the class, `worstCaseRegretOf` is
+print's maximum. -/
+public theorem worstCaseRegretOf_eq_of_max {Environment Policy : Type*}
+    (G : Environment → Policy → ℝ) (ℳ : Set Environment) (π : Policy) {ν : Environment}
+    (hν : ν ∈ ℳ) (hmax : ∀ μ ∈ ℳ, regretOf G μ π ≤ regretOf G ν π) :
+    worstCaseRegretOf G ℳ π = regretOf G ν π := by
+  have : Nonempty ℳ := ⟨⟨ν, hν⟩⟩
+  have hle : ∀ μ : ℳ, regretOf G μ π ≤ regretOf G ν π := fun μ => hmax μ μ.2
+  exact (ciSup_le hle).antisymm (le_ciSup ⟨_, Set.forall_mem_range.2 hle⟩ ⟨ν, hν⟩)
+
 namespace ComplementedClass
 
 variable {Environment Policy : Type*}
@@ -66,6 +113,24 @@ variable {Environment Policy : Type*}
 @[expose] public def worstCaseRegret
     (M : ComplementedClass Environment Policy) (π : Policy) : ℝ :=
   M.regret (M.worstEnvironment π) π
+
+/-- The complemented-class regret is Definition 10's regret of its return. -/
+public theorem regret_eq_regretOf (M : ComplementedClass Environment Policy)
+    (μ : Environment) (π : Policy) :
+    M.regret μ π = regretOf M.returnValue μ π :=
+  (regretOf_eq_of_max _ μ π _ (M.bestPolicy_best μ)).symm
+
+/-- The complemented-class worst-case regret is Definition 10's worst-case
+regret over the whole class. -/
+public theorem worstCaseRegret_eq_worstCaseRegretOf
+    (M : ComplementedClass Environment Policy) (π : Policy) :
+    M.worstCaseRegret π = worstCaseRegretOf M.returnValue Set.univ π := by
+  rw [worstCaseRegretOf_eq_of_max _ _ π (Set.mem_univ (M.worstEnvironment π))
+    (fun μ _ => by
+      rw [← M.regret_eq_regretOf, ← M.regret_eq_regretOf]
+      exact M.worstEnvironment_worst π μ),
+    ← M.regret_eq_regretOf]
+  rfl
 
 /--
 **Everitt et al. Theorem 11 (complement-closure core).**

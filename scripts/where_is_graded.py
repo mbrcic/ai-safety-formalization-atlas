@@ -31,7 +31,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 
-SCOPE_WORDS = ("Same", "Narrower", "Mixed", "Retired", "Beyond", "Wider")
+SCOPE_WORDS = ("Same", "Narrower", "Mixed", "None", "Refuted", "Retired", "Beyond", "Wider")
 FIDELITY_WORDS = ("Literal", "Selected", "Bridged", "DetermineProblem", "AtlasOriginal")
 GRADE_RE = re.compile(r"\b(" + "|".join(SCOPE_WORDS + FIDELITY_WORDS) + r")\b")
 

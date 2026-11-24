@@ -10,7 +10,7 @@ Edges come from the elaborated Lean environment. This answers the question the p
 
 So `A → B` means *`B` occurs in `A`'s statement, or in `A`'s body when `A` is a definition*. A lemma used only inside a proof does not appear. Reading the table as a complete call graph would be wrong, and the two sections below are scoped so that they stay true under this limit.
 
-`95` authored declarations in `AISafetyAtlas.InformationTheory.*` (64 theorems). Compiler-generated companions and projections are dropped.
+`155` authored declarations in `AISafetyAtlas.InformationTheory.*` (121 theorems). Compiler-generated companions and projections are dropped.
 
 ## Load-bearing declarations
 
@@ -19,9 +19,11 @@ Named in the statements of eight or more others. A change to one of these is a c
 | Declaration | Named by |
 |---|---|
 | `CodeSym` | 44 |
-| `errorProb` | 24 |
+| `IsMarkovChain` | 42 |
+| `errorProb` | 41 |
+| `mutualInfoKL` | 33 |
 | `channelCapacity` | 20 |
-| `IsMarkovChain` | 20 |
+| `condMutualInfoKL` | 18 |
 | `IsPrefixCode` | 18 |
 | `encodeNat` | 17 |
 | `errorPair` | 13 |
@@ -65,13 +67,30 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 | `channelCapacity_fun` | theorem | `channelCapacity` |
 | `channelCapacity_le_of_card_le` | theorem | `channelCapacity` |
 | `channelCapacity_prod` | theorem | `channelCapacity` |
+| `condEntropy_comp_ge_countable` | theorem | — |
+| `condEntropy_comp_of_injective_countable` | theorem | — |
+| `condEntropy_comp_of_injective_of_summable` | theorem | — |
 | `condEntropy_comp_self_left` | theorem | — |
+| `condEntropy_eq_entropy_of_indepFun` | theorem | — |
 | `condEntropy_eq_error_split` | theorem | `errorIndicator` |
 | `condEntropy_le_condEntropy_of_isMarkovChain` | theorem | `IsMarkovChain` |
+| `condEntropy_le_condEntropy_of_isMarkovChain_countable` | theorem | `IsMarkovChain` |
+| `condEntropy_le_condEntropy_of_isMarkovChain_of_summable` | theorem | `IsMarkovChain` |
+| `condEntropy_le_entropy_countable` | theorem | — |
+| `condEntropy_le_entropy_of_summable` | theorem | — |
 | `condEntropy_le_error_bound` | theorem | `errorIndicator` |
 | `condEntropy_le_sum_of_fibre_le` | theorem | — |
 | `condEntropy_pair_comm` | theorem | — |
+| `condEntropy_pair_eq_of_isMarkovChain` | theorem | `IsMarkovChain` |
+| `condEntropy_pair_eq_of_isMarkovChain_of_summable` | theorem | `IsMarkovChain` |
 | `condEntropy_pair_errorIndicator` | theorem | `errorIndicator` |
+| `condEntropy_pair_le_countable` | theorem | — |
+| `condEntropy_pair_le_of_summable` | theorem | — |
+| `condLaw` | definition | — |
+| `condLaw_singleton_mul` | theorem | `condLaw` |
+| `condMutualInfoKL` | definition | `condLaw` |
+| `condMutualInfoKL_comm` | theorem | `condMutualInfoKL` |
+| `condMutualInfoKL_le_mutualInfoKL` | theorem | `IsMarkovChain`, `condMutualInfoKL`, `mutualInfoKL` |
 | `condMutualInfo_le_mutualInfo` | theorem | `IsMarkovChain` |
 | `encodeBoolList` | definition | `CodeSym`, `CodeSym.ofBool`, `CodeSym.sep` |
 | `encodeBoolList_takeWhile` | theorem | `CodeSym`, `CodeSym.isDigit`, `CodeSym.ofBool`, `CodeSym.sep`, `encodeBoolList` |
@@ -84,23 +103,37 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 | `encodeSparseList_injective` | theorem | `CodeSym`, `IsPrefixCode`, `SparsePoly`, `encodeSparseList` |
 | `encodeSparsePoly` | definition | `CodeSym`, `SparseMonomial`, `SparsePoly`, `encodeList`, `encodeMonomial` |
 | `encodeVarPow` | definition | `CodeSym`, `encodeNat` |
+| `entropy_comp_le_of_summable` | theorem | — |
 | `entropy_cond_errorPair_false` | theorem | `errorPair` |
 | `entropy_cond_errorPair_true_le` | theorem | `errorPair` |
+| `entropy_eq_tsum` | theorem | — |
 | `entropy_errorIndicator` | theorem | `errorIndicator`, `errorProb` |
 | `entropy_le_fano` | theorem | `errorProb` |
+| `entropy_le_log_card_toFinset` | theorem | — |
 | `errorIndicator` | definition | — |
 | `errorPair` | definition | `errorIndicator` |
 | `errorProb` | definition | — |
+| `errorProb_mode_le_of_indepFun` | theorem | `errorProb` |
 | `fano` | theorem | `errorPair`, `errorProb` |
 | `fano_le_log_two_add` | theorem | `errorPair`, `errorProb` |
 | `fano_of_embedding` | theorem | `errorPair`, `errorProb` |
+| `fano_of_embedding_countable` | theorem | `errorProb` |
 | `fano_of_log_le` | theorem | `errorPair`, `errorProb` |
 | `fano_unrestricted` | theorem | `errorPair`, `errorProb` |
+| `fano_unrestricted_countable` | theorem | `errorProb` |
+| `hasSum_condEntropy` | theorem | — |
+| `hasSum_condEntropy_of_summable` | theorem | — |
+| `hasSum_condEntropy_pair` | theorem | — |
+| `hasSum_condEntropy_pair_of_summable` | theorem | — |
 | `instFiniteRangeErrorPair` | theorem | `errorPair` |
+| `isMarkovChain_comm` | theorem | `IsMarkovChain` |
 | `isMarkovChain_comp` | theorem | `IsMarkovChain` |
+| `isMarkovChain_comp_countable` | theorem | `IsMarkovChain` |
+| `isMarkovChain_iff_condMutualInfoKL_eq_zero` | theorem | `IsMarkovChain`, `condMutualInfoKL` |
 | `isMarkovChain_iff_condMutualInfo_eq_zero` | theorem | `IsMarkovChain` |
 | `isMarkovChain_iff_measure_factorizes` | theorem | `IsMarkovChain` |
 | `isMarkovChain_iff_measure_factorizes_singleton` | theorem | `IsMarkovChain` |
+| `isMarkovKernel_condLaw` | theorem | `condLaw` |
 | `isPrefixCode_encodeBoolList` | theorem | `IsPrefixCode`, `encodeBoolList` |
 | `isPrefixCode_encodeInt` | theorem | `IsPrefixCode`, `encodeInt` |
 | `isPrefixCode_encodeMonomial` | theorem | `CodeSym`, `IsPrefixCode`, `SparseMonomial`, `encodeMonomial` |
@@ -110,10 +143,27 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 | `isPrefixCode_encodeSparsePoly` | theorem | `CodeSym`, `IsPrefixCode`, `SparsePoly`, `encodeSparsePoly` |
 | `isPrefixCode_encodeVarPow` | theorem | `CodeSym`, `IsPrefixCode`, `encodeVarPow` |
 | `le_errorProb` | theorem | `errorPair`, `errorProb` |
+| `map_pair_eq_compProd_condLaw` | theorem | `condLaw` |
 | `measurable_errorIndicator` | theorem | `errorIndicator` |
 | `measurable_errorPair` | theorem | `errorPair` |
 | `measure_factorizes_of_isMarkovChain` | theorem | `IsMarkovChain` |
 | `measure_preimage_inter_eq_tsum` | theorem | — |
+| `mutualInfoKL` | definition | — |
+| `mutualInfoKL_chain_rule_fin` | theorem | `condMutualInfoKL`, `mutualInfoKL`, `observationPrefix`, `observationVector` |
+| `mutualInfoKL_chain_rule_fin'` | theorem | `condMutualInfoKL`, `mutualInfoKL`, `observationPrefix`, `observationVector` |
+| `mutualInfoKL_chain_rule_pi` | theorem | `condMutualInfoKL`, `mutualInfoKL`, `observationPrefixPi`, `observationVectorPi` |
+| `mutualInfoKL_comm` | theorem | `mutualInfoKL` |
+| `mutualInfoKL_comp_equiv` | theorem | `mutualInfoKL` |
+| `mutualInfoKL_comp_le` | theorem | `mutualInfoKL` |
+| `mutualInfoKL_const` | theorem | `mutualInfoKL` |
+| `mutualInfoKL_eq_iff_condMutualInfoKL_eq_zero` | theorem | `IsMarkovChain`, `condMutualInfoKL`, `mutualInfoKL` |
+| `mutualInfoKL_eq_iff_isMarkovChain` | theorem | `IsMarkovChain`, `mutualInfoKL` |
+| `mutualInfoKL_eq_ofReal_mutualInfo` | theorem | `mutualInfoKL` |
+| `mutualInfoKL_eq_of_isMarkovChain` | theorem | `IsMarkovChain`, `mutualInfoKL` |
+| `mutualInfoKL_le_of_isMarkovChain` | theorem | `IsMarkovChain`, `mutualInfoKL` |
+| `mutualInfoKL_le_of_isMarkovChain'` | theorem | `IsMarkovChain`, `mutualInfoKL` |
+| `mutualInfoKL_pair_eq_add` | theorem | `condMutualInfoKL`, `mutualInfoKL` |
+| `mutualInfoKL_pair_eq_add'` | theorem | `condMutualInfoKL`, `mutualInfoKL` |
 | `mutualInfo_chain_rule` | theorem | — |
 | `mutualInfo_chain_rule'` | theorem | — |
 | `mutualInfo_chain_rule_fin` | theorem | `observationPrefix`, `observationVector` |
@@ -123,16 +173,28 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 | `mutualInfo_le_of_isMarkovChain` | theorem | `IsMarkovChain` |
 | `mutualInfo_le_of_isMarkovChain'` | theorem | `IsMarkovChain` |
 | `mutualInfo_sub_eq` | theorem | — |
+| `negMulLog_tsum_le` | theorem | — |
 | `observationPrefix` | definition | — |
 | `observationPrefixPi` | definition | — |
+| `observationPrefixPi_apply` | theorem | `observationPrefixPi` |
+| `observationPrefix_apply` | theorem | `observationPrefix` |
 | `observationTagged` | definition | — |
 | `observationVector` | definition | — |
 | `observationVectorPi` | definition | — |
+| `observationVectorPi_apply` | theorem | `observationVectorPi` |
+| `observationVector_apply` | theorem | `observationVector` |
 | `ofSparseMonomial` | definition | `SparseMonomial`, `sparseExponents` |
 | `ofSparsePoly` | definition | `SparseMonomial`, `SparsePoly`, `ofSparseMonomial` |
 | `ofSparsePoly_nil` | theorem | `SparseMonomial`, `ofSparsePoly` |
 | `preimage_errorIndicator_false` | theorem | `errorIndicator` |
 | `preimage_errorIndicator_true` | theorem | `errorIndicator` |
+| `rnDeriv_singleton` | theorem | — |
 | `sparseExponents` | definition | — |
 | `sum_errorPair_true` | theorem | `errorPair`, `errorProb` |
+| `sum_sum_mul_negMulLog_cond_le_entropy` | theorem | — |
+| `summable_measureReal_map_singleton` | theorem | — |
+| `summable_mul_negMulLog_cond` | theorem | — |
+| `summable_negMulLog_cond` | theorem | — |
+| `summable_negMulLog_of_finiteRange` | theorem | — |
 | `takeWhile_digits_append` | theorem | `CodeSym`, `CodeSym.isDigit`, `CodeSym.sep` |
+| `tsum_mul_negMulLog_cond_le_entropy` | theorem | — |

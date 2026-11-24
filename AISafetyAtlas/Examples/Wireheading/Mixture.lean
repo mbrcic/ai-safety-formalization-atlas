@@ -347,4 +347,224 @@ public theorem pred_uses_the_box_of_posterior (t : ℕ) :
   · exact actionValue_flip_false_le_one t
   · rw [posterior_nil_echo]; norm_num
 
+
+/-! ## Wave 3: the repaired statements at every observation type
+
+The same pair as above inhabits the `[Fintype Obs]`-free statements; the laws
+themselves are then witnessed at the infinite observation type `ℕ`.
+-/
+
+/-- `statement_one_of_posterior_scaled` at `vmax = 1`. -/
+public theorem rl_uses_the_box_of_posterior_scaled (t : ℕ) :
+    actionValue (mixtureBelief (3 / 4) echoB flipB) bitAgent t 0 [] false
+      < actionValue (mixtureBelief (3 / 4) echoB flipB) bitAgent t 0 []
+          (alwaysTrue []) := by
+  refine statement_one_of_posterior_scaled echoB flipB (by norm_num) (by norm_num)
+    echoB_isSubprobability flipB_isSubprobability bitAgent bitAgent_abs_utility_le_one
+    t 0 [] alwaysTrue false 1 0 one_pos ?_ ?_ ?_ ?_ (by norm_num) ?_
+  · rw [policyActionValue_echo_one]
+  · rw [policyActionValue_flip_zero]
+  · rw [actionValue_echo_false_zero]; norm_num
+  · exact actionValue_flip_false_le_one t
+  · rw [posterior_nil_echo]; norm_num
+
+/-- `statement_two_of_posterior_tsum`, on the pair of Statement 2. -/
+public theorem goal_uses_the_box_of_posterior_tsum (t : ℕ) :
+    actionValue (mixtureBelief (3 / 4) echoB constFalse) bitAgent t 0 [] false
+      < actionValue (mixtureBelief (3 / 4) echoB constFalse) bitAgent t 0 []
+          (alwaysTrue []) := by
+  refine statement_two_of_posterior_tsum echoB constFalse (by norm_num) (by norm_num)
+    echoB_isSubprobability constFalse_isSubprobability bitAgent
+    bitAgent_abs_utility_le_one t 0 [] alwaysTrue false 1 2 ?_ ?_ ?_ ?_ ?_
+  · rw [policyActionValue_echo_one]; norm_num
+  · rw [policyActionValue_constFalse_zero]
+  · rw [actionValue_echo_false_zero]; norm_num
+  · rw [actionValue_constFalse_false_zero]; norm_num
+  · rw [posterior_nil]; norm_num
+
+/-- `statement_three_of_posterior_scaled` at `vmax = 1`. -/
+public theorem pred_uses_the_box_of_posterior_scaled (t : ℕ) :
+    actionValue (mixtureBelief (3 / 4) echoB flipB) bitAgent t 0 [] false
+      < actionValue (mixtureBelief (3 / 4) echoB flipB) bitAgent t 0 []
+          (alwaysTrue []) := by
+  refine statement_three_of_posterior_scaled echoB flipB (by norm_num) (by norm_num)
+    echoB_isSubprobability flipB_isSubprobability bitAgent
+    bitAgent_abs_utility_le_one t 0 [] alwaysTrue false 1 one_pos ?_ ?_ ?_ ?_ ?_
+  · rw [policyActionValue_echo_one]
+  · rw [policyActionValue_flip_zero]
+  · rw [actionValue_echo_false_zero]
+  · exact actionValue_flip_false_le_one t
+  · rw [posterior_nil_echo]; norm_num
+
+/-- An environment over `ℕ` that echoes the action. -/
+@[expose] public def echoN : Belief ℕ ℕ := diracBelief (fun _ a => a)
+
+/-- An environment over `ℕ` that answers the action plus one. -/
+@[expose] public def shiftN : Belief ℕ ℕ := diracBelief (fun _ a => a + 1)
+
+/-- Paid one when the last observation is even; goal-seeking horizon, which is
+summable. -/
+@[expose] public noncomputable def parityAgent : Agent ℕ ℕ where
+  utility := fun h =>
+    match h.getLast? with
+    | none => 0
+    | some q => if q.2 % 2 = 0 then 1 else 0
+  horizon := shortHorizon
+
+/-- A policy over `ℕ`: play the history length. -/
+@[expose] public def lengthPolicy : History ℕ ℕ → ℕ := fun h => h.length
+
+/-- Both are probabilities. -/
+public theorem echoN_isSubprobability : echoN.IsSubprobability := diracBelief_isSubprobability _
+
+/-- Both are probabilities. -/
+public theorem shiftN_isSubprobability : shiftN.IsSubprobability := diracBelief_isSubprobability _
+
+/-- The parity agent's utility lies in `[0, 1]`. -/
+public theorem parityAgent_abs_utility_le_one (h : History ℕ ℕ) : |parityAgent.utility h| ≤ 1 := by
+  simp only [parityAgent]
+  split
+  · norm_num
+  · split_ifs <;> norm_num
+
+/-- Its weighted utilities are nonnegative. -/
+public theorem parityAgent_weighted_nonneg (t : ℕ) (h : History ℕ ℕ) :
+    0 ≤ parityAgent.horizon t h.length * parityAgent.utility h := by
+  refine mul_nonneg (shortHorizon_pos t _).le ?_
+  simp only [parityAgent]
+  split
+  · norm_num
+  · split_ifs <;> norm_num
+
+/-- Its horizon is absolutely summable. -/
+public theorem parityAgent_horizon_summable (t : ℕ) :
+    Summable (fun k ↦ |parityAgent.horizon t k|) :=
+  summable_abs_shortHorizon t
+
+/-- `policyValue_mixture_tsum` at `Obs = ℕ`. -/
+public theorem nat_policyValue_mixture (t n : ℕ) (h : History ℕ ℕ) :
+    policyValue (mixtureBelief (1 / 2) echoN shiftN) parityAgent lengthPolicy t n h
+      = posterior (1 / 2) echoN shiftN h * policyValue echoN parityAgent lengthPolicy t n h
+        + (1 - posterior (1 / 2) echoN shiftN h) * policyValue shiftN parityAgent lengthPolicy t n h :=
+  policyValue_mixture_tsum (by norm_num) (by norm_num) echoN_isSubprobability
+    shiftN_isSubprobability parityAgent parityAgent_abs_utility_le_one lengthPolicy t n h
+
+/-- `policyActionValue_mixture_tsum` at `Obs = ℕ`. -/
+public theorem nat_policyActionValue_mixture (t n : ℕ) (h : History ℕ ℕ) :
+    policyActionValue (mixtureBelief (1 / 2) echoN shiftN) parityAgent lengthPolicy t n h
+      = posterior (1 / 2) echoN shiftN h * policyActionValue echoN parityAgent lengthPolicy t n h
+        + (1 - posterior (1 / 2) echoN shiftN h)
+          * policyActionValue shiftN parityAgent lengthPolicy t n h :=
+  policyActionValue_mixture_tsum (by norm_num) (by norm_num) echoN_isSubprobability
+    shiftN_isSubprobability parityAgent parityAgent_abs_utility_le_one lengthPolicy t n h
+
+/-- `policyValue_le_value_tsum` at `Obs = ℕ`. -/
+public theorem nat_policyValue_le_value (t n : ℕ) (h : History ℕ ℕ) :
+    policyValue echoN parityAgent lengthPolicy t n h ≤ value echoN parityAgent t n h :=
+  policyValue_le_value_tsum echoN_isSubprobability parityAgent parityAgent_abs_utility_le_one
+    lengthPolicy t n h
+
+/-- `policyActionValue_le_actionValue_tsum` at `Obs = ℕ`. -/
+public theorem nat_policyActionValue_le_actionValue (t n : ℕ) (h : History ℕ ℕ) :
+    policyActionValue echoN parityAgent lengthPolicy t n h
+      ≤ actionValue echoN parityAgent t n h (lengthPolicy h) :=
+  policyActionValue_le_actionValue_tsum echoN_isSubprobability parityAgent
+    parityAgent_abs_utility_le_one lengthPolicy t n h
+
+/-- `value_mixture_le_tsum` at `Obs = ℕ`. -/
+public theorem nat_value_mixture_le (t n : ℕ) (h : History ℕ ℕ) :
+    value (mixtureBelief (1 / 2) echoN shiftN) parityAgent t n h
+      ≤ posterior (1 / 2) echoN shiftN h * value echoN parityAgent t n h
+        + (1 - posterior (1 / 2) echoN shiftN h) * value shiftN parityAgent t n h :=
+  value_mixture_le_tsum (by norm_num) (by norm_num) echoN_isSubprobability
+    shiftN_isSubprobability parityAgent parityAgent_abs_utility_le_one t n h
+
+/-- `actionValue_mixture_le_tsum` at `Obs = ℕ`. -/
+public theorem nat_actionValue_mixture_le (t n : ℕ) (h : History ℕ ℕ) (a : ℕ) :
+    actionValue (mixtureBelief (1 / 2) echoN shiftN) parityAgent t n h a
+      ≤ posterior (1 / 2) echoN shiftN h * actionValue echoN parityAgent t n h a
+        + (1 - posterior (1 / 2) echoN shiftN h) * actionValue shiftN parityAgent t n h a :=
+  actionValue_mixture_le_tsum (by norm_num) (by norm_num) echoN_isSubprobability
+    shiftN_isSubprobability parityAgent parityAgent_abs_utility_le_one t n h a
+
+/-- `abs_policyValue_le_horizonBudget` at `Obs = ℕ`. -/
+public theorem nat_abs_policyValue_le (t n : ℕ) (h : History ℕ ℕ) :
+    |policyValue echoN parityAgent lengthPolicy t n h| ≤ horizonBudget parityAgent t n h.length :=
+  abs_policyValue_le_horizonBudget echoN_isSubprobability parityAgent
+    parityAgent_abs_utility_le_one lengthPolicy t n h
+
+/-- `policyValue_nonneg` and `policyActionValue_nonneg` at `Obs = ℕ`. -/
+public theorem nat_policyValue_nonneg (t n : ℕ) (h : History ℕ ℕ) :
+    0 ≤ policyValue echoN parityAgent lengthPolicy t n h
+      ∧ 0 ≤ policyActionValue echoN parityAgent lengthPolicy t n h :=
+  ⟨policyValue_nonneg echoN_isSubprobability.nonneg parityAgent lengthPolicy t
+      (parityAgent_weighted_nonneg t) n h,
+    policyActionValue_nonneg echoN_isSubprobability.nonneg parityAgent lengthPolicy t
+      (parityAgent_weighted_nonneg t) n h⟩
+
+/-- `abs_policyValue_succ_sub_le` and `policyValue_cauchySeq` at `Obs = ℕ`. -/
+public theorem nat_policyValue_cauchy (t : ℕ) (h : History ℕ ℕ) :
+    (∀ n, |policyValue echoN parityAgent lengthPolicy t (n + 1) h
+        - policyValue echoN parityAgent lengthPolicy t n h|
+        ≤ |parityAgent.horizon t (h.length + n + 1)|)
+      ∧ CauchySeq (fun n ↦ policyValue echoN parityAgent lengthPolicy t n h) :=
+  ⟨fun n => abs_policyValue_succ_sub_le echoN_isSubprobability parityAgent
+      parityAgent_abs_utility_le_one lengthPolicy t n h,
+    policyValue_cauchySeq echoN_isSubprobability parityAgent parityAgent_abs_utility_le_one
+      lengthPolicy t (parityAgent_horizon_summable t) h⟩
+
+/-- The infinite committed values are the limits, at `Obs = ℕ`. -/
+public theorem nat_tendsto_infinitePolicy (t : ℕ) (h : History ℕ ℕ) :
+    Filter.Tendsto (fun n ↦ policyValue echoN parityAgent lengthPolicy t n h) Filter.atTop
+        (nhds (infinitePolicyValue echoN parityAgent lengthPolicy t h))
+      ∧ Filter.Tendsto (fun n ↦ policyActionValue echoN parityAgent lengthPolicy t n h)
+        Filter.atTop (nhds (infinitePolicyActionValue echoN parityAgent lengthPolicy t h)) :=
+  ⟨tendsto_policyValue_infinitePolicyValue echoN_isSubprobability parityAgent
+      parityAgent_abs_utility_le_one lengthPolicy t (parityAgent_horizon_summable t) h,
+    tendsto_policyActionValue_infinitePolicyActionValue echoN_isSubprobability parityAgent
+      parityAgent_abs_utility_le_one lengthPolicy t (parityAgent_horizon_summable t) h⟩
+
+/-- `infinitePolicyActionValue_mixture` at `Obs = ℕ`. -/
+public theorem nat_infinitePolicyActionValue_mixture (t : ℕ) (h : History ℕ ℕ) :
+    infinitePolicyActionValue (mixtureBelief (1 / 2) echoN shiftN) parityAgent lengthPolicy t h
+      = posterior (1 / 2) echoN shiftN h
+          * infinitePolicyActionValue echoN parityAgent lengthPolicy t h
+        + (1 - posterior (1 / 2) echoN shiftN h)
+          * infinitePolicyActionValue shiftN parityAgent lengthPolicy t h :=
+  infinitePolicyActionValue_mixture (by norm_num) (by norm_num) echoN_isSubprobability
+    shiftN_isSubprobability parityAgent parityAgent_abs_utility_le_one lengthPolicy t
+    (parityAgent_horizon_summable t) h
+
+/-- `infinitePolicyActionValue_le_infiniteActionValue` at `Obs = ℕ`. -/
+public theorem nat_infinitePolicyActionValue_le (t : ℕ) (h : History ℕ ℕ) :
+    infinitePolicyActionValue echoN parityAgent lengthPolicy t h
+      ≤ infiniteActionValue echoN parityAgent t h (lengthPolicy h) :=
+  infinitePolicyActionValue_le_infiniteActionValue echoN_isSubprobability parityAgent
+    parityAgent_abs_utility_le_one lengthPolicy t (parityAgent_horizon_summable t) h
+
+/-- `infiniteActionValue_mixture_le` at `Obs = ℕ`. -/
+public theorem nat_infiniteActionValue_mixture_le (t : ℕ) (h : History ℕ ℕ) (a : ℕ) :
+    infiniteActionValue (mixtureBelief (1 / 2) echoN shiftN) parityAgent t h a
+      ≤ posterior (1 / 2) echoN shiftN h * infiniteActionValue echoN parityAgent t h a
+        + (1 - posterior (1 / 2) echoN shiftN h) * infiniteActionValue shiftN parityAgent t h a :=
+  infiniteActionValue_mixture_le (by norm_num) (by norm_num) echoN_isSubprobability
+    shiftN_isSubprobability parityAgent parityAgent_abs_utility_le_one t
+    (parityAgent_horizon_summable t) h a
+
+/-- The finite-observation mixture laws, at the echo/flip mixture (the `[Fintype Obs]`
+forms; the tsum forms are witnessed above). -/
+example (t n : ℕ) (h : History Bool Bool) (a : Bool) :=
+  AISafetyAtlas.Wireheading.Mixture.actionValue_mixture_le (p := 1 / 2) (by norm_num)
+    (by norm_num) echoB_isSubprobability flipB_isSubprobability bitAgent
+    bitAgent_abs_utility_le_one t n h a
+
+example (t n : ℕ) (h : History Bool Bool) :=
+  AISafetyAtlas.Wireheading.Mixture.policyActionValue_mixture (p := 1 / 2) (by norm_num)
+    (by norm_num) echoB_isSubprobability.nonneg flipB_isSubprobability.nonneg bitAgent
+    alwaysTrue t n h
+
+example (t n : ℕ) (h : History Bool Bool) :=
+  AISafetyAtlas.Wireheading.Mixture.policyActionValue_le_actionValue echoB_isSubprobability
+    bitAgent bitAgent_abs_utility_le_one alwaysTrue t n h
+
 end AISafetyAtlas.Examples.Wireheading.Mixture

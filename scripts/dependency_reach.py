@@ -4,7 +4,7 @@
 `check_elaboration_drift.py` exists for the change where the source does not move
 and its meaning does: an upstream rename behind an alias, a different instance
 chosen. CI runs it when a dependency moves. Elaborating the whole environment
-costs 342 s on an idle 12-core host and runs past the 30-minute budget on a
+takes minutes on the self-hosted runner and runs past the 30-minute budget on a
 two-core hosted runner, and for most dependencies most of that is wasted. A
 module's elaboration depends only on the toolchain, the Lean options and its
 own import closure, so a moved package can change the meaning of a declaration

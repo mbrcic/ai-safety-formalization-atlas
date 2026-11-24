@@ -54,6 +54,8 @@ source mapping and the omitted parts of the paper.
 | **Boundary** | `meshing_fails_of_measuresAllStates` | **Corollary** — measuring every state makes the inference map inconsistent |
 | **Boundary** | `exists_state_meshing_failure_of_measuresAllStates` | The Corollary's printed witness, under the source's §3.3 surjectivity |
 | **Bridge** | `not_knowable_state_of_properInclusion` | Proper inclusion through `AISafetyAtlas.Knowledge`; strictly weaker than the measurement result |
+| **Law** | `exists_injective_of_measuresAllStates` | Measuring every state injects states into readings; no meshing |
+| **Law** | `exists_surjective_of_measuresAllStates` | §3.4: a surjection from readings onto states is necessary |
 
 ## Explicit non-claims
 
@@ -66,7 +68,9 @@ physically contained apparatus must have a non-injective restriction; the source
 does not derive it either, and Breuer's own counterexample shows containment need
 not force a collision. Deriving it under stated hypotheses is
 `Knowledge.Embedded.Composition` and `.Finite`, graded separately as atlas
-modelling rather than as the paper.
+modelling rather than as the paper. Those two modules also carry printed
+statements outside §3.5: Breuer's §3.4 finite remark (`.Finite`) and footnote 4's
+non-meshing bijection (`.Composition`).
 
 Nothing here concerns AI systems. No self-monitoring, introspection, or
 observability reading follows without a separate reviewed bridge.
@@ -169,6 +173,20 @@ public theorem Meshing.restrict_surjective
     exact Set.mem_singleton a
   rcases ha with ⟨s, hs, hsa⟩
   exact ⟨s, hsa⟩
+
+/--
+**Restricting a composite state to its apparatus is surjective.** Breuer §3.3:
+*"O is composed of the apparatus A and of a rest R"*, and *"So `|A` describes a
+surjective map from the states of O to the states of A."*
+
+The composite's states are pairs, the restriction is the first coordinate, and
+the rest has at least one state. No meshing hypothesis is used: this is the
+setup's own surjectivity, which `Meshing.restrict_surjective` recovers only
+under §3.5's later condition.
+-/
+public theorem composite_restrict_surjective {A : Type v} {R : Type*} [Nonempty R] :
+    Function.Surjective (Prod.fst : Restriction (A × R) A) :=
+  Prod.fst_surjective
 
 /-- A state is exactly measurable when some nonempty reading set infers it alone. -/
 @[expose] public def ExactlyMeasurable
@@ -538,5 +556,53 @@ public theorem exists_state_meshing_failure_of_measuresAllStates
   obtain ⟨a, ha⟩ := hm
   obtain ⟨s₀, rfl⟩ := hsurj a
   exact ⟨s₀, ha⟩
+
+/-! ## §3.4, *A First Attempt*: the counting obstruction
+
+Breuer's §3.4, before meshing is introduced in §3.5: *"For exact measurability of
+all states it is necessary (but not sufficient) that there is a surjective map
+from the states of `A` onto the states of `O`."* Nothing here assumes meshing,
+or any restriction map at all; only the union law is used. The finite counting
+consequences are in `Knowledge.Embedded.Finite`. -/
+
+/--
+**Measuring every state injects the states into the readings.** By the union
+law each exactly measured state `s` is already pinned down by one reading
+`a_s` (`exists_singleton_infer_eq_of_infer_eq`), and `θ({a_s}) = {s}` makes
+`s ↦ a_s` injective. No meshing hypothesis.
+-/
+public theorem exists_injective_of_measuresAllStates
+    {Ω : Type u} {A : Type v} (M : InferenceMap Ω A) (hall : MeasuresAllStates M) :
+    ∃ g : Ω → A, Function.Injective g := by
+  have h : ∀ s : Ω, ∃ a : A, M.infer (ReadingSet.singleton a) = {s} := fun s => by
+    obtain ⟨U, hU⟩ := hall s
+    obtain ⟨a, -, ha⟩ := exists_singleton_infer_eq_of_infer_eq M hU
+    exact ⟨a, ha⟩
+  choose g hg using h
+  refine ⟨g, fun s t hst => ?_⟩
+  have : ({s} : Set Ω) = {t} := by rw [← hg s, ← hg t, hst]
+  exact Set.singleton_eq_singleton_iff.mp this
+
+/--
+**Breuer §3.4, the necessary condition.** *"For exact measurability of all states
+it is necessary … that there is a surjective map from the states of `A` onto the
+states of `O`."* Any inference map, meshing or not, at any cardinality.
+
+`Nonempty Ω` is needed only to write the map down: with no global states there
+is no map from a nonempty apparatus onto them, while `MeasuresAllStates` holds
+vacuously.
+
+The printed *"but not sufficient"* is witnessed in
+`AISafetyAtlas.Examples.Knowledge.Embedded`: a surjection exists there and the
+constant inference map measures nothing. It is a statement about a given
+inference map: a surjection `f` always admits *some* map measuring every state,
+namely `InferenceMap.ofFun f` (`Knowledge.Embedded.Composition`).
+-/
+public theorem exists_surjective_of_measuresAllStates
+    {Ω : Type u} {A : Type v} [Nonempty Ω] (M : InferenceMap Ω A)
+    (hall : MeasuresAllStates M) :
+    ∃ f : A → Ω, Function.Surjective f := by
+  obtain ⟨g, hg⟩ := exists_injective_of_measuresAllStates M hall
+  exact ⟨Function.invFun g, Function.invFun_surjective hg⟩
 
 end AISafetyAtlas.Knowledge.Embedded

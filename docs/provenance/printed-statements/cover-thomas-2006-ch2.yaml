@@ -1,0 +1,278 @@
+source:
+  citation: >-
+    Thomas M. Cover and Joy A. Thomas, Elements of Information Theory, 2nd ed.,
+    Wiley-Interscience, 2006. Chapter 2, sections 2.5 and 2.8.
+  file: >-
+    [Wiley Series in Telecommunications and Signal Processing] Thomas M. Cover,
+    Joy A. Thomas - Elements of Information Theory (2006, Wiley-Interscience).pdf
+  sha256: fed9b82d0904c75b47027524e11a12b6dbac31cf4f25319414679050d125dd6f
+  page_offset: 26
+  standing: |
+    Discrete random variables with probability mass functions (§2.1, p. 13, PDF
+    p. 39: "Let $X$ be a discrete random variable with alphabet $\mathcal{X}$ and
+    probability mass function $p(x) = \Pr\{X = x\}$, $x \in \mathcal{X}$.").
+    No finiteness of the alphabet is stated in §§2.1--2.8 (source card S01 records
+    the pages searched). The chapter's own problems use an infinite alphabet:
+    Problem 2.1 (p. 43, PDF p. 69), "Coin flips. A fair coin is flipped until the
+    first head occurs. Let $X$ denote the number of flips required."
+
+definitions:
+  - id: ct2-def-entropy
+    label: Definition (entropy)
+    pdf_page: 40
+    book_page: 14
+    latex: |
+      \textbf{Definition} The \emph{entropy} $H(X)$ of a discrete random variable
+      $X$ is defined by
+      \[ H(X) = -\sum_{x \in \mathcal{X}} p(x) \log p(x). \tag{2.1} \]
+      We also write $H(p)$ for the above quantity. The log is to the base 2 and
+      entropy is expressed in bits. [\ldots] We will use the convention that
+      $0 \log 0 = 0$, which is easily justified by continuity since
+      $x \log x \to 0$ as $x \to 0$. Adding terms of zero probability does not
+      change the entropy.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: ct2-def-joint-entropy
+    label: Definition (joint entropy)
+    pdf_page: 42
+    book_page: 16
+    latex: |
+      \textbf{Definition} The \emph{joint entropy} $H(X, Y)$ of a pair of discrete
+      random variables $(X, Y)$ with a joint distribution $p(x, y)$ is defined as
+      \[ H(X, Y) = -\sum_{x \in \mathcal{X}} \sum_{y \in \mathcal{Y}} p(x, y)
+         \log p(x, y), \tag{2.8} \]
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: ct2-def-conditional-entropy
+    label: Definition (conditional entropy)
+    pdf_page: 43
+    book_page: 17
+    latex: |
+      \textbf{Definition} If $(X, Y) \sim p(x, y)$, the \emph{conditional entropy}
+      $H(Y|X)$ is defined as
+      \[ H(Y|X) = \sum_{x \in \mathcal{X}} p(x) H(Y|X = x) \tag{2.10} \]
+      \[ = -\sum_{x \in \mathcal{X}} p(x) \sum_{y \in \mathcal{Y}} p(y|x)
+         \log p(y|x) \tag{2.11} \]
+      \[ = -\sum_{x \in \mathcal{X}} \sum_{y \in \mathcal{Y}} p(x, y)
+         \log p(y|x) \tag{2.12} \]
+      \[ = -E \log p(Y|X). \tag{2.13} \]
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: ct2-def-relative-entropy
+    label: Definition (relative entropy)
+    pdf_page: 45
+    book_page: 19
+    latex: |
+      \textbf{Definition} The \emph{relative entropy} or \emph{Kullback--Leibler
+      distance} between two probability mass functions $p(x)$ and $q(x)$ is defined as
+      \[ D(p||q) = \sum_{x \in \mathcal{X}} p(x) \log \frac{p(x)}{q(x)} \tag{2.26} \]
+      \[ = E_p \log \frac{p(X)}{q(X)}. \tag{2.27} \]
+      In the above definition, we use the convention that $0 \log \frac{0}{0} = 0$
+      and the convention (based on continuity arguments) that
+      $0 \log \frac{0}{q} = 0$ and $p \log \frac{p}{0} = \infty$. Thus, if there
+      is any symbol $x \in \mathcal{X}$ such that $p(x) > 0$ and $q(x) = 0$, then
+      $D(p||q) = \infty$.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: ct2-def-mutual-information
+    label: Definition (mutual information)
+    pdf_page: 45-46
+    book_page: 19-20
+    latex: |
+      \textbf{Definition} Consider two random variables $X$ and $Y$ with a joint
+      probability mass function $p(x, y)$ and marginal probability mass functions
+      $p(x)$ and $p(y)$. The \emph{mutual information} $I(X; Y)$ is the relative
+      entropy between the joint distribution and the product distribution
+      $p(x)p(y)$:
+      \[ I(X; Y) = \sum_{x \in \mathcal{X}} \sum_{y \in \mathcal{Y}} p(x, y)
+         \log \frac{p(x, y)}{p(x)p(y)} \tag{2.28} \]
+      \[ = D(p(x, y)||p(x)p(y)) \tag{2.29} \]
+      \[ = E_{p(x,y)} \log \frac{p(X, Y)}{p(X)p(Y)}. \tag{2.30} \]
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: ct2-def-conditional-mutual-information
+    label: Definition (conditional mutual information)
+    pdf_page: 49
+    book_page: 23
+    latex: |
+      \textbf{Definition} The \emph{conditional mutual information} of random
+      variables $X$ and $Y$ given $Z$ is defined by
+      \[ I(X; Y|Z) = H(X|Z) - H(X|Y, Z) \tag{2.60} \]
+      \[ = E_{p(x,y,z)} \log \frac{p(X, Y|Z)}{p(X|Z)p(Y|Z)}. \tag{2.61} \]
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+excerpts: []
+
+statements:
+  - id: ct2-def-markov
+    audit_row: S01-R01
+    locator: (2.117)
+    pdf_page: 60
+    book_page: 34
+    label: Definition
+    latex: |
+      \textbf{Definition} Random variables $X, Y, Z$ are said to \emph{form a Markov
+      chain in that order} (denoted by $X \to Y \to Z$) if the conditional
+      distribution of $Z$ depends only on $Y$ and is conditionally independent of
+      $X$. Specifically, $X$, $Y$, and $Z$ form a Markov chain $X \to Y \to Z$ if the
+      joint probability mass function can be written as
+      \[ p(x, y, z) = p(x)\,p(y|x)\,p(z|y). \tag{2.117} \]
+    uses: []
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: ct2-markov-iff-ci
+    audit_row: S01-R02
+    locator: (2.118)
+    pdf_page: 60
+    book_page: 34
+    label: consequence (first bullet after the Definition)
+    latex: |
+      $X \to Y \to Z$ if and only if $X$ and $Z$ are conditionally independent given
+      $Y$. Markovity implies conditional independence because
+      \[ p(x, z|y) = \frac{p(x, y, z)}{p(y)} = \frac{p(x, y)\,p(z|y)}{p(y)}
+         = p(x|y)\,p(z|y). \tag{2.118} \]
+    context: |
+      Introduced by: "Some simple consequences are as follows:"
+    uses: [ct2-def-markov]
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: ct2-markov-reverse
+    audit_row: S01-R03
+    locator: §2.8
+    pdf_page: 60
+    book_page: 34
+    label: consequence (second bullet)
+    latex: |
+      $X \to Y \to Z$ implies that $Z \to Y \to X$. Thus, the condition is sometimes
+      written $X \leftrightarrow Y \leftrightarrow Z$.
+    context: |
+      Introduced by: "Some simple consequences are as follows:"
+    uses: [ct2-def-markov]
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: ct2-markov-function
+    audit_row: S01-R04
+    locator: §2.8
+    pdf_page: 60
+    book_page: 34
+    label: consequence (third bullet)
+    latex: |
+      If $Z = f(Y)$, then $X \to Y \to Z$.
+    context: |
+      Introduced by: "Some simple consequences are as follows:"
+    uses: [ct2-def-markov]
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: ct2-thm-2.8.1
+    audit_row: S01-R05
+    locator: Thm 2.8.1
+    pdf_page: 60
+    book_page: 34
+    label: Theorem 2.8.1 (Data-processing inequality)
+    latex: |
+      \textbf{Theorem 2.8.1} (\emph{Data-processing inequality}) \emph{If
+      $X \to Y \to Z$, then $I(X; Y) \ge I(X; Z)$.}
+    uses: [ct2-def-markov, ct2-def-mutual-information]
+    proof_pages: 60-61
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: ct2-thm-2.8.1-equality
+    audit_row: S01-R06
+    locator: 2.8.1 proof
+    pdf_page: 61
+    book_page: 35
+    label: in the proof of Theorem 2.8.1
+    latex: |
+      We have equality if and only if $I(X; Y|Z) = 0$ (i.e., $X \to Z \to Y$ forms a
+      Markov chain).
+    context: |
+      Follows (2.121), $I(X; Y) \ge I(X; Z)$, in the proof of Theorem 2.8.1.
+    uses: [ct2-def-markov, ct2-def-conditional-mutual-information]
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: ct2-thm-2.8.1-similarly
+    audit_row: S01-R07
+    locator: 2.8.1 proof
+    pdf_page: 61
+    book_page: 35
+    label: in the proof of Theorem 2.8.1
+    latex: |
+      Similarly, one can prove that $I(Y; Z) \ge I(X; Z)$.
+    context: |
+      Last sentence of the proof of Theorem 2.8.1 (hypothesis $X \to Y \to Z$).
+    uses: [ct2-def-markov, ct2-def-mutual-information]
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: ct2-cor-function
+    audit_row: S01-R08
+    locator: Cor. (unnum.)
+    pdf_page: 61
+    book_page: 35
+    label: Corollary (unnumbered, first)
+    latex: |
+      \textbf{Corollary} \emph{In particular, if $Z = g(Y)$, we have
+      $I(X; Y) \ge I(X; g(Y))$.}
+    uses: [ct2-def-markov, ct2-def-mutual-information]
+    proof_pages: 61
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: ct2-cor-conditioning
+    audit_row: S01-R09
+    locator: Cor. (unnum.)
+    pdf_page: 61
+    book_page: 35
+    label: Corollary (unnumbered, second)
+    latex: |
+      \textbf{Corollary} \emph{If $X \to Y \to Z$, then $I(X; Y|Z) \le I(X; Y)$.}
+    uses: [ct2-def-markov, ct2-def-mutual-information, ct2-def-conditional-mutual-information]
+    proof_pages: 61
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: ct2-thm-2.5.2
+    audit_row: S01-R10
+    locator: Thm 2.5.2, used at `n = 2` inline as (2.119)/(2.120)
+    pdf_page: 50
+    book_page: 24
+    label: Theorem 2.5.2 (Chain rule for information)
+    latex: |
+      \textbf{Theorem 2.5.2} (\emph{Chain rule for information})
+      \[ I(X_1, X_2, \ldots, X_n; Y) = \sum_{i=1}^{n} I(X_i; Y | X_{i-1}, X_{i-2},
+         \ldots, X_1). \tag{2.62} \]
+    note: >-
+      The audit's locator also cites the $n = 2$ instances (2.119) and (2.120) on
+      p. 34: $I(X; Y, Z) = I(X; Z) + I(X; Y|Z) = I(X; Y) + I(X; Z|Y)$.
+    uses: [ct2-def-mutual-information, ct2-def-conditional-mutual-information]
+    proof_pages: 50
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: ct2-remark-conditioning-can-increase
+    audit_row: S01-R11
+    locator: Remark + example
+    pdf_page: 61
+    book_page: 35
+    label: remark with example (after the second Corollary)
+    latex: |
+      Note that it is also possible that $I(X; Y|Z) > I(X; Y)$ when $X$, $Y$, and
+      $Z$ do not form a Markov chain. For example, let $X$ and $Y$ be independent
+      fair binary random variables, and let $Z = X + Y$. Then $I(X; Y) = 0$, but
+      $I(X; Y|Z) = H(X|Z) - H(X|Y, Z) = H(X|Z) = P(Z = 1)\,H(X|Z = 1)
+      = \frac{1}{2}$ bit.
+    uses: [ct2-def-markov, ct2-def-mutual-information, ct2-def-conditional-mutual-information, ct2-def-conditional-entropy]
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}

@@ -1,6 +1,7 @@
 module
 
 import AISafetyAtlas.Wireheading.RewardGrid
+import AISafetyAtlas.Examples.Wireheading.StochasticCRMDP
 
 /-!
 # The half-maximal bound, on a grid class where it is about something
@@ -332,5 +333,102 @@ theorem fullMixedReturn_ofDet_transPair (e : FullEnv 0 Bool Bool)
     fullMixedReturn transPairMDP 1 false e (StochPolicy.ofDet π)
       = fullReturn transPair 1 false e π :=
   fullMixedReturn_ofDet transPair 1 false e π
+
+/-! ## Definition 9 at given sets, over a reward set that is not a grid
+
+Everitt et al.'s Definition 9 takes *given* sets of transition, reward and
+corruption functions, over Definition 7's finite reward set `ℛ ⊂ [0, 1]`. The
+class below is the defect's own instance: `ℛ = {0, 0.1, 1}`, which is no uniform
+grid, one true-reward function `Ṙ ≡ 1`, and the identity channel only. It has no
+complement inside it, so it is not a `ComplementedClass`, and Definition 10's
+worst-case regret is still stated on it, through `Corruption.worstCaseRegretOf`:
+every policy earns the same return, so the worst-case regret is zero. -/
+
+/-- The reward `1`. -/
+private def rOne : Reward := ⟨1, by norm_num, le_rfl⟩
+
+/-- The reward `0.1`, off every grid of the form `i/(m+1)` with `m + 1 < 10`. -/
+private noncomputable def rTenth : Reward := ⟨1 / 10, by norm_num, by norm_num⟩
+
+/-- The reward `0`. -/
+private def rZero : Reward := ⟨0, le_rfl, by norm_num⟩
+
+/-- **A Definition 9 class with given singleton sets**, over `ℛ = {0, 0.1, 1}`. -/
+private noncomputable def tenthClass : CRMDPClass Unit Unit Unit Bool Bool :=
+  AISafetyAtlas.Wireheading.RewardGrid.CRMDPClass.ofDet {rZero, rTenth, rOne} (Set.toFinite _)
+    (fun _ _ a => a) (fun _ _ => rOne) (fun _ _ x => x) (by intros; simp) (fun _ _ _ h => h)
+
+/-- Every member's return is the horizon, for every policy. -/
+private theorem tenthClass_return (t : ℕ) (e : Unit × Unit × Unit) (π : Policy Bool Bool) :
+    tenthClass.classReturn t false e π = t := by
+  rw [tenthClass, AISafetyAtlas.Wireheading.RewardGrid.CRMDPClass.classReturn_ofDet]
+  simp [returnOver, rOne]
+
+/-- Definition 10's regret in the singleton class is zero. -/
+private theorem tenthClass_regretOf (t : ℕ) (e : Unit × Unit × Unit) (π : Policy Bool Bool) :
+    AISafetyAtlas.Wireheading.Corruption.regretOf (tenthClass.classReturn t false) e π = 0 := by
+  rw [AISafetyAtlas.Wireheading.Corruption.regretOf_eq_of_max _ e π π (fun π' => by rw [tenthClass_return, tenthClass_return]),
+    sub_self]
+
+/-- **Definition 10's worst-case regret on a class with no complement**: zero. -/
+example (t : ℕ) (π : Policy Bool Bool) :
+    AISafetyAtlas.Wireheading.Corruption.worstCaseRegretOf (tenthClass.classReturn t false) Set.univ π = 0 := by
+  rw [AISafetyAtlas.Wireheading.Corruption.worstCaseRegretOf_eq_of_max _ _ π (Set.mem_univ ((), (), ()))
+    (fun μ _ => by simp [tenthClass_regretOf]), tenthClass_regretOf]
+
+/-- `0.1` is in the class's reward set. -/
+example : rTenth ∈ tenthClass.rewards := by
+  simp [tenthClass, AISafetyAtlas.Wireheading.RewardGrid.CRMDPClass.ofDet]
+
+/-- **`FullEnv` is the grid instance of Definition 9's class**, at the wireheading
+environment. -/
+example : (CRMDPClass.gridClass (Trans := Unit) 0 (fun _ => step)).classReturn 1 false
+      ((), binaryEnv.trueReward, binaryEnv.corruption) alwaysTrue
+      = fullReturn (fun _ : Unit => step) 1 false ⟨(), binaryEnv⟩ alwaysTrue :=
+  CRMDPClass.gridClass_return 0 (fun _ => step) 1 false ⟨(), binaryEnv⟩ alwaysTrue
+
+/-- The grid instance's member environment is the embedded grid environment. -/
+example : (CRMDPClass.gridClass (Trans := Unit) (Action := Bool) 0 (fun _ => step)).env
+      binaryEnv.trueReward binaryEnv.corruption = toEnv binaryEnv :=
+  CRMDPClass.gridClass_env 0 (fun _ => step) binaryEnv
+
+/-! ## Definition 9's transitions are kernels
+
+`CRMDPClass` reads print's transition functions `T(s' | s, a)` as kernels. The
+class below has one transition, the fair coin over two states (`coinMDP`), and
+no deterministic transition lifts to it, so it is outside the image of
+`CRMDPClass.ofDet`. -/
+
+/-- **A Definition 9 class with a stochastic transition**: the fair coin over
+`Bool`, reward set `{0}`, identity corruption. -/
+private noncomputable def coinClass : CRMDPClass Unit Unit Unit Bool Unit where
+  rewards := {rZero}
+  rewards_finite := Set.finite_singleton _
+  transition := fun _ => coinMDP
+  trueReward := fun _ _ => rZero
+  corruption := fun _ _ r => r
+  trueReward_mem := fun _ _ => rfl
+  corruption_mem := fun _ _ _ hr => hr
+
+/-- **The coin is not a lifted deterministic transition**: at state `false` it puts
+`1/2` on the successor any deterministic transition puts `1` on. -/
+example (f : Bool → Unit → Bool) :
+    (coinClass.transition ()).transition false () ≠
+      (AISafetyAtlas.Decision.MDP.ofDet f).transition false () := by
+  intro h
+  have := congrArg (fun q => q (f false ())) h
+  simp [coinClass, coinMDP, AISafetyAtlas.Decision.MDP.ofDet] at this
+
+/-- **So no deterministic class is the coin class.** -/
+example (rewards : Set Reward) (hfin : rewards.Finite) (trans : Unit → Bool → Unit → Bool)
+    (tr : Unit → Bool → Reward) (c : Unit → Bool → Reward → Reward)
+    (htr : ∀ i s, tr i s ∈ rewards) (hc : ∀ j s r, r ∈ rewards → c j s r ∈ rewards) :
+    AISafetyAtlas.Wireheading.RewardGrid.CRMDPClass.ofDet rewards hfin trans tr c htr hc ≠
+      coinClass := by
+  intro h
+  have := congrArg (fun K : CRMDPClass Unit Unit Unit Bool Unit =>
+    (K.transition ()).transition false () (trans () false ())) h.symm
+  simp [coinClass, coinMDP, AISafetyAtlas.Wireheading.RewardGrid.CRMDPClass.ofDet,
+    AISafetyAtlas.Decision.MDP.ofDet] at this
 
 end AISafetyAtlas.Examples.Wireheading.RewardGrid

@@ -1,0 +1,275 @@
+source:
+  citation: >-
+    Manuel Alfonseca, Manuel Cebrian, Antonio Fernández Anta, Lorenzo Coviello, Andrés
+    Abeliuk and Iyad Rahwan, Superintelligence Cannot be Contained: Lessons from
+    Computability Theory, Journal of Artificial Intelligence Research 70 (2021) 65--76
+    (submitted 06/2020; published 01/2021). Sections 4--5 (pp. 68--72).
+  file: alfonseca-cebrian-fernandez-anta-coviello-abeliuk-rahwan-jair-2021-superintelligence-cannot-be-contained.pdf
+  sha256: ee8cfd460b9074e085142f84ddbfee03606a55954f7e5125e9f7d79c39f0b1a4
+  page_offset: -64
+  standing: |
+    (a) Idealised control strategies (p. 70, PDF p. 6): "Let us assume we can articulate
+    in a precise programming language a perfectly reliable set of control strategies
+    that guarantees that no human comes to harm by a superintelligence."
+    (b) Harm-free solving (p. 70, PDF p. 6): "Since it must be assumed that solving the
+    harming problem must not harm humans, it follows that a solution to this problem
+    must simulate the execution of $R(D)$ and predict its potentially harmful
+    consequences in an isolated situation (i.e., without any effect on the external
+    world)."
+    (c) Range of the reduction (p. 70, PDF p. 6): "Consider the set of all Turing
+    machines $T$ and inputs $I$ on which they can execute. As mentioned above, the
+    function $\mathit{Halt}(T, I)$ that decides whether $T$ halts with input $I$ is not
+    computable."
+    (d) Turing machines are isolated (p. 70, PDF p. 6): "since the execution of $T(I)$
+    cannot harms humans, as a Turing machine is isolated from the external world."
+    (e) Assumption 2 (p. 71, PDF p. 7) is stated after Theorem 1 and is introduced for
+    the containment argument ("it remains to be shown that the containment problem is
+    incomputable. [\ldots] we advance the following assumption"); it is statement
+    alf21-assumption2.
+    Silent: no criterion for ``harmful to humans'' / ``harms humans'' is given anywhere
+    in §§3--5 (PDF pp. 3--8 searched; the predicate is used in Algorithm 1, the
+    Terminology box and the proof of Theorem 1 without definition). The paper does not
+    say which Turing-machine model or encoding is meant, nor (in §5) whether Rice's
+    ``property'' must be a property of the function computed.
+
+definitions:
+  - id: alf21-def-terminology
+    label: Terminology box (§4)
+    pdf_page: 5
+    book_page: 69
+    latex: |
+      \textbf{Terminology:}
+      \begin{itemize}
+      \item A \textbf{decision problem} (or simply a problem) is a question, on a set of
+        possible inputs, with a yes-no answer.
+      \item A \textbf{solution} to a problem is any algorithm that is guaranteed to run in
+        a finite amount of time (i.e., always halts), and correctly returns the
+        appropriate yes/no answer to every instance (input) of the problem.
+      \item A problem is \textbf{decidable} if it has a solution. Otherwise, the problem
+        is \textbf{undecidable}.
+      \item A function is \textbf{computable} if it can be effectively computed by a
+        program (more formally, by a Turing machine)
+      \item A \textbf{Turing machine} is an abstract automaton that reads one symbol
+        contained in an infinite tape, changes its state depending on its current state
+        and the symbol just read, writes another symbol on the tape, and moves (or not)
+        to the right or to the left of its current position in the tape.
+      \item A \textbf{universal Turing machine} when started on a tape containing the
+        encoding of another Turing machine, call it $T$, followed by the input to $T$,
+        produces the same result as the Turing machine $T$ would when started on that
+        input. Essentially a universal Turing machine can simulate the behavior of an
+        arbitrary Turing machine on arbitrary input.
+      \item The \textbf{halting problem,} proved by Alan Turing in 1936, is a general
+        algorithm that, given information about a program (a Turing machine) and an
+        input to that program, will always predict whether the program will halt when
+        fed with that input. The halting problem is one of the undecidable problems of
+        mathematics, in the same class as Gödel undecidability theorems. It does not
+        assert that no program can be predicted to halt (or not), but that not every
+        program can be predicted to halt (or not).
+      \item A \textbf{superintelligent machine} is a programmable machine with a program
+        $R$, that receives input $D$ from the external world (the state of the world),
+        and is able to act on the external world as a function of the output of its
+        program $R(D)$. The program in this machine must be able to simulate the behavior
+        of a universal Turing machine.
+      \item A superintelligent machine is \textbf{containable} if there is a control
+        strategy that prevents its acting on the external world when there is a reason
+        to predict that $R(D)$ will harm humans, and allows it otherwise.
+      \end{itemize}
+    note: >-
+      The "halting problem" bullet defines the problem as "a general algorithm"
+      (as printed).
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: alf21-def-harming-problem
+    label: harming problem and control problem (§4)
+    pdf_page: 6
+    book_page: 70
+    latex: |
+      The containment problem is composed of two subproblems. The first, which we refer
+      to as the \emph{harming problem}, consists of a function $\mathit{Harm}(R, D)$ that
+      decides whether the execution of $R(D)$ will harm humans (detailed in Algorithm 1).
+      [\ldots]
+
+      The second, which we refer to as the \emph{control problem}, consists of a function
+      $\mathit{Control}(R, D)$ that allows the execution of $R(D)$ if and only if it does
+      not harm humans (detailed in Algorithm 2).
+
+      \textbf{ALGORITHM 2:} $\mathit{Control}(R, D)$ \\
+      \textbf{Input:} program $R$; input to the program $D$ \\
+      \textbf{if} $\mathit{Harm}(R, D)$ \textbf{then} \\
+      \quad disable execution of $R(D)$ \\
+      \textbf{else} \\
+      \quad allow execution of $R(D)$ \\
+      \textbf{end}
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: alf21-def-harmhumans
+    label: $\mathit{HarmHumans}()$ and $\mathit{HaltHarm}()$ (§4)
+    pdf_page: 6
+    book_page: 70
+    latex: |
+      We now consider function $\mathit{HaltHarm}()$ described by Algorithm 3, which takes
+      a pair $(T, I)$ as its input (i.e., a Turing machine-input pair). The following
+      algorithm first executes $T(I)$ and then executes $\mathit{HarmHumans}()$, an
+      explicit program that harms humans and takes a finite time.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+excerpts:
+  - id: alf21-thm1-proof
+    for: [alf21-thm1]
+    reason: >-
+      The proof fixes what "decidable" quantifies over: $\mathit{Harm}$ computable for
+      every program $R$ and input $D$, instantiated only at $R = \mathit{HaltHarm}()$,
+      $D = (T, I)$; and it relies on the observation (statement alf21-observation)
+      rather than on Assumption 2, which is stated after the theorem.
+    pdf_page: 7
+    latex: |
+      \emph{Proof.} Assume, by contradiction, that the harming problem is decidable, that
+      is, $\mathit{Harm}(R, D)$ is computable for every possible program $R$ and input
+      $D$. Then, it is computable with inputs $R = \mathit{HaltHarm}()$ and input
+      $D = (T, I)$. With these inputs, $\mathit{Harm}(\mathit{HaltHarm}(), (T, I))$
+      returns $\mathit{TRUE}$ if and only if $\mathit{HaltHarm}(T, I)$ harms humans.
+      Hence, $\mathit{Harm}(\mathit{HaltHarm}(), (T, I))$ returns $\mathit{TRUE}$ if and
+      only if $T(I)$ halts.
+
+      This implies that a harming-checking algorithm can be used to devise an algorithm
+      that decides if Turing machine $T$ halts with input $I$, for every $T$ and $I$.
+      However, this constitutes a contradiction, and hence the theorem is proven.
+      $\square$
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+statements:
+  - id: alf21-alg1-harm
+    audit_row: S28-R05
+    locator: Algorithm 1, p.70
+    pdf_page: 6
+    book_page: 70
+    label: Algorithm 1
+    latex: |
+      \textbf{ALGORITHM 1:} $\mathit{Harm}(R, D)$ \\
+      \textbf{Input:} program $R$; input to the program $D$ \\
+      \textbf{if} $R(D)$ \emph{is harmful to humans} \textbf{then} \\
+      \quad \textbf{return} TRUE \\
+      \textbf{else} \\
+      \quad \textbf{return} FALSE \\
+      \textbf{end}
+    context: |
+      Introduced by: "The first, which we refer to as the \emph{harming problem},
+      consists of a function $\mathit{Harm}(R, D)$ that decides whether the execution of
+      $R(D)$ will harm humans (detailed in Algorithm 1)."
+    uses: [alf21-def-harming-problem, alf21-def-terminology]
+    note: >-
+      The algorithm itself states no termination; totality comes only from the
+      Terminology box's "solution" (always halts) together with "decides" in the
+      introducing sentence.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: alf21-alg3-haltharm
+    audit_row: S28-R08
+    locator: Algorithm 3, p.71
+    pdf_page: 7
+    book_page: 71
+    label: Algorithm 3
+    latex: |
+      \textbf{ALGORITHM 3:} $\mathit{HaltHarm}(T, I)$ \\
+      \textbf{Input:} Turing machine $T$; input to the Turing machine $I$ \\
+      execute $T(I)$; \\
+      execute $\mathit{HarmHumans}()$; \\
+      \textbf{end}
+    uses: [alf21-def-harmhumans]
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: alf21-observation
+    audit_row: S28-R09
+    locator: §4 the observation, p.70
+    pdf_page: 6
+    book_page: 70
+    label: observation preceding Algorithm 3, §4
+    latex: |
+      Observe that $\mathit{HarmHumans}()$ is executed if and only if $T(I)$ halts. On
+      the other hand, $\mathit{HaltHarm}()$ harms humans if and only if
+      $\mathit{HarmHumans}()$ is executed, since the execution of $T(I)$ cannot harms
+      humans, as a Turing machine is isolated from the external world.
+    context: |
+      Preceded by: "Consider the set of all Turing machines $T$ and inputs $I$ on which
+      they can execute. [\ldots] The following algorithm first executes $T(I)$ and then
+      executes $\mathit{HarmHumans}()$, an explicit program that harms humans and takes
+      a finite time."
+    uses: [alf21-def-harmhumans, alf21-alg3-haltharm]
+    note: >-
+      "cannot harms" is a grammatical slip, as printed. Algorithm 3 is printed on the next
+      page (p. 71).
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: alf21-thm1
+    audit_row: S28-R10
+    locator: Theorem 1, p.71
+    pdf_page: 7
+    book_page: 71
+    label: Theorem 1
+    latex: |
+      \textbf{Theorem 1.} \emph{The harming problem is undecidable.}
+    context: |
+      Preceded by: "The function $\mathit{HaltHarm}()$ is instrumental in proving our
+      main result."
+    uses: [alf21-def-harming-problem, alf21-alg1-harm, alf21-def-terminology,
+           alf21-alg3-haltharm, alf21-observation]
+    proof_pages: 7
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: alf21-assumption2
+    audit_row: S28-R11
+    locator: Assumption 2, p.71
+    pdf_page: 7
+    book_page: 71
+    label: Assumption 2
+    latex: |
+      \textbf{Assumption 2.} \emph{As the program $R$ and the state of the world $D$ are
+      arbitrarily complex, $R$ must be able to simulate a universal Turing machine and $D$
+      includes the set of inputs that can be executed by a universal Turing machine. In
+      addition, the language of $R$ contains at least one explicit operation
+      $\mathit{HarmHumans}()$ that harms humans and takes a finite time.}
+    context: |
+      Preceded by: "As the interacting program $R$ is a complex program with arbitrary
+      data $D$ pertaining to complex interactions with humans, we advance the following
+      assumption, in line with Bostrom's notion of superintelligence (Bostrom, 2014)."
+      Followed by Corollary 3, "\emph{The containment problem is incomputable.}"
+    uses: [alf21-def-terminology, alf21-def-harmhumans]
+    note: >-
+      The Atlas's VERBATIM quote omits the opening clause "As the program $R$ and the
+      state of the world $D$ are arbitrarily complex,". Numbering is shared across
+      results (Theorem 1, Assumption 2, Corollary 3).
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: alf21-rice
+    audit_row: S28-R13
+    locator: §5 Rice, p.72
+    pdf_page: 8
+    book_page: 72
+    label: citation of Rice's theorem, §5
+    latex: |
+      Another lesson from computability theory is the following: we may not even know
+      when superintelligent machines have arrived, as deciding whether a machine exhibits
+      intelligence is in the same realm of problems as the containment problem. This is
+      a consequence of Rice's theorem (Rice, 1953), which states that, any non-trivial
+      property (e.g., ``harm humans'' or ``display superintelligence'') of a Turing
+      machine is undecidable. Non-trivial means some programs have that property and some
+      don't.
+    uses: [alf21-def-terminology]
+    note: >-
+      Cited, not proved. Bibliography (p. 75, PDF p. 11): "Rice, H. G. (1953). Classes of
+      recursively enumerable sets and their decision problems. \emph{Transactions of the
+      American Mathematical Society}, \emph{74}(2), 358--366." The paper states no
+      restriction to properties of the computed function (semantic/extensional
+      properties); its examples that follow (emptiness, all strings, password checker,
+      equivalence) are such properties.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind) + Codex (anchored re-read); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}

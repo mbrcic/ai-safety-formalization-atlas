@@ -9,7 +9,7 @@ public import Mathlib.Tactic.Positivity
 /-!
 # Ashby's Law of Requisite Variety — the counting half
 
-W. Ross Ashby, *An Introduction to Cybernetics* (Chapman & Hall, 1961), chapter
+W. Ross Ashby, *An Introduction to Cybernetics* (Chapman & Hall, 1956; second impression 1957), chapter
 11, sections 11/5, 11/7 and 11/9 in their combinatorial form: a regulator cannot
 hold the outcome steadier than its own repertoire allows, counted in states.
 `AISafetyAtlas.Control.RequisiteVariety` carries the same law's entropy form

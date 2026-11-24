@@ -1,0 +1,319 @@
+source:
+  citation: >-
+    J. Klamka, Uncontrollability and Unobservability of Multivariable Systems,
+    IEEE Transactions on Automatic Control, October 1972, pp. 725--726 (Technical
+    Notes and Correspondence). Running heads of the pinned scan; the volume and
+    issue numbers are not printed on these two pages (the audit cites 17(5)).
+    Manuscript received April 24, 1972.
+  file: klamka1972.pdf
+  sha256: fdaa652dc63e69a5bcae88cd679d2b7832d7e07fea0bf2c1a7acb18f6f0a2751
+  page_offset: 724
+  standing: |
+    The scan's two pages also carry the end of a preceding article (left column
+    of p. 725, with its own equations (5)--(11)) and the start of a following one
+    (Wall and Stewart, right column of p. 726). Only Klamka's text is used here;
+    equation numbers below are Klamka's.
+    The system (p. 725, PDF p. 1): "Consider the linear time-invariant system $S$
+    described by the state equations $\dot{x}(t) = Ax(t) + Bu(t)$,
+    $y(t) = Cx(t)$ where the state vector $x(t)$ is $n \times 1$, the input vector
+    $u(t)$ is $p \times 1$, and the output vector $y(t)$ is $q \times 1$. The
+    constant matrices $A, B$, and $C$ are of dimension $n \times n$,
+    $n \times p$, $q \times n$, respectively." (Transcribed in full as statement
+    klamka-intro-system.)
+    Controllability and observability are not defined; the criterion used is
+    imported from Chen and Desoer [1] (p. 726, PDF p. 2), transcribed as
+    definition klamka-def-jordan-criterion: linear independence "over the field
+    of complex numbers".
+    Silent: no field for the entries of $A, B, C$, no time domain, and no class
+    of admissible inputs or trajectories is stated (source card S25 searched PDF
+    pp. 1--2, Klamka's article only). The only field named is the complex
+    numbers, in the imported criterion.
+
+definitions:
+  - id: klamka-def-int
+    label: int (Introduction)
+    pdf_page: 1
+    book_page: 725
+    latex: |
+      Let $d$ be a real number. Then the term $\operatorname{int}[d]$ denotes the
+      greatest integer number not greater than $d$. In other words,
+      $\operatorname{int}[d] = s$, where $s$ is the integer number satisfying the
+      inequality $s \leq d < s + 1$.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 200}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: klamka-def-jordan-form
+    label: Jordan canonical form $S_J$ (Introduction, continued)
+    pdf_page: 1-2
+    book_page: 725-726
+    latex: |
+      Let us transform system $S$ into its Jordan canonical form $S_J$ with a
+      nonsingular constant $n \times n$ matrix $T$ such that $x(t) = Tz(t)$ and
+      \[ \dot{z}(t) = Jz(t) + Gu(t) \]
+      \[ y(t) = Hz(t) \]
+      where $J = T^{-1}AT$, $G = T^{-1}B$, and $H = CT$. $J$ will be of block
+      diagonal form with $k$ blocks $J_i$, $i = 1,2,\cdots,k$, on the main diagonal,
+      of dimension $n_i \times n_i$. Each $J_i$ will be pseudodiagonal and composed
+      of $\alpha_i$ separate Jordan blocks on the main diagonal $J_{ij}$,
+      $j = 1,2,\cdots,\alpha_i$, all associated with $\lambda_i$. Each $J_{ij}$ will
+      be of dimension $\beta_{ij} \times \beta_{ij}$ and will have $\lambda_i$ on
+      the main diagonal, ones on the superdiagonal, and zeros elsewhere. Denote the
+      rows of $G$ associated with the last rows of $J_{ij}$ as $g_{ij}$,
+      $i = 1,2,\cdots,k$ and $j = 1,2,\cdots,\alpha_i$. Similarly, denote the
+      columns of $H$ associated with the first columns of $J_{ij}$ as $h_{ij}$,
+      $i = 1,2,\cdots,k$ and $j = 1,2,\cdots,\alpha_i$.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 200}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: klamka-def-jordan-criterion
+    label: controllability/observability criterion, quoted from [1]
+    pdf_page: 2
+    book_page: 726
+    latex: |
+      It is well known [1] that the system $S$ is completely state controllable
+      (observable) if and only if for each $i = 1,2,\cdots,k$ the set of $\alpha_i$
+      row vectors (column vectors),
+      $g_{i1}, g_{i2}, \cdots, g_{i\alpha_i}$ $(h_{i1}, h_{i2}, \cdots, h_{i\alpha_i})$,
+      are linearly independent over the field of complex numbers.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 200}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+statements:
+  - id: klamka-intro-system
+    audit_row: S25-R01
+    locator: §Intro, the system
+    pdf_page: 1
+    book_page: 725
+    label: Introduction (the system $S$)
+    latex: |
+      Consider the linear time-invariant system $S$ described by the state
+      equations
+      \[ \dot{x}(t) = Ax(t) + Bu(t) \]
+      \[ y(t) = Cx(t) \]
+      where the state vector $x(t)$ is $n \times 1$, the input vector $u(t)$ is
+      $p \times 1$, and the output vector $y(t)$ is $q \times 1$. The constant
+      matrices $A, B$, and $C$ are of dimension $n \times n$, $n \times p$,
+      $q \times n$, respectively.
+    uses: []
+    note: >-
+      The source card's text-layer quote has the output vector as "p X 1" and C
+      as "p X n"; the page has $q \times 1$ and $q \times n$.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 200}
+    checked: {by: 'Codex (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: klamka-intro-notation
+    audit_row: S25-R02
+    locator: §Intro, the notation
+    pdf_page: 1
+    book_page: 725
+    label: Introduction (notation list)
+    latex: |
+      Let us denote the following:
+      \begin{tabular}{ll}
+      $\lambda_i$ & distinct eigenvalues of $A$, where $i = 1,2,\cdots,k$, where $k \leq n$ \\
+      $\varphi(\lambda)$ & characteristic polynomial of $A$ \\
+      $\psi(\lambda)$ & minimal polynomial of $A$ \\
+      $n_i$ & multiplicity of $\lambda_i$ in $\varphi(\lambda)$, where $i = 1,2,\cdots,k$, where $k \leq n$ \\
+      $r$ & rank of matrix $B$ \\
+      $m$ & rank of matrix $C$.
+      \end{tabular}
+    uses: [klamka-intro-system]
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 200}
+    checked: {by: 'Codex (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: klamka-intro-index
+    audit_row: S25-R03
+    locator: §Intro, the index
+    pdf_page: 1
+    book_page: 725
+    label: Introduction (the index $\nu_i$)
+    latex: |
+      Now consider $A$ as a linear transformation. Let us denote by
+      $\mathfrak{N}_i^{w}$ the null space of the linear transformation
+      $(A - \lambda_i I)^{w}$, that is,
+      $\mathfrak{N}_i^{w} = \{x \mid (A - \lambda_i I)^{w} x = 0\}$. The index
+      $\nu_i$, $i = 1,2,\cdots,k$, where $k \leq n$, of the eigenvalue $\lambda_i$
+      is the least integer $w$ such that
+      $\mathfrak{N}_i^{w} = \mathfrak{N}_i^{w+1}$. By [4] the multiplicity of
+      eigenvalue $\lambda_i$ in the minimal polynomial of $A$ $\psi(\lambda)$ is
+      equal to its index $\nu_i$ for all $i = 1,2,\cdots,k$, where $k \leq n$.
+    uses: [klamka-intro-notation]
+    note: >-
+      The null-space symbol is a script/fraktur N in the scan, transcribed as
+      \mathfrak{N}. "least integer $w$" carries no stated lower bound (e.g.
+      $w \geq 0$ or $w \geq 1$).
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 200}
+    checked: {by: 'Codex (blind) + Codex (anchored re-read); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: klamka-eq2
+    audit_row: S25-R07
+    locator: eq (2)
+    pdf_page: 2
+    book_page: 726
+    label: equation (2), in the proof of Theorem 1
+    latex: |
+      By [4] the multiplicity of eigenvalue $\lambda_i$ in $\psi(\lambda)$ is equal
+      to its index $\nu_i$, for all $i$. In view of (1), we can write
+      \[ \alpha_i \geqslant \operatorname{int}\left[\frac{n_i}{\nu_i}\right],
+         \qquad \text{for } i = 1,2,\cdots,k. \tag{2} \]
+    context: |
+      Preceded by: "Proof: By [2] it is sufficient to consider the Jordan
+      canonical form of system $S$, $S_J$. By [3], for the dimension $\beta_{ij}$
+      of Jordan block $J_{ij}$ and the index $\nu_i$, the following inequality
+      holds:
+      \[ \beta_{ij} \leqslant \nu_i \neq 0, \qquad \text{for } i = 1,2,\cdots,k;
+         \quad j = 1,2,\cdots,\alpha_i. \tag{1} \]"
+    uses: [klamka-def-int, klamka-def-jordan-form, klamka-intro-index]
+    note: >-
+      Equation (1) is printed as "$\beta_{ij} \leqslant \nu_i \neq 0$" (checked
+      at 300 dpi), a chained relation. Equation (2) uses int (floor), a weaker
+      bound than the ceiling that (5) later gives.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 200}
+    checked: {by: 'Codex (blind) + Codex (anchored re-read); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: klamka-eq5
+    audit_row: S25-R09
+    locator: eq (5)
+    pdf_page: 2
+    book_page: 726
+    label: equation (5), in the proof of Theorem 1
+    latex: |
+      By (2) and the properties of Jordan canonical form, we can write
+      \[ \alpha_i \geqslant \frac{n_i}{\nu_i}, \qquad \text{when } n_i/\nu_i
+         \text{ is an integer number} \tag{3} \]
+      \[ \alpha_i \geqslant \operatorname{int}\left[\frac{n_i}{\nu_i}\right] + 1,
+         \qquad \text{when } n_i/\nu_i \text{ is a fraction.} \tag{4} \]
+      Inequalities (3) and (4) imply the following inequality:
+      \[ \alpha_i \geqslant \operatorname{int}\left[\frac{n_i + \nu_i - 1}{\nu_i}\right]. \tag{5} \]
+    uses: [klamka-def-int, klamka-eq2]
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 200}
+    checked: {by: 'Codex (blind) + Codex (anchored re-read); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: klamka-thm1
+    audit_row: S25-R11
+    locator: Theorem 1
+    pdf_page: 2
+    book_page: 726
+    label: Theorem 1
+    latex: |
+      \emph{Theorem 1}
+
+      If there are $i$ such that
+      \[ \operatorname{int}\left[\frac{n_i + \nu_i - 1}{\nu_i}\right] > r, \]
+      then the system $S$ is uncontrollable.
+    context: |
+      Under the heading "Main Theorems".
+    uses: [klamka-intro-system, klamka-intro-notation, klamka-intro-index, klamka-def-int, klamka-def-jordan-criterion]
+    proof_pages: 2
+    note: >-
+      Theorem text is set upright (not italic) in the scan; only the label is
+      italic. "If there are $i$ such that" is read as "if there is some $i$". The
+      proof's step from $\alpha_i > r$ to dependence rests on (6), see excerpt
+      klamka-thm1-rank-step.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 200}
+    checked: {by: 'Codex (blind) + Grok (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: klamka-cor1
+    audit_row: S25-R12
+    locator: Corollary 1
+    pdf_page: 2
+    book_page: 726
+    label: Corollary 1
+    latex: |
+      \emph{Corollary 1:} If there are $i$ such that
+      \[ \operatorname{int}\left[\frac{n_i + \nu_i - 1}{\nu_i}\right] > p, \]
+      then the system $S$ is uncontrollable.
+    uses: [klamka-intro-system, klamka-thm1]
+    note: No proof printed.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 200}
+    checked: {by: 'Codex (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: klamka-thm2
+    audit_row: S25-R13
+    locator: Theorem 2
+    pdf_page: 2
+    book_page: 726
+    label: Theorem 2
+    latex: |
+      \emph{Theorem 2}
+
+      If there are $i$ such that
+      \[ \operatorname{int}\left[\frac{n_i + \nu_i - 1}{\nu_i}\right] > m, \]
+      then the system $S$ is unobservable.
+
+      \emph{Proof:} It follows by duality.
+    uses: [klamka-intro-system, klamka-intro-notation, klamka-intro-index, klamka-def-int, klamka-def-jordan-criterion]
+    proof_pages: 2
+    note: >-
+      The statement starts at the foot of the left column of p. 726 ("Theorem 2 /
+      If there are i such that") and continues at the top of the right column.
+      The whole printed proof is the one sentence included above.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 200}
+    checked: {by: 'Codex (blind) + Codex (anchored re-read); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: klamka-cor2
+    audit_row: S25-R14
+    locator: Corollary 2
+    pdf_page: 2
+    book_page: 726
+    label: Corollary 2
+    latex: |
+      \emph{Corollary 2:} If there are $i$ such that
+      \[ \operatorname{int}\left[\frac{n_i + \nu_i - 1}{\nu_i}\right] > q, \]
+      then the system $S$ is unobservable.
+    uses: [klamka-intro-system, klamka-thm2]
+    note: No proof printed.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 200}
+    checked: {by: 'Codex (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: klamka-cor3
+    audit_row: S25-R15
+    locator: Corollary 3
+    pdf_page: 2
+    book_page: 726
+    label: Corollary 3
+    latex: |
+      \emph{Corollary 3:} If there are $i$ such that
+      \[ \operatorname{int}\left[\frac{n_i + \nu_i - 1}{\nu_i}\right] > \max\,(r,m), \]
+      then the system $S$ is uncontrollable and unobservable.
+    uses: [klamka-thm1, klamka-thm2]
+    note: No proof printed.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 200}
+    checked: {by: 'Codex (blind) + Grok (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: klamka-cor4
+    audit_row: S25-R16
+    locator: Corollary 4
+    pdf_page: 2
+    book_page: 726
+    label: Corollary 4
+    latex: |
+      \emph{Corollary 4:} If there are $i$ such that
+      \[ \operatorname{int}\left[\frac{n_i + \nu_i - 1}{\nu_i}\right] > \max\,(p,q), \]
+      then the system $S$ is uncontrollable and unobservable.
+    uses: [klamka-cor1, klamka-cor2]
+    note: No proof printed.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 200}
+    checked: {by: 'Codex (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+excerpts:
+  - id: klamka-thm1-rank-step
+    for: [klamka-thm1, klamka-thm2]
+    reason: >-
+      The step of the proof of Theorem 1 that turns (5) and the hypothesis into
+      uncontrollability, through the imported criterion; (6) contains a printed
+      slip: the rank of a product is in general only bounded above by the minimum
+      of the ranks. The intended fact is that $T^{-1}$ is nonsingular, so
+      $\operatorname{rank} G = \operatorname{rank} B = r$, which the printed
+      chain reaches because $\min(n, r) = r$.
+    pdf_page: 2
+    latex: |
+      Since the matrix $T$ is nonsingular, then
+      \[ \operatorname{rank} G = \min\,(\operatorname{rank} T^{-1}, \operatorname{rank} B)
+         = \min\,(n,r) = r. \tag{6} \]
+      If there are $i$ such that
+      \[ \operatorname{int}\left[\frac{n_i + \nu_i - 1}{\nu_i}\right] > r, \tag{7} \]
+      then row vectors $g_{i1}, g_{i2}, \cdots, g_{i\alpha_i}$ are linearly
+      dependent; therefore, system $S$ is uncontrollable. \hfill Q.E.D.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 200}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}

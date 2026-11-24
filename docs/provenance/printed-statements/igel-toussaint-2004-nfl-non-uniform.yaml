@@ -1,0 +1,307 @@
+source:
+  citation: >-
+    Christian Igel and Marc Toussaint, A No-Free-Lunch Theorem for Non-Uniform
+    Distributions of Target Functions, Journal of Mathematical Modelling and
+    Algorithms 3: 313--322, 2004 (Kluwer Academic Publishers).
+  file: igel-toussaint-2004-published-nfl-non-uniform-distributions.pdf
+  sha256: 6117e3515bd66b60a3d3d33939ef479c136708b678a83924696f0e83d520e0e8
+  page_offset: -312
+  standing: |
+    Finite search space and cost-values; $\mathcal{F}$ is all objective functions
+    (§2, p. 314, PDF p. 2): "A finite search space $\mathcal{X}$ and a finite set of
+    cost-values $\mathcal{Y}$ are presumed. Let $\mathcal{F}$ be the set of all
+    objective functions $f\colon \mathcal{X} \to \mathcal{Y}$ to be optimized (also
+    called target, fitness, energy, or cost functions)."
+
+    Cost-values described as ordered in the introduction only (§1, p. 313, PDF
+    p. 1): "where $\mathcal{X}$ denotes the search space and $\mathcal{Y}$ is a set
+    of totally ordered cost-values." The order is not used in any statement below.
+
+    Algorithm class (§2, p. 314, PDF p. 2): see definition it04-def-algorithm
+    (non-repeating black-box search algorithms).
+
+    Deterministic or stochastic algorithms (§2, after Theorem 1, pp. 314--315,
+    PDF pp. 2--3): "This theorem implies that for any two (deterministic or
+    stochastic, cf. [1]) algorithms $a$ and $b$ and any function
+    $f_a \in \mathcal{F}$, there is a function $f_b \in F$ on which $b$ has the
+    same performance as $a$ on $f_a$." The class of algorithms is not otherwise
+    restricted to deterministic ones; no definition of a stochastic algorithm is
+    printed (it is delegated to [1]). Note the printed $f_b \in F$ (italic $F$,
+    not $\mathcal{F}$) in this sentence.
+
+    Uniform averaging (§2, p. 315, PDF p. 3): "Note that the summation in (1)
+    corresponds to uniformly averaging over all functions in $\mathcal{F}$, i.e.,
+    each function has the same probability to be the target function." And
+    (p. 316, PDF p. 4): Theorem 2 "can only be applied if all elements in $F$ have
+    the same probability to be the target function, because the summations average
+    uniformly over $F$."
+
+    Arbitrary distributions (§4, p. 319, PDF p. 7): "Here, we investigate the
+    general case when every function $f \in \mathcal{F}$ has an arbitrary
+    probability $p(f)$ to be the objective function." No further condition on $p$
+    (nonnegativity, normalization) is printed beyond the word "probability".
+
+    Neighbourhood diagonal (§3, p. 318, PDF p. 6): the definition of a
+    neighborhood relation (it04-def-neighborhood) states no condition on
+    $n(x, x)$; the source card records this silence.
+
+definitions:
+  - id: it04-def-algorithm
+    label: non-repeating black-box search algorithm (§2)
+    pdf_page: 2
+    book_page: 314
+    latex: |
+      NFL-theorems are concerned with non-repeating black-box search algorithms
+      (referred to as algorithms) that choose a new exploration point in the search
+      space depending on the history of prior explorations: The sequence
+      $T_m = \langle (x_1, f(x_1)), (x_2, f(x_2)), \ldots, (x_m, f(x_m)) \rangle$
+      represents $m$ pairs of different search points $x_i \in \mathcal{X}$,
+      $\forall i, j\colon x_i \neq x_j$ and their cost-values
+      $f(x_i) \in \mathcal{Y}$. An algorithm $a$ appends a pair
+      $(x_{m+1}, f(x_{m+1}))$ to this sequence by mapping $T_m$ to a new point
+      $x_{m+1}$, $\forall i\colon x_{m+1} \neq x_i$.
+    note: >-
+      "$\forall i, j\colon x_i \neq x_j$" is printed without the restriction
+      $i \neq j$; the intent (distinct points) is clear from "pairs of different
+      search points".
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: it04-def-performance
+    label: cost sequence $Y(f, m, a)$ and performance measure $c$ (§2)
+    pdf_page: 2
+    book_page: 314
+    latex: |
+      We assume that the performance of an algorithm $a$ after $m$ iterations with
+      respect to a function $f$ depends only on the sequence
+      \[ Y(f, m, a) = \langle f(x_1), f(x_2), \ldots, f(x_m) \rangle \]
+      of cost-values the algorithm has produced. Let the function $c$ denote a
+      performance measure mapping sequences of cost-values to the real numbers.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: it04-def-kronecker
+    label: Kronecker function $\delta$ (§2, after Theorem 1)
+    pdf_page: 2
+    book_page: 314
+    latex: |
+      Herein, $\delta$ denotes the Kronecker function ($\delta(i, j) = 1$ if
+      $i = j$, $\delta(i, j) = 0$ otherwise).
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: it04-def-cup
+    label: permutations $\Pi(\mathcal{X})$ and closed under permutation (c.u.p.) (§2)
+    pdf_page: 3
+    book_page: 315
+    latex: |
+      Let $\pi\colon \mathcal{X} \to \mathcal{X}$ be a permutation of
+      $\mathcal{X}$. The set of all permutations of $\mathcal{X}$ is denoted by
+      $\Pi(\mathcal{X})$. A set $F \subseteq \mathcal{F}$ is said to be c.u.p. if
+      for any $\pi \in \Pi(\mathcal{X})$ and any function $f \in F$ the function
+      $f \circ \pi$ is also in $F$.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: it04-def-neighborhood
+    label: neighborhood relation, non-trivial (§3)
+    pdf_page: 6
+    book_page: 318
+    latex: |
+      A neighborhood relation on $\mathcal{X}$ is a symmetric function
+      $n\colon \mathcal{X} \times \mathcal{X} \to \{0, 1\}$. Two elements
+      $x_i, x_j \in \mathcal{X}$ are called neighbors iff $n(x_i, x_j) = 1$. A
+      neighborhood relation is called non-trivial iff
+      $\exists x_i, x_j \in \mathcal{X}\colon x_i \neq x_j \wedge n(x_i, x_j) = 1$
+      and
+      $\exists x_k, x_l \in \mathcal{X}\colon x_k \neq x_l \wedge n(x_k, x_l) = 0$.
+      There are only two trivial neighborhood relations, either every two points
+      are neighbored or no points are neighbored.
+    note: >-
+      No condition on the diagonal $n(x, x)$ is stated; read literally, the
+      definition admits more than the "only two trivial" relations the last
+      sentence names (each of those two can carry any diagonal).
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: it04-def-histogram
+    label: $\mathcal{Y}$-histogram, $h$-equivalence, basis class (§4)
+    pdf_page: 7
+    book_page: 319
+    latex: |
+      A $\mathcal{Y}$-\emph{histogram} (\emph{histogram} for short) is a mapping
+      $h\colon \mathcal{Y} \to \mathbb{N}_0$ such that
+      $\sum_{y \in \mathcal{Y}} h(y) = |\mathcal{X}|$. The set of all histograms is
+      denoted $\mathcal{H}$. Any function $f\colon \mathcal{X} \to \mathcal{Y}$
+      implies the histogram $h_f(y) = |f^{-1}(y)|$ that counts the number of
+      elements in $\mathcal{X}$ that are mapped to the same value
+      $y \in \mathcal{Y}$ by $f$. Herein, $f^{-1}(y)$ returns the preimage
+      $\{x \mid f(x) = y\}$ of $y$ under $f$. Further, two functions $f, g$ are
+      called \emph{$h$-equivalent} iff they have the same histogram. The
+      corresponding $h$-equivalence class $B_h \subseteq \mathcal{F}$ containing
+      all functions with histogram $h$ is termed a \emph{basis class}.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+excerpts: []
+
+statements:
+  - id: it04-thm-1
+    audit_row: S04-R01
+    locator: IT Thm 1
+    pdf_page: 2
+    book_page: 314
+    label: Theorem 1 (NFL-theorem [15])
+    latex: |
+      THEOREM 1 (NFL-theorem [15]). \emph{For any two algorithms $a$ and $b$, any
+      $k \in \mathbb{R}$, any $m \in \{1, \ldots, |\mathcal{X}|\}$, and any
+      performance measure $c$}
+      \[ \sum_{f \in \mathcal{F}} \delta(k, c(Y(f, m, a)))
+         = \sum_{f \in \mathcal{F}} \delta(k, c(Y(f, m, b))). \tag{1} \]
+    context: |
+      Introduced by: "Using these definitions, the original NFL-theorem for
+      optimization reads:". Followed (pp. 314--315) by: "Proofs can be found in
+      [14, 15, 8]. This theorem implies that for any two (deterministic or
+      stochastic, cf. [1]) algorithms $a$ and $b$ and any function
+      $f_a \in \mathcal{F}$, there is a function $f_b \in F$ on which $b$ has the
+      same performance as $a$ on $f_a$."
+    uses: [it04-def-algorithm, it04-def-performance, it04-def-kronecker]
+    proof_pages: null
+    note: >-
+      No proof in this paper ("Proofs can be found in [14, 15, 8]"). The
+      "(deterministic or stochastic, cf. [1])" qualifier is in the sentence after
+      the theorem, not in the theorem; it prints $f_b \in F$ with italic $F$, where
+      $\mathcal{F}$ is expected.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: it04-thm-2
+    audit_row: S04-R02
+    locator: IT Thm 2
+    pdf_page: 3
+    book_page: 315
+    label: Theorem 2 (sharpened NFL-theorem [10, 11])
+    latex: |
+      THEOREM 2 (sharpened NFL-theorem [10, 11]). \emph{If and only if $F$ is
+      c.u.p., then for any two algorithms $a$ and $b$, any $k \in \mathbb{R}$, any
+      $m \in \{1, \ldots, |\mathcal{X}|\}$, and any performance measure $c$}
+      \[ \sum_{f \in F} \delta(k, c(Y(f, m, a)))
+         = \sum_{f \in F} \delta(k, c(Y(f, m, b))). \tag{2} \]
+    context: |
+      Introduced by: "In [10, 11] it is proven:". $F \subseteq \mathcal{F}$ from
+      the c.u.p. definition just above.
+    uses: [it04-def-algorithm, it04-def-performance, it04-def-kronecker, it04-def-cup]
+    proof_pages: null
+    note: >-
+      No proof in this paper (proven in [10, 11]).
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: it04-thm-5
+    audit_row: S04-R03
+    locator: IT Thm 5
+    pdf_page: 8
+    book_page: 320
+    label: Theorem 5 (non-uniform sharpened NFL)
+    latex: |
+      THEOREM 5 (non-uniform sharpened NFL). \emph{If and only if for all
+      histograms $h$}
+      \[ f, g \in B_h \Rightarrow p(f) = p(g), \tag{10} \]
+      \emph{then for any two algorithms $a$ and $b$, any value $k \in \mathbb{R}$,
+      any $m \in \{1, \ldots, |\mathcal{X}|\}$, and any performance measure $c$}
+      \[ \sum_{f \in \mathcal{F}} p(f)\, \delta(k, c(Y(f, m, a)))
+         = \sum_{f \in \mathcal{F}} p(f)\, \delta(k, c(Y(f, m, b))). \tag{11} \]
+    uses: [it04-def-algorithm, it04-def-performance, it04-def-kronecker, it04-def-histogram]
+    proof_pages: 8-9
+    note: >-
+      $p$ is introduced in §4 (p. 319) as "an arbitrary probability $p(f)$"; see
+      source.standing. The sufficiency proof (12)--(15) invokes Theorem 2 on each
+      basis class; the necessity proof (16)--(19) uses deterministic fixed-order
+      enumerations $a$, $b$ at $m = n = |\mathcal{X}|$, $k = 1$.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: it04-lemma-1
+    audit_row: S04-R04
+    locator: IT Lemma 1(1)+(2)
+    pdf_page: 8
+    book_page: 320
+    label: Lemma 1 ([6])
+    latex: |
+      LEMMA 1 ([6]). (1) \emph{Any subset $F \subseteq \mathcal{F}$ that is c.u.p.
+      is uniquely defined by a union of pairwise disjoint basis classes.}
+
+      (2) \emph{$B_h$ is equal to the permutation orbit of any function $f$ with
+      histogram $h$, i.e., for all $f$}
+      \[ B_{h_f} = \bigcup_{\pi \in \Pi(\mathcal{X})} \{ f \circ \pi \}. \tag{9} \]
+    uses: [it04-def-cup, it04-def-histogram]
+    proof_pages: null
+    note: >-
+      No proof in this paper ("A proof is given in [6].").
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: it04-thm-3-count
+    audit_row: S04-R09
+    locator: IT Thm 3, count
+    pdf_page: 5
+    book_page: 317
+    label: Theorem 3 ([6]), first display
+    latex: |
+      THEOREM 3 ([6]). \emph{The number of non-empty subsets of
+      $\mathcal{Y}^{\mathcal{X}}$ that are c.u.p. is given by}
+      \[ 2^{\binom{|\mathcal{X}| + |\mathcal{Y}| - 1}{|\mathcal{X}|}} - 1 \tag{4} \]
+    uses: [it04-def-cup]
+    proof_pages: null
+    note: >-
+      No proof in this paper ("A proof (using Lemma 1 quoted in Section 4) is given
+      in [6]."). $\mathcal{Y}^{\mathcal{X}}$ is not separately defined; the text
+      uses $\mathcal{F}$ for the same set (p. 316: "There exist
+      $2^{(|\mathcal{Y}|^{|\mathcal{X}|})} - 1$ non-empty subsets of
+      $\mathcal{F}$"). Read at 250 dpi to confirm the exponents.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 250}
+    checked: {by: 'Codex (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: it04-thm-3-fraction
+    audit_row: S04-R10
+    locator: IT Thm 3, fraction
+    pdf_page: 5
+    book_page: 317
+    label: Theorem 3 ([6]), second display
+    latex: |
+      \emph{and therefore the fraction of non-empty subsets c.u.p. is given by}
+      \[ \Bigl( 2^{\binom{|\mathcal{X}| + |\mathcal{Y}| - 1}{|\mathcal{X}|}} - 1
+         \Bigr) \Big/ \bigl( 2^{(|\mathcal{Y}|^{|\mathcal{X}|})} - 1 \bigr). \tag{5} \]
+    context: |
+      Continues Theorem 3 directly after (4) (it04-thm-3-count). The asymptotic
+      claim ("(5) converges to zero double exponentially fast with increasing
+      $|\mathcal{X}|$ (for $|\mathcal{Y}| > e|\mathcal{X}|/(|\mathcal{X}| - e)$
+      ...)") is in the following prose, not in Theorem 3.
+    uses: [it04-def-cup, it04-thm-3-count]
+    proof_pages: null
+    note: >-
+      No proof in this paper (given in [6]). Read at 250 dpi to confirm the
+      exponents.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 250}
+    checked: {by: 'Codex (blind) + Codex (anchored re-read); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: it04-thm-4
+    audit_row: S04-R12
+    locator: IT Thm 4
+    pdf_page: 6
+    book_page: 318
+    label: Theorem 4 ([6])
+    latex: |
+      THEOREM 4 ([6]). \emph{A non-trivial neighborhood relation on $\mathcal{X}$
+      is not invariant under permutations of $\mathcal{X}$, i.e.,}
+      \[ \exists x_i, x_j \in \mathcal{X}, \pi \in \Pi(\mathcal{X})\colon\quad
+         n(x_i, x_j) \neq n(\pi(x_i), \pi(x_j)). \tag{6} \]
+    context: |
+      Introduced by: "It holds:", directly after the neighborhood definition.
+    uses: [it04-def-neighborhood, it04-def-cup]
+    proof_pages: null
+    note: >-
+      No proof in this paper; the theorem is attributed to [6] and no proof
+      appears in the text.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}

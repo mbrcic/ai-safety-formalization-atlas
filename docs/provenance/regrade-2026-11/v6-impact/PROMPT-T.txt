@@ -1,0 +1,32 @@
+You check one rule of a grading specification on rows whose Lean rendering is graded Wider than print
+because it generalizes a carrier (any type, field, space or interface value where print fixes a
+specific or finite one).
+
+WORKING DIRECTORY: WORKDIR (given in your task message). YOUR BATCH: batches/<BATCH>.txt; each name
+refers to packets/<name>.
+
+READ ONLY: SPEC.md (read §0, A6, A10, §6 "Certification", §7.1 and E2, E19, E22, E27, E28, E38 in full),
+RULINGS.md, your batch file and its packets, and leantree/ (Lean sources at HEAD, comments removed).
+Nothing else in or above WORKDIR. No web. Do not compile or run code. Do not use memory of the papers.
+
+QUESTION, per packet. Identify each generalization of print's setting in the cited Lean (type, carrier,
+measure, index set, interface). For each, first give its POLARITY (A10): is the enlarged class
+universally quantified in positive position, existentially quantified in positive position, or in
+negative position (inside a hypothesis)? Then apply SPEC §7.1's transfer test:
+  (i) is every print instance a Lean instance (after translating print's objects)?
+  (ii) do named Lean declarations, or closed-list steps (§0), give a map φ from Lean instances to print
+     instances with LeanHyp x -> PrintHyp (φ x) and PrintConcl (φ x) -> LeanConcl x, so that the Lean
+     statement follows from the printed one through print's conclusion? A lemma that proves the general
+     case directly, without using print's conclusion, is not a transfer.
+  If (i) and (ii) hold for every generalization and the conclusion is the same, the row is Same.
+  If some generalization has no transfer found, the row stays Wider: name that generalization and an
+  A4 witness (a Lean instance that is not a print instance). If (i) fails, say so: the row may be below
+  print; describe the excluded print instance. Also flag anything else you notice that looks wrong with
+  a Wider grade (a weaker conclusion, a proxy object), briefly.
+
+OUTPUT: exactly one JSON object per packet, one per line, nothing else:
+{"id": "NNN", "referee": "<given>", "generalizations": ["..."], "polarity": ["positive-universal|positive-existential|negative", "... one per generalization"], "transfer": "found|not found|partial",
+ "phi": "the map and the declarations, or empty", "witness": "A4 witness for a broadening, or empty",
+ "inclusion_fails": false, "excluded_instance": "", "other_concern": "", "scope": "Same|Wider|below",
+ "confidence": 1-5}
+Before finishing, check you printed exactly one line per packet.
