@@ -1,8 +1,8 @@
 {
   "counts": {
     "declarations": 379,
-    "examples_only": 322,
-    "load_bearing": 57,
+    "examples_only": 319,
+    "load_bearing": 60,
     "no_consumer": 0
   },
   "declarations": {
@@ -132,11 +132,12 @@
     },
     "AISafetyAtlas.Causal.eq_family_of_isCausalBayesNetwork": {
       "consumers": [
+        "AISafetyAtlas.Causal.DiscreteMarginal",
         "AISafetyAtlas.Examples.Causal.BayesianNetwork",
         "AISafetyAtlas.Examples.Registry"
       ],
       "origin": "LAND-CAUSAL-PEARLCBN-001",
-      "tier": "examples-only"
+      "tier": "load-bearing"
     },
     "AISafetyAtlas.Causal.exists_behaviorEq_pair_of_not_knowable": {
       "consumers": [
@@ -315,6 +316,7 @@
         "AISafetyAtlas.Examples.HaltingExample",
         "AISafetyAtlas.Examples.PublicAPI",
         "AISafetyAtlas.Examples.Registry",
+        "AISafetyAtlas.Examples.Verification.AgentBehavior",
         "AISafetyAtlas.Verification.Containment",
         "AISafetyAtlas.Verification.Robot"
       ],
@@ -706,6 +708,7 @@
     "AISafetyAtlas.Decision.vPiBdd_eq_vPi": {
       "consumers": [
         "AISafetyAtlas.Examples.Decision.BoundedValue",
+        "AISafetyAtlas.Examples.Preference.Discounted",
         "AISafetyAtlas.Examples.Registry"
       ],
       "origin": "LAND-BELLMAN-BDD-001",
@@ -1241,10 +1244,11 @@
     "AISafetyAtlas.InformationTheory.isMarkovChain_iff_measure_factorizes_singleton": {
       "consumers": [
         "AISafetyAtlas.Examples.InformationTheory.DataProcessing",
-        "AISafetyAtlas.Examples.Registry"
+        "AISafetyAtlas.Examples.Registry",
+        "AISafetyAtlas.InformationTheory.MutualInfoKL"
       ],
       "origin": "LAND-DPI-001",
-      "tier": "examples-only"
+      "tier": "load-bearing"
     },
     "AISafetyAtlas.InformationTheory.measure_factorizes_of_isMarkovChain": {
       "consumers": [
@@ -1497,6 +1501,7 @@
     },
     "AISafetyAtlas.Knowledge.Embedded.no_meshing_inference_measures_all_states": {
       "consumers": [
+        "AISafetyAtlas.Examples.Knowledge.Embedded",
         "AISafetyAtlas.Examples.NonVacuity",
         "AISafetyAtlas.Examples.Registry",
         "AISafetyAtlas.Knowledge.Embedded.Composition",
@@ -2323,10 +2328,12 @@
     "AISafetyAtlas.Preference.behaviour_le_of_evaluatesTo": {
       "consumers": [
         "AISafetyAtlas.Examples.Preference.Complexity",
-        "AISafetyAtlas.Examples.Registry"
+        "AISafetyAtlas.Examples.Registry",
+        "AISafetyAtlas.Preference.DescribedComplexity",
+        "AISafetyAtlas.Preference.RationalComplexity"
       ],
       "origin": "BY-011",
-      "tier": "examples-only"
+      "tier": "load-bearing"
     },
     "AISafetyAtlas.Preference.consistent_rewards_eq_univ": {
       "consumers": [
@@ -2893,7 +2900,8 @@
     "AISafetyAtlas.Verification.AgentBehavior.no_behavioral_safety_verifier": {
       "consumers": [
         "AISafetyAtlas.Examples.PublicAPI",
-        "AISafetyAtlas.Examples.Registry"
+        "AISafetyAtlas.Examples.Registry",
+        "AISafetyAtlas.Examples.Verification.AgentBehavior"
       ],
       "origin": "LAND-VERIF-AGENTBEHAVIOR-001",
       "tier": "examples-only"
@@ -3060,7 +3068,6 @@
     "AISafetyAtlas.Causal.SCM.eval_eq_f",
     "AISafetyAtlas.Causal.SCM.exoJoint_mul_prod",
     "AISafetyAtlas.Causal.behaviorEq_iff_behavior_eq",
-    "AISafetyAtlas.Causal.eq_family_of_isCausalBayesNetwork",
     "AISafetyAtlas.Causal.exists_behaviorEq_pair_of_not_knowable",
     "AISafetyAtlas.Causal.inIdentifiedSet_zero_of_behaviorEq",
     "AISafetyAtlas.Causal.modelError_eq_zero_iff",
@@ -3175,7 +3182,6 @@
     "AISafetyAtlas.InformationTheory.fano_of_log_le",
     "AISafetyAtlas.InformationTheory.fano_unrestricted",
     "AISafetyAtlas.InformationTheory.isMarkovChain_iff_measure_factorizes",
-    "AISafetyAtlas.InformationTheory.isMarkovChain_iff_measure_factorizes_singleton",
     "AISafetyAtlas.InformationTheory.measure_factorizes_of_isMarkovChain",
     "AISafetyAtlas.InformationTheory.mutualInfo_comp_le",
     "AISafetyAtlas.InformationTheory.mutualInfo_eq_iff_isMarkovChain",
@@ -3286,7 +3292,6 @@
     "AISafetyAtlas.Preference.Source.ReasonableForF.proposition_eight",
     "AISafetyAtlas.Preference.Source.ReasonableForF.proposition_seven",
     "AISafetyAtlas.Preference.Source.ReasonableForF.theorem_two_conditional",
-    "AISafetyAtlas.Preference.behaviour_le_of_evaluatesTo",
     "AISafetyAtlas.Preference.consistent_rewards_eq_univ",
     "AISafetyAtlas.Preference.consistent_rewards_of_trajectory_eq_univ",
     "AISafetyAtlas.Preference.degenerate_explanation_cheap",

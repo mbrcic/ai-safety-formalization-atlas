@@ -56,12 +56,16 @@ Pauly's Theorem 3.2 is a characterisation: *an effectivity function is playable
 iff it is the effectivity function of some strategic game.* `effectivity_playable`
 below is the direction his proof dismisses in one sentence -- "one can easily
 check that the effectivity function of any strategic game satisfies the five
-properties mentioned". **The converse is the content, and it is false.**
+properties mentioned". **The converse is the content, and it is false at an
+arbitrary outcome set.**
 `AISafetyAtlas.Sovereignty.PlayableConverse` carries the witness, which is Goranko,
 Jamroga and Turrini's published counterexample and not this atlas's -- the cofinite
 filter on the natural numbers is a playable effectivity function on one player
 that no game form has -- and the four parts of the construction, which is built
 there and proved to give `E_G = E` at every coalition except the two ends.
+At a finite outcome set the converse holds, by a different game:
+`AISafetyAtlas.Sovereignty.Playable.exists_gameForm_of_finite` in
+`AISafetyAtlas.Sovereignty.TrulyPlayableRepresentation`.
 
 His construction on page 153 has four moving parts. All four are now built, parts
 2 and 3 here and parts 1 and 4 in `PlayableConverse`:

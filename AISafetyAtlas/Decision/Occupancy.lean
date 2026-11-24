@@ -64,10 +64,11 @@ hypothesis goes where it is used.
   no theorem connects, which `docs/agent/policy/lean-parsimony.md` allows only
   with the reason recorded — this is the reason, and section 26 of
   `docs/provenance/source-coverage-audit.md` carries the cost.
-* **That `stateDist` is the state marginal of `AISafetyAtlas.Decision.MDP.run`.**
-  `run` takes a single start state and a history-dependent policy; the stationary
-  chain here is its specialization along `obs = id` at a policy that reads only
-  the last observation. Also costed in section 26.
+* ~~That `stateDist` is the state marginal of `AISafetyAtlas.Decision.MDP.run`.~~
+  Proved in `AISafetyAtlas.Decision.OccupancyHistory`, which defines print's visit
+  counts at non-stationary policies along `run` (from `I`, with `obs = id`) and shows
+  in `histVisitCount_ofStationary` that at a policy reading only the current state
+  they are `visitCount` here.
 -/
 
 namespace AISafetyAtlas.Decision

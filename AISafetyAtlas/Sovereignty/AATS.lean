@@ -76,10 +76,16 @@ every printed statement about `⟪η : C⟫φ` is an instance. Nothing below ins
 `φ`, which is why the generalisation is free — and it is what lets this module
 render §4 without building a temporal logic.
 
+## Permission and obligation, §5
+
+`Perm` and `Oblig` are print's `P_η` and `O_η`, `perm_of_le` is Proposition 3(2),
+and print's page-410 chain `A φ → O_η φ → P_η φ → E φ` is
+`oblig_of_sat_bot_empty`, `perm_of_oblig` and `sat_bot_of_respectsNature`.
+
 ## What is not here
 
-Print's `P_η` and `O_η` (§5), Propositions 3(2) and 3(3), Proposition 4, and the
-`⊔`/`⊓` lattice of Proposition 1. Section 27 costs each.
+Proposition 3(3), Proposition 4, and the `⊔`/`⊓` lattice of Proposition 1.
+Section 27 costs each.
 -/
 
 namespace AISafetyAtlas.Sovereignty
@@ -194,6 +200,23 @@ public theorem comp_univ_subsingleton (σ : S.Profile Set.univ) (q : Q) :
   | zero => rw [hl0, hm0]
   | succ n ih =>
       exact S.out_univ_subsingleton σ (l n) (hl n) (ih ▸ hm n)
+
+/-- **And the grand coalition always has a computation**: `out_univ_nonempty`
+chosen at each step. With `comp_univ_subsingleton` this is print's remark that
+`comp(σ_Ag, q)` is a singleton. -/
+public theorem comp_univ_nonempty (σ : S.Profile Set.univ) (q : Q) :
+    (S.comp σ q).Nonempty := by
+  let l : ℕ → Q := fun n => Nat.rec q (fun _ p => (S.out_univ_nonempty σ p).some) n
+  exact ⟨l, rfl, fun u => (S.out_univ_nonempty σ (l u)).some_mem⟩
+
+/-- **Every computation of a profile is a computation of the empty coalition's
+profile**: the empty coalition fixes no component of the joint action. -/
+public theorem comp_subset_comp_empty {C : Set Ag} (σ : S.Profile C)
+    (σ₀ : S.Profile (∅ : Set Ag)) (q : Q) : S.comp σ q ⊆ S.comp σ₀ q := by
+  rintro l ⟨hl0, hl⟩
+  refine ⟨hl0, fun u => ?_⟩
+  obtain ⟨j, -, hj⟩ := hl u
+  exact ⟨j, fun i => absurd i.2 (Set.notMem_empty _), hj⟩
 
 end AATS
 
@@ -428,13 +451,71 @@ public theorem perm_union_of_left {η : Norm Q Ag Ac} {P P' : Set (ℕ → Q)} {
     (hperm : S.Perm η P q) : S.Perm η (P ∪ P') q :=
   S.perm_mono Set.subset_union_left hperm
 
+/-! ### Print's chain of implications, page 410
+
+> `⊨ (A φ → O_η φ)`, `⊨ (O_η φ → P_η φ)`, `⊨ (P_η φ → E φ)`, *"where `η` is an
+> arbitrary non-trivial normative system"*,
+
+with `A φ ≜ ⟪∅⟫φ`, `E φ ≜ ⟪Ag⟫φ` and `⟪C⟫φ ≜ ⟪η_⊥ : C⟫φ` (page 407). The first
+link is `oblig_of_sat_bot_empty`, the second `perm_of_oblig`, and the third is
+`sat_bot_of_respectsNature` at `C = Set.univ`, since `Perm η` is `Sat η Set.univ`.
+`RespectsNature` is print's standing requirement on every normative system, so it
+is not an added hypothesis.
+-/
+
+/--
+**Print's `⊨ A φ → O_η φ`** (page 410): what is naturally inevitable is obligatory
+in every normative system. `A φ` is `⟪η_⊥ : ∅⟫φ`, which is
+`S.Sat (Norm.bot S) ∅ P q`.
+
+Wider than print: print states the chain for a non-trivial `η`, and this link
+needs neither non-triviality nor `RespectsNature`. A grand-coalition profile has a
+computation (`comp_univ_nonempty`), and that computation is one of the empty
+coalition's (`comp_subset_comp_empty`), so it lies in `φ` and cannot witness
+`P_η ¬φ`.
+-/
+public theorem oblig_of_sat_bot_empty {η : Norm Q Ag Ac} {P : Set (ℕ → Q)} {q : Q}
+    (hA : S.Sat (Norm.bot S) ∅ P q) : S.Oblig η P q := by
+  rintro ⟨σ, -, hσ⟩
+  obtain ⟨σ₀, -, hσ₀⟩ := hA
+  obtain ⟨l, hl⟩ := S.comp_univ_nonempty σ q
+  exact hσ l hl (hσ₀ l (S.comp_subset_comp_empty σ σ₀ q hl))
+
+/--
+**Print's `⊨ O_η φ → P_η φ` for a non-trivial `η`** (page 410).
+
+Non-triviality picks a joint action `η` allows at each state; `RespectsNature`
+makes each of its components available there, so together they form an
+`η`-conformant grand-coalition profile. Its computation from `q` is unique
+(`comp_univ_subsingleton`, `comp_univ_nonempty`), so either it lies in `φ`, giving
+`P_η φ`, or it lies in `¬φ`, giving `P_η ¬φ`, which `O_η φ` excludes.
+`not_perm_top` and `oblig_top` below show that non-triviality cannot be dropped.
+-/
+public theorem perm_of_oblig {η : Norm Q Ag Ac} (hnat : Norm.RespectsNature S η)
+    (hnt : Norm.IsNontrivial η) {P : Set (ℕ → Q)} {q : Q} (hob : S.Oblig η P q) :
+    S.Perm η P q := by
+  classical
+  have hlegal : ∀ (q' : Q) (i : Ag) (β : Ac i), q' ∉ η i β → β ∈ S.options i q' := by
+    intro q' i β hβ
+    by_contra hprec
+    exact hβ (hnat i β hprec)
+  let σ : S.Profile Set.univ := fun i =>
+    { act := fun q' => (hnt q').choose i.1
+      legal := fun q' => hlegal q' i.1 _ ((hnt q').choose_spec i.1) }
+  have hconf : S.ConfProfile η σ := fun i q' => (hnt q').choose_spec i.1
+  obtain ⟨l, hl⟩ := S.comp_univ_nonempty σ q
+  by_cases hP : l ∈ P
+  · exact ⟨σ, hconf, fun l' hl' => S.comp_univ_subsingleton σ q hl hl' ▸ hP⟩
+  · exact absurd ⟨σ, hconf, fun l' hl' => S.comp_univ_subsingleton σ q hl hl' ▸ hP⟩ hob
+
 /-! ### The top of the lattice, where print's chain breaks
 
 Print's page 410 says the chain `O_η φ → P_η φ` *"does not hold for arbitrary
 normative systems"*, and names `η_⊤` as the counterexample: there `O_η φ` holds
 for every `φ` while `P_η ψ` holds for no `ψ`. Both halves are below, and the
 reason is the same in each: `η_⊤` forbids every action at every state, so no
-strategy conforms to it.
+strategy conforms to it. So `η_⊤` is not non-trivial, which is the hypothesis
+`perm_of_oblig` reads.
 -/
 
 /-- Nothing conforms to `η_⊤`: at any state, the action the strategy picks is

@@ -259,6 +259,75 @@ public theorem gap_maximal (s : Fin 2 → ℝ) (hs : s ∈ feasibleStates budget
   gap_le_of_unmentioned_eq_lowerBound (C := budget) (Ut := proxyUtil)
     monotone_trueUtil unmentioned_at_floor hs hJ
 
+/-! ## Print's setup definitions, at this model -/
+
+/-- The worked path is an `OptimizationSequence` in print's sense: a continuous
+rate function, the integral representation, and feasibility throughout. -/
+public theorem path_optimizationSequence :
+    OptimizationSequence budget floor2 initialState rate path :=
+  ⟨continuous_rate.continuousOn, path_eq_integral, path_feasible⟩
+
+/-- Theorem 1 through the packaged sequence: the same conclusion as
+`unmentioned_at_floor`. -/
+public theorem unmentioned_at_floor_of_optimizationSequence :
+    ∀ k ∉ proxyAttrs, limitState k = floor2 k :=
+  zhuang_hadfield_menell_theorem_one_of_optimizationSequence budget continuous_budget
+    strictMonoCoord_budget floor2 proxyAttrs ⟨0, rfl⟩ proxyUtil continuous_proxyUtil
+    strictMonoCoord_proxyUtil initialState rate path path_optimizationSequence
+    1 isLUB_proxy complete_optimization limitState path_tendsto
+
+/-- The robot's objective at this model reads the first attribute only: it
+scores the limit state `1` and the initial state `0`. -/
+public theorem proxyObjective_limit_initial :
+    proxyObjective proxyAttrs proxyUtil limitState = 1 ∧
+      proxyObjective proxyAttrs proxyUtil initialState = 0 :=
+  ⟨limitState_zero, initialState_zero⟩
+
+/-- **The human's optimum is where the robot started.** `initialState`, all of
+the budget on the unmentioned attribute, maximizes the principal's utility over
+the feasible states, which is the state Theorem 1's optimization drives away
+from. -/
+public theorem initialState_humanOptimal :
+    HumanOptimal budget floor2 trueUtil initialState := by
+  refine ⟨⟨?_, Fin.forall_fin_two.mpr ⟨?_, ?_⟩⟩, fun x hx => ?_⟩
+  · show initialState 0 + initialState 1 - 1 ≤ 0
+    rw [initialState_zero, initialState_one]
+    norm_num
+  · exact le_of_eq initialState_zero.symm
+  · show (0:ℝ) ≤ initialState 1
+    rw [initialState_one]
+    norm_num
+  · obtain ⟨hC, hb⟩ := hx
+    have h0 : (0:ℝ) ≤ x 0 := hb 0
+    have hC' : x 0 + x 1 - 1 ≤ 0 := hC
+    show x 0 + 2 * x 1 ≤ initialState 0 + 2 * initialState 1
+    rw [initialState_zero, initialState_one]
+    linarith
+
+/-- The gap corollary at print's assumptions on the principal's utility,
+continuity and strict monotonicity in each attribute. -/
+public theorem gap_maximal_of_strictMonoCoord (s : Fin 2 → ℝ)
+    (hs : s ∈ feasibleStates budget floor2) (hJ : ∀ j ∈ proxyAttrs, s j = limitState j) :
+    proxyUtil (restrictAttrs proxyAttrs s) - trueUtil s
+      ≤ proxyUtil (restrictAttrs proxyAttrs limitState) - trueUtil limitState :=
+  gap_le_of_unmentioned_eq_lowerBound_of_strictMonoCoord (C := budget) (Ut := proxyUtil)
+    continuous_trueUtil strictMonoCoord_trueUtil unmentioned_at_floor hs hJ
+
+/-- The state hypotheses of `gap_maximal_of_strictMonoCoord` are inhabited. At
+this model the only feasible state carrying the limit state's proxy attribute is
+the limit state itself (the proxy attribute and the budget fix both
+coordinates), so that is where it is applied. -/
+example : proxyUtil (restrictAttrs proxyAttrs limitState) - trueUtil limitState
+      ≤ proxyUtil (restrictAttrs proxyAttrs limitState) - trueUtil limitState := by
+  refine gap_maximal_of_strictMonoCoord limitState
+    ⟨?_, Fin.forall_fin_two.mpr ⟨?_, le_of_eq limitState_one.symm⟩⟩ (fun _ _ => rfl)
+  · show limitState 0 + limitState 1 - 1 ≤ 0
+    rw [limitState_zero, limitState_one]
+    norm_num
+  · show (0:ℝ) ≤ limitState 0
+    rw [limitState_zero]
+    norm_num
+
 /-! ## Why the nonemptiness hypothesis is load-bearing -/
 
 /-- A proxy utility on no attributes at all, which is a constant. -/
@@ -287,5 +356,71 @@ public theorem empty_proxyAttrs_breaks_the_conclusion :
   · show (0:ℝ) ≤ initialState 1
     rw [initialState_one]
     norm_num
+
+/-! ## Complete Optimization in the extended reals
+
+`CompleteOptimization` and `StrongCompleteOptimization` state print's assumption
+with the supremum in `EReal`. The worked model satisfies the stronger one, and
+`zhuang_hadfield_menell_theorem_one_ereal` then gives the same conclusion as
+`unmentioned_at_floor`. A second, one-attribute model shows the predicate
+covering print's other case, a proxy driven to arbitrarily large values. -/
+
+private theorem isGreatest_proxy :
+    IsGreatest ((fun x => proxyUtil (restrictAttrs proxyAttrs x)) ''
+      feasibleStates budget floor2) 1 := by
+  refine ⟨⟨limitState, ⟨?_, Fin.forall_fin_two.mpr ⟨?_, ?_⟩⟩, ?_⟩, isLUB_proxy.1⟩
+  · show limitState 0 + limitState 1 - 1 ≤ 0
+    rw [limitState_zero, limitState_one]
+    norm_num
+  · show (0:ℝ) ≤ limitState 0
+    rw [limitState_zero]
+    norm_num
+  · exact le_of_eq limitState_one.symm
+  · exact limitState_zero
+
+/-- The worked model satisfies print's limit form of Complete Optimization, in
+the extended reals. -/
+public theorem strongCompleteOptimization_path :
+    StrongCompleteOptimization budget floor2 proxyAttrs proxyUtil path := by
+  have hsup : sSup ((fun x => (proxyUtil (restrictAttrs proxyAttrs x) : EReal)) ''
+      feasibleStates budget floor2) = ((1 : ℝ) : EReal) := by
+    have h := (EReal.coe_strictMono.monotone.map_isGreatest isGreatest_proxy).isLUB.sSup_eq
+    rw [← h, Set.image_image]
+  unfold StrongCompleteOptimization
+  rw [hsup]
+  have h := (tendsto_const_nhds (x := (1:ℝ)) (f := (atTop : Filter ℝ))).sub
+    Real.tendsto_exp_neg_atTop_nhds_zero
+  rw [sub_zero] at h
+  exact (continuous_coe_real_ereal.tendsto _).comp (by simpa only [proxy_path] using h)
+
+/-- **Theorem 1 with Complete Optimization in the extended reals, at the worked
+model**: the unmentioned attribute ends at its floor. -/
+public theorem unmentioned_at_floor_ereal : ∀ k ∉ proxyAttrs, limitState k = floor2 k :=
+  zhuang_hadfield_menell_theorem_one_ereal budget continuous_budget strictMonoCoord_budget
+    floor2 proxyAttrs ⟨0, rfl⟩ proxyUtil continuous_proxyUtil strictMonoCoord_proxyUtil
+    initialState rate continuous_rate.continuousOn path path_eq_integral path_feasible
+    strongCompleteOptimization_path.completeOptimization limitState path_tendsto
+
+/-- One attribute, read whole by the proxy. -/
+@[expose] public def wholeProxy : (↥(Set.univ : Set (Fin 1)) → ℝ) → ℝ :=
+  fun x => x ⟨0, trivial⟩
+
+/-- **Print's unbounded case, inhabited.** On the nonnegative half-line, with the
+proxy reading the one attribute and the sequence `s(t) = t`, the proxy is
+unbounded on the feasible set, its supremum is `⊤`, and the sequence drives it
+there: the limit form of Complete Optimization holds with no real least upper
+bound to state it against. -/
+public theorem strongCompleteOptimization_unbounded :
+    StrongCompleteOptimization (fun _ : Fin 1 → ℝ => (-1 : ℝ)) (fun _ => 0) Set.univ
+      wholeProxy (fun t _ => t) := by
+  have hsup : sSup ((fun x => (wholeProxy (restrictAttrs Set.univ x) : EReal)) ''
+      feasibleStates (fun _ : Fin 1 → ℝ => (-1 : ℝ)) (fun _ => 0)) = ⊤ := by
+    refine sSup_eq_top.mpr fun e he => ?_
+    obtain ⟨r, her, -⟩ := EReal.lt_iff_exists_real_btwn.mp he
+    refine ⟨((max r 0 : ℝ) : EReal), ⟨fun _ => max r 0, ⟨by norm_num, fun _ => le_max_right _ _⟩,
+      rfl⟩, her.trans_le (EReal.coe_le_coe_iff.mpr (le_max_left _ _))⟩
+  unfold StrongCompleteOptimization
+  rw [hsup]
+  exact EReal.tendsto_coe_atTop
 
 end AISafetyAtlas.Examples.Goodhart.Overoptimization

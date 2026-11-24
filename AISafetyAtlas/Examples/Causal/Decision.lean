@@ -165,6 +165,18 @@ public theorem high_value_const_sub :
       = high.Δmix skel.gap identityProbMixture.1 :=
   Model.value_const_sub high skel ∅ identityProbMixture
 
+/-- **The same identity at a utility no skeleton carries.** `5` for `true` and
+`-3` for `false` lies outside `[0, 1]`, so `value_const_sub` cannot be applied to
+it without normalising; `valueOfUtility_const_sub` takes it as it is. -/
+public theorem high_valueOfUtility_const_sub :
+    high.valueOfUtility (fun d _ ↦ if d then 5 else -3) ∅ (Policy.const ∅ true)
+        identityProbMixture -
+      high.valueOfUtility (fun d _ ↦ if d then 5 else -3) ∅ (Policy.const ∅ false)
+        identityProbMixture
+      = high.Δmix (fun _ ↦ 8) identityProbMixture.1 := by
+  rw [Model.valueOfUtility_const_sub]
+  norm_num
+
 /-! ## The identified-set relation, at the same two models
 
 `not_inIdentifiedSet_high` is the negative instance this file was built for.
@@ -266,5 +278,10 @@ public theorem high_fibreRep_mem (v : AISafetyAtlas.Causal.Assignment (Fin 2) (b
     ∀ c ∈ (Finset.univ : Finset (Fin 2)),
       AISafetyAtlas.Causal.fibreRep high Finset.univ v c = v c :=
   AISafetyAtlas.Causal.fibreRep_mem high Finset.univ v
+
+/-- `value` is `valueOfUtility` at the skeleton's own utility. -/
+example : high.value skel ∅ (Policy.const ∅ true) identityProbMixture =
+    high.valueOfUtility skel.utility ∅ (Policy.const ∅ true) identityProbMixture :=
+  AISafetyAtlas.Causal.Model.value_eq_valueOfUtility high skel ∅ _ identityProbMixture
 
 end AISafetyAtlas.Examples.Causal

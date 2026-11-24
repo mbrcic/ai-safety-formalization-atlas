@@ -1,0 +1,318 @@
+# Final scope per graded audit row at v0.10.0 (SPEC v6). id: regrade row id; row: audit section-row id;
+# decided_by: v5 regrade source, then v6 adjudication batch(es) and author rulings (RULINGS-PENDING.md).
+id	row	scope	coverage	decided_by
+001	S04-R08	Same	Yes	majority + v6:C04
+002	S20-R41	Wider	Yes	adjudication (Lean transfer withdrawn)
+003	S26-R03	Wider	Yes	majority
+004	S04-R02	Wider	Yes	majority
+005	S11-R13	None	No	fix-w4b+unanimous+pre-release
+006	S19-R10	Same	Yes	majority+adversarial-r3 + v6:A00
+007	S16-R15	Wider	Yes	fix-w2+unanimous
+008	S25-R09	Wider	Yes	majority
+009	S05-R06	Wider	Yes	majority
+010	S11-R03	Wider	Yes	fix-w4+unanimous+adversarial-r3 + v6:C01
+011	S04-R04	Wider	Yes	majority + v6:C06
+012	S08-R07	Wider	Yes	fix-w4b+unanimous+ruling-2026-11-21
+013	S27-R02	Wider	Yes	majority
+014	S22-R08	Same	Yes	majority+adversarial-r3 + v6:A05
+015	S28-R10	Wider	Yes	majority + v6:C01
+016	S20-R24	Wider	Yes	fix-w6+split+adversarial-r3
+017	S01-R02	Same	Yes	majority
+018	S17-R07	Same	Yes	fix-w7+split+wave-7
+019	S22-R01	Same	Yes	majority
+020	S01-R04	Wider	Yes	fix-w3+unanimous
+021	S20-R27	Wider	Yes	fix-w5+split+ruling-2026-11-21
+022	S16-R01	Wider	Yes	majority
+023	S16-R14	Wider	Yes	fix-w3+unanimous
+024	S05-R08	Same	Yes	majority + v6:B00
+025	S19-R12	Wider	Yes	fix-w4+adjudication+ruling-2026-11-21
+026	S05-R02	Wider	Yes	majority + v6:A00
+027	S09-R06	Wider	Yes	majority
+028	S11-R01	Wider	Yes	fix-w4+unanimous+ruling-2026-11-21
+029	S03-R10	Wider	Yes	fix-w3+adjudication+adversarial-r3 + v6:A00
+030	S06-R02	Wider	Yes	majority
+031	S14-R01	Same	Yes	majority+adversarial-r3 + v6:B00
+032	S05-R10	Same	Yes	majority+adversarial-r3
+033	S12-R03	Wider	Yes	majority
+034	S21-R19	Same	Yes	majority + Lean transfer
+035	S15-R06	Wider	Yes	fix-w5+split+ruling-2026-11-21 + v6:C04
+036	S21-R13	Same	Yes	majority + Lean transfer
+037	S19-R06	Same	Yes	majority+adversarial-r3 + v6:A05
+038	S20-R37	Wider	Yes	majority + v6:A00
+039	S23-R01	Wider	Yes	majority
+040	S09-R09	Wider	Yes	majority
+041	S23-R05	Same	Yes	fix-w2+unanimous + Lean transfer
+042	S09-R11	Wider	Yes	fix-w2+unanimous + v6:C06
+043	S26-R05	Wider	Yes	majority + v6:B06
+044	S13-R12	Same	Yes	adjudication + Lean transfer
+045	S02-R05	Same	Yes	fix-w3+unanimous + v6:B00
+046	S09-R14	Wider	Yes	adjudication+repair
+047	S22-R07	Same	Yes	majority + v6:A05
+048	S20-R21	Wider	Yes	fix-w6+split+adversarial-r3 + v6:A00
+049	S28-R08	Same	Yes	fix-w3+unanimous
+050	S26-R01	Wider	Yes	fix-w7+split+wave-7
+051	S17-R03	Same	Yes	adjudication + v6:C01
+052	S12-R07	Wider	Yes	majority
+053	S27-R22	Wider	Yes	majority
+054	S21-R03	Wider	Yes	majority + v6:B06
+055	S27-R13	Wider	Yes	majority
+056	S01-R10	Same	Yes	fix-w3+unanimous
+057	S19-R11	Wider	Yes	fix-w2+adjudication
+058	S19-R03	Same	Yes	majority
+059	S20-R26	Wider	Yes	fix-w6+split+adversarial-r3
+060	S24-R02	Wider	Yes	fix-w6+split+adversarial-r3
+061	S04-R03	Same	Yes	majority + v6:A05
+062	S06-R06	Wider	Yes	adjudication
+063	S08-R01	Wider	Yes	adjudication+adversarial-r3
+064	S06-R09	Wider	Yes	majority+adversarial-r3
+065	S21-R10	Wider	Yes	fix-w6+split+adversarial-r3 + v6:C01
+066	S03-R08	Wider	Yes	adjudication
+067	S16-R02	Wider	Yes	majority
+068	S12-R13	Wider	Yes	majority
+069	S27-R04	Same	Yes	majority + Lean transfer
+070	S02-R08	Wider	Yes	adjudication+rule + v6:A01 + ruling
+071	S25-R15	Wider	Yes	majority+adversarial-r3 + v6:A05
+072	S14-R05	Same	Yes	majority+adversarial-r3 + v6:B00
+073	S13-R01	Wider	Yes	fix-w4b+adjudication+rule+ruling-2026-11-21 + v6:B06,C06
+074	S19-R02	Same	Yes	majority
+075	S20-R07	Wider	Yes	majority
+076	S20-R09	Wider, argued	Yes	fix-w4+adjudication + v6:A01
+077	S27-R03	Wider	Yes	majority
+078	S05-R01	Wider	Yes	majority+adversarial-r3
+079	S21-R11	Wider	Yes	majority
+080	S09-R10	Wider	Yes	fix-w4+unanimous + v6:B06
+081	S23-R02	Same	Yes	majority + Lean transfer
+082	S25-R03	Wider	Yes	majority
+083	S24-R05	Wider	Yes	fix-w6+split+adversarial-r3
+084	S05-R07	Wider	Yes	majority+adversarial-r3 (Lean transfer withdrawn)
+085	S01-R11	Same	Yes	majority
+086	S03-R02	Same	Yes	majority + v6:B00
+087	S11-R04	Wider	Yes	fix-w5+unanimous+ruling-2026-11-21
+088	S11-R06	Same	Yes	adjudication+adversarial-r3 + v6:A06
+089	S04-R06	Same	Yes	fix-w7+split+wave-7 + Lean transfer
+090	S07-R01	Wider	Yes	fix-w4b+adjudication+ruling-2026-11-21 + v6:C01
+091	S17-R04	Wider	Yes	fix-w4b+unanimous+ruling-2026-11-21
+092	S21-R17	Wider	Yes	majority + v6:B06
+093	S21-R08	Same	Yes	fix-w1+unanimous + Lean transfer
+094	S20-R08	Wider	Yes	majority
+095	S13-R05	Wider	Yes	fix-w4+adjudication + v6:C01 + ruling
+096	S01-R09	Same	Yes	fix-w3+unanimous
+097	S24-R04	Wider	Yes	majority
+098	S12-R10	Wider	Yes	majority
+099	S15-R03	Same	Yes	majority+adversarial-r3 + v6:A06
+100	S23-R09	Wider	Yes	majority
+101	S27-R11	Wider	Yes	majority
+102	S22-R16	Same	Yes	adjudication + v6:A01
+103	S21-R16	Same	Yes	fix-w2+unanimous + v6:B01
+104	S23-R11	Same	Yes	majority + Lean transfer
+105	S28-R11	Same	Yes	fix-w2+adjudication
+106	S20-R18	Same	Yes	fix-w6+split+adversarial-r3 + v6:C04
+107	S21-R15	Wider	Yes	majority
+108	S06-R03	Wider	Yes	adjudication + v6:C06
+109	S13-R11	Wider	Yes	fix-w2+adjudication+ruling-2026-11-21
+110	S14-R11	Same	Yes	majority + Lean transfer
+111	S20-R05	Same	Yes	majority + Lean transfer
+112	S21-R06	Same	Yes	fix-w1+unanimous + v6:B01
+113	S08-R08	Wider	Yes	majority+adversarial-r3
+114	S21-R22	Wider	Yes	majority
+115	S15-R02	Same	Yes	fix-w3+unanimous + v6:A06 + ruling
+116	S22-R03	Same	Yes	fix-w4+unanimous
+117	S08-R04	Wider	Yes	fix-w4b+unanimous+ruling-2026-11-21
+118	S17-R09	Same	Yes	fix-w1+unanimous
+119	S12-R14	Wider	Yes	majority
+120	S10-R17	Wider	Yes	fix-w4+unanimous
+121	S10-R03	Wider	Yes	fix-w6+split+adversarial-r3 + v6:C07
+122	S01-R07	Same	Yes	fix-w3+unanimous
+123	S18-R04	Wider	Yes	fix-w2+unanimous + v6:C02 + ruling
+124	S08-R02	Wider	Yes	fix-w4b+adjudication
+125	S05-R14	Wider	Yes	fix-w6+split+adversarial-r3
+126	S04-R14	Same	Yes	majority + Lean transfer
+127	S20-R06	Same	Yes	majority + Lean transfer
+128	S14-R12	Same	Yes	majority
+129	S22-R02	Same	Yes	majority + v6:A01
+130	S13-R03	Wider	Yes	fix-w4+adjudication
+131	S11-R10	Mixed	Partial	fix-w5+split+ruling-2026-11-21 + v6:C04
+132	S12-R11	Wider	Yes	majority
+133	S20-R36	Wider	Yes	fix-w6+split+adversarial-r3 + v6:A01
+134	S27-R12	Wider	Yes	majority
+135	S20-R12	Mixed	Partial	fix-w4b+unanimous+pre-release
+136	S16-R08	Wider	Yes	majority + v6:C05
+137	S02-R06	Same	Yes	fix-w3+adjudication
+138	S21-R09	Same	Yes	fix-w1+unanimous + v6:B01
+139	S21-R21	Same	Yes	fix-w4+unanimous + Lean transfer
+140	S16-R16	Wider	Yes	fix-w3+unanimous
+141	S03-R01	Same	Yes	majority
+142	S25-R13	Same	Yes	majority+adversarial-r3 + v6:A06
+143	S04-R12	Same	Yes	majority + Lean transfer
+144	S27-R09	Wider	Yes	majority
+145	S27-R23	Wider	Yes	majority
+146	S20-R16	Wider	Yes	majority
+147	S25-R14	Wider	Yes	majority+adversarial-r3
+148	S07-R03	Wider, argued	Yes	fix-w3+adjudication + v6:A02
+149	S06-R05	Wider	Yes	fix-w1+unanimous + v6:C05
+150	S16-R12	Wider	Yes	majority
+151	S02-R03	Same	Yes	fix-w3+adjudication
+152	S20-R15	Wider	Yes	fix-w6+split+adversarial-r3
+153	S20-R22	Wider	Yes	fix-w6+split+adversarial-r3
+154	S12-R09	Wider	Yes	majority
+155	S03-R06	Same	Yes	majority + v6:C02
+156	S22-R05	Same	Yes	fix-w1+unanimous + v6:A06 + ruling
+157	S23-R12	Same	Yes	majority + Lean transfer
+158	S01-R03	Wider	Yes	fix-w3+unanimous
+159	S19-R09	Same	Yes	majority + v6:A07
+160	S11-R08	Wider	Yes	fix-w4+unanimous+ruling-2026-11-21
+161	S18-R01	Wider	Yes	adjudication
+162	S16-R04	Wider	Yes	majority
+163	S23-R03	Same	Yes	majority + v6:B01
+164	S13-R08	Wider	Yes	majority + v6:C05 + ruling
+165	S25-R16	Wider	Yes	majority+adversarial-r3
+166	S22-R15	Same	Yes	adjudication + v6:A02
+167	S14-R06	Wider	Yes	majority
+168	S23-R07	Same	Yes	majority + Lean transfer
+169	S16-R17	Wider	Yes	majority + v6:C05
+170	S25-R11	Wider	Yes	majority+adversarial-r3
+171	S13-R07	Same	Yes	fix-w6+split+adversarial-r3 + v6:A02
+172	S26-R06	Wider	Yes	fix-w6+split+adversarial-r3 + v6:A07
+173	S14-R02	Same	Yes	majority+adversarial-r3 + v6:B01
+174	S20-R19	Wider	Yes	fix-w6+split+adversarial-r3
+175	S20-R17	Wider	Yes	majority
+176	S06-R04	Wider	Yes	majority
+177	S09-R08	Wider	Yes	majority
+178	S21-R14	Wider	Yes	majority
+179	S13-R06	Wider	Yes	majority + v6:C06
+180	S16-R09	Wider	Yes	majority+defect-pass+repair
+181	S11-R07	Wider	Yes	adjudication + v6:C02 + ruling
+182	S27-R06	Same	Yes	majority + Lean transfer
+183	S03-R05	Same	Yes	fix-w4b+adjudication+ruling-2026-11-21 + Lean transfer
+184	S26-R04	Wider	Yes	majority+adversarial-r3
+185	S09-R15	Same	Yes	majority + Lean transfer
+186	S20-R34	Wider	Yes	adjudication
+187	S12-R05	Wider	Yes	majority
+188	S04-R05	Wider	Yes	fix-w7+split+wave-7
+189	S06-R08	Wider	Yes	majority
+190	S25-R12	Wider	Yes	majority+adversarial-r3
+191	S20-R02	Wider	Yes	fix-w2+unanimous + v6:A07
+192	S23-R10	Wider	Yes	majority
+193	S20-R39	Wider, argued	Yes	fix-w5+split+ruling-2026-11-21 + v6:A02
+194	S05-R12	Wider	Yes	majority
+195	S14-R09	Same	Yes	majority+adversarial-r3 + v6:A07 + ruling
+196	S02-R09	Wider	Yes	majority
+197	S20-R25	Wider	Yes	majority
+198	S03-R07	Same	Yes	fix-w2+adjudication+ruling-2026-11-21
+199	S27-R01	Wider	Yes	majority
+200	S21-R01	Wider	Yes	majority
+201	S01-R06	Same	Yes	fix-w4+unanimous+ruling-2026-11-21
+202	S11-R05	Wider	Yes	majority
+203	S20-R03	Wider	Yes	majority
+204	S24-R03	Same	Yes	fix-w2+unanimous
+205	S07-R05	Wider	Yes	fix-w7+split+wave-7
+206	S20-R38	Wider	Yes	fix-w6+split+adversarial-r3 + v6:A02
+207	S11-R12	Mixed	Partial	fix-w5b+unanimous+ruling-2026-11-21 + v6:C02
+208	S01-R08	Wider	Yes	fix-w3+unanimous
+209	S20-R35	Wider	Yes	fix-w3+adjudication+rule
+210	S25-R02	Same	Yes	fix-w2+unanimous
+211	S06-R11	Wider	Yes	fix-w2+unanimous + v6:B08
+212	S23-R13	Wider	Yes	majority
+213	S20-R11	Wider	Yes	adjudication + v6:B08
+214	S15-R01	Same	Yes	fix-w2+unanimous+adversarial-r3 + v6:A07 + ruling
+215	S23-R14	Same	Yes	fix-w6+split+adversarial-r3 + v6:C04
+216	S05-R11	Wider	Yes	majority
+217	S04-R07	Same	Yes	majority
+218	S05-R03	Same	Yes	majority
+219	S12-R08	Wider	Yes	majority
+220	S11-R09	Wider	Yes	adjudication+rule+correction + v6:A03
+221	S02-R04	Same	Yes	fix-w3+unanimous
+222	S24-R01	Wider	Yes	fix-w6+split+adversarial-r3
+223	S03-R13	Same	Yes	majority
+224	S28-R13	Wider	Yes	majority+defect-pass+repair + v6:A08
+225	S27-R21	Wider	Yes	majority
+226	S16-R03	Wider	Yes	majority
+227	S19-R04	Same	Yes	majority+adversarial-r3 + v6:C02
+228	S21-R24	Wider	Yes	fix-w6+split+adversarial-r3 + v6:A03
+229	S20-R43	Same	Yes	majority + v6:C02 + ruling
+230	S17-R06	Wider	Yes	fix-w1+unanimous + v6:A08 + ruling
+231	S03-R09	Same	Yes	fix-w1+unanimous + v6:A08
+232	S15-R04	Same	Yes	majority + ruling
+233	S14-R08	Same	Yes	majority+adversarial-r3 + v6:B02
+234	S08-R03	Wider	Yes	majority+adversarial-r3
+235	S20-R29	Wider	Yes	fix-w6+split+adversarial-r3 + v6:A03
+236	S16-R07	Wider	Yes	fix-w2+unanimous
+237	S10-R12	Wider	Yes	fix-w4+unanimous
+238	S12-R12	Wider	Yes	majority
+239	S20-R23	Wider	Yes	fix-w6+split+adversarial-r3
+240	S13-R09	Mixed	Partial	fix-w5b+split+ruling-2026-11-21 + v6:C03
+241	S04-R01	Wider	Yes	majority + v6:A08
+242	S27-R10	Wider	Yes	fix-w2+adjudication
+243	S14-R04	Same	Yes	majority+adversarial-r3 + v6:B02
+244	S09-R07	Wider	Yes	fix-w6+split+adversarial-r3
+245	S04-R13	Same	Yes	majority
+246	S21-R23	Wider	Yes	adjudication+repair + v6:A03
+247	S14-R07	Wider	Yes	majority + v6:B02
+248	S20-R10	Wider	Yes	majority
+249	S16-R13	Same	Yes	fix-w7+split+wave-7 + v6:B02
+250	S22-R04	Same	Yes	majority
+251	S08-R09	Wider	Yes	majority
+252	S04-R09	Same	Yes	majority + v6:A08
+253	S18-R02	Wider	Yes	fix-w2+unanimous+adversarial-r3
+254	S17-R02	Wider	Yes	fix-w4+unanimous + v6:A03,C07 + ruling
+255	S22-R14	Wider	Yes	majority + v6:C03 + ruling
+256	S08-R06	Wider	Yes	majority
+257	S15-R07	Wider	Yes	fix-w1+unanimous
+258	S16-R11	Wider	Yes	majority
+259	S07-R02	Beyond	—	fix-w3+unanimous + v6:A04 + ruling
+260	S14-R03	Wider	Yes	majority+adversarial-r3 + v6:B08
+261	S02-R01	Same	Yes	fix-w3+unanimous + v6:B02
+262	S01-R01	Wider	Yes	majority+adversarial-r3 + v6:B03
+263	S18-R05	Wider	Yes	fix-w3+adjudication+pre-release
+264	S13-R10	Wider	Yes	adjudication
+265	S16-R10	Wider	Yes	fix-w2+unanimous
+266	S23-R08	Wider	Yes	majority
+267	S06-R01	Wider	Yes	adjudication
+268	S12-R27	Wider	Yes	majority
+269	S06-R07	Same	Yes	majority + v6:B03
+270	S18-R03	Wider	Yes	fix-w2+unanimous
+271	S21-R05	Wider	Yes	adjudication+repair + v6:A09
+272	S21-R02	Wider	Yes	majority
+273	S27-R17	Wider	Yes	fix-w2+unanimous
+274	S20-R20	Wider	Yes	fix-w6+split+adversarial-r3
+275	S02-R07	Same	Yes	fix-w3+unanimous
+276	S05-R05	Wider	Yes	majority
+277	S11-R11	Wider, argued	Yes	fix-w3+adjudication+adversarial-r3 + v6:A04,C07 + ruling
+278	S04-R15	Same	Yes	majority
+279	S25-R07	Wider	Yes	majority
+280	S20-R04	Wider	Yes	adjudication+rule
+281	S28-R09	Same	Yes	fix-w3+adjudication + v6:C03 + ruling
+282	S17-R01	Same	Yes	majority + v6:C03
+283	S16-R05	Same	Yes	majority + v6:C05
+284	S19-R05	Same	Yes	fix-w1+adjudication + v6:A04 + ruling
+285	S01-R05	Same	Yes	fix-w3+unanimous
+286	S20-R31	Wider	Yes	fix-w6+split+adversarial-r3
+287	S03-R03	Same	Yes	majority+wave-7
+288	S27-R05	Wider	Yes	majority + v6:B03
+289	S09-R12	Wider	Yes	adjudication+adversarial-r3 + v6:A09
+290	S19-R08	Same	Yes	majority
+291	S21-R12	Wider	Yes	majority
+292	S19-R07	Same	Yes	majority+adversarial-r3 + v6:A09
+293	S07-R04	Wider	Yes	fix-w7+split+wave-7 + v6:C03
+294	S17-R10	Same	Yes	majority
+295	S17-R08	Same	Yes	fix-w2+unanimous + v6:A04
+296	S23-R04	Same	Yes	majority + v6:B03
+297	S08-R19	Wider	Yes	fix-w4b+unanimous+ruling-2026-11-21 + v6:C05
+298	S22-R06	Same	Yes	majority
+299	S25-R01	Same	Yes	adjudication + v6:B03,C07 + ruling
+300	S04-R10	Same	Yes	majority
+301	S08-R05	Wider	Yes	fix-w4b+unanimous+ruling-2026-11-21
+302	S10-R16	Wider	Yes	fix-w4b+unanimous
+303	S23-R06	Wider	Yes	majority
+304	S13-R02	Wider	Yes	fix-w1+adjudication
+305	S03-R04	Wider	Yes	fix-w1+adjudication + v6:C03
+306	S05-R04	Wider	Yes	majority + v6:C06
+307	S11-R02	Wider	Yes	fix-w4b+adjudication+ruling-2026-11-21 + v6:C04
+308	S21-R07	Wider	Yes	fix-w1+unanimous
+309	S09-R13	Wider	Yes	adjudication + v6:A09
+310	S19-R01	Same	Yes	majority
+311	S08-R20	Wider	Yes	fix-w6+split+adversarial-r3
+312	S28-R05	Wider	Yes	majority + v6:C07
+313	S21-R20	Wider	Yes	adjudication + v6:A04
+314	S02-R02	Same	Yes	fix-w5+split+ruling-2026-11-21 + v6:A09 + ruling
+315	S16-R06	Wider	Yes	majority

@@ -3,6 +3,7 @@ module
 public import AISafetyAtlas.Knowledge.Embedded
 public import AISafetyAtlas.Knowledge.Embedded.Composition
 public import AISafetyAtlas.Knowledge.Embedded.Finite
+public import Mathlib.Data.Set.Finite.Range
 
 /-!
 # Breuer's embedded observer, at two bits
@@ -181,5 +182,127 @@ public theorem fourEquiv_not_measuresAllStates :
     (fibreInference (equivalentProductRestriction fourEquiv))
     (show (false : Bool) ≠ true by decide)
     (meshing_fibreInference_of_surjective _ fourEquiv_surjective)
+
+/-! ## §3.4, *A First Attempt*: counting before meshing
+
+Breuer's §3.4 argues by counting, before the meshing condition exists. The
+library's §3.4 statements take no meshing hypothesis, so the witnesses below use
+inference maps that do **not** mesh — the class the §3.5 theorems cannot reach. -/
+
+/-- An apparatus that reports the wrong bit: the reading `b` is taken to mean the
+world `(!b, false)`. A point-map inference that does not mesh. -/
+@[expose] public def swapRead : InferenceMap TwoBits Bool :=
+  InferenceMap.ofFun (fun b => (!b, false))
+
+/-- **`swapRead` does not mesh**: the reading `true` infers a world whose
+apparatus bit is `false`. So the §3.5 results, which assume meshing, say nothing
+about it. -/
+public theorem swapRead_not_meshing : ¬ Meshing readFirst swapRead := by
+  intro hm
+  have h := hm true
+  rw [swapRead, ofFun_infer_singleton] at h
+  simp [readFirst] at h
+
+/-- **Breuer §3.4's finite remark, at a non-meshing map.** Two readings, four
+worlds: no inference map measures every world, meshing or not. -/
+public theorem swapRead_not_measuresAllStates : ¬ MeasuresAllStates swapRead :=
+  AISafetyAtlas.Knowledge.Embedded.Finite.not_measuresAllStates_of_card_lt swapRead
+    (by simp [TwoBits])
+
+/-- **Breuer §3.4: proper inclusion leaves strictly more worlds than readings**,
+at the two-bit model. -/
+public theorem twoBits_card_lt : Fintype.card Bool < Fintype.card TwoBits :=
+  AISafetyAtlas.Knowledge.Embedded.Finite.card_lt_of_properInclusion readFirst
+    readFirst_surjective readFirst_properInclusion
+
+/-- The reading-for-the-world identity map: a surjective point map, so it
+measures every state. -/
+@[expose] public def idRead : InferenceMap Bool Bool := InferenceMap.ofFun id
+
+/-- **The necessary surjection, at a map that measures everything.**
+`exists_surjective_of_measuresAllStates` with its hypothesis discharged. -/
+public theorem idRead_exists_surjective : ∃ f : Bool → Bool, Function.Surjective f :=
+  AISafetyAtlas.Knowledge.Embedded.exists_surjective_of_measuresAllStates idRead
+    (measuresAllStates_ofFun_of_surjective Function.surjective_id)
+
+/-- An inference map that ignores its reading and reports every world. -/
+@[expose] public def blindRead : InferenceMap Bool Bool where
+  infer _ := Set.univ
+  infer_eq_union_singletons := fun U => by
+    obtain ⟨a, ha⟩ := U.2
+    ext s
+    exact ⟨fun _ => ⟨a, ha, trivial⟩, fun _ => trivial⟩
+
+/-- **Breuer §3.4's *"but not sufficient"*.** Readings and worlds are both `Bool`,
+so a surjection from readings onto worlds exists, yet `blindRead` measures no
+world exactly. Sufficiency fails for a given inference map; it cannot fail as
+*"no map measures everything"*, since `idRead` does. -/
+public theorem surjection_not_sufficient :
+    (∃ f : Bool → Bool, Function.Surjective f) ∧ ¬ MeasuresAllStates blindRead := by
+  refine ⟨⟨id, Function.surjective_id⟩, fun hall => ?_⟩
+  obtain ⟨U, hU⟩ := hall true
+  have hfalse : false ∈ blindRead.infer U := trivial
+  rw [hU] at hfalse
+  exact Bool.false_ne_true hfalse
+
+/-! ## Breuer's footnote 4, at `ℕ × Bool`
+
+Countably many readings, two worlds behind each: a bijection between readings and
+worlds exists, and none of them meshes. -/
+
+/-- The apparatus reads the natural-number part; the bit is beyond it. -/
+@[expose] public def readNat : Restriction (ℕ × Bool) ℕ := Prod.fst
+
+/-- Every reading is realized. -/
+public theorem readNat_surjective : Function.Surjective readNat := fun a => ⟨(a, false), rfl⟩
+
+/-- Each reading has two worlds behind it: finitely many. -/
+public theorem readNat_finite_fibres (a : ℕ) : (readNat ⁻¹' {a}).Finite :=
+  (Set.finite_range fun b : Bool => (a, b)).subset fun p hp => ⟨p.2, Prod.ext hp.symm rfl⟩
+
+/-- The bit the apparatus cannot reach. -/
+public theorem readNat_properInclusion : ProperInclusion readNat :=
+  ⟨(0, false), (0, true), rfl, by decide⟩
+
+/-- **Breuer footnote 4, at the model**: a bijection `ℕ ≃ ℕ × Bool` exists, and
+every one of them, read as an inference map, fails meshing at some reading. -/
+public theorem readNat_footnote4 :
+    Nonempty (ℕ ≃ ℕ × Bool) ∧ ∀ e : ℕ ≃ ℕ × Bool, ∃ a : ℕ,
+      Set.image readNat ((InferenceMap.ofFun e).infer (ReadingSet.singleton a)) ≠ {a} :=
+  nonempty_equiv_and_meshing_failure_of_finite_fibres readNat readNat_surjective
+    readNat_finite_fibres readNat_properInclusion
+
+/-- **The §3.4 surjection exists here too, and still no meshing map measures
+everything**: `ℕ` maps onto `ℕ × Bool`, yet proper inclusion rules every meshing
+inference map out (Proposition 1). The necessary condition holds and is not
+sufficient, now at an infinite model and for every meshing map at once. -/
+public theorem readNat_surjection_not_sufficient :
+    (∃ f : ℕ → ℕ × Bool, Function.Surjective f) ∧
+      ∀ M : InferenceMap (ℕ × Bool) ℕ, Meshing readNat M → ¬ MeasuresAllStates M := by
+  obtain ⟨e⟩ := (readNat_footnote4).1
+  exact ⟨⟨e, e.surjective⟩, fun M hm =>
+    no_meshing_inference_measures_all_states readNat M readNat_properInclusion hm⟩
+
+/-- `exists_injective_of_measuresAllStates` at `idRead`, which measures every
+state. -/
+example : ∃ g : Bool → Bool, Function.Injective g :=
+  AISafetyAtlas.Knowledge.Embedded.exists_injective_of_measuresAllStates idRead
+    (AISafetyAtlas.Knowledge.Embedded.Composition.measuresAllStates_ofFun_of_surjective
+      Function.surjective_id)
+
+/-- `nonempty_equiv_of_finite_fibres` at `readNat`: the bijection alone, without
+proper inclusion. -/
+example : Nonempty (ℕ ≃ ℕ × Bool) :=
+  AISafetyAtlas.Knowledge.Embedded.Composition.nonempty_equiv_of_finite_fibres readNat
+    readNat_surjective readNat_finite_fibres
+
+/-- `not_meshing_ofFun_of_surjective` at `readNat`, for any bijection. -/
+example (e : ℕ ≃ ℕ × Bool) : ¬ Meshing readNat (InferenceMap.ofFun e) :=
+  AISafetyAtlas.Knowledge.Embedded.Composition.not_meshing_ofFun_of_surjective readNat
+    readNat_properInclusion e.surjective
+
+/-- A two-state apparatus inside a composite with a one-state rest: restriction is onto. -/
+example : Function.Surjective (Prod.fst : Restriction (Bool × Unit) Bool) :=
+  composite_restrict_surjective
 
 end AISafetyAtlas.Examples.Knowledge.Embedded

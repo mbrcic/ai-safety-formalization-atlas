@@ -18,6 +18,7 @@ public import AISafetyAtlas.Wireheading.SelfMod
 public import AISafetyAtlas.Wireheading.ValueBounds
 public import AISafetyAtlas.Wireheading.Mixture
 public import AISafetyAtlas.Wireheading.ProgramPrior
+public import AISafetyAtlas.Wireheading.ProgramPriorTies
 public import AISafetyAtlas.Wireheading.ValueLearning
 
 /-!

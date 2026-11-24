@@ -23,7 +23,7 @@ mathematics to AI systems.
   for AI safety mathematics*](https://doi.org/10.5281/zenodo.23088951) (preprint,
   2026; DOI for all versions)
 - **Software:** [DOI for all versions](https://doi.org/10.5281/zenodo.21483033);
-  latest release v0.9.0
+  latest release v0.10.0
 - **Start:** [Open in Codespaces](https://codespaces.new/mbrcic/ai-safety-formalization-atlas?quickstart=1)
   — the toolchain provisions itself and one example compiles in minutes — then
   pick a [first task](docs/guide/contributor-tasks.md#open-now). Prefer local?
@@ -56,8 +56,9 @@ row's own grade is never in these numbers. Detail:
 per-source reports under [`docs/status/sources/`](docs/status/sources/).
 <!-- END GENERATED REGISTRY SCOPE -->
 
-Statement coverage of the 28 graded sources is **300 `Yes` / 17 `Partial` / 208
-`No` / 41 `Beyond`**, graded by hand against the printed text in
+Statement coverage of the 28 graded sources is **311 `Yes` / 4 `Partial` / 209
+`No` / 42 `Beyond`**, graded against the printed text under
+[SPEC v6](docs/guide/scope-grading.md) in
 [`source-coverage-audit.md`](docs/provenance/source-coverage-audit.md). Builds
 are reproducible against pinned Lean and Mathlib, and CI checks the axioms of
 every headline declaration. What the atlas does **not** have is counted too:
@@ -225,16 +226,16 @@ table above counts registry rows, not the tree: the working tree pins far more
 public names than it records results. Three ratios a reader is entitled to
 before reading further:
 
-- **Statement coverage of the graded sources: 300 `Yes` / 17 `Partial` / 208
-  `No` / 41 `Beyond`,** across 28 sources. A `No` is a printed statement the
+- **Statement coverage of the graded sources: 311 `Yes` / 4 `Partial` / 209
+  `No` / 42 `Beyond`,** across 28 sources. A `No` is a printed statement the
   atlas does not have. The per-statement grading is
   [`source-coverage-audit.md`](docs/provenance/source-coverage-audit.md).
-- **Scope debt: 4 cells** graded `Narrower` or `Mixed` are owed a closure, a
+- **Scope debt: 5 cells**, four `Mixed` and one `None`, are owed a closure, a
   regrade, an unclosability proof or a cost, and each declares one; 2 more
   record a closure. The
   standing rule is scope ≥ print, so each of those is a defect until discharged.
   `scripts/check_coverage_audit.py` computes both figures.
-- **Witness debt: 3 theorems of 2,686 are ungrounded and 31 reach no worked
+- **Witness debt: 3 theorems of 3,267 are ungrounded and 31 reach no worked
   application** under `AISafetyAtlas/Examples/`. The second is the number that
   says how much of the library the build actually exercises; the first also
   counts a registry citation, and a citation is not built. Two of the three are
@@ -257,12 +258,12 @@ Add it to your `lakefile.toml`. There is no Reservoir entry, so require it by gi
 [[require]]
 name = "ai-safety-formalization-atlas"
 git = "https://github.com/mbrcic/ai-safety-formalization-atlas.git"
-rev = "v0.9.0"
+rev = "v0.10.0"
 ```
 
-`v0.9.0` is the published release and is what that stanza gets you. **The module
+`v0.10.0` is the published release and is what that stanza gets you. **The module
 list below describes the working tree, which is ahead of it** — anything added
-since the tag is not in `v0.9.0`, so check the tag's own module list before
+since the tag is not in `v0.10.0`, so check the tag's own module list before
 depending on a name you read here.
 
 Then `import AISafetyAtlas.Knowledge` (or whichever module below) and instantiate
@@ -360,7 +361,7 @@ human review.
 weakening fidelity. `RELATED` is a useful core with an explicit scope delta; it
 does not by itself mean unfinished, and residual paper gaps remain documented.
 A bridge may be `REVIEWED` while the formalization stays `RELATED` (e.g. robot).
-See the [`v0.9 release non-claims`](docs/releases/v0.9.md#critical-non-claims) and
+See the [`v0.10 release non-claims`](docs/releases/v0.10.md#critical-non-claims) and
 [`docs/guide/methodology.md`](docs/guide/methodology.md).
 
 ## Repository contents

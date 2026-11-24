@@ -563,4 +563,47 @@ not only a proof. -/
 public def nfl_adaptive_probeRule_vs_twoIntoThree (Ψ : (Fin 2 → Fin 2) → ℝ) :=
   nfl_adaptive_probeRule_vs_schedule twoIntoThree Ψ
 
+/-! ## Schumacher–Vose–Whitley's trace theorem at a concrete search operator
+
+A search operator on `Fin 3` that queries the point indexed by the trace length,
+and the transposition of `0` and `1`. The theorem and the bridge to the adaptive
+encoding, at that data. -/
+
+/-- Query the point whose index is the number of points read so far. -/
+@[expose] public def lengthSearch : List (Fin 3 × Bool) → Fin 3 :=
+  fun φ => ⟨φ.length % 3, Nat.mod_lt _ (by norm_num)⟩
+
+/-- The objective: is the point `0`? -/
+@[expose] public def isZero : Fin 3 → Bool := fun x => decide (x = 0)
+
+/-- **The trace theorem at this operator**: the swapped algorithm on `isZero` reads
+the swapped points of the original on the swapped objective. -/
+public theorem lengthSearch_permSearch (n : ℕ) :
+    traceRun (permSearch (Equiv.swap 0 1) lengthSearch) isZero n
+      = traceMapX (Equiv.swap 0 1).symm
+          (traceRun lengthSearch (isZero ∘ (Equiv.swap 0 1).symm) n) :=
+  traceRun_permSearch (Equiv.swap 0 1) lengthSearch isZero n
+
+/-- The swapped algorithm's trace of length two, computed: it reads `1` first, where
+`isZero` is false, then `0`, where it is true. -/
+public theorem lengthSearch_permSearch_two :
+    traceRun (permSearch (Equiv.swap 0 1) lengthSearch) isZero 2
+      = [(1, false), (0, true)] := by
+  simp [traceRun, permSearch, traceMapX, lengthSearch, isZero]
+
+/-- **The bridge at this operator**: replaying what the encoded rule observes gives
+the trace, and print's `σA` is `permRule σ⁻¹` of the encoding. -/
+public theorem lengthSearch_bridge :
+    replay lengthSearch 3 (observed (searchRule 3 lengthSearch) isZero)
+        = traceRun lengthSearch isZero 3 ∧
+      searchRule 3 (permSearch (Equiv.swap 0 1) lengthSearch)
+        = permRule (Equiv.swap 0 1).symm (searchRule 3 lengthSearch) :=
+  ⟨replay_observed lengthSearch isZero, searchRule_permSearch (Equiv.swap 0 1) lengthSearch⟩
+
+/-- The encoded rule visits print's points, at every step. -/
+public theorem lengthSearch_ruleVisit (k : Fin 3) :
+    ruleVisit (searchRule 3 lengthSearch) (observed (searchRule 3 lengthSearch) isZero) k
+      = lengthSearch (traceRun lengthSearch isZero k) :=
+  ruleVisit_searchRule lengthSearch isZero k
+
 end AISafetyAtlas.Examples.Learning

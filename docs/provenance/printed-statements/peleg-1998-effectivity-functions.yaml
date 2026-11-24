@@ -1,0 +1,692 @@
+source:
+  citation: >-
+    Bezalel Peleg, Effectivity functions, game forms, games, and rights.
+    Soc Choice Welfare (1998) 15: 67--80, (c) Springer-Verlag 1998.
+    Received 25 November 1994 / Accepted 28 June 1996 (title page, PDF p. 1).
+    The file name says 1997; the document's own first page says 1998, and the
+    citation follows the document.
+  file: peleg1997.pdf
+  sha256: 99039339aae01cb8e903ebab99e210d2ffdb7945cd9e89247abcdaf02976669a
+  page_offset: -66
+  standing: |
+    Society (§2, p. 68, PDF p. 2): members $N = \{1, \ldots, n\}$, social states $A$
+    "(which may be finite or infinite)", "the (finite) set of \emph{rights}"
+    $\rho = \{\rho_1, \ldots, \rho_l\}$; transcribed in full as definition
+    peleg-def-society.
+
+    Standing assumptions (§2, p. 69, PDF p. 3): "We always assume the following:
+    (1) $\alpha(\emptyset) = \emptyset$, and (2) $\gamma(\emptyset, \theta) =
+    \gamma(S, \emptyset) = \{A\}$ for all $\theta \subset \rho$ and $S \subset N$.
+    (1) is a convenient agreement. (2) is true if A is the set of \emph{all}
+    possible social states."
+
+    Singleton convention (Example 2.3, p. 69, PDF p. 3): "(Henceforth, we shall
+    denote a singleton $\{a\}$ by $a$.)"; transcribed as definition
+    peleg-def-singleton. It is why $E(\emptyset) = A$ (p. 72) and
+    $\gamma(S, \emptyset) = A$ (Examples 2.3, 2.7) are printed for $\{A\}$.
+
+    (3.5) usually assumed (§3, p. 72, PDF p. 6): "Nevertheless, we consider such
+    conflicts as being ``marginal'', and we shall usually assume (3.5)."
+
+    Legal game forms only (§3, p. 73, PDF p. 7): "Henceforth, we shall only
+    consider legal GFs. Moreover, we shall assume that also coalitions cannot
+    break the law (by coordination of strategies)."; transcribed with its
+    paragraph as definition peleg-def-legal.
+
+    Surjectivity of $g$ (Definition 3.3, p. 73, PDF p. 7): "Now assume that $g$ is
+    surjective (onto $A$)"; part of statement peleg-def-3.3-alpha-ef (row S21-R20)
+    and separately row S21-R21.
+
+    Silent (source card S21): no finiteness or cardinality restriction on the
+    strategy sets $\Sigma^i$ is stated; only non-emptiness is required
+    (Definition 3.2). Pages searched by the card: PDF 2--8, 13--14. The appendix
+    (p. 79, PDF p. 13) states for Theorem 3.5*: "$N = \{1, \ldots, n\}$,
+    $n \ge 2$ [\ldots] $A$ may be finite or infinite. However, $|A| \ge 2$ if $A$
+    is finite."
+
+definitions:
+  - id: peleg-def-society
+    label: Definition (society), §2
+    pdf_page: 2
+    book_page: 68
+    latex: |
+      A \emph{society}, $\mathscr{S}$ is a list $\langle N, A, \rho, \alpha, \gamma \rangle$ where:
+      (i) $N = \{1, \ldots, n\}$ is the set of \emph{members} of $\mathscr{S}$.
+      (ii) $A$ is the set of \emph{social states} (which may be finite or infinite).
+      (iii) $\rho = \{\rho_1, \ldots, \rho_l\}$ is the (finite) set of \emph{rights}.
+      (iv) $\alpha : 2^N \to 2^\rho$ is the (current) \emph{assignment} of rights to
+      groups of individuals.
+      (v) $\gamma$, the \emph{access correspondence}, determines the sets of attainable
+      social states by groups of members of $\mathscr{S}$ as a function of their
+      rights. Thus, $\gamma$: $2^N \times 2^\rho \to\to 2^A$. ($\to\to$ denotes a
+      correspondence, i.e., a set-valued function.)
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: peleg-def-singleton
+    label: Notation (singletons), inside Example 2.3
+    pdf_page: 3
+    book_page: 69
+    latex: |
+      (Henceforth, we shall denote a singleton $\{a\}$ by $a$.)
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 200}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: peleg-remark-2.2
+    label: Remark 2.2 (interpretation of the access correspondence)
+    pdf_page: 3
+    book_page: 69
+    latex: |
+      \textbf{Remark 2.2.} The definition of the access correspondence deserves
+      detailed explanation. If $S$ is a coalition (of the members of the society),
+      and $\theta \subset \rho$ is a set of rights, then $\gamma(S, \theta) =
+      \{B_1, \ldots, B_m\}$ has the following interpretation. It is not (legally)
+      excluded that the social outcome is in each of the sets $B_1, \ldots, B_m$
+      separately. For coherent models of rights a stronger interpretation is
+      available (see Section 3).
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: peleg-def-b-plus
+    label: Notation $B^+$, inside Example 2.10
+    pdf_page: 5
+    book_page: 71
+    latex: |
+      For each $B \subset \{0, e, j\}$ let $B^+ = \{\hat{B} \subset \{0, e, j\} |
+      \hat{B} \supset B\}$.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 200}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: peleg-def-ef
+    label: Definition (effectivity function), opening of §3
+    pdf_page: 6
+    book_page: 72
+    latex: |
+      Let $\mathscr{S} = \langle N, A, \rho, \alpha, \gamma \rangle$ be a society. An
+      \emph{effectivity function} (EF) is a correspondence $E$: $2^N \to\to 2^A$ that
+      satisfies the following conditions: (i) $E(\emptyset) = A$;
+      (ii) $E(N) = 2^A \setminus \{\emptyset\}$; (iii) $\emptyset \notin E(S)$ for all
+      $S \subset N$; and (iv) $A \in E(S)$ for all $S \subset N$.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 200}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: peleg-def-legal
+    label: Definition (legal game form), paragraph after Definition 3.2
+    pdf_page: 7
+    book_page: 73
+    latex: |
+      A GF $\Gamma$ is \emph{legal} if for each $i \in N$ every strategy
+      $\sigma^i \in \Sigma^i$ does not contradict the assignment of rights
+      $\alpha(\bullet)$. For example, if Adam has the obligation to support his
+      family, and stealing is forbidden by rule (i.e. by the assignment
+      $\alpha$(Adam)), then Adam cannot support his family by stealing. Henceforth,
+      we shall only consider legal GFs. Moreover, we shall assume that also
+      coalitions cannot break the law (by coordination of strategies).
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 200}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+excerpts:
+  - id: peleg-thm-3.5-star
+    for: [peleg-thm-3.5]
+    reason: >-
+      The audit grades the necessity of condition (i) of Theorem 3.5 as printed
+      (monotonicity of gamma w.r.t. the alternatives, (3.3), at every theta) as
+      refuted. The appendix's generalization, from which the paper says Theorem
+      3.5 follows, states the monotonicity condition on E, not on gamma, i.e. only
+      at the diagonal gamma(S, alpha(S)).
+    pdf_page: 13-14
+    latex: |
+      \textbf{Theorem 3.5*.} \emph{Let $E : 2^N \to\to 2^A$ be an EF that is
+      compatible with $\mathbf{B}$. The following two conditions are equivalent}:
+      (3.8) \emph{$E$ is superadditive and monotonic w.r.t. the alternatives} (i.e.
+      \emph{$S \in 2^N$, $B \in E(S)$, $C \in \mathbf{B}$, and $C \supset B$ imply that
+      $C \in E(S)$}).
+      (3.9) \emph{There exists a GF $\Gamma = \langle N; \Sigma^1, \ldots, \Sigma^n;
+      g; A \rangle$ such that $E_\alpha(S; \Gamma) \cap \mathbf{B} = E(S)$ for all
+      $S \in 2^N$.}
+      [\ldots]
+      Clearly, Theorem 3.5* implies Theorem 3.5.
+    note: The theorem (p. 79, PDF p. 13) and the sentence after its proof (p. 80, PDF p. 14), joined by [\ldots].
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: peleg-offdiagonal-gamma
+    for: [peleg-thm-3.5, peleg-def-3.3-gamma-monotone-alternatives]
+    reason: >-
+      Print's own statement that the off-diagonal values gamma(S, theta), theta not
+      alpha(S), do not enter the analysis at a given date; the audit's refutation of
+      the necessity of (i) rests on it.
+    pdf_page: 4
+    latex: |
+      Moreover, the values $\gamma(S, \theta)$ where $\theta \ne \alpha(S)$ do not
+      enter the analysis of a society at a given date. However, if $\alpha(\bullet)$
+      changes over time, then all the values of $\gamma$ matter.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+statements:
+  - id: peleg-society
+    audit_row: S21-R01
+    locator: §2 society
+    pdf_page: 2
+    book_page: 68
+    label: §2, definition of a society
+    latex: |
+      A \emph{society}, $\mathscr{S}$ is a list $\langle N, A, \rho, \alpha, \gamma \rangle$ where:
+      (i) $N = \{1, \ldots, n\}$ is the set of \emph{members} of $\mathscr{S}$.
+      (ii) $A$ is the set of \emph{social states} (which may be finite or infinite).
+      (iii) $\rho = \{\rho_1, \ldots, \rho_l\}$ is the (finite) set of \emph{rights}.
+      (iv) $\alpha : 2^N \to 2^\rho$ is the (current) \emph{assignment} of rights to
+      groups of individuals.
+      (v) $\gamma$, the \emph{access correspondence}, determines the sets of attainable
+      social states by groups of members of $\mathscr{S}$ as a function of their
+      rights. Thus, $\gamma$: $2^N \times 2^\rho \to\to 2^A$. ($\to\to$ denotes a
+      correspondence, i.e., a set-valued function.)
+    uses: [peleg-def-society]
+    note: >-
+      Same text as definition peleg-def-society, which the other rows cite. The
+      comma after "A society" is printed.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind) + Codex (anchored re-read); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: peleg-standing
+    audit_row: S21-R02
+    locator: §2 standing assumptions
+    pdf_page: 3
+    book_page: 69
+    label: §2, standing assumptions (first paragraph of p. 69)
+    latex: |
+      We always assume the following: (1) $\alpha(\emptyset) = \emptyset$, and (2)
+      $\gamma(\emptyset, \theta) = \gamma(S, \emptyset) = \{A\}$ for all
+      $\theta \subset \rho$ and $S \subset N$. (1) is a convenient agreement. (2) is
+      true if A is the set of \emph{all} possible social states.
+    uses: [peleg-def-society]
+    note: >-
+      Here the singleton is written out as \{A\}; Examples 2.3 and 2.7 later write
+      the same assumption as "= A" under the singleton convention. "A" in the last
+      sentence is printed upright, not italic.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 200}
+    checked: {by: 'Codex (blind) + Grok (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: peleg-def-2.4
+    audit_row: S21-R03
+    locator: Definition 2.4
+    pdf_page: 3
+    book_page: 69
+    label: Definition 2.4
+    latex: |
+      \textbf{Definition 2.4.} Let $\mathscr{S} = \langle N, A, \rho, \alpha, \gamma
+      \rangle$ be a society. The triple $\langle \rho, \alpha, \gamma \rangle$ is
+      called a \emph{constitution}.
+    context: |
+      Followed by: "Thus, a constitution consists of a set of rights, an assignment
+      of rights to groups of members of the society, and a function which specifies
+      for each coalition (of members) its set of attainable (sets of) outcomes."
+    uses: [peleg-def-society]
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind) + Grok (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: peleg-examples-2
+    audit_row: S21-R05
+    locator: §2 examples
+    pdf_page: 3-5
+    book_page: 69-71
+    label: Examples 2.3 (PDF 3), 2.7 (PDF 4), 2.10 (PDF 5)
+    latex: |
+      \textbf{Example 2.3.} Let $\mathscr{S}$ be described in the following way:
+      $N = \{1, 2\}$. Each member $i \in N$ has two shirts, white and blue, and he
+      must wear one of the two. Denoting $w$ for white and $b$ for blue, the set $A$
+      of social states is $A = \{(w, w), (w, b), (b, w), (b, b)\}$ (here, if
+      $(x, y) \in A$ then $x$ is the color of 1's shirt and $y$ is the color of 2's
+      shirt). $\rho = \{\rho_1\}$ where $\rho_1$ is the right to freely choose one's
+      own shirt. (Henceforth, we shall denote a singleton $\{a\}$ by $a$.) $\alpha$ is
+      given by $\alpha(\emptyset) = \emptyset$, $\alpha(1) = \alpha(2) = \alpha(N) =
+      \rho_1$. Finally, $\gamma$ is given by $\gamma(S, \emptyset) = A$ for all
+      $S \subset N$, $\gamma(\emptyset, \rho_1) = A$, $\gamma(1, \rho_1) =
+      \{\{(w, w), (w, b)\}, \{(b, w), (b, b)\}\}$, $\gamma(2, \rho_1) =
+      \{\{(w, w), (b, w)\}, \{(w, b), (b, b)\}\}$, and $\gamma(N, \rho_1, ) =
+      2^A \setminus \{\emptyset\}$.
+
+      [\ldots]
+      \textbf{Example 2.7.} A set $N = \{1, \ldots, n\}$ of workers share the same
+      office. Let $\pi = \{\sigma, \nu\}$ be the set of the following two habits:
+      $\sigma \equiv$ smoker, and $\nu \equiv$ non-smoker. The set of smokers $N_1$ is
+      determined by a function $L : N \to \pi$, that is, $N_1 = \{i \in N | L(i) =
+      \sigma\}$. Thus, $N_2 = \{i \in N | L(i) = \nu\} = N \setminus N_1$. The set A
+      describes the possible states of the air at the office, that is,
+      $A = \{\text{smoky}, \text{clear}\}$. Assume that $\rho$ is a singleton which is
+      the following obligation: ``Refrain from smoking, at the office, in the presence
+      of at least one non-smoker.'' Furthermore, assume that $\alpha$, the assignment
+      of rights, is given by $\alpha(\emptyset) = \emptyset$, and $\alpha(S) = \rho$
+      for all $S \subset N$, $S \ne \emptyset$. If we follow the usual meaning of the
+      foregoing assumptions, then the access function $\gamma$ is given by
+      \[ \gamma(S, \rho) = \begin{cases} 2^A \setminus \{\emptyset\},
+         & S \cap N_2 = \emptyset, S \ne \emptyset, \\
+         \{\{\text{clear}\}, A\}, & S \cap N_2 \ne \emptyset, \end{cases} \]
+      and $\gamma(S, \emptyset) = \gamma(\emptyset, \rho) = A$ for all $S \subset N$.
+
+      [\ldots]
+      \textbf{Example 2.10.} This example of a society $\mathscr{S}$ also is taken from
+      Gibbard (1974) (see also Hammond 1994). $N$ consists of three individuals: $A$
+      (Angelina), $E$ (Edwin), and $J$ (the male Judge). There are three social
+      states: $0, e, j$, where 0 indicates that Angelina remains single, $e$ that she
+      marries Edwin, and $j$ that she marries the judge. The set of rights is
+      $\rho = \{\rho_1, \rho_2\}$, where $\rho_1$ is the right to remain single, and
+      $\rho_2$ is the right to marry. In Gibbard's example the assignment of rights is
+      given by: $\alpha(\emptyset) = \emptyset$, $\alpha(A) = \alpha(E) = \alpha(J) =
+      \rho_1$, $\alpha(\{A, E\}) = \alpha(\{A, J\}) = \rho$, $\alpha(\{E, J\}) =
+      \rho_1$, and $\alpha(N) = \rho$. Using the usual interpretation of the foregoing
+      data we may compute the access function $\gamma$ in the following way. For each
+      $B \subset \{0, e, j\}$ let $B^+ = \{\hat{B} \subset \{0, e, j\} | \hat{B}
+      \supset B\}$. Then $\gamma(\emptyset, \theta) = \{0, e, j\}$ for all
+      $\theta \subset \rho$, and $\gamma(S, \emptyset) = \{0, e, j\}$ for each
+      $S \subset N$. The other values of $\gamma$ are given by:
+      $\gamma(A, \rho_1) = \gamma(A, \rho) = \{0\}^+$, and $\gamma(A, \rho_2) =
+      \{0, e, j\}$; $\gamma(E, \rho_1) = \gamma(E, \rho) = \{0, j\}^+$, and
+      $\gamma(E, \rho_2) = \{0, e, j\}$; $\gamma(J, \rho_1) = \gamma(J, \rho) =
+      \{0, e\}^+$, and $\gamma(J, \rho_2) = \{0, e, j\}$; $\gamma(\{A, E\}, \rho_1) =
+      \{0\}^+$, $\gamma(\{A, E\}, \rho_2) = \{e\}^+$, and $\gamma(\{A, E\}, \rho) =
+      \{0\}^+ \cup \{e\}^+$; $\gamma(\{A, J\}, \rho_1) = \{0\}^+$,
+      $\gamma(\{A, J\}, \rho_2) = \{j\}^+$, and $\gamma(\{A, J\}, \rho) = \{0\}^+ \cup
+      \{j\}^+$; $\gamma(\{E, J\}, \rho_1) = \{0\}^+$, $\gamma(\{E, J\}, \rho_2) =
+      \{0, e, j\}$, and $\gamma(\{E, J\}, \rho) = \{0\}^+$; $\gamma(N, \rho_1) =
+      \{0\}^+$, $\gamma(N, \rho_2) = \{e\}^+ \cup \{j\}^+$, and $\gamma(N, \rho) =
+      \{0\}^+ \cup \{e\}^+ \cup \{j\}^+$.
+    uses: [peleg-def-society, peleg-standing, peleg-def-singleton, peleg-remark-2.2, peleg-def-b-plus]
+    note: >-
+      Slips and shorthand as printed. (a) Example 2.3 ends with
+      "\gamma(N, \rho_1, ) = 2^A \setminus \{\emptyset\}", a stray comma
+      (confirmed at 200 dpi). (b) Examples 2.3 and 2.7 write the standing assumption
+      as \gamma(S, \emptyset) = A (singleton convention) where p. 69 writes \{A\};
+      Example 2.10 writes \gamma(S, \emptyset) = \{0, e, j\}, i.e. the singleton
+      \{A\} with A = \{0, e, j\}, under the same convention. (c) In Example 2.3,
+      \gamma(1, \rho_1) and \gamma(2, \rho_1) are listed as two sets each while
+      \gamma(N, \rho_1) is given as a whole family; Remark 2.2 (each B_k "separately")
+      and Example 2.10's B^+ notation suggest the listed sets are generators. (d) In
+      Example 2.10 the letter A names both Angelina and (implicitly) the set of
+      social states; in Example 2.7 "The set A" is printed upright. Example 2.7's
+      gamma(S, rho) display has its conditions separated by commas, transcribed with
+      a cases environment.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 200}
+    checked: {by: 'Codex (blind) + Grok (blind) + Codex (anchored re-read); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: peleg-ef-iv
+    audit_row: S21-R06
+    locator: §3 EF condition (iv)
+    pdf_page: 6
+    book_page: 72
+    label: condition (iv) in the definition of an effectivity function
+    latex: |
+      (iv) $A \in E(S)$ for all $S \subset N$.
+    context: |
+      Clause of the definition of an EF (definition peleg-def-ef): "An
+      \emph{effectivity function} (EF) is a correspondence $E$: $2^N \to\to 2^A$ that
+      satisfies the following conditions: [...]". Justification printed after (3.1):
+      "Condition (iii) is obvious: There is always some social state that prevails.
+      The same (trivial) argument also justifies (iv)."
+    uses: [peleg-def-ef, peleg-def-society]
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 200}
+    checked: {by: 'Codex (blind) + Grok (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: peleg-ef-iii
+    audit_row: S21-R07
+    locator: §3 EF condition (iii)
+    pdf_page: 6
+    book_page: 72
+    label: condition (iii) in the definition of an effectivity function
+    latex: |
+      (iii) $\emptyset \notin E(S)$ for all $S \subset N$;
+    context: |
+      Clause of the definition of an EF (definition peleg-def-ef). Justification
+      printed after (3.1): "Condition (iii) is obvious: There is always some social
+      state that prevails."
+    uses: [peleg-def-ef, peleg-def-society]
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 200}
+    checked: {by: 'Codex (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: peleg-ef-i
+    audit_row: S21-R08
+    locator: §3 EF condition (i)
+    pdf_page: 6
+    book_page: 72
+    label: condition (i) in the definition of an effectivity function
+    latex: |
+      (i) $E(\emptyset) = A$;
+    context: |
+      Clause of the definition of an EF (definition peleg-def-ef). Printed after
+      (3.1): "Condition (i) above is satisfied as $\gamma(\emptyset,
+      \alpha(\emptyset)) = A$."
+    uses: [peleg-def-ef, peleg-def-singleton, peleg-def-society]
+    note: >-
+      "= A" is the singleton convention of p. 69 (Example 2.3): E(\emptyset) is the
+      family \{A\}, not the set A.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 200}
+    checked: {by: 'Codex (blind) + Grok (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: peleg-ef-ii
+    audit_row: S21-R09
+    locator: §3 EF condition (ii)
+    pdf_page: 6
+    book_page: 72
+    label: condition (ii) in the definition of an effectivity function
+    latex: |
+      (ii) $E(N) = 2^A \setminus \{\emptyset\}$;
+    context: |
+      Clause of the definition of an EF (definition peleg-def-ef). Printed after
+      (3.1): "The next condition $\gamma(N, \alpha(N)) = 2^A \setminus \{\emptyset\}$
+      is the familiar condition of citizen's sovereignty (or non-imposition) for EF's
+      (see Peleg 1984, Remark 6.1.3)." and "In summary, under the assumption of
+      non-imposition (3.1) defines an EF."
+    uses: [peleg-def-ef, peleg-def-society]
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 200}
+    checked: {by: 'Codex (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: peleg-eq-3.1
+    audit_row: S21-R10
+    locator: (3.1)
+    pdf_page: 6
+    book_page: 72
+    label: (3.1)
+    latex: |
+      Under very mild conditions the constitution $\langle \rho, \alpha, \gamma
+      \rangle$ defines an \emph{EF} $E = E(\bullet; \alpha, \gamma)$ in the following
+      way:
+      (3.1) $E(S; \alpha, \gamma) = E(S) = \gamma(S, \alpha(S))$
+    uses: [peleg-def-society, peleg-def-2.4, peleg-def-ef]
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 200}
+    checked: {by: 'Codex (blind) + Codex (anchored re-read); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: peleg-eq-3.2
+    audit_row: S21-R11
+    locator: (3.2)
+    pdf_page: 6
+    book_page: 72
+    label: (3.2)
+    latex: |
+      $\alpha$ satisfies \emph{monotonicity} if
+      (3.2) $S \subset T \Rightarrow \alpha(S) \subset \alpha(T)$ for all
+      $S, T \subset N$.
+    context: |
+      Printed after (3.5): "(3.2) is intuitively acceptable: Usually larger groups
+      have more rights. Essentially, it follows from the usual interpretation of
+      rights."
+    uses: [peleg-def-society]
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 200}
+    checked: {by: 'Codex (blind) + Grok (blind) + Codex (anchored re-read); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: peleg-def-3.3-gamma-monotone-alternatives
+    audit_row: S21-R12
+    locator: (3.3)
+    pdf_page: 6
+    book_page: 72
+    label: (3.3)
+    latex: |
+      $\gamma : 2^N \times 2^\rho \to\to 2^A$ is \emph{monotonic with respect to}
+      (w.r.t.) \emph{the alternatives if} for all $S \in 2^N$ and all
+      $\theta \in 2^\rho$.
+      (3.3) $[B \in \gamma(S, \theta)$ and $B^* \supset B] \Rightarrow
+      [B^* \in \gamma(S, \theta)]$.
+    context: |
+      Printed after (3.5): "(3.3) is always satisfied if the constitution is
+      coherent, that is $E$ (see (3.1)) can be represented by a game form (see
+      Definition 3.4). In this case $B \in \gamma(S, \theta)$ may be interpreted as
+      follows: If $S$ has the set of rights $\theta$, then, by exercising its rights
+      ``properly'', $S$ may force the social outcome to be an element of $B$."
+    uses: [peleg-def-society]
+    note: >-
+      The quantifier sentence ends with a period before the display (3.3), as
+      printed. B and B* are not explicitly quantified; their range (subsets of A) is
+      implicit. The condition is imposed at every theta in 2^rho, not only at
+      theta = alpha(S); see excerpt peleg-offdiagonal-gamma.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 200}
+    checked: {by: 'Codex (blind) + Codex (anchored re-read); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: peleg-eq-3.4
+    audit_row: S21-R13
+    locator: (3.4)
+    pdf_page: 6
+    book_page: 72
+    label: (3.4)
+    latex: |
+      $\gamma$ is \emph{monotonic w.r.t. rights} if for all $S \subset N$ and
+      $\theta, \theta^* \subset \rho$
+      (3.4) $[\theta^* \supset \theta] \Rightarrow [\gamma(S, \theta^*) \supset
+      \gamma(S, \theta)]$.
+    context: |
+      Printed after (3.5): "(3.4) generally does not hold. As rights in our model
+      include also obligations having more rights may diminish the set of possible
+      outcomes."
+    uses: [peleg-def-society]
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 200}
+    checked: {by: 'Codex (blind) + Grok (blind) + Codex (anchored re-read); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: peleg-eq-3.5
+    audit_row: S21-R14
+    locator: (3.5)
+    pdf_page: 6
+    book_page: 72
+    label: (3.5)
+    latex: |
+      Finally, $\gamma$ is \emph{monotonic w.r.t. coalitions} if for all
+      $\theta \in 2^\rho$ and $S, S^* \in 2^N$
+      (3.5) $[S^* \supset S] \Rightarrow [\gamma(S^*, \theta) \supset
+      \gamma(S, \theta)]$.
+    context: |
+      Printed after: "Also, (3.5) may not be true. The members of $S^* \setminus S$
+      may have rights conflicting those of the members of $S$ and thereby excluding
+      some of the outcomes in $\gamma(S, \theta)$. [...] Nevertheless, we consider such
+      conflicts as being ``marginal'', and we shall usually assume (3.5)."
+    uses: [peleg-def-society]
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 200}
+    checked: {by: 'Codex (blind) + Grok (blind) + Codex (anchored re-read); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: peleg-def-3.1
+    audit_row: S21-R15
+    locator: Definition 3.1
+    pdf_page: 6
+    book_page: 72
+    label: Definition 3.1
+    latex: |
+      \textbf{Definition 3.1.} An EF $E : 2^N \to\to 2^A$ is \emph{superadditive} if
+      for all $S_1, S_2 \in 2^N$, $B_1 \in E(S_1)$ and $B_2 \in E(S_2)$,
+      (3.6) $[S_1 \cap S_2 = \emptyset] \Rightarrow [B_1 \cap B_2 \in
+      E(S_1 \cup S_2)]$.
+    uses: [peleg-def-ef]
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 200}
+    checked: {by: 'Codex (blind) + Codex (anchored re-read); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: peleg-superadditive-monotone
+    audit_row: S21-R16
+    locator: p. 72
+    pdf_page: 6
+    book_page: 72
+    label: remark after Definition 3.1
+    latex: |
+      A superadditive EF is monotonic w.r.t. coalitions, that is, if
+      $S \subset T \subset N$ then $E(S) \subset E(T)$ (the proof is
+      straightforward).
+    context: |
+      Continues onto p. 73 (PDF 7): "Hence, an EF that is derived from a
+      constitution by (3.1) might not be superadditive. Nevertheless, we shall deal
+      with EF's that correspond to constitutions and are superadditive, because
+      superadditivity is satisfied quite often."
+    uses: [peleg-def-3.1, peleg-def-ef]
+    note: >-
+      No proof is printed ("the proof is straightforward"). The audit's verbatim
+      quotation elides "that is, if S \subset T \subset N then E(S) \subset E(T)"
+      with an ellipsis; the elided part is the statement's mathematical content.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 200}
+    checked: {by: 'Codex (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: peleg-def-3.2
+    audit_row: S21-R17
+    locator: Definition 3.2
+    pdf_page: 7
+    book_page: 73
+    label: Definition 3.2
+    latex: |
+      \textbf{Definition 3.2.} A \emph{game form} (GF) is a list $\Gamma = \langle N;
+      \Sigma^1, \ldots, \Sigma^n; g; A \rangle$ where $N$ is the set of members of the
+      society; $\Sigma^i$ is the non-empty set of \emph{strategies} of $i \in N$;
+      $g : \Sigma^1 \times \cdots \times \Sigma^n \to A$, is the \emph{outcome
+      function}; and $A$ is the set of social states.
+    context: |
+      The next paragraph defines legality (definition peleg-def-legal) and restricts
+      attention to legal GFs.
+    uses: [peleg-def-society]
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 200}
+    checked: {by: 'Codex (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: peleg-def-3.3-alpha-effective
+    audit_row: S21-R19
+    locator: Definition 3.3
+    pdf_page: 7
+    book_page: 73
+    label: Definition 3.3 (first sentence pair)
+    latex: |
+      \textbf{Definition 3.3.} Let $\Gamma = \langle N; \Sigma^1, \ldots, \Sigma^n;
+      g; A \rangle$ be a GF, let $S \subset N$, $S \ne \emptyset$, and let
+      $B \subset A$. $S$ is $\alpha$-\emph{effective} for $B$ if there exists
+      $\sigma_0^S \in \Sigma^S = \times_{i \in S} \Sigma^i$ such that for all
+      $\sigma^{N \setminus S} \in \Sigma^{N \setminus S}$ $g(\sigma_0^S,
+      \sigma^{N \setminus S}) \in B$.
+    uses: [peleg-def-3.2]
+    note: >-
+      alpha-effectiveness is defined only for non-empty coalitions S.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 200}
+    checked: {by: 'Codex (blind) + Grok (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: peleg-def-3.3-alpha-ef
+    audit_row: S21-R20
+    locator: Definition 3.3
+    pdf_page: 7
+    book_page: 73
+    label: Definition 3.3 (the alpha-EF)
+    latex: |
+      Now assume that $g$ is surjective (onto $A$), and denote for each
+      $S \subset N$, $S \ne \emptyset$,
+      \[ E_\alpha(S; \Gamma) = \{B \subset S \mid S \emph{ is } \alpha\text{-effective
+         for } B\} \]
+      and $E_\alpha(\emptyset; \Gamma) = A$. Then $E_\alpha(\bullet; \Gamma)$ is the
+      $\alpha$-\emph{EF} of $\Gamma$ (in particular, it is an EF).
+    uses: [peleg-def-3.3-alpha-effective, peleg-def-3.2, peleg-def-singleton, peleg-def-ef]
+    note: >-
+      Printed slip, transcribed as printed: "B \subset S" in the set-builder, where
+      S is a coalition; the same definition's first sentence reads "let B \subset A",
+      so the intended range is subsets of A (social states). "E_\alpha(\emptyset;
+      \Gamma) = A" is the singleton convention (the family \{A\}). The word "is" in
+      the set-builder is italic in print. "(in particular, it is an EF)" is asserted
+      without proof.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 200}
+    checked: {by: 'Codex (blind) + Grok (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: peleg-def-3.3-surjective
+    audit_row: S21-R21
+    locator: Definition 3.3
+    pdf_page: 7
+    book_page: 73
+    label: Definition 3.3 (surjectivity assumption)
+    latex: |
+      Now assume that $g$ is surjective (onto $A$),
+    context: |
+      Inside Definition 3.3, immediately before the definition of
+      $E_\alpha(S; \Gamma)$ (statement peleg-def-3.3-alpha-ef).
+    uses: [peleg-def-3.2]
+    note: >-
+      The scope of the assumption is not stated beyond Definition 3.3; Theorem 3.5's
+      quantifier "there exists a GF" does not repeat it.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 200}
+    checked: {by: 'Codex (blind) + Grok (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: peleg-def-3.4
+    audit_row: S21-R22
+    locator: Definition 3.4
+    pdf_page: 7
+    book_page: 73
+    label: Definition 3.4
+    latex: |
+      \textbf{Definition 3.4.} A (legal) GF $\Gamma$ is a \emph{representation} of
+      the constitution $\langle \rho, \alpha, \gamma \rangle$ if $E_\alpha(\bullet;
+      \Gamma) = E(\bullet)$, where $E$ is defined by (3.1).
+    context: |
+      Preceded by: "A GF $\Gamma$ is compatible with the constitution
+      $\langle \rho, \alpha, \gamma \rangle$ if it has the following property."
+    uses: [peleg-def-legal, peleg-def-2.4, peleg-def-3.3-alpha-ef, peleg-eq-3.1]
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 200}
+    checked: {by: 'Codex (blind) + Grok (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: peleg-thm-3.5
+    audit_row: S21-R23
+    locator: Theorem 3.5
+    pdf_page: 7
+    book_page: 73
+    label: Theorem 3.5
+    latex: |
+      \textbf{Theorem 3.5.} \emph{Let $E : 2^N \to\to 2^A$ be the EF which is derived
+      by} (3.1). \emph{Then there exists a GF $\Gamma = \langle N; \Sigma^1, \ldots,
+      \Sigma^n; g; A \rangle$ such that $E_\alpha(S; \Gamma) = E(S)$ for all
+      $S \in 2^N$ iff the following two conditions hold}:
+      (i) \emph{$\gamma$ is monotonic w.r.t. the alternatives};
+      (ii) E \emph{is superadditive.}
+    context: |
+      Followed by: "The proof is given in the appendix. For a proof when $A$ is
+      finite see Moulin (1983)."
+    uses: [peleg-eq-3.1, peleg-def-3.2, peleg-def-3.3-alpha-ef, peleg-def-3.3-gamma-monotone-alternatives, peleg-def-3.1, peleg-def-ef]
+    proof_pages: 13-14
+    note: >-
+      Condition (i) is printed on gamma (i.e. (3.3) at every theta), while the
+      appendix's Theorem 3.5*, from which Theorem 3.5 is said to follow, states
+      monotonicity w.r.t. the alternatives for E (excerpt peleg-thm-3.5-star); see
+      also excerpt peleg-offdiagonal-gamma. The "E" in (ii) is printed upright.
+      The appendix proves Theorem 3.5* with N = \{1, ..., n\}, n >= 2, A finite or
+      infinite with |A| >= 2 if finite, relative to a structure B.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 200}
+    checked: {by: 'Codex (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: peleg-examples-3
+    audit_row: S21-R24
+    locator: Examples 3.6, 3.7, 3.8
+    pdf_page: 7-8
+    book_page: 73-74
+    label: Examples 3.6 (PDF 7-8), 3.7 (PDF 8), 3.8 (PDF 8)
+    latex: |
+      \textbf{Example 3.6.} Consider the society of Example 2.3. (3.1) yields the
+      following EF $E$: $E(\emptyset) = A$ and $E(S) = \gamma(S, \rho_1)$ for
+      $S \ne \emptyset$. Let $\hat{w}(\hat{b})$ be the strategy ``choose a white
+      (blue) shirt''. Then the GF $\Gamma = \langle N; \{\hat{w}, \hat{b}\},
+      \{\hat{w}, \hat{b}\}; g; A \rangle$, where $g$ is given by $g(\hat{x}^1,
+      \hat{x}^2) = (x^1, x^2)$ for all $x^1, x^2 \in \{w, b\}$, is a representation of
+      $E$. According to $\Gamma$, the two members choose their shirt simultaneously.
+
+      \textbf{Example 3.7.} Let $\Sigma^1 = \{\hat{w}, \hat{b}\}$ (see Example 3.6),
+      and let $\Sigma^2 = \{f | f\colon \Sigma^1 \to \{w, b\}\}$. Further define
+      $g : \Sigma^1 \times \Sigma^2 \to A$ by $g(\hat{x}, f) = (x, f(\hat{x}))$. The GF
+      $\Gamma_0 = \langle N; \Sigma^1, \Sigma^2, g, A \rangle$ describes the following
+      sequential procedure:
+      \emph{Step 1.} 1 chooses her shirt.
+      \emph{Step 2.} 2 chooses her shirt after observing 1's choice.
+      $\Gamma_0$ is \emph{not} a representation of $E$ (see, again, Example 3.6).
+      Indeed, by choosing the strategy $f(\hat{x}) = x$ 2 can force the outcome to be
+      in the set $B = \{(w, w), (b, b)\}$. However, $B \notin E(2)$.
+
+      \textbf{Example 3.8.} Now we compute the EF of the society of Example 2.10 by
+      means of (3.1): $E(\emptyset) = \{0, e, j\}$; $E(A) = \gamma(A, \rho_1) =
+      \{0\}^+$ (see Example 2.10); $E(E) = \gamma(E, \rho_1) = \{0, j\}^+$; $E(J) =
+      \gamma(J, \rho_1) = \{0, e\}^+$; $E(\{A, E\}) = \gamma(\{A, E\}, \rho) =
+      \{0\}^+ \cup \{e\}^+$; $E(\{A, J\}) = \gamma(\{A, J\}, \rho) = \{0\}^+ \cup
+      \{j\}^+$; $E(\{E, J\}) = \gamma(\{E, J\}, \rho_1) = \{0\}^+$, and $E(N) =
+      \gamma(N, \rho) = \{0\}^+ \cup \{e\}^+ \cup \{j\}^+$. As the reader may easily
+      verify, $E(\bullet)$ is superadditive and monotonic w.r.t. the alternatives.
+      Hence, by Theorem 3.5, $E$ is representable. Also, if $A$ is finite then the
+      proof of Theorem 3.5 is constructive and, therefore, may be used to obtain
+      representations of $E$.
+    uses: [peleg-examples-2, peleg-eq-3.1, peleg-def-3.2, peleg-def-3.4, peleg-def-singleton, peleg-def-b-plus, peleg-def-3.1, peleg-thm-3.5]
+    note: >-
+      Slip in Example 3.7: "by choosing the strategy f(\hat{x}) = x 2 can force",
+      with no comma between "x" and "2" (member 2), transcribed as printed. Example
+      3.8 says E(\bullet) is "monotonic w.r.t. the alternatives", applying to E the
+      property (3.3) defines for gamma. E(\emptyset) = \{0, e, j\} is the singleton
+      convention (the family \{A\}). Example 3.7 separates the GF's components with
+      commas where Definition 3.2 uses semicolons, as printed.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 200}
+    checked: {by: 'Codex (blind) + Grok (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}

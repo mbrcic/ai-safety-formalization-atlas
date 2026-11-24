@@ -74,6 +74,8 @@ in the repository can detect it.
 - [Source coverage audit](provenance/source-coverage-audit.md) — the statement-by-statement
   grading of every printed source the atlas transcribes: coverage, scope, and the
   readings that are choices rather than transcriptions
+- [Scope grading](guide/scope-grading.md) — how a Lean rendering is graded against a
+  printed statement (SPEC v6): three axes, computed scope and coverage, rulings, owed work
 - [Toolchain v4.33.0 migration](provenance/toolchain-v4330-migration.md) — what
   moved, what broke, and which build records were deliberately not rewritten
 - [Verification scheduling](provenance/verification-scheduling.md) — what CI runs
@@ -145,7 +147,8 @@ Reviewed but deliberately not graduated:
 
 ## Releases
 
-- [v0.9 release](releases/v0.9.md) — current published release (`0.9.0`, tagged)
+- [v0.10 release](releases/v0.10.md) — current release (`0.10.0`)
+- [v0.9 release](releases/v0.9.md) — historical (`0.9.0`, tagged)
 - [v0.8 release](releases/v0.8.md) — historical (`0.8.0`, tagged)
 - [v0.7 release](releases/v0.7.md) — historical (`0.7.0`, tagged)
 - [v0.6 release](releases/v0.6.md) — historical (`0.6.0`, tagged)

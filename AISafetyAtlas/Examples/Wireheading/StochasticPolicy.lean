@@ -262,4 +262,18 @@ public theorem coinPolicy_mixedRun_complement (n : ℕ) :
       = mixedRun (Decision.MDP.ofDet actIsState) (blindEnv true) coinPolicy false n :=
   mixedRun_complement (Decision.MDP.ofDet actIsState) (blindEnv true) coinPolicy false n
 
+/-! ## Definition 10's `Ġ_t` from `k = 0`, with stochastic policies -/
+
+/-- At step zero the state is the start state, whatever the policy draws. -/
+public theorem blindEnv_mixedStateAt_zero (a₀ : Bool) (σ : StochPolicy Bool Bool) :
+    mixedStateAt (Decision.MDP.ofDet actIsState) (blindEnv a₀) σ false 0 = PMF.pure false :=
+  AISafetyAtlas.Wireheading.CRMDP.mixedStateAt_zero _ _ σ false
+
+/-- **The printed return from `k = 0` is the proof's return plus the start
+reward**, at a possibly stochastic policy. -/
+public theorem blindEnv_mixedReturnWithStart (a₀ : Bool) (σ : StochPolicy Bool Bool) :
+    mixedReturnWithStart (Decision.MDP.ofDet actIsState) 1 false (blindEnv a₀) σ
+      = ((σ startHistory) (!a₀)).toReal + ((blindEnv a₀).trueReward false : ℝ) := by
+  rw [AISafetyAtlas.Wireheading.CRMDP.mixedReturnWithStart_eq_mixedReturnOver_add, blindEnv_mixedReturn]
+
 end AISafetyAtlas.Examples.Wireheading

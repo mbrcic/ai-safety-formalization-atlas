@@ -92,7 +92,7 @@ def main() -> int:
     for section, cells, line in rows(text):
         scope = cells[4].replace("**", "").strip()
         grade = re.split(r"[,(]", scope, maxsplit=1)[0].strip()
-        if grade not in {"Narrower", "Mixed"} or "and closed" in scope:
+        if grade not in {"Narrower", "Mixed", "None", "Refuted"} or "and closed" in scope:
             continue
         owed += 1
         label = cells[0].replace("**", "").strip()

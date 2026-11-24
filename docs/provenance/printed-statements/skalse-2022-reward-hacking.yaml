@@ -1,0 +1,221 @@
+source:
+  citation: >-
+    Joar Skalse, Nikolaus H. R. Howe, Dmitrii Krasheninnikov and David Krueger,
+    Defining and Characterizing Reward Hacking, 36th Conference on Neural
+    Information Processing Systems (NeurIPS 2022) (title page of the pinned
+    published file). Sections 4.1 and 4.2.
+  file: skalse-howe-krasheninnikov-krueger-published-neurips-2022-defining-and-characterizing-reward-hacking.pdf
+  sha256: 634ffa7ccb0225296482ef2961a38ba175bd8c1b97b998556a6bcfa7ad560210
+  page_offset: 0
+  standing: |
+    §4.1, p. 4: "In this paper, we assume that $S$ and $A$ are finite, that
+    $|A| > 1$, that all states are reachable, and that $\mathcal{R}(s, a, s')$ has
+    finite mean for all $s, a, s'$."
+    §4.1, p. 4: "In our work, we consider various reward functions for a given
+    environment, which is then formally a \textbf{Markov decision process without
+    reward} $MDP \setminus \mathcal{R} \doteq (S, A, T, I, \_\_, \gamma)$. Having
+    fixed an $MDP \setminus \mathcal{R}$, any reward function can be viewed as a
+    function of only the current state and action by marginalizing over
+    transitions: $\mathcal{R}(s, a) \doteq \sum_{s' \sim T(s'|s,a)} \mathcal{R}(s, a, s')$,
+    we adopt this view from here on."
+    §4.2, p. 5: "Note that these definitions are given relative to some
+    $MDP \setminus \mathcal{R}$, although we often assume the environment in
+    question is clear from context and suppress this dependence. The dependence
+    on the policy set $\Pi$, on the other hand, plays a critical role in our
+    results."
+    Silent: no uniform bound on rewards (only finite mean), and no strict
+    $\gamma < 1$ or other convergence condition for the discounted sums; the
+    printed range is $\gamma \in [0, 1]$ (source card S26 searched PDF pp. 4--5).
+
+definitions:
+  - id: skalse-def-mdp
+    label: MDP, policies, trajectory, return, value, policy orderings (§4.1)
+    pdf_page: 4
+    book_page: 4
+    latex: |
+      RL methods attempt to solve a sequential decision problem, typically
+      formalised as a \textbf{Markov decision process (MDP)} , which is a tuple
+      $(S, A, T, I, \mathcal{R}, \gamma)$ where $S$ is a set of states, $A$ is a set
+      of actions, $T : S \times A \to \Delta(S)$ is a transition function,
+      $I \in \Delta(S)$ is an initial state distribution, $\mathcal{R}$ is a reward
+      function, the most general form of which is
+      $\mathcal{R} : S \times A \times S \to \Delta(\mathbb{R})$, and
+      $\gamma \in [0, 1]$ is the discount factor. Here $\Delta(X)$ is the set of all
+      distributions over $X$. A \textbf{stationary policy} is a function
+      $\pi : S \to \Delta(A)$ that specifies a distribution over actions in each
+      state, and a \textbf{non-stationary} policy is a function
+      $\pi : (S \times A)^* \times S \to \Delta(A)$, where $*$ is the Kleene star.
+      A \textbf{trajectory} $\tau$ is a path $s_0, a_0, r_0, \ldots$ through the MDP
+      that is possible according to $T$, $I$, and $\mathcal{R}$. The
+      \textbf{return} of a trajectory is the discounted sum of rewards
+      $G(\tau) \doteq \sum_{t=0}^{\infty} \gamma^t r_t$, and the \textbf{value} of a
+      policy is the expected return
+      $J(\pi) \doteq \mathbb{E}_{\tau \sim \pi}[G(\tau)]$. We derive \textbf{policy
+      (preference) orderings} from reward functions by ordering policies according
+      to their value.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 220}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: skalse-def-trivial-equivalent
+    label: equivalent and trivial reward functions (§4.2 prose)
+    pdf_page: 5
+    book_page: 5
+    latex: |
+      Additionally, we say that $\mathcal{R}_1$ and $\mathcal{R}_2$ are
+      \textbf{equivalent} on a set of policies $\Pi$ if $J_1$ and $J_2$ induce the
+      same ordering of $\Pi$, and that $\mathcal{R}$ is \textbf{trivial} on $\Pi$ if
+      $J(\pi) = J(\pi')$ for all $\pi, \pi' \in \Pi$.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 220}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: skalse-def-refinement-notation
+    label: refinement and the triangle notation (§4.2)
+    pdf_page: 5
+    book_page: 5
+    latex: |
+      When $\mathcal{R}_1$ is a simplification of $\mathcal{R}_2$, we also say that
+      $\mathcal{R}_2$ is a \textbf{refinement} of $\mathcal{R}_1$. We denote this
+      relationship as $\mathcal{R}_1 \trianglelefteq \mathcal{R}_2$ or
+      $\mathcal{R}_2 \trianglerighteq \mathcal{R}_1$ ; the narrowing of the
+      triangle at $R_1$ represents the collapsing of distinctions between policies.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 220}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+statements:
+  - id: skalse-s4-1-setup
+    audit_row: S26-R01
+    locator: §4.1 setup
+    pdf_page: 4-5
+    book_page: 4-5
+    label: §4.1 (visit counts and embeddings)
+    latex: |
+      We define the \textbf{(discounted) visit counts} of a policy as
+      $\mathcal{F}^{\pi}(s, a) \doteq \mathbb{E}_{\tau \sim \pi}[\sum_{i=0}^{\infty}
+      \gamma^i \mathbb{1}(s_i = s, a_i = a)]$. Note that
+      $J(\pi) = \sum_{s,a} \mathcal{R}(s, a) \mathcal{F}^{\pi}(s, a)$, which we also
+      write as $\langle \mathcal{R}, \mathcal{F}^{\pi} \rangle$. When considering
+      multiple reward functions in an $MDP \setminus \mathcal{R}$, we define
+      $J_{\mathcal{R}}(\pi) \doteq \langle \mathcal{R}, \mathcal{F}^{\pi} \rangle$
+      and sometimes use
+      $J_i(\pi) \doteq \langle \mathcal{R}_i, \mathcal{F}^{\pi} \rangle$ as
+      shorthand. We also use $\mathcal{F} : \Pi \to \mathbb{R}^{|S||A|}$ to denote
+      the embedding of policies into Euclidean space via their visit counts, and
+      define $\mathcal{F}(\dot{\Pi}) \doteq \{\mathcal{F}(\pi : \pi \in \dot{\Pi})\}$
+      for any $\dot{\Pi}$. Moreover, we also use a second way to embed policies into
+      Euclidean space; let $\mathcal{G}(\pi)$ be the $|S||A|$-dimensional vector
+      where $\mathcal{G}(\pi)[s, a] = \pi(a \mid s)$, and let
+      $\mathcal{G}(\dot{\Pi}) \doteq \{\mathcal{G}(\pi : \pi \in \dot{\Pi})\}$.
+    context: |
+      Follows the MDP setup (definition skalse-def-mdp) and the standing
+      assumptions and marginalization recorded under source.standing, all on p. 4.
+      The sentence breaks at "and sometimes use" from p. 4 to p. 5.
+    uses: [skalse-def-mdp]
+    note: >-
+      Printed set-builder slip, twice: "$\{\mathcal{F}(\pi : \pi \in \dot{\Pi})\}$"
+      and "$\{\mathcal{G}(\pi : \pi \in \dot{\Pi})\}$", with the closing
+      parenthesis after the binder; the intent is
+      $\{\mathcal{F}(\pi) : \pi \in \dot{\Pi}\}$. "Note that $J(\pi) = \ldots$" is
+      asserted, not proved, at this point. $\Pi$ in "$\mathcal{F} : \Pi \to$" is
+      not separately defined here.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 220}
+    checked: {by: 'Codex (blind) + Codex (anchored re-read); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: skalse-def1-hackable
+    audit_row: S26-R03
+    locator: Definition 1
+    pdf_page: 5
+    book_page: 5
+    label: Definition 1
+    latex: |
+      \textbf{Definition 1.} A pair of reward functions $\mathcal{R}_1$,
+      $\mathcal{R}_2$ are \textbf{hackable} relative to policy set $\Pi$ and an
+      environment $(S, A, T, I, \_\_, \gamma)$ if there exist $\pi, \pi' \in \Pi$
+      such that
+      \[ J_1(\pi) < J_1(\pi') \ \ \& \ \ J_2(\pi) > J_2(\pi'), \]
+      else they are \textbf{unhackable}.
+    context: |
+      Introduced by: "Here, we formally define \emph{hackability} as a binary
+      relation between reward functions."
+    uses: [skalse-s4-1-setup]
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 220}
+    checked: {by: 'Codex (blind) + Grok (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: skalse-s4-2-prose
+    audit_row: S26-R04
+    locator: §4.2 prose
+    pdf_page: 5
+    book_page: 5
+    label: §4.2 (paragraph after Definition 1)
+    latex: |
+      Note that an unhackable reward pair can have
+      $J_1(\pi) < J_1(\pi') \ \& \ J_2(\pi) = J_2(\pi')$ or vice versa.
+      Unhackability is symmetric; this can be seen be swapping $\pi$ and $\pi'$ in
+      Definition 1. It is not transitive, however. In particular, the constant
+      reward function is unhackable with respect to any other reward function, so if
+      it \emph{were} transitive, any pair of policies would be unhackable.
+      Additionally, we say that $\mathcal{R}_1$ and $\mathcal{R}_2$ are
+      \textbf{equivalent} on a set of policies $\Pi$ if $J_1$ and $J_2$ induce the
+      same ordering of $\Pi$, and that $\mathcal{R}$ is \textbf{trivial} on $\Pi$ if
+      $J(\pi) = J(\pi')$ for all $\pi, \pi' \in \Pi$. It is clear that
+      $\mathcal{R}_1$ and $\mathcal{R}_2$ are unhackable whenever they are
+      equivalent, or one of them is trivial, but this is relatively uninteresting.
+      Our central question is if and when there are other unhackable reward pairs.
+    uses: [skalse-def1-hackable, skalse-def-trivial-equivalent]
+    note: >-
+      Two printed slips: "seen be swapping" (for "by"), and "any pair of
+      policies would be unhackable", where the argument concerns pairs of reward
+      functions. "Equivalent" ("induce the same ordering") is not further defined.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 220}
+    checked: {by: 'Codex (blind) + Grok (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: skalse-def2-simplification
+    audit_row: S26-R05
+    locator: Definition 2
+    pdf_page: 5
+    book_page: 5
+    label: Definition 2
+    latex: |
+      \textbf{Definition 2.} $\mathcal{R}_2$ is a \textbf{simplification} of
+      $\mathcal{R}_1$ relative to policy set $\Pi$ if for all
+      $\pi, \pi' \in \Pi$,
+      \[ J_1(\pi) < J_1(\pi') \implies J_2(\pi) \leq J_2(\pi') \ \ \& \ \
+         J_1(\pi) = J_1(\pi') \implies J_2(\pi) = J_2(\pi') \]
+      and there exist $\pi, \pi' \in \Pi$ such that $J_2(\pi) = J_2(\pi')$ but
+      $J_1(\pi) \neq J_1(\pi')$. Moreover, if $\mathcal{R}_2$ is trivial then we
+      say that this is a \textbf{trivial simplification}.
+    uses: [skalse-s4-1-setup, skalse-def-trivial-equivalent]
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 220}
+    checked: {by: 'Codex (blind) + Grok (blind) + Codex (anchored re-read); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: skalse-fn4-fn5
+    audit_row: S26-R06
+    locator: footnotes 4 and 5
+    pdf_page: 5
+    book_page: 5
+    label: §4.2 sentence with footnotes 4 and 5
+    latex: |
+      If $\mathcal{R}_1 \trianglelefteq \mathcal{R}_2 \trianglerighteq \mathcal{R}_3$,
+      then we have that $\mathcal{R}_1, \mathcal{R}_3$ are unhackable,\footnote{If
+      $J_3(\pi) > J_3(\pi')$ then $J_2(\pi) > J_2(\pi')$, since
+      $\mathcal{R}_2 \trianglerighteq \mathcal{R}_3$, and if
+      $J_2(\pi) > J_2(\pi')$ then $J_1(\pi) \geq J_1(\pi')$, since
+      $\mathcal{R}_1 \trianglelefteq \mathcal{R}_2$. It is therefore not possible
+      that $J_3(\pi) > J_3(\pi')$ but $J_1(\pi) < J_1(\pi')$.} but if
+      $\mathcal{R}_1 \trianglerighteq \mathcal{R}_2 \trianglelefteq \mathcal{R}_3$,
+      then this is not necessarily the case.\footnote{Consider the case where
+      $\mathcal{R}_2$ is trivial -- then
+      $\mathcal{R}_1 \trianglerighteq \mathcal{R}_2 \trianglelefteq \mathcal{R}_3$
+      for any $\mathcal{R}_1, \mathcal{R}_3$.}
+    uses: [skalse-def2-simplification, skalse-def-refinement-notation, skalse-def1-hackable, skalse-def-trivial-equivalent]
+    note: >-
+      Triangle symbols checked at 500 dpi: body and footnote 5 both print
+      $\trianglerighteq$ / $\trianglelefteq$ (with bar). Footnote 5 "for any
+      $\mathcal{R}_1, \mathcal{R}_3$" overstates Definition 2: a simplification
+      requires a pair with $J_2(\pi) = J_2(\pi')$ but $J_1(\pi) \neq J_1(\pi')$, so
+      a trivial $\mathcal{R}_2$ simplifies $\mathcal{R}_1$ only when $\mathcal{R}_1$
+      is non-trivial on $\Pi$ (likewise $\mathcal{R}_3$). Footnote 4 argues one
+      direction only; the other follows by the symmetry stated earlier on the page.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 220}
+    checked: {by: 'Codex (blind) + Codex (anchored re-read); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+excerpts: []

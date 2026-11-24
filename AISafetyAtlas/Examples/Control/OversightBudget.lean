@@ -520,6 +520,46 @@ public theorem frozen_bound_needs_initial (n : ℕ) :
   linarith
 
 
+/-! ### The same chain against Ashby's capacity as a rate
+
+`AISafetyAtlas.Control.eventually_regulationRate_le_ashbyCapacity` compares the
+regulator's removed variety per unit time with Ashby's §9/15 capacity. On the
+frozen chain the capacity is zero, so over long runs the regulator's rate is
+eventually below any `ε`: the one bit the chain's initial state carries is spread
+over ever more acts. -/
+
+/-- A run of `n + 1` disturbances, each the pair of coins. -/
+@[expose] public def frozenRun (n : ℕ) : VolumeΩ → (Fin (n + 1) → Fin 2 × Fin 2) :=
+  fun ω _ => frozenDisturbance ω
+
+/-- The response to every disturbance of the run: the first state watched. -/
+@[expose] public def frozenPolicyRun (n : ℕ) : (Fin (n + 1) → Fin 2) → (Fin (n + 1) → Fin 2) :=
+  fun v _ => v 0
+
+/-- **§11/11 with both capacities as rates, at the frozen chain**: the
+regulator's rate is eventually at most `ashbyCapacity 0 τ + ε`. -/
+public theorem frozen_regulationRate_eventually {τ ε : ℝ} (hτ : 0 < τ) (hε : 0 < ε) :
+    ∀ᶠ n in Filter.atTop,
+      regulationRate volumeLaw (frozenRun n)
+          (fun ω i => frozenOutcome (frozenRun n ω i)
+            (frozenPolicyRun n (traj frozenChain (n + 1) ω) i)) τ
+        ≤ ashbyCapacity H[frozenChain 1 | frozenChain 0 ; volumeLaw] τ + ε :=
+  eventually_regulationRate_le_ashbyCapacity volumeLaw (fun n => measurable_of_countable _)
+    (fun n => ⟨Set.toFinite _⟩) (fun _ => measurable_fst) frozen_markov frozen_stationary
+    frozenPolicyRun frozenOutcome (by decide +kernel) hτ hε
+
+/-- **The window bound at the frozen chain**, one run of `n + 1` acts. -/
+example (n : ℕ) :
+    regulationRate volumeLaw (frozenRun n)
+        (fun ω i => frozenOutcome (frozenRun n ω i)
+          (frozenPolicyRun n (traj frozenChain (n + 1) ω) i)) 1
+      ≤ (H[frozenChain 0 ; volumeLaw] + n * H[frozenChain 1 | frozenChain 0 ; volumeLaw])
+          / ((n + 1) * 1) :=
+  haveI : FiniteRange (frozenRun n) := ⟨Set.toFinite _⟩
+  AISafetyAtlas.Control.regulationRate_le_chainWindow volumeLaw (measurable_of_countable _)
+    (fun _ => measurable_fst) frozen_markov frozen_stationary (frozenPolicyRun n)
+    frozenOutcome (by decide +kernel) one_pos
+
 /-! ## Ashby's regulator with imperfect information, on the same coins
 
 `AISafetyAtlas.Control.entropy_ge_of_sensor` is §11/11 read through a sensor: a

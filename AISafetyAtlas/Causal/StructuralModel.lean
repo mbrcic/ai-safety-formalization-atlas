@@ -392,6 +392,28 @@ induces a joint distribution `Pr(W = w) = Σ_{ε | W(ε) = w} P(ε)`."*
 The sums below are where print's Definition 4 finiteness lives. `SCM.endoLaw` is
 the same object without them. -/
 
+omit [Fintype V] in
+/-- **`Pr(W = w)`, print's formula verbatim, at any vertex set.** Print: *"this
+induces a joint distribution `Pr(W = w) = Σ_{ε | W(ε) = w} P(ε)`"*
+(ec21-scm-joint, PDF p. 2), with `P(ε)` the product of the independent marginals.
+So this is an unconditional sum, over the draws whose evaluation agrees with `w`
+on `W`, of the unconditional product of the exogenous weights.
+
+No finiteness, countability or measurability is asked: the formula is written
+wherever print writes it, including at an uncountable vertex set where no
+evaluation map need be measurable for the product measure. `SCM.sumProb_coe_eq_marginal`
+is the finite computation.
+
+The formula is print's, and so is its presupposition that `P` is atomic: at a
+product of infinitely many non-degenerate marginals every draw has weight `0`, so
+every value of this sum is `0` there (compare `SCM.aemeasurable_of_countable_support`).
+The policy-invariance theorem `SCIM.sumProb_withPolicy_eq_of_notDownstream` holds
+either way. -/
+@[expose] public noncomputable def sumProb (M : SCM V dom edom) [M.IsWellFounded]
+    (W : Set V) (w : EndoAssignment V dom) : ℝ :=
+  ∑' ε : {ε : ExoAssignment V edom | ∀ v ∈ W, M.eval ε v = w v},
+    ∏' v, M.exoProb v (ε.1 v)
+
 section FiniteJoint
 
 variable [∀ v, Fintype (edom v)] [∀ v, Fintype (dom v)] [∀ v, DecidableEq (dom v)]
@@ -452,6 +474,20 @@ public theorem marginal_eq_sum_exo (M : SCM V dom edom) [M.IsWellFounded]
   · simp
   · intro w _ hw; simp [Ne.symm hw]
   · simp
+
+omit [∀ v, Fintype (dom v)] in
+/-- **At a finite model print's formula is the finite marginal**: the
+unconditional sum and product of `SCM.sumProb` are the `Finset` sum and product of
+`SCM.marginal`. -/
+public theorem sumProb_coe_eq_marginal (M : SCM V dom edom) [M.IsWellFounded]
+    [∀ v, Fintype (dom v)] (X : Finset V) (x : EndoAssignment V dom) :
+    M.sumProb (↑X) x = M.marginal X x := by
+  classical
+  rw [marginal_eq_sum_exo, sumProb,
+    tsum_subtype _ fun ε : ExoAssignment V edom ↦ ∏' v, M.exoProb v (ε v),
+    tsum_fintype, Finset.sum_filter]
+  refine Finset.sum_congr rfl fun ε _ ↦ ?_
+  simp only [Set.indicator, Set.mem_ofPred_eq, Finset.mem_coe, tprod_fintype, exoJoint]
 
 end FiniteJoint
 
@@ -516,6 +552,72 @@ public theorem submodel_eval_notMem (M : SCM V dom edom) [M.IsWellFounded]
     (M.submodel X x).eval ε v = M.f v ((M.submodel X x).eval ε) (ε v) := by
   rw [(M.submodel X x).eval_eq_f ε v]
   simp [submodel, hv]
+
+open Classical in
+/-- **Definition 2 at any set of variables.** Print: *"Let `M = ⟨E, V, F, P⟩` be an
+SCM, `X` a set of variables in `V`, and `x` a particular realization of `X`"* —
+a set, with no finiteness, so `X` here is a `Set V` and may be infinite (every even
+vertex of an `ℕ`-indexed model, say). Membership is decided classically; the body
+only tests `v ∈ X`. `submodel` is the `Finset` case (`submodel_eq_submodelSet`). -/
+@[expose] public noncomputable def submodelSet (M : SCM V dom edom) (X : Set V)
+    (x : EndoAssignment V dom) : SCM V dom edom where
+  dom_nonempty := M.dom_nonempty
+  parents := fun v ↦ if v ∈ X then ∅ else M.parents v
+  acyclic := fun v hv ↦ M.acyclic v (Relation.TransGen.mono (fun p w hp ↦ by
+    by_cases hw : w ∈ X
+    · rw [if_pos hw] at hp; exact absurd hp (Set.notMem_empty p)
+    · rwa [if_neg hw] at hp) _ _ hv)
+  f := fun v a e ↦ if v ∈ X then x v else M.f v a e
+  f_parents := fun v a b e h ↦ by
+    by_cases hv : v ∈ X
+    · simp [hv]
+    · simp only [if_neg hv]
+      exact M.f_parents v a b e fun p hp ↦ h p (by rw [if_neg hv]; exact hp)
+  exoProb := M.exoProb
+  exoProb_nonneg := M.exoProb_nonneg
+  exoProb_tsum := M.exoProb_tsum
+
+omit [Fintype V] in
+/-- The `Finset` submodel is the set submodel at the underlying set. -/
+public theorem submodel_eq_submodelSet (M : SCM V dom edom) (X : Finset V)
+    (x : EndoAssignment V dom) : M.submodel X x = M.submodelSet (↑X) x := by
+  unfold submodel submodelSet
+  congr 1
+  · funext v
+    by_cases hv : v ∈ X <;> simp [hv]
+  · funext v a e
+    by_cases hv : v ∈ X <;> simp [hv]
+
+omit [Fintype V] in
+/-- Forcing any set of variables only deletes edges, so the set submodel inherits
+the recursion's hypothesis. -/
+public instance instIsWellFoundedSubmodelSet (M : SCM V dom edom)
+    [hM : M.IsWellFounded] (X : Set V) (x : EndoAssignment V dom) :
+    (M.submodelSet X x).IsWellFounded :=
+  ⟨Subrelation.wf (fun {p v} hp ↦ by
+      simp only [submodelSet] at hp
+      by_cases hv : v ∈ X
+      · rw [if_pos hv] at hp; exact absurd hp (Set.notMem_empty p)
+      · rwa [if_neg hv] at hp) hM.wf⟩
+
+omit [Fintype V] in
+/-- An intervened variable takes its forced value, whatever the exogenous draw,
+for an intervention on any set of variables. -/
+@[simp] public theorem submodelSet_eval (M : SCM V dom edom) [M.IsWellFounded]
+    (X : Set V) (x : EndoAssignment V dom) (ε : ExoAssignment V edom)
+    {v : V} (hv : v ∈ X) :
+    (M.submodelSet X x).eval ε v = x v := by
+  rw [(M.submodelSet X x).eval_eq_f ε v]
+  simp [submodelSet, hv]
+
+omit [Fintype V] in
+/-- A variable outside a set intervention keeps its own structural function. -/
+public theorem submodelSet_eval_notMem (M : SCM V dom edom) [M.IsWellFounded]
+    (X : Set V) (x : EndoAssignment V dom) (ε : ExoAssignment V edom)
+    {v : V} (hv : v ∉ X) :
+    (M.submodelSet X x).eval ε v = M.f v ((M.submodelSet X x).eval ε) (ε v) := by
+  rw [(M.submodelSet X x).eval_eq_f ε v]
+  simp [submodelSet, hv]
 
 /-- **Soft intervention.** Print: *"a soft intervention on a variable `X` in an
 SCM `M` replaces `f^X` with a function `g^X : dom(Pa_X ∪ {E^X}) → dom(X)`"* —
@@ -898,6 +1000,27 @@ public theorem marginal_withPolicy_eq_of_notDownstream
     rw [M.eval_withPolicy_eq_of_notDownstream π π' ε (hX c hc)]
     exact h c hc
 
+omit [Fintype V] in
+/-- **Print's sentence, on print's own formula, at any vertex set.** *"For a set
+of variables `X` not in *Desc_D*, `Pr^π(x)` is independent of `π`"*
+(ec21-policy-invariance, PDF p. 3), with `Pr^π(x)` read through print's
+`Pr(W = w) = Σ_{ε | W(ε) = w} P(ε)` (`SCM.sumProb`).
+
+No finiteness, countability, summability or measurability hypothesis: the two
+sums run over the same draws, because the evaluations agree off *Desc_𝐃*
+(`SCIM.eval_withPolicy_eq_of_notDownstream`), and weigh them by the same
+exogenous marginals. -/
+public theorem sumProb_withPolicy_eq_of_notDownstream [M.graph.IsWellFounded]
+    (π π' : M.Policy) (X : Set V) (hX : ∀ v ∈ X, M.graph.NotDownstream v)
+    (x : EndoAssignment V dom) :
+    (M.withPolicy π).sumProb X x = (M.withPolicy π').sumProb X x := by
+  unfold SCM.sumProb
+  refine tsum_congr_set_coe (fun ε : ExoAssignment V edom ↦ ∏' v, M.exoProb v (ε v)) ?_
+  ext ε
+  simp only [Set.mem_ofPred_eq]
+  refine forall₂_congr fun v hv ↦ ?_
+  rw [M.eval_withPolicy_eq_of_notDownstream π π' ε (hX v hv)]
+
 /-! ### Definition 4's and Definition 5's finiteness
 
 Print writes *"finite"* twice and both times inside Definition 4, qualifying
@@ -1027,8 +1150,10 @@ end SCIM
 
 The product measure uses the existing finite-domain marginals at any vertex
 cardinality. Evaluation laws require measurability explicitly; arbitrary
-functions of infinitely many parents need not be measurable. These laws do not
-yet replace the finite sums in expected utility or conditional expectation.
+functions of infinitely many parents need not be measurable. Expected utility
+and Definition 5 have law forms (`SCIM.expectedUtilityLaw`,
+`SCIM.optimalValueLaw`, `SCIM.IsMaterialLaw`, below); the conditional expectation
+of `Causal.Incentive` is still a finite sum.
 -/
 
 namespace SCM
@@ -1232,9 +1357,14 @@ that maximises `Eπ[U]`"* is a comparison and not an attainment claim, so it
 denotes wherever the expectation does.
 
 **This is the half of Definition 5's sentence that generalises.** The other half
-— that a maximiser *exists* — is `SCIM.exists_isOptimalPolicy`, and it needs the
-policy space finite. Print states no condition delivering one over an unbounded
-policy space, so that half stays where finiteness supplies it. -/
+— that a maximiser *exists* — needs the policy space finite, not the vertex set:
+`SCIM.exists_isOptimalPolicyLaw` proves it at any vertex set under
+`[Finite M.Policy]` (which `SCIM.finite_policy` derives from finitely many
+decisions with finite `Pa^D`), and `SCIM.exists_isOptimalPolicy` is the finite-sum
+form. Print states no condition delivering a maximiser over an unbounded policy
+space, so `SCIM.optimalValueLaw` takes attainment as print's presupposition
+(a hypothesis `∃ π, IsOptimalPolicyLaw π hm`) and finiteness of the policies is
+one way, not the only way, to discharge it. -/
 @[expose] public def IsOptimalPolicyLaw [M.graph.IsWellFounded]
     [Fintype {v : V // M.graph.IsUtility v}] (π : M.Policy)
     (hm : ∀ π' : M.Policy, Measurable fun ε : ExoAssignment V edom ↦
@@ -1290,6 +1420,342 @@ public theorem observableLaw_withPolicy_eq_of_notDownstream [M.graph.IsWellFound
   congr 1
   funext ε v
   exact M.eval_withPolicy_eq_of_notDownstream π π' ε (hX v v.property)
+
+end SCIM
+
+/-! ## Laws at almost-everywhere measurable evaluations
+
+`SCM.observableLaw` asks for the evaluation map to be `Measurable`, which is
+stronger than forming a pushforward needs: `ProbabilityMeasure.map` reads only
+`AEMeasurable` against the exogenous law. Print's joint is
+*"`Pr(W = w) = Σ_{ε | W(ε) = w} P(ε)`"* (ec21-scm-joint, PDF p. 2), a sum of
+point masses with no measurability clause, and at an exogenous law concentrated
+on countably many draws every map is almost-everywhere measurable
+(`SCM.aemeasurable_of_countable_support`). So the laws below carry the weaker
+hypothesis, and at print's atomic laws none at all.
+-/
+
+namespace SCM
+
+open MeasureTheory
+
+variable {V : Type*} [DecidableEq V] {dom edom : V → Type*}
+  [∀ v, MeasurableSpace (edom v)] [∀ v, MeasurableSpace (dom v)]
+  (M : SCM V dom edom)
+
+/-- Joint law of a set of evaluated variables, at an evaluation that is only
+almost-everywhere measurable for the exogenous law. -/
+@[expose] public noncomputable def observableLawAE [M.IsWellFounded] (X : Set V)
+    (hm : AEMeasurable (fun ε : ExoAssignment V edom ↦ fun v : X ↦ M.eval ε v)
+      (M.exoLaw : Measure (ExoAssignment V edom))) :
+    ProbabilityMeasure ((v : X) → dom v) :=
+  M.exoLaw.map hm
+
+/-- At a measurable evaluation the two laws are the same measure. -/
+public theorem observableLaw_eq_observableLawAE [M.IsWellFounded] (X : Set V)
+    (hm : Measurable (fun ε : ExoAssignment V edom ↦ fun v : X ↦ M.eval ε v)) :
+    M.observableLaw X hm = M.observableLawAE X hm.aemeasurable :=
+  rfl
+
+omit [∀ v, MeasurableSpace (dom v)] in
+/-- **At an atomic exogenous law every map is almost-everywhere measurable.**
+
+Print's `Pr(W = w) = Σ_{ε | W(ε) = w} P(ε)` (ec21-scm-joint) is a sum against
+point masses, so it presupposes that `P(ε)` is carried by countably many draws;
+that presupposition is the hypothesis `hfull` with `hS`. A countable vertex set
+and measurable singletons make a countable set of draws measurable, and on it any
+function is measurable. The hypothesis is not free: an infinite product of
+non-degenerate marginals is atomless, and there print's sum formula names
+nothing. -/
+public theorem aemeasurable_of_countable_support [Countable V]
+    [∀ v, MeasurableSingletonClass (edom v)] {S : Set (ExoAssignment V edom)}
+    (hS : S.Countable) (hfull : (M.exoLaw : Measure (ExoAssignment V edom)) Sᶜ = 0)
+    {α : Type*} [MeasurableSpace α] (f : ExoAssignment V edom → α) :
+    AEMeasurable f (M.exoLaw : Measure (ExoAssignment V edom)) := by
+  have hSm : MeasurableSet S := hS.measurableSet
+  have hrestrict : (M.exoLaw : Measure (ExoAssignment V edom)).restrict S = M.exoLaw :=
+    Measure.restrict_eq_self_of_ae_mem (ae_iff.mpr hfull)
+  rw [← hrestrict, aemeasurable_restrict_iff_comap_subtype hSm]
+  have := hS.to_subtype
+  exact (measurable_of_countable _).aemeasurable
+
+end SCM
+
+namespace SCIM
+
+open MeasureTheory
+
+variable {V : Type*} [DecidableEq V] {dom edom : V → Type*}
+  [∀ v, MeasurableSpace (edom v)] [∀ v, MeasurableSpace (dom v)]
+  (M : SCIM V dom edom)
+
+omit [∀ v, MeasurableSpace (dom v)] in
+/-- Almost-everywhere measurability of the observables off the descendants of `𝐃` transfers
+between policies: the two evaluation maps are equal there and the exogenous law
+is the same. So one hypothesis serves both sides of the invariance sentence. -/
+public theorem aemeasurable_withPolicy_of_notDownstream [M.graph.IsWellFounded]
+    (π π' : M.Policy) (X : Set V) (hX : ∀ v ∈ X, M.graph.NotDownstream v)
+    {β : V → Type*} (g : (v : V) → dom v → β v) [∀ v, MeasurableSpace (β v)]
+    (hm : AEMeasurable (fun ε : ExoAssignment V edom ↦
+      fun v : X ↦ g v ((M.withPolicy π).eval ε v))
+      ((M.withPolicy π).exoLaw : Measure (ExoAssignment V edom))) :
+    AEMeasurable (fun ε : ExoAssignment V edom ↦
+      fun v : X ↦ g v ((M.withPolicy π').eval ε v))
+      ((M.withPolicy π').exoLaw : Measure (ExoAssignment V edom)) := by
+  have h : (fun ε : ExoAssignment V edom ↦ fun v : X ↦ g v ((M.withPolicy π').eval ε v)) =
+      fun ε ↦ fun v : X ↦ g v ((M.withPolicy π).eval ε v) :=
+    funext fun ε ↦ funext fun v ↦ by
+      rw [M.eval_withPolicy_eq_of_notDownstream π π' ε (hX v v.property)]
+  rw [h]
+  exact hm
+
+/-- **Print's policy-invariance sentence at the level of laws, with one
+almost-everywhere measurability hypothesis.** *"For a set of variables `X` not in
+Desc_D, `Pr^π(x)` is independent of `π`"* (ec21-policy-invariance, PDF p. 3).
+`SCIM.observableLaw_withPolicy_eq_of_notDownstream` asks for `Measurable` at
+both policies; here `AEMeasurable` at one policy suffices, the other side's
+being derived. -/
+public theorem observableLawAE_withPolicy_eq_of_notDownstream [M.graph.IsWellFounded]
+    (π π' : M.Policy) (X : Set V) (hX : ∀ v ∈ X, M.graph.NotDownstream v)
+    (hm : AEMeasurable (fun ε : ExoAssignment V edom ↦
+      fun v : X ↦ (M.withPolicy π).eval ε v)
+      ((M.withPolicy π).exoLaw : Measure (ExoAssignment V edom))) :
+    (M.withPolicy π).observableLawAE X hm =
+      (M.withPolicy π').observableLawAE X
+        (M.aemeasurable_withPolicy_of_notDownstream π π' X hX (fun _ a ↦ a) hm) := by
+  apply Subtype.ext
+  change Measure.map _ _ = Measure.map _ _
+  congr 1
+  funext ε v
+  exact M.eval_withPolicy_eq_of_notDownstream π π' ε (hX v v.property)
+
+/-- **Print's invariance sentence with no measurability hypothesis**, at an
+exogenous law carried by countably many draws over a countable vertex set —
+the law print's sum formula `Pr(W = w) = Σ_{ε | W(ε) = w} P(ε)` presupposes.
+Both laws exist by `SCM.aemeasurable_of_countable_support`. -/
+public theorem observableLawAE_withPolicy_eq_of_countable_support
+    [M.graph.IsWellFounded] [Countable V] [∀ v, MeasurableSingletonClass (edom v)]
+    (π π' : M.Policy) (X : Set V) (hX : ∀ v ∈ X, M.graph.NotDownstream v)
+    {S : Set (ExoAssignment V edom)} (hS : S.Countable)
+    (hfull : ((M.withPolicy π).exoLaw : Measure (ExoAssignment V edom)) Sᶜ = 0) :
+    (M.withPolicy π).observableLawAE X
+        ((M.withPolicy π).aemeasurable_of_countable_support hS hfull _) =
+      (M.withPolicy π').observableLawAE X
+        ((M.withPolicy π').aemeasurable_of_countable_support hS hfull _) :=
+  M.observableLawAE_withPolicy_eq_of_notDownstream π π' X hX _
+
+/-! ### `Eπ[U]` and optimal policies at almost-everywhere measurable evaluations
+
+`SCIM.expectedUtilityLaw` and `SCIM.IsOptimalPolicyLaw` ask the utility evaluation
+to be `Measurable`, a condition print does not write: print's `P` is *"a
+probability distribution for `E`"* (Definition 4) with `Pr(W = w) = Σ_{ε | W(ε) = w}
+P(ε)` (ec21-scm-joint, PDF p. 2), no measurability clause. The pushforward needs
+only `AEMeasurable` against `Mπ`'s exogenous law, which at print's atomic laws is
+free (`SCM.aemeasurable_of_countable_support`), even where a utility reads a
+non-measurable function of infinitely many parents. -/
+
+/-- **`Eπ[U]` at an almost-everywhere measurable utility evaluation.** The
+integral of print's total utility `U := Σ_{U ∈ 𝐔} U` under the law of the utility
+vertices in `Mπ`, formed by `SCM.observableLawAE`. At a measurable evaluation it
+is `SCIM.expectedUtilityLaw` (`SCIM.expectedUtilityLaw_eq_AE`). -/
+@[expose] public noncomputable def expectedUtilityLawAE [M.graph.IsWellFounded]
+    [Fintype {v : V // M.graph.IsUtility v}] (π : M.Policy)
+    (hm : AEMeasurable (fun ε : ExoAssignment V edom ↦
+      fun u : {v : V // M.graph.IsUtility v} ↦ (M.withPolicy π).eval ε u.1)
+      ((M.withPolicy π).exoLaw : Measure (ExoAssignment V edom))) : ℝ :=
+  ∫ w, ∑ u : {v : V // M.graph.IsUtility v}, M.utilityValue u.1 u.2 (w ⟨u.1, u.2⟩)
+    ∂((M.withPolicy π).observableLawAE {v : V | M.graph.IsUtility v} hm :
+      Measure ((v : {v : V | M.graph.IsUtility v}) → dom v))
+
+/-- At a measurable evaluation the almost-everywhere expectation is
+`SCIM.expectedUtilityLaw`. -/
+public theorem expectedUtilityLaw_eq_AE [M.graph.IsWellFounded]
+    [Fintype {v : V // M.graph.IsUtility v}] (π : M.Policy)
+    (hm : Measurable fun ε : ExoAssignment V edom ↦
+      fun u : {v : V // M.graph.IsUtility v} ↦ (M.withPolicy π).eval ε u.1) :
+    M.expectedUtilityLaw π hm = M.expectedUtilityLawAE π hm.aemeasurable :=
+  rfl
+
+/-- **An optimal policy at almost-everywhere measurable evaluations**: print's
+*"any policy `π` that maximises `Eπ[U]`"* (PDF p. 3), with `Eπ[U]` the expectation
+`SCIM.expectedUtilityLawAE`. Each policy's utility evaluation need only be
+almost-everywhere measurable for its own exogenous law. -/
+@[expose] public def IsOptimalPolicyLawAE [M.graph.IsWellFounded]
+    [Fintype {v : V // M.graph.IsUtility v}] (π : M.Policy)
+    (hm : ∀ π' : M.Policy, AEMeasurable (fun ε : ExoAssignment V edom ↦
+      fun u : {v : V // M.graph.IsUtility v} ↦ (M.withPolicy π').eval ε u.1)
+      ((M.withPolicy π').exoLaw : Measure (ExoAssignment V edom))) : Prop :=
+  ∀ π' : M.Policy, M.expectedUtilityLawAE π' (hm π') ≤ M.expectedUtilityLawAE π (hm π)
+
+/-- At measurable evaluations the two readings of *"maximises"* agree, so
+`SCIM.IsOptimalPolicyLaw` is the measurable case of `SCIM.IsOptimalPolicyLawAE`. -/
+public theorem isOptimalPolicyLaw_iff_AE [M.graph.IsWellFounded]
+    [Fintype {v : V // M.graph.IsUtility v}] (π : M.Policy)
+    (hm : ∀ π' : M.Policy, Measurable fun ε : ExoAssignment V edom ↦
+      fun u : {v : V // M.graph.IsUtility v} ↦ (M.withPolicy π').eval ε u.1) :
+    M.IsOptimalPolicyLaw π hm ↔ M.IsOptimalPolicyLawAE π fun π' ↦ (hm π').aemeasurable :=
+  Iff.rfl
+
+end SCIM
+
+/-! ## Definition 5 without a finite vertex set
+
+`SCIM.optimalValue` and `SCIM.IsMaterial` are finite sums over
+`ExoAssignment V edom` and exist only at `[Fintype V]`. Print's Definition 5
+(*"For any given SCIM `M`, let `V*(M) = max_π E_π[U]`"*, ec21-def-5) names no
+cardinality; Definition 4's *"finite"* qualifies domains, never the vertex set.
+`V*(M)` needs exactly three things to denote, and each is carried here as what
+it is rather than as a bound on `V`:
+
+* the recursion (`[M.graph.IsWellFounded]`, print's *"recursive application"*);
+* print's `U := Σ_{U ∈ 𝐔} U` (`[Fintype {v // IsUtility v}]`, as in
+  `SCIM.expectedUtilityLaw`);
+* print's `max`, which presupposes that some policy attains it: a hypothesis
+  `hatt : ∃ π, M.IsOptimalPolicyLaw π hm`, print's own presupposition rather than
+  a condition on the model's size. `SCIM.exists_isOptimalPolicyLaw` discharges it
+  whenever the policy space is finite, which holds when the decisions are finitely
+  many and each observes finitely many parents over finite domains
+  (`SCIM.finite_policy`); but it also holds at an infinite policy space, for
+  instance where every policy earns the same.
+
+Measurability of each policy's utility evaluation is asked for, as everywhere in
+the law layer, and is free at a finite vertex set (`SCM.measurable_exo`).
+-/
+
+namespace SCIM
+
+open MeasureTheory
+
+variable {V : Type*} [DecidableEq V] {dom edom : V → Type*}
+  [∀ v, MeasurableSpace (edom v)] [∀ v, MeasurableSpace (dom v)]
+  (M : SCIM V dom edom)
+
+omit [∀ v, MeasurableSpace (edom v)] [∀ v, MeasurableSpace (dom v)] in
+/-- **The policy space is finite when the decisions see finitely much**: finitely
+many decision vertices, each with finitely many parents, over finite domains. No
+bound on the other vertices is needed, because a policy reads only its
+observations. -/
+public theorem finite_policy [Finite {d : V // M.graph.IsDecision d}]
+    (hpar : ∀ d, M.graph.IsDecision d → (M.graph.parents d).Finite)
+    [∀ v, Finite (dom v)] [∀ v, Finite (edom v)] : Finite M.Policy := by
+  classical
+  have : ∀ d : {d : V // M.graph.IsDecision d}, Finite (M.graph.parents d.1) :=
+    fun d ↦ (hpar d.1 d.2).to_subtype
+  let ext : (d : {d : V // M.graph.IsDecision d}) →
+      ((p : M.graph.parents d.1) → dom p.1) → EndoAssignment V dom :=
+    fun d a v ↦ if h : v ∈ M.graph.parents d.1 then a ⟨v, h⟩ else (M.dom_nonempty v).some
+  let F : M.Policy → (d : {d : V // M.graph.IsDecision d}) →
+      ((p : M.graph.parents d.1) → dom p.1) → edom d.1 → dom d.1 :=
+    fun π d a e ↦ π.1 d (ext d a) e
+  refine Finite.of_injective F fun π π' h ↦ Subtype.ext (funext fun d ↦ funext fun a ↦
+    funext fun e ↦ ?_)
+  have hagree : ∀ p ∈ M.graph.parents d.1, a p = ext d (fun q ↦ a q.1) p := by
+    intro p hp
+    simp [ext, dif_pos hp]
+  rw [π.2 d a _ e hagree, π'.2 d a _ e hagree]
+  exact congrFun (congrFun (congrFun h d) (fun q ↦ a q.1)) e
+
+omit [∀ v, MeasurableSpace (edom v)] [∀ v, MeasurableSpace (dom v)] in
+/-- `M_{X↛D}` has the same utility vertices as `M`. -/
+public instance instFintypeUtilityRemoveInfoLink [h : Fintype {v : V // M.graph.IsUtility v}]
+    {d : V} (hd : M.graph.IsDecision d) (x : V) :
+    Fintype {v : V // (M.removeInfoLink hd x).graph.IsUtility v} :=
+  h
+
+omit [∀ v, MeasurableSpace (edom v)] [∀ v, MeasurableSpace (dom v)] in
+/-- A policy of `M_{X↛D}` reads fewer parents, so it is a policy of `M`: removing
+an information link keeps the policy space finite. -/
+public instance instFiniteRemoveInfoLinkPolicy [Finite M.Policy]
+    {d : V} (hd : M.graph.IsDecision d) (x : V) :
+    Finite (M.removeInfoLink hd x).Policy := by
+  refine Finite.of_injective
+    (fun π : (M.removeInfoLink hd x).Policy ↦
+      (⟨fun d' a e ↦ π.1 ⟨d'.1, d'.2⟩ a e, fun d' a b e hab ↦
+        π.2 ⟨d'.1, d'.2⟩ a b e fun p hp ↦ hab p (removeInfoLink_sub M hp)⟩ : M.Policy))
+    fun π π' h ↦ Subtype.ext (funext fun d' ↦ ?_)
+  exact congrFun (congrArg Subtype.val h) ⟨d'.1, d'.2⟩
+
+/-- **`V*(M) = max_π E_π[U]` at an unbounded vertex set** (Definition 5,
+ec21-def-5): the supremum of print's expectation `SCIM.expectedUtilityLaw` over
+policies. `_hatt` is print's presupposition that the `max` is attained; with it the
+supremum is the value of any maximiser (`SCIM.optimalValueLaw_eq`), and without it
+a real `⨆` over an unbounded family would be junk, so the hypothesis is
+load-bearing although the body does not read it. No finiteness of the policy space
+is asked: `SCIM.exists_isOptimalPolicyLaw` supplies `_hatt` where that space is
+finite, and nothing else about the model's size is needed. -/
+@[expose] public noncomputable def optimalValueLaw [M.graph.IsWellFounded]
+    [Fintype {v : V // M.graph.IsUtility v}]
+    (hm : ∀ π : M.Policy, Measurable fun ε : ExoAssignment V edom ↦
+      fun u : {v : V // M.graph.IsUtility v} ↦ (M.withPolicy π).eval ε u.1)
+    (_hatt : ∃ π, M.IsOptimalPolicyLaw π hm) : ℝ :=
+  ⨆ π : M.Policy, M.expectedUtilityLaw π (hm π)
+
+/-- **`V*(M)` is the value of any maximiser**: print's `max_π E_π[U]`
+(Definition 5, ec21-def-5) is attained at every policy that maximises `E_π[U]`. -/
+public theorem optimalValueLaw_eq [M.graph.IsWellFounded]
+    [Fintype {v : V // M.graph.IsUtility v}]
+    (hm : ∀ π : M.Policy, Measurable fun ε : ExoAssignment V edom ↦
+      fun u : {v : V // M.graph.IsUtility v} ↦ (M.withPolicy π).eval ε u.1)
+    (hatt : ∃ π, M.IsOptimalPolicyLaw π hm) {π : M.Policy}
+    (hπ : M.IsOptimalPolicyLaw π hm) :
+    M.optimalValueLaw hm hatt = M.expectedUtilityLaw π (hm π) :=
+  le_antisymm (ciSup_le hπ) (le_ciSup ⟨_, Set.forall_mem_range.2 hπ⟩ π)
+
+/-- **Print's `max` is attained when the policy space is finite**: some policy
+is optimal in print's sense, at any vertex set. This is the lemma that discharges
+`SCIM.optimalValueLaw`'s attainment hypothesis; `SCIM.optimalValueLaw_eq` gives
+its value. -/
+public theorem exists_isOptimalPolicyLaw [M.graph.IsWellFounded]
+    [Fintype {v : V // M.graph.IsUtility v}] [Finite M.Policy]
+    (hm : ∀ π : M.Policy, Measurable fun ε : ExoAssignment V edom ↦
+      fun u : {v : V // M.graph.IsUtility v} ↦ (M.withPolicy π).eval ε u.1) :
+    ∃ π : M.Policy, M.IsOptimalPolicyLaw π hm := by
+  obtain ⟨π, hπ⟩ := exists_eq_ciSup_of_finite (ι := M.Policy)
+    (f := fun π : M.Policy ↦ M.expectedUtilityLaw π (hm π))
+  refine ⟨π, fun π' ↦ ?_⟩
+  rw [hπ]
+  exact le_ciSup (Set.finite_range fun π : M.Policy ↦ M.expectedUtilityLaw π (hm π)).bddAbove π'
+
+/-- **Definition 5 (Materiality) at an unbounded vertex set.** *"The observation
+`X ∈ Pa_D` is material if `V*(M_{X↛D}) < V*(M)`"* (ec21-def-5), with both values
+`SCIM.optimalValueLaw`. Measurability is asked of the policies of both models,
+and attainment of both maxima is print's presupposition (`hatt`, `hatt'`), so the
+policy spaces may be infinite. -/
+@[expose] public def IsMaterialLaw [M.graph.IsWellFounded]
+    [Fintype {v : V // M.graph.IsUtility v}] {d : V}
+    (hd : M.graph.IsDecision d) {x : V} (_hx : x ∈ M.graph.parents d)
+    (hm : ∀ π : M.Policy, Measurable fun ε : ExoAssignment V edom ↦
+      fun u : {v : V // M.graph.IsUtility v} ↦ (M.withPolicy π).eval ε u.1)
+    (hm' : ∀ π : (M.removeInfoLink hd x).Policy, Measurable fun ε : ExoAssignment V edom ↦
+      fun u : {v : V // (M.removeInfoLink hd x).graph.IsUtility v} ↦
+        ((M.removeInfoLink hd x).withPolicy π).eval ε u.1)
+    (hatt : ∃ π, M.IsOptimalPolicyLaw π hm)
+    (hatt' : ∃ π, (M.removeInfoLink hd x).IsOptimalPolicyLaw π hm') : Prop :=
+  (M.removeInfoLink hd x).optimalValueLaw hm' hatt' < M.optimalValueLaw hm hatt
+
+/-- At a finite vertex set `V*(M)` is the finite maximum `SCIM.optimalValue`. -/
+public theorem optimalValue_eq_optimalValueLaw [Fintype V] [∀ v, Fintype (edom v)]
+    [∀ v, Fintype (dom v)] [∀ v, DecidableEq (dom v)]
+    [∀ v, DiscreteMeasurableSpace (edom v)] [∀ v, Countable (edom v)]
+    [∀ v, DiscreteMeasurableSpace (dom v)] [∀ v, Countable (dom v)]
+    [M.graph.IsWellFounded] [Fintype {v : V // M.graph.IsUtility v}] :
+    M.optimalValue =
+      M.optimalValueLaw (fun _ ↦ SCM.measurable_exo _) (M.exists_isOptimalPolicyLaw _) := by
+  rw [M.optimalValue_eq_sup'_law, optimalValueLaw, Finset.sup'_univ_eq_ciSup]
+
+/-- **The bridge**: at a finite vertex set materiality in the law sense is
+`SCIM.IsMaterial`, so the unbounded definition extends the finite one. -/
+public theorem isMaterial_iff_law [Fintype V] [∀ v, Fintype (edom v)]
+    [∀ v, Fintype (dom v)] [∀ v, DecidableEq (dom v)]
+    [∀ v, DiscreteMeasurableSpace (edom v)] [∀ v, Countable (edom v)]
+    [∀ v, DiscreteMeasurableSpace (dom v)] [∀ v, Countable (dom v)]
+    [M.graph.IsWellFounded] [Fintype {v : V // M.graph.IsUtility v}] {d : V}
+    (hd : M.graph.IsDecision d) {x : V} (hx : x ∈ M.graph.parents d) :
+    M.IsMaterial hd hx ↔
+      M.IsMaterialLaw hd hx (fun _ ↦ SCM.measurable_exo _) (fun _ ↦ SCM.measurable_exo _)
+        (M.exists_isOptimalPolicyLaw _) ((M.removeInfoLink hd x).exists_isOptimalPolicyLaw _) := by
+  rw [IsMaterial, IsMaterialLaw, M.optimalValue_eq_optimalValueLaw,
+    (M.removeInfoLink hd x).optimalValue_eq_optimalValueLaw]
 
 end SCIM
 

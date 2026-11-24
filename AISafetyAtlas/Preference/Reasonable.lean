@@ -2,6 +2,8 @@ module
 
 public import AISafetyAtlas.Preference
 public import Mathlib.Algebra.Group.Pi.Basic
+public import Mathlib.Order.Lattice.Nat
+public import Mathlib.Tactic.Linarith
 
 /-!
 # Basic operations and Proposition 7
@@ -125,6 +127,122 @@ public theorem op3_op4 (x : Pair S A) : op3 (op4 x) = op3 x := by
 end Operations
 
 /-!
+## The source's bounded reward space
+
+The source's space of candidate rewards is
+`ℛ = {R : 𝒮 × 𝒜 → [-1, 1]} = [-1, 1]^{𝒮×𝒜}` (Armstrong and Mindermann, §3,
+`am-reward-space`). `RewardFn` is real-valued and wider; the subtype below picks
+out exactly print's set, and the three lemmas after it show that print's own
+constructions -- the zero reward of `f₁`, the reward `R_π` of `f₆`, and the
+negation of `f₄` -- stay inside it, so every pair the propositions build from a
+pair with a bounded reward again has a bounded reward.
+-/
+
+/-- A reward function takes values in print's interval `[-1, 1]`. -/
+@[expose] public def IsBoundedReward (R : RewardFn S A) : Prop :=
+  ∀ s a, R s a ∈ Set.Icc (-1 : ℝ) 1
+
+/-- **The source's reward space** `ℛ = [-1, 1]^{𝒮×𝒜}` (Armstrong and
+Mindermann, §3): the reward functions with values in `[-1, 1]`. -/
+public abbrev BoundedRewardFn (S A : Type*) : Type _ :=
+  {R : RewardFn S A // IsBoundedReward R}
+
+/-- The trivial reward of `f₁(p) = (p, 0)` is in print's reward space. -/
+public theorem isBoundedReward_zero : IsBoundedReward (0 : RewardFn S A) := fun _ _ => by
+  simp only [Pi.zero_apply, Set.mem_Icc]; norm_num
+
+/-- The reward `R_π = f₆(π)` takes values in `{0, 1}`, so it is in print's
+reward space. -/
+public theorem isBoundedReward_rewardOf [DecidableEq A] (π : Policy S A) :
+    IsBoundedReward (rewardOf π) := fun s a => by
+  unfold rewardOf
+  split_ifs <;> simp only [Set.mem_Icc] <;> norm_num
+
+/-- Print's reward space is closed under the negation used by `f₄`. -/
+public theorem IsBoundedReward.neg {R : RewardFn S A} (h : IsBoundedReward R) :
+    IsBoundedReward (-R) := fun s a => by
+  obtain ⟨h1, h2⟩ := h s a
+  simp only [Pi.neg_apply, Set.mem_Icc]
+  constructor <;> linarith
+
+/-!
+## Comparable complexity and lowest complexity, at any complexity and any `c`
+
+Armstrong and Mindermann, §5.1 (`am-comparable`, `am-lowest`, PDF p. 6): "choose
+a constant `c ≥ 0`, then `(p, R)` and `(p', R')` are of comparable complexity if
+`‖K_L(p, R) − K_L(p', R')‖ ≤ c`", and for a set `S ⊂ 𝒫 × ℛ` the pair
+`(p, R) ∈ S` "is amongst the lowest complexity in `S` if
+`‖K_L(p, R) − min_{(p', R') ∈ S} K_L(p', R')‖ ≤ c`".
+
+Both are stated here for an arbitrary complexity `K : Pair S A → ℕ` (print's
+`K_L`, a Kolmogorov complexity and so natural-valued) and an arbitrary real
+`c`, with no language structure: print defines them before, and independently
+of, any reasonableness assumption. The language structures' relations are
+instances (`ReasonableLanguage.proposition_eight_comparable`,
+`Source.ReasonableForF.amongLowestCompatible_iff`).
+-/
+
+/-- **Comparable complexity** (Armstrong and Mindermann, §5.1, `am-comparable`):
+`‖K(x) − K(y)‖ ≤ c`. -/
+@[expose] public def ComparableComplexity (K : Pair S A → ℕ) (c : ℝ) (x y : Pair S A) : Prop :=
+  |(K x : ℝ) - K y| ≤ c
+
+/-- At a natural constant, comparable complexity is the two one-sided bounds
+the propositions conclude. -/
+public theorem comparableComplexity_iff (K : Pair S A → ℕ) (c : ℕ) (x y : Pair S A) :
+    ComparableComplexity K c x y ↔ K x ≤ K y + c ∧ K y ≤ K x + c := by
+  unfold ComparableComplexity
+  rw [abs_le]
+  constructor
+  · rintro ⟨h1, h2⟩
+    constructor
+    · exact_mod_cast (by linarith : (K x : ℝ) ≤ K y + c)
+    · exact_mod_cast (by linarith : (K y : ℝ) ≤ K x + c)
+  · rintro ⟨h1, h2⟩
+    have h1' : (K x : ℝ) ≤ K y + c := by exact_mod_cast h1
+    have h2' : (K y : ℝ) ≤ K x + c := by exact_mod_cast h2
+    constructor <;> linarith
+
+/-- Comparable complexity is symmetric, as print's norm makes it. -/
+public theorem ComparableComplexity.symm {K : Pair S A → ℕ} {c : ℝ} {x y : Pair S A}
+    (h : ComparableComplexity K c x y) : ComparableComplexity K c y x := by
+  unfold ComparableComplexity at *
+  rwa [abs_sub_comm]
+
+/-- **Amongst the lowest complexity in a set** (Armstrong and Mindermann, §5.1,
+`am-lowest`), for any set `T` of pairs: `x ∈ T` and no pair of `T` beats it by
+more than `c`.
+
+Print writes the distance to `min_{T} K`. Because `K` is natural-valued, that
+minimum is attained on every nonempty `T`, and `amongLowest_iff_min` shows the
+two readings agree exactly. -/
+@[expose] public def AmongLowest (K : Pair S A → ℕ) (c : ℝ) (T : Set (Pair S A))
+    (x : Pair S A) : Prop :=
+  x ∈ T ∧ ∀ y ∈ T, (K x : ℝ) ≤ K y + c
+
+/-- `AmongLowest` is print's formula `‖K(x) − min_{y ∈ T} K(y)‖ ≤ c`, with the
+minimum written as `sInf (K '' T)`, attained because `K` is natural-valued. -/
+public theorem amongLowest_iff_min (K : Pair S A → ℕ) (c : ℝ) (T : Set (Pair S A))
+    (x : Pair S A) :
+    AmongLowest K c T x ↔ x ∈ T ∧ |(K x : ℝ) - (sInf (K '' T) : ℕ)| ≤ c := by
+  constructor
+  · rintro ⟨hx, hmin⟩
+    refine ⟨hx, ?_⟩
+    obtain ⟨y, hy, hyeq⟩ := Nat.sInf_mem (⟨K x, x, hx, rfl⟩ : (K '' T).Nonempty)
+    have hle : sInf (K '' T) ≤ K x := Nat.sInf_le ⟨x, hx, rfl⟩
+    have hle' : ((sInf (K '' T) : ℕ) : ℝ) ≤ K x := by exact_mod_cast hle
+    have := hmin y hy
+    rw [hyeq] at this
+    rw [abs_of_nonneg (by linarith)]
+    linarith
+  · rintro ⟨hx, habs⟩
+    refine ⟨hx, fun y hy => ?_⟩
+    have hle : sInf (K '' T) ≤ K y := Nat.sInf_le ⟨y, hy, rfl⟩
+    have hle' : ((sInf (K '' T) : ℕ) : ℝ) ≤ K y := by exact_mod_cast hle
+    have := (abs_le.mp habs).2
+    linarith
+
+/-!
 ## `c`-reasonable languages
 -/
 
@@ -232,6 +350,15 @@ public theorem proposition_eight (h : Compatible x π) :
   refine ⟨by rw [Compatible, op3_op4]; exact h, L.neg_le x, ?_⟩
   have := L.neg_le (op4 x)
   rwa [op4_op4] at this
+
+/-- **Proposition 8, in print's vocabulary** (source §5.2): a compatible pair's
+negation is compatible with the same policy and the two are *of comparable
+complexity* in the sense of `ComparableComplexity` (`am-comparable`) at the
+language's constant. A corollary of `proposition_eight`, which is unchanged. -/
+public theorem proposition_eight_comparable (h : Compatible x π) :
+    Compatible (op4 x) π ∧ ComparableComplexity L.KPair L.c x (op4 x) := by
+  obtain ⟨hc, h1, h2⟩ := L.proposition_eight π x h
+  exact ⟨hc, (comparableComplexity_iff _ _ _ _).mpr ⟨h2, h1⟩⟩
 
 end ReasonableLanguage
 

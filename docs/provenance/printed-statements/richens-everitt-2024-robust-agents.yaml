@@ -1,0 +1,394 @@
+source:
+  citation: >-
+    Jonathan Richens and Tom Everitt, Robust agents learn causal world models.
+    Published as a conference paper at ICLR 2024 (proceedings PDF, 32 pp.).
+    Section 2 and Appendices A.1, A.2, B.
+  file: richens-everitt-2024-iclr-proceedings.pdf
+  sha256: 143d458cbee2f4f5d04d7380f6741e8105965d1ee94834e1ddb3bd231722a0e7
+  page_offset: 0
+  version_note: >-
+    The audit (section 6) pins the proceedings PDF, so this file is transcribed
+    from it. map.tsv and source card S06 point at the arXiv working text
+    richens-everitt-2024-iclr-robust-agents-learn-causal-world-models.pdf
+    (sha256 b25a2c7e8fe27d1dfd00299166197d8f3bd2ac8af7102f3b2a07585cfd6743b2), whose
+    pdf_page numbers are those on the card. For every statement below the two texts
+    agree word for word (text layers of PDF pp. 2-3 and of proceedings pp. 14-18 /
+    arXiv pp. 15-19 compared token by token; the only differences are page numbers
+    and two words "in turn" elsewhere on p. 2-3). Section 2 is on the same PDF pages
+    in both; Appendix A-B pages are one higher in the arXiv text (proceedings p. n =
+    arXiv p. n+1). Printed page = PDF page in the proceedings.
+  standing: |
+    Finite domains (§2.1, p. 2): "We use capital letters for random variables $V$,
+    and lower case for their values $v \in dom(V)$. For simplicity, we assume each
+    variable has a finite number of possible values, $|dom(V)| < \infty$. Bold face
+    denotes sets of variables $\boldsymbol{V} = \{V_1, \ldots, V_n\}$, and their
+    values $\boldsymbol{v} \in dom(\boldsymbol{V}) = \times_i dom(V_i)$."
+
+    Single decision, single utility (§2.2, p. 3): "For simplicity we focus on tasks
+    involving a single decision and a single utility function." [\ldots] "The
+    utility is any real-valued function including standard loss and reward
+    functions."
+
+    Environment (§2.2, p. 3): "We assume that the environment is described by a set
+    of random variables $\boldsymbol{C}$ that interact via causal mechanisms, and
+    where $\boldsymbol{C}$ satisfies causal sufficiency (Pearl, 2009) (includes all
+    common causes), noting that such a choice of $\boldsymbol{C}$ always exists. We
+    refer to the CBN over $\boldsymbol{C}$ as the `true' or `underlying' CBN. Note we
+    do not assume the agent has any knowledge of the underling CBN, nor do we assume
+    which variables in $\boldsymbol{C}$ are observed or unobserved by the agent,
+    beyond that the agent can observe $\mathbf{Pa}_D \subseteq \boldsymbol{C}$. We
+    also assume knowledge of the utility function $U(\mathbf{Pa}_U)$."
+
+    Appendix A.1 (p. 14): "The environment is described by a set of random
+    variables $\boldsymbol{C} = \{C_1, C_2, \ldots, C_N\}$, which in combination with
+    the decision $D$ and utility nodes $U$ define the state space for the CID
+    $\boldsymbol{V} = \boldsymbol{C} \cup \{D, U\}$."
+
+    Restriction to unmediated, non-trivial tasks (Appendix A.1, p. 15): "In the
+    following we restrict our attention to a class of CIDs we refer to as
+    `unmediated decision tasks', where where the agent's decision does not causally
+    influence any chance variables that go on to influence the utility." [\ldots]
+    "Furthermore, we will focus on non-trivial unmediated decision tasks i.e. where
+    $U \in \mathbf{Ch}_D$, as the case $\mathbf{Ch}_D = \emptyset$ describes trivial
+    decision tasks (the agent's action does not influence the utility)."
+
+    Domain dependence (Assumption 2, p. 4 and again p. 15) is imposed from Lemma 1
+    on; transcribed under definitions as re24-assumption-2.
+
+    Appendix A.2 (p. 16): "We restrict our attention to $\boldsymbol{C}$ that are
+    categorical, and without loss of generality we label states
+    $c_i = 0, 1, \ldots, \dim_i - 1$ where $\dim_i$ is the dimension of variable
+    $C_i$."
+
+definitions:
+  - id: re24-def-1
+    label: Definition 1 (Bayesian networks)
+    pdf_page: 2
+    book_page: 2
+    latex: |
+      \textbf{Definition 1} (Bayesian networks)\textbf{.} \emph{A Bayesian network
+      $M = (G, P)$ over a set of variables $\boldsymbol{V} = \{V_1, \ldots, V_n\}$ is
+      a joint probability distribution $P(\boldsymbol{V})$ that factors according to
+      a directed acyclic graph (DAG) $G$, i.e.
+      $P(V_1, \ldots, V_n) = \prod_{i=1}^{n} P(V_i \mid \boldsymbol{Pa}_{V_i})$,
+      where $\boldsymbol{Pa}_{V_i}$ are the parents of $V_i$ in $G$.}
+    note: Repeated verbatim in Appendix A.1, p. 14.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: re24-hard-intervention
+    label: hard intervention (§2.1 prose)
+    pdf_page: 2
+    book_page: 2
+    latex: |
+      Interventions describe external changes to the data generating process (and
+      hence changing the joint distribution), for example a \emph{hard} intervention
+      $\mathrm{do}(\boldsymbol{X} = \boldsymbol{x})$ describes forcing the set of
+      variables $\boldsymbol{X} \subseteq \boldsymbol{V}$ to take value
+      $\boldsymbol{x}$. This generates a new distribution
+      $P(\boldsymbol{V} \mid \mathrm{do}(\boldsymbol{X} = \boldsymbol{x})) =
+      P(\boldsymbol{V}_{\boldsymbol{x}})$ where $\boldsymbol{V}_{\boldsymbol{x}}$
+      refers to the variables $\boldsymbol{V}$ following this intervention.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: re24-soft-intervention
+    label: soft intervention (§2.1 prose)
+    pdf_page: 2
+    book_page: 2
+    latex: |
+      More generally, a \emph{soft} intervention
+      $\sigma_{v_i} = P'(V_i \mid \mathbf{Pa}^*_i)$ replaces the conditional
+      probability distribution for $V_i$ with a new distribution
+      $P'(V_i \mid \mathbf{Pa}^*_i)$, possibly resulting in a new parent set
+      $\mathbf{Pa}^*_i \neq \mathbf{Pa}_i$ as long as no cycles are introduced in the
+      graph. We refer to $\sigma_{v_i}$ as a \emph{domain indicator} (Correa \&
+      Bareinboim, 2020) (it has also been called an environment index, Arjovsky et
+      al., 2019). The updated distribution is denoted
+      $P(\boldsymbol{v}; \sigma_{\boldsymbol{v}'}) =
+      \prod_{i: v_i \in \boldsymbol{v}'} P'(v_i \mid \mathbf{pa}^*_{v_i})
+      \prod_{i: v_i \notin \boldsymbol{v}'} P(v_i \mid \mathbf{pa}_{v_i})$.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: re24-anc-desc
+    label: parents, ancestors, children, descendants (Appendix A.1 prose)
+    pdf_page: 14
+    book_page: 14
+    latex: |
+      With respect to the causal graph $G$ we denote the direct causes (parents) of
+      $V_i$ as $\mathbf{Pa}_i$, the set of all causes (ancestors) $\mathbf{Anc}_i$,
+      and the variables that $V_i$ directly causes (children) $\mathbf{Ch}_i$ and
+      descendants $\mathbf{Desc}_i$ as the set of all downstream variables. Note in
+      particular that $\mathbf{Anc}_i$ and $\mathbf{Desc}_i$ refer to \emph{proper}
+      ancestors and descendants, i.e. $V_i \notin \mathbf{Anc}_i$ and
+      $V_i \notin \mathbf{Desc}_i$.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: re24-assumption-2
+    label: Assumption 2 (Domain dependence)
+    pdf_page: 4
+    book_page: 4
+    latex: |
+      \textbf{Assumption 2} (Domain dependence)\textbf{.} \emph{There exists
+      $P(\boldsymbol{C} = \boldsymbol{c})$ and $P'(\boldsymbol{C} = \boldsymbol{c})$
+      compatible with $M$ such that
+      $\pi^* = \arg\max_\pi \mathbb{E}^\pi_P[U]$ implies
+      $\pi^* \neq \arg\max_\pi \mathbb{E}^\pi_{P'}[U]$.}
+    note: >-
+      Repeated verbatim on p. 15, preceded there by "we say that a decision task is
+      \emph{domain independent} if there exists a single policy that is optimal for
+      all choices of environment distribution $P(\boldsymbol{C} = c)$."
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: re24-lemma-1
+    label: Lemma 1
+    pdf_page: 15
+    book_page: 15
+    latex: |
+      \textbf{Lemma 1.} \emph{Domain dependence implies that;}
+
+      \emph{i) There exists no $d \in dom(D)$ such that
+      $d \in \arg\max_d U(d, c)\ \forall \boldsymbol{c} \in dom(C)$.}
+
+      \emph{ii) $\boldsymbol{Pa}_D \subsetneq \boldsymbol{Anc}_U$}
+
+      \emph{iii) $D \in \boldsymbol{Pa}_U$}
+    note: >-
+      In i) as printed, $c$ in $U(d, c)$ and $C$ in $dom(C)$ are not bold while the
+      bound $\boldsymbol{c}$ is (confirmed on a 220 dpi crop).
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+excerpts: []
+
+statements:
+  - id: re24-truncated-factorisation
+    audit_row: S06-R01
+    locator: §2.1 truncated factorisation
+    pdf_page: 2
+    book_page: 2
+    label: definition of a causal Bayesian network (§2.1 prose, displayed formula unnumbered)
+    latex: |
+      A Bayesian network is \emph{causal} if the graph $G$ captures the causal
+      relationships between the variables or, formally, if the result of any
+      intervention $\mathrm{do}(\boldsymbol{X} = \boldsymbol{x})$ for
+      $\boldsymbol{X} \subseteq \boldsymbol{V}$ can be computed from the truncated
+      factorisation formula:
+      \[ P(\boldsymbol{v} \mid \mathrm{do}(\boldsymbol{x})) =
+         \begin{cases}
+           \prod_{i: v_i \notin \boldsymbol{x}} P(v_i \mid \mathbf{pa}_{v_i}) &
+             \text{if } \boldsymbol{v} \text{ consistent with } \boldsymbol{x} \\
+           0 & \text{otherwise.}
+         \end{cases} \]
+    uses: [re24-def-1, re24-hard-intervention]
+    note: >-
+      Appendix A.1 (p. 14) restates it as
+      $P_{\mathrm{do}(v')}(\boldsymbol{v}) = \prod_{i: v_i \notin \boldsymbol{v}'}
+      P(v_i \mid \mathbf{pa}_{v_i})$ if $\boldsymbol{v}$ consistent with
+      $\boldsymbol{v}'$, $0$ otherwise. "Consistent with" is not defined in the
+      source.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind) + Grok (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: re24-def-2
+    audit_row: S06-R02
+    locator: Def. 2, eq. (1)
+    pdf_page: 3
+    book_page: 3
+    label: Definition 2 (Local interventions)
+    latex: |
+      \textbf{Definition 2} (Local interventions)\textbf{.} \emph{Local intervention
+      $\sigma$ on $V_i \in \boldsymbol{V}$ involves applying a map to the states of
+      $V_i$ that is not conditional on any other endogenous variables,
+      $v_i \mapsto f(v_i)$. We use the notation $\sigma = do(V_i = f(v_i))$
+      (variable $V_i$ is assigned the state $f(v_i)$). Formally, this is a soft
+      intervention on $V_i$ that transforms the conditional probability distribution
+      as,}
+      \[ P(v_i \,|\, \boldsymbol{pa}_i; \sigma) = \sum_{v'_i : f(v'_i) = v_i}
+         P(v'_i \,|\, \boldsymbol{pa}_i) \tag{1} \]
+    uses: [re24-soft-intervention, re24-def-1]
+    note: Repeated verbatim in Appendix A.1, p. 14.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind) + Grok (blind) + Codex (anchored re-read); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: re24-def-3
+    audit_row: S06-R03
+    locator: Def. 3 mixture formula
+    pdf_page: 3
+    book_page: 3
+    label: Definition 3 (Mixtures of interventions)
+    latex: |
+      \textbf{Definition 3} (Mixtures of interventions)\textbf{.} \emph{A mixed
+      intervention $\sigma^* = \sum_i p_i \sigma_i$ for $\sum p_i = 1$ performs
+      intervention $\sigma_i$ with probability $p_i$. Formally,
+      $P(\boldsymbol{v} \mid \sigma^*) = \sum_i p_i P(\boldsymbol{v} \mid \sigma_i)$.}
+    uses: [re24-def-2]
+    note: >-
+      Nonnegativity of the $p_i$ is not printed. Repeated verbatim in Appendix A.1,
+      p. 15.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind) + Grok (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: re24-def-4
+    audit_row: S06-R04
+    locator: Def. 4 causal influence diagram
+    pdf_page: 3
+    book_page: 3
+    label: Definition 4 (Causal influence diagram)
+    latex: |
+      \textbf{Definition 4} (Causal influence diagram)\textbf{.} \emph{A
+      (single-decision, single-utility) causal influence diagram (CID) is a CBN
+      $M = (G, P)$ where the variables $\boldsymbol{V}$ are partitioned into
+      decision, utility, and chance variables,
+      $\boldsymbol{V} = (\{D\}, \{U\}, \boldsymbol{C})$. The utility variable is a
+      real-valued function of its parents, $U(\boldsymbol{pa}_U)$.}
+    uses: [re24-truncated-factorisation, re24-def-1]
+    note: >-
+      Repeated verbatim in Appendix A.1, p. 15, where the preceding prose adds
+      "no conditional probability distribution is specified for the decision
+      variables".
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind) + Grok (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: re24-expected-utility-optimal
+    audit_row: S06-R05
+    locator: §2.2 expected utility and optimality
+    pdf_page: 3
+    book_page: 3
+    label: §2.2 prose
+    latex: |
+      The conditional probability distribution for the decision node
+      $\pi(d \mid \mathbf{pa}_D)$ (the policy) is not a fixed parameter of the model
+      but is set by the agent so as to maximise its expected utility, which for a
+      policy $\pi$ is
+      $\mathbb{E}^\pi[U] = \mathbb{E}[U \mid \mathrm{do}(D = \pi(\mathbf{pa}_D))]$.
+      A policy $\pi^*$ is \emph{optimal} if it maximises $\mathbb{E}^{\pi^*}[U]$.
+    uses: [re24-def-4, re24-hard-intervention]
+    note: >-
+      Appendix A.1 (p. 15) restates: "The task of the agent is to select the
+      distribution $\pi = P(D = d \mid \mathbf{Pa}_D = \mathbf{pa}_D)$, also known as
+      the policy or decision rule. An optimal policy $\pi^*$ is defined as a policy
+      $\pi^*$ that maximizes the expected value of the utility
+      $\mathbb{E}_{\pi^*}[U]$."
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind) + Grok (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: re24-regret
+    audit_row: S06-R06
+    locator: §2.2 regret
+    pdf_page: 3
+    book_page: 3
+    label: §2.2 prose
+    latex: |
+      Typically, agents do not behave optimally and incur some \emph{regret}
+      $\delta$, which is the decrease in expected utility compared to an optimal
+      policy $\delta := \mathbb{E}^{\pi^*}[U] - \mathbb{E}^{\pi}[U]$.
+    uses: [re24-expected-utility-optimal]
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: re24-assumption-1
+    audit_row: S06-R07
+    locator: Assumption 1 unmediated decision task
+    pdf_page: 3
+    book_page: 3
+    label: Assumption 1 (Unmediated decision task)
+    latex: |
+      \textbf{Assumption 1} (Unmediated decision task)\textbf{.}
+      $\boldsymbol{Desc}_D \cap \boldsymbol{Anc}_U = \emptyset$.
+    context: |
+      Preceded by: "To simplify our theoretical analysis, we focus on a widely
+      studied class of decision tasks where the agents decision does not causally
+      influence the environment (e.g. Figure 1)."
+    uses: [re24-anc-desc]
+    note: >-
+      Anc and Desc are defined as proper only in Appendix A.1 (p. 14); Assumption 1
+      is repeated verbatim on p. 15.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind) + Grok (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: re24-lemma-1-iii-graph-step
+    audit_row: S06-R08
+    locator: App. A.1, Lemma 1(iii), graph step
+    pdf_page: 16
+    book_page: 16
+    label: in the proof of Lemma 1(iii) (last sentence)
+    latex: |
+      iii) If $D \notin \mathbf{Anc}_U$ then the CID is trivial, in the sense that
+      $\mathbb{E}[U \mid \mathrm{do}(D = d)] = \mathbb{E}[U]$, and hence all decisions
+      are optimal for all distributions $P(\boldsymbol{C})$, which violates domain
+      dependence (Assumption 2). Therefore $D \in \mathbf{Anc}_U$ which with
+      $\mathbf{Desc}_D \cap \mathbf{Anc}_U = \emptyset$ implies $D \in \mathbf{Pa}_U$.
+    context: |
+      Part iii) of the proof of Lemma 1 (statement p. 15, transcribed as
+      re24-lemma-1). The graded row is the last sentence.
+    uses: [re24-lemma-1, re24-assumption-1, re24-assumption-2, re24-anc-desc]
+    proof_pages: 15-16
+    note: >-
+      The atlas's VERBATIM quotation matches the printed sentence apart from the
+      dropped leading "Therefore" and plain-text subscripts.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind) + Grok (blind) + Codex (anchored re-read); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: re24-eq-2
+    audit_row: S06-R09
+    locator: App. A.2, eq. (2)
+    pdf_page: 16
+    book_page: 16
+    label: Appendix A.2, eq. (2)
+    latex: |
+      For simplicity we work with the normalized utility function,
+      \[ U(\mathbf{pa}_U) \to
+         \frac{U(\mathbf{pa}_U) - \min_{\mathbf{pa}'_U} U(\mathbf{Pa}_U = \mathbf{pa}'_U)}
+              {\max_{\mathbf{pa}'_U} U(\mathbf{Pa}_U = \mathbf{pa}'_U)
+               - \min_{\mathbf{pa}'_U} U(\mathbf{Pa}_U = \mathbf{pa}'_U)} \tag{2} \]
+      with values between 0 and 1. Noting that as this is a positive affine
+      transformation of the utility function the set of optimal policies invariant,
+      and we can re-scale regret bounds accordingly.
+    uses: [re24-def-4]
+    note: >-
+      No hypothesis that $U$ is non-constant is printed; the denominator is zero
+      for constant $U$. The second sentence lacks a verb as printed ("the set of
+      optimal policies invariant"). Rendered at 220 dpi as well to read the
+      subscripts.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind) + Grok (blind) + Codex (anchored re-read); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: re24-eq-3
+    audit_row: S06-R11
+    locator: App. B, eq. (3)
+    pdf_page: 18
+    book_page: 18
+    label: Appendix B (Simplified proof), eq. (3)
+    latex: |
+      The expected utility difference between $D = 0$ and $D = 1$ following a hard
+      intervention on $X$ is given by
+      \[ \mathbb{E}[u \mid D = 0; \mathrm{do}(X = 0)] - \mathbb{E}[u \mid D = 1;
+         \mathrm{do}(X = 0)] = \sum_y P(Y_{X=0} = y)[U(0, 0, y) - U(1, 0, y)]
+         \tag{3} \]
+      \[ = P(Y_{X=0} = 0)[U(0, 0, Y = 0) - U(1, 0, 0)] + (1 - P(Y_{X=0} = 0))
+         [U(0, 0, 1) - U(1, 0, 1)] \tag{4} \]
+    context: |
+      p. 18: "Consider the CID in Figure 6, describing a binary decision task
+      $D \in \{0, 1\}$ with two binary latent variables $X, Y \in \mathbf{Pa}_U$."
+      Figure 6: "Example CID describing a context-free mutli-armed bandit with binary
+      latent variables $X, Y$." (edges $X \to Y$, $X \to U$, $Y \to U$, $D \to U$).
+      "Consider an agent that selects a policy $\pi_D$ such that it maximises the
+      expected utility. That is, the CID describes a context-free bandit problem,
+      where $X, Y$ are latent variables that influence the arm values
+      $\mathbb{E}[u \mid d] = \sum_{x,y} P(x, y) U(x, y, d)$." [\ldots] "As we know
+      the utility function we know $D, X, Y \in \mathbf{Pa}_U$, and by assuming the
+      CID is unmediated (Assumption 1) we know $X, Y \notin \mathbf{Desc}_D$.
+      Likewise the decision task is context free hence
+      $D \notin \mathbf{Desc}_X \cup \mathbf{Desc}_Y$."
+    uses: [re24-def-4, re24-hard-intervention, re24-assumption-1]
+    note: >-
+      Argument order of $U$ is inconsistent as printed: $U(x, y, d)$ in the
+      arm-value formula, $U(d, x, y)$ in the text and in (3)-(4) (first argument
+      the decision). Appendix B header is on p. 17. (4) is included because it is
+      the continuation of the same display.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind) + Grok (blind) + Codex (anchored re-read); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}

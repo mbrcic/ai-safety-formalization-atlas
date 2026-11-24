@@ -149,6 +149,43 @@ public theorem totalUtilityIn_congr (N N' : SCM V dom edom)
   refine Finset.sum_congr rfl fun u _ ↦ ?_
   rw [h u.1 ((M.graph.mem_utilities_iff u.1).mp u.2)]
 
+omit [Fintype V] [(v : V) → Fintype (dom v)] [(v : V) → Fintype (edom v)]
+  [(v : V) → DecidableEq (dom v)] in
+/-- **`U(ε) = Σ_{U ∈ 𝐔} U(ε)` at an unbounded vertex set**, print's total utility
+(prose after Definition 4, PDF p. 3), read off an arbitrary structural model over
+this diagram's vertices. With `N` a submodel `(M.withPolicy π).submodelSet X x` it
+is print's potential response *"`U_x := Σ_{U ∈ 𝐔} U_x`"* at a set `X` of any size.
+
+The sum runs over the utility subtype, which print's unqualified `Σ_{U ∈ 𝐔}`
+needs to be finite to denote; no finiteness of the vertex set is asked.
+`SCIM.totalUtilityIn_eq_totalUtility` is the bridge to `SCIM.totalUtilityIn` at a
+finite vertex set. -/
+@[expose] public noncomputable def totalUtility [Fintype {v : V // M.graph.IsUtility v}]
+    (N : SCM V dom edom) [N.IsWellFounded] (ε : ExoAssignment V edom) : ℝ :=
+  ∑ u : {v : V // M.graph.IsUtility v}, M.utilityValue u.1 u.2 (N.eval ε u.1)
+
+omit [Fintype V] [(v : V) → Fintype (dom v)] [(v : V) → Fintype (edom v)]
+  [(v : V) → DecidableEq (dom v)] in
+/-- Two models that agree on the utility vertices at `ε` have the same total
+utility `Σ_{U ∈ 𝐔} U` (prose after Definition 4, PDF p. 3) there, at any vertex
+set. -/
+public theorem totalUtility_congr [Fintype {v : V // M.graph.IsUtility v}]
+    (N N' : SCM V dom edom) [N.IsWellFounded] [N'.IsWellFounded] (ε : ExoAssignment V edom)
+    (h : ∀ u, M.graph.IsUtility u → N.eval ε u = N'.eval ε u) :
+    M.totalUtility N ε = M.totalUtility N' ε :=
+  Finset.sum_congr rfl fun u _ ↦ by rw [h u.1 u.2]
+
+omit [(v : V) → Fintype (dom v)] [(v : V) → Fintype (edom v)]
+  [(v : V) → DecidableEq (dom v)] in
+/-- At a finite vertex set `SCIM.totalUtilityIn` is `SCIM.totalUtility`: the
+`Finset` of utility vertices and the utility subtype index the same sum. -/
+public theorem totalUtilityIn_eq_totalUtility [Fintype {v : V // M.graph.IsUtility v}]
+    (N : SCM V dom edom) [N.IsWellFounded] (ε : ExoAssignment V edom) :
+    M.totalUtilityIn N ε = M.totalUtility N ε := by
+  rw [totalUtilityIn, totalUtility, Finset.attach_eq_univ]
+  exact Fintype.sum_equiv
+    (Equiv.subtypeEquivRight fun v ↦ M.graph.mem_utilities_iff v) _ _ fun _ ↦ rfl
+
 omit [(v : V) → Fintype (dom v)] [(v : V) → DecidableEq (dom v)] in
 /-- `Eπ[U]` is `P(ε)` summed against `totalUtilityIn`, which is what
 `expectedUtility` already writes with the inner sum inline. -/

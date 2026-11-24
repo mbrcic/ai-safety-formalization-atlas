@@ -12,7 +12,11 @@ in [`AISafetyAtlas/Examples/Control/`](../../AISafetyAtlas/Examples/Control/).
 ## The source
 
 `survey-ref-026` cites *"R. W. Ashby, Introduction to Cybernetics. 1961 Edition.
-Chapman & Hall, 1961."* The text read for this formalization is that book,
+Chapman & Hall, 1961."* The text read for this formalization is that book in
+the pinned copy, whose title page reads *"SECOND IMPRESSION … CHAPMAN & HALL LTD
+… 1957"* (copyright 1956); "1961" appears only in the survey's citation and the
+file name, and the atlas cites the copy it read: 1956, second impression 1957.
+The part read is
 chapter 11 (*Requisite Variety*), §11/1–§11/21, printed pp. 202–218; page numbers below are
 the printed 204–208.
 
@@ -72,7 +76,7 @@ as a typesetting error.
 
 ### 2. Relation symbols — READING FIXED
 
-The 1961 typesetting renders `≤` and `≥` as `<` and `>` throughout 11/8 and
+The pinned (1957) typesetting renders `≤` and `≥` as `<` and `>` throughout 11/8 and
 11/9 (for instance `H(R,E) < H(R) + H(E)`, which is false as a strict
 inequality — it is an equality whenever `R` and `E` are independent). The
 non-strict reading is the only one the derivation supports and is the one
@@ -89,6 +93,13 @@ Rather than transcribe either reading, the atlas states the multiplicative form
 once (`card_le_mul_card_admittedOutcomes_mul`) with `k` as a parameter, and
 derives the logarithmic form from it. Ashby's 11/5 is then the `k = 1` case of
 the same theorem rather than a separate result.
+
+The literal line is refuted, not only set aside:
+[`refutations/ashby-11-9-literal.lean`](refutations/ashby-11-9-literal.lean)
+proves it false in Ashby's unit (bits) on the table `[[a, b], [b, a]]` with
+`k = 1`, which meets every hypothesis 11/9 states (`VD = VR = 1`, `VO = 0`, so the
+printed bound reads `0 ≥ 1`), and shows the repaired bound holding there as an
+instance of `ashby_logVariety_ge_mul`.
 
 ## Scope: where the Lean exceeds the source
 
@@ -142,7 +153,7 @@ outcome admitted under every strategy.
 
 * **One exercise figure rests on a typographic inference, recorded here rather
   than assumed.** Ex. 3 gives each of ten divisions "a variety of 10⁶ bits in
-  each day". The scanned 1961 text renders that as a flat `106`: this edition
+  each day". The scanned 1957 text renders that as a flat `106`: this edition
   drops body-text superscripts systematically — the same page-range has
   "proportional to 108" and "100,000000 galaxies", while figure subscripts
   survive. `OpposingArmy` is built at `10^6`, not `106`. Read literally as `106`,

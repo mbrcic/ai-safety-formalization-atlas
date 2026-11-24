@@ -210,7 +210,7 @@ def check_notes(ledger: dict[str, dict[str, object]]) -> tuple[list[str], int]:
 TABLE_ROW = re.compile(r"^\|(?P<cells>.+)\|\s*$")
 SECTION_HEAD = re.compile(r"^## +\d+\. +(?P<name>.+?)\s*$")
 
-AUDIT_SCOPES = {"Same", "Narrower", "Wider", "Mixed", "Beyond"}
+AUDIT_SCOPES = {"Same", "Narrower", "Wider", "Mixed", "None", "Refuted", "Beyond"}
 AUDIT_SCOPE_RE = "|".join(sorted(AUDIT_SCOPES))
 
 # What a note says the row *is*. Deliberately narrow: notes argue at length and

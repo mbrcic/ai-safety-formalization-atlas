@@ -10,7 +10,7 @@ Edges come from the elaborated Lean environment. This answers the question the p
 
 So `A → B` means *`B` occurs in `A`'s statement, or in `A`'s body when `A` is a definition*. A lemma used only inside a proof does not appear. Reading the table as a complete call graph would be wrong, and the two sections below are scoped so that they stay true under this limit.
 
-`61` authored declarations in `AISafetyAtlas.Goodhart.*` (40 theorems). Compiler-generated companions and projections are dropped.
+`92` authored declarations in `AISafetyAtlas.Goodhart.*` (63 theorems). Compiler-generated companions and projections are dropped.
 
 ## Load-bearing declarations
 
@@ -18,17 +18,20 @@ Named in the statements of eight or more others. A change to one of these is a c
 
 | Declaration | Named by |
 |---|---|
-| `Extremal.selectedAt` | 17 |
+| `selected` | 25 |
+| `Extremal.selectedAt` | 22 |
+| `Extremal.FitsOn` | 18 |
+| `gap` | 17 |
+| `feasibleStates` | 16 |
+| `restrictAttrs` | 15 |
 | `RegulatoryTarget.RegulatoryScheme.evidenceBase` | 15 |
-| `Extremal.FitsOn` | 14 |
+| `goal` | 13 |
 | `Unhackable` | 13 |
 | `RegulatoryTarget.RegulatoryScheme.indicator` | 13 |
-| `selected` | 12 |
+| `selectedGe` | 12 |
+| `StrictMonoCoord` | 10 |
 | `RegulatoryTarget.RegulatoryScheme` | 10 |
-| `restrictAttrs` | 9 |
-| `gap` | 9 |
 | `RegulatoryTarget.certified` | 9 |
-| `feasibleStates` | 8 |
 | `Trivial` | 8 |
 | `Simplifies` | 8 |
 
@@ -44,8 +47,13 @@ None.
 
 | Declaration | Kind | Names |
 |---|---|---|
+| `CompleteOptimization` | definition | `feasibleStates`, `restrictAttrs` |
 | `Equivalent` | definition | — |
+| `Extremal.CollapsesOn` | definition | — |
 | `Extremal.FitsOn` | definition | — |
+| `Extremal.SimpleModel` | definition | — |
+| `Extremal.exists_collapsesOn_of_disjoint` | theorem | `Extremal.CollapsesOn`, `Extremal.FitsOn`, `Extremal.selectedAt` |
+| `Extremal.fitsOn_id_iff_of_simpleModel` | theorem | `Extremal.FitsOn`, `Extremal.SimpleModel` |
 | `Extremal.fits_underdetermined_off_observed` | theorem | `Extremal.FitsOn`, `Extremal.selectedAt` |
 | `Extremal.mem_selectedAt` | theorem | `Extremal.selectedAt` |
 | `Extremal.regimeGoal` | definition | — |
@@ -56,8 +64,11 @@ None.
 | `Extremal.regime_underdetermines` | theorem | `Extremal.FitsOn`, `Extremal.regimeGoal`, `Extremal.selectedAt` |
 | `Extremal.selectedAt` | definition | — |
 | `Extremal.selected_disjoint_observed` | theorem | `Extremal.selectedAt` |
+| `Extremal.simpleModel_iff` | theorem | `Extremal.SimpleModel` |
 | `Hackable` | definition | — |
 | `HackableRewards` | definition | `Hackable` |
+| `HumanOptimal` | definition | `feasibleStates` |
+| `OptimizationSequence` | definition | `feasibleStates` |
 | `RegulatoryTarget.RegulatoryScheme` | definition | — |
 | `RegulatoryTarget.certified` | definition | `Extremal.selectedAt`, `RegulatoryTarget.RegulatoryScheme`, `RegulatoryTarget.RegulatoryScheme.indicator`, `RegulatoryTarget.RegulatoryScheme.threshold` |
 | `RegulatoryTarget.certified_disjoint_evidenceBase` | theorem | `RegulatoryTarget.RegulatoryScheme`, `RegulatoryTarget.RegulatoryScheme.evidenceBase`, `RegulatoryTarget.certified` |
@@ -71,6 +82,8 @@ None.
 | `Simplifies` | definition | — |
 | `SimplifiesRewards` | definition | `Simplifies` |
 | `StrictMonoCoord` | definition | — |
+| `StrongCompleteOptimization` | definition | `feasibleStates`, `restrictAttrs` |
+| `StrongCompleteOptimization.completeOptimization` | theorem | `CompleteOptimization`, `StrongCompleteOptimization` |
 | `Trivial` | definition | — |
 | `TrivialSimplification` | definition | `Simplifies`, `Trivial` |
 | `Unhackable` | definition | `Hackable` |
@@ -80,24 +93,43 @@ None.
 | `feasibleStates` | definition | — |
 | `gap` | definition | — |
 | `gap_le_of_unmentioned_eq_lowerBound` | theorem | `feasibleStates`, `restrictAttrs` |
+| `gap_le_of_unmentioned_eq_lowerBound_of_strictMonoCoord` | theorem | `StrictMonoCoord`, `feasibleStates`, `restrictAttrs` |
+| `gap_selectionGe_gaussianReal_gt` | theorem | `gap`, `selectedGe` |
+| `gap_selectionGe_ge` | theorem | `gap`, `selectedGe` |
+| `gap_selectionGe_gt` | theorem | `gap`, `selectedGe` |
 | `gap_selection_gaussianReal_gt` | theorem | `gap`, `selected` |
 | `gap_selection_ge` | theorem | `gap`, `selected` |
 | `gap_selection_gt` | theorem | `gap`, `selected` |
 | `goal` | definition | — |
+| `goalGap_comp` | theorem | `gap`, `goal`, `proxy` |
+| `goal_selected_compl_gaussianReal_lt` | theorem | `goal`, `selected` |
+| `goal_selected_compl_le` | theorem | `goal`, `selected` |
+| `goal_selected_compl_lt` | theorem | `goal`, `selected` |
+| `goal_selection_gaussianReal_gt` | theorem | `goal`, `selected` |
+| `goal_selection_ge` | theorem | `goal`, `selected` |
+| `goal_selection_gt` | theorem | `goal`, `selected` |
 | `integral_gap_selected` | theorem | `gap`, `selected` |
+| `integral_gap_selectedGe` | theorem | `gap`, `selectedGe` |
 | `isClosed_feasibleStates` | theorem | `feasibleStates` |
 | `le_of_unmentioned_eq_lowerBound` | theorem | — |
 | `measurableSet_selected` | theorem | `selected` |
+| `measurableSet_selectedGe` | theorem | `selectedGe` |
 | `measureReal_selected` | theorem | `selected` |
+| `measureReal_selectedGe` | theorem | `selectedGe` |
 | `monotone_of_strictMonoCoord` | theorem | `StrictMonoCoord` |
 | `not_simplifies_of_trivial_base` | theorem | `Simplifies`, `Trivial` |
+| `preimage_selectedGe` | theorem | `Extremal.selectedAt`, `selectedGe` |
 | `proxy` | definition | — |
 | `proxyMax_unmentioned_eq_lowerBound` | theorem | `StrictMonoCoord`, `feasibleStates`, `restrictAttrs` |
+| `proxyObjective` | definition | `restrictAttrs` |
 | `restrictAttrs` | definition | — |
 | `selected` | definition | `proxy` |
+| `selectedGe` | definition | `proxy` |
 | `simplifies_of_trivial` | theorem | `Simplifies`, `Trivial` |
 | `tail_integral_ge` | theorem | — |
+| `tail_integral_ge_Ici` | theorem | — |
 | `tail_integral_gt` | theorem | — |
+| `tail_integral_gt_Ici` | theorem | — |
 | `trivial_of_const` | theorem | `Trivial` |
 | `unhackable_not_transitive` | theorem | `Hackable`, `Trivial`, `Unhackable` |
 | `unhackable_of_equivalent` | theorem | `Equivalent`, `Unhackable` |
@@ -105,3 +137,5 @@ None.
 | `unhackable_of_trivial_left` | theorem | `Trivial`, `Unhackable` |
 | `unhackable_of_trivial_right` | theorem | `Trivial`, `Unhackable` |
 | `zhuang_hadfield_menell_theorem_one` | theorem | `StrictMonoCoord`, `feasibleStates`, `restrictAttrs` |
+| `zhuang_hadfield_menell_theorem_one_ereal` | theorem | `CompleteOptimization`, `StrictMonoCoord`, `feasibleStates` |
+| `zhuang_hadfield_menell_theorem_one_of_optimizationSequence` | theorem | `OptimizationSequence`, `StrictMonoCoord`, `feasibleStates`, `restrictAttrs` |

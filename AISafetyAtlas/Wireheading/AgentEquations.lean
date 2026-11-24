@@ -88,7 +88,10 @@ that make the two unconditional operators above denote at print's hypotheses,
 and with the infinite-horizon limit the printed equations never supply:
 `infiniteValue`, `tendsto_value_infiniteValue`, the certified truncation error
 `value_error_le_tail`, and `infiniteValue_eq`, which is equation (3) at that
-limit.  It claims no attainment.
+limit, each under a dominated tail (`infiniteValue_eq_of_dominated` and the rest of
+the dominated-tail family: a per-length utility bound `b` with
+`Summable (|w t ·| * b)`; the unsuffixed forms are the case `b ≡ 1`).  It claims
+no attainment.
 
 ## Explicit non-claims
 
@@ -325,6 +328,104 @@ public theorem bestAction_max (ρ : Belief Action Obs) (ag : Agent Action Obs)
     actionValue ρ ag t n h a ≤
       actionValue ρ ag t n h (bestAction ρ ag t n h hat) :=
   hat.choose_spec a
+
+/-!
+### Lexicographic tie-breaking
+
+Ring and Orseau, AGI 2011, footnote 4 to equation (1): *"Ties are broken
+lexicographically."* `bestAction` is an unspecified maximiser; the declarations
+below are the least maximiser in an order on the action set.
+
+**Reading.** Print names no order on `𝒜`. Its tie rule denotes only when the set of
+maximisers has a least element, which a well-founded order guarantees and an
+arbitrary one does not: under the lexicographic order on strings the descending
+chain `b > ab > aab > ⋯` can be a set of maximisers with no least member. The
+rule is stated at `[LinearOrder Action] [WellFoundedLT Action]`, which every
+finite linearly ordered action set satisfies (`lexArgmax`), and, without any
+well-foundedness, at the per-call condition that the maximisers have a least
+element (`lexArgmaxOfLeast`), which is exactly where print's rule denotes.
+-/
+
+/-- The least maximiser of `f` in a well-founded linear order on the actions:
+print's argmax with its lexicographic tie rule (Ring and Orseau, AGI 2011,
+eq. (1) and footnote 4), for any value function `f`. The hypothesis is the
+attainment print presupposes by writing *argmax*. -/
+@[expose] public noncomputable def lexArgmax [LinearOrder Action] [WellFoundedLT Action]
+    (f : Action → ℝ) (hat : ∃ a : Action, ∀ b : Action, f b ≤ f a) : Action :=
+  wellFounded_lt.min {a | ∀ b, f b ≤ f a} hat
+
+/-- The lexicographic choice is a maximiser. -/
+public theorem lexArgmax_max [LinearOrder Action] [WellFoundedLT Action]
+    (f : Action → ℝ) (hat : ∃ a : Action, ∀ b : Action, f b ≤ f a) (b : Action) :
+    f b ≤ f (lexArgmax f hat) :=
+  wellFounded_lt.min_mem {a | ∀ b, f b ≤ f a} hat b
+
+/-- The lexicographic choice is below every maximiser: print's tie rule. -/
+public theorem lexArgmax_le [LinearOrder Action] [WellFoundedLT Action]
+    (f : Action → ℝ) (hat : ∃ a : Action, ∀ b : Action, f b ≤ f a) {a : Action}
+    (ha : ∀ b, f b ≤ f a) : lexArgmax f hat ≤ a :=
+  wellFounded_lt.min_le (s := {a | ∀ b, f b ≤ f a}) ha
+
+/-- Print's lexicographic argmax wherever it denotes (Ring and Orseau, AGI 2011,
+eq. (1) and footnote 4; Orseau and Ring, AGI 2011, footnote 5, *"Ties are broken
+in lexicographical order"*): the least maximiser of `f`, given that the set of
+maximisers has a least element. No well-foundedness of the order and no finiteness
+of the action set is assumed; the hypothesis is exactly the condition under which
+print's rule picks an action. Under `[WellFoundedLT Action]` and attainment it is
+`lexArgmax` (`lexArgmaxOfLeast_eq_lexArgmax`). -/
+@[expose] public noncomputable def lexArgmaxOfLeast [PartialOrder Action] (f : Action → ℝ)
+    (hl : ∃ a : Action, IsLeast {a | ∀ b, f b ≤ f a} a) : Action :=
+  hl.choose
+
+/-- The least-maximiser choice is a maximiser. -/
+public theorem lexArgmaxOfLeast_max [PartialOrder Action] (f : Action → ℝ)
+    (hl : ∃ a : Action, IsLeast {a | ∀ b, f b ≤ f a} a) (b : Action) :
+    f b ≤ f (lexArgmaxOfLeast f hl) :=
+  hl.choose_spec.1 b
+
+/-- The least-maximiser choice is below every maximiser: print's tie rule. -/
+public theorem lexArgmaxOfLeast_le [PartialOrder Action] (f : Action → ℝ)
+    (hl : ∃ a : Action, IsLeast {a | ∀ b, f b ≤ f a} a) {a : Action}
+    (ha : ∀ b, f b ≤ f a) : lexArgmaxOfLeast f hl ≤ a :=
+  hl.choose_spec.2 ha
+
+/-- In a well-founded linear order, attainment gives a least maximiser. -/
+public theorem exists_isLeast_maximizers [LinearOrder Action] [WellFoundedLT Action]
+    (f : Action → ℝ) (hat : ∃ a : Action, ∀ b : Action, f b ≤ f a) :
+    ∃ a : Action, IsLeast {a | ∀ b, f b ≤ f a} a :=
+  ⟨lexArgmax f hat, lexArgmax_max f hat, fun _ ha ↦ lexArgmax_le f hat ha⟩
+
+/-- Under a well-founded order the least-maximiser choice is `lexArgmax`. -/
+public theorem lexArgmaxOfLeast_eq_lexArgmax [LinearOrder Action] [WellFoundedLT Action]
+    (f : Action → ℝ) (hat : ∃ a : Action, ∀ b : Action, f b ≤ f a)
+    (hl : ∃ a : Action, IsLeast {a | ∀ b, f b ≤ f a} a) :
+    lexArgmaxOfLeast f hl = lexArgmax f hat :=
+  le_antisymm (lexArgmaxOfLeast_le f hl (lexArgmax_max f hat))
+    (lexArgmax_le f hat (lexArgmaxOfLeast_max f hl))
+
+/-- Equation (1) with footnote 4's lexicographic tie rule, at depth `n`
+(Ring and Orseau, AGI 2011, §2). A new definition beside `bestAction`, which is
+unchanged; `ValueBounds.infiniteLexBestAction` is the same rule at the
+infinite-horizon value. -/
+@[expose] public noncomputable def lexBestAction [LinearOrder Action] [WellFoundedLT Action]
+    (ρ : Belief Action Obs) (ag : Agent Action Obs) (t n : ℕ) (h : History Action Obs)
+    (hat : Attains ρ ag t n h) : Action :=
+  lexArgmax (actionValue ρ ag t n h) hat
+
+/-- The lexicographic best action is maximal. -/
+public theorem lexBestAction_max [LinearOrder Action] [WellFoundedLT Action]
+    (ρ : Belief Action Obs) (ag : Agent Action Obs) (t n : ℕ) (h : History Action Obs)
+    (hat : Attains ρ ag t n h) (a : Action) :
+    actionValue ρ ag t n h a ≤ actionValue ρ ag t n h (lexBestAction ρ ag t n h hat) :=
+  lexArgmax_max _ hat a
+
+/-- The lexicographic best action is the least maximiser (footnote 4). -/
+public theorem lexBestAction_le [LinearOrder Action] [WellFoundedLT Action]
+    (ρ : Belief Action Obs) (ag : Agent Action Obs) (t n : ℕ) (h : History Action Obs)
+    (hat : Attains ρ ag t n h) {a : Action}
+    (ha : ∀ b, actionValue ρ ag t n h b ≤ actionValue ρ ag t n h a) :
+    lexBestAction ρ ag t n h hat ≤ a :=
+  lexArgmax_le _ hat ha
 
 /-!
 ### Factorization, with the recursion doing the work

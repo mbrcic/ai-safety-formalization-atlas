@@ -1,0 +1,198 @@
+source:
+  citation: >-
+    Gabriel A. Melo, Marcos R. O. A. Máximo, Nei Y. Soma and Paulo A. L. Castro,
+    On the Undecidability of Artificial Intelligence Alignment: Machines that
+    Halt, arXiv:2408.08995v1 [cs.AI], 16 Aug 2024 (title page and margin stamp of
+    the pinned file). Abstract, Introduction, Informal Intuition, Formal Proof.
+  file: melo-maximo-soma-castro-arxiv-2024-undecidability-of-ai-alignment-machines-that-halt.pdf
+  sha256: 66eb3448f8f36602d71f65c155c4b6e32de3c2f92ad88590583bb6a225f8723c
+  page_offset: 0
+  standing: |
+    The judge is assumed computable (Introduction, p. 1): "Therefore, we assume
+    that such mathematical formulation of the intended objective is already
+    expressed in a computable form of a judge (alignment) function that receives
+    the output of an AI system (and also its inputs and context, depending on the
+    formulation) and returns True or False for that specific output."
+    AI models are programs equivalent to Turing machines (p. 2): "It is important
+    to note that AI models are represented as computer programs, which, in turn,
+    are equivalent to Turing Machines (TM)."
+    Scope (p. 2): "It is important to note that this proof is valid for Turing
+    Machines or any other computable-equivalent architecture."
+    Silent: no fixed input length, finite input domain or common bound on inputs
+    and outputs is stipulated for the undecidability claim (source card S24
+    searched PDF pp. 1--7); fixed-length inputs are treated separately in the
+    section "A Special Decidable Case" (p. 4). The paper numbers no theorem,
+    definition or lemma.
+
+definitions:
+  - id: melo-def-model
+    label: AI model (Informal Intuition)
+    pdf_page: 2
+    book_page: 2
+    latex: |
+      Let us say we have an AI \emph{m}odel $M$, comprised of a sequence of
+      \emph{b}ytes $B_M$ (of the \emph{m}odel) that defines its executable code for
+      a predetermined architecture. The model $M$, when executed, takes a sequence
+      of bytes $i$ as \emph{i}nput and \emph{o}utputs the sequence of bytes $o$,
+      that is, $M(i) = o$.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: melo-def-judge
+    label: judge $J_v$ and its non-triviality (Informal Intuition)
+    pdf_page: 2
+    book_page: 2
+    latex: |
+      We also have our set of \emph{v}alues and preferences defined by a function
+      $J_v$ that \emph{j}udges whether an output $o$ is aligned given an input $i$.
+      This program takes the bytes $i$ and $o$ as input and returns \emph{True}
+      (byte 1) if the $o$ is aligned to $i$ according to its values, else it
+      returns \emph{False} (byte 0), that is $J_v(i, o)$. This judge is required to
+      be non-trivial, meaning that it does not always returns a constant value for
+      every $(i, o)$, there is at least one negative input $(i^-, o^-)$ that returns
+      0 and at least one output $o^+$ for every input $i$ which the judge returns 1.
+      This function is received as a compiled sequence of \emph{b}ytes $B_{J_v}$.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: melo-def-verifier
+    label: verifier $V$ (Informal Intuition)
+    pdf_page: 2
+    book_page: 2
+    latex: |
+      Suppose we have a \emph{v}erifier $V$ that takes the sequence of bytes $B_M$
+      that defines the compiled code of an arbitrary AI model and the same for
+      $B_{J_v}$, the alignment judge, and returns either \emph{True} (byte 1) if the
+      model is aligned for every input $i$ and output $M(i) = o$ (aligned), else it
+      returns \emph{False} (byte 0) (misaligned). This verifier would be compiled
+      into a sequence of bytes $B_V$.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: melo-def-computability
+    label: computability (Informal Intuition)
+    pdf_page: 2
+    book_page: 2
+    latex: |
+      Computability here means that such a procedure (that should have a finite
+      number of bytes) can be performed mechanistically by a general computer, in
+      more formal terms, a Turing Complete machine.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+statements:
+  - id: melo-abstract-undecidable
+    audit_row: S24-R01
+    locator: abstract, and §Formal Proof
+    pdf_page: 1
+    book_page: 1
+    label: abstract (first sentence); Formal Proof (last sentence, p. 3)
+    latex: |
+      The inner alignment problem, which asserts whether an arbitrary artificial
+      intelligence (AI) model satisfices a non-trivial alignment function of its
+      outputs given its inputs, is undecidable.
+
+      [\ldots] Therefore, there is no Turing machine that
+      decides $P$.
+    context: |
+      Abstract continues: "This is rigorously proved by Rice's theorem, which is
+      also equivalent to a reduction to Turing's Halting Problem, whose proof
+      sketch is presented in this work."
+    uses: [melo-def-model, melo-def-judge, melo-formal-proof-property, melo-formal-proof-decider]
+    proof_pages: 3
+    note: >-
+      Two printed sentences on different pages (p. 1 abstract, p. 3 end of Formal
+      Proof), joined by the atlas's locator; [\ldots] marks the omission. $P$ is never introduced by name: it
+      first appears in "Assume that there is a Turing machine $M_P$ that decides
+      $P$" (p. 3), after "the property" of the preceding paragraph.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind) + Grok (blind) + Codex (anchored re-read); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: melo-formal-proof-property
+    audit_row: S24-R02
+    locator: §Formal Proof, extensionality
+    pdf_page: 3
+    book_page: 3
+    label: Formal Proof (first paragraph, sentences 1--2)
+    latex: |
+      The formal proof could simply be reduced to a restatement of Rice's Theorem,
+      given the equivalence of an AI model to its Turing Machine. The property as
+      defined by the acceptance of the output given the input by a judge function
+      is a property of the language of the TM, as for any two TMs that accept the
+      same language, either both satisfice the judge function or neither.
+    uses: [melo-def-judge, melo-def-model]
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind) + Grok (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: melo-formal-proof-nontrivial
+    audit_row: S24-R03
+    locator: §Formal Proof, non-triviality
+    pdf_page: 3
+    book_page: 3
+    label: Formal Proof (first paragraph, last sentence)
+    latex: |
+      The non-triviality of the judge function guarantees the non-triviality of the
+      property, as a TM can be built to always output the dummy positive values, and
+      a TM can be built to output at least one dummy negative value.
+    uses: [melo-def-judge, melo-formal-proof-property]
+    note: >-
+      "dummy positive values" and "dummy negative value" refer back to $o^+$ and
+      $(i^-, o^-)$ of the non-triviality requirement on p. 2; the word "dummy" is
+      not defined at this point.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind) + Grok (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: melo-formal-proof-decider
+    audit_row: S24-R04
+    locator: §Formal Proof, the decider
+    pdf_page: 3
+    book_page: 3
+    label: Formal Proof (second paragraph)
+    latex: |
+      This proof can be reduced to the decidability of a Turing Machine Halting
+      Problem by contradiction. Assume that there is a Turing machine $M_P$ that
+      decides $P$. We will use $M_P$ to construct a Turing machine $M_H$ that
+      decides the Halting Problem (which is a contradiction since the Halting
+      Problem is undecidable).
+    uses: [melo-formal-proof-property, melo-def-computability]
+    note: >-
+      "decides" is not unpacked in print (no totality or two-sided correctness is
+      stated); $P$ is used without a defining sentence (see melo-abstract-undecidable).
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind) + Grok (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: melo-formal-proof-agent
+    audit_row: S24-R05
+    locator: §Formal Proof, the agent
+    pdf_page: 3
+    book_page: 3
+    label: Formal Proof (construction of $M'$)
+    latex: |
+      Let $M$ be a Turing machine and $i$ be an input to $M$. We want to decide
+      whether $M$ halts on $i$. We construct a new Turing machine $M'$ as follows:
+      \begin{itemize}
+      \item On input $i$, $M'$ simulates $M$ on $i$.
+      \item If $M$ halts on $i$, then $M'$ computes a partial function with
+        property $P$.
+      \item If $M$ does not halt on $i$, then $M'$ computes a partial function
+        without property $P$.
+      \end{itemize}
+      We can now use $M_P$ to decide whether $M'$ computes a partial function with
+      property $P$. If $M_P$ accepts, then $M$ halts on $i$. If $M_P$ rejects, then
+      $M$ does not halt on $i$. Thus, we have constructed a Turing machine $M_H$
+      that decides the Halting Problem, which is a contradiction. Therefore, there
+      is no Turing machine that decides $P$.
+    context: |
+      The equivalence of a model to its machine is the opening clause of the
+      Formal Proof (see melo-formal-proof-property): "given the equivalence of an
+      AI model to its Turing Machine".
+    uses: [melo-formal-proof-property, melo-formal-proof-decider, melo-def-model]
+    note: >-
+      The atlas row pairs a paraphrase ("an AI model is equivalent to its Turing
+      machine") with the quoted fragment "computes a partial function with
+      property P", which is the second bullet. The bullets use the same letter $i$
+      for $M'$'s input and for the fixed input of $M$; print does not separate them.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind) + Grok (blind) + Codex (anchored re-read); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+excerpts: []

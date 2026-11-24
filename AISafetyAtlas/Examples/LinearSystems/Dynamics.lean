@@ -82,6 +82,27 @@ public theorem outputSignal_ramp :
   simp [outputSignal, integratorC, rampTrajectory, Matrix.mulVec, dotProduct,
     Matrix.one_apply]
 
+example : IsTrajectoryOnOver integratorA integratorB Set.univ rampTrajectory unitInput ∧
+    outputSignalOver integratorC rampTrajectory = rampTrajectory :=
+  ⟨(isTrajectoryOnOver_real_complex_iff _ _ _ _ _).mpr ramp_isTrajectory,
+    (outputSignalOver_real_complex _ _).trans outputSignal_ramp⟩
+
+-- The integrator also runs on complex time, with state and output both equal to time.
+example :
+    let x : ℂ → (Fin 1 → ℂ) := fun z _ ↦ z
+    IsTrajectoryOnOver integratorA integratorB Set.univ x (fun _ _ ↦ 1) ∧
+      IsTrajectoryWithin integratorA integratorB Set.univ x (fun _ _ ↦ 1) ∧
+      outputSignalOver integratorC x = x := by
+  dsimp only
+  have hx : IsTrajectoryOnOver integratorA integratorB Set.univ
+      (fun z : ℂ ↦ fun _ ↦ z) (fun _ _ ↦ 1) := by
+    intro t _
+    simp only [integratorA, integratorB, Matrix.zero_mulVec, Matrix.one_mulVec, zero_add]
+    exact hasDerivAt_pi.mpr fun _ ↦ hasDerivAt_id' t
+  refine ⟨hx, (isTrajectoryWithin_iff_isTrajectoryOnOver isOpen_univ).mpr hx, ?_⟩
+  funext t
+  simp [outputSignalOver, integratorC]
+
 /-- **The rank criterion holds here.** -/
 public theorem integrator_isObservable : IsObservable integratorA integratorC := by
   intro x hx

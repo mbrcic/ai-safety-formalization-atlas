@@ -197,6 +197,21 @@ carries it across.
   ∃ φ : G, (fun ω => φ • ω) '' X = Y
 
 /--
+**Definition A.6, print's involution**: *"`φ` is an involution if `φ = φ⁻¹`"*.
+
+Stated as `φ * φ = 1`, the form `InvolutiveCopies` and `SupersetCopies` in
+`AISafetyAtlas.Sovereignty.EUDetermined` write inline; `isInvolution_iff_eq_inv`
+is print's `φ = φ⁻¹`. Print's parenthetical *"(it either transposes states, or
+fixes them)"* describes the case `G = S_d` and is not part of the definition.
+-/
+@[expose] public def IsInvolution {G : Type u} [Group G] (φ : G) : Prop :=
+  φ * φ = 1
+
+/-- **Print's form of definition A.6's involution**: `φ = φ⁻¹`. -/
+public theorem isInvolution_iff_eq_inv {φ : G} : IsInvolution φ ↔ φ = φ⁻¹ :=
+  mul_eq_one_iff_eq_inv
+
+/--
 **Definition A.7, containment of set copies.** `B` contains `n` copies of `A`
 when there are `n` group elements carrying `A` into `B` whose images are fixed by
 each other.

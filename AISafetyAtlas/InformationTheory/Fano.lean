@@ -2,6 +2,7 @@ module
 
 public import PFR.ForMathlib.Entropy.Basic
 public import Mathlib.Analysis.SpecialFunctions.BinaryEntropy
+public import AISafetyAtlas.InformationTheory.DataProcessing
 
 /-!
 # Fano's inequality
@@ -25,6 +26,7 @@ once the estimate is known to be wrong — and everything else is an instance:
 | `fano` | confined to `A` | `log(\|A\| − 1)` | the constant of 2.140 |
 | `fano_unrestricted` | arbitrary | `log \|A\|` | 2.10.1, 2.139 |
 | `fano_of_embedding` | **in another type**, via an injection | `log \|A\|` | 2.10.1 |
+| `fano_unrestricted_countable`, `fano_of_embedding_countable` | as the two above, of **infinite range** | `log \|A\|` | 2.10.1, 2.139 |
 
 Against the source, on each axis:
 
@@ -469,6 +471,83 @@ public theorem fano_of_embedding {T : Type uT} [MeasurableSpace T]
     condEntropy_of_injective μ hX hX' (fun _ => ι) (fun _ => hι)
   rwa [hcomp] at hkey
 
+/-! ## The estimate with an infinite alphabet
+
+`fano_unrestricted` and `fano_of_embedding` carry `FiniteRange X'`, while §2.10
+says "We will not restrict the alphabet `𝒳̂`" (PDF pp. 63-64) and Cover &
+Thomas's discrete variables may have infinite alphabets. The two theorems below
+drop it. Nothing in the fibre argument is redone: the estimate is coarsened to
+`φ ∘ X'`, which keeps the values in `ι '' A` and sends every other value to one
+junk point. The coarsening has finite range, has the same error event (`X` lies
+in `A`, so an estimate outside `ι '' A` is wrong either way), and can only raise
+the conditional entropy (`condEntropy_comp_ge_countable`), so the finite theorem
+applied to it bounds `H[X | X']`. -/
+
+omit [DecidableEq S] in
+/--
+**Fano's inequality across alphabets, estimate of unrestricted range** —
+Cover & Thomas's Theorem 2.10.1, first inequality of (2.130), at §2.10's
+generality: "We will not restrict the alphabet `𝒳̂` to be equal to `𝒳`, and we
+will also allow the function `g(Y)` to be random" (PDF pp. 63-64).
+
+`fano_of_embedding` is the same statement under `FiniteRange X'`; here `X'` may
+take countably many values. `FiniteRange X` is implied by `hXA` and kept only
+for the signature's uniformity with its finite sibling.
+-/
+public theorem fano_of_embedding_countable {T : Type uT} [MeasurableSpace T]
+    [MeasurableSingletonClass T] [Countable T] [DecidableEq T]
+    {A : Finset S} (μ : Measure Ω) [IsProbabilityMeasure μ]
+    {X : Ω → S} {X' : Ω → T} {ι : S → T} (hι : Function.Injective ι)
+    (hX : Measurable X) (hX' : Measurable X') (hXA : ∀ ω, X ω ∈ A) [FiniteRange X] :
+    H[X | X' ; μ]
+      ≤ errorProb μ (ι ∘ X) X' * Real.log (A.card : ℝ)
+        + binEntropy (errorProb μ (ι ∘ X) X') := by
+  classical
+  let : MeasurableSpace (Option T) := ⊤
+  have : DiscreteMeasurableSpace (Option T) := ⟨fun _ => trivial⟩
+  set φ : T → Option T := fun t => if t ∈ A.image ι then some t else none with hφ
+  have hφX' : Measurable (φ ∘ X') := (Measurable.of_discrete (f := φ)).comp hX'
+  have : FiniteRange (φ ∘ X') :=
+    ⟨((insert none ((A.image ι).image some) : Finset (Option T)).finite_toSet).subset (by
+      rintro _ ⟨ω, rfl⟩
+      rw [Finset.mem_coe]
+      by_cases h : X' ω ∈ A.image ι
+      · rw [Function.comp_apply, show φ (X' ω) = some (X' ω) from if_pos h]
+        exact Finset.mem_insert_of_mem (Finset.mem_image_of_mem _ h)
+      · rw [Function.comp_apply, show φ (X' ω) = none from if_neg h]
+        exact Finset.mem_insert_self _ _)⟩
+  have hsome : Function.Injective (some ∘ ι) := (Option.some_injective _).comp hι
+  have hfin := fano_of_embedding (A := A) μ hsome hX hφX' hXA
+  have herr : errorProb μ ((some ∘ ι) ∘ X) (φ ∘ X') = errorProb μ (ι ∘ X) X' := by
+    unfold errorProb
+    congr 2
+    ext ω
+    simp only [Set.mem_ofPred_eq, Function.comp_apply]
+    by_cases h : X' ω ∈ A.image ι
+    · rw [show φ (X' ω) = some (X' ω) from if_pos h, ne_eq, ne_eq, Option.some_inj]
+    · have hne : ι (X ω) ≠ X' ω := fun he => h (he ▸ Finset.mem_image_of_mem ι (hXA ω))
+      rw [show φ (X' ω) = none from if_neg h]
+      simp [hne]
+  rw [herr] at hfin
+  exact (condEntropy_comp_ge_countable hX hX' φ).trans hfin
+
+/--
+**Fano's inequality with the estimate unconstrained, of unrestricted range** —
+Cover & Thomas's Theorem 2.10.1 (first inequality of (2.130)) and corollary
+(2.139), "for any two random variables `X` and `Y`" (PDF pp. 64-65), with the
+estimate allowed infinitely many values.
+
+`fano_unrestricted` is the same statement under `FiniteRange X'`. This is
+`fano_of_embedding_countable` at `ι = id`.
+-/
+public theorem fano_unrestricted_countable {A : Finset S} (μ : Measure Ω)
+    [IsProbabilityMeasure μ] {X X' : Ω → S} (hX : Measurable X) (hX' : Measurable X')
+    (hXA : ∀ ω, X ω ∈ A) [FiniteRange X] :
+    H[X | X' ; μ]
+      ≤ errorProb μ X X' * Real.log (A.card : ℝ)
+        + binEntropy (errorProb μ X X') :=
+  fano_of_embedding_countable (A := A) μ Function.injective_id hX hX' hXA
+
 /-! ## The two weakenings Cover & Thomas record alongside -/
 
 /--
@@ -529,5 +608,52 @@ public theorem entropy_le_fano {A : Finset S} (μ : Measure Ω) [IsProbabilityMe
     linarith
   have hkey := fano (A := A) μ hX hcm hXA (fun _ => hy₀)
   rwa [hconst] at hkey
+
+omit [DecidableEq S] in
+/--
+**With no information about `X`, the most likely value is the best guess.**
+Cover & Thomas, the Remark after (2.143): *"Then the best guess of `X` is
+`X̂ = 1`"*, where `p₁ ≥ p₂ ≥ ⋯`.
+
+A guess made with no information is an estimate `X'` independent of `X`; it
+may be randomized, as the section allows (*"we will also allow the function
+`g(Y)` to be random"*), and a constant guess is the special case. Its success
+probability is `∑ y, P(X = y) P(X' = y) ≤ P(X = y₁)`, so a mode `y₁` of `X`
+has the least error probability among all such guesses.
+-/
+public theorem errorProb_mode_le_of_indepFun (μ : Measure Ω) [IsProbabilityMeasure μ]
+    {X X' : Ω → S} (hX : Measurable X) (hX' : Measurable X') (hind : IndepFun X' X μ)
+    {y₁ : S} (hmode : ∀ y, μ (X ⁻¹' {y}) ≤ μ (X ⁻¹' {y₁})) :
+    errorProb μ X (fun _ => y₁) ≤ errorProb μ X X' := by
+  have hmeas : ∀ y : S, MeasurableSet (X ⁻¹' {y} ∩ X' ⁻¹' {y}) := fun y =>
+    (hX (measurableSet_singleton y)).inter (hX' (measurableSet_singleton y))
+  have hdisj : Pairwise (Function.onFun Disjoint fun y : S => X ⁻¹' {y} ∩ X' ⁻¹' {y}) :=
+    fun a b hab => Set.disjoint_left.mpr fun ω h1 h2 => hab (h1.1.symm.trans h2.1)
+  have hdisj' : Pairwise (Function.onFun Disjoint fun y : S => X' ⁻¹' {y}) :=
+    fun a b hab => Set.disjoint_left.mpr fun ω h1 h2 => hab (h1.symm.trans h2)
+  have hEq : {ω | X ω = X' ω} = ⋃ y, X ⁻¹' {y} ∩ X' ⁻¹' {y} := by
+    ext ω; simp [eq_comm]
+  have htot : ∑' y, μ (X' ⁻¹' {y}) = 1 := by
+    rw [← measure_iUnion hdisj' fun y => hX' (measurableSet_singleton y)]
+    have : (⋃ y, X' ⁻¹' {y}) = Set.univ := by ext ω; simp
+    rw [this, measure_univ]
+  have hle : μ {ω | X ω = X' ω} ≤ μ (X ⁻¹' {y₁}) := by
+    rw [hEq, measure_iUnion hdisj hmeas]
+    calc ∑' y, μ (X ⁻¹' {y} ∩ X' ⁻¹' {y})
+        = ∑' y, μ (X ⁻¹' {y}) * μ (X' ⁻¹' {y}) := by
+          congr 1; ext y
+          rw [Set.inter_comm, hind.measure_inter_preimage_eq_mul _ _
+            (measurableSet_singleton y) (measurableSet_singleton y), mul_comm]
+      _ ≤ ∑' y, μ (X ⁻¹' {y₁}) * μ (X' ⁻¹' {y}) :=
+          ENNReal.tsum_le_tsum fun y => mul_le_mul_of_nonneg_right (hmode y) zero_le
+      _ = μ (X ⁻¹' {y₁}) := by rw [ENNReal.tsum_mul_left, htot, mul_one]
+  have hmEq : MeasurableSet {ω | X ω = X' ω} := hEq ▸ MeasurableSet.iUnion hmeas
+  have hc1 : {ω | X ω ≠ y₁} = (X ⁻¹' {y₁})ᶜ := by ext; simp
+  have hc2 : {ω | X ω ≠ X' ω} = {ω | X ω = X' ω}ᶜ := by ext; simp
+  simp only [errorProb]
+  rw [hc1, hc2, prob_compl_eq_one_sub (hX (measurableSet_singleton y₁)),
+    prob_compl_eq_one_sub hmEq]
+  exact ENNReal.toReal_mono (ne_top_of_le_ne_top ENNReal.one_ne_top tsub_le_self)
+    (tsub_le_tsub_left hle 1)
 
 end AISafetyAtlas.InformationTheory

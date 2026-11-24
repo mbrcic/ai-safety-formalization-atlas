@@ -75,6 +75,19 @@ public theorem underfitGoal_fitsOn :
   rw [h, abs_le]
   constructor <;> nlinarith [sq_nonneg x, sq_nonneg (x - 1), sq_nonneg (x + 1)]
 
+/-- **Print's Simple Model at this instance**: the proxy is the cubic goal plus
+the error term `G' = proxy − underfitGoal`, which is `−x³/10`. -/
+public theorem underfit_simpleModel :
+    SimpleModel proxy underfitGoal (proxy - underfitGoal) :=
+  simpleModel_iff.mpr rfl
+
+/-- Through the bridge, the fit on the observed region is the bound `|G'| ≤ 1/10`
+on print's error term there. -/
+public theorem underfit_error_bounded :
+    ∀ s ∈ observed, |(proxy - underfitGoal) s| ≤ 1 / 10 :=
+  (fitsOn_id_iff_of_simpleModel underfit_simpleModel observed (1 / 10)).mp
+    underfitGoal_fitsOn
+
 /-- The linear fit read as a goal in its own right fits itself exactly, so it
 also fits within the same tolerance. The regulator's evidence cannot separate
 this from `underfitGoal`. -/
@@ -121,6 +134,40 @@ public theorem underdetermined_at_ten :
       ∀ s ∈ selectedAt proxy 10, underfitGoal s - G' s = 1000 :=
   fits_underdetermined_off_observed proxy linearFit (1 / 10)
     selectedAt_disjoint_observed underfitGoal underfitGoal_fitsOn 1000
+
+/-- **Print's collapse, at print's own underfitted goal.** The linear fit is accurate
+to `1 / 10` on `[-1, 1]`, and at every state the threshold `10` selects it misses the
+cubic goal by more than that: the dropped term `x³ / 10` is at least `100` there. -/
+public theorem underfitGoal_collapsesOn :
+    CollapsesOn (selectedAt proxy 10) proxy underfitGoal linearFit (1 / 10) := by
+  intro x hx
+  have hx' : 10 ≤ x := by simpa [proxy] using hx
+  have h : underfitGoal x - linearFit (proxy x) = x ^ 3 / 10 := by
+    simp only [underfitGoal, linearFit, proxy]; ring
+  have hpos : 0 < x ^ 3 / 10 := by positivity
+  rw [h, abs_of_pos hpos]
+  nlinarith [mul_le_mul hx' hx' (by norm_num) (by linarith)]
+
+/-- **The model-insufficiency case of Extremal Goodhart, whole**: print's three
+clauses at one instance. The learned relationship is approximately accurate in the
+initial region, selection moves the metric away from that region onto a non-empty
+set of states, and there the relationship collapses. -/
+public theorem underfit_extremal_collapse :
+    FitsOn observed proxy underfitGoal linearFit (1 / 10) ∧
+      Disjoint (selectedAt proxy 10) observed ∧
+      (selectedAt proxy 10).Nonempty ∧
+      CollapsesOn (selectedAt proxy 10) proxy underfitGoal linearFit (1 / 10) :=
+  ⟨underfitGoal_fitsOn, selectedAt_disjoint_observed, ⟨10, ten_mem_selectedAt⟩,
+    underfitGoal_collapsesOn⟩
+
+/-- The library's collapse theorem at print's data: whatever goal fits the linear
+relationship on `[-1, 1]`, one indistinguishable from it there collapses by more than
+`1000` at every selected state. -/
+public theorem collapse_unruled_at_ten :
+    ∃ G', FitsOn observed proxy G' linearFit (1 / 10) ∧ EqOn underfitGoal G' observed ∧
+      CollapsesOn (selectedAt proxy 10) proxy G' linearFit (max (1 / 10) 1000) :=
+  exists_collapsesOn_of_disjoint proxy linearFit (1 / 10) selectedAt_disjoint_observed
+    underfitGoal underfitGoal_fitsOn 1000
 
 /-! ## Change in regime -/
 

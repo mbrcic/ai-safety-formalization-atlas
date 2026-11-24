@@ -10,7 +10,7 @@ Edges come from the elaborated Lean environment. This answers the question the p
 
 So `A → B` means *`B` occurs in `A`'s statement, or in `A`'s body when `A` is a definition*. A lemma used only inside a proof does not appear. Reading the table as a complete call graph would be wrong, and the two sections below are scoped so that they stay true under this limit.
 
-`208` authored declarations in `AISafetyAtlas.Control.*` (157 theorems). Compiler-generated companions and projections are dropped.
+`215` authored declarations in `AISafetyAtlas.Control.*` (163 theorems). Compiler-generated companions and projections are dropped.
 
 ## Load-bearing declarations
 
@@ -26,6 +26,7 @@ Named in the statements of eight or more others. A change to one of these is a c
 | `minControlLoss` | 15 |
 | `OversightBudget.Oversight.hazard` | 15 |
 | `Purified` | 14 |
+| `traj` | 12 |
 | `kernelOpenLoopReductionAt` | 11 |
 | `OversightBudget.Oversight.reading` | 11 |
 | `OversightBudget.Oversight.outcome` | 11 |
@@ -34,7 +35,6 @@ Named in the statements of eight or more others. A change to one of these is a c
 | `ofWeights` | 10 |
 | `atomLoss` | 10 |
 | `IsPlant` | 10 |
-| `traj` | 9 |
 | `purifyMap` | 9 |
 | `purifiedLaw` | 9 |
 | `openLoopMax` | 9 |
@@ -133,9 +133,11 @@ None.
 | `entropyReduction_le_of_openLoopBound` | theorem | `IsPlant`, `OpenLoopBound`, `entropyReduction` |
 | `entropyReduction_le_openLoopMax` | theorem | `entropyReduction`, `openLoopMax`, `plantOutcome` |
 | `entropyReduction_purified` | theorem | `entropyReduction`, `kernelEntropyReduction`, `plantOutcome`, `purifiedAction`, `purifiedLaw`, `purifiedSeed`, `purifiedState`, `purifyMap` |
+| `entropy_add_condEntropy_le_of_condEntropy_ge` | theorem | — |
 | `entropy_eq_zero_iff` | theorem | — |
 | `entropy_ge_of_condEntropy_ge` | theorem | — |
 | `entropy_ge_of_sensor` | theorem | — |
+| `entropy_ge_sub_of_condEntropy_eq_zero` | theorem | — |
 | `entropy_le_channelCapacity_of_complete` | theorem | — |
 | `entropy_noise_sub_controlLoss` | theorem | `Purified`, `controlLoss` |
 | `entropy_outcome_eq_entropy_controller` | theorem | `IsPerfectRegulator` |
@@ -144,14 +146,17 @@ None.
 | `entropy_outcome_ge_sub_chainEntropy` | theorem | `traj` |
 | `entropy_outcome_ge_sub_channelCapacity` | theorem | — |
 | `entropy_traj` | theorem | `traj` |
+| `eventually_regulationRate_le_ashbyCapacity` | theorem | `ashbyCapacity`, `regulationRate`, `traj` |
 | `exists_atomLoss_eq` | theorem | `atomLoss`, `minAtomLoss` |
 | `exists_columnsInjective_false_and_bound_fails` | theorem | `achievedVariety`, `columnsInjective` |
 | `exists_entropyReduction_const_eq_iSup_openLoopReduction` | theorem | `entropyReduction`, `openLoopReduction`, `plantOutcome` |
+| `exists_entropy_eq_sub_of_condEntropy_eq_zero` | theorem | — |
 | `exists_isMaxOn_openLoopObjective` | theorem | `openLoopObjective` |
 | `exists_isPurification` | theorem | `IsPurification` |
 | `exists_kernelEntropyReduction_dirac_eq_iSup` | theorem | `kernelEntropyReduction`, `kernelOpenLoopReductionAt` |
 | `exists_kernelEntropyReduction_le_at_max` | theorem | `kernelEntropyReduction`, `kernelOpenLoopReductionAt` |
 | `exists_kernelOpenLoopReductionAt_eq_max` | theorem | `kernelOpenLoopMax`, `kernelOpenLoopReductionAt` |
+| `exists_measureEntropy_eq` | theorem | — |
 | `exists_strategy_forcing` | theorem | `IsPerfectRegulator` |
 | `indepFun_comp_of_map` | theorem | — |
 | `indepFun_cond_of_condIndepFun` | theorem | — |
@@ -252,6 +257,8 @@ None.
 | `purified_plantOutcome` | theorem | `Purified`, `plantOutcome` |
 | `purifyMap` | definition | — |
 | `purifySeed` | definition | — |
+| `regulationRate` | definition | — |
+| `regulationRate_le_chainWindow` | theorem | `regulationRate`, `traj` |
 | `sensorLoss` | definition | — |
 | `seq_outcome_eq` | theorem | `IsPerfectRegulator` |
 | `shiftStrategy` | definition | — |

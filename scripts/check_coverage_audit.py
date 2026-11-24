@@ -63,6 +63,9 @@ def strip_markup(cell: str) -> str:
     return cell.replace("**", "").strip()
 
 
+COVERAGE_MISMATCHES: list[str] = []
+
+
 class Unclassifiable(Exception):
     """A six-cell data row that falls in no column — silently uncounted."""
 
@@ -152,13 +155,22 @@ def parse_sections(
         if strip_markup(cells[0]) in {"#", "§", "source"} or set(strip_markup(cells[0])) <= {"-"}:
             continue  # header or separator row
         counts[current][classify(cells[3], cells[4])] += 1
+        g = re.split(r"[,(]", strip_markup(cells[4]), maxsplit=1)[0].strip()
+        if g in COVERAGE_OF and "and closed" not in cells[4] and strip_markup(cells[3]) != COVERAGE_OF[g]:
+            COVERAGE_MISMATCHES.append(
+                f"section {current!r}: row {strip_markup(cells[0])!r} has coverage "
+                f"{strip_markup(cells[3])!r} but scope {g!r} computes {COVERAGE_OF[g]!r}"
+            )
         scope_counts[strip_markup(cells[4])] += 1
         rows[current].append(strip_markup(cells[0]) + "||" + strip_markup(cells[2]))
         atlas_cells.append((current, cells[2]))
     return counts, summaries, rows, atlas_cells, scope_counts
 
 
-SCOPE_GRADES = ("Same", "Wider", "Narrower", "Mixed", "Beyond")
+SCOPE_GRADES = ("Same", "Wider", "Narrower", "Mixed", "None", "Refuted", "Beyond")
+# SPEC v6 (docs/guide/scope-grading.md): coverage is computed from the scope grade.
+COVERAGE_OF = {"Same": "Yes", "Wider": "Yes", "Narrower": "Partial", "Mixed": "Partial",
+               "None": "No", "Refuted": "No"}
 
 
 def tally_scope(
@@ -191,7 +203,7 @@ def tally_scope(
             closed += count
             continue
         buckets[grade] += count
-        if grade in {"Narrower", "Mixed"}:
+        if grade in {"Narrower", "Mixed", "None", "Refuted"}:
             owed += count
     return buckets, owed, closed
 
@@ -297,7 +309,7 @@ def known_declarations() -> set[str]:
         if "::" in line:
             names.add(line.split("::", 1)[1].strip())
     for path in (ROOT / "AISafetyAtlas").rglob("*.lean"):
-        for m in re.finditer(r"^(?:@\[[^\]]*\]\s*)?public (?:noncomputable )?(?:theorem|def|abbrev|instance|structure|inductive) ([A-Za-z_][A-Za-z0-9_'.]*)", path.read_text(), re.M):
+        for m in re.finditer(r"^(?:@\[[^\]]*\]\s*)?public (?:noncomputable )?(?:theorem|def|abbrev|instance|structure|inductive) ([A-Za-z_][A-Za-z0-9_'.′₀-₉]*)", path.read_text(), re.M):
             names.add(m.group(1))
     return names
 
@@ -397,7 +409,7 @@ def main() -> int:
         return 1
     totals_rows, grand = parse_totals(text)
 
-    problems: list[str] = []
+    problems: list[str] = list(COVERAGE_MISMATCHES)
 
     counted = [c for c in per_section.values() if any(c.values())]
     if len(counted) != len(totals_rows):
@@ -531,7 +543,9 @@ def main() -> int:
                 )
     for span in re.finditer(r"`([^`\n]+)`", text):
         # a backtick span may hold several names, or prose around one
-        for m in re.finditer(r"[A-Za-z][A-Za-z0-9_.']*", span.group(1)):
+        # subscript digits are identifier characters (`F₂Of`); without them the
+        # tail of `F₁_of_compatible` is checked as a name of its own
+        for m in re.finditer(r"[A-Za-z][A-Za-z0-9_.'′₀-₉]*", span.group(1)):
             problems.extend(check_name(m.group(0), known, modules))
 
     if problems:
@@ -556,7 +570,7 @@ def main() -> int:
         "  scope: "
         + " / ".join(
             f"{buckets[grade]} {grade}"
-            for grade in ("Same", "Wider", "Narrower", "Mixed", "Beyond", "ungraded")
+            for grade in ("Same", "Wider", "Narrower", "Mixed", "None", "Refuted", "Beyond", "ungraded")
         )
         + f", {closed} closed -- "
         + f"{owed} cells owed a closure, a regrade, an unclosability proof or a cost"

@@ -95,8 +95,11 @@ is reduced to inclusion in step 5 for `C = ∅`"*. They carry one thing this mod
 does not: a **direct** refutation at `C = N` that does not route through the empty
 coalition -- every player choosing `f_i(C) = S` everywhere with a common selector
 `h_i(S) = x` puts `{x}` in `E_G(N)` for an `E` with `{x} ∉ E(N)`. That is a
-second, independent obstruction at the grand coalition, and it is not formalized
-here.
+second, independent obstruction at the grand coalition. It is not formalized in
+this module; `AISafetyAtlas.Examples.Sovereignty.effectivity_paulyGame_pointEff_ne`
+runs it on one player over `Bool`, and
+`AISafetyAtlas.Sovereignty.TrulyPlayableRepresentation` closes both ends at a
+finite outcome set with a different game.
 
 ## What is built here
 
@@ -114,12 +117,16 @@ they hold:
 | `E(C) ⊆ E_G(C)` | `Playable.mem_effectivity_paulyGame_of_mem` | `C.Nonempty` |
 | `E_G(C) ⊆ E(C)` | `Playable.mem_of_mem_effectivity_paulyGame` | `C ≠ Set.univ` |
 | `E = E_G` | `Playable.effectivity_paulyGame_eq`, both conditions | not at `∅`, not at `N` |
+| *"these conditions are independent"* | `Playable.conditions_independent` | -- |
 
 So the equality holds at every coalition other than the two ends of the lattice,
 and it is not that the missing ends are unproved: they are false, by
 `not_exists_gameForm_cofiniteEff`, which rules out any construction closing them
 and so in particular this one. On one player there are no other coalitions, which
-is why the witness needs only one.
+is why the witness needs only one. That refutation needs an infinite outcome set;
+at a finite one this game's ends are still wrong
+(`AISafetyAtlas.Examples.Sovereignty.effectivity_paulyGame_pointEff_ne`), and
+`Playable.exists_gameForm_of_finite` closes them with a different game.
 
 **`N`-maximality is used nowhere below.** Both inclusions and every lemma they
 rest on consume liveness, safety, outcome-monotonicity and superadditivity only.
@@ -786,7 +793,8 @@ make `j₀` the one who picks.
 `C ≠ Set.univ` is print's own hypothesis for this case. Print's `C = N` case is
 the one that appeals to the first inclusion at the empty coalition, and is not
 reproduced here because it is unsound; `not_exists_gameForm_cofiniteEff` shows no
-repair of the construction recovers it.
+repair of the construction recovers it at an arbitrary outcome type. At a finite
+outcome type a different game does: `Playable.exists_gameForm_of_finite`.
 -/
 public theorem Playable.mem_of_mem_effectivity_paulyGame [Fintype N] [Nonempty N]
     (hE : Playable E) {C : Set N} (hC : C ≠ Set.univ) {A : Set X}
@@ -899,5 +907,247 @@ public theorem Playable.effectivity_paulyGame_eq [Fintype N] [Nonempty N]
     (fun _ hX => hE.mem_effectivity_paulyGame_of_mem hne hX)
 
 end Inclusions
+
+/-! ## The five conditions are independent
+
+Page 152, right after the list: *"It can be shown that these conditions are
+independent."* Pauly gives no proof. `Playable.conditions_independent` below is
+that sentence: for each of the five fields of `Playable` there is an effectivity
+function satisfying the other four and not it. The models have one or two
+players and at most three outcomes.
+
+`univ_mem_of_live_of_maximal` records why the model breaking safety needs two
+players: liveness and `N`-maximality already force `S ∈ E(∅)` and `S ∈ E(N)`, so
+on one player, whose only coalitions are `∅` and `N`, they imply safety.
+-/
+
+section Independence
+
+open Set
+
+/-- **Liveness and `N`-maximality give safety at both ends of the coalition
+lattice.** `maximal` at `A = S` reads `∅ ∉ E(∅) → S ∈ E(N)`; its contrapositive at
+`A = ∅` reads `∅ ∉ E(N) → S ∈ E(∅)`. -/
+public theorem univ_mem_of_live_of_maximal {N : Type u} {X : Type v}
+    {E : Set N → Set (Set X)} (live : ∀ C : Set N, (∅ : Set X) ∉ E C)
+    (maximal : ∀ A : Set X, Aᶜ ∉ E (∅ : Set N) → A ∈ E (Set.univ : Set N)) :
+    (Set.univ : Set X) ∈ E ∅ ∧ (Set.univ : Set X) ∈ E Set.univ := by
+  refine ⟨?_, maximal _ (by rw [compl_univ]; exact live ∅)⟩
+  by_contra h
+  exact live Set.univ (maximal ∅ (by rwa [compl_empty]))
+
+private theorem setBool_cases (S : Set Bool) :
+    S = ∅ ∨ S = {false} ∨ S = {true} ∨ S = Set.univ := by
+  by_cases h0 : false ∈ S <;> by_cases h1 : true ∈ S
+  · right; right; right; ext x; cases x <;> simp [h0, h1]
+  · right; left; ext x; cases x <;> simp [h0, h1]
+  · right; right; left; ext x; cases x <;> simp [h0, h1]
+  · left; ext x; cases x <;> simp [h0, h1]
+
+private theorem false_union_true : ({false} ∪ {true} : Set Bool) = Set.univ := by
+  ext x; cases x <;> simp
+
+private theorem true_union_false : ({true} ∪ {false} : Set Bool) = Set.univ := by
+  ext x; cases x <;> simp
+
+private theorem singleton_false_ne_univ : ({false} : Set Bool) ≠ Set.univ := by
+  intro h; have := Set.eq_univ_iff_forall.mp h true; simp at this
+
+/-- Liveness fails, the other four hold: every set is effective for everyone. -/
+private theorem independent_live : ∃ E : Set Unit → Set (Set Unit),
+    ¬ (∀ C, (∅ : Set Unit) ∉ E C) ∧ (∀ C, (Set.univ : Set Unit) ∈ E C) ∧
+    (∀ A : Set Unit, Aᶜ ∉ E ∅ → A ∈ E Set.univ) ∧
+    (∀ C (A B : Set Unit), A ⊆ B → A ∈ E C → B ∈ E C) ∧
+    (∀ (C D : Set Unit) (A B : Set Unit), Disjoint C D → A ∈ E C → B ∈ E D →
+      A ∩ B ∈ E (C ∪ D)) :=
+  ⟨fun _ => Set.univ, fun h => h ∅ (mem_univ _), fun _ => mem_univ _, fun _ _ => mem_univ _,
+    fun _ _ _ _ _ => mem_univ _, fun _ _ _ _ _ _ _ => mem_univ _⟩
+
+/-- Safety fails at a one-player coalition of a two-player set; the other four
+hold. -/
+private theorem independent_safe : ∃ E : Set Bool → Set (Set Unit),
+    (∀ C, (∅ : Set Unit) ∉ E C) ∧ ¬ (∀ C, (Set.univ : Set Unit) ∈ E C) ∧
+    (∀ A : Set Unit, Aᶜ ∉ E ∅ → A ∈ E Set.univ) ∧
+    (∀ C (A B : Set Unit), A ⊆ B → A ∈ E C → B ∈ E C) ∧
+    (∀ (C D : Set Bool) (A B : Set Unit), Disjoint C D → A ∈ E C → B ∈ E D →
+      A ∩ B ∈ E (C ∪ D)) := by
+  refine ⟨fun C => {A | (C = ∅ ∧ A = Set.univ) ∨ (C = Set.univ ∧ A.Nonempty)},
+    ?_, ?_, ?_, ?_, ?_⟩
+  · rintro C (⟨_, h⟩ | ⟨_, h⟩)
+    · exact empty_ne_univ h
+    · exact not_nonempty_empty h
+  · intro h
+    rcases h {false} with ⟨h, _⟩ | ⟨h, _⟩
+    · exact singleton_ne_empty _ h
+    · exact singleton_false_ne_univ h
+  · intro A hA
+    refine Or.inr ⟨rfl, ?_⟩
+    rw [nonempty_iff_ne_empty]
+    rintro rfl
+    exact hA (Or.inl ⟨rfl, compl_empty⟩)
+  · rintro C A B hAB (⟨hC, rfl⟩ | ⟨hC, hA⟩)
+    · exact Or.inl ⟨hC, univ_subset_iff.mp hAB⟩
+    · exact Or.inr ⟨hC, hA.mono hAB⟩
+  · rintro C D A B hCD (⟨rfl, rfl⟩ | ⟨rfl, hA⟩) hB
+    · simpa only [empty_union, univ_inter] using hB
+    · rcases hB with ⟨rfl, rfl⟩ | ⟨rfl, _⟩
+      · exact Or.inr ⟨union_empty _, by simpa using hA⟩
+      · exact absurd (univ_disjoint.mp hCD) univ_nonempty.ne_empty
+
+/-- `N`-maximality fails, the other four hold: only the whole outcome space is
+ever effective, and there are two outcomes. -/
+private theorem independent_maximal : ∃ E : Set Unit → Set (Set Bool),
+    (∀ C, (∅ : Set Bool) ∉ E C) ∧ (∀ C, (Set.univ : Set Bool) ∈ E C) ∧
+    ¬ (∀ A : Set Bool, Aᶜ ∉ E ∅ → A ∈ E Set.univ) ∧
+    (∀ C (A B : Set Bool), A ⊆ B → A ∈ E C → B ∈ E C) ∧
+    (∀ (C D : Set Unit) (A B : Set Bool), Disjoint C D → A ∈ E C → B ∈ E D →
+      A ∩ B ∈ E (C ∪ D)) := by
+  refine ⟨fun _ => {Set.univ}, fun _ h => empty_ne_univ h, fun _ => rfl, fun h => ?_,
+    fun _ A B hAB hA => univ_subset_iff.mp (hA ▸ hAB), fun _ _ A B _ hA hB => ?_⟩
+  · refine singleton_false_ne_univ (h {false} fun hc => ?_)
+    have := Set.eq_univ_iff_forall.mp hc false
+    simp at this
+  · rw [mem_singleton_iff.mp hA, mem_singleton_iff.mp hB, inter_self]
+    rfl
+
+/-- Outcome-monotonicity fails, the other four hold: player `false` is effective
+for `{0}` but not for its superset `{0, 1}` of three outcomes. -/
+private theorem independent_mono : ∃ E : Set Bool → Set (Set (Fin 3)),
+    (∀ C, (∅ : Set (Fin 3)) ∉ E C) ∧ (∀ C, (Set.univ : Set (Fin 3)) ∈ E C) ∧
+    (∀ A : Set (Fin 3), Aᶜ ∉ E ∅ → A ∈ E Set.univ) ∧
+    ¬ (∀ C (A B : Set (Fin 3)), A ⊆ B → A ∈ E C → B ∈ E C) ∧
+    (∀ (C D : Set Bool) (A B : Set (Fin 3)), Disjoint C D → A ∈ E C → B ∈ E D →
+      A ∩ B ∈ E (C ∪ D)) := by
+  refine ⟨fun C => {A | A = Set.univ ∨ (C = Set.univ ∧ A.Nonempty) ∨ (C = {false} ∧ A = {0})},
+    ?_, fun _ => Or.inl rfl, ?_, ?_, ?_⟩
+  · rintro C (h | ⟨_, h⟩ | ⟨_, h⟩)
+    · exact empty_ne_univ h
+    · exact not_nonempty_empty h
+    · exact singleton_ne_empty _ h.symm
+  · intro A hA
+    refine Or.inr (Or.inl ⟨rfl, ?_⟩)
+    rw [nonempty_iff_ne_empty]
+    rintro rfl
+    exact hA (Or.inl compl_empty)
+  · intro h
+    rcases h {false} {0} {0, 1} (by simp) (Or.inr (Or.inr ⟨rfl, rfl⟩)) with
+      h | ⟨h, _⟩ | ⟨_, h⟩
+    · have := Set.eq_univ_iff_forall.mp h 2; simp at this
+    · exact singleton_false_ne_univ h
+    · have := h ▸ (show (1 : Fin 3) ∈ ({0, 1} : Set (Fin 3)) by simp); simp at this
+  · intro C D A B hCD hA hB
+    rcases hA with rfl | ⟨rfl, hA⟩ | ⟨rfl, rfl⟩
+    · rw [univ_inter]
+      rcases hB with rfl | ⟨rfl, hB⟩ | ⟨rfl, rfl⟩
+      · exact Or.inl rfl
+      · exact Or.inr (Or.inl ⟨union_univ _, hB⟩)
+      · rcases setBool_cases C with rfl | rfl | rfl | rfl
+        · exact Or.inr (Or.inr ⟨empty_union _, rfl⟩)
+        · exact absurd hCD (by simp)
+        · exact Or.inr (Or.inl ⟨true_union_false, by simp⟩)
+        · exact absurd (univ_disjoint.mp hCD) (singleton_ne_empty _)
+    · have hD : D = ∅ := univ_disjoint.mp hCD
+      subst hD
+      rcases hB with rfl | ⟨h, _⟩ | ⟨h, _⟩
+      · rw [inter_univ, union_empty]; exact Or.inr (Or.inl ⟨rfl, hA⟩)
+      · exact absurd h.symm univ_nonempty.ne_empty
+      · exact absurd h.symm (singleton_ne_empty _)
+    · rcases hB with rfl | ⟨rfl, _⟩ | ⟨rfl, _⟩
+      · rw [inter_univ]
+        rcases setBool_cases D with rfl | rfl | rfl | rfl
+        · exact Or.inr (Or.inr ⟨union_empty _, rfl⟩)
+        · exact absurd hCD (by simp)
+        · exact Or.inr (Or.inl ⟨false_union_true, by simp⟩)
+        · exact absurd (disjoint_univ.mp hCD) (singleton_ne_empty _)
+      · exact absurd (disjoint_univ.mp hCD) (singleton_ne_empty _)
+      · exact absurd hCD (by simp)
+
+/-- Superadditivity fails, the other four hold: each player alone is effective for
+its own outcome, and the two outcomes are disjoint. -/
+private theorem independent_superadd : ∃ E : Set Bool → Set (Set Bool),
+    (∀ C, (∅ : Set Bool) ∉ E C) ∧ (∀ C, (Set.univ : Set Bool) ∈ E C) ∧
+    (∀ A : Set Bool, Aᶜ ∉ E ∅ → A ∈ E Set.univ) ∧
+    (∀ C (A B : Set Bool), A ⊆ B → A ∈ E C → B ∈ E C) ∧
+    ¬ (∀ (C D : Set Bool) (A B : Set Bool), Disjoint C D → A ∈ E C → B ∈ E D →
+      A ∩ B ∈ E (C ∪ D)) := by
+  let E : Set Bool → Set (Set Bool) := fun C => {A | A = Set.univ ∨ (C = Set.univ ∧ A.Nonempty) ∨
+    (C = {false} ∧ A = {false}) ∨ (C = {true} ∧ A = {true})}
+  have live : ∀ C, (∅ : Set Bool) ∉ E C := by
+    rintro C (h | ⟨_, h⟩ | ⟨_, h⟩ | ⟨_, h⟩)
+    · exact empty_ne_univ h
+    · exact not_nonempty_empty h
+    · exact (singleton_ne_empty _) h.symm
+    · exact (singleton_ne_empty _) h.symm
+  refine ⟨E, live, fun C => Or.inl rfl, fun A hA => ?_, fun C A B hAB hA => ?_, fun h => ?_⟩
+  · refine Or.inr (Or.inl ⟨rfl, ?_⟩)
+    rw [nonempty_iff_ne_empty]
+    rintro rfl
+    exact hA (Or.inl compl_empty)
+  · rcases hA with rfl | ⟨hC, hA⟩ | ⟨hC, rfl⟩ | ⟨hC, rfl⟩
+    · exact Or.inl (univ_subset_iff.mp hAB)
+    · exact Or.inr (Or.inl ⟨hC, hA.mono hAB⟩)
+    · rcases setBool_cases B with rfl | rfl | rfl | rfl
+      · exact absurd (hAB rfl) id
+      · exact Or.inr (Or.inr (Or.inl ⟨hC, rfl⟩))
+      · exact absurd (hAB rfl) (by simp)
+      · exact Or.inl rfl
+    · rcases setBool_cases B with rfl | rfl | rfl | rfl
+      · exact absurd (hAB rfl) id
+      · exact absurd (hAB rfl) (by simp)
+      · exact Or.inr (Or.inr (Or.inr ⟨hC, rfl⟩))
+      · exact Or.inl rfl
+  · have := h {false} {true} {false} {true} (by simp)
+      (Or.inr (Or.inr (Or.inl ⟨rfl, rfl⟩))) (Or.inr (Or.inr (Or.inr ⟨rfl, rfl⟩)))
+    have hint : ({false} ∩ {true} : Set Bool) = ∅ := by ext x; cases x <;> simp
+    rw [hint] at this
+    exact live _ this
+
+/--
+**Pauly's five playability conditions are independent** (Marc Pauly, *A Modal
+Logic for Coalitional Power in Games*, p. 152: *"It can be shown that these
+conditions are independent."*).
+
+One conjunct per field of `Playable`, in print's order (1) liveness, (2) safety,
+(3) `N`-maximality, (4) outcome-monotonicity, (5) superadditivity: an effectivity
+function `E : 𝒫(N) → 𝒫(𝒫(S))` satisfying the other four conditions and not that
+one. Each field is written out as in `Playable`. The player sets are `Unit` or
+`Bool` and the outcome sets `Unit`, `Bool` or `Fin 3`. Safety cannot be broken
+with one player, by `univ_mem_of_live_of_maximal`.
+-/
+public theorem Playable.conditions_independent :
+    (∃ E : Set Unit → Set (Set Unit),
+      ¬ (∀ C, (∅ : Set Unit) ∉ E C) ∧ (∀ C, (Set.univ : Set Unit) ∈ E C) ∧
+      (∀ A : Set Unit, Aᶜ ∉ E ∅ → A ∈ E Set.univ) ∧
+      (∀ C (A B : Set Unit), A ⊆ B → A ∈ E C → B ∈ E C) ∧
+      (∀ (C D : Set Unit) (A B : Set Unit), Disjoint C D → A ∈ E C → B ∈ E D →
+        A ∩ B ∈ E (C ∪ D))) ∧
+    (∃ E : Set Bool → Set (Set Unit),
+      (∀ C, (∅ : Set Unit) ∉ E C) ∧ ¬ (∀ C, (Set.univ : Set Unit) ∈ E C) ∧
+      (∀ A : Set Unit, Aᶜ ∉ E ∅ → A ∈ E Set.univ) ∧
+      (∀ C (A B : Set Unit), A ⊆ B → A ∈ E C → B ∈ E C) ∧
+      (∀ (C D : Set Bool) (A B : Set Unit), Disjoint C D → A ∈ E C → B ∈ E D →
+        A ∩ B ∈ E (C ∪ D))) ∧
+    (∃ E : Set Unit → Set (Set Bool),
+      (∀ C, (∅ : Set Bool) ∉ E C) ∧ (∀ C, (Set.univ : Set Bool) ∈ E C) ∧
+      ¬ (∀ A : Set Bool, Aᶜ ∉ E ∅ → A ∈ E Set.univ) ∧
+      (∀ C (A B : Set Bool), A ⊆ B → A ∈ E C → B ∈ E C) ∧
+      (∀ (C D : Set Unit) (A B : Set Bool), Disjoint C D → A ∈ E C → B ∈ E D →
+        A ∩ B ∈ E (C ∪ D))) ∧
+    (∃ E : Set Bool → Set (Set (Fin 3)),
+      (∀ C, (∅ : Set (Fin 3)) ∉ E C) ∧ (∀ C, (Set.univ : Set (Fin 3)) ∈ E C) ∧
+      (∀ A : Set (Fin 3), Aᶜ ∉ E ∅ → A ∈ E Set.univ) ∧
+      ¬ (∀ C (A B : Set (Fin 3)), A ⊆ B → A ∈ E C → B ∈ E C) ∧
+      (∀ (C D : Set Bool) (A B : Set (Fin 3)), Disjoint C D → A ∈ E C → B ∈ E D →
+        A ∩ B ∈ E (C ∪ D))) ∧
+    (∃ E : Set Bool → Set (Set Bool),
+      (∀ C, (∅ : Set Bool) ∉ E C) ∧ (∀ C, (Set.univ : Set Bool) ∈ E C) ∧
+      (∀ A : Set Bool, Aᶜ ∉ E ∅ → A ∈ E Set.univ) ∧
+      (∀ C (A B : Set Bool), A ⊆ B → A ∈ E C → B ∈ E C) ∧
+      ¬ (∀ (C D : Set Bool) (A B : Set Bool), Disjoint C D → A ∈ E C → B ∈ E D →
+        A ∩ B ∈ E (C ∪ D))) :=
+  ⟨independent_live, independent_safe, independent_maximal, independent_mono,
+    independent_superadd⟩
+
+end Independence
 
 end AISafetyAtlas.Sovereignty

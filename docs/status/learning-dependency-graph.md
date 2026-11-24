@@ -10,7 +10,7 @@ Edges come from the elaborated Lean environment. This answers the question the p
 
 So `A → B` means *`B` occurs in `A`'s statement, or in `A`'s body when `A` is a definition*. A lemma used only inside a proof does not appear. Reading the table as a complete call graph would be wrong, and the two sections below are scoped so that they stay true under this limit.
 
-`77` authored declarations in `AISafetyAtlas.Learning.*` (50 theorems). Compiler-generated companions and projections are dropped.
+`89` authored declarations in `AISafetyAtlas.Learning.*` (57 theorems). Compiler-generated companions and projections are dropped.
 
 ## Load-bearing declarations
 
@@ -18,9 +18,9 @@ Named in the statements of eight or more others. A change to one of these is a c
 
 | Declaration | Named by |
 |---|---|
-| `AdaptiveRule` | 37 |
-| `ruleVisit` | 29 |
-| `observed` | 19 |
+| `AdaptiveRule` | 40 |
+| `ruleVisit` | 31 |
+| `observed` | 23 |
 | `ObjectiveWeight` | 17 |
 | `SupervisedLearner` | 15 |
 | `PermInvariant` | 14 |
@@ -29,6 +29,8 @@ Named in the statements of eight or more others. A change to one of these is a c
 | `weightedTrace` | 10 |
 | `weightedPerformance` | 10 |
 | `scheduleRule` | 10 |
+| `traceRun` | 9 |
+| `permRule` | 8 |
 | `HomogeneousLoss` | 8 |
 
 ## Definitions no statement and no example mentions
@@ -103,18 +105,30 @@ None.
 | `permInvariant_of_closedUnderPermutation` | theorem | `PermInvariant` |
 | `permInvariant_of_nfl` | theorem | `ObjectiveWeight`, `PermInvariant`, `weightedPerformance` |
 | `permRule` | definition | `AdaptiveRule` |
+| `permSearch` | definition | `traceMapX` |
 | `playChoice` | definition | `AdaptiveRule`, `StochasticRule` |
 | `pointLoss` | definition | — |
 | `predict` | definition | `SupervisedLearner`, `restrictTo` |
+| `replay` | definition | — |
+| `replay_obsPrefix` | theorem | `obsPrefix`, `replay`, `searchRule`, `traceRun` |
+| `replay_observed` | theorem | `observed`, `replay`, `searchRule`, `traceRun` |
 | `restrictTo` | definition | — |
 | `ruleVisit` | definition | `AdaptiveRule` |
 | `ruleVisit_permRule` | theorem | `AdaptiveRule`, `permRule`, `ruleVisit` |
 | `ruleVisit_scheduleRule` | theorem | `ruleVisit`, `scheduleRule` |
+| `ruleVisit_searchRule` | theorem | `observed`, `ruleVisit`, `searchRule`, `traceRun` |
 | `scheduleRule` | definition | `AdaptiveRule` |
+| `searchRule` | definition | `AdaptiveRule`, `replay` |
+| `searchRule_permSearch` | theorem | `AdaptiveRule`, `permRule`, `permSearch`, `searchRule` |
 | `stochasticTrace` | definition | `ObjectiveWeight`, `StochasticRule`, `induced`, `weightedTrace` |
 | `sum_performance_eq_scaled_sum` | theorem | `CostPerformance` |
 | `sum_pointLoss_off_training` | theorem | `SupervisedLearner`, `pointLoss`, `predict` |
 | `surjective_induced_playChoice` | theorem | `AdaptiveRule`, `induced`, `playChoice` |
+| `traceMapX` | definition | — |
+| `traceMapX_replay_permSearch` | theorem | `permSearch`, `replay`, `traceMapX` |
+| `traceMapX_traceRun_permSearch` | theorem | `permSearch`, `traceMapX`, `traceRun` |
+| `traceRun` | definition | — |
+| `traceRun_permSearch` | theorem | `permSearch`, `traceMapX`, `traceRun` |
 | `weightedPerformance` | definition | `CostPerformance`, `ObjectiveWeight` |
 | `weightedPerformance_eq_adaptive` | theorem | `CostPerformance`, `ObjectiveWeight`, `scheduleRule`, `weightedPerformance`, `weightedTrace` |
 | `weightedPerformance_indicator` | theorem | `ObjectiveWeight`, `weightedPerformance` |

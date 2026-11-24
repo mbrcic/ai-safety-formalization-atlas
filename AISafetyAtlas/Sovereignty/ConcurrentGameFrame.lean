@@ -64,9 +64,11 @@ nondeterministic outcomes.
 
 ## What is not here
 
-The paper's twenty-odd remaining definitions — alpha and actual neighborhood
-frames, nonmonotonic cores, representability, groundedness, liveness — and every
-numbered theorem. **The representation theorems are what the paper is for**, and
+The paper's twenty-odd remaining definitions — actual neighborhood frames,
+nonmonotonic cores, representability, groundedness, liveness — and every
+numbered theorem. Of the alpha neighborhood layer only Definition 2
+(`AlphaNeighborhoodFrame`), the frame an action frame induces (`alphaFrame`) and
+Definition 12's item 4 (`AlphaNeighborhoodFrame.CoalitionMonotone`) are here. **The representation theorems are what the paper is for**, and
 this module claims nothing about representation. It supplies print's carrier and
 the facts print says are used implicitly throughout, which is what the four owed
 rows asked for.
@@ -214,6 +216,41 @@ public theorem ActualPowerAt.alphaPower {C : Set AG} {s : ST} {X : Set ST}
   obtain ⟨σ, hσ, hsafe, -⟩ := h
   exact ⟨σ, hσ, hsafe⟩
 
+/-! ## §2.3: alpha neighborhood frames -/
+
+/--
+**Print's Definition 2 (alpha neighborhood frames).** Each coalition `C` has an
+alpha neighborhood function `N^α_C : ST → 𝒫(𝒫(ST))`, and every alpha neighborhood
+`N^α_C(s)` is closed under supersets.
+
+Print also asks that `ST` be non-empty. That is not carried: nothing below reads
+it, and dropping it only widens the class.
+-/
+public structure AlphaNeighborhoodFrame (AG : Type u) (ST : Type v) where
+  /-- Print's `N^α_C(s)`, the alpha neighborhood of `C` at `s`. -/
+  nbhd : Set AG → ST → Set (Set ST)
+  /-- Every alpha neighborhood is closed under supersets. -/
+  upward : ∀ (C : Set AG) (s : ST) (X Y : Set ST), X ∈ nbhd C s → X ⊆ Y → Y ∈ nbhd C s
+
+/--
+**Print's Definition 12, item 4 (coalition monotonicity of alpha powers)**: for
+all `s` and all `C ⊆ D`, `N^α_C(s) ⊆ N^α_D(s)`.
+
+Print lists it as one of the conditions of an `α`-representative frame, on an
+arbitrary alpha neighborhood frame. `IsGCGF.alphaFrame_coalitionMonotone` proves
+it for the frame a general concurrent game frame induces.
+-/
+@[expose] public def AlphaNeighborhoodFrame.CoalitionMonotone
+    (NF : AlphaNeighborhoodFrame AG ST) : Prop :=
+  ∀ (s : ST) (C D : Set AG), C ⊆ D → NF.nbhd C s ⊆ NF.nbhd D s
+
+/-- **The alpha neighborhood frame an action frame induces**: print's Definition 5
+alpha effectivity function, which is closed under supersets by `AlphaPower.mono`. -/
+@[expose] public def ActionFrame.alphaFrame (F : ActionFrame AG ST AC) :
+    AlphaNeighborhoodFrame AG ST where
+  nbhd := alphaEff F
+  upward := fun _ _ _ _ hX hXY => AlphaPower.mono hX hXY
+
 /-! ## §3: general concurrent game frames -/
 
 /--
@@ -332,6 +369,14 @@ public theorem alphaPower_mono_coalition {C D : Set AG} (h : C ⊆ D) {s : ST} {
   · refine (hF.out_anti_coalition h s (restrictJA (Set.subset_univ D) σ')).trans ?_
     rw [restrictJA_restrictJA, hσ'res]
     exact hsafe
+
+/--
+**Print's Definition 12, item 4, at every general concurrent game frame**: the
+induced alpha neighborhood frame is coalition-monotone. This is
+`alphaPower_mono_coalition` read as the frame property print names.
+-/
+public theorem alphaFrame_coalitionMonotone : F.alphaFrame.CoalitionMonotone :=
+  fun _ _ _ h _ hX => hF.alphaPower_mono_coalition h hX
 
 /--
 **No coalition is ever effective for the empty set.**

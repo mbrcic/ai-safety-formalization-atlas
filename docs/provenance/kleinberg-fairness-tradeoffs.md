@@ -391,7 +391,7 @@ satisfying both.
 ### Manual review checklist (arXiv v2 PDF)
 
 Use the existing `survey-ref-034-kleinberg-mullainathan-raghavan-1609.05807.pdf`
-under `scratchpad/by-010-sources/` (arXiv v2, 17 Nov 2016). The page numbers below
+in a local working copy, not committed, (arXiv v2, 17 Nov 2016). The page numbers below
 are the PDF's printed page numbers. The Lean files are
 [`RiskAssignment.lean`](../../AISafetyAtlas/Fairness/RiskAssignment.lean),
 [`ApproximateRiskAssignment.lean`](../../AISafetyAtlas/Fairness/ApproximateRiskAssignment.lean),

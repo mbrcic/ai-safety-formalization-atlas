@@ -78,8 +78,11 @@ Print's Proposition 5 (4), the equivalence with `IsCrown`, is stated as
 `IsCrown` and not proved. And their Section 4.2 proves the *corrected* Theorem
 3.2 -- `E` is the effectivity function of a strategic game iff `E` is truly
 playable -- by revising Pauly's construction. `paulyGame` in `PlayableConverse` is
-that construction unrevised, so it is one step short of the corrected theorem,
-which is the natural next result and is not attempted here.
+that construction unrevised, and its two end coalitions are wrong even at a finite
+outcome set. The corrected theorem is proved downstream, in
+`AISafetyAtlas.Sovereignty.TrulyPlayableRepresentation`, by a different route:
+restrict the outcome type to the least member of E(∅) and apply Peleg's
+construction there.
 -/
 
 namespace AISafetyAtlas.Sovereignty

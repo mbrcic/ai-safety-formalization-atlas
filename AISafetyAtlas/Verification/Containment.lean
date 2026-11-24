@@ -93,6 +93,9 @@ halting problem at both arguments, which Mathlib does not state.
 
 `Assumption2` is print's Assumption 2 itself, in print's three clauses, and
 `harming_undecidable_of_assumption2` is print's proof from it and nothing else.
+`Assumption2Harm` adds print's last sentence, a total harming *HarmHumans()*, as
+clauses for an arbitrary effect relation, and `harming_undecidable_of_assumption2Harm`
+is Theorem 1 from it.
 It is deliberately **stronger than the proof consumes**: its simulation clause
 is an equality of partial functions, because a machine agreeing only on domains
 would not be simulating, and print's *"takes a finite time"* is why the appended
@@ -276,9 +279,10 @@ Three clauses, in print's order.
   does *include* them.
 * `computable_encode` is the packaging being a construction.
 
-*HarmHumans()* itself is not a clause, because it is uninterpreted here exactly
-as it is in print; what the proof consumes from it is the finiteness that
-`simulates` records.
+*HarmHumans()* itself is not a clause of this structure, because it is
+uninterpreted here exactly as it is in print; what the proof consumes from it is
+the finiteness that `simulates` records. `Assumption2Harm` extends this
+structure with print's last sentence as clauses, for an arbitrary effect relation.
 -/
 public structure Assumption2 (haltHarm : Code) (encode : Code × ℕ → ℕ) : Prop where
   /-- *"`R` must be able to simulate a universal Turing machine"*. -/
@@ -317,5 +321,173 @@ public theorem harming_undecidable_of_assumption2 {haltHarm : Code} {encode : Co
     (assumption : Assumption2 haltHarm encode) :
     ¬ Nonempty (HarmDecider HaltsOn) :=
   harming_undecidable_pair assumption.harmReductionPair
+
+/-! ## Print's *HarmHumans()*, as a clause
+
+`Assumption2` leaves *HarmHumans()* out and fixes the effect relation to
+`HaltsOn`. The declarations below state Assumption 2's last sentence too, for an
+arbitrary effect relation `harms`: the language contains a program that harms
+and takes a finite time, and print's *HaltHarm()* is that program run after the
+universal machine. -/
+
+/--
+**Print's Assumption 2, all of it.** Alfonseca et al., JAIR 70 (2021), p. 71:
+*"`R` must be able to simulate a universal Turing machine and `D` includes the
+set of inputs that can be executed by a universal Turing machine. In addition,
+the language of `R` contains at least one explicit operation *HarmHumans()* that
+harms humans and takes a finite time."*
+
+The first two sentences are `Assumption2` at the universal machine `universal`,
+which is what print says can be simulated. The last is the two fields here, for
+an uninterpreted effect relation `harms`: `harmHumans` *"takes a finite time"*
+(`total`) and *"harms humans"* (`harmful`). The operation is explicit in the
+language because `Code.comp` sequences it after any program, which is how
+`haltHarm` is built.
+-/
+public structure Assumption2Harm (harms : Code → ℕ → Prop) (harmHumans universal : Code)
+    (encode : Code × ℕ → ℕ) : Prop extends Assumption2 universal encode where
+  /-- *HarmHumans()* *"takes a finite time"*. -/
+  total : ∀ n, (eval harmHumans n).Dom
+  /-- *HarmHumans()* *"harms humans"*. -/
+  harmful : ∀ n, harms harmHumans n
+
+/-- **Print's Algorithm 3**, *HaltHarm(T, I)*: *execute `T(I)`; execute
+*HarmHumans()**. The universal machine runs the packaged `(T, I)`, then
+*HarmHumans()* runs. -/
+@[expose] public def haltHarmOf (harmHumans universal : Code) : Code :=
+  Code.comp harmHumans universal
+
+/-- **Print's observation, first half** (p. 70): *"*HarmHumans()* is executed
+if and only if `T(I)` halts"*. Because *HarmHumans()* takes a finite time, the
+composite runs to completion exactly when the simulated machine halts. -/
+public theorem Assumption2Harm.haltHarm_dom_iff {harms : Code → ℕ → Prop}
+    {harmHumans universal : Code} {encode : Code × ℕ → ℕ}
+    (assumption : Assumption2Harm harms harmHumans universal encode) (source : Code)
+    (input : ℕ) :
+    (eval (haltHarmOf harmHumans universal) (encode (source, input))).Dom ↔
+      (eval source input).Dom := by
+  show (eval universal (encode (source, input)) >>= eval harmHumans).Dom ↔ _
+  rw [assumption.simulates source input]
+  exact ⟨fun ⟨h, _⟩ => h, fun h => ⟨h, assumption.total _⟩⟩
+
+/--
+**Print's Assumption 2 and observation deliver print's reduction, for any effect
+relation.** The hypothesis `isolated` is the observation's second half (p. 70):
+*"*HaltHarm()* harms humans if and only if *HarmHumans()* is executed, since the
+execution of `T(I)` cannot harm humans"*, read as: the composite harms exactly
+when it runs through *HarmHumans()*. It is required at the composite only.
+-/
+public def Assumption2Harm.harmReductionPair {harms : Code → ℕ → Prop}
+    {harmHumans universal : Code} {encode : Code × ℕ → ℕ}
+    (assumption : Assumption2Harm harms harmHumans universal encode)
+    (isolated : ∀ d, harms (haltHarmOf harmHumans universal) d ↔
+      (eval (haltHarmOf harmHumans universal) d).Dom) :
+    HarmReductionPair harms where
+  haltHarm := haltHarmOf harmHumans universal
+  encode := encode
+  computable_encode := assumption.computable_encode
+  harms_iff_halts := fun source input =>
+    (isolated _).trans (assumption.haltHarm_dom_iff source input)
+
+/--
+**Theorem 1 from print's Assumption 2 with *HarmHumans()*,** for an arbitrary
+effect relation `harms` (Alfonseca et al., JAIR 70 (2021), p. 71): no total
+computable `Harm` decider exists.
+-/
+public theorem harming_undecidable_of_assumption2Harm {harms : Code → ℕ → Prop}
+    {harmHumans universal : Code} {encode : Code × ℕ → ℕ}
+    (assumption : Assumption2Harm harms harmHumans universal encode)
+    (isolated : ∀ d, harms (haltHarmOf harmHumans universal) d ↔
+      (eval (haltHarmOf harmHumans universal) d).Dom) :
+    ¬ Nonempty (HarmDecider harms) :=
+  harming_undecidable_pair (assumption.harmReductionPair isolated)
+
+/-- **Print's observation, first half, with "executed" read literally** (p. 70):
+*"*HarmHumans()* is executed if and only if `T(I)` halts"*. In the composite
+`haltHarmOf harmHumans universal`, the second step runs on the output of the
+first, so *HarmHumans()* is executed on the packaged `(T, I)` exactly when the
+universal machine returns there; that is `T(I)` halting.
+`Assumption2Harm.haltHarm_dom_iff` is the same fact for the whole composite
+completing, which under *HarmHumans()*'s totality says the same. -/
+public theorem Assumption2Harm.harmHumans_executed_iff {harms : Code → ℕ → Prop}
+    {harmHumans universal : Code} {encode : Code × ℕ → ℕ}
+    (assumption : Assumption2Harm harms harmHumans universal encode) (source : Code)
+    (input : ℕ) :
+    (eval universal (encode (source, input))).Dom ↔ (eval source input).Dom := by
+  rw [assumption.simulates source input]
+
+/-! ## Print's isolation premise, and the biconditional derived from it
+
+`Assumption2Harm.harmReductionPair` takes the observation's second half as a
+hypothesis at the composite. Print *derives* it: *"*HaltHarm()* harms humans if
+and only if *HarmHumans()* is executed, since the execution of `T(I)` cannot harm
+humans, as a Turing machine is isolated from the external world"*. The structure
+below states the two premises of that sentence for an arbitrary effect relation,
+and the theorems after it derive the biconditional and print's reduction. -/
+
+/--
+**Print's effect semantics for Algorithm 3** (Alfonseca et al., JAIR 70 (2021),
+p. 70), as premises on an effect relation `harms`.
+
+* `isolated`: *"the execution of `T(I)` cannot harm humans, as a Turing machine
+  is isolated from the external world"*: the universal machine, run on any
+  packaged `(T, I)`, does not harm.
+* `seq`: the composite *execute `T(I)`; execute *HarmHumans()** harms exactly
+  when its first step harms or the first step returns and *HarmHumans()* harms
+  when run after it.
+
+It is stated at print's one composite rather than for every sequencing of codes,
+since that is all print's sentence speaks about. It cannot be met by `HaltsOn`,
+under which the universal machine harms wherever it halts; the example module
+gives a relation meeting it.
+-/
+public structure SequentialHarm (harms : Code → ℕ → Prop) (harmHumans universal : Code)
+    (encode : Code × ℕ → ℕ) : Prop where
+  /-- *"The execution of `T(I)` cannot harm humans"*. -/
+  isolated : ∀ source input, ¬ harms universal (encode (source, input))
+  /-- The composite harms iff its first step harms, or the first step returns and
+  *HarmHumans()* harms on what it returned. -/
+  seq : ∀ d, harms (haltHarmOf harmHumans universal) d ↔
+    harms universal d ∨ ∃ y ∈ eval universal d, harms harmHumans y
+
+/-- **Print's observation, second half, derived** (p. 70): *"*HaltHarm()* harms
+humans if and only if *HarmHumans()* is executed"*, from isolation, the
+sequencing premise, and *HarmHumans()* harming (`Assumption2Harm.harmful`). -/
+public theorem SequentialHarm.harms_iff_executed {harms : Code → ℕ → Prop}
+    {harmHumans universal : Code} {encode : Code × ℕ → ℕ}
+    (sem : SequentialHarm harms harmHumans universal encode)
+    (assumption : Assumption2Harm harms harmHumans universal encode) (source : Code)
+    (input : ℕ) :
+    harms (haltHarmOf harmHumans universal) (encode (source, input)) ↔
+      (eval universal (encode (source, input))).Dom := by
+  rw [sem.seq, or_iff_right (sem.isolated source input)]
+  exact ⟨fun ⟨y, hy, _⟩ => Part.dom_iff_mem.mpr ⟨y, hy⟩,
+    fun h => ⟨_, Part.get_mem h, assumption.harmful _⟩⟩
+
+/-- **Print's line *"returns `TRUE` if and only if `T(I)` halts"*, derived from
+print's premises** rather than assumed: isolation and sequencing give the harm
+biconditional, and Assumption 2's simulation gives halting. -/
+public theorem SequentialHarm.harms_haltHarmOf_iff_halts {harms : Code → ℕ → Prop}
+    {harmHumans universal : Code} {encode : Code × ℕ → ℕ}
+    (sem : SequentialHarm harms harmHumans universal encode)
+    (assumption : Assumption2Harm harms harmHumans universal encode) (source : Code)
+    (input : ℕ) :
+    harms (haltHarmOf harmHumans universal) (encode (source, input)) ↔
+      (eval source input).Dom :=
+  (sem.harms_iff_executed assumption source input).trans
+    (assumption.harmHumans_executed_iff source input)
+
+/-- **Print's reduction from print's premises**: Assumption 2 with *HarmHumans()*
+and the isolation semantics give a `HarmReductionPair`, which
+`harming_undecidable_pair` turns into Theorem 1. -/
+public def SequentialHarm.toHarmReductionPair {harms : Code → ℕ → Prop}
+    {harmHumans universal : Code} {encode : Code × ℕ → ℕ}
+    (sem : SequentialHarm harms harmHumans universal encode)
+    (assumption : Assumption2Harm harms harmHumans universal encode) :
+    HarmReductionPair harms where
+  haltHarm := haltHarmOf harmHumans universal
+  encode := encode
+  computable_encode := assumption.computable_encode
+  harms_iff_halts := sem.harms_haltHarmOf_iff_halts assumption
 
 end AISafetyAtlas.Verification.Containment

@@ -10,7 +10,7 @@ Edges come from the elaborated Lean environment. This answers the question the p
 
 So `A → B` means *`B` occurs in `A`'s statement, or in `A`'s body when `A` is a definition*. A lemma used only inside a proof does not appear. Reading the table as a complete call graph would be wrong, and the two sections below are scoped so that they stay true under this limit.
 
-`849` authored declarations in `AISafetyAtlas.Sovereignty.*` (542 theorems). Compiler-generated companions and projections are dropped.
+`925` authored declarations in `AISafetyAtlas.Sovereignty.*` (583 theorems). Compiler-generated companions and projections are dropped.
 
 ## Load-bearing declarations
 
@@ -18,21 +18,21 @@ Named in the statements of eight or more others. A change to one of these is a c
 
 | Declaration | Named by |
 |---|---|
-| `GameForm` | 273 |
-| `GameForm.strategy` | 192 |
+| `GameForm` | 280 |
+| `GameForm.strategy` | 198 |
 | `Forces` | 136 |
-| `effectivity` | 61 |
+| `effectivity` | 68 |
 | `GameForm.outcome` | 56 |
+| `Playable` | 50 |
 | `SafetyGame` | 42 |
-| `Playable` | 42 |
-| `Constitution.induced` | 38 |
+| `ActionFrame` | 41 |
+| `Constitution.induced` | 39 |
+| `AATS` | 37 |
 | `vetoGame` | 35 |
 | `RetainsFamily` | 34 |
 | `NormSystem.permitted` | 33 |
-| `ActionFrame` | 32 |
-| `AATS` | 32 |
+| `Norm` | 31 |
 | `Demandwise` | 31 |
-| `Norm` | 27 |
 | `InstitutionalSetting.norms` | 27 |
 | `Constitution` | 24 |
 | `OutcomeLaw` | 23 |
@@ -42,17 +42,19 @@ Named in the statements of eight or more others. A change to one of these is a c
 | `outcomesOf` | 21 |
 | `BlockChoice.rel` | 21 |
 | `Arena` | 21 |
+| `Setting` | 20 |
 | `Represents` | 19 |
 | `InstitutionalSetting.possible` | 18 |
 | `GameAction` | 18 |
+| `gameFrame` | 17 |
+| `WarehouseGate.Robot` | 17 |
 | `SimpleGame` | 17 |
 | `OutcomeLaw.lowerValue` | 17 |
+| `Norm.Le` | 17 |
+| `IsGCGF` | 17 |
 | `InstitutionalSetting` | 17 |
-| `gameFrame` | 16 |
-| `Setting` | 16 |
-| `Norm.Le` | 16 |
-| `IsGCGF` | 16 |
 | `AuthorizedFrom` | 16 |
+| `AATS.Profile` | 16 |
 | `Strat` | 15 |
 | `SafetyGame.recovery` | 15 |
 | `OutcomeLaw.law` | 15 |
@@ -62,6 +64,8 @@ Named in the statements of eight or more others. A change to one of these is a c
 | `payoff` | 14 |
 | `mixed` | 14 |
 | `fallbackCapability` | 14 |
+| `WarehouseGate.GateState` | 14 |
+| `Superadditive` | 14 |
 | `DemandwiseUniform` | 14 |
 | `Cycle` | 14 |
 | `BlockChoice` | 14 |
@@ -73,44 +77,52 @@ Named in the statements of eight or more others. A change to one of these is a c
 | `HasPowerOver` | 13 |
 | `Arena.Forces` | 13 |
 | `ActionFrame.av` | 13 |
-| `AATS.Profile` | 13 |
+| `alphaEff` | 12 |
+| `WarehouseGate.GateAction` | 12 |
+| `TrulyPlayable` | 12 |
+| `IsFrame` | 12 |
 | `spliceProfile` | 11 |
+| `paulyGame` | 11 |
 | `diracLaw` | 11 |
 | `Veto` | 11 |
-| `Superadditive` | 11 |
 | `ShutdownChannel.run` | 11 |
+| `Setting.Free` | 11 |
 | `SafetyGame.safetyKernel` | 11 |
 | `InstitutionalSetting.enforce` | 11 |
 | `Enforcement.Enforces` | 11 |
 | `EffectivityEq` | 11 |
 | `Cycle.len` | 11 |
 | `BlockChoice.blockOf` | 11 |
+| `AATS.Perm` | 11 |
 | `principalDecides` | 10 |
-| `paulyGame` | 10 |
 | `delegateDecides` | 10 |
+| `actualEff` | 10 |
 | `ShutdownChannel.RelayedCommand.effect` | 10 |
+| `Setting.IndependenceFree` | 10 |
 | `SafetyGame.step` | 10 |
+| `Norm.RespectsNature` | 10 |
 | `InstitutionalSetting.Separated` | 10 |
+| `FrameClass` | 10 |
 | `Enforcement.Regime` | 10 |
 | `Derives` | 10 |
 | `ChoiceFn` | 10 |
 | `CapabilityAssessment.outputProtocol` | 10 |
-| `AATS.Perm` | 10 |
+| `AATS.Sat` | 10 |
 | `restrictJA` | 9 |
 | `refineSeq` | 9 |
-| `TrulyPlayable` | 9 |
+| `UpwardClosed` | 9 |
 | `SignalExperiment` | 9 |
 | `ShutdownChannel.RelayedCommand` | 9 |
-| `Setting.IndependenceFree` | 9 |
+| `Setting.RepublicanFree` | 9 |
 | `SafetyGame.playH` | 9 |
 | `SafetyGame.play` | 9 |
 | `SOV1` | 9 |
 | `RetainsWith` | 9 |
 | `RetainsUnder` | 9 |
 | `Profile` | 9 |
-| `IsFrame` | 9 |
+| `Norm.bot` | 9 |
+| `MostOrbit` | 9 |
 | `InstitutionalSetting.regiment` | 9 |
-| `FrameClass` | 9 |
 | `DoxasticAgent.channel` | 9 |
 | `Cycle.block` | 9 |
 | `Conformity.Operable` | 9 |
@@ -121,17 +133,17 @@ Named in the statements of eight or more others. A change to one of these is a c
 | `Arena.Sovereign` | 9 |
 | `Acyclic` | 9 |
 | `ActualPower` | 9 |
+| `WarehouseGate.Robot.a` | 8 |
 | `SimpleGame.Monotone'` | 8 |
 | `ShutdownChannel.RelayedCommand.idle` | 8 |
-| `Setting.RepublicanFree` | 8 |
 | `SafetyGame.Maintains` | 8 |
 | `RetainsAgainst` | 8 |
-| `Norm.RespectsNature` | 8 |
+| `IsEffectivityFunction` | 8 |
 | `ForcesWithin` | 8 |
 | `Enforcement.Regime.observe` | 8 |
 | `Enforcement.Regime.norms` | 8 |
 | `Constitution.MonotoneAlternatives` | 8 |
-| `AATS.Sat` | 8 |
+| `AATS.ConfProfile` | 8 |
 
 ## Definitions no statement and no example mentions
 
@@ -144,6 +156,11 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 - `IsCrown`
 - `SafetyGame.decidableIsShield`
 - `SimilarUnder`
+- `WarehouseGate.ActionA.close_a`
+- `WarehouseGate.ActionA.delegate_a`
+- `WarehouseGate.ActionA.open_a`
+- `WarehouseGate.ActionB.close_b`
+- `WarehouseGate.ActionB.open_b`
 - `choiceFnForce`
 - `choiceFnUniv`
 - `decidableForces`
@@ -166,6 +183,8 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 | `AATS.Sat` | definition | `AATS`, `AATS.ConfProfile`, `AATS.Profile`, `AATS.comp`, `Norm` |
 | `AATS.Strategy` | definition | `AATS` |
 | `AATS.comp` | definition | `AATS`, `AATS.Profile`, `AATS.out` |
+| `AATS.comp_subset_comp_empty` | theorem | `AATS`, `AATS.Profile`, `AATS.comp` |
+| `AATS.comp_univ_nonempty` | theorem | `AATS`, `AATS.Profile`, `AATS.comp` |
 | `AATS.comp_univ_subsingleton` | theorem | `AATS`, `AATS.Profile`, `AATS.comp` |
 | `AATS.confProfile_of_le` | theorem | `AATS`, `AATS.ConfProfile`, `AATS.Profile`, `Norm`, `Norm.Le` |
 | `AATS.le_of_confProfile_singleton` | theorem | `AATS`, `AATS.Conf`, `AATS.Strategy`, `Norm`, `Norm.IsNontrivial`, `Norm.Le`, `Norm.RespectsNature` |
@@ -173,6 +192,7 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 | `AATS.not_confProfile_top` | theorem | `AATS`, `AATS.ConfProfile`, `AATS.Profile`, `Norm.top` |
 | `AATS.not_perm_top` | theorem | `AATS`, `AATS.Perm`, `Norm.top` |
 | `AATS.oblig_of_le` | theorem | `AATS`, `AATS.Oblig`, `Norm`, `Norm.Le` |
+| `AATS.oblig_of_sat_bot_empty` | theorem | `AATS`, `AATS.Oblig`, `AATS.Sat`, `Norm`, `Norm.bot` |
 | `AATS.oblig_top` | theorem | `AATS`, `AATS.Oblig`, `Norm.top` |
 | `AATS.options` | definition | `AATS`, `AATS.precond` |
 | `AATS.options_nonempty` | theorem | `AATS`, `AATS.options` |
@@ -181,11 +201,13 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 | `AATS.out_univ_subsingleton` | theorem | `AATS`, `AATS.Profile`, `AATS.out` |
 | `AATS.perm_mono` | theorem | `AATS`, `AATS.Perm`, `Norm` |
 | `AATS.perm_of_le` | theorem | `AATS`, `AATS.Perm`, `Norm`, `Norm.Le` |
+| `AATS.perm_of_oblig` | theorem | `AATS`, `AATS.Oblig`, `AATS.Perm`, `Norm`, `Norm.IsNontrivial`, `Norm.RespectsNature` |
 | `AATS.perm_union_of_left` | theorem | `AATS`, `AATS.Perm`, `Norm` |
 | `AATS.sat_bot_of_respectsNature` | theorem | `AATS`, `AATS.Sat`, `Norm`, `Norm.RespectsNature`, `Norm.bot` |
 | `AATS.sat_of_confProfile_mono` | theorem | `AATS`, `AATS.ConfProfile`, `AATS.Profile`, `AATS.Sat`, `Norm` |
 | `AATS.sat_of_le` | theorem | `AATS`, `AATS.Sat`, `Norm`, `Norm.Le` |
 | `ActionFrame` | definition | — |
+| `ActionFrame.alphaFrame` | definition | `ActionFrame`, `AlphaNeighborhoodFrame`, `AlphaPower.mono`, `alphaEff` |
 | `ActionFrame.ofGrand` | definition | `ActionFrame`, `restrictJA` |
 | `ActualPower` | definition | `GameForm`, `GameForm.outcome`, `GameForm.strategy` |
 | `ActualPower.dictates` | theorem | `ActualPower`, `Dictates`, `GameForm`, `GameForm.strategy` |
@@ -195,6 +217,8 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 | `Acyclic` | definition | `Cycle` |
 | `AdversaryLe` | definition | `SafetyGame`, `SafetyGame.step` |
 | `AffineCapability` | definition | — |
+| `AlphaNeighborhoodFrame` | definition | — |
+| `AlphaNeighborhoodFrame.CoalitionMonotone` | definition | `AlphaNeighborhoodFrame`, `AlphaNeighborhoodFrame.nbhd` |
 | `AlphaPower` | definition | `ActionFrame`, `ActionFrame.av`, `SafeFor` |
 | `AlphaPower.mono` | theorem | `ActionFrame`, `AlphaPower` |
 | `AmendmentLog.ChangeLog` | definition | — |
@@ -241,6 +265,8 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 | `BlockChoice.ofChoiceFunctions_le` | theorem | `BlockChoice.ofChoiceFunctions`, `BlockChoice.rel`, `refineSeq` |
 | `BlockChoice.ofChoiceFunctions_rel` | theorem | `BlockChoice.ofChoiceFunctions`, `BlockChoice.rel`, `blockUnder`, `exists_refineFixed`, `refineSeq`, `refineStep` |
 | `BlockChoice.unsplit_ofChoiceFunctions` | theorem | `BlockChoice.Unsplit`, `BlockChoice.ofChoiceFunctions` |
+| `CMaximal` | definition | — |
+| `CRegular` | definition | — |
 | `CapabilityAssessment.no_procedure_on_output_recovers_fallback` | theorem | `CapabilityAssessment.outputProtocol`, `fallbackCapability` |
 | `CapabilityAssessment.not_output_determines_withdrawal` | theorem | `CapabilityAssessment.outputProtocol`, `CapabilityAssessment.withdrawalProtocol` |
 | `CapabilityAssessment.not_withdrawal_determines_output` | theorem | `CapabilityAssessment.outputProtocol`, `CapabilityAssessment.withdrawalProtocol` |
@@ -250,6 +276,7 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 | `CapabilityAssessment.withdrawal_recovers_fallback` | theorem | `CapabilityAssessment.withdrawalProtocol`, `fallbackCapability` |
 | `CapabilityAssessment.withdrawal_settles_and_no_output_procedure_does` | theorem | `CapabilityAssessment.outputProtocol`, `CapabilityAssessment.withdrawalProtocol`, `fallbackCapability` |
 | `ChoiceFn` | definition | — |
+| `CoalitionMonotone` | definition | — |
 | `CogSov` | definition | — |
 | `CompleteCore` | definition | `nonmonotonicCore` |
 | `Conformity.Assessment` | definition | — |
@@ -327,8 +354,15 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 | `DoxasticAgent.mem_of_agent_forces` | theorem | `DoxasticAgent`, `DoxasticAgent.channel`, `DoxasticAgent.dec`, `DoxasticAgent.form`, `Forces` |
 | `DoxasticAgent.sender_forces` | theorem | `DoxasticAgent`, `DoxasticAgent.channel`, `DoxasticAgent.dec`, `DoxasticAgent.form`, `Forces` |
 | `DoxasticAgent.sender_forces_range` | theorem | `DoxasticAgent`, `DoxasticAgent.channel`, `DoxasticAgent.dec`, `DoxasticAgent.form`, `Forces` |
+| `EFMaximal` | definition | `CMaximal` |
+| `EFRegular` | definition | `CRegular` |
 | `EUDetermined` | definition | `euProfile` |
 | `EUDetermined.jointPermInvariant` | theorem | `EUDetermined` |
+| `EUDeterminedN` | definition | `euProfile` |
+| `EUDeterminedN.jointPermInvariant` | theorem | `EUDeterminedN` |
+| `EUDeterminedSet` | definition | `euProfileSet` |
+| `EUDeterminedSet.euDeterminedN_coe` | theorem | `EUDeterminedN`, `EUDeterminedSet` |
+| `EUDeterminedSet.jointPermInvariant` | theorem | `EUDeterminedSet` |
 | `EffectivityEq` | definition | `GameForm`, `effectivity` |
 | `EffectivityEq.refl` | theorem | `EffectivityEq`, `GameForm` |
 | `EffectivityEq.symm` | theorem | `EffectivityEq`, `GameForm` |
@@ -403,6 +437,8 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 | `InstitutionalSetting.regiment_empowered` | theorem | `InstitutionalSetting`, `InstitutionalSetting.empowered`, `InstitutionalSetting.regiment` |
 | `InstitutionalSetting.regiment_norms` | theorem | `InstitutionalSetting`, `InstitutionalSetting.norms`, `InstitutionalSetting.regiment`, `NormSystem` |
 | `InstitutionalSetting.regiment_unpermitted_not_separated` | theorem | `InstitutionalSetting`, `InstitutionalSetting.Separated`, `InstitutionalSetting.norms`, `InstitutionalSetting.regiment`, `NormSystem.permitted` |
+| `InvariantUnderJointPerm` | definition | — |
+| `InvariantUnderJointPerm.increasingUnderJointPerm` | theorem | `IncreasingUnderJointPerm`, `InvariantUnderJointPerm` |
 | `InvolutiveCopies` | definition | — |
 | `InvolutiveCopies.containsCopies` | theorem | `ContainsCopies`, `InvolutiveCopies` |
 | `InvolutiveCopies.supersetCopies` | theorem | `InvolutiveCopies`, `SupersetCopies` |
@@ -414,6 +450,7 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 | `IsEffectivityFunction.playable` | theorem | `IsEffectivityFunction`, `Playable`, `Superadditive`, `UpwardClosed` |
 | `IsFrame` | definition | `ActionFrame`, `Deterministic`, `FrameClass`, `FrameClass.deterministic`, `FrameClass.independent`, `FrameClass.serial`, `Independent`, `IsGCGF`, `Serial` |
 | `IsGCGF` | definition | `ActionFrame` |
+| `IsGCGF.alphaFrame_coalitionMonotone` | theorem | `ActionFrame`, `ActionFrame.alphaFrame`, `AlphaNeighborhoodFrame.CoalitionMonotone`, `IsGCGF` |
 | `IsGCGF.alphaPower_mono_coalition` | theorem | `ActionFrame`, `AlphaPower`, `IsGCGF` |
 | `IsGCGF.exists_av_univ_restrict` | theorem | `ActionFrame`, `ActionFrame.av`, `IsGCGF`, `restrictJA` |
 | `IsGCGF.mem_av_iff` | theorem | `ActionFrame`, `ActionFrame.av`, `ActionFrame.out`, `IsGCGF` |
@@ -421,6 +458,7 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 | `IsGCGF.not_alphaPower_empty` | theorem | `ActionFrame`, `AlphaPower`, `IsGCGF` |
 | `IsGCGF.out_anti_coalition` | theorem | `ActionFrame`, `ActionFrame.out`, `IsGCGF`, `restrictJA` |
 | `IsGCGF.out_eq_iUnion_av` | theorem | `ActionFrame`, `ActionFrame.av`, `ActionFrame.out`, `IsGCGF`, `restrictJA` |
+| `IsInvolution` | definition | — |
 | `MForces` | definition | `MediatedForm`, `MediatedForm.obs`, `MediatedForm.result` |
 | `MForces.mono` | theorem | `MForces`, `MediatedForm` |
 | `MaintenanceFloor` | definition | — |
@@ -480,10 +518,15 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 | `Playable` | definition | — |
 | `Playable.biInter_mem` | theorem | `Playable` |
 | `Playable.blockChoice_mem` | theorem | `BlockChoice.blockChoice`, `BlockChoice.blockOf`, `BlockChoice.rel`, `Playable`, `Strat`, `partitionOf` |
+| `Playable.cMaximal_univ` | theorem | `CMaximal`, `Playable` |
+| `Playable.coalitionMonotone` | theorem | `CoalitionMonotone`, `Playable` |
+| `Playable.conditions_independent` | theorem | — |
+| `Playable.efRegular` | theorem | `EFRegular`, `Playable` |
 | `Playable.effectivity_paulyGame_eq` | theorem | `Playable`, `effectivity`, `paulyGame` |
 | `Playable.emptyFilter` | definition | `Playable`, `Playable.inter_mem_empty`, `Playable.mem_empty_univ`, `Playable.upward_mem_empty` |
 | `Playable.emptyFilter_neBot` | theorem | `Playable`, `Playable.emptyFilter` |
 | `Playable.empty_not_mem_empty` | theorem | `Playable` |
+| `Playable.exists_gameForm_of_finite` | theorem | `GameForm`, `GameForm.strategy`, `Playable`, `effectivity` |
 | `Playable.fullChoice_mem` | theorem | `Playable`, `Strat`, `fullChoice` |
 | `Playable.iInter_mem` | theorem | `Playable` |
 | `Playable.inter_mem_empty` | theorem | `Playable` |
@@ -498,6 +541,7 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 | `Playable.regular` | theorem | `Playable` |
 | `Playable.subset_of_mem_nonmonotonicCore_empty` | theorem | `Playable`, `nonmonotonicCore` |
 | `Playable.subsingleton_nonmonotonicCore_empty` | theorem | `Playable`, `nonmonotonicCore` |
+| `Playable.superadditive` | theorem | `Playable`, `Superadditive` |
 | `Playable.surjective_paulyGame_outcome` | theorem | `GameForm.outcome`, `GameForm.strategy`, `Playable`, `paulyGame` |
 | `Playable.trulyPlayable_iff_emptyFilter_principal` | theorem | `Playable`, `Playable.emptyFilter`, `TrulyPlayable` |
 | `Playable.trulyPlayable_iff_nonmonotonicCore_empty_nonempty` | theorem | `Playable`, `TrulyPlayable`, `nonmonotonicCore` |
@@ -505,6 +549,7 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 | `Playable.trulyPlayable_of_exists_minimal` | theorem | `Playable`, `TrulyPlayable` |
 | `Playable.trulyPlayable_of_finite` | theorem | `Playable`, `TrulyPlayable` |
 | `Playable.trulyPlayable_of_finite_empty` | theorem | `Playable`, `TrulyPlayable` |
+| `Playable.upwardClosed` | theorem | `Playable`, `UpwardClosed` |
 | `Playable.upward_mem_empty` | theorem | `Playable` |
 | `Profile` | definition | `WeakOrder` |
 | `Refusal.Audit` | definition | — |
@@ -515,6 +560,9 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 | `Refusal.refusal_fails_catalogue` | theorem | `Demandwise`, `GameForm`, `GameForm.strategy`, `Inert`, `Refusal.Audit`, `Refusal.Audit.mustServe` |
 | `Refusal.refusal_passes_safety` | theorem | `GameForm`, `GameForm.strategy`, `Inert`, `Refusal.Audit`, `Refusal.Audit.mustHold`, `RetainsFamily` |
 | `Refusal.safety_suite_admits_a_refusal` | theorem | `Demandwise`, `GameForm`, `GameForm.strategy`, `Inert`, `Refusal.Audit`, `Refusal.Audit.mustHold`, `Refusal.Audit.mustServe`, `RetainsFamily` |
+| `RelevanceSpec` | definition | — |
+| `RelevanceSpec.NonMoralized` | definition | `RelevanceSpec` |
+| `RelevanceSpec.moralized` | definition | `RelevanceSpec` |
 | `Represents` | definition | `Constitution`, `Constitution.induced`, `GameForm`, `effectivity` |
 | `Represents.superadditive` | theorem | `Constitution`, `Constitution.induced`, `GameForm`, `Represents`, `Superadditive` |
 | `Represents.surjective_outcome` | theorem | `Constitution`, `Constitution.Standing`, `GameForm`, `GameForm.outcome`, `GameForm.strategy`, `Represents` |
@@ -594,12 +642,17 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 | `Setting.LiberalFree` | definition | `Setting`, `Setting.Free` |
 | `Setting.MoralizedLiberalFree` | definition | `Setting`, `Setting.Free` |
 | `Setting.RepublicanFree` | definition | `Setting`, `Setting.Free` |
+| `Setting.free_moralized_withCriteria_mono` | theorem | `RelevanceSpec`, `RelevanceSpec.NonMoralized`, `Setting`, `Setting.Free`, `Setting.withCriteria` |
+| `Setting.free_not_moralized_iff_of_moralized` | theorem | `RelevanceSpec.moralized`, `Setting`, `Setting.Free`, `Setting.withCriteria` |
+| `Setting.free_not_moralized_withCriteria_iff` | theorem | `RelevanceSpec`, `RelevanceSpec.NonMoralized`, `Setting`, `Setting.Free`, `Setting.withCriteria` |
 | `Setting.free_of_free_not_moralized` | theorem | `Setting`, `Setting.Free` |
 | `Setting.free_of_free_robust` | theorem | `Setting`, `Setting.Free` |
 | `Setting.liberalFree_of_independenceFree` | theorem | `Setting`, `Setting.IndependenceFree`, `Setting.LiberalFree` |
 | `Setting.not_independenceFree_of_universal_threat` | theorem | `Setting`, `Setting.IndependenceFree`, `Setting.constrains`, `Setting.relevant` |
+| `Setting.not_nonMoralized_moralized` | theorem | `RelevanceSpec.NonMoralized`, `RelevanceSpec.moralized` |
 | `Setting.not_republicanFree_of_impermissible_threat` | theorem | `Setting`, `Setting.RepublicanFree`, `Setting.constrains`, `Setting.permitted`, `Setting.relevant` |
 | `Setting.republicanFree_of_independenceFree` | theorem | `Setting`, `Setting.IndependenceFree`, `Setting.RepublicanFree` |
+| `Setting.withCriteria` | definition | `RelevanceSpec`, `Setting`, `Setting.actual`, `Setting.actual_mem`, `Setting.relevant` |
 | `Setting.worlds` | definition | `Setting`, `Setting.actual`, `Setting.relevant` |
 | `ShutdownChannel.RelayedCommand` | definition | — |
 | `ShutdownChannel.obedience_does_not_give_authority` | theorem | `ShutdownChannel.RelayedCommand`, `ShutdownChannel.RelayedCommand.effect`, `ShutdownChannel.RelayedCommand.idle`, `ShutdownChannel.run` |
@@ -662,16 +715,43 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 | `StepKind.memory` | definition | `StepKind` |
 | `Strat` | definition | `ChoiceFn`, `Picker` |
 | `Superadditive` | definition | — |
+| `Superadditive.coalitionMonotone` | theorem | `CoalitionMonotone`, `Superadditive` |
 | `SupersetCopies` | definition | — |
 | `TightFor` | definition | `ActionFrame`, `ActionFrame.out` |
 | `TransmitsZeroError` | definition | `Forces`, `GameForm` |
 | `TransmitsZeroError.comp_injective` | theorem | `GameForm`, `TransmitsZeroError` |
 | `TransmitsZeroError.of_comp` | theorem | `GameForm`, `TransmitsZeroError` |
 | `TrulyPlayable` | definition | `CompleteCore`, `Playable` |
+| `TrulyPlayable.exists_gameForm` | theorem | `GameForm`, `GameForm.strategy`, `TrulyPlayable`, `effectivity` |
 | `UniformDecision` | definition | — |
 | `UpwardClosed` | definition | — |
 | `Veto` | definition | `Forces`, `GameForm` |
 | `Veto.mono` | theorem | `GameForm`, `Veto` |
+| `WarehouseGate.ActionA` | definition | — |
+| `WarehouseGate.ActionA.close_a` | definition | `WarehouseGate.ActionA` |
+| `WarehouseGate.ActionA.delegate_a` | definition | `WarehouseGate.ActionA` |
+| `WarehouseGate.ActionA.open_a` | definition | `WarehouseGate.ActionA` |
+| `WarehouseGate.ActionB` | definition | — |
+| `WarehouseGate.ActionB.close_b` | definition | `WarehouseGate.ActionB` |
+| `WarehouseGate.ActionB.open_b` | definition | `WarehouseGate.ActionB` |
+| `WarehouseGate.GateAction` | definition | `WarehouseGate.Robot`, `WarehouseGate.gateStrategy` |
+| `WarehouseGate.GateState` | definition | — |
+| `WarehouseGate.Robot` | definition | — |
+| `WarehouseGate.Robot.a` | definition | `WarehouseGate.Robot` |
+| `WarehouseGate.Robot.b` | definition | `WarehouseGate.Robot` |
+| `WarehouseGate.actualEff_firstScenario_a` | theorem | `WarehouseGate.GateAction`, `WarehouseGate.GateState`, `WarehouseGate.Robot`, `WarehouseGate.Robot.a`, `WarehouseGate.firstScenario`, `actualEff` |
+| `WarehouseGate.actualEff_secondScenario_a` | theorem | `WarehouseGate.GateAction`, `WarehouseGate.GateState`, `WarehouseGate.Robot`, `WarehouseGate.Robot.a`, `WarehouseGate.secondScenario`, `actualEff` |
+| `WarehouseGate.alphaEff_firstScenario_eq_secondScenario` | theorem | `WarehouseGate.GateAction`, `WarehouseGate.GateState`, `WarehouseGate.Robot`, `WarehouseGate.firstScenario`, `WarehouseGate.secondScenario`, `alphaEff` |
+| `WarehouseGate.alphaEff_scenario_of_mem` | theorem | `WarehouseGate.GateAction`, `WarehouseGate.GateState`, `WarehouseGate.Robot`, `WarehouseGate.Robot.a`, `WarehouseGate.scenario`, `alphaEff` |
+| `WarehouseGate.alphaEff_scenario_of_not_mem` | theorem | `WarehouseGate.GateAction`, `WarehouseGate.GateState`, `WarehouseGate.Robot`, `WarehouseGate.Robot.a`, `WarehouseGate.scenario`, `alphaEff` |
+| `WarehouseGate.firstScenario` | definition | `ActionFrame`, `WarehouseGate.GateAction`, `WarehouseGate.GateState`, `WarehouseGate.Robot`, `WarehouseGate.scenario` |
+| `WarehouseGate.gateGame` | definition | `GameForm`, `WarehouseGate.GateState`, `WarehouseGate.Robot`, `WarehouseGate.Robot.a`, `WarehouseGate.Robot.b`, `WarehouseGate.gateResult`, `WarehouseGate.gateStrategy` |
+| `WarehouseGate.gateResult` | definition | `WarehouseGate.ActionA`, `WarehouseGate.ActionB`, `WarehouseGate.GateState` |
+| `WarehouseGate.gateStrategy` | definition | `WarehouseGate.ActionA`, `WarehouseGate.ActionB`, `WarehouseGate.Robot` |
+| `WarehouseGate.scenario` | definition | `ActionFrame`, `WarehouseGate.GateAction`, `WarehouseGate.GateState`, `WarehouseGate.Robot`, `WarehouseGate.gateGame`, `gameFrame` |
+| `WarehouseGate.scenario_isFrame_sid` | theorem | `FrameClass.sid`, `IsFrame`, `WarehouseGate.GateAction`, `WarehouseGate.GateState`, `WarehouseGate.Robot`, `WarehouseGate.scenario` |
+| `WarehouseGate.secondScenario` | definition | `ActionFrame`, `WarehouseGate.GateAction`, `WarehouseGate.GateState`, `WarehouseGate.Robot`, `WarehouseGate.scenario` |
+| `WarehouseGate.univ_mem_actualEff_first_not_second` | theorem | `WarehouseGate.GateAction`, `WarehouseGate.GateState`, `WarehouseGate.Robot`, `WarehouseGate.Robot.a`, `WarehouseGate.firstScenario`, `WarehouseGate.secondScenario`, `actualEff` |
 | `WeakOrder` | definition | — |
 | `WeakOrder.lt` | definition | `WeakOrder`, `WeakOrder.le` |
 | `WeakOrder.refl` | theorem | `WeakOrder`, `WeakOrder.le` |
@@ -687,6 +767,8 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 | `acyclic_of_stable` | theorem | `Acyclic`, `NoEmptySet`, `Stable` |
 | `aligned` | definition | `GameForm.strategy`, `triadGame` |
 | `alphaEff` | definition | `ActionFrame`, `AlphaPower` |
+| `alphaEff_eq_of_actualEff_eq` | theorem | `ActionFrame`, `actualEff`, `alphaEff` |
+| `alphaEff_eq_supersets_actualEff` | theorem | `ActionFrame`, `actualEff`, `alphaEff` |
 | `alphaEff_gameFrame` | theorem | `GameAction`, `GameForm`, `GameForm.strategy`, `alphaEff`, `effectivity`, `gameFrame` |
 | `alphaPower_gameFrame` | theorem | `AlphaPower`, `Forces`, `GameAction`, `GameForm`, `GameForm.strategy`, `gameFrame` |
 | `assistedOutput` | definition | — |
@@ -749,9 +831,14 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 | `empowerment_eq_log_card_range` | theorem | `empowerment` |
 | `eq_of_dictate_disjoint` | theorem | `Forces`, `GameForm`, `GameForm.strategy` |
 | `eq_of_eventGap_eq_zero` | theorem | `eventGap` |
+| `euDetermined_iff_euDeterminedN_two` | theorem | `EUDetermined`, `EUDeterminedN` |
 | `euProfile` | definition | — |
+| `euProfileSet` | definition | — |
+| `euProfileSet_coe` | theorem | `euProfile`, `euProfileSet` |
+| `euProfileSet_smul` | theorem | `euProfileSet` |
 | `euProfile_smul` | theorem | `euProfile` |
 | `eu_determined_mostOrbit` | theorem | `EUDetermined`, `MostOrbit`, `SupersetCopies` |
+| `eu_determined_mostOrbit_set` | theorem | `EUDeterminedSet`, `MostOrbit`, `SupersetCopies` |
 | `eventGap` | definition | — |
 | `eventGap_comm` | theorem | `eventGap` |
 | `eventGap_eq_zero_iff` | theorem | `eventGap` |
@@ -759,7 +846,10 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 | `eventGap_le_one` | theorem | `eventGap` |
 | `eventGap_map_le` | theorem | `eventGap` |
 | `exists_all_four_combinations` | theorem | — |
+| `exists_alphaEff_eq_actualEff_ne` | theorem | `ActionFrame`, `FrameClass.sid`, `IsFrame`, `actualEff`, `alphaEff` |
 | `exists_dictator_eq` | theorem | `dictator` |
+| `exists_gameForm_iff_playable_of_finite` | theorem | `GameForm`, `GameForm.strategy`, `Playable`, `effectivity` |
+| `exists_gameForm_iff_trulyPlayable` | theorem | `GameForm`, `GameForm.strategy`, `TrulyPlayable`, `effectivity` |
 | `exists_gameForm_of_isEffectivityFunction` | theorem | `GameForm`, `IsEffectivityFunction`, `Superadditive`, `UpwardClosed`, `effectivity` |
 | `exists_measure_le_inv_of_disjoint` | theorem | — |
 | `exists_mixed_saddlePoint` | theorem | `mixed`, `payoff` |
@@ -830,11 +920,13 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 | `influenceCapacity` | definition | `GameForm`, `GameForm.strategy`, `OutcomeLaw`, `OutcomeLaw.law`, `eventGap`, `spliceProfile` |
 | `influenceCapacity_eq_zero_iff` | theorem | `GameForm`, `GameForm.strategy`, `OutcomeLaw`, `OutcomeLaw.law`, `influenceCapacity`, `spliceProfile` |
 | `instFiniteSetoid` | theorem | — |
+| `invariantUnderJointPerm_of_hide` | theorem | `InvariantUnderJointPerm` |
 | `isControllable_iff_reachesEvery` | theorem | `Plant.terminal` |
 | `isFrame_epsilon_iff` | theorem | `ActionFrame`, `FrameClass.epsilon`, `IsFrame`, `IsGCGF` |
 | `isFrame_mono` | theorem | `ActionFrame`, `FrameClass`, `FrameClass.deterministic`, `FrameClass.independent`, `FrameClass.serial`, `IsFrame` |
 | `isFrame_of_sid` | theorem | `ActionFrame`, `FrameClass`, `FrameClass.sid`, `IsFrame` |
 | `isFrame_sid_iff` | theorem | `ActionFrame`, `Deterministic`, `FrameClass.sid`, `Independent`, `IsFrame`, `IsGCGF`, `Serial` |
+| `isInvolution_iff_eq_inv` | theorem | `IsInvolution` |
 | `isProbabilityMeasure_section` | theorem | `section'` |
 | `isUniform_section` | theorem | `section'` |
 | `jointUnion` | definition | — |
@@ -1000,6 +1092,7 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 | `triad_power_when_aligned` | theorem | `HasPowerOverEnv`, `aligned`, `triadGame` |
 | `trulyPlayable_effectivity` | theorem | `GameForm`, `GameForm.strategy`, `TrulyPlayable`, `effectivity` |
 | `unit_coalition_cases` | theorem | — |
+| `univ_mem_of_live_of_maximal` | theorem | — |
 | `vetoGame` | definition | `GameForm` |
 | `vetoGame_hasPowerOver` | theorem | `HasPowerOver`, `vetoGame` |
 | `vetoGame_not_forces` | theorem | `Forces`, `vetoGame` |

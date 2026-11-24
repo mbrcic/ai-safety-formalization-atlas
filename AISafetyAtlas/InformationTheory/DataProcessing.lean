@@ -23,6 +23,13 @@ in `docs/provenance/source-coverage-audit.md` and the worked case in
 sole object outside print's reach is the zero measure, where every quantity is
 `0`, which is vacuity rather than generality.
 
+Finiteness of the *conditioning* variables is a different matter: Cover &
+Thomas's alphabets are not assumed finite, so a `FiniteRange` observation or
+estimate is a narrowing. The section *Countable conditioning variables* at the
+end of the file removes it, keeping `FiniteRange` only on the variable whose
+uncertainty is measured; `isMarkovChain_comm` and `isMarkovChain_comp_countable`
+do the same for the two chain facts.
+
 The two corollaries Cover & Thomas draw from it — both unnumbered in the 2nd
 edition — are recovered rather than reproved: `Z := g ∘ Y` is a Markov chain
 (`isMarkovChain_comp`), so `I(X;Y) ≥ I(X;g(Y))` is an instance of the main
@@ -314,6 +321,23 @@ public theorem IsMarkovChain.symm [IsZeroOrProbabilityMeasure μ]
   rw [isMarkovChain_iff_condMutualInfo_eq_zero hZ hX, condMutualInfo_comm hZ hX]
   exact (isMarkovChain_iff_condMutualInfo_eq_zero hX hZ).mp h
 
+omit [MeasurableSingletonClass S] [MeasurableSingletonClass T] [MeasurableSingletonClass U]
+  [Countable S] [Countable T] [Countable U] in
+/--
+**A Markov chain read backwards, at Cover & Thomas's generality** (§2.8, PDF p. 60:
+"`X → Y → Z` implies that `Z → Y → X`", for the discrete variables of §2.1, whose
+alphabets are not assumed finite).
+
+`IsMarkovChain.symm` proves the forward direction under `FiniteRange` on all
+three variables, through conditional mutual information. None of that is needed:
+the conditional independence defining a chain is symmetric fibre by fibre, so
+this holds for arbitrary variables, with no measurability, finiteness or
+countability hypothesis on any of them, and in both directions.
+-/
+public theorem isMarkovChain_comm : IsMarkovChain X Y Z μ ↔ IsMarkovChain Z Y X μ :=
+  ⟨fun h => Filter.Eventually.mono h fun _ hy => hy.symm,
+    fun h => Filter.Eventually.mono h fun _ hy => hy.symm⟩
+
 /-! ## The chain rule for mutual information
 
 `I[X : ⟨Y, Z⟩] = I[X : Z] + I[X : Y | Z]`: what the pair `⟨Y, Z⟩` says about `X`
@@ -369,6 +393,20 @@ public def observationVector {n : ℕ} (X : Fin n → Ω → V) : Ω → Fin n �
 public def observationPrefix {n : ℕ} (X : Fin n → Ω → V) (i : Fin n) :
     Ω → Fin i.val → V :=
   fun ω j ↦ X ⟨j.val, lt_trans j.isLt i.isLt⟩ ω
+
+omit [MeasurableSpace Ω] [Fintype V] [MeasurableSpace V] [MeasurableSingletonClass V] in
+/-- Entry `i` of the packaged vector is `X i`. Stated so that modules which cannot
+unfold `observationVector` (it is not exposed) can still compute with it. -/
+public theorem observationVector_apply {n : ℕ} (X : Fin n → Ω → V) (ω : Ω) (i : Fin n) :
+    observationVector X ω i = X i ω := by
+  unfold observationVector; rfl
+
+omit [MeasurableSpace Ω] [Fintype V] [MeasurableSpace V] [MeasurableSingletonClass V] in
+/-- Entry `j` of the prefix before `i` is `X j`. -/
+public theorem observationPrefix_apply {n : ℕ} (X : Fin n → Ω → V) (i : Fin n) (ω : Ω)
+    (j : Fin i.val) :
+    observationPrefix X i ω j = X ⟨j.val, lt_trans j.isLt i.isLt⟩ ω := by
+  unfold observationPrefix; rfl
 
 set_option maxHeartbeats 400000 in
 /-- **Finite chain rule for mutual information** (Cover--Thomas, Theorem 2.5.2).
@@ -446,6 +484,21 @@ public def observationPrefixPi {n : ℕ} {V' : Fin n → Type uV}
     (X : (i : Fin n) → Ω → V' i) (i : Fin n) :
     Ω → ((j : Fin i.val) → V' ⟨j.val, lt_trans j.isLt i.isLt⟩) :=
   fun ω j ↦ X ⟨j.val, lt_trans j.isLt i.isLt⟩ ω
+
+omit [MeasurableSpace Ω] in
+/-- Entry `i` of the packaged vector is `X i`. Stated so that modules which cannot
+unfold `observationVectorPi` (it is not exposed) can still compute with it. -/
+public theorem observationVectorPi_apply {n : ℕ} {V' : Fin n → Type uV}
+    (X : (i : Fin n) → Ω → V' i) (ω : Ω) (i : Fin n) :
+    observationVectorPi X ω i = X i ω := by
+  unfold observationVectorPi; rfl
+
+omit [MeasurableSpace Ω] in
+/-- Entry `j` of the prefix before `i` is `X j`. -/
+public theorem observationPrefixPi_apply {n : ℕ} {V' : Fin n → Type uV}
+    (X : (i : Fin n) → Ω → V' i) (i : Fin n) (ω : Ω) (j : Fin i.val) :
+    observationPrefixPi X i ω j = X ⟨j.val, lt_trans j.isLt i.isLt⟩ ω := by
+  unfold observationPrefixPi; rfl
 
 /-- The same family with each variable tagged by its index, so that all of them
 share the codomain `Σ k, V' k`. -/
@@ -654,5 +707,275 @@ public theorem mutualInfo_comp_le (μ : Measure Ω) [IsZeroOrProbabilityMeasure 
     [FiniteRange X] [FiniteRange Y] :
     I[X : g ∘ Y ; μ] ≤ I[X : Y ; μ] :=
   mutualInfo_le_of_isMarkovChain μ hX hY (hg.comp hY) (isMarkovChain_comp μ hX hY hg)
+
+/-! ## Countable conditioning variables
+
+Cover & Thomas's random variables are discrete with alphabets that are not
+assumed finite (§2.1, PDF p. 39), and §2.10 explicitly leaves the observation
+`Y` and the estimate `X̂` unrestricted (PDF pp. 63-64). Everything above carries
+`FiniteRange` on the conditioning variables because it is proved through
+`H[Y]`, `mutualInfo` and PFR's chain rules, which are junk when the conditioner
+has infinite entropy.
+
+This section drops `FiniteRange` from the conditioning variables, keeping it only
+on the variable whose uncertainty is measured. Every fibre entropy
+`H[X | Y ← y]` is then at most `log |range X|`, so PFR's `H[X | Y]` (a Bochner
+integral over `μ.map Y`) is a genuine countable sum, and the arguments run
+fibrewise without ever touching `H[Y]`:
+
+* `hasSum_condEntropy` — `H[X | Y] = ∑' y, P(Y = y) H[X | Y = y]`;
+* `condEntropy_le_entropy_countable` — conditioning reduces entropy, by
+  truncating `Y` to finitely many values and calling PFR's finite lemma;
+* `condEntropy_pair_le_countable` — submodularity `H[X | ⟨Y, Z⟩] ≤ H[X | Z]`;
+* `condEntropy_le_condEntropy_of_isMarkovChain_countable` — the entropy form of
+  data processing, Cover & Thomas (2.130)'s second inequality, at countable `Y`
+  and `Z`;
+* `condEntropy_comp_ge_countable` — `H[X | Y] ≤ H[X | f(Y)]`, as an instance of
+  the previous item at the chain `isMarkovChain_comp_countable`.
+-/
+
+omit [MeasurableSingletonClass T] [Countable T] [MeasurableSpace U] [MeasurableSingletonClass U]
+  [Countable U] in
+/-- A finite-range variable has entropy at most the log of its range size, under
+any measure. The bound that makes every countable sum below summable. -/
+public theorem entropy_le_log_card_toFinset (hX : Measurable X) [FiniteRange X]
+    (ν : Measure Ω) :
+    H[X ; ν] ≤ log (FiniteRange.toFinset X).card :=
+  entropy_le_log_card_of_mem hX (ae_of_all _ fun ω => FiniteRange.mem X ω)
+
+omit [MeasurableSpace U] [MeasurableSingletonClass U] [Countable U] in
+/--
+**Conditional entropy as a countable sum**, the printed definition
+`H(X|Y) = ∑_y p(y) H(X|Y = y)` (Cover & Thomas (2.10), PDF p. 43) for a
+conditioning variable with countably many values.
+
+PFR's `condEntropy_eq_sum` states this as a finite sum under `FiniteRange Y`;
+here `Y` is arbitrary (not even measurable: if it is not, `μ.map Y = 0` and both
+sides vanish) and only `X` has finite range.
+-/
+public theorem hasSum_condEntropy [IsFiniteMeasure μ] (hX : Measurable X) (Y : Ω → T)
+    [FiniteRange X] :
+    HasSum (fun y => (μ.map Y).real {y} * H[X | Y ← y ; μ]) H[X | Y ; μ] := by
+  have hint : Integrable (fun y => H[X | Y ← y ; μ]) (μ.map Y) := by
+    refine Integrable.mono' (integrable_const (log (FiniteRange.toFinset X).card))
+      (Measurable.of_discrete).aestronglyMeasurable (ae_of_all _ fun y => ?_)
+    rw [Real.norm_eq_abs, abs_of_nonneg (entropy_nonneg _ _)]
+    exact entropy_le_log_card_toFinset hX _
+  have h := hasSum_integral_measure (μ := fun y : T => (μ.map Y) {y} • Measure.dirac y)
+    (f := fun y => H[X | Y ← y ; μ]) (by rwa [Measure.sum_smul_dirac])
+  rw [Measure.sum_smul_dirac] at h
+  simp only [integral_smul_measure, integral_dirac, smul_eq_mul] at h
+  exact h
+
+omit [MeasurableSpace U] [MeasurableSingletonClass U] [Countable U] in
+/--
+**Conditioning reduces entropy, at a countable conditioner**: `H(X|Y) ≤ H(X)`
+(Cover & Thomas, Theorem 2.6.5, for discrete variables of unrestricted
+alphabet), with only `X` of finite range.
+
+PFR's `condEntropy_le_entropy` needs `FiniteRange Y`. The proof here truncates
+`Y` to a finite set `F` of values (everything else sent to one junk value), so
+the `F`-partial sum of `hasSum_condEntropy` is at most the conditional entropy
+given the truncation, which is at most `H(X)` by PFR's finite lemma.
+-/
+public theorem condEntropy_le_entropy_countable [IsZeroOrProbabilityMeasure μ]
+    (hX : Measurable X) (hY : Measurable Y) [FiniteRange X] :
+    H[X | Y ; μ] ≤ H[X ; μ] := by
+  classical
+  have hs := hasSum_condEntropy (μ := μ) hX Y
+  rw [← hs.tsum_eq]
+  refine hs.summable.tsum_le_of_sum_le fun F => ?_
+  let : MeasurableSpace (Option T) := ⊤
+  have : DiscreteMeasurableSpace (Option T) := ⟨fun _ => trivial⟩
+  set g : T → Option T := fun t => if t ∈ F then some t else none with hg
+  have hgY : Measurable (g ∘ Y) := (Measurable.of_discrete (f := g)).comp hY
+  have : FiniteRange (g ∘ Y) :=
+    ⟨((insert none (F.image some) : Finset (Option T)).finite_toSet).subset (by
+      rintro _ ⟨ω, rfl⟩
+      by_cases h : Y ω ∈ F <;> simp [hg, h])⟩
+  have hT := hasSum_condEntropy (μ := μ) hX (g ∘ Y)
+  have hle := condEntropy_le_entropy μ hX hgY
+  have hpre : ∀ w ∈ F, (g ∘ Y) ⁻¹' {some w} = Y ⁻¹' {w} := by
+    intro w hw
+    ext ω
+    by_cases h : Y ω ∈ F
+    · simp [hg, h]
+    · simp only [Set.mem_preimage, Function.comp_apply, hg, h, if_false, Set.mem_singleton_iff,
+        reduceCtorEq, false_iff]
+      rintro rfl
+      exact h hw
+  have hterm : ∀ w ∈ F, (μ.map Y).real {w} * H[X | Y ← w ; μ]
+      = (μ.map (g ∘ Y)).real {some w} * H[X | (g ∘ Y) ← some w ; μ] := by
+    intro w hw
+    rw [map_measureReal_apply hgY (.singleton _), map_measureReal_apply hY (.singleton _),
+      hpre w hw]
+  calc ∑ w ∈ F, (μ.map Y).real {w} * H[X | Y ← w ; μ]
+      = ∑ v ∈ F.map ⟨some, Option.some_injective _⟩,
+          (μ.map (g ∘ Y)).real {v} * H[X | (g ∘ Y) ← v ; μ] := by
+        rw [Finset.sum_map]
+        exact Finset.sum_congr rfl hterm
+    _ ≤ ∑' v, (μ.map (g ∘ Y)).real {v} * H[X | (g ∘ Y) ← v ; μ] :=
+        hT.summable.sum_le_tsum _ fun _ _ => mul_nonneg measureReal_nonneg (entropy_nonneg _ _)
+    _ = H[X | g ∘ Y ; μ] := hT.tsum_eq
+    _ ≤ H[X ; μ] := hle
+
+omit [MeasurableSingletonClass S] [MeasurableSingletonClass U] [Countable S] [Countable T]
+  [Countable U] in
+/--
+**Post-processing is a Markov chain, at Cover & Thomas's generality** (§2.8,
+PDF p. 60: "If `Z = f(Y)`, then `X → Y → Z`", for discrete variables whose
+alphabets are not assumed finite).
+
+`isMarkovChain_comp` proves this under `FiniteRange X` and `FiniteRange Y`,
+through conditional mutual information. Here nothing is assumed of `X` or `g`:
+on each fibre `Y = y`, the variable `g ∘ Y` is the constant `g y`, and every
+variable is independent of a constant.
+-/
+public theorem isMarkovChain_comp_countable (hY : Measurable Y) (g : T → U) :
+    IsMarkovChain X Y (g ∘ Y) μ := by
+  show ∀ᵐ y ∂(μ.map Y), IndepFun X (g ∘ Y) (μ[|Y ⁻¹' {y}])
+  refine ae_of_all _ fun y => ?_
+  have hc : (fun _ => g y) =ᵐ[μ[|Y ⁻¹' {y}]] (g ∘ Y) :=
+    ae_cond_of_forall_mem (hY (measurableSet_singleton y)) fun ω hω => by
+      simp only [Set.mem_preimage, Set.mem_singleton_iff] at hω
+      simp [hω]
+  exact (indepFun_const_right X (g y)).congr (Filter.EventuallyEq.refl _ _) hc
+
+omit [MeasurableSingletonClass S] [Countable S] in
+/-- An independent conditioner tells nothing: `H[X | Z] = H[X]` when `X` and `Z`
+are independent, for any `X` and a countable-valued `Z`. PFR's
+`IndepFun.condEntropy_eq_entropy` needs `FiniteRange` on both. -/
+public theorem condEntropy_eq_entropy_of_indepFun [IsZeroOrProbabilityMeasure μ]
+    (hX : Measurable X) (hZ : Measurable Z) (h : IndepFun X Z μ) :
+    H[X | Z ; μ] = H[X ; μ] := by
+  rcases eq_zero_or_isProbabilityMeasure μ with rfl | hμ
+  · simp
+  have hae : (fun z => H[X | Z ← z ; μ]) =ᵐ[μ.map Z] fun _ => H[X ; μ] := by
+    rw [Filter.EventuallyEq, ae_iff_of_countable]
+    intro z hz
+    rw [Measure.map_apply hZ (.singleton z)] at hz
+    rw [entropy_def, entropy_def]
+    congr 1
+    ext s hs
+    rw [Measure.map_apply hX hs, Measure.map_apply hX hs, cond_apply (hZ (.singleton z)),
+      Set.inter_comm, h.measure_inter_preimage_eq_mul _ _ hs (.singleton z), mul_comm (μ _),
+      ← mul_assoc, ENNReal.inv_mul_cancel hz (measure_ne_top _ _), one_mul]
+  rw [condEntropy_def, integral_congr_ae hae, integral_const,
+    map_measureReal_apply hZ MeasurableSet.univ]
+  simp
+
+/-- **Conditioning on a pair, fibred over its first component**:
+`H[X | ⟨Y, Z⟩] = ∑' y, P(Y = y) · H[X | Z]` under `μ` conditioned on `Y = y`,
+for countable-valued `Y` and `Z`. -/
+public theorem hasSum_condEntropy_pair [IsFiniteMeasure μ] (hX : Measurable X)
+    (hY : Measurable Y) (hZ : Measurable Z) [FiniteRange X] :
+    HasSum (fun y => μ.real (Y ⁻¹' {y}) * H[X | Z ; μ[|Y ⁻¹' {y}]]) H[X | ⟨Y, Z⟩ ; μ] := by
+  have hs := hasSum_condEntropy (μ := μ) hX (fun ω => (Y ω, Z ω))
+  refine hs.prod_fiberwise fun y => ?_
+  have hy := (hasSum_condEntropy (μ := μ[|Y ⁻¹' {y}]) hX Z).mul_left (μ.real (Y ⁻¹' {y}))
+  have hterm : ∀ z, (μ.map (fun ω => (Y ω, Z ω))).real {(y, z)}
+        * H[X | (fun ω => (Y ω, Z ω)) ← (y, z) ; μ]
+      = μ.real (Y ⁻¹' {y}) * ((μ[|Y ⁻¹' {y}].map Z).real {z} * H[X | Z ← z ; μ[|Y ⁻¹' {y}]]) := by
+    intro z
+    have hpre : (fun ω => (Y ω, Z ω)) ⁻¹' {(y, z)} = Y ⁻¹' {y} ∩ Z ⁻¹' {z} := by
+      ext ω; simp
+    rw [map_measureReal_apply (hY.prodMk hZ) (.singleton _),
+      map_measureReal_apply hZ (.singleton _), hpre,
+      cond_cond_eq_cond_inter (hY (.singleton y)) (hZ (.singleton z)),
+      cond_real_apply (hY (.singleton y))]
+    rcases eq_or_ne (μ.real (Y ⁻¹' {y})) 0 with h | h
+    · have : μ.real (Y ⁻¹' {y} ∩ Z ⁻¹' {z}) = 0 :=
+        measureReal_mono_null Set.inter_subset_left h (by finiteness)
+      simp [this, h]
+    · rw [← mul_assoc, ← mul_assoc, mul_inv_cancel₀ h, one_mul]
+  simp only [hterm]
+  exact hy
+
+/-- Relabelling a countable-valued conditioner injectively leaves conditional
+entropy unchanged: `H[X | f ∘ Y] = H[X | Y]`. PFR's `condEntropy_of_injective'`
+needs `FiniteRange Y`. -/
+public theorem condEntropy_comp_of_injective_countable [IsFiniteMeasure μ]
+    (hX : Measurable X) (hY : Measurable Y) {f : T → U} (hf : Injective f) [FiniteRange X] :
+    H[X | f ∘ Y ; μ] = H[X | Y ; μ] := by
+  have hfY : Measurable (f ∘ Y) := (Measurable.of_discrete (f := f)).comp hY
+  have h1 := hasSum_condEntropy (μ := μ) hX (f ∘ Y)
+  have h2 := hasSum_condEntropy (μ := μ) hX Y
+  refine h1.unique ((hf.hasSum_iff fun u hu => ?_).mp ?_)
+  · have : (f ∘ Y) ⁻¹' {u} = ∅ := by
+      ext ω
+      simp only [Set.mem_preimage, Function.comp_apply, Set.mem_singleton_iff,
+        Set.mem_empty_iff_false, iff_false]
+      exact fun h => hu ⟨Y ω, h⟩
+    rw [map_measureReal_apply hfY (.singleton _), this]
+    simp
+  · convert h2 using 1
+    funext t
+    have : (f ∘ Y) ⁻¹' {f t} = Y ⁻¹' {t} := by
+      ext ω; simp [hf.eq_iff]
+    simp only [Function.comp_apply]
+    rw [map_measureReal_apply hfY (.singleton _), map_measureReal_apply hY (.singleton _), this]
+
+/-- Along `X → Y → Z`, adding `Z` to the conditioner `Y` changes nothing:
+`H[X | ⟨Y, Z⟩] = H[X | Y]`, for countable-valued `Y` and `Z`. -/
+public theorem condEntropy_pair_eq_of_isMarkovChain [IsFiniteMeasure μ] (hX : Measurable X)
+    (hY : Measurable Y) (hZ : Measurable Z) [FiniteRange X] (h : IsMarkovChain X Y Z μ) :
+    H[X | ⟨Y, Z⟩ ; μ] = H[X | Y ; μ] := by
+  have h' : ∀ᵐ y ∂(μ.map Y), IndepFun X Z (μ[|Y ⁻¹' {y}]) := h
+  rw [ae_iff_of_countable] at h'
+  refine (hasSum_condEntropy_pair hX hY hZ).unique ?_
+  convert hasSum_condEntropy (μ := μ) hX Y using 1
+  funext y
+  rw [map_measureReal_apply hY (.singleton _)]
+  rcases eq_or_ne (μ (Y ⁻¹' {y})) 0 with h0 | h0
+  · simp [measureReal_def, h0]
+  · congr 1
+    refine condEntropy_eq_entropy_of_indepFun hX hZ (h' y ?_)
+    rwa [Measure.map_apply hY (.singleton y)]
+
+/-- **Submodularity at countable conditioners**: `H[X | ⟨Y, Z⟩] ≤ H[X | Z]`, with
+only `X` of finite range. PFR's `entropy_submodular` needs `FiniteRange` on all
+three. Fibrewise over `Z`, it is `condEntropy_le_entropy_countable`. -/
+public theorem condEntropy_pair_le_countable [IsZeroOrProbabilityMeasure μ]
+    (hX : Measurable X) (hY : Measurable Y) (hZ : Measurable Z) [FiniteRange X] :
+    H[X | ⟨Y, Z⟩ ; μ] ≤ H[X | Z ; μ] := by
+  have hswap : H[X | ⟨Y, Z⟩ ; μ] = H[X | ⟨Z, Y⟩ ; μ] :=
+    condEntropy_comp_of_injective_countable (Y := fun ω => (Z ω, Y ω)) hX (hZ.prodMk hY)
+      Prod.swap_injective
+  rw [hswap]
+  refine hasSum_le (fun z => ?_) (hasSum_condEntropy_pair hX hZ hY) (hasSum_condEntropy hX Z)
+  rw [map_measureReal_apply hZ (.singleton _)]
+  exact mul_le_mul_of_nonneg_left (condEntropy_le_entropy_countable hX hY) measureReal_nonneg
+
+/--
+**Data processing in entropy form, at countable observation and estimate** — the
+second inequality of (2.130), `H(X|X̂) ≥ H(X|Y)` for any estimator with
+`X → Y → X̂` (Theorem 2.10.1, PDF p. 64), where §2.10 restricts neither the
+observation's alphabet nor the estimate's (PDF pp. 63-64). `X` keeps a finite
+range here; `condEntropy_le_condEntropy_of_isMarkovChain_of_summable` replaces that
+by finite entropy of `X`.
+
+`condEntropy_le_condEntropy_of_isMarkovChain` is the same inequality under
+`FiniteRange` on `Y` and `Z`. Here only `X`, whose uncertainty is measured, has
+finite range; `Y` and `Z` may take countably many values with infinite entropy.
+The proof never mentions `H[Y]`, `H[Z]` or mutual information:
+`H[X | Y] = H[X | ⟨Y, Z⟩] ≤ H[X | Z]`.
+-/
+public theorem condEntropy_le_condEntropy_of_isMarkovChain_countable (μ : Measure Ω)
+    [IsZeroOrProbabilityMeasure μ] (hX : Measurable X) (hY : Measurable Y) (hZ : Measurable Z)
+    [FiniteRange X] (h : IsMarkovChain X Y Z μ) :
+    H[X | Y ; μ] ≤ H[X | Z ; μ] := by
+  rw [← condEntropy_pair_eq_of_isMarkovChain hX hY hZ h]
+  exact condEntropy_pair_le_countable hX hY hZ
+
+/-- **Processing the conditioner cannot reduce uncertainty**: `H[X | Y] ≤ H[X | f(Y)]`
+for countable-valued `Y`, with only `X` of finite range. PFR's
+PFR's condEntropy_comp_ge needs `FiniteRange Y`. An instance of
+`condEntropy_le_condEntropy_of_isMarkovChain_countable` at the chain
+`isMarkovChain_comp_countable`. -/
+public theorem condEntropy_comp_ge_countable [IsZeroOrProbabilityMeasure μ]
+    (hX : Measurable X) (hY : Measurable Y) (f : T → U) [FiniteRange X] :
+    H[X | Y ; μ] ≤ H[X | f ∘ Y ; μ] :=
+  condEntropy_le_condEntropy_of_isMarkovChain_countable μ hX hY
+    ((Measurable.of_discrete (f := f)).comp hY) (isMarkovChain_comp_countable hY f)
 
 end AISafetyAtlas.InformationTheory

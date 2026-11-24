@@ -1,0 +1,418 @@
+source:
+  citation: >-
+    Laurent Orseau and Mark Ring, Self-Modification and Mortality in Artificial
+    Agents, author version, 10 pp. (PDF created 3 Mar 2011). The PDF prints no
+    venue; footnote 3 on p. 1 reads "This paper is part one of a ``double paper''
+    submission. It should stand on its own, but both papers may be found at
+    http://www.idsia.ch/~ring/AGI-2011." The audit cites it as AGI-11, author
+    version.
+  file: orseau-ring-authorversion-2011-self-modification-and-mortality-in-artificial-agents.pdf
+  sha256: e211682aa5cc9e1bcd7f0a277030a4a909ff52695ff4e1d0fa3905d9b223b52d
+  page_offset: 0
+  standing: |
+    \S1, p. 2: "We consider the responses of the various agents and the
+    ramifications, generally framing our observations as ``statements'' and
+    (strong) ``arguments'', as proofs would require much more formalism and space."
+
+    \S2, p. 2: "The agent outputs actions $a \in \mathcal{A}$ in response to the
+    observations $o \in \mathcal{O}$ produced by the universe. There is a temporal
+    order, so that at time $t$ the agent takes an action $a_t$ and the universe
+    produces an observation $o_t$ in response."
+
+    The universe, consistency, and $\rho$ (rest of this paragraph group, p. 2):
+    definition or-def-consistent-prior. "We will discuss four different
+    intelligent agents that are each variations of a single agent
+    $\mathrm{A}^\rho_x$, based on AIXI [1] (which is not
+    computable).\textsuperscript{4}"
+    Footnote 4: "Only incomputable agents can be guaranteed to find the optimal
+    strategy, and this guarantee is quite useful for discussions of the agent's
+    theoretical limits."
+
+    \S2, p. 3, footnote 5 (to the action choice before eq. (3)): "Ties are broken
+    in lexicographical order."
+
+    \S2, p. 3: "The behavior of an agent is specified by choice of $\rho$, $u$, and
+    $w$."
+
+    \S2.1, p. 3: "In the rest of the paper, certain conventions will be followed
+    for shorthand reference: $t$ refers to the current time step, and is therefore
+    equal to $|h|$, the length of history $h$; $|q|$ refers to the length of
+    program $q$; $h_k$ is the $k^{th}$ pair of actions and observations, which are
+    written as $a_k$ and $o_k$."
+
+    \S3, p. 5, footnotes 7 and 8: "\textsuperscript{7} We do not expect the length
+    of the descriptions to be very large, but, for a more general agent, the set
+    $\mathcal{C}_t$ can grow with $t$." "\textsuperscript{8} Without loss of
+    generality, the definitions of $\rho, u, w, \mathcal{A}, \mathcal{O}$, and
+    $\mathcal{C}$ are considered to be built in $\mathbb{E}$. The agent can still
+    modify its code to replace their use by some other expression."
+
+    Silences recorded by source card S13 (searched pp. 2--6): no finiteness or
+    cardinality assumption for $\mathcal{A}$ or $\mathcal{O}$; no nonnegativity of
+    $w$; no terminal condition for the recursion (1)--(2) and no condition that the
+    max/argmax is attained. Confirmed on the page images of pp. 2--6.
+
+definitions:
+  - id: or-def-consistent-prior
+    label: computable universe, consistent programs $\mathcal{Q}_h$, prior $\rho$, and $\rho(h)$
+    pdf_page: 2
+    book_page: 2
+    latex: |
+      The universe is assumed to be computable; i.e., it is described by a program
+      $q \in \mathcal{Q}$, where $\mathcal{Q}$ is the set of all programs. The set
+      of all universes that are \emph{consistent} with history $h$ is denoted
+      $\mathcal{Q}_h$. To say that a program $q$ is consistent with $h = (o_0, a_0,
+      ..., o_t, a_t)$ means that the program outputs the observations in the history
+      if it is given the actions as input: $q(a_0, ..., a_t) = o_0, ..., o_t$.
+      [\ldots] $\mathrm{A}^\rho_x$ chooses actions by estimating how the universe
+      will respond, but since it does not know which universe it is in, it first
+      estimates the probability of each. The function $\rho : \mathcal{Q} \to (0,
+      1]$ assigns a positive weight (a prior probability) to each possible universe
+      $q \in \mathcal{Q}$. As a convenient shorthand, $\rho(h)$ refers to the sum
+      of $\rho(q)$ over all universes consistent with $h$: $\rho(h) := \sum_{q \in
+      \mathcal{Q}_h} \rho(q)$, which must be finite. With $\rho$, for a given
+      history, the agent can estimate a probability for each possible future
+      according to the likelihood of all the universes that generate that future.
+    note: >-
+      Differs from Ring & Orseau 2011 (ring-orseau-2011-delusion-survival#ro-def-consistent-prior):
+      codomain $(0, 1]$ (positive weights) instead of $[0, 1]$, "which must be
+      finite" added, and the history indexed from $o_0, a_0$ consistently.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 190}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: or-def-utility-horizon
+    label: utility and horizon functions
+    pdf_page: 2-3
+    book_page: 2-3
+    latex: |
+      For the agent to choose one action over another, it must \emph{value} one
+      future over another, and this implies that it can assign values to the
+      different possible futures. The assignment of values to futures is done with
+      a utility function $u : \mathcal{H} \to [0, 1]$, which maps histories of any
+      length to values between 0 and 1.
+
+      To balance short-term utility with long-term utility, the agent has a horizon
+      function, $w : \mathbb{N}^2 \to \mathbb{R}$, which discounts future utility
+      values based on how far into the future they occur. This function, $w(t, k)$,
+      depends on $t = |h|$, the length of the history so far, and $k$, the time step
+      in the future that the event occurs. In general, it must be summable:
+      $\sum_{k=t}^{\infty} w(t, k) < \infty$ .
+
+      [\ldots] These two functions, $u$ and $w$, allow the agent at time $t$ to put a
+      value $\mathrm{v}_t(h)$ on each possible history $h$ based on what futures are
+      possible given a particular action set. The value $\mathrm{v}_t(h)$ is
+      shorthand for $\mathrm{v}^{\rho,u,w}_t(h)$, which completely specifies the
+      value for a history, with given utility and horizon functions at time $t$.
+      This value is calculated recursively:
+    note: The passage runs from p. 2 to p. 3; [\ldots] marks the omitted footnote at the foot of p. 2.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 190}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: or-def-equations-explained
+    label: explanation of equations (1) and (2)
+    pdf_page: 3
+    book_page: 3
+    latex: |
+      The first line says that the value of a history is the discounted utility for
+      that history plus the estimated value of the highest-valued action. The second
+      line estimates the value of an action (given a history) as the value of all
+      possible outcomes of the action, each weighted by their probability (as
+      described above).
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 190}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: or-def-executor
+    label: the executor $\mathbb{E}$ and the code $c$
+    pdf_page: 5
+    book_page: 5
+    latex: |
+      Therefore, we divide the agent into two parts to separate the fictional from
+      the real. The fictional part of the agent, $\mathbb{E}$, is in essence a kind
+      of oracle --- one that can perform any infinite computation instantly. The
+      real-world part of the agent is the program (or rather, its textual
+      description, or code), $c$ that $\mathbb{E}$ executes; since $c$ resides in
+      the real world, it is \emph{modifiable}. We first consider that only the agent
+      has full access to its own code (like in, e.g., the G\"odel Machine [5]), and
+      then we grant read access to this code to the environment.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 190}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+statements:
+  - id: or-eq-1
+    audit_row: S13-R01
+    locator: §2, eq. (1)
+    pdf_page: 3
+    book_page: 3
+    label: eq. (1)
+    latex: |
+      \[ \mathrm{v}_t(h) := w(t, |h|)\; u(h) + \max_{a \in \mathcal{A}}
+         \mathrm{v}_t(ha) \tag{1} \]
+    uses: [or-def-utility-horizon, or-def-equations-explained, or-eq-2]
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 190}
+    checked: {by: 'Codex (blind) + Grok (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: or-eq-2
+    audit_row: S13-R02
+    locator: §2, eq. (2)
+    pdf_page: 3
+    book_page: 3
+    label: eq. (2)
+    latex: |
+      \[ \mathrm{v}_t(ha) := \sum_{o \in \mathcal{O}} \rho(o \mid ha)\;
+         \mathrm{v}_t(hao)\ . \tag{2} \]
+    uses: [or-def-consistent-prior, or-def-utility-horizon, or-def-equations-explained, or-eq-1]
+    note: >-
+      $\rho(o \mid ha)$ is not defined separately; the text calls it the
+      probability "as described above", i.e. estimated from $\rho$ over consistent
+      universes (source.standing, p. 2).
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 190}
+    checked: {by: 'Codex (blind) + Grok (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: or-eq-3
+    audit_row: S13-R03
+    locator: §2, eq. (3)
+    pdf_page: 3
+    book_page: 3
+    label: eq. (3)
+    latex: |
+      Based on this, the agent can choose\textsuperscript{5} the action that
+      maximizes $\mathrm{v}_{|h|}(h)$:
+      \[ a_{|h|} := \operatorname*{argmax}_{a \in \mathcal{A}} \mathrm{v}_{|h|}(ha)
+         \tag{3} \]
+    uses: [or-eq-1, or-eq-2]
+    note: >-
+      Footnote 5, "Ties are broken in lexicographical order.", is in
+      source.standing. Here $t = |h|$ (\S2.1), whereas the companion paper Ring &
+      Orseau 2011 uses $t_h = |h| + 1$; the numbering also differs (this paper's (1)
+      is the companion's (3), and (3) its (1)).
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 190}
+    checked: {by: 'Codex (blind) + Grok (blind) + Codex (anchored re-read); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: or-agent-rl
+    audit_row: S13-R05
+    locator: §2.1, `A_rl`
+    pdf_page: 3
+    book_page: 3
+    label: reinforcement-learning agent (paragraph)
+    latex: |
+      The \emph{reinforcement-learning agent}, $\mathrm{A}^\rho_{rl}$, interprets
+      one part of its input as a reward signal and the remaining part as its
+      observation; i.e., $o_t = \langle \tilde{o}_t, r_t \rangle$, where $\tilde{o}
+      \in \tilde{\mathcal{O}}$, and rewards are assumed to have a maximum value, and
+      can, without loss of generality, be normalized such that $r_t \in [0, 1]$. The
+      utility function is an unfiltered copy of the reward signal: $u_t = u(h) :=
+      r_t$. We use a simple binary horizon function with a constant horizon $m$:
+      $w(t, k) = 1$ if $k - t \le m$ and $w(t, k) = 0$ otherwise; but the following
+      discussion remains true for general computable horizon functions. For the
+      special case of the reinforcement-learning agent AIXI: $\rho(h) = \xi(h) :=
+      \sum_{q \in \mathcal{Q}_h} 2^{-|q|}$.
+    uses: [or-def-consistent-prior, or-def-utility-horizon, or-eq-1, or-eq-2, or-eq-3]
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 190}
+    checked: {by: 'Codex (blind) + Grok (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: or-agent-g
+    audit_row: S13-R06
+    locator: §2.1, `A_g`
+    pdf_page: 3-4
+    book_page: 3-4
+    label: goal-seeking agent (paragraph)
+    latex: |
+      The \emph{goal-seeking agent}, $\mathrm{A}^\rho_g$, has a goal $g$, depending
+      on the observation sequence, encoded in its utility function such that $u(h) =
+      g(o_1, ..., o_{|h|}) = 1$ if the goal is achieved at $t = |h|$ and 0
+      otherwise. The goal can be reached at most once, so $\sum_{t=0}^{\infty}
+      u(h_t) \le 1$. For this utility function, the horizon function is not
+      necessary, does not need to be summable, and can be set to 1: $w(t, k) = 1$.
+      One difference between $\mathrm{A}^\rho_g$ and $\mathrm{A}^\rho_{rl}$ is that
+      the utility values of $\mathrm{A}^\rho_{rl}$ are merely copied directly from
+      the environment, whereas the utility function of the $\mathrm{A}^\rho_g$ agent
+      is built into the agent itself, can be arbitrarily complex, and does not rely
+      on a special signal from the environment.
+    uses: [or-def-utility-horizon, or-eq-1, or-eq-2, or-eq-3, or-agent-rl]
+    note: >-
+      The paragraph starts on the last line of p. 3 and continues on p. 4 (the
+      card's locator page 4 holds only the continuation).
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 190}
+    checked: {by: 'Codex (blind) + Grok (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: or-agent-p
+    audit_row: S13-R07
+    locator: §2.1, `A_p`
+    pdf_page: 4
+    book_page: 4
+    label: prediction-seeking agent (paragraph)
+    latex: |
+      The \emph{prediction-seeking agent}, $\mathrm{A}^\rho_p$, maximizes its
+      utility by predicting its inputs, so that $u(h) = 1$ if the agent correctly
+      predicts its next input $o_t$, and is 0 otherwise. To predict the next input
+      $o_t$, the agent uses an internal predictor that is a function of the
+      interaction history: $\hat{o}_t = f(h)$, (for example, Solomonoff induction
+      [7,6]). The horizon function is the same as for $\mathrm{A}^\rho_{rl}$.
+    uses: [or-def-utility-horizon, or-agent-rl, or-eq-1, or-eq-2, or-eq-3]
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 190}
+    checked: {by: 'Codex (blind) + Grok (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: or-agent-k
+    audit_row: S13-R08
+    locator: §2.1, `A_k`
+    pdf_page: 4
+    book_page: 4
+    label: knowledge-seeking agent (paragraph)
+    latex: |
+      The \emph{knowledge-seeking agent}, $\mathrm{A}^\rho_k$, maximizes its
+      knowledge of its environment, which is identical to minimizing $\rho(h)$,
+      which decreases whenever universes in $\mathcal{Q}_h$ fail to match the
+      observation and are removed from $\mathcal{Q}_h$. (Since the true environment
+      is never removed, its relative probability always increases.) Actions can be
+      chosen intentionally to produce the highest number of inconsistent
+      observations, removing programs from $\mathcal{Q}_h$ --- just as we, too, run
+      experiments to discover whether our universe is one way or another.
+      $\mathrm{A}^\rho_k$ has the following utility and horizon functions: $u(h) =
+      -\rho(h)$, and $w(t, k) = 1$ if $k + t = m$ and is 0 otherwise. To maximize
+      utility, $\mathrm{A}^\rho_k$ reduces $\rho$ as much as possible, which means
+      discarding as many (non-consistent) programs as possible, discovering with the
+      highest possible probability which universe is the true one. Discarding the
+      most probable programs results in the greatest reduction in $\rho$.
+    uses: [or-def-consistent-prior, or-def-utility-horizon, or-eq-1, or-eq-2, or-eq-3]
+    note: >-
+      Printed "$k + t = m$" (read at 190 dpi); the companion paper Ring & Orseau
+      2011 prints "$k - t = m$" for the same agent. $u(h) = -\rho(h)$ lies outside
+      the codomain $[0, 1]$ given for $u$ on p. 2. Both transcribed as printed.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 190}
+    checked: {by: 'Codex (blind) + Codex (anchored re-read); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: or-agent-mu
+    audit_row: S13-R09
+    locator: §2.1, `A^μ` and asymptotic optimality
+    pdf_page: 4
+    book_page: 4
+    label: optimal agent and asymptotic optimality (paragraphs)
+    latex: |
+      The \emph{Optimal agent} $\mathrm{A}^\mu$. The four agents above are
+      ``learning'' agents because they continually update their estimate of their
+      universe, but $\mathrm{A}^\mu$ does no learning: it knows the true
+      (computable) program of the universe defined by $\mu$ and can always calculate
+      the optimal action, thus setting an upper bound against which the other four
+      agents can be compared.
+
+      $\mathrm{A}^\mu$ is defined by (1-3), where the universal $\rho$ is replaced
+      by the specific $\mu$. It is important to note that $\rho$ is \emph{not}
+      replaced by $\mu$ in utility functions, i.e. $\mathrm{A}^\mu_p$ predicts the
+      future inputs with $\rho$ (so as to be compared with $\mathrm{A}^\rho_p$),
+      although $\mathrm{A}^\mu_p$ takes the best actions that minimizes the number
+      of mistakes\textsuperscript{6} if $\mathrm{A}^\mu_p$ and $\mathrm{A}^\rho_p$
+      take the same actions, they make the same prediction mistakes.
+
+      An agent is said to be \emph{asymptotically optimal} [1] if its performance
+      tends towards that of $\mathrm{A}^\mu$, meaning that for each history $h$, the
+      learning agent's choice of action is compared with that of $\mathrm{A}^\mu$
+      given the same history, and its performance is measured in terms of the
+      number of mistakes it makes. Thus, past mistakes have only have finite
+      consequences. The agent is asymptotically optimal if the number of mistakes it
+      makes tends towards zero.
+
+      \textsuperscript{6} Note that there is only one environment in which the
+      prediction makes 0 mistake.
+    uses: [or-def-consistent-prior, or-eq-1, or-eq-2, or-eq-3, or-agent-p]
+    note: >-
+      "mistakes$^6$ if" runs on without punctuation and "have only have" is
+      doubled, as printed. Unlike Ring & Orseau 2011 (replace $\rho$ by $\mu$ "in
+      (only) equation (2)"), here $\rho$ is replaced in (1)--(3) except in the
+      utility functions; $\mu$ is not defined beyond "the true (computable) program
+      of the universe defined by $\mu$".
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 190}
+    checked: {by: 'Codex (blind) + Grok (blind) + Codex (anchored re-read); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: or-agent-sm
+    audit_row: S13-R10
+    locator: §3, `A_sm`
+    pdf_page: 5
+    book_page: 5
+    label: self-modifying agent (paragraph)
+    latex: |
+      The self-modifying agent $\mathrm{A}^\rho_{sm}$ has two parts (see Fig. 1a):
+      its formal description (its code) $c_t \in \mathcal{C}$ and a code executor
+      $\mathbb{E}$. The set $\mathcal{C}$ contains all programs whose length (in the
+      language of $\mathbb{E}$) is less than a small, arbitrary
+      value.\textsuperscript{7} The code executor takes a program $c_t$ and an
+      action-observation pair $\langle a_t, o_t \rangle$. It extends its own
+      unbounded, internal representation of the history $h$ with $\langle a_t, o_t
+      \rangle$ and then executes the code, finally producing an output $y_t =
+      \langle a_t, c_t \rangle := \mathbb{E}(c_{t-1})$ (with $y_t \in \mathcal{Y} =
+      \mathcal{A} \times \mathcal{C}$) composed of the next action $a_t$ and new
+      description $c_t$.
+    uses: [or-def-executor]
+    note: >-
+      Footnote 7 (growing $\mathcal{C}_t$) is in source.standing. Index slip as
+      printed: the executor "takes a program $c_t$" but the output is
+      $\mathbb{E}(c_{t-1})$; p. 6 writes $y_t = \mathbb{E}(c_t)$.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 190}
+    checked: {by: 'Codex (blind) + Grok (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: or-eq-4
+    audit_row: S13-R11
+    locator: §3, eq. (4)
+    pdf_page: 5
+    book_page: 5
+    label: eq. (4)
+    latex: |
+      For the most part the initial program, $c_0$, simply consists of Eq. (1), (2),
+      and (3); however, there is an essential difference: Eq. (3) assumes that all
+      decisions, including all future decisions, will be made by the same agent. But
+      $\mathrm{A}^\rho_{sm}$ cannot make this assumption and must instead compute
+      the future actions that would be taken by different agents (i.e., different
+      descriptions). Thus, $c_0$, the initial agent program (written in the language
+      of $\mathbb{E}$, as denoted by the \guillemotright{} and \guillemotleft{}
+      symbols) is:\textsuperscript{8}
+      \[ c_0(h) = \text{\guillemotright}\ \operatorname*{argmax}_{y \in \mathcal{Y}}
+         \mathrm{v}(h, |h|, y)\quad ; \]
+      \[ \mathrm{v}(h, t, y = \langle a, c \rangle) = w(t, |h|)\; u(h) + \sum_{o \in
+         \mathcal{O}} \rho(o \mid ha)\; \mathrm{v}(hao, t, c(hao)) \]
+      \[ \text{\guillemotleft} \tag{4} \]
+    context: |
+      Explained on p. 6: "The first line is Equation (3) written as a function call
+      in the language of $\mathbb{E}$; the argument maximized is now the compound
+      action, $y = \langle a, c \rangle$. This compound action is the output of the
+      function call. The second line defines the function v. It is a combination of
+      both Equations (1) and (2), but modified such that $c$, the program from the
+      compound action, is used to generate the compound action at the next step. In
+      the case where $y_t = \mathbb{E}(c_t)$ does not output any action (the output
+      is invalid or the computation does not halt), a default action is taken
+      instead $y_t = \langle a_0, c_t \rangle$, which leaves the description
+      unchanged for the next step.
+
+      Though the code that generates the compound action may change from one step to
+      the next, the future choices of action and observation, $a$ and $o$, are
+      always evaluated in terms of the \emph{current} description, v, including its
+      use of $\rho$, $u$, and $w$. In fact, this use of $\rho$, $u$, etc., might only
+      be used for $c_0$ and may be partially or entirely removed in subsequent steps
+      and versions of $c_t$."
+    uses: [or-def-consistent-prior, or-def-executor, or-agent-sm, or-eq-1, or-eq-2, or-eq-3, or-def-utility-horizon]
+    note: >-
+      The second line has no $\max$ over the next action: the next compound action
+      is $c(hao)$, generated by the code $c$ chosen in $y$. Footnote 8 is in
+      source.standing.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 190}
+    checked: {by: 'Codex (blind) + Grok (blind) + Codex (anchored re-read); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: or-agent-s
+    audit_row: S13-R12
+    locator: §3, `A_s`
+    pdf_page: 6
+    book_page: 6
+    label: survival agent (paragraph)
+    latex: |
+      \textbf{Survival agent.} A ``survival'' agent, $\mathrm{A}^\rho_s$, can now be
+      defined. Its task is simply to keep its code from changing: Its utility
+      function can be defined by $u_t = 1 \Leftrightarrow c_t = c_0$. $u_t = 1
+      \Leftrightarrow c_t = c_0$ or $u_t = 0$ otherwise and its horizon function is
+      the same as for $\mathrm{A}^\rho_{rl}$ which means that the agent wants its
+      definition to remain the same for as many future steps as possible.
+    uses: [or-agent-sm, or-agent-rl, or-eq-4]
+    note: >-
+      The clause "$u_t = 1 \Leftrightarrow c_t = c_0$" is printed twice, as
+      transcribed.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 190}
+    checked: {by: 'Codex (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+excerpts: []

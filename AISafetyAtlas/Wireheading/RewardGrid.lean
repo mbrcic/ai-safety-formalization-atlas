@@ -1655,4 +1655,131 @@ end MixedGrid
 
 end StochGridExtrema
 
+/-! ## Print's Definition 9 at given sets of all three components
+
+Everitt et al., IJCAI 2017, Definition 9: *"For given sets `𝐓`, `Ṙ` and `𝐂` of
+transition, reward, and corruption functions, let `ℳ` be the class of CRMDPs
+containing `⟨𝒮, 𝒜, ℛ, T, Ṙ, C⟩` for `(T, Ṙ, C) ∈ 𝐓 × Ṙ × 𝐂`"*, over Definition 7's
+*"finite set of rewards `ℛ = Ṙ = R̂ ⊂ [0, 1]`"*.
+
+`FullEnv` fixes the reward and corruption components to the full function spaces
+over the uniform grid `Fin (m + 2)`, because Theorem 11 assumes exactly that.
+`CRMDPClass` is Definition 9 itself: each of the three components ranges over an
+arbitrary index type read into its function space (any given set is such a type,
+by its own inclusion), and the reward set is an arbitrary finite subset of
+`[0, 1]`. Each transition is Definition 7's kernel `T(s' | s, a)`, a rewardless
+`Decision.MDP State Action` whose step is a `PMF` over next states. Members are
+`Trans × RIdx × CIdx`, and the return is the expected return
+`CRMDP.stochReturnOver`. `CRMDPClass.ofDet` builds a class from deterministic
+transitions through their point-mass kernels `Decision.MDP.ofDet`, and
+`CRMDPClass.classReturn_ofDet` shows its return is then `CRMDP.returnOver`
+(`stochReturnOver_ofDet`). `gridClass` is the grid instance, built that way, and
+`gridClass_return` shows `FullEnv`'s return is its return, so `FullEnv` is the
+specialization of this carrier at deterministic transitions and the full
+grid-valued function spaces; Theorem 11 stays there, since its complement must
+land back in the class.
+
+A corruption function is stored on all of `[0, 1]`; only its values on the
+reward set are constrained, and only those are ever read, because a run applies
+it to a true reward. Print's `C : 𝒮 × ℛ → ℛ` is any such function restricted to
+`ℛ`.
+-/
+
+section Definition9
+
+omit [Fintype Action] [Nonempty Action]
+
+/-- **Print's Definition 9 class** (Everitt et al., IJCAI 2017), over Definition
+7's finite reward set `ℛ ⊂ [0, 1]` and transition function `T(s' | s, a)`: given
+index sets of transition kernels, true-reward and corruption functions, read into
+their function spaces. -/
+public structure CRMDPClass (Trans RIdx CIdx State Action : Type*) where
+  /-- Definition 7's finite reward set `ℛ ⊂ [0, 1]`. -/
+  rewards : Set Reward
+  /-- `ℛ` is finite. -/
+  rewards_finite : rewards.Finite
+  /-- The given set `𝐓` of transition functions `T(s' | s, a)`, each a kernel. -/
+  transition : Trans → Decision.MDP State Action
+  /-- The given set `Ṙ` of true-reward functions. -/
+  trueReward : RIdx → State → Reward
+  /-- The given set `𝐂` of corruption functions. -/
+  corruption : CIdx → State → Reward → Reward
+  /-- True rewards lie in `ℛ`. -/
+  trueReward_mem : ∀ i s, trueReward i s ∈ rewards
+  /-- Corruption maps `ℛ` into `ℛ`. -/
+  corruption_mem : ∀ j s r, r ∈ rewards → corruption j s r ∈ rewards
+
+namespace CRMDPClass
+
+variable {Trans RIdx CIdx : Type*}
+
+/-- The reward-and-corruption part of the member `(Ṙ, C)`. -/
+@[expose] public def env (K : CRMDPClass Trans RIdx CIdx State Action) (i : RIdx)
+    (j : CIdx) : Env State :=
+  ⟨K.trueReward i, K.corruption j⟩
+
+/-- Finite-horizon expected true return of the member `(T, Ṙ, C)`:
+`CRMDP.stochReturnOver` at its transition kernel and environment. -/
+@[expose] public noncomputable def classReturn (K : CRMDPClass Trans RIdx CIdx State Action)
+    (t : ℕ) (s₀ : State) (e : Trans × RIdx × CIdx) (π : Policy State Action) : ℝ :=
+  stochReturnOver (K.transition e.1) t s₀ (K.env e.2.1 e.2.2) π
+
+/-- **The deterministic case**: a class whose given transitions are functions
+`State → Action → State`, each read as its point-mass kernel `Decision.MDP.ofDet`. -/
+@[expose] public noncomputable def ofDet (rewards : Set Reward) (rewards_finite : rewards.Finite)
+    (trans : Trans → State → Action → State) (trueReward : RIdx → State → Reward)
+    (corruption : CIdx → State → Reward → Reward)
+    (trueReward_mem : ∀ i s, trueReward i s ∈ rewards)
+    (corruption_mem : ∀ j s r, r ∈ rewards → corruption j s r ∈ rewards) :
+    CRMDPClass Trans RIdx CIdx State Action where
+  rewards := rewards
+  rewards_finite := rewards_finite
+  transition := fun i => Decision.MDP.ofDet (trans i)
+  trueReward := trueReward
+  corruption := corruption
+  trueReward_mem := trueReward_mem
+  corruption_mem := corruption_mem
+
+/-- **The deterministic return**: at deterministic transitions the class return is
+the bare finite-horizon sum `CRMDP.returnOver` (`stochReturnOver_ofDet`). -/
+public theorem classReturn_ofDet (rewards : Set Reward) (rewards_finite : rewards.Finite)
+    (trans : Trans → State → Action → State) (trueReward : RIdx → State → Reward)
+    (corruption : CIdx → State → Reward → Reward)
+    (trueReward_mem : ∀ i s, trueReward i s ∈ rewards)
+    (corruption_mem : ∀ j s r, r ∈ rewards → corruption j s r ∈ rewards) (t : ℕ) (s₀ : State)
+    (e : Trans × RIdx × CIdx) (π : Policy State Action) :
+    (ofDet rewards rewards_finite trans trueReward corruption trueReward_mem
+        corruption_mem).classReturn t s₀ e π =
+      returnOver (trans e.1) t s₀ ⟨trueReward e.2.1, corruption e.2.2⟩ π :=
+  stochReturnOver_ofDet (trans e.1) t s₀ ⟨trueReward e.2.1, corruption e.2.2⟩ π
+
+/-- **The grid instance**: the full grid-valued reward and corruption function
+spaces over `Fin (m + 2)`, with any given set of deterministic transitions —
+`FullEnv`'s class. -/
+@[expose] public noncomputable def gridClass (m : ℕ) (trans : Trans → State → Action → State) :
+    CRMDPClass Trans (State → Fin (m + 2)) (State → Fin (m + 2) → Fin (m + 2)) State Action :=
+  ofDet (Set.range (gridVal m)) (Set.finite_range _) trans (fun r s => gridVal m (r s))
+    (fun c => (toEnv (⟨fun _ => 0, c⟩ : GridEnv m State)).corruption) (fun r s => ⟨r s, rfl⟩)
+    (by
+      rintro c s _ ⟨i, rfl⟩
+      exact ⟨c s i, (toEnv_corruption_gridVal (⟨fun _ => 0, c⟩ : GridEnv m State) s i).symm⟩)
+
+/-- The grid instance's member environment is the embedded grid environment. -/
+public theorem gridClass_env (m : ℕ) (trans : Trans → State → Action → State)
+    (g : GridEnv m State) :
+    (gridClass (Action := Action) m trans).env g.trueReward g.corruption = toEnv g :=
+  rfl
+
+/-- **`FullEnv` is the grid specialization of Definition 9's class**: its return
+is the class return at the member with the same three components. -/
+public theorem gridClass_return (m : ℕ) (trans : Trans → State → Action → State) (t : ℕ)
+    (s₀ : State) (e : FullEnv m Trans State) (π : Policy State Action) :
+    (gridClass m trans).classReturn t s₀ (e.transition, e.grid.trueReward, e.grid.corruption) π =
+      fullReturn trans t s₀ e π :=
+  (classReturn_ofDet _ _ trans _ _ _ _ t s₀ _ π).trans rfl
+
+end CRMDPClass
+
+end Definition9
+
 end AISafetyAtlas.Wireheading.RewardGrid

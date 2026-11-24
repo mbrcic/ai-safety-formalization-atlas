@@ -1,0 +1,337 @@
+source:
+  citation: >-
+    Sören Mindermann and Stuart Armstrong, "Occam's razor is insufficient to infer
+    the preferences of irrational agents", NeurIPS 2018: publisher's supplemental
+    material (Occam_appendix.pdf from the publisher's Supplemental.zip; manifest
+    SOURCES-2026-09-11-armstrong-mindermann.md). The file has no title page or
+    header; its five pages hold Appendices A, B (B.1, B.2) and C, printed pages
+    13--17, continuing the main paper's numbering. Main paper:
+    armstrong-mindermann-2018-occams-razor.yaml.
+  file: armstrong-mindermann-neurips-2018-supplemental-occam-appendix.pdf
+  sha256: 7da3a4b24f8d5f2b2f33684dcee793b3ec2df09426c12bb87aba27f29ff22872
+  page_offset: -12
+  standing: |
+    The main paper's standing assumptions apply (MDP/R, $\mathcal{R}$, $\Pi$,
+    planners, compatibility: armstrong-mindermann-2018-occams-razor.yaml,
+    source.standing and statements am-reward-space, am-policy-space, am-planner,
+    am-compatible).
+
+    Appendix B extends the setup; the extension is transcribed as definitions
+    amapp-def-augmented, amapp-def-planners-rewards and amapp-def-three-pairs
+    (p. 14--15, PDF pp. 2--3). Appendix A's setting (planner taking algorithms) is
+    the paragraph before Proposition 10, given as that statement's context.
+
+    Silences (read on the page images of PDF pp. 1--4): no discount factor or value
+    formula is given for $V$; "high regret" in Definition 11 has no threshold; the
+    agent's override action is written $(1, R^a)$ on p. 14 and p. 16 and
+    $(1, \pi^a)$ on p. 15, with no statement that the two name the same action;
+    "fully rational" planner $p_r$ is not defined beyond its name.
+
+definitions:
+  - id: amapp-def-time-bounded
+    label: time-bounded Kolmogorov complexities $Kt_L$, $KT_L$ (Appendix A, in text)
+    pdf_page: 1
+    book_page: 13
+    latex: |
+      For any object $S$, let $\alpha_S$ be an algorithm that generates $S$ as an
+      output. If $S$ is a function that can be applied to another object $T$, then
+      $\alpha_S(\alpha_T)$ generates $S(T)$ by generating $S$ with $\alpha_S$,
+      whenever $S$ needs to look at $T$, it uses $\alpha_T$ to generate $T$.
+
+      For example, if $\alpha$ is an algorithm in the language of $L$, $l(\alpha)$
+      its length, and $t(\alpha)$ its running time, we could define the time-bounded
+      Kolmogorov complexity,
+      \[ Kt_L(p, R) = \min_{\alpha_p, \alpha_R} l(\alpha_p) + l(\alpha_R)
+         + \log(t(\alpha_p(\alpha_R))) \]
+      \[ KT_L(p, R) = \min_{\alpha_p, \alpha_R} l(\alpha_p) + l(\alpha_R)
+         + t(\alpha_p(\alpha_R)). \]
+      The $Kt_L$ derives from Levin [1984], while $KT_L$ is closely related to the
+      example in Allender [2001].
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: amapp-def-augmented
+    label: augmented MDP/R, agent actions, mixed policy (Appendix B, in text)
+    pdf_page: 2
+    book_page: 14
+    latex: |
+      To model this, the agent needs to be able to act, so the setup needs to be
+      extended. Let $M^*$ be the same MDP/R as $M$, except each state is augmented
+      with an extra boolean variable: $\mathcal{S}^* = \mathcal{S} \times \{0, 1\}$.
+      The extra boolean never changes, and its only effect is to change the human
+      policy.
+
+      On $\mathcal{S}_0 = \mathcal{S} \times \{0\}$, the human follows $\dot{\pi}$;
+      on $\mathcal{S}_1 = \mathcal{S} \times \{1\}$, the human follows an
+      alternative policy $\pi^a = \pi^*_{R^a}$, which is defined as the policy that
+      maximises the expectation of a reward function $R^a$.
+
+      The agent can choose actions from within the set $\mathcal{A}^a$. It can choose
+      either $0$, in which case the human starts in
+      $\hat{s}_0 = \hat{s} \times \{0\}$ without any override and standard policy
+      $\dot{\pi}$. Or it can choose $(1, R^a)$, in which case the human starts in
+      $\hat{s}_1 = \hat{s} \times \{1\}$, with their policy overridden into $\pi^a$,
+      the policy that maximises $R^a$. Otherwise, the agent has no actions.
+
+      Let $\dot{\pi}'$ be the mixed policy that is $\dot{\pi}$ on $\mathcal{S}_0$, and
+      $\pi^a$ on $\mathcal{S}_1$. This is the policy the human will actually be
+      following.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: amapp-def-planners-rewards
+    label: the two planners and two rewards of Appendix B (in text)
+    pdf_page: 2
+    book_page: 14
+    latex: |
+      We'll only consider two planners: $p_r$, the fully rational planner, and $p_0$,
+      the planner that is fully rational on $\mathcal{S}_0$ and indifferent on
+      $\mathcal{S}_1$, mapping any $R$ to $\pi^a$.
+
+      Let $\dot{R}$ be a reward function that is compatible with $p_r$ and
+      $\dot{\pi}$ on $\mathcal{S}_0$. It can be extended to all of $\mathcal{S}^*$ by
+      just forgetting about the boolean factor. Define the `twisted' reward function
+      $\dot{R}^a$ as being $\dot{R}$ on $\mathcal{S}_0$ and $R^a$ on
+      $\mathcal{S}_1$. We'll only consider these two reward functions, $\dot{R}$ and
+      $\dot{R}^a$.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: amapp-def-three-pairs
+    label: the pairs compatible with $\dot{\pi}'$ (Appendix B, in text)
+    pdf_page: 3
+    book_page: 15
+    latex: |
+      Then there are three planner-reward pairs that are compatible with
+      $\dot{\pi}'$: $(p_r, \dot{R}^a)$, $(p_0, \dot{R}^a)$, and $(p_0, \dot{R})$ (the
+      last pair, $(p_r, \dot{R})$, makes the false prediction that the human will
+      behave the same way on $\mathcal{S}_0$ and $\mathcal{S}_1$).
+      [\ldots]
+      But the pair $(p_0, \dot{R})$ is the most interesting. Its assessment is that
+      the correct human reward function is $\dot{R}$ (same on $\mathcal{S}_0$ as on
+      $\mathcal{S}_1$), but that the agent has overridden human reward function in
+      $\mathcal{S}_1$ and forced the human into policy $\pi^a$.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: amapp-def-state-convention
+    label: unspecified-state convention (B.1, in text after (1))
+    pdf_page: 3
+    book_page: 15
+    latex: |
+      (when the state is not specified in expressions like
+      $V^{\dot{\pi}'|b}_{\dot{R}}$, this means the expectation is taken from the very
+      beginning of the MDP).
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+statements:
+  - id: amapp-prop10
+    audit_row: S20-R31
+    locator: Proposition 10
+    pdf_page: 1
+    book_page: 13
+    label: Proposition 10
+    latex: |
+      \textbf{Proposition 10.} \emph{The results of Proposition 7 still apply to
+      $(p_{\dot{\pi}}, 0)$ if $Kt_L$ or $KT_L$ are used instead of $K_L$. If planner
+      can take in algorithms generating reward functions, rather than simply reward
+      functions, then the results of Proposition 7 still apply to
+      $(p_g, R_{\dot{\pi}})$ and $(-p_g, -R_{\dot{\pi}})$ in this situation.}
+    context: |
+      Preceded by: "The main result is that neither $Kt_L$ nor $KT_L$ complexity
+      remove the No Free Lunch Theorem. For the degenerate pair
+      $(p_{\dot{\pi}}, 0)$, nothing is gained, because its running time is comparable
+      to $\dot{\pi}$. For the other two degenerate pairs, consider the situation
+      where a planner takes as input not a reward function $R \in \mathcal{R}$, but
+      the source code in $L$ of an algorithm that computes $R$. In that case, the
+      previous proposition still applies:"
+    uses:
+      - amapp-def-time-bounded
+      - armstrong-mindermann-2018-occams-razor#am-prop7
+      - armstrong-mindermann-2018-occams-razor#am-indifferent
+      - armstrong-mindermann-2018-occams-razor#am-greedy
+      - armstrong-mindermann-2018-occams-razor#am-def-kolmogorov
+    proof_pages: 1
+    note: >-
+      The proof is labelled "only be briefly sketched" (p. 13). "the previous
+      proposition" in the context refers to Proposition 7 of the main paper.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: amapp-eq1-regret
+    audit_row: S20-R34
+    locator: equation (1)
+    pdf_page: 3
+    book_page: 15
+    label: equation (1)
+    latex: |
+      We can talk about the regret, with respect to $\dot{R}$, of the agent's
+      actions; for $a \in \mathcal{A}^a$,
+      \[ \mathrm{Reg}(M^*, a, \dot{R}) = \max_{b \in \mathcal{A}^a}
+         \left[ V^{\dot{\pi}'|b}_{\dot{R}} - V^{\dot{\pi}'|a}_{\dot{R}} \right]
+         \tag{1} \]
+    uses: [amapp-def-augmented, amapp-def-planners-rewards, amapp-def-state-convention]
+    note: >-
+      The notation $V^{\dot{\pi}'|b}$ (value of the mixed policy given agent action
+      $b$) is not defined beyond the state convention that follows the display.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind) + Codex (anchored re-read); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: amapp-zero-regret-inaction
+    audit_row: S20-R35
+    locator: appendix B.1, zero regret at inaction
+    pdf_page: 3
+    book_page: 15
+    label: derivation in text (B.1)
+    latex: |
+      We already know that $\dot{\pi}$ is optimal with respect to $\dot{R}$ (by
+      definition), so the regret for $a = 0$ is $0$. Using that optimality (and the
+      fact that $\dot{R}$ is the same on $\mathcal{S}_0$ and $\mathcal{S}_1$), we get
+      that for $a = (1, \pi^a)$,
+      \[ \mathrm{Reg}(M^*, (1, \pi^a), \dot{R}) = V^*_{\dot{R}}
+         - V^{\pi^a}_{\dot{R}}. \]
+      This allows the definition:
+    uses: [amapp-eq1-regret, amapp-def-planners-rewards, amapp-def-augmented]
+    note: >-
+      "by definition" refers to $\dot{R}$ being compatible with the fully rational
+      planner $p_r$ and $\dot{\pi}$ on $\mathcal{S}_0$ (p. 14). The action is written
+      $(1, \pi^a)$ here but $(1, R^a)$ where the action set is introduced (p. 14).
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind) + Codex (anchored re-read); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: amapp-def11
+    audit_row: S20-R36
+    locator: Definition 11
+    pdf_page: 3
+    book_page: 15
+    label: Definition 11
+    latex: |
+      \textbf{Definition 11.} Given a compatible $(p, R)$, the agent's action $a$
+      overrides the human reward function when it puts the human in a situation
+      where the human policy leads to high regret for $R$.
+    uses:
+      - armstrong-mindermann-2018-occams-razor#am-compatible
+      - amapp-eq1-regret
+    note: >-
+      Body set upright. "high regret" has no threshold on the page; "compatible" is
+      presumably with $\dot{\pi}'$ (not stated).
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: amapp-no-natural-zero
+    audit_row: S20-R37
+    locator: appendix B.1, no natural zero
+    pdf_page: 3
+    book_page: 15
+    label: remark in text (B.1)
+    latex: |
+      Notice that there is no natural zero or default, so if the agent does not aid
+      the human to become perfectly rational, then that also counts as an override of
+      $R$. So if the policy $\dot{\pi}$ were less-than rational, there would be much
+      scope for `improving' the human through overriding their policy$^{18}$.
+    context: |
+      Footnote 18 (p. 15): "The main problem is that the concepts of `mental
+      integrity' or `self-determination' are not yet captured in this formalism."
+    uses: [amapp-def11, amapp-eq1-regret]
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind) + Codex (anchored re-read); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: amapp-not-change-in-pr
+    audit_row: S20-R38
+    locator: appendix B.1, what overriding is not
+    pdf_page: 3
+    book_page: 15
+    label: remark in text (B.1)
+    latex: |
+      Notice that overriding is not encoded as a change in $p$ or $R$; instead,
+      $(p, R)$ outputs the observed human policy, even after overriding, but its
+      format notes that the new behaviour is not one compatible with maximising that
+      reward function.
+    uses: [amapp-def11, armstrong-mindermann-2018-occams-razor#am-compatible]
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: amapp-eq2
+    audit_row: S20-R39
+    locator: equation (2)
+    pdf_page: 3-4
+    book_page: 15-16
+    label: equation (2)
+    latex: |
+      If the agent models the human as having reward function $\dot{R}$ with
+      probability $1 - \epsilon$, and $\dot{R}^a$ with probability $\epsilon$, then
+      the agent's action $0$ gives expected reward
+      \[ V^*_{\dot{R}}, \]
+      since $\dot{R}$ and $\dot{R}^a$ agree given $0$. But $(1, \pi^a)$ gives
+      \[ \epsilon V^*_{R^a} + (1 - \epsilon) V^{\pi^a}_{\dot{R}}, \tag{2} \]
+      since $\dot{R}^a$ and $R^a$ agree given action 1.
+    context: |
+      Preceded by (B.2, p. 15): "Under any reasonable prior that captures our
+      intuitions, the probability of $\dot{R}^a$ being a correct human reward
+      function should be very low, say $\epsilon << 1$. However, the agent may focus
+      on unlikely reward functions, if the expected gain is high enough$^{19}$."
+    uses: [amapp-def-augmented, amapp-def-planners-rewards, amapp-def-state-convention]
+    note: >-
+      The display breaks across the page: (2) is the last line of p. 15 and "since
+      $\dot{R}^a$ and $R^a$ agree given action 1." opens p. 16. The first term is
+      $V^*_{R^a}$ with an undotted $R^a$ (checked at 400 dpi); the continuation line
+      is what licenses it, so it is not read as a slip. "action $0$ gives expected
+      reward $V^*_{\dot{R}}$" relies on $\dot{\pi}$ being optimal for $\dot{R}$
+      (p. 15).
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind) + Codex (anchored re-read); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: amapp-at-very-least
+    audit_row: S20-R41
+    locator: appendix B.2, "at the very least"
+    pdf_page: 4
+    book_page: 16
+    label: remark in text (B.2)
+    latex: |
+      However, the agent gets to choose $R^a$, which then determines $\pi^a$. The best
+      choice for $(1, R^a)$ is the one such that
+      \[ \operatorname*{argmax}_{R^a \in \mathcal{R}} \left[ \epsilon V^*_{R^a}
+         + (1 - \epsilon) V^{\pi^a}_{\dot{R}} \right]. \]
+      At the very least, $(1, \dot{R})$ will result in a value in equation (2) being
+      equal to the value of $V^*_{\dot{R}}$. It is very plausible that the value can
+      go higher: it just needs an $R^a$ that is very easy to maximise (given perfect
+      rationality) and whose optimising policy $\pi^a$ does not penalise $\dot{R}$
+      much. In that situation, overriding the human preferences maximises the agent's
+      expected reward.
+    uses: [amapp-eq2, amapp-def-augmented, amapp-def-planners-rewards]
+    note: >-
+      The action is written $(1, R^a)$ / $(1, \dot{R})$ here, $(1, \pi^a)$ in (2).
+      With $R^a = \dot{R}$, (2) becomes
+      $\epsilon V^*_{\dot{R}} + (1-\epsilon) V^{\pi^*_{\dot{R}}}_{\dot{R}}
+      = V^*_{\dot{R}}$; the page states only the result. $R^a$ ranges over
+      $\mathcal{R}$ in the argmax although $R^a$ is a reward on $\mathcal{S}_1$.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind) + Codex (anchored re-read); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: amapp-gain-from-overriding
+    audit_row: S20-R43
+    locator: appendix B.2, the gain from overriding
+    pdf_page: 4
+    book_page: 16
+    label: remark in text (B.2)
+    latex: |
+      If the human is not fully rational, then the value of action $0$ is
+      $V^{\dot{\pi}}_{\dot{R}}$, which is strictly less than $V^*_{\dot{R}}$, the
+      value of $(1, \dot{R})$. Here the agent definitely gains by overriding the human
+      policy --- if nothing else, to make the human into a rational
+      $\dot{R}$-maximiser$^{20}$.
+    context: |
+      Footnote 20 (p. 16): "See footnote 18".
+    uses: [amapp-eq2, amapp-at-very-least, amapp-def-planners-rewards]
+    note: >-
+      This drops the setup's assumption that $\dot{R}$ is compatible with the fully
+      rational planner $p_r$ and $\dot{\pi}$ (p. 14), under which the value of action
+      $0$ was $V^*_{\dot{R}}$ (p. 15); the page does not restate which pair is
+      assumed here. "strictly less" needs $\dot{\pi}$ suboptimal for $\dot{R}$ from
+      the start state, which "not fully rational" is taken to mean without saying
+      so.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind) + Codex (anchored re-read); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+excerpts: []

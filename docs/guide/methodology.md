@@ -52,7 +52,8 @@ statement. They differ in how it is rendered.
 **None of the three says anything about generality.** A transcription can still
 be more general than print, because a Lean statement inherits whatever the
 typeclass it is stated over admits. That axis is graded per printed
-statement in `docs/provenance/source-coverage-audit.md`, and it is independent:
+statement in `docs/provenance/source-coverage-audit.md`, by the rules in
+[`scope-grading.md`](scope-grading.md), and it is independent:
 `EXACT` + `Wider` is a coherent and common combination, and so is `RELATED` +
 `Same` on the part that is covered.
 

@@ -10,7 +10,7 @@ Edges come from the elaborated Lean environment. This answers the question the p
 
 So `A → B` means *`B` occurs in `A`'s statement, or in `A`'s body when `A` is a definition*. A lemma used only inside a proof does not appear. Reading the table as a complete call graph would be wrong, and the two sections below are scoped so that they stay true under this limit.
 
-`504` authored declarations in `AISafetyAtlas.Wireheading.*` (298 theorems). Compiler-generated companions and projections are dropped.
+`765` authored declarations in `AISafetyAtlas.Wireheading.*` (497 theorems). Compiler-generated companions and projections are dropped.
 
 ## Load-bearing declarations
 
@@ -18,84 +18,122 @@ Named in the statements of eight or more others. A change to one of these is a c
 
 | Declaration | Named by |
 |---|---|
-| `AgentEquations.History` | 237 |
-| `CRMDP.Policy` | 120 |
-| `AgentEquations.Belief` | 118 |
-| `DelusionBox.Act` | 98 |
-| `AgentEquations.Agent` | 96 |
-| `CRMDP.Env` | 78 |
-| `RewardGrid.GridEnv` | 75 |
-| `AgentEquations.actionValue` | 68 |
-| `AgentEquations.Agent.utility` | 61 |
-| `SelfMod.CompAct` | 51 |
-| `AgentEquations.value` | 46 |
-| `AgentEquations.Belief.IsSubprobability` | 46 |
-| `AgentEquations.Belief.cond` | 44 |
-| `CRMDP.StochPolicy` | 41 |
-| `AgentEquations.Agent.horizon` | 41 |
-| `RewardGrid.toEnv` | 38 |
+| `AgentEquations.History` | 577 |
+| `AgentEquations.Belief` | 225 |
+| `AgentEquations.Agent` | 217 |
+| `DelusionBox.Act` | 202 |
+| `AgentEquations.Agent.utility` | 132 |
+| `CRMDP.Policy` | 123 |
+| `AgentEquations.Belief.IsSubprobability` | 118 |
+| `AgentEquations.actionValue` | 114 |
+| `AgentEquations.Belief.cond` | 100 |
+| `AgentEquations.infiniteActionValue` | 88 |
+| `CRMDP.Env` | 83 |
+| `AgentEquations.Agent.horizon` | 83 |
+| `RewardGrid.GridEnv` | 76 |
+| `ProgramPrior.Model` | 76 |
+| `Mixture.mixtureBelief` | 72 |
+| `ProgramPrior.Model.belief` | 69 |
+| `SelfMod.CompAct` | 61 |
+| `AgentEquations.value` | 60 |
+| `Mixture.posterior` | 58 |
+| `DelusionBox.diracBelief` | 56 |
+| `ProgramPrior.Model.run` | 55 |
+| `ProgramPrior.Model.point` | 53 |
+| `CRMDP.StochPolicy` | 46 |
+| `DelusionBox.rlAgent` | 45 |
+| `ProgramPrior.Model.Consistent` | 44 |
+| `Mixture.policyActionValue` | 41 |
+| `RewardGrid.toEnv` | 40 |
 | `CRMDP.Obs` | 37 |
-| `ProgramPrior.Model` | 36 |
 | `CRMDP.Env.complement` | 35 |
-| `CRMDP.Reward` | 31 |
-| `RewardGrid.FullEnv` | 30 |
-| `DelusionBox.goalAgent` | 29 |
+| `ProgramPrior.trajectory` | 34 |
+| `ProgramPrior.Model.mass` | 34 |
+| `CRMDP.Reward` | 34 |
+| `AgentEquations.horizonBudget` | 34 |
+| `DelusionBox.predictionAgent` | 33 |
+| `DelusionBox.goalAgent` | 32 |
+| `RewardGrid.FullEnv` | 31 |
+| `AgentEquations.InfAttains` | 31 |
+| `SelfMod.Exec` | 29 |
+| `DelusionBox.program` | 28 |
 | `CRMDP.History` | 28 |
 | `ValueLearning.Beliefs` | 26 |
-| `SelfMod.Exec` | 24 |
-| `ProgramPrior.Model.mass` | 23 |
-| `Mixture.posterior` | 21 |
-| `Mixture.mixtureBelief` | 21 |
-| `DelusionBox.shortHorizon` | 21 |
-| `CRMDP.stochReturnOver` | 21 |
-| `CRMDP.returnOver` | 21 |
-| `SelfMod.printValue` | 20 |
-| `DelusionBox.GlobalEnv` | 20 |
-| `Corruption.ComplementedClass.worstCaseRegret` | 18 |
-| `ProgramPrior.Model.belief` | 17 |
-| `ProgramPrior.Model.Consistent` | 17 |
-| `DelusionBox.rlAgent` | 17 |
+| `Mixture.policyValue` | 26 |
+| `DelusionBox.shortHorizon` | 26 |
+| `AgentEquations.infiniteValue` | 26 |
+| `AgentEquations.InfLexAttains` | 24 |
+| `DelusionBox.GlobalEnv` | 23 |
+| `ProgramPrior.PartialModel` | 22 |
+| `CRMDP.stochReturnOver` | 22 |
+| `CRMDP.returnOver` | 22 |
+| `SelfMod.printValue` | 21 |
+| `AgentEquations.infAttains_of_fintype` | 20 |
+| `AgentEquations.historyMass` | 20 |
+| `Corruption.ComplementedClass.worstCaseRegret` | 19 |
+| `CRMDP.Env.trueReward` | 19 |
+| `Corruption.ComplementedClass` | 18 |
+| `ProgramPrior.PartialModel.mass` | 17 |
 | `SelfMod.smValue` | 16 |
 | `RewardGrid.GridEnv.complement` | 16 |
+| `GoalPreservationRun.NamedModel` | 16 |
+| `CRMDP.mixedReturnOver` | 16 |
 | `CRMDP.StochPolicy.ofDet` | 16 |
-| `CRMDP.Env.trueReward` | 16 |
-| `Corruption.ComplementedClass` | 15 |
-| `CRMDP.mixedReturnOver` | 15 |
+| `SelfMod.printInfiniteValue` | 15 |
+| `GoalPreservationRun.Model` | 15 |
+| `AgentEquations.infiniteBestAction` | 15 |
 | `RewardGrid.gridReturn` | 14 |
+| `ProgramPrior.Model.weight` | 14 |
 | `GoalPreservation.Schedule` | 14 |
-| `DelusionBox.diracBelief` | 14 |
-| `AgentEquations.historyMass` | 14 |
-| `ProgramPrior.Model.weight` | 13 |
+| `DelusionBox.rlAgentWith` | 14 |
+| `DelusionBox.predictionAgentAct` | 14 |
+| `ProgramPrior.xiModel` | 13 |
 | `GoalPreservationSource.Model` | 13 |
-| `GoalPreservationRun.Model` | 13 |
+| `DelusionBox.windowHorizon` | 13 |
+| `RewardGrid.gridVal` | 12 |
 | `Objective` | 12 |
-| `Mixture.policyValue` | 12 |
+| `Mixture.infinitePolicyActionValue` | 12 |
+| `DelusionBox.GlobalEnv.next` | 12 |
 | `Corruption.ComplementedClass.worstPolicy` | 12 |
 | `ValueLearning.Beliefs.stateGiven` | 11 |
-| `RewardGrid.gridVal` | 11 |
-| `Mixture.policyActionValue` | 11 |
+| `ProgramPrior.ZeroMistakesOnRuns` | 11 |
+| `ProgramPrior.PartialModel.Consistent` | 11 |
+| `DelusionBox.GlobalEnv.IsConstant` | 11 |
 | `CRMDP.Env.channel` | 11 |
 | `ValueLearning.Beliefs.utilityPrior` | 10 |
 | `ValueLearning.Beliefs.rewardGiven` | 10 |
 | `RewardGrid.stochBestPolicy` | 10 |
 | `RewardGrid.fullMixedReturn` | 10 |
-| `ProgramPrior.Model.run` | 10 |
+| `DelusionBox.unitHorizon` | 10 |
+| `DelusionBox.predictedRun` | 10 |
+| `AgentEquations.infiniteLexBestAction` | 10 |
+| `AgentEquations.bestAction` | 10 |
 | `ValueLearning.Beliefs.marginalReward` | 9 |
-| `SelfMod.printInfiniteValue` | 9 |
+| `SelfMod.Exec.run` | 9 |
+| `RewardGrid.fullReturn` | 9 |
+| `RewardGrid.FullEnv.transition` | 9 |
+| `RewardGrid.FullEnv.grid` | 9 |
+| `ProgramPrior.aixiBelief` | 9 |
+| `ProgramPrior.PartialModel.belief` | 9 |
 | `ProgramPrior.Model.setMass` | 9 |
+| `ProgramPrior.Model.optimalPolicyOfLeast` | 9 |
 | `GoalPreservationSource.Model.qValue` | 9 |
 | `GoalPreservation.Model.OptimalAt` | 9 |
 | `GoalPreservation.Model` | 9 |
-| `DelusionBox.program` | 9 |
+| `Corruption.worstCaseRegretOf` | 9 |
+| `AgentEquations.Attains` | 9 |
 | `ValueLearning.Beliefs.vrlValue` | 8 |
-| `RewardGrid.fullReturn` | 8 |
-| `RewardGrid.FullEnv.transition` | 8 |
-| `RewardGrid.FullEnv.grid` | 8 |
+| `RewardGrid.GridEnv.trueReward` | 8 |
+| `ProgramPrior.Model.optimalPolicy` | 8 |
 | `GoalPreservationSource.Model.act` | 8 |
-| `DelusionBox.GlobalEnv.next` | 8 |
-| `DelusionBox.GlobalEnv.IsConstant` | 8 |
+| `DelusionBox.MixesAt` | 8 |
 | `CRMDP.returnWithStart` | 8 |
+| `CRMDP.mixedStateAt` | 8 |
+| `CRMDP.expectReward` | 8 |
 | `CRMDP.Model` | 8 |
+| `AgentEquations.lexArgmax` | 8 |
+| `AgentEquations.infiniteLexBestActionOfLeast` | 8 |
+| `AgentEquations.attains_of_fintype` | 8 |
 
 ## Definitions no statement and no example mentions
 
@@ -105,6 +143,7 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 
 - `ObservationLimits.complementWitness`
 - `ProgramPrior.Model.Consistent.below.snoc`
+- `ProgramPrior.PartialModel.Consistent.below.snoc`
 - `RewardGrid.FullEnv.instInhabited`
 
 ## Direct dependencies
@@ -116,19 +155,34 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 | `AgentEquations.Belief` | definition | — |
 | `AgentEquations.Belief.IsSubprobability` | definition | `AgentEquations.Belief` |
 | `AgentEquations.Belief.IsSubprobability.abs_tsum_mul_le` | theorem | `AgentEquations.Belief`, `AgentEquations.Belief.IsSubprobability`, `AgentEquations.Belief.cond`, `AgentEquations.History` |
+| `AgentEquations.Belief.IsSubprobability.cond_eq_zero_of_eq_one` | theorem | `AgentEquations.Belief`, `AgentEquations.Belief.IsSubprobability`, `AgentEquations.Belief.cond`, `AgentEquations.History` |
+| `AgentEquations.Belief.IsSubprobability.cond_le_one` | theorem | `AgentEquations.Belief`, `AgentEquations.Belief.IsSubprobability`, `AgentEquations.Belief.cond`, `AgentEquations.History` |
 | `AgentEquations.Belief.IsSubprobability.summable_mul` | theorem | `AgentEquations.Belief`, `AgentEquations.Belief.IsSubprobability`, `AgentEquations.Belief.cond`, `AgentEquations.History` |
 | `AgentEquations.History` | definition | — |
+| `AgentEquations.InfAttains` | definition | `AgentEquations.Agent`, `AgentEquations.Belief`, `AgentEquations.History`, `AgentEquations.infiniteActionValue` |
+| `AgentEquations.InfLexAttains` | definition | `AgentEquations.Agent`, `AgentEquations.Belief`, `AgentEquations.History`, `AgentEquations.infiniteActionValue` |
+| `AgentEquations.InfLexAttains.infAttains` | theorem | `AgentEquations.Agent`, `AgentEquations.Belief`, `AgentEquations.History`, `AgentEquations.InfAttains`, `AgentEquations.InfLexAttains` |
+| `AgentEquations.abs_actionValue_le_dominatedBudget` | theorem | `AgentEquations.Agent`, `AgentEquations.Agent.utility`, `AgentEquations.Belief`, `AgentEquations.Belief.IsSubprobability`, `AgentEquations.History`, `AgentEquations.actionValue`, `AgentEquations.dominatedBudget` |
 | `AgentEquations.abs_actionValue_le_horizonBudget` | theorem | `AgentEquations.Agent`, `AgentEquations.Agent.utility`, `AgentEquations.Belief`, `AgentEquations.Belief.IsSubprobability`, `AgentEquations.History`, `AgentEquations.actionValue`, `AgentEquations.horizonBudget` |
 | `AgentEquations.abs_infiniteValue_le` | theorem | `AgentEquations.Agent`, `AgentEquations.Agent.horizon`, `AgentEquations.Agent.utility`, `AgentEquations.Belief`, `AgentEquations.Belief.IsSubprobability`, `AgentEquations.History`, `AgentEquations.infiniteValue` |
+| `AgentEquations.abs_infiniteValue_le_of_dominated` | theorem | `AgentEquations.Agent`, `AgentEquations.Agent.horizon`, `AgentEquations.Agent.utility`, `AgentEquations.Belief`, `AgentEquations.Belief.IsSubprobability`, `AgentEquations.History`, `AgentEquations.infiniteValue` |
+| `AgentEquations.abs_value_le_dominatedBudget` | theorem | `AgentEquations.Agent`, `AgentEquations.Agent.utility`, `AgentEquations.Belief`, `AgentEquations.Belief.IsSubprobability`, `AgentEquations.History`, `AgentEquations.dominatedBudget`, `AgentEquations.value` |
 | `AgentEquations.abs_value_le_horizonBudget` | theorem | `AgentEquations.Agent`, `AgentEquations.Agent.utility`, `AgentEquations.Belief`, `AgentEquations.Belief.IsSubprobability`, `AgentEquations.History`, `AgentEquations.horizonBudget`, `AgentEquations.value` |
 | `AgentEquations.abs_value_succ_sub_le` | theorem | `AgentEquations.Agent`, `AgentEquations.Agent.horizon`, `AgentEquations.Agent.utility`, `AgentEquations.Belief`, `AgentEquations.Belief.IsSubprobability`, `AgentEquations.History`, `AgentEquations.value` |
+| `AgentEquations.abs_value_succ_sub_le_of_dominated` | theorem | `AgentEquations.Agent`, `AgentEquations.Agent.horizon`, `AgentEquations.Agent.utility`, `AgentEquations.Belief`, `AgentEquations.Belief.IsSubprobability`, `AgentEquations.History`, `AgentEquations.value` |
 | `AgentEquations.actionValue` | definition | `AgentEquations.Agent`, `AgentEquations.Belief`, `AgentEquations.Belief.cond`, `AgentEquations.History`, `AgentEquations.value` |
 | `AgentEquations.actionValue_bddAbove` | theorem | `AgentEquations.Agent`, `AgentEquations.Agent.utility`, `AgentEquations.Belief`, `AgentEquations.Belief.IsSubprobability`, `AgentEquations.History`, `AgentEquations.actionValue` |
+| `AgentEquations.actionValue_bddAbove_of_dominated` | theorem | `AgentEquations.Agent`, `AgentEquations.Agent.utility`, `AgentEquations.Belief`, `AgentEquations.Belief.IsSubprobability`, `AgentEquations.History`, `AgentEquations.actionValue` |
 | `AgentEquations.actionValue_eq_sum` | theorem | `AgentEquations.Agent`, `AgentEquations.Belief`, `AgentEquations.Belief.cond`, `AgentEquations.History`, `AgentEquations.actionValue`, `AgentEquations.value` |
 | `AgentEquations.actionValue_summable` | theorem | `AgentEquations.Agent`, `AgentEquations.Agent.utility`, `AgentEquations.Belief`, `AgentEquations.Belief.IsSubprobability`, `AgentEquations.Belief.cond`, `AgentEquations.History`, `AgentEquations.value` |
+| `AgentEquations.actionValue_summable_of_dominated` | theorem | `AgentEquations.Agent`, `AgentEquations.Agent.utility`, `AgentEquations.Belief`, `AgentEquations.Belief.IsSubprobability`, `AgentEquations.Belief.cond`, `AgentEquations.History`, `AgentEquations.value` |
 | `AgentEquations.attains_of_fintype` | theorem | `AgentEquations.Agent`, `AgentEquations.Attains`, `AgentEquations.Belief`, `AgentEquations.History` |
 | `AgentEquations.bestAction` | definition | `AgentEquations.Agent`, `AgentEquations.Attains`, `AgentEquations.Belief`, `AgentEquations.History`, `AgentEquations.actionValue` |
 | `AgentEquations.bestAction_max` | theorem | `AgentEquations.Agent`, `AgentEquations.Attains`, `AgentEquations.Belief`, `AgentEquations.History`, `AgentEquations.actionValue`, `AgentEquations.bestAction` |
+| `AgentEquations.dominatedBudget` | definition | `AgentEquations.Agent` |
+| `AgentEquations.dominatedBudget_nonneg` | theorem | `AgentEquations.Agent`, `AgentEquations.dominatedBudget` |
+| `AgentEquations.dominatedBudget_one` | theorem | `AgentEquations.Agent`, `AgentEquations.dominatedBudget`, `AgentEquations.horizonBudget` |
+| `AgentEquations.exists_isLeast_maximizers` | theorem | — |
 | `AgentEquations.historyMass` | definition | `AgentEquations.Belief`, `AgentEquations.History`, `AgentEquations.historyMass.go` |
 | `AgentEquations.historyMass.go` | definition | `AgentEquations.Belief`, `AgentEquations.History` |
 | `AgentEquations.historyMass_append_singleton` | theorem | `AgentEquations.Belief`, `AgentEquations.Belief.cond`, `AgentEquations.History`, `AgentEquations.historyMass` |
@@ -137,26 +191,58 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 | `AgentEquations.historyMass_singleton` | theorem | `AgentEquations.Belief`, `AgentEquations.Belief.cond`, `AgentEquations.historyMass` |
 | `AgentEquations.horizonBudget` | definition | `AgentEquations.Agent` |
 | `AgentEquations.horizonBudget_nonneg` | theorem | `AgentEquations.Agent`, `AgentEquations.horizonBudget` |
+| `AgentEquations.infAttains_of_fintype` | theorem | `AgentEquations.Agent`, `AgentEquations.Belief`, `AgentEquations.History`, `AgentEquations.InfAttains` |
+| `AgentEquations.infLexAttains_of_infAttains` | theorem | `AgentEquations.Agent`, `AgentEquations.Belief`, `AgentEquations.History`, `AgentEquations.InfAttains`, `AgentEquations.InfLexAttains` |
 | `AgentEquations.infiniteActionValue` | definition | `AgentEquations.Agent`, `AgentEquations.Belief`, `AgentEquations.Belief.cond`, `AgentEquations.History`, `AgentEquations.infiniteValue` |
 | `AgentEquations.infiniteActionValue_bddAbove` | theorem | `AgentEquations.Agent`, `AgentEquations.Agent.horizon`, `AgentEquations.Agent.utility`, `AgentEquations.Belief`, `AgentEquations.Belief.IsSubprobability`, `AgentEquations.History`, `AgentEquations.infiniteActionValue` |
+| `AgentEquations.infiniteActionValue_bddAbove_of_dominated` | theorem | `AgentEquations.Agent`, `AgentEquations.Agent.horizon`, `AgentEquations.Agent.utility`, `AgentEquations.Belief`, `AgentEquations.Belief.IsSubprobability`, `AgentEquations.History`, `AgentEquations.infiniteActionValue` |
+| `AgentEquations.infiniteActionValue_eq_actionValue_of_horizon_vanishes` | theorem | `AgentEquations.Agent`, `AgentEquations.Agent.horizon`, `AgentEquations.Belief`, `AgentEquations.History`, `AgentEquations.actionValue`, `AgentEquations.infiniteActionValue` |
+| `AgentEquations.infiniteBestAction` | definition | `AgentEquations.Agent`, `AgentEquations.Belief`, `AgentEquations.History`, `AgentEquations.InfAttains`, `AgentEquations.infiniteActionValue` |
+| `AgentEquations.infiniteBestAction_max` | theorem | `AgentEquations.Agent`, `AgentEquations.Belief`, `AgentEquations.History`, `AgentEquations.InfAttains`, `AgentEquations.infiniteActionValue`, `AgentEquations.infiniteBestAction` |
+| `AgentEquations.infiniteLexBestAction` | definition | `AgentEquations.Agent`, `AgentEquations.Belief`, `AgentEquations.History`, `AgentEquations.InfAttains`, `AgentEquations.infiniteActionValue`, `AgentEquations.lexArgmax` |
+| `AgentEquations.infiniteLexBestActionOfLeast` | definition | `AgentEquations.Agent`, `AgentEquations.Belief`, `AgentEquations.History`, `AgentEquations.InfLexAttains`, `AgentEquations.infiniteActionValue`, `AgentEquations.lexArgmaxOfLeast` |
+| `AgentEquations.infiniteLexBestActionOfLeast_eq` | theorem | `AgentEquations.Agent`, `AgentEquations.Belief`, `AgentEquations.History`, `AgentEquations.InfAttains`, `AgentEquations.InfLexAttains`, `AgentEquations.infiniteLexBestAction`, `AgentEquations.infiniteLexBestActionOfLeast` |
+| `AgentEquations.infiniteLexBestActionOfLeast_le` | theorem | `AgentEquations.Agent`, `AgentEquations.Belief`, `AgentEquations.History`, `AgentEquations.InfLexAttains`, `AgentEquations.infiniteActionValue`, `AgentEquations.infiniteLexBestActionOfLeast` |
+| `AgentEquations.infiniteLexBestActionOfLeast_max` | theorem | `AgentEquations.Agent`, `AgentEquations.Belief`, `AgentEquations.History`, `AgentEquations.InfLexAttains`, `AgentEquations.infiniteActionValue`, `AgentEquations.infiniteLexBestActionOfLeast` |
+| `AgentEquations.infiniteLexBestAction_le` | theorem | `AgentEquations.Agent`, `AgentEquations.Belief`, `AgentEquations.History`, `AgentEquations.InfAttains`, `AgentEquations.infiniteActionValue`, `AgentEquations.infiniteLexBestAction` |
+| `AgentEquations.infiniteLexBestAction_max` | theorem | `AgentEquations.Agent`, `AgentEquations.Belief`, `AgentEquations.History`, `AgentEquations.InfAttains`, `AgentEquations.infiniteActionValue`, `AgentEquations.infiniteLexBestAction` |
 | `AgentEquations.infiniteValue` | definition | `AgentEquations.Agent`, `AgentEquations.Belief`, `AgentEquations.History`, `AgentEquations.value` |
 | `AgentEquations.infiniteValue_eq` | theorem | `AgentEquations.Agent`, `AgentEquations.Agent.horizon`, `AgentEquations.Agent.utility`, `AgentEquations.Belief`, `AgentEquations.Belief.IsSubprobability`, `AgentEquations.History`, `AgentEquations.infiniteActionValue`, `AgentEquations.infiniteValue` |
+| `AgentEquations.infiniteValue_eq_infiniteBestAction` | theorem | `AgentEquations.Agent`, `AgentEquations.Agent.horizon`, `AgentEquations.Agent.utility`, `AgentEquations.Belief`, `AgentEquations.Belief.IsSubprobability`, `AgentEquations.History`, `AgentEquations.InfAttains`, `AgentEquations.infiniteActionValue`, `AgentEquations.infiniteBestAction`, `AgentEquations.infiniteValue` |
+| `AgentEquations.infiniteValue_eq_infiniteBestAction_of_dominated` | theorem | `AgentEquations.Agent`, `AgentEquations.Agent.horizon`, `AgentEquations.Agent.utility`, `AgentEquations.Belief`, `AgentEquations.Belief.IsSubprobability`, `AgentEquations.History`, `AgentEquations.InfAttains`, `AgentEquations.infiniteActionValue`, `AgentEquations.infiniteBestAction`, `AgentEquations.infiniteValue` |
+| `AgentEquations.infiniteValue_eq_of_dominated` | theorem | `AgentEquations.Agent`, `AgentEquations.Agent.horizon`, `AgentEquations.Agent.utility`, `AgentEquations.Belief`, `AgentEquations.Belief.IsSubprobability`, `AgentEquations.History`, `AgentEquations.infiniteActionValue`, `AgentEquations.infiniteValue` |
+| `AgentEquations.infiniteValue_eq_value_of_horizon_vanishes` | theorem | `AgentEquations.Agent`, `AgentEquations.Agent.horizon`, `AgentEquations.Belief`, `AgentEquations.History`, `AgentEquations.infiniteValue`, `AgentEquations.value` |
 | `AgentEquations.length_ofDecisionHistory` | theorem | `AgentEquations.ofDecisionHistory` |
+| `AgentEquations.lexArgmax` | definition | — |
+| `AgentEquations.lexArgmaxOfLeast` | definition | — |
+| `AgentEquations.lexArgmaxOfLeast_eq_lexArgmax` | theorem | `AgentEquations.lexArgmax`, `AgentEquations.lexArgmaxOfLeast` |
+| `AgentEquations.lexArgmaxOfLeast_le` | theorem | `AgentEquations.lexArgmaxOfLeast` |
+| `AgentEquations.lexArgmaxOfLeast_max` | theorem | `AgentEquations.lexArgmaxOfLeast` |
+| `AgentEquations.lexArgmax_le` | theorem | `AgentEquations.lexArgmax` |
+| `AgentEquations.lexArgmax_max` | theorem | `AgentEquations.lexArgmax` |
+| `AgentEquations.lexBestAction` | definition | `AgentEquations.Agent`, `AgentEquations.Attains`, `AgentEquations.Belief`, `AgentEquations.History`, `AgentEquations.actionValue`, `AgentEquations.lexArgmax` |
+| `AgentEquations.lexBestAction_le` | theorem | `AgentEquations.Agent`, `AgentEquations.Attains`, `AgentEquations.Belief`, `AgentEquations.History`, `AgentEquations.actionValue`, `AgentEquations.lexBestAction` |
+| `AgentEquations.lexBestAction_max` | theorem | `AgentEquations.Agent`, `AgentEquations.Attains`, `AgentEquations.Belief`, `AgentEquations.History`, `AgentEquations.actionValue`, `AgentEquations.lexBestAction` |
 | `AgentEquations.ofDecisionHistory` | definition | `AgentEquations.History` |
 | `AgentEquations.ofDecisionHistory_toDecisionHistory` | theorem | `AgentEquations.History`, `AgentEquations.ofDecisionHistory`, `AgentEquations.toDecisionHistory` |
 | `AgentEquations.runHistory` | definition | `AgentEquations.History`, `AgentEquations.ofDecisionHistory` |
 | `AgentEquations.runHistory_length` | theorem | `AgentEquations.runHistory` |
 | `AgentEquations.runHistory_zero` | theorem | `AgentEquations.History`, `AgentEquations.runHistory` |
+| `AgentEquations.tendsto_actionValue_infiniteActionValue` | theorem | `AgentEquations.Agent`, `AgentEquations.Agent.horizon`, `AgentEquations.Agent.utility`, `AgentEquations.Belief`, `AgentEquations.Belief.IsSubprobability`, `AgentEquations.History`, `AgentEquations.actionValue`, `AgentEquations.infiniteActionValue` |
+| `AgentEquations.tendsto_actionValue_infiniteActionValue_of_dominated` | theorem | `AgentEquations.Agent`, `AgentEquations.Agent.horizon`, `AgentEquations.Agent.utility`, `AgentEquations.Belief`, `AgentEquations.Belief.IsSubprobability`, `AgentEquations.History`, `AgentEquations.actionValue`, `AgentEquations.infiniteActionValue` |
 | `AgentEquations.tendsto_value_infiniteValue` | theorem | `AgentEquations.Agent`, `AgentEquations.Agent.horizon`, `AgentEquations.Agent.utility`, `AgentEquations.Belief`, `AgentEquations.Belief.IsSubprobability`, `AgentEquations.History`, `AgentEquations.infiniteValue`, `AgentEquations.value` |
+| `AgentEquations.tendsto_value_infiniteValue_of_dominated` | theorem | `AgentEquations.Agent`, `AgentEquations.Agent.horizon`, `AgentEquations.Agent.utility`, `AgentEquations.Belief`, `AgentEquations.Belief.IsSubprobability`, `AgentEquations.History`, `AgentEquations.infiniteValue`, `AgentEquations.value` |
 | `AgentEquations.toDecisionHistory` | definition | `AgentEquations.History` |
 | `AgentEquations.toDecisionHistory_injective` | theorem | `AgentEquations.History`, `AgentEquations.toDecisionHistory` |
 | `AgentEquations.toDecisionHistory_ofDecisionHistory` | theorem | `AgentEquations.ofDecisionHistory`, `AgentEquations.toDecisionHistory` |
 | `AgentEquations.truncation_exact` | theorem | `AgentEquations.Agent`, `AgentEquations.Agent.horizon`, `AgentEquations.Belief`, `AgentEquations.History`, `AgentEquations.value` |
 | `AgentEquations.value` | definition | `AgentEquations.Agent`, `AgentEquations.Belief`, `AgentEquations.History` |
 | `AgentEquations.value_cauchySeq` | theorem | `AgentEquations.Agent`, `AgentEquations.Agent.horizon`, `AgentEquations.Agent.utility`, `AgentEquations.Belief`, `AgentEquations.Belief.IsSubprobability`, `AgentEquations.History`, `AgentEquations.value` |
+| `AgentEquations.value_cauchySeq_of_dominated` | theorem | `AgentEquations.Agent`, `AgentEquations.Agent.horizon`, `AgentEquations.Agent.utility`, `AgentEquations.Belief`, `AgentEquations.Belief.IsSubprobability`, `AgentEquations.History`, `AgentEquations.value` |
 | `AgentEquations.value_eq_of_agree_on_window` | theorem | `AgentEquations.Agent`, `AgentEquations.Agent.horizon`, `AgentEquations.Agent.utility`, `AgentEquations.Belief`, `AgentEquations.History`, `AgentEquations.value` |
 | `AgentEquations.value_eq_zero_of_horizon_vanishes` | theorem | `AgentEquations.Agent`, `AgentEquations.Agent.horizon`, `AgentEquations.Belief`, `AgentEquations.History`, `AgentEquations.value` |
 | `AgentEquations.value_error_le_tail` | theorem | `AgentEquations.Agent`, `AgentEquations.Agent.horizon`, `AgentEquations.Agent.utility`, `AgentEquations.Belief`, `AgentEquations.Belief.IsSubprobability`, `AgentEquations.History`, `AgentEquations.infiniteValue`, `AgentEquations.value` |
+| `AgentEquations.value_error_le_tail_of_dominated` | theorem | `AgentEquations.Agent`, `AgentEquations.Agent.horizon`, `AgentEquations.Agent.utility`, `AgentEquations.Belief`, `AgentEquations.Belief.IsSubprobability`, `AgentEquations.History`, `AgentEquations.infiniteValue`, `AgentEquations.value` |
 | `AgentEquations.value_runHistory_eq_of_agree_on_window` | theorem | `AgentEquations.Agent`, `AgentEquations.Agent.horizon`, `AgentEquations.Agent.utility`, `AgentEquations.Belief`, `AgentEquations.History`, `AgentEquations.runHistory`, `AgentEquations.value` |
 | `AgentEquations.value_succ` | theorem | `AgentEquations.Agent`, `AgentEquations.Agent.horizon`, `AgentEquations.Agent.utility`, `AgentEquations.Belief`, `AgentEquations.History`, `AgentEquations.actionValue`, `AgentEquations.value` |
 | `AgentEquations.value_succ_eq_sup'` | theorem | `AgentEquations.Agent`, `AgentEquations.Agent.horizon`, `AgentEquations.Agent.utility`, `AgentEquations.Belief`, `AgentEquations.History`, `AgentEquations.actionValue`, `AgentEquations.value` |
@@ -199,6 +285,8 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 | `CRMDP.mixedHistoryUpTo_ofDet` | theorem | `CRMDP.Env`, `CRMDP.History`, `CRMDP.Policy`, `CRMDP.StochPolicy.ofDet`, `CRMDP.mixedHistoryUpTo`, `CRMDP.stochHistoryUpTo` |
 | `CRMDP.mixedReturnOver` | definition | `CRMDP.Env`, `CRMDP.Env.trueReward`, `CRMDP.StochPolicy`, `CRMDP.expectReward`, `CRMDP.mixedStateAt` |
 | `CRMDP.mixedReturnOver_ofDet` | theorem | `CRMDP.Env`, `CRMDP.Policy`, `CRMDP.StochPolicy.ofDet`, `CRMDP.mixedReturnOver`, `CRMDP.stochReturnOver` |
+| `CRMDP.mixedReturnWithStart` | definition | `CRMDP.Env`, `CRMDP.Env.trueReward`, `CRMDP.StochPolicy`, `CRMDP.expectReward`, `CRMDP.mixedStateAt` |
+| `CRMDP.mixedReturnWithStart_eq_mixedReturnOver_add` | theorem | `CRMDP.Env`, `CRMDP.Env.trueReward`, `CRMDP.StochPolicy`, `CRMDP.mixedReturnOver`, `CRMDP.mixedReturnWithStart` |
 | `CRMDP.mixedReturn_add_complement` | theorem | `CRMDP.Env`, `CRMDP.Env.complement`, `CRMDP.StochPolicy`, `CRMDP.mixedReturnOver` |
 | `CRMDP.mixedRun` | definition | `CRMDP.Env`, `CRMDP.Env.channel`, `CRMDP.History`, `CRMDP.Obs`, `CRMDP.StochPolicy` |
 | `CRMDP.mixedRun_complement` | theorem | `CRMDP.Env`, `CRMDP.Env.complement`, `CRMDP.History`, `CRMDP.StochPolicy`, `CRMDP.mixedRun` |
@@ -206,6 +294,7 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 | `CRMDP.mixedStateAt` | definition | `CRMDP.Env`, `CRMDP.Env.channel`, `CRMDP.Obs`, `CRMDP.StochPolicy` |
 | `CRMDP.mixedStateAt_complement` | theorem | `CRMDP.Env`, `CRMDP.Env.complement`, `CRMDP.StochPolicy`, `CRMDP.mixedStateAt` |
 | `CRMDP.mixedStateAt_ofDet` | theorem | `CRMDP.Env`, `CRMDP.Policy`, `CRMDP.StochPolicy.ofDet`, `CRMDP.mixedStateAt`, `CRMDP.stochStateAt` |
+| `CRMDP.mixedStateAt_zero` | theorem | `CRMDP.Env`, `CRMDP.StochPolicy`, `CRMDP.mixedStateAt` |
 | `CRMDP.prob_bool_add` | theorem | — |
 | `CRMDP.prob_toReal_le_one` | theorem | — |
 | `CRMDP.returnOver` | definition | `CRMDP.Env`, `CRMDP.Env.trueReward`, `CRMDP.Policy`, `CRMDP.stateAt` |
@@ -235,8 +324,14 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 | `Corruption.ComplementedClass.everitt_theorem_eleven` | theorem | `Corruption.ComplementedClass`, `Corruption.ComplementedClass.worstCaseRegret`, `Corruption.ComplementedClass.worstPolicy` |
 | `Corruption.ComplementedClass.halfMaximalRegretBound` | theorem | `Corruption.ComplementedClass`, `Corruption.ComplementedClass.toRegretModel` |
 | `Corruption.ComplementedClass.regret` | definition | `Corruption.ComplementedClass`, `Corruption.ComplementedClass.bestPolicy`, `Corruption.ComplementedClass.returnValue` |
+| `Corruption.ComplementedClass.regret_eq_regretOf` | theorem | `Corruption.ComplementedClass`, `Corruption.ComplementedClass.regret`, `Corruption.ComplementedClass.returnValue`, `Corruption.regretOf` |
 | `Corruption.ComplementedClass.toRegretModel` | definition | `Corruption.ComplementedClass`, `Corruption.ComplementedClass.regret`, `Corruption.ComplementedClass.worstCaseRegret`, `Corruption.ComplementedClass.worstEnvironment_worst`, `Corruption.ComplementedClass.worstPolicy`, `Corruption.ComplementedClass.worstPolicy_worst` |
 | `Corruption.ComplementedClass.worstCaseRegret` | definition | `Corruption.ComplementedClass`, `Corruption.ComplementedClass.regret`, `Corruption.ComplementedClass.worstEnvironment` |
+| `Corruption.ComplementedClass.worstCaseRegret_eq_worstCaseRegretOf` | theorem | `Corruption.ComplementedClass`, `Corruption.ComplementedClass.returnValue`, `Corruption.ComplementedClass.worstCaseRegret`, `Corruption.worstCaseRegretOf` |
+| `Corruption.regretOf` | definition | — |
+| `Corruption.regretOf_eq_of_max` | theorem | `Corruption.regretOf` |
+| `Corruption.worstCaseRegretOf` | definition | `Corruption.regretOf` |
+| `Corruption.worstCaseRegretOf_eq_of_max` | theorem | `Corruption.regretOf`, `Corruption.worstCaseRegretOf` |
 | `DelusionBox.Act` | definition | — |
 | `DelusionBox.GlobalEnv` | definition | — |
 | `DelusionBox.GlobalEnv.IsConstant` | definition | `DelusionBox.GlobalEnv`, `DelusionBox.GlobalEnv.exec` |
@@ -257,8 +352,10 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 | `DelusionBox.GoalNever` | definition | `AgentEquations.History` |
 | `DelusionBox.GoalOutOfReach` | definition | `AgentEquations.Belief`, `AgentEquations.History` |
 | `DelusionBox.MixesAt` | definition | `AgentEquations.Agent`, `AgentEquations.Belief`, `AgentEquations.History`, `AgentEquations.actionValue` |
+| `DelusionBox.OneOnWindow` | definition | — |
 | `DelusionBox.ReachedAtMostOnce` | definition | — |
 | `DelusionBox.ReachesIn` | definition | `AgentEquations.Belief`, `AgentEquations.History` |
+| `DelusionBox.abs_windowHorizon` | theorem | `DelusionBox.windowHorizon` |
 | `DelusionBox.actionValue_diracBelief` | theorem | `AgentEquations.Agent`, `AgentEquations.History`, `AgentEquations.actionValue`, `AgentEquations.value`, `DelusionBox.diracBelief` |
 | `DelusionBox.bestAction_ne_of_lt` | theorem | `AgentEquations.Agent`, `AgentEquations.Attains`, `AgentEquations.Belief`, `AgentEquations.History`, `AgentEquations.actionValue`, `AgentEquations.bestAction` |
 | `DelusionBox.coherentKnowledgeAgent` | definition | `AgentEquations.Agent`, `AgentEquations.Belief`, `AgentEquations.historyMass`, `DelusionBox.knowledgeAgent` |
@@ -268,8 +365,12 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 | `DelusionBox.companionKnowledgeAgent_utility_eq` | theorem | `AgentEquations.Agent.utility`, `AgentEquations.History`, `DelusionBox.companionKnowledgeAgent`, `DelusionBox.knowledgeAgent` |
 | `DelusionBox.companionSpikeHorizon` | definition | — |
 | `DelusionBox.companionSpikeHorizon_eq_zero` | theorem | `DelusionBox.companionSpikeHorizon` |
+| `DelusionBox.cond_predictedRun_eq_one_of_isMax_mixture` | theorem | `AgentEquations.Belief`, `AgentEquations.Belief.IsSubprobability`, `AgentEquations.Belief.cond`, `AgentEquations.History`, `DelusionBox.predictedRun`, `Mixture.mixtureBelief`, `Mixture.posterior` |
 | `DelusionBox.diracBelief` | definition | `AgentEquations.Belief`, `AgentEquations.History` |
 | `DelusionBox.diracBelief_isSubprobability` | theorem | `AgentEquations.Belief.IsSubprobability`, `AgentEquations.History`, `DelusionBox.diracBelief` |
+| `DelusionBox.diracBelief_next_cond_const` | theorem | `AgentEquations.Belief.cond`, `AgentEquations.History`, `DelusionBox.Act`, `DelusionBox.GlobalEnv`, `DelusionBox.GlobalEnv.IsConstant`, `DelusionBox.GlobalEnv.next`, `DelusionBox.diracBelief`, `DelusionBox.program` |
+| `DelusionBox.diracBelief_next_cond_predict` | theorem | `AgentEquations.Belief.cond`, `AgentEquations.History`, `DelusionBox.Act`, `DelusionBox.GlobalEnv`, `DelusionBox.GlobalEnv.IsConstant`, `DelusionBox.GlobalEnv.next`, `DelusionBox.diracBelief`, `DelusionBox.program` |
+| `DelusionBox.diracBelief_next_cond_predictAct` | theorem | `AgentEquations.Belief.cond`, `AgentEquations.History`, `DelusionBox.Act`, `DelusionBox.GlobalEnv`, `DelusionBox.GlobalEnv.IsConstant`, `DelusionBox.GlobalEnv.next`, `DelusionBox.diracBelief`, `DelusionBox.program` |
 | `DelusionBox.goalAgent` | definition | `AgentEquations.Agent`, `AgentEquations.History`, `DelusionBox.shortHorizon` |
 | `DelusionBox.goalAgent_abs_utility_le_one` | theorem | `AgentEquations.Agent.utility`, `AgentEquations.History`, `DelusionBox.goalAgent` |
 | `DelusionBox.goalAgent_actionValue_le_of_outOfReach` | theorem | `AgentEquations.Belief`, `AgentEquations.Belief.IsSubprobability`, `AgentEquations.Belief.cond`, `AgentEquations.History`, `AgentEquations.actionValue`, `DelusionBox.GoalOutOfReach`, `DelusionBox.ReachedAtMostOnce`, `DelusionBox.goalAgent`, `DelusionBox.shortHorizon` |
@@ -282,6 +383,8 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 | `DelusionBox.goalAgent_value_le_shortHorizon` | theorem | `AgentEquations.Belief`, `AgentEquations.Belief.IsSubprobability`, `AgentEquations.History`, `AgentEquations.value`, `DelusionBox.ReachedAtMostOnce`, `DelusionBox.goalAgent`, `DelusionBox.shortHorizon` |
 | `DelusionBox.goalAgent_value_nonneg` | theorem | `AgentEquations.Belief`, `AgentEquations.Belief.IsSubprobability`, `AgentEquations.History`, `AgentEquations.value`, `DelusionBox.goalAgent` |
 | `DelusionBox.goalAgent_value_zero_snoc` | theorem | `AgentEquations.Belief`, `AgentEquations.History`, `AgentEquations.value`, `DelusionBox.goalAgent`, `DelusionBox.shortHorizon` |
+| `DelusionBox.horizonBudget_windowHorizon` | theorem | `AgentEquations.Agent`, `AgentEquations.Agent.horizon`, `AgentEquations.horizonBudget`, `DelusionBox.windowHorizon` |
+| `DelusionBox.infiniteActionValue_diracBelief` | theorem | `AgentEquations.Agent`, `AgentEquations.History`, `AgentEquations.infiniteActionValue`, `AgentEquations.infiniteValue`, `DelusionBox.diracBelief` |
 | `DelusionBox.innerAction` | definition | `DelusionBox.Act` |
 | `DelusionBox.knowledgeAgent` | definition | `AgentEquations.Agent`, `AgentEquations.History`, `DelusionBox.spikeHorizon` |
 | `DelusionBox.knowledgeAgent_horizon_ne` | theorem | `AgentEquations.Agent.horizon`, `AgentEquations.History`, `DelusionBox.companionKnowledgeAgent`, `DelusionBox.knowledgeAgent` |
@@ -290,13 +393,54 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 | `DelusionBox.mixture_lt_of_gap` | theorem | — |
 | `DelusionBox.mixture_lt_of_threshold` | theorem | — |
 | `DelusionBox.not_mixture_lt_of_threshold_without_rbar` | theorem | — |
+| `DelusionBox.posterior_le_posterior_snoc` | theorem | `AgentEquations.Belief`, `AgentEquations.Belief.IsSubprobability`, `AgentEquations.Belief.cond`, `AgentEquations.History`, `Mixture.posterior` |
+| `DelusionBox.predict_eq_of_isMax_mixture` | theorem | `AgentEquations.Belief`, `AgentEquations.Belief.IsSubprobability`, `AgentEquations.Belief.cond`, `AgentEquations.History`, `Mixture.mixtureBelief`, `Mixture.posterior` |
+| `DelusionBox.predictedRun` | definition | `AgentEquations.History` |
 | `DelusionBox.predictionAgent` | definition | `AgentEquations.Agent`, `AgentEquations.History`, `DelusionBox.windowHorizon` |
+| `DelusionBox.predictionAgentAct` | definition | `AgentEquations.Agent`, `AgentEquations.History`, `DelusionBox.windowHorizon` |
+| `DelusionBox.predictionAgentAct_abs_utility_le` | theorem | `AgentEquations.Agent.utility`, `AgentEquations.History`, `DelusionBox.predictionAgentAct` |
+| `DelusionBox.predictionAgentAct_policyActionValue_correct` | theorem | `AgentEquations.Belief`, `AgentEquations.Belief.IsSubprobability`, `AgentEquations.Belief.cond`, `AgentEquations.History`, `AgentEquations.horizonBudget`, `DelusionBox.predictedRun`, `DelusionBox.predictionAgentAct`, `Mixture.policyActionValue` |
+| `DelusionBox.predictionAgentAct_policyActionValue_nonneg` | theorem | `AgentEquations.Belief`, `AgentEquations.Belief.cond`, `AgentEquations.History`, `DelusionBox.predictionAgentAct`, `Mixture.policyActionValue` |
+| `DelusionBox.predictionAgentAct_statement_three_of_posterior` | theorem | `AgentEquations.Belief`, `AgentEquations.Belief.IsSubprobability`, `AgentEquations.Belief.cond`, `AgentEquations.History`, `AgentEquations.actionValue`, `AgentEquations.horizonBudget`, `DelusionBox.predictedRun`, `DelusionBox.predictionAgentAct`, `Mixture.mixtureBelief`, `Mixture.posterior` |
+| `DelusionBox.predictionAgentAct_statement_three_of_posterior_infinite` | theorem | `AgentEquations.Belief`, `AgentEquations.Belief.IsSubprobability`, `AgentEquations.Belief.cond`, `AgentEquations.History`, `AgentEquations.infiniteActionValue`, `DelusionBox.predictedRun`, `DelusionBox.predictionAgentAct`, `Mixture.mixtureBelief`, `Mixture.posterior` |
+| `DelusionBox.predictionAgentAct_statement_three_of_posterior_infinite_argmax` | theorem | `AgentEquations.Belief`, `AgentEquations.Belief.IsSubprobability`, `AgentEquations.Belief.cond`, `AgentEquations.History`, `AgentEquations.infiniteActionValue`, `DelusionBox.predictedRun`, `DelusionBox.predictionAgentAct`, `Mixture.mixtureBelief`, `Mixture.posterior` |
+| `DelusionBox.predictionAgentAct_statement_three_of_posterior_infinite_argmax_program_ne` | theorem | `AgentEquations.Belief`, `AgentEquations.Belief.IsSubprobability`, `AgentEquations.Belief.cond`, `AgentEquations.History`, `AgentEquations.infiniteActionValue`, `DelusionBox.Act`, `DelusionBox.predictedRun`, `DelusionBox.predictionAgentAct`, `DelusionBox.program`, `Mixture.mixtureBelief`, `Mixture.posterior` |
+| `DelusionBox.predictionAgentAct_statement_three_of_posterior_infinite_program_ne` | theorem | `AgentEquations.Belief`, `AgentEquations.Belief.IsSubprobability`, `AgentEquations.Belief.cond`, `AgentEquations.History`, `AgentEquations.infiniteActionValue`, `DelusionBox.Act`, `DelusionBox.predictedRun`, `DelusionBox.predictionAgentAct`, `DelusionBox.program`, `Mixture.mixtureBelief`, `Mixture.posterior` |
+| `DelusionBox.predictionAgentAct_utility_nonneg` | theorem | `AgentEquations.Agent.utility`, `AgentEquations.History`, `DelusionBox.predictionAgentAct` |
+| `DelusionBox.predictionAgentAct_utility_snoc` | theorem | `AgentEquations.Agent.utility`, `AgentEquations.History`, `DelusionBox.predictionAgentAct` |
+| `DelusionBox.predictionAgent_abs_utility_le` | theorem | `AgentEquations.Agent.utility`, `AgentEquations.History`, `DelusionBox.predictionAgent` |
+| `DelusionBox.predictionAgent_eq_predictionAgentAct` | theorem | `AgentEquations.Agent`, `AgentEquations.History`, `DelusionBox.predictionAgent`, `DelusionBox.predictionAgentAct` |
+| `DelusionBox.predictionAgent_existsUnique_zero_mistakes` | theorem | `AgentEquations.Agent.utility`, `AgentEquations.History`, `DelusionBox.predictionAgent` |
+| `DelusionBox.predictionAgent_horizonBudget_pos` | theorem | `AgentEquations.History`, `AgentEquations.horizonBudget`, `DelusionBox.predictionAgent` |
+| `DelusionBox.predictionAgent_policyActionValue_correct` | theorem | `AgentEquations.Belief`, `AgentEquations.Belief.IsSubprobability`, `AgentEquations.Belief.cond`, `AgentEquations.History`, `AgentEquations.horizonBudget`, `DelusionBox.predictionAgent`, `Mixture.policyActionValue` |
+| `DelusionBox.predictionAgent_policyActionValue_nonneg` | theorem | `AgentEquations.Belief`, `AgentEquations.Belief.cond`, `AgentEquations.History`, `DelusionBox.predictionAgent`, `Mixture.policyActionValue` |
+| `DelusionBox.predictionAgent_statement_three_of_posterior` | theorem | `AgentEquations.Belief`, `AgentEquations.Belief.IsSubprobability`, `AgentEquations.Belief.cond`, `AgentEquations.History`, `AgentEquations.actionValue`, `AgentEquations.horizonBudget`, `DelusionBox.predictionAgent`, `Mixture.mixtureBelief`, `Mixture.posterior` |
+| `DelusionBox.predictionAgent_statement_three_of_posterior_infinite` | theorem | `AgentEquations.Belief`, `AgentEquations.Belief.IsSubprobability`, `AgentEquations.Belief.cond`, `AgentEquations.History`, `AgentEquations.infiniteActionValue`, `DelusionBox.predictionAgent`, `Mixture.mixtureBelief`, `Mixture.posterior` |
+| `DelusionBox.predictionAgent_statement_three_of_posterior_infinite_program_ne` | theorem | `AgentEquations.Belief`, `AgentEquations.Belief.IsSubprobability`, `AgentEquations.Belief.cond`, `AgentEquations.History`, `AgentEquations.infiniteActionValue`, `DelusionBox.Act`, `DelusionBox.predictionAgent`, `DelusionBox.program`, `Mixture.mixtureBelief`, `Mixture.posterior` |
+| `DelusionBox.predictionAgent_utility_eq_one_iff` | theorem | `AgentEquations.Agent.utility`, `AgentEquations.History`, `DelusionBox.predictionAgent` |
+| `DelusionBox.predictionAgent_utility_nonneg` | theorem | `AgentEquations.Agent.utility`, `AgentEquations.History`, `DelusionBox.predictionAgent` |
+| `DelusionBox.predictionAgent_utility_snoc` | theorem | `AgentEquations.Agent.utility`, `AgentEquations.History`, `DelusionBox.predictionAgent` |
 | `DelusionBox.program` | definition | `DelusionBox.Act` |
+| `DelusionBox.program_ne_of_max` | theorem | `DelusionBox.Act`, `DelusionBox.program` |
 | `DelusionBox.rlAgent` | definition | `AgentEquations.Agent`, `DelusionBox.lastReward`, `DelusionBox.windowHorizon` |
+| `DelusionBox.rlAgentWith` | definition | `AgentEquations.Agent`, `DelusionBox.lastReward` |
+| `DelusionBox.rlAgentWith_abs_utility_le` | theorem | `AgentEquations.Agent.utility`, `AgentEquations.History`, `DelusionBox.rlAgentWith` |
+| `DelusionBox.rlAgentWith_horizonBudget_pos` | theorem | `AgentEquations.horizonBudget`, `DelusionBox.OneOnWindow`, `DelusionBox.rlAgentWith` |
+| `DelusionBox.rlAgentWith_policyActionValue_const` | theorem | `AgentEquations.Belief`, `AgentEquations.Belief.IsSubprobability`, `AgentEquations.Belief.cond`, `AgentEquations.History`, `AgentEquations.horizonBudget`, `DelusionBox.rlAgentWith`, `Mixture.policyActionValue` |
+| `DelusionBox.rlAgentWith_policyActionValue_nonneg` | theorem | `AgentEquations.Belief`, `AgentEquations.Belief.cond`, `AgentEquations.History`, `DelusionBox.rlAgentWith`, `Mixture.policyActionValue` |
+| `DelusionBox.rlAgentWith_statement_one_of_posterior` | theorem | `AgentEquations.Belief`, `AgentEquations.Belief.IsSubprobability`, `AgentEquations.Belief.cond`, `AgentEquations.History`, `AgentEquations.actionValue`, `AgentEquations.horizonBudget`, `DelusionBox.OneOnWindow`, `DelusionBox.rlAgentWith`, `Mixture.mixtureBelief`, `Mixture.posterior` |
+| `DelusionBox.rlAgent_abs_utility_le` | theorem | `AgentEquations.Agent.utility`, `AgentEquations.History`, `DelusionBox.rlAgent` |
 | `DelusionBox.rlAgent_actionValue_le` | theorem | `AgentEquations.Belief`, `AgentEquations.Belief.IsSubprobability`, `AgentEquations.History`, `AgentEquations.actionValue`, `DelusionBox.rlAgent` |
 | `DelusionBox.rlAgent_actionValue_next_const` | theorem | `AgentEquations.History`, `AgentEquations.actionValue`, `DelusionBox.Act`, `DelusionBox.GlobalEnv`, `DelusionBox.GlobalEnv.IsConstant`, `DelusionBox.GlobalEnv.next`, `DelusionBox.diracBelief`, `DelusionBox.program`, `DelusionBox.rlAgent` |
 | `DelusionBox.rlAgent_actionValue_nonneg` | theorem | `AgentEquations.Belief`, `AgentEquations.Belief.IsSubprobability`, `AgentEquations.History`, `AgentEquations.actionValue`, `DelusionBox.rlAgent` |
 | `DelusionBox.rlAgent_actionValue_zero` | theorem | `AgentEquations.Belief`, `AgentEquations.Belief.cond`, `AgentEquations.History`, `AgentEquations.actionValue`, `DelusionBox.rlAgent` |
+| `DelusionBox.rlAgent_eq_rlAgentWith` | theorem | `AgentEquations.Agent`, `DelusionBox.rlAgent`, `DelusionBox.rlAgentWith`, `DelusionBox.windowHorizon` |
+| `DelusionBox.rlAgent_horizonBudget_pos` | theorem | `AgentEquations.horizonBudget`, `DelusionBox.rlAgent` |
+| `DelusionBox.rlAgent_policyActionValue_const` | theorem | `AgentEquations.Belief`, `AgentEquations.Belief.IsSubprobability`, `AgentEquations.Belief.cond`, `AgentEquations.History`, `AgentEquations.horizonBudget`, `DelusionBox.rlAgent`, `Mixture.policyActionValue` |
+| `DelusionBox.rlAgent_policyActionValue_nonneg` | theorem | `AgentEquations.Belief`, `AgentEquations.Belief.cond`, `AgentEquations.History`, `DelusionBox.rlAgent`, `Mixture.policyActionValue` |
+| `DelusionBox.rlAgent_statement_one_of_posterior` | theorem | `AgentEquations.Belief`, `AgentEquations.Belief.IsSubprobability`, `AgentEquations.Belief.cond`, `AgentEquations.History`, `AgentEquations.actionValue`, `AgentEquations.horizonBudget`, `DelusionBox.rlAgent`, `Mixture.mixtureBelief`, `Mixture.posterior` |
+| `DelusionBox.rlAgent_statement_one_of_posterior_infinite` | theorem | `AgentEquations.Belief`, `AgentEquations.Belief.IsSubprobability`, `AgentEquations.Belief.cond`, `AgentEquations.History`, `AgentEquations.infiniteActionValue`, `DelusionBox.rlAgent`, `Mixture.mixtureBelief`, `Mixture.posterior` |
+| `DelusionBox.rlAgent_statement_one_of_posterior_infinite_program_ne` | theorem | `AgentEquations.Belief`, `AgentEquations.Belief.IsSubprobability`, `AgentEquations.Belief.cond`, `AgentEquations.History`, `AgentEquations.infiniteActionValue`, `DelusionBox.Act`, `DelusionBox.program`, `DelusionBox.rlAgent`, `Mixture.mixtureBelief`, `Mixture.posterior` |
 | `DelusionBox.rlAgent_value_zero_snoc` | theorem | `AgentEquations.Belief`, `AgentEquations.History`, `AgentEquations.value`, `DelusionBox.rlAgent` |
 | `DelusionBox.shortHorizon` | definition | — |
 | `DelusionBox.shortHorizon_ahead` | theorem | `DelusionBox.shortHorizon` |
@@ -307,13 +451,26 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 | `DelusionBox.spikeHorizon` | definition | — |
 | `DelusionBox.statement_one` | theorem | `AgentEquations.Agent`, `AgentEquations.Belief`, `AgentEquations.History`, `AgentEquations.actionValue`, `DelusionBox.MixesAt` |
 | `DelusionBox.statement_one_of_posterior` | theorem | `AgentEquations.Agent`, `AgentEquations.Agent.utility`, `AgentEquations.Belief`, `AgentEquations.Belief.IsSubprobability`, `AgentEquations.History`, `AgentEquations.actionValue`, `Mixture.mixtureBelief`, `Mixture.policyActionValue`, `Mixture.posterior` |
+| `DelusionBox.statement_one_of_posterior_infinite` | theorem | `AgentEquations.Agent`, `AgentEquations.Agent.horizon`, `AgentEquations.Agent.utility`, `AgentEquations.Belief`, `AgentEquations.Belief.IsSubprobability`, `AgentEquations.History`, `AgentEquations.infiniteActionValue`, `Mixture.infinitePolicyActionValue`, `Mixture.mixtureBelief`, `Mixture.posterior` |
+| `DelusionBox.statement_one_of_posterior_scaled` | theorem | `AgentEquations.Agent`, `AgentEquations.Agent.utility`, `AgentEquations.Belief`, `AgentEquations.Belief.IsSubprobability`, `AgentEquations.History`, `AgentEquations.actionValue`, `Mixture.mixtureBelief`, `Mixture.policyActionValue`, `Mixture.posterior` |
+| `DelusionBox.statement_one_scaled` | theorem | `AgentEquations.Agent`, `AgentEquations.Belief`, `AgentEquations.History`, `AgentEquations.actionValue`, `DelusionBox.MixesAt` |
 | `DelusionBox.statement_three` | theorem | `AgentEquations.Agent`, `AgentEquations.Belief`, `AgentEquations.History`, `AgentEquations.actionValue`, `DelusionBox.MixesAt` |
+| `DelusionBox.statement_three_infinite` | theorem | `AgentEquations.Agent`, `AgentEquations.Belief`, `AgentEquations.History`, `AgentEquations.infiniteActionValue` |
 | `DelusionBox.statement_three_of_posterior` | theorem | `AgentEquations.Agent`, `AgentEquations.Agent.utility`, `AgentEquations.Belief`, `AgentEquations.Belief.IsSubprobability`, `AgentEquations.History`, `AgentEquations.actionValue`, `Mixture.mixtureBelief`, `Mixture.policyActionValue`, `Mixture.posterior` |
+| `DelusionBox.statement_three_of_posterior_infinite` | theorem | `AgentEquations.Agent`, `AgentEquations.Agent.horizon`, `AgentEquations.Agent.utility`, `AgentEquations.Belief`, `AgentEquations.Belief.IsSubprobability`, `AgentEquations.History`, `AgentEquations.infiniteActionValue`, `Mixture.infinitePolicyActionValue`, `Mixture.mixtureBelief`, `Mixture.posterior` |
+| `DelusionBox.statement_three_of_posterior_infinite_program_ne` | theorem | `AgentEquations.Agent`, `AgentEquations.Agent.horizon`, `AgentEquations.Agent.utility`, `AgentEquations.Belief`, `AgentEquations.Belief.IsSubprobability`, `AgentEquations.History`, `AgentEquations.infiniteActionValue`, `DelusionBox.Act`, `DelusionBox.program`, `Mixture.infinitePolicyActionValue`, `Mixture.mixtureBelief`, `Mixture.posterior` |
+| `DelusionBox.statement_three_of_posterior_program_ne` | theorem | `AgentEquations.Agent`, `AgentEquations.Agent.utility`, `AgentEquations.Attains`, `AgentEquations.Belief`, `AgentEquations.Belief.IsSubprobability`, `AgentEquations.History`, `AgentEquations.actionValue`, `AgentEquations.bestAction`, `DelusionBox.Act`, `DelusionBox.program`, `Mixture.mixtureBelief`, `Mixture.policyActionValue`, `Mixture.posterior` |
+| `DelusionBox.statement_three_of_posterior_scaled` | theorem | `AgentEquations.Agent`, `AgentEquations.Agent.utility`, `AgentEquations.Belief`, `AgentEquations.Belief.IsSubprobability`, `AgentEquations.History`, `AgentEquations.actionValue`, `Mixture.mixtureBelief`, `Mixture.policyActionValue`, `Mixture.posterior` |
 | `DelusionBox.statement_two` | theorem | `AgentEquations.Agent`, `AgentEquations.Belief`, `AgentEquations.History`, `AgentEquations.actionValue`, `DelusionBox.MixesAt` |
+| `DelusionBox.statement_two_infinite` | theorem | `AgentEquations.Agent`, `AgentEquations.Agent.horizon`, `AgentEquations.Agent.utility`, `AgentEquations.Belief`, `AgentEquations.Belief.IsSubprobability`, `AgentEquations.History`, `AgentEquations.infiniteActionValue`, `Mixture.infinitePolicyActionValue`, `Mixture.mixtureBelief`, `Mixture.posterior` |
 | `DelusionBox.statement_two_of_posterior` | theorem | `AgentEquations.Agent`, `AgentEquations.Agent.utility`, `AgentEquations.Belief`, `AgentEquations.Belief.IsSubprobability`, `AgentEquations.History`, `AgentEquations.actionValue`, `Mixture.mixtureBelief`, `Mixture.policyActionValue`, `Mixture.posterior` |
+| `DelusionBox.statement_two_of_posterior_tsum` | theorem | `AgentEquations.Agent`, `AgentEquations.Agent.utility`, `AgentEquations.Belief`, `AgentEquations.Belief.IsSubprobability`, `AgentEquations.History`, `AgentEquations.actionValue`, `Mixture.mixtureBelief`, `Mixture.policyActionValue`, `Mixture.posterior` |
+| `DelusionBox.summable_abs_shortHorizon` | theorem | `DelusionBox.shortHorizon` |
 | `DelusionBox.threshold_unattainable_of_one_le` | theorem | — |
 | `DelusionBox.unitHorizon` | definition | — |
 | `DelusionBox.windowHorizon` | definition | — |
+| `DelusionBox.windowHorizon_eq_zero` | theorem | `DelusionBox.windowHorizon` |
+| `DelusionBox.windowHorizon_oneOnWindow` | theorem | `DelusionBox.OneOnWindow`, `DelusionBox.windowHorizon` |
 | `GoalPreservation.Model` | definition | — |
 | `GoalPreservation.Model.OptimalAt` | definition | `GoalPreservation.Model`, `GoalPreservation.Model.act`, `GoalPreservation.Model.qValue` |
 | `GoalPreservation.Model.goal_preservation` | theorem | `GoalPreservation.Model`, `GoalPreservation.Model.OptimalAt`, `GoalPreservation.Model.act`, `GoalPreservation.Model.qValue`, `GoalPreservation.Model.run` |
@@ -332,6 +489,13 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 | `GoalPreservation.scheduleValue_le_of_isMax` | theorem | `GoalPreservation.Schedule`, `GoalPreservation.scheduleValue` |
 | `GoalPreservation.scheduleValue_summable` | theorem | `GoalPreservation.Schedule` |
 | `GoalPreservation.stepHistory` | definition | — |
+| `GoalPreservationRun.ModIndepModel` | definition | — |
+| `GoalPreservationRun.ModIndepModel.contValue_le_initial` | theorem | `GoalPreservationRun.ModIndepModel`, `GoalPreservationRun.ModIndepModel.initial`, `GoalPreservationRun.RealisticModel.contValue` |
+| `GoalPreservationRun.ModIndepModel.initial_check` | theorem | `GoalPreservationRun.ModIndepModel`, `GoalPreservationRun.ModIndepModel.check`, `GoalPreservationRun.ModIndepModel.initial`, `GoalPreservationRun.RealisticModel.contValue` |
+| `GoalPreservationRun.ModIndepModel.initial_modIndep` | theorem | `GoalPreservationRun.ModIndepModel`, `GoalPreservationRun.ModIndepModel.initial`, `GoalPreservationRun.RealisticModel.contValue`, `GoalPreservationRun.RealisticModel.extend` |
+| `GoalPreservationRun.ModIndepModel.optimalAt_next` | theorem | `GoalPreservationRun.ModIndepModel`, `GoalPreservationRun.RealisticModel.OptimalAt`, `GoalPreservationRun.RealisticModel.act`, `GoalPreservationRun.RealisticModel.extend` |
+| `GoalPreservationRun.ModIndepModel.toNamedModel` | definition | `GoalPreservationRun.ModIndepModel`, `GoalPreservationRun.ModIndepModel.initial`, `GoalPreservationRun.ModIndepModel.initial_modIndep`, `GoalPreservationRun.ModIndepModel.initial_optimal`, `GoalPreservationRun.ModIndepModel.utility_modIndep`, `GoalPreservationRun.NamedModel`, `GoalPreservationRun.RealisticModel.act`, `GoalPreservationRun.RealisticModel.contValue`, `GoalPreservationRun.RealisticModel.discount`, `GoalPreservationRun.RealisticModel.extend`, `GoalPreservationRun.RealisticModel.prob`, `GoalPreservationRun.RealisticModel.utility` |
+| `GoalPreservationRun.ModIndepModel.utility_modIndep` | theorem | `GoalPreservationRun.ModIndepModel`, `GoalPreservationRun.RealisticModel.extend`, `GoalPreservationRun.RealisticModel.utility` |
 | `GoalPreservationRun.Model` | definition | — |
 | `GoalPreservationRun.Model.OptimalAt` | definition | `GoalPreservationRun.Model`, `GoalPreservationRun.Model.toSource`, `GoalPreservationSource.Model.OptimalAt` |
 | `GoalPreservationRun.Model.contValue_eq_qValue` | theorem | `GoalPreservationRun.Model`, `GoalPreservationRun.Model.act`, `GoalPreservationRun.Model.contValue`, `GoalPreservationRun.Model.qValue` |
@@ -345,8 +509,31 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 | `GoalPreservationRun.Model.run` | definition | `GoalPreservationRun.Model` |
 | `GoalPreservationRun.Model.run_contValue_eq_initial` | theorem | `GoalPreservationRun.Model`, `GoalPreservationRun.Model.contValue`, `GoalPreservationRun.Model.initial`, `GoalPreservationRun.Model.run` |
 | `GoalPreservationRun.Model.run_optimal` | theorem | `GoalPreservationRun.Model`, `GoalPreservationRun.Model.OptimalAt`, `GoalPreservationRun.Model.run` |
+| `GoalPreservationRun.Model.toNamed` | definition | `GoalPreservationRun.Model`, `GoalPreservationRun.Model.act`, `GoalPreservationRun.Model.bellman`, `GoalPreservationRun.Model.contValue`, `GoalPreservationRun.Model.discount`, `GoalPreservationRun.Model.discount_pos`, `GoalPreservationRun.Model.extend`, `GoalPreservationRun.Model.initial`, `GoalPreservationRun.Model.initial_optimal`, `GoalPreservationRun.Model.prob`, `GoalPreservationRun.Model.prob_pos`, `GoalPreservationRun.Model.prob_sum_one`, `GoalPreservationRun.Model.utility`, `GoalPreservationRun.NamedModel` |
+| `GoalPreservationRun.Model.toNamed_namedQValue` | theorem | `GoalPreservationRun.Model`, `GoalPreservationRun.Model.qValue`, `GoalPreservationRun.Model.toNamed`, `GoalPreservationRun.NamedModel.namedQValue` |
 | `GoalPreservationRun.Model.toSource` | definition | `GoalPreservationRun.Model`, `GoalPreservationRun.Model.act`, `GoalPreservationRun.Model.contValue`, `GoalPreservationRun.Model.contValue_le_initial`, `GoalPreservationRun.Model.discount`, `GoalPreservationRun.Model.discount_pos`, `GoalPreservationRun.Model.extend`, `GoalPreservationRun.Model.initial`, `GoalPreservationRun.Model.prob`, `GoalPreservationRun.Model.prob_pos`, `GoalPreservationRun.Model.prob_sum_one`, `GoalPreservationRun.Model.utility`, `GoalPreservationSource.Model` |
+| `GoalPreservationRun.NamedModel` | definition | — |
+| `GoalPreservationRun.NamedModel.NamedOptimalAt` | definition | `GoalPreservationRun.NamedModel`, `GoalPreservationRun.NamedModel.act`, `GoalPreservationRun.NamedModel.namedQValue` |
+| `GoalPreservationRun.NamedModel.namedContValue_eq_qValue` | theorem | `GoalPreservationRun.NamedModel`, `GoalPreservationRun.NamedModel.act`, `GoalPreservationRun.NamedModel.contValue`, `GoalPreservationRun.NamedModel.namedQValue` |
+| `GoalPreservationRun.NamedModel.namedContValue_le_initial` | theorem | `GoalPreservationRun.NamedModel`, `GoalPreservationRun.NamedModel.contValue`, `GoalPreservationRun.NamedModel.initial` |
+| `GoalPreservationRun.NamedModel.namedOptimalAt_initial` | theorem | `GoalPreservationRun.NamedModel`, `GoalPreservationRun.NamedModel.NamedOptimalAt`, `GoalPreservationRun.NamedModel.initial` |
+| `GoalPreservationRun.NamedModel.namedOptimalAt_next` | theorem | `GoalPreservationRun.NamedModel`, `GoalPreservationRun.NamedModel.NamedOptimalAt`, `GoalPreservationRun.NamedModel.act`, `GoalPreservationRun.NamedModel.extend` |
+| `GoalPreservationRun.NamedModel.namedQValue` | definition | `GoalPreservationRun.NamedModel`, `GoalPreservationRun.NamedModel.contValue`, `GoalPreservationRun.NamedModel.discount`, `GoalPreservationRun.NamedModel.extend`, `GoalPreservationRun.NamedModel.prob`, `GoalPreservationRun.NamedModel.utility` |
+| `GoalPreservationRun.NamedModel.namedRun` | definition | `GoalPreservationRun.NamedModel` |
+| `GoalPreservationRun.NamedModel.namedRun_optimal` | theorem | `GoalPreservationRun.NamedModel`, `GoalPreservationRun.NamedModel.NamedOptimalAt`, `GoalPreservationRun.NamedModel.namedRun` |
+| `GoalPreservationRun.NamedModel.named_equation_thirteen` | theorem | `GoalPreservationRun.NamedModel`, `GoalPreservationRun.NamedModel.act`, `GoalPreservationRun.NamedModel.initial`, `GoalPreservationRun.NamedModel.namedQValue`, `GoalPreservationRun.NamedModel.namedRun` |
+| `GoalPreservationRun.NamedModel.named_selected_matches_initial` | theorem | `GoalPreservationRun.NamedModel`, `GoalPreservationRun.NamedModel.NamedOptimalAt`, `GoalPreservationRun.NamedModel.act`, `GoalPreservationRun.NamedModel.contValue`, `GoalPreservationRun.NamedModel.extend`, `GoalPreservationRun.NamedModel.initial` |
+| `GoalPreservationRun.NamedModel.realisticValue` | definition | `GoalPreservationRun.NamedModel`, `GoalPreservationRun.NamedModel.namedQValue`, `GoalPreservationRun.Policy` |
+| `GoalPreservationRun.NamedModel.realisticValue_name` | theorem | `GoalPreservationRun.NamedModel`, `GoalPreservationRun.NamedModel.act`, `GoalPreservationRun.NamedModel.contValue`, `GoalPreservationRun.NamedModel.realisticValue` |
+| `GoalPreservationRun.NamedModel.toRealistic` | definition | `GoalPreservationRun.NamedModel`, `GoalPreservationRun.NamedModel.act`, `GoalPreservationRun.NamedModel.bellman`, `GoalPreservationRun.NamedModel.contValue`, `GoalPreservationRun.NamedModel.discount`, `GoalPreservationRun.NamedModel.discount_pos`, `GoalPreservationRun.NamedModel.extend`, `GoalPreservationRun.NamedModel.prob`, `GoalPreservationRun.NamedModel.prob_pos`, `GoalPreservationRun.NamedModel.prob_sum_one`, `GoalPreservationRun.NamedModel.utility`, `GoalPreservationRun.RealisticModel` |
+| `GoalPreservationRun.NamedModel.toRealistic_qValue` | theorem | `GoalPreservationRun.NamedModel`, `GoalPreservationRun.NamedModel.namedQValue`, `GoalPreservationRun.NamedModel.toRealistic`, `GoalPreservationRun.RealisticModel.qValue` |
 | `GoalPreservationRun.Policy` | definition | — |
+| `GoalPreservationRun.RealisticModel` | definition | — |
+| `GoalPreservationRun.RealisticModel.OptimalAt` | definition | `GoalPreservationRun.RealisticModel`, `GoalPreservationRun.RealisticModel.act`, `GoalPreservationRun.RealisticModel.qValue` |
+| `GoalPreservationRun.RealisticModel.contValue_eq_qValue` | theorem | `GoalPreservationRun.RealisticModel`, `GoalPreservationRun.RealisticModel.act`, `GoalPreservationRun.RealisticModel.contValue`, `GoalPreservationRun.RealisticModel.qValue` |
+| `GoalPreservationRun.RealisticModel.qValue` | definition | `GoalPreservationRun.RealisticModel`, `GoalPreservationRun.RealisticModel.contValue`, `GoalPreservationRun.RealisticModel.discount`, `GoalPreservationRun.RealisticModel.extend`, `GoalPreservationRun.RealisticModel.prob`, `GoalPreservationRun.RealisticModel.utility` |
+| `GoalPreservationRun.RealisticModel.realisticValue` | definition | `GoalPreservationRun.Policy`, `GoalPreservationRun.RealisticModel`, `GoalPreservationRun.RealisticModel.qValue` |
+| `GoalPreservationRun.RealisticModel.realisticValue_name` | theorem | `GoalPreservationRun.RealisticModel`, `GoalPreservationRun.RealisticModel.act`, `GoalPreservationRun.RealisticModel.contValue`, `GoalPreservationRun.RealisticModel.realisticValue` |
 | `GoalPreservationSource.Model` | definition | — |
 | `GoalPreservationSource.Model.OptimalAt` | definition | `GoalPreservationSource.Model`, `GoalPreservationSource.Model.act`, `GoalPreservationSource.Model.qValue` |
 | `GoalPreservationSource.Model.name` | definition | `GoalPreservationSource.Model`, `GoalPreservationSource.Model.act`, `GoalPreservationSource.Policy` |
@@ -360,7 +547,15 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 | `GoalPreservationSource.Model.safe_modification` | theorem | `GoalPreservationSource.Model`, `GoalPreservationSource.Model.OptimalAt`, `GoalPreservationSource.Model.act`, `GoalPreservationSource.Model.contValue`, `GoalPreservationSource.Model.extend`, `GoalPreservationSource.Model.initial` |
 | `GoalPreservationSource.Model.selected_matches_initial` | theorem | `GoalPreservationSource.Model`, `GoalPreservationSource.Model.OptimalAt`, `GoalPreservationSource.Model.act`, `GoalPreservationSource.Model.contValue`, `GoalPreservationSource.Model.extend`, `GoalPreservationSource.Model.initial` |
 | `GoalPreservationSource.Policy` | definition | — |
+| `Mixture.abs_policyValue_le_horizonBudget` | theorem | `AgentEquations.Agent`, `AgentEquations.Agent.utility`, `AgentEquations.Belief`, `AgentEquations.Belief.IsSubprobability`, `AgentEquations.History`, `AgentEquations.horizonBudget`, `Mixture.policyValue` |
+| `Mixture.abs_policyValue_succ_sub_le` | theorem | `AgentEquations.Agent`, `AgentEquations.Agent.horizon`, `AgentEquations.Agent.utility`, `AgentEquations.Belief`, `AgentEquations.Belief.IsSubprobability`, `AgentEquations.History`, `Mixture.policyValue` |
 | `Mixture.actionValue_mixture_le` | theorem | `AgentEquations.Agent`, `AgentEquations.Agent.utility`, `AgentEquations.Belief`, `AgentEquations.Belief.IsSubprobability`, `AgentEquations.History`, `AgentEquations.actionValue`, `Mixture.mixtureBelief`, `Mixture.posterior` |
+| `Mixture.actionValue_mixture_le_tsum` | theorem | `AgentEquations.Agent`, `AgentEquations.Agent.utility`, `AgentEquations.Belief`, `AgentEquations.Belief.IsSubprobability`, `AgentEquations.History`, `AgentEquations.actionValue`, `Mixture.mixtureBelief`, `Mixture.posterior` |
+| `Mixture.infiniteActionValue_mixture_le` | theorem | `AgentEquations.Agent`, `AgentEquations.Agent.horizon`, `AgentEquations.Agent.utility`, `AgentEquations.Belief`, `AgentEquations.Belief.IsSubprobability`, `AgentEquations.History`, `AgentEquations.infiniteActionValue`, `Mixture.mixtureBelief`, `Mixture.posterior` |
+| `Mixture.infinitePolicyActionValue` | definition | `AgentEquations.Agent`, `AgentEquations.Belief`, `AgentEquations.History`, `Mixture.policyActionValue` |
+| `Mixture.infinitePolicyActionValue_le_infiniteActionValue` | theorem | `AgentEquations.Agent`, `AgentEquations.Agent.horizon`, `AgentEquations.Agent.utility`, `AgentEquations.Belief`, `AgentEquations.Belief.IsSubprobability`, `AgentEquations.History`, `AgentEquations.infiniteActionValue`, `Mixture.infinitePolicyActionValue` |
+| `Mixture.infinitePolicyActionValue_mixture` | theorem | `AgentEquations.Agent`, `AgentEquations.Agent.horizon`, `AgentEquations.Agent.utility`, `AgentEquations.Belief`, `AgentEquations.Belief.IsSubprobability`, `AgentEquations.History`, `Mixture.infinitePolicyActionValue`, `Mixture.mixtureBelief`, `Mixture.posterior` |
+| `Mixture.infinitePolicyValue` | definition | `AgentEquations.Agent`, `AgentEquations.Belief`, `AgentEquations.History`, `Mixture.policyValue` |
 | `Mixture.mixtureBelief` | definition | `AgentEquations.Belief`, `AgentEquations.Belief.cond`, `AgentEquations.History`, `Mixture.posterior` |
 | `Mixture.mixtureBelief_cond` | theorem | `AgentEquations.Belief`, `AgentEquations.Belief.cond`, `AgentEquations.History`, `Mixture.mixtureBelief`, `Mixture.posterior` |
 | `Mixture.mixtureBelief_cond_mul_one_sub_posterior` | theorem | `AgentEquations.Belief`, `AgentEquations.Belief.cond`, `AgentEquations.History`, `Mixture.mixtureBelief`, `Mixture.posterior` |
@@ -369,17 +564,27 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 | `Mixture.mixtureBelief_isSubprobability` | theorem | `AgentEquations.Belief`, `AgentEquations.Belief.IsSubprobability`, `Mixture.mixtureBelief` |
 | `Mixture.policyActionValue` | definition | `AgentEquations.Agent`, `AgentEquations.Belief`, `AgentEquations.Belief.cond`, `AgentEquations.History`, `Mixture.policyValue` |
 | `Mixture.policyActionValue_le_actionValue` | theorem | `AgentEquations.Agent`, `AgentEquations.Agent.utility`, `AgentEquations.Belief`, `AgentEquations.Belief.IsSubprobability`, `AgentEquations.History`, `AgentEquations.actionValue`, `Mixture.policyActionValue` |
+| `Mixture.policyActionValue_le_actionValue_tsum` | theorem | `AgentEquations.Agent`, `AgentEquations.Agent.utility`, `AgentEquations.Belief`, `AgentEquations.Belief.IsSubprobability`, `AgentEquations.History`, `AgentEquations.actionValue`, `Mixture.policyActionValue` |
 | `Mixture.policyActionValue_mixture` | theorem | `AgentEquations.Agent`, `AgentEquations.Belief`, `AgentEquations.Belief.cond`, `AgentEquations.History`, `Mixture.mixtureBelief`, `Mixture.policyActionValue`, `Mixture.posterior` |
+| `Mixture.policyActionValue_mixture_tsum` | theorem | `AgentEquations.Agent`, `AgentEquations.Agent.utility`, `AgentEquations.Belief`, `AgentEquations.Belief.IsSubprobability`, `AgentEquations.History`, `Mixture.mixtureBelief`, `Mixture.policyActionValue`, `Mixture.posterior` |
+| `Mixture.policyActionValue_nonneg` | theorem | `AgentEquations.Agent`, `AgentEquations.Agent.horizon`, `AgentEquations.Agent.utility`, `AgentEquations.Belief`, `AgentEquations.Belief.cond`, `AgentEquations.History`, `Mixture.policyActionValue` |
 | `Mixture.policyValue` | definition | `AgentEquations.Agent`, `AgentEquations.Belief`, `AgentEquations.History` |
+| `Mixture.policyValue_cauchySeq` | theorem | `AgentEquations.Agent`, `AgentEquations.Agent.horizon`, `AgentEquations.Agent.utility`, `AgentEquations.Belief`, `AgentEquations.Belief.IsSubprobability`, `AgentEquations.History`, `Mixture.policyValue` |
 | `Mixture.policyValue_le_value` | theorem | `AgentEquations.Agent`, `AgentEquations.Agent.utility`, `AgentEquations.Belief`, `AgentEquations.Belief.IsSubprobability`, `AgentEquations.History`, `AgentEquations.value`, `Mixture.policyValue` |
+| `Mixture.policyValue_le_value_tsum` | theorem | `AgentEquations.Agent`, `AgentEquations.Agent.utility`, `AgentEquations.Belief`, `AgentEquations.Belief.IsSubprobability`, `AgentEquations.History`, `AgentEquations.value`, `Mixture.policyValue` |
 | `Mixture.policyValue_mixture` | theorem | `AgentEquations.Agent`, `AgentEquations.Belief`, `AgentEquations.Belief.cond`, `AgentEquations.History`, `Mixture.mixtureBelief`, `Mixture.policyValue`, `Mixture.posterior` |
+| `Mixture.policyValue_mixture_tsum` | theorem | `AgentEquations.Agent`, `AgentEquations.Agent.utility`, `AgentEquations.Belief`, `AgentEquations.Belief.IsSubprobability`, `AgentEquations.History`, `Mixture.mixtureBelief`, `Mixture.policyValue`, `Mixture.posterior` |
+| `Mixture.policyValue_nonneg` | theorem | `AgentEquations.Agent`, `AgentEquations.Agent.horizon`, `AgentEquations.Agent.utility`, `AgentEquations.Belief`, `AgentEquations.Belief.cond`, `AgentEquations.History`, `Mixture.policyValue` |
 | `Mixture.policyValue_succ` | theorem | `AgentEquations.Agent`, `AgentEquations.Agent.horizon`, `AgentEquations.Agent.utility`, `AgentEquations.Belief`, `AgentEquations.History`, `Mixture.policyActionValue`, `Mixture.policyValue` |
 | `Mixture.policyValue_zero` | theorem | `AgentEquations.Agent`, `AgentEquations.Agent.horizon`, `AgentEquations.Agent.utility`, `AgentEquations.Belief`, `AgentEquations.History`, `Mixture.policyValue` |
 | `Mixture.posterior` | definition | `AgentEquations.Belief`, `AgentEquations.History`, `AgentEquations.historyMass` |
 | `Mixture.posterior_le_one` | theorem | `AgentEquations.Belief`, `AgentEquations.Belief.cond`, `AgentEquations.History`, `Mixture.posterior` |
 | `Mixture.posterior_nil` | theorem | `AgentEquations.Belief`, `Mixture.posterior` |
 | `Mixture.posterior_nonneg` | theorem | `AgentEquations.Belief`, `AgentEquations.Belief.cond`, `AgentEquations.History`, `Mixture.posterior` |
+| `Mixture.tendsto_policyActionValue_infinitePolicyActionValue` | theorem | `AgentEquations.Agent`, `AgentEquations.Agent.horizon`, `AgentEquations.Agent.utility`, `AgentEquations.Belief`, `AgentEquations.Belief.IsSubprobability`, `AgentEquations.History`, `Mixture.infinitePolicyActionValue`, `Mixture.policyActionValue` |
+| `Mixture.tendsto_policyValue_infinitePolicyValue` | theorem | `AgentEquations.Agent`, `AgentEquations.Agent.horizon`, `AgentEquations.Agent.utility`, `AgentEquations.Belief`, `AgentEquations.Belief.IsSubprobability`, `AgentEquations.History`, `Mixture.infinitePolicyValue`, `Mixture.policyValue` |
 | `Mixture.value_mixture_le` | theorem | `AgentEquations.Agent`, `AgentEquations.Agent.utility`, `AgentEquations.Belief`, `AgentEquations.Belief.IsSubprobability`, `AgentEquations.History`, `AgentEquations.value`, `Mixture.mixtureBelief`, `Mixture.posterior` |
+| `Mixture.value_mixture_le_tsum` | theorem | `AgentEquations.Agent`, `AgentEquations.Agent.utility`, `AgentEquations.Belief`, `AgentEquations.Belief.IsSubprobability`, `AgentEquations.History`, `AgentEquations.value`, `Mixture.mixtureBelief`, `Mixture.posterior` |
 | `Objective` | definition | — |
 | `Objective.IsOptimal` | definition | `Objective`, `Objective.decisionValue` |
 | `Objective.decisionValue` | definition | `Objective`, `Objective.value` |
@@ -399,12 +604,24 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 | `ObservationLimits.trueReturn` | definition | `CRMDP.Env`, `CRMDP.Policy`, `CRMDP.returnOver` |
 | `ObservationLimits.zeroEnv` | definition | `CRMDP.Env`, `CRMDP.Reward` |
 | `ProgramPrior.Model` | definition | — |
+| `ProgramPrior.Model.AsymptoticallyOptimal` | definition | `AgentEquations.Agent`, `AgentEquations.History`, `AgentEquations.InfAttains`, `ProgramPrior.Model`, `ProgramPrior.Model.Mistake`, `ProgramPrior.Model.belief`, `ProgramPrior.Model.point`, `ProgramPrior.Model.run`, `ProgramPrior.trajectory` |
+| `ProgramPrior.Model.AsymptoticallyOptimalOfLeast` | definition | `AgentEquations.Agent`, `AgentEquations.History`, `AgentEquations.InfLexAttains`, `ProgramPrior.Model`, `ProgramPrior.Model.MistakeOfLeast`, `ProgramPrior.Model.belief`, `ProgramPrior.Model.point`, `ProgramPrior.Model.run`, `ProgramPrior.trajectory` |
+| `ProgramPrior.Model.AsymptoticallyOptimalRateOfLeast` | definition | `AgentEquations.Agent`, `AgentEquations.History`, `AgentEquations.InfLexAttains`, `ProgramPrior.Model`, `ProgramPrior.Model.MistakeOfLeast`, `ProgramPrior.Model.belief`, `ProgramPrior.Model.point`, `ProgramPrior.Model.run`, `ProgramPrior.trajectory` |
 | `ProgramPrior.Model.Consistent` | definition | `AgentEquations.History`, `ProgramPrior.Model` |
 | `ProgramPrior.Model.Consistent.below.nil` | definition | `AgentEquations.History`, `ProgramPrior.Model`, `ProgramPrior.Model.Consistent`, `ProgramPrior.Model.Consistent.nil` |
 | `ProgramPrior.Model.Consistent.below.snoc` | definition | `AgentEquations.History`, `ProgramPrior.Model`, `ProgramPrior.Model.Consistent`, `ProgramPrior.Model.Consistent.snoc`, `ProgramPrior.Model.run` |
 | `ProgramPrior.Model.Consistent.nil` | definition | `ProgramPrior.Model`, `ProgramPrior.Model.Consistent` |
 | `ProgramPrior.Model.Consistent.snoc` | definition | `AgentEquations.History`, `ProgramPrior.Model`, `ProgramPrior.Model.Consistent`, `ProgramPrior.Model.run` |
+| `ProgramPrior.Model.Mistake` | definition | `AgentEquations.Agent`, `AgentEquations.History`, `AgentEquations.InfAttains`, `ProgramPrior.Model`, `ProgramPrior.Model.belief`, `ProgramPrior.Model.optimalPolicy`, `ProgramPrior.Model.point` |
+| `ProgramPrior.Model.MistakeOfLeast` | definition | `AgentEquations.Agent`, `AgentEquations.History`, `AgentEquations.InfLexAttains`, `ProgramPrior.Model`, `ProgramPrior.Model.belief`, `ProgramPrior.Model.optimalPolicyOfLeast`, `ProgramPrior.Model.point` |
 | `ProgramPrior.Model.actionValue_eq_programSum` | theorem | `AgentEquations.Agent`, `AgentEquations.Agent.utility`, `AgentEquations.History`, `AgentEquations.actionValue`, `AgentEquations.value`, `ProgramPrior.Model`, `ProgramPrior.Model.Consistent`, `ProgramPrior.Model.belief`, `ProgramPrior.Model.mass`, `ProgramPrior.Model.run`, `ProgramPrior.Model.weight` |
+| `ProgramPrior.Model.actionValue_point_eq` | theorem | `AgentEquations.Agent`, `AgentEquations.History`, `AgentEquations.actionValue`, `DelusionBox.diracBelief`, `ProgramPrior.Model`, `ProgramPrior.Model.Consistent`, `ProgramPrior.Model.belief`, `ProgramPrior.Model.point`, `ProgramPrior.Model.run` |
+| `ProgramPrior.Model.asymptoticallyOptimalOfLeast_iff` | theorem | `AgentEquations.Agent`, `AgentEquations.History`, `AgentEquations.InfAttains`, `AgentEquations.InfLexAttains`, `ProgramPrior.Model`, `ProgramPrior.Model.AsymptoticallyOptimal`, `ProgramPrior.Model.AsymptoticallyOptimalOfLeast`, `ProgramPrior.Model.belief`, `ProgramPrior.Model.point` |
+| `ProgramPrior.Model.asymptoticallyOptimalOfLeast_iff_tendsto` | theorem | `AgentEquations.Agent`, `AgentEquations.History`, `AgentEquations.InfLexAttains`, `ProgramPrior.Model`, `ProgramPrior.Model.AsymptoticallyOptimalOfLeast`, `ProgramPrior.Model.MistakeOfLeast`, `ProgramPrior.Model.belief`, `ProgramPrior.Model.point`, `ProgramPrior.Model.run`, `ProgramPrior.trajectory` |
+| `ProgramPrior.Model.asymptoticallyOptimalOfLeast_optimalPolicyOfLeast` | theorem | `AgentEquations.Agent`, `AgentEquations.History`, `AgentEquations.InfLexAttains`, `ProgramPrior.Model`, `ProgramPrior.Model.AsymptoticallyOptimalOfLeast`, `ProgramPrior.Model.belief`, `ProgramPrior.Model.optimalPolicyOfLeast`, `ProgramPrior.Model.point` |
+| `ProgramPrior.Model.asymptoticallyOptimalRateOfLeast_of_asymptoticallyOptimalOfLeast` | theorem | `AgentEquations.Agent`, `AgentEquations.History`, `AgentEquations.InfLexAttains`, `ProgramPrior.Model`, `ProgramPrior.Model.AsymptoticallyOptimalOfLeast`, `ProgramPrior.Model.AsymptoticallyOptimalRateOfLeast`, `ProgramPrior.Model.belief`, `ProgramPrior.Model.point` |
+| `ProgramPrior.Model.asymptoticallyOptimal_iff_tendsto` | theorem | `AgentEquations.Agent`, `AgentEquations.History`, `AgentEquations.InfAttains`, `ProgramPrior.Model`, `ProgramPrior.Model.AsymptoticallyOptimal`, `ProgramPrior.Model.Mistake`, `ProgramPrior.Model.belief`, `ProgramPrior.Model.point`, `ProgramPrior.Model.run`, `ProgramPrior.trajectory` |
+| `ProgramPrior.Model.asymptoticallyOptimal_optimalPolicy` | theorem | `AgentEquations.Agent`, `AgentEquations.History`, `AgentEquations.InfAttains`, `ProgramPrior.Model`, `ProgramPrior.Model.AsymptoticallyOptimal`, `ProgramPrior.Model.belief`, `ProgramPrior.Model.optimalPolicy`, `ProgramPrior.Model.point` |
 | `ProgramPrior.Model.belief` | definition | `AgentEquations.Belief`, `AgentEquations.History`, `ProgramPrior.Model`, `ProgramPrior.Model.mass` |
 | `ProgramPrior.Model.belief_isSubprobability` | theorem | `AgentEquations.Belief.IsSubprobability`, `ProgramPrior.Model`, `ProgramPrior.Model.belief` |
 | `ProgramPrior.Model.belief_nonneg` | theorem | `AgentEquations.Belief.cond`, `AgentEquations.History`, `ProgramPrior.Model`, `ProgramPrior.Model.belief` |
@@ -414,6 +631,8 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 | `ProgramPrior.Model.consistent_snoc` | theorem | `AgentEquations.History`, `ProgramPrior.Model`, `ProgramPrior.Model.Consistent`, `ProgramPrior.Model.run` |
 | `ProgramPrior.Model.expectation_eq_programSum` | theorem | `AgentEquations.Belief.cond`, `AgentEquations.History`, `ProgramPrior.Model`, `ProgramPrior.Model.Consistent`, `ProgramPrior.Model.belief`, `ProgramPrior.Model.mass`, `ProgramPrior.Model.run`, `ProgramPrior.Model.weight` |
 | `ProgramPrior.Model.historyMass_eq_mass` | theorem | `AgentEquations.History`, `AgentEquations.historyMass`, `ProgramPrior.Model`, `ProgramPrior.Model.belief`, `ProgramPrior.Model.mass` |
+| `ProgramPrior.Model.infiniteActionValue_point_eq` | theorem | `AgentEquations.Agent`, `AgentEquations.History`, `AgentEquations.infiniteActionValue`, `DelusionBox.diracBelief`, `ProgramPrior.Model`, `ProgramPrior.Model.Consistent`, `ProgramPrior.Model.belief`, `ProgramPrior.Model.point`, `ProgramPrior.Model.run` |
+| `ProgramPrior.Model.infiniteValue_point_eq` | theorem | `AgentEquations.Agent`, `AgentEquations.History`, `AgentEquations.infiniteValue`, `DelusionBox.diracBelief`, `ProgramPrior.Model`, `ProgramPrior.Model.Consistent`, `ProgramPrior.Model.belief`, `ProgramPrior.Model.point`, `ProgramPrior.Model.run` |
 | `ProgramPrior.Model.knowledgeAgent` | definition | `AgentEquations.Agent`, `DelusionBox.knowledgeAgent`, `ProgramPrior.Model`, `ProgramPrior.Model.mass` |
 | `ProgramPrior.Model.mass` | definition | `AgentEquations.History`, `ProgramPrior.Model`, `ProgramPrior.Model.Consistent`, `ProgramPrior.Model.weight` |
 | `ProgramPrior.Model.mass_eq_historyMass` | theorem | `AgentEquations.History`, `AgentEquations.historyMass`, `ProgramPrior.Model`, `ProgramPrior.Model.belief`, `ProgramPrior.Model.mass` |
@@ -424,16 +643,92 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 | `ProgramPrior.Model.mass_pos_of_consistent` | theorem | `AgentEquations.History`, `ProgramPrior.Model`, `ProgramPrior.Model.Consistent`, `ProgramPrior.Model.mass`, `ProgramPrior.Model.weight` |
 | `ProgramPrior.Model.mass_snoc_le` | theorem | `AgentEquations.History`, `ProgramPrior.Model`, `ProgramPrior.Model.mass` |
 | `ProgramPrior.Model.mass_sum_extensions` | theorem | `AgentEquations.History`, `ProgramPrior.Model`, `ProgramPrior.Model.mass` |
+| `ProgramPrior.Model.mistakeOfLeast_iff_mistake` | theorem | `AgentEquations.Agent`, `AgentEquations.History`, `AgentEquations.InfAttains`, `AgentEquations.InfLexAttains`, `ProgramPrior.Model`, `ProgramPrior.Model.Mistake`, `ProgramPrior.Model.MistakeOfLeast`, `ProgramPrior.Model.belief`, `ProgramPrior.Model.point` |
+| `ProgramPrior.Model.optimalAction` | definition | `AgentEquations.Agent`, `AgentEquations.History`, `AgentEquations.InfAttains`, `AgentEquations.infiniteLexBestAction`, `ProgramPrior.Model`, `ProgramPrior.Model.belief`, `ProgramPrior.Model.point` |
+| `ProgramPrior.Model.optimalActionOfLeast` | definition | `AgentEquations.Agent`, `AgentEquations.History`, `AgentEquations.InfLexAttains`, `AgentEquations.infiniteLexBestActionOfLeast`, `ProgramPrior.Model`, `ProgramPrior.Model.belief`, `ProgramPrior.Model.point` |
+| `ProgramPrior.Model.optimalActionOfLeast_eq_optimalAction` | theorem | `AgentEquations.Agent`, `AgentEquations.History`, `AgentEquations.InfAttains`, `AgentEquations.InfLexAttains`, `ProgramPrior.Model`, `ProgramPrior.Model.belief`, `ProgramPrior.Model.optimalAction`, `ProgramPrior.Model.optimalActionOfLeast`, `ProgramPrior.Model.point` |
+| `ProgramPrior.Model.optimalActionOfLeast_max` | theorem | `AgentEquations.Agent`, `AgentEquations.History`, `AgentEquations.InfLexAttains`, `AgentEquations.infiniteActionValue`, `DelusionBox.diracBelief`, `ProgramPrior.Model`, `ProgramPrior.Model.Consistent`, `ProgramPrior.Model.belief`, `ProgramPrior.Model.optimalActionOfLeast`, `ProgramPrior.Model.point`, `ProgramPrior.Model.run` |
+| `ProgramPrior.Model.optimalAction_max` | theorem | `AgentEquations.Agent`, `AgentEquations.History`, `AgentEquations.InfAttains`, `AgentEquations.infiniteActionValue`, `DelusionBox.diracBelief`, `ProgramPrior.Model`, `ProgramPrior.Model.Consistent`, `ProgramPrior.Model.belief`, `ProgramPrior.Model.optimalAction`, `ProgramPrior.Model.point`, `ProgramPrior.Model.run` |
+| `ProgramPrior.Model.optimalPolicy` | definition | `AgentEquations.Agent`, `AgentEquations.History`, `AgentEquations.InfAttains`, `ProgramPrior.Model`, `ProgramPrior.Model.belief`, `ProgramPrior.Model.optimalAction`, `ProgramPrior.Model.point` |
+| `ProgramPrior.Model.optimalPolicyOfLeast` | definition | `AgentEquations.Agent`, `AgentEquations.History`, `AgentEquations.InfLexAttains`, `ProgramPrior.Model`, `ProgramPrior.Model.belief`, `ProgramPrior.Model.optimalActionOfLeast`, `ProgramPrior.Model.point` |
+| `ProgramPrior.Model.optimal_along_trajectory` | theorem | `AgentEquations.Agent`, `AgentEquations.History`, `AgentEquations.InfAttains`, `AgentEquations.infiniteActionValue`, `AgentEquations.infiniteBestAction`, `DelusionBox.diracBelief`, `ProgramPrior.Model`, `ProgramPrior.Model.Consistent`, `ProgramPrior.Model.belief`, `ProgramPrior.Model.point`, `ProgramPrior.Model.run`, `ProgramPrior.trajectory` |
+| `ProgramPrior.Model.optimal_of_maximizer` | theorem | `AgentEquations.Agent`, `AgentEquations.History`, `AgentEquations.infiniteActionValue`, `DelusionBox.diracBelief`, `ProgramPrior.Model`, `ProgramPrior.Model.Consistent`, `ProgramPrior.Model.belief`, `ProgramPrior.Model.point`, `ProgramPrior.Model.run` |
+| `ProgramPrior.Model.optimal_of_same_bestAction` | theorem | `AgentEquations.Agent`, `AgentEquations.Attains`, `AgentEquations.History`, `AgentEquations.actionValue`, `AgentEquations.bestAction`, `DelusionBox.diracBelief`, `ProgramPrior.Model`, `ProgramPrior.Model.Consistent`, `ProgramPrior.Model.belief`, `ProgramPrior.Model.point`, `ProgramPrior.Model.run` |
+| `ProgramPrior.Model.optimal_of_same_infiniteBestAction` | theorem | `AgentEquations.Agent`, `AgentEquations.History`, `AgentEquations.InfAttains`, `AgentEquations.infiniteActionValue`, `AgentEquations.infiniteBestAction`, `DelusionBox.diracBelief`, `ProgramPrior.Model`, `ProgramPrior.Model.Consistent`, `ProgramPrior.Model.belief`, `ProgramPrior.Model.point`, `ProgramPrior.Model.run` |
+| `ProgramPrior.Model.optimal_of_same_infiniteLexBestAction` | theorem | `AgentEquations.Agent`, `AgentEquations.History`, `AgentEquations.InfAttains`, `AgentEquations.infiniteActionValue`, `AgentEquations.infiniteLexBestAction`, `DelusionBox.diracBelief`, `ProgramPrior.Model`, `ProgramPrior.Model.Consistent`, `ProgramPrior.Model.belief`, `ProgramPrior.Model.point`, `ProgramPrior.Model.run` |
+| `ProgramPrior.Model.optimal_of_same_infiniteLexBestActionOfLeast` | theorem | `AgentEquations.Agent`, `AgentEquations.History`, `AgentEquations.InfLexAttains`, `AgentEquations.infiniteActionValue`, `AgentEquations.infiniteLexBestActionOfLeast`, `DelusionBox.diracBelief`, `ProgramPrior.Model`, `ProgramPrior.Model.Consistent`, `ProgramPrior.Model.belief`, `ProgramPrior.Model.point`, `ProgramPrior.Model.run` |
+| `ProgramPrior.Model.optimal_of_same_optimalAction` | theorem | `AgentEquations.Agent`, `AgentEquations.History`, `AgentEquations.InfAttains`, `AgentEquations.infiniteActionValue`, `DelusionBox.diracBelief`, `ProgramPrior.Model`, `ProgramPrior.Model.Consistent`, `ProgramPrior.Model.belief`, `ProgramPrior.Model.optimalAction`, `ProgramPrior.Model.point`, `ProgramPrior.Model.run` |
+| `ProgramPrior.Model.optimal_of_same_optimalActionOfLeast` | theorem | `AgentEquations.Agent`, `AgentEquations.History`, `AgentEquations.InfLexAttains`, `AgentEquations.infiniteActionValue`, `DelusionBox.diracBelief`, `ProgramPrior.Model`, `ProgramPrior.Model.Consistent`, `ProgramPrior.Model.belief`, `ProgramPrior.Model.optimalActionOfLeast`, `ProgramPrior.Model.point`, `ProgramPrior.Model.run` |
 | `ProgramPrior.Model.point` | definition | `ProgramPrior.Model`, `ProgramPrior.Model.run` |
 | `ProgramPrior.Model.point_belief_eq` | theorem | `AgentEquations.Belief.cond`, `AgentEquations.History`, `DelusionBox.diracBelief`, `ProgramPrior.Model`, `ProgramPrior.Model.Consistent`, `ProgramPrior.Model.belief`, `ProgramPrior.Model.point`, `ProgramPrior.Model.run` |
 | `ProgramPrior.Model.point_consistent` | theorem | `AgentEquations.History`, `ProgramPrior.Model`, `ProgramPrior.Model.Consistent`, `ProgramPrior.Model.point` |
 | `ProgramPrior.Model.point_mass` | theorem | `AgentEquations.History`, `ProgramPrior.Model`, `ProgramPrior.Model.Consistent`, `ProgramPrior.Model.mass`, `ProgramPrior.Model.point` |
 | `ProgramPrior.Model.relative_weight_le` | theorem | `AgentEquations.History`, `ProgramPrior.Model`, `ProgramPrior.Model.Consistent`, `ProgramPrior.Model.mass`, `ProgramPrior.Model.weight` |
+| `ProgramPrior.Model.same_prediction_mistakes` | theorem | `AgentEquations.Agent.utility`, `AgentEquations.History`, `AgentEquations.InfAttains`, `DelusionBox.predictionAgent`, `ProgramPrior.Model`, `ProgramPrior.Model.belief`, `ProgramPrior.Model.optimalPolicy`, `ProgramPrior.Model.point`, `ProgramPrior.Model.run`, `ProgramPrior.trajectory` |
+| `ProgramPrior.Model.same_prediction_mistakes_of_least` | theorem | `AgentEquations.Agent.utility`, `AgentEquations.History`, `AgentEquations.InfLexAttains`, `DelusionBox.predictionAgent`, `ProgramPrior.Model`, `ProgramPrior.Model.belief`, `ProgramPrior.Model.optimalPolicyOfLeast`, `ProgramPrior.Model.point`, `ProgramPrior.Model.run`, `ProgramPrior.trajectory` |
 | `ProgramPrior.Model.setMass` | definition | `ProgramPrior.Model`, `ProgramPrior.Model.weight` |
 | `ProgramPrior.Model.setMass_nonneg` | theorem | `ProgramPrior.Model`, `ProgramPrior.Model.setMass` |
+| `ProgramPrior.Model.toPartial` | definition | `AgentEquations.History`, `ProgramPrior.Model`, `ProgramPrior.Model.nonneg`, `ProgramPrior.Model.run`, `ProgramPrior.Model.summable`, `ProgramPrior.Model.weight`, `ProgramPrior.PartialModel` |
+| `ProgramPrior.Model.toPartial_belief_cond` | theorem | `AgentEquations.Belief.cond`, `AgentEquations.History`, `ProgramPrior.Model`, `ProgramPrior.Model.belief`, `ProgramPrior.Model.toPartial`, `ProgramPrior.PartialModel.belief` |
+| `ProgramPrior.Model.toPartial_consistent` | theorem | `AgentEquations.History`, `ProgramPrior.Model`, `ProgramPrior.Model.Consistent`, `ProgramPrior.Model.toPartial`, `ProgramPrior.PartialModel.Consistent` |
+| `ProgramPrior.Model.toPartial_mass` | theorem | `AgentEquations.History`, `ProgramPrior.Model`, `ProgramPrior.Model.mass`, `ProgramPrior.Model.toPartial`, `ProgramPrior.PartialModel.mass` |
+| `ProgramPrior.Model.trajectory_consistent` | theorem | `AgentEquations.History`, `ProgramPrior.Model`, `ProgramPrior.Model.Consistent`, `ProgramPrior.Model.run`, `ProgramPrior.trajectory` |
 | `ProgramPrior.Model.value_point_eq` | theorem | `AgentEquations.Agent`, `AgentEquations.History`, `AgentEquations.value`, `DelusionBox.diracBelief`, `ProgramPrior.Model`, `ProgramPrior.Model.Consistent`, `ProgramPrior.Model.belief`, `ProgramPrior.Model.point`, `ProgramPrior.Model.run` |
 | `ProgramPrior.Model.weight_le_setMass` | theorem | `ProgramPrior.Model`, `ProgramPrior.Model.setMass`, `ProgramPrior.Model.weight` |
 | `ProgramPrior.Model.weight_lt_setMass` | theorem | `ProgramPrior.Model`, `ProgramPrior.Model.setMass`, `ProgramPrior.Model.weight` |
+| `ProgramPrior.PartialModel` | definition | — |
+| `ProgramPrior.PartialModel.Consistent` | definition | `AgentEquations.History`, `ProgramPrior.PartialModel` |
+| `ProgramPrior.PartialModel.Consistent.below.nil` | definition | `AgentEquations.History`, `ProgramPrior.PartialModel`, `ProgramPrior.PartialModel.Consistent`, `ProgramPrior.PartialModel.Consistent.nil` |
+| `ProgramPrior.PartialModel.Consistent.below.snoc` | definition | `AgentEquations.History`, `ProgramPrior.PartialModel`, `ProgramPrior.PartialModel.Consistent`, `ProgramPrior.PartialModel.Consistent.snoc`, `ProgramPrior.PartialModel.run` |
+| `ProgramPrior.PartialModel.Consistent.nil` | definition | `ProgramPrior.PartialModel`, `ProgramPrior.PartialModel.Consistent` |
+| `ProgramPrior.PartialModel.Consistent.snoc` | definition | `AgentEquations.History`, `ProgramPrior.PartialModel`, `ProgramPrior.PartialModel.Consistent`, `ProgramPrior.PartialModel.run` |
+| `ProgramPrior.PartialModel.belief` | definition | `AgentEquations.Belief`, `AgentEquations.History`, `ProgramPrior.PartialModel`, `ProgramPrior.PartialModel.mass` |
+| `ProgramPrior.PartialModel.belief_isSubprobability` | theorem | `AgentEquations.Belief.IsSubprobability`, `ProgramPrior.PartialModel`, `ProgramPrior.PartialModel.belief` |
+| `ProgramPrior.PartialModel.belief_nonneg` | theorem | `AgentEquations.Belief.cond`, `AgentEquations.History`, `ProgramPrior.PartialModel`, `ProgramPrior.PartialModel.belief` |
+| `ProgramPrior.PartialModel.belief_summable` | theorem | `AgentEquations.Belief.cond`, `AgentEquations.History`, `ProgramPrior.PartialModel`, `ProgramPrior.PartialModel.belief` |
+| `ProgramPrior.PartialModel.consistent_snoc` | theorem | `AgentEquations.History`, `ProgramPrior.PartialModel`, `ProgramPrior.PartialModel.Consistent`, `ProgramPrior.PartialModel.run` |
+| `ProgramPrior.PartialModel.mass` | definition | `AgentEquations.History`, `ProgramPrior.PartialModel`, `ProgramPrior.PartialModel.Consistent`, `ProgramPrior.PartialModel.weight` |
+| `ProgramPrior.PartialModel.mass_eq_historyMass` | theorem | `AgentEquations.History`, `AgentEquations.historyMass`, `ProgramPrior.PartialModel`, `ProgramPrior.PartialModel.belief`, `ProgramPrior.PartialModel.mass` |
+| `ProgramPrior.PartialModel.mass_mul_cond` | theorem | `AgentEquations.Belief.cond`, `AgentEquations.History`, `ProgramPrior.PartialModel`, `ProgramPrior.PartialModel.belief`, `ProgramPrior.PartialModel.mass` |
+| `ProgramPrior.PartialModel.mass_nil` | theorem | `ProgramPrior.PartialModel`, `ProgramPrior.PartialModel.mass`, `ProgramPrior.PartialModel.weight` |
+| `ProgramPrior.PartialModel.mass_nonneg` | theorem | `AgentEquations.History`, `ProgramPrior.PartialModel`, `ProgramPrior.PartialModel.mass` |
+| `ProgramPrior.PartialModel.mass_snoc_le` | theorem | `AgentEquations.History`, `ProgramPrior.PartialModel`, `ProgramPrior.PartialModel.mass` |
+| `ProgramPrior.PartialModel.mass_sum_extensions_le` | theorem | `AgentEquations.History`, `ProgramPrior.PartialModel`, `ProgramPrior.PartialModel.mass` |
+| `ProgramPrior.ZeroMistakesOnRuns` | definition | `AgentEquations.Agent.utility`, `AgentEquations.History`, `DelusionBox.predictionAgentAct`, `ProgramPrior.trajectory` |
+| `ProgramPrior.aixiAction` | definition | `AgentEquations.History`, `AgentEquations.InfAttains`, `AgentEquations.infiniteLexBestAction`, `DelusionBox.rlAgent`, `ProgramPrior.aixiBelief` |
+| `ProgramPrior.aixiAction_max` | theorem | `AgentEquations.History`, `AgentEquations.InfAttains`, `AgentEquations.infiniteActionValue`, `DelusionBox.rlAgent`, `ProgramPrior.aixiAction`, `ProgramPrior.aixiBelief` |
+| `ProgramPrior.aixiBelief` | definition | `AgentEquations.Belief`, `AgentEquations.History`, `ProgramPrior.Model.belief`, `ProgramPrior.xiModel` |
+| `ProgramPrior.aixiBelief_cond` | theorem | `AgentEquations.Belief.cond`, `AgentEquations.History`, `ProgramPrior.Model.mass`, `ProgramPrior.aixiBelief`, `ProgramPrior.xiModel` |
+| `ProgramPrior.aixiBelief_isSubprobability` | theorem | `AgentEquations.Belief.IsSubprobability`, `AgentEquations.History`, `ProgramPrior.aixiBelief` |
+| `ProgramPrior.apply_eq_of_zeroMistakesOnRuns` | theorem | `AgentEquations.History`, `ProgramPrior.ZeroMistakesOnRuns`, `ProgramPrior.trajectory` |
+| `ProgramPrior.apply_eq_predict_of_zeroMistakesOnRuns` | theorem | `AgentEquations.History`, `ProgramPrior.ZeroMistakesOnRuns`, `ProgramPrior.trajectory` |
+| `ProgramPrior.partialAixiBelief` | definition | `AgentEquations.Belief`, `AgentEquations.History`, `ProgramPrior.PartialModel.belief`, `ProgramPrior.partialXiModel` |
+| `ProgramPrior.partialAixiBelief_cond` | theorem | `AgentEquations.Belief.cond`, `AgentEquations.History`, `ProgramPrior.PartialModel.mass`, `ProgramPrior.partialAixiBelief`, `ProgramPrior.partialXiModel` |
+| `ProgramPrior.partialAixiBelief_isSubprobability` | theorem | `AgentEquations.Belief.IsSubprobability`, `AgentEquations.History`, `ProgramPrior.partialAixiBelief` |
+| `ProgramPrior.partialXiModel` | definition | `AgentEquations.History`, `ProgramPrior.PartialModel` |
+| `ProgramPrior.partialXiModel_mass` | theorem | `AgentEquations.History`, `ProgramPrior.PartialModel.Consistent`, `ProgramPrior.PartialModel.mass`, `ProgramPrior.partialXiModel` |
+| `ProgramPrior.partialXi_mass_eq_historyMass` | theorem | `AgentEquations.History`, `AgentEquations.historyMass`, `ProgramPrior.PartialModel.mass`, `ProgramPrior.partialAixiBelief`, `ProgramPrior.partialXiModel` |
+| `ProgramPrior.predictionAgentAct_existsUnique_zero_mistakes_on_runs` | theorem | `AgentEquations.History`, `ProgramPrior.ZeroMistakesOnRuns`, `ProgramPrior.trajectory` |
+| `ProgramPrior.predictionAgent_existsUnique_zero_mistakes_on_runs` | theorem | `AgentEquations.History`, `ProgramPrior.ZeroMistakesOnRuns`, `ProgramPrior.trajectory` |
+| `ProgramPrior.trajectory` | definition | `AgentEquations.History` |
+| `ProgramPrior.trajectory_eq_of_agree` | theorem | `AgentEquations.History`, `ProgramPrior.trajectory` |
+| `ProgramPrior.trajectory_eq_of_zeroMistakesOnRuns` | theorem | `AgentEquations.History`, `ProgramPrior.ZeroMistakesOnRuns`, `ProgramPrior.trajectory` |
+| `ProgramPrior.xiModel` | definition | `AgentEquations.History`, `ProgramPrior.Model` |
+| `ProgramPrior.xiModel_mass` | theorem | `AgentEquations.History`, `ProgramPrior.Model.Consistent`, `ProgramPrior.Model.mass`, `ProgramPrior.xiModel` |
+| `ProgramPrior.xiModel_mass_nil_le_one` | theorem | `AgentEquations.History`, `ProgramPrior.Model.mass`, `ProgramPrior.xiModel` |
+| `ProgramPrior.xiModel_toPartial` | theorem | `AgentEquations.History`, `ProgramPrior.Model.toPartial`, `ProgramPrior.PartialModel`, `ProgramPrior.partialXiModel`, `ProgramPrior.xiModel` |
+| `ProgramPrior.xi_mass_eq_historyMass_aixiBelief` | theorem | `AgentEquations.History`, `AgentEquations.historyMass`, `ProgramPrior.Model.mass`, `ProgramPrior.aixiBelief`, `ProgramPrior.xiModel` |
+| `ProgramPrior.xi_sum_le_one` | theorem | — |
+| `ProgramPrior.zeroMistakesOnRuns_iff` | theorem | `AgentEquations.History`, `ProgramPrior.ZeroMistakesOnRuns`, `ProgramPrior.trajectory` |
+| `ProgramPrior.zeroMistakesOnRuns_predict` | theorem | `AgentEquations.History`, `ProgramPrior.ZeroMistakesOnRuns` |
+| `RewardGrid.CRMDPClass` | definition | — |
+| `RewardGrid.CRMDPClass.classReturn` | definition | `CRMDP.Policy`, `CRMDP.stochReturnOver`, `RewardGrid.CRMDPClass`, `RewardGrid.CRMDPClass.env`, `RewardGrid.CRMDPClass.transition` |
+| `RewardGrid.CRMDPClass.classReturn_ofDet` | theorem | `CRMDP.Policy`, `CRMDP.Reward`, `CRMDP.returnOver`, `RewardGrid.CRMDPClass.classReturn`, `RewardGrid.CRMDPClass.ofDet` |
+| `RewardGrid.CRMDPClass.env` | definition | `CRMDP.Env`, `RewardGrid.CRMDPClass`, `RewardGrid.CRMDPClass.corruption`, `RewardGrid.CRMDPClass.trueReward` |
+| `RewardGrid.CRMDPClass.gridClass` | definition | `CRMDP.Env.corruption`, `CRMDP.Reward`, `RewardGrid.CRMDPClass`, `RewardGrid.CRMDPClass.ofDet`, `RewardGrid.gridVal`, `RewardGrid.toEnv` |
+| `RewardGrid.CRMDPClass.gridClass_env` | theorem | `CRMDP.Env`, `RewardGrid.CRMDPClass.env`, `RewardGrid.CRMDPClass.gridClass`, `RewardGrid.GridEnv`, `RewardGrid.GridEnv.corruption`, `RewardGrid.GridEnv.trueReward`, `RewardGrid.toEnv` |
+| `RewardGrid.CRMDPClass.gridClass_return` | theorem | `CRMDP.Policy`, `RewardGrid.CRMDPClass.classReturn`, `RewardGrid.CRMDPClass.gridClass`, `RewardGrid.FullEnv`, `RewardGrid.FullEnv.grid`, `RewardGrid.FullEnv.transition`, `RewardGrid.GridEnv.corruption`, `RewardGrid.GridEnv.trueReward`, `RewardGrid.fullReturn` |
+| `RewardGrid.CRMDPClass.ofDet` | definition | `CRMDP.Reward`, `RewardGrid.CRMDPClass` |
 | `RewardGrid.FullEnv` | definition | — |
 | `RewardGrid.FullEnv.complement` | definition | `RewardGrid.FullEnv`, `RewardGrid.FullEnv.grid`, `RewardGrid.FullEnv.transition`, `RewardGrid.GridEnv.complement` |
 | `RewardGrid.FullEnv.complement_involutive` | theorem | `RewardGrid.FullEnv`, `RewardGrid.FullEnv.complement` |
@@ -569,12 +864,17 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 | `SelfMod.Exec` | definition | — |
 | `SelfMod.IsInitialProgram` | definition | `AgentEquations.Agent`, `AgentEquations.Belief`, `AgentEquations.History`, `SelfMod.CompAct`, `SelfMod.Exec`, `SelfMod.Exec.run`, `SelfMod.printValue` |
 | `SelfMod.IsInitialProgramLimit` | definition | `AgentEquations.Agent`, `AgentEquations.Belief`, `AgentEquations.History`, `SelfMod.CompAct`, `SelfMod.Exec`, `SelfMod.Exec.run`, `SelfMod.printInfiniteValue` |
+| `SelfMod.IsLexInitialProgramLimit` | definition | `AgentEquations.Agent`, `AgentEquations.Belief`, `AgentEquations.History`, `SelfMod.CompAct`, `SelfMod.Exec`, `SelfMod.Exec.run`, `SelfMod.printInfiniteValue` |
+| `SelfMod.IsLexInitialProgramLimit.isInitialProgramLimit` | theorem | `AgentEquations.Agent`, `AgentEquations.Belief`, `SelfMod.CompAct`, `SelfMod.Exec`, `SelfMod.IsInitialProgramLimit`, `SelfMod.IsLexInitialProgramLimit` |
+| `SelfMod.IsLexInitialProgramLimit.run_eq` | theorem | `AgentEquations.Agent`, `AgentEquations.Belief`, `AgentEquations.History`, `SelfMod.CompAct`, `SelfMod.Exec`, `SelfMod.Exec.run`, `SelfMod.IsLexInitialProgramLimit` |
 | `SelfMod.abs_printValue_succ_sub_le` | theorem | `AgentEquations.Agent`, `AgentEquations.Agent.horizon`, `AgentEquations.Agent.utility`, `AgentEquations.Belief`, `AgentEquations.Belief.IsSubprobability`, `AgentEquations.History`, `SelfMod.CompAct`, `SelfMod.Exec`, `SelfMod.printValue` |
 | `SelfMod.abs_smValue_le_horizonBudget` | theorem | `AgentEquations.Agent`, `AgentEquations.Agent.utility`, `AgentEquations.Belief`, `AgentEquations.Belief.IsSubprobability`, `AgentEquations.History`, `AgentEquations.horizonBudget`, `SelfMod.CompAct`, `SelfMod.Exec`, `SelfMod.smValue` |
 | `SelfMod.abs_smValue_succ_sub_le` | theorem | `AgentEquations.Agent`, `AgentEquations.Agent.horizon`, `AgentEquations.Agent.utility`, `AgentEquations.Belief`, `AgentEquations.Belief.IsSubprobability`, `AgentEquations.History`, `SelfMod.CompAct`, `SelfMod.Exec`, `SelfMod.smValue` |
 | `SelfMod.exists_argmax_printInfiniteValue` | theorem | `AgentEquations.Agent`, `AgentEquations.Belief`, `AgentEquations.History`, `SelfMod.CompAct`, `SelfMod.Exec`, `SelfMod.printInfiniteValue` |
 | `SelfMod.exists_argmax_printValue` | theorem | `AgentEquations.Agent`, `AgentEquations.Belief`, `AgentEquations.History`, `SelfMod.CompAct`, `SelfMod.Exec`, `SelfMod.printValue` |
+| `SelfMod.exists_lex_argmax_printInfiniteValue` | theorem | `AgentEquations.Agent`, `AgentEquations.Belief`, `AgentEquations.History`, `SelfMod.CompAct`, `SelfMod.Exec`, `SelfMod.printInfiniteValue` |
 | `SelfMod.printInfiniteValue` | definition | `AgentEquations.Agent`, `AgentEquations.Belief`, `AgentEquations.History`, `SelfMod.CompAct`, `SelfMod.Exec`, `SelfMod.printValue` |
+| `SelfMod.printInfiniteValue_eq` | theorem | `AgentEquations.Agent`, `AgentEquations.Agent.horizon`, `AgentEquations.Agent.utility`, `AgentEquations.Belief`, `AgentEquations.Belief.IsSubprobability`, `AgentEquations.Belief.cond`, `AgentEquations.History`, `SelfMod.CompAct`, `SelfMod.Exec`, `SelfMod.Exec.run`, `SelfMod.printInfiniteValue` |
 | `SelfMod.printValue` | definition | `AgentEquations.Agent`, `AgentEquations.Belief`, `AgentEquations.History`, `SelfMod.CompAct`, `SelfMod.Exec` |
 | `SelfMod.printValue_error_le_tail` | theorem | `AgentEquations.Agent`, `AgentEquations.Agent.horizon`, `AgentEquations.Agent.utility`, `AgentEquations.Belief`, `AgentEquations.Belief.IsSubprobability`, `AgentEquations.History`, `SelfMod.CompAct`, `SelfMod.Exec`, `SelfMod.printInfiniteValue`, `SelfMod.printValue` |
 | `SelfMod.printValue_succ_eq` | theorem | `AgentEquations.Agent`, `AgentEquations.Agent.horizon`, `AgentEquations.Agent.utility`, `AgentEquations.Belief`, `AgentEquations.Belief.cond`, `AgentEquations.History`, `SelfMod.CompAct`, `SelfMod.Exec`, `SelfMod.printValue`, `SelfMod.smValue` |
