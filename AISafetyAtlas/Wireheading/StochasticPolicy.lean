@@ -194,6 +194,30 @@ public theorem mixedReturnOver_ofDet (M : Decision.MDP State Action)
   rw [mixedReturnOver, stochReturnOver]
   exact Finset.sum_congr rfl fun k _ => by rw [mixedStateAt_ofDet]
 
+/-- At step zero the state distribution is the point mass at the start state. -/
+public theorem mixedStateAt_zero (M : Decision.MDP State Action)
+    (μ : Env State) (σ : StochPolicy State Action) (s₀ : State) :
+    mixedStateAt M μ σ s₀ 0 = PMF.pure s₀ := by
+  simp [mixedStateAt, Decision.MDP.stateAt, Decision.MDP.run, PMF.pure_bind]
+
+/-- **Definition 10's `Ġ_t` exactly as printed, with stochastic dynamics and a
+possibly stochastic policy** (Everitt et al., IJCAI 2017, Def. 10):
+`Ġ_t(μ, π, s₀) = 𝔼^π_μ[Σ_{k=0}^{t} Ṙ(s_k)]`, so `t + 1` terms including the start
+state, where `mixedReturnOver` (the proof's return) sums `k = 1..t`. The
+deterministic counterpart is `returnWithStart`. -/
+@[expose] public noncomputable def mixedReturnWithStart (M : Decision.MDP State Action)
+    (t : ℕ) (s₀ : State) (μ : Env State) (σ : StochPolicy State Action) : ℝ :=
+  ∑ k ∈ Finset.range (t + 1), expectReward (mixedStateAt M μ σ s₀ k) μ.trueReward
+
+/-- The printed return is the proof's return plus the start state's true reward,
+as `returnWithStart_eq_returnOver_add` is in the deterministic case. -/
+public theorem mixedReturnWithStart_eq_mixedReturnOver_add (M : Decision.MDP State Action)
+    (t : ℕ) (s₀ : State) (μ : Env State) (σ : StochPolicy State Action) :
+    mixedReturnWithStart M t s₀ μ σ =
+      mixedReturnOver M t s₀ μ σ + (μ.trueReward s₀ : ℝ) := by
+  rw [mixedReturnWithStart, Finset.sum_range_succ', mixedStateAt_zero, expectReward_pure,
+    mixedReturnOver]
+
 /-- **The source's equation (3), at print's own quantifiers.** -/
 public theorem mixedReturn_add_complement (M : Decision.MDP State Action)
     (t : ℕ) (s₀ : State) (μ : Env State) (σ : StochPolicy State Action) :

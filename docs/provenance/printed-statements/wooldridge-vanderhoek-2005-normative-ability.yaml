@@ -1,0 +1,629 @@
+source:
+  citation: >-
+    Michael Wooldridge and Wiebe van der Hoek, On obligations and normative ability:
+    Towards a logical analysis of the social contract, Journal of Applied Logic 3
+    (2005) 396--420, doi:10.1016/j.jal.2005.04.006. Sections 2--5 (journal pp. 399--410).
+  file: wooldridge-van-der-hoek-published-jal-2005-on-obligations-and-normative-ability.pdf
+  sha256: 21970069a6e93508c54cdf3b8632ebb54cf151a39e865d42e4f67e32aa7b705f
+  page_offset: -395
+  standing: |
+    (a) Every AATS satisfies two coherence constraints (p. 399--400, PDF p. 4--5):
+    "We require that \textsc{aats}s satisfy the following two coherence constraints:
+    (1) \emph{Non-triviality} [26]. Agents always have at least one action available:
+    \[ \forall q \in Q, \forall i \in Ag, \exists \alpha \in Ac_i \text{ s.t. } q \in \rho(\alpha) \]
+    (2) \emph{Consistency}. The $\rho$ and $\tau$ functions agree on actions that may be
+    performed:
+    \[ \forall q, \forall j \in J_{Ag}, (q, j) \in \mathrm{dom}\,\tau \quad\text{iff}\quad
+       \forall i \in Ag, q \in \rho(j_i) \]"
+    (The finiteness and non-emptiness of $Q$, $Ag$, $Ac_i$, $\Phi$ are part of the AATS
+    definition itself; see statement wvh05-def-aats.)
+    (b) Every normative system forbids what "nature" forbids (p. 402, PDF p. 7): "we will
+    place one requirement on normative systems: that they forbid anything that is
+    forbidden by ``nature''. Formally, the requirement is that:
+    $\forall \alpha \in Ac_{Ag}\colon \big(Q \setminus \rho(\alpha)\big) \subseteq \eta(\alpha)$"
+    (statement wvh05-nature-requirement).
+    (c) $N$ is the set of all normative systems with respect to an implicit AATS (p. 403,
+    PDF p. 8): "We denote the set of all normative systems, with respect to some
+    implicit \textsc{aats}, by $N$."
+    (d) Only the coalition conforms (p. 406, PDF p. 11): "Note that this assumes that,
+    when reasoning about what a coalition $C$ can bring about within normative system
+    $\eta$, we only assume that the agents from $C$, \emph{but not necessarily the
+    others}, will conform to $\eta$."
+    (e) Unqualified formulas are state formulas (p. 406, PDF p. 11): "In the text, when
+    we refer to ``a formula of \textsc{natl*}'', it should be understood that we mean a
+    \emph{state} formula."
+    Silent: the paper prints $S \models \varphi$ (Proposition 3) and $\models \varphi$
+    (p. 409--410) without defining either; only $S, q \models \varphi$ and
+    $S, \lambda \mathrel{|}\!\models \varphi$ are defined (p. 406--407). Searched PDF
+    pp. 4--15 by image and the whole text layer for ``valid'' (only hit: ``here some
+    validities'', p. 409). Whether $S \models \varphi$ means truth at every state of $S$
+    or at $q_0$ is not stated. ``Objective formula'' (p. 409, used in (2)) is likewise
+    not defined.
+
+definitions:
+  - id: wvh05-def-coalition
+    label: 'coalition, grand coalition, $Ac_C$ (§2)'
+    pdf_page: 4
+    book_page: 399
+    latex: |
+      Systems are populated by a set $Ag$ of \emph{agents}; a \emph{coalition} of agents
+      is simply a set $C \subseteq Ag$, and the set of all agents is known as the
+      \emph{grand coalition}. Notice that this is \emph{all} we mean by the term
+      ``coalition'' in this paper: our usage here does not imply any common purpose or
+      shared goal---a coalition in this paper is simply a set of agents.
+
+      Each agent $i \in Ag$ is associated with a set $Ac_i$ of possible actions, and we
+      assume that these sets of actions are pairwise disjoint (i.e., actions are unique
+      to agents). We denote the set of actions associated with a coalition
+      $C \subseteq Ag$ by $Ac_C$, so $Ac_C = \bigcup_{i \in C} Ac_i$.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: wvh05-def-joint-action
+    label: 'joint action (§2)'
+    pdf_page: 4
+    book_page: 399
+    latex: |
+      A \emph{joint action} $j_C$ for a coalition $C$ is a tuple
+      $\langle \alpha_1, \ldots, \alpha_k \rangle$, where for each $\alpha_j$ (where
+      $j \leqslant k$) there is some $i \in C$ such that $\alpha_j \in Ac_i$. Moreover,
+      there are no two different actions $\alpha_j$ and $\alpha_{j'}$ in $J_C$ that
+      belong to the same $Ac_i$. We denote the set of all joint actions for coalition $C$
+      by $J_C$, so $J_C = \prod_{i \in C} Ac_i$. Given an element $j$ of $J_C$ and agent
+      $i \in C$, we denote $i$'s component of $j$ by $j_i$.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: wvh05-def-strategy
+    label: 'options, strategy, strategy profile, out (§2.1)'
+    pdf_page: 6
+    book_page: 401
+    latex: |
+      Given an agent $i \in Ag$ and a state $q \in Q$, we denote the \emph{options}
+      available to $i$ in $q$---the actions that $i$ may perform in $q$---by
+      $\mathit{options}(i, q)$:
+      \[ \mathit{options}(i, q) = \big\{ \alpha \mid \alpha \in Ac_i \text{ and } q \in \rho(\alpha) \big\} \]
+      We then say that a \emph{strategy} for an agent $i \in Ag$ is a function:
+      \[ \sigma_i : Q \to Ac_i \]
+      which must satisfy the \emph{legality} constraint that
+      $\sigma_i(q) \in \mathit{options}(i, q)$ for all $q \in Q$.
+
+      A \emph{strategy profile} for a coalition $C = \{a_1, \ldots, a_k\} \subseteq Ag$
+      is a tuple $\langle \sigma_1, \ldots, \sigma_k \rangle$, one for each agent
+      $a_i \in C$. We denote by $\Sigma_C$ the set of all strategy profiles for coalition
+      $C \subseteq Ag$; if $\sigma_C \in \Sigma_C$ and $i \in C$, then we denote $i$'s
+      component of $\sigma_C$ by $\sigma_C^i$. Given a strategy profile
+      $\sigma_C \in \Sigma_C$ and state $q \in Q$, let $\mathit{out}(\sigma_C, q)$ denote
+      the set of possible states that may result by the members of the coalition $C$
+      acting as defined by their components of $\sigma_C$ for one step from $q$:
+      \[ \mathit{out}(\sigma_C, q) = \big\{ q' \mid \tau(q, j) = q' \text{ where }
+         (q, j) \in \mathrm{dom}\,\tau \text{ and } \sigma_C^i(q) = j_i \text{ for } i \in C \big\} \]
+      Notice that, for any grand coalition strategy profile $\sigma_{Ag}$ and state $q$,
+      the set $\mathit{out}(\sigma_{Ag}, q)$ will be a singleton.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: wvh05-def-computation
+    label: 'computation, $q$-computation, $\lambda[u]$, prefix and suffix (§2.2)'
+    pdf_page: 7
+    book_page: 402
+    latex: |
+      A \emph{computation} is an infinite sequence of states $\lambda = q_0, q_1, \ldots$.
+      A computation $\lambda \in Q^+$ starting in state $q$ is referred to as a
+      \emph{$q$-computation}; if $u \in \mathbb{N}$, then we denote by $\lambda[u]$ the
+      component indexed by $u$ in $\lambda$ (thus $\lambda[0]$ denotes the first element,
+      $\lambda[1]$ the second, and so on). We denote by $\lambda[0, u]$ and
+      $\lambda[u, \infty]$ the finite prefix $q_0, \ldots, q_u$ and the infinite suffix
+      $q_u, q_{u+1}, \ldots$ of $\lambda$ respectively.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: wvh05-def-trivial-system
+    label: 'trivial normative system $\eta_\top$ (§3.1)'
+    pdf_page: 9
+    book_page: 404
+    latex: |
+      In the \emph{trivial} normative system $\eta_\top$, every action is forbidden in
+      every state.
+      \[ \forall \alpha \in Ac_{Ag}\colon \eta_\top(\alpha) = Q \]
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: wvh05-def-less-restrictive
+    label: 'less restrictive relation $\preceq$ (§3.2)'
+    pdf_page: 9
+    book_page: 404
+    latex: |
+      Let us introduce a binary relation $\preceq\, \subseteq N \times N$ on normative
+      systems, with the intended interpretation that $\eta \preceq \eta'$ means that
+      $\eta$ is less restrictive (equivalently, more liberal) than $\eta'$. (To be
+      precise, $\eta \preceq \eta'$ will mean that $\eta$ is ``at most as restrictive
+      as'' $\eta'$, but where no confusion is possible, we will ignore this distinction
+      in the text.) Formally, we define the relation ``$\preceq$'' as follows.
+      \[ \eta \preceq \eta' \quad\Leftrightarrow\quad \forall \alpha \in Ac_{Ag}\colon
+         \eta(\alpha) \subseteq \eta'(\alpha) \]
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: wvh05-def-natl-syntax
+    label: 'Fig. 3, the syntax of NATL* (§4)'
+    pdf_page: 11
+    book_page: 406
+    latex: |
+      \begin{tabular}{lll}
+      $\langle\mathit{state\text{-}fmla}\rangle$ & $::=$ \textbf{true} & (truth constant) \\
+       & $\mid p$ & (primitive propositions) \\
+       & $\mid \neg\langle\mathit{state\text{-}fmla}\rangle$ & (primitive propositions) \\
+       & $\mid \langle\mathit{state\text{-}fmla}\rangle \vee \langle\mathit{state\text{-}fmla}\rangle$ & (disjunction) \\
+       & $\mid \langle\!\langle \eta : C \rangle\!\rangle \langle\mathit{path\text{-}fmla}\rangle$ & (cooperative ability) \\
+      $\langle\mathit{path\text{-}fmla}\rangle$ & $::= \langle\mathit{state\text{-}fmla}\rangle$ & (state formulae are path formula) \\
+       & $\mid \neg\langle\mathit{path\text{-}fmla}\rangle$ & (negation) \\
+       & $\mid \langle\mathit{path\text{-}fmla}\rangle \vee \langle\mathit{path\text{-}fmla}\rangle$ & (disjunction) \\
+       & $\mid \Diamond\langle\mathit{path\text{-}fmla}\rangle$ & (eventually) \\
+       & $\mid \Box\langle\mathit{path\text{-}fmla}\rangle$ & (always) \\
+       & $\mid \langle\mathit{path\text{-}fmla}\rangle\, \mathcal{U}\, \langle\mathit{path\text{-}fmla}\rangle$ & (until)
+      \end{tabular}
+
+      Fig. 3. The Syntax of \textsc{natl*}: $p \in \Phi$ is a propositional variable,
+      $\eta$ is a symbol denoting a normative system, and $C \subseteq Ag$ is a set of
+      agents.
+    note: >-
+      The grammar has no next operator, but the path semantics (p. 407) has a clause for
+      $\bigcirc\varphi$, and $\bigcirc$ is used on pp. 409--410. The comment
+      "(primitive propositions)" on the negation line is as printed.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: wvh05-def-natl-semantics
+    label: 'semantics of NATL* (§4)'
+    pdf_page: 11-12
+    book_page: 406-407
+    latex: |
+      We now define the \emph{semantics} of \textsc{natl*}. These are given with respect
+      to two satisfaction relations: ``$\models$'' (for state formulae), and
+      ``$\mathrel{|}\!\models$'' (for path formulae). The state formula satisfaction
+      relation ``$\models$'' holds between pairs of the form $S, q$ (where $S$ is an
+      \textsc{aats} and $q$ is a state in $S$), and formulae of \textsc{natl*}, while the
+      path formula satisfaction relation ``$\mathrel{|}\!\models$'' holds between pairs of
+      the form $S, \lambda$ (where $\lambda$ is a computation in $S$):
+
+      $S, q \models \textbf{true}$; \\
+      $S, q \models p$ iff $p \in \pi(q)$ \quad (where $p \in \Phi$); \\
+      $S, q \models \neg\varphi$ iff $S, q \not\models \varphi$; \\
+      $S, q \models \varphi \vee \psi$ iff $S, q \models \varphi$ or $S, q \models \psi$; and \\
+      $S, q \models \langle\!\langle \eta : C \rangle\!\rangle\varphi$ iff
+      $\exists \sigma_C \in \Sigma_C^\eta$, such that
+      $\forall \lambda \in \mathit{comp}(\sigma_C, q)$, we have
+      $S, \lambda \mathrel{|}\!\models \varphi$.
+
+      The rules defining the path formula satisfaction relation ``$\mathrel{|}\!\models$''
+      are as follows.
+
+      $S, \lambda \mathrel{|}\!\models \varphi$ iff $S, \lambda[0] \models \varphi$ (where
+      $\varphi$ is a state formula); \\
+      $S, \lambda \mathrel{|}\!\models \neg\varphi$ iff $S, \lambda \mathrel{|}\!\not\models; \varphi$; \\
+      $S, \lambda \mathrel{|}\!\models \varphi \vee \psi$ iff
+      $S, \lambda \mathrel{|}\!\models \varphi$ or $S, \lambda \mathrel{|}\!\models \psi$; \\
+      $S, \lambda \mathrel{|}\!\models \bigcirc\varphi$ iff
+      $S, \lambda[1, \infty] \mathrel{|}\!\models \varphi$; \\
+      $S, \lambda \mathrel{|}\!\models \Diamond\varphi$ iff $\exists u \in \mathbb{N}$, we
+      have $S, \lambda[u, \infty] \mathrel{|}\!\models \varphi$; \\
+      $S, \lambda \mathrel{|}\!\models \Box\varphi$ iff $\forall u \in \mathbb{N}$ we have
+      $S, \lambda[u, \infty] \mathrel{|}\!\models \varphi$; and \\
+      $S, \lambda \mathrel{|}\!\models \varphi\,\mathcal{U}\,\psi$ iff
+      $\exists u \in \mathbb{N}$ s.t. $S, \lambda[u, \infty] \mathrel{|}\!\models \psi$, and
+      $\forall v$ s.t. $0 \leqslant v < u$: $S, \lambda[v, \infty] \mathrel{|}\!\models \varphi$.
+
+      The remaining classical logic connectives (``$\wedge$'', ``$\to$'',
+      ``$\leftrightarrow$'') are assumed to be defined as abbreviations in terms of
+      $\neg$, $\vee$, in the conventional manner. Note that we use the classical
+      connectives for both path and state formulae.
+    note: >-
+      The $\langle\!\langle \eta : C \rangle\!\rangle$ clause is also row S27-R11 (statement
+      wvh05-sem-normative-ability). The negation clause prints a stray semicolon,
+      "$S, \lambda \mathrel{|}\!\not\models; \varphi$" (checked at 220 dpi); transcribed as
+      printed.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: wvh05-def-atl-ctl-quantifiers
+    label: 'ATL modality and CTL path quantifiers as abbreviations (§4)'
+    pdf_page: 12
+    book_page: 407
+    latex: |
+      We omit set brackets in cooperation modalities for singleton coalitions, writing
+      $\langle\!\langle \eta : 1 \rangle\!\rangle$ instead of
+      $\langle\!\langle \eta : \{1\} \rangle\!\rangle$. Note that we can recover the
+      cooperation modality of \textsc{atl} as follows:
+      $\langle\!\langle C \rangle\!\rangle\varphi \mathrel{\hat{=}}
+      \langle\!\langle \eta_\bot : C \rangle\!\rangle\varphi$. Given these definitions, it
+      is useful to define the universal and existential path quantifiers of
+      \textsc{ctl} [11].
+      \[ \mathsf{A}\varphi \mathrel{\hat{=}} \langle\!\langle \emptyset \rangle\!\rangle\varphi
+         \qquad \mathsf{E}\varphi \mathrel{\hat{=}} \langle\!\langle Ag \rangle\!\rangle\varphi \]
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+excerpts:
+  - id: wvh05-prop3-proof
+    for: [wvh05-prop3-1, wvh05-prop3-2, wvh05-prop3-3]
+    reason: >-
+      The proof of Proposition 3 uses only the left-to-right direction of Proposition 2,
+      which the paper says (p. 405) holds for arbitrary systems; whether the
+      non-triviality hypothesis of Proposition 3 is needed rests on this. The passage
+      also prints $\mathit{out}(\sigma_C, q)$ where the semantics (p. 407) has
+      $\mathit{comp}(\sigma_C, q)$.
+    pdf_page: 15
+    latex: |
+      \textbf{Proof.} For (1), assume
+      $S, q \models \langle\!\langle \eta' : C \rangle\!\rangle\varphi$. Then
+      $\exists \sigma_C \in \Sigma_C^{\eta'}$ such that
+      $\forall \lambda \in \mathit{out}(\sigma_C, q)$, we have
+      $S, \lambda \mathrel{|}\!\models \varphi$. But since by Proposition 2, we have that
+      $\forall C \subseteq Ag : \Sigma_C^{\eta'} \subseteq \Sigma_C^\eta$, then
+      $\sigma_C \in \Sigma_C^\eta$, and hence
+      $S, q \models \langle\!\langle \eta : C \rangle\!\rangle\varphi$. Part (2) is the
+      special case of (1) where $C$ is the grand coalition; part (3) is the
+      contrapositive of (2). $\square$
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+statements:
+  - id: wvh05-def-aats
+    audit_row: S27-R01
+    locator: §2
+    pdf_page: 4
+    book_page: 399
+    label: 'Definition (AATS)'
+    latex: |
+      An \emph{Action-based Alternating Transition System}---hereafter referred to simply
+      as an \textsc{aats}---is an $(n + 7)$-tuple
+      $S = \langle Q, q_0, Ag, Ac_1, \ldots, Ac_n, \rho, \tau, \Phi, \pi \rangle$, where:
+      \begin{itemize}
+      \item $Q$ is a finite, non-empty set of \emph{states};
+      \item $q_0 \in Q$ is the \emph{initial state};
+      \item $Ag = \{1, \ldots, n\}$ is a finite, non-empty set of \emph{agents};
+      \item $Ac_i$ is a finite, non-empty set of \emph{actions}, for each $i \in Ag$, where
+        $Ac_i \cap Ac_j = \emptyset$ for all $i \neq j \in Ag$;
+      \item $\rho : Ac_{Ag} \to 2^Q$ is an \emph{action precondition function}, which for
+        each action $\alpha \in Ac_{Ag}$ defines the set of states $\rho(\alpha)$ from
+        which $\alpha$ may be executed;
+      \item $\tau : Q \times J_{Ag} \to Q$ is a partial \emph{system transition function},
+        which defines the state $\tau(q, j)$ that would result by the performance of $j$
+        from state $q$---note that, as this function is partial, not all joint actions are
+        possible in all states (cf. the pre-condition function above);
+      \item $\Phi$ is a finite, non-empty set of \emph{atomic propositions}; and
+      \item $\pi : Q \to 2^\Phi$ is an interpretation function, which gives the set of
+        primitive propositions satisfied in each state: if $p \in \pi(q)$, then this means
+        that the propositional variable $p$ is satisfied (equivalently, true) in state $q$.
+      \end{itemize}
+    context: |
+      Followed immediately by the two coherence constraints (source.standing (a)),
+      p. 399--400: "We require that \textsc{aats}s satisfy the following two coherence
+      constraints".
+    uses: [wvh05-def-coalition, wvh05-def-joint-action]
+    note: >-
+      The card's text-layer quote renders $i \neq j$ as "i = j" (the ≠ glyph lost) and
+      omits the $\Phi$ and $\pi$ bullets with "[...]". The constraint named
+      "Non-triviality" (p. 399) is a condition on the AATS, not the "non-trivial
+      normative system" of p. 405.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind) + Grok (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: wvh05-def-comp
+    audit_row: S27-R02
+    locator: §2.2, p.402
+    pdf_page: 7
+    book_page: 402
+    label: 'Definition (comp), §2.2'
+    latex: |
+      Given a strategy profile $\sigma_C$ for some coalition $C$, and a state $q \in Q$, we
+      define $\mathit{comp}(\sigma_C, q)$ to be the set of possible runs that may occur if
+      every agent $a_i \in C$ follows the corresponding strategy $\sigma_i$, starting when
+      the system is in state $q \in Q$. That is, the set $\mathit{comp}(\sigma_C, q)$ will
+      contain all possible $q$-computations that the coalition $C$ can ``enforce'' by
+      cooperating and following the strategies in $\sigma_C$.
+      \[ \mathit{comp}(\sigma_C, q) = \big\{ \lambda \mid \lambda[0] = q \text{ and }
+         \forall u \in \mathbb{N}\colon \lambda[u + 1] \in
+         \mathit{out}\big(\sigma_C, \lambda[u]\big) \big\} \]
+      Again, note that for any state $q \in Q$ and any grand coalition strategy
+      $\sigma_{Ag}$, the set $\mathit{comp}(\sigma_{Ag}, q)$ will be a singleton,
+      consisting of exactly one infinite computation.
+    uses: [wvh05-def-strategy, wvh05-def-computation, wvh05-def-coalition]
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind) + Codex (anchored re-read); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: wvh05-def-normative-system
+    audit_row: S27-R03
+    locator: §3 norms, p.402
+    pdf_page: 7
+    book_page: 402
+    label: 'Definition (normative system), §3'
+    latex: |
+      We model a normative system, $\eta$, as a function
+      \[ \eta : Ac_{Ag} \to 2^Q \]
+      with the intended interpretation that $q \in \eta(\alpha)$ means the normative
+      system $\eta$ forbids action $\alpha$ from being performed when the system is in
+      state $q$.
+    uses: [wvh05-def-aats, wvh05-def-coalition]
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: wvh05-nature-requirement
+    audit_row: S27-R04
+    locator: §3 nature, p.402
+    pdf_page: 7
+    book_page: 402
+    label: 'requirement on normative systems, §3'
+    latex: |
+      It makes no sense, (in our framework at least), to consider normative systems that
+      permit actions that are naturally impossible to perform, and so we will place one
+      requirement on normative systems: that they forbid anything that is forbidden by
+      ``nature''. Formally, the requirement is that:
+      \[ \forall \alpha \in Ac_{Ag}\colon \big(Q \setminus \rho(\alpha)\big) \subseteq \eta(\alpha) \]
+    uses: [wvh05-def-aats, wvh05-def-normative-system]
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: wvh05-def-conformance
+    audit_row: S27-R05
+    locator: §3.0 conformance, p.403
+    pdf_page: 8
+    book_page: 403
+    label: 'Definition (conformance, $\Sigma_C^\eta$), §3'
+    latex: |
+      We say a strategy $\sigma_i \in \Sigma_i$ is $\eta$-conformant if it never selects an
+      action that is forbidden by $\eta$. We denote the fact that $\sigma_i$ conforms to
+      $\eta$ by $\mathit{conf}(\sigma_i, \eta)$.
+      \[ \mathit{conf}(\sigma_i, \eta) \quad\Leftrightarrow\quad
+         \forall q\colon q \notin \eta\big(\sigma_i(q)\big) \]
+      Given a strategy profile $\sigma_C \in \Sigma_C$, we will abuse notation and write
+      $\mathit{conf}(\sigma_C, \eta)$ to indicate that all the strategies in $\sigma_C$
+      conform to $\eta$.
+      \[ \mathit{conf}(\sigma_C, \eta) \quad\Leftrightarrow\quad
+         \forall i \in C\colon \mathit{conf}(\sigma_C^i, \eta) \]
+      Finally, we denote the set of all $\eta$-conformant strategy profiles for $C$ by
+      $\Sigma_C^\eta$.
+      \[ \Sigma_C^\eta \mathrel{\hat{=}} \big\{ \sigma_C \in \Sigma_C \mid
+         \mathit{conf}(\sigma_C, \eta) \big\} \]
+    uses: [wvh05-def-strategy, wvh05-def-normative-system]
+    note: >-
+      $\Sigma_i$ is not defined separately; only $\Sigma_C$ for a coalition $C$ is (p. 401).
+      Strategies in $\Sigma_C$ already satisfy the legality constraint
+      $\sigma_i(q) \in \mathit{options}(i, q)$ (p. 401).
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind) + Grok (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: wvh05-def-empty-system
+    audit_row: S27-R06
+    locator: §3.1, p.403
+    pdf_page: 8-9
+    book_page: 403-404
+    label: 'Definition (empty normative system $\eta_\bot$), §3.1'
+    latex: |
+      We denote the \emph{empty} normative system by $\eta_\bot$. This system imposes
+      \emph{no} constraints on the actions that agents may perform other than those
+      imposed by the underlying \textsc{aats}: any action that is physically/naturally
+      feasible is legal according to $\eta_\bot$.
+      \[ \forall \alpha \in Ac_{Ag}\colon \eta_\bot(\alpha) = Q \setminus \rho(\alpha) \]
+    context: |
+      Introduced by (p. 403): "We find it convenient to distinguish two particular
+      normative systems." The other is $\eta_\top$ (definition wvh05-def-trivial-system,
+      p. 404).
+    uses: [wvh05-def-normative-system, wvh05-nature-requirement]
+    note: >-
+      The sentence breaks across the page after "on the actions that" (journal p. 403 to
+      p. 404).
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: wvh05-def-non-trivial
+    audit_row: S27-R09
+    locator: p.405
+    pdf_page: 10
+    book_page: 405
+    label: 'Definition (non-trivial normative system), §3.2'
+    latex: |
+      Let us call a normative system $\eta$ to be \emph{non-trivial} if it allows,
+      everywhere, the grand coalition $Ag$ to perform an action: $\eta$ is non-trivial iff
+      \[ \forall q \in Q \exists j \in J_{Ag} \forall i \in Ag\colon \quad q \notin \eta(j_i) \]
+    uses: [wvh05-def-normative-system, wvh05-def-joint-action]
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind) + Grok (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: wvh05-prop2
+    audit_row: S27-R10
+    locator: Proposition 2, p.405
+    pdf_page: 10
+    book_page: 405
+    label: 'Proposition 2, with the remark after its proof'
+    latex: |
+      \textbf{Proposition 2.} \emph{Let
+      $S = \langle Q, q_0, Ag, Ac_1, \ldots, Ac_n, \rho, \tau, \Phi, \pi \rangle$ be an
+      \textsc{aats}, and let $\eta$ and $\eta'$ be non-trivial normative systems over $S$.
+      Then}:
+      \[ \eta \preceq \eta' \quad\Leftrightarrow\quad \forall C \subseteq Ag\colon
+         \Sigma_C^{\eta'} \subseteq \Sigma_C^\eta \]
+
+      [\ldots] Although the $\Rightarrow$-direction of Proposition 2
+      holds for arbitrary systems $\eta$ and $\eta'$, the other direction does not.
+      Suppose that $\eta'$ is such that it forbids every action for every agent $i$ in a
+      particular state $q$. Then, for any $C$, no strategy $\sigma_C$ exists that is
+      $\eta'$-conformant, so $\Sigma_C^{\eta'} = \emptyset$. Would the
+      $\Rightarrow$-direction of Proposition 2 be true, then we would have
+      $\eta \preceq \eta'$ for any $\eta$, which obviously need not be the case.
+    uses: [wvh05-def-aats, wvh05-def-normative-system, wvh05-def-non-trivial,
+           wvh05-def-less-restrictive, wvh05-def-conformance]
+    proof_pages: 10
+    note: >-
+      Slip in the remark: its last sentence prints "the $\Rightarrow$-direction" where
+      the argument (and the remark's first sentence, which says the $\Rightarrow$-direction
+      holds for arbitrary systems) requires $\Leftarrow$. Checked at 200 dpi: both arrows
+      are $\Rightarrow$. The $\eta'$ in the remark is not non-trivial (it forbids every
+      action at $q$). The card's quote drops every prime and the $\preceq$ symbol, so its
+      displayed equivalence is unreadable.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind) + Codex (anchored re-read); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: wvh05-sem-normative-ability
+    audit_row: S27-R11
+    locator: §4, p.407
+    pdf_page: 12
+    book_page: 407
+    label: 'semantic clause for $\langle\!\langle \eta : C \rangle\!\rangle$, §4'
+    latex: |
+      $S, q \models \langle\!\langle \eta : C \rangle\!\rangle\varphi$ iff
+      $\exists \sigma_C \in \Sigma_C^\eta$, such that
+      $\forall \lambda \in \mathit{comp}(\sigma_C, q)$, we have
+      $S, \lambda \mathrel{|}\!\models \varphi$.
+    context: |
+      Last clause of the state-formula satisfaction relation (definition
+      wvh05-def-natl-semantics). Informal reading, p. 406: "$\langle\!\langle \eta : C
+      \rangle\!\rangle\varphi$ means that there is a $\eta$-conformant strategy profile
+      $\sigma_C$ for $C$ such that, if the members of $C$ follow their components of
+      $\sigma_C$, then $\varphi$ will result."
+    uses: [wvh05-def-natl-semantics, wvh05-def-natl-syntax, wvh05-def-conformance,
+           wvh05-def-comp]
+    note: >-
+      $\models$ (state) and $\mathrel{|}\!\models$ (path) are distinct relations in print.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: wvh05-def-permission
+    audit_row: S27-R12
+    locator: §5 permission, p.408
+    pdf_page: 13
+    book_page: 408
+    label: 'Definition (permission $\mathsf{P}_\eta$), §5'
+    latex: |
+      \begin{itemize}
+      \item $\varphi$ is said to be permissible within the context of normative system
+        $\eta$ iff the grand coalition of agents can cooperate to achieve $\varphi$ within
+        the context of $\eta$---that is, if there is some way that the grand coalition of
+        all agents can cause $\varphi$ by behaving legally, according to the normative
+        system $\eta$; and
+      \end{itemize}
+      This leads immediately to the following definition of permission and obligation.
+      \[ \mathsf{P}_\eta\varphi \mathrel{\hat{=}} \langle\!\langle \eta : Ag \rangle\!\rangle\varphi \]
+    context: |
+      Introduced by: "So, our definition of obligations and permissions is as follows:"
+      The display on the page is
+      "$\mathsf{P}_\eta\varphi \mathrel{\hat{=}} \langle\!\langle \eta : Ag \rangle\!\rangle\varphi
+      \qquad \mathsf{O}_\eta\varphi \mathrel{\hat{=}} \neg\mathsf{P}_\eta\neg\varphi$";
+      the obligation half is statement wvh05-def-obligation.
+    uses: [wvh05-sem-normative-ability, wvh05-def-coalition]
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind) + Codex (anchored re-read); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: wvh05-def-obligation
+    audit_row: S27-R13
+    locator: §5 obligation, p.408
+    pdf_page: 13
+    book_page: 408
+    label: 'Definition (obligation $\mathsf{O}_\eta$), §5'
+    latex: |
+      \begin{itemize}
+      \item $\varphi$ is said to be obligatory within the context of normative system
+        $\eta$ iff $\varphi$ is \emph{inevitable} if the grand coalition conforms to $\eta$.
+      \end{itemize}
+      This leads immediately to the following definition of permission and obligation.
+      \[ \mathsf{O}_\eta\varphi \mathrel{\hat{=}} \neg\mathsf{P}_\eta\neg\varphi \]
+    context: |
+      Second bullet of the list introduced by "So, our definition of obligations and
+      permissions is as follows:"; the display is shared with wvh05-def-permission.
+    uses: [wvh05-def-permission]
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind) + Codex (anchored re-read); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: wvh05-deontic-chain
+    audit_row: S27-R17
+    locator: p.410 chain
+    pdf_page: 14-15
+    book_page: 409-410
+    label: 'chain of implications, §5'
+    latex: |
+      If something is naturally, or physically inevitable, then it is obligatory in any
+      normative system; if something is an obligation within a given normative system
+      $\eta$, then it is permissible in $\eta$; and if something is permissible in a given
+      normative system, then it is naturally (physically) possible. Thus we have the
+      following chain of implications (where $\eta$ is an arbitrary \emph{non-trivial}
+      normative system).
+      \[ \models (\mathsf{A}\varphi \to \mathsf{O}_\eta\varphi) \qquad
+         \models (\mathsf{O}_\eta\varphi \to \mathsf{P}_\eta\varphi) \qquad
+         \models (\mathsf{P}_\eta\varphi \to \mathsf{E}\varphi) \]
+      Note that the second of these properties does not hold for arbitrary normative
+      systems $\eta$: If $\eta = \eta_\top$ for example, we have $\mathsf{O}_\eta\varphi$
+      ($= \neg\mathsf{P}_\eta\neg\varphi$) for any $\varphi$, but at the same time,
+      $\mathsf{P}_\eta\psi$ for no $\psi$.
+    uses: [wvh05-def-atl-ctl-quantifiers, wvh05-def-permission, wvh05-def-obligation,
+           wvh05-def-non-trivial, wvh05-def-trivial-system]
+    note: >-
+      The lead-in sentence starts at the foot of p. 409 (PDF p. 14); the display and
+      remark are on p. 410. No proof is printed. "$\models$" without a structure is not
+      defined (see source.standing, Silent). The card's quote renders $\eta_\top$ as
+      plain "η".
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind) + Codex (anchored re-read); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: wvh05-prop3-1
+    audit_row: S27-R21
+    locator: Proposition 3(1), p.410
+    pdf_page: 15
+    book_page: 410
+    label: 'Proposition 3(1)'
+    latex: |
+      \textbf{Proposition 3.} \emph{Let $S$ be an \textsc{aats}, and let $\eta, \eta'$ be
+      arbitrary non-trivial normative systems over $S$ such that $\eta \preceq \eta'$
+      (i.e., $\eta$ is less restrictive than $\eta'$). Then}:
+      \begin{enumerate}
+      \item[(1)] $S \models \langle\!\langle \eta' : C \rangle\!\rangle\varphi \to
+        \langle\!\langle \eta : C \rangle\!\rangle\varphi$
+      \end{enumerate}
+    uses: [wvh05-def-aats, wvh05-def-non-trivial, wvh05-def-less-restrictive,
+           wvh05-sem-normative-ability]
+    proof_pages: 15
+    note: >-
+      The card's quote drops the primes: "(1) S |= η : Cϕ → η : Cϕ". $S \models$ is not
+      defined in the paper (source.standing, Silent). See excerpt wvh05-prop3-proof.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind) + Grok (blind) + Codex (anchored re-read); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: wvh05-prop3-2
+    audit_row: S27-R22
+    locator: Proposition 3(2), p.410
+    pdf_page: 15
+    book_page: 410
+    label: 'Proposition 3(2)'
+    latex: |
+      \textbf{Proposition 3.} \emph{Let $S$ be an \textsc{aats}, and let $\eta, \eta'$ be
+      arbitrary non-trivial normative systems over $S$ such that $\eta \preceq \eta'$
+      (i.e., $\eta$ is less restrictive than $\eta'$). Then}:
+      \begin{enumerate}
+      \item[(2)] $S \models \mathsf{P}_{\eta'}\varphi \to \mathsf{P}_\eta\varphi$
+      \end{enumerate}
+    uses: [wvh05-def-aats, wvh05-def-non-trivial, wvh05-def-less-restrictive,
+           wvh05-def-permission]
+    proof_pages: 15
+    note: 'The card''s quote drops the prime on $\mathsf{P}_{\eta''}$.'
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind) + Grok (blind) + Codex (anchored re-read); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: wvh05-prop3-3
+    audit_row: S27-R23
+    locator: Proposition 3(3), p.410
+    pdf_page: 15
+    book_page: 410
+    label: 'Proposition 3(3)'
+    latex: |
+      \textbf{Proposition 3.} \emph{Let $S$ be an \textsc{aats}, and let $\eta, \eta'$ be
+      arbitrary non-trivial normative systems over $S$ such that $\eta \preceq \eta'$
+      (i.e., $\eta$ is less restrictive than $\eta'$). Then}:
+      \begin{enumerate}
+      \item[(3)] $S \models \mathsf{O}_\eta\varphi \to \mathsf{O}_{\eta'}\varphi$
+      \end{enumerate}
+    uses: [wvh05-def-aats, wvh05-def-non-trivial, wvh05-def-less-restrictive,
+           wvh05-def-obligation]
+    proof_pages: 15
+    note: 'The card''s quote drops the prime on $\mathsf{O}_{\eta''}$.'
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind) + Grok (blind) + Codex (anchored re-read); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}

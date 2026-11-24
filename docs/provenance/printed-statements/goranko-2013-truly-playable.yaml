@@ -1,0 +1,411 @@
+source:
+  citation: >-
+    Valentin Goranko, Wojciech Jamroga and Paolo Turrini, "Strategic Games and
+    Truly Playable Effectivity Functions". Author manuscript ("Noname manuscript
+    No. (will be inserted by the editor)", "Received: date / Accepted: date") of
+    the JAAMAS version (Autonomous Agents and Multi-Agent Systems 26: 288--314,
+    2013). The venue, volume and pages are not printed in the manuscript; they are
+    the audit's (section 14). Title and authors read from PDF p. 1.
+  file: goranko-jamroga-turrini-author-manuscript-jaamas-2013-strategic-games-and-truly-playable-effectivity-functions.pdf
+  sha256: 9fc20337290d725d50f60772642fb942f36321f382c979b9a57c6f5e492a965f
+  page_offset: 0
+  standing: |
+    Strategic games (§2.1, p. 3): abstract game forms. "Following [16], we focus on
+    abstract game forms, where the effect of strategic interaction between players
+    is represented by abstract outcomes from a given set and players' preferences
+    are not specified. For simplicity we refer to them as strategic games."
+    (Definition 1, see gjt-def1-strategic-game.)
+
+    Outcome functions arbitrary (p. 3): "For games where payoffs are given, the
+    outcome function is often assumed a bijection and consequently dispensed with
+    [15]. Some works, mostly aiming at formalizing the condition of
+    \emph{non-imposedness} in social choice theory [14], assume surjectivity. As
+    different scenarios may require different assumptions, we consider games with
+    arbitrary outcome functions, as done in [16]."
+
+    Coalitional strategies (p. 3), see gjt-coalitional-strategies.
+
+    No finiteness of the outcome set $S$ or of the strategy sets is required in
+    Definition 1 (p. 3) or Definition 2 (p. 4). §3.1 (p. 9) uses the natural
+    numbers as the domain: "Consider a coalitional game frame with a single player
+    `$a$' that has the set of natural numbers $\mathbb{N}$ as the domain (i.e.,
+    $N = \{a\}, W = \mathbb{N}$)". Proposition 6 (p. 14) is the only result here
+    that assumes "a finite domain $S$".
+
+    Complement notation: $\overline{X}$ (Definition 3, p. 4) and $\overline{C}$
+    (Definition 6, p. 6) are used without a printed definition; none found on the
+    page images of pp. 3--6 nor in the text layer of pp. 1--8. (Pauly 2002, p. 150,
+    defines $\overline{C} := N \setminus C$; see pauly-2002-coalition-logic.)
+
+    Scope of true playability (p. 14, after Proposition 6): "Finally, note that in
+    a truly playable function the nonmonotonic core for coalitions different from
+    $\emptyset, N$ does not have to be complete, and neither does it have to be
+    nonempty, as Example 5 demonstrates."
+
+definitions:
+  - id: gjt-def1-strategic-game
+    label: Definition 1 (Strategic game)
+    pdf_page: 3
+    book_page: 3
+    latex: |
+      \textbf{Definition 1 (Strategic game)} A \emph{strategic game} $G$ is a tuple
+      $(N, \{\Sigma_i | i \in N\}, o, S)$ that consists of a nonempty finite set of
+      players $N$, a nonempty set of strategies $\Sigma_i$ for each player
+      $i \in N$, a nonempty set of outcomes $S$, and an outcome function
+      $o : \prod_{i \in N} \Sigma_i \to S$ which associates an outcome with every
+      strategy profile.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: gjt-coalitional-strategies
+    label: coalitional strategies (paragraph after Example 1)
+    pdf_page: 3
+    book_page: 3
+    latex: |
+      Additionally, we follow [16] and define coalitional strategies $\sigma_C$ in
+      $G$ as tuples of individual strategies $\sigma_i$ for $i \in C$, i.e.,
+      $\Sigma_C = \prod_{i \in C} \Sigma_i$. Note that (regardless of possible
+      conceptual interpretations of the empty coalition $\emptyset$, cf. [5] for a
+      discussion) this definition allows for only one strategy $\sigma_\emptyset$
+      when $C = \emptyset$, namely the empty function.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: gjt-def2-effectivity-function
+    label: Definition 2 (Effectivity function)
+    pdf_page: 4
+    book_page: 4
+    latex: |
+      \textbf{Definition 2 (Effectivity function)} An \emph{effectivity function}
+      is a function
+      \[ E : 2^N \to 2^{2^S} \]
+      that associates a family of sets of states from $S$ with each set of players.
+
+      Intuitively, elements of $E(C)$ are \emph{choices} available to coalition
+      $C$: if $X \in E(C)$ then by choosing $X$ the coalition $C$ can force the
+      outcome of the game to be in $X$. Effectivity functions are usually required
+      to satisfy additional properties, consistent with this interpretation.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: gjt-def3-playability
+    label: Definition 3 (Playability [16])
+    pdf_page: 4
+    book_page: 4
+    latex: |
+      \textbf{Definition 3 (Playability [16])} An effectivity function $E$ is
+      \emph{playable} iff the following conditions hold:
+
+      \emph{Outcome monotonicity:} $X \in E(C)$ and $X \subseteq Y$ implies
+      $Y \in E(C)$;\\
+      \emph{N-maximality:} $\overline{X} \notin E(\emptyset)$ implies
+      $X \in E(N)$;\\
+      \emph{Liveness:} $\emptyset \notin E(C)$;\\
+      \emph{Safety:} $S \in E(C)$;\\
+      \emph{Superadditivity:} if $C \cap D = \emptyset$, $X \in E(C)$ and
+      $Y \in E(D)$, then $X \cap Y \in E(C \cup D)$.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: gjt-fn2-filter
+    label: Footnote 2 (filter)
+    pdf_page: 5
+    book_page: 5
+    latex: |
+      A family $F$ of subsets of $\Omega$ is a \emph{filter} if and only if (1)
+      $\Omega \in F$, (2) $\emptyset \notin F$ (3) $F$ is closed under finite
+      intersection, and (4) $F$ is closed under supersets. These structures are
+      sometimes referred to as proper filters, to distinguish them from improper
+      filters, that do not satisfy condition (2) and consequently coincide with
+      $2^\Omega$ (cf. e.g. [6]).
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: gjt-def6-alpha-effectivity
+    label: Definition 6 (α-Effectivity in Strategic Games)
+    pdf_page: 6
+    book_page: 6
+    latex: |
+      \textbf{Definition 6 ($\alpha$-Effectivity in Strategic Games)} For a
+      strategic game G, the (coalitional) \emph{$\alpha$-effectivity function
+      $E^\alpha_G : 2^N \to 2^{2^S}$ is defined as follows: $X \in E^\alpha_G(C)$
+      if and only if there exists $\sigma_C$ such that for all $\sigma_{\overline{C}}$
+      we have $o(\sigma_C, \sigma_{\overline{C}}) \in X$.}
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: gjt-fn3-principal-filter
+    label: Footnote 3 (principal filter)
+    pdf_page: 6
+    book_page: 6
+    latex: |
+      Filter $F$ on domain $\Omega$ is \emph{principal} iff there exists
+      $X \subseteq \Omega$ such that $F$ is the set of all supersets of $X$. Then,
+      $F$ is said to be \emph{generated} by $X$. Filters that are not principal are
+      referred to as \emph{non-principal}.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+statements:
+  - id: gjt-def-4
+    audit_row: S14-R01
+    locator: Def. 4
+    pdf_page: 5
+    book_page: 5
+    label: Definition 4 (Nonmonotonic core [16])
+    latex: |
+      \textbf{Definition 4 (Nonmonotonic core [16])} Let $E$ be an effectivity
+      function. The \emph{nonmonotonic core} $E^{nc}(C)$ for $C \subseteq N$ is the
+      set of minimal sets in $E(C)$:
+      \[ E^{nc}(C) = \{X \in E(C) \mid \neg\exists Y (Y \in E(C) \text{ and }
+         Y \subsetneq X)\}. \]
+    uses: [gjt-def2-effectivity-function]
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: gjt-def-5
+    audit_row: S14-R02
+    locator: Def. 5
+    pdf_page: 5
+    book_page: 5
+    label: Definition 5 (Complete nonmonotonic core)
+    latex: |
+      \textbf{Definition 5 (Complete nonmonotonic core)} The nonmonotonic core
+      $E^{nc}(C)$ is \emph{complete} iff for every $X \in E(C)$ there exists
+      $Y \in E^{nc}(C)$ such that $Y \subseteq X$.
+    uses: [gjt-def2-effectivity-function, gjt-def-4]
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: gjt-def-8
+    audit_row: S14-R03
+    locator: Def. 8
+    pdf_page: 13
+    book_page: 13
+    label: Definition 8
+    latex: |
+      \textbf{Definition 8} An effectivity function $E$ is \emph{truly playable}
+      iff it is playable and $E(\emptyset)$ has a complete nonmonotonic core.
+    note: >-
+      The atlas's quotation writes "`E(∅)` has a complete nonmonotonic core"; the
+      print matches. Completeness is required at the empty coalition only (see
+      source.standing, p. 14).
+    uses: [gjt-def2-effectivity-function, gjt-def3-playability, gjt-def-4, gjt-def-5]
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: gjt-def-9
+    audit_row: S14-R04
+    locator: Def. 9
+    pdf_page: 13
+    book_page: 13
+    label: Definition 9
+    latex: |
+      \textbf{Definition 9} An effectivity function $E : 2^N \to 2^{2^S}$ is a
+      \emph{crown} iff $X \in E(N)$ implies $\{x\} \in E(N)$ for some $x \in X$.
+    uses: [gjt-def2-effectivity-function]
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: gjt-prop-1-1
+    audit_row: S14-R05
+    locator: Prop. 1 (1)
+    pdf_page: 5
+    book_page: 5
+    label: Proposition 1, item 1
+    latex: |
+      \textbf{Proposition 1} \emph{For every playable effectivity function $E$:}
+      \begin{enumerate}
+      \item \emph{$E(\emptyset)$ is a filter.}$^{2}$
+      \end{enumerate}
+    context: |
+      Introduced by (p. 5): "The nonmonotonic core of the empty coalition is of
+      particular interest to us. For it, the following holds." Footnote 2 is the
+      filter definition (gjt-fn2-filter). Item 2 continues on p. 6 (gjt-prop-1-2).
+    uses: [gjt-def2-effectivity-function, gjt-def3-playability, gjt-fn2-filter]
+    proof_pages: 6
+    note: >-
+      The domain $\Omega$ of the filter is not named in the statement; footnote 2
+      defines filters on an arbitrary $\Omega$, and the proof (p. 6) reads it as
+      $S$ ("$E(\emptyset)$ is non-empty by safety").
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind) + Codex (anchored re-read); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: gjt-prop-1-2
+    audit_row: S14-R06
+    locator: Prop. 1 (2)
+    pdf_page: 6
+    book_page: 6
+    label: Proposition 1, item 2
+    latex: |
+      \textbf{Proposition 1} \emph{For every playable effectivity function $E$:}
+      [\ldots]
+      \begin{enumerate}
+      \setcounter{enumi}{1}
+      \item \emph{$E^{nc}(\emptyset)$ is either empty or a singleton.}
+      \end{enumerate}
+    context: |
+      The proposition's head is on p. 5; item 2 is the first line of p. 6.
+    uses: [gjt-def2-effectivity-function, gjt-def3-playability, gjt-def-4]
+    proof_pages: 6
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind) + Codex (anchored re-read); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: gjt-prop-2
+    audit_row: S14-R07
+    locator: Prop. 2
+    pdf_page: 6
+    book_page: 6
+    label: Proposition 2
+    latex: |
+      \textbf{Proposition 2} \emph{For every $\alpha$-effectivity function
+      $E^\alpha_G : 2^N \to 2^{2^S}$, the following hold:}
+      \begin{enumerate}
+      \item \emph{The nonmonotonic core of $E^\alpha_G(\emptyset)$ is the singleton
+        set $\{Z\}$ where $Z = \{x \in S \mid x = o(\sigma_N)$ for some
+        $\sigma_N\}$.}
+      \item \emph{$E^\alpha_G(\emptyset)$ is the principal$^{3}$ filter generated
+        by $Z$.}
+      \end{enumerate}
+    uses: [gjt-def1-strategic-game, gjt-def6-alpha-effectivity, gjt-def-4, gjt-fn2-filter, gjt-fn3-principal-filter]
+    proof_pages: 6
+    note: >-
+      Proposition 2 does not itself say that $E^\alpha_G$ is truly playable; the
+      atlas paraphrase ("and such a function is truly playable") adds that.
+      True playability is defined only on p. 13 (Definition 8); playability of
+      $E^\alpha_G$ is asserted on p. 9 ("each strategic game has an
+      $\alpha$-effectivity function that is playable ... the proof of the latter
+      claim is an easy check of the definitions"). "The nonmonotonic core of
+      $E^\alpha_G(\emptyset)$" is printed for $(E^\alpha_G)^{nc}(\emptyset)$, as
+      the proof writes it: "$E^{nc}(\emptyset) = \{Z\}$ for $E = E^\alpha_G$".
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind) + Codex (anchored re-read); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: gjt-prop-5-1-2
+    audit_row: S14-R08
+    locator: Prop. 5 (1) ⇔ (2)
+    pdf_page: 13
+    book_page: 13
+    label: Proposition 5, items (1) and (2)
+    latex: |
+      \textbf{Proposition 5} \emph{The following are equivalent for every playable
+      effectivity function $E : 2^N \to 2^{2^S}$.}
+      \begin{enumerate}
+      \item \emph{$E$ is truly playable.}
+      \item \emph{$E(\emptyset)$ has a non-empty nonmonotonic core.}
+      \item \emph{$E^{nc}(\emptyset)$ is a singleton and $E(\emptyset)$ is a
+        principal filter, generated by $E^{nc}(\emptyset)$.}
+      \item \emph{$E$ is a crown.}
+      \end{enumerate}
+    context: |
+      The whole proposition is transcribed; this row grades the equivalence of
+      items 1 and 2.
+    uses: [gjt-def2-effectivity-function, gjt-def3-playability, gjt-def-4, gjt-def-5, gjt-def-8, gjt-fn2-filter, gjt-fn3-principal-filter]
+    proof_pages: 13-14
+    note: >-
+      The printed proof gives (1) $\Rightarrow$ (2) "immediate, by safety",
+      (2) $\Rightarrow$ (3), (3) $\Rightarrow$ (1), (3) $\Rightarrow$ (4),
+      (4) $\Rightarrow$ (3) (pp. 13--14). In the (3) $\Rightarrow$ (4) step (p. 14)
+      "suppose $\{x\} \notin E(N)$ for all $x \in X$ for some $X \in E(\emptyset)$"
+      appears to be a slip for $X \in E(N)$ (the step concludes
+      "$X \notin E(N)$"); not used by this row.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind) + Codex (anchored re-read); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: gjt-prop-5-1-3
+    audit_row: S14-R09
+    locator: Prop. 5 (1) ⇔ (3)
+    pdf_page: 13
+    book_page: 13
+    label: Proposition 5, items (1) and (3)
+    latex: |
+      \textbf{Proposition 5} \emph{The following are equivalent for every playable
+      effectivity function $E : 2^N \to 2^{2^S}$.}
+      \begin{enumerate}
+      \item \emph{$E$ is truly playable.}
+      \item \emph{$E(\emptyset)$ has a non-empty nonmonotonic core.}
+      \item \emph{$E^{nc}(\emptyset)$ is a singleton and $E(\emptyset)$ is a
+        principal filter, generated by $E^{nc}(\emptyset)$.}
+      \item \emph{$E$ is a crown.}
+      \end{enumerate}
+    context: |
+      Same proposition as gjt-prop-5-1-2; this row grades the equivalence of items
+      1 and 3.
+    uses: [gjt-def2-effectivity-function, gjt-def3-playability, gjt-def-4, gjt-def-8, gjt-fn2-filter, gjt-fn3-principal-filter]
+    proof_pages: 13-14
+    note: >-
+      "generated by $E^{nc}(\emptyset)$" is printed with the singleton family
+      $E^{nc}(\emptyset)$, not its element; footnote 3 (p. 6) defines "generated
+      by $X$" for a set $X \subseteq \Omega$. The proof of (2) $\Rightarrow$ (3)
+      (p. 14) reads it as generated by $Z$ where $E^{nc}(\emptyset) = \{Z\}$.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind) + Codex (anchored re-read); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: gjt-prop-6
+    audit_row: S14-R11
+    locator: Prop. 6
+    pdf_page: 14
+    book_page: 14
+    label: Proposition 6
+    latex: |
+      \textbf{Proposition 6} \emph{Every playable effectivity function
+      $E : 2^N \to 2^{2^S}$ on a finite domain $S$ is truly playable.}
+    context: |
+      Preceded by (p. 14): "We also observe that on finite domains playability and
+      true playability coincide."
+    uses: [gjt-def2-effectivity-function, gjt-def3-playability, gjt-def-8]
+    proof_pages: 14
+    note: >-
+      The atlas's quoted fragment ("on finite domains playability and true
+      playability coincide") is the sentence before the proposition, not the
+      proposition. The proof (p. 14) is one line: "Straightforward, by
+      Proposition 5.3 and the fact that every filter on a finite set is
+      principal." ("5.3" printed as a link to item 3 of Proposition 5.)
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: gjt-prop-4-counterexample
+    audit_row: S14-R12
+    locator: §3.1 counterexample
+    pdf_page: 9-10
+    book_page: 9-10
+    label: Proposition 4 and the counterexample in its proof (§3.1)
+    latex: |
+      \textbf{Proposition 4} \emph{There is a playable effectivity function $E$ for
+      which $E \neq E^\alpha_G$ for all strategic games $G$.}
+
+      \emph{Proof} Consider a coalitional game frame with a single player `$a$'
+      that has the set of natural numbers $\mathbb{N}$ as the domain (i.e.,
+      $N = \{a\}, W = \mathbb{N}$), and the effectivity defined as follows:
+      \begin{itemize}
+      \item[--] $E(\{a\}) = \{X \subseteq \mathbb{N} \mid X \text{ is infinite}\}$;
+      \item[--] $E(\emptyset) = \{X \subseteq \mathbb{N} \mid \overline{X}
+        \text{ is finite}\}$.
+      \end{itemize}
+      In other words, the grand coalition $\{a\}$ is effective for all infinite
+      subsets of the natural numbers, while the empty coalition can enforce all
+      its cofinite subsets.
+
+      $E$ is playable and it does not correspond to any strategic game. [\ldots]
+
+      On the other hand, $E^{nc}(\emptyset) = \emptyset$ because there are no
+      minimal cofinite sets. This implies, by Proposition 2, that
+      $E \neq E^\alpha_G$ for all strategic games $G$.
+    context: |
+      The playability check omitted at [\ldots] (pp. 9--10): "To see this let us
+      first verify the playability conditions. Outcome monotonicity, N-maximality,
+      liveness and safety are straightforward to check. For superadditivity,
+      notice that we only have two cases to verify: 1. $C = \{a\}, C' = \emptyset$;
+      2. $C = \emptyset, C' = \emptyset$." followed by the two case arguments.
+    uses: [gjt-def2-effectivity-function, gjt-def3-playability, gjt-def-4, gjt-prop-2, gjt-def6-alpha-effectivity]
+    proof_pages: 9-10
+    note: >-
+      The counterexample is printed as the proof of Proposition 4. The bar in
+      "$\overline{X}$ is finite" is present on the page (checked at 250 dpi); the
+      text layer drops it. "$W = \mathbb{N}$" uses the modal-logic name $W$ (§2.3,
+      p. 6) for what Definitions 2 and 6 call the state set $S$; the superadditivity
+      cases name the coalitions $C, C'$ where Definition 3 writes $C, D$.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind) + Codex (anchored re-read); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+excerpts: []

@@ -60,14 +60,18 @@ separate obligation and is not taken here. See the closing section.
   `EUDetermined` factors through it -- and the carrier at that point is
   `Finset V`, not `Set`. Only `InvolutiveCopies` and `ContainsCopies`, which
   never read a profile, are stated over `Set`.
-  The one genuine narrowing is that carrier: print's type at A.12 is the power
-  set `𝒫 (ℝᵈ)`. It is costed in section 16 of
-  `docs/provenance/source-coverage-audit.md` and the cost buys nothing, since no
-  step of the chain reads a cardinality and an infinite profile would need a
-  multiplicity function `ℝ → Cardinal` that Mathlib does not carry. Print's
-  equation (4) presupposes finiteness anyway by writing a multiset and its size;
-  print's definition A.2 states it outright, while A.12 and A.13 do not restate
-  it.
+  That carrier is narrower than print's type at A.12, which is the power set
+  `𝒫 (ℝᵈ)`. `eu_determined_mostOrbit` keeps the `Finset` carrier. Definition
+  A.12, lemma B.11 and theorem A.13 are also rendered at print's scope:
+  `EUDeterminedSet` takes `m` arbitrary option sets and reads each through
+  its multiplicity function `ℝ → Cardinal` (`euProfileSet`),
+  `EUDeterminedSet.jointPermInvariant` is B.11 there, and
+  `eu_determined_mostOrbit_set` is A.13 for arbitrary `A`, `B`, `C`.
+  `euProfileSet_coe` checks that on a finite set the multiplicity function is the
+  count of `euProfile`, and `EUDeterminedSet.euDeterminedN_coe` lifts that to the
+  definitions. `EUDeterminedN` is the `m`-ary form on `Finset`s, and
+  `euDetermined_iff_euDeterminedN_two` says the binary `EUDetermined` is its case
+  `m = 2`.
 * **Print's cardinality index is dropped, and that is not a narrowing.** Print
   writes a *family* `{g^{ω₁,…,ω_m}}` indexed by the `|Xᵢ|`. `Multiset.card`
   recovers each `|Xᵢ|` from the profile itself, so the single `g` here carries
@@ -188,9 +192,10 @@ Lemma B.9 and definition B.8 are stated by print over a family `E` of subsets of
 `ℝᵈ`, ordered by inclusion and permuted pointwise. The two properties the proof
 uses are exactly that: an order, and an action. So they are stated here over an
 arbitrary ordered `G`-set, and `Set X` -- print's case -- is one instance of it.
-`Finset V` is the other, and is what theorem A.13 needs, because print's
-equation (4) reads a *multiset* of inner products and a multiset needs a finite
-option set.
+`Finset V` is the other, and is what `eu_determined_mostOrbit` uses, because
+print's equation (4) reads a *multiset* of inner products and a multiset needs a
+finite option set. `eu_determined_mostOrbit_set` uses `Set V`, reading the
+multiset as a multiplicity function.
 -/
 
 section Abstract
@@ -204,6 +209,25 @@ option set and its parameter are permuted *together* by any `φ i`.
 @[expose] public def IncreasingUnderJointPerm {n : ℕ} (E : Set 𝔈) (Θ : Set Ω)
     (φ : Fin n → G) (f : 𝔈 → Ω → ℝ) : Prop :=
   ∀ i, ∀ S ∈ E, ∀ θ ∈ Θ, f S θ ≤ f (φ i • S) (φ i • θ)
+
+omit [Preorder 𝔈] in
+/--
+**Definition B.4, its second sentence**: *"If equality always holds, then
+`f(X₁, …, Xₘ)` is invariant under joint permutation by `P`."* Stated at the same
+shape as `IncreasingUnderJointPerm`: one option set and the parameter, permuted
+together by each `φ i` of the family that plays print's `P`.
+-/
+@[expose] public def InvariantUnderJointPerm {n : ℕ} (E : Set 𝔈) (Θ : Set Ω)
+    (φ : Fin n → G) (f : 𝔈 → Ω → ℝ) : Prop :=
+  ∀ i, ∀ S ∈ E, ∀ θ ∈ Θ, f S θ = f (φ i • S) (φ i • θ)
+
+omit [Preorder 𝔈] in
+/-- **Invariance is the equality case of definition B.4**, so an invariant `f` is
+increasing under joint permutation. -/
+public theorem InvariantUnderJointPerm.increasingUnderJointPerm {n : ℕ} {E : Set 𝔈}
+    {Θ : Set Ω} {φ : Fin n → G} {f : 𝔈 → Ω → ℝ} (h : InvariantUnderJointPerm E Θ φ f) :
+    IncreasingUnderJointPerm E Θ φ f :=
+  fun i S hS θ hθ => (h i S hS θ hθ).le
 
 /--
 **Definition B.8 (superset-of-copy containment).** `B` contains `n`
@@ -337,6 +361,19 @@ public theorem increasingUnderJointPerm_of_hide_invariant {n : ℕ} {E : Set �
   increasingUnderJointPerm_of_hide h hC
     fun i S _ θ _ => le_of_eq (hinv (φ i) S θ).symm
 
+/-- **Lemma B.10, the furthermore, at print's conclusion**: *"if `h` is invariant
+under joint permutation by `φᵢ`, then so is `f`."* The hypothesis is print's,
+asked only at the fixed `C` and only for the `φ i`, and the conclusion is the
+equality of definition B.4's second sentence, not the inequality. -/
+public theorem invariantUnderJointPerm_of_hide {n : ℕ} {E : Set 𝔈} {Θ : Set Ω}
+    {φ : Fin n → G} {C : 𝔉} (h : 𝔈 → 𝔉 → Ω → ℝ)
+    (hC : ∀ i, φ i • C = C)
+    (hinv : ∀ i, ∀ S ∈ E, ∀ θ ∈ Θ, h S C θ = h (φ i • S) (φ i • C) (φ i • θ)) :
+    InvariantUnderJointPerm E Θ φ (fun S θ => h S C θ) := by
+  intro i S hS θ hθ
+  have heq := hinv i S hS θ hθ
+  rwa [hC i] at heq
+
 end Hiding
 
 /-! ## Definition A.12, lemma B.11 and theorem A.13 -/
@@ -366,7 +403,8 @@ expected utilities they induce.
 Print writes a *family* `{g^{ω₁,…,ω_m}}` indexed by the cardinalities `|Xᵢ|`. The
 index is redundant: `Multiset.card` recovers `|Xᵢ|` from the profile itself, so a
 single `g` carries the same data. Print's `m` is arbitrary; A.13 uses `m = 2` and
-that is the case rendered here.
+that is the case rendered here. `EUDeterminedN` takes arbitrary `m`, and
+`EUDeterminedSet` takes arbitrary `m` and arbitrary option sets.
 -/
 @[expose] public def EUDetermined (pair : V → V → ℝ)
     (h : Finset V → Finset V → V → ℝ) : Prop :=
@@ -402,6 +440,58 @@ public theorem EUDetermined.jointPermInvariant {pair : V → V → ℝ}
   rw [hg, hg, euProfile_smul hpair, euProfile_smul hpair]
 
 /--
+**Definition A.12 (EU-determined functions) at print's arity `m`**, on finite
+option sets.
+
+`EUDetermined` is the case `m = 2` that theorem A.13 consumes and stays the
+carrier of that theorem. Here `h` takes a family `X : Fin m → Finset V` of option
+sets, and `g` reads one expected-utility multiset per argument. The cardinality
+index of print's family `{g^{ω₁,…,ω_m}}` is dropped for the reason given at
+`EUDetermined`. `EUDeterminedSet` drops the finiteness as well.
+-/
+@[expose] public def EUDeterminedN {m : ℕ} (pair : V → V → ℝ)
+    (h : (Fin m → Finset V) → V → ℝ) : Prop :=
+  ∃ g : (Fin m → Multiset ℝ) → ℝ,
+    ∀ X u, h X u = g fun i => euProfile pair u (X i)
+
+/--
+**Lemma B.11 at print's arity `m`**, on finite option sets: an EU-determined
+function of `m` option sets is unchanged when all `m` sets and the parameter are
+permuted together. The proof of the binary case runs under `funext`.
+-/
+public theorem EUDeterminedN.jointPermInvariant {m : ℕ} {pair : V → V → ℝ}
+    {h : (Fin m → Finset V) → V → ℝ} (hEU : EUDeterminedN pair h)
+    (hpair : ∀ (g : G) (x u : V), pair (g • x) (g • u) = pair x u)
+    (g₀ : G) (X : Fin m → Finset V) (u : V) :
+    h (fun i => g₀ • X i) (g₀ • u) = h X u := by
+  obtain ⟨g, hg⟩ := hEU
+  rw [hg, hg]
+  congr 1
+  funext i
+  exact euProfile_smul hpair g₀ u (X i)
+
+omit [DecidableEq V] in
+/--
+**The binary definition is print's definition A.12 at `m = 2`.** `EUDetermined`,
+which theorem A.13 consumes, says the same as `EUDeterminedN` at arity two once
+the two option-set arguments are packed into a family `Fin 2 → Finset V`.
+-/
+public theorem euDetermined_iff_euDeterminedN_two {pair : V → V → ℝ}
+    {h : Finset V → Finset V → V → ℝ} :
+    EUDetermined pair h ↔ EUDeterminedN (m := 2) pair fun X u => h (X 0) (X 1) u := by
+  constructor
+  · rintro ⟨g, hg⟩
+    exact ⟨fun P => g (P 0) (P 1), fun X u => hg (X 0) (X 1) u⟩
+  · rintro ⟨g, hg⟩
+    refine ⟨fun a b => g fun i => if i = 0 then a else b, fun X Y u => ?_⟩
+    have := hg (fun i => if i = 0 then X else Y) u
+    simp only [if_true, if_neg (show (1 : Fin 2) ≠ 0 by decide)] at this
+    rw [this]
+    congr 1
+    funext i
+    split_ifs <;> rfl
+
+/--
 **Theorem A.13 (orbit tendencies occur for EU-determined decision-making
 functions).**
 
@@ -435,5 +525,142 @@ public theorem eu_determined_mostOrbit [Finite G] {n : ℕ} {pair : V → V → 
     (fun X _ Y _ hXY u => hmono X Y hXY u)
 
 end EUDetermined
+
+/-! ## Definition A.12 and lemma B.11 on arbitrary option sets
+
+Print's domain at A.12 and B.11 is the power set `𝒫(ℝᵈ)`, so an option set may be
+infinite. The multiset `[xᵀu]_{x ∈ X}` of equation (4) is then read as its
+multiplicity function, `r ↦ #{x ∈ X ∣ xᵀu = r}`, with cardinal values.
+`euProfileSet_coe` checks that on a finite set this is the count function of
+print's multiset `euProfile`. -/
+
+section EUDeterminedSet
+
+variable {V : Type w} [MulAction G V]
+
+/--
+**Print's `[xᵀu]_{x ∈ X}` for an arbitrary option set**: the multiplicity function
+sending each real `r` to the number of options in `X` whose expected utility at
+`u` is `r`, as a cardinal.
+-/
+@[expose] public def euProfileSet (pair : V → V → ℝ) (u : V) (X : Set V) :
+    ℝ → Cardinal.{w} :=
+  fun r => Cardinal.mk ↥{x | x ∈ X ∧ pair x u = r}
+
+/-- **On a finite option set the multiplicity function is the count of print's
+multiset**: `euProfileSet` and `euProfile` carry the same data there. -/
+public theorem euProfileSet_coe [DecidableEq V] (pair : V → V → ℝ) (u : V)
+    (X : Finset V) (r : ℝ) :
+    euProfileSet pair u (X : Set V) r = ((euProfile pair u X).count r : Cardinal.{w}) := by
+  classical
+  have hset : {x | x ∈ (X : Set V) ∧ pair x u = r}
+      = ((X.filter fun x => pair x u = r : Finset V) : Set V) := by
+    ext x
+    simp
+  rw [euProfileSet, hset, Finset.coe_sort_coe, Cardinal.mk_coe_finset, euProfile, Multiset.count_map]
+  congr 1
+  rw [Finset.card_def, Finset.filter_val]
+  congr 1
+  exact Multiset.filter_congr fun x _ => eq_comm
+
+/-- The multiplicity profile is unchanged when the options and the parameter are
+permuted together, provided the pairing is invariant: lemma B.11's content on
+arbitrary option sets. Finiteness is not read; acting by `g₀` is a bijection
+between the two fibres. -/
+public theorem euProfileSet_smul {pair : V → V → ℝ}
+    (hpair : ∀ (g : G) (x u : V), pair (g • x) (g • u) = pair x u)
+    (g₀ : G) (u : V) (X : Set V) :
+    euProfileSet pair (g₀ • u) (g₀ • X) = euProfileSet pair u X := by
+  funext r
+  have hset : {y | y ∈ g₀ • X ∧ pair y (g₀ • u) = r}
+      = (fun x => g₀ • x) '' {x | x ∈ X ∧ pair x u = r} := by
+    ext y
+    simp only [Set.mem_ofPred_eq, Set.mem_image, Set.mem_smul_set]
+    constructor
+    · rintro ⟨⟨x, hx, rfl⟩, hr⟩
+      exact ⟨x, ⟨hx, by rwa [hpair] at hr⟩, rfl⟩
+    · rintro ⟨x, ⟨hx, hr⟩, rfl⟩
+      exact ⟨⟨x, hx, rfl⟩, by rw [hpair]; exact hr⟩
+  rw [euProfileSet, euProfileSet, hset, Cardinal.mk_image_eq (MulAction.injective g₀)]
+
+/--
+**Definition A.12 (EU-determined functions) at print's scope**: `m` option sets,
+each an arbitrary subset, read only through their multiplicity profiles.
+
+Print's cardinality index `|X₁|, …, |X_m|` is dropped, as at `EUDetermined`: the
+size of `Xᵢ` is the sum of its multiplicity function over the reals.
+-/
+@[expose] public def EUDeterminedSet {m : ℕ} (pair : V → V → ℝ)
+    (h : (Fin m → Set V) → V → ℝ) : Prop :=
+  ∃ g : (Fin m → ℝ → Cardinal.{w}) → ℝ,
+    ∀ X u, h X u = g fun i => euProfileSet pair u (X i)
+
+/--
+**Lemma B.11 (EU-determined functions are invariant under joint permutation), at
+print's scope**: `m` arbitrary option sets, finite or not, and an invariant
+pairing in place of print's orthogonal permutation matrix.
+-/
+public theorem EUDeterminedSet.jointPermInvariant {m : ℕ} {pair : V → V → ℝ}
+    {h : (Fin m → Set V) → V → ℝ} (hEU : EUDeterminedSet pair h)
+    (hpair : ∀ (g : G) (x u : V), pair (g • x) (g • u) = pair x u)
+    (g₀ : G) (X : Fin m → Set V) (u : V) :
+    h (fun i => g₀ • X i) (g₀ • u) = h X u := by
+  obtain ⟨g, hg⟩ := hEU
+  rw [hg, hg]
+  congr 1
+  funext i
+  exact euProfileSet_smul hpair g₀ u (X i)
+
+/--
+**Definition A.12 on arbitrary option sets restricts to the finite one.** A
+function EU-determined on all option sets is, on finite option sets,
+EU-determined in the sense of `EUDeterminedN`: its `g` reads the multiplicity
+profiles, and on a finite set the profile is the count of print's multiset
+(`euProfileSet_coe`). With `euDetermined_iff_euDeterminedN_two` this is agreement
+with the binary `EUDetermined` at `m = 2`.
+-/
+public theorem EUDeterminedSet.euDeterminedN_coe [DecidableEq V] {m : ℕ}
+    {pair : V → V → ℝ} {h : (Fin m → Set V) → V → ℝ} (hEU : EUDeterminedSet pair h) :
+    EUDeterminedN pair fun (X : Fin m → Finset V) u => h (fun i => (X i : Set V)) u := by
+  obtain ⟨g, hg⟩ := hEU
+  refine ⟨fun P => g fun i r => ((P i).count r : Cardinal.{w}), fun X u => ?_⟩
+  show h _ u = _
+  rw [hg]
+  congr 1
+  funext i r
+  exact euProfileSet_coe pair u (X i) r
+
+/--
+**Theorem A.13 on arbitrary option sets** (Turner and Tadepalli,
+arXiv:2206.13477v2, theorem A.13: *"Let `A, B, C ⊆ ℝᵈ` … Let
+`h : ∏_{i=1}^2 𝒫(ℝᵈ) × ℝᵈ → ℝ` be an EU-determined function"*).
+
+`eu_determined_mostOrbit` is the same theorem on `Finset`s. Here `A`, `B`, `C` and
+the copies `B⋆ i` are arbitrary subsets, finite or not, and `h` is EU-determined
+in the sense of `EUDeterminedSet` at `m = 2`, reading each option set through its
+multiplicity profile. The proof is print's chain at the ordered `G`-set `Set V`:
+lemma B.11 (`EUDeterminedSet.jointPermInvariant`), lemma B.10 and lemma B.9.
+`hmono` is print's monotonicity probability axiom, as at the `Finset` version.
+-/
+public theorem eu_determined_mostOrbit_set [Finite G] {n : ℕ} {pair : V → V → ℝ}
+    {h : Set V → Set V → V → ℝ} {A B C : Set V} {Bstar : Fin n → Set V}
+    {φ : Fin n → G}
+    (hEU : EUDeterminedSet (m := 2) pair fun X u => h (X 0) (X 1) u)
+    (hpair : ∀ (g : G) (x u : V), pair (g • x) (g • u) = pair x u)
+    (hC : ∀ i, φ i • C = C)
+    (hcopies : SupersetCopies G n B A Bstar φ)
+    (hmono : ∀ X Y : Set V, X ⊆ Y → ∀ u, h X C u ≤ h Y C u) :
+    MostOrbit G n (Set.univ : Set V) (fun u => h A C u) (fun u => h B C u) :=
+  mostOrbit_of_supersetCopies
+    (fun _ _ _ => Set.mem_univ _)
+    (Set.mem_univ A) (Set.mem_univ B) (fun _ => Set.mem_univ _) (fun _ => Set.mem_univ _)
+    hcopies
+    (increasingUnderJointPerm_of_hide_invariant (fun X Y u => h X Y u) hC
+      fun g X u => by
+        have := hEU.jointPermInvariant hpair g (fun i => if i = 0 then X else C) u
+        simpa only [if_pos rfl, if_true, if_neg (show (1 : Fin 2) ≠ 0 by decide)] using this)
+    (fun X _ Y _ hXY u => hmono X Y hXY u)
+
+end EUDeterminedSet
 
 end AISafetyAtlas.Sovereignty

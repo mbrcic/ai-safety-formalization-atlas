@@ -1,0 +1,436 @@
+source:
+  citation: >-
+    Thomas Breuer, The Impossibility of Accurate State Self-Measurements,
+    Philosophy of Science, Vol. 62, No. 2 (Jun., 1995), pp. 197-214.
+    Stable URL: http://www.jstor.org/stable/188430. Sections 3.2-3.5.
+  file: PhilSci1993-ImpossibilityOfAccurateSelfMeasurements.pdf
+  sha256: 5e558352d034e2a1e18f83167a85377e3e5f566635122f315c8b414bf2d452ac
+  page_offset: 195
+  standing: |
+    (File: the name says 1993; the JSTOR cover page, PDF p. 1, reads "Philosophy of
+    Science, Vol. 62, No. 2 (Jun., 1995), pp. 197-214". Journal p. 197 is PDF
+    p. 2.)
+
+    States (§3.2, p. 202, PDF p. 7): "Let us assume that we have a physical theory
+    whose formalism specifies sets of possible states for the systems it describes.
+    These states may refer to individual systems or to statistical ensembles."
+
+    Measurement and time (§3.2, p. 203, PDF p. 8): "A measurement performed by an
+    apparatus $A$ on some observed system $O$ is an interaction establishing certain
+    relations between the states of $A$ and of $O$. After a measurement, we infer
+    information about the state of the observed system from information we have
+    about the state of the apparatus. I will take it that the states of $A$ and of
+    $O$ refer to the \emph{same} time after the experiment."
+
+    Inference map fixed (§3.2, p. 203, PDF p. 8): "$\theta$ is different in
+    different measurement situations. But when the observer chooses the
+    experimental set-up, he also chooses a map $\theta$ describing how he is going
+    to interpret the pointer reading after the experiment. This map is fixed
+    throughout the measurement. The states in $\theta(\mathcal{S}_{\mathcal{A}})$
+    are the possible states of $O$ after the experiment; usually not every state of
+    $O$ is a possible state after the experiment. We have
+    $\theta(\mathcal{S}_{\mathcal{A}}) \subset \mathcal{S}_{\mathcal{O}}$."
+
+    Apparatus inside the system (§3.3, p. 205, PDF p. 10): "consider the case where
+    the apparatus is measuring a system in which it is contained. So the observed
+    system $O$ is composed of the apparatus $A$ and of a rest $R$. We assume that
+    the observed system has more degrees of freedom than the apparatus and contains
+    it."
+
+    Finiteness and continuity (§3.4, pp. 206-207, PDF pp. 11-12): finitely many
+    states is treated as a special case ("If $O$ has only finitely many possible
+    states, [\ldots]"), and for infinitely many states: "Since this case is
+    difficult to handle I will drop the assumption of continuity altogether.
+    Instead I take an entirely different approach." No finiteness is assumed for
+    Propositions 1, 2, the Lemma or the Corollary.
+
+    Scope of the results (§4, p. 209, PDF p. 14): "The main results presented until
+    now are true for classical and for quantum mechanics, and irrespective of the
+    character of the time evolution."
+
+definitions:
+  - id: br-def-curly-notation
+    label: footnote 1 (notation)
+    pdf_page: 8
+    book_page: 203
+    latex: |
+      ${}^{1}$Note that the curly symbol $\mathcal{S}_{\mathcal{A}}$ refers to the
+      set of \emph{all} apparatus states, whereas $S_A$ refers to some set of
+      apparatus states. Similarly for $\mathcal{S}_{\mathcal{O}}$ and $S_o$.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: br-def-restriction
+    label: §3.3 restriction map (running prose)
+    pdf_page: 10
+    book_page: 205
+    latex: |
+      Here $s|_A$ denotes the state of $A$ which is determined by restricting the
+      state $s$ of $O$ to the subsystem $A$. So $|_A$ describes a surjective map
+      from the states of $O$ to the states of $A$. (Later I will, by a slight
+      abuse of notation, also denote by $|_A$ the map from
+      $\mathcal{P}(\mathcal{S}_{\mathcal{O}})$ into
+      $\mathcal{P}(\mathcal{S}_{\mathcal{A}})$ defined by
+      $S_o|_A := \{s|_A : s \in S_o\}$.) In classical mechanics, for example, a map
+      $|_A$ is defined by discarding coordinates which refer to degrees of freedom
+      of $O$ which are not in $A$. In quantum mechanics, one can take $|_A$ to be
+      for example the partial trace over $R$. For our purposes it is enough to take
+      an arbitrary but fixed map.
+
+      Whether the assumption of proper inclusion is satisfied or not depends not
+      only on the sets $\mathcal{S}_{\mathcal{A}}$, $\mathcal{S}_{\mathcal{O}}$ but
+      also on the restriction map $|_A$. [\ldots]
+    note: >-
+      The second sentence ("So $|_A$ describes a surjective map [\ldots]") is also
+      row S19-R05; it was cut here until 2026-11-15, which hid the surjectivity from
+      every row using this definition (found by the grounded adjudication of
+      S19-R09). Its text is the second-read text of br-restriction-surjective. The
+      printed set-restriction definition reads
+      "$S_o|_A : = \{\ldots\}$" with a space inside ":=".
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: br-def-meshing-notation
+    label: §3.5 abbreviation after the meshing condition
+    pdf_page: 12
+    book_page: 207
+    latex: |
+      (By a slight abuse of notation I will write $\theta(\{s_A\})|_A$ instead of
+      $\{s|_A : s \in \theta(\{s_A\})\}$.)
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+statements:
+  - id: br-inference-map
+    audit_row: S19-R01
+    locator: §3.2 inference map
+    pdf_page: 8
+    book_page: 203
+    label: §3.2 inference map (running prose)
+    latex: |
+      To describe this inference, let us use a map $\theta$ from the power set
+      $\mathcal{P}(\mathcal{S}_{\mathcal{A}})$ of the set
+      $\mathcal{S}_{\mathcal{A}}$ of apparatus states into the power set
+      $\mathcal{P}(\mathcal{S}_{\mathcal{O}})$ of the set
+      $\mathcal{S}_{\mathcal{O}}$ of system states.${}^{1}$ $\theta$ assigns to
+      every set $S_A$ of apparatus states (except the empty set) the set
+      $\theta(S_A)$ of object states compatible with the information that the
+      apparatus after the experiment is in one of the states in $S_A$. This defines
+      the inference map $\theta$ which depends on the kind of measurement we are
+      making. [\ldots]
+
+      Knowing that if the apparatus after the experiment is in a state $s_A$ the
+      observed system must be in a state in $\theta(\{s_A\})$, one infers from the
+      information that the apparatus after the experiment is in one of the states in
+      $S_A$ that the state of the observed system must be in
+      $\cup_{s_A \in S_A} \theta(\{s_A\})$. So
+      $\theta(S_A) = \cup_{s_A \in S_A} \theta(\{s_A\})$.
+    note: >-
+      The omitted sentences (between "making." and "Knowing") are in
+      `source.standing` (the map is fixed; $\theta(\mathcal{S}_{\mathcal{A}})
+      \subset \mathcal{S}_{\mathcal{O}}$). The union is printed with a small
+      $\cup$ and the index set as a subscript, inline.
+    uses: [br-def-curly-notation]
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind) + Codex (anchored re-read); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: br-exactly-measurable
+    audit_row: S19-R02
+    locator: §3.2 exactly measurable
+    pdf_page: 8
+    book_page: 203
+    label: §3.2 exact measurability (running prose)
+    latex: |
+      I will say that in an experiment with inference map $\theta$ a state
+      $s_o \in \mathcal{S}_{\mathcal{O}}$ is \emph{exactly measurable} if after the
+      measurement there exists a set $S_A \in \mathcal{P}(\mathcal{S}_{\mathcal{A}})$
+      of apparatus states referring uniquely to the state $s_o$, i.e.,
+      $\theta(S_A) = \{s_o\}$.
+    uses: [br-inference-map, br-def-curly-notation]
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: br-distinguish
+    audit_row: S19-R03
+    locator: §3.2 distinguish
+    pdf_page: 8
+    book_page: 203
+    label: §3.2 distinguishing two states (running prose)
+    latex: |
+      An experiment with inference map $\theta$ is said to be able to
+      \emph{distinguish the states} $s_1$, $s_2$ if there is one set $S_A^1$ of
+      final apparatus states referring to $s_1$, but not to $s_2$, and another set
+      $S_A^2$ referring to $s_2$ but not to $s_1$:
+      $\theta(S_A^1) \ni s_1 \notin \theta(S_A^2)$ and
+      $\theta(S_A^1) \notin s_2 \not\ni \theta(S_A^2)$.
+    note: >-
+      Printed slip in the second formula (read at 600 dpi): it is printed
+      "$\theta(S_A^1) \notin s_2 \not\ni \theta(S_A^2)$". The prose ("another set
+      $S_A^2$ referring to $s_2$ but not to $s_1$", together with "one set $S_A^1$
+      [\ldots] not to $s_2$") requires
+      $\theta(S_A^1) \not\ni s_2 \in \theta(S_A^2)$. The same condition is printed
+      a third way in Proposition 2 (S19-R10) and a fourth in its proof; see
+      excerpt br-prop2-proof-hypothesis.
+    uses: [br-inference-map]
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind) + Codex (anchored re-read); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: br-proper-inclusion
+    audit_row: S19-R04
+    locator: §3.3 proper inclusion
+    pdf_page: 10
+    book_page: 205
+    label: §3.3 assumption of proper inclusion (displayed, unnumbered)
+    latex: |
+      We assume that the observed system has more degrees of freedom than the
+      apparatus and contains it. This can be formulated in an \emph{assumption of
+      proper inclusion}:
+      \[ (\exists s, s' \in \mathcal{S}_{\mathcal{O}}) : s|_A = s'|_A,\ s \neq s'. \]
+    context: |
+      Preceded by: "So the observed system $O$ is composed of the apparatus $A$ and
+      of a rest $R$."
+    note: >-
+      The next paragraph (p. 205-206) stresses that proper inclusion depends on the
+      restriction map and not only on the two sets, with the example
+      $\mathcal{S}_{\mathcal{O}} = $ the natural numbers,
+      $\mathcal{S}_{\mathcal{A}} = $ the even natural numbers, $n \mapsto 2n$ (not
+      satisfied) versus $n \mapsto$ two times the biggest natural number
+      $\le n/2$ (satisfied).
+    uses: [br-def-restriction, br-def-curly-notation]
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind) + Codex (anchored re-read); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: br-restriction-surjective
+    audit_row: S19-R05
+    locator: §3.3 surjectivity
+    pdf_page: 10
+    book_page: 205
+    label: §3.3 restriction is surjective (running prose)
+    latex: |
+      Here $s|_A$ denotes the state of $A$ which is determined by restricting the
+      state $s$ of $O$ to the subsystem $A$. So $|_A$ describes a surjective map
+      from the states of $O$ to the states of $A$.
+    note: >-
+      Stated as part of the set-up, as a consequence of $A$ being a subsystem
+      ("So"), not proved; the first sentence is repeated from br-def-restriction
+      so the "So" can be read.
+    uses: [br-def-restriction]
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: br-meshing
+    audit_row: S19-R06
+    locator: §3.5 meshing
+    pdf_page: 12
+    book_page: 207
+    label: §3.5 meshing condition (indented display)
+    latex: |
+      This leads to a \emph{meshing condition} for the inference map $\theta$ which
+      must be satisfied lest the inference map be contradictory:
+
+      For every apparatus state $s_A \in \mathcal{S}_{\mathcal{A}}$, the restriction
+      of the system states $\theta(\{s_A\})$ to which it refers should again be the
+      same apparatus state $s_A$. So meshing can be written:
+      $\forall s_A \in \mathcal{S}_{\mathcal{A}} :
+      \{s|_A : s \in \theta(\{s_A\})\} = \{s_A\}$.
+    context: |
+      Preceded by: "The states of the apparatus after the measurement are
+      self-referential: they are states in their own right, but they also refer to
+      states of the observed system in which they are contained."
+    uses: [br-inference-map, br-def-restriction, br-def-meshing-notation]
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind) + Codex (anchored re-read); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: br-lemma
+    audit_row: S19-R07
+    locator: Lemma
+    pdf_page: 13
+    book_page: 208
+    label: Lemma (unnumbered)
+    latex: |
+      \textsc{Lemma}: The meshing condition implies that
+      \[ (\forall s_A) : \theta(\{s_A\}) = \{s \in \mathcal{S}_{\mathcal{O}} :
+         s \in \theta(\mathcal{S}_{\mathcal{A}}),\ s|_A = s_A\}. \]
+    note: >-
+      Unlike the Propositions and the Corollary, the Lemma's text is set in roman,
+      not italic.
+    uses: [br-meshing, br-inference-map, br-def-restriction]
+    proof_pages: 13
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind) + Codex (anchored re-read); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: br-prop-1
+    audit_row: S19-R08
+    locator: Proposition 1
+    pdf_page: 13
+    book_page: 208
+    label: Proposition 1
+    latex: |
+      \textsc{Proposition} 1: \emph{The assumption of proper inclusion and the
+      meshing condition imply that not all states of a system can be measured
+      exactly by an internal observer.}
+      $\exists s_o \in \mathcal{S}_{\mathcal{O}},
+      \forall S_A \in \mathcal{P}(\mathcal{S}_{\mathcal{A}}) :
+      \theta(S_A) \neq \{s_o\}$.
+    context: |
+      Preceded by: "With the meshing condition at hand we can now establish that not
+      all states of a system can be measured exactly by an internal observer. The
+      intuitive reason for this is that the meshing condition and the assumption of
+      proper inclusion prevent the existence of a bijection from
+      $\mathcal{S}_{\mathcal{A}}$ to $\mathcal{S}_{\mathcal{O}}$.${}^{4}$"
+    uses: [br-proper-inclusion, br-meshing, br-exactly-measurable, br-inference-map]
+    proof_pages: 13
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: br-corollary
+    audit_row: S19-R09
+    locator: Corollary
+    pdf_page: 14
+    book_page: 209
+    label: Corollary (unnumbered)
+    latex: |
+      \emph{Corollary: Under the assumption of proper inclusion, if all states are
+      exactly measurable from inside the system then the inference map $\theta$ is
+      contradictory (i.e., the meshing condition is violated).}
+      $(\forall s \in \mathcal{S}_{\mathcal{O}})(\exists s_A \in
+      \mathcal{S}_{\mathcal{A}}) : \theta(\{s_A\}) = \{s\}$ \emph{implies}
+      $(\exists s_o \in \mathcal{S}_{\mathcal{O}}) :
+      \theta(\{s_o|_A\})|_A \neq \{s_o|_A\}$.
+    context: |
+      Preceded by: "The result of Proposition 1 can be reformulated in a way
+      reflecting the analogy with Gödel's result."
+    note: >-
+      The formula's antecedent is exact measurability by a singleton
+      $\{s_A\}$, $\theta(\{s_A\}) = \{s\}$, not by an arbitrary set $S_A$ as in the
+      definition of exact measurability (S19-R02); the proper-inclusion hypothesis
+      appears in the prose only, not in the formula.
+    uses: [br-proper-inclusion, br-exactly-measurable, br-meshing, br-def-meshing-notation]
+    proof_pages: 14
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: br-prop-2
+    audit_row: S19-R10
+    locator: Proposition 2
+    pdf_page: 13
+    book_page: 208
+    label: Proposition 2
+    latex: |
+      \textsc{Proposition} 2: \emph{Let $s_1$, $s_2$ be two states of $O$
+      fulfilling $s_1|_A = s_2|_A$. Then there is no inference map $\theta$, and
+      thus no measurement using as apparatus $A$, which can distinguish $s_1$ and
+      $s_2$:}
+      \[ (\forall\theta) : ((\nexists S_A^1, S_A^2 \in
+         \mathcal{P}(\mathcal{S}_{\mathcal{A}})) :
+         \theta(S_A^1) \ni s_1 \notin \theta(S_A^2),\
+         \theta(S_A^1) \ni s_2 \not\ni \theta(S_A^2)). \]
+    note: >-
+      Two readings to check (600 dpi crop). (1) The quantifier after "((" is a
+      heavy $\exists$-shaped glyph, visibly different from the plain $\exists$
+      elsewhere on the page; the stroke of $\nexists$ is not resolved in the scan.
+      It is transcribed as $\nexists$, which the prose ("there is no") requires.
+      (2) Printed slip: the second condition is printed
+      "$\theta(S_A^1) \ni s_2 \not\ni \theta(S_A^2)$"; the definition of
+      distinguishing (S19-R03, itself misprinted) requires
+      $\theta(S_A^1) \not\ni s_2 \in \theta(S_A^2)$. The proof's first sentence
+      prints it a third way, "$\theta(S_A^1) \ni s_2 \in \theta(S_A^2)$", but
+      the proof then uses $s_2 \notin \theta(S_A^1)$ and
+      $s_2 \in \theta(S_A^2)$ (excerpt br-prop2-proof-hypothesis). (3) The
+      statement carries no meshing hypothesis and quantifies over all $\theta$,
+      but the proof applies the Lemma, which assumes the meshing condition (same
+      excerpt).
+    uses: [br-distinguish, br-inference-map, br-def-restriction, br-lemma, br-meshing]
+    proof_pages: 14
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind) + Codex (anchored re-read); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: br-footnote-4
+    audit_row: S19-R11
+    locator: footnote 4, the two independence examples
+    pdf_page: 13
+    book_page: 208
+    label: footnote 4 (attached to the sentence before Proposition 1)
+    latex: |
+      ${}^{4}$There could, of course, be bijections \emph{not} fulfilling the
+      meshing condition. For example, if $\mathcal{S}_{\mathcal{A}}$ is infinite but
+      countable, and if for every state $s_A \in \mathcal{S}_{\mathcal{A}}$ there
+      are only finitely many $s \in \mathcal{S}_{\mathcal{O}}$ such that
+      $s|_A = s_A$, then there is a bijection $\phi$ between
+      $\mathcal{S}_{\mathcal{A}}$ and $\mathcal{S}_{\mathcal{O}}$. But since
+      $\exists s_A \in \mathcal{S}_{\mathcal{A}} : \phi(\{s_A\})|_A \neq \{s_A\}$
+      the meshing condition is not fulfilled. Therefore $\phi$ describes a
+      contradictory inference.
+
+      There could also be bijections between $\mathcal{S}_{\mathcal{A}}$ and
+      $\mathcal{S}_{\mathcal{O}}$ fulfilling the meshing condition but violating
+      the assumption of proper inclusion. Take for example as
+      $\mathcal{S}_{\mathcal{O}}$ the natural numbers and as
+      $\mathcal{S}_{\mathcal{A}}$ the even natural numbers. If one takes as
+      restriction map $\mathcal{S}_{\mathcal{O}} \to \mathcal{S}_{\mathcal{A}} :
+      n \mapsto 2n$, and as inference map $\theta :
+      \mathcal{P}(\mathcal{S}_{\mathcal{A}}) \to
+      \mathcal{P}(\mathcal{S}_{\mathcal{O}})$, $\{2n\} \mapsto \{n\}$, then the
+      meshing condition is satisfied because $\theta(\{2n\})|_A = \{2n\}$. But the
+      assumption of proper inclusion is not satisfied. This is natural because
+      $\mathcal{S}_{\mathcal{A}} \subset \mathcal{S}_{\mathcal{O}}$ does \emph{not}
+      imply that $A$ is a subsystem of $O$. See the discussion after the assumption
+      of proper inclusion was introduced.
+    note: >-
+      The first example asserts the bijection and the failure of meshing ("since
+      $\exists s_A$ [\ldots]") without constructing either; $\phi$ is introduced as
+      a bijection between the state sets and then applied to the singleton
+      $\{s_A\}$, i.e. read as an inference map. The "$\exists s_A$" is a claim, not
+      derived: whether it holds depends on the chosen bijection.
+    uses: [br-meshing, br-proper-inclusion, br-def-restriction, br-def-meshing-notation, br-inference-map]
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind) + Codex (anchored re-read); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: br-finite-remark
+    audit_row: S19-R12
+    locator: p. 207 finite remark
+    pdf_page: 11-12
+    book_page: 206-207
+    label: §3.4 A First Attempt (running prose)
+    latex: |
+      \emph{3.4. A First Attempt.} For exact measurability of \emph{all} states it
+      is necessary (but not sufficient) that there is a surjective map from the
+      states of $A$ onto the states of $O$. But if additionally $A$ is a properly
+      included in $O$, there are strictly more states of $O$ than states of $A$. If
+      $O$ has only finitely many possible states, this already exludes the
+      possibility of exact measurement of all states from inside the observed
+      system.
+    note: >-
+      The passage starts at the foot of p. 206 (PDF p. 11) and ends at the top of
+      p. 207 (PDF p. 12); the audit's "p. 207" locator names only the second page.
+      Two printed slips, kept: "$A$ is a properly included in $O$" and "exludes".
+      "strictly more states of $O$ than states of $A$" is asserted from proper
+      inclusion with surjective restriction, not proved.
+    uses: [br-exactly-measurable, br-proper-inclusion, br-restriction-surjective]
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind) + Codex (anchored re-read); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+excerpts:
+  - id: br-prop2-proof-hypothesis
+    for: [br-prop-2, br-distinguish]
+    reason: >-
+      Shows the intended second distinguishing condition
+      ($s_2 \notin \theta(S_A^1)$, $s_2 \in \theta(S_A^2)$), which the definition
+      (p. 203), the statement and the proof's first sentence each print
+      differently; and shows that the proof uses the Lemma, i.e. the meshing
+      condition, which the statement of Proposition 2 does not carry.
+    pdf_page: 14
+    latex: |
+      \emph{Proof:} Assume that there exists an inference map $\theta$, and sets
+      $S_A^1$, $S_A^2$ of apparatus states such that
+      $\theta(S_A^1) \ni s_1 \notin \theta(S_A^2)$,
+      $\theta(S_A^1) \ni s_2 \in \theta(S_A^2)$. This will lead to a contradiction.
+
+      From $s_1 \in \theta(S_A^1) = \cup_{s \in S_A^1} \theta(\{s\}) \not\ni s_2$
+      we conclude that there is a $s_A^1 \in S_A^1$ such that
+      $s_1 \in \theta(\{s_A^1\})$ and that $s_2 \notin \theta(\{s_A\})$ for all
+      $s_A \in S_A^1$. $s_2 \in \theta(S_A^2)$ implies that
+      $s_2 \in \theta(\mathcal{S}_{\mathcal{A}})$. Using the Lemma we conclude from
+      $s_1 \in \theta(\{s_A^1\})$ that $s_1|_A = s_A^1$. [\ldots]
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}

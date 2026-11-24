@@ -1,0 +1,453 @@
+source:
+  citation: >-
+    Mark Ring and Laurent Orseau, Delusion, Survival, and Intelligent Agents.
+    4th Conference on Artificial General Intelligence (AGI-11), Aug 2011, San
+    Francisco, United States, pp. 1--10. HAL deposit hal-01000226v1 (submitted
+    3 Jun 2020); the HAL cover sheet is PDF p. 1 and the paper is PDF pp. 2--11.
+  file: ring-orseau-hal-2011-delusion-survival-and-intelligent-agents.pdf
+  sha256: a207ab73c87896e0663e4998906aa4c4bcef6d93a43d8e29ebc3cdb81e32ea6d
+  page_offset: 1
+  standing: |
+    \S1, p. 2 (PDF p. 3): "Throughout the paper we frame our observations as a set
+    of ``statements'' and ``arguments'' rather than more rigorous ``theorems'' and
+    ``proofs'', though proofs are given whenever possible."
+
+    \S1, p. 1 (PDF p. 2): "First, the (non-modifiable) agent is allowed by way of a
+    ``delusion box'' to have direct control over its inputs, thus allowing us to
+    consider the consequences of an agent circumventing its reward or goal
+    mechanism."
+
+    \S2, p. 2 (PDF p. 3): "The agent and its environment interact through a
+    sequence of actions and observations. The agent outputs actions $a \in
+    \mathcal{A}$ in response to the observations $o \in \mathcal{O}$ produced by the
+    environment." [\ldots] "We will discuss four different intelligent agents,
+    each variations of a single agent $\mathrm{A}^\rho_x$, which is based on AIXI
+    [1] (and is not assumed to be computable).\textsuperscript{3}"
+    Footnote 3: "Only incomputable agents can be guaranteed to find the optimal
+    strategy, and this guarantee is quite useful when discussing the theoretical
+    limits of \emph{computable} agents."
+
+    \S2, p. 3 (PDF p. 4), footnote 4 to eq. (1)'s explanation: "Ties are broken
+    lexicographically."
+
+    \S2, p. 3 (PDF p. 4): "We now describe four particular universal learning
+    agents based on $\mathrm{A}^\rho_x$. They differ only by their utility and
+    horizon functions."
+
+    \S3, p. 4 (PDF p. 5), footnote 5: "The learning agent does not know \emph{a
+    priori} that its actions are split into these two parts. However, it is assumed
+    to have already explored its environment, and that its resulting estimate of
+    the probability that the environment contains a delusion box $P(\mathrm{DB})$
+    is as high as needed (c.f., Orseau [3] regarding this proof technique)."
+
+    \S4, p. 5 (PDF p. 7): "Section 3 discussed environments with the realistic
+    assumption that intelligent agents can eventually learn to control their own
+    inputs. But one important assumption was left aside: those agents are
+    immortal."
+
+    Silences recorded by source card S11 (searched PDF pp. 3--7): no finiteness or
+    cardinality bound on $\mathcal{A}$ or $\mathcal{O}$; no summability,
+    nonnegativity or boundedness condition on $w$ and no terminal condition for the
+    recursion (3); $\rho$ is called a universal prior and $\rho(o \mid ha)$ an
+    occurrence probability, but no normalisation of $\rho$ over $\mathcal{Q}$ is
+    stated. Confirmed on the page images of PDF pp. 3--4.
+
+definitions:
+  - id: ro-def-consistent-prior
+    label: consistent environments $\mathcal{Q}_h$, prior $\rho$, and $\rho(h)$
+    pdf_page: 3
+    book_page: 2
+    latex: |
+      The set of environments that are \emph{consistent} with history $h = (o_1,
+      a_1, ..., o_t, a_t)$ is denoted $\mathcal{Q}_h$. To say that a program $q \in
+      \mathcal{Q}$ is consistent with $h$ means that the program outputs the
+      observations in the history if it is given the actions as input: $q(a_0, ...,
+      a_t) = o_0, ..., o_t$. The environment is assumed to be computable, and
+      $\rho(q) : \mathcal{Q} \to [0, 1]$ expresses the agent's prior belief in the
+      possibility that some environment (program) $q$ is the true environment. We
+      also write $\rho(h) = \rho(\mathcal{Q}_h) := \sum_{q \in \mathcal{Q}_h}
+      \rho(q)$.
+    note: >-
+      Index slip as printed: the history is written from $o_1, a_1$ but the
+      consistency condition from $a_0$, $o_0$ (read at 220 dpi).
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 220}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: ro-def-agent-components
+    label: agent components
+    pdf_page: 3
+    book_page: 2
+    latex: |
+      An agent is entirely described by: its utility function $u : \mathcal{H} \to
+      [0, 1]$, which assigns a utility value to any history of interaction $h$; its
+      horizon function $w : \mathbb{N}^2 \to \mathbb{R}$, which weights future
+      utility values; its universal prior knowledge of the environment $\rho$; the
+      set of possible actions $\mathcal{A}$ and observations $\mathcal{O}$.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 220}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: ro-def-equations-explained
+    label: explanation of equations (1)--(3)
+    pdf_page: 3-4
+    book_page: 2-3
+    latex: |
+      where $t_h = |h| + 1$, and $|h|$ denotes the length of the history. The first
+      line is the action-selection scheme of the agent: it simply takes the action
+      with the highest \emph{value} given the history $h$.\textsuperscript{4} The
+      value of an action given a history (defined in the second line) is the
+      expected sum of future (weighted) utility values for all possible futures that
+      might result after taking this action, computed for all possible observations
+      $o$ according to their occurrence probability (given by $\rho$). The last line
+      recursively computes the value of a history (after an observation) by
+      weighting the utility value at this step by the horizon function and combining
+      this with the expected value of the best action at that point.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+statements:
+  - id: ro-eq-1
+    audit_row: S11-R01
+    locator: §2, eq. (1)
+    pdf_page: 3
+    book_page: 2
+    label: eq. (1)
+    latex: |
+      An agent $\mathrm{A}^\rho_x$ computes the next action with:
+      \[ a_{t_h} := \operatorname*{argmax}_{a \in \mathcal{A}} \mathrm{v}_{t_h}(ha)
+         \tag{1} \]
+      where $t_h = |h| + 1$, and $|h|$ denotes the length of the history.
+    uses: [ro-def-equations-explained, ro-eq-2, ro-eq-3]
+    note: Tie-breaking (footnote 4, "Ties are broken lexicographically.") is in source.standing.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 220}
+    checked: {by: 'Codex (blind) + Grok (blind) + Codex (anchored re-read); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: ro-eq-2
+    audit_row: S11-R02
+    locator: §2, eq. (2)
+    pdf_page: 3
+    book_page: 2
+    label: eq. (2)
+    latex: |
+      \[ \mathrm{v}_t(ha) := \sum_{o \in \mathcal{O}} \rho(o \mid ha)\;
+         \mathrm{v}_t(hao) \tag{2} \]
+    uses: [ro-def-consistent-prior, ro-def-agent-components, ro-def-equations-explained, ro-eq-3]
+    note: >-
+      $\rho(o \mid ha)$ is not defined separately; the explanation on PDF p. 4 calls
+      it the occurrence probability "given by $\rho$".
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 220}
+    checked: {by: 'Codex (blind) + Grok (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: ro-eq-3
+    audit_row: S11-R03
+    locator: §2, eq. (3)
+    pdf_page: 3
+    book_page: 2
+    label: eq. (3)
+    latex: |
+      \[ \mathrm{v}_t(h) := w(t, |h|)\; u(h) + \max_{a \in \mathcal{A}}
+         \mathrm{v}_t(ha), \tag{3} \]
+      where $t_h = |h| + 1$, and $|h|$ denotes the length of the history.
+    uses: [ro-def-agent-components, ro-def-equations-explained, ro-eq-2]
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 220}
+    checked: {by: 'Codex (blind) + Grok (blind) + Codex (anchored re-read); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: ro-agent-rl
+    audit_row: S11-R04
+    locator: §2, `A` sub `rl`
+    pdf_page: 4
+    book_page: 3
+    label: reinforcement-learning agent (paragraph)
+    latex: |
+      The \emph{reinforcement-learning agent}, $\mathrm{A}^\rho_{rl}$, interprets its
+      observation $o_t$ as being composed of a reward signal $r_t \in [0, 1]$ and
+      other information $\tilde{o} \in \tilde{\mathcal{O}}$ about the environment:
+      $o_t = \langle \tilde{o}_t, r_t \rangle$. Its utility function is simply the
+      reward given by the environment: $u(h) = r_{|h|}$. Its horizon function (at
+      current time $t = |h| + 1$ and for a future step $k$) is $w(t, k) = 1$ if $k -
+      t \le m$, where $m$ is a constant value (but the following discussion also
+      holds for more general computable horizon functions). For the special case of
+      the reinforcement-learning agent AIXI: $\rho(h) = \xi(h) := \sum_{q \in
+      \mathcal{Q}_h} 2^{-|q|}$ (where $|q|$ is the length of program $q$).
+    uses: [ro-def-agent-components, ro-def-consistent-prior, ro-eq-2, ro-eq-3]
+    note: >-
+      The value of $w(t, k)$ when $k - t > m$ is not printed.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 200}
+    checked: {by: 'Codex (blind) + Grok (blind) + Codex (anchored re-read); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: ro-agent-g
+    audit_row: S11-R05
+    locator: §2, `A` sub `g`
+    pdf_page: 4
+    book_page: 3
+    label: goal-seeking agent (paragraph)
+    latex: |
+      The \emph{goal-seeking agent}, $\mathrm{A}^\rho_g$ has a goal encoded in its
+      utility function such that $u(h) = 1$ if the goal is achieved at time $|h|$,
+      and is 0 otherwise, where $u$ is based on the observations only; i.e., $u(h) =
+      g(o_1, ..., o_{|h|})$. The goal can be reached at most once, so
+      $\sum_{t=0}^{\infty} u(h_t) \le 1$. The horizon function is chosen to favor
+      shorter histories: $w(t, k) = 2^{t-k}$.
+    uses: [ro-def-agent-components, ro-eq-2, ro-eq-3]
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 200}
+    checked: {by: 'Codex (blind) + Grok (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: ro-agent-p
+    audit_row: S11-R06
+    locator: §2, `A` sub `p`
+    pdf_page: 4
+    book_page: 3
+    label: prediction-seeking agent (paragraph)
+    latex: |
+      The \emph{prediction-seeking agent}, $\mathrm{A}^\rho_p$ maximizes its utility
+      by predicting its inputs. Its utility function is $u(h) = 1$ if the agent
+      correctly predicts its next input $o_t$ and is 0 otherwise. The prediction
+      scheme can be, for example, Solomonoff induction [6]; i.e, for a universal
+      prior $\rho$, the prediction is $\hat{o}_t = \arg\max_{o \in \mathcal{O}}
+      \rho(o \mid h)$. The horizon function is the same as for
+      $\mathrm{A}^\rho_{rl}$. This agent therefore tries to maximize the future
+      number of correct predictions.
+    uses: [ro-def-agent-components, ro-agent-rl, ro-eq-2, ro-eq-3]
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 200}
+    checked: {by: 'Codex (blind) + Grok (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: ro-agent-k
+    audit_row: S11-R07
+    locator: §2, `A` sub `k`
+    pdf_page: 4
+    book_page: 3
+    label: knowledge-seeking agent (paragraph)
+    latex: |
+      The \emph{knowledge-seeking agent}, $\mathrm{A}^\rho_k$, maximizes its
+      knowledge of its environment, which is identical to minimizing $\rho(h)$
+      (i.e., discarding as many inconsistent environments as possible). Thus, $u(h)
+      = -\rho(h)$ and $w(t, k) = 1$ if $k - t = m$ (with $m$ constant) and is 0
+      otherwise. This agent therefore attempts to maximize its knowledge in some
+      distant future. Actions are chosen to maximize the entropy of the inputs,
+      thereby making a large number of the currently consistent environments
+      inconsistent. In the case where $\rho = \xi$, the agent tries to maximize the
+      Kolmogorov complexity of (its knowledge about) the environment.
+    uses: [ro-def-consistent-prior, ro-def-agent-components, ro-eq-2, ro-eq-3]
+    note: >-
+      $u(h) = -\rho(h)$ takes values in $[-1, 0]$, outside the codomain $[0, 1]$
+      given for $u$ in ro-def-agent-components; transcribed as printed.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 200}
+    checked: {by: 'Codex (blind) + Grok (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: ro-optimal-variants
+    audit_row: S11-R08
+    locator: §2, optimal variants
+    pdf_page: 4
+    book_page: 3
+    label: optimal, non-learning variants (paragraph)
+    latex: |
+      For each of the preceding agents there is an \emph{optimal, non-learning}
+      variant $\mathrm{A}^\mu$, which has full knowledge of the environment $q_\mu
+      \in \mathcal{Q}$. This is achieved simply by replacing $\rho$ by $\mu$ in
+      (only) equation (2) where $\mu(q) = 1 \Leftrightarrow q = q_\mu$. But the
+      non-learning prediction agent $\mathrm{A}^\mu_p$ still uses $\rho$ for
+      prediction. The important notion is that if the learning agent takes the same
+      actions as the non-learning one, then its behavior is also optimal with
+      respect to its utility and horizon functions.
+
+      As for AIXI, we expect the learning agents to asymptotically converge to their
+      respective optimal variant $\mathrm{A}^\mu_{rl}$, $\mathrm{A}^\mu_g$,
+      $\mathrm{A}^\mu_p$, and $\mathrm{A}^\mu_k$.
+    uses: [ro-eq-2, ro-agent-rl, ro-agent-g, ro-agent-p, ro-agent-k]
+    note: >-
+      Only $\mu(q) = 1 \Leftrightarrow q = q_\mu$ is printed; the value of $\mu$ off
+      $q_\mu$ is not stated. In $\mathrm{A}^\mu_k$ the utility $u(h) = -\rho(h)$
+      therefore still uses $\rho$.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 200}
+    checked: {by: 'Codex (blind) + Grok (blind) + Codex (anchored re-read); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: ro-delusion-box
+    audit_row: S11-R09
+    locator: §3, the delusion box
+    pdf_page: 5
+    book_page: 4
+    label: the delusion box (three paragraphs of \S3)
+    latex: |
+      The delusion box is any mechanism that allows the agent to directly modify its
+      inputs from the environment. To describe this, the global environment (GE) is
+      split into two parts: an \emph{inner environment} (E), and a \emph{delusion
+      box} (DB). The outputs of the inner environment ($o^e_t$) pass through the
+      delusion box before being output by the global environment as $o_t$. The DB is
+      thus a function $d : \mathcal{O} \to \mathcal{O}$, mapping observations from
+      the inner environment to observations for the agent: $o_t = d(a_t, o^e_t)$.
+      This arrangement is shown in Fig. 1a.
+
+      The delusion box operates according to the agent's specifications, which is to
+      say that the code of the function $d : \mathcal{O} \to \mathcal{O}$ is part of
+      the agent's action. The agent's action is therefore broken into two parts:
+      $a_t = \langle d_t, a^e_t \rangle$. The first part $d_t$ is a program to be
+      executed by the delusion box at step $t$; the second part $a^e_t$ is the
+      action interpreted by the inner environment.\textsuperscript{5}
+
+      For simplicity and to emphasize that the agent has much control over its very
+      near environment, we assume that the inner environment cannot access this
+      program. Initially, the delusion box executes the identity function
+      $d_0(o^e_t) = o_t$, which leaves the outputs of the inner environment
+      unchanged.
+    uses: [ro-def-agent-components]
+    note: >-
+      Type slip as printed: $d : \mathcal{O} \to \mathcal{O}$ is applied to two
+      arguments in $o_t = d(a_t, o^e_t)$. Footnote 5 is in source.standing.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 170}
+    checked: {by: 'Codex (blind) + Grok (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: ro-stmt-1
+    audit_row: S11-R10
+    locator: Stmt. 1
+    pdf_page: 5
+    book_page: 4
+    label: Statement 1
+    latex: |
+      \textbf{Statement 1} \emph{The reinforcement-learning agent
+      $A^\rho_{rl}$ will use the delusion box to maximize its utility.}
+    context: |
+      Preceded by: "\textbf{Reinforcement-learning agent.} The agent's reward is
+      part of its observation. Therefore the reinforcement-learning agent trivially
+      uses the delusion box to modify this information and replace it with 1, the
+      maximum possible reward."
+    uses: [ro-agent-rl, ro-delusion-box]
+    proof_pages: 5-6
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 170}
+    checked: {by: 'Codex (blind) + Grok (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: ro-stmt-2
+    audit_row: S11-R11
+    locator: Stmt. 2
+    pdf_page: 6
+    book_page: 5
+    label: Statement 2
+    latex: |
+      \textbf{Statement 2} \emph{The goal-seeking agent $A^\rho_g$ will also use the
+      delusion box.}
+    uses: [ro-agent-g, ro-delusion-box]
+    proof_pages: 6
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 170}
+    checked: {by: 'Codex (blind) + Grok (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: ro-stmt-3
+    audit_row: S11-R12
+    locator: Stmt. 3
+    pdf_page: 6
+    book_page: 5
+    label: Statement 3
+    latex: |
+      \textbf{Statement 3} \emph{The prediction agent $A^\rho_p$ will use the
+      delusion box.}
+    context: |
+      Preceded by: "\textbf{Prediction-seeking agent.} For an environment $q \in
+      \mathcal{Q}$, a predictor makes approximately $-\log(\rho(q))$ errors
+      [2],\textsuperscript{7} which is very low when q is highly probable (i.e., very
+      simple)." Footnote 7: "The idea is that a wrong prediction at step $t$
+      discards at least half of the environments that were consistent up to time
+      $t-1$, and that if the agent does not make prediction errors for one
+      environment, then it necessarily makes errors for others."
+    uses: [ro-agent-p, ro-delusion-box, ro-def-consistent-prior]
+    proof_pages: 6
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 170}
+    checked: {by: 'Codex (blind) + Grok (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: ro-stmt-4
+    audit_row: S11-R13
+    locator: Stmt. 4
+    pdf_page: 7
+    book_page: 6
+    label: Statement 4
+    latex: |
+      \textbf{Statement 4} \emph{The optimal knowledge-seeking agent $A^\mu_k$ will
+      not consistently use the delusion box.}
+    context: |
+      Preceded by: "\textbf{Knowledge-seeking agent.} The knowledge-seeking agent is
+      in many ways the opposite of the prediction-seeking agent. It learns the most
+      when its expectations are most violated and seeks observations that it does
+      not predict. We expect $\mathrm{A}^\rho_k$ to behave similarly to
+      $\mathrm{A}^\mu_k$:"
+    uses: [ro-agent-k, ro-optimal-variants, ro-delusion-box, ro-def-consistent-prior]
+    proof_pages: 7
+    note: >-
+      The statement is about the optimal non-learning $A^\mu_k$; \S3.1 (same page)
+      then says "Of the four learning agents, only $\mathrm{A}^\rho_k$ will avoid
+      constant use of the delusion box."
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 170}
+    checked: {by: 'Codex (blind) + Grok (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+excerpts:
+  - id: ro-stmt-1-arguments
+    for: [ro-stmt-1]
+    reason: >-
+      The Arguments give the comparison and threshold that make the informal
+      Statement 1 a quantitative claim.
+    pdf_page: 5-6
+    latex: |
+      \emph{Arguments.} The agent can program the DB to produce a constant reward of
+      1. Defining $\mathrm{v}(h \text{ yes})$ to be the expected value of the best
+      action that uses the delusion box, $\mathrm{v}(h \text{ yes}) >
+      P(\mathrm{DB}) \cdot 1$ and $\mathrm{v}(h \text{ no}) < P(\mathrm{DB}) \cdot
+      \bar{r} + P(\neg\mathrm{DB}) \cdot 1 = P(\mathrm{DB}) \cdot \bar{r} + (1 -
+      P(\mathrm{DB})) \cdot 1 = 1 - P(\mathrm{DB}) \cdot (1 - \bar{r})$ where
+      $\bar{r}$ is the expected reward when not using the DB. Therefore
+      $\mathrm{A}^\rho_{rl}$ uses the DB no later than when $\mathrm{v}(h \text{
+      yes}) > \mathrm{v}(h \text{ no})$, i.e., when $P(\mathrm{DB}) > 1/(2 -
+      \bar{r})$.\textsuperscript{6} $\diamondsuit$
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 170}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: ro-stmt-2-arguments
+    for: [ro-stmt-2]
+    reason: >-
+      The Arguments give the threshold and the length condition under which the
+      informal Statement 2 is claimed.
+    pdf_page: 6
+    latex: |
+      \emph{Arguments.} Let $o^+_t$ be the shortest string of observations that can
+      satisfy the goal after history $h$. If $\mathrm{v}(h \text{ yes})$ is the
+      expected value of programming the DB to produce $o^+_t$, then $\mathrm{v}(h
+      \text{ yes}) > P(\mathrm{DB}) \cdot 2^{-|o^+_t|}$. Without the DB, the agent
+      achieves the goal by producing a string of actions of length $l^a_t \ge
+      |o^+_t|$, and so $\mathrm{v}(h \text{ no}) < P(\mathrm{DB}) \cdot 2^{-l^a_t} +
+      (1 - P(\mathrm{DB})) \cdot 2^{-l^a_t} = 2^{-l^a_t}$. Hence $\mathrm{A}^\rho_g$
+      uses the DB not later than when $P(\mathrm{DB}) > 2^{|o^+_t| - l^a_t}$, which
+      is easily satisfiable once $|o^+_t| < l^a_t$. $\diamondsuit$
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 170}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: ro-stmt-3-arguments
+    for: [ro-stmt-3]
+    reason: >-
+      The Arguments contain the printed comparison $\mathcal{Q}_B >
+      \mathcal{Q}_h/2$, which compares sets where the surrounding text compares
+      their $\rho$-masses; a reading of it needs the passage.
+    pdf_page: 6
+    latex: |
+      \emph{Arguments.} Let $\mathcal{Q}_B$ be the set of environments containing a
+      delusion box, and let $q_b \in \mathcal{Q}_B$ be the true environment. Because
+      $\rho(q_b) < \rho(\mathcal{Q}_B)$, it takes fewer errors to converge to
+      $\mathcal{Q}_B$ than to $q_b$. Once the learning agent $\mathrm{A}^\rho_p$
+      believes that the environment contains a delusion box (i.e., $\mathcal{Q}_B >
+      \mathcal{Q}_h/2$), it will immediately program the DB to output a predictable
+      sequence, obliterating observations from $q_b$, since these observations may
+      generate prediction errors. $\diamondsuit$
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 170}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: ro-stmt-4-arguments
+    for: [ro-stmt-4]
+    reason: >-
+      The Arguments use $\rho(\mathcal{Q}_B) > \rho(q_b)$ and the claim that the
+      box program cannot reduce $\rho(\mathcal{Q}_h)$ below $\rho(\mathcal{Q}_B)$,
+      neither of which is in the statement.
+    pdf_page: 7
+    latex: |
+      \emph{Arguments.} The argument is essentially the reverse of that given for the
+      prediction-seeking agent. $\mathrm{A}^\mu_k$ achieves highest value by
+      minimizing $\rho(h)$, but the program that $\mathrm{A}^\mu_k$ sends to the
+      delusion box cannot reduce $\rho(\mathcal{Q}_h)$ below $\rho(\mathcal{Q}_B)$.
+      Since $\rho(\mathcal{Q}_B) > \rho(q_b)$, $\mathrm{A}^\mu_k$ will choose to
+      acquire further information about the inner environment so as to reduce
+      $\rho(h)$ towards $\rho(q_b)$. As using the delusion box prevents this,
+      $\mathrm{A}^\mu_k$ will avoid using the delusion box. $\diamondsuit$
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 170}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}

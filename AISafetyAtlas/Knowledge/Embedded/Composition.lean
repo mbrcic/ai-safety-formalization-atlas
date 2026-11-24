@@ -1,6 +1,8 @@
 module
 
 public import AISafetyAtlas.Knowledge.Embedded
+public import Mathlib.Data.Set.Countable
+public import Mathlib.Logic.Denumerable
 
 /-!
 # Physical complement models for embedded measurement
@@ -50,6 +52,11 @@ open: `Meshing.restrict_surjective` empties the model there.
 | **Boundary** | `not_meshing_of_not_surjective` | The middle row: injective-but-not-surjective admits **no** meshing map |
 | **Positive** | `measuresAll_fibreInference_of_injective` | Injectivity alone measures every state |
 | **Positive** | `meshing_and_measuresAll_fibreInference_of_bijective` | Bijective: fibre inference meshes *and* measures everything |
+| **Model** | `InferenceMap.ofFun` | A point map from readings to states, read as an inference map |
+| **Positive** | `measuresAllStates_ofFun_of_surjective` | A surjective point map measures every state |
+| **Boundary** | `not_meshing_ofFun_of_surjective` | Under proper inclusion, no surjective point map meshes |
+| **Law** | `nonempty_equiv_of_finite_fibres` | Breuer footnote 4: countably infinite readings, finite fibres ⇒ a bijection readings ≃ states |
+| **Boundary** | `nonempty_equiv_and_meshing_failure_of_finite_fibres` | Breuer footnote 4 as printed: such a bijection exists, and each one fails meshing |
 
 ## Constructivity
 
@@ -67,9 +74,10 @@ finiteness.
   A contained subsystem can in principle encode the whole state, be perfectly
   correlated with the rest, or be modelled at a resolution where the remainder
   is a singleton.
-* **Not** Breuer’s theorem itself. The graded paper core remains
-  `Knowledge.Embedded`. These results are atlas physical modelling, graded
-  separately.
+* **Not** Breuer’s §3.5 theorems. The graded paper core remains
+  `Knowledge.Embedded`, and the complement-model results above are atlas
+  physical modelling, graded separately. The exception is the last section,
+  which states Breuer's footnote 4 (p. 208) as printed.
 * **Not** Bekenstein, dynamics, quantum states, or AI-system conclusions.
 -/
 
@@ -291,5 +299,105 @@ public theorem meshing_and_measuresAll_fibreInference_of_bijective
       MeasuresAllStates (fibreInference restrict) :=
   ⟨meshing_fibreInference_of_surjective restrict hbij.2,
     measuresAll_fibreInference_of_injective restrict hbij.1⟩
+
+/-! ## Point-map inference, and Breuer's footnote 4
+
+Breuer's footnote 4 (p. 208) exhibits bijections between apparatus and global
+states that do **not** mesh: *"if `𝒮_𝒜` is infinite but countable, and if for
+every state `s_A ∈ 𝒮_𝒜` there are only finitely many `s ∈ 𝒮_𝒪` such that
+`s|_A = s_A`, then there is a bijection `φ` between `𝒮_𝒜` and `𝒮_𝒪`. But since
+`∃ s_A ∈ 𝒮_𝒜 : φ({s_A})|_A ≠ {s_A}` the meshing condition is not fulfilled."*
+
+The failure needs proper inclusion, Breuer's §3.3 standing assumption: when every
+fibre is a singleton the restriction is itself a bijection and its inverse
+meshes. The failure half also needs no countability — any surjective point map
+fails to mesh under proper inclusion (`not_meshing_ofFun_of_surjective`);
+countability and finite fibres are what make the bijection exist. -/
+
+end AISafetyAtlas.Knowledge.Embedded.Composition
+
+namespace AISafetyAtlas.Knowledge.Embedded
+
+universe u v
+
+/-- **Point-map inference.** A map `φ` from readings to global states read as an
+inference map, `θ(U) = φ(U)`: the inference map footnote 4 attaches to a
+bijection `φ`, whose singleton values print writes `φ({s_A})`. Breuer's union
+law holds because images commute with unions. -/
+@[expose] public def InferenceMap.ofFun
+    {Ω : Type u} {A : Type v} (φ : A → Ω) : InferenceMap Ω A where
+  infer U := φ '' U.1
+  infer_eq_union_singletons := by
+    intro U
+    ext s
+    constructor
+    · rintro ⟨a, ha, rfl⟩
+      exact ⟨a, ha, a, rfl, rfl⟩
+    · rintro ⟨a, ha, b, hb, rfl⟩
+      obtain rfl : b = a := hb
+      exact ⟨b, ha, rfl⟩
+
+end AISafetyAtlas.Knowledge.Embedded
+
+namespace AISafetyAtlas.Knowledge.Embedded.Composition
+
+open AISafetyAtlas.Knowledge.Embedded
+
+universe u v w
+
+/-- A point map infers, from a single reading, the single state it names. -/
+public theorem ofFun_infer_singleton {Ω : Type u} {A : Type v} (φ : A → Ω) (a : A) :
+    (InferenceMap.ofFun φ).infer (ReadingSet.singleton a) = {φ a} :=
+  Set.image_singleton
+
+/-- **A surjective point map measures every state**: each state is the value of
+some reading, and that reading alone infers it. -/
+public theorem measuresAllStates_ofFun_of_surjective {Ω : Type u} {A : Type v}
+    {φ : A → Ω} (hφ : Function.Surjective φ) :
+    MeasuresAllStates (InferenceMap.ofFun φ) := fun s => by
+  obtain ⟨a, rfl⟩ := hφ s
+  exact ⟨ReadingSet.singleton a, ofFun_infer_singleton φ a⟩
+
+/-- **Under proper inclusion, no surjective point map meshes.** Breuer's
+Corollary (`meshing_fails_of_measuresAllStates`) at a point map, which measures
+every state. Wider than footnote 4: any surjection, at any cardinality. -/
+public theorem not_meshing_ofFun_of_surjective {Ω : Type u} {A : Type v}
+    (restrict : Restriction Ω A) (hp : ProperInclusion restrict)
+    {φ : A → Ω} (hφ : Function.Surjective φ) :
+    ¬ Meshing restrict (InferenceMap.ofFun φ) :=
+  meshing_fails_of_measuresAllStates restrict _ hp (measuresAllStates_ofFun_of_surjective hφ)
+
+/-- **Breuer footnote 4, the bijection.** If the apparatus states are countably
+infinite, the restriction is surjective (Breuer §3.3), and every fibre is finite,
+then apparatus and global states are in bijection: the global states are a
+countable union of finite fibres, and infinite because they cover the readings. -/
+public theorem nonempty_equiv_of_finite_fibres {Ω : Type u} {A : Type v}
+    [Countable A] [Infinite A] (restrict : Restriction Ω A)
+    (hsurj : Function.Surjective restrict) (hfin : ∀ a, (restrict ⁻¹' {a}).Finite) :
+    Nonempty (A ≃ Ω) := by
+  have hcount : (Set.univ : Set Ω).Countable := by
+    have huniv : (Set.univ : Set Ω) = ⋃ a, restrict ⁻¹' {a} := by
+      ext s; simp
+    rw [huniv]
+    exact Set.countable_iUnion fun a => (hfin a).countable
+  have : Countable Ω := Set.countable_univ_iff.mp hcount
+  have : Infinite Ω := Infinite.of_surjective restrict hsurj
+  exact nonempty_equiv_of_countable
+
+/-- **Breuer footnote 4, as printed.** Countably infinite apparatus states,
+surjective restriction, finite fibres: there is a bijection `φ : 𝒮_𝒜 ≃ 𝒮_𝒪`,
+and under proper inclusion *every* such bijection has a reading `s_A` with
+`φ({s_A})|_A ≠ {s_A}` — print's witness that the meshing condition fails. -/
+public theorem nonempty_equiv_and_meshing_failure_of_finite_fibres
+    {Ω : Type u} {A : Type v} [Countable A] [Infinite A] (restrict : Restriction Ω A)
+    (hsurj : Function.Surjective restrict) (hfin : ∀ a, (restrict ⁻¹' {a}).Finite)
+    (hp : ProperInclusion restrict) :
+    Nonempty (A ≃ Ω) ∧ ∀ e : A ≃ Ω, ∃ a : A,
+      Set.image restrict ((InferenceMap.ofFun e).infer (ReadingSet.singleton a)) ≠ {a} := by
+  refine ⟨nonempty_equiv_of_finite_fibres restrict hsurj hfin, fun e => ?_⟩
+  have h := not_meshing_ofFun_of_surjective restrict hp e.surjective
+  unfold Meshing at h
+  push Not at h
+  exact h
 
 end AISafetyAtlas.Knowledge.Embedded.Composition

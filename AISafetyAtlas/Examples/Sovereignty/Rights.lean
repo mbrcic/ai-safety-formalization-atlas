@@ -294,11 +294,11 @@ public theorem surjective_shirtGame_outcome : Function.Surjective shirtGame.outc
 /-- **Theorem 3.5's condition (ii) on this constitution**, obtained from the
 representation. -/
 public theorem superadditive_shirtConstitution : Superadditive shirtConstitution.induced :=
-  represents_shirtGame.superadditive
+  AISafetyAtlas.Sovereignty.Represents.superadditive represents_shirtGame
 
 /-- **Condition (3.3) on the diagonal**, likewise. -/
 public theorem upwardClosed_shirtConstitution : UpwardClosed shirtConstitution.induced :=
-  represents_shirtGame.upwardClosed
+  AISafetyAtlas.Sovereignty.Represents.upwardClosed represents_shirtGame
 
 /-! ## Example 3.7: the sequential game form -/
 
@@ -1118,5 +1118,59 @@ public theorem gibbardInduced_superadditive :
         hu₂ (Or.inr (Or.inr ⟨rfl, hdl ha₁, hdl hj₁⟩))⟩)
     · exact absurd ha₂ (hdl ha₁)
     · exact absurd ha₂ (hdl ha₁)
+
+/-! ## Peleg's coalition monotonicity, and Pauly's page-152 properties -/
+
+/-- **A superadditive effectivity function that is not outcome-monotonic.** Every
+coalition is effective for the whole space and for `{0}`, and for nothing else. -/
+@[expose] public def zeroOrAllEF : Set Bool → Set (Set (Fin 3)) :=
+  fun _ => {Set.univ, {0}}
+
+/-- It is superadditive: the family `{univ, {0}}` is closed under intersection. -/
+public theorem zeroOrAllEF_superadditive : Superadditive zeroOrAllEF := by
+  intro _ _ B₁ B₂ _ hB₁ hB₂
+  rcases hB₁ with rfl | rfl <;> rcases hB₂ with rfl | rfl <;> simp [zeroOrAllEF]
+
+/-- It is not outcome-monotonic: `{0}` is in every family and `{0, 1}` is in none,
+so no `Playable` statement covers it. -/
+public theorem not_zeroOrAllEF_upwardClosed : ¬ UpwardClosed zeroOrAllEF := by
+  intro h
+  rcases h ∅ {0} {0, 1} (Or.inr rfl) (by simp) with h1 | h1
+  · have h2 : (2 : Fin 3) ∈ ({0, 1} : Set (Fin 3)) := h1 ▸ Set.mem_univ _
+    simp at h2
+  · have h2 : (1 : Fin 3) ∈ ({0} : Set (Fin 3)) := h1 ▸ (by simp)
+    simp at h2
+
+/-- **Peleg's page-72 statement on it**: coalition monotonicity from
+superadditivity and `A ∈ E(S)` alone. -/
+example : CoalitionMonotone zeroOrAllEF :=
+  Superadditive.coalitionMonotone zeroOrAllEF_superadditive fun _ => Or.inl rfl
+
+/-- **Pauly's page-152 properties on a constant family**: every coalition is
+effective for the whole space alone. -/
+@[expose] public def univOnlyEF : Set Bool → Set (Set Bool) := fun _ => {Set.univ}
+
+/-- It is coalition-monotonic. -/
+public theorem univOnlyEF_coalitionMonotone : CoalitionMonotone univOnlyEF :=
+  fun _ _ _ _ h => h
+
+/-- It is regular: the whole space and its complement are never both effective. -/
+public theorem univOnlyEF_efRegular : EFRegular univOnlyEF := by
+  intro _ A hA hAc
+  rw [univOnlyEF, Set.mem_singleton_iff] at hA hAc
+  rw [hA, Set.compl_univ] at hAc
+  exact Set.empty_ne_univ hAc
+
+/-- It is not maximal: at `C = ∅`, the complement of `{true}` is not effective for
+the grand coalition, and `{true}` is not effective for `∅`. -/
+public theorem not_univOnlyEF_efMaximal : ¬ EFMaximal univOnlyEF := by
+  intro h
+  have hA : ({true} : Set Bool) ∈ univOnlyEF ∅ := h ∅ {true} fun hc => by
+    rw [univOnlyEF, Set.mem_singleton_iff] at hc
+    have : true ∈ ({true} : Set Bool)ᶜ := hc ▸ Set.mem_univ _
+    simp at this
+  rw [univOnlyEF, Set.mem_singleton_iff] at hA
+  have : false ∈ ({true} : Set Bool) := hA ▸ Set.mem_univ _
+  simp at this
 
 end AISafetyAtlas.Examples.Sovereignty

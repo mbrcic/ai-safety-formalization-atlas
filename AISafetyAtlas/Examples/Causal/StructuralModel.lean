@@ -855,4 +855,523 @@ public theorem eq_constPolicy_of_agree (π : figSCIM.Policy)
     π = constPolicy 0 :=
   policy_eq_of_agree_at_decision π (constPolicy 0) (fun hd a e => h hd a e)
 
+/-! ## Definition 2 at an infinite intervention set
+
+Print's Definition 2 intervenes on *"`X` a set of variables in `V`"*, with no
+finiteness. `SCM.submodelSet` takes any `Set V`; here it forces every even bit of
+`independentBits` to `0`, an intervention set no `Finset` names. -/
+
+/-- The even vertices: an infinite intervention set. -/
+public theorem evens_infinite : {v : ℕ | Even v}.Infinite :=
+  Set.infinite_of_forall_exists_gt fun n ↦ ⟨2 * n + 2, ⟨n + 1, by ring⟩, by omega⟩
+
+/-- **`do(X = 0)` on every even bit**: a forced bit takes the forced value. -/
+public theorem independentBits_doEvens_two (ε : ExoAssignment ℕ (fun _ ↦ Fin 2)) :
+    (independentBits.submodelSet {v | Even v} (fun _ ↦ 0)).eval ε 2 = 0 :=
+  SCM.submodelSet_eval _ _ _ _ ⟨1, rfl⟩
+
+/-- An odd bit, outside the intervention, is still its own noise. -/
+public theorem independentBits_doEvens_one (ε : ExoAssignment ℕ (fun _ ↦ Fin 2)) :
+    (independentBits.submodelSet {v | Even v} (fun _ ↦ 0)).eval ε 1 = ε 1 :=
+  SCM.submodelSet_eval_notMem _ _ _ _ (by decide)
+
+/-- On a finite intervention set the `Finset` submodel is the `Set` one. -/
+example : independentBits.submodel ({0} : Finset ℕ) (fun _ ↦ 0) =
+    independentBits.submodelSet ((({0} : Finset ℕ)) : Set ℕ) (fun _ ↦ 0) :=
+  AISafetyAtlas.Causal.SCM.submodel_eq_submodelSet _ _ _
+
+/-! ## Definition 5 and the invariance law at a countably infinite diagram
+
+`infSCIM` is a single-decision SCIM over `ℕ`: a decision `0` observing the chance
+node `2`, a utility `1` that pays when the decision matches `2`, and countably
+many further chance nodes `n ≥ 3` copying `2`. It is well-founded, has one
+utility vertex and a finite `Pa^D`, so print's `V*(M)` and the materiality of
+`2` denote, and neither `SCIM.optimalValue` nor `SCIM.IsMaterial` can be written
+at it. **The witness is degenerate on one axis, deliberately**: every exogenous
+domain is `Fin 1`, so the exogenous space is a single point and the measurability
+side conditions hold by `Subsingleton.measurable`. What it inhabits is the
+infinite vertex set, which is the axis the new definitions widen.
+-/
+
+/-- Parents: `2 → 0`, `{0, 2} → 1`, and `2 → n` for `n ≥ 3`. -/
+@[expose] public def infParents (v : ℕ) : Set ℕ :=
+  if v = 0 then {2} else if v = 1 then {0, 2} else if v = 2 then ∅ else {2}
+
+/-- A rank: the root `2` at `0`, the decision and the copies at `1`, the utility
+at `2`. -/
+@[expose] public def infRank (v : ℕ) : ℕ :=
+  if v = 2 then 0 else if v = 1 then 2 else 1
+
+public theorem infRank_lt (v : ℕ) : ∀ p ∈ infParents v, infRank p < infRank v := by
+  intro p hp
+  unfold infParents at hp
+  split_ifs at hp with h0 h1 h2 <;> simp_all [infRank]
+  rcases hp with rfl | rfl <;> simp
+
+/-- The diagram of `infSCIM`. -/
+@[expose] public def infCID : CID ℕ where
+  parents := infParents
+  acyclic := acyclic_of_rank infRank infRank_lt
+  kind := fun v ↦
+    if v = 0 then NodeKind.decision
+    else if v = 1 then NodeKind.utility
+    else NodeKind.structureNode
+  utility_childless := by
+    intro u hu v hv
+    have hu1 : u = 1 := by
+      by_contra h
+      by_cases h0 : u = 0 <;> simp_all
+    subst hu1
+    unfold infParents at hv
+    split_ifs at hv <;> simp_all
+
+public theorem infCID_isUtility_iff (v : ℕ) : infCID.IsUtility v ↔ v = 1 := by
+  unfold CID.IsUtility infCID
+  by_cases h0 : v = 0 <;> by_cases h1 : v = 1 <;> simp_all
+
+public theorem infCID_isDecision_iff (v : ℕ) : infCID.IsDecision v ↔ v = 0 := by
+  unfold CID.IsDecision infCID
+  by_cases h0 : v = 0 <;> by_cases h1 : v = 1 <;> simp_all
+
+/-- The utility pays `1` when the decision matches `2`; `2` is `0`; the copies
+read `2`. -/
+@[expose] public noncomputable def infSCIM :
+    SCIM ℕ (fun _ ↦ Fin 2) (fun _ ↦ Fin 1) where
+  dom_nonempty := fun _ ↦ ⟨0⟩
+  graph := infCID
+  utilityValue := fun _ _ i ↦ (i : ℝ)
+  utilityValue_injective := by
+    intro _ _ i j h
+    have hc : ((i : ℕ) : ℝ) = ((j : ℕ) : ℝ) := h
+    exact Fin.ext (Nat.cast_injective hc)
+  f := fun v _ a _ ↦ if v = 1 then (if a 0 = a 2 then 1 else 0) else if v = 2 then 0 else a 2
+  f_parents := by
+    intro v _ a b e hab
+    by_cases h1 : v = 1
+    · subst h1
+      have h0 : a 0 = b 0 := hab 0 (by simp [infCID, infParents])
+      have h2 : a 2 = b 2 := hab 2 (by simp [infCID, infParents])
+      simp [h0, h2]
+    · by_cases h2 : v = 2
+      · simp [h2]
+      · have h22 : a 2 = b 2 := hab 2 (by
+          simp only [infCID, infParents]
+          by_cases h0 : v = 0 <;> simp [h0, h1, h2])
+        simp [h1, h2, h22]
+  exoProb := fun _ _ ↦ 1
+  exoProb_nonneg := fun _ _ ↦ zero_le_one
+  exoProb_tsum := fun _ ↦ by simp
+
+public instance instIsWellFoundedInfSCIM : infSCIM.graph.IsWellFounded :=
+  ⟨wellFounded_of_rank infRank infRank_lt⟩
+
+/-- One utility vertex, so print's `U := Σ_{U ∈ 𝐔} U` denotes; not a bound on
+`V`. -/
+public noncomputable instance instFintypeInfUtilities :
+    Fintype {v : ℕ // infSCIM.graph.IsUtility v} :=
+  have : Finite {v : ℕ // infSCIM.graph.IsUtility v} :=
+    Finite.of_injective (fun _ ↦ ()) fun u u' _ ↦ Subtype.ext <|
+      ((infCID_isUtility_iff u.1).mp u.2).trans ((infCID_isUtility_iff u'.1).mp u'.2).symm
+  Fintype.ofFinite _
+
+/-- **The policy space is finite at an infinite vertex set**, by
+`SCIM.finite_policy`: one decision, observing one vertex. -/
+public instance instFiniteInfPolicy : Finite infSCIM.Policy := by
+  have : Finite {d : ℕ // infSCIM.graph.IsDecision d} :=
+    Finite.of_injective (fun _ ↦ ()) fun u u' _ ↦ Subtype.ext <|
+      ((infCID_isDecision_iff u.1).mp u.2).trans ((infCID_isDecision_iff u'.1).mp u'.2).symm
+  refine infSCIM.finite_policy fun d hd ↦ ?_
+  have hd0 : d = 0 := (infCID_isDecision_iff d).mp hd
+  subst hd0
+  simp [infSCIM, infCID, infParents]
+
+public theorem infSCIM_isDecision_zero : infSCIM.graph.IsDecision 0 :=
+  (infCID_isDecision_iff 0).mpr rfl
+
+public theorem infSCIM_mem_parents_zero : (2 : ℕ) ∈ infSCIM.graph.parents 0 := by
+  simp [infSCIM, infCID, infParents]
+
+/-- **Print's `max` is attained at an infinite vertex set**, and the maximiser
+earns `V*(M)`. -/
+public theorem infSCIM_exists_isOptimalPolicyLaw :
+    ∃ π : infSCIM.Policy,
+      infSCIM.IsOptimalPolicyLaw π (fun _ ↦ Subsingleton.measurable) ∧
+        infSCIM.expectedUtilityLaw π Subsingleton.measurable =
+          infSCIM.optimalValueLaw (fun _ ↦ Subsingleton.measurable)
+            (infSCIM.exists_isOptimalPolicyLaw _) := by
+  obtain ⟨π, hπ⟩ := infSCIM.exists_isOptimalPolicyLaw fun _ ↦ Subsingleton.measurable
+  exact ⟨π, hπ, (infSCIM.optimalValueLaw_eq _ _ hπ).symm⟩
+
+/-- **Definition 5's materiality denotes at an infinite vertex set**: whether
+the observation `2` is material is the comparison print writes, between
+`V*(M_{2↛0})` and `V*(M)`, both law-based. -/
+public theorem infSCIM_isMaterialLaw_iff :
+    infSCIM.IsMaterialLaw infSCIM_isDecision_zero infSCIM_mem_parents_zero
+        (fun _ ↦ Subsingleton.measurable) (fun _ ↦ Subsingleton.measurable)
+        (infSCIM.exists_isOptimalPolicyLaw _)
+        ((infSCIM.removeInfoLink infSCIM_isDecision_zero 2).exists_isOptimalPolicyLaw _) ↔
+      (infSCIM.removeInfoLink infSCIM_isDecision_zero 2).optimalValueLaw
+          (fun _ ↦ Subsingleton.measurable)
+          ((infSCIM.removeInfoLink infSCIM_isDecision_zero 2).exists_isOptimalPolicyLaw _) <
+        infSCIM.optimalValueLaw (fun _ ↦ Subsingleton.measurable)
+          (infSCIM.exists_isOptimalPolicyLaw _) :=
+  Iff.rfl
+
+/-- At `figSCIM`, a finite diagram, law-based materiality is `SCIM.IsMaterial`,
+so the opinion is material in the law sense too. -/
+public theorem figSCIM_opinion_isMaterialLaw :
+    figSCIM.IsMaterialLaw figSCIM_mem_decisions_one
+      (show (0 : Fin 3) ∈ figSCIM.graph.parents 1 by
+        simp [figSCIM_graph, figCID_parents_decision])
+      (fun _ ↦ SCM.measurable_exo _) (fun _ ↦ SCM.measurable_exo _)
+      (figSCIM.exists_isOptimalPolicyLaw _)
+      ((figSCIM.removeInfoLink (show figSCIM.graph.IsDecision 1 from
+        figSCIM_mem_decisions_one) 0).exists_isOptimalPolicyLaw _) :=
+  (figSCIM.isMaterial_iff_law _ _).mp figSCIM_opinion_isMaterial
+
+/-- `2` is not downstream of the decision: every descendant of `0` has rank at
+least `1`, and `2` has rank `0`. -/
+public theorem infCID_notDownstream_two : infCID.NotDownstream 2 := by
+  intro d hd hdesc
+  have hd0 : d = 0 := (infCID_isDecision_iff d).mp hd
+  subst hd0
+  have key : ∀ v, infCID.IsDescendant 0 v → 1 ≤ infRank v := by
+    intro v hv
+    induction hv with
+    | refl => simp [infRank]
+    | tail _ hbc ih => exact ih.trans (infRank_lt _ _ hbc).le
+  exact absurd (key 2 hdesc) (by simp [infRank])
+
+/-- **Print's invariance sentence with no measurability hypothesis, at an
+infinite vertex set.** The exogenous law is carried by one draw, which is print's
+atomic `P(ε)`, so `SCIM.observableLawAE_withPolicy_eq_of_countable_support`
+applies with nothing assumed about the evaluation maps. -/
+public theorem infSCIM_observableLawAE_policy_free (π π' : infSCIM.Policy) :
+    (infSCIM.withPolicy π).observableLawAE {2}
+        ((infSCIM.withPolicy π).aemeasurable_of_countable_support
+          Set.countable_univ (by simp) _) =
+      (infSCIM.withPolicy π').observableLawAE {2}
+        ((infSCIM.withPolicy π').aemeasurable_of_countable_support
+          Set.countable_univ (by simp) _) :=
+  infSCIM.observableLawAE_withPolicy_eq_of_countable_support π π' {2}
+    (fun v hv ↦ by
+      rw [Set.mem_singleton_iff] at hv
+      subst hv
+      exact infCID_notDownstream_two) Set.countable_univ (by simp)
+
+/-- The opinion, as a set of observables, is not downstream of the decision. -/
+public theorem figSCIM_notDownstream_set_zero :
+    ∀ v ∈ ({0} : Set (Fin 3)), figSCIM.graph.NotDownstream v := fun c hc ↦ by
+  rw [Set.mem_singleton_iff] at hc
+  subst hc
+  exact figCID_notDownstream_zero
+
+/-- The single-hypothesis invariance theorem on print's own figure. -/
+public theorem figSCIM_observableLawAE_opinion_policy_free (π π' : figSCIM.Policy) :
+    (figSCIM.withPolicy π).observableLawAE {0} (SCM.measurable_exo _).aemeasurable
+      = (figSCIM.withPolicy π').observableLawAE {0}
+          (figSCIM.aemeasurable_withPolicy_of_notDownstream π π' {0}
+            figSCIM_notDownstream_set_zero (fun _ a ↦ a)
+            (SCM.measurable_exo _).aemeasurable) :=
+  figSCIM.observableLawAE_withPolicy_eq_of_notDownstream π π' {0}
+    figSCIM_notDownstream_set_zero _
+
+/-! ### An atomic law on an uncountable exogenous space
+
+`pointBits` has countably many binary noise variables, each a point mass at `0`.
+The exogenous space `ℕ → Fin 2` is uncountable and carries maps that are not
+measurable, but the law is carried by one draw, so every map out of it is
+almost-everywhere measurable and every observable has a law. -/
+
+/-- Countably many bits, each its own noise, each noise a point mass at `0`. -/
+@[expose] public noncomputable def pointBits : SCM ℕ (fun _ ↦ Fin 2) (fun _ ↦ Fin 2) where
+  dom_nonempty := fun _ ↦ ⟨0⟩
+  parents := fun _ ↦ ∅
+  acyclic := by
+    intro v hv
+    cases hv with
+    | single h => exact h
+    | tail _ h => exact h
+  f := fun _ _ e ↦ e
+  f_parents := by intros; rfl
+  exoProb := fun _ e ↦ if e = 0 then 1 else 0
+  exoProb_nonneg := by intros; split_ifs <;> norm_num
+  exoProb_tsum := by intro v; rw [tsum_fintype]; simp
+
+/-- The law gives the all-zero draw full mass. -/
+public theorem pointBits_exoLaw_compl :
+    (pointBits.exoLaw : MeasureTheory.Measure (ExoAssignment ℕ (fun _ ↦ Fin 2)))
+      ({fun _ ↦ 0}ᶜ) = 0 := by
+  have hsub : ({fun _ ↦ 0} : Set (ExoAssignment ℕ (fun _ ↦ Fin 2)))ᶜ ⊆
+      ⋃ v : ℕ, (fun ε : ExoAssignment ℕ (fun _ ↦ Fin 2) ↦ ε v) ⁻¹' {1} := by
+    intro ε hε
+    simp only [Set.mem_compl_iff, Set.mem_singleton_iff] at hε
+    obtain ⟨v, hv⟩ : ∃ v, ε v ≠ 0 := by
+      by_contra h
+      push Not at h
+      exact hε (funext h)
+    refine Set.mem_iUnion.mpr ⟨v, ?_⟩
+    simp only [Set.mem_preimage, Set.mem_singleton_iff]
+    revert hv
+    generalize ε v = x
+    fin_cases x <;> simp
+  refine MeasureTheory.measure_mono_null hsub (MeasureTheory.measure_iUnion_null fun v ↦ ?_)
+  have he := congrArg (fun μ : MeasureTheory.Measure (Fin 2) ↦ μ {1})
+    (pointBits.exoLaw_map_eval v)
+  rw [MeasureTheory.Measure.map_apply (measurable_pi_apply v)
+    (measurableSet_singleton 1),
+    PMF.toMeasure_apply_singleton _ _ (measurableSet_singleton _)] at he
+  rw [he]
+  show ENNReal.ofReal (pointBits.exoProb v 1) = 0
+  simp [pointBits]
+
+/-- **Every map out of the uncountable exogenous space is almost-everywhere
+measurable** under `pointBits`' atomic law. -/
+public theorem pointBits_aemeasurable {α : Type*} [MeasurableSpace α]
+    (f : ExoAssignment ℕ (fun _ ↦ Fin 2) → α) :
+    AEMeasurable f (pointBits.exoLaw : MeasureTheory.Measure (ExoAssignment ℕ (fun _ ↦ Fin 2))) :=
+  pointBits.aemeasurable_of_countable_support (Set.countable_singleton _) pointBits_exoLaw_compl f
+
+/-- At a measurable evaluation the almost-everywhere law is the old one. -/
+example (π : figSCIM.Policy) :
+    (figSCIM.withPolicy π).observableLaw {0} (SCM.measurable_exo _) =
+      (figSCIM.withPolicy π).observableLawAE {0} (SCM.measurable_exo _).aemeasurable :=
+  AISafetyAtlas.Causal.SCM.observableLaw_eq_observableLawAE _ _ _
+
+/-- At print's figure `V*(M)` is the finite maximum, and both are `1`. -/
+example : figSCIM.optimalValueLaw (fun _ ↦ SCM.measurable_exo _)
+    (figSCIM.exists_isOptimalPolicyLaw _) = 1 := by
+  rw [← AISafetyAtlas.Causal.SCIM.optimalValue_eq_optimalValueLaw, figSCIM_optimalValue]
+
+/-! ## Print's `Pr(x)` by its own formula, and an optimal policy at a.e.-measurable laws
+
+`SCM.sumProb` is print's `Pr(W = w) = Σ_{ε | W(ε) = w} P(ε)` verbatim. At the
+infinite diagram `infSCIM` it is policy-free off the decision's descendants with
+no hypothesis at all, and at a finite model it is `SCM.marginal`. -/
+
+/-- **Print's invariance sentence on print's own formula, at an infinite vertex
+set**, where `SCM.marginal` cannot be written. -/
+public theorem infSCIM_sumProb_policy_free (π π' : infSCIM.Policy)
+    (x : EndoAssignment ℕ (fun _ ↦ Fin 2)) :
+    (infSCIM.withPolicy π).sumProb {2} x = (infSCIM.withPolicy π').sumProb {2} x :=
+  infSCIM.sumProb_withPolicy_eq_of_notDownstream π π' {2} (fun v hv ↦ by
+    rw [Set.mem_singleton_iff] at hv
+    subst hv
+    exact infCID_notDownstream_two) x
+
+/-- At a finite model print's formula is the finite marginal. -/
+example (X : Finset Two) (x : EndoAssignment Two bits) :
+    copyChain.sumProb (↑X) x = copyChain.marginal X x :=
+  AISafetyAtlas.Causal.SCM.sumProb_coe_eq_marginal _ _ _
+
+/-- **An optimal policy in the almost-everywhere sense exists at `infSCIM`**, with
+every policy's measurability hypothesis discharged by print's atomic exogenous law
+alone (`SCM.aemeasurable_of_countable_support`), not by a measurability argument. -/
+public theorem infSCIM_exists_isOptimalPolicyLawAE :
+    ∃ π : infSCIM.Policy, infSCIM.IsOptimalPolicyLawAE π fun π' ↦
+      (infSCIM.withPolicy π').aemeasurable_of_countable_support Set.countable_univ
+        (by simp) _ := by
+  obtain ⟨π, hπ⟩ := infSCIM.exists_isOptimalPolicyLaw fun _ ↦ Subsingleton.measurable
+  exact ⟨π, (infSCIM.isOptimalPolicyLaw_iff_AE π _).mp hπ⟩
+
+/-- At a measurable evaluation the almost-everywhere expectation is the old one. -/
+example (π : infSCIM.Policy) :
+    infSCIM.expectedUtilityLawAE π Subsingleton.measurable.aemeasurable =
+      infSCIM.expectedUtilityLaw π Subsingleton.measurable :=
+  (AISafetyAtlas.Causal.SCIM.expectedUtilityLaw_eq_AE _ _ _).symm
+
+/-! ## Definition 5 at an infinite policy space
+
+`wideSCIM` is a single-decision SCIM over `ℕ` whose decision `0` observes every
+chance node `n ≥ 2`, with a utility `1` that reads the decision and pays `0`
+whatever happens. The decision sees infinitely many binary parents, so the policy
+space is infinite (`wideSCIM_policy_infinite`) and no `[Finite M.Policy]` route
+reaches it; but every policy earns `0`, so print's `max` is attained, `V*(M)`
+and materiality denote, and the observation `2` is **not** material. As for
+`infSCIM`, every exogenous domain is `Fin 1`, so measurability is
+`Subsingleton.measurable`; what this inhabits is the infinite policy space. -/
+
+/-- Parents: every `n ≥ 2` into `0`, and `0 → 1`. -/
+@[expose] public def wideParents (v : ℕ) : Set ℕ :=
+  if v = 0 then {n | 2 ≤ n} else if v = 1 then {0} else ∅
+
+/-- A rank: the chance nodes at `0`, the decision at `1`, the utility at `2`. -/
+@[expose] public def wideRank (v : ℕ) : ℕ :=
+  if v = 0 then 1 else if v = 1 then 2 else 0
+
+public theorem wideRank_lt (v : ℕ) : ∀ p ∈ wideParents v, wideRank p < wideRank v := by
+  intro p hp
+  unfold wideParents at hp
+  split_ifs at hp with h0 h1
+  · subst h0
+    have hp2 : 2 ≤ p := hp
+    have hp0 : p ≠ 0 := by omega
+    have hp1 : p ≠ 1 := by omega
+    simp [wideRank, hp0, hp1]
+  · subst h1
+    rw [Set.mem_singleton_iff] at hp
+    subst hp
+    simp [wideRank]
+  · exact absurd hp (Set.notMem_empty p)
+
+/-- The diagram of `wideSCIM`. -/
+@[expose] public def wideCID : CID ℕ where
+  parents := wideParents
+  acyclic := acyclic_of_rank wideRank wideRank_lt
+  kind := fun v ↦
+    if v = 0 then NodeKind.decision
+    else if v = 1 then NodeKind.utility
+    else NodeKind.structureNode
+  utility_childless := by
+    intro u hu v hv
+    have hu1 : u = 1 := by
+      by_contra h
+      by_cases h0 : u = 0 <;> simp_all
+    subst hu1
+    unfold wideParents at hv
+    split_ifs at hv <;> simp_all
+
+public theorem wideCID_isUtility_iff (v : ℕ) : wideCID.IsUtility v ↔ v = 1 := by
+  unfold CID.IsUtility wideCID
+  by_cases h0 : v = 0 <;> by_cases h1 : v = 1 <;> simp_all
+
+public theorem wideCID_isDecision_iff (v : ℕ) : wideCID.IsDecision v ↔ v = 0 := by
+  unfold CID.IsDecision wideCID
+  by_cases h0 : v = 0 <;> by_cases h1 : v = 1 <;> simp_all
+
+/-- Every non-decision vertex is the constant `0`; in particular the utility pays
+`0` whatever the decision. -/
+@[expose] public noncomputable def wideSCIM :
+    SCIM ℕ (fun _ ↦ Fin 2) (fun _ ↦ Fin 1) where
+  dom_nonempty := fun _ ↦ ⟨0⟩
+  graph := wideCID
+  utilityValue := fun _ _ i ↦ (i : ℝ)
+  utilityValue_injective := by
+    intro _ _ i j h
+    have hc : ((i : ℕ) : ℝ) = ((j : ℕ) : ℝ) := h
+    exact Fin.ext (Nat.cast_injective hc)
+  f := fun _ _ _ _ ↦ 0
+  f_parents := fun _ _ _ _ _ _ ↦ rfl
+  exoProb := fun _ _ ↦ 1
+  exoProb_nonneg := fun _ _ ↦ zero_le_one
+  exoProb_tsum := fun _ ↦ by simp
+
+public instance instIsWellFoundedWideSCIM : wideSCIM.graph.IsWellFounded :=
+  ⟨wellFounded_of_rank wideRank wideRank_lt⟩
+
+/-- One utility vertex. -/
+public noncomputable instance instFintypeWideUtilities :
+    Fintype {v : ℕ // wideSCIM.graph.IsUtility v} :=
+  have : Finite {v : ℕ // wideSCIM.graph.IsUtility v} :=
+    Finite.of_injective (fun _ ↦ ()) fun u u' _ ↦ Subtype.ext <|
+      ((wideCID_isUtility_iff u.1).mp u.2).trans ((wideCID_isUtility_iff u'.1).mp u'.2).symm
+  Fintype.ofFinite _
+
+public theorem wideSCIM_isDecision_zero : wideSCIM.graph.IsDecision 0 :=
+  (wideCID_isDecision_iff 0).mpr rfl
+
+public theorem wideSCIM_mem_parents (d : {d : ℕ // wideSCIM.graph.IsDecision d}) (n : ℕ) :
+    n + 2 ∈ wideSCIM.graph.parents d.1 := by
+  have hd0 : d.1 = 0 := (wideCID_isDecision_iff d.1).mp d.2
+  rw [hd0]
+  show n + 2 ∈ wideParents 0
+  simp [wideParents]
+
+public theorem wideSCIM_mem_parents_two : (2 : ℕ) ∈ wideSCIM.graph.parents 0 :=
+  wideSCIM_mem_parents ⟨0, wideSCIM_isDecision_zero⟩ 0
+
+/-- **The policy space is infinite**: the policy copying the observation `n + 2`
+differs from the one copying `m + 2` whenever `n ≠ m`. So `SCIM.finite_policy`
+does not apply and `[Finite wideSCIM.Policy]` cannot be supplied. -/
+public theorem wideSCIM_policy_infinite : Infinite wideSCIM.Policy := by
+  refine Infinite.of_injective (fun n : ℕ ↦ (⟨fun _ a _ ↦ a (n + 2),
+    fun d _ _ _ hab ↦ hab (n + 2) (wideSCIM_mem_parents d n)⟩ : wideSCIM.Policy)) ?_
+  intro n m h
+  have h' := congrFun (congrFun (congrFun (congrArg Subtype.val h)
+    ⟨0, wideSCIM_isDecision_zero⟩) (fun v ↦ if v = n + 2 then (1 : Fin 2) else 0)) 0
+  simp only [ite_true] at h'
+  by_contra hnm
+  have hne : m + 2 ≠ n + 2 := by omega
+  rw [if_neg hne] at h'
+  exact one_ne_zero h'
+
+open MeasureTheory in
+/-- Whenever every utility pays `0` at every draw, the law-based expectation is
+`0`. -/
+public theorem expectedUtilityLaw_eq_zero_of {N : SCIM ℕ (fun _ ↦ Fin 2) (fun _ ↦ Fin 1)}
+    [N.graph.IsWellFounded] [Fintype {v : ℕ // N.graph.IsUtility v}] (π : N.Policy)
+    (hm : Measurable fun ε : ExoAssignment ℕ (fun _ ↦ Fin 1) ↦
+      fun u : {v : ℕ // N.graph.IsUtility v} ↦ (N.withPolicy π).eval ε u.1)
+    (h : ∀ ε (u : {v : ℕ // N.graph.IsUtility v}),
+      N.utilityValue u.1 u.2 ((N.withPolicy π).eval ε u.1) = 0) :
+    N.expectedUtilityLaw π hm = 0 := by
+  rw [SCIM.expectedUtilityLaw, SCM.observableLaw, ProbabilityMeasure.toMeasure_map,
+    integral_map (φ := fun ε : ExoAssignment ℕ (fun _ ↦ Fin 1) ↦
+      fun v : ({v | N.graph.IsUtility v} : Set ℕ) ↦ (N.withPolicy π).eval ε v.1)
+      (f := fun w : ((v : ({v | N.graph.IsUtility v} : Set ℕ)) → Fin 2) ↦
+        ∑ u : {v : ℕ // N.graph.IsUtility v}, N.utilityValue u.1 u.2 (w ⟨u.1, u.2⟩))
+      hm.aemeasurable (Measurable.aestronglyMeasurable (Finset.measurable_sum Finset.univ
+        fun _ _ ↦ Measurable.of_discrete.comp (measurable_pi_apply _)))]
+  refine (integral_congr_ae (Filter.Eventually.of_forall fun ε ↦ ?_)).trans (integral_zero _ _)
+  exact Finset.sum_eq_zero fun u _ ↦ h ε u
+
+/-- Every policy of `wideSCIM` earns `0`. -/
+public theorem wideSCIM_expectedUtilityLaw (π : wideSCIM.Policy) :
+    wideSCIM.expectedUtilityLaw π Subsingleton.measurable = 0 :=
+  expectedUtilityLaw_eq_zero_of π _ fun ε u ↦ by
+    have hu : ¬ wideSCIM.graph.IsDecision u.1 := fun hd ↦ by
+      have h1 := (wideCID_isUtility_iff u.1).mp u.2
+      have h0 := (wideCID_isDecision_iff u.1).mp hd
+      omega
+    rw [SCM.eval_eq_f, wideSCIM.withPolicy_f_notMem π hu]
+    simp [wideSCIM]
+
+/-- Every policy of `wideSCIM` with the link `2 → 0` removed earns `0`. -/
+public theorem wideSCIM_removeInfoLink_expectedUtilityLaw
+    (π : (wideSCIM.removeInfoLink wideSCIM_isDecision_zero 2).Policy) :
+    (wideSCIM.removeInfoLink wideSCIM_isDecision_zero 2).expectedUtilityLaw π
+      Subsingleton.measurable = 0 :=
+  expectedUtilityLaw_eq_zero_of π _ fun ε u ↦ by
+    have hu : ¬ (wideSCIM.removeInfoLink wideSCIM_isDecision_zero 2).graph.IsDecision u.1 :=
+      fun hd ↦ by
+        have h1 := (wideCID_isUtility_iff u.1).mp u.2
+        have h0 := (wideCID_isDecision_iff u.1).mp hd
+        omega
+    rw [SCM.eval_eq_f,
+      (wideSCIM.removeInfoLink wideSCIM_isDecision_zero 2).withPolicy_f_notMem π hu]
+    simp [wideSCIM, SCIM.removeInfoLink]
+
+/-- Print's `max` is attained at `wideSCIM`: every policy is optimal. -/
+public theorem wideSCIM_attains :
+    ∃ π, wideSCIM.IsOptimalPolicyLaw π fun _ ↦ Subsingleton.measurable :=
+  ⟨Classical.arbitrary _, fun π' ↦ by
+    rw [wideSCIM_expectedUtilityLaw, wideSCIM_expectedUtilityLaw]⟩
+
+/-- Print's `max` is attained at `wideSCIM` with the link `2 → 0` removed. -/
+public theorem wideSCIM_removeInfoLink_attains :
+    ∃ π, (wideSCIM.removeInfoLink wideSCIM_isDecision_zero 2).IsOptimalPolicyLaw π
+      fun _ ↦ Subsingleton.measurable :=
+  ⟨Classical.arbitrary _, fun π' ↦ by
+    rw [wideSCIM_removeInfoLink_expectedUtilityLaw,
+      wideSCIM_removeInfoLink_expectedUtilityLaw]⟩
+
+/-- **Definition 5 at an infinite policy space**: `V*(M) = 0`. -/
+public theorem wideSCIM_optimalValueLaw :
+    wideSCIM.optimalValueLaw (fun _ ↦ Subsingleton.measurable) wideSCIM_attains = 0 := by
+  obtain ⟨π, hπ⟩ := wideSCIM_attains
+  rw [wideSCIM.optimalValueLaw_eq _ _ hπ, wideSCIM_expectedUtilityLaw]
+
+/-- **The observation `2` is not material**, which print's Definition 5 decides at
+this SCIM although its policy space is infinite (`wideSCIM_policy_infinite`):
+both `V*(M_{2↛0})` and `V*(M)` are `0`. -/
+public theorem wideSCIM_not_isMaterialLaw :
+    ¬ wideSCIM.IsMaterialLaw wideSCIM_isDecision_zero wideSCIM_mem_parents_two
+      (fun _ ↦ Subsingleton.measurable) (fun _ ↦ Subsingleton.measurable)
+      wideSCIM_attains wideSCIM_removeInfoLink_attains := by
+  obtain ⟨π', hπ'⟩ := wideSCIM_removeInfoLink_attains
+  rw [SCIM.IsMaterialLaw, wideSCIM_optimalValueLaw,
+    (wideSCIM.removeInfoLink wideSCIM_isDecision_zero 2).optimalValueLaw_eq _ _ hπ',
+    wideSCIM_removeInfoLink_expectedUtilityLaw]
+  exact lt_irrefl 0
+
 end AISafetyAtlas.Examples.Causal.StructuralModel

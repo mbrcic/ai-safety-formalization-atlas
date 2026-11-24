@@ -1,0 +1,604 @@
+source:
+  citation: >-
+    Hugo Touchette and Seth Lloyd, Information-theoretic approach to the study of
+    control systems, Physica A 331 (2004) 140--172, doi:10.1016/j.physa.2003.09.007
+    (Received 3 June 2003). Published version; the arXiv v2 (2003) is held as
+    touchette-lloyd-arxiv-v2-2003-information-theoretic-approach-to-control-systems.pdf
+    and is not the transcription source. Compared on the arXiv v2 page images
+    (arXiv PDF pp. 7--11, 130 dpi): Theorems 2, 3, 4, 5, 6, 9, 10, Corollary 7,
+    Lemma 8, eqs. (28), (29)--(31), (39), the sentence after (51) and (53) have
+    the same wording and the same equation numbers in both versions; (53) carries
+    the same $\Delta H^{\max}_{\mathrm{closed}}$ slip. The only differences seen
+    are typographic: arXiv sets theorem labels in italic and theorem bodies in
+    roman (with "any" italicised in Theorem 10), where the published version sets
+    the bodies in italic with roman inversions, and arXiv numbers sections with
+    roman numerals (e.g. "Section II").
+  file: touchette-lloyd-2004-published-physica-a-information-theoretic-control.pdf
+  sha256: 1beaa6388edb38c17ffb172dcc7bd69528e09b42371d9bdcf4c9c273057ebb2a
+  page_offset: -139
+  standing: |
+    Discrete, finite random variables (§2, p. 143, PDF p. 4): "For simplicity, all
+    the random variables describing the different systems are taken to be discrete
+    random variables with finite sets of outcomes. The extension to
+    continuous-state systems is discussed in Section 4."
+
+    Initial state law fixed (§2, p. 143, PDF p. 4): "the random variable $X$
+    represents the initial state of the system to be controlled, and whose values
+    $x \in \mathcal{X}$ are drawn according to a fixed probability distribution
+    $p_X(x)$."
+
+    Sensor and actuator merged (§2, p. 143, PDF p. 4): "we assume throughout this
+    paper that the sensor and the actuator are merged into a single device, called
+    the \emph{controller}, which fulfills both the roles of estimation and
+    actuation (see Fig. 1b)." (p. 144, PDF p. 5): "The state of the controller is
+    denoted by $C$, and assumes values from some set $\mathcal{C}$ of admissible
+    controls."
+
+    Logarithms (§2, p. 144, PDF p. 5): "(All logarithms are assumed to the base 2,
+    except where explicitly noted.)"
+
+    Purification of any noisy channel (§2, p. 145, PDF p. 6): "From a strict
+    mathematical point of view, note that any non-deterministic channel modeling a
+    source of noise at the level of actuation or estimation can be represented
+    abstractly as a randomly selected deterministic channel with transition matrix
+    containing only zeros and ones. The outcome of a random variable undisclosed to
+    the controller can be thought of as being responsible for the choice of the
+    channel to use. Fig. 2 shows specifically how this can be done by supplementing
+    our original control graphs of Fig. 1 with an exogenous and non-controllable
+    random variable $Z$ in order to `purify' the channel considered (actuation or
+    estimation)." The conditions are definition tl04-def-purification. Eq. (7)
+    averages against an unconditioned $p_Z(z)$; Fig. 2(a) (p. 146, PDF p. 7) draws
+    $Z$ as a parentless node with a single arrow into $X'$.
+
+    Purified control graphs used in §4.2 (p. 151, PDF p. 12): "Control graphs
+    containing the purification of the actuation channel, as depicted in Fig. 2,
+    are used throughout the rest of this section."
+
+    Independence of $Z$ from $X$ and $C$: not stated in §2 or in Theorem 2; it is
+    asserted inside the proof of Theorem 2 (excerpt tl04-z-independent).
+
+    Silent: the paper prints no general definition of conditional entropy over
+    several variables, of conditional mutual information $I(\cdot\,;\cdot|\cdot)$,
+    or of mutual information with a grouped argument such as $I(X'; X, C, Z)$.
+    Only (4) (mutual information of $X$ and $C$), (6), (13), (24) and the chain
+    rules (26), (27) are printed. Entropy facts are cited to [31], which is
+    T.M. Cover, J.A. Thomas, Elements of Information Theory, Wiley, New York, 1991
+    (the 1st edition; the pilot file cover-thomas-2006-ch2.yaml is the 2nd).
+
+definitions:
+  - id: tl04-def-joint
+    label: closed- and open-loop joint distributions (2), (3)
+    pdf_page: 5
+    book_page: 144
+    latex: |
+      [\ldots] the complete joint distribution corresponding to the closed-loop
+      graph of Fig. 1b is written as
+      \[ p(x, x', c)_{\mathrm{closed}} = p_X(x)\, p(c|x)\, p(x'|x, c), \tag{2} \]
+      while the open-loop version of this graph, depicted in Fig. 1c, is
+      characterized by a joint distribution of the form
+      \[ p(x, x', c)_{\mathrm{open}} = p_X(x)\, p_C(c)\, p(x'|x, c). \tag{3} \]
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: tl04-def-mutual-information
+    label: mutual information $I(X;C)$ (4); open- and closed-loop control
+    pdf_page: 5
+    book_page: 144
+    latex: |
+      [\ldots] the controller to gather an amount of information identified
+      formally with the \emph{mutual information}
+      \[ I(X; C) = \sum_{x \in \mathcal{X}, c \in \mathcal{C}} p_{XC}(x, c)
+         \log \frac{p_{XC}(x, c)}{p_X(x)\, p_C(c)}, \tag{4} \]
+      where $p_{X,C}(x, c) = p_X(x)\, p(c|x)$. (All logarithms are assumed to the
+      base 2, except where explicitly noted.) Recall that $I(X; C) \geqslant 0$
+      with equality if and only if the random variables $X$ and $C$ are
+      statistically independent [31], so that in view of this quantity we are
+      naturally led to define open-loop control with the requirement that
+      $I(X; C) = 0$; closed-loop control, on the other hand, must be such that
+      $I(X; C) \neq 0$.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: tl04-def-actuation-channel
+    label: actuation channels (5)
+    pdf_page: 5
+    book_page: 144
+    latex: |
+      From here on, it will be convenient to think of the control actions indexed
+      by each value of $C$ as a set of \emph{actuation channels}, with memoryless
+      transition matrices
+      \[ p(x'|x)_c = p(x'|x, c), \tag{5} \]
+      governing the transmission of the random variable $X$ to a target state
+      $X'$.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: tl04-def-entropy
+    label: entropy (6)
+    pdf_page: 6
+    book_page: 145
+    latex: |
+      \[ H(X) = -\sum_{x \in \mathcal{X}} p_X(x) \log p_X(x). \tag{6} \]
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: tl04-def-purification
+    label: purification condition (i), (ii), (7)
+    pdf_page: 6
+    book_page: 145
+    latex: |
+      For the actuation channel, as for instance, the purification condition
+      simply refers to the two following properties:
+
+      (i) The mapping from $X$ to $X'$ conditioned on the values $c$ and $z$, as
+      described by the extended transition matrix $p(x'|x, c, z)$, is
+      deterministic for all $c \in \mathcal{C}$ and $z \in \mathcal{Z}$.
+
+      (ii) When traced out of $Z$, $p(x'|x, c, z)$ reproduces the dynamics of
+      $p(x'|x, c)$, i.e.,
+      \[ p(x'|x, c) = \sum_{z \in \mathcal{Z}} p(x'|x, c, z)\, p_Z(z), \tag{7} \]
+      for all $x'$, $x \in \mathcal{X}$, and all $c \in \mathcal{C}$.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: tl04-def-open-loop-reduction
+    label: conditional open-loop entropy reduction (9), (12), (13); open-loop entropy reduction (14)
+    pdf_page: 7-8
+    book_page: 146-147
+    latex: |
+      [\ldots] each one indexed by a particular value $c$ that takes the initial
+      distribution $p_X(x)$ to a conditional distribution [\ldots]
+      \[ p(x'|c)_{\mathrm{open}} = \sum_{x \in \mathcal{X}} p(x'|x, c)\, p_X(x).
+         \tag{9} \]
+      [\ldots] each actuation subdynamics represented by the control graph of
+      Fig. 1d can be characterized by a \emph{conditional open-loop entropy
+      reduction} defined by
+      \[ \Delta H^c_{\mathrm{open}} = H(X) - H(X'|c)_{\mathrm{open}}, \tag{12} \]
+      where
+      \[ H(X'|c) = -\sum_{x' \in \mathcal{X}} p(x'|c) \log p(x'|c). \tag{13} \]
+      (Subscripts of $H$ indicate from which distribution the entropy is to be
+      calculated.) In the latter perspective, the entropy reduction associated with
+      the unconditional transition from $X$ to $X'$ is simply the \emph{open-loop
+      entropy reduction}
+      \[ \Delta H_{\mathrm{open}} = H(X) - H(X')_{\mathrm{open}} \tag{14} \]
+      which characterizes the control process as a whole, without regard to any
+      knowledge of the controller's state.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: tl04-def-closed-loop-conditional
+    label: closed-loop conditional decomposition (15)--(18)
+    pdf_page: 8
+    book_page: 147
+    latex: |
+      [\ldots] one can use the Bayesian rule of statistical inference
+      \[ p(x|c) = \frac{p(c|x)\, p_X(x)}{p_C(c)}, \tag{15} \]
+      where
+      \[ p_C(c) = \sum_{x \in \mathcal{X}} p(c|x)\, p_X(x), \tag{16} \]
+      to invert the dependency between $X$ and $C$ in the sensor channel so as to
+      rewrite the closed-loop decomposition in the following form:
+      \[ p_{X'}(x')_{\mathrm{closed}} = \sum_c p_C(c) \Bigl[ \sum_x p(x'|x, c)\,
+         p(x|c) \Bigr]. \tag{17} \]
+      By comparing this last equation with Eq. (8), we see that a closed-loop
+      controller is essentially an open-loop controller acting on the basis of
+      $p(x|c)$ instead of $p_X(x)$ [32]. Thus, given that $c$ is fixed, a
+      closed-loop equivalent of Eq. (12) can be calculated simply by substituting
+      $p_X(x)$ with $p(x|c)$, thereby obtaining
+      \[ \Delta H^c_{\mathrm{closed}} = H(X|c) - H(X'|c) \tag{18} \]
+      for all $c$.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: tl04-def-conditional-entropy-xc
+    label: $H(X'|x, c)$ (24)
+    pdf_page: 11
+    book_page: 150
+    latex: |
+      \[ H(X'|x, c) = -\sum_{x' \in \mathcal{X}} p(x'|x, c) \log p(x'|x, c).
+         \tag{24} \]
+    context: |
+      Printed inside Theorem 1, introduced by "\emph{where}".
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: tl04-def-chain-rule
+    label: chain rule (27)
+    pdf_page: 12
+    book_page: 151
+    latex: |
+      [\ldots] which is a conditional version of the chain rule
+      \[ I(X; Y) = H(X) - H(X|Y), \tag{27} \]
+      valid for any random variables $X$ and $Y$.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: tl04-def-control-loss
+    label: average control loss $L_C$ (28)
+    pdf_page: 12
+    book_page: 151
+    latex: |
+      In order to characterize the \emph{complete} controllability of a system,
+      i.e., its controllability properties over all possible initial states, define
+      \[ L_C = \min_{\{p(c|x)\}} H(X'|X, C) \]
+      \[ = \min_{\{p(c|x)\}} \sum_{x \in \mathcal{X}} p_X(x)
+         \sum_{c \in \mathcal{C}} H(X'|x, c)\, p(c|x) \tag{28} \]
+      as the \emph{average control loss}. (The minimization over all conditional
+      distributions for $C$ is there to ensure that $L_C$ reflects the properties
+      of the actuation channel, and does not depend on one's choice of control
+      inputs.)
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 200}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: tl04-def-observability
+    label: perfectly observable (§4.3, above Theorem 5)
+    pdf_page: 14
+    book_page: 153
+    latex: |
+      More precisely, a controlled system is termed \emph{perfectly observable} if
+      the sensor's transition matrix $p(c|x)$ maps no two values of $X$ to a single
+      observational output value $c$, or in other words if for all
+      $c \in \mathcal{C}$ there exists only one value $x$ such that $p(x|c) = 1$.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 200}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: tl04-def-sensor-loss
+    label: sensor loss $L_S$ (§4.3, below Theorem 5)
+    pdf_page: 14
+    book_page: 153
+    latex: |
+      As a consequence of this association, we interpret the conditional entropy
+      $H(X|C)$ as the information loss, or \emph{sensor loss}, of the sensor
+      channel, denoted by $L_S$.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 200}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: tl04-def-c-hat
+    label: $\hat{c}$ (37); open-loop optimal
+    pdf_page: 17
+    book_page: 156
+    latex: |
+      [\ldots] we show in this section that the maximum decrease of entropy
+      achieved by a particular subdynamics of control variable
+      \[ \hat{c} = \arg\max_{c \in \mathcal{C}} \Delta H^c_{\mathrm{open}} \tag{37} \]
+      is \emph{open-loop optimal} in the sense that no random (i.e.,
+      non-deterministic) choice of the controller's state can improve upon that
+      decrease.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: tl04-def-pure
+    label: pure and mixed controller
+    pdf_page: 18
+    book_page: 157
+    latex: |
+      An open-loop controller or a control strategy is called \emph{pure} if the
+      control random variable $C$ is deterministic, i.e., if it assumes only one
+      value with probability 1. An open-loop controller that is not pure is called
+      \emph{mixed}.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+excerpts:
+  - id: tl04-z-independent
+    for: [tl04-thm-2, tl04-thm-2-equality, tl04-thm-2-proof-30-31]
+    reason: >-
+      Hypothesis the proof uses that the statement of Theorem 2 omits: the
+      independence of $Z$ from $X$ and $C$, used for the equality in (30). The
+      theorem states only the purification assumption.
+    pdf_page: 13
+    latex: |
+      \[ H(X'|X, C) \leqslant H(Z|X, C) \]
+      \[ = H(Z), \tag{30} \]
+      where the last equality follows from the fact that $Z$ is chosen
+      independently of $X$ and $C$ as illustrated in the control graph of Fig. 2a.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 200}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: tl04-eq-53-slip
+    for: [tl04-thm-10, tl04-below-50]
+    reason: >-
+      Printed slip in the proof of Theorem 10: the last step writes
+      $\Delta H^{\max}_{\mathrm{closed}}$ where (47), (51) and (52) require
+      $\Delta H^{\max}_{\mathrm{open}}$. The arXiv v2 (PDF p. 11) has the same
+      slip.
+    pdf_page: 20
+    latex: |
+      Hence, we obtain
+      \[ \Delta H_{\mathrm{closed}} \leqslant H(X) - H(X|C)
+         + \Delta H^{\max}_{\mathrm{closed}} \]
+      \[ = I(X; C) + \Delta H^{\max}_{\mathrm{closed}}, \tag{53} \]
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 200}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+statements:
+  - id: tl04-thm-2
+    audit_row: S05-R01
+    locator: Thm 2, ineq.
+    pdf_page: 12
+    book_page: 151
+    label: Theorem 2
+    grades: 'the inequality $L_C \leqslant H(Z)$ (the equality clause is row S05-R02)'
+    latex: |
+      \textbf{Theorem 2.} \emph{Under the assumption that $X'$ is a deterministic
+      random variable conditioned on the values $x$, $c$, and $z$ (purification
+      assumption), we have $L_C \leqslant H(Z)$ with equality if, and only if,
+      $H(Z|X', X, C) = 0$.}
+    uses: [tl04-def-control-loss, tl04-def-purification, tl04-def-entropy, tl04-def-conditional-entropy-xc]
+    proof_pages: 13
+    note: >-
+      This row grades the inequality $L_C \leqslant H(Z)$; the equality clause is
+      row S05-R02 (same printed sentence). The proof (29)--(31) bounds
+      $H(X'|X, C)$ and uses the independence of $Z$ from $X$ and $C$ (excerpt
+      tl04-z-independent), which the statement does not state.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 200}
+    checked: {by: 'Codex (blind) + Grok (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: tl04-thm-2-equality
+    audit_row: S05-R02
+    locator: Thm 2, equality case
+    pdf_page: 12
+    book_page: 151
+    label: Theorem 2 (equality clause)
+    grades: 'the clause "with equality if, and only if, $H(Z|X'', X, C) = 0$"'
+    latex: |
+      \textbf{Theorem 2.} \emph{Under the assumption that $X'$ is a deterministic
+      random variable conditioned on the values $x$, $c$, and $z$ (purification
+      assumption), we have $L_C \leqslant H(Z)$ with equality if, and only if,
+      $H(Z|X', X, C) = 0$.}
+    uses: [tl04-def-control-loss, tl04-def-purification, tl04-def-entropy, tl04-def-conditional-entropy-xc]
+    proof_pages: 13
+    note: >-
+      Same printed sentence as S05-R01; this row grades "with equality if, and only
+      if, $H(Z|X', X, C) = 0$". The proof's last sentence derives the equality case
+      for "the first line of expression (29)", i.e. for
+      $H(X'|X, C) \leqslant H(X', Z|X, C)$, at a given controller; it does not
+      discuss the minimizer in (28).
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 200}
+    checked: {by: 'Codex (blind) + Grok (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: tl04-thm-2-proof-30-31
+    audit_row: S05-R03
+    locator: Thm 2, proof (30)+(31)
+    pdf_page: 13
+    book_page: 152
+    label: in the proof of Theorem 2, eqs. (30), (31)
+    latex: |
+      Hence,
+      \[ H(X'|X, C) \leqslant H(Z|X, C) \]
+      \[ = H(Z), \tag{30} \]
+      where the last equality follows from the fact that $Z$ is chosen
+      independently of $X$ and $C$ as illustrated in the control graph of Fig. 2a.
+      Now, from the chain rule
+      \[ H(X', Z|X, C) = H(X'|X, C) + H(Z|X', X, C), \tag{31} \]
+      it is clear that equality in the first line of expression (29) is achieved if
+      and only if $H(Z|X', X, C) = 0$.
+    context: |
+      Preceded by (29): "$H(X'|X, C) \leqslant H(X', Z|X, C) = H(Z|X, C) +
+      H(X'|X, C, Z)$. (29) However, $H(X'|X, C, Z) = 0$, since the knowledge of the
+      triplet $(x, c, z)$ is sufficient to infer the value of $X'$ (see the
+      conditions in Section 2)."
+    uses: [tl04-def-purification, tl04-def-entropy]
+    proof_pages: null
+    note: >-
+      The atlas paraphrase ("$H(X';Z|X,C) = H(Z)$ and $H(X';Z|X,C) = L_C +
+      H(Z|X',X,C)$") is not what is printed: (30) is the chain
+      $H(X'|X, C) \leqslant H(Z|X, C) = H(Z)$, and (31) is a chain rule for the
+      joint entropy $H(X', Z|X, C)$ (comma, not semicolon) with $H(X'|X, C)$, not
+      $L_C$, as its first term. Neither displayed equation mentions $L_C$ or
+      $I(\cdot\,;\cdot|\cdot)$.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 200}
+    checked: {by: 'Codex (blind) + Grok (blind) + Codex (anchored re-read); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: tl04-thm-3
+    audit_row: S05-R04
+    locator: Thm 3
+    pdf_page: 13
+    book_page: 152
+    label: Theorem 3
+    latex: |
+      \textbf{Theorem 3.} $L_C = I(X'; Z|X, C)$.
+    context: |
+      Introduced by: "This is the essence of the next two results which hold for
+      the same conditions as Theorem 2 (the minimization over the set of
+      conditional probability distributions $\{p(c|x)\}$ is implied at this
+      point)."
+    uses: [tl04-def-control-loss, tl04-def-purification, tl04-thm-2]
+    proof_pages: 13
+    note: >-
+      Conditional mutual information is not defined in the paper (see
+      source.standing, Silent). The proof uses (32),
+      $I(X'; Z|X, C) = H(X'|X, C) - H(X'|X, C, Z)$, "from the chain rule of
+      mutual information", and the purification determinism.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 200}
+    checked: {by: 'Codex (blind) + Grok (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: tl04-thm-4
+    audit_row: S05-R05
+    locator: Thm 4
+    pdf_page: 13
+    book_page: 152
+    label: Theorem 4
+    latex: |
+      \textbf{Theorem 4.} $L_C = I(X'; X, C, Z) - I(X'; X, C)$.
+    context: |
+      Same introduction as Theorem 3: "the next two results which hold for the same
+      conditions as Theorem 2 (the minimization over the set of conditional
+      probability distributions $\{p(c|x)\}$ is implied at this point)."
+    uses: [tl04-def-control-loss, tl04-def-purification, tl04-thm-2, tl04-thm-3]
+    proof_pages: 13-14
+    note: >-
+      Grouped mutual information $I(X'; X, C, Z)$ is not defined in the paper
+      (source.standing, Silent); the proof expands it by (33) as
+      $H(X') - H(X'|X, C, Z)$.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 200}
+    checked: {by: 'Codex (blind) + Grok (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: tl04-thm-10
+    audit_row: S05-R06
+    locator: Thm 10
+    pdf_page: 20
+    book_page: 159
+    label: Theorem 10
+    latex: |
+      \textbf{Theorem 10.} \emph{The amount of entropy}
+      \[ \Delta H_{\mathrm{closed}} = H(X) - H(X')_{\mathrm{closed}} \tag{46} \]
+      \emph{that can be extracted from a system with given initial state $X$ by
+      using a closed-loop controller with fixed set of actuation subdynamics
+      satisfies}
+      \[ \Delta H_{\mathrm{closed}} \leqslant \Delta H^{\max}_{\mathrm{open}}
+         + I(X; C), \tag{47} \]
+      \emph{where}
+      \[ \Delta H^{\max}_{\mathrm{open}} = \max_{p_X(x) \in \mathcal{P},
+         c \in \mathcal{C}} \Delta H^c_{\mathrm{open}} \tag{48} \]
+      \emph{is the maximum entropy decrease that can be obtained by}
+      (\emph{pure}) \emph{open-loop control over} any \emph{input distribution
+      chosen in the set $\mathcal{P}$ of all probability distributions.}
+    uses: [tl04-def-open-loop-reduction, tl04-def-mutual-information, tl04-def-entropy, tl04-def-pure, tl04-def-closed-loop-conditional]
+    proof_pages: 20-21
+    note: >-
+      "any" is set in roman inside the italic statement (emphasis by inversion).
+      The proof contains a printed slip at (53), $\Delta H^{\max}_{\mathrm{closed}}$
+      for $\Delta H^{\max}_{\mathrm{open}}$ (excerpt tl04-eq-53-slip); the slip is
+      in the proof, not in the statement. Read at 200 dpi.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 200}
+    checked: {by: 'Codex (blind) + Grok (blind) + Codex (anchored re-read); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: tl04-thm-9
+    audit_row: S05-R07
+    locator: Thm 9
+    pdf_page: 18
+    book_page: 157
+    label: Theorem 9
+    latex: |
+      \textbf{Theorem 9.} \emph{The entropy reduction achieved by a set of actuation
+      subdynamics used in open-loop control is always such that}
+      \[ \Delta H_{\mathrm{open}} \leqslant \max_{c \in \mathcal{C}}
+         \Delta H^c_{\mathrm{open}}, \tag{42} \]
+      \emph{for all $p_X(x)$. The equality can always be achieved for the
+      deterministic controller $C = \hat{c}$, with $\hat{c}$ defined as in
+      Eq. (37).}
+    context: |
+      §5.2 (p. 156): "More precisely, we have the following results. (Theorem 9 was
+      originally stated without a proof in Ref. [25].)"
+    uses: [tl04-def-open-loop-reduction, tl04-def-c-hat, tl04-lemma-8]
+    proof_pages: 18
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 200}
+    checked: {by: 'Codex (blind) + Grok (blind) + Codex (anchored re-read); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: tl04-lemma-8
+    audit_row: S05-R08
+    locator: Lemma 8
+    pdf_page: 17-18
+    book_page: 156-157
+    label: Lemma 8
+    latex: |
+      \textbf{Lemma 8.} \emph{For any initial state $X$, the open-loop entropy
+      reduction $\Delta H_{\mathrm{open}}$ satisfies}
+      \[ \Delta H_{\mathrm{open}} \leqslant \Delta H^C_{\mathrm{open}}, \tag{38} \]
+      \emph{where}
+      \[ \Delta H^C_{\mathrm{open}} = \sum_{c \in \mathcal{C}} p_C(c)\,
+         \Delta H^c_{\mathrm{open}} \]
+      \[ = H(X) - H(X'|C)_{\mathrm{open}} \tag{39} \]
+      \emph{with $\Delta H^c_{\mathrm{open}}$ defined as in Eq. (12). The equality
+      is achieved if and only if $I(X'; C) = 0$.}
+    uses: [tl04-def-open-loop-reduction, tl04-def-entropy]
+    proof_pages: 18
+    note: >-
+      The statement runs from the foot of PDF p. 17 onto PDF p. 18; the source
+      card's p. 17 alone truncates it before (39) and the equality clause.
+      $I(X'; C)$ (final state with controller) is not defined by (4), which is
+      printed for $I(X; C)$; the proof reads it as independence of $C$ and $X'$.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 200}
+    checked: {by: 'Codex (blind) + Grok (blind) + Codex (anchored re-read); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: tl04-thm-5
+    audit_row: S05-R10
+    locator: Thm 5
+    pdf_page: 14
+    book_page: 153
+    label: Theorem 5
+    latex: |
+      \textbf{Theorem 5.} \emph{A system with state variable $X$ is} perfectly
+      observable, \emph{with respect to all observed value
+      $c \in \mathrm{supp}(C)$, if and only if}
+      \[ H(X|C) = \sum_{c \in \mathcal{C}} H(X|c)\, p_C(c) = 0. \tag{35} \]
+    context: |
+      Introduced by: "As a consequence, we have the following result [19]. (We omit
+      the proof which readily follows from well-known properties of entropy.)"
+    uses: [tl04-def-observability, tl04-def-entropy]
+    proof_pages: null
+    note: >-
+      No proof printed ("We omit the proof"). "perfectly observable" is set in
+      roman inside the italic statement. "all observed value" (singular) is as
+      printed. $H(X|c)$ is not separately defined; (13) defines the analogous
+      $H(X'|c)$.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 200}
+    checked: {by: 'Codex (blind) + Grok (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: tl04-thm-6
+    audit_row: S05-R11
+    locator: Thm 6
+    pdf_page: 15
+    book_page: 154
+    label: Theorem 6
+    latex: |
+      \textbf{Theorem 6.} \emph{If the state $X$ is} perfectly observable,
+      \emph{then $I(X; Z|C) = 0$.} (\emph{The random variable $Z$ stands for the
+      purification variable of the} `forward' \emph{sensor channel $p(c|x)$.})
+    uses: [tl04-def-observability, tl04-def-sensor-loss, tl04-def-purification]
+    proof_pages: 15
+    note: >-
+      "perfectly observable" and `forward' are set in roman inside the italic
+      statement. The proof uses $H(X|C) \geqslant H(X|C, Z)$ and the chain rule
+      (36), $I(X; Z|C) = H(X|C) - H(X|C, Z)$.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 200}
+    checked: {by: 'Codex (blind) + Grok (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: tl04-cor-7
+    audit_row: S05-R12
+    locator: Cor. 7
+    pdf_page: 15
+    book_page: 154
+    label: Corollary 7
+    latex: |
+      \textbf{Corollary 7.} \emph{If $L_S = 0$, then $I(X; C, Z) = I(X; C)$.}
+    uses: [tl04-def-sensor-loss, tl04-def-mutual-information, tl04-thm-6]
+    proof_pages: null
+    note: >-
+      No proof printed. The argument is $I(X; C, Z)$ with a comma (grouped second
+      argument), confirmed at 200 dpi; the source card's quote renders it
+      "I (X ; C; Z)".
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 200}
+    checked: {by: 'Codex (blind) + Grok (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: tl04-below-50
+    audit_row: S05-R14
+    locator: below (50)
+    pdf_page: 20
+    book_page: 159
+    label: in the proof of Theorem 10, after (51)
+    latex: |
+      That $\Delta H^{\max}_{\mathrm{open}}$ must enter in the lower bounds of
+      $H(X')_{\mathrm{open}}$ and $H(X')_{\mathrm{closed}}$ can be explained in
+      other words by saying that each conditional distribution $p(x|c)$ is a
+      legitimate input distribution for the initial state of the controlled
+      system. It is, in any cases, an element of $\mathcal{P}$.
+    context: |
+      Preceded by: "Now, using the fact that a closed-loop controller is formally
+      equivalent to an ensemble of open-loop controllers acting on the conditional
+      supports $\mathrm{supp}(X|c)$ instead of $\mathrm{supp}(X)$, we also have for
+      all $c \in \mathcal{C}$
+      \[ H(X'|c)_{\mathrm{closed}} \geqslant H(X|c)
+         - \Delta H^{\max}_{\mathrm{open}}, \tag{50} \]
+      and, on average,
+      \[ H(X'|C)_{\mathrm{closed}} \geqslant H(X|C)
+         - \Delta H^{\max}_{\mathrm{open}}. \tag{51} \]"
+    uses: [tl04-thm-10, tl04-def-closed-loop-conditional, tl04-def-open-loop-reduction]
+    proof_pages: null
+    note: >-
+      The passage sits below (51), not directly below (50). It is part of the proof
+      of Theorem 10, whose final step (53) carries the printed slip
+      $\Delta H^{\max}_{\mathrm{closed}}$ (excerpt tl04-eq-53-slip). "in any cases"
+      is as printed.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind) + Grok (blind) + Codex (anchored re-read); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}

@@ -23,7 +23,8 @@ DEFAULT_OUT = ROOT / "docs" / "status" / "coverage-audit.html"
 CHIP = {
     "Yes": "c-full", "Partial": "c-partial", "No": "c-absent",
     "Beyond": "c-beyond", "Wider": "c-plain", "Same": "c-plain",
-    "Narrower": "c-plain", "Mixed": "c-partial", "—": "c-plain", "-": "c-plain",
+    "Narrower": "c-plain", "Mixed": "c-partial", "None": "c-absent", "Refuted": "c-absent",
+    "—": "c-plain", "-": "c-plain",
 }
 
 

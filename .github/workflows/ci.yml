@@ -366,6 +366,25 @@ jobs:
       - name: Elaboration-drift adjudications still hold at the pinned toolchain
         if: steps.filter.outputs.run_lean == 'true'
         run: lake env lean docs/provenance/elaboration-adjudication-v4310-v4330.lean
+      # Printed statements the atlas grades against a repair: each file proves the
+      # literal print false on an instance meeting its stated hypotheses, and, where
+      # the library proves it, that the repaired statement holds. Supplementary;
+      # nothing imports them.
+      - name: Refutations of printed slips still hold
+        if: steps.filter.outputs.run_lean == 'true'
+        run: |
+          for f in docs/provenance/refutations/*.lean; do
+            echo "== $f"; lake env lean "$f"
+          done
+      # Audit rows graded Same on a carrier generalization: each file proves the
+      # atlas statement from print's through print's conclusion along one map
+      # (SPEC v6 §7.1). Supplementary; nothing imports them.
+      - name: Transfers to print still hold
+        if: steps.filter.outputs.run_lean == 'true'
+        run: |
+          for f in docs/provenance/transfers/*.lean; do
+            echo "== $f"; lake env lean "$f"
+          done
       # The adjudications above settle the migration that has already happened.
       # This settles the one nobody has declared: every check in this repository
       # that could notice a statement changing meaning reads source, and the
@@ -387,8 +406,8 @@ jobs:
       # and manual runs. NOT on an ordinary pull request, and this is a change
       # from how it was first wired.
       #
-      # The dump elaborates the whole environment: 342 s and 2.2 GB on an idle
-      # 12-core host against a tree the steps above have already built, slower
+      # The dump elaborates the whole environment: about six minutes on the
+      # self-hosted runner against a tree the steps above have already built, slower
       # on a two-core hosted runner. It was the largest single step on an
       # ordinary pull request, against a job budget of 30 minutes.
       #

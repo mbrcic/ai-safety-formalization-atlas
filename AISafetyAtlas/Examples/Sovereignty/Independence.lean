@@ -259,4 +259,44 @@ public theorem matrix_liberalFree_of_independenceFree :
   Setting.liberalFree_of_independenceFree matrix
     ((matrix_independenceFree_iff 4).mpr rfl)
 
+/-! ## Footnote 8 at the everyday setting
+
+The physical constraint `lethal` does not depend on the moral criteria: that is a
+non-moralized relevance specification. Building `lethal ∧ ¬ permitted` instead is a
+moralized one, and then the moralization question has no effect. -/
+
+/-- The relevance specification that ignores the moral criteria and returns the
+physical constraint. -/
+@[expose] public def lethalSpec : RelevanceSpec Agent Act World := fun _ => lethal
+
+/-- `lethalSpec` satisfies footnote 8. -/
+public theorem lethalSpec_nonMoralized : lethalSpec.NonMoralized := fun _ _ => rfl
+
+/-- `free_not_moralized_withCriteria_iff` at the everyday setting: dropping every
+permission leaves Berlin's and List and Valentini's freedom as they were. -/
+public theorem everyday_free_not_moralized_criteria_iff (r : Bool) (i : Agent) (a : Act) :
+    (everyday.withCriteria lethalSpec punished).Free false r i a ↔
+      (everyday.withCriteria lethalSpec fun _ _ _ => False).Free false r i a :=
+  Setting.free_not_moralized_withCriteria_iff everyday lethalSpec_nonMoralized _ _
+
+/-- `free_moralized_withCriteria_mono` at the everyday setting: adding the punished
+exemption to no exemption can only enlarge moralized freedom. -/
+public theorem everyday_free_moralized_criteria_mono (r : Bool) (i : Agent) (a : Act)
+    (h : (everyday.withCriteria lethalSpec fun _ _ _ => False).Free true r i a) :
+    (everyday.withCriteria lethalSpec punished).Free true r i a :=
+  Setting.free_moralized_withCriteria_mono everyday lethalSpec_nonMoralized
+    (fun _ _ _ hf => hf.elim) h
+
+/-- `free_not_moralized_iff_of_moralized` at the everyday setting: with relevance
+built from permissibility, case 3 is case 4. -/
+public theorem everyday_moralized_spec_collapses (i : Agent) (a : Act) :
+    (everyday.withCriteria (RelevanceSpec.moralized lethal) punished).IndependenceFree i a ↔
+      (everyday.withCriteria (RelevanceSpec.moralized lethal) punished).RepublicanFree i a :=
+  Setting.free_not_moralized_iff_of_moralized everyday lethal punished
+
+/-- The moralized specification built from `lethal` violates footnote 8. -/
+public theorem lethal_moralized_not_nonMoralized :
+    ¬ (RelevanceSpec.moralized lethal : RelevanceSpec Agent Act World).NonMoralized :=
+  Setting.not_nonMoralized_moralized ⟨1, true, true, show (1 : World) ≠ 0 by decide⟩
+
 end AISafetyAtlas.Examples.Sovereignty

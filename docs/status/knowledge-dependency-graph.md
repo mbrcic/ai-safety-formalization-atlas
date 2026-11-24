@@ -10,7 +10,7 @@ Edges come from the elaborated Lean environment. This answers the question the p
 
 So `A → B` means *`B` occurs in `A`'s statement, or in `A`'s body when `A` is a definition*. A lemma used only inside a proof does not appear. Reading the table as a complete call graph would be wrong, and the two sections below are scoped so that they stay true under this limit.
 
-`157` authored declarations in `AISafetyAtlas.Knowledge.*` (108 theorems). Compiler-generated companions and projections are dropped.
+`168` authored declarations in `AISafetyAtlas.Knowledge.*` (118 theorems). Compiler-generated companions and projections are dropped.
 
 ## Load-bearing declarations
 
@@ -19,21 +19,23 @@ Named in the statements of eight or more others. A change to one of these is a c
 | Declaration | Named by |
 |---|---|
 | `Knowable` | 115 |
-| `Embedded.Restriction` | 24 |
+| `Embedded.Restriction` | 29 |
+| `Embedded.InferenceMap` | 28 |
 | `UniformlyActionable` | 22 |
-| `Embedded.InferenceMap` | 20 |
+| `Embedded.MeasuresAllStates` | 20 |
 | `Determines` | 20 |
+| `Embedded.ProperInclusion` | 18 |
+| `Embedded.Meshing` | 18 |
 | `Access.AccessSetting` | 17 |
-| `Embedded.Meshing` | 15 |
 | `Access.scoreAccess` | 15 |
-| `Embedded.ProperInclusion` | 14 |
-| `Embedded.MeasuresAllStates` | 13 |
+| `Embedded.InferenceMap.infer` | 13 |
 | `Embedded.Composition.ProductState` | 13 |
 | `Access.blackBox` | 13 |
 | `ambiguity` | 12 |
-| `Embedded.InferenceMap.infer` | 10 |
+| `Embedded.ReadingSet.singleton` | 10 |
 | `Devices.BlockwiseCollision` | 10 |
 | `Access.whiteBox` | 10 |
+| `Embedded.ReadingSet` | 9 |
 | `Temporal.KnowableFrom` | 8 |
 | `IncidentCount.Reporting.report` | 8 |
 | `IncidentCount.Reporting.count` | 8 |
@@ -109,23 +111,31 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 | `Embedded.Composition.equivalentProductRestriction` | definition | `Embedded.Composition.ProductState`, `Embedded.Restriction` |
 | `Embedded.Composition.fibreInference` | definition | `Embedded.InferenceMap`, `Embedded.ReadingSet`, `Embedded.Restriction` |
 | `Embedded.Composition.knowable_whole_state_iff_injective` | theorem | `Embedded.Restriction`, `Knowable` |
+| `Embedded.Composition.measuresAllStates_ofFun_of_surjective` | theorem | `Embedded.InferenceMap.ofFun`, `Embedded.MeasuresAllStates` |
 | `Embedded.Composition.measuresAll_fibreInference_of_injective` | theorem | `Embedded.Composition.fibreInference`, `Embedded.MeasuresAllStates`, `Embedded.Restriction` |
 | `Embedded.Composition.meshing_and_measuresAll_fibreInference_of_bijective` | theorem | `Embedded.Composition.fibreInference`, `Embedded.MeasuresAllStates`, `Embedded.Meshing`, `Embedded.Restriction` |
 | `Embedded.Composition.meshing_fibreInference_of_surjective` | theorem | `Embedded.Composition.fibreInference`, `Embedded.Meshing`, `Embedded.Restriction` |
 | `Embedded.Composition.no_meshing_measures_all_of_nontrivial_remainder` | theorem | `Embedded.Composition.ProductState`, `Embedded.Composition.productRestriction`, `Embedded.InferenceMap`, `Embedded.MeasuresAllStates`, `Embedded.Meshing` |
 | `Embedded.Composition.no_meshing_measures_all_of_nontrivial_remainder_of_equiv` | theorem | `Embedded.Composition.ProductState`, `Embedded.Composition.equivalentProductRestriction`, `Embedded.InferenceMap`, `Embedded.MeasuresAllStates`, `Embedded.Meshing` |
+| `Embedded.Composition.nonempty_equiv_and_meshing_failure_of_finite_fibres` | theorem | `Embedded.InferenceMap.infer`, `Embedded.InferenceMap.ofFun`, `Embedded.ProperInclusion`, `Embedded.ReadingSet.singleton`, `Embedded.Restriction` |
+| `Embedded.Composition.nonempty_equiv_of_finite_fibres` | theorem | `Embedded.Restriction` |
 | `Embedded.Composition.not_knowable_productState_of_nontrivial_remainder` | theorem | `Embedded.Composition.ProductState`, `Embedded.Composition.productRestriction`, `Knowable` |
+| `Embedded.Composition.not_meshing_ofFun_of_surjective` | theorem | `Embedded.InferenceMap.ofFun`, `Embedded.Meshing`, `Embedded.ProperInclusion`, `Embedded.Restriction` |
 | `Embedded.Composition.not_meshing_of_not_surjective` | theorem | `Embedded.InferenceMap`, `Embedded.Meshing`, `Embedded.Restriction` |
+| `Embedded.Composition.ofFun_infer_singleton` | theorem | `Embedded.InferenceMap.infer`, `Embedded.InferenceMap.ofFun`, `Embedded.ReadingSet.singleton` |
 | `Embedded.Composition.productRestriction` | definition | `Embedded.Composition.ProductState`, `Embedded.Restriction` |
 | `Embedded.Composition.properInclusion_iff_not_injective` | theorem | `Embedded.ProperInclusion`, `Embedded.Restriction` |
 | `Embedded.Composition.properInclusion_of_nontrivial_remainder` | theorem | `Embedded.Composition.ProductState`, `Embedded.Composition.productRestriction`, `Embedded.ProperInclusion` |
 | `Embedded.Composition.properInclusion_of_nontrivial_remainder_of_equiv` | theorem | `Embedded.Composition.ProductState`, `Embedded.Composition.equivalentProductRestriction`, `Embedded.ProperInclusion` |
 | `Embedded.Distinguishes` | definition | `Embedded.InferenceMap`, `Embedded.InferenceMap.infer`, `Embedded.ReadingSet` |
 | `Embedded.ExactlyMeasurable` | definition | `Embedded.InferenceMap`, `Embedded.InferenceMap.infer`, `Embedded.ReadingSet` |
+| `Embedded.Finite.card_lt_of_properInclusion` | theorem | `Embedded.ProperInclusion`, `Embedded.Restriction` |
 | `Embedded.Finite.no_meshing_measures_all_of_card_lt` | theorem | `Embedded.InferenceMap`, `Embedded.MeasuresAllStates`, `Embedded.Meshing`, `Embedded.Restriction` |
+| `Embedded.Finite.not_measuresAllStates_of_card_lt` | theorem | `Embedded.InferenceMap`, `Embedded.MeasuresAllStates` |
 | `Embedded.Finite.properInclusion_of_card_lt` | theorem | `Embedded.ProperInclusion`, `Embedded.Restriction` |
 | `Embedded.Finite.properInclusion_product_of_card_rest_ge_two` | theorem | `Embedded.Composition.ProductState`, `Embedded.Composition.productRestriction`, `Embedded.ProperInclusion` |
 | `Embedded.InferenceMap` | definition | — |
+| `Embedded.InferenceMap.ofFun` | definition | `Embedded.InferenceMap`, `Embedded.ReadingSet` |
 | `Embedded.MeasuresAllStates` | definition | `Embedded.ExactlyMeasurable`, `Embedded.InferenceMap` |
 | `Embedded.Meshing` | definition | `Embedded.InferenceMap`, `Embedded.InferenceMap.infer`, `Embedded.ReadingSet.singleton`, `Embedded.Restriction` |
 | `Embedded.Meshing.restrict_surjective` | theorem | `Embedded.InferenceMap`, `Embedded.Meshing`, `Embedded.Restriction` |
@@ -134,10 +144,13 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 | `Embedded.ReadingSet.singleton` | definition | `Embedded.ReadingSet` |
 | `Embedded.ReadingSet.univ` | definition | `Embedded.ReadingSet` |
 | `Embedded.Restriction` | definition | — |
+| `Embedded.composite_restrict_surjective` | theorem | — |
 | `Embedded.eq_restrict_of_infer_singleton_eq` | theorem | `Embedded.InferenceMap`, `Embedded.InferenceMap.infer`, `Embedded.Meshing`, `Embedded.ReadingSet.singleton`, `Embedded.Restriction` |
+| `Embedded.exists_injective_of_measuresAllStates` | theorem | `Embedded.InferenceMap`, `Embedded.MeasuresAllStates` |
 | `Embedded.exists_singleton_infer_eq_of_infer_eq` | theorem | `Embedded.InferenceMap`, `Embedded.InferenceMap.infer`, `Embedded.ReadingSet`, `Embedded.ReadingSet.singleton` |
 | `Embedded.exists_state_meshing_failure_of_measuresAllStates` | theorem | `Embedded.InferenceMap`, `Embedded.InferenceMap.infer`, `Embedded.MeasuresAllStates`, `Embedded.ProperInclusion`, `Embedded.ReadingSet.singleton`, `Embedded.Restriction` |
 | `Embedded.exists_state_not_exactly_measurable` | theorem | `Embedded.InferenceMap`, `Embedded.InferenceMap.infer`, `Embedded.Meshing`, `Embedded.ProperInclusion`, `Embedded.ReadingSet`, `Embedded.Restriction` |
+| `Embedded.exists_surjective_of_measuresAllStates` | theorem | `Embedded.InferenceMap`, `Embedded.MeasuresAllStates` |
 | `Embedded.infer_singleton_eq_of_meshing` | theorem | `Embedded.InferenceMap`, `Embedded.InferenceMap.infer`, `Embedded.Meshing`, `Embedded.ReadingSet.singleton`, `Embedded.ReadingSet.univ`, `Embedded.Restriction` |
 | `Embedded.meshing_fails_of_measuresAllStates` | theorem | `Embedded.InferenceMap`, `Embedded.MeasuresAllStates`, `Embedded.Meshing`, `Embedded.ProperInclusion`, `Embedded.Restriction` |
 | `Embedded.no_meshing_inference_distinguishes` | theorem | `Embedded.Distinguishes`, `Embedded.InferenceMap`, `Embedded.Meshing`, `Embedded.Restriction` |

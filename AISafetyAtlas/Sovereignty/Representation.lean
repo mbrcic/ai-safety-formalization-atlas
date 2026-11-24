@@ -23,7 +23,9 @@ Moulin (1983)"*. `AISafetyAtlas.Sovereignty.Rights` carries the necessity of
 `AISafetyAtlas.Sovereignty.PlayableConverse` shows Pauly's corresponding
 converse is **false**: `cofiniteEff` satisfies all five playability conditions
 and `not_exists_gameForm_cofiniteEff` says no game form has it. So a
-construction from playability alone cannot exist, and `paulyGame` is honest
+construction from playability alone cannot exist at an arbitrary outcome type (at
+a finite one, `Playable.exists_gameForm_of_finite` reduces to this module's
+theorem on a subtype), and `paulyGame` is honest
 about it -- `Playable.effectivity_paulyGame_eq` delivers the equality at every
 coalition **except the two ends of the lattice**.
 
@@ -133,6 +135,42 @@ public theorem playable (h : IsEffectivityFunction E)
   superadd := fun C D A B hCD hA hB => hs C D A B hCD hA hB
 
 end IsEffectivityFunction
+
+/-! ## Pauly's playable effectivity functions, read through the named properties
+
+Pauly's page-152 properties are predicates on an arbitrary effectivity function
+in `AISafetyAtlas.Sovereignty.Rights`. Here `Playable`'s fields and Lemma 3.1 are
+restated through them.
+-/
+
+namespace Playable
+
+variable {N : Type u} {X : Type v} {E : Set N → Set (Set X)}
+
+/-- **Pauly's Lemma 3.1, first half, as print's *regular***: `Playable.regular` at
+every coalition. -/
+public theorem efRegular (hE : Playable E) : EFRegular E :=
+  fun _ _ hA => hE.regular hA
+
+/-- **Pauly's Lemma 3.1, second half, as print's *coalition-monotonic***. -/
+public theorem coalitionMonotone (hE : Playable E) : CoalitionMonotone E :=
+  fun _ _ h => hE.mono_coalition h
+
+/-- **Pauly's playability condition (3) is `N`-maximality**: `C`-maximal at
+`C = N`, where `C̄ = ∅`. -/
+public theorem cMaximal_univ (hE : Playable E) : CMaximal Set.univ E :=
+  fun A hA => hE.maximal A (by rwa [Set.compl_univ] at hA)
+
+/-- Pauly's playability condition (4) is print's *outcome-monotonic*,
+`UpwardClosed`. -/
+public theorem upwardClosed (hE : Playable E) : UpwardClosed E :=
+  fun C _ _ hA hAB => hE.mono C _ _ hAB hA
+
+/-- Pauly's playability condition (5) is `Superadditive`. -/
+public theorem superadditive (hE : Playable E) : Superadditive E :=
+  hE.superadd
+
+end Playable
 
 /-! ## The constructed game form is onto -/
 

@@ -730,7 +730,7 @@ def do_dump(
         declarations, _, _ = elaborate(modules, raw=raw)
     elif modules:
         jobs = drift_jobs(len(modules))
-        print(f"check_elaboration_drift: fingerprinting {len(modules)} module(s), {jobs} at once")
+        print(f"check_elaboration_drift: fingerprinting {len(modules)} module(s)")
         declarations, names, duplicated = elaborate(modules, raw=raw, pp=False, jobs=jobs)
         if pp_against is None:
             wanted = None  # a baseline: print everything, as a full sweep does

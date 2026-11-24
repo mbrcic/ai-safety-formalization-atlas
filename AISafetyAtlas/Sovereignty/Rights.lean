@@ -213,6 +213,56 @@ correspondence: every coalition's family is closed upwards. -/
 @[expose] public def UpwardClosed (E : Set N → Set (Set X)) : Prop :=
   ∀ (S : Set N) (B B' : Set X), B ∈ E S → B ⊆ B' → B' ∈ E S
 
+/-! ### Pauly's further properties of an effectivity function
+
+Marc Pauly, *A Modal Logic for Coalitional Power in Games*, Journal of Logic and
+Computation 12(1), 2002, page 152, defines these for *"any function
+`E : 𝒫(N) → 𝒫(𝒫(S))`"*. Print's *outcome-monotonic* is `UpwardClosed` and its
+*superadditive* is `Superadditive`, both above. `N` is the whole player set, so
+print's `C̄` is `Cᶜ` and print's `X̄` is `Xᶜ`. The wrappers from Pauly's `Playable`
+are in `AISafetyAtlas.Sovereignty.Representation`, which sees both modules.
+-/
+
+/-- **Pauly, page 152, *coalition-monotonic***: for `C ⊆ C'`, `E(C) ⊆ E(C')`. -/
+@[expose] public def CoalitionMonotone (E : Set N → Set (Set X)) : Prop :=
+  ∀ C C' : Set N, C ⊆ C' → E C ⊆ E C'
+
+/-- **Pauly, page 152, *`C`-regular***: if `X ∈ E(C)` then `X̄ ∉ E(C̄)`. -/
+@[expose] public def CRegular (C : Set N) (E : Set N → Set (Set X)) : Prop :=
+  ∀ A : Set X, A ∈ E C → Aᶜ ∉ E Cᶜ
+
+/-- **Pauly, page 152, *`C`-maximal***: if `X̄ ∉ E(C̄)` then `X ∈ E(C)`. -/
+@[expose] public def CMaximal (C : Set N) (E : Set N → Set (Set X)) : Prop :=
+  ∀ A : Set X, Aᶜ ∉ E Cᶜ → A ∈ E C
+
+/-- **Pauly, page 152, *regular***: `C`-regular for every coalition `C`. Named
+`EFRegular` so it does not shadow Mathlib's names in this namespace. -/
+@[expose] public def EFRegular (E : Set N → Set (Set X)) : Prop :=
+  ∀ C : Set N, CRegular C E
+
+/-- **Pauly, page 152, *maximal***: `C`-maximal for every coalition `C`. Named
+`EFMaximal` so it does not shadow Mathlib's `Maximal` in this namespace. -/
+@[expose] public def EFMaximal (E : Set N → Set (Set X)) : Prop :=
+  ∀ C : Set N, CMaximal C E
+
+/--
+**Peleg, journal page 72: *"A superadditive EF is monotonic w.r.t. coalitions,
+that is, if `S ⊂ T ⊂ N` then `E(S) ⊂ E(T)`"*.**
+
+Print's hypotheses are conditions (i)-(iv) of an EF and superadditivity (3.6).
+The proof reads only superadditivity and `A ∈ E(S)` for every `S`, which (i) and
+(iv) give (`IsEffectivityFunction.safe`), so those two are the hypotheses here.
+Outcome-monotonicity is not assumed, so this is wider than
+`Playable.mono_coalition`: superadditivity at the disjoint pair `S`, `T \ S`, with
+the whole space on the second side.
+-/
+public theorem Superadditive.coalitionMonotone {E : Set N → Set (Set X)}
+    (hE : Superadditive E) (hsafe : ∀ S : Set N, (Set.univ : Set X) ∈ E S) :
+    CoalitionMonotone E := by
+  intro S T hST B hB
+  have := hE S (T \ S) B Set.univ disjoint_sdiff_self_right hB (hsafe _)
+  rwa [Set.inter_univ, Set.union_sdiff_cancel hST] at this
+
 /-! ## Definition 3.4 -/
 
 variable {G G₀ G₁ : GameForm.{u, v, w} N X} {κ : Constitution N X R}

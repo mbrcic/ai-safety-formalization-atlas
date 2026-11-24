@@ -194,4 +194,85 @@ public theorem value_runHistory_agrees :
     (fun h' hh' => utility_agree_on_window h' hh')
     (fun _ _ => rfl)
 
+/-! ## Lexicographic tie-breaking, at a tie
+
+`flatAgent` has zero horizon, so both actions have value zero at every depth: a
+genuine tie, which is where footnote 4's rule says something. The least action
+in `Bool`'s order, `false`, is the one chosen. -/
+
+/-- At the flat model every action value is zero. -/
+public theorem flat_actionValue_eq_zero (t n : ℕ) (h : History Bool Unit) (a : Bool) :
+    actionValue flatBelief flatAgent t n h a = 0 := by
+  unfold actionValue
+  simp [value_eq_zero_of_horizon_vanishes flatBelief flatAgent t 0 (fun _ _ => rfl) n _
+    (Nat.zero_le _)]
+
+/-- **The lexicographic best action breaks the tie to `false`.** -/
+public theorem flat_lexBestAction (t n : ℕ) (h : History Bool Unit) :
+    lexBestAction flatBelief flatAgent t n h (attains_of_fintype flatBelief flatAgent t n h)
+      = false := by
+  have hle := lexBestAction_le flatBelief flatAgent t n h
+    (attains_of_fintype flatBelief flatAgent t n h) (a := false)
+    (fun b => by rw [flat_actionValue_eq_zero, flat_actionValue_eq_zero])
+  exact le_bot_iff.mp hle
+
+/-- The lexicographic best action is maximal, at the witness. -/
+public theorem flat_lexBestAction_max (t n : ℕ) (h : History Bool Unit) (a : Bool) :
+    actionValue flatBelief flatAgent t n h a ≤
+      actionValue flatBelief flatAgent t n h
+        (lexBestAction flatBelief flatAgent t n h (attains_of_fintype flatBelief flatAgent t n h)) :=
+  lexBestAction_max flatBelief flatAgent t n h (attains_of_fintype flatBelief flatAgent t n h) a
+
+/-- The generic lexicographic argmax at a constant function: every action is a
+maximiser and the least, `false`, is chosen. -/
+public theorem lexArgmax_const_eq_false :
+    AISafetyAtlas.Wireheading.AgentEquations.lexArgmax (fun _ : Bool => (0 : ℝ))
+      ⟨true, fun _ => le_rfl⟩ = false :=
+  le_bot_iff.mp (AISafetyAtlas.Wireheading.AgentEquations.lexArgmax_le _ _ (a := false)
+    (fun _ => le_rfl))
+
+/-- The generic lexicographic argmax is a maximiser, at a constant function. -/
+public theorem lexArgmax_const_max (b : Bool) :
+    (fun _ : Bool => (0 : ℝ)) b ≤ (fun _ : Bool => (0 : ℝ))
+      (AISafetyAtlas.Wireheading.AgentEquations.lexArgmax (fun _ : Bool => (0 : ℝ))
+        ⟨true, fun _ => le_rfl⟩) :=
+  AISafetyAtlas.Wireheading.AgentEquations.lexArgmax_max (fun _ : Bool => (0 : ℝ))
+    ⟨true, fun _ => le_rfl⟩ b
+
+/-! ## Print's tie rule without a well-founded order -/
+
+/-- `WithBot ℤ` is a linear order with no well-founded `<`: the integers descend
+forever below every integer. -/
+public theorem withBotInt_not_wellFoundedLT : ¬ WellFoundedLT (WithBot ℤ) := by
+  intro hwf
+  obtain ⟨m, ⟨z, rfl⟩, hm⟩ :=
+    hwf.wf.has_min (Set.range ((↑) : ℤ → WithBot ℤ)) ⟨_, 0, rfl⟩
+  exact hm _ ⟨z - 1, rfl⟩ (WithBot.coe_lt_coe.mpr (by omega))
+
+/-- Every action ties under a constant value, and the tie set has the least element
+`⊥`, so print's rule denotes on `WithBot ℤ` although `lexArgmax` does not apply
+(`withBotInt_not_wellFoundedLT`). -/
+public theorem isLeast_const_withBot :
+    IsLeast {a : WithBot ℤ | ∀ b, (fun _ : WithBot ℤ => (0 : ℝ)) b ≤
+      (fun _ : WithBot ℤ => (0 : ℝ)) a} ⊥ :=
+  ⟨fun _ => le_rfl, fun _ _ => bot_le⟩
+
+/-- The least-maximiser choice on `WithBot ℤ` at a constant value is `⊥`. -/
+public theorem lexArgmaxOfLeast_const_withBot :
+    lexArgmaxOfLeast (fun _ : WithBot ℤ => (0 : ℝ)) ⟨⊥, isLeast_const_withBot⟩ = ⊥ :=
+  le_bot_iff.mp (lexArgmaxOfLeast_le _ _ (a := ⊥) (fun _ => le_rfl))
+
+/-- It is a maximiser there. -/
+public theorem lexArgmaxOfLeast_const_withBot_max (b : WithBot ℤ) :
+    (fun _ : WithBot ℤ => (0 : ℝ)) b ≤ (fun _ : WithBot ℤ => (0 : ℝ))
+      (lexArgmaxOfLeast (fun _ : WithBot ℤ => (0 : ℝ)) ⟨⊥, isLeast_const_withBot⟩) :=
+  lexArgmaxOfLeast_max (fun _ : WithBot ℤ => (0 : ℝ)) ⟨⊥, isLeast_const_withBot⟩ b
+
+/-- On a well-founded order the two choosers agree, at `Bool`. -/
+public theorem lexArgmaxOfLeast_eq_lexArgmax_bool :
+    lexArgmaxOfLeast (fun _ : Bool => (0 : ℝ))
+        (exists_isLeast_maximizers _ ⟨true, fun _ => le_rfl⟩) =
+      lexArgmax (fun _ : Bool => (0 : ℝ)) ⟨true, fun _ => le_rfl⟩ :=
+  lexArgmaxOfLeast_eq_lexArgmax _ _ _
+
 end AISafetyAtlas.Examples.Wireheading.AgentEquations

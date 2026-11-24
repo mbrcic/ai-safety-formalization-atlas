@@ -1,6 +1,7 @@
 module
 
 public import AISafetyAtlas.Causal.Incentive
+public import AISafetyAtlas.Examples.Causal.StructuralModel
 
 /-!
 # A diagram with an instrumental control incentive, and a vertex without one
@@ -563,5 +564,65 @@ public theorem segSCIM_not_hasICI : ¬ segSCIM.HasICI 0 2 := by
 public theorem chain_iciWitness_graph :
     (SCIM.iciWitness chainCID 0 1 2).graph = chainCID :=
   SCIM.iciWitness_graph chainCID 0 1 2
+
+/-! ## A potential response at an infinite vertex set
+
+`SCIM.totalUtility` is print's `U_x := Σ_{U ∈ 𝐔} U_x` with no finiteness of the
+vertex set. At `infSCIM` (vertices `ℕ`, one utility) forcing the decision to `0`
+makes it match the chance node `2`, which is `0`, so the utility pays `1` at every
+draw — a potential response `SCIM.totalUtilityIn` cannot be asked for, since `ℕ`
+is not a `Fintype`. -/
+
+open AISafetyAtlas.Examples.Causal.StructuralModel in
+/-- Forcing `infSCIM`'s decision to `0` makes the utility vertex `1` read `1`,
+under any policy and at any draw. -/
+public theorem infSCIM_doDecision_eval_one (π : infSCIM.Policy)
+    (ε : ExoAssignment ℕ (fun _ ↦ Fin 1)) :
+    ((infSCIM.withPolicy π).submodelSet {0} fun _ ↦ 0).eval ε 1 = 1 := by
+  have h1 : ¬ infSCIM.graph.IsDecision 1 := by
+    rw [show infSCIM.graph = infCID from rfl, infCID_isDecision_iff]; omega
+  have h2 : ¬ infSCIM.graph.IsDecision 2 := by
+    rw [show infSCIM.graph = infCID from rfl, infCID_isDecision_iff]; omega
+  have f1 : ∀ a e, infSCIM.f 1 h1 a e = if a 0 = a 2 then 1 else 0 := fun _ _ ↦ by
+    simp [infSCIM]
+  have f2 : ∀ a e, infSCIM.f 2 h2 a e = 0 := fun _ _ ↦ by simp [infSCIM]
+  have e0 : ((infSCIM.withPolicy π).submodelSet {0} fun _ ↦ 0).eval ε 0 = 0 :=
+    SCM.submodelSet_eval _ _ _ _ rfl
+  have e2 : ((infSCIM.withPolicy π).submodelSet {0} fun _ ↦ 0).eval ε 2 = 0 := by
+    rw [SCM.submodelSet_eval_notMem _ _ _ _ (by simp), infSCIM.withPolicy_f_notMem π h2, f2]
+  rw [SCM.submodelSet_eval_notMem _ _ _ _ (by simp), infSCIM.withPolicy_f_notMem π h1, f1,
+    e0, e2, if_pos rfl]
+
+open AISafetyAtlas.Examples.Causal.StructuralModel in
+/-- **`U_{D = 0} = 1` at `infSCIM`**, under any policy and any draw: the potential
+response read in `SCM.submodelSet` at a model with countably many vertices. -/
+public theorem infSCIM_totalUtility_doDecision (π : infSCIM.Policy)
+    (ε : ExoAssignment ℕ (fun _ ↦ Fin 1)) :
+    infSCIM.totalUtility ((infSCIM.withPolicy π).submodelSet {0} fun _ ↦ 0) ε = 1 := by
+  have hu : infSCIM.graph.IsUtility 1 := (infCID_isUtility_iff 1).mpr rfl
+  rw [SCIM.totalUtility, Fintype.sum_eq_single ⟨1, hu⟩ fun u hne ↦ absurd
+    (Subtype.ext ((infCID_isUtility_iff u.1).mp u.2)) hne]
+  dsimp only
+  rw [infSCIM_doDecision_eval_one]
+  simp [infSCIM]
+
+open AISafetyAtlas.Examples.Causal.StructuralModel in
+/-- The potential response `U_{D = 0}` at `infSCIM` does not depend on the policy
+the intervention overrides, by `SCIM.totalUtility_congr`: the two submodels agree
+on the one utility vertex. -/
+public theorem infSCIM_totalUtility_doDecision_policy_free (π π' : infSCIM.Policy)
+    (ε : ExoAssignment ℕ (fun _ ↦ Fin 1)) :
+    infSCIM.totalUtility ((infSCIM.withPolicy π).submodelSet {0} fun _ ↦ 0) ε =
+      infSCIM.totalUtility ((infSCIM.withPolicy π').submodelSet {0} fun _ ↦ 0) ε :=
+  AISafetyAtlas.Causal.SCIM.totalUtility_congr _ _ _ ε fun u hu ↦ by
+    rw [(infCID_isUtility_iff u).mp hu, infSCIM_doDecision_eval_one,
+      infSCIM_doDecision_eval_one]
+
+/-- At a finite diagram the total utility over the utility subtype is
+`SCIM.totalUtilityIn`. -/
+example (π : chainSCIM.Policy) (ε : ExoAssignment (Fin 4) chainExo) :
+    chainSCIM.totalUtilityIn (chainSCIM.withPolicy π) ε =
+      chainSCIM.totalUtility (chainSCIM.withPolicy π) ε :=
+  AISafetyAtlas.Causal.SCIM.totalUtilityIn_eq_totalUtility _ _ _
 
 end AISafetyAtlas.Examples.Causal.Incentive

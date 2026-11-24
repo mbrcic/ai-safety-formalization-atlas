@@ -1,0 +1,238 @@
+source:
+  citation: >-
+    Christian List and Laura Valentini, Freedom as Independence. Ethics 126
+    (July 2016): 1043--1074. (c) 2016 by The University of Chicago (first page,
+    PDF p. 1). Published version.
+  file: list-valentini-2016-published-ethics-freedom-as-independence.pdf
+  sha256: 93fb7dad01fa93d20ce33550421943100cacc8ea3b9a9d541dce316bb2cc63d2
+  page_offset: -1042
+  standing: |
+    The rows below all come from §II, "The Logical Space of Freedom" (pp.
+    1046--1050, PDF pp. 4--8), including its subsection "A Simple Taxonomy"
+    (p. 1047, PDF p. 5); §III, "Why Freedom Requires Robustness", begins on
+    p. 1051 (PDF p. 9).
+
+    Scope of the scheme (p. 1046, PDF p. 4): "Any (negative) conception of social
+    freedom falls broadly under the following definition scheme:" (statement
+    lv-freedom-scheme).
+
+    Agnosticism about "relevant" (p. 1046, PDF p. 4): "For the moment, we remain
+    agnostic on these questions" (statement lv-relevant).
+
+    Technical use of terms (p. 1047, PDF p. 5): "Note that we use the pair of terms
+    ``moralized/nonmoralized'' and ``robust/nonrobust'' in a technical way, to
+    refer to the answers to the moralization and robustness questions we have
+    introduced."
+
+    From §III on (p. 1051, PDF p. 9): "For ease of exposition, from now on, we will
+    omit the qualification ``relevant''; any reference to ``constraints'' should be
+    understood to mean ``relevant constraints.''" This post-dates the rows below.
+
+definitions:
+  - id: lv-table-1
+    label: Table 1 (A taxonomy of different conceptions of (negative) freedom)
+    pdf_page: 6
+    book_page: 1048
+    latex: |
+      \textsc{Table 1} --- \textsc{A Taxonomy of Different Conceptions of
+      (Negative) Freedom}
+      \begin{tabular}{lll}
+        & Nonmoralized & Moralized \\
+      Nonrobust & \emph{Liberal freedom} (1) & \emph{Moralized liberal freedom} (2) \\
+        & Freedom = actual absence of relevant constraints
+        & Freedom = actual absence of unjust/wrongful relevant constraints \\
+      Robust & \emph{Freedom as independence} (3)
+        & \emph{Republican freedom (and its cousins)} (4) \\
+        & Freedom = robust absence of relevant constraints
+        & Freedom = robust absence of arbitrary relevant constraints
+          (= absence of domination)
+      \end{tabular}
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: lv-def-modal
+    label: Definition (modal property), p. 1047
+    pdf_page: 5
+    book_page: 1047
+    latex: |
+      A property or feature (of something or someone) is \emph{modal} if it depends
+      not only on facts about the actual world, but also on facts about other
+      possible worlds. (The relevant notion of possibility, and which possible worlds
+      matter, can be spelled out in a variety of ways.)
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+excerpts: []
+
+statements:
+  - id: lv-freedom-scheme
+    audit_row: S22-R01
+    locator: L&V §II definition scheme
+    pdf_page: 4
+    book_page: 1046
+    label: definition scheme (displayed)
+    latex: |
+      \textbf{Freedom:} An agent's freedom to do X is the absence of relevant
+      constraints on the agent's doing X.
+    context: |
+      Introduced by: "Any (negative) conception of social freedom falls broadly
+      under the following definition scheme:"
+    uses: []
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: lv-relevant
+    audit_row: S22-R02
+    locator: L&V §II "relevant"
+    pdf_page: 4
+    book_page: 1046
+    label: paragraph after the definition scheme
+    latex: |
+      Different conceptions differ in how they fill in the details. Political
+      philosophers generally agree that constraints from factors outside human
+      control, such as the laws of nature, are irrelevant to social freedom. This
+      leaves open whether the relevant constraints include only intentionally imposed
+      ones or also nonintentional ones (such as structural constraints, which are
+      by-products of social arrangements). Similarly, it leaves open whether the
+      relevant constraints include only physical ones or also psychological ones, and
+      so forth. For the moment, we remain agnostic on these questions and encourage
+      the reader to substitute a preferred answer into the qualification
+      ``relevant.''$^{8}$
+    uses: [lv-freedom-scheme, lv-fn-8]
+    note: >-
+      The paragraph also states a restriction the audit's paraphrase omits:
+      constraints from factors outside human control "are irrelevant to social
+      freedom".
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind) + Grok (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: lv-fn-8
+    audit_row: S22-R03
+    locator: L&V footnote 8
+    pdf_page: 4
+    book_page: 1046
+    label: footnote 8
+    latex: |
+      8. It is important for our analysis, however, that we do not build criteria of
+      moral permissibility or impermissibility into the specification of ``relevant''
+      constraints; i.e., the notion of ``relevance'' should not be ``moralized'' in
+      the technical sense of the moralization question introduced below.
+    uses: [lv-moralization-question]
+    note: >-
+      The audit's verbatim quotation stops at "should not be 'moralized'"; print
+      continues "in the technical sense of the moralization question introduced
+      below." Print uses double quotation marks.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: lv-moralization-question
+    audit_row: S22-R04
+    locator: L&V §II, the moralization question
+    pdf_page: 4
+    book_page: 1046
+    label: the moralization question (displayed)
+    latex: |
+      \textbf{The moralization question:} Is the constraint-absence condition
+      qualified by some moralized exemption clause, according to which morally
+      permissible constraints (e.g., ``nonarbitrary'' or ``just'' ones) do not count
+      as freedom restricting?
+    context: |
+      Introduced by: "We focus on two other dimensions on which different
+      conceptions of freedom can be distinguished. They concern the answers to the
+      following questions:"
+    uses: [lv-freedom-scheme]
+    note: >-
+      The audit's verbatim quotation replaces the parenthesis (e.g.,
+      ``nonarbitrary'' or ``just'' ones) with an ellipsis.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind) + Grok (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: lv-robustness-question
+    audit_row: S22-R05
+    locator: L&V §II, the robustness question
+    pdf_page: 4
+    book_page: 1046
+    label: the robustness question (displayed)
+    latex: |
+      \textbf{The robustness question:} Is the constraint-absence condition fortified
+      with a modal robustness requirement, according to which freedom requires the
+      absence of the constraints in a sufficiently large class of possible worlds
+      (relevant hypothetical scenarios) over and above the actual world?
+    context: |
+      Followed by: "The significance of these questions should be evident. [...] The
+      answer to the second affects whether someone's mere power to interfere, even if
+      not actualized---as, for example, in the case of a slave with a noninterfering
+      master---gives rise to unfreedom."
+    uses: [lv-freedom-scheme, lv-def-modal]
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind) + Grok (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: lv-possibility-parenthesis
+    audit_row: S22-R06
+    locator: L&V §II
+    pdf_page: 5
+    book_page: 1047
+    label: parenthesis in the definition of "modal" ("A Simple Taxonomy")
+    latex: |
+      (The relevant notion of possibility, and which possible worlds matter, can be
+      spelled out in a variety of ways.)
+    context: |
+      Preceded by: "Importantly, though, all four families of conceptions of freedom
+      qualify as modal. A property or feature (of something or someone) is
+      \emph{modal} if it depends not only on facts about the actual world, but also
+      on facts about other possible worlds."
+    uses: [lv-def-modal]
+    note: >-
+      The sentence is about the possibility notion in the definition of a modal
+      property, printed under "A Simple Taxonomy" in §II, not in the statement of
+      the robustness question.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind) + Grok (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: lv-four-cases
+    audit_row: S22-R07
+    locator: L&V §III, four cases
+    pdf_page: 5
+    book_page: 1047
+    label: the four numbered cases ("A Simple Taxonomy")
+    latex: |
+      Freedom could require:
+      (1) the actual absence of the relevant constraints, without any moralized
+      exemption clause;
+      (2) the actual absence of the relevant constraints, except when those
+      constraints are morally permitted;
+      (3) the robust absence of the relevant constraints, without any moralized
+      exemption clause;
+      (4) the robust absence of the relevant constraints, except when those
+      constraints are morally permitted.
+    context: |
+      Followed by: "Liberal freedom in Berlin's sense is an instance of case 1.$^9$
+      Moralized liberal freedom, as proposed by Robert Nozick and Ronald Dworkin, is
+      an instance of case 2.$^{10}$ Republican freedom in Pettit's sense is an
+      instance of case 4. What we call ``freedom as independence'' is an instance of
+      case 3. Table 1 summarizes the four possibilities."
+    uses: [lv-moralization-question, lv-robustness-question, lv-table-1]
+    note: >-
+      Locator mismatch: the four cases are in §II (subsection "A Simple Taxonomy",
+      p. 1047), not §III, which begins on p. 1051 (PDF 9). Print says each named
+      conception is "an instance of" a case, not identical to it.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind) + Grok (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: lv-two-by-two
+    audit_row: S22-R08
+    locator: L&V §III
+    pdf_page: 5
+    book_page: 1047
+    label: opening of "A Simple Taxonomy"
+    latex: |
+      Different conceptions of freedom can be characterized in terms of their answers
+      to the two questions. Since ``moralization'' and ``robustness'' are independent
+      from one another, we arrive at a two-by-two matrix of possibilities.
+    uses: [lv-moralization-question, lv-robustness-question]
+    note: >-
+      Locator mismatch: §II ("A Simple Taxonomy", p. 1047), not §III (which begins
+      p. 1051). Print uses double quotation marks where the audit's quotation has
+      single ones. The independence is asserted, not argued.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind) + Grok (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}

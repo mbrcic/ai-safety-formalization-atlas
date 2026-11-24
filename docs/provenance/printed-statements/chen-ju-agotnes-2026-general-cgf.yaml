@@ -1,0 +1,465 @@
+source:
+  citation: >-
+    Zixuan Chen, Fengkui Ju and Thomas Ågotnes, Representation theorems for
+    actual and alpha powers over general concurrent game frames without assuming
+    independence of agents, arXiv:2607.10567v1 [cs.GT], 12 Jul 2026 (title page
+    and margin stamp of the pinned file). Sections 1.2, 2 and 3, and Definition 12
+    (§4.2).
+  file: chen-ju-agotnes-arxiv-v1-2026-representation-theorems-actual-alpha-powers-general-cgf.pdf
+  sha256: c7aece726de1b7a7a106c6461ee968dbfe020f17851e32cde1fa5a0894f4e971
+  page_offset: 0
+  standing: |
+    Agents (§2.1, p. 6, PDF p. 6): "Let $\mathtt{AG}$ be a finite nonempty set of
+    agents. Subsets of $\mathtt{AG}$ are called \textbf{coalitions}, and
+    $\mathtt{AG}$ itself is called the \textbf{grand coalition}. In what follows,
+    whenever no confusion arises, we write $a$ instead of $\{a\}$ for
+    $a \in \mathtt{AG}$."
+    Section 3 (p. 9, PDF p. 9): "The definitions are stated for arbitrary finite
+    nonempty sets of agents."
+    Action frames carry no further standing restriction (p. 7, PDF p. 7): "Note
+    that the action set $\mathtt{AC}$ may vary across action frames. Different
+    constraints may be imposed on action frames."
+    Silent: no finiteness or cardinality bound on the state set $\mathtt{ST}$ or
+    on the action set $\mathtt{AC}$ is imposed (source card S23 searched PDF pp.
+    6--10; Definition 1 requires only nonemptiness). Page 8 treats an infinite
+    $\mathtt{ST}$ as possible: "Note that $\mathrm{Core}N^{\alpha}_{C}(s)$ may be
+    empty even when $N^{\alpha}_{C}(s)$ is nonempty. However, this cannot occur
+    when $\mathtt{ST}$ is finite."
+
+definitions:
+  - id: chen-def-joint-actions
+    label: joint actions, restriction and union (§2.1)
+    pdf_page: 6
+    book_page: 6
+    latex: |
+      Let $\mathtt{AC}$ be a nonempty set of actions. For each
+      $C \subseteq \mathtt{AG}$, define
+      $\mathtt{JA}_C = \{\sigma_C \mid \sigma_C : C \to \mathtt{AC}\}$, the set of
+      \textbf{joint actions} of $C$. Note $\mathtt{JA}_\emptyset = \{\emptyset\}$.
+      For $C, D \subseteq \mathtt{AG}$ such that $C \subseteq D$, and for every
+      $\sigma_D \in \mathtt{JA}_D$, we denote by $\sigma_D|_C$ the
+      \textbf{restriction} of $\sigma_D$ to $C$, which is an element of
+      $\mathtt{JA}_C$. If $\sigma_C \in \mathtt{JA}_C$ and
+      $\sigma_D \in \mathtt{JA}_D$ agree on $C \cap D$, we write
+      $\sigma_C \cup \sigma_D$ for their union, which is an element of
+      $\mathtt{JA}_{C \cup D}$. In particular, this notation is always defined when
+      $C$ and $D$ are disjoint. In the sequel, we sometimes represent joint actions
+      of coalitions as action sequences, implicitly assuming a fixed order of
+      agents.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: chen-def-safe-tight-powers
+    label: safe, tight, alpha power, actual power (§2.2)
+    pdf_page: 7
+    book_page: 7
+    latex: |
+      Fix an action frame
+      \[ \mathtt{AF} = (\mathtt{ST}, \mathtt{AC}, \{\mathtt{av}_C \mid C \subseteq \mathtt{AG}\},
+         \{\mathtt{out}_C \mid C \subseteq \mathtt{AG}\}), \]
+      a state $s \in \mathtt{ST}$, a coalition $C \subseteq \mathtt{AG}$, and an
+      available joint action $\sigma_C \in \mathtt{av}_C(s)$. We say that a set of
+      states $X \subseteq \mathtt{ST}$ is \textbf{safe} for $\sigma_C$ at $s$ if
+      $\mathtt{out}_C(s, \sigma_C) \subseteq X$, that is, performing $\sigma_C$ at
+      $s$ guarantees that the next state lies in $X$. We say that $X$ is
+      \textbf{tight} for $\sigma_C$ at $s$ if
+      $X \subseteq \mathtt{out}_C(s, \sigma_C)$, that is, every state in $X$ can
+      occur as an outcome compatible with performing $\sigma_C$ at $s$.
+
+      An \textbf{alpha power} of $C$ at $s$ is a set of states
+      $X \subseteq \mathtt{ST}$ that is safe for some available joint action of $C$
+      at $s$. An \textbf{actual power} of $C$ at $s$ is a set of states
+      $X \subseteq \mathtt{ST}$ that is both safe and tight for some available
+      joint action of $C$ at $s$. Equivalently, actual powers of $C$ at $s$ are
+      exactly the sets of the form $\mathtt{out}_C(s, \sigma_C)$ for
+      $\sigma_C \in \mathtt{av}_C(s)$. We say that an (alpha or actual) power $X$
+      \textbf{enables} a state $t \in \mathtt{ST}$ at $s$ if $t \in X$.
+
+      Alpha powers are monotonic: if $X$ is an alpha power, then every superset
+      $X' \supseteq X$ is also an alpha power. By contrast, actual powers are
+      generally non-monotonic, since tightness rules out adding states that are not
+      actually reachable.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: chen-def2-alpha-neighborhood-frame
+    label: Definition 2 (Alpha neighborhood frames)
+    pdf_page: 7
+    book_page: 7
+    latex: |
+      \textbf{Definition 2} (Alpha neighborhood frames)\textbf{.} An \textbf{alpha
+      neighborhood frame} is a tuple
+      $\mathtt{NF}^{\alpha} = (\mathtt{ST}, \{N^{\alpha}_C \mid C \subseteq \mathtt{AG}\})$,
+      where:
+      \begin{itemize}
+      \item $\mathtt{ST}$ is a nonempty set of states;
+      \item For each $C \subseteq \mathtt{AG}$,
+        $N^{\alpha}_C : \mathtt{ST} \to \mathcal{P}(\mathcal{P}(\mathtt{ST}))$ is an
+        \textbf{alpha neighborhood function} of $C$ such that, for every
+        $s \in \mathtt{ST}$, the set $N^{\alpha}_C(s)$ is closed under supersets.
+      \end{itemize}
+      Different constraints may be imposed on alpha neighborhood frames.
+
+      The set $N^{\alpha}_C(s)$ is called the \textbf{alpha neighborhood} of $C$ at
+      $s$. Intuitively, $N^{\alpha}_C(s)$ consists of the alpha powers of $C$ at
+      $s$.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+statements:
+  - id: chen-def1-action-frame
+    audit_row: S23-R01
+    locator: Definition 1
+    pdf_page: 7
+    book_page: 7
+    label: Definition 1
+    latex: |
+      \textbf{Definition 1} (Action frames)\textbf{.} An \textbf{action frame} is a
+      tuple
+      \[ \mathtt{AF} = (\mathtt{ST}, \mathtt{AC}, \{\mathtt{av}_C \mid C \subseteq \mathtt{AG}\},
+         \{\mathtt{out}_C \mid C \subseteq \mathtt{AG}\}), \]
+      where:
+      \begin{itemize}
+      \item $\mathtt{ST}$ is a nonempty set of states.
+      \item $\mathtt{AC}$ is a nonempty set of actions.
+      \item For each $C \subseteq \mathtt{AG}$,
+        $\mathtt{av}_C : \mathtt{ST} \to \mathcal{P}(\mathtt{JA}_C)$ is an
+        \textbf{availability function} for $C$.
+
+        \emph{Here, $\mathtt{av}_C(s)$ is the set of all joint actions of coalition
+        $C$ that are available at state $s$.}
+      \item For each $C \subseteq \mathtt{AG}$,
+        $\mathtt{out}_C : \mathtt{ST} \times \mathtt{JA}_C \to \mathcal{P}(\mathtt{ST})$
+        is an \textbf{outcome function} for $C$.
+
+        \emph{Here, $\mathtt{out}_C(s, \sigma_C)$ is the set of possible outcome
+        states when coalition $C$ performs joint action $\sigma_C$ at state $s$.}
+      \end{itemize}
+      Note that the action set $\mathtt{AC}$ may vary across action frames.
+
+      Different constraints may be imposed on action frames.
+
+      Intuitively, $\mathtt{out}_\emptyset(s, \emptyset)$ contains all states to
+      which $s$ may evolve, i.e., all possible successors of $s$.
+    uses: [chen-def-joint-actions]
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind) + Codex (anchored re-read); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: chen-def5-alpha
+    audit_row: S23-R02
+    locator: Definition 5, alpha
+    pdf_page: 8
+    book_page: 8
+    label: Definition 5 (first bullet)
+    latex: |
+      \textbf{Definition 5} (Alpha and actual effectivity functions of action
+      frames)\textbf{.} Let
+      $\mathtt{AF} = (\mathtt{ST}, \mathtt{AC}, \{\mathtt{av}_C \mid C \subseteq \mathtt{AG}\},
+      \{\mathtt{out}_C \mid C \subseteq \mathtt{AG}\})$ be an action frame. For each
+      $C \subseteq \mathtt{AG}$, define:
+      \begin{itemize}
+      \item the \textbf{alpha effectivity function} $\mathrm{EF}^{\alpha}_C$ for $C$
+        in $\mathtt{AF}$ by setting, for every $s \in \mathtt{ST}$,
+        \[ \mathrm{EF}^{\alpha}_C(s) = \{\, Y \subseteq \mathtt{ST} \mid
+           \mathtt{out}_C(s, \sigma_C) \subseteq Y \text{ for some }
+           \sigma_C \in \mathtt{av}_C(s) \,\}; \]
+      \end{itemize}
+    uses: [chen-def1-action-frame, chen-def-safe-tight-powers]
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind) + Codex (anchored re-read); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: chen-def5-actual
+    audit_row: S23-R03
+    locator: Definition 5, actual
+    pdf_page: 8
+    book_page: 8
+    label: Definition 5 (second bullet)
+    latex: |
+      \begin{itemize}
+      \item the \textbf{actual effectivity function} $\mathrm{EF}^{\mathrm{ac}}_C$
+        for $C$ in $\mathtt{AF}$ by setting, for every $s \in \mathtt{ST}$,
+        \[ \mathrm{EF}^{\mathrm{ac}}_C(s) = \{\, \mathtt{out}_C(s, \sigma_C) \mid
+           \sigma_C \in \mathtt{av}_C(s) \,\}. \]
+      \end{itemize}
+    context: |
+      Second bullet of Definition 5, whose head is transcribed under
+      chen-def5-alpha: "Let AF = (...) be an action frame. For each
+      $C \subseteq \mathtt{AG}$, define:"
+    uses: [chen-def1-action-frame, chen-def-safe-tight-powers]
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind) + Codex (anchored re-read); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: chen-p8-alpha-upward-closed
+    audit_row: S23-R04
+    locator: p. 8
+    pdf_page: 8
+    book_page: 8
+    label: remark after Definition 5
+    latex: |
+      From the definition, it is immediate that each $\mathrm{EF}^{\alpha}_C(s)$ is
+      closed under supersets.
+    uses: [chen-def5-alpha]
+    note: >-
+      The atlas's quotation reads "each alpha effectivity function is closed under
+      supersets"; print has the symbol $\mathrm{EF}^{\alpha}_C(s)$, i.e. the value
+      at a state, not the words "alpha effectivity function".
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind) + Codex (anchored re-read); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: chen-def12-item4-coalition-monotonicity
+    audit_row: S23-R05
+    locator: coalition monotonicity
+    pdf_page: 12
+    book_page: 12
+    label: Definition 12, item 4
+    latex: |
+      4. \textbf{Coalition monotonicity of alpha powers.} For all
+      $s \in \mathtt{ST}$ and all $C, D \subseteq \mathtt{AG}$ with $C \subseteq D$,
+      $N^{\alpha}_C(s) \subseteq N^{\alpha}_D(s)$.
+
+      \emph{Intuitively, enlarging a coalition cannot destroy an alpha power: if
+      $C$ can guarantee $X$, then any larger coalition $D$ can also guarantee $X$.}
+    context: |
+      \textbf{Definition 12} (Finite-agent $\alpha$-representative alpha
+      neighborhood frames)\textbf{.} Assume $\mathtt{AG}$ is finite.
+
+      Let $\mathtt{NF}^{\alpha} = (\mathtt{ST}, \{N^{\alpha}_C \mid C \subseteq \mathtt{AG}\})$
+      be an alpha neighborhood frame. We say that $\mathtt{NF}^{\alpha}$ is
+      \textbf{$\alpha$-representative} if the following conditions are satisfied.
+    uses: [chen-def2-alpha-neighborhood-frame]
+    note: >-
+      Print states this as a defining condition on alpha neighborhood frames
+      (item 4 of Definition 12, §4.2 "Alpha powers"), not as a property proved of
+      general concurrent game frames. The quoted words "enlarging a coalition
+      cannot destroy an alpha power" are the italic gloss under item 4. Section 4
+      is, per p. 6, adapted from [CJÅ26].
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind) + Codex (anchored re-read); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: chen-def9-serial
+    audit_row: S23-R06
+    locator: Definition 9, seriality
+    pdf_page: 10
+    book_page: 10
+    label: Definition 9 (first bullet)
+    latex: |
+      \textbf{Definition 9} (Seriality, independence, and determinism)\textbf{.} Let
+      $\mathtt{GCGF} = (\mathtt{ST}, \mathtt{AC}, \{\mathtt{av}_C \mid C \subseteq \mathtt{AG}\},
+      \{\mathtt{out}_C \mid C \subseteq \mathtt{AG}\})$ be a general concurrent game
+      frame. We say that:
+      \begin{itemize}
+      \item $\mathtt{GCGF}$ is \textbf{serial} if, for all $C \subseteq \mathtt{AG}$
+        and all $s \in \mathtt{ST}$, we have $\mathtt{av}_C(s) \neq \emptyset$;
+      \end{itemize}
+    uses: [chen-def8-gcgf]
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind) + Codex (anchored re-read); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: chen-def9-independent
+    audit_row: S23-R07
+    locator: Definition 9, independence
+    pdf_page: 10
+    book_page: 10
+    label: Definition 9 (second bullet)
+    latex: |
+      \begin{itemize}
+      \item $\mathtt{GCGF}$ is \textbf{independent} if, for all $s \in \mathtt{ST}$
+        and all disjoint coalitions $C, D \subseteq \mathtt{AG}$, whenever
+        $\sigma_C \in \mathtt{av}_C(s)$ and $\sigma_D \in \mathtt{av}_D(s)$, we have
+        $\sigma_C \cup \sigma_D \in \mathtt{av}_{C \cup D}(s)$;
+      \end{itemize}
+    context: |
+      Under the head of Definition 9 (see chen-def9-serial): "Let GCGF = (...) be a
+      general concurrent game frame. We say that:"
+    uses: [chen-def8-gcgf, chen-def-joint-actions]
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind) + Codex (anchored re-read); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: chen-def9-deterministic
+    audit_row: S23-R08
+    locator: Definition 9, determinism
+    pdf_page: 10
+    book_page: 10
+    label: Definition 9 (third bullet)
+    latex: |
+      \begin{itemize}
+      \item $\mathtt{GCGF}$ is \textbf{deterministic} if, for all
+        $s \in \mathtt{ST}$ and all $\sigma_{\mathtt{AG}} \in \mathtt{av}_{\mathtt{AG}}(s)$,
+        the set $\mathtt{out}_{\mathtt{AG}}(s, \sigma_{\mathtt{AG}})$ is a singleton.
+      \end{itemize}
+    context: |
+      Under the head of Definition 9 (see chen-def9-serial).
+    uses: [chen-def8-gcgf]
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind) + Codex (anchored re-read); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: chen-def9-eight-classes
+    audit_row: S23-R09
+    locator: Definition 9, the eight classes
+    pdf_page: 10
+    book_page: 10
+    label: Definition 9 (closing paragraph)
+    latex: |
+      Let $\mathtt{S}$, $\mathtt{I}$, and $\mathtt{D}$ denote seriality,
+      independence, and determinism, respectively. Let
+      \[ \mathrm{ES} = \{\epsilon,\ \mathtt{S},\ \mathtt{I},\ \mathtt{D},\ \mathtt{SI},\
+         \mathtt{SD},\ \mathtt{ID},\ \mathtt{SID}\} \]
+      be the set of the eight strings encoding all combinations of these three
+      properties. Here $\epsilon$ denotes the empty combination. For
+      $\mathtt{X} \in \mathrm{ES}$, we say that a general concurrent game frame is an
+      \textbf{$\mathtt{X}$-frame} if it satisfies the properties indicated by
+      $\mathtt{X}$.
+    uses: [chen-def9-serial, chen-def9-independent, chen-def9-deterministic]
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind) + Codex (anchored re-read); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: chen-p10-eight-classes-remark
+    audit_row: S23-R10
+    locator: p. 10, *On the eight frame classes*
+    pdf_page: 10
+    book_page: 10
+    label: remark "On the eight frame classes"
+    latex: |
+      \textbf{On the eight frame classes}
+
+      The labels in ES record which frame conditions are imposed; they do not
+      record which conditions are required to fail. Thus the eight classes are not
+      intended to be disjoint. Accordingly, when we speak of classes not imposing
+      the independence condition, we mean the four labels not containing
+      $\mathtt{I}$, namely $\epsilon, \mathtt{S}, \mathtt{D}, \mathtt{SD}$, not the
+      class of frames in which independence fails.
+    uses: [chen-def9-eight-classes]
+    note: >-
+      The atlas quotation marks one omission ("disjoint … we mean") but also
+      silently drops "namely $\epsilon, \mathtt{S}, \mathtt{D}, \mathtt{SD}$,"
+      before "not the class". Wording otherwise matches the page.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: chen-fact1-item1
+    audit_row: S23-R11
+    locator: Fact 1, item 1
+    pdf_page: 10
+    book_page: 10
+    label: Fact 1, item 1
+    latex: |
+      \textbf{Fact 1} (Basic consequences of general concurrent game
+      frames)\textbf{.} \emph{Let}
+      \[ \mathtt{GCGF} = (\mathtt{ST}, \mathtt{AC}, \{\mathtt{av}_C \mid C \subseteq \mathtt{AG}\},
+         \{\mathtt{out}_C \mid C \subseteq \mathtt{AG}\}) \]
+      \emph{be a general concurrent game frame. Then the following hold:}
+      \begin{enumerate}
+      \item \textbf{\emph{Outcome monotonicity:}} \emph{for all $s \in \mathtt{ST}$,
+        all $C \subseteq D \subseteq \mathtt{AG}$, all $\sigma_C \in \mathtt{JA}_C$,
+        and all $\sigma_D \in \mathtt{JA}_D$ such that $\sigma_D|_C = \sigma_C$, we
+        have $\mathtt{out}_D(s, \sigma_D) \subseteq \mathtt{out}_C(s, \sigma_C)$.}
+      \end{enumerate}
+    uses: [chen-def8-gcgf, chen-def-joint-actions]
+    proof_pages: 10
+    note: >-
+      No separate proof; p. 10 says "The first item is an immediate consequence of
+      the GCI-condition". The statement quantifies over all joint actions in
+      $\mathtt{JA}_C$, $\mathtt{JA}_D$, not only available ones.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind) + Codex (anchored re-read); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: chen-def8-gcgf
+    audit_row: S23-R12
+    locator: Definition 8
+    pdf_page: 9-10
+    book_page: 9-10
+    label: Definition 8
+    latex: |
+      \textbf{Definition 8} (General concurrent game frames)\textbf{.} An action
+      frame
+      \[ \mathtt{GCGF} = (\mathtt{ST}, \mathtt{AC}, \{\mathtt{av}_C \mid C \subseteq \mathtt{AG}\},
+         \{\mathtt{out}_C \mid C \subseteq \mathtt{AG}\}) \]
+      is a \textbf{general concurrent game frame} if the following conditions hold:
+      \begin{itemize}
+      \item The \textbf{grand-coalition-induced outcome condition} (simply the
+        \textbf{GCI-condition}): for every $C \subseteq \mathtt{AG}$, every
+        $s \in \mathtt{ST}$, and every $\sigma_C \in \mathtt{JA}_C$,
+        \[ \mathtt{out}_C(s, \sigma_C) = \bigcup \{\, \mathtt{out}_{\mathtt{AG}}(s, \sigma_{\mathtt{AG}})
+           \mid \sigma_{\mathtt{AG}} \in \mathtt{JA}_{\mathtt{AG}} \text{ and }
+           \sigma_{\mathtt{AG}}|_C = \sigma_C \,\}. \]
+      \item The \textbf{outcome-driven availability condition} (simply the
+        \textbf{ODA-condition}): for every $C \subseteq \mathtt{AG}$ and every
+        $s \in \mathtt{ST}$,
+        \[ \mathtt{av}_C(s) = \{\, \sigma_C \in \mathtt{JA}_C \mid
+           \mathtt{out}_C(s, \sigma_C) \neq \emptyset \,\}. \]
+      \end{itemize}
+      Thus, under the GCI-condition and the ODA-condition, the functions
+      $\mathtt{out}_C$ and $\mathtt{av}_C$ (for all $C \subseteq \mathtt{AG}$) are
+      determined by the grand-coalition outcome function
+      $\mathtt{out}_{\mathtt{AG}}$.
+    uses: [chen-def1-action-frame, chen-def-joint-actions]
+    note: >-
+      The head is at the foot of PDF p. 9 and the two conditions at the top of
+      p. 10. The text-layer card quote drops the big union symbol (renders it as
+      "[") in the GCI-condition.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind) + Codex (anchored re-read); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: chen-fact1-item2
+    audit_row: S23-R13
+    locator: Fact 1 item 2
+    pdf_page: 10
+    book_page: 10
+    label: Fact 1, item 2
+    latex: |
+      \begin{enumerate}
+      \setcounter{enumi}{1}
+      \item \textbf{\emph{Alternative GCI-condition:}} \emph{for all
+        $s \in \mathtt{ST}$, all $C \subseteq \mathtt{AG}$, and all
+        $\sigma_C \in \mathtt{JA}_C$,}
+        \[ \mathtt{out}_C(s, \sigma_C) = \bigcup \{\, \mathtt{out}_{\mathtt{AG}}(s, \sigma_{\mathtt{AG}})
+           \mid \sigma_{\mathtt{AG}} \in \mathtt{av}_{\mathtt{AG}}(s) \text{ \emph{and} }
+           \sigma_{\mathtt{AG}}|_C = \sigma_C \,\}. \]
+      \end{enumerate}
+      The first item is an immediate consequence of the GCI-condition, and the
+      second is a reformulation of the GCI-condition using the ODA-condition (since
+      unavailable grand-coalition actions have empty outcome sets).
+    context: |
+      Under the head of Fact 1 (see chen-fact1-item1): "Let GCGF = (...) be a
+      general concurrent game frame. Then the following hold:"
+    uses: [chen-def8-gcgf, chen-def-joint-actions]
+    proof_pages: 10
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind) + Codex (anchored re-read); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: chen-s1-2-alpha-vs-actual
+    audit_row: S23-R14
+    locator: §1, the objection to alpha
+    pdf_page: 2
+    book_page: 2
+    label: §1.2 (first paragraph)
+    latex: |
+      Alpha and actual powers abstract from the underlying actions in different
+      ways. Alpha powers record guarantees: if a coalition has an action whose
+      possible outcomes are all contained in a set $X$, then the same action also
+      guarantees every superset of $X$. Hence alpha powers are upward closed. Actual
+      powers, by contrast, record the precise outcome set generated by an available
+      action of the coalition, that is, the set of states left possible once that
+      action is fixed and the remaining agents' choices are left open. They are
+      therefore generally non-monotonic.
+
+      Actual powers provide a more precise account of coalition power in concurrent
+      game frames than alpha powers. Consider the following example.
+    context: |
+      Section heading: "1.2 Alpha powers versus actual powers". Example 1 (Same
+      alpha powers, different actual powers) follows on pp. 2--3.
+    uses: [chen-def-safe-tight-powers]
+    note: >-
+      The atlas's quoted fragment "can obscure relevant information about the
+      power structure in the game" is NOT in this file (text layer of all 50 pages
+      searched for "obscure" and "power structure": no hit; this §1.2 passage is
+      the nearest printed discussion of alpha monotonicity). The sentence is in
+      the companion two-agent paper,
+      chen-ju-agotnes-arxiv-v2-2026-representation-theorems-actual-alpha-powers-two-agent.pdf
+      (sha256 4cb9ce1c...), on its PDF p. 1 by text-layer search, not transcribed
+      here; the audit records that it is there credited to [BBE19]. What is
+      transcribed above is the passage at this file's own locator.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind) + Codex (anchored re-read); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+excerpts: []

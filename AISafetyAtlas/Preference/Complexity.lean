@@ -43,8 +43,12 @@ public import Mathlib.Computability.PartrecCode
   are themselves close to this bound"; Proposition 7 combines these. The
   source's framework of `c`-reasonable languages and "comparable complexity" is
   replaced throughout by plain additive constants over `Kolmogorov.plainK`, and
-  no `ReasonableLanguage` is instantiated at `plainK` — doing that needs
-  policies as strings and is a separate piece of work.
+  no `ReasonableLanguage` is instantiated at `plainK`. The bit strings here are
+  tied to the source's own planners, rewards and policies in
+  `AISafetyAtlas.Preference.DescribedComplexity`: there a string *describes* a
+  pair `(p, R)` or codes a policy `π`, `K` of the object is the least `plainK`
+  of a describing string, and `behaviour_le_of_evaluatesTo` transfers to
+  `plainKPolicy_le_plainKPair_of_compatible`, claim (1) at print's objects.
 
   **Until 2026-09-20 the lower bound here was narrower than the source's**, and
   the gap was the quantifier: the source applies evaluation to *every*
@@ -68,14 +72,10 @@ public import Mathlib.Computability.PartrecCode
   encoding. `behaviour_le_of_evaluatesTo` **is** over arbitrary compatible
   pairs, and the two are separate statements about separate objects.
 - **Not** the whole of the source's Proposition 7. The lower bound half is here
-  at the source's quantifier; the upper half is here only for `readerPair`, and
-  the three named degenerate pairs of §5.1.2 live in `Reasonable.lean` over an
-  abstract measure.
-- **Not** an upper bound on the source's own degenerate pair `(p_π̇, R)` as a
-  function of the behaviour. `degeneratePair` builds its planner *from* the
-  behaviour, so such a bound needs the primitive recursiveness of the
-  constant-program map, which the pinned Mathlib does not state. `readerPair`
-  carries the upper bound instead and is compatible with the same behaviour.
+  at the source's quantifier; the upper half is here for `readerPair` and for
+  the source's own indifferent pair `degeneratePair r` at each fixed reward
+  (`degeneratePair_complexity_eq_behaviour`), and the three named degenerate
+  pairs of §5.1.2 live in `Reasonable.lean` over an abstract measure.
 - **Not** a statement about resource-bounded or computable-in-practice priors;
   the source's Appendix A discusses those separately.
 
@@ -373,8 +373,10 @@ public theorem behaviour_le_of_evaluatesTo (U : Map) (hU : isOptimalConditional 
 
 /--
 **The source's degenerate pair.** The planner ignores its reward and returns the
-behaviour; the reward is whatever you like. This is `(p_π̇, R)` in the source's
-notation, and the source's `(p_π̇, 0)` is the case `r = []`.
+behaviour; the reward is whatever you like. When `b` codes a policy `π̇` and `r`
+codes a reward `R`, this string describes `(p_π̇, R)` in the source's notation
+(`AISafetyAtlas.Preference.describes_degeneratePair`); the source's `(p_π̇, 0)` is
+the case where `r` codes the zero reward.
 -/
 @[expose] public def degeneratePair (r b : BitString) : BitString :=
   pairString (Encodable.encode (Code.const (Encodable.encode b))) r
@@ -414,6 +416,25 @@ public theorem computable_readerPair : Computable readerPair := by
     (Primrec₂.comp Primrec.list_cons (Primrec.const false) Primrec.id)
 
 /--
+**Any compatible pair computable from the behaviour is within constants of it**
+(the mechanism of the source's §5.1, `am-lower-bound`, PDF p. 5: *"if a
+compatible pair can be constructed from `π̇` with little extra complexity, then
+it too will have a complexity close to the minimal complexity of any other pair
+compatible with it"*). For a computable `g` with `g b` evaluating to `b` for
+every `b`, the plain complexities of `b` and `g b` differ by at most additive
+constants, one in each direction, chosen before `b`.
+-/
+public theorem complexity_eq_behaviour_of_evaluatesTo (U : Map)
+    (hU : isOptimalConditional U) {g : BitString → BitString} (hg : Computable g)
+    (hev : ∀ b, EvaluatesTo (g b) b) :
+    ∃ c₁ c₂ : ℕ, ∀ b : BitString,
+      plainK U b ≤ plainK U (g b) + (c₁ : ENat) ∧
+      plainK U (g b) ≤ plainK U b + (c₂ : ENat) := by
+  obtain ⟨c₁, h₁⟩ := behaviour_le_of_evaluatesTo U hU
+  obtain ⟨c₂, h₂⟩ := plainKMapLe U hU g hg
+  exact ⟨c₁, c₂, fun b => ⟨h₁ _ b (hev b), h₂ b⟩⟩
+
+/--
 **The shape of the source's second §5.1 claim, at a fourth pair.** The source
 writes *"degenerate decompositions are themselves close to this bound"* about
 its own three pairs. The reading pair is none of them. What it shows is that the
@@ -423,18 +444,51 @@ simpler — so it sits within additive constants of the whole compatible class,
 not merely of one manufactured string. The source's own three pairs are in
 `AISafetyAtlas.Preference.Reasonable`, over an abstract measure.
 
-The degenerate pair itself carries no such upper bound here, and the reason is
-not that it is false: its planner is built from the behaviour, so bounding it
-needs the primitive recursiveness of the constant-program map, which the pinned
-Mathlib does not state.
+The source's degenerate pair carries the same two-sided bound, at each fixed
+reward: `degeneratePair_complexity_eq_behaviour`. Both are instances of
+`complexity_eq_behaviour_of_evaluatesTo`.
 -/
 public theorem readerPair_complexity_eq_behaviour (U : Map)
     (hU : isOptimalConditional U) :
     ∃ c₁ c₂ : ℕ, ∀ b : BitString,
       plainK U b ≤ plainK U (readerPair b) + (c₁ : ENat) ∧
-      plainK U (readerPair b) ≤ plainK U b + (c₂ : ENat) := by
-  obtain ⟨c₁, h₁⟩ := behaviour_le_of_evaluatesTo U hU
-  obtain ⟨c₂, h₂⟩ := plainKMapLe U hU readerPair computable_readerPair
-  exact ⟨c₁, c₂, fun b => ⟨h₁ _ b (evaluatesTo_readerPair b), h₂ b⟩⟩
+      plainK U (readerPair b) ≤ plainK U b + (c₂ : ENat) :=
+  complexity_eq_behaviour_of_evaluatesTo U hU computable_readerPair evaluatesTo_readerPair
+
+/-- `fun n => List.replicate n true` is primitive recursive: it is the constant
+map over `List.range`. -/
+private theorem primrec_replicate_true : Primrec fun n : ℕ => List.replicate n true := by
+  have h : (fun n : ℕ => List.replicate n true) = fun n => (List.range n).map fun _ => true := by
+    funext n
+    simp
+  rw [h]
+  exact Primrec.list_map Primrec.list_range (Primrec.const true).to₂
+
+/-- **The source's degenerate pair is computable in the behaviour**, at each
+fixed reward: the constant-program map is primitive recursive
+(Mathlib's primrec_const for Code.const), and so is the unary run length. -/
+public theorem computable_degeneratePair (r : BitString) : Computable (degeneratePair r) := by
+  unfold degeneratePair pairString
+  refine Primrec.to_comp ?_
+  exact Primrec₂.comp Primrec.list_append
+    (primrec_replicate_true.comp
+      (Primrec.encode.comp (Nat.Partrec.Code.primrec_const.comp Primrec.encode)))
+    (Primrec.const _)
+
+/--
+**The source's second §5.1 claim, at the source's own degenerate pair**
+(Armstrong and Mindermann, §5.1, `am-lower-bound`, PDF p. 5: *"degenerate
+decompositions are themselves close to this bound"*). For each fixed reward
+`r`, the pair `(p_π̇, r)` — `(p_π̇, 0)` at `r = []` — is within additive
+constants of the behaviour's plain complexity in both directions, so by
+`behaviour_le_of_evaluatesTo` it is within constants of every compatible pair.
+-/
+public theorem degeneratePair_complexity_eq_behaviour (U : Map)
+    (hU : isOptimalConditional U) (r : BitString) :
+    ∃ c₁ c₂ : ℕ, ∀ b : BitString,
+      plainK U b ≤ plainK U (degeneratePair r b) + (c₁ : ENat) ∧
+      plainK U (degeneratePair r b) ≤ plainK U b + (c₂ : ENat) :=
+  complexity_eq_behaviour_of_evaluatesTo U hU (computable_degeneratePair r)
+    (evaluatesTo_degeneratePair r)
 
 end AISafetyAtlas.Preference

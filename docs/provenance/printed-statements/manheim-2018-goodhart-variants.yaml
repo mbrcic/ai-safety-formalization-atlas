@@ -1,0 +1,242 @@
+source:
+  citation: >-
+    David Manheim and Scott Garrabrant, "Categorizing Variants of Goodhart's Law",
+    arXiv:1803.04585v4 [cs.AI], 24 Feb 2019 (title page dated February 26, 2019).
+    (Read from PDF p. 1: title block and arXiv margin stamp.)
+  file: manheim-garrabrant-arxiv-v4-2018-categorizing-variants-of-goodhart-s-law.pdf
+  sha256: 7691af8a05ed88262d0eaebebf082f5d028979445a0cd586acc29c861a7a012a
+  page_offset: 0
+  standing: |
+    Setup (p. 2), see mg-setup (row S17-R01): a system $S$ of states, a regulator
+    selecting a permissible region $A \subseteq S$, goal $G(s) \to \mathbb{R}$,
+    proxy $M(s) \to \mathbb{R}$, threshold selection $s \in A$ if $M(s) \ge c$.
+
+    Single dimension (p. 2, footnote 2), see mg-fn2-metric.
+
+    Selection pressure (p. 2, footnote 3): "This restriction of the available
+    states is one form of selection pressure. There are other forms of selection
+    pressure which can apply, but these are unnecessary for presenting the basic
+    dynamics. For example, we often find that the states are chosen
+    probabilistically and the distribution can be influenced to prefer certain
+    regions. One important such case is evolutionary selection, where the most
+    likely states are generated based on a set of states selected in a previous
+    generation."
+
+    Model insufficiency (p. 3): "Even though we assume the relationship is the
+    same within and without the observed range, it is still often more difficult
+    to detect the exact functional relationship based on a limited range."
+
+    No regulator intervention in §§1--2 (p. 4): "In the above cases of regressional
+    and extremal Goodhart, there are issues with selection pressure for even simple
+    systems when proxies are used. These two classes require selection pressure,
+    but do not involve an intervention on the part of the regulator."
+
+    Silent (searched pp. 1--4): no finiteness or countability of $S$, no
+    boundedness of $G$ or $M$, no probability space, no independence of $G$ and
+    the noise in (1), and no constraint on $\mu$ or $\sigma^2$ is stated. The
+    variables $x$, $y$, $a$ of (3) and $G'$, $s_i$ of (2) are not defined
+    anywhere on pp. 2--4.
+
+definitions:
+  - id: mg-goodhart-effect
+    label: Goodhart effect (Varieties of Goodhart-like Phenomena)
+    pdf_page: 1
+    book_page: 1
+    latex: |
+      As used in this paper, a Goodhart effect is when optimization causes a
+      collapse of the statistical relationship between a goal which the optimizer
+      intends and the proxy used for that goal.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: mg-fn2-metric
+    label: Footnote 2 (metric; single dimension)
+    pdf_page: 2
+    book_page: 2
+    latex: |
+      In general, a mapping from $s \to \mathbb{R}$ is a measaure, and if used for
+      decision-making, it is known as a metric. The current presentation assumes a
+      single-dimensional case. Use of multiple metrics and restrictions follows
+      similar dynamics, but for discussing Goodhart effects the single dimensional
+      case is ideal.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+statements:
+  - id: mg-setup
+    audit_row: S17-R01
+    locator: p. 2 setup
+    pdf_page: 2
+    book_page: 2
+    label: setup (unnumbered, before §1)
+    latex: |
+      To formalize the intuitive description, we consider a system $S$ with a set
+      of possible states $s \in S$. For the initial discussion we focus on a single
+      actor, the regulator, who influences the system by selecting a permissable
+      region of the state-space, $A \subseteq S$. For this discussion, we will use
+      \emph{Goal} to refer to the true goal of the regulator, which is a mapping
+      from states $G(s) \to \mathbb{R}$ for $s \in S$. Because regulators have
+      incomplete knowledge, they cannot act based on $G(s)$ and instead act only on
+      a proxy $M(s) \to \mathbb{R}$ for $s \in S$$^{2}$. For simplicity's sake, we
+      will consider actions where the regulator chooses some threshold $c$ and the
+      permissible states are defined such that $s \in A$ if $M(s) \ge c$. This
+      creates a selection pressure that allows the first two Goodhart-like effects
+      to occur$^{3}$.
+    uses: [mg-fn2-metric]
+    note: >-
+      "permissable" (first occurrence) is printed so. "$s \in A$ if $M(s) \ge c$"
+      is printed with "if", not "iff". Footnotes 2 and 3 are in
+      mg-fn2-metric and source.standing.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind) + Grok (blind) + Codex (anchored re-read); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: mg-regressional
+    audit_row: S17-R02
+    locator: §1 definition
+    pdf_page: 2
+    book_page: 2
+    label: Regressional Goodhart (§1)
+    latex: |
+      \textbf{Regressional Goodhart} - When selecting for a proxy measure, you
+      select not only for the true goal, but also for the difference between the
+      proxy and the goal. This is also known as ``Tails come apart.'' [5]
+    uses: [mg-setup]
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind) + Grok (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: mg-eq-1
+    audit_row: S17-R03
+    locator: eq. (1)
+    pdf_page: 2
+    book_page: 2
+    label: Simple Model, equation (1)
+    latex: |
+      \textbf{Simple Model}:
+      \[ M = G + normal(\mu, \sigma^2) \tag{1} \]
+    uses: [mg-setup, mg-regressional]
+    note: >-
+      Nothing is printed about $\mu$, $\sigma^2$, or the relation of the noise to
+      $G$ (see source.standing).
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind) + Grok (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: mg-regressional-consequence
+    audit_row: S17-R04
+    locator: §1 consequence (a)
+    pdf_page: 2
+    book_page: 2
+    label: paragraph after equation (1)
+    latex: |
+      Due to the noise, a point with a large M value will likely have a large G
+      value, but also a large noise value. Thus, when M is large, you can expect G
+      to be predictably smaller than M. Despite the lack of bias, for large values
+      of $c$ the values of G when $M > c$ is expected to be higher than otherwise.
+      While this is the simplest Goodhart effect, it is also the most fundamental:
+      it cannot be avoided. No matter what measure is chosen for optimization, an
+      inexact metric necessarily leads to a divergence between the goal and the
+      metric in the tail.
+    uses: [mg-setup, mg-eq-1]
+    note: >-
+      "$M > c$" is strict here, while the setup (p. 2) selects $M(s) \ge c$.
+      "Despite the lack of bias" is printed although (1) allows any mean $\mu$.
+      "the values of G ... is expected" is printed so.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind) + Grok (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: mg-extremal
+    audit_row: S17-R06
+    locator: §2 definition
+    pdf_page: 2-3
+    book_page: 2-3
+    label: Extremal Goodhart (§2)
+    latex: |
+      \textbf{Extremal Goodhart} - Worlds in which the proxy takes an extreme value
+      may be very different from the ordinary worlds in which the relationship
+      between the proxy and the goal was observed. A form of this occurs occurs in
+      statistics and machine learning as ``out of sample prediction.''
+    uses: [mg-setup]
+    note: >-
+      "occurs occurs" is printed (doubled word). The definition breaks across the
+      page: "the relationship" ends p. 2, "between the proxy" begins p. 3.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: mg-model-insufficiency
+    audit_row: S17-R07
+    locator: §2 Model Insufficiency
+    pdf_page: 3
+    book_page: 3
+    label: Extremal Goodhart - Model Insufficiency (§2)
+    latex: |
+      \textbf{Extremal Goodhart - Model Insufficiency} - The metric of interest is
+      based on a learned relationship between the goal and the metric which is
+      approximately accurate in the initial region. Selection pressure moves the
+      metric away from the region in which the relationship is most accurate so
+      that the relationship collapses.
+    context: |
+      Preceded by (p. 3): "Extremal Goodhart can occur in two ways. First, the
+      proxy may have been simplified based on either an insufficient number of
+      observations to uncover the true relationship, or because a simpler measure
+      was preferred. In either case, model insufficiency can lead to extremal
+      Goodhart. Secondly, the measure may be a correct estimator only in certain
+      regions of the space. In regions where the generating process differs, the
+      use of the measure leads to extremal Goodhart."
+    uses: [mg-setup, mg-extremal]
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind) + Grok (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: mg-eq-2
+    audit_row: S17-R08
+    locator: eq. (2)
+    pdf_page: 3
+    book_page: 3
+    label: Simple Model, equation (2)
+    latex: |
+      \textbf{Simple Model}:
+      \[ M = G(s_i) + G'(s_i) \tag{2} \]
+    context: |
+      Followed by (p. 3): "In the case of model insufficiency, the error is induced
+      by model simplification and inaccuracy, and not a fundamental issue with the
+      inability to build an sufficiently accurate estimator."
+    uses: [mg-setup, mg-model-insufficiency]
+    note: >-
+      $G'$ and $s_i$ are not defined on the page or elsewhere on pp. 2--4; $G'$ is
+      not stated to be a derivative.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: mg-change-in-regime
+    audit_row: S17-R09
+    locator: §2 Change in Regime
+    pdf_page: 3
+    book_page: 3
+    label: Extremal Goodhart - Change in Regime (§2)
+    latex: |
+      \textbf{Extremal Goodhart - Change in Regime} - The proxy M may be related to
+      G differently in different regions. Even if the correct relationship is
+      learned for the observed region, in the region where the proxy takes an
+      extreme value the relationship to the goal may be fundamentally different.
+      Selection on the basis of the proxy moves into such a region.
+    uses: [mg-setup, mg-extremal]
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind) + Grok (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: mg-eq-3
+    audit_row: S17-R10
+    locator: eq. (3)
+    pdf_page: 3
+    book_page: 3
+    label: Simple Model, equation (3)
+    latex: |
+      \textbf{Simple Model}:
+      \[ G = \begin{cases} M + x, & \text{where } M <= a \\
+                           M + y, & \text{where } M > a \end{cases} \tag{3} \]
+    uses: [mg-setup, mg-change-in-regime]
+    note: >-
+      "$<=$" is printed as two characters. $x$, $y$, $a$ are not defined; the
+      following paragraph (pp. 3--4) attributes regime change to measurement error
+      or to "a generating process that differs in defferent regions" (sic).
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+excerpts: []

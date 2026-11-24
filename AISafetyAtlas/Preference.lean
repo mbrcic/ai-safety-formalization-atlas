@@ -212,6 +212,12 @@ public noncomputable def greedyPlanner {S A : Type*} [Fintype A] [Nonempty A] :
     Planner (RewardFn S A) (Policy S A) :=
   fun R s => greedyAction R s
 
+/-- `greedyPlanner` takes `greedyAction` at every state. The unfolding a consumer
+outside this module needs, since the definition's body is not exposed. -/
+public theorem greedyPlanner_apply {S A : Type*} [Fintype A] [Nonempty A]
+    (R : RewardFn S A) (s : S) : greedyPlanner R s = greedyAction R s := by
+  unfold greedyPlanner; rfl
+
 /-- **The greedy planner recovers `π` from `R_π`** — the source's `p_g(R_π) = π`. -/
 public theorem greedy_rewardOf {S A : Type*} [Fintype A] [Nonempty A] [DecidableEq A]
     (π : Policy S A) :

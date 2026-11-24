@@ -82,4 +82,17 @@ public theorem matchClass_half_le_one : (1 : ℝ) / 2 ≤ 1 := by
   have h := matchClass_everitt_theorem_eleven true
   rwa [matchClass_worstCaseRegret, matchClass_worstCaseRegret] at h
 
+/-! ## Definition 10 on an arbitrary return function, at `matchClass` -/
+
+/-- The complemented-class regret is Definition 10's `regretOf`. -/
+public theorem matchClass_regret_eq_regretOf (μ π : Bool) :
+    matchClass.regret μ π = regretOf matchClass.returnValue μ π :=
+  ComplementedClass.regret_eq_regretOf matchClass μ π
+
+/-- **Definition 10's worst-case regret over the whole class is `1` here**, the
+same value `matchClass_worstCaseRegret` computes from the complement fields. -/
+public theorem matchClass_worstCaseRegretOf (π : Bool) :
+    worstCaseRegretOf matchClass.returnValue Set.univ π = 1 := by
+  rw [← ComplementedClass.worstCaseRegret_eq_worstCaseRegretOf, matchClass_worstCaseRegret]
+
 end AISafetyAtlas.Examples.Wireheading.Corruption

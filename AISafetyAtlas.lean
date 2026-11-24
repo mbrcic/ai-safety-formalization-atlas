@@ -27,11 +27,14 @@ public import AISafetyAtlas.Examples.Control.RegulationCheck
 public import AISafetyAtlas.Decision.MDP
 public import AISafetyAtlas.Decision.Expect
 public import AISafetyAtlas.Decision.BoundedValue
+public import AISafetyAtlas.Decision.EpisodicValue
 public import AISafetyAtlas.Decision.DiscountedValue
 public import AISafetyAtlas.Decision.Occupancy
+public import AISafetyAtlas.Decision.OccupancyHistory
 public import AISafetyAtlas.Examples.Wireheading.DelusionBox
 public import AISafetyAtlas.Examples.Wireheading.SelfMod
 public import AISafetyAtlas.Examples.Wireheading.ProgramPrior
+public import AISafetyAtlas.Examples.Wireheading.ProgramPriorTies
 public import AISafetyAtlas.Examples.Wireheading.ValueBounds
 public import AISafetyAtlas.Examples.Wireheading.Mixture
 public import AISafetyAtlas.Examples.Wireheading.CRMDP
@@ -45,6 +48,7 @@ public import AISafetyAtlas.Examples.Decision.MDP
 public import AISafetyAtlas.Examples.Decision.DiscountedValue
 public import AISafetyAtlas.Examples.Decision.Expect
 public import AISafetyAtlas.Examples.Decision.BoundedValue
+public import AISafetyAtlas.Examples.Decision.EpisodicValue
 public import AISafetyAtlas.Examples.Decision.Occupancy
 public import AISafetyAtlas.Explainability
 public import AISafetyAtlas.Fairness.RiskAssignment
@@ -72,6 +76,7 @@ public import AISafetyAtlas.Knowledge
 public import AISafetyAtlas.Inference
 public import AISafetyAtlas.Causal.Model
 public import AISafetyAtlas.Causal.BayesianNetwork
+public import AISafetyAtlas.Causal.DiscreteMarginal
 public import AISafetyAtlas.Causal.MarginClass
 public import AISafetyAtlas.Causal.Decision
 public import AISafetyAtlas.Causal.DecisionNetwork
@@ -111,8 +116,10 @@ public import AISafetyAtlas.InformationTheory.PrefixCode
 public import AISafetyAtlas.Examples.InformationTheory.PrefixCode
 public import AISafetyAtlas.InformationTheory.ChannelCapacity
 public import AISafetyAtlas.InformationTheory.DataProcessing
+public import AISafetyAtlas.InformationTheory.CountableDataProcessing
 public import AISafetyAtlas.InformationTheory.Determinism
 public import AISafetyAtlas.InformationTheory.Fano
+public import AISafetyAtlas.InformationTheory.MutualInfoKL
 public import AISafetyAtlas.Knowledge.Embedded
 public import AISafetyAtlas.Knowledge.Embedded.Composition
 public import AISafetyAtlas.Knowledge.Embedded.Finite
@@ -133,25 +140,43 @@ public import AISafetyAtlas.Oversight.VarietyBound
 public import AISafetyAtlas.Oversight.VarietyCheck
 public import AISafetyAtlas.Preference
 public import AISafetyAtlas.Preference.Complexity
+public import AISafetyAtlas.Preference.DescribedComplexity
+public import AISafetyAtlas.Preference.RationalComplexity
 public import AISafetyAtlas.Preference.Reasonable
 public import AISafetyAtlas.Preference.SourceComplexity
+public import AISafetyAtlas.Preference.TimedComplexity
 public import AISafetyAtlas.Preference.Override
+public import AISafetyAtlas.Preference.OverrideOnePlanner
+public import AISafetyAtlas.Preference.AnyGreedy
+public import AISafetyAtlas.Preference.AnyGreedyTimed
+public import AISafetyAtlas.Preference.AnyGreedyRational
 public import AISafetyAtlas.Preference.Regret
 public import AISafetyAtlas.Preference.Knowability
 public import AISafetyAtlas.Preference.Trajectory
+public import AISafetyAtlas.Preference.Discounted
+public import AISafetyAtlas.Preference.Episodic
 public import AISafetyAtlas.Examples.Preference.Trajectory
 public import AISafetyAtlas.Examples.Preference.Override
+public import AISafetyAtlas.Examples.Preference.OverrideOnePlanner
+public import AISafetyAtlas.Examples.Preference.AnyGreedy
 public import AISafetyAtlas.Examples.Preference.Regret
+public import AISafetyAtlas.Examples.Preference.Discounted
+public import AISafetyAtlas.Examples.Preference.Episodic
 public import AISafetyAtlas.Examples.Preference.SourceComplexity
+public import AISafetyAtlas.Examples.Preference.TimedComplexity
 public import AISafetyAtlas.Examples.Preference.Complexity
+public import AISafetyAtlas.Examples.Preference.DescribedComplexity
+public import AISafetyAtlas.Examples.Preference.RationalComplexity
 public import AISafetyAtlas.SelfAwareness
 public import AISafetyAtlas.Sovereignty.Arena
 public import AISafetyAtlas.Sovereignty.Separations
 public import AISafetyAtlas.Sovereignty.ConcurrentGameFrame
+public import AISafetyAtlas.Sovereignty.AlphaVersusActual
 public import AISafetyAtlas.Sovereignty.Boundary
 public import AISafetyAtlas.Sovereignty.Playability
 public import AISafetyAtlas.Sovereignty.PlayableConverse
 public import AISafetyAtlas.Sovereignty.TrulyPlayable
+public import AISafetyAtlas.Sovereignty.TrulyPlayableRepresentation
 public import AISafetyAtlas.Sovereignty.Retargetable
 public import AISafetyAtlas.Sovereignty.EUDetermined
 public import AISafetyAtlas.Sovereignty.Independence
@@ -198,11 +223,13 @@ public import AISafetyAtlas.Sovereignty.CapabilityAssessment
 public import AISafetyAtlas.Examples.Sovereignty.Arena
 public import AISafetyAtlas.Examples.Sovereignty.Separations
 public import AISafetyAtlas.Examples.Sovereignty.ConcurrentGameFrame
+public import AISafetyAtlas.Examples.Sovereignty.AlphaVersusActual
 public import AISafetyAtlas.Examples.Sovereignty.Boundary
 public import AISafetyAtlas.Examples.Sovereignty.Domination
 public import AISafetyAtlas.Examples.Sovereignty.Playability
 public import AISafetyAtlas.Examples.Sovereignty.PlayableConverse
 public import AISafetyAtlas.Examples.Sovereignty.TrulyPlayable
+public import AISafetyAtlas.Examples.Sovereignty.TrulyPlayableRepresentation
 public import AISafetyAtlas.Examples.Sovereignty.Retargetable
 public import AISafetyAtlas.Examples.Sovereignty.EUDetermined
 public import AISafetyAtlas.Examples.Sovereignty.Independence
@@ -323,6 +350,7 @@ the result is not proved here.
 | `AISafetyAtlas.Decision.Expect` | The expectation of a real function under a probability mass function, written once. The corrupt-reward cluster and the discounted value layer arrived at it independently -- a `tsum` there because a corrupt-reward MDP has no finiteness to spend, a `Finset.sum` here because the contraction argument fixes a finite state space -- and `expect_eq_sum` is the bridge that makes them the same function. Carries summability for a bounded integrand, the point-mass value, additivity and the constant |
 | `AISafetyAtlas.Decision.DiscountedValue` | The **discounted** value layer above that carrier, with the reward `r : State → Action → ℝ` and the discount `γ : ℝ≥0` as parameters rather than fields: the two Bellman operators, each a `ContractingWith γ` map on `State → ℝ`, `vPi` and `vStar` as `ContractingWith.fixedPoint`, the Bellman equations and their uniqueness as theorems, and value iteration. The two *fixed points* are `Fintype` on `State` where the carrier is not; the three operator definitions are not, since none of them ever used it. **A foundation and not a join**: Turner and Tadepalli's D.10 is AVERAGE-optimal, D.8 to D.10 are stated nowhere in this repository, and the identification of `vPi` with a discounted return along `MDP.run` is owed
 | `AISafetyAtlas.Decision.BoundedValue` | The same policy Bellman operator under a second completeness argument: `vPiBdd` values a stationary deterministic policy on an arbitrary **`Nonempty`** state type, in exchange for a uniform bound on the reward, with the Bellman equation and uniqueness **among bounded solutions**. `vPiBdd_eq_vPi` is the join — on a finite nonempty state type the two value functions are one function, which is what makes this a widening rather than a second development. No bounded counterpart of `vStar`: the optimality operator maximises over actions with `Finset.sup'`. Registry row `LAND-BELLMAN-BDD-001`
+| `AISafetyAtlas.Decision.EpisodicValue` | Finite-horizon undiscounted value `vPiEpisodic` of a stationary deterministic policy on any state type, by backward recursion, with its bound and constant-reward lemmas |
 | `AISafetyAtlas.Combinatorics.Cascade` | The cascade representation of a natural number -- the positional system whose digits are binomial coefficients -- with its greedy digit, that digit's uniqueness, and the two Kruskal-Katona shifts, which move only the lower index and are therefore smaller than the multicomplex shift the same representation carries for Macaulay's theorem. Domain-neutral. The greedy-step arithmetic is adapted from `anthropics/fermats-last-theorem` under Apache-2.0; see the file header |
 | `AISafetyAtlas.Combinatorics.CascadeFamily` | The colex rank of a finite set -- the combinatorial number system -- as a counting principle: it bounds by the ground set, respects colex, and so ranks each layer bijectively onto an interval, which cuts a colexicographic initial segment of any requested size. With that, `cascadeShadow_le_card_shadow'` is **Kruskal-Katona in cascade form over an arbitrary ground type**, the numeric statement Mathlib's own file records as an open task. Domain-neutral |
 | `AISafetyAtlas.Combinatorics.KruskalKatona` | The Lovasz form of Kruskal-Katona with the ground type left arbitrary, which Mathlib's own file records as an open task: a sized downward-closed family large at one order is forced large at every lower one. Domain-neutral, and with no consumer in this repository: it is here as the general form of a bound the library would otherwise restate locally |
@@ -390,6 +418,7 @@ which is a separate Wolpert-specific development and is not migrated;
 |---|---|
 | `AISafetyAtlas.Causal.Model` | Finite categorical CBN construction over an ordered field: RE24 local maps and Pearl-style products, not Pearl Definition 1.3.1 |
 | `AISafetyAtlas.Causal.BayesianNetwork` | Pearl Definition 1.3.1 as a condition on a family of interventional distributions, the truncated product derived from it, and the kernel as an instance |
+| `AISafetyAtlas.Causal.DiscreteMarginal` | Pearl's Properties 1 and 2 (equations (1.38), (1.39)) at discrete variables with any number of values: real-valued marginals as unconditional sums, each member a probability distribution |
 | `AISafetyAtlas.Causal.MarginClass` | Conditions (M1)–(M6): categorical A2 composite, not a RE24 or Uhler definition |
 | `AISafetyAtlas.Causal.Decision` | Generic finite unmediated policies, expected utility, and regret; not a full CID or RE24 Theorems 1–2 |
 | `AISafetyAtlas.Causal.DecisionNetwork` | RE24 Definition 4 with the decision and the utility as **vertices**: expected utility, optimality and regret on the diagram, with Assumption 1 a hypothesis rather than a shape. `Causal.Decision` is its unmediated projection, and `DecisionNetwork.expectedUtility_eq_value` proves the two agree under Assumption 1 |
@@ -423,6 +452,8 @@ which is a separate Wolpert-specific development and is not migrated;
 | `AISafetyAtlas.InformationTheory.PrefixCode` | A self-delimiting three-symbol code, the composition lemmas that build compound encoders from atomic ones, and print's sparse monomial syntax spelled out with them. Domain-neutral source coding; `Causal.EffectiveGenericity` is its consumer, for MAIS-O24's construction-time clause |
 | `AISafetyAtlas.InformationTheory.Fano` | Fano's inequality for an arbitrary estimate on any probability space |
 | `AISafetyAtlas.InformationTheory.DataProcessing` | Markov chains, the mutual-information chain rule, data processing and its equality case |
+| `AISafetyAtlas.InformationTheory.CountableDataProcessing` | Data processing in entropy form with a countable source of finite entropy (`condEntropy_le_condEntropy_of_isMarkovChain_of_summable`: Cover and Thomas's `H(X|X̂) ≥ H(X|Y)` with no finite range anywhere), on a countable Gibbs bound (`tsum_mul_negMulLog_cond_le_entropy`) and the countable form of a function of a variable having at most its entropy (`entropy_comp_le_of_summable`); both sides are genuine sums, not the junk value of a divergent series |
+| `AISafetyAtlas.InformationTheory.MutualInfoKL` | Mutual information in [0, ∞] as a KL divergence: chain rule, data processing, Markov iff I(X;Z\|Y) = 0, agreement with PFR's `I` on finite ranges |
 | `AISafetyAtlas.InformationTheory.ChannelCapacity` | Capacity of a discrete noiseless channel, with repeated use and parallel composition as lemmas. `Control` is one consumer, not the owner |
 | `AISafetyAtlas.InformationTheory.Determinism` | One lemma: a function of a variable adds no uncertainty to it. Three consumers in two domains |
 
@@ -448,10 +479,15 @@ Import the specialization needed; the parent does not supply it.
 | `AISafetyAtlas.Knowledge.Access` | Bridge: black-box, score and white-box access as three points of the informativeness order -- the *how much* axis |
 | `AISafetyAtlas.Preference` | Planner/reward unidentifiability, BY-011 (kernel) |
 | `AISafetyAtlas.Preference.Complexity` | Simplicity does not break the planner/reward tie |
+| `AISafetyAtlas.Preference.DescribedComplexity` | Planners, rewards and policies coded by programs on countable state and action types; description complexity of a policy is at most that of any compatible pair |
+| `AISafetyAtlas.Preference.RationalComplexity` | Armstrong and Mindermann §5.1's claims (1) and (2) with exact rational reward codes and with a hybrid coding (planner correct on every rational table and at the pair's own reward): a greedy planner `greedyOn` with an explicit tie order, so programs can describe it, and the three degenerate pairs within one constant of the policy's complexity and of every compatible pair (`degenerate_near_minimal_exact`, `degenerate_near_minimal_hybrid`) |
 | `AISafetyAtlas.Preference.Reasonable` | Basic operations and Proposition 7 |
 | `AISafetyAtlas.Preference.SourceComplexity` | Propositions 7 and 8 in the source's own parameterization |
+| `AISafetyAtlas.Preference.TimedComplexity` | Armstrong and Mindermann's appendix Proposition 10 at the time-bounded measures `Kt` and `KT`, over an abstract timed language whose fields are only the length and running-time overheads of the transforms print's proof sketch uses (application, a zero-reward algorithm, a hard-wired indifferent planner, and the wrappers for planners that take reward code): the indifferent pair amongst the lowest (`TimedLanguage.proposition_ten_indifferent`), and the greedy and anti-greedy code-planner pairs (`CodePlanning.proposition_ten_greedy`, `CodePlanning.proposition_ten_antigreedy`) |
 | `AISafetyAtlas.Preference.Override` | Overriding human reward functions |
 | `AISafetyAtlas.Preference.Regret` | Half-maximal regret is not ruled out by observation |
+| `AISafetyAtlas.Preference.Discounted` | Overriding on a discounted MDP: the doubled state space, mixed policy and twisted reward of Appendix B, the override instance, equation (2), and the half-maximal regret bound on any nonempty state type (`vPiBdd`) |
+| `AISafetyAtlas.Preference.Episodic` | The half-maximal regret bound at the episodic (finite-horizon, undiscounted) value |
 | `AISafetyAtlas.Preference.Knowability` | Reward unidentifiability as a `Knowledge.Knowable` obstruction |
 | `AISafetyAtlas.Causal.Knowability` | Behavioural identifiability as a `Knowledge.Knowable` factorization |
 | `AISafetyAtlas.Sovereignty.Boundary` | Sovereignty as immunity inside a boundary: the boundary is a view of the outcome rather than a set of them, and a coalition is sovereign when nothing outside it moves that view. Proves sovereignty is exclusive power over the boundary -- the holder forces its own view, and no coalition has power at any target the boundary expresses -- and adds a curtailment layer where an outsider shrinks the available actions, which is strictly stronger than any outcome-level reading. Neighbours named in the module: republican non-domination, rights as effectivity functions, and opportunity-set freedom |
@@ -459,6 +495,7 @@ Import the specialization needed; the parent does not supply it.
 | `AISafetyAtlas.Sovereignty.Playability` | Checks coalition logic's playability conditions against `effectivity`: liveness, safety, N-maximality, outcome monotonicity, superadditivity, regularity, and a principal element at the empty coalition, which is `Set.range outcome`. Three conditions were already theorems under other names and regularity is Gaerdenfors' consistency condition reused, so what is new is liveness, N-maximality and the principal element. The correspondence is checked against Pauly 2002 page 152, read from the rendered page. This is the easy direction of his Theorem 3.2; the converse, its four-part construction and its refutation are in `PlayableConverse`. Also carries his **Theorem 3.3**: an effectivity function is individualistic -- everything the grand coalition forces, some individual already forces -- exactly when some player forces every reachable outcome. The whole is equal to the sum of its parts only when it equals one particular part |
 | `AISafetyAtlas.Sovereignty.PlayableConverse` | Pauly's Theorem 3.2 from the other side: playability as a predicate on an abstract effectivity function, his Lemma 3.1, superadditivity over a finite family of disjoint coalitions, and his whole page-153 construction -- strategies as `(f_i, t_i, h_i)`, the intersection `G(f)`, the dictator picked by summing indices, and the game. Both inclusions of `E_G = E` are proved with the side conditions print's argument needs: the first wants a non-empty coalition, the second one that is not everybody, so the equality holds off the two ends of the coalition lattice. Carries the **refutation of the converse**, which is Goranko, Jamroga and Turrini's (JAAMAS 26: 288-314, 2013) and not this atlas's -- the cofinite filter on the natural numbers is a playable effectivity function on one player that is no game form's, because `effectivity G` at the empty coalition always has a least element and a filter on an infinite set need not -- so the missing ends are false rather than unproved. Names the step of the printed proof that fails, and records that N-maximality is consumed by nothing |
 | `AISafetyAtlas.Sovereignty.TrulyPlayable` | Goranko, Jamroga and Turrini's repair of Pauly's Theorem 3.2 (JAAMAS 26: 288-314, 2013): the nonmonotonic core of a coalition's choices, its completeness, and truly playable as playable plus a complete core at the empty coalition. Their Proposition 1 -- `E(∅)` is a filter and its core is empty or a singleton -- with the load-bearing half stated on its own, that a **minimal** element of `E(∅)` is automatically a **least** one, which holds because `∅` is the only coalition superadditivity can apply against itself. Their Proposition 5 (1) iff (2) iff (3), so true playability, a non-empty core and a principal `E(∅)` all coincide. Their Proposition 2, that a game form's core at `∅` is the singleton of its reachable set. The separating fact in their own terms: the cofinite filter's core at `∅` is empty because no cofinite set is minimal, which re-proves `PlayableConverse`'s refutation by print's route. **Wider than the only other formalization**: `kaiobendrauf/cl-lean` reaches true playability from a finite outcome type, and the argument needs only a minimal element of the family, so the finite-type version is two corollaries down |
+| `AISafetyAtlas.Sovereignty.TrulyPlayableRepresentation` | Pauly's Theorem 3.2 at a finite outcome set, at every coalition including the empty and the grand one: every playable effectivity function over a finite outcome type is the effectivity function of a game form (`Playable.exists_gameForm_of_finite`, with its converse `exists_gameForm_iff_playable_of_finite`), and Goranko, Jamroga and Turrini's corrected theorem at any outcome type, truly playable iff the effectivity function of a game form (`TrulyPlayable.exists_gameForm`, `exists_gameForm_iff_trulyPlayable`). Proved by restricting to the core of the empty coalition's family and transporting a representing game back along the inclusion |
 | `AISafetyAtlas.Sovereignty.Retargetable` | Turner and Tadepalli 2022 section 3, whole: orbits under a group action on a parameter set, the `MostOrbit` counting relation, simple and multiple retargetability, and the theorem that an `n`-retargetable decision-maker favours `B` at `n` times as many orbit parameters as it favours `A`. Finite combinatorics -- no Markov decision process, no measure, no reward. Stated for an arbitrary group where print takes the symmetric group. **Not a result about power**: `A` and `B` are labels, and print's own footnote says no further structure is demanded |
 | `AISafetyAtlas.Sovereignty.EUDetermined` | Turner and Tadepalli 2022, appendix B.2 and theorem A.13: the chain from the section 3 counting theorem to expected-utility-determined decision-makers -- lemma B.7, definition B.8, lemma B.9, lemma B.10, definition A.12 and lemma B.11. Also definition A.7 with print's involution clause, which `Retargetable` drops and lemma B.7 needs. **Still not a result about power**: `A`, `B` and `C` are finite sets of vectors, and the paper's power reading is its appendix D, which instantiates them as recurrent state distributions in a Markov decision process |
 | `AISafetyAtlas.Sovereignty.Separations` | α-forcing countermodels: superadditivity holds under domination, wider targets are free, and the three readings of delegated authority are three obligations |
@@ -466,6 +503,7 @@ Import the specialization needed; the parent does not supply it.
 | `AISafetyAtlas.Examples.Sovereignty.Playability` | The principal element at both extremes: `vetoGame` settles nothing so the empty coalition forces only the whole space, `pinnedForm` settles everything so it already forces the outcome. Playability holds either way, which is why it is not a strength claim |
 | `AISafetyAtlas.Examples.Sovereignty.PlayableConverse` | Both sides of the separation on concrete objects: the veto game's effectivity function is playable, Lemma 3.1 runs on it, and rebuilding the game from it through `paulyGame` returns the same power at each singleton coalition -- while the cofinite effectivity function is playable and no game form's. Also why the witness needs only one player: on one player there is no coalition meeting both side conditions |
 | `AISafetyAtlas.Examples.Sovereignty.TrulyPlayable` | Both sides of the separation: the veto game is truly playable and its core at the empty coalition is the singleton of its reachable set, while `cofiniteEff` is playable, is not truly playable, and has an empty core. The three routes to true playability -- minimal element, finite family, finite outcome type -- run on the same game, and the cofinite filter shows the hypothesis is not free |
+| `AISafetyAtlas.Examples.Sovereignty.TrulyPlayableRepresentation` | The point effectivity function `pointEff`: playable and truly playable, not one of Peleg's effectivity functions, represented by a game on `Bool` whose empty coalition forces one outcome, and on `ℕ` under true playability; Pauly's own game fails at its grand coalition (`effectivity_paulyGame_pointEff_ne`) |
 | `AISafetyAtlas.Examples.Sovereignty.Retargetable` | A two-parameter decision-maker the swap retargets, so the retargetability hypothesis is inhabited and the counting theorem says something about an actual object |
 | `AISafetyAtlas.Examples.Sovereignty.EUDetermined` | A Boltzmann-shaped selection weight on two coordinates that satisfies every hypothesis of theorem A.13, with a parameter at which the losing option set is strictly preferred, so the counting conclusion is not about an empty set |
 | `AISafetyAtlas.Examples.Sovereignty.Arena` | A two-choice arena separating dictation from sovereignty: one choice settles the outcome and the other surrenders it, so the party can set what the boundary shows without holding it. The witness that `Arena.Sovereign.dictates` is strict |

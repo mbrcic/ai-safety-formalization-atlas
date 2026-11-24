@@ -77,9 +77,86 @@ public structure OverrideModel (S A Act : Type*) where
   /-- That action does make the human optimal. -/
   rationalise_optimal : ∀ R, value R (resulting (rationalise R)) = optValue R
 
+/-!
+### Equation (1)'s optimum, bounding agent-reachable policies only
+
+`OverrideModel.le_optValue` bounds the value of **every** policy by the optimum.
+Equation (1) asks less: its maximum ranges over the agent's actions, so only the
+policies an agent action results in need to lie below it. A human policy no
+agent action produces may be worth more, as in print's setting, where the
+agent can only leave the human alone or force a rationalising policy.
+`IsAgentOptimum` is that weaker condition on the raw data of an override model;
+every `OverrideModel` satisfies it (`OverrideModel.isAgentOptimum`).
+-/
+
+/-- **Equation (1)'s optimum** (Armstrong and Mindermann, appendix B,
+`amapp-eq1-regret`, PDF p. 3: *"`Reg(M*, a, Ṙ) = max_{b ∈ 𝒜^a}
+[V^{π̇'|b}_Ṙ − V^{π̇'|a}_Ṙ]`"*): `opt R` bounds the value of the policy every
+agent action results in, and the action `rationalise R` attains it. No bound on
+policies outside the range of `resulting` is asked for. -/
+@[expose] public def IsAgentOptimum {S A Act : Type*} (resulting : Act → Policy S A)
+    (value : RewardFn S A → Policy S A → ℝ) (opt : RewardFn S A → ℝ)
+    (rationalise : RewardFn S A → Act) : Prop :=
+  (∀ R a, value R (resulting a) ≤ opt R) ∧ ∀ R, value R (resulting (rationalise R)) = opt R
+
+namespace IsAgentOptimum
+
+variable {S A Act : Type*} {resulting : Act → Policy S A}
+  {value : RewardFn S A → Policy S A → ℝ} {opt : RewardFn S A → ℝ}
+  {rationalise : RewardFn S A → Act}
+
+/-- **Equation (1)'s maximum is the optimum**: at an agent optimum, `opt R` is
+the greatest value over the agent's actions, so the regret
+`opt R − value R (resulting a)` is print's `max_{b} V^{b} − V^{a}`. -/
+public theorem isGreatest (h : IsAgentOptimum resulting value opt rationalise)
+    (R : RewardFn S A) :
+    IsGreatest {v : ℝ | ∃ a : Act, v = value R (resulting a)} (opt R) :=
+  ⟨⟨rationalise R, (h.2 R).symm⟩, by rintro v ⟨a, rfl⟩; exact h.1 R a⟩
+
+/-- The regret against an agent optimum is never negative. -/
+public theorem sub_value_nonneg (h : IsAgentOptimum resulting value opt rationalise)
+    (R : RewardFn S A) (a : Act) : 0 ≤ opt R - value R (resulting a) :=
+  sub_nonneg.mpr (h.1 R a)
+
+end IsAgentOptimum
+
+/-- **Definition 11, relativised, at an agent optimum's raw data**: the pair
+explains the policy action `a` results in, and the regret `opt R − value R
+(resulting a)` is at least `θ`. `OverrideModel.OverridesFor` is this at an
+override model's own fields (`OverrideModel.overridesFor_iff_overridesForAt`);
+here no bound on policies outside the range of `resulting` is presupposed. -/
+@[expose] public def OverridesForAt {S A Act : Type*} (resulting : Act → Policy S A)
+    (value : RewardFn S A → Policy S A → ℝ) (opt : RewardFn S A → ℝ)
+    (p : Planner (RewardFn S A) (Policy S A)) (R : RewardFn S A) (θ : ℝ) (a : Act) : Prop :=
+  Explains p R (resulting a) ∧ θ ≤ opt R - value R (resulting a)
+
+/-- **Definition 11 at a positive threshold, at raw data** (appendix B.1,
+`amapp-not-change-in-pr`): `OverridesForAt` with `0 < θ`. -/
+@[expose] public def StrictlyOverridesForAt {S A Act : Type*} (resulting : Act → Policy S A)
+    (value : RewardFn S A → Policy S A → ℝ) (opt : RewardFn S A → ℝ)
+    (p : Planner (RewardFn S A) (Policy S A)) (R : RewardFn S A) (θ : ℝ) (a : Act) : Prop :=
+  0 < θ ∧ OverridesForAt resulting value opt p R θ a
+
+/-- **After a strict override the behaviour does not maximise the reward**, at
+raw data: the pair still explains the resulting policy, and its value is strictly
+below the optimum. -/
+public theorem StrictlyOverridesForAt.value_lt {S A Act : Type*}
+    {resulting : Act → Policy S A} {value : RewardFn S A → Policy S A → ℝ}
+    {opt : RewardFn S A → ℝ} {p : Planner (RewardFn S A) (Policy S A)} {R : RewardFn S A}
+    {θ : ℝ} {a : Act} (h : StrictlyOverridesForAt resulting value opt p R θ a) :
+    Explains p R (resulting a) ∧ value R (resulting a) < opt R := by
+  obtain ⟨hθ, hexp, hreg⟩ := h
+  exact ⟨hexp, by linarith⟩
+
 namespace OverrideModel
 
 variable {S A Act : Type*} (M : OverrideModel S A Act)
+
+/-- Every override model's optimum is an agent optimum: `le_optValue` is the
+stronger, all-policy form of `IsAgentOptimum`'s bound. -/
+public theorem isAgentOptimum :
+    IsAgentOptimum M.resulting M.value M.optValue M.rationalise :=
+  ⟨fun R _ => M.le_optValue R _, M.rationalise_optimal⟩
 
 /-- Regret of the human policy resulting from an agent action, under a reward. -/
 @[expose] public def regret (R : RewardFn S A) (a : Act) : ℝ :=
@@ -89,7 +166,7 @@ variable {S A Act : Type*} (M : OverrideModel S A Act)
 against. Sanity condition on the definition, and what lets a regret bound be
 read as a shortfall rather than a signed quantity. -/
 public theorem regret_nonneg (R : RewardFn S A) (a : Act) : 0 ≤ M.regret R a :=
-  sub_nonneg.mpr (M.le_optValue R _)
+  M.isAgentOptimum.sub_value_nonneg R a
 
 /--
 **Definition 11.** The agent's action `a` *overrides* the reward `R` at
@@ -149,11 +226,8 @@ unexplained optimum.  In this model that maximum exists and equals `optValue`,
 since `rationalise R` attains it.
 -/
 public theorem optValue_isGreatest (R : RewardFn S A) :
-    IsGreatest {v : ℝ | ∃ a : Act, v = M.value R (M.resulting a)} (M.optValue R) := by
-  constructor
-  · exact ⟨M.rationalise R, (M.rationalise_optimal R).symm⟩
-  · rintro v ⟨a, rfl⟩
-    exact M.le_optValue R _
+    IsGreatest {v : ℝ | ∃ a : Act, v = M.value R (M.resulting a)} (M.optValue R) :=
+  M.isAgentOptimum.isGreatest R
 
 /--
 **Definition 11, relativised.**  The source's definition is given *relative to a
@@ -183,6 +257,59 @@ public theorem exists_overridesFor (R : RewardFn S A) (θ : ℝ) (a : Act)
     (h : θ ≤ M.regret R a) :
     ∃ p : Planner (RewardFn S A) (Policy S A), M.OverridesFor p R θ a :=
   ⟨fun _ => M.resulting a, rfl, h⟩
+
+/--
+**Definition 11 at a positive threshold** (Armstrong and Mindermann, appendix
+B.1, `amapp-not-change-in-pr`, PDF p. 3: *"`(p, R)` outputs the observed human
+policy, even after overriding, but its format notes that the new behaviour is not
+one compatible with maximising that reward function"*). `OverridesFor` admits
+`θ = 0`, where the resulting policy may be optimal; requiring `0 < θ` makes the
+override record a behaviour that does not maximise `R`
+(`StrictlyOverridesFor.value_lt_optValue`). `OverridesFor` is unchanged.
+-/
+@[expose] public def StrictlyOverridesFor
+    (p : Planner (RewardFn S A) (Policy S A)) (R : RewardFn S A)
+    (θ : ℝ) (a : Act) : Prop :=
+  0 < θ ∧ M.OverridesFor p R θ a
+
+/-- A strict override is an override. -/
+public theorem overridesFor_of_strictlyOverridesFor
+    {p : Planner (RewardFn S A) (Policy S A)} {R : RewardFn S A}
+    {θ : ℝ} {a : Act} (h : M.StrictlyOverridesFor p R θ a) : M.OverridesFor p R θ a := h.2
+
+/-- **The behaviour after a strict override does not maximise the reward**: the
+resulting policy's value falls strictly short of the optimum, while the pair
+still explains it. -/
+public theorem StrictlyOverridesFor.value_lt_optValue
+    {p : Planner (RewardFn S A) (Policy S A)} {R : RewardFn S A}
+    {θ : ℝ} {a : Act} (h : M.StrictlyOverridesFor p R θ a) :
+    Explains p R (M.resulting a) ∧ M.value R (M.resulting a) < M.optValue R := by
+  obtain ⟨hθ, hexp, hreg⟩ := h
+  refine ⟨hexp, ?_⟩
+  have : 0 < M.regret R a := lt_of_lt_of_le hθ hreg
+  unfold regret at this
+  linarith
+
+/-- `OverridesFor` is `OverridesForAt` at the model's own fields. -/
+public theorem overridesFor_iff_overridesForAt
+    (p : Planner (RewardFn S A) (Policy S A)) (R : RewardFn S A) (θ : ℝ) (a : Act) :
+    M.OverridesFor p R θ a ↔ OverridesForAt M.resulting M.value M.optValue p R θ a :=
+  Iff.rfl
+
+/-- `StrictlyOverridesFor` is `StrictlyOverridesForAt` at the model's own
+fields. -/
+public theorem strictlyOverridesFor_iff_strictlyOverridesForAt
+    (p : Planner (RewardFn S A) (Policy S A)) (R : RewardFn S A) (θ : ℝ) (a : Act) :
+    M.StrictlyOverridesFor p R θ a ↔
+      StrictlyOverridesForAt M.resulting M.value M.optValue p R θ a :=
+  Iff.rfl
+
+/-- Every action with positive regret is a strict override at that regret,
+explained by some compatible pair. -/
+public theorem exists_strictlyOverridesFor (R : RewardFn S A) (a : Act)
+    (h : M.value R (M.resulting a) < M.optValue R) :
+    ∃ p : Planner (RewardFn S A) (Policy S A), M.StrictlyOverridesFor p R (M.regret R a) a :=
+  ⟨fun _ => M.resulting a, sub_pos.mpr h, rfl, le_refl _⟩
 
 /--
 **Equation (2).**  The value of the action that rationalises the human for

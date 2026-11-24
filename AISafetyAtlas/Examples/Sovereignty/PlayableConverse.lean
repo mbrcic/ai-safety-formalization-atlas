@@ -182,4 +182,18 @@ public theorem vetoGame_individualisticEff_iff :
     IndividualisticEff (effectivity vetoGame) ↔ Individualistic vetoGame :=
   individualisticEff_effectivity_iff
 
+/-- **Liveness and `N`-maximality give safety at both ends**, at the veto game:
+its liveness and maximality fields are the two hypotheses. -/
+example : (Set.univ : Set Bool) ∈ effectivity vetoGame ∅ ∧
+    (Set.univ : Set Bool) ∈ effectivity vetoGame Set.univ :=
+  AISafetyAtlas.Sovereignty.univ_mem_of_live_of_maximal vetoGame_playable.live
+    vetoGame_playable.maximal
+
+/-- **The independence models are not playable**: the first conjunct's model
+breaks liveness, so it is no `Playable` effectivity function, though it keeps the
+other four fields. -/
+example : ∃ E : Set Unit → Set (Set Unit), ¬ Playable E := by
+  obtain ⟨E, hlive, -⟩ := AISafetyAtlas.Sovereignty.Playable.conditions_independent.1
+  exact ⟨E, fun h => hlive h.live⟩
+
 end AISafetyAtlas.Examples.Sovereignty

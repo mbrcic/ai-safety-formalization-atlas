@@ -1,0 +1,405 @@
+source:
+  citation: >-
+    Tom Everitt, Ryan Carey, Eric D. Langlois, Pedro A. Ortega and Shane Legg,
+    Agent Incentives: A Causal Perspective. The Thirty-Fifth AAAI Conference on
+    Artificial Intelligence (AAAI-21), pp. 11487-11495 (published PDF). Sections
+    Setup, Materiality, Value of Information, Instrumental Control Incentive.
+  file: everitt-etal-2021-aaai-ojs.pdf
+  sha256: 31d4a4b277c562b82000c4d2b81660e89464877ec0cad3549a9375c6d4492598
+  page_offset: -11486
+  version_note: >-
+    The audit (section 8) pins the AAAI published PDF, so this file is transcribed
+    from it; map.tsv and source card S08 point at the arXiv version
+    everitt-carey-langlois-ortega-legg-2021-aaai-agent-incentives.pdf
+    (arXiv:2102.01685v2, sha256
+    e1d9324532870d4a2604a82a9e4865207b8e21cec94524bb662f3a0470b4ee45). The card's
+    pdf_page numbers coincide with the published PDF pages for every row here
+    (2, 3, 4, 6). Definitions 1-7, 17 and Theorem 18 carry the same numbers and the
+    same wording in both (text layers compared token by token; remaining
+    differences are column-order artefacts; Definition 17's sentence and (2) were
+    compared directly). Printed page = PDF page + 11486 (p. 1 is 11487, p. 6 is
+    11492, checked on the images).
+  standing: |
+    Single decision (p. 3, right column, after Definition 4): "We will restrict our
+    attention to single-decision settings with $\boldsymbol{D} = \{D\}$." The
+    definitions of SCM, CID and SCIM themselves are not restricted to one decision.
+
+    Notation (p. 2, after Definition 2): "Throughout this paper we use subscripts to
+    indicate submodels or interventions, and superscripts for indexing."
+
+    Causal reading of CIDs (p. 2-3): "We will assume that the edges of the influence
+    diagram reflect the causal structure of the environment, so we use the term
+    `Causal Influence Diagram'." Footnote 2 (p. 3): "In contrast to subsequent
+    sections, the results in this section and the VoI section do not require the
+    influence diagrams to be causal."
+
+    Silences recorded by source card S08 (pages searched: 2-3, 6): no finiteness of
+    the vertex set or of parent sets, and no well-foundedness beyond "acyclic", is
+    stated; Definitions 1 and 3 impose no finiteness of domains (Definition 4 is the
+    first place finite domains appear); no common bound on utilities beyond the
+    finite real-valued domains of Definition 4; Definition 17 states no positivity
+    of the probability of the decision context and does not quantify the $d$ in (2).
+
+definitions:
+  - id: ec21-scm-joint
+    label: joint distribution induced by an SCM (prose after Definition 1)
+    pdf_page: 2
+    book_page: 11488
+    latex: |
+      The exogenous variables $\boldsymbol{\mathcal{E}}$ of an SCM represent factors
+      that are not modelled. For any value $\boldsymbol{\mathcal{E}} =
+      \boldsymbol{\varepsilon}$ of the exogenous variables, the value of any set of
+      variables $\boldsymbol{W} \subseteq \boldsymbol{V}$ is given by recursive
+      application of the structural functions $\boldsymbol{F}$ and is denoted by
+      $\boldsymbol{W}(\boldsymbol{\varepsilon})$. Together with the distribution
+      $P(\boldsymbol{\varepsilon})$ over exogenous variables, this induces a joint
+      distribution $\Pr(\boldsymbol{W} = \boldsymbol{w}) =
+      \sum_{\{\boldsymbol{\varepsilon} | \boldsymbol{W}(\boldsymbol{\varepsilon}) =
+      \boldsymbol{w}\}} P(\boldsymbol{\varepsilon})$.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 200}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: ec21-potential-response
+    label: potential response and nested counterfactual (prose after Definition 2)
+    pdf_page: 2
+    book_page: 11488
+    latex: |
+      If $W$ is a variable in an SCM $\mathcal{M}$, then $W_{\boldsymbol{x}}$ refers
+      to the same variable in the submodel $\mathcal{M}_{\boldsymbol{x}}$ and is
+      called a \emph{potential response variable}. [\ldots]
+
+      More elaborate hypotheticals can be described with a nested counterfactual, in
+      which the intervention is itself a potential response variable. In Figure 2c,
+      the \emph{click} probability $U$ depends on both the chosen \emph{posts} $D$
+      and the user \emph{opinion} $O$, which is in turn also influenced by $D$. The
+      nested potential response variable $U_{O_d}$, defined by
+      $U_{O_d}(\boldsymbol{\varepsilon}) := U_o(\boldsymbol{\varepsilon})$ where
+      $o = O_d(\boldsymbol{\varepsilon})$, represents the probability that a user
+      clicks on a ``default'' post $D$ given that their opinion has been influenced
+      by a hypothetical post $d$. In other words, the effect of the intervention
+      $\mathrm{do}(D = d)$ is propagated to $U$ only through $O$.
+    note: >-
+      The nested counterfactual is defined only by this example; Definition 17 uses
+      $\mathcal{U}_{X_d}$ by analogy.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 200}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: ec21-graph-notation
+    label: parents, descendants, observations, information links, directed paths (prose after Definition 3)
+    pdf_page: 3
+    book_page: 11489
+    latex: |
+      We use $\mathbf{Pa}^V$ and $\mathbf{Desc}^V$ to denote the parents and
+      descendants of a node $V \in \boldsymbol{V}$. The parents of the decision,
+      $\mathbf{Pa}^D$, are also called observations. An edge from node $V$ to node
+      $Y$ is denoted $V \to Y$. Edges into decisions are called information links,
+      as they indicate what information is available at the time of the decision. A
+      directed path (of length at least zero) is denoted $V \dashrightarrow Y$. For
+      sets of variables, $\boldsymbol{V} \dashrightarrow \boldsymbol{Y}$ means that
+      $V \dashrightarrow Y$ holds for some $V \in \boldsymbol{V}$,
+      $Y \in \boldsymbol{Y}$.
+    note: >-
+      Whether $\mathbf{Desc}^V$ includes $V$ is not stated; the length-zero
+      convention is stated for directed paths only.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 200}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: ec21-policy-completion
+    label: policy completion $\mathcal{M}_\pi$ (prose after Definition 4)
+    pdf_page: 3
+    book_page: 11489
+    latex: |
+      The specification of a policy turns a SCIM $\mathcal{M}$ into an SCM
+      $\mathcal{M}_\pi := \langle \boldsymbol{\mathcal{E}}, \boldsymbol{V},
+      \boldsymbol{F} \cup \{\pi\}, P \rangle$, see Figure 2b. With the resulting SCM,
+      the standard definitions of causal interventions apply.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 200}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+excerpts: []
+
+statements:
+  - id: ec21-def-1
+    audit_row: S08-R01
+    locator: Def. 1 structural causal model
+    pdf_page: 2
+    book_page: 11488
+    label: Definition 1 (Structural causal model; Pearl 2009, Chapter 7)
+    latex: |
+      \textbf{Definition 1} (Structural causal model; Pearl 2009, Chapter 7)\textbf{.}
+      A \emph{structural causal model} (with independent errors) is a tuple
+      $\langle \boldsymbol{\mathcal{E}}, \boldsymbol{V}, \boldsymbol{F}, P \rangle$,
+      where $\boldsymbol{\mathcal{E}}$ is a set of exogenous variables;
+      $\boldsymbol{V}$ is a set of endogenous variables; and
+      $\boldsymbol{F} = \{f^V\}_{V \in \boldsymbol{V}}$ is a collection of
+      functions, one for each $V$. Each function
+      $f^V \colon \mathrm{dom}(\mathbf{Pa}^V \cup \{\mathcal{E}^V\}) \to
+      \mathrm{dom}(V)$ specifies the value of $V$ in terms of the values of the
+      corresponding exogenous variable $\mathcal{E}^V$ and endogenous parents
+      $\mathbf{Pa}^V \subset \boldsymbol{V}$, where these functional dependencies
+      are acyclic. The domain of a variable $V$ is $\mathrm{dom}(V)$ and for a set of
+      variables, $\mathrm{dom}(\boldsymbol{W}) := \times_{W \in \boldsymbol{W}}
+      \mathrm{dom}(W)$. The uncertainty is encoded through a probability
+      distribution $P(\boldsymbol{\varepsilon})$ such that the exogenous variables
+      are mutually independent.
+    uses: [ec21-scm-joint]
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 200}
+    checked: {by: 'Codex (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: ec21-def-2
+    audit_row: S08-R02
+    locator: Def. 2 submodel
+    pdf_page: 2
+    book_page: 11488
+    label: Definition 2 (Submodel; Pearl 2009, Chapter 7), with the soft-intervention paragraph that follows it
+    latex: |
+      \textbf{Definition 2} (Submodel; Pearl 2009, Chapter 7)\textbf{.} Let
+      $\mathcal{M} = \langle \boldsymbol{\mathcal{E}}, \boldsymbol{V},
+      \boldsymbol{F}, P \rangle$ be an SCM, $\boldsymbol{X}$ a set of variables in
+      $\boldsymbol{V}$, and $\boldsymbol{x}$ a particular realization of
+      $\boldsymbol{X}$. The submodel $\mathcal{M}_{\boldsymbol{x}}$ represents the
+      effects of an \emph{intervention} $\mathrm{do}(\boldsymbol{X} =
+      \boldsymbol{x})$, and is formally defined as the SCM
+      $\langle \boldsymbol{\mathcal{E}}, \boldsymbol{V}, \boldsymbol{F}_{\boldsymbol{x}},
+      P \rangle$ where $\boldsymbol{F}_{\boldsymbol{x}} = \{f^V | V \notin
+      \boldsymbol{X}\} \cup \{\boldsymbol{X} = \boldsymbol{x}\}$. That is to say, the
+      original functional relationships of $X \in \boldsymbol{X}$ are replaced with
+      the constant functions $X = x$.
+
+      More generally, a \emph{soft intervention} on a variable $X$ in an SCM
+      $\mathcal{M}$ replaces $f^X$ with a function
+      $g^X \colon \mathrm{dom}(\mathbf{Pa}^X \cup \{\mathcal{E}^X\}) \to
+      \mathrm{dom}(X)$ (Eberhardt and Scheines 2007; Tian and Pearl 2001). The
+      probability distribution $\Pr(\boldsymbol{W}_{g^X})$ on any
+      $\boldsymbol{W} \subseteq \boldsymbol{V}$ is defined as the value of
+      $\Pr(\boldsymbol{W})$ in the submodel $\mathcal{M}_{g^X}$ where
+      $\mathcal{M}_{g^X}$ is $\mathcal{M}$ modified by replacing $f^X$ with $g^X$.
+    uses: [ec21-def-1, ec21-scm-joint]
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 200}
+    checked: {by: 'Codex (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: ec21-def-3
+    audit_row: S08-R03
+    locator: Def. 3 causal influence diagram
+    pdf_page: 3
+    book_page: 11489
+    label: Definition 3 (Causal influence diagram)
+    latex: |
+      \textbf{Definition 3} (Causal influence diagram)\textbf{.} A \emph{causal
+      influence diagram} (CID) is a directed acyclic graph $\mathcal{G}$ where the
+      vertex set $\boldsymbol{V}$ is partitioned into \emph{structure nodes}
+      $\boldsymbol{X}$, \emph{decision nodes} $\boldsymbol{D}$, and \emph{utility
+      nodes} $\boldsymbol{U}$. Utility nodes have no children.
+    uses: [ec21-graph-notation]
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 200}
+    checked: {by: 'Codex (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: ec21-policy-invariance
+    audit_row: S08-R04
+    locator: policy invariance off `Desc_D` (asserted after Def. 4)
+    pdf_page: 3
+    book_page: 11489
+    label: prose after Definition 4
+    latex: |
+      We use $\Pr_\pi$ and $\mathbb{E}_\pi$ to denote probabilities and expectations
+      with respect to $\mathcal{M}_\pi$. For a set of variables $\boldsymbol{X}$ not
+      in $\mathbf{Desc}^D$, $\Pr_\pi(\boldsymbol{x})$ is independent of $\pi$ and we
+      simply write $\Pr(\boldsymbol{x})$.
+    uses: [ec21-policy-completion, ec21-graph-notation, ec21-def-4]
+    note: >-
+      Asserted without proof. The atlas's VERBATIM quotation writes `Pr^π`, `Eπ`
+      and `Desc_D`; print has subscript $\pi$ ($\Pr_\pi$, $\mathbb{E}_\pi$) and
+      superscript $D$ ($\mathbf{Desc}^D$). Wording otherwise matches.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 200}
+    checked: {by: 'Codex (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: ec21-policy-optimal
+    audit_row: S08-R05
+    locator: policy and optimal policy (asserted after Def. 4)
+    pdf_page: 3
+    book_page: 11489
+    label: prose after Definition 4
+    latex: |
+      We will restrict our attention to single-decision settings with
+      $\boldsymbol{D} = \{D\}$. [\ldots] In single-decision SCIMs, the
+      decision-making task is to maximize expected utility by selecting a decision
+      $d \in \mathrm{dom}(D)$ based on the observations $\mathbf{Pa}^D$. More
+      formally, the task is to select a structural function for $D$ in the form of a
+      \emph{policy} $\pi : \mathrm{dom}(\mathbf{Pa}^D \cup \{\mathcal{E}^D\}) \to
+      \mathrm{dom}(D)$. The exogenous variable $\mathcal{E}^D$ provides randomness to
+      allow the policy to be a stochastic function of its endogenous parents
+      $\mathbf{Pa}^D$. [\ldots] An \emph{optimal policy} for a SCIM is defined as
+      any policy $\pi$ that maximises $\mathbb{E}_\pi[\mathcal{U}]$, where
+      $\mathcal{U} := \sum_{U \in \boldsymbol{U}} U$. A potential response
+      $\mathcal{U}_{\boldsymbol{x}}$ is defined as $\mathcal{U}_{\boldsymbol{x}} :=
+      \sum_{U \in \boldsymbol{U}} U_{\boldsymbol{x}}$.
+    uses: [ec21-def-4, ec21-policy-completion, ec21-potential-response]
+    note: >-
+      First omission: the Figure 2a example sentence. Second omission: the
+      policy-completion sentences (ec21-policy-completion), the sentence "Note that
+      what determines whether a node is observed or not at the time of
+      decision-making is whether the node is a parent of the decision. Commonly,
+      some structure nodes represent latent variables that are unobserved.", and the
+      two sentences transcribed as ec21-policy-invariance (S08-R04).
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 200}
+    checked: {by: 'Codex (blind) + Codex (anchored re-read); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: ec21-def-4
+    audit_row: S08-R06
+    locator: Def. 4 structural causal influence model
+    pdf_page: 3
+    book_page: 11489
+    label: Definition 4 (Structural causal influence model)
+    latex: |
+      \textbf{Definition 4} (Structural causal influence model)\textbf{.} A
+      \emph{structural causal influence model} (SCIM) is a tuple
+      $\mathcal{M} = \langle \mathcal{G}, \boldsymbol{\mathcal{E}}, \boldsymbol{F},
+      P \rangle$ where:
+      \begin{itemize}
+      \item $\mathcal{G}$ is a CID with finite-domain variables $\boldsymbol{V}$
+        (partitioned into $\boldsymbol{X}$, $\boldsymbol{D}$, and $\boldsymbol{U}$)
+        where utility variable domains are a subset of $\mathbb{R}$. We say that
+        $\mathcal{M}$ is \emph{compatible with} $\mathcal{G}$.
+      \item $\boldsymbol{\mathcal{E}} = \{\mathcal{E}^V\}_{V \in \boldsymbol{V}}$ is
+        a set of finite-domain \emph{exogenous variables}, one for each endogenous
+        variable.
+      \item $\boldsymbol{F} = \{f^V\}_{V \in \boldsymbol{V} \setminus \boldsymbol{D}}$
+        is a set of \emph{structural functions}
+        $f^V \colon \mathrm{dom}(\mathbf{Pa}^V \cup \{\mathcal{E}^V\}) \to
+        \mathrm{dom}(V)$ that specify how each non-decision endogenous variable
+        depends on its parents in $\mathcal{G}$ and its associated exogenous
+        variable.
+      \item $P$ is a probability distribution for $\boldsymbol{\mathcal{E}}$ such
+        that the individual exogenous variables $\mathcal{E}^V$ are mutually
+        independent.
+      \end{itemize}
+    uses: [ec21-def-3, ec21-graph-notation]
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 200}
+    checked: {by: 'Codex (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: ec21-def-5
+    audit_row: S08-R07
+    locator: Def. 5 materiality
+    pdf_page: 3
+    book_page: 11489
+    label: Definition 5 (Materiality; Shachter 2016)
+    latex: |
+      \textbf{Definition 5} (Materiality; Shachter 2016)\textbf{.} For any given
+      SCIM $\mathcal{M}$, let $\mathcal{V}^*(\mathcal{M}) = \max_\pi
+      \mathbb{E}_\pi[\mathcal{U}]$ be the maximum attainable utility in
+      $\mathcal{M}$, and let $\mathcal{M}_{X \not\to D}$ be $\mathcal{M}$ modified by
+      removing any information link $X \to D$. The observation $X \in \mathbf{Pa}^D$
+      is \emph{material} if $\mathcal{V}^*(\mathcal{M}_{X \not\to D}) <
+      \mathcal{V}^*(\mathcal{M})$.
+    uses: [ec21-def-4, ec21-policy-optimal, ec21-graph-notation]
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 200}
+    checked: {by: 'Codex (blind) + Codex (anchored re-read); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: ec21-def-6
+    audit_row: S08-R08
+    locator: Def. 6 d-separation
+    pdf_page: 4
+    book_page: 11490
+    label: Definition 6 (d-separation; Verma and Pearl 1988)
+    latex: |
+      \textbf{Definition 6} (d-separation; Verma and Pearl 1988)\textbf{.} A path
+      $p$ is said to be d-separated by a set of nodes $\boldsymbol{Z}$ if and only if:
+      \begin{enumerate}
+      \item $p$ contains a collider $X \to W \leftarrow Y$, such that the middle node
+        $W$ is not in $\boldsymbol{Z}$ and no descendants of $W$ are in
+        $\boldsymbol{Z}$, or
+      \item $p$ contains a chain $X \to W \to Y$ or fork $X \leftarrow W \to Y$ where
+        $W$ is in $\boldsymbol{Z}$, or
+      \item one or both of the endpoints of $p$ is in $\boldsymbol{Z}$.
+      \end{enumerate}
+      A set $\boldsymbol{Z}$ is said to d-separate $\boldsymbol{X}$ from
+      $\boldsymbol{Y}$, written $(\boldsymbol{X} \perp \boldsymbol{Y} \mid
+      \boldsymbol{Z})$ if and only if $\boldsymbol{Z}$ d-separates every path from a
+      node in $\boldsymbol{X}$ to a node in $\boldsymbol{Y}$. Sets that are not
+      d-separated are called d-connected.
+    uses: [ec21-graph-notation]
+    note: >-
+      The atlas's VERBATIM quotation matches print for conditions 1-3 and the set
+      clause, but omits ", written $(\boldsymbol{X} \perp \boldsymbol{Y} \mid
+      \boldsymbol{Z})$" and the final sentence on d-connected sets. "Path" is not
+      defined in the source (undirected paths are implied by the collider and fork
+      cases).
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 200}
+    checked: {by: 'Codex (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: ec21-def-7
+    audit_row: S08-R09
+    locator: Def. 7 nonrequisite observation
+    pdf_page: 4
+    book_page: 11490
+    label: Definition 7 (Nonrequisite observation; Lauritzen and Nilsson 2001)
+    latex: |
+      \textbf{Definition 7} (Nonrequisite observation; Lauritzen and Nilsson
+      2001)\textbf{.} Let $\boldsymbol{U}^D := \boldsymbol{U} \cap \mathbf{Desc}^D$ be
+      the utility nodes downstream of $D$. An observation $X \in \mathbf{Pa}^D$ in a
+      single-decision CID $\mathcal{G}$ is \emph{nonrequisite} if:
+      \[ X \perp \boldsymbol{U}^D \bigm| \left(\mathbf{Pa}^D \cup \{D\} \setminus
+         \{X\}\right) \tag{1} \]
+      In this case, the edge $X \to D$ is also called nonrequisite. Otherwise $X$ and
+      $X \to D$ are \emph{requisite}.
+    uses: [ec21-def-6, ec21-def-3, ec21-graph-notation]
+    note: >-
+      The atlas's VERBATIM quotation matches apart from notation (`U^D := 𝐔 ∩
+      Desc^D`, plain `|`) and dropping the parentheses around the conditioning set
+      and the equation number (1). The grouping of $\cup$ and $\setminus$ inside the
+      parentheses is unbracketed as printed.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 200}
+    checked: {by: 'Codex (blind) + Codex (anchored re-read); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: ec21-def-17
+    audit_row: S08-R19
+    locator: Def. 17 instrumental control incentive
+    pdf_page: 6
+    book_page: 11492
+    label: Definition 17 (Instrumental control incentive), with the admits clause that follows it
+    latex: |
+      \textbf{Definition 17} (Instrumental control incentive)\textbf{.} In a
+      single-decision SCIM $\mathcal{M}$, there is an \emph{instrumental control
+      incentive} on a variable $X$ in decision context $\mathbf{pa}^D$ if, for all
+      optimal policies $\pi^*$,
+      \[ \mathbb{E}_{\pi^*}[\mathcal{U}_{X_d} \mid \mathbf{pa}^D] \neq
+         \mathbb{E}_{\pi^*}[\mathcal{U} \mid \mathbf{pa}^D]. \tag{2} \]
+      [\ldots]
+
+      A CID $\mathcal{G}$ \emph{admits} an instrumental control incentive on $X$ if
+      $\mathcal{G}$ is compatible with a SCIM $\mathcal{M}$ with an instrumental
+      control incentive on $X$ for some decision context $\mathbf{pa}^D$.
+    context: |
+      Preceded by (p. 6): "Meanwhile, $X_d$ describes the way $X$ can be controlled
+      by $D$. These notions can be combined with a nested counterfactual
+      $\mathcal{U}_{X_d}$, which expresses the effect that $D$ can have on
+      $\mathcal{U}$ by controlling $X$." The omission is the "Conceptually, ..."
+      interpretive paragraph.
+    uses: [ec21-def-4, ec21-policy-optimal, ec21-potential-response, ec21-policy-completion]
+    note: >-
+      $d$ in (2) is not quantified (no "for some $d$" / "for all $d$"), and no
+      positivity of $\Pr(\mathbf{pa}^D)$ is stated; both as printed.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 200}
+    checked: {by: 'Codex (blind) + Codex (anchored re-read); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: ec21-thm-18
+    audit_row: S08-R20
+    locator: Thm. 18 instrumental control incentive criterion
+    pdf_page: 6
+    book_page: 11492
+    label: Theorem 18 (Instrumental Control Incentive Criterion)
+    latex: |
+      \textbf{Theorem 18} (Instrumental Control Incentive Criterion)\textbf{.}
+      \emph{A single-decision CID $\mathcal{G}$ admits an instrumental control
+      incentive on $X \in \boldsymbol{V}$ if and only if $\mathcal{G}$ has a directed
+      path from the decision $D$ to a utility node $U \in \boldsymbol{U}$ that passes
+      through $X$, i.e. a directed path $D \dashrightarrow X \dashrightarrow
+      \boldsymbol{U}$.}
+    uses: [ec21-def-17, ec21-graph-notation, ec21-def-3]
+    proof_pages: 6
+    note: >-
+      Only the soundness direction is proved in the paper (p. 6); completeness is
+      deferred to the supplementary material (arXiv version). The atlas's VERBATIM
+      quotation matches print.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 200}
+    checked: {by: 'Codex (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}

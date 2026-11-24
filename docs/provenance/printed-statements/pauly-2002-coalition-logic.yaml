@@ -1,0 +1,279 @@
+source:
+  citation: >-
+    Marc Pauly, "A Modal Logic for Coalitional Power in Games", J. Logic Computat.,
+    Vol. 12 No. 1, pp. 149--166, 2002, Oxford University Press. (Read from the
+    title page footer, PDF p. 1.)
+  file: pauly-coalition.pdf
+  sha256: aa761c97e227ec186beb2e060973a829f51b9c3ef6bb3ed5184e7e36cd17826d
+  page_offset: -148
+  standing: |
+    Strategic games (§2, p. 150, PDF p. 2), see pauly-strategic-game: non-empty
+    finite set of players, non-empty strategy sets, non-empty outcome set, outcome
+    function on strategy profiles. Preferences are not part of the structure
+    (p. 150): "Strictly speaking, our strategic games are only game \emph{forms}
+    which can be turned into a game by adding these preference relations."
+
+    Unrestricted effectivity functions (p. 152, PDF p. 4): "While we consider any
+    function $E : \mathcal{P}(N) \to \mathcal{P}(\mathcal{P}(S))$ to be an
+    effectivity function, most of the literature has taken a more restrictive
+    view, requiring $E$ to satisfy various basic properties, [\ldots] Here, we
+    decided to be as general as possible regarding the notion of an effectivity
+    function, codifying all the properties we are interested in in the notion of
+    playability to be introduced in the next section."
+
+    Outcome functions not surjective (§3.1, p. 152, PDF p. 4): "However, these
+    assume that the outcome function $o$ of a strategic game is surjective,
+    whereas we do not want to assume that every state can be reached provided that
+    the players pick the right strategies; certain states may be unreachable no
+    matter how the players play. For the same reason, we did not assume that
+    playable effectivity functions satisfy $X \in E(N)$ for all
+    $X \neq \emptyset$; usually, this is considered to be an essential property of
+    effectivity functions [7, 12]."
+
+    Silent: no finiteness of the strategy sets $\Sigma_i$ or of the outcome set $S$
+    is stated in the definition of strategic game (p. 150) or in §3 and §3.1
+    (pp. 151--154) (source card S15 records the same search). Finiteness of $N$
+    is stated, and the proof of Theorem 3.2 uses it ("Since there are only finitely
+    many players, this partitioning process will eventually stop", p. 153).
+
+definitions:
+  - id: pauly-strategic-game
+    label: strategic game (§2)
+    pdf_page: 2
+    book_page: 150
+    latex: |
+      A \emph{strategic game} $G = (N, \{\Sigma_i | i \in N\}, o, S)$ consists of a
+      non-empty finite set of agents or players $N$, a non-empty set of strategies
+      or actions $\Sigma_i$ for every player $i \in N$, a non-empty set of outcome
+      states $S$ and an outcome function $o : \Pi_{i \in N} \Sigma_i \to S$ which
+      associates with every tuple of strategies of the players (strategy profile)
+      an outcome state in $S$.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: pauly-strategy-tuples
+    label: coalition strategy tuples and complement (§2)
+    pdf_page: 2
+    book_page: 150
+    latex: |
+      For notational convenience, let $\sigma_C := (\sigma_i)_{i \in C}$ denote the
+      strategy tuple for coalition $C \subseteq N$ which consists of player $i$
+      choosing strategy $\sigma_i \in \Sigma_i$. Then given two strategy tuples
+      $\sigma_C$ and $\sigma_{\overline{C}}$ (where
+      $\overline{C} := N \setminus C$), $o(\sigma_C, \sigma_{\overline{C}})$
+      denotes the outcome state associated with the strategy profile induced by
+      $\sigma_C$ and $\sigma_{\overline{C}}$.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: pauly-game-effectivity
+    label: effectivity function of a game (§3)
+    pdf_page: 3
+    book_page: 151
+    latex: |
+      Given a game $G$, a coalition $C \subseteq N$ will be \emph{effective} for a
+      set $X \subseteq S$ iff the coalition has a joint strategy which will result
+      in an outcome in $X$ no matter what strategies the other players choose.
+      Formally, the \emph{effectivity function
+      $E_G : \mathcal{P}(N) \to \mathcal{P}(\mathcal{P}(S))$ of a game} $G$ is
+      defined as
+      \[ X \in E_G(C) \text{ iff } \exists \sigma_C \forall \sigma_{\overline{C}}
+         \; o(\sigma_C, \sigma_{\overline{C}}) \in X. \]
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: pauly-effectivity-function
+    label: effectivity function (§3)
+    pdf_page: 3
+    book_page: 151
+    latex: |
+      For a set of agents $N$ and a set of outcomes $S$, we call any function
+      $E : \mathcal{P}(N) \to \mathcal{P}(\mathcal{P}(S))$ an \emph{effectivity
+      function}. Intuitively, $E$ associates to every coalition $C \subseteq N$ the
+      sets of outcomes for which the coalition is effective, i.e. $X \in E(C)$ iff
+      $C$ is effective for $X$.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+statements:
+  - id: pauly-properties
+    audit_row: S15-R01
+    locator: p. 152 defs
+    pdf_page: 4
+    book_page: 152
+    label: properties of effectivity functions (unnumbered definitions)
+    latex: |
+      Call an effectivity function $E : \mathcal{P}(N) \to \mathcal{P}(\mathcal{P}(S))$
+      \emph{outcome-monotonic} iff for all $X \subseteq X' \subseteq S$ and for all
+      $C$, if $X \in E(C)$ then $X' \in E(C)$. $E$ is \emph{coalition-monotonic}
+      iff for $C \subseteq C' \subseteq N$, $E(C) \subseteq E(C')$. $E$ is
+      \emph{$C$-regular} if for all $X$, if $X \in E(C)$ then
+      $\overline{X} \notin E(\overline{C})$. $E$ is \emph{$C$-maximal} if for all
+      $X$, if $\overline{X} \notin E(\overline{C})$ then $X \in E(C)$. $E$ is
+      \emph{regular} (\emph{maximal}) iff for all coalitions $C$ it is $C$-regular
+      ($C$-maximal). Finally, $E$ is \emph{superadditive} if for all
+      $X_1, X_2, C_1, C_2$ such that $C_1 \cap C_2 = \emptyset$, $X_1 \in E(C_1)$
+      and $X_2 \in E(C_2)$ imply that $X_1 \cap X_2 \in E(C_1 \cup C_2)$.
+    context: |
+      Begins mid-paragraph at the top of p. 152, continuing from p. 151: "Given
+      this intended interpretation of effectivity functions, it is natural to
+      require them to satisfy certain properties, e.g. if a coalition $C$ is
+      effective for a set of outcomes $X$, it should also be effective for
+      $X' \supseteq X$. Which properties we require will depend on the exact
+      situation we want to model."
+    uses: [pauly-effectivity-function, pauly-strategy-tuples]
+    note: >-
+      $\overline{C}$ is defined as $N \setminus C$ on p. 150; $\overline{X}$ for a
+      set of outcomes is not separately defined (read as $S \setminus X$). The text
+      layer of this PDF is unusable (custom font encoding: every math symbol and
+      most letters come out as control characters); the card's quote is garbage
+      for every S15 row.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind) + Codex (anchored re-read); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: pauly-playable
+    audit_row: S15-R02
+    locator: p. 152 playability
+    pdf_page: 4
+    book_page: 152
+    label: playability (unnumbered definition, §3.1)
+    latex: |
+      We now introduce the combination of properties needed to characterize
+      effectivity functions. Call an effectivity function
+      $E : \mathcal{P}(N) \to \mathcal{P}(\mathcal{P}(S))$ \emph{playable} iff
+      (1) $\forall C \subseteq N : \emptyset \notin E(C)$, (2)
+      $\forall C \subseteq N : S \in E(C)$, (3) $E$ is $N$-maximal, (4) $E$ is
+      outcome-monotonic, and (5) $E$ is superadditive. It can be shown that these
+      conditions are independent.
+    uses: [pauly-effectivity-function, pauly-properties]
+    note: >-
+      $N$-maximal is $C$-maximality at $C = N$ (pauly-properties):
+      $\overline{X} \notin E(\emptyset)$ implies $X \in E(N)$, since
+      $\overline{N} = \emptyset$.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind) + Codex (anchored re-read); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: pauly-lemma-3.1
+    audit_row: S15-R03
+    locator: Lemma 3.1
+    pdf_page: 4
+    book_page: 152
+    label: Lemma 3.1
+    latex: |
+      \textsc{Lemma 3.1}\\
+      Every playable effectivity function is regular and coalition-monotonic.
+    uses: [pauly-playable, pauly-properties]
+    proof_pages: 4
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: pauly-thm-3.2
+    audit_row: S15-R04
+    locator: Thm. 3.2, game ⟹ playable
+    pdf_page: 4
+    book_page: 152
+    label: Theorem 3.2 (Characterization)
+    latex: |
+      \textsc{Theorem 3.2} (Characterization)\\
+      An effectivity function $E$ is playable iff it is the effectivity function of
+      some strategic game.
+    context: |
+      The row grades the direction game $\Rightarrow$ playable. The proof's only
+      text for it (p. 152): "\textsc{Proof.} One can easily check that the
+      effectivity function of any strategic game satisfies the five properties
+      mentioned. As for the other direction, [\ldots]"
+    uses: [pauly-strategic-game, pauly-game-effectivity, pauly-playable]
+    proof_pages: 4-6
+    note: >-
+      The other direction (playable $\Rightarrow$ game) is refuted by Goranko,
+      Jamroga and Turrini, Proposition 4 (goranko-2013-truly-playable#gjt-prop-4-counterexample).
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: pauly-thm-3.2-construction
+    audit_row: S15-R06
+    locator: p. 153 construction
+    pdf_page: 4-6
+    book_page: 152-154
+    label: construction in the proof of Theorem 3.2
+    latex: |
+      [\ldots] let $E$ be an effectivity function satisfying the five properties.
+      We shall construct a game $G$ such that $E = E_G$. To simplify our
+      definitions, assume that $N = \{1, \ldots, n\}$. [\ldots]
+
+      Formally, for $i \in N$, let $\mathcal{C}_i = \{C \subseteq N | i \in C\}$ be
+      the set of coalitions of which $i$ is a member. Let
+      $F_i = \{f_i : \mathcal{C}_i \to \mathcal{P}(S) \mid \forall C : f_i(C) \in
+      E(C)\}$, so $F_i$ consist of all functions $f_i$ which associate to every
+      coalition $C$ in which $i$ participates a set of outcomes for which $C$ is
+      effective. Note that since for all coalitions $C$, $S \in E(C)$, $F_i$ will
+      be non-empty for every player $i$.
+
+      Given $f \in \Pi_{i \in N} F_i = F_N$ and a coalition $C$, let $P(f, C)$ be
+      the coarsest partition $\langle C_1, \ldots, C_m \rangle$ of $C$ such that
+      \[ \forall l \le m \forall i, j \in C_l : f_i(C) = f_j(C). \]
+      Then given $f$, let
+      \begin{align*}
+      P_0(f) &= \langle N \rangle\\
+      P_1(f) &= P(f, N) = \langle C^1_1, \ldots, C^1_{k_1} \rangle\\
+      P_2(f) &= \langle P(f, C^1_1), \ldots, P(f, C^1_{k_1}) \rangle
+              = \langle C^2_1, \ldots, C^2_{k_2} \rangle\\
+      &\;\;\vdots\\
+      P_r(f) &= \langle C^r_1, \ldots, C^r_{k_r} \rangle.
+      \end{align*}
+      Since there are only finitely many players, this partitioning process will
+      eventually stop at some state $r$ where $P_r(f) = P_{r+1}(f)$, and we let
+      $P_\infty(f) = P_r(f) = \langle C_1, \ldots, C_k \rangle$. Since for all
+      $l \le k$ and $i, j \in C_l$ we have $f_i(C_l) = f_j(C_l)$ we will simply
+      write $f(C_l)$ for it. Now let
+      \[ G(f) = \bigcap_{l=1}^{k} f(C_l). \]
+      Claim: $G(f) \neq \emptyset$. Proof: Since $C_l$ is effective for
+      $f(C_l)$, i.e. $f(C_l) \in E(C_l)$ for all $l \le k$,
+      $\bigcap_{l=1}^{k} f(C_l) = G(f) \in E(N)$ by superadditivity, and hence
+      since $\emptyset \notin E(N)$, $G(f)$ cannot be empty.
+
+      Now we can define the strategic game $G = (N, \{\Sigma_i | i \in N\}, o, S)$
+      as follows: let $H = \{h : \mathcal{P}(S) \setminus \{\emptyset\} \to S \mid
+      h(X) \in X\}$. Then we define $\Sigma_i = F_i \times N \times H$ and
+      $o(\sigma_N) = h_{i_0}(G(f))$, where $\sigma_N = (f_i, t_i, h_i)_{i \in N}$
+      is a strategy profile and $i_0 = ((t_1 + \cdots + t_n) \bmod n) + 1$
+      indicates the player who has the power to determine the outcome.
+    context: |
+      The first [\ldots] is p. 152 ("Proof. One can easily check [\ldots] As for
+      the other direction,"); the second omits the informal sketch on p. 153,
+      which introduces the strategy as "a triple $(f_i, t_i, h_i)$: for every
+      coalition $C_i$ of which $i$ is a member, the function $f_i$ picks a set
+      which $C_i$ can force, and for every non-empty set $X$, the function $h_i$
+      picks an element of $X$." The last clause ("indicates the player ...") is the
+      first line of p. 154.
+    uses: [pauly-playable, pauly-properties, pauly-strategic-game, pauly-game-effectivity]
+    proof_pages: 4-6
+    note: >-
+      "some state $r$" is printed for "some stage $r$". The
+      partition $P_2(f)$ is printed as a tuple of partitions
+      $\langle P(f, C^1_1), \ldots \rangle$ equated with a flat tuple. The
+      construction's choice "$\forall C' \supseteq C$, $f_i(C') = X$" used in the
+      left-to-right inclusion is on p. 154 (PDF p. 6), not transcribed.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 200}
+    checked: {by: 'Codex (blind) + Grok (blind) + Codex (anchored re-read); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: pauly-individualistic
+    audit_row: S15-R07
+    locator: §3.2 individualistic
+    pdf_page: 6
+    book_page: 154
+    label: individualistic (unnumbered definition, §3.2)
+    latex: |
+      Call an effectivity function
+      $E : \mathcal{P}(N) \to \mathcal{P}(\mathcal{P}(S))$ \emph{individualistic}
+      iff it is playable and $E(N) = \bigcup_{i \in N} E(\{i\})$. The condition
+      ensures that everything which can be forced can be forced already by some
+      individual.
+    uses: [pauly-effectivity-function, pauly-playable]
+    note: >-
+      Followed by Theorem 3.3 (p. 154): "An effectivity function $E$ is
+      individualistic iff it is the effectivity function of a dictatorship."
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind) + Codex (anchored re-read); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+excerpts: []

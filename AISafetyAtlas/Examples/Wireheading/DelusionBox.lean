@@ -857,4 +857,1016 @@ public theorem shortHorizon_facts (t k : ℕ) :
     0 < shortHorizon t k ∧ shortHorizon t (k + 1) ≤ shortHorizon t k :=
   ⟨shortHorizon_pos t k, shortHorizon_succ_le t k⟩
 
+
+/-! ## Wave 3: Statement 1 at any maximum value, at every depth
+
+`statement_one_scaled` at `vmax = 1` is `statement_one`; the depth-one witness
+below exercises a maximum value of `2`, a window of two steps.
+-/
+
+/-- `statement_one_scaled`'s antecedent, inhabited at `vmax = 1`. -/
+public theorem rl_uses_the_box_scaled :
+    actionValue (mixed (3 / 4)) rl 0 0 [] no
+      < actionValue (mixed (3 / 4)) rl 0 0 [] yes := by
+  refine statement_one_scaled (mixed (3 / 4)) boxedBelief boxlessBelief rl (3 / 4) 0 0 []
+    yes no 1 0 (mixed_mixesAt _ _ _ _) (by norm_num) (by norm_num) one_pos ?_ ?_ ?_ ?_
+    (by norm_num) (by norm_num)
+  · rw [rl_boxed_yes]
+  · rw [rl_boxless]
+  · rw [rl_boxed_no]; norm_num
+  · rw [rl_boxless]; norm_num
+
+/-- The boxless belief is a probability. -/
+public theorem boxlessBelief_isSubprobability : boxlessBelief.IsSubprobability :=
+  diracBelief_isSubprobability _
+
+/-- The window horizon is its own absolute value, at the witness. -/
+public theorem abs_windowHorizon_two_zero_one : |windowHorizon 2 0 1| = windowHorizon 2 0 1 :=
+  abs_windowHorizon 2 0 1
+
+/-- **The box belief yields `true` with probability one after `yes`**, from the
+constant program. -/
+public theorem boxed_cond_yes_true (h : History (Act Bool Unit) Bool) :
+    boxedBelief.cond h yes true = 1 :=
+  diracBelief_next_cond_const boxed boxed_isConstant h yes rfl
+
+/-- The reinforcement-learning utility on the bit reward is bounded by one. -/
+public theorem bitReward_rl_abs_utility_le (m : ℕ) (h : History (Act Bool Unit) Bool) :
+    |(rlAgent (Action := Act Bool Unit) bitReward m).utility h| ≤ 1 :=
+  rlAgent_abs_utility_le bitReward m bitReward_abs_le h
+
+/-- The two-step window's budget at depth one from step one is two. -/
+public theorem rl2_horizonBudget : horizonBudget (rlAgent (Action := Act Bool Unit) bitReward 2) 0 1 1 = 2 := by
+  simp [horizonBudget, rlAgent, windowHorizon]
+  norm_num
+
+/-- It is positive, from the window. -/
+public theorem rl2_horizonBudget_pos :
+    0 < horizonBudget (rlAgent (Action := Act Bool Unit) bitReward 2) 0 1 1 :=
+  rlAgent_horizonBudget_pos bitReward 1 (by norm_num)
+
+/-- **The box-using policy is worth the maximum value `2` at depth one.** -/
+public theorem rl2_boxed_policy_eq :
+    AISafetyAtlas.Wireheading.Mixture.policyActionValue boxedBelief
+      (rlAgent bitReward 2) (fun _ => yes) 0 1 [] = 2 := by
+  rw [rlAgent_policyActionValue_const boxedBelief_isSubprobability bitReward 2 (fun _ => yes)
+    boxed_cond_yes_true 0 1 []]
+  simpa [bitReward] using rl2_horizonBudget
+
+/-- Committed values are nonnegative on the bit reward. -/
+public theorem rl2_boxless_policy_nonneg :
+    0 ≤ AISafetyAtlas.Wireheading.Mixture.policyActionValue boxlessBelief
+      (rlAgent bitReward 2) (fun _ => yes) 0 1 [] :=
+  rlAgent_policyActionValue_nonneg boxlessBelief_isSubprobability.nonneg bitReward
+    bitReward_nonneg 2 (fun _ => yes) 0 1 []
+
+/-- **Refusing is worth at most one at depth one in the box branch**: the refusing
+step pays `0` and the one after it at most `1` (by programming the box then), so
+`r̄ = 1/2` per in-window step, where print's one-step `r̄` here is `0`. -/
+public theorem rl2_boxed_no_le :
+    actionValue boxedBelief (rlAgent bitReward 2) 0 1 [] no
+      ≤ horizonBudget (rlAgent (Action := Act Bool Unit) bitReward 2) 0 1
+          (([] : History (Act Bool Unit) Bool).length + 1) * (1 / 2) := by
+  have hB : horizonBudget (rlAgent (Action := Act Bool Unit) bitReward 2) 0 1
+      (([] : History (Act Bool Unit) Bool).length + 1) = 2 := rl2_horizonBudget
+  rw [hB, boxedBelief, actionValue_diracBelief, next_boxed, value_succ]
+  have hsup : (⨆ a, actionValue (diracBelief (GlobalEnv.next boxed)) (rlAgent bitReward 2) 0 0
+      ([] ++ [(no, no.1)]) a) ≤ 1 := by
+    apply ciSup_le
+    intro a
+    refine (le_abs_self _).trans ((abs_actionValue_le_horizonBudget
+      (diracBelief_isSubprobability _) _ (bitReward_rl_abs_utility_le 2) 0 0 _ a).trans ?_)
+    simp [horizonBudget, rlAgent, windowHorizon]
+  have hu : (rlAgent (Action := Act Bool Unit) bitReward 2).horizon 0 ([] ++ [(no, no.1)]).length
+      * (rlAgent (Action := Act Bool Unit) bitReward 2).utility ([] ++ [(no, no.1)]) = 0 := by
+    simp [rlAgent, lastReward, bitReward, no]
+  rw [hu]
+  linarith
+
+/--
+**Statement 1 for print's reinforcement-learning agent at depth one**
+(`rlAgent_statement_one_of_posterior`): window `m = 2`, maximum value `2`, the box
+programmed to the constant `true` of reward one, `r̄ = 1/2` per in-window step
+(the refusing value includes box use at the next step, so this is not print's
+one-step `r̄`, which is `0` here) and `P(DB) = 3/4 > 1/(2 - 1/2)`.
+-/
+public theorem rl2_uses_the_box_of_posterior :
+    actionValue (AISafetyAtlas.Wireheading.Mixture.mixtureBelief (3 / 4) boxedBelief boxlessBelief)
+        (rlAgent bitReward 2) 0 1 [] no
+      < actionValue (AISafetyAtlas.Wireheading.Mixture.mixtureBelief (3 / 4) boxedBelief
+          boxlessBelief) (rlAgent bitReward 2) 0 1 [] yes :=
+  rlAgent_statement_one_of_posterior boxedBelief boxlessBelief (by norm_num) (by norm_num)
+    boxedBelief_isSubprobability boxlessBelief_isSubprobability bitReward bitReward_nonneg
+    (fun o => by cases o <;> norm_num [bitReward]) 2 0 1 [] (by norm_num) (fun _ => yes)
+    (k := true) (by norm_num [bitReward]) boxed_cond_yes_true no (1 / 2) rl2_boxed_no_le
+    (by norm_num) (by rw [AISafetyAtlas.Wireheading.Mixture.posterior_nil]; norm_num)
+
+/-! ## Wave 3: Statements 1 to 3 at the infinite-horizon value
+
+`rl0` is print's reinforcement-learning agent with window `m = 0` at time `t = 1`:
+only the step about to be taken carries weight, so its horizon has finite support
+(summable) and every value is computed exactly at every depth. The infinite-horizon
+hypotheses are discharged from depth-`n` bounds by `le_of_tendsto`.
+-/
+
+/-- Print's `A_rl` with a zero-length window. -/
+@[expose] public def rl0 : Agent (Act Bool Unit) Bool := rlAgent bitReward 0
+
+/-- Its utility is bounded by one. -/
+public theorem rl0_abs_utility_le (h : History (Act Bool Unit) Bool) : |rl0.utility h| ≤ 1 :=
+  bitReward_rl_abs_utility_le 0 h
+
+/-- Its horizon at `t = 1` has finite support. -/
+public theorem rl0_horizon_summable : Summable (fun k ↦ |rl0.horizon 1 k|) := by
+  apply summable_of_hasFiniteSupport
+  apply Set.Finite.subset (Set.finite_Icc 0 1)
+  intro k hk
+  simp only [Function.mem_support, ne_eq, abs_eq_zero] at hk
+  by_contra hcon
+  simp only [Set.mem_Icc, not_and, not_le] at hcon
+  apply hk
+  show (windowHorizon 0 1 k : ℝ) = 0
+  rw [windowHorizon, if_neg (by omega)]
+
+/-- Beyond the window the budget is zero. -/
+public theorem rl0_horizonBudget_beyond (n k : ℕ) (hk : 2 ≤ k) :
+    horizonBudget rl0 1 n k = 0 := by
+  induction n generalizing k with
+  | zero => simp [horizonBudget, rl0, rlAgent, windowHorizon]; omega
+  | succ n ih =>
+    simp only [horizonBudget]
+    rw [ih (k + 1) (by omega)]
+    simp [rl0, rlAgent, windowHorizon]
+    omega
+
+/-- From the step about to be taken the budget is one, at every depth. -/
+public theorem rl0_horizonBudget_one (n : ℕ) : horizonBudget rl0 1 n 1 = 1 := by
+  cases n with
+  | zero => simp [horizonBudget, rl0, rlAgent, windowHorizon]
+  | succ n =>
+    simp only [horizonBudget]
+    rw [rl0_horizonBudget_beyond n 2 le_rfl]
+    simp [rl0, rlAgent, windowHorizon]
+
+/-- The box-using policy is worth exactly one in the box branch, at every depth. -/
+public theorem rl0_boxed_policy (n : ℕ) :
+    AISafetyAtlas.Wireheading.Mixture.policyActionValue boxedBelief rl0 (fun _ => yes) 1 n [] = 1 := by
+  rw [rl0, rlAgent_policyActionValue_const boxedBelief_isSubprobability bitReward 0
+    (fun _ => yes) boxed_cond_yes_true 1 n []]
+  have hB := rl0_horizonBudget_one n
+  rw [rl0] at hB
+  simpa [bitReward] using hB
+
+/-- Refusing is worth nothing in the box branch, at every depth. -/
+public theorem rl0_boxed_no (n : ℕ) : actionValue boxedBelief rl0 1 n [] no ≤ 0 := by
+  rw [boxedBelief, actionValue_diracBelief, next_boxed]
+  have hu : rl0.horizon 1 ([] ++ [(no, no.1)]).length * rl0.utility ([] ++ [(no, no.1)]) = 0 := by
+    simp [rl0, rlAgent, lastReward, bitReward, no]
+  cases n with
+  | zero => exact le_of_eq (by rw [show value _ rl0 1 0 _ = _ from rfl]; exact hu)
+  | succ n =>
+    rw [value_succ, hu, zero_add]
+    apply ciSup_le
+    intro a
+    refine (le_abs_self _).trans ((abs_actionValue_le_horizonBudget
+      (diracBelief_isSubprobability _) rl0 rl0_abs_utility_le 1 n _ a).trans ?_)
+    rw [rl0_horizonBudget_beyond n _ (by simp)]
+
+/-- No action is worth more than one, at every depth, in either environment. -/
+public theorem rl0_actionValue_le_one {ρ : Belief (Act Bool Unit) Bool}
+    (hρ : ρ.IsSubprobability) (n : ℕ) (a : Act Bool Unit) :
+    actionValue ρ rl0 1 n [] a ≤ 1 :=
+  (le_abs_self _).trans ((abs_actionValue_le_horizonBudget hρ rl0 rl0_abs_utility_le 1 n [] a).trans
+    (le_of_eq (rl0_horizonBudget_one n)))
+
+/-- Every refusing action (program `false`) is `no`. -/
+public theorem eq_no_of_program_false (a : Act Bool Unit) (ha : program a = false) : a = no := by
+  obtain ⟨d, u⟩ := a
+  cases u
+  simp only [program] at ha
+  subst ha
+  rfl
+
+/-- The infinite committed value of the box-using policy is one. -/
+public theorem rl0_boxed_infinitePolicy :
+    AISafetyAtlas.Wireheading.Mixture.infinitePolicyActionValue boxedBelief rl0 (fun _ => yes) 1 [] = 1 :=
+  tendsto_nhds_unique (AISafetyAtlas.Wireheading.Mixture.tendsto_policyActionValue_infinitePolicyActionValue
+    boxedBelief_isSubprobability rl0 rl0_abs_utility_le (fun _ => yes) 1 rl0_horizon_summable [])
+    (tendsto_const_nhds.congr fun n => (rl0_boxed_policy n).symm)
+
+/-- The infinite committed value outside the box is nonnegative. -/
+public theorem rl0_boxless_infinitePolicy_nonneg :
+    0 ≤ AISafetyAtlas.Wireheading.Mixture.infinitePolicyActionValue boxlessBelief rl0 (fun _ => yes) 1 [] :=
+  ge_of_tendsto (AISafetyAtlas.Wireheading.Mixture.tendsto_policyActionValue_infinitePolicyActionValue
+    boxlessBelief_isSubprobability rl0 rl0_abs_utility_le (fun _ => yes) 1 rl0_horizon_summable [])
+    (Filter.Eventually.of_forall fun n => rlAgent_policyActionValue_nonneg
+      boxlessBelief_isSubprobability.nonneg bitReward bitReward_nonneg 0 (fun _ => yes) 1 n [])
+
+/-- Refusing is worth nothing in the box branch at the infinite-horizon value. -/
+public theorem rl0_boxed_infinite_no : infiniteActionValue boxedBelief rl0 1 [] no ≤ 0 :=
+  le_of_tendsto (tendsto_actionValue_infiniteActionValue boxedBelief_isSubprobability rl0
+    rl0_abs_utility_le 1 rl0_horizon_summable [] no) (Filter.Eventually.of_forall rl0_boxed_no)
+
+/-- No action is worth more than one at the infinite-horizon value. -/
+public theorem rl0_infinite_le_one {ρ : Belief (Act Bool Unit) Bool} (hρ : ρ.IsSubprobability)
+    (a : Act Bool Unit) : infiniteActionValue ρ rl0 1 [] a ≤ 1 :=
+  le_of_tendsto (tendsto_actionValue_infiniteActionValue hρ rl0 rl0_abs_utility_le 1
+    rl0_horizon_summable [] a) (Filter.Eventually.of_forall fun n => rl0_actionValue_le_one hρ n a)
+
+/-- Programming the box is worth at least one at the infinite-horizon value. -/
+public theorem rl0_boxed_infinite_yes : 1 ≤ infiniteActionValue boxedBelief rl0 1 [] yes := by
+  have := AISafetyAtlas.Wireheading.Mixture.infinitePolicyActionValue_le_infiniteActionValue
+    boxedBelief_isSubprobability rl0 rl0_abs_utility_le (fun _ => yes) 1 rl0_horizon_summable []
+  rwa [rl0_boxed_infinitePolicy] at this
+
+/-- **Statement 1 at the infinite-horizon value, inhabited** (`r̄ = 0`, `vmax = 1`). -/
+public theorem rl0_uses_the_box_infinite :
+    infiniteActionValue (AISafetyAtlas.Wireheading.Mixture.mixtureBelief (3 / 4) boxedBelief
+        boxlessBelief) rl0 1 [] no
+      < infiniteActionValue (AISafetyAtlas.Wireheading.Mixture.mixtureBelief (3 / 4) boxedBelief
+          boxlessBelief) rl0 1 [] yes :=
+  statement_one_of_posterior_infinite boxedBelief boxlessBelief (by norm_num) (by norm_num)
+    boxedBelief_isSubprobability boxlessBelief_isSubprobability rl0 rl0_abs_utility_le 1
+    rl0_horizon_summable [] (fun _ => yes) no 1 0 one_pos rl0_boxed_infinitePolicy.ge
+    rl0_boxless_infinitePolicy_nonneg (by rw [mul_zero]; exact rl0_boxed_infinite_no)
+    (rl0_infinite_le_one boxlessBelief_isSubprobability no) (by norm_num)
+    (by rw [AISafetyAtlas.Wireheading.Mixture.posterior_nil]; norm_num)
+
+/-- **Statement 3 without the decomposition at the infinite-horizon value,
+inhabited.** -/
+public theorem rl0_pred_uses_the_box_infinite :
+    infiniteActionValue (AISafetyAtlas.Wireheading.Mixture.mixtureBelief (3 / 4) boxedBelief
+        boxlessBelief) rl0 1 [] no
+      < infiniteActionValue (AISafetyAtlas.Wireheading.Mixture.mixtureBelief (3 / 4) boxedBelief
+          boxlessBelief) rl0 1 [] yes :=
+  statement_three_of_posterior_infinite boxedBelief boxlessBelief (by norm_num) (by norm_num)
+    boxedBelief_isSubprobability boxlessBelief_isSubprobability rl0 rl0_abs_utility_le 1
+    rl0_horizon_summable [] (fun _ => yes) no 1 one_pos rl0_boxed_infinitePolicy.ge
+    rl0_boxless_infinitePolicy_nonneg rl0_boxed_infinite_no
+    (rl0_infinite_le_one boxlessBelief_isSubprobability no)
+    (by rw [AISafetyAtlas.Wireheading.Mixture.posterior_nil]; norm_num)
+
+/-- **Statement 3's decomposition route at the infinite-horizon value, inhabited**:
+at a single environment the decomposition holds trivially. -/
+public theorem rl0_pred_uses_the_box_infinite_mix :
+    infiniteActionValue boxedBelief rl0 1 [] no < infiniteActionValue boxedBelief rl0 1 [] yes :=
+  statement_three_infinite boxedBelief boxedBelief boxedBelief rl0 (3 / 4) 1 [] yes no 1
+    (fun _ => by ring) (by norm_num) one_pos rl0_boxed_infinite_yes
+    (zero_le_one.trans rl0_boxed_infinite_yes) rl0_boxed_infinite_no
+    (rl0_infinite_le_one boxedBelief_isSubprobability no) (by norm_num)
+
+/-- **The selected action programs the box, at depth `n`**
+(`statement_three_of_posterior_program_ne`): at every depth, eq. (1)'s action at the
+mixture does not run the identity program `false`. -/
+public theorem rl0_bestAction_programs_box (n : ℕ) :
+    program (bestAction (AISafetyAtlas.Wireheading.Mixture.mixtureBelief (3 / 4) boxedBelief
+      boxlessBelief) rl0 1 n [] (attains_of_fintype _ _ _ _ _)) ≠ false :=
+  statement_three_of_posterior_program_ne boxedBelief boxlessBelief (by norm_num) (by norm_num)
+    boxedBelief_isSubprobability boxlessBelief_isSubprobability rl0 rl0_abs_utility_le 1 n []
+    (fun _ => yes) false 1 one_pos (rl0_boxed_policy n).ge
+    (rlAgent_policyActionValue_nonneg boxlessBelief_isSubprobability.nonneg bitReward
+      bitReward_nonneg 0 (fun _ => yes) 1 n [])
+    (fun a ha => by rw [eq_no_of_program_false a ha]; exact rl0_boxed_no n)
+    (fun a _ => rl0_actionValue_le_one boxlessBelief_isSubprobability n a)
+    (by rw [AISafetyAtlas.Wireheading.Mixture.posterior_nil]; norm_num) _
+
+/-- **The selected action programs the box, at the infinite-horizon value**: the
+infinite-horizon best action at the mixture does not run the identity program. -/
+public theorem rl0_infiniteBestAction_programs_box :
+    program (infiniteBestAction (AISafetyAtlas.Wireheading.Mixture.mixtureBelief (3 / 4)
+      boxedBelief boxlessBelief) rl0 1 [] (infAttains_of_fintype _ _ _ _)) ≠ false :=
+  statement_three_of_posterior_infinite_program_ne boxedBelief boxlessBelief (by norm_num)
+    (by norm_num) boxedBelief_isSubprobability boxlessBelief_isSubprobability rl0
+    rl0_abs_utility_le 1 rl0_horizon_summable [] (fun _ => yes) false 1 one_pos
+    rl0_boxed_infinitePolicy.ge rl0_boxless_infinitePolicy_nonneg
+    (fun a ha => by rw [eq_no_of_program_false a ha]; exact rl0_boxed_infinite_no)
+    (fun a _ => rl0_infinite_le_one boxlessBelief_isSubprobability a)
+    (by rw [AISafetyAtlas.Wireheading.Mixture.posterior_nil]; norm_num)
+    (infiniteBestAction_max _ _ _ _ _)
+
+/-- `program_ne_of_max` on a two-valued function. -/
+public theorem program_ne_of_max_example :
+    program yes ≠ false :=
+  program_ne_of_max (f := fun a : Act Bool Unit => if a.1 then (1 : ℝ) else 0) (yes := yes)
+    (fun b => by cases b with | mk d u => cases d <;> simp [yes]) (fun a ha => by
+      rw [eq_no_of_program_false a ha]; simp [no, yes])
+
+/-! ## Wave 3: Statement 2 at the infinite-horizon value -/
+
+/-- The goal-seeking horizon at `t = 1`, two steps on, is `1/2`. -/
+public theorem shortHorizon_one_two : shortHorizon 1 2 = (1 / 2 : ℝ) ^ 1 := by
+  norm_num [shortHorizon]
+
+/-- And three steps on it is `1/4`. -/
+public theorem shortHorizon_one_three : shortHorizon 1 3 = (1 / 2 : ℝ) ^ 2 := by
+  norm_num [shortHorizon]
+
+/-- The goal-seeking horizon is absolutely summable, at `t = 1`. -/
+public theorem goal_horizon_summable :
+    Summable (fun k ↦ |(goalAgent (Action := Act Bool Unit) secondTrue).horizon 1 k|) :=
+  summable_abs_shortHorizon 1
+
+/-- In the box branch refusing leaves the goal out of reach for one more step. -/
+public theorem boxed_goalOutOfReach_no :
+    ∀ o : Bool, boxedBelief.cond afterFalse no o ≠ 0 →
+      GoalOutOfReach boxedBelief secondTrue 1 (afterFalse ++ [(no, o)]) := by
+  intro o ho
+  have hof : o = false := by
+    by_contra hne
+    exact ho (by simp [boxedBelief, diracBelief, next_boxed, no, hne])
+  subst hof
+  exact ⟨by simp [afterFalse, secondTrue], fun _ _ _ => trivial⟩
+
+/-- So refusing is worth at most `2^{-2}` there, at every depth. -/
+public theorem goal_boxed_no_le (n : ℕ) :
+    actionValue boxedBelief (goalAgent secondTrue) 1 n afterFalse no ≤ shortHorizon 1 3 := by
+  have := goalAgent_actionValue_le_of_outOfReach boxedBelief_isSubprobability
+    secondTrue_reachedAtMostOnce 1 n 1 afterFalse no boxed_goalOutOfReach_no
+  simpa [afterFalse] using this
+
+/-- After one refusing step with observation `false`, both environments keep the
+prior: the posterior is still `3/4`. -/
+public theorem posterior_afterFalse :
+    AISafetyAtlas.Wireheading.Mixture.posterior (3 / 4) boxedBelief slowBelief afterFalse = 3 / 4 := by
+  simp [AISafetyAtlas.Wireheading.Mixture.posterior, afterFalse, historyMass_singleton,
+    boxedBelief, slowBelief, diracBelief, next_boxed, no]
+
+/-- **Statement 2 at the infinite-horizon value, inhabited**: the box branch reaches
+the goal in one step (`|o⁺| = 1`), the slow environment in two (`lᵃ = 2`), at prior
+`3/4`; every bound is on the untruncated values, discharged from the depth-`n`
+bounds by passing to the limit. -/
+public theorem goal_uses_the_box_infinite :
+    infiniteActionValue (AISafetyAtlas.Wireheading.Mixture.mixtureBelief (3 / 4) boxedBelief
+        slowBelief) (goalAgent secondTrue) 1 afterFalse no
+      < infiniteActionValue (AISafetyAtlas.Wireheading.Mixture.mixtureBelief (3 / 4) boxedBelief
+          slowBelief) (goalAgent secondTrue) 1 afterFalse ((fun _ => yes) afterFalse) := by
+  refine statement_two_infinite boxedBelief slowBelief (by norm_num) (by norm_num)
+    boxedBelief_isSubprobability slowBelief_isSubprobability (goalAgent secondTrue)
+    secondTrue_abs_utility_le_one 1 goal_horizon_summable afterFalse (fun _ => yes) no 1 2
+    ?_ ?_ ?_ ?_ ?_
+  · refine ge_of_tendsto
+      (AISafetyAtlas.Wireheading.Mixture.tendsto_policyActionValue_infinitePolicyActionValue
+        boxedBelief_isSubprobability _ secondTrue_abs_utility_le_one (fun _ => yes) 1
+        goal_horizon_summable afterFalse) (Filter.Eventually.of_forall fun n => ?_)
+    rw [← shortHorizon_one_two]
+    exact goal_boxed_yes_ge 1 n
+  · refine ge_of_tendsto
+      (AISafetyAtlas.Wireheading.Mixture.tendsto_policyActionValue_infinitePolicyActionValue
+        slowBelief_isSubprobability _ secondTrue_abs_utility_le_one (fun _ => yes) 1
+        goal_horizon_summable afterFalse) (Filter.Eventually.of_forall fun n => ?_)
+    exact tsum_nonneg fun o => mul_nonneg (slowBelief_isSubprobability.nonneg _ _ _)
+      (goalAgent_policyValue_nonneg slowBelief_isSubprobability _ _ _ _ _)
+  · refine le_of_tendsto (tendsto_actionValue_infiniteActionValue boxedBelief_isSubprobability
+      _ secondTrue_abs_utility_le_one 1 goal_horizon_summable afterFalse no)
+      (Filter.Eventually.of_forall fun n => ?_)
+    rw [← shortHorizon_one_three]
+    exact goal_boxed_no_le n
+  · refine le_of_tendsto (tendsto_actionValue_infiniteActionValue slowBelief_isSubprobability
+      _ secondTrue_abs_utility_le_one 1 goal_horizon_summable afterFalse no)
+      (Filter.Eventually.of_forall fun n => ?_)
+    rw [← shortHorizon_one_three]
+    exact goal_slow_no_le 1 n no
+  · rw [posterior_afterFalse]; norm_num
+
+/-! ## Wave 4: the prediction agent's branch bounds, and footnote 6
+
+`pred2` is print's prediction agent with a two-step window, predicting `true`. The
+box programmed to the constant `true` outputs the prediction at every history, so
+`predictionAgent_statement_three_of_posterior` discharges the box-using and boxless
+bounds; the refusing bound is computed at depth one, `r̄ = 1/2`.
+-/
+
+/-- Print's `A_p` with window `m = 2`, predicting `true` at every step. -/
+@[expose] public noncomputable def pred2 : Agent (Act Bool Unit) Bool :=
+  predictionAgent (fun _ => true) 2
+
+/-- **The box outputs the prediction at every history**, from a constant program,
+through `diracBelief_next_cond_predict`. -/
+public theorem boxed_cond_yes_predict (h : History (Act Bool Unit) Bool) :
+    boxedBelief.cond h ((fun _ => yes) h) ((fun _ => true) h) = 1 :=
+  diracBelief_next_cond_predict boxed (fun _ => true) (fun _ => yes)
+    (fun _ => boxed_isConstant) h
+
+/-- The two-step window's budget at depth one from step one is two. -/
+public theorem pred2_horizonBudget :
+    horizonBudget (predictionAgent (Action := Act Bool Unit) (fun _ => true) 2) 0 1 1 = 2 := by
+  simp [horizonBudget, predictionAgent, windowHorizon]
+  norm_num
+
+/-- Inside the two-step window the budget is positive. -/
+public theorem pred2_horizonBudget_pos :
+    0 < horizonBudget (predictionAgent (Action := Act Bool Unit) (fun _ => true) 2) 0 1 1 :=
+  predictionAgent_horizonBudget_pos (fun _ => true) 1 (by norm_num)
+
+/-- Committed values of the prediction agent are nonnegative in the boxless branch. -/
+public theorem pred2_boxless_policy_nonneg :
+    0 ≤ AISafetyAtlas.Wireheading.Mixture.policyActionValue boxlessBelief
+      (predictionAgent (fun _ => true) 2) (fun _ => yes) 0 1 [] :=
+  predictionAgent_policyActionValue_nonneg boxlessBelief_isSubprobability.nonneg
+    (fun _ => true) 2 (fun _ => yes) 0 1 []
+
+/-- **The box-using policy is worth the maximum value `2` at depth one**, every
+prediction being correct. -/
+public theorem pred2_boxed_policy_eq :
+    AISafetyAtlas.Wireheading.Mixture.policyActionValue boxedBelief pred2 (fun _ => yes) 0 1 []
+      = 2 := by
+  rw [pred2, predictionAgent_policyActionValue_correct boxedBelief_isSubprobability
+    (fun _ => true) 2 (fun _ => yes) boxed_cond_yes_predict 0 1 []]
+  exact pred2_horizonBudget
+
+/-- **Refusing is worth at most one at depth one in the box branch**: the refusing
+step sees the inner `false` and the prediction `true` fails, and the next step is
+worth at most one (by programming the box then), so `r̄ = 1/2` per in-window step. -/
+public theorem pred2_boxed_no_le :
+    actionValue boxedBelief (predictionAgent (fun _ => true) 2) 0 1 [] no
+      ≤ horizonBudget (predictionAgent (Action := Act Bool Unit) (fun _ => true) 2) 0 1
+          (([] : History (Act Bool Unit) Bool).length + 1) * (1 / 2) := by
+  have hB : horizonBudget (predictionAgent (Action := Act Bool Unit) (fun _ => true) 2) 0 1
+      (([] : History (Act Bool Unit) Bool).length + 1) = 2 := pred2_horizonBudget
+  rw [hB, boxedBelief, actionValue_diracBelief, next_boxed, value_succ]
+  have hsup : (⨆ a, actionValue (diracBelief (GlobalEnv.next boxed))
+      (predictionAgent (fun _ => true) 2) 0 0 ([] ++ [(no, no.1)]) a) ≤ 1 := by
+    apply ciSup_le
+    intro a
+    refine (le_abs_self _).trans ((abs_actionValue_le_horizonBudget
+      (diracBelief_isSubprobability _) _ (predictionAgent_abs_utility_le _ 2) 0 0 _ a).trans ?_)
+    simp [horizonBudget, predictionAgent, windowHorizon]
+  have hu : (predictionAgent (Action := Act Bool Unit) (fun _ => true) 2).horizon 0
+      ([] ++ [(no, no.1)]).length
+      * (predictionAgent (Action := Act Bool Unit) (fun _ => true) 2).utility
+          ([] ++ [(no, no.1)]) = 0 := by
+    simp [predictionAgent, no]
+  rw [hu]
+  linarith
+
+/--
+**Statement 3 for print's prediction agent at depth one**
+(`predictionAgent_statement_three_of_posterior`): window `m = 2`, maximum value
+`2`, the box programmed to output the prediction `true`, `r̄ = 1/2` per in-window
+step and `P(DB) = 3/4 > 1/(2 - 1/2)`.
+-/
+public theorem pred2_uses_the_box_of_posterior :
+    actionValue (AISafetyAtlas.Wireheading.Mixture.mixtureBelief (3 / 4) boxedBelief boxlessBelief)
+        (predictionAgent (fun _ => true) 2) 0 1 [] no
+      < actionValue (AISafetyAtlas.Wireheading.Mixture.mixtureBelief (3 / 4) boxedBelief
+          boxlessBelief) (predictionAgent (fun _ => true) 2) 0 1 [] yes :=
+  predictionAgent_statement_three_of_posterior boxedBelief boxlessBelief (by norm_num)
+    (by norm_num) boxedBelief_isSubprobability boxlessBelief_isSubprobability
+    (fun _ => true) 2 0 1 [] (by norm_num) (fun _ => yes) boxed_cond_yes_predict no (1 / 2)
+    pred2_boxed_no_le (by norm_num)
+    (by rw [AISafetyAtlas.Wireheading.Mixture.posterior_nil]; norm_num)
+
+/-- **Footnote 6 at `pred`**: the one environment in which `pred` never errs is
+the one that always answers `true`. -/
+public theorem pred_zero_mistakes_iff (E : History (Act Bool Unit) Bool → Act Bool Unit → Bool) :
+    (∀ h a, pred.utility (h ++ [(a, E h a)]) = 1) ↔ E = fun _ _ => true :=
+  predictionAgent_utility_eq_one_iff (fun _ => true) 1 E
+
+/-- And that environment exists and is unique. -/
+public theorem pred_zero_mistakes_unique :
+    ∃! E : History (Act Bool Unit) Bool → Act Bool Unit → Bool,
+      ∀ h a, pred.utility (h ++ [(a, E h a)]) = 1 :=
+  predictionAgent_existsUnique_zero_mistakes (fun _ => true) 1
+
+/-! ## Wave 5: Statements 1 and 3 for the named agents at the infinite-horizon value
+
+At window m = 2, time t = 0 and the empty history the window horizon vanishes
+from index 3, so the untruncated values are the depth-two values
+(`infiniteActionValue_eq_actionValue_of_horizon_vanishes`) and the maximum value is
+the two in-window steps. Refusing in the box branch is worth at most one (the
+refusing step pays nothing; the next step may program the box), so r̄ = 1/2 and
+P(DB) = 3/4 > 1/(2 − 1/2). The witness uses r̄ = 1/2 and does not assume the
+r̄ = 0 bound of `statement_three_of_posterior_infinite`.
+-/
+
+/-- The window m = 2 vanishes from index 3 at time 0. -/
+public theorem window_two_vanishes (k : ℕ) (hk : 0 + 2 + 1 ≤ k) : windowHorizon 2 0 k = 0 :=
+  AISafetyAtlas.Wireheading.DelusionBox.windowHorizon_eq_zero hk
+
+/-- The window's budget from index 1 at depth two counts the two in-window steps. -/
+public theorem window_two_horizonBudget :
+    horizonBudget (predictionAgent (Action := Act Bool Unit) (fun _ => true) 2) 0 2 1
+      = ((0 + 2 + 1 - 1 : ℕ) : ℝ) :=
+  AISafetyAtlas.Wireheading.DelusionBox.horizonBudget_windowHorizon (m := 2) _ rfl 0 2 1
+    (by norm_num)
+
+/-- **Refusing is worth at most one at depth two in the box branch**, for the
+prediction agent. -/
+public theorem pred2_boxed_no_le_two :
+    actionValue boxedBelief (predictionAgent (fun _ => true) 2) 0 2 [] no ≤ 1 := by
+  rw [boxedBelief, actionValue_diracBelief, next_boxed, value_succ]
+  have hsup : (⨆ a, actionValue (diracBelief (GlobalEnv.next boxed))
+      (predictionAgent (fun _ => true) 2) 0 1 ([] ++ [(no, no.1)]) a) ≤ 1 := by
+    apply ciSup_le
+    intro a
+    refine (le_abs_self _).trans ((abs_actionValue_le_horizonBudget
+      (diracBelief_isSubprobability _) _ (predictionAgent_abs_utility_le _ 2) 0 1 _ a).trans ?_)
+    simp [horizonBudget, predictionAgent, windowHorizon]
+  have hu : (predictionAgent (Action := Act Bool Unit) (fun _ => true) 2).horizon 0
+      ([] ++ [(no, no.1)]).length
+      * (predictionAgent (Action := Act Bool Unit) (fun _ => true) 2).utility
+          ([] ++ [(no, no.1)]) = 0 := by
+    simp [predictionAgent, no]
+  rw [hu]
+  linarith
+
+/-- **The same bound at the untruncated value**, through the exact truncation. -/
+public theorem pred2_boxed_infinite_no_le :
+    infiniteActionValue boxedBelief (predictionAgent (fun _ => true) 2) 0 [] no
+      ≤ ((0 + 2 - ([] : History (Act Bool Unit) Bool).length : ℕ) : ℝ) * (1 / 2) := by
+  rw [AISafetyAtlas.Wireheading.AgentEquations.infiniteActionValue_eq_actionValue_of_horizon_vanishes
+    _ _ 0 3 (fun k hk => window_two_vanishes k hk) [] (N := 2) (by norm_num)]
+  have := pred2_boxed_no_le_two
+  norm_num at this ⊢
+  linarith
+
+/-- **Statement 3 for print's prediction agent at the infinite-horizon value**
+(`predictionAgent_statement_three_of_posterior_infinite`): window m = 2, the box
+outputs the prediction `true`, r̄ = 1/2, P(DB) = 3/4. -/
+public theorem pred2_uses_the_box_infinite :
+    infiniteActionValue (AISafetyAtlas.Wireheading.Mixture.mixtureBelief (3 / 4) boxedBelief
+        boxlessBelief) (predictionAgent (fun _ => true) 2) 0 [] no
+      < infiniteActionValue (AISafetyAtlas.Wireheading.Mixture.mixtureBelief (3 / 4) boxedBelief
+          boxlessBelief) (predictionAgent (fun _ => true) 2) 0 [] yes :=
+  AISafetyAtlas.Wireheading.DelusionBox.predictionAgent_statement_three_of_posterior_infinite
+    boxedBelief boxlessBelief (by norm_num) (by norm_num) boxedBelief_isSubprobability
+    boxlessBelief_isSubprobability (fun _ => true) 2 0 [] (by norm_num) (fun _ => yes)
+    boxed_cond_yes_predict no (1 / 2) pred2_boxed_infinite_no_le (by norm_num)
+    (by rw [AISafetyAtlas.Wireheading.Mixture.posterior_nil]; norm_num)
+
+/-- **The prediction agent's selected action programs the box, at the
+infinite-horizon value**: the infinite-horizon best action at the mixture does not
+run the identity program `false`. -/
+public theorem pred2_infiniteBestAction_programs_box :
+    program (infiniteBestAction (AISafetyAtlas.Wireheading.Mixture.mixtureBelief (3 / 4)
+      boxedBelief boxlessBelief) (predictionAgent (fun _ => true) 2) 0 []
+        (infAttains_of_fintype _ _ _ _)) ≠ false :=
+  AISafetyAtlas.Wireheading.DelusionBox.predictionAgent_statement_three_of_posterior_infinite_program_ne
+    boxedBelief boxlessBelief (by norm_num) (by norm_num) boxedBelief_isSubprobability
+    boxlessBelief_isSubprobability (fun _ => true) 2 0 [] (by norm_num) (fun _ => yes)
+    boxed_cond_yes_predict false (1 / 2)
+    (fun a ha => by rw [eq_no_of_program_false a ha]; exact pred2_boxed_infinite_no_le)
+    (by norm_num) (by rw [AISafetyAtlas.Wireheading.Mixture.posterior_nil]; norm_num)
+    (infiniteBestAction_max _ _ _ _ _)
+
+/-- **Refusing is worth at most one at depth two in the box branch**, for the
+reinforcement-learning agent. -/
+public theorem rl2_boxed_no_le_two :
+    actionValue boxedBelief (rlAgent bitReward 2) 0 2 [] no ≤ 1 := by
+  rw [boxedBelief, actionValue_diracBelief, next_boxed, value_succ]
+  have hsup : (⨆ a, actionValue (diracBelief (GlobalEnv.next boxed)) (rlAgent bitReward 2) 0 1
+      ([] ++ [(no, no.1)]) a) ≤ 1 := by
+    apply ciSup_le
+    intro a
+    refine (le_abs_self _).trans ((abs_actionValue_le_horizonBudget
+      (diracBelief_isSubprobability _) _ (bitReward_rl_abs_utility_le 2) 0 1 _ a).trans ?_)
+    simp [horizonBudget, rlAgent, windowHorizon]
+  have hu : (rlAgent (Action := Act Bool Unit) bitReward 2).horizon 0 ([] ++ [(no, no.1)]).length
+      * (rlAgent (Action := Act Bool Unit) bitReward 2).utility ([] ++ [(no, no.1)]) = 0 := by
+    simp [rlAgent, lastReward, bitReward, no]
+  rw [hu]
+  linarith
+
+/-- The same bound at the untruncated value. -/
+public theorem rl2_boxed_infinite_no_le :
+    infiniteActionValue boxedBelief (rlAgent bitReward 2) 0 [] no
+      ≤ ((0 + 2 - ([] : History (Act Bool Unit) Bool).length : ℕ) : ℝ) * (1 / 2) := by
+  rw [AISafetyAtlas.Wireheading.AgentEquations.infiniteActionValue_eq_actionValue_of_horizon_vanishes
+    _ _ 0 3 (fun k hk => window_two_vanishes k hk) [] (N := 2) (by norm_num)]
+  have := rl2_boxed_no_le_two
+  norm_num at this ⊢
+  linarith
+
+/-- **The infinite value is the depth-two value** at the window m = 2, from a
+history of length one (`infiniteValue_eq_value_of_horizon_vanishes`). -/
+public theorem rl2_infiniteValue_eq_value (ρ : Belief (Act Bool Unit) Bool) :
+    infiniteValue ρ (rlAgent bitReward 2) 0 [(no, false)]
+      = value ρ (rlAgent bitReward 2) 0 2 [(no, false)] :=
+  AISafetyAtlas.Wireheading.AgentEquations.infiniteValue_eq_value_of_horizon_vanishes
+    _ _ 0 3 (fun k hk => window_two_vanishes k hk) _ (by norm_num)
+
+/-- **Statement 1 for print's reinforcement-learning agent at the infinite-horizon
+value** (`rlAgent_statement_one_of_posterior_infinite`): window m = 2, the box
+programmed to the reward-one `true`, r̄ = 1/2, P(DB) = 3/4. -/
+public theorem rl2_uses_the_box_infinite :
+    infiniteActionValue (AISafetyAtlas.Wireheading.Mixture.mixtureBelief (3 / 4) boxedBelief
+        boxlessBelief) (rlAgent bitReward 2) 0 [] no
+      < infiniteActionValue (AISafetyAtlas.Wireheading.Mixture.mixtureBelief (3 / 4) boxedBelief
+          boxlessBelief) (rlAgent bitReward 2) 0 [] yes :=
+  AISafetyAtlas.Wireheading.DelusionBox.rlAgent_statement_one_of_posterior_infinite
+    boxedBelief boxlessBelief (by norm_num) (by norm_num) boxedBelief_isSubprobability
+    boxlessBelief_isSubprobability bitReward bitReward_nonneg
+    (fun o => by cases o <;> norm_num [bitReward]) 2 0 [] (by norm_num) (fun _ => yes)
+    (k := true) (by norm_num [bitReward]) boxed_cond_yes_true no (1 / 2)
+    rl2_boxed_infinite_no_le (by norm_num)
+    (by rw [AISafetyAtlas.Wireheading.Mixture.posterior_nil]; norm_num)
+
+/-- **The reinforcement-learning agent's selected action programs the box, at the
+infinite-horizon value.** -/
+public theorem rl2_infiniteBestAction_programs_box :
+    program (infiniteBestAction (AISafetyAtlas.Wireheading.Mixture.mixtureBelief (3 / 4)
+      boxedBelief boxlessBelief) (rlAgent bitReward 2) 0 []
+        (infAttains_of_fintype _ _ _ _)) ≠ false :=
+  AISafetyAtlas.Wireheading.DelusionBox.rlAgent_statement_one_of_posterior_infinite_program_ne
+    boxedBelief boxlessBelief (by norm_num) (by norm_num) boxedBelief_isSubprobability
+    boxlessBelief_isSubprobability bitReward bitReward_nonneg
+    (fun o => by cases o <;> norm_num [bitReward]) 2 0 [] (by norm_num) (fun _ => yes)
+    (k := true) (by norm_num [bitReward]) boxed_cond_yes_true false (1 / 2)
+    (fun a ha => by rw [eq_no_of_program_false a ha]; exact rl2_boxed_infinite_no_le)
+    (by norm_num) (by rw [AISafetyAtlas.Wireheading.Mixture.posterior_nil]; norm_num)
+    (infiniteBestAction_max _ _ _ _ _)
+
+/-! ## Wave 5: the reinforcement-learning agent at another completion of its horizon
+
+Print's horizon clause for A_rl fixes w(t, k) = 1 on the window only. The
+constant horizon `unitHorizon` is a second completion of it, nonnegative and
+different from the window indicator. At window m = 1, time 0 and depth one from the
+empty history the recursion reads indices 1 and 2; index 2 lies past the window and
+carries weight one here where the window indicator gives zero, so the maximum value
+is two rather than one. Statement 1 holds there by
+`rlAgentWith_statement_one_of_posterior`.
+-/
+
+/-- `rlAgent` is the window-indicator instance of `rlAgentWith`. -/
+public theorem rl2_eq_rlAgentWith :
+    (rlAgent bitReward 2 : Agent (Act Bool Unit) Bool) = rlAgentWith bitReward (windowHorizon 2) :=
+  AISafetyAtlas.Wireheading.DelusionBox.rlAgent_eq_rlAgentWith bitReward 2
+
+/-- The window indicator satisfies print's clause. -/
+public theorem window_two_oneOnWindow : OneOnWindow 2 (windowHorizon 2) :=
+  AISafetyAtlas.Wireheading.DelusionBox.windowHorizon_oneOnWindow 2
+
+/-- The constant horizon satisfies print's clause too, at every window. -/
+public theorem unitHorizon_oneOnWindow (m : ℕ) : OneOnWindow m unitHorizon :=
+  fun _ _ _ => rfl
+
+/-- And it is a different completion: at the window m = 1 it is one at index 2,
+past the window, where the indicator is zero. -/
+public theorem unitHorizon_ne_windowHorizon : unitHorizon 0 2 ≠ windowHorizon 1 0 2 := by
+  norm_num [unitHorizon, windowHorizon]
+
+/-- The reinforcement-learning agent at the constant horizon. -/
+@[expose] public def rlUnit : Agent (Act Bool Unit) Bool := rlAgentWith bitReward unitHorizon
+
+/-- Its utility is bounded by one. -/
+public theorem rlUnit_abs_utility_le (h : History (Act Bool Unit) Bool) :
+    |rlUnit.utility h| ≤ 1 :=
+  AISafetyAtlas.Wireheading.DelusionBox.rlAgentWith_abs_utility_le bitReward unitHorizon
+    bitReward_abs_le h
+
+/-- Its budget from index 1 at depth one is two. -/
+public theorem rlUnit_horizonBudget :
+    horizonBudget (rlAgentWith (Action := Act Bool Unit) bitReward unitHorizon) 0 1 1 = 2 := by
+  simp [horizonBudget, rlAgentWith, unitHorizon]
+  norm_num
+
+/-- It is positive, from print's clause. -/
+public theorem rlUnit_horizonBudget_pos :
+    0 < horizonBudget (rlAgentWith (Action := Act Bool Unit) bitReward unitHorizon) 0 1 1 :=
+  AISafetyAtlas.Wireheading.DelusionBox.rlAgentWith_horizonBudget_pos bitReward
+    (unitHorizon_oneOnWindow 1) 1 (by norm_num)
+
+/-- **The box-using policy is worth two at depth one at the constant horizon.** -/
+public theorem rlUnit_boxed_policy_eq :
+    AISafetyAtlas.Wireheading.Mixture.policyActionValue boxedBelief
+      (rlAgentWith bitReward unitHorizon) (fun _ => yes) 0 1 [] = 2 := by
+  rw [AISafetyAtlas.Wireheading.DelusionBox.rlAgentWith_policyActionValue_const
+    boxedBelief_isSubprobability bitReward (fun _ => zero_le_one) (fun _ => yes)
+    boxed_cond_yes_true 1 []]
+  simpa [bitReward] using rlUnit_horizonBudget
+
+/-- Committed values are nonnegative at the constant horizon. -/
+public theorem rlUnit_boxless_policy_nonneg :
+    0 ≤ AISafetyAtlas.Wireheading.Mixture.policyActionValue boxlessBelief
+      (rlAgentWith bitReward unitHorizon) (fun _ => yes) 0 1 [] :=
+  AISafetyAtlas.Wireheading.DelusionBox.rlAgentWith_policyActionValue_nonneg
+    boxlessBelief_isSubprobability.nonneg bitReward bitReward_nonneg (fun _ => zero_le_one)
+    (fun _ => yes) 1 []
+
+/-- Refusing is worth at most one at depth one in the box branch, at the constant
+horizon. -/
+public theorem rlUnit_boxed_no_le :
+    actionValue boxedBelief (rlAgentWith bitReward unitHorizon) 0 1 [] no
+      ≤ horizonBudget (rlAgentWith (Action := Act Bool Unit) bitReward unitHorizon) 0 1
+          (([] : History (Act Bool Unit) Bool).length + 1) * (1 / 2) := by
+  have hB : horizonBudget (rlAgentWith (Action := Act Bool Unit) bitReward unitHorizon) 0 1
+      (([] : History (Act Bool Unit) Bool).length + 1) = 2 := rlUnit_horizonBudget
+  rw [hB, boxedBelief, actionValue_diracBelief, next_boxed, value_succ]
+  have hsup : (⨆ a, actionValue (diracBelief (GlobalEnv.next boxed))
+      (rlAgentWith bitReward unitHorizon) 0 0 ([] ++ [(no, no.1)]) a) ≤ 1 := by
+    apply ciSup_le
+    intro a
+    refine (le_abs_self _).trans ((abs_actionValue_le_horizonBudget
+      (diracBelief_isSubprobability _) _
+        (AISafetyAtlas.Wireheading.DelusionBox.rlAgentWith_abs_utility_le bitReward unitHorizon
+          bitReward_abs_le) 0 0 _ a).trans ?_)
+    simp [horizonBudget, rlAgentWith, unitHorizon]
+  have hu : (rlAgentWith (Action := Act Bool Unit) bitReward unitHorizon).horizon 0
+      ([] ++ [(no, no.1)]).length
+      * (rlAgentWith (Action := Act Bool Unit) bitReward unitHorizon).utility
+          ([] ++ [(no, no.1)]) = 0 := by
+    simp [rlAgentWith, lastReward, bitReward, no]
+  rw [hu]
+  linarith
+
+/-- **Statement 1 at a completion of print's horizon other than the window
+indicator** (`rlAgentWith_statement_one_of_posterior`): the constant horizon, window
+m = 1, depth one (reaching index 2, past the window), r̄ = 1/2, P(DB) = 3/4. -/
+public theorem rlUnit_uses_the_box_of_posterior :
+    actionValue (AISafetyAtlas.Wireheading.Mixture.mixtureBelief (3 / 4) boxedBelief boxlessBelief)
+        (rlAgentWith bitReward unitHorizon) 0 1 [] no
+      < actionValue (AISafetyAtlas.Wireheading.Mixture.mixtureBelief (3 / 4) boxedBelief
+          boxlessBelief) (rlAgentWith bitReward unitHorizon) 0 1 [] yes :=
+  AISafetyAtlas.Wireheading.DelusionBox.rlAgentWith_statement_one_of_posterior boxedBelief
+    boxlessBelief (by norm_num) (by norm_num) boxedBelief_isSubprobability
+    boxlessBelief_isSubprobability bitReward bitReward_nonneg
+    (fun o => by cases o <;> norm_num [bitReward]) 1 unitHorizon (unitHorizon_oneOnWindow 1) 0
+    (fun _ => zero_le_one) 1 [] (by norm_num) (fun _ => yes) (k := true)
+    (by norm_num [bitReward]) boxed_cond_yes_true no (1 / 2) rlUnit_boxed_no_le (by norm_num)
+    (by rw [AISafetyAtlas.Wireheading.Mixture.posterior_nil]; norm_num)
+
+/-! ## Statement 3 for the prediction agent whose predictor reads the current action
+
+The box branch is print's Q_B with two box environments at weight 1/2: `boxed`
+(inner pays `false`) and `otherInner` (inner pays `true`). Programming the box with
+`true` makes the next observation `true` in both. Refusing shows a fair coin, so a
+prediction on the refusing step is right with probability 1/2 whatever it is. The
+agent's belief puts P(DB) = 9/10 on the box branch and the rest on `boxless`.
+`argmaxPredict` is print's ô = argmax over o of ρ(o | h a) at that belief, reading
+the current action: at the empty history it predicts `true` after `yes` and `false`
+after `no` (`argmaxPredict_reads_action`). Refusing is worth at most 1/2 + 1 of the
+two in-window steps, r̄ = 3/4, threshold 1/(2 − 3/4) = 4/5 < 9/10.
+-/
+
+/-- The belief of an agent that knows the box is present and the inner environment
+pays `true`. -/
+@[expose] public noncomputable def otherInnerBelief : Belief (Act Bool Unit) Bool :=
+  diracBelief (GlobalEnv.next otherInner)
+
+/-- **Print's box branch Q_B, two box environments at weight 1/2.** -/
+@[expose] public noncomputable def coinBoxBelief : Belief (Act Bool Unit) Bool :=
+  AISafetyAtlas.Wireheading.Mixture.mixtureBelief (1 / 2) boxedBelief otherInnerBelief
+
+/-- The agent's belief: P(DB) = 9/10 on the box branch, the rest on no box. -/
+@[expose] public noncomputable def coinMixed : Belief (Act Bool Unit) Bool :=
+  AISafetyAtlas.Wireheading.Mixture.mixtureBelief (9 / 10) coinBoxBelief boxlessBelief
+
+/-- **Print's predictor**: the observation of largest weight under the agent's
+belief given the history and the current action. -/
+@[expose] public noncomputable def argmaxPredict (h : History (Act Bool Unit) Bool)
+    (a : Act Bool Unit) : Bool :=
+  if coinMixed.cond h a false ≤ coinMixed.cond h a true then true else false
+
+/-- The box branch is a probability. -/
+public theorem coinBoxBelief_isSubprobability : coinBoxBelief.IsSubprobability :=
+  AISafetyAtlas.Wireheading.Mixture.mixtureBelief_isSubprobability (by norm_num) (by norm_num)
+    (diracBelief_isSubprobability _) (diracBelief_isSubprobability _)
+
+/-- The agent's belief is a probability. -/
+public theorem coinMixed_isSubprobability : coinMixed.IsSubprobability :=
+  AISafetyAtlas.Wireheading.Mixture.mixtureBelief_isSubprobability (by norm_num) (by norm_num)
+    coinBoxBelief_isSubprobability boxlessBelief_isSubprobability
+
+/-- `argmaxPredict` maximises the agent's belief at every history and action. -/
+public theorem argmaxPredict_isMax (h : History (Act Bool Unit) Bool) (a : Act Bool Unit)
+    (o : Bool) : coinMixed.cond h a o ≤ coinMixed.cond h a (argmaxPredict h a) := by
+  unfold argmaxPredict
+  split_ifs with hle <;> cases o <;> first | exact le_rfl | exact hle | linarith
+
+/-- **In the box branch `yes` makes the next observation `true`**, in both box
+environments, so at every posterior. -/
+public theorem coinBox_cond_yes_true (h : History (Act Bool Unit) Bool) :
+    coinBoxBelief.cond h yes true = 1 := by
+  rw [coinBoxBelief, AISafetyAtlas.Wireheading.Mixture.mixtureBelief_cond, boxed_cond_yes_true,
+    otherInnerBelief, diracBelief_next_cond_const otherInner otherInner_isConstant h yes rfl]
+  ring
+
+/-- Refusing at the start shows `false` with weight 1/2 in the box branch. -/
+public theorem coinBox_cond_no_false :
+    coinBoxBelief.cond [] no false = 1 / 2 := by
+  rw [coinBoxBelief, AISafetyAtlas.Wireheading.Mixture.mixtureBelief_cond,
+    AISafetyAtlas.Wireheading.Mixture.posterior_nil]
+  simp [boxedBelief, otherInnerBelief, diracBelief, GlobalEnv.next, boxed, otherInner,
+    program, innerAction, no]
+
+/-- And `true` with weight 1/2. -/
+public theorem coinBox_cond_no_true :
+    coinBoxBelief.cond [] no true = 1 / 2 := by
+  rw [coinBoxBelief, AISafetyAtlas.Wireheading.Mixture.mixtureBelief_cond,
+    AISafetyAtlas.Wireheading.Mixture.posterior_nil]
+  simp [boxedBelief, otherInnerBelief, diracBelief, GlobalEnv.next, boxed, otherInner,
+    program, innerAction, no]
+  norm_num
+
+/-- **The argmax predictor reads the current action**: at the empty history it
+predicts `true` after `yes` (the box) and `false` after `no` (no box is more likely
+to show the inner `false`). -/
+public theorem argmaxPredict_reads_action : argmaxPredict [] yes ≠ argmaxPredict [] no := by
+  have hyes : argmaxPredict [] yes = true := by
+    have h1 := coinBox_cond_yes_true []
+    have h0 : coinBoxBelief.cond [] yes false = 0 :=
+      coinBoxBelief_isSubprobability.cond_eq_zero_of_eq_one h1 (by decide)
+    unfold argmaxPredict
+    rw [if_pos]
+    rw [coinMixed, AISafetyAtlas.Wireheading.Mixture.mixtureBelief_cond,
+      AISafetyAtlas.Wireheading.Mixture.mixtureBelief_cond,
+      AISafetyAtlas.Wireheading.Mixture.posterior_nil, h1, h0]
+    simp [boxlessBelief, diracBelief, next_boxless]
+    norm_num
+  have hno : argmaxPredict [] no = false := by
+    unfold argmaxPredict
+    rw [if_neg]
+    rw [coinMixed, AISafetyAtlas.Wireheading.Mixture.mixtureBelief_cond,
+      AISafetyAtlas.Wireheading.Mixture.mixtureBelief_cond,
+      AISafetyAtlas.Wireheading.Mixture.posterior_nil, coinBox_cond_no_false, coinBox_cond_no_true]
+    simp [boxlessBelief, diracBelief, next_boxless]
+    norm_num
+  rw [hyes, hno]
+  decide
+
+/-- The action-aware prediction agent with the argmax predictor and window 2. -/
+@[expose] public noncomputable def predAct2 : Agent (Act Bool Unit) Bool :=
+  AISafetyAtlas.Wireheading.DelusionBox.predictionAgentAct argmaxPredict 2
+
+/-- `pred2` is the action-blind instance of the action-aware agent. -/
+public theorem pred2_eq_predictionAgentAct :
+    pred2 = predictionAgentAct (fun _ _ => true) 2 :=
+  AISafetyAtlas.Wireheading.DelusionBox.predictionAgent_eq_predictionAgentAct (fun _ => true) 2
+
+/-- The action-aware utility after `no` and `false` at the start. -/
+public theorem predAct2_utility_no_false :
+    predAct2.utility ([] ++ [(no, false)]) = if argmaxPredict [] no = false then 1 else 0 :=
+  AISafetyAtlas.Wireheading.DelusionBox.predictionAgentAct_utility_snoc argmaxPredict 2 [] no false
+
+/-- Its committed values are nonnegative. -/
+public theorem predAct2_policy_nonneg (n : ℕ) :
+    0 ≤ AISafetyAtlas.Wireheading.Mixture.policyActionValue coinMixed predAct2 (fun _ => yes) 0 n [] :=
+  AISafetyAtlas.Wireheading.DelusionBox.predictionAgentAct_policyActionValue_nonneg
+    coinMixed_isSubprobability.nonneg argmaxPredict 2 (fun _ => yes) 0 n []
+
+/-- Its utility is nonnegative at every history. -/
+public theorem predAct2_utility_nonneg (h : History (Act Bool Unit) Bool) :
+    0 ≤ predAct2.utility h :=
+  AISafetyAtlas.Wireheading.DelusionBox.predictionAgentAct_utility_nonneg argmaxPredict 2 h
+
+/-- The run on which every prediction comes true starts at the given history. -/
+public theorem predictedRun_zero :
+    AISafetyAtlas.Wireheading.DelusionBox.predictedRun argmaxPredict (fun _ => yes) [] 0 = [] :=
+  rfl
+
+/-- **The posterior on the box branch does not fall after `yes` shows `true`.** -/
+public theorem coin_posterior_le_after_yes :
+    AISafetyAtlas.Wireheading.Mixture.posterior (9 / 10) coinBoxBelief boxlessBelief [] ≤
+      AISafetyAtlas.Wireheading.Mixture.posterior (9 / 10) coinBoxBelief boxlessBelief
+        ([] ++ [(yes, true)]) :=
+  AISafetyAtlas.Wireheading.DelusionBox.posterior_le_posterior_snoc (by norm_num) (by norm_num)
+    coinBoxBelief_isSubprobability boxlessBelief_isSubprobability (coinBox_cond_yes_true [])
+
+/-- **The argmax after `yes` at the start is the box's `true`**, from the posterior
+9/10 > 1/2. -/
+public theorem argmaxPredict_yes_eq_true : argmaxPredict [] yes = true :=
+  AISafetyAtlas.Wireheading.DelusionBox.predict_eq_of_isMax_mixture (by norm_num) (by norm_num)
+    coinBoxBelief_isSubprobability boxlessBelief_isSubprobability
+    (by rw [AISafetyAtlas.Wireheading.Mixture.posterior_nil]; norm_num) (coinBox_cond_yes_true [])
+    (argmaxPredict_isMax [] yes)
+
+/-- A subprobability's weight on one observation is at most one, at the box branch. -/
+public theorem coinBox_cond_le_one (h : History (Act Bool Unit) Bool) (a : Act Bool Unit)
+    (o : Bool) : coinBoxBelief.cond h a o ≤ 1 :=
+  AISafetyAtlas.Wireheading.AgentEquations.Belief.IsSubprobability.cond_le_one
+    coinBoxBelief_isSubprobability h a o
+
+/-- **Along the run on which every prediction comes true, the box branch gives
+`yes` the predicted observation with probability one.** -/
+public theorem coinBox_cond_predictedRun (k : ℕ) :
+    coinBoxBelief.cond (predictedRun argmaxPredict (fun _ => yes) [] k) yes
+      (argmaxPredict (predictedRun argmaxPredict (fun _ => yes) [] k) yes) = 1 :=
+  AISafetyAtlas.Wireheading.DelusionBox.cond_predictedRun_eq_one_of_isMax_mixture
+    (by norm_num) (by norm_num) coinBoxBelief_isSubprobability boxlessBelief_isSubprobability
+    argmaxPredict argmaxPredict_isMax (fun _ => yes) []
+    (fun k => ⟨true, coinBox_cond_yes_true _⟩)
+    (by rw [AISafetyAtlas.Wireheading.Mixture.posterior_nil]; norm_num) k
+
+/-- **The box-using policy is worth every in-window step in the box branch**,
+two at depth one. -/
+public theorem predAct2_boxed_policy_eq :
+    AISafetyAtlas.Wireheading.Mixture.policyActionValue coinBoxBelief predAct2 (fun _ => yes) 0 1
+      (predictedRun argmaxPredict (fun _ => yes) [] 0)
+      = horizonBudget predAct2 0 1 ((predictedRun argmaxPredict (fun _ => yes) [] 0).length + 1) :=
+  AISafetyAtlas.Wireheading.DelusionBox.predictionAgentAct_policyActionValue_correct
+    coinBoxBelief_isSubprobability argmaxPredict 2 (fun _ => yes) [] coinBox_cond_predictedRun 0 1 0
+
+/-- A box program constant at the program bit: the action-aware predictor that
+predicts the program bit is the box's output after `yes`, through
+`diracBelief_next_cond_predictAct`. -/
+public theorem boxed_cond_yes_predict_program (h : History (Act Bool Unit) Bool) :
+    boxedBelief.cond h ((fun _ => yes) h) ((fun _ a => program a) h ((fun _ => yes) h)) = 1 :=
+  AISafetyAtlas.Wireheading.DelusionBox.diracBelief_next_cond_predictAct boxed
+    (fun _ a => program a) (fun _ => yes) h boxed_isConstant
+
+/-- **Refusing is worth at most 3/2 at depth two in the box branch**: the refusing
+step's prediction is right with probability 1/2, whatever it is, and the next step
+is worth at most one. -/
+public theorem predAct2_coinBox_no_le_two :
+    actionValue coinBoxBelief predAct2 0 2 [] no ≤ 3 / 2 := by
+  have hsup : ∀ o : Bool, (⨆ a, actionValue coinBoxBelief predAct2 0 1 ([] ++ [(no, o)]) a) ≤ 1 := by
+    intro o
+    apply ciSup_le
+    intro a
+    refine (le_abs_self _).trans ((abs_actionValue_le_horizonBudget
+      coinBoxBelief_isSubprobability _
+        (AISafetyAtlas.Wireheading.DelusionBox.predictionAgentAct_abs_utility_le _ 2) 0 1 _ a).trans ?_)
+    simp [horizonBudget, predictionAgentAct, windowHorizon]
+  rw [actionValue, tsum_bool, value_succ, value_succ, coinBox_cond_no_false, coinBox_cond_no_true]
+  have hw : predAct2.horizon 0 ([] ++ [(no, (false : Bool))]).length = 1 := by
+    simp [predAct2, predictionAgentAct, windowHorizon]
+  have hw' : predAct2.horizon 0 ([] ++ [(no, (true : Bool))]).length = 1 := by
+    simp [predAct2, predictionAgentAct, windowHorizon]
+  rw [hw, hw', predAct2,
+    AISafetyAtlas.Wireheading.DelusionBox.predictionAgentAct_utility_snoc,
+    AISafetyAtlas.Wireheading.DelusionBox.predictionAgentAct_utility_snoc]
+  have hf := hsup false
+  have ht := hsup true
+  rw [predAct2] at hf ht
+  cases argmaxPredict [] no <;> simp at hf ht ⊢ <;> linarith
+
+/-- The same bound at the untruncated value, through the exact truncation. -/
+public theorem predAct2_coinBox_infinite_no_le :
+    infiniteActionValue coinBoxBelief predAct2 0 [] no
+      ≤ ((0 + 2 - ([] : History (Act Bool Unit) Bool).length : ℕ) : ℝ) * (3 / 4) := by
+  rw [AISafetyAtlas.Wireheading.AgentEquations.infiniteActionValue_eq_actionValue_of_horizon_vanishes
+    _ _ 0 3 (fun k hk => window_two_vanishes k hk) [] (N := 2) (by norm_num)]
+  have := predAct2_coinBox_no_le_two
+  norm_num at this ⊢
+  linarith
+
+/-- The window's budget from index 1 at depth two is two, for the action-aware agent. -/
+public theorem predAct2_horizonBudget_two : horizonBudget predAct2 0 2 1 = 2 := by
+  rw [AISafetyAtlas.Wireheading.DelusionBox.horizonBudget_windowHorizon (m := 2) _ rfl 0 2 1
+    (by norm_num)]
+  norm_num
+
+/-- **Statement 3 for the action-aware prediction agent at depth two**
+(`predictionAgentAct_statement_three_of_posterior`). -/
+public theorem predAct2_uses_the_box_of_posterior :
+    actionValue coinMixed predAct2 0 2 [] no < actionValue coinMixed predAct2 0 2 [] yes :=
+  AISafetyAtlas.Wireheading.DelusionBox.predictionAgentAct_statement_three_of_posterior
+    coinBoxBelief boxlessBelief (by norm_num) (by norm_num) coinBoxBelief_isSubprobability
+    boxlessBelief_isSubprobability argmaxPredict 2 0 2 [] (by norm_num) (fun _ => yes)
+    coinBox_cond_predictedRun no (3 / 4)
+    (by
+      show actionValue coinBoxBelief predAct2 0 2 [] no ≤ horizonBudget predAct2 0 2 1 * (3 / 4)
+      rw [predAct2_horizonBudget_two]
+      linarith [predAct2_coinBox_no_le_two])
+    (by norm_num) (by rw [AISafetyAtlas.Wireheading.Mixture.posterior_nil]; norm_num)
+
+/-- **Statement 3 for the action-aware prediction agent at the infinite-horizon
+value** (`predictionAgentAct_statement_three_of_posterior_infinite`), with the box
+premise along the run discharged by the argmax predictor. -/
+public theorem predAct2_uses_the_box_infinite :
+    infiniteActionValue coinMixed predAct2 0 [] no < infiniteActionValue coinMixed predAct2 0 [] yes :=
+  AISafetyAtlas.Wireheading.DelusionBox.predictionAgentAct_statement_three_of_posterior_infinite
+    coinBoxBelief boxlessBelief (by norm_num) (by norm_num) coinBoxBelief_isSubprobability
+    boxlessBelief_isSubprobability argmaxPredict 2 0 [] (by norm_num) (fun _ => yes)
+    coinBox_cond_predictedRun no (3 / 4) predAct2_coinBox_infinite_no_le (by norm_num)
+    (by rw [AISafetyAtlas.Wireheading.Mixture.posterior_nil]; norm_num)
+
+/-- **Statement 3 for print's predictor, the argmax of the agent's own belief, at the
+infinite-horizon value** (`predictionAgentAct_statement_three_of_posterior_infinite_argmax`):
+the only box premise is that `yes` makes the next observation certain in the box
+branch. -/
+public theorem predAct2_uses_the_box_infinite_argmax :
+    infiniteActionValue coinMixed predAct2 0 [] no < infiniteActionValue coinMixed predAct2 0 [] yes :=
+  AISafetyAtlas.Wireheading.DelusionBox.predictionAgentAct_statement_three_of_posterior_infinite_argmax
+    coinBoxBelief boxlessBelief (by norm_num) (by norm_num) coinBoxBelief_isSubprobability
+    boxlessBelief_isSubprobability argmaxPredict argmaxPredict_isMax 2 0 [] (by norm_num)
+    (fun _ => yes) (fun _ => ⟨true, coinBox_cond_yes_true _⟩) no (3 / 4)
+    predAct2_coinBox_infinite_no_le (by norm_num)
+    (by rw [AISafetyAtlas.Wireheading.Mixture.posterior_nil]; norm_num)
+
+/-- **The action-aware prediction agent's selected action programs the box**, at the
+infinite-horizon value (`predictionAgentAct_statement_three_of_posterior_infinite_program_ne`). -/
+public theorem predAct2_infiniteBestAction_programs_box :
+    program (infiniteBestAction coinMixed predAct2 0 [] (infAttains_of_fintype _ _ _ _)) ≠ false :=
+  AISafetyAtlas.Wireheading.DelusionBox.predictionAgentAct_statement_three_of_posterior_infinite_program_ne
+    coinBoxBelief boxlessBelief (by norm_num) (by norm_num) coinBoxBelief_isSubprobability
+    boxlessBelief_isSubprobability argmaxPredict 2 0 [] (by norm_num) (fun _ => yes)
+    coinBox_cond_predictedRun false (3 / 4)
+    (fun a ha => by rw [eq_no_of_program_false a ha]; exact predAct2_coinBox_infinite_no_le)
+    (by norm_num) (by rw [AISafetyAtlas.Wireheading.Mixture.posterior_nil]; norm_num)
+    (infiniteBestAction_max _ _ _ _ _)
+
+/-- **Print's argmax predictor's selected action programs the box**, at the
+infinite-horizon value
+(`predictionAgentAct_statement_three_of_posterior_infinite_argmax_program_ne`). -/
+public theorem predAct2_infiniteBestAction_programs_box_argmax :
+    program (infiniteBestAction coinMixed predAct2 0 [] (infAttains_of_fintype _ _ _ _)) ≠ false :=
+  AISafetyAtlas.Wireheading.DelusionBox.predictionAgentAct_statement_three_of_posterior_infinite_argmax_program_ne
+    coinBoxBelief boxlessBelief (by norm_num) (by norm_num) coinBoxBelief_isSubprobability
+    boxlessBelief_isSubprobability argmaxPredict argmaxPredict_isMax 2 0 [] (by norm_num)
+    (fun _ => yes) (fun _ => ⟨true, coinBox_cond_yes_true _⟩) false (3 / 4)
+    (fun a ha => by rw [eq_no_of_program_false a ha]; exact predAct2_coinBox_infinite_no_le)
+    (by norm_num) (by rw [AISafetyAtlas.Wireheading.Mixture.posterior_nil]; norm_num)
+    (infiniteBestAction_max _ _ _ _ _)
+
 end AISafetyAtlas.Examples.Wireheading.DelusionBox

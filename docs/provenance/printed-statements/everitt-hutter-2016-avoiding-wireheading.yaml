@@ -1,0 +1,311 @@
+source:
+  citation: >-
+    Tom Everitt and Marcus Hutter, Avoiding Wireheading with Value Reinforcement
+    Learning, technical report, arXiv:1605.03143v1 [cs.AI], 10 May 2016, 21 pp.
+    (title page footnote: "A shorter version of this paper will be presented at
+    AGI-16").
+  file: everitt-hutter-arxiv-v1-2016-avoiding-wireheading-with-value-reinforcement-learning.pdf
+  sha256: a0a9a8c96a52131f297ee123fcabd8a11a24641a640d35592cd688f662fd37a9
+  page_offset: 0
+  standing: |
+    \S2, p. 3: "Figure 1 describes our model, which incorporates
+    \begin{itemize}
+    \item an \emph{environment state} $s \in \mathcal{S}$ (as for utility agents or
+      (PO)MDPs),
+    \item an unknown \emph{true utility function} $u^* \in \mathcal{U} \subseteq
+      (\mathcal{S} \to \mathcal{R})$ (as in value learning) (here $\mathcal{R}
+      \subseteq \mathbb{R}$ is a set of rewards),
+    \item a pre-deluded \emph{inner reward signal} $\check{r} = u^*(s) \in
+      \mathcal{R}$ (the true utility of $s$),
+    \item a \emph{self-delusion function} $d_s : \mathcal{R} \to \mathcal{R}$ that
+      represents the subversion of the inner reward caused by wireheading (as in
+      Ring and Orseau 2011),
+    \item a \emph{reward signal} $r = d_s(\check{r}) \in \mathcal{R}$ (as in RL).
+    \end{itemize}"
+
+    \S2, p. 4: "For simplicity, we focus on a one-shot scenario where the agent
+    takes one action and receives one reward. We also assume that $\mathcal{R}$,
+    $\mathcal{S}$, and $\mathcal{U}$ are finite or countable. Finally, to ensure
+    well-defined expectations, we assume that $\mathcal{R}$ is bounded if it is
+    countable."
+
+    \S3, p. 5: "\textbf{Assumption 4} (Consistency of $B$ and $C$)\textbf{.} $B$
+    and $C$ are \emph{consistent}\textsuperscript{5} in the sense that for all
+    non-delusional states with $d_s = d^{\mathrm{id}}$, they assign the same
+    probability to all rewards $r \in \mathcal{R}$:
+    \[ d_s = d^{\mathrm{id}} \implies B(r \mid s) = C(r \mid s). \tag{2} \]"
+    Footnote 5: "Appendix A below discusses how to design agents with consistent
+    belief distributions."
+
+    \S3.1, p. 6: "\textbf{Assumption 6.} The agent has at least one CP action, i.e.
+    $\mathcal{A}^{\mathrm{CP}} \neq \emptyset$."
+
+    \S5, p. 9: "\textbf{Assumption 15} (Deliberate delusion)\textbf{.} Unless the
+    agent deliberately chooses self-deluding actions (e.g. modifying its own
+    sensors), the resulting state will be non-delusional $d_s = d^{\mathrm{id}}$,
+    and $r$ will be equal to $d_s(\check{r}) = \check{r}$."
+
+    Silence recorded by source card S12: no finiteness or countability assumption
+    for the action set $\mathcal{A}$ (the countability sentence on p. 4 names only
+    $\mathcal{R}$, $\mathcal{S}$, $\mathcal{U}$), and no separate condition that
+    the arg max in Definitions 7, 8, 10, 11 is attained. Confirmed on the page
+    images of pp. 3--8.
+
+definitions:
+  - id: eh-def-2
+    label: Definition 2 (Self-delusion types) and the Iverson bracket
+    pdf_page: 4
+    book_page: 4
+    latex: |
+      \textbf{Definition 2} (Self-delusion types)\textbf{.} A \emph{non-delusional
+      state} is a state $s$ with self-delusion function $d_s \equiv d^{\mathrm{id}}$,
+      where $d^{\mathrm{id}}(\check{r}) = \check{r}$ is the \emph{identity function}
+      that keeps $\check{r}$ and $r$ identical. Let $d^r$ be the
+      \emph{$r$-self-delusion} where $d^r(\check{r}') \equiv r$ for any
+      $\check{r}'$. The delusion function $d^r$ returns observed reward $r$
+      regardless of the inner reward $\check{r}'$.
+
+      Let $[\![x = y]\!]$ be the \emph{Iverson bracket} that is 1 when $x = y$ and 0
+      otherwise.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: eh-def-B
+    label: belief $B$ (paragraph "Action, state, reward.")
+    pdf_page: 4
+    book_page: 4
+    latex: |
+      \textbf{Action, state, reward.} $B(s \mid a)$ is the agent's (subjective)
+      probability\textsuperscript{3} of transitioning to state $s$ when taking action
+      $a$, and $B(r \mid s)$ is the (subjective) probability of observing reward $r$
+      in state $s$. We sometimes write them together as $B(r, s \mid a) = B(s \mid
+      a)B(r \mid s)$.
+      \textsuperscript{3}For the sequential case, we would have transition
+      probabilities of the form $B(s' \mid s, a)$ instead of $B(s' \mid a)$, with
+      $s$ the current state and $s'$ the next state.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: eh-replace-r
+    label: replacing $\check{r}$ with $r$ (paragraph after Definition 3)
+    pdf_page: 5
+    book_page: 5
+    latex: |
+      \textbf{Replacing $\check{r}$ with $r$.} The inner reward $\check{r}$ is more
+      informative about the true utility function $u^*$ than the (possibly deluded)
+      observed reward $r$. Unfortunately, the inner reward $\check{r}$ is
+      unobserved, so agents need to learn from $r$ instead. We would therefore like
+      to express the utility posterior in terms of $r$ instead of $\check{r}$. For
+      now we will simply replace $\check{r}$ with $r$ and use $C(r \mid s, u) =
+      [\![u(s) = r]\!]$ which gives the utility posterior
+      \[ C(u \mid s, r) = \frac{C(u)C(r \mid s, u)}{C(r \mid s)}. \]
+      This replacement will be carefully justify this in Section
+      5.\textsuperscript{4}
+    note: '"will be carefully justify this" is printed so.'
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 170}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+statements:
+  - id: eh-def-3
+    audit_row: S12-R03
+    locator: Def. 3, eq. (1)
+    pdf_page: 5
+    book_page: 5
+    label: Definition 3 (Utility distribution C)
+    latex: |
+      \textbf{Definition 3} (Utility distribution $C$)\textbf{.} Let $C(u)$ be a
+      prior over a class $\mathcal{U}$ of utility functions $\mathcal{S} \to
+      \mathcal{R}$. For any inner reward $\check{r}$, let $C(\check{r} \mid s, u)$ be
+      1 if $u(s) = \check{r}$ and 0 otherwise, i.e. $C(\check{r} \mid s, u) =
+      [\![u(s) = \check{r}]\!]$. Let $u$ be independent of the state, $C(u \mid s) =
+      C(u)$. This gives the \emph{utility posterior}
+      \[ C(u \mid s, \check{r}) = \frac{C(u)C(\check{r} \mid s, u)}{C(\check{r} \mid
+         s)}, \tag{1} \]
+      where $C(\check{r} \mid s) = \sum_{u'} C(u')C(\check{r} \mid s, u')$.
+    uses: [eh-def-2]
+    note: >-
+      No nonzero-denominator condition is printed. The following paragraph
+      (eh-replace-r) replaces $\check{r}$ by $r$, and Definitions 5, 9, 12 use the
+      $r$-form.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 170}
+    checked: {by: 'Codex (blind) + Codex (anchored re-read); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: eh-def-5
+    audit_row: S12-R05
+    locator: Def. 5, eq. (3)
+    pdf_page: 6
+    book_page: 6
+    label: Definition 5 (CP actions)
+    latex: |
+      \textbf{Definition 5} (CP actions)\textbf{.} An action $a$ is called
+      \emph{consistency preserving (CP)} if for all $r \in \mathcal{R}$
+      \[ B(s \mid a) > 0 \implies B(r \mid s) = C(r \mid s). \tag{3} \]
+      Let $\mathcal{A}^{\mathrm{CP}} \subseteq \mathcal{A}$ be the set of CP
+      actions.
+    uses: [eh-def-B, eh-def-3, eh-replace-r]
+    note: >-
+      $s$ is free in (3); only $r$ is quantified. The proof of Lemma 13 reads the
+      condition for all $s$ with $B(s \mid a) > 0$ (excerpt eh-lem-13-proof).
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 170}
+    checked: {by: 'Codex (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: eh-def-7
+    audit_row: S12-R07
+    locator: Def. 7
+    pdf_page: 7
+    book_page: 7
+    label: Definition 7 (RL agent)
+    latex: |
+      \textbf{Definition 7} (RL agent)\textbf{.} The \emph{RL agent} maximises
+      reward by taking action $a' = \arg\max_{a \in \mathcal{A}}
+      V^{\mathrm{RL}}(a)$, where $V^{\mathrm{RL}}(a) = \sum_{s,r} B(s \mid a)B(r
+      \mid s)r$.
+    uses: [eh-def-B]
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 170}
+    checked: {by: 'Codex (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: eh-def-8
+    audit_row: S12-R08
+    locator: Def. 8
+    pdf_page: 7
+    book_page: 7
+    label: Definition 8 (Utility agent)
+    latex: |
+      \textbf{Definition 8} (Utility agent)\textbf{.} The \emph{utility-$u$ agent}
+      maximises expected utility by taking action $a' = \arg\max_{a \in
+      \mathcal{A}} V_u(a)$, where $V_u(a) := \sum_s B(s \mid a)u(s)$.
+    uses: [eh-def-B]
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 170}
+    checked: {by: 'Codex (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: eh-def-9
+    audit_row: S12-R09
+    locator: Def. 9
+    pdf_page: 7
+    book_page: 7
+    label: Definition 9 (VRL value functions)
+    latex: |
+      \textbf{Definition 9} (VRL value functions)\textbf{.} The \emph{VRL value of
+      an action $a$} is
+      \[ V(a) = \sum_{s,r,u} B(s \mid a)B(r \mid s)C(u \mid s, r)u(s). \]
+    uses: [eh-def-B, eh-def-3, eh-replace-r]
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 170}
+    checked: {by: 'Codex (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: eh-def-10
+    audit_row: S12-R10
+    locator: Def. 10
+    pdf_page: 7
+    book_page: 7
+    label: Definition 10 (U-VRL agent)
+    latex: |
+      \textbf{Definition 10} (U-VRL agent)\textbf{.} The \emph{unconstrained VRL
+      agent (U-VRL)} is the agent choosing the action with the highest VRL value
+      \[ a = \arg\max_{a' \in \mathcal{A}} V(a'). \]
+    uses: [eh-def-9]
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 170}
+    checked: {by: 'Codex (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: eh-def-11
+    audit_row: S12-R11
+    locator: Def. 11
+    pdf_page: 8
+    book_page: 8
+    label: Definition 11 (CP-VRL agent)
+    latex: |
+      \textbf{Definition 11} (CP-VRL agent)\textbf{.} The \emph{consistency
+      preserving VRL agent (CP-VRL)} is the agent choosing the \emph{CP action}
+      (Definition 5) with the highest VRL value
+      \[ a = \arg\max_{a' \in \mathcal{A}^{\mathrm{CP}}} V(a'). \]
+    uses: [eh-def-5, eh-def-9]
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 170}
+    checked: {by: 'Codex (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: eh-def-12
+    audit_row: S12-R12
+    locator: Def. 12, eq. (4)
+    pdf_page: 8
+    book_page: 8
+    label: Definition 12 (EEP)
+    latex: |
+      \textbf{Definition 12} (EEP)\textbf{.} An action $a$ is called \emph{expected
+      ethics preserving (EEP)} if for all $u \in \mathcal{U}$ and all $s \in
+      \mathcal{S}$ with $B(s \mid a) > 0$,
+      \[ C(u) = \sum_r B(r \mid s)C(u \mid s, r). \tag{4} \]
+    uses: [eh-def-B, eh-def-3, eh-replace-r]
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 170}
+    checked: {by: 'Codex (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: eh-lem-13
+    audit_row: S12-R13
+    locator: Lem. 13
+    pdf_page: 8
+    book_page: 8
+    label: Lemma 13 (CP and EEP)
+    latex: |
+      \textbf{Lemma 13} (CP and EEP)\textbf{.} \emph{Any CP action is EEP.}
+    uses: [eh-def-5, eh-def-12]
+    proof_pages: 8
+    note: >-
+      The proof divides by $C(r \mid s)$ with no nonzero condition stated, and reads
+      Definition 5's free $s$ as "for all $s$ with $B(s \mid a) > 0$" (excerpt
+      eh-lem-13-proof).
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 170}
+    checked: {by: 'Codex (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: eh-thm-14
+    audit_row: S12-R14
+    locator: Thm. 14, eq. (5)
+    pdf_page: 8
+    book_page: 8
+    label: Theorem 14 (No wireheading)
+    latex: |
+      \textbf{Theorem 14} (No wireheading)\textbf{.} \emph{For the CP-VRL agent,
+      the value function reduces to}
+      \[ V(a) = \sum_{s,u} B(s \mid a)C(u)u(s). \tag{5} \]
+    uses: [eh-def-11, eh-def-9, eh-def-5, eh-def-12, eh-lem-13]
+    proof_pages: 8
+    note: >-
+      The proof says "under any CP action $a$ the value function reduces to" (5);
+      the statement names the CP-VRL agent.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 170}
+    checked: {by: 'Codex (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: eh-lem-27
+    audit_row: S12-R27
+    locator: Lem. 27
+    pdf_page: 21
+    book_page: 21
+    label: Lemma 27 (U-VRL is RL)
+    latex: |
+      \textbf{Lemma 27} (U-VRL is RL)\textbf{.} \emph{$V(a) = V^{\mathrm{RL}}(a)$,
+      so the U-VRL agent is equivalent to the RL agent.}
+    context: |
+      Announced on p. 7 after Definition 10: "It can be shown that $V(a) =
+      V^{\mathrm{RL}}(a)$, since $\sum_u C(u \mid s, r)u(s) = r$ (Lemma 27 in
+      Appendix C)."
+    uses: [eh-def-9, eh-def-10, eh-def-7, eh-def-3, eh-replace-r]
+    proof_pages: 21
+    note: >-
+      No support or nonzero-marginal condition is stated; the proof divides by
+      $\sum_{u'} C(u')[\![u'(s) = r]\!]$. The proof writes $C(u \mid r, s)$ in its
+      second display where (9) and Definition 9 write $C(u \mid s, r)$.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 170}
+    checked: {by: 'Codex (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+excerpts:
+  - id: eh-lem-13-proof
+    for: [eh-lem-13, eh-def-5]
+    reason: >-
+      Shows how the source reads Definition 5's free variable $s$ (for all $s$ with
+      $B(s \mid a) > 0$) and that the proof divides by $C(r \mid s)$ without a
+      nonzero condition.
+    pdf_page: 8
+    latex: |
+      \emph{Proof.} Assume the antecedent that $B(r \mid s) = C(r \mid s)$ for all
+      $s$ with $B(s \mid a) > 0$. Then for arbitrary $u \in \mathcal{U}$
+      \[ \sum_r B(r \mid s)C(u \mid s, r) = \sum_r B(r \mid s)\frac{C(u)C(r \mid s,
+         u)}{C(r \mid s)} = \sum_r C(u)C(r \mid s, u) = C(u) \]
+      where $r$ marginalises out in the last step. $\square$
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 170}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}

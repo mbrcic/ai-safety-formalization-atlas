@@ -317,6 +317,62 @@ public theorem printValue_error_le_tail {ρ : Belief (CompAct Act Code) Obs}
   simpa [Real.dist_eq, abs_sub_comm] using abs_printValue_succ_sub_le hρ ag hu E t n h y
 
 /--
+**Print's equation (4) holds at the limit.** Orseau and Ring, AGI 2011, §3,
+eq. (4): `v(h, t, y = ⟨a, c⟩) = w(t, |h|) u(h) + Σ_{o ∈ 𝒪} ρ(o | ha) v(hao, t, c(hao))`,
+a recursion with no terminal condition. `printInfiniteValue`, the limit of the
+truncated `printValue`, satisfies it: let `n → ∞` in the `n + 1` clause, with the
+error bound `printValue_error_le_tail` carried uniformly through the
+`ρ`-weighted sum.
+
+**Scope.** At `Belief.IsSubprobability`, `|u| ≤ 1` (print's `u : ℋ → [0,1]`) and
+an absolutely summable horizon. Print states only `Σ_{k ≥ t} w(t, k) < ∞` with
+`w` possibly signed, which does not make `v` denote for every `u : ℋ → [0,1]`
+(`w_k = (-1)^k / k` with `u = 1` exactly at even depths makes `Σ_k w_k u_k`
+diverge); absolute summability is what print's `v` needs in order to be defined,
+not a narrowing of it.
+-/
+public theorem printInfiniteValue_eq {ρ : Belief (CompAct Act Code) Obs}
+    (hρ : ρ.IsSubprobability) (ag : Agent (CompAct Act Code) Obs)
+    (hu : ∀ h, |ag.utility h| ≤ 1) (E : Exec Code Act Obs) (t : ℕ)
+    (hw : Summable (fun k ↦ |ag.horizon t k|))
+    (h : History (CompAct Act Code) Obs) (y : CompAct Act Code) :
+    printInfiniteValue ρ ag E t h y = ag.horizon t h.length * ag.utility h +
+      ∑' o : Obs, ρ.cond h y o *
+        printInfiniteValue ρ ag E t (h ++ [(y, o)]) (E.run y.2 (h ++ [(y, o)])) := by
+  have herr : ∀ n o,
+      |printValue ρ ag E t n (h ++ [(y, o)]) (E.run y.2 (h ++ [(y, o)])) -
+        printInfiniteValue ρ ag E t (h ++ [(y, o)]) (E.run y.2 (h ++ [(y, o)]))| ≤
+        ∑' i : ℕ, |ag.horizon t (h.length + 1 + (n + i) + 1)| := by
+    intro n o
+    simpa using printValue_error_le_tail hρ ag hu E t hw n (h ++ [(y, o)])
+      (E.run y.2 (h ++ [(y, o)]))
+  have hsv : ∀ n, Summable (fun o ↦ ρ.cond h y o *
+      printValue ρ ag E t n (h ++ [(y, o)]) (E.run y.2 (h ++ [(y, o)]))) := by
+    intro n
+    simpa only [smValue_eq_printValue] using smValue_continuation_summable hρ ag hu E t n h y
+  have hsi : Summable (fun o ↦ ρ.cond h y o *
+      printInfiniteValue ρ ag E t (h ++ [(y, o)]) (E.run y.2 (h ++ [(y, o)]))) :=
+    ((hsv 0).sub (hρ.summable_mul h y (herr 0))).congr fun o ↦ by ring
+  have hT : Filter.Tendsto (fun n ↦ ∑' i : ℕ, |ag.horizon t (h.length + 1 + (n + i) + 1)|)
+      Filter.atTop (nhds 0) := by
+    refine ((tendsto_sum_nat_add (fun k ↦ |ag.horizon t k|)).comp
+      (Filter.tendsto_add_atTop_nat (h.length + 2))).congr fun n ↦ ?_
+    simp only [Function.comp_apply]
+    exact tsum_congr fun i ↦ by congr 2; omega
+  have hs : Filter.Tendsto (fun n ↦ ∑' o : Obs, ρ.cond h y o *
+        printValue ρ ag E t n (h ++ [(y, o)]) (E.run y.2 (h ++ [(y, o)]))) Filter.atTop
+      (nhds (∑' o : Obs, ρ.cond h y o *
+        printInfiniteValue ρ ag E t (h ++ [(y, o)]) (E.run y.2 (h ++ [(y, o)])))) := by
+    apply tendsto_iff_dist_tendsto_zero.mpr
+    apply squeeze_zero (fun _ ↦ dist_nonneg) (fun n ↦ ?_) hT
+    rw [Real.dist_eq, ← (hsv n).tsum_sub hsi]
+    simp only [← mul_sub]
+    exact hρ.abs_tsum_mul_le h y (tsum_nonneg fun _ ↦ abs_nonneg _) (herr n)
+  have hv := (tendsto_printValue_printInfiniteValue hρ ag hu E t hw h y).comp
+    (Filter.tendsto_add_atTop_nat 1)
+  exact tendsto_nhds_unique hv (hs.const_add (ag.horizon t h.length * ag.utility h))
+
+/--
 **Print's `c₀` at print's own depth.** Equation (4) maximises the untruncated
 `v`; this is that condition, and it is the one print actually writes.
 -/
@@ -334,6 +390,58 @@ public theorem exists_argmax_printInfiniteValue [Finite Act] [Finite Code]
     ∃ y : CompAct Act Code, ∀ y' : CompAct Act Code,
       printInfiniteValue ρ ag E t h y' ≤ printInfiniteValue ρ ag E t h y :=
   Finite.exists_max _
+
+/--
+**Print's `c₀` with footnote 5's tie rule.** Orseau and Ring, AGI 2011,
+footnote 5 to eq. (3): *"Ties are broken in lexicographical order"*, inherited by
+c₀(h) = argmax over y ∈ 𝒴 of v(h, |h|, y) (eq. (4)). Executing `c₀` at every history
+yields the **least** maximiser of the untruncated `v`, in the lexicographic order
+on `𝒴 = 𝒜 × 𝒞` (`Prod.Lex`, via `toLex`).
+
+Print fixes no order on `𝒜` or `𝒞`, so both are parameters. For an infinite `𝒜`
+a least maximiser need not exist; the predicate is then unsatisfiable at that
+history, which is the domain on which print's rule denotes.
+`exists_lex_argmax_printInfiniteValue` gives existence at print's finite `𝒴`.
+-/
+@[expose] public def IsLexInitialProgramLimit [LinearOrder Act] [LinearOrder Code]
+    (ρ : Belief (CompAct Act Code) Obs) (ag : Agent (CompAct Act Code) Obs)
+    (E : Exec Code Act Obs) (c₀ : Code) : Prop :=
+  ∀ h : History (CompAct Act Code) Obs,
+    (∀ y, printInfiniteValue ρ ag E h.length h y
+        ≤ printInfiniteValue ρ ag E h.length h (E.run c₀ h)) ∧
+    ∀ y, (∀ y', printInfiniteValue ρ ag E h.length h y'
+        ≤ printInfiniteValue ρ ag E h.length h y) → toLex (E.run c₀ h) ≤ toLex y
+
+/-- The tie-broken initial program is an initial program. -/
+public theorem IsLexInitialProgramLimit.isInitialProgramLimit [LinearOrder Act]
+    [LinearOrder Code] {ρ : Belief (CompAct Act Code) Obs}
+    {ag : Agent (CompAct Act Code) Obs} {E : Exec Code Act Obs} {c₀ : Code}
+    (hc : IsLexInitialProgramLimit ρ ag E c₀) : IsInitialProgramLimit ρ ag E c₀ :=
+  fun h => (hc h).1
+
+/-- **The tie rule determines the action**: two tie-broken initial programs
+produce the same compound action at every history. -/
+public theorem IsLexInitialProgramLimit.run_eq [LinearOrder Act] [LinearOrder Code]
+    {ρ : Belief (CompAct Act Code) Obs} {ag : Agent (CompAct Act Code) Obs}
+    {E : Exec Code Act Obs} {c₀ c₁ : Code} (h₀ : IsLexInitialProgramLimit ρ ag E c₀)
+    (h₁ : IsLexInitialProgramLimit ρ ag E c₁) (h : History (CompAct Act Code) Obs) :
+    E.run c₀ h = E.run c₁ h :=
+  toLex.injective (le_antisymm ((h₀ h).2 _ (h₁ h).1) ((h₁ h).2 _ (h₀ h).1))
+
+/-- At print's finite `𝒴` the lexicographically least maximiser exists. -/
+public theorem exists_lex_argmax_printInfiniteValue [Finite Act] [Finite Code]
+    [Nonempty Act] [Nonempty Code] [LinearOrder Act] [LinearOrder Code]
+    (ρ : Belief (CompAct Act Code) Obs) (ag : Agent (CompAct Act Code) Obs)
+    (E : Exec Code Act Obs) (t : ℕ) (h : History (CompAct Act Code) Obs) :
+    ∃ y : CompAct Act Code, (∀ y', printInfiniteValue ρ ag E t h y' ≤
+        printInfiniteValue ρ ag E t h y) ∧
+      ∀ z, (∀ y', printInfiniteValue ρ ag E t h y' ≤ printInfiniteValue ρ ag E t h z) →
+        toLex y ≤ toLex z := by
+  obtain ⟨y₀, hy₀⟩ := exists_argmax_printInfiniteValue ρ ag E t h
+  let f : Lex (CompAct Act Code) → ℝ := fun z => printInfiniteValue ρ ag E t h (ofLex z)
+  have hat : ∃ a, ∀ b, f b ≤ f a := ⟨toLex y₀, fun b => hy₀ _⟩
+  refine ⟨ofLex (lexArgmax f hat), fun y' => lexArgmax_max f hat (toLex y'), fun z hz => ?_⟩
+  exact lexArgmax_le f hat (a := toLex z) (fun b => hz _)
 
 /--
 **The maximand of equation (4) attains its maximum.** Print's `𝒴 = 𝒜 × 𝒞` is

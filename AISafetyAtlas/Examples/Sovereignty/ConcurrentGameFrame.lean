@@ -365,4 +365,34 @@ public theorem endFrame_alphaPower_univ_target :
     AlphaPower endFrame (Set.univ : Set Unit) false (Set.univ : Set Bool) :=
   AlphaPower.mono endFrame_alphaPower_univ (Set.subset_univ _)
 
+/-! ## Definition 12, item 4: coalition monotonicity of alpha neighborhood frames -/
+
+/-- **The ending game's alpha frame is coalition-monotone**, as every general
+concurrent game frame's is. -/
+example : endFrame.alphaFrame.CoalitionMonotone :=
+  IsGCGF.alphaFrame_coalitionMonotone endFrame_isGCGF
+
+/-- **An alpha neighborhood frame that item 4 rejects.** Coalition `{true}` is
+effective for every set containing `true`; every other coalition, the grand one
+included, only for the whole space. Each neighborhood is closed under supersets. -/
+@[expose] public def soloFrame : AlphaNeighborhoodFrame Bool Bool where
+  nbhd := fun C _ => {X | (C = {true} ∧ true ∈ X) ∨ X = Set.univ}
+  upward := by
+    rintro C s X Y (⟨hC, hX⟩ | rfl) hXY
+    · exact Or.inl ⟨hC, hXY hX⟩
+    · exact Or.inr (Set.univ_subset_iff.1 hXY)
+
+/-- **It is not coalition-monotone**: `{true} ⊆ Set.univ`, and `{true}` is in the
+smaller coalition's neighborhood but not in the grand coalition's. So the
+predicate is not satisfied by every alpha neighborhood frame. -/
+public theorem not_soloFrame_coalitionMonotone : ¬ soloFrame.CoalitionMonotone := by
+  intro h
+  have hmem : ({true} : Set Bool) ∈ soloFrame.nbhd {true} false :=
+    Or.inl ⟨rfl, Set.mem_singleton _⟩
+  rcases h false {true} Set.univ (Set.subset_univ _) hmem with ⟨hC, -⟩ | hX
+  · have : false ∈ ({true} : Set Bool) := hC ▸ Set.mem_univ false
+    simp at this
+  · have : false ∈ ({true} : Set Bool) := hX ▸ Set.mem_univ false
+    simp at this
+
 end AISafetyAtlas.Examples.Sovereignty

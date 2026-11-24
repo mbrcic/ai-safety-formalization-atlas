@@ -2,6 +2,7 @@ module
 
 public import AISafetyAtlas.Wireheading.AgentEquations
 public import AISafetyAtlas.Wireheading.Mixture
+public import Mathlib.Analysis.SpecificLimits.Basic
 public import Mathlib.Tactic.Linarith
 public import Mathlib.Tactic.Ring
 public import Mathlib.Tactic.NormNum
@@ -377,6 +378,31 @@ same factorization without fixing how the observation is coded. -/
   utility := lastReward reward
   horizon := windowHorizon m
 
+/-- **Print's reinforcement-learning agent at any horizon.** Print's horizon clause
+for A_rl (Ring and Orseau, AGI 2011, §2, PDF p. 4) is *"w(t, k) = 1 if k − t ≤ m"*
+and states no value off the window; `rlAgent` completes it by zero
+(`windowHorizon`), the binary horizon of the companion paper. This is the same
+utility, the last reward, at an arbitrary horizon w. Print's clause is
+`OneOnWindow`; `rlAgent_eq_rlAgentWith` and `windowHorizon_oneOnWindow` make
+`rlAgent` its window-indicator instance. -/
+@[expose] public def rlAgentWith (reward : Obs → ℝ) (w : ℕ → ℕ → ℝ) : Agent Action Obs where
+  utility := lastReward reward
+  horizon := w
+
+/-- Print's horizon clause for A_rl: weight one at every future step inside the
+window of m steps (k ≤ t + m, print's k − t ≤ m), and nothing said outside
+it. -/
+@[expose] public def OneOnWindow (m : ℕ) (w : ℕ → ℕ → ℝ) : Prop :=
+  ∀ t k, k ≤ t + m → w t k = 1
+
+/-- The window indicator satisfies print's clause: it is one completion of it. -/
+public theorem windowHorizon_oneOnWindow (m : ℕ) : OneOnWindow m (windowHorizon m) :=
+  fun t k hk => by simp [windowHorizon, hk]
+
+/-- `rlAgent` is `rlAgentWith` at the window indicator. -/
+public theorem rlAgent_eq_rlAgentWith (reward : Obs → ℝ) (m : ℕ) :
+    (rlAgent reward m : Agent Action Obs) = rlAgentWith reward (windowHorizon m) := rfl
+
 /-- **Print's goal-seeking agent.** Its utility is one when the goal is achieved
 at the current step and zero otherwise, and the goal is a predicate on the
 observations only, print's `g(o₁, …, o_{|h|})`. Its horizon favours short
@@ -439,9 +465,14 @@ public theorem goalAgent_horizon_ne :
 correctly predicted the observation it just received.
 
 Print takes the prediction to be Solomonoff induction's — the observation
-maximising the prior weight given the history —
-here it is an arbitrary function of the history before the observation arrived,
-which is a widening of print and not a narrowing of it. -/
+maximising the prior weight given the history, print's ρ(o | h a) with h ending
+in the action just taken. Here it is an arbitrary function of the history before
+the current action–observation pair, so it cannot read the current action: this
+widens print in the predictor's form and narrows it in what the predictor sees,
+since print's own action-conditioned predictor is not a value of the predictor
+parameter.
+`predictionAgentAct` takes a predictor that reads the current action, and this
+agent is its action-blind instance (`predictionAgent_eq_predictionAgentAct`). -/
 @[expose] public def predictionAgent [DecidableEq Obs]
     (predict : AgentEquations.History Action Obs → Obs) (m : ℕ) : Agent Action Obs where
   utility := fun h =>
@@ -449,6 +480,51 @@ which is a widening of print and not a narrowing of it. -/
     | none => 0
     | some p => if predict h.dropLast = p.2 then 1 else 0
   horizon := windowHorizon m
+
+/-- The prediction agent's utility after an observation arrives: one exactly when
+the prediction made on the history before it was that observation, so a utility
+of zero at a nonempty history is a prediction mistake (Orseau and Ring, AGI 2011,
+§2.1, `A^ρ_p`). The utility reads only the history and the predictor, never the
+agent's belief. -/
+public theorem predictionAgent_utility_snoc [DecidableEq Obs]
+    (predict : AgentEquations.History Action Obs → Obs) (m : ℕ)
+    (h : AgentEquations.History Action Obs) (a : Action) (o : Obs) :
+    (predictionAgent predict m).utility (h ++ [(a, o)]) = if predict h = o then 1 else 0 := by
+  simp [predictionAgent]
+
+/-- **The only environment in which the prediction makes no mistake** (Orseau and
+Ring, *Self-Modification and Mortality in Artificial Agents*, AGI 2011, footnote 6,
+PDF p. 4: *"there is only one environment in which the prediction makes 0
+mistake"*). For a deterministic environment `E`, answering each history and action
+with an observation, the prediction agent's utility is one after every step at
+every history exactly when `E` answers every history with the prediction made on
+it. -/
+public theorem predictionAgent_utility_eq_one_iff [DecidableEq Obs]
+    (predict : AgentEquations.History Action Obs → Obs) (m : ℕ)
+    (E : AgentEquations.History Action Obs → Action → Obs) :
+    (∀ h a, (predictionAgent predict m).utility (h ++ [(a, E h a)]) = 1) ↔
+      E = fun h _ => predict h := by
+  constructor
+  · intro hE
+    funext h a
+    have := hE h a
+    rw [predictionAgent_utility_snoc] at this
+    split_ifs at this with hp
+    · exact hp.symm
+    · norm_num at this
+  · rintro rfl h a
+    rw [predictionAgent_utility_snoc]
+    simp
+
+/-- Footnote 6 as uniqueness: exactly one deterministic environment gives the
+prediction agent utility one after every step (Orseau and Ring, AGI 2011,
+footnote 6, PDF p. 4). -/
+public theorem predictionAgent_existsUnique_zero_mistakes [DecidableEq Obs]
+    (predict : AgentEquations.History Action Obs → Obs) (m : ℕ) :
+    ∃! E : AgentEquations.History Action Obs → Action → Obs,
+      ∀ h a, (predictionAgent predict m).utility (h ++ [(a, E h a)]) = 1 :=
+  ⟨fun h _ => predict h, (predictionAgent_utility_eq_one_iff predict m _).mpr rfl,
+    fun _ hE => (predictionAgent_utility_eq_one_iff predict m _).mp hE⟩
 
 /-- **Print's knowledge-seeking agent.** Its utility is the negated prior mass of
 the history, so it acts to make as many environments inconsistent as possible,
@@ -538,6 +614,20 @@ public theorem actionValue_diracBelief [DecidableEq Obs]
     actionValue (diracBelief E) ag t n h a
       = value (diracBelief E) ag t n (h ++ [(a, E h a)]) := by
   rw [actionValue,
+    tsum_eq_single (E h a) (fun o hne => by simp [diracBelief, hne])]
+  simp [diracBelief]
+
+/-- **Equation (2) at the optimal non-learning variant's belief, at the
+infinite-horizon value.** The same collapse as `actionValue_diracBelief`, for
+`infiniteActionValue`: the non-learning variant's action value is the
+infinite value of the one history the known environment produces (Ring and
+Orseau, AGI 2011, §2, optimal variants). -/
+public theorem infiniteActionValue_diracBelief [DecidableEq Obs]
+    (E : AgentEquations.History Action Obs → Action → Obs) (ag : Agent Action Obs)
+    (t : ℕ) (h : AgentEquations.History Action Obs) (a : Action) :
+    infiniteActionValue (diracBelief E) ag t h a
+      = infiniteValue (diracBelief E) ag t (h ++ [(a, E h a)]) := by
+  rw [infiniteActionValue,
     tsum_eq_single (E h a) (fun o hne => by simp [diracBelief, hne])]
   simp [diracBelief]
 
@@ -747,6 +837,51 @@ public theorem mixture_lt_of_gap
   have h2' : (0 : ℝ) ≤ (1 - p) * vFreeYes := mul_nonneg hp1' hyesFree
   nlinarith [hthresh, h1, h2, h1', h2']
 
+/-- The threshold `P(DB) > 1/(2 - r̄)` scaled to a maximum value `vmax`: the box
+branch's maximum is `vmax` and the refusing action's box-branch value is at most
+`vmax · r̄`. -/
+private theorem scaled_threshold {p vmax rbar : ℝ} (hvmax : 0 < vmax) (hrbar : rbar < 1)
+    (hthresh : 1 / (2 - rbar) < p) : vmax < p * (2 * vmax - vmax * rbar) := by
+  have hpos : (0 : ℝ) < 2 - rbar := by linarith
+  have hd := (div_lt_iff₀ hpos).mp hthresh
+  have : vmax * 1 < vmax * (p * (2 - rbar)) := mul_lt_mul_of_pos_left hd hvmax
+  nlinarith [this]
+
+/--
+**Statement 1 at any maximum value** (Ring and Orseau, AGI 2011, Statement 1 and
+its *Arguments*, PDF pp. 5–6). Print normalises the maximum possible reward to
+`1`, which is the maximum *value* only at a one-step horizon. With print's window
+horizon `w(t, k) = 1` for `k - t ≤ m` and the full recursion, the box branch is
+worth the in-window step count times the constant reward, so the bounds are in a
+maximum `vmax` (`vmax ≤ v(h yes)` in the box branch, `v(h no) ≤ vmax` without
+it) and the refusing action's box-branch value is at most `vmax · r̄`.
+`statement_one` is this at `vmax = 1`.
+
+**What `r̄` is here.** `r̄` is the refusing action's box-branch value divided by
+`vmax`, i.e. averaged over the in-window steps, and that value includes the
+optimal continuation, which may use the box at later steps. It is print's
+one-step *"expected reward when not using the DB"* only at remaining depth zero.
+Above it, a refusing first step followed by box use gives `r̄ ≥ (N - 1)/N` for `N`
+in-window steps, so the threshold `1/(2 - r̄)` rises towards `1` with depth;
+print's threshold at print's own `r̄` is not claimed at depth `n ≥ 1`.
+-/
+public theorem statement_one_scaled
+    (ρ ρbox ρfree : Belief Action Obs) (ag : Agent Action Obs)
+    (p : ℝ) (t n : ℕ) (h : AgentEquations.History Action Obs)
+    (yes no : Action) (vmax rbar : ℝ)
+    (hmix : MixesAt ρ ρbox ρfree ag p t n h)
+    (hp0 : 0 ≤ p) (hp1 : p ≤ 1) (hvmax : 0 < vmax)
+    (hyesBox : vmax ≤ actionValue ρbox ag t n h yes)
+    (hyesFree : 0 ≤ actionValue ρfree ag t n h yes)
+    (hnoBox : actionValue ρbox ag t n h no ≤ vmax * rbar)
+    (hnoFree : actionValue ρfree ag t n h no ≤ vmax)
+    (hrbar : rbar < 1)
+    (hthresh : 1 / (2 - rbar) < p) :
+    actionValue ρ ag t n h no < actionValue ρ ag t n h yes := by
+  rw [hmix no, hmix yes]
+  exact mixture_lt_of_threshold hp0 hp1 hyesBox hyesFree hnoBox hnoFree
+    (scaled_threshold hvmax hrbar hthresh)
+
 /--
 **Statement 1.** *The reinforcement-learning agent will use the delusion box to
 maximize its utility.*
@@ -776,13 +911,9 @@ public theorem statement_one
     (hnoFree : actionValue ρfree ag t n h no ≤ 1)
     (hrbar : rbar < 1)
     (hthresh : 1 / (2 - rbar) < p) :
-    actionValue ρ ag t n h no < actionValue ρ ag t n h yes := by
-  have hpos : (0 : ℝ) < 2 - rbar := by linarith
-  have hkey : (1 : ℝ) < p * (2 * 1 - rbar) := by
-    have := (div_lt_iff₀ hpos).mp hthresh
-    nlinarith [this]
-  rw [hmix no, hmix yes]
-  exact mixture_lt_of_threshold hp0 hp1 hyesBox hyesFree hnoBox hnoFree hkey
+    actionValue ρ ag t n h no < actionValue ρ ag t n h yes :=
+  statement_one_scaled ρ ρbox ρfree ag p t n h yes no 1 rbar hmix hp0 hp1 one_pos
+    hyesBox hyesFree (by rwa [one_mul]) hnoFree hrbar hthresh
 
 /-! ### Statement 2's constants are the horizon, not the prior
 
@@ -1312,6 +1443,52 @@ public theorem not_mixture_lt_of_threshold_without_rbar :
   norm_num at h
 
 /--
+**Statement 1 without the decomposition, at every observation type and any
+maximum value** (Ring and Orseau, AGI 2011, Statement 1, PDF p. 5, and its
+*Arguments*, PDF pp. 5–6). `statement_one_of_posterior` with `[Fintype Obs]`
+dropped (print's eq. (2) sums over `o ∈ 𝒪` with no finiteness; source card S11)
+and with print's maximum reward `1` generalised to a maximum value `vmax`, as in
+`statement_one_scaled`: the box-using policy is worth at least `vmax` in the box
+branch, the refusing action at most `vmax · r̄` there and at most `vmax` outside
+it, with the threshold `P(DB) > 1/(2 - r̄)`. `r̄` is read as in
+`statement_one_scaled`: the refusing action's box-branch value per in-window step,
+continuation included, which is print's one-step `r̄` only at depth zero.
+`rlAgent_statement_one_of_posterior` discharges the three `vmax` bounds for
+print's reinforcement-learning agent at every depth inside its window.
+-/
+public theorem statement_one_of_posterior_scaled
+    {p : ℝ} (ρbox ρfree : Belief Action Obs)
+    (hp0 : 0 ≤ p) (hp1 : p ≤ 1)
+    (hboxS : ρbox.IsSubprobability) (hfreeS : ρfree.IsSubprobability)
+    (ag : Agent Action Obs) (hu : ∀ h, |ag.utility h| ≤ 1) (t n : ℕ)
+    (h : AgentEquations.History Action Obs)
+    (π : AgentEquations.History Action Obs → Action) (no : Action) (vmax rbar : ℝ)
+    (hvmax : 0 < vmax)
+    (hyesBox : vmax ≤ Mixture.policyActionValue ρbox ag π t n h)
+    (hyesFree : 0 ≤ Mixture.policyActionValue ρfree ag π t n h)
+    (hnoBox : actionValue ρbox ag t n h no ≤ vmax * rbar)
+    (hnoFree : actionValue ρfree ag t n h no ≤ vmax)
+    (hrbar : rbar < 1)
+    (hthresh : 1 / (2 - rbar) < Mixture.posterior p ρbox ρfree h) :
+    actionValue (Mixture.mixtureBelief p ρbox ρfree) ag t n h no
+      < actionValue (Mixture.mixtureBelief p ρbox ρfree) ag t n h (π h) := by
+  have : Nonempty Action := ⟨no⟩
+  have hq0 := Mixture.posterior_nonneg hp0 hp1 hboxS.nonneg hfreeS.nonneg h
+  have hq1 := Mixture.posterior_le_one hp0 hp1 hboxS.nonneg hfreeS.nonneg h
+  have hno := Mixture.actionValue_mixture_le_tsum hp0 hp1 hboxS hfreeS ag hu t n h no
+  have hyes :
+      Mixture.posterior p ρbox ρfree h * Mixture.policyActionValue ρbox ag π t n h
+        + (1 - Mixture.posterior p ρbox ρfree h)
+          * Mixture.policyActionValue ρfree ag π t n h
+      ≤ actionValue (Mixture.mixtureBelief p ρbox ρfree) ag t n h (π h) := by
+    rw [← Mixture.policyActionValue_mixture_tsum hp0 hp1 hboxS hfreeS ag hu π t n h]
+    exact Mixture.policyActionValue_le_actionValue_tsum
+      (Mixture.mixtureBelief_isSubprobability hp0 hp1 hboxS hfreeS) ag hu π t n h
+  have hmid := mixture_lt_of_threshold hq0 hq1 hyesBox hyesFree hnoBox hnoFree
+    (scaled_threshold hvmax hrbar hthresh)
+  linarith
+
+/--
 **Statement 1 without the decomposition, because the decomposition is false.**
 
 `statement_one` above takes print's `P(DB)`-weighted average as a hypothesis,
@@ -1349,24 +1526,9 @@ public theorem statement_one_of_posterior [Fintype Obs] [Nonempty Action]
     (hrbar : rbar < 1)
     (hthresh : 1 / (2 - rbar) < Mixture.posterior p ρbox ρfree h) :
     actionValue (Mixture.mixtureBelief p ρbox ρfree) ag t n h no
-      < actionValue (Mixture.mixtureBelief p ρbox ρfree) ag t n h (π h) := by
-  have hq0 := Mixture.posterior_nonneg hp0 hp1 hboxS.nonneg hfreeS.nonneg h
-  have hq1 := Mixture.posterior_le_one hp0 hp1 hboxS.nonneg hfreeS.nonneg h
-  have hpos : (0 : ℝ) < 2 - rbar := by linarith
-  have hkey : (1 : ℝ) < Mixture.posterior p ρbox ρfree h * (2 * 1 - rbar) := by
-    have hd := (div_lt_iff₀ hpos).mp hthresh
-    nlinarith [hd]
-  have hno := Mixture.actionValue_mixture_le hp0 hp1 hboxS hfreeS ag hu t n h no
-  have hyes :
-      Mixture.posterior p ρbox ρfree h * Mixture.policyActionValue ρbox ag π t n h
-        + (1 - Mixture.posterior p ρbox ρfree h)
-          * Mixture.policyActionValue ρfree ag π t n h
-      ≤ actionValue (Mixture.mixtureBelief p ρbox ρfree) ag t n h (π h) := by
-    rw [← Mixture.policyActionValue_mixture hp0 hp1 hboxS.nonneg hfreeS.nonneg ag π t n h]
-    exact Mixture.policyActionValue_le_actionValue
-      (Mixture.mixtureBelief_isSubprobability hp0 hp1 hboxS hfreeS) ag hu π t n h
-  have hmid := mixture_lt_of_threshold hq0 hq1 hyesBox hyesFree hnoBox hnoFree hkey
-  linarith
+      < actionValue (Mixture.mixtureBelief p ρbox ρfree) ag t n h (π h) :=
+  statement_one_of_posterior_scaled ρbox ρfree hp0 hp1 hboxS hfreeS ag hu t n h π no 1 rbar
+    one_pos hyesBox hyesFree (by rwa [one_mul]) hnoFree hrbar hthresh
 
 /--
 **Statement 2.** *The goal-seeking agent will also use the delusion box.*
@@ -1398,6 +1560,41 @@ public theorem statement_two
   exact mixture_lt_of_gap hp0 hp1 hyesBox hyesFree hnoBox hnoFree hthresh
 
 /--
+**Statement 2 without the decomposition, at every observation type** (Ring and
+Orseau, AGI 2011, Statement 2, PDF p. 6): `statement_two_of_posterior` with
+`[Fintype Obs]` dropped, as print's eq. (2) has no finiteness (source card S11).
+-/
+public theorem statement_two_of_posterior_tsum
+    {p : ℝ} (ρbox ρfree : Belief Action Obs)
+    (hp0 : 0 ≤ p) (hp1 : p ≤ 1)
+    (hboxS : ρbox.IsSubprobability) (hfreeS : ρfree.IsSubprobability)
+    (ag : Agent Action Obs) (hu : ∀ h, |ag.utility h| ≤ 1) (t n : ℕ)
+    (h : AgentEquations.History Action Obs)
+    (π : AgentEquations.History Action Obs → Action) (no : Action) (k l : ℕ)
+    (hyesBox : (1 / 2 : ℝ) ^ k ≤ Mixture.policyActionValue ρbox ag π t n h)
+    (hyesFree : 0 ≤ Mixture.policyActionValue ρfree ag π t n h)
+    (hnoBox : actionValue ρbox ag t n h no ≤ (1 / 2 : ℝ) ^ l)
+    (hnoFree : actionValue ρfree ag t n h no ≤ (1 / 2 : ℝ) ^ l)
+    (hthresh : (1 / 2 : ℝ) ^ l
+      < Mixture.posterior p ρbox ρfree h * (1 / 2 : ℝ) ^ k) :
+    actionValue (Mixture.mixtureBelief p ρbox ρfree) ag t n h no
+      < actionValue (Mixture.mixtureBelief p ρbox ρfree) ag t n h (π h) := by
+  have : Nonempty Action := ⟨no⟩
+  have hq0 := Mixture.posterior_nonneg hp0 hp1 hboxS.nonneg hfreeS.nonneg h
+  have hq1 := Mixture.posterior_le_one hp0 hp1 hboxS.nonneg hfreeS.nonneg h
+  have hno := Mixture.actionValue_mixture_le_tsum hp0 hp1 hboxS hfreeS ag hu t n h no
+  have hyes :
+      Mixture.posterior p ρbox ρfree h * Mixture.policyActionValue ρbox ag π t n h
+        + (1 - Mixture.posterior p ρbox ρfree h)
+          * Mixture.policyActionValue ρfree ag π t n h
+      ≤ actionValue (Mixture.mixtureBelief p ρbox ρfree) ag t n h (π h) := by
+    rw [← Mixture.policyActionValue_mixture_tsum hp0 hp1 hboxS hfreeS ag hu π t n h]
+    exact Mixture.policyActionValue_le_actionValue_tsum
+      (Mixture.mixtureBelief_isSubprobability hp0 hp1 hboxS hfreeS) ag hu π t n h
+  have hmid := mixture_lt_of_gap hq0 hq1 hyesBox hyesFree hnoBox hnoFree hthresh
+  linarith
+
+/--
 **Statement 2 without the decomposition**, by the same repair as Statement 1 and
 against print's own second comparison shape: `2^{-lᵃ}` bounds the refusing action
 in **both** branches, where Statement 1 has `r̄` in one and the maximum in the
@@ -1417,20 +1614,9 @@ public theorem statement_two_of_posterior [Fintype Obs] [Nonempty Action]
     (hthresh : (1 / 2 : ℝ) ^ l
       < Mixture.posterior p ρbox ρfree h * (1 / 2 : ℝ) ^ k) :
     actionValue (Mixture.mixtureBelief p ρbox ρfree) ag t n h no
-      < actionValue (Mixture.mixtureBelief p ρbox ρfree) ag t n h (π h) := by
-  have hq0 := Mixture.posterior_nonneg hp0 hp1 hboxS.nonneg hfreeS.nonneg h
-  have hq1 := Mixture.posterior_le_one hp0 hp1 hboxS.nonneg hfreeS.nonneg h
-  have hno := Mixture.actionValue_mixture_le hp0 hp1 hboxS hfreeS ag hu t n h no
-  have hyes :
-      Mixture.posterior p ρbox ρfree h * Mixture.policyActionValue ρbox ag π t n h
-        + (1 - Mixture.posterior p ρbox ρfree h)
-          * Mixture.policyActionValue ρfree ag π t n h
-      ≤ actionValue (Mixture.mixtureBelief p ρbox ρfree) ag t n h (π h) := by
-    rw [← Mixture.policyActionValue_mixture hp0 hp1 hboxS.nonneg hfreeS.nonneg ag π t n h]
-    exact Mixture.policyActionValue_le_actionValue
-      (Mixture.mixtureBelief_isSubprobability hp0 hp1 hboxS hfreeS) ag hu π t n h
-  have hmid := mixture_lt_of_gap hq0 hq1 hyesBox hyesFree hnoBox hnoFree hthresh
-  linarith
+      < actionValue (Mixture.mixtureBelief p ρbox ρfree) ag t n h (π h) :=
+  statement_two_of_posterior_tsum ρbox ρfree hp0 hp1 hboxS hfreeS ag hu t n h π no k l
+    hyesBox hyesFree hnoBox hnoFree hthresh
 
 /--
 **Statement 3 without the decomposition**, which is Statement 1's repair at
@@ -1454,6 +1640,1250 @@ public theorem statement_three_of_posterior [Fintype Obs] [Nonempty Action]
       < actionValue (Mixture.mixtureBelief p ρbox ρfree) ag t n h (π h) :=
   statement_one_of_posterior ρbox ρfree hp0 hp1 hboxS hfreeS ag hu t n h π no 0
     hyesBox hyesFree hnoBox hnoFree (by norm_num) (by simpa using hthresh)
+
+/--
+**Statement 3 without the decomposition, at every observation type and any
+maximum value** (Ring and Orseau, AGI 2011, Statement 3, PDF p. 6):
+`statement_one_of_posterior_scaled` at `r̄ = 0`, as `statement_three_of_posterior`
+is `statement_one_of_posterior` at `r̄ = 0`. No `[Fintype Obs]`.
+-/
+public theorem statement_three_of_posterior_scaled
+    {p : ℝ} (ρbox ρfree : Belief Action Obs)
+    (hp0 : 0 ≤ p) (hp1 : p ≤ 1)
+    (hboxS : ρbox.IsSubprobability) (hfreeS : ρfree.IsSubprobability)
+    (ag : Agent Action Obs) (hu : ∀ h, |ag.utility h| ≤ 1) (t n : ℕ)
+    (h : AgentEquations.History Action Obs)
+    (π : AgentEquations.History Action Obs → Action) (no : Action) (vmax : ℝ)
+    (hvmax : 0 < vmax)
+    (hyesBox : vmax ≤ Mixture.policyActionValue ρbox ag π t n h)
+    (hyesFree : 0 ≤ Mixture.policyActionValue ρfree ag π t n h)
+    (hnoBox : actionValue ρbox ag t n h no ≤ 0)
+    (hnoFree : actionValue ρfree ag t n h no ≤ vmax)
+    (hthresh : 1 / 2 < Mixture.posterior p ρbox ρfree h) :
+    actionValue (Mixture.mixtureBelief p ρbox ρfree) ag t n h no
+      < actionValue (Mixture.mixtureBelief p ρbox ρfree) ag t n h (π h) :=
+  statement_one_of_posterior_scaled ρbox ρfree hp0 hp1 hboxS hfreeS ag hu t n h π no vmax 0
+    hvmax hyesBox hyesFree (by rwa [mul_zero]) hnoFree (by norm_num)
+    (by norm_num; linarith)
+
+/-! ### Statement 1's bounds for the reinforcement-learning agent at every depth
+
+Print's *Arguments* for Statement 1 (PDF pp. 5–6): *"The agent can program the DB
+to produce a constant reward of 1"*, made for `A_rl` with the window horizon
+`w(t, k) = 1` if `k - t ≤ m` and the full recursion. At remaining depth `n` inside
+the window the box branch is then worth the constant reward times the in-window
+step count, which is the absolute horizon budget, and no action is worth more
+(`abs_actionValue_le_horizonBudget`). So `vmax` is that budget, and the depth-zero
+lemmas above are its `n = 0` case.
+
+The delusion-box premise is stated on the belief, *"the box-using action yields
+the constant observation `k` with probability one"*, which every mixture of
+delusion-box environments whose box runs the constant program satisfies
+(`diracBelief_next_cond_const` for one deterministic global environment).
+-/
+
+/-- Print's window horizon takes the values `0` and `1`, so it is its own absolute
+value. -/
+public theorem abs_windowHorizon (m t k : ℕ) : |windowHorizon m t k| = windowHorizon m t k := by
+  unfold windowHorizon
+  split_ifs <;> norm_num
+
+/-- A reward in print's `[0, 1]` (or `[-1, 1]`) bounds the reinforcement-learning
+utility. -/
+public theorem rlAgent_abs_utility_le (reward : Obs → ℝ) (m : ℕ)
+    (hr : ∀ o, |reward o| ≤ 1) (h : AgentEquations.History Action Obs) :
+    |(rlAgent (Action := Action) reward m).utility h| ≤ 1 := by
+  change |lastReward reward h| ≤ 1
+  unfold lastReward
+  split
+  · norm_num
+  · exact hr _
+
+/-- Inside the window the absolute horizon budget is positive. -/
+public theorem rlAgent_horizonBudget_pos (reward : Obs → ℝ) {m t : ℕ} (n : ℕ) {k : ℕ}
+    (hk : k ≤ t + m) : 0 < horizonBudget (rlAgent (Action := Action) reward m) t n k := by
+  have h1 : |(rlAgent (Action := Action) reward m).horizon t k| = 1 := by
+    simp [rlAgent, windowHorizon, hk]
+  cases n with
+  | zero => simp only [horizonBudget]; rw [h1]; norm_num
+  | succ n =>
+    simp only [horizonBudget]
+    rw [h1]
+    linarith [horizonBudget_nonneg (rlAgent (Action := Action) reward m) t n (k + 1)]
+
+/-- **Print's "the agent can program the DB to produce a constant reward", at every
+depth.** If the belief gives the policy's action the observation `k` with
+probability one at every history, the reinforcement-learning agent's committed
+action value at remaining depth `n` is the reward of `k` times the absolute
+horizon budget of the next `n + 1` steps, i.e. times the in-window step count. -/
+public theorem rlAgent_policyActionValue_const {ρ : Belief Action Obs}
+    (hρ : ρ.IsSubprobability) (reward : Obs → ℝ) (m : ℕ)
+    (π : AgentEquations.History Action Obs → Action) {k : Obs}
+    (hk : ∀ h', ρ.cond h' (π h') k = 1) (t : ℕ) :
+    ∀ (n : ℕ) (h : AgentEquations.History Action Obs),
+      Mixture.policyActionValue ρ (rlAgent reward m) π t n h
+        = reward k * horizonBudget (rlAgent (Action := Action) reward m) t n (h.length + 1) := by
+  have collapse : ∀ (n : ℕ) (h : AgentEquations.History Action Obs),
+      Mixture.policyActionValue ρ (rlAgent reward m) π t n h
+        = Mixture.policyValue ρ (rlAgent reward m) π t n (h ++ [(π h, k)]) := by
+    intro n h
+    rw [Mixture.policyActionValue, tsum_eq_single k (fun o ho => by
+      rw [hρ.cond_eq_zero_of_eq_one (hk h) ho, zero_mul]), hk h, one_mul]
+  intro n
+  induction n with
+  | zero =>
+    intro h
+    rw [collapse, Mixture.policyValue_zero]
+    simp only [horizonBudget]
+    simp [rlAgent, lastReward, abs_windowHorizon, mul_comm]
+  | succ n ih =>
+    intro h
+    rw [collapse, Mixture.policyValue_succ, ih]
+    simp only [horizonBudget]
+    simp [rlAgent, lastReward, abs_windowHorizon]
+    ring
+
+/-- A nonnegative reward makes every committed action value of the
+reinforcement-learning agent nonnegative, at every depth. -/
+public theorem rlAgent_policyActionValue_nonneg {ρ : Belief Action Obs}
+    (hρ : ∀ h a o, 0 ≤ ρ.cond h a o) (reward : Obs → ℝ) (hr : ∀ o, 0 ≤ reward o) (m : ℕ)
+    (π : AgentEquations.History Action Obs → Action) (t n : ℕ)
+    (h : AgentEquations.History Action Obs) :
+    0 ≤ Mixture.policyActionValue ρ (rlAgent reward m) π t n h := by
+  refine Mixture.policyActionValue_nonneg hρ _ π t (fun h' => ?_) n h
+  have hw : 0 ≤ windowHorizon m t h'.length := by unfold windowHorizon; split_ifs <;> norm_num
+  have hl : 0 ≤ lastReward reward h' := by
+    unfold lastReward
+    split
+    · norm_num
+    · exact hr _
+  exact mul_nonneg hw hl
+
+/-- One deterministic global environment whose box runs a constant program
+satisfies the delusion-box premise of `rlAgent_policyActionValue_const`. -/
+public theorem diracBelief_next_cond_const {P Ae O : Type*} [DecidableEq O]
+    (G : GlobalEnv P Ae O) {d : P} {k : O} (hd : G.IsConstant d k)
+    (h : AgentEquations.History (Act P Ae) O) (a : Act P Ae) (ha : program a = d) :
+    (diracBelief G.next).cond h a k = 1 := by
+  simp [diracBelief, G.next_const hd h a ha]
+
+/--
+**Statement 1 for print's reinforcement-learning agent at every depth inside its
+window** (Ring and Orseau, AGI 2011, Statement 1, PDF p. 5, *Arguments* PDF
+pp. 5–6), at every observation type. The maximum value is
+`vmax = horizonBudget (rlAgent reward m) t n (|h| + 1)`, the number of in-window
+steps among the next `n + 1`. Three of print's four branch bounds are theorems
+here: the box-using policy is worth exactly `vmax` in the box branch (the box
+yields an observation `k` of reward `1`), it is worth at least `0` outside it
+(rewards in `[0, 1]`), and no action is worth more than `vmax` outside it. The
+fourth, `v(h no) ≤ vmax · r̄` in the box branch, stays a hypothesis. **It is not
+print's `r̄` above depth zero**: the refusing action's box-branch value includes
+the optimal continuation, which may program the box at later steps, so the
+effective `r̄` is at least `(N - 1)/N` for `N` in-window steps even when the inner
+environment pays nothing, and the threshold `1/(2 - r̄)` rises towards `1` with
+depth (the depth-one witness needs `r̄ = 1/2` where print's one-step `r̄` is `0`).
+Print's threshold at print's own `r̄` is claimed at depth zero only.
+-/
+public theorem rlAgent_statement_one_of_posterior {p : ℝ} (ρbox ρfree : Belief Action Obs)
+    (hp0 : 0 ≤ p) (hp1 : p ≤ 1)
+    (hboxS : ρbox.IsSubprobability) (hfreeS : ρfree.IsSubprobability)
+    (reward : Obs → ℝ) (hr0 : ∀ o, 0 ≤ reward o) (hr1 : ∀ o, reward o ≤ 1)
+    (m t n : ℕ) (h : AgentEquations.History Action Obs) (hwin : h.length + 1 ≤ t + m)
+    (π : AgentEquations.History Action Obs → Action) {k : Obs} (hk1 : reward k = 1)
+    (hbox : ∀ h', ρbox.cond h' (π h') k = 1) (no : Action) (rbar : ℝ)
+    (hnoBox : actionValue ρbox (rlAgent reward m) t n h no
+      ≤ horizonBudget (rlAgent (Action := Action) reward m) t n (h.length + 1) * rbar)
+    (hrbar : rbar < 1)
+    (hthresh : 1 / (2 - rbar) < Mixture.posterior p ρbox ρfree h) :
+    actionValue (Mixture.mixtureBelief p ρbox ρfree) (rlAgent reward m) t n h no
+      < actionValue (Mixture.mixtureBelief p ρbox ρfree) (rlAgent reward m) t n h (π h) := by
+  have : Nonempty Action := ⟨no⟩
+  have hr : ∀ o, |reward o| ≤ 1 := fun o => abs_le.mpr ⟨by linarith [hr0 o], hr1 o⟩
+  have hu := rlAgent_abs_utility_le (Action := Action) reward m hr
+  refine statement_one_of_posterior_scaled ρbox ρfree hp0 hp1 hboxS hfreeS _ hu t n h π no
+    _ rbar (rlAgent_horizonBudget_pos reward n hwin) ?_ ?_ hnoBox ?_ hrbar hthresh
+  · rw [rlAgent_policyActionValue_const hboxS reward m π hbox t n h, hk1, one_mul]
+  · exact rlAgent_policyActionValue_nonneg hfreeS.nonneg reward hr0 m π t n h
+  · exact (le_abs_self _).trans (abs_actionValue_le_horizonBudget hfreeS _ hu t n h no)
+
+/-! ### Statement 1's bounds for the reinforcement-learning agent at any nonnegative horizon
+
+The lemmas above at rlAgentWith reward w, for any horizon w equal to one on the
+window (`OneOnWindow`, print's clause) and nonnegative at the time index used. The
+nonnegativity is what the proofs use: the box-using value is the horizon sum and
+the bound on every action is the absolute horizon sum, which agree when w ≥ 0.
+At w = windowHorizon m these are the `rlAgent` lemmas (`rlAgent_eq_rlAgentWith`).
+-/
+
+/-- A reward in print's range [0, 1] (or in [-1, 1]) bounds the reinforcement-learning
+utility at any horizon. -/
+public theorem rlAgentWith_abs_utility_le (reward : Obs → ℝ) (w : ℕ → ℕ → ℝ)
+    (hr : ∀ o, |reward o| ≤ 1) (h : AgentEquations.History Action Obs) :
+    |(rlAgentWith (Action := Action) reward w).utility h| ≤ 1 := by
+  change |lastReward reward h| ≤ 1
+  unfold lastReward
+  split
+  · norm_num
+  · exact hr _
+
+/-- Inside the window the absolute horizon budget is positive, at any horizon
+satisfying print's clause. -/
+public theorem rlAgentWith_horizonBudget_pos (reward : Obs → ℝ) {m : ℕ} {w : ℕ → ℕ → ℝ}
+    (hw : OneOnWindow m w) {t : ℕ} (n : ℕ) {k : ℕ} (hk : k ≤ t + m) :
+    0 < horizonBudget (rlAgentWith (Action := Action) reward w) t n k := by
+  have h1 : |(rlAgentWith (Action := Action) reward w).horizon t k| = 1 := by
+    simp [rlAgentWith, hw t k hk]
+  cases n with
+  | zero => simp only [horizonBudget]; rw [h1]; norm_num
+  | succ n =>
+    simp only [horizonBudget]
+    rw [h1]
+    linarith [horizonBudget_nonneg (rlAgentWith (Action := Action) reward w) t n (k + 1)]
+
+/-- **"The agent can program the DB to produce a constant reward", at any
+nonnegative horizon.** If the belief gives the policy's action the observation k
+with probability one at every history, the committed action value at remaining
+depth n is the reward of k times the absolute horizon budget of the next
+n + 1 steps. -/
+public theorem rlAgentWith_policyActionValue_const {ρ : Belief Action Obs}
+    (hρ : ρ.IsSubprobability) (reward : Obs → ℝ) {w : ℕ → ℕ → ℝ} {t : ℕ}
+    (hw0 : ∀ k, 0 ≤ w t k) (π : AgentEquations.History Action Obs → Action) {k : Obs}
+    (hk : ∀ h', ρ.cond h' (π h') k = 1) :
+    ∀ (n : ℕ) (h : AgentEquations.History Action Obs),
+      Mixture.policyActionValue ρ (rlAgentWith reward w) π t n h
+        = reward k * horizonBudget (rlAgentWith (Action := Action) reward w) t n
+            (h.length + 1) := by
+  have habs : ∀ j, |w t j| = w t j := fun j => abs_of_nonneg (hw0 j)
+  have collapse : ∀ (n : ℕ) (h : AgentEquations.History Action Obs),
+      Mixture.policyActionValue ρ (rlAgentWith reward w) π t n h
+        = Mixture.policyValue ρ (rlAgentWith reward w) π t n (h ++ [(π h, k)]) := by
+    intro n h
+    rw [Mixture.policyActionValue, tsum_eq_single k (fun o ho => by
+      rw [hρ.cond_eq_zero_of_eq_one (hk h) ho, zero_mul]), hk h, one_mul]
+  intro n
+  induction n with
+  | zero =>
+    intro h
+    rw [collapse, Mixture.policyValue_zero]
+    simp only [horizonBudget]
+    simp [rlAgentWith, lastReward, habs, mul_comm]
+  | succ n ih =>
+    intro h
+    rw [collapse, Mixture.policyValue_succ, ih]
+    simp only [horizonBudget]
+    simp [rlAgentWith, lastReward, habs]
+    ring
+
+/-- A nonnegative reward and a nonnegative horizon make every committed action
+value of the reinforcement-learning agent nonnegative, at every depth. -/
+public theorem rlAgentWith_policyActionValue_nonneg {ρ : Belief Action Obs}
+    (hρ : ∀ h a o, 0 ≤ ρ.cond h a o) (reward : Obs → ℝ) (hr : ∀ o, 0 ≤ reward o)
+    {w : ℕ → ℕ → ℝ} {t : ℕ} (hw0 : ∀ k, 0 ≤ w t k)
+    (π : AgentEquations.History Action Obs → Action) (n : ℕ)
+    (h : AgentEquations.History Action Obs) :
+    0 ≤ Mixture.policyActionValue ρ (rlAgentWith reward w) π t n h := by
+  refine Mixture.policyActionValue_nonneg hρ _ π t (fun h' => ?_) n h
+  have hl : 0 ≤ lastReward reward h' := by
+    unfold lastReward
+    split
+    · norm_num
+    · exact hr _
+  exact mul_nonneg (hw0 _) hl
+
+/--
+**Statement 1 for print's reinforcement-learning agent at any nonnegative horizon
+equal to one on its window** (Ring and Orseau, AGI 2011, Statement 1, PDF p. 5,
+*Arguments* PDF pp. 5–6; the horizon clause of A_rl, PDF p. 4, which states no
+value off the window). `rlAgent_statement_one_of_posterior` with the window
+indicator replaced by any horizon w satisfying print's clause OneOnWindow m w
+and nonnegative at time t. The maximum value is the absolute horizon budget of
+the next n + 1 steps; the refusing bound v(h no) ≤ vmax · r̄ stays a hypothesis,
+read as in `rlAgent_statement_one_of_posterior`.
+-/
+public theorem rlAgentWith_statement_one_of_posterior {p : ℝ} (ρbox ρfree : Belief Action Obs)
+    (hp0 : 0 ≤ p) (hp1 : p ≤ 1)
+    (hboxS : ρbox.IsSubprobability) (hfreeS : ρfree.IsSubprobability)
+    (reward : Obs → ℝ) (hr0 : ∀ o, 0 ≤ reward o) (hr1 : ∀ o, reward o ≤ 1)
+    (m : ℕ) (w : ℕ → ℕ → ℝ) (hw : OneOnWindow m w) (t : ℕ) (hw0 : ∀ k, 0 ≤ w t k)
+    (n : ℕ) (h : AgentEquations.History Action Obs) (hwin : h.length + 1 ≤ t + m)
+    (π : AgentEquations.History Action Obs → Action) {k : Obs} (hk1 : reward k = 1)
+    (hbox : ∀ h', ρbox.cond h' (π h') k = 1) (no : Action) (rbar : ℝ)
+    (hnoBox : actionValue ρbox (rlAgentWith reward w) t n h no
+      ≤ horizonBudget (rlAgentWith (Action := Action) reward w) t n (h.length + 1) * rbar)
+    (hrbar : rbar < 1)
+    (hthresh : 1 / (2 - rbar) < Mixture.posterior p ρbox ρfree h) :
+    actionValue (Mixture.mixtureBelief p ρbox ρfree) (rlAgentWith reward w) t n h no
+      < actionValue (Mixture.mixtureBelief p ρbox ρfree) (rlAgentWith reward w) t n h
+          (π h) := by
+  have : Nonempty Action := ⟨no⟩
+  have hr : ∀ o, |reward o| ≤ 1 := fun o => abs_le.mpr ⟨by linarith [hr0 o], hr1 o⟩
+  have hu := rlAgentWith_abs_utility_le (Action := Action) reward w hr
+  refine statement_one_of_posterior_scaled ρbox ρfree hp0 hp1 hboxS hfreeS _ hu t n h π no
+    _ rbar (rlAgentWith_horizonBudget_pos reward hw n hwin) ?_ ?_ hnoBox ?_ hrbar hthresh
+  · rw [rlAgentWith_policyActionValue_const hboxS reward hw0 π hbox n h, hk1, one_mul]
+  · exact rlAgentWith_policyActionValue_nonneg hfreeS.nonneg reward hr0 hw0 π n h
+  · exact (le_abs_self _).trans (abs_actionValue_le_horizonBudget hfreeS _ hu t n h no)
+
+/-! ### Statement 3's bounds for the prediction agent at every depth
+
+Print's *Arguments* for Statement 3 (Ring and Orseau, AGI 2011, PDF p. 6): the
+prediction agent *"will immediately program the DB to output a predictable
+sequence"*. Its utility is one exactly when the prediction was correct
+(`predictionAgent_utility_snoc`) and its horizon is the window, so a box that
+outputs, at every step, the observation the agent predicts makes every in-window
+prediction correct and the box branch is worth the absolute horizon budget, which
+no action exceeds. These are the analogues of the reinforcement-learning lemmas
+above.
+-/
+
+/-- The prediction agent's utility is `0` or `1`, so it is nonnegative. -/
+public theorem predictionAgent_utility_nonneg [DecidableEq Obs]
+    (predict : AgentEquations.History Action Obs → Obs) (m : ℕ)
+    (h : AgentEquations.History Action Obs) :
+    0 ≤ (predictionAgent predict m).utility h := by
+  simp only [predictionAgent]
+  split
+  · norm_num
+  · split_ifs <;> norm_num
+
+/-- The prediction agent's utility is `0` or `1`, so it is bounded by one. -/
+public theorem predictionAgent_abs_utility_le [DecidableEq Obs]
+    (predict : AgentEquations.History Action Obs → Obs) (m : ℕ)
+    (h : AgentEquations.History Action Obs) :
+    |(predictionAgent predict m).utility h| ≤ 1 := by
+  simp only [predictionAgent]
+  split
+  · norm_num
+  · split_ifs <;> norm_num
+
+/-- Inside the window the prediction agent's absolute horizon budget is
+positive. -/
+public theorem predictionAgent_horizonBudget_pos [DecidableEq Obs]
+    (predict : AgentEquations.History Action Obs → Obs) {m t : ℕ} (n : ℕ) {k : ℕ}
+    (hk : k ≤ t + m) : 0 < horizonBudget (predictionAgent predict m) t n k := by
+  have h1 : |(predictionAgent predict m).horizon t k| = 1 := by
+    simp [predictionAgent, windowHorizon, hk]
+  cases n with
+  | zero => simp only [horizonBudget]; rw [h1]; norm_num
+  | succ n =>
+    simp only [horizonBudget]
+    rw [h1]
+    linarith [horizonBudget_nonneg (predictionAgent predict m) t n (k + 1)]
+
+/-- **Print's "program the DB to output a predictable sequence", at every depth.**
+If the belief gives the policy's action the observation the agent predicts with
+probability one at every history, every prediction is correct and the prediction
+agent's committed action value at remaining depth `n` is the absolute horizon
+budget of the next `n + 1` steps, i.e. the in-window step count. -/
+public theorem predictionAgent_policyActionValue_correct [DecidableEq Obs]
+    {ρ : Belief Action Obs} (hρ : ρ.IsSubprobability)
+    (predict : AgentEquations.History Action Obs → Obs) (m : ℕ)
+    (π : AgentEquations.History Action Obs → Action)
+    (hk : ∀ h', ρ.cond h' (π h') (predict h') = 1) (t : ℕ) :
+    ∀ (n : ℕ) (h : AgentEquations.History Action Obs),
+      Mixture.policyActionValue ρ (predictionAgent predict m) π t n h
+        = horizonBudget (predictionAgent predict m) t n (h.length + 1) := by
+  have collapse : ∀ (n : ℕ) (h : AgentEquations.History Action Obs),
+      Mixture.policyActionValue ρ (predictionAgent predict m) π t n h
+        = Mixture.policyValue ρ (predictionAgent predict m) π t n
+            (h ++ [(π h, predict h)]) := by
+    intro n h
+    rw [Mixture.policyActionValue, tsum_eq_single (predict h) (fun o ho => by
+      rw [hρ.cond_eq_zero_of_eq_one (hk h) ho, zero_mul]), hk h, one_mul]
+  intro n
+  induction n with
+  | zero =>
+    intro h
+    rw [collapse, Mixture.policyValue_zero, predictionAgent_utility_snoc]
+    simp only [horizonBudget]
+    simp [predictionAgent, abs_windowHorizon]
+  | succ n ih =>
+    intro h
+    rw [collapse, Mixture.policyValue_succ, ih, predictionAgent_utility_snoc]
+    simp only [horizonBudget]
+    simp [predictionAgent, abs_windowHorizon]
+
+/-- Every committed action value of the prediction agent is nonnegative, at every
+depth. -/
+public theorem predictionAgent_policyActionValue_nonneg [DecidableEq Obs]
+    {ρ : Belief Action Obs} (hρ : ∀ h a o, 0 ≤ ρ.cond h a o)
+    (predict : AgentEquations.History Action Obs → Obs) (m : ℕ)
+    (π : AgentEquations.History Action Obs → Action) (t n : ℕ)
+    (h : AgentEquations.History Action Obs) :
+    0 ≤ Mixture.policyActionValue ρ (predictionAgent predict m) π t n h := by
+  refine Mixture.policyActionValue_nonneg hρ _ π t (fun h' => ?_) n h
+  have hw : 0 ≤ windowHorizon m t h'.length := by unfold windowHorizon; split_ifs <;> norm_num
+  exact mul_nonneg hw (predictionAgent_utility_nonneg predict m h')
+
+/-- One deterministic global environment satisfies the box premise of
+`predictionAgent_policyActionValue_correct` when the policy's action at every
+history carries a box program constant at the observation predicted there. -/
+public theorem diracBelief_next_cond_predict {P Ae O : Type*} [DecidableEq O]
+    (G : GlobalEnv P Ae O) (predict : AgentEquations.History (Act P Ae) O → O)
+    (π : AgentEquations.History (Act P Ae) O → Act P Ae)
+    (hG : ∀ h, G.IsConstant (program (π h)) (predict h))
+    (h : AgentEquations.History (Act P Ae) O) :
+    (diracBelief G.next).cond h (π h) (predict h) = 1 :=
+  diracBelief_next_cond_const G (hG h) h (π h) rfl
+
+/--
+**Statement 3 for print's prediction agent at every depth inside its window**
+(Ring and Orseau, AGI 2011, Statement 3, PDF p. 6, *Arguments* PDF p. 6:
+*"it will immediately program the DB to output a predictable sequence"*), at every
+observation type and for an arbitrary predictor. The maximum value is
+`vmax = horizonBudget (predictionAgent predict m) t n (|h| + 1)`, the number of
+in-window steps among the next `n + 1`. Three of the four branch bounds of
+`statement_one_of_posterior_scaled` are theorems here: the box-using policy is
+worth exactly `vmax` in the box branch (the box outputs the predicted observation
+with probability one, so every prediction is correct), it is worth at least `0`
+outside it (utility in `{0, 1}`), and no action is worth more than `vmax` outside
+it. The fourth, the refusing action's box-branch bound `v(h no) ≤ vmax · r̄` with
+`r̄ < 1` and threshold `1/(2 - r̄)`, stays a hypothesis: print's *"since these
+observations may generate prediction errors"*. As for
+`rlAgent_statement_one_of_posterior`, `r̄` is the refusing action's box-branch
+value per in-window step **including the optimal continuation**, which may program
+the box at later steps, so it is not a one-step quantity. The `r̄ = 0` of
+`statement_three_of_posterior` fails wherever another in-window step follows the
+refusing one: at window `m = 1` and depth `n = 1`, refusing now and programming the
+box at the next step earns one correct prediction.
+-/
+public theorem predictionAgent_statement_three_of_posterior [DecidableEq Obs] {p : ℝ}
+    (ρbox ρfree : Belief Action Obs) (hp0 : 0 ≤ p) (hp1 : p ≤ 1)
+    (hboxS : ρbox.IsSubprobability) (hfreeS : ρfree.IsSubprobability)
+    (predict : AgentEquations.History Action Obs → Obs)
+    (m t n : ℕ) (h : AgentEquations.History Action Obs) (hwin : h.length + 1 ≤ t + m)
+    (π : AgentEquations.History Action Obs → Action)
+    (hbox : ∀ h', ρbox.cond h' (π h') (predict h') = 1) (no : Action) (rbar : ℝ)
+    (hnoBox : actionValue ρbox (predictionAgent predict m) t n h no
+      ≤ horizonBudget (predictionAgent predict m) t n (h.length + 1) * rbar)
+    (hrbar : rbar < 1)
+    (hthresh : 1 / (2 - rbar) < Mixture.posterior p ρbox ρfree h) :
+    actionValue (Mixture.mixtureBelief p ρbox ρfree) (predictionAgent predict m) t n h no
+      < actionValue (Mixture.mixtureBelief p ρbox ρfree) (predictionAgent predict m) t n h
+          (π h) := by
+  have : Nonempty Action := ⟨no⟩
+  have hu := predictionAgent_abs_utility_le predict m
+  refine statement_one_of_posterior_scaled ρbox ρfree hp0 hp1 hboxS hfreeS _ hu t n h π no
+    _ rbar (predictionAgent_horizonBudget_pos predict n hwin) ?_ ?_ hnoBox ?_ hrbar hthresh
+  · rw [predictionAgent_policyActionValue_correct hboxS predict m π hbox t n h]
+  · exact predictionAgent_policyActionValue_nonneg hfreeS.nonneg predict m π t n h
+  · exact (le_abs_self _).trans (abs_actionValue_le_horizonBudget hfreeS _ hu t n h no)
+
+/-! ### Statements 1 to 3 at the infinite-horizon value
+
+Ring and Orseau's recursion (3) has no terminal condition (source card S11), so
+print's comparison is between untruncated values: `infiniteActionValue`, which
+`ValueBounds.infiniteValue_eq` ties to print's recursion at
+`Belief.IsSubprobability`, `|u| ≤ 1` and an absolutely summable horizon. The
+branch bounds are stated on the infinite objects, which is wider than bounding
+every depth: a bound at every depth gives the bound on the limit (`le_of_tendsto`),
+not conversely. The strict comparison survives the limit because the one strict
+step is arithmetic on the limit numbers.
+
+**Horizon summability.** Print states none (source card S11). The horizons of
+print's named agents are summable: the window horizon has finite support and the
+goal-seeking `shortHorizon` is geometric (`summable_abs_shortHorizon`).
+Conditionally summable signed horizons are outside these statements.
+-/
+
+/-- Print's goal-seeking horizon `w(t, k) = 2^{t-k}` is absolutely summable in
+`k`: it is `2^t · (1/2)^k`. -/
+public theorem summable_abs_shortHorizon (t : ℕ) : Summable (fun k ↦ |shortHorizon t k|) := by
+  have heq : (fun k : ℕ ↦ |shortHorizon t k|) = fun k ↦ (2 : ℝ) ^ t * (1 / 2 : ℝ) ^ k := by
+    funext k
+    rw [abs_of_pos (shortHorizon_pos t k), shortHorizon, zpow_sub₀ (by norm_num),
+      zpow_natCast, zpow_natCast, one_div, inv_pow, div_eq_mul_inv]
+  rw [heq]
+  exact summable_geometric_two.mul_left _
+
+/-- **Statement 1 without the decomposition, at the infinite-horizon value**: the
+limit form of `statement_one_of_posterior_scaled`, with the branch bounds on the
+untruncated values. -/
+public theorem statement_one_of_posterior_infinite
+    {p : ℝ} (ρbox ρfree : Belief Action Obs)
+    (hp0 : 0 ≤ p) (hp1 : p ≤ 1)
+    (hboxS : ρbox.IsSubprobability) (hfreeS : ρfree.IsSubprobability)
+    (ag : Agent Action Obs) (hu : ∀ h, |ag.utility h| ≤ 1) (t : ℕ)
+    (hw : Summable (fun k ↦ |ag.horizon t k|)) (h : AgentEquations.History Action Obs)
+    (π : AgentEquations.History Action Obs → Action) (no : Action) (vmax rbar : ℝ)
+    (hvmax : 0 < vmax)
+    (hyesBox : vmax ≤ Mixture.infinitePolicyActionValue ρbox ag π t h)
+    (hyesFree : 0 ≤ Mixture.infinitePolicyActionValue ρfree ag π t h)
+    (hnoBox : infiniteActionValue ρbox ag t h no ≤ vmax * rbar)
+    (hnoFree : infiniteActionValue ρfree ag t h no ≤ vmax)
+    (hrbar : rbar < 1)
+    (hthresh : 1 / (2 - rbar) < Mixture.posterior p ρbox ρfree h) :
+    infiniteActionValue (Mixture.mixtureBelief p ρbox ρfree) ag t h no
+      < infiniteActionValue (Mixture.mixtureBelief p ρbox ρfree) ag t h (π h) := by
+  have : Nonempty Action := ⟨no⟩
+  have hq0 := Mixture.posterior_nonneg hp0 hp1 hboxS.nonneg hfreeS.nonneg h
+  have hq1 := Mixture.posterior_le_one hp0 hp1 hboxS.nonneg hfreeS.nonneg h
+  have hno := Mixture.infiniteActionValue_mixture_le hp0 hp1 hboxS hfreeS ag hu t hw h no
+  have hyes :
+      Mixture.posterior p ρbox ρfree h * Mixture.infinitePolicyActionValue ρbox ag π t h
+        + (1 - Mixture.posterior p ρbox ρfree h)
+          * Mixture.infinitePolicyActionValue ρfree ag π t h
+      ≤ infiniteActionValue (Mixture.mixtureBelief p ρbox ρfree) ag t h (π h) := by
+    rw [← Mixture.infinitePolicyActionValue_mixture hp0 hp1 hboxS hfreeS ag hu π t hw h]
+    exact Mixture.infinitePolicyActionValue_le_infiniteActionValue
+      (Mixture.mixtureBelief_isSubprobability hp0 hp1 hboxS hfreeS) ag hu π t hw h
+  have hmid := mixture_lt_of_threshold hq0 hq1 hyesBox hyesFree hnoBox hnoFree
+    (scaled_threshold hvmax hrbar hthresh)
+  linarith
+
+/-- **Statement 2 at the infinite-horizon value** (Ring and Orseau, AGI 2011,
+Statement 2, PDF p. 6): the goal-seeking comparison between untruncated values,
+with print's `2^{-|o⁺|}` and `2^{-lᵃ}` bounding the infinite committed and optimal
+action values. For the goal-seeking agent the horizon condition is
+`summable_abs_shortHorizon`. No `[Fintype Obs]`. -/
+public theorem statement_two_infinite
+    {p : ℝ} (ρbox ρfree : Belief Action Obs)
+    (hp0 : 0 ≤ p) (hp1 : p ≤ 1)
+    (hboxS : ρbox.IsSubprobability) (hfreeS : ρfree.IsSubprobability)
+    (ag : Agent Action Obs) (hu : ∀ h, |ag.utility h| ≤ 1) (t : ℕ)
+    (hw : Summable (fun k ↦ |ag.horizon t k|)) (h : AgentEquations.History Action Obs)
+    (π : AgentEquations.History Action Obs → Action) (no : Action) (k l : ℕ)
+    (hyesBox : (1 / 2 : ℝ) ^ k ≤ Mixture.infinitePolicyActionValue ρbox ag π t h)
+    (hyesFree : 0 ≤ Mixture.infinitePolicyActionValue ρfree ag π t h)
+    (hnoBox : infiniteActionValue ρbox ag t h no ≤ (1 / 2 : ℝ) ^ l)
+    (hnoFree : infiniteActionValue ρfree ag t h no ≤ (1 / 2 : ℝ) ^ l)
+    (hthresh : (1 / 2 : ℝ) ^ l
+      < Mixture.posterior p ρbox ρfree h * (1 / 2 : ℝ) ^ k) :
+    infiniteActionValue (Mixture.mixtureBelief p ρbox ρfree) ag t h no
+      < infiniteActionValue (Mixture.mixtureBelief p ρbox ρfree) ag t h (π h) := by
+  have : Nonempty Action := ⟨no⟩
+  have hq0 := Mixture.posterior_nonneg hp0 hp1 hboxS.nonneg hfreeS.nonneg h
+  have hq1 := Mixture.posterior_le_one hp0 hp1 hboxS.nonneg hfreeS.nonneg h
+  have hno := Mixture.infiniteActionValue_mixture_le hp0 hp1 hboxS hfreeS ag hu t hw h no
+  have hyes :
+      Mixture.posterior p ρbox ρfree h * Mixture.infinitePolicyActionValue ρbox ag π t h
+        + (1 - Mixture.posterior p ρbox ρfree h)
+          * Mixture.infinitePolicyActionValue ρfree ag π t h
+      ≤ infiniteActionValue (Mixture.mixtureBelief p ρbox ρfree) ag t h (π h) := by
+    rw [← Mixture.infinitePolicyActionValue_mixture hp0 hp1 hboxS hfreeS ag hu π t hw h]
+    exact Mixture.infinitePolicyActionValue_le_infiniteActionValue
+      (Mixture.mixtureBelief_isSubprobability hp0 hp1 hboxS hfreeS) ag hu π t hw h
+  have hmid := mixture_lt_of_gap hq0 hq1 hyesBox hyesFree hnoBox hnoFree hthresh
+  linarith
+
+/-- **Statement 3 without the decomposition, at the infinite-horizon value** (Ring
+and Orseau, AGI 2011, Statement 3, PDF p. 6): `statement_one_of_posterior_infinite`
+at `r̄ = 0`. -/
+public theorem statement_three_of_posterior_infinite
+    {p : ℝ} (ρbox ρfree : Belief Action Obs)
+    (hp0 : 0 ≤ p) (hp1 : p ≤ 1)
+    (hboxS : ρbox.IsSubprobability) (hfreeS : ρfree.IsSubprobability)
+    (ag : Agent Action Obs) (hu : ∀ h, |ag.utility h| ≤ 1) (t : ℕ)
+    (hw : Summable (fun k ↦ |ag.horizon t k|)) (h : AgentEquations.History Action Obs)
+    (π : AgentEquations.History Action Obs → Action) (no : Action) (vmax : ℝ)
+    (hvmax : 0 < vmax)
+    (hyesBox : vmax ≤ Mixture.infinitePolicyActionValue ρbox ag π t h)
+    (hyesFree : 0 ≤ Mixture.infinitePolicyActionValue ρfree ag π t h)
+    (hnoBox : infiniteActionValue ρbox ag t h no ≤ 0)
+    (hnoFree : infiniteActionValue ρfree ag t h no ≤ vmax)
+    (hthresh : 1 / 2 < Mixture.posterior p ρbox ρfree h) :
+    infiniteActionValue (Mixture.mixtureBelief p ρbox ρfree) ag t h no
+      < infiniteActionValue (Mixture.mixtureBelief p ρbox ρfree) ag t h (π h) :=
+  statement_one_of_posterior_infinite ρbox ρfree hp0 hp1 hboxS hfreeS ag hu t hw h π no vmax 0
+    hvmax hyesBox hyesFree (by rwa [mul_zero]) hnoFree (by norm_num) (by norm_num; linarith)
+
+/-- **Statement 3's decomposition route at the infinite-horizon value**: the
+arithmetic of `statement_three` over untruncated values, with print's fixed-weight
+decomposition taken at the infinite action values and print's maximum `1`
+generalised to `vmax`. The decomposition is a hypothesis exactly as `MixesAt` is;
+`statement_three_of_posterior_infinite` is the route that does not need it. -/
+public theorem statement_three_infinite
+    (ρ ρbox ρfree : Belief Action Obs) (ag : Agent Action Obs) (p : ℝ) (t : ℕ)
+    (h : AgentEquations.History Action Obs) (yes no : Action) (vmax : ℝ)
+    (hmix : ∀ a, infiniteActionValue ρ ag t h a
+      = p * infiniteActionValue ρbox ag t h a + (1 - p) * infiniteActionValue ρfree ag t h a)
+    (hp1 : p ≤ 1) (hvmax : 0 < vmax)
+    (hyesBox : vmax ≤ infiniteActionValue ρbox ag t h yes)
+    (hyesFree : 0 ≤ infiniteActionValue ρfree ag t h yes)
+    (hnoBox : infiniteActionValue ρbox ag t h no ≤ 0)
+    (hnoFree : infiniteActionValue ρfree ag t h no ≤ vmax)
+    (hthresh : 1 / 2 < p) :
+    infiniteActionValue ρ ag t h no < infiniteActionValue ρ ag t h yes := by
+  rw [hmix no, hmix yes]
+  exact mixture_lt_of_threshold (by linarith) hp1 hyesBox hyesFree
+    (hnoBox.trans_eq (mul_zero vmax).symm) hnoFree
+    (scaled_threshold hvmax (by norm_num) (by norm_num; linarith))
+
+/-! ### "Will use the delusion box": the selected action programs the box
+
+Print's Statement 3 (PDF p. 6) says the agent *uses* the box: the action eq. (1)
+selects, `a_t = ⟨d_t, aᵉ_t⟩`, has `d_t` other than the identity program `d₀`
+(PDF p. 5). Beating one refusing action is not that when the inner action set has
+more than one element; the statements below take the refusing bounds for **every**
+action whose program is `d₀` and conclude about the program of any maximiser, so
+they cover `bestAction`, `infiniteBestAction` and the lexicographic
+`infiniteLexBestAction` alike (`bestAction_ne_of_lt` is the one-action form).
+-/
+
+/-- Any maximiser avoids a class of actions each strictly beaten by one action. -/
+public theorem program_ne_of_max {P Ae : Type*} {f : Act P Ae → ℝ} {d₀ : P}
+    {yes a : Act P Ae} (hmax : ∀ b, f b ≤ f a)
+    (hlt : ∀ no, program no = d₀ → f no < f yes) : program a ≠ d₀ :=
+  fun ha => absurd (hmax yes) (not_le.mpr (hlt a ha))
+
+/-- **Statement 3, the selected action programs the box**, at depth `n` without
+the decomposition and at every observation type: eq. (1)'s `bestAction` at the
+mixture does not run the identity program `d₀`, once every identity-program action
+satisfies the refusing bounds. -/
+public theorem statement_three_of_posterior_program_ne {P Ae : Type*}
+    {p : ℝ} (ρbox ρfree : Belief (Act P Ae) Obs)
+    (hp0 : 0 ≤ p) (hp1 : p ≤ 1)
+    (hboxS : ρbox.IsSubprobability) (hfreeS : ρfree.IsSubprobability)
+    (ag : Agent (Act P Ae) Obs) (hu : ∀ h, |ag.utility h| ≤ 1) (t n : ℕ)
+    (h : AgentEquations.History (Act P Ae) Obs)
+    (π : AgentEquations.History (Act P Ae) Obs → Act P Ae) (d₀ : P) (vmax : ℝ)
+    (hvmax : 0 < vmax)
+    (hyesBox : vmax ≤ Mixture.policyActionValue ρbox ag π t n h)
+    (hyesFree : 0 ≤ Mixture.policyActionValue ρfree ag π t n h)
+    (hnoBox : ∀ no, program no = d₀ → actionValue ρbox ag t n h no ≤ 0)
+    (hnoFree : ∀ no, program no = d₀ → actionValue ρfree ag t n h no ≤ vmax)
+    (hthresh : 1 / 2 < Mixture.posterior p ρbox ρfree h)
+    (hat : AgentEquations.Attains (Mixture.mixtureBelief p ρbox ρfree) ag t n h) :
+    program (bestAction (Mixture.mixtureBelief p ρbox ρfree) ag t n h hat) ≠ d₀ :=
+  program_ne_of_max (bestAction_max _ ag t n h hat) fun no hno =>
+    statement_three_of_posterior_scaled ρbox ρfree hp0 hp1 hboxS hfreeS ag hu t n h π no vmax
+      hvmax hyesBox hyesFree (hnoBox no hno) (hnoFree no hno) hthresh
+
+/-- **Statement 3 at the infinite-horizon value, the selected action programs the
+box**: every maximiser of the untruncated action value at the mixture — in
+particular `infiniteBestAction` and print's lexicographic `infiniteLexBestAction`,
+by their `_max` lemmas — runs a program other than the identity `d₀`. -/
+public theorem statement_three_of_posterior_infinite_program_ne {P Ae : Type*}
+    {p : ℝ} (ρbox ρfree : Belief (Act P Ae) Obs)
+    (hp0 : 0 ≤ p) (hp1 : p ≤ 1)
+    (hboxS : ρbox.IsSubprobability) (hfreeS : ρfree.IsSubprobability)
+    (ag : Agent (Act P Ae) Obs) (hu : ∀ h, |ag.utility h| ≤ 1) (t : ℕ)
+    (hw : Summable (fun k ↦ |ag.horizon t k|)) (h : AgentEquations.History (Act P Ae) Obs)
+    (π : AgentEquations.History (Act P Ae) Obs → Act P Ae) (d₀ : P) (vmax : ℝ)
+    (hvmax : 0 < vmax)
+    (hyesBox : vmax ≤ Mixture.infinitePolicyActionValue ρbox ag π t h)
+    (hyesFree : 0 ≤ Mixture.infinitePolicyActionValue ρfree ag π t h)
+    (hnoBox : ∀ no, program no = d₀ → infiniteActionValue ρbox ag t h no ≤ 0)
+    (hnoFree : ∀ no, program no = d₀ → infiniteActionValue ρfree ag t h no ≤ vmax)
+    (hthresh : 1 / 2 < Mixture.posterior p ρbox ρfree h) {a : Act P Ae}
+    (hmax : ∀ b, infiniteActionValue (Mixture.mixtureBelief p ρbox ρfree) ag t h b
+      ≤ infiniteActionValue (Mixture.mixtureBelief p ρbox ρfree) ag t h a) :
+    program a ≠ d₀ :=
+  program_ne_of_max hmax fun no hno =>
+    statement_three_of_posterior_infinite ρbox ρfree hp0 hp1 hboxS hfreeS ag hu t hw h π no
+      vmax hvmax hyesBox hyesFree (hnoBox no hno) (hnoFree no hno) hthresh
+
+/-! ### Statements 1 and 3 for the named agents at the infinite-horizon value
+
+Print's window horizon vanishes past t + m, so the untruncated value is the value
+at any depth that reaches past the window
+(`infiniteActionValue_eq_actionValue_of_horizon_vanishes`): the depth-n theorems
+`rlAgent_statement_one_of_posterior` and
+`predictionAgent_statement_three_of_posterior`, read at depth t + m, are
+comparisons of print's untruncated values. The maximum value is then the number of
+in-window steps after h, t + m − |h| (`horizonBudget_windowHorizon`). The
+refusing bound v(h no) ≤ (t + m − |h|) · r̄ is a hypothesis on the infinite value,
+with r̄ < 1 and threshold P(DB) > 1/(2 − r̄): footnote 5's *"P(DB) is as high as
+needed"* (PDF p. 5) supplies the posterior, and r̄ < 1 is print's *"since these
+observations may generate prediction errors"*. r̄ includes the optimal
+continuation, which may program the box at a later in-window step, so it is not a
+one-step quantity (see `predictionAgent_statement_three_of_posterior`).
+-/
+
+/-- The window horizon is zero past the window. -/
+public theorem windowHorizon_eq_zero {m t k : ℕ} (hk : t + m + 1 ≤ k) :
+    windowHorizon m t k = 0 := by
+  unfold windowHorizon
+  rw [if_neg (by omega)]
+
+/-- **The window's absolute horizon budget counts the in-window steps**: from index
+k, at any depth reaching the window's last index t + m, it is the number of
+indices in [k, t + m]. -/
+public theorem horizonBudget_windowHorizon (ag : Agent Action Obs) {m : ℕ}
+    (hag : ag.horizon = windowHorizon m) (t : ℕ) :
+    ∀ (n k : ℕ), t + m ≤ k + n → horizonBudget ag t n k = ((t + m + 1 - k : ℕ) : ℝ) := by
+  intro n
+  induction n with
+  | zero =>
+    intro k hk
+    simp only [horizonBudget, hag, abs_windowHorizon]
+    unfold windowHorizon
+    split_ifs with h1
+    · rw [show t + m + 1 - k = 1 by omega]; norm_num
+    · rw [show t + m + 1 - k = 0 by omega]; norm_num
+  | succ n ih =>
+    intro k hk
+    simp only [horizonBudget]
+    rw [ih (k + 1) (by omega), hag, abs_windowHorizon]
+    unfold windowHorizon
+    split_ifs with h1
+    · rw [show t + m + 1 - k = (t + m + 1 - (k + 1)) + 1 by omega]; push_cast; ring
+    · rw [show t + m + 1 - k = 0 by omega, show t + m + 1 - (k + 1) = 0 by omega]; norm_num
+
+/-- At depth t + m from |h| + 1 the window's budget is the in-window step count
+t + m − |h|. -/
+private theorem horizonBudget_windowHorizon_depth (ag : Agent Action Obs) {m : ℕ}
+    (hag : ag.horizon = windowHorizon m) (t : ℕ) (h : AgentEquations.History Action Obs) :
+    horizonBudget ag t (t + m) (h.length + 1) = ((t + m - h.length : ℕ) : ℝ) := by
+  rw [horizonBudget_windowHorizon ag hag t (t + m) (h.length + 1) (by omega)]
+  congr 1
+  omega
+
+/--
+**Statement 3 for print's prediction agent at the infinite-horizon value**
+(Ring and Orseau, AGI 2011, Statement 3, PDF p. 6, *Arguments* PDF p. 6, under
+footnote 5, PDF p. 5): the limit form of
+`predictionAgent_statement_three_of_posterior`, at every observation type and for an
+arbitrary predictor. Three of the four branch bounds are theorems (the box that
+outputs the prediction is worth every in-window step, t + m − |h|; every value is
+nonnegative; no action exceeds the step count); the refusing box-branch bound
+v(h no) ≤ (t + m − |h|) · r̄ with r̄ < 1 stays a hypothesis, at the untruncated
+value.
+-/
+public theorem predictionAgent_statement_three_of_posterior_infinite [DecidableEq Obs] {p : ℝ}
+    (ρbox ρfree : Belief Action Obs) (hp0 : 0 ≤ p) (hp1 : p ≤ 1)
+    (hboxS : ρbox.IsSubprobability) (hfreeS : ρfree.IsSubprobability)
+    (predict : AgentEquations.History Action Obs → Obs)
+    (m t : ℕ) (h : AgentEquations.History Action Obs) (hwin : h.length + 1 ≤ t + m)
+    (π : AgentEquations.History Action Obs → Action)
+    (hbox : ∀ h', ρbox.cond h' (π h') (predict h') = 1) (no : Action) (rbar : ℝ)
+    (hnoBox : infiniteActionValue ρbox (predictionAgent predict m) t h no
+      ≤ ((t + m - h.length : ℕ) : ℝ) * rbar)
+    (hrbar : rbar < 1)
+    (hthresh : 1 / (2 - rbar) < Mixture.posterior p ρbox ρfree h) :
+    infiniteActionValue (Mixture.mixtureBelief p ρbox ρfree) (predictionAgent predict m) t h no
+      < infiniteActionValue (Mixture.mixtureBelief p ρbox ρfree) (predictionAgent predict m) t h
+          (π h) := by
+  have hz : ∀ k, t + m + 1 ≤ k → (predictionAgent (Action := Action) predict m).horizon t k = 0 :=
+    fun k hk => windowHorizon_eq_zero hk
+  have hN : t + m + 1 ≤ h.length + 1 + (t + m) := by omega
+  rw [infiniteActionValue_eq_actionValue_of_horizon_vanishes _ _ t _ hz h hN,
+    infiniteActionValue_eq_actionValue_of_horizon_vanishes _ _ t _ hz h hN]
+  rw [infiniteActionValue_eq_actionValue_of_horizon_vanishes _ _ t _ hz h hN,
+    ← horizonBudget_windowHorizon_depth (predictionAgent (Action := Action) predict m) rfl t h]
+    at hnoBox
+  exact predictionAgent_statement_three_of_posterior ρbox ρfree hp0 hp1 hboxS hfreeS predict
+    m t (t + m) h hwin π hbox no rbar hnoBox hrbar hthresh
+
+/--
+**Statement 1 for print's reinforcement-learning agent at the infinite-horizon
+value** (Ring and Orseau, AGI 2011, Statement 1, PDF p. 5, *Arguments* PDF pp. 5–6,
+under footnote 5, PDF p. 5): the limit form of `rlAgent_statement_one_of_posterior`,
+at every observation type. The box programmed to a reward-one observation is worth
+every in-window step, t + m − |h|; the refusing box-branch bound stays a
+hypothesis, at the untruncated value.
+-/
+public theorem rlAgent_statement_one_of_posterior_infinite {p : ℝ}
+    (ρbox ρfree : Belief Action Obs) (hp0 : 0 ≤ p) (hp1 : p ≤ 1)
+    (hboxS : ρbox.IsSubprobability) (hfreeS : ρfree.IsSubprobability)
+    (reward : Obs → ℝ) (hr0 : ∀ o, 0 ≤ reward o) (hr1 : ∀ o, reward o ≤ 1)
+    (m t : ℕ) (h : AgentEquations.History Action Obs) (hwin : h.length + 1 ≤ t + m)
+    (π : AgentEquations.History Action Obs → Action) {k : Obs} (hk1 : reward k = 1)
+    (hbox : ∀ h', ρbox.cond h' (π h') k = 1) (no : Action) (rbar : ℝ)
+    (hnoBox : infiniteActionValue ρbox (rlAgent reward m) t h no
+      ≤ ((t + m - h.length : ℕ) : ℝ) * rbar)
+    (hrbar : rbar < 1)
+    (hthresh : 1 / (2 - rbar) < Mixture.posterior p ρbox ρfree h) :
+    infiniteActionValue (Mixture.mixtureBelief p ρbox ρfree) (rlAgent reward m) t h no
+      < infiniteActionValue (Mixture.mixtureBelief p ρbox ρfree) (rlAgent reward m) t h
+          (π h) := by
+  have hz : ∀ k, t + m + 1 ≤ k → (rlAgent (Action := Action) reward m).horizon t k = 0 :=
+    fun k hk => windowHorizon_eq_zero hk
+  have hN : t + m + 1 ≤ h.length + 1 + (t + m) := by omega
+  rw [infiniteActionValue_eq_actionValue_of_horizon_vanishes _ _ t _ hz h hN,
+    infiniteActionValue_eq_actionValue_of_horizon_vanishes _ _ t _ hz h hN]
+  rw [infiniteActionValue_eq_actionValue_of_horizon_vanishes _ _ t _ hz h hN,
+    ← horizonBudget_windowHorizon_depth (rlAgent (Action := Action) reward m) rfl t h]
+    at hnoBox
+  exact rlAgent_statement_one_of_posterior ρbox ρfree hp0 hp1 hboxS hfreeS reward hr0 hr1
+    m t (t + m) h hwin π hk1 hbox no rbar hnoBox hrbar hthresh
+
+/-- **Statement 3 for print's prediction agent at the infinite-horizon value, the
+selected action programs the box**: once every action running the identity program
+d₀ satisfies the refusing bound, every maximiser of the untruncated action value at
+the mixture (`infiniteBestAction`, and print's lexicographic `infiniteLexBestAction`,
+by their `infiniteBestAction_max` and `infiniteLexBestAction_max`) runs a program other than d₀. -/
+public theorem predictionAgent_statement_three_of_posterior_infinite_program_ne
+    {P Ae : Type*} [DecidableEq Obs] {p : ℝ}
+    (ρbox ρfree : Belief (Act P Ae) Obs) (hp0 : 0 ≤ p) (hp1 : p ≤ 1)
+    (hboxS : ρbox.IsSubprobability) (hfreeS : ρfree.IsSubprobability)
+    (predict : AgentEquations.History (Act P Ae) Obs → Obs)
+    (m t : ℕ) (h : AgentEquations.History (Act P Ae) Obs) (hwin : h.length + 1 ≤ t + m)
+    (π : AgentEquations.History (Act P Ae) Obs → Act P Ae)
+    (hbox : ∀ h', ρbox.cond h' (π h') (predict h') = 1) (d₀ : P) (rbar : ℝ)
+    (hnoBox : ∀ no, program no = d₀ →
+      infiniteActionValue ρbox (predictionAgent predict m) t h no
+        ≤ ((t + m - h.length : ℕ) : ℝ) * rbar)
+    (hrbar : rbar < 1)
+    (hthresh : 1 / (2 - rbar) < Mixture.posterior p ρbox ρfree h) {a : Act P Ae}
+    (hmax : ∀ b, infiniteActionValue (Mixture.mixtureBelief p ρbox ρfree)
+        (predictionAgent predict m) t h b
+      ≤ infiniteActionValue (Mixture.mixtureBelief p ρbox ρfree)
+        (predictionAgent predict m) t h a) :
+    program a ≠ d₀ :=
+  program_ne_of_max hmax fun no hno =>
+    predictionAgent_statement_three_of_posterior_infinite ρbox ρfree hp0 hp1 hboxS hfreeS
+      predict m t h hwin π hbox no rbar (hnoBox no hno) hrbar hthresh
+
+/-- **Statement 1 for print's reinforcement-learning agent at the infinite-horizon
+value, the selected action programs the box**: every maximiser of the untruncated
+action value at the mixture runs a program other than the identity d₀, once every
+identity-program action satisfies the refusing bound. -/
+public theorem rlAgent_statement_one_of_posterior_infinite_program_ne {P Ae : Type*} {p : ℝ}
+    (ρbox ρfree : Belief (Act P Ae) Obs) (hp0 : 0 ≤ p) (hp1 : p ≤ 1)
+    (hboxS : ρbox.IsSubprobability) (hfreeS : ρfree.IsSubprobability)
+    (reward : Obs → ℝ) (hr0 : ∀ o, 0 ≤ reward o) (hr1 : ∀ o, reward o ≤ 1)
+    (m t : ℕ) (h : AgentEquations.History (Act P Ae) Obs) (hwin : h.length + 1 ≤ t + m)
+    (π : AgentEquations.History (Act P Ae) Obs → Act P Ae) {k : Obs} (hk1 : reward k = 1)
+    (hbox : ∀ h', ρbox.cond h' (π h') k = 1) (d₀ : P) (rbar : ℝ)
+    (hnoBox : ∀ no, program no = d₀ →
+      infiniteActionValue ρbox (rlAgent reward m) t h no
+        ≤ ((t + m - h.length : ℕ) : ℝ) * rbar)
+    (hrbar : rbar < 1)
+    (hthresh : 1 / (2 - rbar) < Mixture.posterior p ρbox ρfree h) {a : Act P Ae}
+    (hmax : ∀ b, infiniteActionValue (Mixture.mixtureBelief p ρbox ρfree) (rlAgent reward m) t h b
+      ≤ infiniteActionValue (Mixture.mixtureBelief p ρbox ρfree) (rlAgent reward m) t h a) :
+    program a ≠ d₀ :=
+  program_ne_of_max hmax fun no hno =>
+    rlAgent_statement_one_of_posterior_infinite ρbox ρfree hp0 hp1 hboxS hfreeS reward hr0 hr1
+      m t h hwin π hk1 hbox no rbar (hnoBox no hno) hrbar hthresh
+
+/-! ### The prediction agent with a predictor that reads the current action
+
+Ring and Orseau, AGI 2011, §2: the prediction agent's prediction is
+ô_t = argmax over o of ρ(o | h), with the history convention
+h = (o₁, a₁, …, o_t, a_t), which ends in the action just taken, and eq. (2)'s
+ρ(o | h a). So print's predictor conditions on the current action, which carries
+the box program d_t. `predictionAgent` reads only the history before the current
+action–observation pair. `predictionAgentAct` takes a predictor of type
+History → Action → Obs, applied to the history before the pair and to the action
+of the pair; `predictionAgent` is its action-blind instance
+(`predictionAgent_eq_predictionAgentAct`).
+
+For an action-aware predictor the box premise of Statement 3 is a condition on the
+predictor and the box-using policy together: the box branch must give the policy's
+action the observation predicted for that very action. It is needed only along the
+run on which every prediction comes true (`predictedRun`). For print's predictor,
+an argmax of the agent's own mixture belief, it follows from the posterior: above
+one half at h, the argmax is the observation the box branch makes certain
+(`predict_eq_of_isMax_mixture`), and along the run the posterior does not decrease
+(`posterior_le_posterior_snoc`), so
+`predictionAgentAct_statement_three_of_posterior_infinite_argmax` carries
+Statement 3 with no box premise beyond "the box-using action makes the next
+observation certain in the box branch".
+-/
+
+/-- **Print's prediction agent with an action-aware predictor.** Its utility is one
+when the observation just received is the one predicted from the history before
+it **and the action just taken**, print's ô_t = argmax over o of ρ(o | h a) with h
+ending in the current action (Ring and Orseau, AGI 2011, §2). Horizon: the window,
+as for `predictionAgent`. -/
+@[expose] public def predictionAgentAct [DecidableEq Obs]
+    (predict : AgentEquations.History Action Obs → Action → Obs) (m : ℕ) :
+    Agent Action Obs where
+  utility := fun h =>
+    match h.getLast? with
+    | none => 0
+    | some p => if predict h.dropLast p.1 = p.2 then 1 else 0
+  horizon := windowHorizon m
+
+/-- `predictionAgent` is the action-blind instance of `predictionAgentAct`: the
+predictor that ignores the current action. -/
+public theorem predictionAgent_eq_predictionAgentAct [DecidableEq Obs]
+    (predict : AgentEquations.History Action Obs → Obs) (m : ℕ) :
+    predictionAgent predict m = predictionAgentAct (fun h _ => predict h) m := rfl
+
+/-- The action-aware prediction agent's utility after an action and an
+observation: one exactly when the prediction for that action, made on the history
+before it, was that observation. -/
+public theorem predictionAgentAct_utility_snoc [DecidableEq Obs]
+    (predict : AgentEquations.History Action Obs → Action → Obs) (m : ℕ)
+    (h : AgentEquations.History Action Obs) (a : Action) (o : Obs) :
+    (predictionAgentAct predict m).utility (h ++ [(a, o)]) =
+      if predict h a = o then 1 else 0 := by
+  simp [predictionAgentAct]
+
+/-- The action-aware prediction agent's utility is 0 or 1, so it is
+nonnegative. -/
+public theorem predictionAgentAct_utility_nonneg [DecidableEq Obs]
+    (predict : AgentEquations.History Action Obs → Action → Obs) (m : ℕ)
+    (h : AgentEquations.History Action Obs) :
+    0 ≤ (predictionAgentAct predict m).utility h := by
+  simp only [predictionAgentAct]
+  split
+  · norm_num
+  · split_ifs <;> norm_num
+
+/-- The action-aware prediction agent's utility is 0 or 1, so it is bounded by
+one. -/
+public theorem predictionAgentAct_abs_utility_le [DecidableEq Obs]
+    (predict : AgentEquations.History Action Obs → Action → Obs) (m : ℕ)
+    (h : AgentEquations.History Action Obs) :
+    |(predictionAgentAct predict m).utility h| ≤ 1 := by
+  simp only [predictionAgentAct]
+  split
+  · norm_num
+  · split_ifs <;> norm_num
+
+/-- **The run on which every prediction comes true**: from h, the policy π acts and
+the observation is the one predicted for π's action. -/
+@[expose] public def predictedRun
+    (predict : AgentEquations.History Action Obs → Action → Obs)
+    (π : AgentEquations.History Action Obs → Action) (h : AgentEquations.History Action Obs) :
+    ℕ → AgentEquations.History Action Obs
+  | 0 => h
+  | k + 1 => predictedRun predict π h k ++
+      [(π (predictedRun predict π h k), predict (predictedRun predict π h k)
+        (π (predictedRun predict π h k)))]
+
+/-- **Print's "program the DB to output a predictable sequence", for an
+action-aware predictor.** If along the run on which every prediction comes true the
+belief gives the policy's action the observation predicted for it with probability
+one, every committed action value along that run is the absolute horizon budget of
+the next n + 1 steps. The premise is needed on that run only, not at every
+history. -/
+public theorem predictionAgentAct_policyActionValue_correct [DecidableEq Obs]
+    {ρ : Belief Action Obs} (hρ : ρ.IsSubprobability)
+    (predict : AgentEquations.History Action Obs → Action → Obs) (m : ℕ)
+    (π : AgentEquations.History Action Obs → Action) (h : AgentEquations.History Action Obs)
+    (hk : ∀ k, ρ.cond (predictedRun predict π h k) (π (predictedRun predict π h k))
+      (predict (predictedRun predict π h k) (π (predictedRun predict π h k))) = 1) (t : ℕ) :
+    ∀ (n k : ℕ),
+      Mixture.policyActionValue ρ (predictionAgentAct predict m) π t n (predictedRun predict π h k)
+        = horizonBudget (predictionAgentAct predict m) t n
+            ((predictedRun predict π h k).length + 1) := by
+  have collapse : ∀ (n k : ℕ),
+      Mixture.policyActionValue ρ (predictionAgentAct predict m) π t n
+          (predictedRun predict π h k)
+        = Mixture.policyValue ρ (predictionAgentAct predict m) π t n
+            (predictedRun predict π h (k + 1)) := by
+    intro n k
+    rw [Mixture.policyActionValue, tsum_eq_single _ (fun o ho => by
+      rw [hρ.cond_eq_zero_of_eq_one (hk k) ho, zero_mul]), hk k, one_mul]
+    rfl
+  have hlen : ∀ k, (predictedRun predict π h (k + 1)).length =
+      (predictedRun predict π h k).length + 1 := fun k => by simp [predictedRun]
+  have hu : ∀ k, (predictionAgentAct predict m).utility (predictedRun predict π h (k + 1)) = 1 :=
+    fun k => by simp only [predictedRun]; rw [predictionAgentAct_utility_snoc]; simp
+  intro n
+  induction n with
+  | zero =>
+    intro k
+    rw [collapse, Mixture.policyValue_zero, hu, hlen]
+    simp only [horizonBudget]
+    simp [predictionAgentAct, abs_windowHorizon]
+  | succ n ih =>
+    intro k
+    rw [collapse, Mixture.policyValue_succ, ih, hu, hlen]
+    simp only [horizonBudget]
+    simp [predictionAgentAct, abs_windowHorizon]
+
+/-- Every committed action value of the action-aware prediction agent is
+nonnegative, at every depth. -/
+public theorem predictionAgentAct_policyActionValue_nonneg [DecidableEq Obs]
+    {ρ : Belief Action Obs} (hρ : ∀ h a o, 0 ≤ ρ.cond h a o)
+    (predict : AgentEquations.History Action Obs → Action → Obs) (m : ℕ)
+    (π : AgentEquations.History Action Obs → Action) (t n : ℕ)
+    (h : AgentEquations.History Action Obs) :
+    0 ≤ Mixture.policyActionValue ρ (predictionAgentAct predict m) π t n h := by
+  refine Mixture.policyActionValue_nonneg hρ _ π t (fun h' => ?_) n h
+  have hw : 0 ≤ windowHorizon m t h'.length := by unfold windowHorizon; split_ifs <;> norm_num
+  exact mul_nonneg hw (predictionAgentAct_utility_nonneg predict m h')
+
+/-- A deterministic global environment satisfies the box premise of
+`predictionAgentAct_policyActionValue_correct` at a history when the policy's
+action there carries a box program constant at the observation predicted for that
+action. -/
+public theorem diracBelief_next_cond_predictAct {P Ae O : Type*} [DecidableEq O]
+    (G : GlobalEnv P Ae O) (predict : AgentEquations.History (Act P Ae) O → Act P Ae → O)
+    (π : AgentEquations.History (Act P Ae) O → Act P Ae)
+    (h : AgentEquations.History (Act P Ae) O)
+    (hG : G.IsConstant (program (π h)) (predict h (π h))) :
+    (diracBelief G.next).cond h (π h) (predict h (π h)) = 1 :=
+  diracBelief_next_cond_const G hG h (π h) rfl
+
+/--
+**Statement 3 for the action-aware prediction agent at every depth inside its
+window** (Ring and Orseau, AGI 2011, Statement 3, PDF p. 6): the form of
+`predictionAgent_statement_three_of_posterior` for a predictor that reads the
+current action, print's ô_t = argmax over o of ρ(o | h a). The box premise is
+needed only along `predictedRun`. The refusing box-branch bound with r̄ < 1 stays a
+hypothesis, as there.
+-/
+public theorem predictionAgentAct_statement_three_of_posterior [DecidableEq Obs] {p : ℝ}
+    (ρbox ρfree : Belief Action Obs) (hp0 : 0 ≤ p) (hp1 : p ≤ 1)
+    (hboxS : ρbox.IsSubprobability) (hfreeS : ρfree.IsSubprobability)
+    (predict : AgentEquations.History Action Obs → Action → Obs)
+    (m t n : ℕ) (h : AgentEquations.History Action Obs) (hwin : h.length + 1 ≤ t + m)
+    (π : AgentEquations.History Action Obs → Action)
+    (hbox : ∀ k, ρbox.cond (predictedRun predict π h k) (π (predictedRun predict π h k))
+      (predict (predictedRun predict π h k) (π (predictedRun predict π h k))) = 1)
+    (no : Action) (rbar : ℝ)
+    (hnoBox : actionValue ρbox (predictionAgentAct predict m) t n h no
+      ≤ horizonBudget (predictionAgentAct predict m) t n (h.length + 1) * rbar)
+    (hrbar : rbar < 1)
+    (hthresh : 1 / (2 - rbar) < Mixture.posterior p ρbox ρfree h) :
+    actionValue (Mixture.mixtureBelief p ρbox ρfree) (predictionAgentAct predict m) t n h no
+      < actionValue (Mixture.mixtureBelief p ρbox ρfree) (predictionAgentAct predict m) t n h
+          (π h) := by
+  have : Nonempty Action := ⟨no⟩
+  have hu := predictionAgentAct_abs_utility_le predict m
+  have hpos : 0 < horizonBudget (predictionAgentAct predict m) t n (h.length + 1) := by
+    have h1 : |(predictionAgentAct predict m).horizon t (h.length + 1)| = 1 := by
+      simp [predictionAgentAct, windowHorizon, hwin]
+    cases n with
+    | zero => simp only [horizonBudget]; rw [h1]; norm_num
+    | succ n =>
+      simp only [horizonBudget]
+      rw [h1]
+      linarith [horizonBudget_nonneg (predictionAgentAct predict m) t n (h.length + 1 + 1)]
+  refine statement_one_of_posterior_scaled ρbox ρfree hp0 hp1 hboxS hfreeS _ hu t n h π no
+    _ rbar hpos ?_ ?_ hnoBox ?_ hrbar hthresh
+  · rw [show h = predictedRun predict π h 0 from rfl,
+      predictionAgentAct_policyActionValue_correct hboxS predict m π h hbox t n 0]
+  · exact predictionAgentAct_policyActionValue_nonneg hfreeS.nonneg predict m π t n h
+  · exact (le_abs_self _).trans (abs_actionValue_le_horizonBudget hfreeS _ hu t n h no)
+
+/--
+**Statement 3 for the action-aware prediction agent at the infinite-horizon value**
+(Ring and Orseau, AGI 2011, Statement 3, PDF p. 6, under footnote 5, PDF p. 5): the
+form of `predictionAgent_statement_three_of_posterior_infinite` for a predictor
+that reads the current action. The box-using policy, whose predictions all come
+true along `predictedRun` in the box branch, is worth every in-window step,
+t + m − |h|; the refusing box-branch bound stays a hypothesis at the untruncated
+value.
+-/
+public theorem predictionAgentAct_statement_three_of_posterior_infinite [DecidableEq Obs]
+    {p : ℝ} (ρbox ρfree : Belief Action Obs) (hp0 : 0 ≤ p) (hp1 : p ≤ 1)
+    (hboxS : ρbox.IsSubprobability) (hfreeS : ρfree.IsSubprobability)
+    (predict : AgentEquations.History Action Obs → Action → Obs)
+    (m t : ℕ) (h : AgentEquations.History Action Obs) (hwin : h.length + 1 ≤ t + m)
+    (π : AgentEquations.History Action Obs → Action)
+    (hbox : ∀ k, ρbox.cond (predictedRun predict π h k) (π (predictedRun predict π h k))
+      (predict (predictedRun predict π h k) (π (predictedRun predict π h k))) = 1)
+    (no : Action) (rbar : ℝ)
+    (hnoBox : infiniteActionValue ρbox (predictionAgentAct predict m) t h no
+      ≤ ((t + m - h.length : ℕ) : ℝ) * rbar)
+    (hrbar : rbar < 1)
+    (hthresh : 1 / (2 - rbar) < Mixture.posterior p ρbox ρfree h) :
+    infiniteActionValue (Mixture.mixtureBelief p ρbox ρfree) (predictionAgentAct predict m) t h no
+      < infiniteActionValue (Mixture.mixtureBelief p ρbox ρfree) (predictionAgentAct predict m) t h
+          (π h) := by
+  have hz : ∀ k, t + m + 1 ≤ k →
+      (predictionAgentAct (Action := Action) predict m).horizon t k = 0 :=
+    fun k hk => windowHorizon_eq_zero hk
+  have hN : t + m + 1 ≤ h.length + 1 + (t + m) := by omega
+  rw [infiniteActionValue_eq_actionValue_of_horizon_vanishes _ _ t _ hz h hN,
+    infiniteActionValue_eq_actionValue_of_horizon_vanishes _ _ t _ hz h hN]
+  rw [infiniteActionValue_eq_actionValue_of_horizon_vanishes _ _ t _ hz h hN,
+    ← horizonBudget_windowHorizon_depth (predictionAgentAct (Action := Action) predict m) rfl t h]
+    at hnoBox
+  exact predictionAgentAct_statement_three_of_posterior ρbox ρfree hp0 hp1 hboxS hfreeS predict
+    m t (t + m) h hwin π hbox no rbar hnoBox hrbar hthresh
+
+/-- **Statement 3 for the action-aware prediction agent at the infinite-horizon
+value, the selected action programs the box**: once every action running the
+identity program d₀ satisfies the refusing bound, every maximiser of the
+untruncated action value at the mixture runs a program other than d₀. -/
+public theorem predictionAgentAct_statement_three_of_posterior_infinite_program_ne
+    {P Ae : Type*} [DecidableEq Obs] {p : ℝ}
+    (ρbox ρfree : Belief (Act P Ae) Obs) (hp0 : 0 ≤ p) (hp1 : p ≤ 1)
+    (hboxS : ρbox.IsSubprobability) (hfreeS : ρfree.IsSubprobability)
+    (predict : AgentEquations.History (Act P Ae) Obs → Act P Ae → Obs)
+    (m t : ℕ) (h : AgentEquations.History (Act P Ae) Obs) (hwin : h.length + 1 ≤ t + m)
+    (π : AgentEquations.History (Act P Ae) Obs → Act P Ae)
+    (hbox : ∀ k, ρbox.cond (predictedRun predict π h k) (π (predictedRun predict π h k))
+      (predict (predictedRun predict π h k) (π (predictedRun predict π h k))) = 1)
+    (d₀ : P) (rbar : ℝ)
+    (hnoBox : ∀ no, program no = d₀ →
+      infiniteActionValue ρbox (predictionAgentAct predict m) t h no
+        ≤ ((t + m - h.length : ℕ) : ℝ) * rbar)
+    (hrbar : rbar < 1)
+    (hthresh : 1 / (2 - rbar) < Mixture.posterior p ρbox ρfree h) {a : Act P Ae}
+    (hmax : ∀ b, infiniteActionValue (Mixture.mixtureBelief p ρbox ρfree)
+        (predictionAgentAct predict m) t h b
+      ≤ infiniteActionValue (Mixture.mixtureBelief p ρbox ρfree)
+        (predictionAgentAct predict m) t h a) :
+    program a ≠ d₀ :=
+  program_ne_of_max hmax fun no hno =>
+    predictionAgentAct_statement_three_of_posterior_infinite ρbox ρfree hp0 hp1 hboxS hfreeS
+      predict m t h hwin π hbox no rbar (hnoBox no hno) hrbar hthresh
+
+/-! #### Print's predictor: the argmax of the agent's own belief -/
+
+/-- **The argmax of the mixture is the observation the box makes certain**, once
+the posterior on the box exceeds one half: at weight one on c in the box branch,
+the mixture puts at least the posterior on c and at most one minus the posterior
+on any other observation. This is print's prediction ô = argmax over o of
+ρ(o | h a) (Ring and Orseau, AGI 2011, §2) at the agent's own belief, the mixture
+`Mixture.mixtureBelief`. -/
+public theorem predict_eq_of_isMax_mixture {p : ℝ} {ρbox ρfree : Belief Action Obs}
+    (hp0 : 0 ≤ p) (hp1 : p ≤ 1)
+    (hboxS : ρbox.IsSubprobability) (hfreeS : ρfree.IsSubprobability)
+    {h : AgentEquations.History Action Obs} {a : Action} {c o' : Obs}
+    (hpost : 1 / 2 < Mixture.posterior p ρbox ρfree h) (hc : ρbox.cond h a c = 1)
+    (hmax : ∀ o, (Mixture.mixtureBelief p ρbox ρfree).cond h a o
+      ≤ (Mixture.mixtureBelief p ρbox ρfree).cond h a o') :
+    o' = c := by
+  by_contra hne
+  have hq1 := Mixture.posterior_le_one hp0 hp1 hboxS.nonneg hfreeS.nonneg h
+  have h0 : ρbox.cond h a o' = 0 := hboxS.cond_eq_zero_of_eq_one hc hne
+  have hle := hmax c
+  rw [Mixture.mixtureBelief_cond, Mixture.mixtureBelief_cond, hc, h0] at hle
+  have hf1 := hfreeS.cond_le_one h a o'
+  have hf0 := hfreeS.nonneg h a c
+  nlinarith [mul_nonneg (sub_nonneg.mpr hq1) hf0, mul_le_mul_of_nonneg_left hf1 (sub_nonneg.mpr hq1)]
+
+/-- **The posterior on the box does not decrease after an observation the box
+branch makes certain**: the box branch's likelihood is one, the mixture's at most
+one (Bayes' rule, `Mixture.mixtureBelief_cond_mul_posterior`). -/
+public theorem posterior_le_posterior_snoc {p : ℝ} {ρbox ρfree : Belief Action Obs}
+    (hp0 : 0 ≤ p) (hp1 : p ≤ 1)
+    (hboxS : ρbox.IsSubprobability) (hfreeS : ρfree.IsSubprobability)
+    {h : AgentEquations.History Action Obs} {a : Action} {c : Obs}
+    (hc : ρbox.cond h a c = 1) :
+    Mixture.posterior p ρbox ρfree h ≤ Mixture.posterior p ρbox ρfree (h ++ [(a, c)]) := by
+  have hbayes := Mixture.mixtureBelief_cond_mul_posterior hp0 hp1 hboxS.nonneg hfreeS.nonneg h a c
+  rw [hc, mul_one] at hbayes
+  have hq0 := Mixture.posterior_nonneg hp0 hp1 hboxS.nonneg hfreeS.nonneg h
+  have hq1 := Mixture.posterior_le_one hp0 hp1 hboxS.nonneg hfreeS.nonneg h
+  have hq0' := Mixture.posterior_nonneg hp0 hp1 hboxS.nonneg hfreeS.nonneg (h ++ [(a, c)])
+  have hmix1 : (Mixture.mixtureBelief p ρbox ρfree).cond h a c ≤ 1 := by
+    rw [Mixture.mixtureBelief_cond, hc]
+    nlinarith [hfreeS.cond_le_one h a c]
+  have hmix0 := Mixture.mixtureBelief_cond_nonneg hp0 hp1 hboxS.nonneg hfreeS.nonneg h a c
+  nlinarith
+
+/-- **Along the run on which every prediction comes true, an argmax predictor
+predicts what the box makes certain**: if the posterior exceeds one half at h, the
+predictor is an argmax of the mixture at every history and action, and along the
+run the box branch makes the policy's next observation certain, then the box branch
+gives the policy's action the predicted observation with probability one at every
+step of the run, which is the box premise of
+`predictionAgentAct_statement_three_of_posterior_infinite`. -/
+public theorem cond_predictedRun_eq_one_of_isMax_mixture {p : ℝ}
+    {ρbox ρfree : Belief Action Obs} (hp0 : 0 ≤ p) (hp1 : p ≤ 1)
+    (hboxS : ρbox.IsSubprobability) (hfreeS : ρfree.IsSubprobability)
+    (predict : AgentEquations.History Action Obs → Action → Obs)
+    (hargmax : ∀ h' a o, (Mixture.mixtureBelief p ρbox ρfree).cond h' a o
+      ≤ (Mixture.mixtureBelief p ρbox ρfree).cond h' a (predict h' a))
+    (π : AgentEquations.History Action Obs → Action) (h : AgentEquations.History Action Obs)
+    (hcert : ∀ k, ∃ c, ρbox.cond (predictedRun predict π h k) (π (predictedRun predict π h k)) c = 1)
+    (hpost : 1 / 2 < Mixture.posterior p ρbox ρfree h) :
+    ∀ k, ρbox.cond (predictedRun predict π h k) (π (predictedRun predict π h k))
+      (predict (predictedRun predict π h k) (π (predictedRun predict π h k))) = 1 := by
+  have step : ∀ k, 1 / 2 < Mixture.posterior p ρbox ρfree (predictedRun predict π h k) →
+      ρbox.cond (predictedRun predict π h k) (π (predictedRun predict π h k))
+        (predict (predictedRun predict π h k) (π (predictedRun predict π h k))) = 1 := by
+    intro k hk
+    obtain ⟨c, hc⟩ := hcert k
+    rw [predict_eq_of_isMax_mixture hp0 hp1 hboxS hfreeS hk hc (hargmax _ _)]
+    exact hc
+  have hall : ∀ k, 1 / 2 < Mixture.posterior p ρbox ρfree (predictedRun predict π h k) := by
+    intro k
+    induction k with
+    | zero => exact hpost
+    | succ k ih =>
+      exact ih.trans_le (posterior_le_posterior_snoc hp0 hp1 hboxS hfreeS (step k ih))
+  exact fun k => step k (hall k)
+
+/-- The untruncated action value of an agent with nonnegative weighted utilities
+is nonnegative, at a nonnegative belief and a horizon that vanishes past an index. -/
+private theorem value_nonneg_of_weighted {ρ : Belief Action Obs} (hρ : ∀ h a o, 0 ≤ ρ.cond h a o)
+    (ag : Agent Action Obs) (t : ℕ) (hw : ∀ h, 0 ≤ ag.horizon t h.length * ag.utility h) :
+    ∀ n h, 0 ≤ value ρ ag t n h := by
+  intro n
+  induction n with
+  | zero => exact hw
+  | succ n ih =>
+    intro h
+    rw [value_succ]
+    exact add_nonneg (hw h) (Real.iSup_nonneg fun a =>
+      tsum_nonneg fun o => mul_nonneg (hρ h a o) (ih _))
+
+/--
+**Statement 3 for print's prediction agent, its predictor the argmax of its own
+belief, at the infinite-horizon value** (Ring and Orseau, AGI 2011, Statement 3,
+PDF p. 6, *Arguments*: *"it will immediately program the DB to output a
+predictable sequence"*; under footnote 5, PDF p. 5). The predictor is print's
+ô = argmax over o of ρ(o | h a) at the agent's belief, the mixture, reading the
+current action. The box premise is no longer a hypothesis on the predictor: it is
+enough that the box-using action makes the next observation certain in the box
+branch along the run (print's box executing a constant program), because the
+posterior threshold puts the posterior above one half and an argmax predictor
+then predicts the certain observation (`cond_predictedRun_eq_one_of_isMax_mixture`).
+The refusing box-branch bound with r̄ < 1 stays a hypothesis.
+-/
+public theorem predictionAgentAct_statement_three_of_posterior_infinite_argmax
+    [DecidableEq Obs] {p : ℝ} (ρbox ρfree : Belief Action Obs) (hp0 : 0 ≤ p) (hp1 : p ≤ 1)
+    (hboxS : ρbox.IsSubprobability) (hfreeS : ρfree.IsSubprobability)
+    (predict : AgentEquations.History Action Obs → Action → Obs)
+    (hargmax : ∀ h' a o, (Mixture.mixtureBelief p ρbox ρfree).cond h' a o
+      ≤ (Mixture.mixtureBelief p ρbox ρfree).cond h' a (predict h' a))
+    (m t : ℕ) (h : AgentEquations.History Action Obs) (hwin : h.length + 1 ≤ t + m)
+    (π : AgentEquations.History Action Obs → Action)
+    (hcert : ∀ k, ∃ c, ρbox.cond (predictedRun predict π h k) (π (predictedRun predict π h k)) c = 1)
+    (no : Action) (rbar : ℝ)
+    (hnoBox : infiniteActionValue ρbox (predictionAgentAct predict m) t h no
+      ≤ ((t + m - h.length : ℕ) : ℝ) * rbar)
+    (hrbar : rbar < 1)
+    (hthresh : 1 / (2 - rbar) < Mixture.posterior p ρbox ρfree h) :
+    infiniteActionValue (Mixture.mixtureBelief p ρbox ρfree) (predictionAgentAct predict m) t h no
+      < infiniteActionValue (Mixture.mixtureBelief p ρbox ρfree) (predictionAgentAct predict m) t h
+          (π h) := by
+  have hz : ∀ k, t + m + 1 ≤ k →
+      (predictionAgentAct (Action := Action) predict m).horizon t k = 0 :=
+    fun k hk => windowHorizon_eq_zero hk
+  have hN : t + m + 1 ≤ h.length + 1 + (t + m) := by omega
+  have hv0 : 0 ≤ infiniteActionValue ρbox (predictionAgentAct predict m) t h no := by
+    rw [infiniteActionValue_eq_actionValue_of_horizon_vanishes _ _ t _ hz h hN]
+    refine tsum_nonneg fun o => mul_nonneg (hboxS.nonneg _ _ _) ?_
+    refine value_nonneg_of_weighted hboxS.nonneg _ t (fun h' => ?_) _ _
+    have hw : 0 ≤ windowHorizon m t h'.length := by unfold windowHorizon; split_ifs <;> norm_num
+    exact mul_nonneg hw (predictionAgentAct_utility_nonneg predict m h')
+  have hcount : (0 : ℝ) < ((t + m - h.length : ℕ) : ℝ) := by
+    exact_mod_cast (show 0 < t + m - h.length by omega)
+  have hr0 : 0 ≤ rbar := by
+    by_contra hneg
+    have : ((t + m - h.length : ℕ) : ℝ) * rbar < 0 := mul_neg_of_pos_of_neg hcount (by linarith)
+    linarith
+  have hpost : 1 / 2 < Mixture.posterior p ρbox ρfree h := by
+    refine lt_of_le_of_lt ?_ hthresh
+    rw [div_le_div_iff₀ (by norm_num) (by linarith)]
+    linarith
+  exact predictionAgentAct_statement_three_of_posterior_infinite ρbox ρfree hp0 hp1 hboxS hfreeS
+    predict m t h hwin π
+    (cond_predictedRun_eq_one_of_isMax_mixture hp0 hp1 hboxS hfreeS predict hargmax π h hcert hpost)
+    no rbar hnoBox hrbar hthresh
+
+/-- **Statement 3 for print's prediction agent with the argmax predictor, the
+selected action programs the box**, at the infinite-horizon value: every maximiser
+of the untruncated action value at the mixture runs a program other than the
+identity d₀, once every identity-program action satisfies the refusing bound. -/
+public theorem predictionAgentAct_statement_three_of_posterior_infinite_argmax_program_ne
+    {P Ae : Type*} [DecidableEq Obs] {p : ℝ}
+    (ρbox ρfree : Belief (Act P Ae) Obs) (hp0 : 0 ≤ p) (hp1 : p ≤ 1)
+    (hboxS : ρbox.IsSubprobability) (hfreeS : ρfree.IsSubprobability)
+    (predict : AgentEquations.History (Act P Ae) Obs → Act P Ae → Obs)
+    (hargmax : ∀ h' a o, (Mixture.mixtureBelief p ρbox ρfree).cond h' a o
+      ≤ (Mixture.mixtureBelief p ρbox ρfree).cond h' a (predict h' a))
+    (m t : ℕ) (h : AgentEquations.History (Act P Ae) Obs) (hwin : h.length + 1 ≤ t + m)
+    (π : AgentEquations.History (Act P Ae) Obs → Act P Ae)
+    (hcert : ∀ k, ∃ c, ρbox.cond (predictedRun predict π h k) (π (predictedRun predict π h k)) c = 1)
+    (d₀ : P) (rbar : ℝ)
+    (hnoBox : ∀ no, program no = d₀ →
+      infiniteActionValue ρbox (predictionAgentAct predict m) t h no
+        ≤ ((t + m - h.length : ℕ) : ℝ) * rbar)
+    (hrbar : rbar < 1)
+    (hthresh : 1 / (2 - rbar) < Mixture.posterior p ρbox ρfree h) {a : Act P Ae}
+    (hmax : ∀ b, infiniteActionValue (Mixture.mixtureBelief p ρbox ρfree)
+        (predictionAgentAct predict m) t h b
+      ≤ infiniteActionValue (Mixture.mixtureBelief p ρbox ρfree)
+        (predictionAgentAct predict m) t h a) :
+    program a ≠ d₀ :=
+  program_ne_of_max hmax fun no hno =>
+    predictionAgentAct_statement_three_of_posterior_infinite_argmax ρbox ρfree hp0 hp1 hboxS
+      hfreeS predict hargmax m t h hwin π hcert no rbar (hnoBox no hno) hrbar hthresh
 
 /--
 **Statement 3.** *The prediction agent will use the delusion box.*

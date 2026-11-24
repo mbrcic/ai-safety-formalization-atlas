@@ -88,8 +88,31 @@ theorem plainK_le_of_partrec_evalPair (U : Kolmogorov.Map)
       Kolmogorov.plainK U b ≤ Kolmogorov.plainK U x + (c : ENat) :=
   plainK_le_of_partrec U hU evalPair partrec_evalPair
 
-/-- The reading pair is computable in the behaviour, which the degenerate pair is
-not shown to be. -/
+/-- The reading pair is computable in the behaviour. -/
 theorem computable_readerPair_named : Computable readerPair := computable_readerPair
+
+/-- **The source's own degenerate pair is computable in the behaviour**, at the
+empty reward, its `(p_π̇, 0)`. -/
+theorem computable_degeneratePair_nil : Computable (degeneratePair []) :=
+  computable_degeneratePair []
+
+/-- **The source's second §5.1 claim at its own degenerate pair**: `(p_π̇, 0)` is
+within additive constants of the behaviour in both directions. -/
+theorem degeneratePair_nil_two_sided (U : Kolmogorov.Map)
+    (hU : Kolmogorov.isOptimalConditional U) :
+    ∃ c₁ c₂ : ℕ, ∀ b : Kolmogorov.BitString,
+      Kolmogorov.plainK U b ≤ Kolmogorov.plainK U (degeneratePair [] b) + (c₁ : ENat) ∧
+      Kolmogorov.plainK U (degeneratePair [] b) ≤ Kolmogorov.plainK U b + (c₂ : ENat) :=
+  degeneratePair_complexity_eq_behaviour U hU []
+
+/-- The generic two-sided bound, at the degenerate pair with a nonempty reward:
+its hypotheses, computability and compatibility, are both inhabited there. -/
+theorem complexity_eq_behaviour_degenerate_true (U : Kolmogorov.Map)
+    (hU : Kolmogorov.isOptimalConditional U) :
+    ∃ c₁ c₂ : ℕ, ∀ b : Kolmogorov.BitString,
+      Kolmogorov.plainK U b ≤ Kolmogorov.plainK U (degeneratePair [true] b) + (c₁ : ENat) ∧
+      Kolmogorov.plainK U (degeneratePair [true] b) ≤ Kolmogorov.plainK U b + (c₂ : ENat) :=
+  complexity_eq_behaviour_of_evaluatesTo U hU (computable_degeneratePair [true])
+    (evaluatesTo_degeneratePair [true])
 
 end AISafetyAtlas.Examples.Preference

@@ -28,6 +28,11 @@ say what that costs, and two more instantiate them at print's second model.
   `d` at every selected state. This is the collapse: not that the fitted
   relationship is known to be wrong outside its region, but that nothing
   observed inside it says otherwise.
+* `CollapsesOn`, `exists_collapsesOn_of_disjoint` -- print's word for the
+  failure itself: the relationship misses the goal by more than its tolerance at
+  every selected state. The theorem says the observations never rule that out;
+  `Examples.Goodhart.Extremal.underfit_extremal_collapse` shows it happening at
+  print's own underfitted polynomial, all three clauses at one instance.
 * `regime_prediction_error` -- at print's regime model, the size of that error
   is not a matter of luck: extrapolating the lower regime's relationship into
   the selected region is wrong by exactly the difference of the two offsets, at
@@ -42,6 +47,9 @@ say what that costs, and two more instantiate them at print's second model.
 
 `selectedAt` is the selection event, `FitsOn` is agreement with the learned
 relationship on the observed region, and `regimeGoal` is print's equation (3).
+`SimpleModel` is print's equation (2) transcribed, with no bound on the error
+term; `fitsOn_id_iff_of_simpleModel` says `FitsOn` at the identity relationship
+is a bound on that error term.
 
 ## Provenance
 
@@ -84,7 +92,9 @@ narrowest reading found that leaves the statement non-vacuous.
   relationship, small where the fit was made and unconstrained elsewhere. Print
   does not say it is small there either; `FitsOn` supplies the bound `ε`, and it
   is `ε` that makes "approximately accurate in the initial region" a hypothesis
-  rather than a mood.
+  rather than a mood. The unbounded equation itself is `SimpleModel`, kept
+  beside `FitsOn`; `simpleModel_iff` records that it holds for every `M` and
+  `G` once `G'` is the residual, which is why it carries no content alone.
 * **The learned relationship is a parameter, not a third object.** `FitsOn`
   carries `f : ℝ → ℝ`, print's "learned relationship between the goal and the
   metric". It is a relationship between the two objects, not a third quantity:
@@ -157,6 +167,35 @@ calls it "approximately accurate" there. Print's equation (2) is the case
 @[expose] public def FitsOn (R : Set S) (M G : S → ℝ) (f : ℝ → ℝ) (ε : ℝ) : Prop :=
   ∀ s ∈ R, |G s - f (M s)| ≤ ε
 
+/-- **Print's Simple Model** (Manheim and Garrabrant, §2, equation (2),
+`mg-eq-2`, PDF p. 3): `M = G(sᵢ) + G'(sᵢ)`, the metric is the goal plus an error
+term `G'`, which print attributes to "model simplification and inaccuracy" and
+does not bound. Transcribed with no bound on `G'`, on an arbitrary state type.
+
+As printed the equation constrains nothing: for any `M` and `G` it holds with
+`G' = M − G` (`simpleModel_iff`). That is why `FitsOn`, the bounded reading of
+the residual on the observed region, carries the content the theorems below use;
+`fitsOn_id_iff_of_simpleModel` ties the two together. -/
+@[expose] public def SimpleModel (M G G' : S → ℝ) : Prop :=
+  ∀ s, M s = G s + G' s
+
+/-- The Simple Model holds exactly when the error term is the residual `M − G`;
+in particular every pair `M`, `G` has one. -/
+public theorem simpleModel_iff {M G G' : S → ℝ} : SimpleModel M G G' ↔ G' = M - G := by
+  constructor
+  · intro h; funext s; simp only [Pi.sub_apply, h s]; ring
+  · rintro rfl s; simp only [Pi.sub_apply]; ring
+
+/-- **`FitsOn` at print's model-insufficiency relationship is a bound on print's
+error term.** Under the Simple Model, fitting the identity relationship within
+`ε` on `R` says exactly that `|G'| ≤ ε` on `R`. -/
+public theorem fitsOn_id_iff_of_simpleModel {M G G' : S → ℝ} (h : SimpleModel M G G')
+    (R : Set S) (ε : ℝ) :
+    FitsOn R M G id ε ↔ ∀ s ∈ R, |G' s| ≤ ε := by
+  refine forall₂_congr fun s _ => ?_
+  have : G s - id (M s) = -G' s := by simp only [id, h s]; ring
+  rw [this, abs_neg]
+
 /-- **Selection leaves the region where the relationship was observed.** If the
 proxy is bounded above by `b` on that region, then every threshold above `b`
 selects only states outside it. This is the whole of print's "selection pressure
@@ -200,6 +239,39 @@ public theorem fits_underdetermined_off_observed
     simp [Set.indicator_of_notMem hsel]
   · intro s hs
     simp [Set.indicator_of_mem hs]
+
+/-- **The relationship collapses on a region**: print's *"so that the relationship
+collapses"* (§2, PDF p. 3). At every state of `A` the learned relationship `f` misses
+the goal by more than the tolerance `ε` within which it was accurate where it was
+learned. Stated at every state of `A`, not at one, so a collapse on the selection
+event is a collapse wherever selection lands. -/
+@[expose] public def CollapsesOn (A : Set S) (M G : S → ℝ) (f : ℝ → ℝ) (ε : ℝ) : Prop :=
+  ∀ s ∈ A, ε < |G s - f (M s)|
+
+/-- **The evidence cannot rule the collapse out.** Whatever goal fits the learned
+relationship on the observed region, once selection has left that region there is a
+goal equal to it on the whole observed region, so fitting just as well, for which the
+relationship collapses at every selected state, by more than any margin `δ` named in
+advance. -/
+public theorem exists_collapsesOn_of_disjoint
+    (M : S → ℝ) {R : Set S} (f : ℝ → ℝ) (ε : ℝ) {c : ℝ}
+    (hdisj : Disjoint (selectedAt M c) R)
+    (G : S → ℝ) (hG : FitsOn R M G f ε) (δ : ℝ) :
+    ∃ G', FitsOn R M G' f ε ∧ EqOn G G' R ∧
+      CollapsesOn (selectedAt M c) M G' f (max ε δ) := by
+  classical
+  refine ⟨fun s => if s ∈ selectedAt M c then f (M s) + (|max ε δ| + 1) else G s,
+    ?_, ?_, ?_⟩
+  · intro s hs
+    have hsel : s ∉ selectedAt M c := Set.disjoint_right.mp hdisj hs
+    simpa [hsel] using hG s hs
+  · intro s hs
+    have hsel : s ∉ selectedAt M c := Set.disjoint_right.mp hdisj hs
+    simp [hsel]
+  · intro s hs
+    simp only [hs, if_true, add_sub_cancel_left]
+    rw [abs_of_pos (by positivity)]
+    linarith [le_abs_self (max ε δ)]
 
 /-! ## Change in Regime
 

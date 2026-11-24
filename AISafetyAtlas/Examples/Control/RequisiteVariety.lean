@@ -331,4 +331,124 @@ public theorem battleTable_column_injective {R : Type*} (r : R) :
     Function.Injective fun d : OpposingArmy => battleTable d r :=
   fun _ _ h => congrArg Prod.fst h
 
+/-! ## 11/8's minimum at an outcome no table produces
+
+`entropy_ge_sub_of_condEntropy_eq_zero` takes the outcome arbitrary, which is
+§11/8's *"without any regard for how they are related causally"*. Here the
+disturbance and the outcome are two independent fair coins and the regulator
+copies the disturbance, so `H_D(R) = 0`; the outcome is not a function of
+`(D, R)` at all, which is the case the table-form
+`entropy_outcome_ge_of_strategy` cannot reach. -/
+
+/-- Two independent fair coins: the disturbance is the first, the outcome the
+second. -/
+@[expose] public noncomputable def twoCoins : MeasureTheory.Measure (Fin 2 × Fin 2) :=
+  ProbabilityTheory.uniformOn Set.univ
+
+public instance : MeasureTheory.IsProbabilityMeasure twoCoins := by
+  unfold twoCoins; infer_instance
+
+/-- **The determinate-response bound at an outcome independent of the
+regulation.** Both hypotheses are discharged: `H_D(R) = 0` because the response
+is the disturbance, and §11/8's `H_R(E) ≥ H_R(D)` because `H_R(D) = 0`. -/
+public theorem twoCoins_entropy_ge :
+    H[(fun p : Fin 2 × Fin 2 => p.1) ; twoCoins] - H[(fun p : Fin 2 × Fin 2 => p.1) ; twoCoins]
+      ≤ H[(fun p : Fin 2 × Fin 2 => p.2) ; twoCoins] := by
+  have hzero : H[(fun p : Fin 2 × Fin 2 => p.1) | (fun p : Fin 2 × Fin 2 => p.1) ;
+      twoCoins] = 0 :=
+    condEntropy_comp_self_left (X := fun p : Fin 2 × Fin 2 => p.1) (g := id) twoCoins
+      measurable_fst measurable_id
+  refine entropy_ge_sub_of_condEntropy_eq_zero twoCoins measurable_fst measurable_fst
+    measurable_snd hzero ?_
+  rw [hzero]
+  exact ProbabilityTheory.condEntropy_nonneg _ _ _
+
+/-- **Ashby 11/8's intermediate line on the two coins**, at slack `K = 0`: the
+response copies the disturbance, so `H_R(D) = 0 ≤ H_R(E)` holds and the line
+reads `H(D) + H_D(R) ≤ H(R) + H_R(E)`. -/
+public theorem twoCoins_intermediate_line :
+    H[(fun p : Fin 2 × Fin 2 => p.1) ; twoCoins]
+        + H[(fun p : Fin 2 × Fin 2 => p.1) | (fun p : Fin 2 × Fin 2 => p.1) ; twoCoins] - 0
+      ≤ H[(fun p : Fin 2 × Fin 2 => p.1) ; twoCoins]
+        + H[(fun p : Fin 2 × Fin 2 => p.2) | (fun p : Fin 2 × Fin 2 => p.1) ; twoCoins] := by
+  have hzero : H[(fun p : Fin 2 × Fin 2 => p.1) | (fun p : Fin 2 × Fin 2 => p.1) ;
+      twoCoins] = 0 :=
+    condEntropy_comp_self_left (X := fun p : Fin 2 × Fin 2 => p.1) (g := id) twoCoins
+      measurable_fst measurable_id
+  refine AISafetyAtlas.Control.entropy_add_condEntropy_le_of_condEntropy_ge twoCoins
+    (Dv := fun p : Fin 2 × Fin 2 => p.1) (Rv := fun p : Fin 2 × Fin 2 => p.1)
+    (Ev := fun p : Fin 2 × Fin 2 => p.2) measurable_fst measurable_fst 0 ?_
+  rw [hzero, sub_zero]
+  exact ProbabilityTheory.condEntropy_nonneg _ _ _
+
+/-! ## 11/8's minimum, attained
+
+`AISafetyAtlas.Control.exists_entropy_eq_sub_of_condEntropy_eq_zero` at a
+non-degenerate instance: the disturbance is a pair of independent fair coins, the
+regulator reads the first coin (so `H_D(R) = 0`), and print's minimum
+`H(D) − H(R) = log 4 − log 2 = log 2` is positive. The theorem returns an outcome
+on the extended space that meets §11/8's premise and has entropy exactly `log 2`. -/
+
+/-- A fair coin on `Fin 2`. -/
+@[expose] public noncomputable def fairCoin : MeasureTheory.Measure (Fin 2) :=
+  ProbabilityTheory.uniformOn Set.univ
+
+public instance : MeasureTheory.IsProbabilityMeasure fairCoin := by
+  unfold fairCoin; infer_instance
+
+/-- A fair coin carries `log 2`. -/
+public theorem fairCoin_entropy : H[(id : Fin 2 → Fin 2) ; fairCoin] = Real.log 2 := by
+  rw [fairCoin, ProbabilityTheory.IsUniform.entropy_eq' Set.finite_univ
+    ProbabilityTheory.isUniform_uniformOn measurable_id]
+  simp
+
+/-- **Ashby 11/8's minimum is attained at two coins.** Print (§11/8, book p. 208):
+*"When this is so, then H(E)'s minimum is `H(D) − H(R)`."* With `D` the pair, `R`
+its first coin, `H_D(R) = 0`; the outcome returned by
+`AISafetyAtlas.Control.exists_entropy_eq_sub_of_condEntropy_eq_zero` meets the
+premise `H_R(D) ≤ H_R(E)` and has `H(E) = log 2 = H(D) − H(R)`, which is
+positive, so the instance is not the trivial one where every entropy vanishes. -/
+public theorem coinPair_minimum_attained :
+    ∃ (n : ℕ) (ν : MeasureTheory.Measure (Fin (n + 1))),
+      MeasureTheory.IsProbabilityMeasure ν ∧
+      H[(Prod.fst : Fin 2 × Fin 2 → Fin 2) ∘ Prod.fst |
+          (id : Fin 2 × Fin 2 → Fin 2 × Fin 2) ∘ Prod.fst ; (fairCoin.prod fairCoin).prod ν]
+        = 0 ∧
+      H[(id : Fin 2 × Fin 2 → Fin 2 × Fin 2) ∘ Prod.fst |
+          (Prod.fst : Fin 2 × Fin 2 → Fin 2) ∘ Prod.fst ; (fairCoin.prod fairCoin).prod ν]
+        ≤ H[(Prod.snd : (Fin 2 × Fin 2) × Fin (n + 1) → Fin (n + 1)) |
+          (Prod.fst : Fin 2 × Fin 2 → Fin 2) ∘ Prod.fst ; (fairCoin.prod fairCoin).prod ν] ∧
+      H[(Prod.snd : (Fin 2 × Fin 2) × Fin (n + 1) → Fin (n + 1)) ;
+          (fairCoin.prod fairCoin).prod ν] = Real.log 2 := by
+  have hdet : H[(Prod.fst : Fin 2 × Fin 2 → Fin 2) | (id : Fin 2 × Fin 2 → Fin 2 × Fin 2) ;
+      fairCoin.prod fairCoin] = 0 :=
+    AISafetyAtlas.InformationTheory.condEntropy_comp_self_left (X := id) (g := Prod.fst)
+      (fairCoin.prod fairCoin) measurable_id measurable_fst
+  have hfst : H[(Prod.fst : Fin 2 × Fin 2 → Fin 2) ; fairCoin.prod fairCoin] = Real.log 2 := by
+    rw [ProbabilityTheory.entropy_def, MeasureTheory.Measure.map_fst_prod,
+      MeasureTheory.measure_univ, one_smul, ← fairCoin_entropy, ProbabilityTheory.entropy_def,
+      MeasureTheory.Measure.map_id]
+  have hsnd : H[(Prod.snd : Fin 2 × Fin 2 → Fin 2) ; fairCoin.prod fairCoin] = Real.log 2 := by
+    rw [ProbabilityTheory.entropy_def, MeasureTheory.Measure.map_snd_prod,
+      MeasureTheory.measure_univ, one_smul, ← fairCoin_entropy, ProbabilityTheory.entropy_def,
+      MeasureTheory.Measure.map_id]
+  have hid : H[(id : Fin 2 × Fin 2 → Fin 2 × Fin 2) ; fairCoin.prod fairCoin]
+      = Real.log 2 + Real.log 2 := by
+    have : FiniteRange (Prod.fst : Fin 2 × Fin 2 → Fin 2) := ⟨Set.toFinite _⟩
+    have : FiniteRange (Prod.snd : Fin 2 × Fin 2 → Fin 2) := ⟨Set.toFinite _⟩
+    have hind : ProbabilityTheory.IndepFun (Prod.fst : Fin 2 × Fin 2 → Fin 2) Prod.snd
+        (fairCoin.prod fairCoin) := ProbabilityTheory.indepFun_fst_snd
+    have h := hind.entropy_pair_eq_add measurable_fst measurable_snd
+    rw [hfst, hsnd] at h
+    exact h
+  have : FiniteRange (id : Fin 2 × Fin 2 → Fin 2 × Fin 2) := ⟨Set.toFinite _⟩
+  have : FiniteRange (Prod.fst : Fin 2 × Fin 2 → Fin 2) := ⟨Set.toFinite _⟩
+  obtain ⟨n, ν, hν, -, hdet', hkey', hE⟩ :=
+    AISafetyAtlas.Control.exists_entropy_eq_sub_of_condEntropy_eq_zero (fairCoin.prod fairCoin)
+      (Dv := (id : Fin 2 × Fin 2 → Fin 2 × Fin 2)) (Rv := (Prod.fst : Fin 2 × Fin 2 → Fin 2))
+      measurable_id measurable_fst hdet
+  refine ⟨n, ν, hν, hdet', hkey', ?_⟩
+  rw [hE, hid, hfst]
+  ring
+
 end AISafetyAtlas.Examples.Control

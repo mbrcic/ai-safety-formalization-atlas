@@ -1,0 +1,338 @@
+source:
+  citation: >-
+    C. Schumacher, M. D. Vose and L. D. Whitley, The No Free Lunch and Problem
+    Description Length. (The PDF prints only the title, the authors and their
+    affiliations -- University of Tennessee, Knoxville; Colorado State
+    University. It prints no venue and no year; "2001" comes from the file name
+    and the audit, not from the document.)
+  file: schumacher-vose-whitley-2001-nfl-and-problem-description-length.pdf
+  sha256: 3bf60560a1fd90052374e1cfdb966f67900fa48e9c8672f2e2a499f1e8bcd893
+  # The PDF pages carry no printed page numbers, so every book_page below is null
+  # and pages are cited as PDF pages.
+  page_offset: null
+  standing: |
+    Deterministic non-repeating blackbox algorithms (§2, PDF p. 1): "This section
+    sets forth a framework for the analysis of deterministic non-repeating blackbox
+    search algorithms. To streamline exposition, such search algorithms will be
+    referred to simply as algorithms. This framework makes it possible to
+    precisely model all possible algorithms as they apply to all functions of a
+    given finite domain and range."
+
+    Finite domain and range (§2.1, PDF p. 1): "Let $\mathcal{X}$ and $\mathcal{Y}$
+    be finite sets, let $f\colon \mathcal{X} \to \mathcal{Y}$ be a function, and
+    define $y_i$ as $f(x_i)$."
+
+    Free variables (§2.1, footnote 1, PDF p. 2): "This paper will follow the
+    convention that free variables are universally quantified."
+
+    Empty initial trace (§2.1, PDF p. 2): "In this paper algorithms always start
+    from the empty trace $T_0$, [\ldots]"
+
+    Default function set (§2.2, PDF p. 2): "Four equivalent statements of the No
+    Free Lunch theorem are given below. Where ambiguous, the set of functions
+    involved is $\mathcal{Y}^{\mathcal{X}}$."
+
+    Weighted measures declined (§2.2, PDF p. 3): "A weighted overall measure is
+    \emph{not} generally subject to the No Free Lunch theorem except in the case
+    where the functions are \emph{equally weighted}, i.e. certain functions are not
+    deemed more important than others." Followed by NFL4: "For any equally
+    weighted overall measure, each algorithm will perform equally well."
+
+definitions:
+  - id: svw-def-trace
+    label: trace, $\mathcal{T}_m$, $\mathcal{T}$, notation (§2.1)
+    pdf_page: 1
+    book_page: null
+    latex: |
+      Define a \emph{trace} of size $m$ ($m \ge 0$) to be a sequence of pairs
+      \[ T_m \;\equiv\; \langle (x_0, y_0), (x_1, y_1), \ldots,
+         (x_{m-1}, y_{m-1}) \rangle \]
+      Note that a trace is just an ordered sequence of elements from $f$
+      (regarding $f$ as a set of ordered pairs). At times the subscript of a trace
+      will be omitted to refer to traces of arbitrary size. Let $\mathcal{T}_m$ be
+      the set of all traces of size $m$, and let $\mathcal{T}$ be the set of all
+      traces. Adopt the following notation:
+      \[ \begin{array}{rcl}
+         T_0 & = & \langle\rangle \\
+         T_m^x & \equiv & \langle x_0, x_1, \ldots, x_{m-1} \rangle \\
+         T_m^y & \equiv & \langle y_0, y_1, \ldots, y_{m-1} \rangle \\
+         T_m[i] & \equiv & (x_i, y_i) \\
+         T_m^x[i] & \equiv & x_i \\
+         T_m^y[i] & \equiv & y_i
+         \end{array} \]
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: svw-def-concat-nonrepeating
+    label: concatenation, non-repeating trace, complete trace (§2.1)
+    pdf_page: 2
+    book_page: null
+    latex: |
+      A concatenation operator $\|$ will be used to extend the size of a trace in
+      the following way:
+      \[ T_m \,\|\, (x, y) \;\equiv\; \langle T_m[0], T_m[1], \ldots,
+         T_m[m-1], (x, y) \rangle \]
+      Define a \emph{non-repeating trace} $T$ to be a trace with unique $x$
+      components, i.e. $T^x[i] = T^x[j] \Rightarrow i = j$. A \emph{complete trace}
+      $T$ is defined to be a trace that covers the domain, i.e. for all
+      $z \in \mathcal{X}$ there exists an $i$ such that $T^x[i] = z$. Because a
+      trace is a sequence of ordered pairs, a non-repeating trace corresponds to a
+      function; when it is complete, the corresponding function is $f$.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 200}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: svw-def-algorithm
+    label: search operator, deterministic blackbox search algorithm, non-repeating blackbox search algorithm (§2.1)
+    pdf_page: 2
+    book_page: null
+    latex: |
+      Consider a ``search'' operator $g\colon \mathcal{T} \to \mathcal{X}$ which
+      when given a trace as an argument returns the next point in the search space
+      to be examined. A \emph{deterministic blackbox search algorithm} $A$
+      corresponds to a search operator $g$, and takes as arguments a trace $T_m$
+      and a function $f \in \mathcal{Y}^{\mathcal{X}}$ and returns the trace
+      \[ T_{m+1} = A_f(T_m) = T_m \,\|\, (g(T_m), f \circ g(T_m)) \]
+      [\ldots] Multiple applications of these algorithms will be abbreviated in the
+      natural way, i.e. $A_f^m(T_0) = T_m$, and in particular,
+      $A_f^0(T_0) = T_0$.
+
+      A \emph{non-repeating blackbox search algorithm}---referred to simply as
+      algorithm---is defined to be a blackbox search algorithm whose range contains
+      only non-repeating traces. The largest trace an algorithm could generate is
+      clearly a complete trace which has size $|\mathcal{X}|$.
+
+      [\ldots] Two algorithms $A$ and $B$ will be considered identical if and only
+      if they both generate the same complete trace for all
+      $f \in \mathcal{Y}^{\mathcal{X}}$, i.e.:
+      \[ A_f^{|\mathcal{X}|} = B_f^{|\mathcal{X}|} \text{ for all }
+         f \in \mathcal{Y}^{\mathcal{X}}. \]
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 200}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: svw-def-performance-vector
+    label: performance vector, $T_m(A, f)$, $V_m(A, f)$ (§2.2)
+    pdf_page: 2
+    book_page: null
+    latex: |
+      Define a \emph{performance vector} of length $m$ to be a sequence of $m$
+      values from $\mathcal{Y}$. The performance vector associated with trace
+      $T_m$ is $T_m^y$. A performance vector can thus be said to be
+      \emph{derived} from a trace, and a function and an algorithm together can be
+      said to generate a performance vector from $T_0$.
+
+      The length $m$ trace $A_f^m(T_0)$ generated by algorithm $A$ and function $f$
+      will be abbreviated by $T_m(A, f)$. Let $V_m(A, f)$ denote the length $m$
+      performance vector generated by $A$ and $f$. The size subscripts may be
+      omitted when not needed. Note that the performance vector $V_m(A, f)$ is
+      closely related to $T_m(A, f)$,
+      \[ V_m(A, f) = (T_m(A, f))^y \]
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 200}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: svw-def-overall-measure-nfl
+    label: overall measure; No Free Lunch result over $F$ (§2.2)
+    pdf_page: 2
+    book_page: null
+    latex: |
+      Define an \emph{overall measure} of algorithm $A$ and set of functions $F$ to
+      be a function that maps the set of performance vectors generated by $A$ and
+      $F$ to a real number. An overall measure can be used to compare the overall
+      performance of two algorithms on a set of functions, and if the two
+      algorithms have identical overall measures, it can be said that they perform
+      equally well over $F$. An example of an overall measure would be to take a
+      performance vector measure $M$ (which maps a performance vector to a real
+      number), apply it to every element in $F$ and then combine the results in
+      some symmetric way, such as the average
+      $\sum_{f \in F} M(V(A, f))/|F|$.
+
+      Define an \emph{No Free Lunch result over $F$} to be a situation where any
+      two algorithms will have equal overall performance with respect to the set of
+      functions $F$.
+    note: >-
+      "an No Free Lunch result" is printed as such. "the set of performance vectors
+      generated by $A$ and $F$" is a set, so multiplicities are not part of the
+      argument of an overall measure as defined.
+    uses: [svw-def-performance-vector]
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 200}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: svw-def-permutation
+    label: permutation $\sigma f$; closed under permutation; permuted algorithm $\sigma A$ (§3)
+    pdf_page: 3
+    book_page: null
+    latex: |
+      Let $f\colon \mathcal{X} \to \mathcal{Y}$ be a function and let
+      $\sigma\colon \mathcal{X} \to \mathcal{X}$ be a permutation (i.e. $\sigma$ is
+      one-to-one and onto). The permutation $\sigma f$ of $f$ is the function
+      $\sigma f\colon \mathcal{X} \to \mathcal{Y}$ defined by
+      $\sigma f(x) = f(\sigma^{-1}(x))$.
+
+      Define a set $F$ of functions to be \emph{closed under permutation} if for
+      every $f \in F$, every permutation of $f$ is also in $F$.
+
+      Let $A$ be an algorithm with search operator $g$ and let $\sigma$ be a
+      permutation (of $\mathcal{X}$). The permutation $\sigma A$ of $A$ is the
+      algorithm with search operator $\sigma g$ defined by
+      $\sigma g(\phi) = \sigma^{-1}(g(\sigma_x(\phi)))$ where $\sigma_x(\phi)$
+      operates on the $x$ values of trace $\phi$ by applying $\sigma$ to each of
+      them, while leaving the $y$ values untouched.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 200}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+excerpts:
+  - id: svw-nfl3-sets
+    for: [svw-nfl3, svw-lemma-2]
+    reason: >-
+      The paragraph after NFL3 asserts injectivity ("the collections referred to in
+      NFL3 are actually sets"), and the proof of Lemma 2 cites "NFL3 and the
+      paragraph following it"; the grade of NFL3's count-versus-set reading and of
+      Lemma 2's hypotheses rests on it.
+    pdf_page: 3
+    latex: |
+      Schumacher has proved in addition that $V(A, f) = V(A, g) \Longrightarrow
+      f = g$, i.e., the collections referred to in NFL3 are actually sets [6].
+      This fact is a key observation in demonstrating the equivalence of NFL1,
+      NFL2, NFL3, and NFL4.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 200}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+statements:
+  - id: svw-theorem
+    audit_row: S04-R05
+    locator: SVW Theorem
+    pdf_page: 3
+    book_page: null
+    label: THEOREM (§3)
+    latex: |
+      THEOREM: If
+      \[ T_n(A, \sigma f) = \langle (x_0, y_0), \ldots, (x_{n-1}, y_{n-1}) \rangle \]
+      then
+      \[ T_n(\sigma A, f) = \langle (\sigma^{-1}(x_0), y_0), \ldots,
+         (\sigma^{-1}(x_{n-1}), y_{n-1}) \rangle \]
+    uses: [svw-def-trace, svw-def-algorithm, svw-def-performance-vector, svw-def-permutation]
+    proof_pages: 3
+    note: >-
+      Right column of PDF p. 3. Quantifiers over $A$, $\sigma$, $f$, $n$ are free
+      and so universal by footnote 1 (source.standing).
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 200}
+    checked: {by: 'Codex (blind) + Grok (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: svw-corollary-duality
+    audit_row: S04-R06
+    locator: SVW Cor. (Duality)
+    pdf_page: 3
+    book_page: null
+    label: COROLLARY ("Duality")
+    latex: |
+      COROLLARY (``Duality''): $V(\sigma A, f) = V(A, \sigma f)$
+    context: |
+      Followed by: "This Corollary is true since, by the previous theorem, the $y$
+      values are the same in both traces."
+    uses: [svw-def-performance-vector, svw-def-permutation, svw-theorem]
+    proof_pages: 3
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 200}
+    checked: {by: 'Codex (blind) + Grok (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: svw-lemma-1
+    audit_row: S04-R07
+    locator: SVW Lemma 1
+    pdf_page: 3
+    book_page: null
+    label: LEMMA1
+    latex: |
+      LEMMA1: If the set of functions $F$ is closed under permutation, then there
+      is a No Free Lunch result over $F$.
+    context: |
+      Introduced by: "The following Lemma is an easy consequence of NFL2."
+    uses: [svw-def-permutation, svw-def-overall-measure-nfl]
+    proof_pages: 3-4
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 200}
+    checked: {by: 'Codex (blind) + Grok (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: svw-lemma-2
+    audit_row: S04-R08
+    locator: SVW Lemma 2
+    pdf_page: 4
+    book_page: null
+    label: LEMMA2
+    latex: |
+      LEMMA2: If a No Free Lunch result holds over the set of functions $F$, then
+      $F$ is closed under permutation.
+    context: |
+      Introduced by: "The previous lemma was an intermediate result in Radcliffe
+      and Surry's proof of the No Free Lunch theorem [5]. The converse of this
+      lemma is also true." Followed (after the proof) by: "Combining the previous
+      lemmas yields the following sharpened version of the No Free Lunch theorem:
+      NFL: A No Free Lunch result holds over the set of functions $F$ if and only
+      if $F$ is closed under permutation."
+    uses: [svw-def-permutation, svw-def-overall-measure-nfl]
+    proof_pages: 4
+    note: >-
+      The proof chooses an indicator performance vector measure $M$ and the sum
+      overall measure $\sum_{k \in F} M(V(B, k))$, and cites "NFL3 and the
+      paragraph following it" (excerpt svw-nfl3-sets) and duality.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 200}
+    checked: {by: 'Codex (blind) + Grok (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: svw-nfl1
+    audit_row: S04-R13
+    locator: SVW NFL1
+    pdf_page: 2
+    book_page: null
+    label: NFL1
+    latex: |
+      NFL1: For any overall measure, each algorithm performs equally well.
+    context: |
+      Introduced by: "Four equivalent statements of the No Free Lunch theorem are
+      given below. Where ambiguous, the set of functions involved is
+      $\mathcal{Y}^{\mathcal{X}}$."
+    uses: [svw-def-overall-measure-nfl, svw-def-algorithm]
+    proof_pages: null
+    note: >-
+      Stated without proof here; attributed collectively to the NFL literature
+      ([9] [5] [1] in §1).
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 200}
+    checked: {by: 'Codex (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: svw-nfl2
+    audit_row: S04-R14
+    locator: SVW NFL2
+    pdf_page: 3
+    book_page: null
+    label: NFL2
+    latex: |
+      NFL2: For any two algorithms $A$ and $B$, and for any function $f$, there
+      exists a function $g$ such that $V(A, f) = V(B, g)$.
+    context: |
+      Introduced (end of PDF p. 2 into p. 3) by: "The following is the pivotal idea
+      contained in the proof by Radcliffe and Surry [5], phrased more directly in
+      the language of the current framework."
+    uses: [svw-def-performance-vector, svw-def-algorithm]
+    proof_pages: null
+    note: >-
+      No proof printed (attributed to [5]). The length subscript is omitted ("The
+      size subscripts may be omitted when not needed").
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 200}
+    checked: {by: 'Codex (blind) + Grok (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: svw-nfl3
+    audit_row: S04-R15
+    locator: SVW NFL3
+    pdf_page: 3
+    book_page: null
+    label: NFL3
+    latex: |
+      NFL3: Every algorithm generates precisely the same collection of performance
+      vectors when all functions are considered.
+    context: |
+      Introduced by: "The following is the basis of the No Free Lunch proof given
+      by Schumacher[6]." Followed by: "Schumacher has proved in addition that
+      $V(A, f) = V(A, g) \Longrightarrow f = g$, i.e., the collections referred to
+      in NFL3 are actually sets [6]."
+    uses: [svw-def-performance-vector, svw-def-algorithm]
+    proof_pages: null
+    note: >-
+      No proof printed (attributed to [6]). No sample length is printed in NFL3;
+      $V$ with omitted subscript.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 200}
+    checked: {by: 'Codex (blind) + Grok (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}

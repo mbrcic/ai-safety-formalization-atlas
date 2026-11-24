@@ -1,0 +1,173 @@
+source:
+  citation: >-
+    Ian Carter and Ronen Shnayderman, The Impossibility of ``Freedom as
+    Independence''. Political Studies Review, 2018, pp. 1--11,
+    DOI 10.1177/1478929918771452, (c) The Author(s) 2018; accepted 21 March 2018
+    (first page, PDF p. 1). OnlineFirst text: the running head reads "Political
+    Studies Review 00(0)" and carries no volume, issue or journal page numbers, so
+    pages below are the article's own 1--11.
+  file: carter-shnayderman-2018-earlyview-political-studies-review-impossibility-of-freedom-as-independence.pdf
+  sha256: bb5bf47c635036527739b5d65597f0a7b0e6386d5107ebd77fccff942fa07dff
+  page_offset: 0
+  standing: |
+    The two theses are displayed, italic-labelled claims; the paper numbers no
+    theorem. Their terms (robustness requirement, arbitrariness requirement,
+    freedom as independence) are fixed in the introduction, pp. 1--2 (definitions
+    cs-def-requirements and cs-def-freedom-as-independence). The meaning of
+    "impunity" used in the asymmetry argument is fixed in note 6, p. 10
+    (definition cs-note-6-impunity). Both theses are stated about "relevant
+    possibilit[ies]"; which possible worlds are relevant is taken from List and
+    Valentini (list-valentini-2016-freedom-as-independence) and not redefined
+    here.
+
+definitions:
+  - id: cs-def-requirements
+    label: the robustness and arbitrariness requirements (introduction)
+    pdf_page: 1-2
+    book_page: 1-2
+    latex: |
+      First, republicans have claimed that one is free only if the non-interference
+      that one enjoys is robust, where the robustness of non-interference involves an
+      absence of interference not only in the actual world but also in a range of
+      possible worlds. Second, they have claimed that an interference counts as a
+      source of unfreedom only if it is arbitrary, where the arbitrariness of an
+      interference depends on a lack of institutional structures forcing it to track
+      the interests of those interfered with, as a result of which such interference
+      is carried out at will and with impunity. We may call these two requirements,
+      respectively, the ``robustness requirement'' and the ``arbitrariness
+      requirement.'' Together, they constitute the republican notion of freedom as
+      ``non-domination.''
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: cs-def-freedom-as-independence
+    label: freedom as independence (introduction)
+    pdf_page: 2
+    book_page: 2
+    latex: |
+      List and Valentini endorse the robustness requirement but not the arbitrariness
+      requirement. Thus, for List and Valentini, freedom is the robust absence of
+      constraints, whether arbitrary or non-arbitrary. They call the resulting
+      conception ``freedom as independence.''
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: cs-note-6-impunity
+    label: note 6 (meaning of "impunity")
+    pdf_page: 10
+    book_page: 10
+    latex: |
+      6. Pettit does not say what exactly he means by ``impunity.'' We take him to
+      mean that we enjoy impunity with respect to a certain act (X) only when we are
+      not exposed even to the mere possibility of being punished for X-ing. [\ldots]
+      Were Pettit to claim that we enjoy impunity with respect to X-ing as long as we
+      are not actually punished for X-ing, then freedom, on his conception, would be
+      impossible owing to people's power to interfere with each other's lives within
+      the state. For even in a republican state there would always be a possibility
+      that any crime will go unpunished.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+excerpts: []
+
+statements:
+  - id: cs-thesis-republican
+    audit_row: S22-R14
+    locator: C&S thesis 1
+    pdf_page: 4
+    book_page: 4
+    label: displayed thesis, "The impossibility of republican freedom"
+    latex: |
+      \emph{The impossibility of republican freedom}. Republican freedom entails that
+      no one is ever free to do anything whatsoever, not even in a republican state,
+      given that there is always a relevant possibility that a person or a group of
+      persons will succeed in acquiring the means that would enable them to take over
+      the state and thereby possess more or less absolute arbitrary power to interfere
+      with every aspect of its citizens' lives.
+    context: |
+      Introduced by: "Now, as long as republican robustness is to be considered
+      something distinct from the liberal minimization of probabilities, at least
+      some of the minimally probable scenarios involving the accumulation of such
+      powers must qualify as relevant possibilities from the republican point of
+      view, that is, as occurring in possible worlds that are relevant in
+      characterizing the robustness requirement. As a result, Pettit's conception
+      runs into the following problem:"
+    uses: [cs-def-requirements]
+    note: >-
+      The label is italic in print, not bold as in the audit's quotation. The audit
+      quotation stops at "arbitrary power..."; print continues "to interfere with
+      every aspect of its citizens' lives." No proof beyond the preceding Kramer
+      argument (p. 4).
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: cs-thesis-independence
+    audit_row: S22-R15
+    locator: C&S thesis 2
+    pdf_page: 5
+    book_page: 5
+    label: displayed thesis, "The impossibility of freedom as independence"
+    latex: |
+      \emph{The impossibility of freedom as independence}. Freedom as independence
+      entails that no one is ever free to do anything whatsoever. But this entailment
+      depends not only on the particular case of a threat to any regime that would
+      otherwise secure its citizens' freedom; it depends also on the countless threats
+      which everyone constantly faces in everyday situations, given that these threats
+      cannot be eliminated by any reasonable state.
+    context: |
+      Introduced by: "To recall, in order to avoid moralizing the concept of freedom,
+      List and Valentini drop the arbitrariness requirement. Thereby, they also drop
+      the impunity requirement. Consequently, their conception of freedom as
+      independence magnifies the problem of the impossibility of freedom to the point
+      of absurdity:" Followed by examples (stabbing, being run over, being pushed
+      onto train tracks, poisoning) ending "no one is ever free to do any of the
+      things that their death would prevent them from doing, in other words, no one
+      is ever free to do anything whatsoever."
+    uses: [cs-def-freedom-as-independence, cs-def-requirements]
+    note: >-
+      The label is italic in print, not bold as in the audit's quotation. The
+      audit's ellipsis drops "that would otherwise secure its citizens' freedom",
+      and its quotation stops before "given that these threats cannot be eliminated
+      by any reasonable state."
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: cs-asymmetry
+    audit_row: S22-R16
+    locator: C&S §"Probability Versus Sheer Possibility"
+    pdf_page: 5
+    book_page: 5
+    label: argument for the asymmetry between the two theses (paragraphs 1 and 3 of p. 5)
+    latex: |
+      The important thing to note here is that, on Pettit's conception of freedom,
+      this problem arises only with respect to the particular case of a threat to the
+      republican state as a whole. Other cases of people's power to interfere with
+      each other's lives, including in the most severe and morally outrageous
+      ways---for example, by stabbing each other in the back with a kitchen knife as
+      they walk down the street---will of course be present, for they cannot be
+      eliminated by any reasonable state, even a republican one. However, these other
+      cases do not pose such a problem for Pettit's conception of freedom. This is
+      because, on his conception, in order to count as a source of unfreedom, the
+      power to interfere has to be arbitrary. In order to be arbitrary, it has to be,
+      \emph{inter alia}, possessed with impunity (Pettit, 1996, 1997, 2011: 57--58).
+      Given that no one would enjoy impunity within a republican state with respect
+      to such cases, such cases would not involve arbitrary power. Therefore, they
+      would not involve unfreedom.$^{6}$
+      [\ldots]
+      To recall, in order to avoid moralizing the concept of freedom, List and
+      Valentini drop the arbitrariness requirement. Thereby, they also drop the
+      impunity requirement. Consequently, their conception of freedom as independence
+      magnifies the problem of the impossibility of freedom to the point of
+      absurdity:
+    uses: [cs-def-requirements, cs-def-freedom-as-independence, cs-note-6-impunity, cs-thesis-republican, cs-thesis-independence]
+    note: >-
+      The audit's row is a paraphrase; no single printed sentence states the
+      asymmetry. The passage is in the section "Probability Versus Sheer
+      Possibility" (pp. 4--5). The omitted middle paragraph sets aside the
+      moralization problem for Pettit's view. Later on p. 5 print adds "On this
+      conception, the very low probability of anyone actually killing us is
+      irrelevant. [...] Similarly, the fact that no one can do so with impunity is
+      also irrelevant. Therefore, the republican way out of the problem is also
+      unavailable."
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind) + Codex (anchored re-read); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}

@@ -697,6 +697,45 @@ public theorem value_const_sub (M : Model C dim 𝕜) (sk : Skeleton C dim Bool 
   rw [← Finset.sum_sub_distrib]
   exact Finset.sum_congr rfl fun v _ ↦ by ring
 
+/-- **Expected utility at an arbitrary utility function.** `value_eq`'s right-hand
+side, `Σ_v P(v) Σ_d π(d | v) u(d, v)`, with any utility `u` in place of a
+skeleton's `sk.utility`, which `Skeleton` confines to `[0, 1]`. Richens–Everitt
+2024 §2.2: *"The utility is any real-valued function including standard loss and
+reward functions"*. `value_eq_valueOfUtility` identifies `value` with it at
+`sk.utility`. -/
+@[expose] public def valueOfUtility (M : Model C dim 𝕜)
+    (u : Decision → Assignment C dim → 𝕜) (visible : Finset C)
+    (π : Policy (dim := dim) visible Decision 𝕜) (w : ProbMixture C dim 𝕜) : 𝕜 :=
+  ∑ v : Assignment C dim, M.jointProbMix w.1 v * ∑ d : Decision, π.prob v d * u d v
+
+/-- `value` is `valueOfUtility` at the skeleton's utility. -/
+public theorem value_eq_valueOfUtility (M : Model C dim 𝕜) (sk : Skeleton C dim Decision 𝕜)
+    (visible : Finset C) (π : Policy (dim := dim) visible Decision 𝕜)
+    (w : ProbMixture C dim 𝕜) :
+    M.value sk visible π w = M.valueOfUtility sk.utility visible π w :=
+  M.value_eq sk visible π w
+
+/-- **Richens–Everitt 2024, App. B eq. (3), at any utility.** The expected-utility
+difference of the two constant decisions is the mixture of the utility gap:
+
+`E[u | D = 1] − E[u | D = 0] = Σ_v P(v) [U(1, v) − U(0, v)]`,
+
+for any utility `u : Bool → Assignment → 𝕜`, with no range restriction. Print
+writes it for the Figure 6 utility `U(d, x, y)` after `do(X = 0)`, which is this
+identity at the intervened model's mixture. `value_const_sub` is the same identity
+at a skeleton's `[0, 1]` utility. -/
+public theorem valueOfUtility_const_sub (M : Model C dim 𝕜)
+    (u : Bool → Assignment C dim → 𝕜) (visible : Finset C) (w : ProbMixture C dim 𝕜) :
+    M.valueOfUtility u visible (Policy.const visible true) w -
+      M.valueOfUtility u visible (Policy.const visible false) w
+      = M.Δmix (fun v ↦ u true v - u false v) w.1 := by
+  unfold valueOfUtility
+  simp only [Policy.const, Fintype.sum_bool]
+  simp
+  unfold Model.Δmix
+  rw [← Finset.sum_sub_distrib]
+  exact Finset.sum_congr rfl fun v _ ↦ by ring
+
 /-- Positive binary fibre gap forces every zero-regret policy to choose `true`. -/
 public theorem prob_true_eq_one_of_gap_pos (M : Model C dim 𝕜) (sk : Skeleton C dim Bool 𝕜)
     (visible : Finset C) (π : Policy (dim := dim) visible Bool 𝕜)

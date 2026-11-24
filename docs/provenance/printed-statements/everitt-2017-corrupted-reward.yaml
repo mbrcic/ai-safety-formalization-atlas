@@ -1,0 +1,311 @@
+source:
+  citation: >-
+    Tom Everitt, Victoria Krakovna, Laurent Orseau, Marcus Hutter and Shane Legg,
+    Reinforcement Learning with a Corrupted Reward Channel. arXiv:1705.08417v2
+    [cs.AI], 19 Aug 2017 (long version, 24 pp.; title page dated August 22, 2017).
+    Section 2 (Formalisation) and Section 3.1 (No Free Lunch Theorem).
+  file: everitt-krakovna-orseau-hutter-legg-arxiv-v2-2017-reinforcement-learning-with-a-corrupted-reward-channel.pdf
+  sha256: 68ed8a0dcadc93d5d494538d666cb09c428b7b81a1e8ff681a8d5f6fce153dad
+  page_offset: 0
+  standing: |
+    Finite sets, rewards in $[0,1]$, state-based rewards: Definition 7 (p. 3,
+    transcribed as ek17-def-7) and its footnote 1 (p. 3): "We let rewards depend
+    only on the state $s$, rather than on state-action pairs $s, a$, or
+    state-action-state transitions $s, a, s'$, as is also common in the literature.
+    Formally it makes little difference, since MDPs with rewards depending only on
+    $s$ can model the other two cases by means of a larger state space."
+
+    Unknown environment within a known class (p. 4, "CRMDP classes."):
+    "Typically, $T$, $\dot{R}$, and $C$ will be fixed but unknown to the agent. To
+    make this formal, we introduce classes of CRMDPs. Agent uncertainty can then be
+    modelled by letting the agent know only which class of CRMDPs it may encounter,
+    but not which element in the class."
+
+    Stationarity, acknowledged tacitly (§7, Future work, p. 22): "(Non-stationary
+    corruption function) In this work, we tacitly assumed that both the reward and
+    the corruption functions are stationary, and are always the same in the same
+    state."
+
+definitions:
+  - id: ek17-agent
+    label: agent / policy and observed history (p. 4, "Agents.")
+    pdf_page: 4
+    book_page: 4
+    latex: |
+      Following the POMDP [Kaelbling \emph{et al.}, 1998] and general reinforcement
+      learning [Hutter, 2005] literature, we define an agent as a (possibly
+      stochastic) policy $\pi : \mathcal{S} \times \hat{\mathcal{R}} \times
+      (\mathcal{A} \times \mathcal{S} \times \hat{\mathcal{R}})^* \rightsquigarrow
+      \mathcal{A}$ that selects a next action based on the \emph{observed history}
+      $\hat{h}_n = s_0 \hat{r}_0 a_1 s_1 \hat{r}_1 \ldots a_n s_n \hat{r}_n$. Here
+      $X^*$ denotes the set of finite sequences that can be formed with elements of
+      a set $X$. The policy $\pi$ specifies how the agent will learn and react to
+      any possible experience.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 200}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: ek17-expectation
+    label: expectation $\mathbb{E}^\pi_\mu$ (after eq. (1))
+    pdf_page: 4
+    book_page: 4
+    latex: |
+      Let $\mathbb{E}^\pi_\mu$ denote the expectation with respect to $P^\pi_\mu$.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 200}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+excerpts:
+  - id: ek17-eq-3-derivation
+    for: [ek17-eq-3, ek17-def-10]
+    reason: >-
+      The derivation of (3) defines the undotted $G_t$ by a sum from $k = 1$ to $t$,
+      while Definition 10 defines the dotted $\dot{G}_t$ by a sum from $k = 0$ to
+      $t$. With $k = 0$ included, the identity (3) would read $= t + 1$; a grade of
+      (3) must say which return it is about.
+    pdf_page: 5
+    latex: |
+      since
+      \[ G_t(\mu, \pi, s_0) = \mathbb{E}^\pi_\mu\left[\sum_{k=1}^{t}
+         \dot{R}(s_k)\right] = \mathbb{E}^\pi_\mu\left[\sum_{k=1}^{t} 1 -
+         \dot{R}^-(s_k)\right] \]
+      \[ = t - \mathbb{E}^\pi_\mu\left[\sum_{k=1}^{t} \dot{R}^-(s_k)\right] =
+         t - G_t(\mu^-, \pi, s_0). \]
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 200}
+    checked: {by: 'Codex (anchored); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+statements:
+  - id: ek17-def-6
+    audit_row: S09-R06
+    locator: Def. 6
+    pdf_page: 3
+    book_page: 3
+    label: Definition 6 (Dot and hat notation)
+    latex: |
+      \textbf{Definition 6} (Dot and hat notation)\textbf{.} We will let a dot
+      indicate the \emph{true} signal, and let a hat indicate the \emph{observed}
+      (possibly corrupt) counterpart. The reward sets are represented with
+      $\dot{\mathcal{R}} = \hat{\mathcal{R}} = \mathcal{R}$. For clarity, we use
+      $\dot{\mathcal{R}}$ when referring to true rewards and $\hat{\mathcal{R}}$ when
+      referring to possibly corrupt, observed rewards. Similarly, we use $\dot{r}$
+      for true reward, and $\hat{r}$ for (possibly corrupt) observed reward.
+    uses: []
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: ek17-def-7
+    audit_row: S09-R07
+    locator: Def. 7
+    pdf_page: 3
+    book_page: 3
+    label: Definition 7 (CRMDP)
+    latex: |
+      \textbf{Definition 7} (CRMDP)\textbf{.} A \emph{corrupt reward MDP} (CRMDP) is
+      a tuple $\mu = \langle \mathcal{S}, \mathcal{A}, \mathcal{R}, T, \dot{R}, C
+      \rangle$ with
+      \begin{itemize}
+      \item $\langle \mathcal{S}, \mathcal{A}, \mathcal{R}, T, \dot{R} \rangle$ an
+        MDP with\textsuperscript{1} a finite set of states $\mathcal{S}$, a finite set of
+        actions $\mathcal{A}$, a finite set of rewards $\mathcal{R} =
+        \dot{\mathcal{R}} = \hat{\mathcal{R}} \subset [0, 1]$, a transition function
+        $T(s' | s, a)$, and a (true) reward function $\dot{R} : \mathcal{S} \to
+        \dot{\mathcal{R}}$; and
+      \item a reward corruption function $C : \mathcal{S} \times \dot{\mathcal{R}}
+        \to \hat{\mathcal{R}}$.
+      \end{itemize}
+      The state dependency of the corruption function will be written as a
+      subscript, so $C_s(\dot{r}) := C(s, \dot{r})$.
+    uses: [ek17-def-6]
+    note: >-
+      $T(s'|s,a)$ is not further specified (no statement that it is a probability
+      distribution over $s'$); its stochastic reading comes from its use in eq. (1).
+      Footnote 1 is quoted under source.standing.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: ek17-def-8
+    audit_row: S09-R08
+    locator: Def. 8
+    pdf_page: 3
+    book_page: 3
+    label: Definition 8 (Observed reward)
+    latex: |
+      \textbf{Definition 8} (Observed reward)\textbf{.} Given a true reward function
+      $\dot{R}$ and a corruption function $C$, we define the \emph{observed reward
+      function}\textsuperscript{2} $\hat{R} : \mathcal{S} \to \hat{\mathcal{R}}$ as
+      $\hat{R}(s) := C_s(\dot{R}(s))$.
+    context: |
+      Footnote 2 (p. 3): "A CRMDP could equivalently have been defined as a tuple
+      $\langle \mathcal{S}, \mathcal{A}, \mathcal{R}, T, \dot{R}, \hat{R} \rangle$
+      with a true and an observed reward function, with the corruption function $C$
+      implicitly defined as the difference between $\dot{R}$ and $\hat{R}$."
+    uses: [ek17-def-6, ek17-def-7]
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 130}
+    checked: {by: 'Codex (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: ek17-eq-1
+    audit_row: S09-R09
+    locator: eq. (1)
+    pdf_page: 4
+    book_page: 4
+    label: eq. (1)
+    latex: |
+      When an agent $\pi$ interacts with a CRMDP $\mu$, the result can be described
+      by a (possibly non-Markov) stochastic process $P^\pi_\mu$ over
+      $X = (s, a, \dot{r}, \hat{r})$, formally defined as:
+      \[ P^\pi_\mu(h_n) = P^\pi_\mu(s_0 \dot{r}_0 \hat{r}_0 a_1 s_1 \dot{r}_1
+         \hat{r}_1 \ldots a_n s_n \dot{r}_n \hat{r}_n) := \prod_{i=1}^{n}
+         P(\pi(\hat{h}_{i-1}) = a_i) T(s_i \mid s_{i-1}, a_i) P(\dot{R}(s_i) =
+         \dot{r}_i, \hat{R}(s_i) = \hat{r}_i). \tag{1} \]
+    uses: [ek17-def-7, ek17-def-8, ek17-agent]
+    note: >-
+      The product starts at $i = 1$: no factor is printed for $s_0, \dot{r}_0,
+      \hat{r}_0$ (the start state is a conditioning argument elsewhere, e.g.
+      $\dot{G}_t(\mu, \pi, s_0)$). $\dot{R}$ and $\hat{R}$ are deterministic
+      functions, so the last factor is an indicator.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 200}
+    checked: {by: 'Codex (blind) + Codex (anchored re-read); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: ek17-def-9
+    audit_row: S09-R10
+    locator: Def. 9
+    pdf_page: 4
+    book_page: 4
+    label: Definition 9 (CRMDP class)
+    latex: |
+      \textbf{Definition 9} (CRMDP class)\textbf{.} For given sets
+      $\boldsymbol{T}$, $\dot{\boldsymbol{R}}$, and $\boldsymbol{C}$ of transition,
+      reward, and corruption functions, let $\mathcal{M} = \langle \mathcal{S},
+      \mathcal{A}, \mathcal{R}, \boldsymbol{T}, \dot{\boldsymbol{R}}, \boldsymbol{C}
+      \rangle$ be the class of CRMDPs containing $\langle \mathcal{S}, \mathcal{A},
+      \mathcal{R}, T, \dot{R}, C \rangle$ for $(T, \dot{R}, C) \in \boldsymbol{T}
+      \times \dot{\boldsymbol{R}} \times \boldsymbol{C}$.
+    uses: [ek17-def-7]
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 200}
+    checked: {by: 'Codex (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: ek17-def-10
+    audit_row: S09-R11
+    locator: Def. 10
+    pdf_page: 4
+    book_page: 4
+    label: Definition 10 (Regret)
+    latex: |
+      \textbf{Definition 10} (Regret)\textbf{.} For a CRMDP $\mu$, let
+      $\dot{G}_t(\mu, \pi, s_0) = \mathbb{E}^\pi_\mu\left[\sum_{k=0}^{t}
+      \dot{R}(s_k)\right]$ be the \emph{expected cumulative true reward} until time
+      $t$ of a policy $\pi$ starting in $s_0$. The \emph{regret} of $\pi$ is
+      \[ \mathrm{Reg}(\mu, \pi, s_0, t) = \max_{\pi'} \left[\dot{G}_t(\mu, \pi', s_0)
+         - \dot{G}_t(\mu, \pi, s_0)\right], \]
+      and the \emph{worst-case regret} for a class $\mathcal{M}$ is
+      $\mathrm{Reg}(\mathcal{M}, \pi, s_0, t) = \max_{\mu \in \mathcal{M}}
+      \mathrm{Reg}(\mu, \pi, s_0, t)$, i.e. the difference in expected cumulative
+      true reward between $\pi$ and an optimal (in hindsight) policy that knows
+      $\mu$.
+    context: |
+      Preceded by (p. 4): "Essentially, the regret of an agent $\pi$ is how much
+      less true reward $\pi$ gets compared to an optimal agent that knows which
+      $\mu \in \mathcal{M}$ it is interacting with."
+    uses: [ek17-def-9, ek17-eq-1, ek17-expectation, ek17-agent]
+    note: >-
+      The sum includes $k = 0$ (the start state) here, while the proof of Theorem
+      11 sums from $k = 1$ (excerpt ek17-eq-3-derivation). The range of $\pi'$ in
+      the max is not stated (all policies in the sense of "Agents.", p. 4).
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 200}
+    checked: {by: 'Codex (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: ek17-thm-11
+    audit_row: S09-R12
+    locator: Thm. 11
+    pdf_page: 5
+    book_page: 5
+    label: Theorem 11 (CRMDP No Free Lunch Theorem)
+    latex: |
+      \textbf{Theorem 11} (CRMDP No Free Lunch Theorem)\textbf{.} \emph{Let
+      $\mathcal{R} = \{r_1, \ldots, r_n\} \subset [0, 1]$ be a uniform discretisation
+      of $[0, 1]$, $0 = r_1 < r_2 < \cdots < r_n = 1$. If the hypothesis classes
+      $\dot{\boldsymbol{R}}$ and $\boldsymbol{C}$ contain all functions
+      $\dot{R} : \mathcal{S} \to \dot{\mathcal{R}}$ and
+      $C : \mathcal{S} \times \dot{\mathcal{R}} \to \hat{\mathcal{R}}$, then for any
+      $\pi$, $s_0$, $t$,}
+      \[ \mathrm{Reg}(\mathcal{M}, \pi, s_0, t) \geq \frac{1}{2} \max_{\check{\pi}}
+         \mathrm{Reg}(\mathcal{M}, \check{\pi}, s_0, t). \tag{2} \]
+      \emph{That is, the worst-case regret of any policy $\pi$ is at most a factor 2
+      better than the maximum worst-case regret.}
+    uses: [ek17-def-6, ek17-def-7, ek17-def-9, ek17-def-10]
+    proof_pages: 5
+    note: >-
+      Nothing is assumed about $\boldsymbol{T}$. The proof's first line restates a
+      policy as a function $\pi : \mathcal{S} \times \hat{\mathcal{R}} \times
+      (\mathcal{A} \times \mathcal{S} \times \hat{\mathcal{R}})^* \to \mathcal{A}$
+      (plain arrow) where "Agents." (p. 4) has $\rightsquigarrow$ (possibly
+      stochastic). The codomain dots ($\dot{R} : \mathcal{S} \to \dot{\mathcal{R}}$,
+      $C : \mathcal{S} \times \dot{\mathcal{R}} \to \hat{\mathcal{R}}$) were
+      confirmed on a 300 dpi crop.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 200}
+    checked: {by: 'Codex (blind) + Codex (anchored re-read); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: ek17-thm-11-proof-complement
+    audit_row: S09-R13
+    locator: Thm. 11 proof, step 1
+    pdf_page: 5
+    book_page: 5
+    label: in the proof of Theorem 11 (complement construction)
+    latex: |
+      For any $\dot{R}, C$ in $\dot{\boldsymbol{R}}$ and $\boldsymbol{C}$, the
+      functions $\dot{R}^-(s) := 1 - \dot{R}(s)$ and $C^-_s(x) := C_s(1 - x)$ are
+      also in $\dot{\boldsymbol{R}}$ and $\boldsymbol{C}$. If $\mu = \langle
+      \mathcal{S}, \mathcal{A}, \mathcal{R}, T, \dot{R}, C \rangle$, then let
+      $\mu^- = \langle \mathcal{S}, \mathcal{A}, \mathcal{R}, T, \dot{R}^-, C^-
+      \rangle$. Both $(\dot{R}, C)$ and $(\dot{R}^-, C^-)$ induce the same observed
+      reward function $\hat{R}(s) = C_s(\dot{R}(s)) = C^-_s(1 - \dot{R}(s)) =
+      C^-_s(\dot{R}^-(s))$,
+    context: |
+      The graded step is the construction and the observed-reward identity; the
+      sentence continues as transcribed in ek17-thm-11-proof-same-measure.
+    uses: [ek17-thm-11, ek17-def-7, ek17-def-8]
+    note: >-
+      That $\dot{R}^-$ and $C^-$ lie in the classes uses the uniform grid with
+      $0 = r_1$, $r_n = 1$ (so $1 - r \in \mathcal{R}$); the proof does not say so.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 200}
+    checked: {by: 'Codex (blind); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: ek17-thm-11-proof-same-measure
+    audit_row: S09-R14
+    locator: Thm. 11 proof, step 2
+    pdf_page: 5
+    book_page: 5
+    label: in the proof of Theorem 11 (same measure)
+    latex: |
+      [\ldots] and therefore induce the same measure $P^\pi_\mu = P^\pi_{\mu^-}$ over
+      histories (see Eq. (1)).
+    context: |
+      Continues the sentence "Both $(\dot{R}, C)$ and $(\dot{R}^-, C^-)$ induce the
+      same observed reward function $\hat{R}(s) = \ldots$" (ek17-thm-11-proof-complement).
+    uses: [ek17-thm-11-proof-complement, ek17-eq-1]
+    note: >-
+      As printed, eq. (1) is over $(s, a, \dot{r}, \hat{r})$ and includes the true
+      reward in its last factor, so $P^\pi_\mu$ and $P^\pi_{\mu^-}$ as defined in
+      (1) differ in the $\dot{r}_i$ coordinates; equality holds for the marginal on
+      observed histories, which is what the policy depends on. The proof does not
+      make this distinction.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 200}
+    checked: {by: 'Codex (blind) + Codex (anchored re-read); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
+
+  - id: ek17-eq-3
+    audit_row: S09-R15
+    locator: eq. (3)
+    pdf_page: 5
+    book_page: 5
+    label: eq. (3), in the proof of Theorem 11
+    latex: |
+      This gives that for any $\mu, \pi, s_0, t$,
+      \[ G_t(\mu, \pi, s_0) + G_t(\mu^-, \pi, s_0) = t \tag{3} \]
+    uses: [ek17-thm-11-proof-complement, ek17-thm-11-proof-same-measure, ek17-def-10]
+    note: >-
+      $G_t$ is printed without the dot, and its only definition is in the
+      derivation that follows, as a sum from $k = 1$ to $t$ (excerpt
+      ek17-eq-3-derivation). Definition 10's $\dot{G}_t$ sums from $k = 0$; under
+      that definition the right-hand side would be $t + 1$. The derivation also
+      prints $\sum_{k=1}^{t} 1 - \dot{R}^-(s_k)$ without parentheses around
+      $1 - \dot{R}^-(s_k)$; the next line reads it as $\sum (1 - \dot{R}^-(s_k))$.
+    transcribed: {by: Claude, date: 2026-11-14, from: page image, dpi: 200}
+    checked: {by: 'Codex (blind) + Codex (anchored re-read); disagreements adjudicated on the page image (Claude)', date: 2026-11-15}
