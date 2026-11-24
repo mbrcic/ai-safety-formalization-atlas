@@ -36,6 +36,7 @@ def _untracked_lean() -> str:
     return subprocess.run(
         ["git", "ls-files", "--others", "--exclude-standard", "--", "AISafetyAtlas"],
         cwd=ROOT, capture_output=True, text=True,
+        encoding="utf-8",
     ).stdout.strip()
 
 
@@ -204,6 +205,7 @@ def test_fail_on_drift_exits_nonzero_on_an_unresolved_adjudication():
         [sys.executable, "scripts/check_statement_drift.py", "--ref", baseline,
          "--fail-on-drift"],
         cwd=ROOT, capture_output=True, text=True,
+        encoding="utf-8",
     )
     assert result.returncode == 1, result.stdout[-2000:]
     assert "adjudicate:" in result.stdout
@@ -217,6 +219,7 @@ def test_no_drift_against_head_exits_zero():
         [sys.executable, "scripts/check_statement_drift.py", "--ref", "HEAD",
          "--fail-on-drift"],
         cwd=ROOT, capture_output=True, text=True,
+        encoding="utf-8",
     )
     assert result.returncode == 0, result.stdout[-2000:]
     assert "statement drift ok" in result.stdout
@@ -232,6 +235,7 @@ def test_recorded_adjudications_match_what_the_checker_reports():
     result = subprocess.run(
         [sys.executable, "scripts/check_statement_drift.py", "--ref", commit],
         cwd=ROOT, capture_output=True, text=True,
+        encoding="utf-8",
     )
     reported = sorted(
         line.split("[", 1)[1].rsplit("]", 1)[0]

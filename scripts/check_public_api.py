@@ -135,7 +135,7 @@ def main() -> int:
 
     if args.write:
         PINNED.parent.mkdir(parents=True, exist_ok=True)
-        PINNED.write_text(body, encoding="utf-8")
+        PINNED.write_text(body, encoding="utf-8", newline="\n")
         print(f"public api pinned: {len(current)} declarations written to {PINNED}")
         return 0
 

@@ -51,7 +51,7 @@ def test_dns_failure_does_not_prevent_other_records_or_persistence(monkeypatch, 
         "next": {"citation": "Another example", "role": "work"},
     }
     registry_path = tmp_path / "registry.yaml"
-    registry_path.write_text(json.dumps({"source_catalog": sources}))
+    registry_path.write_text(json.dumps({"source_catalog": sources}), encoding="utf-8", newline="\n")
     monkeypatch.setattr(snapshot, "REGISTRY", registry_path)
     monkeypatch.setattr(snapshot, "load_cached_records", lambda: {})
     attempts = []
@@ -74,7 +74,7 @@ def test_dns_failure_does_not_prevent_other_records_or_persistence(monkeypatch, 
     assert result["records"]["next"]["lookup_status"] == "MISSING_LOCATOR"
     path = tmp_path / "snapshot.json"
     snapshot.write_snapshot(result, path)
-    assert json.loads(path.read_text()) == result
+    assert json.loads(path.read_text(encoding="utf-8")) == result
 
 
 def test_all_crossref_licenses_and_effective_dates_reach_report() -> None:

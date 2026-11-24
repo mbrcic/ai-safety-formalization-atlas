@@ -52,6 +52,7 @@ def output() -> str:
     result = subprocess.run(
         [sys.executable, "scripts/report_predicate_duplicates.py"],
         cwd=ROOT, capture_output=True, text=True, check=True,
+        encoding="utf-8",
     )
     return result.stdout
 
@@ -95,10 +96,12 @@ def Q2 (f g : Nat → Nat) : Prop := ∀ n, g n = f n
   IO.println s!"q2\t{← shapeOf ``Q2}"
 """,
         encoding="utf-8",
+        newline="\n",
     )
     result = subprocess.run(
         ["lake", "env", "lean", str(probe)],
         cwd=ROOT, capture_output=True, text=True,
+        encoding="utf-8",
     )
     assert result.returncode == 0, result.stdout + result.stderr
     shapes = dict(
@@ -164,10 +167,12 @@ def eqTwo : Prop := (1 : Nat) = 2
   IO.println s!"two\t{← shapeOf ``eqTwo}"
 """,
         encoding="utf-8",
+        newline="\n",
     )
     result = subprocess.run(
         ["lake", "env", "lean", str(probe)],
         cwd=ROOT, capture_output=True, text=True,
+        encoding="utf-8",
     )
     assert result.returncode == 0, result.stdout + result.stderr
     shapes = dict(

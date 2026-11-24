@@ -93,15 +93,16 @@ def _tree(root: Path, modules: dict[str, str], packages: dict[str, dict]) -> lis
     for module, source in modules.items():
         path = root / (module.replace(".", "/") + ".lean")
         path.parent.mkdir(parents=True, exist_ok=True)
-        path.write_text(source, encoding="utf-8")
+        path.write_text(source, encoding="utf-8", newline="\n")
     for package, spec in packages.items():
         directory = root / ".lake" / "packages" / package
         directory.mkdir(parents=True, exist_ok=True)
         for module_root in spec.get("roots", []):
-            (directory / f"{module_root}.lean").write_text("", encoding="utf-8")
+            (directory / f"{module_root}.lean").write_text("", encoding="utf-8", newline="\n")
         (directory / "lake-manifest.json").write_text(
             json.dumps({"packages": [{"name": name} for name in spec.get("requires", [])]}),
             encoding="utf-8",
+            newline="\n",
         )
     return list(modules)
 

@@ -237,6 +237,7 @@ def main() -> int:
             )
             + "\n",
             encoding="utf-8",
+            newline="\n",
         )
         print(f"module grading exclusions written: {len(kept)} -> {EXCLUSIONS}")
         return 0

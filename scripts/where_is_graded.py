@@ -98,6 +98,7 @@ def grep(term: str) -> list[tuple[str, int, str]]:
         capture_output=True,
         text=True,
         check=False,
+        encoding="utf-8",
     )
     hits: list[tuple[str, int, str]] = []
     for line in (proc.stdout or "").splitlines():

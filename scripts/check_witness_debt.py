@@ -732,6 +732,7 @@ def main() -> int:
             )
             + "\n",
             encoding="utf-8",
+            newline="\n",
         )
 
     # Ceilings. `--since` is the better ratchet because it compares identities,

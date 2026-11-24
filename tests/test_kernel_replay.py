@@ -59,6 +59,7 @@ def _lean(tmp: Path, *args: str) -> subprocess.CompletedProcess[str]:
         ["lake", "env", "bash", "-c", 'LEAN_PATH="$0:$LEAN_PATH" exec lean "$@"',
          str(tmp), *args],
         cwd=ROOT, capture_output=True, text=True, check=False,
+        encoding="utf-8",
     )
 
 
@@ -66,7 +67,7 @@ def _lean(tmp: Path, *args: str) -> subprocess.CompletedProcess[str]:
 def fixtures(tmp_path_factory: pytest.TempPathFactory) -> Path:
     tmp = tmp_path_factory.mktemp("kernel-replay")
     for name, source in FIXTURES.items():  # Honest before Agg, which imports it
-        (tmp / f"{name}.lean").write_text(source, encoding="utf-8")
+        (tmp / f"{name}.lean").write_text(source, encoding="utf-8", newline="\n")
         built = _lean(tmp, f"--root={tmp}", "-o", str(tmp / f"{name}.olean"),
                       str(tmp / f"{name}.lean"))
         assert built.returncode == 0, built.stdout + built.stderr
@@ -95,6 +96,7 @@ def test_replay_is_the_toolchains_own() -> None:
     prefix = subprocess.run(
         ["lake", "env", "lean", "--print-prefix"],
         cwd=ROOT, capture_output=True, text=True, check=True,
+        encoding="utf-8",
     ).stdout.strip()
     upstream = (Path(prefix) / "src/lean/LeanChecker.lean").read_text(encoding="utf-8")
     theirs = re.search(r"^unsafe def replayFromImports .*?(?=\n\n)", upstream,

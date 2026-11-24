@@ -89,7 +89,7 @@ def _install(
     path = tmp_path / "docs" / "status" / "migration-baseline.json"
     if record is not None:
         path.parent.mkdir(parents=True, exist_ok=True)
-        path.write_text(json.dumps(record), encoding="utf-8")
+        path.write_text(json.dumps(record), encoding="utf-8", newline="\n")
     monkeypatch.setattr(gate, "ROOT", tmp_path)
     monkeypatch.setattr(gate, "BASELINE", path)
 

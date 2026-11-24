@@ -119,7 +119,7 @@ def test_reviewing_one_finding_without_affecting_another() -> None:
         },
     }
 
-    with tempfile.NamedTemporaryFile("w", encoding="utf-8", suffix=".json") as tmp:
+    with tempfile.NamedTemporaryFile("w", encoding="utf-8", newline="\n", suffix=".json") as tmp:
         tmp.write(json.dumps(dispositions_doc))
         tmp.flush()
         reviewed_count = validator.validate_dispositions(
@@ -211,7 +211,7 @@ def test_orphan_and_invalid_dispositions_rejected() -> None:
 
     def _validate(doc: dict) -> str | None:
         try:
-            with tempfile.NamedTemporaryFile("w", encoding="utf-8", suffix=".json") as tmp:
+            with tempfile.NamedTemporaryFile("w", encoding="utf-8", newline="\n", suffix=".json") as tmp:
                 tmp.write(json.dumps(doc))
                 tmp.flush()
                 validator.validate_dispositions({"src-1": source}, {"src-1": record}, Path(tmp.name))
@@ -351,7 +351,7 @@ def test_disposition_rejects_impossible_calendar_date() -> None:
             }
         },
     }
-    with tempfile.NamedTemporaryFile("w", encoding="utf-8", suffix=".json") as tmp:
+    with tempfile.NamedTemporaryFile("w", encoding="utf-8", newline="\n", suffix=".json") as tmp:
         tmp.write(json.dumps(invalid_date_doc))
         tmp.flush()
         try:

@@ -21,7 +21,7 @@ BASH = Path("/bin/bash")
 
 
 def _stub(path: Path) -> None:
-    path.write_text("#!/bin/sh\nexit 0\n", encoding="utf-8")
+    path.write_text("#!/bin/sh\nexit 0\n", encoding="utf-8", newline="\n")
     path.chmod(path.stat().st_mode | stat.S_IXUSR)
 
 
@@ -48,6 +48,7 @@ def test_quiet_mode_runs_under_nounset(tmp_path: Path) -> None:
         capture_output=True,
         text=True,
         check=False,
+        encoding="utf-8",
     )
 
     assert result.returncode == 0, result.stdout + result.stderr

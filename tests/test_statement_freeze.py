@@ -12,7 +12,7 @@ SPEC.loader.exec_module(FREEZE)
 
 
 def test_every_graded_conjecture_declaration_is_frozen() -> None:
-    rows = json.loads((ROOT / "conjectures.yaml").read_text())["conjectures"]
+    rows = json.loads((ROOT / "conjectures.yaml").read_text(encoding="utf-8"))["conjectures"]
     expected = {
         row["lean"]
         for row in rows

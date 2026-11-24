@@ -38,7 +38,7 @@ def sections() -> list[tuple[str, str]]:
     for path in sorted(LEAN_ROOT.rglob("*.lean")):
         if "Examples" in path.parts:
             continue
-        lines = path.read_text().split("\n")
+        lines = path.read_text(encoding="utf-8").split("\n")
         for i, line in enumerate(lines):
             if not HEADING.match(line):
                 continue
@@ -94,7 +94,7 @@ def main() -> int:
         return 1
     page = render(found)
     if check:
-        if not OUT.exists() or OUT.read_text() != page:
+        if not OUT.exists() or OUT.read_text(encoding="utf-8") != page:
             print(
                 f"generated file is out of date: {OUT.relative_to(ROOT)}. "
                 "Re-run scripts/generate_non_claims.py",
@@ -103,7 +103,7 @@ def main() -> int:
             return 1
         print(f"non-claims page ok: {len(found)} modules")
         return 0
-    OUT.write_text(page)
+    OUT.write_text(page, encoding="utf-8", newline="\n")
     print(f"updated {OUT.relative_to(ROOT)} ({len(found)} modules)")
     return 0
 

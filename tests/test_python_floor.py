@@ -160,7 +160,7 @@ def test_suite_collects_without_pyyaml(tmp_path: Path) -> None:
     suite with it -- so the gate's notice would promise something untrue.
     """
     blocker = tmp_path / "sitecustomize.py"
-    blocker.write_text("import sys\nsys.modules['yaml'] = None\n", encoding="utf-8")
+    blocker.write_text("import sys\nsys.modules['yaml'] = None\n", encoding="utf-8", newline="\n")
 
     environment = dict(os.environ)
     existing = environment.get("PYTHONPATH")
@@ -179,6 +179,7 @@ def test_suite_collects_without_pyyaml(tmp_path: Path) -> None:
         capture_output=True,
         text=True,
         check=False,
+        encoding="utf-8",
     )
 
     # 0 is a clean run and 5 is "everything in this run was skipped"; the

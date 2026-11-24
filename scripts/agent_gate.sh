@@ -68,6 +68,15 @@ if ! python3 -c 'import sys; sys.exit(0 if sys.version_info >= (3, 12) else 1)';
   exit 1
 fi
 
+# The validators print mathematics (an arrow, a subscript) and read each other's
+# output through pipes. Python encodes its standard streams with the platform's
+# default, which on Windows is a legacy code page that has no arrow, so a
+# validator there died in print() with UnicodeEncodeError (issue #84). This pins
+# the streams, and only the streams: every file is opened with an explicit
+# encoding at its call site, which tests/test_text_io_explicit.py enforces. On a
+# UTF-8 locale it changes nothing.
+export PYTHONIOENCODING=utf-8
+
 skip_self_tests() { [ "$lean_only" = 1 ]; }
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"

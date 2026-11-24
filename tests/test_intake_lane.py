@@ -48,12 +48,13 @@ def run(tmp_path: Path, rows: list[dict], next_id: int = 2) -> subprocess.Comple
     payload["intake"] = rows
     payload["next_id"] = next_id
     try:
-        INTAKE.write_text(json.dumps(payload, indent=2), encoding="utf-8")
+        INTAKE.write_text(json.dumps(payload, indent=2), encoding="utf-8", newline="\n")
         return subprocess.run(
-            [sys.executable, str(VALIDATOR)], capture_output=True, text=True, cwd=ROOT
+            [sys.executable, str(VALIDATOR)], capture_output=True, text=True, cwd=ROOT,
+            encoding="utf-8",
         )
     finally:
-        INTAKE.write_text(original, encoding="utf-8")
+        INTAKE.write_text(original, encoding="utf-8", newline="\n")
 
 
 def message(result: subprocess.CompletedProcess) -> str:
@@ -62,7 +63,8 @@ def message(result: subprocess.CompletedProcess) -> str:
 
 def test_shipped_lane_validates() -> None:
     result = subprocess.run(
-        [sys.executable, str(VALIDATOR)], capture_output=True, text=True, cwd=ROOT
+        [sys.executable, str(VALIDATOR)], capture_output=True, text=True, cwd=ROOT,
+        encoding="utf-8",
     )
     assert result.returncode == 0, message(result)
 
