@@ -124,4 +124,15 @@ example (Φ : CostPerformance 1 (Fin 2)) :
       aggregatePerformance Φ scheduleFin3Last :=
   no_free_lunch Φ scheduleFin3First scheduleFin3Last
 
+/--
+The closed form behind the supervised NFL, evaluated: on `Fin 2 → Fin 2` with
+training set `{0}`, the constant-0 learner's aggregate off-training-set loss is
+exactly `2`. This is `aggregateOffTrainingLoss_eq` read as a number,
+`|Sᶜ| · (|Y| − 1) · |Y|^(|X| − 1) = 1 · 1 · 2`: of the four targets, any learner
+is wrong at the one unseen point on two.
+-/
+example : aggregateOffTrainingLoss trainOn0 learnerConst0 = 2 := by
+  rw [aggregateOffTrainingLoss_eq]
+  simp [trainOn0, sub_eq_iff_eq_add, one_add_one_eq_two]
+
 end AISafetyAtlas.Examples.FirstContribution
