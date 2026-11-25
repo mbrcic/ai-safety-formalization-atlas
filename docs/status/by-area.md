@@ -247,7 +247,7 @@ Catalogued, no atlas Lean:
 | BY-044 | Limited self-awareness | `AISafetyAtlas.SelfAwareness.Model.limited_self_awareness`<br>`AISafetyAtlas.SelfAwareness.Model.not_agentAware_of_maximal`<br>`AISafetyAtlas.SelfAwareness.Model.not_aware_of_le`<br>`AISafetyAtlas.SelfAwareness.Model.not_perfectlySelfAware`<br>`AISafetyAtlas.SelfAwareness.Model.process_not_self_aware` |
 | CLM-WOLPERT-KNOW-001 | Physical knowledge by inference devices | `AISafetyAtlas.Inference.PhysicalKnowledgeWitness.eq_target_on_of_refinesOn`<br>`AISafetyAtlas.Inference.PhysicallyKnows.weaklyInfers`<br>`AISafetyAtlas.Inference.exists_never_physicallyKnown`<br>`AISafetyAtlas.Inference.not_physicallyKnows_true_and_false`<br>`AISafetyAtlas.Inference.physicallyKnows_false_iff_not_true` |
 | CLM-WOLPERT-EPISTEMIC-001 | Epistemic consequences of physical knowledge | `AISafetyAtlas.Inference.corollary20_ii`<br>`AISafetyAtlas.Inference.corollary23`<br>`AISafetyAtlas.Inference.corollary24`<br>`AISafetyAtlas.Inference.exists_three_inequivalent_not_weaklyInfers` |
-| LAND-WOLPERT-KNOW-DEFECTS-001 | Countermodels to Wolpert 2018 epistemic claims | `AISafetyAtlas.Inference.corollary21_ii_repaired` |
+| LAND-WOLPERT-KNOW-DEFECTS-001 | Countermodels to Wolpert 2018 epistemic claims | `AISafetyAtlas.Inference.corollary21_ii_repaired`<br>`AISafetyAtlas.Inference.prop12_repaired`<br>`AISafetyAtlas.Inference.prop8_bound_sharp` |
 | LAND-ATTR-001 | Attribution impossibility (DASH trilemma) | `AISafetyAtlas.Explainability.attribution_impossibility`<br>`AISafetyAtlas.Explainability.attribution_impossibility_weak` |
 | LAND-CAUSAL-KNOW-001 | Behavioural identifiability as a knowability factorization | `AISafetyAtlas.Causal.behaviorEq_iff_behavior_eq`<br>`AISafetyAtlas.Causal.exists_behaviorEq_pair_of_not_knowable` |
 | LAND-SELFREF-001 | The self-model as a component of the state it models | `AISafetyAtlas.Knowledge.SelfReference.card_rest_le_one_of_selfComplete`<br>`AISafetyAtlas.Knowledge.SelfReference.not_selfComplete_of_two_rest`<br>`AISafetyAtlas.Knowledge.SelfReference.selfComplete_iff_subsingleton_rest` |
@@ -393,7 +393,7 @@ Catalogued, no atlas Lean:
 | BY-016 | Undefinability | `AISafetyAtlas.Logic.tarski_undefinability` |
 | BY-027 | Löb's theorem (unverifiability) | `AISafetyAtlas.Logic.loeb` |
 | CLM-WOLPERT-EPISTEMIC-001 | Epistemic consequences of physical knowledge | `AISafetyAtlas.Inference.corollary20_ii`<br>`AISafetyAtlas.Inference.corollary23`<br>`AISafetyAtlas.Inference.corollary24`<br>`AISafetyAtlas.Inference.exists_three_inequivalent_not_weaklyInfers` |
-| LAND-WOLPERT-KNOW-DEFECTS-001 | Countermodels to Wolpert 2018 epistemic claims | `AISafetyAtlas.Inference.corollary21_ii_repaired` |
+| LAND-WOLPERT-KNOW-DEFECTS-001 | Countermodels to Wolpert 2018 epistemic claims | `AISafetyAtlas.Inference.corollary21_ii_repaired`<br>`AISafetyAtlas.Inference.prop12_repaired`<br>`AISafetyAtlas.Inference.prop8_bound_sharp` |
 | CLM-LAWVERE-001 | Lawvere fixed-point theorem (types and functions) | `AISafetyAtlas.Logic.lawvere_fixed_point` |
 | LAND-SOV-INSTITUTION-001 | A Horn derivation is not counts-as, and the proof is two theorems | `AISafetyAtlas.Sovereignty.Institution.exists_recognized_not_authorized`<br>`AISafetyAtlas.Sovereignty.countsAs_validates_refl_and_trans`<br>`AISafetyAtlas.Sovereignty.no_authority_from_ungrounded_cycles` |
 

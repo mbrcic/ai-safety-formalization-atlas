@@ -873,6 +873,22 @@ that line cancel, so the expression is `−Σ_x log₂ μ(x)`, which is not
 Nothing in the 2008 complexity layer depends on Proposition 12; Theorem 4's
 emulation bound is a different statement and is unaffected.
 
+### Repaired (2026-11-24)
+
+The printed chain breaks at a second place. Step 1 bounds
+`Σ_δ min ℳ(x)` by `Σ_{x ∈ X(U)} ℳ(x)`, which needs the minimizing setups of the
+different probes to be distinct. They need not be: a setup whose fibre never
+takes either of two values `γ, γ′` (its conclusion `false` throughout) answers
+both probes, so for `|Γ(U)| ≥ 3` the left side can count one length several
+times. `prop12_repaired` proves the printed conclusion under
+`HeavyAnsweringSelection`, an injective choice of answering setups, each of mass
+at least `1/|Γ(U)|`. Neither half suffices alone. The four-state countermodel has
+distinct answering setups and still fails (`prop12_distinct_insufficient`), and a
+five-state model with `|Γ(U)| = 4` meets the mass bound at every setup and fails
+by `2 ln 3` (`prop12_massBound_insufficient`). `prop12_step3_term_iff` shows the
+mass bound is exactly what step 3's term comparison asserts. A uniform four-state
+model attains the repaired bound with equality.
+
 ## 24. Proposition 14's Figure 7 does not establish Proposition 14
 
 A **Wolpert 2018** clash. The printed statement is true — `exists_complexity_inversion`
@@ -1001,6 +1017,18 @@ The intermediate numerator is printed as
 equality asserts. Changing the final `+ b_x` to `− b_x` makes the two agree, so
 this reads as a typo rather than a mathematical error, and the identity it leads
 to is the correct one. Recorded for completeness only.
+
+### Repaired (2026-11-24)
+
+The sharpness claim is true; only Example 6's computation is not.
+`prop8_bound_sharp` attains Proposition 8's bound at every `|Γ(U)| ≥ 1` and every
+value of `max_x E_P(Y | x)` in `[−1, 1]`, by Example 6's own construction at a
+device whose `E_P(Y | x)` is constant. For every device, the construction (each
+universe split into `n` equal-mass labelled copies, `CellUniform`) has accuracy
+`(2 − n) · min_x E_P(Y | x) / n` for `n ≥ 2` (`example6_accuracy`), and
+`example6_attains_prop8_bound_iff` says it attains the bound exactly when
+`n ≤ 2` or `E_P(Y | x)` is constant. The heading above stands: Example 6 as
+printed does not establish sharpness, and sharpness holds.
 
 ## 26. Corollary 21(ii)'s two implications are transposed
 

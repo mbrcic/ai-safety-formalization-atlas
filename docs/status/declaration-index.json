@@ -3,7 +3,7 @@
   "generated_by": "scripts/generate_declaration_index.py",
   "note": "Declaration index walked from the elaborated environment, not from source text. Consumed by the prose checks so that a name resolves only when it is a real declaration.",
   "prefix": "AISafetyAtlas",
-  "count": 13282,
+  "count": 13358,
   "declarations": [
     {
       "name": "AISafetyAtlas",
@@ -21181,7 +21181,67 @@
       "module": "AISafetyAtlas.Examples.Inference.EntropyBound"
     },
     {
+      "name": "AISafetyAtlas.Examples.Inference.EntropyBound.collision_lacks_only_distinctness",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Inference.EntropyBound"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Inference.EntropyBound.countermodel_lacks_only_mass",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Inference.EntropyBound"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Inference.EntropyBound.instIsProbabilityMeasureFinOfNatNatUniformMeasure",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Inference.EntropyBound"
+    },
+    {
       "name": "AISafetyAtlas.Examples.Inference.EntropyBound.prop12_is_refuted",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Inference.EntropyBound"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Inference.EntropyBound.step3_term_at_half_and_quarter",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Inference.EntropyBound"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Inference.EntropyBound.uniformMeasure",
+      "kind": "def",
+      "module": "AISafetyAtlas.Examples.Inference.EntropyBound"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Inference.EntropyBound.uniformPMF",
+      "kind": "def",
+      "module": "AISafetyAtlas.Examples.Inference.EntropyBound"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Inference.EntropyBound.uniform_bound",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Inference.EntropyBound"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Inference.EntropyBound.uniform_complexity",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Inference.EntropyBound"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Inference.EntropyBound.uniform_heavyAnsweringSelection",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Inference.EntropyBound"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Inference.EntropyBound.uniform_mass",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Inference.EntropyBound"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Inference.EntropyBound.uniform_prop12_repaired",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Inference.EntropyBound"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Inference.EntropyBound.uniform_prop12_repaired_of_massBound",
       "kind": "theorem",
       "module": "AISafetyAtlas.Examples.Inference.EntropyBound"
     },
@@ -21991,6 +22051,16 @@
       "module": "AISafetyAtlas.Examples.Inference.Sharpness"
     },
     {
+      "name": "AISafetyAtlas.Examples.Inference.Sharpness.ex6Profile_le_one",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Inference.Sharpness"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Inference.Sharpness.ex6_corrected_formula",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Inference.Sharpness"
+    },
+    {
       "name": "AISafetyAtlas.Examples.Inference.Sharpness.ex6_holds_and_is_slack",
       "kind": "theorem",
       "module": "AISafetyAtlas.Examples.Inference.Sharpness"
@@ -22006,12 +22076,37 @@
       "module": "AISafetyAtlas.Examples.Inference.Sharpness"
     },
     {
+      "name": "AISafetyAtlas.Examples.Inference.Sharpness.ex6_probe_identity",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Inference.Sharpness"
+    },
+    {
       "name": "AISafetyAtlas.Examples.Inference.Sharpness.ex6_pushOnImage_marginal",
       "kind": "theorem",
       "module": "AISafetyAtlas.Examples.Inference.Sharpness"
     },
     {
+      "name": "AISafetyAtlas.Examples.Inference.Sharpness.example6_attained_at_three",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Inference.Sharpness"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Inference.Sharpness.example6_attained_at_three_cellUniform",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Inference.Sharpness"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Inference.Sharpness.example6_min_at_three",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Inference.Sharpness"
+    },
+    {
       "name": "AISafetyAtlas.Examples.Inference.Sharpness.gibbs_cell_at_quarter",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Examples.Inference.Sharpness"
+    },
+    {
+      "name": "AISafetyAtlas.Examples.Inference.Sharpness.halfProfile_le_one",
       "kind": "theorem",
       "module": "AISafetyAtlas.Examples.Inference.Sharpness"
     },
@@ -37661,6 +37756,11 @@
       "module": "AISafetyAtlas.Inference.Complexity"
     },
     {
+      "name": "AISafetyAtlas.Inference.CellUniform",
+      "kind": "def",
+      "module": "AISafetyAtlas.Inference.Stochastic.Sharpness"
+    },
+    {
       "name": "AISafetyAtlas.Inference.Complexity",
       "kind": "module",
       "module": "AISafetyAtlas.Inference.Complexity"
@@ -38064,6 +38164,11 @@
       "name": "AISafetyAtlas.Inference.HaltsAt",
       "kind": "def",
       "module": "AISafetyAtlas.Inference.Complexity.Halting"
+    },
+    {
+      "name": "AISafetyAtlas.Inference.HeavyAnsweringSelection",
+      "kind": "def",
+      "module": "AISafetyAtlas.Inference.Complexity.EntropyBound"
     },
     {
       "name": "AISafetyAtlas.Inference.ImageValue",
@@ -39071,6 +39176,11 @@
       "module": "AISafetyAtlas.Inference.Stochastic"
     },
     {
+      "name": "AISafetyAtlas.Inference.condExpect_probe_of_cellUniform",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Inference.Stochastic.Sharpness"
+    },
+    {
       "name": "AISafetyAtlas.Inference.condExpect_sum",
       "kind": "theorem",
       "module": "AISafetyAtlas.Inference.Stochastic"
@@ -39296,6 +39406,11 @@
       "module": "AISafetyAtlas.Inference.Complexity.EntropyBound"
     },
     {
+      "name": "AISafetyAtlas.Inference.entropyOn_eq_sum_mul_measureLength",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Inference.Complexity.EntropyBound"
+    },
+    {
       "name": "AISafetyAtlas.Inference.entropyOn_toMeasure",
       "kind": "theorem",
       "module": "AISafetyAtlas.Inference.Stochastic.Bridge"
@@ -39386,7 +39501,17 @@
       "module": "AISafetyAtlas.Inference.Stochastic.Sharpness"
     },
     {
+      "name": "AISafetyAtlas.Inference.ex6_accuracy_via_min",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Inference.Stochastic.Sharpness"
+    },
+    {
       "name": "AISafetyAtlas.Inference.ex6_bound_not_attained",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Inference.Stochastic.Sharpness"
+    },
+    {
+      "name": "AISafetyAtlas.Inference.ex6_cellUniform",
       "kind": "theorem",
       "module": "AISafetyAtlas.Inference.Stochastic.Sharpness"
     },
@@ -39437,6 +39562,26 @@
     },
     {
       "name": "AISafetyAtlas.Inference.ex6_realizedValues",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Inference.Stochastic.Sharpness"
+    },
+    {
+      "name": "AISafetyAtlas.Inference.example6_accuracy",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Inference.Stochastic.Sharpness"
+    },
+    {
+      "name": "AISafetyAtlas.Inference.example6_attains_prop8_bound",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Inference.Stochastic.Sharpness"
+    },
+    {
+      "name": "AISafetyAtlas.Inference.example6_attains_prop8_bound_iff",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Inference.Stochastic.Sharpness"
+    },
+    {
+      "name": "AISafetyAtlas.Inference.example6_power_accuracy",
       "kind": "theorem",
       "module": "AISafetyAtlas.Inference.Stochastic.Sharpness"
     },
@@ -39991,6 +40136,11 @@
       "module": "AISafetyAtlas.Inference.Stochastic.Measure"
     },
     {
+      "name": "AISafetyAtlas.Inference.inferenceAccuracy_eq_of_cellUniform",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Inference.Stochastic.Sharpness"
+    },
+    {
       "name": "AISafetyAtlas.Inference.inferenceAccuracy_eq_of_two_setups",
       "kind": "theorem",
       "module": "AISafetyAtlas.Inference.Stochastic"
@@ -40004,6 +40154,21 @@
       "name": "AISafetyAtlas.Inference.inferenceAccuracy_eq_one_of_weaklyInfers",
       "kind": "theorem",
       "module": "AISafetyAtlas.Inference.Stochastic"
+    },
+    {
+      "name": "AISafetyAtlas.Inference.inferenceAccuracy_eq_prop8_bound_iff_of_cellUniform",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Inference.Stochastic.Sharpness"
+    },
+    {
+      "name": "AISafetyAtlas.Inference.inferenceAccuracy_eq_prop8_bound_of_card_eq_one",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Inference.Stochastic.Sharpness"
+    },
+    {
+      "name": "AISafetyAtlas.Inference.inferenceAccuracy_eq_prop8_bound_of_cellUniform",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Inference.Stochastic.Sharpness"
     },
     {
       "name": "AISafetyAtlas.Inference.inferenceAccuracy_ge",
@@ -40134,6 +40299,11 @@
       "name": "AISafetyAtlas.Inference.instFiniteRangeProd",
       "kind": "theorem",
       "module": "AISafetyAtlas.Inference.Stochastic.Measure"
+    },
+    {
+      "name": "AISafetyAtlas.Inference.instIsProbabilityMeasureFinOfNatNatProp12CollideMeasure",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Inference.Complexity.EntropyBound"
     },
     {
       "name": "AISafetyAtlas.Inference.intelligibleQuestion",
@@ -40444,6 +40614,11 @@
       "name": "AISafetyAtlas.Inference.measureLength_count",
       "kind": "theorem",
       "module": "AISafetyAtlas.Inference.Complexity.Measure"
+    },
+    {
+      "name": "AISafetyAtlas.Inference.measureLength_nonneg",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Inference.Complexity.EntropyBound"
     },
     {
       "name": "AISafetyAtlas.Inference.measureLength_sub_measureLength",
@@ -40856,6 +41031,41 @@
       "module": "AISafetyAtlas.Inference.Stochastic"
     },
     {
+      "name": "AISafetyAtlas.Inference.powerDevice",
+      "kind": "def",
+      "module": "AISafetyAtlas.Inference.Stochastic.Sharpness"
+    },
+    {
+      "name": "AISafetyAtlas.Inference.powerMass",
+      "kind": "def",
+      "module": "AISafetyAtlas.Inference.Stochastic.Sharpness"
+    },
+    {
+      "name": "AISafetyAtlas.Inference.powerPMF",
+      "kind": "def",
+      "module": "AISafetyAtlas.Inference.Stochastic.Sharpness"
+    },
+    {
+      "name": "AISafetyAtlas.Inference.powerPMF.congr_simp",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Inference.Stochastic.Sharpness"
+    },
+    {
+      "name": "AISafetyAtlas.Inference.power_condExpect",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Inference.Stochastic.Sharpness"
+    },
+    {
+      "name": "AISafetyAtlas.Inference.power_positiveMassSetups",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Inference.Stochastic.Sharpness"
+    },
+    {
+      "name": "AISafetyAtlas.Inference.power_pushOnImage",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Inference.Stochastic.Sharpness"
+    },
+    {
       "name": "AISafetyAtlas.Inference.prefixFreeOn_iff_prefixFree",
       "kind": "theorem",
       "module": "AISafetyAtlas.Inference.Complexity.Halting"
@@ -40899,6 +41109,96 @@
       "name": "AISafetyAtlas.Inference.prop11_of_independentOn",
       "kind": "theorem",
       "module": "AISafetyAtlas.Inference.Stochastic.Measure"
+    },
+    {
+      "name": "AISafetyAtlas.Inference.prop12CollideDevice",
+      "kind": "def",
+      "module": "AISafetyAtlas.Inference.Complexity.EntropyBound"
+    },
+    {
+      "name": "AISafetyAtlas.Inference.prop12CollideGamma",
+      "kind": "def",
+      "module": "AISafetyAtlas.Inference.Complexity.EntropyBound"
+    },
+    {
+      "name": "AISafetyAtlas.Inference.prop12CollideMass",
+      "kind": "def",
+      "module": "AISafetyAtlas.Inference.Complexity.EntropyBound"
+    },
+    {
+      "name": "AISafetyAtlas.Inference.prop12CollideMeasure",
+      "kind": "def",
+      "module": "AISafetyAtlas.Inference.Complexity.EntropyBound"
+    },
+    {
+      "name": "AISafetyAtlas.Inference.prop12CollidePMF",
+      "kind": "def",
+      "module": "AISafetyAtlas.Inference.Complexity.EntropyBound"
+    },
+    {
+      "name": "AISafetyAtlas.Inference.prop12CollideX",
+      "kind": "def",
+      "module": "AISafetyAtlas.Inference.Complexity.EntropyBound"
+    },
+    {
+      "name": "AISafetyAtlas.Inference.prop12CollideY",
+      "kind": "def",
+      "module": "AISafetyAtlas.Inference.Complexity.EntropyBound"
+    },
+    {
+      "name": "AISafetyAtlas.Inference.prop12Collide_answering_of_ne_three",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Inference.Complexity.EntropyBound"
+    },
+    {
+      "name": "AISafetyAtlas.Inference.prop12Collide_answering_three",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Inference.Complexity.EntropyBound"
+    },
+    {
+      "name": "AISafetyAtlas.Inference.prop12Collide_complexity",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Inference.Complexity.EntropyBound"
+    },
+    {
+      "name": "AISafetyAtlas.Inference.prop12Collide_entropy",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Inference.Complexity.EntropyBound"
+    },
+    {
+      "name": "AISafetyAtlas.Inference.prop12Collide_gap",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Inference.Complexity.EntropyBound"
+    },
+    {
+      "name": "AISafetyAtlas.Inference.prop12Collide_massBound",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Inference.Complexity.EntropyBound"
+    },
+    {
+      "name": "AISafetyAtlas.Inference.prop12Collide_mass_false",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Inference.Complexity.EntropyBound"
+    },
+    {
+      "name": "AISafetyAtlas.Inference.prop12Collide_mass_true",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Inference.Complexity.EntropyBound"
+    },
+    {
+      "name": "AISafetyAtlas.Inference.prop12Collide_not_injective_selection",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Inference.Complexity.EntropyBound"
+    },
+    {
+      "name": "AISafetyAtlas.Inference.prop12Collide_rangeFinset",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Inference.Complexity.EntropyBound"
+    },
+    {
+      "name": "AISafetyAtlas.Inference.prop12Collide_weaklyInfers",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Inference.Complexity.EntropyBound"
     },
     {
       "name": "AISafetyAtlas.Inference.prop12Device",
@@ -40951,12 +41251,27 @@
       "module": "AISafetyAtlas.Inference.Complexity.EntropyBound"
     },
     {
+      "name": "AISafetyAtlas.Inference.prop12_distinct_insufficient",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Inference.Complexity.EntropyBound"
+    },
+    {
       "name": "AISafetyAtlas.Inference.prop12_entropy",
       "kind": "theorem",
       "module": "AISafetyAtlas.Inference.Complexity.EntropyBound"
     },
     {
       "name": "AISafetyAtlas.Inference.prop12_gap",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Inference.Complexity.EntropyBound"
+    },
+    {
+      "name": "AISafetyAtlas.Inference.prop12_injective_selection",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Inference.Complexity.EntropyBound"
+    },
+    {
+      "name": "AISafetyAtlas.Inference.prop12_massBound_insufficient",
       "kind": "theorem",
       "module": "AISafetyAtlas.Inference.Complexity.EntropyBound"
     },
@@ -40971,12 +41286,32 @@
       "module": "AISafetyAtlas.Inference.Complexity.EntropyBound"
     },
     {
+      "name": "AISafetyAtlas.Inference.prop12_not_heavyAnsweringSelection",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Inference.Complexity.EntropyBound"
+    },
+    {
       "name": "AISafetyAtlas.Inference.prop12_rangeFinset",
       "kind": "theorem",
       "module": "AISafetyAtlas.Inference.Complexity.EntropyBound"
     },
     {
       "name": "AISafetyAtlas.Inference.prop12_refuted",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Inference.Complexity.EntropyBound"
+    },
+    {
+      "name": "AISafetyAtlas.Inference.prop12_repaired",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Inference.Complexity.EntropyBound"
+    },
+    {
+      "name": "AISafetyAtlas.Inference.prop12_repaired_of_massBound",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Inference.Complexity.EntropyBound"
+    },
+    {
+      "name": "AISafetyAtlas.Inference.prop12_step3_term_iff",
       "kind": "theorem",
       "module": "AISafetyAtlas.Inference.Complexity.EntropyBound"
     },
@@ -41064,6 +41399,11 @@
       "name": "AISafetyAtlas.Inference.prop6_product_le_iSup",
       "kind": "theorem",
       "module": "AISafetyAtlas.Inference.Stochastic.Bounds"
+    },
+    {
+      "name": "AISafetyAtlas.Inference.prop8_bound_sharp",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Inference.Stochastic.Sharpness"
     },
     {
       "name": "AISafetyAtlas.Inference.pushOnImage",
@@ -41179,6 +41519,46 @@
       "name": "AISafetyAtlas.Inference.recursive_iff_refines",
       "kind": "theorem",
       "module": "AISafetyAtlas.Inference.Complexity.Halting"
+    },
+    {
+      "name": "AISafetyAtlas.Inference.refineDevice",
+      "kind": "def",
+      "module": "AISafetyAtlas.Inference.Stochastic.Sharpness"
+    },
+    {
+      "name": "AISafetyAtlas.Inference.refinePMF",
+      "kind": "def",
+      "module": "AISafetyAtlas.Inference.Stochastic.Sharpness"
+    },
+    {
+      "name": "AISafetyAtlas.Inference.refinePMF.congr_simp",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Inference.Stochastic.Sharpness"
+    },
+    {
+      "name": "AISafetyAtlas.Inference.refine_cellUniform",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Inference.Stochastic.Sharpness"
+    },
+    {
+      "name": "AISafetyAtlas.Inference.refine_condExpect",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Inference.Stochastic.Sharpness"
+    },
+    {
+      "name": "AISafetyAtlas.Inference.refine_positiveMassSetups",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Inference.Stochastic.Sharpness"
+    },
+    {
+      "name": "AISafetyAtlas.Inference.refine_pushOnImage",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Inference.Stochastic.Sharpness"
+    },
+    {
+      "name": "AISafetyAtlas.Inference.refine_realizedValues_card",
+      "kind": "theorem",
+      "module": "AISafetyAtlas.Inference.Stochastic.Sharpness"
     },
     {
       "name": "AISafetyAtlas.Inference.relativeLength",

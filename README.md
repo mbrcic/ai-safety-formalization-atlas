@@ -23,7 +23,7 @@ mathematics to AI systems.
   for AI safety mathematics*](https://doi.org/10.5281/zenodo.23088951) (preprint,
   2026; DOI for all versions)
 - **Software:** [DOI for all versions](https://doi.org/10.5281/zenodo.21483033);
-  latest release v0.10.0
+  latest release v0.10.1
 - **Start:** [Open in Codespaces](https://codespaces.new/mbrcic/ai-safety-formalization-atlas?quickstart=1)
   — the toolchain provisions itself and one example compiles in minutes — then
   pick a [first task](docs/guide/contributor-tasks.md#open-now). Prefer local?
@@ -35,7 +35,7 @@ mathematics to AI systems.
 <!-- BEGIN GENERATED REGISTRY SCOPE -->
 | Metric | Current |
 |---|---:|
-| Declarations recorded in the registry | **379** |
+| Declarations recorded in the registry | **381** |
 | Results stating a source claim | **49** |
 | Results recording a formalization only | **95** (86 on root import) |
 | AI-system bridges (`BRIDGE` declarations) | **37**: 30 interpretation-reviewed, 7 statement-reviewed only |
@@ -258,12 +258,12 @@ Add it to your `lakefile.toml`. There is no Reservoir entry, so require it by gi
 [[require]]
 name = "ai-safety-formalization-atlas"
 git = "https://github.com/mbrcic/ai-safety-formalization-atlas.git"
-rev = "v0.10.0"
+rev = "v0.10.1"
 ```
 
-`v0.10.0` is the published release and is what that stanza gets you. **The module
+`v0.10.1` is the published release and is what that stanza gets you. **The module
 list below describes the working tree, which is ahead of it** — anything added
-since the tag is not in `v0.10.0`, so check the tag's own module list before
+since the tag is not in `v0.10.1`, so check the tag's own module list before
 depending on a name you read here.
 
 Then `import AISafetyAtlas.Knowledge` (or whichever module below) and instantiate

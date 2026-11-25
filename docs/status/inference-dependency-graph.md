@@ -10,7 +10,7 @@ Edges come from the elaborated Lean environment. This answers the question the p
 
 So `A → B` means *`B` occurs in `A`'s statement, or in `A`'s body when `A` is a definition*. A lemma used only inside a proof does not appear. Reading the table as a complete call graph would be wrong, and the two sections below are scoped so that they stay true under this limit.
 
-`682` authored declarations in `AISafetyAtlas.Inference.*` (434 theorems). Compiler-generated companions and projections are dropped.
+`736` authored declarations in `AISafetyAtlas.Inference.*` (474 theorems). Compiler-generated companions and projections are dropped.
 
 ## Load-bearing declarations
 
@@ -18,76 +18,86 @@ Named in the statements of eight or more others. A change to one of these is a c
 
 | Declaration | Named by |
 |---|---|
-| `InferenceDevice` | 386 |
-| `InferenceDevice.Setup` | 368 |
-| `InferenceDevice.setup` | 301 |
-| `InferenceDevice.concl` | 150 |
-| `FiniteRange` | 103 |
+| `InferenceDevice.Setup` | 411 |
+| `InferenceDevice` | 409 |
+| `InferenceDevice.setup` | 340 |
+| `InferenceDevice.concl` | 166 |
+| `FiniteRange` | 107 |
+| `FinPMF` | 101 |
 | `InferenceDevice.Realized` | 95 |
-| `FinPMF` | 83 |
-| `WeaklyInfers` | 82 |
-| `instFiniteRangeOfFinite` | 72 |
+| `instFiniteRangeOfFinite` | 91 |
+| `WeaklyInfers` | 85 |
+| `massOn` | 74 |
 | `SelfAwareDevice` | 66 |
-| `massOn` | 65 |
+| `rangeFinset` | 62 |
+| `probe` | 56 |
 | `StronglyInfers` | 50 |
 | `SelfAwareDevice.question` | 48 |
 | `SelfAwareDevice.Question` | 48 |
-| `rangeFinset` | 46 |
-| `probe` | 45 |
+| `inferenceAccuracy` | 44 |
+| `condExpect` | 36 |
+| `boolPm` | 35 |
+| `answeringSet` | 34 |
 | `SelfAwareDevice.toDevice` | 33 |
 | `PhysicallyKnows` | 33 |
-| `inferenceAccuracy` | 30 |
-| `pushOnImage` | 27 |
+| `pushOnImage` | 29 |
 | `DeviceReality` | 26 |
-| `answeringSet` | 25 |
+| `inferenceComplexityMeasure` | 25 |
 | `IsProbe` | 25 |
+| `FinPMF.mass` | 25 |
 | `Distinguishable` | 25 |
-| `FinPMF.mass` | 23 |
+| `measureLength` | 23 |
+| `positiveMassSetups` | 22 |
 | `SemiControls` | 22 |
 | `Intelligible` | 22 |
-| `measureLength` | 21 |
-| `condExpect` | 21 |
+| `realizedValues` | 21 |
 | `setupLength` | 20 |
-| `boolPm` | 20 |
 | `InfersDevice` | 20 |
+| `ex6PMF` | 19 |
+| `entropyOn` | 19 |
 | `condExpectPmOn` | 19 |
 | `RefinesOn` | 19 |
 | `Prop6Quadruple` | 19 |
+| `prop12Gamma` | 17 |
+| `positiveMassSetups_nonempty` | 17 |
 | `Implies` | 17 |
 | `FullReality` | 17 |
-| `inferenceComplexityMeasure` | 15 |
-| `ex6PMF` | 15 |
+| `realizedSetups` | 16 |
+| `FinPMF.toMeasure` | 16 |
+| `prop12Device` | 15 |
 | `SelfAwareDevice.eval` | 15 |
 | `Copies` | 15 |
 | `setupMass` | 14 |
 | `inferenceAccuracyOn` | 14 |
 | `PhysicalKnowledgeWitness` | 14 |
 | `Infallible` | 14 |
-| `FinPMF.toMeasure` | 14 |
 | `prop6Expr` | 13 |
+| `ex6Device` | 13 |
 | `TrueOn` | 13 |
 | `LargeSetupFibres` | 13 |
-| `realizedSetups` | 12 |
 | `inferenceComplexity` | 12 |
+| `ex6Gamma` | 12 |
 | `IndependentOn` | 12 |
 | `FullReality.conclOf` | 12 |
 | `Controls` | 12 |
+| `refinePMF` | 11 |
+| `refineDevice` | 11 |
+| `prop12X` | 11 |
 | `fig6PMF` | 11 |
 | `StatisticallyIndependent` | 11 |
+| `prop12Measure` | 10 |
+| `prop12CollideGamma` | 10 |
 | `invMeasure` | 10 |
 | `invGamma` | 10 |
 | `inferenceComplexityTotal` | 10 |
-| `realizedValues` | 9 |
-| `positiveMassSetups` | 9 |
+| `prop12CollideDevice` | 9 |
 | `mutualInfo` | 9 |
-| `ex6Device` | 9 |
 | `emulationCost` | 9 |
 | `FullReality.IsUniversalFull` | 9 |
 | `stochasticInferenceComplexity` | 8 |
-| `prop12Gamma` | 8 |
+| `prop12_weaklyInfers` | 8 |
+| `prop12CollideMeasure` | 8 |
 | `invDevice` | 8 |
-| `ex6Gamma` | 8 |
-| `entropyOn` | 8 |
 | `answeringSetOn` | 8 |
 | `accuracySupOn` | 8 |
 | `ThreeSetupValues` | 8 |
@@ -113,6 +123,7 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 |---|---|---|
 | `AdmissibleTuples` | definition | `RealityTuple` |
 | `AnswersProbe` | definition | `InferenceDevice`, `InferenceDevice.Realized`, `InferenceDevice.Setup`, `InferenceDevice.concl`, `InferenceDevice.setup` |
+| `CellUniform` | definition | `FinPMF`, `FinPMF.mass`, `InferenceDevice`, `InferenceDevice.Setup`, `InferenceDevice.concl`, `InferenceDevice.setup`, `realizedValues` |
 | `Controls` | definition | `InferenceDevice`, `InferenceDevice.Realized`, `InferenceDevice.Setup`, `InferenceDevice.concl`, `InferenceDevice.setup`, `IsProbe` |
 | `Copies` | definition | `InferenceDevice`, `Mimics` |
 | `Copies.symm` | theorem | `Copies`, `InferenceDevice` |
@@ -156,6 +167,7 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 | `FunctionValuedSelfAware.toSelfAware_ask` | theorem | `FunctionValuedSelfAware`, `FunctionValuedSelfAware.askOf`, `FunctionValuedSelfAware.toSelfAware`, `SelfAwareDevice.ask` |
 | `FunctionallyEquivalent` | definition | — |
 | `HaltsAt` | definition | `InferenceDevice`, `InferenceDevice.Setup`, `InferenceDevice.concl`, `InferenceDevice.setup` |
+| `HeavyAnsweringSelection` | definition | `FiniteRange`, `InferenceDevice`, `InferenceDevice.Setup`, `InferenceDevice.setup`, `answeringSet`, `massOn`, `probe`, `rangeFinset` |
 | `ImageValue` | definition | — |
 | `Implies` | definition | `boolImplies` |
 | `IndependentOn` | definition | `massOn` |
@@ -298,6 +310,7 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 | `condExpect_eq_one_of_eq_one` | theorem | `FinPMF`, `FinPMF.mass`, `condExpect` |
 | `condExpect_le_one` | theorem | `FinPMF`, `condExpect` |
 | `condExpect_neg` | theorem | `FinPMF`, `condExpect` |
+| `condExpect_probe_of_cellUniform` | theorem | `CellUniform`, `FinPMF`, `InferenceDevice`, `InferenceDevice.Setup`, `InferenceDevice.concl`, `InferenceDevice.setup`, `boolPm`, `condExpect`, `probe`, `realizedValues` |
 | `condExpect_sum` | theorem | `FinPMF`, `condExpect` |
 | `condLawOn` | definition | `InferenceDevice`, `InferenceDevice.Setup`, `InferenceDevice.setup` |
 | `condLawOn_eq_of_relativeLength_eq_zero` | theorem | `InferenceDevice`, `InferenceDevice.Setup`, `condLawOn`, `relativeLength` |
@@ -341,6 +354,7 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 | `emulationSetOn_nonempty_of_stronglyInfers` | theorem | `InferenceDevice`, `InferenceDevice.Realized`, `InferenceDevice.Setup`, `StronglyInfers`, `emulationSetOn` |
 | `emulationSet_nonempty_of_stronglyInfers` | theorem | `FiniteRange`, `InferenceDevice`, `InferenceDevice.Realized`, `InferenceDevice.Setup`, `InferenceDevice.setup`, `StronglyInfers`, `emulationSet` |
 | `entropyOn` | definition | `FiniteRange`, `massOn`, `rangeFinset` |
+| `entropyOn_eq_sum_mul_measureLength` | theorem | `FiniteRange`, `InferenceDevice`, `InferenceDevice.Setup`, `InferenceDevice.setup`, `entropyOn`, `massOn`, `measureLength`, `rangeFinset` |
 | `entropyOn_toMeasure` | theorem | `FinPMF`, `FinPMF.toMeasure`, `entropyOn`, `instFiniteRangeOfFinite`, `pushOnImage`, `shannonEntropyOn` |
 | `entropySum` | definition | `entropyTerm` |
 | `entropySum_eq_entropyOn` | theorem | `FiniteRange`, `entropyOn`, `entropySum` |
@@ -359,7 +373,9 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 | `ex6X` | definition | — |
 | `ex6Y` | definition | — |
 | `ex6_accuracy` | theorem | `ex6Device`, `ex6Gamma`, `ex6PMF`, `inferenceAccuracy` |
+| `ex6_accuracy_via_min` | theorem | `InferenceDevice.Setup`, `InferenceDevice.concl`, `InferenceDevice.setup`, `boolPm`, `condExpect`, `ex6Device`, `ex6Gamma`, `ex6PMF`, `inferenceAccuracy`, `positiveMassSetups`, `positiveMassSetups_nonempty`, `realizedValues` |
 | `ex6_bound_not_attained` | theorem | `InferenceDevice.Setup`, `InferenceDevice.concl`, `InferenceDevice.setup`, `boolPm`, `condExpect`, `ex6Device`, `ex6Gamma`, `ex6PMF`, `inferenceAccuracy`, `positiveMassSetups`, `positiveMassSetups_nonempty`, `realizedValues` |
+| `ex6_cellUniform` | theorem | `CellUniform`, `ex6Device`, `ex6Gamma`, `ex6PMF` |
 | `ex6_condExpect_Y_false` | theorem | `boolPm`, `condExpect`, `ex6PMF`, `ex6X`, `ex6Y` |
 | `ex6_condExpect_Y_true` | theorem | `boolPm`, `condExpect`, `ex6PMF`, `ex6X`, `ex6Y` |
 | `ex6_condExpect_probe_false` | theorem | `boolPm`, `condExpect`, `ex6Gamma`, `ex6PMF`, `ex6X`, `ex6Y`, `probe` |
@@ -370,6 +386,10 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 | `ex6_prop8_bound` | theorem | `InferenceDevice.Setup`, `InferenceDevice.concl`, `InferenceDevice.setup`, `boolPm`, `condExpect`, `ex6Device`, `ex6Gamma`, `ex6PMF`, `positiveMassSetups`, `positiveMassSetups_nonempty`, `realizedValues` |
 | `ex6_prop8_holds` | theorem | `InferenceDevice.Setup`, `InferenceDevice.concl`, `InferenceDevice.setup`, `boolPm`, `condExpect`, `ex6Device`, `ex6Gamma`, `ex6PMF`, `inferenceAccuracy`, `positiveMassSetups`, `positiveMassSetups_nonempty`, `realizedValues` |
 | `ex6_realizedValues` | theorem | `ex6Gamma`, `realizedValues` |
+| `example6_accuracy` | theorem | `FinPMF`, `InferenceDevice`, `InferenceDevice.Setup`, `InferenceDevice.concl`, `InferenceDevice.setup`, `boolPm`, `condExpect`, `inferenceAccuracy`, `positiveMassSetups`, `positiveMassSetups_nonempty`, `refineDevice`, `refinePMF` |
+| `example6_attains_prop8_bound` | theorem | `FinPMF`, `InferenceDevice`, `InferenceDevice.Setup`, `InferenceDevice.concl`, `InferenceDevice.setup`, `boolPm`, `condExpect`, `inferenceAccuracy`, `positiveMassSetups`, `positiveMassSetups_nonempty`, `refineDevice`, `refinePMF` |
+| `example6_attains_prop8_bound_iff` | theorem | `FinPMF`, `InferenceDevice`, `InferenceDevice.Setup`, `InferenceDevice.concl`, `InferenceDevice.setup`, `boolPm`, `condExpect`, `inferenceAccuracy`, `positiveMassSetups`, `positiveMassSetups_nonempty`, `refineDevice`, `refinePMF` |
+| `example6_power_accuracy` | theorem | `inferenceAccuracy`, `powerDevice`, `powerPMF`, `refineDevice`, `refinePMF` |
 | `exists_admissible_not_corrects` | theorem | `Corrects`, `InferenceDevice`, `InferenceDevice.concl`, `SelfAwareDevice`, `SelfAwareDevice.Question`, `SelfAwareDevice.eval`, `SelfAwareDevice.question` |
 | `exists_admissible_not_corrects_of_four_states` | theorem | `Corrects`, `InferenceDevice`, `SelfAwareDevice`, `SelfAwareDevice.Question`, `SelfAwareDevice.eval`, `SelfAwareDevice.question` |
 | `exists_complexity_inversion` | theorem | `InferenceDevice.Setup`, `InferenceDevice.setup`, `StronglyInfers`, `WeaklyInfers`, `inferenceComplexityMeasure`, `instFiniteRangeOfFinite`, `invDevice`, `invDevice'`, `invGamma`, `invMeasure`, `inv_stronglyInfers`, `inv_weaklyInfers`, `weaklyInfers_of_stronglyInfers` |
@@ -475,9 +495,13 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 | `inferenceAccuracyOn_le_one` | theorem | `FiniteRange`, `InferenceDevice`, `InferenceDevice.Setup`, `InferenceDevice.setup`, `inferenceAccuracyOn` |
 | `inferenceAccuracySupOn` | definition | `FiniteRange`, `InferenceDevice`, `InferenceDevice.concl`, `accuracySupOn`, `probe`, `rangeFinset` |
 | `inferenceAccuracySupOn_ge` | theorem | `FiniteRange`, `InferenceDevice`, `InferenceDevice.Setup`, `InferenceDevice.concl`, `InferenceDevice.setup`, `accuracySupOn`, `inferenceAccuracySupOn`, `massOn`, `rangeFinset` |
+| `inferenceAccuracy_eq_of_cellUniform` | theorem | `CellUniform`, `FinPMF`, `InferenceDevice`, `InferenceDevice.Setup`, `InferenceDevice.concl`, `InferenceDevice.setup`, `boolPm`, `condExpect`, `inferenceAccuracy`, `positiveMassSetups`, `positiveMassSetups_nonempty`, `realizedValues` |
 | `inferenceAccuracy_eq_of_two_setups` | theorem | `FinPMF`, `InferenceDevice`, `InferenceDevice.Realized`, `InferenceDevice.Setup`, `InferenceDevice.concl`, `InferenceDevice.setup`, `boolPm`, `condExpect`, `inferenceAccuracy`, `pushOnImage` |
 | `inferenceAccuracy_eq_one_iff` | theorem | `FinPMF`, `FinPMF.mass`, `InferenceDevice`, `InferenceDevice.Setup`, `WeaklyInfers`, `inferenceAccuracy` |
 | `inferenceAccuracy_eq_one_of_weaklyInfers` | theorem | `FinPMF`, `FinPMF.mass`, `InferenceDevice`, `InferenceDevice.Setup`, `WeaklyInfers`, `inferenceAccuracy` |
+| `inferenceAccuracy_eq_prop8_bound_iff_of_cellUniform` | theorem | `CellUniform`, `FinPMF`, `InferenceDevice`, `InferenceDevice.Setup`, `InferenceDevice.concl`, `InferenceDevice.setup`, `boolPm`, `condExpect`, `inferenceAccuracy`, `positiveMassSetups`, `positiveMassSetups_nonempty`, `realizedValues` |
+| `inferenceAccuracy_eq_prop8_bound_of_card_eq_one` | theorem | `CellUniform`, `FinPMF`, `InferenceDevice`, `InferenceDevice.Setup`, `InferenceDevice.concl`, `InferenceDevice.setup`, `boolPm`, `condExpect`, `inferenceAccuracy`, `positiveMassSetups`, `positiveMassSetups_nonempty`, `realizedValues` |
+| `inferenceAccuracy_eq_prop8_bound_of_cellUniform` | theorem | `CellUniform`, `FinPMF`, `InferenceDevice`, `InferenceDevice.Setup`, `InferenceDevice.concl`, `InferenceDevice.setup`, `boolPm`, `condExpect`, `inferenceAccuracy`, `positiveMassSetups`, `positiveMassSetups_nonempty`, `realizedValues` |
 | `inferenceAccuracy_ge` | theorem | `FinPMF`, `InferenceDevice`, `InferenceDevice.Setup`, `InferenceDevice.concl`, `InferenceDevice.setup`, `boolPm`, `condExpect`, `inferenceAccuracy`, `positiveMassSetups`, `positiveMassSetups_nonempty`, `realizedValues` |
 | `inferenceAccuracy_le_one` | theorem | `FinPMF`, `InferenceDevice`, `InferenceDevice.Setup`, `inferenceAccuracy` |
 | `inferenceAccuracy_nonneg_of_card_eq_two` | theorem | `FinPMF`, `InferenceDevice`, `InferenceDevice.Setup`, `inferenceAccuracy`, `realizedValues` |
@@ -564,6 +588,7 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 | `measureLength` | definition | `InferenceDevice`, `InferenceDevice.Setup`, `InferenceDevice.setup`, `massOn` |
 | `measureLengthBase2` | definition | `InferenceDevice`, `InferenceDevice.Setup`, `InferenceDevice.setup`, `massOn` |
 | `measureLength_count` | theorem | `InferenceDevice`, `InferenceDevice.Setup`, `measureLength`, `setupLength` |
+| `measureLength_nonneg` | theorem | `InferenceDevice`, `InferenceDevice.Setup`, `measureLength` |
 | `measureLength_sub_measureLength` | theorem | `InferenceDevice`, `InferenceDevice.Setup`, `InferenceDevice.setup`, `massOn`, `measureLength` |
 | `measure_pair_eq_mul_of_independentOn` | theorem | `IndependentOn` |
 | `measure_sum_fiber` | theorem | `FiniteRange`, `rangeFinset` |
@@ -642,6 +667,12 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 | `positiveMassSetupsOn_nonempty` | theorem | `FiniteRange`, `InferenceDevice`, `InferenceDevice.Setup`, `InferenceDevice.setup`, `positiveMassSetupsOn` |
 | `positiveMassSetups_eq_pair` | theorem | `FinPMF`, `InferenceDevice`, `InferenceDevice.Realized`, `InferenceDevice.Setup`, `InferenceDevice.setup`, `positiveMassSetups`, `pushOnImage` |
 | `positiveMassSetups_nonempty` | theorem | `FinPMF`, `InferenceDevice`, `InferenceDevice.Setup`, `positiveMassSetups` |
+| `powerDevice` | definition | `InferenceDevice` |
+| `powerMass` | definition | `boolPm` |
+| `powerPMF` | definition | `FinPMF`, `powerMass` |
+| `power_condExpect` | theorem | `InferenceDevice.Setup`, `InferenceDevice.concl`, `InferenceDevice.setup`, `boolPm`, `condExpect`, `powerDevice`, `powerPMF` |
+| `power_positiveMassSetups` | theorem | `InferenceDevice.Setup`, `positiveMassSetups`, `powerDevice`, `powerPMF` |
+| `power_pushOnImage` | theorem | `InferenceDevice.Setup`, `InferenceDevice.setup`, `powerDevice`, `powerPMF`, `pushOnImage` |
 | `prefixFreeOn_iff_prefixFree` | theorem | `FiniteRange`, `HaltsAt`, `InferenceDevice`, `InferenceDevice.Setup`, `InferenceDevice.setup`, `PrefixFree`, `PrefixFreeOn` |
 | `preimage_pair_singleton` | theorem | — |
 | `probe` | definition | — |
@@ -650,6 +681,24 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 | `probeImage_subset_evalImage` | theorem | `Intelligible`, `SelfAwareDevice`, `evalImage`, `probeImage` |
 | `prop11_of_independent` | theorem | `FinPMF`, `InferenceDevice`, `InferenceDevice.Realized`, `InferenceDevice.Setup`, `InferenceDevice.concl`, `InferenceDevice.setup`, `Prop6Quadruple`, `StatisticallyIndependent`, `inferenceAccuracy`, `prop6Expr`, `setupMass` |
 | `prop11_of_independentOn` | theorem | `FiniteRange`, `IndependentOn`, `InferenceDevice`, `InferenceDevice.Realized`, `InferenceDevice.Setup`, `InferenceDevice.concl`, `InferenceDevice.setup`, `Prop6Quadruple`, `inferenceAccuracyOn`, `massOn`, `prop6Expr` |
+| `prop12CollideDevice` | definition | `InferenceDevice`, `prop12CollideX`, `prop12CollideY` |
+| `prop12CollideGamma` | definition | — |
+| `prop12CollideMass` | definition | — |
+| `prop12CollideMeasure` | definition | `FinPMF.toMeasure`, `prop12CollidePMF` |
+| `prop12CollidePMF` | definition | `FinPMF`, `prop12CollideMass` |
+| `prop12CollideX` | definition | — |
+| `prop12CollideY` | definition | — |
+| `prop12Collide_answering_of_ne_three` | theorem | `InferenceDevice.Setup`, `InferenceDevice.setup`, `answeringSet`, `instFiniteRangeOfFinite`, `probe`, `prop12CollideDevice`, `prop12CollideGamma` |
+| `prop12Collide_answering_three` | theorem | `InferenceDevice.Setup`, `InferenceDevice.setup`, `answeringSet`, `instFiniteRangeOfFinite`, `probe`, `prop12CollideDevice`, `prop12CollideGamma` |
+| `prop12Collide_complexity` | theorem | `InferenceDevice.Setup`, `InferenceDevice.setup`, `inferenceComplexityMeasure`, `instFiniteRangeOfFinite`, `prop12CollideDevice`, `prop12CollideGamma`, `prop12CollideMeasure`, `prop12Collide_weaklyInfers` |
+| `prop12Collide_entropy` | theorem | `entropyOn`, `instFiniteRangeOfFinite`, `prop12CollideMeasure`, `prop12CollideX` |
+| `prop12Collide_gap` | theorem | `InferenceDevice.Setup`, `InferenceDevice.setup`, `entropyOn`, `inferenceComplexityMeasure`, `instFiniteRangeOfFinite`, `prop12CollideDevice`, `prop12CollideGamma`, `prop12CollideMeasure`, `prop12CollideX`, `prop12Collide_weaklyInfers`, `rangeFinset` |
+| `prop12Collide_massBound` | theorem | `InferenceDevice.Setup`, `InferenceDevice.setup`, `instFiniteRangeOfFinite`, `massOn`, `prop12CollideDevice`, `prop12CollideGamma`, `prop12CollideMeasure`, `rangeFinset`, `realizedSetups` |
+| `prop12Collide_mass_false` | theorem | `massOn`, `prop12CollideMeasure`, `prop12CollideX` |
+| `prop12Collide_mass_true` | theorem | `massOn`, `prop12CollideMeasure`, `prop12CollideX` |
+| `prop12Collide_not_injective_selection` | theorem | `InferenceDevice.Setup`, `InferenceDevice.setup`, `answeringSet`, `instFiniteRangeOfFinite`, `probe`, `prop12CollideDevice`, `prop12CollideGamma`, `rangeFinset` |
+| `prop12Collide_rangeFinset` | theorem | `instFiniteRangeOfFinite`, `prop12CollideGamma`, `rangeFinset` |
+| `prop12Collide_weaklyInfers` | theorem | `WeaklyInfers`, `prop12CollideDevice`, `prop12CollideGamma` |
 | `prop12Device` | definition | `InferenceDevice`, `prop12X`, `prop12Y` |
 | `prop12Gamma` | definition | — |
 | `prop12Mass` | definition | — |
@@ -660,12 +709,19 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 | `prop12_answering_false` | theorem | `InferenceDevice.Setup`, `InferenceDevice.setup`, `answeringSet`, `instFiniteRangeOfFinite`, `probe`, `prop12Device`, `prop12Gamma` |
 | `prop12_answering_true` | theorem | `InferenceDevice.Setup`, `InferenceDevice.setup`, `answeringSet`, `instFiniteRangeOfFinite`, `probe`, `prop12Device`, `prop12Gamma` |
 | `prop12_complexity` | theorem | `InferenceDevice.Setup`, `InferenceDevice.setup`, `inferenceComplexityMeasure`, `instFiniteRangeOfFinite`, `prop12Device`, `prop12Gamma`, `prop12Measure`, `prop12_weaklyInfers` |
+| `prop12_distinct_insufficient` | theorem | `InferenceDevice.Setup`, `InferenceDevice.setup`, `answeringSet`, `entropyOn`, `inferenceComplexityMeasure`, `instFiniteRangeOfFinite`, `probe`, `prop12Device`, `prop12Gamma`, `prop12Measure`, `prop12X`, `prop12_weaklyInfers`, `rangeFinset` |
 | `prop12_entropy` | theorem | `entropyOn`, `instFiniteRangeOfFinite`, `prop12Measure`, `prop12X` |
 | `prop12_gap` | theorem | `InferenceDevice.Setup`, `InferenceDevice.setup`, `entropyOn`, `inferenceComplexityMeasure`, `instFiniteRangeOfFinite`, `prop12Device`, `prop12Gamma`, `prop12Measure`, `prop12X`, `prop12_weaklyInfers`, `rangeFinset` |
+| `prop12_injective_selection` | theorem | `InferenceDevice.Setup`, `InferenceDevice.setup`, `answeringSet`, `instFiniteRangeOfFinite`, `probe`, `prop12Device`, `prop12Gamma`, `rangeFinset` |
+| `prop12_massBound_insufficient` | theorem | `InferenceDevice.Setup`, `InferenceDevice.setup`, `entropyOn`, `inferenceComplexityMeasure`, `instFiniteRangeOfFinite`, `massOn`, `prop12CollideDevice`, `prop12CollideGamma`, `prop12CollideMeasure`, `prop12Collide_weaklyInfers`, `rangeFinset`, `realizedSetups` |
 | `prop12_mass_false` | theorem | `massOn`, `prop12Measure`, `prop12X` |
 | `prop12_mass_true` | theorem | `massOn`, `prop12Measure`, `prop12X` |
+| `prop12_not_heavyAnsweringSelection` | theorem | `HeavyAnsweringSelection`, `InferenceDevice.Setup`, `InferenceDevice.setup`, `instFiniteRangeOfFinite`, `prop12Device`, `prop12Gamma`, `prop12Measure` |
 | `prop12_rangeFinset` | theorem | `instFiniteRangeOfFinite`, `prop12Gamma`, `rangeFinset` |
 | `prop12_refuted` | theorem | `InferenceDevice.Setup`, `InferenceDevice.setup`, `entropyOn`, `inferenceComplexityMeasure`, `instFiniteRangeOfFinite`, `prop12Device`, `prop12Gamma`, `prop12Measure`, `prop12X`, `prop12_weaklyInfers`, `rangeFinset` |
+| `prop12_repaired` | theorem | `FiniteRange`, `HeavyAnsweringSelection`, `InferenceDevice`, `InferenceDevice.Setup`, `InferenceDevice.setup`, `WeaklyInfers`, `entropyOn`, `inferenceComplexityMeasure`, `rangeFinset` |
+| `prop12_repaired_of_massBound` | theorem | `FiniteRange`, `InferenceDevice`, `InferenceDevice.Setup`, `InferenceDevice.setup`, `WeaklyInfers`, `answeringSet`, `entropyOn`, `inferenceComplexityMeasure`, `massOn`, `probe`, `rangeFinset`, `realizedSetups` |
+| `prop12_step3_term_iff` | theorem | — |
 | `prop12_weaklyInfers` | theorem | `WeaklyInfers`, `prop12Device`, `prop12Gamma` |
 | `prop6Expr` | definition | `Prop6Quadruple`, `Prop6Quadruple.k`, `Prop6Quadruple.m`, `Prop6Quadruple.n` |
 | `prop6Expr_bddAbove` | theorem | `Prop6Quadruple`, `prop6Expr` |
@@ -683,6 +739,7 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 | `prop6_product_eq` | theorem | `FinPMF`, `InferenceDevice`, `InferenceDevice.Realized`, `InferenceDevice.Setup`, `InferenceDevice.concl`, `InferenceDevice.setup`, `Prop6Law`, `inferenceAccuracy`, `prop6Expr`, `prop6QuadrupleOf`, `setupMass` |
 | `prop6_product_eqOn` | theorem | `FiniteRange`, `IndependentOn`, `InferenceDevice`, `InferenceDevice.Realized`, `InferenceDevice.Setup`, `InferenceDevice.concl`, `InferenceDevice.setup`, `inferenceAccuracyOn`, `massOn`, `prop6Expr`, `prop6QuadrupleOfOn` |
 | `prop6_product_le_iSup` | theorem | `FinPMF`, `InferenceDevice`, `InferenceDevice.Realized`, `InferenceDevice.Setup`, `InferenceDevice.concl`, `InferenceDevice.setup`, `Prop6Law`, `Prop6Quadruple`, `inferenceAccuracy`, `prop6Expr`, `pushOnImage`, `setupMass` |
+| `prop8_bound_sharp` | theorem | `FinPMF`, `InferenceDevice`, `InferenceDevice.Setup`, `InferenceDevice.concl`, `InferenceDevice.setup`, `boolPm`, `condExpect`, `inferenceAccuracy`, `positiveMassSetups`, `positiveMassSetups_nonempty`, `realizedValues` |
 | `pushOnImage` | definition | `FinPMF`, `FinPMF.mass` |
 | `pushOnImage_le_one` | theorem | `FinPMF`, `pushOnImage` |
 | `pushOnImage_marginal` | theorem | `FinPMF`, `pushOnImage` |
@@ -704,6 +761,13 @@ Candidates for deletion, not a verdict: a definition here could still be unfolde
 | `realizedValues` | definition | — |
 | `realized_of_pushOnImage_pos` | theorem | `FinPMF`, `pushOnImage` |
 | `recursive_iff_refines` | theorem | `InferenceDevice`, `InferenceDevice.Setup`, `InferenceDevice.concl`, `InferenceDevice.setup`, `Recursive` |
+| `refineDevice` | definition | `InferenceDevice`, `InferenceDevice.Setup`, `InferenceDevice.concl`, `InferenceDevice.setup` |
+| `refinePMF` | definition | `FinPMF`, `FinPMF.mass` |
+| `refine_cellUniform` | theorem | `CellUniform`, `FinPMF`, `InferenceDevice`, `InferenceDevice.Setup`, `refineDevice`, `refinePMF` |
+| `refine_condExpect` | theorem | `FinPMF`, `InferenceDevice`, `InferenceDevice.Setup`, `InferenceDevice.setup`, `condExpect`, `refineDevice`, `refinePMF` |
+| `refine_positiveMassSetups` | theorem | `FinPMF`, `InferenceDevice`, `InferenceDevice.Setup`, `positiveMassSetups`, `refineDevice`, `refinePMF` |
+| `refine_pushOnImage` | theorem | `FinPMF`, `InferenceDevice`, `InferenceDevice.Setup`, `InferenceDevice.setup`, `pushOnImage`, `refineDevice`, `refinePMF` |
+| `refine_realizedValues_card` | theorem | `InferenceDevice`, `realizedValues` |
 | `relativeLength` | definition | `InferenceDevice`, `InferenceDevice.Setup`, `condLawOn` |
 | `relativeLength_eq_zero_of_cond_eq` | theorem | `InferenceDevice`, `InferenceDevice.Setup`, `condLawOn`, `relativeLength` |
 | `relativeLength_nonneg` | theorem | `InferenceDevice`, `InferenceDevice.Setup`, `relativeLength` |
