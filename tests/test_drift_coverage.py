@@ -216,7 +216,7 @@ def _fake_tree(root: Path, sources: list[str], oleans: list[str]) -> None:
     for name in sources:
         path = root / (name.replace(".", "/") + ".lean")
         path.parent.mkdir(parents=True, exist_ok=True)
-        path.write_text("-- source\n", encoding="utf-8")
+        path.write_text("-- source\n", encoding="utf-8", newline="\n")
     for name in oleans:
         path = build / (name.replace(".", "/") + ".olean")
         path.parent.mkdir(parents=True, exist_ok=True)

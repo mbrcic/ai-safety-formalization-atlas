@@ -133,6 +133,7 @@ def elaborate(path: Path, timeout: int) -> tuple[bool, str]:
         capture_output=True,
         text=True,
         timeout=timeout,
+        encoding="utf-8",
     )
     return proc.returncode == 0, proc.stdout + proc.stderr
 
@@ -185,7 +186,8 @@ def main() -> int:
         for binder, lo, hi in binders:
             candidate = text[:lo].rstrip(" ") + text[hi:]
             with tempfile.NamedTemporaryFile(
-                "w", suffix=".lean", dir=source.parent, delete=False, encoding="utf-8"
+                "w", suffix=".lean", dir=source.parent, delete=False, encoding="utf-8",
+                newline="\n",
             ) as tmp:
                 tmp.write(candidate)
                 tmp_path = Path(tmp.name)

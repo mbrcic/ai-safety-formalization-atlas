@@ -202,13 +202,14 @@ def harness_source(modules: list[str]) -> str:
 def elaborate(modules: list[str]) -> list[dict]:
     with tempfile.TemporaryDirectory(prefix="atlas-drift-coverage-") as tmp:
         harness = Path(tmp) / "DriftCoverage.lean"
-        harness.write_text(harness_source(modules), encoding="utf-8")
+        harness.write_text(harness_source(modules), encoding="utf-8", newline="\n")
         proc = subprocess.run(
             ["lake", "env", "lean", str(harness)],
             cwd=ROOT,
             capture_output=True,
             text=True,
             check=False,
+            encoding="utf-8",
         )
     blob = (proc.stdout or "") + "\n" + (proc.stderr or "")
     if proc.returncode != 0 or MARK_BEGIN not in blob:

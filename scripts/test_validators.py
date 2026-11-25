@@ -95,6 +95,10 @@ def run(tmp: Path, script: str) -> tuple[int, str]:
         [sys.executable, str(tmp / "scripts" / script)],
         capture_output=True,
         text=True,
+        encoding="utf-8",
+        # The child is Python too, and encodes its stdout by the platform default
+        # unless told otherwise; this makes it write what `encoding=` reads.
+        env={**os.environ, "PYTHONIOENCODING": "utf-8"},
     )
     return done.returncode, (done.stderr + done.stdout).strip()
 
@@ -104,7 +108,8 @@ def mutate(tmp: Path, name: str, change) -> None:
     data = json.loads(path.read_text(encoding="utf-8"))
     change(data)
     path.write_text(
-        json.dumps(data, indent=2, ensure_ascii=False) + "\n", encoding="utf-8"
+        json.dumps(data, indent=2, ensure_ascii=False) + "\n", encoding="utf-8",
+        newline="\n",
     )
 
 
@@ -1634,7 +1639,7 @@ def run_cases(cases: list[tuple]) -> list[str]:
                         f"{label}: rejected for the wrong reason\n    got: {output}"
                     )
             finally:
-                (tmp / target).write_text(original, encoding="utf-8")
+                (tmp / target).write_text(original, encoding="utf-8", newline="\n")
     return failures
 
 

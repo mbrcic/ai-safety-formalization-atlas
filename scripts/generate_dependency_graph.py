@@ -198,13 +198,14 @@ def run_harness() -> dict[str, Node]:
         harness = Path(tmp) / "DepGraph.lean"
         imports = ["import AISafetyAtlas",
                    *[f"import {m}" for m in consumer_modules()]]
-        harness.write_text("\n".join([*imports, HARNESS_BODY]), encoding="utf-8")
+        harness.write_text("\n".join([*imports, HARNESS_BODY]), encoding="utf-8", newline="\n")
         proc = subprocess.run(
             ["lake", "env", "lean", str(harness)],
             cwd=ROOT,
             capture_output=True,
             text=True,
             check=False,
+            encoding="utf-8",
         )
     if proc.returncode != 0:
         print(proc.stdout[-4000:], file=sys.stderr)
@@ -440,7 +441,7 @@ def main() -> int:
     STATUS.mkdir(parents=True, exist_ok=True)
     written: list[str] = []
     for config in CLUSTERS:
-        config.markdown.write_text(render(graph, config), encoding="utf-8")
+        config.markdown.write_text(render(graph, config), encoding="utf-8", newline="\n")
         written.append(config.markdown.name)
     print("dependency graph written: " + ", ".join(written))
     return 0

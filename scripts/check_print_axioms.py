@@ -410,7 +410,7 @@ def main() -> None:
     check_ledger_coverage()
     with tempfile.TemporaryDirectory(prefix="atlas-axioms-") as tmp:
         harness = Path(tmp) / "PrintAxioms.lean"
-        harness.write_text(harness_source(), encoding="utf-8")
+        harness.write_text(harness_source(), encoding="utf-8", newline="\n")
         # lake env lean elaborates imports from the package root.
         proc = subprocess.run(
             ["lake", "env", "lean", str(harness)],
@@ -418,6 +418,7 @@ def main() -> None:
             capture_output=True,
             text=True,
             check=False,
+            encoding="utf-8",
         )
     output = (proc.stdout or "") + "\n" + (proc.stderr or "")
     if proc.returncode != 0:

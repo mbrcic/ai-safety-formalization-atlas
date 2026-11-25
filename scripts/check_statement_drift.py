@@ -322,12 +322,14 @@ def tree_at(ref: str) -> dict[str, str]:
     listing = subprocess.run(
         ["git", "ls-tree", "-r", "--name-only", ref, SOURCES],
         cwd=ROOT, capture_output=True, text=True, check=True,
+        encoding="utf-8",
     ).stdout.split()
     sources = [path for path in listing if path.endswith(".lean")]
     return {
         path: subprocess.run(
             ["git", "show", f"{ref}:{path}"],
             cwd=ROOT, capture_output=True, text=True, check=True,
+            encoding="utf-8",
         ).stdout
         for path in sources
     }

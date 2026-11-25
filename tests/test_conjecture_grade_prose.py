@@ -175,7 +175,7 @@ def _audit(text: str) -> list[str]:
 
     with tempfile.TemporaryDirectory() as tmp:
         path = Path(tmp) / "source-coverage-audit.md"
-        path.write_text(text, encoding="utf-8")
+        path.write_text(text, encoding="utf-8", newline="\n")
         failures, _ = prose.check_audit(path)
     return failures
 
@@ -245,7 +245,7 @@ def _markdown(text: str, ledger: dict[str, dict[str, object]]) -> list[str]:
 
     with tempfile.TemporaryDirectory() as tmp:
         path = Path(tmp) / "current.md"
-        path.write_text(text, encoding="utf-8")
+        path.write_text(text, encoding="utf-8", newline="\n")
         failures, _ = prose.check_markdown(ledger, [path])
     return failures
 
@@ -317,6 +317,7 @@ def test_coverage_row_disagreeing_with_the_ledger_is_caught(tmp_path):
         "|---|---|---|---|\n"
         "| O26 | `CONJ-003` | `Narrower` | **Statement only** |\n",
         encoding="utf-8",
+        newline="\n",
     )
     failures, checked = prose.check_mais_coverage(_ledger(), table)
     assert checked
@@ -331,6 +332,7 @@ def test_coverage_row_prose_disagreeing_with_its_own_cell_is_caught(tmp_path):
         "|---|---|---|---|\n"
         "| O26 | `CONJ-003` | `Same` | **Statement only, graded `Narrower`** |\n",
         encoding="utf-8",
+        newline="\n",
     )
     failures, _ = prose.check_mais_coverage(_ledger(), table)
     assert any("graded" in f and "Scope cell" in f for f in failures)
@@ -347,6 +349,7 @@ def test_universal_scope_claim_is_recomputed_from_the_rows(tmp_path):
         "\n"
         "- Four source targets have complete propositions, all four at `Beyond` scope.\n",
         encoding="utf-8",
+        newline="\n",
     )
     failures, _ = prose.check_mais_coverage(_ledger(), table)
     assert any("claims every graded row is `Beyond`" in f for f in failures)
@@ -359,6 +362,7 @@ def test_target_with_no_ledger_row_may_not_carry_a_grade(tmp_path):
         "|---|---|---|---|\n"
         "| O27 | — | `Retired` | **Withdrawn encoding** |\n",
         encoding="utf-8",
+        newline="\n",
     )
     failures, _ = prose.check_mais_coverage(_ledger(), table)
     assert any("no ledger row" in f for f in failures)
@@ -370,6 +374,7 @@ def test_stale_public_counts_are_caught(tmp_path):
     page.write_text(
         "<p>five open, four resolved by linked Lean theorems, one withdrawn.</p>",
         encoding="utf-8",
+        newline="\n",
     )
     failures, checked, skipped = prose.check_counts(_ledger(), (page,))
     assert checked
@@ -390,7 +395,7 @@ def test_live_counts_pass(tmp_path):
     opened = sum(e["status"] == "OPEN" for e in ledger.values())
     resolved = sum(e["status"] == "RESOLVED" for e in ledger.values())
     page = tmp_path / "index.html"
-    page.write_text(f"<p>{opened} open and {resolved} resolved.</p>", encoding="utf-8")
+    page.write_text(f"<p>{opened} open and {resolved} resolved.</p>", encoding="utf-8", newline="\n")
     failures, checked, skipped = prose.check_counts(ledger, (page,))
     assert checked and not failures
 
@@ -421,6 +426,7 @@ def test_mais_scoped_counts_are_checked(tmp_path):
         "<p>ninety-nine MAIS-linked records. One have linked Lean proofs; "
         "the other twelve remain open.</p>",
         encoding="utf-8",
+        newline="\n",
     )
     failures, checked, skipped = prose.check_counts(ledger, (page,))
     assert checked == 3
@@ -455,7 +461,7 @@ def test_hyphenated_number_word_is_parsed(tmp_path):
     `checked` assertions above exist for, caught one layer earlier.
     """
     page = tmp_path / "guide.md"
-    page.write_text("This is a twenty-one-row file.", encoding="utf-8")
+    page.write_text("This is a twenty-one-row file.", encoding="utf-8", newline="\n")
     failures, checked, skipped = prose.check_counts(_ledger(), (page,))
     assert checked == 1
     assert any("21" in f and "rows" in f for f in failures)
@@ -470,7 +476,8 @@ def test_ordinary_prose_is_not_reported_as_an_unparsed_count(tmp_path):
     """
     page = tmp_path / "guide.md"
     page.write_text(
-        "The rest are determine-problem specifications.", encoding="utf-8"
+        "The rest are determine-problem specifications.", encoding="utf-8",
+        newline="\n",
     )
     failures, checked, skipped = prose.check_counts(_ledger(), (page,))
     assert not failures and not skipped and checked == 0

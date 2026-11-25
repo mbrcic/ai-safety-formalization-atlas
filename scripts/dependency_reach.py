@@ -60,7 +60,8 @@ IMPORT_RE = re.compile(
 
 def _git_show(ref: str, path: str) -> str | None:
     out = subprocess.run(
-        ["git", "-C", str(ROOT), "show", f"{ref}:{path}"], capture_output=True, text=True
+        ["git", "-C", str(ROOT), "show", f"{ref}:{path}"], capture_output=True, text=True,
+        encoding="utf-8",
     )
     return out.stdout if out.returncode == 0 else None
 
@@ -127,6 +128,7 @@ def decide(base: str, head: str) -> tuple[str, list[str], str]:
         capture_output=True,
         text=True,
         check=True,
+        encoding="utf-8",
     ).stdout.split()
     return classify_move(
         diff,

@@ -80,13 +80,15 @@ def _run_validator(tmp_path: Path, review: dict) -> subprocess.CompletedProcess[
         tmp_path / "docs/provenance/source-review-dispositions.json",
     )
     (tmp_path / REVIEW).write_text(
-        json.dumps(review, indent=2, ensure_ascii=False) + "\n", encoding="utf-8"
+        json.dumps(review, indent=2, ensure_ascii=False) + "\n", encoding="utf-8",
+        newline="\n",
     )
     return subprocess.run(
         [sys.executable, "scripts/validate_source_review.py"],
         cwd=tmp_path,
         capture_output=True,
         text=True,
+        encoding="utf-8",
     )
 
 
@@ -690,7 +692,7 @@ def test_refresh_aborts_on_unsafe_locator_without_writing_snapshot(monkeypatch, 
 
     snapshot_path = tmp_path / "source-review.json"
     initial_content = '{"schema_version": 3, "records": {"existing": {}}}\n'
-    snapshot_path.write_text(initial_content, encoding="utf-8")
+    snapshot_path.write_text(initial_content, encoding="utf-8", newline="\n")
 
     registry_path = tmp_path / "registry.yaml"
     registry = {
@@ -702,7 +704,7 @@ def test_refresh_aborts_on_unsafe_locator_without_writing_snapshot(monkeypatch, 
             }
         }
     }
-    registry_path.write_text(json.dumps(registry), encoding="utf-8")
+    registry_path.write_text(json.dumps(registry), encoding="utf-8", newline="\n")
 
     # Verify any attempted network open fails the test
     def mock_network(*args, **kwargs):
@@ -783,6 +785,7 @@ def test_load_cached_records_rejects_incompatible_schema(tmp_path: Path, old_ver
             }
         }),
         encoding="utf-8",
+        newline="\n",
     )
     loaded = load_cached_records(cache_file)
     assert loaded == {}
@@ -798,6 +801,7 @@ def test_load_cached_records_rejects_incompatible_schema(tmp_path: Path, old_ver
             }
         }),
         encoding="utf-8",
+        newline="\n",
     )
     loaded = load_cached_records(cache_file)
     assert "src-1" in loaded
@@ -818,7 +822,7 @@ def test_write_snapshot_does_not_follow_predictable_symlink(tmp_path: Path) -> N
     refresh = _refresh_module()
     target_file = tmp_path / "snapshot.json"
     victim = tmp_path / "victim.txt"
-    victim.write_text("KEEP", encoding="utf-8")
+    victim.write_text("KEEP", encoding="utf-8", newline="\n")
 
     # Create the old predictable snapshot.tmp as a symlink pointing to victim.txt
     predictable_tmp = target_file.with_suffix(".tmp")
@@ -863,7 +867,7 @@ def test_refresh_cli_rejects_sources_with_reclassify() -> None:
         "--sources", "src-1",
         "--reclassify",
     ]
-    res = subprocess.run(cmd, capture_output=True, text=True)
+    res = subprocess.run(cmd, capture_output=True, text=True, encoding="utf-8")
     assert res.returncode != 0
     assert "--sources and --reclassify cannot be used together" in res.stderr
 

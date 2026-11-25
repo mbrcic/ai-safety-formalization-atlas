@@ -74,6 +74,7 @@ def verify_corpus(name: str, path: Path, metadata: dict[str, object]) -> None:
             check=True,
             capture_output=True,
             text=True,
+            encoding="utf-8",
         ).stdout.strip()
         if actual != version:
             raise SystemExit(f"{name} revision mismatch: expected {version}, got {actual}")
@@ -92,6 +93,7 @@ def git_revision(path: Path) -> str:
         check=True,
         capture_output=True,
         text=True,
+        encoding="utf-8",
     ).stdout.strip()
 
 
@@ -104,6 +106,7 @@ def git_remote(path: Path) -> str:
         check=True,
         capture_output=True,
         text=True,
+        encoding="utf-8",
     ).stdout.strip()
 
 
@@ -465,6 +468,7 @@ def main() -> None:
             EVIDENCE_PATH.write_text(
                 json.dumps(evidence, ensure_ascii=False, indent=2) + "\n",
                 encoding="utf-8",
+                newline="\n",
             )
         return
 
@@ -524,12 +528,14 @@ def main() -> None:
         REGISTRY_PATH.write_text(
             json.dumps(registry, ensure_ascii=False, indent=2) + "\n",
             encoding="utf-8",
+            newline="\n",
         )
         EVIDENCE_PATH.write_text(
             json.dumps(evidence, ensure_ascii=False, indent=2) + "\n",
             encoding="utf-8",
+            newline="\n",
         )
-        SUMMARY_PATH.write_text(render_summary(registry, evidence), encoding="utf-8")
+        SUMMARY_PATH.write_text(render_summary(registry, evidence), encoding="utf-8", newline="\n")
 
 
 if __name__ == "__main__":

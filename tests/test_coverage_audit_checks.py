@@ -47,12 +47,14 @@ def test_gate_scripts_pass_on_the_repository(tmp_path):
     result = subprocess.run(
         [sys.executable, str(SCRIPTS / "check_coverage_audit.py")],
         cwd=ROOT, capture_output=True, text=True,
+        encoding="utf-8",
     )
     assert result.returncode == 0, f"check_coverage_audit.py: {result.stderr}"
     result = subprocess.run(
         [sys.executable, str(SCRIPTS / "render_coverage_artifact.py"),
          str(tmp_path / "coverage-audit.html")],
         cwd=ROOT, capture_output=True, text=True,
+        encoding="utf-8",
     )
     assert result.returncode == 0, f"render_coverage_artifact.py: {result.stderr}"
     assert (tmp_path / "coverage-audit.html").exists()
@@ -107,7 +109,7 @@ def test_graded_section_without_a_target_heading_is_reported():
 
 
 def test_declared_headings_match_the_section_parser_keys():
-    text = (ROOT / "docs" / "provenance" / "source-coverage-audit.md").read_text()
+    text = (ROOT / "docs" / "provenance" / "source-coverage-audit.md").read_text(encoding="utf-8")
     per_section, *_ = audit.parse_sections(text)
     declared = audit.audit_declared_headings(text)
     graded = {name for name, counts in per_section.items() if any(counts.values())}
@@ -217,7 +219,7 @@ def test_real_module_resolves_in_a_lake_package():
 
 
 def test_every_graded_module_is_hosted_by_a_registry_row():
-    text = (ROOT / "docs" / "provenance" / "source-coverage-audit.md").read_text()
+    text = (ROOT / "docs" / "provenance" / "source-coverage-audit.md").read_text(encoding="utf-8")
     targets = audit.audit_target_modules(text)
     assert targets, "no section heading names a target module"
     hosted = audit.registry_modules()
@@ -250,6 +252,7 @@ def test_renderer_rejects_an_unknown_flag(flag, tmp_path):
     result = subprocess.run(
         [sys.executable, str(SCRIPTS / "render_coverage_artifact.py"), flag],
         cwd=tmp_path, capture_output=True, text=True,
+        encoding="utf-8",
     )
     assert result.returncode == 2, result.stdout
     assert "unknown option" in result.stderr
@@ -261,16 +264,18 @@ def test_renderer_rejects_two_output_paths(tmp_path):
         [sys.executable, str(SCRIPTS / "render_coverage_artifact.py"),
          str(tmp_path / "a.html"), str(tmp_path / "b.html")],
         cwd=tmp_path, capture_output=True, text=True,
+        encoding="utf-8",
     )
     assert result.returncode == 2, result.stdout
 
 
 def test_renderer_check_detects_a_stale_artifact(tmp_path):
     out = tmp_path / "coverage-audit.html"
-    out.write_text("<p>stale</p>")
+    out.write_text("<p>stale</p>", encoding="utf-8", newline="\n")
     result = subprocess.run(
         [sys.executable, str(SCRIPTS / "render_coverage_artifact.py"), "--check", str(out)],
         cwd=ROOT, capture_output=True, text=True,
+        encoding="utf-8",
     )
     assert result.returncode != 0, "a stale artifact passed --check"
 
@@ -285,7 +290,7 @@ def test_renderer_check_detects_a_stale_artifact(tmp_path):
 
 
 def test_every_root_cluster_module_is_ledgered():
-    text = (ROOT / "docs" / "provenance" / "source-coverage-audit.md").read_text()
+    text = (ROOT / "docs" / "provenance" / "source-coverage-audit.md").read_text(encoding="utf-8")
     exempt = audit.ledger_exempt_modules(text)
     assert exempt is not None, "the module-ledger block is missing from the audit"
     hosted = audit.registry_modules()
@@ -296,7 +301,7 @@ def test_every_root_cluster_module_is_ledgered():
 
 
 def test_ledger_block_lists_no_module_a_registry_row_already_hosts():
-    text = (ROOT / "docs" / "provenance" / "source-coverage-audit.md").read_text()
+    text = (ROOT / "docs" / "provenance" / "source-coverage-audit.md").read_text(encoding="utf-8")
     exempt = audit.ledger_exempt_modules(text) or set()
     stale = sorted(m for m in exempt if m in audit.registry_modules())
     assert not stale, f"listed as unhosted but a row hosts them: {stale}"
@@ -380,7 +385,7 @@ def test_the_real_audit_renders_quickly():
     # A regression on the whole file: the defect above took nine minutes on it.
     import time
 
-    text = (ROOT / "docs" / "provenance" / "source-coverage-audit.md").read_text()
+    text = (ROOT / "docs" / "provenance" / "source-coverage-audit.md").read_text(encoding="utf-8")
     start = time.monotonic()
     renderer.render_blocks(text.splitlines())
     assert time.monotonic() - start < 20, "the audit should render in well under a second"

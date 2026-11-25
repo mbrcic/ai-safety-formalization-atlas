@@ -187,10 +187,11 @@ def changed_paths(base: str, staged: bool) -> list[str]:
         merge_base = subprocess.run(
             ["git", "merge-base", "HEAD", base], cwd=ROOT,
             capture_output=True, text=True,
+            encoding="utf-8",
         )
         ref = merge_base.stdout.strip() or base
         cmd = ["git", "diff", "--name-only", ref]
-    result = subprocess.run(cmd, cwd=ROOT, capture_output=True, text=True)
+    result = subprocess.run(cmd, cwd=ROOT, capture_output=True, text=True, encoding="utf-8")
     paths = [p for p in result.stdout.split("\n") if p.strip()]
     if not staged:
         # A first contribution is usually a *new* file, and `git diff` does not
@@ -199,6 +200,7 @@ def changed_paths(base: str, staged: bool) -> list[str]:
         untracked = subprocess.run(
             ["git", "ls-files", "--others", "--exclude-standard"],
             cwd=ROOT, capture_output=True, text=True,
+            encoding="utf-8",
         )
         paths += [p for p in untracked.stdout.split("\n") if p.strip()]
     return sorted(set(paths))

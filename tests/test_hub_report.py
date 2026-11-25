@@ -39,6 +39,7 @@ def hub_output() -> str:
     result = subprocess.run(
         [sys.executable, "scripts/report_consumers.py", "--hub"],
         cwd=ROOT, capture_output=True, text=True, check=True,
+        encoding="utf-8",
     )
     return result.stdout
 

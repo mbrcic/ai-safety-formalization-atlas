@@ -110,9 +110,9 @@ def frontier(*artifacts: Any, identifier: str = "FAKE-FRONTIER") -> Any:
 @pytest.fixture
 def tree(tmp_path: Path) -> Path:
     (tmp_path / "AISafetyAtlas" / "Fake").mkdir(parents=True)
-    (tmp_path / FRONTIER_FILE).write_text(LEAN, encoding="utf-8")
+    (tmp_path / FRONTIER_FILE).write_text(LEAN, encoding="utf-8", newline="\n")
     (tmp_path / "scripts").mkdir()
-    (tmp_path / "scripts" / "fake_probe.py").write_text("# probe\n", encoding="utf-8")
+    (tmp_path / "scripts" / "fake_probe.py").write_text("# probe\n", encoding="utf-8", newline="\n")
     return tmp_path
 
 
@@ -212,7 +212,7 @@ def test_frontier_with_no_consumer_fails(tree: Path) -> None:
         LEAN.replace("public theorem consumer_of_frontier (h : FakeFrontier) "
                      "(n : Nat) (hn : 0 < n) :\n    n ≠ 0 := h n hn",
                      ""),
-        encoding="utf-8")
+        encoding="utf-8", newline="\n")
     report = run(tree, frontier(probe()))
 
     assert report.consumers == []
@@ -225,7 +225,7 @@ def test_examples_do_not_count_as_consumers(tree: Path) -> None:
     (tree / "AISafetyAtlas" / "Examples").mkdir()
     (tree / "AISafetyAtlas" / "Examples" / "Fake.lean").write_text(
         "example (h : AISafetyAtlas.Fake.FakeFrontier) : True := trivial\n",
-        encoding="utf-8")
+        encoding="utf-8", newline="\n")
     report = run(tree, frontier(probe()))
 
     assert [path for _, path, _ in report.consumers] == [FRONTIER_FILE]
@@ -252,7 +252,7 @@ def test_missing_proposition_fails(tree: Path) -> None:
 
     (tree / FRONTIER_FILE).write_text(
         LEAN.replace("def FakeFrontier", "def RenamedFrontier"),
-        encoding="utf-8")
+        encoding="utf-8", newline="\n")
     renamed = run(tree, frontier(probe()))
 
     assert any("does not resolve" in failure for failure in renamed.failures)

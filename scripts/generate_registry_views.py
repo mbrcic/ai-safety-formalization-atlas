@@ -2416,7 +2416,7 @@ def update(path: Path, expected: str, check: bool) -> bool:
         )
         return True
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(expected, encoding="utf-8")
+    path.write_text(expected, encoding="utf-8", newline="\n")
     print(f"updated {path.relative_to(ROOT)}")
     return False
 

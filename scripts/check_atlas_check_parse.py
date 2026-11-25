@@ -69,11 +69,11 @@ FIXED_LENGTH = {"observation", "property", "setup", "conclusion", "target", "haz
 
 
 def run(model: dict) -> tuple[int, str]:
-    with tempfile.NamedTemporaryFile("w", suffix=".json", delete=False) as handle:
+    with tempfile.NamedTemporaryFile("w", suffix=".json", delete=False, encoding="utf-8", newline="\n") as handle:
         json.dump(model, handle)
         path = handle.name
     try:
-        done = subprocess.run([str(BINARY), path], capture_output=True, text=True)
+        done = subprocess.run([str(BINARY), path], capture_output=True, text=True, encoding="utf-8")
     finally:
         pathlib.Path(path).unlink(missing_ok=True)
     return done.returncode, done.stdout + done.stderr
@@ -214,7 +214,7 @@ def main() -> int:
     checks = 0
     failures = 0
     for path in fixtures:
-        model = json.loads(path.read_text())
+        model = json.loads(path.read_text(encoding="utf-8"))
         code, output = run(model)
         if code != 0:
             print(f"FAIL {path.name}: the shipped fixture is refused", file=sys.stderr)

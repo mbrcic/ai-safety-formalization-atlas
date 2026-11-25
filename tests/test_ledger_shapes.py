@@ -69,18 +69,20 @@ def mutated(tree: Path) -> Iterator[Callable[[str, Mutation], subprocess.Complet
         data = json.loads(original)
         mutation(data)
         path.write_text(
-            json.dumps(data, indent=2, ensure_ascii=False) + "\n", encoding="utf-8"
+            json.dumps(data, indent=2, ensure_ascii=False) + "\n", encoding="utf-8",
+            newline="\n",
         )
         return subprocess.run(
             [sys.executable, "scripts/validate_registry.py"],
             cwd=tree,
             capture_output=True,
             text=True,
+            encoding="utf-8",
         )
 
     yield run
     for path, original in touched:
-        path.write_text(original, encoding="utf-8")
+        path.write_text(original, encoding="utf-8", newline="\n")
 
 
 def _assert_clean_rejection(done: subprocess.CompletedProcess[str], expected: str) -> None:
@@ -338,11 +340,13 @@ def _check_cases(cases: list[tuple[str, str, Mutation, str]]) -> None:
             data = json.loads(path.read_text(encoding="utf-8"))
             mutation(data)
             path.write_text(
-                json.dumps(data, indent=2, ensure_ascii=False) + "\n", encoding="utf-8"
+                json.dumps(data, indent=2, ensure_ascii=False) + "\n", encoding="utf-8",
+                newline="\n",
             )
             done = subprocess.run(
                 [sys.executable, "scripts/validate_registry.py"],
                 cwd=work, capture_output=True, text=True,
+                encoding="utf-8",
             )
         try:
             _assert_clean_rejection(done, expected)
@@ -375,19 +379,20 @@ def test_generator_points_at_the_validator_instead_of_crashing(tree: Path) -> No
     try:
         data = json.loads(original)
         data["vocabulary"] = None
-        path.write_text(json.dumps(data, indent=2) + "\n", encoding="utf-8")
+        path.write_text(json.dumps(data, indent=2) + "\n", encoding="utf-8", newline="\n")
         done = subprocess.run(
             [sys.executable, "scripts/generate_registry_views.py", "--check"],
             cwd=tree,
             capture_output=True,
             text=True,
+            encoding="utf-8",
         )
         output = done.stderr + done.stdout
         assert done.returncode != 0
         assert "Traceback" not in output, output
         assert "validate_registry.py" in output, output
     finally:
-        path.write_text(original, encoding="utf-8")
+        path.write_text(original, encoding="utf-8", newline="\n")
 
 
 def test_the_unmutated_copy_still_validates(tree: Path) -> None:
@@ -397,6 +402,7 @@ def test_the_unmutated_copy_still_validates(tree: Path) -> None:
         cwd=tree,
         capture_output=True,
         text=True,
+        encoding="utf-8",
     )
     assert done.returncode == 0, done.stderr + done.stdout
 
@@ -477,17 +483,18 @@ def test_a_claim_from_another_source_is_admissible(tree: Path) -> None:
         }
         row.pop("public", None)
         data["results"].append(row)
-        path.write_text(json.dumps(data, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+        path.write_text(json.dumps(data, indent=2, ensure_ascii=False) + "\n", encoding="utf-8", newline="\n")
         done = subprocess.run(
             [sys.executable, "scripts/validate_registry.py"],
             cwd=tree,
             capture_output=True,
             text=True,
+            encoding="utf-8",
         )
         assert done.returncode == 0, done.stderr + done.stdout
         assert f"{baseline_claim_count + 1} claims" in done.stdout, done.stdout
     finally:
-        path.write_text(original, encoding="utf-8")
+        path.write_text(original, encoding="utf-8", newline="\n")
 
 
 def test_a_claim_without_provenance_is_rejected(tree: Path) -> None:
@@ -506,19 +513,20 @@ def test_a_claim_without_provenance_is_rejected(tree: Path) -> None:
         ):
             row.pop(survey_only, None)
         data["results"].append(row)
-        path.write_text(json.dumps(data, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+        path.write_text(json.dumps(data, indent=2, ensure_ascii=False) + "\n", encoding="utf-8", newline="\n")
         done = subprocess.run(
             [sys.executable, "scripts/validate_registry.py"],
             cwd=tree,
             capture_output=True,
             text=True,
+            encoding="utf-8",
         )
         _assert_clean_rejection(
             done,
             "CLM-UNSOURCED-001 claim rows must name at least one original source",
         )
     finally:
-        path.write_text(original, encoding="utf-8")
+        path.write_text(original, encoding="utf-8", newline="\n")
 
 
 def test_every_recorded_reproduction_command_is_a_real_entry_point(tree: Path) -> None:

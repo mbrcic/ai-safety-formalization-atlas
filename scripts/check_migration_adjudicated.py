@@ -38,6 +38,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import re
 import subprocess
 import sys
@@ -54,7 +55,8 @@ ADJUDICATE_RE = re.compile(r"^adjudicate: (\d+) non-theorem declaration")
 
 def git(*args: str) -> str | None:
     proc = subprocess.run(
-        ["git", *args], cwd=ROOT, capture_output=True, text=True, check=False
+        ["git", *args], cwd=ROOT, capture_output=True, text=True, check=False,
+        encoding="utf-8",
     )
     return proc.stdout if proc.returncode == 0 else None
 
@@ -72,6 +74,7 @@ def is_ancestor(ref: str) -> bool:
         capture_output=True,
         text=True,
         check=False,
+        encoding="utf-8",
     )
     return proc.returncode == 0
 
@@ -87,6 +90,10 @@ def run_drift(ref: str) -> tuple[str, int]:
         capture_output=True,
         text=True,
         check=False,
+        encoding="utf-8",
+        # The child is Python too, and encodes its stdout by the platform default
+        # unless told otherwise; this makes it write what `encoding=` reads.
+        env={**os.environ, "PYTHONIOENCODING": "utf-8"},
     )
     return (proc.stdout or "") + (proc.stderr or ""), proc.returncode
 

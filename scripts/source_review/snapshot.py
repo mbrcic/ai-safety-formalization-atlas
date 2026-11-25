@@ -210,6 +210,7 @@ def write_snapshot(snapshot: dict[str, Any], path: Path = REVIEW) -> None:
         prefix=f".{target.name}.",
         suffix=".tmp",
         delete=False,
+        newline="\n",
     )
     temp_path = Path(temp_file.name)
     try:

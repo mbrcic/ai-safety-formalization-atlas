@@ -53,6 +53,7 @@ def _run(rows: list[dict[str, str]], tmp_path: Path) -> subprocess.CompletedProc
         json.dumps({"schema_version": 1, "next_id": 1, "description": "fixture",
                     "intake": rows}),
         encoding="utf-8",
+        newline="\n",
     )
     probe = tmp_path / "probe.py"
     probe.write_text(
@@ -63,9 +64,11 @@ def _run(rows: list[dict[str, str]], tmp_path: Path) -> subprocess.CompletedProc
         f"c.INTAKE = Path({str(ledger)!r})\n"
         "raise SystemExit(c.main())\n",
         encoding="utf-8",
+        newline="\n",
     )
     return subprocess.run(
-        [sys.executable, str(probe)], cwd=ROOT, capture_output=True, text=True
+        [sys.executable, str(probe)], cwd=ROOT, capture_output=True, text=True,
+        encoding="utf-8",
     )
 
 
