@@ -163,7 +163,8 @@ physical-knowledge cluster above transcribes Definition 11, Lemma 17,
 Proposition 18, and Corollaries 19–24. The nested event module transcribes the
 event definitions and refutes Corollary 25 as printed. The §III stochastic and
 complexity clusters are transcribed too — Definitions 4 and 6 through 9 and
-Propositions 7 through 14 — with Proposition 12 refuted. The Kraft direction the
+Propositions 7 through 14 — with Proposition 12 refuted as printed and repaired,
+and Example 6's sharpness claim proved where its computation is refuted. The Kraft direction the
 source cites is a citation rather than a claim of the paper, and nothing here
 waited on it.
 

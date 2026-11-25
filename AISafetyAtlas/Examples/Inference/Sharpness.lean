@@ -39,8 +39,9 @@ theorem ex6_summary :
 
 /-- **Proposition 8 holds here and is not attained**, which is the whole point
 of Example 6 and which neither half states alone. The bound is `-1/9` and the
-accuracy is `0`, so the inequality is comfortable and the claim of *sharpness*
-for `|Γ(U)| ≥ 3` fails at this device.
+accuracy is `0`, so the inequality is comfortable and Example 6's construction
+is slack at this device. The bound itself is still sharp at every `|Γ(U)|`
+(`prop8_bound_sharp`); what fails here is only the demonstration of it.
 
 Both halves existed in the library and neither had an application, so nothing in
 the build connected the counterexample to the proposition it is a counterexample
@@ -112,5 +113,96 @@ proposition's bound is stated against, computed rather than quoted. -/
 public theorem prop6_value_at_maximizer :
     prop6Expr (1 / 2) (1 / 2) prop6Maximizer = 1 / 4 :=
   prop6Expr_half_maximizer
+
+/-! ## The repair, at concrete numbers
+
+Example 6's split into three labelled parts, applied to the two-setup device with
+inference power `e`. With constant `e = 1/2` the bound `(2 − 3) · (1/2) / 3 = −1/6`
+is attained. With `e = (0, 1/3)` — the profile of `ex6Device` — the accuracy is
+`(2 − 3) · min(0, 1/3) / 3 = 0`, not the bound `−1/9`.
+-/
+
+/-- Constant power `1/2` is an admissible profile. -/
+public theorem halfProfile_le_one : ∀ x : Bool, |(fun _ : Bool => (1 / 2 : ℝ)) x| ≤ 1 := by
+  intro _; norm_num [abs_of_pos]
+
+/-- So is `ex6Device`'s profile, `0` at the first setup and `1/3` at the second. -/
+public theorem ex6Profile_le_one :
+    ∀ x : Bool, |(fun b : Bool => if b then (0 : ℝ) else 1 / 3) x| ≤ 1 := by
+  intro x; cases x <;> norm_num [abs_of_pos]
+
+/-- **Sharpness at `|Γ(U)| = 3`.** Constant inference power `1/2`: Example 6's
+construction attains Proposition 8's bound, `−1/6`. -/
+public theorem example6_attained_at_three :
+    inferenceAccuracy (refineDevice powerDevice 3 (by norm_num))
+        (refinePMF (powerPMF (fun _ => 1 / 2) halfProfile_le_one) 3 (by norm_num))
+        (Prod.snd : (Bool × Bool) × Fin 3 → Fin 3) = -(1 / 6) := by
+  rw [example6_power_accuracy _ _ 3 (by norm_num)]
+  norm_num
+
+/-- **The same instance through the general cell-uniform theorem**: Example 6's
+split is cell-uniform and the power is constant, so the accuracy is Proposition
+8's bound, computed in the split model's own terms. -/
+public theorem example6_attained_at_three_cellUniform :
+    inferenceAccuracy (refineDevice powerDevice 3 (by norm_num))
+        (refinePMF (powerPMF (fun _ => 1 / 2) halfProfile_le_one) 3 (by norm_num))
+        (Prod.snd : (Bool × Bool) × Fin 3 → Fin 3) =
+      ((2 - ((realizedValues (Prod.snd : (Bool × Bool) × Fin 3 → Fin 3)).card : ℝ)) *
+          (positiveMassSetups (refineDevice powerDevice 3 (by norm_num))
+              (refinePMF (powerPMF (fun _ => 1 / 2) halfProfile_le_one) 3 (by norm_num))).sup'
+            (positiveMassSetups_nonempty _ _)
+            (fun x => condExpect
+              (refinePMF (powerPMF (fun _ => 1 / 2) halfProfile_le_one) 3 (by norm_num))
+              (refineDevice powerDevice 3 (by norm_num)).setup x
+              (fun u => boolPm ((refineDevice powerDevice 3 (by norm_num)).concl u)))) /
+        ((realizedValues (Prod.snd : (Bool × Bool) × Fin 3 → Fin 3)).card : ℝ) :=
+  inferenceAccuracy_eq_prop8_bound_of_cellUniform _ _ _
+    (refine_cellUniform powerDevice _ 3 (by norm_num))
+    (fun x _ x' _ => by
+      rw [refine_condExpect powerDevice _ 3 (by norm_num) x (fun u => boolPm (powerDevice.concl u)),
+        refine_condExpect powerDevice _ 3 (by norm_num) x' (fun u => boolPm (powerDevice.concl u)),
+        power_condExpect, power_condExpect])
+
+/-- **Sharpness at `|Γ(U)| = 3`, `max_x E_P(Y ∣ x) = 1/2`, from the existence
+theorem.** -/
+example : ∃ (U : Type) (_ : Fintype U) (C : InferenceDevice.{0, 0} U)
+    (_ : DecidableEq C.Setup) (p : FinPMF U) (Γ : U → Fin 3),
+    (realizedValues Γ).card = 3 ∧ inferenceAccuracy C p Γ = -(1 / 6) := by
+  obtain ⟨U, hU, C, hC, p, Γ, hcard, -, -, -, hacc⟩ :=
+    prop8_bound_sharp 3 (by norm_num) (1 / 2) (by norm_num [abs_of_pos])
+  exact ⟨U, hU, C, hC, p, Γ, hcard, by rw [hacc]; norm_num⟩
+
+/-- **And the corrected value when the power varies.** Profile `(0, 1/3)`: the
+accuracy is `0`, governed by the minimum. -/
+public theorem example6_min_at_three :
+    inferenceAccuracy (refineDevice powerDevice 3 (by norm_num))
+        (refinePMF (powerPMF (fun b => if b then 0 else 1 / 3) ex6Profile_le_one) 3
+          (by norm_num))
+        (Prod.snd : (Bool × Bool) × Fin 3 → Fin 3) = 0 := by
+  rw [example6_power_accuracy _ _ 3 (by norm_num)]
+  norm_num
+
+/-- **The hand-built instance agrees with the corrected formula**: `ex6Device` is
+cell-uniform, so its accuracy is `(2 − 3) · min_x E_P(Y ∣ x) / 3`. -/
+public theorem ex6_corrected_formula :
+    inferenceAccuracy ex6Device ex6PMF ex6Gamma =
+      ((2 - ((realizedValues ex6Gamma).card : ℝ)) *
+          (positiveMassSetups ex6Device ex6PMF).inf'
+            (positiveMassSetups_nonempty ex6Device ex6PMF)
+            (fun x => condExpect ex6PMF ex6Device.setup x
+              (fun u => boolPm (ex6Device.concl u)))) /
+        ((realizedValues ex6Gamma).card : ℝ) :=
+  ex6_accuracy_via_min
+
+/-- **Example 6's pointwise identity on the twelve-state instance.** The printed
+identity `E_P(Yδ_γ(Γ) ∣ x) = (2 − |Γ(U)|)/|Γ(U)| · E_P(Y ∣ x)` holds at every setup
+and every target value; the slip is only in the maximum taken after it. -/
+public theorem ex6_probe_identity (x : ex6Device.Setup) (γ : Fin 3) :
+    condExpect ex6PMF ex6Device.setup x
+        (fun u => boolPm (ex6Device.concl u) * boolPm (probe γ (ex6Gamma u))) =
+      (2 - ((realizedValues ex6Gamma).card : ℝ)) / ((realizedValues ex6Gamma).card : ℝ) *
+        condExpect ex6PMF ex6Device.setup x (fun u => boolPm (ex6Device.concl u)) :=
+  condExpect_probe_of_cellUniform ex6Device ex6PMF ex6Gamma ex6_cellUniform x
+    (by rw [ex6_realizedValues]; exact Finset.mem_univ _)
 
 end AISafetyAtlas.Examples.Inference.Sharpness

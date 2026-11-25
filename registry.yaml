@@ -6174,7 +6174,7 @@
         "interpretability",
         "provability-logic"
       ],
-      "notes": "Machine-checked audit artifacts for two defective printed claims in arXiv:1711.03499v3. Corollary 21(ii)'s second disjunct is refuted by an inhabited Boolean model; corollary21_ii_repaired proves the valid successive-implication weakening. Equation (11) is transcribed literally as KnowledgeEvent. For the four-state Definition 11 observer it yields the universal event. Under the paper's standing two-valued-target convention that characteristic is inadmissibly constant, so Corollary 25 is not closed under its own construction; under the natural singleton-image extension implemented by Definition 11, the observer cannot know the universal event and positive introspection is false. These findings are not an EQUIVALENT claim for the defective source statements. Wolpert 2018 Proposition 12 is a third machine-refuted printed claim, added here: C_mu(Gamma; D) <= |Gamma| x H_mu(X) fails on a four-state model meeting every printed hypothesis, by exactly (ln 3)/2. prop12_gap is an identity, so the refutation does not rest on a numeric estimate. The printed proof's final step compares two sums term by term and needs mu(x) >= 1/|Gamma| at every setup value, which the statement does not assume. Recorded as clash 23. Wolpert 2018 Example 6 is a fourth machine-refuted printed claim. Its sharpness claim for Proposition 8's bound is false: the construction's central identity is correct and verified, but the step after it pulls the factor (2 - |Gamma(U)|)/|Gamma(U)| out of a maximum, which is valid only when that factor is nonnegative. For |Gamma(U)| >= 3 it is negative and the maximum moves to the minimum of E_P(Y | x). On a twelve-state instance of the source's own recipe with non-constant inference power the accuracy is 0 while the bound is -1/9, so the bound is strictly not attained; Proposition 8 itself still holds there. Recorded as clash 25.",
+      "notes": "Machine-checked audit artifacts for two defective printed claims in arXiv:1711.03499v3. Corollary 21(ii)'s second disjunct is refuted by an inhabited Boolean model; corollary21_ii_repaired proves the valid successive-implication weakening. Equation (11) is transcribed literally as KnowledgeEvent. For the four-state Definition 11 observer it yields the universal event. Under the paper's standing two-valued-target convention that characteristic is inadmissibly constant, so Corollary 25 is not closed under its own construction; under the natural singleton-image extension implemented by Definition 11, the observer cannot know the universal event and positive introspection is false. These findings are not an EQUIVALENT claim for the defective source statements. Wolpert 2018 Proposition 12 is a third machine-refuted printed claim, added here: C_mu(Gamma; D) <= |Gamma| x H_mu(X) fails on a four-state model meeting every printed hypothesis, by exactly (ln 3)/2. prop12_gap is an identity, so the refutation does not rest on a numeric estimate. The printed proof's final step compares two sums term by term and needs mu(x) >= 1/|Gamma| at every setup value, which the statement does not assume. Recorded as clash 23. It is repaired: prop12_repaired proves the printed conclusion under an injective selection of answering setups, each of mass at least 1/|Gamma(U)| (HeavyAnsweringSelection). The printed proof needs both halves, step 1 the distinct setups and step 3 the mass bound, and each half alone has a countermodel (prop12_distinct_insufficient, prop12_massBound_insufficient); a uniform model attains the bound with equality. Wolpert 2018 Example 6 is a fourth machine-refuted printed claim: its computation of the accuracy, not the sharpness it is adduced for. The construction's central identity is correct and verified, but the step after it pulls the factor (2 - |Gamma(U)|)/|Gamma(U)| out of a maximum, which is valid only when that factor is nonnegative. For |Gamma(U)| >= 3 it is negative and the maximum moves to the minimum of E_P(Y | x). On a twelve-state instance of the source's own recipe with non-constant inference power the accuracy is 0 while the bound is -1/9, so the bound is strictly not attained; Proposition 8 itself still holds there. Recorded as clash 25. The sharpness claim itself holds: prop8_bound_sharp attains Proposition 8's bound at every |Gamma(U)| >= 1, and example6_accuracy gives the construction's true value, (2 - n) min_x E_P(Y | x) / n, which equals the bound exactly when n <= 2 or E_P(Y | x) is constant (example6_attains_prop8_bound_iff).",
       "original_source_refs": [
         "survey-ref-054"
       ],
@@ -6209,16 +6209,35 @@
             "AISafetyAtlas.Inference.ex6_bound_not_attained",
             "AISafetyAtlas.Inference.ex6_prop8_holds",
             "AISafetyAtlas.Inference.ex6Device",
-            "AISafetyAtlas.Inference.ex6PMF"
+            "AISafetyAtlas.Inference.ex6PMF",
+            "AISafetyAtlas.Inference.HeavyAnsweringSelection",
+            "AISafetyAtlas.Inference.prop12_repaired",
+            "AISafetyAtlas.Inference.prop12_repaired_of_massBound",
+            "AISafetyAtlas.Inference.prop12_distinct_insufficient",
+            "AISafetyAtlas.Inference.prop12_massBound_insufficient",
+            "AISafetyAtlas.Inference.CellUniform",
+            "AISafetyAtlas.Inference.example6_accuracy",
+            "AISafetyAtlas.Inference.example6_attains_prop8_bound_iff",
+            "AISafetyAtlas.Inference.prop8_bound_sharp"
           ],
           "module": "AISafetyAtlas.Inference.PhysicalKnowledge.Event",
-          "build_command": "lake build AISafetyAtlas.Inference.PhysicalKnowledge.Event AISafetyAtlas.Examples.Inference.PhysicalKnowledge.Epistemic AISafetyAtlas.Examples.Inference.PhysicalKnowledge.Event"
+          "build_command": "lake build AISafetyAtlas.Inference.PhysicalKnowledge.Event AISafetyAtlas.Examples.Inference.PhysicalKnowledge.Epistemic AISafetyAtlas.Examples.Inference.PhysicalKnowledge.Event AISafetyAtlas.Inference.Complexity.EntropyBound AISafetyAtlas.Inference.Stochastic.Sharpness AISafetyAtlas.Examples.Inference.EntropyBound AISafetyAtlas.Examples.Inference.Sharpness"
         }
       ],
       "lean_artifact": {
         "declarations": [
           {
             "atlas_declaration": "AISafetyAtlas.Inference.corollary21_ii_repaired",
+            "type": "NEW_PROOF",
+            "source_declarations": []
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Inference.prop12_repaired",
+            "type": "NEW_PROOF",
+            "source_declarations": []
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Inference.prop8_bound_sharp",
             "type": "NEW_PROOF",
             "source_declarations": []
           }

@@ -360,8 +360,9 @@ and mechanized separately; it is not part of the 46-row tally above.
 The 46 numbered statements are not the whole paper. Section 2 and section 5 also
 carry six worked examples; the denominator above counts the numbered statements
 only, and the examples are tracked separately below. An example is not
-automatically prose — 2018's Example 6, adduced to show a bound was sharp, is
-**refuted**.
+automatically prose — 2018's Example 6, adduced to show a bound was sharp, has
+a **refuted** computation, while the sharpness it was adduced for is proved
+(`prop8_bound_sharp`; clash 25).
 
 These six are counted separately from the 46; the tally above is unchanged.
 

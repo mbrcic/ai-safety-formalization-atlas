@@ -11,7 +11,7 @@ than point impossibilities, is in [`relations.md`](relations.md).
 
 | ID | Name | Framework | Atlas / source declarations | Root import | Reproduction |
 |---|---|---|---|---|---|
-| LAND-WOLPERT-KNOW-DEFECTS-001 | Countermodels to Wolpert 2018 epistemic claims | Lean | `AISafetyAtlas.Inference.corollary21_ii_repaired` | yes | `lake build AISafetyAtlas.Inference.PhysicalKnowledge.Event AISafetyAtlas.Examples.Inference.PhysicalKnowledge.Epistemic AISafetyAtlas.Examples.Inference.PhysicalKnowledge.Event` |
+| LAND-WOLPERT-KNOW-DEFECTS-001 | Countermodels to Wolpert 2018 epistemic claims | Lean | `AISafetyAtlas.Inference.corollary21_ii_repaired`<br>`AISafetyAtlas.Inference.prop12_repaired`<br>`AISafetyAtlas.Inference.prop8_bound_sharp` | yes | `lake build AISafetyAtlas.Inference.PhysicalKnowledge.Event AISafetyAtlas.Examples.Inference.PhysicalKnowledge.Epistemic AISafetyAtlas.Examples.Inference.PhysicalKnowledge.Event AISafetyAtlas.Inference.Complexity.EntropyBound AISafetyAtlas.Inference.Stochastic.Sharpness AISafetyAtlas.Examples.Inference.EntropyBound AISafetyAtlas.Examples.Inference.Sharpness` |
 | LAND-ATTR-001 | Attribution impossibility (DASH trilemma) | Lean | `AISafetyAtlas.Explainability.attribution_impossibility`<br>`AISafetyAtlas.Explainability.attribution_impossibility_weak` | yes | `lake build AISafetyAtlas (vendored axiom-free trilemma)` |
 | LAND-GS-001 | Gibbard–Satterthwaite theorem | Isabelle/HOL | `Gibbard_Satterthwaite` | no | `scripts/reproduce_isabelle.sh arrow` |
 | LAND-GS-002 | Gibbard–Satterthwaite theorem (Lean / SocialChoiceLean) | Lean | `AISafetyAtlas.SocialChoice.gibbard_satterthwaite` | yes | `lake build AISafetyAtlas; python3 scripts/check_print_axioms.py` |

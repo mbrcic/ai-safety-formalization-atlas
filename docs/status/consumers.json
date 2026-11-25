@@ -1,7 +1,7 @@
 {
   "counts": {
-    "declarations": 379,
-    "examples_only": 319,
+    "declarations": 381,
+    "examples_only": 321,
     "load_bearing": 60,
     "no_consumer": 0
   },
@@ -1143,6 +1143,22 @@
         "AISafetyAtlas.Examples.Registry"
       ],
       "origin": "CLM-WOLPERT-KNOW-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Inference.prop12_repaired": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Inference.EntropyBound",
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-WOLPERT-KNOW-DEFECTS-001",
+      "tier": "examples-only"
+    },
+    "AISafetyAtlas.Inference.prop8_bound_sharp": {
+      "consumers": [
+        "AISafetyAtlas.Examples.Inference.Sharpness",
+        "AISafetyAtlas.Examples.Registry"
+      ],
+      "origin": "LAND-WOLPERT-KNOW-DEFECTS-001",
       "tier": "examples-only"
     },
     "AISafetyAtlas.InformationTheory.channelCapacity_eq_of_card_eq_pow": {
@@ -3175,6 +3191,8 @@
     "AISafetyAtlas.Inference.identityDevice_weaklyInfers",
     "AISafetyAtlas.Inference.not_physicallyKnows_true_and_false",
     "AISafetyAtlas.Inference.physicallyKnows_false_iff_not_true",
+    "AISafetyAtlas.Inference.prop12_repaired",
+    "AISafetyAtlas.Inference.prop8_bound_sharp",
     "AISafetyAtlas.InformationTheory.condMutualInfo_le_mutualInfo",
     "AISafetyAtlas.InformationTheory.entropy_le_fano",
     "AISafetyAtlas.InformationTheory.fano",

@@ -155,6 +155,8 @@ import AISafetyAtlas.Oversight.Debate
 #check AISafetyAtlas.Inference.fig5_accuracy_gap
 #check AISafetyAtlas.Inference.exists_distinguishable_accuracy_near_one
 #check AISafetyAtlas.Inference.corollary21_ii_repaired
+#check AISafetyAtlas.Inference.prop12_repaired
+#check AISafetyAtlas.Inference.prop8_bound_sharp
 #check AISafetyAtlas.Logic.lawvere_fixed_point
 #check AISafetyAtlas.Explainability.attribution_impossibility
 #check AISafetyAtlas.Explainability.attribution_impossibility_weak

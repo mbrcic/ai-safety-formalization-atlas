@@ -2547,7 +2547,16 @@
             "AISafetyAtlas.Inference.ex6_bound_not_attained",
             "AISafetyAtlas.Inference.ex6_prop8_holds",
             "AISafetyAtlas.Inference.ex6Device",
-            "AISafetyAtlas.Inference.ex6PMF"
+            "AISafetyAtlas.Inference.ex6PMF",
+            "AISafetyAtlas.Inference.HeavyAnsweringSelection",
+            "AISafetyAtlas.Inference.prop12_repaired",
+            "AISafetyAtlas.Inference.prop12_repaired_of_massBound",
+            "AISafetyAtlas.Inference.prop12_distinct_insufficient",
+            "AISafetyAtlas.Inference.prop12_massBound_insufficient",
+            "AISafetyAtlas.Inference.CellUniform",
+            "AISafetyAtlas.Inference.example6_accuracy",
+            "AISafetyAtlas.Inference.example6_attains_prop8_bound_iff",
+            "AISafetyAtlas.Inference.prop8_bound_sharp"
           ],
           "module": "AISafetyAtlas.Inference.PhysicalKnowledge.Event",
           "repository": "https://github.com/mbrcic/ai-safety-formalization-atlas",
@@ -2561,6 +2570,18 @@
             "type": "NEW_PROOF",
             "file": "AISafetyAtlas/Inference/PhysicalKnowledge/Epistemic.lean",
             "line": 147
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Inference.prop12_repaired",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Inference/Complexity/EntropyBound.lean",
+            "line": 330
+          },
+          {
+            "atlas_declaration": "AISafetyAtlas.Inference.prop8_bound_sharp",
+            "type": "NEW_PROOF",
+            "file": "AISafetyAtlas/Inference/Stochastic/Sharpness.lean",
+            "line": 846
           }
         ]
       },

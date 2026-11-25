@@ -19,11 +19,11 @@ Statement-match is not the primary success score.
 | Claim results with workbench formalizations (`RELATED` only) | 9 |
 | Formalization records | 210 |
 | … declaring reproduction (self-attested; see methodology) | 208 |
-| Atlas Lean theorem declarations (unique names) | 379 |
-| Registry Lean declaration records | 379 |
+| Atlas Lean theorem declarations (unique names) | 381 |
+| Registry Lean declaration records | 381 |
 | … of which `WRAPPER` | 29 |
 | … of which `BRIDGE` | 37 |
-| … of which `NEW_PROOF` | 311 |
+| … of which `NEW_PROOF` | 313 |
 | … of which `REFERENCE` | 2 |
 | Registry rows whose atlas Lean is wrapper-only | 10 |
 | Registry rows with at least one `BRIDGE` declaration | 22 |
@@ -62,7 +62,7 @@ Statement-match is not the primary success score.
 | CLM-WOLPERT-KNOW-001 | Physical knowledge by inference devices | `EQUIVALENT` | — | `AISafetyAtlas.Inference.PhysicallyKnows.weaklyInfers (NEW_PROOF)`<br>`AISafetyAtlas.Inference.PhysicalKnowledgeWitness.eq_target_on_of_refinesOn (NEW_PROOF)`<br>`AISafetyAtlas.Inference.physicallyKnows_false_iff_not_true (NEW_PROOF)`<br>`AISafetyAtlas.Inference.not_physicallyKnows_true_and_false (NEW_PROOF)`<br>`AISafetyAtlas.Inference.exists_never_physicallyKnown (NEW_PROOF)` |
 | CLM-WOLPERT-EPISTEMIC-001 | Epistemic consequences of physical knowledge | `EQUIVALENT` | — | `AISafetyAtlas.Inference.corollary20_ii (NEW_PROOF)`<br>`AISafetyAtlas.Inference.exists_three_inequivalent_not_weaklyInfers (NEW_PROOF)`<br>`AISafetyAtlas.Inference.corollary23 (NEW_PROOF)`<br>`AISafetyAtlas.Inference.corollary24 (NEW_PROOF)` |
 | CLM-WOLPERT-APPROX-001 | Bounds on inference accuracy, and the collapse of the exact limits | `EQUIVALENT` | — | `AISafetyAtlas.Inference.identityDevice_weaklyInfers (NEW_PROOF)`<br>`AISafetyAtlas.Inference.exists_weaklyInfers_of_three_values (NEW_PROOF)`<br>`AISafetyAtlas.Inference.inferenceAccuracy_ge (NEW_PROOF)`<br>`AISafetyAtlas.Inference.fig5_accuracy_gap (NEW_PROOF)`<br>`AISafetyAtlas.Inference.exists_distinguishable_accuracy_near_one (NEW_PROOF)` |
-| LAND-WOLPERT-KNOW-DEFECTS-001 | Countermodels to Wolpert 2018 epistemic claims |  | — | `AISafetyAtlas.Inference.corollary21_ii_repaired (NEW_PROOF)` |
+| LAND-WOLPERT-KNOW-DEFECTS-001 | Countermodels to Wolpert 2018 epistemic claims |  | — | `AISafetyAtlas.Inference.corollary21_ii_repaired (NEW_PROOF)`<br>`AISafetyAtlas.Inference.prop12_repaired (NEW_PROOF)`<br>`AISafetyAtlas.Inference.prop8_bound_sharp (NEW_PROOF)` |
 | CLM-LAWVERE-001 | Lawvere fixed-point theorem (types and functions) | `EQUIVALENT` | `Function.exists_fixed_point_of_surjective` | `AISafetyAtlas.Logic.lawvere_fixed_point (WRAPPER)` |
 | LAND-ATTR-001 | Attribution impossibility (DASH trilemma) |  | `DASHImpossibility.attribution_impossibility`<br>`DASHImpossibility.attribution_impossibility_weak` | `AISafetyAtlas.Explainability.attribution_impossibility (WRAPPER)`<br>`AISafetyAtlas.Explainability.attribution_impossibility_weak (WRAPPER)` |
 | LAND-GS-002 | Gibbard–Satterthwaite theorem (Lean / SocialChoiceLean) |  | `SocialChoice.gibbard_satterthwaite` | `AISafetyAtlas.SocialChoice.gibbard_satterthwaite (WRAPPER)` |
