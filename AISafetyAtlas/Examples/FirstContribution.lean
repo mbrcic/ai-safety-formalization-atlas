@@ -135,4 +135,22 @@ example : aggregateOffTrainingLoss trainOn0 learnerConst0 = 2 := by
   rw [aggregateOffTrainingLoss_eq]
   simp [trainOn0, sub_eq_iff_eq_add, one_add_one_eq_two]
 
+
+/-- Constant-0 learner over the full `Fin 2` domain. -/
+def learnerFullConst0 : SupervisedLearner (Fin 2) (Fin 2) Set.univ :=
+  fun _ _ => 0
+
+/-- Constant-1 learner over the full `Fin 2` domain. -/
+def learnerFullConst1 : SupervisedLearner (Fin 2) (Fin 2) Set.univ :=
+  fun _ _ => 1
+
+/--
+Aggregate off-training-set loss is equal for distinct constant learners when
+training over all of `Fin 2` (`no_free_lunch_supervised`).
+-/
+example :
+    aggregateOffTrainingLoss (Set.univ : Set (Fin 2)) learnerFullConst0 =
+      aggregateOffTrainingLoss (Set.univ : Set (Fin 2)) learnerFullConst1 :=
+  no_free_lunch_supervised Set.univ learnerFullConst0 learnerFullConst1
+
 end AISafetyAtlas.Examples.FirstContribution
