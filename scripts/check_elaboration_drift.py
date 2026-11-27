@@ -408,7 +408,7 @@ def selftest_source() -> str:
 def do_selftest() -> int:
     with tempfile.TemporaryDirectory(prefix="atlas-elab-selftest-") as tmp:
         path = Path(tmp) / "ElabSelfTest.lean"
-        path.write_text(selftest_source(), encoding="utf-8")
+        path.write_text(selftest_source(), encoding="utf-8", newline="\n")
         proc = subprocess.run(
             ["lake", "env", "lean", str(path)],
             cwd=ROOT,
@@ -473,7 +473,7 @@ def _run_harness(source: str) -> list[list[str]]:
     """Elaborate one harness and return its rows, split into their six fields."""
     with tempfile.TemporaryDirectory(prefix="atlas-elab-drift-") as tmp:
         harness = Path(tmp) / "ElabDrift.lean"
-        harness.write_text(source, encoding="utf-8")
+        harness.write_text(source, encoding="utf-8", newline="\n")
         proc = subprocess.run(
             ["lake", "env", "lean", str(harness)],
             cwd=ROOT,
@@ -685,7 +685,7 @@ def write_dump(path: Path, payload: dict) -> None:
     """
     text = json.dumps(payload, indent=1, sort_keys=True) + "\n"
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(text, encoding="utf-8")
+    path.write_text(text, encoding="utf-8", newline="\n")
 
 
 def do_dump(

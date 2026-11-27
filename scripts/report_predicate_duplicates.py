@@ -215,7 +215,7 @@ def main() -> int:
 
     with tempfile.TemporaryDirectory(prefix="atlas-preddup-") as tmp:
         path = Path(tmp) / "PredicateShapes.lean"
-        path.write_text(harness_source(), encoding="utf-8")
+        path.write_text(harness_source(), encoding="utf-8", newline="\n")
         proc = subprocess.run(
             ["lake", "env", "lean", str(path)],
             cwd=ROOT, capture_output=True, text=True,

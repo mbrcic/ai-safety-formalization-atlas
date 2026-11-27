@@ -143,7 +143,7 @@ def main() -> int:
     with tempfile.TemporaryDirectory(prefix="atlas-intake-") as tmp:
         for index, (module, module_rows) in enumerate(sorted(by_module.items())):
             path = Path(tmp) / f"IntakeProbe{index}.lean"
-            path.write_text(harness_for(module, module_rows), encoding="utf-8")
+            path.write_text(harness_for(module, module_rows), encoding="utf-8", newline="\n")
             try:
                 proc = subprocess.run(
                     ["lake", "env", "lean", str(path)],

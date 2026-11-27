@@ -415,7 +415,7 @@ def main() -> None:
             }
             payload["work_queue"].append(declaration)
         out = Path(args.json)
-        out.write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n")
+        out.write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n", encoding="utf-8", newline="\n")
         print(f"wrote {out} — {len(payload['declarations'])} declarations, "
               f"{len(payload['work_queue'])} in the work queue")
         return

@@ -465,7 +465,7 @@ def main() -> None:
             EVIDENCE_PATH.write_text(
                 json.dumps(evidence, ensure_ascii=False, indent=2) + "\n",
                 encoding="utf-8",
-            )
+             newline="\n")
         return
 
     corpus_roots = parse_mapping(args.corpus_root, "--corpus-root")
@@ -524,12 +524,12 @@ def main() -> None:
         REGISTRY_PATH.write_text(
             json.dumps(registry, ensure_ascii=False, indent=2) + "\n",
             encoding="utf-8",
-        )
+         newline="\n")
         EVIDENCE_PATH.write_text(
             json.dumps(evidence, ensure_ascii=False, indent=2) + "\n",
             encoding="utf-8",
-        )
-        SUMMARY_PATH.write_text(render_summary(registry, evidence), encoding="utf-8")
+         newline="\n")
+        SUMMARY_PATH.write_text(render_summary(registry, evidence), encoding="utf-8", newline="\n")
 
 
 if __name__ == "__main__":
