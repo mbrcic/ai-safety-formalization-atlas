@@ -84,7 +84,7 @@ def main() -> int:
     if not AUDIT.exists():
         print(f"check_scope_owed: missing {AUDIT}", file=sys.stderr)
         return 1
-    text = AUDIT.read_text()
+    text = AUDIT.read_text(encoding="utf-8")
 
     owed = 0
     states: dict[str, int] = dict.fromkeys(STATES, 0)

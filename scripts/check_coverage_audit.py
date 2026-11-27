@@ -305,11 +305,11 @@ def known_modules() -> set[str]:
 
 def known_declarations() -> set[str]:
     names: set[str] = set()
-    for line in PUBLIC_API.read_text().splitlines():
+    for line in PUBLIC_API.read_text(encoding="utf-8").splitlines():
         if "::" in line:
             names.add(line.split("::", 1)[1].strip())
     for path in (ROOT / "AISafetyAtlas").rglob("*.lean"):
-        for m in re.finditer(r"^(?:@\[[^\]]*\]\s*)?public (?:noncomputable )?(?:theorem|def|abbrev|instance|structure|inductive) ([A-Za-z_][A-Za-z0-9_'.′₀-₉]*)", path.read_text(), re.M):
+        for m in re.finditer(r"^(?:@\[[^\]]*\]\s*)?public (?:noncomputable )?(?:theorem|def|abbrev|instance|structure|inductive) ([A-Za-z_][A-Za-z0-9_'.′₀-₉]*)", path.read_text(encoding="utf-8"), re.M):
             names.add(m.group(1))
     return names
 
@@ -322,7 +322,7 @@ def registry_modules() -> set[str]:
     work exists. That was true of all three information-theory modules until
     2026-08-16; nothing but this check stops it recurring.
     """
-    registry = json.loads((ROOT / "registry.yaml").read_text())
+    registry = json.loads((ROOT / "registry.yaml").read_text(encoding="utf-8"))
     modules: set[str] = set()
     for row in registry.get("results", []):
         for record in row.get("formalizations", []):
@@ -348,7 +348,7 @@ def root_cluster_modules() -> list[str]:
     fourteen modules and zero rows and every gate green.
     """
     modules: list[str] = []
-    for line in (ROOT / "AISafetyAtlas.lean").read_text().splitlines():
+    for line in (ROOT / "AISafetyAtlas.lean").read_text(encoding="utf-8").splitlines():
         m = re.match(r"^(?:public )?import (AISafetyAtlas\.[A-Za-z0-9_.]+)\s*$", line)
         if m and not m.group(1).startswith(LEDGER_EXCLUDED):
             modules.append(m.group(1))
@@ -401,7 +401,7 @@ def audit_declared_headings(text: str) -> set[str]:
 
 
 def main() -> int:
-    text = AUDIT.read_text()
+    text = AUDIT.read_text(encoding="utf-8")
     try:
         per_section, summaries, section_rows, atlas_cells, scope_counts = parse_sections(text)
     except Unclassifiable as exc:

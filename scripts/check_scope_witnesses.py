@@ -60,7 +60,7 @@ def main() -> int:
     if not AUDIT.exists():
         print(f"check_scope_witnesses: missing {AUDIT}", file=sys.stderr)
         return 1
-    text = AUDIT.read_text()
+    text = AUDIT.read_text(encoding="utf-8")
 
     graded = witnessed = 0
     gaps: dict[str, list[str]] = {}

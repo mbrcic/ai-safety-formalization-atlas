@@ -214,7 +214,7 @@ def main() -> int:
     checks = 0
     failures = 0
     for path in fixtures:
-        model = json.loads(path.read_text())
+        model = json.loads(path.read_text(encoding="utf-8"))
         code, output = run(model)
         if code != 0:
             print(f"FAIL {path.name}: the shipped fixture is refused", file=sys.stderr)
