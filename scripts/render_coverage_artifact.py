@@ -137,7 +137,7 @@ def render_blocks(lines: list[str]) -> str:
 
 
 def main() -> int:
-    md = AUDIT.read_text()
+    md = AUDIT.read_text(encoding="utf-8")
     args = [a for a in sys.argv[1:] if a != "--check"]
     check = "--check" in sys.argv[1:]
     # An unrecognized flag must not be taken as an output path, or a typo writes a
@@ -209,7 +209,7 @@ def main() -> int:
         body="\n".join(body_html),
     )
     if check:
-        if not out_path.exists() or out_path.read_text() != page:
+        if not out_path.exists() or out_path.read_text(encoding="utf-8") != page:
             print(
                 "render_coverage_artifact: generated file is out of date: "
                 f"{out_path}. Re-run scripts/render_coverage_artifact.py",
@@ -223,7 +223,7 @@ def main() -> int:
         return 0
 
     out_path.parent.mkdir(parents=True, exist_ok=True)
-    out_path.write_text(page)
+    out_path.write_text(page, encoding="utf-8")
     try:
         shown = out_path.relative_to(ROOT)
     except ValueError:

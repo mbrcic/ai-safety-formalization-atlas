@@ -137,8 +137,8 @@ def conjecture_declarations() -> list[tuple[str, str, int]]:
         ]
         raise RuntimeError(f"missing conjecture input: {', '.join(missing)}")
 
-    rows = json.loads(CONJECTURES.read_text())["conjectures"]
-    declarations = json.loads(DECLARATION_INDEX.read_text())["declarations"]
+    rows = json.loads(CONJECTURES.read_text(encoding="utf-8"))["conjectures"]
+    declarations = json.loads(DECLARATION_INDEX.read_text(encoding="utf-8"))["declarations"]
     indexed_modules = {
         declaration["name"]: declaration["module"]
         for declaration in declarations
@@ -216,7 +216,7 @@ def resolve_one(
 
 def current() -> dict[str, dict[str, str]]:
     """Signature hashes for every ledger declaration with a definition site."""
-    index = json.loads(BY_ID.read_text())
+    index = json.loads(BY_ID.read_text(encoding="utf-8"))
     sources: dict[str, str] = {}
     out: dict[str, dict[str, str]] = {}
     for row in index["results_by_id"].values():
@@ -293,7 +293,7 @@ def main() -> int:
                      "re-grade the row.",
              "count": len(now),
              "declarations": dict(sorted(now.items()))},
-            indent=2) + "\n")
+            indent=2) + "\n", encoding="utf-8")
         print(f"statement lock written: {len(now)} statements -> "
               f"{LOCK.relative_to(ROOT)}")
         return 0
@@ -304,7 +304,7 @@ def main() -> int:
               f"record the current statements.", file=sys.stderr)
         return 1
 
-    locked = json.loads(LOCK.read_text())["declarations"]
+    locked = json.loads(LOCK.read_text(encoding="utf-8"))["declarations"]
     changed = sorted(n for n, v in now.items()
                      if n in locked and locked[n]["sha256"] != v["sha256"])
     added = sorted(set(now) - set(locked))

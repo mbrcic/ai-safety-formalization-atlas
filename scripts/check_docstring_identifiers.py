@@ -178,7 +178,7 @@ def known_modules() -> set[str]:
     names = {"AISafetyAtlas"}
     for path in SRC.rglob("*.lean"):
         names.add(".".join(path.relative_to(ROOT).with_suffix("").parts))
-        text = path.read_text()
+        text = path.read_text(encoding="utf-8")
         decls = re.findall(r"^namespace ([A-Za-z_][A-Za-z0-9_'.]*)", text, re.M)
         # structures and classes also open a namespace for their fields
         decls += re.findall(
@@ -276,7 +276,7 @@ def code_identifiers() -> set[str]:
     paths = list(SRC.rglob("*.lean"))
     paths.append(ROOT / "AISafetyAtlas.lean")  # the root module, where imports live
     for path in paths:
-        code = re.sub(r"/-[-!]?.*?-/", " ", path.read_text(), flags=re.S)
+        code = re.sub(r"/-[-!]?.*?-/", " ", path.read_text(encoding="utf-8"), flags=re.S)
         code = re.sub(r"--[^\n]*", " ", code)
         names.update(re.findall(r"[A-Za-z_]" + IDENT_TAIL, code))
         # also register each dotted suffix, so `Namespace.thm` matches `thm`
@@ -400,7 +400,7 @@ def reachable_modules(module: str) -> set[str]:
         path = ROOT / Path(current.replace(".", "/") + ".lean")
         if not path.is_file():
             continue
-        for imported in re.findall(r"^public import (\S+)", path.read_text(), re.M):
+        for imported in re.findall(r"^public import (\S+)", path.read_text(encoding="utf-8"), re.M):
             if imported.startswith("AISafetyAtlas"):
                 pending.append(imported)
     return seen
@@ -473,7 +473,7 @@ def check_dependency_names() -> list[str]:
             continue
         found: set[str] = set()
         for path in root.rglob("*.lean"):
-            text = path.read_text()
+            text = path.read_text(encoding="utf-8")
             found.update(n for n in wanted if n in text)
         for missing in sorted(wanted - found):
             problems.append(
@@ -491,7 +491,7 @@ def main() -> int:
     # our business, so only flag names that look atlas-shaped and are unknown
     problems: list[str] = []
     for path in sorted(SRC.rglob("*.lean")):
-        text = path.read_text()
+        text = path.read_text(encoding="utf-8")
         rel = path.relative_to(ROOT)
         for offset, body in docstring_spans(text):
             line0 = text.count("\n", 0, offset) + 1

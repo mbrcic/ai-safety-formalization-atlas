@@ -38,7 +38,7 @@ def main() -> None:
 
     status = views.render_status(
         registry,
-        json.loads((ROOT / "docs/provenance/formalization-search.json").read_text()),
+        json.loads((ROOT / "docs/provenance/formalization-search.json").read_text(encoding="utf-8")),
     )
     by_area = views.render_by_area(registry)
     source_report = views.render_survey_source_report(registry)

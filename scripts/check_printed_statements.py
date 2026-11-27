@@ -104,7 +104,7 @@ def main() -> int:
     ap.add_argument("--require-checked", action="store_true")
     a = ap.parse_args()
     files = load(a.dir)
-    rows = {v["row_id"] for v in json.loads(a.rows.read_text()).values()} if a.rows else None
+    rows = {v["row_id"] for v in json.loads(a.rows.read_text(encoding="utf-8")).values()} if a.rows else None
     errs = check(files, a.literature, rows, a.require_checked)
     n = sum(len(d.get("statements") or []) for d in files.values())
     for e in errs:
