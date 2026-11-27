@@ -142,7 +142,7 @@ def is_auxiliary(name: str) -> bool:
 def elaborate() -> list[dict[str, str]]:
     with tempfile.TemporaryDirectory(prefix="atlas-declindex-") as tmp:
         harness = Path(tmp) / "DeclIndex.lean"
-        harness.write_text(harness_source(), encoding="utf-8")
+        harness.write_text(harness_source(), encoding="utf-8", newline="\n")
         proc = subprocess.run(
             ["lake", "env", "lean", str(harness)],
             cwd=ROOT,
@@ -213,7 +213,7 @@ def main() -> int:
 
     rendered = render(elaborate())
     if args.write:
-        INDEX.write_text(rendered, encoding="utf-8")
+        INDEX.write_text(rendered, encoding="utf-8", newline="\n")
         count = json.loads(rendered)["count"]
         print(f"declaration index written: {count} declarations -> "
               f"{INDEX.relative_to(ROOT)}")

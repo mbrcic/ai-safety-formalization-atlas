@@ -293,7 +293,7 @@ def main() -> int:
                      "re-grade the row.",
              "count": len(now),
              "declarations": dict(sorted(now.items()))},
-            indent=2) + "\n")
+            indent=2) + "\n", encoding="utf-8", newline="\n")
         print(f"statement lock written: {len(now)} statements -> "
               f"{LOCK.relative_to(ROOT)}")
         return 0

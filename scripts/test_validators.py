@@ -105,7 +105,7 @@ def mutate(tmp: Path, name: str, change) -> None:
     change(data)
     path.write_text(
         json.dumps(data, indent=2, ensure_ascii=False) + "\n", encoding="utf-8"
-    )
+    , newline="\n")
 
 
 def first(items, **match):
@@ -1634,7 +1634,7 @@ def run_cases(cases: list[tuple]) -> list[str]:
                         f"{label}: rejected for the wrong reason\n    got: {output}"
                     )
             finally:
-                (tmp / target).write_text(original, encoding="utf-8")
+                (tmp / target).write_text(original, encoding="utf-8", newline="\n")
     return failures
 
 

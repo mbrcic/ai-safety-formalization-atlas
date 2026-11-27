@@ -223,7 +223,7 @@ def main() -> int:
         return 0
 
     out_path.parent.mkdir(parents=True, exist_ok=True)
-    out_path.write_text(page)
+    out_path.write_text(page, encoding="utf-8", newline="\n")
     try:
         shown = out_path.relative_to(ROOT)
     except ValueError:
